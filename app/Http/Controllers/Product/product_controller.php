@@ -1332,18 +1332,16 @@ class product_controller extends Controller
 
         $user_record = myuser::find($user_id);
 
-        if($user_record){
-            if($user_record->active_pakage_type == 0){
-                return response()->json([
-                    'status' => false,
-                    'msg' => 'شما به این قسمت دسترسی ندارید.'
-                ]);
-            }
+        if(is_null($user_record)){
+            return response()->json([
+                'status' => false,
+                'msg' => 'شما به این قسمت دسترسی ندارید.'
+            ]);
         }
 
         $product = product::where('myuser_id',$user_id)
                                 ->whereBetween('created_at',[Carbon::now()->subMinutes(30),Carbon::now()])
-                                ->orderBy('created_at','desc')
+                                ->orderBy('created_at')
                                 ->get()
                                 ->first();
 
@@ -1388,9 +1386,9 @@ class product_controller extends Controller
         {
             $tmp = $this->get_new_most_related_buyAds($product);
 
-            // $tmp = array_filter($tmp,function($buyAd){
-            //     return $buyAd->is_golden == true;
-            // });
+            $tmp = array_filter($tmp,function($buyAd){
+                return $buyAd->is_golden == true;
+            });
 
             $buyAds = array_unique(array_merge($buyAds,$tmp),SORT_REGULAR);
         }
