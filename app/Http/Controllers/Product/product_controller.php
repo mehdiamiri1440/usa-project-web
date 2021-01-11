@@ -483,7 +483,6 @@ class product_controller extends Controller
             ->first();
 
         if (is_null($product)) {
-            return redirect('/product-list');
             return response()->json([
                 'status' => false,
                 'msg' => 'product not found.',
