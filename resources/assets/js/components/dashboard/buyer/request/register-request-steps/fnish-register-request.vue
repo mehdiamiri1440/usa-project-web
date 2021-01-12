@@ -291,7 +291,8 @@ select.error:focus {
       <div class="col-xs-12">
         <div class="text-input-wrapper">
           <p class="main-description text-rtl">
-            درخواست خرید شما پس از تایید کارشناسان باسکول، برای کشاورزان و تامین
+            درخواست خرید شما پس از تایید کارشناسان
+            <span class="light-green-text">باسکول،</span> برای کشاورزان و تامین
             کنندگان مرتبط ارسال می شود.
           </p>
 

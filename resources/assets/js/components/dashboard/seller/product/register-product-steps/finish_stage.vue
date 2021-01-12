@@ -52,10 +52,6 @@
   color: #7e7e7e;
 }
 
-.list-title span.brand-text {
-  color: #556080;
-}
-
 .right-side {
   text-align: right !important;
 }
@@ -275,18 +271,19 @@
   color: #333;
 }
 
-.lock > p {
+.lock .right-side p.list-title {
   filter: blur(7px);
 }
 
-.lock > span.lock-text {
+.lock span.lock-text {
   position: absolute;
   left: 0;
   text-align: right;
-  right: 90px;
-  font-size: 20px;
+  right: 30px;
+  font-size: 14px;
   font-weight: bold;
-  top: 14px;
+  color: #7e7e7e;
+  top: 40px;
 }
 .text-input-wrapper > p {
   font-size: 20px;
@@ -334,6 +331,10 @@
   border: none;
   background: #fff;
 }
+span.brand-text {
+  color: #556080;
+}
+
 @media screen and (max-width: 991px) {
   .fix-request-header-box,
   .title {
@@ -344,10 +345,11 @@
   }
 }
 @media screen and (max-width: 767px) {
-  .lock > span.lock-text {
+  .lock span.lock-text {
     text-align: center;
     right: 0;
-    top: 25px;
+    font-size: 16px;
+    top: 55px;
   }
   .golden {
     padding: 25px 0;
@@ -434,8 +436,16 @@
           $parent.currentUser.user_info.active_pakage_type == 0
         "
         class="lock-text"
-        v-text="buyAd.subcategory_name"
-      ></span>
+      >
+        <span> خریدار </span>
+        <span class="brand-text" v-text="buyAd.subcategory_name"></span>
+        <span v-if="buyAd.name"> از نوع </span>
+        <span v-if="buyAd.name">
+          <span class="brand-text" v-if="buyAd.name" v-text="buyAd.name"></span>
+        </span>
+
+        <span> هستم </span>
+      </span>
       <div class="right-side pull-right">
         <div class="user-information-wrapper">
           <div class="user-information-content">
@@ -472,8 +482,12 @@
             "
             v-text="'.از پکیج ویژه استفاده کنید'"
           ></span>
-          <span v-else class="red-text" v-text="buyAd.subcategory_name"></span>
-          <span> از نوع </span>
+          <span
+            v-else
+            class="brand-text"
+            v-text="buyAd.subcategory_name"
+          ></span>
+          <span v-if="buyAd.name"> از نوع </span>
           <span
             class="red-text"
             v-if="
@@ -526,6 +540,7 @@
     <li class="col-xs-12 static-item">
       <router-link :to="{ name: 'buyAdRequestsSeller' }">
         سایر درخواست های خرید (مرتبط و غیر مرتبط)
+        <i class="fa fa-arrow-left"></i>
       </router-link>
     </li>
   </ul>
@@ -549,50 +564,6 @@
       <span class="sr-only">Loading...</span>
     </div>
   </div>
-
-  <!-- <ul v-else class="list-unstyled">
-				<li
-				v-for="(item, index) in 6"
-				:key="index"
-				class="list-group-item col-xs-12"
-				>
-				<p
-					class="default-list-title pull-right col-sm-9 hidden-xs margin-10-0"
-				>
-					<span
-					class="placeholder-content content-full-width h-20"
-					></span>
-				</p>
-
-				<p
-					class="list-title col-sm-2 col-xs-12 hidden-md hidden-lg hidden-sm"
-				>
-					<span
-					class="placeholder-content content-half-width h-20 margin-auto"
-					></span>
-				</p>
-
-				<p class="needs col-sm-4 col-xs-12 hidden-md hidden-lg hidden-sm">
-					<span
-					class="placeholder-content content-default-width h-20 margin-auto"
-					></span>
-				</p>
-
-				<p
-					class="list-time col-sm-2 col-xs-12 hidden-md hidden-lg hidden-sm"
-				>
-					<span
-					class="placeholder-content content-min-width h-20 margin-auto"
-					></span>
-				</p>
-
-				<p class="col-sm-3 col-xs-12">
-					<span
-					class="placeholder-content default-button-full-with margin-10-auto"
-					></span>
-				</p>
-				</li>
-			</ul> -->
 </template>
 
 <script>
@@ -619,34 +590,61 @@ export default {
         event_label: labelName,
       });
     },
-    openChat: function (product) {
-      this.registerComponentStatistics(
-        "productReplyAfterBuyAdRegister",
-        "openChat",
-        "click on open chatBox"
-      );
+    openChat: function (buyAd, event) {
       var self = this;
 
+      let id = "#loader-" + buyAd.id;
+      self.hideReplyBtn(event, id);
+
       axios
-        .post("/get_user_last_confirmed_profile_photo", {
-          user_id: product.myuser_id,
+        .post("/get_user_permission_for_buyAd_reply", {
+          buy_ad_id: buyAd.id,
         })
         .then(function (response) {
-          var profile_photo = response.data.profile_photo;
+          self.showReplyBtn(event, id);
 
-          var contact = {
-            contact_id: product.myuser_id,
-            first_name: product.first_name,
-            last_name: product.last_name,
-            profile_photo: profile_photo,
-            user_name: product.user_name,
-          };
+          if (response.data.permission == true) {
+            var contact = {
+              contact_id: buyAd.myuser_id,
+              first_name: buyAd.first_name,
+              last_name: buyAd.last_name,
+              profile_photo: null,
+              user_name: buyAd.user_name,
+              buyAd_id: buyAd.id,
+            };
 
-          eventBus.$emit("ChatInfo", contact);
-        })
-        .catch(function (err) {
-          //
+            eventBus.$emit("ChatInfo", contact);
+
+            self.registerComponentStatistics(
+              "buyAdReply",
+              "openChat",
+              "click on open chatBox"
+            );
+          } else {
+            eventBus.$emit("modal", "buyAdReplyLimit");
+            self.registerComponentStatistics(
+              "buyAdReply",
+              "openChat",
+              "permission denied"
+            );
+          }
         });
+    },
+    hideReplyBtn: function (e, id) {
+      return new Promise((resolve, reject) => {
+        $(e.target).hide();
+        resolve(true);
+      }).then(() => {
+        $(id).show();
+      });
+    },
+    showReplyBtn: function (e, id) {
+      return new Promise((resolve, reject) => {
+        $(id).hide();
+        resolve(true);
+      }).then(() => {
+        $(e.target).show();
+      });
     },
   },
 };

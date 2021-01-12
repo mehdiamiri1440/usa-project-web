@@ -6,9 +6,6 @@
   margin-bottom: 15px;
   padding: 0;
 }
-.light-green-text {
-  color: #21ad93;
-}
 
 .submit-button {
   background: #dddddd;
@@ -170,7 +167,7 @@ input.error:focus + i {
               v-text="' ' + $parent.subCategoryName + ' '"
             >
             </span>
-            خود را وارد کنید.
+            مورد نیاز خود را وارد کنید.
           </h2>
 
           <label for="stock" class="description">
@@ -192,7 +189,7 @@ input.error:focus + i {
                 active: $parent.productName,
                 error: $parent.errors.productName,
               }"
-              placeholder="نوع محصول خود را وارد کنید"
+              placeholder="نوع محصول مورد نیاز خود را وارد کنید"
               pattern="[0-9]*"
             />
 
@@ -220,7 +217,7 @@ input.error:focus + i {
 
         <div class="col-xs-12">
           <h2 class="title-contents col-xs-12">
-            میزان موجودی
+            میزان نیازمندی
 
             <span class="small-label">(کیلوگرم)</span>
 
@@ -239,7 +236,7 @@ input.error:focus + i {
                 active: $parent.requirement_amount,
                 error: $parent.errors.requirement_amount,
               }"
-              placeholder="میزان موجودی را وارد کنید"
+              placeholder="میزان نیازمندی را وارد کنید"
               pattern="[0-9]*"
             />
 

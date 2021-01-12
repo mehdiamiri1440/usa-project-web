@@ -1,5 +1,12 @@
 
 <style scoped>
+.static-item a {
+  color: #1da1f2;
+}
+.static-item a:hover {
+  color: #337ab7;
+}
+
 .buttons-wrapper {
   margin: 15px auto;
   text-align: center;
@@ -64,20 +71,6 @@ p {
 </style>
 
 <template>
-  <!-- <header
-        class="header-contents-wrapper text-center text-rtl col-xs-12"
-        v-if="products"
-      >
-       <p class="main-text text-rtl">
-            تعدادی از مرتبط ترین محصولات برای درخواست خرید شما در زیر نمایش داده
-            شده است.
-          </p>
-          <p class="red-text">
-            در صورت عدم ارسال پیام به فروشنده ها دیگر به این محصولات دسترسی
-            نخواهید داشت.
-          </p>
-      </header> -->
-
   <main class="main-content-wrapper">
     <div v-if="products">
       <finish-step-article
@@ -88,12 +81,10 @@ p {
       />
     </div>
 
-    <div class="buttons-wrapper col-xs-12">
-      <router-link
-        :to="{ name: 'productList' }"
-        class="green-button blue-button"
-        >مشاهده همه محصولات</router-link
-      >
+    <div class="buttons-wrapper static-item col-xs-12">
+      <router-link :to="{ name: 'productList' }">
+        مشاهده همه محصولات <i class="fa fa-arrow-left"></i>
+      </router-link>
     </div>
   </main>
 </template>
@@ -109,6 +100,37 @@ export default {
   methods: {
     openChat: function (product) {
       this.$parent.openChat(product);
+    },
+    getConvertedNumbers: function (number) {
+      if (number || typeof number === "number") {
+        let data = number / 1000;
+        if (number < 1000) {
+          return number + " " + "کیلوگرم";
+        } else {
+          data = this.getNumberWithCommas(data);
+          return data + " " + "تن";
+        }
+      } else return "";
+    },
+    getNumberWithCommas: function (number) {
+      if (number || typeof number === "number")
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      else return "";
+    },
+    isDeviceMobile: function () {
+      if (
+        navigator.userAgent.match(/Android/i) ||
+        navigator.userAgent.match(/webOS/i) ||
+        navigator.userAgent.match(/iPhone/i) ||
+        navigator.userAgent.match(/iPad/i) ||
+        navigator.userAgent.match(/iPod/i) ||
+        navigator.userAgent.match(/BlackBerry/i) ||
+        navigator.userAgent.match(/Windows Phone/i)
+      ) {
+        return true;
+      } else {
+        return false;
+      }
     },
   },
 };

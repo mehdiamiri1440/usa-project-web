@@ -6,9 +6,7 @@
   margin-bottom: 30px;
   padding: 0 15px;
 }
-.light-green-text {
-  color: #21ad93;
-}
+
 
 .submit-button {
   background: #dddddd;

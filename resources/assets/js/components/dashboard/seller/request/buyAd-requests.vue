@@ -31,17 +31,14 @@
   padding: 5px;
 }
 
-
-.list-title.list-name{
- text-align: right !important;
+.list-title.list-name {
+  text-align: right !important;
   padding: 5px 15px;
 }
 
-
-
 .list-group-item {
   border: 1px solid #ddd;
-  padding: 11px 0 15px;
+  padding: 11px 15px 15px;
 }
 .list-group-item:nth-last-of-type(2n + 1) {
   background: #fdfdfd !important;
@@ -324,8 +321,8 @@
   .list-notice button > span.request-count {
     font-size: 15px;
   }
-  .list-title.list-name{
-  text-align: center !important;
+  .list-title.list-name {
+    text-align: center !important;
   }
 }
 </style>
@@ -413,12 +410,10 @@
                 class="lock-text"
                 v-text="buyAd.subcategory_name"
               ></span>
-              <p class="list-title list-name col-sm-6 col-xs-12  ">
-                <span>
-                  خریدار
-                </span>
-                 <span
-                 class="red-text"
+              <p class="list-title list-name col-sm-6 col-xs-12">
+                <span> خریدار </span>
+                <span
+                  class="red-text"
                   v-if="
                     buyAd.is_golden &&
                     currentUser.user_info.active_pakage_type == 0
@@ -426,27 +421,21 @@
                   v-text="'0000'"
                 ></span>
                 <span
-                class="red-text"
-
+                  class="red-text"
                   v-else
                   v-text="getConvertedNumbers(buyAd.requirement_amount)"
                 ></span>
 
+                <span class="red-text" v-text="buyAd.subcategory_name"></span>
+                <span> از نوع </span>
                 <span
-                class="red-text"
-                 v-text="buyAd.subcategory_name"></span>
-                <span>
-                   از نوع 
-                </span>
-                <span
-                class="red-text"
-                 v-if="buyAd.name" v-text="buyAd.name"></span>
+                  class="red-text"
+                  v-if="buyAd.name"
+                  v-text="buyAd.name"
+                ></span>
 
-                <span>
-                  هستم
-                </span>
+                <span> هستم </span>
               </p>
-
 
               <p
                 class="list-time col-sm-2 col-xs-12"

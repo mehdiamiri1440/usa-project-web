@@ -223,14 +223,18 @@
               <span>درخواست شما با موفقیت ثبت شد</span>
             </h2>
             <p>
-              درخواست خرید شما پس از تایید کارشناسان باسکول، برای کشاورزان و
+              درخواست خرید شما پس از تایید کارشناسان
+              <span class="light-green-text">باسکول،</span> برای کشاورزان و
               تامین کنندگان مرتبط ارسال می شود.
             </p>
           </div>
         </div>
         <div class="section-title related-product">
           <h2>فروشندگان پیشنهادی</h2>
-          <p>فروشندگان پیشنهادی از طرف باسکول برای محصول شما.</p>
+          <p>
+            فروشندگان پیشنهادی از طرف
+            <span class="light-green-text">باسکول</span> برای درخواست شما.
+          </p>
         </div>
       </div>
       <div class="success-register mini" v-else>
@@ -521,6 +525,7 @@ export default {
           //
         });
     },
+
     getProductUrl: function () {
       return (
         "/product-view/خرید-عمده-" +

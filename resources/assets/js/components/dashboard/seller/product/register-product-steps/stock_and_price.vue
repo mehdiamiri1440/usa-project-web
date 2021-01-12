@@ -7,9 +7,6 @@
   padding: 0;
 }
 
-.light-green-text {
-  color: #21ad93;
-}
 
 .bg-white {
   background: #fff;

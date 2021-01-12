@@ -4,6 +4,9 @@
   border-radius: 5px;
   margin-bottom: 35px;
 }
+.main-article-wrapper:hover {
+  cursor: pointer;
+}
 
 .user-information-content {
   display: block;
@@ -94,17 +97,12 @@ h3.article-title {
   margin-bottom: 10px;
 }
 
-.button-wrapper {
-  float: right;
-  width: 100%;
-  margin-top: 15px;
-}
-
 .green-button {
   width: 100%;
   padding: 4px 0 5px;
-  margin-top: 10px;
   max-width: 400px;
+  margin: 0 auto 20px;
+  display: block;
 }
 
 button i {
@@ -166,7 +164,7 @@ button i {
       class="main-article-wrapper col-xs-12"
       :class="{ 'is-user-valid': product.active_pakage_type == 3 }"
     >
-      <div class="user-information-wrapper row">
+      <div @click="handelLinkTarget()" class="user-information-wrapper row">
         <div class="user-information-content">
           <div class="user-image">
             <img src="../../../../../../../img/user-defult.png" />
@@ -192,7 +190,7 @@ button i {
           </div>
         </div>
       </div>
-      <div class="main-article row text-center">
+      <div @click="handelLinkTarget()" class="main-article row text-center">
         <div class="valid-user-badge">
           <div class="wrapper-icon">
             <svg width="24.965" height="30.574" viewBox="0 0 24.965 30.574">
@@ -228,11 +226,7 @@ button i {
             </svg>
           </div>
         </div>
-        <router-link
-          class="article-image"
-          :to="getProductUrl()"
-          target="_blank"
-        >
+        <div class="article-image">
           <div v-show="isImageLoad">
             <transition>
               <img
@@ -248,30 +242,22 @@ button i {
             <div></div>
             <div></div>
           </div>
-        </router-link>
+        </div>
         <div class="main-content text-rtl">
           <h3 class="article-title">
             <span v-text="product.subcategory_name" style="color: #777"></span>
             {{ product.product_name }}
           </h3>
-          <!-- <p class="product-description">
-            توضیحات :
-            <span> {{ product.description }}</span> <span>کیلوگرم</span>
-          </p> -->
+
           <p>
             <span style="color: #777">مقدار موجودی :</span>
-            <span> {{ product.stock }} <span>کیلوگرم</span></span>
+            <span v-text="$parent.getConvertedNumbers(product.stock)"></span>
           </p>
         </div>
-        <div class="button-wrapper">
-          <button
-            class="green-button"
-            @click.prevent="$parent.openChat(product)"
-          >
-            <i class="fa fa-envelope"></i> پیام به فروشنده
-          </button>
-        </div>
       </div>
+      <button class="green-button" @click.prevent="$parent.openChat(product)">
+        <i class="fa fa-envelope"></i> پیام به فروشنده
+      </button>
     </article>
   </div>
 </template>
@@ -288,6 +274,13 @@ export default {
     this.loadImage();
   },
   methods: {
+    handelLinkTarget() {
+      if (this.$parent.isDeviceMobile()) {
+        window.open(this.getProductUrl(), "_blank");
+      } else {
+        this.$router.push(this.getProductUrl());
+      }
+    },
     loadImage: function () {
       this.isImageLoad = false;
     },

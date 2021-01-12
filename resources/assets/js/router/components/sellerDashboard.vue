@@ -207,6 +207,7 @@ export default {
         "buyAd-requests",
         "messenger/contacts",
         "messenger/buy-ads",
+        "register-product/success",
       ],
       buttonIsActive: true,
       currentUser: {

@@ -256,11 +256,14 @@
               <span> ثبت محصول با موفقیت انجام شد </span>
             </h2>
           </div>
-          <p>پس از تایید کارشناسان محصول شما در لیست قرار خواهد گرفت.</p>
+          <p>پس از تایید کارشناسان، محصول شما در لیست قرار خواهد گرفت.</p>
         </div>
         <div v-if="buyAds.length != 0" class="section-title">
           <h2>خریداران</h2>
-          <p>خریداران پیشنهادی از طرف باسکول برای محصول شما.</p>
+          <p>
+            خریداران پیشنهادی از طرف
+            <span class="light-green-text">باسکول</span> برای محصول شما.
+          </p>
         </div>
       </div>
       <div
@@ -715,9 +718,15 @@ export default {
         if (number < 1000) {
           return number + " " + "کیلوگرم";
         } else {
+          data = this.getNumberWithCommas(data);
           return data + " " + "تن";
         }
       } else return "";
+    },
+    getNumberWithCommas: function (number) {
+      if (number || typeof number === "number")
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      else return "";
     },
     getProductRegisterSuccessMessage: function () {
       let msg = "";
@@ -899,35 +908,6 @@ export default {
         ios = /iphone|ipod|ipad/.test(userAgent);
 
       return ios;
-    },
-    openChat: function (buyAd) {
-      this.registerComponentStatistics(
-        "buyAdReplyAfterProductRegister",
-        "openChat",
-        "click on open chatBox"
-      );
-      var self = this;
-
-      axios
-        .post("/get_user_last_confirmed_profile_photo", {
-          user_id: buyAd.myuser_id,
-        })
-        .then(function (response) {
-          var profile_photo = response.data.profile_photo;
-
-          var contact = {
-            contact_id: buyAd.myuser_id,
-            first_name: buyAd.first_name,
-            last_name: buyAd.last_name,
-            profile_photo: profile_photo,
-            user_name: buyAd.user_name,
-          };
-
-          eventBus.$emit("ChatInfo", contact);
-        })
-        .catch(function (err) {
-          //
-        });
     },
     convertUnits: function (number) {
       let data = number / 1000;
