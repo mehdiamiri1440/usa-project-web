@@ -623,7 +623,7 @@ class product_list_controller extends Controller
         $contacts = DB::table('messages')
                                     ->where('receiver_id',$user_id)
                                     ->select(DB::raw("DISTINCT(sender_id) as sender_id,sum(TIMESTAMPDIFF(SECOND,created_at,updated_at)) as delay"))
-                                    ->whereBetween('created_at',[Carbon::now()->subMonths(3),Carbon::now()])
+                                    ->whereBetween('created_at',[Carbon::now()->subMonths(9),Carbon::now()])
                                     ->groupBy('sender_id')
                                     ->get();
         

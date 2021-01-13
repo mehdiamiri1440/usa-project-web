@@ -1347,21 +1347,20 @@ class buyAd_controller extends Controller
                 return $a->remaining_time <= $b->remaining_time;
             });
         }
-
-        if($final_golden_buyAds instanceof Illuminate\Database\Eloquent\Collection){
-            $final_golden_buyAds = $final_golden_buyAds->toArray();
-        }
-
-        if( count($my_buyAd_suggestions) == 0 )
-        {
+        else{
             $products = product::where('myuser_id',$user_id)
                                     ->where('confirmed',true)
                                     ->get();
 
             foreach($products as $product){
-                $final_golden_buyAds = array_merge($final_golden_buyAds,$this->get_new_most_related_buyAds($product));
+                $tmp = $this->get_new_most_related_buyAds($product)->toArray();
+                $final_golden_buyAds = array_merge($final_golden_buyAds,$tmp);
             }
             
+        }
+
+        if($final_golden_buyAds instanceof Illuminate\Database\Eloquent\Collection){
+            $final_golden_buyAds = $final_golden_buyAds->toArray();
         }
 
         return response()->json([
@@ -1463,6 +1462,8 @@ class buyAd_controller extends Controller
                                 })
                                 ->select($this->related_buyAds_required_fields)
                                 ->get();
+
+        return $buyAds;
 
         $buyAds = $this->get_most_valuable_buyAds($buyAds);
 
