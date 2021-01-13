@@ -25,7 +25,7 @@ class product_list_controller extends Controller
         'myusers.is_verified'
     ];
     protected $profile_info_sent_by_product_array = [
-        'profiles.profile_photo',
+        // 'profiles.profile_photo',
     ];
 
     protected $product_info_sent_by_product_array = [
@@ -45,7 +45,7 @@ class product_list_controller extends Controller
         'provinces.id as province_id', 
         'cities.city_name', 
         'cities.id as city_id', 
-        'categories.category_name as sub_category_name', 
+        'c.category_name as sub_category_name', 
         'products.is_elevated',
     ];
 
@@ -67,6 +67,47 @@ class product_list_controller extends Controller
         'search_text' => 'string',
         'special_products' => 'boolean',
         'sort_by' => 'string'
+    ];
+
+    protected $output_attributes = [
+        'main' => [
+            'product_id',
+            'product_name',
+            'stock',
+            'min_sale_amount',
+            'description',
+            'myuser_id',
+            'sub_category_id',
+            'province_name',
+            'province_id',
+            'city_name',
+            'city_id',
+            'sub_category_name',
+            'category_name',
+            'category_id',
+            'is_elevated',
+            'updated_at',
+            'photos_count',
+            'photo'
+        ],
+        'user_info' => [
+            'user_id',
+            'user_name',
+            'first_name',
+            'last_name',
+            'is_verified',
+            'active_pakage_type',
+            'response_rate',
+            'response_time',
+            'ums',
+            'created_at',
+        ],
+        'profile_info' => [
+            'profile_photo',
+        ],
+        'photos' => [
+            'file_path',
+        ],
     ];
 
     protected $activate_cache = true;
@@ -191,7 +232,7 @@ class product_list_controller extends Controller
     {
         $products = $this->get_all_products();
 
-        $products = $this->append_related_data_to_given_products($products);
+        // $products = $this->append_related_data_to_given_products($products);
 
         foreach($products as $product)
         {
@@ -200,14 +241,12 @@ class product_list_controller extends Controller
                 $product['user_info']->response_time =  -1;
             }
             else{
-                $product['user_info']->response_time =  $response_info['response_time'];
+                $product['user_info']->response_time =  $product['user_info']->response_time ?? -1;
             }
-            $product['user_info']->response_rate = $response_info['response_rate'];
+            $product['user_info']->response_rate = $product['user_info']->response_rate ?? 100;
+
             if($product['user_info']->active_pakage_type > 0 && $product['user_info']->response_rate > 70){
-                $product['user_info']->ums = (integer) ($response_info['ums']/(Carbon::now()->diffInWeeks($product['main']->updated_at) + 1));
-            }
-            else{
-                $product['user_info']->ums = $response_info['ums'];
+                $product['user_info']->ums = (integer) (($product['user_info']->ums)/(Carbon::now()->diffInWeeks($product['main']->updated_at) + 1));
             }
             
         }
@@ -217,66 +256,86 @@ class product_list_controller extends Controller
 
     protected function get_all_products()
     {
-        $query = product::where('confirmed', true);
+        $selected_items = array_merge($this->product_info_sent_by_product_array,
+                                        $this->user_info_sent_by_product_array);
 
-        // if ($request->special_products == true) {
-        //     $package_buyers_user_id = $this->get_package_buyers_user_id_array();
+        $products = DB::table('products')
+                        ->join('categories as c', 'products.category_id', '=', 'c.id')
+                        ->join('myusers','products.myuser_id','=','myusers.id')
+                        ->leftJoin('cities', 'cities.id', '=', 'products.city_id')
+                        ->leftJoin('provinces', 'provinces.id', '=', 'cities.province_id')
+                        ->selectRaw(implode(', ' , $selected_items) . ',( 
+                            FLOOR((select count(distinct(m1.sender_id)) from messages as m1 where m1.is_read = true and m1.receiver_id = products.myuser_id and not exists(select * from messages where messages.receiver_id = products.myuser_id and m1.is_read = false ))/(select count(distinct(messages.sender_id)) from messages where messages.receiver_id = products.myuser_id) * 100 )) as response_rate,
+                            (
+                                (select sum(TIMESTAMPDIFF(HOUR,messages.created_at,messages.updated_at)) from messages where messages.receiver_id = products.myuser_id and messages.is_read = true and messages.created_at between SUBDATE(NOW(), INTERVAL 3 MONTH) and NOW() ) / (select count(messages.id) from messages where messages.is_read = true and messages.receiver_id = products.myuser_id and messages.created_at between SUBDATE(NOW(), INTERVAL 3 MONTH) and NOW() )
+                            ) as response_time,(select categories.category_name from categories where c.parent_id = categories.id) as category_name,(select count(id) from product_media where product_media.product_id = products.id) as photos_count,(select file_path from product_media where product_media.product_id = products.id order by product_media.id asc limit 1) as file_path,(select count(distinct(messages.sender_id)) from messages where messages.receiver_id = products.myuser_id) as ums')
+                        ->distinct('products.id')
+                        ->whereNull('products.deleted_at')
+                        ->where('products.confirmed', true)
+                        ->get();
 
-        //     $query = $query->whereIn('myuser_id', $package_buyers_user_id);
-        // }
-        // if($request->has('sub_category_id')){
-        //     $query->where('category_id',$request->sub_category_id);
-
-        //     $this->activate_cache = false;
-        // }
-        // if($request->has('city_id')){
-        //     $query->where('city_id',$request->city_id);
-
-        //     $this->activate_cache = false;
-        // }
-        // if($request->has('province_id')){
-        //     $province_id = $request->province_id;
-
-        //     $query = $this->apply_province_filter($query,$province_id);
-
-        //     $this->activate_cache = false;
-        // }
-        // if($request->has('category_id')){
-        //     $category_id = $request->category_id;
-
-        //     $query = $this->apply_category_filter($query,$category_id);
-
-        //     $this->activate_cache = false;
-        // }
-        // if($request->has('search_text')){
-        //     $search_text = $request->search_text;
-            
-        //     $query = $this->apply_search_text_filter($query,$search_text);
-        // }
-
-        $query = $query->orderBy('updated_at', 'desc');
-
-        // if($$request->has('to_record_number')){
-        //     $to_record_number = $request->to_record_number;
-
-        //     if($request->response_rate == false){
-        //         $helper_query = clone $query;
-
-        //         $products = $query->whereBetween('updated_at',[Carbon::now()->subDays(((integer) $to_record_number/10) * 7),Carbon::now()])->get();
-        //         if($products->count() < $to_record_number){
-        //             $products = $helper_query->get();
-        //         }
-        //     }
-        //     else{
-        //         $products = $query->get();
-        //     }
-        // }
-        // else {
-        //     $products = $query->get();
-        // }
-        $products = $query->get();
+        $products = $this->prepare_data_for_client($products);
 
         return $products;
+    }
+
+    protected function prepare_data_for_client(&$products)
+    {
+        $profiles = DB::table('profiles')
+                        ->where('confirmed',true)
+                        ->whereIn('myuser_id',array_column($products->all(),'myuser_id'))
+                        ->select('profiles.myuser_id','profiles.profile_photo')
+                        ->orderBy('created_at','desc')
+                        ->groupBy('profiles.myuser_id')
+                        ->get();
+
+        $result_products = [];
+        foreach($products as $product){
+            foreach($profiles as $profile){
+                if($profile->myuser_id == $product->myuser_id){
+                    $product->profile_photo = $profile->profile_photo;
+                    continue;
+                }
+            }
+            $result_products[] = $this->categorize_product_data($product);
+        }
+
+        return $result_products;
+    }
+
+    protected function categorize_product_data($product)
+    {
+        $categorized_product['main'] = new \stdClass;
+        $categorized_product['user_info'] = new \stdClass;
+        $categorized_product['profile_info'] = new \stdClass;
+        $categorized_product['photos'] = [];
+
+        $product_attributes = get_object_vars($product);
+        foreach($product_attributes as $key => $value)
+        {
+            if(in_array($key,$this->output_attributes['main']) === true ){
+                if($key == 'product_id'){
+                    $key = 'id';
+                }
+                $categorized_product['main']->$key = $value;
+            }
+            else if(in_array($key,$this->output_attributes['user_info']) === true){
+                if($key == 'user_id'){
+                    $key = 'id';
+                }
+                $categorized_product['user_info']->$key = $value;
+            }
+            else if(in_array($key,$this->output_attributes['profile_info']) === true){
+                $categorized_product['profile_info']->$key = $value;
+            }
+            else if(in_array($key,$this->output_attributes['photos']) === true){
+                $tmp = new \stdClass;
+                $tmp->$key = $value;
+                $categorized_product['photos'][] = $tmp;
+            }
+        }
+
+        return $categorized_product;
     }
 
     protected function get_package_buyers_user_id_array()
@@ -490,8 +549,8 @@ class product_list_controller extends Controller
                 $b = $item2['main']->is_elevated == true ? $item2['main']->updated_at :  $item2['main']->is_elevated;
     
                 if($a == $b){
-                    $c = (Carbon::now()->diffInDays($item1['main']->updated_at) < 3) ? 1 : $this->get_users_similarity($item1['user_info'],$user_response_info);
-                    $d = (Carbon::now()->diffInDays($item2['main']->updated_at) < 3) ? 1 : $this->get_users_similarity($item2['user_info'],$user_response_info);
+                    $c = (Carbon::now()->diffInDays($item1['main']->updated_at) < 3) ? 0 : abs($user_response_info['ums'] - $item1['user_info']->ums);
+                    $d = (Carbon::now()->diffInDays($item2['main']->updated_at) < 3) ? 0 : abs($user_response_info['ums'] - $item2['user_info']->ums);
     
                     if($c == $d){
                         $e = (((Carbon::now()->diffInDays($item1['main']->updated_at) < 2)) || ($item1['user_info']->response_time > 0 )) ? $item1['user_info']->ums : 10000;
@@ -509,7 +568,7 @@ class product_list_controller extends Controller
                         return ($e > $f) ? 1 : -1;
                     }
     
-                    return ($c < $d) ? 1 : -1;
+                    return ($c > $d) ? 1 : -1;
                 }
     
                 return ($a < $b) ? 1 : -1;

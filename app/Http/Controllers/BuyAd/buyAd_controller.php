@@ -869,7 +869,7 @@ class buyAd_controller extends Controller
                                                 ->where('myusers.active_pakage_type','=',0)
                                                 ->where('products.category_id', $buyAd->category_id)
                                                 ->where('products.confirmed', true)
-                                                ->whereNotNull('products.deleted_at')
+                                                ->whereNull('products.deleted_at')
                                                 ->whereBetween('products.created_at', [$from_date, $until_date])
                                                 ->where('products.myuser_id','<>',$buyAd->myuser_id)
                                                 ->where('products.stock','>=',$buyAd->requirement_amount)
@@ -894,7 +894,7 @@ class buyAd_controller extends Controller
                                                 ->where('myusers.active_pakage_type','<>',0)
                                                 ->where('products.category_id', $buyAd->category_id)
                                                 ->where('products.confirmed', true)
-                                                ->whereNotNull('products.deleted_at')
+                                                ->whereNull('products.deleted_at')
                                                 ->where('products.myuser_id','<>',$buyAd->myuser_id)
                                                 ->where('products.stock','>=',$buyAd->requirement_amount)
                                                 ->where(function($q) use($buyAd_name_array){
