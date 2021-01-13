@@ -1142,7 +1142,9 @@ class product_controller extends Controller
                                 ->join('myusers','myusers.id','=','buy_ads.myuser_id')
                                 ->join('categories as subcategory','subcategory.id','=','buy_ads.category_id')
                                 ->join('categories','subcategory.parent_id','=','categories.id')
+                                ->where('buy_ads.myuser_id','<>',$product->myuser_id)
                                 ->where('buy_ads.category_id',$product->category_id)
+                                ->whereNull('buy_ads.deleted_at')
                                 ->where('myusers.is_buyer',true)
                                 ->whereBetween('buy_ads.updated_at',[$from,$until])
                                 ->where('confirmed',true)
@@ -1332,18 +1334,16 @@ class product_controller extends Controller
 
         $user_record = myuser::find($user_id);
 
-        if($user_record){
-            if($user_record->active_pakage_type == 0){
-                return response()->json([
-                    'status' => false,
-                    'msg' => 'شما به این قسمت دسترسی ندارید.'
-                ]);
-            }
+        if(is_null($user_record)){
+            return response()->json([
+                'status' => false,
+                'msg' => 'شما به این قسمت دسترسی ندارید.'
+            ]);
         }
 
         $product = product::where('myuser_id',$user_id)
                                 ->whereBetween('created_at',[Carbon::now()->subMinutes(30),Carbon::now()])
-                                ->orderBy('created_at','desc')
+                                ->orderBy('created_at')
                                 ->get()
                                 ->first();
 
@@ -1388,9 +1388,9 @@ class product_controller extends Controller
         {
             $tmp = $this->get_new_most_related_buyAds($product);
 
-            // $tmp = array_filter($tmp,function($buyAd){
-            //     return $buyAd->is_golden == true;
-            // });
+            $tmp = array_filter($tmp,function($buyAd){
+                return $buyAd->is_golden == true;
+            });
 
             $buyAds = array_unique(array_merge($buyAds,$tmp),SORT_REGULAR);
         }
