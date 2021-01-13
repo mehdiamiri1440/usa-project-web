@@ -236,8 +236,11 @@ label {
 }
 
 .article-action-buttons > button {
-  margin: 0;
-  padding: 4px 15px;
+  width: 100% !important;
+  max-width: 280px;
+  margin: 0 auto;
+  padding: 7px;
+  font-size: 18px;
 }
 
 .article-features button.disable {
@@ -249,7 +252,8 @@ label {
   background: #e41c38;
   color: #fff;
   border-radius: 4px;
-  padding: 4px 14px;
+  padding: 7px 14px;
+  font-size: 17px;
 }
 
 .article-features button.disable {
@@ -667,7 +671,7 @@ export default {
         window.localStorage.setItem("contact", JSON.stringify(contact));
 
         // this.$router.push({ name: "registerInquiry" });
-        eventBus.$emit('modal','sendMsg');
+        eventBus.$emit("modal", "sendMsg");
       }
     },
     updatePopUpStatus: function (popUpOpenStatus) {

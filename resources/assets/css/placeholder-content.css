@@ -267,9 +267,18 @@ body,
 .red-text {
   color: #e41c38 !important;
 }
+
 .yellow-text {
   color: #ffbb00 !important;
 }
+
+.blue-text {
+  color: #1DA1F2 !important;
+}
+.brand-text {
+  color: #556080 !important;
+}
+
 .green-text {
   color: #00c569;
 }

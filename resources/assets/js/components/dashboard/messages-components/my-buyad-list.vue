@@ -8,12 +8,54 @@
   z-index: 2;
 }
 
+.user-information-content {
+  display: block;
+  float: right;
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 10px 0 3px;
+}
+.user-image {
+  width: 25px;
+  height: 25px;
+  float: right;
+  margin-left: 10px;
+}
+.user-content {
+  display: block;
+  max-width: 170px;
+  overflow: hidden;
+  font-size: 13px;
+  font-weight: 400;
+  color: #adadad;
+  height: 21px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  text-align: right;
+}
+
+.user-content i {
+  margin-left: 1px;
+  position: relative;
+  top: 3px;
+  font-size: 15px;
+}
+
 .contact-items {
   padding-top: 99px;
 }
 
 li.contact-item {
+  border-bottom: 2px solid #dddddd;
+  float: right;
+  width: 100%;
+  padding: 10px 0;
   min-height: 230px;
+}
+
+li.contact-item:nth-last-of-type(2n + 1) {
+  background: #f9fcff !important;
 }
 
 .contact-items.is-buyer-list {
@@ -214,12 +256,7 @@ li.contact-item {
   border-radius: 4px 4px 0 0;
 }
 .buyad-lists-wrapper .contact-item > div {
-  background: #fff;
-  border: none;
-  border-bottom: 2px solid #dddddd;
-  padding: 0;
   text-align: center;
-  width: 100%;
 }
 .buyad-expire {
   color: #556080;
@@ -228,11 +265,7 @@ li.contact-item {
 .buyad-notice {
   color: #aeaeae;
 }
-.request-contact-image {
-  width: 30px;
-  height: 30px;
-  float: right;
-}
+
 .buyad-info {
   font-size: 15px;
   padding: 5px;
@@ -252,12 +285,6 @@ li.contact-item {
   color: #777;
 }
 
-.buyad-header {
-  padding: 8px 5px;
-  float: right;
-  width: 100%;
-  border-bottom: 1px solid #f2f2f2;
-}
 .contact-body .contact-item .my-contact-info-wrapper {
   float: right;
   padding-top: 7px;
@@ -273,7 +300,7 @@ li.contact-item {
   border-radius: 4px;
   padding: 3px;
   max-width: 150px;
-  margin: 7px auto 15px;
+  margin: 15px auto;
   transition: 300ms;
   display: block;
   border: none;
@@ -290,21 +317,21 @@ li.contact-item {
   transition: 300ms;
 }
 
-.golden {
+li.golden {
   border: 2px solid rgb(199, 168, 79);
   border-top: transparent;
 }
 
-.golden:first-of-type {
+li.golden:first-of-type {
   border-top: 2px solid rgb(199, 168, 79);
 }
 
-.golden .buyad-info {
+li.golden .buyad-info {
   margin-top: 15px;
 }
 
-.golden .buyad-button,
-.golden .buyad-button:hover {
+li.golden .buyad-button,
+li.golden .buyad-button:hover {
   color: #333;
   background: linear-gradient(
     21deg,
@@ -531,16 +558,16 @@ li.contact-item {
             :key="'golden-' + index"
           >
             <div v-if="$parent.currentUser.user_info.active_pakage_type > 0">
-              <div class="buyad-header">
-                <div class="request-contact-image">
-                  <img src="../../../../img/user-defult.png" />
-                </div>
-                <div class="my-contact-info-wrapper">
-                  <span
-                    class="contact-name text-rtl"
-                    v-text="buyAd.first_name + ' ' + buyAd.last_name"
-                  >
-                  </span>
+              <div class="user-information-wrapper col-xs-12">
+                <div class="user-information-content">
+                  <div class="user-content">
+                    <i class="fa fa-user-circle"></i>
+                    <span
+                      class="user-name-link"
+                      v-text="buyAd.first_name + ' ' + buyAd.last_name"
+                    >
+                    </span>
+                  </div>
                 </div>
               </div>
               <div class="buyad-main col-xs-12">
@@ -590,16 +617,16 @@ li.contact-item {
               </div>
             </div>
             <div v-else>
-              <div class="buyad-header">
-                <div class="request-contact-image">
-                  <img src="../../../../img/user-defult.png" />
-                </div>
-                <div class="my-contact-info-wrapper">
-                  <span
-                    class="contact-name text-rtl"
-                    v-text="buyAd.first_name + ' ' + buyAd.last_name"
-                  >
-                  </span>
+              <div class="user-information-wrapper col-xs-12">
+                <div class="user-information-content">
+                  <div class="user-content">
+                    <i class="fa fa-user-circle"></i>
+                    <span
+                      class="user-name-link"
+                      v-text="buyAd.first_name + ' ' + buyAd.last_name"
+                    >
+                    </span>
+                  </div>
                 </div>
               </div>
               <div class="buyad-main col-xs-12">
@@ -614,16 +641,13 @@ li.contact-item {
                   </p>
                 </div>
                 <div class="row golden-info-text">
-                  <p>
-                    <br />
-                  </p>
                   <p class="buyad-info">
                     خریدار
 
                     <span v-text="buyAd.subcategory_name"></span>
                     <span v-if="buyAd.name" class="gray-text"> از نوع </span>
                     <span v-if="buyAd.name" v-text="buyAd.name"></span>
-                    <span v-if="buyAd.name" class="gray-text"> هستم </span>
+                    <span class="gray-text"> هستم </span>
                   </p>
 
                   <button
@@ -642,23 +666,16 @@ li.contact-item {
             :key="index"
           >
             <div v-if="!buyAd.expired">
-              <div class="buyad-header">
-                <div class="request-contact-image">
-                  <!-- <img
-                  v-if="contact.profile_photo"
-                  :src="$parent.str + '/' + contact.profile_photo"
-                  :alt="contact.first_name[0]"
-                /> -->
-
-                  <!-- <img v-else src="../../../../img/user-defult.png" /> -->
-                  <img src="../../../../img/user-defult.png" />
-                </div>
-                <div class="my-contact-info-wrapper">
-                  <span
-                    class="contact-name text-rtl"
-                    v-text="buyAd.first_name + ' ' + buyAd.last_name"
-                  >
-                  </span>
+              <div class="user-information-wrapper col-xs-12">
+                <div class="user-information-content">
+                  <div class="user-content">
+                    <i class="fa fa-user-circle"></i>
+                    <span
+                      class="user-name-link"
+                      v-text="buyAd.first_name + ' ' + buyAd.last_name"
+                    >
+                    </span>
+                  </div>
                 </div>
               </div>
               <div class="buyad-main col-xs-12">
@@ -712,23 +729,20 @@ li.contact-item {
               </div>
             </div>
             <div v-else>
-              <div class="buyad-header">
-                <div class="request-contact-image">
-                  <img src="../../../../img/user-defult.png" />
-                </div>
-                <div class="my-contact-info-wrapper">
-                  <span
-                    class="contact-name text-rtl"
-                    v-text="buyAd.first_name + ' ' + buyAd.last_name"
-                  >
-                  </span>
+              <div class="user-information-wrapper col-xs-12">
+                <div class="user-information-content">
+                  <div class="user-content">
+                    <i class="fa fa-user-circle"></i>
+                    <span
+                      class="user-name-link"
+                      v-text="buyAd.first_name + ' ' + buyAd.last_name"
+                    >
+                    </span>
+                  </div>
                 </div>
               </div>
               <div class="buyad-main col-xs-12">
                 <div class="row">
-                  <p>
-                    <br />
-                  </p>
                   <p class="buyad-info">
                     خریدار
                     <span

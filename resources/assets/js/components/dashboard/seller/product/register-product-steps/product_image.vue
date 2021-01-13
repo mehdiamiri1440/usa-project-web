@@ -276,10 +276,10 @@ export default {
               this.errors.images_type = "تصاویر باید فرمت معتبری باشند.";
             }
 
-            if (files[i].size > 5242880) {
+            if (files[i].size > 4242880) {
               errorsStatus = true;
               this.errors.images_size =
-                "حجم تصویر بالا است، باید کمتر از 5 مگابایت باشد.";
+                "حجم تصویر بالا است، باید کمتر از 4 مگابایت باشد.";
               this.$parent.errors.images_size = this.errors.images_size;
             } else if (files[i].size < 20480) {
               errorsStatus = true;

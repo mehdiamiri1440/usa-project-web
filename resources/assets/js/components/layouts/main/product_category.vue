@@ -171,7 +171,7 @@ a.close-dialog-popup {
 
 button.btn-filter {
   float: left;
-  padding: 4px 10px;
+  padding: 6px 10px;
   border-radius: 5px;
   border: none;
   background: #000546;
@@ -325,6 +325,10 @@ li.active a::after {
 
 .rate-filter {
   float: right;
+}
+
+.static-sort-item {
+  color: #999;
 }
 
 .rate-filter-desktop-wrapper,
@@ -982,6 +986,12 @@ end filter modal styles
           <section class="hidden-xs col-xs-12">
             <div class="rate-filter-desktop-wrapper">
               <ul class="list-unstiled list-inline">
+                <li class="static-sort-item">
+                  <p>
+                    <i class="fa fa-sort-amount-down-alt"> </i>
+                    مرتب سازی بر اساس :
+                  </p>
+                </li>
                 <li>
                   <button
                     @click="setSortOption('RR')"

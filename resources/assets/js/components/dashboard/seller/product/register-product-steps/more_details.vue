@@ -149,10 +149,6 @@ input.error:focus + i {
   border-color: #e41c38;
 }
 
-.text-red {
-  color: #e51c38;
-}
-
 select {
   width: 100%;
 
@@ -316,12 +312,12 @@ label .small-label {
     <div class="form-contents col-xs-12">
       <div class="col-xs-6 pull-right">
         <p class="small-description">
-          <span class="text-red">مثال :</span> بسته بندی
+          <span class="red-text">مثال :</span> بسته بندی
         </p>
       </div>
       <div class="col-xs-6">
         <p class="small-description">
-          <span class="text-red">مثال :</span> کارتن مادر ۸ کیلویی
+          <span class="red-text">مثال :</span> کارتن مادر ۸ کیلویی
         </p>
       </div>
     </div>

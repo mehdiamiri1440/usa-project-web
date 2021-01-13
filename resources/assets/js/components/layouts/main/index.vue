@@ -555,10 +555,6 @@ li > ul > li.active > ul > li {
   line-height: 1.618;
 }
 
-.text-red {
-  color: #e41c38;
-}
-
 .title {
   text-align: right;
   padding: 13px 15px;

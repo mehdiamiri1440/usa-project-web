@@ -103,10 +103,6 @@
   line-height: 1.618;
 }
 
-.text-red {
-  color: #e41c38;
-}
-
 .request-detail .green-button {
   font-size: 16px;
   padding: 8px 30px;
@@ -330,9 +326,6 @@
 .static-item {
   border: none;
   background: #fff;
-}
-span.brand-text {
-  color: #556080;
 }
 
 @media screen and (max-width: 991px) {

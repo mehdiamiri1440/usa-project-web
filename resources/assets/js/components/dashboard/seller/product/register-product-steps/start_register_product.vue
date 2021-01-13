@@ -140,7 +140,7 @@ label {
 
 .text-input-wrapper p {
   font-size: 18px;
-  color: #374761;
+  color: #777;
 }
 
 .small-description {
@@ -179,12 +179,12 @@ label {
           <p>
             <strong>
               به دنبال
-              <span class="blue-text">خریدار</span>
+              <span class="brand-text">خریدار</span>
               برای محصول خود هستید؟
             </strong>
           </p>
         </div>
-          <div class="event-text blue-text">
+          <div class="event-text brand-text">
             <strong>همین حالا محصول خود را ثبت کنید</strong>
           </div>
           <div class="arrow-icon">

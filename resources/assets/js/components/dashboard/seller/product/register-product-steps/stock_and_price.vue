@@ -7,7 +7,6 @@
   padding: 0;
 }
 
-
 .bg-white {
   background: #fff;
 }
@@ -195,7 +194,7 @@ input.error:focus + i {
           <div class="input-text-wrapper">
             <p class="small-description-text" v-if="!$parent.errors.stock">
               <span
-                class="light-green-text"
+                class="blue-text"
                 v-if="$parent.stock_text"
                 v-text="$parent.stock_text"
               ></span>
@@ -253,7 +252,7 @@ input.error:focus + i {
               v-if="!$parent.errors.min_sale_amount"
             >
               <span
-                class="light-green-text"
+                class="blue-text"
                 v-if="$parent.min_sale_amount_text"
                 v-text="$parent.min_sale_amount_text"
               ></span>

@@ -19,9 +19,8 @@
 
   z-index: 1012;
 
-  width: 365px;
-
-  height: 450px;
+  width: 450px;
+  height: 550px;
 
   bottom: -800px;
 
@@ -307,7 +306,7 @@
         </span>
 
         <span class="header-chat-content">
-          {{contactInfo.first_name + ' ' + contactInfo.last_name}}
+          {{ contactInfo.first_name + " " + contactInfo.last_name }}
           <!-- <button
             @click.prevent
             class="verified-user"
@@ -329,7 +328,10 @@
     </div>
 
     <div class="main-modal-chat">
-      <div class="loading-container" v-show="isChatMessagesLoaded && isFirstMessageLoading">
+      <div
+        class="loading-container"
+        v-show="isChatMessagesLoaded && isFirstMessageLoading"
+      >
         <div class="image-wrapper">
           <div class="lds-ring">
             <div></div>
@@ -349,10 +351,12 @@
           <div>
             <p v-text="msg.text"></p>
             <div class="message-info">
-              <span
-                class="time"
-                v-if="msg.created_at"
-              >{{ msg.created_at | moment("jYY/jMM/jDD, h:mm A") }} &nbsp</span>
+              <span class="time" v-if="msg.created_at"
+                >{{
+                  msg.created_at | moment("jYY/jMM/jDD, h:mm A")
+                }}
+                &nbsp</span
+              >
               <span v-else>{{ Date() | moment("jYY/jMM/jDD, h:mm A") }}</span>
               <span class="visited" v-if="msg.sender_id === currentUserId">
                 <i class="fa fa-check" v-if="msg.created_at"></i>
@@ -399,7 +403,7 @@
 import { eventBus } from "../../../../router/router.js";
 
 export default {
-  data: function() {
+  data: function () {
     return {
       isChatMessagesLoaded: true,
       isFirstMessageLoading: true,
@@ -408,16 +412,16 @@ export default {
       chatMessages: "",
       currentContactUserId: "",
       currentUserId: "",
-      msgToSend: ""
+      msgToSend: "",
     };
   },
   methods: {
-    setUpChat: function() {
+    setUpChat: function () {
       this.handleBackBtnClickOnDevices();
 
       this.loadChatHistory(this.contactInfo);
     },
-    loadChatHistory: function(contact, index) {
+    loadChatHistory: function (contact, index) {
       var self = this;
       self.isChatMessagesLoaded = true;
       if (index !== -10) self.isFirstMessageLoading = true;
@@ -427,33 +431,33 @@ export default {
 
       axios
         .post("/get_user_chat_history", {
-          user_id: contact.contact_id
+          user_id: contact.contact_id,
         })
-        .then(function(response) {
+        .then(function (response) {
           self.chatMessages = response.data.messages;
           self.currentUserId = response.data.current_user_id;
           self.scrollToEnd(0);
         })
-        .catch(function(e) {
+        .catch(function (e) {
           //
         });
     },
-    scrollToEnd: function(time) {
+    scrollToEnd: function (time) {
       var chatPageElementList = $(".main-modal-chat ul");
 
       var self = this;
-      setTimeout(function() {
+      setTimeout(function () {
         chatPageElementList.animate(
           { scrollTop: chatPageElementList.prop("scrollHeight") },
           500,
           "swing",
-          function() {
+          function () {
             self.isChatMessagesLoaded = false;
           }
         );
       }, time);
     },
-    sendMessage: function() {
+    sendMessage: function () {
       var self = this;
 
       let tempMsg = self.msgToSend;
@@ -463,39 +467,42 @@ export default {
         let msgObject = {
           sender_id: self.currentUserId,
           receiver_id: self.currentContactUserId,
-          text: tempMsg
+          text: tempMsg,
         };
 
         self.chatMessages.push(msgObject);
         self.scrollToEnd(0);
 
-        if (self.contactInfo.buyAd_id !== undefined && self.contactInfo.buyAd_id != null) {
-            axios
-              .post("/send_reply_to_buyAd", {
-                buy_ad_id: self.contactInfo.buyAd_id,
-                text: msgObject.text
-              })
-              .then(function(response) {
-                self.isFirstMessageLoading = false;
-                self.loadChatHistory(self.contactInfo, -10);
-              })
-              .catch(function(e) {
-                //
-              });
-        } else {
+        if (
+          self.contactInfo.buyAd_id !== undefined &&
+          self.contactInfo.buyAd_id != null
+        ) {
           axios
-            .post("/messanger/send_message", msgObject)
-            .then(function(response) {
+            .post("/send_reply_to_buyAd", {
+              buy_ad_id: self.contactInfo.buyAd_id,
+              text: msgObject.text,
+            })
+            .then(function (response) {
               self.isFirstMessageLoading = false;
               self.loadChatHistory(self.contactInfo, -10);
             })
-            .catch(function(e) {
+            .catch(function (e) {
+              //
+            });
+        } else {
+          axios
+            .post("/messanger/send_message", msgObject)
+            .then(function (response) {
+              self.isFirstMessageLoading = false;
+              self.loadChatHistory(self.contactInfo, -10);
+            })
+            .catch(function (e) {
               //
             });
         }
       }
     },
-    handleInitialMessage: function() {
+    handleInitialMessage: function () {
       let self = this;
 
       return new Promise((resolve, reject) => {
@@ -505,14 +512,14 @@ export default {
         self.sendMessage();
       });
     },
-    handleBackBtnClickOnDevices: function() {
+    handleBackBtnClickOnDevices: function () {
       var self = this;
 
       if (window.history.state) {
         history.pushState(null, null, window.location);
       }
 
-      $(window).on("popstate", function(e) {
+      $(window).on("popstate", function (e) {
         self.openChatBox = false;
 
         if (self.doesUserComeFromAuthenticationPages()) {
@@ -523,7 +530,7 @@ export default {
         }
       });
     },
-    isDeviceMobile: function() {
+    isDeviceMobile: function () {
       if (
         navigator.userAgent.match(/Android/i) ||
         navigator.userAgent.match(/webOS/i) ||
@@ -538,14 +545,14 @@ export default {
         return false;
       }
     },
-    doesUserComeFromAuthenticationPages: function() {
+    doesUserComeFromAuthenticationPages: function () {
       if (window.localStorage.getItem("comeFromAuthentication")) {
         return true;
       } else {
         return false;
       }
     },
-    routeToProfile: function() {
+    routeToProfile: function () {
       if (this.contactInfo.user_name) {
         this.openChatBox = false;
         this.$router.push({ path: "/profile/" + this.contactInfo.user_name });
@@ -554,26 +561,26 @@ export default {
     activeComponentTooltip() {
       $(".verified-user")
         .popover({ trigger: "manual", html: true, animation: false })
-        .on("mouseenter", function() {
+        .on("mouseenter", function () {
           var _this = this;
           $(this).popover("show");
-          $(".popover").on("mouseleave", function() {
+          $(".popover").on("mouseleave", function () {
             $(_this).popover("hide");
           });
         })
-        .on("mouseleave", function() {
+        .on("mouseleave", function () {
           var _this = this;
-          setTimeout(function() {
+          setTimeout(function () {
             if (!$(".popover:hover").length) {
               $(_this).popover("hide");
             }
           }, 300);
         });
-    }
+    },
   },
 
-  created: function() {
-    eventBus.$on("ChatInfo", $event => {
+  created: function () {
+    eventBus.$on("ChatInfo", ($event) => {
       this.contactInfo = $event;
       this.chatMessages = "";
       this.openChatBox = true;
@@ -582,7 +589,7 @@ export default {
     });
   },
   watch: {
-    openChatBox: function(value) {
+    openChatBox: function (value) {
       if (value == true) {
         $("body").addClass("overflow-hidden");
         setTimeout(() => {
@@ -591,7 +598,7 @@ export default {
       } else {
         $("body").removeClass("overflow-hidden");
       }
-    }
-  }
+    },
+  },
 };
 </script>

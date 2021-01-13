@@ -6,11 +6,11 @@ body {
 <style scoped>
 .main-article-contents p a,
 span {
-  color: #777;
+  color: #474747;
 }
 
 .main-article-contents h3 a {
-  color: #474747;
+  color: #777;
 }
 .main-article-contents h3 {
   font-size: 16px;
@@ -64,9 +64,11 @@ span {
 }
 
 .main-article-contents p {
-  font-size: 13px;
+  font-size: 15px;
 
   font-weight: bold;
+
+  color: #777;
 
   max-width: 500px;
 
@@ -138,7 +140,7 @@ span {
   .main-article-contents h3,
   .main-article-contents a p {
     max-width: 150px;
-    font-size: 14px;
+    font-size: 17px;
   }
 
   .main-article-contents a p {
@@ -334,7 +336,7 @@ export default {
         this.$parent.product.main.category_name +
         " | " +
         this.$parent.product.main.sub_category_name +
-        ' <span style="color: #777">' +
+        ' <span style="color: #474747">' +
         this.$parent.product.main.product_name +
         "</span>";
       // if (this.$route.params.categoryName) {
@@ -390,6 +392,7 @@ export default {
         if (number < 1000) {
           return number + " " + "کیلوگرم";
         } else {
+          data = this.getNumberWithCommas(data);
           return data + " " + "تن";
         }
       } else return "";
