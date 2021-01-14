@@ -116,7 +116,7 @@ class buyAd_controller extends Controller
         'buy_ads.updated_at',
         'buy_ads.category_id',
         'buy_ads.requirement_amount',
-        'buy_ads.myuser_id',
+        'buy_ads.myuser_id as buyer_id',
         'subcategory.category_name as subcategory_name',
         'categories.category_name as category_name',
         'myusers.first_name',

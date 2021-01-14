@@ -266,13 +266,19 @@ li.contact-item:nth-last-of-type(2n + 1) {
   color: #aeaeae;
 }
 
+.golden .buyad-notice {
+  display: inline-block;
+  margin-bottom: 15px;
+}
+
 .buyad-info {
   font-size: 15px;
   padding: 5px;
   font-weight: bold;
   color: #777;
-  min-height: 58px;
+  min-height: 68px;
   padding-top: 15px;
+  line-height: 1.618;
 }
 .buyad-notice.red-text {
   padding-top: 15px;
@@ -298,17 +304,19 @@ li.contact-item:nth-last-of-type(2n + 1) {
   background: #00c569;
   color: #fff;
   border-radius: 4px;
-  padding: 3px;
-  max-width: 150px;
+  padding: 8px 0;
+  max-width: 200px;
   margin: 15px auto;
   transition: 300ms;
   display: block;
   border: none;
   width: 100%;
+  font-size: 17px;
+  font-weight: bold;
 }
 
 .buyad-button :hover {
-  background: #00c569;
+  /* background: #00c569; */
   transition: 300ms;
 }
 
@@ -326,9 +334,9 @@ li.golden:first-of-type {
   border-top: 2px solid rgb(199, 168, 79);
 }
 
-li.golden .buyad-info {
+/* li.golden .buyad-info {
   margin-top: 15px;
-}
+} */
 
 li.golden .buyad-button,
 li.golden .buyad-button:hover {
@@ -515,7 +523,7 @@ li.golden .buyad-button:hover {
         دانلود اپلیکیشن</a
       >
     </div>
-    <div class="image-wrapper" v-else-if="buyAds.length === 0 && isLoading">
+    <div class="image-wrapper" v-else-if="buyAds.length === 0 && buyAdsGoldenFilter.length == 0 &&  isLoading">
       <div class="lds-ring">
         <div></div>
         <div></div>
@@ -524,23 +532,25 @@ li.golden .buyad-button:hover {
       </div>
       <!-- <span v-text="alt" class="lds-ring-alt"></span> -->
     </div>
-    <div v-else-if="buyAds.length === 0 && !isLoading" class="not-found-item">
+    <div v-else-if="buyAds.length === 0 && buyAdsGoldenFilter.length == 0 &&  !isLoading" class="not-found-item">
       <div class="empty-list">
         <i class="fa fa-list-alt"></i>
         <p>در حال حاضر پیشنهادی برای شما وجود ندارد</p>
         <p class="red-text">
           در صورت وجود خریدار پیشنهادی، به شما اطلاع داده می شود.
         </p>
+         <router-link :to="{name:'registerProductSeller'}" tag="button" class="buyad-button">
+            ثبت محصول
+          </router-link>
       </div>
     </div>
 
-    <div v-else class="contact-items buyad-lists-wrapper">
-      <div
-        v-if="
+    <div v-else-if="
           isSearchingBuyAds == true &&
           buyAdsFilter.length === 0 &&
           buyAdsGoldenFilter.length == 0
-        "
+        " class="contact-items buyad-lists-wrapper">
+      <div
       >
         <div class="empty-list text-center">
           <i class="fa fa-search"></i>
@@ -548,9 +558,13 @@ li.golden .buyad-button:hover {
           <p class="red-text">
             در صورت وجود درخواست خرید، به شما اطلاع داده می شود.
           </p>
+
+         
         </div>
       </div>
-      <div v-else>
+      
+    </div>
+    <div v-else class="contact-items buyad-lists-wrapper">
         <ul>
           <li
             class="contact-item golden"
@@ -595,24 +609,31 @@ li.golden .buyad-button:hover {
                     <span v-text="buyAd.subcategory_name"></span>
                     <span v-if="buyAd.name" class="gray-text"> از نوع </span>
                     <span v-if="buyAd.name" v-text="buyAd.name"></span>
-                    <span v-if="buyAd.name" class="gray-text"> هستم </span>
+                    <span  class="gray-text"> هستم </span>
                   </p>
                   <p class="buyad-notice">
                     درصورت داشتن این محصول به من پیام دهید.
                   </p>
                   <button
-                    @click="openChat(buyAd, $event)"
+                    @click="openChat(buyAd)"
                     class="buyad-button golden-button"
+                    :id="'golden-loader-' + buyAd.id"
                   >
-                    پیام به خریدار
+                   <span>
+                    <span>
+                      <span class="fas fa-comment-alt"></span>
+                      پیام به خریدار
+                    </span>
+                    <span class="hide-reply"> کمی صبر کنید... </span>
+                  </span>
                   </button>
-                  <button
+                  <!-- <button
                     class="hide-reply buyad-button"
                     :id="'golden-loader-' + buyAd.id"
                     disabled
                   >
                     کمی صبر کنید...
-                  </button>
+                  </button> -->
                 </div>
               </div>
             </div>
@@ -654,12 +675,13 @@ li.golden .buyad-button:hover {
                     @click="openGoldenChatRestrictionModal()"
                     class="buyad-button"
                   >
+                    <i class="fas fa-comment-alt"></i>
                     پیام به خریدار
                   </button>
                 </div>
               </div>
             </div>
-          </li>
+          </li> 
           <li
             class="contact-item"
             v-for="(buyAd, index) in buyAdsFilter"
@@ -703,7 +725,7 @@ li.golden .buyad-button:hover {
                     <span v-text="buyAd.subcategory_name"></span>
                     <span v-if="buyAd.name" class="gray-text"> از نوع </span>
                     <span v-if="buyAd.name" v-text="buyAd.name"></span>
-                    <span v-if="buyAd.name" class="gray-text"> هستم </span>
+                    <span  class="gray-text"> هستم </span>
                   </p>
                   <p class="buyad-expire">
                     <span class="red-text">
@@ -715,16 +737,22 @@ li.golden .buyad-button:hover {
                   <p class="buyad-notice">
                     درصورت داشتن این محصول به من پیام دهید.
                   </p>
-                  <button @click="openChat(buyAd, $event)" class="buyad-button">
-                    پیام به خریدار
+                  <button @click="openChat(buyAd)" class="buyad-button" :id="'loader-' + buyAd.id">
+                    <span>
+                      <span>
+                        <span class="fas fa-comment-alt"></span>
+                        پیام به خریدار
+                      </span>
+                      <span class="hide-reply"> کمی صبر کنید... </span>
+                    </span>
                   </button>
-                  <button
+                  <!-- <button
                     class="hide-reply buyad-button"
                     :id="'loader-' + buyAd.id"
                     disabled
                   >
                     کمی صبر کنید...
-                  </button>
+                  </button> -->
                 </div>
               </div>
             </div>
@@ -766,20 +794,22 @@ li.golden .buyad-button:hover {
                     <span v-text="buyAd.subcategory_name"></span>
                     <span v-if="buyAd.name" class="gray-text"> از نوع </span>
                     <span v-if="buyAd.name" v-text="buyAd.name"></span>
-                    <span v-if="buyAd.name" class="gray-text"> هستم </span>
+                    <span  class="gray-text"> هستم </span>
                   </p>
 
                   <p class="buyad-notice red-text">
                     فرصت پاسخ گویی شما به این خریدار به پایان رسیده است
                   </p>
-                  <button class="buyad-button disable">پیام به خریدار</button>
+                  <button class="buyad-button disable">
+                    <i class="fas fa-comment-alt"></i>
+                    پیام به خریدار</button>
                 </div>
               </div>
             </div>
           </li>
         </ul>
       </div>
-    </div>
+
   </div>
 </template>
 
@@ -834,22 +864,21 @@ export default {
           }, 300);
         });
     },
-    openChat: function (buyAd, event) {
+    openChat: function (buyAd) {
       var self = this;
       let id = "#loader-0";
-      if ($(event.target).hasClass("golden-button")) {
+      if ($("#golden-loader-" + buyAd.id).length) {
         id = "#golden-loader-" + buyAd.id;
       } else {
         id = "#loader-" + buyAd.id;
       }
-      self.hideReplyBtn(event, id);
-
+      self.hideReplyBtn(id);
       axios
         .post("/get_user_permission_for_buyAd_reply", {
           buy_ad_id: buyAd.id,
         })
         .then(function (response) {
-          self.showReplyBtn(event, id);
+          self.showReplyBtn(id);
 
           if (response.data.permission == true) {
             var contact = {
@@ -897,22 +926,34 @@ export default {
         event_label: labelName,
       });
     },
-    hideReplyBtn: function (e, id) {
-      return new Promise((resolve, reject) => {
-        $(e.target).hide();
-        resolve(true);
-      }).then(() => {
-        $(id).show();
-      });
+    hideReplyBtn: function (id) {
+      let itemFirst = id + " span:first-child";
+      let itemLast = id + " span:last-child";
+      $(itemFirst).hide();
+      $(itemLast).show();
     },
-    showReplyBtn: function (e, id) {
-      return new Promise((resolve, reject) => {
-        $(id).hide();
-        resolve(true);
-      }).then(() => {
-        $(e.target).show();
-      });
+    showReplyBtn: function (id) {
+      let itemFirst = id + " span:first-child";
+      let itemLast = id + " span:last-child";
+      $(itemLast).hide();
+      $(itemFirst).show();
     },
+    // hideReplyBtn: function (e, id) {
+    //   return new Promise((resolve, reject) => {
+    //     $(e.target).hide();
+    //     resolve(true);
+    //   }).then(() => {
+    //     $(id).show();
+    //   });
+    // },
+    // showReplyBtn: function (e, id) {
+    //   return new Promise((resolve, reject) => {
+    //     $(id).hide();
+    //     resolve(true);
+    //   }).then(() => {
+    //     $(e.target).show();
+    //   });
+    // },
     isOsIOS: function () {
       var userAgent = window.navigator.userAgent.toLowerCase(),
         safari = /safari/.test(userAgent),
@@ -944,7 +985,7 @@ export default {
       if (this.isDeviceMobile() && !this.isOsIOS()) {
         let androidVersion = this.getAndroidVersion();
         if (parseInt(androidVersion) >= 5) {
-          this.isConditionSatisfied = true;
+          // this.isConditionSatisfied = true;
         }
       }
     },
