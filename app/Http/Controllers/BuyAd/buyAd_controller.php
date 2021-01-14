@@ -123,6 +123,19 @@ class buyAd_controller extends Controller
         'myusers.last_name',
     ];
 
+    protected $my_buyAds_required_fields = [
+        'buy_ads.id',
+        'buy_ads.name',
+        'buy_ads.created_at',
+        'buy_ads.updated_at',
+        'buy_ads.category_id',
+        'buy_ads.requirement_amount',
+        'buy_ads.myuser_id',
+        'buy_ads.reply_capacity',
+        'subcategories.category_name as subcategory_name',
+        'categories.category_name as category_name',
+    ];
+
     protected $offered_products_count_after_buyAd_register = 6;
 
     protected $max_factorial_input_number = 10;
@@ -522,7 +535,7 @@ class buyAd_controller extends Controller
 
             return response()->json([
                'status' => true,
-                'msg' => 'آگهی حذف شد.',
+                'msg' => 'درخواست خرید شما با موفقیت حذف شد.',
             ], 200);
         } else {
             return response()->json([
@@ -1518,5 +1531,31 @@ class buyAd_controller extends Controller
         $product_name_array = $this->remove_black_list_words($product_name_array);
 
         return $product_name_array;
+    }
+
+    public function get_my_buyAds()
+    {
+        $user_id = session('user_id');
+
+        $my_buyAds = DB::table('buy_ads')
+                            ->join('myusers','myusers.id','=','buy_ads.myuser_id')
+                            ->join('categories as subcategories','subcategories.id','=','buy_ads.category_id')
+                            ->join('categories','subcategories.parent_id','=','categories.id')
+                            ->where('confirmed',true)
+                            ->where('buy_ads.myuser_id',$user_id)
+                            ->select($this->my_buyAds_required_fields)
+                            ->get();
+                        
+        foreach($my_buyAds as $buyAd)
+        {
+            $buyAd->reply_capacity = abs(10 - $buyAd->reply_capacity);
+        }
+
+        
+        return response()->json([
+            'status' => true,
+            'buyAds' => $my_buyAds,
+        ],200);
+        
     }
 }
