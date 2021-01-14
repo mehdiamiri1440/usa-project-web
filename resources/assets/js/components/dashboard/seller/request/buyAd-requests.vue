@@ -522,7 +522,7 @@
                     class="brand-text"
                     v-text="buyAd.subcategory_name"
                   ></span>
-                  <span> از نوع </span>
+                  <span v-if="buyAd.name"> از نوع </span>
                   <span
                     class="brand-text"
                     v-if="buyAd.name"

@@ -259,7 +259,7 @@ input.error:focus + i {
               v-if="!$parent.errors.requirement_amount"
             >
               <span
-                class="light-green-text"
+                class="blue-text"
                 v-if="$parent.requirement_amount_text"
                 v-text="$parent.requirement_amount_text"
               ></span>
