@@ -115,8 +115,11 @@ a.active {
       <ul class="list-unstyled">
         <li class="list-item">
           <router-link
-            :to="{ name : 'profileBasicBuyer' }"
-            :class="{ 'router-link-exact-active' : $route.name == 'profileBasicBuyerVeficiation'}"
+            :to="{ name: 'profileBasicBuyer' }"
+            :class="{
+              'router-link-exact-active':
+                $route.name == 'profileBasicBuyerVeficiation',
+            }"
           >
             <i class="fa fa-user" aria-hidden="true"></i>
             <span>ویرایش پروفایل</span>
@@ -124,7 +127,7 @@ a.active {
         </li>
 
         <li class="list-item">
-          <router-link :to="{ name : 'registerRequestBuyer' }">
+          <router-link :to="{ name: 'registerRequestBuyer' }">
             <i class="fa fa-plus-square" aria-hidden="true"></i>
             <span>ثبت درخواست خرید</span>
           </router-link>
@@ -132,24 +135,35 @@ a.active {
 
         <li class="list-item">
           <router-link
-            :to="{ name : 'messagesBuyer' }"
-            :class="{'router-link-exact-active ' : this.activeElement === 0}"
+            :to="{ name: 'messagesBuyer' }"
+            :class="{ 'router-link-exact-active ': this.activeElement === 0 }"
           >
             <i class="fas fa-comment-alt" aria-hidden="true"></i>
             <span>پیام ها</span>
-            <span class="custom-badge" v-if="messageCount > 0" v-text="messageCount"></span>
+            <span
+              class="custom-badge"
+              v-if="messageCount > 0"
+              v-text="messageCount"
+            ></span>
           </router-link>
         </li>
 
         <li class="list-item">
-          <router-link :to="{ name : 'specialProducts' }">
-            <i class="fa fa-list-alt" aria-hidden="true"></i>
+          <router-link :to="{ name: 'specialProducts' }">
+            <i class="fas fa-list-ol" aria-hidden="true"></i>
             <span>محصولات ویژه</span>
           </router-link>
         </li>
 
         <li class="list-item">
-          <router-link :to="{ name : 'guideBuyer' }">
+          <router-link :to="{ name: 'myBuyAdRequestsBuyer' }">
+            <i class="fa fa-list-alt" aria-hidden="true"></i>
+            <span>درخواست های من</span>
+          </router-link>
+        </li>
+
+        <li class="list-item">
+          <router-link :to="{ name: 'guideBuyer' }">
             <i class="fa fa-question-circle" aria-hidden="true"></i>
             <span>راهنما</span>
           </router-link>
@@ -169,27 +183,27 @@ export default {
     "selregpro",
     "transactroute",
     "mytrans",
-    "guide"
+    "guide",
   ],
   data() {
     return {
       activeElement: 0,
       messageCount: "",
-      linksPath: ["/buyer/messenger/group-messages"]
+      linksPath: ["/buyer/messenger/group-messages"],
     };
   },
   methods: {
-    init: function() {
+    init: function () {
       var self = this;
     },
     subIsActive(input) {
       const paths = Array.isArray(input) ? input : [input];
 
-      return paths.some(path => {
+      return paths.some((path) => {
         return this.$route.path.indexOf(path) === 0; // current path starts with this path string
       });
     },
-    checkLinkActive: function() {
+    checkLinkActive: function () {
       for (var i = 0; i < this.linksPath.length; i++) {
         if (this.subIsActive(this.linksPath[i])) {
           this.activeElement = i;
@@ -197,14 +211,14 @@ export default {
           this.activeElement = null;
         }
       }
-    }
+    },
   },
   watch: {
     $route() {
       this.checkLinkActive();
-    }
+    },
   },
-  mounted: function() {
+  mounted: function () {
     this.checkLinkActive();
     this.init();
   },
@@ -212,12 +226,12 @@ export default {
     var self = this;
     var userId = window.localStorage.getItem("userId");
 
-    eventBus.$on("messageCount", event => {
+    eventBus.$on("messageCount", (event) => {
       this.messageCount += event;
     });
-    eventBus.$on("active", event => {
+    eventBus.$on("active", (event) => {
       this.activeElement = event;
     });
-  }
+  },
 };
 </script>
