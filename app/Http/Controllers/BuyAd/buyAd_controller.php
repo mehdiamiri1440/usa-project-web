@@ -421,6 +421,7 @@ class buyAd_controller extends Controller
                                                     ->select('buy_ads.id', 'buy_ads.name', 'buy_ads.requirement_amount', 'buy_ads.address', 'buy_ads.description', 'buy_ads.address', 'buy_ads.price', 'buy_ads.category_id as sub_category_id', 'buy_ads.reply_capacity', 'provinces.province_name', 'provinces.id as province_id', 'cities.city_name', 'cities.id as city_id', 'categories.category_name as sub_category_name')
                                                     ->where('buy_ads.id', $buy_ad_id)
                                                     ->where('confirmed', true)
+                                                    ->whereNull('buy_ads.deleted_at')
                                                     ->get()
                                                     ->first();
 
@@ -733,6 +734,7 @@ class buyAd_controller extends Controller
                     ->join('myusers', 'buy_ads.myuser_id', '=', 'myusers.id')
                     ->where('buy_ads.confirmed', true)
                     ->where('buy_ads.reply_capacity','>',0)
+                    ->whereNull('buy_ads.deleted_at')
                     ->whereBetween('buy_ads.updated_at',[Carbon::now()->subWeeks(2),Carbon::now()])
                     ->where('buy_ads.myuser_id','<>',$user->id);
         
@@ -1435,6 +1437,7 @@ class buyAd_controller extends Controller
                                 ->where('myuser_id','<>',$user_id)
                                 ->where('confirmed',true)
                                 ->where('buy_ads.category_id',$product->category_id)
+                                ->whereNull('buy_ads.deleted_at')
                                 ->select('buy_ads.id','myusers.first_name', 'myusers.last_name' ,'buy_ads.name', 'buy_ads.requirement_amount' ,'categories.category_name as subcategory_name' ,'buy_ads.myuser_id as buyer_id' )
                                 ->get()
                                 ->values()
@@ -1464,7 +1467,8 @@ class buyAd_controller extends Controller
                                 ->where('myusers.is_buyer',true)
                                 ->where('buy_ads.requirement_amount','<=',$product->stock)
                                 ->whereBetween('buy_ads.updated_at',[$from,$until])
-                                ->where('confirmed',true)
+                                ->where('buy_ads.confirmed',true)
+                                ->whereNull('buy_ads.deleted_at')
                                 ->where(function($q) use($product_name_array){
                                     foreach($product_name_array as $name){
                                         $q = $q->orWhere('name','like',"%$name%");
@@ -1541,6 +1545,7 @@ class buyAd_controller extends Controller
                             ->join('myusers','myusers.id','=','buy_ads.myuser_id')
                             ->join('categories as subcategories','subcategories.id','=','buy_ads.category_id')
                             ->join('categories','subcategories.parent_id','=','categories.id')
+                            ->whereNull('deleted_at')
                             ->where('confirmed',true)
                             ->where('buy_ads.myuser_id',$user_id)
                             ->select($this->my_buyAds_required_fields)
