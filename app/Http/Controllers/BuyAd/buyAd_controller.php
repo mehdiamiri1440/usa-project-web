@@ -1116,7 +1116,7 @@ class buyAd_controller extends Controller
     {
         foreach($products as $product)
         {
-            $activity_info = $this->get_user_activity_ratio($product->id,$product->created_at);
+            $activity_info = $this->get_user_activity_ratio($product->myuser_id,$product->created_at);
             $product->activity_ratio = $activity_info['activity_ratio'];
             $product->score = $activity_info['score'];
         }
@@ -1173,7 +1173,7 @@ class buyAd_controller extends Controller
         $total_number_of_active_days  = count($result); 
 
         $days_since_product_register = Carbon::now()->diffInDays($product_register_date);
-
+        
         $user_register_date = DB::table('myusers')->where('id',$user_id)->get()->first()->created_at;
 
         $days_between_last_activity_and_user_signup = Carbon::parse($user_register_date)->diffInDays(Carbon::parse($result[0]->date));
