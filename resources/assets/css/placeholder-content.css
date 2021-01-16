@@ -228,6 +228,14 @@ body,
   padding-top: 5px;
 }
 
+.padding-bottom-5 {
+  padding-bottom: 5px;
+}
+
+.padding-bottom-15 {
+  padding-bottom: 15px;
+}
+
 .padding-0 {
   padding: 0 !important;
 }

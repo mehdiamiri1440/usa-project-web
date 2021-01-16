@@ -826,11 +826,6 @@ export default {
         }
       } else return "";
     },
-    getNumberWithCommas: function (number) {
-      if (number || typeof number === "number")
-        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      else return "";
-    },
     registerComponentStatistics: function (
       categoryName,
       actionName,

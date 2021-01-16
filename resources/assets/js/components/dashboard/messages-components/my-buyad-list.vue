@@ -494,7 +494,7 @@ li.golden .buyad-button:hover {
         <div class="switch-button-item">
           <button class="contact-button active">
             <span class="total-unread-messages-badge">جدید</span>
-            <i class="fa fa-list-alt"></i>
+            <i class="fa fa-list-ul"></i>
             خریداران پیشنهادی
           </button>
         </div>

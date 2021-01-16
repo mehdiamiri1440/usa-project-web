@@ -193,6 +193,15 @@ const router = new Router({
             },
           },
         },
+        {
+          path: "support",
+          name: "supportSeller",
+          components: {
+            default: (resolve) => {
+              require(["../components/dashboard/seller/support.vue"], resolve);
+            },
+          },
+        },
       ],
       beforeEnter: (to, from, next) => {
         var userId = window.localStorage.getItem("userId");
@@ -310,6 +319,15 @@ const router = new Router({
           components: {
             default: (resolve) => {
               require(["../components/dashboard/buyer/guide.vue"], resolve);
+            },
+          },
+        },
+        {
+          path: "support",
+          name: "supportBuyer",
+          components: {
+            default: (resolve) => {
+              require(["../components/dashboard/buyer/support.vue"], resolve);
             },
           },
         },

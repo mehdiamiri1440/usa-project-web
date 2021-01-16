@@ -305,44 +305,6 @@ span.min {
 
     <div class="container">
       <div
-        id="deleteBuyAdModal"
-        class="modal"
-        tabindex="-1"
-        role="dialog"
-        aria-labelledby="myLargeModalLabel"
-      >
-        <div class="modal-dialog modal-lg" role="document">
-          <div class="modal-content">
-            <div class="main_popup_content">
-              <a href="#" data-dismiss="modal">
-                <i class="fa fa-times"></i>
-              </a>
-              <p class="main-pop-up" v-text="popUpMsg"></p>
-
-              <a
-                href="#"
-                class="btn green-button delete"
-                data-dismiss="modal"
-                @click.prevent="deleteBuyAd()"
-                v-text="deleteButtonText"
-              ></a>
-
-              <a
-                href="#"
-                class="btn green-button"
-                data-dismiss="modal"
-                v-text="cancelButtonText"
-              ></a>
-            </div>
-          </div>
-          <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-      </div>
-    </div>
-
-    <div class="container">
-      <div
         id="deleteModal"
         class="modal"
         tabindex="-1"
@@ -691,7 +653,6 @@ export default {
       productId: "",
       searchValueText: "",
       resetTextSearch: false,
-      buyAdId: "",
     };
   },
   methods: {
@@ -1015,9 +976,6 @@ export default {
 
     eventBus.$on("productId", (event) => {
       this.productId = event;
-    });
-    eventBus.$on("buyAdId", (event) => {
-      this.buyAdId = event;
     });
 
     eventBus.$on("resetTextSearch", (event) => {

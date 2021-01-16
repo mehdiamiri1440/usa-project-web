@@ -252,39 +252,43 @@ tr:nth-child(even) {
           <p class="section-contents">
             برای دسترسی به این قسمت لطفا اپلیکیشن موبایل باسکول را نصب کنید.
           </p>
-          <a class="green-button" href @click.prevent="doDownload()">
+          <!-- <a class="green-button" href @click.prevent="doDownload()">
             دانلود اپلیکیشن</a
-          >
+          > -->
         </div>
         <!-- <div v-else-if="buyAds.length != 0"> -->
-        <div class="buyAds-wrapper">
+        <div v-if="buyAds.length != 0 && !load" class="buyAds-wrapper">
           <div
             class="col-xs-12 col-md-6 pull-right"
-            v-for="(buyAd, index) in 5"
+            v-for="(buyAd, index) in buyAds"
             :key="index"
           >
             <article class="item-wrapper shadow-content bg-white">
               <div class="table-wrapper">
                 <table>
                   <tr>
-                    <td>دسته بندی</td>
-                    <td>خرما</td>
+                    <td class="gray-text">دسته بندی</td>
+                    <td v-text="buyAd.subcategory_name"></td>
+                  </tr>
+                  <tr v-if="buyAd.name">
+                    <td class="gray-text">نوع محصول</td>
+                    <td v-text="buyAd.name"></td>
                   </tr>
                   <tr>
-                    <td>نوع محصول</td>
-                    <td>مضافتی</td>
+                    <td class="gray-text">میزان نیاز مندی</td>
+                    <td
+                      v-text="getConvertedNumbers(buyAd.requirement_amount)"
+                    ></td>
                   </tr>
                   <tr>
-                    <td>میزان نیاز مندی</td>
-                    <td>2,000 تن</td>
+                    <td class="gray-text">زمان ثبت</td>
+                    <td>
+                      {{ buyAd.created_at | moment("jYYYY/jMM/jDD") }}
+                    </td>
                   </tr>
                   <tr>
-                    <td>زمان ثبت</td>
-                    <td>۲۵ اردیبهشت، ۱۳۹۹</td>
-                  </tr>
-                  <tr>
-                    <td>تعداد پاسخ های دریافتی</td>
-                    <td>۲۰</td>
+                    <td class="gray-text">تعداد پاسخ های دریافتی</td>
+                    <td v-text="buyAd.reply_capacity"></td>
                   </tr>
                   <!-- <tr>
                     <td>وضعیت</td>
@@ -293,7 +297,7 @@ tr:nth-child(even) {
                 </table>
               </div>
               <button
-                @click="deleteBuyAd(index)"
+                @click="deleteBuyAd(buyAd.id)"
                 class="red-text delete-button"
               >
                 <i class="fa fa-trash"></i>
@@ -301,55 +305,12 @@ tr:nth-child(even) {
               </button>
             </article>
           </div>
-
-          <!-- <ul class="list-unstyled wrapper-items">
-            <li
-              v-for="(buyAd, index) in 5"
-              :key="index"
-              class="list-group-item col-xs-12"
-            >
-              <p class="list-title col-sm-3 col-xs-12">
-                <span v-text="buyAd.category_name"></span>
-
-                <span>|</span>
-
-                <span v-text="buyAd.subcategory_name"></span>
-
-                <span v-if="buyAd.name" v-text="' | ' + buyAd.name"></span>
-              </p>
-
-              <p class="needs col-sm-3 col-xs-12">
-                <span class="static-content">میزان نیازمندی :</span>
-                <span
-                  v-text="getNumberWithCommas(buyAd.requirement_amount)"
-                ></span>
-
-                <span class="static-content">کیلوگرم</span>
-              </p>
-              <p
-                class="list-time col-sm-2 col-xs-12"
-                v-text="buyAd.register_date"
-              ></p>
-
-              <a
-                class="col-sm-3 col-xs-12 pull-left"
-                href
-                @click.prevent="openChat(buyAd, $event)"
-              >
-                <p class="detail-success hover-effect">
-                  <span class="fas fa-comment-alt"></span> پیام به خریدار
-                </p>
-                <p class="detail-success hide-reply" :id="'loader-' + buyAd.id">
-                  کمی صبر کنید...
-                </p>
-              </a>
-            </li>
-          </ul> -->
         </div>
         <!-- <div
           class="col-xs-12 wrapper-items"
           v-else-if="buyAds.length === 0 && !load"
-        >
+        > -->
+        <div class="buyAds-wrapper" v-else-if="buyAds.length === 0 && !load">
           <div class="wrapper_no_pro">
             <div class="content_no_pic">
               <i class="fa fa-list-alt"></i>
@@ -358,53 +319,77 @@ tr:nth-child(even) {
             <div class="text_no_pic">
               <p>در حال حاظر شما درخواستی ثبت نکرده اید</p>
             </div>
+
+            <router-link
+              class="green-button"
+              :to="{ name: 'registerRequestBuyer' }"
+            >
+              ثبت درخواست خرید
+            </router-link>
           </div>
         </div>
-        <div class="col-xs-12 wrapper-items" v-else-if="load">
-          <ul class="list-unstyled">
-            <li
-              v-for="(item, index) in 5"
-              :key="index"
-              class="list-group-item col-xs-12"
+        <div v-if="buyAds.length === 0 && load" class="buyAds-wrapper">
+          <!-- <div v-if="load" class="buyAds-wrapper"> -->
+          <div
+            class="col-xs-12 col-md-6 pull-right"
+            v-for="(buyAd, index) in 6"
+            :key="index"
+          >
+            <article
+              class="item-wrapper shadow-content padding-bottom-15 bg-white"
             >
-              <p
-                class="default-list-title pull-right col-sm-9 hidden-xs margin-10-0"
-              >
-                <span
-                  class="placeholder-content content-full-width h-20"
-                ></span>
-              </p>
-
-              <p
-                class="list-title col-sm-2 col-xs-12 hidden-md hidden-lg hidden-sm"
-              >
-                <span
-                  class="placeholder-content content-half-width h-20 margin-auto"
-                ></span>
-              </p>
-
-              <p class="needs col-sm-4 col-xs-12 hidden-md hidden-lg hidden-sm">
-                <span
-                  class="placeholder-content content-default-width h-20 margin-auto"
-                ></span>
-              </p>
-
-              <p
-                class="list-time col-sm-2 col-xs-12 hidden-md hidden-lg hidden-sm"
-              >
-                <span
-                  class="placeholder-content content-min-width h-20 margin-auto"
-                ></span>
-              </p>
-
-              <p class="col-sm-3 col-xs-12">
-                <span
-                  class="placeholder-content default-button-full-with margin-10-auto"
-                ></span>
-              </p>
-            </li>
-          </ul>
-        </div> -->
+              <div class="table-wrapper">
+                <table>
+                  <tr>
+                    <td>
+                      <p class="placeholder-content content-half-width"></p>
+                    </td>
+                    <td>
+                      <p class="placeholder-content content-half-width"></p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="placeholder-content content-default-width"></p>
+                    </td>
+                    <td>
+                      <p class="placeholder-content content-min-width"></p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="placeholder-content content-half-width"></p>
+                    </td>
+                    <td>
+                      <p class="placeholder-content content-default-width"></p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="placeholder-content content-default-width"></p>
+                    </td>
+                    <td>
+                      <p class="placeholder-content content-half-width"></p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="placeholder-content content-half-width"></p>
+                    </td>
+                    <td>
+                      <p class="placeholder-content content-default-width"></p>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+              <div class="margin-top-10">
+                <p
+                  class="placeholder-content padding-15-0 margin-auto content-half-width"
+                ></p>
+              </div>
+            </article>
+          </div>
+        </div>
       </section>
     </div>
   </div>
@@ -416,69 +401,9 @@ export default {
   props: ["storage"],
   data: function () {
     return {
-      currentUser: {
-        profile: "",
-        user_info: "",
-      },
-      buyAds: [
-        {
-          id: 84,
-          name: "سیب سبز",
-          created_at: "2020-10-24 19:09:34",
-          updated_at: "2020-10-24 19:09:34",
-          category_id: 3,
-          requirement_amount: 10000202,
-          confirmed: 1,
-          myuser_id: 1,
-          reply_capacity: 10,
-          first_name: "علی",
-          last_name: "قاسمی",
-          is_golden: false,
-          score: 5,
-          category_name: "میوه",
-          subcategory_name: "سیب",
-          register_date: "۳  آبان , ۱۳۹۹",
-        },
-        {
-          id: 84,
-          name: "سیب سبز",
-          created_at: "2020-10-24 19:09:34",
-          updated_at: "2020-10-24 19:09:34",
-          category_id: 3,
-          requirement_amount: 10000202,
-          confirmed: 1,
-          myuser_id: 1,
-          reply_capacity: 10,
-          first_name: "علی",
-          last_name: "قاسمی",
-          is_golden: false,
-          score: 5,
-          category_name: "میوه",
-          subcategory_name: "سیب",
-          register_date: "۳  آبان , ۱۳۹۹",
-        },
-        {
-          id: 84,
-          name: "سیب سبز",
-          created_at: "2020-10-24 19:09:34",
-          updated_at: "2020-10-24 19:09:34",
-          category_id: 3,
-          requirement_amount: 10000202,
-          confirmed: 1,
-          myuser_id: 1,
-          reply_capacity: 10,
-          first_name: "علی",
-          last_name: "قاسمی",
-          is_golden: false,
-          score: 5,
-          category_name: "میوه",
-          subcategory_name: "سیب",
-          register_date: "۳  آبان , ۱۳۹۹",
-        },
-      ],
+      buyAds: "",
       isConditionSatisfied: false,
       load: false,
-      items: [],
       isRequests: true,
     };
   },
@@ -486,7 +411,6 @@ export default {
     init: function () {
       this.load = true;
       var self = this;
-
       axios.post("/get_my_buyAds").then(function (response) {
         self.buyAds = response.data.buyAds;
         self.load = false;
@@ -496,6 +420,17 @@ export default {
       if (number || typeof number === "number")
         return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       else return "";
+    },
+    getConvertedNumbers: function (number) {
+      if (number || typeof number === "number") {
+        let data = number / 1000;
+        if (number < 1000) {
+          return number + " " + "کیلوگرم";
+        } else {
+          data = this.getNumberWithCommas(data);
+          return data + " " + "تن";
+        }
+      } else return "";
     },
     registerComponentStatistics: function (
       categoryName,
@@ -543,9 +478,10 @@ export default {
       }
     },
     deleteBuyAd(id) {
-      eventBus.$emit("buyAdId", 1);
+      eventBus.$emit("buyAdId", id);
 
       eventBus.$emit("modal", "deleteBuyAdModal");
+
       this.registerComponentStatistics(
         "product",
         "delete-product",

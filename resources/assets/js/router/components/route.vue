@@ -327,6 +327,7 @@ export default {
       isConditionSatisfied: false,
       elevatorText: "",
       productId: "",
+      buyAdId: "",
       joinGroupMessage: "",
       joinGroupId: "",
       activeContactId: "",
@@ -358,6 +359,10 @@ export default {
 
     eventBus.$on("productId", ($event) => {
       this.productId = $event;
+    });
+
+    eventBus.$on("buyAdId", ($event) => {
+      this.buyAdId = $event;
     });
 
     eventBus.$on("joinGroupId", ($event) => {
@@ -729,13 +734,13 @@ export default {
         switch (value) {
           case "delete":
             axios
-              .post("/delete_product_by_id", {
-                product_id: self.productId,
+              .post("/delete_buy_ad_by_id", {
+                buy_ad_id: self.buyAdId,
               })
               .then(function (response) {
                 swal({
                   title: "حذف شد",
-                  text: "محصول شما از لیست محصولات باسکول حذف شد.",
+                  text: "درخواست خرید شما با موفقیت حذف شد.",
                   icon: "success",
                   className: "custom-swal-with-cancel",
                   buttons: {

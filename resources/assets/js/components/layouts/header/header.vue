@@ -769,7 +769,7 @@ a.profile-info-wrapper:hover {
 
               <router-link
                 data-dismiss="modal"
-                :to="{ name: 'login' }"
+                :to="{ name: 'register' }"
                 class="btn green-button"
                 >ورود/ثبت نام</router-link
               >
@@ -899,7 +899,7 @@ a.profile-info-wrapper:hover {
             </li>
 
             <li class="mobile-login-link hidden-sm hidden-md hidden-lg">
-              <router-link class="green-button" :to="{ name: 'login' }">
+              <router-link class="green-button" :to="{ name: 'register' }">
                 <i class="fa fa-user"></i>
 
                 <span>ورود / ثبت نام</span>
@@ -1021,6 +1021,21 @@ a.profile-info-wrapper:hover {
                   >ثبت درخواست خرید</router-link
                 >
               </li>
+              <li v-if="user_id !== ''">
+                <router-link
+                  v-if="is_seller == 1"
+                  class="smoothScroll"
+                  :to="{ name: 'messagesRequestSeller' }"
+                  @click="
+                    registerComponentStatistics(
+                      'header',
+                      'dashboard',
+                      'click-on-dashboard'
+                    )
+                  "
+                  >خریداران پیشنهادی
+                </router-link>
+              </li>
               <li>
                 <router-link
                   class="smoothScroll"
@@ -1137,7 +1152,6 @@ a.profile-info-wrapper:hover {
               ></span>
             </router-link>
           </li>
-
           <li v-if="user_id !== ''">
             <router-link
               v-if="is_seller == 1"
@@ -1166,7 +1180,21 @@ a.profile-info-wrapper:hover {
               >ثبت درخواست خرید</router-link
             >
           </li>
-
+          <li v-if="user_id !== ''">
+            <router-link
+              v-if="is_seller == 1"
+              class="smoothScroll"
+              :to="{ name: 'messagesRequestSeller' }"
+              @click="
+                registerComponentStatistics(
+                  'header',
+                  'dashboard',
+                  'click-on-dashboard'
+                )
+              "
+              >خریداران پیشنهادی
+            </router-link>
+          </li>
           <li>
             <router-link
               class="smoothScroll"

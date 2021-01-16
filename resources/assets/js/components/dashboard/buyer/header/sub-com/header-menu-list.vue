@@ -168,6 +168,13 @@ a.active {
             <span>راهنما</span>
           </router-link>
         </li>
+
+        <li class="list-item">
+          <router-link :to="{ name: 'supportBuyer' }">
+            <i class="fas fa-headset"></i>
+            <span>پشتیبانی</span>
+          </router-link>
+        </li>
       </ul>
     </div>
   </div>

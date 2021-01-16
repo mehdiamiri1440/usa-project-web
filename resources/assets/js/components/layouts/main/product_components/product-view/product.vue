@@ -578,6 +578,7 @@ export default {
         if (number < 1000) {
           return number + " " + "کیلوگرم";
         } else {
+          data = this.getNumberWithCommas(data);
           return data + " " + "تن";
         }
       } else return "";

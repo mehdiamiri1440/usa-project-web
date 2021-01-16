@@ -234,7 +234,7 @@
                 <router-link
                   :to="{ name: box.routerName }"
                   class="green-button"
-                  :class="{'gray-brand-background' : index > 0}"
+                  :class="{ 'gray-brand-background': index > 0 }"
                 >
                   <i v-if="box.linkIcon" :class="box.linkIcon"></i>
                   {{ box.linkName }}
@@ -310,7 +310,7 @@ export default {
         },
         {
           href: "messagesRequestSeller",
-          icon: "fas fa-list-alt",
+          icon: "fas fa-list-ul",
           text: "خریداران پیشنهادی",
           badge: true,
         },

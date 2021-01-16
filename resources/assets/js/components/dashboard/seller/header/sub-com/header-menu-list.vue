@@ -155,6 +155,13 @@ a.active {
           </li>
 
           <li class="list-item">
+            <router-link :to="{ name: 'messagesRequestSeller' }">
+              <i class="fa fa-list-ul" aria-hidden="true"></i>
+              <span>خریداران پیشنهادی</span>
+            </router-link>
+          </li>
+
+          <li class="list-item">
             <router-link
               :to="{ name: 'registerProductSeller' }"
               :class="{
@@ -172,11 +179,11 @@ a.active {
             <router-link
               :to="{ name: 'messagesSeller' }"
               :class="{
-                'router-link-exact-active ':
-                  this.activeElement === 0 ||
-                  $route.name == 'messagesRequestSeller',
+                'router-link-exact-active ': this.activeElement === 0,
               }"
             >
+              <!-- ||
+                  $route.name == 'messagesRequestSeller', -->
               <i class="fas fa-comment-alt" aria-hidden="true"></i>
 
               <span>پیام ها</span>
@@ -214,9 +221,17 @@ a.active {
               <span>راهنما</span>
             </router-link>
           </li>
+
+          <li class="list-item">
+            <router-link :to="{ name: 'supportSeller' }">
+              <i class="fas fa-headset"></i>
+              <span>پشتیبانی</span>
+            </router-link>
+          </li>
+
           <li
             class="list-item"
-            v-if="$parent.currentUser.user_info.active_pakage_type != 3"
+            v-if="$parent.currentUser.user_info.active_pakage_type < 3"
           >
             <router-link
               tag="button"
