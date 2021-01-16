@@ -292,6 +292,10 @@ body,
   color: #dbdbdb !important;
 }
 
+.bg-white {
+  background-color: #fff !important;
+}
+
 .bg-red {
   background-color: #e41c38 !important;
 }

@@ -519,6 +519,9 @@ export default {
         case "deleteProduct":
           this.raiseDeleteProductModal();
           break;
+        case "deleteBuyAdModal":
+          this.raiseDeleteBuyAdModal();
+          break;
         case "productEditDone":
           this.raiseProductEditSuccessModal();
           break;
@@ -623,6 +626,89 @@ export default {
       swal({
         title: "حذف محصول",
         text: "آیا میخواهید این محصول را حذف کنید؟",
+        // content: closeIconBtn,
+        className: "custom-swal-with-cancel",
+        buttons: {
+          delete: {
+            text: "حذف کن",
+            value: "delete",
+            className: "bg-red",
+          },
+          reject: {
+            text: "انصراف",
+          },
+          close: {
+            text: "بستن",
+            className: "bg-cancel",
+          },
+        },
+      }).then((value) => {
+        switch (value) {
+          case "delete":
+            axios
+              .post("/delete_product_by_id", {
+                product_id: self.productId,
+              })
+              .then(function (response) {
+                swal({
+                  title: "حذف شد",
+                  text: "محصول شما از لیست محصولات باسکول حذف شد.",
+                  icon: "success",
+                  className: "custom-swal-with-cancel",
+                  buttons: {
+                    close: {
+                      text: "بستن",
+                      value: "close",
+                      className: "bg-cancel",
+                    },
+                  },
+                }).then((value) => {
+                  if (value == "close") {
+                    window.location.reload();
+                  }
+                });
+
+                self.registerComponentStatistics(
+                  "product",
+                  "product-deleted",
+                  "product-deleted-successfully"
+                );
+              })
+              .catch(function (err) {
+                console.log(err);
+                self.registerComponentStatistics(
+                  "product",
+                  "product-delete-failed",
+                  "product-delete-failed"
+                );
+                //show modal
+                swal({
+                  title: "خطا",
+                  text: "خطایی رخ داده است. دوباره تلاش کنید.",
+                  icon: "error",
+                  className: "custom-swal-with-cancel",
+                  buttons: {
+                    close: {
+                      text: "بستن",
+                      value: "close",
+                      className: "bg-cancel",
+                    },
+                  },
+                });
+              });
+
+            break;
+        }
+      });
+    },
+    raiseDeleteBuyAdModal: function () {
+      let self = this;
+
+      this.handleBackBtn();
+
+      swal({
+        title: "حذف درخواست",
+        text: "آیا میخواهید این درخواست را حذف کنید؟",
         // content: closeIconBtn,
         className: "custom-swal-with-cancel",
         buttons: {

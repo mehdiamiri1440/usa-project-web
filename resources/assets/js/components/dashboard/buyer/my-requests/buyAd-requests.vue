@@ -127,64 +127,45 @@
   right: 80px;
 }
 
-.detail-contents {
-  margin: 15px auto;
-}
-.detail-contents > div {
-  background: #fff;
-  padding: 15px;
-  margin-bottom: 15px;
-  line-height: 25px;
-  font-size: 30px;
-}
-.list-notice {
-  text-align: right;
-  height: 32px;
-}
-.list-notice button {
-  background: none;
-
-  border: none;
-
-  color: #777;
-
-  padding: 0;
-
-  position: relative;
-
-  top: -5px;
-}
-.list-notice button > span:first-of-type {
-  position: relative;
-
-  font-size: 26px;
-}
-.list-notice button > span.request-count {
-  font-size: 18px;
-
-  position: relative;
-
-  top: -5px;
-}
-.list-notice button > span > i:last-of-type {
-  position: absolute;
-
-  left: 17px;
-
-  color: #fff;
-
-  font-size: 15px;
-
-  top: 7px;
-}
-
-.hide-reply {
-  display: none;
-}
-
-.wrapper-items {
+.buyAds-wrapper {
   padding-top: 60px;
+  max-width: 992px;
+  margin: 0 auto;
 }
+
+.delete-button {
+  font-size: 18px;
+  text-align: center;
+  padding: 15px;
+  background: none;
+  border: none;
+}
+
+.item-wrapper {
+  border-radius: 7px;
+  border-top: 5px solid #556080;
+  min-height: 150px;
+  direction: rtl;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+table {
+  width: 100%;
+}
+
+.table-wrapper {
+  min-height: 227px;
+}
+
+td {
+  padding: 15px;
+}
+
+tr:nth-child(even) {
+  background-color: #f6fbff;
+}
+
 .remove-filter-button {
   background: #fff;
   border-radius: 50px;
@@ -226,20 +207,6 @@
   font-size: 16px;
 }
 
-.lock > p {
-  filter: blur(7px);
-}
-
-.lock > span.lock-text {
-  position: absolute;
-  left: 0;
-  text-align: right;
-  right: 90px;
-  font-size: 20px;
-  font-weight: bold;
-  top: 14px;
-}
-
 @media screen and (max-width: 991px) {
   .fix-request-header-box,
   .title {
@@ -250,20 +217,8 @@
   }
 }
 @media screen and (max-width: 767px) {
-  .lock > span.lock-text {
-    text-align: center;
-    right: 0;
-    top: 60px;
-  }
-  .golden {
-    padding: 25px 0;
-  }
-  .golden::after {
-    display: none;
-  }
-  .main-content,
-  .wrapper-items {
-    padding: 0;
+  .buyAds-wrapper {
+    padding-top: 10px;
   }
   .requests .main-content {
     padding: 0 0 100px !important;
@@ -273,32 +228,6 @@
   }
   .title h1 {
     text-align: center;
-  }
-
-  .detail-success {
-    max-width: 300px;
-    margin: 0 auto;
-  }
-
-  .default-button-full-with {
-    max-width: 300px;
-  }
-
-  .list-notice button > span.request-count {
-    font-size: 15px;
-    top: -5px;
-  }
-  .list-notice button > span > i:last-of-type {
-    left: 16px;
-
-    font-size: 12px;
-    top: 7px;
-  }
-  .list-notice button > span:first-of-type {
-    font-size: 23px;
-  }
-  .list-notice button > span.request-count {
-    font-size: 15px;
   }
 }
 </style>
@@ -327,10 +256,55 @@
             دانلود اپلیکیشن</a
           >
         </div>
-        <div v-else-if="buyAds.length != 0">
-          <ul class="list-unstyled wrapper-items">
+        <!-- <div v-else-if="buyAds.length != 0"> -->
+        <div class="buyAds-wrapper">
+          <div
+            class="col-xs-12 col-md-6 pull-right"
+            v-for="(buyAd, index) in 5"
+            :key="index"
+          >
+            <article class="item-wrapper shadow-content bg-white">
+              <div class="table-wrapper">
+                <table>
+                  <tr>
+                    <td>دسته بندی</td>
+                    <td>خرما</td>
+                  </tr>
+                  <tr>
+                    <td>نوع محصول</td>
+                    <td>مضافتی</td>
+                  </tr>
+                  <tr>
+                    <td>میزان نیاز مندی</td>
+                    <td>2,000 تن</td>
+                  </tr>
+                  <tr>
+                    <td>زمان ثبت</td>
+                    <td>۲۵ اردیبهشت، ۱۳۹۹</td>
+                  </tr>
+                  <tr>
+                    <td>تعداد پاسخ های دریافتی</td>
+                    <td>۲۰</td>
+                  </tr>
+                  <!-- <tr>
+                    <td>وضعیت</td>
+                    <td>بد نیست</td>
+                  </tr> -->
+                </table>
+              </div>
+              <button
+                @click="deleteBuyAd(index)"
+                class="red-text delete-button"
+              >
+                <i class="fa fa-trash"></i>
+                حذف این درخواست
+              </button>
+            </article>
+          </div>
+
+          <!-- <ul class="list-unstyled wrapper-items">
             <li
-              v-for="(buyAd, index) in buyAds"
+              v-for="(buyAd, index) in 5"
               :key="index"
               class="list-group-item col-xs-12"
             >
@@ -370,9 +344,9 @@
                 </p>
               </a>
             </li>
-          </ul>
+          </ul> -->
         </div>
-        <div
+        <!-- <div
           class="col-xs-12 wrapper-items"
           v-else-if="buyAds.length === 0 && !load"
         >
@@ -430,7 +404,7 @@
               </p>
             </li>
           </ul>
-        </div>
+        </div> -->
       </section>
     </div>
   </div>
@@ -512,22 +486,11 @@ export default {
     init: function () {
       this.load = true;
       var self = this;
-      this.filterBuyAdByCategory();
-      axios.post("/user/profile_info").then(function (response) {
-        self.currentUser = response.data;
+
+      axios.post("/get_my_buyAds").then(function (response) {
+        self.buyAds = response.data.buyAds;
+        self.load = false;
       });
-
-      // axios
-      //   .post("/get_related_buyAds_list_to_the_seller")
-      //   .then(function (response) {
-      //     self.allBuyAds = response.data.buyAds;
-      //     self.buyAds = self.allBuyAds;
-
-      //     self.load = false;
-      //     setTimeout(function () {
-      //       $(".list-notice button").tooltip();
-      //     }, 100);
-      //   });
     },
     getNumberWithCommas: function (number) {
       if (number || typeof number === "number")
@@ -575,21 +538,19 @@ export default {
       if (this.isDeviceMobile() && !this.isOsIOS()) {
         let androidVersion = this.getAndroidVersion();
         if (parseInt(androidVersion) >= 5) {
-          this.isConditionSatisfied = true;
+          this.isConditionSatisfied = false;
         }
       }
     },
-    doDownload: function () {
-      //ga
+    deleteBuyAd(id) {
+      eventBus.$emit("buyAdId", 1);
+
+      eventBus.$emit("modal", "deleteBuyAdModal");
       this.registerComponentStatistics(
-        "download",
-        "app download btn",
-        "download app btn in popUp"
+        "product",
+        "delete-product",
+        "click on delete product-btn"
       );
-      // code here
-      this.createCookie("downloadAppModal", true, 60 * 24);
-      window.location.href =
-        "https://app-download.s3.ir-thr-at1.arvanstorage.com/buskool.apk";
     },
     createCookie: function (name, value, minutes) {
       if (minutes) {
