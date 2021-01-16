@@ -1159,6 +1159,18 @@ class product_controller extends Controller
                                 ->select($this->related_buyAds_required_fields)
                                 ->get();
 
+        //remove duplication in buyers
+        $buyer_ids = [];
+        $buyAds = $buyAds->filter(function($buyAd) use(&$buyer_ids){
+                    $result = false;
+                    if(in_array($buyAd->myuser_id,$buyer_ids) == false){
+                        $buyer_ids[] = $buyAd->myuser_id;
+                        $result = true;
+                    }
+
+                    return $result;
+                });
+
         $buyAds = $this->get_most_valuable_buyAds($buyAds);
 
         return $buyAds;
