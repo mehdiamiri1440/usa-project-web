@@ -174,10 +174,10 @@ Route::group(['middleware' => [login::class]], function () {
         'as' => 'delete_product_by_id',
     ]);
 
-    // Route::delete('/delete_buy_ad_by_id', [
-    //     'uses' => 'BuyAd\buyAd_controller@delete_buy_ad_by_id',
-    //     'as' => 'delete_buy_ad_by_id',
-    // ]);
+    Route::post('/delete_buy_ad_by_id', [
+        'uses' => 'BuyAd\buyAd_controller@delete_buy_ad_by_id',
+        'as' => 'delete_buy_ad_by_id',
+    ]);
 
     // Route::post('/add_sell_offer', [
     //     'uses' => 'sell_offer_controller@add_sell_offer',
@@ -550,7 +550,10 @@ Route::group(['middleware' => [login::class]], function () {
     Route::post('/get_related_buyAds_to_my_product',[
         'uses' => 'Product\product_controller@get_related_buyAds_to_the_last_registered_product'
     ]);
-    
+
+    Route::post('/get_my_buyAds',[
+        'uses' => 'BuyAd\buyAd_controller@get_my_buyAds'
+    ]); 
 });
 
 Route::post('/send_phone_verification_code_for_password_reset', [
