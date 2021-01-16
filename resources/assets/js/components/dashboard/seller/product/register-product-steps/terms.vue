@@ -243,7 +243,7 @@ export default {
         if (
           !this.$parent.validateRegx(
             description,
-            /^(?!.*[(@#!%$&*)])[s\u{0600}-\u{06FF}\u{060C}\u{061B}\u{061F}\u{0640}\u{066A}\u{066B}\u{066C}\u{0E}\u{0A}\u{05BE}_.-،:()A-Za-z0-9 ]+$/u
+            /^[\u0600-\u06FF\s_,.:/;()+-\d]+$/
           )
         ) {
           this.errors.description = "توضیحات شامل کاراکتر های غیرمجاز است";
