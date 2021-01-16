@@ -555,10 +555,6 @@ li > ul > li.active > ul > li {
   line-height: 1.618;
 }
 
-.text-red {
-  color: #e41c38;
-}
-
 .title {
   text-align: right;
   padding: 13px 15px;
@@ -851,7 +847,9 @@ li > ul > li.active > ul > li {
 
 <template>
   <div>
-    <div :class="{ 'loader-wrapper': isLoading, 'finish-loader-show': !isLoading }">
+    <div
+      :class="{ 'loader-wrapper': isLoading, 'finish-loader-show': !isLoading }"
+    >
       <div class="main-loader">
         <img src="../../../../img/gif/loading.gif" />
       </div>
@@ -875,10 +873,9 @@ li > ul > li.active > ul > li {
               animateClass="animated"
               :begin="false"
             >
-              <h1
-                class="intro-site-title"
-                data-wow-delay="1.2s"
-              >باسکول | بازار خرید و فروش عمده محصولات کشاورزی</h1>
+              <h1 class="intro-site-title" data-wow-delay="1.2s">
+                باسکول | بازار خرید و فروش عمده محصولات کشاورزی
+              </h1>
             </u-animate>
 
             <u-animate
@@ -890,10 +887,9 @@ li > ul > li.active > ul > li {
               animateClass="animated"
               :begin="false"
             >
-              <h2
-                class="intro-site-title"
-                data-wow-delay="1.2s"
-              >ارتباط مستقیم با خریداران و فروشندگان عمده محصولات کشاورزی</h2>
+              <h2 class="intro-site-title" data-wow-delay="1.2s">
+                ارتباط مستقیم با خریداران و فروشندگان عمده محصولات کشاورزی
+              </h2>
             </u-animate>
 
             <u-animate
@@ -912,7 +908,10 @@ li > ul > li.active > ul > li {
                   placeholder="محصول مورد نظر خود را جستجو کنید"
                   v-model="mainSearchBoxText"
                 />
-                <button class="hidden-sm hidden-md hidden-lg fa fa-search" @click="search"></button>
+                <button
+                  class="hidden-sm hidden-md hidden-lg fa fa-search"
+                  @click="search"
+                ></button>
 
                 <button class="hidden-xs" @click="search">
                   <i class="fa fa-search"></i>
@@ -920,7 +919,9 @@ li > ul > li.active > ul > li {
                 </button>
               </div>
 
-              <router-link :to="{ name: 'productList' }" class="green-button">لیست محصولات</router-link>
+              <router-link :to="{ name: 'productList' }" class="green-button"
+                >لیست محصولات</router-link
+              >
             </u-animate>
           </u-animate-container>
         </div>
@@ -950,7 +951,10 @@ li > ul > li.active > ul > li {
                   {{ category.category_name }}
                 </a>
               </h2>
-              <ul class="sub-categories-wrapper list-inline col-xs-12" :data-index="index">
+              <ul
+                class="sub-categories-wrapper list-inline col-xs-12"
+                :data-index="index"
+              >
                 <li
                   v-for="subCategory in category.subcategories"
                   class="col-xs-4 col-sm-3 col-md-4 pull-right"
@@ -963,7 +967,10 @@ li > ul > li.active > ul > li {
                 </li>
 
                 <li class="col-xs-12 button-link-wrapper">
-                  <router-link class="product-link green-button" :to="{ name: 'productList' }">
+                  <router-link
+                    class="product-link green-button"
+                    :to="{ name: 'productList' }"
+                  >
                     <i class="fa fa-arrow-left"></i>
                     مشاهده همه محصولات
                   </router-link>
@@ -978,7 +985,10 @@ li > ul > li.active > ul > li {
         Request SECTION
     ==============================-->
 
-    <section id="requests-section" class="section-wrapper container-fluid hidden-xs">
+    <section
+      id="requests-section"
+      class="section-wrapper container-fluid hidden-xs"
+    >
       <div class="container">
         <div class="row">
           <div class="col-xs-12 col-md-9">
@@ -998,11 +1008,17 @@ li > ul > li.active > ul > li {
                     class="list-group-item col-xs-12"
                   >
                     <p class="list-title col-sm-4 col-xs-12">
-                      <span v-if="buyAd.category_name" v-text="buyAd.category_name"></span>
+                      <span
+                        v-if="buyAd.category_name"
+                        v-text="buyAd.category_name"
+                      ></span>
 
                       <span v-if="buyAd.subcategory_name">|</span>
 
-                      <span v-if="buyAd.subcategory_name" v-text="buyAd.subcategory_name"></span>
+                      <span
+                        v-if="buyAd.subcategory_name"
+                        v-text="buyAd.subcategory_name"
+                      ></span>
 
                       <span v-if="buyAd.name" v-text="'| ' + buyAd.name"></span>
                     </p>
@@ -1010,19 +1026,25 @@ li > ul > li.active > ul > li {
                     <p class="needs col-sm-4 col-xs-12">
                       <span class="static-content">میزان نیازمندی :</span>
 
-                      <span v-text="getNumberWithCommas(buyAd.requirement_amount)"></span>
-
-                      <span class="static-content">کیلوگرم</span>
+                      <span
+                        v-text="getConvertedNumbers(buyAd.requirement_amount)"
+                      ></span>
                     </p>
 
-                    <p class="list-time col-sm-4 col-xs-12" v-text="buyAd.register_date"></p>
+                    <p
+                      class="list-time col-sm-4 col-xs-12"
+                      v-text="buyAd.register_date"
+                    ></p>
                   </li>
 
                   <li
                     v-if="!isUserLogin || userType == 1"
                     class="buttons-action list-group-item col-xs-12"
                   >
-                    <router-link class="green-button" :to="{ name: 'buyAdRequestsSeller' }">
+                    <router-link
+                      class="green-button"
+                      :to="{ name: 'buyAdRequestsSeller' }"
+                    >
                       همه درخواست های خرید
                       <i class="fa fa-arrow-left"></i>
                     </router-link>
@@ -1030,12 +1052,19 @@ li > ul > li.active > ul > li {
                 </ul>
 
                 <ul v-else class="list-unstyled">
-                  <li v-for="(item, index) in 3" class="list-group-item col-xs-12">
-                    <span class="margin-10 content-full-width placeholder-content"></span>
+                  <li
+                    v-for="(item, index) in 3"
+                    class="list-group-item col-xs-12"
+                  >
+                    <span
+                      class="margin-10 content-full-width placeholder-content"
+                    ></span>
                   </li>
 
                   <li class="list-group-item col-xs-12 text-center">
-                    <span class="default-button margin-10 content-min-width placeholder-content"></span>
+                    <span
+                      class="default-button margin-10 content-min-width placeholder-content"
+                    ></span>
                   </li>
                 </ul>
               </div>
@@ -1043,7 +1072,10 @@ li > ul > li.active > ul > li {
           </div>
 
           <div class="col-xs-12 col-md-3 pull-right">
-            <div v-if="isUserLogin && userType == 0" class="title-box box-content">
+            <div
+              v-if="isUserLogin && userType == 0"
+              class="title-box box-content"
+            >
               <h3>
                 از فروشندگان عمده قیمت بگیرید و با یک درخواست چندین قیمت دریافت
                 کنید
@@ -1052,10 +1084,14 @@ li > ul > li.active > ul > li {
               <router-link
                 class="green-button"
                 :to="{ name: 'registerRequestBuyer' }"
-              >ثبت درخواست خرید</router-link>
+                >ثبت درخواست خرید</router-link
+              >
             </div>
 
-            <div v-else-if="isUserLogin && userType == 1" class="title-box box-content">
+            <div
+              v-else-if="isUserLogin && userType == 1"
+              class="title-box box-content"
+            >
               <h3>
                 درخواست های خریداران عمده را ببینید و بدون واسطه با آن ها ارتباط
                 برقرار کنید
@@ -1064,7 +1100,8 @@ li > ul > li.active > ul > li {
               <router-link
                 class="green-button"
                 :to="{ name: 'buyAdRequestsSeller' }"
-              >لیست درخواست های خرید</router-link>
+                >لیست درخواست های خرید</router-link
+              >
             </div>
 
             <div v-else class="title-box box-content">
@@ -1077,7 +1114,8 @@ li > ul > li.active > ul > li {
                 v-if="!isUserLogin"
                 class="green-button"
                 :to="{ name: 'register' }"
-              >ثبت نام</router-link>
+                >ثبت نام</router-link
+              >
             </div>
           </div>
         </div>
@@ -1102,11 +1140,14 @@ li > ul > li.active > ul > li {
                 :key="index"
                 :name="buyAd.name"
                 :title="buyAd.category_name + ' | ' + buyAd.subcategory_name"
-                :need="getNumberWithCommas(buyAd.requirement_amount)"
+                :need="getConvertedNumbers(buyAd.requirement_amount)"
                 :date="buyAd.register_date"
               />
             </div>
-            <div class="text-center text-rtl" v-if="!isUserLogin || userType == 1">
+            <div
+              class="text-center text-rtl"
+              v-if="!isUserLogin || userType == 1"
+            >
               <router-link
                 class="mobile-requests-buttons green-button"
                 :to="{ name: 'buyAdRequestsSeller' }"
@@ -1141,7 +1182,10 @@ li > ul > li.active > ul > li {
         </div>
 
         <div class="container">
-          <div v-if="isUserLogin && userType == 0" class="title-box box-content">
+          <div
+            v-if="isUserLogin && userType == 0"
+            class="title-box box-content"
+          >
             <h3>
               از فروشندگان عمده قیمت بگیرید و با یک درخواست چندین قیمت دریافت
               کنید
@@ -1150,10 +1194,14 @@ li > ul > li.active > ul > li {
             <router-link
               class="green-button"
               :to="{ name: 'registerRequestBuyer' }"
-            >ثبت درخواست خرید</router-link>
+              >ثبت درخواست خرید</router-link
+            >
           </div>
 
-          <div v-else-if="isUserLogin && userType == 1" class="title-box box-content">
+          <div
+            v-else-if="isUserLogin && userType == 1"
+            class="title-box box-content"
+          >
             <h3>
               درخواست های خریداران عمده را ببینید و بدون واسطه با آن ها ارتباط
               برقرار کنید
@@ -1162,7 +1210,8 @@ li > ul > li.active > ul > li {
             <router-link
               class="green-button"
               :to="{ name: 'buyAdRequestsSeller' }"
-            >لیست درخواست های خرید</router-link>
+              >لیست درخواست های خرید</router-link
+            >
           </div>
 
           <div v-else class="title-box box-content">
@@ -1171,7 +1220,12 @@ li > ul > li.active > ul > li {
               برای فروش بدون واسطه محصولات کشاورزی خود به خریداران مستقیم و
               صادرکنندگان هم اکنون ثبت نام کنید
             </p>
-            <router-link v-if="!isUserLogin" class="green-button" :to="{ name: 'register' }">ثبت نام</router-link>
+            <router-link
+              v-if="!isUserLogin"
+              class="green-button"
+              :to="{ name: 'register' }"
+              >ثبت نام</router-link
+            >
           </div>
         </div>
       </div>
@@ -1179,7 +1233,10 @@ li > ul > li.active > ul > li {
     <!-- =========================
         Product SECTION
     ==============================-->
-    <section id="product-section" class="section-wrapper container-fluid latest-product">
+    <section
+      id="product-section"
+      class="section-wrapper container-fluid latest-product"
+    >
       <div class="container">
         <div class="row">
           <div class="col-xs-12 col-md-9">
@@ -1198,7 +1255,7 @@ li > ul > li.active > ul > li {
                     :key="index"
                     :img="str + '/thumbnails/' + product.photo"
                     :title="product.product_name"
-                    :stock="getNumberWithCommas(product.stock)"
+                    :stock="getConvertedNumbers(product.stock)"
                     :link="getProductUrl(product)"
                     column="3"
                   />
@@ -1212,7 +1269,9 @@ li > ul > li.active > ul > li {
                   class="col-md-4 col-sm-4 col-xs-6"
                 >
                   <article class="carousel-item box-content col-xs-12">
-                    <span class="default-index-product-image placeholder-content col-xs-12"></span>
+                    <span
+                      class="default-index-product-image placeholder-content col-xs-12"
+                    ></span>
 
                     <span
                       class="content-default-width placeholder-content margin-10 col-xs-10 col-xs-offset-1"
@@ -1230,22 +1289,34 @@ li > ul > li.active > ul > li {
           </div>
 
           <div class="col-xs-12 col-md-3 pull-right">
-            <div v-if="isUserLogin && userType == 0" class="title-box box-content">
+            <div
+              v-if="isUserLogin && userType == 0"
+              class="title-box box-content"
+            >
               <h3>
                 محصولات فروشندگان را ببینید و بدون واسطه با آن ها ارتباط برقرار
                 کنید
               </h3>
 
-              <router-link class="green-button" :to="{ name: 'productList' }">لیست محصولات</router-link>
+              <router-link class="green-button" :to="{ name: 'productList' }"
+                >لیست محصولات</router-link
+              >
             </div>
 
-            <div v-else-if="isUserLogin && userType == 1" class="title-box box-content">
+            <div
+              v-else-if="isUserLogin && userType == 1"
+              class="title-box box-content"
+            >
               <h3>
                 با ثبت و معرفی محصول خود، بدون واسطه با خریداران عمده ارتباط
                 برقرار کنید
               </h3>
 
-              <router-link class="green-button" :to="{ name: 'registerProductSeller' }">ثبت محصول</router-link>
+              <router-link
+                class="green-button"
+                :to="{ name: 'registerProductSeller' }"
+                >ثبت محصول</router-link
+              >
             </div>
 
             <div v-else class="title-box box-content">
@@ -1255,7 +1326,9 @@ li > ul > li.active > ul > li {
                 عمده هم اکنون ثبت نام کنید
               </p>
 
-              <router-link class="green-button" :to="{ name: 'register' }">ثبت نام</router-link>
+              <router-link class="green-button" :to="{ name: 'register' }"
+                >ثبت نام</router-link
+              >
             </div>
           </div>
         </div>
@@ -1265,7 +1338,9 @@ li > ul > li.active > ul > li {
     <section id="services-section" class="section-wrapper container-fluid">
       <div class="container">
         <div class="row">
-          <h3 class="col-xs-12">ارتباط مستقیم با خریداران و فروشندگان عمده محصولات کشاورزی</h3>
+          <h3 class="col-xs-12">
+            ارتباط مستقیم با خریداران و فروشندگان عمده محصولات کشاورزی
+          </h3>
 
           <div class="service-boxs-wrapper col-xs-12">
             <div class="row">
@@ -1279,8 +1354,8 @@ li > ul > li.active > ul > li {
                     <p>
                       باسکول بازار خرید و فروش عمده محصولات کشاورزی
                       <br />است که خریداران را به فروشندگان عمده متصل کرده
-                      <br />و خریداران و فروشندگان بدون واسطه می توانند با یکدیگر
-                      ارتباط برقرار کنند
+                      <br />و خریداران و فروشندگان بدون واسطه می توانند با
+                      یکدیگر ارتباط برقرار کنند
                     </p>
                   </router-link>
                 </article>
@@ -1296,9 +1371,8 @@ li > ul > li.active > ul > li {
 
                     <p>
                       معرفی محصولات به خریداران عمده
-                      <br />دسترسی به درخواست های خرید روزانه
-                      <br />گسترش شبکه ی تجاری و مشتریان
-                      <br />فروش بدون واسطه و مقرون به صرفه
+                      <br />دسترسی به درخواست های خرید روزانه <br />گسترش شبکه ی
+                      تجاری و مشتریان <br />فروش بدون واسطه و مقرون به صرفه
                       <br />
                     </p>
                   </router-link>
@@ -1315,9 +1389,8 @@ li > ul > li.active > ul > li {
 
                     <p>
                       استعلام قیمت از فروشندگان و کشاورزان
-                      <br />دسترسی بدون واسطه به فروشندگان متنوع
-                      <br />صرفه جویی در زمان و هزینه خرید محصول
-                      <br />گسترش شبکه تامین کنندگان
+                      <br />دسترسی بدون واسطه به فروشندگان متنوع <br />صرفه جویی
+                      در زمان و هزینه خرید محصول <br />گسترش شبکه تامین کنندگان
                       <br />
                     </p>
                   </router-link>
@@ -1352,7 +1425,10 @@ li > ul > li.active > ul > li {
               <!-- end loop  -->
 
               <!-- loop for wholesale  -->
-              <div v-if="categoryList.length" v-for="(category, index) in categoryList">
+              <div
+                v-if="categoryList.length"
+                v-for="(category, index) in categoryList"
+              >
                 <h4
                   v-for="subCategory in category.subcategories"
                   class="col-xs-6 col-sm-4 col-md-2 pull-right"
@@ -1419,7 +1495,7 @@ var RequestCarousel = {
     "</div>" +
     "</article>",
 
-  mounted: function() {
+  mounted: function () {
     $("#mobile-requests-section .owl-carousel").owlCarousel({
       autoplay: true,
       autoplayTimeout: 4000,
@@ -1430,9 +1506,9 @@ var RequestCarousel = {
       mouseDrag: true,
       margin: 30,
       dots: true,
-      stagePadding: 15
+      stagePadding: 15,
     });
-  }
+  },
 };
 
 export default {
@@ -1442,10 +1518,10 @@ export default {
     RequestCarousel,
     UAnimateContainer,
     UAnimate,
-    mainRegisterRequestForm
+    mainRegisterRequestForm,
   },
   props: ["isUserLogin", "userType", "assets", "str"],
-  data: function() {
+  data: function () {
     return {
       mainSearchBoxText: "",
       enterKeyActiveForSearch: false,
@@ -1458,125 +1534,125 @@ export default {
         wholesaleDate: [
           {
             name: "خرما",
-            link: "خرما"
+            link: "خرما",
           },
           {
             name: "خرمای مضافتی",
-            link: "خرما"
+            link: "خرما",
           },
           {
             name: "خرمای بم",
-            link: "خرما"
+            link: "خرما",
           },
           {
             name: "خرمای زاهدی",
-            link: "خرما"
+            link: "خرما",
           },
           {
             name: "خرمای بوشهر",
-            link: "خرما"
+            link: "خرما",
           },
           {
             name: "خرمای کبکاب",
-            link: "خرما"
+            link: "خرما",
           },
           {
             name: "خرمای خوزستان",
-            link: "خرما"
+            link: "خرما",
           },
           {
             name: "خرما در مشهد",
-            link: "خرما"
+            link: "خرما",
           },
           {
             name: "خرما در بوشهر",
-            link: "خرما"
+            link: "خرما",
           },
           {
             name: "خرمای مجول",
-            link: "خرما"
+            link: "خرما",
           },
           {
             name: "کشمش",
-            link: "کشمش"
+            link: "کشمش",
           },
           {
             name: "پسته",
-            link: "پسته"
+            link: "پسته",
           },
           {
             name: "انجیر خشک استهبان",
-            link: "انجیر"
+            link: "انجیر",
           },
           {
             name: "زعفران",
-            link: "زعفران"
-          }
+            link: "زعفران",
+          },
         ],
         wholesaleRise: [
           {
             name: "برنج",
-            link: "برنج"
+            link: "برنج",
           },
           {
             name: "خاطره",
-            link: "برنج"
+            link: "برنج",
           },
           {
             name: "هندی طبیعت",
-            link: "برنج"
+            link: "برنج",
           },
           {
             name: "محسن",
-            link: "برنج"
+            link: "برنج",
           },
           {
             name: "پاکستانی",
-            link: "برنج"
+            link: "برنج",
           },
           {
             name: "طبیعت",
-            link: "برنج"
+            link: "برنج",
           },
           {
             name: "قهوه ای",
-            link: "برنج"
+            link: "برنج",
           },
           {
             name: "شمال",
-            link: "برنج"
+            link: "برنج",
           },
           {
             name: "طارم",
-            link: "برنج"
+            link: "برنج",
           },
           {
             name: "دم سیاه",
-            link: "برنج"
+            link: "برنج",
           },
           {
             name: "هاشمی",
-            link: "برنج"
+            link: "برنج",
           },
           {
             name: "صدری",
-            link: "برنج"
-          }
-        ]
-      }
+            link: "برنج",
+          },
+        ],
+      },
     };
   },
   methods: {
-    stopLoader: function() {
+    stopLoader: function () {
       eventBus.$emit("isLoading", false);
     },
-    collapseDropDown: function() {
-      $(".profile-list").fadeIn("slow", function() {
+    collapseDropDown: function () {
+      $(".profile-list").fadeIn("slow", function () {
         visible = true;
       });
     },
-    collapseDropDownList: function() {
-      $(".icon-header-list").fadeIn("slow", function() {
+    collapseDropDownList: function () {
+      $(".icon-header-list").fadeIn("slow", function () {
         visible = true;
       });
     },
@@ -1587,27 +1663,27 @@ export default {
         visible = false;
       }
     },
-    init: function() {
+    init: function () {
       var self = this;
       window.scrollTo(0, 0);
 
       axios
         .post("/get_category_list", {
-          cascade_list: true
+          cascade_list: true,
         })
-        .then(function(response) {
+        .then(function (response) {
           self.categoryList = response.data.categories;
         });
 
-      axios.post("/get_sample_products", {}).then(function(response) {
+      axios.post("/get_sample_products", {}).then(function (response) {
         self.lastProducts = response.data.products;
       });
 
-      axios.post("/get_sample_buyAds", {}).then(function(response) {
+      axios.post("/get_sample_buyAds", {}).then(function (response) {
         self.lastRequests = response.data.buyAds;
       });
     },
-    search: function() {
+    search: function () {
       if (this.mainSearchBoxText !== "") {
         eventBus.$emit("textSearch", this.mainSearchBoxText);
 
@@ -1617,12 +1693,12 @@ export default {
         this.$router.push({
           name: "productList",
           query: {
-            s: queryValue
-          }
+            s: queryValue,
+          },
         });
       }
     },
-    generateProductLink: function(product) {
+    generateProductLink: function (product) {
       var id = product.main.id;
       var categoryName = product.main.category_name;
       var subCategoryName = product.main.sub_category_name;
@@ -1636,11 +1712,11 @@ export default {
         id
       );
     },
-    getSubCategoryUrl: function(name) {
+    getSubCategoryUrl: function (name) {
       let url = "/product-list/category/" + name.replace(" ", "-");
       return url;
     },
-    dropDownSecondaryMenu: function(event, index) {
+    dropDownSecondaryMenu: function (event, index) {
       function collapseDropDown(eventItem) {
         var dropdowns = $(".menu-wrapper > li");
         var targetClass = $(eventItem.target).attr("class");
@@ -1652,18 +1728,18 @@ export default {
           (index != activeItemIndex && targetClass == "category-item") ||
           (index != activeItemIndex && targetClass == "fa fa-angle-down ")
         ) {
-          dropdowns.each(function(index) {
+          dropdowns.each(function (index) {
             $(this).removeClass("active");
           });
           document.getElementById("menu" + index).classList.toggle("active");
         } else {
-          dropdowns.each(function(index) {
+          dropdowns.each(function (index) {
             $(this).removeClass("active");
           });
         }
       }
 
-      window.onclick = function(event) {
+      window.onclick = function (event) {
         var eventItem = event;
         setTimeout(collapseDropDown(eventItem), 80);
       };
@@ -1671,7 +1747,7 @@ export default {
       // setTimeout(collapseDropDown, 80);
     },
 
-    getProductUrl: function(product) {
+    getProductUrl: function (product) {
       return (
         "/product-view/خرید-عمده-" +
         product.subcategory_name.replace(" ", "-") +
@@ -1686,8 +1762,19 @@ export default {
         return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       else return "";
     },
+    getConvertedNumbers: function (number) {
+      if (number || typeof number === "number") {
+        let data = number / 1000;
+        if (number < 1000) {
+          return number + " " + "کیلوگرم";
+        } else {
+          data = this.getNumberWithCommas(data);
+          return data + " " + "تن";
+        }
+      } else return "";
+    },
   },
-  mounted: function() {
+  mounted: function () {
     this.init();
     this.isLoading = true;
   },
@@ -1695,7 +1782,7 @@ export default {
     this.$nextTick(this.stopLoader());
   },
   created() {
-    eventBus.$on("textSearch", event => {
+    eventBus.$on("textSearch", (event) => {
       this.mainSearchBoxText = event;
     });
 
@@ -1705,7 +1792,7 @@ export default {
 
     var self = this;
 
-    window.addEventListener("keydown", function(event) {
+    window.addEventListener("keydown", function (event) {
       if (event.keyCode === 13) {
         if (self.enterKeyActiveForSearch) {
           self.search();
@@ -1714,10 +1801,10 @@ export default {
     });
   },
   watch: {
-    mainSearchBoxText: function(value) {
+    mainSearchBoxText: function (value) {
       this.enterKeyActiveForSearch = this.mainSearchBoxText !== "";
       eventBus.$emit("textSearch", value);
-    }
+    },
   },
   metaInfo() {
     return {
@@ -1727,27 +1814,27 @@ export default {
         {
           name: "description",
           content:
-            "مرجع تخصصی خرید و فروش عمده و قیمت محصولات کشاورزی ایران | صادرات محصولات کشاورزی"
+            "مرجع تخصصی خرید و فروش عمده و قیمت محصولات کشاورزی ایران | صادرات محصولات کشاورزی",
         },
         {
           name: "author",
-          content: "باسکول"
+          content: "باسکول",
         },
         {
           property: "og:description",
           content:
-            "مرجع تخصصی خرید و فروش عمده و قیمت محصولات کشاورزی ایران | صادرات محصولات کشاورزی"
+            "مرجع تخصصی خرید و فروش عمده و قیمت محصولات کشاورزی ایران | صادرات محصولات کشاورزی",
         },
         {
           property: "og:site_name",
-          content: "باسکول بازارآنلاین خرید و فروش عمده محصولات کشاورزی ایران"
+          content: "باسکول بازارآنلاین خرید و فروش عمده محصولات کشاورزی ایران",
         },
         {
           property: "og:title",
-          content: " باسکول | بازار خرید و فروش عمده محصولات کشاورزی "
-        }
-      ]
+          content: " باسکول | بازار خرید و فروش عمده محصولات کشاورزی ",
+        },
+      ],
     };
-  }
+  },
 };
 </script>

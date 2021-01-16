@@ -7,10 +7,6 @@
   width: initial;
 }
 
-.text-red {
-  color: #e41c38;
-}
-
 .text-green {
   color: #00ac5c;
 }

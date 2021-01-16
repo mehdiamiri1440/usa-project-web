@@ -339,7 +339,9 @@ input[type="number"] {
           <div></div>
           <div></div>
         </div>
-        <p class="pricing-loader-text text-rtl">در حال انتقال به درگاه پرداخت . . .</p>
+        <p class="pricing-loader-text text-rtl">
+          در حال انتقال به درگاه پرداخت . . .
+        </p>
       </div>
     </div>
 
@@ -357,7 +359,10 @@ input[type="number"] {
                 <p>افزایش ظرفیت ثبت محصول</p>
               </div>
               <div class="description-section gray-text">
-                <p>تعداد ظرفیت اضافی برای ثبت محصول را انتخاب کنید سپس دکمه افزایش ظرفیت را بزنید.</p>
+                <p>
+                  تعداد ظرفیت اضافی برای ثبت محصول را انتخاب کنید سپس دکمه
+                  افزایش ظرفیت را بزنید.
+                </p>
               </div>
               <div class="form-wrapper">
                 <div class="item-wrapper active">
@@ -371,7 +376,7 @@ input[type="number"] {
                   </button>
                   <p class="item-text">تعداد محصولات اضافی</p>
                   <p class="item-count">
-                    {{productPriceData.count}}
+                    {{ productPriceData.count }}
                     <span>عدد</span>
                   </p>
                 </div>
@@ -415,11 +420,15 @@ input[type="number"] {
               <div class="pricing-section">
                 <label>قیمت</label>
                 <p class="price-content">
-                  <span v-text="getNumberWithCommas(productPriceData.totalPrice)"></span>
+                  <span
+                    v-text="getNumberWithCommas(productPriceData.totalPrice)"
+                  ></span>
                   <span class="currency">تومان</span>
                   <span class="price-date">(سالانه)</span>
                 </p>
-                <button class="green-button" @click.prevent="doPayment()">افزایش ظرفیت</button>
+                <button class="green-button" @click.prevent="doPayment()">
+                  افزایش ظرفیت
+                </button>
               </div>
             </div>
           </div>
@@ -442,12 +451,12 @@ import productPricingContents from "./pricing-tables/pricing-package-contents";
 export default {
   props: ["offerTime"],
   components: { ProductPricing, productPricingContents },
-  data: function() {
+  data: function () {
     return {
       productPriceData: {
         unitPrice: "25000",
         count: 1,
-        totalPrice: ""
+        totalPrice: "",
       },
       statusData: "",
       doPaymentLoader: false,
@@ -463,14 +472,14 @@ export default {
               contentUnit: "۷ عدد",
               helpDescription:
                 " تعداد آگهی های همزمان شما که در لیست محصولات نمایش داده می شود. ",
-              active: true
+              active: true,
             },
             {
               title: "تعداد نردبان ",
               contentUnit: "1",
               helpDescription:
                 "بر روی اولین محصول ثبت شده ویژگی نردبان به صورت خودکار اعمال خواهد شد",
-              active: false
+              active: false,
             },
             {
               title: "نمایش در لیست محصولات ویژه",
@@ -478,7 +487,7 @@ export default {
                 '<i class="text-green fa fa-check-circle" style="color:#00c569"></i>',
               helpDescription:
                 "محصولات ثبت شده شما، در قسمت محصولات ویژه در پنل خریداران به آنها نمایش داده می شود",
-              active: false
+              active: false,
             },
             {
               title: "تایید فوری ",
@@ -486,13 +495,13 @@ export default {
                 '<i class="text-green fa fa-check-circle" style="color:#00c569"></i>',
               helpDescription:
                 " آگهی های فروش ثبت شده بلافاصله پس از ثبت در لیست محصولات نمایش داده می شود. ",
-              active: false
+              active: false,
             },
             {
               title: " میزان افزایش خوشنامی ",
               contentUnit: "350",
               helpDescription: " مقدار اعتبار اضافه شده به صفحه پروفایل شما ",
-              active: false
+              active: false,
             },
             {
               title: " نشان فروشنده معتبر ",
@@ -500,13 +509,13 @@ export default {
                 '<i class="text-green fa fa-check-circle" style="color:#00c569"></i>',
               helpDescription:
                 " این نشان در صفحه پروفایل فروشنده نمایش داده می شود. ",
-              active: false
+              active: false,
             },
             {
               title: " سقف روزانه پاسخ به درخواست ها ",
               contentUnit: "30",
               helpDescription: "سقف تعداد روزانه پاسخگویی به درخواست های خرید",
-              active: false
+              active: false,
             },
             {
               title: "مشاهده بلافاصله درخواست خرید ",
@@ -514,7 +523,7 @@ export default {
                 '<i class="text-green fa fa-check-circle" style="color:#00c569"></i>',
               helpDescription:
                 " درخواست های خرید جدید بدون تاخیر به شما نمایش داده می شود. ",
-              active: false
+              active: false,
             },
             {
               title: "تضمین بازگشت وجه ",
@@ -522,29 +531,29 @@ export default {
                 '<i class="text-green fa fa-check-circle" style="color:#00c569"></i>',
               helpDescription:
                 " اگر پس از سه ماه از نتیجه آن رضایت نداشته باشید 100% مبلغ پرداختی به شما بازگردانده می شود. ",
-              active: false
-            }
-          ]
-        }
-      ]
+              active: false,
+            },
+          ],
+        },
+      ],
     };
   },
   methods: {
-    init: function() {
+    init: function () {
       var self = this;
       axios
         .post("/get_seller_dashboard_required_data")
-        .then(function(response) {
+        .then(function (response) {
           if (response.data.is_valid || response.data.is_valid == false) {
             self.statusData = response.data;
           }
         });
     },
-    collapseControl: function(link) {
+    collapseControl: function (link) {
       var $myGroup = $(".item-content");
       $myGroup.find(".collapse.in").collapse("hide");
     },
-    doPayment: function() {
+    doPayment: function () {
       this.doPaymentLoader = true;
 
       let self = this;
@@ -558,42 +567,46 @@ export default {
       window.location.href =
         "/payment/product-capacity/" + this.productPriceData.count;
     },
-    registerComponentStatistics: function(categoryName, actionName, labelName) {
+    registerComponentStatistics: function (
+      categoryName,
+      actionName,
+      labelName
+    ) {
       gtag("event", actionName, {
         event_category: categoryName,
-        event_label: labelName
+        event_label: labelName,
       });
     },
-    setTotalPrice: function() {
+    setTotalPrice: function () {
       this.productPriceData.totalPrice =
         this.productPriceData.count * this.productPriceData.unitPrice;
     },
-    getNumberWithCommas: function(number) {
+    getNumberWithCommas: function (number) {
       if (number || typeof number === "number")
         return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       else return "";
     },
-    selectCountInput: function(event) {
+    selectCountInput: function (event) {
       event.target.select();
       // event.target.setSelectionRange(0, this.productPriceData.count);
-    }
+    },
   },
   mounted() {
     this.init();
-    $(document).on("click", function() {
+    $(document).on("click", function () {
       $(".collapse").collapse("hide");
     });
     this.setTotalPrice();
   },
   watch: {
-    "productPriceData.count": function() {
+    "productPriceData.count": function () {
       if (this.productPriceData.count <= 0) {
         this.productPriceData.count = 1;
       } else if (this.productPriceData.count >= 1000) {
         this.productPriceData.count = 1000;
       }
       this.setTotalPrice();
-    }
-  }
+    },
+  },
 };
 </script>

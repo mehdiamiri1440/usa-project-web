@@ -1,12 +1,15 @@
 
 <style scoped>
-p {
-  margin: 10px auto;
-  line-height: 1.618;
+.form-contents {
+  padding-bottom: 50px;
 }
 
-textarea {
-  margin: 0 auto 9px auto;
+.title-contents {
+  font-weight: 500;
+  font-size: 18px;
+  margin-bottom: 15px;
+  padding: 0;
+  margin-top: 30px;
 }
 
 .submit-button {
@@ -16,98 +19,94 @@ textarea {
   border-radius: 4px;
   display: inline-block;
   font-size: 16px;
-  padding: 10px 30px 9px;
+  padding: 8px 25px 7px;
   transition: 200ms;
   cursor: default;
-  margin: 8px 0;
+  margin: 0;
 }
+
+.submit-button i {
+  transition: 300ms;
+  position: relative;
+  top: 2px;
+  left: -3px;
+}
+
+.input-text-wrapper {
+  height: 25px;
+  padding-top: 5px;
+}
+
+.small-description-text {
+  text-align: left;
+}
+
+.submit-button.default-back-button i {
+  left: 3px;
+}
+
 .submit-button.default-back-button {
   background: #fff;
   color: #777;
-  border: 1px solid #777;
+  border: 1px solid #bdc4cc;
   border-radius: 4px;
   cursor: pointer;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.submit-button.default-back-button:hover i {
+  transform: translateX(5px);
 }
 .submit-button.active {
   background: #00c569;
   cursor: pointer;
+  transform: translateX(0);
 }
-
-.title-contents {
-  font-weight: bold;
-  font-size: 19px;
+.submit-button.active:hover i {
+  background: #00c569;
+  cursor: pointer;
+  transform: translateX(-5px);
 }
-
-.form-contents {
-  margin: 5px auto;
-}
-
-.form-contents lable {
-  font-size: 12px;
-}
-
-.input-wrapper,
-.text-input-wrapper {
-  margin: 6px auto;
-
-  position: relative;
-}
-
-.input-wrapper:after {
-  content: "\F107";
-
-  color: #777;
-
-  position: absolute;
-
-  display: inline-block;
-
-  top: 6px;
-
-  font-family: "Font Awesome 5 Free",sans-serif;
-
-  font-weight: 900;
-
-  left: 15px;
-
-  font-size: 20px;
-
-  z-index: 0;
-}
-
-textarea {
-  width: 100%;
-
-  border-radius: 4px;
-
-  border: 1px solid;
-
-  padding: 8px 15px;
-
-  color: #bebebe;
-
-  border-color: #bebebe;
-
-  direction: rtl;
-
-  transition: 300ms;
-
+.action-control-wrapper {
+  padding: 20px 15px 50px;
   background: #fff;
 }
 
-.input-wrapper i {
-  display: inline-block;
+label {
+  margin: 0 auto 10px auto;
+  font-size: 15px;
+  font-weight: 400;
+  color: #777;
+}
+.small-label {
+  font-size: 15px;
+}
 
+.text-input-wrapper {
+  margin: 0 auto;
+  position: relative;
+  background: #fbfbfb;
+  margin-bottom: 10px;
+}
+
+textarea {
+  background: none;
+  z-index: 1;
+  position: relative;
+  width: 100%;
+  padding: 8px 15px;
+  border: 1px solid #bdc4cc;
+  border-radius: 4px;
+  box-shadow: none;
+}
+
+.text-input-wrapper i {
   position: absolute;
-
   left: 15px;
-
-  font-size: 20px;
-
-  color: #bebebe;
-
-  top: 9px;
-
+  top: 11px;
+  font-size: 18px;
+  color: #bdc4cc;
   transition: 300ms;
 }
 
@@ -145,66 +144,8 @@ textarea.error:focus,
 textarea.error:focus + i {
   border-color: #e41c38;
 }
-
-.input-wrapper i {
-  display: inline-block;
-
-  position: absolute;
-
-  left: 15px;
-
-  font-size: 20px;
-
-  color: #bebebe;
-
-  top: 9px;
-
-  transition: 200ms;
-}
-
-.error-message {
-  text-align: center;
-
-  color: #e41c38;
-
-  font-weight: bold;
-
-  height: 15px;
-
-  direction: rtl;
-
-  font-size: 11px;
-
-  margin: 0;
-}
-
-.small-description {
-  font-size: 11px;
-
-  font-weight: bold;
-
-  color: #777777;
-
-  line-height: 1.618;
-}
-
-.green-text {
-  color: #00c569;
-}
-
-textarea .small-label {
-  font-size: 12px;
-}
-
-@media screen and (max-width: 767px) {
-  textarea {
-    font-size: 12px;
-  }
-  .input-wrapper::after {
-    left: 14px;
-  }
-}
 </style>
+
 
 <template>
   <div>
@@ -212,48 +153,47 @@ textarea .small-label {
       <h2 class="title-contents">توضیحات محصول</h2>
     </div>
 
-    <div class="form-contents col-xs-12">
-      <label >توضیحات  محصول خود را بنویسید</label>
-
+    <form
+      class="form-contents col-xs-12"
+      v-on:submit.prevent="descriptionSubmited()"
+    >
       <div class="text-input-wrapper">
         <!-- input type tel because we have some limmitation for processes -->
 
         <textarea
           rows="4"
-          :class="{'active' : $parent.product.description , 'error' : $parent.errors.description}"
+          :class="{
+            active: $parent.product.description,
+            error: errors.description,
+          }"
           v-model="$parent.product.description"
-          placeholder="در مورد کیفیت و نوع بسته بندی محصول خود توضیح دهید"
+          placeholder="در مورد کیفیت و نوع بسته بندی محصول خود اینجا توضیح دهید"
         ></textarea>
 
-        <p class="error-message col-xs-12">
-          <span v-if="$parent.errors.description" v-text="$parent.errors.description"></span>
-        </p>
+        <i
+          v-if="$parent.product.description && !errors.description"
+          class="fa fa-check-circle"
+        ></i>
+        <i v-else-if="errors.description" class="fa fa-times-circle"></i>
+        <i v-else class="fa fa-edit"></i>
       </div>
 
-      <!-- <span class="small-description">
-        انتخاب آدرس صحیح به بهتر دیده شدن شما در سامانه باسکول کمک می کند
-        انتخاب آدرس صحیح به بهتر دیده شدن شما در سامانه باسکول کمک می کند
-      </span>-->
-      <p>
-        
-        با کلیک روی دکمه ثبت نهایی موافقت خود را 
-
-
-        <a
-          href="/privacy-and-policy"
-          target="_balnk"
-          class="green-text"
-        > 
-        قوانین و شرایط باسکول
-      </a>
-        اعلام می کنید
-      </p>
-    </div>
+      <div class="row">
+        <p class="error-message col-xs-12">
+          <span
+            class="red-text"
+            v-if="errors.description"
+            v-text="errors.description"
+          ></span>
+        </p>
+      </div>
+    </form>
     <div class="col-xs-12">
       <button
         class="submit-button active pull-left"
-        @click.prevent="$parent.descriptionSubmited()"
-      >                        مرحله بعد
+        @click.prevent="descriptionSubmited()"
+      >
+        مرحله بعد
 
         <i class="fa fa-arrow-left"></i>
       </button>
@@ -270,10 +210,51 @@ textarea .small-label {
 </template>
 <script>
 export default {
+  data() {
+    return {
+      errors: {
+        description: "",
+      },
+    };
+  },
   mounted() {
     if (this.$parent.isOsIOS()) {
       $('input[type="tel"]').attr("type", "text");
     }
-  }
+  },
+  methods: {
+    descriptionSubmited() {
+      if (!this.errors.description) {
+        this.$parent.goToStep(6);
+      } else {
+        if (this.errors.description) {
+          this.registerComponentStatistics(
+            "product-register-error",
+            "description",
+            "input:" + description + " error:" + this.errors.description
+          );
+        }
+      }
+    },
+    descriptionValidator: function (description) {
+      this.errors.description = "";
+
+      if (description != "") {
+        if (
+          !this.$parent.validateRegx(
+            description,
+            /^[\u0600-\u06FF\s_,.:/;()+-\d]+$/
+          )
+        ) {
+          this.errors.description = "توضیحات شامل کاراکتر های غیرمجاز است";
+        }
+      }
+    },
+  },
+  watch: {
+    "$parent.product.description"(value) {
+      this.descriptionValidator(value);
+    },
+  },
 };
 </script>

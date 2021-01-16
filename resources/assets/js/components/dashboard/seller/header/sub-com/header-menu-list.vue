@@ -31,12 +31,15 @@ a.active {
   background: #637484;
 }
 
-.header-menu a {
+.header-menu a,
+.header-menu button {
   color: #b1b1b1;
   padding: 10px 20px;
   display: inline-block;
   position: relative;
   width: 100%;
+  border: none;
+  text-align: right;
 }
 
 .header-menu {
@@ -78,41 +81,58 @@ a.active {
 .custom-badge {
   position: absolute;
   left: 20px;
-  top: 6px;
   background: #e41c38;
-  height: 30px;
-  width: 30px;
-  border-radius: 50px;
-  padding-top: 7px;
+  height: 25px;
+  border-radius: 12px;
   color: #fff;
   text-align: center;
   direction: ltr;
+  line-height: 1;
+  padding: 5px 7px;
 }
 
 .header-menu i {
   margin: 5px;
 }
 
-.pricing-table {
-  background: #00c569;
-
-  border-top: 2px solid;
-
-  border-bottom: 2px solid;
-
+.pricing-link {
+  /* background: linear-gradient(90deg, #00c569 0%, #21ad93 100%); */
+  background: linear-gradient(-45deg, #00c569, #23d5ab, #21ad93, #23a6d5);
+  background-size: 400% 400%;
+  animation: gradient 10s ease infinite;
   color: #fff !important;
 }
 
-.pricing-table:hover,
-a.pricing-table.router-link-exact-active {
-  background: #fff !important;
-
-  color: #00c569 !important;
+.pricing-link:hover i {
+  animation: shake 1s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
 }
 
-.pricing-table .custom-badge {
-  padding: 7px;
-  width: initial;
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes shake {
+  0% {
+    transform: translate3d(0, -1px, 0);
+  }
+
+  50% {
+    transform: translate3d(0, -5px, 0);
+  }
+  100% {
+    transform: translate3d(0, -1px, 0);
+  }
 }
 </style>
 <template>
@@ -135,7 +155,21 @@ a.pricing-table.router-link-exact-active {
           </li>
 
           <li class="list-item">
-            <router-link :to="{ name: 'registerProductSeller' }">
+            <router-link :to="{ name: 'messagesRequestSeller' }">
+              <i class="fa fa-list-ul" aria-hidden="true"></i>
+              <span>خریداران پیشنهادی</span>
+            </router-link>
+          </li>
+
+          <li class="list-item">
+            <router-link
+              :to="{ name: 'registerProductSeller' }"
+              :class="{
+                'router-link-exact-active ':
+                  this.activeElement === 0 ||
+                  $route.name == 'successRegisterProduct',
+              }"
+            >
               <i class="fa fa-plus-square" aria-hidden="true"></i>
               <span>ثبت محصول</span>
             </router-link>
@@ -145,11 +179,11 @@ a.pricing-table.router-link-exact-active {
             <router-link
               :to="{ name: 'messagesSeller' }"
               :class="{
-                'router-link-exact-active ':
-                  this.activeElement === 0 ||
-                  $route.name == 'messagesRequestSeller',
+                'router-link-exact-active ': this.activeElement === 0,
               }"
             >
+              <!-- ||
+                  $route.name == 'messagesRequestSeller', -->
               <i class="fas fa-comment-alt" aria-hidden="true"></i>
 
               <span>پیام ها</span>
@@ -187,12 +221,21 @@ a.pricing-table.router-link-exact-active {
               <span>راهنما</span>
             </router-link>
           </li>
+
+          <li class="list-item">
+            <router-link :to="{ name: 'supportSeller' }">
+              <i class="fas fa-headset"></i>
+              <span>پشتیبانی</span>
+            </router-link>
+          </li>
+
           <li
             class="list-item"
-            v-if="$parent.currentUser.user_info.active_pakage_type != 3"
+            v-if="$parent.currentUser.user_info.active_pakage_type < 3"
           >
             <router-link
-              class="pricing-table"
+              tag="button"
+              class="pricing-link"
               :to="{ name: 'dashboardPricingTableSeller' }"
             >
               <i class="fa fa-arrow-up" aria-hidden="true"></i>

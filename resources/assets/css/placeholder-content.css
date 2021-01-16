@@ -1,3 +1,10 @@
+html,
+body,
+#app,
+#app > div {
+  height: 100%;
+}
+
 .hover-effect {
   transition: 200ms !important;
 }
@@ -163,6 +170,15 @@
 .inline-block {
   display: inline-block;
 }
+
+.text-right {
+  text-align: right !important;
+}
+
+.text-left {
+  text-align: left !important;
+}
+
 .text-rtl {
   direction: rtl;
 }
@@ -208,9 +224,16 @@
   margin-top: 10px;
 }
 
-
 .padding-top-5 {
   padding-top: 5px;
+}
+
+.padding-bottom-5 {
+  padding-bottom: 5px;
+}
+
+.padding-bottom-15 {
+  padding-bottom: 15px;
 }
 
 .padding-0 {
@@ -241,18 +264,34 @@
   height: 40px;
 }
 
-.w-100{
+.h-100 {
+  height: 100%;
+}
+
+.w-100 {
   width: 100%;
 }
 
 .red-text {
   color: #e41c38 !important;
 }
+
 .yellow-text {
   color: #ffbb00 !important;
 }
+
+.blue-text {
+  color: #1DA1F2 !important;
+}
+.brand-text {
+  color: #556080 !important;
+}
+
 .green-text {
   color: #00c569;
+}
+.light-green-text {
+  color: #21ad93;
 }
 .gray-text {
   color: #777;
@@ -261,20 +300,21 @@
   color: #dbdbdb !important;
 }
 
-.bg-red{
+.bg-white {
+  background-color: #fff !important;
+}
+
+.bg-red {
   background-color: #e41c38 !important;
 }
 
-.bg-green{
+.bg-green {
   background-color: #00c569 !important;
 }
 
-.bg-gray{
+.bg-gray {
   background-color: #556080 !important;
-
 }
-
-
 
 .category-products-widget-default {
   padding: 15px;
@@ -284,8 +324,46 @@
   border-radius: 5px;
 }
 
-/*product view user info styles*/
+.empty {
+  opacity: 0;
+}
+/*spinner and animation styles*/
+.spinner-border {
+  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  vertical-align: text-bottom;
+  border: 0.25rem solid currentColor;
+  border-right-color: currentcolor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  -webkit-animation: spinner-border 1s linear infinite;
+  animation: spinner-border 1s linear infinite;
+}
+.bd-example::after {
+  display: block;
+  clear: both;
+  content: "";
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+@keyframes spinner-border {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
 
+/*product view user info styles*/
 
 .user-info-wrapper .default-wrapper-main-image {
   width: 90px;

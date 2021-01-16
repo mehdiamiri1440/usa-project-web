@@ -48,10 +48,10 @@
   border-bottom: 2px solid whitesmoke;
   padding-bottom: 10px;
   font-size: 15px;
-  line-height: 1.618
+  line-height: 1.618;
 }
-.upload-error{
-  line-height: 1.618
+.upload-error {
+  line-height: 1.618;
 }
 .green-button {
   max-width: 300px;
@@ -87,7 +87,6 @@
   line-height: 1;
   font-weight: 900;
 }
-
 </style>
 
 <template>
@@ -98,36 +97,41 @@
           <div class="content-wrapper row">
             <div class="col-xs-12 pull-right">
               <div class="main-title-wrapper">
-                ۱ -
-                نمونه تصویر از کارت ملی
+                ۱ - نمونه تصویر از کارت ملی
                 <span class="red-text">*</span>
               </div>
               <div class="image-file-wrapper">
-                <img src="../../../../../img/user-id-card.jpg" alt="send file" />
+                <img
+                  src="../../../../../img/user-id-card.jpg"
+                  alt="send file"
+                />
               </div>
             </div>
             <div class="col-xs-12 pull-right">
               <div class="main-title-wrapper">
-                ۲ -
-                نمونه تصویر کارت ملی در کنار تصویر شما
+                ۲ - نمونه تصویر کارت ملی در کنار تصویر شما
                 <span class="red-text">*</span>
               </div>
               <div class="image-file-wrapper">
-                <img src="../../../../../img/verifi-user-image.jpg" alt="send file" />
+                <img
+                  src="../../../../../img/verifi-user-image.jpg"
+                  alt="send file"
+                />
               </div>
             </div>
             <div class="col-xs-12 pull-right">
               <div class="main-title-wrapper">
-                ۳ -
-                تصویر یکی از این اسناد (اجاره نامه یا جواز کسب یا سند مالکیت) که به نام فرد دارنده کارت ملی است.
-                <span
-                  class="red-text"
-                >*</span>
+                ۳ - تصویر یکی از این اسناد (اجاره نامه یا جواز کسب یا سند
+                مالکیت) که به نام فرد دارنده کارت ملی است.
+                <span class="red-text">*</span>
               </div>
               <div class="col-xs-12 text-center">
                 <div class="row">
                   <div class="col-xs-12 pull-right">
-                    <img src="../../../../../img/profile-verification/madarek.jpg" alt="img" />
+                    <img
+                      src="../../../../../img/profile-verification/madarek.jpg"
+                      alt="img"
+                    />
                   </div>
                 </div>
               </div>
@@ -139,11 +143,14 @@
             <div class="col-xs-12 pull-right">
               <label>
                 تمام موارد فوق را بارگذاری کنید
-                <p class="upload-error margin-10-0 red-text" v-text="errors.autorizationFiles"></p>
+                <p
+                  class="upload-error margin-10-0 red-text"
+                  v-text="errors.autorizationFiles"
+                ></p>
               </label>
 
               <UploadFile
-                uploadName="autorization-files"
+                uploadName="autorizationFiles"
                 uploadAccept="image/*"
                 :uploadMinSize="1024"
                 :uploadSize="1024 * 1024 * 10"
@@ -154,7 +161,6 @@
                 :uploadThread="2"
                 :uploadOCompress="1024 * 1024"
                 :uploadUploadAuto="false"
-                :uploadRef="autorizationFiles"
               />
             </div>
           </div>
@@ -163,9 +169,14 @@
             <div class="row">
               <button
                 class="green-button"
-                :class="{'disabled' : autorizationFiles.length <= 2 || errors.autorizationFiles}"
+                :class="{
+                  disabled:
+                    autorizationFiles.length <= 2 || errors.autorizationFiles,
+                }"
                 @click.prevent="uploadFiles"
-              >ثبت مدارک</button>
+              >
+                ثبت مدارک
+              </button>
             </div>
           </div>
         </section>
@@ -191,29 +202,29 @@ import UploadFile from "../../upload-image";
 
 export default {
   components: {
-    UploadFile
+    UploadFile,
   },
-  data: function() {
+  data: function () {
     return {
       autorizationFiles: [],
       uploadPercentage: 0,
       errors: {
-        autorizationFiles: ""
+        autorizationFiles: "",
       },
       items: [
         {
           message: "پروفایل",
-          url: "profileBasicBuyer"
+          url: "profileBasicBuyer",
         },
         {
           message: "احراز هویت",
-          url: "profileBasicBuyerVeficiation"
-        }
-      ]
+          url: "profileBasicBuyerVeficiation",
+        },
+      ],
     };
   },
   methods: {
-    uploadFiles: function() {
+    uploadFiles: function () {
       eventBus.$emit("submiting", true);
 
       if (!this.filesDataHasError()) {
@@ -222,41 +233,41 @@ export default {
         data.append("images_count", imagesCount);
         for (let i = 0; i < imagesCount; i++) {
           let file = this.autorizationFiles[i];
-          data.append("image_" + i, file);
+          data.append("image_" + i, file.file);
         }
 
         axios
           .post("/verify/upload-photos", data, {
             headers: {
               "X-Requested-With": "XMLHttpRequest",
-              "Content-Type": "application/json"
+              "Content-Type": "application/json",
             },
-            onUploadProgress: function(progressEvent) {
+            onUploadProgress: function (progressEvent) {
               this.uploadPercentage = parseInt(
                 Math.round((progressEvent.loaded * 100) / progressEvent.total)
               );
-            }.bind(this)
+            }.bind(this),
           })
-          .then(response => {
+          .then((response) => {
             eventBus.$emit("submiting", false);
             eventBus.$emit("uploadPercentage", 0);
 
-            eventBus.$emit('modal','verificationInfoUploadDone');
+            eventBus.$emit("modal", "verificationInfoUploadDone");
 
-            setTimeout(function() {
-              window.location.href = '/buyer/profile';
+            setTimeout(function () {
+              window.location.href = "/buyer/profile";
             }, 3000);
           })
-          .catch(e => {
-              eventBus.$emit("submiting", false);
-              eventBus.$emit("uploadPercentage", 0);
+          .catch((e) => {
+            eventBus.$emit("submiting", false);
+            eventBus.$emit("uploadPercentage", 0);
           });
       } else {
         eventBus.$emit("submiting", false);
         eventBus.$emit("uploadPercentage", 0);
       }
     },
-    filesDataHasError: function() {
+    filesDataHasError: function () {
       let imagesCount = this.autorizationFiles.length;
       let hasError = false;
       if (imagesCount == 0) {
@@ -269,7 +280,7 @@ export default {
       }
 
       return hasError;
-    }
+    },
   },
   mounted() {
     eventBus.$emit("subHeader", this.items);
@@ -277,12 +288,12 @@ export default {
     $('input[type="file"]').imageuploadify();
   },
   watch: {
-    uploadPercentage: function() {
+    uploadPercentage: function () {
       eventBus.$emit("uploadPercentage", this.uploadPercentage);
     },
-    autorizationFiles: function() {
+    autorizationFiles: function () {
       this.errors.autorizationFiles = "";
-    }
-  }
+    },
+  },
 };
 </script>

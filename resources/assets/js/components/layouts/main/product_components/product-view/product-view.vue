@@ -179,7 +179,7 @@ span {
                       :key="index"
                       :img="str + '/thumbnails/' + product.photo"
                       :title="product.product_name"
-                      :stock="product.stock"
+                      :stock="getConvertedNumbers(product.stock)"
                       :link="getRelatedProductUrl(product)"
                       column="4"
                     />
@@ -241,7 +241,7 @@ span {
         >
       </div>
 
-      <register-inquer-form
+      <!-- <register-inquer-form
         v-if="showRegisterRequestBox"
         wrapper-bg="true"
         :str="str"
@@ -251,7 +251,7 @@ span {
             ? str + '/' + product.profile_info.profile_photo
             : assets + 'assets/img/user-defult.png'
         "
-      />
+      /> -->
 
       <div
         v-if="product.main.product_name && !isMyProfile"
@@ -281,14 +281,14 @@ import { eventBus } from "../../../../../router/router";
 import ProductCarousel from "../../main_components/product-list-carousel";
 import ProductContents from "./product";
 import UserInfo from "./user_info";
-import registerInquerForm from "../../main_components/register-inquiry-form.vue";
+// import registerInquerForm from "../../main_components/register-inquiry-form.vue";
 
 export default {
   components: {
     ProductContents,
     UserInfo,
     ProductCarousel,
-    registerInquerForm,
+    // registerInquerForm,
   },
   props: ["str", "assets", "userType"],
   data: function () {
@@ -398,7 +398,8 @@ export default {
       } else {
         window.localStorage.setItem("contact", JSON.stringify(contact));
 
-        this.$router.push({ name: "registerInquiry" });
+        // this.$router.push({ name: "registerInquiry" });
+        eventBus.$emit('modal','sendMsg');
       }
     },
     openChatModal: function (product) {
@@ -599,6 +600,16 @@ export default {
     inquiry: function () {
       //eventBus.$emit("productUserInfo", this.product);
       this.$router.push({ name: "registerinquiry" });
+    },
+    getConvertedNumbers: function (number) {
+      if (number || typeof number === "number") {
+        let data = number / 1000;
+        if (number < 1000) {
+          return number + " " + "کیلوگرم";
+        } else {
+          return data + " " + "تن";
+        }
+      } else return "";
     },
   },
   created() {

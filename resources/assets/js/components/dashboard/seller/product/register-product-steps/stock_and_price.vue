@@ -1,11 +1,14 @@
 
 <style scoped>
-input {
-  box-shadow: none !important;
+.title-contents {
+  font-weight: 500;
+  font-size: 18px;
+  margin-bottom: 15px;
+  padding: 0;
 }
 
-label {
-  margin: 0 auto 9px auto;
+.bg-white {
+  background: #fff;
 }
 
 .submit-button {
@@ -15,99 +18,93 @@ label {
   border-radius: 4px;
   display: inline-block;
   font-size: 16px;
-  padding: 10px 30px 9px;
+  padding: 8px 25px 7px;
   transition: 200ms;
   cursor: default;
-  margin: 8px 0;
+  margin: 0;
 }
+
+.submit-button i {
+  transition: 300ms;
+  position: relative;
+  top: 2px;
+  left: -3px;
+}
+
+.input-text-wrapper {
+  height: 25px;
+  padding-top: 5px;
+}
+
+.small-description-text {
+  text-align: left;
+}
+
+.submit-button.default-back-button i {
+  left: 3px;
+}
+
 .submit-button.default-back-button {
   background: #fff;
   color: #777;
-  border: 1px solid #777;
+  border: 1px solid #bdc4cc;
   border-radius: 4px;
   cursor: pointer;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.submit-button.default-back-button:hover i {
+  transform: translateX(5px);
 }
 .submit-button.active {
   background: #00c569;
   cursor: pointer;
+  transform: translateX(0);
 }
-
-.title-contents {
-  font-weight: bold;
-  font-size: 19px;
-  margin-bottom: 15px;
+.submit-button.active:hover i {
+  background: #00c569;
+  cursor: pointer;
+  transform: translateX(-5px);
 }
-
-.form-contents {
-  margin: 5px auto;
-}
-
-.form-contents lable {
-  font-size: 12px;
-}
-
-.input-wrapper,
-.text-input-wrapper {
-  margin: 6px auto;
-
-  position: relative;
-}
-
-.input-wrapper:after {
-  content: "\F107";
-
-  color: #777;
-
-  position: absolute;
-
-  display: inline-block;
-
-  top: 6px;
-
-  font-family: "Font Awesome 5 Free",sans-serif;
-
-  font-weight: 900;
-
-  left: 15px;
-
-  font-size: 20px;
-
-  z-index: 0;
-}
-
-input {
-  width: 100%;
-
-  border-radius: 4px;
-
-  border: 1px solid;
-
-  padding: 8px 15px;
-
-  color: #bebebe;
-
-  border-color: #bebebe;
-
-  direction: rtl;
-
-  transition: 300ms;
-
+.action-control-wrapper {
+  padding: 20px 15px 50px;
   background: #fff;
 }
 
-.input-wrapper i {
-  display: inline-block;
+label {
+  margin: 0 auto 10px auto;
+  font-size: 15px;
+  font-weight: 400;
+  color: #777;
+}
+.small-label {
+  font-size: 15px;
+}
 
+.text-input-wrapper {
+  margin: 0 auto;
+  position: relative;
+  background: #fbfbfb;
+}
+
+input {
+  background: none;
+  z-index: 1;
+  position: relative;
+  width: 100%;
+  padding: 8px 15px;
+  border: 1px solid #bdc4cc;
+  border-radius: 4px;
+  box-shadow: none;
+}
+
+.text-input-wrapper i {
   position: absolute;
-
   left: 15px;
-
-  font-size: 20px;
-
-  color: #bebebe;
-
-  top: 9px;
-
+  top: 11px;
+  font-size: 18px;
+  color: #bdc4cc;
   transition: 300ms;
 }
 
@@ -146,101 +143,6 @@ input.error:focus + i {
   border-color: #e41c38;
 }
 
-select {
-  width: 100%;
-
-  border-radius: 4px;
-
-  border: 1px solid;
-
-  padding: 8px 15px;
-
-  position: relative;
-
-  z-index: 1;
-
-  color: #777777;
-
-  direction: rtl;
-
-  transition: 200ms;
-
-  background: none;
-
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
-}
-
-.input-wrapper i {
-  display: inline-block;
-
-  position: absolute;
-
-  left: 15px;
-
-  font-size: 20px;
-
-  color: #bebebe;
-
-  top: 9px;
-
-  transition: 200ms;
-}
-
-select option {
-  color: #333;
-}
-
-select:focus {
-  color: #333;
-}
-
-select.active {
-  color: #333;
-  color: #00c569;
-}
-
-select.active:focus {
-  color: #00c569;
-}
-
-select.error {
-  color: #333;
-  color: #e41c38;
-}
-
-select.error:focus {
-  color: #e41c38;
-}
-
-.error-message {
-  text-align: center;
-
-  color: #e41c38;
-
-  font-weight: bold;
-
-  height: 15px;
-
-  direction: rtl;
-
-  font-size: 11px;
-}
-
-.small-description {
-  font-size: 11px;
-
-  font-weight: bold;
-
-  color: #777777;
-
-  line-height: 1.618;
-}
-label .small-label {
-  font-size: 12px;
-}
 @media screen and (max-width: 767px) {
   select {
     font-size: 12px;
@@ -253,127 +155,243 @@ label .small-label {
 
 <template>
   <div>
-    <h2 class="title-contents col-xs-12">موجودی و قیمت محصول</h2>
-
-    <div class="form-contents col-xs-12">
+    <form
+      class="form-contents col-xs-12"
+      v-on:submit.prevent="$parent.stockAndPriceSubmited()"
+    >
       <div class="row">
-        <div class="col-xs-6 pull-right">
-          <label for="stock">
+        <div class="col-xs-12 bg-white">
+          <h2 class="title-contents col-xs-12">
             میزان موجودی
+
             <span class="small-label">(کیلوگرم)</span>
-          </label>
+
+            <span class="red-text"> * </span>
+          </h2>
+          <label for="stock" class="description"> مثلا: 50,000 </label>
 
           <div class="text-input-wrapper">
-            <!-- input type tel because we have some limmitation for processes -->
-
             <input
               v-model="$parent.product.stock"
               id="stock"
               type="tel"
-              :class="{'active' :  $parent.product.stock , 'error': $parent.errors.stock}"
-              placeholder="مثلا : 1000 "
+              :class="{
+                active: $parent.product.stock,
+                error: $parent.errors.stock,
+              }"
+              placeholder="میزان موجودی محصول را وارد کنید"
               pattern="[0-9]*"
             />
+
+            <i
+              v-if="$parent.product.stock && !$parent.errors.stock"
+              class="fa fa-check-circle"
+            ></i>
+            <i v-else-if="$parent.errors.stock" class="fa fa-times-circle"></i>
+            <i v-else class="fa fa-edit"></i>
           </div>
-          <p class="error-message col-xs-12">
-            <span v-if="$parent.errors.stock" v-text="$parent.errors.stock"></span>
-          </p>
+
+          <div class="input-text-wrapper">
+            <p class="small-description-text" v-if="!$parent.errors.stock">
+              <span
+                class="blue-text"
+                v-if="$parent.stock_text"
+                v-text="$parent.stock_text"
+              ></span>
+            </p>
+            <p class="error-message">
+              <span
+                class="red-text"
+                v-if="$parent.errors.stock"
+                v-text="$parent.errors.stock"
+              ></span>
+            </p>
+          </div>
         </div>
 
-        <div class="col-xs-6">
-          <label for="min-sale-amount">
-            حداقل سفارش
+        <div class="col-xs-12 bg-white">
+          <h2 class="title-contents col-xs-12">
+            حداقل میزان فروش
+
             <span class="small-label">(کیلوگرم)</span>
-          </label>
+
+            <span class="red-text"> * </span>
+          </h2>
+          <label for="stock" class="description"> مثلا: 25,000 </label>
 
           <div class="text-input-wrapper">
             <input
               v-model="$parent.product.min_sale_amount"
               id="min-sale-amount"
               type="tel"
-              :class="{'active' :  $parent.product.min_sale_amount , 'error':$parent.errors.min_sale_amount}"
-              placeholder="مثلا : 20 "
+              :class="{
+                active: $parent.product.min_sale_amount,
+                error: $parent.errors.min_sale_amount,
+              }"
+              placeholder="حداقل میزان فروش را وارد کنید"
               pattern="[0-9]*"
             />
+
+            <i
+              v-if="
+                $parent.product.min_sale_amount &&
+                !$parent.errors.min_sale_amount
+              "
+              class="fa fa-check-circle"
+            ></i>
+            <i
+              v-else-if="$parent.errors.min_sale_amount"
+              class="fa fa-times-circle"
+            ></i>
+            <i v-else class="fa fa-edit"></i>
           </div>
-          <p class="error-message">
-            <span v-if="$parent.errors.min_sale_amount" v-text="$parent.errors.min_sale_amount"></span>
-          </p>
+
+          <div class="input-text-wrapper">
+            <p
+              class="small-description-text"
+              v-if="!$parent.errors.min_sale_amount"
+            >
+              <span
+                class="blue-text"
+                v-if="$parent.min_sale_amount_text"
+                v-text="$parent.min_sale_amount_text"
+              ></span>
+            </p>
+            <p class="error-message">
+              <span
+                class="red-text"
+                v-if="$parent.errors.min_sale_amount"
+                v-text="$parent.errors.min_sale_amount"
+              ></span>
+            </p>
+          </div>
         </div>
 
-        <div class="col-xs-6 pull-right">
-          <label for="min-sale-price">
+        <div class="col-xs-12 bg-white">
+          <h2 class="title-contents col-xs-12">
             حداقل قیمت
+
             <span class="small-label">(هر کیلو به تومان)</span>
-          </label>
+
+            <span class="red-text"> * </span>
+          </h2>
+          <label for="stock" class="description"> مثلا: 15,000 </label>
 
           <div class="text-input-wrapper">
             <input
               v-model="$parent.product.min_sale_price"
-              id="min-sale-price"
+              id="min-sale-amount"
               type="tel"
-              :class="{'active' :  $parent.product.min_sale_price , 'error':$parent.errors.min_sale_price}"
-              placeholder="مثلا : 260000 "
+              :class="{
+                active: $parent.product.min_sale_price,
+                error: $parent.errors.min_sale_price,
+              }"
+              placeholder="حداقل قیمت را وارد کنید"
               pattern="[0-9]*"
             />
+
+            <i
+              v-if="
+                $parent.product.min_sale_price && !$parent.errors.min_sale_price
+              "
+              class="fa fa-check-circle"
+            ></i>
+            <i
+              v-else-if="$parent.errors.min_sale_price"
+              class="fa fa-times-circle"
+            ></i>
+            <i v-else class="fa fa-edit"></i>
           </div>
-          <p class="error-message">
-            <span v-if="$parent.errors.min_sale_price" v-text="$parent.errors.min_sale_price"></span>
-          </p>
+
+          <div class="input-text-wrapper">
+            <p class="error-message">
+              <span
+                class="red-text"
+                v-if="$parent.errors.min_sale_price"
+                v-text="$parent.errors.min_sale_price"
+              ></span>
+            </p>
+          </div>
         </div>
 
-        <div class="col-xs-6">
-          <label for="max-sale-price">
+        <div class="col-xs-12 bg-white">
+          <h2 class="title-contents col-xs-12">
             حداکثر قیمت
+
             <span class="small-label">(هر کیلو به تومان)</span>
-          </label>
+
+            <span class="red-text"> * </span>
+          </h2>
+          <label for="stock" class="description"> مثلا: 30,000 </label>
 
           <div class="text-input-wrapper">
             <input
               v-model="$parent.product.max_sale_price"
-              id="max-sale-price"
+              id="min-sale-amount"
               type="tel"
-              :class="{'active' :  $parent.product.max_sale_price , 'error':$parent.errors.max_sale_price}"
-              placeholder="مثلا : 500000 "
+              :class="{
+                active: $parent.product.max_sale_price,
+                error: $parent.errors.max_sale_price,
+              }"
+              placeholder="حداکثر قیمت را وارد کنید"
               pattern="[0-9]*"
             />
+
+            <i
+              v-if="
+                $parent.product.max_sale_price && !$parent.errors.max_sale_price
+              "
+              class="fa fa-check-circle"
+            ></i>
+            <i
+              v-else-if="$parent.errors.max_sale_price"
+              class="fa fa-times-circle"
+            ></i>
+            <i v-else class="fa fa-edit"></i>
           </div>
 
-          <p class="error-message">
-            <span v-if="$parent.errors.max_sale_price" v-text="$parent.errors.max_sale_price"></span>
-          </p>
+          <div class="input-text-wrapper">
+            <p class="error-message">
+              <span
+                class="red-text"
+                v-if="$parent.errors.max_sale_price"
+                v-text="$parent.errors.max_sale_price"
+              ></span>
+            </p>
+          </div>
         </div>
       </div>
+      <div class="row action-control-wrapper">
+        <button
+          class="submit-button disabled pull-left"
+          :class="{
+            active:
+              $parent.product.stock &&
+              $parent.product.min_sale_price &&
+              $parent.product.max_sale_price &&
+              $parent.product.min_sale_amount &&
+              !$parent.errors.stock &&
+              !$parent.errors.min_sale_price &&
+              !$parent.errors.max_sale_price &&
+              !$parent.errors.min_sale_amount,
+          }"
+          @click.prevent="$parent.stockAndPriceSubmited()"
+          type="submit"
+        >
+          مرحله بعد
+          <i class="fa fa-arrow-left"></i>
+        </button>
 
-      <!-- <span class="small-description">
+        <button
+          class="submit-button default-back-button pull-right"
+          @click.prevent="$parent.currentStep--"
+        >
+          <i class="fa fa-arrow-right"></i>
 
- انتخاب آدرس صحیح به بهتر دیده شدن شما در سامانه باسکول کمک می کند
- انتخاب آدرس صحیح به بهتر دیده شدن شما در سامانه باسکول کمک می کند
-
-      </span>-->
-
-      <div class="col-xs-12">
-        <div class="row">
-          <button
-            class="submit-button disabled pull-left"
-            :class="{'active' : $parent.product.stock && $parent.product.min_sale_price && $parent.product.max_sale_price && $parent.product.min_sale_amount}"
-            @click.prevent="$parent.stockAndPriceSubmited()"
-          >
-            مرحله بعد
-            <i class="fa fa-arrow-left"></i>
-          </button>
-
-          <button
-            class="submit-button default-back-button pull-right"
-            @click.prevent="$parent.currentStep--"
-          >
-            <i class="fa fa-arrow-right"></i>
-
-            مرحله قبل
-          </button>
-        </div>
+          مرحله قبل
+        </button>
       </div>
-    </div>
+    </form>
   </div>
 </template>
 <script>
@@ -383,19 +401,5 @@ export default {
       $('input[type="tel"]').attr("type", "text");
     }
   },
-  watch: {
-    "$parent.product.stock": function() {
-      this.$parent.errors.stock = "";
-    },
-    "$parent.product.min_sale_amount": function() {
-      this.$parent.errors.min_sale_amount = "";
-    },
-    "$parent.product.min_sale_price": function() {
-      this.$parent.errors.min_sale_price = "";
-    },
-    "$parent.product.max_sale_price": function() {
-      this.$parent.errors.max_sale_price = "";
-    }
-  }
 };
 </script>

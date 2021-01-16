@@ -153,7 +153,11 @@
       :offer-time="this.offerTime"
     ></header-dash-seller>
 
-    <div id="main" :class="{ 'is-required-fix-alert': isRequiredFixAlert }">
+    <div
+      id="main"
+      class="h-100"
+      :class="{ 'is-required-fix-alert': isRequiredFixAlert }"
+    >
       <router-view
         :str="storagePath"
         :user-type="currentUser.user_info.is_seller"
@@ -203,6 +207,7 @@ export default {
         "buyAd-requests",
         "messenger/contacts",
         "messenger/buy-ads",
+        "register-product/success",
       ],
       buttonIsActive: true,
       currentUser: {

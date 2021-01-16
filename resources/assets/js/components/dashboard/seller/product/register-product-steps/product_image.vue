@@ -1,10 +1,14 @@
 
 <style scoped>
-input[type="tel"] {
-  box-shadow: none !important;
+.title-contents {
+  font-weight: 500;
+  font-size: 19px;
+  margin-bottom: 30px;
+  padding: 0 15px;
 }
-label {
-  margin: 0 auto 9px auto;
+
+.bg-white {
+  background: #fff;
 }
 
 .submit-button {
@@ -14,267 +18,108 @@ label {
   border-radius: 4px;
   display: inline-block;
   font-size: 16px;
-  padding: 10px 30px 9px;
+  padding: 8px 25px 7px;
   transition: 200ms;
   cursor: default;
-  margin: 8px 0;
+  margin: 0;
+  position: relative;
 }
+
+.button-icon-wrapper {
+  display: inline;
+}
+
+.spinner-border {
+  position: absolute;
+  left: 19px;
+  top: 9px;
+}
+
+.submit-button i {
+  transition: 300ms;
+  position: relative;
+  top: 2px;
+  left: -3px;
+}
+
+.error-message {
+  height: 25px;
+  margin: 15px 0;
+  padding: 0;
+}
+
+.submit-button.default-back-button i {
+  left: 3px;
+}
+
 .submit-button.default-back-button {
   background: #fff;
   color: #777;
-  border: 1px solid #777;
+  border: 1px solid #bdc4cc;
   border-radius: 4px;
   cursor: pointer;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.submit-button.default-back-button:hover i {
+  transform: translateX(5px);
 }
 .submit-button.active {
   background: #00c569;
   cursor: pointer;
+  transform: translateX(0);
 }
-.submit-button-wrapper {
-  margin: 0 auto;
-  max-width: 420px;
+.submit-button.active:hover i {
+  background: #00c569;
+  cursor: pointer;
+  transform: translateX(-5px);
 }
-.title-contents {
-  font-weight: bold;
-  font-size: 19px;
-  margin-bottom: 15px;
-}
-
-.form-contents {
-  margin: 5px auto;
+.action-control-wrapper {
+  margin: 40px auto 20px;
 }
 
-.form-contents lable {
-  font-size: 12px;
+label {
+  margin: 0 auto 14px auto;
+  font-size: 15px;
+  font-weight: 400;
+  color: #777;
 }
 
-.input-wrapper,
 .text-input-wrapper {
   margin: 6px auto;
-
   position: relative;
+  background: #fbfbfb;
 }
 
-.input-wrapper:after {
-  content: "\F107";
-
-  color: #777;
-
-  position: absolute;
-
-  display: inline-block;
-
-  top: 6px;
-
-  font-family: "Font Awesome 5 Free",sans-serif;
-
-  font-weight: 900;
-
-  left: 15px;
-
-  font-size: 20px;
-
-  z-index: 0;
-}
-
-input {
+.submit-button-wrapper {
+  float: right;
   width: 100%;
-
-  border-radius: 4px;
-
-  border: 1px solid;
-
-  padding: 8px 15px;
-
-  color: #bebebe;
-
-  border-color: #bebebe;
-
-  direction: rtl;
-
-  transition: 300ms;
-
-  background: #fff;
-}
-
-.input-wrapper i {
-  display: inline-block;
-
-  position: absolute;
-
-  left: 15px;
-
-  font-size: 20px;
-
-  color: #bebebe;
-
-  top: 9px;
-
-  transition: 300ms;
-}
-
-input:focus,
-input:focus + i {
-  color: #333;
-  border-color: #333;
-}
-
-input.active {
-  border-color: #00c569;
-  color: #333;
-}
-
-input.active + i {
-  color: #00c569;
-}
-
-input.active:focus,
-input.active:focus + i,
-input.active + i {
-  border-color: #00c569;
-}
-
-input.error {
-  color: #333;
-  border-color: #e41c38;
-}
-
-input.error + i {
-  color: #e41c38;
-}
-
-input.error:focus,
-input.error:focus + i {
-  border-color: #e41c38;
-}
-
-select {
-  width: 100%;
-
-  border-radius: 4px;
-
-  border: 1px solid;
-
-  padding: 8px 15px;
-
-  position: relative;
-
-  z-index: 1;
-
-  color: #777777;
-
-  direction: rtl;
-
-  transition: 200ms;
-
-  background: none;
-
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
-}
-
-.input-wrapper i {
-  display: inline-block;
-
-  position: absolute;
-
-  left: 15px;
-
-  font-size: 20px;
-
-  color: #bebebe;
-
-  top: 9px;
-
-  transition: 200ms;
-}
-
-select option {
-  color: #333;
-}
-
-select:focus {
-  color: #333;
-}
-
-select.active {
-  color: #333;
-  color: #00c569;
-}
-
-select.active:focus {
-  color: #00c569;
-}
-
-select.error {
-  color: #333;
-  color: #e41c38;
-}
-
-select.error:focus {
-  color: #e41c38;
-}
-
-.error-message {
-  text-align: center;
-
-  color: #e41c38;
-
-  font-weight: bold;
-
-  height: 15px;
-
-  direction: rtl;
-
-  font-size: 11px;
-  margin-bottom: 15px;
-}
-
-.small-description {
-  font-size: 11px;
-
-  font-weight: bold;
-
-  color: #777777;
-
-  line-height: 1.618;
-}
-label .small-label {
-  font-size: 12px;
-}
-
-.text-red{
-  color: red;
+  margin: 15px auto 50px;
 }
 
 @media screen and (max-width: 767px) {
-  select {
-    font-size: 12px;
-  }
-  .input-wrapper::after {
-    left: 14px;
+  .title-contents {
+    margin-top: 40px;
   }
 }
 </style>
 
 <template>
   <div>
-    <h2 class="title-contents col-xs-12">افزودن تصاویر محصول</h2>
-    <span
-        class="text-red col-xs-12 small-description">
-        لطفا فقط عکس های مرتبط با محصول خود را ثبت کنید
-      </span>
-    <div class="form-contents col-xs-12">
-      <div class="text-input-wrapper">
-        <!-- input type tel because we have some limmitation for processes -->
+    <h2 class="title-contents col-xs-12">
+      افزودن تصاویر محصول
+      <span class="red-text"> *</span>
+    </h2>
 
+    <div class="form-contents bg-white col-xs-12">
+      <label for="product-type" class="description">
+        <span> لطفا فقط عکس های مرتبط با محصول خود را ثبت کنید </span>
+      </label>
+      <div class="text-input-wrapper">
         <UploadFile
-          uploadName="product_files"
-          uploadAccept="image/*"
-          :uploadMinSize="1024"
-          :uploadSize="1024 * 1024 * 10"
+          uploadName="files"
+          uploadAccept="*"
           :uploadMultiple="true"
           :uploadDrop="true"
           :uploadDropDirectory="true"
@@ -282,44 +127,92 @@ label .small-label {
           :uploadThread="3"
           :uploadOCompress="1024 * 1024"
           :uploadUploadAuto="false"
-          :uploadRef="$parent.productFiles"
+          :imageWrapperSize="'col-xs-6'"
         />
       </div>
+
       <p class="error-message col-xs-12">
-        <span v-if="$parent.errors.images_type" v-text="$parent.errors.images_type"></span>
+        <span
+          class="red-text"
+          v-if="$parent.errors.images_type"
+          v-text="errors.images_type"
+        ></span>
 
-        <span v-if="$parent.errors.images_size" v-text="$parent.errors.images_size"></span>
+        <span
+          class="red-text"
+          v-if="$parent.errors.images_size"
+          v-text="errors.images_size"
+        ></span>
 
-        <span v-if="$parent.errors.images_count" v-text="$parent.errors.images_count[0]"></span>
+        <span
+          class="red-text"
+          v-if="$parent.errors.images_count"
+          v-text="errors.images_count[0]"
+        ></span>
 
-        <span v-if="$parent.errors.image_0" v-text="$parent.errors.image_0[0]"></span>
+        <span
+          class="red-text"
+          v-if="$parent.errors.image_0"
+          v-text="$parent.errors.image_0[0]"
+        ></span>
 
-        <span v-if="$parent.errors.image_1" v-text="$parent.errors.image_1[0]"></span>
+        <span
+          class="red-text"
+          v-if="$parent.errors.image_1"
+          v-text="$parent.errors.image_1[0]"
+        ></span>
 
-        <span v-if="$parent.errors.image_2" v-text="$parent.errors.image_2[0]"></span>
+        <span
+          class="red-text"
+          v-if="$parent.errors.image_2"
+          v-text="$parent.errors.image_2[0]"
+        ></span>
 
-        <span v-if="$parent.errors.image_3" v-text="$parent.errors.image_3[0]"></span>
+        <span
+          class="red-text"
+          v-if="$parent.errors.image_3"
+          v-text="$parent.errors.image_3[0]"
+        ></span>
 
-        <span v-if="$parent.errors.image_4" v-text="$parent.errors.image_4[0]"></span>
+        <span
+          class="red-text"
+          v-if="$parent.errors.image_4"
+          v-text="$parent.errors.image_4[0]"
+        ></span>
 
-        <span v-if="$parent.errors.image_5" v-text="$parent.errors.image_5[0]"></span>
+        <span
+          class="red-text"
+          v-if="$parent.errors.image_5"
+          v-text="$parent.errors.image_5[0]"
+        ></span>
       </p>
-
-      
 
       <div class="submit-button-wrapper">
         <button
           class="submit-button disabled pull-left"
-          :class="{'active' : $parent.productFiles[0] && !$parent.errors.images_type && !$parent.errors.images_size}"
-          @click.prevent="$parent.productImageSubmited()"
+          :class="{
+            active:
+              !this.errors.images_count[0] &&
+              this.$parent.productFiles[0] &&
+              !this.errors.images_type &&
+              !isCompressor &&
+              !this.errors.images_size,
+          }"
+          @click.prevent="submitImages()"
         >
           مرحله بعد
-          <i class="fa fa-arrow-left"></i>
+          <div class="button-icon-wrapper">
+            <!-- v-if="isCompressor" -->
+            <i class="fa fa-arrow-left" :class="{ empty: isCompressor }"></i>
+            <div class="spinner-border" :class="{ empty: !isCompressor }">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>
         </button>
 
         <button
           class="submit-button default-back-button pull-right"
-          @click.prevent="$parent.currentStep --"
+          @click.prevent="$parent.currentStep--"
         >
           <i class="fa fa-arrow-right"></i>
           مرحله قبل
@@ -331,13 +224,100 @@ label .small-label {
 <script>
 import UploadFile from "../../../upload-image";
 export default {
-  components: {
-    UploadFile
+  data() {
+    return {
+      files: [],
+      isCompressor: false,
+      errors: {
+        images_count: [],
+        images_type: "",
+        images_size: "",
+      },
+    };
   },
-  mounted() {
-    if (this.$parent.isOsIOS()) {
-      $('input[type="tel"]').attr("type", "text");
-    }
-  }
+  components: {
+    UploadFile,
+  },
+  methods: {
+    submitImages() {
+      if (!this.$parent.productFiles[0]) {
+        this.errors.images_count.push("لطفا تصویر محصول را وارد کنید");
+      } else {
+        this.imageValidator(this.files);
+      }
+
+      if (
+        !this.errors.images_count[0] &&
+        this.$parent.productFiles[0] &&
+        !this.errors.images_type &&
+        !this.errors.images_size
+      ) {
+        this.$parent.goToStep(5);
+      }
+    },
+    imageValidator(files) {
+      var errorsStatus = false;
+
+      if (files.length) {
+        this.errors.images_count = [];
+        for (var i = 0; i <= files.length; i++) {
+          if (files[i]) {
+            if (
+              !files[i].type ||
+              files[i].type == "" ||
+              files[i].type == "image/gif" ||
+              files[i].type == "image/svg+xml" ||
+              files[i].type == "application/postscript" ||
+              files[i].type == "text/xml" ||
+              files[i].type == "application/x-gzip"
+            ) {
+              errorsStatus = true;
+              this.errors.images_type = "تصاویر باید فرمت معتبری باشند.";
+            }
+
+            if (files[i].size > 4242880) {
+              errorsStatus = true;
+              this.errors.images_size =
+                "حجم تصویر بالا است، باید کمتر از 4 مگابایت باشد.";
+              this.$parent.errors.images_size = this.errors.images_size;
+            } else if (files[i].size < 20480) {
+              errorsStatus = true;
+              this.errors.images_size =
+                "حجم تصویر پایین است، باید بیشتر از 20 کیلوبایت باشد.";
+            }
+          }
+        }
+        if (!errorsStatus) {
+          this.errors.images_type = "";
+          this.errors.images_size = "";
+          this.$parent.productFiles = this.files;
+        }
+      } else {
+        this.errors.images_type = "";
+        this.errors.images_size = "";
+        this.$parent.productFiles = [];
+      }
+    },
+    resetComponents() {
+      this.files = [];
+      this.isCompressor = false;
+      this.errors = {
+        images_count: [],
+        images_type: "",
+        images_size: "",
+      };
+      this.$parent.productFiles = this.files;
+    },
+  },
+  watch: {
+    files(files) {
+      this.imageValidator(files);
+    },
+    "$parent.successRegisterProduct"(value) {
+      if (value == true) {
+        this.resetComponents();
+      }
+    },
+  },
 };
 </script>
