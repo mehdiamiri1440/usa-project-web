@@ -1157,6 +1157,7 @@ class product_controller extends Controller
                                     return $q;
 
                                 })
+                                ->orderBy('buy_ads.created_at','desc')
                                 ->select($this->related_buyAds_required_fields)
                                 ->get();
 
@@ -1259,7 +1260,7 @@ class product_controller extends Controller
     protected function prioritize_buyAds_according_to_buyers_last_activity_date(&$buyAds)
     {
         $buyAds->each(function($buyAd){
-            $activity_info = $this->get_user_activity_ratio($buyAd->id,$buyAd->created_at);
+            $activity_info = $this->get_user_activity_ratio($buyAd->myuser_id,$buyAd->created_at);
             $buyAd->activity_ratio = $activity_info['activity_ratio'];
             $buyAd->score = $activity_info['score'];
         });
