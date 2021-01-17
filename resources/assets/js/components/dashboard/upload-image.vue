@@ -62,8 +62,8 @@
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  width: initial;
-  height: 100%;
+  width: 100%;
+  min-height: 100%;
   min-width: 100%;
 }
 
@@ -645,9 +645,7 @@ export default {
           this.autoCompress < newFile.size
         ) {
           newFile.error = "compressing";
-          if (this.$parent.isCompressor) {
-            this.$parent.isCompressor = true;
-          }
+          this.$parent.isCompressor = true;
 
           let Options = {
             checkOrientation: true,
@@ -657,40 +655,52 @@ export default {
             minHeight: 512,
           };
 
+          var finalOrientation = 1;
+
           const imageCompressor = new ImageCompressor(null, Options);
           const self = this;
 
           imageCompressor
             .compress(newFile.file, Options)
             .then((file) => {
-              loadImage(file, { meta: true, canvas: true, maxWidth: 800 })
-                .then(function (data) {
-                  if (!data.imageHead)
-                    throw new Error("Could not parse image metadata");
-                  return new Promise(function (resolve) {
-                    data.image.toBlob(function (blob) {
-                      data.blob = blob;
-                      resolve(data);
-                    }, "image/jpeg");
+              self.getOrientation(newFile.file, function (orientation) {
+                if (orientation != 1) {
+                  finalOrientation = 8;
+                }
+                loadImage(file, {
+                  orientation: finalOrientation,
+                  meta: true,
+                  canvas: true,
+                  maxWidth: 800,
+                })
+                  .then(function (data) {
+                    if (!data.imageHead)
+                      throw new Error("Could not parse image metadata");
+                    return new Promise(function (resolve) {
+                      data.image.toBlob(function (blob) {
+                        data.blob = blob;
+                        resolve(data);
+                      }, "image/jpeg");
+                    });
+                  })
+                  .then(function (data) {
+                    return loadImage.replaceHead(data.blob, data.imageHead);
+                  })
+                  .then(function (blob) {
+                    self.$refs.upload.update(newFile, {
+                      error: "",
+                      file: blob,
+                      size: blob.size,
+                      type: blob.type,
+                    });
+                    if (self.$parent.isCompressor) {
+                      self.$parent.isCompressor = false;
+                    }
+                  })
+                  .catch(function (err) {
+                    console.error(err);
                   });
-                })
-                .then(function (data) {
-                  return loadImage.replaceHead(data.blob, data.imageHead);
-                })
-                .then(function (blob) {
-                  self.$refs.upload.update(newFile, {
-                    error: "",
-                    blob,
-                    size: blob.size,
-                    type: blob.type,
-                  });
-                })
-                .catch(function (err) {
-                  console.error(err);
-                });
-              if (this.$parent.isCompressor) {
-                this.$parent.isCompressor = false;
-              }
+              });
             })
             .catch((err) => {
               this.$refs.upload.update(newFile, {
@@ -824,6 +834,41 @@ export default {
       let file = new window.File([this.addData.content], this.addData.name, {
         type: this.addData.type,
       });
+    },
+    getOrientation(file, callback) {
+      var reader = new FileReader();
+
+      reader.onload = function (event) {
+        var view = new DataView(event.target.result);
+
+        if (view.getUint16(0, false) != 0xffd8) return callback(-2);
+
+        var length = view.byteLength,
+          offset = 2;
+
+        while (offset < length) {
+          var marker = view.getUint16(offset, false);
+          offset += 2;
+
+          if (marker == 0xffe1) {
+            if (view.getUint32((offset += 2), false) != 0x45786966) {
+              return callback(-1);
+            }
+            var little = view.getUint16((offset += 6), false) == 0x4949;
+            offset += view.getUint32(offset + 4, little);
+            var tags = view.getUint16(offset, little);
+            offset += 2;
+
+            for (var i = 0; i < tags; i++)
+              if (view.getUint16(offset + i * 12, little) == 0x0112)
+                return callback(view.getUint16(offset + i * 12 + 8, little));
+          } else if ((marker & 0xff00) != 0xff00) break;
+          else offset += view.getUint16(offset, false);
+        }
+        return callback(-1);
+      };
+
+      reader.readAsArrayBuffer(file.slice(0, 64 * 1024));
     },
   },
 };

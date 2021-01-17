@@ -434,7 +434,7 @@ export default {
   },
   data: function () {
     return {
-      currentStep: 0,
+      currentStep: 4,
       currentUser: {
         profile: "",
         user_info: "",
