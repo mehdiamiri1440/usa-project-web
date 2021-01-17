@@ -110,10 +110,10 @@ export default {
       this.$parent.buyAd.requirement_amount = value;
       this.errors.requirement_amount = "";
       if (value) {
-        if (value.length >= 9) {
+        if (value.length >= 13) {
           this.$parent.buyAd.requirement_amount = this.$parent.buyAd.requirement_amount.substring(
             0,
-            9
+            13
           );
         }
         let number = this.$parent.toLatinNumbers(
