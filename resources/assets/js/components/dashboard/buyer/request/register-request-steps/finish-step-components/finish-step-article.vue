@@ -99,8 +99,9 @@ h3.article-title {
 
 .green-button {
   width: 100%;
-  padding: 4px 0 5px;
-  max-width: 400px;
+  padding: 7px;
+  font-size: 18px;
+  max-width: 280px;
   margin: 0 auto 20px;
   display: block;
 }
