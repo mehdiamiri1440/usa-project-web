@@ -118,9 +118,8 @@ label {
       </label>
       <div class="text-input-wrapper">
         <UploadFile
-          uploadName="product_files"
+          uploadName="files"
           uploadAccept="*"
-          :files="files"
           :uploadMultiple="true"
           :uploadDrop="true"
           :uploadDropDirectory="true"
