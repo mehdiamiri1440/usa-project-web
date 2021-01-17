@@ -316,8 +316,8 @@ tr:nth-child(even) {
               <i class="fa fa-list-alt"></i>
             </div>
 
-            <div class="text_no_pic">
-              <p>در حال حاظر شما درخواستی ثبت نکرده اید</p>
+            <div class="text_no_pic text-rtl">
+              <p>شما درخواست خریدی را ثبت نکرده اید یا در انتظار تایید است.</p>
             </div>
 
             <router-link

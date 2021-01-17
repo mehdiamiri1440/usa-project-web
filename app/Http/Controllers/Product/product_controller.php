@@ -77,7 +77,8 @@ class product_controller extends Controller
     ];
 
     protected $product_register_nullable_fields_array_with_validation_rules = array(
-        'description' => 'regex:/^(?!.*[(@#!%$&*)])[\s\x{0600}-\x{06FF}\x{060C}\x{061B}\x{061F}\x{0640}\x{066A}\x{066B}\x{066C}\x{0E}\x{0A}\<\>\/_\.\-\،\:\(\)\A-Za-z0-9 ]+$/u',
+        'description' => 'string',
+        // 'description' => 'regex:/^(?!.*[(@#!%$&*)])[\s\x{0600}-\x{06FF}\x{060C}\x{061B}\x{061F}\x{0640}\x{066A}\x{066B}\x{066C}\x{0E}\x{0A}\<\>\/_\.\-\،\:\(\)\A-Za-z0-9 ]+$/u',
     );
 
     protected $max_factorial_input_number = 10;
@@ -165,7 +166,7 @@ class product_controller extends Controller
             'min_sale_price' => 'required|integer|min:0',
             'max_sale_price' => 'required|integer|min:0',
             'min_sale_amount' => 'required|integer|min:0',
-            'product_name' => 'required|regex:/^(?!.*[(@#!%$&*)])[\s\x{0600}-\x{06FF}_\.\-\0-9 ]+$/u',
+            'product_name' => 'required|string',
             'category_id' => 'required',
             'city_id' => 'required',
             'images_count' => 'required|integer|min:1',
@@ -1156,6 +1157,7 @@ class product_controller extends Controller
                                     return $q;
 
                                 })
+                                ->orderBy('buy_ads.created_at','desc')
                                 ->select($this->related_buyAds_required_fields)
                                 ->get();
 
@@ -1258,7 +1260,7 @@ class product_controller extends Controller
     protected function prioritize_buyAds_according_to_buyers_last_activity_date(&$buyAds)
     {
         $buyAds->each(function($buyAd){
-            $activity_info = $this->get_user_activity_ratio($buyAd->id,$buyAd->created_at);
+            $activity_info = $this->get_user_activity_ratio($buyAd->myuser_id,$buyAd->created_at);
             $buyAd->activity_ratio = $activity_info['activity_ratio'];
             $buyAd->score = $activity_info['score'];
         });
@@ -1355,7 +1357,7 @@ class product_controller extends Controller
 
         $product = product::where('myuser_id',$user_id)
                                 ->whereBetween('created_at',[Carbon::now()->subMinutes(30),Carbon::now()])
-                                ->orderBy('created_at')
+                                ->orderBy('created_at','desc')
                                 ->get()
                                 ->first();
 
@@ -1391,7 +1393,7 @@ class product_controller extends Controller
         }
 
         $products = product::where('myuser_id',$user_id)
-                                ->where('confirmed',true)
+                                // ->where('confirmed',true)
                                 ->orderBy('created_at','desc')
                                 ->get();
 
@@ -1404,9 +1406,14 @@ class product_controller extends Controller
                 return $buyAd->is_golden == true;
             });
 
-            $buyAds = array_unique(array_merge($buyAds,$tmp),SORT_REGULAR);
+            if(count($buyAds) <= 20){
+                $buyAds = array_unique(array_merge($buyAds,$tmp),SORT_REGULAR);
+            }
+            else{
+                break;
+            }
         }
 
-        return $buyAds;
+        return array_slice($buyAds,0,20);
     }
 }

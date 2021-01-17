@@ -281,7 +281,7 @@ export default {
               this.errors.images_size =
                 "حجم تصویر بالا است، باید کمتر از 5 مگابایت باشد.";
               this.$parent.errors.images_size = this.errors.images_size;
-            } else if (files[i].size < 20480) {
+            } else if (files[i].file.size < 20480) {
               errorsStatus = true;
               this.errors.images_size =
                 "حجم تصویر پایین است، باید بیشتر از 20 کیلوبایت باشد.";

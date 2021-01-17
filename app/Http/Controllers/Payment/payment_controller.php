@@ -157,7 +157,7 @@ class payment_controller extends Controller
                                                     ->count();
             
             if($lastest_registered_product_count > 0){
-                return redirect('buskool://buyAd-requests');
+                return redirect('buskool://register-product-successfully');
             }
             
             return redirect('buskool://buyAd-requests');
@@ -165,7 +165,8 @@ class payment_controller extends Controller
         } 
         catch (\Exception $e)
         {
-            return redirect('buskool://pricing');
+            return redirect('buskool://register-product-successfully');
+            // return redirect('buskool://pricing');
         }
     }
     

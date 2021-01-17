@@ -184,13 +184,12 @@ input.error:focus + i {
             <input
               v-model="$parent.productName"
               id="min-sale-amount"
-              type="tel"
+              type="text"
               :class="{
                 active: $parent.productName,
                 error: $parent.errors.productName,
               }"
               placeholder="نوع محصول مورد نیاز خود را وارد کنید"
-              pattern="[0-9]*"
             />
 
             <i

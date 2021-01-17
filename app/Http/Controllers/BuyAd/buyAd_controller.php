@@ -50,7 +50,8 @@ class buyAd_controller extends Controller
     );
 
     protected $buyAd_register_nullable_fields_array_with_validation_rules = array(
-        'name' => 'regex:/^(?!.*[(@#!%$&*)])[\s\x{0600}-\x{06FF}_\.\-\0-9 ]+$/u',
+        'name' => 'string',
+        // 'name' => 'regex:/^(?!.*[(@#!%$&*)])[\s\x{0600}-\x{06FF}_\.\-\0-9 ]+$/u',
         //'city_id' => 'integer|min:1',
         // 'price' => 'integer|min:0',
         // 'address' => 'regex:/^(?!.*[(@#!%$&*)])[\s\x{0600}-\x{06FF}_\.\-\0-9 ]+$/u',
