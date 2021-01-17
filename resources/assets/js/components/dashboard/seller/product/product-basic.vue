@@ -1000,8 +1000,8 @@ export default {
     "product.stock": function (value) {
       this.errors.stock = "";
       if (value) {
-        if (value.length >= 9) {
-          this.product.stock = this.product.stock.substring(0, 9);
+        if (value.length >= 13) {
+          this.product.stock = this.product.stock.substring(0, 13);
         }
         let number = this.toLatinNumbers(this.product.stock);
         if (!this.validateRegx(number, /^\d*$/)) {
@@ -1018,10 +1018,10 @@ export default {
     },
     "product.min_sale_amount": function (value) {
       this.errors.min_sale_amount = "";
-      if (value.length >= 9) {
+      if (value.length >= 13) {
         this.product.min_sale_amount = this.product.min_sale_amount.substring(
           0,
-          9
+          13
         );
       }
       if (value) {
@@ -1039,10 +1039,10 @@ export default {
     },
     "product.min_sale_price": function (value) {
       this.errors.min_sale_price = "";
-      if (value.length >= 9) {
+      if (value.length >= 13) {
         this.product.min_sale_price = this.product.min_sale_price.substring(
           0,
-          9
+          13
         );
       }
       if (value) {
@@ -1057,10 +1057,10 @@ export default {
     },
     "product.max_sale_price": function (value) {
       this.errors.max_sale_price = "";
-      if (value.length >= 9) {
+      if (value.length >= 13) {
         this.product.max_sale_price = this.product.max_sale_price.substring(
           0,
-          9
+          13
         );
       }
       if (value) {

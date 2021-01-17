@@ -171,8 +171,8 @@ a.close-dialog-popup {
 
 button.btn-filter {
   float: left;
-  padding: 6px 10px;
-  border-radius: 5px;
+  padding: 6px 10px 7px;
+  border-radius: 3px;
   border: none;
   background: #000546;
   color: #fff;
