@@ -1357,7 +1357,7 @@ class product_controller extends Controller
 
         $product = product::where('myuser_id',$user_id)
                                 ->whereBetween('created_at',[Carbon::now()->subMinutes(30),Carbon::now()])
-                                ->orderBy('created_at')
+                                ->orderBy('created_at','desc')
                                 ->get()
                                 ->first();
 
@@ -1393,7 +1393,7 @@ class product_controller extends Controller
         }
 
         $products = product::where('myuser_id',$user_id)
-                                ->where('confirmed',true)
+                                // ->where('confirmed',true)
                                 ->orderBy('created_at','desc')
                                 ->get();
 
@@ -1406,9 +1406,14 @@ class product_controller extends Controller
                 return $buyAd->is_golden == true;
             });
 
-            $buyAds = array_unique(array_merge($buyAds,$tmp),SORT_REGULAR);
+            if(count($buyAds) <= 20){
+                $buyAds = array_unique(array_merge($buyAds,$tmp),SORT_REGULAR);
+            }
+            else{
+                break;
+            }
         }
 
-        return $buyAds;
+        return array_slice($buyAds,0,20);
     }
 }
