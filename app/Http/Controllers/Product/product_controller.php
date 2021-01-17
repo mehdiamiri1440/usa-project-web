@@ -77,7 +77,8 @@ class product_controller extends Controller
     ];
 
     protected $product_register_nullable_fields_array_with_validation_rules = array(
-        'description' => 'regex:/^(?!.*[(@#!%$&*)])[\s\x{0600}-\x{06FF}\x{060C}\x{061B}\x{061F}\x{0640}\x{066A}\x{066B}\x{066C}\x{0E}\x{0A}\<\>\/_\.\-\،\:\(\)\A-Za-z0-9 ]+$/u',
+        'description' => 'string',
+        // 'description' => 'regex:/^(?!.*[(@#!%$&*)])[\s\x{0600}-\x{06FF}\x{060C}\x{061B}\x{061F}\x{0640}\x{066A}\x{066B}\x{066C}\x{0E}\x{0A}\<\>\/_\.\-\،\:\(\)\A-Za-z0-9 ]+$/u',
     );
 
     protected $max_factorial_input_number = 10;
@@ -165,7 +166,7 @@ class product_controller extends Controller
             'min_sale_price' => 'required|integer|min:0',
             'max_sale_price' => 'required|integer|min:0',
             'min_sale_amount' => 'required|integer|min:0',
-            'product_name' => 'required|regex:/^(?!.*[(@#!%$&*)])[\s\x{0600}-\x{06FF}_\.\-\0-9 ]+$/u',
+            'product_name' => 'required|string',
             'category_id' => 'required',
             'city_id' => 'required',
             'images_count' => 'required|integer|min:1',
