@@ -232,7 +232,7 @@
                 <img src="../../../img/logo/mobile-logo.svg" alt />
               </div>
               <h3>اپلیکیشن جدید باسکول</h3>
-              <p>
+              <p class="text-rtl">
                 برای دسترسی سریعتر و راحت تر به خریداران و فروشندگان عمده برنامه
                 جدید باسکول را نصب کنید.
               </p>
@@ -336,6 +336,7 @@ export default {
       reviewCurrentStep: 0,
       reviewUserData: "",
       reviewUserPrfileId: "",
+      currentUserCreatedAt: "",
       verifiedUserContent:
         "<div class='tooltip-wrapper text-rtl'>اطلاعات هویتی این کاربر احراز شده است.<br/><a href='/verification'>اطلاعات بیشتر</a> </div>",
     };
@@ -475,10 +476,13 @@ export default {
           ) {
             this.isConditionSatisfied = true;
           }
+
           if (!this.checkCookie() && this.userId && !this.iswebview) {
+            console.log(" run modal");
+
             setTimeout(() => {
               $("#download-app-modal").modal("show");
-            }, 5000);
+            }, 1000);
           }
         }
       }
@@ -1101,9 +1105,18 @@ export default {
     },
   },
   mounted() {
-    this.activateDownloadApp();
     // eventBus.$emit("globalVerifiedBadgeContents", this.verifiedUserContent);
     eventBus.$emit("globalVerifiedBadgeContents", 1);
+  },
+  watch: {
+    currentUserCreatedAt(date) {
+      let userCreatedAt = new Date(date);
+      let currentDate = new Date();
+      currentDate = new Date(currentDate.getTime() - 60 * 60000);
+      if (currentDate > userCreatedAt) {
+        this.activateDownloadApp();
+      }
+    },
   },
 };
 </script>

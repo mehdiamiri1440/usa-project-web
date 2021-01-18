@@ -246,7 +246,7 @@ export default {
             /^[\u0600-\u06FF\s_,.:/;()+-\d]+$/
           )
         ) {
-          this.errors.description = "توضیحات شامل کاراکتر های غیرمجاز است";
+          this.errors.description = "توضیحات شامل حروف غیرمجاز است";
         }
       }
     },

@@ -239,6 +239,22 @@ li.contact-item:nth-last-of-type(2n + 1) {
   z-index: 1;
 }
 
+i.fa-star {
+  font-size: 16px;
+  background: linear-gradient(
+    21deg,
+    rgb(199, 168, 79) 0%,
+    rgb(249, 242, 159) 51%,
+    rgb(199, 168, 79) 100%
+  );
+  background-clip: border-box;
+  background-clip: border-box;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: relative;
+  top: 2px;
+}
+
 .total-unread-messages-badge {
   position: absolute;
   top: -3px;
@@ -252,6 +268,7 @@ li.contact-item:nth-last-of-type(2n + 1) {
   line-height: 1;
   padding-top: 4px;
 }
+
 .contact-button.active {
   border-radius: 4px 4px 0 0;
 }
@@ -414,6 +431,28 @@ li.golden .buyad-button:hover {
 .golden-info-text .buyad-info {
   font-size: 18px;
 }
+
+li.static-item {
+  margin-bottom: 50px;
+  margin-top: 20px;
+}
+
+li.static-item > i {
+  font-size: 55px;
+  display: block;
+  text-align: center;
+  color: #777;
+  margin-top: 15px;
+}
+li.static-item > button {
+  font-size: 14px;
+  background: #21ad93;
+}
+li.static-item > button i {
+  position: relative;
+  top: 2px;
+  right: 3px;
+}
 @media screen and (max-width: 991px) {
   .main-content {
     padding: 59px 0 0;
@@ -493,8 +532,7 @@ li.golden .buyad-button:hover {
       <div v-if="$parent.userType" class="contacts-switch-buttons-wrapper">
         <div class="switch-button-item">
           <button class="contact-button active">
-            <span class="total-unread-messages-badge">جدید</span>
-            <i class="fa fa-list-ul"></i>
+            <i class="fa fa-star"></i>
             خریداران پیشنهادی
           </button>
         </div>
@@ -544,7 +582,7 @@ li.golden .buyad-button:hover {
       class="not-found-item"
     >
       <div class="empty-list">
-        <i class="fa fa-list-alt"></i>
+        <i class="fa fa-list-ul"></i>
         <p>در حال حاضر پیشنهادی برای شما وجود ندارد</p>
         <p class="red-text">
           در صورتی که محصولی ثبت نکرده اید، ابتدا محصول خود را ثبت کنید.
@@ -577,255 +615,268 @@ li.golden .buyad-button:hover {
         </div>
       </div>
     </div>
-    <div v-else class="contact-items buyad-lists-wrapper">
-      <ul>
-        <li
-          class="contact-item golden"
-          v-for="(buyAd, index) in buyAdsGoldenFilter"
-          :key="'golden-' + index"
-        >
-          <div v-if="$parent.currentUser.user_info.active_pakage_type > 0">
-            <div class="user-information-wrapper col-xs-12">
-              <div class="user-information-content">
-                <div class="user-content">
-                  <i class="fa fa-user-circle"></i>
-                  <span
-                    class="user-name-link"
-                    v-text="buyAd.first_name + ' ' + buyAd.last_name"
-                  >
-                  </span>
+    <div v-else class="contact-items col-xs-12 buyad-lists-wrapper">
+      <div class="row">
+        <ul>
+          <li
+            class="contact-item golden"
+            v-for="(buyAd, index) in buyAdsGoldenFilter"
+            :key="'golden-' + index"
+          >
+            <div v-if="$parent.currentUser.user_info.active_pakage_type > 0">
+              <div class="user-information-wrapper col-xs-12">
+                <div class="user-information-content">
+                  <div class="user-content">
+                    <i class="fa fa-user-circle"></i>
+                    <span
+                      class="user-name-link"
+                      v-text="buyAd.first_name + ' ' + buyAd.last_name"
+                    >
+                    </span>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="buyad-main col-xs-12">
-              <div class="row">
-                <p class="buyad-info">
-                  خریدار
-                  <span
-                    class="red-text"
-                    v-if="buyAd.requirement_amount < 1000"
-                    v-text="buyAd.requirement_amount + 'کیلوگرم'"
-                  ></span>
-                  <span
-                    class="red-text"
-                    v-else-if="buyAd.requirement_amount == 1000"
-                    >یک تن</span
+              <div class="buyad-main col-xs-12">
+                <div class="row">
+                  <p class="buyad-info">
+                    خریدار
+                    <span
+                      class="red-text"
+                      v-if="buyAd.requirement_amount < 1000"
+                      v-text="buyAd.requirement_amount + 'کیلوگرم'"
+                    ></span>
+                    <span
+                      class="red-text"
+                      v-else-if="buyAd.requirement_amount == 1000"
+                      >یک تن</span
+                    >
+                    <span
+                      v-else
+                      class="red-text"
+                      v-text="
+                        getNumberWithCommas(buyAd.requirement_amount / 1000) +
+                        ' تن '
+                      "
+                    ></span>
+                    <span v-text="buyAd.subcategory_name"></span>
+                    <span v-if="buyAd.name" class="gray-text"> از نوع </span>
+                    <span v-if="buyAd.name" v-text="buyAd.name"></span>
+                    <span class="gray-text"> هستم </span>
+                  </p>
+                  <p class="buyad-notice">
+                    درصورت داشتن این محصول به من پیام دهید.
+                  </p>
+                  <button
+                    @click="openChat(buyAd)"
+                    class="buyad-button golden-button"
+                    :id="'golden-loader-' + buyAd.id"
                   >
-                  <span
-                    v-else
-                    class="red-text"
-                    v-text="
-                      getNumberWithCommas(buyAd.requirement_amount / 1000) +
-                      ' تن '
-                    "
-                  ></span>
-                  <span v-text="buyAd.subcategory_name"></span>
-                  <span v-if="buyAd.name" class="gray-text"> از نوع </span>
-                  <span v-if="buyAd.name" v-text="buyAd.name"></span>
-                  <span class="gray-text"> هستم </span>
-                </p>
-                <p class="buyad-notice">
-                  درصورت داشتن این محصول به من پیام دهید.
-                </p>
-                <button
-                  @click="openChat(buyAd)"
-                  class="buyad-button golden-button"
-                  :id="'golden-loader-' + buyAd.id"
-                >
-                  <span>
                     <span>
-                      <span class="fas fa-comment-alt"></span>
-                      پیام به خریدار
+                      <span>
+                        <span class="fas fa-comment-alt"></span>
+                        پیام به خریدار
+                      </span>
+                      <span class="hide-reply"> کمی صبر کنید... </span>
                     </span>
-                    <span class="hide-reply"> کمی صبر کنید... </span>
-                  </span>
-                </button>
-                <!-- <button
+                  </button>
+                  <!-- <button
                     class="hide-reply buyad-button"
                     :id="'golden-loader-' + buyAd.id"
                     disabled
                   >
                     کمی صبر کنید...
                   </button> -->
-              </div>
-            </div>
-          </div>
-          <div v-else>
-            <div class="user-information-wrapper col-xs-12">
-              <div class="user-information-content">
-                <div class="user-content">
-                  <i class="fa fa-user-circle"></i>
-                  <span
-                    class="user-name-link"
-                    v-text="buyAd.first_name + ' ' + buyAd.last_name"
-                  >
-                  </span>
                 </div>
               </div>
             </div>
-            <div class="buyad-main col-xs-12">
-              <div class="main-background-buyad">
-                <p class="buyad-info">
-                  این درخواست فقط برای
-                  <span class="red-text"> کاربران ویژه </span>
-                  قابل نمایش است
-                </p>
-                <p class="buyad-notice">
-                  برای مشاهده لطفا حساب کاربری خود را ارتقا دهد
-                </p>
-              </div>
-              <div class="row golden-info-text">
-                <p class="buyad-info">
-                  خریدار
-
-                  <span v-text="buyAd.subcategory_name"></span>
-                  <span v-if="buyAd.name" class="gray-text"> از نوع </span>
-                  <span v-if="buyAd.name" v-text="buyAd.name"></span>
-                  <span class="gray-text"> هستم </span>
-                </p>
-
-                <button
-                  @click="openGoldenChatRestrictionModal()"
-                  class="buyad-button"
-                >
-                  <i class="fas fa-comment-alt"></i>
-                  پیام به خریدار
-                </button>
-              </div>
-            </div>
-          </div>
-        </li>
-        <li
-          class="contact-item"
-          v-for="(buyAd, index) in buyAdsFilter"
-          :key="index"
-        >
-          <div v-if="!buyAd.expired">
-            <div class="user-information-wrapper col-xs-12">
-              <div class="user-information-content">
-                <div class="user-content">
-                  <i class="fa fa-user-circle"></i>
-                  <span
-                    class="user-name-link"
-                    v-text="buyAd.first_name + ' ' + buyAd.last_name"
-                  >
-                  </span>
-                </div>
-              </div>
-            </div>
-            <div class="buyad-main col-xs-12">
-              <div class="row">
-                <p class="buyad-info">
-                  خریدار
-                  <span
-                    class="red-text"
-                    v-if="buyAd.requirement_amount < 1000"
-                    v-text="buyAd.requirement_amount + ' کیلوگرم '"
-                  ></span>
-                  <span
-                    class="red-text"
-                    v-else-if="buyAd.requirement_amount == 1000"
-                    >یک تن</span
-                  >
-                  <span
-                    v-else
-                    class="red-text"
-                    v-text="
-                      getNumberWithCommas(buyAd.requirement_amount / 1000) +
-                      ' تن '
-                    "
-                  ></span>
-                  <span v-text="buyAd.subcategory_name"></span>
-                  <span v-if="buyAd.name" class="gray-text"> از نوع </span>
-                  <span v-if="buyAd.name" v-text="buyAd.name"></span>
-                  <span class="gray-text"> هستم </span>
-                </p>
-                <p class="buyad-expire">
-                  <span class="red-text">
-                    <i class="fas fa-hourglass-half"></i>
-                    <span v-text="buyAd.remaining_time + ' ساعت '"></span>
-                  </span>
-                  دیگر فرصت پاسخ گویی شما به این خریدار
-                </p>
-                <p class="buyad-notice">
-                  درصورت داشتن این محصول به من پیام دهید.
-                </p>
-                <button
-                  @click="openChat(buyAd)"
-                  class="buyad-button"
-                  :id="'loader-' + buyAd.id"
-                >
-                  <span>
-                    <span>
-                      <span class="fas fa-comment-alt"></span>
-                      پیام به خریدار
+            <div v-else>
+              <div class="user-information-wrapper col-xs-12">
+                <div class="user-information-content">
+                  <div class="user-content">
+                    <i class="fa fa-user-circle"></i>
+                    <span
+                      class="user-name-link"
+                      v-text="buyAd.first_name + ' ' + buyAd.last_name"
+                    >
                     </span>
-                    <span class="hide-reply"> کمی صبر کنید... </span>
-                  </span>
-                </button>
-                <!-- <button
+                  </div>
+                </div>
+              </div>
+              <div class="buyad-main col-xs-12">
+                <div class="main-background-buyad">
+                  <p class="buyad-info">
+                    این درخواست فقط برای
+                    <span class="red-text"> کاربران ویژه </span>
+                    قابل نمایش است
+                  </p>
+                  <p class="buyad-notice">
+                    برای مشاهده لطفا حساب کاربری خود را ارتقا دهد
+                  </p>
+                </div>
+                <div class="row golden-info-text">
+                  <p class="buyad-info">
+                    خریدار
+
+                    <span v-text="buyAd.subcategory_name"></span>
+                    <span v-if="buyAd.name" class="gray-text"> از نوع </span>
+                    <span v-if="buyAd.name" v-text="buyAd.name"></span>
+                    <span class="gray-text"> هستم </span>
+                  </p>
+
+                  <button
+                    @click="openGoldenChatRestrictionModal()"
+                    class="buyad-button"
+                  >
+                    <i class="fas fa-comment-alt"></i>
+                    پیام به خریدار
+                  </button>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li
+            class="contact-item"
+            v-for="(buyAd, index) in buyAdsFilter"
+            :key="index"
+          >
+            <div v-if="!buyAd.expired">
+              <div class="user-information-wrapper col-xs-12">
+                <div class="user-information-content">
+                  <div class="user-content">
+                    <i class="fa fa-user-circle"></i>
+                    <span
+                      class="user-name-link"
+                      v-text="buyAd.first_name + ' ' + buyAd.last_name"
+                    >
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="buyad-main col-xs-12">
+                <div class="row">
+                  <p class="buyad-info">
+                    خریدار
+                    <span
+                      class="red-text"
+                      v-if="buyAd.requirement_amount < 1000"
+                      v-text="buyAd.requirement_amount + ' کیلوگرم '"
+                    ></span>
+                    <span
+                      class="red-text"
+                      v-else-if="buyAd.requirement_amount == 1000"
+                      >یک تن</span
+                    >
+                    <span
+                      v-else
+                      class="red-text"
+                      v-text="
+                        getNumberWithCommas(buyAd.requirement_amount / 1000) +
+                        ' تن '
+                      "
+                    ></span>
+                    <span v-text="buyAd.subcategory_name"></span>
+                    <span v-if="buyAd.name" class="gray-text"> از نوع </span>
+                    <span v-if="buyAd.name" v-text="buyAd.name"></span>
+                    <span class="gray-text"> هستم </span>
+                  </p>
+                  <p class="buyad-expire">
+                    <span class="red-text">
+                      <i class="fas fa-hourglass-half"></i>
+                      <span v-text="buyAd.remaining_time + ' ساعت '"></span>
+                    </span>
+                    دیگر فرصت پاسخ گویی شما به این خریدار
+                  </p>
+                  <p class="buyad-notice">
+                    درصورت داشتن این محصول به من پیام دهید.
+                  </p>
+                  <button
+                    @click="openChat(buyAd)"
+                    class="buyad-button"
+                    :id="'loader-' + buyAd.id"
+                  >
+                    <span>
+                      <span>
+                        <span class="fas fa-comment-alt"></span>
+                        پیام به خریدار
+                      </span>
+                      <span class="hide-reply"> کمی صبر کنید... </span>
+                    </span>
+                  </button>
+                  <!-- <button
                     class="hide-reply buyad-button"
                     :id="'loader-' + buyAd.id"
                     disabled
                   >
                     کمی صبر کنید...
                   </button> -->
-              </div>
-            </div>
-          </div>
-          <div v-else>
-            <div class="user-information-wrapper col-xs-12">
-              <div class="user-information-content">
-                <div class="user-content">
-                  <i class="fa fa-user-circle"></i>
-                  <span
-                    class="user-name-link"
-                    v-text="buyAd.first_name + ' ' + buyAd.last_name"
-                  >
-                  </span>
                 </div>
               </div>
             </div>
-            <div class="buyad-main col-xs-12">
-              <div class="row">
-                <p class="buyad-info">
-                  خریدار
-                  <span
-                    class="red-text"
-                    v-if="buyAd.requirement_amount < 1000"
-                    v-text="buyAd.requirement_amount + ' کیلوگرم '"
-                  ></span>
-                  <span
-                    class="red-text"
-                    v-else-if="buyAd.requirement_amount == 1000"
-                    >یک تن</span
-                  >
-                  <span
-                    v-else
-                    class="red-text"
-                    v-text="
-                      getNumberWithCommas(buyAd.requirement_amount / 1000) +
-                      ' تن '
-                    "
-                  ></span>
-                  <span v-text="buyAd.subcategory_name"></span>
-                  <span v-if="buyAd.name" class="gray-text"> از نوع </span>
-                  <span v-if="buyAd.name" v-text="buyAd.name"></span>
-                  <span class="gray-text"> هستم </span>
-                </p>
+            <div v-else>
+              <div class="user-information-wrapper col-xs-12">
+                <div class="user-information-content">
+                  <div class="user-content">
+                    <i class="fa fa-user-circle"></i>
+                    <span
+                      class="user-name-link"
+                      v-text="buyAd.first_name + ' ' + buyAd.last_name"
+                    >
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="buyad-main col-xs-12">
+                <div class="row">
+                  <p class="buyad-info">
+                    خریدار
+                    <span
+                      class="red-text"
+                      v-if="buyAd.requirement_amount < 1000"
+                      v-text="buyAd.requirement_amount + ' کیلوگرم '"
+                    ></span>
+                    <span
+                      class="red-text"
+                      v-else-if="buyAd.requirement_amount == 1000"
+                      >یک تن</span
+                    >
+                    <span
+                      v-else
+                      class="red-text"
+                      v-text="
+                        getNumberWithCommas(buyAd.requirement_amount / 1000) +
+                        ' تن '
+                      "
+                    ></span>
+                    <span v-text="buyAd.subcategory_name"></span>
+                    <span v-if="buyAd.name" class="gray-text"> از نوع </span>
+                    <span v-if="buyAd.name" v-text="buyAd.name"></span>
+                    <span class="gray-text"> هستم </span>
+                  </p>
 
-                <p class="buyad-notice red-text">
-                  فرصت پاسخ گویی شما به این خریدار به پایان رسیده است
-                </p>
-                <button class="buyad-button disable">
-                  <i class="fas fa-comment-alt"></i>
-                  پیام به خریدار
-                </button>
+                  <p class="buyad-notice red-text">
+                    فرصت پاسخ گویی شما به این خریدار به پایان رسیده است
+                  </p>
+                  <button class="buyad-button disable">
+                    <i class="fas fa-comment-alt"></i>
+                    پیام به خریدار
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        </li>
-      </ul>
+          </li>
+          <li class="col-xs-12 static-item">
+            <i class="fa fa-list-alt"></i>
+            <router-link
+              tag="button"
+              class="buyad-button"
+              :to="{ name: 'buyAdRequestsSeller' }"
+            >
+              همه درخواست های خرید
+              <i class="fa fa-arrow-left"></i>
+            </router-link>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>

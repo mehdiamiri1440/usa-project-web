@@ -171,11 +171,9 @@ label {
 
 <template>
   <div>
-       
-
-      <div class="col-xs-12">
-        <div class="text-center">
-           <div class="text-input-wrapper">
+    <div class="col-xs-12">
+      <div class="text-center">
+        <div class="text-input-wrapper">
           <p>
             <strong>
               به دنبال
@@ -184,25 +182,22 @@ label {
             </strong>
           </p>
         </div>
-          <div class="event-text brand-text">
-            <strong>همین حالا محصول خود را ثبت کنید</strong>
-          </div>
-          <div class="arrow-icon">
-            <i class="fa fa-arrow-down"></i>
-          </div>
-          <button
-            v-if="!$parent.isStartLoading"
-            class="submit-button active"
-            @click.prevent="$parent.startRegisterProductSubmited()"
-          >
-            <i class="fa fa-plus-square"></i> 
-           <span> 
-             ثبت محصول جدید
-            </span>
-         </button>
-          <div v-else class="loading-submit">
-            <img src="../../../../../../img/gif/loading.gif" />
-          </div>
+        <div class="event-text brand-text">
+          <strong>همین حالا محصول خود را ثبت کنید</strong>
+        </div>
+        <div class="arrow-icon">
+          <i class="fa fa-arrow-down"></i>
+        </div>
+        <button
+          v-if="!$parent.isStartLoading"
+          class="submit-button active"
+          @click.prevent="$parent.startRegisterProductSubmited()"
+        >
+          <i class="fa fa-plus-square"></i>
+          <span> ثبت محصول جدید </span>
+        </button>
+        <div v-else class="loading-submit">
+          <img src="../../../../../../img/gif/loading.gif" />
         </div>
       </div>
     </div>

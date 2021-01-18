@@ -858,6 +858,9 @@ export default {
         $(".list-notice button").tooltip();
       }, 100);
     },
+    scrollToTop() {
+      window.scrollTo(0, 0);
+    },
   },
   mounted() {
     this.init();

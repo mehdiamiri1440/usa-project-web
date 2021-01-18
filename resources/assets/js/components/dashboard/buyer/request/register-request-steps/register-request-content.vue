@@ -86,7 +86,7 @@ export default {
     },
     formValidator: function () {
       if (!this.requirement_amount) {
-        this.errors.requirement_amount = "لطفا میزان موجودی را وارد کنید.";
+        this.errors.requirement_amount = "لطفا میزان نیازمندی را وارد کنید.";
       }
 
       if (
