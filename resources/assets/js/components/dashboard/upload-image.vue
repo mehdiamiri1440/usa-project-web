@@ -665,8 +665,11 @@ export default {
             .then((file) => {
               self.getOrientation(newFile.file, function (orientation) {
                 if (orientation != 1) {
+                  finalOrientation = 1;
+                }else if(orientation == 6){
                   finalOrientation = 8;
                 }
+
                 loadImage(file, {
                   orientation: finalOrientation,
                   meta: true,
