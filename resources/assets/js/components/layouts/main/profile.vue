@@ -784,7 +784,12 @@ p.response-rate span {
     </header>
 
     <main id="main" class="container">
-      <section class="main-content" itemscope itemprop="Person" itemtype="http://schema.org/Person">
+      <section
+        class="main-content"
+        itemscope
+        itemprop="Person"
+        itemtype="http://schema.org/Person"
+      >
         <div class="profile-main-content-item">
           <div class="header-content col-xs-12">
             <div class="image_user_wrapper col-xs-4 col-sm-3 col-lg-2">
@@ -813,7 +818,9 @@ p.response-rate span {
                 </div>
               </div>
               <div v-else class="user-image">
-                <div class="placeholder-content default-wrapper-main-image"></div>
+                <div
+                  class="placeholder-content default-wrapper-main-image"
+                ></div>
               </div>
               <div
                 class="profile-rating-box-wrapper hidden-xs"
@@ -828,16 +835,23 @@ p.response-rate span {
                       <span v-for="(star, index) in 5" :key="index">
                         <span v-text="index + 1"></span>
 
-                        <i class="fa fa-star" :class="{ 'yellow-text': index < starScore }"></i>
+                        <i
+                          class="fa fa-star"
+                          :class="{ 'yellow-text': index < starScore }"
+                        ></i>
                       </span>
                     </p>
                     <p class="review-count-wrapper">
-                      <span v-text="profileOwnerStatistics.rating_info.total_count"></span>
+                      <span
+                        v-text="profileOwnerStatistics.rating_info.total_count"
+                      ></span>
                       نظر
                     </p>
                   </div>
                   <span class="rating-score pull-right">
-                    <span v-text="profileOwnerStatistics.rating_info.avg_score"></span>
+                    <span
+                      v-text="profileOwnerStatistics.rating_info.avg_score"
+                    ></span>
                   </span>
                 </div>
               </div>
@@ -856,11 +870,20 @@ p.response-rate span {
               class="info_user_wrapper_mobile hidden-sm hidden-md hidden-lg col-xs-8 col-sm-4 col-md-3"
             >
               <div class="row">
-                <div class="col-xs-6 text-center" v-if="profileOwnerStatistics.reputation_score">
-                  <div class="info-num" v-text="profileOwnerStatistics.reputation_score"></div>اعتبار
+                <div
+                  class="col-xs-6 text-center"
+                  v-if="profileOwnerStatistics.reputation_score"
+                >
+                  <div
+                    class="info-num"
+                    v-text="profileOwnerStatistics.reputation_score"
+                  ></div>
+                  اعتبار
                 </div>
                 <div class="col-xs-6 text-center" v-else>
-                  <div class="info-num placeholder-content content-min-width margin-auto"></div>
+                  <div
+                    class="info-num placeholder-content content-min-width margin-auto"
+                  ></div>
                 </div>
 
                 <div
@@ -869,7 +892,11 @@ p.response-rate span {
                     profileOwner.user_info.is_seller && profileOwnerStatistics
                   "
                 >
-                  <div class="info-num" v-text="profileOwnerStatistics.product_count"></div>محصولات
+                  <div
+                    class="info-num"
+                    v-text="profileOwnerStatistics.product_count"
+                  ></div>
+                  محصولات
                 </div>
 
                 <div
@@ -878,16 +905,24 @@ p.response-rate span {
                     profileOwner.user_info.is_buyer && profileOwnerStatistics
                   "
                 >
-                  <div class="info-num" v-text="profileOwnerStatistics.buyAd_count"></div>درخواست ها
+                  <div
+                    class="info-num"
+                    v-text="profileOwnerStatistics.buyAd_count"
+                  ></div>
+                  درخواست ها
                 </div>
 
                 <div class="col-xs-6 text-center" v-else>
-                  <div class="info-num placeholder-content content-min-width margin-auto"></div>
+                  <div
+                    class="info-num placeholder-content content-min-width margin-auto"
+                  ></div>
                 </div>
 
                 <div class="col-xs-12">
                   <div v-if="!profileOwner.user_info.id">
-                    <div class="default-boxing-size placeholder-content content-full-width"></div>
+                    <div
+                      class="default-boxing-size placeholder-content content-full-width"
+                    ></div>
                   </div>
 
                   <div v-else>
@@ -916,14 +951,21 @@ p.response-rate span {
                       </router-link>
                     </div>
 
-                    <a v-else href="#" @click.prevent="openChat()" class="green-button edit">
+                    <a
+                      v-else
+                      href="#"
+                      @click.prevent="openChat()"
+                      class="green-button edit"
+                    >
                       <i class="fa fa-envelope"></i>
                       ارسال پیام
                     </a>
                   </div>
 
                   <div v-if="!profileOwner.user_info.id">
-                    <div class="placeholder-content padding-15-0 content-full-width"></div>
+                    <div
+                      class="placeholder-content padding-15-0 content-full-width"
+                    ></div>
                   </div>
 
                   <button
@@ -939,7 +981,9 @@ p.response-rate span {
               </div>
             </div>
 
-            <div class="content_user_wrapper hidden-xs col-xs-6 col-sm-9 col-lg-10">
+            <div
+              class="content_user_wrapper hidden-xs col-xs-6 col-sm-9 col-lg-10"
+            >
               <div class="user-contents row">
                 <div class="title_content col-xs-12">
                   <div class="back_page first-back col-xs-12 col-sm-4 col-md-3">
@@ -953,7 +997,8 @@ p.response-rate span {
                           'click on back button'
                         )
                       "
-                    >بازگشت به صفحه قبل</a>
+                      >بازگشت به صفحه قبل</a
+                    >
                   </div>
 
                   <h1
@@ -962,9 +1007,11 @@ p.response-rate span {
                     itemprop="name"
                   >
                     <span>
-                      {{ profileOwner.user_info.first_name +
-                      ' ' +
-                      profileOwner.user_info.last_name}}
+                      {{
+                        profileOwner.user_info.first_name +
+                        " " +
+                        profileOwner.user_info.last_name
+                      }}
                       <button
                         v-if="profileOwner.user_info.is_verified"
                         @click.prevent
@@ -979,23 +1026,36 @@ p.response-rate span {
                       </button>
                     </span>
 
-                    <span class="valid-seller" v-if="profileOwnerStatistics.validated_seller">
+                    <span
+                      class="valid-seller"
+                      v-if="profileOwnerStatistics.validated_seller"
+                    >
                       <i class="fa fa-check-circle"></i>
                       فروشنده معتبر
                     </span>
-                    <p v-if="profileOwnerStatistics.response_rate" class="response-rate">
+                    <p
+                      v-if="profileOwnerStatistics.response_rate"
+                      class="response-rate"
+                    >
                       احتمال پاسخ گویی
-                      <span v-text="'%' + profileOwnerStatistics.response_rate"></span>
+                      <span
+                        v-text="'%' + profileOwnerStatistics.response_rate"
+                      ></span>
                     </p>
                   </h1>
 
-                  <h1 v-else class="h-20 placeholder-content content-half-width"></h1>
+                  <h1
+                    v-else
+                    class="h-20 placeholder-content content-half-width"
+                  ></h1>
                 </div>
 
                 <div class="title_content col-xs-12">
                   <div class="back_page col-xs-12 col-sm-4 col-md-3">
                     <div v-if="!profileOwner.user_info.id">
-                      <div class="default-boxing-size placeholder-content content-full-width"></div>
+                      <div
+                        class="default-boxing-size placeholder-content content-full-width"
+                      ></div>
                     </div>
                     <div v-else>
                       <div
@@ -1023,14 +1083,21 @@ p.response-rate span {
                         </router-link>
                       </div>
 
-                      <a v-else href="#" @click.prevent="openChat()" class="green-button edit">
+                      <a
+                        v-else
+                        href="#"
+                        @click.prevent="openChat()"
+                        class="green-button edit"
+                      >
                         <i class="fa fa-envelope"></i>
                         ارسال پیام
                       </a>
                     </div>
 
                     <div v-if="!profileOwner.user_info.id">
-                      <div class="default-boxing-size placeholder-content content-full-width"></div>
+                      <div
+                        class="default-boxing-size placeholder-content content-full-width"
+                      ></div>
                     </div>
                     <button
                       v-else
@@ -1051,7 +1118,9 @@ p.response-rate span {
                           <span v-text="profileOwner.activity_domain"></span>
                         </p>
                         <p v-else>
-                          <span class="h-20 placeholder-content content-full-width"></span>
+                          <span
+                            class="h-20 placeholder-content content-full-width"
+                          ></span>
                         </p>
                       </div>
 
@@ -1069,21 +1138,27 @@ p.response-rate span {
                         </p>
 
                         <p v-else>
-                          <span class="h-20 placeholder-content content-full-width"></span>
+                          <span
+                            class="h-20 placeholder-content content-full-width"
+                          ></span>
                         </p>
                       </div>
 
                       <div class="col-xs-6 margin-15-0 pull-right">
                         <p v-if="profileOwner.profile.is_company">
                           نام شرکت
-                          <span v-text="profileOwner.profile.company_name"></span>
+                          <span
+                            v-text="profileOwner.profile.company_name"
+                          ></span>
                         </p>
                       </div>
 
                       <div class="col-xs-6 margin-15-0">
                         <p v-if="profileOwner.profile.is_company">
                           شماره ثبت
-                          <span v-text="profileOwner.profile.company_register_code"></span>
+                          <span
+                            v-text="profileOwner.profile.company_register_code"
+                          ></span>
                         </p>
                       </div>
                     </div>
@@ -1092,7 +1167,9 @@ p.response-rate span {
               </div>
             </div>
 
-            <div class="content_user_wrapper_mobile hidden-sm hidden-md hidden-lg col-xs-12">
+            <div
+              class="content_user_wrapper_mobile hidden-sm hidden-md hidden-lg col-xs-12"
+            >
               <div class="user-contents row">
                 <div class="title_content col-xs-12">
                   <div class="back_page col-xs-12 col-sm-4">
@@ -1105,17 +1182,26 @@ p.response-rate span {
                       <span v-text="copyLinkText"></span>
                     </button>
 
-                    <a href="#" class="green-button edit" @click="copyProfileLinkToClipBoard">
+                    <a
+                      href="#"
+                      class="green-button edit"
+                      @click="copyProfileLinkToClipBoard"
+                    >
                       <i class="fa fa-pencil-alt"></i>
                       ویرایش پروفایل
                     </a>
                   </div>
 
-                  <h1 v-if="profileOwner.user_info" class="content_title col-xs-12 col-sm-8">
+                  <h1
+                    v-if="profileOwner.user_info"
+                    class="content_title col-xs-12 col-sm-8"
+                  >
                     <span>
-                      {{ profileOwner.user_info.first_name +
-                      ' ' +
-                      profileOwner.user_info.last_name}}
+                      {{
+                        profileOwner.user_info.first_name +
+                        " " +
+                        profileOwner.user_info.last_name
+                      }}
                       <button
                         v-if="profileOwner.user_info.is_verified"
                         @click.prevent
@@ -1130,14 +1216,22 @@ p.response-rate span {
                       </button>
                     </span>
 
-                    <span class="valid-seller" v-if="profileOwnerStatistics.validated_seller">
+                    <span
+                      class="valid-seller"
+                      v-if="profileOwnerStatistics.validated_seller"
+                    >
                       <i class="fa fa-check-circle"></i>
                       فروشنده معتبر
                     </span>
 
-                    <p v-if="profileOwnerStatistics.response_rate" class="response-rate">
+                    <p
+                      v-if="profileOwnerStatistics.response_rate"
+                      class="response-rate"
+                    >
                       احتمال پاسخ گویی
-                      <span v-text="'%' + profileOwnerStatistics.response_rate"></span>
+                      <span
+                        v-text="'%' + profileOwnerStatistics.response_rate"
+                      ></span>
                     </p>
                   </h1>
                   <h1
@@ -1154,7 +1248,10 @@ p.response-rate span {
                           <span v-for="(star, index) in 5" :key="index">
                             <span v-text="index + 1"></span>
 
-                            <i class="fa fa-star" :class="{ 'yellow-text': index < starScore }"></i>
+                            <i
+                              class="fa fa-star"
+                              :class="{ 'yellow-text': index < starScore }"
+                            ></i>
                           </span>
                         </p>
                         <p class="review-count-wrapper">
@@ -1167,7 +1264,9 @@ p.response-rate span {
                         </p>
                       </div>
                       <div class="rating-score pull-right">
-                        <span v-text="profileOwnerStatistics.rating_info.avg_score"></span>
+                        <span
+                          v-text="profileOwnerStatistics.rating_info.avg_score"
+                        ></span>
                       </div>
                     </div>
                   </div>
@@ -1178,7 +1277,10 @@ p.response-rate span {
                           حوزه ی فعالیت :
                           <span v-text="profileOwner.activity_domain"></span>
                         </p>
-                        <span v-else class="placeholder-content content-full-width"></span>
+                        <span
+                          v-else
+                          class="placeholder-content content-full-width"
+                        ></span>
                       </div>
 
                       <div class="col-xs-6">
@@ -1193,20 +1295,27 @@ p.response-rate span {
                             "
                           ></span>
                         </p>
-                        <span v-else class="placeholder-content content-full-width"></span>
+                        <span
+                          v-else
+                          class="placeholder-content content-full-width"
+                        ></span>
                       </div>
 
                       <div class="col-xs-6 pull-right margin-15-0">
                         <p v-if="profileOwner.profile.is_company">
                           نام شرکت :
-                          <span v-text="profileOwner.profile.company_name"></span>
+                          <span
+                            v-text="profileOwner.profile.company_name"
+                          ></span>
                         </p>
                       </div>
 
                       <div class="col-xs-6 margin-15-0">
                         <p v-if="profileOwner.profile.is_company">
                           شماره ثبت :
-                          <span v-text="profileOwner.profile.company_register_code"></span>
+                          <span
+                            v-text="profileOwner.profile.company_register_code"
+                          ></span>
                         </p>
                       </div>
                     </div>
@@ -1221,7 +1330,11 @@ p.response-rate span {
               <button @click.prevent="showProfileOwnerDescription()">
                 <div class="inside-links buskool-icon">
                   <i aria-hidden="true">
-                    <svg width="21.75" height="21.68" viewBox="0 0 24.965 30.574">
+                    <svg
+                      width="21.75"
+                      height="21.68"
+                      viewBox="0 0 24.965 30.574"
+                    >
                       <g
                         id="buskool-icon"
                         data-name="buskool"
@@ -1280,17 +1393,23 @@ p.response-rate span {
                 <button
                   :disabled="!profileOwner.user_info.id"
                   @click.prevent="showProfileOwnerReviews()"
-                >نظرات کاربران</button>
+                >
+                  نظرات کاربران
+                </button>
               </li>
 
               <li class="list-item" :class="{ active: profileDescription }">
-                <button @click.prevent="showProfileOwnerDescription()">اطلاعات پایه</button>
+                <button @click.prevent="showProfileOwnerDescription()">
+                  اطلاعات پایه
+                </button>
               </li>
             </ul>
           </div>
           <div class="contents col-xs-12" v-if="profileDescription === true">
             <div class="description-wrapper col-xs-12">
-              <p v-if="profileOwner.profile.description" class="title-content">توضیحات</p>
+              <p v-if="profileOwner.profile.description" class="title-content">
+                توضیحات
+              </p>
 
               <div
                 v-if="profileOwner.profile.description"
@@ -1298,9 +1417,15 @@ p.response-rate span {
                 v-text="profileOwner.profile.description"
               ></div>
               <div v-else>
-                <span class="content-default-width placeholder-content margin-15 h-20"></span>
-                <span class="content-half-width placeholder-content margin-0-15 h-20"></span>
-                <span class="content-full-width placeholder-content margin-15"></span>
+                <span
+                  class="content-default-width placeholder-content margin-15 h-20"
+                ></span>
+                <span
+                  class="content-half-width placeholder-content margin-0-15 h-20"
+                ></span>
+                <span
+                  class="content-full-width placeholder-content margin-15"
+                ></span>
               </div>
             </div>
             <div class="my-products col-xs-12">
@@ -1323,7 +1448,10 @@ p.response-rate span {
                 </div>
               </section>
 
-              <section class="col-xs-12" v-else-if="products.length === 0 && !loading">
+              <section
+                class="col-xs-12"
+                v-else-if="products.length === 0 && !loading"
+              >
                 <div class="col-xs-12">
                   <div class="wrapper_no_pro">
                     <div class="content_no_pic">
@@ -1347,7 +1475,9 @@ p.response-rate span {
                       class="col-xs-12 padding-15 margin-15-0 default-item-wrapper shadow-content"
                     >
                       <div class="default-user-contents col-xs-12 padding-0">
-                        <div class="placeholder-content default-article-user-image pull-right"></div>
+                        <div
+                          class="placeholder-content default-article-user-image pull-right"
+                        ></div>
 
                         <span
                           class="padding-top-5 placeholder-content margin-15 pull-right content-min-width"
@@ -1358,19 +1488,31 @@ p.response-rate span {
                         ></span>
                       </div>
 
-                      <div class="default-article-contents padding-0 margin-top-10 col-xs-12">
+                      <div
+                        class="default-article-contents padding-0 margin-top-10 col-xs-12"
+                      >
                         <div class="default-wrapper-main-image pull-right">
-                          <span class="default-main-image placeholder-content"></span>
+                          <span
+                            class="default-main-image placeholder-content"
+                          ></span>
                         </div>
 
                         <div class="default-main-article-content">
-                          <span class="content-half-width placeholder-content"></span>
+                          <span
+                            class="content-half-width placeholder-content"
+                          ></span>
 
-                          <span class="content-default-width placeholder-content"></span>
+                          <span
+                            class="content-default-width placeholder-content"
+                          ></span>
 
-                          <span class="content-min-width placeholder-content mobile-hidden"></span>
+                          <span
+                            class="content-min-width placeholder-content mobile-hidden"
+                          ></span>
 
-                          <span class="content-half-width placeholder-content"></span>
+                          <span
+                            class="content-half-width placeholder-content"
+                          ></span>
                         </div>
                         <span
                           class="margin-top-10 placeholder-content default-button-min-with pull-left hidden-afetr-mobile-hidden"
@@ -1383,7 +1525,7 @@ p.response-rate span {
             </div>
 
             <div class="cerificates col-xs-12">
-              <p class="title-content">عکس های مرتبط :</p>
+              <p class="title-content">تصاویر مرتبط :</p>
 
               <div v-if="profileOwner.relateds[0]">
                 <PopupImageCertificate
@@ -1492,7 +1634,10 @@ p.response-rate span {
                     حذف شده است
                   </p>
                 </div>
-                <div class="reviews-wrapper" v-if="reviews.comments.length > 0 && !reviewsLoader">
+                <div
+                  class="reviews-wrapper"
+                  v-if="reviews.comments.length > 0 && !reviewsLoader"
+                >
                   <article-review
                     v-for="(comment, index) in reviews.comments"
                     :key="index"
@@ -1501,7 +1646,10 @@ p.response-rate span {
                 </div>
                 <div class="reviews-wrapper" v-else-if="reviewsLoader">
                   <div class="default-review">
-                    <placeholder-article-review v-for="(item, index) in 3" :key="index" />
+                    <placeholder-article-review
+                      v-for="(item, index) in 3"
+                      :key="index"
+                    />
                   </div>
                 </div>
                 <div class="reviews-wrapper" v-else>
@@ -1524,7 +1672,8 @@ p.response-rate span {
                         <router-link
                           :to="{ name: 'register' }"
                           class="green-button hover-effect"
-                        >ثبت نام / ورود سریع</router-link>
+                          >ثبت نام / ورود سریع</router-link
+                        >
                       </div>
                     </div>
                   </div>
@@ -1546,9 +1695,9 @@ import { eventBus } from "../../../router/router";
 
 var visible = false;
 var PopupImage = {
-  data: function() {
+  data: function () {
     return {
-      imgSrcs: ""
+      imgSrcs: "",
     };
   },
   props: ["img", "base"],
@@ -1558,7 +1707,7 @@ var PopupImage = {
     '<img :src="base + img">' +
     "</a>" +
     "</div>",
-  mounted: function() {
+  mounted: function () {
     $(this.$el)
       .parent()
       .magnificPopup({
@@ -1568,31 +1717,31 @@ var PopupImage = {
         gallery: {
           enabled: true,
           navigateByImgClick: true,
-          preload: [0, 1] // Will preload 0 - before current, and 1 after the current image
-        }
+          preload: [0, 1], // Will preload 0 - before current, and 1 after the current image
+        },
       });
-  }
+  },
 };
 var PopupImageCertificate = {
   props: ["img", "base"],
   template: '<a   :href="base + img">' + '<img :src="base + img">' + "</a>",
-  mounted: function() {
-    $(".cerificates > div").each(function() {
+  mounted: function () {
+    $(".cerificates > div").each(function () {
       // the containers for all your galleries
       $(this).magnificPopup({
         delegate: "a", // the selector for gallery item
         type: "image",
         gallery: {
-          enabled: true
-        }
+          enabled: true,
+        },
       });
     });
-  }
+  },
 };
 var OwlCarouselLists = {
-  data: function() {
+  data: function () {
     return {
-      imgSrcs: ""
+      imgSrcs: "",
     };
   },
   props: ["img", "base"],
@@ -1602,13 +1751,13 @@ var OwlCarouselLists = {
     '<img :src="base + img">' +
     "</a>" +
     "</div>",
-  mounted: function() {
+  mounted: function () {
     $(".owl-carousel").owlCarousel({
       loop: false,
       items: 1,
       margin: 10,
       nav: false,
-      dots: true
+      dots: true,
     });
     $(this.$el)
       .parent()
@@ -1620,15 +1769,15 @@ var OwlCarouselLists = {
         gallery: {
           enabled: true,
           navigateByImgClick: true,
-          preload: [0, 1] // Will preload 0 - before current, and 1 after the current image
-        }
+          preload: [0, 1], // Will preload 0 - before current, and 1 after the current image
+        },
       });
-  }
+  },
 };
 var OwlCarousel = {
-  data: function() {
+  data: function () {
     return {
-      imgSrcs: ""
+      imgSrcs: "",
     };
   },
   props: ["img", "base"],
@@ -1638,12 +1787,12 @@ var OwlCarousel = {
     '<img :src="base + img">' +
     "</a>" +
     "</div>",
-  mounted: function() {
+  mounted: function () {
     $(".owl-carousel").owlCarousel({
       loop: false,
       margin: 10,
       nav: true,
-      dots: false
+      dots: false,
     });
     $(this.$el)
       .parent()
@@ -1655,10 +1804,10 @@ var OwlCarousel = {
         gallery: {
           enabled: true,
           navigateByImgClick: true,
-          preload: [0, 1] // Will preload 0 - before current, and 1 after the current image
-        }
+          preload: [0, 1], // Will preload 0 - before current, and 1 after the current image
+        },
       });
-  }
+  },
 };
 
 export default {
@@ -1669,22 +1818,22 @@ export default {
     PopupImageCertificate,
     ProductArticle,
     ArticleReview,
-    PlaceholderArticleReview
+    PlaceholderArticleReview,
   },
   props: ["assets", "str"],
-  data: function() {
+  data: function () {
     return {
       products: {
         main: "",
         user_info: "",
         profile_info: {
-          profile_photo: ""
+          profile_photo: "",
         },
-        photos: []
+        photos: [],
       },
       currentUser: {
         profile: "",
-        user_info: ""
+        user_info: "",
       },
       profileOwner: {
         profile: "",
@@ -1692,7 +1841,7 @@ export default {
         certificates: "",
         relateds: "",
         activity_domain: "",
-        is_buyer: ""
+        is_buyer: "",
       },
       profileDescription: true,
       noProductMsgSignal: false,
@@ -1706,7 +1855,7 @@ export default {
         transaction_count: "",
         product_count: "",
         buyAd_count: "",
-        rating_info: {}
+        rating_info: {},
       },
       statisticsLoader: false,
       getUserName: this.$route.params.user_name,
@@ -1714,26 +1863,26 @@ export default {
       reviewCurrentStep: 0,
       starScore: "",
       reviews: {
-        comments: ""
+        comments: "",
       },
       doDeletereview: false,
       reviewsLoader: false,
       userLogin: true,
       userAllowedReview: false,
-      verifiedUserContent: this.$parent.verifiedUserContent
+      verifiedUserContent: this.$parent.verifiedUserContent,
     };
   },
   methods: {
-    stopLoader: function() {
+    stopLoader: function () {
       eventBus.$emit("isLoading", false);
     },
-    collapseDropDown: function() {
-      $(".profile-list").fadeIn("slow", function() {
+    collapseDropDown: function () {
+      $(".profile-list").fadeIn("slow", function () {
         visible = true;
       });
     },
-    collapseDropDownList: function() {
-      $(".icon-header-list").fadeIn("slow", function() {
+    collapseDropDownList: function () {
+      $(".icon-header-list").fadeIn("slow", function () {
         visible = true;
       });
     },
@@ -1744,7 +1893,7 @@ export default {
         visible = false;
       }
     },
-    init: function() {
+    init: function () {
       var self = this;
       this.getProfileOwnerProducts();
       if (this.isDeviceMobile()) {
@@ -1757,9 +1906,9 @@ export default {
       self.statisticsLoader = true;
       axios
         .post("/get_user_statistics_by_user_name", {
-          user_name: this.$route.params.user_name
+          user_name: this.$route.params.user_name,
         })
-        .then(function(response) {
+        .then(function (response) {
           self.profileOwnerStatistics = response.data.statistics;
 
           if (self.profileOwnerStatistics.rating_info) {
@@ -1771,18 +1920,18 @@ export default {
           }
           self.statisticsLoader = false;
         })
-        .catch(function(err) {
+        .catch(function (err) {
           //
         });
-      axios.post("/user/profile_info").then(response => {
+      axios.post("/user/profile_info").then((response) => {
         this.currentUser = response.data;
       });
 
       axios
         .post("/load_profile_by_user_name", {
-          user_name: this.$route.params.user_name
+          user_name: this.$route.params.user_name,
         })
-        .then(function(response) {
+        .then(function (response) {
           self.profileOwner = response.data;
           self.jsonLDObject = self.createJsonLDObject(self.profileOwner);
           if (self.$parent.userId == self.profileOwner.user_info.id) {
@@ -1792,13 +1941,13 @@ export default {
           }
           self.isUserAuthorizedToPostComment();
         })
-        .catch(function(err) {
+        .catch(function (err) {
           if (err.response.status === 404) {
             window.location.href = "/404";
           }
         });
     },
-    getProfileOwnerProducts: function() {
+    getProfileOwnerProducts: function () {
       this.registerComponentStatistics(
         "profileView",
         "showUserProducts",
@@ -1810,15 +1959,15 @@ export default {
       var self = this;
       axios
         .post("/get_product_list_by_user_name", {
-          user_name: this.$route.params.user_name
+          user_name: this.$route.params.user_name,
         })
-        .then(function(response) {
+        .then(function (response) {
           self.products = response.data.products;
 
           self.loading = false;
         });
     },
-    showProfileOwnerDescription: function() {
+    showProfileOwnerDescription: function () {
       this.registerComponentStatistics(
         "profileView",
         "profileDescription",
@@ -1830,16 +1979,16 @@ export default {
 
       axios
         .post("/load_profile_by_user_name", {
-          user_name: this.$route.params.user_name
+          user_name: this.$route.params.user_name,
         })
-        .then(response => (this.profileOwner = response.data))
-        .catch(function(err) {
+        .then((response) => (this.profileOwner = response.data))
+        .catch(function (err) {
           if (err.response.status == 404) {
             window.location.href = "/404";
           }
         });
     },
-    showProfileOwnerReviews: function() {
+    showProfileOwnerReviews: function () {
       this.profileDescription = false;
       if (this.$parent.userId) {
         this.getReviews();
@@ -1847,7 +1996,7 @@ export default {
         this.userLogin = false;
       }
     },
-    refreshProduct: function(productId) {
+    refreshProduct: function (productId) {
       this.registerComponentStatistics(
         "profileView",
         "RefreshProduct",
@@ -1858,9 +2007,9 @@ export default {
 
       axios
         .post("/refresh_my_product_by_id", {
-          product_id: productId
+          product_id: productId,
         })
-        .then(function(response) {
+        .then(function (response) {
           if (response.data.status === true) {
             self.popUpMsg =
               "محصول شما بروز رسانی شد و در صدر لیست محصولات قرار گرفت.";
@@ -1873,14 +2022,14 @@ export default {
             $("#custom-main-modal").modal("show");
           }
         })
-        .catch(function(err) {
+        .catch(function (err) {
           self.popUpMsg =
             "هم اکنون قادر به انجام عملیات نیستیم.دوباره تلاش کنید.";
           eventBus.$emit("submitSuccess", self.popUpMsg);
           $("#custom-main-modal").modal("show");
         });
     },
-    copyProfileLinkToClipBoard: function() {
+    copyProfileLinkToClipBoard: function () {
       this.registerComponentStatistics(
         "profileView",
         "CopyProfileLink",
@@ -1918,7 +2067,7 @@ export default {
         }
       }
     },
-    isDeviceMobile: function() {
+    isDeviceMobile: function () {
       if (
         navigator.userAgent.match(/Android/i) ||
         navigator.userAgent.match(/webOS/i) ||
@@ -1933,7 +2082,7 @@ export default {
         return false;
       }
     },
-    openChat: function() {
+    openChat: function () {
       this.registerComponentStatistics(
         "profileView",
         "openChat",
@@ -1945,7 +2094,7 @@ export default {
         first_name: this.profileOwner.user_info.first_name,
         last_name: this.profileOwner.user_info.last_name,
         profile_photo: this.profileOwner.profile.profile_photo,
-        user_name: this.profileOwner.user_info.user_name
+        user_name: this.profileOwner.user_info.user_name,
       };
       var self = this;
 
@@ -1958,7 +2107,7 @@ export default {
         eventBus.$emit("modal", "sendMsg");
       }
     },
-    createJsonLDObject: function(profileOwner) {
+    createJsonLDObject: function (profileOwner) {
       var fullName =
         profileOwner.user_info.first_name +
         " " +
@@ -1967,10 +2116,10 @@ export default {
         profileOwner.user_info.province + " - " + profileOwner.user_info.city;
 
       var images = [];
-      profileOwner.certificates.forEach(function(photo) {
+      profileOwner.certificates.forEach(function (photo) {
         images.push("https://buskool.com/storage/" + photo);
       });
-      profileOwner.relateds.forEach(function(photo) {
+      profileOwner.relateds.forEach(function (photo) {
         images.push("https://buskool.com/storage/" + photo);
       });
 
@@ -1993,7 +2142,7 @@ export default {
         "@type": "Person",
         address: {
           "@type": "PostalAddress",
-          addressLocality: address
+          addressLocality: address,
         },
         image: images,
         jobTitle: jobTitle,
@@ -2001,25 +2150,29 @@ export default {
         gender: gender,
         nationality: "Iranian",
         url:
-          "http://www.buskool.com/profile/" + profileOwner.user_info.user_name
+          "http://www.buskool.com/profile/" + profileOwner.user_info.user_name,
       };
 
       return jsondl;
     },
-    registerComponentStatistics: function(categoryName, actionName, labelName) {
+    registerComponentStatistics: function (
+      categoryName,
+      actionName,
+      labelName
+    ) {
       gtag("event", actionName, {
         event_category: categoryName,
-        event_label: labelName
+        event_label: labelName,
       });
     },
-    activeReviewModal: function() {
+    activeReviewModal: function () {
       let userImage = "";
       let selectedUserData = {
         id: this.profileOwner.user_info.id,
         name:
           this.profileOwner.user_info.first_name +
           " " +
-          this.profileOwner.user_info.last_name
+          this.profileOwner.user_info.last_name,
       };
 
       if (this.profileOwner.profile.profile_photo) {
@@ -2029,24 +2182,24 @@ export default {
 
       eventBus.$emit("reviewUserData", selectedUserData);
     },
-    isUserAuthorizedToPostComment: function() {
+    isUserAuthorizedToPostComment: function () {
       let self = this;
       let userObg = {
-        user_id: this.profileOwner.user_info.id
+        user_id: this.profileOwner.user_info.id,
       };
       axios
         .post("/profile/is-user-authorized-to-post-comment", userObg)
-        .then(function(response) {
+        .then(function (response) {
           self.userAllowedReview = response.data.is_allowed;
         });
     },
-    getReviews: function() {
+    getReviews: function () {
       this.reviewsLoader = true;
       axios
         .post("/profile/get-user-comments", {
-          user_id: this.profileOwner.user_info.id
+          user_id: this.profileOwner.user_info.id,
         })
-        .then(response => {
+        .then((response) => {
           this.doDeletereview = false;
           this.reviewsLoader = false;
           this.reviews = response.data;
@@ -2055,46 +2208,46 @@ export default {
     activeComponentTooltip() {
       $(".verified-user")
         .popover({ trigger: "manual", html: true, animation: false })
-        .on("mouseenter", function() {
+        .on("mouseenter", function () {
           var _this = this;
           $(this).popover("show");
-          $(".popover").on("mouseleave", function() {
+          $(".popover").on("mouseleave", function () {
             $(_this).popover("hide");
           });
         })
-        .on("mouseleave", function() {
+        .on("mouseleave", function () {
           var _this = this;
-          setTimeout(function() {
+          setTimeout(function () {
             if (!$(".popover:hover").length) {
               $(_this).popover("hide");
             }
           }, 300);
         });
-    }
+    },
   },
   mounted() {
     this.init();
     this.$nextTick(this.stopLoader());
   },
-  updated: function() {
+  updated: function () {
     this.$nextTick(this.stopLoader());
   },
   created() {
     gtag("config", "UA-129398000-1", { page_path: "/profile" });
 
     document.addEventListener("click", this.documentClick);
-    eventBus.$on("userAllowedReview", $event => {
+    eventBus.$on("userAllowedReview", ($event) => {
       this.userAllowedReview = $event;
     });
   },
   watch: {
-    "profileOwner.user_info": function() {
+    "profileOwner.user_info": function () {
       if (this.profileOwner.user_info) {
         setTimeout(() => {
           this.activeComponentTooltip();
         }, 10);
       }
-    }
+    },
   },
   metaInfo() {
     let fullName =
@@ -2131,51 +2284,51 @@ export default {
         {
           name: "description",
           content:
-            " محصولات کشاورزی و تصاویر محصولات من را در این صفحه مشاهده کنید"
+            " محصولات کشاورزی و تصاویر محصولات من را در این صفحه مشاهده کنید",
         },
         {
           name: "robots",
-          content: indexingStatus
+          content: indexingStatus,
         },
         {
           property: "og:type",
-          content: "website"
+          content: "website",
         },
         {
           property: "og:image:height",
-          content: "256"
+          content: "256",
         },
         {
           property: "og:image:width",
-          content: "256"
+          content: "256",
         },
         {
           property: "og:image:type",
-          content: "image/jpeg"
+          content: "image/jpeg",
         },
         {
           property: "og:description",
-          content: "صفحه ی پروفایل کاربران باسکول"
+          content: "صفحه ی پروفایل کاربران باسکول",
         },
         {
           property: "og:site_name",
-          content: "باسکول"
+          content: "باسکول",
         },
         {
           property: "og:url",
-          content: url
+          content: url,
         },
         {
           property: "og:title",
-          content: fullName
+          content: fullName,
         },
         {
           property: "og:image",
-          content: profilePhoto
-        }
+          content: profilePhoto,
+        },
       ],
-      link: [{ rel: "canonical", href: url }]
+      link: [{ rel: "canonical", href: url }],
     };
-  }
+  },
 };
 </script>

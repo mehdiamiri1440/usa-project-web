@@ -1263,7 +1263,6 @@ export default {
     $("#imgInp").change(function () {
       show_image_preview(this);
     });
-
     if (this.isOsIOS()) {
       $("#phone-number").attr("type", "text");
       $("#company-number").attr("type", "text");

@@ -114,7 +114,7 @@ label {
 
     <div class="form-contents bg-white col-xs-12">
       <label for="product-type" class="description">
-        <span> لطفا فقط عکس های مرتبط با محصول خود را ثبت کنید </span>
+        <span> لطفا فقط تصاویر مرتبط با محصول خود را ثبت کنید </span>
       </label>
       <div class="text-input-wrapper">
         <UploadFile
@@ -128,6 +128,7 @@ label {
           :uploadOCompress="1024 * 1024"
           :uploadUploadAuto="false"
           :imageWrapperSize="'col-xs-6'"
+          :isImageReset="filesReset"
         />
       </div>
 
@@ -225,9 +226,11 @@ label {
 <script>
 import UploadFile from "../../../upload-image";
 export default {
+  props: ["resetAllImages"],
   data() {
     return {
       files: [],
+      filesReset: false,
       isCompressor: false,
       errors: {
         images_count: [],
@@ -311,6 +314,9 @@ export default {
     },
   },
   watch: {
+    resetAllImages() {
+      this.filesReset = true;
+    },
     files(files) {
       if (!this.isCompressor) {
         this.imageValidator(files);

@@ -664,12 +664,12 @@ export default {
             .compress(newFile.file, Options)
             .then((file) => {
               self.getOrientation(newFile.file, function (orientation) {
-                if (orientation != 1) {
-                  finalOrientation = 1;
-                }else if(orientation == 6){
+                // console.log(orientation);
+                if (orientation == 6) {
                   finalOrientation = 8;
+                } else if (orientation != 1) {
+                  finalOrientation = 1;
                 }
-
                 loadImage(file, {
                   orientation: finalOrientation,
                   meta: true,

@@ -398,7 +398,10 @@
             />
             <StockAndPrice v-else-if="currentStep == 2" />
             <Location :provinces="provinces" v-else-if="currentStep == 3" />
-            <ProductImage v-show="currentStep == 4" />
+            <ProductImage
+              :resetAllImages="resetAllImages"
+              v-show="currentStep == 4"
+            />
             <Terms v-if="currentStep == 5" />
             <MoreDetails v-else-if="currentStep == 6" />
           </main>
@@ -434,7 +437,7 @@ export default {
   },
   data: function () {
     return {
-      currentStep: 4,
+      currentStep: 0,
       currentUser: {
         profile: "",
         user_info: "",
@@ -507,6 +510,7 @@ export default {
       buyAds: [],
       load: true,
       successRegisterProduct: false,
+      resetAllImages: false,
     };
   },
   methods: {
@@ -537,7 +541,7 @@ export default {
 
     startRegisterProductSubmited() {
       this.isStartLoading = true;
-
+      this.resetAllImages = true;
       var self = this;
       axios
         .post("/is_user_allowed_to_register_product")
@@ -605,6 +609,8 @@ export default {
           })
           .then(function (response) {
             if (response.status === 201) {
+              self.resetAllImages = true;
+
               self.disableSubmit = true;
               self.popUpMsg = self.getProductRegisterSuccessMessage();
               eventBus.$emit("submitSuccess", self.popUpMsg);
@@ -622,7 +628,10 @@ export default {
               self.$router.push({ name: "successRegisterProduct" });
 
               if (response.data.product) {
-                if (response.data.product.active_package_type == 0) {
+                if (
+                  response.data.product.active_package_type == 0 &&
+                  !response.data.buyAds
+                ) {
                   setTimeout(function () {
                     self.$parent.is_pricing_active = true;
                   }, 1000);
@@ -631,6 +640,8 @@ export default {
                 self.buyAds = response.data.buyAds;
               }
             } else if (response.status === 200) {
+              self.resetAllImages = true;
+
               self.popUpMsg = response.data.msg;
               eventBus.$emit("submitSuccess", self.popUpMsg);
               eventBus.$emit("submiting", false);
@@ -798,7 +809,7 @@ export default {
       this.errors.stock = "";
       var standardNumber = this.toLatinNumbers(number);
       if (standardNumber == "") {
-        this.errors.stock = "لطفا فیلد را وارد کنید";
+        this.errors.stock = "لطفا میزان موجودی را وارد کنید";
       } else if (!this.validateRegx(standardNumber, /^\d*$/)) {
         this.errors.stock = "لطفا فقط عدد وارد کنید";
       }
@@ -815,7 +826,7 @@ export default {
       this.errors.min_sale_amount = "";
       var standardNumber = this.toLatinNumbers(number);
       if (standardNumber == "") {
-        this.errors.min_sale_amount = "لطفا فیلد را وارد کنید";
+        this.errors.min_sale_amount = "لطفا حداقل میزان فروش را وارد کنید";
       } else if (!this.validateRegx(standardNumber, /^\d*$/)) {
         this.errors.min_sale_amount = "لطفا فقط عدد وارد کنید ";
       }
@@ -832,9 +843,9 @@ export default {
       this.errors.max_sale_price = "";
       var standardNumber = this.toLatinNumbers(number);
       if (standardNumber == "") {
-        this.errors.max_sale_price = "لطفا فیلد را وارد کنید";
+        this.errors.max_sale_price = "لطفا حداکثر قیمت را وارد کنید";
       } else if (!this.validateRegx(standardNumber, /^\d*$/)) {
-        this.errors.max_sale_price = "یک فرمت معتبر وارد کنید";
+        this.errors.max_sale_price = "لطفا فقط عدد وارد کنید ";
       }
 
       if (this.errors.max_sale_price) {
@@ -849,9 +860,9 @@ export default {
       this.errors.min_sale_price = "";
       var standardNumber = this.toLatinNumbers(number);
       if (standardNumber == "") {
-        this.errors.min_sale_price = "لطفا فیلد را وارد کنید";
+        this.errors.min_sale_price = "لطفا حداقل قیمت را وارد کنید";
       } else if (!this.validateRegx(standardNumber, /^\d*$/)) {
-        this.errors.min_sale_price = "یک فرمت معتبر وارد کنید";
+        this.errors.min_sale_price = "لطفا فقط عدد وارد کنید ";
       }
 
       if (this.errors.min_sale_price) {
@@ -950,6 +961,7 @@ export default {
         rules: true,
       };
       this.currentStep = 0;
+      this.resetAllImages = false;
     },
   },
   mounted() {
