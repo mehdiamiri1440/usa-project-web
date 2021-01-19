@@ -18,6 +18,7 @@
 }
 .main-content > div.wrapper-section.empty-section {
   border: none;
+  background: #fff;
 }
 
 .main-content .section-title {

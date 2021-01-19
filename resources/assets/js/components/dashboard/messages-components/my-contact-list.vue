@@ -442,11 +442,21 @@ i.fa-star {
           <p>در حال حاضر مخاطبی وجود ندارد</p>
 
           <router-link
+            v-if="$parent.userType"
             :to="{ name: 'buyAdRequestsSeller' }"
             tag="button"
             class="user-button"
           >
             شروع چت با خریداران
+          </router-link>
+
+          <router-link
+            v-else
+            :to="{ name: 'productList' }"
+            tag="button"
+            class="user-button"
+          >
+            شروع چت با فروشندگان
           </router-link>
         </div>
       </div>
