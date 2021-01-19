@@ -310,7 +310,7 @@
 
 .static-item {
   text-align: center;
-  padding: 25px 5px;
+  padding: 40px 5px;
 }
 
 .send-message-button {
@@ -338,6 +338,11 @@
   }
 }
 @media screen and (max-width: 767px) {
+  .static-item {
+  text-align: center;
+  padding: 45px 5px 80px;
+}
+
   .lock span.lock-text {
     text-align: center;
     right: 0;

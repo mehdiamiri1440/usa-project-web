@@ -1325,13 +1325,13 @@ class buyAd_controller extends Controller
 
                 return true;
             }
-            else if($buyAd->remaining_time <= 0 && $buyAd->remaining_time > -8){
-                $buyAd->expired = true;
+            // else if($buyAd->remaining_time <= 0 && $buyAd->remaining_time > -1){
+            //     $buyAd->expired = true;
 
-                // unset($buyAd->remaining_time);
+            //     // unset($buyAd->remaining_time);
                 
-                return true;
-            }
+            //     return true;
+            // }
             else{
                 return false;
             }
