@@ -1365,12 +1365,15 @@ class buyAd_controller extends Controller
         }
         else{
             $products = product::where('myuser_id',$user_id)
-                                    ->where('confirmed',true)
+                                    // ->where('confirmed',true)
+                                    ->orderBy('created_at','desc')
                                     ->get();
 
             foreach($products as $product){
                 $tmp = $this->get_new_most_related_buyAds($product)->toArray();
+
                 $final_golden_buyAds = array_merge($final_golden_buyAds,$tmp);
+                
             }
             
         }
