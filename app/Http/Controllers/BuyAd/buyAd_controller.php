@@ -1372,7 +1372,12 @@ class buyAd_controller extends Controller
             foreach($products as $product){
                 $tmp = $this->get_new_most_related_buyAds($product)->toArray();
 
-                $final_golden_buyAds = array_merge($final_golden_buyAds,$tmp);
+                if(count($final_golden_buyAds) <= 50){
+                    $final_golden_buyAds = array_merge($final_golden_buyAds,$tmp);
+                }
+                else{
+                    break;
+                }
                 
             }
             
@@ -1552,6 +1557,7 @@ class buyAd_controller extends Controller
                             ->whereNull('deleted_at')
                             ->where('confirmed',true)
                             ->where('buy_ads.myuser_id',$user_id)
+                            ->orderBy('buy_ads.created_at','desc')
                             ->select($this->my_buyAds_required_fields)
                             ->get();
                         
