@@ -8,7 +8,7 @@
 }
 
 .buttons-wrapper {
-  margin: 15px auto;
+  margin: 15px auto 80px;
   text-align: center;
 }
 

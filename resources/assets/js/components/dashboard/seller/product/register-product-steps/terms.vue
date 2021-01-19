@@ -190,7 +190,10 @@ textarea.error:focus + i {
     </form>
     <div class="col-xs-12">
       <button
-        class="submit-button active pull-left"
+        class="submit-button pull-left"
+        :class="{
+          active: !errors.description,
+        }"
         @click.prevent="descriptionSubmited()"
       >
         مرحله بعد
