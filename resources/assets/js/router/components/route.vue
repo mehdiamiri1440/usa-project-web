@@ -830,7 +830,7 @@ export default {
 
       let content = document.createElement("div");
       content.innerHTML =
-        '<p dir="rtl">سقف تعداد محصولات ثبت شده شما پر شده است.</p><br/><p class="red-text" dir="rtl"><b>برای ثبت محصولات جدید، لطفا دکمه افزایش ظرفیت را بزنید.</b></p>';
+        '<p dir="rtl" class="swal-guide">سقف تعداد محصولات ثبت شده شما پر شده است.</p><br/><p class="red-text swal-guide" dir="rtl"><b>برای ثبت محصولات جدید، لطفا دکمه افزایش ظرفیت را بزنید.</b></p>';
       swal({
         title: "محدودیت ثبت محصول جدید",
         content: content,
@@ -862,7 +862,7 @@ export default {
 
       let content = document.createElement("div");
       content.innerHTML =
-        '<p dir="rtl">ظرفیت روزانه پاسخ به درخواست های خرید شما پر شده است.</p><br/><p class="red-text" dir="rtl"><b>برای افزایش ظرفیت، لطفا دکمه افزایش ظرفیت را بزنید.</b></p>';
+        '<p class="swal-guide" dir="rtl">ظرفیت روزانه پاسخ به درخواست های خرید شما پر شده است.</p><br/><p class="red-text swal-guide" dir="rtl"><b>برای افزایش ظرفیت، لطفا دکمه افزایش ظرفیت را بزنید.</b></p>';
       swal({
         title: "محدودیت پاسخ به درخواست ها",
         content: content,
@@ -1009,7 +1009,7 @@ export default {
 
       let content = document.createElement("div");
       content.innerHTML =
-        '<p dir="rtl">شما به درخواست هایی طلایی دسترسی ندارید.</p><br/><p class="red-text" dir="rtl"><b>برای دسترسی به تمام درخواست های طلایی، عضویت خود را ارتقا دهید.</b></p>';
+        '<p><span class="swal-star-badge"><i class="fa fa-star"></i></span></p><br/><p class="swal-guide" dir="rtl">شما به درخواست هایی طلایی دسترسی ندارید.</p><br/><p class="red-text swal-guide" dir="rtl"><b>برای دسترسی به تمام درخواست های طلایی، عضویت خود را ارتقا دهید.</b></p>';
       swal({
         title: "درخواست های طلایی",
         content: content,
