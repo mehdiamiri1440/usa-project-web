@@ -696,7 +696,7 @@ export default {
 
       if (this.isDeviceMobile()) {
         var linkElement = document.createElement("a");
-        var Message = "https://buskool.com" + this.getProductUrl();
+        var Message = "https://www.buskool.com" + this.getProductUrl();
         var messageToWhatsApp = encodeURIComponent(Message);
         var url = "whatsapp://send?text=" + messageToWhatsApp;
 
@@ -712,7 +712,7 @@ export default {
         var input = document.createElement("input");
         input.setAttribute(
           "value",
-          "https://buskool.com" + this.getProductUrl()
+          "https://www.buskool.com" + this.getProductUrl()
         );
         document.body.appendChild(input);
         input.select();

@@ -775,13 +775,17 @@ class product_controller extends Controller
     //public method
     public function get_all_products_url_for_sitemap()
     {
-        $products = product::where('confirmed',true)
-                                    // ->whereRaw("LENGTH(products.description) > 700")
-                                    ->orderBy('updated_at','desc')
-                                    ->get();
-        $result_products = $this->append_related_data_to_given_products($products);
+        $products = DB::table('products')->where('confirmed',true)
+                                ->join('categories as sub','sub.id','=','products.category_id')
+                                ->leftJoin('categories','categories.parent_id','=','sub.id')
+                                ->whereNull('products.deleted_at')
+                                ->orderBy('products.created_at','desc')
+                                ->selectRaw('products.id,sub.category_name as sub_category_name,categories.category_name as category_name')
+                                ->distinct('product.id')
+                                ->get();
 
-        return $result_products;
+
+        return $products;
     }
 
     protected function get_the_most_related_buyAd_to_the_given_product_if_there_is_any(&$product)

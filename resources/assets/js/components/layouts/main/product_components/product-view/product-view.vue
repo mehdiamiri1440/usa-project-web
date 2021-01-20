@@ -235,7 +235,7 @@ span {
 
       <div class="buttons-wrapper col-xs-12">
         <router-link
-          :to="{ name: 'productList' }"
+          :to="{path:this.categoryUrl}"
           class="green-button blue-button"
           >مشاهده همه محصولات</router-link
         >
@@ -318,6 +318,7 @@ export default {
       showRegisterRequestBox: true,
       starScore: "",
       verifiedUserContent: this.$parent.verifiedUserContent,
+      categoryUrl: '',
     };
   },
   methods: {
@@ -339,6 +340,7 @@ export default {
           })
           .then(function (response) {
             self.product = response.data.product;
+            self.categoryUrl = '/product-list/category/' + self.getCategoryName();
             self.starScore = Math.floor(
               self.product.user_info.review_info.avg_score
             );
@@ -610,6 +612,11 @@ export default {
           return data + " " + "تن";
         }
       } else return "";
+    },
+    getCategoryName: function () {
+      let name = this.product.main.sub_category_name;
+
+      return name.split("-").join(" ");
     },
   },
   created() {
