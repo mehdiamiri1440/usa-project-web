@@ -186,7 +186,7 @@ span {
           ' - ' +
           $parent.product.main.province_name
         "
-        :image-count="$parent.product.photos.length"
+        :image-count="$parent.product.main.photos_count"
         :product-url="this.$parent.productUrl"
       />
     </div>
