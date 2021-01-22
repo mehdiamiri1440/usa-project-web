@@ -119,6 +119,10 @@
     padding: 0;
   }
 
+  /* .main-content > .row {
+    margin: 0;
+  } */
+
   #main {
     margin-top: 111px;
     background: #fff;
@@ -145,46 +149,9 @@
   .article-contents > .main-image {
     padding: 0 !important;
   }
-}
-
-@media screen and (max-width: 500px) {
-  .user-contents .user-image {
-    width: 50px;
-    height: 50px;
-  }
-
-  .user-contents p {
-    padding: 5px 0;
-    width: 100%;
-  }
-
-  .user-contents .green-button {
-    float: left;
-    width: initial;
-    padding: 15px 30px;
-  }
-}
-
-@media screen and (max-width: 370px) {
-  .default-wrapper-main-image {
-    position: relative;
-    width: 100%;
-    height: 250px;
-    overflow: hidden;
-    border-radius: 4px;
-  }
-  .default-main-article-content {
-    width: 100%;
-
-    position: relative;
-
-    top: 15px;
-  }
-
-  .default-item-wrapper .default-button-min-with {
-    width: 100%;
-    margin-bottom: 15px;
-  }
+  /* .default-items {
+    padding: 0;
+  } */
 }
 </style>
 <template>
@@ -291,14 +258,10 @@
                   <span
                     class="padding-top-5 placeholder-content margin-15 pull-right content-min-width"
                   ></span>
-
-                  <span
-                    class="margin-0 placeholder-content default-button-min-with pull-left"
-                  ></span>
                 </div>
 
                 <div
-                  class="default-article-contents padding-0 margin-15-0 col-xs-12"
+                  class="default-article-contents padding-0 margin-top-10 col-xs-12"
                 >
                   <div class="default-wrapper-main-image pull-right">
                     <span class="default-main-image placeholder-content"></span>
@@ -311,10 +274,15 @@
                       class="content-default-width placeholder-content"
                     ></span>
 
-                    <span class="content-min-width placeholder-content"></span>
+                    <span
+                      class="content-min-width placeholder-content mobile-hidden"
+                    ></span>
 
                     <span class="content-half-width placeholder-content"></span>
                   </div>
+                  <!-- <span
+                    class="margin-top-10 placeholder-content default-button-min-with pull-left hidden-afetr-mobile-hidden"
+                  ></span> -->
                 </div>
               </div>
             </div>
