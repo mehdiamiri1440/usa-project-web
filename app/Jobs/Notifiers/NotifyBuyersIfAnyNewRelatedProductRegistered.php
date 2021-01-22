@@ -300,8 +300,7 @@ class NotifyBuyersIfAnyNewRelatedProductRegistered implements ShouldQueue
 
         foreach($user_records as $user)
         {
-            echo $user->phone . "\n";
-            // sendSMS::dispatch($user->phone, 41522,$data);
+            sendSMS::dispatch($user->phone, 41522,$data);
         }  
     }
 }
