@@ -828,13 +828,18 @@ class product_list_controller extends Controller
                 $filtered_products = [];
 
                 if(! is_null($buyAd->name)){
-                    $buyAd_name_array = $this->get_buyAd_name_array($buyAd);
+                    $buyAd_name_array = array_slice($this->get_buyAd_name_array($buyAd),0,2);
+                    
+            
+                    foreach($buyAd_name_array as $search_text){
     
-                    $search_text = implode(' ',$buyAd_name_array);
-    
-                    $filtered_products = array_filter($products,function($product) use($search_text,$buyAd){
-                        return $this->does_search_text_matche_the_product($search_text,$product) && $product['main']->sub_category_id === $buyAd->category_id;
-                    });
+                        $tmp = array_filter($products,function($product) use($search_text,$buyAd){
+                            return $this->does_search_text_matche_the_product($search_text,$product) && $product['main']->sub_category_id === $buyAd->category_id;
+                        });
+
+                        $filtered_products = array_merge($filtered_products,$tmp);
+                    }
+                    
                 }
                 else{
                     $filtered_products = array_filter($products,function($product) use($buyAd){
