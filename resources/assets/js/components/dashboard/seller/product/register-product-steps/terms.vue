@@ -246,7 +246,7 @@ export default {
         if (
           !this.$parent.validateRegx(
             description,
-            /^[\u0600-\u06FF\s_,.:/;()+-\d]+$/
+            /^[\u0600-\u06FF\a-zA-z\s_,.:/;()+-\d]+$/
           )
         ) {
           this.errors.description = "توضیحات شامل حروف غیرمجاز است";

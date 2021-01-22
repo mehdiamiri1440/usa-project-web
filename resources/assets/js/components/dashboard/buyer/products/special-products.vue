@@ -194,7 +194,7 @@
         <div class="title col-xs-12">
           <div class="row">
             <div class="col-xs-12 col-sm-4 pull-right">
-              <h1>محصولات ویژه</h1>
+              <h1>فروشندگان پیشنهادی</h1>
             </div>
           </div>
         </div>
@@ -202,7 +202,7 @@
         <div v-if="products.length > 0" class="col-xs-12 product-wrapper">
           <div class="row">
             <div
-              v-for="(product,productIndex) in products"
+              v-for="(product, productIndex) in products"
               :key="product.main.id"
               class="col-xs-12 pull-right"
             >
@@ -216,7 +216,7 @@
           </div>
           <div
             class="load-more-button col-xs-12"
-            v-if="$parent.searchText === '' && continueToLoadProducts === true "
+            v-if="$parent.searchText === '' && continueToLoadProducts === true"
           >
             <button class="btn btn-loader" @click.prevent="feed()">
               <div class="btn-content">
@@ -225,7 +225,10 @@
                   <i class="fa fa-plus"></i>
                 </span>
 
-                <span class="hidden-sm hidden-md hidden-lg text-rtl" v-show="!loadMoreActive">
+                <span
+                  class="hidden-sm hidden-md hidden-lg text-rtl"
+                  v-show="!loadMoreActive"
+                >
                   محصولات بیشتر
                   <i class="fa fa-plus"></i>
                 </span>
@@ -238,7 +241,10 @@
           </div>
         </div>
 
-        <div class="col-xs-12" v-else-if="products.length == 0 && $parent.searchText && !loading">
+        <div
+          class="col-xs-12"
+          v-else-if="products.length == 0 && $parent.searchText && !loading"
+        >
           <div class="wrapper_no_pro">
             <div class="content_no_pic">
               <i class="fa fa-list-alt"></i>
@@ -247,16 +253,21 @@
             <div class="text_no_pic standard-line">
               <h4 class="text-center" dir="rtl">جستجو نتیجه ای نداشت.</h4>
 
-              <p class="text-center" dir="rtl">شما می توانید درخواست خرید خود را در اینجا ثبت کنید.</p>
+              <p class="text-center" dir="rtl">
+                شما می توانید درخواست خرید خود را در اینجا ثبت کنید.
+              </p>
 
               <div class="text-center no-product-buttons">
                 <router-link
-                  :to="{name : 'registerRequestBuyer'}"
+                  :to="{ name: 'registerRequestBuyer' }"
                   class="green-button"
                   tag="button"
-                >ثبت درخواست خرید</router-link>
+                  >ثبت درخواست خرید</router-link
+                >
 
-                <button class="green-button" @click.prevent="resetFilter()">نمایش همه محصولات</button>
+                <button class="green-button" @click.prevent="resetFilter()">
+                  نمایش همه محصولات
+                </button>
               </div>
             </div>
           </div>
@@ -264,19 +275,31 @@
 
         <section v-else class="main-content col-xs-12">
           <div class="row">
-            <div v-for="(defaultItem ,index) in 8" :key="index" class="default-items col-xs-12">
-              <div class="col-xs-12 padding-15 margin-15-0 default-item-wrapper shadow-content">
+            <div
+              v-for="(defaultItem, index) in 8"
+              :key="index"
+              class="default-items col-xs-12"
+            >
+              <div
+                class="col-xs-12 padding-15 margin-15-0 default-item-wrapper shadow-content"
+              >
                 <div class="default-user-contents col-xs-12 padding-0">
-                  <div class="placeholder-content default-article-user-image pull-right"></div>
+                  <div
+                    class="placeholder-content default-article-user-image pull-right"
+                  ></div>
 
                   <span
                     class="padding-top-5 placeholder-content margin-15 pull-right content-min-width"
                   ></span>
 
-                  <span class="margin-0 placeholder-content default-button-min-with pull-left"></span>
+                  <span
+                    class="margin-0 placeholder-content default-button-min-with pull-left"
+                  ></span>
                 </div>
 
-                <div class="default-article-contents padding-0 margin-15-0 col-xs-12">
+                <div
+                  class="default-article-contents padding-0 margin-15-0 col-xs-12"
+                >
                   <div class="default-wrapper-main-image pull-right">
                     <span class="default-main-image placeholder-content"></span>
                   </div>
@@ -284,7 +307,9 @@
                   <div class="default-main-article-content">
                     <span class="content-half-width placeholder-content"></span>
 
-                    <span class="content-default-width placeholder-content"></span>
+                    <span
+                      class="content-default-width placeholder-content"
+                    ></span>
 
                     <span class="content-min-width placeholder-content"></span>
 
@@ -306,18 +331,18 @@ import { eventBus } from "../../../../router/router";
 
 export default {
   components: {
-    ProductArticle
+    ProductArticle,
   },
   props: ["str"],
-  data: function() {
+  data: function () {
     return {
       products: {
         main: "",
         user_info: "",
         profile_info: {
-          profile_photo: ""
+          profile_photo: "",
         },
-        photos: []
+        photos: [],
       },
       currentUser: "",
       categoryId: "",
@@ -329,11 +354,11 @@ export default {
       loadMoreActive: false,
       loading: false,
       searchTextTimeout: null,
-      verifiedUserContent: this.$parent.verifiedUserContent
+      verifiedUserContent: this.$parent.verifiedUserContent,
     };
   },
   methods: {
-    init: function() {
+    init: function () {
       var self = this;
 
       this.loading = true;
@@ -342,7 +367,7 @@ export default {
 
       axios
         .post("/user/profile_info")
-        .then(function(response) {
+        .then(function (response) {
           self.currentUser = response.data;
 
           if (searchValueText) {
@@ -358,9 +383,9 @@ export default {
               .post("/user/get_product_list", {
                 from_record_number: 0,
                 special_products: true,
-                to_record_number: self.productCountInPage
+                to_record_number: self.productCountInPage,
               })
-              .then(function(response) {
+              .then(function (response) {
                 self.products = response.data.products;
                 self.loading = false;
                 localStorage.removeItem("productCountInPage");
@@ -368,7 +393,7 @@ export default {
               });
           }
         })
-        .catch(error => reject(error));
+        .catch((error) => reject(error));
     },
     feed() {
       this.loading = true;
@@ -383,9 +408,9 @@ export default {
           .post("/user/get_product_list", {
             from_record_number: 0,
             to_record_number: self.productCountInPage,
-            special_products: true
+            special_products: true,
           })
-          .then(function(response) {
+          .then(function (response) {
             self.products = response.data.products;
             localStorage.productCountInPage = JSON.stringify(
               self.productCountInPage
@@ -400,13 +425,17 @@ export default {
           });
       }
     },
-    registerComponentStatistics: function(categoryName, actionName, labelName) {
+    registerComponentStatistics: function (
+      categoryName,
+      actionName,
+      labelName
+    ) {
       gtag("event", actionName, {
         event_category: categoryName,
-        event_label: labelName
+        event_label: labelName,
       });
     },
-    applyFilter: function() {
+    applyFilter: function () {
       var self = this;
 
       this.loading = true;
@@ -428,21 +457,21 @@ export default {
 
       axios
         .post("/user/get_product_list", searchObject)
-        .then(function(response) {
+        .then(function (response) {
           self.products = response.data.products;
           self.loading = false;
 
           // self.scrollToTop();
         })
-        .catch(function(err) {
+        .catch(function (err) {
           alert("خطایی رخ داده است. دوباره تلاش کنید.");
         });
     },
-    resetFilter: function() {
+    resetFilter: function () {
       // reset text data from header for syncing
 
       eventBus.$emit("resetTextSearch", true);
-    }
+    },
   },
   mounted() {
     this.init();
@@ -452,12 +481,12 @@ export default {
     gtag("config", "UA-129398000-1", { page_path: "/my-products" });
   },
   watch: {
-    "$parent.searchText": function(value) {
+    "$parent.searchText": function (value) {
       var self = this;
 
       clearTimeout(this.searchTextTimeout);
 
-      this.searchTextTimeout = setTimeout(function() {
+      this.searchTextTimeout = setTimeout(function () {
         self.registerComponentStatistics(
           "product-list",
           "search-text",
@@ -466,7 +495,7 @@ export default {
 
         self.applyFilter();
       }, 1500);
-    }
-  }
+    },
+  },
 };
 </script>
