@@ -76,7 +76,7 @@ class Kernel extends ConsoleKernel
         $cache_product_list_job = new CacheProductList();
 
         $schedule->job($cache_product_list_job)
-                ->everyFiveMinutes();
+                ->everyTenMinutes();
 
         // $retention_reminder_notifier_job = new RetentionReminder();
         // $schedule->job($retention_reminder_notifier_job)
