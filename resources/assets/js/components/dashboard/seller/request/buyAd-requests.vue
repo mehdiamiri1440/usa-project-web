@@ -582,7 +582,7 @@
                   :id="'loader-' + buyAd.id"
                   class="detail-success hover-effect"
                 >
-                  <span class="hover-effect">
+                  <span>
                     پیام به خریدار
                     <span class="fas fa-comment-alt"></span>
                   </span>
