@@ -60,9 +60,9 @@ class NotifyBuyersIfAnyNewRelatedProductRegistered implements ShouldQueue
             ],
         ];
 
-        // $fcm_object = new fcm_controller();
+        $fcm_object = new fcm_controller();
 
-        // $fcm_object->send_notification_to_given_topic_group($data,$topics);
+        $fcm_object->send_notification_to_given_topic_group($data,$topics);
 
         //send SMS notification to buyers
         $this->send_sms_to_buyers($subcategory_record->category_name,$this->product->product_name,$the_most_related_buyAd_owners_ids);
@@ -296,7 +296,7 @@ class NotifyBuyersIfAnyNewRelatedProductRegistered implements ShouldQueue
                             ->select('phone')
                             ->get();
         
-        $data['productname'] = $product_name;
+        $data['productname'] = $category_name;
 
         foreach($user_records as $user)
         {
