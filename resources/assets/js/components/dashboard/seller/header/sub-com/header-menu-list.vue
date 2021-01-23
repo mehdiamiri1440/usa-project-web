@@ -249,21 +249,6 @@ a.active {
               <span>محصولات من</span>
             </router-link>
           </li>
-
-          <li class="list-item">
-            <router-link :to="{ name: 'guideSeller' }">
-              <i class="fa fa-question" aria-hidden="true"></i>
-              <span>راهنما</span>
-            </router-link>
-          </li>
-
-          <li class="list-item">
-            <router-link :to="{ name: 'supportSeller' }">
-              <i class="fas fa-headset"></i>
-              <span>پشتیبانی</span>
-            </router-link>
-          </li>
-
           <li
             class="list-item"
             v-if="$parent.currentUser.user_info.active_pakage_type < 3"
@@ -276,6 +261,19 @@ a.active {
               <i class="fa fa-arrow-up" aria-hidden="true"></i>
               <span>ارتقا عضویت</span>
               <span class="custom-badge upgrade">ویژه</span>
+            </router-link>
+          </li>
+          <li class="list-item">
+            <router-link :to="{ name: 'guideSeller' }">
+              <i class="fa fa-question" aria-hidden="true"></i>
+              <span>راهنما</span>
+            </router-link>
+          </li>
+
+          <li class="list-item">
+            <router-link :to="{ name: 'supportSeller' }">
+              <i class="fas fa-headset"></i>
+              <span>پشتیبانی</span>
             </router-link>
           </li>
         </ul>
