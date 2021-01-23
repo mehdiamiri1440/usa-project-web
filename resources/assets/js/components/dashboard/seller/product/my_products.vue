@@ -124,13 +124,18 @@
           </div>
 
           <div class="col-xs-12 product-wrapper">
-            <div class="col-xs-12 shadow-content text-center my-products-info-text">
+            <div
+              class="col-xs-12 shadow-content text-center my-products-info-text"
+            >
               <i class="fas fa-chart-line"></i>
-              <span>با اعمال نردبان روی محصولات خود بیشتر دیده شوید و با خریداران بیشتری ارتباط برقرار کنید.</span>
+              <span
+                >با اعمال نردبان روی محصولات خود بیشتر دیده شوید و با خریداران
+                بیشتری ارتباط برقرار کنید.</span
+              >
             </div>
             <div class="row">
               <div
-                v-for="(product,productIndex) in products"
+                v-for="(product, productIndex) in products"
                 :key="productIndex"
                 class="col-xs-12 pull-right"
               >
@@ -151,27 +156,46 @@
               <i class="fa fa-list-alt"></i>
             </div>
 
-            <div class="text_no_pic standard-line">
-              <p>محصولی ثبت نشده است یا در انتظار تایید است</p>
+            <div class="text_no_pic standard-line text-rtl">
+              <p>شما محصولی را ثبت نکرده اید یا در انتظار تایید است.</p>
             </div>
+
+            <!-- <router-link
+              class="green-button"
+              :to="{ name: 'registerProductSeller' }"
+            >
+              ثبت محصول
+            </router-link> -->
           </div>
         </div>
 
         <section class="main-content col-xs-12" v-if="loading">
           <div class="row">
-            <div v-for="(defaultItem ,index) in 1" :key="index" class="default-items col-xs-12">
-              <div class="col-xs-12 padding-15 margin-15-0 default-item-wrapper shadow-content">
+            <div
+              v-for="(defaultItem, index) in 1"
+              :key="index"
+              class="default-items col-xs-12"
+            >
+              <div
+                class="col-xs-12 padding-15 margin-15-0 default-item-wrapper shadow-content"
+              >
                 <div class="default-user-contents col-xs-12 padding-0">
-                  <div class="placeholder-content default-article-user-image pull-right"></div>
+                  <div
+                    class="placeholder-content default-article-user-image pull-right"
+                  ></div>
 
                   <span
                     class="padding-top-5 placeholder-content margin-15 pull-right content-min-width"
                   ></span>
 
-                  <span class="margin-0 placeholder-content default-button-min-with pull-left"></span>
+                  <span
+                    class="margin-0 placeholder-content default-button-min-with pull-left"
+                  ></span>
                 </div>
 
-                <div class="default-article-contents padding-0 margin-15-0 col-xs-12">
+                <div
+                  class="default-article-contents padding-0 margin-15-0 col-xs-12"
+                >
                   <div class="default-wrapper-main-image pull-right">
                     <span class="default-main-image placeholder-content"></span>
                   </div>
@@ -179,7 +203,9 @@
                   <div class="default-main-article-content">
                     <span class="content-half-width placeholder-content"></span>
 
-                    <span class="content-default-width placeholder-content"></span>
+                    <span
+                      class="content-default-width placeholder-content"
+                    ></span>
 
                     <span class="content-min-width placeholder-content"></span>
 
@@ -201,18 +227,18 @@ import { eventBus } from "../../../../router/router";
 
 export default {
   components: {
-    ProductArticle
+    ProductArticle,
   },
   props: ["str"],
-  data: function() {
+  data: function () {
     return {
       products: {
         main: "",
         user_info: "",
         profile_info: {
-          profile_photo: ""
+          profile_photo: "",
         },
-        photos: []
+        photos: [],
       },
       currentUser: {
         profile: {
@@ -223,38 +249,38 @@ export default {
           public_phone: "",
           profile_photo: this.storage + "",
           postal_code: "",
-          shaba_code: ""
+          shaba_code: "",
         },
-        user_info: ""
+        user_info: "",
       },
       items: [
         {
           message: "محصولات من",
-          url: "myProducts"
-        }
+          url: "myProducts",
+        },
       ],
       loading: false,
-      verifiedUserContent: this.$parent.verifiedUserContent
+      verifiedUserContent: this.$parent.verifiedUserContent,
     };
   },
   methods: {
-    init: function() {
+    init: function () {
       var self = this;
       self.loading = true;
 
-      axios.post("/user/profile_info").then(function(response) {
+      axios.post("/user/profile_info").then(function (response) {
         self.currentUser = response.data;
 
         axios
           .post("/get_product_list_by_user_name", {
-            user_name: self.currentUser.user_info.user_name
+            user_name: self.currentUser.user_info.user_name,
           })
-          .then(function(response) {
+          .then(function (response) {
             self.products = response.data.products;
             self.loading = false;
           });
       });
-    }
+    },
   },
   mounted() {
     this.init();
@@ -262,6 +288,6 @@ export default {
   },
   created() {
     gtag("config", "UA-129398000-1", { page_path: "/my-products" });
-  }
+  },
 };
 </script>

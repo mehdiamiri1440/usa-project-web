@@ -929,7 +929,8 @@ textarea {
                 <article
                   v-if="currentUser.certificates.length"
                   class="col-md-4 col-xs-6 col-lg-3 pull-right"
-                  v-for="photo in currentUser.certificates"
+                  v-for="(photo, index) in currentUser.certificates"
+                  :key="index"
                 >
                   <!--   <a href="#">
                                                 <i class="fa fa-times"></i>
@@ -1262,7 +1263,6 @@ export default {
     $("#imgInp").change(function () {
       show_image_preview(this);
     });
-
     if (this.isOsIOS()) {
       $("#phone-number").attr("type", "text");
       $("#company-number").attr("type", "text");

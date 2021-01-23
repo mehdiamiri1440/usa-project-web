@@ -64,6 +64,30 @@ a.active {
   background: #637484;
 }
 
+.star-badge {
+  position: absolute;
+  left: 20px;
+  border-radius: 12px;
+  color: rgb(249, 242, 159);
+  text-align: center;
+  direction: ltr;
+  line-height: 1;
+}
+
+.star-badge i {
+  font-size: 20px;
+  background: linear-gradient(
+    21deg,
+    rgb(199, 168, 79) 0%,
+    rgb(249, 242, 159) 51%,
+    rgb(199, 168, 79) 100%
+  );
+  background-clip: border-box;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 2px 0;
+}
+
 .header-menu li.active a:before {
   content: " ";
   height: 100%;
@@ -151,7 +175,10 @@ a.active {
         <li class="list-item">
           <router-link :to="{ name: 'specialProducts' }">
             <i class="fas fa-list-ol" aria-hidden="true"></i>
-            <span>محصولات ویژه</span>
+            <span>فروشندگان پیشنهادی</span>
+            <span class="star-badge">
+              <i class="fa fa-star"></i>
+            </span>
           </router-link>
         </li>
 

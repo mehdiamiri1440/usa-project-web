@@ -75,5 +75,11 @@ export default {
         console.log("error", error);
       });
   },
+  watch: {
+    currentUser(user) {
+      if (user.profile.created_at)
+        this.$parent.currentUserCreatedAt = user.profile.created_at;
+    },
+  },
 };
 </script>

@@ -82,17 +82,49 @@ a.active {
   position: absolute;
   left: 20px;
   background: #e41c38;
-  height: 25px;
-  border-radius: 12px;
+  height: 20px;
+  border-radius: 20px;
   color: #fff;
   text-align: center;
   direction: ltr;
   line-height: 1;
-  padding: 5px 7px;
+  padding: 5px 3px;
+  min-width: 20px;
+  font-size: 12px;
+}
+
+.custom-badge.upgrade {
+  padding: 5px 10px;
+  height: 24px;
+  font-size: 14px;
 }
 
 .header-menu i {
   margin: 5px;
+}
+
+.star-badge {
+  position: absolute;
+  left: 20px;
+  border-radius: 12px;
+  color: rgb(249, 242, 159);
+  text-align: center;
+  direction: ltr;
+  line-height: 1;
+}
+
+.star-badge i {
+  font-size: 20px;
+  background: linear-gradient(
+    21deg,
+    rgb(199, 168, 79) 0%,
+    rgb(249, 242, 159) 51%,
+    rgb(199, 168, 79) 100%
+  );
+  background-clip: border-box;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 2px 0;
 }
 
 .pricing-link {
@@ -158,6 +190,9 @@ a.active {
             <router-link :to="{ name: 'messagesRequestSeller' }">
               <i class="fa fa-list-ul" aria-hidden="true"></i>
               <span>خریداران پیشنهادی</span>
+              <span class="star-badge">
+                <i class="fa fa-star"></i>
+              </span>
             </router-link>
           </li>
 
@@ -214,21 +249,6 @@ a.active {
               <span>محصولات من</span>
             </router-link>
           </li>
-
-          <li class="list-item">
-            <router-link :to="{ name: 'guideSeller' }">
-              <i class="fa fa-question" aria-hidden="true"></i>
-              <span>راهنما</span>
-            </router-link>
-          </li>
-
-          <li class="list-item">
-            <router-link :to="{ name: 'supportSeller' }">
-              <i class="fas fa-headset"></i>
-              <span>پشتیبانی</span>
-            </router-link>
-          </li>
-
           <li
             class="list-item"
             v-if="$parent.currentUser.user_info.active_pakage_type < 3"
@@ -240,7 +260,20 @@ a.active {
             >
               <i class="fa fa-arrow-up" aria-hidden="true"></i>
               <span>ارتقا عضویت</span>
-              <span class="custom-badge">ویژه</span>
+              <span class="custom-badge upgrade">ویژه</span>
+            </router-link>
+          </li>
+          <li class="list-item">
+            <router-link :to="{ name: 'guideSeller' }">
+              <i class="fa fa-question" aria-hidden="true"></i>
+              <span>راهنما</span>
+            </router-link>
+          </li>
+
+          <li class="list-item">
+            <router-link :to="{ name: 'supportSeller' }">
+              <i class="fas fa-headset"></i>
+              <span>پشتیبانی</span>
             </router-link>
           </li>
         </ul>

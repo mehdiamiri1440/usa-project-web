@@ -5,6 +5,11 @@ body,
   height: 100%;
 }
 
+a, a:hover, a:visited, a:focus, a:active{
+  outline: none;
+}
+
+
 .hover-effect {
   transition: 200ms !important;
 }

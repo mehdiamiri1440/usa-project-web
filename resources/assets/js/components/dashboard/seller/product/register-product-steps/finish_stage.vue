@@ -310,7 +310,7 @@
 
 .static-item {
   text-align: center;
-  padding: 25px 5px;
+  padding: 40px 5px;
 }
 
 .send-message-button {
@@ -338,6 +338,11 @@
   }
 }
 @media screen and (max-width: 767px) {
+  .static-item {
+    text-align: center;
+    padding: 45px 5px 80px;
+  }
+
   .lock span.lock-text {
     text-align: center;
     right: 0;
@@ -505,7 +510,7 @@
           buyAd.is_golden &&
           $parent.currentUser.user_info.active_pakage_type == 0
         "
-        class="col-sm-3 col-xs-12 pull-left"
+        class="send-message-button col-sm-3 col-xs-12 pull-left"
         href
         @click.prevent="openGoldenChatRestrictionModal()"
       >
@@ -520,14 +525,18 @@
         v-else
         class="send-message-button col-sm-3 col-xs-12 pull-left"
         href
-        @click.prevent="openChat(buyAd, $event)"
+        @click.prevent="openChat(buyAd)"
       >
-        <p class="detail-success hover-effect">
-          <span class="fas fa-comment-alt"></span> پیام به خریدار
+        <p class="detail-success hover-effect" :id="'loader-' + buyAd.id">
+          <span>
+            <span class="fas fa-comment-alt"></span>
+            پیام به خریدار
+          </span>
+          <span class="hide-reply"> کمی صبر کنید... </span>
         </p>
-        <p class="detail-success hide-reply" :id="'loader-' + buyAd.id">
+        <!-- <p class="detail-success hide-reply" :id="'loader-' + buyAd.id">
           کمی صبر کنید...
-        </p>
+        </p> -->
       </a>
     </li>
     <li class="col-xs-12 static-item">
@@ -583,18 +592,18 @@ export default {
         event_label: labelName,
       });
     },
-    openChat: function (buyAd, event) {
+    openChat: function (buyAd) {
       var self = this;
 
       let id = "#loader-" + buyAd.id;
-      self.hideReplyBtn(event, id);
+      self.hideReplyBtn(id);
 
       axios
         .post("/get_user_permission_for_buyAd_reply", {
           buy_ad_id: buyAd.id,
         })
         .then(function (response) {
-          self.showReplyBtn(event, id);
+          self.showReplyBtn(id);
 
           if (response.data.permission == true) {
             var contact = {
@@ -623,21 +632,17 @@ export default {
           }
         });
     },
-    hideReplyBtn: function (e, id) {
-      return new Promise((resolve, reject) => {
-        $(e.target).hide();
-        resolve(true);
-      }).then(() => {
-        $(id).show();
-      });
+    hideReplyBtn: function (id) {
+      let itemFirst = id + " span:first-child";
+      let itemLast = id + " span:last-child";
+      $(itemFirst).hide();
+      $(itemLast).show();
     },
-    showReplyBtn: function (e, id) {
-      return new Promise((resolve, reject) => {
-        $(id).hide();
-        resolve(true);
-      }).then(() => {
-        $(e.target).show();
-      });
+    showReplyBtn: function (id) {
+      let itemFirst = id + " span:first-child";
+      let itemLast = id + " span:last-child";
+      $(itemLast).hide();
+      $(itemFirst).show();
     },
   },
 };

@@ -478,15 +478,6 @@
               >
                 <span> خریدار </span>
                 <span class="brand-text" v-text="buyAd.subcategory_name"></span>
-                <span v-if="buyAd.name"> از نوع </span>
-                <span v-if="buyAd.name">
-                  <span
-                    class="brand-text"
-                    v-if="buyAd.name"
-                    v-text="buyAd.name"
-                  ></span>
-                </span>
-
                 <span> هستم </span>
               </span>
               <div class="list-title list-name col-sm-6 col-xs-12">
@@ -591,7 +582,7 @@
                   :id="'loader-' + buyAd.id"
                   class="detail-success hover-effect"
                 >
-                  <span class="hover-effect">
+                  <span>
                     پیام به خریدار
                     <span class="fas fa-comment-alt"></span>
                   </span>
@@ -857,6 +848,9 @@ export default {
       setTimeout(function () {
         $(".list-notice button").tooltip();
       }, 100);
+    },
+    scrollToTop() {
+      window.scrollTo(0, 0);
     },
   },
   mounted() {

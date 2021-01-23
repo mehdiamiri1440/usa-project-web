@@ -18,6 +18,7 @@
 }
 .main-content > div.wrapper-section.empty-section {
   border: none;
+  background: #fff;
 }
 
 .main-content .section-title {
@@ -140,7 +141,7 @@
     direction: rtl;
     transform: translate(0, 0);
     top: 0;
-    padding-top: 20px;
+    padding-top: 0;
     width: 100%;
     left: 0;
   }
@@ -159,10 +160,6 @@
     left: 26px;
   }
 
-  .success-register {
-    margin-top: -20px;
-  }
-
   .success-register p {
     line-height: 1.618;
   }
@@ -174,6 +171,10 @@
     height: 80px;
     font-size: 45px;
     padding-top: 17px;
+  }
+  .info-inquiry-wrapper {
+    padding: 20px;
+    border-radius: 0px;
   }
 }
 </style>

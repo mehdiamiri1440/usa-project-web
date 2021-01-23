@@ -208,6 +208,7 @@ export default {
         "messenger/contacts",
         "messenger/buy-ads",
         "register-product/success",
+        "register-product",
       ],
       buttonIsActive: true,
       currentUser: {
@@ -375,6 +376,10 @@ export default {
     },
   },
   watch: {
+    currentUser(user) {
+      if (user.profile.created_at)
+        this.$parent.currentUserCreatedAt = user.profile.created_at;
+    },
     $route() {
       this.checkButtonIsHide();
       this.checkPricingModal();

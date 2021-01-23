@@ -442,6 +442,23 @@ a.profile-info-wrapper:hover {
   text-align: center;
   z-index: 1;
 }
+
+.star-badge {
+  color: rgb(249, 242, 159);
+}
+
+.star-badge i {
+  background: linear-gradient(
+    21deg,
+    rgb(199, 168, 79) 0%,
+    rgb(249, 242, 159) 51%,
+    rgb(199, 168, 79) 100%
+  );
+  background-clip: border-box;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 .mobile-navigation li {
   position: relative;
 }
@@ -1033,7 +1050,11 @@ a.profile-info-wrapper:hover {
                       'click-on-dashboard'
                     )
                   "
-                  >خریداران پیشنهادی
+                >
+                  <span class="star-badge">
+                    <i class="fa fa-star"></i>
+                  </span>
+                  خریداران پیشنهادی
                 </router-link>
               </li>
               <li>
@@ -1192,7 +1213,11 @@ a.profile-info-wrapper:hover {
                   'click-on-dashboard'
                 )
               "
-              >خریداران پیشنهادی
+            >
+              <span class="star-badge">
+                <i class="fa fa-star"></i>
+              </span>
+              خریداران پیشنهادی
             </router-link>
           </li>
           <li>

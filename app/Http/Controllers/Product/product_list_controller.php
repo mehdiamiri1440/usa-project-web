@@ -110,6 +110,10 @@ class product_list_controller extends Controller
         ],
     ];
 
+    protected $words_blacklist = [
+        'در', 'به', 'را', 'از', 'و', 'برای', 'تا', 'که', 'بر', 'بی', 'مگر','-','(',')','،',','
+    ];
+
     protected $activate_cache = true;
     protected $is_search_text_category_name = true;
 
@@ -808,9 +812,96 @@ class product_list_controller extends Controller
     {
         if($special_products == true){
             $products = array_filter($products,function($product){
-                return $product['user_info']->active_pakage_type == 3;
+                return $product['user_info']->active_pakage_type != 0 || ($product['user_info']->response_rate >= 90 && $product['user_info']->ums <= 10);
             });
+
+            $user_id = session('user_id');
+            $buyAds = DB::table('buy_ads')
+                            ->where('buy_ads.myuser_id',$user_id)
+                            ->where('confirmed',true)
+                            ->whereNull('deleted_at')
+                            ->orderBy('created_at','desc')
+                            ->get();
+            $result = [];
+            
+            foreach($buyAds as $buyAd){
+                $filtered_products = [];
+
+                if(! is_null($buyAd->name)){
+                    $buyAd_name_array = array_slice($this->get_buyAd_name_array($buyAd),0,2);
+                    
+            
+                    foreach($buyAd_name_array as $search_text){
+    
+                        $tmp = array_filter($products,function($product) use($search_text,$buyAd){
+                            return $this->does_search_text_matche_the_product($search_text,$product) && $product['main']->sub_category_id === $buyAd->category_id;
+                        });
+
+                        $filtered_products = array_merge($filtered_products,$tmp);
+                    }
+                    
+                }
+                else{
+                    $filtered_products = array_filter($products,function($product) use($buyAd){
+                        return $product['main']->sub_category_id === $buyAd->category_id;
+                    });
+                }
+
+                $result = array_merge($result,$filtered_products);
+            }
+            if(count($result) > 0){
+                $products = $this->remove_duplicated_paying_sellers($result);
+            }
         }
+    }
+
+    protected function get_buyAd_name_array($buyAd)
+    {
+        $buyAd_name_array = array_filter(array_map('trim', explode(' ', str_replace('،', ' ', $buyAd->name)))); //PHP is for professionals,not for kids
+        
+        $category_info = $this->get_category_and_subcategory_name($buyAd->category_id);
+
+        if (count($buyAd_name_array)) {
+            if ($buyAd_name_array[0] == $category_info['subcategory_name']) {
+                array_splice($buyAd_name_array, 0, 1);
+            }
+        }
+
+        $buyAd_name_array = $this->remove_black_list_words($buyAd_name_array);
+
+        return $buyAd_name_array;
+    }
+
+    protected function get_category_and_subcategory_name($subcategory_id)
+    {
+        $subcategory_record = category::where('id', $subcategory_id)
+            ->select('category_name', 'parent_id')
+            ->get()
+            ->first();
+
+        $category_record = category::where('id', $subcategory_record->parent_id)
+            ->select('category_name')
+            ->get()
+            ->first();
+
+        return [
+            'category_name' => $category_record->category_name,
+            'subcategory_name' => $subcategory_record->category_name,
+        ];
+    }
+
+    protected function remove_black_list_words(&$words)
+    {
+        $result = [];
+
+        foreach ($words as $word) {
+            $index = array_search($word, $this->words_blacklist);
+            if ($index === false) {
+                $result[] = $word;
+            }
+        }
+
+        return $result;
     }
 
     protected function sort_products_by_response_rate(&$products)

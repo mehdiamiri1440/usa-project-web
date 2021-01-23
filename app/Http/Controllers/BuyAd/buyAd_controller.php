@@ -1325,13 +1325,13 @@ class buyAd_controller extends Controller
 
                 return true;
             }
-            else if($buyAd->remaining_time <= 0 && $buyAd->remaining_time > -8){
-                $buyAd->expired = true;
+            // else if($buyAd->remaining_time <= 0 && $buyAd->remaining_time > -1){
+            //     $buyAd->expired = true;
 
-                // unset($buyAd->remaining_time);
+            //     // unset($buyAd->remaining_time);
                 
-                return true;
-            }
+            //     return true;
+            // }
             else{
                 return false;
             }
@@ -1365,18 +1365,26 @@ class buyAd_controller extends Controller
         }
         else{
             $products = product::where('myuser_id',$user_id)
-                                    ->where('confirmed',true)
+                                    // ->where('confirmed',true)
+                                    ->orderBy('created_at','desc')
                                     ->get();
 
             foreach($products as $product){
                 $tmp = $this->get_new_most_related_buyAds($product)->toArray();
-                $final_golden_buyAds = array_merge($final_golden_buyAds,$tmp);
+
+                if(count($final_golden_buyAds) <= 50){
+                    $final_golden_buyAds = array_merge($final_golden_buyAds,$tmp);
+                }
+                else{
+                    break;
+                }
+                
             }
             
         }
 
-        if($final_golden_buyAds instanceof Illuminate\Database\Eloquent\Collection){
-            $final_golden_buyAds = $final_golden_buyAds->toArray();
+        if($final_golden_buyAds instanceof Illuminate\Database\Eloquent\Collection || is_object($final_golden_buyAds)){
+            $final_golden_buyAds = (array) $final_golden_buyAds;
         }
 
         return response()->json([
@@ -1440,11 +1448,9 @@ class buyAd_controller extends Controller
                                 ->where('buy_ads.category_id',$product->category_id)
                                 ->whereNull('buy_ads.deleted_at')
                                 ->select('buy_ads.id','myusers.first_name', 'myusers.last_name' ,'buy_ads.name', 'buy_ads.requirement_amount' ,'categories.category_name as subcategory_name' ,'buy_ads.myuser_id as buyer_id' )
-                                ->get()
-                                ->values()
-                                ->all();
+                                ->get();
 
-            $result_golden_buyAds = array_merge($result_golden_buyAds,$golden_buyAds);
+            $result_golden_buyAds = array_merge($result_golden_buyAds,array_values($golden_buyAds->toArray()));
         }
         
 
@@ -1549,6 +1555,7 @@ class buyAd_controller extends Controller
                             ->whereNull('deleted_at')
                             ->where('confirmed',true)
                             ->where('buy_ads.myuser_id',$user_id)
+                            ->orderBy('buy_ads.created_at','desc')
                             ->select($this->my_buyAds_required_fields)
                             ->get();
                         

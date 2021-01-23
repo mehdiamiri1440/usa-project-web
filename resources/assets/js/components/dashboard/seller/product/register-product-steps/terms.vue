@@ -190,7 +190,10 @@ textarea.error:focus + i {
     </form>
     <div class="col-xs-12">
       <button
-        class="submit-button active pull-left"
+        class="submit-button pull-left"
+        :class="{
+          active: !errors.description,
+        }"
         @click.prevent="descriptionSubmited()"
       >
         مرحله بعد
@@ -243,10 +246,10 @@ export default {
         if (
           !this.$parent.validateRegx(
             description,
-            /^[\u0600-\u06FF\s_,.:/;()+-\d]+$/
+            /^[\u0600-\u06FF\a-zA-z\s_,.:/;()+-\d]+$/
           )
         ) {
-          this.errors.description = "توضیحات شامل کاراکتر های غیرمجاز است";
+          this.errors.description = "توضیحات شامل حروف غیرمجاز است";
         }
       }
     },

@@ -775,13 +775,17 @@ class product_controller extends Controller
     //public method
     public function get_all_products_url_for_sitemap()
     {
-        $products = product::where('confirmed',true)
-                                    // ->whereRaw("LENGTH(products.description) > 700")
-                                    ->orderBy('updated_at','desc')
-                                    ->get();
-        $result_products = $this->append_related_data_to_given_products($products);
+        $products = DB::table('products')->where('confirmed',true)
+                                ->join('categories as sub','sub.id','=','products.category_id')
+                                ->leftJoin('categories','categories.parent_id','=','sub.id')
+                                ->whereNull('products.deleted_at')
+                                ->orderBy('products.created_at','desc')
+                                ->selectRaw('products.id,sub.category_name as sub_category_name,categories.category_name as category_name')
+                                ->distinct('product.id')
+                                ->get();
 
-        return $result_products;
+
+        return $products;
     }
 
     protected function get_the_most_related_buyAd_to_the_given_product_if_there_is_any(&$product)
@@ -1357,7 +1361,7 @@ class product_controller extends Controller
 
         $product = product::where('myuser_id',$user_id)
                                 ->whereBetween('created_at',[Carbon::now()->subMinutes(30),Carbon::now()])
-                                ->orderBy('created_at')
+                                ->orderBy('created_at','desc')
                                 ->get()
                                 ->first();
 
@@ -1393,7 +1397,7 @@ class product_controller extends Controller
         }
 
         $products = product::where('myuser_id',$user_id)
-                                ->where('confirmed',true)
+                                // ->where('confirmed',true)
                                 ->orderBy('created_at','desc')
                                 ->get();
 
@@ -1406,9 +1410,14 @@ class product_controller extends Controller
                 return $buyAd->is_golden == true;
             });
 
-            $buyAds = array_unique(array_merge($buyAds,$tmp),SORT_REGULAR);
+            if(count($buyAds) <= 20){
+                $buyAds = array_unique(array_merge($buyAds,$tmp),SORT_REGULAR);
+            }
+            else{
+                break;
+            }
         }
 
-        return $buyAds;
+        return array_slice($buyAds,0,20);
     }
 }

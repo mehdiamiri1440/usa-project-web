@@ -276,7 +276,7 @@ a.profile-info-wrapper:focus {
   right: 0;
   text-align: center;
   border-bottom: 1px solid #e6e6e6;
-  border-top: 1px solid #e6e6e6;
+  /* border-top: 1px solid #e6e6e6; */
 }
 
 .sub-header ul {
@@ -329,17 +329,17 @@ a.profile-info-wrapper:focus {
   position: relative;
   margin: 10px auto;
   border: none;
+  padding: 0;
 }
 
 .search-box input {
-  width: 100%;
   text-align: right;
   direction: rtl;
-  border: 1px solid #666666;
+  border: 1px solid #777;
   border-radius: 6px;
-  padding: 6px 35px 5px 15px;
-  background: #f8f8f8;
-  font-size: 12px;
+  padding: 6px 50px 5px 15px;
+  background: #fff;
+  font-size: 14px;
   float: right;
 }
 
@@ -347,12 +347,12 @@ a.profile-info-wrapper:focus {
   background: none;
   border: none;
   position: absolute;
-  right: 16px;
-  top: 9px;
+  right: 5px;
+  top: 7px;
   border-left: 1px solid;
   color: #777;
   padding: 0 7px;
-  font-size: 12px;
+  font-size: 22px;
   height: 20px;
 }
 

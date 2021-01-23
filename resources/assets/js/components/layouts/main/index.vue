@@ -1488,7 +1488,7 @@ var RequestCarousel = {
     "</span>" +
     '<span v-text="need"></span>' +
     '<span class="static-content">' +
-    "کیلوگرم" +
+    // "کیلوگرم" +
     "</span>" +
     "</p>" +
     '<p class="list-time col-sm-4 col-xs-12" v-text="date"></p>' +
