@@ -1383,8 +1383,8 @@ class buyAd_controller extends Controller
             
         }
 
-        if($final_golden_buyAds instanceof Illuminate\Database\Eloquent\Collection){
-            $final_golden_buyAds = $final_golden_buyAds->toArray();
+        if($final_golden_buyAds instanceof Illuminate\Database\Eloquent\Collection || is_object($final_golden_buyAds)){
+            $final_golden_buyAds = (array) $final_golden_buyAds;
         }
 
         return response()->json([
@@ -1448,11 +1448,9 @@ class buyAd_controller extends Controller
                                 ->where('buy_ads.category_id',$product->category_id)
                                 ->whereNull('buy_ads.deleted_at')
                                 ->select('buy_ads.id','myusers.first_name', 'myusers.last_name' ,'buy_ads.name', 'buy_ads.requirement_amount' ,'categories.category_name as subcategory_name' ,'buy_ads.myuser_id as buyer_id' )
-                                ->get()
-                                ->values()
-                                ->all();
+                                ->get();
 
-            $result_golden_buyAds = array_merge($result_golden_buyAds,$golden_buyAds);
+            $result_golden_buyAds = array_merge($result_golden_buyAds,array_values($golden_buyAds->toArray()));
         }
         
 
