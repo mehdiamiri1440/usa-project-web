@@ -22,18 +22,6 @@ elif [ "$role" = "queue" ]; then
     echo "Running the queue..."
     php /var/www/html/artisan queue:work --verbose --tries=3 --timeout=90 --queue=sms,fcm,default
 
-elif [ "$role" = "queue-helper-1" ]; then
-
-    php /var/www/html/artisan config:cache
-    echo "Running the queue-helper-1"
-    php /var/www/html/artisan queue:work --verbose --tries=3 --timeout=90 --queue=sms,fcm,default
-
-elif [ "$role" = "queue-helper-2" ]; then
-
-    php /var/www/html/artisan config:cache
-    echo "Running the queue-helper-2"
-    php /var/www/html/artisan queue:work --verbose --tries=3 --timeout=90 --queue=sms,fcm,default
-
 elif [ "$role" = "scheduler" ]; then
 
     php /var/www/html/artisan config:cache
