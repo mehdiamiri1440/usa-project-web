@@ -168,6 +168,32 @@ services:
     networks:
       - backend
 
+  queue-helper-1:
+    image: buskool-app
+    container_name: laravel-helper-1
+    restart: always
+    depends_on:
+      - laravel-app
+    volumes:
+      - .:/var/www/html
+    environment:
+      CONTAINER_ROLE: queue
+    networks:
+      - backend
+
+  queue-helper-2:
+    image: buskool-app
+    container_name: laravel-helper-2
+    restart: always
+    depends_on:
+      - laravel-app
+    volumes:
+      - .:/var/www/html
+    environment:
+      CONTAINER_ROLE: queue
+    networks:
+      - backend
+
   blog:
     image: wordpress:php7.2
     container_name: blog
