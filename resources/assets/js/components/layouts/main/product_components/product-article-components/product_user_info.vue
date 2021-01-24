@@ -177,20 +177,30 @@ p.response-rate {
 <template>
   <div class="user-information-wrapper row">
     <div class="user-information-contents">
-      <router-link :to="'/profile/'+ user_name" class="user-information-link">
+      <router-link :to="'/profile/' + user_name" class="user-information-link">
         <div class="user-information-content-image">
           <div class="user-image" v-if="profile_photo">
-            <img v-bind:src=" '/storage/' + profile_photo" />
+            <img v-bind:src="'/storage/' + profile_photo" />
           </div>
 
           <div class="user-image" v-else>
-            <img src="../../../../../../img/user-defult.png" class="image_defult" />
+            <img
+              src="../../../../../../img/user-defult.png"
+              class="image_defult"
+            />
           </div>
         </div>
 
-        <div v-if="user_info.response_rate" class="user-information-content">
-          <router-link class="user-name-link" :to="'/profile/'+ user_name" v-if="user_info">
-            {{user_full_name}}
+        <div
+          v-if="user_info.response_rate && user_info.response_rate != '0'"
+          class="user-information-content"
+        >
+          <router-link
+            class="user-name-link"
+            :to="'/profile/' + user_name"
+            v-if="user_info"
+          >
+            {{ user_full_name }}
             <button
               v-if="user_info.is_verified"
               @click.prevent
@@ -212,8 +222,12 @@ p.response-rate {
         </div>
 
         <div v-else class="user-information-content default">
-          <router-link class="user-name-link" :to="'/profile/'+ user_name" v-if="user_info">
-            {{user_full_name}}
+          <router-link
+            class="user-name-link"
+            :to="'/profile/' + user_name"
+            v-if="user_info"
+          >
+            {{ user_full_name }}
             <button
               v-if="user_info.is_verified"
               @click.prevent
@@ -224,7 +238,7 @@ p.response-rate {
               :data-content="$parent.verifiedUserContent"
               title
             >
-              <i  class="fa fa-certificate"></i>
+              <i class="fa fa-certificate"></i>
             </button>
           </router-link>
         </div>
@@ -232,18 +246,30 @@ p.response-rate {
 
       <router-link
         v-if="!is_my_profile_status"
-        :to="'/profile/'+ user_name"
-        :class="{'default' : !user_info.response_rate}"
-        @click="registerComponentStatistics('product','showUserProfile','show profile')"
+        :to="'/profile/' + user_name"
+        :class="{
+          default: !user_info.response_rate || user_info.response_rate == '0',
+        }"
+        @click="
+          registerComponentStatistics(
+            'product',
+            'showUserProfile',
+            'show profile'
+          )
+        "
         class="user-action-link green-text"
-      >مشاهده پروفایل</router-link>
+        >مشاهده پروفایل</router-link
+      >
       <a
         v-else
         href="#"
         @click.prevent="deleteProduct()"
-        :class="{'default' : !user_info.response_rate}"
+        :class="{
+          default: !user_info.response_rate || user_info.response_rate == '0',
+        }"
         class="user-action-link red-text"
-      >حذف محصول</a>
+        >حذف محصول</a
+      >
     </div>
     <div class="article-action-buttons">
       <button
@@ -281,17 +307,17 @@ export default {
     "user_name",
     "current_user",
     "product_id",
-    "is_my_profile_status"
+    "is_my_profile_status",
   ],
   data() {
     return {
       popUpMsg: "",
       deleteButtonText: "",
-      cancelButtonText: ""
+      cancelButtonText: "",
     };
   },
   methods: {
-    openChat: function(product) {
+    openChat: function (product) {
       this.registerComponentStatistics(
         "product",
         "openChat",
@@ -306,7 +332,7 @@ export default {
         last_name: this.user_info.last_name,
         profile_photo: this.profile_photo,
         user_name: this.user_info.user_name,
-        product_name: productName
+        product_name: productName,
       };
       var self = this;
 
@@ -324,16 +350,16 @@ export default {
       } else {
         window.localStorage.setItem("contact", JSON.stringify(contact));
         // this.$router.push({ name: "registerInquiry" });
-        eventBus.$emit('modal','sendMsg');
+        eventBus.$emit("modal", "sendMsg");
       }
     },
-    scrollToTheRequestRegisterBox: function(element) {
+    scrollToTheRequestRegisterBox: function (element) {
       var newPosition = $(element).offset();
       $("html, body")
         .stop()
         .animate({ scrollTop: newPosition.top - 380 }, 1000);
     },
-    deleteProduct: function() {
+    deleteProduct: function () {
       //show modal
       // this.popUpMsg = "آیا محصول حذف شود؟";
       // this.deleteButtonText = "حذف";
@@ -353,40 +379,44 @@ export default {
         "click on delete product-btn"
       );
     },
-    registerComponentStatistics: function(categoryName, actionName, labelName) {
+    registerComponentStatistics: function (
+      categoryName,
+      actionName,
+      labelName
+    ) {
       gtag("event", actionName, {
         event_category: categoryName,
-        event_label: labelName
+        event_label: labelName,
       });
     },
-    registerComponentExceptions: function(description, fatal = false) {
+    registerComponentExceptions: function (description, fatal = false) {
       gtag("event", "exception", {
         description: description,
-        fatal: fatal
+        fatal: fatal,
       });
     },
     activeComponentTooltip() {
       $(".verified-user")
         .popover({ trigger: "manual", html: true, animation: false })
-        .on("mouseenter", function() {
+        .on("mouseenter", function () {
           var _this = this;
           $(this).popover("show");
-          $(".popover").on("mouseleave", function() {
+          $(".popover").on("mouseleave", function () {
             $(_this).popover("hide");
           });
         })
-        .on("mouseleave", function() {
+        .on("mouseleave", function () {
           var _this = this;
-          setTimeout(function() {
+          setTimeout(function () {
             if (!$(".popover:hover").length) {
               $(_this).popover("hide");
             }
           }, 300);
         });
-    }
+    },
   },
-  mounted: function() {
+  mounted: function () {
     this.activeComponentTooltip();
-  }
+  },
 };
 </script>
