@@ -137,7 +137,16 @@ class product_list_controller extends Controller
             if($this->is_sorting_option_valid($request->sort_by)){
                 
                 if($request->sort_by == 'BM'){
-                    $products = $this->{$this->sorting_options_array[$request->sort_by]}($products);
+                    $cache_key = md5('products-' . session('user_id'));
+
+                    if(Cache::has($cache_key)){
+                        $products = Cache::get($cache_key);
+                    }
+                    else{
+                        $products = $this->{$this->sorting_options_array[$request->sort_by]}($products);
+
+                        Cache::put($cache_key,$products,15);  
+                    }
                 }
                 else{
                     $products = $this->{$this->sorting_options_array[$request->sort_by]}($products);
@@ -461,7 +470,7 @@ class product_list_controller extends Controller
         if($user_info->is_buyer == true){
             $the_buyer_last_buyAd_request = buyAd::where('myuser_id',$user_id)
                                                     // ->where('confirmed',true)
-                                                    ->orderBy('updated_at')
+                                                    ->orderBy('updated_at','desc')
                                                     ->get()
                                                     ->last();
 
