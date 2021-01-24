@@ -145,7 +145,9 @@ class product_list_controller extends Controller
                     else{
                         $products = $this->{$this->sorting_options_array[$request->sort_by]}($products);
 
-                        Cache::put($cache_key,$products,15);  
+                        if($is_filter_applied == false){
+                            Cache::put($cache_key,$products,15);  
+                        }
                     }
                 }
                 else{
