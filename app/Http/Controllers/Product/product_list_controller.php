@@ -123,7 +123,7 @@ class product_list_controller extends Controller
 
         $products = $this->get_products_from_cache();
 
-        $this->apply_product_filters($request,$products);
+        $is_filter_applied = $this->apply_product_filters($request,$products);
 
         if(is_null($products)){
             return response()->json([
@@ -139,7 +139,7 @@ class product_list_controller extends Controller
                 if($request->sort_by == 'BM'){
                     $cache_key = md5('products-' . session('user_id'));
 
-                    if(Cache::has($cache_key)){
+                    if($is_filter_applied == false && Cache::has($cache_key)){
                         $products = Cache::get($cache_key);
                     }
                     else{
@@ -220,25 +220,34 @@ class product_list_controller extends Controller
     
     protected function apply_product_filters($request,&$products)
     {
+        $is_filter_applied = false;
+
         if($request->has('category_id')){
             $this->apply_category_filter($products,$request->category_id);
+            $is_filter_applied = true;
         }
 
         if($request->has('province_id')){
             $this->apply_province_filter($products,$request->province_id);
+            $is_filter_applied = true;
         }
 
         if($request->has('city_id')){
             $this->apply_city_filter($products,$request->city_id);
+            $is_filter_applied = true;
         }
 
         if($request->has('search_text')){
             $this->apply_search_text_filter($products,$request->search_text);
+            $is_filter_applied = true;
         }
 
         if($request->has('special_products')){
             $this->apply_special_products_filter($products,$request->special_products);
+            $is_filter_applied = true;
         }
+
+        return $is_filter_applied;
     }
 
     public function get_all_products_with_related_media()
