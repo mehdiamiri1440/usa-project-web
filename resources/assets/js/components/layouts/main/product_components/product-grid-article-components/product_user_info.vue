@@ -186,7 +186,10 @@ p.response-rate {
           </div>
         </div>
 
-        <div v-if="user_info.response_rate" class="user-information-content">
+        <div
+          v-if="user_info.response_rate && user_info.response_rate != '0'"
+          class="user-information-content"
+        >
           <router-link
             class="user-name-link"
             :to="'/profile/' + user_name"
@@ -317,7 +320,7 @@ export default {
       } else {
         window.localStorage.setItem("contact", JSON.stringify(contact));
         // this.$router.push({ name: "registerInquiry" });
-        eventBus.$emit('modal','sendMsg');
+        eventBus.$emit("modal", "sendMsg");
       }
     },
     scrollToTheRequestRegisterBox: function (element) {
