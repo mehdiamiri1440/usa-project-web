@@ -1370,7 +1370,7 @@ class buyAd_controller extends Controller
                                     ->get();
 
             foreach($products as $product){
-                $tmp = $this->get_new_most_related_buyAds($product)->toArray();
+                $tmp = $this->get_new_most_related_buyAds($product);
 
                 if(count($final_golden_buyAds) <= 50){
                     $final_golden_buyAds = array_merge($final_golden_buyAds,$tmp);
@@ -1487,8 +1487,6 @@ class buyAd_controller extends Controller
                                 ->select($this->related_buyAds_required_fields)
                                 ->get();
 
-        return $buyAds;
-
         $buyAds = $this->get_most_valuable_buyAds($buyAds);
 
         return $buyAds;
@@ -1496,9 +1494,13 @@ class buyAd_controller extends Controller
 
     protected function get_most_valuable_buyAds($buyAds)
     {
-        $buyer_ids = $buyAds->map(function($buyAd){
-            return collect($buyAd)->only('myuser_id');
-        });
+        $buyer_ids = [];
+
+        foreach($buyAds as $buyAd){
+            $buyer_ids[] = $buyAd->buyer_id;
+        }
+
+        $buyer_ids = array_unique($buyer_ids);
 
         $result = DB::table('messages')->selectRaw("receiver_id as user_id,count(DISTINCT(sender_id)) as in_degree,((SELECT count(DISTINCT(sender_id)) as cnt from messages where receiver_id = user_id and is_read = true)/count(DISTINCT(sender_id))) * 100 as response_rate,(SELECT count(DISTINCT(receiver_id)) as cnt from messages where sender_id = user_id) as out_degree")
                                             ->whereIn('receiver_id',$buyer_ids)
@@ -1512,8 +1514,8 @@ class buyAd_controller extends Controller
 
         $buyer_ids = [];
         $important_buyAds = $buyAds->filter(function($buyAd) use($result,&$buyer_ids){ //extract selected buyers from all related buyAds
-            if(in_array($buyAd->myuser_id,$result) === true && in_array($buyAd->myuser_id,$buyer_ids) === false){
-                $buyer_ids[] = $buyAd->myuser_id;
+            if(in_array($buyAd->buyer_id,$result) === true){
+                $buyer_ids[] = $buyAd->buyer_id;
                 $buyAd->is_golden = true;
                 unset($buyAd->created_at);
                 unset($buyAd->updated_at);
