@@ -442,6 +442,23 @@ a.profile-info-wrapper:hover {
   text-align: center;
   z-index: 1;
 }
+
+.star-badge {
+  color: rgb(249, 242, 159);
+}
+
+.star-badge i {
+  background: linear-gradient(
+    21deg,
+    rgb(199, 168, 79) 0%,
+    rgb(249, 242, 159) 51%,
+    rgb(199, 168, 79) 100%
+  );
+  background-clip: border-box;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 .mobile-navigation li {
   position: relative;
 }
@@ -769,7 +786,7 @@ a.profile-info-wrapper:hover {
 
               <router-link
                 data-dismiss="modal"
-                :to="{ name: 'login' }"
+                :to="{ name: 'register' }"
                 class="btn green-button"
                 >ورود/ثبت نام</router-link
               >
@@ -899,7 +916,7 @@ a.profile-info-wrapper:hover {
             </li>
 
             <li class="mobile-login-link hidden-sm hidden-md hidden-lg">
-              <router-link class="green-button" :to="{ name: 'login' }">
+              <router-link class="green-button" :to="{ name: 'register' }">
                 <i class="fa fa-user"></i>
 
                 <span>ورود / ثبت نام</span>
@@ -1021,6 +1038,25 @@ a.profile-info-wrapper:hover {
                   >ثبت درخواست خرید</router-link
                 >
               </li>
+              <li v-if="user_id !== ''">
+                <router-link
+                  v-if="is_seller == 1"
+                  class="smoothScroll"
+                  :to="{ name: 'messagesRequestSeller' }"
+                  @click="
+                    registerComponentStatistics(
+                      'header',
+                      'dashboard',
+                      'click-on-dashboard'
+                    )
+                  "
+                >
+                  <span class="star-badge">
+                    <i class="fa fa-star"></i>
+                  </span>
+                  خریداران پیشنهادی
+                </router-link>
+              </li>
               <li>
                 <router-link
                   class="smoothScroll"
@@ -1137,7 +1173,6 @@ a.profile-info-wrapper:hover {
               ></span>
             </router-link>
           </li>
-
           <li v-if="user_id !== ''">
             <router-link
               v-if="is_seller == 1"
@@ -1166,7 +1201,25 @@ a.profile-info-wrapper:hover {
               >ثبت درخواست خرید</router-link
             >
           </li>
-
+          <li v-if="user_id !== ''">
+            <router-link
+              v-if="is_seller == 1"
+              class="smoothScroll"
+              :to="{ name: 'messagesRequestSeller' }"
+              @click="
+                registerComponentStatistics(
+                  'header',
+                  'dashboard',
+                  'click-on-dashboard'
+                )
+              "
+            >
+              <span class="star-badge">
+                <i class="fa fa-star"></i>
+              </span>
+              خریداران پیشنهادی
+            </router-link>
+          </li>
           <li>
             <router-link
               class="smoothScroll"

@@ -159,7 +159,12 @@
                 v-text="'عضویت در گروه'"
               ></a>
 
-              <a href="#" class="btn green-button bg-gray" data-dismiss="modal" v-text="'انصراف'"></a>
+              <a
+                href="#"
+                class="btn green-button bg-gray"
+                data-dismiss="modal"
+                v-text="'انصراف'"
+              ></a>
             </div>
           </div>
           <!-- /.modal-content -->
@@ -185,9 +190,15 @@
               <br />
               <p class="main-pop-up" v-text="elevatorText"></p>
 
-              <a href class="btn green-button bg-gray" data-dismiss="modal">متوجه شدم</a>
+              <a href class="btn green-button bg-gray" data-dismiss="modal"
+                >متوجه شدم</a
+              >
 
-              <a :href="'/payment/elevator/' + productId" class="btn green-button">خرید نردبان</a>
+              <a
+                :href="'/payment/elevator/' + productId"
+                class="btn green-button"
+                >خرید نردبان</a
+              >
             </div>
           </div>
           <!-- /.modal-content -->
@@ -221,7 +232,10 @@
                 <img src="../../../img/logo/mobile-logo.svg" alt />
               </div>
               <h3>اپلیکیشن جدید باسکول</h3>
-              <p>برای دسترسی سریعتر و راحت تر به خریداران و فروشندگان عمده برنامه جدید باسکول را نصب کنید.</p>
+              <p class="text-rtl">
+                برای دسترسی سریعتر و راحت تر به خریداران و فروشندگان عمده برنامه
+                جدید باسکول را نصب کنید.
+              </p>
               <a href @click.prevent="doDownload()">
                 دانلود اپلیکیشن باسکول
                 <i class="fa fa-download"></i>
@@ -263,6 +277,7 @@
 
     <router-view
       name="seller"
+      class="h-100"
       :user-id="userId"
       :is-seller="isSeller"
       :assets="assets"
@@ -272,7 +287,10 @@
 
     <!-- add android app download  -->
 
-    <div v-if="isConditionSatisfied" class="android-download-alert-wrapper hidden-lg hidden-md">
+    <div
+      v-if="isConditionSatisfied"
+      class="android-download-alert-wrapper hidden-lg hidden-md"
+    >
       <button
         class="close-android-download-alert-wrapper"
         @click.prevent="isConditionSatisfied = false"
@@ -309,6 +327,7 @@ export default {
       isConditionSatisfied: false,
       elevatorText: "",
       productId: "",
+      buyAdId: "",
       joinGroupMessage: "",
       joinGroupId: "",
       activeContactId: "",
@@ -317,6 +336,7 @@ export default {
       reviewCurrentStep: 0,
       reviewUserData: "",
       reviewUserPrfileId: "",
+      currentUserCreatedAt: "",
       verifiedUserContent:
         "<div class='tooltip-wrapper text-rtl'>اطلاعات هویتی این کاربر احراز شده است.<br/><a href='/verification'>اطلاعات بیشتر</a> </div>",
     };
@@ -340,6 +360,10 @@ export default {
 
     eventBus.$on("productId", ($event) => {
       this.productId = $event;
+    });
+
+    eventBus.$on("buyAdId", ($event) => {
+      this.buyAdId = $event;
     });
 
     eventBus.$on("joinGroupId", ($event) => {
@@ -424,7 +448,7 @@ export default {
       // code here
       this.createCookie("downloadAppModal", true, 60 * 24);
       window.location.href =
-        "https://app-download.s3.ir-thr-at1.arvanstorage.com/buskool.apk";
+        "https://play.google.com/store/apps/details?id=com.buskool";
     },
     isOsIOS: function () {
       var userAgent = window.navigator.userAgent.toLowerCase(),
@@ -447,15 +471,18 @@ export default {
             window.location.pathname != "/buyer/messenger/contacts" &&
             window.location.pathname != "/seller/messenger/contacts" &&
             window.location.pathname != "/seller/buyAd-requests" &&
-            !window.location.pathname.includes('product-view') &&
+            !window.location.pathname.includes("product-view") &&
             !this.iswebview
           ) {
             this.isConditionSatisfied = true;
           }
+
           if (!this.checkCookie() && this.userId && !this.iswebview) {
+            console.log(" run modal");
+
             setTimeout(() => {
               $("#download-app-modal").modal("show");
-            }, 5000);
+            }, 1000);
           }
         }
       }
@@ -500,6 +527,9 @@ export default {
           break;
         case "deleteProduct":
           this.raiseDeleteProductModal();
+          break;
+        case "deleteBuyAdModal":
+          this.raiseDeleteBuyAdModal();
           break;
         case "productEditDone":
           this.raiseProductEditSuccessModal();
@@ -680,6 +710,89 @@ export default {
         }
       });
     },
+    raiseDeleteBuyAdModal: function () {
+      let self = this;
+
+      this.handleBackBtn();
+
+      swal({
+        title: "حذف درخواست",
+        text: "آیا میخواهید این درخواست را حذف کنید؟",
+        // content: closeIconBtn,
+        className: "custom-swal-with-cancel",
+        buttons: {
+          delete: {
+            text: "حذف کن",
+            value: "delete",
+            className: "bg-red",
+          },
+          reject: {
+            text: "انصراف",
+          },
+          close: {
+            text: "بستن",
+            className: "bg-cancel",
+          },
+        },
+      }).then((value) => {
+        switch (value) {
+          case "delete":
+            axios
+              .post("/delete_buy_ad_by_id", {
+                buy_ad_id: self.buyAdId,
+              })
+              .then(function (response) {
+                swal({
+                  title: "حذف شد",
+                  text: "درخواست خرید شما با موفقیت حذف شد.",
+                  icon: "success",
+                  className: "custom-swal-with-cancel",
+                  buttons: {
+                    close: {
+                      text: "بستن",
+                      value: "close",
+                      className: "bg-cancel",
+                    },
+                  },
+                }).then((value) => {
+                  if (value == "close") {
+                    window.location.reload();
+                  }
+                });
+
+                self.registerComponentStatistics(
+                  "product",
+                  "product-deleted",
+                  "product-deleted-successfully"
+                );
+              })
+              .catch(function (err) {
+                console.log(err);
+                self.registerComponentStatistics(
+                  "product",
+                  "product-delete-failed",
+                  "product-delete-failed"
+                );
+                //show modal
+                swal({
+                  title: "خطا",
+                  text: "خطایی رخ داده است. دوباره تلاش کنید.",
+                  icon: "error",
+                  className: "custom-swal-with-cancel",
+                  buttons: {
+                    close: {
+                      text: "بستن",
+                      value: "close",
+                      className: "bg-cancel",
+                    },
+                  },
+                });
+              });
+
+            break;
+        }
+      });
+    },
     raiseProductEditSuccessModal: function () {
       this.handleBackBtn();
       swal({
@@ -717,7 +830,7 @@ export default {
 
       let content = document.createElement("div");
       content.innerHTML =
-        '<p dir="rtl">سقف تعداد محصولات ثبت شده شما پر شده است.</p><br/><p class="red-text" dir="rtl"><b>برای ثبت محصولات جدید، لطفا دکمه افزایش ظرفیت را بزنید.</b></p>';
+        '<p dir="rtl" class="swal-guide">سقف تعداد محصولات ثبت شده شما پر شده است.</p><br/><p class="red-text swal-guide" dir="rtl"><b>برای ثبت محصولات جدید، لطفا دکمه افزایش ظرفیت را بزنید.</b></p>';
       swal({
         title: "محدودیت ثبت محصول جدید",
         content: content,
@@ -749,7 +862,7 @@ export default {
 
       let content = document.createElement("div");
       content.innerHTML =
-        '<p dir="rtl">ظرفیت روزانه پاسخ به درخواست های خرید شما پر شده است.</p><br/><p class="red-text" dir="rtl"><b>برای افزایش ظرفیت، لطفا دکمه افزایش ظرفیت را بزنید.</b></p>';
+        '<p class="swal-guide" dir="rtl">ظرفیت روزانه پاسخ به درخواست های خرید شما پر شده است.</p><br/><p class="red-text swal-guide" dir="rtl"><b>برای افزایش ظرفیت، لطفا دکمه افزایش ظرفیت را بزنید.</b></p>';
       swal({
         title: "محدودیت پاسخ به درخواست ها",
         content: content,
@@ -896,7 +1009,7 @@ export default {
 
       let content = document.createElement("div");
       content.innerHTML =
-        '<p dir="rtl">شما به درخواست هایی طلایی دسترسی ندارید.</p><br/><p class="red-text" dir="rtl"><b>برای دسترسی به تمام درخواست های طلایی، عضویت خود را ارتقا دهید.</b></p>';
+        '<p><span class="swal-star-badge"><i class="fa fa-star"></i></span></p><br/><p class="swal-guide" dir="rtl">شما به درخواست هایی طلایی دسترسی ندارید.</p><br/><p class="red-text swal-guide" dir="rtl"><b>برای دسترسی به تمام درخواست های طلایی، عضویت خود را ارتقا دهید.</b></p>';
       swal({
         title: "درخواست های طلایی",
         content: content,
@@ -992,9 +1105,18 @@ export default {
     },
   },
   mounted() {
-    this.activateDownloadApp();
     // eventBus.$emit("globalVerifiedBadgeContents", this.verifiedUserContent);
     eventBus.$emit("globalVerifiedBadgeContents", 1);
+  },
+  watch: {
+    currentUserCreatedAt(date) {
+      let userCreatedAt = new Date(date);
+      let currentDate = new Date();
+      currentDate = new Date(currentDate.getTime() - 60 * 60000);
+      if (currentDate > userCreatedAt) {
+        this.activateDownloadApp();
+      }
+    },
   },
 };
 </script>

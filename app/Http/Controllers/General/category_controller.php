@@ -17,7 +17,12 @@ class category_controller extends Controller
         $casade_list = $request->cascade_list;
 
         $all_categories = Cache::remember(md5('categories'),24 * 60,function(){
-            return DB::table('categories')->get();
+            return DB::table('categories')
+                        ->leftJoin('products','products.category_id','=','categories.id')
+                        ->select('categories.*',DB::raw('count(products.id) as score'))
+                        ->groupBy('categories.id','categories.created_at','categories.updated_at','categories.category_name','categories.parent_id')
+                        ->orderBy('score','desc')
+                        ->get();
         });
 
         if (!$request->has('parent_id')) {
@@ -31,12 +36,25 @@ class category_controller extends Controller
                 $categories->each(function ($item) use($all_categories){
                     // $item['subcategories'] = category::where('parent_id', $item->id)
                     //     ->get();
-                    $item->subcategories = $all_categories->filter(function($category) use($item){
+                    $other = null;
+                    $item->subcategories = $all_categories->filter(function($category) use($item,&$other){
+                        if($category->parent_id == $item->id && $category->category_name == 'سایر'){
+                            $other = $category;
+                            return false;
+                        }
+
                         return $category->parent_id == $item->id;
                     });
+
+                    if(! is_null($other)){
+                        ($item->subcategories)[] = $other;
+                    }
+
+                    // $item->subcategories = collect($item->subcategories);
                 });
             }
-        } else {
+        } 
+        else {
             if ($request->has('cascade_list') && $casade_list == true) {
                 $categories = [];
 
@@ -47,15 +65,34 @@ class category_controller extends Controller
 
                 // $categories['subcategories'] = category::where('parent_id', $parent_id)
                 //     ->get();
-                $categories->subcategories = $all_categories->filter(function($category) use($parent_id){
+                $other = null;
+                $categories->subcategories = $all_categories->filter(function($category) use($parent_id,&$other){
+                    if($category->parent_id == $parent_id && $category->category_name == 'سایر'){
+                        $other = $category;
+                        return false;
+                    }
                     return $category->parent_id == $parent_id;
                 });
+
+                if(! is_null($other)){
+                    ($categories->subcategories)[] = $other;
+                }
             } else {
                 // $categories = category::where('parent_id', $parent_id)
                 //     ->get();
-                $categories = $all_categories->filter(function($category) use($parent_id){
+                $other = null;
+                $categories = $all_categories->filter(function($category) use($parent_id,&$other){
+                    if($category->parent_id == $parent_id && $category->category_name == 'سایر'){
+                        $other = $category;
+                        return false;
+                    }
+
                     return $category->parent_id == $parent_id;
                 });
+
+                if(! is_null($other)){
+                    $categories[] = $other;
+                }
             }
         }
 

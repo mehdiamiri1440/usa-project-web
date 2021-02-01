@@ -650,7 +650,7 @@ export default {
       deleteText: "",
       deleteButtonText: "",
       cancelButtonText: "",
-      ProductId: "",
+      productId: "",
       searchValueText: "",
       resetTextSearch: false,
     };

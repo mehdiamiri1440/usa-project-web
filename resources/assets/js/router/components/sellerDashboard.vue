@@ -153,7 +153,11 @@
       :offer-time="this.offerTime"
     ></header-dash-seller>
 
-    <div id="main" :class="{ 'is-required-fix-alert': isRequiredFixAlert }">
+    <div
+      id="main"
+      class="h-100"
+      :class="{ 'is-required-fix-alert': isRequiredFixAlert }"
+    >
       <router-view
         :str="storagePath"
         :user-type="currentUser.user_info.is_seller"
@@ -203,6 +207,8 @@ export default {
         "buyAd-requests",
         "messenger/contacts",
         "messenger/buy-ads",
+        "register-product/success",
+        "register-product",
       ],
       buttonIsActive: true,
       currentUser: {
@@ -370,6 +376,10 @@ export default {
     },
   },
   watch: {
+    currentUser(user) {
+      if (user.profile.created_at)
+        this.$parent.currentUserCreatedAt = user.profile.created_at;
+    },
     $route() {
       this.checkButtonIsHide();
       this.checkPricingModal();

@@ -10,7 +10,8 @@ span {
 }
 
 .main-article-contents h3 a {
-  color: #474747;
+  color: #777;
+  font-size: 16px;
 }
 .main-article-contents h3 {
   font-size: 14px;
@@ -64,8 +65,8 @@ span {
 }
 
 .main-article-contents p {
-  font-size: 11px;
-
+  font-size: 13px;
+  color: #777;
   font-weight: bold;
 
   max-width: 500px;
@@ -185,7 +186,7 @@ span {
           ' - ' +
           $parent.product.main.province_name
         "
-        :image-count="$parent.product.photos.length"
+        :image-count="$parent.product.main.photos_count"
         :product-url="this.$parent.productUrl"
       />
     </div>
@@ -250,9 +251,8 @@ span {
         <p>
           موجودی:
           <span
-            v-text="
-              getNumberWithCommas($parent.product.main.stock) + ' کیلوگرم'
-            "
+            style="color: #474747"
+            v-text="getConvertedNumbers($parent.product.main.stock)"
           ></span>
         </p>
       </div>
@@ -311,7 +311,7 @@ export default {
       var productName = "";
       productName =
         this.$parent.product.main.sub_category_name +
-        ' <span style="color: #777">' +
+        ' <span style="color: #474747">' +
         this.$parent.product.main.product_name +
         "</span>";
       // if (this.$route.params.categoryName) {
@@ -360,6 +360,17 @@ export default {
       if (number || typeof number === "number")
         return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       else return "";
+    },
+    getConvertedNumbers: function (number) {
+      if (number || typeof number === "number") {
+        let data = number / 1000;
+        if (number < 1000) {
+          return number + " " + "کیلوگرم";
+        } else {
+          data = this.getNumberWithCommas(data);
+          return data + " " + "تن";
+        }
+      } else return "";
     },
   },
 };

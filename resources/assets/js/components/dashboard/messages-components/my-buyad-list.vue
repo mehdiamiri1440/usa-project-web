@@ -17,13 +17,54 @@
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
+.user-information-content {
+  display: block;
+  float: right;
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 10px 0 3px;
+}
+.user-image {
+  width: 25px;
+  height: 25px;
+  float: right;
+  margin-left: 10px;
+}
+.user-content {
+  display: block;
+  max-width: 170px;
+  overflow: hidden;
+  font-size: 13px;
+  font-weight: 400;
+  color: #adadad;
+  height: 21px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  text-align: right;
+}
+
+.user-content i {
+  margin-left: 1px;
+  position: relative;
+  top: 3px;
+  font-size: 15px;
+}
 
 .contact-items {
   padding-top: 80px;
 }
 
 li.contact-item {
+  border-bottom: 2px solid #dddddd;
+  float: right;
+  width: 100%;
+  padding: 10px 0;
   min-height: 230px;
+}
+
+li.contact-item:nth-last-of-type(2n + 1) {
+  background: #f9fcff !important;
 }
 
 .contact-items.is-buyer-list {
@@ -215,6 +256,22 @@ li.contact-item {
   z-index: 1;
 }
 
+i.fa-star {
+  font-size: 16px;
+  background: linear-gradient(
+    21deg,
+    rgb(199, 168, 79) 0%,
+    rgb(249, 242, 159) 51%,
+    rgb(199, 168, 79) 100%
+  );
+  background-clip: border-box;
+  background-clip: border-box;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: relative;
+  top: 2px;
+}
+
 .total-unread-messages-badge {
   position: absolute;
   top: -6px;
@@ -228,16 +285,12 @@ li.contact-item {
   line-height: 1;
   padding-top: 2px;
 }
+
 .contact-button.active {
   border-radius: 4px 4px 0 0;
 }
 .buyad-lists-wrapper .contact-item > div {
-  background: #fff;
-  border: none;
-  border-bottom: 2px solid #dddddd;
-  padding: 0;
   text-align: center;
-  width: 100%;
 }
 .buyad-expire {
   color: #556080;
@@ -246,18 +299,20 @@ li.contact-item {
 .buyad-notice {
   color: #aeaeae;
 }
-.request-contact-image {
-  width: 30px;
-  height: 30px;
-  float: right;
+
+.golden .buyad-notice {
+  display: inline-block;
+  margin-bottom: 15px;
 }
+
 .buyad-info {
   font-size: 15px;
   padding: 5px;
   font-weight: bold;
   color: #777;
-  min-height: 58px;
+  min-height: 68px;
   padding-top: 15px;
+  line-height: 1.618;
 }
 .buyad-notice.red-text {
   padding-top: 15px;
@@ -270,12 +325,6 @@ li.contact-item {
   color: #777;
 }
 
-.buyad-header {
-  padding: 8px 5px;
-  float: right;
-  width: 100%;
-  border-bottom: 1px solid #f2f2f2;
-}
 .contact-body .contact-item .my-contact-info-wrapper {
   float: right;
   padding-top: 7px;
@@ -289,17 +338,19 @@ li.contact-item {
   background: #00c569;
   color: #fff;
   border-radius: 4px;
-  padding: 3px;
-  max-width: 150px;
-  margin: 7px auto 15px;
+  padding: 8px 0;
+  max-width: 200px;
+  margin: 15px auto;
   transition: 300ms;
   display: block;
   border: none;
   width: 100%;
+  font-size: 17px;
+  font-weight: bold;
 }
 
 .buyad-button :hover {
-  background: #00c569;
+  /* background: #00c569; */
   transition: 300ms;
 }
 
@@ -308,21 +359,21 @@ li.contact-item {
   transition: 300ms;
 }
 
-.golden {
+li.golden {
   border: 2px solid rgb(199, 168, 79);
   border-top: transparent;
 }
 
-.golden:first-of-type {
+li.golden:first-of-type {
   border-top: 2px solid rgb(199, 168, 79);
 }
 
-.golden .buyad-info {
+/* li.golden .buyad-info {
   margin-top: 15px;
-}
+} */
 
-.golden .buyad-button,
-.golden .buyad-button:hover {
+li.golden .buyad-button,
+li.golden .buyad-button:hover {
   color: #333;
   background: linear-gradient(
     21deg,
@@ -396,6 +447,28 @@ li.contact-item {
 }
 .golden-info-text .buyad-info {
   font-size: 18px;
+}
+
+li.static-item {
+  margin-bottom: 50px;
+  margin-top: 20px;
+}
+
+li.static-item > i {
+  font-size: 55px;
+  display: block;
+  text-align: center;
+  color: #777;
+  margin-top: 15px;
+}
+li.static-item > button {
+  font-size: 14px;
+  background: #21ad93;
+}
+li.static-item > button i {
+  position: relative;
+  top: 2px;
+  right: 3px;
 }
 @media screen and (max-width: 991px) {
   .main-content {
@@ -479,8 +552,7 @@ li.contact-item {
       <div v-if="$parent.userType" class="contacts-switch-buttons-wrapper">
         <div class="switch-button-item">
           <button class="contact-button active">
-            <span class="total-unread-messages-badge">جدید</span>
-            <i class="fa fa-list-alt"></i>
+            <i class="fa fa-star"></i>
             خریداران پیشنهادی
           </button>
         </div>
@@ -509,7 +581,12 @@ li.contact-item {
         دانلود اپلیکیشن</a
       >
     </div>
-    <div class="image-wrapper" v-else-if="buyAds.length === 0 && isLoading">
+    <div
+      class="image-wrapper"
+      v-else-if="
+        buyAds.length === 0 && buyAdsGoldenFilter.length == 0 && isLoading
+      "
+    >
       <div class="lds-ring">
         <div></div>
         <div></div>
@@ -518,24 +595,37 @@ li.contact-item {
       </div>
       <!-- <span v-text="alt" class="lds-ring-alt"></span> -->
     </div>
-    <div v-else-if="buyAds.length === 0 && !isLoading" class="not-found-item">
+    <div
+      v-else-if="
+        buyAds.length === 0 && buyAdsGoldenFilter.length == 0 && !isLoading
+      "
+      class="not-found-item"
+    >
       <div class="empty-list">
-        <i class="fa fa-list-alt"></i>
+        <i class="fa fa-list-ul"></i>
         <p>در حال حاضر پیشنهادی برای شما وجود ندارد</p>
         <p class="red-text">
-          در صورت وجود خریدار پیشنهادی، به شما اطلاع داده می شود.
+          در صورتی که محصولی ثبت نکرده اید، ابتدا محصول خود را ثبت کنید.
         </p>
+        <router-link
+          :to="{ name: 'registerProductSeller' }"
+          tag="button"
+          class="buyad-button"
+        >
+          ثبت محصول
+        </router-link>
       </div>
     </div>
 
-    <div v-else class="contact-items buyad-lists-wrapper">
-      <div
-        v-if="
-          isSearchingBuyAds == true &&
-          buyAdsFilter.length === 0 &&
-          buyAdsGoldenFilter.length == 0
-        "
-      >
+    <div
+      v-else-if="
+        isSearchingBuyAds == true &&
+        buyAdsFilter.length === 0 &&
+        buyAdsGoldenFilter.length == 0
+      "
+      class="contact-items buyad-lists-wrapper"
+    >
+      <div>
         <div class="empty-list text-center">
           <i class="fa fa-search"></i>
           <p>جستجو نتیجه ای نداشت.</p>
@@ -544,7 +634,9 @@ li.contact-item {
           </p>
         </div>
       </div>
-      <div v-else>
+    </div>
+    <div v-else class="contact-items col-xs-12 buyad-lists-wrapper">
+      <div class="row">
         <ul>
           <li
             class="contact-item golden"
@@ -552,16 +644,16 @@ li.contact-item {
             :key="'golden-' + index"
           >
             <div v-if="$parent.currentUser.user_info.active_pakage_type > 0">
-              <div class="buyad-header">
-                <div class="request-contact-image">
-                  <img src="../../../../img/user-defult.png" />
-                </div>
-                <div class="my-contact-info-wrapper">
-                  <span
-                    class="contact-name text-rtl"
-                    v-text="buyAd.first_name + ' ' + buyAd.last_name"
-                  >
-                  </span>
+              <div class="user-information-wrapper col-xs-12">
+                <div class="user-information-content">
+                  <div class="user-content">
+                    <i class="fa fa-user-circle"></i>
+                    <span
+                      class="user-name-link"
+                      v-text="buyAd.first_name + ' ' + buyAd.last_name"
+                    >
+                    </span>
+                  </div>
                 </div>
               </div>
               <div class="buyad-main col-xs-12">
@@ -589,38 +681,45 @@ li.contact-item {
                     <span v-text="buyAd.subcategory_name"></span>
                     <span v-if="buyAd.name" class="gray-text"> از نوع </span>
                     <span v-if="buyAd.name" v-text="buyAd.name"></span>
-                    <span v-if="buyAd.name" class="gray-text"> هستم </span>
+                    <span class="gray-text"> هستم </span>
                   </p>
                   <p class="buyad-notice">
                     درصورت داشتن این محصول به من پیام دهید.
                   </p>
                   <button
-                    @click="openChat(buyAd, $event)"
+                    @click="openChat(buyAd)"
                     class="buyad-button golden-button"
+                    :id="'golden-loader-' + buyAd.id"
                   >
-                    پیام به خریدار
+                    <span>
+                      <span>
+                        <span class="fas fa-comment-alt"></span>
+                        پیام به خریدار
+                      </span>
+                      <span class="hide-reply"> کمی صبر کنید... </span>
+                    </span>
                   </button>
-                  <button
+                  <!-- <button
                     class="hide-reply buyad-button"
                     :id="'golden-loader-' + buyAd.id"
                     disabled
                   >
                     کمی صبر کنید...
-                  </button>
+                  </button> -->
                 </div>
               </div>
             </div>
             <div v-else>
-              <div class="buyad-header">
-                <div class="request-contact-image">
-                  <img src="../../../../img/user-defult.png" />
-                </div>
-                <div class="my-contact-info-wrapper">
-                  <span
-                    class="contact-name text-rtl"
-                    v-text="buyAd.first_name + ' ' + buyAd.last_name"
-                  >
-                  </span>
+              <div class="user-information-wrapper col-xs-12">
+                <div class="user-information-content">
+                  <div class="user-content">
+                    <i class="fa fa-user-circle"></i>
+                    <span
+                      class="user-name-link"
+                      v-text="buyAd.first_name + ' ' + buyAd.last_name"
+                    >
+                    </span>
+                  </div>
                 </div>
               </div>
               <div class="buyad-main col-xs-12">
@@ -635,22 +734,20 @@ li.contact-item {
                   </p>
                 </div>
                 <div class="row golden-info-text">
-                  <p>
-                    <br />
-                  </p>
                   <p class="buyad-info">
                     خریدار
 
                     <span v-text="buyAd.subcategory_name"></span>
                     <span v-if="buyAd.name" class="gray-text"> از نوع </span>
                     <span v-if="buyAd.name" v-text="buyAd.name"></span>
-                    <span v-if="buyAd.name" class="gray-text"> هستم </span>
+                    <span class="gray-text"> هستم </span>
                   </p>
 
                   <button
                     @click="openGoldenChatRestrictionModal()"
                     class="buyad-button"
                   >
+                    <i class="fas fa-comment-alt"></i>
                     پیام به خریدار
                   </button>
                 </div>
@@ -663,23 +760,16 @@ li.contact-item {
             :key="index"
           >
             <div v-if="!buyAd.expired">
-              <div class="buyad-header">
-                <div class="request-contact-image">
-                  <!-- <img
-                  v-if="contact.profile_photo"
-                  :src="$parent.str + '/' + contact.profile_photo"
-                  :alt="contact.first_name[0]"
-                /> -->
-
-                  <!-- <img v-else src="../../../../img/user-defult.png" /> -->
-                  <img src="../../../../img/user-defult.png" />
-                </div>
-                <div class="my-contact-info-wrapper">
-                  <span
-                    class="contact-name text-rtl"
-                    v-text="buyAd.first_name + ' ' + buyAd.last_name"
-                  >
-                  </span>
+              <div class="user-information-wrapper col-xs-12">
+                <div class="user-information-content">
+                  <div class="user-content">
+                    <i class="fa fa-user-circle"></i>
+                    <span
+                      class="user-name-link"
+                      v-text="buyAd.first_name + ' ' + buyAd.last_name"
+                    >
+                    </span>
+                  </div>
                 </div>
               </div>
               <div class="buyad-main col-xs-12">
@@ -707,7 +797,7 @@ li.contact-item {
                     <span v-text="buyAd.subcategory_name"></span>
                     <span v-if="buyAd.name" class="gray-text"> از نوع </span>
                     <span v-if="buyAd.name" v-text="buyAd.name"></span>
-                    <span v-if="buyAd.name" class="gray-text"> هستم </span>
+                    <span class="gray-text"> هستم </span>
                   </p>
                   <p class="buyad-expire">
                     <span class="red-text">
@@ -719,37 +809,44 @@ li.contact-item {
                   <p class="buyad-notice">
                     درصورت داشتن این محصول به من پیام دهید.
                   </p>
-                  <button @click="openChat(buyAd, $event)" class="buyad-button">
-                    پیام به خریدار
-                  </button>
                   <button
+                    @click="openChat(buyAd)"
+                    class="buyad-button"
+                    :id="'loader-' + buyAd.id"
+                  >
+                    <span>
+                      <span>
+                        <span class="fas fa-comment-alt"></span>
+                        پیام به خریدار
+                      </span>
+                      <span class="hide-reply"> کمی صبر کنید... </span>
+                    </span>
+                  </button>
+                  <!-- <button
                     class="hide-reply buyad-button"
                     :id="'loader-' + buyAd.id"
                     disabled
                   >
                     کمی صبر کنید...
-                  </button>
+                  </button> -->
                 </div>
               </div>
             </div>
             <div v-else>
-              <div class="buyad-header">
-                <div class="request-contact-image">
-                  <img src="../../../../img/user-defult.png" />
-                </div>
-                <div class="my-contact-info-wrapper">
-                  <span
-                    class="contact-name text-rtl"
-                    v-text="buyAd.first_name + ' ' + buyAd.last_name"
-                  >
-                  </span>
+              <div class="user-information-wrapper col-xs-12">
+                <div class="user-information-content">
+                  <div class="user-content">
+                    <i class="fa fa-user-circle"></i>
+                    <span
+                      class="user-name-link"
+                      v-text="buyAd.first_name + ' ' + buyAd.last_name"
+                    >
+                    </span>
+                  </div>
                 </div>
               </div>
               <div class="buyad-main col-xs-12">
                 <div class="row">
-                  <p>
-                    <br />
-                  </p>
                   <p class="buyad-info">
                     خریدار
                     <span
@@ -773,16 +870,30 @@ li.contact-item {
                     <span v-text="buyAd.subcategory_name"></span>
                     <span v-if="buyAd.name" class="gray-text"> از نوع </span>
                     <span v-if="buyAd.name" v-text="buyAd.name"></span>
-                    <span v-if="buyAd.name" class="gray-text"> هستم </span>
+                    <span class="gray-text"> هستم </span>
                   </p>
 
                   <p class="buyad-notice red-text">
                     فرصت پاسخ گویی شما به این خریدار به پایان رسیده است
                   </p>
-                  <button class="buyad-button disable">پیام به خریدار</button>
+                  <button class="buyad-button disable">
+                    <i class="fas fa-comment-alt"></i>
+                    پیام به خریدار
+                  </button>
                 </div>
               </div>
             </div>
+          </li>
+          <li class="col-xs-12 static-item">
+            <i class="fa fa-list-alt"></i>
+            <router-link
+              tag="button"
+              class="buyad-button"
+              :to="{ name: 'buyAdRequestsSeller' }"
+            >
+              همه درخواست های خرید
+              <i class="fa fa-arrow-left"></i>
+            </router-link>
           </li>
         </ul>
       </div>
@@ -841,22 +952,21 @@ export default {
           }, 300);
         });
     },
-    openChat: function (buyAd, event) {
+    openChat: function (buyAd) {
       var self = this;
       let id = "#loader-0";
-      if ($(event.target).hasClass("golden-button")) {
+      if ($("#golden-loader-" + buyAd.id).length) {
         id = "#golden-loader-" + buyAd.id;
       } else {
         id = "#loader-" + buyAd.id;
       }
-      self.hideReplyBtn(event, id);
-
+      self.hideReplyBtn(id);
       axios
         .post("/get_user_permission_for_buyAd_reply", {
           buy_ad_id: buyAd.id,
         })
         .then(function (response) {
-          self.showReplyBtn(event, id);
+          self.showReplyBtn(id);
 
           if (response.data.permission == true) {
             var contact = {
@@ -904,22 +1014,19 @@ export default {
         event_label: labelName,
       });
     },
-    hideReplyBtn: function (e, id) {
-      return new Promise((resolve, reject) => {
-        $(e.target).hide();
-        resolve(true);
-      }).then(() => {
-        $(id).show();
-      });
+    hideReplyBtn: function (id) {
+      let itemFirst = id + " span:first-child";
+      let itemLast = id + " span:last-child";
+      $(itemFirst).hide();
+      $(itemLast).show();
     },
-    showReplyBtn: function (e, id) {
-      return new Promise((resolve, reject) => {
-        $(id).hide();
-        resolve(true);
-      }).then(() => {
-        $(e.target).show();
-      });
+    showReplyBtn: function (id) {
+      let itemFirst = id + " span:first-child";
+      let itemLast = id + " span:last-child";
+      $(itemLast).hide();
+      $(itemFirst).show();
     },
+
     isOsIOS: function () {
       var userAgent = window.navigator.userAgent.toLowerCase(),
         safari = /safari/.test(userAgent),
@@ -951,7 +1058,7 @@ export default {
       if (this.isDeviceMobile() && !this.isOsIOS()) {
         let androidVersion = this.getAndroidVersion();
         if (parseInt(androidVersion) >= 5) {
-          this.isConditionSatisfied = true;
+          // this.isConditionSatisfied = true;
         }
       }
     },

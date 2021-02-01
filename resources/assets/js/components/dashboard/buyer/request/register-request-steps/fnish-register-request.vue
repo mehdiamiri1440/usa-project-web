@@ -1,365 +1,314 @@
 
 <style scoped>
+p {
+  line-height: 1.618;
+  text-align: center;
+}
 
-	p{
-		line-height: 1.618;
-		text-align: center;
-	}
+label {
+  margin: 0 auto 9px auto;
+}
 
-	label{
-		margin: 0 auto 9px auto;
-	}
+.submit-button {
+  background: #dddddd;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  display: inline-block;
+  font-size: 16px;
+  padding: 10px 30px 9px;
+  transition: 200ms;
+  cursor: default;
+  margin: 8px 0;
+}
 
-	.submit-button{
+.submit-button.active {
+  background: #00c569;
+  cursor: pointer;
+}
 
-		background: #DDDDDD;
-		color: #fff;
-		border: none;
-		border-radius: 4px;
-		display: inline-block;
-		font-size: 16px;
-		padding: 10px 30px 9px;
-		transition: 200ms;
-		cursor: default;
-		margin: 8px 0;
+.title-contents {
+  font-weight: bold;
+  font-size: 19px;
+  margin-bottom: 15px;
+}
 
-    }
+.form-contents {
+  margin: 5px auto;
+}
 
-    .submit-button.active{
-		background: #00C569;
-		cursor: pointer;
-    }
+.form-contents lable {
+  font-size: 12px;
+}
 
-    .title-contents{
+.input-wrapper,
+.text-input-wrapper {
+  margin: 6px auto;
 
-    	font-weight: bold;
-    	font-size: 19px;
-		margin-bottom: 15px;
+  position: relative;
+}
 
-    }
+.input-wrapper:after {
+  content: "\F107";
 
-    .form-contents{
-    	margin: 5px auto;
-    }
+  color: #777;
 
-    .form-contents lable{
-    	font-size: 12px;
-    }
+  position: absolute;
 
-    .input-wrapper,.text-input-wrapper{
-   		margin: 6px auto;
+  display: inline-block;
 
-    	position: relative;
+  top: 6px;
 
-    }
+  font-family: "Font Awesome 5 Free", sans-serif;
 
-    .input-wrapper:after{
-		content: "\F107";
+  font-weight: 900;
 
-		color: #777;
+  left: 15px;
 
-		position: absolute;
+  font-size: 20px;
 
-		display: inline-block;
+  z-index: 0;
+}
 
-		top: 6px;
+input {
+  width: 100%;
 
-		font-family: "Font Awesome 5 Free",sans-serif;
+  border-radius: 4px;
 
-		font-weight: 900;
+  border: 1px solid;
 
-		left: 15px;
+  padding: 8px 15px;
 
-		font-size: 20px;
+  color: #bebebe;
 
-		z-index: 0;
+  border-color: #bebebe;
 
-    }
+  direction: rtl;
 
-    input{
-    	width: 100%;
+  transition: 300ms;
 
-		border-radius: 4px;
+  background: #fff;
+}
 
-		border: 1px solid;
+.input-wrapper i {
+  display: inline-block;
 
-		padding: 8px 15px ;
+  position: absolute;
 
-		color: #BEBEBE;
+  left: 15px;
 
-		border-color: #BEBEBE;
+  font-size: 20px;
 
-		direction: rtl;
+  color: #bebebe;
 
-		transition: 300ms;
+  top: 9px;
 
-		background: #fff;
-    }
+  transition: 300ms;
+}
 
-    .input-wrapper i {
+input:focus,
+input:focus + i {
+  color: #333;
+  border-color: #333;
+}
 
-    	display: inline-block;
+input.active {
+  border-color: #00c569;
+  color: #333;
+}
 
-		position: absolute;
+input.active + i {
+  color: #00c569;
+}
 
-		left: 15px;
+input.active:focus,
+input.active:focus + i,
+input.active + i {
+  border-color: #00c569;
+}
 
-		font-size: 20px;
+input.error {
+  color: #333;
+  border-color: #e41c38;
+}
 
-		color: #BEBEBE;
+input.error + i {
+  color: #e41c38;
+}
 
-		top: 9px;
+input.error:focus,
+input.error:focus + i {
+  border-color: #e41c38;
+}
 
-		transition: 300ms;
-    }
+select {
+  width: 100%;
 
+  border-radius: 4px;
 
-    input:focus ,  input:focus + i{
-		color: #333;
-		border-color: #333;
+  border: 1px solid;
 
-    }
+  padding: 8px 15px;
 
-    input.active{
-		border-color: #00C569;
-		color: #333;
-    }
+  position: relative;
 
-    input.active + i{
-		color: #00C569;
-    }
+  z-index: 1;
 
-    input.active:focus ,  input.active:focus + i , input.active + i {
-		border-color: #00C569;
-    }
+  color: #777777;
 
-    input.error {
-    	color: #333;
-		border-color: #e41c38;
-    }
+  direction: rtl;
 
-    input.error + i{
-		color: #e41c38;
-    }
+  transition: 200ms;
 
+  background: none;
 
-    input.error:focus ,  input.error:focus + i  {
-		border-color: #e41c38;
-    }
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+}
 
-    select{
+.input-wrapper i {
+  display: inline-block;
 
-    	width: 100%;
+  position: absolute;
 
-		border-radius: 4px;
+  left: 15px;
 
-		border: 1px solid;
+  font-size: 20px;
 
-		padding: 8px 15px;
+  color: #bebebe;
 
-		position: relative;
+  top: 9px;
 
-		z-index: 1;
+  transition: 200ms;
+}
 
-		color: #777777;
+select option {
+  color: #333;
+}
 
-		direction: rtl;
+select:focus {
+  color: #333;
+}
 
-		transition: 200ms;
+select.active {
+  color: #333;
+  color: #00c569;
+}
 
-		background: none;
+select.active:focus {
+  color: #00c569;
+}
 
-		appearance:none;
-		-webkit-appearance:none;
-		-moz-appearance:none;
-		-ms-appearance:none;
+select.error {
+  color: #333;
+  color: #e41c38;
+}
 
+select.error:focus {
+  color: #e41c38;
+}
+.error-message {
+  text-align: center;
 
+  color: #e41c38;
 
-    }
+  font-weight: bold;
 
-    .input-wrapper i {
-    	display: inline-block;
+  height: 15px;
 
-		position: absolute;
+  direction: rtl;
 
-		left: 15px;
+  font-size: 11px;
+}
 
-		font-size: 20px;
+.background-blue {
+  background: #000546 !important;
+}
 
-		color: #BEBEBE;
+.small-description {
+  font-size: 11px;
 
-		top: 9px;
+  font-weight: bold;
 
-		transition: 200ms;
-    }
+  color: #777777;
 
-     select option{
-		color: #333;
-    }
+  line-height: 1.618;
+}
 
-    select:focus{
-		color: #333;
-    }
+.list-item-wrapper {
+  background: #f8f8f8;
+  box-shadow: 0 5px 10px #c5c5c5;
+  border: none;
+  margin: 20px auto;
+  padding: 4px 0;
+}
+.list-item-wrapper > p {
+  float: right;
+  padding: 0;
+  padding-top: 12px;
+}
+.send-message {
+  padding: 0;
+  text-align: center;
+}
+.send-message .submit-button {
+  display: inline-block;
+  font-size: 14px;
+  padding: 7px 15px;
+}
 
-    select.active{
-    		color: #333;
-		color: #00C569;
-    }
+.send-message a.submit-button:before {
+  content: none;
+}
+.main-description {
+  margin-top: 25px;
+}
+.red-text {
+  color: #e41c38;
+}
 
-    select.active:focus {
-		color: #00C569;
-    }
-
-    select.error {
-    		color: #333;
-		color: #e41c38;
-    }
-
-    select.error:focus{
-		color: #e41c38;
-    }
-    .error-message{
-
-    	text-align: center;
-
-		color: #e41c38;
-
-		font-weight: bold;
-
-		height: 15px;
-
-	    direction: rtl;
-
-		font-size: 11px;
-    }
-
-    .background-blue{
-
-        background: #000546 !important;
-
-    }
-
-    .small-description{
-
-         font-size: 11px;
-
-         font-weight: bold;
-
-         color: #777777;
-
-         line-height: 1.618;
-
-    }
-
-    .list-item-wrapper{
-
-		background: #f8f8f8;
-		box-shadow: 0 5px 10px #c5c5c5;
-		border: none;
-		margin: 20px auto;
-		padding: 4px 0;
-
-    }
-    .list-item-wrapper > p{
-
-		float: right;
-		padding: 0;
-		padding-top: 12px;
-
-    }
-    .send-message{
-
-    	padding: 0;
-    	text-align: center;
-
-    }
-    .send-message .submit-button{
-
-        display: inline-block;
-    	font-size: 14px;
-		padding: 7px 15px;
-
-    }
-
-    .send-message a.submit-button:before{
-
-        content: none;
-
-    }
-    .main-description{
-    	margin-top: 25px;
-    }
-    .red-text{
-		color: #e41c38;
-
-    }
-
-    .blue-background{
-
-        background: #000546 !important;
-
-    }
-    @media screen and (max-width: 767px){
-		.input-wrapper {
-		    padding: 0 5px;
-
-		}
-		select{
-			font-size: 12px;
-		}
-		.input-wrapper::after {
-		    left: 14px;
-		}
-	}
+.blue-background {
+  background: #000546 !important;
+}
+@media screen and (max-width: 767px) {
+  .input-wrapper {
+    padding: 0 5px;
+  }
+  select {
+    font-size: 12px;
+  }
+  .input-wrapper::after {
+    left: 14px;
+  }
+}
 </style>
 
 <template>
-	<div>
+  <div>
+    <div class="form-contents">
+      <div class="col-xs-12">
+        <div class="text-input-wrapper">
+          <p class="main-description text-rtl">
+            درخواست خرید شما پس از تایید کارشناسان
+            <span class="light-green-text">باسکول،</span> برای کشاورزان و تامین
+            کنندگان مرتبط ارسال می شود.
+          </p>
 
-
-		 <div class="form-contents ">
-
-			    	<div class=" col-xs-12 ">
-
-				     	<div class="text-input-wrapper">
-
-
-				     		<p class="main-description text-rtl">
-                                درخواست خرید شما پس از تایید کارشناسان باسکول برای کشاورزان و تامین کنندگان مرتبط ارسال میشود.
-				     		</p>
-
-                           
-
-                            <div class="text-center margin-15-0" >
-                            	   <router-link class="submit-button active" :to="{name : 'productList'}">
-                       		    		  لیست محصولات
-                     				</router-link>
-
-                            </div>
-
-
-				     	</div>
-
-				    </div>
-
-			      <!--  <div class="col-xs-12">
-			       	<div class="text-center">
-			       		 <button class="submit-button active "
-
-			       		 	@click.prevent="$parent.reLoadPage()"
-			       		   >
-			        		ثبت درخواست جدید
-
-		        	  </button>
-			       	</div>
-			       </div> -->
-		</div>
-
+          <div class="text-center margin-15-0">
+            <router-link
+              class="submit-button active"
+              :to="{ name: 'productList' }"
+            >
+              لیست محصولات
+            </router-link>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
-
-
 </script>

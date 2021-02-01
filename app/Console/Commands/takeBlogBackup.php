@@ -58,7 +58,7 @@ class takeBlogBackup extends Command
         // Initialize archive object
         $zip = new \ZipArchive();
 
-        $backup_file_name = "../blog-backups/blog-{$date_time}.zip";
+        $backup_file_name = "/blog-backups/blog-{$date_time}.zip";
         $zip->open($backup_file_name, \ZipArchive::CREATE | \ZipArchive::OVERWRITE);
 
         // Create recursive directory iterator
@@ -85,18 +85,19 @@ class takeBlogBackup extends Command
         // Zip archive will be created only after closing object
         $zip->close();
 
-        return $backup_file_name;
+        $tmp = explode('/',$backup_file_name);
+        return end($tmp);
     }
 
     protected function save_backup_on_cloud($file_name)
     {
-        $path = base_path($file_name);
+        $path = "/blog-backups/$file_name" ;
 
         try{
             $client = \AWS::createClient('s3');
             $client->putObject(array(
                 'Bucket'     => 'daily-backup',
-                'Key'        => $file_name,
+                'Key'        => env('APP_NAME'). '-' . $file_name,
                 'SourceFile' => $path,
             ));
         }

@@ -60,8 +60,8 @@ class payment_controller extends Controller
                 ]);
                 
                 return $gateway->redirect(); 
-            }catch (Exception $e){ 
-                echo $e->getMessage();
+            }catch (\Exception $e){ 
+                return redirect('/contact-us');
             }   
         }
     } 
@@ -98,8 +98,8 @@ class payment_controller extends Controller
                 ]);
                 
                 return $gateway->redirect(); 
-            }catch (Exception $e){ 
-                echo $e->getMessage();
+            }catch (\Exception $e){ 
+                return redirect('/contact-us');
             }   
         }
     } 
@@ -117,6 +117,16 @@ class payment_controller extends Controller
             // در اینجا کالا درخواستی را به کاربر ارائه میکنم
             $this->do_after_payment_changes_for_subscription(session('user_id'));
             
+            $lastest_registered_product_count = DB::table('products')
+                                                    ->where('myuser_id',session('user_id'))
+                                                    ->whereBetween('created_at',[Carbon::now()->subMinutes(20),Carbon::now()])
+                                                    ->orderBy('created_at','desc')
+                                                    ->count();
+            
+            if($lastest_registered_product_count > 0){
+                return redirect('/seller/register-product/success');
+            }
+
             return redirect('/seller/buyAd-requests');
 
         } 
@@ -138,6 +148,17 @@ class payment_controller extends Controller
             // عملیات خرید با موفقیت انجام شده است
             // در اینجا کالا درخواستی را به کاربر ارائه میکنم
             $this->do_after_payment_changes_for_subscription(session()->pull('app_user_id'));
+
+
+            $lastest_registered_product_count = DB::table('products')
+                                                    ->where('myuser_id',session('user_id'))
+                                                    ->whereBetween('created_at',[Carbon::now()->subMinutes(20),Carbon::now()])
+                                                    ->orderBy('created_at','desc')
+                                                    ->count();
+            
+            if($lastest_registered_product_count > 0){
+                return redirect('buskool://register-product-successfully');
+            }
             
             return redirect('buskool://buyAd-requests');
 
@@ -316,8 +337,8 @@ class payment_controller extends Controller
             ]);
 
             return $gateway->redirect(); 
-        }catch (Exception $e){ 
-            echo $e->getMessage();
+        }catch (\Exception $e){ 
+            return redirect('/contact-us');
         }   
     }  
 
@@ -345,8 +366,8 @@ class payment_controller extends Controller
             ]);
  
             return $gateway->redirect(); 
-        }catch (Exception $e){ 
-            echo $e->getMessage();
+        }catch (\Exception $e){ 
+            return redirect('/contact-us');
         }   
     }  
     
@@ -456,7 +477,7 @@ class payment_controller extends Controller
                 
                 return $gateway->redirect(); 
             }catch (Exception $e){ 
-                echo $e->getMessage();
+                return redirect('/contact-us');
             }  
         }
         else{
@@ -495,8 +516,8 @@ class payment_controller extends Controller
 
                 
                 return $gateway->redirect(); 
-            }catch (Exception $e){ 
-                echo $e->getMessage();
+            }catch (\Exception $e){ 
+                return redirect('/contact-us');
             }  
         }
         else{
@@ -601,8 +622,8 @@ class payment_controller extends Controller
 
                 
                 return $gateway->redirect(); 
-            }catch (Exception $e){ 
-                echo $e->getMessage();
+            }catch (\Exception $e){ 
+                return redirect('/contact-us');
             } 
         }
         else{
@@ -641,8 +662,8 @@ class payment_controller extends Controller
 
                 
                 return $gateway->redirect(); 
-            }catch (Exception $e){ 
-                echo $e->getMessage();
+            }catch (\Exception $e){ 
+                return redirect('/contact-us');
             } 
         }
         else{

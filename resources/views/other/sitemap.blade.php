@@ -39,7 +39,7 @@
 
 @foreach($categories as $item)
     <url>
-      <loc>{{url("product-list/category/".$item->category_name)}}</loc>
+      <loc>{{url("product-list/category/".$item)}}</loc>
       <changefreq>daily</changefreq>
       <priority>0.5</priority>
     </url>
@@ -48,7 +48,7 @@
     
 @foreach($products as $product)
     <url>
-      <loc>{{url("product-view/".str_replace(' ','-',$product['main']->category_name)."/"."خرید-عمده-".str_replace(' ','-',$product['main']->sub_category_name)."/".$product['main']->id)}}</loc>
+      <loc>{{url("product-view/".str_replace(' ','-',$product->category_name)."/"."خرید-عمده-".str_replace(' ','-',$product->sub_category_name)."/".$product->id)}}</loc>
       <changefreq>monthly</changefreq>
       <priority>0.5</priority>
     </url>

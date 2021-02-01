@@ -21,16 +21,19 @@ class admin_verification_controller extends Controller
         // dd(array_values($user_ids->toArray()[0]));
 
         $users = DB::table('myusers')
-                        ->whereIn('id',array_values($user_ids->toArray()))
+                        ->join('verification_photos','verification_photos.myuser_id','=','myusers.id')
+                        ->whereIn('myusers.id',array_values($user_ids->toArray()))
                         ->where('is_verified',false)
                         ->select([
-                            'id',
-                            'first_name',
-                            'last_name',
-                            'created_at',
-                            'phone',
-                            'active_pakage_type'
-                        ])->get();
+                            'myusers.id',
+                            'myusers.first_name',
+                            'myusers.last_name',
+                            'verification_photos.created_at as created_at',
+                            'myusers.phone',
+                            'myusers.active_pakage_type'
+                        ])->distinct('myusers.id')
+                        ->orderBy('verification_photos.created_at','desc')
+                        ->paginate(10);
         
         $date_convertor_object = new date_convertor();
 

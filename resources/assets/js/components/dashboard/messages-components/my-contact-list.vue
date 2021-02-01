@@ -232,19 +232,22 @@
   z-index: 1;
 }
 
-.total-unread-messages-badge {
-  position: absolute;
-  top: -6px;
-  background: #e41c38;
-  height: 16px;
-  width: 30px;
-  color: #fff;
-  border-radius: 4px;
-  left: 5px;
-  font-size: 11px;
-  line-height: 1;
-  padding-top: 2px;
+i.fa-star {
+  font-size: 16px;
+  background: linear-gradient(
+    21deg,
+    rgb(199, 168, 79) 0%,
+    rgb(249, 242, 159) 51%,
+    rgb(199, 168, 79) 100%
+  );
+  background-clip: border-box;
+  background-clip: border-box;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: relative;
+  top: 2px;
 }
+
 .contact-button.active {
   border-radius: 4px 4px 0 0;
 }
@@ -293,25 +296,42 @@
   padding-top: 6px;
 }
 
-.buyad-button p {
+.empty-list i {
+  color: #777;
+  margin-top: 50px;
+  font-size: 50px;
+  text-align: center;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.empty-list p:first-of-type {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.618;
+  margin-top: 11px;
+}
+
+.user-button {
   background: #00c569;
   color: #fff;
   border-radius: 4px;
-  padding: 3px;
-  max-width: 150px;
-  margin: 7px auto 15px;
+  padding: 8px 0;
+  max-width: 200px;
+  margin: 15px auto;
+  transition: 300ms;
+  display: block;
+  border: none;
+  width: 100%;
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.user-button :hover {
+  /* background: #00c569; */
   transition: 300ms;
 }
 
-.buyad-button p:hover {
-  background: #00c569;
-  transition: 300ms;
-}
-
-.buyad-button.disable p {
-  background: #dddddd;
-  transition: 300ms;
-}
 .user-not-fount img {
   width: 200px;
   display: block;
@@ -414,8 +434,8 @@
             tag="button"
             class="contact-button"
           >
-            <span class="total-unread-messages-badge">جدید</span>
-            <i class="fa fa-list-alt"></i>
+            <i class="fa fa-star"></i>
+
             خریداران پیشنهادی
           </router-link>
         </div>
@@ -464,10 +484,28 @@
         </div>
       </div>
       <div v-else-if="$parent.isContactListLoaded">
-        <p class="user-not-fount">
-          <img src="../../../../img/empty-message.svg" alt="" />
-          <span>هیچ مکالمه ای وجود ندارد</span>
-        </p>
+        <div class="empty-list">
+          <i class="fa fa-user"></i>
+          <p>در حال حاضر مخاطبی وجود ندارد</p>
+
+          <router-link
+            v-if="$parent.userType"
+            :to="{ name: 'buyAdRequestsSeller' }"
+            tag="button"
+            class="user-button"
+          >
+            شروع چت با خریداران
+          </router-link>
+
+          <router-link
+            v-else
+            :to="{ name: 'productList' }"
+            tag="button"
+            class="user-button"
+          >
+            شروع چت با فروشندگان
+          </router-link>
+        </div>
       </div>
     </div>
 

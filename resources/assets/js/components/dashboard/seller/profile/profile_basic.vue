@@ -594,13 +594,15 @@ textarea {
   <div class="main-wrapper col-xs-12">
     <header class="col-xs-12">
       <div class="progressbar col-xs-12">
-        <p class="text-center progress-title hidden-sm hidden-md hidden-lg">میزان تکمیل پروفایل</p>
+        <p class="text-center progress-title hidden-sm hidden-md hidden-lg">
+          میزان تکمیل پروفایل
+        </p>
 
         <div class="progress-wrapper row">
           <div class="custom-progress">
             <p class="hidden-xs">میزان تکمیل پروفایل</p>
 
-            <span>{{completeProfileProgress}}%</span>
+            <span>{{ completeProfileProgress }}%</span>
           </div>
         </div>
       </div>
@@ -645,7 +647,9 @@ textarea {
 
             <div class="user-information col-xs-8 col-sm-10">
               <div class="row">
-                <div class="activity-type padding-0 col-xs-12 col-md-4 pull-right">
+                <div
+                  class="activity-type padding-0 col-xs-12 col-md-4 pull-right"
+                >
                   <p class="label-text">نوع کاربری</p>
                   <div class="radio-wrapper">
                     <div class="label-radio">
@@ -654,7 +658,7 @@ textarea {
                         type="radio"
                         value="0"
                         name="radio"
-                        :checked="0  == currentUser.profile.is_company"
+                        :checked="0 == currentUser.profile.is_company"
                         v-model="currentUser.profile.is_company"
                       />
 
@@ -668,7 +672,7 @@ textarea {
                         type="radio"
                         @click="enableForm()"
                         value="1"
-                        :checked="1  == currentUser.profile.is_company"
+                        :checked="1 == currentUser.profile.is_company"
                         name="radio"
                         v-model="currentUser.profile.is_company"
                       />
@@ -679,13 +683,18 @@ textarea {
                   </div>
 
                   <div class="error-message">
-                    <span v-if="errors.is_company" v-text="errors.is_company[0]"></span>
+                    <span
+                      v-if="errors.is_company"
+                      v-text="errors.is_company[0]"
+                    ></span>
                   </div>
                 </div>
 
                 <div class="inputs-wrapper col-xs-12 col-md-8 pull-left">
                   <div class="row">
-                    <div class="form-control-wrapper col-xs-12 col-sm-6 pull-right">
+                    <div
+                      class="form-control-wrapper col-xs-12 col-sm-6 pull-right"
+                    >
                       <p class="label-text">نام شرکت</p>
 
                       <div class="input-wrapper company-name-wrapper">
@@ -696,12 +705,18 @@ textarea {
                           placeholder="نام شرکت"
                           v-model="currentUser.profile.company_name"
                           :disabled="!formEnabled"
-                          :class="{'disabled' : formEnabled == false , 'active' : currentUser.profile.company_name}"
+                          :class="{
+                            disabled: formEnabled == false,
+                            active: currentUser.profile.company_name,
+                          }"
                         />
                       </div>
 
                       <div class="error-message">
-                        <span v-if="errors.company_name" v-text="errors.company_name[0]"></span>
+                        <span
+                          v-if="errors.company_name"
+                          v-text="errors.company_name[0]"
+                        ></span>
                       </div>
                     </div>
 
@@ -716,7 +731,10 @@ textarea {
                           placeholder="شماره ثبت شرکت"
                           v-model="currentUser.profile.company_register_code"
                           :disabled="!formEnabled"
-                          :class="{'disabled' : formEnabled == false , 'active' : currentUser.profile.company_register_code}"
+                          :class="{
+                            disabled: formEnabled == false,
+                            active: currentUser.profile.company_register_code,
+                          }"
                           pattern="[0-9]*"
                         />
 
@@ -748,11 +766,14 @@ textarea {
                           placeholder="شماره موبایل"
                           pattern="[0-9]*"
                           v-model="currentUser.profile.public_phone"
-                          :class="{'active' : currentUser.profile.public_phone}"
+                          :class="{ active: currentUser.profile.public_phone }"
                         />
 
                         <div class="error-message">
-                          <span v-if="errors.public_phone" v-text="errors.public_phone[0]"></span>
+                          <span
+                            v-if="errors.public_phone"
+                            v-text="errors.public_phone[0]"
+                          ></span>
                         </div>
                       </div>
                     </div>
@@ -767,11 +788,14 @@ textarea {
                           class="dire"
                           placeholder="آدرس شما"
                           v-model="currentUser.profile.address"
-                          :class="{'active' : currentUser.profile.address}"
+                          :class="{ active: currentUser.profile.address }"
                         />
 
                         <div class="error-message">
-                          <span v-if="errors.address" v-text="errors.address[0]"></span>
+                          <span
+                            v-if="errors.address"
+                            v-text="errors.address[0]"
+                          ></span>
                         </div>
                       </div>
                     </div>
@@ -793,23 +817,31 @@ textarea {
                   class="dire"
                   placeholder=" درباره کسب و کارتان بنویسید "
                   v-model="currentUser.profile.description"
-                  :class="{'active' : currentUser.profile.description}"
+                  :class="{ active: currentUser.profile.description }"
                 ></textarea>
 
                 <div class="error-message">
-                  <span v-if="errors.description" v-text="errors.description[0]"></span>
+                  <span
+                    v-if="errors.description"
+                    v-text="errors.description[0]"
+                  ></span>
                 </div>
               </div>
             </div>
 
             <div class="link-help padding-0 col-xs-12 col-md-4">
-              <a target="_blank" href="https://www.buskool.com/profile/buskools">
+              <a
+                target="_blank"
+                href="https://www.buskool.com/profile/buskools"
+              >
                 نمونه پروفایل تکمیل شده
                 <i class="fa fa-question-circle"></i>
               </a>
               <p>
                 در بخش (درباره کسب و کارتان بنویسید) به این سوالات پاسخ دهید.
-                <br />1- چه محصولاتی برای فروش دارید؟ 2- میزان تولید ماهانه یا سالانه محصولات چقدر است ؟ 3- محصولات در چه زمانی از سال آماده فروش می باشند؟ 4- چند سال سابقه فعالیت دارید؟
+                <br />1- چه محصولاتی برای فروش دارید؟ 2- میزان تولید ماهانه یا
+                سالانه محصولات چقدر است ؟ 3- محصولات در چه زمانی از سال آماده
+                فروش می باشند؟ 4- چند سال سابقه فعالیت دارید؟
               </p>
             </div>
           </div>
@@ -823,18 +855,17 @@ textarea {
             </label>
 
             <UploadFile
-              uploadName="related_files"
+              uploadName="relatedFiles"
               uploadAccept="image/*"
-              :uploadMinSize="1024"
-              :uploadSize="1024 * 1024 * 10"
               :uploadMultiple="true"
+              :isImageReset="relatedFilesReset"
               :uploadDrop="true"
               :uploadDropDirectory="true"
               :uploadAddIndex="false"
               :uploadThread="3"
               :uploadOCompress="1024 * 1024"
               :uploadUploadAuto="false"
-              :uploadRef="relatedFiles"
+              :imageWrapperSize="'col-xs-12 col-sm-6'"
             />
           </div>
 
@@ -853,7 +884,7 @@ textarea {
                   </a>-->
 
                   <div class="image-item">
-                    <img :src=" str + '/' + photo" alt />
+                    <img :src="str + '/' + photo" alt />
                   </div>
                 </article>
 
@@ -870,16 +901,15 @@ textarea {
           <div class="col-xs-12 col-sm-6 pull-right">
             <label>
               افزودن گواهی های مربوطه
-              <span
-                class="small-description"
-              >(گواهی های ثبت شرکت | استاندارد محصول)</span>
+              <span class="small-description"
+                >(گواهی های ثبت شرکت | استاندارد محصول)</span
+              >
             </label>
 
             <UploadFile
-              uploadName="certificate_files"
+              uploadName="certificateFiles"
+              :isImageReset="certificateFilesReset"
               uploadAccept="image/*"
-              :uploadMinSize="1024"
-              :uploadSize="1024 * 1024"
               :uploadMultiple="true"
               :uploadDrop="true"
               :uploadDropDirectory="true"
@@ -887,7 +917,7 @@ textarea {
               :uploadThread="3"
               :uploadOCompress="1024 * 1024"
               :uploadUploadAuto="false"
-              :uploadRef="certificateFiles"
+              :imageWrapperSize="'col-xs-12 col-sm-6'"
             />
           </div>
 
@@ -899,13 +929,14 @@ textarea {
                 <article
                   v-if="currentUser.certificates.length"
                   class="col-md-4 col-xs-6 col-lg-3 pull-right"
-                  v-for="photo in currentUser.certificates"
+                  v-for="(photo, index) in currentUser.certificates"
+                  :key="index"
                 >
                   <!--   <a href="#">
                                                 <i class="fa fa-times"></i>
                   </a>-->
                   <div class="image-item">
-                    <img :src=" str + '/' + photo" alt />
+                    <img :src="str + '/' + photo" alt />
                   </div>
                 </article>
                 <div v-else class="default-images">
@@ -919,7 +950,12 @@ textarea {
 
         <div class="col-xs-12 col-md-3 col-sm-4 pull-right">
           <div class="row">
-            <button class="submit-button active" @click="RegisterBasicProfileInfo">ثبت تغییرات</button>
+            <button
+              class="submit-button active"
+              @click="RegisterBasicProfileInfo"
+            >
+              ثبت تغییرات
+            </button>
           </div>
         </div>
       </section>
@@ -934,9 +970,9 @@ import UploadFile from "../../upload-image";
 export default {
   props: ["str"],
   components: {
-    UploadFile
+    UploadFile,
   },
-  data: function() {
+  data: function () {
     return {
       currentUser: {
         profile: {
@@ -947,11 +983,11 @@ export default {
           public_phone: "",
           profile_photo: "",
           postal_code: "",
-          shaba_code: ""
+          shaba_code: "",
         },
         user_info: "",
         relateds: "",
-        certificates: ""
+        certificates: "",
       },
       profileBasicFields: [
         "is_company",
@@ -960,14 +996,14 @@ export default {
         "public_phone",
         "address",
         "postal_code",
-        "shaba_code"
+        "shaba_code",
       ],
       profileComplementaryFields: [
         "is_company",
         "company_name",
         "company_register_code",
         "public_phone",
-        "description"
+        "description",
       ],
       profilePhoto: "",
       errors: "",
@@ -975,15 +1011,17 @@ export default {
       items: [
         {
           message: "پروفایل",
-          url: "profileBasicSeller"
+          url: "profileBasicSeller",
         },
         {
           message: "احراز هویت",
-          url: "profileBasicSellerVeficiation"
-        }
+          url: "profileBasicSellerVeficiation",
+        },
       ],
       relatedFiles: [],
       certificateFiles: [],
+      relatedFilesReset: false,
+      certificateFilesReset: false,
       formEnabled: false,
       rankState: {
         is_company: 12,
@@ -994,23 +1032,23 @@ export default {
         description: 11,
         profile_photo: 11,
         certificates: 11,
-        relateds: 11
+        relateds: 11,
       },
       completeProfileProgress: 0,
-      uploadPercentage: 0
+      uploadPercentage: 0,
     };
   },
   methods: {
-    init: function() {
+    init: function () {
       this.isLoaded = true;
       $('input[type="file"]').imageuploadify();
       var self = this;
-      axios.post("/user/profile_info").then(function(response) {
+      axios.post("/user/profile_info").then(function (response) {
         self.currentUser = response.data;
         self.sumProgressNumber();
       });
     },
-    RegisterBasicProfileInfo: function() {
+    RegisterBasicProfileInfo: function () {
       eventBus.$emit("submiting", true);
       this.errors = "";
       var self = this;
@@ -1045,12 +1083,12 @@ export default {
 
       for (var i = 0; i < this.relatedFiles.length; i++) {
         let file = this.relatedFiles[i];
-        data.append("related_" + i, file);
+        data.append("related_" + i, file.file);
       }
 
       for (var i = 0; i < this.certificateFiles.length; i++) {
         let file = this.certificateFiles[i];
-        data.append("certificate_" + i, file);
+        data.append("certificate_" + i, file.file);
       }
 
       data.append("related_image_count", this.relatedFiles.length);
@@ -1062,29 +1100,33 @@ export default {
       if (profilePhoto) {
         data.append("profile_photo", profilePhoto);
       }
-
       axios
         .post("/user/profile_modification", data, {
           headers: {
             "X-Requested-With": "XMLHttpRequest",
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
           },
-          onUploadProgress: function(progressEvent) {
+          onUploadProgress: function (progressEvent) {
             this.uploadPercentage = parseInt(
               Math.round((progressEvent.loaded * 100) / progressEvent.total)
             );
-          }.bind(this)
+          }.bind(this),
         })
-        .then(function(response) {
+        .then(function (response) {
           if (response.status === 200) {
             eventBus.$emit("submiting", false);
             eventBus.$emit("uploadPercentage", 0);
-
             eventBus.$emit("modal", "profileEditSuccess");
+            self.relatedFilesReset = true;
+            self.certificateFilesReset = true;
+            axios.post("/user/profile_info").then(function (response) {
+              self.currentUser = response.data;
+              self.sumProgressNumber();
+            });
           }
           self.submiting = false;
         })
-        .catch(function(err) {
+        .catch(function (err) {
           self.scrollToTop();
           if (err.response.status === 413) {
             self.popUpMsg =
@@ -1113,21 +1155,21 @@ export default {
           eventBus.$emit("uploadPercentage", 0);
         });
     },
-    toLatinNumbers: function(num) {
+    toLatinNumbers: function (num) {
       if (num == null) {
         return null;
       }
 
       return num
         .toString()
-        .replace(/[\u0660-\u0669]/g, function(c) {
+        .replace(/[\u0660-\u0669]/g, function (c) {
           return c.charCodeAt(0) - 0x0660;
         })
-        .replace(/[\u06f0-\u06f9]/g, function(c) {
+        .replace(/[\u06f0-\u06f9]/g, function (c) {
           return c.charCodeAt(0) - 0x06f0;
         });
     },
-    disableForm: function() {
+    disableForm: function () {
       var companyNumber = $("#company-number");
       var companyName = $("#company-name");
 
@@ -1138,7 +1180,7 @@ export default {
       companyName.attr("disabled", true);
       this.formEnabled = false;
     },
-    enableForm: function() {
+    enableForm: function () {
       var companyNumber = $("#company-number");
       var companyName = $("#company-name");
       companyName.val("");
@@ -1178,7 +1220,7 @@ export default {
         this.completeProfileProgress += this.rankState.relateds;
       }
     },
-    isOsIOS: function() {
+    isOsIOS: function () {
       var userAgent = window.navigator.userAgent.toLowerCase(),
         safari = /safari/.test(userAgent),
         ios = /iphone|ipod|ipad/.test(userAgent);
@@ -1187,7 +1229,7 @@ export default {
     },
     scrollToTop() {
       window.scrollTo(0, 0);
-    }
+    },
   },
   mounted() {
     this.init();
@@ -1198,7 +1240,7 @@ export default {
         var reader = new FileReader();
         var image = $(".image-preview");
         var iconProfile = $("#icon-pro");
-        reader.onload = function(e) {
+        reader.onload = function (e) {
           image.attr("src", e.target.result);
           image.css("display", "inline");
           iconProfile.css("display", "none");
@@ -1218,10 +1260,9 @@ export default {
 
     image_checked();
 
-    $("#imgInp").change(function() {
+    $("#imgInp").change(function () {
       show_image_preview(this);
     });
-
     if (this.isOsIOS()) {
       $("#phone-number").attr("type", "text");
       $("#company-number").attr("type", "text");
@@ -1231,24 +1272,25 @@ export default {
     gtag("config", "UA-129398000-1", { page_path: "/profile-basic" });
   },
   watch: {
-    uploadPercentage: function() {
+    uploadPercentage: function () {
       eventBus.$emit("uploadPercentage", this.uploadPercentage);
     },
-    "currentUser.profile.is_company": function(value) {
+    "currentUser.profile.is_company": function (value) {
       if (value == 1) {
         this.enableForm();
       } else {
         this.disableForm();
       }
     },
-    "currentUser.profile.company_register_code": function(value) {
+    "currentUser.profile.company_register_code": function (value) {
       this.currentUser.profile.company_register_code = this.toLatinNumbers(
         value
       );
     },
-    completeProfileProgress: function(value) {
+    completeProfileProgress: function (value) {
       $(".custom-progress").css("width", value + "%");
-    }
-  }
+    },
+  },
 };
 </script>
+

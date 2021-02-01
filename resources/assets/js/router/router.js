@@ -170,6 +170,19 @@ const router = new Router({
               ], resolve);
             },
           },
+          children: [
+            {
+              path: "success",
+              name: "successRegisterProduct",
+              components: {
+                default: (resolve) => {
+                  require([
+                    "../components/dashboard/seller/product/product-basic.vue",
+                  ], resolve);
+                },
+              },
+            },
+          ]
         },
         {
           path: "guide",
@@ -177,6 +190,15 @@ const router = new Router({
           components: {
             default: (resolve) => {
               require(["../components/dashboard/seller/guide.vue"], resolve);
+            },
+          },
+        },
+        {
+          path: "support",
+          name: "supportSeller",
+          components: {
+            default: (resolve) => {
+              require(["../components/dashboard/seller/support.vue"], resolve);
             },
           },
         },
@@ -281,11 +303,31 @@ const router = new Router({
           },
         },
         {
+          path: "my-buyAd-requests",
+          name: "myBuyAdRequestsBuyer",
+          components: {
+            default: (resolve) => {
+              require([
+                "../components/dashboard/buyer/my-requests/buyAd-requests.vue",
+              ], resolve);
+            },
+          },
+        },
+        {
           path: "guide",
           name: "guideBuyer",
           components: {
             default: (resolve) => {
               require(["../components/dashboard/buyer/guide.vue"], resolve);
+            },
+          },
+        },
+        {
+          path: "support",
+          name: "supportBuyer",
+          components: {
+            default: (resolve) => {
+              require(["../components/dashboard/buyer/support.vue"], resolve);
             },
           },
         },

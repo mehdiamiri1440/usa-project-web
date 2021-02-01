@@ -54,12 +54,12 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <table id="example1" class="table table-bordered table-striped">
+              <table  class="table table-bordered table-striped">
                 <thead>
                 <tr>
                   <th>#</th>
                   <th>نام و نام خانوادگی</th>
-                  <th>تاریخ ثبت نام</th>
+                  <th>تاریخ ثبت اطلاعات</th>
                   <th>تلفن</th>
                   <th>جزییات</th>
                 </tr>
@@ -77,6 +77,10 @@
                     </tr>
                     @endforeach
               </table>
+
+              <div align="center">
+                {{$users->appends($_GET)->render("pagination::default")}}
+              </div>
             </div>
             <!-- /.box-body -->
           </div>

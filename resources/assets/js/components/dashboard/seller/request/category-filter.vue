@@ -59,11 +59,20 @@
 
 <template>
   <div class="container">
-    <div id="fitler-modal" class="fitler-modal modal fade" tabindex="-1" role="dialog">
+    <div
+      id="fitler-modal"
+      class="fitler-modal modal fade"
+      tabindex="-1"
+      role="dialog"
+    >
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <a class="close-modal" v-if="fitlerCurrentStep == 0" @click.prevent="fitlerResetData()">
+            <a
+              class="close-modal"
+              v-if="fitlerCurrentStep == 0"
+              @click.prevent="fitlerResetData()"
+            >
               <i class="fa fa-times"></i>
             </a>
             <a class="close-modal" v-else @click.prevent="resetData()">
@@ -93,37 +102,37 @@ import FitlerContent from "./filter-modal-steps/filter-content";
 
 export default {
   components: {
-    FitlerContent
+    FitlerContent,
     // FitlerContentDeepTwo
   },
-  data: function() {
+  data: function () {
     return {
       modalTitle: "دسته بندی ها",
       fitlerCurrentStep: 0,
       categories: "",
       categoryIndex: 0,
-      dataList: []
+      dataList: [],
     };
   },
   methods: {
-    init: function() {
+    init: function () {
       var self = this;
       axios
         .post("/get_category_list", {
-          cascade_list: true
+          cascade_list: true,
         })
-        .then(function(response) {
+        .then(function (response) {
           self.categories = response.data.categories;
           self.dataList = self.categories;
         });
 
-      $("#fitler-modal").on("hide.bs.modal", function(e) {
+      $("#fitler-modal").on("hide.bs.modal", function (e) {
         self.resetData();
         self.handleBackBtnClickOnDevices();
       });
     },
 
-    setList: function(index, name) {
+    setList: function (index, name) {
       this.dataList = [];
       if (this.fitlerCurrentStep == 0) {
         this.categoryIndex = index;
@@ -138,29 +147,30 @@ export default {
       this.$parent.filterCategory = subCategory;
       this.fitlerResetData();
     },
-    resetData: function() {
+    resetData: function () {
       setTimeout(() => {
         this.dataList = this.categories;
         this.fitlerCurrentStep = 0;
         this.modalTitle = "دسته بندی ها";
       }, 200);
     },
-    fitlerResetData: function() {
+    fitlerResetData: function () {
       $("#fitler-modal").modal("hide");
+      this.$parent.scrollToTop();
       this.resetData();
     },
-    handleBackBtnClickOnDevices: function() {
+    handleBackBtnClickOnDevices: function () {
       var self = this;
 
       if (window.history.state) {
         history.pushState(null, null, window.location);
       }
 
-      $(window).on("popstate", function(e) {
+      $(window).on("popstate", function (e) {
         self.fitlerResetData();
       });
     },
-    isDeviceMobile: function() {
+    isDeviceMobile: function () {
       if (
         navigator.userAgent.match(/Android/i) ||
         navigator.userAgent.match(/webOS/i) ||
@@ -174,10 +184,10 @@ export default {
       } else {
         return false;
       }
-    }
+    },
   },
-  mounted: function() {
+  mounted: function () {
     this.init();
-  }
+  },
 };
 </script>

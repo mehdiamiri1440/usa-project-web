@@ -1,328 +1,318 @@
 
 <style scoped>
+p {
+  line-height: 1.618;
+  margin: 45px auto 55px;
+  text-align: center;
+}
 
-	p{
-		line-height: 1.618;
-		margin: 45px auto 55px;
-		text-align: center;
+.red-text {
+  color: #e41c38;
+}
 
-	}
+.event-text {
+  font-size: 18px;
+  margin-bottom: 15px;
+}
 
-	.red-text{
-		color: #e41c38;
-	}
+label {
+  margin: 0 auto 9px auto;
+}
 
-	.event-text{
+.submit-button {
+  background: #dddddd;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  display: inline-block;
+  font-size: 16px;
+  padding: 10px 30px 9px;
+  transition: 200ms;
+  cursor: default;
+  margin: 8px 0;
+}
 
-		font-size: 18px;
-		margin-bottom: 15px;
+.submit-button.active {
+  background: #00c569;
+  cursor: pointer;
+}
 
-	}
+.title-contents {
+  font-weight: bold;
+  font-size: 19px;
+  margin-bottom: 15px;
+}
 
-	label{
-		margin: 0 auto 9px auto;
-	}
+.form-contents {
+  margin: 5px auto;
+}
 
-	.submit-button{
+.form-contents lable {
+  font-size: 12px;
+}
 
-		background: #DDDDDD;
-		color: #fff;
-		border: none;
-		border-radius: 4px;
-		display: inline-block;
-		font-size: 16px;
-		padding: 10px 30px 9px;
-		transition: 200ms;
-		cursor: default;
-		margin: 8px 0;
+.input-wrapper,
+.text-input-wrapper {
+  margin: 6px auto;
 
-    }
+  position: relative;
+}
 
-    .submit-button.active{
-		background: #00C569;
-		cursor: pointer;
-    }
+.input-wrapper:after {
+  content: "\F107";
 
-    .title-contents{
+  color: #777;
 
-    	font-weight: bold;
-    	font-size: 19px;
-		margin-bottom: 15px;
+  position: absolute;
 
-    }
+  display: inline-block;
 
-    .form-contents{
-    	margin: 5px auto;
-    }
+  top: 6px;
 
-    .form-contents lable{
-    	font-size: 12px;
-    }
+  font-family: "Font Awesome 5 Free", sans-serif;
 
-    .input-wrapper,.text-input-wrapper{
-   		margin: 6px auto;
+  font-weight: 900;
 
-    	position: relative;
+  left: 15px;
 
-    }
+  font-size: 20px;
 
-    .input-wrapper:after{
-		content: "\F107";
+  z-index: 0;
+}
 
-		color: #777;
+input {
+  width: 100%;
 
-		position: absolute;
+  border-radius: 4px;
 
-		display: inline-block;
+  border: 1px solid;
 
-		top: 6px;
+  padding: 8px 15px;
 
-		font-family: "Font Awesome 5 Free",sans-serif;
+  color: #bebebe;
 
-		font-weight: 900;
+  border-color: #bebebe;
 
-		left: 15px;
+  direction: rtl;
 
-		font-size: 20px;
+  transition: 300ms;
 
-		z-index: 0;
+  background: #fff;
+}
 
-    }
+.input-wrapper i {
+  display: inline-block;
 
-    input{
-    	width: 100%;
+  position: absolute;
 
-		border-radius: 4px;
+  left: 15px;
 
-		border: 1px solid;
+  font-size: 20px;
 
-		padding: 8px 15px ;
+  color: #bebebe;
 
-		color: #BEBEBE;
+  top: 9px;
 
-		border-color: #BEBEBE;
+  transition: 300ms;
+}
 
-		direction: rtl;
+input:focus,
+input:focus + i {
+  color: #333;
+  border-color: #333;
+}
 
-		transition: 300ms;
+input.active {
+  border-color: #00c569;
+  color: #333;
+}
 
-		background: #fff;
-    }
+input.active + i {
+  color: #00c569;
+}
 
-    .input-wrapper i {
+input.active:focus,
+input.active:focus + i,
+input.active + i {
+  border-color: #00c569;
+}
 
-    	display: inline-block;
+input.error {
+  color: #333;
+  border-color: #e41c38;
+}
 
-		position: absolute;
+input.error + i {
+  color: #e41c38;
+}
 
-		left: 15px;
+input.error:focus,
+input.error:focus + i {
+  border-color: #e41c38;
+}
 
-		font-size: 20px;
+select {
+  width: 100%;
 
-		color: #BEBEBE;
+  border-radius: 4px;
 
-		top: 9px;
+  border: 1px solid;
 
-		transition: 300ms;
-    }
+  padding: 8px 15px;
 
+  position: relative;
 
-    input:focus ,  input:focus + i{
-		color: #333;
-		border-color: #333;
+  z-index: 1;
 
-    }
+  color: #777777;
 
-    input.active{
-		border-color: #00C569;
-		color: #333;
-    }
+  direction: rtl;
 
-    input.active + i{
-		color: #00C569;
-    }
+  transition: 200ms;
 
-    input.active:focus ,  input.active:focus + i , input.active + i {
-		border-color: #00C569;
-    }
+  background: none;
 
-    input.error {
-    	color: #333;
-		border-color: #e41c38;
-    }
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+}
 
-    input.error + i{
-		color: #e41c38;
-    }
+.input-wrapper i {
+  display: inline-block;
 
+  position: absolute;
 
-    input.error:focus ,  input.error:focus + i  {
-		border-color: #e41c38;
-    }
+  left: 15px;
 
-    select{
+  font-size: 20px;
 
-    	width: 100%;
+  color: #bebebe;
 
-		border-radius: 4px;
+  top: 9px;
 
-		border: 1px solid;
+  transition: 200ms;
+}
 
-		padding: 8px 15px;
+select option {
+  color: #333;
+}
 
-		position: relative;
+select:focus {
+  color: #333;
+}
 
-		z-index: 1;
+select.active {
+  color: #333;
+  color: #00c569;
+}
 
-		color: #777777;
+select.active:focus {
+  color: #00c569;
+}
 
-		direction: rtl;
+select.error {
+  color: #333;
+  color: #e41c38;
+}
 
-		transition: 200ms;
+select.error:focus {
+  color: #e41c38;
+}
 
-		background: none;
+.error-message {
+  text-align: right;
 
-		appearance:none;
-		-webkit-appearance:none;
-		-moz-appearance:none;
-		-ms-appearance:none;
+  color: #e41c38;
 
+  font-weight: bold;
 
+  height: 25px;
 
-    }
+  direction: rtl;
 
-    .input-wrapper i {
-    	display: inline-block;
+  font-size: 11px;
+}
 
-		position: absolute;
+.small-description {
+  font-size: 11px;
 
-		left: 15px;
+  font-weight: bold;
 
-		font-size: 20px;
+  color: #777777;
 
-		color: #BEBEBE;
+  line-height: 1.618;
+}
 
-		top: 9px;
+.small-description-text {
+  text-align: right;
 
-		transition: 200ms;
-    }
+  font-weight: bold;
+  color: #777777;
 
-     select option{
-		color: #333;
-    }
+  height: 25px;
 
-    select:focus{
-		color: #333;
-    }
+  direction: rtl;
 
-    select.active{
-    		color: #333;
-		color: #00C569;
-    }
+  font-size: 12px;
+}
 
-    select.active:focus {
-		color: #00C569;
-    }
-
-    select.error {
-    		color: #333;
-		color: #e41c38;
-    }
-
-    select.error:focus{
-		color: #e41c38;
-    }
-    .error-message{
-
-    	text-align: center;
-
-		color: #e41c38;
-
-		font-weight: bold;
-
-		height: 15px;
-
-	    direction: rtl;
-
-		font-size: 11px;
-    }
-
-    .small-description{
-
-         font-size: 11px;
-
-         font-weight: bold;
-
-         color: #777777;
-
-         line-height: 1.618;
-
-    }
-    .loading-submit{
-    	width: 50px;
-		margin: 0 auto;
-    }
-    @media screen and (max-width: 767px){
-		.input-wrapper {
-		    padding: 0 5px;
-
-		}
-		select{
-			font-size: 12px;
-		}
-		.input-wrapper::after {
-		    left: 14px;
-		}
-	}
+.loading-submit {
+  width: 50px;
+  margin: 0 auto;
+}
+@media screen and (max-width: 767px) {
+  .input-wrapper {
+    padding: 0 5px;
+  }
+  select {
+    font-size: 12px;
+  }
+  .input-wrapper::after {
+    left: 14px;
+  }
+}
 </style>
 
 <template>
-	<div>
+  <div>
+    <div class="form-contents">
+      <div class="col-xs-12">
+        <div class="text-input-wrapper">
+          <p>
+            خریدار محترم برای اطلاع از آخرین قیمت محصولات و پیداکردن محصول
+            مناسب، علاوه بر جستوجو در <br /><router-link
+              :to="{ name: 'productList' }"
+            >
+              لیست محصولات </router-link
+            ><br />میتوانید درخواست خرید خود را در اینجا ثبت کنید تا کشاورزان و
+            تامین کنندگان باسکول به شما پاسخ دهند.
+            <br />
+            <br />
 
-
-		 <div class="form-contents ">
-
-			    	<div class=" col-xs-12 ">
-
-
-
-				     	<div class="text-input-wrapper  ">
-
-
-				     		<p>
-                                خریدار محترم برای اطلاع از آخرین قیمت محصولات و پیداکردن محصول مناسب، علاوه بر جستوجو در <br/><router-link :to="{name : 'productList'}"> لیست محصولات </router-link><br/>میتوانید درخواست خرید خود را در اینجا ثبت کنید تا کشاورزان و تامین کنندگان باسکول به شما پاسخ دهند.
-				     			<br/>
-				     			<br/>
-
-<!--
+            <!--
 				     			<strong>
 				     				<span class="red-text">تنها </span>پس از ثبت محصول اطلاعات شما بر روی سامانه به خریداران نمایش داده می شود
 				     			</strong>
 -->
-				     		</p>
+          </p>
+        </div>
+      </div>
 
-				     	</div>
+      <div class="col-xs-12">
+        <div class="text-center">
+          <div class="event-text">
+            <strong> همین حالا درخواست خرید خود را ثبت کنید </strong>
+          </div>
 
-				    </div>
-
-			       <div class="col-xs-12">
-			       	<div class="text-center">
-				       	<div class="event-text">
-				       		<strong>
-				       		همین حالا درخواست خرید خود را ثبت کنید
-				       		</strong>
-				       	</div>
-
-			       		 <button class="submit-button active "
-
-			       		 	@click.prevent="$parent.goToStep(1)"
-			       		   >
-			        		ثبت درخواست خرید
-						 </button>
-			       	</div>
-			       	</div>
-			       </div>
-		</div>
-
+          <button
+            class="submit-button active"
+            @click.prevent="$parent.goToStep(1)"
+          >
+            ثبت درخواست خرید
+          </button>
+        </div>
+      </div>
     </div>
+  </div>
 </template>

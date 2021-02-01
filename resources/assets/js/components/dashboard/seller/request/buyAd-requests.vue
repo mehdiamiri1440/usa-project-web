@@ -3,6 +3,46 @@
   padding-top: 50px;
 } */
 
+.user-information-wrapper {
+  float: right;
+  width: 100%;
+  margin-bottom: 4px;
+}
+
+.user-information-content {
+  display: block;
+  float: right;
+  width: 100%;
+  background: none;
+  border: none;
+  padding-bottom: 3px;
+}
+.user-image {
+  width: 25px;
+  height: 25px;
+  float: right;
+  margin-left: 10px;
+}
+.user-content {
+  display: block;
+  max-width: 170px;
+  overflow: hidden;
+  font-size: 13px;
+  font-weight: 400;
+  color: #adadad;
+  height: 21px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  text-align: right;
+}
+
+.user-content i {
+  margin-left: 1px;
+  position: relative;
+  top: 3px;
+  font-size: 15px;
+}
+
 .wrapper_no_pro {
   text-align: center;
   font-size: 23px;
@@ -33,21 +73,24 @@
 
 .list-group-item {
   border: 1px solid #ddd;
-  padding: 11px 0;
+  padding: 11px 15px 15px;
 }
 .list-group-item:nth-last-of-type(2n + 1) {
-  background: #fdfdfd !important;
+  background: #f9fcff !important;
 }
 
 .detail-success {
-  padding: 8px 0;
+  padding: 10px 0;
   width: 100%;
   background: #00c569;
   color: #fff;
   text-align: center;
   border-radius: 5px;
-  font-size: 13px;
+  font-size: 17px;
   font-weight: bold;
+  display: block;
+  max-width: 250px;
+  margin: 13px auto 0;
 }
 
 .main-content > ul {
@@ -59,6 +102,9 @@
 .main-content .list-group-item p {
   text-align: center;
   direction: rtl;
+  padding-top: 25px;
+  font-size: 15px;
+  font-weight: bold;
 }
 
 #main.little-main {
@@ -70,10 +116,6 @@
   text-align: center;
   background: #eff3f6;
   line-height: 1.618;
-}
-
-.text-red {
-  color: #e41c38;
 }
 
 .request-detail .green-button {
@@ -146,7 +188,7 @@
 
   border: none;
 
-  color: #777;
+  color: #556080;
 
   padding: 0;
 
@@ -242,18 +284,29 @@
   color: #333;
 }
 
-.lock > p {
-  filter: blur(7px);
+.lock p {
+  filter: blur(10px);
 }
 
-.lock > span.lock-text {
+.lock span.lock-text {
   position: absolute;
   left: 0;
   text-align: right;
-  right: 90px;
+  right: 30px;
   font-size: 20px;
   font-weight: bold;
-  top: 14px;
+  color: #7e7e7e;
+  top: 45px;
+}
+.list-title.list-name {
+  text-align: right;
+  padding: 5px 15px;
+  direction: rtl;
+  color: #7e7e7e;
+}
+.list-title.list-name p {
+  text-align: right;
+  font-size: 18px;
 }
 
 @media screen and (max-width: 991px) {
@@ -266,13 +319,21 @@
   }
 }
 @media screen and (max-width: 767px) {
-  .lock > span.lock-text {
+  .list-title.list-name p {
+    text-align: center;
+    min-height: 83px;
+  }
+  .button-wrapper {
+    margin: 10px auto;
+  }
+
+  .main-content .list-group-item p {
+    padding-top: 10px;
+  }
+  .lock span.lock-text {
     text-align: center;
     right: 0;
-    top: 60px;
-  }
-  .golden {
-    padding: 25px 0;
+    top: 90px;
   }
   .golden::after {
     display: none;
@@ -316,6 +377,20 @@
   .list-notice button > span.request-count {
     font-size: 15px;
   }
+  .list-title.list-name {
+    text-align: center !important;
+  }
+
+  .main-content .list-group-item p.list-notice {
+    text-align: left;
+    padding-left: 30px;
+  }
+
+  .main-content .list-group-item p.list-time {
+    text-align: right;
+    padding-right: 30px;
+    padding-top: 6px;
+  }
 }
 </style>
 <template>
@@ -358,7 +433,7 @@
                   class="green-button remove-filter-button"
                   @click.prevent="filterCategory = ''"
                 >
-                  <span class="text-red remove-filter-icon">
+                  <span class="red-text remove-filter-icon">
                     <i class="fa fa-times"></i>
                   </span>
                   <span
@@ -400,52 +475,55 @@
                   currentUser.user_info.active_pakage_type == 0
                 "
                 class="lock-text"
-                v-text="buyAd.subcategory_name"
-              ></span>
-              <p class="list-title col-sm-3 col-xs-12">
-                <span v-text="buyAd.category_name"></span>
+              >
+                <span> خریدار </span>
+                <span class="brand-text" v-text="buyAd.subcategory_name"></span>
+                <span> هستم </span>
+              </span>
+              <div class="list-title list-name col-sm-6 col-xs-12">
+                <div class="user-information-wrapper">
+                  <div class="user-information-content">
+                    <div class="user-content">
+                      <i class="fa fa-user-circle"></i>
+                      <span
+                        class="user-name-link"
+                        v-text="buyAd.first_name + ' ' + buyAd.last_name"
+                      >
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <p>
+                  <span> خریدار </span>
+                  <span
+                    class="red-text"
+                    v-if="
+                      buyAd.is_golden &&
+                      currentUser.user_info.active_pakage_type == 0
+                    "
+                    v-text="'0000'"
+                  ></span>
+                  <span
+                    class="red-text"
+                    v-else
+                    v-text="getConvertedNumbers(buyAd.requirement_amount)"
+                  ></span>
 
-                <span>|</span>
+                  <span
+                    class="brand-text"
+                    v-text="buyAd.subcategory_name"
+                  ></span>
+                  <span v-if="buyAd.name"> از نوع </span>
+                  <span
+                    class="brand-text"
+                    v-if="buyAd.name"
+                    v-text="buyAd.name"
+                  ></span>
 
-                <span v-text="buyAd.subcategory_name"></span>
-
-                <span v-if="buyAd.name" v-text="' | ' + buyAd.name"></span>
-                <!-- <span v-else v-text="' | ' + buyAd.name"></span> -->
-              </p>
-
-              <p class="needs col-sm-3 col-xs-12">
-                <span class="static-content">میزان نیازمندی :</span>
-
-                <span
-                  v-if="
-                    buyAd.is_golden &&
-                    currentUser.user_info.active_pakage_type == 0
-                  "
-                  v-text="'0000'"
-                ></span>
-                <span
-                  v-else
-                  v-text="getNumberWithCommas(buyAd.requirement_amount)"
-                ></span>
-
-                <span class="static-content">کیلوگرم</span>
-              </p>
-
-              <p
-                class="list-time col-sm-2 col-xs-12"
-                v-if="
-                  buyAd.is_golden &&
-                  currentUser.user_info.active_pakage_type == 0
-                "
-                v-text="'۱۳ تیر , ۱۳۰۴'"
-              ></p>
-              <p
-                class="list-time col-sm-2 col-xs-12"
-                v-else
-                v-text="buyAd.register_date"
-              ></p>
-
-              <p class="list-notice col-sm-1 col-xs-12 pull-right">
+                  <span> هستم </span>
+                </p>
+              </div>
+              <p class="list-notice col-sm-1 col-xs-6 pull-right">
                 <button
                   v-if="
                     buyAd.is_golden &&
@@ -454,11 +532,11 @@
                   class="btn"
                   type="button"
                 >
-                  <span>
+                  <span class="gray-text">
                     <i class="fas fa-comment-alt"></i>
                     <i class="fas fa-exclamation"></i>
                   </span>
-                  <span class="request-count red-text">{{ "0+" }}</span>
+                  <span class="request-count">{{ "0+" }}</span>
                 </button>
                 <button
                   v-else
@@ -468,44 +546,65 @@
                   data-placement="top"
                   title="ظرفیت باقی مانده برای ارسال پیام به خریدار این محصول"
                 >
-                  <span>
+                  <span class="gray-text">
                     <i class="fas fa-comment-alt"></i>
                     <i class="fas fa-exclamation"></i>
                   </span>
-                  <span class="request-count red-text">{{
+                  <span class="request-count">{{
                     buyAd.reply_capacity + "+"
                   }}</span>
                 </button>
               </p>
+              <p
+                class="list-time col-sm-2 col-xs-6"
+                v-if="
+                  buyAd.is_golden &&
+                  currentUser.user_info.active_pakage_type == 0
+                "
+                v-text="'۱۳ تیر , ۱۳۰۴'"
+              ></p>
+              <p
+                class="list-time col-sm-2 col-xs-6"
+                v-else
+                v-text="buyAd.register_date"
+              ></p>
 
               <a
                 v-if="
                   buyAd.is_golden &&
                   currentUser.user_info.active_pakage_type == 0
                 "
-                class="col-sm-3 col-xs-12 pull-left"
+                class="col-sm-3 col-xs-12 pull-left button-wrapper"
                 href
                 @click.prevent="openGoldenChatRestrictionModal()"
               >
-                <p class="detail-success hover-effect">
-                  <span class="fas fa-comment-alt"></span> پیام به خریدار
-                </p>
-                <p class="detail-success hide-reply" :id="'loader-' + buyAd.id">
-                  کمی صبر کنید...
-                </p>
+                <span
+                  :id="'loader-' + buyAd.id"
+                  class="detail-success hover-effect"
+                >
+                  <span>
+                    پیام به خریدار
+                    <span class="fas fa-comment-alt"></span>
+                  </span>
+                  <span class="hide-reply"> کمی صبر کنید... </span>
+                </span>
               </a>
               <a
                 v-else
-                class="col-sm-3 col-xs-12 pull-left"
                 href
-                @click.prevent="openChat(buyAd, $event)"
+                class="col-sm-3 col-xs-12 pull-left button-wrapper"
+                @click.prevent="openChat(buyAd)"
               >
-                <p class="detail-success hover-effect">
-                  <span class="fas fa-comment-alt"></span> پیام به خریدار
-                </p>
-                <p class="detail-success hide-reply" :id="'loader-' + buyAd.id">
-                  کمی صبر کنید...
-                </p>
+                <span
+                  :id="'loader-' + buyAd.id"
+                  class="detail-success hover-effect"
+                >
+                  <span>
+                    پیام به خریدار
+                    <span class="fas fa-comment-alt"></span>
+                  </span>
+                  <span class="hide-reply"> کمی صبر کنید... </span>
+                </span>
               </a>
             </li>
           </ul>
@@ -641,18 +740,18 @@ export default {
           }, 100);
         });
     },
-    openChat: function (buyAd, event) {
+    openChat: function (buyAd) {
       var self = this;
 
       let id = "#loader-" + buyAd.id;
-      self.hideReplyBtn(event, id);
+      self.hideReplyBtn(id);
 
       axios
         .post("/get_user_permission_for_buyAd_reply", {
           buy_ad_id: buyAd.id,
         })
         .then(function (response) {
-          self.showReplyBtn(event, id);
+          self.showReplyBtn(id);
 
           if (response.data.permission == true) {
             var contact = {
@@ -681,21 +780,17 @@ export default {
           }
         });
     },
-    hideReplyBtn: function (e, id) {
-      return new Promise((resolve, reject) => {
-        $(e.target).hide();
-        resolve(true);
-      }).then(() => {
-        $(id).show();
-      });
+    hideReplyBtn: function (id) {
+      let itemFirst = id + " span:first-child";
+      let itemLast = id + " span:last-child";
+      $(itemFirst).hide();
+      $(itemLast).show();
     },
-    showReplyBtn: function (e, id) {
-      return new Promise((resolve, reject) => {
-        $(id).hide();
-        resolve(true);
-      }).then(() => {
-        $(e.target).show();
-      });
+    showReplyBtn: function (id) {
+      let itemFirst = id + " span:first-child";
+      let itemLast = id + " span:last-child";
+      $(itemLast).hide();
+      $(itemFirst).show();
     },
     openGoldenChatRestrictionModal: function () {
       eventBus.$emit("modal", "goldenBuyAdReplyLimit");
@@ -710,6 +805,17 @@ export default {
       if (number || typeof number === "number")
         return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       else return "";
+    },
+    getConvertedNumbers: function (number) {
+      if (number || typeof number === "number") {
+        let data = number / 1000;
+        if (number < 1000) {
+          return number + " " + "کیلوگرم";
+        } else {
+          data = this.getNumberWithCommas(data);
+          return data + " " + "تن";
+        }
+      } else return "";
     },
     registerComponentStatistics: function (
       categoryName,
@@ -742,6 +848,9 @@ export default {
       setTimeout(function () {
         $(".list-notice button").tooltip();
       }, 100);
+    },
+    scrollToTop() {
+      window.scrollTo(0, 0);
     },
   },
   mounted() {

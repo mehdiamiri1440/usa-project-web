@@ -39,7 +39,7 @@ class messaging_anomaly_controller extends Controller
                             'users.created_at as reciever_created_at',
                             'messages.*'
                         ])
-                        ->orderBy('messages.created_at')
+                        ->orderBy('messages.created_at','desc')
                         ->get();
 
         $users = DB::table('myusers')
