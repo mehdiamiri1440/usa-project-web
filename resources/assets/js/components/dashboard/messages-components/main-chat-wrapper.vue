@@ -79,7 +79,7 @@
   float: right;
   width: 100%;
   color: #fff;
-  background: #f0f0f0;
+  background: linear-gradient(-90deg, #21ad93, #4dc0bb);
 }
 
 .message-contact-title a {
@@ -143,7 +143,7 @@
   overflow: hidden;
   max-width: 135px;
   font-size: 15px;
-  color: #919191;
+  color: #fff;
 }
 
 .back-state {

@@ -355,13 +355,12 @@
     </div>
 
     <div
-      class="col-xs-12 message-wrapper col-sm-8 col-lg-9"
+      class="col-xs-12 pull-right message-wrapper col-sm-8 col-lg-6"
       v-bind:class="{ hidden_element: !selectedContact }"
       v-if="selectedContact"
     >
       <mainChatWrapper />
     </div>
-
     <div
       class="col-xs-12 default-message-wrapper hidden-xs col-sm-8 col-lg-9"
       v-if="!selectedContact && isCurrentStep == 0"
@@ -378,6 +377,16 @@
         <p>برای شروع چت لطفا یک مخاطب انتخاب کنید</p>
       </div>
     </div>
+
+    <div
+      class="contact-wrapper pull-left hiiden-sm hidden-xs col-lg-3"
+      v-bind:class="{ hidden_element: !selectedContact }"
+      v-if="selectedContact"
+    >
+      <div class="row">
+        <chat-user-info />
+      </div>
+    </div>
   </section>
 </template>
 
@@ -386,12 +395,14 @@ import { eventBus } from "../../router/router";
 import Push from "push.js";
 
 import myContactList from "./messages-components/my-contact-list";
+import chatUserInfo from "./messages-components/chat-user-info";
 import MainChatWrapper from "./messages-components/main-chat-wrapper";
 
 export default {
   props: ["isRequiredFixAlert", "userType", "currentUser", "str"],
   components: {
     myContactList,
+    chatUserInfo,
     MainChatWrapper,
   },
   data: function () {

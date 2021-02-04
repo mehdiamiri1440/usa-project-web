@@ -19,7 +19,7 @@
 }
 
 .contact-items {
-  padding-top: 80px;
+  padding-top: 102px;
 }
 
 .contact-items.is-buyer-list {
@@ -36,11 +36,11 @@
   right: 20px;
   font-size: 16px;
   color: #919191;
-  top: 17px;
+  top: 21px;
 }
 
 .contact-body .contact-search .contact-search-input-wrapper input {
-  padding: 3px 40px 3px 15px;
+  padding: 8px 40px 8px 15px;
   border-radius: 50px;
   background: #fff;
   border: none;
@@ -212,7 +212,7 @@
   border: none;
   width: 100%;
   font-size: 13px;
-  padding: 3px 0;
+  padding: 8px 0;
   position: relative;
   color: #666;
 }
@@ -228,7 +228,8 @@
 .contacts-switch-buttons-wrapper .contact-button.active,
 .contacts-switch-buttons-wrapper .contact-button:hover {
   background-color: #fff;
-  border-bottom: 1px solid #00c569;
+  border-bottom: 2px solid #00c569;
+  margin-bottom: -2px;
   z-index: 1;
 }
 
