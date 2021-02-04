@@ -288,7 +288,7 @@
     <!-- add android app download  -->
 
     <div
-      v-if="isConditionSatisfied"
+      v-if="downloadAppButton"
       class="android-download-alert-wrapper hidden-lg hidden-md"
     >
       <button
@@ -325,6 +325,7 @@ export default {
     return {
       iswebview: navigator.userAgent == "webView" ? true : false,
       isConditionSatisfied: false,
+      downloadAppButton: false,
       elevatorText: "",
       productId: "",
       buyAdId: "",
@@ -478,12 +479,24 @@ export default {
           }
 
           if (!this.checkCookie() && this.userId && !this.iswebview) {
-            console.log(" run modal");
-
             setTimeout(() => {
               $("#download-app-modal").modal("show");
             }, 1000);
           }
+        }
+      }
+    },
+    activateDownloadAppButton: function () {
+      let self = this;
+      if (this.isDeviceMobile() && !this.isOsIOS()) {
+        let androidVersion = this.getAndroidVersion();
+        if (parseInt(androidVersion) >= 5) {
+          this.downloadAppButton = true;
+          // if (!this.checkCookie() && !this.iswebview) {
+          // setTimeout(() => {
+          //   $("#download-app-modal").modal("show");
+          // }, 1000);
+          // }
         }
       }
     },
@@ -1106,6 +1119,7 @@ export default {
   },
   mounted() {
     // eventBus.$emit("globalVerifiedBadgeContents", this.verifiedUserContent);
+    this.activateDownloadAppButton();
     eventBus.$emit("globalVerifiedBadgeContents", 1);
   },
   watch: {
