@@ -86,7 +86,7 @@
 /******/ 		if (__webpack_require__.nc) {
 /******/ 			script.setAttribute("nonce", __webpack_require__.nc);
 /******/ 		}
-/******/ 		script.src = __webpack_require__.p + "chunks/" + ({}[chunkId]||chunkId) + "." + {"0":"6785dfebb7ee7cdfc6a7","1":"d37fb1ac85d2ebb1054b","2":"1b7d13a1005184d17183","3":"e238dc26323fc916e614","4":"94c5a543b55f361c2d7b","5":"ddebc2037c446baeff7d","6":"672c4ff5da5ff3233f8a","7":"90b8e3345009bf1eda43","8":"490ec0495e10b2af1ab8","9":"d84e0763c2be07c02fc6","10":"1222ef84f72ac799d5e1","11":"b5c0604c9880676545e1","12":"a69bfc768058ef366c51","13":"d7af121969fe2305a80c","14":"f7d4a4eeb22d38dee8bd","15":"740250feecb3735a4d50","16":"262c3ece9b428634c536","17":"c620d553779b4d176e5f","18":"7c86253700a5f10eecb8","19":"4de66616cd5a8959b859","20":"28d43d96318ad3e491de","21":"8dae4df07eca4a6402ad","22":"50727420a48d0f398998","23":"c268c567c893dca803b2","24":"5a2d614d9e0824a41223","25":"2cdc3e7c35c2b82e88a1","26":"c7b18345e3d0c7d6ac29","27":"0670276fcc0234878d38","28":"87d22230843ac3b80ebd","29":"9356865987f405f8ac29","30":"e4d8a69701ed5a596ef8","31":"3043a9c5e55f40a2d337","32":"e12b14e10ccba58ceff9","33":"3a6d89eae35afb2db6d9","34":"4966e22a7101a96d40b6","35":"bee4d70221f47ea4a076","36":"a2b364349ecd880c574a","37":"b30e187b3eff08ad02de"}[chunkId] + ".js";
+/******/ 		script.src = __webpack_require__.p + "chunks/" + ({}[chunkId]||chunkId) + "." + {"0":"6f951d8ec1e70b3875d6","1":"48012b856028a3101b7d","2":"053b77acdd53987d44a9","3":"9bcd882f5193feb00c0a","4":"94c5a543b55f361c2d7b","5":"a1dcd52eac2d1038d25e","6":"840ffdbd45ae5e552e9f","7":"a2a2d188180887cd10aa","8":"f67764b1b21f051c2ff1","9":"619463983706cd63684e","10":"321a2dc9239d0ebd87f0","11":"c8a74bdd721c133f08a0","12":"ab573d025883c74d3a8e","13":"790ca4d885add5c2217a","14":"f7d4a4eeb22d38dee8bd","15":"d57d69b32cb63a50a0cb","16":"262c3ece9b428634c536","17":"ab139653db5acf675f0f","18":"33961c3b20b3fe53ebdd","19":"4de66616cd5a8959b859","20":"28d43d96318ad3e491de","21":"8dae4df07eca4a6402ad","22":"32657a4c4f65cc484d42","23":"b14dd476ad6b1d40cb76","24":"d7065c686dce05bee252","25":"48f2c66e0cb248db40f3","26":"ef71d3e4d3f98dc862ca","27":"601fdba425a4946047ad","28":"2a9eaa70487db5c97c09","29":"7c5b0514bf5ef26c0b26","30":"abfbca8b65b5bab57bae","31":"0b9031fbc3f9dbbee22d","32":"dcbaa796eab07cd002f0","33":"8d0632aca1361867c9e0","34":"4966e22a7101a96d40b6","35":"62e79d1956957ec6c6c8","36":"15dc2b3d50cbc3ba4653","37":"208914eb1e420be76c4a"}[chunkId] + ".js";
 /******/ 		var timeout = setTimeout(onScriptComplete, 120000);
 /******/ 		script.onerror = script.onload = onScriptComplete;
 /******/ 		function onScriptComplete() {
@@ -6005,7 +6005,7 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
       path: "messenger",
       components: {
         default: function _default(resolve) {
-          __webpack_require__.e/* require */(2/* duplicate */).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(163)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+          __webpack_require__.e/* require */(1/* duplicate */).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(163)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
         }
       },
       children: [{
@@ -6114,7 +6114,7 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
       path: "messenger",
       components: {
         default: function _default(resolve) {
-          __webpack_require__.e/* require */(2/* duplicate */).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(163)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+          __webpack_require__.e/* require */(1/* duplicate */).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(163)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
         }
       },
       children: [{
@@ -6182,7 +6182,7 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
       name: "indexPage",
       components: {
         default: function _default(resolve) {
-          __webpack_require__.e/* require */(1/* duplicate */).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(165)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+          __webpack_require__.e/* require */(2/* duplicate */).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(165)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
         }
       }
     }, {
@@ -6256,7 +6256,7 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
       name: "productListSearch",
       components: {
         default: function _default(resolve) {
-          __webpack_require__.e/* require */(1/* duplicate */).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(165)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+          __webpack_require__.e/* require */(2/* duplicate */).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(165)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
         }
       }
     }, {
@@ -69650,7 +69650,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     return {
       iswebview: navigator.userAgent == "webView" ? true : false,
       isConditionSatisfied: false,
-      downloadAppButton: false,
       elevatorText: "",
       productId: "",
       buyAdId: "",
@@ -69780,24 +69779,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           }
 
           if (!this.checkCookie() && this.userId && !this.iswebview) {
+            console.log(" run modal");
+
             setTimeout(function () {
               $("#download-app-modal").modal("show");
             }, 1000);
           }
-        }
-      }
-    },
-    activateDownloadAppButton: function activateDownloadAppButton() {
-      var self = this;
-      if (this.isDeviceMobile() && !this.isOsIOS()) {
-        var androidVersion = this.getAndroidVersion();
-        if (parseInt(androidVersion) >= 5) {
-          this.downloadAppButton = true;
-          // if (!this.checkCookie() && !this.iswebview) {
-          // setTimeout(() => {
-          //   $("#download-app-modal").modal("show");
-          // }, 1000);
-          // }
         }
       }
     },
@@ -70383,7 +70370,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   mounted: function mounted() {
     // eventBus.$emit("globalVerifiedBadgeContents", this.verifiedUserContent);
-    this.activateDownloadAppButton();
     __WEBPACK_IMPORTED_MODULE_0__router_js__["b" /* eventBus */].$emit("globalVerifiedBadgeContents", 1);
   },
 
@@ -77261,7 +77247,7 @@ var render = function() {
         }
       }),
       _vm._v(" "),
-      _vm.downloadAppButton
+      _vm.isConditionSatisfied
         ? _c(
             "div",
             {

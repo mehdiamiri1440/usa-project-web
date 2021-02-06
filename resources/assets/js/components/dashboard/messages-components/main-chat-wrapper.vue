@@ -27,17 +27,6 @@
   border-width: 3px;
 }
 
-/* Hide scrollbar for Chrome, Safari and Opera */
-.chat-loaded::-webkit-scrollbar {
-  display: none;
-}
-
-/* Hide scrollbar for IE, Edge and Firefox */
-.chat-loaded {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-}
-
 .whatsapp-loading-gif {
   justify-content: center;
   align-items: center;
@@ -169,7 +158,7 @@
 }
 
 .message-wrapper .chat-page ul {
-  padding: 20px 70px;
+  padding: 20px;
 
   overflow-x: hidden;
 
@@ -742,7 +731,7 @@
       <div class="send-message-form">
         <form>
           <div class="message-input">
-            <button
+            <!-- <button
               class="capture-image"
               :class="{
                 'slide-out-right': isChat,
@@ -750,11 +739,13 @@
               }"
             >
               <i class="fa fa-camera"></i>
-            </button>
-            <input
-              :class="{
+            </button> -->
+
+            <!-- :class="{
                 'padding-default': isChat,
-              }"
+              }" -->
+            <input
+              class="padding-default"
               type="text"
               placeholder="پیغامی بگذارید "
               v-model="$parent.msgToSend"
@@ -763,7 +754,7 @@
 
           <div class="button-wrapper">
             <div class="item-wrapper">
-              <button
+              <!-- <button
                 class="voice-message-button"
                 :class="{
                   'scale-down-center-fade': isChat,
@@ -772,14 +763,15 @@
                 @click.prevent="isChat = false"
               >
                 <i class="fa fa-microphone"></i>
-              </button>
-              <button
-                type="submit"
-                class="send-message-button"
-                :class="{
+              </button> -->
+
+              <!-- :class="{
                   'scale-down-center-fade': !isChat,
                   'scale-up-center-full ': isChat,
-                }"
+                }" -->
+              <button
+                type="submit"
+                class="send-message-button scale-up-center-full"
                 @click.prevent="isChat = true"
               >
                 <!-- @click.prevent="$parent.sendMessage()" -->

@@ -384,7 +384,10 @@
       v-if="selectedContact"
     >
       <div class="row">
-        <chat-user-info />
+        <chat-user-info
+          v-if="selectedContact"
+          :selected-contact="selectedContact"
+        />
       </div>
     </div>
   </section>
@@ -481,6 +484,8 @@ export default {
       this.loadContactList();
     },
     loadChatHistory: function (contact, index) {
+      this.selectedContact = "";
+      this.chatMessages = "";
       var self = this;
       self.isChatLoadeMore = false;
       self.handleBackBtnClickOnDevices();

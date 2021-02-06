@@ -7,16 +7,6 @@
   z-index: 2;
 }
 
-/* Hide scrollbar for Chrome, Safari and Opera */
-.contact-wrapper .contact-body::-webkit-scrollbar {
-  display: none;
-}
-
-/* Hide scrollbar for IE, Edge and Firefox */
-.contact-wrapper .contact-body {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-}
 .user-information-content {
   display: block;
   float: right;
