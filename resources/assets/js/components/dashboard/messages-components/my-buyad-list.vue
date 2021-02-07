@@ -86,7 +86,7 @@ li.contact-item:nth-last-of-type(2n + 1) {
   left: 7px;
   font-size: 16px;
   color: #919191;
-  top: 8px;
+  top: 12px;
   background: none;
   border: none;
   padding: 7px 15px 1px;

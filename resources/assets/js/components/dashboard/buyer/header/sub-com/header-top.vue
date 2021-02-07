@@ -417,7 +417,7 @@ a.profile-info-wrapper:focus {
   }
 
   .show-header button {
-    padding: 19px 17px 16px 17px;
+    padding: 19px 17px 11px 17px;
   }
 
   .right-menu-header {

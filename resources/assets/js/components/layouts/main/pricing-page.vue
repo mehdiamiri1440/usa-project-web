@@ -42,7 +42,7 @@ export default {
       if (elementClass !== "") {
         console.log($(element).toggleClass("changed-angle"));
       } else {
-        console.log("false");
+        // console.log("false");
       }
     },
   },

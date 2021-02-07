@@ -54,6 +54,10 @@
   color: #777;
 }
 
+.empty-response-rate {
+  padding-top: 13px;
+}
+
 li.user-info,
 li.user-items {
   float: right;
@@ -262,12 +266,22 @@ li.score-item i {
           </div>
           <div class="user-contents">
             <p
-            :class="{'empty-response-rate' : userStatistics.response_rate && userStatistics.response_rate != '0'}"
+              :class="{
+                'empty-response-rate':
+                  !userStatistics.response_rate &&
+                  userStatistics.response_rate == '0',
+              }"
               v-text="
                 selectedContact.first_name + ' ' + selectedContact.last_name
               "
             ></p>
-            <p v-if="userStatistics.response_rate && userStatistics.response_rate != '0'" class="response-rate">
+            <p
+              v-if="
+                userStatistics.response_rate &&
+                userStatistics.response_rate != '0'
+              "
+              class="response-rate"
+            >
               احتمال پاسخگویی
               <span
                 class="red-text"
@@ -305,7 +319,6 @@ li.score-item i {
                     data-toggle="popover"
                     data-placement="bottom"
                     :data-content="$parent.verifiedUserContent"
-                    title
                   >
                     <i class="fa fa-certificate"></i>
                   </button>
@@ -512,8 +525,9 @@ export default {
               user_name: self.selectedContact.user_name,
             })
             .then((statisticsResponse) => {
-              self.userDataLoader = false;
               self.userStatistics = statisticsResponse.data.statistics;
+              self.activeComponentTooltip();
+              self.userDataLoader = false;
             })
             .catch((err) => {
               //
@@ -523,13 +537,42 @@ export default {
           //
         });
     },
+    activeComponentTooltip() {
+      $(".verified-user")
+        .popover({ trigger: "manual", html: true, animation: false })
+        .on("mouseenter", function () {
+          var _this = this;
+          $(this).popover("show");
+          $(".popover").on("mouseleave", function () {
+            $(_this).popover("hide");
+          });
+        })
+        .on("mouseleave", function () {
+          var _this = this;
+          setTimeout(function () {
+            if (!$(".popover:hover").length) {
+              $(_this).popover("hide");
+            }
+          }, 300);
+        });
+    },
+  },
+  mounted() {
+    this.init();
   },
   watch: {
-    "$parent.chatMessages"(value) {
-      if (value) {
+    "$parent.selectedContact"(isItemActive) {
+      if (isItemActive) {
         this.init();
       } else {
         this.userDataLoader = true;
+      }
+    },
+    userDataLoader(userDataLoader) {
+      if (!userDataLoader) {
+        setTimeout(() => {
+          this.activeComponentTooltip();
+        }, 50);
       }
     },
   },

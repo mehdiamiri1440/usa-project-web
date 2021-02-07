@@ -299,22 +299,6 @@
     display: none;
   }
 
-  .message-wrapper .message-contact-title span {
-    padding-top: 6px;
-
-    width: 170px;
-
-    overflow: hidden;
-
-    height: 40px;
-
-    line-height: 1.618;
-
-    text-overflow: ellipsis;
-
-    white-space: nowrap;
-  }
-
   .contacts-switch-buttons-wrapper .switch-button-item {
     width: 33.3333%;
   }
@@ -323,19 +307,10 @@
   }
 }
 
-@media screen and (max-width: 370px) {
-  .message-wrapper .message-contact-title span {
-    width: 130px;
-  }
-}
-
-@media screen and (max-width: 330px) {
-  .message-wrapper .message-contact-title-img {
-    margin: 0 15px;
-  }
-
-  .message-wrapper .message-contact-title span {
-    font-size: 13px;
+@media screen and (max-width: 767px) {
+  .is-guide-active {
+    z-index: 5 !important;
+    background: transparent !important;
   }
 }
 </style>
@@ -343,7 +318,10 @@
 <template>
   <section
     class="main-content col-xs-12"
-    :class="{ 'is-fix-alert': isRequiredFixAlert }"
+    :class="{
+      'is-fix-alert': isRequiredFixAlert,
+      'is-guide-active': selectedContact,
+    }"
   >
     <div
       class="col-xs-12 contact-wrapper pull-right col-sm-4 col-lg-3"
@@ -424,6 +402,7 @@ export default {
       contactList: [],
       chatMessages: "",
       isNoticeActive: true,
+      isGuideActive: false,
       selectedContact: "",
       currentUserId: "",
       currentContactUserId: "",
@@ -440,6 +419,7 @@ export default {
       userAllowedReview: false,
       verifiedUserContent: this.$parent.verifiedUserContent,
       isCurrentUserVerified: false,
+      isChatUpdate: true,
     };
   },
 
@@ -483,9 +463,12 @@ export default {
 
       this.loadContactList();
     },
-    loadChatHistory: function (contact, index) {
-      this.selectedContact = "";
-      this.chatMessages = "";
+    loadChatHistory: function (contact, index, isUpdate) {
+      if (!isUpdate) {
+        this.selectedContact = "";
+        this.selectedContact = contact;
+        this.chatMessages = "";
+      }
       var self = this;
       self.isChatLoadeMore = false;
       self.handleBackBtnClickOnDevices();
@@ -493,8 +476,8 @@ export default {
       if (index !== -10) self.isFirstMessageLoading = true;
       self.selectedIndex = index;
 
-      this.selectedContact = contact;
       this.isUserAuthorizedToPostComment();
+      this.setUserGuideCookie();
 
       this.currentContactUserId = contact.contact_id;
 
@@ -538,28 +521,60 @@ export default {
 
       this.contactList.splice(index, 1, contact);
     },
-    userHasNotice() {
-      let cookie = this.getCookie("messengerNoticeData");
-      if (cookie) {
-        let getAlCookies = JSON.parse(cookie).userNoticeCloed;
-        if (getAlCookies.find(this.cookieHasUser)) {
-          this.isNoticeActive = false;
-        }
-      }
-    },
     cookieHasUser(userId) {
       return userId == this.selectedContact.contact_id;
+    },
+    setUserGuideCookie() {
+      let contactUserId = this.selectedContact.contact_id;
+      let cookie = this.getCookie("userGuideData");
+      let closeUserGuide = this.getCookie("closeUserGuide");
+
+      if (cookie) {
+        let getAllGuidDataCookies = JSON.parse(cookie).userSelected;
+
+        if (!closeUserGuide) {
+          if (getAllGuidDataCookies.length >= 2) {
+            if (!getAllGuidDataCookies.find(this.cookieHasUser)) {
+              getAllGuidDataCookies.push(contactUserId);
+              this.createCookie(
+                "userGuideData",
+                JSON.stringify({ userSelected: getAllGuidDataCookies }),
+                1000
+              );
+            }
+            this.isGuideActive = true;
+          } else if (!getAllGuidDataCookies.find(this.cookieHasUser)) {
+            getAllGuidDataCookies.push(contactUserId);
+            this.createCookie(
+              "userGuideData",
+              JSON.stringify({ userSelected: getAllGuidDataCookies }),
+              1000
+            );
+          }
+        } else {
+          this.isGuideActive = false;
+        }
+      } else {
+        this.createCookie(
+          "userGuideData",
+          JSON.stringify({ userSelected: [contactUserId] }),
+          1000
+        );
+      }
+    },
+    closeUserGuide() {
+      this.createCookie("closeUserGuide", true, 1000);
     },
     setNoticeCookie() {
       let contactUserId = this.selectedContact.contact_id;
       let cookie = this.getCookie("messengerNoticeData");
       if (cookie) {
-        let getAlCookies = JSON.parse(cookie).userNoticeCloed;
-        if (!getAlCookies.find(this.cookieHasUser)) {
-          getAlCookies.push(contactUserId);
+        let getAllCookies = JSON.parse(cookie).userNoticeCloed;
+        if (!getAllCookies.find(this.cookieHasUser)) {
+          getAllCookies.push(contactUserId);
           this.createCookie(
             "messengerNoticeData",
-            JSON.stringify({ userNoticeCloed: getAlCookies }),
+            JSON.stringify({ userNoticeCloed: getAllCookies }),
             1000
           );
         }
@@ -571,6 +586,15 @@ export default {
         );
       }
       this.isNoticeActive = false;
+    },
+    userHasNotice() {
+      let cookie = this.getCookie("messengerNoticeData");
+      if (cookie) {
+        let getAlCookies = JSON.parse(cookie).userNoticeCloed;
+        if (getAlCookies.find(this.cookieHasUser)) {
+          this.isNoticeActive = false;
+        }
+      }
     },
     createCookie: function (name, value, minutes) {
       if (minutes) {
@@ -661,7 +685,7 @@ export default {
           .post("/messanger/send_message", msgObject)
           .then(function (response) {
             self.isFirstMessageLoading = false;
-            self.loadChatHistory(self.selectedContact, -10);
+            self.loadChatHistory(self.selectedContact, -10, true);
           })
           .catch(function (e) {
             //
@@ -671,7 +695,7 @@ export default {
     keepChatUpdated: function (contact) {
       var self = this;
       setTimeout(function () {
-        self.loadChatHistory(contact);
+        self.loadChatHistory(contact, -10, true);
       }, 20000);
     },
     pushNotification: function (header, body, link) {

@@ -379,20 +379,6 @@ export default {
     };
   },
   methods: {
-    init: function () {
-      let self = this;
-
-      // $("#review-modal").on("hide.bs.modal", function (e) {
-      //   setTimeout(() => {
-      //     self.reviewSteps(0);
-      //   }, 200);
-      //   self.resetData();
-      // });
-
-      // $("#review-modal").on("show.bs.modal", function (e) {
-      //   self.handleBackBtnClickOnDevices();
-      // });
-    },
     reviewSteps: function (step) {
       this.$parent.reviewCurrentStep = step;
     },
@@ -428,7 +414,7 @@ export default {
         if (
           !this.validateRegx(
             reviewText,
-            /^(?!.*[(@#!%$&*)])[s\u{0600}-\u{06FF}\u{060C}\u{061B}\u{061F}\u{0640}\u{066A}\u{066B}\u{066C}\u{0E}\u{0A}_.-،:()A-Za-z0-9 ]+$/u
+            /^[\u0600-\u06FF\a-zA-z\s_,.:/;()+-\d]+$/
           )
         ) {
           this.errors.reviewText = "توضیحات شامل کاراکتر های غیرمجاز است";
@@ -492,9 +478,6 @@ export default {
         self.reviewResetData();
       });
     },
-  },
-  mounted: function () {
-    this.init();
   },
   watch: {
     "reviewData.rate": function () {

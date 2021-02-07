@@ -40,7 +40,7 @@
   left: 7px;
   font-size: 16px;
   color: #919191;
-  top: 8px;
+  top: 12px;
   background: none;
   border: none;
   padding: 7px 15px 1px;
@@ -512,7 +512,7 @@ i.fa-star {
         >
           <a
             href="#"
-            @click.prevent="$parent.loadChatHistory(contact, index)"
+            @click.prevent="$parent.loadChatHistory(contact, index, false)"
             :class="{
               active: $parent.selectedContact.contact_id == contact.contact_id,
             }"
