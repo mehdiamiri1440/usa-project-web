@@ -90,7 +90,7 @@
   right: 0;
   top: 50px;
   bottom: 60px;
-  background-size: 50%;
+  background-size: contain;
 }
 
 .chat-page ul {
@@ -129,14 +129,13 @@
 .message-wrapper .message-contact-title a {
   float: right;
   display: block;
-
-  max-width: 200px;
+  max-width: 230px;
   font-size: 15px;
   color: #fff;
 }
 
 .message-wrapper .message-contact-title span:first-of-type {
-  max-width: 100px;
+  max-width: 112px;
   white-space: nowrap;
   text-overflow: ellipsis;
   height: 25px;
@@ -476,6 +475,12 @@
   left: 3px;
 }
 
+.verified-user {
+  float: right;
+  top: 7px;
+  right: 5px;
+}
+
 .overlay-bg-guide {
   position: absolute;
   width: 100%;
@@ -527,13 +532,6 @@
   .message-wrapper .message-contact-title {
     padding: 8px;
   }
-  .messenger-notice {
-    margin: 20px -20px;
-    border-radius: 0;
-    background: #fcfaf8;
-    text-align: right;
-    padding: 7px 15px;
-  }
   .notice-actions {
     width: 100%;
   }
@@ -575,13 +573,35 @@
   }
 }
 
+@media screen and (max-width: 450px) {
+  .message-wrapper .message-contact-title a {
+    max-width: 174px;
+  }
+
+  .message-wrapper .message-contact-title span:first-of-type {
+    max-width: 73px;
+  }
+
+  .message-wrapper .message-contact-title span.commetns-link {
+    margin-right: 8px;
+    margin-top: 5px;
+    padding: 4px;
+  }
+  .verified-user {
+    right: 2px;
+  }
+  .message-wrapper .message-contact-title-img {
+    margin-left: 5px;
+  }
+}
+
 @media screen and (max-width: 345px) {
   .message-wrapper .message-contact-title a {
     max-width: 174px;
   }
 
   .message-wrapper .message-contact-title span:first-of-type {
-    max-width: 80px;
+    max-width: 53px;
   }
 
   .message-wrapper .message-contact-title span.commetns-link {
@@ -658,10 +678,9 @@
 
           <img v-else src="../../../../img/user-defult.png" />
         </div>
-        <div
-          @click.prevent="
-            routeToAddress('/profile/' + $parent.selectedContact.user_name)
-          "
+        <router-link
+          :to="{ path: '/profile/' + $parent.selectedContact.user_name }"
+          tag="div"
           class="message-contact-title-img hidden-xs"
         >
           <img
@@ -671,13 +690,10 @@
           />
 
           <img v-else src="../../../../img/user-defult.png" />
-        </div>
+        </router-link>
 
-        <a
-          @click.prevent="
-            routeToAddress('/profile/' + $parent.selectedContact.user_name)
-          "
-          href
+        <router-link
+          :to="{ path: '/profile/' + $parent.selectedContact.user_name }"
         >
           <span>
             {{
@@ -685,24 +701,21 @@
               " " +
               $parent.selectedContact.last_name
             }}
-            <button
-              v-if="$parent.selectedContact.is_verified"
-              @click.prevent
-              class="verified-user"
-              data-container="body"
-              data-toggle="popover"
-              data-placement="bottom"
-              :data-content="$parent.verifiedUserContent"
-              title
-            >
-              <i class="fa fa-certificate"></i>
-            </button>
           </span>
-          <span class="commetns-link">
-            نظر کاربران
-            <i class="fa fa-arrow-left"></i>
-          </span>
-        </a>
+          <button
+            v-if="$parent.selectedContact.is_verified"
+            @click.prevent
+            class="verified-user"
+            data-container="body"
+            data-toggle="popover"
+            data-placement="bottom"
+            :data-content="$parent.verifiedUserContent"
+            title
+          >
+            <i class="fa fa-certificate"></i>
+          </button>
+          <span class="commetns-link"> نظر کاربران </span>
+        </router-link>
       </div>
       <div class="head-action-buttons pull-left">
         <div class="head-action-buttons pull-left">
@@ -1030,13 +1043,15 @@ export default {
     },
     userGuide() {
       $(".overlay-bg-guide").on("click", () => {
-        this.$parent.closeUserGuide();
+        this.$parent.setUserGuideCookie();
         $(".overlay-bg-guide").fadeOut();
       });
-    },
-    routeToAddress(address) {
-      this.$parent.closeUserGuide();
-      this.$router.push({ path: address });
+      if (this.$parent.isGuideActive) {
+        setTimeout(() => {
+          this.$parent.setUserGuideCookie();
+          $(".overlay-bg-guide").fadeOut();
+        }, 2000);
+      }
     },
   },
   mounted: function () {
@@ -1048,6 +1063,14 @@ export default {
         this.isChat = true;
       } else {
         this.isChat = false;
+      }
+    },
+    "$parent.isGuideActive"(value) {
+      if (value) {
+        setTimeout(() => {
+          this.$parent.setUserGuideCookie();
+          $(".overlay-bg-guide").fadeOut();
+        }, 2000);
       }
     },
   },

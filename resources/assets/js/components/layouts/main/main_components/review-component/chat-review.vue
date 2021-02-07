@@ -41,31 +41,7 @@
 
 .main-text {
   text-align: center;
-  margin: 0 0 40px;
-}
-
-.buttons-wrapper .green-button {
-  background: #fff;
-
-  color: #777;
-
-  border: 1px solid #00c569;
-
-  font-size: 16px;
-
-  font-weight: bold;
-
-  padding: 5px 40px;
-
-  margin: 15px;
-}
-
-.buttons-wrapper .green-button:hover {
-  background: #00c569;
-
-  color: #fff;
-
-  border: 1px solid #00c569;
+  margin: 0 0 20px;
 }
 
 /* rate styles */
@@ -78,6 +54,7 @@
   overflow: hidden;
 
   width: 260px;
+  height: 60px;
 }
 
 .rate:not(:checked) > input {
@@ -162,11 +139,6 @@
   content: "1";
 }
 
-.buttons-wrapper {
-  display: inline-block;
-  margin-bottom: 15px;
-}
-
 .chat-report-form-wrapper {
   direction: rtl;
 
@@ -184,39 +156,10 @@
 
   border-radius: 5px;
 
-  background: #fafafa;
-}
-
-.buttons-wrapper .green-button {
   background: #fff;
-
-  color: #777;
-
-  border: 1px solid #00c569;
-
-  font-size: 16px;
-
-  font-weight: bold;
-
-  padding: 5px;
-  margin: 15px;
-  width: 138px;
 }
 
-.buttons-wrapper .green-button:hover {
-  background: #00c569;
-
-  color: #fff;
-
-  border: 1px solid #00c569;
-}
-
-.buttons-wrapper .review-button {
-  background: #00c569;
-  color: #fff;
-}
-
-.review-button i {
+.report-button-wrapper .green .review-button i {
   color: #ffbb00;
 }
 
@@ -228,6 +171,8 @@
 .main-text p.error-text {
   font-size: 14px;
   font-weight: 400;
+  height: 15px;
+  margin-top: 10px;
 }
 .btn-disable {
   background: #dbdbdb;
@@ -266,7 +211,7 @@
           @click="showReviewText()"
           id="lable-star5"
           for="chatStar5"
-          title="text"
+          title="5"
         ></label>
         <input
           type="radio"
@@ -279,7 +224,7 @@
           @click="showReviewText()"
           id="lable-star4"
           for="chatStar4"
-          title="text"
+          title="4"
         ></label>
         <input
           type="radio"
@@ -292,7 +237,7 @@
           @click="showReviewText()"
           id="lable-star3"
           for="chatStar3"
-          title="text"
+          title="3"
         ></label>
         <input
           type="radio"
@@ -305,7 +250,7 @@
           @click="showReviewText()"
           id="lable-star2"
           for="chatStar2"
-          title="text"
+          title="2"
         ></label>
         <input
           type="radio"
@@ -318,7 +263,7 @@
           @click="showReviewText()"
           id="lable-star1"
           for="chatStar1"
-          title="text"
+          title="1"
         ></label>
       </div>
 

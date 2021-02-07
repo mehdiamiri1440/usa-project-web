@@ -332,7 +332,7 @@ li.score-item i {
               <li class="user-activity-item">
                 <p class="icon-wrapper">
                   <svg
-                    v-if="userData.user_info.is_seller"
+                    v-if="userData.user_info && userData.user_info.is_seller"
                     data-v-422a709e=""
                     id="Layer_1"
                     data-name="Layer 1"
@@ -407,7 +407,9 @@ li.score-item i {
                     ></path>
                   </svg>
                 </p>
-                <span v-if="userData.user_info.is_seller"> فروشنده </span>
+                <span v-if="userData.user_info && userData.user_info.is_seller">
+                  فروشنده
+                </span>
                 <span v-else> خریدار </span>
               </li>
               <li class="report-item">

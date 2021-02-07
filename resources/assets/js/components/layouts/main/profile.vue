@@ -456,10 +456,14 @@ p.response-rate span {
 }
 
 .header-reviews .actions {
-  margin-bottom: 15px;
+  background: #f6fbff;
+  max-width: 600px;
+  padding: 1px 15px;
+  border-radius: 5px;
+  margin: 0 auto;
 }
 
-.actions a.green-button {
+.empty-actions a.green-button {
   width: initial;
 }
 .add-review {
@@ -475,12 +479,28 @@ p.response-rate span {
   margin-bottom: 20px;
 }
 
+.title-content {
+  margin: 7px 0 20px;
+  padding: 15px;
+  border-bottom: 1px solid #ededed;
+}
 .empty-reviews {
   text-align: center;
   font-size: 18px;
   font-weight: bold;
   color: #777;
   margin: 40px auto;
+}
+
+.login-empty-reviews {
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: #777;
+  margin: 40px auto;
+  max-width: 600px;
+  background: #f6fbff;
+  padding: 1px 15px 30px;
 }
 
 .empty-reviews > span {
@@ -582,12 +602,6 @@ p.response-rate span {
   #main .contents {
     background: #fff;
     width: 100%;
-  }
-
-  .title-content {
-    margin: 7px 0 20px;
-    padding: 15px;
-    border-bottom: 1px solid #ededed;
   }
 
   .logo img {
@@ -1326,8 +1340,9 @@ p.response-rate span {
           </div>
 
           <div class="sub-header hidden-sm hidden-md hidden-lg col-xs-12">
-            <div class="col-xs-6" :class="{ active: profileDescription }">
-              <button @click.prevent="showProfileOwnerDescription()">
+            <div class="col-xs-12" :class="{ active: profileDescription }">
+              <!-- <button @click.prevent="showProfileOwnerDescription()"> -->
+              <button>
                 <div class="inside-links buskool-icon">
                   <i aria-hidden="true">
                     <svg
@@ -1374,7 +1389,7 @@ p.response-rate span {
               </button>
             </div>
 
-            <div class="col-xs-6" :class="{ active: !profileDescription }">
+            <!-- <div class="col-xs-6" :class="{ active: !profileDescription }">
               <button
                 :disabled="!profileOwner.user_info.id"
                 @click.prevent="showProfileOwnerReviews()"
@@ -1384,24 +1399,20 @@ p.response-rate span {
                   نظرات کاربران
                 </div>
               </button>
-            </div>
+            </div> -->
           </div>
 
           <div class="sub-header hidden-xs col-xs-12">
             <ul class="list-inline">
-              <li class="list-item" :class="{ active: !profileDescription }">
-                <button
-                  :disabled="!profileOwner.user_info.id"
-                  @click.prevent="showProfileOwnerReviews()"
-                >
+              <!-- <li class="list-item" :class="{ active: !profileDescription }">
+                <button :disabled="!profileOwner.user_info.id">
                   نظرات کاربران
                 </button>
-              </li>
+              </li> -->
 
               <li class="list-item" :class="{ active: profileDescription }">
-                <button @click.prevent="showProfileOwnerDescription()">
-                  اطلاعات پایه
-                </button>
+                <!-- <button @click.prevent="showProfileOwnerDescription()"> -->
+                <button>اطلاعات پایه</button>
               </li>
             </ul>
           </div>
@@ -1428,6 +1439,87 @@ p.response-rate span {
                 ></span>
               </div>
             </div>
+
+            <div v-if="userLogin">
+              <div class="reviews-wrapper col-xs-12">
+                <p class="title-content">نظر کاربران</p>
+                <div class="header-reviews text-center">
+                  <div class="actions" v-if="userAllowedReview && !isMyProfile">
+                    <!-- <button
+                      v-if="userAllowedReview && !isMyProfile"
+                      @click.prevent="activeReviewModal()"
+                      class="add-review hover-effect rtl"
+                    >
+                      <i class="fa fa-star yellow-text"></i>
+
+                      <span>ثبت نظر</span>
+                    </button> -->
+
+                    <ChatReviewComponent v-if="reviewCurrentStep == 0" />
+                    <SuccessReviewComponent v-if="reviewCurrentStep == 1" />
+                  </div>
+                  <p class="red-text" v-if="reviews.deleted_count > 0">
+                    نظرات
+                    <strong v-text="reviews.deleted_count"></strong>
+                    کاربر توسط
+                    <span
+                      v-text="
+                        profileOwner.user_info.first_name +
+                        ' ' +
+                        profileOwner.user_info.last_name
+                      "
+                    ></span>
+                    حذف شده است
+                  </p>
+                </div>
+
+                <div
+                  class="reviews-wrapper"
+                  v-if="reviews.comments.length > 0 && !reviewsLoader"
+                >
+                  <article-review
+                    v-for="(comment, index) in reviews.comments"
+                    :key="index"
+                    :review="comment"
+                  />
+                </div>
+                <div class="reviews-wrapper" v-else-if="reviewsLoader">
+                  <div class="default-review">
+                    <placeholder-article-review
+                      v-for="(item, index) in 2"
+                      :key="index"
+                    />
+                  </div>
+                </div>
+                <div class="reviews-wrapper" v-else>
+                  <div class="empty-reviews">
+                    <span class="fa fa-comment-alt"></span>
+                    هیچ نظری ثبت نشده است
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row" v-else>
+              <div class="reviews-wrapper col-xs-12">
+                <div class="header-reviews text-center">
+                  <div class="reviews-wrapper">
+                    <div class="login-empty-reviews empty-reviews">
+                      <span class="fa fa-user"></span>
+                      <p>برای مشاهده نظرات لطفا وارد شوید</p>
+                      <div class="empty-actions">
+                        <router-link
+                          :to="{ name: 'register' }"
+                          class="green-button hover-effect"
+                          >ثبت نام / ورود سریع</router-link
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <div class="my-products col-xs-12">
               <p class="title-content">محصولات من</p>
 
@@ -1569,8 +1661,9 @@ p.response-rate span {
 
               <div v-if="profileOwner.certificates[0]">
                 <article
-                  v-for="photo in profileOwner.certificates"
+                  v-for="(photo, index) in profileOwner.certificates"
                   class="ceteficate-image col-xs-6 hidden-sm hidden-md hidden-lg"
+                  :key="index"
                 >
                   <a :href="str + '/' + photo">
                     <img :src="str + '/' + photo" />
@@ -1600,83 +1693,6 @@ p.response-rate span {
                 </div>
                 <div class="text_no_pic">
                   <p>مدارکی ثبت نشده است</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="contents" v-else>
-            <div class="row" v-if="userLogin">
-              <div class="reviews-wrapper col-xs-12">
-                <div class="header-reviews text-center">
-                  <div class="actions">
-                    <button
-                      v-if="userAllowedReview && !isMyProfile"
-                      @click.prevent="activeReviewModal()"
-                      class="add-review hover-effect rtl"
-                    >
-                      <i class="fa fa-star yellow-text"></i>
-
-                      <span>ثبت نظر</span>
-                    </button>
-                  </div>
-                  <p class="red-text" v-if="reviews.deleted_count > 0">
-                    نظرات
-                    <strong v-text="reviews.deleted_count"></strong>
-                    کاربر توسط
-                    <span
-                      v-text="
-                        profileOwner.user_info.first_name +
-                        ' ' +
-                        profileOwner.user_info.last_name
-                      "
-                    ></span>
-                    حذف شده است
-                  </p>
-                </div>
-                <div
-                  class="reviews-wrapper"
-                  v-if="reviews.comments.length > 0 && !reviewsLoader"
-                >
-                  <article-review
-                    v-for="(comment, index) in reviews.comments"
-                    :key="index"
-                    :review="comment"
-                  />
-                </div>
-                <div class="reviews-wrapper" v-else-if="reviewsLoader">
-                  <div class="default-review">
-                    <placeholder-article-review
-                      v-for="(item, index) in 3"
-                      :key="index"
-                    />
-                  </div>
-                </div>
-                <div class="reviews-wrapper" v-else>
-                  <div class="empty-reviews">
-                    <span class="fa fa-comment-alt"></span>
-                    هیچ نظری ثبت نشده است
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="row" v-else>
-              <div class="reviews-wrapper col-xs-12">
-                <div class="header-reviews text-center">
-                  <div class="reviews-wrapper">
-                    <div class="empty-reviews">
-                      <span class="fa fa-user"></span>
-                      <p>برای مشاهده نظرات لطفا وارد شوید</p>
-                      <div class="actions">
-                        <router-link
-                          :to="{ name: 'register' }"
-                          class="green-button hover-effect"
-                          >ثبت نام / ورود سریع</router-link
-                        >
-                      </div>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
@@ -1810,6 +1826,9 @@ var OwlCarousel = {
   },
 };
 
+import ChatReviewComponent from "../../layouts/main/main_components/review-component/chat-review";
+import SuccessReviewComponent from "../../layouts/main/main_components/review-component/success-submit-chat-review";
+
 export default {
   components: {
     OwlCarousel,
@@ -1819,6 +1838,8 @@ export default {
     ProductArticle,
     ArticleReview,
     PlaceholderArticleReview,
+    SuccessReviewComponent,
+    ChatReviewComponent,
   },
   props: ["assets", "str"],
   data: function () {
@@ -1870,6 +1891,14 @@ export default {
       userLogin: true,
       userAllowedReview: false,
       verifiedUserContent: this.$parent.verifiedUserContent,
+      userDataLoader: true,
+      userData: {
+        user_info: "",
+        profile: "",
+      },
+      userStatistics: "",
+      reviewCurrentStep: 0,
+      successMessage: "نظر شما با موفقیت ثبت شد",
     };
   },
   methods: {
@@ -1933,6 +1962,7 @@ export default {
         })
         .then(function (response) {
           self.profileOwner = response.data;
+          self.userData = self.profileOwner;
           self.jsonLDObject = self.createJsonLDObject(self.profileOwner);
           if (self.$parent.userId == self.profileOwner.user_info.id) {
             self.isMyProfile = true;
@@ -1940,6 +1970,11 @@ export default {
             self.isMyProfile = false;
           }
           self.isUserAuthorizedToPostComment();
+          if (self.$parent.userId) {
+            self.getReviews();
+          } else {
+            self.userLogin = false;
+          }
         })
         .catch(function (err) {
           if (err.response.status === 404) {
@@ -1974,7 +2009,7 @@ export default {
         "click on profile description"
       );
       this.getProfileOwnerProducts();
-      this.profileDescription = true;
+      // this.profileDescription = true;
       this.profileOwner.profile = "";
 
       axios
@@ -1987,14 +2022,6 @@ export default {
             window.location.href = "/404";
           }
         });
-    },
-    showProfileOwnerReviews: function () {
-      this.profileDescription = false;
-      if (this.$parent.userId) {
-        this.getReviews();
-      } else {
-        this.userLogin = false;
-      }
     },
     refreshProduct: function (productId) {
       this.registerComponentStatistics(
@@ -2241,6 +2268,9 @@ export default {
     });
   },
   watch: {
+    userLogin: function (val) {
+      console.log(val);
+    },
     "profileOwner.user_info": function () {
       if (this.profileOwner.user_info) {
         setTimeout(() => {

@@ -527,29 +527,20 @@ export default {
     setUserGuideCookie() {
       let contactUserId = this.selectedContact.contact_id;
       let cookie = this.getCookie("userGuideData");
-      let closeUserGuide = this.getCookie("closeUserGuide");
 
       if (cookie) {
         let getAllGuidDataCookies = JSON.parse(cookie).userSelected;
-
-        if (!closeUserGuide) {
-          if (getAllGuidDataCookies.length >= 2) {
-            if (!getAllGuidDataCookies.find(this.cookieHasUser)) {
-              getAllGuidDataCookies.push(contactUserId);
-              this.createCookie(
-                "userGuideData",
-                JSON.stringify({ userSelected: getAllGuidDataCookies }),
-                1000
-              );
-            }
+        if (!getAllGuidDataCookies.find(this.cookieHasUser)) {
+          getAllGuidDataCookies.push(contactUserId);
+          this.createCookie(
+            "userGuideData",
+            JSON.stringify({ userSelected: getAllGuidDataCookies }),
+            5400 * 365 // 2400 * 365 this time may 5 years
+          );
+          if (getAllGuidDataCookies.length > 20) {
+            this.isGuideActive = false;
+          } else {
             this.isGuideActive = true;
-          } else if (!getAllGuidDataCookies.find(this.cookieHasUser)) {
-            getAllGuidDataCookies.push(contactUserId);
-            this.createCookie(
-              "userGuideData",
-              JSON.stringify({ userSelected: getAllGuidDataCookies }),
-              1000
-            );
           }
         } else {
           this.isGuideActive = false;
@@ -558,12 +549,16 @@ export default {
         this.createCookie(
           "userGuideData",
           JSON.stringify({ userSelected: [contactUserId] }),
-          1000
+          5400 * 365 // 2400 * 365 this time may 2 years
         );
+        this.isGuideActive = true;
       }
-    },
-    closeUserGuide() {
-      this.createCookie("closeUserGuide", true, 1000);
+      if (this.isGuideActive == true) {
+        $(".overlay-bg-guide").css("display", "block");
+        setTimeout(() => {
+          $(".overlay-bg-guide").fadeOut();
+        }, 2000);
+      }
     },
     setNoticeCookie() {
       let contactUserId = this.selectedContact.contact_id;

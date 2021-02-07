@@ -214,7 +214,6 @@ li.contact-item:nth-last-of-type(2n + 1) {
 .contacts-switch-buttons-wrapper {
   float: right;
   width: 100%;
-  background: #eef3f3;
 }
 
 .contacts-switch-buttons-wrapper .switch-button-item {
@@ -229,6 +228,7 @@ li.contact-item:nth-last-of-type(2n + 1) {
   padding: 8px 0;
   position: relative;
   color: #666;
+  background: #f0f0f0;
 }
 
 .contacts-switch-buttons-wrapper .contact-button .fa-plus {
