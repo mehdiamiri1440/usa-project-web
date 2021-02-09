@@ -1,7 +1,8 @@
 <style scoped>
-  p, span{
-    line-height: 1.5;
-  }
+p,
+span {
+  line-height: 1.5;
+}
 .submit-button {
   background: #dddddd;
   color: #fff;
@@ -164,7 +165,7 @@ select.error:focus {
           <div class="input-wrapper province-wrapper col-xs-6 pull-right">
             <select
               @change="setProvince($event)"
-              :class="{'error' :  error}"
+              :class="{ error: error }"
               id="province"
               class="dire"
             >
@@ -180,7 +181,12 @@ select.error:focus {
           </div>
 
           <div class="input-wrapper province-wrapper col-xs-6">
-            <select @change="setCity($event)" :class="{'error' :  error}" id="city" class="dire">
+            <select
+              @change="setCity($event)"
+              :class="{ error: error }"
+              id="city"
+              class="dire"
+            >
               <option selected disabled>شهر را انتخاب کنید</option>
               <option
                 v-for="city in $parent.step3.cityList"
@@ -192,14 +198,26 @@ select.error:focus {
           </div>
         </div>
 
-        <span
-          class="small-description"
-        >انتخاب آدرس صحیح به بهتر دیده شدن شما در سامانه باسکول کمک می کند</span>
+        <span class="small-description"
+          >انتخاب آدرس صحیح به بهتر دیده شدن شما در سامانه باسکول کمک می
+          کند</span
+        >
 
         <p class="error-message">
-          <span v-if="error " v-text="error"></span>
+          <span v-if="error" v-text="error"></span>
         </p>
-        <button class="submit-button disabled" @click.prevent="submitForm()">مرحله بعد</button>
+        <button
+          class="submit-button disabled hidden-xs hidden-sm"
+          @click.prevent="submitForm(false)"
+        >
+          مرحله بعد
+        </button>
+        <button
+          class="submit-button disabled hidden-md hidden-lg"
+          @click.prevent="submitForm(true)"
+        >
+          مرحله بعد
+        </button>
       </div>
     </div>
   </div>
@@ -207,63 +225,43 @@ select.error:focus {
 
 <script>
 export default {
-  data: function() {
+  data: function () {
     return {
       province: "",
       city: "",
-      error: ""
+      error: "",
     };
   },
   methods: {
     setProvince(event) {
-      $("#province")
-        .addClass("active")
-        .removeClass("error");
+      $("#province").addClass("active").removeClass("error");
       this.$parent.setProvinceName(event);
     },
     setCity(event) {
-      $("#city")
-        .addClass("active")
-        .removeClass("error");
+      $("#city").addClass("active").removeClass("error");
       this.$parent.setCityName(event);
       if ($(event.target).val().length >= 0) {
-        $(".submit-button")
-          .removeClass("disabled")
-          .addClass("active");
+        $(".submit-button").removeClass("disabled").addClass("active");
       }
     },
-    submitForm() {
+    submitForm(isUserMobile) {
       if (this.$parent.step3.city.length == 0) {
         this.error = "لطفا استان و شهر خود را مشخص کنید";
-        $("#city")
-          .addClass("error")
-          .removeClass("active");
-        $(".submit-button")
-          .removeClass("active")
-          .addClass("disabled");
+        $("#city").addClass("error").removeClass("active");
+        $(".submit-button").removeClass("active").addClass("disabled");
       } else {
-        this.$parent.setLocation();
-        $("#city")
-          .addClass("active")
-          .removeClass("error");
-        $(".submit-button")
-          .removeClass("disabled")
-          .addClass("active");
+        this.$parent.setLocation(isUserMobile);
+        $("#city").addClass("active").removeClass("error");
+        $(".submit-button").removeClass("disabled").addClass("active");
       }
-    }
+    },
   },
   mounted() {
     if (this.$parent.step3.city) {
-      $("#province")
-        .addClass("active")
-        .removeClass("error");
-      $("#city")
-        .addClass("active")
-        .removeClass("error");
-      $(".submit-button")
-        .removeClass("disabled")
-        .addClass("active");
+      $("#province").addClass("active").removeClass("error");
+      $("#city").addClass("active").removeClass("error");
+      $(".submit-button").removeClass("disabled").addClass("active");
     }
-  }
+  },
 };
 </script>

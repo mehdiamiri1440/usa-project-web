@@ -105,6 +105,19 @@
   float: right;
   width: 100%;
   height: calc(100% - 110px);
+  background-color: #e5ddd6;
+}
+
+.main-modal-chat .bg-wrapper {
+  background: url("../../../../../img/whatsappbg.png") repeat;
+  opacity: 0.06;
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  top: 50px;
+  bottom: 60px;
+  background-size: 80%;
 }
 
 .main-modal-chat ul {
@@ -116,7 +129,8 @@
 
 .main-modal-chat li {
   float: left;
-
+  position: relative;
+  z-index: 1;
   width: 100%;
 }
 
@@ -185,22 +199,21 @@
 /*footer chat modal styles*/
 .footer-modal-chat {
   position: absolute;
-
-  bottom: 0;
-
   left: 0;
-
-  right: 0;
-
-  padding: 4px 15px;
+  overflow: hidden;
+  padding: 10px 15px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: #f0f0f0;
 }
 
 .send-message-button {
   float: right;
 
-  width: 50px;
+  width: 40px;
 
-  height: 50px;
+  height: 40px;
 
   color: #fff;
 
@@ -235,7 +248,7 @@
 
   border: none;
 
-  padding: 13px 15px;
+  padding: 7px 15px 8px 15px;
 
   direction: rtl;
 
@@ -328,6 +341,8 @@
     </div>
 
     <div class="main-modal-chat">
+      <div class="bg-wrapper"></div>
+
       <div
         class="loading-container"
         v-show="isChatMessagesLoaded && isFirstMessageLoading"
