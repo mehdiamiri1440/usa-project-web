@@ -1370,15 +1370,23 @@ class buyAd_controller extends Controller
                                     ->get();
 
             foreach($products as $product){
-                $tmp = $this->get_new_most_related_buyAds($product);
+                $user_active_package_type = myuser::find($user_id)->active_pakage_type;
+
+                $tmp = $this->get_new_most_related_buyAds($product,$user_active_package_type);
 
                 if(count($final_golden_buyAds) <= 50){
-                    $final_golden_buyAds = array_merge($final_golden_buyAds,$tmp);
+                    $final_golden_buyAds = array_unique(array_merge($final_golden_buyAds,$tmp),SORT_REGULAR);
                 }
                 else{
                     break;
                 }
                 
+            }
+
+            if(count($final_golden_buyAds) > 0){
+                usort($final_golden_buyAds,function($item1,$item2){
+                    return $item1->updated_at < $item2->updated_at;
+                });
             }
             
         }
@@ -1459,7 +1467,7 @@ class buyAd_controller extends Controller
         
     }
 
-    protected function get_new_most_related_buyAds($product)
+    protected function get_new_most_related_buyAds($product,$user_active_package_type = 0)
     {
         $until = Carbon::now();
         $from = Carbon::now()->subMonths(4);
@@ -1484,15 +1492,16 @@ class buyAd_controller extends Controller
                                     return $q;
 
                                 })
+                                ->orderBy('updated_at','desc')
                                 ->select($this->related_buyAds_required_fields)
                                 ->get();
 
-        $buyAds = $this->get_most_valuable_buyAds($buyAds);
+        $buyAds = $this->get_most_valuable_buyAds($buyAds,$user_active_package_type);
 
         return $buyAds;
     }
 
-    protected function get_most_valuable_buyAds($buyAds)
+    protected function get_most_valuable_buyAds($buyAds,$user_active_package_type)
     {
         $buyer_ids = [];
 
@@ -1502,31 +1511,52 @@ class buyAd_controller extends Controller
 
         $buyer_ids = array_unique($buyer_ids);
 
-        $result = DB::table('messages')->selectRaw("receiver_id as user_id,count(DISTINCT(sender_id)) as in_degree,((SELECT count(DISTINCT(sender_id)) as cnt from messages where receiver_id = user_id and is_read = true)/count(DISTINCT(sender_id))) * 100 as response_rate,(SELECT count(DISTINCT(receiver_id)) as cnt from messages where sender_id = user_id) as out_degree")
+        $query_result = DB::table('messages')->selectRaw("receiver_id as user_id,count(DISTINCT(sender_id)) as in_degree,((SELECT count(DISTINCT(sender_id)) as cnt from messages where receiver_id = user_id and is_read = true)/count(DISTINCT(sender_id))) * 100 as response_rate,(SELECT count(DISTINCT(receiver_id)) as cnt from messages where sender_id = user_id) as out_degree")
                                             ->whereIn('receiver_id',$buyer_ids)
                                             ->groupBy('user_id')
-                                            ->havingRaw('in_degree >= 30 and out_degree>= 30 and response_rate >= 95')
+                                            ->havingRaw('response_rate >= 90')
                                             ->orderByRaw('response_rate desc,out_degree,in_degree')
                                             ->get()
                                             ->all();
 
-        $result = array_column($result,'user_id');
+        $result = array_column($query_result,'user_id');
+
+        $high_degree_buyers = [];
+        foreach($query_result as $item)
+        {
+            if($item->in_degree >= 30 && $item->out_degree >= 30)
+            {
+                $high_degree_buyers[] = $item->user_id;
+            }
+        }
+
 
         $buyer_ids = [];
-        $important_buyAds = $buyAds->filter(function($buyAd) use($result,&$buyer_ids){ //extract selected buyers from all related buyAds
-            if(in_array($buyAd->buyer_id,$result) === true){
-                $buyer_ids[] = $buyAd->buyer_id;
-                $buyAd->is_golden = true;
-                unset($buyAd->created_at);
-                unset($buyAd->updated_at);
+        $important_buyAds = [];
+        $new_buyAds = [];
+        
+        foreach($buyAds as $buyAd){
+            if(in_array($buyAd->buyer_id,$result) === true && in_array($buyAd->buyer_id,$buyer_ids) === false){
+                
+                if( in_array($buyAd->buyer_id,$high_degree_buyers)){
 
-                return true;
+                    $buyAd->is_golden = true;
+                    unset($buyAd->created_at);
+
+                    $important_buyAds[] = $buyAd;
+                    $buyer_ids[] = $buyAd->buyer_id;
+                }
+                else if($user_active_package_type > 0 && Carbon::now()->diffInHours($buyAd->updated_at) <= 12){
+                    $buyAd->is_golden = true;
+                    unset($buyAd->created_at);
+
+                    $new_buyAds[] = $buyAd; 
+                    $buyer_ids[] = $buyAd->buyer_id;
+                }
             }
+        } 
 
-            return false;
-        });
-
-        return $important_buyAds->all();
+        return array_merge($new_buyAds,$important_buyAds);
     }
 
     protected function get_product_name_array($product)

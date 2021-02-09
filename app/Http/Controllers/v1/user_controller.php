@@ -50,7 +50,7 @@ class user_controller extends Controller
 			'first_name' => 'required|regex:/^(?!.*[(@#!%$&*)])[\s\x{0600}-\x{06FF}_\.\- ]+$/u',
 			'last_name' => 'required|regex:/^(?!.*[(@#!%$&*)])[\s\x{0600}-\x{06FF}_\.\- ]+$/u',
 			'phone' => ['required','regex:/^((09[0-9]{9})|(\x{06F0}\x{06F9}[\x{06F0}-\x{06F9}]{9}))$/u','unique:myusers'],
-			'password' => 'required',
+			'password' => 'string',
             // 'user_name' => 'required|alpha_dash|unique:myusers',
 			'sex' => 'required',
 			'province' => 'required',

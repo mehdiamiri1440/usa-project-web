@@ -21,7 +21,7 @@ class category_controller extends Controller
                         ->leftJoin('products','products.category_id','=','categories.id')
                         ->select('categories.*',DB::raw('count(products.id) as score'))
                         ->groupBy('categories.id','categories.created_at','categories.updated_at','categories.category_name','categories.parent_id')
-                        ->orderBy('score','desc')
+                        ->orderByRaw('score desc, categories.id')
                         ->get();
         });
 

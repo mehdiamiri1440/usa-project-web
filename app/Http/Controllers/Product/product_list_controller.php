@@ -780,30 +780,48 @@ class product_list_controller extends Controller
             $this->apply_category_filter($products,$category_record->id);
         }
         else{
-            $products = array_filter($products,function($product) use($search_text){
-                return $this->does_search_text_matche_the_product($search_text,$product);
+            $search_text = str_replace('\\', '', $search_text);
+            $search_text = str_replace('/', '', $search_text);
+            $search_text_array = explode(' ', $search_text);
+
+            $search_expresion = '(.*)';
+
+            foreach ($search_text_array as $text) {
+                $search_expresion .= "($text)(.*)";
+            }
+
+            $result_products = array_filter($products,function($product) use($search_expresion){
+                return $this->does_search_text_matche_the_product($search_expresion,$product);
             });
+
+            if(count($result_products) == 0){
+                
+                $result_products = array_filter($products,function($product) use($search_text_array){
+                    $product_info[] = $product['main']->sub_category_name;
+                    $product_info[] = $product['main']->product_name;
+                    $product_info[] = $product['main']->description;
+                    $product_info[] = $product['user_info']->first_name . $product['user_info']->last_name;
+
+                    if(array_intersect($search_text_array,$product_info)){
+                        return true;
+                    }
+
+                    return false;
+                });
+            }
+
+            $products = $result_products;
         }
     }
 
-    protected function does_search_text_matche_the_product($search_text, &$product)
+    protected function does_search_text_matche_the_product($search_expresion, &$product)
     {
-        $search_text = str_replace('\\', '', $search_text);
-        $search_text = str_replace('/', '', $search_text);
-        $search_text_array = explode(' ', $search_text);
-
-        $search_expresion = '(.*)';
-
-        foreach ($search_text_array as $text) {
-            $search_expresion .= "($text)(.*)";
-        }
-
         $product_info[] = $product['main']->sub_category_name;
         $product_info[] = $product['main']->product_name;
         $product_info[] = $product['main']->description;
         $product_info[] = $product['user_info']->first_name . $product['user_info']->last_name;
 
-        $result = array_filter($product_info, function ($item) use ($search_text,$search_expresion) {
+        $result = array_filter($product_info, function ($item) use ($search_expresion) {
             return preg_match("/$search_expresion/", $item);
         });
 
