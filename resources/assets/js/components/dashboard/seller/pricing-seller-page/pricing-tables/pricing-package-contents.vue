@@ -19,7 +19,7 @@
 .wrapper-background {
   background: #fff;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
-  border-radius: 4px;
+  border-radius: 8px;
   padding: 15px;
   line-height: 1.618;
   margin-bottom: 30px;
@@ -41,21 +41,42 @@
   padding: 0;
   float: left;
   width: 100%;
+  border: 1px solid #fff;
+}
+
+.item-wrapper.pro-version {
+  border: 1px solid #21ad93;
 }
 
 .item-title {
-  font-size: 16px;
-  padding: 3px 0 4px;
-  font-weight: bold;
+  margin-top: 10px;
+}
+
+.item-title > h2 {
+  font-size: 25px;
+}
+
+.item-wrapper.pro-version .item-title > h2 {
+  color: #21ad93;
 }
 
 .item-price {
-  font-size: 16px;
-  font-weight: bold;
-  color: #00c569;
+  font-size: 18px;
+  font-weight: 500;
+  color: #808c9b;
   text-align: center;
   margin-bottom: 10px;
   margin-top: 5px;
+}
+
+.item-price span.price {
+  color: #1da1f2;
+  font-size: 24px;
+}
+
+.small-unit {
+  font-size: 16px;
+  font-weight: normal;
 }
 
 .detail-wrapper {
@@ -114,12 +135,10 @@
 
 .item-content-title {
   float: right;
-
-  font-size: 14px;
-
+  font-size: 16px;
   color: #777;
-
-  font-weight: bold;
+  font-weight: 500;
+  padding-top: 5px;
 }
 
 .item-content-amount {
@@ -129,19 +148,38 @@
   text-align: center;
   font-size: 20px;
 }
+
 .item-content-amount > i {
   font-size: 20px;
 }
+
+.item-content-list {
+  float: right;
+  width: 100%;
+}
+
 .item-content-list li {
   float: left;
   width: 100%;
-  padding: 12px 0;
+  padding: 12px 15px;
   position: relative;
-  border-bottom: 1px solid #bdc4cc;
 }
 
-.item-content-list li:last-of-type {
-  border-bottom: none;
+.item-content-list li.free-item {
+  direction: rtl;
+  text-align: center;
+  background: #eefef6;
+  padding: 4px 0 3px;
+}
+
+.item-content-list li.free-item > p {
+  font-size: 16px;
+  font-weight: 500;
+  color: #808c9b;
+}
+
+.item-content-list li:nth-last-of-type(2n + 1) {
+  background: #fafafa;
 }
 
 .wrapper-icon {
@@ -155,16 +193,6 @@
 .item-header {
   overflow: hidden;
   direction: rtl;
-  background: #556080;
-  color: #fff;
-}
-
-.item-header.pro-version {
-  overflow: hidden;
-  direction: rtl;
-  background: linear-gradient(90deg, #00c569 0%, #21ad93 100%);
-
-  color: #fff;
 }
 
 .item-title > span {
@@ -206,17 +234,17 @@
 
 .special-badge {
   position: absolute;
-  left: -38px;
+  left: -46px;
   background: #e41c38;
   color: #fff;
   font-size: 17px;
   font-weight: bold;
   width: 120px;
   text-align: center;
-  padding: 3px;
-  transform: rotate(-45deg);
-  top: 8px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
+  padding: 11px 3px 3px;
+  -webkit-transform: rotate(-41deg);
+  transform: rotate(-41deg);
+  top: -4px;
 }
 
 .offer-price {
@@ -347,17 +375,27 @@
         :class="{ 'col-sm-offset-3': justPro == 'true' }"
         class="pull-left mobile-padding-0 col-xs-12 col-sm-6 col-lg-6"
       >
-        <div class="item-wrapper wrapper-background">
-          <div class="item-header pro-version text-center">
+        <div class="item-wrapper pro-version wrapper-background">
+          <div class="item-header text-center">
             <span class="special-badge">ویژه</span>
             <div class="item-title">
-              عضویت ویژه
-              <span>/ سالانه</span>
+              <h2>عضویت ویژه</h2>
+              <p class="item-price">
+                ماهانه
+                <span class="price">180,000</span>
+                <span class="small-unit"> تومان</span>
+              </p>
             </div>
           </div>
 
           <div class="item-content">
-            <ul class="item-content-list col-xs-12">
+            <ul class="item-content-list">
+              <li class="free-item">
+                <p>
+                  <i class="fa fa-plus-circle"></i>
+                  یک ماه رایگان
+                </p>
+              </li>
               <li v-for="(item, index) in priceItemPro" :key="index">
                 <a
                   data-toggle="collapse"
@@ -372,22 +410,6 @@
               </li>
             </ul>
           </div>
-
-          <!-- remove pricing offer contents -->
-          <!-- <div class="detail-wrapper" v-if="offerTime">
-            <div class="offer-notice text-center text-rtl">
-              <span>
-                <span>4</span>
-                ساعت تا پایان تخفیف
-              </span>
-            </div>
-            <div class="item-price text-rtl">
-              <span class="offer-item-price-content">689,000</span>
-              <span class="item-price-content">500,000</span>
-              <span class="item-currency">تومان</span>
-              <span class="item-date">/ سالانه</span>
-            </div>
-          </div>-->
 
           <div class="detail-wrapper">
             <!-- remove pricing offer contents -->
