@@ -293,7 +293,7 @@
     >
       <button
         class="close-android-download-alert-wrapper"
-        @click.prevent="isConditionSatisfied = false"
+        @click.prevent="downloadAppButton = false"
       >
         <i class="fa fa-times-circle"></i>
       </button>
@@ -491,7 +491,15 @@ export default {
       if (this.isDeviceMobile() && !this.isOsIOS()) {
         let androidVersion = this.getAndroidVersion();
         if (parseInt(androidVersion) >= 5) {
-          this.downloadAppButton = true;
+          if (
+            window.location.pathname != "/buyer/messenger/contacts" &&
+            window.location.pathname != "/seller/messenger/contacts" &&
+            window.location.pathname != "/seller/buyAd-requests" &&
+            !window.location.pathname.includes("product-view") &&
+            !this.iswebview
+          ) {
+            this.downloadAppButton = true;
+          }
           // if (!this.checkCookie() && !this.iswebview) {
           // setTimeout(() => {
           //   $("#download-app-modal").modal("show");
