@@ -127,15 +127,14 @@ a.active {
   margin: 2px 0;
 }
 
-.pricing-link {
-  /* background: linear-gradient(90deg, #00c569 0%, #21ad93 100%); */
+#pricing-link {
   background: linear-gradient(-45deg, #00c569, #23d5ab, #21ad93, #23a6d5);
   background-size: 400% 400%;
-  animation: gradient 10s ease infinite;
+  animation: gradient 7s ease infinite;
   color: #fff !important;
 }
 
-.pricing-link:hover i {
+#pricing-link:hover i {
   animation: shake 1s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
   transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
@@ -250,12 +249,11 @@ a.active {
             </router-link>
           </li>
           <li
+            v-show="$parent.currentUser.user_info.active_pakage_type < 3"
             class="list-item"
-            v-if="$parent.currentUser.user_info.active_pakage_type < 3"
           >
             <router-link
-              tag="button"
-              class="pricing-link"
+              id="pricing-link"
               :to="{ name: 'dashboardPricingTableSeller' }"
             >
               <i class="fa fa-arrow-up" aria-hidden="true"></i>

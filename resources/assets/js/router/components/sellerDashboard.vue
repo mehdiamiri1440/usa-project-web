@@ -47,6 +47,11 @@
   height: 100%;
   padding: 0 !important ;
 }
+
+#pricing-modal .modal-body {
+  padding: 20px 15px 0;
+}
+
 #pricing-modal .modal-content {
   min-height: 100%;
   border-radius: 0;
@@ -95,7 +100,7 @@
     margin-right: 0 !important;
   }
   .modal-body {
-    padding-top: 40px;
+    padding: 20px 7px;
   }
   #main.is-required-fix-alert {
     margin-top: 89px !important;
