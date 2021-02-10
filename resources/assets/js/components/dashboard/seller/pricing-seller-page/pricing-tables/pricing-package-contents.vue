@@ -135,6 +135,7 @@
   color: #777;
   font-weight: 500;
   padding-top: 5px;
+  direction: rtl;
 }
 
 .item-content-title.disable-text {
@@ -424,20 +425,6 @@
 </style>
 <template>
   <div class="col-xs-12">
-    <div v-if="doPaymentLoader" class="main-loader-content">
-      <div class="pricing-loader-icon">
-        <div class="lds-ring">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-        <p class="pricing-loader-text text-rtl">
-          در حال انتقال به درگاه پرداخت . . .
-        </p>
-      </div>
-    </div>
-
     <div class="row">
       <div class="col-xs-12 text-center mobile-padding-5">
         <div class="wrapper-background mobile-padding-7">
@@ -494,7 +481,7 @@
               <h2>عضویت ویژه</h2>
               <p class="item-price">
                 ماهانه
-                <span class="price">180,000</span>
+                <span class="price">89,000</span>
                 <span class="small-unit"> تومان</span>
               </p>
             </div>
@@ -537,6 +524,22 @@
               </li>
             </ul>
           </div>
+
+          <!-- remove pricing offer contents -->
+          <!-- <div class="detail-wrapper" v-if="offerTime">
+            <div class="offer-notice text-center text-rtl">
+              <span>
+                <span>4</span>
+                ساعت تا پایان تخفیف
+              </span>
+            </div>
+            <div class="item-price text-rtl">
+              <span class="offer-item-price-content">689,000</span>
+              <span class="item-price-content">500,000</span>
+              <span class="item-currency">تومان</span>
+              <span class="item-date">/ سالانه</span>
+            </div>
+          </div>-->
 
           <div class="detail-wrapper">
             <p>امکان خرید به صورت سالانه</p>
@@ -585,7 +588,7 @@
               <h2>عضویت پایه</h2>
               <p class="item-price">
                 ماهانه
-                <span class="price">120,000</span>
+                <span class="price">99,000</span>
                 <span class="small-unit"> تومان</span>
               </p>
             </div>
@@ -699,13 +702,12 @@
 
 
 <script>
+import { eventBus } from "../../../../../router/router";
 export default {
   props: ["justPro", "offerTime"],
   data: function () {
     return {
       statusData: "",
-      doPaymentLoader: false,
-
       priceItemBasic: [
         {
           title: "تعداد محصولات قابل تبلیغ",
@@ -781,27 +783,76 @@ export default {
         });
     },
     doPayment: function (packageType) {
-      this.doPaymentLoader = true;
-
-      let userId = getUserId();
-
-      this.registerComponentStatistics(
-        "payment",
-        "type-" + packageType,
-        "userId: " + userId
-      );
-
-      window.location.href = "/payment/" + packageType;
+      let paymentData = {
+        paymentItems: "",
+        selectedPackage: "",
+      };
+      paymentData.paymentItems = this.calculateData(packageType);
+      paymentData.selectedPackage = packageType;
+      eventBus.$emit("paymentData", paymentData);
     },
-    registerComponentStatistics: function (
-      categoryName,
-      actionName,
-      labelName
-    ) {
-      gtag("event", actionName, {
-        event_category: categoryName,
-        event_label: labelName,
-      });
+    calculateData(payment) {
+      let item = "";
+      switch (payment) {
+        case 1:
+          return (item = [
+            {
+              title: "تعداد ماه های فعال",
+              value: "3",
+              unit: "ماه",
+            },
+            {
+              title: "تعداد ماه های رایگان",
+              value: "0",
+              unit: "ماه",
+            },
+            {
+              title: "تعداد ماه های قابل پرداخت",
+              value: "3",
+              unit: "ماه",
+            },
+            {
+              title: "هزینه هر ماه",
+              value: "99,000",
+              unit: "تومان",
+            },
+            {
+              title: "مجموع",
+              value: "297,000",
+              unit: "تومان",
+            },
+          ]);
+          break;
+        case 3:
+          return (item = [
+            {
+              title: "تعداد ماه های فعال",
+              value: "12",
+              unit: "ماه",
+            },
+            {
+              title: "تعداد ماه های رایگان",
+              value: "1",
+              unit: "ماه",
+            },
+            {
+              title: "تعداد ماه های قابل پرداخت",
+              value: "11",
+              unit: "ماه",
+            },
+            {
+              title: "هزینه هر ماه",
+              value: "89,000",
+              unit: "تومان",
+            },
+            {
+              title: "مجموع",
+              value: "979,000",
+              unit: "تومان",
+            },
+          ]);
+          break;
+      }
     },
   },
   mounted() {

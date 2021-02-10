@@ -41,24 +41,102 @@
   margin-top: 84px !important;
 }
 
-#pricing-modal {
+#pricing-modal,
+#factor-pricing-modal {
   margin: 0;
   width: 100%;
   height: 100%;
   padding: 0 !important ;
 }
 
-#pricing-modal .modal-body {
+#pricing-modal .modal-body,
+#factor-pricing-modal .modal-body {
   padding: 20px 15px 0;
 }
 
-#pricing-modal .modal-content {
+#pricing-modal .modal-content,
+#factor-pricing-modal .modal-content {
   min-height: 100%;
   border-radius: 0;
   border: none;
   float: right;
   width: 100%;
   background: #f6f6f6;
+}
+
+#factor-pricing-modal .modal-content {
+  background: #fff;
+}
+
+#factor-pricing-modal .modal-body {
+  text-align: center;
+}
+
+#factor-pricing-modal p.factor-title {
+  font-size: 22px;
+  margin-top: 10px;
+  font-weight: bold;
+  color: #313a43;
+  text-align: right;
+}
+
+#factor-pricing-modal ul {
+  text-align: right;
+  margin-top: 20px;
+}
+
+#factor-pricing-modal ul li {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  direction: rtl;
+  padding: 20px 0;
+  border-top: 1px solid #f2f2f2;
+}
+
+#factor-pricing-modal ul li .item-title {
+  font-size: 18px;
+  font-weight: 500;
+  color: #556080;
+}
+
+#factor-pricing-modal ul li .item-value {
+  font-size: 18px;
+  font-weight: bold;
+  color: #666;
+}
+
+#factor-pricing-modal ul li.checkout-item .item-title {
+  color: #00c569;
+}
+
+#factor-pricing-modal ul li.checkout-item .item-value {
+  color: #00c569;
+}
+
+#factor-pricing-modal ul li .item-value span {
+  color: #666;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+#factor-pricing-modal ul li.checkout-item {
+  border-top: 1px solid #bebebe;
+}
+
+#factor-pricing-modal ul li:first-of-type {
+  border-top: none;
+}
+
+#factor-pricing-modal button.pay {
+  background: linear-gradient(-45deg, #00c569, #23d5ab, #21ad93, #23a6d5);
+  background-size: 400% 400%;
+  animation: gradient 7s ease infinite;
+  font-size: 22px;
+  padding: 13px;
+  width: 100%;
+  max-width: 250px;
+  border-radius: 8px;
 }
 
 .modal-header {
@@ -112,10 +190,48 @@
     margin-top: 84px !important;
   }
 }
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes shake {
+  0% {
+    transform: translate3d(0, -1px, 0);
+  }
+
+  50% {
+    transform: translate3d(0, -5px, 0);
+  }
+  100% {
+    transform: translate3d(0, -1px, 0);
+  }
+}
 </style>
 
 <template>
   <div>
+    <div v-if="doPaymentLoader" class="main-loader-content">
+      <div class="pricing-loader-icon">
+        <div class="lds-ring">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <p class="pricing-loader-text text-rtl">
+          در حال انتقال به درگاه پرداخت . . .
+        </p>
+      </div>
+    </div>
     <!--  #regex pricing modal  -->
 
     <!--modal-->
@@ -147,6 +263,45 @@
       </div>
     </div>
 
+    <!--modal-->
+    <div class="container">
+      <div
+        id="factor-pricing-modal"
+        class="factor-pricing-modal modal fade"
+        tabindex="-1"
+        role="dialog"
+      >
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-body col-xs-12 col-lg-4 col-lg-offset-4">
+              <p class="factor-title">جزئيات پرداخت</p>
+              <ul>
+                <li
+                  v-for="(item, index) in paymentData.paymentItems"
+                  :key="index"
+                  :class="{
+                    'checkout-item':
+                      index == paymentData.paymentItems.length - 1,
+                  }"
+                >
+                  <p class="item-title" v-text="item.title"></p>
+                  <p class="item-value">
+                    {{ item.value }}
+                    <span v-text="item.unit"> </span>
+                  </p>
+                </li>
+              </ul>
+
+              <button class="green-button pay" @click.prevent="doPayment">
+                پرداخت
+              </button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+    </div>
     <!-- end regex pricing modal -->
 
     <header-dash-seller
@@ -234,11 +389,17 @@ export default {
       offerTime: "",
       active_pakage_type: 3,
       is_pricing_active: false,
+      paymentData: "",
+      doPaymentLoader: false,
     };
   },
   methods: {
     init: function () {
       this.checkButtonIsHide();
+
+      $("#factor-pricing-modal").on("show.bs.modal", (e) => {
+        this.handleBackKeys();
+      });
 
       $("#pricing-modal").on("show.bs.modal", (e) => {
         this.handleBackKeys();
@@ -366,6 +527,7 @@ export default {
         history.pushState(null, null, window.location);
       }
       $(window).on("popstate", function (e) {
+        $("#factor-pricing-modal").modal("hide");
         $("#pricing-modal").modal("hide");
       });
     },
@@ -378,6 +540,27 @@ export default {
         this.is_pricing_active = false;
       } else {
       }
+    },
+    doPayment: function () {
+      this.doPaymentLoader = true;
+      let userId = getUserId();
+
+      this.registerComponentStatistics(
+        "payment",
+        "type-" + this.paymentData.selectedPackage,
+        "userId: " + userId
+      );
+      window.location.href = "/payment/" + this.paymentData.selectedPackage;
+    },
+    registerComponentStatistics: function (
+      categoryName,
+      actionName,
+      labelName
+    ) {
+      gtag("event", actionName, {
+        event_category: categoryName,
+        event_label: labelName,
+      });
     },
   },
   watch: {
@@ -404,6 +587,11 @@ export default {
 
     eventBus.$on("buyAdbuttonActive", (event) => {
       this.buttonActiveInSteps = event;
+    });
+
+    eventBus.$on("paymentData", (event) => {
+      this.paymentData = event;
+      $("#factor-pricing-modal").modal("show");
     });
   },
   created: function () {

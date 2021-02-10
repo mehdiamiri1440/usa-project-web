@@ -776,7 +776,7 @@ select#bd-month-end-date-id option {
 
 .main-loader-content{
   position: fixed;
-  z-index: 999;
+  z-index: 9999;
   background: rgba(0,0,0,0.8);
   width: 100%;
   height: 100%;
