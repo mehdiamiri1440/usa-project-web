@@ -285,10 +285,11 @@
                   }"
                 >
                   <p class="item-title" v-text="item.title"></p>
-                  <p class="item-value">
+                  <p class="item-value" v-if="item.value != '0'">
                     {{ item.value }}
                     <span v-text="item.unit"> </span>
                   </p>
+                  <p class="item-value" v-else>ندارد</p>
                 </li>
               </ul>
 

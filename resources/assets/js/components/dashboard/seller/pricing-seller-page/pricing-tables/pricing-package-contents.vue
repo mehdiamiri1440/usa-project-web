@@ -426,50 +426,6 @@
 <template>
   <div class="col-xs-12">
     <div class="row">
-      <div class="col-xs-12 text-center mobile-padding-5">
-        <div class="wrapper-background mobile-padding-7">
-          <div class="header-wrapper">
-            <div class="header-title">
-              <span>آیا میدانستید؟</span>
-            </div>
-
-            <div class="item-content-wrapper">
-              <div>
-                <div class="icon-wrapper">
-                  <i class="fa fa-frown-open red-text"></i>
-                </div>
-                <div class="content-wrapper">
-                  متوسط هزینه ارتباط با یک خریدار در
-                  <strong> فضای سنتی </strong>
-                  <span class="red-text important-text">
-                    بيش از چند میلیون تومان در چند روز
-                  </span>
-                  است.
-                </div>
-              </div>
-            </div>
-            <div class="item-content-wrapper">
-              <div>
-                <div class="icon-wrapper">
-                  <i class="fa fa-grin green-text"></i>
-                </div>
-                <div class="content-wrapper">
-                  متوسط هزینه ارتباط با یک خریدار در
-                  <strong> بازار باسکول </strong>
-                  <span class="green-text important-text">
-                    کمتر از ۲ هزار تومان در چند دقیقه
-                  </span>
-                  است.
-                </div>
-              </div>
-            </div>
-          </div>
-          <p class="main-text-wrapper">
-            حرفه ای ها فرصت ها را از دست نمی دهند!
-          </p>
-        </div>
-      </div>
-
       <div
         :class="{ 'col-sm-offset-3': justPro == 'true' }"
         class="pull-left mobile-padding-5 col-xs-12 col-sm-6 col-lg-6"
@@ -675,27 +631,6 @@
           </div>
         </div>
       </div>
-
-      <div class="col-xs-12 text-center mobile-padding-5">
-        <div class="wrapper-background">
-          <div class="header-wrapper">
-            <div class="header-title">
-              <span>بسته ی ویژه فروش چیست؟</span>
-            </div>
-
-            <p class="header-description">
-              <strong>
-                این بسته شامل مجموعه امکاناتی مانند اعمال نردبان رایگان، مشاهده
-                بدون تاخیر درخواست های خرید، دریافت پیامک درخواست های خرید مرتبط
-                و ... است که
-                <span class="green-text"
-                  >باعث فروش محصولات شما در سریع ترین زمان ممکن می شود</span
-                >
-              </strong>
-            </p>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </template>
@@ -727,15 +662,12 @@ export default {
           contentUnit: true,
           helpDescription: "",
         },
-        // <i class="text-green fa fa-check-circle" style="color:#00c569"></i>
         {
           title: "بسته ی ویژه فروش",
           contentUnit: false,
           helpDescription:
             "محصولات ثبت شده شما، در قسمت محصولات ویژه در پنل خریداران به آنها نمایش داده می شود",
         },
-
-        // '<i class="text-green fa fa-times-circle" style="color:#e41c38"></i>'
       ],
       priceItemPro: [
         {
@@ -763,7 +695,7 @@ export default {
           helpDescription: "",
         },
         {
-          title: "<span class='red-text'>*</span> بسته ی ویژه فروش",
+          title: "بسته ی ویژه فروش <span class='red-text'>*</span>",
           contentUnit: true,
           helpDescription:
             "محصولات ثبت شده شما، در قسمت محصولات ویژه در پنل خریداران به آنها نمایش داده می شود",

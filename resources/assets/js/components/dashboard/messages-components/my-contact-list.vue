@@ -338,6 +338,9 @@ i.fa-star {
   .main-content.is-fix-alert {
     padding: 89px 0 0;
   }
+  .contact-items {
+    padding-bottom: 59px;
+  }
 }
 
 @media screen and (max-width: 767px) {

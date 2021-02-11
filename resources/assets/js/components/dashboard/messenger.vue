@@ -254,26 +254,14 @@
   font-size: 12px;
 }
 
-.contact-wrapper .contact-items {
-  position: relative;
-  overflow-y: scroll;
-  height: calc(100% + 40px);
-}
-
-.contact-wrapper .contact-items > ul {
-  position: absolute;
-  right: 0;
-  left: 0;
-  top: 0;
-  bottom: 0;
-}
-
 @media screen and (max-width: 991px) {
   .main-content {
-    padding: 59px 0 0;
+    padding: 0;
+    top: 59px;
   }
   .main-content.is-fix-alert {
-    padding: 89px 0 0;
+    padding: 0;
+    top: 89px;
   }
 }
 
@@ -286,13 +274,9 @@
   .send-message-form .message-input input {
     padding: 13px 15px;
   }
-
-  .main-content {
-    padding: 59px 0 0;
-  }
-
   .main-content.is-fix-alert {
-    padding: 85px 0 0;
+    padding: 0;
+    top: 85px;
   }
 
   .hidden_element {
@@ -309,7 +293,7 @@
 
 @media screen and (max-width: 767px) {
   .is-guide-active {
-    z-index: 5 !important;
+    z-index: 4 !important;
     background: transparent !important;
   }
 }
@@ -416,10 +400,10 @@ export default {
       toContact: 15,
       contactsCountInEachLoad: 20,
       showLoadMoreBtn: false,
-      userAllowedReview: false,
       verifiedUserContent: this.$parent.verifiedUserContent,
       isCurrentUserVerified: false,
       isChatUpdate: true,
+      userDataLoader: true,
     };
   },
 
@@ -476,7 +460,6 @@ export default {
       if (index !== -10) self.isFirstMessageLoading = true;
       self.selectedIndex = index;
 
-      this.isUserAuthorizedToPostComment();
       this.setUserGuideCookie();
 
       this.currentContactUserId = contact.contact_id;
@@ -557,7 +540,7 @@ export default {
         $(".overlay-bg-guide").css("display", "block");
         setTimeout(() => {
           $(".overlay-bg-guide").fadeOut();
-        }, 2000);
+        }, 1000);
       }
     },
     setNoticeCookie() {
@@ -813,17 +796,6 @@ export default {
 
       eventBus.$emit("reviewUserData", selectedUserData);
     },
-    isUserAuthorizedToPostComment: function () {
-      let self = this;
-      let userObg = {
-        user_id: this.selectedContact.contact_id,
-      };
-      axios
-        .post("/profile/is-user-authorized-to-post-comment", userObg)
-        .then(function (response) {
-          self.userAllowedReview = response.data.is_allowed;
-        });
-    },
   },
 
   mounted: function () {
@@ -871,9 +843,9 @@ export default {
       });
     }
 
-    eventBus.$on("userAllowedReview", ($event) => {
-      this.userAllowedReview = $event;
-    });
+    // eventBus.$on("userAllowedReview", ($event) => {
+    //   this.userAllowedReview = $event;
+    // });
   },
   watch: {
     contactNameSearchText: function (value) {

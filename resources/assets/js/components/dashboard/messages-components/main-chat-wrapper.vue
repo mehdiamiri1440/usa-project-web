@@ -129,13 +129,13 @@
 .message-wrapper .message-contact-title a {
   float: right;
   display: block;
-  max-width: 230px;
+  max-width: 300px;
   font-size: 15px;
   color: #fff;
 }
 
 .message-wrapper .message-contact-title span:first-of-type {
-  max-width: 112px;
+  max-width: 190px;
   white-space: nowrap;
   text-overflow: ellipsis;
   height: 25px;
@@ -573,39 +573,41 @@
   }
 }
 
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 500px) {
   .message-wrapper .message-contact-title a {
-    max-width: 174px;
+    max-width: 190px;
   }
 
   .message-wrapper .message-contact-title span:first-of-type {
-    max-width: 73px;
+    max-width: 100px;
   }
 
   .message-wrapper .message-contact-title span.commetns-link {
     margin-right: 8px;
-    margin-top: 5px;
+    margin-top: 7px;
     padding: 4px;
   }
+
   .verified-user {
     right: 2px;
   }
+
   .message-wrapper .message-contact-title-img {
     margin-left: 5px;
   }
 }
 
-@media screen and (max-width: 345px) {
+@media screen and (max-width: 365px) {
   .message-wrapper .message-contact-title a {
-    max-width: 174px;
+    max-width: 154px;
   }
 
   .message-wrapper .message-contact-title span:first-of-type {
-    max-width: 53px;
+    max-width: 66px;
   }
 
   .message-wrapper .message-contact-title span.commetns-link {
-    margin-right: 3px;
+    margin-right: 6px;
     margin-top: 5px;
   }
 
@@ -729,47 +731,6 @@
             <i class="fas fa-exclamation-circle"></i>
             گزارش تخلف
           </button>
-
-          <!-- <button
-            type="button"
-            class="report-button hover-effect"
-            data-toggle="collapse"
-            id="button-collapse-chat-menu"
-            href="#chat-menu-items"
-            role="button"
-          >
-            <i class="fa fa-ellipsis-h"></i>
-            <i class="new-badge">جدید</i>
-          </button>
-          <button
-            @click.prevent="$parent.selectedContact = !$parent.selectedContact"
-            class="back-state hidden-sm hidden-md hidden-lg"
-          >
-            <i class="fa fa-arrow-left"></i>
-          </button>
-
-          <ul id="chat-menu-items" class="collapse">
-            <li class="list-item">
-              <button
-                type="button"
-                @click.prevent="
-                  $parent.activeReportModal($parent.selectedContact.contact_id)
-                "
-              >
-                <i class="fas fa-exclamation-circle"></i>
-                گزارش تخلف
-              </button>
-            </li>
-            <li v-if="$parent.userAllowedReview" class="list-item">
-              <button
-                type="button"
-                @click.prevent="$parent.activeReviewModal()"
-              >
-                <i class="fas fa-star"></i>
-                ثبت نظر
-              </button>
-            </li>
-          </ul> -->
         </div>
       </div>
     </div>
@@ -906,19 +867,6 @@
       <div class="send-message-form">
         <form @v-on:submit.prevent="$parent.sendMessage()">
           <div class="message-input">
-            <!-- <button
-              class="capture-image"
-              :class="{
-                'slide-out-right': isChat,
-                'scale-up-center-full ': !isChat,
-              }"
-            >
-              <i class="fa fa-camera"></i>
-            </button> -->
-
-            <!-- :class="{
-                'padding-default': isChat,
-              }" -->
             <input
               class="padding-default"
               type="text"
@@ -929,21 +877,6 @@
 
           <div class="button-wrapper">
             <div class="item-wrapper">
-              <!-- <button
-                class="voice-message-button"
-                :class="{
-                  'scale-down-center-fade': isChat,
-                  'scale-up-center-full ': !isChat,
-                }"
-                @click.prevent="isChat = false"
-              >
-                <i class="fa fa-microphone"></i>
-              </button> -->
-
-              <!-- :class="{
-                  'scale-down-center-fade': !isChat,
-                  'scale-up-center-full ': isChat,
-                }" -->
               <button
                 type="submit"
                 class="send-message-button scale-up-center-full"
@@ -1044,13 +977,13 @@ export default {
     userGuide() {
       $(".overlay-bg-guide").on("click", () => {
         this.$parent.setUserGuideCookie();
-        $(".overlay-bg-guide").fadeOut();
+        $(".overlay-bg-guide").fadeOut("fast");
       });
       if (this.$parent.isGuideActive) {
         setTimeout(() => {
           this.$parent.setUserGuideCookie();
           $(".overlay-bg-guide").fadeOut();
-        }, 2000);
+        }, 1000);
       }
     },
   },
@@ -1070,7 +1003,7 @@ export default {
         setTimeout(() => {
           this.$parent.setUserGuideCookie();
           $(".overlay-bg-guide").fadeOut();
-        }, 2000);
+        }, 1000);
       }
     },
   },

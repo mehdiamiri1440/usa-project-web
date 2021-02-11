@@ -435,10 +435,15 @@ input[type="number"] {
         </div>
       </div>
       <div class="col-xs-12">
-        <div class="header-section">
-          <p>ارتقا عضویت</p>
+        <div class="row">
+          <div class="header-section col-xs-12">
+            <p>ارتقا عضویت</p>
+          </div>
+          <product-pricing-contents
+            justPro="true"
+            :offer-time="this.offerTime"
+          />
         </div>
-        <product-pricing-contents justPro="true" :offer-time="this.offerTime" />
       </div>
     </div>
   </div>
