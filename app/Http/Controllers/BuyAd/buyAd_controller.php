@@ -1524,7 +1524,7 @@ class buyAd_controller extends Controller
         $high_degree_buyers = [];
         foreach($query_result as $item)
         {
-            if($item->in_degree >= 30 && $item->out_degree >= 30)
+            if($item->in_degree >= 10 && $item->out_degree >= 10)
             {
                 $high_degree_buyers[] = $item->user_id;
             }
