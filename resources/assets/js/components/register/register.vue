@@ -605,10 +605,24 @@ export default {
     },
     setLocation(isUserMobile) {
       if (isUserMobile) {
+        this.getCategory();
+        this.step3.password = this.makeRandomString(8);
         this.goToStep(6);
       } else {
         this.goToStep(5);
       }
+    },
+    makeRandomString(length) {
+      var result = "";
+      var characters =
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+      var charactersLength = characters.length;
+      for (var i = 0; i < length; i++) {
+        result += characters.charAt(
+          Math.floor(Math.random() * charactersLength)
+        );
+      }
+      return result;
     },
     setAccount() {
       // this.userNameValidator(this.step3.user_name);

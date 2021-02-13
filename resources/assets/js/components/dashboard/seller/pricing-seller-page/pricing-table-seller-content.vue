@@ -251,7 +251,7 @@
 
 .content-wrapper {
   float: right;
-  font-size: 16px;
+  font-size: 15px;
   color: #707070;
   padding-top: 11px;
   padding-right: 15px;
@@ -382,12 +382,11 @@
                       <i class="fa fa-frown-open red-text"></i>
                     </div>
                     <div class="content-wrapper">
-                      متوسط هزینه ارتباط با یک خریدار در
-                      <strong> فضای سنتی </strong>
+                      شما سالانه
                       <span class="red-text important-text">
-                        بيش از چند میلیون تومان در چند روز
+                        10 ها میلیون تومان پول
                       </span>
-                      است.
+                      را به دلیل دسترسی نداشتن به خریدار ها از دست می دهید.
                     </div>
                   </div>
                 </div>
@@ -397,12 +396,13 @@
                       <i class="fa fa-grin green-text"></i>
                     </div>
                     <div class="content-wrapper">
-                      متوسط هزینه ارتباط با یک خریدار در
-                      <strong> بازار باسکول </strong>
+                      برای ارتباط با هزاران
                       <span class="green-text important-text">
-                        کمتر از ۲ هزار تومان در چند دقیقه
+                        خریدار واقعی
                       </span>
-                      است.
+                      از سراسر کشور به جمع
+                      <strong> فروشندگان ویژه باسکول </strong>
+                      بپیوندید.
                     </div>
                   </div>
                 </div>

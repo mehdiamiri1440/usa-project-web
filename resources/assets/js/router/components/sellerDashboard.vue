@@ -254,7 +254,12 @@
             </div>
 
             <div class="modal-body col-xs-12 col-lg-8 col-lg-offset-2">
-              <pricing-contents justPro="false" :offer-time="this.offerTime" />
+              <div class="row">
+                <pricing-contents
+                  justPro="false"
+                  :offer-time="this.offerTime"
+                />
+              </div>
             </div>
           </div>
           <!-- /.modal-content -->
@@ -370,6 +375,9 @@ export default {
         "messenger/buy-ads",
         "register-product/success",
         "register-product",
+        "pricing",
+        "product-pricing",
+        "buyad-pricing",
       ],
       buttonIsActive: true,
       currentUser: {
