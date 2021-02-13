@@ -59,7 +59,9 @@
 
 .rate:not(:checked) > input {
   position: absolute;
-  top: -9999px;
+  opacity: 0;
+  z-index: -1;
+  /* top: -9999px; */
 }
 .rate:not(:checked) > label {
   float: left;

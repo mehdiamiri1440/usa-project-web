@@ -532,7 +532,7 @@
             <span class="fas fa-comment-alt"></span>
             پیام به خریدار
           </span>
-          <span class="hide-reply"> کمی صبر کنید... </span>
+          <span class="hide-reply text-rtl"> کمی صبر کنید... </span>
         </p>
         <!-- <p class="detail-success hide-reply" :id="'loader-' + buyAd.id">
           کمی صبر کنید...

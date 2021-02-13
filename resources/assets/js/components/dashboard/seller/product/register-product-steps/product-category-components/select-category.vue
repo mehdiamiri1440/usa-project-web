@@ -1,5 +1,8 @@
 
 <style scoped>
+.form-contents {
+  background: #fff;
+}
 .title-contents {
   font-weight: 500;
   font-size: 19px;

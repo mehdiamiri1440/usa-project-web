@@ -131,6 +131,18 @@ ul li.item button i {
         v-else-if="$parent.categoryName == 'غلات'"
         src="../../../../../../../img/barley.svg"
       />
+      <img
+        v-else-if="$parent.categoryName == 'خشکبار'"
+        src="../../../../../../../img/pistachio.svg"
+      />
+      <img
+        v-else-if="$parent.categoryName == 'ادویه'"
+        src="../../../../../../../img/bowl.svg"
+      />
+      <img
+        v-else-if="$parent.categoryName == 'دامپروری'"
+        src="../../../../../../../img/bee.svg"
+      />
       انتخاب دسته بندی محصول
     </h2>
 
