@@ -7,7 +7,6 @@
   padding: 0 15px;
 }
 
-
 .submit-button {
   background: #dddddd;
   color: #fff;
@@ -74,6 +73,7 @@ label {
   margin: 6px auto;
   position: relative;
   background: #fbfbfb;
+  box-shadow: none;
 }
 
 #product-type {
@@ -164,6 +164,16 @@ label {
             <span v-else-if="$parent.categoryName == 'غلات'">
               مثلا: هندی ۱۱۲۱
             </span>
+            <span v-else-if="$parent.categoryName == 'خشکبار'">
+              مثلا: پسته فندقی
+            </span>
+            <span v-else-if="$parent.categoryName == 'ادویه'">
+              مثلا: زعفرون نگین
+            </span>
+            <span v-else-if="$parent.categoryName == 'دامپروری'">
+              مثلا: عسل چهل گیاه
+            </span>
+            <span v-else> مثلا: مضافتی</span>
           </label>
 
           <div class="text-input-wrapper">

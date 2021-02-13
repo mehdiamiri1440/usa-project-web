@@ -586,7 +586,7 @@
                     پیام به خریدار
                     <span class="fas fa-comment-alt"></span>
                   </span>
-                  <span class="hide-reply"> کمی صبر کنید... </span>
+                  <span class="hide-reply text-rtl"> کمی صبر کنید... </span>
                 </span>
               </a>
               <a
@@ -603,7 +603,7 @@
                     پیام به خریدار
                     <span class="fas fa-comment-alt"></span>
                   </span>
-                  <span class="hide-reply"> کمی صبر کنید... </span>
+                  <span class="hide-reply text-rtl"> کمی صبر کنید... </span>
                 </span>
               </a>
             </li>

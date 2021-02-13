@@ -253,7 +253,7 @@ li.score-item i {
     </div>
 
     <div class="main-section">
-      <ul v-if="!userDataLoader">
+      <ul v-if="!$parent.userDataLoader">
         <li class="user-info">
           <div class="user-image">
             <img
@@ -329,7 +329,7 @@ li.score-item i {
                 ></span>
                 <span v-else v-text="'احراز هویت نشده'"></span>
               </li>
-              <li class="user-activity-item">
+              <!-- <li class="user-activity-item">
                 <p class="icon-wrapper">
                   <svg
                     v-if="userData.user_info && userData.user_info.is_seller"
@@ -411,7 +411,7 @@ li.score-item i {
                   فروشنده
                 </span>
                 <span v-else> خریدار </span>
-              </li>
+              </li> -->
               <li class="report-item">
                 <button
                   @click.prevent="
@@ -473,7 +473,7 @@ li.score-item i {
             </div>
           </div> -->
         </li>
-        <li v-if="$parent.userAllowedReview" class="col-xs-12">
+        <li v-if="userAllowedReview" class="col-xs-12">
           <ChatReviewComponent v-if="reviewCurrentStep == 0" />
           <SuccessReviewComponent v-if="reviewCurrentStep == 1" />
         </li>
@@ -500,40 +500,50 @@ export default {
   },
   data: function () {
     return {
-      userDataLoader: true,
-      userData: {
-        user_info: "",
-        profile: "",
-      },
       userStatistics: "",
       reviewCurrentStep: 0,
       successMessage: "نظر شما با موفقیت ثبت شد",
+      userAllowedReview: false,
     };
   },
   methods: {
     init() {
-      this.userDataLoader = true;
+      if (!this.checkMobileWidth()) {
+        this.isUserAuthorizedToPostComment();
+      }
+    },
+    checkMobileWidth() {
+      if ($(window).width() <= 991) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    isUserAuthorizedToPostComment: function () {
+      let self = this;
+      let userObg = {
+        user_id: this.selectedContact.contact_id,
+      };
+      axios
+        .post("/profile/is-user-authorized-to-post-comment", userObg)
+        .then(function (response) {
+          self.userAllowedReview = response.data.is_allowed;
+          self.getUserData();
+        });
+    },
+    getUserData() {
+      this.$parent.userDataLoader = true;
       this.reviewCurrentStep = 0;
 
       const self = this;
       axios
-        .post("/load_profile_by_user_name", {
+        .post("/get_user_statistics_by_user_name", {
           user_name: self.selectedContact.user_name,
         })
-        .then((response) => {
-          self.userData = response.data;
-          axios
-            .post("/get_user_statistics_by_user_name", {
-              user_name: self.selectedContact.user_name,
-            })
-            .then((statisticsResponse) => {
-              self.userStatistics = statisticsResponse.data.statistics;
-              self.activeComponentTooltip();
-              self.userDataLoader = false;
-            })
-            .catch((err) => {
-              //
-            });
+        .then((statisticsResponse) => {
+          self.userStatistics = statisticsResponse.data.statistics;
+          self.activeComponentTooltip();
+          self.$parent.userDataLoader = false;
         })
         .catch((err) => {
           //
@@ -567,10 +577,10 @@ export default {
       if (isItemActive) {
         this.init();
       } else {
-        this.userDataLoader = true;
+        this.$parent.userDataLoader = true;
       }
     },
-    userDataLoader(userDataLoader) {
+    "$parent.userDataLoader"(userDataLoader) {
       if (!userDataLoader) {
         setTimeout(() => {
           this.activeComponentTooltip();

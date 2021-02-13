@@ -254,7 +254,12 @@
             </div>
 
             <div class="modal-body col-xs-12 col-lg-8 col-lg-offset-2">
-              <pricing-contents justPro="false" :offer-time="this.offerTime" />
+              <div class="row">
+                <pricing-contents
+                  justPro="false"
+                  :offer-time="this.offerTime"
+                />
+              </div>
             </div>
           </div>
           <!-- /.modal-content -->
@@ -285,10 +290,11 @@
                   }"
                 >
                   <p class="item-title" v-text="item.title"></p>
-                  <p class="item-value">
+                  <p class="item-value" v-if="item.value != '0'">
                     {{ item.value }}
                     <span v-text="item.unit"> </span>
                   </p>
+                  <p class="item-value" v-else>ندارد</p>
                 </li>
               </ul>
 
@@ -369,6 +375,9 @@ export default {
         "messenger/buy-ads",
         "register-product/success",
         "register-product",
+        "pricing",
+        "product-pricing",
+        "buyad-pricing",
       ],
       buttonIsActive: true,
       currentUser: {

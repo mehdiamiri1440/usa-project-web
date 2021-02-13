@@ -1442,10 +1442,14 @@ p.response-rate span {
 
             <div v-if="userLogin">
               <div class="reviews-wrapper col-xs-12">
-                <p class="title-content">نظر کاربران</p>
-                <div class="header-reviews text-center">
-                  <div class="actions" v-if="userAllowedReview && !isMyProfile">
-                    <!-- <button
+                <div class="row">
+                  <p class="title-content">نظر کاربران</p>
+                  <div class="header-reviews text-center">
+                    <div
+                      class="actions"
+                      v-if="userAllowedReview && !isMyProfile"
+                    >
+                      <!-- <button
                       v-if="userAllowedReview && !isMyProfile"
                       @click.prevent="activeReviewModal()"
                       class="add-review hover-effect rtl"
@@ -1455,46 +1459,47 @@ p.response-rate span {
                       <span>ثبت نظر</span>
                     </button> -->
 
-                    <ChatReviewComponent v-if="reviewCurrentStep == 0" />
-                    <SuccessReviewComponent v-if="reviewCurrentStep == 1" />
+                      <ChatReviewComponent v-if="reviewCurrentStep == 0" />
+                      <SuccessReviewComponent v-if="reviewCurrentStep == 1" />
+                    </div>
+                    <p class="red-text" v-if="reviews.deleted_count > 0">
+                      نظرات
+                      <strong v-text="reviews.deleted_count"></strong>
+                      کاربر توسط
+                      <span
+                        v-text="
+                          profileOwner.user_info.first_name +
+                          ' ' +
+                          profileOwner.user_info.last_name
+                        "
+                      ></span>
+                      حذف شده است
+                    </p>
                   </div>
-                  <p class="red-text" v-if="reviews.deleted_count > 0">
-                    نظرات
-                    <strong v-text="reviews.deleted_count"></strong>
-                    کاربر توسط
-                    <span
-                      v-text="
-                        profileOwner.user_info.first_name +
-                        ' ' +
-                        profileOwner.user_info.last_name
-                      "
-                    ></span>
-                    حذف شده است
-                  </p>
-                </div>
 
-                <div
-                  class="reviews-wrapper"
-                  v-if="reviews.comments.length > 0 && !reviewsLoader"
-                >
-                  <article-review
-                    v-for="(comment, index) in reviews.comments"
-                    :key="index"
-                    :review="comment"
-                  />
-                </div>
-                <div class="reviews-wrapper" v-else-if="reviewsLoader">
-                  <div class="default-review">
-                    <placeholder-article-review
-                      v-for="(item, index) in 2"
+                  <div
+                    class="reviews-wrapper"
+                    v-if="reviews.comments.length > 0 && !reviewsLoader"
+                  >
+                    <article-review
+                      v-for="(comment, index) in reviews.comments"
                       :key="index"
+                      :review="comment"
                     />
                   </div>
-                </div>
-                <div class="reviews-wrapper" v-else>
-                  <div class="empty-reviews">
-                    <span class="fa fa-comment-alt"></span>
-                    هیچ نظری ثبت نشده است
+                  <div class="reviews-wrapper" v-else-if="reviewsLoader">
+                    <div class="default-review">
+                      <placeholder-article-review
+                        v-for="(item, index) in 2"
+                        :key="index"
+                      />
+                    </div>
+                  </div>
+                  <div class="reviews-wrapper" v-else>
+                    <div class="empty-reviews">
+                      <span class="fa fa-comment-alt"></span>
+                      هیچ نظری ثبت نشده است
+                    </div>
                   </div>
                 </div>
               </div>
@@ -2263,9 +2268,9 @@ export default {
     gtag("config", "UA-129398000-1", { page_path: "/profile" });
 
     document.addEventListener("click", this.documentClick);
-    eventBus.$on("userAllowedReview", ($event) => {
-      this.userAllowedReview = $event;
-    });
+    // eventBus.$on("userAllowedReview", ($event) => {
+    //   this.userAllowedReview = $event;
+    // });
   },
   watch: {
     userLogin: function (val) {
