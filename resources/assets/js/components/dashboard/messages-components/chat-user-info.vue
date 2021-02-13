@@ -474,7 +474,12 @@ li.score-item i {
           </div> -->
         </li>
         <li v-if="userAllowedReview" class="col-xs-12">
-          <ChatReviewComponent v-if="reviewCurrentStep == 0" />
+          <ChatReviewComponent
+            :user-full-name="
+              selectedContact.first_name + ' ' + selectedContact.last_name
+            "
+            v-if="reviewCurrentStep == 0"
+          />
           <SuccessReviewComponent v-if="reviewCurrentStep == 1" />
         </li>
       </ul>

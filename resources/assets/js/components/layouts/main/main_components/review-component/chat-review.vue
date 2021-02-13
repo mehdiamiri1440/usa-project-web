@@ -141,6 +141,9 @@
   content: "1";
 }
 
+.form-wrapper {
+  padding: 0 10px;
+}
 .chat-report-form-wrapper {
   direction: rtl;
 
@@ -179,6 +182,20 @@
 .btn-disable {
   background: #dbdbdb;
 }
+
+.hint-reviews {
+  display: flex;
+  justify-content: space-between;
+  max-width: 272px;
+  margin: 0 auto;
+  direction: rtl;
+  flex-direction: row-reverse;
+  font-size: 13px;
+  color: #bebebe;
+  padding-right: 7px;
+  font-weight: 500;
+}
+
 @media screen and (max-width: 1366px) {
   .rate {
     width: 217px;
@@ -193,13 +210,17 @@
     font-size: 17px;
     top: -30px;
   }
+
+  .hint-reviews {
+    max-width: 233px;
+  }
 }
 </style>
 
 <template>
-  <div class="rate-score-wrapper">
+  <div class="rate-score-wrapper row">
     <div class="main-text">
-      <p>میزان رضایت خود را از 1 تا 5 ثبت کنید</p>
+      <p>به این کاربر از 1 تا 5 امتیاز دهید</p>
 
       <div class="rate">
         <input
@@ -268,10 +289,22 @@
           title="1"
         ></label>
       </div>
-
+      <div class="hint-reviews">
+        <span>خیلی خوب</span>
+        <span>خیلی بد</span>
+      </div>
       <div class="chat-report-form-wrapper">
         <div id="chat-report-form" class="form-wrapper collapse">
-          <p>نظر خود را اینجا بنویسید</p>
+          <p>
+            نظر خود را درباره
+            <span
+              class="light-green-text"
+              v-if="userFullName"
+              v-text="userFullName"
+            ></span>
+            <span class="light-green-text" v-else>این کاربر</span>
+            اینجا بنویسید
+          </p>
           <textarea
             placeholder="نظرتان درباره این کاربر را با بقیه به اشتراک بگذارید..."
             v-model="reviewData.reviewText"
@@ -312,6 +345,7 @@
 // import ReviewDescription from "./review-steps/review-description";
 // import FinalStep from "./review-steps/final-step";
 export default {
+  props: ["userFullName"],
   data: function () {
     return {
       reviewData: {

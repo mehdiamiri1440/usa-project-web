@@ -2,6 +2,17 @@
 .bg-gradient {
   background: linear-gradient(90deg, #00c569 0%, #21ad93 100%);
 }
+
+.wrapper-background {
+  background: #fff;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+  border-radius: 8px;
+  padding: 15px;
+  line-height: 1.618;
+  margin-bottom: 30px;
+  overflow: hidden;
+}
+
 .item-action .green-button {
   padding: 10px 35px;
   margin: 0 auto 30px;
@@ -29,10 +40,11 @@
   float: left;
   width: 100%;
   border: 1px solid #fff;
+  min-height: 577px;
 }
 
 .item-wrapper.pro-version {
-  border: 1px solid #21ad93;
+  border: 2px solid #21ad93;
 }
 
 .item-title {
@@ -203,16 +215,6 @@
   font-size: 13px;
 }
 
-.wrapper-background {
-  background: #fff;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
-  border-radius: 8px;
-  padding: 15px;
-  line-height: 1.618;
-  margin-bottom: 30px;
-  overflow: hidden;
-}
-
 .header-wrapper {
   text-align: center;
   padding: 15px;
@@ -229,12 +231,6 @@
   font-size: 20px;
   color: #333;
   font-weight: bold;
-}
-
-.item-wrapper {
-  position: relative;
-  padding: 0;
-  float: left;
 }
 
 .special-badge {
@@ -322,6 +318,16 @@
 .important-text {
   font-weight: bold;
 }
+
+.recomended-item {
+  text-align: center;
+  font-size: 17px;
+  font-weight: 500;
+  background: #21ad93;
+  color: #fff;
+  padding: 2px;
+}
+
 @media screen and (max-width: 991px) {
   .list-title,
   .needs,
@@ -331,6 +337,9 @@
 }
 
 @media screen and (max-width: 767px) {
+  .item-wrapper {
+    min-height: initial;
+  }
   .header-icon-wrapper {
     float: right;
     width: 50px;
@@ -431,6 +440,7 @@
         class="pull-left mobile-padding-5 col-xs-12 col-sm-6 col-lg-6"
       >
         <div class="item-wrapper pro-version wrapper-background">
+          <div class="recomended-item">پیشنهادی به شما</div>
           <div class="item-header text-center">
             <span class="special-badge">ویژه</span>
             <div class="item-title">
@@ -539,6 +549,8 @@
         class="pull-right mobile-padding-5 col-xs-12 col-sm-6 col-lg-6"
       >
         <div class="item-wrapper wrapper-background">
+          <div class="recomended-item empty">پیشنهادی به شما</div>
+
           <div class="item-header text-center">
             <div class="item-title">
               <h2>عضویت پایه</h2>
