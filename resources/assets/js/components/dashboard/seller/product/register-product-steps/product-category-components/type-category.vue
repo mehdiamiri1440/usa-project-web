@@ -7,7 +7,6 @@
   padding: 0 15px;
 }
 
-
 .submit-button {
   background: #dddddd;
   color: #fff;
@@ -74,6 +73,7 @@ label {
   margin: 6px auto;
   position: relative;
   background: #fbfbfb;
+  box-shadow: none;
 }
 
 #product-type {

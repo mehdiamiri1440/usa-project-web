@@ -612,6 +612,7 @@ export default {
       $(".collapse").collapse("hide");
     });
     this.setTotalPrice();
+    $(".item-guid").tooltip();
   },
   watch: {
     "productPriceData.count": function () {

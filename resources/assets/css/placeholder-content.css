@@ -9,6 +9,13 @@ a, a:hover, a:visited, a:focus, a:active{
   outline: none;
 }
 
+input,textarea {   
+  /* Remove inner shadow bug in ios */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  
+}
 
 .hover-effect {
   transition: 200ms !important;

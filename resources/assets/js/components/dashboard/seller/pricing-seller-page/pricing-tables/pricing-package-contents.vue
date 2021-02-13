@@ -239,17 +239,17 @@
 
 .special-badge {
   position: absolute;
-  left: -46px;
+  left: -52px;
   background: #e41c38;
   color: #fff;
-  font-size: 17px;
+  font-size: 21px;
   font-weight: bold;
-  width: 120px;
+  width: 145px;
   text-align: center;
-  padding: 11px 3px 3px;
+  padding: 16px 3px 7px;
   -webkit-transform: rotate(-41deg);
   transform: rotate(-41deg);
-  top: -4px;
+  top: -7px;
 }
 
 .offer-price {

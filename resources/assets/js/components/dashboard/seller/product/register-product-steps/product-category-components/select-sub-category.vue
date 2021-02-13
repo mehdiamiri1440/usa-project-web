@@ -1,5 +1,8 @@
 
 <style scoped>
+.form-contents {
+  background: #fff;
+}
 .submit-button {
   background: #dddddd;
   color: #fff;
@@ -147,17 +150,17 @@ ul li.item button i {
             </button>
           </li>
         </ul>
-      </div>
-    </div>
-    <div class="col-xs-12 action-control-wrapper">
-      <button
-        class="submit-button default-back-button pull-right"
-        @click.prevent="$parent.step--"
-      >
-        <i class="fa fa-arrow-right"></i>
+        <div class="col-xs-12 action-control-wrapper">
+          <button
+            class="submit-button default-back-button pull-right"
+            @click.prevent="$parent.step--"
+          >
+            <i class="fa fa-arrow-right"></i>
 
-        مرحله قبل
-      </button>
+            مرحله قبل
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </template>

@@ -302,7 +302,7 @@
 
 .message-input {
   float: left;
-  width: calc(100% - 60px);
+  width: calc(100% - 50px);
 }
 
 .send-message-form .message-input input {
@@ -334,21 +334,10 @@
 }
 
 .send-message-form .button-wrapper .item-wrapper {
-  float: right;
-
   width: 40px;
-
   height: 40px;
-
-  color: #fff;
-
   background: linear-gradient(90deg, #00c569 0%, #21ad93 100%);
-
-  border: none;
-
   border-radius: 35px;
-
-  padding: 0 10px;
 }
 
 .send-message-form .button-wrapper .item-wrapper .send-message-button {
@@ -356,10 +345,10 @@
   border: none;
   width: 40px;
   height: 40px;
+  height: 40px;
   position: absolute;
-  right: 0;
-  padding-top: 7px;
-  padding-left: 9px;
+  right: calc(50% - 21px);
+  padding: 7px 0 0;
 }
 
 .send-message-form .button-wrapper .voice-message-button {
@@ -598,6 +587,16 @@
 }
 
 @media screen and (max-width: 365px) {
+  .message-wrapper .message-contact-title a {
+    max-width: 180px;
+  }
+
+  .message-wrapper .message-contact-title span:first-of-type {
+    max-width: 90px;
+  }
+}
+
+@media screen and (max-width: 355px) {
   .message-wrapper .message-contact-title a {
     max-width: 154px;
   }

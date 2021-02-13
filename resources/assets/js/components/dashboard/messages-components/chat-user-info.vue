@@ -473,7 +473,7 @@ li.score-item i {
             </div>
           </div> -->
         </li>
-        <li v-if="$parent.userAllowedReview" class="col-xs-12">
+        <li v-if="userAllowedReview" class="col-xs-12">
           <ChatReviewComponent v-if="reviewCurrentStep == 0" />
           <SuccessReviewComponent v-if="reviewCurrentStep == 1" />
         </li>

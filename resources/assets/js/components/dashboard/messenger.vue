@@ -258,10 +258,12 @@
   .main-content {
     padding: 0;
     top: 59px;
+    padding-bottom: 59px;
   }
   .main-content.is-fix-alert {
     padding: 0;
     top: 89px;
+    padding-bottom: 89px;
   }
 }
 
@@ -454,6 +456,10 @@ export default {
         this.chatMessages = "";
       }
       var self = this;
+
+      // enable loader for user info component
+      self.userDataLoader = true;
+
       self.isChatLoadeMore = false;
       self.handleBackBtnClickOnDevices();
       self.isChatMessagesLoaded = true;
