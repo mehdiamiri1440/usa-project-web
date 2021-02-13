@@ -134,6 +134,10 @@
   width: 100%;
 }
 
+.main-modal-chat li:last-of-type {
+  margin-bottom: 20px;
+}
+
 .main-modal-chat li > div {
   background: #f7f7f7;
 

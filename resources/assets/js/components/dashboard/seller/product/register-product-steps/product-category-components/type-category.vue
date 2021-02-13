@@ -164,6 +164,16 @@ label {
             <span v-else-if="$parent.categoryName == 'غلات'">
               مثلا: هندی ۱۱۲۱
             </span>
+            <span v-else-if="$parent.categoryName == 'خشکبار'">
+              مثلا: پسته فندقی
+            </span>
+            <span v-else-if="$parent.categoryName == 'ادویه'">
+              مثلا: زعفرون نگین
+            </span>
+            <span v-else-if="$parent.categoryName == 'دامپروری'">
+              مثلا: عسل چهل گیاه
+            </span>
+            <span v-else> مثلا: مضافتی</span>
           </label>
 
           <div class="text-input-wrapper">
