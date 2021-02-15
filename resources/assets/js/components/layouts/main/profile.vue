@@ -1459,7 +1459,15 @@ p.response-rate span {
                       <span>ثبت نظر</span>
                     </button> -->
 
-                      <ChatReviewComponent v-if="reviewCurrentStep == 0" />
+                      <ChatReviewComponent
+                        :user-full-name="
+                          profileOwner.user_info.first_name +
+                          ' ' +
+                          profileOwner.user_info.last_name
+                        "
+                        v-if="reviewCurrentStep == 0"
+                      />
+                      
                       <SuccessReviewComponent v-if="reviewCurrentStep == 1" />
                     </div>
                     <p class="red-text" v-if="reviews.deleted_count > 0">
