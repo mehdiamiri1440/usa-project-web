@@ -121,6 +121,9 @@
         <li class="{{Request::is('admin/payment-list') ? 'active':''}}">
             <a href="{{route('admin_panel_payment_list')}}"><i class="fa fa-envelope"></i><span>وضعیت تراکنش ها</span></a>      
         </li>
+        <li class="{{Request::is('admin/submit-to-chanel') ? 'active':''}}">
+            <a href="{{url('admin/submit-to-chanel')}}"><i class="fa fa-envelope"></i><span>ارسال در کانال</span></a>      
+        </li>
         <!-- <li class="{{Request::is('admin/sell-offers') || Request::is('admin/sell-offer-detail/*') ? 'active':''}}">
             <a href="{{route('admin_panel_sell_offer_list')}}"><i class="fa fa-envelope"></i><span>پیشنهادات فروش</span></a>     
         </li>
