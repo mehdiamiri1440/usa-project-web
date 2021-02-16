@@ -438,6 +438,51 @@ i.fa-star {
       :class="{ 'is-buyer-list': !$parent.userType }"
     >
       <ul>
+        <li class="contact-item">
+          <a
+            href="#"
+            @click.prevent="$parent.isChanleActive = true"
+            :class="{
+              active: $parent.isChanleActive,
+            }"
+          >
+            <div class="contact-image">
+              <!-- <img
+                v-if="contact.profile_photo"
+                :src="$parent.str + '/' + contact.profile_photo"
+                :alt="contact.first_name[0]"
+              /> -->
+
+              <img src="../../../../img/user-defult.png" />
+            </div>
+            <div class="my-contact-info-wrapper">
+              <span class="contact-name text-rtl">
+                کانال رسمی باسکول
+                <button
+                  @click.prevent
+                  class="verified-user"
+                  data-container="body"
+                  data-toggle="popover"
+                  data-placement="bottom"
+                  :data-content="$parent.verifiedUserContent"
+                  title
+                >
+                  <i class="fa fa-certificate"></i>
+                </button>
+              </span>
+
+              <p class="last-message-date">1399/11/25</p>
+            </div>
+
+            <div class="my-contact-info-wrapper">
+              <span class="contact-last-message" v-text="'یه متنی'"></span>
+
+              <div class="count-number-wrapper">
+                <p class="count-number" v-text="'5'"></p>
+              </div>
+            </div>
+          </a>
+        </li>
         <li
           class="contact-item"
           v-for="(contact, index) in $parent.contactList"
@@ -447,7 +492,9 @@ i.fa-star {
             href="#"
             @click.prevent="$parent.loadChatHistory(contact, index, false)"
             :class="{
-              active: $parent.selectedContact.contact_id == contact.contact_id,
+              active:
+                $parent.selectedContact.contact_id == contact.contact_id &&
+                !$parent.isChanleActive,
             }"
           >
             <div class="contact-image">
