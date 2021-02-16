@@ -1004,6 +1004,10 @@ Route::get('/sitemap.xml', [
     'as' => 'get_sitemap',
 ]);
 
+Route::get('/chanel', function () {
+            return view('layout.chanel.messenger');
+        });
+
 //-----------------------------------------------------
 //    in code bayad bad az har chizi ke any dare biad
 Route::get('/{any}', function (Request $request) {
