@@ -917,6 +917,9 @@ Route::group(['prefix' => 'admin', 'middleware' => [admin_login::class]], functi
         'uses' => 'admin_panel\admin_payment_controller@get_payment_logs',
         'as' => 'admin_panel_payment_list'
     ]);
+    Route::get('/submit-to-chanel', function () {
+        return view('admin_panel.chanel-pages.chanel');
+    });
 });
 
 Route::post('/refresh-token',[
