@@ -319,9 +319,13 @@
     </div>
 
     <div
-      class="col-xs-12 pull-right message-wrapper col-sm-8 col-lg-6"
-      v-bind:class="{ hidden_element: !selectedContact }"
-      v-if="selectedContact"
+      class="col-xs-12 pull-right message-wrapper col-sm-8"
+      :class="{
+        hidden_element: !selectedContact,
+        'col-lg-6': !isChanleActive,
+        'col-lg-9': isChanleActive,
+      }"
+      v-if="selectedContact || isChanleActive"
     >
       <mainChatWrapper />
     </div>
@@ -345,7 +349,7 @@
     <div
       class="contact-wrapper pull-left hiiden-sm hidden-xs col-lg-3"
       v-bind:class="{ hidden_element: !selectedContact }"
-      v-if="selectedContact"
+      v-if="selectedContact && !isChanleActive"
     >
       <div class="row">
         <chat-user-info
@@ -406,6 +410,7 @@ export default {
       isCurrentUserVerified: false,
       isChatUpdate: true,
       userDataLoader: true,
+      isChanleActive: false,
     };
   },
 
@@ -450,6 +455,7 @@ export default {
       this.loadContactList();
     },
     loadChatHistory: function (contact, index, isUpdate) {
+      this.isChanleActive = false;
       if (!isUpdate) {
         this.selectedContact = "";
         this.selectedContact = contact;
@@ -802,6 +808,9 @@ export default {
 
       eventBus.$emit("reviewUserData", selectedUserData);
     },
+    activeChanel() {
+      // this.isChanleActive = true
+    },
   },
 
   mounted: function () {
@@ -888,6 +897,11 @@ export default {
     },
     selectedContact: function (value) {
       eventBus.$emit("activeContactId", value.contact_id);
+    },
+    isChanleActive(isChanel) {
+      if (isChanel) {
+        this.activeChanel();
+      }
     },
   },
 
