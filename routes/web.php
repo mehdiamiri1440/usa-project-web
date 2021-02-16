@@ -554,6 +554,11 @@ Route::group(['middleware' => [login::class]], function () {
     Route::post('/get_my_buyAds',[
         'uses' => 'BuyAd\buyAd_controller@get_my_buyAds'
     ]); 
+
+    Route::post('/get_channel_contents',[
+        'uses' => 'Messenger\channel_controller@get_channel_contents'
+    ]);
+
 });
 
 Route::post('/send_phone_verification_code_for_password_reset', [
@@ -617,7 +622,25 @@ Route::any('app-payment/buyAd_reply_capacity_payment_callback', [
     'as' => 'app_buyAd_reply_capacity_payment_callback',
 ]);
 
+
 //------------------------- End of app payment routes-------------------------------------------------------
+
+
+
+//------------------------- Channel routes ---------------------------------------------------------
+
+// Route::get('/public-channel/{slug}',[
+//     'uses' => 'Messenger\channel_controller@get_channel_content_by_id',
+//     'as' => 'load_channel_content_by_id'
+// ]);
+
+Route::get('/public-channel/{slug}',[
+    'uses' => 'Messenger\channel_controller@get_channel_content_by_id',
+    'as' => 'load_channel_content_by_id'
+]);
+
+//------------------------- End of Channel routes ---------------------------------------------------------
+
 Route::get('/logout', function () {
     Session::flush();
     Session::save();
@@ -916,6 +939,21 @@ Route::group(['prefix' => 'admin', 'middleware' => [admin_login::class]], functi
     Route::get('/payment-list',[
         'uses' => 'admin_panel\admin_payment_controller@get_payment_logs',
         'as' => 'admin_panel_payment_list'
+    ]);
+
+    Route::post('/add-channel-content',[
+        'uses' => 'Messenger\channel_controller@add_content',
+        'as' => 'admin_panel_add_channel_content'
+    ]);
+
+    Route::delete('/d-channel-content',[
+        'uses' => 'Messenger\channel_controller@delete_channel_content',
+        'as' => 'delete_channel_content_by_admin'
+    ]);
+
+    Route::get('/channel-contents-list',[
+        'uses' => 'Messenger\channel_controller@get_all_channel_contents',
+        'as' => 'admin_panel_channel_content_list'
     ]);
 });
 
