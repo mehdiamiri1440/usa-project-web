@@ -955,9 +955,10 @@ Route::group(['prefix' => 'admin', 'middleware' => [admin_login::class]], functi
         'uses' => 'Messenger\channel_controller@get_all_channel_contents',
         'as' => 'admin_panel_channel_content_list'
     ]);
-    Route::get('/submit-to-chanel', function () {
-        return view('admin_panel.chanel-pages.chanel');
-    });
+    Route::get('/submit-to-chanel', [
+        'uses' => 'Messenger\channel_controller@submit_contents_to_channel',
+        'as' => 'admin_panel_submit_to_channel'
+        ]);
 });
 
 Route::post('/refresh-token',[

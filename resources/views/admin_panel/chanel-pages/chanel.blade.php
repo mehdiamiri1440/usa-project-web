@@ -54,17 +54,13 @@
     <section class="content">
       <div class="row">        
           <div class="box">
-            <div class="box-header">
-              <h3 class="box-title">جدول داده ها</h3>
-            </div>
+           
             <!-- /.box-header -->
             <div class="box-body">
 
                 <!--Grid column-->
                 <div class="col-xs-12 col-md-8 col-md-offset-2">
-                    <form id="contact-form" name="contact-form" action="" method="POST">
-        
-                     
+                    <form id="contact-form" enctype="multipart/form-data" action="{{route('admin_panel_add_channel_content')}}" method="POST">                     
         
                         <!--Grid row-->
                         <div class="row">
@@ -100,7 +96,6 @@
                             <div class="col-md-12">
                                 <div class="md-form">
                                     <label for="media" class="">تصویر</label>
-
                                     <input type="file" id="media" name="media" >
                                     <hr />
 
@@ -117,11 +112,16 @@
 
                                     <div class="btn-group btn-toggle" data-toggle="buttons">
                                         <label class="btn btn-default active">
+                                            <input type="radio" name="is_for_buyer" value="0" checked=""> پیش فرض
+                                          </label>
+                                         
+                                        <label class="btn btn-default ">
                                           <input type="radio" name="is_for_buyer" value="1"> بلی
                                         </label>
                                         <label class="btn btn-default">
-                                          <input type="radio" name="is_for_buyer" value="0" checked=""> خیر
+                                          <input type="radio" name="is_for_buyer" value="0" > خیر
                                         </label>
+                                       
                                        
                                     </div>        
                                 </div>
@@ -132,10 +132,13 @@
 
                                     <div class="btn-group btn-toggle" data-toggle="buttons">
                                         <label class="btn btn-default active">
+                                            <input type="radio" name="is_for_seller" value="0" checked=""> پیش فرض
+                                          </label>
+                                        <label class="btn btn-default ">
                                             <input type="radio" name="is_for_seller" value="1"> بلی
                                           </label>
                                           <label class="btn btn-default">
-                                            <input type="radio" name="is_for_seller" value="0" checked=""> خیر
+                                            <input type="radio" name="is_for_seller" value="0" > خیر
                                           </label>
                                        
                                     </div>     
@@ -150,10 +153,13 @@
 
                                     <div class="btn-group btn-toggle" data-toggle="buttons">
                                         <label class="btn btn-default active">
+                                            <input type="radio" name="is_for_verified" value="0" checked=""> پیش فرض
+                                          </label>
+                                        <label class="btn btn-default ">
                                             <input type="radio" name="is_for_verified" value="1"> بلی
                                           </label>
                                           <label class="btn btn-default">
-                                            <input type="radio" name="is_for_verified" value="0" checked=""> خیر
+                                            <input type="radio" name="is_for_verified" value="0" > خیر
                                           </label>
                                        
                                     </div>                                
@@ -161,14 +167,17 @@
                             </div>
                             <div class="col-xs-12 col-sm-6 ">
                                 <div class="md-form">
-                                    <label for="active_package_type" class="">نوع پکیج فعال</label>
+                                    <label for="" class="">نوع پکیج فعال</label>
 
                                     <div class="btn-group btn-toggle" data-toggle="buttons">
                                         <label class="btn btn-default active">
+                                            <input type="radio" name="active_package_type" value="0" checked=""> پیش فرض
+                                          </label>
+                                        <label class="btn btn-default ">
                                           <input type="radio" name="active_package_type" value="0"> رایگان
                                         </label>
                                         <label class="btn btn-default">
-                                          <input type="radio" name="active_package_type" value="1" checked=""> ماهانه
+                                          <input type="radio" name="active_package_type" value="1" > ماهانه
                                         </label>
                                         <label class="btn btn-default ">
                                             <input type="radio" name="active_package_type" value="3"> سالانه
@@ -184,9 +193,8 @@
                                 <div class="md-form">
                                     <label for="categories" class="">انتخاب دسته بندی</label>
 
-                                    <select class="form-control" id="categories">
-                                        <option value="1">1</option>
-                                        <option value="1">2</option>
+                                    <select required onchange="getSubCategories(this)" class="form-control" id="categories">
+                                      <option  selected>انتخاب کنید</option>
                                     </select>                             
                                 </div>
                             </div>
@@ -195,9 +203,8 @@
                                 <div class="md-form">
                                     <label for="sub_categories" class="">انتخاب زیر دسته</label>
 
-                                    <select class="form-control" class="sub_categories">
-                                        <option value="1">1</option>
-                                        <option value="1">2</option>
+                                    <select required class="form-control" name="sub_category_id" id="sub_categories">
+                                        <option  selected>انتخاب کنید</option>
                                     </select>                             
                                 </div>
                             </div>
@@ -210,7 +217,7 @@
                                 <div class="md-form">
                                     <label for="register_date_from" class="">تاریخ ثبت نام از</label>
 
-                                    <input class="form-control" type="text" name="register_date_from" id="register_date_from" >
+                                    <input class="form-control" type="date" name="register_date_from" id="register_date_from" >
                            
                                 </div>
                             </div>
@@ -219,7 +226,7 @@
                                 <div class="md-form">
                                     <label for="register_date_until" class="">تاریخ ثبت نام تا</label>
 
-                                    <input class="form-control" type="text" name="register_date_until" id="register_date_until">
+                                    <input class="form-control" type="date" name="register_date_until" id="register_date_until">
                           
                                 </div>
                             </div>
@@ -232,7 +239,7 @@
                                 <div class="md-form">
                                     <label for="last_login_date_from" class="">لاگین شده از</label>
 
-                                    <input class="form-control" type="text" name="last_login_date_from" id="last_login_date_from">
+                                    <input class="form-control" type="date" name="last_login_date_from" id="last_login_date_from">
                            
                                 </div>
                             </div>
@@ -241,7 +248,7 @@
                                 <div class="md-form">
                                     <label for="last_login_date_until" class="">لاگین شده تا</label>
 
-                                    <input class="form-control" type="text" name="last_login_date_until" id="last_login_date_until" value="{{session('start_date')}}">
+                                    <input class="form-control" type="date" name="last_login_date_until" id="last_login_date_until" >
                           
                                 </div>
                             </div>
@@ -255,10 +262,13 @@
 
                                     <div class="btn-group btn-toggle" data-toggle="buttons">
                                         <label class="btn btn-default active">
+                                            <input type="radio" name="last_login_client" value="default" checked=""> پیش فرض
+                                          </label>
+                                        <label class="btn btn-default">
                                           <input type="radio" name="last_login_client" value="web"> web
                                         </label>
                                         <label class="btn btn-default">
-                                          <input type="radio" name="last_login_client" value="app" checked=""> app
+                                          <input type="radio" name="last_login_client" value="app" > app
                                         </label>
                                        
                                     </div>        
@@ -266,14 +276,14 @@
                             </div>
                             <div class="col-xs-12 col-sm-6 ">
                                 <div class="md-form">
-                                    <label for="is_shareable" class=""> قابلیت اشتراک بودن</label>
+                                    <label for="is_sharable" class=""> قابلیت اشتراک بودن</label>
 
                                     <div class="btn-group btn-toggle" data-toggle="buttons">
                                         <label class="btn btn-default active">
-                                            <input type="radio" name="is_shareable" checked value="1"> بلی
+                                            <input type="radio" name="is_sharable" checked value="1"> بلی
                                           </label>
                                           <label class="btn btn-default">
-                                            <input type="radio" name="is_shareable" value="0" > خیر
+                                            <input type="radio" name="is_sharable" value="0" > خیر
                                           </label>
                                        
                                     </div>     
@@ -281,8 +291,14 @@
                             </div>
                             <div class="col-xs-12 col-sm-6 ">
                                 <div class="md-form">
-                                    <label for="is_shareable" class=""> آیدی کاربر</label>
-                                    <input type="number" class="form-control" name="is_shareable" checked value="1"> 
+                                    <label for="myuser_id" class=""> آیدی کاربر</label>
+                                    <input type="number" class="form-control" id="myuser_id" name="myuser_id" placeholder="پیشفرض"> 
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 ">
+                                <div class="md-form">
+                                    <label for="min_contacts_count" class="">حداقل تعداد مخاطبین</label>
+                                    <input type="number" class="form-control" id="min_contacts_count" name="min_contacts_count" placeholder="پیشفرض"> 
                                 </div>
                             </div>
                         </div>
@@ -291,7 +307,7 @@
                         
                         <div class="col-xs-12 col-sm-4">
                            <div class="row">
-                            <button class="btn btn-success">
+                            <button type="submit" class="btn btn-success">
                                 ثبت در کانال
                             </button>
                            </div>
@@ -339,118 +355,45 @@
 
 <!-- page script -->
 <script>
-    $(function () {
-        // $('#example1').DataTable()
-        $('#example1').DataTable({
-            'paging'      : false,
-            'lengthChange': true,
-            'searching'   : false,
-            'ordering'    : true,
-            'info'        : true,
-            'autoWidth'   : false
-        })
-    })
+    var categories = '';
 
-    function push_notification(data)
-    {
-        if (!window.Notification) {
-                alert("Sorry, Notification Not supported in this Browser!");
-        } else {
-            if (Notification.permission === 'default') {
-                    Notification.requestPermission(function(p) {
-                        if (p === 'denied')
-                                alert('You have denied Notification from Team Abhivyakti');
-                        else {
-                                notify = new Notification(data.title, {
-                                    body: data.msg,
-                                    icon: "{{asset('images/logo-Inco-mobile.png')}}",
-                                });
-                        }
-                    });
-            } else {
-                    notify = new Notification(data.title, {
-                        body: data.msg,
-                        icon: "{{asset('images/logo-Inco-mobile.png')}}",  
-                        // You Can give image Link to change notification Icon.
-                    });
-            }
-        }
-    }
-    function notif(){
-            $.ajax({
-                url: "{{route('admin_notify')}}",
-                method:'POST',
-                success: function(data){
-                    if(data.notify){
-                            push_notification(data);
-                        setTimeout(notif,300000);
-                    }
+    function getCategories(){
+            $.post("/get_category_list",
+                {cascade_list:true},
+                 function(data, status){
+                    categories = data.categories;
+                    data.categories.map((item,index)=>{
+                        $('#categories').append('<option value="' + index +'">' + item.category_name + '</option>')
+                    })
+                    // for(let i = 0; data.categories.length > i ; i++){
+                    //     $('#categories').append('<option>category</option>')
+                    // }
                 },
-        });
-    }
-        
-    $(document).ready(function() {
-        // run the first time; all subsequent calls will take care of themselves
-        setTimeout(notif, 5000);
-    });
+        );
+    }  
 
-    function block_user(event)
-    {
-        event.preventDefault();
-        var e = event.currentTarget;
+    function getSubCategories(categoryIndex){
+            let getItemFromCategory = categories.filter((item,index)=>{
+                return categoryIndex.value == index
+            })
 
-        var user_id = $(e).attr('id');
+            // convert obj to array 
+            let subCategories = $.map(getItemFromCategory[0].subcategories, function(value, index) {
+                return [value];
+            });
 
-        $.ajax({
-            url:"{{route('admin_panel_block_operator')}}",
-            data:{
-                user_id:user_id,
-                block:1
-            },
-            type:"POST",
-            datatype:'json'
-        })
-        .done(function(json){
-            alert(json.msg); 
-            window.location.reload();          
-        })
-        .fail(function(xhr,status,errorThrown){
+            subCategories.map((item)=>{
+                $('#sub_categories').append('<option value="' + item.id +'">' + item.category_name + '</option>')
+            })
+            
+    }  
 
-        });   
-    }
-
-    function unblock_user(event)
-    {
-        event.preventDefault();
-        var e = event.currentTarget;
-
-        var user_id = $(e).attr('id');
-
-        $.ajax({
-            url:"{{route('admin_panel_block_operator')}}",
-            data:{
-                user_id:user_id,
-                block:0
-            },
-            type:"POST",
-            datatype:'json'
-        })
-        .done(function(json){
-            alert(json.msg); 
-            window.location.reload();          
-        })
-        .fail(function(xhr,status,errorThrown){
-
-        });   
-    }
 
     $(document).ready(function() {
-      kamaDatepicker('register_date_from', { forceFarsiDigits: true,markHolidays:true,gotoToday:true,markToday:true });
-      kamaDatepicker('register_date_until', { forceFarsiDigits: true,markHolidays:true,gotoToday:true,markToday:true });
-      kamaDatepicker('last_login_date_from', { forceFarsiDigits: true,markHolidays:true,gotoToday:true,markToday:true });
-      kamaDatepicker('last_login_date_until', { forceFarsiDigits: true,markHolidays:true,gotoToday:true,markToday:true });
-        // run the first time; all subsequent calls will take care of themselves
-       setTimeout(notif, 5000);
+
+    getCategories();
+    console.log(categories)
+
     });
     
 </script>

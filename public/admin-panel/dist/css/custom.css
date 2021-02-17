@@ -10,16 +10,17 @@ label{
     width: initial;
     margin-top:0 ;
 }
-.btn.active{
+.btn-default.active, .btn-default.active.focus, .btn-default.active:focus, .btn-default.active:hover{
     background: #00c19d;
     color: #fff;
 }
+
 
 .form-control{
     border-color: #d2d6de;
     border-radius: 4px;
     background: #f9f9f9;
-    padding: 7px 15px;
+    padding: 0 15px;
 }
 .box-body{
     float: right;

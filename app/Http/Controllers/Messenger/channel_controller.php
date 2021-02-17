@@ -235,6 +235,11 @@ class channel_controller extends Controller
             'contents' => $contents
         ]);
     }
+    
+    public function submit_contents_to_channel()
+    {
+        return view('admin_panel.chanel-pages.chanel');
+    }
 
     public function get_channel_content_by_id($slug)
     {
