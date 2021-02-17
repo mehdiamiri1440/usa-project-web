@@ -16,7 +16,7 @@
     <!-- Bootstrap css -->
     <link rel="stylesheet" href="{{asset('index/css/fontiran.css')}}">
     <link rel="stylesheet" href="{{asset('index/css/bootstrap.min.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/css/chanel/styles.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/channel/styles.css')}}">
 
     <!-- Font Awesome css -->
     <link rel="stylesheet" href="{{asset('index/css/all.css')}}">

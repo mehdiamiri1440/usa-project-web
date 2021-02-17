@@ -238,7 +238,7 @@ class channel_controller extends Controller
     
     public function submit_contents_to_channel()
     {
-        return view('admin_panel.chanel-pages.chanel');
+        return view('admin_panel.channel-pages.channel');
     }
 
     public function get_channel_content_by_id($slug)
