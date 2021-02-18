@@ -165,11 +165,13 @@ li > div .message-item-wrapper  {
     position: relative;
 }
 
-.message-content-wrapper,.message-chat-date{
+.message-content-wrapper{
     padding: 0 5px;
+    white-space: pre-line;
 }
 .message-chat-date{
     color: #B2B2B2;
+    padding: 0 5px;
 }
 
 .message-chat-date span{

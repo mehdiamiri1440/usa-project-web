@@ -55,47 +55,27 @@
                 <thead>
                 <tr>
                   <th>#</th>
-                  <th>نام و نام خانوادگی</th>
-                  <th>نوع کاربری</th>
-                  <th>استان-شهر</th>
-                  <th>تاریخ ثبت نام</th>
-                  <th>تلفن</th>
-                  <th>نوع عضوبت</th>
+                  <th>عنوان</th>
+                  <th>متن</th>
+                  <th>تاریخ ثبت</th>
+                  <th>تاریخ حذف</th>
                   <th>آی دی</th>
-                  <th>بلاک</th>
                 </tr>
                 </thead>
                 <tbody>
-                    @foreach($users as $user)
+                    @foreach($contents as $content)
                     <tr>
-                        <td>{{$loop->iteration}}</td>
-                        <td>{{$user->first_name . ' ' . $user->last_name}}</td>
-                        <td>{{$user->is_seller ? "فروشنده" : "خریدار"}}</td>
-                        <td>{{$user->province}} | {{$user->city}}</td>                    
-                        <td>{{$user->register_date}}</td>
-                        <td>{{$user->phone}}</td>
-                        @if($user->active_pakage_type == 0)
-                          <td>رایگان</td>
-                        @elseif($user->active_pakage_type == 1)
-                          <td>سه ماهه</td>
-                        @elseif($user->active_pakage_type == 2)
-                          <td>نوع دو</td>
-                        @elseif($user->active_pakage_type == 3)
-                          <td>ویژه</td>
-                        @endif
-                        <td>{{$user->id}}</td>
-                        <td>
-                            @if($user->is_blocked == false)
-                                <button class="btn btn-danger" id="{{$user->id}}" onclick="block_user(event)">بلاک کردن</button>
-                            @else
-                                <button class="btn btn-success" id="{{$user->id}}" onclick="unblock_user(event)">رفع بلاک</button>
-                            @endif
-                        </td>
+                        <td>{{$loop->iteration}}</td>                  
+                        <td>{{$content->title}}</td>
+                        <td>{{$content->text}}</td>
+                        <td>{{$content->created_at}}</td>
+                        <td>{{$content->deleted_at}}</td>
+                        <td>{{$content->id}}</td>
                     </tr>
                     @endforeach
               </table>
               <div align="center">
-                {{ $users->appends($_GET)->render("pagination::default")}}
+                {{ $contents->appends($_GET)->render("pagination::default")}}
               </div>
             </div>
             <!-- /.box-body -->

@@ -629,11 +629,6 @@ Route::any('app-payment/buyAd_reply_capacity_payment_callback', [
 
 //------------------------- Channel routes ---------------------------------------------------------
 
-// Route::get('/public-channel/{slug}',[
-//     'uses' => 'Messenger\channel_controller@get_channel_content_by_id',
-//     'as' => 'load_channel_content_by_id'
-// ]);
-
 Route::get('/public-channel/{slug}',[
     'uses' => 'Messenger\channel_controller@get_channel_content_by_id',
     'as' => 'load_channel_content_by_id'
@@ -1008,9 +1003,6 @@ Route::get('/sitemap.xml', [
     'as' => 'get_sitemap',
 ]);
 
-Route::get('/channel', function () {
-            return view('layout.channel.messenger');
-        });
 
 //-----------------------------------------------------
 //    in code bayad bad az har chizi ke any dare biad

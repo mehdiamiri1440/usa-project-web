@@ -49,6 +49,7 @@
         ارسال در کانال
       </h1>
     </section>
+    
 
     <!-- Main content -->
     <section class="content">
@@ -60,8 +61,7 @@
 
                 <!--Grid column-->
                 <div class="col-xs-12 col-md-8 col-md-offset-2">
-                    <form id="contact-form" enctype="multipart/form-data" action="{{route('admin_panel_add_channel_content')}}" method="POST">                     
-        
+                    <form id="contact-form" enctype="multipart/form-data" action="{{route('admin_panel_add_channel_content')}}" method="POST">
                         <!--Grid row-->
                         <div class="row">
         
@@ -84,7 +84,7 @@
         
                                 <div class="md-form">
                                     <label for="text">متن ارسالی در کانال</label>
-                                    <textarea type="text" id="text" name="text" rows="4" class="form-control md-textarea"></textarea>
+                                    <textarea type="text" id="text" name="text" rows="8" class="form-control md-textarea"></textarea>
                                 </div>
         
                             </div>
@@ -112,7 +112,7 @@
 
                                     <div class="btn-group btn-toggle" data-toggle="buttons">
                                         <label class="btn btn-default active">
-                                            <input type="radio" name="is_for_buyer" value="0" checked=""> پیش فرض
+                                            <input type="radio" name="is_for_buyer"> پیش فرض
                                           </label>
                                          
                                         <label class="btn btn-default ">
@@ -132,7 +132,7 @@
 
                                     <div class="btn-group btn-toggle" data-toggle="buttons">
                                         <label class="btn btn-default active">
-                                            <input type="radio" name="is_for_seller" value="0" checked=""> پیش فرض
+                                            <input type="radio" name="is_for_seller"> پیش فرض
                                           </label>
                                         <label class="btn btn-default ">
                                             <input type="radio" name="is_for_seller" value="1"> بلی
@@ -153,7 +153,7 @@
 
                                     <div class="btn-group btn-toggle" data-toggle="buttons">
                                         <label class="btn btn-default active">
-                                            <input type="radio" name="is_for_verified" value="0" checked=""> پیش فرض
+                                            <input type="radio" name="is_for_verified"> پیش فرض
                                           </label>
                                         <label class="btn btn-default ">
                                             <input type="radio" name="is_for_verified" value="1"> بلی
@@ -171,7 +171,7 @@
 
                                     <div class="btn-group btn-toggle" data-toggle="buttons">
                                         <label class="btn btn-default active">
-                                            <input type="radio" name="active_package_type" value="0" checked=""> پیش فرض
+                                            <input type="radio" name="active_package_type"> پیش فرض
                                           </label>
                                         <label class="btn btn-default ">
                                           <input type="radio" name="active_package_type" value="0"> رایگان
@@ -187,7 +187,7 @@
                             </div>
                         </div>
 
-                        <div class="row">
+                        <!-- <div class="row">
 
                             <div class="col-xs-12 col-sm-6 ">
                                 <div class="md-form">
@@ -209,7 +209,7 @@
                                 </div>
                             </div>
                             
-                        </div>
+                        </div> -->
 
                         <div class="row">
 
@@ -262,7 +262,7 @@
 
                                     <div class="btn-group btn-toggle" data-toggle="buttons">
                                         <label class="btn btn-default active">
-                                            <input type="radio" name="last_login_client" value="default" checked=""> پیش فرض
+                                            <input type="radio" name="last_login_client"> پیش فرض
                                           </label>
                                         <label class="btn btn-default">
                                           <input type="radio" name="last_login_client" value="web"> web

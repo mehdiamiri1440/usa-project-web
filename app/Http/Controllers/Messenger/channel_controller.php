@@ -12,20 +12,20 @@ class channel_controller extends Controller
 {
     protected $channel_validation_rules = [
         'title' => 'required|string',
-        'text' => 'required_without:media|string',
-        'media' => 'required_without:text|image|mimes:jpeg,jpg,png|max:2000',
-        'is_for_seller' => 'boolean',
-        'is_for_buyer' => 'boolean',
-        'sub_category_id' => 'exists:categories,id',
-        'is_for_verified' => 'boolean',
-        'min_contacts_count' => 'integer:min:0',
-        'active_package_type' => 'integer:min:0',
-        'register_date_from' => 'date',
-        'register_date_until' => 'date',
-        'last_login_date_from' => 'date',
-        'last_login_date_until' => 'date',
-        'last_login_client' => 'string',
-        'myuser_id' => 'exists:myusers,id',
+        'text' => 'required_without:media|string|nullable',
+        'media' => 'required_without:text|image|mimes:jpeg,jpg,png|max:2000|nullable',
+        'is_for_seller' => 'boolean|nullable',
+        'is_for_buyer' => 'boolean|nullable',
+        'sub_category_id' => 'exists:categories,id|nullable',
+        'is_for_verified' => 'boolean|nullable',
+        'min_contacts_count' => 'integer:min:0|nullable',
+        'active_package_type' => 'integer:min:0|nullable',
+        'register_date_from' => 'date|nullable',
+        'register_date_until' => 'date|nullable',
+        'last_login_date_from' => 'date|nullable',
+        'last_login_date_until' => 'date|nullable',
+        'last_login_client' => 'string|nullable',
+        'myuser_id' => 'exists:myusers,id|nullable',
         // 'product_id' => 'exists:products,id',
         'is_sharable' => 'boolean',
     ];
@@ -73,7 +73,7 @@ class channel_controller extends Controller
 
         $channel_content_record->save();
 
-        return response()->json($channel_content_record);
+        return redirect()->route('admin_panel_channel_content_list');
     }
 
     public function get_channel_contents()
@@ -231,7 +231,7 @@ class channel_controller extends Controller
                             ->orderBy('created_at','desc')
                             ->paginate(10);
 
-        return view('',[
+        return view('admin_panel.channel-pages.channelList',[
             'contents' => $contents
         ]);
     }
@@ -271,7 +271,7 @@ class channel_controller extends Controller
             return abort(404);
         }
 
-        return view('admin_panel.login',[
+        return view('layout.channel.messenger',[
             'content' => $content
         ]);
     }
