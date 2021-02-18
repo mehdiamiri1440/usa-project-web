@@ -1,27 +1,25 @@
 <div class="contact-list">
-    <div class="contact-list-header">
-        مخاطبین
-    </div>
+    <h1 class="contact-list-header">
+        {{$content->title}}
+    </h1>
     <div class="contact-list-main">
         <ul class="contact-list">
             <li>
                 <button class="active">
                     <div class="user-image-list">
-                        <img src="{{asset('assets/img/buyer.jpg')}}" alt="">
+                        <img src="{{asset('assets/img/logo/512-buskool-logo.jpg')}}" alt="buskool">
                     </div>
                     <div class="content-wrapper">
                         <span class="user-name">
-                            پشتیبانی باسکول 
-                        </span>
-                        
-                        <span class="user-time-update">
-                            1399/10/13
-                        </span>
-                        
-                    </div>
-                    <div class="content-wrapper">
-                        <span class="message">
-                            سلام قیمت چند ؟سلام قیمت چند ؟سلام قیمت چند ؟سلام قیمت چند ؟سلام قیمت چند ؟سلام قیمت چند ؟
+                        کانال رسمی باسکول
+                        <a
+                        class="verified-user"
+                        data-container="body"
+                        data-toggle="popover"
+                        data-placement="bottom"
+                        >
+                        <i class="fa fa-certificate"></i>
+                        </a>
                         </span>
                         <p class="new-message-count">
                             <span>

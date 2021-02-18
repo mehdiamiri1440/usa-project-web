@@ -473,14 +473,6 @@ i.fa-star {
 
               <p class="last-message-date">1399/11/25</p>
             </div>
-
-            <div class="my-contact-info-wrapper">
-              <span class="contact-last-message" v-text="'یه متنی'"></span>
-
-              <div class="count-number-wrapper">
-                <p class="count-number" v-text="'5'"></p>
-              </div>
-            </div>
           </a>
         </li>
         <li

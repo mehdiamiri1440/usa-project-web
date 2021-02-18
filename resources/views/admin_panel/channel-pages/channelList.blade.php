@@ -71,10 +71,22 @@
                         <td>{{$content->created_at}}</td>
                         <td>{{$content->deleted_at}}</td>
                         <td>{{$content->id}}</td>
+                        
+                        @if(!$content->deleted_at)
+                        <td>
+                              <button class="btn btn-danger" id="{{$content->id}}" onclick="delete_content(event)">حذف کردن</button>
+                        </td>
+
+                        @else
+
+                        <td>
+                          حذف شده
+                        </td>
+                        @endif
                     </tr>
                     @endforeach
               </table>
-              <div align="center">
+              <div align="center">  
                 {{ $contents->appends($_GET)->render("pagination::default")}}
               </div>
             </div>
@@ -125,103 +137,32 @@
       'autoWidth'   : false
     })
   })
-</script>
-    <script>
-    function push_notification(data)
-    {
-        if (!window.Notification) {
-                alert("Sorry, Notification Not supported in this Browser!");
-        } else {
-            if (Notification.permission === 'default') {
-                  Notification.requestPermission(function(p) {
-                        if (p === 'denied')
-                              alert('You have denied Notification from Team Abhivyakti');
-                        else {
-                              notify = new Notification(data.title, {
-                                    body: data.msg,
-                                    icon: "{{asset('images/logo-Inco-mobile.png')}}",
-                              });
-                        }
-                  });
-            } else {
-                  notify = new Notification(data.title, {
-                        body: data.msg,
-                        icon: "{{asset('images/logo-Inco-mobile.png')}}",  
-                        // You Can give image Link to change notification Icon.
-                  });
-            }
-      }
-    }
-    function notif(){
-            $.ajax({
-                url: "{{route('admin_notify')}}",
-                method:'POST',
-                success: function(data){
-                    if(data.notify){
-                         push_notification(data);
-                        setTimeout(notif,300000);
-                    }
-                },
-        });
-    }
-        
-    $(document).ready(function() {
-      // run the first time; all subsequent calls will take care of themselves
-      setTimeout(notif, 5000);
-    });
-    
-</script>
 
-<script>
     
-    function block_user(event)
+    function delete_content(event)
     {
         event.preventDefault();
         var e = event.currentTarget;
 
-        var user_id = $(e).attr('id');
+        var contentId = $(e).attr('id');
+        if(confirm('آیا حذف شود؟'))
 
-        $.ajax({
-            url:"{{route('admin_panel_block_operator')}}",
-            data:{
-                user_id:user_id,
-                block:1
-            },
-            type:"POST",
-            datatype:'json'
-        })
-        .done(function(json){
-            alert(json.msg); 
-            window.location.reload();          
-        })
-        .fail(function(xhr,status,errorThrown){
+        {
+          $.ajax({
+              url:"{{route('delete_channel_content_by_admin')}}",
+              data:{
+                content_id:contentId,
+              },
+              type:"DELETE",
+              datatype:'json'
+          })
+          .done(function(json){
+              window.location.reload();          
+          })
+          .fail(function(xhr,status,errorThrown){
 
-        });   
-    }
-
-    function unblock_user(event)
-    {
-        event.preventDefault();
-        var e = event.currentTarget;
-
-        var user_id = $(e).attr('id');
-
-        $.ajax({
-            url:"{{route('admin_panel_block_operator')}}",
-            data:{
-                user_id:user_id,
-                block:0
-            },
-            type:"POST",
-            datatype:'json'
-        })
-        .done(function(json){
-            alert(json.msg); 
-            window.location.reload();          
-        })
-        .fail(function(xhr,status,errorThrown){
-
-        });   
+          });   
+        }
     }
 
 </script>

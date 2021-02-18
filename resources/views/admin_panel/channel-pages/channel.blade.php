@@ -70,7 +70,7 @@
         
                                 <div class="md-form">
                                     <label for="title">عنوان</label>
-                                    <input type="title" class="form-control" name="title" > 
+                                    <input required type="title" class="form-control" name="title" > 
                                 </div>
         
                             </div>
@@ -84,7 +84,7 @@
         
                                 <div class="md-form">
                                     <label for="text">متن ارسالی در کانال</label>
-                                    <textarea type="text" id="text" name="text" rows="8" class="form-control md-textarea"></textarea>
+                                    <textarea required type="text" id="text" name="text" rows="8" class="form-control md-textarea"></textarea>
                                 </div>
         
                             </div>
@@ -187,14 +187,14 @@
                             </div>
                         </div>
 
-                        <!-- <div class="row">
+                        <div class="row">
 
                             <div class="col-xs-12 col-sm-6 ">
                                 <div class="md-form">
                                     <label for="categories" class="">انتخاب دسته بندی</label>
 
-                                    <select required onchange="getSubCategories(this)" class="form-control" id="categories">
-                                      <option  selected>انتخاب کنید</option>
+                                    <select  onchange="getSubCategories(this)" class="form-control" id="categories">
+                                      <option  selected value="">انتخاب کنید</option>
                                     </select>                             
                                 </div>
                             </div>
@@ -203,13 +203,13 @@
                                 <div class="md-form">
                                     <label for="sub_categories" class="">انتخاب زیر دسته</label>
 
-                                    <select required class="form-control" name="sub_category_id" id="sub_categories">
-                                        <option  selected>انتخاب کنید</option>
+                                    <select  class="form-control" name="sub_category_id" id="sub_categories">
+                                        <option  selected value="">انتخاب کنید</option>
                                     </select>                             
                                 </div>
                             </div>
                             
-                        </div> -->
+                        </div> 
 
                         <div class="row">
 
@@ -292,13 +292,13 @@
                             <div class="col-xs-12 col-sm-6 ">
                                 <div class="md-form">
                                     <label for="myuser_id" class=""> آیدی کاربر</label>
-                                    <input type="number" class="form-control" id="myuser_id" name="myuser_id" placeholder="پیشفرض"> 
+                                    <input type="number" class="form-control" id="myuser_id" name="myuser_id" placeholder="پیش فرض"> 
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-6 ">
                                 <div class="md-form">
                                     <label for="min_contacts_count" class="">حداقل تعداد مخاطبین</label>
-                                    <input type="number" class="form-control" id="min_contacts_count" name="min_contacts_count" placeholder="پیشفرض"> 
+                                    <input type="number" class="form-control" id="min_contacts_count" name="min_contacts_count" placeholder="پیش فرض"> 
                                 </div>
                             </div>
                         </div>

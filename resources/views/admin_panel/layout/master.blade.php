@@ -124,6 +124,9 @@
         <li class="{{Request::is('admin/submit-to-channel') ? 'active':''}}">
             <a href="{{route('admin_panel_submit_to_channel')}}"><i class="fa fa-envelope"></i><span>ارسال در کانال</span></a>      
         </li>
+        <li class="{{Request::is('admin/admin_panel_channel_content_list') ? 'active':''}}">
+            <a href="{{route('admin_panel_channel_content_list')}}"><i class="fa fa-envelope"></i><span>همه پست های کانال</span></a>      
+        </li>
         <!-- <li class="{{Request::is('admin/sell-offers') || Request::is('admin/sell-offer-detail/*') ? 'active':''}}">
             <a href="{{route('admin_panel_sell_offer_list')}}"><i class="fa fa-envelope"></i><span>پیشنهادات فروش</span></a>     
         </li>

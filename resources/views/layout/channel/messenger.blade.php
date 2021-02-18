@@ -1,6 +1,7 @@
 @include('layout.channel.messenger-components.header')
 <div class="header-wrapper"></div>
 <main class="container-fluid messenger-wrapper">
+    
     <div class="container messenger">
        <div class="row h-100">
         <div class="hidden-xs hidden-sm  col-md-4 h-100">

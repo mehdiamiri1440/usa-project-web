@@ -6,12 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="keywords" content="محصولات کشاورزی,خرید مستقیم صیفی,فروشگاه آنلاین کشاورزی,باسکول">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
+    <meta property="og:title" content="{{$content->title}}" />
+    {{-- <meta property="og:description" content="Get from SEO newbie to SEO pro in 8 simple steps." /> --}}
+    
     <meta name="csrf-token" content="{{csrf_token()}}">
 
     <link rel="icon" href="{{asset('assets/img/logo/mobile-logo.svg')}}">
 
-    <title>باسکول | بازارگاه کشاورزی </title>
+    <title>{{$content->title}}</title>
 
     <!-- Bootstrap css -->
     <link rel="stylesheet" href="{{asset('index/css/fontiran.css')}}">
@@ -28,5 +30,7 @@
 
 </head>
 <body >
+
+ 
     
 
