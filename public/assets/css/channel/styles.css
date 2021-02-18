@@ -8,6 +8,10 @@ body {
     font-weight: 300;
     overflow: hidden;
 }
+.tooltip-wrapper{
+    font-family: "IranSans", Tahoma !important;
+
+}
 
 /*---------------------------------------
     Typorgraphy
@@ -111,7 +115,7 @@ html,body,.messenger-wrapper{
     float: right;
     width: calc(100% - 45px);
     text-align: right;
-    padding: 7px 15px;
+    padding: 6px 15px 0;
     margin: 0 auto;
     color: #fff;
     font-size: 15px;
@@ -119,7 +123,7 @@ html,body,.messenger-wrapper{
     max-width: 190px;
     white-space: nowrap;
     text-overflow: ellipsis;
-    height: 25px;
+    height: 30px;
     overflow: hidden;
 }
 
@@ -365,22 +369,12 @@ li .message-item-wrapper::after {
 }
 
 .contact-list button .new-message-count{
-    width: 60px;
+    font-size: 19px;
+    color: #999;
     float: left;
-    text-align: center;
+    margin-left: 5px;
 }
 
-
-.contact-list button .new-message-count > span{
-    display: inline-block;
-    height: 20px;
-    width: 20px;
-    background: #00c569;
-    color: #fff;
-    border-radius: 50px;
-    font-size: 13px;
-    line-height: 2;
-}
 
 .product-content-wrapper{
     overflow: hidden;
@@ -459,7 +453,32 @@ button.share-button:hover{
     background: rgba(0,0,0,0.6);
 }
 
+.verified-user{
+    display: inline-block;
+    overflow: initial !important;
+    background: none;
+    border: none;
+    color: #1da1f2;
+    font-weight: 900;
+    padding: 0;
+    line-height: 1;
+    font-size: 19px;
+    position: relative;
+    top: 3px;
+}
 
+.verified-user::before {
+    content: "\F00C";
+    position: absolute;
+    font-family: "Font Awesome 5 Free";
+    color: #fff;
+    top: 5px;
+    left: 5px;
+    font-size: 10px;
+    z-index: 1;
+    line-height: 1;
+    font-weight: 900;
+}
 
 @media screen and (max-width: 1199px){
     .messenger{

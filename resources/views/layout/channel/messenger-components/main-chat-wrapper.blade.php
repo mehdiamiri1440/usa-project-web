@@ -2,7 +2,16 @@
     <div class="chat-user-image">
         <img src="{{asset('assets/img/logo/512-buskool-logo.jpg')}}" alt="buskool">
     </div>
-    <p>کانال رسمی باسکول</p>
+    <p>کانال رسمی باسکول <a
+        class="verified-user"
+        data-container="body"
+        data-toggle="popover"
+        data-placement="bottom"
+        data-content="<div class='tooltip-wrapper text-rtl'>اطلاعات هویتی این کاربر احراز شده است.<br/><a href='/verification'>اطلاعات بیشتر</a> </div>"
+        title
+        >
+            <i class="fa fa-certificate"></i>
+        </a></p>
 </div>
 
 <div class="main-chat">
@@ -17,7 +26,9 @@
             <div  class="message-item-wrapper ">
                 @if($content->file_path)
                     <div class="message-image">
-                        <img src="{{asset('storage/' . $content->file_path)}}" alt="{{$content->title}}">
+                        <a class="image-popup-no-margins" href="{{asset('storage/' . $content->file_path)}}">
+                            <img src="{{asset('storage/' . $content->file_path)}}" alt="{{$content->title}}">
+                        </a>
                     </div>
                 @endif
                 @if($content->text)

@@ -7,7 +7,7 @@
     <meta name="keywords" content="محصولات کشاورزی,خرید مستقیم صیفی,فروشگاه آنلاین کشاورزی,باسکول">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta property="og:title" content="{{$content->title}}" />
-    {{-- <meta property="og:description" content="Get from SEO newbie to SEO pro in 8 simple steps." /> --}}
+    <meta property="og:description" content="{{$content->text}}" />
     
     <meta name="csrf-token" content="{{csrf_token()}}">
 
@@ -16,8 +16,8 @@
     <title>{{$content->title}}</title>
 
     <!-- Bootstrap css -->
-    <link rel="stylesheet" href="{{asset('index/css/fontiran.css')}}">
     <link rel="stylesheet" href="{{asset('index/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('index/css/magnific-popup.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/channel/styles.css')}}">
 
     <!-- Font Awesome css -->
@@ -26,6 +26,7 @@
     <!-- Main css -->
     <script src="{{asset('index/js/jquery.js')}}"></script>
     <script src="{{asset('index/js/bootstrap.min.js')}}"></script>
+    <script src="{{asset('index/js/jquery.magnific-popup.min.js')}}"></script>
 
 
 </head>
