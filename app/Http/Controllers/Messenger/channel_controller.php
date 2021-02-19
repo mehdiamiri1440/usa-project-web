@@ -180,7 +180,7 @@ class channel_controller extends Controller
                         })
                         ->whereNull('deleted_at')
                         ->select($this->required_channel_content_fields)
-                        ->orderBy('created_at','asc')
+                        ->orderBy('created_at','desc')
                         ->paginate(20);
 
         $total = $contents->total();
