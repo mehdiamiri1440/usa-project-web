@@ -327,7 +327,8 @@
       }"
       v-if="selectedContact || isChanleActive"
     >
-      <mainChatWrapper />
+      <main-channel-wrapper v-if="isChanleActive" />
+      <main-chat-wrapper v-else />
     </div>
     <div
       class="col-xs-12 default-message-wrapper hidden-xs col-sm-8 col-lg-9"
@@ -368,6 +369,7 @@ import Push from "push.js";
 import myContactList from "./messages-components/my-contact-list";
 import chatUserInfo from "./messages-components/chat-user-info";
 import MainChatWrapper from "./messages-components/main-chat-wrapper";
+import MainChannelWrapper from "./messages-components/main-channel-wrapper";
 
 export default {
   props: ["isRequiredFixAlert", "userType", "currentUser", "str"],
@@ -375,6 +377,7 @@ export default {
     myContactList,
     chatUserInfo,
     MainChatWrapper,
+    MainChannelWrapper,
   },
   data: function () {
     return {

@@ -46,7 +46,8 @@
   padding: 7px 15px 1px;
 }
 
-.contact-body .contact-image {
+.contact-body .contact-image,
+.contact-body .channel-image {
   width: 45px;
   height: 45px;
   float: right;
@@ -56,13 +57,9 @@
   position: relative;
 }
 
-.contact-body .contact-image img {
-  position: absolute;
-  left: 50%;
-  top: 50%;
+.contact-body .channel-image img {
+  width: 100%;
   height: 100%;
-  width: initial;
-  transform: translate(-50%, -50%);
 }
 
 .contact-body .contact-item a {
@@ -90,13 +87,14 @@
 .contact-body .contact-item span.contact-name {
   float: right;
   position: relative;
+  font-size: 14px;
 }
 
 .contact-body .contact-item span.contact-last-message {
   float: right;
   width: calc(100% - 60px);
   font-weight: lighter;
-  font-size: 12px;
+  font-size: 14px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -112,7 +110,8 @@
   text-align: center;
 }
 
-.contact-body .contact-item .my-contact-info-wrapper {
+.contact-body .contact-item .my-contact-info-wrapper,
+.contact-body .contact-item .my-channel-name-wraopper {
   float: right;
   padding-top: 6px;
   direction: ltr;
@@ -121,11 +120,22 @@
   padding-right: 15px;
 }
 
+.contact-body .contact-item .my-channel-name-wraopper {
+  padding-top: 15px;
+}
+
+.contact-body .contact-item .my-channel-name-wraopper .icon-wrapper {
+  font-size: 16px;
+  color: #999;
+  float: left;
+  margin-left: 15px;
+}
+
 .last-message-date {
   display: inline-block;
   height: 17px;
   width: 60px;
-  font-size: 10px;
+  font-size: 12px;
   line-height: 2;
   text-align: center;
 }
@@ -446,16 +456,10 @@ i.fa-star {
               active: $parent.isChanleActive,
             }"
           >
-            <div class="contact-image">
-              <!-- <img
-                v-if="contact.profile_photo"
-                :src="$parent.str + '/' + contact.profile_photo"
-                :alt="contact.first_name[0]"
-              /> -->
-
-              <img src="../../../../img/user-defult.png" />
+            <div class="channel-image">
+              <img src="../../../../img/logo/512-buskool-logo.jpg" />
             </div>
-            <div class="my-contact-info-wrapper">
+            <div class="my-channel-name-wraopper">
               <span class="contact-name text-rtl">
                 کانال رسمی باسکول
                 <button
@@ -471,7 +475,9 @@ i.fa-star {
                 </button>
               </span>
 
-              <p class="last-message-date">1399/11/25</p>
+              <p class="icon-wrapper">
+                <i class="fa fa-bullhorn"></i>
+              </p>
             </div>
           </a>
         </li>
