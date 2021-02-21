@@ -88,6 +88,12 @@
   float: right;
   position: relative;
   font-size: 14px;
+  max-width: calc(100% - 84px);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: right;
+  font-weight: 500;
 }
 
 .contact-body .contact-item span.contact-last-message {
@@ -134,7 +140,7 @@
 .last-message-date {
   display: inline-block;
   height: 17px;
-  width: 60px;
+  width: 70px;
   font-size: 12px;
   line-height: 2;
   text-align: center;
@@ -185,9 +191,10 @@
 .verified-user {
   line-height: 1;
   font-size: 15px;
-  position: absolute;
-  left: -18px;
+  position: relative;
+  right: 3px;
   top: -2px;
+  float: right;
 }
 
 .verified-user::before {
@@ -460,21 +467,18 @@ i.fa-star {
               <img src="../../../../img/logo/512-buskool-logo.jpg" />
             </div>
             <div class="my-channel-name-wraopper">
-              <span class="contact-name text-rtl">
-                کانال رسمی باسکول
-                <button
-                  @click.prevent
-                  class="verified-user"
-                  data-container="body"
-                  data-toggle="popover"
-                  data-placement="bottom"
-                  :data-content="$parent.verifiedUserContent"
-                  title
-                >
-                  <i class="fa fa-certificate"></i>
-                </button>
-              </span>
-
+              <span class="contact-name text-rtl"> کانال رسمی باسکول </span>
+              <button
+                @click.prevent
+                class="verified-user"
+                data-container="body"
+                data-toggle="popover"
+                data-placement="bottom"
+                :data-content="$parent.verifiedUserContent"
+                title
+              >
+                <i class="fa fa-certificate"></i>
+              </button>
               <p class="icon-wrapper">
                 <i class="fa fa-bullhorn"></i>
               </p>
@@ -507,20 +511,19 @@ i.fa-star {
             <div class="my-contact-info-wrapper">
               <span class="contact-name text-rtl">
                 {{ contact.first_name + " " + contact.last_name }}
-                <button
-                  v-if="contact.is_verified"
-                  @click.prevent
-                  class="verified-user"
-                  data-container="body"
-                  data-toggle="popover"
-                  data-placement="bottom"
-                  :data-content="$parent.verifiedUserContent"
-                  title
-                >
-                  <i class="fa fa-certificate"></i>
-                </button>
               </span>
-
+              <button
+                v-if="contact.is_verified"
+                @click.prevent
+                class="verified-user"
+                data-container="body"
+                data-toggle="popover"
+                data-placement="bottom"
+                :data-content="$parent.verifiedUserContent"
+                title
+              >
+                <i class="fa fa-certificate"></i>
+              </button>
               <p class="last-message-date">
                 {{ contact.last_msg_time_date | moment("jYYYY/jMM/jDD") }}
               </p>

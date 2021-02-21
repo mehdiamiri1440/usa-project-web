@@ -38,6 +38,9 @@
 .chat-loaded {
   opacity: 1;
 }
+.chat-loaded.load-more-active {
+  padding-top: 80px !important;
+}
 
 .contact-is-search img {
   display: block;
@@ -89,7 +92,7 @@
   left: 0;
   right: 0;
   top: 50px;
-  bottom: 60px;
+  bottom: 0;
   background-size: contain;
 }
 
@@ -135,7 +138,6 @@
 }
 
 .message-wrapper .message-contact-title span:first-of-type {
-  max-width: 190px;
   white-space: nowrap;
   text-overflow: ellipsis;
   height: 25px;
@@ -191,11 +193,11 @@
 
   right: 0;
 
-  bottom: 60px;
+  bottom: 0;
 
   top: 50px;
 
-  transition: 100ms;
+  /* transition: 100ms; */
 }
 
 .message-wrapper .chat-page ul li {
@@ -209,7 +211,7 @@
 
 .message-date {
   text-align: center;
-  margin: 10px auto;
+  margin: 20px auto;
   color: #313a43;
   font-size: 14px;
 }
@@ -233,15 +235,23 @@
   max-width: 100%;
   min-width: 100px;
 }
-.message-content-wrapper {
+.message-contents {
   max-width: 455px;
+  float: left;
+  position: relative;
+}
+.message-content-wrapper {
   padding: 5px 10px;
   display: block;
+  min-width: 200px;
 }
 .message-wrapper .chat-page .message-item-wrapper.message-receive {
   float: left;
   background: #fff;
   border-radius: 0 8px 8px 8px;
+  width: 100%;
+  position: relative;
+  margin-bottom: 3px;
 }
 .message-wrapper .chat-page .message-receive::after {
   content: "";
@@ -257,12 +267,6 @@
   line-height: 0px;
   _border-color: #000000 #fff #000000 #000000;
   _filter: progid:DXImageTransform.Microsoft.Chroma(color='#000000');
-}
-
-.message-wrapper .chat-page .message-item-wrapper.message-send {
-  float: right;
-  background: #dcf8c6;
-  border-radius: 8px 0 8px 8px;
 }
 
 .message-wrapper .chat-page .message-send::after {
@@ -498,6 +502,68 @@
   line-height: 1.618;
 }
 
+button.share-button {
+  border-radius: 4px;
+  border: none;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  color: #fff;
+  padding: 5px;
+  font-size: 15px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.16);
+  margin-bottom: 10px;
+}
+
+button.share-button:hover {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.forward-item {
+  position: absolute;
+  bottom: 0;
+  right: -40px;
+  background: rgba(0, 0, 0, 0.4);
+  width: 30px;
+  height: 30px;
+  border-radius: 50px;
+  text-align: center;
+  padding-top: 5px;
+  color: #fff;
+  font-size: 15px;
+  border: none;
+}
+
+.forward-item:hover {
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+}
+
+.chat-spinner-wrapper {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  width: 46px;
+  height: 46px;
+  background: #fff;
+  border-radius: 45px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  margin: 55px auto 0;
+}
+.message-text {
+  line-height: 1.618;
+  white-space: pre-line;
+}
+
+.spinner-border {
+  color: #00c569;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 3rem;
+  height: 3rem;
+  border-width: 0.29rem;
+}
+
 @media screen and (max-width: 1199px) {
   .message-wrapper .message-contact-title {
     position: relative;
@@ -506,12 +572,8 @@
 }
 
 @media screen and (max-width: 767px) {
-  .guide-arrow-item {
-    margin-top: 120px;
-  }
-
-  .overlay-bg-guide {
-    top: -60px;
+  .message-contents {
+    margin-right: 25px;
   }
 
   #chat-menu-items {
@@ -567,10 +629,6 @@
     max-width: 190px;
   }
 
-  .message-wrapper .message-contact-title span:first-of-type {
-    max-width: 100px;
-  }
-
   .message-wrapper .message-contact-title span.commetns-link {
     margin-right: 8px;
     margin-top: 7px;
@@ -590,19 +648,11 @@
   .message-wrapper .message-contact-title a {
     max-width: 180px;
   }
-
-  .message-wrapper .message-contact-title span:first-of-type {
-    max-width: 90px;
-  }
 }
 
 @media screen and (max-width: 355px) {
   .message-wrapper .message-contact-title a {
     max-width: 154px;
-  }
-
-  .message-wrapper .message-contact-title span:first-of-type {
-    max-width: 66px;
   }
 
   .message-wrapper .message-contact-title span.commetns-link {
@@ -624,13 +674,13 @@
     <div class="message-contact-title">
       <div class="contact-title-contents pull-right">
         <button
-          @click.prevent="$parent.selectedContact = !$parent.selectedContact"
+          @click.prevent="$parent.isChanleActive = !$parent.isChanleActive"
           class="back-state hidden-sm hidden-md hidden-lg"
         >
           <i class="fa fa-arrow-right"></i>
         </button>
         <div
-          @click.prevent="$parent.selectedContact = !$parent.selectedContact"
+          @click.prevent="$parent.isChanleActive = !$parent.isChanleActive"
           class="message-contact-title-img hidden-sm hidden-md hidden-lg"
         >
           <img src="../../../../img/logo/512-buskool-logo.jpg" />
@@ -658,80 +708,58 @@
 
     <div class="chat-page" v-if="$parent.activeChanel">
       <div class="bg-wrapper"></div>
+      <div v-if="loadMoreContacts" class="chat-spinner-wrapper">
+        <div class="spinner-border">
+          <span class="sr-only"></span>
+        </div>
+      </div>
       <ul
         :class="[
-          $parent.isChatMessagesLoaded && $parent.isFirstMessageLoading
-            ? 'chat-not-loaded'
-            : 'chat-loaded',
+          isChannelContentLoaded ? 'chat-not-loaded' : 'chat-loaded',
+          loadMoreContacts ? 'load-more-active' : '',
         ]"
       >
-        <li
-          :key="msg.id"
-          v-for="(msg, index) in $parent.chatMessages"
-          :class="{ 'margin-top-10': checkMessageName(index, index - 1) }"
-        >
-          <div class="message-date" v-if="msg.isDateShow">
+        <li :key="msg.id" v-for="msg in channelMessages">
+          <!-- <div class="message-date" v-if="msg.isDateShow">
             <span>
               {{ msg.created_at | moment("jYYYY/jMM/jDD") }}
             </span>
-          </div>
-          <div class="message-item-wrapper message-send">
-            <div class="message-content-wrapper">
-              <span v-text="msg.text"></span>
-              <span class="message-chat-date">
-                <span v-if="msg.created_at">{{
-                  msg.created_at | moment("HH:mm")
-                }}</span>
-                <span v-else>{{ Date() | moment("HH:mm") }}</span>
-                <span
-                  class="check-items"
-                  v-if="
-                    msg.sender_id === $parent.currentUserId && !msg.created_at
-                  "
-                >
-                  <i class="far fa-clock"></i>
+          </div> -->
+          <div class="message-contents">
+            <div class="message-item-wrapper message-receive">
+              <div class="message-content-wrapper">
+                <!-- content image -->
+                <message-image
+                  :img="msg.file_path"
+                  :base="$parent.str"
+                  :alt="msg.text"
+                />
+                <span class="message-text" v-text="msg.text"></span>
+                <span class="message-chat-date">
+                  <span v-if="msg.created_at">{{
+                    msg.created_at | moment("jYYYY/jMM/jDD HH:mm")
+                  }}</span>
                 </span>
-                <span
-                  class="check-items dual"
-                  v-else-if="
-                    msg.sender_id === $parent.currentUserId && msg.created_at
-                  "
-                >
-                  <i
-                    class="fa fa-check"
-                    v-if="msg.is_read"
-                    :class="{ 'text-blue': msg.is_read }"
-                  ></i>
-                  <i class="fa fa-check text-blue"></i>
-                </span>
-              </span>
+              </div>
+              <button
+                v-if="msg.is_sharable"
+                @click.prevent="shareContetn(msg.id)"
+                class="forward-item"
+              >
+                <i class="fa fa-share"> </i>
+              </button>
             </div>
-          </div>
-        </li>
-        <li
-          v-if="$parent.isNoticeActive && !$parent.isChatMessagesLoaded"
-          class="messenger-notice"
-        >
-          <p class="notice-title">
-            اطلاعات هویتی این کاربر
-            <span class="red-text" v-if="!$parent.isCurrentUserVerified"
-              >مانند اطلاعات هویتی شما</span
+            <button
+              v-if="msg.is_sharable"
+              @click.prevent="shareContetn(msg.id)"
+              class="share-button"
             >
-            نزد باسکول احراز <span class="red-text"> نشده </span> است.
-          </p>
-          <div class="notice-actions">
-            <button @click="$parent.setNoticeCookie()">متوجه شدم</button>
-            <router-link tag="button" :to="{ name: 'verificationInfo' }">
-              <i class="fa fa-info"></i>
-              اطلاعات بیشتر
-            </router-link>
+              ارسال برای دوستان <i class="fa fa-share"></i>
+            </button>
           </div>
         </li>
       </ul>
-      <div
-        class="loading-container"
-        v-if="$parent.isChatMessagesLoaded && $parent.isFirstMessageLoading"
-      >
+      <div class="loading-container" v-if="isChannelContentLoaded">
         <div class="image-wrapper">
           <div class="lds-ring">
             <div></div>
@@ -789,17 +817,27 @@
 </template>
 
 <script>
+import MessageImage from "./messege-image";
+import { eventBus } from "../../../router/router";
 export default {
+  components: {
+    MessageImage,
+  },
   data() {
     return {
-      isVoiceRecord: false,
-      isChat: false,
+      isImageLoad: false,
+      loadMoreContacts: false,
+      channelMessages: "",
+      channelMessagesTotalCount: 0,
+      loadPagesCount: 1,
+      listHeight: 0,
+      isChannelContentLoaded: false,
     };
   },
   methods: {
     init: function () {
       this.hideCollapses();
-      this.getChannelPosts();
+      this.getChannelPosts(1);
     },
 
     hideCollapses: function () {
@@ -819,27 +857,118 @@ export default {
         /* bootstrap collapse js adds "in" class to your collapsible element*/
       });
     },
-    getChannelPosts() {},
+    getChannelPosts() {
+      this.isChannelContentLoaded = true;
+      axios
+        .post("/get_channel_contents", {
+          page: this.loadPagesCount,
+        })
+        .then((response) => {
+          this.channelMessagesTotalCount = response.data.total;
+          let data = response.data.contents.reverse();
+          // let itemDate = "";
+          // data = data.map((item) => {
+          //   let date = item.created_at.substr(0, 10);
+          //   item.isDateShow = true;
+          //   if (itemDate == date) {
+          //     item.isDateShow = false;
+          //   }
+          //   itemDate = date;
+          //   return item;
+          // });
+          this.channelMessages = data;
+          this.$parent.scrollToEnd(0);
+          this.listHeight = $(".chat-page ul").height();
+          this.activeLoadMore();
+          this.isChannelContentLoaded = false;
+        });
+    },
+    loadMoreChannelPosts() {
+      this.loadMoreContacts = true;
+      this.loadPagesCount += 1;
+      axios
+        .post("/get_channel_contents", {
+          page: this.loadPagesCount,
+        })
+        .then((response) => {
+          let data = response.data.contents;
+          if (data.length > 0) {
+            let itemDate = "";
+            data = data.map((item) => {
+              // let date = item.created_at.substr(0, 10);
+              // item.isDateShow = true;
+              // if (itemDate == date) {
+              //   item.isDateShow = false;
+              // }
+              // itemDate = date;
+              this.channelMessages.unshift(item);
+            });
+            this.stopScrollPostition();
+          }
+        });
+    },
+    activeLoadMore() {
+      let chatPageElementList = $(".chat-page ul");
+      chatPageElementList.scroll((_) => {
+        if (chatPageElementList.scrollTop() <= 20 && !this.loadMoreContacts) {
+          if (this.channelMessagesTotalCount > this.channelMessages.length) {
+            this.loadMoreChannelPosts();
+          }
+        }
+      });
+
+      // loadMoreContacts
+    },
+    stopScrollPostition() {
+      let chatPageElementList = $(".chat-page ul");
+      let chatElementHeight = chatPageElementList.height();
+      chatPageElementList.scrollTop(this.listHeight - chatElementHeight);
+      this.listHeight = chatElementHeight;
+      this.loadMoreContacts = false;
+    },
+    shareContetn(contentId) {
+      if (this.isDeviceMobile()) {
+        let baseUrl = getBase();
+        var linkElement = document.createElement("a");
+        var Message = baseUrl + "public-channel/" + contentId;
+        var messageToWhatsApp = encodeURIComponent(Message);
+        var url = "whatsapp://send?text=" + messageToWhatsApp;
+
+        linkElement.setAttribute("href", url);
+        linkElement.setAttribute("data-action", "share/whatsapp/share");
+
+        document.body.appendChild(linkElement);
+
+        linkElement.click();
+
+        document.body.removeChild(linkElement);
+      } else {
+        this.activeShareModal(contentId);
+      }
+    },
+    isDeviceMobile: function () {
+      if (
+        navigator.userAgent.match(/Android/i) ||
+        navigator.userAgent.match(/webOS/i) ||
+        navigator.userAgent.match(/iPhone/i) ||
+        navigator.userAgent.match(/iPad/i) ||
+        navigator.userAgent.match(/iPod/i) ||
+        navigator.userAgent.match(/BlackBerry/i) ||
+        navigator.userAgent.match(/Windows Phone/i)
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    activeShareModal: function (contentId) {
+      let baseUrl = getBase();
+      let url = baseUrl + "public-channel/" + contentId;
+      eventBus.$emit("shareModalUrl", url);
+    },
   },
   mounted: function () {
     this.init();
-  },
-  watch: {
-    "$parent.msgToSend"(value) {
-      if (value) {
-        this.isChat = true;
-      } else {
-        this.isChat = false;
-      }
-    },
-    "$parent.isGuideActive"(value) {
-      if (value) {
-        setTimeout(() => {
-          this.$parent.setUserGuideCookie();
-          $(".overlay-bg-guide").fadeOut();
-        }, 1000);
-      }
-    },
   },
 };
 </script>

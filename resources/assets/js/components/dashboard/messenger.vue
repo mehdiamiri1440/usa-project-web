@@ -311,7 +311,11 @@
   >
     <div
       class="col-xs-12 contact-wrapper pull-right col-sm-4 col-lg-3"
-      v-bind:class="{ hidden_element: selectedContact }"
+      v-bind:class="[
+        {
+          hidden_element: selectedContact || isChanleActive,
+        },
+      ]"
     >
       <div class="row">
         <router-view name="messenger-list" />
@@ -320,11 +324,12 @@
 
     <div
       class="col-xs-12 pull-right message-wrapper col-sm-8"
-      :class="{
-        hidden_element: !selectedContact,
-        'col-lg-6': !isChanleActive,
-        'col-lg-9': isChanleActive,
-      }"
+      v-bind:class="[
+        {
+          'col-lg-6': !isChanleActive,
+          'col-lg-9': isChanleActive,
+        },
+      ]"
       v-if="selectedContact || isChanleActive"
     >
       <main-channel-wrapper v-if="isChanleActive" />
@@ -332,7 +337,7 @@
     </div>
     <div
       class="col-xs-12 default-message-wrapper hidden-xs col-sm-8 col-lg-9"
-      v-if="!selectedContact && isCurrentStep == 0"
+      v-if="!selectedContact && isCurrentStep == 0 && !isChanleActive"
     >
       <div v-if="userType" class="default-main-contents seller-buyAd-picture">
         <p class="red-text">
@@ -463,11 +468,11 @@ export default {
         this.selectedContact = "";
         this.selectedContact = contact;
         this.chatMessages = "";
+        this.userDataLoader = true;
       }
       var self = this;
 
       // enable loader for user info component
-      self.userDataLoader = true;
 
       self.isChatLoadeMore = false;
       self.handleBackBtnClickOnDevices();
@@ -852,7 +857,6 @@ export default {
         });
 
       eventBus.$on("contanctMessageReceived", ($event) => {
-        // console.log("contact message");
         if (self.selectedContact) {
           self.appendMessageToChatHistory(self.selectedContact);
         } else if (self.isComponentActive) {

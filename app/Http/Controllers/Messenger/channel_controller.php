@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Models\channel_content;
 use App\Models\myuser;
 use DB;
+use App\Http\Library\date_convertor;
+use App\Jobs\Channel\PushPoroductIntoPublicChannel;
 
 class channel_controller extends Controller
 {
@@ -73,6 +75,8 @@ class channel_controller extends Controller
 
         $channel_content_record->save();
 
+        PushPoroductIntoPublicChannel::dispatch();
+
         return redirect()->route('admin_panel_channel_content_list');
     }
 
@@ -118,11 +122,7 @@ class channel_controller extends Controller
                                             ->from('products')
                                             ->where('myuser_id',$user_record->id);
 
-                            })->orWhereNull('sub_category_id');
-
-                            return $q;
-                        })->where(function($q) use($user_record){
-                            $q = $q->whereIn('sub_category_id',function($query) use($user_record){
+                            })->orWhereIn('sub_category_id',function($query) use($user_record){
 
                                 $query->select(DB::raw("distinct(category_id) as id"))
                                             ->from('buy_ads')
@@ -180,23 +180,14 @@ class channel_controller extends Controller
                         })
                         ->whereNull('deleted_at')
                         ->select($this->required_channel_content_fields)
-                        ->orderBy('created_at','asc')
-                        ->paginate(10);
+                        ->orderBy('created_at','desc')
+                        ->paginate(20);
 
+        $total = $contents->total();
         $contents = $contents->getCollection();
         $contents->each(function($content){
             if($content->product_id){
                 $content->is_product = true;
-
-                $product = DB::table('products')
-                                ->join('categories','categories.id','=','products.category_id')
-                                ->join('product_media','products.id','=','product_media.product_id')
-                                ->where('products.id',$content->product_id)
-                                ->select('categories.category_name','product_name','stock','file_path')
-                                ->first();
-
-                $content->text = $product->category_name . ' | ' .$product->product_name . "\n" . "موجودی :‌ " . $product->stock . ' کیلوگرم ';
-                $content->file_path = $product->file_path;
             }
             else{
                 $content->is_product = false;
@@ -206,7 +197,8 @@ class channel_controller extends Controller
 
         return response()->json([
             'status' => true,
-            'contents' => $contents
+            'contents' => $contents,
+            'total' => $total
         ],200);
         
     }
@@ -270,6 +262,9 @@ class channel_controller extends Controller
         else{
             return abort(404);
         }
+
+        $date_convertor_object = new date_convertor();
+        $content->created_at = $date_convertor_object->get_persian_date($content->created_at);
 
         return view('layout.channel.messenger',[
             'content' => $content
