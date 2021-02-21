@@ -95,12 +95,14 @@ class channel_controller extends Controller
         $sending_contacts_count = DB::table('messages')
                     ->select(DB::raw("count(distinct(receiver_id)) as cnt"))
                     ->where('sender_id',$user_record->id)
-                    ->get()->first()->cnt;
+                    ->get()
+                    ->first()->cnt;
 
         $receiving_contacts_count = DB::table('messages')
-                        ->select(DB::raw("count(distinct(sender_id)) as cnt"))
-                        ->where('receiver_id',$user_record->id)
-                        ->get()->first()->cnt;
+                    ->select(DB::raw("count(distinct(sender_id)) as cnt"))
+                    ->where('receiver_id',$user_record->id)
+                    ->get()
+                    ->first()->cnt;
 
         $total_contacts_count = $sending_contacts_count + $receiving_contacts_count;
 
@@ -195,6 +197,10 @@ class channel_controller extends Controller
             }
         });
 
+        if($contents->currentPage() === 1){
+            $this->update_user_last_channel_opening_date($user_record->id);
+        }
+
         return response()->json([
             'status' => true,
             'contents' => $contents,
@@ -283,6 +289,130 @@ class channel_controller extends Controller
         else{
             return false;
         }
+    }
+
+    public function get_channel_info_for_this_user($user_record)
+    {
+        $sending_contacts_count = DB::table('messages')
+                    ->select(DB::raw("count(distinct(receiver_id)) as cnt"))
+                    ->where('sender_id',$user_record->id)
+                    ->get()->first()->cnt;
+
+        $receiving_contacts_count = DB::table('messages')
+                        ->select(DB::raw("count(distinct(sender_id)) as cnt"))
+                        ->where('receiver_id',$user_record->id)
+                        ->get()->first()->cnt;
+
+        $total_contacts_count = $sending_contacts_count + $receiving_contacts_count;
+
+        $last_channel_opening_date = $user_record->last_channel_opening_date ?? $user_record->created_at;
+
+        $channel_contents = DB::table('channel_contents')
+                                    ->where(function($q) use($user_record){
+                                        $q = $q->where('is_for_seller',$user_record->is_seller)
+                                            ->orWhereNull('is_for_seller');
+
+                                        return $q;
+                                    })->where(function($q) use($user_record){
+                                        $q = $q->where('is_for_buyer',$user_record->is_buyer)
+                                            ->orWhereNull('is_for_buyer');
+
+                                        return $q;
+                                    })->where(function($q) use($user_record){
+                                        $q = $q->whereIn('sub_category_id',function($query) use($user_record){
+
+                                            $query->select(DB::raw("distinct(category_id) as id"))
+                                                        ->from('products')
+                                                        ->where('myuser_id',$user_record->id);
+
+                                        })->orWhereIn('sub_category_id',function($query) use($user_record){
+
+                                            $query->select(DB::raw("distinct(category_id) as id"))
+                                                        ->from('buy_ads')
+                                                        ->where('myuser_id',$user_record->id);
+
+                                        })->orWhereNull('sub_category_id');
+
+                                        return $q;
+                                    })
+                                    ->where(function($q) use($user_record){
+                                        $q = $q->where('is_for_verified',$user_record->is_verified)
+                                            ->orWhereNull('is_for_verified');
+
+                                        return $q;
+                                    })->where(function($q) use($user_record){
+                                        $q = $q->where('active_package_type',$user_record->active_pakage_type)
+                                            ->orWhereNull('active_package_type');
+
+                                        return $q;
+                                    })->where(function($q) use($user_record){
+                                        $q = $q->where('last_login_client',$user_record->last_login_client)
+                                            ->orWhereNull('last_login_client');
+
+                                        return $q;
+                                    })->where(function($q) use($user_record){
+                                        $q = $q->where('myuser_id',$user_record->id)
+                                            ->orWhereNull('myuser_id');
+
+                                        return $q;
+                                    })->where(function($q) use($user_record){
+                                        $q = $q->where('register_date_from','<=',$user_record->created_at)
+                                            ->orWhereNull('register_date_from');
+
+                                        return $q;
+                                    })->where(function($q) use($user_record){
+                                        $q = $q->where('register_date_until','>=',$user_record->created_at)
+                                            ->orWhereNull('register_date_until');
+
+                                        return $q;
+                                    })->where(function($q) use($user_record){
+                                        $q = $q->where('last_login_date_from','<=',$user_record->created_at)
+                                            ->orWhereNull('last_login_date_from');
+
+                                        return $q;
+                                    })->where(function($q) use($user_record){
+                                        $q = $q->where('last_login_date_until','>=',$user_record->created_at)
+                                            ->orWhereNull('last_login_date_until');
+
+                                        return $q;
+                                    })->where(function($q) use($total_contacts_count){
+                                        $q = $q->where('min_contacts_count','<=',$total_contacts_count)
+                                            ->orWhereNull('min_contacts_count');
+
+                                        return $q;
+                                    })
+                                    ->whereNull('deleted_at')
+                                    ->where('created_at','>' ,$last_channel_opening_date)
+                                    ->select('title','created_at')
+                                    ->orderBy('created_at','desc')
+                                    ->get();
+
+        if($channel_contents){
+            $channel_info = [
+                'unread_contents' => $channel_contents->count(),
+                'last_content_title' => $channel_contents->first()->title,
+                'last_content_date' => $channel_contents->first()->created_at,
+            ];
+        }
+        else{
+            $channel_info = [
+                'unread_contents' => 0,
+                'last_content_title' => null,
+                'last_content_date' => null,
+            ];
+        }
+
+        return $channel_info;
+        
+    }
+
+    protected function update_user_last_channel_opening_date($user_id)
+    {
+        DB::table('myusers')
+                ->where('id',$user_id)
+                ->update([
+                    'last_channel_opening_date' => Carbon::now()
+                ]);
     }
 
 

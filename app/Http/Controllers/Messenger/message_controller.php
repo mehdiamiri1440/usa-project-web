@@ -11,6 +11,7 @@ use App\Jobs\SendNewMessageNotification;
 use Carbon\Carbon;
 use App\Models\daily_sms_blacklist;
 use App\Models\buyAd;
+use App\Http\Controllers\Messenger\channel_controller;
 
 class message_controller extends Controller
 {
@@ -219,11 +220,15 @@ class message_controller extends Controller
             });
         }
 
+        $channel_controller_object = new channel_controller();
+        $channel_info = $channel_controller_object->get_channel_info_for_this_user($user_record);
+
         return response()->json([
             'status' => true,
             'contact_list' => $contact_list,
             'user_id' => $user_id,
-            'is_verified' => $user_record->is_verified
+            'is_verified' => $user_record->is_verified,
+            'channel_info' => $channel_info
         ], 200);
     }
 
