@@ -392,7 +392,7 @@ class channel_controller extends Controller
                                     ->orderBy('created_at','desc')
                                     ->get();
 
-        if($channel_contents){
+        if(count($channel_contents) > 0){
             $channel_info = [
                 'unread_contents' => $channel_contents->count(),
                 'last_content_title' => $channel_contents->first()->title,
