@@ -165,8 +165,7 @@ class payment_controller extends Controller
         } 
         catch (\Exception $e)
         {
-            return redirect('buskool://register-product-successfully');
-            // return redirect('buskool://pricing');
+            return redirect('buskool://pricing');
         }
     }
     
