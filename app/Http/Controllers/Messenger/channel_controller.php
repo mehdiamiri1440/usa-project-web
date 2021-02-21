@@ -9,6 +9,7 @@ use App\Models\myuser;
 use DB;
 use App\Http\Library\date_convertor;
 use App\Jobs\Channel\PushPoroductIntoPublicChannel;
+use Carbon\Carbon;
 
 class channel_controller extends Controller
 {
@@ -186,7 +187,13 @@ class channel_controller extends Controller
                         ->paginate(20);
 
         $total = $contents->total();
+
+        if($contents->currentPage() === 1){
+            $this->update_user_last_channel_opening_date($user_record->id);
+        }
+
         $contents = $contents->getCollection();
+
         $contents->each(function($content){
             if($content->product_id){
                 $content->is_product = true;
@@ -197,9 +204,7 @@ class channel_controller extends Controller
             }
         });
 
-        if($contents->currentPage() === 1){
-            $this->update_user_last_channel_opening_date($user_record->id);
-        }
+        
 
         return response()->json([
             'status' => true,
