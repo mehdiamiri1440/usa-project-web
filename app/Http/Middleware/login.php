@@ -73,8 +73,14 @@ class login
                 ],401);
             }
 
-            return redirect('/login');
+            if($request->hasHeader('Authorization')){
+                return response()->json([
+                    'status' => false,
+                    'refresh' => false
+                ],401);
+            }
 
+            return redirect('/login');
         }
     }
 
