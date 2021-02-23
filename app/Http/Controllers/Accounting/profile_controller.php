@@ -708,4 +708,27 @@ class profile_controller extends Controller
 
         return round(($seen_by_user_contacts_count / $total_contacts_count) * 100, 2);
     }
+
+    public function get_user_shared_profile_info($user_name)
+    {
+        $user_name = strip_tags($user_name);
+
+        $profile_info = DB::table('myusers')
+                                ->join('profiles','profiles.myuser_id','=','myusers.id')
+                                ->where('myusers.user_name',$user_name)
+                                ->where('profiles.confirmed',true)
+                                ->orderBy('profiles.created_at','desc')
+                                ->select('myusers.first_name','myusers.last_name','profiles.profile_photo','myusers.user_name')
+                                ->get()
+                                ->last();
+
+        if($profile_info){
+            return view('layout.shared-profile',[
+                'profile' => $profile_info
+            ]);
+        }
+
+        return abort(404);
+        
+    }
 }

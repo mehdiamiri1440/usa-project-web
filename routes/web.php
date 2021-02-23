@@ -1005,9 +1005,9 @@ Route::get('/sitemap.xml', [
     'as' => 'get_sitemap',
 ]);
 
-Route::get('/shared-profile', function () {
-    return view('layout.shared-profile');
-})->name('sharedProfile');
+Route::get('/shared-profile/{username}',[
+    'uses' => 'Accounting\profile_controller@get_user_shared_profile_info'
+])->name('sharedProfile')->where("username","[A-Za-z0-9_]+$");
 
 
 //-----------------------------------------------------
