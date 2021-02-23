@@ -18,69 +18,107 @@ class login
      */
     public function handle($request, Closure $next)
     {
-        try{
-            if(! $request->session()->has('user_id'))
-            {
-                $user_phone = $request->cookie('user_phone');
-                $user_hashed_password = $request->cookie('user_password');
+        
+        if($request->hasHeader('Authorization')){
+            try{
+                $user = JWTAuth::parseToken()->authenticate();
 
-                if($user_phone && $user_hashed_password){
-                    $status = $this->set_user_session($user_phone,$user_hashed_password);
-
-                    if($status){
-                        return $next($request);
-                    }
-
-                    else  return redirect('/login');
-
-                }
-                else if($user = JWTAuth::parseToken()->authenticate()){
-                     $status = $this->set_user_session($user->phone,$user->password);
+                if(! $request->session()->has('user_id')){
+                    $status = $this->set_user_session($user->phone,$user->password);
 
                     if($status){
                         return $next($request);
                     }
-
-                    else return redirect('/login');
-                }
-                else {
-                    if($request->hasHeader('Authorization')){
+                    else{
                         return response()->json([
                             'status' => false,
-                            'refresh' => true
+                            'redirect_to_login' => true,
+                            'msg' => 'token is not valid bla bla bla'
                         ],401);
                     }
-
-                    return redirect('/login');
                 }
-                
 
+                return $next($request);
             }
-            else return $next($request);
+            catch(\Exception $e){
+                if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenInvalidException){
+                    return response()->json([
+                        'status' => false,
+                        'redirect_to_login' => true,
+                        'msg' => 'token is not valid'
+                    ],401);
+                }else if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenExpiredException){
+                    // If the token is expired, then it will be refreshed and added to the headers
+                    try
+                    {
+                        $refreshed_token = JWTAuth::refresh(JWTAuth::getToken());
+                        
+                        
+                        return response()->json([
+                            'status' => false,
+                            'refresh' => true,
+                            'token' => $refreshed_token
+                        ],401);
+
+                    }catch (JWTException $e){
+                        if($e instanceof \Tymon\JWTAuth\Exceptions\TokenBlacklistedException){
+                            return response()->json([
+                                'status' => false,
+                                'redirect_to_login' => true,
+                                'msg' => $e->getMessage()
+                            ],401);
+                        }
+
+                        return response()->json([
+                            'status' => false,
+                            'redirect_to_login' => true,
+                            'msg' => 'token can not be refreshed',
+                        ],401);
+                    }
+                }
+                else if($e instanceof \Tymon\JWTAuth\Exceptions\TokenBlacklistedException){
+                    return response()->json([
+                        'status' => false,
+                        'redirect_to_login' => true,
+                        'msg' => $e->getMessage()
+                    ],401);
+                }
+                else{
+                    response()->json([
+                        'status' => false,
+                        'redirect_to_login' => true,
+                        'msg' => 'token not found!'
+                    ],401);
+                }
+            }
         }
-        catch(\Exception $e){
-            if($e instanceof \Tymon\JWTAuth\Exceptions\TokenExpiredException){
-                return response()->json([
-                    'status' => false,
-                    'refresh' => true
-                ],401);
-            }
-            else if($e instanceof \Tymon\JWTAuth\Exceptions\TokenInvalidException){
-                return response()->json([
-                    'status' => false,
-                    'refresh' => false,
-                    'msg' => 'token is not valid'
-                ],401);
-            }
+        else{
+            try{
+                if(! $request->session()->has('user_id'))
+                {
+                    $user_phone = $request->cookie('user_phone');
+                    $user_hashed_password = $request->cookie('user_password');
 
-            if($request->hasHeader('Authorization')){
-                return response()->json([
-                    'status' => false,
-                    'refresh' => false
-                ],401);
-            }
+                    if($user_phone && $user_hashed_password){
+                        $status = $this->set_user_session($user_phone,$user_hashed_password);
 
-            return redirect('/login');
+                        if($status){
+                            return $next($request);
+                        }
+
+                        else  return redirect('/login');
+
+                    }
+                    else {
+                        return redirect('/login');
+                    } 
+
+                }
+                else return $next($request);
+            }
+            catch(\Exception $e){
+                return redirect('/login');
+            }
         }
     }
 
@@ -116,6 +154,7 @@ class login
         return true;
         }
         else return false;
-	}
+    }
 
 }
+
