@@ -64,6 +64,8 @@
     border-radius: 4px;
     border: 1px solid #ddd;
     cursor: pointer;
+    width: 100%;
+margin: 7px auto;
   }
   
   button:hover,
@@ -94,10 +96,6 @@
   }
   
   .targets {
-    display: grid;
-    grid-template-rows: 1fr 1fr;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 24px;
     margin-bottom: 24px;
   }
   

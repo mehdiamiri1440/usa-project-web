@@ -90,17 +90,18 @@
   function shareLink(social) {
     let url = "";
     let shareModalUrl = generateLinkUrl();
+     shareModalUrl = encodeURIComponent(shareModalUrl);
     let linkElement = document.createElement("a");
 
     switch (social) {
       case 0:
-        url = "https://wa.me/?text=" + encodeURIComponent(shareModalUrl);
+        url = "https://wa.me/?text=" + shareModalUrl;
         linkElement.setAttribute("data-action", "share/whatsapp/share");
         break;
       case 1:
         url =
           "https://t.me/share/url?url=" +
-          encodeURIComponent(shareModalUrl);
+          shareModalUrl;
         break;
       case 2:
         url =
@@ -108,9 +109,9 @@
           shareModalUrl +
           "&title=باسکول&source=LinkedIn";
         break;
-      case 3:
-        url = "mailto:" + shareModalUrl;
-        break;
+        case 3:
+          url = "mailto:?body=" + shareModalUrl;
+          break;
     }
 
     linkElement.setAttribute("href", url);

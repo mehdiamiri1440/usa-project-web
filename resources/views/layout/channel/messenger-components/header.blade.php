@@ -99,12 +99,12 @@
                       <span>واتس آپ</span>
                     </a>
     
-                    <a class="button" onclick="shareLink(2)">
+                    {{-- <a class="button" onclick="shareLink(2)">
                       <svg>
                         <use href="#linkedin"></use>
                       </svg>
                       <span>لینک دین</span>
-                    </a>
+                    </a> --}}
     
                     <a class="button" onclick="shareLink(3)">
                       <svg>

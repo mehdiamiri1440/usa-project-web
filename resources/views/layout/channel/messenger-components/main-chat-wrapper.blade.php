@@ -97,7 +97,7 @@
    
     </ul>
     <a href="https://play.google.com/store/apps/details?id=com.buskool" id="download-app" >
-        دانلود اپلیکیشن
+        دانلود اپلیکیشن باسکول
         <i class="fa fa-download"></i>
     </a>
 </div>
