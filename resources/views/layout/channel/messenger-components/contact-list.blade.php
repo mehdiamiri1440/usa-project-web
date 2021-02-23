@@ -1,5 +1,5 @@
 <div class="contact-list">
-    <h1 class="contact-list-header">
+    <h1 class="contact-list-header hidden-xs hidden-sm">
         {{$content->title}}
     </h1>
     <div class="contact-list-main">

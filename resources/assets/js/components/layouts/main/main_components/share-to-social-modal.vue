@@ -64,6 +64,8 @@ button,
   border-radius: 4px;
   border: 1px solid #ddd;
   cursor: pointer;
+  width: 100%;
+  margin: 5px auto;
 }
 
 button:hover,
@@ -94,10 +96,10 @@ header {
 }
 
 .targets {
-  display: grid;
+  /* display: grid;
   grid-template-rows: 1fr 1fr;
   grid-template-columns: 1fr 1fr;
-  grid-gap: 24px;
+  grid-gap: 24px; */
   margin-bottom: 24px;
 }
 
@@ -127,7 +129,7 @@ header {
   border-radius: 2px;
   padding: 16px;
   position: fixed;
-  z-index: 1;
+  z-index: 1090;
   left: 50%;
   bottom: 30px;
   font-size: 17px;
@@ -271,12 +273,12 @@ header {
                   <span>واتس آپ</span>
                 </a>
 
-                <a class="button" @click.prevent="shareLink(2)">
+                <!-- <a class="button" @click.prevent="shareLink(2)">
                   <svg>
                     <use href="#linkedin"></use>
                   </svg>
                   <span>لینک دین</span>
-                </a>
+                </a> -->
 
                 <a class="button" @click.prevent="shareLink(3)">
                   <svg>
@@ -414,25 +416,23 @@ export default {
     shareLink(social) {
       let url = "";
       var linkElement = document.createElement("a");
-
+      let shareModalUrl = encodeURIComponent(this.shareModalUrl);
       switch (social) {
         case 0:
-          url = "https://wa.me/?text=" + encodeURIComponent(this.shareModalUrl);
+          url = "https://wa.me/?text=" + shareModalUrl;
           linkElement.setAttribute("data-action", "share/whatsapp/share");
           break;
         case 1:
-          url =
-            "https://t.me/share/url?url=" +
-            encodeURIComponent(this.shareModalUrl);
+          url = "https://t.me/share/url?url=" + shareModalUrl;
           break;
         case 2:
           url =
             "https://www.linkedin.com/shareArticle?mini=true&url=" +
-            this.shareModalUrl +
+            shareModalUrl +
             "&title=باسکول&source=LinkedIn";
           break;
         case 3:
-          url = "mailto:" + this.shareModalUrl;
+          url = "mailto:?body=" + shareModalUrl;
           break;
       }
 

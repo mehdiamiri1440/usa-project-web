@@ -89,7 +89,7 @@
   opacity: 0.06;
   position: absolute;
   z-index: 1;
-  left: 0;
+  left: 15px;
   right: 0;
   top: 50px;
   bottom: 0;
@@ -117,16 +117,6 @@
 
 .message-wrapper .message-contact-title-img:hover {
   cursor: pointer;
-}
-
-.message-wrapper .message-contact-title img {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  height: 100%;
-  width: initial;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
 }
 
 .message-wrapper .message-contact-title a {
@@ -193,11 +183,11 @@
 
   right: 0;
 
-  bottom: 0;
+  bottom: 50px;
 
   top: 50px;
 
-  /* transition: 100ms; */
+  transition: 100ms;
 }
 
 .message-wrapper .chat-page ul li {
@@ -239,9 +229,11 @@
   max-width: 455px;
   float: left;
   position: relative;
+  margin-top: 20px;
+  width: 100%;
 }
 .message-content-wrapper {
-  padding: 5px 10px;
+  padding: 5px;
   display: block;
   min-width: 200px;
 }
@@ -287,39 +279,80 @@
 
 .message-wrapper .chat-page span.message-chat-date {
   text-align: right;
-  font-size: 11px;
+  font-size: 13px;
   padding-top: 3px;
   width: 100%;
   direction: ltr;
   display: block;
   color: #b2b2b2;
 }
+.product-content-wrapper {
+  float: right;
+  width: calc(100% - 130px);
+  padding: 10px 15px 10px 0;
+}
+.message-wrapper .chat-page .product-wrapper span.message-chat-date {
+  float: right;
+  width: 100%;
+  border-top: 1px solid #eee;
+  margin-top: 10px;
+  padding: 5px 0;
+}
+
+.product-title {
+  font-weight: bold;
+  color: #474747;
+  padding-top: 3px;
+  font-size: 17px;
+}
+
+.product-amount i {
+  position: relative;
+  top: 2px;
+}
+
+.product-amount {
+  padding-top: 10px;
+  font-size: 15px;
+}
 
 .send-message-form {
   overflow: hidden;
-  padding: 10px 15px;
+  padding: 0;
   position: absolute;
   bottom: 0;
   width: 100%;
-  background: #f0f0f0;
 }
 
-.message-input {
-  float: left;
-  width: calc(100% - 50px);
-}
-
-.send-message-form .message-input input {
-  border-radius: 50px;
-  background: #fff;
+.send-message-form > button {
+  padding: 12px 10px 17px;
+  text-align: center;
+  width: 100%;
+  color: #fff;
   border: none;
-  padding: 7px 50px 8px 15px;
-  transition: 150ms;
+  border-top-color: currentcolor;
+  border-top-style: none;
+  border-top-width: medium;
+  border-radius: 0;
+  background: #4eb9fb;
+  position: relative;
+  z-index: 4;
+  font-size: 16px;
+  line-height: 1;
+  font-weight: 500;
 }
 
-.send-message-form .message-input input.padding-default {
-  transition: 150ms;
-  padding: 7px 15px 8px 15px;
+.send-message-form > button i {
+  font-size: 19px;
+  position: relative;
+  height: 18px;
+  line-height: 1;
+  top: 2px;
+  left: 5px;
+}
+
+.send-message-form > button:hover {
+  background: #1da1f2;
 }
 
 .capture-image {
@@ -329,47 +362,6 @@
   border: none;
   color: #919191;
   padding: 7px 15px 7px 10px;
-}
-
-.button-wrapper {
-  float: right;
-  line-height: 1.1;
-  position: relative;
-}
-
-.send-message-form .button-wrapper .item-wrapper {
-  width: 40px;
-  height: 40px;
-  background: linear-gradient(90deg, #00c569 0%, #21ad93 100%);
-  border-radius: 35px;
-}
-
-.send-message-form .button-wrapper .item-wrapper .send-message-button {
-  background: none;
-  border: none;
-  width: 40px;
-  height: 40px;
-  height: 40px;
-  position: absolute;
-  right: calc(50% - 21px);
-  padding: 7px 0 0;
-}
-
-.send-message-form .button-wrapper .voice-message-button {
-  position: absolute;
-  right: 0;
-  left: 0;
-  top: 0px;
-  background: none;
-  border: none;
-  font-size: 19px;
-  bottom: 0;
-  padding: 4px 13px 0;
-}
-
-.button-wrapper .send-message-button svg {
-  width: 19px;
-  height: 19px;
 }
 
 #chat-menu-items {
@@ -511,7 +503,6 @@ button.share-button {
   padding: 5px;
   font-size: 15px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.16);
-  margin-bottom: 10px;
 }
 
 button.share-button:hover {
@@ -525,12 +516,14 @@ button.share-button:hover {
   background: rgba(0, 0, 0, 0.4);
   width: 30px;
   height: 30px;
+  display: inline-block;
   border-radius: 50px;
   text-align: center;
-  padding-top: 5px;
   color: #fff;
   font-size: 15px;
   border: none;
+  padding: 0;
+  padding-top: 5px;
 }
 
 .forward-item:hover {
@@ -569,13 +562,12 @@ button.share-button:hover {
     position: relative;
     z-index: 5;
   }
+  .message-wrapper .chat-page ul li {
+    padding-right: 30px;
+  }
 }
 
 @media screen and (max-width: 767px) {
-  .message-contents {
-    margin-right: 25px;
-  }
-
   #chat-menu-items {
     left: 54px;
   }
@@ -651,6 +643,19 @@ button.share-button:hover {
 }
 
 @media screen and (max-width: 355px) {
+  .message-wrapper .chat-page ul li {
+    padding-right: 0;
+  }
+
+  .forward-item {
+    display: none;
+  }
+
+  .product-content-wrapper {
+    width: calc(100% - 80px);
+    padding: 5px 15px 0px 0;
+  }
+
   .message-wrapper .message-contact-title a {
     max-width: 154px;
   }
@@ -727,7 +732,38 @@ button.share-button:hover {
           </div> -->
           <div class="message-contents">
             <div class="message-item-wrapper message-receive">
-              <div class="message-content-wrapper">
+              <router-link
+                target="_blank"
+                :to="{ path: getProductUrl(msg) }"
+                class="message-content-wrapper product-wrapper"
+                v-if="msg.is_product"
+              >
+                <!-- :to="{ path: getProductUrl(msg) }" -->
+                <!-- content image -->
+                <message-image
+                  :img="msg.file_path"
+                  :base="$parent.str"
+                  :alt="msg.text"
+                  is-product="true"
+                />
+                <div class="product-content-wrapper">
+                  <p
+                    class="message-text product-title"
+                    v-text="getProductInfo(msg.text, true)"
+                  ></p>
+                  <p class="message-text gray-text product-amount">
+                    <i class="fa fa-box-open"></i>
+
+                    <span> {{ getProductInfo(msg.text, false) }}</span>
+                  </p>
+                </div>
+                <span class="message-chat-date">
+                  <span v-if="msg.created_at">{{
+                    msg.created_at | moment("jYYYY/jMM/jDD, HH:mm")
+                  }}</span>
+                </span>
+              </router-link>
+              <div class="message-content-wrapper" v-else>
                 <!-- content image -->
                 <message-image
                   :img="msg.file_path"
@@ -737,7 +773,7 @@ button.share-button:hover {
                 <span class="message-text" v-text="msg.text"></span>
                 <span class="message-chat-date">
                   <span v-if="msg.created_at">{{
-                    msg.created_at | moment("jYYYY/jMM/jDD HH:mm")
+                    msg.created_at | moment("jYYYY/jMM/jDD, HH:mm")
                   }}</span>
                 </span>
               </div>
@@ -770,8 +806,13 @@ button.share-button:hover {
           <!-- <span v-text="alt" class="lds-ring-alt"></span> -->
         </div>
       </div>
-      <!-- <div class="send-message-form">
-        <form @v-on:submit.prevent="$parent.sendMessage()">
+      <div class="send-message-form">
+        <button class="btn" @click.prevent="shareMyProfile()">
+          <i class="fa fa-address-card"> </i>
+
+          ارسال پروفایل تجاری شما به دوستان
+        </button>
+        <!-- <form @v-on:submit.prevent="$parent.sendMessage()">
           <div class="message-input">
             <input
               class="padding-default"
@@ -810,8 +851,8 @@ button.share-button:hover {
               </button>
             </div>
           </div>
-        </form>
-      </div> -->
+        </form> -->
+      </div>
     </div>
   </div>
 </template>
@@ -866,52 +907,37 @@ export default {
         .then((response) => {
           this.channelMessagesTotalCount = response.data.total;
           let data = response.data.contents.reverse();
-          // let itemDate = "";
-          // data = data.map((item) => {
-          //   let date = item.created_at.substr(0, 10);
-          //   item.isDateShow = true;
-          //   if (itemDate == date) {
-          //     item.isDateShow = false;
-          //   }
-          //   itemDate = date;
-          //   return item;
-          // });
           this.channelMessages = data;
           this.$parent.scrollToEnd(0);
-          this.listHeight = $(".chat-page ul").height();
-          this.activeLoadMore();
+          this.$nextTick(() => {
+            this.activeLoadMore();
+          });
           this.isChannelContentLoaded = false;
         });
     },
     loadMoreChannelPosts() {
-      this.loadMoreContacts = true;
       this.loadPagesCount += 1;
       axios
         .post("/get_channel_contents", {
           page: this.loadPagesCount,
         })
         .then((response) => {
-          let data = response.data.contents;
+          let data = response.data.contents.reverse();
           if (data.length > 0) {
-            let itemDate = "";
-            data = data.map((item) => {
-              // let date = item.created_at.substr(0, 10);
-              // item.isDateShow = true;
-              // if (itemDate == date) {
-              //   item.isDateShow = false;
-              // }
-              // itemDate = date;
-              this.channelMessages.unshift(item);
+            this.channelMessages.unshift(...data);
+            this.$nextTick(() => {
+              this.stopScrollPostition();
             });
-            this.stopScrollPostition();
           }
         });
     },
     activeLoadMore() {
       let chatPageElementList = $(".chat-page ul");
-      chatPageElementList.scroll((_) => {
-        if (chatPageElementList.scrollTop() <= 20 && !this.loadMoreContacts) {
+      this.listHeight = chatPageElementList.prop("scrollHeight");
+      chatPageElementList.scroll(() => {
+        if (chatPageElementList.scrollTop() == 0 && !this.loadMoreContacts) {
           if (this.channelMessagesTotalCount > this.channelMessages.length) {
+            this.loadMoreContacts = true;
             this.loadMoreChannelPosts();
           }
         }
@@ -921,8 +947,8 @@ export default {
     },
     stopScrollPostition() {
       let chatPageElementList = $(".chat-page ul");
-      let chatElementHeight = chatPageElementList.height();
-      chatPageElementList.scrollTop(this.listHeight - chatElementHeight);
+      let chatElementHeight = chatPageElementList.prop("scrollHeight");
+      chatPageElementList.scrollTop(chatElementHeight - this.listHeight);
       this.listHeight = chatElementHeight;
       this.loadMoreContacts = false;
     },
@@ -965,6 +991,48 @@ export default {
       let baseUrl = getBase();
       let url = baseUrl + "public-channel/" + contentId;
       eventBus.$emit("shareModalUrl", url);
+    },
+    getProductInfo(text, isTitle) {
+      let splitText = text.split("\n");
+      if (isTitle) {
+        return splitText[0];
+      } else {
+        return splitText[1];
+      }
+    },
+    getProductUrl(product) {
+      let productName = product.text.split("\n")[0].split("|");
+      return (
+        "/product-view/خرید-عمده-" +
+        productName[1].trim().replace(" ", "-") +
+        "/" +
+        productName[0].trim().replace(" ", "-") +
+        "/" +
+        product.product_id
+      );
+    },
+
+    shareMyProfile() {
+      let baseUrl = getBase();
+
+      if (this.isDeviceMobile()) {
+        var linkElement = document.createElement("a");
+        var Message = baseUrl + "shared-profile";
+        var messageToWhatsApp = encodeURIComponent(Message);
+        var url = "whatsapp://send?text=" + messageToWhatsApp;
+
+        linkElement.setAttribute("href", url);
+        linkElement.setAttribute("data-action", "share/whatsapp/share");
+
+        document.body.appendChild(linkElement);
+
+        linkElement.click();
+
+        document.body.removeChild(linkElement);
+      } else {
+        let url = baseUrl + "shared-profile";
+        eventBus.$emit("shareModalUrl", url);
+      }
     },
   },
   mounted: function () {

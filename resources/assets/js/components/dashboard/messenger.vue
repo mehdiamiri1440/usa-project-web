@@ -398,6 +398,7 @@ export default {
       ],
       isSearchingContact: false,
       contactList: [],
+      channelInfo: "",
       chatMessages: "",
       isNoticeActive: true,
       isGuideActive: false,
@@ -443,6 +444,7 @@ export default {
         })
         .then(function (response) {
           self.contactList = response.data.contact_list;
+          self.channelInfo = response.data.channel_info;
           self.currentUserId = response.data.user_id;
           self.isCurrentUserVerified = response.data.is_verified;
           self.isContactListLoaded = true;
@@ -491,16 +493,16 @@ export default {
         .then(function (response) {
           self.isNoticeActive = true;
           let data = response.data.messages;
-          let itemDate = "";
-          data = data.map((item) => {
-            let date = item.created_at.substr(0, 10);
-            item.isDateShow = true;
-            if (itemDate == date) {
-              item.isDateShow = false;
-            }
-            itemDate = date;
-            return item;
-          });
+          // let itemDate = "";
+          // data = data.map((item) => {
+          //   let date = item.created_at.substr(0, 10);
+          //   item.isDateShow = true;
+          //   if (itemDate == date) {
+          //     item.isDateShow = false;
+          //   }
+          //   itemDate = date;
+          //   return item;
+          // });
           self.chatMessages = data;
           if (!self.chatMessages.length) {
             self.isNoticeActive = false;

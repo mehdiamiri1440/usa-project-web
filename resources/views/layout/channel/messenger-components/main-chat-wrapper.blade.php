@@ -1,8 +1,13 @@
-<div class="main-chat-header">
+<div a class="main-chat-header">
     <div class="chat-user-image">
-        <img src="{{asset('assets/img/logo/512-buskool-logo.jpg')}}" alt="buskool">
+        <a href="/">
+            <img src="{{asset('assets/img/logo/512-buskool-logo.jpg')}}" alt="بازار باسکول">
+        </a>
+       
     </div>
-    <p>کانال رسمی باسکول <a
+    <p><a href="/">
+        کانال رسمی باسکول </a>
+        <a
         class="verified-user"
         data-container="body"
         data-toggle="popover"
@@ -12,6 +17,9 @@
         >
             <i class="fa fa-certificate"></i>
         </a></p>
+        <h1 class="second-title hiiden-md hidden-lg">
+            {{$content->title}}
+        </h1>
 </div>
 
 <div class="main-chat">
@@ -38,12 +46,13 @@
                         <!-- <span>580k <i class="fa fa-eye"></i></span> -->
                     </div>
                 @endif
-                <a href="{{'/public-channel/'. $content->id}}" class="forward-item">
+                <button class="forward-item forward-link">
                     <i class="fa fa-share"> </i>
-                </a>
+                </button>
             </div>
-            <button class="share-button">
-                اشتراک لینک <i class="fa fa-share"></i>
+            <button class="share-button forward-link" >
+                ارسال برای دوستان
+                <i class="fa fa-share"></i>
             </button>
         </div>
         </li>
@@ -87,4 +96,8 @@
     </li> --}}
    
     </ul>
+    <a href="https://play.google.com/store/apps/details?id=com.buskool" id="download-app" >
+        دانلود اپلیکیشن
+        <i class="fa fa-download"></i>
+    </a>
 </div>

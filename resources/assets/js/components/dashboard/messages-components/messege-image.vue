@@ -4,8 +4,26 @@
 <style scoped>
 .message-image {
   text-align: center;
-  min-height: 200px;
+  height: 210px;
   position: relative;
+  overflow: hidden;
+}
+.message-product-image {
+  width: 130px;
+  height: 100px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+  float: right;
+  background: #eee;
+}
+.message-product-image img {
+  width: initial;
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 .message-image .spinner-wrapper {
   position: relative;
@@ -17,17 +35,40 @@
   border-width: 0.35rem;
   color: #21ad93;
 }
+@media screen and (max-width: 420px) {
+  .message-image {
+    height: 150px;
+  }
+
+  .message-product-image {
+    width: 80px;
+    height: 80px;
+  }
+}
 </style>
 
 <template>
-  <div :class="{ 'message-image': !isProduct }" v-if="img">
-    <a
-      v-show="isImageLoad"
-      class="image-popup-no-margins"
-      :href="base + '/' + img"
-    >
-      <img :src="base + '/' + img" @load="ImageLoaded" :alt="alt" />
-    </a>
+  <div
+    :class="{ 'message-image': !isProduct, 'message-product-image': isProduct }"
+    v-if="img"
+  >
+    <div v-if="!isProduct">
+      <a
+        v-show="isImageLoad"
+        class="image-popup-no-margins"
+        :href="base + '/' + img"
+      >
+        <img :src="base + '/' + img" @load="ImageLoaded" :alt="alt" />
+      </a>
+    </div>
+    <div v-else>
+      <img
+        v-show="isImageLoad"
+        :src="base + '/' + img"
+        @load="ImageLoaded"
+        :alt="alt"
+      />
+    </div>
     <div class="spinner-wrapper">
       <div v-show="!isImageLoad" class="spinner-border">
         <span class="sr-only">Loading...</span>

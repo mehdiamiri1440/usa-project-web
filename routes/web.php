@@ -1005,6 +1005,10 @@ Route::get('/sitemap.xml', [
     'as' => 'get_sitemap',
 ]);
 
+Route::get('/shared-profile', function () {
+    return view('layout.shared-profile');
+})->name('sharedProfile');
+
 
 //-----------------------------------------------------
 //    in code bayad bad az har chizi ke any dare biad

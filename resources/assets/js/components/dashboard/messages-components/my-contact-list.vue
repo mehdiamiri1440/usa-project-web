@@ -88,7 +88,7 @@
   float: right;
   position: relative;
   font-size: 14px;
-  max-width: calc(100% - 84px);
+  max-width: calc(100% - 85px);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -466,7 +466,10 @@ i.fa-star {
             <div class="channel-image">
               <img src="../../../../img/logo/512-buskool-logo.jpg" />
             </div>
-            <div class="my-channel-name-wraopper">
+            <div
+              v-if="$parent.channelInfo.unread_contents == 0"
+              class="my-channel-name-wraopper"
+            >
               <span class="contact-name text-rtl"> کانال رسمی باسکول </span>
               <button
                 @click.prevent
@@ -482,6 +485,42 @@ i.fa-star {
               <p class="icon-wrapper">
                 <i class="fa fa-bullhorn"></i>
               </p>
+            </div>
+            <div v-else class="my-contact-info-wrapper">
+              <span class="contact-name text-rtl"> کانال رسمی باسکول </span>
+
+              <button
+                @click.prevent
+                class="verified-user"
+                data-container="body"
+                data-toggle="popover"
+                data-placement="bottom"
+                :data-content="$parent.verifiedUserContent"
+                title
+              >
+                <i class="fa fa-certificate"></i>
+              </button>
+              <p class="last-message-date">
+                {{
+                  $parent.channelInfo.last_content_date
+                    | moment("jYYYY/jMM/jDD")
+                }}
+              </p>
+            </div>
+
+            <div class="my-contact-info-wrapper">
+              <span
+                class="contact-last-message"
+                v-text="$parent.channelInfo.last_content_title"
+              ></span>
+
+              <div class="count-number-wrapper">
+                <p
+                  class="count-number"
+                  v-if="$parent.channelInfo.unread_contents !== 0"
+                  v-text="$parent.channelInfo.unread_contents"
+                ></p>
+              </div>
             </div>
           </a>
         </li>
@@ -593,6 +632,13 @@ export default {
   watch: {
     "$parent.contactList": function () {
       if (this.$parent.contactList) {
+        setTimeout(() => {
+          this.activeComponentTooltip();
+        }, 10);
+      }
+    },
+    "$parent.isChanleActive": function () {
+      if (this.$parent.isChanleActive) {
         setTimeout(() => {
           this.activeComponentTooltip();
         }, 10);

@@ -77,30 +77,53 @@ html,body,.messenger-wrapper{
 .header-wrapper{
     width: 100%;
     min-height: 100px;
-    background: #f6fbff;
+    background: #f8f9fa;
 
+}
+.logo-wrapper {
+    padding: 15px;
+}
+.logo-wrapper > a{
+    display: inline-block;
+    width: 140px;
 }
 
 .messenger-wrapper{
     background-color: #d5dbd8;
-    
+    position: relative;
 }
 
 .messenger{
     background-color: #fff;
     box-shadow: 0 1px 1px 0 rgba(0,0,0,.06),0 2px 5px 0 rgba(0,0,0,.2);
     position: absolute;
-    top: 30px;
+    top: -38px;
     left: 50%;
     transform: translatex(-50%);
-    bottom: 30px;
+    bottom: 140px;
 }
 
 .main-chat-header{
     float: right;
     width: 100%;
-    background: linear-gradient(-90deg,#21ad93,#4dc0bb);
-    padding: 8px 15px 7px;
+    background: #4dc0bb;
+    padding: 8px 15px 7px 0;
+}
+
+h1.second-title{
+    font-size: 13px;
+    color: rgba(255,255,255,.9);
+    float: right;
+    margin: 0;
+    margin-top: 6px;
+    margin-right: 10px;
+    max-width: 250px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    height: 14px;
+    overflow: hidden;
+    line-height: 1;
+    display: none;
 }
 
 .chat-user-image{
@@ -111,11 +134,15 @@ html,body,.messenger-wrapper{
     overflow: hidden;
 }
 
+.main-chat-header a:first-of-type{
+    color: #fff;
+}
+
 .main-chat-header > p{
     float: right;
     width: calc(100% - 45px);
     text-align: right;
-    padding: 6px 15px 0;
+    padding: 5px 15px 0;
     margin: 0 auto;
     color: #fff;
     font-size: 15px;
@@ -199,20 +226,12 @@ li .message-item-wrapper::after {
 
 .message-image{
     margin-bottom: 13px;
-    max-height: 350px;
-    min-height: 300px;
+    height: 210px;
     position: relative;
     overflow: hidden;
+    background: #eeee;
 }
 
-.message-image img{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    height: 100%;
-    width: initial;
-}
 
 .main-chat-bg-wrapper{
     background: url('../../img/whatsappbg.png') repeat;
@@ -252,9 +271,10 @@ li .message-item-wrapper::after {
     height: 30px;
     border-radius: 50px;
     text-align: center;
-    padding-top: 5px;
     color: #fff;
     font-size: 15px;
+    padding: 0;
+    border: none;
 }
 
 .forward-item:hover{
@@ -271,28 +291,31 @@ li .message-item-wrapper::after {
 .contact-list-main ul li > button{
     background: none;
     border: none;
-        border-bottom-color: currentcolor;
-        border-bottom-style: none;
-        border-bottom-width: medium;
     width: 100%;
     margin: 0;
     padding: 0;
     float: right;
     padding: 10px 15px;
     border-bottom: 1px solid #ededed;
+    border-radius: 0;
 }
+
 .contact-list-main ul li > button.active{
     background: #fafafa;
     border-left: 2px solid #00c569;
+
 }
 
 .contact-list-header{
     background: #f0f0f0;
-    padding: 17px 10px;
-    font-size: 16px;
+    padding: 0 10px;
+    font-size: 14px;
     font-weight: 400;
-    line-height: 1;
+    line-height: 1.618;
     margin: 0;
+    height: 50px;
+    display: flex;
+    align-items: center;
 }
 
 .user-image-list{
@@ -332,7 +355,7 @@ li .message-item-wrapper::after {
 
 .contact-list button > .content-wrapper{
     float: right;
-    padding-top: 13px;
+    padding-top: 1px;
     direction: ltr;
     text-align: left;
     width: calc(100% - 45px);
@@ -442,11 +465,16 @@ button.share-button{
     width: 100%;
     background: rgba(0,0,0,0.4);
     color: #fff;
-    padding: 5px;
+    padding: 9px;
     font-size: 15px;
     margin-top: 5px;
     box-shadow: 0 1px 3px rgba(0,0,0,.16);
     margin-bottom: 5px;
+}
+
+button.share-button i{
+    position: relative;
+    right: 4px;
 }
 
 button.share-button:hover{
@@ -480,19 +508,74 @@ button.share-button:hover{
     font-weight: 900;
 }
 
-@media screen and (max-width: 1199px){
-    .messenger{
-    width: 100%;
-    top: 0;
+#download-app{
+    display: none;
+    direction: ltr;
+    position: absolute;
     bottom: 0;
+    width: 100%;
+    left: 0;
+    z-index: 2;
+    background: #e84256;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 0;
+    border: none;
+    box-shadow: 0 -3px 10px rgba(0,0,0,0.12);
+    padding: 15px 0;
+    text-align: center;
+}
+
+#download-app i{
+    position: relative;
+    left: 7px;
+    top: -2px;
+}
+
+@media screen and (max-width: 1199px){
+    .logo-wrapper{
+        width: 100%;
+    }
+
+    .messenger{
+        width: 100%;
+        bottom: 0;
     }
 }
 
 @media screen and (max-width: 991px){
+    .header-wrapper{
+        display: none;
+    }
     .messenger{
-    width: 100%;
-    top: 0;
-    bottom: 0;
+        width: 100%;
+        top: 0;
+        bottom: 0;
+    }
+    .main-chat ul{
+        padding: 10px 6px 0;
+    }
+
+    h1.second-title{
+        display: block;
+    }
+
+    .main-chat-header > p{
+        float: right;
+        width: calc(100% - 45px);
+        padding: 0 10px;
+        margin: 0 auto;
+        color: #fff;
+        font-size: 14px;
+        font-weight: 500;
+        max-width: initial;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        height: 21px;
+        overflow: hidden;
+        line-height: 1;
+        margin-top: -6px;
     }
 }
 
@@ -501,4 +584,12 @@ button.share-button:hover{
         min-width: 200px;
     margin-right: 40px;
     }
+   
+}
+
+@media screen and (max-width: 450px){
+    .message-image{
+        height: 150px;
+    }
+   
 }
