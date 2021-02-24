@@ -720,7 +720,7 @@ class profile_controller extends Controller
                                 ->orderBy('profiles.created_at','desc')
                                 ->select('myusers.first_name','myusers.last_name','profiles.profile_photo','myusers.user_name')
                                 ->get()
-                                ->last();
+                                ->first();
 
         if($profile_info){
             return view('layout.shared-profile',[

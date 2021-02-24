@@ -9,6 +9,14 @@
     
     <meta property="og:title" content="{{$content->title}}" />
     <meta property="og:description" content="{{$content->text}}" />
+    @if($content->file_path)
+    <meta property="og:image" content="{{asset('/storage/' . $content->file_path)}}" />
+    @else
+    <meta property="og:image" content="{{asset('assets/img/logo/mobile-logo.svg')}}" />
+    @endif
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="400" />
+    <meta property="og:image:height" content="300" />
     
     <meta name="csrf-token" content="{{csrf_token()}}">
 

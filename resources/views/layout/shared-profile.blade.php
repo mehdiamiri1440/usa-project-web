@@ -8,7 +8,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta property="og:title" content="{{$profile->first_name . ' ' . $profile->last_name}}" />
     <meta property="og:description" content="پروفایل تجاری {{$profile->first_name . ' ' . $profile->last_name}} در باسکول، بزرگترین سامانه خرید و فروش عمده مواد غذایی کشور" />
-    <meta property="og:image" content="{{asset('/storage/profile_photos/' . $profile->profile_photo)}}" />
+    @if($profile->profile_photo)
+    <meta property="og:image" content="{{asset('/storage/' . $profile->profile_photo)}}" />
+    @else
+    <meta property="og:image" content="{{asset('assets/img/logo/mobile-logo.svg')}}" />
+    @endif
     <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:width" content="400" />
     <meta property="og:image:height" content="300" />
@@ -39,10 +43,9 @@
             <div class="user-data">
                 <div class="user-image">
                     @if($profile->profile_photo)
-                        <img src="{{url('storage/' .  $profile->profile_photo )}}" alt="">
-                        @else
-                        <img src="{{asset('assets/img/user-defult.png')}}" alt="">
-
+                        <img src="{{asset('/storage/' . $profile->profile_photo)}}" alt="باسکول">
+                    @else
+                        <img src="{{asset('assets/img/user-defult.png')}}" alt="باسکول">
                     @endif
                 </div>
                 <p class="user-name">
