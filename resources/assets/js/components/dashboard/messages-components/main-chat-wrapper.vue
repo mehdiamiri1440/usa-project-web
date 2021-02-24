@@ -204,7 +204,7 @@
 }
 
 .message-wrapper .chat-page ul li:last-of-type {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .message-date {

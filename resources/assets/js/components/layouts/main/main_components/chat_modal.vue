@@ -135,7 +135,7 @@
 }
 
 .main-modal-chat li:last-of-type {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .main-modal-chat li > div {
@@ -202,10 +202,9 @@
 
 /*footer chat modal styles*/
 .footer-modal-chat {
-  position: absolute;
   left: 0;
   overflow: hidden;
-  padding: 10px 15px;
+  padding: 8px 15px;
   position: absolute;
   bottom: 0;
   width: 100%;

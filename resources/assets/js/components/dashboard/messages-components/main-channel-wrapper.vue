@@ -173,7 +173,7 @@
 }
 
 .message-wrapper .chat-page ul {
-  padding: 20px;
+  padding: 20px 20px 0;
 
   overflow-x: hidden;
 
@@ -196,7 +196,7 @@
 }
 
 .message-wrapper .chat-page ul li:last-of-type {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .message-date {
@@ -545,6 +545,8 @@ button.share-button:hover {
 .message-text {
   line-height: 1.618;
   white-space: pre-line;
+  padding: 5px;
+  display: block;
 }
 
 .spinner-border {
@@ -636,6 +638,13 @@ button.share-button:hover {
   }
 }
 
+@media screen and (max-width: 420px) {
+  .product-content-wrapper {
+    width: calc(100% - 80px);
+    padding: 5px 15px 0px 0;
+  }
+}
+
 @media screen and (max-width: 365px) {
   .message-wrapper .message-contact-title a {
     max-width: 180px;
@@ -649,11 +658,6 @@ button.share-button:hover {
 
   .forward-item {
     display: none;
-  }
-
-  .product-content-wrapper {
-    width: calc(100% - 80px);
-    padding: 5px 15px 0px 0;
   }
 
   .message-wrapper .message-contact-title a {
@@ -724,6 +728,12 @@ button.share-button:hover {
           loadMoreContacts ? 'load-more-active' : '',
         ]"
       >
+        <li v-if="channelMessages.length == 0" class="messenger-notice">
+          <p class="notice-title">
+            جدید ترین اخبار و اطلاعیه ها در کانال رسمی باسکول به زودی ارسال
+            خواهد شد.
+          </p>
+        </li>
         <li :key="msg.id" v-for="msg in channelMessages">
           <!-- <div class="message-date" v-if="msg.isDateShow">
             <span>
@@ -809,7 +819,6 @@ button.share-button:hover {
       <div class="send-message-form">
         <button class="btn" @click.prevent="shareMyProfile()">
           <i class="fa fa-address-card"> </i>
-
           ارسال پروفایل تجاری شما به دوستان
         </button>
         <!-- <form @v-on:submit.prevent="$parent.sendMessage()">
@@ -1017,7 +1026,10 @@ export default {
 
       if (this.isDeviceMobile()) {
         var linkElement = document.createElement("a");
-        var Message = baseUrl + "shared-profile";
+        var Message =
+          baseUrl +
+          "shared-profile/" +
+          this.$parent.currentUser.user_info.user_name;
         var messageToWhatsApp = encodeURIComponent(Message);
         var url = "whatsapp://send?text=" + messageToWhatsApp;
 
@@ -1030,7 +1042,10 @@ export default {
 
         document.body.removeChild(linkElement);
       } else {
-        let url = baseUrl + "shared-profile";
+        let url =
+          baseUrl +
+          "shared-profile/" +
+          this.$parent.currentUser.user_info.user_name;
         eventBus.$emit("shareModalUrl", url);
       }
     },
