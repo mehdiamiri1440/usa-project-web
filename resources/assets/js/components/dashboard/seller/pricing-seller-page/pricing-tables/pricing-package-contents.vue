@@ -22,8 +22,13 @@
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
   border-radius: 4px;
 }
+
 .item-action .green-button.bg-gray {
   background-color: #556080 !important;
+}
+
+.item-action .green-button.btn-disabled {
+  margin: 0 auto 17px;
 }
 
 .item-action .green-button i {
@@ -569,6 +574,18 @@
                   <br />
                 </p>
               </li>
+              <li class="empty hidden-xs">
+                <a data-toggle="collapse" class="item-help" title=""></a>
+
+                <p class="item-content-title">عنوان</p>
+
+                <p class="item-content-amount">
+                  <i
+                    class="text-green fa fa-times-circle"
+                    style="color: #e41c38"
+                  ></i>
+                </p>
+              </li>
               <li v-for="(item, index) in priceItemBasic" :key="index">
                 <a
                   data-toggle="collapse"
@@ -697,6 +714,12 @@ export default {
 
         {
           title: "امکان ارتباط با خریداران طلایی",
+          contentUnit: true,
+          helpDescription: "",
+        },
+
+        {
+          title: "تبلیغ محصولات در کانال باسکول",
           contentUnit: true,
           helpDescription: "",
         },

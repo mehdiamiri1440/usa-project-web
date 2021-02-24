@@ -237,6 +237,21 @@
   display: block;
   min-width: 200px;
 }
+.message-content-wrapper.product-wrapper {
+  padding: 5px 10px;
+  display: block;
+  min-width: 200px;
+  border: 2px solid #00c569;
+  float: right;
+  width: 100%;
+  border-radius: 10px;
+}
+.message-content-wrapper .product-header > p {
+  font-size: 17px;
+  color: #474747;
+  font-weight: 500;
+  margin: 13px 0 18px;
+}
 .message-wrapper .chat-page .message-item-wrapper.message-receive {
   float: left;
   background: #fff;
@@ -260,21 +275,11 @@
   _border-color: #000000 #fff #000000 #000000;
   _filter: progid:DXImageTransform.Microsoft.Chroma(color='#000000');
 }
-
-.message-wrapper .chat-page .message-send::after {
-  content: "";
-  display: block;
-  position: absolute;
-  right: -6px;
-  top: 0;
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-width: 9px 6px 0 0;
-  border-color: #dcf8c6 transparent transparent transparent;
-  line-height: 0px;
-  _border-color: #dcf8c6 #000000 #000000 #000000;
-  _filter: progid:DXImageTransform.Microsoft.Chroma(color='#000000');
+.message-wrapper .chat-page .message-receive.product-item {
+  border-radius: 10px;
+}
+.message-wrapper .chat-page .message-receive.product-item::after {
+  display: none;
 }
 
 .message-wrapper .chat-page span.message-chat-date {
@@ -288,22 +293,22 @@
 }
 .product-content-wrapper {
   float: right;
-  width: calc(100% - 130px);
-  padding: 10px 15px 10px 0;
+  width: 100%;
+  padding: 10px 0;
 }
 .message-wrapper .chat-page .product-wrapper span.message-chat-date {
   float: right;
   width: 100%;
   border-top: 1px solid #eee;
-  margin-top: 10px;
+  margin-top: 2px;
   padding: 5px 0;
 }
 
 .product-title {
-  font-weight: bold;
+  font-weight: 500;
   color: #474747;
   padding-top: 3px;
-  font-size: 17px;
+  font-size: 20px;
 }
 
 .product-amount i {
@@ -312,8 +317,9 @@
 }
 
 .product-amount {
-  padding-top: 10px;
-  font-size: 15px;
+  margin-top: 5px;
+  font-size: 17px;
+  font-weight: 500;
 }
 
 .send-message-form {
@@ -545,7 +551,7 @@ button.share-button:hover {
 .message-text {
   line-height: 1.618;
   white-space: pre-line;
-  padding: 5px;
+  padding: 0 5px;
   display: block;
 }
 
@@ -557,6 +563,35 @@ button.share-button:hover {
   width: 3rem;
   height: 3rem;
   border-width: 0.29rem;
+}
+
+.valid-user-badge {
+  width: 36px;
+  height: 38px;
+  background: #00c569;
+  position: absolute;
+  left: 14px;
+  top: 0;
+  padding: 2px;
+  border-top: 3px solid #00b761;
+  text-align: center;
+  color: #fff !important;
+}
+
+.valid-user-badge::after {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 18px 14px;
+  border-color: transparent #00c569 transparent #00c569;
+  line-height: 0;
+  _border-color: #000000 #000000 #000000 #6980fe;
+  _filter: progid:DXImageTransform.Microsoft.Chroma(color='#000000');
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -14px;
 }
 
 @media screen and (max-width: 1199px) {
@@ -638,13 +673,6 @@ button.share-button:hover {
 
   .message-wrapper .message-contact-title-img {
     margin-left: 5px;
-  }
-}
-
-@media screen and (max-width: 420px) {
-  .product-content-wrapper {
-    width: calc(100% - 80px);
-    padding: 5px 15px 0px 0;
   }
 }
 
@@ -731,7 +759,10 @@ button.share-button:hover {
           loadMoreContacts ? 'load-more-active' : '',
         ]"
       >
-        <li v-if="channelMessages.length == 0" class="messenger-notice">
+        <li
+          v-if="channelMessages.length == 0 && !isChannelContentLoaded"
+          class="messenger-notice"
+        >
           <p class="notice-title">
             جدید ترین اخبار و اطلاعیه ها در کانال رسمی باسکول به زودی ارسال
             خواهد شد.
@@ -744,7 +775,10 @@ button.share-button:hover {
             </span>
           </div> -->
           <div class="message-contents">
-            <div class="message-item-wrapper message-receive">
+            <div
+              class="message-item-wrapper message-receive"
+              :class="{ 'product-item': msg.is_product }"
+            >
               <router-link
                 target="_blank"
                 :to="{ path: getProductUrl(msg) }"
@@ -753,6 +787,48 @@ button.share-button:hover {
               >
                 <!-- :to="{ path: getProductUrl(msg) }" -->
                 <!-- content image -->
+                <div class="product-header">
+                  <p>محصول پیشنهادی</p>
+                  <div class="valid-user-badge">
+                    <div class="wrapper-icon">
+                      <svg
+                        width="24.965"
+                        height="30.574"
+                        viewBox="0 0 24.965 30.574"
+                      >
+                        <g
+                          id="buskool-icon"
+                          data-name="buskool"
+                          transform="translate(-273.1 -715.025)"
+                        >
+                          <path
+                            id="Subtraction_1"
+                            data-name="Subtraction 1"
+                            d="M-1951.5,35.792a12.419,12.419,0,0,1-8.839-3.661A12.419,12.419,0,0,1-1964,23.292a12.361,12.361,0,0,1,1.378-5.71,12.614,12.614,0,0,1,3.679-4.333l3.175,3.175a7.967,7.967,0,0,0-3.732,6.768,8.009,8.009,0,0,0,8,8,8.036,8.036,0,0,0,7.917-6.85l2.185-2.149,2.34,2.3a12.464,12.464,0,0,1-4.012,8.026A12.467,12.467,0,0,1-1951.5,35.792Zm12.465-13.44,0,0-2.361-2.33-2.169,2.14a8.029,8.029,0,0,0-4.052-5.965l3.2-3.2a12.44,12.44,0,0,1,5.381,9.357Z"
+                            transform="translate(2237.1 709.808)"
+                            fill="#fff"
+                          />
+                          <g id="Group_24" data-name="Group 24">
+                            <path
+                              id="Rectangle_12"
+                              data-name="Rectangle 12"
+                              d="M3,0H9.5a0,0,0,0,1,0,0V5.5a0,0,0,0,1,0,0H0a0,0,0,0,1,0,0V3A3,3,0,0,1,3,0Z"
+                              transform="translate(282.389 717.5) rotate(45)"
+                              fill="#fff"
+                            />
+                            <path
+                              id="Rectangle_13"
+                              data-name="Rectangle 13"
+                              d="M0,0H13.5a0,0,0,0,1,0,0V5a0,0,0,0,1,0,0H4A4,4,0,0,1,0,1V0A0,0,0,0,1,0,0Z"
+                              transform="translate(294.935 718.561) rotate(135)"
+                              fill="#fff"
+                            />
+                          </g>
+                        </g>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
                 <message-image
                   :img="msg.file_path"
                   :base="$parent.str"
@@ -765,9 +841,7 @@ button.share-button:hover {
                     v-text="getProductInfo(msg.text, true)"
                   ></p>
                   <p class="message-text gray-text product-amount">
-                    <i class="fa fa-box-open"></i>
-
-                    <span> {{ getProductInfo(msg.text, false) }}</span>
+                    <span v-text="'موجودی : ' + productAmount(msg.text)"></span>
                   </p>
                 </div>
                 <span class="message-chat-date">
@@ -1009,8 +1083,28 @@ export default {
       if (isTitle) {
         return splitText[0];
       } else {
-        return splitText[1];
+        return splitText[1].match(/\d+/)[0];
       }
+    },
+    productAmount(getAmount) {
+      let amount = this.getProductInfo(getAmount, false);
+      return this.getConvertedNumbers(amount);
+    },
+    getNumberWithCommas: function (number) {
+      if (number || typeof number === "number")
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      else return "";
+    },
+    getConvertedNumbers: function (number) {
+      if (number || typeof number === "number") {
+        let data = number / 1000;
+        if (number < 1000) {
+          return number + " " + "کیلوگرم";
+        } else {
+          data = this.getNumberWithCommas(data);
+          return data + " " + "تن";
+        }
+      } else return "";
     },
     getProductUrl(product) {
       let productName = product.text.split("\n")[0].split("|");
