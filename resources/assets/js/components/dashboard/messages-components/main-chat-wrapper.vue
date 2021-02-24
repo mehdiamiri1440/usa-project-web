@@ -86,7 +86,7 @@
   opacity: 0.06;
   position: absolute;
   z-index: 1;
-  left: 0;
+  left: 15px;
   right: 0;
   top: 50px;
   bottom: 60px;
@@ -181,7 +181,7 @@
 }
 
 .message-wrapper .chat-page ul {
-  padding: 20px;
+  padding: 20px 20px 0;
 
   overflow-x: hidden;
 
@@ -506,6 +506,9 @@
 }
 
 @media screen and (max-width: 767px) {
+  .chat-page .bg-wrapper {
+    left: 0;
+  }
   .guide-arrow-item {
     margin-top: 120px;
   }

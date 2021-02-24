@@ -570,6 +570,9 @@ button.share-button:hover {
 }
 
 @media screen and (max-width: 767px) {
+  .chat-page .bg-wrapper {
+    left: 0;
+  }
   #chat-menu-items {
     left: 54px;
   }
