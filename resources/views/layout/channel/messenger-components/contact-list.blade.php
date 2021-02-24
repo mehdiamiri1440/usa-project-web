@@ -1,5 +1,5 @@
 <div class="contact-list">
-    <h1 class="contact-list-header">
+    <h1 class="contact-list-header hidden-xs hidden-sm">
         {{$content->title}}
     </h1>
     <div class="contact-list-main">
@@ -17,14 +17,14 @@
                         data-container="body"
                         data-toggle="popover"
                         data-placement="bottom"
+                        data-content="<div class='tooltip-wrapper text-rtl'>اطلاعات هویتی این کاربر احراز شده است.<br/><a href='/verification'>اطلاعات بیشتر</a> </div>"
+                        title
                         >
-                        <i class="fa fa-certificate"></i>
+                            <i class="fa fa-certificate"></i>
                         </a>
                         </span>
                         <p class="new-message-count">
-                            <span>
-                                6
-                            </span>
+                            <i class="fa fa-bullhorn"> </i>
                         </p>
                     </div>
                 </button>

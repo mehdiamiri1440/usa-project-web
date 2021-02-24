@@ -478,6 +478,7 @@ li.score-item i {
             :user-full-name="
               selectedContact.first_name + ' ' + selectedContact.last_name
             "
+            :user-id="selectedContact.contact_id"
             v-if="reviewCurrentStep == 0"
           />
           <SuccessReviewComponent v-if="reviewCurrentStep == 1" />

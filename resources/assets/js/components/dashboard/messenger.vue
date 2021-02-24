@@ -311,7 +311,11 @@
   >
     <div
       class="col-xs-12 contact-wrapper pull-right col-sm-4 col-lg-3"
-      v-bind:class="{ hidden_element: selectedContact }"
+      v-bind:class="[
+        {
+          hidden_element: selectedContact || isChanleActive,
+        },
+      ]"
     >
       <div class="row">
         <router-view name="messenger-list" />
@@ -320,18 +324,20 @@
 
     <div
       class="col-xs-12 pull-right message-wrapper col-sm-8"
-      :class="{
-        hidden_element: !selectedContact,
-        'col-lg-6': !isChanleActive,
-        'col-lg-9': isChanleActive,
-      }"
+      v-bind:class="[
+        {
+          'col-lg-6': !isChanleActive,
+          'col-lg-9': isChanleActive,
+        },
+      ]"
       v-if="selectedContact || isChanleActive"
     >
-      <mainChatWrapper />
+      <main-channel-wrapper v-if="isChanleActive" />
+      <main-chat-wrapper v-else />
     </div>
     <div
       class="col-xs-12 default-message-wrapper hidden-xs col-sm-8 col-lg-9"
-      v-if="!selectedContact && isCurrentStep == 0"
+      v-if="!selectedContact && isCurrentStep == 0 && !isChanleActive"
     >
       <div v-if="userType" class="default-main-contents seller-buyAd-picture">
         <p class="red-text">
@@ -368,6 +374,7 @@ import Push from "push.js";
 import myContactList from "./messages-components/my-contact-list";
 import chatUserInfo from "./messages-components/chat-user-info";
 import MainChatWrapper from "./messages-components/main-chat-wrapper";
+import MainChannelWrapper from "./messages-components/main-channel-wrapper";
 
 export default {
   props: ["isRequiredFixAlert", "userType", "currentUser", "str"],
@@ -375,6 +382,7 @@ export default {
     myContactList,
     chatUserInfo,
     MainChatWrapper,
+    MainChannelWrapper,
   },
   data: function () {
     return {
@@ -390,6 +398,7 @@ export default {
       ],
       isSearchingContact: false,
       contactList: [],
+      channelInfo: "",
       chatMessages: "",
       isNoticeActive: true,
       isGuideActive: false,
@@ -435,6 +444,7 @@ export default {
         })
         .then(function (response) {
           self.contactList = response.data.contact_list;
+          self.channelInfo = response.data.channel_info;
           self.currentUserId = response.data.user_id;
           self.isCurrentUserVerified = response.data.is_verified;
           self.isContactListLoaded = true;
@@ -460,11 +470,11 @@ export default {
         this.selectedContact = "";
         this.selectedContact = contact;
         this.chatMessages = "";
+        this.userDataLoader = true;
       }
       var self = this;
 
       // enable loader for user info component
-      self.userDataLoader = true;
 
       self.isChatLoadeMore = false;
       self.handleBackBtnClickOnDevices();
@@ -483,16 +493,16 @@ export default {
         .then(function (response) {
           self.isNoticeActive = true;
           let data = response.data.messages;
-          let itemDate = "";
-          data = data.map((item) => {
-            let date = item.created_at.substr(0, 10);
-            item.isDateShow = true;
-            if (itemDate == date) {
-              item.isDateShow = false;
-            }
-            itemDate = date;
-            return item;
-          });
+          // let itemDate = "";
+          // data = data.map((item) => {
+          //   let date = item.created_at.substr(0, 10);
+          //   item.isDateShow = true;
+          //   if (itemDate == date) {
+          //     item.isDateShow = false;
+          //   }
+          //   itemDate = date;
+          //   return item;
+          // });
           self.chatMessages = data;
           if (!self.chatMessages.length) {
             self.isNoticeActive = false;
@@ -849,7 +859,6 @@ export default {
         });
 
       eventBus.$on("contanctMessageReceived", ($event) => {
-        // console.log("contact message");
         if (self.selectedContact) {
           self.appendMessageToChatHistory(self.selectedContact);
         } else if (self.isComponentActive) {

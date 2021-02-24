@@ -252,6 +252,7 @@
 
     <chat-modal />
 
+    <share-to-social-modal :share-modal-url="shareModalUrl" />
     <report-modal :reported-user-id="reportedUserId" />
     <review-modal :review-user-data="reviewUserData" />
 
@@ -314,12 +315,14 @@ import IsWebview from "is-webview";
 import ChatModal from "../../components/layouts/main/main_components/chat_modal";
 import ReportModal from "../../components/layouts/main/main_components/report";
 import ReviewModal from "../../components/layouts/main/main_components/review-component/review";
+import shareToSocialModal from "../../components/layouts/main/main_components/share-to-social-modal";
 
 export default {
   components: {
     ChatModal,
     ReportModal,
     ReviewModal,
+    shareToSocialModal,
   },
   data: function () {
     return {
@@ -333,6 +336,7 @@ export default {
       joinGroupId: "",
       activeContactId: "",
       reportedUserId: "",
+      shareModalUrl: "",
       msg: "",
       reviewCurrentStep: 0,
       reviewUserData: "",
@@ -382,6 +386,12 @@ export default {
       this.reportedUserId = $event;
       $("#report-modal").modal("show");
     });
+
+    eventBus.$on("shareModalUrl", ($event) => {
+      this.shareModalUrl = $event;
+      $("#share-modal").modal("show");
+    });
+
     eventBus.$on("reviewUserData", ($event) => {
       this.reviewUserData = $event;
       this.reviewUserPrfileId = $event.id;

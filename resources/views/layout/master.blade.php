@@ -142,6 +142,10 @@
         let userId = <?php if(session('user_id')){echo session('user_id');} else echo -1; ?>;
         return userId;
     }
+    function getBase(){
+        let base = {!! json_encode(url('/')) !!}
+        return base + '/';
+    }
 
    
     //     addEvent(window, "load", function (e) {

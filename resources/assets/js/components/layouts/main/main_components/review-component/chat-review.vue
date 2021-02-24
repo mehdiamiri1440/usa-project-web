@@ -345,7 +345,7 @@
 // import ReviewDescription from "./review-steps/review-description";
 // import FinalStep from "./review-steps/final-step";
 export default {
-  props: ["userFullName"],
+  props: ["userFullName", "userId"],
   data: function () {
     return {
       reviewData: {
@@ -374,9 +374,6 @@ export default {
         reviewText: "",
       };
       $("#chat-report-form").collapse("hide");
-      setTimeout(function () {
-        self.$parent.userData = "";
-      }, 200);
     },
     reviewResetData: function () {
       $("#review-modal").modal("hide");
@@ -420,7 +417,7 @@ export default {
       this.submitLoader = true;
 
       let reviewObg = {
-        user_id: self.$parent.userData.user_info.id,
+        user_id: self.userId,
       };
 
       if (self.reviewData.rate) {

@@ -950,10 +950,12 @@ Route::group(['prefix' => 'admin', 'middleware' => [admin_login::class]], functi
         'uses' => 'Messenger\channel_controller@get_all_channel_contents',
         'as' => 'admin_panel_channel_content_list'
     ]);
+
     Route::get('/submit-to-channel', [
         'uses' => 'Messenger\channel_controller@submit_contents_to_channel',
         'as' => 'admin_panel_submit_to_channel'
-        ]);
+    ]);
+    
 });
 
 Route::post('/refresh-token',[
@@ -1002,6 +1004,10 @@ Route::get('/sitemap.xml', [
     'uses' => 'General\sitemap_controller@get_required_data_for_sitemap',
     'as' => 'get_sitemap',
 ]);
+
+Route::get('/shared-profile/{username}',[
+    'uses' => 'Accounting\profile_controller@get_user_shared_profile_info'
+])->name('sharedProfile')->where("username","[A-Za-z0-9_]+$");
 
 
 //-----------------------------------------------------

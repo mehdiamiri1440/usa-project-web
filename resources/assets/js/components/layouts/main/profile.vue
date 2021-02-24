@@ -1465,9 +1465,10 @@ p.response-rate span {
                           ' ' +
                           profileOwner.user_info.last_name
                         "
+                        :user-id="profileOwner.user_info.id"
                         v-if="reviewCurrentStep == 0"
                       />
-                      
+
                       <SuccessReviewComponent v-if="reviewCurrentStep == 1" />
                     </div>
                     <p class="red-text" v-if="reviews.deleted_count > 0">

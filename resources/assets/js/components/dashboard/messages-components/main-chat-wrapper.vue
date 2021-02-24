@@ -86,7 +86,7 @@
   opacity: 0.06;
   position: absolute;
   z-index: 1;
-  left: 0;
+  left: 15px;
   right: 0;
   top: 50px;
   bottom: 60px;
@@ -181,7 +181,7 @@
 }
 
 .message-wrapper .chat-page ul {
-  padding: 20px;
+  padding: 20px 20px 0;
 
   overflow-x: hidden;
 
@@ -204,7 +204,7 @@
 }
 
 .message-wrapper .chat-page ul li:last-of-type {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .message-date {
@@ -283,7 +283,7 @@
 
 .message-wrapper .chat-page span.message-chat-date {
   text-align: right;
-  font-size: 11px;
+  font-size: 13px;
   padding-top: 3px;
   width: 100%;
   direction: ltr;
@@ -506,6 +506,9 @@
 }
 
 @media screen and (max-width: 767px) {
+  .chat-page .bg-wrapper {
+    left: 0;
+  }
   .guide-arrow-item {
     margin-top: 120px;
   }
@@ -748,11 +751,11 @@
           v-for="(msg, index) in $parent.chatMessages"
           :class="{ 'margin-top-10': checkMessageName(index, index - 1) }"
         >
-          <div class="message-date" v-if="msg.isDateShow">
+          <!-- <div class="message-date" v-if="msg.isDateShow">
             <span>
               {{ msg.created_at | moment("jYYYY/jMM/jDD") }}
             </span>
-          </div>
+          </div> -->
           <div
             class="message-item-wrapper"
             :class="[
@@ -775,9 +778,11 @@
                 </span>
                 <span class="message-chat-date">
                   <span v-if="msg.created_at">{{
-                    msg.created_at | moment("HH:mm")
+                    msg.created_at | moment("jYYYY/jMM/jDD, HH:mm")
                   }}</span>
-                  <span v-else>{{ Date() | moment("HH:mm") }}</span>
+                  <span v-else>{{
+                    Date() | moment("jYYYY/jMM/jDD, HH:mm")
+                  }}</span>
                   <div class="message-button-wrapper">
                     <button>
                       <i class="fa fa-phone-alt"></i>
@@ -790,9 +795,11 @@
                 <span v-text="msg.text"></span>
                 <span class="message-chat-date">
                   <span v-if="msg.created_at">{{
-                    msg.created_at | moment("HH:mm")
+                    msg.created_at | moment("jYYYY/jMM/jDD, HH:mm")
                   }}</span>
-                  <span v-else>{{ Date() | moment("HH:mm") }}</span>
+                  <span v-else>{{
+                    Date() | moment("jYYYY/jMM/jDD, HH:mm")
+                  }}</span>
                 </span>
               </div>
             </div>
@@ -801,9 +808,11 @@
               <span v-text="msg.text"></span>
               <span class="message-chat-date">
                 <span v-if="msg.created_at">{{
-                  msg.created_at | moment("HH:mm")
+                  msg.created_at | moment("jYYYY/jMM/jDD, HH:mm")
                 }}</span>
-                <span v-else>{{ Date() | moment("HH:mm") }}</span>
+                <span v-else>{{
+                  Date() | moment("jYYYY/jMM/jDD, HH:mm")
+                }}</span>
                 <span
                   class="check-items"
                   v-if="
