@@ -68,8 +68,7 @@
     v-if="img"
   >
     <div class="spinner-wrapper">
-      <div class="spinner-border">
-        <!-- <div v-show="!isImageLoad" class="spinner-border"> -->
+      <div v-show="!isImageLoad" class="spinner-border">
         <span class="sr-only">Loading...</span>
       </div>
     </div>

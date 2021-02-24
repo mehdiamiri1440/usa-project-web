@@ -38,7 +38,12 @@
             </p>
             <div class="user-data">
                 <div class="user-image">
-                    <img src="{{asset('assets/img/user-defult.png')}}" alt="">
+                    @if($profile->profile_photo)
+                        <img src="{{url('storage/' .  $profile->profile_photo )}}" alt="">
+                        @else
+                        <img src="{{asset('assets/img/user-defult.png')}}" alt="">
+
+                    @endif
                 </div>
                 <p class="user-name">
                     {{$profile->first_name . ' ' . $profile->last_name}}

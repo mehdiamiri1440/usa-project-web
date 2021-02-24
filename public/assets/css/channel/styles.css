@@ -226,10 +226,26 @@ li .message-item-wrapper::after {
 
 .message-image{
     margin-bottom: 13px;
-    height: 210px;
+    height: 270px;
     position: relative;
     overflow: hidden;
     background: #eeee;
+}
+
+
+.message-image a{
+    display: block;
+    height: 100%;
+}
+
+.message-image a img{
+    width: 100%;
+    height: initial;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%)
 }
 
 

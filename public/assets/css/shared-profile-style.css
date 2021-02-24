@@ -54,6 +54,9 @@ h1{
     height: 140px;
     position: relative;
     margin: 20px auto;
+    overflow: hidden;
+    border-radius: 150px;
+    background: #eee;
 }
 
 .user-data .user-image img{
