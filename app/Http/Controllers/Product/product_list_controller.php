@@ -309,7 +309,7 @@ class product_list_controller extends Controller
                         ->where('confirmed',true)
                         ->whereIn('myuser_id',array_column($products->all(),'myuser_id'))
                         ->select('profiles.myuser_id','profiles.profile_photo')
-                        ->orderBy('created_at','desc')
+                        ->orderBy('created_at')
                         ->groupBy('profiles.myuser_id')
                         ->get();
 
