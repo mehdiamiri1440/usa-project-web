@@ -46,7 +46,8 @@
   padding: 7px 15px 1px;
 }
 
-.contact-body .contact-image {
+.contact-body .contact-image,
+.contact-body .channel-image {
   width: 45px;
   height: 45px;
   float: right;
@@ -56,13 +57,9 @@
   position: relative;
 }
 
-.contact-body .contact-image img {
-  position: absolute;
-  left: 50%;
-  top: 50%;
+.contact-body .channel-image img {
+  width: 100%;
   height: 100%;
-  width: initial;
-  transform: translate(-50%, -50%);
 }
 
 .contact-body .contact-item a {
@@ -90,13 +87,20 @@
 .contact-body .contact-item span.contact-name {
   float: right;
   position: relative;
+  font-size: 14px;
+  max-width: calc(100% - 85px);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: right;
+  font-weight: 500;
 }
 
 .contact-body .contact-item span.contact-last-message {
   float: right;
   width: calc(100% - 60px);
   font-weight: lighter;
-  font-size: 12px;
+  font-size: 14px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -112,7 +116,8 @@
   text-align: center;
 }
 
-.contact-body .contact-item .my-contact-info-wrapper {
+.contact-body .contact-item .my-contact-info-wrapper,
+.contact-body .contact-item .my-channel-name-wraopper {
   float: right;
   padding-top: 6px;
   direction: ltr;
@@ -121,11 +126,22 @@
   padding-right: 15px;
 }
 
+.contact-body .contact-item .my-channel-name-wraopper {
+  padding-top: 15px;
+}
+
+.contact-body .contact-item .my-channel-name-wraopper .icon-wrapper {
+  font-size: 16px;
+  color: #999;
+  float: left;
+  margin-left: 15px;
+}
+
 .last-message-date {
   display: inline-block;
   height: 17px;
-  width: 60px;
-  font-size: 10px;
+  width: 70px;
+  font-size: 12px;
   line-height: 2;
   text-align: center;
 }
@@ -175,9 +191,10 @@
 .verified-user {
   line-height: 1;
   font-size: 15px;
-  position: absolute;
-  left: -18px;
+  position: relative;
+  right: 3px;
   top: -2px;
+  float: right;
 }
 
 .verified-user::before {
@@ -446,32 +463,64 @@ i.fa-star {
               active: $parent.isChanleActive,
             }"
           >
-            <div class="contact-image">
-              <!-- <img
-                v-if="contact.profile_photo"
-                :src="$parent.str + '/' + contact.profile_photo"
-                :alt="contact.first_name[0]"
-              /> -->
-
-              <img src="../../../../img/user-defult.png" />
+            <div class="channel-image">
+              <img src="../../../../img/logo/512-buskool-logo.jpg" />
             </div>
-            <div class="my-contact-info-wrapper">
-              <span class="contact-name text-rtl">
-                کانال رسمی باسکول
-                <button
-                  @click.prevent
-                  class="verified-user"
-                  data-container="body"
-                  data-toggle="popover"
-                  data-placement="bottom"
-                  :data-content="$parent.verifiedUserContent"
-                  title
-                >
-                  <i class="fa fa-certificate"></i>
-                </button>
-              </span>
+            <div
+              v-if="$parent.channelInfo.unread_contents == 0"
+              class="my-channel-name-wraopper"
+            >
+              <span class="contact-name text-rtl"> کانال رسمی باسکول </span>
+              <button
+                @click.prevent
+                class="verified-user"
+                data-container="body"
+                data-toggle="popover"
+                data-placement="bottom"
+                :data-content="$parent.verifiedUserContent"
+                title
+              >
+                <i class="fa fa-certificate"></i>
+              </button>
+              <p class="icon-wrapper">
+                <i class="fa fa-bullhorn"></i>
+              </p>
+            </div>
+            <div v-else class="my-contact-info-wrapper">
+              <span class="contact-name text-rtl"> کانال رسمی باسکول </span>
 
-              <p class="last-message-date">1399/11/25</p>
+              <button
+                @click.prevent
+                class="verified-user"
+                data-container="body"
+                data-toggle="popover"
+                data-placement="bottom"
+                :data-content="$parent.verifiedUserContent"
+                title
+              >
+                <i class="fa fa-certificate"></i>
+              </button>
+              <p class="last-message-date">
+                {{
+                  $parent.channelInfo.last_content_date
+                    | moment("jYYYY/jMM/jDD")
+                }}
+              </p>
+            </div>
+
+            <div class="my-contact-info-wrapper">
+              <span
+                class="contact-last-message"
+                v-text="$parent.channelInfo.last_content_title"
+              ></span>
+
+              <div class="count-number-wrapper">
+                <p
+                  class="count-number"
+                  v-if="$parent.channelInfo.unread_contents !== 0"
+                  v-text="$parent.channelInfo.unread_contents"
+                ></p>
+              </div>
             </div>
           </a>
         </li>
@@ -501,20 +550,19 @@ i.fa-star {
             <div class="my-contact-info-wrapper">
               <span class="contact-name text-rtl">
                 {{ contact.first_name + " " + contact.last_name }}
-                <button
-                  v-if="contact.is_verified"
-                  @click.prevent
-                  class="verified-user"
-                  data-container="body"
-                  data-toggle="popover"
-                  data-placement="bottom"
-                  :data-content="$parent.verifiedUserContent"
-                  title
-                >
-                  <i class="fa fa-certificate"></i>
-                </button>
               </span>
-
+              <button
+                v-if="contact.is_verified"
+                @click.prevent
+                class="verified-user"
+                data-container="body"
+                data-toggle="popover"
+                data-placement="bottom"
+                :data-content="$parent.verifiedUserContent"
+                title
+              >
+                <i class="fa fa-certificate"></i>
+              </button>
               <p class="last-message-date">
                 {{ contact.last_msg_time_date | moment("jYYYY/jMM/jDD") }}
               </p>
@@ -584,6 +632,13 @@ export default {
   watch: {
     "$parent.contactList": function () {
       if (this.$parent.contactList) {
+        setTimeout(() => {
+          this.activeComponentTooltip();
+        }, 10);
+      }
+    },
+    "$parent.isChanleActive": function () {
+      if (this.$parent.isChanleActive) {
         setTimeout(() => {
           this.activeComponentTooltip();
         }, 10);

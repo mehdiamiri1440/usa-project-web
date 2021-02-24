@@ -1,0 +1,142 @@
+@font-face {
+    font-family: "IranSans";
+    src: url(../../index/fonts/IranSans.woff);
+}
+body {
+    font-family: "IranSans", Tahoma;
+    font-style: normal;
+}
+
+html,body{
+    height: 100%;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+a{
+    text-decoration: none !important;
+    outline: none;
+}
+
+a:visited,
+a:focus {
+    outline: none;
+    text-decoration: none !important;
+}
+
+
+h1{
+    margin: 0;
+}
+
+.header-page-wrapper{
+    background: linear-gradient(-90deg, #21ad93, #4dc0bb);
+    height: 30px;
+}
+
+.main-page-wrapper {
+    height: 100%;
+    position: relative;
+}
+
+.main-content{
+    position: absolute;
+    min-height: 200px;
+    text-align: center;
+    left: 50%;
+    top: calc(50% - 30px);
+    transform: translate(-50%,-50%);
+}
+
+.user-data .user-image{
+    width: 140px;
+    height: 140px;
+    position: relative;
+    margin: 20px auto;
+}
+
+.user-data .user-image img{
+    height: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.user-name{
+    font-size: 30px;
+    font-weight: bold;
+    color: #474747;
+}
+
+.description{
+    font-size: 22px;
+    color: #666;
+    margin: 23px;
+    font-weight: 500;
+}
+
+.light-green-text{
+    color: #21ad93;
+}
+
+.share-button{
+    color: #fff;
+    background: #4eb9fb;
+    display: inline-block;
+    border-radius: 6px;
+    font-size: 23px;
+    padding: 11px;
+    font-weight: bold;
+    margin: 10px 0 50px;
+    width: 100%;
+    max-width: 320px;
+}
+.share-button:hover{
+    color: #fff;
+    background: #1da1f2;
+}
+
+.logo-section{
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+}
+
+.logo-section a{
+    max-width: 140px;
+    display: block;
+}
+
+@media screen and (max-width:991px){
+    .logo-section a{
+        margin: 0 auto;
+    }
+    
+    .header-page-wrapper{
+        height: 10px;
+    }
+
+    .main-content{
+        position: relative;
+        margin: 20px auto;
+        top: initial;
+        left: initial;
+        transform: translate(0,0);
+    }
+
+    .logo-section{
+        margin-bottom: 20px;
+    }
+
+    .user-data .user-image{
+        width: 100px;
+        height: 100px;
+    }
+
+    .description{
+        font-size: 18px;
+        margin: 20px;
+    }
+}

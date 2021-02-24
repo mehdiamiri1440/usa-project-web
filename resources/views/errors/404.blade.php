@@ -149,7 +149,7 @@
 
 <div class="container-fluid">
     <div class="container">
-        <img src="{{url('assets/img/404.jpg')}}">
+        <img src="{{asset('images/def404.png')}}">
         <div class="buttons">
             <div>
                 <a href="/" class="green-bot">

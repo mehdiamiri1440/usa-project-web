@@ -1,5 +1,11 @@
 @include('layout.channel.messenger-components.header')
-<div class="header-wrapper"></div>
+<div class="header-wrapper">
+    <div class="logo-wrapper container">
+        <a href="/">
+            <img src="{{asset('assets/img/logo/web-logo.svg')}}" alt="بازار باسکول">
+        </a>
+    </div>
+</div>
 <main class="container-fluid messenger-wrapper">
     
     <div class="container messenger">
