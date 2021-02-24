@@ -84,7 +84,7 @@
         
                                 <div class="md-form">
                                     <label for="text">متن ارسالی در کانال</label>
-                                    <textarea required type="text" id="text" name="text" rows="8" class="form-control md-textarea"></textarea>
+                                    <textarea type="text" id="text" name="text" rows="8" class="form-control md-textarea"></textarea>
                                 </div>
         
                             </div>
@@ -177,7 +177,7 @@
                                           <input type="radio" name="active_package_type" value="0"> رایگان
                                         </label>
                                         <label class="btn btn-default">
-                                          <input type="radio" name="active_package_type" value="1" > ماهانه
+                                          <input type="radio" name="active_package_type" value="1" > سه ماهه
                                         </label>
                                         <label class="btn btn-default ">
                                             <input type="radio" name="active_package_type" value="3"> سالانه
@@ -268,7 +268,7 @@
                                           <input type="radio" name="last_login_client" value="web"> web
                                         </label>
                                         <label class="btn btn-default">
-                                          <input type="radio" name="last_login_client" value="app" > app
+                                          <input type="radio" name="last_login_client" value="mobile" > app
                                         </label>
                                        
                                     </div>        
@@ -276,7 +276,7 @@
                             </div>
                             <div class="col-xs-12 col-sm-6 ">
                                 <div class="md-form">
-                                    <label for="is_sharable" class=""> قابلیت اشتراک بودن</label>
+                                    <label for="is_sharable" class=""> قابلیت اشتراک گذاری</label>
 
                                     <div class="btn-group btn-toggle" data-toggle="buttons">
                                         <label class="btn btn-default active">
