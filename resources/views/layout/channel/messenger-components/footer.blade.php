@@ -186,7 +186,7 @@
     shareButtonClick();
     activeUserVerified();
     activeImagePopup();
-        
+    $('.main-loader-wrapper').css('display','none'); 
   })
 
   function getContentId(){

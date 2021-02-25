@@ -8,6 +8,7 @@
   position: relative;
   overflow: hidden;
   background: #eee;
+  margin-bottom: 15px;
 }
 
 .message-image a {
