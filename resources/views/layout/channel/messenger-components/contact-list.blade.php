@@ -4,7 +4,7 @@
     </h1>
     <div class="contact-list-main">
         <ul class="contact-list">
-            <li>
+            <li class="contact-item">
                 <button class="active">
                     <div class="user-image-list">
                         <img src="{{asset('assets/img/logo/512-buskool-logo.jpg')}}" alt="buskool">
@@ -28,6 +28,14 @@
                         </p>
                     </div>
                 </button>
+            </li>
+            <li class="item-action">
+                <p>
+                    به جمع چندین هزار نفری فعالان صنعت عمده غذایی کشور بپیوندید.
+                </p>
+                <a href="/register" class="active">
+                    ثبت نام در باسکول
+                </a>
             </li>
         </ul>
     </div>
