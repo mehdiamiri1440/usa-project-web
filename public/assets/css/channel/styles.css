@@ -224,6 +224,30 @@ li .message-item-wrapper::after {
    
 }
 
+li.item-action {
+    text-align: center;
+}
+
+li.item-action > p{
+    font-size: 18px;
+    padding: 55px 15px 20px;
+    line-height: 1.618;
+    font-weight: 400;
+}
+
+li.item-action > a{
+    display: inline-block;
+    border-radius: 4px;
+    font-size: 18px;
+    font-weight: bold;
+    background: #00c569;
+    color: #fff;
+    border: none;
+    width: initial;
+    margin: 0 auto;
+    padding: 10px 30px;
+}
+
 .message-image{
     margin-bottom: 13px;
     position: relative;
@@ -288,12 +312,12 @@ li .message-item-wrapper::after {
 }
 
 /* contact list styles */
-.contact-list-main ul li{
+.contact-list-main ul li.contact-item{
     padding: 0;
     margin: 0;
     overflow: hidden;
 }
-.contact-list-main ul li > button{
+.contact-list-main ul li.contact-item > button{
     background: none;
     border: none;
     width: 100%;
@@ -305,7 +329,7 @@ li .message-item-wrapper::after {
     border-radius: 0;
 }
 
-.contact-list-main ul li > button.active{
+.contact-list-main ul li.contact-item > button.active{
     background: #fafafa;
     border-left: 2px solid #00c569;
 
@@ -513,15 +537,14 @@ button.share-button:hover{
     font-weight: 900;
 }
 
-#download-app{
-    display: none;
+.footer-button{
     direction: ltr;
     position: absolute;
     bottom: 0;
     width: 100%;
     left: 0;
     z-index: 2;
-    background: #e84256;
+    background: #00c569;
     color: #fff;
     font-size: 18px;
     font-weight: 500;
@@ -531,8 +554,12 @@ button.share-button:hover{
     padding: 15px 0;
     text-align: center;
 }
+#download-app{
+    background: #e84256;
+    display: none;
+}
 
-#download-app i{
+.footer-button i{
     position: relative;
     left: 7px;
     top: -2px;

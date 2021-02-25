@@ -175,6 +175,7 @@
       let androidVersion = getAndroidVersion();
       if (parseInt(androidVersion) >= 5) {
         $('#download-app').css('display','block');
+        $('#to-register').css('display','none');
       }
     }
   }
