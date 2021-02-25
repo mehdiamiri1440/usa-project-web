@@ -4,7 +4,7 @@
     
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-    <meta name="keywords" content="محصولات کشاورز ی,خرید مستقیم صیفی,فروشگاه آنلاین کشاورزی,باسکول">
+    <meta name="robots" content="noindex"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta property="og:title" content="{{$content->title}}" />

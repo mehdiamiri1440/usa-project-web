@@ -254,8 +254,9 @@ class channel_controller extends Controller
 
     public function get_channel_content_by_id($slug)
     {
-        $exploded_slug = explode('-',$slug);
-        $id = $exploded_slug[count($exploded_slug) - 1];
+        // $exploded_slug = explode('-',$slug);
+        // $id = $exploded_slug[count($exploded_slug) - 1];
+        $id = $slug;
         
         if(!is_numeric($id)){
             return abort(404);
@@ -273,21 +274,21 @@ class channel_controller extends Controller
                         ->first();
 
         if($content){
-            $real_slug = $this->slugify_url($slug,$content->id,$content->title);
-            if($real_slug !== false){
-                return redirect("public-channel/$real_slug",301);
-            }
+            // $real_slug = $this->slugify_url($slug,$content->id,$content->title);
+            // if($real_slug !== false){
+            //     return redirect("public-channel/$real_slug",301);
+            // }
+            $date_convertor_object = new date_convertor();
+            $content->created_at = $date_convertor_object->get_persian_date($content->created_at);
+
+            return view('layout.channel.messenger',[
+                'content' => $content
+            ]);
         }
         else{
             return abort(404);
         }
 
-        $date_convertor_object = new date_convertor();
-        $content->created_at = $date_convertor_object->get_persian_date($content->created_at);
-
-        return view('layout.channel.messenger',[
-            'content' => $content
-        ]);
     }
 
     protected function slugify_url($slug,$content_id,$title)
