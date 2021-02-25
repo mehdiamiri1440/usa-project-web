@@ -108,6 +108,18 @@
                         <div class="row">
                             <div class="col-xs-12 col-sm-6 ">
                                 <div class="md-form">
+                                    <label for="cta_text" class=""> متن CTA</label>
+                                    <input type="text" class="form-control" id="cta_text" name="cta_text" placeholder="پیش فرض"> 
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 ">
+                                <div class="md-form">
+                                    <label for="cta_link" class="">لینک کامل CTA (داخلی یا خارجی)</label>
+                                    <input type="text" class="form-control" id="cta_link" name="cta_link" placeholder="پیش فرض"> 
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 ">
+                                <div class="md-form">
                                     <label for="is_for_buyer" class="">برای خریداران</label>
 
                                     <div class="btn-group btn-toggle" data-toggle="buttons">

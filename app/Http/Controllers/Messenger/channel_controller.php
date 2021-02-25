@@ -28,6 +28,8 @@ class channel_controller extends Controller
         'last_login_date_from' => 'date|nullable',
         'last_login_date_until' => 'date|nullable',
         'last_login_client' => 'string|nullable',
+        'cta_text' => 'string|nullable',
+        'cta_link' => 'url|nullable',
         'myuser_id' => 'exists:myusers,id|nullable',
         // 'product_id' => 'exists:products,id',
         'is_sharable' => 'boolean',
@@ -39,7 +41,9 @@ class channel_controller extends Controller
         'file_path',
         'is_sharable',
         'product_id',
-        'created_at'
+        'created_at',
+        'cta_text',
+        'cta_link'
     ];
 
     protected $required_channel_content_fields_for_public_page = [
@@ -72,6 +76,10 @@ class channel_controller extends Controller
                     $channel_content_record->$key = $request->$key;
                 }
             }
+        }
+
+        if($request->filled('cta_text') && $request->filled('cta_link')){
+            $channel_content_record->is_sharable = false;
         }
 
         $channel_content_record->save();
