@@ -258,7 +258,7 @@
   border-radius: 0 8px 8px 8px;
   width: 100%;
   position: relative;
-  margin-bottom: 3px;
+  margin-bottom: 5px;
 }
 .message-wrapper .chat-page .message-receive::after {
   content: "";
@@ -500,19 +500,40 @@
   line-height: 1.618;
 }
 
-button.share-button {
+.share-button {
   border-radius: 4px;
   border: none;
   width: 100%;
-  background: rgba(0, 0, 0, 0.4);
   color: #fff;
   padding: 5px;
+  background: rgba(0, 0, 0, 0.4);
+
   font-size: 15px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.16);
+  display: block;
+  overflow: hidden;
+  text-align: center;
+}
+.share-button i {
+  position: relative;
+  top: 2px;
+  left: 2px;
 }
 
-button.share-button:hover {
-  background: rgba(0, 0, 0, 0.6);
+.share-button:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.share-button.custom-link {
+  background: rgba(56, 72, 95, 0.67);
+
+  transition: 0ms;
+  padding: 9px;
+}
+
+.share-button.custom-link:hover {
+  background: rgba(56, 72, 95, 0.9);
+  transition: 0ms;
 }
 
 .forward-item {
@@ -877,8 +898,18 @@ button.share-button:hover {
               @click.prevent="shareContetn(msg.id)"
               class="share-button"
             >
-              ارسال برای دوستان <i class="fa fa-share"></i>
+              <i class="fa fa-share"></i>
+              ارسال برای دوستان
             </button>
+            <a
+              v-else-if="msg.cta_link"
+              :href="msg.cta_link"
+              target="_blank"
+              class="share-button custom-link"
+            >
+              <i class="fa fa-link"></i>
+              {{ msg.cta_text }}
+            </a>
           </div>
         </li>
       </ul>
