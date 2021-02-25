@@ -161,16 +161,16 @@
   float: left;
   text-align: center;
 }
-.not-found-item {
+.empty-list {
   text-align: center;
-  padding: 100px 15px 0;
+  padding: 10px 15px 0;
 }
-.not-found-item p {
+.empty-list p {
   font-size: 16px;
   font-weight: bold;
   color: #777;
 }
-.not-found-item i {
+.empty-list i {
   margin: 5px;
 }
 
@@ -339,6 +339,13 @@ i.fa-star {
   transition: 300ms;
 }
 
+.user-not-fount {
+  text-align: center;
+  font-size: 20px;
+  font-weight: 500;
+  padding-top: 60px;
+}
+
 .user-not-fount img {
   width: 200px;
   display: block;
@@ -423,29 +430,106 @@ i.fa-star {
           <div></div>
         </div>
       </div>
-      <div v-else-if="$parent.isContactListLoaded">
-        <div class="empty-list">
-          <i class="fa fa-user"></i>
-          <p>در حال حاضر مخاطبی وجود ندارد</p>
+      <div
+        v-else-if="$parent.isContactListLoaded"
+        class="contact-items"
+        :class="{ 'is-buyer-list': !$parent.userType }"
+      >
+        <ul>
+          <li class="contact-item">
+            <a
+              href="#"
+              @click.prevent="$parent.isChanleActive = true"
+              :class="{
+                active: $parent.isChanleActive,
+              }"
+            >
+              <div class="channel-image">
+                <img src="../../../../img/logo/512-buskool-logo.jpg" />
+              </div>
+              <div
+                v-if="$parent.channelInfo.unread_contents == 0"
+                class="my-channel-name-wraopper"
+              >
+                <span class="contact-name text-rtl"> کانال رسمی باسکول </span>
+                <button
+                  @click.prevent
+                  class="verified-user"
+                  data-container="body"
+                  data-toggle="popover"
+                  data-placement="bottom"
+                  :data-content="$parent.verifiedUserContent"
+                  title
+                >
+                  <i class="fa fa-certificate"></i>
+                </button>
+                <p class="icon-wrapper">
+                  <i class="fa fa-bullhorn"></i>
+                </p>
+              </div>
+              <div v-else class="my-contact-info-wrapper">
+                <span class="contact-name text-rtl"> کانال رسمی باسکول </span>
 
-          <router-link
-            v-if="$parent.userType"
-            :to="{ name: 'buyAdRequestsSeller' }"
-            tag="button"
-            class="user-button"
-          >
-            شروع چت با خریداران
-          </router-link>
+                <button
+                  @click.prevent
+                  class="verified-user"
+                  data-container="body"
+                  data-toggle="popover"
+                  data-placement="bottom"
+                  :data-content="$parent.verifiedUserContent"
+                  title
+                >
+                  <i class="fa fa-certificate"></i>
+                </button>
+                <p class="last-message-date">
+                  {{
+                    $parent.channelInfo.last_content_date
+                      | moment("jYYYY/jMM/jDD")
+                  }}
+                </p>
+              </div>
 
-          <router-link
-            v-else
-            :to="{ name: 'productList' }"
-            tag="button"
-            class="user-button"
-          >
-            شروع چت با فروشندگان
-          </router-link>
-        </div>
+              <div class="my-contact-info-wrapper">
+                <span
+                  class="contact-last-message"
+                  v-text="$parent.channelInfo.last_content_title"
+                ></span>
+
+                <div class="count-number-wrapper">
+                  <p
+                    class="count-number"
+                    v-if="$parent.channelInfo.unread_contents !== 0"
+                    v-text="$parent.channelInfo.unread_contents"
+                  ></p>
+                </div>
+              </div>
+            </a>
+          </li>
+          <li>
+            <div class="empty-list">
+              <i class="fa fa-user"></i>
+              <p>در حال حاضر مخاطبی وجود ندارد</p>
+
+              <router-link
+                v-if="$parent.userType"
+                :to="{ name: 'buyAdRequestsSeller' }"
+                tag="button"
+                class="user-button"
+              >
+                شروع چت با خریداران
+              </router-link>
+
+              <router-link
+                v-else
+                :to="{ name: 'productList' }"
+                tag="button"
+                class="user-button"
+              >
+                شروع چت با فروشندگان
+              </router-link>
+            </div>
+          </li>
+        </ul>
       </div>
     </div>
 

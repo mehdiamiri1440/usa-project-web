@@ -226,8 +226,8 @@ li .message-item-wrapper::after {
 
 .message-image{
     margin-bottom: 13px;
-    height: 270px;
     position: relative;
+    min-height: 270px;
     overflow: hidden;
     background: #eeee;
 }
@@ -237,17 +237,6 @@ li .message-item-wrapper::after {
     display: block;
     height: 100%;
 }
-
-.message-image a img{
-    width: 100%;
-    height: initial;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%)
-}
-
 
 .main-chat-bg-wrapper{
     background: url('../../img/whatsappbg.png') repeat;
@@ -549,6 +538,18 @@ button.share-button:hover{
     top: -2px;
 }
 
+.spinner-wrapper {
+    position: relative;
+    top: 100px;
+    text-align: center;
+  }
+  .spinner-border {
+    width: 5rem;
+    height: 5rem;
+    border-width: 0.35rem;
+    color: #21ad93;
+  }
+  
 @media screen and (max-width: 1199px){
     .logo-wrapper{
         width: 100%;
@@ -599,13 +600,6 @@ button.share-button:hover{
     li > div.list-item{
         min-width: 200px;
     margin-right: 40px;
-    }
-   
-}
-
-@media screen and (max-width: 450px){
-    .message-image{
-        height: 150px;
     }
    
 }

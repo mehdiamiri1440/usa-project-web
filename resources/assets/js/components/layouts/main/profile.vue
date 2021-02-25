@@ -2076,12 +2076,12 @@ export default {
         "CopyProfileLink",
         "click on copy profile link"
       );
+      let base = getBase();
 
       if (this.isDeviceMobile()) {
         var linkElement = document.createElement("a");
         var Message =
-          "https://buskool.com/profile/" +
-          this.profileOwner.user_info.user_name;
+          base + "shared-profile/" + this.profileOwner.user_info.user_name;
         var messageToWhatsApp = encodeURIComponent(Message);
         var url = "whatsapp://send?text=" + messageToWhatsApp;
         linkElement.setAttribute("href", url);
@@ -2095,7 +2095,7 @@ export default {
         var input = document.createElement("input");
         input.setAttribute(
           "value",
-          "https://buskool.com/profile/" + this.profileOwner.user_info.user_name
+          base + "shared-profile/" + this.profileOwner.user_info.user_name
         );
         document.body.appendChild(input);
         input.select();
