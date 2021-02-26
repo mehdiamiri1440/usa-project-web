@@ -324,6 +324,7 @@
 
 .btn.btn-copy {
   width: 100%;
+  background: #f0f0f0;
 }
 
 .content_user_wrapper_mobile {
@@ -1943,8 +1944,8 @@ export default {
         this.copyLinkText = " اشتراک در واتساپ";
         this.copyLinkClass = "fab fa-whatsapp fa-2x";
       } else {
-        this.copyLinkText = "کپی آدرس";
-        this.copyLinkClass = "fa fa-copy";
+        this.copyLinkText = "اشتراک پروفایل";
+        this.copyLinkClass = "fa fa-share-alt";
       }
       self.statisticsLoader = true;
       axios
@@ -2070,44 +2071,74 @@ export default {
           $("#custom-main-modal").modal("show");
         });
     },
-    copyProfileLinkToClipBoard: function () {
+    copyProfileLinkToClipBoard(contentId) {
       this.registerComponentStatistics(
         "profileView",
         "CopyProfileLink",
         "click on copy profile link"
       );
-      let base = getBase();
+
+      let baseUrl = getBase();
 
       if (this.isDeviceMobile()) {
         var linkElement = document.createElement("a");
         var Message =
-          base + "shared-profile/" + this.profileOwner.user_info.user_name;
+          baseUrl + "shared-profile/" + this.profileOwner.user_info.user_name;
         var messageToWhatsApp = encodeURIComponent(Message);
         var url = "whatsapp://send?text=" + messageToWhatsApp;
+
         linkElement.setAttribute("href", url);
         linkElement.setAttribute("data-action", "share/whatsapp/share");
+
         document.body.appendChild(linkElement);
 
         linkElement.click();
 
         document.body.removeChild(linkElement);
       } else {
-        var input = document.createElement("input");
-        input.setAttribute(
-          "value",
-          base + "shared-profile/" + this.profileOwner.user_info.user_name
-        );
-        document.body.appendChild(input);
-        input.select();
-        var result = document.execCommand("copy");
-        document.body.removeChild(input);
-        if (result) {
-          this.popUpMsg = "آدرس پروفایل کاربر کپی شد.";
-          eventBus.$emit("submitSuccess", this.popUpMsg);
-          $("#custom-main-modal").modal("show");
-        }
+        let url =
+          baseUrl + "shared-profile/" + this.profileOwner.user_info.user_name;
+        eventBus.$emit("shareModalUrl", url);
       }
     },
+    // copyProfileLinkToClipBoard: function () {
+    //   this.registerComponentStatistics(
+    //     "profileView",
+    //     "CopyProfileLink",
+    //     "click on copy profile link"
+    //   );
+    //   let base = getBase();
+
+    //   if (this.isDeviceMobile()) {
+    //     var linkElement = document.createElement("a");
+    //     var Message =
+    //       base + "shared-profile/" + this.profileOwner.user_info.user_name;
+    //     var messageToWhatsApp = encodeURIComponent(Message);
+    //     var url = "whatsapp://send?text=" + messageToWhatsApp;
+    //     linkElement.setAttribute("href", url);
+    //     linkElement.setAttribute("data-action", "share/whatsapp/share");
+    //     document.body.appendChild(linkElement);
+
+    //     linkElement.click();
+
+    //     document.body.removeChild(linkElement);
+    //   } else {
+    //     var input = document.createElement("input");
+    //     input.setAttribute(
+    //       "value",
+    //       base + "shared-profile/" + this.profileOwner.user_info.user_name
+    //     );
+    //     document.body.appendChild(input);
+    //     input.select();
+    //     var result = document.execCommand("copy");
+    //     document.body.removeChild(input);
+    //     if (result) {
+    //       this.popUpMsg = "آدرس پروفایل کاربر کپی شد.";
+    //       eventBus.$emit("submitSuccess", this.popUpMsg);
+    //       $("#custom-main-modal").modal("show");
+    //     }
+    //   }
+    // },
     isDeviceMobile: function () {
       if (
         navigator.userAgent.match(/Android/i) ||

@@ -110,12 +110,11 @@ h1{
 .logo-section a{
     max-width: 140px;
     display: block;
+    margin: 0 auto;
+
 }
 
 @media screen and (max-width:991px){
-    .logo-section a{
-        margin: 0 auto;
-    }
     
     .header-page-wrapper{
         height: 10px;
