@@ -308,9 +308,8 @@ class product_list_controller extends Controller
         $profiles = DB::table('profiles')
                         ->where('confirmed',true)
                         ->whereIn('myuser_id',array_column($products->all(),'myuser_id'))
-                        ->select('profiles.myuser_id','profiles.profile_photo')
-                        ->orderBy('created_at')
-                        ->groupBy('profiles.myuser_id')
+                        ->selectRaw('profiles.myuser_id,profiles.profile_photo,MAX(profiles.created_at)')
+                        ->groupBy(DB::raw('profiles.myuser_id desc'))
                         ->get();
 
         $result_products = [];
