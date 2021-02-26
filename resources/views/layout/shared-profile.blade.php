@@ -11,7 +11,7 @@
     @if($profile->profile_photo)
     <meta property="og:image" content="{{asset('/storage/' . $profile->profile_photo)}}" />
     @else
-    <meta property="og:image" content="{{asset('assets/img/logo/mobile-logo.svg')}}" />
+    <meta property="og:image" content="{{asset('assets/img/logo/512-buskool-logo.jpg')}}" />
     @endif
     <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:width" content="400" />

@@ -543,17 +543,27 @@ button.share-button:hover{
     bottom: 0;
     width: 100%;
     left: 0;
-    z-index: 2;
     background: #00c569;
+    z-index: 2;
     color: #fff;
     font-size: 18px;
     font-weight: 500;
     border-radius: 0;
     border: none;
     box-shadow: 0 -3px 10px rgba(0,0,0,0.12);
-    padding: 15px 0;
+    padding: 12px 0;
     text-align: center;
 }
+
+.footer-button:hover, .footer-button:focus{
+    color: #fff;
+}
+
+.footer-button:hover{
+    background: #4dc0bb;
+
+}
+
 #download-app{
     background: #e84256;
     display: none;
@@ -584,11 +594,16 @@ button.share-button:hover{
 
     .messenger{
         width: 100%;
-        bottom: 0;
+        bottom: 100px;
     }
 }
 
 @media screen and (max-width: 991px){
+    
+    .main-chat ul li:last-child{
+        padding-bottom: 70px;
+    }
+
     .header-wrapper{
         display: none;
     }

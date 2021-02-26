@@ -574,18 +574,6 @@
                   <br />
                 </p>
               </li>
-              <li class="empty hidden-xs">
-                <a data-toggle="collapse" class="item-help" title=""></a>
-
-                <p class="item-content-title">عنوان</p>
-
-                <p class="item-content-amount">
-                  <i
-                    class="text-green fa fa-times-circle"
-                    style="color: #e41c38"
-                  ></i>
-                </p>
-              </li>
               <li v-for="(item, index) in priceItemBasic" :key="index">
                 <a
                   data-toggle="collapse"
@@ -692,6 +680,11 @@ export default {
           helpDescription: "",
         },
         {
+          title: "تبلیغ محصولات در کانال باسکول",
+          contentUnit: false,
+          helpDescription: "",
+        },
+        {
           title: "بسته ی ویژه فروش",
           contentUnit: false,
           helpDescription:
@@ -711,19 +704,16 @@ export default {
           helpDescription:
             "بر روی اولین محصول ثبت شده ویژگی نردبان به صورت خودکار اعمال خواهد شد",
         },
-
         {
           title: "امکان ارتباط با خریداران طلایی",
           contentUnit: true,
           helpDescription: "",
         },
-
         {
           title: "تبلیغ محصولات در کانال باسکول",
           contentUnit: true,
           helpDescription: "",
         },
-
         {
           title: "5 برابر ارتباطات بیشتر با خریداران",
           contentUnit: true,
