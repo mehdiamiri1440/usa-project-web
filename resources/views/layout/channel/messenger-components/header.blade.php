@@ -12,7 +12,7 @@
     @if($content->file_path)
     <meta property="og:image" content="{{asset('/storage/' . $content->file_path)}}" />
     @else
-    <meta property="og:image" content="{{asset('assets/img/logo/mobile-logo.svg')}}" />
+    <meta property="og:image" content="{{asset('assets/img/logo/512-buskool-logo.jpg')}}" />
     @endif
     <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:width" content="400" />
