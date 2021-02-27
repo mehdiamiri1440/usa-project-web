@@ -183,7 +183,7 @@
 
   $(document).ready(function(){
     $('#copy-link-url').text(generateLinkUrl());
-    activateDownloadAppButton();
+    // activateDownloadAppButton();
     shareButtonClick();
     activeUserVerified();
     activeImagePopup();
