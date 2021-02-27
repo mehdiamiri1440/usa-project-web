@@ -616,6 +616,10 @@
 }
 
 @media screen and (max-width: 1199px) {
+  .message-contents {
+    max-width: 423px;
+  }
+
   .message-wrapper .message-contact-title {
     position: relative;
     z-index: 5;
@@ -678,6 +682,9 @@
 }
 
 @media screen and (max-width: 500px) {
+  .message-contents {
+    max-width: 304px;
+  }
   .message-wrapper .message-contact-title a {
     max-width: 190px;
   }
@@ -694,6 +701,12 @@
 
   .message-wrapper .message-contact-title-img {
     margin-left: 5px;
+  }
+}
+
+@media screen and (max-width: 376px) {
+  .message-contents {
+    max-width: 289px;
   }
 }
 
@@ -854,7 +867,8 @@
                   :img="msg.file_path"
                   :base="$parent.str"
                   :alt="msg.text"
-                  is-product="true"
+                  :img-id="msg.id"
+                  :is-product="true"
                 />
                 <div class="product-content-wrapper">
                   <p
@@ -877,6 +891,7 @@
                   :img="msg.file_path"
                   :base="$parent.str"
                   :alt="msg.text"
+                  :img-id="msg.id"
                 />
                 <span class="message-text" v-text="msg.text"></span>
                 <span class="message-chat-date">
