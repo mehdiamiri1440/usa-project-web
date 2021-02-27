@@ -1064,6 +1064,21 @@ export default {
         this.activeShareModal(contentId);
       }
     },
+    handleBackKeys: function () {
+      this.$parent.isImageOpened = true;
+      let self = this;
+      if (window.history.state) {
+        history.pushState(null, null, window.location);
+      }
+      $(window).on("popstate", function (e) {
+        $.magnificPopup.close();
+      });
+      this.$parent.handleBackBtnClickOnDevices();
+    },
+    resetBackKeys() {
+      this.$parent.isImageOpened = false;
+      this.$parent.handleBackBtnClickOnDevices();
+    },
     isDeviceMobile: function () {
       if (
         navigator.userAgent.match(/Android/i) ||

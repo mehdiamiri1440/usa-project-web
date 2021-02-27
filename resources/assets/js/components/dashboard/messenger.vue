@@ -387,6 +387,7 @@ export default {
   data: function () {
     return {
       isImageLoad: false,
+      isImageOpened: false,
       isChatMessagesLoaded: true,
       isFirstMessageLoading: true,
       selectedIndex: -1,
@@ -765,7 +766,6 @@ export default {
     },
     handleBackBtnClickOnDevices: function () {
       var self = this;
-
       if (window.history.state) {
         history.pushState(null, null, window.location);
       }
@@ -775,10 +775,12 @@ export default {
             window.location.pathname == "/seller/messenger/contacts" ||
             window.location.pathname == "/buyer/messenger/contacts"
           ) {
-            if (self.selectedContact) {
-              self.selectedContact = "";
-            } else if (self.isChanleActive) {
-              self.isChanleActive = false;
+            if (!self.isImageOpened) {
+              if (self.selectedContact) {
+                self.selectedContact = "";
+              } else if (self.isChanleActive) {
+                self.isChanleActive = false;
+              }
             }
           }
         }

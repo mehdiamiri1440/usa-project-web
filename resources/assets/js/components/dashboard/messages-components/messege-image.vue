@@ -183,19 +183,14 @@ export default {
           },
           callbacks: {
             open: function () {
-              self.handleBackKeys();
+              self.$parent.handleBackKeys();
+            },
+            close: function () {
+              self.$parent.resetBackKeys();
             },
           },
         });
       }, 10);
-    },
-    handleBackKeys: function () {
-      if (window.history.state) {
-        history.pushState(null, null, window.location);
-      }
-      $(window).on("popstate", function (e) {
-        $.magnificPopup.close();
-      });
     },
   },
   mounted() {
