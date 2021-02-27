@@ -338,11 +338,11 @@
     >
       <router-link
         tag="button"
-        :to="{ name: 'buyAdRequestsSeller' }"
+        :to="{ name: 'messagesRequestSeller' }"
         class="fixed-action"
       >
         <i class="fa fa-list-alt"></i>
-        <span>درخواست ها</span>
+        <span> خریداران </span>
       </router-link>
     </div>
   </div>
@@ -374,7 +374,7 @@ export default {
         "messenger/contacts",
         "messenger/buy-ads",
         "register-product/success",
-        "register-product",
+        // "register-product",
         "pricing",
         "product-pricing",
         "buyad-pricing",

@@ -944,46 +944,6 @@
           <i class="fa fa-address-card"> </i>
           ارسال پروفایل تجاری شما به دوستان
         </button>
-        <!-- <form @v-on:submit.prevent="$parent.sendMessage()">
-          <div class="message-input">
-            <input
-              class="padding-default"
-              type="text"
-              placeholder="پیغامی بگذارید "
-              v-model="$parent.msgToSend"
-            />
-          </div>
-
-          <div class="button-wrapper">
-            <div class="item-wrapper">
-              <button
-                type="submit"
-                class="send-message-button scale-up-center-full"
-                @click.prevent="$parent.sendMessage()"
-              >
-                @click.prevent="$parent.sendMessage()"
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="13.347"
-                  height="12.766"
-                  viewBox="0 0 13.347 12.766"
-                >
-                  <path
-                    id="send-message-icon"
-                    data-name="send-message-icon"
-                    d="M2511.158-3909.893l12.347-5.929-12.347-5.837.235,4.51,10.029,1.327-10.029,1.477Z"
-                    transform="translate(-2510.658 3922.159)"
-                    fill="#fff"
-                    stroke="#fff"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1"
-                  />
-                </svg>
-              </button>
-            </div>
-          </div>
-        </form> -->
       </div>
     </div>
   </div>

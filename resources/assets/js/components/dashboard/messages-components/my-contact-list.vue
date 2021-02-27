@@ -439,7 +439,7 @@ i.fa-star {
           <li class="contact-item">
             <a
               href="#"
-              @click.prevent="$parent.isChanleActive = true"
+              @click.prevent="$parent.openChannel()"
               :class="{
                 active: $parent.isChanleActive,
               }"
@@ -542,7 +542,7 @@ i.fa-star {
         <li class="contact-item">
           <a
             href="#"
-            @click.prevent="$parent.isChanleActive = true"
+            @click.prevent="$parent.openChannel()"
             :class="{
               active: $parent.isChanleActive,
             }"

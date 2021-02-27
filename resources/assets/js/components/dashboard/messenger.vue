@@ -398,7 +398,11 @@ export default {
       ],
       isSearchingContact: false,
       contactList: [],
-      channelInfo: "",
+      channelInfo: {
+        unread_contents: 0,
+        last_content_title: "",
+        last_content_date: "",
+      },
       chatMessages: "",
       isNoticeActive: true,
       isGuideActive: false,
@@ -463,6 +467,13 @@ export default {
       this.toContact = this.toContact + this.contactsCountInEachLoad;
 
       this.loadContactList();
+    },
+    openChannel() {
+      this.channelInfo.unread_contents = 0;
+      this.channelInfo.last_content_title = "";
+      this.channelInfo.last_content_date = "";
+      this.handleBackBtnClickOnDevices();
+      this.isChanleActive = true;
     },
     loadChatHistory: function (contact, index, isUpdate) {
       this.isChanleActive = false;
@@ -758,7 +769,6 @@ export default {
       if (window.history.state) {
         history.pushState(null, null, window.location);
       }
-
       $(window).on("popstate", function (e) {
         if (self.isDeviceMobile()) {
           if (
@@ -767,6 +777,8 @@ export default {
           ) {
             if (self.selectedContact) {
               self.selectedContact = "";
+            } else if (self.isChanleActive) {
+              self.isChanleActive = false;
             }
           }
         }

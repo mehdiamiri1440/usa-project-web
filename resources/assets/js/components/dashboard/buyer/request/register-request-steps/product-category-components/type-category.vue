@@ -179,13 +179,13 @@ input.error:focus + i {
               مثلا: هندی ۱۱۲۱
             </span>
             <span v-else-if="$parent.categoryName == 'خشکبار'">
-              مثلا: پسته فندقی
+              مثلا: فندقی
             </span>
             <span v-else-if="$parent.categoryName == 'ادویه'">
-              مثلا: زعفرون نگین
+              مثلا: نگین
             </span>
             <span v-else-if="$parent.categoryName == 'دامپروری'">
-              مثلا: عسل چهل گیاه
+              مثلا: چهل گیاه
             </span>
             <span v-else> مثلا: مضافتی</span>
           </label>

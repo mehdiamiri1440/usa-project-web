@@ -183,7 +183,6 @@ export default {
           },
           callbacks: {
             open: function () {
-              console.log("handle back");
               self.handleBackKeys();
             },
           },
