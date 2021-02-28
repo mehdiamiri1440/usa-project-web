@@ -475,6 +475,12 @@ export default {
       this.channelInfo.last_content_date = "";
       this.handleBackBtnClickOnDevices();
       this.isChanleActive = true;
+
+      this.registerComponentStatistics(
+        "messenger",
+        "openChannel",
+        "clickOnChannel"
+      );
     },
     loadChatHistory: function (contact, index, isUpdate) {
       this.isChanleActive = false;
