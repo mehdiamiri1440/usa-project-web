@@ -1065,9 +1065,8 @@ export default {
         this.activeShareModal(contentId);
       }
     },
-    handleBackKeys: function () {
+    handleBackKeys() {
       this.$parent.isImageOpened = true;
-      let self = this;
       if (window.history.state) {
         history.pushState(null, null, window.location);
       }
