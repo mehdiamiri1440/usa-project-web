@@ -573,7 +573,7 @@
   line-height: 1.618;
   white-space: pre-line;
   padding: 0 5px;
-  font-size: 18px;
+  font-size: 16px;
   display: block;
 }
 
