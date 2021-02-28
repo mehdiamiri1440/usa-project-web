@@ -56,7 +56,7 @@ class user_controller extends Controller
 
             $this->set_user_session($user);
             $this->set_last_login_info($user->id,$request);
-            $jwt_token = JWTAuth::fromUser($user,['exp' => Carbon::now()->addMinutes(3)->timestamp]);
+            $jwt_token = JWTAuth::fromUser($user,['exp' => Carbon::now()->addDays(2)->timestamp]);
 
             return response()->json([
                 'status' => true,
