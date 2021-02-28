@@ -175,10 +175,10 @@ export default {
         image: {
           verticalFit: true,
         },
-        zoom: {
-          enabled: true,
-          duration: 300, // don't foget to change the duration also in CSS
-        },
+        // zoom: {
+        //   enabled: true,
+        //   duration: 300, // don't foget to change the duration also in CSS
+        // },
         callbacks: {
           open: () => {
             this.$parent.handleBackKeys();
