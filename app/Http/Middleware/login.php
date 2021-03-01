@@ -68,6 +68,13 @@ class login
                                 'msg' => $e->getMessage()
                             ],401);
                         }
+                        else if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenExpiredException){
+                            return response()->json([
+                                'status' => false,
+                                'redirect_to_login' => true,
+                                'msg' => $e->getMessage()
+                            ],401);
+                        }
 
                         return response()->json([
                             'status' => false,
