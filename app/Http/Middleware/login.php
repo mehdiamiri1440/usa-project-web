@@ -60,7 +60,7 @@ class login
                             'token' => $refreshed_token
                         ],401);
 
-                    }catch (JWTException $e){
+                    }catch (\Exception $e){
                         if($e instanceof \Tymon\JWTAuth\Exceptions\TokenBlacklistedException){
                             return response()->json([
                                 'status' => false,
