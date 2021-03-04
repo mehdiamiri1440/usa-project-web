@@ -460,12 +460,12 @@
 
           <div class="item-content">
             <ul class="item-content-list">
-              <li class="free-item">
+              <!-- <li class="free-item">
                 <p>
                   <i class="fa fa-plus-circle"></i>
                   یک ماه رایگان
                 </p>
-              </li>
+              </li> -->
               <li v-for="(item, index) in priceItemPro" :key="index">
                 <a
                   data-toggle="collapse"
@@ -513,7 +513,10 @@
           </div>-->
 
           <div class="detail-wrapper">
-            <p>امکان خرید به صورت سالانه</p>
+            <!-- <p>امکان خرید به صورت سالانه</p> -->
+            <p>
+              <br />
+            </p>
           </div>
 
           <div class="item-action">
@@ -569,11 +572,11 @@
 
           <div class="item-content">
             <ul class="item-content-list">
-              <li class="free-item hidden-xs">
+              <!-- <li class="free-item hidden-xs">
                 <p>
                   <br />
                 </p>
-              </li>
+              </li> -->
               <li v-for="(item, index) in priceItemBasic" :key="index">
                 <a
                   data-toggle="collapse"
@@ -621,7 +624,10 @@
           </div>
 
           <div class="detail-wrapper">
-            <p>امکان خرید به صورت ۳ ماهه</p>
+            <!-- <p>امکان خرید به صورت ۳ ماهه</p> -->
+            <p>
+              <br />
+            </p>
           </div>
 
           <div class="item-action">

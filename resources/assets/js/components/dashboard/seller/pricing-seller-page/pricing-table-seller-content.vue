@@ -226,6 +226,9 @@
   border-bottom: 1px solid #f2f2f2;
   overflow: hidden;
 }
+.item-content-wrapper:last-of-type {
+  border-bottom: none;
+}
 
 .item-content-wrapper > div {
   float: right;
@@ -422,9 +425,9 @@
                   </div>
                 </div>
               </div>
-              <p class="main-text-wrapper">
+              <!-- <p class="main-text-wrapper">
                 حرفه ای ها فرصت ها را از دست نمی دهند!
-              </p>
+              </p> -->
             </div>
           </div>
           <!-- show pricing items -->
