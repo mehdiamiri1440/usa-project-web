@@ -451,8 +451,8 @@
             <div class="item-title">
               <h2>عضویت ویژه</h2>
               <p class="item-price">
-                ماهانه
-                <span class="price">89,000</span>
+                سالانه
+                <span class="price">979,000</span>
                 <span class="small-unit"> تومان</span>
               </p>
             </div>
@@ -560,8 +560,8 @@
             <div class="item-title">
               <h2>عضویت پایه</h2>
               <p class="item-price">
-                ماهانه
-                <span class="price">99,000</span>
+                سه ماهه
+                <span class="price">297,000</span>
                 <span class="small-unit"> تومان</span>
               </p>
             </div>
@@ -740,13 +740,35 @@ export default {
         });
     },
     doPayment: function (packageType) {
-      let paymentData = {
-        paymentItems: "",
-        selectedPackage: "",
-      };
-      paymentData.paymentItems = this.calculateData(packageType);
-      paymentData.selectedPackage = packageType;
-      eventBus.$emit("paymentData", paymentData);
+      this.doPaymentLoader = true;
+      let userId = getUserId();
+
+      this.registerComponentStatistics(
+        "payment",
+        "type-" + packageType,
+        "userId: " + userId
+      );
+      window.location.href = "/payment/" + packageType;
+
+      // *****  payment width factor  *****
+
+      // let paymentData = {
+      //   paymentItems: "",
+      //   selectedPackage: "",
+      // };
+      // paymentData.paymentItems = this.calculateData(packageType);
+      // paymentData.selectedPackage = packageType;
+      // eventBus.$emit("paymentData", paymentData);
+    },
+    registerComponentStatistics: function (
+      categoryName,
+      actionName,
+      labelName
+    ) {
+      gtag("event", actionName, {
+        event_category: categoryName,
+        event_label: labelName,
+      });
     },
     calculateData(payment) {
       let item = "";
