@@ -502,75 +502,6 @@
   padding: 15px;
   line-height: 1.618;
 }
-.drop-image {
-  transition: 150ms;
-  display: none;
-}
-.drop-image .report-button {
-  padding: 0;
-}
-
-.drop-active,
-.drop-to-change-image {
-  transition: 150ms;
-  display: block;
-  height: 100%;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  position: absolute;
-  z-index: 9999;
-  text-align: center;
-  background: #f0f0f0;
-}
-
-.drop-to-change-image {
-  transition: 150ms;
-  height: 0;
-  z-index: 10000;
-  opacity: 0.8;
-  overflow: hidden;
-}
-
-.drop-to-change-active {
-  transition: 150ms;
-  height: 100%;
-}
-
-.main-wrapper {
-  position: absolute;
-  left: 15px;
-  right: 15px;
-  top: 65px;
-  bottom: 15px;
-  border: 6px solid;
-  border-style: dashed;
-  color: #ababab;
-  display: flex;
-  align-items: center;
-  transition: 100ms;
-}
-
-.main-wrapper.file-is-upload {
-  border: none;
-  bottom: 60px;
-  overflow: hidden;
-  border-radius: 5px;
-}
-
-.main-wrapper h3 {
-  flex: 1;
-}
-
-.main-wrapper img {
-  width: initial;
-  height: 100%;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 5px;
-}
 
 @media screen and (max-width: 1199px) {
   .message-wrapper .message-contact-title {
@@ -812,120 +743,10 @@
     </div>
 
     <div class="chat-page" v-if="$parent.selectedContact">
-      <div
-        class="drop-to-change-image"
-        :class="{
-          'drop-to-change-active':
-            $refs.upload && $refs.upload.dropActive && files.length,
-        }"
-      >
-        <div class="main-wrapper">
-          <h3>تصویر را اینجا بکشید و رها کنید</h3>
-        </div>
-      </div>
-      <div
-        class="drop-image"
-        :class="{
-          'drop-active':
-            ($refs.upload && $refs.upload.dropActive) || files.length,
-        }"
-      >
-        <div class="message-contact-title">
-          <div class="contact-title-contents pull-right">
-            <button @click.prevent="files.pop()" class="back-state">
-              <i class="fa fa-arrow-right"></i>
-            </button>
-            <div @click.prevent="files.pop()" class="message-contact-title-img">
-              <img
-                v-if="$parent.selectedContact.profile_photo"
-                :src="$parent.str + '/' + $parent.selectedContact.profile_photo"
-                :alt="$parent.selectedContact.first_name[0]"
-              />
-
-              <img v-else src="../../../../img/user-defult.png" />
-            </div>
-
-            <span>
-              {{
-                $parent.selectedContact.first_name +
-                " " +
-                $parent.selectedContact.last_name
-              }}
-            </span>
-          </div>
-          <div class="head-action-buttons pull-left">
-            <div class="head-action-buttons pull-left">
-              <file-upload
-                class="report-button"
-                accept="mage/png,image/gif,image/jpeg,image/webp"
-                :multiple="false"
-                :directory="false"
-                :size="1024 * 1024 * 10"
-                :thread="3"
-                :drop="true"
-                :add-index="false"
-                name="chat-upload"
-                v-model="files"
-                @input-filter="inputFilter"
-                @input-file="inputFile"
-                ref="upload"
-              >
-                <i class="fa fa-redo-alt"></i>
-                تغییر تصوير
-              </file-upload>
-            </div>
-          </div>
-        </div>
-        <div class="main-upload-image-wrapper">
-          <div class="main-wrapper" :class="{ 'file-is-upload': files.length }">
-            <h3 v-if="!files.length">تصویر را اینجا بکشید و رها کنید</h3>
-            <img v-else :src="files[0].thumb" width="40" height="auto" />
-          </div>
-        </div>
-        <div class="send-message-form" v-show="files.length">
-          <form @v-on:submit.prevent="$parent.sendMessage()">
-            <div class="message-input">
-              <input
-                class="padding-default"
-                type="text"
-                placeholder="توضیحات تصویر"
-                v-model="$parent.msgToSend"
-              />
-            </div>
-
-            <div class="button-wrapper">
-              <div class="item-wrapper">
-                <button
-                  type="submit"
-                  class="send-message-button scale-up-center-full"
-                  @click.prevent="$parent.sendMessage()"
-                >
-                  <!-- @click.prevent="$parent.sendMessage()" -->
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="13.347"
-                    height="12.766"
-                    viewBox="0 0 13.347 12.766"
-                  >
-                    <path
-                      id="send-message-icon"
-                      data-name="send-message-icon"
-                      d="M2511.158-3909.893l12.347-5.929-12.347-5.837.235,4.51,10.029,1.327-10.029,1.477Z"
-                      transform="translate(-2510.658 3922.159)"
-                      fill="#fff"
-                      stroke="#fff"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="1"
-                    />
-                  </svg>
-                </button>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-
+      <upload-image-chat
+        :str="$parent.str"
+        :selected-contact="$parent.selectedContact"
+      />
       <div class="bg-wrapper"></div>
       <ul
         :class="[
@@ -1061,9 +882,9 @@
         </div>
       </div>
       <div class="send-message-form">
-        <form @v-on:submit.prevent="$parent.sendMessage()">
+        <form @v-on:submit.prevent="sendMessage()">
           <div class="message-input">
-            <file-upload
+            <!-- <file-upload
               class="capture-image"
               :class="{
                 'slide-out-right': isChat,
@@ -1083,7 +904,7 @@
               ref="upload"
             >
               <i class="fa fa-camera"></i>
-            </file-upload>
+            </file-upload> -->
 
             <input
               :class="{
@@ -1091,7 +912,7 @@
               }"
               type="text"
               placeholder="پیغامی بگذارید "
-              v-model="$parent.msgToSend"
+              v-model="message"
             />
           </div>
 
@@ -1100,9 +921,9 @@
               <button
                 type="submit"
                 class="send-message-button scale-up-center-full"
-                @click.prevent="$parent.sendMessage()"
+                @click.prevent="sendMessage()"
               >
-                <!-- @click.prevent="$parent.sendMessage()" -->
+                <!-- @click.prevent="sendMessage()" -->
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="13.347"
@@ -1131,16 +952,16 @@
 </template>
 
 <script>
-import FileUpload from "vue-upload-component";
-
+import uploadImageChat from "./upload-image-chat.vue";
 export default {
   components: {
-    FileUpload,
+    uploadImageChat,
   },
   data() {
     return {
       isVoiceRecord: false,
       isChat: false,
+      message: "",
       files: [],
     };
   },
@@ -1150,7 +971,9 @@ export default {
       this.hideCollapses();
       this.$parent.userHasNotice();
     },
-
+    sendMessage() {
+      this.$parent.sendMessage();
+    },
     hideCollapses: function () {
       $(document).on("click", function (e) {
         /* bootstrap collapse js adds "in" class to your collapsible element*/
@@ -1209,256 +1032,6 @@ export default {
         }, 1000);
       }
     },
-    inputFile(newFile, oldFile) {
-      if (newFile && oldFile) {
-        // update
-        if (newFile.active && !oldFile.active) {
-          // beforeSend
-          // min size
-          if (
-            newFile.size >= 0 &&
-            this.minSize > 0 &&
-            newFile.size < this.minSize
-          ) {
-            this.$refs.upload.update(newFile, { error: "size" });
-          }
-        }
-        if (newFile.progress !== oldFile.progress) {
-          // progress
-        }
-        if (newFile.error && !oldFile.error) {
-          // error
-        }
-        if (newFile.success && !oldFile.success) {
-          // success
-        }
-      }
-      if (!newFile && oldFile) {
-        // remove
-
-        if (oldFile.success && oldFile.response.id) {
-          // $.ajax({
-          //   type: 'DELETE',
-          //   url: '/upload/delete?id=' + oldFile.response.id,
-          // })
-        }
-      }
-      // Automatically activate upload
-      if (
-        Boolean(newFile) !== Boolean(oldFile) ||
-        oldFile.error !== newFile.error
-      ) {
-        if (this.uploadAuto && !this.$refs.upload.active) {
-          this.$refs.upload.active = true;
-        }
-      }
-    },
-    inputFilter(newFile, oldFile, prevent) {
-      if (newFile && !oldFile) {
-        // Before adding a file
-        // 添加文件前
-        // Filter system files or hide files
-        // 过滤系统文件 和隐藏文件
-        if (/(\/|^)(Thumbs\.db|desktop\.ini|\..+)$/.test(newFile.name)) {
-          return prevent();
-        }
-        // Filter php html js file
-        // 过滤 php html js 文件
-        if (/\.(php5?|html?|jsx?)$/i.test(newFile.name)) {
-          return prevent();
-        }
-        // Automatic compression
-        // 自动压缩
-        if (
-          newFile.file &&
-          newFile.type.substr(0, 6) === "image/" &&
-          this.autoCompress > 0 &&
-          this.autoCompress < newFile.size
-        ) {
-          newFile.error = "compressing";
-          this.$parent.isCompressor = true;
-
-          let Options = {
-            checkOrientation: true,
-            quality: 0.6,
-            convertSize: 1000000,
-            minWidth: 512,
-            minHeight: 512,
-          };
-
-          var finalOrientation = 1;
-
-          const imageCompressor = new ImageCompressor(null, Options);
-          const self = this;
-
-          imageCompressor
-            .compress(newFile.file, Options)
-            .then((file) => {
-              self.getOrientation(newFile.file, function (orientation) {
-                // console.log(orientation);
-                if (orientation == 6) {
-                  finalOrientation = 8;
-                } else if (orientation != 1) {
-                  finalOrientation = 1;
-                }
-                loadImage(file, {
-                  orientation: finalOrientation,
-                  meta: true,
-                  canvas: true,
-                  maxWidth: 800,
-                })
-                  .then(function (data) {
-                    if (!data.imageHead)
-                      throw new Error("Could not parse image metadata");
-                    return new Promise(function (resolve) {
-                      data.image.toBlob(function (blob) {
-                        data.blob = blob;
-                        resolve(data);
-                      }, "image/jpeg");
-                    });
-                  })
-                  .then(function (data) {
-                    return loadImage.replaceHead(data.blob, data.imageHead);
-                  })
-                  .then(function (blob) {
-                    self.$refs.upload.update(newFile, {
-                      error: "",
-                      file: blob,
-                      size: blob.size,
-                      type: blob.type,
-                    });
-                    if (self.$parent.isCompressor) {
-                      self.$parent.isCompressor = false;
-                    }
-                  })
-                  .catch(function (err) {
-                    console.error(err);
-                  });
-              });
-            })
-            .catch((err) => {
-              this.$refs.upload.update(newFile, {
-                error: err.message || "compress",
-              });
-              if (this.$parent.isCompressor) {
-                this.$parent.isCompressor = false;
-              }
-              console.log(err);
-            });
-        }
-      }
-      if (newFile && (!oldFile || newFile.file !== oldFile.file)) {
-        // Create a blob field
-        // 创建 blob 字段
-        newFile.blob = "";
-        let URL = window.URL || window.webkitURL;
-        if (URL && URL.createObjectURL) {
-          newFile.blob = URL.createObjectURL(newFile.file);
-        }
-        // Thumbnails
-        // 缩略图
-        newFile.thumb = "";
-        if (newFile.blob && newFile.type.substr(0, 6) === "image/") {
-          newFile.thumb = newFile.blob;
-        }
-      }
-    },
-    onEditFileShow(file) {
-      this.editFile = { ...file, show: true };
-      this.$refs.upload.update(file, { error: "edit" });
-    },
-    onEditorFile() {
-      if (!this.$refs.upload.features.html5) {
-        this.alert("Your browser does not support");
-        this.editFile.show = false;
-        return;
-      }
-      let data = {
-        name: this.editFile.name,
-      };
-
-      if (this.editFile.cropper) {
-        let binStr = atob(
-          this.editFile.cropper
-            .getCroppedCanvas()
-            .toDataURL(this.editFile.type)
-            .split(",")[1]
-        );
-        let arr = new Uint8Array(binStr.length);
-        for (let i = 0; i < binStr.length; i++) {
-          arr[i] = binStr.charCodeAt(i);
-        }
-        data.file = new File([arr], data.name, { type: this.editFile.type });
-        data.size = data.file.size;
-      }
-
-      this.$refs.upload.update(this.editFile.id, data);
-      this.editFile.error = "";
-      this.editFile.show = false;
-    },
-    // add folader
-    onAddFolader() {
-      if (!this.$refs.upload.features.directory) {
-        this.alert("Your browser does not support");
-        return;
-      }
-      let input = this.$refs.upload.$el.querySelector("input");
-      input.directory = true;
-      input.webkitdirectory = true;
-      this.directory = true;
-      input.onclick = null;
-      input.click();
-      input.onclick = (e) => {
-        this.directory = false;
-        input.directory = false;
-        input.webkitdirectory = false;
-      };
-    },
-    onAddData() {
-      this.addData.show = false;
-      if (!this.$refs.upload.features.html5) {
-        this.alert("Your browser does not support");
-        return;
-      }
-      let file = new window.File([this.addData.content], this.addData.name, {
-        type: this.addData.type,
-      });
-    },
-    getOrientation(file, callback) {
-      var reader = new FileReader();
-
-      reader.onload = function (event) {
-        var view = new DataView(event.target.result);
-
-        if (view.getUint16(0, false) != 0xffd8) return callback(-2);
-
-        var length = view.byteLength,
-          offset = 2;
-
-        while (offset < length) {
-          var marker = view.getUint16(offset, false);
-          offset += 2;
-
-          if (marker == 0xffe1) {
-            if (view.getUint32((offset += 2), false) != 0x45786966) {
-              return callback(-1);
-            }
-            var little = view.getUint16((offset += 6), false) == 0x4949;
-            offset += view.getUint32(offset + 4, little);
-            var tags = view.getUint16(offset, little);
-            offset += 2;
-
-            for (var i = 0; i < tags; i++)
-              if (view.getUint16(offset + i * 12, little) == 0x0112)
-                return callback(view.getUint16(offset + i * 12 + 8, little));
-          } else if ((marker & 0xff00) != 0xff00) break;
-          else offset += view.getUint16(offset, false);
-        }
-        return callback(-1);
-      };
-
-      reader.readAsArrayBuffer(file.slice(0, 64 * 1024));
-    },
   },
   mounted: function () {
     this.init();
@@ -1467,10 +1040,14 @@ export default {
     files(files) {
       this.$parent.msgFileToSend = files[0];
     },
+    message(text) {
+      this.$parent.msgToSend = text;
+    },
     "$parent.msgToSend"(value) {
       if (value) {
         this.isChat = true;
       } else {
+        this.message = "";
         this.isChat = false;
       }
     },

@@ -167,6 +167,10 @@ label {
   margin: 9px auto;
 }
 
+.report-button label {
+  cursor: pointer;
+}
+
 input[type="number"] {
   -moz-appearance: textfield;
   outline: none;
