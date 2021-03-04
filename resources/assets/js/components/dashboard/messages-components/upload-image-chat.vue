@@ -136,9 +136,15 @@
 .drop-to-change-image {
   transition: 150ms;
   height: 0;
+  top: 15px;
   z-index: 10000;
   opacity: 0.8;
   overflow: hidden;
+}
+
+.drop-to-change-image .main-wrapper {
+  top: 30px;
+  bottom: 30px;
 }
 
 .drop-to-change-active {
@@ -148,9 +154,9 @@
 
 .main-wrapper {
   position: absolute;
-  left: 15px;
-  right: 15px;
-  top: 65px;
+  left: 35px;
+  right: 35px;
+  top: 115px;
   bottom: 15px;
   border: 6px solid;
   border-style: dashed;
@@ -162,8 +168,7 @@
 
 .main-wrapper.file-is-upload {
   border: none;
-  bottom: 60px;
-  overflow: hidden;
+  bottom: 115px;
   border-radius: 5px;
 }
 
@@ -184,23 +189,15 @@
 .render-image {
   display: block;
   margin: auto;
+  box-shadow: 0 7px 20px rgba(0, 0, 0, 0.2);
+  border-radius: 7px;
 }
 .render-container {
   width: 100%;
   position: relative;
+  height: 100%;
+  display: flex;
 }
-.sizeScore {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  background-color: black;
-  opacity: 0.5;
-  color: aqua;
-  padding: 0.5em;
-  font-family: sans-serif;
-  letter-spacing: 0.1em;
-}
-
 .send-message-form {
   overflow: hidden;
   padding: 10px 15px;
@@ -359,6 +356,7 @@
       </div>
       <div class="main-upload-image-wrapper">
         <div
+          id="image-upload-wrapper"
           class="main-wrapper"
           :class="{ 'file-is-upload': $parent.files.length }"
         >
@@ -367,10 +365,6 @@
           </h3>
           <!-- <img v-else :src="$parent.files[0].thumb" width="40" height="auto" /> -->
           <div v-show="$parent.files.length" class="render-container">
-            <div class="sizeScore">
-              <span class="js-width">0px</span> X
-              <span class="js-height">0px</span>
-            </div>
             <img
               v-if="$parent.files[0]"
               class="render-image js-render-image"
@@ -684,57 +678,25 @@ export default {
 
       reader.readAsArrayBuffer(file.slice(0, 64 * 1024));
     },
-    calIamgeSize(imageSelector, imageOriginWidth, imageOriginHeight) {
-      // make image as big as it can to start
-      $(imageSelector).width($(imageSelector).parent().width());
-
-      // Get the one percent of the image width and height
-      var widthOnePercent = imageOriginWidth / 100;
-      var heightOnePercent = imageOriginHeight / 100;
-
-      // Calculate the width percentage
-      var imageCurrentWidth = $(imageSelector).width();
-      var imageCurrentPercent = imageCurrentWidth / widthOnePercent;
-
-      // Calculate the height relative to the percentage of the images width
-      var imageNewHeight = heightOnePercent * imageCurrentPercent;
-
-      // If the images height is off the page, then rescale
-      if ($(window).height() < $(imageSelector).offset().top + imageNewHeight) {
-        // Set the new height so it fit on the screen
-        imageNewHeight = $(window).height() - $(imageSelector).offset().top;
-
-        // Calculate out what percentage is the height at
-        imageCurrentPercent = imageNewHeight / heightOnePercent;
-
-        // Calculate the width relative to the percentage of the images height
-        var imageNewWidth = widthOnePercent * imageCurrentPercent;
-
-        // Set new width of image
-        $(imageSelector).width(imageNewWidth);
-      }
-
-      // set new height of image
-      $(imageSelector).height(imageNewHeight);
-    },
-    sizes() {
-      $(".js-width").text(Math.ceil($(".js-render-image").width()) + "px");
-      $(".js-height").text(Math.ceil($(".js-render-image").height()) + "px");
-    },
     resizeImagePreview() {
+      let containerImage = $("#image-upload-wrapper");
+      let imageClass = ".js-render-image";
+      let containerImageheight = containerImage.height();
+      let containerImageWidth = containerImage.width();
       let imageSize = this.getImagenaturalSize();
 
-      var imageW = imageSize.width;
-      var imageH = imageSize.height;
-      var imageClass = ".js-render-image";
-      console.log(imageW, imageH, $(imageClass));
-
-      $(window).on("resize", () => {
-        this.calIamgeSize(imageClass, imageW, imageH);
-        this.sizes();
-      });
-      this.calIamgeSize(imageClass, imageW, imageH);
-      this.sizes();
+      if (imageSize.width < imageSize.height) {
+        let division = imageSize.height / imageSize.width;
+        $(imageClass).height(containerImageheight);
+        $(imageClass).width(containerImageheight / division);
+      } else if (imageSize.width > imageSize.height) {
+        let division = imageSize.width / imageSize.height;
+        $(imageClass).height(containerImageWidth / division);
+        $(imageClass).width(containerImageWidth);
+      } else {
+        $(imageClass).height(containerImageheight);
+        $(imageClass).width(containerImageWidth);
+      }
     },
     getImagenaturalSize() {
       let element = document.getElementById("thump-image");
