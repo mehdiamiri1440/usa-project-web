@@ -740,7 +740,7 @@ export default {
         });
     },
     doPayment: function (packageType) {
-      this.doPaymentLoader = true;
+      this.$parent.doPaymentLoader = true;
       let userId = getUserId();
 
       this.registerComponentStatistics(

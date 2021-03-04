@@ -366,6 +366,21 @@
 </style>
 <template>
   <div class="col-xs-12">
+    <!-- payment loader -->
+    <div v-if="doPaymentLoader" class="main-loader-content">
+      <div class="pricing-loader-icon">
+        <div class="lds-ring">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <p class="pricing-loader-text text-rtl">
+          در حال انتقال به درگاه پرداخت . . .
+        </p>
+      </div>
+    </div>
+
     <div class="row">
       <div class="main-content-wrapper col-xs-12 col-lg-10 col-lg-offset-1">
         <div class="row">
@@ -470,66 +485,7 @@ export default {
   data: function () {
     return {
       // statusData: "",
-      // doPaymentLoader: false
-      //  priceItemSix: [
-      //   {
-      //     title: "تعداد آگهی ها",
-      //     contentUnit: "2",
-      //     helpDescription:
-      //       " تعداد آگهی های همزمان شما که در لیست محصولات نمایش داده می شود. "
-      //   },
-      //   {
-      //     title: "تعداد نردبان ",
-      //     contentUnit: "1",
-      //     helpDescription:
-      //       "بر روی اولین محصول ثبت شده ویژگی نردبان به صورت خودکار اعمال خواهد شد"
-      //   },
-      //   {
-      //     title: "نمایش در لیست محصولات ویژه",
-      //     contentUnit:
-      //       '<i class="text-green fa fa-times-circle" style="color:#e41c38"></i>',
-      //     helpDescription:
-      //       "محصولات ثبت شده شما، در قسمت محصولات ویژه در پنل خریداران به آنها نمایش داده می شود"
-      //   },
-      //   {
-      //     title: "تایید فوری ",
-      //     contentUnit:
-      //       '<i class="text-green fa fa-check-circle" style="color:#00c569"></i>',
-      //     helpDescription:
-      //       " آگهی های فروش ثبت شده بلافاصله پس از ثبت در لیست محصولات نمایش داده می شود. "
-      //   },
-      //   {
-      //     title: " میزان افزایش خوشنامی ",
-      //     contentUnit: "100",
-      //     helpDescription: " مقدار اعتبار اضافه شده به صفحه پروفایل شما "
-      //   },
-      //   {
-      //     title: " نشان فروشنده معتبر ",
-      //     contentUnit:
-      //       '<i class="text-green fa fa-times-circle" style="color:#e41c38"></i>',
-      //     helpDescription:
-      //       " این نشان در صفحه پروفایل فروشنده نمایش داده می شود. "
-      //   },
-      //   {
-      //     title: " سقف روزانه پاسخ به درخواست ها ",
-      //     contentUnit: "10",
-      //     helpDescription: "سقف تعداد روزانه پاسخگویی به درخواست های خرید"
-      //   },
-      //   {
-      //     title: "مشاهده بلافاصله درخواست خرید ",
-      //     contentUnit:
-      //       '<i class="text-green fa fa-check-circle" style="color:#00c569"></i>',
-      //     helpDescription:
-      //       " درخواست های خرید جدید بدون تاخیر به شما نمایش داده می شود. "
-      //   },
-      //   {
-      //     title: "تضمین بازگشت وجه ",
-      //     contentUnit:
-      //       '<i class="text-green fa fa-times-circle" style="color:#e41c38"></i>',
-      //     helpDescription:
-      //       " اگر پس از سه ماه از نتیجه آن رضایت نداشته باشید 100% مبلغ پرداختی به شما بازگردانده می شود. "
-      //   }
-      // ],
+      doPaymentLoader: false,
     };
   },
   methods: {
