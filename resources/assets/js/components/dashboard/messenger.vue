@@ -410,6 +410,7 @@ export default {
       selectedContact: "",
       currentUserId: "",
       currentContactUserId: "",
+      msgFileToSend: "",
       msgToSend: "",
       isComponentActive: true,
       contactNameSearchText: "",
@@ -687,12 +688,15 @@ export default {
       var self = this;
 
       let tempMsg = self.msgToSend;
+      let tempfile = self.msgFileToSend;
       self.msgToSend = "";
+      self.msgFileToSend = "";
 
       if (tempMsg) {
         let msgObject = {
           sender_id: self.currentUserId,
           receiver_id: self.currentContactUserId,
+          image: tempfile.thumb,
           text: tempMsg,
         };
 
@@ -841,6 +845,10 @@ export default {
     activeChanel() {
       // this.isChanleActive = true
     },
+    resetSendMessage() {
+      this.msgToSend = "";
+      this.msgFileToSend = "";
+    },
   },
 
   mounted: function () {
@@ -925,6 +933,7 @@ export default {
       }
     },
     selectedContact: function (value) {
+      this.resetSendMessage();
       eventBus.$emit("activeContactId", value.contact_id);
     },
     isChanleActive(isChanel) {
