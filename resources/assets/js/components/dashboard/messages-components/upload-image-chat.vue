@@ -111,6 +111,48 @@
   color: #fff;
 }
 
+/* .drop-active, */
+.drop-to-change-image {
+  display: block;
+  height: 100%;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  transition: 300ms;
+  top: 5000px;
+  z-index: 10000;
+  opacity: 0.9;
+  overflow: hidden;
+  position: absolute;
+  text-align: center;
+  background: #f0f0f0;
+}
+
+.drop-to-change-image .main-wrapper {
+  top: 30px;
+  bottom: 30px;
+  position: absolute;
+  left: 35px;
+  right: 35px;
+  border: none;
+  color: #888;
+  border: 5px dashed;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-transition: 100ms;
+  transition: 100ms;
+}
+
+.drop-to-change-active {
+  transition: 300ms;
+  top: 0;
+}
+
+/* 
 .drop-image {
   transition: 150ms;
   display: none;
@@ -119,62 +161,52 @@
   padding: 0;
 }
 
-.drop-active,
-.drop-to-change-image {
-  transition: 150ms;
-  display: block;
-  height: 100%;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  position: absolute;
-  z-index: 9999;
-  text-align: center;
-  background: #f0f0f0;
-}
 
-.drop-to-change-image {
-  transition: 150ms;
-  height: 0;
-  top: 15px;
-  z-index: 10000;
-  opacity: 0.8;
-  overflow: hidden;
-}
 
-.drop-to-change-image .main-wrapper {
-  top: 30px;
-  bottom: 30px;
-}
 
-.drop-to-change-active {
-  transition: 150ms;
-  height: 100%;
-}
 
 .main-wrapper {
   position: absolute;
   left: 35px;
   right: 35px;
-  top: 115px;
-  bottom: 15px;
-  border: 6px solid;
-  border-style: dashed;
-  color: #ababab;
+  top: 100px;
+  bottom: 100px;
+  border: none;
+  color: #999;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
+  -webkit-transition: 100ms;
   transition: 100ms;
 }
 
-.main-wrapper.file-is-upload {
-  border: none;
-  bottom: 115px;
-  border-radius: 5px;
+.main-upload-image-wrapper {
+  height: 100%;
+}
+
+.main-upload-image-wrapper.file-is-upload {
+  height: 100%;
+  padding: 50px;
+  position: relative;
+  background: #fafafa;
+  z-index: 1;
+  border: 1px solid #ededed;
+}
+
+.file-is-upload .main-wrapper {
+  top: 30px;
+  z-index: 1;
+  left: 30px;
+  bottom: 30px;
+  right: 30px;
 }
 
 .main-wrapper h3 {
   flex: 1;
-}
+} */
 /* 
 .main-wrapper img {
   width: initial;
@@ -294,15 +326,32 @@
     <div
       class="drop-to-change-image"
       :class="{
-        'drop-to-change-active':
-          $refs.upload && $refs.upload.dropActive && $parent.files.length,
+        'drop-to-change-active': $refs.upload && $refs.upload.dropActive,
       }"
     >
       <div class="main-wrapper">
         <h3>تصویر را اینجا بکشید و رها کنید</h3>
+        <file-upload
+          class="report-button"
+          accept="mage/png,image/gif,image/jpeg,image/webp"
+          :multiple="false"
+          :directory="false"
+          :size="1024 * 1024 * 10"
+          :thread="3"
+          :drop="true"
+          :add-index="false"
+          name="chat-upload"
+          v-model="$parent.files"
+          @input-filter="inputFilter"
+          @input-file="inputFile"
+          ref="upload"
+        >
+          <i class="fa fa-redo-alt"></i>
+          تغییر تصوير
+        </file-upload>
       </div>
     </div>
-    <div
+    <!-- <div
       class="drop-image"
       :class="{
         'drop-active':
@@ -354,17 +403,13 @@
           </div>
         </div>
       </div>
-      <div class="main-upload-image-wrapper">
-        <div
-          id="image-upload-wrapper"
-          class="main-wrapper"
-          :class="{ 'file-is-upload': $parent.files.length }"
-        >
-          <h3 v-show="!$parent.files.length">
-            تصویر را اینجا بکشید و رها کنید
-          </h3>
-          <!-- <img v-else :src="$parent.files[0].thumb" width="40" height="auto" /> -->
-          <div v-show="$parent.files.length" class="render-container">
+      <div
+        class="main-upload-image-wrapper"
+        :class="{ 'file-is-upload': $parent.files.length }"
+      >
+        <div id="image-upload-wrapper" class="main-wrapper">
+          <h3 v-show="$parent.files.length">تصویر را اینجا بکشید و رها کنید</h3>
+          <div v-show="!$parent.files.length" class="render-container">
             <img
               v-if="$parent.files[0]"
               class="render-image js-render-image"
@@ -391,7 +436,6 @@
                 class="send-message-button scale-up-center-full"
                 @click.prevent="$parent.sendMessage()"
               >
-                <!-- @click.prevent="$parent.sendMessage()" -->
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="13.347"
@@ -415,7 +459,7 @@
           </div>
         </form>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -683,6 +727,7 @@ export default {
       let imageClass = ".js-render-image";
       let containerImageheight = containerImage.height();
       let containerImageWidth = containerImage.width();
+      console.log(containerImageheight, containerImageWidth);
       let imageSize = this.getImagenaturalSize();
 
       if (imageSize.width < imageSize.height) {
