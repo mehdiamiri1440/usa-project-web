@@ -31,7 +31,8 @@ return [
        'buyAd-count' => 10,
        'buyAd-reply-count' => 10,
        'elevetor-count' => 0,
-       'price' => 2970000
+       'price' => 2970000,
+       'price-1' => 2490000, //old price
    ],
    'type-2' => [
        'max-products' => 2,
@@ -64,7 +65,8 @@ return [
         'buyAd-count' => 2000,
         'buyAd-reply-count' => 30,
         'elevetor-count' => 1,
-        'price' => 9790000
+        'price' => 9790000,
+        'price-1' => 6890000, //old price
     ],
     
     'elevator' => [

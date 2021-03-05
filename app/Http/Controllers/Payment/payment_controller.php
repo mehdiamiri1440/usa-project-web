@@ -31,7 +31,8 @@ class payment_controller extends Controller
     
     public function do_payment($pakage_type)
     {
-        $payment_amount = config("subscriptionPakage.type-$pakage_type.price");
+        $payment_amount = $this->get_packages_price_array()['type-' . $pakage_type];
+
         
         if(!in_array($pakage_type,$this->allowed_package_types_to_pay)){
             return redirect()->back()->withErrors([
@@ -68,7 +69,7 @@ class payment_controller extends Controller
     
     public function app_do_payment($user_id,$pakage_type)
     {
-        $payment_amount = config("subscriptionPakage.type-$pakage_type.price");
+        $payment_amount = $this->get_packages_price_array()['type-' . $pakage_type];
         
         if(!in_array($pakage_type,$this->allowed_package_types_to_pay)){
             return redirect()->back()->withErrors([
@@ -738,6 +739,36 @@ class payment_controller extends Controller
     protected function record_payment_log($payment)
     {
         DB::table('payment_logs')->insert($payment);
+    }
+
+    public function get_packages_price_array()
+    {
+        $pricing_change_date = Carbon::createFromFormat('m/d/Y H:i:s', '03/01/2021 00:00:00');
+        $user_record = myuser::find(session('user_id'));
+
+        if($user_record->created_at->lt($pricing_change_date)){
+            $prices = [
+                'type-1' => config("subscriptionPakage.type-1.price-1"),
+                'type-3' => config("subscriptionPakage.type-3.price-1"),
+            ];
+        }
+        else{
+            $prices = [
+                'type-1' => config("subscriptionPakage.type-1.price"),
+                'type-3' => config("subscriptionPakage.type-3.price"),
+            ];
+        }
+
+        return $prices;
+        
+    }
+
+    public function get_packages_price(){
+        $prices = $this->get_packages_price_array();
+
+        return response()->json([
+            'prices' => $prices
+        ],200);
     }
     
     

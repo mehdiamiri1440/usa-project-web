@@ -364,6 +364,10 @@ Route::group(['middleware' => [login::class]], function () {
         'as' => 'do_buyAd_reply_capacity_payment',
     ])->where('extra_pacacity', '[0-9]+');
 
+    Route::post('/payment/get-packages-price',[
+        'uses' => 'Payment\payment_controller@get_packages_price'
+    ]);
+
     // Route::get('app/payment/{user_id}/{pakageType}', [
     //     'uses' => 'Payment\payment_controller@app_do_payment',
     //     'as' => 'app_do_payment',
