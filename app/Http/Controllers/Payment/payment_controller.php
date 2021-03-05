@@ -69,7 +69,7 @@ class payment_controller extends Controller
     
     public function app_do_payment($user_id,$pakage_type)
     {
-        $payment_amount = $this->get_packages_price_array()['type-' . $pakage_type];
+        $payment_amount = $this->get_packages_price_array($user_id)['type-' . $pakage_type];
         
         if(!in_array($pakage_type,$this->allowed_package_types_to_pay)){
             return redirect()->back()->withErrors([
@@ -741,10 +741,15 @@ class payment_controller extends Controller
         DB::table('payment_logs')->insert($payment);
     }
 
-    public function get_packages_price_array()
+    public function get_packages_price_array($user_id = null)
     {
         $pricing_change_date = Carbon::createFromFormat('m/d/Y H:i:s', '03/01/2021 00:00:00');
-        $user_record = myuser::find(session('user_id'));
+
+        if(is_null($user_id)){
+            $user_id = session('user_id');
+        }
+
+        $user_record = myuser::find($user_id);
 
         if($user_record->created_at->lt($pricing_change_date)){
             $prices = [
