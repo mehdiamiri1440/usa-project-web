@@ -452,7 +452,12 @@
               <h2>عضویت ویژه</h2>
               <p class="item-price">
                 سالانه
-                <span class="price">979,000</span>
+                <span
+                  class="price"
+                  v-if="prices['type-3']"
+                  v-text="convertToToman(prices['type-3'])"
+                ></span>
+                <span v-else class="price">---,---</span>
                 <span class="small-unit"> تومان</span>
               </p>
             </div>
@@ -564,7 +569,12 @@
               <h2>عضویت پایه</h2>
               <p class="item-price">
                 سه ماهه
-                <span class="price">297,000</span>
+                <span
+                  class="price"
+                  v-if="prices['type-3']"
+                  v-text="convertToToman(prices['type-1'])"
+                ></span>
+                <span v-else class="price">---,---</span>
                 <span class="small-unit"> تومان</span>
               </p>
             </div>
@@ -665,6 +675,7 @@ export default {
   props: ["justPro", "offerTime"],
   data: function () {
     return {
+      prices: "",
       statusData: "",
       priceItemBasic: [
         {
@@ -744,6 +755,22 @@ export default {
             self.statusData = response.data;
           }
         });
+      this.getPrices();
+    },
+    getPrices() {
+      axios.post("/payment/get-packages-price").then((response) => {
+        this.prices = response.data.prices;
+      });
+    },
+    convertToToman(price) {
+      price = price.toString().slice(0, -1);
+      let priceWithComma = this.getNumberWithCommas(price);
+      return priceWithComma;
+    },
+    getNumberWithCommas: function (number) {
+      if (number || typeof number === "number")
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      else return "";
     },
     doPayment: function (packageType) {
       this.$parent.doPaymentLoader = true;
