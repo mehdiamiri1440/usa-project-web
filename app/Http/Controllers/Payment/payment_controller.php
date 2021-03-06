@@ -31,7 +31,8 @@ class payment_controller extends Controller
     
     public function do_payment($pakage_type)
     {
-        $payment_amount = $this->get_packages_price_array()['type-' . $pakage_type];
+        $prices_array = $this->get_packages_price_array();
+        $payment_amount = $prices_array['type-' . $pakage_type .'-discount'] ?? $prices_array['type-' . $pakage_type];
 
         
         if(!in_array($pakage_type,$this->allowed_package_types_to_pay)){
@@ -69,7 +70,8 @@ class payment_controller extends Controller
     
     public function app_do_payment($user_id,$pakage_type)
     {
-        $payment_amount = $this->get_packages_price_array($user_id)['type-' . $pakage_type];
+        $prices_array = $this->get_packages_price_array($user_id);
+        $payment_amount = $prices_array['type-' . $pakage_type .'-discount'] ?? $prices_array['type-' . $pakage_type];
         
         if(!in_array($pakage_type,$this->allowed_package_types_to_pay)){
             return redirect()->back()->withErrors([
@@ -755,6 +757,8 @@ class payment_controller extends Controller
             $prices = [
                 'type-1' => config("subscriptionPakage.type-1.price-1"),
                 'type-3' => config("subscriptionPakage.type-3.price-1"),
+                'type-1-discount' => null,
+                'type-3-discount' => null
             ];
         }
         else{
@@ -762,6 +766,15 @@ class payment_controller extends Controller
                 'type-1' => config("subscriptionPakage.type-1.price"),
                 'type-3' => config("subscriptionPakage.type-3.price"),
             ];
+
+            if(($time_diff = Carbon::now()->diffInHours($user_record->created_at)) < 3 * 24)
+            {
+                $prices['type-1-discount'] = config("subscriptionPakage.type-1.price-discount");
+                $prices['type-3-discount'] = config("subscriptionPakage.type-3.price-discount");
+
+                $prices['discount-deadline']['days'] = (integer) (abs(3 * 24 - $time_diff)/24); 
+                $prices['discount-deadline']['hours'] = (integer) abs(3 * 24 - $time_diff) % 24; 
+            }
         }
 
         return $prices;

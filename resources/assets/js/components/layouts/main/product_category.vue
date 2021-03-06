@@ -1260,7 +1260,7 @@ end filter modal styles
 
     <footer
       class="category-footer container"
-      v-if="categoryMetaData.length > 0"
+      v-if="categoryMetaData.length > 0 && categoryMetaData[0]"
     >
       <div class="col-xs-12">
         <div data-v-c5ebe4ce class="title-section col-xs-12">

@@ -1074,7 +1074,7 @@ class product_controller extends Controller
             //     break;
             // }
 
-            if(! is_null($tags_info->schema_object)){
+            if(! is_null($tags_info)){
                 $schema_object = $tags_info->schema_object;
                 unset($tags_info->schema_object);
             }

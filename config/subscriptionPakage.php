@@ -33,6 +33,7 @@ return [
        'elevetor-count' => 0,
        'price' => 2970000,
        'price-1' => 2490000, //old price
+       'price-discount' => 1990000
    ],
    'type-2' => [
        'max-products' => 2,
@@ -67,6 +68,7 @@ return [
         'elevetor-count' => 1,
         'price' => 9790000,
         'price-1' => 6890000, //old price
+        'price-discount' => 6890000
     ],
     
     'elevator' => [
