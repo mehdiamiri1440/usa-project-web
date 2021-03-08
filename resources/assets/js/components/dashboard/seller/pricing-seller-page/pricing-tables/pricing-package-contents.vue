@@ -114,6 +114,7 @@
   position: relative;
   float: left;
   width: 100%;
+  margin-bottom: 20px;
 }
 
 .item-action {
@@ -333,6 +334,53 @@
   padding: 2px;
 }
 
+.main-discount-wrapper {
+  float: right;
+  width: 100%;
+  text-align: center;
+  direction: rtl;
+  margin-bottom: 18px;
+}
+
+.discount-item span {
+  display: inline-block;
+  padding: 8px 15px 5px;
+  background: #e41c38;
+  color: #fff;
+  font-size: 17px;
+  border-radius: 4px;
+  line-height: 1;
+}
+
+.discount-title {
+  font-weight: bold;
+  font-size: 17px;
+  color: #555;
+  margin-top: 10px;
+}
+
+.discount-main-price {
+  font-weight: bold;
+  font-size: 30px;
+  color: #1da1f2;
+  margin-top: 10px;
+}
+
+.discount-price {
+  font-size: 20px;
+  font-weight: 500;
+  color: #808c9b;
+  text-decoration: line-through;
+  margin-top: -13px;
+}
+
+.discount-time {
+  color: #808c9b;
+  font-size: 16px;
+  font-weight: 500;
+  margin-top: 8px;
+}
+
 @media screen and (max-width: 991px) {
   .list-title,
   .needs,
@@ -517,12 +565,55 @@
             </div>
           </div>-->
 
-          <div class="detail-wrapper">
-            <!-- <p>امکان خرید به صورت سالانه</p> -->
+          <div
+            class="main-discount-wrapper"
+            v-if="
+              prices['type-3-discount'] && statusData.active_pakage_type < 3
+            "
+          >
+            <div class="discount-item">
+              <span>30% تخفیف</span>
+            </div>
+            <div class="discount-title">برای شما عضو جدید باسکول</div>
+            <div class="discount-main-price">
+              {{ convertToToman(prices["type-3-discount"]) }}
+              <span class="small-unit">تومان</span>
+            </div>
+            <div class="discount-price">
+              {{ convertToToman(prices["type-3"]) }}
+              <span class="small-unit">تومان</span>
+            </div>
+            <div class="discount-time" v-if="prices['discount-deadline']">
+              <i class="fa fa-clock red-text"></i>
+              <span
+                class="red-text"
+                v-if="prices['discount-deadline'].days"
+                v-text="prices['discount-deadline'].days + ' روز'"
+              ></span>
+              <span
+                class="red-text"
+                v-if="
+                  prices['discount-deadline'].days &&
+                  prices['discount-deadline'].hours
+                "
+              >
+                و
+              </span>
+              <span
+                class="red-text"
+                v-if="prices['discount-deadline'].hours"
+                v-text="prices['discount-deadline'].hours + ' ساعت'"
+              >
+              </span>
+              تا پایان تخفیف
+            </div>
+          </div>
+          <!-- <div class="detail-wrapper">
+            <p>امکان خرید به صورت سالانه</p>
             <p>
               <br />
             </p>
-          </div>
+          </div> -->
 
           <div class="item-action">
             <p v-if="statusData.active_pakage_type == 3" class="text-green">
@@ -587,6 +678,18 @@
                   <br />
                 </p>
               </li> -->
+              <li class="empty hidden-xs">
+                <a data-toggle="collapse" class="item-help" title=""></a>
+
+                <p class="item-content-title">عنوان</p>
+
+                <p class="item-content-amount">
+                  <i
+                    class="text-green fa fa-times-circle"
+                    style="color: #e41c38"
+                  ></i>
+                </p>
+              </li>
               <li v-for="(item, index) in priceItemBasic" :key="index">
                 <a
                   data-toggle="collapse"
@@ -618,27 +721,59 @@
                   <span v-else v-text="item.contentUnit"></span>
                 </p>
               </li>
-              <li class="empty hidden-xs">
-                <a data-toggle="collapse" class="item-help" title=""></a>
-
-                <p class="item-content-title">عنوان</p>
-
-                <p class="item-content-amount">
-                  <i
-                    class="text-green fa fa-times-circle"
-                    style="color: #e41c38"
-                  ></i>
-                </p>
-              </li>
             </ul>
           </div>
 
-          <div class="detail-wrapper">
-            <!-- <p>امکان خرید به صورت ۳ ماهه</p> -->
+          <div
+            class="main-discount-wrapper"
+            v-if="
+              prices['type-1-discount'] && statusData.active_pakage_type < 1
+            "
+          >
+            <div class="discount-item">
+              <span>30% تخفیف</span>
+            </div>
+            <div class="discount-title">برای شما عضو جدید باسکول</div>
+            <div class="discount-main-price">
+              {{ convertToToman(prices["type-1-discount"]) }}
+              <span class="small-unit">تومان</span>
+            </div>
+            <div class="discount-price">
+              {{ convertToToman(prices["type-1"]) }}
+              <span class="small-unit">تومان</span>
+            </div>
+            <div class="discount-time" v-if="prices['discount-deadline']">
+              <i class="fa fa-clock red-text"></i>
+              <span
+                class="red-text"
+                v-if="prices['discount-deadline'].days"
+                v-text="prices['discount-deadline'].days + ' روز'"
+              ></span>
+              <span
+                class="red-text"
+                v-if="
+                  prices['discount-deadline'].days &&
+                  prices['discount-deadline'].hours
+                "
+              >
+                و
+              </span>
+              <span
+                class="red-text"
+                v-if="prices['discount-deadline'].hours"
+                v-text="prices['discount-deadline'].hours + ' ساعت'"
+              >
+              </span>
+              تا پایان تخفیف
+            </div>
+          </div>
+
+          <!-- <div class="detail-wrapper">
+            <p>امکان خرید به صورت ۳ ماهه</p>
             <p>
               <br />
             </p>
-          </div>
+          </div> -->
 
           <div class="item-action">
             <p v-if="statusData.active_pakage_type == 1" class="green-text">
