@@ -93,11 +93,6 @@
     <nav class="navbar text-rtl">
       <div class="container-fluid buskool-main-nav">
         <div class="hidden-md hidden-sm hidden-lg mobile-menu-button">
-          <span
-            class="message-count"
-            v-if="messageCount > 0"
-            v-text="messageCount"
-          ></span>
           <button
             type="button"
             class="navbar-toggle"

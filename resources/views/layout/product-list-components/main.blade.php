@@ -1,220 +1,76 @@
-{{-- <div
-      class="flat-plust-icon hidden-lg hidden-md"
-    >
-      <a href="#" >
-        <i class="fa fa-exclamation"></i>
-      </a>
-    </div>
-
-      <button
-        class="guide-button hidden-sm hidden-xs"
-      >
-        راهنما
-      </button> --}}
-
-
-    <div
-      class="sub-header-fix sub-header hidden-lg hidden-md hidden-sm container-fluid"
-    >
-      <div class="search-box col-sm-8 col-xs-12 col-lg-5 pull-right">
-        <input
-          type="text"
-          placeholder="اینجا جستجو کنید"
-        />
-
-        <button class="btn-search">
-          <i class="fa-search fa"></i>
-        </button>
-      </div>
-      <div class="rate-filter-mobile-wrapper">
-        <div class="rate-filter">
-          <button class="green-button bg-gray" @click.prevent="openSortModal()">
-            <i class="fas fa-sort-amount-down-alt"></i>
-            مرتب سازی
-          </button>
-        </div>
-        <button class="btn-filter hidden-lg" @click.prevent="openFilterModal()">
-          <i class="fa fa-filter"></i>
-          دسته ها و فیلتر
-        </button>
-      </div>
-    </div>
 
     <main id="main" class="container">
       <div class="col-xs-12 pull-left col-lg-9">
         <div class="row">
-          {{-- <section class="hidden-xs col-xs-12">
-            <div class="rate-filter-desktop-wrapper">
-              <ul class="list-unstiled list-inline">
-                <li class="static-sort-item">
-                  <p>
-                    <i class="fa fa-sort-amount-down-alt"> </i>
-                    مرتب سازی بر اساس :
-                  </p>
-                </li>
-                <li>
-                  <button
-                    @click="setSortOption('RR')"
-                    :class="{ 'text-green': sortOption == 'RR' }"
-                  >
-                    احتمال پاسخگویی
-                  </button>
-                </li>
-                <li>
-                  <button
-                    @click="setSortOption('RT')"
-                    :class="{ 'text-green': sortOption == 'RT' }"
-                  >
-                    سرعت پاسخگویی
-                  </button>
-                </li>
-                <li>
-                  <button
-                    @click="setSortOption('RD')"
-                    :class="{ 'text-green': sortOption == 'RD' }"
-                  >
-                    جدیدترین ها
-                  </button>
-                </li>
-              </ul>
-              <button
-                class="btn-filter hidden-lg"
-                data-toggle="modal"
-                data-target="#searchFilter"
-              >
-                <i class="fa fa-filter"></i>
-                دسته ها و فیلتر
-              </button>
-              <div class="show-list-items hidden-xs hidden-sm">
-                <button
-                  @click.prevent="listIsGrid = true"
-                  :class="{ active: listIsGrid }"
-                  data-toggle="tooltip"
-                  data-placement="top"
-                  title="نمایش ستونی"
-                >
-                  <i class="fas fa-grip-horizontal"></i>
-                </button>
 
-                <button
-                  @click.prevent="listIsGrid = false"
-                  :class="{ active: !listIsGrid }"
-                  data-toggle="tooltip"
-                  data-placement="top"
-                  title="نمایش لیستی"
-                >
-                  <i class="fa fa-list"></i>
-                </button>
-              </div>
-            </div>
-          </section> --}}
 
           <section class="main-content col-xs-12" >
             <div id="article-list" class="row">
-              <div >
+              
                 <div
                   class="col-xs-12"
             
                 >
+                <div class="row">
 
                 @foreach ($products as $product)
 
-                    <article
-                    class="main-content-item"
-                    :class="{ 'is-user-valid': product.user_info.active_pakage_type == 3 }"
+                @if($product['user_info']->active_pakage_type == 3)
+                  <article
+                    class="main-content-item is-user-valid"
                   >
-                    <!--article modal-->
-                
-                
-                    <!--end article modal-->
-                
+                  @else
+                  <article
+                    class="main-content-item "
+                  >
+                  @endif
                     <div class="user-information-wrapper row">
                         <div class="user-information-contents">
-                          <a href="'/profile/' + user_name" class="user-information-link">
+                          <a href="{{'/profile/' . $product['user_info']->user_name}}" class="user-information-link">
                             <div class="user-information-content-image">
-                              <div class="user-image" v-else>
-                                <img
-                                  src="../../../../../../img/user-defult.png"
+                              <div class="user-image" >
+                                {{-- <img
+                                  src=""
                                   class="image_defult"
+                                  alt="{{$product['user_info']->first_name . ' ' . $product['user_info']->last_name}}"
+                                /> --}}
+                                <img
+                                  src="{{asset('assets/img/user-defult.png')}}"
+                                  class="image_defult"
+                                  alt="{{$product['user_info']->first_name . ' ' . $product['user_info']->last_name}}"
                                 />
                               </div>
                             </div>
-                    
-                            {{-- <div
-                              v-if="user_info.response_rate && user_info.response_rate != '0'"
-                              class="user-information-content"
-                            >
-                              <router-link
-                                class="user-name-link"
-                                :to="'/profile/' + user_name"
-                                v-if="user_info"
-                              >
-                              user_full_name
-                                <button
-                                  v-if="user_info.is_verified"
-                                  @click.prevent
-                                  class="verified-user"
-                                  data-container="body"
-                                  data-toggle="popover"
-                                  data-placement="bottom"
-                                  :data-content="$parent.verifiedUserContent"
-                                  title
-                                >
-                                  <i v-if="user_info.is_verified" class="fa fa-certificate"></i>
-                                </button>
-                              </router-link>
-                    
-                              <p v-if="user_info" class="response-rate">
-                                احتمال پاسخ گویی
-                                <span v-text="'%' + user_info.response_rate"></span>
-                              </p>
-                            </div> --}}
-                    
-                            <div v-else class="user-information-content default">
+
+                            <div class="user-information-content default">
                               <a
                                 class="user-name-link"
-                                href="#"
-                                v-if="user_info"
+                                href="{{'/profile/' . $product['user_info']->user_name}}"
                               >
                               {{$product['user_info']->first_name . ' ' . $product['user_info']->last_name}}
+                              @if($product['user_info']->is_verified) 
                                 <button
-                                  v-if="user_info.is_verified"
-                                  @click.prevent
-                                  class="verified-user"
-                                  data-container="body"
-                                  data-toggle="popover"
-                                  data-placement="bottom"
-                                  :data-content="$parent.verifiedUserContent"
-                                  title
-                                >
-                                  <i class="fa fa-certificate"></i>
-                                </button>
+                                    class="verified-user"
+                                    data-container="body"
+                                    data-toggle="popover"
+                                    data-placement="bottom"
+                                  >
+                                    <i class="fa fa-certificate"></i>
+                                  </button>
+                                  @endif
                               </a>
                             </div>
                           </a>
                     
                           <a
-                            v-if="!is_my_profile_status"
-                            href="#"
-                            :class="{
-                              default: !user_info.response_rate || user_info.response_rate == '0',
-                            }"
-                            @click="
-                              registerComponentStatistics(
-                                'product',
-                                'showUserProfile',
-                                'show profile'
-                              )
-                            "
-                            class="user-action-link green-text"
+                            href="href="{{'/profile/' . $product['user_info']->user_name}}"
+                            class="user-action-link default green-text"
                             >مشاهده پروفایل</a
                           >
                       
                         </div>
                         <div class="article-action-buttons">
                           <button
-                            v-if="!is_my_profile_status"
-                            @click.prevent="$parent.openChat($parent.product)"
                             class="green-button"
                           >
                             <i class="fa fa-envelope"></i>
@@ -222,38 +78,42 @@
                           </button>
                         </div>
                       </div>
-                
+                      
+                    @if($product['user_info']->active_pakage_type != 3)
                     <div
-                        class="main-article-contents-wrapper pointer-class"
-                        :class="{
-                        'is-user-valid-content':
-                            $parent.product.user_info.active_pakage_type != 3,
-                        }"
+                        class="main-article-contents-wrapper pointer-class "
                     >
-                        <div class="main-article-contents-image-wrapper" @click="setScroll()">
+                    @else
+                    <div
+                    class="main-article-contents-wrapper pointer-class is-user-valid-content"
+                >
+                    @endif
+                        <div class="main-article-contents-image-wrapper" >
                     
                             <div class="main-article-image">
-                                <router-link v-show="isImageLoad" :to="productUrl">
-                                <img :src="base + 'thumbnails/' +  img" @load="ImageLoaded" :alt="alt" />
-                                </router-link>
+                              <a target="_blank" href="{{'/product-view/' . $product['main']->id . '/' . str_replace(' ', '-', 'خرید-عمده-' .$product['main']->sub_category_name) .'/'. str_replace(' ', '-', $product['main']->category_name)  }}">
+                                <img src="{{url('/storage') . '/thumbnails/' . $product['photos'][0]->file_path}}"  :alt="alt" />
+                                </a>
                             
-                                <div v-show="!isImageLoad" class="lds-ring">
+                                <div class="lds-ring">
                                 <div></div>
                                 <div></div>
                                 <div></div>
                                 <div></div>
                                 </div>
                             
-                                <div v-if="imageCount" class="image-count-item">
+                                <div  class="image-count-item">
                                 <i class="fas fa-images"></i>
-                                <span v-text="imageCount"></span>
+                                <span >
+                                  {{$product['main']->photos_count}}
+                                </span>
                                 </div>
                             </div>
                         </div>
-                        <div class="main-article-contents" @click="setScroll()">
-                        <div
+                        <div class="main-article-contents" >
+                          @if($product['user_info']->active_pakage_type == 3)
+                          <div
                             class="valid-user-badge"
-                            v-if="$parent.product.user_info.active_pakage_type == 3"
                         >
                             <div class="wrapper-icon">
                             <svg width="24.965" height="30.574" viewBox="0 0 24.965 30.574">
@@ -289,83 +149,70 @@
                             </svg>
                             </div>
                         </div>
+                          @endif
+                        
                         <div>
                             <h3 class="article-title">
-                            <router-link
-                                :to="this.$parent.productUrl"
-                                v-html="getProductName()"
-                            ></router-link>
+                              <a target="_blank" href="{{'/product-view/' . $product['main']->id . '/' . str_replace(' ', '-', 'خرید-عمده-' .$product['main']->sub_category_name) .'/'. str_replace(' ', '-', $product['main']->category_name)  }}">
+                                
+                                  {{$product['main']->category_name . ' | ' . $product['main']->sub_category_name  }}
+                                  <span>
+                                    {{$product['main']->product_name}}
+                                  </span>
+                              </a>
                             </h3>
 
                             <p>
                             استان / شهر:
                             <span
-                                v-text="
-                                $parent.product.main.province_name +
-                                ' - ' +
-                                $parent.product.main.city_name
-                                "
-                            ></span>
+                            >
+                            {{$product['main']->province_name . ' - ' . $product['main']->city_name  }}
+                          </span>
                             </p>
 
-                            <p v-if="$parent.product.main.description" class="product-description">
+                            <p  class="product-description">
                             توضیحات
-                            <router-link
-                                v-if="$parent.product.main.description < 100"
-                                :to="this.$parent.productUrl"
-                                v-html="$parent.product.main.description"
-                            ></router-link>
-
-                            <router-link
-                                v-else
-                                :to="this.$parent.productUrl"
-                                v-html="$parent.product.main.description.substring(0, 100)"
-                            ></router-link>
+                            <a target="_blank" href="{{'/product-view/' . $product['main']->id . '/' . str_replace(' ', '-', 'خرید-عمده-' .$product['main']->sub_category_name) .'/'. str_replace(' ', '-', $product['main']->category_name)  }}">
+                            {{$product['main']->description  }}
+                          </a>
                             </p>
 
                             <p>
                             مقدار موجودی:
-                            <span v-text="getConvertedNumbers($parent.product.main.stock)"></span>
+                            <span >
+                              {{$product['main']->stock  }} کیلوگرم
+                            </span>
                             </p>
                         </div>
 
-                        <router-link
-                            to="#"
-                            @click.prevent="$parent.copyProductLinkToClipBoard"
-                            class="share-link hidden"
-                        >
-                            <i class="fa fa-share"></i>
-                            <span>اشتراک گذاری</span>
-                        </router-link>
                         </div>
                     </div>
                 
                     <div class="footer-article">
+                      @if($product['main']->is_elevated)
                       <div
-                        class="article-features pull-left"
-                        v-if="product.main.is_elevated == 1 || isMyProfile"
-                      >
-                        <button
-                          v-if="product.main.is_elevated == 1"
-                          data-toggle="tooltip"
-                          data-placement="bottom"
-                          title="نردبان اعمال شده است"
-                          class="elevator-event active disable"
+                          class="article-features pull-left"
                         >
-                          <i class="fas fa-chart-line"></i>
-                        </button>
-                      </div>
+                          <button
+                            data-toggle="tooltip"
+                            data-placement="bottom"
+                            title="نردبان اعمال شده است"
+                            class="elevator-event active disable"
+                          >
+                            <i class="fas fa-chart-line"></i>
+                          </button>
+                        </div>
+                      @endif
+                      
+                      @if($product['main']->is_elevated)
                       <div
-                        class="article-action-buttons pull-right"
-                        :class="[
-                          {
-                            'full-width-button': product.main.is_elevated == 0 && !isMyProfile,
-                          },
-                          {
-                            'calc-width-button': product.main.is_elevated == 1 && !isMyProfile,
-                          },
-                        ]"
+                        class="article-action-buttons calc-width-button pull-right"
                       >
+                      @else
+                      <div
+                        class="article-action-buttons full-width-button pull-right"
+                      >
+                      @endif
                         <button
                           class="green-button"
                         >
@@ -387,7 +234,7 @@
               <div
                 class="load-more-button col-xs-12"
               >
-                <button class="btn btn-loader" @click.prevent="feed()">
+                <button class="btn btn-loader" >
                   <div class="btn-content text-rtl">
                     <span class="hidden-xs text-rtl" >
                       <i class="fa fa-plus"></i>
@@ -412,11 +259,7 @@
               </div>
             </div>
           </section>
-          <!-- test -->
-{{-- 
-          <search-not-found
-            v-else-if="products.length === 0 && searchActive === true"
-          /> --}}
+
 
 
         </div>
