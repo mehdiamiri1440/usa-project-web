@@ -34,53 +34,53 @@ function scrull_css_header() {
 
 function collapseMethod() {
 
-    let parentselemets = $('.category-products-widget > ul > li');
-    for (let i = 1; i <= parentselemets.length; i++) {
-        let id = i;
-        let wrapperlistElemetn = $("aside .collapse-category-" + id);
-        let listElemetn = $(
-            "aside .collapse-category-" + id + " .sub-category-product"
-        );
-        let buttonElemetn = $("aside .collapse-category-" + id + " button span");
-        let subCategoryLength = $(".collapse-category-" + id + " > ul > li").length;
-        var initialHeight = subCategoryLength * 47;
-        if (checkListHeight(id, subCategoryLength) !== true) {
-            if (listElemetn.hasClass("little")) {
-                listElemetn.css("height", initialHeight + "px");
-                listElemetn.removeClass("little", 500);
-            } else {
-                listElemetn.css("height", "145px");
-                listElemetn.addClass("little", 500);
-            }
-            wrapperlistElemetn.toggleClass("list-open", 500);
-            buttonElemetn.text(function (i, v) {
-                return v === "بستن" ? "مشاهده بیشتر" : "بستن";
-            });
+    // let parentselemets = $('.category-products-widget > ul > li');
+    // for (let i = 1; i <= parentselemets.length; i++) {
+    //     let id = i;
+    //     let wrapperlistElemetn = $("aside .collapse-category-" + id);
+    //     let listElemetn = $(
+    //         "aside .collapse-category-" + id + " .sub-category-product"
+    //     );
+    //     let buttonElemetn = $("aside .collapse-category-" + id + " button span");
+    //     let subCategoryLength = $(".collapse-category-" + id + " > ul > li").length;
+    //     var initialHeight = subCategoryLength * 47;
+    //     if (checkListHeight(id, subCategoryLength) !== true) {
+    //         if (listElemetn.hasClass("little")) {
+    //             listElemetn.css("height", initialHeight + "px");
+    //             listElemetn.removeClass("little", 500);
+    //         } else {
+    //             listElemetn.css("height", "145px");
+    //             listElemetn.addClass("little", 500);
+    //         }
+    //         wrapperlistElemetn.toggleClass("list-open", 500);
+    //         buttonElemetn.text(function (i, v) {
+    //             return v === "بستن" ? "مشاهده بیشتر" : "بستن";
+    //         });
 
-            var wrapperlistElemetnMobile = $(
-                " #searchFilter .collapse-category-" + id
-            );
-            var listElemetnMobile = $(
-                "#searchFilter .collapse-category-" + id + " .sub-category-product"
-            );
-            var buttonElemetnMobile = $(
-                "#searchFilter .collapse-category-" + id + " button span"
-            );
+    //         var wrapperlistElemetnMobile = $(
+    //             " #searchFilter .collapse-category-" + id
+    //         );
+    //         var listElemetnMobile = $(
+    //             "#searchFilter .collapse-category-" + id + " .sub-category-product"
+    //         );
+    //         var buttonElemetnMobile = $(
+    //             "#searchFilter .collapse-category-" + id + " button span"
+    //         );
 
-            if (listElemetnMobile.hasClass("little")) {
-                listElemetnMobile.css("height", initialHeight + "px");
-                listElemetnMobile.removeClass("little", 500);
-            } else {
-                listElemetnMobile.css("height", "145px");
-                listElemetnMobile.addClass("little", 500);
-            }
-            wrapperlistElemetnMobile.toggleClass("list-open", 500);
-            buttonElemetnMobile.text(function (i, v) {
-                return v === "بستن" ? "مشاهده بیشتر" : "بستن";
-            });
-        }
+    //         if (listElemetnMobile.hasClass("little")) {
+    //             listElemetnMobile.css("height", initialHeight + "px");
+    //             listElemetnMobile.removeClass("little", 500);
+    //         } else {
+    //             listElemetnMobile.css("height", "145px");
+    //             listElemetnMobile.addClass("little", 500);
+    //         }
+    //         wrapperlistElemetnMobile.toggleClass("list-open", 500);
+    //         buttonElemetnMobile.text(function (i, v) {
+    //             return v === "بستن" ? "مشاهده بیشتر" : "بستن";
+    //         });
+    //     }
 
-    }
+    // }
 
 
     setTimeout(() => {
