@@ -18,11 +18,13 @@ use Illuminate\Http\Request;
 
 use App\Jobs\sendSMS;
 
-Route::get('product-list', function ($searchText = null) {
-            return view('layout.product-list', [
-                'searchText' => $searchText,
-            ]);
-        })->name('product-list');
+Route::get('/product-list',[
+    'uses' => 'Product\product_list_controller@get_product_list_blade',
+]);
+
+Route::get('/product-list/category/{category_name}',[
+    'uses' => 'Product\product_list_controller@get_product_list_blade',
+])->name('product-list');
 
 // Route::group(['prefix' => 'master'], function () {
 //     Route::get('/', function () {

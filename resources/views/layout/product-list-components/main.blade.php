@@ -117,7 +117,7 @@
             
                 >
 
-                @for ($i = 0; $i < 7; $i++)
+                @foreach ($products as $product)
 
                     <article
                     class="main-content-item"
@@ -176,7 +176,7 @@
                                 href="#"
                                 v-if="user_info"
                               >
-                              محمدامین دلداری
+                              {{$product['user_info']->first_name . ' ' . $product['user_info']->last_name}}
                                 <button
                                   v-if="user_info.is_verified"
                                   @click.prevent
@@ -379,7 +379,7 @@
                     <!--end google codes-->
                   </article>
               
-                @endfor
+                @endforeach
 
 
                   </div>

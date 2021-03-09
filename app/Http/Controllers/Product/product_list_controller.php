@@ -1030,4 +1030,30 @@ class product_list_controller extends Controller
     }
 
 
+    // ---------------------------------------------------------------------------------------------------
+
+
+    public function get_product_list_blade($category_name = null)
+    {
+        $products = $this->get_products_from_cache();
+
+        $categories =  DB::table('categories')
+                        ->select('id','category_name','parent_id')
+                        ->get();
+
+        if(! is_null($category_name)){
+            $this->apply_search_text_filter($products,$category_name);
+        }
+
+        $products = array_slice($products,0,20);
+        
+
+        return view('layout.product-list',[
+            'products' => $products,
+            'categories' => $categories
+        ]);
+    }
+
+
+
 }
