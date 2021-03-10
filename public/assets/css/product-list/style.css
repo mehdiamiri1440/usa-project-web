@@ -1147,20 +1147,17 @@ body {
 }
 
 /*preloader image style*/
-.main-article-image a{
+.main-article-image > div.image{
   position: relative;
   z-index: 1;
 }
 
 .main-article-image img {
-  width: initial;
-
+  width: auto;
   height: 100%;
-
   position: relative;
-
-  transform: translate(50%, 0);
-
+  -webkit-transform: translate(50%);
+  transform: translate(50%);
   right: 50%;
 }
 
@@ -1307,6 +1304,58 @@ body {
              Footer section
           -----------------------------------------*/
   
+.footer-note-wrapper h3 {
+  font-size: 15px;
+  margin: 8px auto;
+}
+
+.title-section {
+  direction: rtl;
+  margin: 50px auto 10px;
+}
+
+.title-section h1 {
+  font-size: 16px;
+  color: #00c569;
+  float: right;
+}
+
+.title-section hr {
+  margin: 15px 15px 10px auto;
+  position: relative;
+}
+
+.title-section hr::after {
+  content: " ";
+  height: 3px;
+  width: 50px;
+  background: #00c569;
+  position: absolute;
+  top: -4px;
+  right: 0;
+}
+
+.footer-note-wrapper {
+  background: #fff;
+  direction: rtl;
+  margin: 15px auto;
+  padding: 7px 15px;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+  overflow: hidden;
+  max-height: 220px;
+
+  overflow-y: auto;
+
+  line-height: 1.628;
+}
+
+.wrapper-contents {
+  margin-bottom: 20px;
+}
+
+
   #wrap-footer {
     margin-top: 60px;
     position: relative;
