@@ -10,8 +10,10 @@ use DB;
 use App\Models\product_media;
 use App\Models\product;
 use App\Models\buyAd;
+use App\Models\tag;
 use Illuminate\Support\Facades\Cache;
 use Carbon\Carbon;
+
 
 class product_list_controller extends Controller
 {
@@ -1037,21 +1039,150 @@ class product_list_controller extends Controller
     {
         $products = $this->get_products_from_cache();
 
-        $categories =  DB::table('categories')
-                        ->select('id','category_name','parent_id')
-                        ->get();
+        $categories =  $this->get_all_categories();
+
+        $meta_info = null;
 
         if(! is_null($category_name)){
+            $category_name = strip_tags($category_name);
+            $category_name = str_replace('-',' ',$category_name);
+
             $this->apply_search_text_filter($products,$category_name);
+
+            $meta_info = $this->get_category_tags_data_if_any($category_name);
         }
 
-        $products = array_slice($products,0,20);
-        
+        usort($products, function ($item1, $item2) {
+            $a = $item1['main']->is_elevated;
+            $b = $item2['main']->is_elevated;
 
+            if ($a == $b) {
+                return $item1['main']->updated_at < $item2['main']->updated_at;
+            }
+
+            return ($a < $b) ? 1 : -1;
+        });
+
+        $products = array_slice($products,0,12);
+        
+        // dd($meta_info);
         return view('layout.product-list',[
             'products' => $products,
-            'categories' => $categories
+            'categories' => $categories,
+            'categoryMetaData' => $meta_info,
         ]);
+    }
+
+    protected function get_all_categories()
+    {
+        $all_categories = Cache::remember(md5('categories'),24 * 60,function(){
+            return DB::table('categories')
+                        ->leftJoin('products','products.category_id','=','categories.id')
+                        ->select('categories.*',DB::raw('count(products.id) as score'))
+                        ->groupBy('categories.id','categories.created_at','categories.updated_at','categories.category_name','categories.parent_id')
+                        ->orderByRaw('score desc, categories.id')
+                        ->get();
+        });
+
+        $categories = [];
+
+        $categories = $all_categories->filter(function($category){
+            return $category->parent_id == null;
+        });
+
+        $categories->each(function ($item) use($all_categories){
+    
+            $other = null;
+            $item->subcategories = $all_categories->filter(function($category) use($item,&$other){
+                if($category->parent_id == $item->id && $category->category_name == 'سایر'){
+                    $other = $category;
+                    return false;
+                }
+
+                return $category->parent_id == $item->id;
+            });
+
+            if(! is_null($other)){
+                ($item->subcategories)[] = $other;
+            }
+
+        });
+
+        return $categories;
+    }
+
+    protected function get_category_tags_data_if_any($category_name)
+    {
+
+        $category_record = category::where('category_name',$category_name)
+                                        ->first();
+        $schema_object = '';
+
+        if($category_record){
+            $category_id = $category_record->id;
+
+            $tags_info = $this->get_category_meta_data($category_id)->first();
+
+
+            if(! is_null($tags_info)){
+                $schema_object = $tags_info->schema_object;
+                unset($tags_info->schema_object);
+            }
+            
+
+            $data = [
+                'category_info' => array($tags_info),
+                'schema_object' => $schema_object
+            ];
+
+            return $data;
+        }
+        else{
+            $tags_info = tag::where('header',$category_name)
+                                ->where('is_visible',true)
+                                ->select([
+                                    'id',
+                                    'header',
+                                    'content',
+                                    'schema_object'
+                                ])->get();
+
+            if(sizeof($tags_info) > 0){
+                $temp = $tags_info->first();
+                $schema_object = $temp->schema_object;
+                
+                unset($temp->schema_object);
+            }
+                                
+            
+
+            if($tags_info){
+                $data = [
+                    'category_info' => array($tags_info),
+                    'schema_object' => $schema_object
+                ];
+
+                return $data;
+            }
+            else{
+                return null;
+            }
+
+        }  
+    }
+
+    protected function get_category_meta_data($category_id)
+    {
+        $tags_info = tag::where('category_id',$category_id)
+                            ->where('is_visible',true)
+                            ->select([
+                                'id',
+                                'header',
+                                'content',
+                                'schema_object'
+                            ])->get();
+
+        return $tags_info;
     }
 
 

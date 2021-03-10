@@ -2,32 +2,23 @@
       <footer
       class="category-footer container"
       >
-      <div class="col-xs-12">
-        <div  class="title-section col-xs-12">
-          <div  class="row">
-            <h1 >
-              خرید عمده
-              <span>
-                خیار
-              </span>
-            </h1>
-            <hr  />
-          </div>
-        </div>
+      @if($categoryMetaData['category_info'])
+        <div class="col-xs-12">
 
-        <div class="footer-note-wrapper main-box-shadow">
-          <div class="wrapper-contents">
-            <div
-              class="contents"
-              v-for="categoryMeta in categoryMetaData"
-              :key="categoryMeta.id"
-            >
-              <div v-html="categoryMeta.header"></div>
-              <div v-html="categoryMeta.content"></div>
+          <div class="footer-note-wrapper main-box-shadow">
+            <div class="wrapper-contents">
+              <div
+                class="contents"
+              >
+              @foreach($categoryMetaData['category_info'] as $categoryMeta)
+                <div>{!! $categoryMeta['header'] ?? $categoryMeta[0]['header'] !!}</div>
+                <div>{!! $categoryMeta['content'] ?? $categoryMeta[0]['content'] !!}</div>
+              @endforeach
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      @endif
       </footer>
       <div id="wrap-footer">
         <footer id="footer">
