@@ -25,6 +25,7 @@
     <meta name="og:title" content="لیست محصولات و قیمت عمده محصولات کشاورزی | باسکول">
     @endif
 
+    <meta property="og:image" content="{{asset('assets/img/logo/512-buskool-logo.jpg')}}" />
 
     <!-- Bootstrap css -->
     <link rel="stylesheet" href="{{asset('index/css/bootstrap.min.css')}}">
