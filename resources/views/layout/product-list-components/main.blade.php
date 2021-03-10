@@ -1,9 +1,92 @@
 
+    <div
+    class="sub-header-fix sub-header hidden-lg hidden-md hidden-sm container-fluid"
+    >
+      <div class="search-box col-sm-8 col-xs-12 col-lg-5 pull-right">
+        <input
+          type="text"
+          v-model="searchText"
+          placeholder="اینجا جستجو کنید"
+        />
+
+        <button class="btn-search">
+          <i class="fa-search fa"></i>
+        </button>
+      </div>
+      <div class="rate-filter-mobile-wrapper">
+        <div class="rate-filter">
+          <button class="green-button bg-gray" @click.prevent="openSortModal()">
+            <i class="fas fa-sort-amount-down-alt"></i>
+            مرتب سازی
+          </button>
+        </div>
+        <button class="btn-filter hidden-lg" @click.prevent="openFilterModal()">
+          <i class="fa fa-filter"></i>
+          دسته ها و فیلتر
+        </button>
+      </div>
+    </div>
     <main id="main" class="container">
       <div class="col-xs-12 pull-left col-lg-9">
         <div class="row">
-
-
+          <section class="hidden-xs col-xs-12">
+            <div class="row">
+              <div class="rate-filter-desktop-wrapper">
+                <ul class="list-unstiled list-inline">
+                  <li class="static-sort-item">
+                    <p>
+                      <i class="fa fa-sort-amount-down-alt"> </i>
+                      مرتب سازی بر اساس :
+                    </p>
+                  </li>
+                  <li>
+                    <button
+                    >
+                      احتمال پاسخگویی
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                    >
+                      سرعت پاسخگویی
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                    >
+                      جدیدترین ها
+                    </button>
+                  </li>
+                </ul>
+                <button
+                  class="btn-filter hidden-lg"
+                  data-toggle="modal"
+                  data-target="#searchFilter"
+                >
+                  <i class="fa fa-filter"></i>
+                  دسته ها و فیلتر
+                </button>
+                <div class="show-list-items hidden-xs hidden-sm">
+                  <button
+                    class="active"
+                    data-toggle="tooltip"
+                    data-placement="top"
+                    title="نمایش ستونی"
+                  >
+                    <i class="fas fa-grip-horizontal"></i>
+                  </button>
+  
+                  <button
+                    data-toggle="tooltip"
+                    data-placement="top"
+                    title="نمایش لیستی"
+                  >
+                    <i class="fa fa-list"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
           <section class="main-content col-xs-12" >
             <div id="article-list" class="row">
               
@@ -29,16 +112,19 @@
                           <a href="{{'/profile/' . $product['user_info']->user_name}}" class="user-information-link">
                             <div class="user-information-content-image">
                               <div class="user-image" >
-                                {{-- <img
-                                  src=""
+                                @if ($product['profile_info']->profile_photo)
+                                    <img
+                                  src="{{url('storage/' . $product['profile_info']->profile_photo)}}"
                                   class="image_defult"
                                   alt="{{$product['user_info']->first_name . ' ' . $product['user_info']->last_name}}"
-                                /> --}}
+                                />
+                                @else
                                 <img
                                   src="{{asset('assets/img/user-defult.png')}}"
                                   class="image_defult"
                                   alt="{{$product['user_info']->first_name . ' ' . $product['user_info']->last_name}}"
                                 />
+                                @endif
                               </div>
                             </div>
 
@@ -80,11 +166,11 @@
                       </div>
                       
                     @if($product['user_info']->active_pakage_type != 3)
-                    <a target="_blank" href="{{'/product-view/' . $product['main']->id  .'/'. str_replace(' ', '-', $product['main']->category_name) . '/' . str_replace(' ', '-', 'خرید-عمده-' .$product['main']->sub_category_name)  }}"
+                    <a target="_blank" href="{{'/product-view/'  . str_replace(' ', '-', 'خرید-عمده-' .$product['main']->sub_category_name) .'/' . str_replace(' ', '-', $product['main']->category_name) . '/' .   $product['main']->id  }}"
                       class="main-article-contents-wrapper pointer-class "
                     >
                     @else
-                    <a target="_blank" href="{{'/product-view/' . $product['main']->id  .'/'. str_replace(' ', '-', $product['main']->category_name) . '/' . str_replace(' ', '-', 'خرید-عمده-' .$product['main']->sub_category_name)  }}"
+                    <a target="_blank" href="{{'/product-view/'  . str_replace(' ', '-', 'خرید-عمده-' .$product['main']->sub_category_name) .'/' . str_replace(' ', '-', $product['main']->category_name) . '/' .   $product['main']->id  }}"
                     class="main-article-contents-wrapper pointer-class is-user-valid-content"
                     >
                     @endif
@@ -92,7 +178,7 @@
                     
                             <div class="main-article-image">
                               <div class="image" >
-                                <img src="{{url('/storage') . '/thumbnails/' . $product['photos'][0]->file_path}}"  :alt="alt" />
+                                <img src="{{url('/storage') . '/thumbnails/' . $product['photos'][0]->file_path}}"  alt=" {{$product['main']->category_name . ' | ' . $product['main']->sub_category_name . ' ' .  $product['main']->product_name }}" />
                                 </div>
                             
                                 <div class="lds-ring">

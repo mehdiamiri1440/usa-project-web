@@ -27,18 +27,17 @@
           </h2>
 
           <ul class="sub-category-product ">
-            {{-- @foreach ($category->subcategories as $sub_category)
+            @foreach ($category->subcategories as $sub_category)
               <li class="sub-category-item">
                 <h4>
                   <a
-                    class="active"
                     data-dismiss="modal"
                   >
                   {{$sub_category->category_name}}
                 </a>
                 </h4>
               </li>
-            @endforeach --}}
+            @endforeach
 
           </ul>
 
