@@ -27,7 +27,7 @@
           </h2>
 
           <ul class="sub-category-product ">
-            {{-- @foreach ($category->subcategories as $sub_category)
+            @foreach ($category->subcategories as $sub_category)
               <li class="sub-category-item">
                 <h4>
                   <a
@@ -38,7 +38,7 @@
                 </a>
                 </h4>
               </li>
-            @endforeach --}}
+            @endforeach 
 
           </ul>
 

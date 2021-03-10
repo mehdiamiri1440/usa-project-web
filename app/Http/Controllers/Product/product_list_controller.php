@@ -1035,8 +1035,24 @@ class product_list_controller extends Controller
     // ---------------------------------------------------------------------------------------------------
 
 
-    public function get_product_list_blade($category_name = null)
+    public function get_product_list_blade(Request $request,$category_name = null)
     {
+        if($this->_bot_detected() == false){
+            if (!$request->session()->has('user_id')) {
+                $user_phone = $request->cookie('user_phone');
+                $user_hashed_password = $request->cookie('user_password');
+        
+                if ($user_phone && $user_hashed_password) {
+                    $login_middleware_object = new login();
+                    $status = $login_middleware_object->set_user_session($user_phone, $user_hashed_password);
+                }
+            }
+        
+            return  view('layout.master');
+        }
+
+        //crwler bot has been deteced and will be served by plain html
+
         $products = $this->get_products_from_cache();
 
         $categories =  $this->get_all_categories();
@@ -1065,7 +1081,6 @@ class product_list_controller extends Controller
 
         $products = array_slice($products,0,12);
         
-        // dd($meta_info);
         return view('layout.product-list',[
             'products' => $products,
             'categories' => $categories,
@@ -1184,6 +1199,14 @@ class product_list_controller extends Controller
 
         return $tags_info;
     }
+
+    protected function _bot_detected() {
+
+        return (
+          isset($_SERVER['HTTP_USER_AGENT'])
+          && preg_match('/bot|crawl|slurp|spider|mediapartners/i', $_SERVER['HTTP_USER_AGENT'])
+        );
+      }
 
 
 
