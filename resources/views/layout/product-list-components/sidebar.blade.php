@@ -30,9 +30,24 @@
             @foreach ($category->subcategories as $sub_category)
               <li class="sub-category-item">
                 <h4>
-                  <a
-                    href="{{'/product-list/category/' . $sub_category->category_name}}"
-                  >
+
+                  @if($category_name)
+                    @if($sub_category->category_name == $category_name)
+                    <a
+                    class="active"
+                      href="{{'/product-list/category/' . str_replace(' ','-',$sub_category->category_name)}}"
+                    >
+                    @else
+                    <a
+                      href="{{'/product-list/category/' . str_replace(' ','-',$sub_category->category_name)}}"
+                    >
+                    @endif
+                  
+                    @else
+                    <a
+                      href="{{'/product-list/category/' . str_replace(' ','-',$sub_category->category_name)}}"
+                    >
+                    @endif
                   {{$sub_category->category_name}}
                 </a>
                 </h4>
