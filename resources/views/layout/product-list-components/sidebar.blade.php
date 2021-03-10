@@ -31,7 +31,6 @@
               <li class="sub-category-item">
                 <h4>
                   <a
-                    class="active"
                     data-dismiss="modal"
                   >
                   {{$sub_category->category_name}}
@@ -39,6 +38,7 @@
                 </h4>
               </li>
             @endforeach 
+
 
           </ul>
 
