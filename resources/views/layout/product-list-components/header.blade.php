@@ -21,7 +21,7 @@
     <!-- Font Awesome css -->
     <link rel="stylesheet" href="{{asset('assets/css/all.css')}}">
 
-    <link rel="stylesheet" href="{{asset('assets/css/product-list/placeholder-content.css')}}">
+    {{-- <link rel="stylesheet" href="{{asset('assets/css/product-list/placeholder-content.css')}}"> --}}
     <link rel="stylesheet" href="{{asset('assets/css/fontiran.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/main-loader.css')}}">
 
@@ -29,12 +29,12 @@
 
 
     <!-- Main css -->
-    <script src="{{asset('index/js/jquery.js')}}"></script>
+    {{-- <script src="{{asset('index/js/jquery.js')}}"></script>
 
     <script src="{{asset('index/js/bootstrap.min.js')}}"></script>
-    <script src="{{asset('assets/js/stickySidebar.js')}}"></script>
+    <script src="{{asset('assets/js/stickySidebar.js')}}"></script> --}}
 
-    <script src="{{asset('assets/js/product-list/custom.js')}}"></script>
+    {{-- <script src="{{asset('assets/js/product-list/custom.js')}}"></script> --}}
 
 
 
@@ -42,7 +42,7 @@
 <body >
 
  <!-- #regex main loader -->
- <div class="main-loader-wrapper">
+ <div id="main-loader-wrapper" class="main-loader-wrapper">
    
     <div class="logo-main-loader">
       <svg

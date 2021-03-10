@@ -256,31 +256,10 @@
         </a>
       </div>
 
-    
-
-
-
-
-
-
-
 <script>
-    $(document).ready(function () {
-        // $(document).idleTimer(7200000);
-        
-        $('.main-loader-wrapper').css('display','none');
-    });
-    
-
-    function getUserId(){
-        let userId = <?php if(session('user_id')){echo session('user_id');} else echo -1; ?>;
-        return userId;
-    }
-    function getBase(){
-        let base = {!! json_encode(url('/')) !!}
-        return base + '/';
-    }
-
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.getElementById("main-loader-wrapper").style.display = 'none'
+    })
 </script>
 
 
