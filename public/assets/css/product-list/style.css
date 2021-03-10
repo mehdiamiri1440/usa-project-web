@@ -944,7 +944,7 @@ body {
     width: 100%;
   }
  .grid-list .main-content-item{
-    min-height: 210px;
+    height: 210px;
   }
 
   .main-article-contents p a,
