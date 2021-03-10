@@ -1085,6 +1085,7 @@ class product_list_controller extends Controller
             'products' => $products,
             'categories' => $categories,
             'categoryMetaData' => $meta_info,
+            'category_name' => $category_name
         ]);
     }
 

@@ -19,6 +19,13 @@
           </div>
         </div>
       @endif
+
+      @if($categoryMetaData['schema_object'])
+      <script
+        {!! $categoryMetaData["schema_object"] !!}
+        type="application/ld+json"
+      ></script>
+      @endif
       </footer>
       <div id="wrap-footer">
         <footer id="footer">
@@ -35,7 +42,7 @@
                   <li>
                     <a
                       class="smoothScroll"
-                      a="/privacy-and-policy"
+                      href="/privacy-and-policy"
                     >
                       قوانین و مقررات
                     </a>

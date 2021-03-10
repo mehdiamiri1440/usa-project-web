@@ -7,11 +7,24 @@
     <meta name="keywords" content="محصولات کشاورزی,خرید مستقیم صیفی,فروشگاه آنلاین کشاورزی,باسکول">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <meta name="csrf-token" content="{{csrf_token()}}">
-
     <link rel="icon" href="{{asset('assets/img/logo/mobile-logo.svg')}}">
 
-    <title>باسکول | بازارگاه کشاورزی </title>
+    @if($category_name)
+    <title>{{'خرید و فروش عمده و قیمت ' . $category_name . ' | ' . 'باسکول' }}</title>
+    <meta name="description" content='{{"خرید و فروش عمده " . $category_name . " به صورت مستقیم و بدون واسطه از بهترین کشاورزان و تامین کنندگان | آگاهی از آخرین قیمت " . $category_name . " عمده در بازار عمده باسکول "}}'>
+    <meta name="og:description" content='{{"خرید و فروش عمده " . $category_name . " به صورت مستقیم و بدون واسطه از بهترین کشاورزان و تامین کنندگان | آگاهی از آخرین قیمت " . $category_name . " عمده در بازار عمده باسکول "}}'>
+    <meta name="og:site_name" content="باسکول بازارآنلاین خرید و فروش محصولات کشاورزی ایران">
+    <meta name="og:title" content='{{"باسکول | خرید و فروش عمده و قیمت " . $category_name}}' >
+
+    @else
+    <title>لیست محصولات و قیمت عمده محصولات کشاورزی | باسکول</title>
+    <meta name="description" content="خرید عمده و قیمت میوه | خرید عمده و قیمت غلات | خرید عمده و قیمت صیفی جات | خرید و قیمت عمده خشکبار">
+    <meta name="og:description" content="مرجع تخصصی خرید و فروش عمده و قیمت محصولات کشاورزی ایران | صادرات محصولات کشاورزی">
+    <meta name="og:site_name" content="باسکول بازارآنلاین خرید و فروش محصولات کشاورزی ایران">
+    <meta name="og:title" content="لیست محصولات و قیمت عمده محصولات کشاورزی | باسکول">
+    @endif
+
+    
 
 
     <!-- Bootstrap css -->
