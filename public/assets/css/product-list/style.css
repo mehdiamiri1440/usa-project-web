@@ -861,6 +861,7 @@ body {
     padding: 5px 15px;
     border-bottom: 2px solid #eeeeee;
     margin: 0;
+    min-height: 52px;
   }
   
   .user-information-wrapper > div,
@@ -942,7 +943,9 @@ body {
     float: right;
     width: 100%;
   }
-
+ .grid-list .main-content-item{
+    min-height: 210px;
+  }
 
   .main-article-contents p a,
   .main-article-contents span {
@@ -994,6 +997,10 @@ body {
   padding-right: 10px;
 }
 
+.grid-list .main-article-contents {
+  width: calc(100% - 95px);
+}
+
 .main-article-contents > a {
   display: block;
   float: right;
@@ -1024,6 +1031,9 @@ body {
 
   margin-bottom: 10px;
 }
+.grid-list .main-article-contents p {
+  font-size: 13px;
+}
 
 .share-link {
   position: absolute;
@@ -1050,6 +1060,14 @@ body {
   color: #fff !important;
 }
 
+.grid-list .valid-user-badge {
+  width: 30px;
+  height: 35px;
+  left: 5px;
+  padding: 0 3px;
+}
+
+
 .valid-user-badge::after {
   display: inline-block;
   width: 0;
@@ -1066,6 +1084,9 @@ body {
   bottom: -14px;
 }
 
+.grid-list .valid-user-badge::after {
+  border-width: 0 15px 14px;
+}
 .text-danger {
   height: 24px;
 }
@@ -1132,6 +1153,7 @@ body {
 }
 
 /*preloader image style*/
+
 .main-article-image {
   width: 140px;
 
@@ -1146,6 +1168,10 @@ body {
   border-radius: 4px;
 }
 
+.grid-list .main-article-image {
+  width: 80px;
+height: 80px;
+}
 /*preloader image style*/
 .main-article-image > div.image{
   position: relative;
@@ -1196,9 +1222,18 @@ body {
   min-width: 150px;
 }
 
+.grid-list .article-features {
+  bottom: 10px;
+}
+
 .article-features button {
   background: none;
   border: none;
+}
+
+.grid-list .article-action-buttons.calc-width-button {
+  width: calc(100% - 50px) !important;
+  padding-left: 10px;
 }
 
 .article-action-buttons > button {
@@ -1222,6 +1257,10 @@ body {
   font-size: 17px;
 }
 
+.grid-list .article-features button.elevator-event {
+  padding: 4px 14px;
+}
+
 .article-features button.disable {
   background: #777;
   border: none;
@@ -1231,6 +1270,24 @@ body {
 .footer-article .article-action-buttons {
   display: none;
 }
+
+.grid-list .footer-article .article-action-buttons {
+  display: block;
+}
+
+.grid-list .footer-article{
+  overflow: hidden;
+  padding: 0 10px 10px;
+}
+
+.grid-list .article-action-buttons > button{
+  margin: 0;
+  width: 100%;
+  font-size: 14px;
+  font-weight: 700;
+  display: block;
+}
+
 .full-width-button,
 .full-width-button button {
   width: 100% !important;
@@ -1741,7 +1798,7 @@ body {
     top: 56px;
     left: 0;
     right: 0;
-    z-index: 2;
+    z-index: 3;
     background: #f0f3f6;
     padding: 0;
   }
@@ -1815,7 +1872,7 @@ body {
 
   .sub-header {
     position: fixed;
-    z-index: 2;
+    z-index: 3;
     width: 100%;
     background: #f0f3f6;
   }

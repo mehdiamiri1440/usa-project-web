@@ -31,7 +31,7 @@
               <li class="sub-category-item">
                 <h4>
                   <a
-                    data-dismiss="modal"
+                    href="{{'/product-list/category/' . $sub_category->category_name}}"
                   >
                   {{$sub_category->category_name}}
                 </a>
