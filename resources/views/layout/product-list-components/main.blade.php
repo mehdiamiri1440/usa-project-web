@@ -412,7 +412,7 @@
                             </a>
                             @endif
                             <a
-                              href="href="{{'/profile/' . $product['user_info']->user_name}}"
+                              href="{{'/profile/' . $product['user_info']->user_name}}"
                               class="user-action-link default green-text"
                               >مشاهده پروفایل</a
                             >
