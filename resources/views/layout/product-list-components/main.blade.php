@@ -319,14 +319,6 @@
 
             @endforeach
 
-
-
-
-
-
-
-
-              {{-- default list article  --}}
             <div
               class="col-xs-12  hidden-md hidden-lg">
                   @foreach ($products as $product)
@@ -596,13 +588,6 @@
                     <i class="fa fa-plus"></i>  
                     محصولات بیشتر
                     </span>
-
-                    {{-- <div
-                      class="btn-loader-active-wrapper"
-                    >
-                      <img src="{{asset('assets/img/gif/loading.gif')}}" />
-                    </div>
-                  </div> --}}
                 </button>
               </div>
             </div>
