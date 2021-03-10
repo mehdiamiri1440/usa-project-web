@@ -15,6 +15,7 @@
     <meta name="og:description" content='{{"خرید و فروش عمده " . $category_name . " به صورت مستقیم و بدون واسطه از بهترین کشاورزان و تامین کنندگان | آگاهی از آخرین قیمت " . $category_name . " عمده در بازار عمده باسکول "}}'>
     <meta name="og:site_name" content="باسکول بازارآنلاین خرید و فروش محصولات کشاورزی ایران">
     <meta name="og:title" content='{{"باسکول | خرید و فروش عمده و قیمت " . $category_name}}' >
+    <link rel="canonical" href="{{url('/product-list/category/' . implode(explode(' ',$category_name),'-'))}}">
 
     @else
     <title>لیست محصولات و قیمت عمده محصولات کشاورزی | باسکول</title>
@@ -23,8 +24,6 @@
     <meta name="og:site_name" content="باسکول بازارآنلاین خرید و فروش محصولات کشاورزی ایران">
     <meta name="og:title" content="لیست محصولات و قیمت عمده محصولات کشاورزی | باسکول">
     @endif
-
-    
 
 
     <!-- Bootstrap css -->
