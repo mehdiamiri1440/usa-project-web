@@ -546,6 +546,17 @@ filter modal styles
   color: #777;
 }
 
+.default-grid .default-main-article-content {
+  width: calc(100% - 90px);
+}
+.default-grid .default-wrapper-main-image {
+  width: 80px;
+  height: 80px;
+}
+.default-grid > div {
+  padding-bottom: 0;
+}
+
 /* 
 end filter modal styles
 ---------------------------------------------------------------------------------
@@ -885,16 +896,7 @@ end filter modal styles
     float: left;
   }
 }
-.default-grid .default-main-article-content {
-  width: calc(100% - 90px);
-}
-.default-grid .default-wrapper-main-image {
-  width: 80px;
-  height: 80px;
-}
-.default-grid > div {
-  padding-bottom: 0;
-}
+
 @media screen and (max-width: 370px) {
   .mobile-hidden {
     display: none;
