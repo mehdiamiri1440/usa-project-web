@@ -13,69 +13,39 @@
   width: 100%;
 }
 
-.header-menu a.router-link-exact-active::before,
-.header-menu a.active::before {
-  content: " ";
-  height: 100%;
-  width: 2px;
-  background: #00c569;
-  position: absolute;
-  right: 1px;
-  top: 0;
-  display: block;
-}
-
 .header-menu a.router-link-exact-active,
 a.active {
   color: #fff;
   background: #637484;
+  border-right: 10px solid #4dc0bb;
 }
 
 .header-menu a,
 .header-menu button {
-  color: #b1b1b1;
-  padding: 10px 20px;
+  color: #fff;
+  padding: 6px 12px 11px;
   display: inline-block;
   position: relative;
   width: 100%;
   border: none;
   text-align: right;
+  border-radius: 12px;
+  border-right: 10px solid transparent;
 }
 
 .header-menu {
-  padding: 0;
+  padding: 0 10px;
 }
 
 .header-menu a:hover {
   color: #fff;
   background: #637484;
-}
-
-.header-menu a:hover::before {
-  content: " ";
-  height: 100%;
-  width: 2px;
-  background: #00ac5c;
-  position: absolute;
-  right: 0;
-  top: 0;
-  display: block;
+  border-right: 10px solid #4dc0bb;
 }
 
 .header-menu li.active a {
   color: #fff;
   background: #637484;
-}
-
-.header-menu li.active a:before {
-  content: " ";
-  height: 100%;
-  width: 2px;
-  background: #00c569;
-  position: absolute;
-  right: 0;
-  top: 0;
-  display: block;
 }
 
 .custom-badge {
@@ -91,6 +61,7 @@ a.active {
   padding: 5px 3px;
   min-width: 20px;
   font-size: 12px;
+  top: 9px;
 }
 
 .custom-badge.upgrade {
@@ -132,6 +103,7 @@ a.active {
   background-size: 400% 400%;
   animation: gradient 7s ease infinite;
   color: #fff !important;
+  border: none;
 }
 
 #pricing-link:hover i {
@@ -139,8 +111,12 @@ a.active {
   transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
   perspective: 1000px;
+  border: none;
 }
 
+.list-item {
+  padding-bottom: 2px;
+}
 @keyframes gradient {
   0% {
     background-position: 0% 50%;
