@@ -1,965 +1,554 @@
 
 <style scoped>
-.main-wrapper main {
-  padding-bottom: 50px;
+a {
+  color: #1da1f2;
 }
 
-.submit-button {
-  background: #dddddd;
+.main-wrapper {
+  background: #fff;
+  padding-top: 15px;
+}
+
+.info-box-wrapper {
+  background: #e8f4f8;
+  border-radius: 12px;
+  text-align: right;
+  color: #404b55;
+  padding: 5px 20px;
+  margin-bottom: 15px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: center;
+  min-height: 41px;
+}
+
+.info-text-fix {
+  position: relative;
+  top: -2px;
+  line-height: 1.618;
+}
+
+.info-description {
+  margin: 5px auto 10px;
+}
+
+.info-box-wrapper i {
+  font-size: 23px;
+  position: relative;
+  top: 5px;
+  margin-left: 6px;
+}
+
+.button {
+  background: #1da1f2;
   color: #fff;
-  border: none;
-  border-radius: 4px;
-  width: 100%;
-  font-size: 16px;
-  padding: 10px 0 9px;
-  transition: 300ms;
-  cursor: default;
+  border-radius: 12px;
+  padding: 4px 25px;
 }
 
-.submit-button.active {
-  background: #00c569;
-  color: #fff !important;
-  cursor: pointer;
+.verification-button {
+  padding: 1px 25px 8px;
 }
 
-.padding-0 {
+.verification-button i {
+  font-size: 20px;
+  top: 3px;
+  margin-left: 1px;
+}
+.certificate-cehck::after {
+  content: "\F00C";
+  position: absolute;
+  left: 3px;
+  color: #1da1f2;
+  font-size: 13px;
+  top: 3px;
+}
+
+.bg-main {
+  background: #f7f7f7;
+}
+
+.box-wrapper {
+  border-radius: 12px;
+  border: 1px solid #f7f7f7;
+  padding: 20px;
+}
+
+.box-wrapper.user-info-box {
   padding: 0;
 }
 
-input[type="number"] {
-  -moz-appearance: textfield;
+.box-title {
+  font-size: 18px;
+  color: #313a43;
 }
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+
+.box-title::after {
+  content: " ";
+  width: 100px;
+  height: 4px;
+  background: #00c569;
+  display: block;
+  border-radius: 5px;
+  margin-top: 10px;
 }
-input,
-textarea {
-  padding: 9px 15px;
+
+.header-wrapper {
+  position: relative;
+  margin: 33px auto 22px;
 }
-input.disabled {
+
+.header-wrapper > svg {
+  position: absolute;
+  left: 13px;
+  top: -3px;
+  z-index: 1;
+}
+
+.user-img-wrapper {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+  border-radius: 120px;
+  overflow: hidden;
+}
+
+.user-img-wrapper img {
+  display: inline-block;
+  height: 100%;
+  width: initial;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.upload-image {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  overflow: hidden;
+  border-radius: 120px;
+  top: 0px;
+  left: calc(50% - 60px);
+}
+
+.upload-image > input {
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  position: relative;
+  z-index: 3;
+}
+
+.upload-image > input:hover {
+  cursor: pointer;
+}
+
+.upload-image > span {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  top: 0;
+  font-size: 30px;
   color: #fff;
-  background: #f6f6f6;
-  border: 1px solid;
+  -webkit-transition: 100ms;
+  transition: 100ms;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.upload-image > span i {
+  flex: 1;
+}
+
+.upload-image > input:hover + span {
+  font-size: 35px;
+  transition: 100ms;
+}
+
+.user-name {
+  text-align: center;
+  font-size: 23px;
   font-weight: bold;
+  color: #313a43;
+  margin: 16px auto 31px;
+}
+
+.phone-number-wrapper {
+  margin: 15px auto;
+}
+
+.info-description-wrapper {
+  display: block;
+}
+
+.info-description .row > div {
+  margin: 6px auto;
+  color: #777;
+}
+
+/********
+ input design  
+*********/
+
+.text-input-wrapper {
+  margin: 0 auto;
+  position: relative;
+  background: #fbfbfb;
+}
+
+.title-contents {
+  font-size: 18px;
+  margin-bottom: 10px;
+  padding: 0;
+}
+
+.title-contents.active-number-title {
+  font-size: 15px;
+  margin-top: 3px;
+}
+
+.active-number-button {
+  font-size: 18px;
+  background: #00c569;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 30px 9px;
 }
 
 input {
-  width: 100%;
   background: none;
+  z-index: 1;
+  position: relative;
+  width: 100%;
+  padding: 8px 15px;
+  border: 1px solid #bdc4cc;
   border-radius: 4px;
-  border: 1px solid;
-  color: #bebebe;
+  box-shadow: none;
+}
+
+.text-input-wrapper i {
+  position: absolute;
+  left: 15px;
+  top: 11px;
+  font-size: 18px;
+  color: #bdc4cc;
   transition: 300ms;
 }
 
 input:focus,
-textarea:focus {
+input:focus + i {
   color: #333;
   border-color: #333;
 }
 
-input.active,
-textarea.active {
-  color: #333;
+input.active {
   border-color: #00c569;
+  color: #333;
+}
+
+input.active + i {
+  color: #00c569;
 }
 
 input.active:focus,
-textarea.active:focus {
-  color: #333;
+input.active:focus + i,
+input.active + i {
   border-color: #00c569;
 }
 
 input.error {
+  color: #333;
+  border-color: #e41c38;
+}
+
+input.error + i {
   color: #e41c38;
 }
 
-input.error:focus {
-  color: #e41c38;
+input.error:focus,
+input.error:focus + i {
+  border-color: #e41c38;
 }
 
 textarea {
   background: none;
-  min-height: 120px;
-  max-height: 140px;
-  transition: 300ms;
-  line-height: 1.618;
-  max-width: 100%;
-  min-width: 100%;
-}
-
-.error-message {
-  text-align: center;
-  color: #e41c38;
-  font-weight: bold;
-  height: 16px;
-  margin: 4px auto 0;
-  direction: rtl;
-  font-size: 12px;
-  display: block;
-}
-
-.main-wrapper {
-  direction: rtl;
-  background: #f6f6f6;
-  font-size: 13px;
-  padding-top: 50px;
-}
-
-.title {
-  padding: 13px 15px;
-}
-
-.title h1 {
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.title p {
-  color: #e41c38;
-  padding-top: 4px;
-  text-align: center;
-  font-size: 13px;
-}
-
-/*progress styles*/
-
-.progress-wrapper {
-  background: #fff;
-  border-radius: 4px;
-  position: relative;
-  overflow: hidden;
-}
-
-.custom-progress {
-  background: #00c569;
-  color: #fff;
-  width: 25%;
-  text-align: center;
-  padding: 3px 0;
-  font-weight: bold;
-  min-width: 25%;
-  transition: 300ms;
-}
-
-.custom-progress p {
-  display: inline;
-}
-
-/*form styles*/
-
-.content-wrapper {
-  background: #fff;
-  box-shadow: 0 0 10px #c5c5c5;
-  border-radius: 9px;
-  margin: 15px auto;
-}
-
-/*user image*/
-
-.user-image-wrapper {
-  text-align: center;
-}
-
-.user-image-wrapper > p {
-  margin-bottom: 7px;
-}
-
-.content-wrapper {
-  padding: 15px 0;
-}
-
-.user-image {
-  width: 86px;
-  height: 86px;
-  overflow: hidden;
-  margin: 0 auto;
-  border-radius: 50px;
-  position: relative;
-}
-
-.user-image img {
-  position: absolute;
-
-  width: initial;
-
-  height: 100%;
-
-  left: 50%;
-
-  top: 50%;
-
-  transform: translate(-50%, -50%);
-}
-
-.submit {
-  position: relative;
-
-  max-width: 105px;
-
-  margin: 7px auto 0;
-
-  height: 25px;
-
-  background: #00c569;
-
-  text-align: center;
-
-  color: #fff;
-
-  overflow: hidden;
-
-  border-radius: 4px;
-}
-
-#imgInp {
-  max-width: 100%;
-  position: relative;
-  opacity: 0;
-  height: 100%;
   z-index: 1;
-}
-
-#imgInp:hover {
-  cursor: pointer;
-}
-
-.submit label {
-  position: absolute;
-  z-index: 0;
-  top: 3px;
-  margin: 0;
-  left: 0;
-  right: 0;
-  font-weight: normal;
-}
-
-/*inputs styles*/
-
-.inputs-wrapper {
-  margin-bottom: 10px;
-}
-
-/*redio button styles*/
-
-.label-radio {
-  display: inline-block;
-
   position: relative;
-
-  cursor: pointer;
-
-  -webkit-user-select: none;
-
-  -moz-user-select: none;
-
-  -ms-user-select: none;
-
-  user-select: none;
-
-  direction: rtl;
-
-  padding: 0 29px 0 15px;
-
-  font-size: 14px;
-}
-
-.label-radio:nth-of-type(1) {
-  margin-left: 16px;
-}
-
-/* Hide the browser's default radio button */
-.label-radio input {
-  position: absolute;
-
-  opacity: 0;
-
-  cursor: pointer;
-
-  z-index: 1;
-
-  left: 0;
-
-  right: 0;
-
-  top: 0;
-
-  bottom: 0;
-
-  height: 100%;
-
-  margin: 0;
-
   width: 100%;
+  padding: 8px 15px;
+  border: 1px solid #bdc4cc;
+  border-radius: 4px;
+  box-shadow: none;
 }
 
-/* Create a custom radio button */
-.checkmark {
-  position: absolute;
-
-  top: 11px;
-
-  right: 13px;
-
-  height: 12px;
-
-  width: 12px;
-
-  background-color: #eee;
-
-  border-radius: 50%;
+textarea:focus,
+textarea:focus + i {
+  color: #333;
+  border-color: #333;
 }
 
-/* On mouse-over, add a grey background color */
-.label-radio:hover input ~ .checkmark {
-  background-color: #ccc;
+textarea.active {
+  border-color: #00c569;
+  color: #333;
 }
 
-/* When the radio button is checked, add a blue background */
-.label-radio input:checked ~ .checkmark {
-  background-color: #00c569;
+textarea.active + i {
+  color: #00c569;
 }
 
-.label-radio input:checked ~ label::after {
+textarea.active:focus,
+textarea.active:focus + i,
+textarea.active + i {
   border-color: #00c569;
 }
 
-.label-radio label::after {
-  content: "";
-
-  display: block;
-
-  position: absolute;
-
-  left: 0;
-
-  right: 0;
-
-  top: -2px;
-
-  bottom: 0;
-
-  z-index: 0;
-
-  margin: 0;
-
-  padding: 0;
-
-  border-radius: 3px;
-
-  border: 1px solid #bdc4cc;
+textarea.error {
+  color: #333;
+  border-color: #e41c38;
 }
 
-.label-radio label i {
-  margin: 0 4px;
+textarea.error + i {
+  color: #e41c38;
 }
 
-.label-text {
-  margin-bottom: 10px;
-}
-
-/*link help style*/
-
-.link-help {
-  text-align: right;
-}
-
-.link-help a {
-  color: #00c569;
-
-  padding: 2px 15px;
-
-  border-radius: 4px;
-
-  border: 1px solid;
-
-  display: inline-block;
-
-  font-weight: bold;
-
-  margin-bottom: 5px;
-}
-
-.link-help a {
-  color: #00c569;
-
-  padding: 2px 15px;
-
-  border-radius: 4px;
-
-  border: 1px solid;
-
-  display: inline-block;
-
-  font-weight: bold;
-}
-
-.link-help a:hover {
-  color: #fff;
-  background: #00c569;
-}
-
-.link-help i {
-  -ms-transform: matrix(-1, 0, 0, 1, 0, 0); /* Standard syntax */
-  -webkit-transform: matrix(-1, 0, 0, 1, 0, 0); /* Standard syntax */
-  transform: matrix(-1, 0, 0, 1, 0, 0); /* Standard syntax */
-}
-
-.link-help p {
-  color: #bdc4cc;
-
-  font-size: 12px;
-
-  line-height: 19px;
-
-  font-weight: bold;
-}
-
-.default-images {
-  text-align: center;
-  border: 3px dashed;
-  border-radius: 3px;
-  padding: 19px 0px;
-  font-size: 15px;
-  font-weight: bold;
-  color: #d2d2d2;
-}
-
-.default-images i {
-  display: block;
-  font-size: 50px;
-  margin: 6px auto;
-}
-
-.images-content i.fa-times {
-  position: absolute;
-  color: red;
-}
-
-.small-description {
-  font-size: 12px;
-  color: #bdc4cc;
-}
-
-.images-content > article {
-  padding: 5px;
-}
-
-.images-content .image-item {
-  transition: 300ms;
-  top: 0;
-  overflow: hidden;
-  border-radius: 3px;
-  position: relative;
-  height: 115px;
-}
-
-.images-content .image-item img {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  width: initial;
-  height: 100%;
-  min-width: 100%;
-}
-
-.progressbar {
-  margin-top: 20px;
-}
-.progressbar .progress-title {
-  margin-bottom: 10px;
-  font-size: 15px;
-  color: #777;
-}
-
-@media screen and (max-width: 1120px) {
-  .label-radio {
-    padding: 0 25px 0 11px;
-    font-size: 14px;
-  }
-
-  .label-radio:nth-of-type(1) {
-    margin-left: 10px;
-  }
-
-  .checkmark {
-    right: 8px;
-  }
-  .link-help a {
-    padding: 2px 10px;
-  }
-}
-
-@media only screen and (max-width: 991px) {
-  .radio-wrapper {
-    margin-bottom: 10px;
-  }
-
-  .label-radio {
-    padding: 0 29px 0 15px;
-  }
-
-  .label-radio:nth-of-type(1) {
-    margin-left: 16px;
-  }
-
-  .checkmark {
-    right: 13px;
-  }
-
-  .description {
-    margin: 15px auto;
-  }
-
-  .description hr {
-    margin: 0 auto 15px;
-  }
-
-  .link-help a {
-    float: right;
-    margin-left: 15px;
-  }
-
-  .link-help {
-    padding: 0 15px;
-  }
-
-  .form-control-wrapper {
-    margin-bottom: 7px;
-  }
-  .description {
-    margin: 8px auto 15px;
-  }
-
-  .activity-type {
-    padding: 0 15px;
-  }
-
-  .images-content .image-item {
-    height: 150px;
-  }
-}
-
-@media only screen and (max-width: 767px) {
-  .title {
-    text-align: center;
-    padding: 5px 15px;
-  }
-  .user-image-wrapper {
-    margin-top: 23px;
-  }
-  .title p,
-  .title h1 {
-    padding-top: 0;
-    margin: 5px auto;
-  }
-  .link-help a {
-    float: initial;
-    margin: 0 auto;
-  }
-
-  .link-help {
-    text-align: center;
-  }
-
-  main,
-  .form-wrapper {
-    padding: 0;
-  }
-  .content-wrapper {
-    border-radius: 0;
-  }
-
-  .images-content .image-item {
-    height: 200px;
-  }
-
-  .main-wrapper main {
-    padding-bottom: 110px !important;
-  }
-}
-
-@media only screen and (max-width: 512px) {
-  .images-content .image-item {
-    height: 150px;
-  }
+textarea.error:focus,
+textarea.error:focus + i {
+  border-color: #e41c38;
 }
 </style>
 
 <template>
-  <div class="main-wrapper col-xs-12">
-    <header class="col-xs-12">
-      <div class="progressbar col-xs-12">
-        <p class="text-center progress-title hidden-sm hidden-md hidden-lg">
-          میزان تکمیل پروفایل
-        </p>
-
-        <div class="progress-wrapper row">
-          <div class="custom-progress">
-            <p class="hidden-xs">میزان تکمیل پروفایل</p>
-
-            <span>{{ completeProfileProgress }}%</span>
+  <div class="main-wrapper h-100 col-xs-12 text-rtl">
+    <div class="row">
+      <div class="col-xs-12 col-md-4 pull-right">
+        <div class="info-box-wrapper">
+          <a href="#" class="info-text-fix">
+            <i class="fa fa-question-circle"></i>
+            نمونه پروفایل تکمیل شده
+          </a>
+        </div>
+      </div>
+      <div class="col-xs-12 col-md-8">
+        <div class="info-box-wrapper bg-main">
+          <p class="pull-right info-text-fix">
+            <i class="fas fa-exclamation-circle"></i>
+            اطلاعات هویتی شما احراز نشده است.
+          </p>
+          <router-link
+            class="button verification-button"
+            :to="{ name: 'profileBasicSellerVeficiation' }"
+          >
+            <i class="fa fa-certificate certificate-cehck"></i>
+            احراز هویت کنید
+          </router-link>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-md-4 pull-right">
+        <div class="box-wrapper user-info-box">
+          <div class="header-wrapper">
+            <svg width="150" height="150" viewBox="0 0 120 120">
+              <linearGradient id="linear" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#a6ceff" />
+                <stop offset="100%" stop-color="#2ed8a7" />
+              </linearGradient>
+              <circle
+                stroke-linecap="round"
+                cx="50"
+                cy="50"
+                r="48"
+                stroke="url(#linear)"
+                stroke-width="5"
+                fill="none"
+                stroke-dasharray="315"
+                stroke-dashoffset="315"
+                stroke-mitterlimit="0"
+                transform="rotate(-90 ) translate(-100 0)"
+              />
+            </svg>
+            <div class="user-img-wrapper">
+              <img
+                v-if="currentUser.profile.profile_photo"
+                :src="str + '/' + currentUser.profile.profile_photo"
+                alt="تصویر پروفایل"
+                class="image-preview"
+              />
+              <img
+                v-else
+                src="../../../../../img/user-defult.png"
+                alt="تصویر پروفایل"
+                class="image-preview"
+              />
+            </div>
+            <div class="upload-image">
+              <input id="imgInp" type="file" />
+              <span>
+                <i class="fa fa-camera"></i>
+              </span>
+            </div>
+          </div>
+          <div class="user-name">
+            <p class="blue-aqua-text text-center">
+              میزان تکمیل پروفایل
+              {{ completeProfileProgress }}%
+            </p>
+            <p
+              class="user-name"
+              v-text="
+                currentUser.user_info.first_name +
+                ' ' +
+                currentUser.user_info.last_name
+              "
+            ></p>
           </div>
         </div>
       </div>
-    </header>
-
-    <main class="col-xs-12">
-      <section class="wrapper-section">
-        <div class="content-wrapper row">
-          <div class="form-wrapper col-xs-12">
-            <div class="user-image-wrapper col-xs-4 col-sm-2 pull-right">
-              <p class="hidden-xs">تصویر پروفایل</p>
-              <div class="user-image">
-                <img
-                  v-if="currentUser.profile.profile_photo"
-                  :src="str + '/' + currentUser.profile.profile_photo"
-                  class="image-preview"
-                  alt="تصویر پروفایل"
+      <div class="col-xs-12 col-md-8">
+        <div class="box-wrapper">
+          <div class="box-title">اطلاعات شما</div>
+          <div class="phone-number-wrapper row">
+            <div class="col-xs-12 pull-right col-md-7">
+              <p class="title-contents">
+                شماره موبایل
+                <span class="red-text"> * </span>
+              </p>
+              <div class="text-input-wrapper">
+                <input
+                  v-model="currentUser.profile.public_phone"
+                  id="min-sale-amount"
+                  type="tel"
+                  :class="{
+                    active: currentUser.profile.public_phone,
+                  }"
+                  placeholder="شماره موبایل را وارد کنید"
+                  pattern="[0-9]*"
                 />
 
-                <img
-                  v-else
-                  src="../../../../../img/user-defult.png"
-                  align="تصویر پروفایل"
-                  class="image-preview"
+                <i
+                  v-if="currentUser.profile.public_phone"
+                  class="fa fa-check-circle"
+                ></i>
+                <!-- <i
+                  v-else-if="$parent.errors.max_sale_price"
+                  class="fa fa-times-circle"
+                ></i> -->
+                <i v-else class="fa fa-edit"></i>
+              </div>
+            </div>
+            <div class="col-xs-12 col-md-5">
+              <p class="title-contents active-number-title">
+                نمايش شماره به خریداران
+                <span class="red-text"> غیر فعال است </span>
+              </p>
+              <button class="active-number-button hover-effect">
+                فعال کردن
+              </button>
+            </div>
+          </div>
+          <div class="phone-number-wrapper row">
+            <div class="col-xs-12 pull-right col-md-7">
+              <p class="title-contents">آدرس</p>
+              <div class="text-input-wrapper">
+                <input
+                  v-model="currentUser.profile.address"
+                  id="min-sale-amount"
+                  type="tel"
+                  :class="{
+                    active: currentUser.profile.address,
+                  }"
+                  placeholder="آدرس را وارد کنید"
+                  pattern="[0-9]*"
                 />
-              </div>
 
-              <div class="submit">
-                <input type="file" id="imgInp" ref="profilePhoto" />
-
-                <label>ویرایش تصویر</label>
-
-                <br />
-
-                <span
-                  v-if="errors.profile_photo"
-                  class="text-danger tex-left"
-                  v-text="errors.profile_photo[0]"
-                ></span>
+                <i
+                  v-if="currentUser.profile.address"
+                  class="fa fa-check-circle"
+                ></i>
+                <!-- <i
+                  v-else-if="$parent.errors.max_sale_price"
+                  class="fa fa-times-circle"
+                ></i> -->
+                <i v-else class="fa fa-edit"></i>
               </div>
             </div>
-
-            <div class="user-information col-xs-8 col-sm-10">
+            <div class="col-xs-12 col-md-5"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-md-4 pull-right">
+        <div class="box-wrapper">
+          <div class="box-title">افزودن اطلاعات حقوقی</div>
+          <p class="margin-15-0">
+            با تکمیل اطلاعات حقوقی، اعتبار حساب خود را بیشتر کنید.
+          </p>
+          <a href="#">
+            افزودن اطلاعات حقوقی
+            <i class="fa fa-angle-left"></i>
+          </a>
+        </div>
+      </div>
+      <div class="col-xs-12 col-md-8">
+        <div class="box-wrapper">
+          <div class="box-title">درباره کسب و کارتان بنویسید</div>
+          <div class="info-box-wrapper info-description-wrapper margin-15-0">
+            <p class="pull-right info-text-fix col-xs-12">
+              <i class="fas fa-question-circle"></i>
+              در بخش (درباره کسب و کارتان بنویسید) به این سوالات پاسخ دهید.
+            </p>
+            <div class="info-description col-xs-12">
               <div class="row">
-                <div
-                  class="activity-type padding-0 col-xs-12 col-md-4 pull-right"
-                >
-                  <p class="label-text">نوع کاربری</p>
-                  <div class="radio-wrapper">
-                    <div class="label-radio">
-                      <input
-                        @click="disableForm()"
-                        type="radio"
-                        value="0"
-                        name="radio"
-                        :checked="0 == currentUser.profile.is_company"
-                        v-model="currentUser.profile.is_company"
-                      />
-
-                      <span class="checkmark"></span>
-
-                      <label>حقیقی</label>
-                    </div>
-
-                    <div class="label-radio">
-                      <input
-                        type="radio"
-                        @click="enableForm()"
-                        value="1"
-                        :checked="1 == currentUser.profile.is_company"
-                        name="radio"
-                        v-model="currentUser.profile.is_company"
-                      />
-                      <span class="checkmark"></span>
-
-                      <label>حقوقی</label>
-                    </div>
-                  </div>
-
-                  <div class="error-message">
-                    <span
-                      v-if="errors.is_company"
-                      v-text="errors.is_company[0]"
-                    ></span>
-                  </div>
+                <div class="col-xs-12 pull-right col-md-6">
+                  1- در چه زمینه ای فعالیت می کنید؟
                 </div>
-
-                <div class="inputs-wrapper col-xs-12 col-md-8 pull-left">
-                  <div class="row">
-                    <div
-                      class="form-control-wrapper col-xs-12 col-sm-6 pull-right"
-                    >
-                      <p class="label-text">نام شرکت</p>
-
-                      <div class="input-wrapper company-name-wrapper">
-                        <input
-                          type="text"
-                          id="company-name"
-                          name="company-name"
-                          placeholder="نام شرکت"
-                          v-model="currentUser.profile.company_name"
-                          :disabled="!formEnabled"
-                          :class="{
-                            disabled: formEnabled == false,
-                            active: currentUser.profile.company_name,
-                          }"
-                        />
-                      </div>
-
-                      <div class="error-message">
-                        <span
-                          v-if="errors.company_name"
-                          v-text="errors.company_name[0]"
-                        ></span>
-                      </div>
-                    </div>
-
-                    <div class="form-control-wrapper col-xs-12 col-sm-6">
-                      <p class="label-text">شماره ثبت شرکت</p>
-
-                      <div class="input-wrapper company-number-wrapper">
-                        <input
-                          id="company-number"
-                          type="tel"
-                          name="company-number"
-                          placeholder="شماره ثبت شرکت"
-                          v-model="currentUser.profile.company_register_code"
-                          :disabled="!formEnabled"
-                          :class="{
-                            disabled: formEnabled == false,
-                            active: currentUser.profile.company_register_code,
-                          }"
-                          pattern="[0-9]*"
-                        />
-
-                        <div class="error-message">
-                          <span
-                            v-if="errors.company_register_code"
-                            v-text="errors.company_register_code[0]"
-                          ></span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                <div class="col-xs-12 pull-right col-md-6">
+                  2- بازار فعالیت شما داخلی است یا خارجی؟
                 </div>
-              </div>
-            </div>
-
-            <div class="user-form col-xs-12 col-sm-10">
-              <div class="row">
-                <div class="col-xs-12 col-md-8 pull-left">
-                  <div class="row">
-                    <div class="form-control-wrapper col-xs-6 pull-right">
-                      <p class="label-text">شماره تماس عمومی</p>
-
-                      <div class="input-wrapper phone-number-wrapper">
-                        <input
-                          id="phone-number"
-                          type="tel"
-                          class="dire"
-                          placeholder="شماره موبایل"
-                          pattern="[0-9]*"
-                          v-model="currentUser.profile.public_phone"
-                          :class="{ active: currentUser.profile.public_phone }"
-                        />
-
-                        <div class="error-message">
-                          <span
-                            v-if="errors.public_phone"
-                            v-text="errors.public_phone[0]"
-                          ></span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="col-xs-6 form-control-wrapper">
-                      <p class="label-text">آدرس</p>
-
-                      <div class="input-wrapper address-wrapper">
-                        <input
-                          id="address"
-                          type="text"
-                          class="dire"
-                          placeholder="آدرس شما"
-                          v-model="currentUser.profile.address"
-                          :class="{ active: currentUser.profile.address }"
-                        />
-
-                        <div class="error-message">
-                          <span
-                            v-if="errors.address"
-                            v-text="errors.address[0]"
-                          ></span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                <div class="col-xs-12 pull-right col-md-6">
+                  3- چند سال سابقه فعالیت دارید؟
                 </div>
               </div>
             </div>
           </div>
-
-          <div class="form-wrapper col-xs-12 col-md-10 pull-left">
-            <div class="description col-xs-12 col-md-8">
-              <hr class="hidden-md hidden-lg" />
-              <p class="label-text">درباره کسب و کارتان بنویسید</p>
-
-              <div class="input-wrapper address-wrapper">
+          <div class="description row">
+            <div class="col-xs-12">
+              <div class="text-input-wrapper">
                 <textarea
                   rows="3"
-                  id="description"
-                  class="dire"
-                  placeholder=" درباره کسب و کارتان بنویسید "
+                  :class="{
+                    active: currentUser.profile.description,
+                  }"
                   v-model="currentUser.profile.description"
-                  :class="{ active: currentUser.profile.description }"
+                  placeholder="در مورد کیفیت و نوع بسته بندی محصول خود اینجا توضیح دهید"
                 ></textarea>
 
-                <div class="error-message">
-                  <span
-                    v-if="errors.description"
-                    v-text="errors.description[0]"
-                  ></span>
-                </div>
-              </div>
-            </div>
-
-            <div class="link-help padding-0 col-xs-12 col-md-4">
-              <a
-                target="_blank"
-                href="https://www.buskool.com/profile/buskools"
-              >
-                نمونه پروفایل تکمیل شده
-                <i class="fa fa-question-circle"></i>
-              </a>
-              <p>
-                در بخش (درباره کسب و کارتان بنویسید) به این سوالات پاسخ دهید.
-                <br />1- چه محصولاتی برای فروش دارید؟ 2- میزان تولید ماهانه یا
-                سالانه محصولات چقدر است ؟ 3- محصولات در چه زمانی از سال آماده
-                فروش می باشند؟ 4- چند سال سابقه فعالیت دارید؟
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="content-wrapper row">
-          <div class="col-xs-12 col-sm-6 pull-right">
-            <label>
-              افزودن تصاویر مربوطه
-              <span class="small-description">(محصولات | شرکت | کارکنان)</span>
-            </label>
-
-            <UploadFile
-              uploadName="relatedFiles"
-              uploadAccept="image/*"
-              :uploadMultiple="true"
-              :isImageReset="relatedFilesReset"
-              :uploadDrop="true"
-              :uploadDropDirectory="true"
-              :uploadAddIndex="false"
-              :uploadThread="3"
-              :uploadOCompress="1024 * 1024"
-              :uploadUploadAuto="false"
-              :imageWrapperSize="'col-xs-12 col-sm-6'"
-            />
-          </div>
-
-          <div class="col-xs-12 col-sm-6 pull-left">
-            <label>تصاویر ثبت شده</label>
-
-            <div class="row">
-              <div class="images-content col-xs-12">
-                <article
-                  class="col-md-4 col-xs-6 col-lg-3 pull-right"
-                  v-for="photo in currentUser.relateds"
-                  v-if="currentUser.relateds.length"
-                >
-                  <!--                                             <a href="#">
-                                                <i class="fa fa-times"></i>
-                  </a>-->
-
-                  <div class="image-item">
-                    <img :src="str + '/' + photo" alt />
-                  </div>
-                </article>
-
-                <div v-else class="default-images">
-                  <i class="fa fa-picture-o"></i>
-                  هنوز تصویری ثبت نشده است
-                </div>
+                <i
+                  v-if="currentUser.profile.description"
+                  class="fa fa-check-circle"
+                ></i>
+                <!-- <i
+                  v-else-if="$parent.errors.max_sale_price"
+                  class="fa fa-times-circle"
+                ></i> -->
+                <i v-else class="fa fa-edit"></i>
               </div>
             </div>
           </div>
         </div>
-
-        <div class="content-wrapper row">
-          <div class="col-xs-12 col-sm-6 pull-right">
-            <label>
-              افزودن گواهی های مربوطه
-              <span class="small-description"
-                >(گواهی های ثبت شرکت | استاندارد محصول)</span
-              >
-            </label>
-
-            <UploadFile
-              uploadName="certificateFiles"
-              :isImageReset="certificateFilesReset"
-              uploadAccept="image/*"
-              :uploadMultiple="true"
-              :uploadDrop="true"
-              :uploadDropDirectory="true"
-              :uploadAddIndex="false"
-              :uploadThread="3"
-              :uploadOCompress="1024 * 1024"
-              :uploadUploadAuto="false"
-              :imageWrapperSize="'col-xs-12 col-sm-6'"
-            />
-          </div>
-
-          <div class="col-xs-12 col-sm-6 pull-left">
-            <label>تصاویر ثبت شده</label>
-
-            <div class="row">
-              <div class="images-content col-xs-12">
-                <article
-                  v-if="currentUser.certificates.length"
-                  class="col-md-4 col-xs-6 col-lg-3 pull-right"
-                  v-for="(photo, index) in currentUser.certificates"
-                  :key="index"
-                >
-                  <!--   <a href="#">
-                                                <i class="fa fa-times"></i>
-                  </a>-->
-                  <div class="image-item">
-                    <img :src="str + '/' + photo" alt />
-                  </div>
-                </article>
-                <div v-else class="default-images">
-                  <i class="fa fa-picture-o"></i>
-                  هنوز تصویری ثبت نشده است
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-xs-12 col-md-3 col-sm-4 pull-right">
-          <div class="row">
-            <button
-              class="submit-button active"
-              @click="RegisterBasicProfileInfo"
-            >
-              ثبت تغییرات
-            </button>
-          </div>
-        </div>
-      </section>
-    </main>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -1009,14 +598,14 @@ export default {
       errors: "",
       popUpMsg: "",
       items: [
-        {
-          message: "پروفایل",
-          url: "profileBasicSeller",
-        },
-        {
-          message: "احراز هویت",
-          url: "profileBasicSellerVeficiation",
-        },
+        // {
+        //   message: "پروفایل",
+        //   url: "profileBasicSeller",
+        // },
+        // {
+        //   message: "احراز هویت",
+        //   url: "profileBasicSellerVeficiation",
+        // },
       ],
       relatedFiles: [],
       certificateFiles: [],
@@ -1219,7 +808,14 @@ export default {
       if (this.currentUser.relateds.length) {
         this.completeProfileProgress += this.rankState.relateds;
       }
+      this.circleProgress();
     },
+    circleProgress() {
+      let circle = 315;
+      let percentage = circle - (this.completeProfileProgress * circle) / 100;
+      $("circle").attr("stroke-dashoffset", percentage);
+    },
+
     isOsIOS: function () {
       var userAgent = window.navigator.userAgent.toLowerCase(),
         safari = /safari/.test(userAgent),
