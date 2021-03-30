@@ -13,55 +13,65 @@
   width: 100%;
 }
 
-.header-menu a.router-link-exact-active::before,
-.header-menu a.active::before {
-  content: " ";
-  height: 100%;
-  width: 2px;
-  background: #00c569;
-  position: absolute;
-  right: 1px;
-  top: 0;
-  display: block;
-}
-
 .header-menu a.router-link-exact-active,
 a.active {
   color: #fff;
   background: #637484;
+  border-right: 10px solid #4dc0bb;
 }
 
-.header-menu a {
-  color: #b1b1b1;
-  padding: 10px 20px;
+.header-menu a,
+.header-menu button {
+  color: #fff;
+  padding: 6px 12px 11px;
   display: inline-block;
   position: relative;
   width: 100%;
+  border: none;
+  text-align: right;
+  border-radius: 12px;
+  border-right: 10px solid transparent;
 }
 
 .header-menu {
-  padding: 0;
+  padding: 0 10px;
 }
 
 .header-menu a:hover {
   color: #fff;
   background: #637484;
-}
-
-.header-menu a:hover::before {
-  content: " ";
-  height: 100%;
-  width: 2px;
-  background: #00ac5c;
-  position: absolute;
-  right: 0;
-  top: 0;
-  display: block;
+  border-right: 10px solid #4dc0bb;
 }
 
 .header-menu li.active a {
   color: #fff;
   background: #637484;
+}
+
+.custom-badge {
+  position: absolute;
+  left: 20px;
+  background: #e41c38;
+  height: 20px;
+  border-radius: 20px;
+  color: #fff;
+  text-align: center;
+  direction: ltr;
+  line-height: 1;
+  padding: 5px 3px;
+  min-width: 20px;
+  font-size: 12px;
+  top: 9px;
+}
+
+.custom-badge.upgrade {
+  padding: 5px 10px;
+  height: 24px;
+  font-size: 14px;
+}
+
+.header-menu i {
+  margin: 5px;
 }
 
 .star-badge {
@@ -88,51 +98,51 @@ a.active {
   margin: 2px 0;
 }
 
-.header-menu li.active a:before {
-  content: " ";
-  height: 100%;
-  width: 2px;
-  background: #00c569;
-  position: absolute;
-  right: 0;
-  top: 0;
-  display: block;
+#pricing-link {
+  background: linear-gradient(-45deg, #00c569, #23d5ab, #21ad93, #23a6d5);
+  background-size: 400% 400%;
+  animation: gradient 7s ease infinite;
+  color: #fff !important;
+  border: none;
 }
 
-.header-menu li.active a.router-link-exact-active {
-  color: #fff;
-  background: #637484;
+#pricing-link:hover i {
+  animation: shake 1s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+  border: none;
 }
 
-.header-menu li.active a.router-link-exact-active:before {
-  content: " ";
-  height: 100%;
-  width: 2px;
-  background: #00c569;
-  position: absolute;
-  right: 0;
-  top: 0;
-  display: block;
+.list-item {
+  padding-bottom: 2px;
+}
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
-.custom-badge {
-  position: absolute;
-  left: 20px;
-  top: 6px;
-  background: #e41c38;
-  height: 30px;
-  width: 30px;
-  border-radius: 50px;
-  padding-top: 7px;
-  color: #fff;
-  text-align: center;
-  direction: ltr;
-}
+@keyframes shake {
+  0% {
+    transform: translate3d(0, -1px, 0);
+  }
 
-.header-menu i {
-  margin: 5px;
+  50% {
+    transform: translate3d(0, -5px, 0);
+  }
+  100% {
+    transform: translate3d(0, -1px, 0);
+  }
 }
 </style>
+
 <template>
   <div>
     <div class="header-menu">

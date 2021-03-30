@@ -167,18 +167,19 @@
 <template>
   <div class="switch-buttons">
     <div class="radio-wrapper">
-      <div class="label-radio active">
+      <div class="label-radio" :class="{ active: !isSwitch }">
         <input
           type="radio"
           value="0"
           :name="mobile == 1 ? 'mobileMyRadio' : 'myRadio'"
-          checked
+          :checked="!isSwitch"
         />
 
-        <span class="checkmark active">
+        <span v-if="isSwitch" class="checkmark"> </span>
+
+        <span v-else class="checkmark active">
           <i class="fa fa-check"></i>
         </span>
-
         <label>
           <svg
             id="Layer_1"
@@ -210,16 +211,20 @@
         </label>
       </div>
 
-      <div class="label-radio">
+      <div class="label-radio" :class="{ active: isSwitch }">
         <input
           type="radio"
           value="1"
           :name="mobile == 1 ? 'mobileMyRadio' : 'myRadio'"
-          :checked="'1' == $parent.currentUser.user_info.is_buyer"
+          :checked="isSwitch"
           @click="switchRole()"
         />
 
-        <span class="checkmark"></span>
+        <span v-if="!isSwitch" class="checkmark"> </span>
+
+        <span v-else class="checkmark active">
+          <i class="fa fa-check"></i>
+        </span>
 
         <label>
           <svg
@@ -268,8 +273,14 @@
 <script>
 export default {
   props: ["mobile"],
+  data() {
+    return {
+      isSwitch: false,
+    };
+  },
   methods: {
     switchRole() {
+      this.isSwitch = true;
       window.location.href = "/switch-role";
     },
   },

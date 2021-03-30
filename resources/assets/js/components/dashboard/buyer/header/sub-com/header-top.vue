@@ -1,4 +1,9 @@
 <style scoped>
+.list-inline > li {
+  padding-left: 0;
+  padding-right: 0;
+}
+
 .show-header button {
   float: right;
   border: none;
@@ -39,7 +44,7 @@
 }
 
 .main-header {
-  height: 59px;
+  min-height: 59px;
   position: fixed;
   left: 0;
   right: 250px;
@@ -51,6 +56,39 @@
 
 .little-main-header {
   right: 80px;
+}
+
+.required-fix-alert {
+  background: #e41c38;
+  color: #fff;
+  text-align: center;
+  font-size: 16px;
+}
+
+.fix-alert-wrapper > a {
+  line-height: 1;
+  display: inline-block;
+  width: calc(100% - 60px);
+  color: #fff;
+  padding: 6px 0 8px;
+}
+
+.fix-alert-wrapper span.button {
+  font-size: 13px;
+  background: #fff;
+  color: red;
+  padding: 0 18px;
+  margin: 0 12px;
+  border-radius: 4px;
+}
+
+.close-required-fix-alert {
+  float: right;
+  height: 100%;
+  background: none;
+  border: none;
+  line-height: 1;
+  padding: 5px 15px;
 }
 
 .placeholder-image-header-profile {
@@ -107,7 +145,7 @@
 
 .right-menu-header {
   position: relative;
-  padding: 6px;
+  padding: 9px;
 }
 
 .right-menu-header li ul a {
@@ -158,17 +196,24 @@
   background: #00ac5c;
 }
 
+a.home-button {
+  display: inline-block;
+  color: #fff;
+  background: #50e3c2;
+  padding: 2px 10px 6px;
+  border-radius: 12px;
+  margin-left: 10px;
+}
 i.fa-home {
   position: relative;
-  top: 5px;
+  top: 4px;
+  font-size: 25px;
 }
-
 .product-list-link {
-  font-size: 17px !important;
-  padding: 7px 20px !important;
-  background: #00c569 !important;
-  border-radius: 4px;
-  border: 1px solid;
+  font-size: 18px !important;
+  padding: 9px 15px !important;
+  background: #4dc0bb !important;
+  border-radius: 12px;
   display: inline-block;
   color: #fff !important;
 }
@@ -259,12 +304,35 @@ a.profile-info-wrapper:focus {
 }
 
 .user-auth-info-wrapper {
-  margin-top: 10px;
+  margin-top: 6px;
   margin-left: 10px;
   float: left;
 }
 .user-auth-info-wrapper > ul {
   margin: 0;
+}
+
+.header-with-fix-alert {
+  top: 83px !important;
+}
+
+.upgrade-account {
+  color: #556080;
+  border: 1px solid;
+  padding: 2px 15px;
+  border-radius: 12px;
+  position: relative;
+  margin-left: 20px;
+  top: 10px;
+  transition: 300ms;
+}
+
+.upgrade-account:hover {
+  color: #fff;
+  background: #556080;
+  border-color: #556080;
+
+  transition: 300ms;
 }
 
 /*start style sub-header*/
@@ -362,6 +430,7 @@ a.profile-info-wrapper:focus {
 .header-with-fix-alert {
   top: 83px !important;
 }
+
 @media screen and (max-width: 991px) {
   .main-header,
   .little-main-header {
@@ -391,6 +460,35 @@ a.profile-info-wrapper:focus {
   }
 }
 
+@media screen and (max-width: 767px) {
+  .fix-alert-wrapper > a {
+    line-height: 1;
+    display: inline-block;
+    width: calc(100% - 21px);
+    color: #fff;
+    padding: 6px 0 8px;
+    font-size: 12px;
+  }
+  .close-required-fix-alert {
+    float: right;
+    height: 100%;
+    background: none;
+    border: none;
+    line-height: 1;
+    padding: 4px 5px 3px;
+  }
+  .fix-alert-wrapper span.button {
+    font-size: 11px;
+    background: #fff;
+    color: red;
+    padding: 0 5px;
+    margin: 0;
+    margin-right: 0px;
+    border-radius: 4px;
+    margin-right: 6px;
+  }
+}
+
 @media screen and (max-width: 555px) {
   .user_name {
     display: none !important;
@@ -399,7 +497,7 @@ a.profile-info-wrapper:focus {
     margin: 0;
   }
   .right-menu-header {
-    padding: 6px;
+    padding: 9px;
     border-right: 1px solid #eff3f6;
   }
 
@@ -605,6 +703,7 @@ a.profile-info-wrapper:focus {
                   'click-on-home-page-in-dashboard'
                 )
               "
+              class="home-button"
             >
               <i class="fa fa-home" aria-hidden="true"></i>
             </router-link>
