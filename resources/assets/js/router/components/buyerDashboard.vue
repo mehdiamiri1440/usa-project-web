@@ -28,6 +28,7 @@
     <div id="main" class="h-100">
       <router-view
         :str="storagePath"
+        :assets="assets"
         :user-type="currentUser.user_info.is_seller"
         :currentUser="currentUser"
         :verifiedUserContent="verifiedUserContent"

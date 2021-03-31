@@ -326,6 +326,7 @@
     >
       <router-view
         :str="storagePath"
+        :assets="assets"
         :user-type="currentUser.user_info.is_seller"
         :current-user="currentUser"
         :offer-time="this.offerTime"

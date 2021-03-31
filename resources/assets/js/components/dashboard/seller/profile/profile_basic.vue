@@ -155,16 +155,8 @@ a {
   position: relative;
   border-radius: 120px;
   overflow: hidden;
-}
-
-.user-img-wrapper img {
-  display: inline-block;
-  height: 100%;
-  width: initial;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  background-size: cover;
+  background-position: center;
 }
 
 .upload-image {
@@ -437,6 +429,24 @@ textarea.error:focus,
 textarea.error:focus + i {
   border-color: #e41c38;
 }
+
+@media screen and (max-width: 992px) {
+  .address-wrapper {
+    margin-top: 15px;
+  }
+  .box-title {
+    font-size: 16px;
+    line-height: 1.618;
+  }
+  .submited-images {
+    margin-top: 30px;
+    padding: 0;
+  }
+  .info-box-wrapper {
+    line-height: 1.618;
+    padding: 5px;
+  }
+}
 </style>
 
 <template>
@@ -463,7 +473,7 @@ textarea.error:focus + i {
             <i class="fas fa-check"></i>
             اطلاعات هویتی شما احراز شده است.
           </p>
-          <p v-else class="pull-right info-text-fix">
+          <p v-else class="pull-right info-text-fix red-text">
             <i class="fas fa-exclamation-circle"></i>
             اطلاعات هویتی شما احراز نشده است.
           </p>
@@ -503,22 +513,29 @@ textarea.error:focus + i {
                 transform="rotate(-90 ) translate(-100 0)"
               />
             </svg>
-            <div class="user-img-wrapper">
-              <img
-                v-if="currentUser.profile.profile_photo"
-                :src="str + '/' + currentUser.profile.profile_photo"
-                alt="تصویر پروفایل"
-                class="image-preview"
-              />
-              <img
-                v-else
-                src="../../../../../img/user-defult.png"
-                alt="تصویر پروفایل"
-                class="image-preview"
-              />
-            </div>
+            <div
+              class="user-img-wrapper"
+              v-if="currentUser.profile.profile_photo"
+              :style="{
+                backgroundImage:
+                  'url(' + str + '/' + currentUser.profile.profile_photo + ')',
+              }"
+            ></div>
+            <div
+              class="user-img-wrapper"
+              v-else
+              :style="{
+                backgroundImage:
+                  'url(' + assets + 'assets/img/user-defult.png)',
+              }"
+            ></div>
             <div class="upload-image">
-              <input id="imgInp" type="file" ref="profilePhoto" />
+              <input
+                id="imgInp"
+                type="file"
+                accept="image/*"
+                ref="profilePhoto"
+              />
               <span>
                 <i class="fa fa-camera"></i>
               </span>
@@ -530,16 +547,24 @@ textarea.error:focus + i {
           <div class="user-name">
             <p class="blue-aqua-text text-center">
               میزان تکمیل پروفایل
-              {{ completeProfileProgress }}%
+              <span v-if="completeProfileProgress">
+                {{ completeProfileProgress }}%
+              </span>
             </p>
             <p
               class="user-name"
+              v-if="currentUser.user_info.first_name"
               v-text="
                 currentUser.user_info.first_name +
                 ' ' +
                 currentUser.user_info.last_name
               "
             ></p>
+            <p class="user-name" v-else>
+              <span
+                class="placeholder-content content-default-width h-25 margin-auto"
+              ></span>
+            </p>
           </div>
         </div>
       </div>
@@ -588,7 +613,7 @@ textarea.error:focus + i {
                 </p>
               </div>
             </div>
-            <div class="col-xs-12 col-md-5">
+            <div class="col-xs-12 active-number-wrapper col-md-5">
               <p class="title-contents active-number-title">
                 نمايش شماره به خریداران
                 <span class="red-text" v-if="false"> غیر فعال است </span>
@@ -852,16 +877,19 @@ textarea.error:focus + i {
             </div>
           </div>
 
-          <div class="col-xs-12 col-sm-6 pull-left">
+          <div class="col-xs-12 submited-images col-sm-6 pull-left">
             <div class="row">
               <div class="box-title">تصاویر ثبت شده</div>
 
               <div class="row margin-15-auto">
-                <div class="images-content col-xs-12">
+                <div
+                  class="images-content col-xs-12"
+                  v-if="currentUser.relateds.length"
+                >
                   <article
                     class="col-md-4 col-xs-6 col-lg-3 pull-right"
-                    v-for="photo in currentUser.relateds"
-                    v-if="currentUser.relateds.length"
+                    v-for="(photo, index) in currentUser.relateds"
+                    :key="index"
                   >
                     <a href="#">
                       <i class="fa fa-times"></i>
@@ -874,11 +902,10 @@ textarea.error:focus + i {
                       }"
                     ></div>
                   </article>
-
-                  <div v-else class="default-images">
-                    <i class="fa fa-picture-o"></i>
-                    هنوز تصویری ثبت نشده است
-                  </div>
+                </div>
+                <div v-else class="default-images">
+                  <i class="fa fa-picture-o"></i>
+                  هنوز تصویری ثبت نشده است
                 </div>
               </div>
             </div>
@@ -917,13 +944,15 @@ textarea.error:focus + i {
             </div>
           </div>
 
-          <div class="col-xs-12 col-sm-6 pull-left">
+          <div class="col-xs-12 submited-images col-sm-6 pull-left">
             <div class="box-title">تصاویر ثبت شده</div>
 
             <div class="row margin-15-auto">
-              <div class="images-content col-xs-12">
+              <div
+                class="images-content col-xs-12"
+                v-if="currentUser.certificates.length"
+              >
                 <article
-                  v-if="currentUser.certificates.length"
                   class="col-md-4 col-xs-6 col-lg-3 pull-right"
                   v-for="(photo, index) in currentUser.certificates"
                   :key="index"
@@ -938,10 +967,10 @@ textarea.error:focus + i {
                     }"
                   ></div>
                 </article>
-                <div v-else class="default-images">
-                  <i class="fa fa-picture-o"></i>
-                  هنوز تصویری ثبت نشده است
-                </div>
+              </div>
+              <div v-else class="default-images">
+                <i class="fa fa-picture-o"></i>
+                هنوز تصویری ثبت نشده است
               </div>
             </div>
           </div>
@@ -967,7 +996,7 @@ import { eventBus } from "../../../../router/router";
 import UploadFile from "../../upload-image";
 
 export default {
-  props: ["str"],
+  props: ["str", "assets"],
   components: {
     UploadFile,
   },
@@ -1051,6 +1080,9 @@ export default {
       var self = this;
       axios.post("/user/profile_info").then(function (response) {
         self.currentUser = response.data;
+        if (self.currentUser.profile.is_company) {
+          $("#company-box").collapse("show");
+        }
         self.sumProgressNumber();
       });
     },
@@ -1140,6 +1172,9 @@ export default {
               self.certificateFilesReset = true;
               axios.post("/user/profile_info").then(function (response) {
                 self.currentUser = response.data;
+                if (self.currentUser.profile.is_company) {
+                  $("#company-box").collapse("show");
+                }
                 self.sumProgressNumber();
               });
             }
@@ -1294,38 +1329,24 @@ export default {
     validateRegx: function (input, regx) {
       return regx.test(input);
     },
+    show_image_preview(input) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        var image = $(".user-img-wrapper");
+        reader.onload = function (e) {
+          image.css("background-image", "url('" + e.target.result + "')");
+        };
+        reader.readAsDataURL(input.files[0]);
+      }
+    },
   },
   mounted() {
     this.init();
     eventBus.$emit("subHeader", this.items);
     var self = this;
-    function show_image_preview(input) {
-      if (input.files && input.files[0]) {
-        var reader = new FileReader();
-        var image = $(".image-preview");
-        var iconProfile = $("#icon-pro");
-        reader.onload = function (e) {
-          image.attr("src", e.target.result);
-          image.css("display", "inline");
-          iconProfile.css("display", "none");
-        };
-        reader.readAsDataURL(input.files[0]);
-      }
-    }
-
-    function image_checked() {
-      var image = $(".image-preview");
-      var iconProfile = $("#icon-pro");
-      if (image.attr("src") !== "") {
-        image.css("display", "inline");
-        iconProfile.css("display", "none");
-      }
-    }
-
-    image_checked();
 
     $("#imgInp").change(function () {
-      show_image_preview(this);
+      self.show_image_preview(this);
     });
     if (this.isOsIOS()) {
       $("#phone-number").attr("type", "text");
