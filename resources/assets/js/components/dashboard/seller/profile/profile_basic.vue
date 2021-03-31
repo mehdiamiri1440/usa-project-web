@@ -41,6 +41,10 @@ a {
   margin-left: 6px;
 }
 
+.description .text-input-wrapper {
+  margin: 9px auto;
+}
+
 .button {
   background: #1da1f2;
   color: #fff;
@@ -66,14 +70,46 @@ a {
   top: 3px;
 }
 
+.valid-user {
+  position: absolute;
+  font-size: 30px;
+  color: #1da1f2;
+  left: calc(50% - 15px);
+  top: 104px;
+  z-index: 1;
+}
+.valid-user .certificate-cehck::after {
+  color: #fff;
+  left: 6px;
+  font-size: 19px;
+  top: 6px;
+}
 .bg-main {
   background: #f7f7f7;
+}
+
+.action-link {
+  font-size: 18px;
+  border: none;
+  background: none;
+}
+
+.action-link i {
+  transition: 300ms;
+}
+.action-link i.rotate-down-icon {
+  transform: rotate(180deg);
 }
 
 .box-wrapper {
   border-radius: 12px;
   border: 1px solid #f7f7f7;
   padding: 20px;
+  margin-bottom: 15px;
+}
+
+.padding-buttom-fixed {
+  padding-bottom: 1px;
 }
 
 .box-wrapper.user-info-box {
@@ -183,7 +219,7 @@ a {
 }
 
 .phone-number-wrapper {
-  margin: 15px auto;
+  margin-top: 15px;
 }
 
 .info-description-wrapper {
@@ -198,6 +234,10 @@ a {
 /********
  input design  
 *********/
+.error-input-wrapper {
+  height: 25px;
+  padding-top: 5px;
+}
 
 .text-input-wrapper {
   margin: 0 auto;
@@ -220,6 +260,15 @@ a {
   font-size: 18px;
   background: #00c569;
   color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 30px 9px;
+}
+
+.deactive-number-button {
+  font-size: 18px;
+  background: #f7f7f7;
+  color: #556080;
   border: none;
   border-radius: 4px;
   padding: 8px 30px 9px;
@@ -289,6 +338,8 @@ textarea {
   border: 1px solid #bdc4cc;
   border-radius: 4px;
   box-shadow: none;
+  max-width: 100%;
+  min-height: 113px;
 }
 
 textarea:focus,
@@ -332,7 +383,11 @@ textarea.error:focus + i {
     <div class="row">
       <div class="col-xs-12 col-md-4 pull-right">
         <div class="info-box-wrapper">
-          <a href="#" class="info-text-fix">
+          <a
+            target="_blank"
+            href="https://www.buskool.com/profile/buskools"
+            class="info-text-fix"
+          >
             <i class="fa fa-question-circle"></i>
             نمونه پروفایل تکمیل شده
           </a>
@@ -340,11 +395,19 @@ textarea.error:focus + i {
       </div>
       <div class="col-xs-12 col-md-8">
         <div class="info-box-wrapper bg-main">
-          <p class="pull-right info-text-fix">
+          <p
+            class="pull-right info-text-fix light-green-text"
+            v-if="currentUser.user_info.is_verified"
+          >
+            <i class="fas fa-check"></i>
+            اطلاعات هویتی شما احراز شده است.
+          </p>
+          <p v-else class="pull-right info-text-fix">
             <i class="fas fa-exclamation-circle"></i>
             اطلاعات هویتی شما احراز نشده است.
           </p>
           <router-link
+            v-if="!currentUser.user_info.is_verified"
             class="button verification-button"
             :to="{ name: 'profileBasicSellerVeficiation' }"
           >
@@ -397,6 +460,9 @@ textarea.error:focus + i {
                 <i class="fa fa-camera"></i>
               </span>
             </div>
+            <div class="valid-user" v-if="currentUser.user_info.is_verified">
+              <i class="fa fa-certificate certificate-cehck"></i>
+            </div>
           </div>
           <div class="user-name">
             <p class="blue-aqua-text text-center">
@@ -415,7 +481,7 @@ textarea.error:focus + i {
         </div>
       </div>
       <div class="col-xs-12 col-md-8">
-        <div class="box-wrapper">
+        <div class="box-wrapper padding-buttom-fixed">
           <div class="box-title">اطلاعات شما</div>
           <div class="phone-number-wrapper row">
             <div class="col-xs-12 pull-right col-md-7">
@@ -430,6 +496,7 @@ textarea.error:focus + i {
                   type="tel"
                   :class="{
                     active: currentUser.profile.public_phone,
+                    error: errors.public_phone,
                   }"
                   placeholder="شماره موبایل را وارد کنید"
                   pattern="[0-9]*"
@@ -439,47 +506,66 @@ textarea.error:focus + i {
                   v-if="currentUser.profile.public_phone"
                   class="fa fa-check-circle"
                 ></i>
-                <!-- <i
-                  v-else-if="$parent.errors.max_sale_price"
+                <i
+                  v-else-if="errors.public_phone"
                   class="fa fa-times-circle"
-                ></i> -->
+                ></i>
                 <i v-else class="fa fa-edit"></i>
+              </div>
+              <div class="error-input-wrapper">
+                <p class="error-message">
+                  <span
+                    class="red-text"
+                    v-if="errors.public_phone"
+                    v-text="errors.public_phone"
+                  ></span>
+                </p>
               </div>
             </div>
             <div class="col-xs-12 col-md-5">
               <p class="title-contents active-number-title">
                 نمايش شماره به خریداران
-                <span class="red-text"> غیر فعال است </span>
+                <span class="red-text" v-if="false"> غیر فعال است </span>
+                <span class="green-text" v-else> فعال است </span>
               </p>
-              <button class="active-number-button hover-effect">
+              <button v-if="false" class="active-number-button hover-effect">
                 فعال کردن
+              </button>
+              <button v-else class="deactive-number-button hover-effect">
+                غیرفعال
               </button>
             </div>
           </div>
-          <div class="phone-number-wrapper row">
+          <div class="address-wrapper row">
             <div class="col-xs-12 pull-right col-md-7">
               <p class="title-contents">آدرس</p>
               <div class="text-input-wrapper">
                 <input
                   v-model="currentUser.profile.address"
                   id="min-sale-amount"
-                  type="tel"
+                  type="text"
                   :class="{
                     active: currentUser.profile.address,
+                    error: errors.address,
                   }"
                   placeholder="آدرس را وارد کنید"
-                  pattern="[0-9]*"
                 />
 
                 <i
                   v-if="currentUser.profile.address"
                   class="fa fa-check-circle"
                 ></i>
-                <!-- <i
-                  v-else-if="$parent.errors.max_sale_price"
-                  class="fa fa-times-circle"
-                ></i> -->
+                <i v-else-if="errors.address" class="fa fa-times-circle"></i>
                 <i v-else class="fa fa-edit"></i>
+              </div>
+              <div class="error-input-wrapper">
+                <p class="error-message">
+                  <span
+                    class="red-text"
+                    v-if="errors.address"
+                    v-text="errors.address"
+                  ></span>
+                </p>
               </div>
             </div>
             <div class="col-xs-12 col-md-5"></div>
@@ -494,14 +580,104 @@ textarea.error:focus + i {
           <p class="margin-15-0">
             با تکمیل اطلاعات حقوقی، اعتبار حساب خود را بیشتر کنید.
           </p>
-          <a href="#">
-            افزودن اطلاعات حقوقی
-            <i class="fa fa-angle-left"></i>
-          </a>
+          <button
+            class="action-link blue-text"
+            type="button"
+            data-toggle="collapse"
+            data-target="#company-box"
+            aria-expanded="false"
+            aria-controls="company-box"
+          >
+            <span v-if="!currentUser.profile.is_company"
+              >افزودن اطلاعات حقوقی</span
+            >
+            <span v-else>بستن</span>
+            <i
+              class="fa fa-angle-down"
+              :class="{ 'rotate-down-icon': currentUser.profile.is_company }"
+            ></i>
+          </button>
+
+          <div class="form-wrapper collapse" id="company-box">
+            <div class="margin-top-15">
+              <p class="title-contents">
+                نام شرکت
+                <span class="red-text"> * </span>
+              </p>
+              <div class="text-input-wrapper">
+                <input
+                  v-model="currentUser.profile.company_name"
+                  id="min-sale-amount"
+                  type="tel"
+                  :class="{
+                    active: currentUser.profile.company_name,
+                  }"
+                  placeholder="نام شرکت را وارد کنید"
+                  pattern="[0-9]*"
+                />
+
+                <i
+                  v-if="currentUser.profile.company_name"
+                  class="fa fa-check-circle"
+                ></i>
+                <i
+                  v-else-if="errors.company_name"
+                  class="fa fa-times-circle"
+                ></i>
+                <i v-else class="fa fa-edit"></i>
+              </div>
+              <div class="error-input-wrapper">
+                <p class="error-message">
+                  <span
+                    class="red-text"
+                    v-if="errors.company_name"
+                    v-text="errors.company_name"
+                  ></span>
+                </p>
+              </div>
+            </div>
+            <div class="">
+              <p class="title-contents">
+                شماره ثبت شرکت
+                <span class="red-text"> * </span>
+              </p>
+              <div class="text-input-wrapper">
+                <input
+                  v-model="currentUser.profile.company_register_code"
+                  id="min-sale-amount"
+                  type="tel"
+                  :class="{
+                    active: currentUser.profile.company_register_code,
+                  }"
+                  placeholder="شماره ثبت شرکت را وارد کنید"
+                  pattern="[0-9]*"
+                />
+
+                <i
+                  v-if="currentUser.profile.company_register_code"
+                  class="fa fa-check-circle"
+                ></i>
+                <i
+                  v-else-if="errors.company_register_code"
+                  class="fa fa-times-circle"
+                ></i>
+                <i v-else class="fa fa-edit"></i>
+              </div>
+              <div class="error-input-wrapper">
+                <p class="error-message">
+                  <span
+                    class="red-text"
+                    v-if="errors.company_register_code"
+                    v-text="errors.company_register_code"
+                  ></span>
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <div class="col-xs-12 col-md-8">
-        <div class="box-wrapper">
+        <div class="box-wrapper padding-buttom-fixed">
           <div class="box-title">درباره کسب و کارتان بنویسید</div>
           <div class="info-box-wrapper info-description-wrapper margin-15-0">
             <p class="pull-right info-text-fix col-xs-12">
@@ -529,6 +705,7 @@ textarea.error:focus + i {
                   rows="3"
                   :class="{
                     active: currentUser.profile.description,
+                    error: errors.description,
                   }"
                   v-model="currentUser.profile.description"
                   placeholder="در مورد کیفیت و نوع بسته بندی محصول خود اینجا توضیح دهید"
@@ -538,11 +715,20 @@ textarea.error:focus + i {
                   v-if="currentUser.profile.description"
                   class="fa fa-check-circle"
                 ></i>
-                <!-- <i
-                  v-else-if="$parent.errors.max_sale_price"
+                <i
+                  v-else-if="errors.description"
                   class="fa fa-times-circle"
-                ></i> -->
+                ></i>
                 <i v-else class="fa fa-edit"></i>
+              </div>
+              <div class="error-input-wrapper">
+                <p class="error-message">
+                  <span
+                    class="red-text"
+                    v-if="errors.description"
+                    v-text="errors.description"
+                  ></span>
+                </p>
               </div>
             </div>
           </div>
@@ -629,6 +815,7 @@ export default {
   },
   methods: {
     init: function () {
+      this.activeisCompanyCollapse();
       this.isLoaded = true;
       $('input[type="file"]').imageuploadify();
       var self = this;
@@ -825,6 +1012,14 @@ export default {
     },
     scrollToTop() {
       window.scrollTo(0, 0);
+    },
+    activeisCompanyCollapse() {
+      $("#company-box").on("hidden.bs.collapse", () => {
+        this.currentUser.profile.is_company = 0;
+      });
+      $("#company-box").on("show.bs.collapse", () => {
+        this.currentUser.profile.is_company = 1;
+      });
     },
   },
   mounted() {
