@@ -7,16 +7,14 @@
 .show-header button {
   float: right;
   border: none;
-  background: none;
   font-size: 25px;
-  padding: 19px 24px 11px;
-  display: none;
-}
-
-.show-header button {
+  padding: 7px 14px 6px;
   display: block;
-  background: #000546;
+  background: #151c2e;
   color: #fff;
+  border-radius: 12px;
+  margin-top: 8px;
+  margin-right: 10px;
 }
 
 .display-loading {
@@ -209,13 +207,13 @@ i.fa-home {
   font-size: 25px;
 }
 
-.product-list-link {
-  font-size: 18px !important;
-  padding: 9px 15px !important;
-  background: #4dc0bb !important;
+a.product-list-link {
+  font-size: 18px;
+  padding: 9px 15px;
+  background: #4dc0bb;
   border-radius: 12px;
   display: inline-block;
-  color: #fff !important;
+  color: #fff;
 }
 
 /* profile info styles */
@@ -317,14 +315,20 @@ a.profile-info-wrapper:focus {
 }
 
 .upgrade-account {
+  background: #fff;
   color: #556080;
   border: 1px solid;
-  padding: 2px 15px;
+  padding: 6px 12px 5px;
   border-radius: 12px;
   position: relative;
-  margin-left: 20px;
-  top: 10px;
+  margin-left: 10px;
+  top: 5px;
   transition: 300ms;
+}
+
+.upgrade-account.wallet {
+  color: #1da1f2;
+  margin-left: 20px;
 }
 
 .upgrade-account:hover {
@@ -335,21 +339,47 @@ a.profile-info-wrapper:focus {
   transition: 300ms;
 }
 
+.upgrade-account.wallet:hover {
+  background: #1da1f2;
+  border-color: #1da1f2;
+}
+
 @media screen and (max-width: 991px) {
   .main-header,
   .little-main-header {
     right: 0 !important;
   }
+  a.home-button {
+    background: none;
+    color: #151c2e;
+  }
+  a.product-list-link {
+    background: none;
+    color: #4dc0bb;
+    padding: 9px 0;
+  }
+  .message-notification {
+    top: 4px;
+    cursor: pointer;
+    right: 45px;
+    z-index: 10;
+    position: absolute;
+    background-color: #e41c38;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    color: #fff;
+  }
+}
+@media screen and (min-width: 991px) {
+  .hide-message-notification {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 768px) {
-  span.min {
-    display: inherit;
-  }
-
-  span.full {
-    display: none;
-  }
   .mobile-header .green-button {
     margin: 15px 0 0;
   }
@@ -400,53 +430,12 @@ a.profile-info-wrapper:focus {
   .profile-image-wrapper {
     margin: 0;
   }
-  .right-menu-header {
-    padding: 9px;
-    border-right: 1px solid #eff3f6;
-  }
 
   .profile-menu-header .user_name {
     display: none;
   }
   .right-menu-header .green-button {
     padding: 10px 15px;
-  }
-}
-
-@media screen and (max-width: 345px) {
-  .sub-header a {
-    font-size: 10px;
-  }
-
-  .show-header button {
-    padding: 19px 17px 11px 17px;
-  }
-
-  .right-menu-header {
-    padding: 6px;
-  }
-}
-@media only screen and (max-width: 991px) {
-  .message-notification {
-    top: 4px;
-    cursor: pointer;
-    border: 1px solid white;
-    right: 35px;
-    z-index: 10;
-    position: absolute;
-    background-color: #e41c38;
-    border-radius: 50%;
-    width: 28px;
-    height: 28px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: wheat;
-  }
-}
-@media only screen and (min-width: 991px) {
-  .hide-message-notification {
-    display: none;
   }
 }
 .rotation {
@@ -477,9 +466,6 @@ a.profile-info-wrapper:focus {
   60% {
     transform: translate3d(4px, 0, 0);
   }
-}
-.button-height {
-  line-height: 1;
 }
 </style>
 
@@ -526,20 +512,31 @@ a.profile-info-wrapper:focus {
           v-if="messageCount > 0"
           class="message-notification hide-message-notification"
         >
-          {{ messageCount }}
+          {{ messageCount > 100 ? "+99" : messageCount }}
         </div>
-        <button class="button-height">
+        <button>
           <span :class="menuClosed ? 'rotation' : ''" class="fa fa-bars"></span>
         </button>
       </div>
 
       <div class="user-auth-info-wrapper">
+        <button
+          v-if="
+            $route.name != 'dashboardPricingTableSeller' &&
+            $parent.currentUser.user_info.active_pakage_type != 3
+          "
+          class="upgrade-account wallet hidden-xs hidden-sm"
+          :to="{ name: 'dashboardPricingTableSeller' }"
+        >
+          موجودی : 1,000,000 تومان
+          <i class="fa fa-wallet"></i>
+        </button>
         <router-link
           v-if="
             $route.name != 'dashboardPricingTableSeller' &&
             $parent.currentUser.user_info.active_pakage_type != 3
           "
-          class="upgrade-account hidden-xs"
+          class="upgrade-account hidden-xs hidden-sm"
           :to="{ name: 'dashboardPricingTableSeller' }"
         >
           ارتقا عضویت
@@ -639,9 +636,6 @@ a.profile-info-wrapper:focus {
               "
             >
               <span class="full">لیست محصولات</span>
-              <span class="min">
-                <i class="fa fa-th-list" aria-hidden="true"></i>
-              </span>
             </router-link>
           </li>
 
