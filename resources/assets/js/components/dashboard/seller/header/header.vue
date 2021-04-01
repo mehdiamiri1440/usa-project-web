@@ -569,7 +569,7 @@ span.min {
           <div class="wallet-main">
             <p class="wallet-title">
               <i class="fa fa-wallet"></i>
-              موجود کیف پول
+              موجودی کیف پول
             </p>
             <p class="wallet-price">
               100,000,000
@@ -619,7 +619,7 @@ span.min {
           <div class="wallet-main">
             <p class="wallet-title">
               <i class="fa fa-wallet"></i>
-              موجود کیف پول
+              موجودی کیف پول
             </p>
             <p class="wallet-price">
               100,000,000
