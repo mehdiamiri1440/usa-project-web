@@ -701,13 +701,12 @@ textarea.error:focus + i {
                 <input
                   v-model="currentUser.profile.company_name"
                   id="min-sale-amount"
-                  type="tel"
+                  type="text"
                   :class="{
                     active: currentUser.profile.company_name,
                     error: errors.company_name,
                   }"
                   placeholder="نام شرکت را وارد کنید"
-                  pattern="[0-9]*"
                 />
 
                 <i
@@ -891,9 +890,9 @@ textarea.error:focus + i {
                     v-for="(photo, index) in currentUser.relateds"
                     :key="index"
                   >
-                    <a href="#">
+                    <!-- <a href="#">
                       <i class="fa fa-times"></i>
-                    </a>
+                    </a> -->
 
                     <div
                       class="image-item"
@@ -957,9 +956,9 @@ textarea.error:focus + i {
                   v-for="(photo, index) in currentUser.certificates"
                   :key="index"
                 >
-                  <a href="#">
+                  <!-- <a href="#">
                     <i class="fa fa-times"></i>
-                  </a>
+                  </a> -->
                   <div
                     class="image-item"
                     :style="{
