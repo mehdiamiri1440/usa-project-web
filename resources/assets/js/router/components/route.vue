@@ -44,10 +44,10 @@
 
   z-index: 1021;
 }
-
+/* 
 .modal-dialog {
   width: 400px;
-}
+} */
 .modal-content {
   overflow: hidden;
   border-radius: 12px;
@@ -118,7 +118,27 @@
   display: block;
   margin: 50px auto;
 }
+
+.main_popup_content i.fa-times {
+  color: #777;
+  background: none;
+  top: 0;
+  right: 0;
+}
+
+.main_popup_content {
+  padding: 50px 0;
+}
+
 @media screen and (max-width: 768px) {
+  #wallet-modal .modal-dialog {
+    margin: 0;
+    height: 100%;
+  }
+  #wallet-modal {
+    padding: 0 !important;
+  }
+
   #download-app-modal > div {
     margin: 0;
     width: 100%;
@@ -176,29 +196,14 @@
     <!--  #regex elevator modal  -->
 
     <div class="container">
-      <div id="elevator-modal" class="modal fade" tabindex="-1" role="dialog">
+      <div id="wallet-modal" class="modal fade" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg" role="document">
           <div class="modal-content">
-            <div class="main_popup_content">
+            <div class="main_popup_content col-xs-12">
               <a href="#" data-dismiss="modal">
                 <i class="fa fa-times"></i>
               </a>
-              <h1 class="green-text">
-                <span>25,000</span>
-                تومان
-              </h1>
-              <br />
-              <p class="main-pop-up" v-text="elevatorText"></p>
-
-              <a href class="btn green-button bg-gray" data-dismiss="modal"
-                >متوجه شدم</a
-              >
-
-              <a
-                :href="'/payment/elevator/' + productId"
-                class="btn green-button"
-                >خرید نردبان</a
-              >
+              <wallet-component :user-name="userFullName" />
             </div>
           </div>
           <!-- /.modal-content -->
@@ -316,6 +321,7 @@ import ChatModal from "../../components/layouts/main/main_components/chat_modal"
 import ReportModal from "../../components/layouts/main/main_components/report";
 import ReviewModal from "../../components/layouts/main/main_components/review-component/review";
 import shareToSocialModal from "../../components/layouts/main/main_components/share-to-social-modal";
+import walletComponent from "../../components/layouts/main/wallet";
 
 export default {
   components: {
@@ -323,6 +329,7 @@ export default {
     ReportModal,
     ReviewModal,
     shareToSocialModal,
+    walletComponent,
   },
   data: function () {
     return {
@@ -1089,7 +1096,7 @@ export default {
         history.pushState(null, null, window.location);
       }
       $(window).on("popstate", function (e) {
-        $("#download-app-modal").modal("hide");
+        $(".modal").modal("hide");
       });
     },
     isUserAuthorizedToPostComment: function () {
@@ -1138,6 +1145,9 @@ export default {
   mounted() {
     // eventBus.$emit("globalVerifiedBadgeContents", this.verifiedUserContent);
     this.activateDownloadAppButton();
+    $("#wallet-modal").on("show.bs.modal", (e) => {
+      this.handleBackKeys();
+    });
     eventBus.$emit("globalVerifiedBadgeContents", 1);
   },
   watch: {

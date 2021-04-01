@@ -7,32 +7,13 @@ body,
 
 /*start style right header*/
 .logo {
-  height: 64px;
-
+  max-width: 100px;
   display: block;
-
-  float: right;
-
-  width: 70%;
-
-  text-align: center;
+  margin: 16px 15px;
 }
 
 .logo_hide {
   display: none;
-}
-
-.logo a {
-  display: inline-block;
-  margin-top: 0;
-  padding: 0 10px;
-  color: #fff;
-  text-align: center;
-}
-
-.logo img {
-  width: 100px;
-  padding: 9px 0 4px;
 }
 
 .right-header {
@@ -43,7 +24,7 @@ body,
   top: 0;
   overflow: hidden;
   z-index: 9;
-  background: #313a43;
+  background: #151c2e;
   direction: rtl;
 }
 
@@ -51,30 +32,20 @@ body,
   width: 80px;
 }
 
-.right-header.mobile-header {
-  display: none;
-  box-shadow: 0 0 20px;
-}
-
 .right-header > header {
   overflow: hidden;
-  background: #313a43;
-  border-bottom: 2px solid #2a3035;
-  border-bottom-color: rgb(42, 48, 53);
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
+  border-bottom: 2px solid #384152;
 }
 
 .close_menu,
 .close_menu_mob {
   float: left;
-  width: 30%;
   border: none;
   background: none;
-  font-size: 35px;
+  font-size: 25px;
   top: 0;
   position: relative;
-  padding: 11px;
+  padding: 14px 15px;
 }
 
 .close_menu i,
@@ -299,6 +270,7 @@ span.min {
 /*end loader*/
 </style>
 
+
 <template>
   <div>
     <!-- Modal -->
@@ -501,22 +473,16 @@ span.min {
     <section class="right-header mobile-header">
       <header class="header-right-header">
         <button class="close_menu_mob">
-          <i class="fa fa-angle-right"></i>
+          <i class="fa fa-bars"></i>
         </button>
 
         <button class="close_menu">
-          <i class="fa fa-angle-right"></i>
+          <i class="fa fa-bars"></i>
         </button>
 
-        <span class="logo">
-          <router-link :to="{ name: 'indexPage' }">
-            <img
-              src="../../../../../img/logo/web-logo-white.svg"
-              alt="buskool"
-            />
-            <p>بازارگاه آنلاین کشاورزی</p>
-          </router-link>
-        </span>
+        <router-link class="logo" :to="{ name: 'indexPage' }">
+          <img src="../../../../../img/logo/web-logo-white.svg" alt="buskool" />
+        </router-link>
       </header>
 
       <section class="main-right-header">
@@ -534,7 +500,6 @@ span.min {
           "
           :userprof="currentUser.user_info.user_name"
         />
-
         <SwitchButtons mobile="1" />
         <HeaderMenuList />
       </section>
@@ -545,22 +510,16 @@ span.min {
     <section class="right-header desktop-header">
       <header class="header-right-header">
         <button class="close_menu_mob">
-          <i class="fa fa-angle-right"></i>
+          <i class="fa fa-bars"></i>
         </button>
 
         <button class="close_menu">
-          <i class="fa fa-angle-right"></i>
+          <i class="fa fa-bars"></i>
         </button>
 
-        <span class="logo">
-          <router-link :to="{ name: 'indexPage' }">
-            <img
-              src="../../../../../img/logo/web-logo-white.svg"
-              alt="buskool"
-            />
-            <p>بازارگاه آنلاین کشاورزی</p>
-          </router-link>
-        </span>
+        <router-link class="logo" :to="{ name: 'indexPage' }">
+          <img src="../../../../../img/logo/web-logo-white.svg" alt="buskool" />
+        </router-link>
       </header>
 
       <section class="main-right-header">
@@ -578,7 +537,6 @@ span.min {
           "
           :userprof="currentUser.user_info.user_name"
         />
-
         <SwitchButtons />
         <HeaderMenuList />
       </section>
@@ -734,7 +692,7 @@ export default {
       menuCloseButton.click(function () {
         if (nextMove == "expand") {
           $(this).css({
-            width: "30%",
+            width: "initial",
           });
           headerMenuLink.css({
             "text-align": "right",
@@ -753,7 +711,7 @@ export default {
           nextMove = "shrink";
 
           profile.fadeIn();
-          logo.fadeIn();
+          logo.css("display", "block");
         } else {
           $(this).css({
             width: "100%",

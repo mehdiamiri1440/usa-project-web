@@ -802,7 +802,6 @@ export default {
 
       eventBus.$emit("productId", this.product.main.id);
       eventBus.$emit("modal", "elevator");
-      // $("#elevator-modal").modal("show");
     },
   },
   mounted() {

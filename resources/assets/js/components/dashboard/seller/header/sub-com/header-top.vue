@@ -1,4 +1,9 @@
 <style scoped>
+.list-inline > li {
+  padding-left: 0;
+  padding-right: 0;
+}
+
 .show-header button {
   float: right;
   border: none;
@@ -140,7 +145,7 @@
 
 .right-menu-header {
   position: relative;
-  padding: 6px;
+  padding: 9px;
 }
 
 .right-menu-header li ul a {
@@ -160,7 +165,6 @@
 .right-menu-header a,
 .profile-menu-header > a {
   color: #7f8c9b;
-  margin: 0 5px;
 }
 
 .profile-menu-header > a {
@@ -191,17 +195,25 @@
   background: #00ac5c;
 }
 
+a.home-button {
+  display: inline-block;
+  color: #fff;
+  background: #50e3c2;
+  padding: 2px 10px 6px;
+  border-radius: 12px;
+  margin-left: 10px;
+}
 i.fa-home {
   position: relative;
-  top: 5px;
+  top: 4px;
+  font-size: 25px;
 }
 
 .product-list-link {
-  font-size: 17px !important;
-  padding: 7px 20px !important;
-  background: #00c569 !important;
-  border-radius: 4px;
-  border: 1px solid;
+  font-size: 18px !important;
+  padding: 9px 15px !important;
+  background: #4dc0bb !important;
+  border-radius: 12px;
   display: inline-block;
   color: #fff !important;
 }
@@ -308,7 +320,7 @@ a.profile-info-wrapper:focus {
   color: #556080;
   border: 1px solid;
   padding: 2px 15px;
-  border-radius: 4px;
+  border-radius: 12px;
   position: relative;
   margin-left: 20px;
   top: 10px;
@@ -318,6 +330,8 @@ a.profile-info-wrapper:focus {
 .upgrade-account:hover {
   color: #fff;
   background: #556080;
+  border-color: #556080;
+
   transition: 300ms;
 }
 
@@ -387,7 +401,7 @@ a.profile-info-wrapper:focus {
     margin: 0;
   }
   .right-menu-header {
-    padding: 6px;
+    padding: 9px;
     border-right: 1px solid #eff3f6;
   }
 
@@ -641,6 +655,7 @@ a.profile-info-wrapper:focus {
                 )
               "
               :to="{ name: 'statusSeller' }"
+              class="home-button"
             >
               <i class="fa fa-home" aria-hidden="true"></i>
             </router-link>

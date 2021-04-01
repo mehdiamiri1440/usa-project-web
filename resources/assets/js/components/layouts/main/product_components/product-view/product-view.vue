@@ -597,7 +597,6 @@ export default {
 
       eventBus.$emit("productId", this.product.main.id);
       eventBus.$emit("modal", "elevator");
-      // $("#elevator-modal").modal("show")
     },
     inquiry: function () {
       //eventBus.$emit("productUserInfo", this.product);
