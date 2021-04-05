@@ -199,7 +199,7 @@ a.home-button {
   background: #50e3c2;
   padding: 2px 10px 6px;
   border-radius: 12px;
-  margin-left: 10px;
+  margin-left: 5px;
 }
 i.fa-home {
   position: relative;
@@ -209,7 +209,7 @@ i.fa-home {
 
 a.product-list-link {
   font-size: 18px;
-  padding: 9px 15px;
+  padding: 9px 15px 8px;
   background: #4dc0bb;
   border-radius: 12px;
   display: inline-block;
@@ -351,12 +351,15 @@ a.profile-info-wrapper:focus {
   }
   a.home-button {
     background: none;
-    color: #151c2e;
+    border: 1px solid #50e3c2;
+    border-radius: 12px;
+    color: #50e3c2;
+    padding: 2px 10px 4px;
   }
   a.product-list-link {
     background: none;
     color: #4dc0bb;
-    padding: 9px 0;
+    border: 1px solid;
   }
   .message-notification {
     top: 4px;
@@ -635,7 +638,10 @@ a.profile-info-wrapper:focus {
                 )
               "
             >
-              <span class="full">لیست محصولات</span>
+              <span class="hidden-xs hidden-sm"> لیست محصولات </span>
+              <span class="hidden-md hidden-lg">
+                <i class="fa fa-list-ul"></i>
+              </span>
             </router-link>
           </li>
 
