@@ -47,7 +47,11 @@ class profile_controller extends Controller
         'updated_at',
         'extra_product_capacity',
         'profile_visit',
-        'is_blocked'
+        'is_blocked',
+        'last_login_client',
+        'last_channel_opening_date',
+        'last_login_date',
+        'phone_view_permission'
     ];
 
     protected $profile_fields_exclude_array = [

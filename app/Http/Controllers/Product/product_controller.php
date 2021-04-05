@@ -38,7 +38,9 @@ class product_controller extends Controller
         'myusers.last_name',
         'myusers.active_pakage_type',
         'myusers.created_at',
-        'myusers.is_verified'
+        'myusers.is_verified',
+        'myusers.wallet_balance',
+        'myusers.phone_view_permission'
     ];
     protected $profile_info_sent_by_product_array = [
         'profiles.profile_photo',
@@ -533,11 +535,22 @@ class product_controller extends Controller
         {
             if($property_name == 'user_id'){
                 $product_related_data['user_info']->id = $product_related_data_tmp->$property_name;
-            }   
+            }  
             else{
                 $product_related_data['user_info']->$property_name = $product_related_data_tmp->$property_name;
             }
         }
+
+        if(($product_related_data['user_info']->wallet_balance >= config('subscriptionPakage.phone-number.view-price') && str_split($product_related_data['user_info']->phone_view_permission)[0] == 1) || (str_split($product_related_data['user_info']->phone_view_permission)[0] == 1 && $product_related_data['user_info']->active_pakage_type > 0) )
+        {
+            $product_related_data['user_info']->has_phone = true;
+        }
+        else{
+            $product_related_data['user_info']->has_phone = false;
+        }
+
+        unset($product_related_data['user_info']->wallet_balance);
+        unset($product_related_data['user_info']->phone_view_permission);
 
         $product_related_data['profile_info'] = new \StdClass;
         foreach($profile_records as $property_name)

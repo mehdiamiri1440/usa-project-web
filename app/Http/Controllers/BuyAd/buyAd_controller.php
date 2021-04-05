@@ -80,6 +80,7 @@ class buyAd_controller extends Controller
         'buy_ads.confirmed',
         'buy_ads.myuser_id',
         'buy_ads.reply_capacity',
+        'myusers.phone_view_permission',
         // 'myusers.user_name',
         'myusers.first_name',
         'myusers.last_name',
@@ -750,6 +751,10 @@ class buyAd_controller extends Controller
 
         $golden_buyAds_update_date = Carbon::now()->subHours(2);
         $buyAds->each(function($buyAd) use($golden_buyAds_update_date){
+            if(str_split($buyAd->phone_view_permission)[1] == 1){
+                $buyAd->has_phone = true;
+            }
+
             if($buyAd->updated_at > $golden_buyAds_update_date)
             {
                 $buyAd->is_golden = true;
@@ -757,6 +762,8 @@ class buyAd_controller extends Controller
             else{
                 $buyAd->is_golden = false;
             }
+
+            unset($buyAd->phone_view_permission);
         });
                     
         //relevance

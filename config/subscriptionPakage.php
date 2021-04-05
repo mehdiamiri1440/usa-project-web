@@ -75,4 +75,8 @@ return [
         'price' => 250000,
         'expiration-time-in-days' => 7
     ],
+    'phone-number' => [
+        'view-price' => 500, //Toman
+        'max-daily-access-count' => 10
+    ],
 ];

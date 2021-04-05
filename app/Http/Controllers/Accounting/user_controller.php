@@ -515,4 +515,31 @@ class user_controller extends Controller
             
         }
     }
+
+    public function get_my_account_balance()
+    {
+        $user_id = session('user_id');
+
+        $user_record = myuser::find($user_id);
+
+        if($user_record){
+            if($user_record->is_seller ==  true){
+                return response()->json([
+                    'status' => true,
+                    'balance' => $user_record->wallet_balance
+                ],200);
+            }
+            else{
+                return response()->json([
+                    'status' => false,
+                    'msg' => 'Access Denied!'
+                ],404);
+            }
+        }
+
+        return response()->json([
+            'status' => false,
+            'msg' => 'unAuthorized Access!'
+        ],404);
+    }
 }
