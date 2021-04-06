@@ -53,6 +53,46 @@ class wallet_controller extends Controller
         } 
     }
 
+    public function do_app_charge_wallet($user_id,$amount)
+    {
+        if($amount >= 1000){
+            $payment_amount = $amount * 10; //converting toman to Rial
+
+            if(session()->has('payment_amount')){
+                session()->pull('payment_amount'); //remove session from previous payment
+            }
+        }
+        else{
+            return redirect()->back()->withErrors([
+                'error' => 'شما مجاز به انجام این پرداخت نیستید' 
+             ]);
+        }
+
+        try{
+            $gateway = \Gateway::zarinpal();
+            $gateway->setCallback(url('/app-wallet-payment-callback'));
+            $gateway->price($payment_amount)->ready();
+            $refId =  $gateway->refId();
+            $transID = $gateway->transactionId();
+
+            // Your code here
+            session(['gateway_transaction_id' => $transID]);
+            session(['payment_amount' => $amount]);
+            session(['app_user_id' => $user_id]);
+
+            $this->record_payment_log([
+                'myuser_id' => $user_id,
+                'transaction_id' => $transID,
+                'pay_for' => 'wallet-charge',
+                'client' => 'mobile'
+            ]);
+            
+            return $gateway->redirect(); 
+        }catch (\Exception $e){ 
+            return redirect('/contact-us');
+        } 
+    }
+
     public function wallet_payment_callback()
     {
         try{ 
@@ -64,7 +104,7 @@ class wallet_controller extends Controller
             // عملیات خرید با موفقیت انجام شده است
             // در اینجا کالا درخواستی را به کاربر ارائه میکنم
             
-            $this->do_after_payment_changes_for_wallet_charge(session()->pull('payment_amount'));
+            $this->do_after_payment_changes_for_wallet_charge(session()->pull('payment_amount'),session('user_id'));
             
             return redirect('/seller/pricing');
 
@@ -75,10 +115,30 @@ class wallet_controller extends Controller
         }
     }
 
-    protected function do_after_payment_changes_for_wallet_charge($payment_amount)
+    public function app_wallet_payment_callback()
     {
-        $user_id = session('user_id');
+        try{ 
+            $gateway = \Gateway::verify();
+            $trackingCode = $gateway->trackingCode();
+            $refId = $gateway->refId();
+            $cardNumber = $gateway->cardNumber();
 
+            // عملیات خرید با موفقیت انجام شده است
+            // در اینجا کالا درخواستی را به کاربر ارائه میکنم
+            
+            $this->do_after_payment_changes_for_wallet_charge(session()->pull('payment_amount'),session()->pull('app_user_id'));
+            
+            return redirect('buskool://my-buskool');
+
+        } 
+        catch (\Exception $e)
+        {
+            return redirect('buskool://wallet');
+        }
+    }
+
+    protected function do_after_payment_changes_for_wallet_charge($payment_amount,$user_id)
+    {
         if($user_id && is_integer((integer)$payment_amount)){
             DB::table('myusers')
                         ->where('id',$user_id)

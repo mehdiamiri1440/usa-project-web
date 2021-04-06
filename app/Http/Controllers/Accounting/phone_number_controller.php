@@ -121,8 +121,6 @@ class phone_number_controller extends Controller
             $viewer_role = 'SELLER';
         }
 
-        var_dump($viewer_role);
-
         DB::table('phone_number_view_logs')
                     ->insert([
                         'created_at' => $now,

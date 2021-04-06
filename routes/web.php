@@ -380,6 +380,7 @@ Route::group(['middleware' => [login::class]], function () {
         'uses' => 'Payment\wallet_controller@do_charge_wallet'
     ])->where('amount','[0-9]+');
 
+
     // Route::get('app/payment/{user_id}/{pakageType}', [
     //     'uses' => 'Payment\payment_controller@app_do_payment',
     //     'as' => 'app_do_payment',
@@ -663,6 +664,10 @@ Route::get('app-payment/buyAd-reply-capacity/{user_id}/{extra_capacity}', [
     'as' => 'app_do_buyAd_reply_capacity_payment',
 ])->where('extra_capacity', '[0-9]+');
 
+Route::get('/app-wallet-payment/charge/{user_id}/{amount}',[
+    'uses' => 'Payment\wallet_controller@do_app_charge_wallet'
+])->where('amount','[0-9]+');
+
 Route::any('app-payment/payment_callback', [
     'uses' => 'Payment\payment_controller@app_payment_callback',
     'as' => 'app_payment_callback',
@@ -681,6 +686,11 @@ Route::any('app-payment/product_capacity_payment_callback', [
 Route::any('app-payment/buyAd_reply_capacity_payment_callback', [
     'uses' => 'Payment\payment_controller@app_buyAd_reply_capacity_payment_callback',
     'as' => 'app_buyAd_reply_capacity_payment_callback',
+]);
+
+Route::any('/app-wallet-payment-callback', [
+    'uses' => 'Payment\wallet_controller@app_wallet_payment_callback',
+    'as' => 'app_wallet_payment_callback',
 ]);
 
 
