@@ -21,6 +21,7 @@
   <div class="h-100">
     <header-dash-buyer
       :storage="storagePath"
+      :assets="assets"
       :logout="'/logout'"
       :search-text="searchText"
     ></header-dash-buyer>

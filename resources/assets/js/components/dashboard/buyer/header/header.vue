@@ -573,7 +573,7 @@ export default {
     HeaderTop,
     SwitchButtons,
   },
-  props: ["storage", "logout", "userId", "searchText"],
+  props: ["storage", "logout", "userId", "assets", "searchText"],
   data: function () {
     return {
       menuClosed: false,
