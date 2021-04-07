@@ -64,7 +64,47 @@ a.active {
   background: #637484;
 }
 
+.star-badge {
+  position: absolute;
+  left: 20px;
+  border-radius: 12px;
+  color: rgb(249, 242, 159);
+  text-align: center;
+  direction: ltr;
+  line-height: 1;
+}
+
+.star-badge i {
+  font-size: 20px;
+  background: linear-gradient(
+    21deg,
+    rgb(199, 168, 79) 0%,
+    rgb(249, 242, 159) 51%,
+    rgb(199, 168, 79) 100%
+  );
+  background-clip: border-box;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 2px 0;
+}
+
 .header-menu li.active a:before {
+  content: " ";
+  height: 100%;
+  width: 2px;
+  background: #00c569;
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: block;
+}
+
+.header-menu li.active a.router-link-exact-active {
+  color: #fff;
+  background: #637484;
+}
+
+.header-menu li.active a.router-link-exact-active:before {
   content: " ";
   height: 100%;
   width: 2px;
@@ -78,14 +118,15 @@ a.active {
 .custom-badge {
   position: absolute;
   left: 20px;
-  top: 7px;
+  top: 6px;
   background: #e41c38;
-  height: 25px;
-  width: 25px;
+  height: 30px;
+  width: 30px;
   border-radius: 50px;
-  padding: 4px;
+  padding-top: 7px;
   color: #fff;
   text-align: center;
+  direction: ltr;
 }
 
 .header-menu i {
@@ -96,49 +137,69 @@ a.active {
   <div>
     <div class="header-menu">
       <ul class="list-unstyled">
-        <!--                 <li class="list-item">
-                  <router-link
-                    :class="{'active' : this.activeElement === 0}"
-                    :to="{ name : 'status' }"
-                  >
-                    <span>داشبورد</span>
-                    <i class="fa fa-chart-line"></i>
-                  </router-link>
-        </li>-->
         <li class="list-item">
-          <router-link :to="{ name : 'profileBasicBuyer' }">
+          <router-link
+            :to="{ name: 'profileBasicBuyer' }"
+            :class="{
+              'router-link-exact-active':
+                $route.name == 'profileBasicBuyerVeficiation',
+            }"
+          >
             <i class="fa fa-user" aria-hidden="true"></i>
             <span>ویرایش پروفایل</span>
           </router-link>
         </li>
 
         <li class="list-item">
-          <router-link :to="{ name : 'registerRequestBuyer' }">
+          <router-link :to="{ name: 'registerRequestBuyer' }">
             <i class="fa fa-plus-square" aria-hidden="true"></i>
             <span>ثبت درخواست خرید</span>
           </router-link>
         </li>
 
         <li class="list-item">
-          <router-link :to="{ name : 'messagesBuyer' }">
+          <router-link
+            :to="{ name: 'messagesBuyer' }"
+            :class="{ 'router-link-exact-active ': this.activeElement === 0 }"
+          >
             <i class="fas fa-comment-alt" aria-hidden="true"></i>
             <span>پیام ها</span>
-            <span class="custom-badge" v-if="messageCount" v-text="messageCount"></span>
+            <span
+              class="custom-badge"
+              v-if="messageCount > 0"
+              v-text="messageCount"
+            ></span>
           </router-link>
         </li>
 
+        <li class="list-item">
+          <router-link :to="{ name: 'specialProducts' }">
+            <i class="fas fa-list-ol" aria-hidden="true"></i>
+            <span>فروشندگان پیشنهادی</span>
+            <span class="star-badge">
+              <i class="fa fa-star"></i>
+            </span>
+          </router-link>
+        </li>
 
         <li class="list-item">
-          <router-link :to="{ name : 'specialProducts' }">
+          <router-link :to="{ name: 'myBuyAdRequestsBuyer' }">
             <i class="fa fa-list-alt" aria-hidden="true"></i>
-            <span>محصولات ویژه</span>
+            <span>درخواست های من</span>
           </router-link>
         </li>
 
         <li class="list-item">
-          <router-link :to="{ name : 'guideBuyer' }">
+          <router-link :to="{ name: 'guideBuyer' }">
             <i class="fa fa-question-circle" aria-hidden="true"></i>
             <span>راهنما</span>
+          </router-link>
+        </li>
+
+        <li class="list-item">
+          <router-link :to="{ name: 'supportBuyer' }">
+            <i class="fas fa-headset"></i>
+            <span>پشتیبانی</span>
           </router-link>
         </li>
       </ul>
@@ -156,34 +217,27 @@ export default {
     "selregpro",
     "transactroute",
     "mytrans",
-    "guide"
+    "guide",
   ],
   data() {
     return {
       activeElement: 0,
       messageCount: "",
-      linksPath: ["/dashboard/complementary"]
+      linksPath: ["/buyer/messenger/group-messages"],
     };
   },
   methods: {
-    init: function() {
+    init: function () {
       var self = this;
-
-      axios
-        .post("/get_total_unread_messages_for_current_user")
-        .then(function(response) {
-          self.messageCount = response.data.msg_count;
-        })
-        .catch(function(err) {});
     },
     subIsActive(input) {
       const paths = Array.isArray(input) ? input : [input];
 
-      return paths.some(path => {
+      return paths.some((path) => {
         return this.$route.path.indexOf(path) === 0; // current path starts with this path string
       });
     },
-    checkLinkActive: function() {
+    checkLinkActive: function () {
       for (var i = 0; i < this.linksPath.length; i++) {
         if (this.subIsActive(this.linksPath[i])) {
           this.activeElement = i;
@@ -191,14 +245,14 @@ export default {
           this.activeElement = null;
         }
       }
-    }
+    },
   },
   watch: {
     $route() {
       this.checkLinkActive();
-    }
+    },
   },
-  mounted: function() {
+  mounted: function () {
     this.checkLinkActive();
     this.init();
   },
@@ -206,17 +260,12 @@ export default {
     var self = this;
     var userId = window.localStorage.getItem("userId");
 
-    eventBus.$on("messageCount", event => {
+    eventBus.$on("messageCount", (event) => {
       this.messageCount += event;
     });
-    eventBus.$on("active", event => {
+    eventBus.$on("active", (event) => {
       this.activeElement = event;
     });
-    Echo.private("testChannel." + userId).listen("newMessage", e => {
-      var senderId = e.new_message.sender_id;
-
-      self.messageCount += 1;
-    });
-  }
+  },
 };
 </script>

@@ -1,0 +1,83 @@
+
+html,body{
+    background: none;
+    height: 100%;
+}
+
+.page-wrapper {
+    height: 100%;
+    background-image: url('../img/ricepaper.jpg');
+    background-position: center;
+    background-repeat: repeat;
+}
+
+.page-wrapper > div {
+    padding-top: 80px;
+    
+    width: 664px;
+}
+
+
+.header-section h1{
+    font-size: 50px;
+    color: #21AD93;
+    font-weight: normal;
+}
+
+.header-section p{
+    font-size: 30px;
+    margin-top: 20px;   
+    line-height: 1.618;
+}
+
+.main-content-wrapper p{
+    font-family: arial,tahoma;
+    font-size: 125px;
+    line-height: 1;
+    margin: 35px 0;
+}
+.main-content-wrapper p > span{
+    color: #21ad93;
+}
+.footer-section{
+    position: relative;
+    height: 135px;
+    margin-top: -135px;
+    background: #fff;
+    box-shadow: 0 -6px 35px rgba(0,0,0,0.1);
+    padding: 15px;
+}
+
+.social-icon li a:hover{
+    background: #21ad93;
+}
+@media screen and (max-width: 768px) {
+    .page-wrapper {
+        padding: 0;
+    }
+    .page-wrapper > div {
+        padding: 37px 0;
+        max-width: 664px;
+        width: 100%;
+    }
+    
+        
+    html,body{
+        background: none;
+        height: initial;
+    }
+    .logo-wrapper{
+        margin-bottom: 30px;
+    }
+    .header-section p {
+        font-size: 18px;
+        margin-top: 30px;
+        line-height: 1.618;
+    }
+    .main-content-wrapper p {
+        font-size: 90px;
+    }
+    .footer-section{
+        margin-top: 0;
+    }
+}

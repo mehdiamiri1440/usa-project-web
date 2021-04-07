@@ -2,7 +2,7 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(App\myuser::class, function (Faker $faker) {
+$factory->define(App\Models\myuser::class, function (Faker $faker) {
     return [
         'phone' =>  mt_rand(10000000000,99999999999),
         'user_name' => $faker->unique()->word(10),

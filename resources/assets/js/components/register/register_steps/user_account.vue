@@ -1,10 +1,9 @@
 <style scoped>
-  p, span{
-    line-height: 1.5;
-  }
-.text-red {
-  color: red;
+p,
+span {
+  line-height: 1.5;
 }
+
 .submit-button {
   background: #dddddd;
   color: #fff;
@@ -125,13 +124,13 @@ input.error:focus + i {
 
     <div class="form-contents col-xs-12">
       <div class="row">
-        <label for="user-name">
+        <!-- <label for="user-name">
           یک نام کاربری
-          <span class="text-red">(انگلیسی و بدون فاصله)</span>
+          <span class="red-text ">(انگلیسی و بدون فاصله)</span>
           وارد کنید
-        </label>
+        </label> -->
 
-        <div class="input-wrapper col-xs-12 user-name-wrapper">
+        <!-- <div class="input-wrapper col-xs-12 user-name-wrapper">
           <div class="row">
             <input
               v-model="userName"
@@ -149,16 +148,22 @@ input.error:focus + i {
           <p class="error-message">
             <span v-if="$parent.errors.user_name[0]" v-text="$parent.errors.user_name[0]"></span>
           </p>
-        </div>
+        </div> -->
 
         <div class="row">
-          <div class="col-xs-6 pull-right">
-            <label for="password">کلمه عبور را وارد کنید</label>
+          <div class="col-xs-12">
+            <label for="password"
+              >یک گذرواژه انتخاب کنید
+              <span class="red-text">(۸ کاراکتر یا بیشتر)</span>
+            </label>
 
             <div class="input-wrapper password-wrapper">
               <input
                 v-model="password"
-                :class="{'error' : $parent.errors.password[0], 'active' : password.length}"
+                :class="{
+                  error: $parent.errors.password[0],
+                  active: password.length,
+                }"
                 id="password"
                 type="password"
                 class="dire"
@@ -167,12 +172,15 @@ input.error:focus + i {
 
               <i class="fa fa-lock"></i>
               <p class="error-message">
-                <span v-if="$parent.errors.password[0]" v-text="$parent.errors.password[0]"></span>
+                <span
+                  v-if="$parent.errors.password[0]"
+                  v-text="$parent.errors.password[0]"
+                ></span>
               </p>
             </div>
           </div>
 
-          <div class="col-xs-6">
+          <!-- <div class="col-xs-6">
             <label for="password">تکرار کلمه عبور</label>
             <div class="input-wrapper password-wrapper">
               <input
@@ -193,14 +201,16 @@ input.error:focus + i {
                 ></span>
               </p>
             </div>
-          </div>
+          </div> -->
         </div>
 
         <button
           class="submit-button disabled"
-          :class="{'active' : password.length && rePassword.length && userName.length >=3}"
+          :class="{ active: password.length >= 8 }"
           @click.prevent="$parent.setAccount()"
-        >مرحله بعد</button>
+        >
+          مرحله بعد
+        </button>
       </div>
     </div>
   </div>
@@ -208,30 +218,30 @@ input.error:focus + i {
 
 <script>
 export default {
-  data: function() {
+  data: function () {
     return {
       password: "",
       rePassword: "",
-      userName: ""
+      userName: "",
     };
   },
   watch: {
-    userName: function(value) {
-      this.$parent.step3.user_name = this.userName;
-    },
-    password: function(value) {
+    // userName: function(value) {
+    //   this.$parent.step3.user_name = this.userName;
+    // },
+    password: function (value) {
       this.$parent.errors.password = "";
       this.$parent.step3.password = this.password;
     },
-    rePassword: function(value) {
-      this.$parent.errors.password_conf = "";
-      this.$parent.step3.re_password = this.rePassword;
-    }
+    // rePassword: function(value) {
+    //   this.$parent.errors.password_conf = "";
+    //   this.$parent.step3.re_password = this.rePassword;
+    // }
   },
   mounted() {
-    this.userName = this.$parent.step3.user_name;
+    // this.userName = this.$parent.step3.user_name;
     this.password = this.$parent.step3.password;
-    this.rePassword = this.$parent.step3.re_password;
-  }
+    // this.rePassword = this.$parent.step3.re_password;
+  },
 };
 </script>

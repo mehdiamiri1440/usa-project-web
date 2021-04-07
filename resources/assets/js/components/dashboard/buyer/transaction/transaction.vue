@@ -1,1091 +1,1240 @@
 <style>
-    .col-xs-12,
-    .col-sm-4,
-    .col-sm-8,
-    .col-md-3,
-    .col-md-9
-    {
-        float: right;
-    }
-
-  ol, ul {
-        list-style: inherit;
-    }
-
-  .description-text ul {
-        padding: 0 15px;
-    }
-
-    /*start main content style */
-    .image-content-post {
-        width: 30%;
-        float: right;
-        position: relative;
-    }
-
-    .image-content-post img {
-        border-radius: 3px;
-        transition: 200ms;
-        filter: grayscale(30%);
-    }
-
-    .image-content-post a:hover img {
-        filter: grayscale(0);
-        transition: 200ms;
-    }
-
-    .image-content-post i {
-        display: none;
-        position: absolute;
-        top: 46%;
-        left: 0;
-        right: 0;
-        text-align: center;
-        font-size: 35px;
-        color: #fff;
-        z-index: 1;
-
-    }
-
-    .image-content-post a:hover i {
-        display: block;
-    }
-
-    .content-item {
-        overflow: hidden;
-        text-align: right;
-        direction: rtl;
-    }
-
-    .main-content {
-        padding: 60px 15px;
-    }
-
-    .header-label {
-        display: block;
-        margin: 13px;
-        padding: 0;
-    }
-
-    /*end main content style */
-    /*custom cods*/
-    .green-button {
-        margin: 15px 0;
-        display: inline-block;
-        background: #00c569;
-        color: #fff;
-        padding: 10px 35px;
-        border-radius: 3px;
-        text-align: center;
-        border: none;
-        transition: 300ms;
-    }
-    .green-button:focus,.gray-bot:focus {
-        color: #fff;
-    }
-    .default_btn{
-        margin: 15px 0;
-        display: inline-block;
-        background: #eee;
-        color: #444;
-        padding: 10px 35px;
-        border-radius: 3px;
-        text-align: center;
-        border: none;
-        transition: 300ms;
-    }
-    .gray-bot {
-        margin: 15px 0;
-        display: inline-block;
-        background: #85888d;
-        color: #fff;
-        padding: 10px 35px;
-        border-radius: 3px;
-        text-align: center;
-        border: none;
-        transition: 300ms;
-    }
-    .default_btn:hover {
-        color: #444;
-        background: #ddd;
-        transition: 300ms;
-    }
-    .green-button:hover {
-        color: #fff;
-        background: #00ac5c;
-        transition: 300ms;
-
-    }
-    .gray-bot:hover {
-        color: #fff;
-        background: #72757a;
-        transition: 300ms;
-
-    }
-
-    .botton-inco {
-        margin: 15px 7px;
-        display: inline-block;
-        color: #313a43;
-        padding: 8px 35px;
-        border-radius: 3px;
-        text-align: center;
-    }
-
-    .botton-inco:hover {
-        color: #fff;
-    }
-
-    .font-big {
-        font-size: 23px;
-        position: relative;
-        top: 3px;
-    }
-
-    .little_header {
-        width: 80px;
-    }
-
-    .little-main-header {
-        right: 80px;
-    }
-
-    .background_mob_sec {
-        position: fixed;
-        right: 0;
-        left: 0;
-        bottom: 0;
-        top: 0;
-        background: rgba(0, 0, 0, 0.6);
-        z-index: -1;
-        display: none;
-    }
-
-    .kind_user, .kind_activity {
-        margin: 7px 0;
-        border-bottom: 1px solid #eff3f6;
-        padding-bottom: 10px;
-    }
-
-    .kind_user > div, .kind_activity > div {
-        float: right;
-        overflow: hidden;
-        padding: 10px;
-        font-size: 15px;
-    }
-
-    .kind_user input, .kind_activity input {
-        cursor: pointer;
-        width: 23px;
-        height: 23px;
-        float: right;
-        position: absolute;
-        top: 2px;
-        right: 65px;
-        opacity: 0;
-    }
-
-    .kind_user input:checked + i, .kind_activity input:checked + i {
-        color: #00c569;
-    }
-
-    .kind_user i, .kind_activity i {
-        background: none;
-        width: 23px;
-        height: 23px;
-        display: block;
-        position: absolute;
-        top: 4px;
-        right: 65px;
-        z-index: -1;
-        color: #808c9c;
-        border: 2px solid;
-        border-radius: 50%;
-        padding: 3px 2px;
-        font-size: 14px;
-    }
-
-    .user-form {
-        padding: 0;
-    }
-    .alert-message{
-        padding: 20px;
-
-        text-align: right;
-    }
-    .user-form input[type="text"] {
-        width: 100%;
-        border: 1px solid #e9e9e9;
-        padding: 15px 20px;
-        margin: 7px auto;
-        border-radius: 4px;
-        transition: 300ms;
-    }
-
-    .user-form input[type="button"] {
-        width: 100%;
-
-    }
-
-    .user-form input[type="text"]:focus {
-        border: 1px solid #00c569;
-        transition: 500ms;
-    }
-
-    .img-profile {
-        float: right;
-    }
-
-    #icon-pro {
-        width: 150px;
-        height: 150px;
-        display: inline-block;
-    }
-
-    #icon-pro svg {
-        height: 150px;
-    }
-
-    .main-content-nav {
-        margin: 20px auto;
-
-        width: 80%;
-
-        float: none;
-    }
-    .main-content-nav ul {
-        text-align: center;
-        margin-right: -25px;
-    }
-
-    .main-content-nav li {
-        padding: 14px 50px;
-        position: relative;
-        background: #fbfbfb;
-        font-size: 18px;
-    }
-    .main-content-nav li a{
-        color: #999;
-    }
-    .main-content-nav li.active a{
-        color: #333;
-    }
-    .main-content-nav li:after {
-        content: "";
-        position: absolute;
-        right: 0;
-        bottom: 0;
-        width: 0;
-        height: 0;
-        border-right: 20px solid #fff;
-        border-top: 26px solid transparent;
-        border-bottom: 20px solid transparent;
-    }
-
-    .main-content-nav li:before {
-        content: "";
-        position: absolute;
-        left: -20px;
-        bottom: 0;
-        width: 0;
-        height: 0;
-        border-right: 20px solid #fbfbfb;
-        border-top: 26px solid transparent;
-        border-bottom: 20px solid transparent;
-        z-index: 1;
-    }
-    .main-content-nav li.active {
-        background: #f7f7f7;
-        color: #333;
-    }
-    .main-content-nav li.active:before {
-        border-right-color: #f7f7f7;
-    }
-
-    #main .contents,#main .alert-danger{
-        text-align: center;
-        background: #f7f7f7;
-
-        width: 80%;
-
-        margin: 0 auto;
-
-        float: none;
-
-        overflow: hidden;
-
-        border-radius: 3px;
-
-        line-height: 1.618;
-
-        direction: rtl;
-    }
-    #main .alert-danger{
-        font-size: 18px;
-        background: #e41c38;
-        padding: 15px;
-        margin: 0 auto 20pxauto;
-        color: #fff;
-    }
-    .title-p{
-        margin: 10px auto 15px;
-
-        font-size: 16px;
-
-        font-weight: bold;
-    }
-    #main .contents p{
-        text-align: right;
-    }
-    #main .contents h2{
-        margin: 20px auto;
-    }
-
-    #main .continue_but{
-        float: right;
-    }
-
-    #main .main_buttons{
-        float: right;
-
-    }
-
-    #step1 .main_buttons{
-        text-align: right;
-    }
-    /*part 2*/
-    .main-content-texts{
-        background: #fff;
-
-        border-radius: 3px;
-    }
-    .header-contents{
-        background: #fff;
-        margin: 15px auto;
-        border-radius: 3px;
-        padding: 10px;
-        text-align: left;
-    }
-
-    .header-contents .title-contents{
-        text-align: right;
-    }
-
-    .contents h2{
-        font-size: 22px;
-    }
-    .description-text{
-        font-size: 12px;
-        padding: 5px 0;
-        border-top:1px solid #ddd;
-
-    }
-    .services td {
-        color: #00d613;
-    }
-
-    .pre-pay td {
-        color: #e41c38;
-    }
-
-    @media screen and (max-width: 992px) {
-        .right-header.desktop-header {
-            display: none;
-        }
-
-        .right-header.mobile-header {
-            display: block;
-            right: -300px;
-        }
-
-        .main-header, .little-main-header {
-            right: 0 !important;
-        }
-
-        #main, #main.little-main {
-            margin-right: 0 !important;
-        }
-
-        .post-contents-table {
-            width: 100%;
-        }
-
-        .copy-right {
-            display: none;
-        }
-
-        .close_menu {
-            display: none;
-        }
-
-        .close_menu_mob {
-            display: block;
-        }
-
-        .show-header button {
-            display: block;
-        }
-
-        .kind_user > div, .kind_activity > div {
-            float: none;
-
-        }
-
-        .img-profile .submit {
-            position: relative;
-            width: 100%;
-            margin: 25px auto;
-
-        }
-
-        .img-profile .submit label {
-            width: 40%;
-            padding: 12px 0;
-        }
-
-        .img-profile {
-            float: none;
-        }
-    }
-
-    @media screen and (max-width: 768px) {
-        .image-content-post, .contents-post {
-            width: 100%;
-            float: none;
-            margin: 10px 0;
-            padding: 0;
-        }
-        #main .contents,#main .alert-danger{
-
-            width: 100%;
-
-
-        }
-        #main .alert-danger{
-            font-size: 14px;
-        }
-        .name-header-profile {
-            display: none;
-        }
-
-        .profile-menu-header {
-            padding: 7px;
-            padding-left: 36px;
-        }
-    }
-
-    @media screen and (max-width: 555px) {
-        .content-header {
-            display: none;
-        }
-
-    }
-
-    @media screen and (max-width: 345px) {
-        .sub-header a {
-            font-size: 10px;
-
-        }
-
-        .sub-header {
-
-            bottom: -44px;
-
-        }
-    }
+.col-xs-12,
+.col-sm-4,
+.col-sm-8,
+.col-md-3,
+.col-md-9 {
+  float: right;
+}
+
+ol,
+ul {
+  list-style: inherit;
+}
+
+.description-text ul {
+  padding: 0 15px;
+}
+
+/*start main content style */
+.image-content-post {
+  width: 30%;
+  float: right;
+  position: relative;
+}
+
+.image-content-post img {
+  border-radius: 3px;
+  transition: 200ms;
+  filter: grayscale(30%);
+}
+
+.image-content-post a:hover img {
+  filter: grayscale(0);
+  transition: 200ms;
+}
+
+.image-content-post i {
+  display: none;
+  position: absolute;
+  top: 46%;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 35px;
+  color: #fff;
+  z-index: 1;
+}
+
+.image-content-post a:hover i {
+  display: block;
+}
+
+.content-item {
+  overflow: hidden;
+  text-align: right;
+  direction: rtl;
+}
+
+.main-content {
+  padding: 60px 15px;
+}
+
+.header-label {
+  display: block;
+  margin: 13px;
+  padding: 0;
+}
+
+/*end main content style */
+/*custom cods*/
+.green-button {
+  margin: 15px 0;
+  display: inline-block;
+  background: #00c569;
+  color: #fff;
+  padding: 10px 35px;
+  border-radius: 3px;
+  text-align: center;
+  border: none;
+  transition: 300ms;
+}
+.green-button:focus,
+.gray-bot:focus {
+  color: #fff;
+}
+.default_btn {
+  margin: 15px 0;
+  display: inline-block;
+  background: #eee;
+  color: #444;
+  padding: 10px 35px;
+  border-radius: 3px;
+  text-align: center;
+  border: none;
+  transition: 300ms;
+}
+.gray-bot {
+  margin: 15px 0;
+  display: inline-block;
+  background: #85888d;
+  color: #fff;
+  padding: 10px 35px;
+  border-radius: 3px;
+  text-align: center;
+  border: none;
+  transition: 300ms;
+}
+.default_btn:hover {
+  color: #444;
+  background: #ddd;
+  transition: 300ms;
+}
+.green-button:hover {
+  color: #fff;
+  background: #00ac5c;
+  transition: 300ms;
+}
+.gray-bot:hover {
+  color: #fff;
+  background: #72757a;
+  transition: 300ms;
+}
+
+.botton-inco {
+  margin: 15px 7px;
+  display: inline-block;
+  color: #313a43;
+  padding: 8px 35px;
+  border-radius: 3px;
+  text-align: center;
+}
+
+.botton-inco:hover {
+  color: #fff;
+}
+
+.font-big {
+  font-size: 23px;
+  position: relative;
+  top: 3px;
+}
+
+.little_header {
+  width: 80px;
+}
+
+.little-main-header {
+  right: 80px;
+}
+
+.background_mob_sec {
+  position: fixed;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  top: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: -1;
+  display: none;
+}
+
+.kind_user,
+.kind_activity {
+  margin: 7px 0;
+  border-bottom: 1px solid #eff3f6;
+  padding-bottom: 10px;
+}
+
+.kind_user > div,
+.kind_activity > div {
+  float: right;
+  overflow: hidden;
+  padding: 10px;
+  font-size: 15px;
+}
+
+.kind_user input,
+.kind_activity input {
+  cursor: pointer;
+  width: 23px;
+  height: 23px;
+  float: right;
+  position: absolute;
+  top: 2px;
+  right: 65px;
+  opacity: 0;
+}
+
+.kind_user input:checked + i,
+.kind_activity input:checked + i {
+  color: #00c569;
+}
+
+.kind_user i,
+.kind_activity i {
+  background: none;
+  width: 23px;
+  height: 23px;
+  display: block;
+  position: absolute;
+  top: 4px;
+  right: 65px;
+  z-index: -1;
+  color: #808c9c;
+  border: 2px solid;
+  border-radius: 50%;
+  padding: 3px 2px;
+  font-size: 14px;
+}
+
+.user-form {
+  padding: 0;
+}
+.alert-message {
+  padding: 20px;
+
+  text-align: right;
+}
+.user-form input[type="text"] {
+  width: 100%;
+  border: 1px solid #e9e9e9;
+  padding: 15px 20px;
+  margin: 7px auto;
+  border-radius: 4px;
+  transition: 300ms;
+}
+
+.user-form input[type="button"] {
+  width: 100%;
+}
+
+.user-form input[type="text"]:focus {
+  border: 1px solid #00c569;
+  transition: 500ms;
+}
+
+.img-profile {
+  float: right;
+}
+
+#icon-pro {
+  width: 150px;
+  height: 150px;
+  display: inline-block;
+}
+
+#icon-pro svg {
+  height: 150px;
+}
+
+.main-content-nav {
+  margin: 20px auto;
+
+  width: 80%;
+
+  float: none;
+}
+.main-content-nav ul {
+  text-align: center;
+  margin-right: -25px;
+}
+
+.main-content-nav li {
+  padding: 14px 50px;
+  position: relative;
+  background: #fbfbfb;
+  font-size: 18px;
+}
+.main-content-nav li a {
+  color: #999;
+}
+.main-content-nav li.active a {
+  color: #333;
+}
+.main-content-nav li:after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  border-right: 20px solid #fff;
+  border-top: 26px solid transparent;
+  border-bottom: 20px solid transparent;
+}
+
+.main-content-nav li:before {
+  content: "";
+  position: absolute;
+  left: -20px;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  border-right: 20px solid #fbfbfb;
+  border-top: 26px solid transparent;
+  border-bottom: 20px solid transparent;
+  z-index: 1;
+}
+.main-content-nav li.active {
+  background: #f7f7f7;
+  color: #333;
+}
+.main-content-nav li.active:before {
+  border-right-color: #f7f7f7;
+}
+
+#main .contents,
+#main .alert-danger {
+  text-align: center;
+  background: #f7f7f7;
+
+  width: 80%;
+
+  margin: 0 auto;
+
+  float: none;
+
+  overflow: hidden;
+
+  border-radius: 3px;
+
+  line-height: 1.618;
+
+  direction: rtl;
+}
+#main .alert-danger {
+  font-size: 18px;
+  background: #e41c38;
+  padding: 15px;
+  margin: 0 auto 20pxauto;
+  color: #fff;
+}
+.title-p {
+  margin: 10px auto 15px;
+
+  font-size: 16px;
+
+  font-weight: bold;
+}
+#main .contents p {
+  text-align: right;
+}
+#main .contents h2 {
+  margin: 20px auto;
+}
+
+#main .continue_but {
+  float: right;
+}
+
+#main .main_buttons {
+  float: right;
+}
+
+#step1 .main_buttons {
+  text-align: right;
+}
+/*part 2*/
+.main-content-texts {
+  background: #fff;
+
+  border-radius: 3px;
+}
+.header-contents {
+  background: #fff;
+  margin: 15px auto;
+  border-radius: 3px;
+  padding: 10px;
+  text-align: left;
+}
+
+.header-contents .title-contents {
+  text-align: right;
+}
+
+.contents h2 {
+  font-size: 22px;
+}
+.description-text {
+  font-size: 12px;
+  padding: 5px 0;
+  border-top: 1px solid #ddd;
+}
+.services td {
+  color: #00d613;
+}
+
+.pre-pay td {
+  color: #e41c38;
+}
+
+@media screen and (max-width: 991px) {
+  .right-header.desktop-header {
+    display: none;
+  }
+
+  .right-header.mobile-header {
+    display: block;
+    right: -300px;
+  }
+
+  .main-header,
+  .little-main-header {
+    right: 0 !important;
+  }
+
+  #main,
+  #main.little-main {
+    margin-right: 0 !important;
+  }
+
+  .post-contents-table {
+    width: 100%;
+  }
+
+  .copy-right {
+    display: none;
+  }
+
+  .close_menu {
+    display: none;
+  }
+
+  .close_menu_mob {
+    display: block;
+  }
+
+  .show-header button {
+    display: block;
+  }
+
+  .kind_user > div,
+  .kind_activity > div {
+    float: none;
+  }
+
+  .img-profile .submit {
+    position: relative;
+    width: 100%;
+    margin: 25px auto;
+  }
+
+  .img-profile .submit label {
+    width: 40%;
+    padding: 12px 0;
+  }
+
+  .img-profile {
+    float: none;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .image-content-post,
+  .contents-post {
+    width: 100%;
+    float: none;
+    margin: 10px 0;
+    padding: 0;
+  }
+  #main .contents,
+  #main .alert-danger {
+    width: 100%;
+  }
+  #main .alert-danger {
+    font-size: 14px;
+  }
+  .name-header-profile {
+    display: none;
+  }
+
+  .profile-menu-header {
+    padding: 7px;
+    padding-left: 36px;
+  }
+}
+
+@media screen and (max-width: 555px) {
+  .content-header {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 345px) {
+  .sub-header a {
+    font-size: 10px;
+  }
+
+  .sub-header {
+    bottom: -44px;
+  }
+}
 </style>
 <template>
-    <div>
-
-        <section  class="main-content col-xs-12" v-if="transactionInfo">
-
-
-            <!--part 1-->
-            <div id="step1" v-if="currentStep == 1">
-                <nav class="main-content-nav col-xs-12">
-                    <ul class="list-inline">
-                        <li class="list-item">نظر سنجی</li>
-                        <li class="list-item "> تسویه حساب </li>
-                        <li class="list-item "> پرداخت ودیعه</li>
-                        <li class="list-item active">تایید مفاد قرارداد </li>
-                    </ul>
-                </nav>
-                <div class="contents col-xs-12" v-if="msg == ''">
-                    <div class="content-show">
-                        <div class="buttons ">
-                            <div class="main_buttons col-xs-12 col-sm-8 col-md-9">
-                                <a href="#" class="default_btn" @click.prevent="goToNextPage()">صفحه بعد</a>
-                                <a href="#" class="default_btn" @click.prevent="goToPrePage()">صفحه قبل</a>
-                            </div>
-                            <div class="continue_but col-xs-12 col-sm-4 col-md-3">
-                                <a href="#" @click.prevent="confirmContract()" class="green-button">تایید قرارداد</a>
-                            </div>
-
-                        </div>
-                        <h2>قرارداد همکاری در خرید و فروش</h2>
-                        <p id="step1S1" v-if="pageStep == 1">
-                            <span>  با هدف تنظیم روابط طرف های قرارداد، قرارداد حاضر ذیل ماده ۱۰ قانون مدنی و به نحو لازم و با حاکم قرار دادن اصل حسن نیت بین طرفین منعقد می گردد.
-                            </span><br/><br/>
-
-                            <span><b> ماده 1 :طرفین قرارداد</b></span><br/><br/>
-
-                            <span>1-1 طرف اول: شرکت سهامی خاص فناوران توسعه تجارت ارم به شماره ثبت 49233 که از این پس اینکوباک نامیده میشود.</span><br/>
-                            <span>1-2 طرف دوم (فروشنده): هر شخص حقیقی یا حقوقی به نام {{sellerUserInfo.first_name + ' ' + sellerUserInfo.last_name}}  و شناسه ملی /کد ملی {{sellerUserInfo.national_code}} که از این به بعد فروشنده نامیده می شود.</span><br/><br/>
-                            <span>1-3 طرف سوم (خریدار): هر شخص حقیقی یا حقوقی به نام {{buyerUserInfo.first_name + ' ' + buyerUserInfo.last_name}}  و شناسه ملی /کد ملی {{buyerUserInfo.national_code}} که از این به بعد خریدار نامیده می شود.</span>
-                            <br/><br/>
-                            <span><b> ماده 2 :موضوع قرارداد</b></span><br/><br/>
-                            <span>2-1 تنظیم همکاری و روابط قراردادی طرفین در خصوص همکاری اینکوباک با خریدار و فروشنده جهت خرید و فروش کالا و محصولات فروشنده از طریق ارائه این محصولات در وبسایت ایجاد شده توسط اینکوباک به نشانی incobac.com. بدیهی است با توجه به اینکه مالکیت محصولات ارائه شده در سایت متعلق به اینکوباک نبوده و اینکوباک صرفاً ارائه دهنده بستر اینترنتی جهت فروش محصولات فوق می باشد لذا مسئولیت کلیه اوصاف محصول اعم از نوع، بسته بندی، قیمت و هرگونه اطلاعات ذکر شده در رابطه با محصول بر عهده فروشنده است.
-
-                            </span><br/><br/>
-                            <span>2-2 اینکوباک بر اساس اطلاعات ذکر شده در سایت اقدام به صدور فاکتور برای خریدار می نماید که این فاکتور در اختیار خریدار قرار می گیرد و مبنای رسیدگی به کلیه اختلافات حاصله  قرارداد حاضر و فاکتور مذکور می باشد.</span><br/><br/>
-                            <span>2-3 با توجه به شرایط خاص هر معامله، هزینه های مربوط به حمل و نقل و بیمه کالاهای مورد معامله ممکن است بر عهده خریدار یا فروشنده قرار گیرد که این امر در قرارداد حاضر قید و مورد تایید طرف متعهد قرار می گیرد در هر صورت اینکوباک نسبت به هزینه های فوق الذکر از خود سلب مسئولیت می‌نماید.
-                            </span><br/><br/>
-
-                            <span><b>ماده 3 :مکانیسم اجرایی عملیات خرید و فروش</b></span><br/><br/>
-                            <span>3-1 خریدار و فروشنده با پذیرش قرارداد حاضر می توانند از بستر اینترنتی ارائه شده توسط طرف اول (پلتفرم اینکوباک) جهت سفارش و ارائه محصولات استفاده نمایند.
-                            </span><br/>
-
-                        </p>
-                        <p id="step1S2" v-if="pageStep == 2">
-                            <span>3-2 خریدار درخواست خود را از طریق سفارش کالا به صورت الکترونیکی برای اینکوباک ارسال و اینکوباک تقاضای خرید خریدار را از طریق ایمیل یا seller center به فروشندگان مرتبط اعلام می نماید.
-                            </span><br/><br/>
-                            <span>3-3 چنانچه فروشنده قادر به تامین سفارش خریدار باشد پاسخ خود را با ذکر اوصاف و پیوست تصاویر محصولات، برای خریدار ارسال می نماید.
-                            </span><br/><br/>
-                            <span>3-4 چنانچه خریدار پیشنهاد فروشنده را در پنل کاربری خویش پذیرفت، اپراتور های اینکوباک اقدام به برقراری تماس تلفنی و انجام هماهنگی های نهایی با خریدار و فروشنده نموده و در صورت حصول توافق، متن قرارداد را برای خریدار و فروشنده ارسال می نمایند که ملاک زمانی انعقاد قراداد، زمان تایید الکترونیکی متن قرارداد ارسالی برای طرفین ( خریدار و فروشنده) می باشد.
-                            </span><br/><br/>
-                            <span>3-5 پس از تایید قرارداد توسط خریدار و فروشنده، فاکتور پیش پرداخت توسط اینکوباک برای خریدار صادر گردیده و خریدار بایستی ظرف مدت یک روز نسبت به پرداخت آن اقدام نماید.
-                            </span><br/><br/>
-                            <span>3-6 در صورت تادیه پیش پرداخت توسط خریدار، فروشنده بایستی ظرف مهلتی که در قرارداد حاضر قید می گردد کالای سفارش داده شده را تهیه و جهت ارسال به متصدی حمل و نقل تسلیم نماید. بدیهی است که کلیه مسؤلیت های ناشی از تامین سفارش و همچنین تحویل کالا به متصدی حمل و نقل قانونی بر عهده فروشنده می باشد.
-                            </span><br/><br/>
-                            <span>3-7 قبل از تسلیم کالا به متصدی حمل و نقل و انجام عملیات بارگیری، بازرس اینکوباک در محل بارگیری حضور می یابد و کالای سفارش داده شده را از جهت انطباق با مفاد قرارداد حاضر مورد بررسی قرار می دهد. (تعیین موارد و اوصافی که در هر سفارش بایستی توسط بازرس اینکوباک مورد بررسی و تایید قرار گیرد به پیوست قرارداد حاضر در اختیار خریدار و فروشنده قرار خواهد گرفت). بدیهی است که بازرس اینکوباک صرفاً نسبت به بررسی این اوصاف مسئولیت داشته و سایر اوصاف و موارد از حیطه مسئولیت بازرس اینکوباک خارج می باشد.
-                            </span><br/><br/>
-                            <span>3-8 در صورت تأیید محصولات توسط بازرس و بارگیری، این امر بصورت سیستمی در سامانه اینکوباک به اطلاع خریدار رسیده و فاکتور نهایی قرارداد توسط اینکوباک صادر می گردد و خریدار بایستی ظرف مدت 2 ساعت از اتمام بارگیری نسبت به تسویه مبلغ باقی مانده قراداد اقدام نماید و حداکثر تا یک هفته از پایان تراکنش، اینکوباک پس از کسر کمیسیون خود از معامله، ثمن معامله را به حساب فروشنده واریز خواهد کرد.
-                             .</span><br/><br/>
-                        </p>
-                        <p id="step1S3" v-if="pageStep == 3">
-                            <span>3-9 بدیهی است با توجه به عدم مالکیت اینکوباک بر محصولات ارائه شده در بستر اینترنتی، فروش کالا به خریدار توسط فروشنده انجام می پذیرد و اینکوباک صرفا زیرساخت انجام فروش را فراهم می نماید لذا در صورت صدور فاکتور در وجه اینکوباک و اظهار نمودن آن در گزارشات مالیاتی مراتب مورد تایید این شرکت نبوده و همچنین این شرکت هیچگونه مسئولیتی بر عهده نخواهد داشت و مسئولیت خسارت وارده احتمالی بر عهده متخلف از این بند خواهد بود.
-                            </span><br/><br/>
-                            <span><b>ماده4. تعهدات و تضمینات فروشنده
-                            </b></span><br/><br/>
-                            <span>بر اساس شرایط این قرارداد فروشنده موظف به انجام امور ذیل می باشد.
-                            </span><br/><br/>
-                            <span>4-1 مسئولیت تعیین و درج قیمت کالا، تولید و درج اطلاعات محصول اعم از کلیه اطلاعات کمی و کیفی محصول و به‌ روزرسانی میزان موجودی محصول در وبسایت اینکوباک بر عهده فروشنده می باشد. قیمت‌های مندرج بر روی وبسایت اینکوباک می‌بایست رقابتی و حداقل برابر با قیمت کالاهای همانند در سایر فروشگاه ها اعم از اینترنتی و غیر اینترنتی باشد.
-                            </span><br/><br/>
-                            <span>تبصره - اینکوباک زیرساخت و ابزار ساخت محتوا را به صورت رایگان در اختیار فروشندگان قرار می دهد.
-                            </span><br/><br/>
-                            <span>4-2 فروشنده تضمین می‌نماید که تمامی کالاهای تحویلی به خریدار مطابق قوانین جمهوری اسلامی ایران تولید شده و یا از مبادی رسمی کشور وارد گردیده است. همچنین کالاها سالم و مطابق با توصیفات اعلام شده از کلیه ابعاد کمی و کیفی می باشد و چنانچه در هر مرحله از عملیات فروش خلاف موارد فوق اثبات گردید، اینکوباک می تواند راسا نسبت به لغو سفارش اقدام نماید و چنانچه در این خصوص خسارتی به اینکوباک یا خریدار وارد گردد فروشنده متعهد به جبران خسارت خواهد بود.
-                            </span><br/><br/>
-                            <span>4-3 فروشنده اعلام می دارد که مالک کالا بوده و کالا معارض ندارد و حقوق مالکیت صنعتی و تجاری در صورت وجود، مالکیت معنوی و سایر حقوق قانونی و عرفی کالا متعلق به اوست یا حق بهره برداری از این حقوق و عرضه کالای مربوطه را دارد و مطابق قوانین جمهوری اسلامی ایران مجاز به فعالیت میباشد و چنانچه در هر مرحله از عملیات فروش خلاف موارد فوق اثبات گردید، اینکوباک می تواند راساٌ نسبت به لغو سفارش اقدام نماید و چنانچه در این خصوص خسارتی به اینکوباک یا خریدار وارد گردد فروشنده متعهد به جبران خسارت خواهد بود.
-                            </span><br/><br/>
-
-                        </p>
-                        <p id="step1S4" v-if="pageStep == 4">
-                            <span>4-4 فروشنده تعهد می‌نماید که در صورت اعمال هرگونه تغییر در اطلاعات کالا اعم از نوع، بهای کالا، عدم موجودی کالا، توقف تولید یا عرضه محصول و همچنین تخفیف‌های ارائه شده به سایر خریداران ظرف مدت یک روز اطلاعات کالا را در سامانه اینکوباک به روز نماید در غیر این صورت مسئولیت کلیه خسارات وارده به اینکوباک و خریدار بر عهده فروشنده است.
-                            </span><br/><br/>
-                            <span>4-5 فروشنده موظف است در زمان تعیین شده در قرارداد حاضر، کالای سفارش داده شده را تامین نماید و در زمان مشخص شده کالای سفارش داده شده را جهت تحویل به خریدار به متصدی حمل و نقل قانونی تحویل نماید. در صورت عدم تامین کالا و یا تامین ناقص در مدت زمان تعهد شده، فروشنده بایستی به ازای هر روز تاخیر 2 درصد از مبلغ کل معامله را به عنوان جریمه تاخیر در تاًمین به اینکوباک پرداخت نماید. و چنانچه عدم تاًمین کالا و یا تامین ناقص بیش از 2 روز تقویمی به طول بیانجامد اینکوباک می تواند راساً نسبت به لغو معامله اقدام نماید، که در این حالت فروشنده موظف به پرداخت 9 درصد از مبلغ کل معامله به عنوان جریمه عدم تاًمین به اینکوباک میباشد و همچنین مسئول کلیه خسارات ناشی از عدم تاًمین و یا تامین ناقص کالا که برای اینکوباک یا خریدار ایجاد گردد می باشد.
-                            </span><br/><br/>
-                            <span>4-6 فروشنده تضمین می نماید که کلیه اوصاف کمی و کیفی محصولات تامین شده کاملا مطابق با اظهارات درج شده توسط ایشان در سامانه اینکوباک می باشد که تمامی این اظهارات در قرارداد حاضر منعکس می گردد. با توجه به تعبیه نظام بازرسی توسط اینکوباک قبل از ارسال کالا و تحویل به متصدی حمل و نقل چنانچه عدم تطابق محموله با اطلاعات مندرج در سایت، مربوط به امور و اوصافی باشد که بایستی توسط بازرس اینکوباک بررسی گردد (شرح دقیق این اوصاف متناسب با هر معامله و به‌صورت احصایی در قرارداد مربوط به آن معامله قید میگردد) اینکوباک و فروشنده مشترکاً در قبال خریدار مسئول می‌باشند که میزان مسئولیت هر یک بر اساس حدود  قصور یا تقصیر آنها توسط مرجع داوری پیش بینی شده در  قرارداد حاضر تعیین می گردد. در غیر اینصورت مسئولیت عدم تطابق کالا بر عهده فروشنده می باشد و چنانچه این امر منجر به ورود هر گونه خسارتی به اینکوباک یا خریدار گردد فروشنده متعهد به جبران خسارت خواهد بود.
-                            </span><br/><br/>
-                            <span>تبصره - در صورتی که فروشنده نسبت به آماده کردن محصول اقدام کرده باشد ولی نتواند در موعد مقرر نسب به تحویل آن اقدام کند و یا در صورتی که محصول آماده شده توسط فروشنده فاقد استانداردهای تعیین شده از سمت خریدار باشد، تصمیم درباره ی لغو یا ادامه معامله، و یا خرید تمام و یا بخشی از محصولات و شرایط مربوط به آن بر عهده اینکوباک و خریدار می باشد. </span><br/><br/>
-                        </p>
-                        <p id="step1S5" v-if="pageStep == 5">
-                            <span>4-7 مسئولیت تحویل کالای سفارش داده شده به متصدی حمل و نقل بر عهده ی فروشنده می باشد. فروشنده موظف است کالا را به شیوه صحیح بسته بندی و در شرایط استاندارد بارگیری به متصدی حمل و نقل قانونی تحویل داده و همچنین کالا را از طریق وسیله ی حمل و نقل دارای شرایط مناسب جهت حفظ سلامت کالا برای خریدار ارسال نماید مگر آنکه متصدی حمل و نقل توسط خریدار تعیین گردد که در این صورت فروشنده صرفا نسبت به انتخاب وسیله و متصدی حمل و نقل مسئولیتی ندارد. چنانچه از جهت عدم رعایت این بند خسارتی حاصل گردد فروشنده مسئول جبران کلیه ی خسارات ایجاد شده می باشد.
-                            </span><br/><br/>
-                            <span>تبصره - چنانچه در طی حمل کالا خسارتی برای محموله ایجاد گردد موجب مسئولیت متصدی حمل و نقل طبق مقررات مربوطه در این زمینه می باشد.
-                            </span><br/><br/>
-                            <span>تبصره – مسئولیت و هزینه های مربوط به حمل و نقل و بیمه محموله ارسالی بر حسب مورد بر عهده خریدار و یا فروشنده می باشد.
-                            </span><br/><br/>
-                            <span> تبصره- چنانچه در طی حمل کالا خسارتی برای محموله ایجاد گردد موجب مسئولیت متصدی حمل و نقل طبق مقررات مربوطه در این زمینه می باشد.</span><br/><br/>
-                            <span><b>ماده 5. تعهدات خریدار</b></span><br/><br/>
-                            <span>خریدار متعهد می باشد پس از تامین بار توسط فروشنده و تایید نهایی بازرس اینکوباک، نسبت به تسویه حساب و پرداخت مبلغ فاکتور نهایی قراداد، حداکثر ظرف مدت 2 ساعت اقدام نماید و چنانچه نسبت به تسویه حساب در زمان مقرر اقدام ننماید، مبلغ پانصد هزار تومان به انضمام 5 درصد از مبلغ کل معامله از پیش پرداخت واریزی توسط خریدار به عنوان جریمه لغو معامله کسر و مابقی مبلغ پیش پرداخت به وی مسترد می گردد. همچنین چنانچه در این خصوص خسارتی به اینکوباک یا فروشنده وارد گردد خریدار متعهد به جبران خسارت خواهد بود که مبلغ خسارت ایجاد شده به انضمام مبالغ جریمه فوق، از پیش پرداخت واریزی توسط خریدار کسر و مابقی به وی مسترد می گردد و تا تعیین تکلیف نهایی در خصوص خسارت مورد ادعا و اجرای رای قطعی مرکز داوری پیش بینی شده در قرارداد، پیش پرداخت واریزی توسط خریدار به عنوان ضمانت اجرای رای داور نزد اینکوباک نگهداری می گردد.
-                            </span><br/><br/>
-                        </p>
-                        <p id="step1S6" v-if="pageStep == 6">
-                            <span><b>ماده 6. تعهدات اینکوباک</b></span><br/><br/>
-                            <span>بر اساس این قرارداد اینکوباک متعهد به انجام امور ذیل می باشد. </span><br/><br/>
-                            <span>6-1 اینکوباک بخشی از سایت اینترنتی خود به نام incobac.com را برای معرفی و ارائه کالا های فروشنده اختصاص می دهد و آموزش های لازم را به فروشنده جهت بروز رسانی لیست کالاها، موجودی آنها و درج قیمت ارائه خواهد داد به نحوی که تغییراتی که در اثر فروش کالا در مقدار کالا ایجاد می گردد و همچنین مشخصات سفارش در هر لحظه برای فروشنده از طریق الکترونیکی قابل مشاهده خواهد بود. همچنین اینکوباک بخشی از سایت اینترنتی خود به نام incobac.com  را جهت ارائه سفارشات خریدار اختصاص می دهد و آموزش های لازم را به خریدار در این خصوص ارائه خواهد داد.
-                            </span><br/><br/>
-                            <span>6-2 اینکوباک خدمات بازرسی محصولات را از طریق ارائه کارشناس کیفیت محصول قبل از بارگیری کالا ارائه می نماید، بدین شرح که لیست آیتم ها و اوصاف و شرایطی که بایستی توسط بازرس اینکوباک مورد بررسی قرار گیرد به صورت احصایی و متناسب با هر معامله در قرارداد مربوط به آن معامله قید می‌گردد.</span><br/><br/>
-                            <span>6-3 اینکوباک نسبت به تطابق اوصاف ذکر شده در بند فوق مشترکاً همراه با فروشنده مطابق بند 4-6 مسئول می باشد و نسبت به سایر اوصاف و شرایط هیچ گونه مسئولیتی نداشته و چنانچه خسارتی حادث گردد فروشنده مسئول می باشد.</span><br/><br/>
-                            <span>6-4 اینکوباک موظف به مدیریت و انتخاب فضا و ظاهر وب سایت می باشد.</span><br/><br/>
-                            <span>6-5 اینکوباک متعهد می گردد جهت مدیریت موجودی و بهای کالا در سایت اینکوباک پنل نرم افزاری seller center را در اختیار فروشنده قرار دهد و همچنین آموزش های مربوطه را به فروشنده ارائه نماید .
-                            </span><br/><br/>
-                            <span>6-6 اینکوباک در خصوص حمل و نقل و بیمه کالای مورد معامله هیچ گونه مسئولیت و تعهدی ندارد. </span><br/><br/>
-                            <span><b>ماده 7. کمیسیون دریافتی از فروشنده</b></span><br/><br/>
-                            <span>7-1 کمیسیون اینکوباک معادل ریالی و درصدی معین از مبلغ کل معامله طبق پیوست قرارداد می باشد. کمیسیون پیش از احتساب مالیات بر ارزش افزوده کالا محاسبه می گردد.
-                            </span><br/><br/>
-                            <span>7-2 مبلغ کمیسیون اینکوباک مشمول قانون مالیات بر ارزش افزوده می باشد که مبلغ آن به صورت حساب های اضافه واریز شده و دریافت می گردد.</span><br/><br/>
-                        </p>
-                        <p id="step1S7" v-if="pageStep == 7">
-                            <span>7-3 مفروض است که کلیه قیمتهای ارائه شده توسط فروشنده بر روی وب‌سایت اینکوباک شامل مالیات بر ارزش افزوده بوده (در صورت عدم معافیت کالا) که مبلغ آن توسط خریدار نهایی پرداخت می گردد. بدیهی است اینکوباک هیچ گونه مسئولیتی در قبال مالیات بر ارزش افزوده کالای فروش رفته نداشته و فروشنده مستقیما مسئول ثبت و پرداخت مالیات بر ارزش افزوده کالای فروش رفته به سازمان امور مالیاتی کشور می باشد.
-                            </span><br/><br/>
-                            <span>7-4 مسئولیت دریافت وجه سفارشات از خریداران بر عهده اینکوباک می باشد.</span><br/><br/>
-                            <span>7-5 اینکوباک حداکثر تا هفت روز کاری بهای محصولات فروش رفته را (به غیر از سفارشات عودت داده شده یا سفارشات مورد شکایت و در حال بررسی) که از خریدار دریافت کرده پس از کسر کمیسیون و سایر هزینه ها و مبالغ ذکر شده در قرارداد و پس از محاسبه به فروشنده پرداخت خواهد نمود.
-                            </span><br/><br/>
-                            <span>تبصره - منظور از روز کاری هر روز هفته به استثنای جمعه و تعطیلات رسمی جمهوری اسلامی ایران از ساعت 8 الی 17 می باشد.</span><br/><br/>
-                            <span><b>ماده 8. حق الزحمه دریافتی از خریدار</b></span><br/><br/>
-                            <span>8-1حق الزحمه اینکوباک معادل ریالی و درصدی معین از مبلغ کل معامله طبق فاکتورهای قرارداد می باشد. حق الزحمه پیش از احتساب مالیات بر ارزش افزوده کالا محاسبه می گردد.
-                            </span><br/><br/>
-                            <span>8-2 مسئولیت دریافت وجه سفارشات از خریداران بر عهده اینکوباک می باشد.
-                            </span><br/><br/>
-                            <span>8-3 اینکوباک حداکثر تا هفت روز کاری بهای محصولات فروش رفته را (به غیر از سفارشات عودت داده شده یا سفارشات مورد شکایت و بررسی) که از خریدار دریافت کرده پس از کسر کمیسیون و سایر هزینه ها و مبالغ ذکر شده در قرارداد و پس از محاسبه به فروشنده پرداخت خواهد نمود.
-                            </span>تبصره - منظور از روز کاری هر روز هفته به استثنای جمعه و تعطیلات رسمی جمهوری اسلامی ایران از ساعت 8 الی 17 می باشد.
-                            <br/><br/>
-                            <span><b>ماده 9. مدت و تمدید قرارداد</b></span><br/><br/>
-                        </p>
-                        <p id="step1S8" v-if="pageStep == 8">
-                            <span>9-1 این قرارداد از تاریخ تایید الکترونیکی  به مدت ده روز تقویمی اعتبار دارد و در موارد فورس ماژور به مدت آن اضافه میگردد.
-                            </span><br/><br/>
-                            <span>9-2 پس از خاتمه قرارداد، تمدید قرارداد و ادامه همکاری طرفین و نحوه و شرایط آن نیاز به توافق مجدد طرفین قرارداد دارد.</span><br/><br/>
-                            <span>9-3 تاریخ موثر شدن و شروع قرارداد از تاریخ تایید الکترونیکی قرارداد توسط خریدار و فروشنده می باشد.
-                                بود.</span><br/><br/>
-                            <span><b>ماده 10. فسخ قرارداد</b></span><br/><br/>
-                            <span>10-1 چنانچه معامله میان خریدار و فروشنده به عللی از علل قانونی منجر به فسخ گردد، اینکوباک مستحق دریافت کمیسیون مقرر برای آن معامله می باشد.
-                            </span><br/><br/>
-                            <span><b>ماده 11. خسارات قراردادی</b></span><br/><br/>
-                            <span>علاوه بر ضمانت اجرا های پیش بینی شده نسبت به برخی از تعهدات طرفین این قرارداد، چنانچه نسبت به سایر تعهدات موضوع این قرارداد هر یک از طرفین تخلفی از انجام تعهد خویش داشته باشد و در نتیجه این تخلف ضرری به منافع طرف مقابل وارد شود، طرف متخلف و مقصر، متعهد به پرداخت خسارت به طرف مقابل می باشد که مطالبه خسارت و تعیین میزان آن در مرجع داوری این قرارداد به عمل می آید.</span><br/><br/>
-                            <span><b>ماده 12. مشترکات</b></span><br/><br/>
-                            <span>12-1 خریدار و فروشنده اعلام می دارند کلیه تاییدیه ها و قبول الکترونیکی به منزله تایید و قبول حضوری و شخصی می باشد و به استناد آن تعهدات انجام می پذیرد.</span><br/><br/>
-                            <span>12-2 طرفین قرارداد اعلام می دارند این قرارداد هرگونه توافق یا ترتیبات شفاهی یا کتبی مغایر با قرارداد حاضر را که ممکن است در گذشته بین طرفین واقع شده باشد نسخ می نماید.</span><br/><br/>
-                        </p>
-                        <p id="step1S9" v-if="pageStep == 9">
-                            <span>12-3 هیچ یک از مواد یا مفاد قرارداد حاضر به معنای شراکت یا وجود رابطه کارگر و کارفرمایی فی‌مابین فروشنده و اینکوباک و نیز خریدار و اینکوباک نبوده و نخواهد بود.</span><br/><br/>
-                            <span>12-4 هیچ گونه تغییری در این توافقنامه معتبر نیست مگر با توافق کتبی یا الکترونیکی طرفین قرارداد.</span><br/><br/>
-                            <span>12-5 خریدار و فروشنده اعلام می دارند مالکیت نرم افزار seller center متعلق به اینکوباک است.</span><br/><br/>
-                            <span><b>ماده 13. حقوق مالکیت فکری</b></span><br/><br/>
-                            <span>13-1 مالکیت سورس کدها و پلتفرم اینکوباک متعلق به اینکوباک می باشد و طرف دوم و سوم صرفاً اجازه بهره برداری از این پلتفرم را مطابق مفاد این قرارداد و سطح دسترسی اجازه داده شده توسط این قرارداد دارا می باشد. </span><br/><br/>
-                            <span>13-2 مالکیت داده های تحصیل شده از طریق پلتفرم اینکوباک، تحلیل این داده ها، فروش نتایج تحلیل داده و استفاده پژوهشی و هرگونه استفاده دیگر از آنها با رعایت محرمانگی و عدم افشای اسرار صرفاً به اینکوباک تعلق داشته و طرف دوم و سوم هیچگونه حقی در این زمینه نخواهد داشت.</span><br/><br/>
-                            <span><b>ماده 14. محرمانگی و عدم افشای اسرار</b></span><br/><br/>
-                            <span>14-1 اطلاعات مربوط به این قرارداد، اسرار محرمانه تلقی می گردد لذا طرفین تضمین خواهند نمود که خود و اشخاص مرتبط با آنان و اشخاص ذیربط آنها در تمام مدت این قرارداد و در مدت 5 سال پس از اتمام آن اقدامات معمول جهت محرمانه نگاه داشتن تمام اطلاعات محرمانه ای که وی یا آنان ممکن است در ارتباط با هر کدام از طرف دیگر به دست آورند را اتخاذ نموده و جز در راستای مقاصد قراردادی از چنین اطلاعاتی استفاده نخواهند کرد و آنها را افشا نخواهند نمود.</span>
-
-                        </p>
-                        <p id="step1S10" v-if="pageStep == 10">
-                            <span>14-2 طرفین باید تضمین نمایند که هر کدام از کارکنان، ماموران، مدیران عامل آنان یا اشخاص مرتبط با آنها که به موجب این قرارداد به اطلاعات محرمانه دسترسی دارند از طبیعت محرمانه این اطلاعات مطلع هستند و لازم است تا از شروط طرفین قرارداد پیروی نمایند بنابراین طرفی که اطلاعات را دریافت می نماید مسئول است که تضمین نماید تعهد رعایت محرمانگی و عدم استفاده مندرج در این ماده را به دقت رعایت می‌کند و در مقابل فعل یا ترک فعل کارکنان نمایندگان یا عوامل خود کاملا مسئول فرض می گردد.</span><br/><br/>
-                            <span></span><br/><br/>
-                            <span>تبصره - اطلاعاتی که در اختیار عموم قرار دارند جزو اطلاعات محرمانه محسوب نمی گردد.</span><br/><br/>
-                            <span><b>ماده 15. فورس ماژور</b></span><br/><br/>
-                            <span>15-1 منظور از فورس ماژور در این قرارداد هرگونه حادثه و پیشامد غیرقابل پیش بینی، غیر قابل دفع و خارج از اراده و کنترل طرفها است. اعم از جنگ، بلایای طبیعی، آتش‌سوزی، اعتصاب ، تغییر قوانین و مقررات یا تعطیلی ادارات و نهادهای دولتی برای مدت بیش از یک هفته که به واسطه آن طرفی که در چنین شرایطی قرار گرفته است نمی تواند تمام یا بخشی از تعهدات خود، موضوع این قرارداد یاد قوانین مرتبط را ایفا نماید.</span><br/><br/>
-                            <span>15-2 متعهد در صورتی از ایفای تعهدات در اثر فورس ماژور معاف می گردد که حداکثر تا یک روز پس از اطلاع از چنین وضعیتی مراتب را به اطلاع طرف دیگر رسانیده باشد.</span><br/><br/>
-                            <span><b>ماده 16. ابلاغات</b></span><br/><br/>
-                            <span>هرگونه اطلاعیه یا ابلاغیه ای که قرار باشد طبق این قرارداد ابلاغ و تحویل گردد بایستی از طریق وبسایت اینکوباک یا بصورت تلفنی انجام پذیرد و خطاب به طرف مرتبط صورت گیرد و تصریح شود که اطلاعیه یا مکاتبه موضوع این قرارداد است. طرفها می توانند به وسیله اطلاعیه نشانی خود را تغییر دهند تا تمام اطلاعیه های آتی برای آنان به نشانی جدید ارسال گردد.</span><br/><br/>
-                        </p>
-
-                        <p id="step1S11" v-if="pageStep == 11">
-                            <span><b>ماده 17. حل و فصل اختلافات و داوری</b></span><br/><br/>
-                            <span>کلیه اختلافات و دعاوی ناشی از این قرارداد و یا راجع به آن از جمله انعقاد، اعتبار، فسخ، تفسیر یا اجرای آن به مرکز داوری اتاق بازرگانی صنایع معادن و کشاورزی شیراز ارجاع می گردد. که مطابق با قانون اساسنامه و آیین داوری آن مرکز با رای یک یا سه نفر داور به صورت قطعی و لازم الاجرا حل و فصل می گردد. داور/ان علاوه بر مقررات حاکم عرف تجارتی ذیربط را نیز مراعات خواهند نمود. شرط داوری حاضر موافقت نامه مستقل از قرارداد اصلی تلقی می‌شود و در هر حال لازم الاجرا است.</span><br/><br/>
-                            <span><b>ماده 18. نسخ قرارداد</b></span><br/><br/>
-                            <span>قرارداد حاضر در18ماده و پیوست های آن (اجزای لاینفک قرارداد) در یک نسخه الکترونیکی تهیه و تنظیم گردیده است و در راستای تایید مفاد آن به تایید الکترونیکی طرف دوم و سوم (که به منزله قبول و تایید و امضای حضوری وی می باشد) رسید.</span><br/><br/>
-                            <span>بنا به مراتب فوق طرفهای قرارداد حاضر را از تاریخ درج شده در آن اجرایی نمودند. تمام</span><br/><br/>
-                        </p>
-                        <p id="step1S12" v-if="pageStep == 12">
-                            <span><b>الحاقیه</b></span><br/><br/>
-                            <span><b>مهلت بارگیری محصول تا تاریخ <span class="text-danger">{{transactionInfo.loading_dead_line}}</span> خواهد بود.</b></span><br/><br/>
-                            <span><b>توضیحات تکمیلی</b></span><br/><br/>
-                            <span>{{transactionInfo.admin_notes}}</span><br/><br/>
-                        </p>
-                    </div>
-                </div>
-                <div class="alert-message" v-else>
-                    {{msg}}
-                </div>
+  <div>
+    <section class="main-content col-xs-12" v-if="transactionInfo">
+      <!--part 1-->
+      <div id="step1" v-if="currentStep == 1">
+        <nav class="main-content-nav col-xs-12">
+          <ul class="list-inline">
+            <li class="list-item">نظر سنجی</li>
+            <li class="list-item">تسویه حساب</li>
+            <li class="list-item">پرداخت ودیعه</li>
+            <li class="list-item active">تایید مفاد قرارداد</li>
+          </ul>
+        </nav>
+        <div class="contents col-xs-12" v-if="msg == ''">
+          <div class="content-show">
+            <div class="buttons">
+              <div class="main_buttons col-xs-12 col-sm-8 col-md-9">
+                <a href="#" class="default_btn" @click.prevent="goToNextPage()">صفحه بعد</a>
+                <a href="#" class="default_btn" @click.prevent="goToPrePage()">صفحه قبل</a>
+              </div>
+              <div class="continue_but col-xs-12 col-sm-4 col-md-3">
+                <a href="#" @click.prevent="confirmContract()" class="green-button">تایید قرارداد</a>
+              </div>
             </div>
+            <h2>قرارداد همکاری در خرید و فروش</h2>
+            <p id="step1S1" v-if="pageStep == 1">
+              <span>با هدف تنظیم روابط طرف های قرارداد، قرارداد حاضر ذیل ماده ۱۰ قانون مدنی و به نحو لازم و با حاکم قرار دادن اصل حسن نیت بین طرفین منعقد می گردد.</span>
+              <br />
+              <br />
 
-            <!--end part 1-->
+              <span>
+                <b>ماده 1 :طرفین قرارداد</b>
+              </span>
+              <br />
+              <br />
 
+              <span>1-1 طرف اول: شرکت سهامی خاص فناوران توسعه تجارت ارم به شماره ثبت 49233 که از این پس باسکول نامیده میشود.</span>
+              <br />
+              <span>1-2 طرف دوم (فروشنده): هر شخص حقیقی یا حقوقی به نام {{sellerUserInfo.first_name + ' ' + sellerUserInfo.last_name}} و شناسه ملی /کد ملی {{sellerUserInfo.national_code}} که از این به بعد فروشنده نامیده می شود.</span>
+              <br />
+              <br />
+              <span>1-3 طرف سوم (خریدار): هر شخص حقیقی یا حقوقی به نام {{buyerUserInfo.first_name + ' ' + buyerUserInfo.last_name}} و شناسه ملی /کد ملی {{buyerUserInfo.national_code}} که از این به بعد خریدار نامیده می شود.</span>
+              <br />
+              <br />
+              <span>
+                <b>ماده 2 :موضوع قرارداد</b>
+              </span>
+              <br />
+              <br />
+              <span>2-1 تنظیم همکاری و روابط قراردادی طرفین در خصوص همکاری باسکول با خریدار و فروشنده جهت خرید و فروش کالا و محصولات فروشنده از طریق ارائه این محصولات در وبسایت ایجاد شده توسط باسکول به نشانی buskool.com. بدیهی است با توجه به اینکه مالکیت محصولات ارائه شده در سایت متعلق به باسکول نبوده و باسکول صرفاً ارائه دهنده بستر اینترنتی جهت فروش محصولات فوق می باشد لذا مسئولیت کلیه اوصاف محصول اعم از نوع، بسته بندی، قیمت و هرگونه اطلاعات ذکر شده در رابطه با محصول بر عهده فروشنده است.</span>
+              <br />
+              <br />
+              <span>2-2 باسکول بر اساس اطلاعات ذکر شده در سایت اقدام به صدور فاکتور برای خریدار می نماید که این فاکتور در اختیار خریدار قرار می گیرد و مبنای رسیدگی به کلیه اختلافات حاصله قرارداد حاضر و فاکتور مذکور می باشد.</span>
+              <br />
+              <br />
+              <span>2-3 با توجه به شرایط خاص هر معامله، هزینه های مربوط به حمل و نقل و بیمه کالاهای مورد معامله ممکن است بر عهده خریدار یا فروشنده قرار گیرد که این امر در قرارداد حاضر قید و مورد تایید طرف متعهد قرار می گیرد در هر صورت باسکول نسبت به هزینه های فوق الذکر از خود سلب مسئولیت می‌نماید.</span>
+              <br />
+              <br />
 
-            <!--part 2-->
+              <span>
+                <b>ماده 3 :مکانیسم اجرایی عملیات خرید و فروش</b>
+              </span>
+              <br />
+              <br />
+              <span>3-1 خریدار و فروشنده با پذیرش قرارداد حاضر می توانند از بستر اینترنتی ارائه شده توسط طرف اول (پلتفرم باسکول) جهت سفارش و ارائه محصولات استفاده نمایند.</span>
+              <br />
+            </p>
+            <p id="step1S2" v-if="pageStep == 2">
+              <span>3-2 خریدار درخواست خود را از طریق سفارش کالا به صورت الکترونیکی برای باسکول ارسال و باسکول تقاضای خرید خریدار را از طریق ایمیل یا seller center به فروشندگان مرتبط اعلام می نماید.</span>
+              <br />
+              <br />
+              <span>3-3 چنانچه فروشنده قادر به تامین سفارش خریدار باشد پاسخ خود را با ذکر اوصاف و پیوست تصاویر محصولات، برای خریدار ارسال می نماید.</span>
+              <br />
+              <br />
+              <span>3-4 چنانچه خریدار پیشنهاد فروشنده را در پنل کاربری خویش پذیرفت، اپراتور های باسکول اقدام به برقراری تماس تلفنی و انجام هماهنگی های نهایی با خریدار و فروشنده نموده و در صورت حصول توافق، متن قرارداد را برای خریدار و فروشنده ارسال می نمایند که ملاک زمانی انعقاد قراداد، زمان تایید الکترونیکی متن قرارداد ارسالی برای طرفین ( خریدار و فروشنده) می باشد.</span>
+              <br />
+              <br />
+              <span>3-5 پس از تایید قرارداد توسط خریدار و فروشنده، فاکتور پیش پرداخت توسط باسکول برای خریدار صادر گردیده و خریدار بایستی ظرف مدت یک روز نسبت به پرداخت آن اقدام نماید.</span>
+              <br />
+              <br />
+              <span>3-6 در صورت تادیه پیش پرداخت توسط خریدار، فروشنده بایستی ظرف مهلتی که در قرارداد حاضر قید می گردد کالای سفارش داده شده را تهیه و جهت ارسال به متصدی حمل و نقل تسلیم نماید. بدیهی است که کلیه مسؤلیت های ناشی از تامین سفارش و همچنین تحویل کالا به متصدی حمل و نقل قانونی بر عهده فروشنده می باشد.</span>
+              <br />
+              <br />
+              <span>3-7 قبل از تسلیم کالا به متصدی حمل و نقل و انجام عملیات بارگیری، بازرس باسکول در محل بارگیری حضور می یابد و کالای سفارش داده شده را از جهت انطباق با مفاد قرارداد حاضر مورد بررسی قرار می دهد. (تعیین موارد و اوصافی که در هر سفارش بایستی توسط بازرس باسکول مورد بررسی و تایید قرار گیرد به پیوست قرارداد حاضر در اختیار خریدار و فروشنده قرار خواهد گرفت). بدیهی است که بازرس باسکول صرفاً نسبت به بررسی این اوصاف مسئولیت داشته و سایر اوصاف و موارد از حیطه مسئولیت بازرس باسکول خارج می باشد.</span>
+              <br />
+              <br />
+              <span>
+                3-8 در صورت تأیید محصولات توسط بازرس و بارگیری، این امر بصورت سیستمی در سامانه باسکول به اطلاع خریدار رسیده و فاکتور نهایی قرارداد توسط باسکول صادر می گردد و خریدار بایستی ظرف مدت 2 ساعت از اتمام بارگیری نسبت به تسویه مبلغ باقی مانده قراداد اقدام نماید و حداکثر تا یک هفته از پایان تراکنش، باسکول پس از کسر کمیسیون خود از معامله، ثمن معامله را به حساب فروشنده واریز خواهد کرد.
+                .
+              </span>
+              <br />
+              <br />
+            </p>
+            <p id="step1S3" v-if="pageStep == 3">
+              <span>3-9 بدیهی است با توجه به عدم مالکیت باسکول بر محصولات ارائه شده در بستر اینترنتی، فروش کالا به خریدار توسط فروشنده انجام می پذیرد و باسکول صرفا زیرساخت انجام فروش را فراهم می نماید لذا در صورت صدور فاکتور در وجه باسکول و اظهار نمودن آن در گزارشات مالیاتی مراتب مورد تایید این شرکت نبوده و همچنین این شرکت هیچگونه مسئولیتی بر عهده نخواهد داشت و مسئولیت خسارت وارده احتمالی بر عهده متخلف از این بند خواهد بود.</span>
+              <br />
+              <br />
+              <span>
+                <b>ماده4. تعهدات و تضمینات فروشنده</b>
+              </span>
+              <br />
+              <br />
+              <span>بر اساس شرایط این قرارداد فروشنده موظف به انجام امور ذیل می باشد.</span>
+              <br />
+              <br />
+              <span>4-1 مسئولیت تعیین و درج قیمت کالا، تولید و درج اطلاعات محصول اعم از کلیه اطلاعات کمی و کیفی محصول و به‌ روزرسانی میزان موجودی محصول در وبسایت باسکول بر عهده فروشنده می باشد. قیمت‌های مندرج بر روی وبسایت باسکول می‌بایست رقابتی و حداقل برابر با قیمت کالاهای همانند در سایر فروشگاه ها اعم از اینترنتی و غیر اینترنتی باشد.</span>
+              <br />
+              <br />
+              <span>تبصره - باسکول زیرساخت و ابزار ساخت محتوا را به صورت رایگان در اختیار فروشندگان قرار می دهد.</span>
+              <br />
+              <br />
+              <span>4-2 فروشنده تضمین می‌نماید که تمامی کالاهای تحویلی به خریدار مطابق قوانین جمهوری اسلامی ایران تولید شده و یا از مبادی رسمی کشور وارد گردیده است. همچنین کالاها سالم و مطابق با توصیفات اعلام شده از کلیه ابعاد کمی و کیفی می باشد و چنانچه در هر مرحله از عملیات فروش خلاف موارد فوق اثبات گردید، باسکول می تواند راسا نسبت به لغو سفارش اقدام نماید و چنانچه در این خصوص خسارتی به باسکول یا خریدار وارد گردد فروشنده متعهد به جبران خسارت خواهد بود.</span>
+              <br />
+              <br />
+              <span>4-3 فروشنده اعلام می دارد که مالک کالا بوده و کالا معارض ندارد و حقوق مالکیت صنعتی و تجاری در صورت وجود، مالکیت معنوی و سایر حقوق قانونی و عرفی کالا متعلق به اوست یا حق بهره برداری از این حقوق و عرضه کالای مربوطه را دارد و مطابق قوانین جمهوری اسلامی ایران مجاز به فعالیت میباشد و چنانچه در هر مرحله از عملیات فروش خلاف موارد فوق اثبات گردید، باسکول می تواند راساٌ نسبت به لغو سفارش اقدام نماید و چنانچه در این خصوص خسارتی به باسکول یا خریدار وارد گردد فروشنده متعهد به جبران خسارت خواهد بود.</span>
+              <br />
+              <br />
+            </p>
+            <p id="step1S4" v-if="pageStep == 4">
+              <span>4-4 فروشنده تعهد می‌نماید که در صورت اعمال هرگونه تغییر در اطلاعات کالا اعم از نوع، بهای کالا، عدم موجودی کالا، توقف تولید یا عرضه محصول و همچنین تخفیف‌های ارائه شده به سایر خریداران ظرف مدت یک روز اطلاعات کالا را در سامانه باسکول به روز نماید در غیر این صورت مسئولیت کلیه خسارات وارده به باسکول و خریدار بر عهده فروشنده است.</span>
+              <br />
+              <br />
+              <span>4-5 فروشنده موظف است در زمان تعیین شده در قرارداد حاضر، کالای سفارش داده شده را تامین نماید و در زمان مشخص شده کالای سفارش داده شده را جهت تحویل به خریدار به متصدی حمل و نقل قانونی تحویل نماید. در صورت عدم تامین کالا و یا تامین ناقص در مدت زمان تعهد شده، فروشنده بایستی به ازای هر روز تاخیر 2 درصد از مبلغ کل معامله را به عنوان جریمه تاخیر در تاًمین به باسکول پرداخت نماید. و چنانچه عدم تاًمین کالا و یا تامین ناقص بیش از 2 روز تقویمی به طول بیانجامد باسکول می تواند راساً نسبت به لغو معامله اقدام نماید، که در این حالت فروشنده موظف به پرداخت 9 درصد از مبلغ کل معامله به عنوان جریمه عدم تاًمین به باسکول میباشد و همچنین مسئول کلیه خسارات ناشی از عدم تاًمین و یا تامین ناقص کالا که برای باسکول یا خریدار ایجاد گردد می باشد.</span>
+              <br />
+              <br />
+              <span>4-6 فروشنده تضمین می نماید که کلیه اوصاف کمی و کیفی محصولات تامین شده کاملا مطابق با اظهارات درج شده توسط ایشان در سامانه باسکول می باشد که تمامی این اظهارات در قرارداد حاضر منعکس می گردد. با توجه به تعبیه نظام بازرسی توسط باسکول قبل از ارسال کالا و تحویل به متصدی حمل و نقل چنانچه عدم تطابق محموله با اطلاعات مندرج در سایت، مربوط به امور و اوصافی باشد که بایستی توسط بازرس باسکول بررسی گردد (شرح دقیق این اوصاف متناسب با هر معامله و به‌صورت احصایی در قرارداد مربوط به آن معامله قید میگردد) باسکول و فروشنده مشترکاً در قبال خریدار مسئول می‌باشند که میزان مسئولیت هر یک بر اساس حدود قصور یا تقصیر آنها توسط مرجع داوری پیش بینی شده در قرارداد حاضر تعیین می گردد. در غیر اینصورت مسئولیت عدم تطابق کالا بر عهده فروشنده می باشد و چنانچه این امر منجر به ورود هر گونه خسارتی به باسکول یا خریدار گردد فروشنده متعهد به جبران خسارت خواهد بود.</span>
+              <br />
+              <br />
+              <span>تبصره - در صورتی که فروشنده نسبت به آماده کردن محصول اقدام کرده باشد ولی نتواند در موعد مقرر نسب به تحویل آن اقدام کند و یا در صورتی که محصول آماده شده توسط فروشنده فاقد استانداردهای تعیین شده از سمت خریدار باشد، تصمیم درباره ی لغو یا ادامه معامله، و یا خرید تمام و یا بخشی از محصولات و شرایط مربوط به آن بر عهده باسکول و خریدار می باشد.</span>
+              <br />
+              <br />
+            </p>
+            <p id="step1S5" v-if="pageStep == 5">
+              <span>4-7 مسئولیت تحویل کالای سفارش داده شده به متصدی حمل و نقل بر عهده ی فروشنده می باشد. فروشنده موظف است کالا را به شیوه صحیح بسته بندی و در شرایط استاندارد بارگیری به متصدی حمل و نقل قانونی تحویل داده و همچنین کالا را از طریق وسیله ی حمل و نقل دارای شرایط مناسب جهت حفظ سلامت کالا برای خریدار ارسال نماید مگر آنکه متصدی حمل و نقل توسط خریدار تعیین گردد که در این صورت فروشنده صرفا نسبت به انتخاب وسیله و متصدی حمل و نقل مسئولیتی ندارد. چنانچه از جهت عدم رعایت این بند خسارتی حاصل گردد فروشنده مسئول جبران کلیه ی خسارات ایجاد شده می باشد.</span>
+              <br />
+              <br />
+              <span>تبصره - چنانچه در طی حمل کالا خسارتی برای محموله ایجاد گردد موجب مسئولیت متصدی حمل و نقل طبق مقررات مربوطه در این زمینه می باشد.</span>
+              <br />
+              <br />
+              <span>تبصره – مسئولیت و هزینه های مربوط به حمل و نقل و بیمه محموله ارسالی بر حسب مورد بر عهده خریدار و یا فروشنده می باشد.</span>
+              <br />
+              <br />
+              <span>تبصره- چنانچه در طی حمل کالا خسارتی برای محموله ایجاد گردد موجب مسئولیت متصدی حمل و نقل طبق مقررات مربوطه در این زمینه می باشد.</span>
+              <br />
+              <br />
+              <span>
+                <b>ماده 5. تعهدات خریدار</b>
+              </span>
+              <br />
+              <br />
+              <span>خریدار متعهد می باشد پس از تامین بار توسط فروشنده و تایید نهایی بازرس باسکول، نسبت به تسویه حساب و پرداخت مبلغ فاکتور نهایی قراداد، حداکثر ظرف مدت 2 ساعت اقدام نماید و چنانچه نسبت به تسویه حساب در زمان مقرر اقدام ننماید، مبلغ پانصد هزار تومان به انضمام 5 درصد از مبلغ کل معامله از پیش پرداخت واریزی توسط خریدار به عنوان جریمه لغو معامله کسر و مابقی مبلغ پیش پرداخت به وی مسترد می گردد. همچنین چنانچه در این خصوص خسارتی به باسکول یا فروشنده وارد گردد خریدار متعهد به جبران خسارت خواهد بود که مبلغ خسارت ایجاد شده به انضمام مبالغ جریمه فوق، از پیش پرداخت واریزی توسط خریدار کسر و مابقی به وی مسترد می گردد و تا تعیین تکلیف نهایی در خصوص خسارت مورد ادعا و اجرای رای قطعی مرکز داوری پیش بینی شده در قرارداد، پیش پرداخت واریزی توسط خریدار به عنوان ضمانت اجرای رای داور نزد باسکول نگهداری می گردد.</span>
+              <br />
+              <br />
+            </p>
+            <p id="step1S6" v-if="pageStep == 6">
+              <span>
+                <b>ماده 6. تعهدات باسکول</b>
+              </span>
+              <br />
+              <br />
+              <span>بر اساس این قرارداد باسکول متعهد به انجام امور ذیل می باشد.</span>
+              <br />
+              <br />
+              <span>6-1 باسکول بخشی از سایت اینترنتی خود به نام buskool.com را برای معرفی و ارائه کالا های فروشنده اختصاص می دهد و آموزش های لازم را به فروشنده جهت بروز رسانی لیست کالاها، موجودی آنها و درج قیمت ارائه خواهد داد به نحوی که تغییراتی که در اثر فروش کالا در مقدار کالا ایجاد می گردد و همچنین مشخصات سفارش در هر لحظه برای فروشنده از طریق الکترونیکی قابل مشاهده خواهد بود. همچنین باسکول بخشی از سایت اینترنتی خود به نام buskool.com را جهت ارائه سفارشات خریدار اختصاص می دهد و آموزش های لازم را به خریدار در این خصوص ارائه خواهد داد.</span>
+              <br />
+              <br />
+              <span>6-2 باسکول خدمات بازرسی محصولات را از طریق ارائه کارشناس کیفیت محصول قبل از بارگیری کالا ارائه می نماید، بدین شرح که لیست آیتم ها و اوصاف و شرایطی که بایستی توسط بازرس باسکول مورد بررسی قرار گیرد به صورت احصایی و متناسب با هر معامله در قرارداد مربوط به آن معامله قید می‌گردد.</span>
+              <br />
+              <br />
+              <span>6-3 باسکول نسبت به تطابق اوصاف ذکر شده در بند فوق مشترکاً همراه با فروشنده مطابق بند 4-6 مسئول می باشد و نسبت به سایر اوصاف و شرایط هیچ گونه مسئولیتی نداشته و چنانچه خسارتی حادث گردد فروشنده مسئول می باشد.</span>
+              <br />
+              <br />
+              <span>6-4 باسکول موظف به مدیریت و انتخاب فضا و ظاهر وب سایت می باشد.</span>
+              <br />
+              <br />
+              <span>6-5 باسکول متعهد می گردد جهت مدیریت موجودی و بهای کالا در سایت باسکول پنل نرم افزاری seller center را در اختیار فروشنده قرار دهد و همچنین آموزش های مربوطه را به فروشنده ارائه نماید .</span>
+              <br />
+              <br />
+              <span>6-6 باسکول در خصوص حمل و نقل و بیمه کالای مورد معامله هیچ گونه مسئولیت و تعهدی ندارد.</span>
+              <br />
+              <br />
+              <span>
+                <b>ماده 7. کمیسیون دریافتی از فروشنده</b>
+              </span>
+              <br />
+              <br />
+              <span>7-1 کمیسیون باسکول معادل ریالی و درصدی معین از مبلغ کل معامله طبق پیوست قرارداد می باشد. کمیسیون پیش از احتساب مالیات بر ارزش افزوده کالا محاسبه می گردد.</span>
+              <br />
+              <br />
+              <span>7-2 مبلغ کمیسیون باسکول مشمول قانون مالیات بر ارزش افزوده می باشد که مبلغ آن به صورت حساب های اضافه واریز شده و دریافت می گردد.</span>
+              <br />
+              <br />
+            </p>
+            <p id="step1S7" v-if="pageStep == 7">
+              <span>7-3 مفروض است که کلیه قیمتهای ارائه شده توسط فروشنده بر روی وب‌سایت باسکول شامل مالیات بر ارزش افزوده بوده (در صورت عدم معافیت کالا) که مبلغ آن توسط خریدار نهایی پرداخت می گردد. بدیهی است باسکول هیچ گونه مسئولیتی در قبال مالیات بر ارزش افزوده کالای فروش رفته نداشته و فروشنده مستقیما مسئول ثبت و پرداخت مالیات بر ارزش افزوده کالای فروش رفته به سازمان امور مالیاتی کشور می باشد.</span>
+              <br />
+              <br />
+              <span>7-4 مسئولیت دریافت وجه سفارشات از خریداران بر عهده باسکول می باشد.</span>
+              <br />
+              <br />
+              <span>7-5 باسکول حداکثر تا هفت روز کاری بهای محصولات فروش رفته را (به غیر از سفارشات عودت داده شده یا سفارشات مورد شکایت و در حال بررسی) که از خریدار دریافت کرده پس از کسر کمیسیون و سایر هزینه ها و مبالغ ذکر شده در قرارداد و پس از محاسبه به فروشنده پرداخت خواهد نمود.</span>
+              <br />
+              <br />
+              <span>تبصره - منظور از روز کاری هر روز هفته به استثنای جمعه و تعطیلات رسمی جمهوری اسلامی ایران از ساعت 8 الی 17 می باشد.</span>
+              <br />
+              <br />
+              <span>
+                <b>ماده 8. حق الزحمه دریافتی از خریدار</b>
+              </span>
+              <br />
+              <br />
+              <span>8-1حق الزحمه باسکول معادل ریالی و درصدی معین از مبلغ کل معامله طبق فاکتورهای قرارداد می باشد. حق الزحمه پیش از احتساب مالیات بر ارزش افزوده کالا محاسبه می گردد.</span>
+              <br />
+              <br />
+              <span>8-2 مسئولیت دریافت وجه سفارشات از خریداران بر عهده باسکول می باشد.</span>
+              <br />
+              <br />
+              <span>8-3 باسکول حداکثر تا هفت روز کاری بهای محصولات فروش رفته را (به غیر از سفارشات عودت داده شده یا سفارشات مورد شکایت و بررسی) که از خریدار دریافت کرده پس از کسر کمیسیون و سایر هزینه ها و مبالغ ذکر شده در قرارداد و پس از محاسبه به فروشنده پرداخت خواهد نمود.</span>تبصره - منظور از روز کاری هر روز هفته به استثنای جمعه و تعطیلات رسمی جمهوری اسلامی ایران از ساعت 8 الی 17 می باشد.
+              <br />
+              <br />
+              <span>
+                <b>ماده 9. مدت و تمدید قرارداد</b>
+              </span>
+              <br />
+              <br />
+            </p>
+            <p id="step1S8" v-if="pageStep == 8">
+              <span>9-1 این قرارداد از تاریخ تایید الکترونیکی به مدت ده روز تقویمی اعتبار دارد و در موارد فورس ماژور به مدت آن اضافه میگردد.</span>
+              <br />
+              <br />
+              <span>9-2 پس از خاتمه قرارداد، تمدید قرارداد و ادامه همکاری طرفین و نحوه و شرایط آن نیاز به توافق مجدد طرفین قرارداد دارد.</span>
+              <br />
+              <br />
+              <span>
+                9-3 تاریخ موثر شدن و شروع قرارداد از تاریخ تایید الکترونیکی قرارداد توسط خریدار و فروشنده می باشد.
+                بود.
+              </span>
+              <br />
+              <br />
+              <span>
+                <b>ماده 10. فسخ قرارداد</b>
+              </span>
+              <br />
+              <br />
+              <span>10-1 چنانچه معامله میان خریدار و فروشنده به عللی از علل قانونی منجر به فسخ گردد، باسکول مستحق دریافت کمیسیون مقرر برای آن معامله می باشد.</span>
+              <br />
+              <br />
+              <span>
+                <b>ماده 11. خسارات قراردادی</b>
+              </span>
+              <br />
+              <br />
+              <span>علاوه بر ضمانت اجرا های پیش بینی شده نسبت به برخی از تعهدات طرفین این قرارداد، چنانچه نسبت به سایر تعهدات موضوع این قرارداد هر یک از طرفین تخلفی از انجام تعهد خویش داشته باشد و در نتیجه این تخلف ضرری به منافع طرف مقابل وارد شود، طرف متخلف و مقصر، متعهد به پرداخت خسارت به طرف مقابل می باشد که مطالبه خسارت و تعیین میزان آن در مرجع داوری این قرارداد به عمل می آید.</span>
+              <br />
+              <br />
+              <span>
+                <b>ماده 12. مشترکات</b>
+              </span>
+              <br />
+              <br />
+              <span>12-1 خریدار و فروشنده اعلام می دارند کلیه تاییدیه ها و قبول الکترونیکی به منزله تایید و قبول حضوری و شخصی می باشد و به استناد آن تعهدات انجام می پذیرد.</span>
+              <br />
+              <br />
+              <span>12-2 طرفین قرارداد اعلام می دارند این قرارداد هرگونه توافق یا ترتیبات شفاهی یا کتبی مغایر با قرارداد حاضر را که ممکن است در گذشته بین طرفین واقع شده باشد نسخ می نماید.</span>
+              <br />
+              <br />
+            </p>
+            <p id="step1S9" v-if="pageStep == 9">
+              <span>12-3 هیچ یک از مواد یا مفاد قرارداد حاضر به معنای شراکت یا وجود رابطه کارگر و کارفرمایی فی‌مابین فروشنده و باسکول و نیز خریدار و باسکول نبوده و نخواهد بود.</span>
+              <br />
+              <br />
+              <span>12-4 هیچ گونه تغییری در این توافقنامه معتبر نیست مگر با توافق کتبی یا الکترونیکی طرفین قرارداد.</span>
+              <br />
+              <br />
+              <span>12-5 خریدار و فروشنده اعلام می دارند مالکیت نرم افزار seller center متعلق به باسکول است.</span>
+              <br />
+              <br />
+              <span>
+                <b>ماده 13. حقوق مالکیت فکری</b>
+              </span>
+              <br />
+              <br />
+              <span>13-1 مالکیت سورس کدها و پلتفرم باسکول متعلق به باسکول می باشد و طرف دوم و سوم صرفاً اجازه بهره برداری از این پلتفرم را مطابق مفاد این قرارداد و سطح دسترسی اجازه داده شده توسط این قرارداد دارا می باشد.</span>
+              <br />
+              <br />
+              <span>13-2 مالکیت داده های تحصیل شده از طریق پلتفرم باسکول، تحلیل این داده ها، فروش نتایج تحلیل داده و استفاده پژوهشی و هرگونه استفاده دیگر از آنها با رعایت محرمانگی و عدم افشای اسرار صرفاً به باسکول تعلق داشته و طرف دوم و سوم هیچگونه حقی در این زمینه نخواهد داشت.</span>
+              <br />
+              <br />
+              <span>
+                <b>ماده 14. محرمانگی و عدم افشای اسرار</b>
+              </span>
+              <br />
+              <br />
+              <span>14-1 اطلاعات مربوط به این قرارداد، اسرار محرمانه تلقی می گردد لذا طرفین تضمین خواهند نمود که خود و اشخاص مرتبط با آنان و اشخاص ذیربط آنها در تمام مدت این قرارداد و در مدت 5 سال پس از اتمام آن اقدامات معمول جهت محرمانه نگاه داشتن تمام اطلاعات محرمانه ای که وی یا آنان ممکن است در ارتباط با هر کدام از طرف دیگر به دست آورند را اتخاذ نموده و جز در راستای مقاصد قراردادی از چنین اطلاعاتی استفاده نخواهند کرد و آنها را افشا نخواهند نمود.</span>
+            </p>
+            <p id="step1S10" v-if="pageStep == 10">
+              <span>14-2 طرفین باید تضمین نمایند که هر کدام از کارکنان، ماموران، مدیران عامل آنان یا اشخاص مرتبط با آنها که به موجب این قرارداد به اطلاعات محرمانه دسترسی دارند از طبیعت محرمانه این اطلاعات مطلع هستند و لازم است تا از شروط طرفین قرارداد پیروی نمایند بنابراین طرفی که اطلاعات را دریافت می نماید مسئول است که تضمین نماید تعهد رعایت محرمانگی و عدم استفاده مندرج در این ماده را به دقت رعایت می‌کند و در مقابل فعل یا ترک فعل کارکنان نمایندگان یا عوامل خود کاملا مسئول فرض می گردد.</span>
+              <br />
+              <br />
+              <span></span>
+              <br />
+              <br />
+              <span>تبصره - اطلاعاتی که در اختیار عموم قرار دارند جزو اطلاعات محرمانه محسوب نمی گردد.</span>
+              <br />
+              <br />
+              <span>
+                <b>ماده 15. فورس ماژور</b>
+              </span>
+              <br />
+              <br />
+              <span>15-1 منظور از فورس ماژور در این قرارداد هرگونه حادثه و پیشامد غیرقابل پیش بینی، غیر قابل دفع و خارج از اراده و کنترل طرفها است. اعم از جنگ، بلایای طبیعی، آتش‌سوزی، اعتصاب ، تغییر قوانین و مقررات یا تعطیلی ادارات و نهادهای دولتی برای مدت بیش از یک هفته که به واسطه آن طرفی که در چنین شرایطی قرار گرفته است نمی تواند تمام یا بخشی از تعهدات خود، موضوع این قرارداد یاد قوانین مرتبط را ایفا نماید.</span>
+              <br />
+              <br />
+              <span>15-2 متعهد در صورتی از ایفای تعهدات در اثر فورس ماژور معاف می گردد که حداکثر تا یک روز پس از اطلاع از چنین وضعیتی مراتب را به اطلاع طرف دیگر رسانیده باشد.</span>
+              <br />
+              <br />
+              <span>
+                <b>ماده 16. ابلاغات</b>
+              </span>
+              <br />
+              <br />
+              <span>هرگونه اطلاعیه یا ابلاغیه ای که قرار باشد طبق این قرارداد ابلاغ و تحویل گردد بایستی از طریق وبسایت باسکول یا بصورت تلفنی انجام پذیرد و خطاب به طرف مرتبط صورت گیرد و تصریح شود که اطلاعیه یا مکاتبه موضوع این قرارداد است. طرفها می توانند به وسیله اطلاعیه نشانی خود را تغییر دهند تا تمام اطلاعیه های آتی برای آنان به نشانی جدید ارسال گردد.</span>
+              <br />
+              <br />
+            </p>
 
-            <div id="step2" v-if="currentStep == 2">
-                <nav class="main-content-nav col-xs-12">
-                    <ul class="list-inline">
-                        <li class="list-item">نظر سنجی</li>
-                        <li class="list-item "> تسویه حساب </li>
-                        <li class="list-item active"> پرداخت ودیعه</li>
-                        <li class="list-item ">تایید مفاد قرارداد </li>
-                    </ul>
-                </nav>
-                <div class="contents col-xs-12" >
-                    <div class="content-show" v-if="msg == ''">
-                        <div class="header-contents col-xs-12">
-                            <div class="title-contents col-xs-12 col-sm-4">
-                                فاکتور پرداخت نهایی
-                            </div>
-                            <div class="content col-xs-12 col-sm-8">
-                                <div class="col-xs-6">
-                                    شماره سریال: <span>{{transactionId}}</span>
-                                </div>
-                                <div class="col-xs-6">
-                                    تاریخ صدور: <span>{{transactionInfo.issue_date}}</span>
-                                </div>
-                            </div>
-
-
-                        </div>
-                        <div class="main-content-texts col-xs-12">
-                            <h2>
-                                عنوان: <span>{{transactionInfo.product_name}}</span>
-                            </h2>
-                            <div class="right-side-main-texts col-xs-12 col-sm-6">
-                                <table class="table table-striped ">
-                                    <tbody>
-                                    <tr>
-                                        <td>میزان درخواست:</td>
-                                        <td> {{transactionInfo.quantity}} کیلو گرم</td>
-                                    </tr>
-                                    <tr>
-                                        <td>مبلغ کل (تقریبی):</td>
-                                        <td> {{transactionInfo.quantity * transactionInfo.unit_price}} تومان</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="left-side-main-texts col-xs-12 col-sm-6 ">
-                                <table class="table table-striped">
-                                    <tbody>
-                                    <tr>
-                                        <td> قیمت واحد:</td>
-                                        <td> {{transactionInfo.unit_price}} تومان</td>
-                                    </tr>
-                                    <tr>
-                                        <td>مبلغ پیش پرداخت:</td>
-                                        <td>{{transactionInfo.amount_to_pay}} تومان</td>
-                                    </tr>
-
-                                    </tbody>
-                                </table>
-
-                            </div>
-                            <div class="description-text col-xs-12">
-                                <ul>
-                                <li>
-                                مبلغ پیش پرداخت 20 درصد از حجم کل تراکنش بوده و پس از پرداخت این مبلغ، فرایند آماده سازی بار
-                                توسط تامین کننده و بازرسی و نظارت آغاز خواهد شد.</li>
-                                <li class="text-danger">
-                                    تراکنش های مالی شما کاملا محرمانه است و اطلاعات آن نزد اینکوباک محفوظ خواهد بود.
-                                </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="buttons">
-                            <div class="main_buttons col-xs-12">
-                                <a href="#" @click.prevent="payPrepayment" class="green-button">پرداخت آنلاین</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="alert-message" v-else>
-                        {{msg}}
-                    </div>
-                </div>
-            </div>
-            <!--end part 2-->
-
-
-            <!--part 3-->
-
-            <div id="step3" v-if="currentStep == 3">
-                <nav class="main-content-nav col-xs-12">
-                    <ul class="list-inline">
-                        <li class="list-item">نظر سنجی</li>
-                        <li class="list-item active" > تسویه حساب </li>
-                        <li class="list-item "> پرداخت ودیعه</li>
-                        <li class="list-item ">تایید مفاد قرارداد </li>
-                    </ul>
-                </nav>
-                <div class="contents col-xs-12">
-                    <div class="content-show" v-if="msg == ''">
-                        <div class="header-contents col-xs-12">
-                            <div class="title-contents col-xs-12 col-sm-4">
-                                فاکتور پرداخت نهایی
-                            </div>
-                            <div class="content col-xs-12 col-sm-8">
-                                <div class="col-xs-6">
-                                    شماره سریال: <span>{{transactionId}}</span>
-                                </div>
-                                <div class="col-xs-6">
-                                    تاریخ صدور: <span>{{transactionInfo.issue_date}}</span>
-                                </div>
-                            </div>
-
-
-                        </div>
-                        <div class="main-content-texts col-xs-12">
-                            <h2>
-                                عنوان: <span>{{transactionInfo.product_name}}</span>
-                            </h2>
-                            <div class="right-side-main-texts col-xs-12 col-sm-6">
-                                <table class="table table-striped ">
-                                    <tbody>
-                                    <tr>
-                                        <td>میزان درخواست:</td>
-                                        <td> {{transactionInfo.quantity}} کیلو گرم</td>
-                                    </tr>
-                                    <tr>
-                                        <td>مبلغ کل :</td>
-                                        <td> {{transactionInfo.quantity * transactionInfo.unit_price}} تومان</td>
-                                    </tr>
-                                    <tr class="services">
-                                        <td>هزینه خدمات:</td>
-                                        <td> {{transactionInfo.inspection_price}} تومان</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="left-side-main-texts col-xs-12 col-sm-6 ">
-                                <table class="table table-striped">
-                                    <tbody>
-                                    <tr>
-                                        <td> قیمت واحد:</td>
-                                        <td> {{transactionInfo.unit_price}} تومان</td>
-                                    </tr>
-                                    <tr class="pre-pay">
-                                        <td>مبلغ پیش پرداخت:</td>
-                                        <td>{{transactionInfo.prepayment_amount}} تومان</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td> مبلغ قابل پرداخت:</td>
-                                        <td> {{transactionInfo.amount_to_pay}} تومان</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-
-                            </div>
-                              <div class="description-text col-xs-12">
-                                <ul>
-                                <li>
-                                مبلغ پیش پرداخت 20 درصد از حجم کل تراکنش بوده و پس از پرداخت این مبلغ، فرایند آماده سازی بار
-                                توسط تامین کننده و بازرسی و نظارت آغاز خواهد شد.</li>
-                                <li class="text-danger">
-                                    تراکنش های مالی شما کاملا محرمانه است و اطلاعات آن نزد اینکوباک محفوظ خواهد بود.
-                                </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="buttons">
-                            <div class="main_buttons col-xs-12 ">
-                                <a href="#" class="green-button" @click.prevent="finalPayment">پرداخت آنلاین</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="alert-message" v-else>
-                        {{msg}}
-                    </div>
-                </div>
-
-            </div>
-            <!--end part 3-->
-            <div id="step4" v-if="currentStep == 4">
-                <nav class="main-content-nav col-xs-12">
-                    <ul class="list-inline">
-                        <li class="list-item active">نظر سنجی</li>
-                        <li class="list-item "> تسویه حساب </li>
-                        <li class="list-item "> پرداخت ودیعه</li>
-                        <li class="list-item ">تایید مفاد قرارداد </li>
-                    </ul>
-                </nav>
-                <div class="contents col-xs-12">
-                    <div class="alert-message">
-                        در مراحل تسویه کردن اینکوباک با فروشنده
-                    </div>
-                </div>
-
-            </div>
-            <!--part 3-->
-
-
-            <!--end part 3-->
-        </section>
-        <div class="loading_images  col-xs-12" v-else>
-            <img :src="loading" style="width:200px;height:200px">
+            <p id="step1S11" v-if="pageStep == 11">
+              <span>
+                <b>ماده 17. حل و فصل اختلافات و داوری</b>
+              </span>
+              <br />
+              <br />
+              <span>کلیه اختلافات و دعاوی ناشی از این قرارداد و یا راجع به آن از جمله انعقاد، اعتبار، فسخ، تفسیر یا اجرای آن به مرکز داوری اتاق بازرگانی صنایع معادن و کشاورزی شیراز ارجاع می گردد. که مطابق با قانون اساسنامه و آیین داوری آن مرکز با رای یک یا سه نفر داور به صورت قطعی و لازم الاجرا حل و فصل می گردد. داور/ان علاوه بر مقررات حاکم عرف تجارتی ذیربط را نیز مراعات خواهند نمود. شرط داوری حاضر موافقت نامه مستقل از قرارداد اصلی تلقی می‌شود و در هر حال لازم الاجرا است.</span>
+              <br />
+              <br />
+              <span>
+                <b>ماده 18. نسخ قرارداد</b>
+              </span>
+              <br />
+              <br />
+              <span>قرارداد حاضر در18ماده و پیوست های آن (اجزای لاینفک قرارداد) در یک نسخه الکترونیکی تهیه و تنظیم گردیده است و در راستای تایید مفاد آن به تایید الکترونیکی طرف دوم و سوم (که به منزله قبول و تایید و امضای حضوری وی می باشد) رسید.</span>
+              <br />
+              <br />
+              <span>بنا به مراتب فوق طرفهای قرارداد حاضر را از تاریخ درج شده در آن اجرایی نمودند. تمام</span>
+              <br />
+              <br />
+            </p>
+            <p id="step1S12" v-if="pageStep == 12">
+              <span>
+                <b>الحاقیه</b>
+              </span>
+              <br />
+              <br />
+              <span>
+                <b>
+                  مهلت بارگیری محصول تا تاریخ
+                  <span
+                    class="text-danger"
+                  >{{transactionInfo.loading_dead_line}}</span> خواهد بود.
+                </b>
+              </span>
+              <br />
+              <br />
+              <span>
+                <b>توضیحات تکمیلی</b>
+              </span>
+              <br />
+              <br />
+              <span>{{transactionInfo.admin_notes}}</span>
+              <br />
+              <br />
+            </p>
+          </div>
         </div>
+        <div class="alert-message" v-else>{{msg}}</div>
+      </div>
 
+      <!--end part 1-->
+
+      <!--part 2-->
+
+      <div id="step2" v-if="currentStep == 2">
+        <nav class="main-content-nav col-xs-12">
+          <ul class="list-inline">
+            <li class="list-item">نظر سنجی</li>
+            <li class="list-item">تسویه حساب</li>
+            <li class="list-item active">پرداخت ودیعه</li>
+            <li class="list-item">تایید مفاد قرارداد</li>
+          </ul>
+        </nav>
+        <div class="contents col-xs-12">
+          <div class="content-show" v-if="msg == ''">
+            <div class="header-contents col-xs-12">
+              <div class="title-contents col-xs-12 col-sm-4">فاکتور پرداخت نهایی</div>
+              <div class="content col-xs-12 col-sm-8">
+                <div class="col-xs-6">
+                  شماره سریال:
+                  <span>{{transactionId}}</span>
+                </div>
+                <div class="col-xs-6">
+                  تاریخ صدور:
+                  <span>{{transactionInfo.issue_date}}</span>
+                </div>
+              </div>
+            </div>
+            <div class="main-content-texts col-xs-12">
+              <h2>
+                عنوان:
+                <span>{{transactionInfo.product_name}}</span>
+              </h2>
+              <div class="right-side-main-texts col-xs-12 col-sm-6">
+                <table class="table table-striped">
+                  <tbody>
+                    <tr>
+                      <td>میزان درخواست:</td>
+                      <td>{{transactionInfo.quantity}} کیلو گرم</td>
+                    </tr>
+                    <tr>
+                      <td>مبلغ کل (تقریبی):</td>
+                      <td>{{transactionInfo.quantity * transactionInfo.unit_price}} تومان</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="left-side-main-texts col-xs-12 col-sm-6">
+                <table class="table table-striped">
+                  <tbody>
+                    <tr>
+                      <td>قیمت واحد:</td>
+                      <td>{{transactionInfo.unit_price}} تومان</td>
+                    </tr>
+                    <tr>
+                      <td>مبلغ پیش پرداخت:</td>
+                      <td>{{transactionInfo.amount_to_pay}} تومان</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="description-text col-xs-12">
+                <ul>
+                  <li>
+                    مبلغ پیش پرداخت 20 درصد از حجم کل تراکنش بوده و پس از پرداخت این مبلغ، فرایند آماده سازی بار
+                    توسط تامین کننده و بازرسی و نظارت آغاز خواهد شد.
+                  </li>
+                  <li
+                    class="text-danger"
+                  >تراکنش های مالی شما کاملا محرمانه است و اطلاعات آن نزد باسکول محفوظ خواهد بود.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="buttons">
+              <div class="main_buttons col-xs-12">
+                <a href="#" @click.prevent="payPrepayment" class="green-button">پرداخت آنلاین</a>
+              </div>
+            </div>
+          </div>
+          <div class="alert-message" v-else>{{msg}}</div>
+        </div>
+      </div>
+      <!--end part 2-->
+
+      <!--part 3-->
+
+      <div id="step3" v-if="currentStep == 3">
+        <nav class="main-content-nav col-xs-12">
+          <ul class="list-inline">
+            <li class="list-item">نظر سنجی</li>
+            <li class="list-item active">تسویه حساب</li>
+            <li class="list-item">پرداخت ودیعه</li>
+            <li class="list-item">تایید مفاد قرارداد</li>
+          </ul>
+        </nav>
+        <div class="contents col-xs-12">
+          <div class="content-show" v-if="msg == ''">
+            <div class="header-contents col-xs-12">
+              <div class="title-contents col-xs-12 col-sm-4">فاکتور پرداخت نهایی</div>
+              <div class="content col-xs-12 col-sm-8">
+                <div class="col-xs-6">
+                  شماره سریال:
+                  <span>{{transactionId}}</span>
+                </div>
+                <div class="col-xs-6">
+                  تاریخ صدور:
+                  <span>{{transactionInfo.issue_date}}</span>
+                </div>
+              </div>
+            </div>
+            <div class="main-content-texts col-xs-12">
+              <h2>
+                عنوان:
+                <span>{{transactionInfo.product_name}}</span>
+              </h2>
+              <div class="right-side-main-texts col-xs-12 col-sm-6">
+                <table class="table table-striped">
+                  <tbody>
+                    <tr>
+                      <td>میزان درخواست:</td>
+                      <td>{{transactionInfo.quantity}} کیلو گرم</td>
+                    </tr>
+                    <tr>
+                      <td>مبلغ کل :</td>
+                      <td>{{transactionInfo.quantity * transactionInfo.unit_price}} تومان</td>
+                    </tr>
+                    <tr class="services">
+                      <td>هزینه خدمات:</td>
+                      <td>{{transactionInfo.inspection_price}} تومان</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="left-side-main-texts col-xs-12 col-sm-6">
+                <table class="table table-striped">
+                  <tbody>
+                    <tr>
+                      <td>قیمت واحد:</td>
+                      <td>{{transactionInfo.unit_price}} تومان</td>
+                    </tr>
+                    <tr class="pre-pay">
+                      <td>مبلغ پیش پرداخت:</td>
+                      <td>{{transactionInfo.prepayment_amount}} تومان</td>
+                    </tr>
+
+                    <tr>
+                      <td>مبلغ قابل پرداخت:</td>
+                      <td>{{transactionInfo.amount_to_pay}} تومان</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="description-text col-xs-12">
+                <ul>
+                  <li>
+                    مبلغ پیش پرداخت 20 درصد از حجم کل تراکنش بوده و پس از پرداخت این مبلغ، فرایند آماده سازی بار
+                    توسط تامین کننده و بازرسی و نظارت آغاز خواهد شد.
+                  </li>
+                  <li
+                    class="text-danger"
+                  >تراکنش های مالی شما کاملا محرمانه است و اطلاعات آن نزد باسکول محفوظ خواهد بود.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="buttons">
+              <div class="main_buttons col-xs-12">
+                <a href="#" class="green-button" @click.prevent="finalPayment">پرداخت آنلاین</a>
+              </div>
+            </div>
+          </div>
+          <div class="alert-message" v-else>{{msg}}</div>
+        </div>
+      </div>
+      <!--end part 3-->
+      <div id="step4" v-if="currentStep == 4">
+        <nav class="main-content-nav col-xs-12">
+          <ul class="list-inline">
+            <li class="list-item active">نظر سنجی</li>
+            <li class="list-item">تسویه حساب</li>
+            <li class="list-item">پرداخت ودیعه</li>
+            <li class="list-item">تایید مفاد قرارداد</li>
+          </ul>
+        </nav>
+        <div class="contents col-xs-12">
+          <div class="alert-message">در مراحل تسویه کردن باسکول با فروشنده</div>
+        </div>
+      </div>
+      <!--part 3-->
+
+      <!--end part 3-->
+    </section>
+    <div class="loading_images col-xs-12" v-else>
+      <img src="../../../../../img/gif/prload.gif" style="width:200px;height:200px" />
     </div>
+  </div>
 </template>
 
 <script>
-    import {eventBus} from "../../../../router/router";
+import { eventBus } from "../../../../router/router";
 
-    export default {
-
-        props: [
-            'trans',
-            'loading',
-
-        ],
-        data: function () {
-            return {
-                currentStep: 1,
-                pageStep:1,
-                transactionId: this.$route.params.id,
-                popUpMsg:'',
-                transactionInfo:'',
-                sellerUserInfo:'',
-                buyerUserInfo:'',
-                msg:'',
-                transactionType:'',
-                step1:{
-
-                },
-                step2:{
-
-                },
-                step3:{
-
-                },
-                step4:{
-
-                },
-                submiting:false,
-                items: [
-                    {
-                        message: 'جزئیات تراکنش',
-                        url: ''
-                    }
-                ]
-
-            }
-        },
-        methods: {
-            init:function(){
-                var self = this;
-                var pathName = this.$route.name;
-
-                this.items.url = pathName;
-
-                if(pathName == 'transactionDetail'){
-                    this.transactionType = 'normal';
-
-                    var transaction_id = this.$route.params.id;
-                    this.transactionId = transaction_id;
-
-                    axios.post('/dashboard/get_transaction_info',{
-                        transaction_id: transaction_id,
-                    })
-                    .then(function(response){
-                        self.currentStep = response.data.step;
-                        self.transactionInfo = response.data.transaction_info;
-
-                        if(self.transactionInfo.buy_ad_id){
-                            axios.post('/get_buyAd_owner_user_id',{
-                                buyAd_id : self.transactionInfo.buy_ad_id
-                            })
-                            .then(function(response){
-                                axios.post('/get_contract_sides_user_info',{
-                                    seller_user_id:self.transactionInfo.seller_user_id,
-                                    buyer_user_id: response.data.user_id
-                                })
-                                .then(function(response){
-                                    self.sellerUserInfo = response.data.seller_user_info;
-                                    self.buyerUserInfo  = response.data.buyer_user_info;
-                                });
-                            });
-                        }
-
-                        self.msg = response.data.msg;
-                    })
-                    .catch(function(err){
-                        if(err.response.status == 404){
-                            window.location.href = '/404';
-                        }
-                    });
-                }
-                else{
-                    this.transactionType = 'instant';
-
-                    var transaction_id = this.$route.params.id;
-                    this.transactionId = transaction_id;
-
-                    axios.post('/dashboard/get_instant_transaction_info',{
-                        transaction_id: transaction_id,
-                    })
-                    .then(function(response){
-                        self.currentStep = response.data.step;
-                        self.transactionInfo = response.data.transaction_info;
-
-                        if(self.transactionInfo.buyer_user_id){
-                            axios.post('/get_contract_sides_user_info',{
-                                    seller_user_id:self.transactionInfo.seller_user_id,
-                                    buyer_user_id: self.transactionInfo.buyer_user_id
-                            })
-                            .then(function(response){
-                                self.sellerUserInfo = response.data.seller_user_info;
-                                self.buyerUserInfo  = response.data.buyer_user_info;
-                            });
-                        }
-
-                        self.msg = response.data.msg;
-                    })
-                    .catch(function(err){
-                        if(err.response.status == 404){
-                            window.location.href = '/404';
-                        }
-                    });
-                }
-
-            },
-            confirmContract:function(){
-                var self = this;
-
-                if(this.transactionType == 'normal'){
-                    this.doAction('/action',3);
-                }
-                else if(this.transactionType == 'instant'){
-                    this.doAction('/instant_action',2);
-                }
-
-            },
-            payPrepayment:function(){
-                if(this.transactionType == 'normal'){
-                    var paymentUrl = '/payment/prepayment/' + this.transactionId;
-                    window.location.href = paymentUrl;
-                }
-                else if(this.transactionType == 'instant'){
-                    var paymentUrl = '/instant_payment/prepayment/' + this.transactionId;
-                    window.location.href = paymentUrl;
-                }
-            },
-            finalPayment:function(){
-                if(this.transactionType == 'normal'){
-                    var paymentUrl = '/payment/finalPayment/' + this.transactionId;
-
-                    window.location.href = paymentUrl;
-                }
-                else if(this.transactionType == 'instant'){
-                    var paymentUrl = '/instant_payment/finalPayment/' + this.transactionId;
-
-                    window.location.href = paymentUrl;
-                }
-            },
-            doAction:function(url,actionId){
-                var self = this;
-
-                axios.post(url,{
-                    transaction_id : self.transactionId,
-                    action_id : actionId
-                })
-                .then(function(response){
-                        self.init();
-                });
-            },
-            goToStep: function(step){
-                this.currentStep = step;
-            },
-            goToNextPage: function() {
-                if (this.pageStep < 12){
-                    this.pageStep++;
-                }
-            },
-            goToPrePage: function() {
-                if (this.pageStep < 1){
-                    this.pageStep = 1;
-                }else if (this.pageStep > 1){
-                    this.pageStep--;
-                }
-            }
-        },
-        mounted: function () {
-            eventBus.$emit('subHeader', this.items);
-            this.init();
+export default {
+  props: ["trans"],
+  data: function() {
+    return {
+      currentStep: 1,
+      pageStep: 1,
+      transactionId: this.$route.params.id,
+      popUpMsg: "",
+      transactionInfo: "",
+      sellerUserInfo: "",
+      buyerUserInfo: "",
+      msg: "",
+      transactionType: "",
+      step1: {},
+      step2: {},
+      step3: {},
+      step4: {},
+      submiting: false,
+      items: [
+        {
+          message: "جزئیات تراکنش",
+          url: ""
         }
+      ]
+    };
+  },
+  methods: {
+    init: function() {
+      var self = this;
+      var pathName = this.$route.name;
+
+      this.items.url = pathName;
+
+      if (pathName == "transactionDetail") {
+        this.transactionType = "normal";
+
+        var transaction_id = this.$route.params.id;
+        this.transactionId = transaction_id;
+
+        axios
+          .post("/dashboard/get_transaction_info", {
+            transaction_id: transaction_id
+          })
+          .then(function(response) {
+            self.currentStep = response.data.step;
+            self.transactionInfo = response.data.transaction_info;
+
+            if (self.transactionInfo.buy_ad_id) {
+              axios
+                .post("/get_buyAd_owner_user_id", {
+                  buyAd_id: self.transactionInfo.buy_ad_id
+                })
+                .then(function(response) {
+                  axios
+                    .post("/get_contract_sides_user_info", {
+                      seller_user_id: self.transactionInfo.seller_user_id,
+                      buyer_user_id: response.data.user_id
+                    })
+                    .then(function(response) {
+                      self.sellerUserInfo = response.data.seller_user_info;
+                      self.buyerUserInfo = response.data.buyer_user_info;
+                    });
+                });
+            }
+
+            self.msg = response.data.msg;
+          })
+          .catch(function(err) {
+            if (err.response.status == 404) {
+              window.location.href = "/404";
+            }
+          });
+      } else {
+        this.transactionType = "instant";
+
+        var transaction_id = this.$route.params.id;
+        this.transactionId = transaction_id;
+
+        axios
+          .post("/dashboard/get_instant_transaction_info", {
+            transaction_id: transaction_id
+          })
+          .then(function(response) {
+            self.currentStep = response.data.step;
+            self.transactionInfo = response.data.transaction_info;
+
+            if (self.transactionInfo.buyer_user_id) {
+              axios
+                .post("/get_contract_sides_user_info", {
+                  seller_user_id: self.transactionInfo.seller_user_id,
+                  buyer_user_id: self.transactionInfo.buyer_user_id
+                })
+                .then(function(response) {
+                  self.sellerUserInfo = response.data.seller_user_info;
+                  self.buyerUserInfo = response.data.buyer_user_info;
+                });
+            }
+
+            self.msg = response.data.msg;
+          })
+          .catch(function(err) {
+            if (err.response.status == 404) {
+              window.location.href = "/404";
+            }
+          });
+      }
+    },
+    confirmContract: function() {
+      var self = this;
+
+      if (this.transactionType == "normal") {
+        this.doAction("/action", 3);
+      } else if (this.transactionType == "instant") {
+        this.doAction("/instant_action", 2);
+      }
+    },
+    payPrepayment: function() {
+      if (this.transactionType == "normal") {
+        var paymentUrl = "/payment/prepayment/" + this.transactionId;
+        window.location.href = paymentUrl;
+      } else if (this.transactionType == "instant") {
+        var paymentUrl = "/instant_payment/prepayment/" + this.transactionId;
+        window.location.href = paymentUrl;
+      }
+    },
+    finalPayment: function() {
+      if (this.transactionType == "normal") {
+        var paymentUrl = "/payment/finalPayment/" + this.transactionId;
+
+        window.location.href = paymentUrl;
+      } else if (this.transactionType == "instant") {
+        var paymentUrl = "/instant_payment/finalPayment/" + this.transactionId;
+
+        window.location.href = paymentUrl;
+      }
+    },
+    doAction: function(url, actionId) {
+      var self = this;
+
+      axios
+        .post(url, {
+          transaction_id: self.transactionId,
+          action_id: actionId
+        })
+        .then(function(response) {
+          self.init();
+        });
+    },
+    goToStep: function(step) {
+      this.currentStep = step;
+    },
+    goToNextPage: function() {
+      if (this.pageStep < 12) {
+        this.pageStep++;
+      }
+    },
+    goToPrePage: function() {
+      if (this.pageStep < 1) {
+        this.pageStep = 1;
+      } else if (this.pageStep > 1) {
+        this.pageStep--;
+      }
     }
+  },
+  mounted: function() {
+    eventBus.$emit("subHeader", false);
+    this.init();
+  }
+};
 </script>

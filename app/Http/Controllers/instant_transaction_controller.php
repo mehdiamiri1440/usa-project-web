@@ -7,7 +7,7 @@ use App\instant_transaction;
 use App\instant_factor;
 use App\Http\Library\date_convertor;
 use DB;
-use App\Http\Controllers\sms_controller;
+use App\Http\Controllers\Notification\sms_controller;
 
 class instant_transaction_controller extends Controller
 {
@@ -482,7 +482,7 @@ class instant_transaction_controller extends Controller
             switch($user_role){
                 case 'seller' :
                     //send sms to the seller
-                    $msg_array [] = 'فروشنده محترم اینکوباک';
+                    $msg_array [] = 'فروشنده محترم باسکول';
                     $msg_array [] =  $msg;
                     $msg_array [] = 'شماره تراکنش' . ' : ' . $transaction_id ;
                     
@@ -492,7 +492,7 @@ class instant_transaction_controller extends Controller
                 case 'buyer'  :
                     //send sms to the buyer
                     
-                    $msg_array [] = 'خریدار محترم اینکوباک';
+                    $msg_array [] = 'خریدار محترم باسکول';
                     $msg_array [] =  $msg;
                     $msg_array [] = 'شماره تراکنش' . ' : ' . $transaction_id ;
                     

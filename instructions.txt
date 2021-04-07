@@ -1,0 +1,30 @@
+# DB Instructions
+
+1. install s3cmd on os :
+        - yum install s3cmd
+
+2. setup configiguration file at ~/$HOME/.s3cfg like below: 
+    [default]
+
+    access_key = <put-your-access-key>
+
+    secret_key = <put-your-secret-key>
+
+    host_base = https://s3.ir-thr-at1.arvanstorage.com
+
+    host_bucket = https://s3.ir-thr-at1.arvanstorage.com
+
+    enable_multipart = True
+
+    multipart_chunk_size_mb = 15
+
+    use_https = True
+
+3. run : s3cmd ls
+4. run : s3cmd ls -r s3://real-test #based on what you know
+5. download DB:
+    - s3cmd get s3://real-test/test-dir-1/test-file-2
+6. unzip the file:
+    unzip /downloaded-zip-file-name
+6. run this command as root user: (mysql container should be up before running this command)
+    - cat dowloadeb-db.sql | docker exec -i MYSQL-CONTAINER_NAME /usr/bin/mysql -u root --password=secret MAIN_DB_NAME

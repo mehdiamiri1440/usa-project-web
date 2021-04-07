@@ -21,21 +21,24 @@ i {
 
 .green-button-o:hover {
   background: #00c569;
+  color: #fff;
 }
 
 .user-info-wrapper {
   padding: 30px 20px;
   text-align: center;
   font-weight: bold;
+  margin-bottom: 30px;
 }
 
 .user-info-wrapper.active {
-  padding: 28px 20px;
+  padding: 15px 20px;
   border: 2px solid #00c569;
 }
 
 .user-information-content-image {
   position: relative;
+  min-width: 110px;
 }
 
 .user-information-content-image .user-image {
@@ -52,8 +55,8 @@ i {
   min-height: 100%;
   position: relative;
   left: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
   top: 50%;
 }
 .valid-icon {
@@ -78,12 +81,14 @@ i {
   margin-left: -15px;
 }
 
-.user-information-content p {
+.user-information-content > p {
   font-size: 18px;
 
   font-weight: bold;
 
   color: #333;
+
+  direction: rtl;
 }
 
 .user-information-content p.user-position {
@@ -100,23 +105,95 @@ p.user-valid-text {
   color: #00c569;
 }
 
-    p.response-rate{
-      color: #777;
-      font-size : 12px;
-      padding: 0;
-      direction: rtl;
+p.response-rate {
+  color: #777;
+  font-size: 12px;
+  padding: 0;
+  direction: rtl;
+}
 
-    }
+p.response-rate span {
+  color: #e41c38;
+}
 
-    p.response-rate span{
-      color: #e41c38;
-    }
+/* stars styles */
+
+.profile-rating-box-wrapper {
+  padding-left: 10px;
+}
+
+.profile-rating-box {
+  border: 1px solid #f6f6f6;
+  border-radius: 4px;
+  width: 100%;
+  max-width: 180px;
+  margin: 5px auto;
+  overflow: hidden;
+}
+.stars-wrapper {
+  padding-right: 2px;
+}
+.rating-stars {
+  width: calc(100% - 40px);
+  padding: 3px 0;
+  text-align: center;
+}
+.rating-stars p > span {
+  position: relative;
+  display: inline-block;
+}
+.rating-stars p > span i {
+  position: absolute;
+  left: 2px;
+  font-size: 17px;
+  z-index: 0;
+  top: 0px;
+  color: #bdc4cc;
+}
+.rating-stars p > span > span {
+  display: block;
+  position: relative;
+  z-index: 1;
+  font-size: 9px;
+  width: 18px;
+  text-align: center;
+  margin-left: 5px;
+  color: #777;
+}
+.rating-stars .review-count-wrapper {
+  color: #556080;
+  line-height: 1;
+  font-size: 11px;
+}
+.rating-score {
+  width: 40px;
+  background: #f6f6f6;
+  height: 100%;
+  text-align: center;
+  padding: 9px 0;
+  font-size: 16px;
+  font-weight: bold;
+  color: #556080;
+}
 
 @media screen and (max-width: 1199px) {
   .user-info-wrapper {
     overflow: hidden;
   }
+  .user-information-content-image .user-image {
+    width: 70px;
+    height: 70px;
+  }
+  .rating-stars p > span > span {
+    margin: 0 1px;
+  }
+  .rating-stars p > span i {
+    left: -1px;
+  }
 
+  .rating-score {
+    padding: 9px 0;
+  }
   .user-information-content-image,
   .default-wrapper-main-image,
   .default-image-info {
@@ -146,7 +223,7 @@ p.user-valid-text {
 
     bottom: initial;
     top: -2px;
-    right: -6px;
+    right: 15px;
     left: initial;
     border: 2px solid white;
   }
@@ -172,6 +249,20 @@ p.user-valid-text {
   .default-user-action-buttons {
     width: 160px;
   }
+
+  .user-information-content p {
+    margin-bottom: 5px;
+  }
+  .user-information-content p:last-of-type {
+    margin-bottom: 0;
+  }
+
+  .user-info-actions {
+    margin-top: 5px;
+  }
+  .profile-rating-box-wrapper {
+    padding-left: 0;
+  }
 }
 
 @media screen and (max-width: 767px) {
@@ -182,7 +273,15 @@ p.user-valid-text {
   .user-info-wrapper {
     overflow: inherit;
   }
-
+  .user-information-content p {
+    margin-bottom: 0;
+  }
+  .user-information-content {
+    padding-top: 6px;
+  }
+  .user-info-actions {
+    margin-top: 0;
+  }
   .user-information-content-image,
   .default-user-action-buttons,
   .default-wrapper-main-image,
@@ -240,23 +339,27 @@ p.user-valid-text {
   <div
     v-if="$parent.product.user_info"
     class="user-info-wrapper wrapper-bg"
-    :class="{ 'active': $parent.product.user_info.active_pakage_type != 0 }"
+    :class="{ active: $parent.product.user_info.active_pakage_type == 3 }"
   >
     <router-link
-      :to="'/profile/'+ $parent.product.user_info.user_name"
-      class="user-information-link"
+      :to="'/profile/' + $parent.product.user_info.user_name"
+      class="user-information-link text-rtl"
     >
       <div class="user-information-content-image">
         <div class="user-image" v-if="$parent.product.profile_info.profile_photo">
-          <img v-bind:src=" '/storage/' + $parent.product.profile_info.profile_photo" />
+          <img
+            v-bind:src="
+              '/storage/' + $parent.product.profile_info.profile_photo
+            "
+          />
         </div>
 
         <div class="user-image" v-else>
-          <img :src="$parent.defultimg" class="image_defult" />
+          <img src="../../../../../../img/user-defult.png" class="image_defult" />
         </div>
-        <div class="valid-icon" v-if="$parent.product.user_info.active_pakage_type != 0">
+        <div class="valid-icon" v-if="$parent.product.user_info.active_pakage_type == 3">
           <svg width="21.75" height="21.68" viewBox="0 0 24.965 30.574">
-            <g id="incobac-icon" data-name="incobac" transform="translate(-273.1 -715.025)">
+            <g id="buskool-icon" data-name="buskool" transform="translate(-273.1 -715.025)">
               <path
                 id="Subtraction_1"
                 data-name="Subtraction 1"
@@ -283,38 +386,97 @@ p.user-valid-text {
             </g>
           </svg>
         </div>
+
+        <div
+          class="profile-rating-box-wrapper hidden-xs hidden-lg"
+          v-if="$parent.product.user_info.review_info.avg_score > 0"
+        >
+          <div class="profile-rating-box">
+            <div class="rating-stars pull-left">
+              <p class="stars-wrapper">
+                <span v-for="(star, index) in 5" :key="index">
+                  <span v-text="index + 1"></span>
+
+                  <i class="fa fa-star" :class="{ 'yellow-text': index < $parent.starScore }"></i>
+                </span>
+              </p>
+              <p class="review-count-wrapper">
+                <span v-text="$parent.product.user_info.review_info.total_count"></span>
+                نظر
+              </p>
+            </div>
+            <span class="rating-score pull-right">
+              <span v-text="$parent.product.user_info.review_info.avg_score"></span>
+            </span>
+          </div>
+        </div>
       </div>
 
       <div class="user-information-content">
         <p class="user-position">فروشنده</p>
 
-        <p
-          v-if="$parent.product.user_info"
-          v-text="$parent.product.user_info.first_name + ' ' +
-            $parent.product.user_info.last_name"
-        ></p>
+        <p v-show="$parent.product.user_info">
+          {{ $parent.product.user_info.first_name +
+          ' ' +
+          $parent.product.user_info.last_name}}
+          <button
+            v-if="$parent.product.user_info.is_verified"
+            @click.prevent
+            class="verified-user"
+            data-container="body"
+            data-toggle="popover"
+            data-placement="bottom"
+            :data-content="$parent.verifiedUserContent"
+            title
+          >
+            <i class="fa fa-certificate"></i>
+          </button>
+        </p>
 
         <p
-          v-if="$parent.product.user_info.active_pakage_type != 0"
+          v-if="$parent.product.user_info.active_pakage_type == 3"
           class="user-valid-text"
         >کاربر تایید شده</p>
 
-               <p v-if="$parent.product.user_info.response_rate"  class="response-rate" > احتمال پاسخ گویی <span v-text="'%' + $parent.product.user_info.response_rate "></span></p>
-   
+        <div
+          class="profile-rating-box-wrapper hidden-sm hidden-md"
+          v-if="$parent.product.user_info.review_info.avg_score > 0"
+        >
+          <div class="profile-rating-box">
+            <div class="rating-stars pull-left">
+              <p class="stars-wrapper">
+                <span v-for="(star, index) in 5" :key="index">
+                  <span v-text="index + 1"></span>
+
+                  <i class="fa fa-star" :class="{ 'yellow-text': index < $parent.starScore }"></i>
+                </span>
+              </p>
+              <p class="review-count-wrapper">
+                <span v-text="$parent.product.user_info.review_info.total_count"></span>
+                نظر
+              </p>
+            </div>
+            <span class="rating-score pull-right">
+              <span v-text="$parent.product.user_info.review_info.avg_score"></span>
+            </span>
+          </div>
+        </div>
+
+        <p v-if="$parent.product.user_info.response_rate" class="response-rate">
+          احتمال پاسخ گویی
+          <span v-text="'%' + $parent.product.user_info.response_rate"></span>
+        </p>
       </div>
-
-  
-
     </router-link>
     <div class="user-info-actions">
       <router-link
-        :to="'/profile/'+ $parent.product.user_info.user_name"
+        :to="'/profile/' + $parent.product.user_info.user_name"
         class="green-button green-button-o"
       >مشاهده پروفایل</router-link>
 
       <button
         v-if="!$parent.isMyProfile"
-        @click.prevent="$parent.openChat($parent.product)"
+        @click.prevent="$parent.openChatModal($parent.product)"
         class="green-button"
       >
         ارسال پیام
@@ -323,7 +485,7 @@ p.user-valid-text {
 
       <router-link
         v-else-if="$parent.userType == 0"
-        :to="{name : 'profileBasicBuyer'}"
+        :to="{ name: 'profileBasicBuyer' }"
         class="green-button"
       >
         ویرایش پروفایل
@@ -332,7 +494,7 @@ p.user-valid-text {
 
       <router-link
         v-else-if="$parent.userType == 1"
-        :to="{name : 'profileBasicSeller'}"
+        :to="{ name: 'profileBasicSeller' }"
         class="green-button"
       >
         ویرایش پروفایل
@@ -354,3 +516,38 @@ p.user-valid-text {
     </div>
   </div>
 </template>
+
+<script >
+export default {
+  methods: {
+    activeComponentTooltip() {
+      $(".verified-user")
+        .popover({ trigger: "manual", html: true, animation: false })
+        .on("mouseenter", function() {
+          var _this = this;
+          $(this).popover("show");
+          $(".popover").on("mouseleave", function() {
+            $(_this).popover("hide");
+          });
+        })
+        .on("mouseleave", function() {
+          var _this = this;
+          setTimeout(function() {
+            if (!$(".popover:hover").length) {
+              $(_this).popover("hide");
+            }
+          }, 300);
+        });
+    }
+  },
+  watch: {
+    "$parent.product.user_info": function() {
+      if (this.$parent.product.user_info) {
+        setTimeout(() => {
+          this.activeComponentTooltip();
+        }, 10);
+      }
+    }
+  }
+};
+</script>

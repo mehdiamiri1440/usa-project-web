@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     <!-- site title -->
-    <title>اینکوباک | بازارگاه کشاورزی</title>
+    <title>باسکول | بازارگاه کشاورزی</title>
 
     <!-- Bootstrap css -->
     <link rel="stylesheet" href="{{asset('index/css/bootstrap.min.css')}}">
@@ -149,7 +149,7 @@
 
 <div class="container-fluid">
     <div class="container">
-        <img src="{{url('assets/img/404.jpg')}}">
+        <img src="{{asset('images/def404.png')}}">
         <div class="buttons">
             <div>
                 <a href="/" class="green-bot">

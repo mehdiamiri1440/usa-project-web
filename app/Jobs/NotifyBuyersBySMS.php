@@ -8,10 +8,10 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 
-use App\product;
+use App\Models\product;
 use App\Jobs\sendSMS;
-use App\myuser;
-use App\buyAd;
+use App\Models\myuser;
+use App\Models\buyAd;
 use Carbon\Carbon;
 use DB;
 
@@ -48,7 +48,7 @@ class NotifyBuyersBySMS implements ShouldQueue
 //        
 //            $product_owner_user_name = $this->get_product_owner_user_name();
 //        
-//            $link = "www.incobac.com/profile/$product_owner_user_name";
+//            $link = "www.buskool.com/profile/$product_owner_user_name";
 //        
 //            $msg_array = [
 //              'یک محصول مشابه محصول درخواستی شما یافت شد',

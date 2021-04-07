@@ -4,7 +4,7 @@
   border: none;
   background: none;
   font-size: 25px;
-  padding: 19px 30px 17px 24px;
+  padding: 19px 24px 11px;
   display: none;
 }
 
@@ -20,13 +20,10 @@
   align-items: center;
 }
 
-.margin-loading {
-  margin: 3%;
-}
-
-.loading-height {
+.placeholder-user-name {
   height: 10px !important;
   width: 60px;
+  border-radius: 6px;
 }
 
 #main {
@@ -42,7 +39,7 @@
 }
 
 .main-header {
-  height: 65px;
+  height: 59px;
   position: fixed;
   left: 0;
   right: 250px;
@@ -56,15 +53,16 @@
   right: 80px;
 }
 
-.image-header-profile {
-  width: 50px;
-  height: 50px;
+.placeholder-image-header-profile {
+  width: 40px;
+  height: 40px;
   overflow: hidden;
-  border-radius: 50%;
+  border-radius: 50px;
   float: left;
+  margin-left: 10px;
 }
 
-.image-header-profile img {
+.placeholder-image-header-profile img {
   height: 100%;
 }
 
@@ -72,8 +70,7 @@
   float: left;
 }
 
-.right-menu-header,
-.content-header {
+.right-menu-header {
   float: right;
 }
 
@@ -104,28 +101,9 @@
   font-size: 17px;
 }
 
-.right-menu-header a,
-.profile-menu-header a {
-  color: #7f8c9b;
-  margin: 5px;
-}
-
 .right-menu-header a {
   font-size: 30px;
 }
-
-.content-header {
-  background: #00c569;
-  color: #fff;
-  height: 100%;
-  padding: 20px 20px 0;
-  display: none;
-}
-
-/*.content-header span{
-    display: block;
-    text-align: right;
-  }*/
 
 .right-menu-header {
   position: relative;
@@ -147,36 +125,13 @@
 }
 
 .right-menu-header a,
-.profile-menu-header a {
+.profile-menu-header > a {
   color: #7f8c9b;
-  margin: 5px;
+  margin: 0 5px;
 }
 
 .profile-menu-header > a {
   position: relative;
-}
-
-.profile-list {
-  position: absolute;
-  width: 165px;
-  background: #fff;
-  padding: 8px 10px;
-  border-radius: 3px;
-  box-shadow: 0 0 3px #313a43;
-  text-align: right;
-  left: 40px;
-  top: 65px;
-  display: none;
-  z-index: 999;
-}
-
-.profile-list li {
-  margin: 5px;
-}
-
-.profile-list a {
-  width: 100%;
-  display: inline-block;
 }
 
 .font-big {
@@ -217,241 +172,313 @@ i.fa-home {
   display: inline-block;
   color: #fff !important;
 }
+
+/* profile info styles */
+
+a.profile-info-wrapper {
+  overflow: hidden;
+  padding: 0;
+  font-size: 14px;
+  color: #777;
+  font-weight: bold;
+}
+
+a.profile-info-wrapper:hover,
+a.profile-info-wrapper:focus {
+  background: none;
+}
+
+.profile-image-wrapper {
+  width: 40px;
+  height: 40px;
+  border-radius: 40px;
+  overflow: hidden;
+  float: right;
+  margin-left: 10px;
+  position: relative;
+}
+
+.profile-image-wrapper > img {
+  width: initial;
+  height: 100%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 100%;
+}
+
+.profile-information {
+  float: left;
+  padding-top: 10px;
+  direction: rtl;
+}
+
+.profile-information i {
+  position: relative;
+  top: 3px;
+  margin-right: 7px;
+}
+
+#web-profile-items {
+  position: absolute;
+  top: 50px;
+  background: #fff;
+  width: 100%;
+  min-width: 150px;
+  text-align: right;
+  direction: rtl;
+  border-radius: 4px;
+  line-height: 1.618;
+  -webkit-box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+#web-profile-items > li a {
+  background: none;
+  color: #777;
+  font-size: 13px;
+  border: none;
+  width: 100%;
+  padding: 10px;
+  text-align: right;
+  -webkit-transition: 200ms;
+  transition: 200ms;
+  border-bottom: 1px solid #dbdbdb;
+  display: block;
+}
+#web-profile-items > li:last-of-type a {
+  border: none;
+}
+#web-profile-items li a:hover {
+  color: #333;
+  background: #eee;
+}
+#web-profile-items li a i {
+  margin-left: 6px;
+}
+
+.user-auth-info-wrapper {
+  margin-top: 10px;
+  margin-left: 10px;
+  float: left;
+}
+.user-auth-info-wrapper > ul {
+  margin: 0;
+}
+
 /*start style sub-header*/
-    .sub-header {
-        position: absolute;
-        left: 0;
-        background: #eff3f6;
-        top: 63px;
-        right: 0;
-        text-align: center;
-        border-bottom: 1px solid #e6e6e6;
-        border-top: 1px solid #e6e6e6;
-    }
+.sub-header {
+  position: absolute;
+  left: 0;
+  background: #eff3f6;
+  top: 59px;
+  right: 0;
+  text-align: center;
+  border-bottom: 1px solid #e6e6e6;
+  /* border-top: 1px solid #e6e6e6; */
+}
 
-    .sub-header ul {
-        text-align: center;
-    }
+.sub-header ul {
+  text-align: center;
+}
 
-    .sub-header a {
-        padding: 16px;
+.sub-header a {
+  padding: 16px;
 
-        display: inline-block;
+  display: inline-block;
 
-        color: #808c9b;
+  color: #808c9b;
 
-        font-weight: bold;
+  font-weight: bold;
 
-        font-size: 14px;
+  font-size: 14px;
 
-        position: relative;
-    }
+  position: relative;
+}
 
-    .sub-header a:hover {
-        color: #313942;
-    }
+.sub-header a:hover {
+  color: #313942;
+}
 
-    .sub-header a:hover::after {
-        content: " ";
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        background: #00C569;
-        height: 3px;
-        width: 100%;
-    }
+.sub-header a:hover::after {
+  content: " ";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: #00c569;
+  height: 3px;
+  width: 100%;
+}
 
-    .sub-header a.active {
-        color: #313942;
-    }
+.sub-header a.active {
+  color: #313942;
+}
 
-    .sub-header a.active::after {
-        content: " ";
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        background: #00C569;
-        height: 3px;
-        width: 100%;
-    }
+.sub-header a.active::after {
+  content: " ";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: #00c569;
+  height: 3px;
+  width: 100%;
+}
 
+.search-box {
+  position: relative;
+  margin: 10px auto;
+  border: none;
+  padding: 0;
+}
 
+.search-box input {
+  text-align: right;
+  direction: rtl;
+  border: 1px solid #777;
+  border-radius: 6px;
+  padding: 6px 50px 5px 15px;
+  background: #fff;
+  font-size: 14px;
+  float: right;
+}
 
-    .search-box {
-        position: relative;
-        margin: 10px auto;
-        border: none;
-    }
+.search-box button.btn-search {
+  background: none;
+  border: none;
+  position: absolute;
+  right: 5px;
+  top: 7px;
+  border-left: 1px solid;
+  color: #777;
+  padding: 0 7px;
+  font-size: 22px;
+  height: 20px;
+}
 
-    .search-box input {
-        width: 100%;
-        text-align: right;
-        direction: rtl;
-        border: 1px solid #666666;
-        border-radius: 6px;
-        padding: 6px 35px 5px 15px;
-        background: #f8f8f8;
-        font-size: 12px;
-        float: right;
-    }
+.button-height {
+  line-height: 1;
+}
+.header-with-fix-alert {
+  top: 83px !important;
+}
+@media screen and (max-width: 991px) {
+  .main-header,
+  .little-main-header {
+    right: 0 !important;
+  }
+}
 
-    .search-box button.btn-search {
-        background: none;
-        border: none;
-        position: absolute;
-        right: 16px;
-        top: 9px;
-        border-left: 1px solid;
-        color: #777;
-        padding: 0 7px;
-        font-size: 12px;
-        height: 20px;
-    }
+@media screen and (max-width: 768px) {
+  span.min {
+    display: inherit;
+  }
 
-    .button-height {
-      line-height: 1;
-    }
+  span.full {
+    display: none;
+  }
+  .mobile-header .green-button {
+    margin: 15px 0 0;
+  }
 
-    @media screen and (max-width: 994px) {
-      .content-header {
-        display: none;
-      }
+  .mobile-header ul a {
+    padding: 15px 20px;
+  }
 
-      .main-header,
-      .little-main-header {
-        right: 0 !important;
-      }
-    }
+  .profile-menu-header {
+    padding: 7px;
+    padding-left: 36px;
+  }
+}
 
-    @media screen and (max-width: 768px) {
-      span.min {
-        display: inherit;
-      }
+@media screen and (max-width: 555px) {
+  .user_name {
+    display: none !important;
+  }
+  .profile-image-wrapper {
+    margin: 0;
+  }
+  .right-menu-header {
+    padding: 6px;
+    border-right: 1px solid #eff3f6;
+  }
 
-      span.full {
-        display: none;
-      }
-      .mobile-header .green-button {
-        margin: 15px 0 0;
-      }
+  .profile-menu-header .user_name {
+    display: none;
+  }
+  .right-menu-header .green-button {
+    padding: 10px 15px;
+  }
+}
 
-      .mobile-header ul a {
-        padding: 15px 20px;
-      }
+@media screen and (max-width: 345px) {
+  .sub-header a {
+    font-size: 10px;
+  }
 
-      .profile-menu-header {
-        padding: 7px;
-        padding-left: 36px;
-      }
-    }
+  .show-header button {
+    padding: 19px 17px 11px 17px;
+  }
 
-    @media screen and (max-width: 555px) {
-      .user_name {
-        display: none !important;
-      }
+  .right-menu-header {
+    padding: 6px;
+  }
+}
+@media only screen and (max-width: 991px) {
+  .message-notification {
+    top: 4px;
+    cursor: pointer;
+    border: 1px solid white;
+    right: 35px;
+    z-index: 10;
+    position: absolute;
+    background-color: #e41c38;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: wheat;
+  }
+}
+@media only screen and (min-width: 991px) {
+  .hide-message-notification {
+    display: none;
+  }
+}
+.rotation {
+  animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
 
-      .right-menu-header {
-        padding: 6px;
-        border-right: 1px solid #eff3f6;
-      }
+@keyframes shake {
+  10%,
+  90% {
+    transform: translate3d(-1px, 0, 0);
+  }
 
-      .profile-menu-header .user_name {
-        display: none;
-      }
+  20%,
+  80% {
+    transform: translate3d(2px, 0, 0);
+  }
 
-      .content-header {
-        display: none;
-      }
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-4px, 0, 0);
+  }
 
-      .right-menu-header .green-button {
-        padding: 10px 15px;
-      }
-    }
-
-    @media screen and (max-width: 345px) {
-      .sub-header a {
-        font-size: 10px;
-      }
-
-      .show-header button {
-        padding: 19px 26px 19px 19px;
-      }
-
-      .right-menu-header {
-        padding: 6px;
-      }
-    }
-    @media only screen and (max-width: 992px) {
-      .message-notification {
-        top: 4px;
-        cursor: pointer;
-        border: 1px solid white;
-        right: 35px;
-        z-index: 10;
-        position: absolute;
-        background-color: #e41c38;
-        border-radius: 50%;
-        width: 28px;
-        height: 28px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: wheat;
-      }
-    }
-    @media only screen and (min-width: 992px) {
-      .hide-message-notification {
-        display: none;
-      }
-    }
-    .rotation {
-      animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
-      transform: translate3d(0, 0, 0);
-      backface-visibility: hidden;
-      perspective: 1000px;
-    }
-
-    @keyframes shake {
-      10%,
-      90% {
-        transform: translate3d(-1px, 0, 0);
-      }
-
-      20%,
-      80% {
-        transform: translate3d(2px, 0, 0);
-      }
-
-      30%,
-      50%,
-      70% {
-        transform: translate3d(-4px, 0, 0);
-      }
-
-      40%,
-      60% {
-        transform: translate3d(4px, 0, 0);
-      }
-    }
-
-
-    /*end style sub-header*/
-    @media screen and (max-width: 768px) {
-        .sub-header {
-
-            padding: 0;
-
-        }
-    }
-    /*end style sub-header*/
-    @media screen and (max-width: 345px) {
-        .sub-header a {
-            font-size: 10px;
-
-        }
-
-    }
-
+  40%,
+  60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+.button-height {
+  line-height: 1;
+}
 </style>
 
 <template>
@@ -459,67 +486,107 @@ i.fa-home {
     <header id="header" class="main-header">
       <div class="show-header hidden-md hidden-lg">
         <div
-          v-if="messageCount>0"
+          v-if="messageCount > 0"
           class="message-notification hide-message-notification"
-        >{{messageCount}}</div>
+        >
+          {{ messageCount }}
+        </div>
         <button class="button-height">
-          <span :class="menuClosed?'rotation':''" class="fa fa-bars"></span>
+          <span :class="menuClosed ? 'rotation' : ''" class="fa fa-bars"></span>
         </button>
       </div>
 
-      <div class="content-header">
-        <span class="font-big">اینکوباک</span>
-        <span>بازارگاه آنلاین کشاورزی</span>
-      </div>
+      <div class="user-auth-info-wrapper">
+        <ul v-if="!isLoading" class="nav navbar-nav">
+          <li>
+            <a
+              class="profile-info-wrapper"
+              data-toggle="collapse"
+              href="#web-profile-items"
+              role="button"
+            >
+              <div class="profile-image-wrapper">
+                <img v-if="photoLink" :src="storage + '/' + photoLink" />
+                <img v-else src="../../../../../../img/user-defult.png" />
+              </div>
 
-      <div class="profile-menu-header">
-        <a v-if="!isLoading" href="#" @click.prevent="collapseDropDown()">
-          <div class="image-header-profile" v-if="photoLink">
-            <img :src="storage + '/' + photoLink" />
-          </div>
+              <div class="profile-information">
+                <span class="user_name" v-text="username"></span>
+                <i class="fa fa-angle-down"></i>
+              </div>
+            </a>
 
-          <div class="image-header-profile" v-else>
-            <img :src="def" />
-          </div>
+            <ul id="web-profile-items" class="collapse">
+              <li class="list-item">
+                <router-link
+                  data-toggle="collapse"
+                  href="#web-profile-items"
+                  :to="{ name: 'profileBasicBuyer' }"
+                  @click="
+                    registerComponentStatistics(
+                      'seller-dashboard-header',
+                      'profile-link',
+                      'click-on-profile-link-in-dashboard'
+                    )
+                  "
+                >
+                  <i class="fa fa-user"></i>
+                  پروفایل
+                </router-link>
+              </li>
 
-          <i class="fa fa-angle-down" aria-hidden="true"></i>
+              <li class="list-item">
+                <router-link
+                  data-toggle="collapse"
+                  href="#web-profile-items"
+                  :to="{ name: 'passwordBuyer' }"
+                  @click="
+                    registerComponentStatistics(
+                      'seller-dashboard-header',
+                      'change-password',
+                      'click-on-change-password-dashboard'
+                    )
+                  "
+                >
+                  <i class="fa fa-lock"></i>
+                  تغییر کلمه عبور
+                </router-link>
+              </li>
 
-          <span class="user_name" v-text="username"></span>
-        </a>
-        <div class="col display-loading" v-else>
-          <div class="image-header-profile shadow-content placeholder-content"></div>
-          <div class="user_name shadow-content placeholder-content loading-height margin-loading"></div>
-        </div>
-
-        <div class="profile-list">
-          <ul class="list-unstyled">
-            <li class="list-item">
-              <router-link
-                :to="{name : 'profileBasicBuyer'}"
-                @click="registerComponentStatistics('seller-dashboard-header','profile-link','click-on-profile-link-in-dashboard')"
-              >پروفایل</router-link>
-            </li>
-
-            <li class="list-item">
-              <router-link
-                :to="{name : 'passwordBuyer'}"
-                @click="registerComponentStatistics('seller-dashboard-header','change-password','click-on-change-password-dashboard')"
-              >تغییر کلمه عبور</router-link>
-            </li>
-
-            <li class="list-item">
-              <a :href="out" @click="logUserOut()">خروج</a>
-            </li>
-          </ul>
-        </div>
+              <li class="list-item">
+                <a :href="out" @click="logUserOut()">
+                  <i class="fas fa-sign-out-alt"></i> خروج
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <ul v-else class="nav navbar-nav">
+          <li>
+            <div class="col display-loading">
+              <div
+                class="user_name placeholder-content placeholder-user-name margin-loading"
+              ></div>
+              <div
+                class="placeholder-image-header-profile placeholder-content"
+              ></div>
+            </div>
+          </li>
+        </ul>
       </div>
       <div class="right-menu-header">
         <ul class="list-inline">
           <li>
             <router-link
               class="product-list-link"
-              :to="{ name : 'productList'}"
-              @click="registerComponentStatistics('dashboard-header','product-list-btn','click-on-product-list-in-dashboard')"
+              :to="{ name: 'productList' }"
+              @click="
+                registerComponentStatistics(
+                  'dashboard-header',
+                  'product-list-btn',
+                  'click-on-product-list-in-dashboard'
+                )
+              "
             >
               <span class="full">لیست محصولات</span>
               <span class="min">
@@ -530,8 +597,14 @@ i.fa-home {
 
           <li>
             <router-link
-              :to="{name : 'indexPage'}"
-              @click="registerComponentStatistics('dashboard-header','home-page-btn','click-on-home-page-in-dashboard')"
+              :to="{ name: 'indexPage' }"
+              @click="
+                registerComponentStatistics(
+                  'dashboard-header',
+                  'home-page-btn',
+                  'click-on-home-page-in-dashboard'
+                )
+              "
             >
               <i class="fa fa-home" aria-hidden="true"></i>
             </router-link>
@@ -539,18 +612,25 @@ i.fa-home {
         </ul>
       </div>
 
-      <div v-if="$route.path==='/buyer/special-products'" class="sub-header col-xs-12">
+      <div
+        v-if="$route.path === '/buyer/special-products'"
+        class="sub-header col-xs-12"
+      >
+        <div class="search-box col-sm-6 col-xs-12 col-lg-4 pull-right">
+          <input
+            type="text"
+            v-model="$parent.searchValueText"
+            placeholder="اینجا جستجو کنید"
+          />
 
-         <div  class="search-box col-sm-6 col-xs-12 col-lg-4 pull-right">
-             <input type="text" v-model="$parent.searchValueText" placeholder="اینجا جستجو کنید" />
-
-             <button class="btn-search">
-                 <i class="fa-search fa"></i>
-             </button>
-
-         </div>
-
-    </div>
+          <button class="btn-search">
+            <i class="fa-search fa"></i>
+          </button>
+        </div>
+      </div>
+      <SubMenu
+        :class="{ 'header-with-fix-alert': $parent.isRequiredFixAlert }"
+      />
     </header>
   </div>
 </template>
@@ -558,84 +638,85 @@ i.fa-home {
 
 <script>
 var visible = false;
+import SubMenu from "./sub-menu/sub-menu.vue";
 import { eventBus } from "../../../../../router/router";
 export default {
-  data: function() {
+  data: function () {
     return {
-      messageCount: 0,
+      messageCount: "",
     };
+  },
+  components: {
+    SubMenu,
   },
   props: [
     "menuClosed",
     "photoLink",
     "storage",
-    "def",
     "username",
     "out",
     "routeHome",
     "isLoading",
   ],
   methods: {
-    logUserOut: function() {
+    init: function () {
+      this.closeCollapses();
+    },
+    logUserOut: function () {
       localStorage.removeItem("userRoute");
-      registerComponentStatistics(
+      this.registerComponentStatistics(
         "seller-dashboard-header",
         "logout",
         "click-on-logout-in-dashboard"
       );
     },
-    collapseDropDown: function() {
-      $(".profile-list").fadeIn("slow", function() {
-        visible = true;
+    closeCollapses: function () {
+      $(document).on("click", function (e) {
+        /* bootstrap collapse js adds "in" class to your collapsible element*/
+
+        var user_menu_opened = $("#web-profile-items").hasClass("in");
+
+        if (
+          !$(e.target).closest("#web-profile-items").length &&
+          !$(e.target).is("#web-profile-items") &&
+          user_menu_opened === true
+        ) {
+          $("#web-profile-items").collapse("toggle");
+        }
       });
     },
-    collapseDropDownList: function() {
-      $(".icon-header-list").fadeIn("slow", function() {
-        visible = true;
-      });
-    },
-    documentClick(e) {
-      if (visible) {
-        $(".profile-list").fadeOut("slow");
-        $(".icon-header-list").fadeOut("slow");
-        visible = false;
-      }
-    }
   },
   mounted() {
     var self = this;
-    axios
-      .post("/get_total_unread_messages_for_current_user")
-      .then(function(response) {
-        self.messageCount = response.data.msg_count;
-      })
-      .catch(function(error) {
-        console.log("error", error);
-      });
+    this.init();
+
+    // axios
+    //   .post("/get_total_unread_messages_for_current_user")
+    //   .then(function(response) {
+    //     self.messageCount = response.data.msg_count;
+    //       if (self.messageCount >= 100) {
+    //           self.messageCount = "+99"
+    //       }
+    //   })
+    //   .catch(function(error) {
+    //     console.log("error", error);
+    //   });
   },
   created() {
     var self = this;
-    eventBus.$on("messageCount", event => {
+    eventBus.$on("messageCount", (event) => {
       this.messageCount += event;
     });
-    eventBus.$on("active", event => {
+    eventBus.$on("active", (event) => {
       this.activeElement = event;
     });
-    Echo.private("testChannel." + this.$parent.userId).listen(
-      "newMessage",
-      e => {
-        var senderId = e.new_message.sender_id;
-
-        self.messageCount += 1;
-      }
-    );
     document.addEventListener("click", this.documentClick);
   },
-  registerComponentStatistics: function(categoryName, actionName, labelName) {
+  registerComponentStatistics: function (categoryName, actionName, labelName) {
     gtag("event", actionName, {
       event_category: categoryName,
-      event_label: labelName
+      event_label: labelName,
     });
-  }
+  },
 };
 </script>

@@ -10,7 +10,7 @@
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini">پنل</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>پنل مدیریت اینکوباک</b></span>
+      <span class="logo-lg"><b>پنل مدیریت باسکول</b></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -78,8 +78,11 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">منو</li>
-        <li class="{{Request::is('admin/statistics') ? 'active':''}}">
+        <!-- <li class="{{Request::is('admin/statistics') ? 'active':''}}">
                 <a href="{{route('admin_panel_load_statistics')}}"><i class="fa fa-envelope"></i><span>آمار سایت</span></a>      
+        </li> -->
+        <li class="{{Request::is('admin/statisticsCharts') ? 'active':''}}">
+                <a href="{{route('admin_panel_load_statistics_chart')}}"><i class="fa fa-envelope"></i><span>نمودارها</span></a>      
         </li>
         <li class="{{Request::is('admin/user-list') || Request::is('admin/user-list-detail/*') ? 'active':''}}">
                 <a href="{{route('admin_panel_load_user_list')}}"><i class="fa fa-envelope"></i><span> لیست کاربران</span></a>      
@@ -103,7 +106,28 @@
         <li class="{{Request::is('admin/sellAd-list') || Request::is('admin/sellAd-list-detail/*') ? 'active':''}}">
             <a href="{{route('admin_panel_sellAd_list')}}"><i class="fa fa-envelope"></i><span>آگهی های فروش تایید شده</span></a>      
         </li>
-        <li class="{{Request::is('admin/sell-offers') || Request::is('admin/sell-offer-detail/*') ? 'active':''}}">
+        <li class="{{Request::is('admin/messages') ? 'active':''}}">
+            <a href="{{route('admin_panel_message_list')}}"><i class="fa fa-envelope"></i><span>پیام ها</span></a>      
+        </li>
+        <li class="{{Request::is('admin/user-comment-list') || Request::is('admin/user-comment-detail/*')? 'active':''}}">
+            <a href="{{route('load_users_unconfirmed_comments')}}"><i class="fa fa-envelope"></i><span>کامنت های تایید نشده</span></a>      
+        </li>
+        <li class="{{Request::is('admin/suspicious-messages-list') ? 'active':''}}">
+            <a href="{{route('admin_panel_load_messaging_anomaly')}}"><i class="fa fa-envelope"></i><span>آنومالی در پیام ها</span></a>      
+        </li>
+        <li class="{{Request::is('admin/unverified-user-list') ? 'active':''}}">
+            <a href="{{route('admin_load_unverified_documents')}}"><i class="fa fa-envelope"></i><span>اطلاعات احراز هویت</span></a>      
+        </li>
+        <li class="{{Request::is('admin/payment-list') ? 'active':''}}">
+            <a href="{{route('admin_panel_payment_list')}}"><i class="fa fa-envelope"></i><span>وضعیت تراکنش ها</span></a>      
+        </li>
+        <li class="{{Request::is('admin/submit-to-channel') ? 'active':''}}">
+            <a href="{{route('admin_panel_submit_to_channel')}}"><i class="fa fa-envelope"></i><span>ارسال در کانال</span></a>      
+        </li>
+        <li class="{{Request::is('admin/admin_panel_channel_content_list') ? 'active':''}}">
+            <a href="{{route('admin_panel_channel_content_list')}}"><i class="fa fa-envelope"></i><span>همه پست های کانال</span></a>      
+        </li>
+        <!-- <li class="{{Request::is('admin/sell-offers') || Request::is('admin/sell-offer-detail/*') ? 'active':''}}">
             <a href="{{route('admin_panel_sell_offer_list')}}"><i class="fa fa-envelope"></i><span>پیشنهادات فروش</span></a>     
         </li>
         <hr/>
@@ -120,7 +144,7 @@
             <a href="{{route('admin_panel_waiting_for_termination_transaction_list')}}"><i class="fa fa-envelope"></i><span>در انتظاراتمام تراکنش</span></a>
         </li>
         <li class="{{Request::is('admin/transaction-checkout-list') ? 'active':''}}">
-            <a href="{{route('admin_panel_waiting_for_checkout_transaction_list')}}"><i class="fa fa-envelope"></i><span>درانتظار تسویه با اینکوباک</span></a>
+            <a href="{{route('admin_panel_waiting_for_checkout_transaction_list')}}"><i class="fa fa-envelope"></i><span>درانتظار تسویه با باسکول</span></a>
         </li>
         <hr/>
         <li class="{{Request::is('admin/initiate-instant-transaction') ? 'active':''}}">
@@ -137,7 +161,7 @@
         </li>
         <li class="{{Request::is('admin/generate-manual-payment-url') ? 'active':''}}">
             <a href="{{route('generate_manual_payment_url')}}"><i class="fa fa-envelope"></i><span>صدور لینک پرداخت</span></a>
-        </li>
+        </li> -->
       </ul>
     </section>
     <!-- /.sidebar -->

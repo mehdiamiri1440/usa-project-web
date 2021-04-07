@@ -2,7 +2,7 @@
 <html lang="fa">
     <head>
         <meta charset="UTF-8">
-        <title>اینکوباک | بازارگاه کشاورزی</title>
+        <title>باسکول | بازارگاه کشاورزی</title>
         <script src="{{asset('assets/js/jquery-3.3.1.min.js')}}"></script>
         <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
         <link type="text/css" rel="stylesheet" href="{{asset('assets/css/fontiran.css')}}">
@@ -26,7 +26,7 @@
             </div>
             <div class="row">
                 <div class="col-xs-2 col-xs-offset-5">
-                    <a class="btn btn-primary" href="{{route('show-transaction-detail',$id)}}">بازگشت به اینکوباک</a>    
+                    <a class="btn btn-primary" href="{{route('show-transaction-detail',$id)}}">بازگشت به باسکول</a>    
                 </div>
             </div>
         </div>

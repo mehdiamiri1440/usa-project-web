@@ -4,16 +4,16 @@
 }
 
 /*---------------------------------------
-       Footer section
-    -----------------------------------------*/
+           Footer section
+        -----------------------------------------*/
 
 #wrap-footer {
-  background: #000122;
   margin-top: 60px;
   position: relative;
 }
 
 #wrap-footer footer {
+  background: #000122;
   padding: 30px 0;
 }
 
@@ -93,8 +93,8 @@ footer a {
 }
 
 /*---------------------------------------
-       Social icon
-    -----------------------------------------*/
+           Social icon
+        -----------------------------------------*/
 .social-icon {
   position: relative;
   padding: 0;
@@ -216,7 +216,7 @@ img.image-blur:hover {
 .enamad img {
   width: 120px;
   text-align: center;
-  background: #fff;
+  background: #eceff8;
   padding: 9px;
   border-radius: 5px;
   position: relative;
@@ -229,15 +229,51 @@ img.image-blur:hover {
   box-shadow: 0 0 30px #000;
 }
 
+.vertical-padding {
+  padding-top: 10px !important;
+}
+
+.footer-note {
+  padding: 30px 15px;
+  text-align: right;
+  color: #f1f1f1;
+  line-height: 1.618;
+  border-top: 2px solid #000235;
+}
+
+#note-text.collapse[aria-expanded="false"] {
+  display: block;
+  height: 44px !important;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  direction: rtl;
+  color: #f1f1f1;
+}
+
+#note-text.collapsing[aria-expanded="false"] {
+  height: 44px !important;
+}
+
+.content-wrapper a.collapsed {
+  color: #fff;
+}
+
+.content-wrapper a.collapsed:after {
+  content: "مشاهده بیشتر +";
+}
+
+.content-wrapper a#note-close:not(.collapsed):after {
+  content: "بستن -";
+}
+
 @media screen and (max-width: 767px) {
   .contact-us {
-    border-top: 2px solid #f8f8f8;
+    border-top: 2px solid #000111;
     padding: 15px;
     margin: 15px 0;
   }
-}
-.vertical-padding {
-  padding-top: 10px !important;
 }
 </style>
 
@@ -246,7 +282,7 @@ img.image-blur:hover {
     <footer id="footer">
       <div class="container">
         <div class="row">
-          <div class="col-xs-12 col-sm-6 col-md-4 pull-left">
+          <!-- <div class="col-xs-12 col-sm-6 col-md-4 pull-left">
             <ul class="list-unstyled footer-list">
               <li>
                 <div class="enamad">
@@ -254,71 +290,93 @@ img.image-blur:hover {
                     target="_blank"
                     href="https://trustseal.enamad.ir/?id=129504&amp;Code=I3flHhEiFZPLWVe9vTFK"
                   >
-                    <img
-                      src="https://Trustseal.eNamad.ir/logo.aspx?id=129504&amp;Code=I3flHhEiFZPLWVe9vTFK"
-                      alt
-                      style="cursor:pointer"
-                      id="I3flHhEiFZPLWVe9vTFK"
-                    />
-                  </a>
+                    <img src="../../../../img/enamad.jpg" alt /> -->
+          <!--                                        <img-->
+          <!--                                                src="https://Trustseal.eNamad.ir/logo.aspx?id=129504&amp;Code=I3flHhEiFZPLWVe9vTFK"-->
+          <!--                                                alt-->
+          <!--                                                style="cursor:pointer"-->
+          <!--                                                id="I3flHhEiFZPLWVe9vTFK"-->
+          <!--                                        />-->
+          <!-- </a>
                 </div>
               </li>
             </ul>
-          </div>
+          </div> -->
 
           <div class="col-xs-12 col-sm-6 col-md-4">
             <ul class="list-unstyled footer-list">
+              <!--   <li>
+                                 <router-link
+                                   class="smoothScroll"
+                                   to="/pricing"
+                                   @click="registerComponentStatistics('footer','pricing','click-on-pricing')"
+                                 >
+                                   ارتقا عضویت
+                                 </router-link>
+              </li>-->
               <li>
-                <router-link
-                  class="smoothScroll"
-                  to="/pricing"
-                  @click="registerComponentStatistics('footer','pricing','click-on-pricing')"
+                <router-link class="smoothScroll" to="#"
+                  >قیمت روزانه</router-link
                 >
-                  تعرفه
-                  ها
-                </router-link>
-              </li>
-              <li>
-                <router-link class="smoothScroll" to="#">قیمت روزانه</router-link>
               </li>
               <li>
                 <router-link
                   class="smoothScroll"
                   to="/privacy-and-policy"
-                  @click="registerComponentStatistics('footer','privacy-and-policy','click-on-privacy-policy')"
+                  @click="
+                    registerComponentStatistics(
+                      'footer',
+                      'privacy-and-policy',
+                      'click-on-privacy-policy'
+                    )
+                  "
                 >
-                  قوانین
-                  و مقررات
+                  قوانین و مقررات
                 </router-link>
               </li>
               <li>
                 <router-link
                   class="smoothScroll"
                   to="/help"
-                  @click="registerComponentStatistics('footer','help','click-on-help')"
+                  @click="
+                    registerComponentStatistics(
+                      'footer',
+                      'help',
+                      'click-on-help'
+                    )
+                  "
                 >
-                  اینکوباک چگونه
-                  کار می کند؟
+                  باسکول چگونه کار می کند؟
                 </router-link>
               </li>
               <li>
                 <router-link
                   class="smoothScroll"
                   to="/about-us"
-                  @click="registerComponentStatistics('footer','about-us','click-on-about-us')"
+                  @click="
+                    registerComponentStatistics(
+                      'footer',
+                      'about-us',
+                      'click-on-about-us'
+                    )
+                  "
                 >
-                  درباره
-                  ما
+                  درباره ما
                 </router-link>
               </li>
               <li>
                 <router-link
                   class="smoothScroll"
                   to="/contact-us"
-                  @click="registerComponentStatistics('footer','contact-us','click-on-contact-us')"
+                  @click="
+                    registerComponentStatistics(
+                      'footer',
+                      'contact-us',
+                      'click-on-contact-us'
+                    )
+                  "
                 >
-                  ارتباط
-                  با ما
+                  ارتباط با ما
                 </router-link>
               </li>
             </ul>
@@ -328,8 +386,130 @@ img.image-blur:hover {
             <p>آدرس</p>
             <p class="vertical-padding">شیراز، خیابان ارم کوچه 15 پلاک 264</p>
             <br />
-            <p>تماس با ما</p>
-            <p class="vertical-padding">‌09118413054 / 09178928266</p>
+            <!-- <p>تماس با پشتیبانی باسکول</p>
+            <p class="vertical-padding">‌09118413054 / 09178928266</p> -->
+          </div>
+        </div>
+      </div>
+      <div class="footer-note">
+        <div class="container">
+          <div class="content-wrapper">
+            <div id="note-text" class="collapse" aria-expanded="false">
+              باسکول، بازار عمده خرید و فروش عمده محصولات کشاورزی ایران، فضایی
+              برای دسترسی مستقیم به تولیدکنندگان عمده محصولات کشاورزی است. اگر
+              خریدار عمده و صادرکننده هستید می توانید با استفاده از خدمات باسکول
+              از قیمت روز محصولات اطلاع پیدا کنید، به صورت مستقیم و بدون واسطه
+              با فروشندگان ارتباط بگیرید، سابقه فروشندگان و اعتبار آنها را
+              ببینید و با حرفه ای ها معامله کنید. باسکول با گردآوری انواع
+              محصولات کشاورزی و فروشنده های آن امکان مقایسه و بررسی موقعیت های
+              خرید را برای فعالین این حوزه فراهم کرده است. در بازار باسکول می
+              توانید محصولات گوناگون را با هم مقایسه کرده با ثبت درخواست خرید،
+              بهترین فروشنده و بهترین قیمت عمده را از میان هزاران محصول با قیمت
+              های مختلف بیابید. باسکول بازاری برای خرید و فروش عمده انواع
+              <a
+                href="https://www.buskool.com/product-list/category/%D8%A8%D8%B1%D9%86%D8%AC"
+                >برنج ایرانی و خارجی</a
+              >
+              و انواع
+              <a
+                href="https://www.buskool.com/product-list/category/%D8%AE%D8%B1%D9%85%D8%A7"
+                >خرما</a
+              >،
+              <a
+                href="https://www.buskool.com/product-list/category/%D9%BE%D8%B3%D8%AA%D9%87"
+                >پسته</a
+              >،
+              <a
+                href="https://www.buskool.com/product-list/category/%D8%B2%D8%B9%D9%81%D8%B1%D8%A7%D9%86"
+                >زعفران</a
+              >،
+              <a
+                href="https://www.buskool.com/product-list/category/%DA%A9%D8%B4%D9%85%D8%B4"
+                >کشمش</a
+              >،
+              <a
+                href="https://www.buskool.com/product-list/category/%D8%A7%D9%86%D8%AC%DB%8C%D8%B1"
+                >انجیر خشک</a
+              >
+              درجه یک صادراتی و همچنین انواع
+              <a
+                href="https://www.buskool.com/product-list/category/%D8%B3%DB%8C%D8%A8"
+                >سیب</a
+              >،
+              <a
+                href="https://www.buskool.com/product-list/category/%D9%BE%D8%B1%D8%AA%D9%82%D8%A7%D9%84"
+                >پرتقال</a
+              >،
+              <a
+                href="https://www.buskool.com/product-list/category/%D8%A7%D9%86%DA%AF%D9%88%D8%B1-"
+                >انگور</a
+              >،
+              <a
+                href="https://www.buskool.com/product-list/category/%D8%A7%D9%86%D8%A7%D8%B1"
+                >انار</a
+              >
+              و
+              <a
+                href="https://www.buskool.com/product-list/category/%D9%84%DB%8C%D9%85%D9%88-%D8%AA%D8%B1%D8%B4"
+                >لیموترش</a
+              >
+              درجه یک صادراتی به همراه
+              <a
+                href="https://www.buskool.com/product-list/category/%DA%AF%D9%88%D8%AC%D9%87"
+                >گوجه فرنگی</a
+              >،
+              <a
+                href="https://www.buskool.com/product-list/category/%D8%B3%DB%8C%D8%A8-%D8%B2%D9%85%DB%8C%D9%86%DB%8C"
+                >سیب زمینی</a
+              >،
+              <a
+                href="https://www.buskool.com/product-list/category/%D9%81%D9%84%D9%81%D9%84-%D8%AF%D9%84%D9%85%D9%87%20%D8%A7%DB%8C"
+                >فلفل دلمه ای</a
+              >،
+              <a
+                href="https://www.buskool.com/product-list/category/%D9%87%D9%88%DB%8C%D8%AC"
+                >هویج</a
+              >،
+              <a
+                href="https://www.buskool.com/product-list/category/%DA%A9%D9%84%D9%85"
+                >کلم</a
+              >،
+              <a
+                href="https://www.buskool.com/product-list/category/%D8%AE%DB%8C%D8%A7%D8%B1"
+                >خیار سبز</a
+              >،
+              <a
+                href="https://www.buskool.com/product-list/category/%D8%B3%DB%8C%D8%B1"
+                >سیر</a
+              >
+              درجه یک صادراتی را از بهترین فروشندگان و کشاورزان فراهم کرده است.
+              باسکول مرجع تخصصی خرید و فروش محصولات کشاورزی ایران به خصوص
+              محصولات صادراتی می باشد و خریدارانی که قصد
+              <a
+                href="https://blog.buskool.com/%da%86%da%af%d9%88%d9%86%da%af%db%8c-%d9%88-%d9%86%d8%ad%d9%88%d9%87-%d8%b5%d8%a7%d8%af%d8%b1%d8%a7%d8%aa-%da%a9%d8%a7%d9%84%d8%a7/"
+                >صادرات کالا</a
+              >
+              را دارند می توانند با استفاده از بازار باسکول بهترین فروشندگان
+              کالای صادراتی ایران را پیدا کنند. باسکول محیطی برای معاملات عمده
+              فراهم کرده است تا تولیدکنندگان یکی از دغدغه های اصلی یعنی فروش
+              محصولات خود را به راحتی حل کنند. اگر فروشنده هستید می توانند با
+              ثبت محصول خود و دسترسی به درخواست های خرید، محصول خود را به راحتی
+              به فروش برسانید و مشتریان جدیدی پیدا کنید. با مراجعه به بخش
+              درخواست های خرید به صورت روزانه می توانید به صورت مستقیم با خریدار
+              عمده ارتباط داشته باشید و با اطلاع از بازار با قیمت و شرایط بهتر
+              محصول خود را به فروش برسانید. به راحتی فضای کاری خود را به دنیای
+              دیجیتال گسترش دهید تا همه با برند و نام شما آشنا شوند و محصولات
+              خود را به خریداران در سراسر ایران معرفی کنید.
+            </div>
+            <a
+              role="button"
+              class="collapsed"
+              id="note-close"
+              data-toggle="collapse"
+              href="#note-text"
+              aria-expanded="false"
+              aria-controls="collapseExample"
+            ></a>
           </div>
         </div>
       </div>
@@ -342,17 +522,29 @@ img.image-blur:hover {
             <ul class="social-icon">
               <li>
                 <a
-                  href="https://www.instagram.com/incobac.ir/"
+                  href="https://www.instagram.com/buskool.ir/"
                   class="fab fa-instagram wow"
-                  @click="registerComponentStatistics('footer','instagram','click-on-instagram')"
+                  @click="
+                    registerComponentStatistics(
+                      'footer',
+                      'instagram',
+                      'click-on-instagram'
+                    )
+                  "
                 ></a>
               </li>
 
               <li>
                 <a
-                  href="https://t.me/Incobac"
+                  href="https://t.me/buskool"
                   class="fab fa-telegram wow"
-                  @click="registerComponentStatistics('footer','telegram','click-on-telegram')"
+                  @click="
+                    registerComponentStatistics(
+                      'footer',
+                      'telegram',
+                      'click-on-telegram'
+                    )
+                  "
                 ></a>
               </li>
 
@@ -360,30 +552,50 @@ img.image-blur:hover {
                 <a
                   href="https://www.linkedin.com/company/27058131/ "
                   class="fab fa-linkedin wow"
-                  @click="registerComponentStatistics('footer','linked-in','click-on-linked-in')"
+                  @click="
+                    registerComponentStatistics(
+                      'footer',
+                      'linked-in',
+                      'click-on-linked-in'
+                    )
+                  "
                 ></a>
               </li>
 
               <li>
                 <a
-                  href="https://twitter.com/incobac"
+                  href="https://twitter.com/buskool_BS"
                   class="fab fa-twitter wow"
-                  @click="registerComponentStatistics('footer','twitter','click-on-twitter')"
+                  @click="
+                    registerComponentStatistics(
+                      'footer',
+                      'twitter',
+                      'click-on-twitter'
+                    )
+                  "
                 ></a>
               </li>
 
               <li>
                 <a
-                  href="https://www.facebook.com/incobac/"
+                  href="https://www.facebook.com/buskool1/"
                   class="fab fa-facebook wow"
-                  @click="registerComponentStatistics('footer','facebook','click-on-facebook')"
+                  @click="
+                    registerComponentStatistics(
+                      'footer',
+                      'facebook',
+                      'click-on-facebook'
+                    )
+                  "
                 ></a>
               </li>
             </ul>
           </div>
 
           <div class="col-xs-12 col-sm-6">
-            <p class="wow copy-right">تمام حقوق مادی و معنوی سایت متعلق به اینکوباک است.</p>
+            <p class="wow copy-right">
+              تمام حقوق مادی و معنوی سایت متعلق به باسکول است.
+            </p>
           </div>
         </div>
       </div>
@@ -398,12 +610,16 @@ img.image-blur:hover {
 <script>
 export default {
   methods: {
-    registerComponentStatistics: function(categoryName, actionName, labelName) {
+    registerComponentStatistics: function (
+      categoryName,
+      actionName,
+      labelName
+    ) {
       gtag("event", actionName, {
         event_category: categoryName,
-        event_label: labelName
+        event_label: labelName,
       });
-    }
-  }
+    },
+  },
 };
 </script>

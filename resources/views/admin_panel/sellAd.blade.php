@@ -52,6 +52,16 @@
             <div class="box-header">
               <h3 class="box-title">جدول داده ها</h3>
             </div>
+            <form method="GET" action="{{Request::is('admin/sellAd') ? route('admin_panel_sellAd') : route('admin_panel_sellAd_list')}}">
+              <div class="row">
+                <div class="col-xs-4 col-xs-offset-4">
+                  <label>جستوجو‌ :‌ </label>
+                  <input type="text" name="search" placeholder="نام یا محصول">
+                  <input type="submit" class="btn btn-primary" value="برو">
+                </div>
+              </div>
+              
+            </form>
             <!-- /.box-header -->
             <div class="box-body">
               <table id="example1" class="table table-bordered table-striped">
@@ -63,6 +73,7 @@
                   <th>نام محصول</th>
                   <th>نام و نام خانوادگی</th>
                   <th>زمان ثبت</th>
+                  <th>ظرفیت باقیمانده</th>
                   <th>مشاهده</th>
                 </tr>
                 </thead>
@@ -75,10 +86,16 @@
                         <td>{{$sellAd->product_name}}</td>                    
                         <td>{{$sellAd->first_name . ' ' . $sellAd->last_name}}</td>                    
                         <td>{{$sellAd->created_at}}</td>                    
+                        <td>{{$sellAd->remained_capacity}}</td>                    
                         <td><a href="{{route($sellAd->confirmed ? 'admin_panel_load_confirmed_sellAd_by_id' : 'admin_panel_load_unconfirmed_sellAd_by_id',['sellAd_id' => $sellAd->id])}}">مشاهده جزییات</a></td>
                     </tr>
                 @endforeach
               </table>
+
+              <div align="center">
+                {{$sellAds->appends($_GET)->render("pagination::default")}}
+              </div>
+              
             </div>
             <!-- /.box-body -->
           </div>
@@ -116,9 +133,9 @@
 <!-- page script -->
 <script>
   $(function () {
-    $('#example1').DataTable()
-    $('#example2').DataTable({
-      'paging'      : true,
+    // $('#example1').DataTable()
+    $('#example1').DataTable({
+      'paging'      : false,
       'lengthChange': false,
       'searching'   : false,
       'ordering'    : true,

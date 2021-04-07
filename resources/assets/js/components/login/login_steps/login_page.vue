@@ -237,15 +237,19 @@ input.error:focus + i {
           class="submit-button disabled"
           :class="{'active' : phoneNumber.length >= 11 && password.length}"
           @click.prevent="doLogin()"
-        >ورود</button>
+        >
+        <span v-if="phoneNumber.length >= 11 && password.length && $parent.loginBtnLoading" class="fas fa-circle-notch fa-spin"></span>
+
+         ورود
+        </button>
 
         <div class="register-form">
           <p>
-            <span>برای ثبت نام در اینکوباک بر روی دکمه زیر کلیک کنید</span>
+            <span>برای ثبت نام در باسکول بر روی دکمه زیر کلیک کنید</span>
             <img src="./img/banner-arrow.png" />
           </p>
 
-          <router-link to="/register" class="register-button vertical-padding">ثبت نام در اینکوباک</router-link>
+          <router-link to="/register" class="register-button vertical-padding">ثبت نام در باسکول</router-link>
         </div>
       </div>
     </div>
@@ -257,7 +261,7 @@ export default {
   data: function() {
     return {
       phoneNumber: this.$parent.step1.phone,
-      password: this.$parent.step1.password
+      password: this.$parent.step1.password,
     };
   },
   methods: {
@@ -269,10 +273,10 @@ export default {
     phoneNumber: function(value) {
       this.$parent.errors.phone = "";
 
-      if (this.phoneNumber.length >= 11) {
+      // if (this.phoneNumber.length >= 11) {
         this.phoneNumber = this.phoneNumber.substring(0, 11);
         this.$parent.step1.phone = this.phoneNumber;
-      }
+      // }
     },
     password: function(value) {
       this.$parent.errors.password = "";

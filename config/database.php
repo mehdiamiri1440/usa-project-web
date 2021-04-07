@@ -50,8 +50,15 @@ return [
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
             'prefix' => '',
-            'strict' => true,
+            'strict' => false,
             'engine' => null,
+            'dump' => [
+                'dump_binary_path' => '/usr/local/bin', // only the path, so without `mysqldump` or `pg_dump`
+                'use_single_transaction',
+                // 'timeout' => 60 * 5, // 5 minute timeout
+                // 'exclude_tables' => ['table1', 'table2'],
+                // 'add_extra_option' => '--optionname=optionvalue', 
+             ]  
         ],
         
         'inspectors' => [
@@ -73,7 +80,7 @@ return [
             'driver' => 'mysql',
             'host' => env('DB_HOST', '127.0.0.1'),
             'port' => env('DB_PORT', '3306'),
-            'database' => env('THIRD_DB_DATABASE', 'forge'),
+            'database' => env('DB_BLOG_DATABASE', 'forge'),
             'username' => env('DB_USERNAME', 'forge'),
             'password' => env('DB_PASSWORD', ''),
             'unix_socket' => env('DB_SOCKET', ''),
@@ -82,6 +89,13 @@ return [
             'prefix' => '',
             'strict' => true,
             'engine' => null,
+            'dump' => [
+                'dump_binary_path' => '/usr/local/bin', // only the path, so without `mysqldump` or `pg_dump`
+                'use_single_transaction',
+                // 'timeout' => 60 * 5, // 5 minute timeout
+                // 'exclude_tables' => ['table1', 'table2'],
+                // 'add_extra_option' => '--optionname=optionvalue', 
+             ]
         ],
         
         'forum' => [

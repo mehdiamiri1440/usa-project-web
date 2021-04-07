@@ -4,13 +4,16 @@ namespace App\Http\Controllers\admin_panel;
 
 use \Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\product;
-use App\category;
-use App\product_media;
+use App\Models\product;
+use App\Models\category;
+use App\Models\product_media;
 use DB;
-use App\Http\Controllers\sms_controller;
-use App\myuser;
+use App\Http\Controllers\Notification\sms_controller;
+use App\Models\myuser;
 use App\Http\Library\date_convertor;
+use Carbon\Carbon;
+use App\Jobs\Backups\SaveProductPhotosInCloud;
+use App\Jobs\Notifiers\NotifyBuyersIfAnyNewRelatedProductRegistered;
 
 class admin_sellAd_controller extends Controller
 {
@@ -20,8 +23,11 @@ class admin_sellAd_controller extends Controller
         'products.confirmed',
         'products.created_at',
         'products.category_id',
+        'products.myuser_id',
         'myusers.first_name',
         'myusers.last_name',
+        'myusers.active_pakage_type',
+        'myusers.extra_product_capacity',
     ];
     
     protected $sellAd_detail_fields_array = [
@@ -61,13 +67,13 @@ class admin_sellAd_controller extends Controller
     ];
     
     
-    protected $sellAd_confirmation_sms_text = 'آگهی فروش شما در سامانه ی اینکوباک تایید گردید.';
+    protected $sellAd_confirmation_sms_text = 'آگهی فروش شما در سامانه ی باسکول تایید گردید.';
     
-    public function load_unconfirmed_sellAd_list()
+    public function load_unconfirmed_sellAd_list(Request $request)
     {
-        $unconfirmed_sellAd_list = $this->get_sellAd_list(0);
+        $unconfirmed_sellAd_list = $this->get_sellAd_list(0,$request);
         
-        $this->add_categories_to_sellAd_list($unconfirmed_sellAd_list);
+        $this->add_meta_data_to_sellAd_list($unconfirmed_sellAd_list);
         
         return view('admin_panel.sellAd',[
             'sellAds' => $unconfirmed_sellAd_list, 
@@ -75,11 +81,11 @@ class admin_sellAd_controller extends Controller
         ]);
     }
     
-    public function load_confirmed_sellAd_list()
+    public function load_confirmed_sellAd_list(Request $request)
     {
-        $confirmed_sellAd_list = $this->get_sellAd_list(1);
+        $confirmed_sellAd_list = $this->get_sellAd_list(1,$request);
         
-        $this->add_categories_to_sellAd_list($confirmed_sellAd_list);
+        $this->add_meta_data_to_sellAd_list($confirmed_sellAd_list);
         
         return view('admin_panel.sellAd',[
             'sellAds' => $confirmed_sellAd_list, 
@@ -87,19 +93,44 @@ class admin_sellAd_controller extends Controller
         ]);
     }
     
-    protected function get_sellAd_list($confirm_status)
+    protected function get_sellAd_list($confirm_status,&$request)
     {
-        $list = DB::table('products')
+        if($request->filled('search'))
+        {
+            $search = $request->search;
+
+            $search_array = explode(' ',$search);
+
+            $search_expresion = '';
+            foreach ($search_array as $text) {
+                $search_expresion .= "%$text%";
+            }
+
+            $list = DB::table('products')
+                        ->leftJoin('myusers','products.myuser_id','=','myusers.id') 
+                        ->where('products.confirmed',$confirm_status)
+                        ->where(function($q) use($search_expresion){
+                            return $q = $q->where('product_name','like',$search_expresion)
+                                            ->orWhere(DB::raw("CONCAT(myusers.first_name,' ',myusers.last_name)"),'like',$search_expresion);
+                        })
+                        ->select($this->sellAd_list_neccessary_fields_array)
+                        ->orderBy('products.created_at','desc')
+                        ->paginate(10);
+        }
+        else{
+            $list = DB::table('products')
                         ->leftJoin('myusers','products.myuser_id','=','myusers.id') 
                         ->where('products.confirmed',$confirm_status)
                         ->select($this->sellAd_list_neccessary_fields_array)
                         ->orderBy('products.created_at','desc')
-                        ->get();
+                        ->paginate(10);
+        }
+        
 
-        return collect($list);
+        return $list;
     }
     
-    protected function add_categories_to_sellAd_list(&$sellAd_list)
+    protected function add_meta_data_to_sellAd_list(&$sellAd_list)
     {
         $date_convertor_object = new date_convertor();
          
@@ -111,6 +142,10 @@ class admin_sellAd_controller extends Controller
             
             $sellAd->sub_category_name = $sub_category_record->category_name;
             $sellAd->category_name = $category_record->category_name;
+
+            $sellAd_owner_confirmed_products = $this->get_seller_confirmed_products_count($sellAd->myuser_id);
+
+            $sellAd->remained_capacity = (config("subscriptionPakage.type-{$sellAd->active_pakage_type}.max-products") + $sellAd->extra_product_capacity ) - $sellAd_owner_confirmed_products;
         });
     }
     
@@ -134,6 +169,18 @@ class admin_sellAd_controller extends Controller
            'category_name' => $category_name,
            'related_media' => $product_related_media,
         ]);
+    }
+
+    protected function get_seller_confirmed_products_count($seller_id)
+    {
+        $count = DB::table('products')
+                        ->where('myuser_id',$seller_id)
+                        ->where('confirmed',true)
+                        ->whereNull('deleted_at')
+                        ->get()
+                        ->count();
+
+        return $count;
     }
     
     public function load_confirmed_sellAd_by_id($sellAd_id)
@@ -192,13 +239,25 @@ class admin_sellAd_controller extends Controller
                 }
             }
             
+            if($this->is_user_package_active($user_id)){
+                if($this->is_it_user_first_confirmed_product($user_id)){
+                    $now = Carbon::now();
+                    
+                    $sellAd_record->is_elevated = true;
+                    $sellAd_record->elevator_expiry = $now->addDays(14);
+                }
+            }
+            
             $sellAd_record->confirmed = true;
             
             $sellAd_record->save();
-            
+
+            NotifyBuyersIfAnyNewRelatedProductRegistered::dispatch($sellAd_record);
+
+            // SaveProductPhotosInCloud::dispatch($sellAd_record->id);
             //send SMS
-            $sms_controller_object = new sms_controller();            
-            $sms_controller_object->send_status_sms_message($sellAd_record,$this->sellAd_confirmation_sms_text);
+//            $sms_controller_object = new sms_controller();            
+//            $sms_controller_object->send_status_sms_message($sellAd_record,$this->sellAd_confirmation_sms_text);
             
             return redirect()->route('admin_panel_sellAd');
         }
@@ -254,6 +313,30 @@ class admin_sellAd_controller extends Controller
             'status' => true,
            'msg' => 'photo deleted', 
         ]);
+    }
+    
+    protected function is_user_package_active($user_id)
+    {
+        $user_record = myuser::find($user_id);
+        
+        if($user_record->active_pakage_type >= 2){
+            return true;
+        }
+        
+        return false;
+    }
+    
+    protected function is_it_user_first_confirmed_product($user_id)
+    {
+        $products = DB::table('products')->where('myuser_id',$user_id)
+                            ->where('confirmed',true)
+                            ->get();
+        
+        if($products->count() > 0){
+            return false;
+        }
+        
+        return true;
     }
     
 }

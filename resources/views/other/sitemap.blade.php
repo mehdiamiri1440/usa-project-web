@@ -27,19 +27,19 @@
 
 <url>
   <loc>{{url("login")}}</loc>
-  <changefreq>daily</changefreq>
+  <changefreq>monthly</changefreq>
   <priority>0.5</priority>
 </url>
 
 <url>
   <loc>{{url("register")}}</loc>
-  <changefreq>daily</changefreq>
+  <changefreq>monthly</changefreq>
   <priority>0.5</priority>
 </url>
 
-@foreach($user_names as $user_name)
+@foreach($categories as $item)
     <url>
-      <loc>{{url("profile/".$user_name->user_name)}}</loc>
+      <loc>{{url("product-list/category/".$item)}}</loc>
       <changefreq>daily</changefreq>
       <priority>0.5</priority>
     </url>
@@ -48,7 +48,7 @@
     
 @foreach($products as $product)
     <url>
-      <loc>{{url("product-view/".str_replace(' ','-',$product['main']->category_name)."/"."خرید-عمده-".str_replace(' ','-',$product['main']->sub_category_name)."/".$product['main']->id)}}</loc>
+      <loc>{{url("product-view/".str_replace(' ','-',$product->category_name)."/"."خرید-عمده-".str_replace(' ','-',$product->sub_category_name)."/".$product->id)}}</loc>
       <changefreq>monthly</changefreq>
       <priority>0.5</priority>
     </url>

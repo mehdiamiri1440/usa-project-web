@@ -42,7 +42,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        تراکنش های منتظر تسویه کردن اینکوباک با فروشنده
+        تراکنش های منتظر تسویه کردن باسکول با فروشنده
       </h1>
     </section>
 

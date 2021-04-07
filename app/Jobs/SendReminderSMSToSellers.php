@@ -8,8 +8,8 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Carbon\Carbon;
-use App\product;
-use App\myuser;
+use App\Models\product;
+use App\Models\myuser;
 use App\Jobs\sendSMS;
 use DB;
 
@@ -37,7 +37,7 @@ class SendReminderSMSToSellers implements ShouldQueue
         $sellers_to_notify = $this->get_sellers_who_did_not_registered_product_48_hours_after_signup();
         
         $sellers_to_notify->each(function($user){
-             sendSMS::dispatch($user->phone,18295)->onQueue('sms');
+             sendSMS::dispatch($user->phone,20692)->onQueue('sms');
         });
     }
     

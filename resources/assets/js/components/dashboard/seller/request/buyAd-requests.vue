@@ -1,6 +1,46 @@
 <style scoped>
-ul {
+/* .requests .main-content {
+  padding-top: 50px;
+} */
+
+.user-information-wrapper {
+  float: right;
+  width: 100%;
+  margin-bottom: 4px;
+}
+
+.user-information-content {
+  display: block;
+  float: right;
+  width: 100%;
+  background: none;
+  border: none;
+  padding-bottom: 3px;
+}
+.user-image {
+  width: 25px;
+  height: 25px;
+  float: right;
+  margin-left: 10px;
+}
+.user-content {
+  display: block;
+  max-width: 170px;
   overflow: hidden;
+  font-size: 13px;
+  font-weight: 400;
+  color: #adadad;
+  height: 21px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  text-align: right;
+}
+
+.user-content i {
+  margin-left: 1px;
+  position: relative;
+  top: 3px;
+  font-size: 15px;
 }
 
 .wrapper_no_pro {
@@ -22,26 +62,35 @@ ul {
 
 .list-title,
 .needs,
-.list-time {
+.list-time,
+.list-notice {
   float: right;
   text-align: center;
   line-height: 1.618;
   font-weight: bold;
-  padding-top: 5px;
+  padding: 5px;
 }
 
 .list-group-item {
   border: 1px solid #ddd;
+  padding: 11px 15px 15px;
+}
+.list-group-item:nth-last-of-type(2n + 1) {
+  background: #f9fcff !important;
 }
 
 .detail-success {
-  padding: 8px 0;
+  padding: 10px 0;
   width: 100%;
   background: #00c569;
   color: #fff;
   text-align: center;
   border-radius: 5px;
-  font-size: 13px;
+  font-size: 17px;
+  font-weight: bold;
+  display: block;
+  max-width: 250px;
+  margin: 13px auto 0;
 }
 
 .main-content > ul {
@@ -53,6 +102,9 @@ ul {
 .main-content .list-group-item p {
   text-align: center;
   direction: rtl;
+  padding-top: 25px;
+  font-size: 15px;
+  font-weight: bold;
 }
 
 #main.little-main {
@@ -66,129 +118,237 @@ ul {
   line-height: 1.618;
 }
 
-.text-red {
-  color: #e41c38;
+.request-detail .green-button {
+  font-size: 16px;
+  padding: 8px 30px;
 }
-
 .title {
-  text-align: right;
+  background: #f6f6f6;
+  position: fixed;
+  right: 250px;
+  left: 0;
+  z-index: 1;
+  border-radius: 0;
   padding: 13px 15px;
 }
 
+.placeholder-title h1,
 .title h1 {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold;
+  line-height: 1.9;
+}
+.fix-request-header-box {
+  background: #eff3f6;
+  position: fixed;
+  right: 250px;
+  left: 0;
+  z-index: 2;
+  border-radius: 0;
+  padding: 10px 0;
 }
 
-.list-placeholder-wrapper {
-  border: 1px solid rgb(221, 221, 221);
+.fix-request-bottom {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  background: #fff;
+  border-radius: 0;
+  padding: 10px 0;
+}
+.request-update button {
+  margin: 0;
+  padding: 3px 14px;
+  margin-right: 6px;
+}
+
+#main.little-main .fix-request-header-box,
+#main.little-main .title {
+  right: 80px;
+}
+
+.detail-contents {
+  margin: 15px auto;
+}
+.detail-contents > div {
+  background: #fff;
+  padding: 15px;
+  margin-bottom: 15px;
+  line-height: 25px;
+  font-size: 30px;
+}
+.list-notice {
+  text-align: right;
+  height: 32px;
+}
+.list-notice button {
+  background: none;
+
+  border: none;
+
+  color: #556080;
+
+  padding: 0;
 
   position: relative;
 
-  overflow: hidden;
-
-  border-radius: 0 0 3px 3px;
-
-  margin-bottom: 20px;
-
-  border-top: none;
-
-  background: #f6f6f6;
+  top: -5px;
 }
+.list-notice button > span:first-of-type {
+  position: relative;
 
-.list-placeholder-wrapper ul {
-  margin: 0;
-
-  overflow: hidden;
-
-  border: none;
+  font-size: 26px;
 }
+.list-notice button > span.request-count {
+  font-size: 18px;
 
-.list-placeholder-wrapper li {
-  background: none;
+  position: relative;
 
-  -webkit-filter: blur(8px);
-
-  filter: blur(8px);
+  top: -5px;
 }
-
-.list-placeholder::after {
+.list-notice button > span > i:last-of-type {
   position: absolute;
 
-  width: 100%;
+  left: 17px;
 
+  color: #fff;
+
+  font-size: 15px;
+
+  top: 7px;
+}
+
+.hide-reply {
+  display: none;
+}
+
+.wrapper-items {
+  padding-top: 60px;
+}
+.remove-filter-button {
+  background: #fff;
+  border-radius: 50px;
+  border: 1px solid #e41c39;
+  color: #777;
+  margin: 0;
+  padding: 2px 15px;
+  margin-right: 10px;
+}
+.remove-filter-icon {
+  position: relative;
+  top: 2px;
+  right: -6px;
+}
+.golden {
+  border: 2px solid transparent;
+  border-image-outset: 0;
+  border-image-repeat: stretch;
+  border-image-slice: 100%;
+  border-image-source: none;
+  border-image-width: 1;
+  -moz-border-image: -moz-linear-gradient(left, #3acfd5 0%, #3a4ed5 100%);
+  -webkit-border-image: -webkit-linear-gradient(left, #3acfd5 0%, #3a4ed5 100%);
+  border-image: linear-gradient(
+    21deg,
+    rgb(199, 168, 79) 0%,
+    rgb(249, 242, 159) 51%,
+    rgb(199, 168, 79) 100%
+  );
+  border-image-slice: 100%;
+  border-image-slice: 1;
+  position: relative;
+}
+.golden::after {
+  background: linear-gradient(
+    44deg,
+    rgb(199, 168, 79) 0%,
+    rgb(249, 242, 159) 51%,
+    rgb(199, 168, 79) 100%
+  );
+  width: 20px;
   height: 100%;
-
   content: "";
-
-  left: 0;
-
+  position: absolute;
+  right: 0;
   top: 0;
 }
-
-.list-placeholder-wrapper .link {
-  position: absolute;
-
-  width: 100%;
-
-  text-align: center;
-
-  top: calc(50% - 82px);
-
-  padding: 15px;
-}
-
-.list-placeholder-wrapper .link-wrapper-content {
-  max-width: 500px;
-
-  background: white;
-
-  padding: 15px;
-
-  border-radius: 4px;
-
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
-
-  margin: 0 auto;
-}
-
-.list-placeholder-wrapper .link p {
-  font-size: 19px;
-
-  font-weight: bold;
-
+.golden .detail-success {
+  background: linear-gradient(
+    21deg,
+    rgb(199, 168, 79) 0%,
+    rgb(249, 242, 159) 51%,
+    rgb(199, 168, 79) 100%
+  );
   color: #333;
-
-  margin-bottom: 4px;
-
-  line-height: 1.618;
 }
 
-.list-placeholder-wrapper .link a {
-  font-size: 14px;
+.lock p {
+  filter: blur(10px);
+}
 
+.lock span.lock-text {
+  position: absolute;
+  left: 0;
+  text-align: right;
+  right: 30px;
+  font-size: 20px;
   font-weight: bold;
-
-  margin-top: 4px;
+  color: #7e7e7e;
+  top: 45px;
+}
+.list-title.list-name {
+  text-align: right;
+  padding: 5px 15px;
+  direction: rtl;
+  color: #7e7e7e;
+}
+.list-title.list-name p {
+  text-align: right;
+  font-size: 18px;
 }
 
-@media screen and (max-width: 992px) {
-  .list-title,
-  .needs,
-  .list-time {
-    padding: 15px;
+@media screen and (max-width: 991px) {
+  .fix-request-header-box,
+  .title {
+    right: 0;
+  }
+  .default-list-title {
+    padding: 4px 15px;
   }
 }
-
 @media screen and (max-width: 767px) {
-  .main-content {
+  .list-title.list-name p {
+    text-align: center;
+    min-height: 83px;
+  }
+  .button-wrapper {
+    margin: 10px auto;
+  }
+
+  .main-content .list-group-item p {
+    padding-top: 10px;
+  }
+  .lock span.lock-text {
+    text-align: center;
+    right: 0;
+    top: 90px;
+  }
+  .golden::after {
+    display: none;
+  }
+  .main-content,
+  .wrapper-items {
     padding: 0;
   }
-  .green-button {
-    width: 100%;
+  .requests .main-content {
+    padding: 0 0 100px !important;
   }
-
   .title {
+    position: relative;
+  }
+  .title h1 {
     text-align: center;
   }
 
@@ -196,195 +356,514 @@ ul {
     max-width: 300px;
     margin: 0 auto;
   }
+
+  .default-button-full-with {
+    max-width: 300px;
+  }
+
+  .list-notice button > span.request-count {
+    font-size: 15px;
+    top: -5px;
+  }
+  .list-notice button > span > i:last-of-type {
+    left: 16px;
+
+    font-size: 12px;
+    top: 7px;
+  }
+  .list-notice button > span:first-of-type {
+    font-size: 23px;
+  }
+  .list-notice button > span.request-count {
+    font-size: 15px;
+  }
+  .list-title.list-name {
+    text-align: center !important;
+  }
+
+  .main-content .list-group-item p.list-notice {
+    text-align: left;
+    padding-left: 30px;
+  }
+
+  .main-content .list-group-item p.list-time {
+    text-align: right;
+    padding-right: 30px;
+    padding-top: 6px;
+  }
 }
 </style>
 <template>
   <div>
-    <section class="main-content col-xs-12" v-if="buyAds.length != 0">
-      <div class="title col-xs-12">
-        <div class="row">
-          <div class="col-xs-12 col-sm-4 pull-right">
-            <h1>درخواست ها</h1>
-          </div>
-        </div>
+    <category-filter v-if="categoryModal" />
+    <div
+      class="fix-request-bottom hidden-sm hidden-md hidden-lg shadow-content text-center"
+    >
+      <div class="col-xs-12 text-right">
+        <button
+          type="button"
+          @click.prevent="openCategoryModal()"
+          class="green-button bg-gray w-100 margin-0 hover-effect"
+        >
+          دسته بندی ها
+          <i class="fas fa-filter"></i>
+        </button>
       </div>
-      <div class="col-xs-12">
-        <div class="row">
-          <ul class="list-unstyled">
-            <li v-for="buyAd in buyAds" class="list-group-item col-xs-12">
-              <p class="list-title col-sm-3 col-xs-12">
-                <span v-text="buyAd.category_name"></span>
-
-                <span>|</span>
-
-                <span v-text="buyAd.subcategory_name"></span>
-
-                <span v-if="buyAd.name" v-text="' | ' + buyAd.name"></span>
-              </p>
-
-              <p class="needs col-sm-4 col-xs-12">
-                <span class="static-content">میزان نیازمندی :</span>
-
-                <span v-text="buyAd.requirement_amount"></span>
-
-                <span class="static-content">کیلوگرم</span>
-              </p>
-
-              <p class="list-time col-sm-2 col-xs-12" v-text="buyAd.register_date"></p>
-
-              <a class="col-sm-3 col-xs-12" href @click.prevent="openChat(buyAd)">
-                <p class="detail-success">
-                  <span class="fas fa-comment-alt"></span> پیام به خریدار
-                </p>
-              </a>
-            </li>
-          </ul>
-          <div class="list-placeholder-wrapper" v-if="buyAds.length <= 5">
-            <ul class="list-placeholder">
-              <li v-for="item in 3" class="list-group-item col-xs-12">
-                <p class="list-title col-sm-3 col-xs-12">
-                  <span>میوه</span>
-                  <span>|</span>
-                  <span>خرما</span>
-                  <span>| زاهدی</span>
-                </p>
-
-                <p class="needs col-sm-4 col-xs-12">
-                  <span class="static-content">میزان نیازمندی :</span>
-                  <span>1000</span>
-                  <span class="static-content">کیلوگرم</span>
-                </p>
-
-                <p class="list-time col-sm-2 col-xs-12">۱۲ آبان , ۱۳۹۷</p>
-
-                <a href class="col-sm-3 col-xs-12">
-                  <p class="detail-success">
-                    <span class="fas fa-comment-alt"></span> پیام به خریدار
-                  </p>
-                </a>
-              </li>
-            </ul>
-
-            <div class="link">
-              <div class="link-wrapper-content">
-                <p>
-                  سقف تعداد درخواست های خریدی که به شما نمایش داده میشود
-                  <span class="text-red">5</span>
-                  است
-                </p>
-                <router-link
-                  class="green-button"
-                  :to="{ name : 'dashboardPricingTableSeller' }"
-                >مشاهده تعرفه ها</router-link>
-              </div>
+    </div>
+    <div class="requests" v-show="isRequests">
+      <!-- <div
+        v-if="currentUser.user_info.active_pakage_type == 0"
+        class="fix-request-header-box request-update shadow-content text-center text-rtl"
+      >
+        <span>شما به درخواست های طلایی دسترسی ندارید</span>
+        <button
+          class="green-button bg-red hover-effect"
+          @click="isRequests = !isRequests"
+        >جزییات</button>
+      </div> -->
+      <!-- :class="{'padding-0-15' : currentUser.user_info.active_pakage_type != 0}" -->
+      <section class="main-content col-xs-12 padding-0-15'">
+        <div class="title">
+          <div class="row">
+            <div class="col-xs-12 text-rtl text-right col-sm-8 pull-right">
+              <h1>
+                درخواست های خرید
+                <button
+                  v-if="filterCategory"
+                  class="green-button remove-filter-button"
+                  @click.prevent="filterCategory = ''"
+                >
+                  <span class="red-text remove-filter-icon">
+                    <i class="fa fa-times"></i>
+                  </span>
+                  <span
+                    v-text="'دسته بندی : ' + filterCategory.category_name"
+                  ></span>
+                </button>
+              </h1>
+            </div>
+            <div
+              class="col-xs-12 col-sm-4 hidden-xs request-update pull-left text-left"
+            >
+              <button
+                type="button"
+                @click.prevent="openCategoryModal()"
+                class="green-button bg-gray hover-effect"
+              >
+                دسته بندی ها
+                <i class="fas fa-filter"></i>
+              </button>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+        <div v-if="buyAds.length != 0">
+          <ul class="list-unstyled wrapper-items">
+            <li
+              v-for="(buyAd, index) in buyAds"
+              :key="index"
+              class="list-group-item col-xs-12"
+              :class="{
+                golden: buyAd.is_golden,
+                lock:
+                  buyAd.is_golden &&
+                  currentUser.user_info.active_pakage_type == 0,
+              }"
+            >
+              <span
+                v-if="
+                  buyAd.is_golden &&
+                  currentUser.user_info.active_pakage_type == 0
+                "
+                class="lock-text"
+              >
+                <span> خریدار </span>
+                <span class="brand-text" v-text="buyAd.subcategory_name"></span>
+                <span> هستم </span>
+              </span>
+              <div class="list-title list-name col-sm-6 col-xs-12">
+                <div class="user-information-wrapper">
+                  <div class="user-information-content">
+                    <div class="user-content">
+                      <i class="fa fa-user-circle"></i>
+                      <span
+                        class="user-name-link"
+                        v-text="buyAd.first_name + ' ' + buyAd.last_name"
+                      >
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <p>
+                  <span> خریدار </span>
+                  <span
+                    class="red-text"
+                    v-if="
+                      buyAd.is_golden &&
+                      currentUser.user_info.active_pakage_type == 0
+                    "
+                    v-text="'0000'"
+                  ></span>
+                  <span
+                    class="red-text"
+                    v-else
+                    v-text="getConvertedNumbers(buyAd.requirement_amount)"
+                  ></span>
 
-    <section class="main-content col-xs-12 loading_images" v-else-if="buyAds.length === 0 && !load">
-      <div class="wrapper_no_pro">
-        <div class="content_no_pic">
-          <i class="fa fa-list-alt"></i>
+                  <span
+                    class="brand-text"
+                    v-text="buyAd.subcategory_name"
+                  ></span>
+                  <span v-if="buyAd.name"> از نوع </span>
+                  <span
+                    class="brand-text"
+                    v-if="buyAd.name"
+                    v-text="buyAd.name"
+                  ></span>
+
+                  <span> هستم </span>
+                </p>
+              </div>
+              <p class="list-notice col-sm-1 col-xs-6 pull-right">
+                <button
+                  v-if="
+                    buyAd.is_golden &&
+                    currentUser.user_info.active_pakage_type == 0
+                  "
+                  class="btn"
+                  type="button"
+                >
+                  <span class="gray-text">
+                    <i class="fas fa-comment-alt"></i>
+                    <i class="fas fa-exclamation"></i>
+                  </span>
+                  <span class="request-count">{{ "0+" }}</span>
+                </button>
+                <button
+                  v-else
+                  class="btn"
+                  type="button"
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="ظرفیت باقی مانده برای ارسال پیام به خریدار این محصول"
+                >
+                  <span class="gray-text">
+                    <i class="fas fa-comment-alt"></i>
+                    <i class="fas fa-exclamation"></i>
+                  </span>
+                  <span class="request-count">{{
+                    buyAd.reply_capacity + "+"
+                  }}</span>
+                </button>
+              </p>
+              <p
+                class="list-time col-sm-2 col-xs-6"
+                v-if="
+                  buyAd.is_golden &&
+                  currentUser.user_info.active_pakage_type == 0
+                "
+                v-text="'۱۳ تیر , ۱۳۰۴'"
+              ></p>
+              <p
+                class="list-time col-sm-2 col-xs-6"
+                v-else
+                v-text="buyAd.register_date"
+              ></p>
+
+              <a
+                v-if="
+                  buyAd.is_golden &&
+                  currentUser.user_info.active_pakage_type == 0
+                "
+                class="col-sm-3 col-xs-12 pull-left button-wrapper"
+                href
+                @click.prevent="openGoldenChatRestrictionModal()"
+              >
+                <span
+                  :id="'loader-' + buyAd.id"
+                  class="detail-success hover-effect"
+                >
+                  <span>
+                    پیام به خریدار
+                    <span class="fas fa-comment-alt"></span>
+                  </span>
+                  <span class="hide-reply text-rtl"> کمی صبر کنید... </span>
+                </span>
+              </a>
+              <a
+                v-else
+                href
+                class="col-sm-3 col-xs-12 pull-left button-wrapper"
+                @click.prevent="openChat(buyAd)"
+              >
+                <span
+                  :id="'loader-' + buyAd.id"
+                  class="detail-success hover-effect"
+                >
+                  <span>
+                    پیام به خریدار
+                    <span class="fas fa-comment-alt"></span>
+                  </span>
+                  <span class="hide-reply text-rtl"> کمی صبر کنید... </span>
+                </span>
+              </a>
+            </li>
+          </ul>
         </div>
+        <div
+          class="col-xs-12 wrapper-items"
+          v-else-if="buyAds.length === 0 && !load"
+        >
+          <div class="wrapper_no_pro">
+            <div class="content_no_pic">
+              <i class="fa fa-list-alt"></i>
+            </div>
 
-        <div class="text_no_pic">
-          <p>درخواست خرید مرتبط با شما وجود ندارد</p>
+            <div class="text_no_pic">
+              <p>درخواست خرید مرتبط با شما وجود ندارد</p>
+            </div>
+          </div>
         </div>
-      </div>
-    </section>
+        <div class="col-xs-12 wrapper-items" v-else-if="load">
+          <ul class="list-unstyled">
+            <li
+              v-for="(item, index) in 5"
+              :key="index"
+              class="list-group-item col-xs-12"
+            >
+              <p
+                class="default-list-title pull-right col-sm-9 hidden-xs margin-10-0"
+              >
+                <span
+                  class="placeholder-content content-full-width h-20"
+                ></span>
+              </p>
 
-    <section class="main-content col-xs-12 loading_images" v-show="load">
-      <img :src="loading_img" style="width:200px;height:200px" />
-    </section>
+              <p
+                class="list-title col-sm-2 col-xs-12 hidden-md hidden-lg hidden-sm"
+              >
+                <span
+                  class="placeholder-content content-half-width h-20 margin-auto"
+                ></span>
+              </p>
+
+              <p class="needs col-sm-4 col-xs-12 hidden-md hidden-lg hidden-sm">
+                <span
+                  class="placeholder-content content-default-width h-20 margin-auto"
+                ></span>
+              </p>
+
+              <p
+                class="list-time col-sm-2 col-xs-12 hidden-md hidden-lg hidden-sm"
+              >
+                <span
+                  class="placeholder-content content-min-width h-20 margin-auto"
+                ></span>
+              </p>
+
+              <p class="col-sm-3 col-xs-12">
+                <span
+                  class="placeholder-content default-button-full-with margin-10-auto"
+                ></span>
+              </p>
+            </li>
+          </ul>
+        </div>
+      </section>
+    </div>
+
+    <!-- <div class="request-detail" v-show="!isRequests">
+      <section class="main-content col-xs-12">
+        <div class="detail-contents shadow-content text-center text-rtl">
+          <div>
+            <p>
+              درخواست های خرید طلایی درخواست هایی است که احتمال خرید از سوی خریدار آن وجود بالاست. برای دسترسی به این درخواست ها نوع عضویت خود را ارتقا دهید.
+            </p>
+            <router-link
+              class="green-button"
+              :to="{ name : 'dashboardPricingTableSeller' }"
+            >ارتقا عضویت</router-link>
+          </div>
+        </div>
+      </section>
+    </div> -->
   </div>
 </template>
 
 <script>
 import { eventBus } from "../../../../router/router";
-
+import CategoryFilter from "./category-filter";
 export default {
-  props: ["loading_img", "storage", "defultimg"],
-  data: function() {
+  props: ["storage"],
+  components: {
+    CategoryFilter,
+  },
+  data: function () {
     return {
       currentUser: {
         profile: "",
-        user_info: ""
+        user_info: "",
       },
       buyAds: "",
+      allBuyAds: "",
       popUpMsg: "",
       load: false,
       textActive: false,
       items: [
         {
           message: "درخواست های جدید",
-          url: "buyAdRequests"
-        }
-      ]
+          url: "buyAdRequests",
+        },
+      ],
+      isRequests: true,
+      categoryModal: false,
+      filterCategory: "",
     };
   },
   methods: {
-    init: function() {
+    init: function () {
       this.load = true;
       var self = this;
+      this.filterBuyAdByCategory();
+      axios.post("/user/profile_info").then(function (response) {
+        self.currentUser = response.data;
+      });
 
       axios
         .post("/get_related_buyAds_list_to_the_seller")
-        .then(function(response) {
-          self.buyAds = response.data.buyAds;
+        .then(function (response) {
+          self.allBuyAds = response.data.buyAds;
+          self.buyAds = self.allBuyAds;
+
           self.load = false;
+          setTimeout(function () {
+            $(".list-notice button").tooltip();
+          }, 100);
         });
     },
-    openChat: function(buyAd) {
+    openChat: function (buyAd) {
+      var self = this;
+
+      let id = "#loader-" + buyAd.id;
+      self.hideReplyBtn(id);
+
+      axios
+        .post("/get_user_permission_for_buyAd_reply", {
+          buy_ad_id: buyAd.id,
+        })
+        .then(function (response) {
+          self.showReplyBtn(id);
+
+          if (response.data.permission == true) {
+            var contact = {
+              contact_id: buyAd.myuser_id,
+              first_name: buyAd.first_name,
+              last_name: buyAd.last_name,
+              profile_photo: null,
+              user_name: buyAd.user_name,
+              buyAd_id: buyAd.id,
+            };
+
+            eventBus.$emit("ChatInfo", contact);
+
+            self.registerComponentStatistics(
+              "buyAdReply",
+              "openChat",
+              "click on open chatBox"
+            );
+          } else {
+            eventBus.$emit("modal", "buyAdReplyLimit");
+            self.registerComponentStatistics(
+              "buyAdReply",
+              "openChat",
+              "permission denied"
+            );
+          }
+        });
+    },
+    hideReplyBtn: function (id) {
+      let itemFirst = id + " span:first-child";
+      let itemLast = id + " span:last-child";
+      $(itemFirst).hide();
+      $(itemLast).show();
+    },
+    showReplyBtn: function (id) {
+      let itemFirst = id + " span:first-child";
+      let itemLast = id + " span:last-child";
+      $(itemLast).hide();
+      $(itemFirst).show();
+    },
+    openGoldenChatRestrictionModal: function () {
+      eventBus.$emit("modal", "goldenBuyAdReplyLimit");
+
       this.registerComponentStatistics(
         "buyAdReply",
         "openChat",
-        "click on open chatBox"
+        "permission denied"
       );
-      var self = this;
-
-      axios
-        .post("/get_user_last_confirmed_profile_photo", {
-          user_id: buyAd.myuser_id
-        })
-        .then(function(response) {
-          var profile_photo = response.data.profile_photo;
-
-          var contact = {
-            contact_id: buyAd.myuser_id,
-            first_name: buyAd.first_name,
-            last_name: buyAd.last_name,
-            profile_photo: profile_photo,
-            user_name: buyAd.user_name
-          };
-
-          axios
-            .post("/set_last_chat_contact", contact)
-            .then(function(response) {
-              self.$router.push("/seller/messages");
-            })
-            .catch(function(e) {
-              alert("Error");
-            });
-        })
-        .catch(function(err) {
-          //
-        });
     },
-    registerComponentStatistics: function(categoryName, actionName, labelName) {
+    getNumberWithCommas: function (number) {
+      if (number || typeof number === "number")
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      else return "";
+    },
+    getConvertedNumbers: function (number) {
+      if (number || typeof number === "number") {
+        let data = number / 1000;
+        if (number < 1000) {
+          return number + " " + "کیلوگرم";
+        } else {
+          data = this.getNumberWithCommas(data);
+          return data + " " + "تن";
+        }
+      } else return "";
+    },
+    registerComponentStatistics: function (
+      categoryName,
+      actionName,
+      labelName
+    ) {
       gtag("event", actionName, {
         event_category: categoryName,
-        event_label: labelName
+        event_label: labelName,
       });
-    }
+    },
+    openCategoryModal: function () {
+      this.categoryModal = true;
+      setTimeout(function () {
+        $("#fitler-modal").modal("show");
+      }, 200);
+    },
+    filterBuyAdByCategory: function () {
+      this.buyAds = "";
+      this.isRequests = true;
+      if (this.filterCategory.id) {
+        let filterBuyAd = this.allBuyAds;
+        filterBuyAd = filterBuyAd.filter(
+          (buyAd) => buyAd.category_id == this.filterCategory.id
+        );
+        this.buyAds = filterBuyAd;
+      } else {
+        this.buyAds = this.allBuyAds;
+      }
+      setTimeout(function () {
+        $(".list-notice button").tooltip();
+      }, 100);
+    },
+    scrollToTop() {
+      window.scrollTo(0, 0);
+    },
   },
   mounted() {
     this.init();
-    eventBus.$emit("subHeader", this.items);
+    eventBus.$emit("subHeader", false);
   },
   created() {
     gtag("config", "UA-129398000-1", { page_path: "/buyAd-requests" });
-  }
+  },
+  watch: {
+    filterCategory: function () {
+      this.filterBuyAdByCategory();
+    },
+  },
 };
 </script>

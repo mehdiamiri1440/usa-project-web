@@ -125,11 +125,10 @@
           <!-- /.box -->
         </div>
         <!-- /.col -->
+        <form action="{{route('admin_panel_profile_confirmation')}}" method="post">
         <div class="row">
             <div class="col-xs-12">
-                <div class="well well-lg">
-                    {{$profile->description}}
-                </div>
+                <textarea type="text" rows="10" cols="130" name="description">{{$profile->description}}</textarea>
             </div>
         </div>
       <!-- /.row -->
@@ -154,7 +153,6 @@
     <hr/>
     @if($profile->confirmed == 0)
         <div class="row">
-            <form action="{{route('admin_panel_profile_confirmation')}}" method="post">
                 <div class="col-xs-3 col-xs-offset-1">
                     <input type="hidden" name="type" value="accept">
                     <input type="hidden" name="user_id" value="{{$user_info['id']}}">

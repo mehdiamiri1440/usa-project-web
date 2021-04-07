@@ -1,5 +1,3 @@
-
-
 <style scoped>
 #main-content {
   padding-top: 122px;
@@ -39,7 +37,7 @@
   margin: 0;
 }
 
-#searchFilter .main_popup_content {
+#searchFilter .main_popup_content > div {
   padding: 0;
 }
 
@@ -105,17 +103,6 @@ a.close-dialog-popup {
 .header-nav a:hover {
   color: #333;
 }
-
-#header {
-  background: url("../../../../../../public/assets/img/topheader.jpg");
-  background-position: 50% 30%;
-  color: #fff;
-  background-size: cover;
-  overflow: hidden;
-  padding-top: 64px;
-  padding-bottom: 0;
-}
-
 .title-page {
   text-align: center;
 
@@ -134,14 +121,13 @@ a.close-dialog-popup {
 }
 
 .search-box input {
-  width: 100%;
   text-align: right;
   direction: rtl;
-  border: 1px solid #666666;
+  border: 1px solid #777;
   border-radius: 6px;
-  padding: 6px 35px 5px 15px;
-  background: #f8f8f8;
-  font-size: 12px;
+  padding: 6px 50px 5px 15px;
+  background: #fff;
+  font-size: 14px;
   float: right;
 }
 
@@ -149,23 +135,24 @@ a.close-dialog-popup {
   background: none;
   border: none;
   position: absolute;
-  right: 3px;
-  top: 9px;
+  right: 18px;
+  top: 15px;
   border-left: 1px solid;
-  color:
-  #777;
+  color: #777;
   padding: 0 7px;
-  font-size: 12px;
+  font-size: 22px;
   height: 20px;
 }
 
-.search-box button.btn-filter {
+button.btn-filter {
   float: left;
-  padding: 7px 10px;
-  border-radius: 5px;
+  padding: 6px 10px 7px;
+  border-radius: 3px;
   border: none;
   background: #000546;
   color: #fff;
+  width: 140px;
+  margin-right: 15px;
 }
 
 .links-sub-header {
@@ -230,13 +217,12 @@ a.close-dialog-popup {
   right: 0;
   z-index: 2;
   background: #f0f3f6;
-  padding: 0 15px;
-  border-bottom: 3px solid #ececec;
+  padding: 0;
 }
 
 /*  .main-padding-fix {
-          padding-top: 72px;
-      }*/
+              padding-top: 72px;
+          }*/
 
 li.active a {
   color: #313942;
@@ -296,72 +282,278 @@ li.active a::after {
 }
 
 .btn-loader {
-
   overflow: hidden;
-
 }
 
 .btn-loader-active-wrapper {
-
   height: 26px;
-
 }
 
 .btn-loader img {
-
   width: 56px;
 
   margin-top: -15px;
-
 }
 
-.response-rate-filter-desktop-wrapper, .response-rate-filter-mobile-wrapper{
+.rate-filter {
+  float: right;
+}
 
+.static-sort-item{
+  color: #999;
+}
+
+.rate-filter-desktop-wrapper,
+.rate-filter-mobile-wrapper {
   background: #fff;
   direction: rtl;
-  margin: 15px auto;
+  margin: 15px auto 0;
   padding: 7px 15px;
   border-radius: 5px;
-  -webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16);
-  box-shadow: 0 3px 6px
-  rgba(0,0,0,0.16);
+  -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
   overflow: hidden;
-
 }
 
-.response-rate-filter-desktop-wrapper .checkbox, .response-rate-filter-mobile-wrapper .chekbox{
+.rate-filter-desktop-wrapper > ul {
+  float: right;
+  padding: 4px 0;
+}
+
+.rate-filter-desktop-wrapper > ul li {
+  padding: 0;
+}
+
+.rate-filter-desktop-wrapper ul button {
+  background: none;
+
+  border: none;
+}
+.rate-filter label {
+  float: right;
+  margin-left: 7px;
+}
+
+.rate-filter > button {
+  padding: 8px 0;
+
+  font-size: 14px;
 
   margin: 0;
+
+  font-weight: 400;
+
+  width: 140px;
+}
+
+.filter-select-input-wrapper {
   float: right;
-
+  max-width: 138px;
+  position: relative;
 }
 
-.response-rate-filter-mobile-wrapper .checkbox-slider--b-flat{
-    margin: 0 auto 5px;
+.filter-select-input-wrapper:after {
+  content: "\F107";
+
+  color: #777;
+
+  position: absolute;
+
+  display: inline-block;
+
+  top: 9px;
+
+  font-family: "Font Awesome 5 Free", sans-serif;
+
+  font-weight: 900;
+
+  left: 6px;
+
+  font-size: 20px;
+
+  z-index: 0;
+}
+.filter-select-input-wrapper select {
+  width: 100%;
+
+  border-radius: 4px;
+
+  border: 1px solid;
+
+  padding: 6px 3px 6px 22px;
+
+  position: relative;
+
+  z-index: 1;
+
+  color: #777777;
+
+  direction: rtl;
+
+  transition: 200ms;
+
+  background: none;
+
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+}
+.text-green {
+  color: #00c569 !important;
 }
 
-.response-rate-filter-mobile-wrapper .checkbox-slider--b-flat input + span::before, .response-rate-filter-mobile-wrapper .checkbox-slider--b-flat input + span::after{
-    top: 0;
+.show-list-items {
+  float: left;
+  padding-top: 2px;
+}
+.show-list-items button {
+  background: #eee;
+  border: 1px solid #999;
+  border-radius: 5px;
+  padding: 3px 14px 0;
+  transition: 300ms;
+}
+.show-list-items button:hover {
+  background: #556080;
+  color: #fff;
+  border-color: #556080;
+  transition: 300ms;
+}
+.show-list-items button.active {
+  background: #556080;
+  color: #fff;
+  border-color: #556080;
+  transition: 300ms;
 }
 
-.response-rate-filter-mobile-wrapper{
-    padding: 10px 0;
-
-    margin: 0;
-
-    overflow: hidden;
-
-    float: right;
-
-    width: 100%;
-
-   box-shadow: none;
-   background: none;
+/* 
+.rate-filter-desktop-wrapper .checkbox,
+.rate-filter-mobile-wrapper .chekbox {
+  margin: 0;
+  float: right;
 }
+
+.rate-filter-mobile-wrapper .checkbox-slider--b-flat {
+  margin: 0 auto 5px;
+}
+
+.rate-filter-mobile-wrapper
+  .checkbox-slider--b-flat
+  input
+  + span::before,
+.rate-filter-mobile-wrapper
+  .checkbox-slider--b-flat
+  input
+  + span::after {
+  top: 0;
+}
+
+.rate-filter-mobile-wrapper {
+  padding: 7px 15px;
+  margin: 0;
+  overflow: hidden;
+  float: right;
+  width: 100%;
+  border-radius: 0;
+} */
+
+/* 
+---------------------------------------------------------------------------------
+
+filter modal styles
+*/
+
+.modal-content {
+  overflow: hidden;
+  border-radius: 12px;
+}
+.close-modal {
+  font-size: 20px;
+
+  color: #777;
+
+  position: absolute;
+
+  right: 0;
+
+  padding: 8px 15px 2px;
+
+  top: 0;
+}
+
+.modal-title {
+  font-size: 16px;
+
+  font-weight: 800;
+
+  color: #474747;
+
+  text-align: center;
+}
+
+.modal-header {
+  padding: 9px 15px 10px;
+}
+
+.modal-body {
+  padding: 0 15px;
+}
+.form-check-wrapper button {
+  width: 100%;
+
+  border: none;
+
+  background: none;
+
+  border-bottom: 1px solid #eee;
+
+  text-align: right;
+
+  padding: 12px 15px 13px;
+}
+.form-check-wrapper button.active {
+  color: #00c569;
+}
+.form-check-wrapper button.active + i {
+  color: #00c569;
+  content: "\f00c";
+}
+.form-check-wrapper button.active + i:before {
+  content: "\f00c";
+}
+.form-check-wrapper button:hover {
+  background: #fafafa;
+  cursor: pointer;
+}
+
+.form-check-wrapper li {
+  position: relative;
+}
+
+.form-check-wrapper li:last-of-type button {
+  border: none;
+}
+.form-check-wrapper li i {
+  position: absolute;
+
+  top: 15px;
+
+  left: 20px;
+
+  font-size: 18px;
+
+  color: #777;
+}
+
+/* 
+end filter modal styles
+---------------------------------------------------------------------------------
+*/
 
 @media screen and (max-width: 1199px) {
   .search-box input {
-    width: calc(100% - 75px);
+    width: 100%;
   }
 }
 
@@ -379,24 +571,51 @@ li.active a::after {
   }
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 768px) {
+  #filter-modal > div {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .modal-content {
+    min-height: 100%;
 
+    border-radius: 0;
+
+    border: none;
+
+    float: right;
+
+    width: 100%;
+  }
+  .main_popup_content > div {
+    padding: 0;
+  }
+  .main_popup_content {
+    padding: 0;
+  }
+}
+
+@media screen and (max-width: 767px) {
   .main-content,
   #main {
     padding: 0;
   }
+
   .main-content {
-    padding-top: 32px;
+    padding-top: 52px;
   }
+
   .sub-header {
     position: fixed;
-    z-index: 1;
+    z-index: 2;
     width: 100%;
   }
 
   .search-box {
-    margin: 7px auto 0;
-    padding: 0;
+    margin: 0 auto;
+    padding: 7px 15px;
+    background: #fbfbfb;
   }
 
   .main-image {
@@ -450,8 +669,26 @@ li.active a::after {
   .create_buy {
     display: none;
   }
+}
 
-
+.guide-button {
+  height: 32px;
+  border: solid 1px white;
+  background: #e41c38;
+  width: 100px;
+  line-height: 32px;
+  -webkit-transform: rotate(-90deg);
+  font-weight: 500;
+  color: white;
+  transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  text-align: center;
+  font-size: 17px;
+  position: fixed;
+  left: -40px;
+  top: 50%;
+  z-index: 999;
 }
 
 @media screen and (max-width: 715px) {
@@ -494,11 +731,11 @@ li.active a::after {
     padding: 6px 10px;
   }
 
-  #article-list > div {
+  #article-list > div > div {
     padding: 0;
   }
 
-  .default-items{
+  .default-items {
     padding: 0;
   }
 }
@@ -516,30 +753,37 @@ li.active a::after {
     float: left;
   }
 }
-
+.default-grid .default-main-article-content {
+  width: calc(100% - 90px);
+}
+.default-grid .default-wrapper-main-image {
+  width: 80px;
+  height: 80px;
+}
+.default-grid > div {
+  padding-bottom: 0;
+}
 @media screen and (max-width: 370px) {
-  .default-wrapper-main-image{
-    position: relative;
+  .mobile-hidden {
+    display: none;
+  }
+  .default-wrapper-main-image {
+    width: 90px;
+
+    height: 90px;
+  }
+  .default-main-article-content {
+    width: calc(100% - 90px);
+  }
+  .default-button-min-with {
     width: 100%;
-    height: 250px;
-    overflow: hidden;
-    border-radius: 4px;
   }
-  .default-main-article-content{
-    width: 100% ;
+}
 
-    position: relative;
-
-    top: 15px;
-
+@media screen and (min-width: 370px) {
+  .hidden-afetr-mobile-hidden {
+    display: none;
   }
-
-  .default-item-wrapper .default-button-min-with{
-    width: 100%;
-    margin-bottom: 15px;
-  }
-
-
 }
 </style>
 
@@ -548,16 +792,21 @@ li.active a::after {
     <!--modal-->
     <div class="container">
       <div
-        class="modal"
+        class="modal fade"
         id="searchFilter"
         tabindex="-1"
         role="dialog"
         aria-labelledby="searchFilter"
       >
         <div class="modal-dialog">
-          <a href="#" class="close-dialog-popup" data-dismiss="modal">
-            <i class="fa fa-times"></i>
-          </a>
+          <div class="modal-header">
+            <a href="#" class="close-modal" @click.prevent="closeFilterModal()">
+              <i class="fa fa-times"></i>
+            </a>
+            <div class="modal-title">
+              <span>دسته ها و فیلتر</span>
+            </div>
+          </div>
 
           <div class="main_popup_content">
             <div class="col-xs-12">
@@ -577,88 +826,217 @@ li.active a::after {
         <!-- /.modal-dialog -->
       </div>
     </div>
+    <div class="container">
+      <div
+        id="filter-modal"
+        class="filter-modal modal fade"
+        tabindex="-1"
+        role="dialog"
+      >
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <a href="#" class="close-modal" @click.prevent="closeSortModal()">
+                <i class="fa fa-times"></i>
+              </a>
+              <div class="modal-title">
+                <span>مرتب سازی بر اساس</span>
+              </div>
+            </div>
 
-    <div class="flat-plust-icon hidden-lg hidden-md">
-      <a href="#" @click.prevent="addProductOrRequest()">
-        <i class="fa fa-plus"></i>
+            <div class="modal-body col-xs-12">
+              <ul class="form-check-wrapper">
+                <li>
+                  <button
+                    @click="setSortOption('RR')"
+                    class="default-button-list"
+                    :class="{ active: sortOption == 'RR' }"
+                  >
+                    احتمال پاسخگویی
+                  </button>
+                  <i class="fa fa-angle-left"></i>
+                </li>
+                <li>
+                  <button
+                    @click="setSortOption('RT')"
+                    class="default-button-list"
+                    :class="{ active: sortOption == 'RT' }"
+                  >
+                    سرعت پاسخگویی
+                  </button>
+                  <i class="fa fa-angle-left"></i>
+                </li>
+                <li>
+                  <button
+                    @click="setSortOption('RD')"
+                    class="default-button-list"
+                    :class="{ active: sortOption == 'RD' }"
+                  >
+                    جدیدترین ها
+                  </button>
+                  <i class="fa fa-angle-left"></i>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+    </div>
+
+    <div
+      v-if="!currentUser.user_info"
+      class="flat-plust-icon hidden-lg hidden-md"
+    >
+      <a href="#" @click.prevent="openStickyGuide()">
+        <i class="fa fa-exclamation"></i>
       </a>
     </div>
 
-    <div class="sub-header-fix sub-header hidden-lg hidden-md hidden-sm container-fluid">
-        <div class="search-box col-sm-8 col-xs-12 col-lg-5 pull-right">
-          <input type="text" v-model="searchText" placeholder="اینجا جستجو کنید" />
+    <div v-if="!currentUser.user_info">
+      <button
+        class="guide-button hidden-sm hidden-xs"
+        @click.prevent="openStickyGuide()"
+      >
+        راهنما
+      </button>
+    </div>
 
-          <button class="btn-search">
-            <i class="fa-search fa"></i>
-          </button>
+    <div
+      class="sub-header-fix sub-header hidden-lg hidden-md hidden-sm container-fluid"
+    >
+      <div class="search-box col-sm-8 col-xs-12 col-lg-5 pull-right">
+        <input
+          type="text"
+          v-model="searchText"
+          placeholder="اینجا جستجو کنید"
+        />
 
-          <button class="btn-filter hidden-lg" data-toggle="modal" data-target="#searchFilter">
-            فیلتر
-            <i class="fa fa-filter"></i>
+        <button class="btn-search">
+          <i class="fa-search fa"></i>
+        </button>
+      </div>
+      <div class="rate-filter-mobile-wrapper">
+        <div class="rate-filter">
+          <button class="green-button bg-gray" @click.prevent="openSortModal()">
+            <i class="fas fa-sort-amount-down-alt"></i>
+            مرتب سازی
           </button>
         </div>
-        <div class="response-rate-filter-mobile-wrapper"> 
-          <div class="response-rate-filter">
-
-                <div class="checkbox checkbox-slider--b-flat">
-                  <label>
-                    <input type="checkbox" v-model="$parent.productByResponseRate"><span>                  مرتب سازی بر اساس احتمال پاسخ گویی
-</span>
-                  </label>
-                </div>
-
-              </div>
-        </div>
-       <!--  <div class="links-sub-header hidden-xs col-sm-4 pull-left">
-          <ul class="list-inline">
-            <li class="list-item active">
-              <h1>
-                <a href>لیست محصولات</a>
-              </h1>
-            </li>
-          </ul>
-        </div> -->
+        <button class="btn-filter hidden-lg" @click.prevent="openFilterModal()">
+          <i class="fa fa-filter"></i>
+          دسته ها و فیلتر
+        </button>
+      </div>
     </div>
 
     <main id="main" class="container">
       <div class="col-xs-12 col-lg-9">
         <div class="row">
+          <section class="hidden-xs col-xs-12">
+            <div class="rate-filter-desktop-wrapper">
+              <ul class="list-unstiled list-inline">
+                <li class="static-sort-item">
+                  <p>
+                    <i class="fa fa-sort-amount-down-alt"> </i>
+                    مرتب سازی بر اساس :
+                  </p>
+                </li>
+                <li>
+                  <button
+                    @click="setSortOption('RR')"
+                    :class="{ 'text-green': sortOption == 'RR' }"
+                  >
+                    احتمال پاسخگویی
+                  </button>
+                </li>
+                <li>
+                  <button
+                    @click="setSortOption('RT')"
+                    :class="{ 'text-green': sortOption == 'RT' }"
+                  >
+                    سرعت پاسخگویی
+                  </button>
+                </li>
+                <li>
+                  <button
+                    @click="setSortOption('RD')"
+                    :class="{ 'text-green': sortOption == 'RD' }"
+                  >
+                    جدیدترین ها
+                  </button>
+                </li>
+              </ul>
+              <button
+                class="btn-filter hidden-lg"
+                data-toggle="modal"
+                data-target="#searchFilter"
+              >
+                <i class="fa fa-filter"></i>
+                دسته ها و فیلتر
+              </button>
+              <div class="show-list-items hidden-xs hidden-sm">
+                <button
+                  @click.prevent="listIsGrid = true"
+                  :class="{ active: listIsGrid }"
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="نمایش ستونی"
+                >
+                  <i class="fas fa-grip-horizontal"></i>
+                </button>
 
-          <section class="hidden-xs  col-xs-12">
-            
-          
-              <div class="response-rate-filter-desktop-wrapper">
-
-                <div class="checkbox checkbox-slider--b-flat">
-                  <label>
-                    <input type="checkbox" v-model="$parent.productByResponseRate"><span>                  مرتب سازی بر اساس احتمال پاسخ گویی
-</span>
-                  </label>
-                </div>
-
+                <button
+                  @click.prevent="listIsGrid = false"
+                  :class="{ active: !listIsGrid }"
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="نمایش لیستی"
+                >
+                  <i class="fa fa-list"></i>
+                </button>
               </div>
-           
-
+            </div>
           </section>
 
-          <section class="main-content col-xs-12" v-if="products.length > 0  ">
+          <section class="main-content col-xs-12" v-if="products.length > 0">
             <div id="article-list" class="row">
-              <div class="col-xs-12" :key="productIndex" v-for="(product,productIndex) in products">
-                <ProductArticle
-                  :productIndex="productIndex"
-                  v-if="products.length >= productIndex"
-                  :key="product.main.id"
-                  :product="product"
-                  :loading_img="loading_img"
-                  :defultimg="defultimg"
-                  :str="str"
-                  :loading="loading"
-                  :currentUser="currentUser"
-                />
+              <div v-if="!listIsGrid">
+                <div
+                  class="col-xs-12"
+                  :key="productIndex"
+                  v-for="(product, productIndex) in products"
+                >
+                  <ProductArticle
+                    :productIndex="productIndex"
+                    v-if="products.length >= productIndex"
+                    :key="product.main.id"
+                    :product="product"
+                    :str="str"
+                    :currentUser="currentUser"
+                  />
+                </div>
+              </div>
+              <div v-else>
+                <div
+                  class="col-xs-12 col-md-4 pull-right"
+                  :key="productIndex"
+                  v-for="(product, productIndex) in products"
+                >
+                  <ProductGridArticle
+                    :productIndex="productIndex"
+                    v-if="products.length >= productIndex"
+                    :key="product.main.id"
+                    :product="product"
+                    :str="str"
+                    :currentUser="currentUser"
+                  />
+                </div>
               </div>
               <div
                 class="load-more-button col-xs-12"
-                v-if="searchText === '' && continueToLoadProducts === true "
+                v-if="continueToLoadProducts === true"
               >
                 <button class="btn btn-loader" @click.prevent="feed()">
                   <div class="btn-content">
@@ -667,13 +1045,19 @@ li.active a::after {
                       <i class="fa fa-plus"></i>
                     </span>
 
-                    <span class="hidden-sm hidden-md hidden-lg text-rtl" v-show="!loadMoreActive">
+                    <span
+                      class="hidden-sm hidden-md hidden-lg text-rtl"
+                      v-show="!loadMoreActive"
+                    >
                       محصولات بیشتر
                       <i class="fa fa-plus"></i>
                     </span>
 
-                    <div v-show="loadMoreActive" class="btn-loader-active-wrapper">
-                      <img :src="loading_img" />
+                    <div
+                      v-show="loadMoreActive"
+                      class="btn-loader-active-wrapper"
+                    >
+                      <img src="../../../../img/gif/loading.gif" />
                     </div>
                   </div>
                 </button>
@@ -681,107 +1065,116 @@ li.active a::after {
             </div>
           </section>
           <!-- test -->
-          <section
-            class="main-content col-xs-12"
+
+          <search-not-found
             v-else-if="products.length === 0 && searchActive === true"
-          >
-            <p></p>
+          />
+          <search-not-found
+            v-else-if="products.length === 0 && searchText !== ''"
+          />
+          <search-not-found
+            v-else-if="products.length === 0 && searchText === ''"
+          />
 
-            <h4 class="text-center" dir="rtl">جستجو نتیجه ای نداشت.</h4>
-
-            <p>شما می توانید درخواست خرید خود را در اینجا ثبت کنید.</p>
-
-            <br />
-
-            <div class="text-center">
-              <button class="btn btn-success">درخواست خرید</button>
-            </div>
-          </section>
-
-          <section
-            class="main-content col-xs-12"
-            v-else-if="products.length === 0 && searchText !== '' "
-          >
-            <p></p>
-
-            <h4 class="text-center" dir="rtl">جستجو نتیجه ای نداشت.</h4>
-
-            <p class="text-center" dir="rtl">شما می توانید درخواست خرید خود را در اینجا ثبت کنید.</p>
-            <br />
-
-            <div class="text-center">
-              <a
-                class="green-button col-xs-4"
-                @click.prevent="registerRequestInSearchNotFoundCase()"
+          <section v-else class="main-content col-xs-12">
+            <div class="row" v-if="!listIsGrid">
+              <div
+                v-for="(defaultItem, index) in 8"
+                :key="index"
+                class="default-items col-xs-12"
               >
-                درخواست
-                خرید
-              </a>
-              <br />
-
-              <a class="green-button col-xs-4" @click="resetFilter()">نمایش همه محصولات</a>
-            </div>
-
-            <br />
-          </section>
-
-          <section
-            class="main-content col-xs-12"
-            v-else-if="products.length === 0 && searchText === '' "
-          >
-            <p></p>
-
-            <h4 class="text-center" dir="rtl">جستجو نتیجه ای نداشت.</h4>
-
-            <p class="text-center" dir="rtl">شما می توانید درخواست خرید خود را در اینجا ثبت کنید.</p>
-
-            <br />
-
-            <div class="text-center">
-              <a
-                class="green-button col-xs-4"
-                @click.prevent="registerRequestInSearchNotFoundCase()"
-              >
-                درخواست
-                خرید
-              </a>
-
-              <br />
-              <a class="green-button col-xs-4" @click.prevent="resetFilter()">نمایش همه محصولات</a>
-            </div>
-
-            <br />
-          </section>
-
-          <section v-else class=" main-content col-xs-12">
-            <div class="row">
-              <div v-for="(defaultItem ,index) in 8" :key="index" class="default-items col-xs-12">
-                <div class="col-xs-12 padding-15 margin-15-0 default-item-wrapper shadow-content">
+                <div
+                  class="col-xs-12 padding-15 margin-15-0 default-item-wrapper shadow-content"
+                >
                   <div class="default-user-contents col-xs-12 padding-0">
-                    <div class="placeholder-content default-article-user-image pull-right"></div>
+                    <div
+                      class="placeholder-content default-article-user-image pull-right"
+                    ></div>
 
                     <span
                       class="padding-top-5 placeholder-content margin-15 pull-right content-min-width"
                     ></span>
-
-                    <span class="margin-0 placeholder-content default-button-min-with pull-left"></span>
                   </div>
 
-                  <div class="default-article-contents padding-0 margin-15-0 col-xs-12">
+                  <div
+                    class="default-article-contents padding-0 margin-top-10 col-xs-12"
+                  >
                     <div class="default-wrapper-main-image pull-right">
-                      <span class="default-main-image placeholder-content"></span>
+                      <span
+                        class="default-main-image placeholder-content"
+                      ></span>
                     </div>
 
                     <div class="default-main-article-content">
-                      <span class="content-half-width placeholder-content"></span>
+                      <span
+                        class="content-half-width placeholder-content"
+                      ></span>
 
-                      <span class="content-default-width placeholder-content"></span>
+                      <span
+                        class="content-default-width placeholder-content"
+                      ></span>
 
-                      <span class="content-min-width placeholder-content"></span>
+                      <span
+                        class="content-min-width placeholder-content mobile-hidden"
+                      ></span>
 
-                      <span class="content-half-width placeholder-content"></span>
+                      <span
+                        class="content-half-width placeholder-content"
+                      ></span>
                     </div>
+                    <span
+                      class="margin-top-10 placeholder-content default-button-min-with pull-left hidden-afetr-mobile-hidden"
+                    ></span>
                   </div>
+                </div>
+              </div>
+            </div>
+            <div class="row" v-else>
+              <div
+                v-for="(defaultItem, index) in 12"
+                :key="index"
+                class="default-items col-md-4 default-grid"
+              >
+                <div
+                  class="col-xs-12 padding-15 margin-15-0 default-item-wrapper shadow-content"
+                >
+                  <div
+                    class="default-user-contents col-xs-12 padding-0 padding-10-0"
+                  >
+                    <div
+                      class="placeholder-content default-article-user-image pull-right"
+                    ></div>
+
+                    <span
+                      class="placeholder-content margin-10 pull-right content-half-width"
+                    ></span>
+                  </div>
+
+                  <div
+                    class="default-article-contents padding-0 margin-top-10 col-xs-12"
+                  >
+                    <div class="default-wrapper-main-image pull-right">
+                      <span
+                        class="default-main-image placeholder-content"
+                      ></span>
+                    </div>
+
+                    <div class="default-main-article-content">
+                      <span
+                        class="content-half-width placeholder-content"
+                      ></span>
+
+                      <span
+                        class="content-default-width placeholder-content"
+                      ></span>
+                    </div>
+                    <span
+                      class="margin-top-10 placeholder-content default-button-min-with pull-left hidden-afetr-mobile-hidden"
+                    ></span>
+                  </div>
+                  <span
+                    class="placeholder-content default-button-full-with pull-left mobile-hidden"
+                  ></span>
                 </div>
               </div>
             </div>
@@ -789,9 +1182,12 @@ li.active a::after {
         </div>
       </div>
 
-      <aside id="sidebar" class="product-sidebar sidebar hidden-xs hidden-sm hidden-md col-lg-3">
+      <aside
+        id="sidebar"
+        class="product-sidebar sidebar hidden-xs hidden-sm hidden-md col-lg-3"
+      >
         <div class="row">
-          <div class="sidebar__inner col-xs-12" style="position: relative;">
+          <div class="sidebar__inner col-xs-12" style="position: relative">
             <ProductAsideCategories
               :productsInfo="products"
               :categoryId="categoryId"
@@ -807,545 +1203,592 @@ li.active a::after {
   </div>
 </template>
 <script>
-    import ProductArticle from './product_components/product_article'
-    import ProductAsideCategories from './product_components/sidebar/product_aside_categories'
-    import {eventBus} from "../../../router/router";
-  
+import ProductArticle from "./product_components/product_article";
+import ProductGridArticle from "./product_components/Product_grid_article";
+import ProductAsideCategories from "./product_components/sidebar/product_aside_categories";
+import searchNotFound from "./main_components/search-not-found";
+import { eventBus } from "../../../router/router";
 
-
-    var visible = false;
-    export default {
-      components: {
-            ProductArticle,
-            ProductAsideCategories,
+var visible = false;
+export default {
+  components: {
+    ProductArticle,
+    ProductGridArticle,
+    ProductAsideCategories,
+    searchNotFound,
+  },
+  props: ["assets", "str"],
+  data: function () {
+    return {
+      currentUser: {
+        profile: "",
+        user_info: "",
+      },
+      products: {
+        main: "",
+        user_info: "",
+        profile_info: {
+          profile_photo: "",
         },
-        props: [
-            'str',
-            'defultimg',
-            'loading_img',
-        ],
-        data: function () {
-            return {
-                currentUser: {
-                    profile: '',
-                    user_info: ''
-                },
-                products: {
-                    main: '',
-                    user_info: '',
-                    profile_info: {
-                        profile_photo: ''
-                    },
-                    photos: [],
-                },
-                searchText: '',
-                provinceId: '',
-                categoryId: '',
-                subCategoryId: '',
-                cityId: '',
-                searchValue: "",
-                scrolled: false,
-                productCountInPage:JSON.parse(localStorage.getItem('productCountInPage'))|| 10,
-                productCountInEachLoad: 10,
-                continueToLoadProducts: true,
-                searchActive: false,
-                errors: '',
-                popUpMsg: '',
-                submiting: false,
-                loading: false,
-                bottom: false,
-                loadMoreActive: false,
-                searchTextTimeout: null,
-
-            }
-        },
-        methods: {
-            filterProducts: function (productsFilter) {
-                this.products = productsFilter;
-            },
-            collapseDropDown: function () {
-                $(".profile-list").fadeIn("slow", function () {
-                    visible = true;
-                });
-            },
-            collapseDropDownList: function () {
-                $(".icon-header-list").fadeIn("slow", function () {
-                    visible = true;
-                });
-            },
-            documentClick(e) {
-                if (visible) {
-                    $('.profile-list').fadeOut("slow");
-                    $('.icon-header-list').fadeOut("slow");
-                    visible = false;
-                }
-            },
-            init: function () {
-              return new Promise((resolve,reject)=>{
-                var self = this;
-                
-                if(this.$route.query.s){
-                     var searchValue = this.$route.query.s.split('+').join(' ')  
-                }
-                else{
-                    var searchValue = '';
-                }
-                
-                var searchValueText = searchValue;
-
-                axios.post('/user/profile_info')
-                    .then(function (response) {
-                        self.currentUser = response.data;
-
-                        if (searchValueText) {
-                            self.registerComponentStatistics('homePage', 'search-text', searchValueText);
-                            self.searchText = searchValueText;
-                            eventBus.$emit('submiting', false);
-                        }
-                        else {
-                            self.loading = true;
-                            axios.post('/user/get_product_list', {
-                                from_record_number: 0,
-                                response_rate: self.$parent.productByResponseRate,
-                                to_record_number: self.productCountInPage,
-
-                            }).then(function (response) {
-                                self.products = response.data.products;
-                                localStorage.removeItem('productCountInPage')
-                                resolve(self.loading = false);
-                                eventBus.$emit('submiting', false);
-                                setTimeout(function(){
-                                    self.sidebarScroll();
-                                },500)
-
-                            });
-                        }
-                    }).catch(error=>reject(error));
-})
-            },
-            feed() {
-
-                var self = this;
-                if (this.searchText === '' && this.provinceId === '' && this.categoryId === '' && this.continueToLoadProducts) {
-                    this.loadMoreActive = true;
-                    this.productCountInPage += this.productCountInEachLoad;
-                    axios.post('/user/get_product_list', {
-                        from_record_number: 0,
-                        response_rate: self.$parent.productByResponseRate,
-                        to_record_number: this.productCountInPage,
-                    }).then(function (response) {
-                      self.products=response.data.products;
-                      localStorage.productCountInPage=JSON.stringify(self.productCountInPage) 
-                        eventBus.$emit('submiting', false);
-                        if (self.products.length + 1 < self.productCountInPage) {
-                            self.continueToLoadProducts = false;
-                        }
-
-                        self.loadMoreActive = false;
-                        setTimeout(function(){
-                            self.sidebarScroll();
-                        },500)
-                    });
-                }
-
-            },
-            registerRequestInSearchNotFoundCase: function () {
-
-                if (this.currentUser.profile) {
-                    if (this.currentUser.user_info.is_buyer) {
-                        this.$router.push({name : 'registerRequestBuyer'})
-                    }
-                    else {
-                        this.popUpMsg = 'حساب کاربری شما از نوع خریدار نیست.';
-                        eventBus.$emit('submitSuccess', this.popUpMsg);
-                        $('#custom-main-modal').modal('show');
-                    }
-                }
-                else {
-                    this.popUpMsg = 'تنها کاربران تایید شده ی اینکوباک مجاز به ثبت درخواست هستند.اگر کاربر ما هستید ابتدا وارد سامانه شوید درغیر اینصورت ثبت نام کنید.';
-                    eventBus.$emit('submitSuccess', this.popUpMsg);
-                    $('#auth-popup').modal('show');
-                }
-            },
-            bottomVisible: function () {
-                const scrollY = window.scrollY;
-                const visible = document.documentElement.clientHeight;
-                const pageHeight = document.documentElement.scrollHeight;
-                const bottomOfPage = visible + scrollY >= pageHeight;
-                return bottomOfPage || pageHeight < visible;
-            },
-            addProductOrRequest: function () {
-                if (this.currentUser.user_info) {
-                    if (this.currentUser.user_info.is_seller) {
-                        this.registerComponentStatistics('product-list', 'register-product', 'seller clicks on plus button');
-
-                        this.$router.push({name : 'registerProductSeller'})
-                    }
-                    else if (this.currentUser.user_info.is_buyer) {
-                        this.registerComponentStatistics('product-list', 'register-request', 'seller clicks on plus button');
-
-                        this.$router.push({name : 'registerProductSeller'})
-                    }
-                }
-                else {
-                    this.registerComponentStatistics('product-list', 'unauthorized-user-clicks-on-plus-btn', 'unauthorized-user-clicks-on-plus-btn');
-
-                    this.popUpMsg = 'برای ثبت آگهی خرید یا فروش  ابتدا وارد سامانه شوید یا ثبت نام کنید.';
-                    eventBus.$emit('submitSuccess', this.popUpMsg);
-                    $('#auth-popup').modal('show');
-                }
-            },
-            resetFilter: function () {
-
-
-                eventBus.$emit('submiting', true);
-
-                $('.box-sidebar option').prop('selected', function () {
-                    return this.defaultSelected;
-                });
-
-                this.searchText = '';
-                this.provinceId = '';
-                this.categoryId = '';
-                this.subCategoryId = '';
-                this.cityId = '';
-
-                this.applyFilter();
-
-            },
-            applyFilter: function () {
-                var self = this;
-
-                eventBus.$emit('submiting', true);
-
-                var searchObject = {};
-
-                searchObject.response_rate = self.$parent.productByResponseRate;
-
-                if (this.categoryId) {
-                    searchObject.category_id = this.categoryId;
-                }
-                if (this.subCategoryId) {
-                    searchObject.sub_category_id = this.subCategoryId;
-                }
-                if (this.provinceId) {
-                    searchObject.province_id = this.provinceId;
-                }
-                if (this.cityId) {
-                    searchObject.city_id = this.cityId;
-                }
-                if (this.searchText) {
-                    this.$router.replace({
-                        name : 'productList',
-                        query :{
-                            s:this.searchText.replace(/ /g,'+')
-                        }
-                    });
-                    searchObject.search_text = this.searchText;
-                }
-                
-
-                if (jQuery.isEmptyObject(searchObject)) {
-                    searchObject.from_record_number = 0;
-                    searchObject.to_record_number = 10;
-                    if(this.searchText == ""){
-                        this.$router.push({
-                            name : 'productList'
-                        });
-                    }
-                }
-
-                axios.post('/user/get_product_list', searchObject)
-                    .then(function (response) {
-                      self.products=response.data.products
-                      eventBus.$emit('submiting', false);
-                        // self.scrollToTop();
-                    })
-                    .catch(function (err) {
-                        alert('خطایی رخ داده است. دوباره تلاش کنید.');
-                    });
-
-            },
-            scrollToTop() {
-                window.scrollTo(0, 0);
-            },
-            stopLoader: function () {
-                eventBus.$emit('isLoading', false);
-            },
-            registerComponentStatistics: function (categoryName, actionName, labelName) {
-                gtag('event', actionName, {
-                    'event_category': categoryName,
-                    'event_label': labelName
-                });
-            },
-            registerComponentExceptions: function (description, fatal = false) {
-                gtag('event', 'exception', {
-                    'description': description,
-                    'fatal': fatal
-                });
-            },
-            sidebarScroll() {
-
-                var $sticky = $('.sticky');
-                var stickyrStopper = $('#wrap-footer');
-                var lastScrollTop = 0;
-
-
-                var sidebarStopper = $('#wrap-footer').height();
-
-                   var sidebar = new StickySidebar('#sidebar', {
-                        containerSelector: '#article-list',
-                        innerWrapperSelector: '.sidebar__inner',
-                        topSpacing: 122,
-                        resizeSensor: true,
-
-                    });
-
-
-
-                    var documentHeight = $(document).height();
-                    var wHeight = $(window).height();
-                    var generalSidebarHeight = $sticky.innerHeight();
-                    var stickyTop = 162;
-                    var stickOffset = 0;
-                    var stickPositionToContent = 115;
-                    var stickyStopperPosition = stickyrStopper.offset().top;
-                    var stopPoint = documentHeight - (wHeight + stickyrStopper.innerHeight() + 130);
-                    var differences = (stickyStopperPosition - stickPositionToContent) - (generalSidebarHeight - stickOffset);
-                    var diff = differences + stickOffset ;
-                    var sidebarHeightToTop = generalSidebarHeight + stickyTop;
-
-
-                        if (generalSidebarHeight > wHeight) {
-
-
-                            if(wHeight < sidebarHeightToTop){
-
-                                $(window).scroll(function(){ // scroll event
-                                      var windowTop = $(window).scrollTop(); // returns number
-
-                                           if (windowTop > lastScrollTop){
-
-                                                if ((dynamicScroll + generalSidebarHeight) < windowTop + wHeight) {
-
-                                                      if (stopPoint + 13  < windowTop  ) {
-                                                          $sticky.css({
-                                                              position: 'absolute',
-                                                              top: diff,
-                                                              right:'0'
-                                                          });
-                                                      } else if (windowTop + wHeight > sidebarHeightToTop) {
-                                                          $sticky.css({
-                                                              position: 'fixed',
-                                                              bottom: stickOffset,
-                                                              top:'initial',
-                                                              right:'0'
-                                                          });
-                                                      } else {
-                                                          $sticky.css({
-                                                              position: 'absolute',
-                                                              top: 'initial',
-                                                              right:'0',
-                                                              bottom:'initial'
-                                                          });
-                                                      }
-
-                                                }else{
-
-                                                      if (stopPoint  < windowTop) {
-                                                          $sticky.css({
-                                                              position: 'absolute',
-                                                              top: diff,
-                                                              right:'0'
-                                                          });
-                                                      } else {
-                                                          $sticky.css({
-                                                              position: 'absolute',
-                                                              top: dynamicScroll + stickOffset,
-                                                              right:'0',
-                                                              bottom:'initial'
-                                                          });
-                                                      }
-
-
-                                                }
-
-                                      dynamicScroll = $sticky.offset().top;
-
-                                    }else{
-
-                                 if ((dynamicScroll - stickyTop) < windowTop) {
-                                        $sticky.css({
-                                              position: 'absolute',
-                                              top: dynamicScroll + 'px' ,
-                                              right:'0',
-                                              bottom:'initial'
-                                          });
-                                    }else{
-                                          $sticky.css({
-                                              position: 'fixed',
-                                              bottom: 'initial',
-                                              top:stickyTop,
-                                              right:'0'
-                                          });
-                                    }
-
-
-
-
-                                    }
-                                  dynamicScroll = $sticky.offset().top;
-
-                                  lastScrollTop = windowTop;
-                                 });
-
-                            }else{
-
-                                  $(window).scroll(function(){ // scroll event
-                                      var windowTop = $(window).scrollTop(); // returns number
-                                      if (windowTop < lastScrollTop){
-
-
-                                         if (stopPoint  < windowTop) {
-                                                  $sticky.css({
-                                                      position: 'absolute',
-                                                      top: diff,
-                                                      right:'0'
-                                                  });
-                                              }else{
-                                                  $sticky.css({
-                                                      position: 'fixed',
-                                                      bottom: 'initial',
-                                                      top:stickyTop,
-                                                      right:'0'
-                                                  });
-                                              }
-                                          }
-                                       lastScrollTop = windowTop;
-                                    });
-
-                            }; //end all if
-
-
-                        } else {
-
-
-
-                             $(window).scroll(function(){ // scroll event
-                                      var windowTop = $(window).scrollTop(); // returns number'
-                                      var getHeightFooter = documentHeight - (stickyrStopper.innerHeight() + stickPositionToContent +  stickyTop + generalSidebarHeight);
-                                        if (getHeightFooter  < windowTop) {
-                                                  $sticky.css({
-                                                      position: 'absolute',
-                                                      top: diff,
-                                                      right:'0'
-                                                  });
-                                              }else{
-                                                  $sticky.css({
-                                                      position: 'fixed',
-                                                      bottom: 'initial',
-                                                      top:stickyTop,
-                                                      right:'0'
-                                                  });
-                                              }
-                            });
-
-                        }
-
-               },
-            },
-        watch: {
-            searchText: function (value) {
-
-                var self = this;
-                
-                eventBus.$emit('textSearch',value);
-        
-                clearTimeout(this.searchTextTimeout);
-
-                this.searchTextTimeout = setTimeout(function () {
-                    self.registerComponentStatistics('product-list', 'search-text', self.searchText);
-
-                    self.applyFilter();
-                }, 1500);
-
-            },
-            '$route':function(){
-                
-                if(this.$route.query.s){
-                    this.searchText = this.$route.query.s.split('+').join(' ');
-                } 
-            },
-            '$parent.productByResponseRate':function(){
-                this.products = {};
-                
-                if (this.searchText) {
-                  
-                  this.applyFilter();
-                  
-                }else{
-                  
-                  this.init();
-                  
-                }
-
-            },
-            bottom(bottom) {
-                if (bottom) {
-                    //this.feed()
-                }
-            },
-        },
-        created() {
-            gtag('config', 'UA-129398000-1', {'page_path': '/product-list'});
-            eventBus.$on("textSearch", event => {
-                this.searchText = event;
+        photos: [],
+      },
+      searchText: "",
+      provinceId: "",
+      categoryId: "",
+      subCategoryId: "",
+      cityId: "",
+      searchValue: "",
+      scrolled: false,
+      productCountInPage: 12,
+      productCountInEachLoad: 12,
+      fromProductCount: 0,
+      continueToLoadProducts: true,
+      searchActive: false,
+      errors: "",
+      popUpMsg: "",
+      submiting: false,
+      loading: false,
+      bottom: false,
+      loadMoreActive: false,
+      searchTextTimeout: null,
+      sortOption: "BM",
+      verifiedUserContent: this.$parent.verifiedUserContent,
+      listIsGrid: true,
+    };
+  },
+  methods: {
+    filterProducts: function (productsFilter) {
+      this.products = productsFilter;
+    },
+    collapseDropDown: function () {
+      $(".profile-list").fadeIn("slow", function () {
+        visible = true;
+      });
+    },
+    collapseDropDownList: function () {
+      $(".icon-header-list").fadeIn("slow", function () {
+        visible = true;
+      });
+    },
+    documentClick(e) {
+      if (visible) {
+        $(".profile-list").fadeOut("slow");
+        $(".icon-header-list").fadeOut("slow");
+        visible = false;
+      }
+    },
+    init: function () {
+      //              return new Promise((resolve,reject)=>{
+      var self = this;
+      $(".show-list-items button").tooltip();
+      this.swithToListOnMobile();
+      this.cehckPageWidth();
+
+      this.scrollToTop();
+      if (this.$route.query.s) {
+        var searchValue = this.$route.query.s.split("+").join(" ");
+      } else {
+        var searchValue = "";
+      }
+
+      var searchValueText = searchValue;
+
+      axios.post("/user/profile_info").then(function (response) {
+        self.currentUser = response.data;
+
+        if (searchValueText) {
+          self.registerComponentStatistics(
+            "homePage",
+            "search-text",
+            searchValueText
+          );
+          self.searchText = searchValueText;
+          eventBus.$emit("submiting", false);
+        } else {
+          self.loading = true;
+
+          self.fromProductCount = 0;
+          self.productCountInPage = 12;
+
+          axios
+            .post("/user/get_product_list", {
+              from_record_number: self.fromProductCount,
+              response_rate: self.$parent.productByResponseRate,
+              to_record_number: self.productCountInPage,
+              sort_by: self.sortOption,
+            })
+            .then(function (response) {
+              self.products = response.data.products;
+              //                                localStorage.removeItem('productCountInPage')
+              //                                resolve(self.loading = false);
+              eventBus.$emit("submiting", false);
+              setTimeout(function () {
+                self.sidebarScroll();
+              }, 500);
             });
-
-            // document.addEventListener('click', this.documentClick);
-        }, 
-        mounted() {
-                let self=this
-            this.init().then(loading=>{
-              if(!loading){
-                   let scrollPosition=(localStorage.getItem('scroll'))||{x:0,y:0};
-                   window.scrollTo(0,scrollPosition);
-                   localStorage.removeItem('scroll')
-                   }
-            });
-            this.stopLoader();
-            },
-        metaInfo() {
-
-            return {
-                title: 'لیست محصولات و قیمت عمده محصولات کشاورزی',
-                titleTemplate: 'اینکوباک | %s',
-                meta: [
-                    {
-                        name: 'description',
-                        content: 'خرید عمده و قیمت میوه | خرید عمده و قیمت غلات | خرید عمده و قیمت صیفی جات | خرید و قیمت عمده خشکبار'
-                    },
-                    {
-                        name: 'author',
-                        content: 'اینکوباک'
-                    },
-                    {
-                        property: 'og:description',
-                        content: 'مرجع تخصصی خرید و فروش عمده و قیمت محصولات کشاورزی ایران | صادرات محصولات کشاورزی'
-                    },
-                    {
-                        property: 'og:site_name',
-                        content: 'اینکوباک بازارآنلاین خرید و فروش محصولات کشاورزی ایران'
-                    },
-                    {
-                        'property': 'og:title',
-                        'content': 'اینکوباک | لیست محصولات و قیمت محصولات کشاورزی'
-                    },
-
-                ]
-
-            }
         }
+        //                    }).catch(error=>reject(error));
+      });
+    },
+    feed() {
+      if (this.products.isEmptyObject == true) {
+        return false;
+      }
+
+      var self = this;
+      if (
+        this.searchText === "" &&
+        this.provinceId === "" &&
+        this.categoryId === "" &&
+        this.continueToLoadProducts
+      ) {
+        this.loadMoreActive = true;
+        this.fromProductCount = this.productCountInPage;
+        this.productCountInPage += this.productCountInEachLoad;
+        axios
+          .post("/user/get_product_list", {
+            from_record_number: self.fromProductCount,
+            response_rate: self.$parent.productByResponseRate,
+            to_record_number: self.productCountInPage,
+            sort_by: self.sortOption,
+          })
+          .then(function (response) {
+            if (self.products && self.products.length) {
+              self.products = self.products.concat([...response.data.products]);
+            }
+            //                      localStorage.productCountInPage=JSON.stringify(self.productCountInPage)
+            eventBus.$emit("submiting", false);
+            if (self.products.length + 1 < self.productCountInPage) {
+              self.continueToLoadProducts = false;
+            }
+
+            self.loadMoreActive = false;
+            setTimeout(function () {
+              self.sidebarScroll();
+            }, 500);
+          });
+      } else {
+        this.loadMoreActive = true;
+
+        var searchObject = {};
+
+        if (self.$parent.productByResponseRate) {
+          searchObject.response_rate = self.$parent.productByResponseRate;
+        }
+        if (this.categoryId) {
+          searchObject.category_id = this.categoryId;
+        }
+        if (this.subCategoryId) {
+          searchObject.sub_category_id = this.subCategoryId;
+        }
+        if (this.provinceId) {
+          searchObject.province_id = this.provinceId;
+        }
+        if (this.cityId) {
+          searchObject.city_id = this.cityId;
+        }
+        if (this.searchText) {
+          this.$router.replace({
+            name: "productList",
+            query: {
+              s: this.searchText.replace(/ /g, "+"),
+            },
+          });
+          searchObject.search_text = this.searchText;
+        }
+
+        if (jQuery.isEmptyObject(searchObject)) {
+          if (this.searchText == "") {
+            this.$router.push({
+              name: "productList",
+            });
+          }
+        }
+
+        searchObject.from_record_number = self.productCountInPage;
+        self.productCountInPage += self.productCountInEachLoad;
+        searchObject.to_record_number = self.productCountInPage;
+        searchObject.sort_by = self.sortOption;
+
+        axios
+          .post("/user/get_product_list", searchObject)
+          .then(function (response) {
+            self.products = self.products.concat(response.data.products);
+
+            self.loadMoreActive = false;
+
+            setTimeout(function () {
+              self.sidebarScroll();
+            }, 500);
+          })
+          .catch(function (err) {
+            alert("خطایی رخ داده است. دوباره تلاش کنید.");
+          });
+      }
+    },
+    registerRequestInSearchNotFoundCase: function () {
+      if (this.currentUser.profile) {
+        if (this.currentUser.user_info.is_buyer) {
+          this.$router.push({ name: "registerRequestBuyer" });
+        } else {
+          this.popUpMsg = "حساب کاربری شما از نوع خریدار نیست.";
+          eventBus.$emit("submitSuccess", this.popUpMsg);
+          $("#custom-main-modal").modal("show");
+        }
+      } else {
+        this.popUpMsg =
+          "تنها کاربران تایید شده ی باسکول مجاز به ثبت درخواست هستند.اگر کاربر ما هستید ابتدا وارد سامانه شوید درغیر اینصورت ثبت نام کنید.";
+        eventBus.$emit("submitSuccess", this.popUpMsg);
+        $("#auth-popup").modal("show");
+      }
+    },
+    bottomVisible: function () {
+      const scrollY = window.scrollY;
+      const visible = document.documentElement.clientHeight;
+      const pageHeight = document.documentElement.scrollHeight;
+      const bottomOfPage = visible + scrollY >= pageHeight;
+      return bottomOfPage || pageHeight < visible;
+    },
+    addProductOrRequest: function () {
+      if (this.currentUser.user_info) {
+        if (this.currentUser.user_info.is_seller) {
+          this.registerComponentStatistics(
+            "product-list",
+            "register-product",
+            "seller clicks on plus button"
+          );
+
+          this.$router.push({ name: "registerProductSeller" });
+        } else if (this.currentUser.user_info.is_buyer) {
+          this.registerComponentStatistics(
+            "product-list",
+            "register-request",
+            "seller clicks on plus button"
+          );
+
+          this.$router.push({ name: "registerProductSeller" });
+        }
+      } else {
+        this.registerComponentStatistics(
+          "product-list",
+          "unauthorized-user-clicks-on-plus-btn",
+          "unauthorized-user-clicks-on-plus-btn"
+        );
+
+        eventBus.$emit("modal", "guide");
+      }
+    },
+    resetFilter: function () {
+      eventBus.$emit("submiting", true);
+
+      $(".box-sidebar option").prop("selected", function () {
+        return this.defaultSelected;
+      });
+
+      this.searchText = "";
+      this.provinceId = "";
+      this.categoryId = "";
+      this.subCategoryId = "";
+      this.cityId = "";
+
+      this.applyFilter();
+    },
+    applyFilter: function () {
+      var self = this;
+
+      eventBus.$emit("submiting", true);
+
+      self.fromProductCount = 0;
+      self.productCountInPage = 12;
+
+      var searchObject = {};
+
+      if (self.$parent.productByResponseRate) {
+        searchObject.response_rate = self.$parent.productByResponseRate;
+      }
+      if (this.categoryId) {
+        searchObject.category_id = this.categoryId;
+      }
+      if (this.subCategoryId) {
+        searchObject.sub_category_id = this.subCategoryId;
+      }
+      if (this.provinceId) {
+        searchObject.province_id = this.provinceId;
+      }
+      if (this.cityId) {
+        searchObject.city_id = this.cityId;
+      }
+      if (this.searchText) {
+        this.$router.replace({
+          name: "productList",
+          query: {
+            s: this.searchText.replace(/ /g, "+"),
+          },
+        });
+        searchObject.search_text = this.searchText;
+      }
+
+      if (jQuery.isEmptyObject(searchObject)) {
+        if (this.searchText == "") {
+          this.$router.push({
+            name: "productList",
+          });
+        }
+      }
+
+      searchObject.from_record_number = self.fromProductCount;
+      searchObject.to_record_number = self.productCountInPage;
+      searchObject.sort_by = self.sortOption;
+
+      axios
+        .post("/user/get_product_list", searchObject)
+        .then(function (response) {
+          self.products = response.data.products;
+          eventBus.$emit("submiting", false);
+          self.scrollToTop();
+        })
+        .catch(function (err) {
+          alert("خطایی رخ داده است. دوباره تلاش کنید.");
+        });
+    },
+    setSortOption: function (sortOption) {
+      $("#filter-modal").modal("hide");
+      if (this.isDeviceMobile()) {
+        history.go(-1);
+      }
+
+      if (this.sortOption != sortOption) {
+        this.registerComponentStatistics(
+          "product-list",
+          "apply-sort",
+          sortOption
+        );
+
+        this.sortOption = sortOption;
+        this.applyFilter();
+      }
+    },
+    isDeviceMobile: function () {
+      if (
+        navigator.userAgent.match(/Android/i) ||
+        navigator.userAgent.match(/webOS/i) ||
+        navigator.userAgent.match(/iPhone/i) ||
+        navigator.userAgent.match(/iPad/i) ||
+        navigator.userAgent.match(/iPod/i) ||
+        navigator.userAgent.match(/BlackBerry/i) ||
+        navigator.userAgent.match(/Windows Phone/i)
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    scrollToTop() {
+      window.scrollTo(0, 0);
+    },
+    stopLoader: function () {
+      eventBus.$emit("isLoading", false);
+    },
+    registerComponentStatistics: function (
+      categoryName,
+      actionName,
+      labelName
+    ) {
+      gtag("event", actionName, {
+        event_category: categoryName,
+        event_label: labelName,
+      });
+    },
+    registerComponentExceptions: function (description, fatal = false) {
+      gtag("event", "exception", {
+        description: description,
+        fatal: fatal,
+      });
+    },
+    infiniteScrollHandler: function () {
+      let lastOffset = 0;
+
+      window.onscroll = () => {
+        if (
+          window.location.pathname.includes("product-list") &&
+          !window.location.pathname.includes("category")
+        ) {
+          var bottom =
+            document.documentElement.scrollTop + window.innerHeight >
+            document.documentElement.offsetHeight -
+              document.documentElement.scrollTop / 2;
+
+          let newOffset = document.documentElement.offsetHeight;
+
+          if (bottom) {
+            if (newOffset > lastOffset + 100) {
+              lastOffset = document.documentElement.offsetHeight;
+              this.feed();
+            }
+          }
+        }
+      };
+    },
+    openSortModal() {
+      $("#filter-modal").modal("show");
+
+      if (window.history.state) {
+        history.pushState(null, null, window.location);
+      }
+      $(window).on("popstate", function (e) {
+        $("#filter-modal").modal("hide");
+      });
+    },
+    closeSortModal: function () {
+      $("#filter-modal").modal("hide");
+      history.go(-1);
+    },
+    openFilterModal() {
+      $("#searchFilter").modal("show");
+
+      if (window.history.state) {
+        history.pushState(null, null, window.location);
+      }
+      $(window).on("popstate", function (e) {
+        $("#searchFilter").modal("hide");
+      });
+    },
+    closeFilterModal: function () {
+      $("#searchFilter").modal("hide");
+      history.go(-1);
+    },
+    sidebarScroll() {
+      let sidebarHeight = $("#sidebar").outerHeight();
+      $("#main .main-content").css("min-height", sidebarHeight);
+      $("#sidebar").StickySidebar({
+        // Settings
+        additionalMarginTop: 120,
+      });
+    },
+    openStickyGuide: function () {
+      eventBus.$emit("modal", "guide");
+    },
+    swithToListOnMobile() {
+      window.addEventListener("resize", (event) => {
+        this.cehckPageWidth();
+      });
+    },
+    cehckPageWidth() {
+      let pageWidth = window.outerWidth;
+      if (pageWidth <= 991) {
+        this.listIsGrid = false;
+      } else {
+        this.listIsGrid = true;
+      }
+    },
+  },
+  watch: {
+    searchText: function (value) {
+      var self = this;
+
+      eventBus.$emit("textSearch", value);
+
+      clearTimeout(this.searchTextTimeout);
+
+      this.searchTextTimeout = setTimeout(function () {
+        self.registerComponentStatistics(
+          "product-list",
+          "search-text",
+          self.searchText
+        );
+
+        self.applyFilter();
+      }, 1500);
+    },
+    $route: function () {
+      if (this.$route.query.s) {
+        this.searchText = this.$route.query.s.split("+").join(" ");
+      }
+    },
+    "$parent.productByResponseRate": function () {
+      this.products = {};
+
+      this.infiniteScrollHandler();
+
+      if (this.searchText) {
+        this.applyFilter();
+      } else {
+        this.init();
+      }
+    },
+    bottom(bottom) {
+      if (bottom) {
+        //this.feed()
+      }
+    },
+  },
+  created() {
+    gtag("config", "UA-129398000-1", { page_path: "/product-list" });
+    eventBus.$on("textSearch", (event) => {
+      this.searchText = event;
+    });
+
+    // document.addEventListener('click', this.documentClick);
+  },
+  mounted() {
+    let self = this;
+
+    this.scrollToTop();
+
+    this.infiniteScrollHandler();
+
+    this.init(); //.then(loading=>{
+    //              if(!loading){
+    //                   let scrollPosition=(localStorage.getItem('scroll'))||{x:0,y:0};
+    //                   window.scrollTo(0,scrollPosition);
+    //                   localStorage.removeItem('scroll')
+    //                   }
+    //            });
+    this.stopLoader();
+  },
+  metaInfo() {
+    let canonicalLink = window.location.host + "/product-list";
+
+    let title = "";
+    let description = "";
+
+    if (this.searchText) {
+      title = "لیست محصولات و قیمت عمده " + this.searchText;
+      description = "خرید و قیمت عمده " + title;
+    } else {
+      title = "لیست محصولات و قیمت عمده محصولات کشاورزی";
+      description =
+        "خرید عمده و قیمت میوه | خرید عمده و قیمت غلات | خرید عمده و قیمت صیفی جات | خرید و قیمت عمده خشکبار";
     }
 
+    return {
+      title: title,
+      titleTemplate: "%s | باسکول",
+      meta: [
+        {
+          name: "description",
+          content: description,
+        },
+        {
+          name: "author",
+          content: "باسکول",
+        },
+        {
+          property: "og:description",
+          content:
+            "مرجع تخصصی خرید و فروش عمده و قیمت محصولات کشاورزی ایران | صادرات محصولات کشاورزی",
+        },
+        {
+          property: "og:site_name",
+          content: "باسکول بازارآنلاین خرید و فروش محصولات کشاورزی ایران",
+        },
+        {
+          property: "og:title",
+          content: "باسکول | لیست محصولات و قیمت " + title,
+        },
+      ],
+      link: [{ rel: "canonical", href: canonicalLink }],
+    };
+  },
+};
 </script>

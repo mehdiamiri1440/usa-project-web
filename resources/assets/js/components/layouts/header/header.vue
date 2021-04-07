@@ -1,1309 +1,1502 @@
 <style scoped>
-    body {
-        background: #F6F6F6;
-    }
+body {
+  background: #f6f6f6;
+}
 
-    #main-content {
+#main-content {
+  min-height: 600px;
+  position: relative;
+}
 
-        min-height: 600px;
-        position: relative;
+#DownloadApp {
+  background: #fff;
+  padding-left: 0 !important;
+}
 
-    }
+.green-button:focus,
+.green-button:hover {
+  color: #fff !important;
+}
 
-    #DownloadApp {
-        background: #fff;
-        padding-left: 0 !important;
-    }
+#DownloadApp .modal-dialog {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
 
-    .green-button:focus,
-    .green-button:hover {
-        color: #fff !important;
-    }
+#DownloadApp .main_popup_content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  padding: 0;
+  width: calc(100% - 30px);
+}
 
-    #DownloadApp .modal-dialog {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        margin: 0;
-    }
+#DownloadApp .main_popup_content > div {
+  transform: translate(-50%, -50%);
+}
 
-    #DownloadApp .main_popup_content {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        padding: 0;
-        width: calc(100% - 30px);
-    }
+a.close-dialog-popup {
+  display: block;
 
-    #DownloadApp .main_popup_content > div {
-        transform: translate(-50%, -50%);
-    }
+  padding: 15px;
 
-    a.close-dialog-popup {
-        display: block;
+  font-size: 22px;
 
-        padding: 15px;
+  color: #e41c38;
 
-        font-size: 22px;
+  text-align: right;
 
-        color: #e41c38;
+  background: #000546;
+}
 
-        text-align: right;
+.main_popup_content div > a {
+  width: 150px;
+  border: none;
+  padding: 9px 0;
+}
 
-        background: #000546;
-    }
+.main_popup_content div > a:first-of-type {
+  color: #fff;
+  background: #00c569;
+}
 
-    .main_popup_content div > a {
-        width: 150px;
-        border: none;
-        padding: 9px 0;
-    }
+.main-logo-popup {
+  text-align: center;
+}
 
-    .main_popup_content div > a:first-of-type {
-        color: #fff;
-        background: #00c569;
-    }
+.main-logo-popup p.title {
+  font-size: 32px;
+}
 
-    .main-logo-popup {
-        text-align: center;
-    }
+.main-logo-popup img {
+  width: 30%;
+}
 
-    .main-logo-popup p.title {
-        font-size: 32px;
-    }
+.modal-content .green-button {
+  margin: 15px;
 
-    .main-logo-popup img {
-        width: 30%;
-    }
+  display: inline-block;
 
-    .modal-content .green-button {
-        margin: 15px;
+  background: #00c569;
 
-        display: inline-block;
+  color: #fff;
 
-        background: #00c569;
+  padding: 10px 35px;
 
-        color: #fff;
+  border-radius: 3px;
 
-        padding: 10px 35px;
+  text-align: center;
 
-        border-radius: 3px;
+  border: none;
 
-        text-align: center;
+  -webkit-transition: 300ms;
 
-        border: none;
+  transition: 300ms;
 
-        -webkit-transition: 300ms;
+  width: initial;
+}
 
-        transition: 300ms;
+.green-button.delete {
+  background: #e41c38;
+  color: #fff;
+}
 
-        width: initial;
-    }
+/*end global styles */
 
-    .green-button.delete {
-        background: #e41c38;
-        color: #fff;
-    }
+/*start header styles*/
 
-    /*end global styles */
+.search-input {
+  transition: 300ms;
 
-    /*start header styles*/
+  display: inline-block;
 
-    .search-input {
+  min-width: 455px;
 
-        transition: 300ms;
+  overflow: hidden;
 
-        display: inline-block;
+  position: relative;
 
-        min-width: 455px;
+  float: right;
+}
 
-        overflow: hidden;
+.search-input input {
+  padding: 9px 15px 8px;
 
-        position: relative;
+  border-radius: 0 4px 4px 0;
 
-        float: right;
+  margin: 0;
 
+  float: right;
 
-    }
+  border: none;
 
-    .search-input input {
+  width: calc(100% - 20px);
 
-        padding: 9px 15px 8px;
+  background: #f8f8f8;
+}
 
-        border-radius: 0 4px 4px 0;
+.search-input button {
+  transition: 300ms;
 
-        margin: 0;
+  border: none;
 
-        float: right;
+  margin: 0;
 
-        border: none;
+  padding: 8px 15px;
 
-        width: calc(100% - 20px);
+  color: #fff;
 
-        background: #F8F8F8;
+  background: #000546;
 
-    }
+  border-radius: 4px 0 0 4px;
 
-    .search-input button {
+  position: absolute;
 
-        transition: 300ms;
+  left: 0;
 
-        border: none;
+  top: 0;
+}
 
-        margin: 0;
+.search-input button:hover {
+  transition: 300ms;
 
-        padding: 8px 15px;
+  background: #00032b;
 
-        color: #fff;
+  padding-left: 18px;
 
-        background: #000546;
+  padding-right: 18px;
+}
 
-        border-radius: 4px 0 0 4px;
+.search-input button:before {
+  position: relative;
 
-        position: absolute;
+  top: 2px;
+}
 
-        left: 0;
+nav.navbar {
+  background: #fff;
+  margin: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1010;
+  border-radius: 0;
+  border: none;
+  box-shadow: 0 7px 8px 0 rgba(0, 0, 0, 0.04);
+}
 
-        top: 0;
+.buskool-main-nav {
+  padding: 10px 15px 8px;
+  border-bottom: 2px solid #f8f9fa;
+}
 
-    }
+.nav > li > a.green-button:hover {
+  background: #00c569;
+}
 
-    .search-input button:hover {
+.nav > li > a.green-button.router-link-exact-active:hover {
+  background: #eee;
+}
 
-        transition: 300ms;
+nav .green-button {
+  font-size: 13px;
+  padding: 8px 7px 7px;
+  margin-top: 0;
+  margin-right: 15px;
+}
 
-        background: #00032b;
+nav .green-button-alt {
+  background: #fff;
+  color: #00c569 !important;
+  border: 2px solid #00c569;
+  padding: 6px 7px 5px;
+}
 
-        padding-left: 18px;
+.green-button-alt:focus,
+.green-button-alt:hover {
+  color: #fff !important;
+}
 
-        padding-right: 18px;
+nav .green-button.router-link-exact-active,
+nav > li > a.green-button.router-link-exact-active:hover {
+  background-color: #eee;
+  border-color: #eee;
+  color: #fff !important;
+}
 
-    }
+.buskool-logo .navbar-brand {
+  overflow: hidden;
 
-    .search-input button:before {
+  width: 132px;
+}
 
-        position: relative;
+.buskool-logo .navbar-brand {
+  height: initial;
 
-        top: 2px;
+  margin: 0;
 
-    }
+  padding: 0;
+}
 
-    nav.navbar {
-        background: #fff;
-        margin: 0;
-        position: fixed;
-        top: 0;
-        width: 100%;
-        z-index: 1010;
-        border-radius: 0;
-        border: none;
-        box-shadow: 0 7px 8px 0 rgba(0,0,0,.04);
-    }
+#buskool-nav {
+  margin-right: 46px;
+}
 
-    .incobac-main-nav {
-        padding: 10px 15px 8px;
-        border-bottom: 2px solid #F8F9FA
-    }
+.buskool-sub-menu .navbar-right {
+  margin-right: 193px;
+}
 
-    .nav > li > a.green-button:hover {
-        background: #00c569;
-    }
+.buskool-sub-menu {
+  transition: 0.3s;
+  height: 38px;
+  overflow: hidden;
+}
 
-    .nav > li > a.green-button.router-link-exact-active:hover {
-        background: #eee;
-    }
+.buskool-sub-menu.scrollUp {
+  height: 0;
+  transition: 0.3s;
+}
 
-    nav .green-button {
-        font-size: 13px;
-        padding: 8px 7px 7px;
-        margin-top: 0;
-        margin-right: 15px;
-    }
+.buskool-sub-menu li {
+  float: right;
+}
 
-    nav .green-button-alt {
-        background: #fff;
-        color: #00c569 !important;
-        border: 2px solid #00c569;
-        padding: 6px 7px 5px;
+.buskool-sub-menu a {
+  color: #777;
+  padding: 9px 15px;
+  position: relative;
+}
 
-    }
+.buskool-sub-menu a:hover,
+.buskool-sub-menu a.router-link-exact-active {
+  color: #00c569;
+  background: #fbfbfb;
+}
 
-    .green-button-alt:focus,
-    .green-button-alt:hover {
-        color: #fff !important;
-    }
+.buskool-sub-menu a:hover:after,
+.buskool-sub-menu a.router-link-exact-active:after {
+  content: "";
+  background: #00c569;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 2px;
+  right: 0;
+}
 
-    nav .green-button.router-link-exact-active, nav > li > a.green-button.router-link-exact-active:hover {
-        background-color: #eee;
-        border-color: #eee;
-        color: #fff !important;
-    }
+a.profile-info-wrapper {
+  overflow: hidden;
 
+  padding: 0;
 
-    .incobac-logo .navbar-brand {
+  font-size: 14px;
 
-        overflow: hidden;
+  color: #777;
 
-        width: 132px;
+  font-weight: bold;
+}
 
-    }
+a.profile-info-wrapper:focus {
+  background: none;
+}
 
-    .incobac-logo .navbar-brand {
+a.profile-info-wrapper:hover {
+  background: none;
 
-        height: initial;
+  color: #00c569;
+}
 
-        margin: 0;
+.profile-information {
+  float: left;
 
-        padding: 0;
+  padding-top: 10px;
+}
 
-    }
+.profile-information i {
+  position: relative;
 
-    #incobac-nav{
-        margin-right: 46px;
-    }
+  top: 3px;
 
-    .incobac-sub-menu .navbar-right{
-        margin-right: 193px;
-    }
+  margin-right: 7px;
+}
 
-    .incobac-sub-menu {
-        transition: 0.3s;
-        height: 38px;
-        overflow: hidden;
-    }
+.profile-image-wrapper {
+  width: 40px;
 
-    .incobac-sub-menu.scrollUp{
-        height: 0;
-        transition: 0.3s;
-    }
+  height: 40px;
 
-    .incobac-sub-menu  li{
-        float: right;
-    }
+  border-radius: 40px;
 
-    .incobac-sub-menu a{
-       color: #777;
-        padding: 9px 15px;
-        position: relative;
-    }
+  overflow: hidden;
 
-    .incobac-sub-menu a:hover, .incobac-sub-menu a.router-link-exact-active {
-       color: #00C569;
-        background:#fbfbfb;
-    }
+  float: right;
 
-    .incobac-sub-menu a:hover:after, .incobac-sub-menu a.router-link-exact-active:after {
-        content:'';
-        background: #00C569;
-        position: absolute;
-        top: 0;
-        width: 100%;
-        height: 2px;
-        right:0;
-    }
+  margin-left: 10px;
+}
 
-    a.profile-info-wrapper{
+.profile-image-wrapper img {
+  width: initial;
+  height: 100%;
+  position: relative;
+  left: -50%;
+  transform: translate(50%, 0);
+}
 
-        overflow: hidden;
+#web-profile-items {
+  position: absolute;
 
-        padding: 0;
+  top: 50px;
 
-        font-size: 14px;
+  background: #fff;
 
-        color: #777;
+  width: 100%;
 
-        font-weight: bold;
+  text-align: right;
 
-    }
+  direction: rtl;
 
-    a.profile-info-wrapper:focus{
+  border-radius: 4px;
 
-        background: none;
+  line-height: 1.618;
 
-    }
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
 
-    a.profile-info-wrapper:hover{
+  z-index: 1;
+}
 
-        background: none;
+#web-profile-items a {
+  background: none;
+  color: #777;
+  font-size: 13px;
+  border: none;
+  width: 100%;
+  padding: 10px;
+  text-align: right;
+  -webkit-transition: 200ms;
+  transition: 200ms;
+  border-bottom: 1px solid #dbdbdb;
+  display: block;
+}
+#web-profile-items > li:last-of-type a {
+  border: none;
+}
+#web-profile-items a:hover {
+  color: #333;
+  background: #eee;
+}
+#web-profile-items li a i {
+  margin-left: 6px;
+}
 
-        color: #00c569;
+.mobile-menu-button {
+  float: right;
+  position: relative;
+}
 
-    }
+.mobile-menu-button .message-count {
+  padding-top: 5px;
+  left: -10px;
+  top: -8px;
+}
+.navbar-toggle {
+  margin: 0;
 
-    .profile-information{
+  border: 2px solid #000546;
+}
 
-        float: left;
+.navbar-toggle .icon-bar {
+  background: #000546;
+}
 
-        padding-top: 10px;
+.mobile-background-shadow {
+  background: rgb(0, 0, 0);
 
-    }
+  opacity: 0.8;
 
-    .profile-information i{
+  display: none;
 
-        position: relative;
+  transition: 300ms;
 
-        top: 3px;
+  position: fixed;
 
-        margin-right: 7px;
+  height: 100%;
 
-    }
+  width: 100%;
 
-    .profile-image-wrapper{
-        width: 40px;
+  z-index: 10;
+}
+.message-count {
+  background: #e41c39;
+  border-radius: 50px;
+  font-size: 12px;
+  width: 24px;
+  height: 20px;
+  display: inline-block;
+  position: absolute;
+  top: 0px;
+  color: #fff;
+  left: -9px;
+  padding-top: 1px;
+  text-align: center;
+  z-index: 1;
+}
 
-        height: 40px;
+.star-badge {
+  color: rgb(249, 242, 159);
+}
 
-        border-radius: 40px;
+.star-badge i {
+  background: linear-gradient(
+    21deg,
+    rgb(199, 168, 79) 0%,
+    rgb(249, 242, 159) 51%,
+    rgb(199, 168, 79) 100%
+  );
+  background-clip: border-box;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
-        overflow: hidden;
+.mobile-navigation li {
+  position: relative;
+}
+.mobile-navigation li .message-count {
+  position: relative;
+  top: 0px;
+  padding-top: 5px;
+}
+@media screen and (min-width: 767px) {
+  .mobile-background-shadow {
+    display: none !important;
+  }
+}
 
-        float: right;
+@media screen and (max-width: 991px) {
+  #buskool-nav {
+    margin: 0;
+  }
 
-        margin-left: 10px;
+  .buskool-sub-menu .navbar-right {
+    margin-right: 149px;
+  }
 
-    }
+  .search-input {
+    min-width: 300px;
+  }
+}
 
+@media screen and (max-width: 767px) {
+  #buskool-nav {
+    padding: 0;
 
-    .profile-image-wrapper img{
-        width: initial;
-        height: 100%;
-        position: relative;
-        left: -50%;
-        transform: translate(50% ,0);
-    }
+    overflow: hidden;
 
-    #web-profile-items{
-        position: absolute;
+    margin: 0;
 
-        top: 50px;
+    position: absolute;
 
-        background: #fff;
+    background: #fff;
 
-        width: 100%;
+    top: 56px;
 
-        text-align: right;
+    right: -1px;
 
-        direction: rtl;
+    left: -1px;
 
-        border-radius: 4px;
+    border-top: 2px solid #00c569;
+  }
 
-        line-height: 1.618;
+  #buskool-nav:after {
+    width: 0;
 
-        box-shadow: 0 3px 15px
-        rgba(0, 0, 0, 0.2);
+    height: 0;
 
-        z-index: 1;
-    }
+    border-style: solid;
 
+    border-width: 0 10px 10px 10px;
 
-    #web-profile-items > li a{
-        padding: 7px 15px;
-        display: block;
-    }
+    border-color: transparent transparent #00c569 transparent;
 
+    content: "";
 
+    position: absolute;
 
-    #web-profile-items a{
-        color: #777;
-    }
+    top: -10px;
 
-    #web-profile-items a:hover{
-        color: #333;
-        background: #eee;
-    }
+    right: 29px;
+  }
 
-    .mobile-menu-button{
-        float: right;
-    }
+  #buskool-nav .wrapper-nav {
+    padding: 30px 0 0;
+  }
 
-    .navbar-toggle{
+  .buskool-logo {
+    margin: 0 auto;
 
-        margin: 0;
+    float: right;
 
-        border:2px solid  #000546;
+    position: relative;
 
-    }
+    right: calc(50% - 114px);
+  }
 
-    .navbar-toggle .icon-bar{
+  .profile-image-wrapper,
+  .user-auth-info-wrapper,
+  .user-auth-info-wrapper .navbar-nav {
+    margin: 0;
+  }
 
-        background: #000546;
+  .user-auth-info-wrapper {
+    float: left;
+  }
 
-    }
+  #buskool-nav .search-input {
+    max-width: 100%;
 
-    .mobile-background-shadow{
+    width: 100%;
 
-        background: rgb(0,0,0);
+    padding: 0 15px;
 
-        opacity: 0.8;
+    margin-bottom: 15px;
 
-        display: none;
+    float: none;
+  }
 
-        transition:300ms;
+  #buskool-nav .search-input input {
+    border: 1px solid #e6e6e6;
+  }
 
-        position: fixed;
+  .search-input button {
+    left: 15px;
 
-        height: 100%;
+    padding: 13px 15px;
 
-        width: 100%;
+    height: 100%;
+  }
 
-        z-index: 10;
+  #buskool-nav ul.mobile-navigation a {
+    color: #777;
 
-    }
+    font-weight: bold;
 
-    @media screen and (min-width: 767px){
-        .mobile-background-shadow{
-            display: none !important;
-        }
-    }
+    padding: 15px;
 
-    @media screen and (max-width: 992px){
+    display: block;
 
-        #incobac-nav{
+    border-bottom: 1px solid #e6e6e6;
+  }
 
-            margin: 0
+  #buskool-nav ul.mobile-navigation a:hover,
+  #buskool-nav ul.mobile-navigation a:focus,
+  #buskool-nav ul.mobile-navigation a.router-link-exact-active {
+    color: #00c569;
 
-        }
+    background: #fbfbfb;
 
-        .incobac-sub-menu .navbar-right {
+    border-color: #00c569;
+  }
 
-            margin-right: 149px;
+  #web-profile-items {
+    min-width: 150px;
 
-        }
+    left: 0;
+  }
+}
 
-        .search-input {
+@media screen and (max-width: 550px) {
+  .buskool-logo {
+    margin: 0 auto;
 
-            min-width: 300px;
+    float: right;
 
+    position: relative;
 
-        }
+    right: calc(50% - 95px);
+  }
 
-    }
+  .buskool-logo .navbar-brand {
+    width: 100px;
 
-    @media screen and (max-width: 767px){
+    margin-top: 5px;
+  }
 
-        #incobac-nav{
-            padding: 0;
+  .profile-image-wrapper,
+  .user-auth-info-wrapper,
+  .user-auth-info-wrapper .navbar-nav {
+    margin: 0;
+  }
 
-            overflow: hidden;
+  .user-auth-info-wrapper {
+    float: left;
+  }
 
-            margin: 0;
+  .mobile-login-link a {
+    font-size: 11px;
+  }
+}
 
-            position: absolute;
+@media screen and (max-width: 360px) {
+  .mobile-login-link a {
+    margin: 0;
 
-            background: #fff;
+    padding: 8px 16px 7px;
 
-            top: 56px;
+    font-size: 17px;
+  }
 
-            right: -1px;
-
-            left: -1px;
-
-            border-top: 2px solid #00c569;
-
-        }
-
-        #incobac-nav:after{
-
-            width: 0;
-
-            height: 0;
-
-            border-style: solid;
-
-            border-width: 0 10px 10px 10px;
-
-            border-color:  transparent transparent #00c569 transparent;
-
-            content: "";
-
-            position: absolute;
-
-            top: -10px;
-
-            right: 29px;
-
-
-        }
-
-        #incobac-nav .wrapper-nav{
-
-            padding: 30px 0 0;
-
-        }
-
-        .incobac-logo{
-
-            margin: 0 auto;
-
-            float: right;
-
-            position: relative;
-
-            right: calc(50% - 114px);
-
-        }
-
-        .profile-image-wrapper, .user-auth-info-wrapper, .user-auth-info-wrapper .navbar-nav{
-            margin: 0
-        }
-
-        .user-auth-info-wrapper{
-            float: left;
-        }
-
-
-        #incobac-nav .search-input{
-
-            max-width: 100%;
-
-            width: 100%;
-
-            padding: 0 15px;
-
-            margin-bottom:  15px;
-
-            float: none;
-
-        }
-
-        #incobac-nav .search-input input{
-
-            border:1px solid #E6E6E6;
-        }
-
-        .search-input button{
-
-            left: 15px;
-
-            padding: 13px 15px;
-
-            height: 100%;
-        }
-
-        #incobac-nav ul.mobile-navigation a{
-
-                color: #777;
-
-                font-weight: bold;
-
-                padding: 15px;
-
-                display: block;
-
-                border-bottom: 1px solid #E6E6E6;
-
-        }
-
-        #incobac-nav ul.mobile-navigation a:hover,
-        #incobac-nav ul.mobile-navigation a:focus,
-        #incobac-nav ul.mobile-navigation a.router-link-exact-active{
-
-                color: #00c569;
-
-                background: #fbfbfb;
-
-                border-color: #00c569;
-        }
-
-        #web-profile-items{
-
-            min-width: 150px;
-
-            left: 0;
-        }
-    }
-
-    @media screen and (max-width: 550px){
-        .incobac-logo{
-
-            margin: 0 auto;
-
-            float: right;
-
-            position: relative;
-
-            right: calc(50% - 95px);
-
-        }
-
-        .incobac-logo .navbar-brand{
-
-            width: 100px;
-
-            margin-top: 5px;
-
-        }
-
-
-        .profile-image-wrapper, .user-auth-info-wrapper, .user-auth-info-wrapper .navbar-nav{
-            margin: 0
-        }
-
-        .user-auth-info-wrapper{
-            float: left;
-        }
-
-        .mobile-login-link a{
-
-            font-size: 11px;
-
-        }
-
-
-    }
-
-
-    @media screen and (max-width: 360px){
-
-        .mobile-login-link a{
-
-            margin: 0;
-
-            padding: 8px 16px 7px;
-
-            font-size: 17px;
-
-
-        }
-
-        .mobile-login-link span{
-
-            display: none;
-
-        }
-
-    }
+  .mobile-login-link span {
+    display: none;
+  }
+}
 </style>
 
 <template>
-    <div>
-        <!-- loading -->
-        <div :class="{'loader-wrapper': !submiting , 'loader-display' : submiting }">
-            <div class="main-loader">
-                <img :src="loading"/>
-                <p dir="rtl">در حال بارگذاری...</p>
+  <div>
+    <!-- loading -->
+    <div :class="{ 'loader-wrapper': !submiting, 'loader-display': submiting }">
+      <div class="main-loader">
+        <img src="../../../../img/gif/prload.gif" />
+        <p dir="rtl">در حال بارگذاری...</p>
+      </div>
+    </div>
+    <!-- Modals -->
+    <div class="container">
+      <div
+        id="deleteModal"
+        class="modal fade"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="myLargeModalLabel"
+      >
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="main_popup_content">
+              <a href="#" data-dismiss="modal">
+                <i class="fa fa-times"></i>
+              </a>
+              <p class="main-pop-up" v-text="popUpMsg"></p>
+
+              <a
+                href="#"
+                class="btn green-button delete"
+                data-dismiss="modal"
+                @click.prevent="deleteProduct()"
+                v-text="deleteButtonText"
+              ></a>
+
+              <a
+                href="#"
+                class="btn green-button"
+                data-dismiss="modal"
+                v-text="cancelButtonText"
+              ></a>
             </div>
+          </div>
+          <!-- /.modal-content -->
         </div>
-        <!-- Modals -->
-        <div class="container">
-            <div
-                    id="deleteModal"
-                    class="modal fade"
-                    tabindex="-1"
-                    role="dialog"
-                    aria-labelledby="myLargeModalLabel"
-            >
-                <div class="modal-dialog modal-lg" role="document">
-                    <div class="modal-content">
-                        <div class="main_popup_content">
-                            <a href="#" data-dismiss="modal">
-                                <i class="fa fa-times"></i>
-                            </a>
-                            <p class="main-pop-up" v-text="popUpMsg"></p>
+        <!-- /.modal-dialog -->
+      </div>
+    </div>
 
-                            <a
-                                    href="#"
-                                    class="btn green-button delete"
-                                    data-dismiss="modal"
-                                    @click.prevent="deleteProduct()"
-                                    v-text="deleteButtonText"
-                            ></a>
+    <div class="container">
+      <div
+        id="custom-main-modal"
+        class="modal fade"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="myLargeModalLabel"
+      >
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="main_popup_content">
+              <a href="#" data-dismiss="modal">
+                <i class="fa fa-times"></i>
+              </a>
 
-                            <a href="#" class="btn green-button" data-dismiss="modal" v-text="cancelButtonText"></a>
-                        </div>
-                    </div>
-                    <!-- /.modal-content -->
-                </div>
-                <!-- /.modal-dialog -->
+              <p class="main-pop-up" v-text="popUpMsg"></p>
+
+              <button class="btn green-button" data-dismiss="modal">
+                متوجه شدم
+              </button>
             </div>
+          </div>
+          <!-- /.modal-content -->
         </div>
+        <!-- /.modal-dialog -->
+      </div>
+    </div>
 
-        <div class="container">
-            <div
-                    id="custom-main-modal"
-                    class="modal fade"
-                    tabindex="-1"
-                    role="dialog"
-                    aria-labelledby="myLargeModalLabel"
-            >
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="main_popup_content">
-                            <a href="#" data-dismiss="modal">
-                                <i class="fa fa-times"></i>
-                            </a>
+    <!-- <div class="container">
+      <div
+        id="DownloadApp"
+        class="modal fade"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="myLargeModalLabel"
+      >
+        <div class="modal-dialog modal-lg" role="document">
+          <a href="#" class="close-dialog-popup" data-dismiss="modal">
+            <i class="fa fa-times"></i>
+          </a>
 
-                            <p class="main-pop-up" v-text="popUpMsg"></p>
+          <div class="main_popup_content">
+            <div>
+              <div class="main-logo-popup">
+                <img src="../../../../img/logo/mobile-logo-white.svg" alt />
+                <p class="title">باسکول</p>
+              </div>
 
-                            <button class="btn green-button" data-dismiss="modal">متوجه شدم</button>
-                        </div>
-                    </div>
-                    <!-- /.modal-content -->
-                </div>
-                <!-- /.modal-dialog -->
+              <p class="main-pop-up">دانلود اپلیکیشن اندروید باسکول</p>
+
+              <a
+                href="#"
+                class="btn green-button"
+                data-dismiss="modal"
+                @click.prevent="doDownload()"
+              >دریافت اپلیکیشن</a>
+
+              <a href="#" class="btn green-button" data-dismiss="modal">متوجه شدم</a>
             </div>
+          </div>
         </div>
+        //.modal-dialog
+      </div>
+    </div>-->
 
-        <div class="container">
-            <div
-                    id="DownloadApp"
-                    class="modal fade"
-                    tabindex="-1"
-                    role="dialog"
-                    aria-labelledby="myLargeModalLabel"
-            >
-                <div class="modal-dialog modal-lg" role="document">
-                    <a href="#" class="close-dialog-popup" data-dismiss="modal">
-                        <i class="fa fa-times"></i>
-                    </a>
+    <div class="container">
+      <div
+        class="modal fade"
+        id="auth-popup"
+        tabindex="-1"
+        ref="myModal"
+        role="dialog"
+        aria-labelledby="myModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="main_popup_content">
+              <a href="#" data-dismiss="modal">
+                <i class="fa fa-times"></i>
+              </a>
 
-                    <div class="main_popup_content">
-                        <div>
-                            <div class="main-logo-popup">
-                                <img :src="incobacicon" alt/>
-                                <p class="title">اینکوباک</p>
-                            </div>
+              <p class="main-pop-up" v-text="popUpMsg"></p>
 
-                            <p class="main-pop-up">دانلود اپلیکیشن اندروید اینکوباک</p>
+              <router-link
+                data-dismiss="modal"
+                :to="{ name: 'register' }"
+                class="btn green-button"
+                >ورود/ثبت نام</router-link
+              >
 
-                            <a
-                                    href="#"
-                                    class="btn green-button"
-                                    data-dismiss="modal"
-                                    @click.prevent="doDownload()"
-                            >دریافت اپلیکیشن</a>
+              <br />
+              <br />
 
-                            <a href="#" class="btn green-button" data-dismiss="modal">متوجه شدم</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- /.modal-dialog -->
+              <button class="btn gray-button" data-dismiss="modal">
+                متوجه شدم
+              </button>
             </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+    </div>
+
+    <!-- end modals -->
+
+    <!--nav-->
+    <div class="mobile-background-shadow"></div>
+    <nav class="navbar text-rtl">
+      <div class="container-fluid buskool-main-nav">
+        <div class="hidden-md hidden-sm hidden-lg mobile-menu-button">
+          <span
+            class="message-count"
+            v-if="messageCount > 0"
+            v-text="messageCount"
+          ></span>
+          <button
+            type="button"
+            class="navbar-toggle"
+            data-toggle="collapse"
+            data-target="#buskool-nav"
+          >
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
         </div>
 
+        <div class="buskool-logo navbar-header navbar-right">
+          <router-link class="navbar-brand" :to="{ name: 'indexPage' }">
+            <img
+              src="../../../../img/logo/web-logo.svg"
+              alt="باسکول | بازارگاه آنلاین دنیای کشاورزی"
+            />
+          </router-link>
+        </div>
 
-        <div class="container">
-            <div
-                    class="modal fade"
-                    id="auth-popup"
-                    tabindex="-1"
-                    ref="myModal"
-                    role="dialog"
-                    aria-labelledby="myModalLabel"
-                    aria-hidden="true"
-            >
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="main_popup_content">
-                            <a href="#" data-dismiss="modal">
-                                <i class="fa fa-times"></i>
-                            </a>
-
-                            <p class="main-pop-up" v-text="popUpMsg"></p>
-
-                            <router-link data-dismiss='modal'  :to="{name : 'login'}" class="btn green-button">ورود/ثبت نام</router-link>
-
-                            <br/>
-                            <br/>
-
-                            <button class="btn green-button" data-dismiss="modal">متوجه شدم</button>
-                        </div>
-                    </div>
-                    <!-- /.modal-content -->
+        <div class="user-auth-info-wrapper navbar-nav">
+          <ul v-if="user_id != ''" class="nav navbar-nav">
+            <li>
+              <a
+                class="profile-info-wrapper"
+                data-toggle="collapse"
+                href="#web-profile-items"
+                role="button"
+              >
+                <div class="profile-image-wrapper">
+                  <img
+                    v-if="profile_photo"
+                    :src="storage_path + '/' + profile_photo"
+                    :alt="user_full_name"
+                  />
+                  <img
+                    v-else
+                    src="../../../../img/user-defult.png"
+                    :alt="user_full_name"
+                  />
                 </div>
-                <!-- /.modal-dialog -->
+                <div class="profile-information">
+                  <span class="hidden-xs" v-text="user_full_name"></span>
+                  <i class="fa fa-angle-down"></i>
+                </div>
+              </a>
+
+              <ul v-if="is_seller == 1" id="web-profile-items" class="collapse">
+                <li class="list-item">
+                  <router-link :to="{ name: 'statusSeller' }">
+                    <i class="fa fa-cog"></i>
+                    داشبورد
+                  </router-link>
+                </li>
+                <li class="list-item">
+                  <router-link :to="{ name: 'passwordSeller' }">
+                    <i class="fa fa-lock"></i>
+                    تغییر کلمه عبور
+                  </router-link>
+                </li>
+                <li class="list-item">
+                  <a href="/logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                    خروج
+                  </a>
+                </li>
+              </ul>
+              <ul v-else id="web-profile-items" class="collapse">
+                <li class="list-item">
+                  <router-link :to="{ name: 'profileBasicBuyer' }">
+                    <i class="fa fa-cog"></i>
+                    داشبورد
+                  </router-link>
+                </li>
+                <li class="list-item">
+                  <router-link :to="{ name: 'passwordBuyer' }">
+                    <i class="fa fa-lock"></i>
+                    تغییر کلمه عبور
+                  </router-link>
+                </li>
+                <li class="list-item">
+                  <a href="/logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                    خروج
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <ul v-else class="nav navbar-nav">
+            <li class="hidden-xs">
+              <router-link class="green-button" :to="{ name: 'register' }">
+                <i class="fa fa-user"></i>
+                ثبت نام رایگان
+              </router-link>
+            </li>
+
+            <li class="mobile-login-link hidden-sm hidden-md hidden-lg">
+              <router-link class="green-button" :to="{ name: 'register' }">
+                <i class="fa fa-user"></i>
+
+                <span>ورود / ثبت نام</span>
+              </router-link>
+            </li>
+
+            <li class="hidden-xs">
+              <router-link
+                class="green-button green-button-alt"
+                :to="{ name: 'login' }"
+              >
+                <i class="fa fa-sign-in-alt"></i>
+                ورود به باسکول
+              </router-link>
+            </li>
+          </ul>
+        </div>
+
+        <div class="collapse navbar-collapse navbar-right" id="buskool-nav">
+          <div class="wrapper-nav">
+            <div class="search-input">
+              <input
+                type="text"
+                placeholder="محصول مورد نظر خود را جستجو کنید"
+                v-model="mainSearchBoxText"
+              />
+              <button
+                class="hidden-sm hidden-md hidden-lg fa fa-search"
+                @click="search"
+              ></button>
+
+              <button class="hidden-xs" @click="search">
+                <i class="fa fa-search"></i>
+              </button>
             </div>
-        </div>
 
-        <!-- end modals -->
+            <ul class="mobile-navigation hidden-lg hidden-sm hidden-md">
+              <li>
+                <router-link
+                  class="smoothScroll"
+                  :to="{ name: 'indexPage' }"
+                  @click="
+                    registerComponentStatistics(
+                      'header',
+                      'home-page',
+                      'click-on-home-page'
+                    )
+                  "
+                >
+                  صفحه نخست
+                </router-link>
+              </li>
+              <li v-if="user_id !== ''">
+                <router-link
+                  v-if="is_seller == 1"
+                  class="smoothScroll"
+                  :to="{ name: 'messagesSeller' }"
+                  @click="
+                    registerComponentStatistics(
+                      'header',
+                      'dashboard',
+                      'click-on-dashboard'
+                    )
+                  "
+                >
+                  پیام ها
+                  <span
+                    class="message-count"
+                    v-if="messageCount > 0"
+                    v-text="messageCount"
+                  ></span>
+                </router-link>
 
-
-        <!--nav-->
-        <div class="mobile-background-shadow"></div>
-        <nav class="navbar text-rtl">
-
-            <div class="container-fluid incobac-main-nav">
-
-                <div class="hidden-md hidden-sm hidden-lg mobile-menu-button">
-                      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#incobac-nav">
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                </div>
-
-                <div class="incobac-logo navbar-header navbar-right">
-
-                    <router-link class="navbar-brand " :to="{name : 'indexPage'}">
-                        <img :src="assets + 'assets/img/logo_dark.png'" alt="اینکوباک | بازارگاه آنلاین دنیای کشاورزی">
-                    </router-link>
-                </div>
-
-                <div class="user-auth-info-wrapper navbar-nav">
-                    <ul  v-if="user_id != ''" class="nav navbar-nav ">
-                        <li>
-                            <a class="profile-info-wrapper" data-toggle="collapse" href="#web-profile-items" role="button" >
-                                <div class="profile-image-wrapper">
-                                    <img v-if="profile_photo" :src="storage_path + '/' + profile_photo" :alt="user_full_name"/>
-                                    <img v-else :src="user_default_image" :alt="user_full_name"/>
-
-                                </div>
-                                <div class="profile-information ">
-                                    <span class="hidden-xs" v-text="user_full_name"></span>
-                                    <i class="fa fa-angle-down"></i>
-                                </div>
-                            </a>
-
-                              <ul v-if="is_seller == 1" id="web-profile-items" class="collapse ">
-                                        <li  class="list-item">
-                                            <router-link
-                                                    :to="{ name: 'statusSeller'}"
-                                            >داشبورد
-                                            </router-link>
-                                        </li>
-                                        <li class="list-item">
-                                            <router-link
-                                                    :to="{ name: 'passwordSeller'}"
-                                            >تغییر کلمه عبور
-                                            </router-link>
-                                        </li>
-                                        <li class="list-item">
-                                            <a   href="/logout">خروج</a>
-                                        </li>
-                                    </ul>
-                                    <ul v-else id="web-profile-items" class="collapse ">
-                                        <li  class="list-item">
-                                            <router-link
-                                                    :to="{ name: 'profileBasicBuyer'}"
-                                            >داشبورد
-                                            </router-link>
-                                        </li>
-                                        <li class="list-item">
-                                            <router-link
-                                                    :to="{ name: 'passwordBuyer'}"
-                                            >تغییر کلمه عبور
-                                            </router-link>
-                                        </li>
-                                        <li class="list-item">
-                                            <a   href="/logout">خروج</a>
-                                        </li>
-                                    </ul>
-
-                        </li>
-                    </ul>
-                    <ul v-else class="nav navbar-nav ">
-                        <li  class="hidden-xs">
-                            <router-link
-                                    class="green-button"
-                                    :to="{name : 'register'}">
-                                <i class="fa fa-user"></i>
-
-                                    ثبت نام رایگان
-                            </router-link>
-                        </li>
-
-
-                         <li class="mobile-login-link hidden-sm hidden-md hidden-lg">
-                            <router-link
-                                    class="green-button"
-                                    :to="{name : 'login'}">
-                                <i class="fa fa-user"></i>
-
-                                <span>
-                                    ورود / ثبت نام
-
-                                </span>
-                            </router-link>
-                        </li>
-
-
-                        <li class="hidden-xs">
-                            <router-link
-                                    class="green-button green-button-alt"
-                                    :to="{name : 'login'}">
-                                <i class="fa  fa-sign-in-alt "></i>
-                                ورود به اینکوباک
-                            </router-link>
-                        </li>
-                    </ul>
-                 </div>
-
-                <div class="collapse navbar-collapse navbar-right" id="incobac-nav">
-
-                    <div class="wrapper-nav">
-                        <div class="search-input">
-
-                        <input type="text" placeholder="محصول مورد نظر خود را جستجو کنید"
-                               v-model="mainSearchBoxText">
-                        <button class="hidden-sm hidden-md hidden-lg fa fa-search" @click="search">
-
-                        </button>
-
-                        <button class="hidden-xs " @click="search">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </div>
-
-                    <ul class="mobile-navigation hidden-lg hidden-sm hidden-md ">
-                        <li>
-                            <router-link
-                                    class="smoothScroll"
-                                    :to="{ name: 'indexPage'}"
-                                    @click="registerComponentStatistics('header','home-page','click-on-home-page')"
-                            >
-                                صفحه
-                                نخست
-                            </router-link>
-                        </li>
-
-                        <li v-if="user_id !== ''">
-                            <router-link
-                                    v-if="is_seller == 1"
-                                    class="smoothScroll"
-                                    :to="{name : 'statusSeller'}"
-                                    @click="registerComponentStatistics('header','dashboard','click-on-dashboard')"
-                            >داشبورد
-                            </router-link>
-                            <router-link
-                                    v-else
-                                    class="smoothScroll"
-                                    :to="{name : 'profileBasicBuyer'}"
-                                    @click="registerComponentStatistics('header','dashboard','click-on-dashboard')"
-                            >داشبورد
-                            </router-link>
-                        </li>
-
-                        <li>
-                            <router-link
-                                    class="smoothScroll"
-                                    :to="{ name: 'productList'}"
-                                    @click="registerComponentStatistics('header','product-list','click-on-product-list')"
-                            >
-                                لیست
-                                محصولات
-                            </router-link>
-                        </li>
-                        <li>
-                            <a
-                                    href="http:\\www.blog.incobac.com"
-                                    class="smoothScroll"
-                                    @click="registerComponentStatistics('header','blog','click-on-blog')"
-                            >وبلاگ</a>
-                        </li>
-                        <!--  <li>
+                <router-link
+                  v-else
+                  class="smoothScroll"
+                  :to="{ name: 'messagesBuyer' }"
+                  @click="
+                    registerComponentStatistics(
+                      'header',
+                      'dashboard',
+                      'click-on-dashboard'
+                    )
+                  "
+                >
+                  پیام ها
+                  <span
+                    class="message-count"
+                    v-if="messageCount > 0"
+                    v-text="messageCount"
+                  ></span>
+                </router-link>
+              </li>
+              <li v-if="user_id !== ''">
+                <router-link
+                  v-if="is_seller == 1"
+                  class="smoothScroll"
+                  :to="{ name: 'buyAdRequestsSeller' }"
+                  @click="
+                    registerComponentStatistics(
+                      'header',
+                      'dashboard',
+                      'click-on-dashboard'
+                    )
+                  "
+                  >درخواست های خرید</router-link
+                >
+                <router-link
+                  v-else
+                  class="smoothScroll"
+                  :to="{ name: 'registerRequestBuyer' }"
+                  @click="
+                    registerComponentStatistics(
+                      'header',
+                      'dashboard',
+                      'click-on-dashboard'
+                    )
+                  "
+                  >ثبت درخواست خرید</router-link
+                >
+              </li>
+              <li v-if="user_id !== ''">
+                <router-link
+                  v-if="is_seller == 1"
+                  class="smoothScroll"
+                  :to="{ name: 'messagesRequestSeller' }"
+                  @click="
+                    registerComponentStatistics(
+                      'header',
+                      'dashboard',
+                      'click-on-dashboard'
+                    )
+                  "
+                >
+                  <span class="star-badge">
+                    <i class="fa fa-star"></i>
+                  </span>
+                  خریداران پیشنهادی
+                </router-link>
+              </li>
+              <li>
+                <router-link
+                  class="smoothScroll"
+                  :to="{ name: 'productList' }"
+                  @click="
+                    registerComponentStatistics(
+                      'header',
+                      'product-list',
+                      'click-on-product-list'
+                    )
+                  "
+                >
+                  لیست محصولات
+                </router-link>
+              </li>
+              <li>
+                <a
+                  href="https:\\blog.buskool.com"
+                  class="smoothScroll"
+                  @click="
+                    registerComponentStatistics(
+                      'header',
+                      'blog',
+                      'click-on-blog'
+                    )
+                  "
+                  >وبلاگ</a
+                >
+              </li>
+              <!--  <li>
                             <router-link
                               class="smoothScroll"
                               :to="{ name: 'pricing'}"
                               @click="registerComponentStatistics('header','pricing','click-on-pricing')"
-                            >تعرفه ها</router-link>
+                            >ارتقا عضویت</router-link>
                           </li>
               -->
-                        <li>
-                            <router-link
-                                    class="smoothScroll"
-                                    :to="{ name: 'aboutUs'}"
-                                    @click="registerComponentStatistics('header','about-us','click-on-about-us')"
-                            >
-                                درباره
-                                ما
-                            </router-link>
-                        </li>
+              <li>
+                <router-link
+                  class="smoothScroll"
+                  :to="{ name: 'aboutUs' }"
+                  @click="
+                    registerComponentStatistics(
+                      'header',
+                      'about-us',
+                      'click-on-about-us'
+                    )
+                  "
+                >
+                  درباره ما
+                </router-link>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
 
-                     </ul>
+      <div class="container-fluid buskool-sub-menu hidden-xs">
+        <ul class="nav navbar-right navbar-nav">
+          <li>
+            <router-link
+              class="smoothScroll"
+              :to="{ name: 'indexPage' }"
+              @click="
+                registerComponentStatistics(
+                  'header',
+                  'home-page',
+                  'click-on-home-page'
+                )
+              "
+            >
+              صفحه نخست
+            </router-link>
+          </li>
 
-                    </div>
-                </div>
-            </div>
+          <li v-if="user_id !== ''">
+            <router-link
+              v-if="is_seller == 1"
+              class="smoothScroll"
+              :to="{ name: 'messagesSeller' }"
+              @click="
+                registerComponentStatistics(
+                  'header',
+                  'dashboard',
+                  'click-on-dashboard'
+                )
+              "
+            >
+              پیام ها
+              <span
+                class="message-count"
+                v-if="messageCount > 0"
+                v-text="messageCount"
+              ></span>
+            </router-link>
 
-
-            <div class="container-fluid incobac-sub-menu hidden-xs">
-
-
-                <ul class="nav navbar-right navbar-nav">
-                    <li>
-                        <router-link
-                                class="smoothScroll"
-                                :to="{ name: 'indexPage'}"
-                                @click="registerComponentStatistics('header','home-page','click-on-home-page')"
-                        >
-                            صفحه
-                            نخست
-                        </router-link>
-                    </li>
-
-                    <li v-if="user_id !== ''">
-                        <router-link
-                                v-if="is_seller == 1"
-                                class="smoothScroll"
-                                :to="{name : 'statusSeller'}"
-                                @click="registerComponentStatistics('header','dashboard','click-on-dashboard')"
-                        >داشبورد
-                        </router-link>
-                        <router-link
-                                v-else
-                                class="smoothScroll"
-                                :to="{name : 'profileBasicBuyer'}"
-                                @click="registerComponentStatistics('header','dashboard','click-on-dashboard')"
-                        >داشبورد
-                        </router-link>
-                    </li>
-
-                    <li>
-                        <router-link
-                                class="smoothScroll"
-                                :to="{ name: 'productList'}"
-                                @click="registerComponentStatistics('header','product-list','click-on-product-list')"
-                        >
-                            لیست
-                            محصولات
-                        </router-link>
-                    </li>
-                    <li>
-                        <a
-                                href="http:\\www.blog.incobac.com"
-                                class="smoothScroll"
-                                @click="registerComponentStatistics('header','blog','click-on-blog')"
-                        >وبلاگ</a>
-                    </li>
-                    <!--  <li>
+            <router-link
+              v-else
+              class="smoothScroll"
+              :to="{ name: 'messagesBuyer' }"
+              @click="
+                registerComponentStatistics(
+                  'header',
+                  'dashboard',
+                  'click-on-dashboard'
+                )
+              "
+            >
+              پیام ها
+              <span
+                class="message-count"
+                v-if="messageCount > 0"
+                v-text="messageCount"
+              ></span>
+            </router-link>
+          </li>
+          <li v-if="user_id !== ''">
+            <router-link
+              v-if="is_seller == 1"
+              class="smoothScroll"
+              :to="{ name: 'buyAdRequestsSeller' }"
+              @click="
+                registerComponentStatistics(
+                  'header',
+                  'dashboard',
+                  'click-on-dashboard'
+                )
+              "
+              >درخواست های خرید</router-link
+            >
+            <router-link
+              v-else
+              class="smoothScroll"
+              :to="{ name: 'registerRequestBuyer' }"
+              @click="
+                registerComponentStatistics(
+                  'header',
+                  'dashboard',
+                  'click-on-dashboard'
+                )
+              "
+              >ثبت درخواست خرید</router-link
+            >
+          </li>
+          <li v-if="user_id !== ''">
+            <router-link
+              v-if="is_seller == 1"
+              class="smoothScroll"
+              :to="{ name: 'messagesRequestSeller' }"
+              @click="
+                registerComponentStatistics(
+                  'header',
+                  'dashboard',
+                  'click-on-dashboard'
+                )
+              "
+            >
+              <span class="star-badge">
+                <i class="fa fa-star"></i>
+              </span>
+              خریداران پیشنهادی
+            </router-link>
+          </li>
+          <li>
+            <router-link
+              class="smoothScroll"
+              :to="{ name: 'productList' }"
+              @click="
+                registerComponentStatistics(
+                  'header',
+                  'product-list',
+                  'click-on-product-list'
+                )
+              "
+            >
+              لیست محصولات
+            </router-link>
+          </li>
+          <li>
+            <a
+              href="https:\\blog.buskool.com"
+              class="smoothScroll"
+              @click="
+                registerComponentStatistics('header', 'blog', 'click-on-blog')
+              "
+              >وبلاگ</a
+            >
+          </li>
+          <!--  <li>
                         <router-link
                           class="smoothScroll"
                           :to="{ name: 'pricing'}"
                           @click="registerComponentStatistics('header','pricing','click-on-pricing')"
-                        >تعرفه ها</router-link>
+                        >ارتقا عضویت</router-link>
                       </li>
           -->
-                    <li>
-                        <router-link
-                                class="smoothScroll"
-                                :to="{ name: 'aboutUs'}"
-                                @click="registerComponentStatistics('header','about-us','click-on-about-us')"
-                        >
-                            درباره
-                            ما
-                        </router-link>
-                    </li>
-
-                </ul>
-            </div>
-        </nav>
-    </div>
+          <li>
+            <router-link
+              class="smoothScroll"
+              :to="{ name: 'aboutUs' }"
+              @click="
+                registerComponentStatistics(
+                  'header',
+                  'about-us',
+                  'click-on-about-us'
+                )
+              "
+            >
+              درباره ما
+            </router-link>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
 </template>
 <script>
-    var visible = false;
-    import {eventBus} from "../../../router/router";
+var visible = false;
+import { eventBus } from "../../../router/router";
 
-
-    export default {
-        data() {
-            return {
-                popUpMsg: "",
-                submiting: false,
-                isLoading: true,
-                deleteText: "",
-                deleteButtonText: "",
-                cancelButtonText: "",
-                ProductId: "",
-                mainSearchBoxText: ""
-            };
-        },
-        props: [
-            "assets",
-            "incobacicon",
-            "user_id",
-            "is_seller",
-            "user_default_image",
-            "profile_photo",
-            "user_full_name",
-            "user_logout_path",
-            "storage_path",
-            "login_page_path",
-            "loading",
-            "finish_load_img",
-        ],
-        methods: {
-       
-           
-            // jQuery
-            jqUpdateSize: function () {
-                // Get the dimensions of the viewport
-                var width = $(window).width();
-                if (width < 767) {
-                    $("#collapseHeader a.smoothScroll").on("click", function () {
-                        $(".btn-navbar").click(); //bootstrap 2.x
-                        $(".navbar-toggle").click(); //bootstrap 3.x by Richard
-                        $(".navbar-toggler").click(); //bootstrap 4.x
-                    });
-                }
-            },
-            logUserOut: function () {
-                localStorage.removeItem("userRoute");
-                registerComponentStatistics('header', 'register-login', 'click-on-register-login')
-            },
-            registerComponentStatistics: function (categoryName, actionName, labelName) {
-                gtag("event", actionName, {
-                    event_category: categoryName,
-                    event_label: labelName
-                });
-            },
-            deleteProduct: function () {
-                var self = this;
-
-                axios
-                    .post("/delete_product_by_id", {
-                        product_id: self.productId
-                    })
-                    .then(function (response) {
-                        //show product deleted message
-                        //code
-                        self.popUpMsg = "حذف شد.";
-                        $("#custom-main-modal").modal("show");
-
-                        self.registerComponentStatistics(
-                            "product",
-                            "product-deleted",
-                            "product-deleted-successfully"
-                        );
-
-                        setTimeout(function () {
-                            window.location.reload();
-                        }, 3000);
-                    })
-                    .catch(function (err) {
-                        self.registerComponentStatistics(
-                            "product",
-                            "product-delete-failed",
-                            "product-delete-failed"
-                        );
-                        //show modal
-                        self.popUpMsg = "خطایی رخ داده است.لطفا دوباره تلاش کنید.";
-                        $("#custom-main-modal").modal("show");
-                    });
-            },
-            search: function () {
-                if (this.mainSearchBoxText !== '') {
-                    
-                    let searchValue = this.mainSearchBoxText;
-                    let queryValue = searchValue.replace(/ /g,'+');
-                    
-                    this.$router.push({
-                        name : 'productList',
-                        query :{
-                            s:queryValue
-                        }
-                    });
-                }
-            },
-
-        },
-        mounted() {
-
-            // scroll handeling hide in web
-             var lastScroll = 0;
-             var navbar = $('nav.navbar .incobac-sub-menu');
-            $(window).scroll(function(){
-                var state = $(window).scrollTop();
-
-                if($(window).scrollTop() > 60 && state > lastScroll)
-                {
-                     navbar.addClass("scrollUp");
-
-                }else if ($(window).scrollTop() < 60 && state < lastScroll || $(window).scrollTop() > 60 && state < lastScroll){
-
-                    navbar.removeClass("scrollUp");
-
-                }
-
-                lastScroll = state
-            });
-
-
-
-            $("#incobac-nav").on("hide.bs.collapse", function(){
-
-             $('.mobile-background-shadow').fadeTo(0,0,function(){
-                $(this).css('display','none')
-             })
-
-            });
-
-
-            $("#incobac-nav").on("show.bs.collapse", function(){
-               $('.mobile-background-shadow').fadeTo(0,0.8)
-             });
-
-
-            $(document).on('click', function (e){
-                /* bootstrap collapse js adds "in" class to your collapsible element*/
-
-                var user_menu_opened = $('#web-profile-items').hasClass('in');
-
-                if(!$(e.target).closest('#web-profile-items').length &&
-                    !$(e.target).is('#web-profile-items') &&
-                    user_menu_opened === true){
-
-                        $('#web-profile-items').collapse('toggle');
-                }
-
-                  /* bootstrap collapse js adds "in" class to your collapsible element*/
-
-                var menu_opened = $('#incobac-nav').hasClass('in');
-
-                if(!$(e.target).is('.search-input input') && menu_opened === true){
-
-                        $('#incobac-nav').collapse('toggle');
-
-                }
-
-            });
-
-
-
-            eventBus.$on("submitSuccess", $event => {
-                this.popUpMsg = $event;
-            });
-            eventBus.$on("submiting", $event => {
-                this.submiting = $event;
-            });
-            eventBus.$on("isLoading", $event => {
-                this.isLoading = $event;
-            });
-
-            eventBus.$on("deleteButtonText", event => {
-                this.deleteButtonText = event;
-            });
-
-            eventBus.$on("cancelButtonText", event => {
-                this.cancelButtonText = event;
-            });
-
-            eventBus.$on("productId", event => {
-                this.productId = event;
-            });
-
-            eventBus.$on("textSearch", event => {
-                this.mainSearchBoxText = event;
-            });
-
-            $(window).resize(this.jqUpdateSize); // When the browser changes size
-        },
-        created() {
-            document.addEventListener("click", this.documentClick);
-
-            var self = this;
-
-            window.addEventListener('keydown', function (event) {
-                if (event.keyCode === 13) {
-                        self.search();
-                        $('#incobac-nav').collapse('hide');
-                        $('#web-profile-items').collapse('hide');
-                }
-            });
-        },
-        watch: {
-            mainSearchBoxText:function(value){
-                eventBus.$emit('textSearch',value);
-            }
-        },
+export default {
+  data() {
+    return {
+      popUpMsg: "",
+      submiting: false,
+      isLoading: true,
+      deleteText: "",
+      deleteButtonText: "",
+      cancelButtonText: "",
+      ProductId: "",
+      mainSearchBoxText: "",
+      messageCount: 0,
     };
+  },
+  props: [
+    "assets",
+    "user_id",
+    "is_seller",
+    "profile_photo",
+    "user_full_name",
+    "user_logout_path",
+    "storage_path",
+    "login_page_path",
+  ],
+  methods: {
+    // jQuery
+    jqUpdateSize: function () {
+      // Get the dimensions of the viewport
+      var width = $(window).width();
+      if (width < 767) {
+        $("#collapseHeader a.smoothScroll").on("click", function () {
+          $(".btn-navbar").click(); //bootstrap 2.x
+          $(".navbar-toggle").click(); //bootstrap 3.x by Richard
+          $(".navbar-toggler").click(); //bootstrap 4.x
+        });
+      }
+    },
+    logUserOut: function () {
+      localStorage.removeItem("userRoute");
+      this.registerComponentStatistics(
+        "header",
+        "register-login",
+        "click-on-register-login"
+      );
+    },
+    registerComponentStatistics: function (
+      categoryName,
+      actionName,
+      labelName
+    ) {
+      gtag("event", actionName, {
+        event_category: categoryName,
+        event_label: labelName,
+      });
+    },
+    deleteProduct: function () {
+      var self = this;
+
+      axios
+        .post("/delete_product_by_id", {
+          product_id: self.productId,
+        })
+        .then(function (response) {
+          //show product deleted message
+          //code
+          self.popUpMsg = "حذف شد.";
+          $("#custom-main-modal").modal("show");
+
+          self.registerComponentStatistics(
+            "product",
+            "product-deleted",
+            "product-deleted-successfully"
+          );
+
+          setTimeout(function () {
+            window.location.reload();
+          }, 3000);
+        })
+        .catch(function (err) {
+          self.registerComponentStatistics(
+            "product",
+            "product-delete-failed",
+            "product-delete-failed"
+          );
+          //show modal
+          self.popUpMsg = "خطایی رخ داده است.لطفا دوباره تلاش کنید.";
+          $("#custom-main-modal").modal("show");
+        });
+    },
+    search: function () {
+      if (this.mainSearchBoxText !== "") {
+        let searchValue = this.mainSearchBoxText;
+        let queryValue = searchValue.replace(/ /g, "+");
+
+        this.$router.push({
+          name: "productList",
+          query: {
+            s: queryValue,
+          },
+        });
+      }
+    },
+  },
+  mounted() {
+    if (this.user_id) {
+      axios
+        .post("/get_total_unread_messages_for_current_user")
+        .then(function (response) {
+          let messageCount = response.data.msg_count;
+          eventBus.$emit("messageCount", messageCount);
+        })
+        .catch(function (error) {
+          console.log("error", error);
+        });
+    }
+    // scroll handeling hide in web
+    var lastScroll = 0;
+    var navbar = $("nav.navbar .buskool-sub-menu");
+    $(window).scroll(function () {
+      var state = $(window).scrollTop();
+
+      if ($(window).scrollTop() > 60 && state > lastScroll) {
+        navbar.addClass("scrollUp");
+      } else if (
+        ($(window).scrollTop() < 60 && state < lastScroll) ||
+        ($(window).scrollTop() > 60 && state < lastScroll)
+      ) {
+        navbar.removeClass("scrollUp");
+      }
+
+      lastScroll = state;
+    });
+
+    $("#buskool-nav").on("hide.bs.collapse", function () {
+      $(".mobile-background-shadow").fadeTo(0, 0, function () {
+        $(this).css("display", "none");
+      });
+    });
+
+    $("#buskool-nav").on("show.bs.collapse", function () {
+      $(".mobile-background-shadow").fadeTo(0, 0.8);
+    });
+
+    $(document).on("click", function (e) {
+      /* bootstrap collapse js adds "in" class to your collapsible element*/
+
+      var user_menu_opened = $("#web-profile-items").hasClass("in");
+
+      if (
+        !$(e.target).closest("#web-profile-items").length &&
+        !$(e.target).is("#web-profile-items") &&
+        user_menu_opened === true
+      ) {
+        $("#web-profile-items").collapse("toggle");
+      }
+
+      /* bootstrap collapse js adds "in" class to your collapsible element*/
+
+      var menu_opened = $("#buskool-nav").hasClass("in");
+
+      if (!$(e.target).is(".search-input input") && menu_opened === true) {
+        $("#buskool-nav").collapse("toggle");
+      }
+    });
+
+    eventBus.$on("submitSuccess", ($event) => {
+      this.popUpMsg = $event;
+    });
+    eventBus.$on("submiting", ($event) => {
+      this.submiting = $event;
+    });
+    eventBus.$on("isLoading", ($event) => {
+      this.isLoading = $event;
+    });
+
+    eventBus.$on("deleteButtonText", (event) => {
+      this.deleteButtonText = event;
+    });
+
+    eventBus.$on("cancelButtonText", (event) => {
+      this.cancelButtonText = event;
+    });
+
+    eventBus.$on("productId", (event) => {
+      this.productId = event;
+    });
+
+    eventBus.$on("textSearch", (event) => {
+      this.mainSearchBoxText = event;
+    });
+
+    eventBus.$on("messageCount", (event) => {
+      this.messageCount += event;
+    });
+
+    $(window).resize(this.jqUpdateSize); // When the browser changes size
+  },
+  created() {
+    document.addEventListener("click", this.documentClick);
+
+    var self = this;
+
+    window.addEventListener("keydown", function (event) {
+      if (
+        !window.location.pathname.includes("seller") &&
+        !window.location.pathname.includes("buyer") &&
+        !window.location.pathname.includes("login")
+      ) {
+        if (event.keyCode === 13) {
+          self.search();
+          $("#buskool-nav").collapse("hide");
+          $("#web-profile-items").collapse("hide");
+        }
+      }
+    });
+  },
+  watch: {
+    mainSearchBoxText: function (value) {
+      eventBus.$emit("textSearch", value);
+    },
+  },
+};
 </script>

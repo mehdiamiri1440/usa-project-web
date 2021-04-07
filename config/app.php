@@ -151,13 +151,13 @@ return [
         Illuminate\Filesystem\FilesystemServiceProvider::class,
         Illuminate\Foundation\Providers\FoundationServiceProvider::class,
         Illuminate\Hashing\HashServiceProvider::class,
-        Illuminate\Mail\MailServiceProvider::class,
+        // Illuminate\Mail\MailServiceProvider::class,
         Illuminate\Notifications\NotificationServiceProvider::class,
         Illuminate\Pagination\PaginationServiceProvider::class,
         Illuminate\Pipeline\PipelineServiceProvider::class,
         Illuminate\Queue\QueueServiceProvider::class,
-        Illuminate\Redis\RedisServiceProvider::class,
-        Illuminate\Auth\Passwords\PasswordResetServiceProvider::class,
+        // Illuminate\Redis\RedisServiceProvider::class,
+        // Illuminate\Auth\Passwords\PasswordResetServiceProvider::class,
         Illuminate\Session\SessionServiceProvider::class,
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
@@ -166,6 +166,8 @@ return [
         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
         Larabookir\Gateway\GatewayServiceProvider::class,
         LaravelFCM\FCMServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
+        Aws\Laravel\AwsServiceProvider::class,
         
         
 
@@ -238,7 +240,9 @@ return [
         'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
         'Gateway' => \Larabookir\Gateway\Gateway::class, 
         'FCM'      => LaravelFCM\Facades\FCM::class,
-	    'FCMGroup' => LaravelFCM\Facades\FCMGroup::class,
+        'FCMGroup' => LaravelFCM\Facades\FCMGroup::class,
+        'Image' => Intervention\Image\Facades\Image::class,
+        'AWS' => Aws\Laravel\AwsFacade::class,
 
     ],
 

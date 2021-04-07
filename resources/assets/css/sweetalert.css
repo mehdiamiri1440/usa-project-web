@@ -1,0 +1,199 @@
+/*
+         .custom-swal -> custom styles for default swal wrapper
+         .custom-swal-with-cancel -> custom styles for  swal wrapper with cancel button (Always the last button most be cancel button)
+         .custom-swal-full-size  -> custom style for default swal wrapper but it is full size in mobile 
+         .custom-swal-full-size-with-cancel  -> custom style for default swal wrapper but it is full size in mobile  with cancel button (Always the last button most be cancel button)
+         */
+
+.custom-swal,
+.custom-swal-with-cancel,
+.custom-swal-full-size,
+.custom-swal-full-size-with-cancel {
+  overflow: hidden;
+  border-radius: 13px;
+}
+
+.swal-button {
+  background-color: #00c569;
+}
+.swal-button:not([disabled]):hover {
+  background-color: #279b41;
+}
+.swal-button:focus {
+  outline: none;
+
+  box-shadow: none;
+}
+
+.swal-title {
+  font-size: 16px;
+  padding: 7px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.swal-title:not(:last-child),
+.swal-content {
+  margin: 0 auto 30px;
+}
+
+.swal-title:first-child {
+  margin-top: 0;
+}
+
+.sweet-alert-close-button {
+  font-size: 20px;
+
+  color: #777;
+
+  position: absolute;
+
+  right: 0;
+
+  padding: 8px 15px 2px;
+
+  top: 0;
+
+  background: none;
+
+  border: none;
+}
+
+.swal-text {
+  text-align: center;
+  direction: rtl;
+  margin: 0 auto;
+  font-size: 14px;
+  line-height: normal;
+}
+
+.custom-swal-with-cancel
+  .swal-footer
+  .swal-button-container:last-of-type
+  button,
+.custom-swal-full-size-with-cancel
+  .swal-footer
+  .swal-button-container:last-of-type
+  button {
+  border-radius: 0;
+
+  width: 100%;
+
+  color: #555;
+
+  transition: 200ms;
+}
+
+.custom-swal-with-cancel .swal-footer .swal-button-container:last-of-type,
+.custom-swal-full-size-with-cancel
+  .swal-footer
+  .swal-button-container:last-of-type {
+  margin: 0;
+
+  width: 100%;
+
+  border-radius: 0;
+
+  margin-top: 30px;
+}
+
+/* 
+create new badge for buttons
+ */
+
+.button-new-badge::after{
+  content: 'جدید';
+  position: absolute;
+  top: -10px;
+  right: -14px;
+  background: red;
+  border-radius: 17px;
+  padding: 0px 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+
+
+/* 
+.close-sweet-alert-btn:hover {
+  background-color: #ddd !important;
+} */
+
+.swal-footer {
+  text-align: center;
+  direction: rtl;
+  padding: 0;
+  margin-top: 30px;
+}
+.custom-swal .swal-footer,
+.custom-swal-full-size .swal-footer {
+  margin-bottom: 30px;
+}
+
+.swal-button-container .swal-button {
+  font-size: 14px;
+}
+
+.bg-cancel {
+  background-color: #ddd !important;
+  color: #555;
+}
+.bg-cancel:hover {
+  background-color: #eee !important;
+}
+
+.swal-star-badge {
+  position: relative;
+  border-radius: 50px;
+  background: linear-gradient( 21deg, rgb(199, 168, 79) 0%, rgb(249, 242, 159) 51%, rgb(199, 168, 79) 100% );
+  background-clip: border-box;
+  background-clip: border-box;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+  direction: ltr;
+  line-height: 1;
+  font-size:50px;
+}
+
+.swal-guide{
+  line-height: 1.618;
+}
+
+.swal-user-image {
+  width: 90px;
+  height: 90px;
+  position: relative;
+  margin: 0 auto 10px;
+  border-radius: 90px;
+  overflow: hidden;
+  position: relative;
+}
+
+.swal-img{
+  height: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  .custom-swal-full-size,
+  .custom-swal-full-size-with-cancel {
+    border-radius: 0;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+  }
+
+  .custom-swal-full-size .swal-footer,
+  .custom-swal-full-size-with-cancel .swal-footer {
+    padding: 0;
+
+    margin: 0;
+
+    width: 100%;
+
+    left: 0;
+
+    position: absolute;
+
+    bottom: 0;
+  }
+}

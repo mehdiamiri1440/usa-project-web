@@ -3,7 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use App\profile;
+use App\Models\profile;
 
 class profile_confirmation
 {

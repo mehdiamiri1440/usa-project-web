@@ -12,13 +12,13 @@ return [
     // Zarinpal gateway
     //--------------------------------
     'zarinpal' => [
-        'merchant-id'  => 'aefa8848-91c2-11e9-aec8-000c29344814',
+        'merchant-id'  => 'b8c8560c-4ab3-11ea-b839-000c295eb8fc',
         'type'         => 'normal',             // Types: [zarin-gate || normal]
         'callback-url' => '/',
         'server'       => 'iran',                // Servers: [germany || iran || test]
         'email'        => 'ali_delkhosh@ymail.com',
         'mobile'       => '09118413054',
-        'description'  => 'اینکوباک',
+        'description'  => 'باسکول',
     ],
 
     //--------------------------------

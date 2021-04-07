@@ -4,17 +4,18 @@ body {
 }
 </style>
 <style scoped>
+.main-article-contents p a,
 span {
-  color: #777;
+  color: #474747;
 }
 
-.main-article-contents h1,
+.main-article-contents h3 a {
+  color: #777;
+}
 .main-article-contents h3 {
   font-size: 16px;
 
   font-weight: bold;
-
-  color: #474747;
 
   max-width: 240px;
 
@@ -32,7 +33,6 @@ span {
 }
 
 .main-article-contents-wrapper {
-  padding: 15px;
   overflow: hidden;
   display: block;
 }
@@ -40,13 +40,18 @@ span {
 .main-article-contents-image-wrapper,
 .main-article-contents {
   float: right;
+
+  padding: 15px;
+
+  padding-left: 0;
 }
 
 .main-article-contents {
   float: right;
-  width: calc(100% - 140px);
-  padding-right: 10px;
+  width: calc(100% - 155px);
   position: relative;
+  padding: 15px;
+  padding-right: 10px;
 }
 
 .main-article-contents > a {
@@ -59,9 +64,11 @@ span {
 }
 
 .main-article-contents p {
-  font-size: 13px;
+  font-size: 15px;
 
   font-weight: bold;
+
+  color: #777;
 
   max-width: 500px;
 
@@ -95,8 +102,8 @@ span {
   height: 38px;
   background: #00c569;
   position: absolute;
-  left: 0;
-  top: -15px;
+  left: 14px;
+  top: 0;
   padding: 2px;
   border-top: 3px solid #00b761;
   text-align: center;
@@ -119,39 +126,21 @@ span {
   bottom: -14px;
 }
 
-.is-user-valid-content {
-  padding: 15px;
-}
-
 .text-danger {
   height: 24px;
 }
-
 
 @media screen and (max-width: 767px) {
   .main-article-contents a p {
     max-width: 300px;
   }
 }
-
-@media screen and (max-width: 480px) {
-  .main-article-contents h1,
-  .main-article-contents h3,
-  .main-article-contents a p {
-    max-width: 170px;
-  }
-
-  .share-link span {
-    display: none;
-  }
-}
-
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 555px) {
   .main-article-contents h1,
   .main-article-contents h3,
   .main-article-contents a p {
     max-width: 150px;
-    font-size: 14px;
+    font-size: 17px;
   }
 
   .main-article-contents a p {
@@ -162,29 +151,38 @@ span {
     display: none;
   }
 
+  .main-article-contents-image-wrapper,
+  .main-article-contents {
+    padding-right: 10px;
+  }
+
   .main-article-contents {
     float: right;
-    width: calc(100% - 90px);
+
+    width: calc(100% - 100px);
+
     padding-right: 10px;
+
     position: relative;
+
+    padding-bottom: 0;
+  }
+  .product-description {
+    display: none;
+  }
+}
+@media screen and (max-width: 480px) {
+  .main-article-contents h1,
+  .main-article-contents h3,
+  .main-article-contents a p {
+    max-width: 300px;
+  }
+
+  .share-link span {
+    display: none;
   }
 }
 
-@media screen and (max-width: 370px) {
-  .main-article-contents-image-wrapper,
-  .main-article-contents,
-  .main-article-contents > a {
-    float: initial;
-  }
-
-  .main-article-contents {
-    width: 100%;
-    padding: 15px 0 0;
-  }
-  .valid-user-badge {
-    top: 15px;
-  }
-}
 .pointer-class {
   cursor: pointer;
 }
@@ -192,28 +190,41 @@ span {
 <template>
   <div
     class="main-article-contents-wrapper pointer-class"
-    @click="setScroll()"
-    :class="{ 'is-user-valid-content': $parent.product.user_info.active_pakage_type != 0 }"
+    :class="{
+      'is-user-valid-content':
+        $parent.product.user_info.active_pakage_type != 3,
+    }"
   >
-    <div class="main-article-contents-image-wrapper">
+    <div class="main-article-contents-image-wrapper" @click="setScroll()">
       <ProductImage
         :base="$parent.str + '/'"
         :img="$parent.product.photos[0].file_path"
-        :alt="'فروش عمده ی ' + $parent.product.main.sub_category_name +
-                                            ' '  +
-                                            $parent.product.main.product_name +
-                                            ' ' +
-                                            $parent.product.main.city_name +
-                                             ' - ' +
-                                            $parent.product.main.province_name"
-        :image-count="$parent.product.photos.length"
+        :alt="
+          'فروش عمده ی ' +
+          $parent.product.main.sub_category_name +
+          ' ' +
+          $parent.product.main.product_name +
+          ' ' +
+          $parent.product.main.city_name +
+          ' - ' +
+          $parent.product.main.province_name
+        "
+        :image-count="$parent.product.main.photos_count"
+        :product-url="this.$parent.productUrl"
       />
     </div>
-    <div class="main-article-contents">
-      <div class="valid-user-badge" v-if="$parent.product.user_info.active_pakage_type != 0">
+    <div class="main-article-contents" @click="setScroll()">
+      <div
+        class="valid-user-badge"
+        v-if="$parent.product.user_info.active_pakage_type == 3"
+      >
         <div class="wrapper-icon">
           <svg width="24.965" height="30.574" viewBox="0 0 24.965 30.574">
-            <g id="incobac-icon" data-name="incobac" transform="translate(-273.1 -715.025)">
+            <g
+              id="buskool-icon"
+              data-name="buskool"
+              transform="translate(-273.1 -715.025)"
+            >
               <path
                 id="Subtraction_1"
                 data-name="Subtraction 1"
@@ -242,48 +253,44 @@ span {
         </div>
       </div>
       <div>
-        <h1 v-if="$route.params.id" class="article-title" v-html="getProductName()"></h1>
-
-        <h3 v-else class="article-title" v-html="getProductName()"></h3>
+        <h3 class="article-title">
+          <router-link
+            :to="this.$parent.productUrl"
+            v-html="getProductName()"
+          ></router-link>
+        </h3>
 
         <p>
           استان / شهر:
           <span
-            v-text="$parent.product.main.province_name +
-                            ' - ' +
-                             $parent.product.main.city_name"
+            v-text="
+              $parent.product.main.province_name +
+              ' - ' +
+              $parent.product.main.city_name
+            "
           ></span>
         </p>
 
-        <p v-if="$parent.product.main.description">
+        <p v-if="$parent.product.main.description" class="product-description">
           توضیحات
-          <span v-text="$parent.product.main.description"></span>
+          <router-link
+            v-if="$parent.product.main.description < 100"
+            :to="this.$parent.productUrl"
+            v-html="$parent.product.main.description"
+          ></router-link>
+
+          <router-link
+            v-else
+            :to="this.$parent.productUrl"
+            v-html="$parent.product.main.description.substring(0, 100)"
+          ></router-link>
         </p>
-        <!--
-                <p >
-                    حداقل سفارش:
 
-                    <span v-text="$parent.product.main.min_sale_amount"> </span>
-
-                    <span>کیلوگرم</span>
-        </p>-->
         <p>
           مقدار موجودی:
-          <span v-text="$parent.product.main.stock + ' کیلوگرم'"></span>
+          <span v-text="getConvertedNumbers($parent.product.main.stock)"></span>
         </p>
-
-        <!-- <p v-if="!$parent.isMyProfile">قیمت:
-                    <a href="#" @click.prevent="$parent.openChat($parent.product)">استعلام بگیرید</a>
-                     <span v-text="product.main.min_sale_price +
-                       ' - ' +
-                       product.main.max_sale_price"
-                      >
-                      </span>
-
-                      <span>تومان</span>
-        </p>-->
       </div>
-
 
       <router-link
         to="#"
@@ -294,7 +301,6 @@ span {
         <span>اشتراک گذاری</span>
       </router-link>
     </div>
- 
   </div>
 </template>
 
@@ -302,27 +308,35 @@ span {
 import ProductImage from "./product_image";
 
 export default {
-  props: ["productIndex"],
+  props: ["productIndex", "is_my_profile_status"],
   components: {
-    ProductImage
+    ProductImage,
   },
   methods: {
-    setScroll: function() {
+    setScroll: function () {
       localStorage.setItem("scrollIndex", this.$props.productIndex);
-      this.$router.push(this.$parent.productUrl);
+
+      if (
+        this.isDeviceMobile() &&
+        window.location.pathname.includes("product-list")
+      ) {
+        window.open(this.$parent.productUrl, "_blank");
+      } else {
+        this.$router.push(this.$parent.productUrl);
+      }
       this.$parent.registerComponentStatistics(
         "product",
         "show-product-in-seperate-page",
         "show-product-in-seperate-page"
       );
     },
-    getProductName: function() {
+    getProductName: function () {
       var productName = "";
       productName =
         this.$parent.product.main.category_name +
         " | " +
         this.$parent.product.main.sub_category_name +
-        ' <span style="color: #777">' +
+        ' <span style="color: #474747">' +
         this.$parent.product.main.product_name +
         "</span>";
       // if (this.$route.params.categoryName) {
@@ -344,7 +358,45 @@ export default {
       // }
 
       return productName;
-    }
-  }
+    },
+    isDeviceMobile: function () {
+      if (
+        navigator.userAgent.match(/Android/i) ||
+        navigator.userAgent.match(/webOS/i) ||
+        navigator.userAgent.match(/iPhone/i) ||
+        navigator.userAgent.match(/iPad/i) ||
+        navigator.userAgent.match(/iPod/i) ||
+        navigator.userAgent.match(/BlackBerry/i) ||
+        navigator.userAgent.match(/Windows Phone/i)
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    getProductLinkTarget: function () {
+      // if (this.isDeviceMobile()) {
+      //   return "_blank";
+      // }
+
+      return "_self";
+    },
+    getNumberWithCommas: function (number) {
+      if (number || typeof number === "number")
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      else return "";
+    },
+    getConvertedNumbers: function (number) {
+      if (number || typeof number === "number") {
+        let data = number / 1000;
+        if (number < 1000) {
+          return number + " " + "کیلوگرم";
+        } else {
+          data = this.getNumberWithCommas(data);
+          return data + " " + "تن";
+        }
+      } else return "";
+    },
+  },
 };
 </script>

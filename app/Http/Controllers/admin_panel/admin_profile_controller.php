@@ -4,24 +4,31 @@ namespace App\Http\Controllers\admin_panel;
 
 use \Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\profile;
-use App\profile_media;
-use App\Http\Controllers\sms_controller;
-use App\myuser;
+use App\Models\profile;
+use App\Models\profile_media;
+use App\Http\Controllers\Notification\sms_controller;
+use App\Models\myuser;
 use App\Http\Library\date_convertor;
+use DB;
 
 class admin_profile_controller extends Controller
 {
     protected $profile_list_neccessary_fields = [
-        'id',
-        'created_at',
-        'confirmed',
-        'activity_domain',
-        'myuser_id'
+        'profiles.id',
+        'profiles.created_at',
+        'profiles.updated_at',
+        'profiles.confirmed',
+        'profiles.activity_domain',
+        'profiles.myuser_id',
+        'myusers.id as user_id',
+        'first_name',
+        'last_name',
+        'is_buyer',
+        'is_seller',
     ];
     
     protected $neccessary_user_fields_for_profile_list = [
-        'id',
+        'myusers.id as user_id',
         'first_name',
         'last_name',
         'is_buyer',
@@ -33,11 +40,11 @@ class admin_profile_controller extends Controller
       'file_path',  
     ];
     
-    protected $profile_confirmation_text = 'پروفایل کاربری شما در سامانه ی اینکوباک تایید شد.در صورت تمایل می توانید آگهی های خود را در سامانه ثبت کنید.';
+    protected $profile_confirmation_text = 'پروفایل کاربری شما در سامانه ی باسکول تایید شد.در صورت تمایل می توانید آگهی های خود را در سامانه ثبت کنید.';
     
-    public function load_unconfirmed_profile_records()
+    public function load_unconfirmed_profile_records(Request $request)
     {
-        $unconfirmed_profile_records = $this->get_profile_records(false);
+        $unconfirmed_profile_records = $this->get_profile_records($request,false);
         
         return view('admin_panel.profile',[
            'profiles' => $unconfirmed_profile_records, 
@@ -45,9 +52,9 @@ class admin_profile_controller extends Controller
         ]);        
     }
     
-    public function load_confirmed_profile_records()
+    public function load_confirmed_profile_records(Request $request)
     {
-        $confirmed_profile_records = $this->get_profile_records(true);
+        $confirmed_profile_records = $this->get_profile_records($request,true);
         
         return view('admin_panel.profile',[
            'profiles' => $confirmed_profile_records, 
@@ -55,15 +62,46 @@ class admin_profile_controller extends Controller
         ]); 
     }
     
-    protected function get_profile_records($confirm_status)
+    protected function get_profile_records($request,$confirm_status)
     {
         try{
-           $profile_records = profile::where('confirmed',$confirm_status)
-                                            ->select($this->profile_list_neccessary_fields)
-                                            ->orderBy('created_at','desc')
-                                            ->get(); 
+            if($request->filled('search')){
+                $search = $request->search;
+
+                $search_array = explode(' ',$search);
+
+                $search_expresion = '';
+                foreach ($search_array as $text) {
+                    $search_expresion .= "%$text%";
+                }
             
-            $this->add_user_info_to_each_profile_record($profile_records,$this->neccessary_user_fields_for_profile_list);
+
+            $profile_records = DB::table('profiles')
+                                    ->join('myusers','myusers.id','=','profiles.myuser_id')
+                                    ->where('profiles.confirmed',$confirm_status)
+                                    ->where(function($q) use($search_expresion){
+                                        $q = $q->where(DB::raw("CONCAT(myusers.first_name,' ',myusers.last_name)"),'like',$search_expresion);
+
+                                        return $q;
+                                    })
+                                    ->orderBy('updated_at','desc')
+                                    ->select($this->profile_list_neccessary_fields)
+                                    ->paginate(10);
+
+            }
+            else{
+                $profile_records = DB::table('profiles')
+                    ->join('myusers','myusers.id','=','profiles.myuser_id')
+                    ->where('profiles.confirmed',$confirm_status)
+                    ->select($this->profile_list_neccessary_fields)
+                    ->orderBy('updated_at','desc')
+                    ->paginate(10);
+
+            }
+
+           
+            
+            $this->add_user_info_to_each_profile_record($profile_records);
             
             return $profile_records;
         }
@@ -85,19 +123,19 @@ class admin_profile_controller extends Controller
         });
     }
     
-    protected function add_user_info_to_each_profile_record(&$profile_records,$user_neccessary_fields_array)
+    protected function add_user_info_to_each_profile_record(&$profile_records)
     {
         $date_convertor_object = new date_convertor();
         
-        $profile_records->each(function($profile_record) use(&$user_neccessary_fields_array,$date_convertor_object){
-            $user_info =  myuser::where('id',$profile_record->myuser_id)
-                                    ->select($user_neccessary_fields_array)
-                                    ->get()
-                                    ->first();
+        $profile_records->each(function($profile_record) use($date_convertor_object){
+            // $user_info =  myuser::where('id',$profile_record->myuser_id)
+            //                         ->select($user_neccessary_fields_array)
+            //                         ->get()
+            //                         ->first();
             
-            $profile_record['user_info'] = $user_info;
+            // $profile_record['user_info'] = $user_info;
             
-            $profile_record['register_date'] = $date_convertor_object->get_persian_date($profile_record->created_at);
+            $profile_record->register_date = $date_convertor_object->get_persian_date($profile_record->created_at);
         });
     }
     
@@ -150,13 +188,17 @@ class admin_profile_controller extends Controller
             
             //confirm profile
             $profile_record = profile::find($profile_id);
+
+            if($request->has('description')){
+                $profile_record->description = strip_tags($request->description);
+            }
             
             $profile_record->confirmed  = true;
             $profile_record->save();
             
             //send sms
-            $sms_controller_object = new sms_controller();
-            $sms_controller_object->send_status_sms_message($profile_record,$this->profile_confirmation_text);
+            // $sms_controller_object = new sms_controller();
+            // $sms_controller_object->send_status_sms_message($profile_record,$this->profile_confirmation_text);
             
             return redirect()->route('admin_panel_profile');
         }

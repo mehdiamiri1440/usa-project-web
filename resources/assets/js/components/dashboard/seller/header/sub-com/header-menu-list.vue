@@ -31,12 +31,15 @@ a.active {
   background: #637484;
 }
 
-.header-menu a {
+.header-menu a,
+.header-menu button {
   color: #b1b1b1;
   padding: 10px 20px;
   display: inline-block;
   position: relative;
   width: 100%;
+  border: none;
+  text-align: right;
 }
 
 .header-menu {
@@ -78,18 +81,89 @@ a.active {
 .custom-badge {
   position: absolute;
   left: 20px;
-  top: 7px;
   background: #e41c38;
-  height: 25px;
-  width: 25px;
-  border-radius: 50px;
-  padding: 4px;
+  height: 20px;
+  border-radius: 20px;
   color: #fff;
   text-align: center;
+  direction: ltr;
+  line-height: 1;
+  padding: 5px 3px;
+  min-width: 20px;
+  font-size: 12px;
+}
+
+.custom-badge.upgrade {
+  padding: 5px 10px;
+  height: 24px;
+  font-size: 14px;
 }
 
 .header-menu i {
   margin: 5px;
+}
+
+.star-badge {
+  position: absolute;
+  left: 20px;
+  border-radius: 12px;
+  color: rgb(249, 242, 159);
+  text-align: center;
+  direction: ltr;
+  line-height: 1;
+}
+
+.star-badge i {
+  font-size: 20px;
+  background: linear-gradient(
+    21deg,
+    rgb(199, 168, 79) 0%,
+    rgb(249, 242, 159) 51%,
+    rgb(199, 168, 79) 100%
+  );
+  background-clip: border-box;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 2px 0;
+}
+
+#pricing-link {
+  background: linear-gradient(-45deg, #00c569, #23d5ab, #21ad93, #23a6d5);
+  background-size: 400% 400%;
+  animation: gradient 7s ease infinite;
+  color: #fff !important;
+}
+
+#pricing-link:hover i {
+  animation: shake 1s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes shake {
+  0% {
+    transform: translate3d(0, -1px, 0);
+  }
+
+  50% {
+    transform: translate3d(0, -5px, 0);
+  }
+  100% {
+    transform: translate3d(0, -1px, 0);
+  }
 }
 </style>
 <template>
@@ -98,56 +172,106 @@ a.active {
       <div class="header-menu">
         <ul class="list-unstyled">
           <li class="list-item">
-            <router-link
-              :class="{'active' : this.activeElement === 0}"
-              :to="{ name : 'statusSeller' }"
-            >
+            <router-link :to="{ name: 'statusSeller' }">
               <i class="fa fa-chart-line"></i>
               <span>داشبورد</span>
             </router-link>
           </li>
 
           <li class="list-item">
-            <router-link :to="{ name : 'buyAdRequestsSeller' }">
+            <router-link :to="{ name: 'buyAdRequestsSeller' }">
               <i class="fa fa-list-alt" aria-hidden="true"></i>
               <span>درخواست های خرید</span>
             </router-link>
           </li>
 
           <li class="list-item">
-            <router-link :to="{ name : 'registerProductSeller' }">
+            <router-link :to="{ name: 'messagesRequestSeller' }">
+              <i class="fa fa-list-ul" aria-hidden="true"></i>
+              <span>خریداران پیشنهادی</span>
+              <span class="star-badge">
+                <i class="fa fa-star"></i>
+              </span>
+            </router-link>
+          </li>
+
+          <li class="list-item">
+            <router-link
+              :to="{ name: 'registerProductSeller' }"
+              :class="{
+                'router-link-exact-active ':
+                  this.activeElement === 0 ||
+                  $route.name == 'successRegisterProduct',
+              }"
+            >
               <i class="fa fa-plus-square" aria-hidden="true"></i>
               <span>ثبت محصول</span>
             </router-link>
           </li>
 
           <li class="list-item">
-            <router-link :to="{ name : 'messagesSeller' }">
+            <router-link
+              :to="{ name: 'messagesSeller' }"
+              :class="{
+                'router-link-exact-active ': this.activeElement === 0,
+              }"
+            >
+              <!-- ||
+                  $route.name == 'messagesRequestSeller', -->
               <i class="fas fa-comment-alt" aria-hidden="true"></i>
 
               <span>پیام ها</span>
-              <span class="custom-badge" v-if="messageCount" v-text="messageCount"></span>
+              <span
+                class="custom-badge"
+                v-if="messageCount > 0"
+                v-text="messageCount"
+              ></span>
             </router-link>
           </li>
 
           <li class="list-item">
-            <router-link :to="{ name : 'profileBasicSeller' }">
+            <router-link
+              :to="{ name: 'profileBasicSeller' }"
+              :class="{
+                'router-link-exact-active':
+                  $route.name == 'profileBasicSellerVeficiation',
+              }"
+            >
               <i class="fa fa-user" aria-hidden="true"></i>
               <span>ویرایش پروفایل</span>
             </router-link>
           </li>
 
           <li class="list-item">
-            <router-link :to="{ name : 'myProductsSeller' }">
+            <router-link :to="{ name: 'myProductsSeller' }">
               <i class="fas fa-list-ol" aria-hidden="true"></i>
               <span>محصولات من</span>
             </router-link>
           </li>
-
+          <li
+            v-show="$parent.currentUser.user_info.active_pakage_type < 3"
+            class="list-item"
+          >
+            <router-link
+              id="pricing-link"
+              :to="{ name: 'dashboardPricingTableSeller' }"
+            >
+              <i class="fa fa-arrow-up" aria-hidden="true"></i>
+              <span>ارتقا عضویت</span>
+              <span class="custom-badge upgrade">ویژه</span>
+            </router-link>
+          </li>
           <li class="list-item">
-            <router-link :to="{ name : 'guideSeller' }">
+            <router-link :to="{ name: 'guideSeller' }">
               <i class="fa fa-question" aria-hidden="true"></i>
               <span>راهنما</span>
+            </router-link>
+          </li>
+
+          <li class="list-item">
+            <router-link :to="{ name: 'supportSeller' }">
+              <i class="fas fa-headset"></i>
+              <span>پشتیبانی</span>
             </router-link>
           </li>
         </ul>
@@ -166,36 +290,38 @@ export default {
     "selregpro",
     "transactroute",
     "mytrans",
-    "guide"
+    "guide",
   ],
   data() {
     return {
       activeElement: null,
       isLoading: true,
-      messageCount: "",
-      linksPath: ["/dashboard/complementary"]
+      messageCount: 0,
+      linksPath: ["/seller/messenger/group-messages"],
     };
   },
   methods: {
-    init: function() {
+    init: function () {
       var self = this;
-
-      axios
-        .post("/get_total_unread_messages_for_current_user")
-        .then(function(response) {
-          self.messageCount = response.data.msg_count;
-        })
-        .catch(function(err) {
-          //
-        });
+      // axios
+      //     .post("/get_total_unread_messages_for_current_user")
+      //     .then(function (response) {
+      //         self.messageCount = response.data.msg_count;
+      //         if (self.messageCount >= 100) {
+      //             self.messageCount = "+99"
+      //         }
+      //     })
+      //     .catch(function (err) {
+      //         //
+      //     });
     },
     subIsActive(input) {
       const paths = Array.isArray(input) ? input : [input];
-      return paths.some(path => {
+      return paths.some((path) => {
         return this.$route.path.indexOf(path) === 0; // current path starts with this path string
       });
     },
-    checkLinkActive: function() {
+    checkLinkActive: function () {
       for (var i = 0; i < this.linksPath.length; i++) {
         if (this.subIsActive(this.linksPath[i])) {
           this.activeElement = i;
@@ -203,14 +329,14 @@ export default {
           this.activeElement = null;
         }
       }
-    }
+    },
   },
   watch: {
     $route() {
       this.checkLinkActive();
-    }
+    },
   },
-  mounted: function() {
+  mounted: function () {
     this.checkLinkActive();
     this.init();
   },
@@ -218,18 +344,12 @@ export default {
     var self = this;
     var userId = window.localStorage.getItem("userId");
 
-    eventBus.$on("messageCount", event => {
+    eventBus.$on("messageCount", (event) => {
       this.messageCount += event;
     });
-    eventBus.$on("active", event => {
+    eventBus.$on("active", (event) => {
       this.activeElement = event;
     });
-
-    Echo.private("testChannel." + userId).listen("newMessage", e => {
-      var senderId = e.new_message.sender_id;
-
-      self.messageCount += 1;
-    });
-  }
+  },
 };
 </script>

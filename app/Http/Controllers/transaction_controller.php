@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\sell_offer;
-use App\factor;
-use App\buyAd;
+use App\Models\sell_offer;
+use App\Models\factor;
+use App\Models\buyAd;
 use App\Http\Library\date_convertor;
 use DB;
-use App\Http\Controllers\sms_controller;
+use App\Http\Controllers\Notification\sms_controller;
 
 class transaction_controller extends Controller
 {
@@ -511,7 +511,7 @@ class transaction_controller extends Controller
             switch($user_role){
                 case 'seller' :
                     //send sms to the seller
-                    $msg_array [] = 'فروشنده محترم اینکوباک';
+                    $msg_array [] = 'فروشنده محترم باسکول';
                     $msg_array [] =  $msg;
                     $msg_array [] = 'شماره تراکنش' . ' : ' . $transaction_id ;
                     
@@ -522,7 +522,7 @@ class transaction_controller extends Controller
                     //send sms to the buyer
                     $buyer_user_id = $this->get_buyAd_owner_user_id($buyAd_id);
                     
-                    $msg_array [] = 'خریدار محترم اینکوباک';
+                    $msg_array [] = 'خریدار محترم باسکول';
                     $msg_array [] =  $msg;
                     $msg_array [] = 'شماره تراکنش' . ' : ' . $transaction_id ;
                     

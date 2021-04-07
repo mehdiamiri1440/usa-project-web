@@ -98,7 +98,7 @@
 <script>
     function generatePaymentLink(){
         var paymentAmount = $('#payment-amount').val();
-        var url = 'www.incobac.com/manual-payment/' + paymentAmount  ;
+        var url = 'www.buskool.com/manual-payment/' + paymentAmount  ;
         $('#generated-url').text(url);
     }
 </script>

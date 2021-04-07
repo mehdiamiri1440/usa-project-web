@@ -52,6 +52,17 @@
             <div class="box-header">
               <h3 class="box-title">جدول داده ها</h3>
             </div>
+
+            <form method="GET" action="{{Request::is('admin/profile') ? route('admin_panel_profile') : route('admin_panel_profile_list')}}">
+              <div class="row">
+                <div class="col-xs-4 col-xs-offset-4">
+                  <label>جستوجو‌ :‌ </label>
+                  <input type="text" name="search" placeholder="نام یا محصول">
+                  <input type="submit" class="btn btn-primary" value="برو">
+                </div>
+              </div>
+              
+            </form>
             <!-- /.box-header -->
             <div class="box-body">
               <table id="example1" class="table table-bordered table-striped">
@@ -68,13 +79,17 @@
                 @foreach($profiles as $profile)
                 <tr>
                     <td>{{$loop->iteration}}</td>
-                    <td>{{$profile->user_info->first_name . ' ' . $profile->user_info->last_name}}</td>
+                    <td>{{$profile->first_name . ' ' . $profile->last_name}}</td>
                     <td>{{$profile->register_date}}</td>
-                    <td>{{$profile->user_info->is_buyer ? 'خریدار' : 'فروشنده'}}</td>                    
+                    <td>{{$profile->is_buyer ? 'خریدار' : 'فروشنده'}}</td>                    
                     <td><a href="{{"/admin/profile-detail/".$profile->id}}">مشاهده جزییات</a></td>
                 </tr>
                 @endforeach
               </table>
+
+              <div align="center">
+                    {{ $profiles->appends($_GET)->render("pagination::default")}}
+              </div>
             </div>
             <!-- /.box-body -->
           </div>
@@ -110,9 +125,9 @@
 <!-- page script -->
 <script>
   $(function () {
-    $('#example1').DataTable()
-    $('#example2').DataTable({
-      'paging'      : true,
+    // $('#example1').DataTable()
+    $('#example1').DataTable({
+      'paging'      : false,
       'lengthChange': false,
       'searching'   : false,
       'ordering'    : true,
