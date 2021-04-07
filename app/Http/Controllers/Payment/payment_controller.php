@@ -16,6 +16,7 @@ use App\Models\myuser;
 use Carbon\Carbon;
 use App\Models\product;
 use DB;
+use App\Models\premium_service;
     
 
 class payment_controller extends Controller
@@ -788,6 +789,9 @@ class payment_controller extends Controller
             'prices' => $prices
         ],200);
     }
+
+
+
     
     
 }

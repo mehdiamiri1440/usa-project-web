@@ -22,9 +22,8 @@
 
       @if($categoryMetaData['schema_object'])
       <script
-        {!! $categoryMetaData["schema_object"] !!}
         type="application/ld+json"
-      ></script>
+      >{!! $categoryMetaData["schema_object"] !!}</script>
       @endif
       </footer>
       <div id="wrap-footer">

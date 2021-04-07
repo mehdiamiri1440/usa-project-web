@@ -376,6 +376,11 @@ Route::group(['middleware' => [login::class]], function () {
         'uses' => 'Payment\payment_controller@get_packages_price'
     ]);
 
+    Route::get('/wallet-payment/charge/{amount}',[
+        'uses' => 'Payment\wallet_controller@do_charge_wallet'
+    ])->where('amount','[0-9]+');
+
+
     // Route::get('app/payment/{user_id}/{pakageType}', [
     //     'uses' => 'Payment\payment_controller@app_do_payment',
     //     'as' => 'app_do_payment',
@@ -414,6 +419,11 @@ Route::group(['middleware' => [login::class]], function () {
     Route::any('/buyAd_reply_capacity_payment_callback', [
         'uses' => 'Payment\payment_controller@buyAd_reply_capacity_payment_callback',
         'as' => 'buyAd_reply_capacity_payment_callback',
+    ]);
+
+    Route::any('/wallet_payment_callback', [
+        'uses' => 'Payment\wallet_controller@wallet_payment_callback',
+        'as' => 'wallet_payment_callback',
     ]);
 
     // Route::any('app/payment_callback', [
@@ -571,6 +581,46 @@ Route::group(['middleware' => [login::class]], function () {
         'uses' => 'Messenger\channel_controller@get_channel_contents'
     ]);
 
+    Route::post('/get_seller_phone_number',[
+        'uses' => 'Accounting\phone_number_controller@get_seller_phone_number',
+        'as' => 'get_seller_phone_number'
+    ]);
+
+    Route::post('/get_buyer_phone_number',[
+        'uses' => 'Accounting\phone_number_controller@get_buyer_phone_number',
+        'as' => 'get_buyer_phone_number'
+    ]);
+    
+    Route::post('/set_phone_number_view_permission',[
+        'uses' => 'Accounting\phone_number_controller@set_my_phone_number_view_permissions',
+        'as' => 'set_my_phone_number_view_permissions'
+    ]);
+    
+    Route::post('/get_phone_number_viewers_list',[
+        'uses' => 'Accounting\phone_number_controller@get_my_phone_number_viewers_list',
+        'as' => 'get_my_phone_number_viewers_list'
+    ]);
+    
+    Route::post('/get_my_account_balance',[
+        'uses' => 'Accounting\user_controller@get_my_account_balance',
+        'as' => 'get_my_account_balance'
+    ]);
+
+    Route::post('/wallet-expend/elevator',[
+        'uses' => 'Payment\wallet_controller@do_elevator_payment_from_wallet',
+        'as' => 'do_elevator_payment_from_wallet'
+    ]);
+
+    Route::post('/wallet-expend/product-capacity',[
+        'uses' => 'Payment\wallet_controller@do_extra_product_capacity_payment_from_wallet',
+        'as' => 'do_extra_product_capacity_payment_from_wallet'
+    ]);
+
+    Route::post('/wallet-expend/buyAd-capacity',[
+        'uses' => 'Payment\wallet_controller@do_extra_buyAd_capacity_payment_from_wallet',
+        'as' => 'do_extra_buyad_capacity_payment_from_wallet'
+    ]);
+    
 });
 
 Route::post('/send_phone_verification_code_for_password_reset', [
@@ -614,6 +664,10 @@ Route::get('app-payment/buyAd-reply-capacity/{user_id}/{extra_capacity}', [
     'as' => 'app_do_buyAd_reply_capacity_payment',
 ])->where('extra_capacity', '[0-9]+');
 
+Route::get('/app-wallet-payment/charge/{user_id}/{amount}',[
+    'uses' => 'Payment\wallet_controller@do_app_charge_wallet'
+])->where('amount','[0-9]+');
+
 Route::any('app-payment/payment_callback', [
     'uses' => 'Payment\payment_controller@app_payment_callback',
     'as' => 'app_payment_callback',
@@ -632,6 +686,11 @@ Route::any('app-payment/product_capacity_payment_callback', [
 Route::any('app-payment/buyAd_reply_capacity_payment_callback', [
     'uses' => 'Payment\payment_controller@app_buyAd_reply_capacity_payment_callback',
     'as' => 'app_buyAd_reply_capacity_payment_callback',
+]);
+
+Route::any('/app-wallet-payment-callback', [
+    'uses' => 'Payment\wallet_controller@app_wallet_payment_callback',
+    'as' => 'app_wallet_payment_callback',
 ]);
 
 
