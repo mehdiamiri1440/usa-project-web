@@ -239,16 +239,9 @@ a.profile-info-wrapper:focus {
   float: right;
   margin-left: 10px;
   position: relative;
-}
-
-.profile-image-wrapper > img {
-  width: initial;
-  height: 100%;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  min-width: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .profile-information {
@@ -554,10 +547,24 @@ a.profile-info-wrapper:focus {
               href="#web-profile-items"
               role="button"
             >
-              <div class="profile-image-wrapper">
-                <img v-if="photoLink" :src="storage + '/' + photoLink" />
-                <img v-else src="../../../../../../img/user-defult.png" />
-              </div>
+              <div
+                v-if="photoLink"
+                class="profile-image-wrapper"
+                :style="{
+                  backgroundImage: 'url(' + storage + '/' + photoLink + ')',
+                }"
+              ></div>
+              <div
+                v-else
+                class="profile-image-wrapper"
+                :style="{
+                  backgroundImage:
+                    'url(' +
+                    $parent.assets +
+                    'assets/img/user-defult.png' +
+                    ')',
+                }"
+              ></div>
 
               <div class="profile-information">
                 <span class="user_name" v-text="username"></span>

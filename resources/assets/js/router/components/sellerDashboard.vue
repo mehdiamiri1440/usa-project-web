@@ -312,6 +312,7 @@
 
     <header-dash-seller
       :storage="storagePath"
+      :assets="assets"
       :logout="'/logout'"
       :user-id="userId"
       :messageCount="messageCount"

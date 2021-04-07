@@ -37,20 +37,9 @@
   width: 45px;
   margin: 0 auto;
   float: right;
-}
-
-.dark-profile-img {
-  overflow: hidden;
-  border-radius: 50%;
-  height: 85px;
-  width: 85px;
-  margin: 0 auto;
-  margin-left: 10px;
-  border: 2px solid #5b5c5d;
-  float: right;
-}
-.profile-img img {
-  height: 100%;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .profile-content {
@@ -100,13 +89,22 @@
     class="profile"
     v-if="!isLoading"
   >
-    <div class="profile-img" v-if="photoLink">
-      <img :src="storage + '/' + photoLink" />
-    </div>
+    <div
+      class="profile-img"
+      v-if="photoLink"
+      :style="{
+        backgroundImage: 'url(' + storage + '/' + photoLink + ')',
+      }"
+    ></div>
 
-    <div class="profile-img" v-else>
-      <img src="../../../../../../img/user-defult.png" />
-    </div>
+    <div
+      class="profile-img"
+      v-else
+      :style="{
+        backgroundImage:
+          'url(' + $parent.assets + 'assets/img/user-defult.png' + ')',
+      }"
+    ></div>
 
     <div class="profile-content">
       <div class="profile-name" v-text="username"></div>
