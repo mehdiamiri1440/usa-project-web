@@ -21,6 +21,7 @@
   <div class="h-100">
     <header-dash-buyer
       :storage="storagePath"
+      :assets="assets"
       :logout="'/logout'"
       :search-text="searchText"
     ></header-dash-buyer>
@@ -28,6 +29,7 @@
     <div id="main" class="h-100">
       <router-view
         :str="storagePath"
+        :assets="assets"
         :user-type="currentUser.user_info.is_seller"
         :currentUser="currentUser"
         :verifiedUserContent="verifiedUserContent"

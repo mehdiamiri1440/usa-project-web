@@ -193,6 +193,15 @@ const router = new Router({
             },
           },
         },
+        // {
+        //   path: "wallet",
+        //   name: "walletSeller",
+        //   components: {
+        //     default: (resolve) => {
+        //       require(["../components/dashboard/seller/wallet.vue"], resolve);
+        //     },
+        //   },
+        // },
         {
           path: "support",
           name: "supportSeller",

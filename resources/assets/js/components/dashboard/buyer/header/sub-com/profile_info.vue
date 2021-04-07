@@ -1,46 +1,45 @@
 <style scoped>
-.green-button {
-  padding: 10px 35px;
-  width: initial;
+.profile {
+  padding: 20px 10px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: 150ms;
 }
 
-.profile {
-  padding: 10px 15px 15px;
-  text-align: center;
+.profile:hover {
+  cursor: pointer;
+  background: #384152;
+  transition: 150ms;
+}
+
+.profile:hover .profile-icon-wrapper {
+  left: 10px;
+  transition: 150ms;
 }
 
 .little_header .profile {
   display: none;
 }
 
+.profile-icon-wrapper {
+  position: absolute;
+  top: calc(50% - 13px);
+  font-size: 27px;
+  left: 17px;
+  transition: 150ms;
+}
+
 .profile-img {
   overflow: hidden;
-
   border-radius: 50%;
-
-  height: 55px;
-
-  width: 55px;
-
+  height: 45px;
+  width: 45px;
   margin: 0 auto;
-
-  border: 2px solid #fff;
-
   float: right;
-}
-
-.dark-profile-img {
-  overflow: hidden;
-  border-radius: 50%;
-  height: 85px;
-  width: 85px;
-  margin: 0 auto;
-  margin-left: 10px;
-  border: 2px solid #5b5c5d;
-  float: right;
-}
-.profile-img img {
-  height: 100%;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .profile-content {
@@ -54,8 +53,8 @@
 }
 
 .profile-name {
-  margin: 8px 0;
-  font-size: 17px;
+  margin: 0 0 8px;
+  font-size: 16px;
 }
 
 .profile-city {
@@ -84,41 +83,57 @@
 }
 </style>
 <template>
-  <div>
-    <section v-if="!isLoading">
-      <div class="profile">
-        <div class="profile-img" v-if="photoLink">
-          <img :src="storage + '/' + photoLink" />
-        </div>
+  <router-link
+    :to="'/profile/' + userprof"
+    tag="section"
+    class="profile"
+    v-if="!isLoading"
+  >
+    <div
+      class="profile-img"
+      v-if="photoLink"
+      :style="{
+        backgroundImage: 'url(' + storage + '/' + photoLink + ')',
+      }"
+    ></div>
 
-        <div class="profile-img" v-else>
-          <img src="../../../../../../img/user-defult.png" />
-        </div>
+    <div
+      class="profile-img"
+      v-else
+      :style="{
+        backgroundImage:
+          'url(' + $parent.assets + 'assets/img/user-defult.png' + ')',
+      }"
+    ></div>
 
-        <div class="profile-content">
-          <div class="profile-name" v-text="username"></div>
+    <div class="profile-content">
+      <div class="profile-name" v-text="username"></div>
 
-          <div class="profile-city" v-text="usercity"></div>
-        </div>
+      <div class="profile-city" v-text="usercity"></div>
+    </div>
+    <div class="profile-icon-wrapper">
+      <i class="fa fa-angle-left"></i>
+    </div>
 
-        <router-link :to="'/profile/'+ userprof" class="green-button">نمایش پروفایل من</router-link>
+    <!-- 
+        <router-link :to="'/profile/' + userprof" class="green-button"
+          >نمایش پروفایل من</router-link
+        > -->
+  </router-link>
+
+  <!-- loading section  -->
+  <section v-else id="loadingSection">
+    <div class="profile">
+      <div class="profile-img placeholder-content"></div>
+
+      <div class="profile-content">
+        <div class="profile-name placeholder-content loading-height"></div>
+        <div class="profile-city placeholder-content loading-height"></div>
       </div>
-    </section>
 
-    <!-- loading section  -->
-    <section v-else id="loadingSection">
-      <div class="profile">
-        <div class="profile-img placeholder-content"></div>
-
-        <div class="profile-content">
-          <div class="profile-name placeholder-content loading-height"></div>
-          <div class="profile-city placeholder-content loading-height"></div>
-        </div>
-
-        <span class="button-loading green-button placeholder-content"></span>
-      </div>
-    </section>
-  </div>
+      <!-- <span class="button-loading green-button placeholder-content"></span> -->
+    </div>
+  </section>
 </template>
 
 <script>
@@ -129,7 +144,7 @@ export default {
     "username",
     "usercity",
     "isLoading",
-    "userprof"
-  ]
+    "userprof",
+  ],
 };
 </script>

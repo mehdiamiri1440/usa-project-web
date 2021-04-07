@@ -236,6 +236,10 @@ input,textarea {
   margin-top: 10px;
 }
 
+.margin-top-15 {
+  margin-top: 10px;
+}
+
 .padding-top-5 {
   padding-top: 5px;
 }
@@ -272,6 +276,10 @@ input,textarea {
   height: 20px;
 }
 
+.h-25 {
+  height: 25px;
+}
+
 .h-40 {
   height: 40px;
 }
@@ -305,6 +313,9 @@ input,textarea {
 .light-green-text {
   color: #21ad93;
 }
+.blue-aqua-text {
+  color: #4DC0BB;
+}
 .gray-text {
   color: #777;
 }
@@ -322,6 +333,10 @@ input,textarea {
 
 .bg-green {
   background-color: #00c569 !important;
+}
+
+.bg-blue {
+  background-color: #1DA1F2 !important;
 }
 
 .bg-gray {

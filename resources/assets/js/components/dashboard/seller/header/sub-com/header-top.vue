@@ -1,17 +1,20 @@
 <style scoped>
-.show-header button {
-  float: right;
-  border: none;
-  background: none;
-  font-size: 25px;
-  padding: 19px 24px 11px;
-  display: none;
+.list-inline > li {
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .show-header button {
+  float: right;
+  border: none;
+  font-size: 25px;
+  padding: 7px 14px 6px;
   display: block;
-  background: #000546;
+  background: #151c2e;
   color: #fff;
+  border-radius: 12px;
+  margin-top: 8px;
+  margin-right: 10px;
 }
 
 .display-loading {
@@ -140,7 +143,7 @@
 
 .right-menu-header {
   position: relative;
-  padding: 6px;
+  padding: 9px;
 }
 
 .right-menu-header li ul a {
@@ -160,7 +163,6 @@
 .right-menu-header a,
 .profile-menu-header > a {
   color: #7f8c9b;
-  margin: 0 5px;
 }
 
 .profile-menu-header > a {
@@ -191,19 +193,27 @@
   background: #00ac5c;
 }
 
+a.home-button {
+  display: inline-block;
+  color: #fff;
+  background: #50e3c2;
+  padding: 2px 10px 6px;
+  border-radius: 12px;
+  margin-left: 5px;
+}
 i.fa-home {
   position: relative;
-  top: 5px;
+  top: 4px;
+  font-size: 25px;
 }
 
-.product-list-link {
-  font-size: 17px !important;
-  padding: 7px 20px !important;
-  background: #00c569 !important;
-  border-radius: 4px;
-  border: 1px solid;
+a.product-list-link {
+  font-size: 18px;
+  padding: 9px 15px 8px;
+  background: #4dc0bb;
+  border-radius: 12px;
   display: inline-block;
-  color: #fff !important;
+  color: #fff;
 }
 
 /* profile info styles */
@@ -229,16 +239,9 @@ a.profile-info-wrapper:focus {
   float: right;
   margin-left: 10px;
   position: relative;
-}
-
-.profile-image-wrapper > img {
-  width: initial;
-  height: 100%;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  min-width: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .profile-information {
@@ -305,20 +308,33 @@ a.profile-info-wrapper:focus {
 }
 
 .upgrade-account {
+  background: #fff;
   color: #556080;
   border: 1px solid;
-  padding: 2px 15px;
-  border-radius: 4px;
+  padding: 6px 12px 5px;
+  border-radius: 12px;
   position: relative;
-  margin-left: 20px;
-  top: 10px;
+  margin-left: 10px;
+  top: 5px;
   transition: 300ms;
+}
+
+.upgrade-account.wallet {
+  color: #1da1f2;
+  margin-left: 20px;
 }
 
 .upgrade-account:hover {
   color: #fff;
   background: #556080;
+  border-color: #556080;
+
   transition: 300ms;
+}
+
+.upgrade-account.wallet:hover {
+  background: #1da1f2;
+  border-color: #1da1f2;
 }
 
 @media screen and (max-width: 991px) {
@@ -326,16 +342,40 @@ a.profile-info-wrapper:focus {
   .little-main-header {
     right: 0 !important;
   }
+  a.home-button {
+    background: none;
+    border: 1px solid #50e3c2;
+    border-radius: 12px;
+    color: #50e3c2;
+    padding: 2px 10px 4px;
+  }
+  a.product-list-link {
+    background: none;
+    color: #4dc0bb;
+    border: 1px solid;
+  }
+  .message-notification {
+    top: 4px;
+    cursor: pointer;
+    right: 45px;
+    z-index: 10;
+    position: absolute;
+    background-color: #e41c38;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    color: #fff;
+  }
+}
+@media screen and (min-width: 991px) {
+  .hide-message-notification {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 768px) {
-  span.min {
-    display: inherit;
-  }
-
-  span.full {
-    display: none;
-  }
   .mobile-header .green-button {
     margin: 15px 0 0;
   }
@@ -386,53 +426,12 @@ a.profile-info-wrapper:focus {
   .profile-image-wrapper {
     margin: 0;
   }
-  .right-menu-header {
-    padding: 6px;
-    border-right: 1px solid #eff3f6;
-  }
 
   .profile-menu-header .user_name {
     display: none;
   }
   .right-menu-header .green-button {
     padding: 10px 15px;
-  }
-}
-
-@media screen and (max-width: 345px) {
-  .sub-header a {
-    font-size: 10px;
-  }
-
-  .show-header button {
-    padding: 19px 17px 11px 17px;
-  }
-
-  .right-menu-header {
-    padding: 6px;
-  }
-}
-@media only screen and (max-width: 991px) {
-  .message-notification {
-    top: 4px;
-    cursor: pointer;
-    border: 1px solid white;
-    right: 35px;
-    z-index: 10;
-    position: absolute;
-    background-color: #e41c38;
-    border-radius: 50%;
-    width: 28px;
-    height: 28px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: wheat;
-  }
-}
-@media only screen and (min-width: 991px) {
-  .hide-message-notification {
-    display: none;
   }
 }
 .rotation {
@@ -463,9 +462,6 @@ a.profile-info-wrapper:focus {
   60% {
     transform: translate3d(4px, 0, 0);
   }
-}
-.button-height {
-  line-height: 1;
 }
 </style>
 
@@ -512,20 +508,31 @@ a.profile-info-wrapper:focus {
           v-if="messageCount > 0"
           class="message-notification hide-message-notification"
         >
-          {{ messageCount }}
+          {{ messageCount > 100 ? "+99" : messageCount }}
         </div>
-        <button class="button-height">
+        <button>
           <span :class="menuClosed ? 'rotation' : ''" class="fa fa-bars"></span>
         </button>
       </div>
 
       <div class="user-auth-info-wrapper">
+        <button
+          v-if="
+            $route.name != 'dashboardPricingTableSeller' &&
+            $parent.currentUser.user_info.active_pakage_type != 3
+          "
+          class="upgrade-account wallet hidden-xs hidden-sm"
+          :to="{ name: 'dashboardPricingTableSeller' }"
+        >
+          موجودی : 1,000,000 تومان
+          <i class="fa fa-wallet"></i>
+        </button>
         <router-link
           v-if="
             $route.name != 'dashboardPricingTableSeller' &&
             $parent.currentUser.user_info.active_pakage_type != 3
           "
-          class="upgrade-account hidden-xs"
+          class="upgrade-account hidden-xs hidden-sm"
           :to="{ name: 'dashboardPricingTableSeller' }"
         >
           ارتقا عضویت
@@ -540,10 +547,24 @@ a.profile-info-wrapper:focus {
               href="#web-profile-items"
               role="button"
             >
-              <div class="profile-image-wrapper">
-                <img v-if="photoLink" :src="storage + '/' + photoLink" />
-                <img v-else src="../../../../../../img/user-defult.png" />
-              </div>
+              <div
+                v-if="photoLink"
+                class="profile-image-wrapper"
+                :style="{
+                  backgroundImage: 'url(' + storage + '/' + photoLink + ')',
+                }"
+              ></div>
+              <div
+                v-else
+                class="profile-image-wrapper"
+                :style="{
+                  backgroundImage:
+                    'url(' +
+                    $parent.assets +
+                    'assets/img/user-defult.png' +
+                    ')',
+                }"
+              ></div>
 
               <div class="profile-information">
                 <span class="user_name" v-text="username"></span>
@@ -624,9 +645,9 @@ a.profile-info-wrapper:focus {
                 )
               "
             >
-              <span class="full">لیست محصولات</span>
-              <span class="min">
-                <i class="fa fa-th-list" aria-hidden="true"></i>
+              <span class="hidden-xs hidden-sm"> لیست محصولات </span>
+              <span class="hidden-md hidden-lg">
+                <i class="fa fa-list-ul"></i>
               </span>
             </router-link>
           </li>
@@ -641,6 +662,7 @@ a.profile-info-wrapper:focus {
                 )
               "
               :to="{ name: 'statusSeller' }"
+              class="home-button"
             >
               <i class="fa fa-home" aria-hidden="true"></i>
             </router-link>

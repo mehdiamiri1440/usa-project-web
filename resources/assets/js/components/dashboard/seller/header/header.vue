@@ -7,32 +7,13 @@ body,
 
 /*start style right header*/
 .logo {
-  height: 64px;
-
+  max-width: 100px;
   display: block;
-
-  float: right;
-
-  width: 70%;
-
-  text-align: center;
+  margin: 16px 15px;
 }
 
 .logo_hide {
   display: none;
-}
-
-.logo a {
-  display: inline-block;
-  margin-top: 0;
-  padding: 0 10px;
-  color: #fff;
-  text-align: center;
-}
-
-.logo img {
-  width: 100px;
-  padding: 9px 0 4px;
 }
 
 .right-header {
@@ -43,12 +24,27 @@ body,
   top: 0;
   overflow: hidden;
   z-index: 9;
-  background: #313a43;
+  background: #151c2e;
   direction: rtl;
 }
 
 .little_header {
   width: 80px;
+}
+
+.little_header .wallet-wrapper .wallet-title,
+.little_header .wallet-wrapper .wallet-price {
+  display: none;
+}
+
+.little_header .wallet-main > i {
+  top: 15px;
+  left: 15px;
+}
+
+.little_header .wallet-main {
+  margin-top: 20px;
+  min-height: 60px;
 }
 
 .right-header.mobile-header {
@@ -58,23 +54,18 @@ body,
 
 .right-header > header {
   overflow: hidden;
-  background: #313a43;
-  border-bottom: 2px solid #2a3035;
-  border-bottom-color: rgb(42, 48, 53);
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
+  border-bottom: 2px solid #384152;
 }
 
 .close_menu,
 .close_menu_mob {
   float: left;
-  width: 30%;
   border: none;
   background: none;
-  font-size: 35px;
+  font-size: 25px;
   top: 0;
   position: relative;
-  padding: 11px;
+  padding: 14px 15px;
 }
 
 .close_menu i,
@@ -236,6 +227,47 @@ span.min {
   font-size: 16px;
   margin: 15px auto;
   font-weight: bold;
+}
+
+.wallet-wrapper {
+  display: block;
+  margin: 0 10px 15px;
+}
+
+.wallet-main {
+  background: url(/images/wallet-bg.jpg?e4c987caae6519070b37492a6e0b1e85) center;
+  background-size: auto;
+  border-radius: 12px;
+  min-height: 80px;
+  color: #fff;
+  background-size: cover;
+  padding: 10px 15px;
+  position: relative;
+}
+
+.wallet-main > i {
+  position: absolute;
+  top: 26px;
+  left: 20px;
+  font-size: 19px;
+  background: #fff;
+  color: #333;
+  border-radius: 8px;
+  padding: 5px 7px;
+}
+
+.wallet-main > p {
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.wallet-main > p.wallet-price {
+  font-size: 23px;
+  margin-top: 13px;
+}
+
+.wallet-main > p.wallet-price > span {
+  font-size: 16px;
 }
 
 @media screen and (max-width: 991px) {
@@ -503,33 +535,19 @@ span.min {
       </div>
     </div>
 
-    <!-- <div :class="{'loader-wrapper': !submiting , 'loader-display' : submiting }">
-      <div class="main-loader">
-        <img src="../../../../../img/gif/prload.gif" />
-        <p dir="rtl">در حال بارگذاری...</p>
-      </div>
-    </div>-->
-    <!--end loader-->
-
     <section class="right-header mobile-header">
       <header class="header-right-header">
         <button class="close_menu_mob">
-          <i class="fa fa-angle-right"></i>
+          <i class="fa fa-bars"></i>
         </button>
 
         <button class="close_menu">
-          <i class="fa fa-angle-right"></i>
+          <i class="fa fa-bars"></i>
         </button>
 
-        <span class="logo">
-          <router-link :to="{ name: 'indexPage' }">
-            <img
-              src="../../../../../img/logo/web-logo-white.svg"
-              alt="buskool"
-            />
-            <p>بازارگاه آنلاین کشاورزی</p>
-          </router-link>
-        </span>
+        <router-link class="logo" :to="{ name: 'indexPage' }">
+          <img src="../../../../../img/logo/web-logo-white.svg" alt="buskool" />
+        </router-link>
       </header>
 
       <section class="main-right-header">
@@ -547,7 +565,19 @@ span.min {
           "
           :userprof="currentUser.user_info.user_name"
         />
-
+        <a href="#" @click.prevent="showWallet()" class="wallet-wrapper">
+          <div class="wallet-main">
+            <p class="wallet-title">
+              <i class="fa fa-wallet"></i>
+              موجودی کیف پول
+            </p>
+            <p class="wallet-price">
+              100,000,000
+              <span> تومان </span>
+            </p>
+            <i class="fa fa-plus"></i>
+          </div>
+        </a>
         <SwitchButtons mobile="1" />
         <HeaderMenuList />
       </section>
@@ -558,22 +588,16 @@ span.min {
     <section class="right-header desktop-header">
       <header class="header-right-header">
         <button class="close_menu_mob">
-          <i class="fa fa-angle-right"></i>
+          <i class="fa fa-bars"></i>
         </button>
 
         <button class="close_menu">
-          <i class="fa fa-angle-right"></i>
+          <i class="fa fa-bars"></i>
         </button>
 
-        <span class="logo">
-          <router-link :to="{ name: 'indexPage' }">
-            <img
-              src="../../../../../img/logo/web-logo-white.svg"
-              alt="buskool"
-            />
-            <p>بازارگاه آنلاین کشاورزی</p>
-          </router-link>
-        </span>
+        <router-link class="logo" :to="{ name: 'indexPage' }">
+          <img src="../../../../../img/logo/web-logo-white.svg" alt="buskool" />
+        </router-link>
       </header>
 
       <section class="main-right-header">
@@ -591,7 +615,19 @@ span.min {
           "
           :userprof="currentUser.user_info.user_name"
         />
-
+        <a href="#" @click.prevent="showWallet()" class="wallet-wrapper">
+          <div class="wallet-main">
+            <p class="wallet-title">
+              <i class="fa fa-wallet"></i>
+              موجودی کیف پول
+            </p>
+            <p class="wallet-price">
+              100,000,000
+              <span> تومان </span>
+            </p>
+            <i class="fa fa-plus"></i>
+          </div>
+        </a>
         <SwitchButtons />
         <HeaderMenuList />
       </section>
@@ -629,7 +665,14 @@ export default {
     HeaderTop,
     SwitchButtons,
   },
-  props: ["storage", "logout", "userId", "isRequiredFixAlert", "offerTime"],
+  props: [
+    "storage",
+    "logout",
+    "assets",
+    "userId",
+    "isRequiredFixAlert",
+    "offerTime",
+  ],
   data: function () {
     return {
       showSnapShot: false,
@@ -749,7 +792,7 @@ export default {
       menuCloseButton.click(function () {
         if (nextMove == "expand") {
           $(this).css({
-            width: "30%",
+            width: "initial",
           });
           headerMenuLink.css({
             "text-align": "right",
@@ -768,7 +811,7 @@ export default {
           nextMove = "shrink";
 
           profile.fadeIn();
-          logo.fadeIn();
+          logo.css("display", "block");
         } else {
           $(this).css({
             width: "100%",
@@ -973,6 +1016,9 @@ export default {
         var expires = "";
       }
       document.cookie = name + "=" + value + expires + "; path=/";
+    },
+    showWallet: function () {
+      $("#wallet-modal").modal("show");
     },
   },
   mounted() {
