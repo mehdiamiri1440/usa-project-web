@@ -51,7 +51,6 @@ class profile_controller extends Controller
         'last_login_client',
         'last_channel_opening_date',
         'last_login_date',
-        'phone_view_permission'
     ];
 
     protected $profile_fields_exclude_array = [
@@ -327,6 +326,16 @@ class profile_controller extends Controller
             $result['user_info'] = collect(myuser::find($user_id))
                 ->except($this->user_fields_exclude_array);
         }
+
+        //adding user phone view permission status
+        if(str_split($result['user_info']['phone_view_permission'])[0] == 1){
+            $result['user_info']['phone_allowed'] = true;
+        }
+        else{
+            $result['user_info']['phone_allowed'] = false;
+        }
+
+        unset($result['user_info']['phone_view_permission']);
 
         if ($request->isMethod('post')) {
             if ($result['user_info']['id'] == session('user_id')) {
