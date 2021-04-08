@@ -104,7 +104,7 @@ span {
   border-radius: 6px;
   margin: 0;
   font-size: 18px;
-  padding: 15px;
+  padding: 10px 15px;
 }
 
 .fix-send-message-wrapper button.disable {
