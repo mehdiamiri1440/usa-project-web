@@ -90,6 +90,8 @@ label {
 .share .share-button {
   color: #777;
 
+  background: none;
+
   font-size: 12px;
 
   font-weight: bold;
@@ -113,20 +115,40 @@ label {
   float: right;
   padding: 0 15px;
   text-align: right;
+  position: relative;
 }
 
 .main-contents-wrapper h1 {
   font-size: 23px;
 }
 
-.actions .green-button {
+.actions .green-button,
+.send-message-button {
   font-size: 14px;
-
   font-weight: bold;
-
   width: initial;
-
   padding: 8px 15px;
+  border-radius: 8px;
+}
+
+.send-message-button {
+  background: none;
+  border-radius: 8px;
+  border: 1px solid #404b55;
+  color: #404b55;
+  transition: 300ms;
+}
+.phone-call {
+  margin-left: 15px;
+}
+
+.send-message-button:hover {
+  background: none;
+  border-radius: 8px;
+  border: 1px solid #404b55;
+  background: #404b55;
+  color: #fff;
+  transition: 300ms;
 }
 
 .actions button.elevator-event {
@@ -154,6 +176,13 @@ label {
   width: 100%;
 
   padding: 15px 0;
+  font-size: 16px;
+}
+
+.product-info-table i {
+  width: 20px;
+  text-align: center;
+  margin-left: 5px;
 }
 
 .product-description {
@@ -169,6 +198,7 @@ label {
 
 .product-description > span {
   font-weight: bold;
+  font-size: 16px;
   display: inline-block;
   margin-bottom: 9px;
 }
@@ -177,7 +207,71 @@ label {
   padding: 15px;
 }
 
+.phone-number-wrapper {
+  margin-top: 15px;
+}
+
+.phone-number {
+  display: flex;
+  justify-content: space-between;
+  color: #404b55;
+}
+
+.phone-number p {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.warning-wrapper {
+  background: #fffbe5;
+  border-radius: 12px;
+  direction: rtl;
+  padding: 10px 15px;
+  margin-top: 15px;
+}
+
+.warning-title {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.warning-title i {
+  font-size: 23px;
+  position: relative;
+  top: 4px;
+}
+
+.green-button.disable {
+  background: #e0e0e0;
+}
+
+.spinner-border {
+  width: 1.5rem;
+  height: 1.5rem;
+  top: -5px;
+  position: relative;
+  left: 2px;
+}
+
 @media screen and (max-width: 991px) {
+  .actions {
+    margin-top: 15px;
+  }
+  .share .share-button {
+    font-size: 17px;
+  }
+
+  .phone-number-wrapper,
+  .warning-wrapper {
+    margin-top: 25px;
+  }
+
+  .share {
+    position: absolute;
+    top: -4px;
+    padding: 0;
+  }
   .images-wrapper,
   .main-contents-wrapper {
     width: initial;
@@ -202,18 +296,15 @@ label {
   .default-product-list {
     padding: 9px 0;
   }
-
-  .actions button.elevator-event,
-  .actions .green-button {
-    float: right;
-    margin-left: 10px;
-  }
 }
 
 @media screen and (max-width: 767px) {
   .images-wrapper,
   .main-product-wrapper {
     padding: 0;
+  }
+  .main-product-wrapper {
+    border: none;
   }
 }
 </style>
@@ -393,10 +484,14 @@ label {
           <button
             v-if="!$parent.isMyProfile"
             @click.prevent="$parent.openChat($parent.product)"
-            class="green-button"
+            class="hidden-xs hidden-sm"
+            :class="{
+              'send-message-button': $parent.product.user_info.has_phone,
+              'green-button': !$parent.product.user_info.has_phone,
+            }"
           >
-            استعلام قیمت
-            <i class="fa fa-envelope"></i>
+            ارسال پیام
+            <i class="fas fa-comment-alt"></i>
           </button>
 
           <button
@@ -407,6 +502,23 @@ label {
           >
             ویرایش
             <i class="fa fa-pencil-alt"></i>
+          </button>
+
+          <button
+            v-if="!$parent.isMyProfile && $parent.product.user_info.has_phone"
+            @click.prevent="$parent.activePhoneCall(false)"
+            class="green-button phone-call hidden-xs hidden-sm"
+            :class="{ disable: $parent.isActivePhone }"
+            :disabled="$parent.isActivePhone"
+          >
+            اطلاعات تماس
+            <i
+              class="fas fa-phone-square-alt"
+              v-if="!$parent.getPhoneLoader"
+            ></i>
+            <div v-else class="spinner-border">
+              <span class="sr-only"></span>
+            </div>
           </button>
 
           <button
@@ -424,20 +536,47 @@ label {
               @click.prevent="$parent.copyProductLinkToClipBoard"
               class="share-button"
             >
-              <span>اشتراک گذاری</span>
-              <i class="fa fa-share"></i>
+              <i class="fa fa-share-alt"></i>
             </button>
+          </div>
+        </div>
+        <div
+          id="phone-number-wrapper"
+          v-if="$parent.isActivePhone"
+          class="phone-number-wrapper collapse"
+        >
+          <a :href="'tel:' + $parent.userPhone" class="phone-number">
+            <p>
+              <i class="fa fa-phone-square-alt"></i>
+              {{ $parent.userPhone }}
+            </p>
+            <p>شماره تماس</p>
+          </a>
+          <div class="warning-wrapper">
+            <p class="warning-title">
+              <i class="fa fa-exclamation-circle"></i>
+
+              هشدار پلیس
+            </p>
+            <p class="warning-text">
+              لطفاً پیش از انجام معامله و هر نوع پرداخت وجه، از صحت کالا یا
+              خدمات ارائه شده، به صورت حضوری اطمینان حاصل نمایید.
+            </p>
           </div>
         </div>
         <div class="product-info-table">
           <ul class="product-info-list">
             <li>
-              <span class="gray-text">دسته بندی</span>
+              <span class="gray-text">
+                <i class="fa fa-folder"></i> دسته بندی
+              </span>
 
               <span v-text="$parent.product.main.sub_category_name"></span>
             </li>
             <li>
-              <span class="gray-text">استان / شهر</span>
+              <span class="gray-text">
+                <i class="fa fa-map-marker-alt"></i> استان / شهر</span
+              >
 
               <span
                 v-text="
@@ -448,14 +587,18 @@ label {
               ></span>
             </li>
             <li>
-              <span class="gray-text">مقدار موجودی</span>
+              <span class="gray-text">
+                <i class="fa fa-box-open"></i> مقدار موجودی</span
+              >
 
               <span
                 v-text="getConvertedNumbers($parent.product.main.stock)"
               ></span>
             </li>
             <li>
-              <span class="gray-text">حداقل سفارش</span>
+              <span class="gray-text">
+                <i class="fas fa-clipboard-check"></i> حداقل سفارش</span
+              >
 
               <span
                 v-text="
@@ -464,7 +607,9 @@ label {
               ></span>
             </li>
             <li v-if="!$parent.isMyProfile">
-              <span class="gray-text">قیمت</span>
+              <span class="gray-text">
+                <i class="fas fa-dollar-sign"></i> قیمت</span
+              >
 
               <span>استعلام بگیرید</span>
             </li>
