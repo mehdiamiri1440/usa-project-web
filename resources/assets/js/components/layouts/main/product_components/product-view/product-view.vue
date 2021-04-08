@@ -258,7 +258,11 @@ button.send-message-button {
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <a href="#" class="close-modal" @click.prevent="closeSortModal()">
+              <a
+                href="#"
+                class="close-modal"
+                @click.prevent="closePhoneModal()"
+              >
                 <i class="fa fa-times"></i>
               </a>
               <div class="modal-title">
@@ -640,6 +644,22 @@ export default {
               this.getPhoneLoader = false;
             });
           }
+        })
+        .catch((error) => {
+          this.getPhoneLoader = false;
+          this.isActivePhone = false;
+
+          swal({
+            text: error.response.data.msg,
+            icon: "warning",
+            className: "custom-swal-with-cancel",
+            buttons: {
+              close: {
+                text: "بستن",
+                className: "bg-cancel",
+              },
+            },
+          });
         });
     },
     registerComponentStatistics: function (
@@ -829,6 +849,9 @@ export default {
       $(window).on("popstate", function (e) {
         $(".modal").modal("hide");
       });
+    },
+    closePhoneModal() {
+      $(".modal").modal("hide");
     },
   },
   created() {

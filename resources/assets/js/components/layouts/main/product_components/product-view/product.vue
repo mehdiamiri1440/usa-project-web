@@ -230,6 +230,11 @@ label {
   margin-top: 15px;
 }
 
+.info-wrapper.warning-wrapper {
+  background: #f5fbff;
+  display: block;
+}
+
 .warning-title {
   font-size: 16px;
   font-weight: bold;
@@ -464,16 +469,22 @@ label {
           <i class="fa fa-share"></i>
         </button>
       </div>
-      <p class="buskool-default-text hidden-xs hidden-sm">
-        باسکول هیچ‌گونه منفعت و مسئولیتی در قبال معامله شما ندارد. با مطالعه‌ی
-        راهنمای
-        <a
-          href="https://blog.buskool.com/%d8%b1%d8%a7%d9%87%d9%86%d9%85%d8%a7%db%8c-%d8%ae%d8%b1%db%8c%d8%af-%d8%a7%d9%85%d9%86/"
-          target="_blank"
-          >خرید امن</a
-        >
-        ، آسوده‌تر معامله کنید.
-      </p>
+
+      <a
+        href="https://blog.buskool.com/%d8%b1%d8%a7%d9%87%d9%86%d9%85%d8%a7%db%8c-%d8%ae%d8%b1%db%8c%d8%af-%d8%a7%d9%85%d9%86/"
+        target="_blank"
+        class="warning-wrapper info-wrapper hidden-xs hidden-sm"
+      >
+        <p class="warning-title">
+          <i class="fa fa-question-circle"></i>
+
+          راهنمای خرید امن
+        </p>
+        <p class="warning-text">
+          باسکول هیچ‌گونه منفعت و مسئولیتی در قبال معامله شما ندارد. با مطالعه‌ی
+          راهنمای خرید امن ، آسوده‌تر معامله کنید.
+        </p>
+      </a>
     </div>
 
     <div class="main-contents-wrapper">

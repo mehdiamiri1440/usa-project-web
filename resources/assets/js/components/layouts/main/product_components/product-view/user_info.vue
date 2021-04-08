@@ -199,6 +199,32 @@ p.response-rate span {
   padding: 0 15px;
 }
 
+.warning-wrapper {
+  background: #fffbe5;
+  border-radius: 12px;
+  direction: rtl;
+  padding: 10px 15px;
+  margin-top: 15px;
+}
+
+.info-wrapper.warning-wrapper {
+  background: #f5fbff;
+  display: block;
+  margin-bottom: 30px;
+}
+
+.warning-title {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.warning-title i {
+  font-size: 23px;
+  position: relative;
+  top: 4px;
+}
+
 @media screen and (max-width: 1199px) {
   .rating-stars .review-count-wrapper {
     padding: 12px;
@@ -580,6 +606,20 @@ p.response-rate span {
         ></div>
       </div>
     </div>
+    <a
+      href="https://blog.buskool.com/%d8%b1%d8%a7%d9%87%d9%86%d9%85%d8%a7%db%8c-%d8%ae%d8%b1%db%8c%d8%af-%d8%a7%d9%85%d9%86/"
+      target="_blank"
+      class="warning-wrapper col-xs-12 info-wrapper hidden-md hidden-lg"
+    >
+      <p class="warning-title">
+        <i class="fa fa-question-circle"></i>
+        راهنمای خرید امن
+      </p>
+      <p class="warning-text">
+        باسکول هیچ‌گونه منفعت و مسئولیتی در قبال معامله شما ندارد. با مطالعه‌ی
+        راهنمای خرید امن ، آسوده‌تر معامله کنید.
+      </p>
+    </a>
   </div>
 </template>
 
