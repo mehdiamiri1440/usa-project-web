@@ -517,14 +517,18 @@ a.profile-info-wrapper:focus {
 
       <div class="user-auth-info-wrapper">
         <button
-          v-if="
-            $route.name != 'dashboardPricingTableSeller' &&
-            $parent.currentUser.user_info.active_pakage_type != 3
-          "
+          @click.prevent="$parent.showWallet()"
+          v-if="$parent.currentUser.user_info.wallet_balance"
           class="upgrade-account wallet hidden-xs hidden-sm"
           :to="{ name: 'dashboardPricingTableSeller' }"
         >
-          موجودی : 1,000,000 تومان
+          موجودی :
+          {{
+            $parent.getNumberWithCommas(
+              $parent.currentUser.user_info.wallet_balance
+            )
+          }}
+          تومان
           <i class="fa fa-wallet"></i>
         </button>
         <router-link

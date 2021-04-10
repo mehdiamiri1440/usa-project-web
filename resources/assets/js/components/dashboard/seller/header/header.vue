@@ -235,7 +235,7 @@ span.min {
 }
 
 .wallet-main {
-  background: url(/images/wallet-bg.jpg?e4c987caae6519070b37492a6e0b1e85) center;
+  background: url("../../../../../img/wallet-bg.jpg") center;
   background-size: auto;
   border-radius: 12px;
   min-height: 80px;
@@ -572,7 +572,8 @@ span.min {
               موجودی کیف پول
             </p>
             <p class="wallet-price">
-              100,000,000
+              {{ getNumberWithCommas(currentUser.user_info.wallet_balance) }}
+
               <span> تومان </span>
             </p>
             <i class="fa fa-plus"></i>
@@ -622,7 +623,7 @@ span.min {
               موجودی کیف پول
             </p>
             <p class="wallet-price">
-              100,000,000
+              {{ getNumberWithCommas(currentUser.user_info.wallet_balance) }}
               <span> تومان </span>
             </p>
             <i class="fa fa-plus"></i>
@@ -1019,6 +1020,11 @@ export default {
     },
     showWallet: function () {
       $("#wallet-modal").modal("show");
+    },
+    getNumberWithCommas: function (number) {
+      if (number || typeof number === "number")
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      else return "";
     },
   },
   mounted() {

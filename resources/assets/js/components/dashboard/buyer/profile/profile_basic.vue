@@ -1041,16 +1041,7 @@ export default {
         company_register_code: "",
       },
       popUpMsg: "",
-      items: [
-        // {
-        //   message: "پروفایل",
-        //   url: "profileBasicSeller",
-        // },
-        // {
-        //   message: "احراز هویت",
-        //   url: "profileBasicSellerVeficiation",
-        // },
-      ],
+      items: "",
       relatedFiles: [],
       certificateFiles: [],
       relatedFilesReset: false,
