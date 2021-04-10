@@ -1118,23 +1118,6 @@ export default {
           }
         }
 
-        // Complementary  form check
-
-        // for (var i = 0; i < this.profileComplementaryFields.length; i++) {
-        //   if (
-        //     this.profileComplementaryFields[i] === "description" &&
-        //     (this.currentUser.profile["description"] == null ||
-        //       this.currentUser.profile["description"] === "")
-        //   ) {
-        //     continue;
-        //   }
-
-        //   data.append(
-        //     this.profileComplementaryFields[i],
-        //     this.currentUser.profile[this.profileComplementaryFields[i]]
-        //   );
-        // }
-
         for (var i = 0; i < this.relatedFiles.length; i++) {
           let file = this.relatedFiles[i];
           data.append("related_" + i, file.file);
