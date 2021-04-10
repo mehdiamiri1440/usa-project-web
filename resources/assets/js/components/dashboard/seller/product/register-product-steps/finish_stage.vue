@@ -56,18 +56,18 @@
   text-align: right !important;
 }
 
-.list-group-item {
-  padding: 10px 30px;
-  border: none;
-  margin: 0;
-  border-bottom: 1px solid #ddd;
+.buyAd-list-item {
+  padding: 10px 15px;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #e9ecef;
 }
 
-.list-group-item:nth-last-of-type(2n + 1) {
-  background: #f9fcff !important;
+.buyAd-list-item:nth-last-of-type(2n + 1) {
+  background: #fdfdfd !important;
 }
 
-.list-group-item:last-of-type {
+.buyAd-list-item:last-of-type {
   border: none;
 }
 .detail-success {
@@ -76,21 +76,30 @@
   background: #00c569;
   color: #fff;
   text-align: center;
-  border-radius: 5px;
-  font-size: 13px;
+  border-radius: 8px;
   font-weight: bold;
+  border: none;
 }
 
+.buyAd-buttons-wrapper {
+  display: flex;
+  padding: 0;
+  margin-top: 7px;
+}
+
+.buyAd-buttons-wrapper button.phone-button {
+  margin-left: 15px;
+}
 .main-content > ul {
   border-radius: 3px;
   box-shadow: 0 0 10px #e1e1e1;
   overflow: hidden;
 }
-
-.main-content .list-group-item p {
+/* 
+.main-content .buyAd-list-item p {
   text-align: center;
   direction: rtl;
-}
+} */
 
 #main.little-main {
   margin-right: 80px;
@@ -224,25 +233,28 @@
   top: 2px;
   right: -6px;
 }
-.golden {
-  border: 2px solid transparent;
-  border-image-outset: 0;
-  border-image-repeat: stretch;
-  border-image-slice: 100%;
-  border-image-source: none;
-  border-image-width: 1;
-  -moz-border-image: -moz-linear-gradient(left, #3acfd5 0%, #3a4ed5 100%);
-  -webkit-border-image: -webkit-linear-gradient(left, #3acfd5 0%, #3a4ed5 100%);
-  border-image: linear-gradient(
-    21deg,
-    rgb(199, 168, 79) 0%,
-    rgb(249, 242, 159) 51%,
-    rgb(199, 168, 79) 100%
-  );
-  border-image-slice: 100%;
-  border-image-slice: 1;
-  position: relative;
+
+.buyad-button {
+  width: 100%;
 }
+.buyad-button.single-send-message-button {
+  margin-top: 7px;
+}
+
+button.disable {
+  background: #e0e0e0 !important;
+}
+
+.buyad-button :hover {
+  /* background: #00c569; */
+  transition: 300ms;
+}
+.golden {
+  border: 2px solid #c5a75b;
+  position: relative;
+  padding-right: 30px;
+}
+
 .golden::after {
   background: linear-gradient(
     44deg,
@@ -256,6 +268,7 @@
   position: absolute;
   right: 0;
   top: 0;
+  border-radius: 0 10px 10px 0;
 }
 .golden .detail-success {
   background: linear-gradient(
@@ -313,19 +326,63 @@
   padding: 40px 5px;
 }
 
-.send-message-button {
-  position: relative;
-  top: 9px;
-  padding: 0;
+li .buyad-button.send-message-button {
+  background: none;
+  border: 1px solid #404b55;
+  color: #404b55;
+  border-radius: 8px;
+  transition: 300ms;
 }
 
-.detail-success {
-  padding: 11px 0;
+li .buyad-button.send-message-button:hover {
+  background: #404b55;
+  color: #fff;
+  transition: 300ms;
 }
 
 .static-item {
   border: none;
   background: #fff;
+}
+
+.phone-number-wrapper {
+  padding: 15px 0;
+}
+
+.phone-number {
+  display: flex;
+  justify-content: space-between;
+  color: #404b55;
+  direction: ltr;
+  text-align: center;
+  margin-top: 15px;
+}
+
+.phone-number p {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.warning-wrapper {
+  background: #fffbe5;
+  border-radius: 12px;
+  direction: rtl;
+  padding: 5px 15px 10px;
+  margin-top: 15px;
+  text-align: right;
+  line-height: 1.618;
+}
+
+.warning-title {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.warning-title i {
+  font-size: 23px;
+  position: relative;
+  top: 4px;
 }
 
 @media screen and (max-width: 991px) {
@@ -398,16 +455,16 @@
     text-align: center !important;
     width: 100%;
   }
-  .main-content .list-group-item p {
+  .main-content .buyAd-list-item p {
     margin-bottom: 15px;
     width: 100%;
     font-size: 16px;
   }
-  .main-content .list-group-item p.detail-success {
+  .main-content .buyAd-list-item p.detail-success {
     padding: 11px;
   }
 
-  .list-group-item {
+  .buyAd-list-item {
     padding: 20px 10px;
   }
 }
@@ -420,7 +477,7 @@
     <li
       v-for="(buyAd, index) in $parent.buyAds"
       :key="index"
-      class="list-group-item col-xs-12"
+      class="buyAd-list-item col-xs-12"
       :class="{
         golden: buyAd.is_golden,
         lock:
@@ -505,39 +562,106 @@
         </p>
       </div>
 
-      <a
-        v-if="
-          buyAd.is_golden &&
-          $parent.currentUser.user_info.active_pakage_type == 0
-        "
-        class="send-message-button col-sm-3 col-xs-12 pull-left"
-        href
-        @click.prevent="openGoldenChatRestrictionModal()"
-      >
-        <p class="detail-success hover-effect">
-          <span class="fas fa-comment-alt"></span> پیام به خریدار
-        </p>
-        <p class="detail-success hide-reply" :id="'loader-' + buyAd.id">
-          کمی صبر کنید...
-        </p>
-      </a>
-      <a
-        v-else
-        class="send-message-button col-sm-3 col-xs-12 pull-left"
-        href
-        @click.prevent="openChat(buyAd)"
-      >
-        <p class="detail-success hover-effect" :id="'loader-' + buyAd.id">
+      <div v-if="buyAd.has_phone" class="col-sm-5 col-xs-12 pull-left">
+        <div class="row">
+          <div class="buyAd-buttons-wrapper">
+            <button
+              class="detail-success hover-effect phone-button"
+              :id="'loader-phone-' + buyAd.id"
+              @click.prevent="activePhoneCall(buyAd.myuser_id, buyAd.id)"
+            >
+              <span>
+                <span class="fas fa-phone-square-alt"></span>
+                اطلاعات تماس
+              </span>
+              <span class="hide-reply text-rtl"> کمی صبر کنید... </span>
+            </button>
+            <button
+              v-if="
+                buyAd.is_golden &&
+                $parent.currentUser.user_info.active_pakage_type == 0
+              "
+              class="detail-success hover-effect send-message-button"
+              :id="'loader-chat-' + buyAd.id"
+              @click.prevent="openGoldenChatRestrictionModal()"
+            >
+              <span>
+                <span class="fas fa-comment-alt"></span>
+                پیام به خریدار
+              </span>
+              <span class="hide-reply text-rtl"> کمی صبر کنید... </span>
+            </button>
+
+            <button
+              v-else
+              @click="openChat(buyAd)"
+              class="buyad-button hover-effect send-message-button"
+              :id="'loader-chat-' + buyAd.id"
+            >
+              <span>
+                <span class="fas fa-comment-alt"></span>
+                پیام به خریدار
+              </span>
+              <span class="hide-reply text-rtl"> کمی صبر کنید... </span>
+            </button>
+          </div>
+        </div>
+        <div class="row">
+          <div
+            :id="buyAd.id + '-phone-number-wrapper'"
+            class="phone-number-wrapper collapse"
+          >
+            <a class="phone-number">
+              <p>
+                <i class="fa fa-phone-square-alt"></i>
+                <span class="phone"></span>
+              </p>
+              <p>شماره تماس</p>
+            </a>
+            <div class="warning-wrapper">
+              <p class="warning-title">
+                <i class="fa fa-exclamation-circle"></i>
+
+                هشدار پلیس
+              </p>
+              <p class="warning-text">
+                لطفاً پیش از انجام معامله و هر نوع پرداخت وجه، از صحت کالا یا
+                خدمات ارائه شده، به صورت حضوری اطمینان حاصل نمایید.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div v-else class="col-sm-5 col-xs-12 pull-left">
+        <button
+          v-if="
+            buyAd.is_golden &&
+            $parent.currentUser.user_info.active_pakage_type == 0
+          "
+          class="buyad-button single-send-message-button detail-success hover-effect"
+          :id="'loader-chat' + buyAd.id"
+          @click.prevent="openGoldenChatRestrictionModal()"
+        >
           <span>
             <span class="fas fa-comment-alt"></span>
             پیام به خریدار
           </span>
           <span class="hide-reply text-rtl"> کمی صبر کنید... </span>
-        </p>
-        <!-- <p class="detail-success hide-reply" :id="'loader-' + buyAd.id">
-          کمی صبر کنید...
-        </p> -->
-      </a>
+        </button>
+        <button
+          v-else
+          @click="openChat(buyAd)"
+          class="buyad-button single-send-message-button detail-success"
+          :id="'loader-chat-' + buyAd.id"
+        >
+          <span>
+            <span class="fas fa-comment-alt"></span>
+            پیام به خریدار
+          </span>
+          <span class="hide-reply text-rtl"> کمی صبر کنید... </span>
+        </button>
+      </div>
     </li>
     <li class="col-xs-12 static-item">
       <router-link :to="{ name: 'buyAdRequestsSeller' }">
@@ -595,7 +719,7 @@ export default {
     openChat: function (buyAd) {
       var self = this;
 
-      let id = "#loader-" + buyAd.id;
+      let id = "#loader-chat-" + buyAd.id;
       self.hideReplyBtn(id);
 
       axios
@@ -630,6 +754,50 @@ export default {
               "permission denied"
             );
           }
+        });
+    },
+    activePhoneCall: function (buyAdUserId, buyAdId) {
+      let id = "#loader-phone-" + buyAdId;
+
+      $(id).prop("disabled", true);
+      $(id).addClass("disable");
+
+      this.hideReplyBtn(id);
+
+      axios
+        .post("/get_buyer_phone_number", {
+          b_id: buyAdUserId,
+          ba_id: buyAdId,
+          item: "BUYAD",
+        })
+        .then((response) => {
+          this.$nextTick(() => {
+            $("#" + buyAdId + "-phone-number-wrapper .phone").text(
+              response.data.phone
+            );
+            $("#" + buyAdId + "-phone-number-wrapper a.phone-number").attr(
+              "href",
+              "tel:" + response.data.phone
+            );
+            $("#" + buyAdId + "-phone-number-wrapper").collapse("show");
+            this.showReplyBtn(id);
+          });
+        })
+        .catch((error) => {
+          this.showReplyBtn(id);
+          $(id).prop("disabled", false);
+          $(id).removeClass("disable");
+          swal({
+            text: error.response.data.msg,
+            icon: "warning",
+            className: "custom-swal-with-cancel",
+            buttons: {
+              close: {
+                text: "بستن",
+                className: "bg-cancel",
+              },
+            },
+          });
         });
     },
     hideReplyBtn: function (id) {

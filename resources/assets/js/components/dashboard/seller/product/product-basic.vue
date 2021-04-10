@@ -14,8 +14,12 @@
 
 .main-content > div.wrapper-section {
   border: 1px solid #dadce0;
-  border-radius: 4px;
+  border-radius: 12px;
   min-height: 400px;
+}
+
+.main-content > div.wrapper-section.finish-stage {
+  border: none;
 }
 
 .main-content > div.wrapper-section.empty-section {
@@ -138,7 +142,7 @@
 .active-progress-wrapper {
   position: absolute;
 
-  right: 37px;
+  right: 43px;
 
   left: 41px;
 }
@@ -268,8 +272,10 @@
       </div>
       <div
         v-show="buyAds.length > 0"
-        class="row wrapper-section"
-        :class="{ 'empty-section': buyAds.length == 0 }"
+        class="row wrapper-section finish-stage"
+        :class="{
+          'empty-section': buyAds.length == 0,
+        }"
       >
         <div class="main-section">
           <main
