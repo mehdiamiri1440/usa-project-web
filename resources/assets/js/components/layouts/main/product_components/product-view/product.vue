@@ -497,8 +497,12 @@ label {
             @click.prevent="$parent.openChat($parent.product)"
             class="hidden-xs hidden-sm"
             :class="{
-              'send-message-button': $parent.product.user_info.has_phone,
-              'green-button': !$parent.product.user_info.has_phone,
+              'send-message-button':
+                $parent.product.user_info.has_phone &&
+                $parent.currentUser.user_info.is_buyer,
+              'green-button':
+                !$parent.product.user_info.has_phone ||
+                $parent.currentUser.user_info.is_seller,
             }"
           >
             ارسال پیام
@@ -516,7 +520,11 @@ label {
           </button>
 
           <button
-            v-if="!$parent.isMyProfile && $parent.product.user_info.has_phone"
+            v-if="
+              !$parent.isMyProfile &&
+              $parent.product.user_info.has_phone &&
+              $parent.currentUser.user_info.is_buyer
+            "
             @click.prevent="$parent.activePhoneCall(false)"
             class="green-button phone-call hidden-xs hidden-sm"
             :class="{ disable: $parent.isActivePhone }"

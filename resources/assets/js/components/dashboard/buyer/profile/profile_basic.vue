@@ -616,13 +616,26 @@ textarea.error:focus + i {
             <div class="col-xs-12 active-number-wrapper col-md-5">
               <p class="title-contents active-number-title">
                 نمايش شماره به خریداران
-                <span class="red-text" v-if="false"> غیر فعال است </span>
+                <span
+                  class="red-text"
+                  v-if="!currentUser.user_info.phone_allowed"
+                >
+                  غیر فعال است
+                </span>
                 <span class="green-text" v-else> فعال است </span>
               </p>
-              <button v-if="false" class="active-number-button hover-effect">
+              <button
+                v-if="!currentUser.user_info.phone_allowed"
+                class="active-number-button hover-effect"
+                @click.prevent="switchPhoneActivation(true)"
+              >
                 فعال کردن
               </button>
-              <button v-else class="deactive-number-button hover-effect">
+              <button
+                v-else
+                @click.prevent="switchPhoneActivation(false)"
+                class="deactive-number-button hover-effect"
+              >
                 غیرفعال
               </button>
             </div>
@@ -1199,6 +1212,25 @@ export default {
             eventBus.$emit("uploadPercentage", 0);
           });
       }
+    },
+    switchPhoneActivation(active) {
+      axios
+        .post("/set_phone_number_view_permission", { permission: active })
+        .then((response) => {
+          this.init();
+          swal({
+            title: "تغییرات شماره تماس",
+            text: "تغییرات شماره تماس با موفقیت اعمال شد",
+            icon: "success",
+            className: "custom-swal-with-cancel",
+            buttons: {
+              close: {
+                text: "بستن",
+                className: "bg-cancel",
+              },
+            },
+          });
+        });
     },
     toLatinNumbers: function (num) {
       if (num == null) {
