@@ -214,21 +214,6 @@
 </style>
 <template>
   <section class="main-content h-100 col-xs-12">
-    <!-- payment loader -->
-    <div v-if="doPaymentLoader" class="main-loader-content">
-      <div class="pricing-loader-icon">
-        <div class="lds-ring">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-        <p class="pricing-loader-text text-rtl">
-          در حال انتقال به درگاه پرداخت . . .
-        </p>
-      </div>
-    </div>
-
     <!-- end payment loader -->
     <div class="main-wrapper col-xs-12 col-md-8 col-md-offset-2">
       <div class="wallet-wrapper">
@@ -241,7 +226,7 @@
             <span class="site-name"> ‌Buskool.com </span>
           </div>
           <div class="wallet-main">
-            100,000,000
+            {{ getNumberWithCommas(walletBalance) }}
             <span class="small-unit"> تومان </span>
           </div>
           <div class="wallet-footer">
@@ -292,7 +277,10 @@
             <span class="red-text" v-if="priceError" v-text="priceError"></span>
           </p>
         </div>
-        <div class="item-action text-center" @click="payment">
+        <div
+          class="item-action text-center"
+          @click="$parent.rechargeWalletPayment(price)"
+        >
           <button class="green-button bg-gradient">افزایش موجودی</button>
         </div>
       </div>
@@ -302,12 +290,11 @@
 
 <script>
 export default {
-  props: ["userName"],
+  props: ["userName", "walletBalance"],
   data: function () {
     return {
-      price: "10,000",
+      price: "50,000",
       priceError: "",
-      doPaymentLoader: false,
     };
   },
   methods: {
@@ -352,19 +339,7 @@ export default {
         this.price = this.getNumberWithCommas(number);
       }
     },
-    payment() {
-      this.doPaymentLoader = true;
-      let self = this;
-      let number = Number(this.toLatinNumbers(this.price));
 
-      this.registerComponentStatistics(
-        "payment",
-        "increase-wallet-capacity",
-        number
-      );
-
-      window.location.href = "/payment/buyAd-reply-capacity/" + number;
-    },
     registerComponentStatistics: function (
       categoryName,
       actionName,

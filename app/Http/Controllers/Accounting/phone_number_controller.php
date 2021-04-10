@@ -47,7 +47,7 @@ class phone_number_controller extends Controller
         if(is_null($related_record)){
             return response()->json([
                 'status' => false,
-                'msg' => 'Access denied!'
+                'msg' => 'متاسفانه شما به اطلاعات تماس این کاربر دسترسی ندارید.'
             ],404);
         }
 
@@ -63,7 +63,7 @@ class phone_number_controller extends Controller
             if($viewer_daily_access_count > config('subscriptionPakage.phone-number.max-daily-access-count')){
                 return response()->json([
                     'status' => false,
-                    'msg' => 'Access denied!'
+                    'msg' => 'سقف تعداد روزانه ی دسترسی شما به شماره تماس کاربران پر شده است'
                 ],404);
             }
 
@@ -147,7 +147,7 @@ class phone_number_controller extends Controller
         if($viewr_user_record && $viewr_user_record->active_pakage_type == 0){
             return response()->json([
                 'status' => false,
-                'msg' => 'Access Denied!'
+                'msg' => 'برای دسترسی به شماره تماس خریداران لطفا نوع عضویت خود را ارتقا دهید.'
             ],404);
         }
 
@@ -166,7 +166,7 @@ class phone_number_controller extends Controller
         if(is_null($related_record)){
             return response()->json([
                 'status' => false,
-                'msg' => 'Access Denieddd!'
+                'msg' => 'متاسفانه خریدار اجازه دسترسی به شماره تماس را نداده است.'
             ],404);
         }
 
@@ -183,7 +183,7 @@ class phone_number_controller extends Controller
             if($viewer_daily_access_count > config('subscriptionPakage.phone-number.max-daily-access-count')){
                 return response()->json([
                     'status' => false,
-                    'msg' => 'Access denied!'
+                    'msg' => 'سقف تعداد روزانه ی دسترسی شما به شماره تماس کاربران پر شده است'
                 ],404);
             }  
         }

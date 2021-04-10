@@ -160,6 +160,20 @@
 
 <template>
   <div>
+    <!-- payment loader -->
+    <div v-if="doPaymentLoader" class="main-loader-content">
+      <div class="pricing-loader-icon">
+        <div class="lds-ring">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <p class="pricing-loader-text text-rtl">
+          در حال انتقال به درگاه پرداخت . . .
+        </p>
+      </div>
+    </div>
     <!-- Chat Join Modals -->
     <div class="container">
       <div id="join-to-group" class="modal fade" tabindex="-1" role="dialog">
@@ -203,7 +217,10 @@
               <a href="#" data-dismiss="modal">
                 <i class="fa fa-times"></i>
               </a>
-              <wallet-component :user-name="userFullName" />
+              <wallet-component
+                :user-name="userFullName"
+                :walletBalance="walletBalance"
+              />
             </div>
           </div>
           <!-- /.modal-content -->
@@ -349,8 +366,10 @@ export default {
       reviewUserData: "",
       reviewUserPrfileId: "",
       currentUserCreatedAt: "",
+      walletBalance: "",
       verifiedUserContent:
         "<div class='tooltip-wrapper text-rtl'>اطلاعات هویتی این کاربر احراز شده است.<br/><a href='/verification'>اطلاعات بیشتر</a> </div>",
+      doPaymentLoader: false,
     };
   },
   props: [
@@ -1140,6 +1159,37 @@ export default {
       } else {
         return false;
       }
+    },
+    rechargeWalletPayment(amount) {
+      this.doPaymentLoader = true;
+      let number = Number(this.toLatinNumbers(amount));
+
+      // this.registerComponentStatistics(
+      //   "payment",
+      //   "increase-wallet-capacity",
+      //   number
+      // );
+
+      window.location.href =
+        "/app-wallet-payment/charge/" + this.userId + "/" + number + "";
+    },
+    toLatinNumbers(num) {
+      if (num == null) {
+        return null;
+      }
+      num = num.toString().replace(/,/g, "");
+      num = num.toString().replace(/^0+/, "");
+      num = num.toString().replace(/^\u0660+/, "");
+      num = num.toString().replace(/^\u06f0+/, "");
+
+      return num
+        .toString()
+        .replace(/[\u0660-\u0669]/g, function (c) {
+          return c.charCodeAt(0) - 0x0660;
+        })
+        .replace(/[\u06f0-\u06f9]/g, function (c) {
+          return c.charCodeAt(0) - 0x06f0;
+        });
     },
   },
   mounted() {

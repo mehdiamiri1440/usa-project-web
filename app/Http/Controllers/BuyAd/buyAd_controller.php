@@ -104,7 +104,9 @@ class buyAd_controller extends Controller
         'myusers.first_name',
         'myusers.last_name',
         'myusers.active_pakage_type',
-        'myusers.is_verified'
+        'myusers.is_verified',
+        'myusers.phone_view_permission',
+        'myusers.wallet_balance',
     ];
 
     protected $words_blacklist = [
@@ -123,6 +125,7 @@ class buyAd_controller extends Controller
         'categories.category_name as category_name',
         'myusers.first_name',
         'myusers.last_name',
+        'myusers.phone_view_permission'
     ];
 
     protected $my_buyAds_required_fields = [
@@ -1251,6 +1254,20 @@ class buyAd_controller extends Controller
     {
         foreach($products as $product){
             $this->append_related_media_to_most_related_product_record($product);
+
+            $phone_view_permission = str_split($product->phone_view_permission)[0];
+            if( 
+                ($phone_view_permission == true && $product->wallet_balance >= config("subscriptionPakage.phone-number.view-price")) 
+                || ($phone_view_permission == true && $product->active_pakage_type > 0)
+              ){
+                $product->has_phone = true;
+            }
+            else{
+                $product->has_phone = false;
+            }
+
+            unset($product->phone_view_permission);
+            unset($product->wallet_balance);
         }
     }
 
@@ -1318,7 +1335,7 @@ class buyAd_controller extends Controller
                                         ->join('myusers','myusers.id','=','buy_ads.myuser_id')
                                         ->join('categories','buy_ads.category_id','=','categories.id')
                                         ->where('buy_ad_suggestions.seller_id',$user_id)
-                                        ->select('buy_ads.id','myusers.first_name', 'myusers.last_name' ,'buy_ads.name', 'buy_ads.requirement_amount' ,'categories.category_name as subcategory_name' ,'buy_ads.myuser_id as buyer_id' ,'buy_ad_suggestions.created_at')
+                                        ->select('buy_ads.id','myusers.first_name', 'myusers.last_name' , 'myusers.phone_view_permission', 'buy_ads.name', 'buy_ads.requirement_amount' ,'categories.category_name as subcategory_name' ,'buy_ads.myuser_id as buyer_id' ,'buy_ad_suggestions.created_at')
                                         ->get();
 
         $my_buyAd_suggestions->each(function($buyAd){
@@ -1402,6 +1419,28 @@ class buyAd_controller extends Controller
             $final_golden_buyAds = (array) $final_golden_buyAds;
         }
 
+        foreach($final_golden_buyAds as $buyAd){
+            if(str_split($buyAd->phone_view_permission)[1] == 1){
+                $buyAd->has_phone = true;
+            }
+            else{
+                $buyAd->has_phone = false;
+            }
+
+            unset($buyAd->phone_view_permission);
+        }
+
+        foreach($my_buyAd_suggestions as $buyAd){
+            if(str_split($buyAd->phone_view_permission)[1] == 1){
+                $buyAd->has_phone = true;
+            }
+            else{
+                $buyAd->has_phone = false;
+            }
+
+            unset($buyAd->phone_view_permission);
+        }
+
         return response()->json([
             'status' => true,
             'buyAds' => $my_buyAd_suggestions,
@@ -1462,7 +1501,7 @@ class buyAd_controller extends Controller
                                 ->where('confirmed',true)
                                 ->where('buy_ads.category_id',$product->category_id)
                                 ->whereNull('buy_ads.deleted_at')
-                                ->select('buy_ads.id','myusers.first_name', 'myusers.last_name' ,'buy_ads.name', 'buy_ads.requirement_amount' ,'categories.category_name as subcategory_name' ,'buy_ads.myuser_id as buyer_id' )
+                                ->select('buy_ads.id','myusers.first_name', 'myusers.last_name' ,'myusers.phone_view_permission','buy_ads.name', 'buy_ads.requirement_amount' ,'categories.category_name as subcategory_name' ,'buy_ads.myuser_id as buyer_id' )
                                 ->get();
 
             $result_golden_buyAds = array_merge($result_golden_buyAds,array_values($golden_buyAds->toArray()));

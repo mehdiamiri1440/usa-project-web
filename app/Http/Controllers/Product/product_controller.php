@@ -97,6 +97,7 @@ class product_controller extends Controller
         'categories.category_name as category_name',
         'myusers.first_name',
         'myusers.last_name',
+        'myusers.phone_view_permission',
     ];
 
     // public method
@@ -1191,6 +1192,17 @@ class product_controller extends Controller
                 });
 
         $buyAds = $this->get_most_valuable_buyAds($buyAds);
+
+        foreach($buyAds as $buyAd){
+            if(str_split($buyAd->phone_view_permission)[1] == true){
+                $buyAd->has_phone = true;
+            }
+            else{
+                $buyAd->has_phone = false;
+            }
+
+            unset($buyAd->phone_view_permission);
+        }
 
         return $buyAds;
     }

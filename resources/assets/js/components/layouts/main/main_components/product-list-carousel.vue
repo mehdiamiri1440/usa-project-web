@@ -117,6 +117,15 @@
 
   display: inline-block;
 }
+.spinner-border {
+  width: 6rem;
+  height: 6rem;
+  border-width: 0.3em;
+  color: #00c569;
+  position: absolute;
+  top: calc(50% - 30px);
+  left: calc(50% - 30px);
+}
 .inquiry-button.green-button {
   padding: 4px 15px;
   margin: 10px auto 15px;
@@ -132,11 +141,10 @@
         </transition>
       </div>
 
-      <div v-show="!isImageLoad" class="lds-ring">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
+      <div v-show="!isImageLoad" class="text-center">
+        <div class="spinner-border">
+          <span class="sr-only">Loading...</span>
+        </div>
       </div>
     </router-link>
 

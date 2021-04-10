@@ -8,10 +8,6 @@ span {
   padding-top: 160px;
 }
 
-.main-content {
-  margin-bottom: 30px;
-}
-
 .main-content > h4 {
   margin: 30px auto;
 }
@@ -25,6 +21,7 @@ span {
   width: initial;
   font-size: 16px;
   padding: 8px 20px;
+  border-radius: 8px;
 }
 
 .box-content {
@@ -33,8 +30,8 @@ span {
   padding: 0;
   text-align: center;
   padding-bottom: 10px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
-  border-radius: 4px;
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
 }
 
 .title-box {
@@ -60,30 +57,24 @@ span {
   padding: 9px 22px 6px;
 }
 
-.title-section {
+.box-title {
+  font-size: 18px;
+  color: #313a43;
   direction: rtl;
-  margin-bottom: 8px;
+  margin: 30px 0 15px;
+}
+.box-title-placeholder {
+  margin: 30px 0 15px;
 }
 
-.title-section h3 {
-  font-size: 16px;
-  color: #00c569;
-  float: right;
-}
-
-.title-section hr {
-  margin: 15px 15px 10px auto;
-  position: relative;
-}
-
-.title-section hr::after {
+.box-title::after {
   content: " ";
-  height: 3px;
-  width: 50px;
+  width: 100px;
+  height: 4px;
   background: #00c569;
-  position: absolute;
-  top: -4px;
-  right: 0;
+  display: block;
+  border-radius: 5px;
+  margin-top: 10px;
 }
 
 .section-wrapper {
@@ -105,6 +96,7 @@ span {
   padding: 5px;
   box-shadow: 0 -6px 15px rgba(0, 0, 0, 0.16);
   background: #fff;
+  display: flex;
 }
 
 .fix-send-message-wrapper button {
@@ -112,10 +104,122 @@ span {
   border-radius: 6px;
   margin: 0;
   font-size: 18px;
-  padding: 15px;
+  padding: 10px 15px;
+}
+
+.fix-send-message-wrapper button.disable {
+  background: #e0e0e0;
+}
+
+button.send-message-button {
+  background: none;
+  border-radius: 8px;
+  border: 1px solid #404b55;
+  color: #404b55;
+  transition: 300ms;
+  margin-right: 10px;
+}
+
+.send-message-button:hover {
+  background: none;
+  border-radius: 8px;
+  border: 1px solid #404b55;
+  background: #404b55;
+  color: #fff;
+  transition: 300ms;
+}
+
+/* 
+---------------------------------------------------------------------------------
+
+ modal styles
+*/
+
+.modal-content {
+  overflow: hidden;
+  border-radius: 12px;
+}
+.close-modal {
+  font-size: 20px;
+
+  color: #777;
+
+  position: absolute;
+
+  right: 0;
+
+  padding: 8px 15px 2px;
+
+  top: 0;
+}
+
+.modal-title {
+  font-size: 16px;
+
+  font-weight: 800;
+
+  color: #474747;
+
+  text-align: center;
+}
+
+.modal-header {
+  padding: 9px 15px 10px;
+}
+
+.modal-body {
+  padding: 0 15px;
+}
+
+.phone-number-wrapper {
+  margin: 35px 0;
+  padding: 0 15px;
+}
+
+.phone-number {
+  display: flex;
+  justify-content: space-between;
+  color: #404b55;
+}
+
+.phone-number p {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.warning-wrapper {
+  background: #fffbe5;
+  border-radius: 12px;
+  direction: rtl;
+  padding: 10px 15px;
+  margin-top: 15px;
+}
+
+.warning-title {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.warning-title i {
+  font-size: 23px;
+  position: relative;
+  top: 4px;
+}
+
+.spinner-border {
+  width: 1.5rem;
+  height: 1.5rem;
+  top: -5px;
+  position: relative;
+  left: 2px;
 }
 
 @media screen and (max-width: 1199px) {
+  .box-title {
+    margin: 0 auto 15px;
+  }
+
   .default-carousel-item:last-of-type {
     display: none;
   }
@@ -143,6 +247,57 @@ span {
 
 <template>
   <div class="container">
+    <!--modal-->
+    <div class="container" v-if="isActivePhone">
+      <div
+        id="phone-information-modal"
+        class="pricing-modal modal fade"
+        tabindex="-1"
+        role="dialog"
+      >
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <a
+                href="#"
+                class="close-modal"
+                @click.prevent="closePhoneModal()"
+              >
+                <i class="fa fa-times"></i>
+              </a>
+              <div class="modal-title">
+                <span>اطلاعات تماس</span>
+              </div>
+            </div>
+
+            <div class="modal-body col-xs-12">
+              <div class="phone-number-wrapper">
+                <a :href="'tel:' + userPhone" class="phone-number">
+                  <p>
+                    <i class="fa fa-phone-square-alt"></i>
+                    {{ userPhone }}
+                  </p>
+                  <p>شماره تماس</p>
+                </a>
+                <div class="warning-wrapper">
+                  <p class="warning-title">
+                    <i class="fa fa-exclamation-circle"></i>
+
+                    هشدار پلیس
+                  </p>
+                  <p class="warning-text">
+                    لطفاً پیش از انجام معامله و هر نوع پرداخت وجه، از صحت کالا
+                    یا خدمات ارائه شده، به صورت حضوری اطمینان حاصل نمایید.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+    </div>
     <main id="main" class="row">
       <div class="col-xs-12 col-lg-9 pull-right">
         <section class="main-content">
@@ -153,7 +308,9 @@ span {
       </div>
 
       <div class="col-xs-12 col-lg-3 pull-left">
-        <UserInfo />
+        <div class="row">
+          <UserInfo />
+        </div>
       </div>
 
       <section
@@ -162,28 +319,21 @@ span {
         class="section-wrapper container-fluid latest-product"
       >
         <div class="container">
-          <div class="row">
-            <div class="col-xs-12">
-              <div class="title-section col-xs-12">
-                <div class="row">
-                  <h3>محصولات مرتبط</h3>
-                  <hr />
-                </div>
-              </div>
+          <div class="col-xs-12">
+            <div class="row">
+              <h3 class="box-title">محصولات مرتبط</h3>
 
-              <div class="col-xs-12 products-contents">
-                <div class="row">
-                  <div class="owl-carousel">
-                    <ProductCarousel
-                      v-for="(product, index) in relatedProducts"
-                      :key="index"
-                      :img="str + '/thumbnails/' + product.photo"
-                      :title="product.product_name"
-                      :stock="getConvertedNumbers(product.stock)"
-                      :link="getRelatedProductUrl(product)"
-                      column="4"
-                    />
-                  </div>
+              <div class="products-contents">
+                <div class="owl-carousel">
+                  <ProductCarousel
+                    v-for="(product, index) in relatedProducts"
+                    :key="index"
+                    :img="str + '/thumbnails/' + product.photo"
+                    :title="product.product_name"
+                    :stock="getConvertedNumbers(product.stock)"
+                    :link="getRelatedProductUrl(product)"
+                    column="4"
+                  />
                 </div>
               </div>
             </div>
@@ -198,7 +348,7 @@ span {
         <div class="container">
           <div class="row">
             <div class="col-xs-12">
-              <div class="title-section col-xs-12">
+              <div class="box-title-placeholder col-xs-12">
                 <span class="placeholder-content content-full-width"></span>
                 <br />
               </div>
@@ -207,6 +357,7 @@ span {
                 <div class="row">
                   <div
                     v-for="(item, index) in 4"
+                    :key="index"
                     :class="{ 'hidden-xs': index >= 2 }"
                     class="col-lg-3 col-md-4 col-sm-6 col-xs-12 default-carousel-item"
                   >
@@ -235,7 +386,7 @@ span {
 
       <div class="buttons-wrapper col-xs-12">
         <router-link
-          :to="{path:this.categoryUrl}"
+          :to="{ path: this.categoryUrl }"
           class="green-button blue-button"
           >مشاهده همه محصولات</router-link
         >
@@ -260,10 +411,32 @@ span {
         <button
           v-if="!isMyProfile"
           @click.prevent="openChat(product)"
-          class="green-button"
+          :class="{
+            'send-message-button':
+              product.user_info.has_phone && currentUser.user_info.is_buyer,
+            'green-button':
+              !product.user_info.has_phone || currentUser.user_info.is_seller,
+          }"
         >
-          استعلام قیمت
-          <i class="fa fa-envelope"></i>
+          ارسال پیام
+          <i class="fas fa-comment-alt"></i>
+        </button>
+        <button
+          v-if="
+            !isMyProfile &&
+            product.user_info.has_phone &&
+            currentUser.user_info.is_buyer
+          "
+          @click.prevent="activePhoneCall(true)"
+          class="green-button"
+          :class="{ disable: isActivePhone }"
+          :disabled="isActivePhone"
+        >
+          اطلاعات تماس
+          <i class="fas fa-phone-square-alt" v-if="!getPhoneLoader"></i>
+          <div v-else class="spinner-border">
+            <span class="sr-only"></span>
+          </div>
         </button>
       </div>
       <div
@@ -318,7 +491,10 @@ export default {
       showRegisterRequestBox: true,
       starScore: "",
       verifiedUserContent: this.$parent.verifiedUserContent,
-      categoryUrl: '',
+      categoryUrl: "",
+      isActivePhone: false,
+      userPhone: "",
+      getPhoneLoader: false,
     };
   },
   methods: {
@@ -340,7 +516,8 @@ export default {
           })
           .then(function (response) {
             self.product = response.data.product;
-            self.categoryUrl = '/product-list/category/' + self.getCategoryName();
+            self.categoryUrl =
+              "/product-list/category/" + self.getCategoryName();
             self.starScore = Math.floor(
               self.product.user_info.review_info.avg_score
             );
@@ -401,7 +578,7 @@ export default {
         window.localStorage.setItem("contact", JSON.stringify(contact));
 
         // this.$router.push({ name: "registerInquiry" });
-        eventBus.$emit('modal','sendMsg');
+        eventBus.$emit("modal", "sendMsg");
       }
     },
     openChatModal: function (product) {
@@ -436,6 +613,54 @@ export default {
 
         eventBus.$emit("modal", "sendMsg");
       }
+    },
+    activePhoneCall: function (isModal) {
+      this.isActivePhone = true;
+      this.getPhoneLoader = true;
+      axios
+        .post("/get_seller_phone_number", {
+          s_id: this.product.user_info.id,
+          p_id: this.$route.params.id,
+          item: "PRODUCT",
+        })
+        .then((response) => {
+          if (isModal) {
+            this.$nextTick(() => {
+              this.userPhone = response.data.phone;
+
+              $("#phone-information-modal").modal("show");
+              this.getPhoneLoader = false;
+              $("#phone-information-modal").on("shown.bs.modal", () => {
+                this.handleBackKeys();
+              });
+              $("#phone-information-modal").on("hidden.bs.modal", () => {
+                this.isActivePhone = false;
+              });
+            });
+          } else {
+            this.$nextTick(() => {
+              this.userPhone = response.data.phone;
+              $("#phone-number-wrapper").collapse("show");
+              this.getPhoneLoader = false;
+            });
+          }
+        })
+        .catch((error) => {
+          this.getPhoneLoader = false;
+          this.isActivePhone = false;
+
+          swal({
+            text: error.response.data.msg,
+            icon: "warning",
+            className: "custom-swal-with-cancel",
+            buttons: {
+              close: {
+                text: "بستن",
+                className: "bg-cancel",
+              },
+            },
+          });
+        });
     },
     registerComponentStatistics: function (
       categoryName,
@@ -616,6 +841,17 @@ export default {
       let name = this.product.main.sub_category_name;
 
       return name.split("-").join(" ");
+    },
+    handleBackKeys: function () {
+      if (window.history.state) {
+        history.pushState(null, null, window.location);
+      }
+      $(window).on("popstate", function (e) {
+        $(".modal").modal("hide");
+      });
+    },
+    closePhoneModal() {
+      $(".modal").modal("hide");
     },
   },
   created() {
