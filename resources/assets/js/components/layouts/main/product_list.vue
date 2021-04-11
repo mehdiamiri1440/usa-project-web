@@ -309,8 +309,9 @@ li.active a::after {
   direction: rtl;
   margin: 15px auto 0;
   padding: 7px 15px;
-  border-radius: 12px;
-  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
   overflow: hidden;
 }
 
@@ -398,7 +399,6 @@ li.active a::after {
   -moz-appearance: none;
   -ms-appearance: none;
 }
-
 .text-green {
   color: #00c569 !important;
 }
@@ -1215,7 +1215,15 @@ end filter modal styles
                 >
                   <div
                     class="col-xs-12"
-                    v-if="productIndex % 9 == 0 && productIndex != 0"
+                    v-if="
+                      (productIndex % 9 == 0 &&
+                        productIndex != 0 &&
+                        currentUser.user_info &&
+                        currentUser.user_info.is_buyer) ||
+                      (productIndex % 9 == 0 &&
+                        productIndex != 0 &&
+                        !currentUser.user_info)
+                    "
                   >
                     <div class="banner-wrapper">
                       <div class="banner-bg-striped"></div>
@@ -1223,6 +1231,15 @@ end filter modal styles
                         <p>آیا محصول مورد نظر خود را پیدا نکرده اید؟</p>
                         <p>درخواست خرید ثبت کنید.</p>
                         <router-link
+                          v-if="!currentUser.user_info"
+                          :to="{ name: 'register' }"
+                          class="btn green-button banner-button hover-effect"
+                        >
+                          ثبت درخواست خرید
+                          <i class="fa fa-arrow-left"> </i>
+                        </router-link>
+                        <router-link
+                          v-else
                           :to="{ name: 'registerRequestBuyer' }"
                           class="btn green-button banner-button hover-effect"
                         >
