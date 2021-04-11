@@ -91,8 +91,7 @@ i {
 }
 
 .user-information-wrapper {
-  padding: 5px 15px;
-  border-bottom: 2px solid #eeeeee;
+  padding: 10px 7px;
   margin: 0;
 }
 

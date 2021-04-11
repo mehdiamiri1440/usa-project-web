@@ -67,7 +67,7 @@
 
   position: relative;
 
-  background: #f6f6f6;
+  background: #404b55;
 
   border-radius: 4px;
 }
@@ -105,23 +105,12 @@
     height: 90px;
   }
 }
-
-/* @media screen and (max-width: 370px) {
-        .main-article-image {
-
-            width: initial;
-
-            height: 230px;
-
-        }
-
-    } */
 </style>
 
 <template>
   <div class="main-article-image">
     <router-link v-show="isImageLoad" :to="productUrl">
-      <img :src="base + 'thumbnails/' +  img" @load="ImageLoaded" :alt="alt" />
+      <img :src="base + 'thumbnails/' + img" @load="ImageLoaded" :alt="alt" />
     </router-link>
 
     <div v-show="!isImageLoad" class="lds-ring">
@@ -140,24 +129,24 @@
 
 <script>
 export default {
-  data: function() {
+  data: function () {
     return {
       imgSrcs: "",
-      isImageLoad: false
+      isImageLoad: false,
     };
   },
   props: ["img", "base", "popUpLoaded", "alt", "imageCount", "productUrl"],
 
-  created: function() {
+  created: function () {
     this.loadImage();
   },
   methods: {
-    loadImage: function() {
+    loadImage: function () {
       this.isImageLoad = false;
     },
-    ImageLoaded: function() {
+    ImageLoaded: function () {
       this.isImageLoad = true;
-    }
-  }
+    },
+  },
 };
 </script>

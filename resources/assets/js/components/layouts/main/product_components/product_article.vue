@@ -25,12 +25,16 @@
 .main-content-item {
   direction: rtl;
   margin: 15px auto;
-  border-radius: 5px;
-  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.16);
   padding: 0;
   background: #fff;
   float: right;
   width: 100%;
+  border: 1px solid #e9ecef;
+  border-radius: 12px;
+}
+
+.main-content-item.diffrent-bg {
+  background: #fdfdfd;
 }
 
 .main-article-title {
@@ -297,7 +301,10 @@ label {
 <template>
   <article
     class="main-content-item"
-    :class="{ 'is-user-valid': product.user_info.active_pakage_type == 3 }"
+    :class="{
+      'is-user-valid': product.user_info.active_pakage_type == 3,
+      'diffrent-bg': productIndex % 2 == 0,
+    }"
   >
     <!--article modal-->
 

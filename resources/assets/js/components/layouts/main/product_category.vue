@@ -31,6 +31,12 @@
   background: #fff;
 }
 
+.default-main-wrapper {
+  border: 1px solid #e9ecef;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
 .sidebar {
   will-change: min-height;
 }
@@ -615,14 +621,18 @@ filter modal styles
 }
 
 .default-grid .default-main-article-content {
-  width: calc(100% - 90px);
+  width: 100%;
 }
 .default-grid .default-wrapper-main-image {
-  width: 80px;
-  height: 80px;
+  width: 100%;
+  height: 160px;
 }
 .default-grid > div {
-  padding-bottom: 0;
+  padding: 0;
+}
+
+.default-grid .default-article-contents {
+  padding: 15px;
 }
 /* 
 end filter modal styles
@@ -1371,7 +1381,7 @@ end filter modal styles
                 class="default-items col-xs-12"
               >
                 <div
-                  class="col-xs-12 padding-15 margin-15-0 default-item-wrapper shadow-content"
+                  class="col-xs-12 padding-15 margin-15-0 default-item-wrapper default-main-wrapper"
                 >
                   <div class="default-user-contents col-xs-12 padding-0">
                     <div
@@ -1380,10 +1390,6 @@ end filter modal styles
 
                     <span
                       class="padding-top-5 placeholder-content margin-15 pull-right content-min-width"
-                    ></span>
-
-                    <span
-                      class="margin-0 placeholder-content default-button-min-with pull-left mobile-hidden"
                     ></span>
                   </div>
 
@@ -1395,7 +1401,6 @@ end filter modal styles
                         class="default-main-image placeholder-content"
                       ></span>
                     </div>
-
                     <div class="default-main-article-content">
                       <span
                         class="content-half-width placeholder-content"
@@ -1427,29 +1432,24 @@ end filter modal styles
                 class="default-items col-md-4 default-grid"
               >
                 <div
-                  class="col-xs-12 padding-15 margin-15-0 default-item-wrapper shadow-content"
+                  class="col-xs-12 margin-15-0 default-item-wrapper default-main-wrapper"
                 >
-                  <div
-                    class="default-user-contents col-xs-12 padding-0 padding-10-0"
-                  >
-                    <div
-                      class="placeholder-content default-article-user-image pull-right"
-                    ></div>
-
-                    <span
-                      class="placeholder-content margin-10 pull-right content-half-width"
-                    ></span>
+                  <div class="default-wrapper-main-image pull-right">
+                    <span class="default-main-image placeholder-content"></span>
                   </div>
 
                   <div
                     class="default-article-contents padding-0 margin-top-10 col-xs-12"
                   >
-                    <div class="default-wrapper-main-image pull-right">
+                    <div class="padding-10 col-xs-12">
+                      <div
+                        class="placeholder-content default-article-user-image pull-right"
+                      ></div>
+
                       <span
-                        class="default-main-image placeholder-content"
+                        class="placeholder-content margin-10 pull-right content-half-width"
                       ></span>
                     </div>
-
                     <div class="default-main-article-content">
                       <span
                         class="content-half-width placeholder-content"
@@ -1458,14 +1458,14 @@ end filter modal styles
                       <span
                         class="content-default-width placeholder-content"
                       ></span>
+                      <span
+                        class="margin-top-10 placeholder-content default-button-min-with pull-left hidden-afetr-mobile-hidden"
+                      ></span>
+                      <span
+                        class="placeholder-content default-button-full-with pull-left mobile-hidden"
+                      ></span>
                     </div>
-                    <span
-                      class="margin-top-10 placeholder-content default-button-min-with pull-left hidden-afetr-mobile-hidden"
-                    ></span>
                   </div>
-                  <span
-                    class="placeholder-content default-button-full-with pull-left mobile-hidden"
-                  ></span>
                 </div>
               </div>
             </div>

@@ -25,13 +25,13 @@
 .main-content-item {
   direction: rtl;
   margin: 15px auto;
-  border-radius: 5px;
-  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.16);
+  border-radius: 12px;
   padding: 0;
   background: #fff;
   float: right;
   width: 100%;
-  border: 2px solid transparent;
+  border: 1px solid #e0e0e0;
+  overflow: hidden;
 }
 
 .main-article-title {
@@ -165,7 +165,7 @@ label {
 }
 
 .is-user-valid {
-  border: 2px solid #00c569;
+  border: 1px solid #00c569;
 }
 
 .modal-content {
@@ -234,6 +234,7 @@ label {
   margin: 0;
   padding: 4px 15px;
   width: 100%;
+  border-radius: 8px;
 }
 
 .article-features button.disable {
@@ -279,6 +280,10 @@ label {
 }
 
 @media screen and (max-width: 555px) {
+  .article-action-buttons > button {
+    padding: 8px 15px;
+    font-size: 16px;
+  }
   .article-action-buttons {
     padding: 0 15px 15px;
     display: block;
@@ -420,6 +425,24 @@ label {
     </div>
 
     <!--end article modal-->
+    <div class="main-article-contents-image-wrapper" @click="setScroll()">
+      <ProductImage
+        :base="str + '/'"
+        :img="product.photos[0].file_path"
+        :alt="
+          'فروش عمده ی ' +
+          product.main.sub_category_name +
+          ' ' +
+          product.main.product_name +
+          ' ' +
+          product.main.city_name +
+          ' - ' +
+          product.main.province_name
+        "
+        :image-count="product.main.photos_count"
+        :product-url="productUrl"
+      />
+    </div>
 
     <ProductUserInfo
       :profile_photo="product.profile_info.profile_photo"
@@ -508,11 +531,13 @@ import { eventBus } from "../../../../router/router";
 
 import ProductUserInfo from "./product-grid-article-components/product_user_info";
 import ArticleMainContents from "./product-grid-article-components/article_main_contents";
+import ProductImage from "./product-grid-article-components/product_image";
 
 export default {
   components: {
     ProductUserInfo,
     ArticleMainContents,
+    ProductImage,
   },
   props: ["productIndex", "product", "str", "currentUser"],
   data: function () {
@@ -539,6 +564,23 @@ export default {
       }
 
       // this.jsonLDObject = this.createJsonLDObject();
+    },
+    setScroll: function () {
+      localStorage.setItem("scrollIndex", this.$props.productIndex);
+
+      if (
+        this.isDeviceMobile() &&
+        window.location.pathname.includes("product-list")
+      ) {
+        window.open(this.productUrl, "_blank");
+      } else {
+        this.$router.push(this.productUrl);
+      }
+      this.$parent.registerComponentStatistics(
+        "product",
+        "show-product-in-seperate-page",
+        "show-product-in-seperate-page"
+      );
     },
     toLatinNumbers: function (num) {
       if (num == null) {
@@ -680,7 +722,7 @@ export default {
         window.localStorage.setItem("contact", JSON.stringify(contact));
 
         // this.$router.push({ name: "registerInquiry" });
-        eventBus.$emit('modal','sendMsg');
+        eventBus.$emit("modal", "sendMsg");
       }
     },
     updatePopUpStatus: function (popUpOpenStatus) {
