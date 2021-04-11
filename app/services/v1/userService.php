@@ -27,6 +27,13 @@ use Carbon\Carbon;
 	 {
 		 $user = new myuser();
 
+		 if(session('sms_OTP') != $request->verification_code){
+			return response()->json([
+				'status' => false,
+				'msg' => 'Get The F*CK Out!'
+			],404);
+		}
+
 		 $user->first_name = $request->first_name;
 		 $user->last_name = $request->last_name;
 		 $user->phone = $request->phone;
@@ -52,6 +59,7 @@ use Carbon\Carbon;
 		 else{
 			$user->password = sha1($this->generate_plain_text_password(8));
 		 }
+
 
         //  $sms_controller_object = new sms_controller();
         //  $profile_controller_object = new profile_controller();

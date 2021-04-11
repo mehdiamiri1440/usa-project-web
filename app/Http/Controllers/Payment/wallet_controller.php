@@ -198,8 +198,8 @@ class wallet_controller extends Controller
         if(count($related_record) == 0){
             return response()->json([
                 'status' => false,
-                'msg' => 'your balance is not sufficient! or access denied!'
-            ],200);
+                'msg' => 'موجودی کیف پول شما کافی نیست. لطفا ابتدا موجودی کیف پول خود را افزایش دهید.'
+            ],403);
         }
 
         $expiration_time_in_days = config("subscriptionPakage.elevator.expiration-time-in-days");
