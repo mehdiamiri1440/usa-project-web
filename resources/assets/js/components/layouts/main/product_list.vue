@@ -309,9 +309,8 @@ li.active a::after {
   direction: rtl;
   margin: 15px auto 0;
   padding: 7px 15px;
-  border-radius: 5px;
-  -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
   overflow: hidden;
 }
 
@@ -734,6 +733,12 @@ end filter modal styles
 }
 
 @media screen and (max-width: 767px) {
+  .rate-filter-desktop-wrapper,
+  .rate-filter-mobile-wrapper {
+    background: #fbfbfb;
+    border: none;
+    border-radius: 0;
+  }
   .main-content,
   #main {
     padding: 0;

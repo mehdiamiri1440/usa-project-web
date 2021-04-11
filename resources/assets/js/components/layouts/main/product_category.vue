@@ -780,6 +780,13 @@ end filter modal styles
 }
 
 @media screen and (max-width: 767px) {
+  .rate-filter-desktop-wrapper,
+  .rate-filter-mobile-wrapper {
+    background: #fbfbfb;
+    border: none;
+    border-radius: 0;
+  }
+
   .main-content,
   #main,
   .category-footer {
