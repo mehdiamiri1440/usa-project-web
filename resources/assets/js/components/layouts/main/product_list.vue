@@ -1215,15 +1215,7 @@ end filter modal styles
                 >
                   <div
                     class="col-xs-12"
-                    v-if="
-                      (productIndex % 9 == 0 &&
-                        productIndex != 0 &&
-                        currentUser.user_info &&
-                        currentUser.user_info.is_buyer) ||
-                      (productIndex % 9 == 0 &&
-                        productIndex != 0 &&
-                        !currentUser.user_info)
-                    "
+                    v-if="productIndex % 9 == 0 && productIndex != 0"
                   >
                     <div class="banner-wrapper">
                       <div class="banner-bg-striped"></div>
