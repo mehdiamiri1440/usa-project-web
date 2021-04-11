@@ -45,6 +45,17 @@ const router = new Router({
           },
         },
         {
+          path: "viewer",
+          name: "sellerViewer",
+          components: {
+            default: (resolve) => {
+              require([
+                "../components/dashboard/seller/seller-viewer.vue",
+              ], resolve);
+            },
+          },
+        },
+        {
           path: "pricing",
           name: "dashboardPricingTableSeller",
           components: {

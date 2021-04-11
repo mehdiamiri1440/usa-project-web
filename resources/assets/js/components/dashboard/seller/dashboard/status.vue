@@ -127,6 +127,20 @@
   left: 10px;
 }
 
+.header-links-wrapper a.viewers-link {
+  margin: 20px auto 5px;
+  display: inline-block;
+  font-size: 17px;
+  font-weight: bold;
+  color: #1da1f2;
+  transition: 300ms;
+}
+
+.header-links-wrapper a.viewers-link:hover {
+  transition: 300ms;
+  transform: translateX(-5px);
+}
+
 @keyframes shake {
   10%,
   90% {
@@ -194,6 +208,12 @@
       </div>
       <div class="header-links col-xs-12">
         <div class="header-links-wrapper">
+          <div>
+            <router-link :to="{ name: 'sellerViewer' }" class="viewers-link">
+              <span> خریدارانی که شماره تماس شما را دیده اند </span>
+              <i class="fa fa-arrow-left"></i>
+            </router-link>
+          </div>
           <router-link
             v-for="(link, index) in linkItems"
             :key="index"
