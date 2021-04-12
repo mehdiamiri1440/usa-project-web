@@ -32,6 +32,18 @@
   width: 100%;
   border: 1px solid #e0e0e0;
   overflow: hidden;
+  position: relative;
+  height: 250px;
+}
+
+.elevator-event {
+  position: absolute;
+  left: 5px;
+  bottom: 15px;
+  border: none;
+  border-radius: 8px;
+  background: #38485f;
+  color: #fff;
 }
 
 .main-article-title {
@@ -240,13 +252,6 @@ label {
 .article-features button.disable {
   background: #777;
   border: none;
-}
-
-.article-features button.elevator-event {
-  background: #e41c38;
-  color: #fff;
-  border-radius: 4px;
-  padding: 4px 14px;
 }
 
 .article-features button.disable {
@@ -460,67 +465,16 @@ label {
       :productIndex="productIndex"
       :is_my_profile_status="isMyProfile"
     />
-
-    <!-- <div
-      class="footer-article"
-      :class="{
-        'owner-product': isMyProfile,
-      }"
+    <button
+      v-if="product.main.is_elevated == 1"
+      data-toggle="tooltip"
+      data-placement="right"
+      title="نردبان اعمال شده است"
+      class="elevator-event"
     >
-      <div
-        class="article-features pull-left"
-        v-if="product.main.is_elevated == 1 || isMyProfile"
-      >
-        <button
-          v-if="isMyProfile"
-          class="elevator-event"
-          @click.prevent="elevatorEvent()"
-        >
-          <i class="fas fa-chart-line"></i>
-          اعمال نردبان
-        </button>
+      <i class="fas fa-chart-line"></i>
+    </button>
 
-        <button
-          v-if="product.main.is_elevated == 1"
-          data-toggle="tooltip"
-          data-placement="bottom"
-          title="نردبان اعمال شده است"
-          class="elevator-event active disable"
-        >
-          <i class="fas fa-chart-line"></i>
-        </button>
-      </div>
-      <div
-        class="article-action-buttons pull-right"
-        :class="[
-          {
-            'full-width-button': product.main.is_elevated == 0 && !isMyProfile,
-          },
-          {
-            'calc-width-button': product.main.is_elevated == 1 && !isMyProfile,
-          },
-        ]"
-      >
-        <button
-          v-if="!isMyProfile"
-          @click.prevent="openChat(product)"
-          class="green-button"
-        >
-          <i class="fa fa-envelope"></i>
-          استعلام قیمت
-        </button>
-
-        <button
-          v-else
-          class="blue-button"
-          data-toggle="modal"
-          :data-target="'#article-modal' + product.main.id"
-        >
-          <i class="fa fa-pencil-alt"></i>
-          ویرایش
-        </button>
-      </div>
-    </div> -->
     <!--google codes-->
     <script v-html="jsonLDObject" type="application/ld+json"></script>
     <!--end google codes-->
@@ -857,7 +811,7 @@ export default {
   },
   mounted() {
     this.init();
-    $(".elevator-event.active").tooltip();
+    $(".elevator-event").tooltip();
   },
 };
 </script>

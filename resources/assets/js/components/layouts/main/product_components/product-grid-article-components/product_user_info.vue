@@ -7,19 +7,19 @@ i {
 .verified-user {
   font-size: 16px;
 }
-.user-information-wrapper,
-.article-action-buttons button {
+.user-information-wrapper {
   font-size: 14px;
 
   font-weight: bold;
 
-  padding: 4px 7px 5px;
+  padding: 4px 0 5px;
 
   margin: 0;
 
-  margin-top: 3px;
+  margin: 3px 5px;
 
   line-height: 1.618;
+  border-bottom: 1px solid #e9ecef;
 }
 
 .article-action-buttons button {

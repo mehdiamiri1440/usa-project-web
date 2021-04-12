@@ -551,6 +551,10 @@ filter modal styles
   color: #777;
 }
 
+.default-grid {
+  padding: 0 3px;
+}
+
 .default-grid .default-main-article-content {
   width: 100%;
 }
@@ -597,6 +601,8 @@ end filter modal styles
   position: relative;
   direction: rtl;
   overflow: hidden;
+  border-radius: 12px;
+  margin: 15px auto;
 }
 
 .banner-wrapper .main-wrapper {
@@ -604,6 +610,7 @@ end filter modal styles
   padding: 20px 100px;
   overflow: hidden;
   z-index: 1;
+  border-radius: 12px;
 }
 
 .banner-button {
@@ -846,6 +853,11 @@ div.items-wrapper {
 }
 
 @media screen and (max-width: 555px) {
+  #article-list.grid-items-wrapper {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
   .user-image {
     float: right;
 
@@ -1238,16 +1250,17 @@ div.items-wrapper {
               </div>
               <div v-else>
                 <div
-                  
+                  :key="productIndex"
+                  v-for="(product, productIndex) in products"
                 >
                   <div
                     class="col-xs-12"
                     v-if="
-                      (productIndex % 9 == 0 &&
+                      (productIndex % 12 == 0 &&
                         productIndex != 0 &&
                         currentUser.user_info &&
                         currentUser.user_info.is_buyer) ||
-                      (productIndex % 9 == 0 &&
+                      (productIndex % 12 == 0 &&
                         productIndex != 0 &&
                         !currentUser.user_info)
                     "
@@ -1298,8 +1311,6 @@ div.items-wrapper {
                   </div>
                   <div
                     class="col-xs-6 col-sm-4 items-wrapper pull-right col-md-3"
-                    :key="productIndex"
-                  v-for="(product, productIndex) in products"
                   >
                     <ProductGridArticle
                       :productIndex="productIndex"
@@ -1406,11 +1417,11 @@ div.items-wrapper {
                 </div>
               </div>
             </div>
-            <div class="row" v-else>
+            <div v-else>
               <div
                 v-for="(defaultItem, index) in 12"
                 :key="index"
-                class="default-items col-md-4 default-grid"
+                class="default-items col-sm-4 col-md-3 default-grid"
               >
                 <div
                   class="col-xs-12 margin-15-0 default-item-wrapper default-main-wrapper"
@@ -1422,15 +1433,6 @@ div.items-wrapper {
                   <div
                     class="default-article-contents padding-0 margin-top-10 col-xs-12"
                   >
-                    <div class="padding-10 col-xs-12">
-                      <div
-                        class="placeholder-content default-article-user-image pull-right"
-                      ></div>
-
-                      <span
-                        class="placeholder-content margin-10 pull-right content-half-width"
-                      ></span>
-                    </div>
                     <div class="default-main-article-content">
                       <span
                         class="content-half-width placeholder-content"
