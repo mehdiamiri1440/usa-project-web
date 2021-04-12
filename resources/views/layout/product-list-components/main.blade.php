@@ -86,17 +86,14 @@
               </div>
           </section>
           <section class="main-content col-xs-12" >
-            <div id="article-list" class="row">
+            <div id="article-list" >
               
-
-
-
           @foreach ($products as $product)
 
               <div
-              class="col-xs-12 grid-list col-md-4 pull-right hidden-sm hidden-xs"
+              class="col-xs-6 grid-list col-sm-4 col-md-3 pull-right hidden-sm "
             >
-
+              
                   @if($product['user_info']->active_pakage_type == 3)
                     <article
                       class="main-content-item is-user-valid"
@@ -106,85 +103,7 @@
                       class="main-content-item "
                     >
                   @endif
-                    <div class="user-information-wrapper row">
-                        <div class="user-information-contents">
 
-                          
-                          <a href="{{'/profile/' . $product['user_info']->user_name}}" class="user-information-link">
-                            <div class="user-information-content-image">
-                              <div class="user-image" >
-                                @if ($product['profile_info']->profile_photo)
-                                    <img
-                                  src="{{url('storage/' . $product['profile_info']->profile_photo)}}"
-                                  class="image_defult"
-                                  alt="{{$product['user_info']->first_name . ' ' . $product['user_info']->last_name}}"
-                                />
-                                @else
-                                <img
-                                  src="{{asset('assets/img/user-defult.png')}}"
-                                  class="image_defult"
-                                  alt="{{$product['user_info']->first_name . ' ' . $product['user_info']->last_name}}"
-                                />
-                                @endif
-                              </div>
-                            </div>
-                          
-                            @if ($product['user_info']->response_rate)
-                              <div
-                                class="user-information-content"
-                              >
-                              <a
-                              class="user-name-link"
-                              href="{{'/profile/' . $product['user_info']->user_name}}"
-                            >
-                              {{$product['user_info']->first_name . ' ' . $product['user_info']->last_name}}
-                              @if($product['user_info']->is_verified) 
-                                <button
-                                    class="verified-user"
-                                    data-container="body"
-                                    data-toggle="popover"
-                                    data-placement="bottom"
-                                  >
-                                    <i class="fa fa-certificate"></i>
-                                  </button>
-                                  @endif
-                              </a>
-
-                                <p  class="response-rate">
-                                  احتمال پاسخ گویی
-                                  <span>
-                                    {{
-                                      '%' . $product['user_info']->response_rate
-                                    }}
-                                  </span>
-                                </p>
-                            </div>
-                            @else
-                            <div class="user-information-content default">
-                              <a
-                                class="user-name-link"
-                                href="{{'/profile/' . $product['user_info']->user_name}}"
-                              >
-                              {{$product['user_info']->first_name . ' ' . $product['user_info']->last_name}}
-                              @if($product['user_info']->is_verified) 
-                                <button
-                                    class="verified-user"
-                                    data-container="body"
-                                    data-toggle="popover"
-                                    data-placement="bottom"
-                                  >
-                                    <i class="fa fa-certificate"></i>
-                                  </button>
-                                  @endif
-                              </a>
-                            </div>
-                            @endif
-                          </a>
-                    
-                        </div>
-                        
-                      </div>
-                      
                     @if($product['user_info']->active_pakage_type != 3)
                     <a target="_blank"  rel="nofollow" href="{{'/product-view/'  . str_replace(' ', '-', 'خرید-عمده-' .$product['main']->sub_category_name) .'/' . str_replace(' ', '-', $product['main']->category_name) . '/' .   $product['main']->id  }}"
                       class="main-article-contents-wrapper pointer-class "
@@ -194,22 +113,28 @@
                     class="main-article-contents-wrapper pointer-class is-user-valid-content"
                     >
                     @endif
-                        <div class="main-article-contents-image-wrapper" >
+                    <div class="main-article-contents-image-wrapper" >
                     
-                            <div class="main-article-image">
-                              <div class="image" >
-                                <img src="{{url('/storage') . '/thumbnails/' . $product['photos'][0]->file_path}}"  alt=" {{$product['main']->category_name . ' | ' . $product['main']->sub_category_name . ' ' .  $product['main']->product_name }}" />
-                                </div>
-                                <div  class="image-count-item">
-                                <i class="fas fa-images"></i>
-                                <span >
-                                  {{$product['main']->photos_count}}
-                                </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="main-article-contents" >
-                          @if($product['user_info']->active_pakage_type == 3)
+                      <div class="main-article-image">
+                        <div class="image" >
+                          <img src="{{url('/storage') . '/thumbnails/' . $product['photos'][0]->file_path}}"  alt=" {{$product['main']->category_name . ' | ' . $product['main']->sub_category_name . ' ' .  $product['main']->product_name }}" />
+                          </div>
+                          <div  class="image-count-item">
+                          <i class="fas fa-images"></i>
+                          <span >
+                            {{$product['main']->photos_count}}
+                          </span>
+                          </div>
+                      </div>
+                      <h3 class="article-title grid-list-title">
+                       <p>
+                        {{$product['main']->category_name . ' | ' . $product['main']->sub_category_name  }}
+                        <span>
+                          {{$product['main']->product_name}}
+                        </span>
+                       </p>
+                      </h3>
+                      @if($product['user_info']->active_pakage_type == 3)
                             <div
                               class="valid-user-badge"
                             >
@@ -248,17 +173,46 @@
                               </div>
                             </div>
                           @endif
-                        
-                          <div>
-                              <h3 class="article-title">
-                                    {{$product['main']->category_name . ' | ' . $product['main']->sub_category_name  }}
-                                    <span>
-                                      {{$product['main']->product_name}}
-                                    </span>
-                              </h3>
+                    </div>
+                        <a href="{{'/profile/' . $product['user_info']->user_name}}" class="user-information-link">
+                            
+                          
+                            <div
+                              class="user-information-content"
+                            >
+                            <a
+                            class="user-name-link"
+                            href="{{'/profile/' . $product['user_info']->user_name}}"
+                          >
+                          <i class="fa fa-user-circle"></i>
+                            {{$product['user_info']->first_name . ' ' . $product['user_info']->last_name}}
+                            @if($product['user_info']->is_verified) 
+                              <button
+                                  class="verified-user"
+                                  data-container="body"
+                                  data-toggle="popover"
+                                  data-placement="bottom"
+                                >
+                                  <i class="fa fa-certificate"></i>
+                                </button>
+                                @endif
+                            </a>
 
+                          </div>
+                        </a>
+                        <div class="main-article-contents" >
+                          
+                          <div>
+                            <p>
+                              <i class="fa fa-map-marker-alt"></i>
+
+                              <span
+                              >
+                              {{$product['main']->province_name . ' - ' . $product['main']->city_name  }}
+                            </span>
+                              </p>
                               <p>
-                               موجودی:
+                               <i class="fa fa-box-open"></i>
                               <span >
                                 
                                 @php 
@@ -277,10 +231,7 @@
                               </p>
                           </div>
                       </div>
-                    </a>
-                
-                    <div class="footer-article">
-                      @if(!$product['main']->is_elevated)
+                      @if($product['main']->is_elevated)
                       <div
                           class="article-features pull-left"
                         >
@@ -294,37 +245,12 @@
                           </button>
                         </div>
                       @endif
-                      
-                      @if(!$product['main']->is_elevated)
-                        <div
-                          class="article-action-buttons calc-width-button pull-right"
-                        >
-                      @else
-                        <div
-                          class="article-action-buttons full-width-button pull-right"
-                        >
-                      @endif
-                        <button
-                          class="green-button"
-                        >
-                          <i class="fa fa-envelope"></i>
-                          استعلام قیمت
-                        </button>
-                      </div>
-                    </div>
+                    </a>
+
                   </article>
-
-
             </div>
 
             @endforeach
-
-
-
-
-
-
-
 
               {{-- default list article  --}}
             <div
