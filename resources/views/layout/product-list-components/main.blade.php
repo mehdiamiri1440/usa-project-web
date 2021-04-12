@@ -91,7 +91,7 @@
           @foreach ($products as $product)
 
               <div
-              class="col-xs-6 grid-list col-sm-4 col-md-3 pull-right hidden-sm "
+              class="col-xs-6 grid-list col-sm-4 col-md-3 pull-right  "
             >
               
                   @if($product['user_info']->active_pakage_type == 3)
@@ -254,7 +254,7 @@
 
               {{-- default list article  --}}
             <div
-              class="col-xs-12  hidden-md hidden-lg">
+              class="col-xs-12 hidden-sm hidden-xs hidden-md hidden-lg">
                   @foreach ($products as $product)
 
                     @if($product['user_info']->active_pakage_type == 3)

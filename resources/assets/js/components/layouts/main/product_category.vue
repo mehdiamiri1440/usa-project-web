@@ -184,6 +184,7 @@ button.btn-filter {
   color: #fff;
   width: 140px;
   margin-right: 15px;
+  border-radius: 8px;
 }
 
 .links-sub-header {
@@ -378,6 +379,8 @@ li.active a::after {
   font-weight: 400;
 
   width: 140px;
+
+  border-radius: 8px;
 }
 
 .filter-select-input-wrapper {
@@ -805,6 +808,11 @@ div.items-wrapper {
 }
 
 @media screen and (max-width: 767px) {
+  #article-list.grid-items-wrapper {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
   .rate-filter-desktop-wrapper,
   .rate-filter-mobile-wrapper {
     background: #fbfbfb;
@@ -901,10 +909,6 @@ div.items-wrapper {
 }
 
 @media screen and (max-width: 555px) {
-  #article-list.grid-items-wrapper {
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-  }
   .user-image {
     float: right;
 
