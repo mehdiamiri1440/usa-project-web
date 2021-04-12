@@ -461,7 +461,7 @@ label {
       :is_my_profile_status="isMyProfile"
     />
 
-    <div
+    <!-- <div
       class="footer-article"
       :class="{
         'owner-product': isMyProfile,
@@ -520,7 +520,7 @@ label {
           ویرایش
         </button>
       </div>
-    </div>
+    </div> -->
     <!--google codes-->
     <script v-html="jsonLDObject" type="application/ld+json"></script>
     <!--end google codes-->

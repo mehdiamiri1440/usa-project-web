@@ -4,14 +4,12 @@ body {
 }
 </style>
 <style scoped>
-.main-article-contents p a,
-span {
+.main-article-contents p span:first-of-type {
   color: #777;
-}
-
-.main-article-contents h3 a {
-  color: #777;
-  font-size: 16px;
+  width: 13px;
+  display: inline-block;
+  text-align: center;
+  margin-left: 8px;
 }
 
 .main-article-contents-wrapper {
@@ -94,11 +92,6 @@ span {
   font-size: 12px;
 }
 
-.main-article-contents > p {
-  display: flex;
-  justify-content: space-between;
-}
-
 .share-link span {
   display: none;
 }
@@ -113,7 +106,7 @@ span {
   width: 100%;
   position: relative;
   padding-bottom: 0;
-  padding: 5px 15px 10px;
+  padding: 5px 15px 0;
 }
 
 .product-description {
@@ -136,7 +129,7 @@ span {
       <p>
         <span>
           <i class="fa fa-map-marker-alt"></i>
-          استان / شهر:
+          <!-- استان / شهر: -->
         </span>
         <span
           style="color: #474747"
@@ -151,7 +144,7 @@ span {
       <p>
         <span>
           <i class="fa fa-box-open"></i>
-          موجودی:
+          <!-- موجودی: -->
         </span>
         <span
           style="color: #474747"

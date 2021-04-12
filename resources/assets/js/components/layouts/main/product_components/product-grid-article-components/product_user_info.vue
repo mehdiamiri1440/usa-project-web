@@ -22,9 +22,6 @@ i {
   line-height: 1.618;
 }
 
-.user-information-wrapper {
-  height: 55px;
-}
 .article-action-buttons button {
   margin-top: 7px;
   width: 100%;
@@ -90,23 +87,6 @@ i {
   float: right;
 }
 
-.user-information-wrapper {
-  padding: 10px 7px;
-  margin: 0;
-}
-
-.user-information-wrapper > div,
-.user-information-content,
-.user-action-link,
-.user-information-link {
-  float: right;
-  display: block;
-  overflow: hidden;
-}
-
-.user-information-link {
-  min-height: 43px;
-}
 .user-action-link {
   padding-right: 10px;
   font-size: 11px;
@@ -118,148 +98,37 @@ i {
   padding-top: 9px;
 }
 
-.user-information-contents p,
-a.user-name-link {
+a.user-information-link {
   display: block;
-
-  max-width: 170px;
-
   overflow: hidden;
-
-  font-size: 14px;
-
+  font-size: 13px;
   font-weight: bold;
-
   color: #777;
-
-  height: 21px;
-
   padding-top: 0;
-
   white-space: nowrap;
-
   text-overflow: ellipsis;
-}
-
-.user-information-contents p.response-rate {
-  max-width: 115px;
-  float: right;
-  font-size: 10px;
-  height: 19px;
-  padding: 0;
-}
-
-.user-information-content.default {
-  padding-top: 8px;
-}
-
-.user-image img,
-.user-image > div {
-  height: 100%;
-}
-
-p.response-rate {
-  font-size: 10px;
-  height: 21px;
-  padding: 0;
-}
-.response-rate span {
-  color: #e41c38;
+  width: 100%;
 }
 </style>
 
 <template>
-  <div class="user-information-wrapper row">
-    <div class="user-information-contents">
-      <router-link :to="'/profile/' + user_name" class="user-information-link">
-        <div class="user-information-content-image">
-          <div class="user-image" v-if="profile_photo">
-            <img v-bind:src="'/storage/' + profile_photo" />
-          </div>
-
-          <div class="user-image" v-else>
-            <img
-              src="../../../../../../img/user-defult.png"
-              class="image_defult"
-            />
-          </div>
-        </div>
-
-        <div
-          v-if="user_info.response_rate && user_info.response_rate != '0'"
-          class="user-information-content"
-        >
-          <router-link
-            class="user-name-link"
-            :to="'/profile/' + user_name"
-            v-if="user_info"
-          >
-            {{ user_full_name }}
-            <button
-              v-if="user_info.is_verified"
-              @click.prevent
-              class="verified-user"
-              data-container="body"
-              data-toggle="popover"
-              data-placement="bottom"
-              :data-content="$parent.verifiedUserContent"
-              title
-            >
-              <i v-if="user_info.is_verified" class="fa fa-certificate"></i>
-            </button>
-          </router-link>
-
-          <div class="under-name-section">
-            <p v-if="user_info" class="response-rate">
-              احتمال پاسخ گویی
-              <span v-text="'%' + user_info.response_rate"></span>
-            </p>
-          </div>
-        </div>
-
-        <div v-else class="user-information-content default">
-          <router-link
-            class="user-name-link"
-            :to="'/profile/' + user_name"
-            v-if="user_info"
-          >
-            {{ user_full_name }}
-            <button
-              v-if="user_info.is_verified"
-              @click.prevent
-              class="verified-user"
-              data-container="body"
-              data-toggle="popover"
-              data-placement="bottom"
-              :data-content="$parent.verifiedUserContent"
-              title
-            >
-              <i class="fa fa-certificate"></i>
-            </button>
-          </router-link>
-        </div>
-      </router-link>
-    </div>
-    <!-- <div class="article-action-buttons">
+  <div class="user-information-wrapper">
+    <router-link :to="'/profile/' + user_name" class="user-information-link">
+      <i class="fa fa-user-circle"></i>
+      {{ user_full_name }}
       <button
-        v-if="!is_my_profile_status"
-        @click.prevent="$parent.openChat($parent.product)"
-        class="green-button"
+        v-if="!!user_info.is_verified"
+        @click.prevent
+        class="verified-user"
+        data-container="body"
+        data-toggle="popover"
+        data-placement="bottom"
+        :data-content="$parent.verifiedUserContent"
+        title
       >
-        <i class="fa fa-envelope"></i>
-        استعلام قیمت
+        <i class="fa fa-certificate"></i>
       </button>
-
-      <button
-        v-else="!is_my_profile_status"
-        class="blue-button"
-        data-toggle="modal"
-        :data-target="'#article-modal' + $parent.product.main.id"
-      >
-        <i class="fa fa-pencil-alt"></i>
-        ویرایش
-      </button>
-    </div> -->
+    </router-link>
   </div>
 </template>
 

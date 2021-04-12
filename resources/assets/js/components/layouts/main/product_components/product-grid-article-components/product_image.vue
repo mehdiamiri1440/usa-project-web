@@ -6,7 +6,7 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  height: 160px;
+  height: 140px;
 
   overflow: hidden;
 
