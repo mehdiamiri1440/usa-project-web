@@ -362,11 +362,15 @@ a.profile-info-wrapper:focus {
     position: absolute;
     background-color: #e41c38;
     border-radius: 50%;
-    width: 28px;
-    height: 28px;
+    width: 25px;
+    height: 25px;
     display: flex;
     align-items: center;
     color: #fff;
+  }
+  .message-notification span {
+    flex: 1;
+    text-align: center;
   }
 }
 @media screen and (min-width: 991px) {
@@ -508,7 +512,9 @@ a.profile-info-wrapper:focus {
           v-if="messageCount > 0"
           class="message-notification hide-message-notification"
         >
-          {{ messageCount > 100 ? "+99" : messageCount }}
+          <span>
+            {{ messageCount > 100 ? "+99" : messageCount }}
+          </span>
         </div>
         <button>
           <span :class="menuClosed ? 'rotation' : ''" class="fa fa-bars"></span>

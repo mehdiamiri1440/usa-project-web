@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use DB;
 use Carbon\Carbon;
 use App\Models\myuser;
-use App\Http\Controllers\Payment\payment_controller;
+use App\Http\Controllers\Payment\wallet_controller;
 
 class phone_number_controller extends Controller
 {
@@ -70,8 +70,8 @@ class phone_number_controller extends Controller
             if($related_record->active_pakage_type == 0){
                 $this->insert_phone_number_view_log_record($viewer_user_id,$request->s_id,'SELLER',$request->item,true);
                 
-                $payment_controller_object = new payment_controller();
-                $payment_controller_object->insert_expendig_log_record(1,$request->s_id);
+                $wallet_controller_object = new wallet_controller();
+                $wallet_controller_object->insert_expendig_log_record(1,$request->s_id);
             }
             else{
                 $this->insert_phone_number_view_log_record($viewer_user_id,$request->s_id,'SELLER',$request->item,false);

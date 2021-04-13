@@ -89,13 +89,17 @@ a:focus {
 }
 
 body {
-    background: #f6f6f6;
+    background: #fff;
   }
 
   .text-rtl{
     direction: rtl;
   }
 
+  .bg-gray{
+    background-color: #556080 !important;
+
+  }
 /*---------------------------------------
             Header styles 
         -----------------------------------------*/
@@ -582,23 +586,13 @@ body {
     padding-top: 120px;
   }
 
-  .rate-filter-desktop-wrapper{
-    background: #fff;
-    direction: rtl;
-    margin: 15px auto 0;
-    padding: 7px 15px;
-    border-radius: 5px;
-    -webkit-box-shadow: 0 3px 6px rgba(0,0,0,.16);
-    box-shadow: 0 3px 6px rgba(0,0,0,.16);
-    overflow: hidden;
-  }
+  
   .content-sidebar{
     background: #fff;
     direction: rtl;
     margin: 15px auto;
-    border-radius: 5px;
-    -webkit-box-shadow: 0 3px 6px rgba(0,0,0,.16);
-    box-shadow: 0 3px 6px rgba(0,0,0,.16);
+    border-radius: 12px;
+border: 1px solid #e0e0e0;
   }
 
   /*---------------------------------------
@@ -864,14 +858,6 @@ body {
     min-height: 52px;
   }
   
-  .user-information-wrapper > div,
-  .user-information-content,
-  .user-action-link,
-  .user-information-link {
-    float: right;
-    display: block;
-    overflow: hidden;
-  }
   
   .user-information-wrapper .article-action-buttons {
     float: left !important;
@@ -889,10 +875,24 @@ body {
     padding-top: 9px;
   }
   
-  .user-information-contents p,
   a.user-name-link {
     max-width: 120px;
+    overflow: hidden;
+    font-size: 14px;
+    font-weight: bold;
+    color: #777;
+    height: 21px;
+    padding-top: 0;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
   
+  .grid-list a.user-name-link {
+
+    height: initial;
+
+    max-width: 100%;
+
     overflow: hidden;
   
     font-size: 14px;
@@ -901,15 +901,35 @@ body {
   
     color: #777;
   
-    height: 21px;
+    display: block;
   
-    padding-top: 0;
+    padding: 4px 0 5px;
+
+    margin: 0;
+
+    margin: 3px 5px;
+
+    line-height: 1.618;
+
+    border-bottom: 1px solid #e9ecef;
   
     white-space: nowrap;
   
     text-overflow: ellipsis;
   }
   
+  .user-information-content, .user-action-link, .user-information-link {
+    float: right;
+    display: block;
+    overflow: hidden;
+}
+  
+ .grid-list .user-information-content,.grid-list .user-action-link,.grid-list .user-information-link {
+    float: none;
+    display: block;
+    overflow: hidden;
+}
+
   .user-information-content.default {
     padding-top: 5px;
   }
@@ -935,16 +955,21 @@ body {
   .main-content-item{
     direction: rtl;
     margin: 15px auto;
-    border-radius: 5px;
-    -webkit-box-shadow: 0 1px 6px rgba(0,0,0,.16);
-    box-shadow: 0 1px 6px rgba(0,0,0,.16);
+    border-radius: 12px;
+    border: 1px solid #e0e0e0;
     padding: 0;
     background: #fff;
     float: right;
     width: 100%;
+    overflow: hidden;
   }
+  
+ .grid-list {
+  padding: 0 3px;
+  }
+  
  .grid-list .main-content-item{
-    height: 210px;
+    height: 250px;
   }
 
   .main-article-contents p a,
@@ -980,13 +1005,20 @@ body {
   display: block;
 }
 
-.main-article-contents-image-wrapper,
-.main-article-contents {
+.main-article-contents-image-wrapper {
   float: right;
-
   padding: 15px;
-
+      padding-left: 15px;
   padding-left: 0;
+}
+
+.grid-list .main-article-contents-image-wrapper {
+  width: 100%;
+  height: 140px;
+  overflow: hidden;
+  position: relative;
+  float: none;
+  padding: 0;
 }
 
 .main-article-contents {
@@ -998,7 +1030,8 @@ body {
 }
 
 .grid-list .main-article-contents {
-  width: calc(100% - 95px);
+  width: 100%;
+  padding: 5px;
 }
 
 .main-article-contents > a {
@@ -1063,7 +1096,7 @@ body {
 .grid-list .valid-user-badge {
   width: 30px;
   height: 35px;
-  left: 5px;
+  left: 10px;
   padding: 0 3px;
 }
 
@@ -1156,54 +1189,67 @@ body {
 
 .main-article-image {
   width: 140px;
-
   height: 140px;
-
   overflow: hidden;
-
   position: relative;
-
-  background: #f6f6f6;
-
+  background: #404b55;
   border-radius: 4px;
 }
 
 .grid-list .main-article-image {
-  width: 80px;
-height: 80px;
+  width: 100%;
+  height: 140px;
+  overflow: hidden;
+  position: relative;
+  background: #404b55;
+
 }
+
 /*preloader image style*/
 .main-article-image > div.image{
   position: relative;
-  z-index: 1;
+  z-index: 0;
   height: 100%;
 }
 
 .main-article-image img {
-  width: auto;
+  width: 100%;
   height: 100%;
-  position: relative;
-  -webkit-transform: translate(50%);
-  transform: translate(50%);
-  right: 50%;
 }
 
 .image-count-item {
   position: absolute;
-
-  bottom: 0;
-
-  right: 0;
-
-  background: rgba(0, 0, 0, 0.5);
-
+  top: 10px;
+  right: 10px;
+  background: rgba(0,0,0,.5);
   padding: 5px 9px 3px;
-
   color: #fff;
+  border-radius: 50px;
   z-index: 2;
 }
 
+.article-title.grid-list-title{
+  position: absolute;
+  bottom: 0;
+  min-height: 40px;
+  width: 100%;
+  right: 0;
+  background: linear-gradient(transparent,rgba(0,0,0,.5));
+  display: flex;
+  align-items: center;
+  padding-top: 6px;
+}
 
+.article-title.grid-list-title p{
+  font-size: 15px;
+  padding: 0 5px;
+  color: #ebebeb;
+  overflow: hidden;
+  height: 25px;
+  line-height: 1.618;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
 
 
 .article-features {
@@ -1258,7 +1304,15 @@ height: 80px;
 }
 
 .grid-list .article-features button.elevator-event {
-  padding: 4px 14px;
+  position: absolute;
+  left: 5px;
+  bottom: 15px;
+  border: none;
+  border-radius: 8px;
+  background: #38485f;
+  color: #fff;
+  padding: 4px 8px;
+      font-size: 14px;
 }
 
 .article-features button.disable {
@@ -1360,9 +1414,8 @@ height: 80px;
   direction: rtl;
   margin: 15px auto 0;
   padding: 7px 15px;
-  border-radius: 5px;
-  -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+  border-radius: 12px;
+border: 1px solid #e0e0e0;
   overflow: hidden;
 }
 
@@ -2075,11 +2128,7 @@ height: 80px;
     .product-description {
       display: none;
     }
-    .main-article-image {
-      width: 90px;
 
-      height: 90px;
-    }
   }
 
   @media screen and (max-width: 550px) {

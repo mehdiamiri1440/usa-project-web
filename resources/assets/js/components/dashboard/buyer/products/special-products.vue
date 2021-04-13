@@ -42,8 +42,11 @@
   font-weight: bold;
 }
 
-.shadow-content {
+.default-main-wrapper {
   background: #fff;
+  border: 1px solid #e9ecef;
+  border-radius: 12px;
+  overflow: hidden;
 }
 
 .load-more-button {
@@ -248,7 +251,7 @@
               class="default-items col-xs-12"
             >
               <div
-                class="col-xs-12 padding-15 margin-15-0 default-item-wrapper shadow-content"
+                class="col-xs-12 padding-15 margin-15-0 default-item-wrapper default-main-wrapper"
               >
                 <div class="default-user-contents col-xs-12 padding-0">
                   <div

@@ -58,6 +58,7 @@ class user_controller extends Controller
             'category_id' => 'required|integer|min:1',
             'activity_type' => 'required',
             //'national_code' => 'unique:myusers',
+            'verification_code' => 'required|numeric'
 		);
 		$this->validate($request,$rules);
 		

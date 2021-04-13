@@ -621,6 +621,11 @@ Route::group(['middleware' => [login::class]], function () {
         'as' => 'do_extra_buyad_capacity_payment_from_wallet'
     ]);
     
+    Route::post('/app/get_product_list', [
+        'uses' => 'Product\product_list_controller@get_product_list',
+        'as' => 'get_product_list',
+    ]);
+    
 });
 
 Route::post('/send_phone_verification_code_for_password_reset', [
