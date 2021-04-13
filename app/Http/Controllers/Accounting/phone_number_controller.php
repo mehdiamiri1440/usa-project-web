@@ -143,7 +143,7 @@ class phone_number_controller extends Controller
         ]);
 
         $viewr_user_record = myuser::find(session('user_id'));
-        $buyAd_id = $request->buyAd_id;
+        $buyAd_id = $request->ba_id;
         $buyer_id = $request->b_id;
         $user_id = session('user_id');
 
