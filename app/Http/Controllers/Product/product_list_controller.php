@@ -102,7 +102,8 @@ class product_list_controller extends Controller
             'active_pakage_type',
             'response_rate',
             'response_time',
-            'ums',
+            'ums', // unique message senders to the user
+            'upr', // unique phone number receivers
             'created_at',
         ],
         'profile_info' => [
@@ -263,7 +264,7 @@ class product_list_controller extends Controller
 
         foreach($products as $product)
         {
-            $response_info = $this->get_user_response_info($product['user_info']->id);
+            // $response_info = $this->get_user_response_info($product['user_info']->id);
             if(Carbon::now()->diffInMonths($product['main']->updated_at) >= 3){
                 $product['user_info']->response_time =  -1;
             }
@@ -295,7 +296,7 @@ class product_list_controller extends Controller
                             FLOOR((select count(distinct(m1.sender_id)) from messages as m1 where m1.is_read = true and m1.receiver_id = products.myuser_id and not exists(select * from messages where messages.receiver_id = products.myuser_id and m1.is_read = false ))/(select count(distinct(messages.sender_id)) from messages where messages.receiver_id = products.myuser_id) * 100 )) as response_rate,
                             (
                                 (select sum(TIMESTAMPDIFF(HOUR,messages.created_at,messages.updated_at)) from messages where messages.receiver_id = products.myuser_id and messages.is_read = true and messages.created_at between SUBDATE(NOW(), INTERVAL 3 MONTH) and NOW() ) / (select count(messages.id) from messages where messages.is_read = true and messages.receiver_id = products.myuser_id and messages.created_at between SUBDATE(NOW(), INTERVAL 3 MONTH) and NOW() )
-                            ) as response_time,(select categories.category_name from categories where c.parent_id = categories.id) as category_name,(select count(id) from product_media where product_media.product_id = products.id) as photos_count,(select file_path from product_media where product_media.product_id = products.id order by product_media.id asc limit 1) as file_path,(select count(distinct(messages.sender_id)) from messages where messages.receiver_id = products.myuser_id) as ums')
+                            ) as response_time,(select categories.category_name from categories where c.parent_id = categories.id) as category_name,(select count(id) from product_media where product_media.product_id = products.id) as photos_count,(select file_path from product_media where product_media.product_id = products.id order by product_media.id asc limit 1) as file_path,(select count(distinct(messages.sender_id)) from messages where messages.receiver_id = products.myuser_id) as ums,(select count(distinct(phone_number_view_logs.viewer_id)) from phone_number_view_logs where phone_number_view_logs.myuser_id = products.myuser_id) as upr')
                         ->distinct('products.id')
                         ->whereNull('products.deleted_at')
                         ->where('products.confirmed', true)
@@ -575,8 +576,11 @@ class product_list_controller extends Controller
                 $b = $item2['main']->is_elevated == true ? $item2['main']->updated_at :  $item2['main']->is_elevated;
     
                 if($a == $b){
-                    $c = (Carbon::now()->diffInDays($item1['main']->updated_at) < 3) ? 0 : abs($user_response_info['ums'] - $item1['user_info']->ums);
-                    $d = (Carbon::now()->diffInDays($item2['main']->updated_at) < 3) ? 0 : abs($user_response_info['ums'] - $item2['user_info']->ums);
+                    $item1_degree = $item1['user_info']->ums + $item1['user_info']->upr;
+                    $item2_degree = $item2['user_info']->ums + $item2['user_info']->upr;
+
+                    $c = (Carbon::now()->diffInDays($item1['main']->updated_at) < 3) ? 0 : abs($user_response_info['ums'] + $user_response_info['upr'] - $item1_degree);
+                    $d = (Carbon::now()->diffInDays($item2['main']->updated_at) < 3) ? 0 : abs($user_response_info['ums'] + $user_response_info['upr'] - $item2_degree);
     
                     if($c == $d){
                         $e = (((Carbon::now()->diffInDays($item1['main']->updated_at) < 2)) || ($item1['user_info']->response_time > 0 )) ? $item1['user_info']->ums : 10000;
@@ -687,9 +691,15 @@ class product_list_controller extends Controller
             $response_time =  round($total_delay/$total_contacts_count);
         }
 
-        $ums = $total_contacts_count;
+        $ums = $total_contacts_count; // UMS stands for unique message senders to this user
 
-        return compact('response_rate','response_time','ums'); // UMS stands for unique message senders to this user
+        $user_phone_view_log = DB::table('phone_number_view_logs')->where('myuser_id',$user_id)
+                        ->select(DB::raw("DISTINCT(viewer_id) as cnt"))
+                        ->first();
+
+        $upr = $user_phone_view_log['cnt'];
+
+        return compact('response_rate','response_time','ums','upr'); // UMS stands for unique message senders to this user
     }
 
     protected function apply_province_filter_in_query($query,$province_id)

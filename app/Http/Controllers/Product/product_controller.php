@@ -1244,11 +1244,11 @@ class product_controller extends Controller
             return collect($buyAd)->only('myuser_id');
         });
 
-        $result = DB::table('messages')->selectRaw("receiver_id as user_id,count(DISTINCT(sender_id)) as in_degree,((SELECT count(DISTINCT(sender_id)) as cnt from messages where receiver_id = user_id and is_read = true)/count(DISTINCT(sender_id))) * 100 as response_rate,(SELECT count(DISTINCT(receiver_id)) as cnt from messages where sender_id = user_id) as out_degree")
+        $result = DB::table('messages')->selectRaw("receiver_id as user_id,count(DISTINCT(sender_id)) as in_degree,((SELECT count(DISTINCT(sender_id)) as cnt from messages where receiver_id = user_id and is_read = true)/count(DISTINCT(sender_id))) * 100 as response_rate,(SELECT count(DISTINCT(receiver_id)) as cnt from messages where sender_id = user_id) as out_degree,(select count(DISTINCT(viewer_id)) as cnt from phone_number_view_logs where myuser_id = user_id) as upr")
                                             ->whereIn('receiver_id',$buyer_ids)
                                             ->groupBy('user_id')
-                                            ->havingRaw('in_degree >= 20 and out_degree>= 20 and response_rate >= 95')
-                                            ->orderByRaw('response_rate desc,out_degree,in_degree')
+                                            ->havingRaw('in_degree >= 20 and out_degree>= 20 and upr >=20 and response_rate >= 95')
+                                            ->orderByRaw('response_rate desc,out_degree,in_degree,upr')
                                             ->get()
                                             ->all();
 
@@ -1336,6 +1336,9 @@ class product_controller extends Controller
                                         ->select(DB::raw("date(last_login_date) as date"))
                                         ->whereNotNull('last_login_date');
 
+        $phone_number_view_record = DB::table('phone_number_view_logs')->where('viewer_id',$user_id)
+                                        ->select(DB::raw("date(created_at) as date"));
+
         $result = DB::table('profiles')->where('myuser_id',$user_id)
                                     ->select(DB::raw("distinct(date(updated_at)) as date"))
                                     ->union($sending_message_records)
@@ -1344,6 +1347,7 @@ class product_controller extends Controller
                                     ->union($buyAd_register_records)
                                     ->union($user_record)
                                     ->union($login_record)
+                                    ->union($phone_number_view_record)
                                     ->orderBy('date','desc')
                                     ->get();
 

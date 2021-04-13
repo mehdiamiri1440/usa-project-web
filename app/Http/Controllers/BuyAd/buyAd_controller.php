@@ -80,6 +80,7 @@ class buyAd_controller extends Controller
         'buy_ads.confirmed',
         'buy_ads.myuser_id',
         'buy_ads.reply_capacity',
+        'buy_ads.phone_view_capacity',
         'myusers.phone_view_permission',
         // 'myusers.user_name',
         'myusers.first_name',
@@ -738,14 +739,14 @@ class buyAd_controller extends Controller
         $query = DB::table('buy_ads')
                     ->join('myusers', 'buy_ads.myuser_id', '=', 'myusers.id')
                     ->where('buy_ads.confirmed', true)
-                    ->where('buy_ads.reply_capacity','>',0)
+                    ->where(function($q){
+                        return $q = $q->where('buy_ads.reply_capacity','>',0)
+                                        ->orWhere('buy_ads.phone_view_capacity','>',0);
+                    })
+                    // ->where('buy_ads.reply_capacity','>',0)
                     ->whereNull('buy_ads.deleted_at')
                     ->whereBetween('buy_ads.updated_at',[Carbon::now()->subWeeks(2),Carbon::now()])
                     ->where('buy_ads.myuser_id','<>',$user->id);
-        
-        // if($user->active_pakage_type == 0){
-        //     $query = $query->where('buy_ads.updated_at','<',Carbon::now()->subHours(2));
-        // }
 
         $query = $query->select($this->related_buyAd_list_required_fields)
                     ->orderBy('buy_ads.updated_at', 'desc');
@@ -754,8 +755,12 @@ class buyAd_controller extends Controller
 
         $golden_buyAds_update_date = Carbon::now()->subHours(2);
         $buyAds->each(function($buyAd) use($golden_buyAds_update_date){
-            if(str_split($buyAd->phone_view_permission)[1] == 1){
+            if(str_split($buyAd->phone_view_permission)[1] == 1 && $buyAd->phone_view_capacity > 0){
                 $buyAd->has_phone = true;
+            }
+
+            if($buyAd->reply_capacity > 0){
+                $buyAd->has_msg = true;
             }
 
             if($buyAd->updated_at > $golden_buyAds_update_date)
@@ -1166,6 +1171,9 @@ class buyAd_controller extends Controller
         $login_record = DB::table('myusers')->where('id',$user_id)
                                         ->select(DB::raw("date(last_login_date) as date"))
                                         ->whereNotNull('last_login_date');
+                                        
+        $phone_number_view_record = DB::table('phone_number_view_logs')->where('viewer_id',$user_id)
+                                        ->select(DB::raw("date(created_at) as date"));
 
         $result = DB::table('profiles')->where('myuser_id',$user_id)
                                     ->select(DB::raw("distinct(date(updated_at)) as date"))
@@ -1175,6 +1183,7 @@ class buyAd_controller extends Controller
                                     ->union($buyAd_register_records)
                                     ->union($user_record)
                                     ->union($login_record)
+                                    ->union($phone_number_view_record)
                                     ->orderBy('date','desc')
                                     ->get();
 

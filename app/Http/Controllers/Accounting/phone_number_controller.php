@@ -143,6 +143,9 @@ class phone_number_controller extends Controller
         ]);
 
         $viewr_user_record = myuser::find(session('user_id'));
+        $buyAd_id = $request->buyAd_id;
+        $buyer_id = $request->b_id;
+        $user_id = session('user_id');
 
         if($viewr_user_record && $viewr_user_record->active_pakage_type == 0){
             return response()->json([
@@ -154,9 +157,10 @@ class phone_number_controller extends Controller
         $related_record = DB::table('myusers')
                                 ->join('buy_ads','buy_ads.myuser_id','=','myusers.id')
                                 ->whereNull('buy_ads.deleted_at')
-                                ->where('myusers.id',$request->b_id)
-                                ->where('myusers.id','<>',session('user_id'))
-                                ->where('buy_ads.id',$request->ba_id)
+                                ->where('myusers.id',$buyer_id)
+                                ->where('myusers.id','<>',$user_id)
+                                ->where('buy_ads.id',$buyAd_id)
+                                ->where('buy_ads.phone_view_capacity','>',0)
                                 ->where('buy_ads.confirmed',true)
                                 ->whereIn('myusers.phone_view_permission',['0101','1101','0111','1111'])
                                 ->select('myusers.*')
@@ -186,6 +190,25 @@ class phone_number_controller extends Controller
                     'msg' => 'سقف تعداد روزانه ی دسترسی شما به شماره تماس کاربران پر شده است'
                 ],404);
             }  
+        }
+
+        $already_replied_to_the_buyAd = DB::table('buy_ad_reply_meta_datas')
+                                                ->where([
+                                                    ['buy_ad_id','=',$buyAd_id],
+                                                    ['replier_id','=',$user_id],
+                                                ])->get()->count();
+
+        if($already_replied_to_the_buyAd == 0){
+            $now = Carbon::now();
+
+            DB::table('buy_ad_reply_meta_datas')->insert([
+                'created_at' => $now,
+                'updated_at' => $now,
+                'replier_id' => $user_id,
+                'buy_ad_id'  => $buyAd_id
+            ]);
+
+            DB::table('buy_ads')->where('id',$buyAd_id)->decrement('phone_view_capacity', 1);
         }
 
         $this->insert_phone_number_view_log_record(session('user_id'),$request->b_id,'BUYER',$request->item,true);
@@ -271,5 +294,58 @@ class phone_number_controller extends Controller
             'status' => true,
             'users' => $result
         ],200);
+    }
+
+    protected function is_user_allowed_to_reply_the_buyAd($sender_id,$buyAd_id)
+    {
+        $today = Carbon::today();
+        $tomorrow = Carbon::tomorrow();
+
+        $already_replied_to_the_buyAd = DB::table('buy_ad_reply_meta_datas')
+                                                ->where([
+                                                    ['buy_ad_id','=',$buyAd_id],
+                                                    ['replier_id','=',$sender_id],
+                                                ])->get()->count();
+
+        if($already_replied_to_the_buyAd > 0){
+            $buyAd_record = buyAd::find($buyAd_id);
+
+            return $buyAd_record->myuser_id;
+        }
+
+        $user_reply_records = DB::table('buy_ad_reply_meta_datas')
+                                    ->join('myusers','myusers.id','=','buy_ad_reply_meta_datas.replier_id')
+                                    ->where('replier_id',$sender_id)
+                                    ->whereBetween('buy_ad_reply_meta_datas.created_at',[$today, $tomorrow])
+                                    ->get();
+        
+        $today_replies_count = $user_reply_records->count();
+        if($today_replies_count > 0){
+            $user_daily_reply_capacity = config("subscriptionPakage.type-{$user_reply_records->first()->active_pakage_type}.buyAd-reply-count");
+            
+            if($today_replies_count > $user_daily_reply_capacity + $user_reply_records->first()->extra_buyAd_reply_capacity){
+                return false;
+            }
+        }
+
+        $buyAd_record = buyAd::find($buyAd_id);
+
+        if($already_replied_to_the_buyAd == true)
+        {
+            return $buyAd_record->myuser_id;
+        }
+        
+        $now = Carbon::now();
+
+        DB::table('buy_ad_reply_meta_datas')->insert([
+            'created_at' => $now,
+            'updated_at' => $now,
+            'replier_id' => $sender_id,
+            'buy_ad_id'  => $buyAd_record->id
+        ]);
+
+        DB::table('buy_ads')->where('id',$buyAd_record->id)->decrement('reply_capacity', 1);
+
+        return $buyAd_record->myuser_id;
     }
 }
