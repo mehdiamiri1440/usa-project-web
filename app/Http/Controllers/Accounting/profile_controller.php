@@ -328,12 +328,23 @@ class profile_controller extends Controller
         }
 
         //adding user phone view permission status
-        if(str_split($result['user_info']['phone_view_permission'])[0] == 1){
-            $result['user_info']['phone_allowed'] = true;
+        if($result['user_info']['is_seller']){
+            if(str_split($result['user_info']['phone_view_permission'])[0] == 1){
+                $result['user_info']['phone_allowed'] = true;
+            }
+            else{
+                $result['user_info']['phone_allowed'] = false;
+            }
         }
         else{
-            $result['user_info']['phone_allowed'] = false;
+            if(str_split($result['user_info']['phone_view_permission'])[1] == 1){
+                $result['user_info']['phone_allowed'] = true;
+            }
+            else{
+                $result['user_info']['phone_allowed'] = false;
+            }
         }
+        
 
         unset($result['user_info']['phone_view_permission']);
 
