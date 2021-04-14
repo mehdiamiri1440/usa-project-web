@@ -1523,6 +1523,13 @@ div.items-wrapper {
           </div>
         </div>
       </aside>
+
+      <script
+        v-if="jsonLDObject"
+        v-html="jsonLDObject"
+        type="application/ld+json"
+      ></script>
+      
     </main>
     <footer
       class="category-footer container"
