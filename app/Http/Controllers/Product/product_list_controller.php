@@ -1097,7 +1097,7 @@ class product_list_controller extends Controller
             return ($a < $b) ? 1 : -1;
         });
 
-        $products = array_slice($products,0,12);
+        $products = array_slice($products,0,16);
         
         return view('layout.product-list',[
             'products' => $products,
