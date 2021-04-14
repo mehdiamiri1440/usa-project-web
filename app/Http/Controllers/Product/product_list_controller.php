@@ -14,6 +14,7 @@ use App\Models\tag;
 use Illuminate\Support\Facades\Cache;
 use Carbon\Carbon;
 use App\Http\Middleware\login;
+use App\Models\phone_number_view_log;
 
 
 class product_list_controller extends Controller
@@ -693,11 +694,17 @@ class product_list_controller extends Controller
 
         $ums = $total_contacts_count; // UMS stands for unique message senders to this user
 
-        $user_phone_view_log = DB::table('phone_number_view_logs')->where('myuser_id',$user_id)
+        $user_phone_view_log = phone_number_view_log::where('myuser_id',$user_id)
                         ->select(DB::raw("DISTINCT(viewer_id) as cnt"))
+                        ->get()
                         ->first();
 
-        $upr = $user_phone_view_log['cnt'];
+        if($user_phone_view_log){
+            $upr = $user_phone_view_log->cnt;
+        }
+        else{
+            $upr = 0;
+        }
 
         return compact('response_rate','response_time','ums','upr'); // UMS stands for unique message senders to this user
     }
