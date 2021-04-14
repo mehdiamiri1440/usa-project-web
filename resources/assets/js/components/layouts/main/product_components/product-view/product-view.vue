@@ -171,50 +171,6 @@ button.send-message-button {
   padding: 0 15px;
 }
 
-.phone-number-wrapper {
-  margin: 35px 0;
-  padding: 0 15px;
-}
-
-.phone-number {
-  display: flex;
-  justify-content: space-between;
-  color: #404b55;
-}
-
-.phone-number p {
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.warning-wrapper {
-  background: #fffbe5;
-  border-radius: 12px;
-  direction: rtl;
-  padding: 10px 15px;
-  margin-top: 15px;
-}
-
-.warning-title {
-  font-size: 16px;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-.warning-title i {
-  font-size: 23px;
-  position: relative;
-  top: 4px;
-}
-
-.spinner-border {
-  width: 1.5rem;
-  height: 1.5rem;
-  top: -5px;
-  position: relative;
-  left: 2px;
-}
-
 @media screen and (max-width: 1199px) {
   .box-title {
     margin: 0 auto 15px;
@@ -235,69 +191,22 @@ button.send-message-button {
   #main {
     padding-top: 56px;
   }
+}
+
+@media screen and (max-width: 450px) {
   .default-carousel-item {
     display: none;
   }
 
   .default-carousel-item:first-of-type {
     display: block;
+    width: 100%;
   }
 }
 </style>
 
 <template>
   <div class="container">
-    <!--modal-->
-    <div class="container" v-if="isActivePhone">
-      <div
-        id="phone-information-modal"
-        class="pricing-modal modal fade"
-        tabindex="-1"
-        role="dialog"
-      >
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <a
-                href="#"
-                class="close-modal"
-                @click.prevent="closePhoneModal()"
-              >
-                <i class="fa fa-times"></i>
-              </a>
-              <div class="modal-title">
-                <span>اطلاعات تماس</span>
-              </div>
-            </div>
-
-            <div class="modal-body col-xs-12">
-              <div class="phone-number-wrapper">
-                <a :href="'tel:' + userPhone" class="phone-number">
-                  <p>
-                    <i class="fa fa-phone-square-alt"></i>
-                    {{ userPhone }}
-                  </p>
-                  <p>شماره تماس</p>
-                </a>
-                <div class="warning-wrapper">
-                  <p class="warning-title">
-                    <i class="fa fa-exclamation-circle"></i>
-
-                    هشدار پلیس
-                  </p>
-                  <p class="warning-text">
-                    لطفاً پیش از انجام معامله و هر نوع پرداخت وجه، از صحت کالا
-                    یا خدمات ارائه شده، به صورت حضوری اطمینان حاصل نمایید.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-      </div>
-    </div>
     <main id="main" class="row">
       <div class="col-xs-12 col-lg-9 pull-right">
         <section class="main-content">
@@ -359,7 +268,7 @@ button.send-message-button {
                     v-for="(item, index) in 4"
                     :key="index"
                     :class="{ 'hidden-xs': index >= 2 }"
-                    class="col-lg-3 col-md-4 col-sm-6 col-xs-12 default-carousel-item"
+                    class="col-lg-3 col-md-4 col-xs-6 default-carousel-item"
                   >
                     <article class="carousel-item box-content col-xs-12">
                       <span
@@ -615,8 +524,8 @@ export default {
       }
     },
     activePhoneCall: function (isModal) {
-      this.isActivePhone = true;
       this.getPhoneLoader = true;
+      this.isActivePhone = false;
       axios
         .post("/get_seller_phone_number", {
           s_id: this.product.user_info.id,
@@ -627,21 +536,50 @@ export default {
           if (isModal) {
             this.$nextTick(() => {
               this.userPhone = response.data.phone;
+              this.handleBackKeys();
 
-              $("#phone-information-modal").modal("show");
-              this.getPhoneLoader = false;
-              $("#phone-information-modal").on("shown.bs.modal", () => {
-                this.handleBackKeys();
-              });
-              $("#phone-information-modal").on("hidden.bs.modal", () => {
+              var buskoolInfo = document.createElement("div");
+              buskoolInfo.className = "phone-number-wrapper";
+              buskoolInfo.innerHTML = `<a href="'tel:' + ${this.userPhone}" class="phone-number">
+                        <p>
+                          <i class="fa fa-phone-square-alt"></i>
+                          ${this.userPhone}
+                        </p>
+                        <p>شماره تماس</p>
+                      </a>
+                      <div class="warning-wrapper">
+                        <p class="warning-title">
+                          <i class="fa fa-exclamation-circle"></i>
+
+                          توصیه باسکول
+                        </p>
+                        <p class="warning-text">
+                          توصیه باسکول همواره به انجام معاملات حضوری است.
+                        </p>
+                      </div>`;
+
+              swal({
+                content: buskoolInfo,
+                className: "custom-swal-with-cancel",
+                buttons: {
+                  close: {
+                    text: "بستن",
+                    className: "bg-cancel",
+                  },
+                },
+              }).then((value) => {
                 this.isActivePhone = false;
+                this.getPhoneLoader = false;
               });
             });
           } else {
-            this.$nextTick(() => {
-              this.userPhone = response.data.phone;
-              $("#phone-number-wrapper").collapse("show");
+            this.userPhone = response.data.phone;
               this.getPhoneLoader = false;
+              this.isActivePhone = false;
+            this.$nextTick(() => {
+              
+              console.log($("#phone-number-wrapper"));
+              $("#phone-number-wrapper").collapse("show");
             });
           }
         })

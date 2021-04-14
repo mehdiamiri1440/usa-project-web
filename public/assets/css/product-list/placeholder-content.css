@@ -377,14 +377,14 @@ input,textarea {
 /*product view user info styles*/
 
 .user-info-wrapper .default-wrapper-main-image {
-  width: 90px;
-  height: 90px;
+  width: 70px;
+  height: 70px;
   border-radius: 100px;
   margin: 0 auto;
 }
 
 .default-user-info-wrapper {
-  padding: 30px 20px 15px !important;
+  padding: 30px 20px 15px ;
 }
 
 /*end product view user info styles*/

@@ -516,40 +516,6 @@ li.static-item > button i {
   padding: 15px 10px;
 }
 
-.phone-number {
-  display: flex;
-  justify-content: space-between;
-  color: #404b55;
-  direction: ltr;
-}
-
-.phone-number p {
-  font-size: 16px;
-  font-weight: bold;
-}
-
-.warning-wrapper {
-  background: #fffbe5;
-  border-radius: 12px;
-  direction: rtl;
-  padding: 5px 15px 10px;
-  margin-top: 15px;
-  text-align: right;
-  line-height: 1.618;
-}
-
-.warning-title {
-  font-size: 16px;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-.warning-title i {
-  font-size: 23px;
-  position: relative;
-  top: 4px;
-}
-
 @media screen and (max-width: 991px) {
   .main-content {
     padding: 59px 0 0;
@@ -811,12 +777,10 @@ li.static-item > button i {
                         <p class="warning-title">
                           <i class="fa fa-exclamation-circle"></i>
 
-                          هشدار پلیس
+                          توصیه باسکول
                         </p>
                         <p class="warning-text">
-                          لطفاً پیش از انجام معامله و هر نوع پرداخت وجه، از صحت
-                          کالا یا خدمات ارائه شده، به صورت حضوری اطمینان حاصل
-                          نمایید.
+                          توصیه باسکول همواره به انجام معاملات حضوری است.
                         </p>
                       </div>
                     </div>
@@ -1000,12 +964,10 @@ li.static-item > button i {
                         <p class="warning-title">
                           <i class="fa fa-exclamation-circle"></i>
 
-                          هشدار پلیس
+                          توصیه باسکول
                         </p>
                         <p class="warning-text">
-                          لطفاً پیش از انجام معامله و هر نوع پرداخت وجه، از صحت
-                          کالا یا خدمات ارائه شده، به صورت حضوری اطمینان حاصل
-                          نمایید.
+                          توصیه باسکول همواره به انجام معاملات حضوری است.
                         </p>
                       </div>
                     </div>
@@ -1184,7 +1146,7 @@ export default {
           }
         });
     },
-     activePhoneCall: function (buyAdUserId, buyAdId) {
+    activePhoneCall: function (buyAdUserId, buyAdId) {
       let id = "#loader-phone-" + buyAdId;
 
       $(id).prop("disabled", true);
@@ -1247,7 +1209,7 @@ export default {
         event_label: labelName,
       });
     },
-   
+
     hideReplyBtn: function (id) {
       let itemFirst = id + " span:first-child";
       let itemLast = id + " span:last-child";

@@ -226,6 +226,11 @@ p.response-rate span {
 }
 
 @media screen and (max-width: 1199px) {
+  .default-button-user-item {
+    height: 20px;
+    margin-top: 27px;
+  }
+
   .rating-stars .review-count-wrapper {
     padding: 12px;
   }
@@ -311,7 +316,7 @@ p.response-rate span {
 
     text-align: right;
 
-    margin-top: 27px;
+    margin-top: 15px;
 
     margin-right: 15px;
   }
@@ -599,10 +604,10 @@ p.response-rate span {
       </div>
       <div class="default-user-action-buttons">
         <div
-          class="placeholder-content default-button-full-with margin-0"
+          class="placeholder-content default-button-full-with margin-0 hidden-xs hidden-md hidden-sm"
         ></div>
         <div
-          class="placeholder-content default-button-full-with margin-10-0"
+          class="placeholder-content default-button-user-item default-button-full-with margin-10-0"
         ></div>
       </div>
     </div>
