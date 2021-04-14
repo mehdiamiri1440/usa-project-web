@@ -892,7 +892,7 @@ div.items-wrapper {
   }
 
   .default-items {
-    padding: 0;
+    padding: 3px;
   }
 
   .banner-wrapper .circle-item-wrapper {
@@ -1951,14 +1951,15 @@ export default {
       });
     },
     cehckPageWidth() {
-      let pageWidth = window.outerWidth;
-      if (pageWidth <= 555) {
-        this.listIsGrid = true;
-      } else if (pageWidth <= 991) {
-        this.listIsGrid = false;
-      } else {
-        this.listIsGrid = true;
-      }
+      this.listIsGrid = true;
+      // let pageWidth = window.outerWidth;
+      // if (pageWidth <= 555) {
+      //   this.listIsGrid = true;
+      // } else if (pageWidth <= 991) {
+      //   this.listIsGrid = false;
+      // } else {
+      //   this.listIsGrid = true;
+      // }
     },
   },
   watch: {

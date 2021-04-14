@@ -938,11 +938,9 @@ div.items-wrapper {
   #article-list > div > div {
     padding: 0;
   }
-
   .default-items {
-    padding: 0;
+    padding: 3px;
   }
-
   .banner-wrapper .circle-item-wrapper {
     left: 20px;
     width: 110px;
@@ -1471,7 +1469,7 @@ div.items-wrapper {
               <div
                 v-for="(defaultItem, index) in 12"
                 :key="index"
-                class="default-items col-sm-4 col-md-3 default-grid"
+                class="default-items col-xs-6 col-sm-4 col-md-3 default-grid"
               >
                 <div
                   class="col-xs-12 margin-15-0 default-item-wrapper default-main-wrapper"
@@ -2051,12 +2049,15 @@ export default {
       });
     },
     cehckPageWidth() {
-      let pageWidth = window.outerWidth;
-      if (pageWidth <= 991) {
-        this.listIsGrid = false;
-      } else {
-        this.listIsGrid = true;
-      }
+      this.listIsGrid = true;
+      // let pageWidth = window.outerWidth;
+      // if (pageWidth <= 555) {
+      //   this.listIsGrid = true;
+      // } else if (pageWidth <= 991) {
+      //   this.listIsGrid = false;
+      // } else {
+      //   this.listIsGrid = true;
+      // }
     },
   },
   watch: {
