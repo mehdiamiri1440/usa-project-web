@@ -86,7 +86,7 @@
 /******/ 		if (__webpack_require__.nc) {
 /******/ 			script.setAttribute("nonce", __webpack_require__.nc);
 /******/ 		}
-/******/ 		script.src = __webpack_require__.p + "chunks/" + ({}[chunkId]||chunkId) + "." + {"0":"db658ba321225499499f","1":"d1afd4a2b1d08ca91ab9","2":"746cb00d813e11045a33","3":"f34db5b365da60388297","4":"40e290ed3ec401016c30","5":"68eb79e6b8a63712e449","6":"7ac5b3a223c507302f08","7":"2f456fe32693c6e1ce4a","8":"ff453ed3e1251a87a79f","9":"d38df4ec5d7dfac18797","10":"1f0accef433e628e30f1","11":"0ae07d124a5d8ef53369","12":"603f9552022404323cd5","13":"dc0d9e7b02682dddf17a","14":"8f4d59f37b8ed8bdae8e","15":"d6d256663896dda32119","16":"abf55c2d60b547c92a97","17":"98cb113bff98472bd46c","18":"86f8b4201bd1c7b65183","19":"9c6e8f9c702b9feb1156","20":"130d0f4763ceaf735e1a","21":"b4f66e3c2dd7dd4d13b1","22":"953ec6f06eafd7523e9f","23":"04bea826ce95fdb34fd6","24":"05a496a1573ae485a53c","25":"ece6d43b19bc4aa3b158","26":"e82c87094c5c62e8ac4d","27":"c0bf6ea7dcd9468f4bab","28":"f9b056c26892db11b5b0","29":"1c1226606f860d7f66b4","30":"7f8d0783d856c3e94792","31":"e8de5f7aa3da80b1d293","32":"87aa856b82af7a73d0c3","33":"586d1fc6d5df632dc932","34":"d5889444ba5c2fe270fd","35":"12265eaa0d846fda0cf2","36":"85f8d42c53fc9e04ead9","37":"a02b0c8d73a89ded5cea","38":"932ee83c47d9382dd5c9"}[chunkId] + ".js";
+/******/ 		script.src = __webpack_require__.p + "chunks/" + ({}[chunkId]||chunkId) + "." + {"0":"db658ba321225499499f","1":"d1afd4a2b1d08ca91ab9","2":"746cb00d813e11045a33","3":"f34db5b365da60388297","4":"40e290ed3ec401016c30","5":"6ed17c47e5a2eca6e4a8","6":"7ac5b3a223c507302f08","7":"2f456fe32693c6e1ce4a","8":"ff453ed3e1251a87a79f","9":"d38df4ec5d7dfac18797","10":"1f0accef433e628e30f1","11":"0ae07d124a5d8ef53369","12":"603f9552022404323cd5","13":"dc0d9e7b02682dddf17a","14":"8f4d59f37b8ed8bdae8e","15":"d6d256663896dda32119","16":"abf55c2d60b547c92a97","17":"98cb113bff98472bd46c","18":"86f8b4201bd1c7b65183","19":"9c6e8f9c702b9feb1156","20":"130d0f4763ceaf735e1a","21":"b4f66e3c2dd7dd4d13b1","22":"953ec6f06eafd7523e9f","23":"04bea826ce95fdb34fd6","24":"05a496a1573ae485a53c","25":"ece6d43b19bc4aa3b158","26":"e82c87094c5c62e8ac4d","27":"c0bf6ea7dcd9468f4bab","28":"f9b056c26892db11b5b0","29":"1c1226606f860d7f66b4","30":"7f8d0783d856c3e94792","31":"e8de5f7aa3da80b1d293","32":"87aa856b82af7a73d0c3","33":"586d1fc6d5df632dc932","34":"d5889444ba5c2fe270fd","35":"12265eaa0d846fda0cf2","36":"85f8d42c53fc9e04ead9","37":"a02b0c8d73a89ded5cea","38":"932ee83c47d9382dd5c9"}[chunkId] + ".js";
 /******/ 		var timeout = setTimeout(onScriptComplete, 120000);
 /******/ 		script.onerror = script.onload = onScriptComplete;
 /******/ 		function onScriptComplete() {
@@ -67390,7 +67390,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n.main_popup_content .main-pop-up {\n    font-size: 15px;\n    line-height: 1.618;\n    margin-bottom: 15px;\n}\n\n\n.main_popup_content {\n    position: relative;\n    text-align: center;\n    background: #fff;\n    border-radius: 3px;\n    padding: 50px;\n    margin: 0;\n    direction: rtl;\n}\n.main_popup_content i.fa-times {\n    color: #fff;\n    position: absolute;\n    top: -16px;\n    right: -14px;\n    font-size: 18px;\n    background: rgba(0,0,0,0.6);\n    border-radius: 50px;\n    height: 30px;\n    width: 30px;\n    padding-top: 5px;\n}\n\n", ""]);
+exports.push([module.i, "\n.main_popup_content .main-pop-up {\n    font-size: 15px;\n    line-height: 1.618;\n    margin-bottom: 15px;\n}\n\n\n.main_popup_content {\n    position: relative;\n    text-align: center;\n    background: #fff;\n    border-radius: 3px;\n    padding: 50px;\n    margin: 0;\n    direction: rtl;\n}\n.main_popup_content i.fa-times {\n    color: #fff;\n    position: absolute;\n    top: -16px;\n    right: -14px;\n    font-size: 18px;\n    background: rgba(0,0,0,0.6);\n    border-radius: 50px;\n    height: 30px;\n    width: 30px;\n    padding-top: 5px;\n}\n\n.swal-text:last-child{\n    margin-bottom: 0  !important;\n}", ""]);
 
 // exports
 
@@ -69989,8 +69989,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         className: "custom-swal-with-cancel",
         buttons: {
           success: {
-            text: "پرداخت",
+            text: "پرداخت از طریق درگاه",
             value: "pay"
+          },
+          wallet: {
+            text: "پرداخت از کیف پول",
+            value: "wallet",
+            className: "bg-blue"
           },
           close: {
             text: "بستن",
@@ -70001,7 +70006,43 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         switch (value) {
           case "pay":
             window.location.href = "/payment/elevator/" + self.productId;
-
+            break;
+          case "wallet":
+            axios.post("/wallet-expend/elevator", {
+              product_id: self.productId
+            }).then(function (response) {
+              swal({
+                title: "نردبان اعمال شد",
+                text: "اعمال نردبان با موفقیت انجام شد.",
+                icon: "success",
+                className: "custom-swal-with-cancel",
+                buttons: {
+                  close: {
+                    text: "بستن",
+                    value: "close",
+                    className: "bg-cancel"
+                  }
+                }
+              }).then(function (value) {
+                if (value == "close") {
+                  window.location.reload();
+                }
+              });
+            }).catch(function (err) {
+              swal({
+                title: "خطا",
+                text: err.response.data.msg,
+                icon: "error",
+                className: "custom-swal-with-cancel",
+                buttons: {
+                  close: {
+                    text: "بستن",
+                    value: "close",
+                    className: "bg-cancel"
+                  }
+                }
+              });
+            });
             break;
         }
       });
