@@ -524,7 +524,6 @@ a.profile-info-wrapper:focus {
       <div class="user-auth-info-wrapper">
         <button
           @click.prevent="$parent.showWallet()"
-          v-if="$parent.currentUser.user_info.wallet_balance"
           class="upgrade-account wallet hidden-xs hidden-sm"
           :to="{ name: 'dashboardPricingTableSeller' }"
         >

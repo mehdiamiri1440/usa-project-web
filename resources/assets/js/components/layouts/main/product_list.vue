@@ -762,11 +762,11 @@ div.items-wrapper {
 }
 
 @media screen and (max-width: 767px) {
-   #article-list.grid-items-wrapper {
+  #article-list.grid-items-wrapper {
     margin-left: 0 !important;
     margin-right: 0 !important;
   }
-  
+
   .rate-filter-desktop-wrapper,
   .rate-filter-mobile-wrapper {
     background: #fbfbfb;
@@ -861,8 +861,6 @@ div.items-wrapper {
 }
 
 @media screen and (max-width: 555px) {
- 
-
   .user-image {
     float: right;
 
@@ -1426,7 +1424,7 @@ div.items-wrapper {
               <div
                 v-for="(defaultItem, index) in 12"
                 :key="index"
-                class="default-items col-sm-4 col-md-3 default-grid"
+                class="default-items col-xs-6 col-sm-4 col-md-3 default-grid"
               >
                 <div
                   class="col-xs-12 margin-15-0 default-item-wrapper default-main-wrapper"
