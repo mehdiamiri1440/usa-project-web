@@ -11,10 +11,6 @@
 }
 
 .user-items-wrapper {
-  margin: 30px auto;
-}
-
-.user-items-wrapper li {
   direction: rtl;
   background: #fff;
   border-radius: 12px;
@@ -23,23 +19,45 @@
   align-items: center;
   border: 1px solid #e9ecef;
   padding: 11px 15px 12px;
-  margin-bottom: 21px;
+  margin-bottom: 25px;
 }
 
-.user-items-wrapper li p {
+.user-items-wrapper p {
   font-size: 20px;
   color: #313a43;
   text-align: right;
 }
 
-.user-items-wrapper li p i {
+.user-items-wrapper p i {
   position: relative;
   top: 2px;
   color: #777;
 }
 
-.user-items-wrapper li:nth-of-type(2n + 1) {
+li:nth-of-type(2n + 1) .user-items-wrapper {
   background: #f9faf5;
+}
+
+.doller-sign {
+  background: none;
+  border: none;
+  font-size: 22px;
+  position: relative;
+  top: 5px;
+  margin-left: 20px;
+  color: #556080;
+}
+
+.date-wrapper p {
+  font-weight: bold;
+  margin: 0 auto;
+  max-width: 110px;
+  background: #e9ecef;
+  text-align: center;
+  color: #555;
+  padding: 5px;
+  border-radius: 25px;
+  margin-bottom: 15px;
 }
 
 .green-button {
@@ -67,6 +85,9 @@
     text-align: center;
   }
 
+  .doller-sign {
+    margin-left: 5px;
+  }
   .main-content {
     padding-bottom: 90px;
   }
@@ -82,16 +103,30 @@
       </div>
 
       <div class="content-wrapper col-xs-12">
-        <ul class="user-items-wrapper" v-if="!loader && users.length">
+        <ul v-if="!loader && users.length">
           <li v-for="(user, index) in users" :key="index">
-            <p>
-              <i class="fa fa-user-circle"></i>
-              <span v-text="user.first_name + ' ' + user.last_name"> </span>
-            </p>
-            <button class="green-button" @click.prevent="openChat(user)">
-              <i class="fa fa-comment-alt"></i>
-              ارسال پیام
-            </button>
+            <div class="date-wrapper">
+              <p>1400/01/25</p>
+            </div>
+            <div class="user-items-wrapper">
+              <p>
+                <i class="fa fa-user-circle"></i>
+                <span v-text="user.first_name + ' ' + user.last_name"> </span>
+              </p>
+              <div>
+                <button
+                  class="doller-sign"
+                  @click.prevent="fireToast()"
+                  v-if="user.is_free"
+                >
+                  <i class="fa fa-dollar-sign"></i>
+                </button>
+                <button class="green-button" @click.prevent="openChat(user)">
+                  <i class="fa fa-comment-alt"></i>
+                  ارسال پیام
+                </button>
+              </div>
+            </div>
           </li>
         </ul>
         <div
@@ -112,6 +147,7 @@
         </ul>
       </div>
     </div>
+    <div class="toast">از کیف پول شما برای این دسترسی مبلغی کم شده است</div>
   </section>
 </template>
 
@@ -158,6 +194,13 @@ export default {
         event_category: categoryName,
         event_label: labelName,
       });
+    },
+    fireToast() {
+      var toast = $(".toast");
+      toast.addClass("show");
+      setTimeout(() => {
+        toast.removeClass("show");
+      }, 3000);
     },
   },
   mounted() {
