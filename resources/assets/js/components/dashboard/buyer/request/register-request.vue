@@ -13,7 +13,7 @@
 
 .main-content > div.wrapper-section {
   border: 1px solid #dadce0;
-  border-radius: 4px;
+  border-radius: 12px;
   min-height: 400px;
 }
 .main-content > div.wrapper-section.empty-section {
@@ -76,7 +76,7 @@
 
 .info-inquiry-wrapper {
   background: #e6f4f8;
-  border-radius: 4px;
+  border-radius: 12px;
   padding: 15px;
   margin-bottom: 20px;
 }

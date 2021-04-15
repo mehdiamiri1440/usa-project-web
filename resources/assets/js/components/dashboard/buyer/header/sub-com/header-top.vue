@@ -243,6 +243,7 @@ a.profile-info-wrapper:focus {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+  background-color: #dddddd;
 }
 
 .profile-information {

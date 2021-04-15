@@ -151,7 +151,7 @@ class phone_number_controller extends Controller
             return response()->json([
                 'status' => false,
                 'msg' => 'برای دسترسی به شماره تماس خریداران لطفا نوع عضویت خود را ارتقا دهید.'
-            ],404);
+            ],408);
         }
 
         $related_record = DB::table('myusers')

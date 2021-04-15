@@ -1,4 +1,14 @@
 <style scoped>
+.product-wrapper {
+  max-width: 1170px;
+  margin: 0 auto;
+  float: initial;
+}
+
+.items-wrapper {
+  padding: 0 3px;
+}
+
 #main-content {
   margin-top: 58px;
 }
@@ -97,6 +107,25 @@
   margin-top: -15px;
 }
 
+.default-grid {
+  padding: 0 3px;
+}
+
+.default-grid .default-main-article-content {
+  width: 100%;
+}
+.default-grid .default-wrapper-main-image {
+  width: 100%;
+  height: 160px;
+}
+.default-grid > div {
+  padding: 0;
+}
+
+.default-grid .default-article-contents {
+  padding: 15px;
+}
+
 @media screen and (max-width: 767px) {
   #main-content {
     margin-top: 123px;
@@ -152,37 +181,28 @@
   .article-contents > .main-image {
     padding: 0 !important;
   }
-  /* .default-items {
-    padding: 0;
-  } */
 }
 </style>
 <template>
   <div>
-    <main id="main-content" class="col-sm-12">
-      <div class="contents">
+    <main id="main-content" class="col-sm-12 contents">
+      <div class="row">
         <div class="title col-xs-12">
-          <div class="row">
-            <div class="col-xs-12 col-sm-4 pull-right">
-              <h1>فروشندگان پیشنهادی</h1>
-            </div>
-          </div>
+          <h1>فروشندگان پیشنهادی</h1>
         </div>
 
-        <div v-if="products.length > 0" class="col-xs-12 product-wrapper">
-          <div class="row">
-            <div
-              v-for="(product, productIndex) in products"
-              :key="product.main.id"
-              class="col-xs-12 pull-right"
-            >
-              <ProductArticle
-                :product="product"
-                :str="str"
-                :currentUser="currentUser"
-                :productIndex="productIndex"
-              />
-            </div>
+        <div v-if="products.length > 0" class="product-wrapper">
+          <div
+            v-for="(product, productIndex) in products"
+            :key="product.main.id"
+            class="col-xs-6 col-sm-4 items-wrapper pull-right col-md-3"
+          >
+            <ProductGridArticle
+              :product="product"
+              :str="str"
+              :currentUser="currentUser"
+              :productIndex="productIndex"
+            />
           </div>
           <div
             class="load-more-button col-xs-12"
@@ -243,49 +263,31 @@
           </div>
         </div>
 
-        <section v-else class="main-content col-xs-12">
-          <div class="row">
+        <section v-else class="product-wrapper">
+          <div
+            v-for="(defaultItem, index) in 8"
+            :key="index"
+            class="default-items col-xs-6 col-sm-4 col-md-3 default-grid"
+          >
             <div
-              v-for="(defaultItem, index) in 8"
-              :key="index"
-              class="default-items col-xs-12"
+              class="col-xs-12 margin-15-0 default-item-wrapper default-main-wrapper"
             >
+              <div class="default-wrapper-main-image pull-right">
+                <span class="default-main-image placeholder-content"></span>
+              </div>
+
               <div
-                class="col-xs-12 padding-15 margin-15-0 default-item-wrapper default-main-wrapper"
+                class="default-article-contents padding-0 margin-top-10 col-xs-12"
               >
-                <div class="default-user-contents col-xs-12 padding-0">
-                  <div
-                    class="placeholder-content default-article-user-image pull-right"
-                  ></div>
+                <div class="default-main-article-content">
+                  <span class="content-half-width placeholder-content"></span>
 
                   <span
-                    class="padding-top-5 placeholder-content margin-15 pull-right content-min-width"
+                    class="content-default-width placeholder-content"
                   ></span>
-                </div>
-
-                <div
-                  class="default-article-contents padding-0 margin-top-10 col-xs-12"
-                >
-                  <div class="default-wrapper-main-image pull-right">
-                    <span class="default-main-image placeholder-content"></span>
-                  </div>
-
-                  <div class="default-main-article-content">
-                    <span class="content-half-width placeholder-content"></span>
-
-                    <span
-                      class="content-default-width placeholder-content"
-                    ></span>
-
-                    <span
-                      class="content-min-width placeholder-content mobile-hidden"
-                    ></span>
-
-                    <span class="content-half-width placeholder-content"></span>
-                  </div>
-                  <!-- <span
-                    class="margin-top-10 placeholder-content default-button-min-with pull-left hidden-afetr-mobile-hidden"
-                  ></span> -->
+                  <span
+                    class="placeholder-content default-button-full-with pull-left mobile-hidden"
+                  ></span>
                 </div>
               </div>
             </div>
@@ -297,12 +299,14 @@
 </template>
 
 <script>
-import ProductArticle from "../../../layouts/main/product_components/product_article";
+import ProductGridArticle from "../../../layouts/main/product_components/Product_grid_article";
+// import ProductGridArticle from "./product_components/Product_grid_article";
+
 import { eventBus } from "../../../../router/router";
 
 export default {
   components: {
-    ProductArticle,
+    ProductGridArticle,
   },
   props: ["str"],
   data: function () {
@@ -319,8 +323,8 @@ export default {
       categoryId: "",
       subCategoryId: "",
       searchValue: "",
-      productCountInEachLoad: 10,
-      productCountInPage: 10,
+      productCountInEachLoad: 16,
+      productCountInPage: 16,
       continueToLoadProducts: true,
       loadMoreActive: false,
       loading: false,

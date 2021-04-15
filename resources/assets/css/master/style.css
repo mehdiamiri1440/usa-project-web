@@ -857,6 +857,7 @@ select#bd-month-end-date-id option {
   display: flex;
   justify-content: space-between;
   color: #404b55;
+  direction: ltr;
 }
 
 .phone-number p {

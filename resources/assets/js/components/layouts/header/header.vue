@@ -334,14 +334,14 @@ a.profile-info-wrapper:hover {
   float: right;
 
   margin-left: 10px;
-}
 
-.profile-image-wrapper img {
-  width: initial;
-  height: 100%;
-  position: relative;
-  left: -50%;
-  transform: translate(50%, 0);
+  background-position: center;
+
+  background-size: cover;
+
+  background-repeat: no-repeat;
+
+  background-color: #dddddd;
 }
 
 #web-profile-items {
@@ -847,18 +847,22 @@ a.profile-info-wrapper:hover {
                 href="#web-profile-items"
                 role="button"
               >
-                <div class="profile-image-wrapper">
-                  <img
-                    v-if="profile_photo"
-                    :src="storage_path + '/' + profile_photo"
-                    :alt="user_full_name"
-                  />
-                  <img
-                    v-else
-                    src="../../../../img/user-defult.png"
-                    :alt="user_full_name"
-                  />
-                </div>
+                <div
+                  class="profile-image-wrapper"
+                  v-if="profile_photo"
+                  :style="{
+                    backgroundImage:
+                      'url(' + storage_path + '/' + profile_photo + ')',
+                  }"
+                ></div>
+                <div
+                  v-else
+                  class="profile-image-wrapper"
+                  :style="{
+                    backgroundImage:
+                      'url(' + assets + 'assets/img/user-defult.png)',
+                  }"
+                ></div>
                 <div class="profile-information">
                   <span class="hidden-xs" v-text="user_full_name"></span>
                   <i class="fa fa-angle-down"></i>

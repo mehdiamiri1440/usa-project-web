@@ -1,7 +1,7 @@
 <style scoped>
 .main-article-wrapper {
-  border: 2px solid #ccc;
-  border-radius: 5px;
+  border: 1px solid #e9ecef;
+  border-radius: 12px;
   margin-bottom: 35px;
 }
 .main-article-wrapper:hover {
@@ -15,7 +15,7 @@
   padding: 5px 30px;
   background: none;
   border: none;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #e9ecef;
 }
 .user-image {
   width: 35px;
@@ -85,7 +85,7 @@ h3.article-title {
   height: 17px;
 }
 
-.main-content p {
+.main-content .main-article p {
   font-size: 13px;
   font-weight: 700;
   max-width: 500px;
@@ -103,9 +103,22 @@ h3.article-title {
   font-size: 18px;
   max-width: 280px;
   margin: 0 auto 20px;
+  border-radius: 8px;
   display: block;
 }
 
+.green-button.send-message-button {
+  background: none;
+  border: 1px solid #404b55;
+  color: #404b55;
+  transition: 300ms;
+}
+
+.green-button.send-message-button:hover {
+  background: #404b55;
+  color: #fff;
+  transition: 300ms;
+}
 button i {
   position: relative;
   top: 1px;
@@ -113,7 +126,7 @@ button i {
 }
 
 .is-user-valid {
-  border: 2px solid #00c569;
+  border: 1px solid #00c569;
 }
 
 .valid-user-badge {
@@ -149,12 +162,32 @@ button i {
   display: block;
 }
 
+.action-button-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.spinner-border {
+  width: 1.5rem;
+  height: 1.5rem;
+  top: -5px;
+  position: relative;
+  left: 2px;
+}
+
+.green-button.disable {
+  background: #e0e0e0;
+}
+
 @media screen and (max-width: 767px) {
   .main-article {
     padding: 15px;
   }
   .article-image {
     width: 100px;
+  }
+  .action-button-wrapper {
+    flex-direction: column;
   }
 }
 </style>
@@ -256,9 +289,54 @@ button i {
           </p>
         </div>
       </div>
-      <button class="green-button" @click.prevent="$parent.openChat(product)">
-        <i class="fa fa-envelope"></i> پیام به فروشنده
-      </button>
+
+      <div class="action-button-wrapper">
+        <button
+          v-if="product.has_phone"
+          class="green-button phone-button"
+          :class="{ disable: isActivePhone }"
+          :disabled="isActivePhone"
+          @click.prevent="activePhoneCall()"
+        >
+          <span>
+            <i class="fas fa-phone-square-alt" v-if="!getPhoneLoader"></i>
+            <div v-else class="spinner-border">
+              <span class="sr-only"></span>
+            </div>
+            اطلاعات تماس
+          </span>
+        </button>
+        <button
+          class="green-button"
+          :class="{ 'send-message-button': product.has_phone }"
+          @click.prevent="$parent.openChat(product)"
+        >
+          <i class="fa fa-envelope"></i> پیام به فروشنده
+        </button>
+      </div>
+      <div
+        id="phone-number-wrapper"
+        v-if="isActivePhone"
+        class="phone-number-wrapper collapse"
+      >
+        <a :href="'tel:' + userPhone" class="phone-number">
+          <p>
+            <i class="fa fa-phone-square-alt"></i>
+            {{ userPhone }}
+          </p>
+          <p>شماره تماس</p>
+        </a>
+        <div class="warning-wrapper">
+          <p class="warning-title">
+            <i class="fa fa-exclamation-circle"></i>
+
+            توصیه باسکول
+          </p>
+          <p class="warning-text">
+            توصیه باسکول همواره به انجام معاملات حضوری است.
+          </p>
+        </div>
+      </div>
     </article>
   </div>
 </template>
@@ -269,8 +347,12 @@ export default {
   data: function () {
     return {
       isImageLoad: false,
+      getPhoneLoader: false,
+      isActivePhone: false,
+      userPhone: "",
     };
   },
+
   created: function () {
     this.loadImage();
   },
@@ -281,6 +363,39 @@ export default {
       } else {
         this.$router.push(this.getProductUrl());
       }
+    },
+    activePhoneCall() {
+      this.getPhoneLoader = true;
+      this.isActivePhone = true;
+      axios
+        .post("/get_seller_phone_number", {
+          p_id: this.product.id,
+          s_id: this.product.myuser_id,
+          item: "PRODUCT",
+        })
+        .then((response) => {
+          this.$nextTick(() => {
+            this.userPhone = response.data.phone;
+            $("#phone-number-wrapper").collapse("show");
+            this.getPhoneLoader = false;
+          });
+        })
+        .catch((error) => {
+          this.getPhoneLoader = false;
+          this.isActivePhone = false;
+
+          swal({
+            text: error.response.data.msg,
+            icon: "warning",
+            className: "custom-swal-with-cancel",
+            buttons: {
+              close: {
+                text: "بستن",
+                className: "bg-cancel",
+              },
+            },
+          });
+        });
     },
     loadImage: function () {
       this.isImageLoad = false;

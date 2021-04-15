@@ -525,7 +525,7 @@ export default {
     },
     activePhoneCall: function (isModal) {
       this.getPhoneLoader = true;
-      this.isActivePhone = false;
+      this.isActivePhone = true;
       axios
         .post("/get_seller_phone_number", {
           s_id: this.product.user_info.id,
@@ -536,11 +536,13 @@ export default {
           if (isModal) {
             this.$nextTick(() => {
               this.userPhone = response.data.phone;
+              this.getPhoneLoader = false;
+
               this.handleBackKeys();
 
               var buskoolInfo = document.createElement("div");
               buskoolInfo.className = "phone-number-wrapper";
-              buskoolInfo.innerHTML = `<a href="'tel:' + ${this.userPhone}" class="phone-number">
+              buskoolInfo.innerHTML = `<a href="tel:${this.userPhone}" class="phone-number">
                         <p>
                           <i class="fa fa-phone-square-alt"></i>
                           ${this.userPhone}
@@ -569,17 +571,13 @@ export default {
                 },
               }).then((value) => {
                 this.isActivePhone = false;
-                this.getPhoneLoader = false;
               });
             });
           } else {
-            this.userPhone = response.data.phone;
-              this.getPhoneLoader = false;
-              this.isActivePhone = false;
             this.$nextTick(() => {
-              
-              console.log($("#phone-number-wrapper"));
+              this.userPhone = response.data.phone;
               $("#phone-number-wrapper").collapse("show");
+              this.getPhoneLoader = false;
             });
           }
         })

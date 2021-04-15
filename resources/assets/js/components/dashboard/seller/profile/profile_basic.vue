@@ -214,7 +214,7 @@ a {
   margin: 16px auto 31px;
 }
 
-.phone-number-wrapper {
+.user-phone-number-wrapper {
   margin-top: 15px;
 }
 
@@ -447,6 +447,17 @@ textarea.error:focus + i {
     padding: 5px;
   }
 }
+
+@media screen and (max-width: 767px) {
+  .info-box-wrapper {
+    flex-direction: column;
+  }
+  .verification-button{
+    max-width: 180px;
+margin: 6px auto;
+padding: 5px 25px 7px;
+  }
+}
 </style>
 
 <template>
@@ -572,7 +583,7 @@ textarea.error:focus + i {
         <div class="box-wrapper padding-buttom-fixed">
           <span class="profile-badge"> %22 </span>
           <div class="box-title">اطلاعات شما</div>
-          <div class="phone-number-wrapper row">
+          <div class="user-phone-number-wrapper row">
             <div class="col-xs-12 pull-right col-md-7">
               <p class="title-contents">
                 شماره موبایل
@@ -815,7 +826,7 @@ textarea.error:focus + i {
             <div class="col-xs-12">
               <div class="text-input-wrapper">
                 <textarea
-                  rows="3"
+                  rows="5"
                   :class="{
                     active: currentUser.profile.description,
                     error: errors.description,

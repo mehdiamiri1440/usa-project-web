@@ -1,7 +1,8 @@
 <style scoped>
-  p, span{
-    line-height: 1.5;
-  }
+p,
+span {
+  line-height: 1.5;
+}
 .submit-button {
   background: #dddddd;
   color: #fff;
@@ -176,7 +177,7 @@ input.error:focus + i {
   border-radius: 50%;
 }
 
-.label-radio label{
+.label-radio label {
   margin: 0;
 }
 
@@ -224,7 +225,13 @@ input.error:focus + i {
 
         <div class="radio-wrapper">
           <div class="label-radio">
-            <input v-model="sex" type="radio" value="خانم" name="radio" :checked="'خانم'  == sex" />
+            <input
+              v-model="sex"
+              type="radio"
+              value="خانم"
+              name="radio"
+              :checked="'خانم' == sex"
+            />
 
             <span class="checkmark"></span>
 
@@ -235,7 +242,13 @@ input.error:focus + i {
           </div>
 
           <div class="label-radio">
-            <input type="radio" v-model="sex" value="آقا" :checked="'آقا'  == sex" name="radio" />
+            <input
+              type="radio"
+              v-model="sex"
+              value="آقا"
+              :checked="'آقا' == sex"
+              name="radio"
+            />
             <span class="checkmark"></span>
             <label>
               <i class="fa fa-male"></i>
@@ -244,14 +257,17 @@ input.error:focus + i {
           </div>
         </div>
 
-        <div class="input-wrapper phone-number-wrapper">
+        <div class="input-wrapper user-phone-number-wrapper">
           <div class="row">
             <div class="col-xs-6 pull-right">
               <label for="first-name">نام خود را وارد کنید</label>
 
               <input
                 v-model="firstName"
-                :class="{'error' : $parent.errors.first_name[0] , 'active' : firstName.length}"
+                :class="{
+                  error: $parent.errors.first_name[0],
+                  active: firstName.length,
+                }"
                 id="first-name"
                 type="text"
                 class="dire"
@@ -259,7 +275,10 @@ input.error:focus + i {
               />
 
               <p class="error-message">
-                <span v-if="$parent.errors.first_name[0]" v-text="$parent.errors.first_name[0]"></span>
+                <span
+                  v-if="$parent.errors.first_name[0]"
+                  v-text="$parent.errors.first_name[0]"
+                ></span>
               </p>
             </div>
 
@@ -268,7 +287,10 @@ input.error:focus + i {
 
               <input
                 v-model="lastName"
-                :class="{'error' : $parent.errors.last_name[0] , 'active' : lastName.length}"
+                :class="{
+                  error: $parent.errors.last_name[0],
+                  active: lastName.length,
+                }"
                 id="last-name"
                 type="text"
                 class="dire"
@@ -277,16 +299,21 @@ input.error:focus + i {
             </div>
 
             <p class="error-message">
-              <span v-if="$parent.errors.last_name[0]" v-text="$parent.errors.last_name[0]"></span>
+              <span
+                v-if="$parent.errors.last_name[0]"
+                v-text="$parent.errors.last_name[0]"
+              ></span>
             </p>
           </div>
         </div>
 
         <button
           class="submit-button disabled"
-          :class="{'active' : firstName.length && lastName.length}"
+          :class="{ active: firstName.length && lastName.length }"
           @click.prevent="nexStep()"
-        >مرحله بعد</button>
+        >
+          مرحله بعد
+        </button>
       </div>
     </div>
   </div>
@@ -294,12 +321,12 @@ input.error:focus + i {
 
 <script>
 export default {
-  data: function() {
+  data: function () {
     return {
       firstName: "",
       lastName: "",
       sex: "",
-      error: ""
+      error: "",
     };
   },
   methods: {
@@ -310,21 +337,21 @@ export default {
       this.$parent.step3.last_name = this.lastName;
       this.$parent.step3.sex = this.sex;
       this.$parent.setPersonalInformation();
-    }
+    },
   },
   watch: {
-    firstName: function(value) {
+    firstName: function (value) {
       this.$parent.errors.first_name = [];
     },
-    lastName: function(value) {
+    lastName: function (value) {
       this.$parent.errors.last_name = [];
-    }
+    },
   },
   mounted() {
     this.sex = this.$parent.step3.sex;
     this.firstName = this.$parent.step3.first_name;
     this.lastName = this.$parent.step3.last_name;
     this.$parent.getProvinceList();
-  }
+  },
 };
 </script>
