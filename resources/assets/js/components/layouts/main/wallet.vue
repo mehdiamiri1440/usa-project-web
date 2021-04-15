@@ -112,16 +112,20 @@
   padding: 8px 15px;
   font-size: 20px;
   margin-bottom: 15px;
-  border: 1px solid #00c569;
   transition: 100ms;
 }
 
 .payment-buttons > button:hover,
 .payment-buttons > button:active,
 .payment-buttons > button:focus {
-  background: #00c569;
+  background: #21ad93;
   color: #fff;
   transition: 100ms;
+}
+
+.payment-buttons > button.active {
+  background-color: #21ad93;
+  color: #fff;
 }
 
 .payment-buttons > button span {
@@ -238,15 +242,27 @@
       <div class="payment-wrapper">
         <p class="box-title">افزایش موجودی</p>
         <div class="payment-buttons">
-          <button @click="price = 150000" class="button-item">
+          <button
+            @click="price = 150000"
+            class="button-item"
+            :class="{ active: price == '150,000' }"
+          >
             ۱۵۰،۰۰۰
             <span> تومان </span>
           </button>
-          <button @click="price = 100000" class="button-item">
+          <button
+            @click="price = 100000"
+            class="button-item"
+            :class="{ active: price == '100,000' }"
+          >
             ۱۰۰،۰۰۰
             <span> تومان </span>
           </button>
-          <button @click="price = 50000" class="button-item">
+          <button
+            @click="price = 50000"
+            class="button-item"
+            :class="{ active: price == '50,000' }"
+          >
             ۵۰،۰۰۰
             <span> تومان </span>
           </button>

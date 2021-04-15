@@ -197,7 +197,7 @@
 a.home-button {
   display: inline-block;
   color: #fff;
-  background: #50e3c2;
+  background: #151c2e;
   padding: 2px 10px 6px;
   border-radius: 12px;
   margin-left: 5px;
@@ -431,9 +431,9 @@ a.profile-info-wrapper:focus {
   }
   a.home-button {
     background: none;
-    border: 1px solid #50e3c2;
+    border: 1px solid #151c2e;
     border-radius: 12px;
-    color: #50e3c2;
+    color: #151c2e;
     padding: 2px 10px 4px;
   }
   a.product-list-link {

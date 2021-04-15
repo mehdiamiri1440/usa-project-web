@@ -235,7 +235,7 @@ span.min {
 }
 
 .wallet-main {
-  background: url("../../../../../img/wallet-bg.jpg") center;
+  background: url("../../../../../img/wallet-bg.jpg")  center, rgb(55, 174, 222);
   background-size: auto;
   border-radius: 12px;
   min-height: 80px;
@@ -245,15 +245,19 @@ span.min {
   position: relative;
 }
 
-.wallet-main > i {
+.wallet-main > .icon-wrapper {
   position: absolute;
-  top: 26px;
-  left: 20px;
-  font-size: 19px;
+  top: 32px;
+  left: 10px;
+  font-size: 11px;
   background: #fff;
   color: #333;
   border-radius: 8px;
   padding: 5px 7px;
+}
+
+.wallet-main > .icon-wrapper i {
+  color: #21ad93;
 }
 
 .wallet-main > p {
@@ -571,12 +575,17 @@ span.min {
               <i class="fa fa-wallet"></i>
               موجودی کیف پول
             </p>
+
             <p class="wallet-price">
               {{ getNumberWithCommas(currentUser.user_info.wallet_balance) }}
 
               <span> تومان </span>
             </p>
-            <i class="fa fa-plus"></i>
+
+            <span class="icon-wrapper">
+              افزایش موجودی
+              <i class="fa fa-plus"></i>
+            </span>
           </div>
         </a>
         <SwitchButtons mobile="1" />
@@ -626,7 +635,11 @@ span.min {
               {{ getNumberWithCommas(currentUser.user_info.wallet_balance) }}
               <span> تومان </span>
             </p>
-            <i class="fa fa-plus"></i>
+
+            <span class="icon-wrapper">
+              <i class="fa fa-plus"></i>
+              افزایش موجودی
+            </span>
           </div>
         </a>
         <SwitchButtons />
