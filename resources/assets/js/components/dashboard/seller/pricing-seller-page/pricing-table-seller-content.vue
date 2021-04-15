@@ -269,6 +269,31 @@
   font-weight: bold;
 }
 
+.fix-botton-wraper {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+  padding: 5px;
+  box-shadow: 0 -6px 15px rgba(0, 0, 0, 0.16);
+  background: #fff;
+  display: flex;
+}
+
+.fix-botton-wraper button {
+  width: 100%;
+  border-radius: 6px;
+  margin: 0;
+  font-size: 18px;
+  padding: 10px 15px;
+  background: #556080;
+}
+
+.fix-botton-wraper button i {
+  position: relative;
+  top: 2px;
+}
 @media screen and (max-width: 991px) {
   .list-title,
   .needs,
@@ -475,6 +500,13 @@
         </div>
       </div>
     </div>
+
+    <div class="fix-botton-wraper hidden-sm hidden-md hidden-lg">
+      <button class="green-button" @click="openCreditCardGuide()">
+        پرداخت از طریق کارت به کارت
+        <i class="fa fa-credit-card"></i>
+      </button>
+    </div>
   </div>
 </template>
 
@@ -492,7 +524,29 @@ export default {
     };
   },
   methods: {
-    init: function () {},
+    openCreditCardGuide() {
+      var buskoolInfo = document.createElement("div");
+      buskoolInfo.className = "credit-card-wrapper";
+      buskoolInfo.innerHTML = `<i class="fa fa-credit-card"></i><p>
+      درصورت نیاز به پرداخت از طریق کارت به کارت، با ما تماس بگیرید
+      </p> <div>
+      <a href='tel:09178928266'><span><i class='fa fa-phone-alt'></i> 09178928266</span></a>
+      <a href='tel:09118413054'><span><i class='fa fa-phone-alt'></i> 09118413054</span></a>
+      </div>`;
+
+      swal({
+        content: buskoolInfo,
+        className: "custom-swal-with-cancel",
+        buttons: {
+          close: {
+            text: "بستن",
+            className: "bg-cancel",
+          },
+        },
+      }).then((value) => {
+        this.isActivePhone = false;
+      });
+    },
   },
   mounted() {
     this.init();

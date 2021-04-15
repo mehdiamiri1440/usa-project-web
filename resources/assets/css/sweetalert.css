@@ -173,6 +173,39 @@ create new badge for buttons
   height: 100%;
 }
 
+
+/* style for credit-card-wrapper */
+
+.credit-card-wrapper > i{
+  font-size: 70px;
+  margin: 10px auto;
+  color: #556080;
+}
+
+.credit-card-wrapper > p{
+  color: #555;
+font-size: 16px;
+line-height: 1.618;
+margin: 10px;
+font-weight: bold;
+}
+.credit-card-wrapper > div{
+  margin: 15px auto;
+}
+.credit-card-wrapper > div a{
+  display: block;
+font-size: 20px;
+color: #333;
+font-weight: bold;
+margin-top: 20px;
+}
+.credit-card-wrapper > div i{
+  color: #00c569;
+}
+
+
+
+
 @media screen and (max-width: 768px) {
   .custom-swal-full-size,
   .custom-swal-full-size-with-cancel {
