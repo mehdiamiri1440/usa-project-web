@@ -1516,8 +1516,8 @@ export default {
       cityId: "",
       searchValue: "",
       scrolled: false,
-      productCountInPage: 12,
-      productCountInEachLoad: 12,
+      productCountInPage: 16,
+      productCountInEachLoad: 16,
       fromProductCount: 0,
       continueToLoadProducts: true,
       searchActive: false,
@@ -1585,7 +1585,7 @@ export default {
           self.loading = true;
 
           self.fromProductCount = 0;
-          self.productCountInPage = 12;
+          self.productCountInPage = 16;
 
           axios
             .post("/user/get_product_list", {

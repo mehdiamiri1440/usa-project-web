@@ -626,7 +626,7 @@ textarea.error:focus + i {
             </div>
             <div class="col-xs-12 active-number-wrapper col-md-5">
               <p class="title-contents active-number-title">
-                نمايش شماره به خریداران
+                نمايش شماره به فروشندگان
                 <span
                   class="red-text"
                   v-if="!currentUser.user_info.phone_allowed"

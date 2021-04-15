@@ -78,7 +78,6 @@
       <div class="title col-xs-12">
         <div class="col-xs-12 pull-right">
           <h1>خریدارانی که شماره تماس شما را دیده اند</h1>
-          <p>یه متن خوب اینجا قرار میگیرد</p>
         </div>
       </div>
 
@@ -99,7 +98,7 @@
           class="list-empty-wrapper"
           v-else-if="!loader && users.length == 0"
         >
-          <i class="fa fa-list"></i>
+          <i class="fa fa-users"></i>
           <p>هنوز کاربری شماره تماس شما را ندیده است</p>
         </div>
         <ul class="user-items-wrapper" v-else>

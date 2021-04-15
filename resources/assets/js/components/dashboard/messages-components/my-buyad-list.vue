@@ -367,7 +367,6 @@ button.disable {
 
 li.golden {
   border: 2px solid rgb(199, 168, 79);
-  border-top: transparent;
   position: relative;
   padding-right: 20px;
 }

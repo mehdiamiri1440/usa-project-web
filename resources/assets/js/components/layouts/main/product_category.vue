@@ -1521,6 +1521,12 @@ div.items-wrapper {
           </div>
         </div>
       </aside>
+
+      <script
+        v-if="jsonLDObject"
+        v-html="jsonLDObject"
+        type="application/ld+json"
+      ></script>
     </main>
     <footer
       class="category-footer container"
@@ -1591,8 +1597,8 @@ export default {
       categoryMetaData: "",
       searchValue: this.$route.params.searchText,
       scrolled: false,
-      productCountInPage: 12,
-      productCountInEachLoad: 12,
+      productCountInPage: 16,
+      productCountInEachLoad: 16,
       continueToLoadProducts: true,
       fromProductCount: 0,
       searchActive: false,
@@ -1666,7 +1672,7 @@ export default {
           self.loading = true;
 
           self.fromProductCount = 0;
-          self.productCountInPage = 12;
+          self.productCountInPage = 16;
 
           axios
             .post("/user/get_product_list", {
@@ -2128,7 +2134,13 @@ export default {
       categoryName.split(" ").join("-");
 
     return {
-      title: "خرید و فروش عمده و قیمت " + categoryName,
+      title:
+        "خرید و فروش عمده " +
+        categoryName +
+        " - " +
+        "قیمت " +
+        categoryName +
+        " عمده صادراتی - خرید و فروش مستقیم",
       titleTemplate: "%s | باسکول",
       meta: [
         {
@@ -2136,9 +2148,9 @@ export default {
           content:
             "خرید و فروش عمده " +
             categoryName +
-            " به صورت مستقیم و بدون واسطه از بهترین کشاورزان و تامین کنندگان | آگاهی از آخرین قیمت " +
+            " به صورت مستقیم و بدون واسطه از بهترین کشاورزان و تامین کنندگان ☀️☀️ آخرین قیمت " +
             categoryName +
-            " عمده در بازار عمده باسکول ",
+            " عمده ☀️☀️ بازار باسکول ",
         },
         {
           name: "author",
@@ -2149,9 +2161,9 @@ export default {
           content:
             "خرید و فروش عمده " +
             categoryName +
-            " به صورت مستقیم و بدون واسطه از بهترین کشاورزان و تامین کنندگان | آگاهی از آخرین قیمت " +
+            " به صورت مستقیم و بدون واسطه از بهترین کشاورزان و تامین کنندگان ☀️☀️ آخرین قیمت " +
             categoryName +
-            " عمده در بازار عمده باسکول ",
+            " عمده ☀️☀️ بازار باسکول ",
         },
         {
           property: "og:site_name",

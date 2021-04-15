@@ -553,11 +553,11 @@ export default {
                         <p class="warning-title">
                           <i class="fa fa-exclamation-circle"></i>
 
-                          توصیه باسکول
-                        </p>
-                        <p class="warning-text">
-                          توصیه باسکول همواره به انجام معاملات حضوری است.
-                        </p>
+                           هشدار پلیس 
+          </p>
+          <p class="warning-text">
+            لطفاً پیش از انجام معامله و هر نوع پرداخت وجه، از صحت کالا یا خدمات ارائه شده، به صورت حضوری اطمینان حاصل نمایید. 
+          </p>
                       </div>`;
 
               swal({
