@@ -466,6 +466,7 @@ input,textarea {
   direction: rtl;
   border-radius: 12px;
   font-size: 17px;
+  z-index: 2;
 }
 
 .toast.show {

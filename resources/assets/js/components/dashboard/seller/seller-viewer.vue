@@ -22,13 +22,13 @@
   margin-bottom: 25px;
 }
 
-.user-items-wrapper p {
+.user-items-wrapper a {
   font-size: 20px;
   color: #313a43;
   text-align: right;
 }
 
-.user-items-wrapper p i {
+.user-items-wrapper a i {
   position: relative;
   top: 2px;
   color: #777;
@@ -81,6 +81,27 @@ li:nth-of-type(2n + 1) .user-items-wrapper {
 }
 
 @media screen and (max-width: 767px) {
+  .content-wrapper,
+  .user-items-wrapper {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+  .user-items-wrapper a {
+    overflow: hidden;
+    height: 30px;
+    line-height: 1.618;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 142px;
+  }
+
+  .toast {
+    margin-left: 0;
+    left: 10px;
+    right: 10px;
+  }
+
   .title {
     text-align: center;
   }
@@ -105,14 +126,18 @@ li:nth-of-type(2n + 1) .user-items-wrapper {
       <div class="content-wrapper col-xs-12">
         <ul v-if="!loader && users.length">
           <li v-for="(user, index) in users" :key="index">
-            <div class="date-wrapper">
-              <p>1400/01/25</p>
+            <div v-if="user.isDateShow" class="date-wrapper">
+              <p>
+                {{ user.created_at | moment("jYYYY/jMM/jDD") }}
+              </p>
             </div>
             <div class="user-items-wrapper">
-              <p>
+              <router-link
+                :to="{ name: 'profile', params: { user_name: user.user_name } }"
+              >
                 <i class="fa fa-user-circle"></i>
                 <span v-text="user.first_name + ' ' + user.last_name"> </span>
-              </p>
+              </router-link>
               <div>
                 <button
                   class="doller-sign"
@@ -136,13 +161,15 @@ li:nth-of-type(2n + 1) .user-items-wrapper {
           <i class="fa fa-users"></i>
           <p>هنوز کاربری شماره تماس شما را ندیده است</p>
         </div>
-        <ul class="user-items-wrapper" v-else>
+        <ul v-else>
           <li v-for="(item, index) in 5" :key="index">
-            <p class="placeholder-content h-30 content-default-width"></p>
-            <span
-              class="default-chat-button placeholder-content h-30 content-min-width"
-            >
-            </span>
+            <div class="user-items-wrapper">
+              <p class="placeholder-content h-30 content-default-width"></p>
+              <span
+                class="default-chat-button placeholder-content h-30 content-min-width"
+              >
+              </span>
+            </div>
           </li>
         </ul>
       </div>
@@ -165,8 +192,19 @@ export default {
   methods: {
     init() {
       this.loader = true;
+      let itemDate = "";
+
       axios.post("/get_phone_number_viewers_list").then((response) => {
         this.users = response.data.users;
+        this.users = this.users.map((item) => {
+          let date = item.created_at.substr(0, 10);
+          item.isDateShow = true;
+          if (itemDate == date) {
+            item.isDateShow = false;
+          }
+          itemDate = date;
+          return item;
+        });
         this.loader = false;
       });
     },
