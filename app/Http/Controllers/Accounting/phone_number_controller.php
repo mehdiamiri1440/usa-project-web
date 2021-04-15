@@ -15,7 +15,9 @@ class phone_number_controller extends Controller
         'myusers.id',
         'myusers.first_name',
         'myusers.last_name',
-        'myusers.user_name'
+        'myusers.user_name',
+        'phone_number_view_logs.is_free',
+        'phone_number_view_logs.created_at'
     ];
 
     public function get_seller_phone_number(Request $request)
@@ -288,6 +290,7 @@ class phone_number_controller extends Controller
                     ->select($this->phone_number_viewers_list)
                     ->groupBy('phone_number_view_logs.viewer_id')
                     ->orderBy('phone_number_view_logs.created_at','desc')
+                    ->take(50)
                     ->get();
 
         return response()->json([
