@@ -94,6 +94,29 @@ i {
   text-align: left;
 }
 
+.response-rate-wrapper {
+  width: 45px;
+}
+
+.response-rate-wrapper button {
+  background: #f2f2f2;
+  border: none;
+  border-radius: 20px;
+  font-size: 13px;
+  text-align: center;
+  color: #e41c38;
+  width: 100%;
+  line-height: initial;
+  padding: 0;
+}
+
+.user-information-content {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: calc(100% - 65px);
+}
+
 .user-action-link.default {
   padding-top: 9px;
 }
@@ -114,8 +137,10 @@ a.user-information-link {
 <template>
   <div class="user-information-wrapper">
     <router-link :to="'/profile/' + user_name" class="user-information-link">
-      <i class="fa fa-user-circle"></i>
-      {{ user_full_name }}
+      <div class="user-information-content pull-right">
+        <i class="fa fa-user-circle"></i>
+        {{ user_full_name }}
+      </div>
       <button
         v-if="!!user_info.is_verified"
         @click.prevent
@@ -128,6 +153,18 @@ a.user-information-link {
       >
         <i class="fa fa-certificate"></i>
       </button>
+      <div class="response-rate-wrapper pull-left">
+        <button
+          v-if="user_info.response_rate != 0"
+          data-toggle="tooltip"
+          data-placement="right"
+          title="احتمال پاسخ گویی"
+          class="response-rate"
+        >
+          <i class="fa fa-exchange-alt"></i>
+          {{ user_info.response_rate }}
+        </button>
+      </div>
     </router-link>
   </div>
 </template>
@@ -251,6 +288,7 @@ export default {
             }
           }, 300);
         });
+      $(".response-rate").tooltip();
     },
   },
   mounted: function () {

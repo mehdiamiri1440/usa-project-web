@@ -204,6 +204,15 @@ const router = new Router({
             },
           },
         },
+        {
+          path: "show-number-guide",
+          name: "showNumberGuideSeller",
+          components: {
+            default: (resolve) => {
+              require(["../components/dashboard/seller/show-number-guide.vue"], resolve);
+            },
+          },
+        },
         // {
         //   path: "wallet",
         //   name: "walletSeller",

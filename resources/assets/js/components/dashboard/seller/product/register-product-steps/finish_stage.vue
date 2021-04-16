@@ -532,6 +532,22 @@ li .buyad-button.send-message-button:hover {
             <button
               class="detail-success hover-effect phone-button"
               :id="'loader-phone-' + buyAd.id"
+              v-if="
+                buyAd.is_golden &&
+                $parent.currentUser.user_info.active_pakage_type == 0
+              "
+              @click.prevent="openGoldenChatRestrictionModal()"
+            >
+              <span>
+                <span class="fas fa-phone-square-alt"></span>
+                اطلاعات تماس
+              </span>
+              <span class="hide-reply text-rtl"> کمی صبر کنید... </span>
+            </button>
+            <button
+              v-else
+              class="detail-success hover-effect phone-button"
+              :id="'loader-phone-' + buyAd.id"
               @click.prevent="activePhoneCall(buyAd.myuser_id, buyAd.id)"
             >
               <span>
@@ -750,17 +766,42 @@ export default {
           this.showReplyBtn(id);
           $(id).prop("disabled", false);
           $(id).removeClass("disable");
-          swal({
-            text: error.response.data.msg,
-            icon: "warning",
-            className: "custom-swal-with-cancel",
-            buttons: {
-              close: {
-                text: "بستن",
-                className: "bg-cancel",
+          if (error.response.status == 408) {
+            swal({
+              title: "ارتقا عضویت",
+              text: error.response.data.msg,
+              icon: "warning",
+              className: "custom-swal-with-cancel",
+              buttons: {
+                success: {
+                  text: "ارتقا عضویت",
+                  value: "promote",
+                },
+                close: {
+                  text: "بستن",
+                  className: "bg-cancel",
+                },
               },
-            },
-          });
+            }).then((value) => {
+              switch (value) {
+                case "promote":
+                  self.$router.push({ name: "dashboardPricingTableSeller" });
+                  break;
+              }
+            });
+          } else {
+            swal({
+              text: error.response.data.msg,
+              icon: "warning",
+              className: "custom-swal-with-cancel",
+              buttons: {
+                close: {
+                  text: "بستن",
+                  className: "bg-cancel",
+                },
+              },
+            });
+          }
         });
     },
     hideReplyBtn: function (id) {
