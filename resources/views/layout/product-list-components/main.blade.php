@@ -186,18 +186,31 @@
                           >
                           <i class="fa fa-user-circle"></i>
                             {{$product['user_info']->first_name . ' ' . $product['user_info']->last_name}}
-                            @if($product['user_info']->is_verified) 
-                              <button
-                                  class="verified-user"
-                                  data-container="body"
-                                  data-toggle="popover"
-                                  data-placement="bottom"
-                                >
-                                  <i class="fa fa-certificate"></i>
-                                </button>
-                                @endif
+                           
                             </a>
-
+                            @if($product['user_info']->is_verified) 
+                            <button
+                                class="verified-user"
+                                data-container="body"
+                                data-toggle="popover"
+                                data-placement="bottom"
+                              >
+                                <i class="fa fa-certificate"></i>
+                              </button>
+                              @endif
+                            @if( $product['user_info']->response_rate)
+                            <div class="response-rate-wrapper pull-left">
+                              <button
+                                data-toggle="tooltip"
+                                data-placement="right"
+                                title="احتمال پاسخ گویی"
+                                class="response-rate"
+                              >
+                                <i class="fa fa-exchange-alt"></i>
+                                {{ $product['user_info']->response_rate }}
+                              </button>
+                            </div>
+                            @endif
                           </div>
                         </a>
                         <div class="main-article-contents" >
@@ -290,9 +303,8 @@
                               <div
                                 class="user-information-content"
                               >
-                              <a
+                              <p
                               class="user-name-link"
-                              href="{{'/profile/' . $product['user_info']->user_name}}"
                             >
                               {{$product['user_info']->first_name . ' ' . $product['user_info']->last_name}}
                               @if($product['user_info']->is_verified) 
@@ -305,7 +317,7 @@
                                     <i class="fa fa-certificate"></i>
                                   </button>
                                   @endif
-                              </a>
+                                </p>
 
                                 <p  class="response-rate">
                                   احتمال پاسخ گویی
