@@ -542,7 +542,7 @@ export default {
               active: false,
             },
             {
-              title: " نشان فروشنده معتبر ",
+              title: " نشان فروشنده ویژه ",
               contentUnit:
                 '<i class="text-green fa fa-check-circle" style="color:#00c569"></i>',
               helpDescription:

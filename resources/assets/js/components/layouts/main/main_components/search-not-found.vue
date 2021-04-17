@@ -9,9 +9,8 @@
   direction: rtl;
   margin: 15px auto 0;
   padding: 25px 15px 15px;
-  border-radius: 5px;
-  -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
   overflow: hidden;
 }
 
@@ -130,12 +129,18 @@
             class="green-button"
             type="button"
             @click="openBuyAdRequestPage()"
-          >ثبت درخواست خرید</button>
+          >
+            ثبت درخواست خرید
+          </button>
         </div>
       </div>
 
       <div class="categories-content-wrapper">
-        <div class="category-item" v-for="(category, index) in categories" :key="index">
+        <div
+          class="category-item"
+          v-for="(category, index) in categories"
+          :key="index"
+        >
           <div class="title-section col-xs-12">
             <p class="category-title" v-text="category.category_name"></p>
             <hr />
@@ -147,7 +152,10 @@
               :key="catIndex"
               class="list-item col-xs-4 col-sm-3 col-md-2 pull-right"
             >
-              <router-link :to="getSubCategoryUrl(subCategory)" v-text="subCategory.category_name"></router-link>
+              <router-link
+                :to="getSubCategoryUrl(subCategory)"
+                v-text="subCategory.category_name"
+              ></router-link>
             </li>
           </ul>
         </div>
@@ -158,34 +166,34 @@
 
 <script>
 export default {
-  data: function() {
+  data: function () {
     return {
-      categories: ""
+      categories: "",
     };
   },
   methods: {
-    init: function() {
+    init: function () {
       let self = this;
 
       axios
         .post("/get_category_list", {
-          cascade_list: true
+          cascade_list: true,
         })
-        .then(function(response) {
+        .then(function (response) {
           self.categories = response.data.categories;
         });
     },
-    getSubCategoryUrl: function(t) {
+    getSubCategoryUrl: function (t) {
       let url =
         "/product-list/category/" + t.category_name.split(" ").join("-");
       return url;
     },
-    openBuyAdRequestPage: function() {
+    openBuyAdRequestPage: function () {
       this.$router.push({ name: "mainRegisterRequest" });
-    }
+    },
   },
-  mounted: function() {
+  mounted: function () {
     this.init();
-  }
+  },
 };
 </script>

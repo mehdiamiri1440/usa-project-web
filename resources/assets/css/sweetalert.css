@@ -142,17 +142,20 @@ create new badge for buttons
 }
 
 .swal-star-badge {
-  position: relative;
-  border-radius: 50px;
-  background: linear-gradient( 21deg, rgb(199, 168, 79) 0%, rgb(249, 242, 159) 51%, rgb(199, 168, 79) 100% );
-  background-clip: border-box;
-  background-clip: border-box;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  border-radius: 12px;
+  color: rgb(249, 242, 159);
   text-align: center;
   direction: ltr;
   line-height: 1;
-  font-size:50px;
+}
+
+.swal-star-badge i{
+  font-size: 60px;
+  background: linear-gradient( 21deg, rgb(199, 168, 79) 0%, rgb(249, 242, 159) 51%, rgb(199, 168, 79) 100% );
+  background-clip: border-box;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 2px 0;
 }
 
 .swal-guide{
