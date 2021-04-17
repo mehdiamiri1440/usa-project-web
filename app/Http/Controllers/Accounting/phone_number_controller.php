@@ -160,7 +160,7 @@ class phone_number_controller extends Controller
             return response()->json([
                 'status' => false,
                 'msg' => 'برای دسترسی به شماره تماس خریداران لطفا نوع عضویت خود را ارتقا دهید.'
-            ],408);
+            ],423);
         }
 
         if($this->is_proper_time_for_phone_call() == false){
