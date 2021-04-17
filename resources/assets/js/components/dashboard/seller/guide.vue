@@ -43,6 +43,16 @@ ul {
   font-weight: bold;
 }
 
+.guide-link {
+  margin: 20px auto 5px;
+  display: inline-block;
+  font-size: 17px;
+  font-weight: bold;
+  color: #1da1f2;
+  -webkit-transition: 300ms;
+  transition: 300ms;
+}
+
 @media screen and (max-width: 767px) {
   .title {
     text-align: center;
@@ -108,6 +118,16 @@ ul {
               شماره تماس خود را در پیام رد و بدل کنند.
             </li>
             <li>در صورت بروز هرگونه مشکل با خدمتگزاران خود تماس بگیرید.</li>
+
+            <li>
+              <router-link
+                :to="{ name: 'showNumberGuideSeller' }"
+                class="guide-link"
+              >
+                راهنمای نمایش اطلاعات تماس
+                <i class="fa fa-arrow-left"></i>
+              </router-link>
+            </li>
           </ol>
           <!--                    <p class="text-center text-danger">  پشتیبانی :‌۰۹۱۱۸۴۱۳۰۵۴ </p>-->
         </li>
