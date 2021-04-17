@@ -529,6 +529,15 @@ export default {
     init: function () {
       this.productUrl = this.getProductUrl();
 
+      this.$nextTick(() => {
+        if (this.currentUser.user_info) {
+          if (this.currentUser.user_info.id === this.product.main.myuser_id) {
+            this.isMyProfile = true;
+            this.$emit("isMyProfile", this.isMyProfile);
+          }
+        }
+      });
+
       // this.jsonLDObject = this.createJsonLDObject();
     },
     toLatinNumbers: function (num) {
@@ -807,14 +816,6 @@ export default {
   mounted() {
     this.init();
     $(".elevator-event.active").tooltip();
-  },
-  watch: {
-    "currentUser.user_info"() {
-      if (this.currentUser.user_info.id === this.product.main.myuser_id) {
-        this.isMyProfile = true;
-        this.$emit("isMyProfile", this.isMyProfile);
-      }
-    },
   },
 };
 </script>

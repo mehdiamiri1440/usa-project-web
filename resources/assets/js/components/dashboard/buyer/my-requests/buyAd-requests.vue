@@ -128,7 +128,8 @@
 }
 
 .buyAds-wrapper {
-  padding-top: 60px;
+  padding-top: 80px;
+  overflow: hidden;
   max-width: 992px;
   margin: 0 auto;
 }
@@ -142,8 +143,8 @@
 }
 
 .item-wrapper {
-  border-radius: 7px;
-  border-top: 5px solid #556080;
+  border-radius: 12px;
+  border: 1px solid #e9ecef;
   min-height: 150px;
   direction: rtl;
   margin-bottom: 30px;
@@ -263,7 +264,7 @@ tr:nth-child(even) {
             v-for="(buyAd, index) in buyAds"
             :key="index"
           >
-            <article class="item-wrapper shadow-content bg-white">
+            <article class="item-wrapper bg-white">
               <div class="table-wrapper">
                 <table>
                   <tr>
@@ -335,9 +336,7 @@ tr:nth-child(even) {
             v-for="(buyAd, index) in 6"
             :key="index"
           >
-            <article
-              class="item-wrapper shadow-content padding-bottom-15 bg-white"
-            >
+            <article class="item-wrapper padding-bottom-15 bg-white">
               <div class="table-wrapper">
                 <table>
                   <tr>
