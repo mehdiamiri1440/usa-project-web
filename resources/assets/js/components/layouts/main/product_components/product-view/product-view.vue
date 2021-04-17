@@ -227,23 +227,21 @@ button.send-message-button {
         id="product-section"
         class="section-wrapper container-fluid latest-product"
       >
-        <div class="container">
-          <div class="col-xs-12">
-            <div class="row">
-              <h3 class="box-title">محصولات مرتبط</h3>
+        <div class="col-xs-12">
+          <div class="row">
+            <h3 class="box-title">محصولات مرتبط</h3>
 
-              <div class="products-contents">
-                <div class="owl-carousel">
-                  <ProductCarousel
-                    v-for="(product, index) in relatedProducts"
-                    :key="index"
-                    :img="str + '/thumbnails/' + product.photo"
-                    :title="product.product_name"
-                    :stock="getConvertedNumbers(product.stock)"
-                    :link="getRelatedProductUrl(product)"
-                    column="4"
-                  />
-                </div>
+            <div class="products-contents">
+              <div class="owl-carousel">
+                <ProductCarousel
+                  v-for="(product, index) in relatedProducts"
+                  :key="index"
+                  :img="str + '/thumbnails/' + product.photo"
+                  :title="product.product_name"
+                  :stock="getConvertedNumbers(product.stock)"
+                  :link="getRelatedProductUrl(product)"
+                  column="4"
+                />
               </div>
             </div>
           </div>
@@ -315,16 +313,28 @@ button.send-message-button {
 
       <div
         v-if="product.main.product_name && !isMyProfile"
-        class="fix-send-message-wrapper hidden-lg hidden-md hidden-sm"
+        class="fix-send-message-wrapper hidden-lg hidden-md"
       >
         <button
-          v-if="!isMyProfile"
+          v-if="!isMyProfile && currentUser.user_info"
           @click.prevent="openChat(product)"
           :class="{
             'send-message-button':
               product.user_info.has_phone && currentUser.user_info.is_buyer,
             'green-button':
-              !product.user_info.has_phone || currentUser.user_info.is_seller,
+              !product.user_info.has_phone ||
+              (product.user_info.has_phone && currentUser.user_info.is_seller),
+          }"
+        >
+          ارسال پیام
+          <i class="fas fa-comment-alt"></i>
+        </button>
+        <button
+          v-else-if="!currentUser.user_info"
+          @click.prevent="loginModal()"
+          :class="{
+            'send-message-button': product.user_info.has_phone,
+            'green-button': !product.user_info.has_phone,
           }"
         >
           ارسال پیام
@@ -333,10 +343,24 @@ button.send-message-button {
         <button
           v-if="
             !isMyProfile &&
+            currentUser.user_info &&
             product.user_info.has_phone &&
             currentUser.user_info.is_buyer
           "
           @click.prevent="activePhoneCall(true)"
+          class="green-button"
+          :class="{ disable: isActivePhone }"
+          :disabled="isActivePhone"
+        >
+          اطلاعات تماس
+          <i class="fas fa-phone-square-alt" v-if="!getPhoneLoader"></i>
+          <div v-else class="spinner-border">
+            <span class="sr-only"></span>
+          </div>
+        </button>
+        <button
+          v-else-if="!currentUser.user_info && product.user_info.has_phone"
+          @click.prevent="loginModal()"
           class="green-button"
           :class="{ disable: isActivePhone }"
           :disabled="isActivePhone"
@@ -411,7 +435,7 @@ export default {
       this.isLoading = true;
       var self = this;
       axios.post("/user/profile_info").then(function (response) {
-        if (response.data) {
+        if (response.data.status) {
           self.currentUser = response.data;
 
           if (self.currentUser.user_info) {
@@ -491,6 +515,28 @@ export default {
         // this.$router.push({ name: "registerInquiry" });
         eventBus.$emit("modal", "sendMsg");
       }
+    },
+    loginModal() {
+      swal({
+        title: "ارتباط با مخاطب",
+        icon: "info",
+        text:
+          "برای ارتباط با هزاران خریدار و فروشنده در باسکول ابتدا ثبت نام کنید.",
+        className: "custom-swal-with-cancel",
+        buttons: {
+          success: {
+            text: "ورود سریع / ثبت نام",
+          },
+          close: {
+            text: "بستن",
+            className: "bg-cancel",
+          },
+        },
+      }).then((value) => {
+        if (value == "success") {
+          this.$router.push({ name: "register" });
+        }
+      });
     },
     openChatModal: function (product) {
       this.registerComponentStatistics(
