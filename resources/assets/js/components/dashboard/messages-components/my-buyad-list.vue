@@ -1177,7 +1177,7 @@ export default {
           this.showReplyBtn(id);
           $(id).prop("disabled", false);
           $(id).removeClass("disable");
-          if (error.response.status == 408) {
+          if (error.response.status == 423) {
             swal({
               title: "ارتقا عضویت",
               text: error.response.data.msg,
