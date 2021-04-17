@@ -28,6 +28,13 @@ class phone_number_controller extends Controller
             'item' => 'required|in:PRODUCT,PROFILE',
         ]);
 
+        if($this->is_proper_time_for_phone_call() == false){
+            return response()->json([
+                'status' => false,
+                'msg' => 'متاسفانه الان زمان مناسبی برای تماس تلفنی نیست. لطفا در طی ساعات روز اقدام به تماس کنید.'
+            ],404);
+        }
+
         $viewer_user_id = session('user_id');
 
         $related_record = DB::table('myusers')
@@ -154,6 +161,13 @@ class phone_number_controller extends Controller
                 'status' => false,
                 'msg' => 'برای دسترسی به شماره تماس خریداران لطفا نوع عضویت خود را ارتقا دهید.'
             ],408);
+        }
+
+        if($this->is_proper_time_for_phone_call() == false){
+            return response()->json([
+                'status' => false,
+                'msg' => 'متاسفانه الان زمان مناسبی برای تماس تلفنی نیست. لطفا در طی ساعات روز اقدام به تماس کنید.'
+            ],404);
         }
 
         $related_record = DB::table('myusers')
@@ -350,5 +364,15 @@ class phone_number_controller extends Controller
         DB::table('buy_ads')->where('id',$buyAd_record->id)->decrement('reply_capacity', 1);
 
         return $buyAd_record->myuser_id;
+    }
+
+    protected function is_proper_time_for_phone_call()
+    {
+        $now = Carbon::now();
+        if($now->hour > 22 && $now->hour < 7){
+            return false;
+        }
+
+        return true;
     }
 }
