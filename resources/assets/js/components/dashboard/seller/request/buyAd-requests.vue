@@ -779,9 +779,7 @@ button.disable {
                         "
                         class="detail-success hover-effect phone-button"
                         :id="'loader-phone-' + buyAd.id"
-                        @click.prevent="
-                          activePhoneCall(buyAd.myuser_id, buyAd.id)
-                        "
+                        @click.prevent="openGoldenChatRestrictionModal()"
                       >
                         <span>
                           <span class="fas fa-phone-square-alt"></span>
@@ -809,9 +807,27 @@ button.disable {
                       </button>
                       <button
                         class="detail-success send-message-button hover-effect"
+                        @click.prevent="openGoldenChatRestrictionModal()"
+                        :id="'loader-chat-' + buyAd.id"
+                        v-if="
+                          buyAd.is_golden &&
+                          currentUser.user_info.active_pakage_type == 0 &&
+                          buyAd.has_msg
+                        "
+                      >
+                        <span>
+                          <span class="fas fa-comment-alt"></span>
+                          پیام به خریدار
+                        </span>
+                        <span class="hide-reply text-rtl">
+                          کمی صبر کنید...
+                        </span>
+                      </button>
+                      <button
+                        class="detail-success send-message-button hover-effect"
                         @click.prevent="openChat(buyAd)"
                         :id="'loader-chat-' + buyAd.id"
-                        v-if="buyAd.has_msg"
+                        v-else-if="buyAd.has_msg"
                       >
                         <span>
                           <span class="fas fa-comment-alt"></span>
@@ -1045,98 +1061,74 @@ export default {
         });
     },
     activePhoneCall: function (buyAdUserId, buyAdId) {
-      if (this.currentUser.user_info.active_pakage_type != 0) {
-        let id = "#loader-phone-" + buyAdId;
+      let id = "#loader-phone-" + buyAdId;
 
-        $(id).prop("disabled", true);
-        $(id).addClass("disable");
+      $(id).prop("disabled", true);
+      $(id).addClass("disable");
 
-        this.hideReplyBtn(id);
+      this.hideReplyBtn(id);
 
-        axios
-          .post("/get_buyer_phone_number", {
-            b_id: buyAdUserId,
-            ba_id: buyAdId,
-            item: "BUYAD",
-          })
-          .then((response) => {
-            this.$nextTick(() => {
-              // this.userPhone = response.data.phone;
-              $("#" + buyAdId + "-phone-number-wrapper .phone").text(
-                response.data.phone
-              );
-              $("#" + buyAdId + "-phone-number-wrapper a.phone-number").attr(
-                "href",
-                "tel:" + response.data.phone
-              );
-              $("#" + buyAdId + "-phone-number-wrapper").collapse("show");
-              this.showReplyBtn(id);
-            });
-          })
-          .catch((error) => {
+      axios
+        .post("/get_buyer_phone_number", {
+          b_id: buyAdUserId,
+          ba_id: buyAdId,
+          item: "BUYAD",
+        })
+        .then((response) => {
+          this.$nextTick(() => {
+            // this.userPhone = response.data.phone;
+            $("#" + buyAdId + "-phone-number-wrapper .phone").text(
+              response.data.phone
+            );
+            $("#" + buyAdId + "-phone-number-wrapper a.phone-number").attr(
+              "href",
+              "tel:" + response.data.phone
+            );
+            $("#" + buyAdId + "-phone-number-wrapper").collapse("show");
             this.showReplyBtn(id);
-            $(id).prop("disabled", false);
-            $(id).removeClass("disable");
-            if (error.response.status == 408) {
-              swal({
-                text: error.response.data.msg,
-                icon: "warning",
-                className: "custom-swal-with-cancel",
-                buttons: {
-                  success: {
-                    text: "ارتقا عضویت",
-                    value: "promote",
-                  },
-                  close: {
-                    text: "بستن",
-                    className: "bg-cancel",
-                  },
-                },
-              }).then((value) => {
-                switch (value) {
-                  case "promote":
-                    self.$router.push({ name: "dashboardPricingTableSeller" });
-                    break;
-                }
-              });
-            } else {
-              swal({
-                text: error.response.data.msg,
-                icon: "warning",
-                className: "custom-swal-with-cancel",
-                buttons: {
-                  close: {
-                    text: "بستن",
-                    className: "bg-cancel",
-                  },
-                },
-              });
-            }
           });
-      } else {
-        swal({
-          text:
-            "برای دسترسی به شماره تماس خریداران لطفا نوع عضویت خود را ارتقا دهید.",
-          icon: "warning",
-          className: "custom-swal-with-cancel",
-          buttons: {
-            success: {
-              text: "ارتقا عضویت",
-              value: "promote",
-            },
-            close: {
-              text: "بستن",
-              className: "bg-cancel",
-            },
-          },
-        }).then((value) => {
-          switch (value) {
-            case "promote":
-              this.$router.push({ name: "dashboardPricingTableSeller" });
-              break;
+        })
+        .catch((error) => {
+          this.showReplyBtn(id);
+          $(id).prop("disabled", false);
+          $(id).removeClass("disable");
+          if (error.response.status == 408) {
+            swal({
+              title: "ارتقا عضویت",
+              text: error.response.data.msg,
+              icon: "warning",
+              className: "custom-swal-with-cancel",
+              buttons: {
+                success: {
+                  text: "ارتقا عضویت",
+                  value: "promote",
+                },
+                close: {
+                  text: "بستن",
+                  className: "bg-cancel",
+                },
+              },
+            }).then((value) => {
+              switch (value) {
+                case "promote":
+                  self.$router.push({ name: "dashboardPricingTableSeller" });
+                  break;
+              }
+            });
+          } else {
+            swal({
+              text: error.response.data.msg,
+              icon: "warning",
+              className: "custom-swal-with-cancel",
+              buttons: {
+                close: {
+                  text: "بستن",
+                  className: "bg-cancel",
+                },
+              },
+            });
           }
         });
-      }
     },
     hideReplyBtn: function (id) {
       let itemFirst = id + " span:first-child";

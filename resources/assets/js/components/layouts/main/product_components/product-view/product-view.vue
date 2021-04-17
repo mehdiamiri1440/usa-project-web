@@ -411,11 +411,13 @@ export default {
       this.isLoading = true;
       var self = this;
       axios.post("/user/profile_info").then(function (response) {
-        self.currentUser = response.data;
+        if (response.data.user_info.id) {
+          self.currentUser = response.data;
 
-        if (self.currentUser.user_info) {
-          if (self.currentUser.user_info.is_seller == true) {
-            self.showRegisterRequestBox = false;
+          if (self.currentUser.user_info) {
+            if (self.currentUser.user_info.is_seller == true) {
+              self.showRegisterRequestBox = false;
+            }
           }
         }
 

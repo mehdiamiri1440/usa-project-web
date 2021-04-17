@@ -851,6 +851,7 @@ select#bd-month-end-date-id option {
 .phone-number-wrapper {
   margin: 35px 0;
   padding: 0 15px;
+  line-height: 1.618;
 }
 
 .phone-number {

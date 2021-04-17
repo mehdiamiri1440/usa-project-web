@@ -576,10 +576,7 @@ export default {
   },
   watch: {
     currentUser(user) {
-      this.$parent.walletBalance = user.user_info.wallet_balance;
-
-      if (user.profile.created_at)
-        this.$parent.currentUserCreatedAt = user.profile.created_at;
+      if (user.user_info.id) this.$parent.currentUser = user;
     },
     $route() {
       this.checkButtonIsHide();

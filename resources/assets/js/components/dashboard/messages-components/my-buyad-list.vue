@@ -46,7 +46,7 @@
 }
 
 .buyAds-list-wrapper {
-  padding: 30px 15px;
+  padding: 15px 5px;
   overflow: hidden;
 }
 
@@ -513,6 +513,7 @@ li.static-item > button i {
 
 .phone-number-wrapper {
   padding: 15px 10px;
+  margin: 5px 0;
 }
 
 @media screen and (max-width: 991px) {
@@ -683,9 +684,10 @@ li.static-item > button i {
     <div v-else class="contact-items col-xs-12 buyad-lists-wrapper">
       <div class="row">
         <ul class="buyAds-list-wrapper">
+          <!-- v-for="(buyAd, index) in buyAdsGoldenFilter" -->
           <li
             class="contact-item golden"
-            v-for="(buyAd, index) in buyAdsGoldenFilter"
+            v-for="(buyAd, index) in buyAds"
             :key="'golden-' + index"
           >
             <div v-if="$parent.currentUser.user_info.active_pakage_type > 0">
@@ -834,7 +836,7 @@ li.static-item > button i {
                   </p>
                   <div class="buyAd-buttons-wrapper" v-if="buyAd.has_phone">
                     <button
-                      @click="activePhoneCall(buyAd.buyer_id, buyAd.id)"
+                      @click="openGoldenChatRestrictionModal()"
                       class="buyad-button golden-button phone-button"
                       :id="'loader-phone-' + buyAd.id"
                     >
@@ -1176,17 +1178,42 @@ export default {
           this.showReplyBtn(id);
           $(id).prop("disabled", false);
           $(id).removeClass("disable");
-          swal({
-            text: error.response.data.msg,
-            icon: "warning",
-            className: "custom-swal-with-cancel",
-            buttons: {
-              close: {
-                text: "بستن",
-                className: "bg-cancel",
+          if (error.response.status == 408) {
+            swal({
+              title: "ارتقا عضویت",
+              text: error.response.data.msg,
+              icon: "warning",
+              className: "custom-swal-with-cancel",
+              buttons: {
+                success: {
+                  text: "ارتقا عضویت",
+                  value: "promote",
+                },
+                close: {
+                  text: "بستن",
+                  className: "bg-cancel",
+                },
               },
-            },
-          });
+            }).then((value) => {
+              switch (value) {
+                case "promote":
+                  self.$router.push({ name: "dashboardPricingTableSeller" });
+                  break;
+              }
+            });
+          } else {
+            swal({
+              text: error.response.data.msg,
+              icon: "warning",
+              className: "custom-swal-with-cancel",
+              buttons: {
+                close: {
+                  text: "بستن",
+                  className: "bg-cancel",
+                },
+              },
+            });
+          }
         });
     },
     openGoldenChatRestrictionModal: function () {

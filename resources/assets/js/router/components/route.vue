@@ -365,7 +365,7 @@ export default {
       reviewCurrentStep: 0,
       reviewUserData: "",
       reviewUserPrfileId: "",
-      currentUserCreatedAt: "",
+      currentUser: "",
       walletBalance: "",
       verifiedUserContent:
         "<div class='tooltip-wrapper text-rtl'>اطلاعات هویتی این کاربر احراز شده است.<br/><a href='/verification'>اطلاعات بیشتر</a> </div>",
@@ -1191,6 +1191,56 @@ export default {
           return c.charCodeAt(0) - 0x06f0;
         });
     },
+    numberGuideCountCookie() {
+      let showNumberCount = this.getCookie("showNumberCount");
+      if (!showNumberCount) {
+        showNumberCount = 1;
+      } else {
+        showNumberCount++;
+      }
+      this.createCookie("showNumberCount", showNumberCount, 60 * 24 * 365);
+
+      return showNumberCount;
+    },
+    isShowNumberGuideActive() {
+      let showNumberGuideActive = this.getCookie("showNumberGuideActive");
+      if (!showNumberGuideActive) {
+        this.createCookie("showNumberGuideActive", true, 24 * 60); //for one day
+        return true;
+      } else {
+        return false;
+      }
+    },
+    initShowNumberGuide() {
+      // console.log("guide is run", this.numberGuideCountCookie());
+      if (this.isShowNumberGuideActive()) {
+        if (this.numberGuideCountCookie() < 5) {
+          swal({
+            title: "نمایش اطلاعات تماس",
+            text:
+              "شماره تماس شما به خریداران نمایش داده نمی شود. اگر مایل به نمایش شماره تماس خود به خریداران هستید. راهنمای زیر را مطالعه کنید.",
+            className: "custom-swal-with-cancel",
+            icon: "info",
+            buttons: {
+              success: {
+                text: "راهنمای اطلاعات تماس",
+                value: "guide",
+              },
+              close: {
+                text: "بستن",
+                className: "bg-cancel",
+              },
+            },
+          }).then((value) => {
+            switch (value) {
+              case "guide":
+                this.$router.push({ name: "showNumberGuideSeller" });
+                break;
+            }
+          });
+        }
+      }
+    },
   },
   mounted() {
     // eventBus.$emit("globalVerifiedBadgeContents", this.verifiedUserContent);
@@ -1201,12 +1251,21 @@ export default {
     eventBus.$emit("globalVerifiedBadgeContents", 1);
   },
   watch: {
-    currentUserCreatedAt(date) {
+    currentUser(user) {
+      this.walletBalance = user.user_info.wallet_balance;
+
+      let date = user.profile.created_at;
       let userCreatedAt = new Date(date);
       let currentDate = new Date();
       currentDate = new Date(currentDate.getTime() - 60 * 60000);
       if (currentDate > userCreatedAt) {
         this.activateDownloadApp();
+      }
+    },
+    walletBalance(balance) {
+      let activePackageType = this.currentUser.user_info.active_pakage_type;
+      if (balance == 0 && Number(activePackageType) == 0) {
+        this.initShowNumberGuide();
       }
     },
   },

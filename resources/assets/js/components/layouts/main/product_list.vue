@@ -781,7 +781,7 @@ div.items-wrapper {
 
   .sub-header {
     position: fixed;
-    z-index: 2;
+    z-index: 3;
     width: 100%;
   }
 
@@ -1522,7 +1522,9 @@ export default {
       var searchValueText = searchValue;
 
       axios.post("/user/profile_info").then(function (response) {
-        self.currentUser = response.data;
+        if (response.data.user_info.id) {
+          self.currentUser = response.data;
+        }
 
         if (searchValueText) {
           self.registerComponentStatistics(
