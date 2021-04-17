@@ -95,7 +95,7 @@ i {
 }
 
 .response-rate-wrapper {
-  width: 45px;
+  width: 50px;
 }
 
 .response-rate-wrapper button {
@@ -114,7 +114,7 @@ i {
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
-  max-width: calc(100% - 65px);
+  max-width: calc(100% - 70px);
 }
 
 .user-action-link.default {
@@ -162,7 +162,7 @@ a.user-information-link {
           class="response-rate"
         >
           <i class="fa fa-exchange-alt"></i>
-          {{ user_info.response_rate }}
+          {{ "%" + user_info.response_rate }}
         </button>
       </div>
     </router-link>

@@ -23,7 +23,7 @@ export default {
     SelectSubCategory,
     TypeCategory,
   },
-  props: ["categoryList"],
+  props: ["categoryList", "formLoader"],
   data: function () {
     return {
       step: 0,
@@ -85,8 +85,10 @@ export default {
       return regx.test(input);
     },
     formValidator: function () {
+      this.$parent.formLoader = true;
       if (!this.requirement_amount) {
         this.errors.requirement_amount = "لطفا میزان نیازمندی را وارد کنید.";
+        this.$parent.formLoader = false;
       }
 
       if (

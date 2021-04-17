@@ -260,6 +260,7 @@
           <register-request
             :categoryList="categoryList"
             v-else-if="currentStep == 1"
+            :form-loader="formLoader"
           />
           <finish-register-request-related
             v-else-if="currentStep == 2 && relatedProducts"
@@ -338,6 +339,7 @@ export default {
           url: "registerRequest",
         },
       ],
+      formLoader: false,
     };
   },
   methods: {
@@ -382,10 +384,10 @@ export default {
             if (response.data.products) {
               self.relatedProducts = response.data.products;
             }
-
             self.goToStep(2);
           }
           eventBus.$emit("submitingEvent", false);
+          self.formLoader = false;
         })
         .catch(function (err) {
           self.errors = err.response.data.errors;
@@ -393,6 +395,7 @@ export default {
           eventBus.$emit("submitingEvent", false);
 
           self.registerComponentExceptions("validation error in buyAd-request");
+          self.formLoader = false;
         });
     },
     getBuyAdFormFields: function () {

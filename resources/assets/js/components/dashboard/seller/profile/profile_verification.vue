@@ -6,7 +6,6 @@
 
 .main-wrapper {
   direction: rtl;
-  background: #f6f6f6;
   font-size: 13px;
   padding-top: 50px;
 }
@@ -22,8 +21,8 @@
 
 .content-wrapper {
   background: #fff;
-  box-shadow: 0 0 10px #c5c5c5;
-  border-radius: 9px;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
   margin: 15px auto;
   padding: 15px 0;
 }
@@ -56,13 +55,12 @@
 .green-button {
   max-width: 300px;
   width: 100%;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
-  border-radius: 6px;
+  border-radius: 8px;
 }
 
 .disabled {
   color: #fff;
-  background: #eee;
+  background: #ccc;
 }
 
 .user-verified-icon-wrapper {

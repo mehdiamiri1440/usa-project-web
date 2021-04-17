@@ -832,6 +832,16 @@ export default {
           helpDescription: "",
         },
         {
+          title: "دسترسی به اطلاعات تماس خریداران",
+          contentUnit: true,
+          helpDescription: "",
+        },
+        {
+          title: "نمایش اطلاعات تماس شما به خریداران",
+          contentUnit: true,
+          helpDescription: "",
+        },
+        {
           title: "تبلیغ محصولات در کانال باسکول",
           contentUnit: false,
           helpDescription: "",
@@ -858,6 +868,16 @@ export default {
         },
         {
           title: "امکان ارتباط با خریداران طلایی",
+          contentUnit: true,
+          helpDescription: "",
+        },
+        {
+          title: "دسترسی به اطلاعات تماس خریداران",
+          contentUnit: true,
+          helpDescription: "",
+        },
+        {
+          title: "نمایش اطلاعات تماس شما به خریداران",
           contentUnit: true,
           helpDescription: "",
         },

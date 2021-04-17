@@ -525,6 +525,10 @@ p.response-rate span {
   direction: initial;
 }
 
+.deleted-reviews {
+  margin-top: 15px;
+}
+
 @media screen and (max-width: 370px) {
   .mobile-hidden {
     display: none;
@@ -1046,7 +1050,7 @@ p.response-rate span {
                       v-if="profileOwnerStatistics.validated_seller"
                     >
                       <i class="fa fa-check-circle"></i>
-                      فروشنده معتبر
+                      فروشنده ویژه
                     </span>
                     <p
                       v-if="profileOwnerStatistics.response_rate"
@@ -1236,7 +1240,7 @@ p.response-rate span {
                       v-if="profileOwnerStatistics.validated_seller"
                     >
                       <i class="fa fa-check-circle"></i>
-                      فروشنده معتبر
+                      فروشنده ویژ
                     </span>
 
                     <p
@@ -1472,7 +1476,10 @@ p.response-rate span {
 
                       <SuccessReviewComponent v-if="reviewCurrentStep == 1" />
                     </div>
-                    <p class="red-text" v-if="reviews.deleted_count > 0">
+                    <p
+                      class="red-text deleted-reviews"
+                      v-if="reviews.deleted_count > 0"
+                    >
                       نظرات
                       <strong v-text="reviews.deleted_count"></strong>
                       کاربر توسط

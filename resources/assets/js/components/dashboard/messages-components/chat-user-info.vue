@@ -285,7 +285,7 @@ li.score-item i {
               احتمال پاسخگویی
               <span
                 class="red-text"
-                v-text="userStatistics.response_rate + '٪'"
+                v-text="'%' + userStatistics.response_rate"
               >
               </span>
             </p>

@@ -1522,10 +1522,7 @@ export default {
       var searchValueText = searchValue;
 
       axios.post("/user/profile_info").then(function (response) {
-        if (response.data.user_info.id) {
-          self.currentUser = response.data;
-        }
-
+        self.currentUser = response.data;
         if (searchValueText) {
           self.registerComponentStatistics(
             "homePage",

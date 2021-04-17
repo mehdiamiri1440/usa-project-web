@@ -506,7 +506,7 @@ p.response-rate span {
             class="response-rate"
           >
             احتمال پاسخ گویی
-            <span v-text="'%' + $parent.product.user_info.response_rate"></span>
+            <span v-text="$parent.product.user_info.response_rate + '%'"></span>
           </p>
           <p
             v-if="$parent.product.user_info.active_pakage_type == 3"
@@ -555,8 +555,17 @@ p.response-rate span {
           >
 
           <button
-            v-if="!$parent.isMyProfile"
+            v-if="!$parent.isMyProfile && $parent.currentUser.user_info"
             @click.prevent="$parent.openChatModal($parent.product)"
+            class="green-button"
+          >
+            <i class="fa fa-comment-alt"></i>
+
+            ارسال پیام
+          </button>
+          <button
+            v-else-if="!$parent.isMyProfile && !$parent.currentUser.user_info"
+            @click.prevent="$parent.loginModal()"
             class="green-button"
           >
             <i class="fa fa-comment-alt"></i>

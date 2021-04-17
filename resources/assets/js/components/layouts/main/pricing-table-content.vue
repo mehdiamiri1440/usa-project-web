@@ -596,7 +596,7 @@ export default {
           helpDescription: " مقدار اعتبار اضافه شده به صفحه پروفایل شما ",
         },
         {
-          title: " نشان فروشنده معتبر ",
+          title: " نشان فروشنده ویژه ",
           contentUnit:
             '<i class="text-green fa fa-times-circle" style="color:#e41c38"></i>',
           helpDescription:
@@ -655,7 +655,7 @@ export default {
           helpDescription: " مقدار اعتبار اضافه شده به صفحه پروفایل شما ",
         },
         {
-          title: " نشان فروشنده معتبر ",
+          title: " نشان فروشنده ویژه ",
           contentUnit:
             '<i class="text-green fa fa-times-circle" style="color:#e41c38"></i>',
           helpDescription:
@@ -714,7 +714,7 @@ export default {
           helpDescription: " مقدار اعتبار اضافه شده به صفحه پروفایل شما ",
         },
         {
-          title: " نشان فروشنده معتبر ",
+          title: " نشان فروشنده ویژه ",
           contentUnit:
             '<i class="text-green fa fa-check-circle" style="color:#00c569"></i>',
           helpDescription:
@@ -768,7 +768,7 @@ export default {
                         helpDescription: ' مقدار اعتبار اضافه شده به صفحه پروفایل شما '
                     },
                     {
-                        title: ' نشان فروشنده معتبر ',
+                        title: ' نشان فروشنده ویژه ',
                         contentUnit: '<i class="text-green fa fa-times-circle" style="color:#e41c38"></i>',
                         helpDescription: ' این نشان در صفحه پروفایل فروشنده نمایش داده می شود. '
                     },

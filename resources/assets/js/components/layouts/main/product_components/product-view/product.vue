@@ -458,7 +458,7 @@ label {
 
         <div class="actions">
           <button
-            v-if="!$parent.isMyProfile"
+            v-if="!$parent.isMyProfile && $parent.currentUser.user_info"
             @click.prevent="$parent.openChat($parent.product)"
             class="hidden-xs hidden-sm"
             :class="{
@@ -467,7 +467,20 @@ label {
                 $parent.currentUser.user_info.is_buyer,
               'green-button':
                 !$parent.product.user_info.has_phone ||
-                $parent.currentUser.user_info.is_seller,
+                ($parent.product.user_info.has_phone &&
+                  !$parent.currentUser.user_info.is_buyer),
+            }"
+          >
+            ارسال پیام
+            <i class="fas fa-comment-alt"></i>
+          </button>
+          <button
+            v-else-if="!$parent.currentUser.user_info"
+            @click.prevent="$parent.loginModal()"
+            class="hidden-xs hidden-sm"
+            :class="{
+              'send-message-button': $parent.product.user_info.has_phone,
+              'green-button': !$parent.product.user_info.has_phone,
             }"
           >
             ارسال پیام
@@ -487,10 +500,30 @@ label {
           <button
             v-if="
               !$parent.isMyProfile &&
+              $parent.currentUser.user_info &&
               $parent.product.user_info.has_phone &&
               $parent.currentUser.user_info.is_buyer
             "
             @click.prevent="$parent.activePhoneCall(false)"
+            class="green-button phone-call hidden-xs hidden-sm"
+            :class="{ disable: $parent.isActivePhone }"
+            :disabled="$parent.isActivePhone"
+          >
+            اطلاعات تماس
+            <i
+              class="fas fa-phone-square-alt"
+              v-if="!$parent.getPhoneLoader"
+            ></i>
+            <div v-else class="spinner-border">
+              <span class="sr-only"></span>
+            </div>
+          </button>
+          <button
+            v-else-if="
+              !$parent.currentUser.user_info &&
+              $parent.product.user_info.has_phone
+            "
+            @click.prevent="$parent.loginModal()"
             class="green-button phone-call hidden-xs hidden-sm"
             :class="{ disable: $parent.isActivePhone }"
             :disabled="$parent.isActivePhone"

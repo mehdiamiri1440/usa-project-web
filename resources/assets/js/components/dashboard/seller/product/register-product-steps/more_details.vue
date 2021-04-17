@@ -437,7 +437,7 @@ export default {
           id: 1,
           name: "بسته بندی",
           description:
-            "نوع بسته بندی و وزن ارایه شده توسط فروشنده برای این محصول",
+            "نوع بسته بندی و وزن ارائه شده توسط فروشنده برای این محصول",
           itemValue: "",
           alreadySelected: false,
           selectedIndex: null,
@@ -445,7 +445,7 @@ export default {
         {
           id: 2,
           name: "کیفیت",
-          description: "میزان مرغوبیت و کیفیت ظاهری محصول ارایه شده",
+          description: "میزان مرغوبیت و کیفیت ظاهری محصول ارائه شده",
           itemValue: "",
           alreadySelected: false,
           selectedIndex: null,
