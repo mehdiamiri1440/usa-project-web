@@ -35,7 +35,7 @@ i {
 
 .user-info-wrapper.active {
   padding: 15px 20px;
-  border: 2px solid #00c569;
+  border: 1px solid #00c569;
 }
 
 .user-information-content-image {
@@ -239,8 +239,9 @@ p.response-rate span {
     margin-top: 30px;
   }
 
-  .user-info-wrapper {
-    padding: 10px 15px;
+  .user-info-wrapper,
+  .user-info-wrapper.active {
+    padding: 7px;
     float: right;
     width: 100%;
   }
@@ -356,10 +357,6 @@ p.response-rate span {
     padding: 0 15px;
     margin-top: 0;
   }
-  .user-information-content-image .user-image {
-    width: 50px;
-    height: 50px;
-  }
 
   .user-information-content-image {
     min-width: 50px;
@@ -375,7 +372,7 @@ p.response-rate span {
   }
 
   .user-information-content {
-    width: calc(100% - 65px);
+    width: calc(100% - 85px);
   }
 
   .user-information-content p.stars-wrapper {
@@ -403,10 +400,15 @@ p.response-rate span {
   }
 }
 
-@media screen and (max-width: 350px) {
+@media screen and (max-width: 374px) {
   .more-info {
     top: 21px;
   }
+  .user-info-wrapper,
+  .user-info-wrapper.active {
+    padding: 10px 15px;
+  }
+
   .user-information-content {
     width: 100%;
     margin: 0;
