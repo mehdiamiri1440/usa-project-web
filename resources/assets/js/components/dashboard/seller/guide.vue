@@ -24,7 +24,8 @@ ul {
   font-size: 14px;
   font-weight: 400;
   padding: 15px 30px;
-  box-shadow: 0 0 9px rgba(0, 0, 0, 0.075);
+  border: 1px solid #e9ecef;
+  border-radius: 12px;
   background: #fff;
 }
 

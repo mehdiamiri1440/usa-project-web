@@ -4,8 +4,8 @@ input[type="number"] {
 }
 .wrapper-background {
   background: #fff;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
-  border-radius: 4px;
+  border: 1px solid #e9ecef;
+  border-radius: 12px;
   padding: 15px 0;
   line-height: 1.618;
   margin-bottom: 15px;

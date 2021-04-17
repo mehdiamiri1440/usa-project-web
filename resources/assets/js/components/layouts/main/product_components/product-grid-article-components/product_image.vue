@@ -12,6 +12,11 @@
 
   position: relative;
 }
+
+.main-article-image:hover {
+  cursor: pointer;
+}
+
 .main-article-image .product-image {
   display: block;
 
@@ -65,7 +70,7 @@
   padding-top: 6px;
 }
 
-.article-title a {
+.article-title p {
   font-size: 15px;
   padding: 0 5px;
   color: #ebebeb;
@@ -112,7 +117,7 @@
 </style>
 
 <template>
-  <router-link :to="productUrl" class="main-article-image">
+  <div class="main-article-image">
     <div
       class="product-image"
       :style="{
@@ -175,13 +180,10 @@
         <span v-text="imageCount"></span>
       </div>
       <h3 class="article-title">
-        <router-link
-          :to="$parent.productUrl"
-          v-html="getProductName()"
-        ></router-link>
+        <p v-html="getProductName()"></p>
       </h3>
     </div>
-  </router-link>
+  </div>
 </template>
 
 <script>

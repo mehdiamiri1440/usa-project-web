@@ -6,6 +6,7 @@
 .green-button {
   padding: 10px 15px;
   width: initial;
+  border-radius: 8px;
 }
 
 .special-button {
@@ -49,9 +50,9 @@
 .box {
   background: #fff;
 
-  border-radius: 4px;
+  border: 1px solid #e9ecef;
 
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16);
+  border-radius: 12px;
 
   padding: 0;
 
