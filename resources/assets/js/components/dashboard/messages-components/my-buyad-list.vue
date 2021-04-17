@@ -684,10 +684,9 @@ li.static-item > button i {
     <div v-else class="contact-items col-xs-12 buyad-lists-wrapper">
       <div class="row">
         <ul class="buyAds-list-wrapper">
-          <!-- v-for="(buyAd, index) in buyAdsGoldenFilter" -->
           <li
             class="contact-item golden"
-            v-for="(buyAd, index) in buyAds"
+            v-for="(buyAd, index) in buyAdsGoldenFilter"
             :key="'golden-' + index"
           >
             <div v-if="$parent.currentUser.user_info.active_pakage_type > 0">

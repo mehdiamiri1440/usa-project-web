@@ -887,11 +887,27 @@ border: 1px solid #e0e0e0;
     text-overflow: ellipsis;
   }
   
+.response-rate-wrapper {
+  width: 45px;
+}
+
+.response-rate-wrapper button {
+  background: #f2f2f2;
+  border: none;
+  border-radius: 20px;
+  font-size: 13px;
+  text-align: center;
+  color: #e41c38;
+  width: 100%;
+  line-height: initial;
+  padding: 0;
+}
+
   .grid-list a.user-name-link {
 
     height: initial;
 
-    max-width: 100%;
+    max-width: calc(100% - 70px);
 
     overflow: hidden;
   
@@ -903,16 +919,14 @@ border: 1px solid #e0e0e0;
   
     display: block;
   
-    padding: 4px 0 5px;
 
     margin: 0;
 
-    margin: 3px 5px;
 
     line-height: 1.618;
 
-    border-bottom: 1px solid #e9ecef;
-  
+    float: right;
+    
     white-space: nowrap;
   
     text-overflow: ellipsis;
@@ -923,6 +937,15 @@ border: 1px solid #e0e0e0;
     display: block;
     overflow: hidden;
 }
+  
+  
+   .user-information-content {
+    margin: 3px 5px;
+    padding: 4px 0 5px;
+
+    border-bottom: 1px solid #e9ecef;
+  
+  }
   
  .grid-list .user-information-content,.grid-list .user-action-link,.grid-list .user-information-link {
     float: none;
