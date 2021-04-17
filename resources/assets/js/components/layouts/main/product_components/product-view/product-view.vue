@@ -411,7 +411,7 @@ export default {
       this.isLoading = true;
       var self = this;
       axios.post("/user/profile_info").then(function (response) {
-        if (response.data.user_info.id) {
+        if (response.data) {
           self.currentUser = response.data;
 
           if (self.currentUser.user_info) {

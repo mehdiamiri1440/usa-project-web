@@ -139,6 +139,14 @@ input.error:focus + i {
   border-color: #e41c38;
 }
 
+.spinner-border {
+  width: 1.5rem;
+  height: 1.5rem;
+  top: -5px;
+  position: relative;
+  left: 2px;
+}
+
 @media screen and (max-width: 767px) {
   select {
     font-size: 12px;
@@ -291,13 +299,17 @@ input.error:focus + i {
               active:
                 !$parent.errors.productName &&
                 $parent.requirement_amount &&
-                !$parent.errors.requirement_amount,
+                !$parent.errors.requirement_amount &&
+                !$parent.formLoader,
             }"
             @click.prevent="$parent.formValidator()"
             type="submit"
           >
             ثبت درخواست
-            <i class="fa fa-check"></i>
+            <i v-if="!$parent.formLoader" class="fa fa-check"></i>
+            <div v-else class="spinner-border">
+              <span class="sr-only"></span>
+            </div>
           </button>
 
           <button

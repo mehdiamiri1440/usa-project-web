@@ -315,7 +315,7 @@ button i {
         </button>
       </div>
       <div
-        id="phone-number-wrapper"
+        :id="product.id + '-phone-number-wrapper'"
         v-if="isActivePhone"
         class="phone-number-wrapper collapse"
       >
@@ -377,7 +377,7 @@ export default {
         .then((response) => {
           this.$nextTick(() => {
             this.userPhone = response.data.phone;
-            $("#phone-number-wrapper").collapse("show");
+            $("#" + this.product.id + "-phone-number-wrapper").collapse("show");
             this.getPhoneLoader = false;
           });
         })
