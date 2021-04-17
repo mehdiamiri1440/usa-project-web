@@ -31,7 +31,7 @@ class phone_number_controller extends Controller
         if($this->is_proper_time_for_phone_call() == false){
             return response()->json([
                 'status' => false,
-                'msg' => 'متاسفانه الان زمان مناسبی برای تماس تلفنی نیست. لطفا در طی ساعات روز اقدام به تماس کنید.'
+                'msg' => 'متاسفانه الان زمان مناسبی برای برقراری تماس تلفنی نیست. لطفا پیام ارسال کنید یا در ساعات روز تماس بگیرید.'
             ],404);
         }
 
@@ -166,7 +166,7 @@ class phone_number_controller extends Controller
         if($this->is_proper_time_for_phone_call() == false){
             return response()->json([
                 'status' => false,
-                'msg' => 'متاسفانه الان زمان مناسبی برای تماس تلفنی نیست. لطفا در طی ساعات روز اقدام به تماس کنید.'
+                'msg' => 'متاسفانه الان زمان مناسبی برای برقراری تماس تلفنی نیست. لطفا پیام ارسال کنید یا در ساعات روز تماس بگیرید.'
             ],404);
         }
 
