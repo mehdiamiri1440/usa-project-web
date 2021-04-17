@@ -110,9 +110,6 @@
 button.disable {
   background: #e0e0e0 !important;
 }
-.buyAd-phone-buttons-wrapper > .phone-button {
-  margin-left: 20px;
-}
 
 .main-content > ul {
   border-radius: 3px;
@@ -297,6 +294,7 @@ button.disable {
   border: 1px solid #404b55;
   color: #404b55;
   transition: 300ms;
+  margin-right: 20px;
 }
 
 .buyAd-phone-buttons-wrapper > .send-message-button:hover {
@@ -710,7 +708,7 @@ button.disable {
                     </div>
                   </div>
                   <p
-                    v-if="buyAd.reply_capacity"
+                    v-if="buyAd.reply_capacity > 0"
                     class="list-notice col-sm-1 col-xs-6 pull-right"
                   >
                     <button
@@ -746,7 +744,7 @@ button.disable {
                   <p
                     class="list-time"
                     :class="[
-                      buyAd.reply_capacity
+                      buyAd.reply_capacity > 0
                         ? 'col-sm-2 col-xs-6'
                         : 'col-sm-3 col-xs-12',
                     ]"

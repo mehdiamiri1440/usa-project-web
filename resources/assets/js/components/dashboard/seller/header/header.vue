@@ -33,8 +33,16 @@ body,
 }
 
 .little_header .wallet-wrapper .wallet-title,
-.little_header .wallet-wrapper .wallet-price {
+.little_header .wallet-wrapper .wallet-price,
+.little_header .wallet-main .icon-wrapper > span {
   display: none;
+}
+
+.little_header .wallet-main .icon-wrapper {
+  text-align: center;
+  top: 16px;
+  left: 15px;
+  font-size: 18px;
 }
 
 .little_header .wallet-main > i {
@@ -235,7 +243,7 @@ span.min {
 }
 
 .wallet-main {
-  background: url("../../../../../img/wallet-bg.jpg")  center, rgb(55, 174, 222);
+  background: url("../../../../../img/wallet-bg.jpg") center, rgb(55, 174, 222);
   background-size: auto;
   border-radius: 12px;
   min-height: 80px;
@@ -583,7 +591,7 @@ span.min {
             </p>
 
             <span class="icon-wrapper">
-              افزایش موجودی
+              <span>افزایش موجودی</span>
               <i class="fa fa-plus"></i>
             </span>
           </div>
@@ -638,7 +646,7 @@ span.min {
 
             <span class="icon-wrapper">
               <i class="fa fa-plus"></i>
-              افزایش موجودی
+              <span>افزایش موجودی</span>
             </span>
           </div>
         </a>

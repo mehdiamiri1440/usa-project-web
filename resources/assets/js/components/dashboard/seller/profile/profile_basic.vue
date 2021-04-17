@@ -452,10 +452,10 @@ textarea.error:focus + i {
   .info-box-wrapper {
     flex-direction: column;
   }
-  .verification-button{
+  .verification-button {
     max-width: 180px;
-margin: 6px auto;
-padding: 5px 25px 7px;
+    margin: 6px auto;
+    padding: 5px 25px 7px;
   }
 }
 </style>
@@ -1091,13 +1091,15 @@ export default {
       this.activeisCompanyCollapse();
       this.isLoaded = true;
       $('input[type="file"]').imageuploadify();
-      var self = this;
-      axios.post("/user/profile_info").then(function (response) {
-        self.currentUser = response.data;
-        if (self.currentUser.profile.is_company) {
+      this.getProfileInfo();
+    },
+    getProfileInfo() {
+      axios.post("/user/profile_info").then((response) => {
+        this.currentUser = response.data;
+        if (this.currentUser.profile.is_company) {
           $("#company-box").collapse("show");
         }
-        self.sumProgressNumber();
+        this.sumProgressNumber();
       });
     },
     RegisterBasicProfileInfo: function () {
@@ -1211,7 +1213,7 @@ export default {
       axios
         .post("/set_phone_number_view_permission", { permission: active })
         .then((response) => {
-          this.init();
+          this.getProfileInfo();
           swal({
             title: "تغییرات شماره تماس",
             text: "تغییرات شماره تماس با موفقیت اعمال شد",
