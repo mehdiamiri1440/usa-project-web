@@ -487,12 +487,16 @@ class product_list_controller extends Controller
                                                     // ->where('confirmed',true)
                                                     ->orderBy('updated_at','desc')
                                                     ->get()
-                                                    ->last();
+                                                    ->first();
 
             if($the_buyer_last_buyAd_request){
                 $tmp_products =  $products;
                 $tmp_products = $this->get_the_most_related_products_to_buyer($the_buyer_last_buyAd_request,$tmp_products);
-                $tmp_products = array_slice($tmp_products,0,5);
+                usort($tmp_products,function($item1,$item2){
+                    return $item1['main']->updated_at <= $item2['main']->updated_at ? 1 : -1;
+                });
+
+                $tmp_products = array_slice($tmp_products,0,10);
             }
             else{
                 if($user_info->created_at->diffInHours(Carbon::now()) <= 6){
