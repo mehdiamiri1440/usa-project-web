@@ -592,7 +592,6 @@ textarea.error:focus + i {
               <div class="text-input-wrapper">
                 <input
                   v-model="currentUser.profile.public_phone"
-                  id="min-sale-amount"
                   type="tel"
                   :class="{
                     active: currentUser.profile.public_phone,
@@ -657,7 +656,6 @@ textarea.error:focus + i {
               <div class="text-input-wrapper">
                 <input
                   v-model="currentUser.profile.address"
-                  id="min-sale-amount"
                   type="text"
                   :class="{
                     active: currentUser.profile.address,
@@ -724,7 +722,6 @@ textarea.error:focus + i {
               <div class="text-input-wrapper">
                 <input
                   v-model="currentUser.profile.company_name"
-                  id="min-sale-amount"
                   type="text"
                   :class="{
                     active: currentUser.profile.company_name,
@@ -763,7 +760,6 @@ textarea.error:focus + i {
               <div class="text-input-wrapper">
                 <input
                   v-model="currentUser.profile.company_register_code"
-                  id="min-sale-amount"
                   type="tel"
                   :class="{
                     active: currentUser.profile.company_register_code,
@@ -863,6 +859,7 @@ textarea.error:focus + i {
       <div class="col-xs-12 text-center margin-15-auto">
         <button
           @click="RegisterBasicProfileInfo()"
+          :disabled="isLoaded"
           class="submit-form-button bg-blue hover-effect"
         >
           <i class="fa fa-check"></i>
@@ -1004,6 +1001,7 @@ textarea.error:focus + i {
       <div class="col-xs-12 text-center margin-15-auto">
         <button
           @click="RegisterBasicProfileInfo()"
+          :disabled="isLoaded"
           class="submit-form-button bg-blue hover-effect"
         >
           <i class="fa fa-check"></i>
@@ -1084,6 +1082,7 @@ export default {
       },
       completeProfileProgress: 0,
       uploadPercentage: 0,
+      isLoaded: false,
     };
   },
   methods: {
@@ -1096,6 +1095,7 @@ export default {
     getProfileInfo() {
       axios.post("/user/profile_info").then((response) => {
         this.currentUser = response.data;
+        this.isLoaded = false;
         if (this.currentUser.profile.is_company) {
           $("#company-box").collapse("show");
         }
@@ -1105,6 +1105,9 @@ export default {
     RegisterBasicProfileInfo: function () {
       if (this.currentUser.profile.is_company) {
         this.checkIsCompany();
+      } else {
+        this.errors.company_name = "";
+        this.errors.company_register_code = "";
       }
       let formError = 0;
 
@@ -1113,7 +1116,6 @@ export default {
           formError += 1;
         }
       }
-
       if (!formError) {
         eventBus.$emit("submiting", true);
 

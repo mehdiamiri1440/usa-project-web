@@ -863,6 +863,7 @@ textarea.error:focus + i {
       <div class="col-xs-12 text-center margin-15-auto">
         <button
           @click="RegisterBasicProfileInfo()"
+          :disabled="isLoaded"
           class="submit-form-button bg-blue hover-effect"
         >
           <i class="fa fa-check"></i>
@@ -1004,6 +1005,7 @@ textarea.error:focus + i {
       <div class="col-xs-12 text-center margin-15-auto">
         <button
           @click="RegisterBasicProfileInfo()"
+          :disabled="isLoaded"
           class="submit-form-button bg-blue hover-effect"
         >
           <i class="fa fa-check"></i>
@@ -1084,6 +1086,7 @@ export default {
       },
       completeProfileProgress: 0,
       uploadPercentage: 0,
+      isLoaded: false,
     };
   },
   methods: {
@@ -1091,12 +1094,13 @@ export default {
       this.activeisCompanyCollapse();
       this.isLoaded = true;
       $('input[type="file"]').imageuploadify();
-      var self = this;
       this.getProfileInfo();
     },
     getProfileInfo() {
       axios.post("/user/profile_info").then((response) => {
         this.currentUser = response.data;
+        this.isLoaded = false;
+
         if (this.currentUser.profile.is_company) {
           $("#company-box").collapse("show");
         }
@@ -1106,6 +1110,9 @@ export default {
     RegisterBasicProfileInfo: function () {
       if (this.currentUser.profile.is_company) {
         this.checkIsCompany();
+      } else {
+        this.errors.company_name = "";
+        this.errors.company_register_code = "";
       }
       let formError = 0;
 
