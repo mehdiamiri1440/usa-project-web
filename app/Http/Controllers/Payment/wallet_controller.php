@@ -106,7 +106,7 @@ class wallet_controller extends Controller
             
             $this->do_after_payment_changes_for_wallet_charge(session()->pull('payment_amount'),session('user_id'));
             
-            return redirect('/seller/pricing');
+            return redirect('/seller/buyAd-requests');
 
         } 
         catch (\Exception $e)
