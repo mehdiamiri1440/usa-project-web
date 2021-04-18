@@ -77,17 +77,17 @@ class phone_number_controller extends Controller
             }
 
             if($related_record->active_pakage_type == 0){
-                $this->insert_phone_number_view_log_record($viewer_user_id,$request->s_id,'SELLER',$request->item,true);
+                $this->insert_phone_number_view_log_record($viewer_user_id,$request->s_id,'SELLER',$request->item,false);
                 
                 $wallet_controller_object = new wallet_controller();
                 $wallet_controller_object->insert_expendig_log_record(1,$request->s_id);
             }
             else{
-                $this->insert_phone_number_view_log_record($viewer_user_id,$request->s_id,'SELLER',$request->item,false);
+                $this->insert_phone_number_view_log_record($viewer_user_id,$request->s_id,'SELLER',$request->item,true);
             }
         }
         else{
-            $this->insert_phone_number_view_log_record($viewer_user_id,$request->s_id,'SELLER',$request->item,false);
+            $this->insert_phone_number_view_log_record($viewer_user_id,$request->s_id,'SELLER',$request->item,true);
         }
 
         return response()->json([
