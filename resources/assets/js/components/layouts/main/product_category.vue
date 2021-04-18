@@ -1261,6 +1261,7 @@ div.items-wrapper {
                     :str="str"
                     :currentUser="currentUser"
                     :isMyProfile="
+                      currentUser.user_info &&
                       currentUser.user_info.id == product.main.myuser_id
                         ? true
                         : false

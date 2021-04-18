@@ -124,7 +124,7 @@ ul.list-info-wrapper li::after {
           class="green-button bg-light-green"
           :to="{ name: 'dashboardPricingTableSeller' }"
         >
-          ارتقاع عضویت
+          ارتقا عضویت
         </router-link>
       </div>
       <div class="info-wrapper">
