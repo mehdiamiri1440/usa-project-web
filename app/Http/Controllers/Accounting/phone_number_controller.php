@@ -302,7 +302,7 @@ class phone_number_controller extends Controller
                     ->join('phone_number_view_logs','myusers.id','=','phone_number_view_logs.viewer_id')
                     ->where('phone_number_view_logs.myuser_id',$user_id)
                     ->select($this->phone_number_viewers_list)
-                    ->groupBy('phone_number_view_logs.viewer_id')
+                    // ->groupBy('phone_number_view_logs.viewer_id')
                     ->orderBy('phone_number_view_logs.created_at','desc')
                     ->take(50)
                     ->get();
