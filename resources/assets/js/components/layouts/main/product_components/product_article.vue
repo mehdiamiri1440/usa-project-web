@@ -512,14 +512,14 @@ export default {
     ProductUserInfo,
     ArticleMainContents,
   },
-  props: ["productIndex", "product", "str", "currentUser"],
+  props: ["productIndex", "product", "str", "currentUser", "isMyProfile"],
   data: function () {
     return {
       submiting: false,
       errors: "",
       popUpMsg: "",
       popUpLoaded: false,
-      isMyProfile: false,
+      // isMyProfile: false,
       productUrl: "",
       jsonLDObject: "",
       verifiedUserContent: this.$parent.verifiedUserContent,
@@ -528,17 +528,20 @@ export default {
   methods: {
     init: function () {
       this.productUrl = this.getProductUrl();
+      // console.log(
+      //   this.$parent.currentUser.user_info.id,
+      //   this.product.main.myuser_id
+      // );
+      // this.$nextTick(() => {
+      //   if (this.currentUser.user_info) {
+      //     if (this.currentUser.user_info.id === this.product.main.myuser_id) {
+      //       this.isMyProfile = true;
+      //       this.$emit("isMyProfile", this.isMyProfile);
+      //     }
+      //   }
+      // });
 
-      this.$nextTick(() => {
-        if (this.currentUser.user_info) {
-          if (this.currentUser.user_info.id === this.product.main.myuser_id) {
-            this.isMyProfile = true;
-            this.$emit("isMyProfile", this.isMyProfile);
-          }
-        }
-      });
-
-      // this.jsonLDObject = this.createJsonLDObject();
+      this.jsonLDObject = this.createJsonLDObject();
     },
     toLatinNumbers: function (num) {
       if (num == null) {

@@ -670,11 +670,11 @@ export default {
             text: "پرداخت از طریق درگاه",
             value: "pay",
           },
-          wallet: {
-            text: "پرداخت از کیف پول",
-            value: "wallet",
-            className: "bg-blue",
-          },
+          // wallet: {
+          //   text: "پرداخت از کیف پول",
+          //   value: "wallet",
+          //   className: "bg-blue",
+          // },
           close: {
             text: "بستن",
             className: "bg-cancel",
@@ -716,6 +716,11 @@ export default {
                   icon: "error",
                   className: "custom-swal-with-cancel",
                   buttons: {
+                    wallet: {
+                      text: "افزایش موجودی",
+                      value: "wallet",
+                      className: "bg-blue",
+                    },
                     close: {
                       text: "بستن",
                       value: "close",

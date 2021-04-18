@@ -785,7 +785,7 @@ export default {
             }).then((value) => {
               switch (value) {
                 case "promote":
-                  self.$router.push({ name: "dashboardPricingTableSeller" });
+                  this.$router.push({ name: "dashboardPricingTableSeller" });
                   break;
               }
             });

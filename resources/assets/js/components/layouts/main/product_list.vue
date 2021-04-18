@@ -1214,6 +1214,11 @@ div.items-wrapper {
                     :product="product"
                     :str="str"
                     :currentUser="currentUser"
+                    :isMyProfile="
+                      currentUser.user_info.id == product.main.myuser_id
+                        ? true
+                        : false
+                    "
                   />
                 </div>
               </div>
@@ -1482,6 +1487,7 @@ export default {
       sortOption: "BM",
       verifiedUserContent: this.$parent.verifiedUserContent,
       listIsGrid: true,
+      isMyProfile: false,
     };
   },
   methods: {
