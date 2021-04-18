@@ -145,7 +145,7 @@ button.disable {
   position: fixed;
   right: 250px;
   left: 0;
-  z-index: 5;
+  z-index: 4;
   border-radius: 0;
   padding: 13px 15px;
 }
