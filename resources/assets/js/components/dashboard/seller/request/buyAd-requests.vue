@@ -522,7 +522,7 @@ button.disable {
 
   .detail-success {
     max-width: 300px;
-    margin: 0 auto;
+    margin: 13px auto 0;
   }
 
   .default-button-full-with {
