@@ -147,7 +147,7 @@
   position: fixed;
   bottom: 0;
   left: 0;
-  z-index: 1;
+  z-index: 5;
   width: 100%;
   background: #fff;
   border-radius: 0;
@@ -785,7 +785,7 @@ export default {
             }).then((value) => {
               switch (value) {
                 case "promote":
-                  self.$router.push({ name: "dashboardPricingTableSeller" });
+                  this.$router.push({ name: "dashboardPricingTableSeller" });
                   break;
               }
             });

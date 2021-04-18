@@ -147,6 +147,7 @@
                   :str="str"
                   :loading="loading"
                   :currentUser="currentUser"
+                  :isMyProfile="true"
                 />
               </div>
             </div>

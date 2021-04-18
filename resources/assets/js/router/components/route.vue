@@ -667,9 +667,14 @@ export default {
         className: "custom-swal-with-cancel",
         buttons: {
           success: {
-            text: "پرداخت",
+            text: "پرداخت از طریق درگاه",
             value: "pay",
           },
+          // wallet: {
+          //   text: "پرداخت از کیف پول",
+          //   value: "wallet",
+          //   className: "bg-blue",
+          // },
           close: {
             text: "بستن",
             className: "bg-cancel",
@@ -679,7 +684,51 @@ export default {
         switch (value) {
           case "pay":
             window.location.href = "/payment/elevator/" + self.productId;
-
+            break;
+          case "wallet":
+            axios
+              .post("/wallet-expend/elevator", {
+                product_id: self.productId,
+              })
+              .then((response) => {
+                swal({
+                  title: "نردبان اعمال شد",
+                  text: "اعمال نردبان با موفقیت انجام شد.",
+                  icon: "success",
+                  className: "custom-swal-with-cancel",
+                  buttons: {
+                    close: {
+                      text: "بستن",
+                      value: "close",
+                      className: "bg-cancel",
+                    },
+                  },
+                }).then((value) => {
+                  if (value == "close") {
+                    window.location.reload();
+                  }
+                });
+              })
+              .catch((err) => {
+                swal({
+                  title: "خطا",
+                  text: err.response.data.msg,
+                  icon: "error",
+                  className: "custom-swal-with-cancel",
+                  buttons: {
+                    wallet: {
+                      text: "افزایش موجودی",
+                      value: "wallet",
+                      className: "bg-blue",
+                    },
+                    close: {
+                      text: "بستن",
+                      value: "close",
+                      className: "bg-cancel",
+                    },
+                  },
+                });
+              });
             break;
         }
       });

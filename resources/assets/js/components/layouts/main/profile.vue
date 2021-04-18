@@ -1558,6 +1558,7 @@ p.response-rate span {
                     :product="product"
                     :str="str"
                     :currentUser="currentUser"
+                    :isMyProfile="isMyProfile"
                   />
                 </div>
               </section>

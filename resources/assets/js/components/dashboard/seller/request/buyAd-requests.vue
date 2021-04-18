@@ -170,7 +170,7 @@ button.disable {
   position: fixed;
   bottom: 0;
   left: 0;
-  z-index: 1;
+  z-index: 5;
   width: 100%;
   background: #fff;
   border-radius: 0;
@@ -522,7 +522,7 @@ button.disable {
 
   .detail-success {
     max-width: 300px;
-    margin: 0 auto;
+    margin: 13px auto 0;
   }
 
   .default-button-full-with {
