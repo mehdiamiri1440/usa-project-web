@@ -72,7 +72,7 @@ class phone_number_controller extends Controller
             if($viewer_daily_access_count > config('subscriptionPakage.phone-number.max-daily-access-count')){
                 return response()->json([
                     'status' => false,
-                    'msg' => 'سقف تعداد روزانه ی دسترسی شما به شماره تماس کاربران پر شده است'
+                    'msg' => 'سقف تعداد روزانه دسترسی شما به شماره تماس کاربران پر شده است. لطفا پیام ارسال کنید.'
                 ],404);
             }
 
@@ -203,7 +203,7 @@ class phone_number_controller extends Controller
             if($viewer_daily_access_count > config('subscriptionPakage.phone-number.max-daily-access-count')){
                 return response()->json([
                     'status' => false,
-                    'msg' => 'سقف تعداد روزانه ی دسترسی شما به شماره تماس کاربران پر شده است'
+                    'msg' => 'سقف تعداد روزانه دسترسی شما به شماره تماس کاربران پر شده است. لطفا پیام ارسال کنید.'
                 ],404);
             }  
         }
@@ -369,7 +369,8 @@ class phone_number_controller extends Controller
     protected function is_proper_time_for_phone_call()
     {
         $now = Carbon::now();
-        if($now->hour > 22 && $now->hour < 7){
+
+        if(Carbon::parse($now)->format('H') > 22  && Carbon::parse($now)->format('H') < 7){
             return false;
         }
 
