@@ -1209,18 +1209,17 @@ export default {
         return false;
       }
     },
-    rechargeWalletPayment(amount) {
+    rechargeWalletPayment(price) {
       this.doPaymentLoader = true;
-      let number = Number(this.toLatinNumbers(amount));
+      let amount = Number(this.toLatinNumbers(price));
 
-      // this.registerComponentStatistics(
-      //   "payment",
-      //   "increase-wallet-capacity",
-      //   number
-      // );
+      this.registerComponentStatistics(
+        "payment",
+        "increase-wallet-capacity",
+        amount
+      );
 
-      window.location.href =
-        "/app-wallet-payment/charge/" + this.userId + "/" + number + "";
+      window.location.href = "/wallet-payment/charge/" + amount;
     },
     toLatinNumbers(num) {
       if (num == null) {
