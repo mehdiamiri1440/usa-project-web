@@ -311,7 +311,7 @@ button i {
           :class="{ 'send-message-button': product.has_phone }"
           @click.prevent="$parent.openChat(product)"
         >
-          <i class="fa fa-envelope"></i> پیام به فروشنده
+          <i class="fa fa-envelope"></i> چت با فروشنده
         </button>
       </div>
       <div
