@@ -326,7 +326,13 @@ button.send-message-button {
               (product.user_info.has_phone && currentUser.user_info.is_seller),
           }"
         >
-          ارسال پیام
+          <span
+            v-if="product.user_info.has_phone && currentUser.user_info.is_buyer"
+          >
+            چت
+          </span>
+          <span v-else> چت با فروشنده </span>
+
           <i class="fas fa-comment-alt"></i>
         </button>
         <button
@@ -337,7 +343,8 @@ button.send-message-button {
             'green-button': !product.user_info.has_phone,
           }"
         >
-          ارسال پیام
+          <span v-if="product.user_info.has_phone"> چت </span>
+          <span v-else> چت با فروشنده </span>
           <i class="fas fa-comment-alt"></i>
         </button>
         <button

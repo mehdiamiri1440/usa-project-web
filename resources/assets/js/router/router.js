@@ -45,7 +45,7 @@ const router = new Router({
           },
         },
         {
-          path: "viewer",
+          path: "phone-viewers",
           name: "sellerViewer",
           components: {
             default: (resolve) => {
