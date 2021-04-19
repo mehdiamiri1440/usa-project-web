@@ -2322,7 +2322,7 @@ export default {
   },
   watch: {
     userLogin: function (val) {
-      console.log(val);
+      // console.log(val);
     },
     "profileOwner.user_info": function () {
       if (this.profileOwner.user_info) {

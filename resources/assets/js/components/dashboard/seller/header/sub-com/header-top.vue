@@ -269,7 +269,7 @@ a.profile-info-wrapper:focus {
   line-height: 1.618;
   -webkit-box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
   box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
-  z-index: 1;
+  z-index: 6;
 }
 #web-profile-items > li a {
   background: none;
