@@ -148,7 +148,7 @@ li:nth-of-type(2n + 1) .user-items-wrapper {
                 </button>
                 <button class="green-button" @click.prevent="openChat(user)">
                   <i class="fa fa-comment-alt"></i>
-                  ارسال پیام
+                  چت
                 </button>
               </div>
             </div>

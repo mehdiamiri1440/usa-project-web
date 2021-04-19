@@ -755,7 +755,7 @@ li.static-item > button i {
                       >
                         <span>
                           <span class="fas fa-comment-alt"></span>
-                          پیام به خریدار
+                          چت با خریدار
                         </span>
                         <span class="hide-reply text-rtl">
                           کمی صبر کنید...
@@ -793,7 +793,7 @@ li.static-item > button i {
                   >
                     <span>
                       <span class="fas fa-comment-alt"></span>
-                      پیام به خریدار
+                      چت با خریدار
                     </span>
                     <span class="hide-reply text-rtl"> کمی صبر کنید... </span>
                   </button>
@@ -850,7 +850,7 @@ li.static-item > button i {
                       class="buyad-button send-message-button"
                     >
                       <i class="fas fa-comment-alt"></i>
-                      پیام به خریدار
+                      چت با خریدار
                     </button>
                   </div>
                   <button
@@ -859,7 +859,7 @@ li.static-item > button i {
                     class="buyad-button"
                   >
                     <i class="fas fa-comment-alt"></i>
-                    پیام به خریدار
+                    چت با خریدار
                   </button>
                 </div>
               </div>
@@ -942,7 +942,7 @@ li.static-item > button i {
                       >
                         <span>
                           <span class="fas fa-comment-alt"></span>
-                          پیام به خریدار
+                          چت با خریدار
                         </span>
                         <span class="hide-reply text-rtl">
                           کمی صبر کنید...
@@ -980,7 +980,7 @@ li.static-item > button i {
                   >
                     <span>
                       <span class="fas fa-comment-alt"></span>
-                      پیام به خریدار
+                      چت با خریدار
                     </span>
                     <span class="hide-reply text-rtl"> کمی صبر کنید... </span>
                   </button>
@@ -1033,7 +1033,7 @@ li.static-item > button i {
                   </p>
                   <button class="buyad-button disable">
                     <i class="fas fa-comment-alt"></i>
-                    پیام به خریدار
+                    چت با خریدار
                   </button>
                 </div>
               </div>

@@ -815,7 +815,7 @@ button.disable {
                       >
                         <span>
                           <span class="fas fa-comment-alt"></span>
-                          پیام به خریدار
+                          چت با خریدار
                         </span>
                         <span class="hide-reply text-rtl">
                           کمی صبر کنید...
@@ -829,7 +829,7 @@ button.disable {
                       >
                         <span>
                           <span class="fas fa-comment-alt"></span>
-                          پیام به خریدار
+                          چت با خریدار
                         </span>
                         <span class="hide-reply text-rtl">
                           کمی صبر کنید...
@@ -872,7 +872,7 @@ button.disable {
                         <span>
                           <span class="fas fa-comment-alt"></span>
 
-                          پیام به خریدار
+                          چت با خریدار
                         </span>
                         <span class="hide-reply text-rtl">
                           کمی صبر کنید...
@@ -889,7 +889,7 @@ button.disable {
                         <span>
                           <span class="fas fa-comment-alt"></span>
 
-                          پیام به خریدار
+                          چت با خریدار
                         </span>
                         <span class="hide-reply text-rtl">
                           کمی صبر کنید...

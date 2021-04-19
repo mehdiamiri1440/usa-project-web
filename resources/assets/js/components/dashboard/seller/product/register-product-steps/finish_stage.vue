@@ -567,7 +567,7 @@ li .buyad-button.send-message-button:hover {
             >
               <span>
                 <span class="fas fa-comment-alt"></span>
-                پیام به خریدار
+                چت با خریدار
               </span>
               <span class="hide-reply text-rtl"> کمی صبر کنید... </span>
             </button>
@@ -580,7 +580,7 @@ li .buyad-button.send-message-button:hover {
             >
               <span>
                 <span class="fas fa-comment-alt"></span>
-                پیام به خریدار
+                چت با خریدار
               </span>
               <span class="hide-reply text-rtl"> کمی صبر کنید... </span>
             </button>
@@ -624,7 +624,7 @@ li .buyad-button.send-message-button:hover {
         >
           <span>
             <span class="fas fa-comment-alt"></span>
-            پیام به خریدار
+            چت با خریدار
           </span>
           <span class="hide-reply text-rtl"> کمی صبر کنید... </span>
         </button>
@@ -636,7 +636,7 @@ li .buyad-button.send-message-button:hover {
         >
           <span>
             <span class="fas fa-comment-alt"></span>
-            پیام به خریدار
+            چت با خریدار
           </span>
           <span class="hide-reply text-rtl"> کمی صبر کنید... </span>
         </button>
