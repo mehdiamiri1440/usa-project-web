@@ -1240,7 +1240,7 @@ p.response-rate span {
                       v-if="profileOwnerStatistics.validated_seller"
                     >
                       <i class="fa fa-check-circle"></i>
-                      فروشنده ویژ
+                      فروشنده ویژه
                     </span>
 
                     <p
