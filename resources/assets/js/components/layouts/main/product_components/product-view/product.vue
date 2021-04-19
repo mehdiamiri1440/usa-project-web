@@ -471,7 +471,7 @@ label {
                   !$parent.currentUser.user_info.is_buyer),
             }"
           >
-            ارسال پیام
+            چت با فروشنده
             <i class="fas fa-comment-alt"></i>
           </button>
           <button
@@ -483,7 +483,7 @@ label {
               'green-button': !$parent.product.user_info.has_phone,
             }"
           >
-            ارسال پیام
+            چت با فروشنده
             <i class="fas fa-comment-alt"></i>
           </button>
 

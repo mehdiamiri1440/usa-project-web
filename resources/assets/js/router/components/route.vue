@@ -1260,8 +1260,8 @@ export default {
       }
     },
     initShowNumberGuide() {
-      // console.log("guide is run", this.numberGuideCountCookie());
-      if (this.isShowNumberGuideActive()) {
+      let registerNewUser = this.getCookie("registerNewUser");
+      if (this.isShowNumberGuideActive() && !registerNewUser) {
         if (this.numberGuideCountCookie() < 5) {
           swal({
             title: "نمایش اطلاعات تماس",

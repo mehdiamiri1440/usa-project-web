@@ -808,7 +808,7 @@ export default {
           .then(function (response) {
             if (response.status === 201) {
               eventBus.$emit("modal", "userRegisterSuccess");
-
+              self.createCookie('registerNewUser',true,60);
               axios
                 .post("/dologin", {
                   phone: object.phone,
@@ -1244,6 +1244,16 @@ export default {
         return true;
       }
       return false;
+    },
+    createCookie: function (name, value, minutes) {
+      if (minutes) {
+        var date = new Date();
+        date.setTime(date.getTime() + minutes * 60 * 1000);
+        var expires = "; expires=" + date.toGMTString();
+      } else {
+        var expires = "";
+      }
+      document.cookie = name + "=" + value + expires + "; path=/";
     },
   },
   watch: {
