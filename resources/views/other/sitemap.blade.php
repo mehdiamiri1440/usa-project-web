@@ -48,7 +48,7 @@
     
 @foreach($products as $product)
     <url>
-      <loc>{{url("product-view/".str_replace(' ','-',$product->category_name)."/"."خرید-عمده-".str_replace(' ','-',$product->sub_category_name)."/".$product->id)}}</loc>
+      <loc>{{url("product-view/".str_replace(' ','-',$product->category_name) . "/" ."خرید-عمده-" . str_replace(' ','-',$product->sub_category_name)."/".$product->id)}}</loc>
       <changefreq>monthly</changefreq>
       <priority>0.5</priority>
     </url>

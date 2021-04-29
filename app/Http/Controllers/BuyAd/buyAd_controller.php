@@ -17,6 +17,7 @@ use Carbon\Carbon;
 use App\Models\product_media;
 use App\Models\message;
 use App\Http\Controllers\Product\product_controller;
+use Illuminate\Support\Facades\Cache;
 
 class buyAd_controller extends Controller
 {
@@ -85,6 +86,7 @@ class buyAd_controller extends Controller
         // 'myusers.user_name',
         'myusers.first_name',
         'myusers.last_name',
+        'c.category_name as subcategory_name'
     ];
 
     protected $my_sell_offer_required_fields = [
@@ -174,6 +176,8 @@ class buyAd_controller extends Controller
             else{
                 $interested_categories = $request->category_id;
             }
+
+            Cache::forget(md5('products-' . session('user_id')));
 
             if ($most_related_products) {
                 return response()->json([
@@ -695,32 +699,88 @@ class buyAd_controller extends Controller
         $user = myuser::find($seller_id);
 
         $date_convertor_object = new date_convertor();
-        $buyAd_recommender_object = new buyAd_recommender_controller();
-
 
         if ($user->is_seller) {
-            $result_buyAds = array();
+            $result_buyAds = [];
 
-            $related_buyAds = $this->get_related_buyAds_list_to_the_user($user);
+            $cache_key = md5('AllBuyAds');
 
-            // $record_count = config("subscriptionPakage.type-$user->active_pakage_type.buyAd-count");
+            if(Cache::has($cache_key)){
+                $related_buyAds = Cache::get($cache_key);
+            }
+            else{
+                $related_buyAds = $this->get_related_buyAds_list_to_the_user();
 
-            // if ($record_count <= config("subscriptionPakage.type-2.buyAd-count")) {
-                $buyAd_recommender_object->buyAd_list_recommender_for_seller($related_buyAds, $seller_id); //check out the method for more details
-            // } else {
-            //     $related_buyAds = $related_buyAds->toArray();
-            // }
-            
-            // $related_buyAds = array_slice($related_buyAds, 0, $record_count);
+                Cache::put($cache_key,$related_buyAds,5);  
+            }
 
             foreach ($related_buyAds as $buyAd) {
-                $category_array = $this->get_category_and_subcategory_name($buyAd->category_id);
-                $buyAd->category_name = $category_array['category_name'];
-                $buyAd->subcategory_name = $category_array['subcategory_name'];
                 $buyAd->register_date = $date_convertor_object->get_persian_date_with_month_name($buyAd->created_at);
 
                 $result_buyAds[] = $buyAd;
             }
+
+            $user_registered_products = DB::table('products')->where('myuser_id',$seller_id)
+                                                ->where(function($q){
+                                                    return $q = $q->where('confirmed',true)
+                                                                    ->orWhereBetween('created_at',[Carbon::now()->subHours(24),Carbon::now()]);
+                                                })
+                                                ->get();
+
+            $filtered_buyAds = [];
+            if(count($user_registered_products) > 0){
+
+                foreach($user_registered_products as $product){
+
+                    $product_name_array = array_slice($this->get_product_name_array($product),0,3);
+
+                    foreach($product_name_array as $word){
+                        $tmp = array_filter($result_buyAds,function($buyAd) use($product,$word,$user){
+                            if(is_null($buyAd->name)){
+                                return false;
+                            }
+
+                            return preg_match("/$word/", $buyAd->name) && $buyAd->category_id == $product->category_id && $buyAd->myuser_id != $user->id;
+                        });
+                    }
+                    
+                    $filtered_buyAds = array_merge($filtered_buyAds,$tmp);
+                }
+
+                //sort buyAds according to recency and response rate
+                usort($filtered_buyAds,function($item1,$item2){
+                    $a = Carbon::now()->subHours(12)->gte(Carbon::parse($item1->updated_at)) ?  $item1->response_rate : 100;
+                    $b = Carbon::now()->subHours(12)->gte(Carbon::parse($item2->updated_at)) ?  $item2->response_rate : 100;
+
+                    if($a == $b){
+                        return ($item1->updated_at < $item2->updated_at) ? 1 : -1;
+                    }
+
+                    return ($a < $b) ? 1 : -1;
+                    
+                });
+
+            }
+
+            if(count($filtered_buyAds) > 0){
+                $result_buyAds = array_filter($result_buyAds,function($buyAd) use($filtered_buyAds,$user){
+                    return in_array($buyAd->id,array_column($filtered_buyAds,'id')) == false && $buyAd->myuser_id != $user->id;
+                });
+            }
+            
+
+            usort($result_buyAds,function($item1,$item2){
+                $a = $item1->response_rate;
+                $b = $item2->response_rate;
+
+                if($a == $b){
+                    return ($item1->updated_at < $item2->updated_at) ? 1 : -1;
+                }
+
+                return ($a < $b) ? 1 : -1;
+            });
+
+            $result_buyAds = array_merge($filtered_buyAds,$result_buyAds);
 
             return response()->json([
                 'status' => true,
@@ -734,21 +794,22 @@ class buyAd_controller extends Controller
         }
     }
 
-    protected function get_related_buyAds_list_to_the_user(&$user)
+    protected function get_related_buyAds_list_to_the_user()
     {
         $query = DB::table('buy_ads')
                     ->join('myusers', 'buy_ads.myuser_id', '=', 'myusers.id')
+                    ->join('categories as c', 'buy_ads.category_id', '=', 'c.id')
                     ->where('buy_ads.confirmed', true)
                     ->where(function($q){
                         return $q = $q->where('buy_ads.reply_capacity','>',0)
                                         ->orWhere('buy_ads.phone_view_capacity','>',0);
                     })
-                    // ->where('buy_ads.reply_capacity','>',0)
                     ->whereNull('buy_ads.deleted_at')
-                    ->whereBetween('buy_ads.updated_at',[Carbon::now()->subWeeks(2),Carbon::now()])
-                    ->where('buy_ads.myuser_id','<>',$user->id);
+                    ->whereBetween('buy_ads.updated_at',[Carbon::now()->subWeeks(2),Carbon::now()]);
+                    // ->where('buy_ads.myuser_id','<>',$user->id);
 
-        $query = $query->select($this->related_buyAd_list_required_fields)
+        $query = $query->selectRaw(implode(', ',$this->related_buyAd_list_required_fields) . ",(FLOOR((select count(distinct(m1.sender_id)) from messages as m1 where m1.is_read = true and m1.receiver_id = buy_ads.myuser_id and not exists(select * from messages where messages.receiver_id = buy_ads.myuser_id and m1.is_read = false ))/(select count(distinct(messages.sender_id)) from messages where messages.receiver_id = buy_ads.myuser_id) * 100 )) as response_rate,
+        (select categories.category_name from categories where c.parent_id = categories.id) as category_name")
                     ->orderBy('buy_ads.updated_at', 'desc');
 
         $buyAds = $query->get();

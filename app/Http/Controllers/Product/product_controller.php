@@ -791,10 +791,9 @@ class product_controller extends Controller
     {
         $products = DB::table('products')->where('confirmed',true)
                                 ->join('categories as sub','sub.id','=','products.category_id')
-                                ->leftJoin('categories','categories.parent_id','=','sub.id')
                                 ->whereNull('products.deleted_at')
                                 ->orderBy('products.created_at','desc')
-                                ->selectRaw('products.id,sub.category_name as sub_category_name,categories.category_name as category_name')
+                                ->selectRaw('products.id,sub.category_name as sub_category_name,(select categories.category_name from categories where sub.parent_id = categories.id) as category_name')
                                 ->distinct('product.id')
                                 ->get();
 

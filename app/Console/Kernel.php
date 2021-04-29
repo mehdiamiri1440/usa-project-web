@@ -18,6 +18,9 @@ use App\Jobs\Notifiers\ExpiryReminder;
 use App\Jobs\AnomalyDetectors\MessagingAnomalyDetection;
 use DB;
 use App\Jobs\PhoneNumberAutoSend\ProductAutoDeleteForUnresponsiveSellers;
+use App\Jobs\Notifiers\AdvertiseProductsPeriodically;
+use App\Jobs\Notifiers\AdvertiseBuyAdsPeriodically;
+
 
 class Kernel extends ConsoleKernel
 {
@@ -78,9 +81,9 @@ class Kernel extends ConsoleKernel
         $schedule->job($cache_product_list_job)
                 ->everyTenMinutes();
 
-        // $retention_reminder_notifier_job = new RetentionReminder();
-        // $schedule->job($retention_reminder_notifier_job)
-        //         ->monthlyOn(15, '14:30');
+                        // $retention_reminder_notifier_job = new RetentionReminder();
+                        // $schedule->job($retention_reminder_notifier_job)
+                        //         ->monthlyOn(15, '14:30');
 
         $product_register_reminder_job = new ProductRegisterReminder();
         $schedule->job($product_register_reminder_job)
@@ -104,6 +107,26 @@ class Kernel extends ConsoleKernel
         $product_auto_delete_job = new ProductAutoDeleteForUnresponsiveSellers();
         $schedule->job($product_auto_delete_job)
                 ->dailyAt('02:33');
+
+
+        $daily_product_avertisement_for_premium_sellers = new AdvertiseProductsPeriodically(0,true,true);
+        $schedule->job($daily_product_avertisement_for_premium_sellers)
+                        ->dailyAt('10:45');
+
+        $daily_product_avertisement_for_first_day_after_register_product = new AdvertiseProductsPeriodically(1,false,false);
+        $schedule->job($daily_product_avertisement_for_first_day_after_register_product)
+                        ->dailyAt('16:45');
+
+        $daily_product_avertisement_for_third_day_after_register_product = new AdvertiseProductsPeriodically(3,false,false);
+        $schedule->job($daily_product_avertisement_for_third_day_after_register_product)
+                        ->dailyAt('17:45');
+
+        $daily_buyAds_advertisement = new AdvertiseBuyAdsPeriodically();
+        $schedule->job($daily_buyAds_advertisement)
+                        ->dailyAt('8:13');
+
+        $schedule->job($daily_buyAds_advertisement)
+                        ->dailyAt('20:13');
 
 
         // $schedule->command('backup:clean')->daily()->at('12:27');
