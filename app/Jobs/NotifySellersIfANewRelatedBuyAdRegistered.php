@@ -24,13 +24,15 @@ class NotifySellersIfANewRelatedBuyAdRegistered implements ShouldQueue
      * Create a new job instance.
      */
     protected $buyAd;
+    protected $max_notified_sellers;
     protected $words_blacklist = [
         'در', 'به', 'را', 'از', 'و', 'برای', 'تا', 'که', 'بر', 'بی', 'مگر',
     ];
 
-    public function __construct(buyAd $buyAd)
+    public function __construct($buyAd,$max_notified_sellers = 12)
     {
         $this->buyAd = $buyAd;
+        $this->max_notified_sellers = $max_notified_sellers;
     }
 
     /**
@@ -38,10 +40,10 @@ class NotifySellersIfANewRelatedBuyAdRegistered implements ShouldQueue
      */
     public function handle()
     {
-        $seller_finder_controller_object = new seller_finder_controller();
+        $seller_finder_controller_object = new seller_finder_controller($this->max_notified_sellers);
         $the_most_related_product_owners_ids = $seller_finder_controller_object->get_the_most_related_product_owners_id_to_the_given_buyAd_if_any($this->buyAd);
-        $the_most_related_product_owners_ids = array_unique($the_most_related_product_owners_ids);
-        
+        $the_most_related_product_owners_ids = array_unique($the_most_related_product_owners_ids); 
+
         $now = Carbon::now();
 
         if (count($the_most_related_product_owners_ids) > 0) {
@@ -56,7 +58,7 @@ class NotifySellersIfANewRelatedBuyAdRegistered implements ShouldQueue
                     'buy_ad_id'  => $this->buyAd->id,
                 ];
 
-                $this->notify_product_owner($user_id);
+                // $this->notify_product_owner($user_id);
             }
             
             DB::table('buy_ad_suggestions')->insert($buyAd_suggestion_records);
@@ -81,7 +83,7 @@ class NotifySellersIfANewRelatedBuyAdRegistered implements ShouldQueue
 
         $related_subcategory_products = product::where('category_id', $buyAd->category_id)
                                             ->where('confirmed', true)
-                                            ->whereBetween('created_at', [$from_date, $until_date])
+                                            ->whereBetween('updated_at', [$from_date, $until_date])
                                             ->where('myuser_id','<>'.$buyAd->myuser_id)
                                             ->orderBy('created_at')
                                             ->get();
