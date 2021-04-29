@@ -302,7 +302,7 @@ export default {
         categorySelected: "",
         category_id: "",
         requirement_amount: "",
-        name: "",
+        productName: "",
       },
       currentUser: {
         profile: "",
@@ -311,12 +311,6 @@ export default {
       buyAd: {
         name: "",
         requirement_amount: "",
-        price: "",
-        description: "",
-        address: "",
-        pack_type: "",
-        category_id: "",
-        rules: false,
         category_id: "",
       },
       buyAdFields: ["name", "requirement_amount", "category_id"],
@@ -348,7 +342,6 @@ export default {
 
       axios.post("/user/profile_info").then(function (response) {
         self.currentUser = response.data;
-
         if (self.isThereInquiryToSend()) {
           self.sendInquiry();
         }

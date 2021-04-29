@@ -91,9 +91,9 @@ a.close-dialog-popup {
 
   border: none;
 
-  -webkit-transition: 300ms;
+  -webkit-transition: 150ms;
 
-  transition: 300ms;
+  transition: 150ms;
 
   width: initial;
 }
@@ -108,71 +108,51 @@ a.close-dialog-popup {
 /*start header styles*/
 
 .search-input {
-  transition: 300ms;
-
-  display: inline-block;
-
-  min-width: 455px;
-
+  transition: 150ms;
+  min-width: 480px;
   overflow: hidden;
-
   position: relative;
-
-  float: right;
+  border-radius: 8px;
 }
 
 .search-input input {
-  padding: 9px 15px 8px;
-
-  border-radius: 0 4px 4px 0;
+  padding: 8px 15px;
 
   margin: 0;
 
   float: right;
 
   border: none;
-
-  width: calc(100% - 20px);
 
   background: #f8f8f8;
 }
 
 .search-input button {
-  transition: 300ms;
-
+  transition: 150ms;
   border: none;
-
   margin: 0;
-
-  padding: 8px 15px;
-
+  padding: 8px 27px;
   color: #fff;
-
-  background: #000546;
-
-  border-radius: 4px 0 0 4px;
-
+  background: #1da1f2;
   position: absolute;
-
   left: 0;
-
   top: 0;
+  font-size: 17px;
+  font-weight: 500;
 }
 
 .search-input button:hover {
-  transition: 300ms;
+  transition: 150ms;
 
-  background: #00032b;
+  padding-left: 30px;
 
-  padding-left: 18px;
-
-  padding-right: 18px;
+  padding-right: 30px;
 }
 
-.search-input button:before {
+.search-input button i:before {
   position: relative;
-
-  top: 2px;
+  left: 2px;
+  top: 3px;
 }
 
 nav.navbar {
@@ -184,12 +164,11 @@ nav.navbar {
   z-index: 1010;
   border-radius: 0;
   border: none;
-  box-shadow: 0 7px 8px 0 rgba(0, 0, 0, 0.04);
+  border-bottom: 1px solid #ebebeb;
 }
 
 .buskool-main-nav {
-  padding: 10px 15px 8px;
-  border-bottom: 2px solid #f8f9fa;
+  padding: 10px 15px;
 }
 
 .nav > li > a.green-button:hover {
@@ -201,17 +180,29 @@ nav.navbar {
 }
 
 nav .green-button {
-  font-size: 13px;
-  padding: 8px 7px 7px;
+  font-size: 17px;
+  padding: 10px 20px 9px;
   margin-top: 0;
   margin-right: 15px;
+  font-weight: 400;
+  border-radius: 8px;
 }
 
 nav .green-button-alt {
-  background: #fff;
-  color: #00c569 !important;
-  border: 2px solid #00c569;
-  padding: 6px 7px 5px;
+  font-size: 17px;
+  padding: 10px 20px 9px;
+  margin-top: 0;
+  margin-right: 15px;
+  font-weight: 400;
+  border-radius: 8px;
+  border: none;
+  background: none;
+  color: #1da1f2;
+}
+
+.nav > li > a.green-button.green-button-alt:hover {
+  color: #fff;
+  background: #1da1f2 !important;
 }
 
 .green-button-alt:focus,
@@ -228,20 +219,14 @@ nav > li > a.green-button.router-link-exact-active:hover {
 
 .buskool-logo .navbar-brand {
   overflow: hidden;
-
-  width: 132px;
-}
-
-.buskool-logo .navbar-brand {
+  width: 140px;
   height: initial;
-
-  margin: 0;
-
+  margin: 6px 15px 6px 0;
   padding: 0;
 }
 
 #buskool-nav {
-  margin-right: 46px;
+  margin-right: 35px;
 }
 
 .buskool-sub-menu .navbar-right {
@@ -250,8 +235,9 @@ nav > li > a.green-button.router-link-exact-active:hover {
 
 .buskool-sub-menu {
   transition: 0.3s;
-  height: 38px;
+  height: 33px;
   overflow: hidden;
+  margin-bottom: -1px;
 }
 
 .buskool-sub-menu.scrollUp {
@@ -264,26 +250,16 @@ nav > li > a.green-button.router-link-exact-active:hover {
 }
 
 .buskool-sub-menu a {
-  color: #777;
-  padding: 9px 15px;
+  color: #5f6368;
+  padding: 6px 15px;
   position: relative;
 }
 
 .buskool-sub-menu a:hover,
 .buskool-sub-menu a.router-link-exact-active {
-  color: #00c569;
-  background: #fbfbfb;
-}
-
-.buskool-sub-menu a:hover:after,
-.buskool-sub-menu a.router-link-exact-active:after {
-  content: "";
-  background: #00c569;
-  position: absolute;
-  top: 0;
-  width: 100%;
-  height: 2px;
-  right: 0;
+  color: #4dc0bb;
+  background: #fff;
+  border-bottom: 1px solid;
 }
 
 a.profile-info-wrapper {
@@ -402,12 +378,11 @@ a.profile-info-wrapper:hover {
 }
 .navbar-toggle {
   margin: 0;
-
-  border: 2px solid #000546;
+  padding: 0;
 }
-
-.navbar-toggle .icon-bar {
-  background: #000546;
+.navbar-toggle i {
+  font-size: 25px;
+  line-height: 1;
 }
 
 .mobile-background-shadow {
@@ -417,7 +392,7 @@ a.profile-info-wrapper:hover {
 
   display: none;
 
-  transition: 300ms;
+  transition: 150ms;
 
   position: fixed;
 
@@ -473,6 +448,18 @@ a.profile-info-wrapper:hover {
   }
 }
 
+@media screen and (max-width: 1199px) {
+  .search-input button {
+    padding: 8px 17px;
+  }
+  nav .green-button {
+    padding: 10px 15px 9px;
+  }
+  .search-input {
+    min-width: 400px;
+  }
+}
+
 @media screen and (max-width: 991px) {
   #buskool-nav {
     margin: 0;
@@ -482,12 +469,63 @@ a.profile-info-wrapper:hover {
     margin-right: 149px;
   }
 
+  nav .green-button {
+    padding: 10px 8px 9px;
+    font-size: 13px;
+  }
+
   .search-input {
     min-width: 300px;
   }
 }
 
 @media screen and (max-width: 767px) {
+  .buskool-logo .navbar-brand {
+    width: 100px;
+    margin-top: 4px;
+  }
+
+  .buskool-logo {
+    margin: 0 auto;
+
+    position: absolute;
+    right: calc(50% - 50px);
+  }
+  .nav .green-button {
+    padding: 5px 0 5px;
+    font-size: 13px;
+    background: none;
+    color: #00c569;
+    margin: 0;
+  }
+  .buskool-main-nav {
+    padding: 6px 0 1px;
+    border-bottom: 1px solid #ebebeb;
+    margin: 0 10px;
+  }
+
+  .search-input {
+    min-width: 100%;
+    margin: 10px auto;
+    padding: 0 10px;
+  }
+
+  .search-input button {
+    font-weight: bold;
+    top: 0;
+    bottom: 0;
+    left: initial;
+    right: 10px;
+    padding: 9px;
+    background: none;
+    color: #5f6368;
+  }
+
+  .search-input input {
+    padding: 6px 35px 5px 15px;
+    border-radius: 8px;
+  }
+
   #buskool-nav {
     padding: 0;
 
@@ -499,7 +537,7 @@ a.profile-info-wrapper:hover {
 
     background: #fff;
 
-    top: 56px;
+    top: 97px;
 
     right: -1px;
 
@@ -528,20 +566,6 @@ a.profile-info-wrapper:hover {
     right: 29px;
   }
 
-  #buskool-nav .wrapper-nav {
-    padding: 30px 0 0;
-  }
-
-  .buskool-logo {
-    margin: 0 auto;
-
-    float: right;
-
-    position: relative;
-
-    right: calc(50% - 114px);
-  }
-
   .profile-image-wrapper,
   .user-auth-info-wrapper,
   .user-auth-info-wrapper .navbar-nav {
@@ -566,14 +590,6 @@ a.profile-info-wrapper:hover {
 
   #buskool-nav .search-input input {
     border: 1px solid #e6e6e6;
-  }
-
-  .search-input button {
-    left: 15px;
-
-    padding: 13px 15px;
-
-    height: 100%;
   }
 
   #buskool-nav ul.mobile-navigation a {
@@ -602,6 +618,10 @@ a.profile-info-wrapper:hover {
     min-width: 150px;
 
     left: 0;
+  }
+  nav .green-button.router-link-exact-active,
+  nav > li > a.green-button.router-link-exact-active:hover {
+    display: none;
   }
 }
 
@@ -728,43 +748,6 @@ a.profile-info-wrapper:hover {
       </div>
     </div>
 
-    <!-- <div class="container">
-      <div
-        id="DownloadApp"
-        class="modal fade"
-        tabindex="-1"
-        role="dialog"
-        aria-labelledby="myLargeModalLabel"
-      >
-        <div class="modal-dialog modal-lg" role="document">
-          <a href="#" class="close-dialog-popup" data-dismiss="modal">
-            <i class="fa fa-times"></i>
-          </a>
-
-          <div class="main_popup_content">
-            <div>
-              <div class="main-logo-popup">
-                <img src="../../../../img/logo/mobile-logo-white.svg" alt />
-                <p class="title">باسکول</p>
-              </div>
-
-              <p class="main-pop-up">دانلود اپلیکیشن اندروید باسکول</p>
-
-              <a
-                href="#"
-                class="btn green-button"
-                data-dismiss="modal"
-                @click.prevent="doDownload()"
-              >دریافت اپلیکیشن</a>
-
-              <a href="#" class="btn green-button" data-dismiss="modal">متوجه شدم</a>
-            </div>
-          </div>
-        </div>
-        //.modal-dialog
-      </div>
-    </div>-->
-
     <div class="container">
       <div
         class="modal fade"
@@ -823,9 +806,7 @@ a.profile-info-wrapper:hover {
             data-toggle="collapse"
             data-target="#buskool-nav"
           >
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
+            <i class="fa fa-bars"></i>
           </button>
         </div>
 
@@ -941,22 +922,18 @@ a.profile-info-wrapper:hover {
 
         <div class="collapse navbar-collapse navbar-right" id="buskool-nav">
           <div class="wrapper-nav">
-            <div class="search-input">
+            <div class="search-input hidden-xs">
               <input
                 type="text"
                 placeholder="محصول مورد نظر خود را جستجو کنید"
                 v-model="mainSearchBoxText"
               />
-              <button
-                class="hidden-sm hidden-md hidden-lg fa fa-search"
-                @click="search"
-              ></button>
 
               <button class="hidden-xs" @click="search">
                 <i class="fa fa-search"></i>
+                <span class="hidden-sm"> جستجو </span>
               </button>
             </div>
-
             <ul class="mobile-navigation hidden-lg hidden-sm hidden-md">
               <li>
                 <router-link
@@ -1117,7 +1094,19 @@ a.profile-info-wrapper:hover {
           </div>
         </div>
       </div>
+      <div class="search-input hidden-sm hidden-md hidden-lg">
+        <input
+          type="text"
+          placeholder="محصول مورد نظر خود را جستجو کنید"
+          v-model="mainSearchBoxText"
+        />
+        <button class="fa fa-search" @click="search"></button>
 
+        <button class="hidden-xs" @click="search">
+          <i class="fa fa-search"></i>
+          <span class="hidden-sm"> جستجو </span>
+        </button>
+      </div>
       <div class="container-fluid buskool-sub-menu hidden-xs">
         <ul class="nav navbar-right navbar-nav">
           <li>

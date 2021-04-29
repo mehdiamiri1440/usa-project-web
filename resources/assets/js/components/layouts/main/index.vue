@@ -18,13 +18,13 @@ p {
 h1 {
   font-size: 26px;
 
-  font-weight: bold;
+  font-weight: 500;
 }
 
 h2 {
   font-size: 17px;
 
-  font-weight: bold;
+  font-weight: normal;
 }
 
 i {
@@ -37,6 +37,10 @@ i {
   margin-bottom: -60px;
 }
 
+.hidden {
+  display: none !important;
+}
+
 #intro::after {
   content: "";
   width: 100%;
@@ -45,30 +49,10 @@ i {
   top: 0;
   left: 0;
   background: rgba(25, 102, 142, 0.4);
-  background: linear-gradient(
-    66deg,
-    rgba(25, 102, 142, 0.4) 0%,
-    rgba(33, 173, 147, 0.4) 100%
-  );
-  background: -webkit-linear-gradient(
-    66deg,
-    rgba(25, 102, 142, 0.4) 0%,
-    rgba(33, 173, 147, 0.4) 100%
-  );
-  background: -moz-linear-gradient(
-    66deg,
-    rgba(25, 102, 142, 0.4) 0%,
-    rgba(33, 173, 147, 0.4) 100%
-  );
-  background: -o-linear-gradient(
-    66deg,
-    rgba(25, 102, 142, 0.4) 0%,
-    rgba(33, 173, 147, 0.4) 100%
-  );
-  background: -ms-linear-gradient(
-    66deg,
-    rgba(25, 102, 142, 0.4) 0%,
-    rgba(33, 173, 147, 0.4) 100%
+  background: radial-gradient(
+    circle,
+    rgba(0, 0, 0, 0.3) 0%,
+    rgba(0, 0, 0, 0.6) 100%
   );
   z-index: 0;
 }
@@ -91,48 +75,31 @@ i {
 }
 
 .title-box h3 {
-  font-size: 17px;
-  font-weight: bold;
+  font-size: 16px;
+  font-weight: 500;
   color: #4b4b4b;
   margin-bottom: 12px;
 }
 
 .title-box a {
   margin: 20px auto 10px;
-
   width: inherit;
-
-  font-size: 14px;
-
-  font-weight: bold;
-
-  padding: 9px 22px 6px;
-}
-
-.title-section {
+  font-size: 17px;
+  border-radius: 8px;
+  padding: 7px 22px 6px;
   direction: rtl;
-  margin-bottom: 8px;
+  font-weight: normal;
 }
 
-.title-section h3 {
-  font-size: 16px;
-  color: #00c569;
-  float: right;
+.title-box a i {
+  top: 3px;
 }
 
-.title-section hr {
-  margin: 15px 15px 10px auto;
-  position: relative;
-}
-
-.title-section hr::after {
-  content: " ";
-  height: 3px;
-  width: 50px;
-  background: #00c569;
-  position: absolute;
-  top: -4px;
-  right: 0;
+.title-box p {
+  margin-top: 20px;
+  font-size: 15px;
+  text-align: right;
+  line-height: 28px;
 }
 
 .section-wrapper {
@@ -140,7 +107,7 @@ i {
 }
 
 .section-wrapper .title-box {
-  text-align: center;
+  text-align: right;
 
   margin-top: 35px;
 }
@@ -148,7 +115,7 @@ i {
 /*intro section style */
 
 #intro {
-  margin-top: 97px;
+  margin-top: 93px;
 
   text-align: center;
 
@@ -157,13 +124,21 @@ i {
   direction: rtl;
 
   position: relative;
+  background-color: #404b55;
+}
+
+#intro h1 {
+  margin-top: 18px;
+  margin-bottom: 6px;
 }
 
 #intro h1,
 #intro h2 {
   color: #fff;
+}
 
-  margin-bottom: 15px;
+#intro h2 {
+  margin-bottom: 16px;
 }
 
 .search-wrapper {
@@ -174,33 +149,24 @@ i {
   margin: 0 auto;
 }
 
-.search-input {
+.hero-search-input {
   display: inline-block;
-
   min-width: 455px;
-
   overflow: hidden;
-
   position: relative;
-
-  float: right;
+  border-radius: 8px;
 }
 
-.search-input input {
+.hero-search-input input {
   padding: 9px 15px 8px;
-
   border-radius: 0 4px 4px 0;
-
   margin: 0;
-
   float: right;
-
   border: none;
-
   width: calc(100% - 20px);
 }
 
-.search-input button {
+.hero-search-input button {
   transition: 300ms;
 
   border: none;
@@ -211,7 +177,7 @@ i {
 
   color: #fff;
 
-  background: #000546;
+  background: #1da1f2;
 
   border-radius: 4px 0 0 4px;
 
@@ -222,32 +188,33 @@ i {
   top: 0;
 }
 
-.search-input button:hover {
+.hero-search-input button:hover {
   transition: 300ms;
-
-  background: #00032b;
-
   padding-left: 18px;
-
   padding-right: 18px;
 }
 
-.search-input button:before {
+.hero-search-input button:before {
   position: relative;
 
   top: 2px;
 }
 
 #intro a.green-button {
-  font-size: 14px;
-
-  margin: 0 15px 0 0;
-
+  font-size: 17px;
+  margin: 0 auto;
   width: initial;
+  padding: 6px 33px 11px;
+  font-weight: 400;
+  line-height: 1;
+  border-radius: 8px;
+  margin-top: 62px;
+  margin-bottom: 30px;
+}
 
-  float: right;
-
-  padding: 9px 15px 8px;
+#intro a.green-button i {
+  font-size: 21px;
+  top: 3px;
 }
 
 /*sub navigation styles*/
@@ -294,32 +261,25 @@ i {
   top: 2px;
 }
 
-.category-item:hover,
-.active .category-item {
-  color: #00c569;
-}
-
-.category-item:hover,
 .sub-category-item:hover {
-  color: #00c569;
+  background: #00c569;
+  border-color: #00c569;
+  color: #fff;
 }
 
 .sub-category-item {
-  font-size: 14px;
-
-  color: #777;
-
+  font-size: 15px;
+  color: #5f6368;
   display: inline-block;
-
   line-height: 1.618;
-
   position: relative;
-
-  font-weight: bold;
-
-  padding: 5px 0;
-
+  padding: 5px 0px;
   width: 100%;
+  background: #fff;
+  border-radius: 8px;
+  margin-top: 20px;
+  border: 1px solid #ddd;
+  transition: 150ms;
 }
 
 .product-link.green-button {
@@ -671,23 +631,15 @@ li > ul > li.active > ul > li {
 /*services section*/
 
 #services-section {
-  background: #ececec;
-
   text-align: center;
 }
 
 #services-section h3 {
   margin-top: 24px;
-
-  font-size: 23px;
-
-  font-weight: bold;
-
-  color: #4b4b4b;
-}
-
-.service-boxs-wrapper {
-  padding: 20px 15px 45px;
+  font-size: 21px;
+  font-weight: 500;
+  color: #404b55;
+  margin-bottom: 26px;
 }
 
 .box-image {
@@ -704,13 +656,17 @@ li > ul > li.active > ul > li {
   padding: 0;
   position: relative;
   top: 0;
+  -webkit-transition: 200ms;
   transition: 200ms;
+  border-radius: 12px;
+  border: 1px solid #f0f0f1;
+  margin-bottom: 30px;
 }
 
 .service-box:hover {
   top: -5px;
   transition: 200ms;
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
 }
 
 .service-box a {
@@ -791,11 +747,377 @@ li > ul > li.active > ul > li {
 .main-incobac-logo img {
   width: 200px;
 }
+
+.web-category-wrapper {
+  background: #fff;
+  position: absolute;
+  right: 15px;
+  left: 15px;
+  border-radius: 12px;
+  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.16);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.16);
+  padding: 8px 0 0;
+}
+
+.web-category-wrapper > .section-title {
+  margin: 0 14px;
+}
+
+.web-category-wrapper > ul {
+  margin-top: 10px;
+  height: 267px;
+  transition: 300ms;
+  overflow: hidden;
+}
+
+/* .web-category-wrapper > ul > li {
+  position: relative;
+} */
+
+.web-category-wrapper > ul > li:hover .sub-categories-wrapper {
+  display: block;
+}
+
+.web-category-wrapper > ul > li button {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 8px 20px 9px;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  z-index: 1;
+}
+
+.web-category-wrapper > ul > li span,
+.web-category-wrapper > ul > li i {
+  position: relative;
+  z-index: 1;
+  font-size: 16px;
+  color: #5f6368;
+}
+
+.web-category-wrapper > ul > li span {
+  font-weight: 500;
+}
+
+.web-category-wrapper > ul > li:hover button::after {
+  width: 100%;
+  transition: 150ms;
+}
+
+.web-category-wrapper > ul > li button::after {
+  content: " ";
+  transition: 150ms;
+  background-color: #00c569;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  top: 0;
+  width: 0%;
+  z-index: 0;
+  background: #fbfbfb;
+}
+
+.web-category-wrapper .sub-categories-wrapper {
+  position: absolute;
+  right: 100%;
+  background: #fbfbfb;
+  /* top: 0; */
+  width: 600px;
+  border-radius: 12px 0 12px 12px;
+  overflow: hidden;
+  display: none;
+  min-height: 90px;
+  padding: 15px 20px 30px;
+  box-shadow: -4px 5px 10px rgba(0, 0, 0, 0.16);
+}
+
+.web-banner-wrapper {
+  margin-top: 70px;
+}
+
+.load-more-categories {
+  width: 100%;
+  background: #f2f2f2;
+  border: none;
+  border-radius: 0 0 12px 12px;
+  font-size: 17px;
+  font-weight: 500;
+  color: #556080;
+  padding: 8px 0px;
+  margin-top: 0;
+}
+
+.rotate-icon {
+  transform: rotate(180deg);
+}
+
+.web-banner-wrapper .banner-item {
+  height: 160px;
+  background-size: cover;
+  border-radius: 12px;
+  background-color: #404b55;
+  background-position: 50% 0;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  border-radius: 12px;
+  position: relative;
+  margin-top: 20px;
+  border: none;
+  width: 100%;
+  z-index: 0;
+}
+.web-banner-wrapper .banner-contents {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  text-align: right;
+  color: #fff;
+  direction: rtl;
+}
+
+.web-banner-wrapper .banner-contents p {
+  font-size: 40px;
+  padding: 0 20px;
+}
+
+.web-banner-wrapper .banner-contents > div {
+  position: absolute;
+  left: 20px;
+  bottom: 15px;
+  border: none;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50px;
+  font-size: 18px;
+  padding: 5px 17px;
+}
+
+.web-banner-wrapper .banner-item::after {
+  content: " ";
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: radial-gradient(
+    circle,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.5) 100%
+  );
+}
+.web-banner-wrapper .banner-more-categories {
+  height: 160px;
+  background-color: #f0f7e7;
+  overflow: hidden;
+  border-radius: 12px;
+  position: relative;
+  margin-top: 20px;
+  border: none;
+  width: 100%;
+}
+.web-banner-wrapper .banner-more-categories .banner-contents {
+  text-align: center;
+  color: #404b55;
+}
+.web-banner-wrapper .banner-more-categories .banner-contents p {
+  font-size: 32px;
+  padding: 9px 0 0;
+  width: 60px;
+  height: 60px;
+  background: #fff;
+  border-radius: 50px;
+  margin: 18px auto 0;
+}
+
+.web-banner-wrapper .banner-more-categories .banner-contents div {
+  position: relative;
+  bottom: initial;
+  left: initial;
+  background: #fff;
+  display: inline-block;
+  margin-top: 16px;
+}
+
+.web-banner-wrapper .banner-more-categories .banner-contents div i {
+  color: #1da1f2;
+}
+
+/* mobile categories styles 
+******************************************/
+
+.mobile-banner {
+  padding: 20px 15px;
+}
+
+.mobile-banner .banner-item-wrapper {
+  background: #f2f2f2;
+  border-radius: 12px;
+  padding: 20px 0;
+  overflow: hidden;
+}
+
+.mobile-banner .banner-item-wrapper > div {
+  padding: 0 7px;
+  text-align: center;
+}
+
+.mobile-banner .banner-item {
+  text-align: center;
+  display: block;
+  background: none;
+  border: none;
+  padding: 0;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.mobile-banner .banner-item-wrapper .banner-item .item-image {
+  height: 45px;
+  width: 45px;
+  border-radius: 50px;
+  background-size: cover;
+  margin: 0 auto;
+  background-position: center;
+}
+
+.mobile-banner .banner-item-wrapper .banner-item.all-banners .item-image {
+  background-color: #fff;
+  padding-top: 7px;
+  font-size: 22px;
+}
+
+.mobile-banner .banner-item-wrapper .banner-item p {
+  font-size: 16px;
+  font-weight: 500;
+  color: #313a43;
+  margin-top: 5px;
+}
+
+/* categories modal styles 
+******************************************/
+
+.modal-dialog {
+  width: 400px;
+}
+.modal-content {
+  overflow: hidden;
+  border-radius: 12px;
+}
+.close-modal {
+  font-size: 20px;
+
+  color: #777;
+
+  position: absolute;
+
+  right: 0;
+
+  padding: 8px 15px 2px;
+
+  top: 0;
+}
+
+.modal-title {
+  font-size: 16px;
+
+  font-weight: 800;
+
+  color: #474747;
+
+  text-align: center;
+}
+
+.modal-header {
+  padding: 9px 15px 10px;
+}
+
+.modal-body {
+  padding: 0 15px;
+}
+
+.form-check-wrapper {
+  direction: rtl;
+}
+
+.report-form textarea {
+  max-width: 600px;
+
+  margin: 0px auto;
+
+  height: 110px;
+
+  max-height: 170px;
+
+  border-radius: 5px;
+
+  direction: rtl;
+}
+
+.main-text {
+  text-align: center;
+  /* margin: 20px 0 40px; */
+}
+.form-check-wrapper button {
+  width: 100%;
+
+  border: none;
+
+  background: none;
+
+  border-bottom: 1px solid #eee;
+
+  text-align: right;
+
+  padding: 12px 15px 13px;
+}
+.form-check-wrapper button:hover {
+  background: #fafafa;
+  cursor: pointer;
+}
+
+.form-check-wrapper li {
+  position: relative;
+}
+
+.form-check-wrapper li:last-of-type button {
+  border: none;
+}
+.form-check-wrapper li i {
+  position: absolute;
+
+  top: 15px;
+
+  left: 20px;
+
+  font-size: 18px;
+
+  color: #777;
+}
+
+.loading-list {
+  padding: 90px 0 130px;
+}
+
+.main-contents-wrapper {
+  padding: 20px;
+  position: relative;
+  border-radius: 12px;
+  border: 1px solid #f0f0f1;
+  margin: 30px auto;
+  direction: rtl;
+}
+
+.main-contents-wrapper > p {
+  margin-top: 20px;
+}
+
 @media screen and (max-width: 767px) {
   #intro {
-    margin-top: 57px;
+    margin-top: 75px;
   }
-  .search-input {
+  .hero-search-input {
     width: 100%;
 
     margin-bottom: 15px;
@@ -805,7 +1127,7 @@ li > ul > li.active > ul > li {
     overflow: hidden;
   }
 
-  .search-input button {
+  .hero-search-input button {
     padding: 13px 15px 15px;
   }
 
@@ -839,8 +1161,28 @@ li > ul > li.active > ul > li {
     margin: 15px 0 0;
   }
 
-  .service-box {
-    margin-top: 30px;
+  #categories-modal > div {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .modal-content {
+    min-height: 100%;
+
+    border-radius: 0;
+
+    border: none;
+
+    float: right;
+
+    width: 100%;
+  }
+  .title-box p {
+    text-align: center;
+  }
+
+  .section-wrapper .title-box {
+    text-align: center;
   }
 }
 </style>
@@ -855,6 +1197,53 @@ li > ul > li.active > ul > li {
       </div>
     </div>
 
+    <div class="container">
+      <div
+        id="categories-modal"
+        class="categories-modal modal fade"
+        tabindex="-1"
+        role="dialog"
+      >
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <a class="close-modal" @click.prevent="closeModal()">
+                <i class="fa fa-times"></i>
+              </a>
+
+              <div class="modal-title">
+                <span> دسته بندی ها </span>
+              </div>
+            </div>
+            <div class="modal-body col-xs-12">
+              <ul class="form-check-wrapper" v-if="!isCategories">
+                <li v-for="(item, index) in categoryModalList" :key="index">
+                  <button
+                    @click.prevent="routeCategories(item.category_name)"
+                    class="default-button-list"
+                    v-text="item.category_name"
+                  ></button>
+                  <i class="fa fa-angle-left"></i>
+                </li>
+              </ul>
+              <ul class="form-check-wrapper" v-else>
+                <li v-for="(item, index) in categoryModalList" :key="index">
+                  <button
+                    class="default-button-list"
+                    @click.prevent="activeSubCategories(item.id)"
+                    v-text="item.category_name"
+                  ></button>
+                  <i class="fa fa-angle-left"></i>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+    </div>
+
     <!-- =========================
         Intro SECTION
     ==============================-->
@@ -863,22 +1252,14 @@ li > ul > li.active > ul > li {
       <!-- <div class="particle-network-animation"></div> -->
       <div class="container">
         <div class="row">
-          <u-animate-container>
-            <u-animate
-              name="fadeIn"
-              delay="0.2s"
-              duration="1s"
-              :iteration="1"
-              :offset="0"
-              animateClass="animated"
-              :begin="false"
-            >
-              <h1 class="intro-site-title" data-wow-delay="1.2s">
+          <div class="col-xs-12 col-md-9">
+            <div name="fadeIn">
+              <h1 class="intro-site-title">
                 باسکول | بازار خرید و فروش عمده محصولات کشاورزی
               </h1>
-            </u-animate>
+            </div>
 
-            <u-animate
+            <div
               name="fadeIn"
               delay="0.5s"
               duration="1s"
@@ -887,22 +1268,13 @@ li > ul > li.active > ul > li {
               animateClass="animated"
               :begin="false"
             >
-              <h2 class="intro-site-title" data-wow-delay="1.2s">
+              <h2 class="intro-site-title">
                 ارتباط مستقیم با خریداران و فروشندگان عمده محصولات کشاورزی
               </h2>
-            </u-animate>
+            </div>
 
-            <u-animate
-              name="fadeIn"
-              delay="0.8s"
-              duration="1s"
-              :iteration="1"
-              :offset="0"
-              animateClass="animated"
-              :begin="false"
-              class="search-wrapper"
-            >
-              <div class="search-input">
+            <div class="search-wrapper">
+              <div class="hero-search-input">
                 <input
                   type="text"
                   placeholder="محصول مورد نظر خود را جستجو کنید"
@@ -920,10 +1292,63 @@ li > ul > li.active > ul > li {
               </div>
 
               <router-link :to="{ name: 'productList' }" class="green-button"
-                >لیست محصولات</router-link
+                >شروع خرید و فروش عمده
+                <i class="fa fa-angle-left"></i>
+              </router-link>
+            </div>
+          </div>
+          <div class="col-xs-12 hidden-xs hidden-sm col-md-3">
+            <div class="web-category-wrapper">
+              <div class="section-title">دسته بندی ها</div>
+              <ul v-if="categoryList.length" id="web-categories">
+                <li
+                  v-for="(category, index) in categoryList"
+                  :id="'menu-' + index"
+                  :key="index"
+                >
+                  <ul class="sub-categories-wrapper" :data-index="index">
+                    <li
+                      class="col-md-3 pull-right"
+                      v-for="(
+                        subCategory, subCategoryIndex
+                      ) in category.subcategories"
+                      :key="subCategoryIndex"
+                    >
+                      <router-link
+                        class="sub-category-item"
+                        :to="getSubCategoryUrl(subCategory.category_name)"
+                        v-text="subCategory.category_name"
+                      ></router-link>
+                    </li>
+                  </ul>
+                  <button>
+                    <span v-text="category.category_name"></span>
+
+                    <i class="fa fa-angle-left"></i>
+                  </button>
+                </li>
+              </ul>
+              <ul v-else>
+                <li v-for="(category, index) in 6" :key="index">
+                  <button>
+                    <span class="placeholder-content content-full-width"></span>
+                  </button>
+                </li>
+              </ul>
+              <button
+                v-if="categoryList.length > 6"
+                @click.prevent="collapseMenu()"
+                class="load-more-categories"
               >
-            </u-animate>
-          </u-animate-container>
+                <span v-if="!this.isCollapse">دسته های بیشتر</span>
+                <span v-else>بستن</span>
+                <i
+                  class="fa fa-angle-down"
+                  :class="{ 'rotate-icon': this.isCollapse }"
+                ></i>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -931,56 +1356,292 @@ li > ul > li.active > ul > li {
     <!-- =========================
         Secondary Nav SECTION
     ==============================-->
-    <section class="secondary-nav-wrapper container-fluid">
-      <div class="container">
-        <nav class="row">
-          <ul class="menu-wrapper list-inline">
-            <li
-              v-if="categoryList.length"
-              v-for="(category, index) in categoryList"
-              :id="'menu' + index"
-              class="nav-item"
-            >
-              <h2>
-                <a
-                  href="#"
-                  @click.prevent="dropDownSecondaryMenu($event, index)"
-                  class="category-item"
-                >
-                  <i class="fa fa-angle-down"></i>
-                  {{ category.category_name }}
-                </a>
-              </h2>
-              <ul
-                class="sub-categories-wrapper list-inline col-xs-12"
-                :data-index="index"
+    <section id="categories-banner" class="categories-banner container">
+      <div class="web-banner-wrapper hidden-xs hidden-sm">
+        <div class="row">
+          <div class="banner-item-wrapper">
+            <div class="pull-right col-xs-3">
+              <button
+                id="banner-item-1"
+                class="banner-item"
+                @click.prevent="openCategoriesModal(50)"
+                :style="{ backgroundImage: 'url(' + getImageUrl(7) + ')' }"
               >
-                <li
-                  v-for="subCategory in category.subcategories"
-                  class="col-xs-4 col-sm-3 col-md-4 pull-right"
-                >
-                  <router-link
-                    class="sub-category-item"
-                    :to="getSubCategoryUrl(subCategory.category_name)"
-                    v-text="subCategory.category_name"
-                  ></router-link>
-                </li>
-
-                <li class="col-xs-12 button-link-wrapper">
-                  <router-link
-                    class="product-link green-button"
-                    :to="{ name: 'productList' }"
-                  >
+                <div class="banner-contents">
+                  <p>حبوبات</p>
+                  <div>
+                    مشاهده همه
                     <i class="fa fa-arrow-left"></i>
-                    مشاهده همه محصولات
-                  </router-link>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </nav>
+                  </div>
+                </div>
+              </button>
+            </div>
+            <div class="pull-right col-xs-9">
+              <button
+                id="banner-item-2"
+                class="banner-item"
+                @click.prevent="openCategoriesModal(1)"
+                :style="{ backgroundImage: 'url(' + getImageUrl(1) + ')' }"
+              >
+                <div class="banner-contents">
+                  <p>میوه</p>
+                  <div>
+                    مشاهده همه
+                    <i class="fa fa-arrow-left"></i>
+                  </div>
+                </div>
+              </button>
+            </div>
+            <div class="pull-right col-xs-3">
+              <button
+                id="banner-item-3"
+                class="banner-item"
+                @click.prevent="openCategoriesModal(45)"
+                :style="{ backgroundImage: 'url(' + getImageUrl(5) + ')' }"
+              >
+                <div class="banner-contents">
+                  <p>ادویه</p>
+                  <div>
+                    مشاهده همه
+                    <i class="fa fa-arrow-left"></i>
+                  </div>
+                </div>
+              </button>
+            </div>
+            <div class="pull-right col-xs-6">
+              <button
+                id="banner-item-4"
+                class="banner-item"
+                @click.prevent="openCategoriesModal(2)"
+                :style="{ backgroundImage: 'url(' + getImageUrl(2) + ')' }"
+              >
+                <div class="banner-contents">
+                  <p>صیفی</p>
+                  <div>
+                    مشاهده همه
+                    <i class="fa fa-arrow-left"></i>
+                  </div>
+                </div>
+              </button>
+            </div>
+            <div class="pull-right col-xs-3">
+              <button
+                id="banner-item-5"
+                class="banner-item"
+                @click.prevent="openCategoriesModal(42)"
+                :style="{ backgroundImage: 'url(' + getImageUrl(3) + ')' }"
+              >
+                <div class="banner-contents">
+                  <p>غلات</p>
+                  <div>
+                    مشاهده همه
+                    <i class="fa fa-arrow-left"></i>
+                  </div>
+                </div>
+              </button>
+            </div>
+            <div class="pull-right col-xs-6">
+              <button
+                id="banner-item-6"
+                class="banner-item"
+                @click.prevent="openCategoriesModal(44)"
+                :style="{ backgroundImage: 'url(' + getImageUrl(4) + ')' }"
+              >
+                <div class="banner-contents">
+                  <p>خشکبار</p>
+                  <div>
+                    مشاهده همه
+                    <i class="fa fa-arrow-left"></i>
+                  </div>
+                </div>
+              </button>
+            </div>
+            <div class="pull-right col-xs-3">
+              <button
+                id="banner-item-7"
+                class="banner-item"
+                @click.prevent="openCategoriesModal(46)"
+                :style="{ backgroundImage: 'url(' + getImageUrl(6) + ')' }"
+              >
+                <div class="banner-contents">
+                  <p>دامپروری</p>
+                  <div>
+                    مشاهده همه
+                    <i class="fa fa-arrow-left"></i>
+                  </div>
+                </div>
+              </button>
+            </div>
+            <div class="pull-right col-xs-3">
+              <button
+                class="banner-more-categories"
+                @click.prevent="openCategoriesModal(false)"
+              >
+                <div class="banner-contents">
+                  <p>
+                    <i class="fa fa-list"></i>
+                  </p>
+                  <div>
+                    همه دسته ها
+                    <i class="fa fa-arrow-left"></i>
+                  </div>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mobile-banner-wrapper hidden-md hidden-lg">
+        <div class="row">
+          <div class="mobile-banner">
+            <div class="banner-item-wrapper">
+              <div
+                class="col-xs-3 pull-right"
+                v-for="(item, index) in categoryList"
+                :key="index"
+                :class="{ hidden: index > 6 }"
+              >
+                <button
+                  class="banner-item"
+                  @click.prevent="openCategoriesModal(item.id)"
+                >
+                  <div
+                    class="item-image"
+                    :style="{
+                      backgroundImage: 'url(' + getImageUrl(index + 1) + ')',
+                    }"
+                  ></div>
+                  <p class="item-text" v-text="item.category_name"></p>
+                </button>
+              </div>
+              <div class="col-xs-3 pull-right">
+                <button
+                  class="banner-item all-banners"
+                  @click.prevent="openCategoriesModal(false)"
+                >
+                  <div class="item-image">
+                    <i class="fa fa-list"></i>
+                  </div>
+                  <p class="item-text">همه</p>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
+
+    <!-- =========================
+        Product SECTION
+    ==============================-->
+    <section
+      id="product-section"
+      class="section-wrapper container-fluid latest-product"
+    >
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12 col-md-9">
+            <div class="section-title">آخرین محصولات ثبت شده</div>
+
+            <div class="col-xs-12 products-contents">
+              <div v-if="lastProducts" class="row">
+                <!-- <div class="owl-carousel">
+                  <ProductCarousel
+                    v-for="(product, index) in lastProducts"
+                    :key="index"
+                    :img="str + '/thumbnails/' + product.photo"
+                    :title="product.product_name"
+                    :stock="getConvertedNumbers(product.stock)"
+                    :link="getProductUrl(product)"
+                    column="3"
+                  />
+                </div> -->
+
+                <div
+                  class="col-xs-6 col-sm-4 items-wrapper pull-right col-md-3"
+                  :key="productIndex"
+                  v-for="(product, productIndex) in lastProducts"
+                >
+                  <!-- <ProductGridArticle
+                    :productIndex="productIndex"
+                    v-if="lastProducts.length >= productIndex"
+                    :key="product.id"
+                    :product="product"
+                    :str="str"
+                    :currentUser="$parent.currentUser"
+                  /> -->
+                </div>
+              </div>
+
+              <div v-else class="row">
+                <div
+                  v-for="(item, index) in 3"
+                  :key="index"
+                  :class="{ 'hidden-xs': index >= 2 }"
+                  class="col-md-4 col-sm-4 col-xs-6"
+                >
+                  <article class="carousel-item box-content col-xs-12">
+                    <span
+                      class="default-index-product-image placeholder-content col-xs-12"
+                    ></span>
+
+                    <span
+                      class="content-default-width placeholder-content margin-10 col-xs-10 col-xs-offset-1"
+                    ></span>
+
+                    <span
+                      class="content-default-width placeholder-content col-xs-8 col-xs-offset-2"
+                    ></span>
+
+                    <span class="margin-10"></span>
+                  </article>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xs-12 col-md-3 pull-right">
+            <div v-if="isUserLogin && userType == 0" class="title-box">
+              <h3>
+                محصولات فروشندگان را ببینید و بدون واسطه با آن ها ارتباط برقرار
+                کنید
+              </h3>
+
+              <router-link class="green-button" :to="{ name: 'productList' }"
+                >لیست محصولات</router-link
+              >
+            </div>
+
+            <div v-else-if="isUserLogin && userType == 1" class="title-box">
+              <h3>
+                با ثبت و معرفی محصول خود، بدون واسطه با خریداران عمده ارتباط
+                برقرار کنید
+              </h3>
+
+              <router-link
+                class="green-button"
+                :to="{ name: 'registerProductSeller' }"
+                >ثبت محصول</router-link
+              >
+            </div>
+
+            <div v-else class="title-box">
+              <div class="section-title">ثبت نام خریداران</div>
+              <p>
+                برای استعلام قیمت و خرید محصولات کشاورزی از بهترین فروشندگان
+                عمده هم اکنون ثبت نام کنید
+              </p>
+
+              <router-link class="green-button" :to="{ name: 'register' }"
+                >ثبت نام رایگان
+                <i class="fa fa-angle-left"></i>
+              </router-link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- =========================
         Request SECTION
     ==============================-->
@@ -992,12 +1653,7 @@ li > ul > li.active > ul > li {
       <div class="container">
         <div class="row">
           <div class="col-xs-12 col-md-9">
-            <div class="title-section col-xs-12">
-              <div class="row">
-                <h3>آخرین درخواست های خرید</h3>
-                <hr />
-              </div>
-            </div>
+            <div class="section-title">آخرین درخواست های خرید</div>
 
             <div class="col-xs-12 requests-contents box-content">
               <div class="row hidden-xs">
@@ -1072,10 +1728,7 @@ li > ul > li.active > ul > li {
           </div>
 
           <div class="col-xs-12 col-md-3 pull-right">
-            <div
-              v-if="isUserLogin && userType == 0"
-              class="title-box box-content"
-            >
+            <div v-if="isUserLogin && userType == 0" class="title-box">
               <h3>
                 از فروشندگان عمده قیمت بگیرید و با یک درخواست چندین قیمت دریافت
                 کنید
@@ -1088,10 +1741,7 @@ li > ul > li.active > ul > li {
               >
             </div>
 
-            <div
-              v-else-if="isUserLogin && userType == 1"
-              class="title-box box-content"
-            >
+            <div v-else-if="isUserLogin && userType == 1" class="title-box">
               <h3>
                 درخواست های خریداران عمده را ببینید و بدون واسطه با آن ها ارتباط
                 برقرار کنید
@@ -1104,8 +1754,8 @@ li > ul > li.active > ul > li {
               >
             </div>
 
-            <div v-else class="title-box box-content">
-              <h3>ثبت نام فروشندگان</h3>
+            <div v-else class="title-box">
+              <div class="section-title">ثبت نام فروشندگان</div>
               <p>
                 برای فروش بدون واسطه محصولات کشاورزی خود به خریداران مستقیم و
                 صادرکنندگان هم اکنون ثبت نام کنید
@@ -1114,8 +1764,8 @@ li > ul > li.active > ul > li {
                 v-if="!isUserLogin"
                 class="green-button"
                 :to="{ name: 'register' }"
-                >ثبت نام</router-link
-              >
+                >ثبت نام رایگان <i class="fa fa-angle-left"></i
+              ></router-link>
             </div>
           </div>
         </div>
@@ -1182,10 +1832,7 @@ li > ul > li.active > ul > li {
         </div>
 
         <div class="container">
-          <div
-            v-if="isUserLogin && userType == 0"
-            class="title-box box-content"
-          >
+          <div v-if="isUserLogin && userType == 0" class="title-box">
             <h3>
               از فروشندگان عمده قیمت بگیرید و با یک درخواست چندین قیمت دریافت
               کنید
@@ -1198,10 +1845,7 @@ li > ul > li.active > ul > li {
             >
           </div>
 
-          <div
-            v-else-if="isUserLogin && userType == 1"
-            class="title-box box-content"
-          >
+          <div v-else-if="isUserLogin && userType == 1" class="title-box">
             <h3>
               درخواست های خریداران عمده را ببینید و بدون واسطه با آن ها ارتباط
               برقرار کنید
@@ -1214,8 +1858,8 @@ li > ul > li.active > ul > li {
             >
           </div>
 
-          <div v-else class="title-box box-content">
-            <h3>ثبت نام فروشندگان</h3>
+          <div v-else class="title-box">
+            <div class="section-title">ثبت نام فروشندگان</div>
             <p>
               برای فروش بدون واسطه محصولات کشاورزی خود به خریداران مستقیم و
               صادرکنندگان هم اکنون ثبت نام کنید
@@ -1224,112 +1868,8 @@ li > ul > li.active > ul > li {
               v-if="!isUserLogin"
               class="green-button"
               :to="{ name: 'register' }"
-              >ثبت نام</router-link
-            >
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- =========================
-        Product SECTION
-    ==============================-->
-    <section
-      id="product-section"
-      class="section-wrapper container-fluid latest-product"
-    >
-      <div class="container">
-        <div class="row">
-          <div class="col-xs-12 col-md-9">
-            <div class="title-section col-xs-12">
-              <div class="row">
-                <h3>آخرین محصولات ثبت شده</h3>
-                <hr />
-              </div>
-            </div>
-
-            <div class="col-xs-12 products-contents">
-              <div v-if="lastProducts" class="row">
-                <div class="owl-carousel">
-                  <ProductCarousel
-                    v-for="(product, index) in lastProducts"
-                    :key="index"
-                    :img="str + '/thumbnails/' + product.photo"
-                    :title="product.product_name"
-                    :stock="getConvertedNumbers(product.stock)"
-                    :link="getProductUrl(product)"
-                    column="3"
-                  />
-                </div>
-              </div>
-
-              <div v-else class="row">
-                <div
-                  v-for="(item, index) in 3"
-                  :class="{ 'hidden-xs': index >= 2 }"
-                  class="col-md-4 col-sm-4 col-xs-6"
-                >
-                  <article class="carousel-item box-content col-xs-12">
-                    <span
-                      class="default-index-product-image placeholder-content col-xs-12"
-                    ></span>
-
-                    <span
-                      class="content-default-width placeholder-content margin-10 col-xs-10 col-xs-offset-1"
-                    ></span>
-
-                    <span
-                      class="content-default-width placeholder-content col-xs-8 col-xs-offset-2"
-                    ></span>
-
-                    <span class="margin-10"></span>
-                  </article>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-xs-12 col-md-3 pull-right">
-            <div
-              v-if="isUserLogin && userType == 0"
-              class="title-box box-content"
-            >
-              <h3>
-                محصولات فروشندگان را ببینید و بدون واسطه با آن ها ارتباط برقرار
-                کنید
-              </h3>
-
-              <router-link class="green-button" :to="{ name: 'productList' }"
-                >لیست محصولات</router-link
-              >
-            </div>
-
-            <div
-              v-else-if="isUserLogin && userType == 1"
-              class="title-box box-content"
-            >
-              <h3>
-                با ثبت و معرفی محصول خود، بدون واسطه با خریداران عمده ارتباط
-                برقرار کنید
-              </h3>
-
-              <router-link
-                class="green-button"
-                :to="{ name: 'registerProductSeller' }"
-                >ثبت محصول</router-link
-              >
-            </div>
-
-            <div v-else class="title-box box-content">
-              <h3>ثبت نام خریداران</h3>
-              <p>
-                برای استعلام قیمت و خرید محصولات کشاورزی از بهترین فروشندگان
-                عمده هم اکنون ثبت نام کنید
-              </p>
-
-              <router-link class="green-button" :to="{ name: 'register' }"
-                >ثبت نام</router-link
-              >
-            </div>
+              >ثبت نام رایگان <i class="fa fa-angle-left"></i
+            ></router-link>
           </div>
         </div>
       </div>
@@ -1344,8 +1884,8 @@ li > ul > li.active > ul > li {
 
           <div class="service-boxs-wrapper col-xs-12">
             <div class="row">
-              <div class="col-xs-12 col-sm-4 pull-right">
-                <article class="service-box box-content main-incobac-logo">
+              <div class="col-xs-12 col-md-4 hidden-md hidden-lg">
+                <article class="service-box main-incobac-logo">
                   <router-link :to="{ name: 'help' }">
                     <div class="box-image">
                       <img src="../../../../img/logo/web-logo.svg" />
@@ -1361,8 +1901,8 @@ li > ul > li.active > ul > li {
                 </article>
               </div>
 
-              <div class="col-xs-12 col-sm-4 pull-right">
-                <article class="service-box box-content">
+              <div class="col-xs-12 col-sm-6 col-md-4 pull-right">
+                <article class="service-box">
                   <router-link :to="{ name: 'help' }">
                     <div class="box-image">
                       <img src="../../../../img/seller.jpg" />
@@ -1378,9 +1918,27 @@ li > ul > li.active > ul > li {
                   </router-link>
                 </article>
               </div>
+              <div
+                class="col-xs-12 col-sm-6 col-md-4 pull-right hidden-xs hidden-sm"
+              >
+                <article class="service-box main-incobac-logo">
+                  <router-link :to="{ name: 'help' }">
+                    <div class="box-image">
+                      <img src="../../../../img/logo/web-logo.svg" />
+                    </div>
+                    <h4>باسکول چیست؟</h4>
+                    <p>
+                      باسکول بازار خرید و فروش عمده محصولات کشاورزی
+                      <br />است که خریداران را به فروشندگان عمده متصل کرده
+                      <br />و خریداران و فروشندگان بدون واسطه می توانند با
+                      یکدیگر ارتباط برقرار کنند
+                    </p>
+                  </router-link>
+                </article>
+              </div>
 
-              <div class="col-xs-12 col-sm-4 pull-right">
-                <article class="service-box box-content">
+              <div class="col-xs-12 col-sm-6 col-md-4 pull-right">
+                <article class="service-box">
                   <router-link :to="{ name: 'help' }">
                     <div class="box-image">
                       <img src="../../../../img/buyer.jpg" />
@@ -1402,10 +1960,34 @@ li > ul > li.active > ul > li {
       </div>
     </section>
 
-    <section class="container" v-if="userType != 1">
+    <section
+      id="register-request-section"
+      class="container"
+      v-if="userType != 1"
+    >
       <main-register-request-form wrapper-bg="true" />
     </section>
 
+    <section id="main-contents-section" class="container">
+      <div class="col-xs-12">
+        <div class="row">
+          <article class="main-contents-wrapper">
+            <div class="section-title">متن سئو</div>
+
+            <p>
+              معرفی محصولات به خریداران عمده دسترسی به درخواست های خرید روزانه
+              گسترش شبکه ی تجاری و مشتریان فروش بدون واسطه و مقرون به صرفه معرفی
+              محصولات به خریداران عمده دسترسی به درخواست های خرید روزانه گسترش
+              شبکه ی تجاری و مشتریان فروش بدون واسطه و مقرون به صرفه معرفی
+              محصولات به خریداران عمده دسترسی به درخواست های خرید روزانه گسترش
+              شبکه ی تجاری و مشتریان فروش بدون واسطه و مقرون به صرفه معرفی
+              محصولات به خریداران عمده دسترسی به درخواست های خرید روزانه گسترش
+              شبکه ی تجاری و مشتریان فروش بدون واسطه و مقرون به صرفه
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
     <section id="benefit-links" class="container-fluid">
       <div class="container">
         <div class="row">
@@ -1414,7 +1996,8 @@ li > ul > li.active > ul > li {
             <div class="row">
               <!-- loop for wholesale date -->
               <h4
-                v-for="item in footerLinks.wholesaleDate"
+                v-for="(item, index) in footerLinks.wholesaleDate"
+                :key="index"
                 class="col-xs-6 col-sm-4 col-md-2 pull-right"
               >
                 <router-link
@@ -1425,26 +2008,28 @@ li > ul > li.active > ul > li {
               <!-- end loop  -->
 
               <!-- loop for wholesale  -->
-              <div
-                v-if="categoryList.length"
-                v-for="(category, index) in categoryList"
-              >
-                <h4
-                  v-for="subCategory in category.subcategories"
-                  class="col-xs-6 col-sm-4 col-md-2 pull-right"
-                >
-                  <router-link
-                    :to="getSubCategoryUrl(subCategory.category_name)"
-                    v-text="'فروش عمده' + ' ' + subCategory.category_name"
-                  ></router-link>
-                </h4>
+              <div v-if="categoryList.length">
+                <div v-for="(category, index) in categoryList" :key="index">
+                  <h4
+                    v-for="(subCategory, subIndex) in category.subcategories"
+                    :key="subIndex"
+                    class="col-xs-6 col-sm-4 col-md-2 pull-right"
+                  >
+                    <router-link
+                      :to="getSubCategoryUrl(subCategory.category_name)"
+                      v-text="'فروش عمده' + ' ' + subCategory.category_name"
+                    ></router-link>
+                  </h4>
+                </div>
               </div>
+
               <!-- end loop  -->
 
               <!-- loop for wholesale rice -->
 
               <h4
-                v-for="item in footerLinks.wholesaleRise"
+                v-for="(item, index) in footerLinks.wholesaleRise"
+                :key="index"
                 class="col-xs-6 col-sm-4 col-md-2 pull-right"
               >
                 <router-link
@@ -1464,9 +2049,8 @@ li > ul > li.active > ul > li {
 
 <script>
 import { eventBus } from "../../../router/router";
-import VueWow from "vue-wow";
 import mainRegisterRequestForm from "./main_components/main-register-request-form";
-import { UAnimateContainer, UAnimate } from "vue-wow";
+import ProductGridArticle from "./product_components/Product_grid_article";
 
 var visible = false;
 
@@ -1516,9 +2100,8 @@ export default {
     Route,
     ProductCarousel,
     RequestCarousel,
-    UAnimateContainer,
-    UAnimate,
     mainRegisterRequestForm,
+    ProductGridArticle,
   },
   props: ["isUserLogin", "userType", "assets", "str"],
   data: function () {
@@ -1530,6 +2113,9 @@ export default {
       isLoading: false,
       categoryList: "",
       subCategoryList: "",
+      isCollapse: false,
+      isCategories: false,
+      categoryModalList: "",
       footerLinks: {
         wholesaleDate: [
           {
@@ -1743,8 +2329,6 @@ export default {
         var eventItem = event;
         setTimeout(collapseDropDown(eventItem), 80);
       };
-
-      // setTimeout(collapseDropDown, 80);
     },
 
     getProductUrl: function (product) {
@@ -1773,9 +2357,141 @@ export default {
         }
       } else return "";
     },
+    collapseMenu() {
+      if (!this.isCollapse) {
+        let fullHeight = 10 + this.categoryList.length * 42.8833;
+        fullHeight = Math.round(fullHeight);
+        $("#web-categories").height(fullHeight);
+        this.isCollapse = true;
+      } else {
+        $("#web-categories").height(267);
+        this.isCollapse = false;
+      }
+    },
+    getImageUrl(index) {
+      return this.assets + "assets/img/banners/banner-" + index + ".jpg";
+    },
+    imageParallax() {
+      var parallax = -0.1;
+
+      var $bg_image1 = $("#banner-item-1");
+      var $bg_image2 = $("#banner-item-2");
+      var $bg_image3 = $("#banner-item-3");
+      var $bg_image4 = $("#banner-item-4");
+      var $bg_image5 = $("#banner-item-5");
+      var $bg_image6 = $("#banner-item-6");
+      var $bg_image7 = $("#banner-item-7");
+
+      var offset_tops = [];
+
+      $bg_image1.each(function (i, el) {
+        offset_tops.push($(el).offset().top);
+      });
+      $bg_image2.each(function (i, el) {
+        offset_tops.push($(el).offset().top);
+      });
+      $bg_image3.each(function (i, el) {
+        offset_tops.push($(el).offset().top);
+      });
+      $bg_image4.each(function (i, el) {
+        offset_tops.push($(el).offset().top);
+      });
+      $bg_image5.each(function (i, el) {
+        offset_tops.push($(el).offset().top);
+      });
+      $bg_image6.each(function (i, el) {
+        offset_tops.push($(el).offset().top);
+      });
+      $bg_image7.each(function (i, el) {
+        offset_tops.push($(el).offset().top);
+      });
+
+      $(window).scroll(function () {
+        var dy = $(this).scrollTop();
+        $bg_image1.each(function (i, el) {
+          var ot = offset_tops[i];
+          $(el).css(
+            "background-position",
+            "50% " + ((dy - ot) * parallax + -50) + "px"
+          );
+        });
+        $bg_image2.each(function (i, el) {
+          var ot = offset_tops[i];
+          $(el).css(
+            "background-position",
+            "50% " + ((dy - ot) * parallax + -50) + "px"
+          );
+        });
+        $bg_image3.each(function (i, el) {
+          var ot = offset_tops[i];
+          $(el).css(
+            "background-position",
+            "50% " + ((dy - ot) * parallax + -50) + "px"
+          );
+        });
+        $bg_image4.each(function (i, el) {
+          var ot = offset_tops[i];
+          $(el).css(
+            "background-position",
+            "50% " + ((dy - ot) * parallax + -50) + "px"
+          );
+        });
+        $bg_image5.each(function (i, el) {
+          var ot = offset_tops[i];
+          $(el).css(
+            "background-position",
+            "50% " + ((dy - ot) * parallax + -50) + "px"
+          );
+        });
+        $bg_image6.each(function (i, el) {
+          var ot = offset_tops[i];
+          $(el).css(
+            "background-position",
+            "50% " + ((dy - ot) * parallax + -50) + "px"
+          );
+        });
+        $bg_image7.each(function (i, el) {
+          var ot = offset_tops[i];
+          $(el).css(
+            "background-position",
+            "50% " + ((dy - ot) * parallax + -50) + "px"
+          );
+        });
+      });
+    },
+    closeModal() {
+      $(".modal").modal("hide");
+    },
+    routeCategories(categoryName) {
+      this.closeModal();
+      this.$router.push(this.getSubCategoryUrl(categoryName));
+    },
+    openCategoriesModal(categoryId) {
+      $("#categories-modal").modal("show");
+      if (categoryId) {
+        for (let i = 0; i < this.categoryList.length; i++) {
+          if (this.categoryList[i].id == categoryId) {
+            this.categoryModalList = this.categoryList[i].subcategories;
+          }
+        }
+      } else {
+        this.isCategories = true;
+        this.categoryModalList = this.categoryList;
+      }
+    },
+    activeSubCategories(categoryId) {
+      for (let i = 0; i < this.categoryList.length; i++) {
+        if (this.categoryList[i].id == categoryId) {
+          this.categoryModalList = this.categoryList[i].subcategories;
+        }
+      }
+
+      this.isCategories = false;
+    },
   },
   mounted: function () {
     this.init();
+    this.imageParallax();
     this.isLoading = true;
   },
   updated() {
