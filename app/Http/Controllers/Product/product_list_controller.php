@@ -1373,14 +1373,29 @@ class product_list_controller extends Controller
         if(count($result) > 0){
             usort($result, function ($item1, $item2){
 
-                $c = $item1['main']->is_elevated;
-                $d = $item2['main']->is_elevated;
+                $a = $item1['main']->is_elevated;
+                $b = $item2['main']->is_elevated;
     
-                if ($c == $d) {
-                    return ($item1['main']->updated_at < $item2['main']->updated_at) ? 1 : -1;
+                if($a == $b){
+                    $c = $item1['user_info']->is_verified;
+                    $d = $item2['user_info']->is_verified;
+
+                    if ($c == $d) {
+                        $e = $item1['user_info']->response_rate;
+                        $f = $item2['user_info']->response_rate;
+
+                        if($e == $f){
+                            return ($item1['main']->updated_at < $item2['main']->updated_at) ? 1 : -1;
+                        }
+                        
+                        return ($e < $f) ? 1 : -1;
+                    }
+                    
+                    return ($c < $d) ? 1 : -1;
+
                 }
     
-                return ($c < $d) ? 1 : -1;
+                return ($a < $b) ? 1 : -1;
             });
         }
         
