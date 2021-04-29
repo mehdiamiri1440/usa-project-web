@@ -284,7 +284,6 @@ import StartRegisterRequest from "./register-request-steps/start-register-reques
 import RegisterRequest from "./register-request-steps/register-request-content";
 import FinishRegisterRequestRelated from "./register-request-steps/fnish-register-request-related";
 import FinishRegisterRequest from "./register-request-steps/fnish-register-request";
-import ProductCarousel from "../../../layouts/main/main_components/product-list-carousel";
 
 export default {
   props: ["str", "verifiedUserContent"],
@@ -293,7 +292,6 @@ export default {
     RegisterRequest,
     FinishRegisterRequestRelated,
     FinishRegisterRequest,
-    ProductCarousel,
   },
   data: function () {
     return {

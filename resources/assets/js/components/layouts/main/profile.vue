@@ -662,6 +662,7 @@ p.response-rate span {
   .main-content,
   #main {
     padding: 0;
+    padding-top: 30px;
   }
 
   .ceteficate-image {

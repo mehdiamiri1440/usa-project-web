@@ -373,8 +373,8 @@ a.profile-info-wrapper:hover {
 
 .mobile-menu-button .message-count {
   padding-top: 5px;
-  left: -10px;
-  top: -8px;
+  left: -16px;
+  top: -4px;
 }
 .navbar-toggle {
   margin: 0;
@@ -406,7 +406,7 @@ a.profile-info-wrapper:hover {
   background: #e41c39;
   border-radius: 50px;
   font-size: 12px;
-  width: 24px;
+  width: 20px;
   height: 20px;
   display: inline-block;
   position: absolute;
@@ -461,6 +461,13 @@ a.profile-info-wrapper:hover {
 }
 
 @media screen and (max-width: 991px) {
+  .search-input button:hover {
+    transition: 150ms;
+
+    padding-left: 9px;
+
+    padding-right: 9px;
+  }
   #buskool-nav {
     margin: 0;
   }
@@ -480,6 +487,14 @@ a.profile-info-wrapper:hover {
 }
 
 @media screen and (max-width: 767px) {
+  a.profile-info-wrapper {
+    margin-top: -4px;
+  }
+  a.profile-info-wrapper .profile-image-wrapper {
+    width: 35px;
+    height: 35px;
+  }
+
   .buskool-logo .navbar-brand {
     width: 100px;
     margin-top: 4px;
@@ -542,8 +557,10 @@ a.profile-info-wrapper:hover {
     right: -1px;
 
     left: -1px;
+  }
 
-    border-top: 2px solid #00c569;
+  #buskool-nav.hidden-search {
+    top: 50px;
   }
 
   #buskool-nav:after {
@@ -795,17 +812,17 @@ a.profile-info-wrapper:hover {
     <nav class="navbar text-rtl">
       <div class="container-fluid buskool-main-nav">
         <div class="hidden-md hidden-sm hidden-lg mobile-menu-button">
-          <span
-            class="message-count"
-            v-if="messageCount > 0"
-            v-text="messageCount"
-          ></span>
           <button
             type="button"
             class="navbar-toggle"
             data-toggle="collapse"
             data-target="#buskool-nav"
           >
+            <span
+              class="message-count"
+              v-if="messageCount > 0"
+              v-text="messageCount"
+            ></span>
             <i class="fa fa-bars"></i>
           </button>
         </div>
@@ -920,7 +937,14 @@ a.profile-info-wrapper:hover {
           </ul>
         </div>
 
-        <div class="collapse navbar-collapse navbar-right" id="buskool-nav">
+        <div
+          class="collapse navbar-collapse navbar-right"
+          id="buskool-nav"
+          :class="{
+            'hidden-search':
+              $route.name == 'login' || $route.name == 'register',
+          }"
+        >
           <div class="wrapper-nav">
             <div class="search-input hidden-xs">
               <input
@@ -1094,7 +1118,10 @@ a.profile-info-wrapper:hover {
           </div>
         </div>
       </div>
-      <div class="search-input hidden-sm hidden-md hidden-lg">
+      <div
+        v-if="$route.name != 'login' && $route.name != 'register'"
+        class="search-input hidden-sm hidden-md hidden-lg"
+      >
         <input
           type="text"
           placeholder="محصول مورد نظر خود را جستجو کنید"
