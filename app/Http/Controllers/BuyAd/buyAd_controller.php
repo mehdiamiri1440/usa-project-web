@@ -1369,14 +1369,16 @@ class buyAd_controller extends Controller
         $until_date = Carbon::now();
         $from_date = Carbon::now()->subDays(7); // last 2 weeks
 
-        $buyAds = buyAd::where('confirmed', true)
-                            ->whereBetween('created_at', [$from_date, $until_date])
-                            ->select(['id', 'name', 'requirement_amount', 'created_at', 'category_id'])
-                            ->orderBy('created_at', 'desc')
+        $buyAds = DB::table('buy_ads')
+                            ->join('myusers','myusers.id','=','buy_ads.myuser_id')
+                            ->where('buy_ads.confirmed', true)
+                            ->whereBetween('buy_ads.created_at', [$from_date, $until_date])
+                            ->select(['buy_ads.id', 'buy_ads.name', 'buy_ads.requirement_amount', 'buy_ads.created_at', 'buy_ads.category_id','myusers.first_name','myusers.last_name'])
+                            ->orderBy('buy_ads.created_at', 'desc')
                             ->limit(10)
                             ->get()
                             ->shuffle()
-                            ->slice(0, 5);
+                            ->slice(0, 6);
 
         $date_convertor_object = new date_convertor();
 

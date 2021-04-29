@@ -942,12 +942,16 @@ class product_controller extends Controller
     public function get_sample_products()
     {
         $until_date = Carbon::now();
-        $from_date = Carbon::now()->subDays(14); // last 2 weeks
+        $from_date = Carbon::now()->subDays(10); // last 2 weeks
 
-        $products = product::where('confirmed', true)
-                                ->whereBetween('created_at', [$from_date, $until_date])
-                                ->select(['id', 'product_name', 'category_id', 'stock'])
-                                ->orderBy('created_at', 'desc')
+        $products = DB::table('products')
+                                ->join('myusers','myusers.id','=','products.myuser_id')
+                                ->leftJoin('cities', 'cities.id', '=', 'products.city_id')
+                                ->leftJoin('provinces', 'provinces.id', '=', 'cities.province_id')
+                                ->where('products.confirmed', true)
+                                ->whereBetween('products.created_at', [$from_date, $until_date])
+                                ->select(['products.id', 'products.product_name', 'products.category_id', 'products.stock','myusers.first_name','myusers.last_name','cities.city_name','provinces.province_name','myusers.is_verified'])
+                                ->orderBy('products.created_at', 'desc')
                                 ->limit(10)
                                 ->get()
                                 ->shuffle()
@@ -961,7 +965,7 @@ class product_controller extends Controller
             $product->photo = product_media::where('product_id', $product->id)
                                                 ->get()
                                                 ->first()
-                                                ->file_path;
+                                                ->file_path ?? null;
         });
 
         return response()->json([
