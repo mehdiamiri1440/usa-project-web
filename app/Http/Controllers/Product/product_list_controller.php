@@ -505,7 +505,7 @@ class product_list_controller extends Controller
             //     }
             // }
             $tmp_products = $this->apply_customized_related_products_filter_for_buyers($products,$user_info);
-            $products =  $this->sort_products_by_response_rate($products);
+            $products =  $this->sort_products_by_response_time($products);
 
             if(count($tmp_products) > 0){
                 $tmp_product_ids = [];
@@ -522,29 +522,32 @@ class product_list_controller extends Controller
             return array_unique(array_merge($tmp_products,$products),SORT_REGULAR);
         }
         else if($user_info->is_seller == true){
-            if($user_info->active_pakage_type == 0){
-                $eleveted_products = product::where('myuser_id',$user_id)
-                                            ->where('confirmed',true)
-                                            ->where('is_elevated',true)
-                                            ->get()
-                                            ->count();
+            $products = $this->sort_products_by_response_rate($products);
+            // if($user_info->active_pakage_type == 0){
+            //     $eleveted_products = product::where('myuser_id',$user_id)
+            //                                 ->where('confirmed',true)
+            //                                 ->where('is_elevated',true)
+            //                                 ->get()
+            //                                 ->count();
 
-                if($eleveted_products == 0 && $user_info->created_at->diffInDays(Carbon::now()) <= 7){
-                    $products =  $this->sort_products_by_response_rate($products);
-                    $products = $this->remove_duplicated_paying_sellers($products);
+            //     if($eleveted_products == 0 && $user_info->created_at->diffInDays(Carbon::now()) <= 7){
+            //         $products =  $this->sort_products_by_response_rate($products);
+            //         $products = $this->remove_duplicated_paying_sellers($products);
 
-                    return $products;
-                }
-            }
+            //         return $products;
+            //     }
+            // }
         }
 
-        $user_response_info = $this->get_user_response_info($user_id);
-        $user_response_info['created_at'] = $user_info->created_at;
+        // $user_response_info = $this->get_user_response_info($user_id);
+        // $user_response_info['created_at'] = $user_info->created_at;
         
 
-        $sorting_callback_function = $this->get_best_match_call_back_function($user_response_info);
+        // $sorting_callback_function = $this->get_best_match_call_back_function($user_response_info);
 
-        usort($products,$sorting_callback_function);
+        // usort($products,$sorting_callback_function);
+
+        $products = $this->remove_duplicated_sellers($products);
 
         return $products;
     }
@@ -880,7 +883,10 @@ class product_list_controller extends Controller
             $user_id = session('user_id');
             $buyAds = DB::table('buy_ads')
                             ->where('buy_ads.myuser_id',$user_id)
-                            ->where('confirmed',true)
+                            ->where(function($q){
+                                return $q = $q->where('confirmed',true)
+                                                ->orWhereBetween('created_at',[Carbon::now()->subHours(24),Carbon::now()]);
+                            })
                             ->whereNull('deleted_at')
                             ->orderBy('created_at','desc')
                             ->get();
@@ -991,12 +997,12 @@ class product_list_controller extends Controller
     protected function sort_products_by_response_time(&$products)
     {
         usort($products,function($item1,$item2){
-            $a = ($item1['user_info']->response_time > 0 && $item1['user_info']->response_rate > 70) ? ($item1['user_info']->response_time + ((100 - $item1['user_info']->response_rate) * $item1['user_info']->ums)) : 10000;
-            $b = ($item2['user_info']->response_time > 0 && $item2['user_info']->response_rate > 70) ? ($item2['user_info']->response_time + ((100 - $item2['user_info']->response_rate) * $item2['user_info']->ums)) : 10000;
+            $a = ($item1['user_info']->response_time > 0 && $item1['user_info']->response_rate > 75) ? ($item1['user_info']->response_time + ((100 - $item1['user_info']->response_rate) * $item1['user_info']->ums)) : 10000;
+            $b = ($item2['user_info']->response_time > 0 && $item2['user_info']->response_rate > 75) ? ($item2['user_info']->response_time + ((100 - $item2['user_info']->response_rate) * $item2['user_info']->ums)) : 10000;
 
             if($a == $b){
-                $c = $item1['user_info']->response_rate > 70 ? $item1['user_info']->response_rate : 0;
-                $d = $item2['user_info']->response_rate > 70 ? $item2['user_info']->response_rate : 0;
+                $c = $item1['user_info']->response_rate > 75 ? $item1['user_info']->response_rate : 0;
+                $d = $item2['user_info']->response_rate > 75 ? $item2['user_info']->response_rate : 0;
 
                 if($c == $d){
                     return $item1['main']->updated_at < $item2['main']->updated_at;
@@ -1030,9 +1036,9 @@ class product_list_controller extends Controller
         return $products;
     }
 
-    protected function remove_duplicated_paying_sellers(&$products)
+    protected function remove_duplicated_sellers(&$products)
     {
-        $first_products = array_slice($products,0,100);
+        $first_products = array_slice($products,0,250);
 
         $tmp_user_ids = [];
         $duplicated_keys = [];

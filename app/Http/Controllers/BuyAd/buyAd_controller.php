@@ -760,6 +760,8 @@ class buyAd_controller extends Controller
                     
                 });
 
+                
+
             }
 
             if(count($filtered_buyAds) > 0){
@@ -769,18 +771,37 @@ class buyAd_controller extends Controller
             }
             
 
-            usort($result_buyAds,function($item1,$item2){
-                $a = $item1->response_rate;
-                $b = $item2->response_rate;
+            $user_registered_products_categories_array = [];
+
+            foreach($user_registered_products as $product)
+            {
+                $user_registered_products_categories_array[] = $product->category_id;
+            }
+
+            $user_registered_products_categories_array = array_unique($user_registered_products_categories_array);
+
+            usort($result_buyAds,function($item1,$item2) use($user_registered_products_categories_array){
+                $a =  (in_array($item1->category_id,$user_registered_products_categories_array) == true) ? 1 : -1;
+                $b =  (in_array($item2->category_id,$user_registered_products_categories_array) == true) ? 1 : -1;
 
                 if($a == $b){
-                    return ($item1->updated_at < $item2->updated_at) ? 1 : -1;
+                    $c = $item1->response_rate;
+                    $d = $item2->response_rate;
+
+                    if($c == $d){
+                        return ($item1->updated_at < $item2->updated_at) ? 1 : -1;
+                    }
+
+                    return ($c < $d) ? 1 : -1;
                 }
 
                 return ($a < $b) ? 1 : -1;
+                
             });
 
             $result_buyAds = array_merge($filtered_buyAds,$result_buyAds);
+
+            $result_buyAds = array_unique($result_buyAds,SORT_REGULAR);
 
             return response()->json([
                 'status' => true,

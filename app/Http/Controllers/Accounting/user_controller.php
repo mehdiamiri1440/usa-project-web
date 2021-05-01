@@ -12,6 +12,7 @@ use App\Models\product;
 use App\Http\Controllers\Notification\sms_controller;
 use DB;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Cache;
 
 class user_controller extends Controller
 {
@@ -417,6 +418,8 @@ class user_controller extends Controller
 
             $user->is_seller = false;
             $user->is_buyer = true;
+
+            Cache::forget(md5('products-' . session('user_id')));
         }
         else if(session('is_buyer') == true){
             session([
@@ -426,6 +429,8 @@ class user_controller extends Controller
 
             $user->is_buyer  = false;
             $user->is_seller = true;
+
+            Cache::forget(md5('products-' . session('user_id')));
         }
 
         $user->save();
