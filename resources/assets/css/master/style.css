@@ -1229,7 +1229,7 @@ border: 1px solid #F0F0F1;
 #intro {
   background: url("../../../assets/img/hero-section.jpg");
   background-size: cover;
-  background-position: center right;
+  background-position: center left;
 }
 
 .title-page {

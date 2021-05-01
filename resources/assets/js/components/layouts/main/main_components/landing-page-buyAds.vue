@@ -67,8 +67,9 @@
   direction: rtl;
   text-align: center;
   line-height: 1.618;
-  font-weight: bold;
+  font-weight: 400;
   padding: 5px;
+  color: #777;
 }
 
 .buyAd-wrapper-item {
@@ -264,6 +265,7 @@ button.disable {
 }
 .list-title.list-name div.buyer-text > div {
   flex: 1;
+  font-weight: bold;
 }
 
 .text-center {
