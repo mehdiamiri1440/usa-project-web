@@ -14,6 +14,7 @@ input,textarea {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+  
 }
 
 .hover-effect {
@@ -40,6 +41,7 @@ input,textarea {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
+  width: 100%;
 }
 
 .content-half-width {
@@ -235,6 +237,10 @@ input,textarea {
   margin-top: 10px;
 }
 
+.margin-top-15 {
+  margin-top: 10px;
+}
+
 .padding-top-5 {
   padding-top: 5px;
 }
@@ -271,6 +277,14 @@ input,textarea {
   height: 20px;
 }
 
+.h-25 {
+  height: 25px;
+}
+
+.h-30 {
+  height: 30px;
+}
+
 .h-40 {
   height: 40px;
 }
@@ -304,6 +318,9 @@ input,textarea {
 .light-green-text {
   color: #21ad93;
 }
+.blue-aqua-text {
+  color: #4DC0BB;
+}
 .gray-text {
   color: #777;
 }
@@ -321,6 +338,10 @@ input,textarea {
 
 .bg-green {
   background-color: #00c569 !important;
+}
+
+.bg-blue {
+  background-color: #1DA1F2 !important;
 }
 
 .bg-gray {
@@ -423,6 +444,60 @@ input,textarea {
     width: 100%;
   }
 }
+
+
+
+/* toast style */
+
+
+
+.toast {
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -150px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  bottom: 30px;
+  direction: rtl;
+  border-radius: 12px;
+  font-size: 17px;
+  z-index: 2;
+}
+
+.toast.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+  from {bottom: 0; opacity: 0;} 
+  to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+  from {bottom: 30px; opacity: 1;} 
+  to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+
+
 
 /*index styles*/
 

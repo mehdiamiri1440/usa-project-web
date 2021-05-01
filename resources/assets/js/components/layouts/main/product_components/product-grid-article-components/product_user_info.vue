@@ -21,6 +21,9 @@ i {
   line-height: 1.618;
   border-bottom: 1px solid #e9ecef;
 }
+.user-information-wrapper:hover {
+  cursor: pointer;
+}
 
 .article-action-buttons button {
   margin-top: 7px;
@@ -121,7 +124,7 @@ i {
   padding-top: 9px;
 }
 
-a.user-information-link {
+div.user-information-link {
   display: block;
   overflow: hidden;
   font-size: 13px;
@@ -135,8 +138,8 @@ a.user-information-link {
 </style>
 
 <template>
-  <div class="user-information-wrapper">
-    <router-link :to="'/profile/' + user_name" class="user-information-link">
+  <div class="user-information-wrapper" @click.prevent="$parent.setScroll()">
+    <div class="user-information-link">
       <div class="user-information-content pull-right">
         <i class="fa fa-user-circle"></i>
         {{ user_full_name }}
@@ -165,7 +168,7 @@ a.user-information-link {
           {{ "%" + user_info.response_rate }}
         </button>
       </div>
-    </router-link>
+    </div>
   </div>
 </template>
 
