@@ -464,6 +464,7 @@ li > ul > li.active > ul > li {
   font-weight: bold;
   padding: 0;
   padding-top: 5px;
+  width: 100%;
 }
 
 .list-group-item {
@@ -1125,14 +1126,13 @@ li > ul > li.active > ul > li {
   border: 1px solid #f0f0f1;
   margin: 30px auto;
   direction: rtl;
+  max-height: 400px;
+overflow-y: scroll;
 }
 
 .main-contents-wrapper > p {
   margin-top: 20px;
 }
-
-
-
 
 
 /*---------------------------------------
@@ -1226,12 +1226,6 @@ li > ul > li.active > ul > li {
       float: right;
     }
     
-    .user-information-wrapper {
-      padding: 5px 15px;
-      border-bottom: 2px solid #eeeeee;
-      margin: 0;
-      min-height: 52px;
-    }
     
     
     .user-information-wrapper .article-action-buttons {
@@ -1582,7 +1576,66 @@ li > ul > li.active > ul > li {
       transform: rotate(360deg);
     }
   }
-  
+
+  .buyAd-wrapper-item{
+    border: 1px solid #ddd;
+    padding: 3px 5px 5px;
+    border-radius: 12px;
+    margin-top: 20px;
+    background: #fdfdfd !important;
+  }
+
+  .buyAd-wrapper-item .list-title.list-name{
+    text-align: center;
+    padding: 5px 15px;
+    direction: rtl;
+    color: #7e7e7e;
+  }
+
+  .buyAd-wrapper-item .user-information-wrapper{
+    float: right;
+    width: 100%;
+    margin-bottom: 4px;
+  }
+
+  .buyAd-wrapper-item .user-information-content{
+    display: block;
+    float: right;
+    width: 100%;
+    background: none;
+    border: none;
+    margin: 0;
+    padding: 0;
+    padding-bottom: 3px;
+  }
+  .list-title.list-name div.buyer-text{
+    text-align: center;
+    font-size: 15px;
+    font-weight: 400;
+    height: 65px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+
+  .buyAd-wrapper-item .user-content{
+    display: block;
+    max-width: 170px;
+    overflow: hidden;
+    font-size: 13px;
+    font-weight: 400;
+    color: #adadad;
+    height: 21px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-align: right;
+  }
+
+
   /*preloader image style*/
   
   .main-article-image {
