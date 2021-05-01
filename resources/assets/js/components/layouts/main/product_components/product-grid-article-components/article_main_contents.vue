@@ -40,7 +40,7 @@ body {
 
   color: #777;
 
-  font-weight: bold;
+  font-weight: 500;
 
   max-width: 500px;
 

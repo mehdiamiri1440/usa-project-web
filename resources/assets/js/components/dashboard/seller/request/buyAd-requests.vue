@@ -726,7 +726,7 @@ button.disable {
                       <span class="request-count">{{ "0+" }}</span>
                     </button>
                     <button
-                    v-else
+                      v-else
                       class="btn"
                       type="button"
                       data-toggle="tooltip"

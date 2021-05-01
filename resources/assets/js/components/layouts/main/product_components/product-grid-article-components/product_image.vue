@@ -64,21 +64,22 @@
   min-height: 40px;
   width: 100%;
   right: 0;
-  background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5));
+  background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.6));
   display: flex;
   align-items: center;
   padding-top: 6px;
 }
 
 .article-title p {
-  font-size: 15px;
+  font-size: 17px;
   padding: 0 5px;
   color: #ebebeb;
   overflow: hidden;
-  height: 25px;
+  height: 29px;
   line-height: 1.618;
   white-space: nowrap;
   text-overflow: ellipsis;
+  font-weight: 500;
 }
 
 .valid-user-badge {
