@@ -370,7 +370,7 @@ class phone_number_controller extends Controller
     {
         $now = Carbon::now();
 
-        if(Carbon::parse($now)->format('H') > 22  && Carbon::parse($now)->format('H') < 7){
+        if(Carbon::parse($now)->format('H') >= 22  || Carbon::parse($now)->format('H') < 7){
             return false;
         }
 
