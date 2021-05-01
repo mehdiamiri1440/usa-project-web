@@ -30,7 +30,7 @@ export default {
       selectedCategoryIndex: "",
       subCategoryList: "",
       categoryName: "",
-      subCategoryName: "",
+      subCategoryName: "محصول",
       productName: "",
       errors: {
         productName: "",
@@ -47,27 +47,31 @@ export default {
     let buyAd = JSON.parse(window.localStorage.getItem("buyAd"));
 
     if (buyAd) {
-      this.$parent.buyAd = buyAd;
+      this.step = 2;
+      this.productName = buyAd.name;
+      this.requirement_amount = buyAd.requirement_amount;
 
-      let categoryId = buyAd.categorySelected;
-
-      this.$parent.categorySelected = categoryId;
+      let categoryId = buyAd.category_id;
+      this.$parent.buyAd.category_id = buyAd.sub_category_id;
 
       axios
         .post("/get_category_list", {
           parent_id: categoryId,
         })
-        .then(
-          (response) =>
-            (this.$parent.subCategoryList = response.data.categories)
-        );
+        .then((response) => {
+          this.subCategoryList = response.data.categories;
+          let subCategory = this.subCategoryList.filter((item) => {
+            return item.id == buyAd.sub_category_id;
+          });
+          this.subCategoryName = subCategory[0].category_name;
+        });
     }
   },
   methods: {
     selectedCategory(index) {
       window.localStorage.removeItem("buyAd");
       this.selectedCategoryIndex = index;
-      this.categoryName = this.categoryList[index].category_name;
+      // this.categoryName = this.categoryList[index].category_name;
       this.subCategoryList = this.categoryList[index].subcategories;
       this.step = 1;
     },

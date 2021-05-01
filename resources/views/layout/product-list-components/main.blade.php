@@ -562,3 +562,31 @@
         </div>
       </aside>
     </main>
+
+     <footer
+      class="category-footer container"
+      >
+      @if($categoryMetaData['category_info'])
+        <div class="col-xs-12">
+
+          <div class="footer-note-wrapper main-box-shadow">
+            <div class="wrapper-contents">
+              <div
+                class="contents"
+              >
+              @foreach($categoryMetaData['category_info'] as $categoryMeta)
+                <div>{!! $categoryMeta['header'] ?? $categoryMeta[0]['header'] !!}</div>
+                <div>{!! $categoryMeta['content'] ?? $categoryMeta[0]['content'] !!}</div>
+              @endforeach
+              </div>
+            </div>
+          </div>
+        </div>
+      @endif
+
+      @if($categoryMetaData['schema_object'])
+      <script
+        type="application/ld+json"
+      >{!! $categoryMetaData["schema_object"] !!}</script>
+      @endif
+      </footer>

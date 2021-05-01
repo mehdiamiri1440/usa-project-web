@@ -521,15 +521,16 @@ export default {
     },
     setScroll: function () {
       localStorage.setItem("scrollIndex", this.$props.productIndex);
+      window.open(this.productUrl, "_blank");
 
-      if (
-        this.isDeviceMobile() &&
-        window.location.pathname.includes("product-list")
-      ) {
-        window.open(this.productUrl, "_blank");
-      } else {
-        this.$router.push(this.productUrl);
-      }
+      // if (
+      //   this.isDeviceMobile() &&
+      //   window.location.pathname.includes("product-list")
+      // ) {
+      //   window.open(this.productUrl, "_blank");
+      // } else {
+      //   this.$router.push(this.productUrl);
+      // }
       this.$parent.registerComponentStatistics(
         "product",
         "show-product-in-seperate-page",

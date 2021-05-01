@@ -339,6 +339,26 @@ select {
 .bg-red:hover:hover {
   background-color: #d71a34 !important;
 }
+
+.section-title {
+  text-align: right;
+  font-size: 18px;
+  font-weight: 500;
+  color: #313a43;
+  position: relative;
+  padding-bottom: 9px;
+}
+
+.section-title::after {
+  content: " ";
+  background-color: #00c569;
+  width: 100px;
+  height: 3px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
 /* 
 .message-wrapper .chat-page ul,
 .main-modal-chat ul,
@@ -1201,7 +1221,7 @@ Sizes
   background: #fff;
 padding: 15px;
 border-radius: 12px;
-border: 1px solid #E0E0E0;
+border: 1px solid #F0F0F1;
 }
 
 /*index page global style */
@@ -1396,10 +1416,6 @@ span.min {
 }
 
 @media only screen and (max-width: 767px) {
-  .main-content-index-pages {
-    padding-top: 70px;
-  }
-
   .overflow-hidden {
     overflow: hidden;
   }
