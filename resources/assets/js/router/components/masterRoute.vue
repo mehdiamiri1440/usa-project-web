@@ -16,6 +16,7 @@
       :assets="assets"
       :is-user-login="userId"
       :user-type="isSeller"
+      :verifiedUserContent="verifiedUserContent"
     ></router-view>
 
     <footer-master-layouts />

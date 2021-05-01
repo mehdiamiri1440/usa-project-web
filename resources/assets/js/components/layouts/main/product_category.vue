@@ -248,7 +248,7 @@ button.btn-filter {
 
 .sub-header-fix {
   position: fixed;
-  top: 56px;
+  top: 83px;
   left: 0;
   right: 0;
   z-index: 2;
@@ -1109,17 +1109,6 @@ div.items-wrapper {
     <div
       class="sub-header-fix sub-header hidden-lg hidden-md hidden-sm container-fluid"
     >
-      <div class="search-box col-sm-8 col-xs-12 col-lg-5 pull-right">
-        <input
-          type="text"
-          v-model="headerSearchText"
-          placeholder="اینجا جستجو کنید"
-        />
-
-        <button class="btn-search">
-          <i class="fa-search fa"></i>
-        </button>
-      </div>
       <div class="rate-filter-mobile-wrapper">
         <div class="rate-filter">
           <button class="green-button bg-gray" @click.prevent="openSortModal()">

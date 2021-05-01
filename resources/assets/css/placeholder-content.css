@@ -41,6 +41,7 @@ input,textarea {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
+  width: 100%;
 }
 
 .content-half-width {
@@ -337,6 +338,10 @@ input,textarea {
 
 .bg-green {
   background-color: #00c569 !important;
+}
+
+.bg-light-green {
+  background-color: #21ad93 !important;
 }
 
 .bg-blue {

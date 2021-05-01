@@ -81,9 +81,8 @@ hr {
 }
 @media screen and (max-width: 768px) {
   .content-sidebar {
-    margin: 0 auto;
+    margin: 50px auto 100px;
     box-shadow: none;
-    margin-top: -60px;
   }
 }
 </style>
@@ -103,7 +102,8 @@ hr {
           <option disabled selected>استان</option>
 
           <option
-            v-for="province in provinceList"
+            v-for="(province, index) in provinceList"
+            :key="'province-' + index"
             v-bind:value="province.id"
             v-text="province.province_name"
           ></option>
@@ -113,9 +113,13 @@ hr {
         <i class="fa-home fa"></i>
         <select v-on:change="setCityFilter($event)">
           <option disabled selected>شهر</option>
-          <option v-for="city in cityList" v-bind:value="city.id">{{
-            city.city_name
-          }}</option>
+          <option
+            v-for="(city, index) in cityList"
+            :key="'city-' + index"
+            v-bind:value="city.id"
+          >
+            {{ city.city_name }}
+          </option>
         </select>
       </div>
       <div class="sidebar-buttons">
