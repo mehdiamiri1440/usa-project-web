@@ -462,12 +462,11 @@ a.profile-info-wrapper:hover {
 
 @media screen and (max-width: 991px) {
   .search-input button:hover {
-    transition: 150ms;
+    padding-left: 19px;
 
-    padding-left: 9px;
-
-    padding-right: 9px;
+    padding-right: 19px;
   }
+
   #buskool-nav {
     margin: 0;
   }
@@ -487,6 +486,14 @@ a.profile-info-wrapper:hover {
 }
 
 @media screen and (max-width: 767px) {
+  .search-input button:hover {
+    transition: 150ms;
+
+    padding-left: 9px;
+
+    padding-right: 9px;
+  }
+
   a.profile-info-wrapper {
     margin-top: -4px;
   }
@@ -512,6 +519,10 @@ a.profile-info-wrapper:hover {
     background: none;
     color: #00c569;
     margin: 0;
+  }
+  .nav > li > a.green-button:hover {
+    background: none;
+    color: #00c569 !important;
   }
   .buskool-main-nav {
     padding: 6px 0 1px;

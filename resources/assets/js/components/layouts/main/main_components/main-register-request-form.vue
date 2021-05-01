@@ -42,10 +42,6 @@
   padding-top: 5px;
 }
 
-.small-description-text {
-  text-align: left;
-}
-
 .submit-button.default-back-button i {
   left: 3px;
 }
@@ -271,9 +267,10 @@ select.error:focus {
 }
 
 .small-description-text {
-  text-align: right;
+  text-align: left;
 
   font-weight: bold;
+
   color: #777777;
 
   height: 25px;

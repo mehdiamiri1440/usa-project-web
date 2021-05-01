@@ -1268,7 +1268,7 @@ li > ul > li.active > ul > li {
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <a class="close-modal" @click.prevent="closeModal()">
+              <a href="#" class="close-modal" @click.prevent="closeModal()">
                 <i class="fa fa-times"></i>
               </a>
 

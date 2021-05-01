@@ -189,7 +189,7 @@ button.send-message-button {
 
 @media screen and (max-width: 767px) {
   #main {
-    padding-top: 104px;
+    padding-top: 96px;
   }
 }
 
