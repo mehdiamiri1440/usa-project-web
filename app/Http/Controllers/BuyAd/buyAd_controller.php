@@ -721,6 +721,7 @@ class buyAd_controller extends Controller
             }
 
             $user_registered_products = DB::table('products')->where('myuser_id',$seller_id)
+                                                ->whereNull('deleted_at')
                                                 ->where(function($q){
                                                     return $q = $q->where('confirmed',true)
                                                                     ->orWhereBetween('created_at',[Carbon::now()->subHours(24),Carbon::now()]);
