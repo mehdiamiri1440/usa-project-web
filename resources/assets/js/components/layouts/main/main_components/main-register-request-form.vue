@@ -421,6 +421,7 @@ label .small-label {
                   <span v-else-if="categoryName == 'دامپروری'">
                     مثلا: چهل گیاه
                   </span>
+                  <span v-else-if="categoryName == 'حبوبات'"> مثلا: چیتی </span>
                   <span v-else> مثلا: مضافتی</span>
                 </label>
                 <div class="text-input-wrapper">
