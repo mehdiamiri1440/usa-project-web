@@ -20,13 +20,6 @@ use App\Jobs\sendSMS;
 
 
 
-Route::get('/test', function () {
-            return view('layout.index');
-        });
-
-
-
-
 Route::get('/product-list',[
     'uses' => 'Product\product_list_controller@get_product_list_blade',
 ]);

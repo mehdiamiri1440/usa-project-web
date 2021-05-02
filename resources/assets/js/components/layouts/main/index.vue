@@ -1390,7 +1390,7 @@ li > ul > li.active > ul > li {
               <button
                 id="banner-item-1"
                 class="banner-item"
-                @click.prevent="openCategoriesModal(50)"
+                @click.prevent="openCategoriesModal('حبوبات')"
                 :style="{ backgroundImage: 'url(' + getImageUrl(7) + ')' }"
               >
                 <div class="banner-contents">
@@ -1406,7 +1406,7 @@ li > ul > li.active > ul > li {
               <button
                 id="banner-item-2"
                 class="banner-item"
-                @click.prevent="openCategoriesModal(1)"
+                @click.prevent="openCategoriesModal('میوه')"
                 :style="{ backgroundImage: 'url(' + getImageUrl(1) + ')' }"
               >
                 <div class="banner-contents">
@@ -1422,7 +1422,7 @@ li > ul > li.active > ul > li {
               <button
                 id="banner-item-3"
                 class="banner-item"
-                @click.prevent="openCategoriesModal(45)"
+                @click.prevent="openCategoriesModal('ادویه')"
                 :style="{ backgroundImage: 'url(' + getImageUrl(5) + ')' }"
               >
                 <div class="banner-contents">
@@ -1438,7 +1438,7 @@ li > ul > li.active > ul > li {
               <button
                 id="banner-item-4"
                 class="banner-item"
-                @click.prevent="openCategoriesModal(2)"
+                @click.prevent="openCategoriesModal('صیفی')"
                 :style="{ backgroundImage: 'url(' + getImageUrl(2) + ')' }"
               >
                 <div class="banner-contents">
@@ -1454,7 +1454,7 @@ li > ul > li.active > ul > li {
               <button
                 id="banner-item-5"
                 class="banner-item"
-                @click.prevent="openCategoriesModal(42)"
+                @click.prevent="openCategoriesModal('غلات')"
                 :style="{ backgroundImage: 'url(' + getImageUrl(3) + ')' }"
               >
                 <div class="banner-contents">
@@ -1470,7 +1470,7 @@ li > ul > li.active > ul > li {
               <button
                 id="banner-item-6"
                 class="banner-item"
-                @click.prevent="openCategoriesModal(44)"
+                @click.prevent="openCategoriesModal('خشکبار')"
                 :style="{ backgroundImage: 'url(' + getImageUrl(4) + ')' }"
               >
                 <div class="banner-contents">
@@ -1486,7 +1486,7 @@ li > ul > li.active > ul > li {
               <button
                 id="banner-item-7"
                 class="banner-item"
-                @click.prevent="openCategoriesModal(46)"
+                @click.prevent="openCategoriesModal('دامپروری')"
                 :style="{ backgroundImage: 'url(' + getImageUrl(6) + ')' }"
               >
                 <div class="banner-contents">
@@ -1530,7 +1530,7 @@ li > ul > li.active > ul > li {
                 >
                   <button
                     class="banner-item"
-                    @click.prevent="openCategoriesModal(item.id)"
+                    @click.prevent="openCategoriesModal(item.category_name)"
                   >
                     <div
                       class="item-image"
@@ -2607,9 +2607,10 @@ export default {
       this.closeModal();
       this.$router.push(this.getSubCategoryUrl(categoryName));
     },
-    openCategoriesModal(categoryId) {
+    openCategoriesModal(categoryname) {
       $("#categories-modal").modal("show");
-      if (categoryId) {
+      if (categoryname) {
+        let categoryId = this.getCategoryIdByName(categoryname);
         for (let i = 0; i < this.categoryList.length; i++) {
           if (this.categoryList[i].id == categoryId) {
             this.categoryModalList = this.categoryList[i].subcategories;
@@ -2619,6 +2620,16 @@ export default {
         this.isCategories = true;
         this.categoryModalList = this.categoryList;
       }
+    },
+    getCategoryIdByName(categoryName) {
+      let category = "";
+
+      category = this.categoryList.filter((item) => {
+        if (categoryName == item.category_name) {
+          return item;
+        }
+      });
+      return category[0].id;
     },
     activeSubCategories(categoryId) {
       for (let i = 0; i < this.categoryList.length; i++) {
