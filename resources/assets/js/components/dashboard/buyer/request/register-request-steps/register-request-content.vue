@@ -71,7 +71,7 @@ export default {
     selectedCategory(index) {
       window.localStorage.removeItem("buyAd");
       this.selectedCategoryIndex = index;
-      // this.categoryName = this.categoryList[index].category_name;
+      this.categoryName = this.categoryList[index].category_name;
       this.subCategoryList = this.categoryList[index].subcategories;
       this.step = 1;
     },

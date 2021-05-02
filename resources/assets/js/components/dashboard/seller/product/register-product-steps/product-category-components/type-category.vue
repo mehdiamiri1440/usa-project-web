@@ -173,6 +173,9 @@ label {
             <span v-else-if="$parent.categoryName == 'دامپروری'">
               مثلا: چهل گیاه
             </span>
+            <span v-else-if="$parent.categoryName == 'حبوبات'">
+              مثلا: چیتی
+            </span>
             <span v-else> مثلا: مضافتی</span>
           </label>
 
