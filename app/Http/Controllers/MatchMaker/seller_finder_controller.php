@@ -92,8 +92,12 @@ class seller_finder_controller extends Controller
                                                 $q->select(DB::raw(1))
                                                     ->from('buy_ad_suggestions')
                                                     ->whereRaw("buy_ad_suggestions.seller_id = products.myuser_id")
-                                                    ->orWhereRaw("buy_ad_suggestions.buy_ad_id = {$buyAd->id} and buy_ad_suggestions.seller_id = products.myuser_id") //preventing from buyAd duplication notifications for sellers
-                                                    ->whereBetween('created_at',[Carbon::now()->subHours(4),Carbon::now()]);
+                                                    ->where(function($q) use($buyAd){
+                                                        return $q = $q->whereBetween('created_at',[Carbon::now()->subHours(4),Carbon::now()])
+                                                                        ->orWhere('buy_ad_suggestions.buy_ad_id',$buyAd->id);
+                                                    });
+                                                    // ->orWhereRaw("buy_ad_suggestions.buy_ad_id = {$buyAd->id} and buy_ad_suggestions.seller_id = products.myuser_id") //preventing from buyAd duplication notifications for sellers
+                                                    // ->whereBetween('created_at',[Carbon::now()->subHours(4),Carbon::now()]);
                                             })
                                             ->select('myuser_id as user_id')
                                             ->distinct('user_id')
@@ -134,8 +138,12 @@ class seller_finder_controller extends Controller
                                     $q->select(DB::raw(1))
                                         ->from('buy_ad_suggestions')
                                         ->whereRaw("buy_ad_suggestions.seller_id = products.myuser_id")
-                                        ->orWhereRaw("buy_ad_suggestions.buy_ad_id = {$buyAd->id} and buy_ad_suggestions.seller_id = products.myuser_id") //preventing from buyAd duplication notifications for sellers
-                                        ->whereBetween('created_at',[Carbon::now()->subHours(2),Carbon::now()]);
+                                        ->where(function($q) use($buyAd){
+                                            return $q = $q->whereBetween('created_at',[Carbon::now()->subHours(2),Carbon::now()])
+                                                            ->orWhere('buy_ad_suggestions.buy_ad_id',$buyAd->id);
+                                        });
+                                        // ->orWhereRaw("buy_ad_suggestions.buy_ad_id = {$buyAd->id} and buy_ad_suggestions.seller_id = products.myuser_id") //preventing from buyAd duplication notifications for sellers
+                                        // ->whereBetween('created_at',[Carbon::now()->subHours(2),Carbon::now()]);
                                 })
                                 ->select('myuser_id as user_id')
                                 ->distinct('user_id')
@@ -180,8 +188,12 @@ class seller_finder_controller extends Controller
                                             $q->select(DB::raw(1))
                                                 ->from('buy_ad_suggestions')
                                                 ->whereRaw("buy_ad_suggestions.seller_id = meta.replier_id")
-                                                ->orWhereRaw("buy_ad_suggestions.buy_ad_id = {$buyAd->id} and buy_ad_suggestions.seller_id = meta.replier_id") //preventing from buyAd duplication notifications for sellers
-                                                ->whereBetween('created_at',[Carbon::now()->subHours(2),Carbon::now()]);
+                                                ->where(function($q) use($buyAd){
+                                                    return $q = $q->whereBetween('created_at',[Carbon::now()->subHours(2),Carbon::now()])
+                                                                    ->orWhere('buy_ad_suggestions.buy_ad_id',$buyAd->id);
+                                                });
+                                                // ->orWhereRaw("buy_ad_suggestions.buy_ad_id = {$buyAd->id} and buy_ad_suggestions.seller_id = meta.replier_id") //preventing from buyAd duplication notifications for sellers
+                                                // ->whereBetween('created_at',[Carbon::now()->subHours(2),Carbon::now()]);
                                         })
                                         ->select('replier_id as user_id')
                                         ->distinct('user_id')
