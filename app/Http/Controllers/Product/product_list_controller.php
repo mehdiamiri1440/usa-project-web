@@ -918,7 +918,7 @@ class product_list_controller extends Controller
                 $result = array_merge($result,$filtered_products);
             }
             if(count($result) > 0){
-                $products = $this->remove_duplicated_paying_sellers($result);
+                $products = $this->remove_duplicated_sellers($result);
             }
         }
     }
