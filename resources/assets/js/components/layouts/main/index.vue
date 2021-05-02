@@ -51,8 +51,8 @@ i {
   background: rgba(25, 102, 142, 0.4);
   background: radial-gradient(
     circle,
-    rgba(0, 0, 0, 0.3) 0%,
-    rgba(0, 0, 0, 0.6) 100%
+    rgba(0, 0, 0, 0.2) 0%,
+    rgba(0, 0, 0, 0.4) 100%
   );
   z-index: 0;
 }
@@ -133,16 +133,19 @@ i {
 
 #intro h1 {
   margin-top: 18px;
-  margin-bottom: 6px;
+  font-size: 30px;
+  margin-bottom: 16px;
 }
 
 #intro h1,
 #intro h2 {
   color: #fff;
+  font-weight: bold;
 }
 
 #intro h2 {
   margin-bottom: 16px;
+  font-size: 15px;
 }
 
 .search-wrapper {
@@ -154,20 +157,22 @@ i {
 }
 
 .hero-search-input {
-  display: inline-block;
+  display: block;
   min-width: 455px;
   overflow: hidden;
   position: relative;
   border-radius: 8px;
+  margin: 35px auto 0;
+  max-width: 670px;
 }
 
 .hero-search-input input {
-  padding: 9px 15px 8px;
-  border-radius: 0 4px 4px 0;
+  padding: 11px 15px;
+  border-radius: 12px;
   margin: 0;
   float: right;
   border: none;
-  width: calc(100% - 20px);
+  font-size: 16px;
 }
 
 .hero-search-input button {
@@ -177,25 +182,27 @@ i {
 
   margin: 0;
 
-  padding: 8px 15px 11px;
+  padding: 16px 31px;
 
   color: #fff;
 
-  background: #1da1f2;
+  background: #000546;
 
-  border-radius: 4px 0 0 4px;
+  border-radius: 8px 0 0 8px;
 
   position: absolute;
 
   left: 0;
 
   top: 0;
+
+  font-size: 20px;
 }
 
 .hero-search-input button:hover {
   transition: 300ms;
-  padding-left: 18px;
-  padding-right: 18px;
+  padding-left: 33px;
+  padding-right: 33px;
 }
 
 .hero-search-input button:before {
@@ -216,13 +223,13 @@ i {
 }
 
 #intro a.green-button {
-  font-size: 17px;
+  font-size: 20px;
   margin: 0 auto;
   width: initial;
-  padding: 6px 33px 11px;
+  padding: 13px 33px;
   font-weight: 400;
   line-height: 1;
-  border-radius: 8px;
+  border-radius: 12px;
   margin-top: 62px;
   margin-bottom: 30px;
 }
@@ -1028,9 +1035,6 @@ li > ul > li.active > ul > li {
 /* categories modal styles 
 ******************************************/
 
-.modal-dialog {
-  width: 400px;
-}
 .modal-content {
   overflow: hidden;
   border-radius: 12px;
@@ -1061,10 +1065,6 @@ li > ul > li.active > ul > li {
 
 .modal-header {
   padding: 9px 15px 10px;
-}
-
-.modal-body {
-  padding: 0 15px;
 }
 
 .form-check-wrapper {
@@ -1111,9 +1111,6 @@ li > ul > li.active > ul > li {
   position: relative;
 }
 
-.form-check-wrapper li:last-of-type button {
-  border: none;
-}
 .form-check-wrapper li i {
   position: absolute;
 
@@ -1172,11 +1169,20 @@ li > ul > li.active > ul > li {
   }
 }
 @media screen and (max-width: 767px) {
+  .form-check-wrapper li:last-of-type button {
+    border: none;
+  }
+  .modal-body {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
   .mobile-banner .banner-item-wrapper .banner-item p {
     height: 35px;
   }
   #intro {
     margin-top: 75px;
+    padding: 20px 0;
   }
   .hero-search-input {
     width: 100%;
@@ -1189,11 +1195,15 @@ li > ul > li.active > ul > li {
   }
 
   .hero-search-input button {
-    padding: 13px 15px 15px;
+    padding: 14px 20px 15px;
+  }
+
+  .hero-search-input button:hover {
+    padding: 14px 20px 15px;
   }
 
   #intro a.green-button {
-    margin: 0 auto;
+    margin: 15px auto;
 
     float: none !important;
   }
@@ -1276,9 +1286,10 @@ li > ul > li.active > ul > li {
                 <span> دسته بندی ها </span>
               </div>
             </div>
-            <div class="modal-body col-xs-12">
+            <div class="modal-body row">
               <ul class="form-check-wrapper" v-if="!isCategories">
                 <li
+                  class="col-xs-12 col-sm-4 pull-right"
                   v-for="(item, index) in categoryModalList"
                   :key="item.category_name + index"
                 >
@@ -1292,6 +1303,7 @@ li > ul > li.active > ul > li {
               </ul>
               <ul class="form-check-wrapper" v-else>
                 <li
+                  class="col-xs-12 col-sm-4 pull-right"
                   v-for="(item, index) in categoryModalList"
                   :key="item.category_name + index"
                 >
@@ -1319,7 +1331,7 @@ li > ul > li.active > ul > li {
       <!-- <div class="particle-network-animation"></div> -->
       <div class="container">
         <div class="row">
-          <div class="col-xs-12 col-md-9">
+          <div class="col-xs-12">
             <div name="fadeIn">
               <h1 class="intro-site-title">
                 باسکول | بازار خرید و فروش عمده محصولات کشاورزی
@@ -1354,69 +1366,13 @@ li > ul > li.active > ul > li {
 
                 <button class="hidden-xs" @click="search">
                   <i class="fa fa-search"></i>
-                  جستجو
                 </button>
               </div>
 
-              <router-link :to="{ name: 'productList' }" class="green-button"
-                >شروع خرید و فروش عمده
+              <router-link :to="{ name: 'productList' }" class="green-button">
+                لیست محصولات
                 <i class="fa fa-angle-left"></i>
               </router-link>
-            </div>
-          </div>
-          <div class="col-xs-12 hidden-xs hidden-sm col-md-3">
-            <div class="web-category-wrapper">
-              <div class="section-title">دسته بندی ها</div>
-              <ul v-if="categoryList.length" id="web-categories">
-                <li
-                  v-for="(category, index) in categoryList"
-                  :id="'menu-' + index"
-                  :key="'banner-category-' + index"
-                >
-                  <ul class="sub-categories-wrapper" :data-index="index">
-                    <li
-                      class="col-md-3 pull-right"
-                      v-for="(
-                        subCategory, subCategoryIndex
-                      ) in category.subcategories"
-                      :key="'banner-sub-category-' + subCategoryIndex"
-                    >
-                      <router-link
-                        class="sub-category-item"
-                        :to="getSubCategoryUrl(subCategory.category_name)"
-                        v-text="subCategory.category_name"
-                      ></router-link>
-                    </li>
-                  </ul>
-                  <button>
-                    <span v-text="category.category_name"></span>
-
-                    <i class="fa fa-angle-left"></i>
-                  </button>
-                </li>
-              </ul>
-              <ul v-else>
-                <li
-                  v-for="(category, index) in 6"
-                  :key="'placeholder-banner-category-' + index"
-                >
-                  <button>
-                    <span class="placeholder-content content-full-width"></span>
-                  </button>
-                </li>
-              </ul>
-              <button
-                v-if="categoryList.length > 6"
-                @click.prevent="collapseMenu()"
-                class="load-more-categories"
-              >
-                <span v-if="!this.isCollapse">دسته های بیشتر</span>
-                <span v-else>بستن</span>
-                <i
-                  class="fa fa-angle-down"
-                  :class="{ 'rotate-icon': this.isCollapse }"
-                ></i>
-              </button>
             </div>
           </div>
         </div>

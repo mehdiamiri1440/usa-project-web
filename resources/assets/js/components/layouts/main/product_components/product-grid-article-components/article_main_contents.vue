@@ -104,7 +104,7 @@ body {
   width: 100%;
   position: relative;
   padding-bottom: 0;
-  padding: 5px 5px 0;
+  padding: 9px 5px 0;
 }
 
 .product-description {

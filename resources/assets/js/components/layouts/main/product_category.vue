@@ -19,7 +19,9 @@
 
 #main {
   padding-top: 32px;
+  max-width: 1280px;
 }
+
 
 @media screen and (min-width: 1200px) {
   #main-content {
@@ -347,6 +349,7 @@ li.active a::after {
   border-radius: 12px;
   border: 1px solid #e0e0e0;
   overflow: hidden;
+  margin-bottom:5px
 }
 
 .rate-filter-desktop-wrapper > ul {
@@ -624,7 +627,7 @@ filter modal styles
 }
 
 .default-grid {
-  padding: 0 3px;
+  padding: 0 7px;
 }
 
 .default-grid .default-main-article-content {
@@ -720,7 +723,7 @@ end filter modal styles
 }
 
 div.items-wrapper {
-  padding: 0 3px;
+  padding: 0 7px;
 }
 
 .banner-wrapper .circle-item-wrapper img {
@@ -1123,7 +1126,7 @@ div.items-wrapper {
       </div>
     </div>
 
-    <main id="main" class="container">
+    <main id="main" class="container-fluid">
       <div class="col-xs-12 col-lg-9">
         <div class="row">
           <section class="hidden-xs col-xs-12">

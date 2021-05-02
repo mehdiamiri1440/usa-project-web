@@ -6,7 +6,7 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  height: 140px;
+  height: 130px;
 
   overflow: hidden;
 
@@ -67,13 +67,14 @@
   background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.6));
   display: flex;
   align-items: center;
-  padding-top: 6px;
+  padding-top: 16px;
+  padding-bottom: 2px;
 }
 
 .article-title p {
   font-size: 17px;
   padding: 0 5px;
-  color: #ebebeb;
+  color: #fff;
   overflow: hidden;
   height: 29px;
   line-height: 1.618;
@@ -211,7 +212,7 @@ export default {
       var productName = "";
       productName =
         this.$parent.product.main.sub_category_name +
-        ' <span style="color: #fff">' +
+        ' | <span style="color: #fff">' +
         this.$parent.product.main.product_name +
         "</span>";
       return productName;

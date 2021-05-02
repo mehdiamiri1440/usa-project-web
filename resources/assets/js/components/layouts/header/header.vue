@@ -133,7 +133,7 @@ a.close-dialog-popup {
   margin: 0;
   padding: 8px 27px;
   color: #fff;
-  background: #1da1f2;
+  background: #000546;
   position: absolute;
   left: 0;
   top: 0;
@@ -378,11 +378,19 @@ a.profile-info-wrapper:hover {
 }
 .navbar-toggle {
   margin: 0;
+  border: 1px solid;
+  border-radius: 8px;
+  height: 31px;
+  width: 46px;
   padding: 0;
+  padding-top: 9px;
+  margin-bottom: 2px;
 }
 .navbar-toggle i {
-  font-size: 25px;
+  font-size: 21px;
   line-height: 1;
+  position: relative;
+  top: -6px;
 }
 
 .mobile-background-shadow {
@@ -476,7 +484,7 @@ a.profile-info-wrapper:hover {
   }
 
   nav .green-button {
-    padding: 10px 8px 9px;
+    padding: 6px 8px 5px;
     font-size: 13px;
   }
 
@@ -509,21 +517,10 @@ a.profile-info-wrapper:hover {
 
   .buskool-logo {
     margin: 0 auto;
-
     position: absolute;
     right: calc(50% - 50px);
   }
-  .nav .green-button {
-    padding: 5px 0 5px;
-    font-size: 13px;
-    background: none;
-    color: #00c569;
-    margin: 0;
-  }
-  .nav > li > a.green-button:hover {
-    background: none;
-    color: #00c569 !important;
-  }
+
   .buskool-main-nav {
     padding: 6px 0 1px;
     border-bottom: 1px solid #ebebeb;
@@ -668,6 +665,8 @@ a.profile-info-wrapper:hover {
     width: 100px;
 
     margin-top: 5px;
+
+    margin-right: 0;
   }
 
   .profile-image-wrapper,
@@ -688,9 +687,7 @@ a.profile-info-wrapper:hover {
 @media screen and (max-width: 360px) {
   .mobile-login-link a {
     margin: 0;
-
-    padding: 8px 16px 7px;
-
+    padding: 6px 16px 4px;
     font-size: 17px;
   }
 
@@ -966,7 +963,6 @@ a.profile-info-wrapper:hover {
 
               <button class="hidden-xs" @click="search">
                 <i class="fa fa-search"></i>
-                <span class="hidden-sm"> جستجو </span>
               </button>
             </div>
             <ul class="mobile-navigation hidden-lg hidden-sm hidden-md">
