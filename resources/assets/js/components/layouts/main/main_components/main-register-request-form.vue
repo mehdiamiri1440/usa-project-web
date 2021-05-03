@@ -516,7 +516,10 @@ label .small-label {
                 <button
                   class="submit-button disabled"
                   :class="{
-                    active: buyAd.sub_category_id && buyAd.requirement_amount,
+                    active:
+                      buyAd.sub_category_id &&
+                      buyAd.requirement_amount &&
+                      !errors.requirement_amount 
                   }"
                   @click.prevent="formValidator()"
                 >
