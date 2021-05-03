@@ -1904,7 +1904,10 @@ li > ul > li.active > ul > li {
       class="container"
       v-if="userType != 1"
     >
-      <main-register-request-form wrapper-bg="true" />
+      <main-register-request-form
+        wrapper-bg="true"
+        :is-user-login="isUserLogin"
+      />
     </section>
 
     <section id="main-contents-section" class="container">

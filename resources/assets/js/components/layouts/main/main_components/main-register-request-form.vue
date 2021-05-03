@@ -518,7 +518,7 @@ label .small-label {
                   :class="{
                     active: buyAd.sub_category_id && buyAd.requirement_amount,
                   }"
-                  @click.prevent="formValidator"
+                  @click.prevent="formValidator()"
                 >
                   ثبت درخواست
                   <i class="fa fa-check"></i>
@@ -534,7 +534,7 @@ label .small-label {
 
 <script>
 export default {
-  props: ["wrapperBg"],
+  props: ["wrapperBg", "isUserLogin"],
   data: function () {
     return {
       errors: {
@@ -621,7 +621,11 @@ export default {
 
       window.localStorage.setItem("buyAd", JSON.stringify(this.buyAd));
 
-      window.location.href = "/buyer/register-request";
+      if (this.isUserLogin) {
+        window.location.href = "/buyer/register-request";
+      } else {
+        this.$router.push("/register");
+      }
     },
 
     setCategoryId: function (subCategory) {
