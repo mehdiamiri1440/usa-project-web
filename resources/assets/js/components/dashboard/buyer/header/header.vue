@@ -945,6 +945,9 @@ export default {
       this.resetTextSearch = false;
       this.$parent.searchText = value;
     },
+    "$parent.searchText"(text) {
+      this.searchValueText = text;
+    },
     resetTextSearch: function (value) {
       if (value == true) {
         this.searchValueText = "";
