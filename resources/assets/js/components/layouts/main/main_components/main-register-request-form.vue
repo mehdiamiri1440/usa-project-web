@@ -431,7 +431,6 @@ label .small-label {
                     type="text"
                     :class="{ active: buyAd.name, error: errors.name }"
                     placeholder="نوع محصول مورد نیاز خود را وارد کنید"
-                    pattern="[0-9]*"
                   />
                   <i
                     v-if="buyAd.name && !errors.name"
@@ -519,7 +518,7 @@ label .small-label {
                     active:
                       buyAd.sub_category_id &&
                       buyAd.requirement_amount &&
-                      !errors.requirement_amount 
+                      !errors.requirement_amount,
                   }"
                   @click.prevent="formValidator()"
                 >
