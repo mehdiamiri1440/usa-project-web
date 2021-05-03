@@ -416,7 +416,7 @@ export default {
       // } else {
       //   this.$router.push(this.productUrl);
       // }
-      this.$parent.registerComponentStatistics(
+      this.registerComponentStatistics(
         "product",
         "show-product-in-seperate-page",
         "show-product-in-seperate-page"
