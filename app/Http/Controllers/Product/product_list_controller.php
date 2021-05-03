@@ -964,20 +964,27 @@ class product_list_controller extends Controller
     protected function sort_products_by_response_time(&$products)
     {
         usort($products,function($item1,$item2){
-            $a = ($item1['user_info']->response_time > 0 && $item1['user_info']->response_rate > 75) ? ($item1['user_info']->response_time + ((100 - $item1['user_info']->response_rate) * $item1['user_info']->ums)) : 10000;
-            $b = ($item2['user_info']->response_time > 0 && $item2['user_info']->response_rate > 75) ? ($item2['user_info']->response_time + ((100 - $item2['user_info']->response_rate) * $item2['user_info']->ums)) : 10000;
+            $a = $item1['main']->is_elevated == true ? $item1['main']->updated_at :  $item1['main']->is_elevated;
+            $b = $item2['main']->is_elevated == true ? $item2['main']->updated_at :  $item2['main']->is_elevated;
 
             if($a == $b){
-                $c = $item1['user_info']->response_rate > 75 ? $item1['user_info']->response_rate : 0;
-                $d = $item2['user_info']->response_rate > 75 ? $item2['user_info']->response_rate : 0;
+                $c = ($item1['user_info']->response_time > 0 && $item1['user_info']->response_rate > 75) ? ($item1['user_info']->response_time + ((100 - $item1['user_info']->response_rate) * $item1['user_info']->ums)) : 10000;
+                $d = ($item2['user_info']->response_time > 0 && $item2['user_info']->response_rate > 75) ? ($item2['user_info']->response_time + ((100 - $item2['user_info']->response_rate) * $item2['user_info']->ums)) : 10000;
 
                 if($c == $d){
-                    return $item1['main']->updated_at < $item2['main']->updated_at;
-                }
-                return ($c < $d) ? 1 : -1;
-            }
+                    $e = $item1['user_info']->response_rate > 75 ? $item1['user_info']->response_rate : 0;
+                    $f = $item2['user_info']->response_rate > 75 ? $item2['user_info']->response_rate : 0;
 
-            return ($a > $b) ? 1 : -1;
+                    if($e == $f){
+                        return $item1['main']->updated_at < $item2['main']->updated_at;
+                    }
+                    return ($e < $f) ? 1 : -1;
+                }
+
+                return ($c > $d) ? 1 : -1;
+            }
+            return ($a < $b) ? 1 : -1;
+            
         });
 
         return $products;
