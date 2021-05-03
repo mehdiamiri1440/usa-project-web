@@ -123,10 +123,6 @@
     margin: 0px auto;
   }
 
-  .main-content .section-title {
-    padding: 0 10px;
-  }
-
   .main-content > div.wrapper-section {
     border: none;
     border-top: 1px solid #dadce0;
@@ -215,7 +211,9 @@
     </div>
 
     <div class="row">
-      <h2 class="section-title" v-if="currentStep <= 1">ثبت درخواست خرید</h2>
+      <div class="col-xs-12" v-if="currentStep <= 1">
+        <h2 class="section-title">ثبت درخواست خرید</h2>
+      </div>
       <div v-else-if="currentStep == 2 && relatedProducts">
         <div class="success-register">
           <div class="title-success">

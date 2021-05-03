@@ -1139,7 +1139,7 @@ li > ul > li.active > ul > li {
 }
 
 .main-contents-wrapper > p {
-  margin-top: 20px;
+  margin: 20px auto;
 }
 .main-contents-wrapper p:last-of-type {
   margin-bottom: 30px;
@@ -2247,11 +2247,11 @@ export default {
           },
           {
             name: "خرمای مضافتی",
-            link: "خرما",
+            link: "خرمای-مضافتی",
           },
           {
             name: "خرمای بم",
-            link: "خرما",
+            link: "خرمای-مضافتی",
           },
           {
             name: "خرمای زاهدی",
@@ -2263,7 +2263,15 @@ export default {
           },
           {
             name: "خرمای کبکاب",
-            link: "خرما",
+            link: "خرما-کبکاب",
+          },
+          {
+            name: "خرما خاصویی",
+            link: "خرما-خاصویی",
+          },
+          {
+            name: "خرما ربی",
+            link: "خرما-ربی",
           },
           {
             name: "خرمای خوزستان",
@@ -2297,6 +2305,22 @@ export default {
             name: "زعفران",
             link: "زعفران",
           },
+          {
+            name: "پسته اکبری",
+            link: "پسته-اکبری",
+          },
+          {
+            name: "پسته فندقی",
+            link: "پسته-فندقی",
+          },
+          {
+            name: "پسته احمد آقایی",
+            link: "پسته-احمد-آقایی",
+          },
+          {
+            name: "پسته کله قوچی",
+            link: "پسته-کله-قوچی",
+          },
         ],
         wholesaleRise: [
           {
@@ -2329,11 +2353,11 @@ export default {
           },
           {
             name: "شمال",
-            link: "برنج",
+            link: "برنج-شمال",
           },
           {
             name: "طارم",
-            link: "برنج",
+            link: "برنج-طارم",
           },
           {
             name: "دم سیاه",
@@ -2341,7 +2365,7 @@ export default {
           },
           {
             name: "هاشمی",
-            link: "برنج",
+            link: "برنج-هاشمی",
           },
           {
             name: "صدری",

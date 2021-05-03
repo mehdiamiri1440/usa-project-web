@@ -89,7 +89,6 @@ export default {
       return regx.test(input);
     },
     formValidator: function () {
-      this.$parent.formLoader = true;
       if (!this.requirement_amount) {
         this.errors.requirement_amount = "لطفا میزان نیازمندی را وارد کنید.";
         this.$parent.formLoader = false;
@@ -100,6 +99,7 @@ export default {
         !this.$parent.errors.category_id &&
         !this.errors.requirement_amount
       ) {
+        this.$parent.formLoader = true;
         this.$parent.submitBuyAd();
       }
     },

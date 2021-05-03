@@ -185,10 +185,6 @@
     margin: 0px auto;
   }
 
-  .main-content .section-title {
-    padding: 0 10px;
-  }
-
   .main-content .section-title p {
     line-height: 1.618;
   }
@@ -262,12 +258,14 @@
           </div>
           <p>پس از تایید کارشناسان، محصول شما در لیست قرار خواهد گرفت.</p>
         </div>
-        <div v-if="buyAds.length != 0" class="section-title">
-          <h2>خریداران</h2>
-          <p>
-            خریداران پیشنهادی از طرف
-            <span class="light-green-text">باسکول</span> برای محصول شما.
-          </p>
+        <div class="col-xs-12" v-if="buyAds.length != 0">
+          <div class="section-title">
+            <h2>خریداران</h2>
+            <p>
+              خریداران پیشنهادی از طرف
+              <span class="light-green-text">باسکول</span> برای محصول شما.
+            </p>
+          </div>
         </div>
       </div>
       <div
@@ -307,9 +305,7 @@
       v-show="$route.name != 'successRegisterProduct'"
       class="main-content col-xs-12"
     >
-      <div class="row">
-        <h2 class="section-title">ثبت محصول جدید</h2>
-      </div>
+      <h2 class="section-title">ثبت محصول جدید</h2>
       <div
         class="row wrapper-section"
         :class="{ 'empty-section': currentStep == 7 && buyAds.length == 0 }"
