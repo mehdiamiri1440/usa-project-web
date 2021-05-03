@@ -2532,7 +2532,8 @@ export default {
       return this.assets + "assets/img/banners/banner-" + index + ".jpg";
     },
     imageParallax() {
-      var parallax = -0.1;
+      var parallax = -0.13;
+      var staticHeight = -80;
 
       var $bg_image1 = $("#banner-item-1");
       var $bg_image2 = $("#banner-item-2");
@@ -2572,49 +2573,49 @@ export default {
           var ot = offset_tops[i];
           $(el).css(
             "background-position",
-            "50% " + ((dy - ot) * parallax + -50) + "px"
+            "50% " + ((dy - ot) * parallax + staticHeight) + "px"
           );
         });
         $bg_image2.each(function (i, el) {
           var ot = offset_tops[i];
           $(el).css(
             "background-position",
-            "50% " + ((dy - ot) * parallax + -50) + "px"
+            "50% " + ((dy - ot) * parallax + staticHeight) + "px"
           );
         });
         $bg_image3.each(function (i, el) {
           var ot = offset_tops[i];
           $(el).css(
             "background-position",
-            "50% " + ((dy - ot) * parallax + -50) + "px"
+            "50% " + ((dy - ot) * parallax + staticHeight) + "px"
           );
         });
         $bg_image4.each(function (i, el) {
           var ot = offset_tops[i];
           $(el).css(
             "background-position",
-            "50% " + ((dy - ot) * parallax + -50) + "px"
+            "50% " + ((dy - ot) * parallax + staticHeight) + "px"
           );
         });
         $bg_image5.each(function (i, el) {
           var ot = offset_tops[i];
           $(el).css(
             "background-position",
-            "50% " + ((dy - ot) * parallax + -50) + "px"
+            "50% " + ((dy - ot) * parallax + staticHeight) + "px"
           );
         });
         $bg_image6.each(function (i, el) {
           var ot = offset_tops[i];
           $(el).css(
             "background-position",
-            "50% " + ((dy - ot) * parallax + -50) + "px"
+            "50% " + ((dy - ot) * parallax + staticHeight) + "px"
           );
         });
         $bg_image7.each(function (i, el) {
           var ot = offset_tops[i];
           $(el).css(
             "background-position",
-            "50% " + ((dy - ot) * parallax + -50) + "px"
+            "50% " + ((dy - ot) * parallax + staticHeight) + "px"
           );
         });
       });
