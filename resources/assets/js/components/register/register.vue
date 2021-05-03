@@ -792,7 +792,7 @@ export default {
         phone: this.toLatinNumbers(this.step1.phone),
         first_name: this.step3.first_name,
         last_name: this.step3.last_name,
-        verification_code: this.step2.verification_code,
+        verification_code: this.toLatinNumbers(this.step2.verification_code),
         password: this.step3.password,
         user_name: this.step3.user_name,
         sex: this.step3.sex,
