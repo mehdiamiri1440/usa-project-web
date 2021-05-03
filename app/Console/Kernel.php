@@ -110,8 +110,8 @@ class Kernel extends ConsoleKernel
 
 
         $daily_product_avertisement_for_premium_sellers = new AdvertiseProductsPeriodically(0,true,true);
-        $schedule->job($daily_product_avertisement_for_premium_sellers)
-                        ->dailyAt('10:45');
+        // $schedule->job($daily_product_avertisement_for_premium_sellers)
+        //                 ->dailyAt('10:45');
 
         $daily_product_avertisement_for_first_day_after_register_product = new AdvertiseProductsPeriodically(1,false,false);
         $schedule->job($daily_product_avertisement_for_first_day_after_register_product)

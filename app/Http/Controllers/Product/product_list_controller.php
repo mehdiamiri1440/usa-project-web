@@ -483,27 +483,7 @@ class product_list_controller extends Controller
         $tmp_products = [];
         //this condition checks if buyer has buyAd request to show five related products at top list
         if($user_info->is_buyer == true){
-            // $the_buyer_last_buyAd_request = buyAd::where('myuser_id',$user_id)
-            //                                         // ->where('confirmed',true)
-            //                                         ->orderBy('updated_at','desc')
-            //                                         ->get()
-            //                                         ->first();
-
-
-            // if($the_buyer_last_buyAd_request){
-            //     $tmp_products =  $products;
-            //     $tmp_products = $this->get_the_most_related_products_to_buyer($the_buyer_last_buyAd_request,$tmp_products);
-            //     usort($tmp_products,function($item1,$item2){
-            //         return $item1['main']->updated_at <= $item2['main']->updated_at ? 1 : -1;
-            //     });
-
-            //     $tmp_products = array_slice($tmp_products,0,10);
-            // }
-            // else{
-            //     if($user_info->created_at->diffInHours(Carbon::now()) <= 6){
-            //         return $this->sort_products_by_response_time($products);
-            //     }
-            // }
+            
             $tmp_products = $this->apply_customized_related_products_filter_for_buyers($products,$user_info);
             $products =  $this->sort_products_by_response_time($products);
 
@@ -519,33 +499,11 @@ class product_list_controller extends Controller
                 });
             }
 
-            return array_unique(array_merge($tmp_products,$products),SORT_REGULAR);
+            $products = array_unique(array_merge($tmp_products,$products),SORT_REGULAR);
         }
         else if($user_info->is_seller == true){
             $products = $this->sort_products_by_response_rate($products);
-            // if($user_info->active_pakage_type == 0){
-            //     $eleveted_products = product::where('myuser_id',$user_id)
-            //                                 ->where('confirmed',true)
-            //                                 ->where('is_elevated',true)
-            //                                 ->get()
-            //                                 ->count();
-
-            //     if($eleveted_products == 0 && $user_info->created_at->diffInDays(Carbon::now()) <= 7){
-            //         $products =  $this->sort_products_by_response_rate($products);
-            //         $products = $this->remove_duplicated_paying_sellers($products);
-
-            //         return $products;
-            //     }
-            // }
         }
-
-        // $user_response_info = $this->get_user_response_info($user_id);
-        // $user_response_info['created_at'] = $user_info->created_at;
-        
-
-        // $sorting_callback_function = $this->get_best_match_call_back_function($user_response_info);
-
-        // usort($products,$sorting_callback_function);
 
         $products = $this->remove_duplicated_sellers($products);
 
@@ -882,6 +840,7 @@ class product_list_controller extends Controller
 
             $user_id = session('user_id');
             $buyAds = DB::table('buy_ads')
+                            ->whereNull('deleted_at')
                             ->where('buy_ads.myuser_id',$user_id)
                             ->where(function($q){
                                 return $q = $q->where('confirmed',true)
@@ -975,20 +934,28 @@ class product_list_controller extends Controller
     protected function sort_products_by_response_rate(&$products)
     {
         usort($products,function($item1,$item2){
-            $a = $item1['user_info']->response_rate;
-            $b = $item2['user_info']->response_rate;
+            $a = $item1['main']->is_elevated == true ? $item1['main']->updated_at :  $item1['main']->is_elevated;
+            $b = $item2['main']->is_elevated == true ? $item2['main']->updated_at :  $item2['main']->is_elevated;
 
             if($a == $b){
-                $c = $item1['user_info']->active_pakage_type;
-                $d = $item2['user_info']->active_pakage_type;
+                $c = $item1['user_info']->response_rate;
+                $d = $item2['user_info']->response_rate;
 
                 if($c == $d){
-                    return $item1['main']->updated_at < $item2['main']->updated_at;
+                    $e = $item1['user_info']->active_pakage_type;
+                    $f = $item2['user_info']->active_pakage_type;
+
+                    if($e == $f){
+                        return $item1['main']->updated_at < $item2['main']->updated_at;
+                    }
+                    return ($e < $f) ? 1 : -1;
                 }
+
                 return ($c < $d) ? 1 : -1;
             }
 
             return ($a < $b) ? 1 : -1;
+            
         });
 
         return $products;
@@ -1413,6 +1380,8 @@ class product_list_controller extends Controller
 
             $result = array_merge($tmp,$result);
         }
+
+        $result = $this->remove_duplicated_sellers($result);
 
         return $result;
     }
