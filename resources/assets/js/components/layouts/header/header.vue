@@ -372,7 +372,7 @@ a.profile-info-wrapper:hover {
 }
 
 .mobile-menu-button .message-count {
-  padding-top: 5px;
+  padding-top: 0px;
   left: -16px;
   top: -4px;
 }
