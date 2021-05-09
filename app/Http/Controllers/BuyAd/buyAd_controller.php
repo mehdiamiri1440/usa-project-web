@@ -732,9 +732,9 @@ class buyAd_controller extends Controller
             if(count($user_registered_products) > 0){
 
                 foreach($user_registered_products as $product){
-
+                    
                     $product_name_array = array_slice($this->get_product_name_array($product),0,3);
-
+                    $tmp = [];
                     foreach($product_name_array as $word){
                         $tmp = array_filter($result_buyAds,function($buyAd) use($product,$word,$user){
                             if(is_null($buyAd->name)){
