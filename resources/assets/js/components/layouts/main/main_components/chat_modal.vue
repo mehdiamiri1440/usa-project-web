@@ -348,7 +348,7 @@
 
       <div
         class="loading-container"
-        v-show="isChatMessagesLoaded && isFirstMessageLoading"
+        v-show="chatMessagesLoader && isFirstMessageLoading"
       >
         <div class="image-wrapper">
           <div class="lds-ring">
@@ -423,7 +423,7 @@ import { eventBus } from "../../../../router/router.js";
 export default {
   data: function () {
     return {
-      isChatMessagesLoaded: true,
+      chatMessagesLoader: true,
       isFirstMessageLoading: true,
       openChatBox: false,
       contactInfo: "",
@@ -441,7 +441,7 @@ export default {
     },
     loadChatHistory: function (contact, index) {
       var self = this;
-      self.isChatMessagesLoaded = true;
+      self.chatMessagesLoader = true;
       if (index !== -10) self.isFirstMessageLoading = true;
       // self.selectedIndex = index;
       // this.selectedContact = contact;
@@ -470,7 +470,7 @@ export default {
           500,
           "swing",
           function () {
-            self.isChatMessagesLoaded = false;
+            self.chatMessagesLoader = false;
           }
         );
       }, time);

@@ -338,35 +338,25 @@ export default {
 
       this.loading = true;
 
-      var searchValueText = this.$parent.searchText;
+      this.$parent.searchText = "";
 
       axios
         .post("/user/profile_info")
         .then(function (response) {
           self.currentUser = response.data;
 
-          if (searchValueText) {
-            self.registerComponentStatistics(
-              "homePage",
-              "search-text",
-              searchValueText
-            );
-            self.searchValue = searchValueText;
-            eventBus.$emit("submiting", false);
-          } else {
-            axios
-              .post("/user/get_product_list", {
-                from_record_number: 0,
-                special_products: true,
-                to_record_number: self.productCountInPage,
-              })
-              .then(function (response) {
-                self.products = response.data.products;
-                self.loading = false;
-                localStorage.removeItem("productCountInPage");
-                eventBus.$emit("submiting", false);
-              });
-          }
+          axios
+            .post("/user/get_product_list", {
+              from_record_number: 0,
+              special_products: true,
+              to_record_number: self.productCountInPage,
+            })
+            .then(function (response) {
+              self.products = response.data.products;
+              self.loading = false;
+              localStorage.removeItem("productCountInPage");
+              eventBus.$emit("submiting", false);
+            });
         })
         .catch((error) => reject(error));
     },

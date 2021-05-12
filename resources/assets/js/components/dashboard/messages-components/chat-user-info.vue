@@ -473,7 +473,7 @@ li.score-item i {
             </div>
           </div> -->
         </li>
-        <li v-if="userAllowedReview" class="col-xs-12">
+        <li v-if="$parent.userAllowedReview" class="col-xs-12">
           <ChatReviewComponent
             :user-full-name="
               selectedContact.first_name + ' ' + selectedContact.last_name
@@ -509,17 +509,16 @@ export default {
       userStatistics: "",
       reviewCurrentStep: 0,
       successMessage: "نظر شما با موفقیت ثبت شد",
-      userAllowedReview: false,
     };
   },
   methods: {
     init() {
-      if (!this.checkMobileWidth()) {
-        this.isUserAuthorizedToPostComment();
-      }
+      // if (!this.checkMobileWidth()) {
+      this.isUserAuthorizedToPostComment();
+      // }
     },
     checkMobileWidth() {
-      if ($(window).width() <= 991) {
+      if ($(window).width() <= 1199) {
         return true;
       } else {
         return false;
@@ -533,8 +532,10 @@ export default {
       axios
         .post("/profile/is-user-authorized-to-post-comment", userObg)
         .then(function (response) {
-          self.userAllowedReview = response.data.is_allowed;
-          self.getUserData();
+          self.$parent.userAllowedReview = response.data.is_allowed;
+          if (!self.checkMobileWidth()) {
+            self.getUserData();
+          }
         });
     },
     getUserData() {
