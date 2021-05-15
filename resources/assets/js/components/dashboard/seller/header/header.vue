@@ -731,6 +731,13 @@ export default {
       deleteButtonText: "",
       cancelButtonText: "",
       ProductId: "",
+      verificationAlert: false,
+      disableVerificationAlertRoutes: [
+        "profileBasicSellerVeficiation",
+        "messagesSeller",
+        "messagesRequestSeller",
+      ],
+      disableVerificationAlert: false,
     };
   },
   methods: {
@@ -741,6 +748,16 @@ export default {
         this.$parent.active_pakage_type =
           response.data.user_info.active_pakage_type;
         this.$parent.currentUser = response.data;
+        if (
+          !response.data.user_info.is_verified &&
+          this.checkVerificationAlert(this.$route.name)
+        ) {
+          if (!this.disableVerificationAlert) {
+            this.verificationAlert = true;
+          }
+        } else {
+          this.verificationAlert = false;
+        }
         return (this.currentUser = response.data);
       });
     },
@@ -1047,6 +1064,13 @@ export default {
         return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       else return "";
     },
+    checkVerificationAlert(routeName) {
+      let routeIsDisable = this.disableVerificationAlertRoutes.some((item) => {
+        return item == routeName;
+      });
+
+      return !routeIsDisable;
+    },
   },
   mounted() {
     var self = this;
@@ -1081,6 +1105,28 @@ export default {
     eventBus.$on("productId", (event) => {
       this.productId = event;
     });
+  },
+  watch: {
+    $route(route) {
+      if (
+        !this.$parent.currentUser.user_info.is_verified &&
+        this.checkVerificationAlert(route.name)
+      ) {
+        if (!this.disableVerificationAlert) {
+          this.verificationAlert = true;
+        }
+      } else {
+        this.verificationAlert = false;
+      }
+    },
+    verificationAlert(value) {
+      this.$parent.verificationAlert = value;
+    },
+    disableVerificationAlert(isDisable) {
+      if (isDisable) {
+        this.verificationAlert = false;
+      }
+    },
   },
   metaInfo() {
     return {

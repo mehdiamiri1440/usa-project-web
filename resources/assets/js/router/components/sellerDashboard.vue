@@ -4,7 +4,9 @@
   margin-top: 59px;
   position: relative;
 }
-
+#main.has-verification-alert {
+  margin-top: 99px;
+}
 #main.little-main {
   margin-right: 80px;
 }
@@ -323,7 +325,10 @@
     <div
       id="main"
       class="h-100"
-      :class="{ 'is-required-fix-alert': isRequiredFixAlert }"
+      :class="{
+        'is-required-fix-alert': isRequiredFixAlert,
+        'has-verification-alert': verificationAlert,
+      }"
     >
       <router-view
         :str="storagePath"
@@ -402,6 +407,7 @@ export default {
       is_pricing_active: false,
       paymentData: "",
       doPaymentLoader: false,
+      verificationAlert: false,
     };
   },
   methods: {
