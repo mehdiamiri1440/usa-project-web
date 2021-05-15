@@ -174,6 +174,23 @@
   font-size: 15px;
 }
 
+.main-button-wrapper {
+  text-align: center;
+  margin-top: 25px;
+}
+
+.main-button-wrapper button {
+  font-size: 18px;
+  border-radius: 12px;
+  padding: 13px 30px;
+}
+
+.main-button-wrapper button i {
+  position: relative;
+  top: 3px;
+  margin-right: 8px;
+}
+
 @media screen and (max-width: 767px) {
   .wrapper-section.success {
     margin-top: -33px;
@@ -308,6 +325,26 @@
       </div>
 
       <div class="section-background"></div>
+    </div>
+    <div v-if="currentStep == 3" class="main-button-wrapper">
+      <router-link
+        v-if="$parent.currentUser.user_info.is_buyer"
+        :to="{ name: 'productList' }"
+        tag="button"
+        class="green-button"
+      >
+        لیست محصولات
+        <i class="fa fa-arrow-left"></i>
+      </router-link>
+      <router-link
+        v-else
+        :to="{ name: 'buyAdRequestsSeller' }"
+        tag="button"
+        class="green-button"
+      >
+        درخواست های خرید
+        <i class="fa fa-arrow-left"></i>
+      </router-link>
     </div>
   </section>
 </template>
