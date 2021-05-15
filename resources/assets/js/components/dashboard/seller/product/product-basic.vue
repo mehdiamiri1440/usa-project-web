@@ -990,7 +990,7 @@ export default {
           break;
 
         case 3:
-          $(".custom-progressbar.active-item").css("width", "42%");
+          $(".custom-progressbar.active-item").css("width", "41%");
           break;
 
         case 4:
@@ -998,11 +998,11 @@ export default {
           break;
 
         case 5:
-          $(".custom-progressbar.active-item").css("width", "79%");
+          $(".custom-progressbar.active-item").css("width", "81%");
           break;
 
         case 6:
-          $(".custom-progressbar.active-item").css("width", "98%");
+          $(".custom-progressbar.active-item").css("width", "99%");
           break;
 
         default:
