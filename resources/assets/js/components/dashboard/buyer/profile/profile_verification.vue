@@ -191,6 +191,28 @@
   margin-right: 8px;
 }
 
+.user-verified-icon-wrapper {
+  margin-top: 50px;
+}
+
+.user-verified-icon {
+  position: relative;
+  font-size: 95px;
+  color: #1da1f2;
+}
+
+.user-verified-icon::before {
+  content: "\F00C";
+  position: absolute;
+  left: 22px;
+  font-family: "Font Awesome 5 Free";
+  color: #fff;
+  top: 37px;
+  font-size: 52px;
+  z-index: 1;
+  line-height: 1;
+  font-weight: 900;
+}
 @media screen and (max-width: 767px) {
   .wrapper-section.success {
     margin-top: -33px;
@@ -258,7 +280,10 @@
 
 
 <template>
-  <section class="main-content col-xs-12">
+  <section
+    class="main-content col-xs-12"
+    v-if="!$parent.currentUser.user_info.is_verified"
+  >
     <div class="row title-wrapper">
       <div class="section-title" v-if="currentStep >= 0 && currentStep <= 2">
         احراز هویت
@@ -345,6 +370,20 @@
         درخواست های خرید
         <i class="fa fa-arrow-left"></i>
       </router-link>
+    </div>
+  </section>
+
+  <section class="main-content col-xs-12" v-else>
+    <div class="row">
+      <section class="wrapper-section user-verified-wrapper text-center">
+        <div class="user-verified-icon-wrapper">
+          <span class="user-verified-icon">
+            <i class="fa fa-certificate"></i>
+          </span>
+        </div>
+        <h3>اطلاعات هویتی شما احراز شده است.</h3>
+        <!-- <p class="gray-text margin-10-0">توضیحات اضافه در صورت لزوم</p> -->
+      </section>
     </div>
   </section>
 </template>
