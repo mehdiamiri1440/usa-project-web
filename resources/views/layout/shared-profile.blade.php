@@ -16,6 +16,10 @@
     <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:width" content="400" />
     <meta property="og:image:height" content="300" />
+    <meta property="og:type" content="profile"/>
+    <meta property="og:profile:first_name" content="{{$profile->first_name}}"/>
+    <meta property="og:profile:last_name" content="{{$profile->last_name}}"/>
+    <meta property="og:url" content="{{url('/shared-profile/' . $profile->user_name)}}"/>
 
     <meta name="csrf-token" content="{{csrf_token()}}">
 
