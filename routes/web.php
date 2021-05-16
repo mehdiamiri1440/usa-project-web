@@ -1034,6 +1034,30 @@ Route::group(['prefix' => 'admin', 'middleware' => [admin_login::class]], functi
         'as' => 'admin_panel_submit_to_channel'
     ]);
     
+    Route::get('/categories-meta-data-list', [
+        'uses' => 'admin_panel\admin_seo_controller@load_meta_contents_list',
+        'as' => 'admin_panel_load_meta_contents_list'
+    ]);
+
+    Route::get('/meta-data-detail/{id}', [
+        'uses' => 'admin_panel\admin_seo_controller@load_meta_content_details',
+        'as' => 'load_meta_content_details_by_id',
+    ]);
+
+    Route::post('/edit-category-meta-data-detail', [
+        'uses' => 'admin_panel\admin_seo_controller@edit_meta_content_to_a_category',
+        'as' => 'admin_panel_edit_meta_content_to_a_category',
+    ]);
+
+    Route::post('/add-category-meta-data-detail', [
+        'uses' => 'admin_panel\admin_seo_controller@add_meta_content_to_a_category',
+        'as' => 'admin_panel_add_meta_content_to_a_category',
+    ]);
+
+    Route::get('/add-category-meta-data-detail',function(){
+        return view('admin_panel.addNewCategoryMetaData');
+    });
+    
 });
 
 Route::post('/refresh-token',[
