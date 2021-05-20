@@ -91,8 +91,12 @@
             <div class="modal-title">ورود / ثبت نام</div>
           </div>
           <div class="modal-body col-xs-12">
-            <RegisterNumber v-if="currentStep == 0" />
-            <VerifiedCode v-else-if="currentStep == 1" />
+            <RegisterNumber v-show="currentStep == 1" />
+            <VerifiedCode v-show="currentStep == 2" />
+            <PersonalInformation v-show="currentStep == 3" />
+            <ChoseRoute v-show="currentStep == 4" />
+            <Location v-show="currentStep == 5" />
+            <RegisterRequest v-show="currentStep == 6" />
           </div>
         </div>
         <!-- /.modal-content -->
@@ -105,19 +109,29 @@
 <script>
 import RegisterNumber from "./register-modal-steps/register-number";
 import VerifiedCode from "./register-modal-steps/verified-code";
+import PersonalInformation from "./register-modal-steps/personal-information";
+import ChoseRoute from "./register-modal-steps/chose-route";
+import Location from "./register-modal-steps/location";
+import RegisterRequest from "./register-modal-steps/register-reuqest";
 
 export default {
   components: {
     RegisterNumber,
     VerifiedCode,
+    PersonalInformation,
+    ChoseRoute,
+    Location,
+    RegisterRequest,
   },
   data: function () {
     return {
-      currentStep: 0,
-
+      currentStep: 6,
+      route: 0,
       errors: {
         phone: "",
         verification_code: "",
+        name: "",
+        family: "",
       },
       step1: {
         phone: "",
@@ -132,10 +146,22 @@ export default {
       },
       step3: {
         verifyCodeLoader: false,
+        provinceList: "",
+      },
+      step4: {
+        name: "",
+        family: "",
+      },
+      step5: {
+        provinceId: "",
+        cityid: "",
       },
     };
   },
   methods: {
+    registerUser() {
+      console.log("register user");
+    },
     sendVerificationCode() {
       this.step2.reSendCode = false;
       this.step1.sendCode = true;
@@ -150,7 +176,7 @@ export default {
         })
         .then((response) => {
           this.step1.sendCode = false;
-          this.goToStep(1);
+          this.goToStep(2);
 
           this.step2.verification_code = "";
           this.errors.verification_code = "";
@@ -192,14 +218,12 @@ export default {
 
           if (response.data.status === true) {
             if (response.data.redirected) {
-              // it's very tricky condition, be careful
               window.location.href = "/login";
             } else {
-              this.goToStep(2);
-              //   self.getProvinceList();
+              this.getProvinceList();
+              this.goToStep(3);
             }
           } else if (response.data.status === false) {
-            // this.goToStep(2);
             this.errors.verification_code =
               "کد وارد شده صحیح نیست یا منقضی شده است";
 
@@ -213,7 +237,7 @@ export default {
         .catch((error) => {
           this.step3.verifyCodeLoader = false;
 
-          this.goToStep(1);
+          this.goToStep(2);
           this.errors.verification_code = "وارد کردن کد الزامی است.";
 
           this.registerComponentStatistics(
@@ -223,17 +247,40 @@ export default {
           );
         });
     },
-    registerComponentStatistics: function (
-      categoryName,
-      actionName,
-      labelName
-    ) {
+    getProvinceList: function () {
+      axios
+        .post("/location/get_location_info", { cascade_list: true })
+        .then(
+          (response) => (this.step3.provinceList = response.data.provinces)
+        );
+    },
+    registerComponentStatistics(categoryName, actionName, labelName) {
       gtag("event", actionName, {
         event_category: categoryName,
         event_label: labelName,
       });
     },
-    updateCounterDownTimer: function (seconds) {
+    textValidator(text, name) {
+      if (text != "") {
+        if (!this.validateRegx(text, /^[\u0600-\u06FF\s]+$/)) {
+          return `لطفا ${name} را به فارسی وارد کنید`;
+        }
+      }
+    },
+    descriptionValidator(text, name) {
+      name = name ? name : "توضیحات";
+      if (text != "") {
+        if (
+          !this.validateRegx(
+            text,
+            /^(?!.*[(@#!%$&*)])[s\u{0600}-\u{06FF}\u{060C}\u{061B}\u{061F}\u{0640}\u{066A}\u{066B}\u{066C}\u{0E}\u{0A}_.-،:()A-Za-z0-9 ]+$/u
+          )
+        ) {
+          return `${name} شامل کاراکتر های غیرمجاز است`;
+        }
+      }
+    },
+    updateCounterDownTimer(seconds) {
       if (seconds !== 1) {
         this.step2.timeCounterDown = seconds;
       } else this.step2.showTimer = false;
@@ -245,11 +292,8 @@ export default {
         step = 6;
       }
       this.currentStep = step;
-
-      //   this.checkLevel();
-      //   this.scrollToTop();
     },
-    toLatinNumbers: function (num) {
+    toLatinNumbers(num) {
       if (num == null) {
         return null;
       }
@@ -279,7 +323,7 @@ export default {
     },
   },
   watch: {
-    "step2.timeCounterDown": function () {
+    "step2.timeCounterDown"() {
       var self = this;
       var now = new Date().getTime();
 

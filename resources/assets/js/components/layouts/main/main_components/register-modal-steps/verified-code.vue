@@ -175,19 +175,21 @@ input.error:focus + i {
       class="form-contents col-xs-12"
     >
       <div class="row">
-        <label for="phone-number">
+        <label for="code">
           کد ارسال شده به شماره ی
           <span class="light-green-text" v-text="$parent.step1.phone"> </span>
           را وارد کنید
         </label>
         <div class="input-wrapper">
           <input
+            id="code"
             v-model="code.number1"
             name="code"
             class="code-input"
             placeholder="_"
             maxlength="1"
             type="tel"
+            pattern="[0-9]*"
             onfocus="this.select();"
             :class="{
               error: this.$parent.errors.verification_code,
@@ -201,6 +203,7 @@ input.error:focus + i {
             placeholder="_"
             maxlength="1"
             type="tel"
+            pattern="[0-9]*"
             onfocus="this.select();"
             :class="{
               error: this.$parent.errors.verification_code,
@@ -214,6 +217,7 @@ input.error:focus + i {
             placeholder="_"
             maxlength="1"
             type="tel"
+            pattern="[0-9]*"
             onfocus="this.select();"
             :class="{
               error: this.$parent.errors.verification_code,
@@ -227,6 +231,7 @@ input.error:focus + i {
             placeholder="_"
             maxlength="1"
             type="tel"
+            pattern="[0-9]*"
             onfocus="this.select();"
             :class="{
               error: this.$parent.errors.verification_code,
@@ -262,7 +267,6 @@ input.error:focus + i {
           </button>
         </div>
         <div class="step-action text-left">
-          <!-- this.phoneNumber.length >= 11 && -->
           <button
             class="submit-button disabled"
             :class="{
@@ -372,9 +376,6 @@ export default {
     },
   },
   mounted() {
-    if (this.$parent.isOsIOS()) {
-      $("#phone-number").attr("type", "text");
-    }
     this.init();
   },
   watch: {
