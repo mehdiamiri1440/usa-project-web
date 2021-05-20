@@ -207,8 +207,18 @@ button.send-message-button {
 
 <template>
   <div class="container">
+    <RegisterModal />
+
     <main id="main" class="row">
       <div class="col-xs-12 col-lg-9 pull-right">
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-toggle="modal"
+          data-target="#register-modal"
+        >
+          Launch demo modal
+        </button>
         <section class="main-content">
           <div class="row">
             <ProductContents />
@@ -395,12 +405,14 @@ import ProductCarousel from "../../main_components/product-list-carousel";
 import ProductContents from "./product";
 import UserInfo from "./user_info";
 // import registerInquerForm from "../../main_components/register-inquiry-form.vue";
+import RegisterModal from "../../main_components/register-modal";
 
 export default {
   components: {
     ProductContents,
     UserInfo,
     ProductCarousel,
+    RegisterModal,
     // registerInquerForm,
   },
   props: ["str", "assets", "userType"],
