@@ -412,6 +412,7 @@ import { eventBus } from "../../router/router";
 import loginPage from "./login_steps/login_page";
 import ForgotPassword from "./login_steps/forgot_password";
 import VerifyCode from "./login_steps/verify_code";
+import device from 'device-uuid/lib/device-uuid';
 
 export default {
   components: {
@@ -460,10 +461,17 @@ export default {
 
       self.loginBtnLoading = true;
 
+      let deviceInfo = new device.DeviceUUID();
+      let deviceId = null;
+      if(deviceInfo.get()){
+        deviceId = deviceInfo.get();
+      }
+
       axios
         .post("/dologin", {
           phone: this.step1.phone,
-          password: this.step1.password
+          password: this.step1.password,
+          device_id: deviceId
         })
         .then(function(response) {
           if (response.data.status === true) {

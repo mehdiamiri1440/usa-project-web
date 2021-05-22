@@ -112,12 +112,32 @@ class user_controller extends Controller
             $last_login_client = 'web';
         }
 
+        $now = Carbon::now();
+
         DB::table('myusers')
             ->where('id',$user_id)
             ->update([
                 'last_login_client' => $last_login_client,
-                'last_login_date'   => Carbon::now()
+                'last_login_date'   => $now
             ]);
+        
+        if($request->has('device_id')){
+            $device_id = $request->device_id;
+        }
+        else{
+            $device_id = NULL;
+        }
+
+        $meta_data = [
+            'user_agent' => $request->server('HTTP_USER_AGENT'),
+            'ip' => $request->ip(),
+            'device_id' => $device_id,
+            'created_at' => $now,
+            'updated_at' => $now,
+            'myuser_id' => $user_id
+        ];
+
+        DB::table('client_meta_datas')->insert($meta_data);
     }
 
     public function does_user_name_already_exists(Request $request)

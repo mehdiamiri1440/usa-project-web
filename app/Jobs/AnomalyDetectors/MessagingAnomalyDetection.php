@@ -43,7 +43,11 @@ class MessagingAnomalyDetection implements ShouldQueue
     {
         $block_candidate_user_ids = $this->get_block_candidate_user_ids();
 
-        var_dump($block_candidate_user_ids);
+        $same_device_user_ids = $this->get_same_device_users($block_candidate_user_ids);
+
+        $final_block_candidate_user_ids = array_unique(array_merge($block_candidate_user_ids,$same_device_user_ids));
+
+        // var_dump($block_candidate_user_ids);
 
         // DB::table('myusers')->whereIn('id',$block_candidate_user_ids)
         //                         ->update('is_block',false);
@@ -210,6 +214,27 @@ class MessagingAnomalyDetection implements ShouldQueue
         });
 
         return count(array_unique($contact_id_array));
+    }
+
+    protected function get_same_device_users($user_ids)
+    {
+        $device_ids = DB::table('client_meta_datas')
+                            ->whereIn('myuser_id',$user_ids)
+                            ->whereNotNull('device_id')
+                            ->distinct('id')
+                            ->get('device_id');
+
+        $same_device_user_ids = DB::table('client_meta_datas')
+                                    ->join('myusers','myusers.id','=','client_meta_datas.myuser_id')
+                                    ->where('myusers.is_blocked',false)
+                                    ->whereNotIn('myusers.id',$user_ids)
+                                    ->whereIn('client_meta_datas.device_id',$device_ids)
+                                    ->pluck('myuser_id')
+                                    ->toArray();
+
+        var_dump($same_device_user_ids);
+
+        return $same_device_user_ids;
     }
 
 
