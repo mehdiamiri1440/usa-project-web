@@ -371,7 +371,8 @@ export default {
       this.code.number1 = "";
       this.code.number2 = "";
       this.code.number3 = "";
-      this.$parent.errors.verification_code = " ";
+      this.code.number4 = "";
+      this.$parent.errors.verification_code = "";
       this.$parent.sendVerificationCode();
     },
   },

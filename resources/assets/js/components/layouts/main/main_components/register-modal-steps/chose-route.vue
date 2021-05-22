@@ -119,6 +119,14 @@ span {
   font-weight: 500;
   font-size: 23px;
 }
+@media screen and (max-width: 991px) {
+  .col-xs-6.item-button-wrapper {
+    padding: 5px;
+  }
+  .item-button-wrapper button .title {
+    font-size: 20px;
+  }
+}
 </style>
 
 <template>

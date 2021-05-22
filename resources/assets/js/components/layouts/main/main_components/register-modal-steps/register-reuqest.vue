@@ -17,6 +17,7 @@ span {
   color: #555;
   margin-bottom: 16px;
   text-align: center;
+  line-height: 1.618;
 }
 
 .form-contents {
@@ -214,73 +215,80 @@ input.error:focus + i {
       آیا تمایل دارید درخواست خرید شما برای فروشندگان مشابه ارسال شود؟
     </h2>
     <div class="form-contents col-xs-12">
-      <div v-if="!isStock" class="text-center form-buttons-wrapper">
-        <button
-          class="green-button"
-          type="button"
-          @click.prevent="isStock = true"
+      <div class="row">
+        <div v-if="!isStock" class="text-center form-buttons-wrapper">
+          <button
+            class="green-button"
+            type="button"
+            @click.prevent="isStock = true"
+          >
+            بله
+          </button>
+          <button
+            class="green-button bg-red"
+            @click.prevent="callRegisterUser()"
+          >
+            خیر
+          </button>
+        </div>
+        <div v-else id="stock">
+          <label for="user-stock">
+            میزان نیازمندی <span>(کیلوگرم)</span>
+          </label>
+          <form
+            @submit.prevent="callRegisterUser()"
+            class="input-wrapper user-information-wrapper"
+          >
+            <input
+              v-model="stock"
+              :class="{
+                error: $parent.errors.stock,
+                active: this.stock,
+              }"
+              id="user-stock"
+              type="tel"
+              placeholder="مثلا : 50,000"
+            />
+
+            <i
+              class="fa fa-check-circle"
+              v-if="this.stock && !$parent.errors.stock"
+            ></i>
+            <i class="fa fa-times-circle" v-else-if="$parent.errors.stock"></i>
+            <i class="fa fa-edit" v-else></i>
+          </form>
+          <p class="error-message">
+            <span
+              v-if="$parent.errors.stock"
+              v-text="$parent.errors.stock"
+            ></span>
+          </p>
+        </div>
+
+        <div
+          class="step-action text-right"
+          :class="{ 'submit-button-wrapper': isStock }"
         >
-          بله
-        </button>
-        <button class="green-button bg-red" @click.prevent="callRegisterUser()">
-          خیر
-        </button>
-      </div>
-      <div v-else id="stock">
-        <label for="user-stock"> میزان نیازمندی <span>(کیلوگرم)</span> </label>
-        <form
-          @submit.prevent="callRegisterUser()"
-          class="input-wrapper user-information-wrapper"
-        >
-          <input
-            v-model="stock"
+          <button
+            v-if="isStock"
+            class="submit-button disabled"
             :class="{
-              error: $parent.errors.stock,
-              active: this.stock,
+              active: !$parent.errors.stock,
             }"
-            id="user-stock"
-            type="tel"
-            placeholder="مثلا : 50,000"
-          />
+            @click.prevent="callRegisterUser()"
+          >
+            ثبت
 
-          <i
-            class="fa fa-check-circle"
-            v-if="this.stock && !$parent.errors.stock"
-          ></i>
-          <i class="fa fa-times-circle" v-else-if="$parent.errors.stock"></i>
-          <i class="fa fa-edit" v-else></i>
-        </form>
-        <p class="error-message">
-          <span
-            v-if="$parent.errors.stock"
-            v-text="$parent.errors.stock"
-          ></span>
-        </p>
-      </div>
-
-      <div
-        class="step-action text-right"
-        :class="{ 'submit-button-wrapper': isStock }"
-      >
-        <button
-          v-if="isStock"
-          class="submit-button disabled"
-          :class="{
-            active: !$parent.errors.stock,
-          }"
-          @click.prevent="callRegisterUser()"
-        >
-          ثبت
-
-          <i class="fa fa-check"></i>
-        </button>
-        <button
-          class="submit-button back-button"
-          @click.prevent="$parent.currentStep--"
-        >
-          <i class="fa fa-arrow-right"></i>
-          مرحله قبل
-        </button>
+            <i class="fa fa-check"></i>
+          </button>
+          <button
+            class="submit-button back-button"
+            @click.prevent="$parent.currentStep--"
+          >
+            <i class="fa fa-arrow-right"></i>
+            مرحله قبل
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -305,8 +313,16 @@ export default {
       if (!this.$parent.validateRegx(standardNumber, /^\d*$/)) {
         this.$parent.errors.stock = "لطفا فقط عدد وارد کنید ";
       }
+
       if (!this.$parent.errors.stock) {
-        this.stock = this.$parent.getNumberWithCommas(standardNumber);
+        if (number.length <= 13) {
+          this.stock = this.$parent.getNumberWithCommas(standardNumber);
+        } else {
+          let numberWithCommas = this.$parent.getNumberWithCommas(
+            standardNumber
+          );
+          this.stock = numberWithCommas.substring(0, 13);
+        }
       }
       if (this.$parent.errors.stock) {
         this.$parent.registerComponentStatistics(
@@ -325,9 +341,14 @@ export default {
   watch: {
     stock(value) {
       this.$parent.errors.stock = "";
-      this.stockValidator(value);
-      if (!this.$parent.errors.stock) {
-        this.$parent.stock = this.$parent.toLatinNumbersWithCommas(this.stock);
+
+      if (value) {
+        this.stockValidator(value);
+        if (!this.$parent.errors.stock) {
+          this.$parent.stock = this.$parent.toLatinNumbersWithCommas(
+            this.stock
+          );
+        }
       }
     },
   },

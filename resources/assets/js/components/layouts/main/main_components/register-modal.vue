@@ -84,7 +84,7 @@
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <a class="close-modal" @click.prevent="reportResetData()">
+            <a class="close-modal" @click.prevent="closeRegisterModal()">
               <i class="fa fa-times"></i>
             </a>
 
@@ -161,8 +161,8 @@ export default {
         password: "",
       },
       step5: {
-        provinceId: "",
-        cityId: "",
+        provinceName: "",
+        cityName: "",
       },
     };
   },
@@ -179,8 +179,8 @@ export default {
         password: this.step4.password,
         user_name: "",
         sex: "آقا",
-        province: this.step5.provinceId,
-        city: this.step5.cityId,
+        province: this.step5.provinceName,
+        city: this.step5.cityName,
         activity_type: 1,
         national_code: "",
         category_id: this.product.main.category_id,
@@ -221,22 +221,22 @@ export default {
         if (response.data.status) {
           $("#register-modal").modal("hide");
           if (this.stock) {
-            this.submitBuyAd();
+            this.submitBuyAd(response.data);
           } else {
-            this.openChatOrCall();
+            this.openChatOrCall(response.data);
           }
         }
       });
     },
-    submitBuyAd() {
+    submitBuyAd(currentUser) {
       let formData = this.getBuyAdFormFields();
 
       axios
         .post("/user/add_buyAd", formData)
         .then((response) => {
           if (response.status === 201) {
-            this.openChatOrCall();
-            self.registerComponentStatistics(
+            this.openChatOrCall(currentUser);
+            this.registerComponentStatistics(
               "buyAd-register",
               "buyAd-registered-successfully",
               "buyAd-registered-successfully"
@@ -244,18 +244,18 @@ export default {
           }
         })
         .catch((err) => {
-          this.errors = err.response.data.errors;
+          //   this.errors = err.response.data.errors;
           this.registerComponentExceptions("validation error in buyAd-request");
         });
     },
-    openChatOrCall() {
+    openChatOrCall(currentUser) {
       setTimeout(() => {
-        this.$parent.currentUser = response.data;
-        if (this.$parent.currentUser.user_info) {
-          if (this.$parent.currentUser.user_info.is_seller == true) {
-            this.$parent.showRegisterRequestBox = false;
-          }
-        }
+        this.$parent.currentUser = currentUser;
+        // if (this.$parent.currentUser.user_info) {
+        //   if (this.$parent.currentUser.user_info.is_seller == true) {
+        //     this.$parent.showRegisterRequestBox = false;
+        //   }
+        // }
         if (this.$parent.currentUser.user_info.is_seller) {
           this.$parent.openChat(this.$parent.product);
         } else {
@@ -463,7 +463,7 @@ export default {
 
       return ios;
     },
-    reportResetData() {
+    closeRegisterModal() {
       $(".modal").modal("hide");
       //   this.resetData();
     },
@@ -479,7 +479,7 @@ export default {
       }
       return result;
     },
-    swithToListOnMobile() {
+    checkMobileWidth() {
       window.addEventListener("resize", (event) => {
         this.cehckPageWidth();
       });
@@ -498,9 +498,26 @@ export default {
         fatal: fatal,
       });
     },
+    handleBackKeys() {
+      if (window.history.state) {
+        history.pushState(null, null, window.location);
+      }
+      $(window).on("popstate", (e) => {
+        if (this.currentStep > 1) {
+          this.currentStep--;
+          history.pushState(null, null, window.location);
+        } else {
+          this.closeRegisterModal();
+        }
+      });
+    },
   },
   mounted() {
-    this.swithToListOnMobile();
+    this.cehckPageWidth();
+    this.checkMobileWidth();
+    $("#register-modal").on("show.bs.modal", (e) => {
+      this.handleBackKeys();
+    });
   },
   watch: {
     "step2.timeCounterDown"() {

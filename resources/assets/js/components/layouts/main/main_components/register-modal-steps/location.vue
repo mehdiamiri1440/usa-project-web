@@ -142,6 +142,12 @@ input.focus + i {
 .list-wrapper li:last-of-type button {
   border: none;
 }
+
+@media screen and (max-width: 991px) {
+  .list-wrapper > ul {
+    height: 325px;
+  }
+}
 </style>
 
 <template>
@@ -170,7 +176,7 @@ input.focus + i {
               :placeholder="isProvince ? 'جستجوی استان' : 'جستجوی شهر'"
             />
 
-            <button v-if="searchText">
+            <button v-if="searchText" @click.prevent="searchText = ''">
               <i class="fa fa-times"></i>
             </button>
             <button v-else>
@@ -180,7 +186,9 @@ input.focus + i {
           <div class="list-wrapper">
             <ul v-if="isProvince" ref="isProvinces">
               <li v-for="(item, index) in provinces" :key="index">
-                <button @click.prevent="setProvince(item.id)">
+                <button
+                  @click.prevent="setProvince(item.id, item.province_name)"
+                >
                   <span v-text="item.province_name"></span>
                   <i class="fa fa-angle-left"></i>
                 </button>
@@ -188,7 +196,7 @@ input.focus + i {
             </ul>
             <ul v-else ref="isProvinces">
               <li v-for="(city, index) in cities" :key="index">
-                <button @click.prevent="setCity(city.id)">
+                <button @click.prevent="setCity(city.city_name)">
                   <span v-text="city.city_name"></span>
                   <i class="fa fa-angle-left"></i>
                 </button>
@@ -232,30 +240,30 @@ export default {
     };
   },
   methods: {
-    setProvince(provinceId) {
+    setProvince(provinceId, provinceName) {
       this.searchText = "";
       this.provinces = this.$parent.step3.provinceList;
-      this.$parent.step5.provinceId = provinceId;
+      this.$parent.step5.provinceName = provinceName;
 
-      let provinceCities = this.$parent.step3.provinceList.find(
+      this.allCitiesList = this.$parent.step3.provinceList.find(
         (item) => item.id == provinceId
       ).cities;
 
       if (
-        !provinceCities ||
-        (!Array.isArray(provinceCities) &&
-          !Object.entries(provinceCities).length)
+        !this.allCitiesList ||
+        (!Array.isArray(this.allCitiesList) &&
+          !Object.entries(this.allCitiesList).length)
       )
         this.allCitiesList = {};
 
-      if (!Array.isArray(provinceCities))
-        this.allCitiesList = Object.values(provinceCities);
+      if (!Array.isArray(this.cities))
+        this.allCitiesList = Object.values(this.allCitiesList);
       this.cities = this.allCitiesList;
 
       this.isProvince = false;
     },
-    setCity(cityId) {
-      this.$parent.step5.cityId = cityId;
+    setCity(cityName) {
+      this.$parent.step5.cityName = cityName;
 
       if (this.$parent.route == 1) {
         this.$parent.goToStep(6);
@@ -270,19 +278,20 @@ export default {
         } else {
           return (this.cities = this.allCitiesList);
         }
-      }
-      if (this.isProvince) {
-        this.provinces = this.$parent.step3.provinceList.filter((item) => {
-          if (item.province_name.indexOf(this.searchText) >= 0) {
-            return item;
-          }
-        });
       } else {
-        this.cities = this.allCitiesList.filter((item) => {
-          if (item.city_name.indexOf(this.searchText) >= 0) {
-            return item;
-          }
-        });
+        if (this.isProvince) {
+          this.provinces = this.$parent.step3.provinceList.filter((item) => {
+            if (item.province_name.indexOf(this.searchText) >= 0) {
+              return item;
+            }
+          });
+        } else {
+          this.cities = this.allCitiesList.filter((item) => {
+            if (item.city_name.indexOf(this.searchText) >= 0) {
+              return item;
+            }
+          });
+        }
       }
     },
     setScrollToTop() {
