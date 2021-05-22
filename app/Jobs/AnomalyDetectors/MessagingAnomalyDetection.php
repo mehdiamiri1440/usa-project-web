@@ -19,7 +19,8 @@ class MessagingAnomalyDetection implements ShouldQueue
 
     protected $anomaly_detectors = [
         'detect_links_anomaly',
-        'detect_copy_paste',
+        'detect_length_anomaly',
+        // 'detect_copy_paste',
     ];
     protected $contacts_max = 10;
 
@@ -40,22 +41,27 @@ class MessagingAnomalyDetection implements ShouldQueue
      */
     public function handle()
     {
-        $abnormal_users = $this->get_abnormal_user_ids();
-        
-        if(count($abnormal_users) > 0){
-            //Deli
-            sendSMS::dispatch('09118413054', 27257);
-            sendSMS::dispatch('09172021943', 27257);
-            //Ghasem
-            sendSMS::dispatch('09217985653', 27257);
-            sendSMS::dispatch('09178928266', 27257);
-        }
+        $block_candidate_user_ids = $this->get_block_candidate_user_ids();
+
+        var_dump($block_candidate_user_ids);
+
+        // DB::table('myusers')->whereIn('id',$block_candidate_user_ids)
+        //                         ->update('is_block',false);
+
+        // if(count($abnormal_users) > 0){
+        //     //Deli
+        //     sendSMS::dispatch('09118413054', 27257);
+        //     sendSMS::dispatch('09172021943', 27257);
+        //     //Ghasem
+        //     sendSMS::dispatch('09217985653', 27257);
+        //     sendSMS::dispatch('09178928266', 27257);
+        // }
     }
 
     protected function get_abnormal_message_info()
     {
         $messages = DB::table('messages')
-                        ->whereBetween('created_at',[Carbon::now()->subMonths(1),Carbon::now()])
+                        ->whereBetween('created_at',[Carbon::now()->subMinutes(20),Carbon::now()])
                         ->get();
 
         $abnormal_messages = [];
@@ -71,7 +77,7 @@ class MessagingAnomalyDetection implements ShouldQueue
 
     protected function detect_links_anomaly(&$messages)
     {
-        $msgs = [];
+        $user_ids = [];
         foreach($messages as $msg)
         {
             preg_match_all('/[-A-Z0-9+&@#\/%=~_|$?!:,.]*[A-Z0-9+&@#\/%=~_|$]/i', $msg->text, $result, PREG_PATTERN_ORDER);
@@ -79,12 +85,16 @@ class MessagingAnomalyDetection implements ShouldQueue
             {
                 if(stripos($possible_link,'.com') !== false || stripos($possible_link,'.ir') !== false || stripos($possible_link,'.market') !== false)
                 {
-                    $msgs[] = $msg->id;
+                    if(stripos($possible_link,'buskool.com') !== false || stripos($possible_link,'@') !== false){
+                        continue;
+                    }
+
+                    $user_ids[] = $msg->sender_id;
                 }
             }
         }
 
-        return $msgs;
+        return $user_ids;
     }
 
     protected function detect_copy_paste(&$messages)
@@ -103,12 +113,64 @@ class MessagingAnomalyDetection implements ShouldQueue
         return $msgs;
     }
 
+    protected function detect_length_anomaly(&$messages)
+    {
+        $long_messages = DB::table('messages')
+                                ->whereBetween('created_at',[Carbon::now()->subDays(60),Carbon::now()])
+                                ->where(DB::raw("CHAR_LENGTH(text) >= 250"))
+                                ->get();
+
+
+        $user_ids = [];
+        foreach($long_messages as $msg)
+        {
+            $phone = null;
+            preg_match_all('/((09[0-9]{9})|(\x{06F0}\x{06F9}[\x{06F0}-\x{06F9}]{9}))/u',$msg,$phone);
+            if(count($phone) > 0){
+                $repeat_count = 0;
+
+                foreach($long_messages as $tmp_msg){
+                    if(strcmp($msg->text,$temp_msg->text) == 0 && $msg->id != $tmp_msg->id && $msg->sender_id == $tmp_msg->sender_id){
+                        $repeat_count++;
+
+                        if($repeat_count >= 3){
+                            $user_ids[] = $msg->sender_id;
+                            break;
+                        }   
+                    }
+                }
+            }
+        }
+
+        return $user_ids;
+    }
+
+    protected function get_block_candidate_user_ids()
+    {
+        $messages = DB::table('messages')
+                        ->whereBetween('created_at',[Carbon::now()->subDays(60),Carbon::now()])
+                        ->get();
+
+        $abnormal_user_ids = [];
+        foreach($this->anomaly_detectors as $method_name)
+        {
+            $tmp = $this->$method_name($messages);
+        
+            $abnormal_user_ids = array_merge($abnormal_user_ids,$tmp);
+        }
+
+        var_dump($abnormal_user_ids);
+        $abnormal_user_ids = array_unique($abnormal_user_ids,SORT_REGULAR);
+
+        return $abnormal_user_ids;
+    }
+
     protected function get_abnormal_user_ids()
     {
         $userIds = [];
 
         $messages = DB::table('messages')
-                        ->whereBetween('created_at',[Carbon::now()->subDays(1),Carbon::now()])
+                        ->whereBetween('created_at',[Carbon::now()->subDays(60),Carbon::now()])
                         ->get();
 
         $msg_senders = array_unique(array_column($messages->toArray(),'sender_id'));

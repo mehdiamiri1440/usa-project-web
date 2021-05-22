@@ -252,7 +252,15 @@ class message_controller extends Controller
             }
         });
 
-        return array_unique($contact_id_array);
+        $contact_id_array = array_unique($contact_id_array);
+
+        $blocked_users = DB::table('myusers')->where('is_blocked',true)->pluck('id')->toArray();
+
+        $contact_id_array = array_filter($contact_id_array,function($contact_id) use($blocked_users){
+            return in_array($contact_id,$blocked_users) == false;
+        });
+
+        return $contact_id_array;
     }
 
     protected function get_contact_info($contact_id)
@@ -309,8 +317,13 @@ class message_controller extends Controller
     {
         $user_id = session('user_id');
 
-        $unread_msgs_count = message::where('receiver_id', $user_id)
+        $unread_msgs_count = DB::table('messages')->where('receiver_id', $user_id)
                                 ->where('is_read', false)
+                                ->whereNotExists(function($q){
+                                    $q->select(DB::raw(1))
+                                        ->from('myusers')
+                                        ->whereRaw('myusers.id = messages.sender_id and myusers.is_blocked = true');
+                                })
                                 ->get()
                                 ->count();
 
@@ -429,6 +442,12 @@ class message_controller extends Controller
         $users_info = DB::table('myusers')
                             ->join('messages', 'messages.receiver_id', '=', 'myusers.id')
                             ->where('messages.is_read', false)
+                            ->where('myusers.is_blocked',false)
+                            ->whereNotExists(function($q){
+                                $q->select(DB::raw(1))
+                                        ->from('myusers as usr')
+                                        ->whereRaw('usr.id = messages.sender_id and usr.is_blocked = true');
+                            })
                             ->whereBetween('messages.created_at', [$from, $to])
                             ->select('myusers.id as user_id', 'myusers.phone')
                             ->distinct()

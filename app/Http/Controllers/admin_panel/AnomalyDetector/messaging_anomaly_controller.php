@@ -100,7 +100,7 @@ class messaging_anomaly_controller extends Controller
         $temp_msgs = $messages->toArray();
 
         usort($temp_msgs,function($msg1,$msg2) use(&$msgs){
-            if(strcmp($msg1->text,$msg2->text) == 0){
+            if(strcmp($msg1->text,$msg2->text) == 0 && $msg1->text != 'سلام'){
                 if( ! in_array($msg1->id,$msgs)){
                     $msgs[] = $msg1->id;
                 }
