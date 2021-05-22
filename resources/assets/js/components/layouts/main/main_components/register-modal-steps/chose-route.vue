@@ -134,7 +134,7 @@ span {
         </div>
 
         <div class="col-xs-6 item-button-wrapper pull-right">
-          <button @click.prevent="nextStep(1)">
+          <button @click.prevent="nextStep(0)">
             <img src="../../../../../../img/dollar.svg" />
             <span class="text"> فقط می خواهم </span>
             <span class="title"> قیمت بگیرم </span>

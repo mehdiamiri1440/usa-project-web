@@ -97,6 +97,7 @@
             <ChoseRoute v-show="currentStep == 4" />
             <Location v-show="currentStep == 5" />
             <RegisterRequest v-show="currentStep == 6" />
+            <RegisterLoader v-show="currentStep == 7" />
           </div>
         </div>
         <!-- /.modal-content -->
@@ -113,8 +114,10 @@ import PersonalInformation from "./register-modal-steps/personal-information";
 import ChoseRoute from "./register-modal-steps/chose-route";
 import Location from "./register-modal-steps/location";
 import RegisterRequest from "./register-modal-steps/register-reuqest";
+import RegisterLoader from "./register-modal-steps/register-loader";
 
 export default {
+  props: ["isChat", "product"],
   components: {
     RegisterNumber,
     VerifiedCode,
@@ -122,16 +125,20 @@ export default {
     ChoseRoute,
     Location,
     RegisterRequest,
+    RegisterLoader,
   },
   data: function () {
     return {
-      currentStep: 6,
+      isMobile: false,
+      currentStep: 1,
       route: 0,
+      stock: "",
       errors: {
         phone: "",
         verification_code: "",
         name: "",
         family: "",
+        stock: "",
       },
       step1: {
         phone: "",
@@ -151,16 +158,121 @@ export default {
       step4: {
         name: "",
         family: "",
+        password: "",
       },
       step5: {
         provinceId: "",
-        cityid: "",
+        cityId: "",
       },
     };
   },
   methods: {
     registerUser() {
-      console.log("register user");
+      this.currentStep = 7;
+      this.step4.password = this.makeRandomString(8);
+
+      var object = {
+        phone: this.step1.phone,
+        first_name: this.step4.name,
+        last_name: this.step4.family,
+        verification_code: this.step2.verification_code,
+        password: this.step4.password,
+        user_name: "",
+        sex: "آقا",
+        province: this.step5.provinceId,
+        city: this.step5.cityId,
+        activity_type: 1,
+        national_code: "",
+        category_id: this.product.main.category_id,
+      };
+      axios
+        .post("/api/v1/users", object)
+        .then((response) => {
+          if (response.status === 201) {
+            this.createCookie("registerNewUser", true, 60);
+            axios
+              .post("/dologin", {
+                phone: object.phone,
+                password: object.password,
+              })
+              .then((response) => {
+                if (response.data.status) {
+                  this.getCurrentUser();
+                }
+              })
+              .catch((err) => {
+                console.log("err");
+              });
+            this.registerComponentStatistics(
+              "Register",
+              "successful-register",
+              "user-registered-successfully"
+            );
+          }
+        })
+        .catch((err) => {
+          console.log("User register API failed");
+          this.registerComponentExceptions("User register API failed", true);
+        });
+    },
+    getCurrentUser() {
+      this.currentStep = 7;
+      axios.post("/user/profile_info").then((response) => {
+        if (response.data.status) {
+          $("#register-modal").modal("hide");
+          if (this.stock) {
+            this.submitBuyAd();
+          } else {
+            this.openChatOrCall();
+          }
+        }
+      });
+    },
+    submitBuyAd() {
+      let formData = this.getBuyAdFormFields();
+
+      axios
+        .post("/user/add_buyAd", formData)
+        .then((response) => {
+          if (response.status === 201) {
+            this.openChatOrCall();
+            self.registerComponentStatistics(
+              "buyAd-register",
+              "buyAd-registered-successfully",
+              "buyAd-registered-successfully"
+            );
+          }
+        })
+        .catch((err) => {
+          this.errors = err.response.data.errors;
+          this.registerComponentExceptions("validation error in buyAd-request");
+        });
+    },
+    openChatOrCall() {
+      setTimeout(() => {
+        this.$parent.currentUser = response.data;
+        if (this.$parent.currentUser.user_info) {
+          if (this.$parent.currentUser.user_info.is_seller == true) {
+            this.$parent.showRegisterRequestBox = false;
+          }
+        }
+        if (this.$parent.currentUser.user_info.is_seller) {
+          this.$parent.openChat(this.$parent.product);
+        } else {
+          if (this.isChat) {
+            this.$parent.openChat(this.$parent.product);
+          } else {
+            this.$parent.activePhoneCall(this.isMobile);
+          }
+        }
+      }, 100);
+    },
+    getBuyAdFormFields() {
+      let formData = new FormData();
+
+      formData.append("requirement_amount", this.stock);
+      formData.append("category_id", this.product.main.sub_category_id);
+      return formData;
     },
     sendVerificationCode() {
       this.step2.reSendCode = false;
@@ -218,7 +330,8 @@ export default {
 
           if (response.data.status === true) {
             if (response.data.redirected) {
-              window.location.href = "/login";
+              //   window.location.href = "/login";
+              this.getCurrentUser();
             } else {
               this.getProvinceList();
               this.goToStep(3);
@@ -247,7 +360,17 @@ export default {
           );
         });
     },
-    getProvinceList: function () {
+    createCookie(name, value, minutes) {
+      if (minutes) {
+        var date = new Date();
+        date.setTime(date.getTime() + minutes * 60 * 1000);
+        var expires = "; expires=" + date.toGMTString();
+      } else {
+        var expires = "";
+      }
+      document.cookie = name + "=" + value + expires + "; path=/";
+    },
+    getProvinceList() {
       axios
         .post("/location/get_location_info", { cascade_list: true })
         .then(
@@ -307,6 +430,29 @@ export default {
           return c.charCodeAt(0) - 0x06f0;
         });
     },
+    toLatinNumbersWithCommas: function (num) {
+      if (num == null) {
+        return null;
+      }
+      num = num.toString().replace(/,/g, "");
+      num = num.toString().replace(/^0+/, "");
+      num = num.toString().replace(/^\u0660+/, "");
+      num = num.toString().replace(/^\u06f0+/, "");
+
+      return num
+        .toString()
+        .replace(/[\u0660-\u0669]/g, function (c) {
+          return c.charCodeAt(0) - 0x0660;
+        })
+        .replace(/[\u06f0-\u06f9]/g, function (c) {
+          return c.charCodeAt(0) - 0x06f0;
+        });
+    },
+    getNumberWithCommas: function (number) {
+      if (number || typeof number === "number")
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      else return "";
+    },
     validateRegx(input, regx) {
       return regx.test(input);
     },
@@ -321,6 +467,40 @@ export default {
       $(".modal").modal("hide");
       //   this.resetData();
     },
+    makeRandomString(length) {
+      var result = "";
+      var characters =
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+      var charactersLength = characters.length;
+      for (var i = 0; i < length; i++) {
+        result += characters.charAt(
+          Math.floor(Math.random() * charactersLength)
+        );
+      }
+      return result;
+    },
+    swithToListOnMobile() {
+      window.addEventListener("resize", (event) => {
+        this.cehckPageWidth();
+      });
+    },
+    cehckPageWidth() {
+      let pageWidth = window.outerWidth;
+      if (pageWidth <= 991) {
+        this.isMobile = true;
+      } else {
+        this.isMobile = false;
+      }
+    },
+    registerComponentExceptions(description, fatal = false) {
+      gtag("event", "exception", {
+        description: description,
+        fatal: fatal,
+      });
+    },
+  },
+  mounted() {
+    this.swithToListOnMobile();
   },
   watch: {
     "step2.timeCounterDown"() {

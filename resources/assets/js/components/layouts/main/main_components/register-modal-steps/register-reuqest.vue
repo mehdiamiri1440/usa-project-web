@@ -16,6 +16,7 @@ span {
   font-size: 18px;
   color: #555;
   margin-bottom: 16px;
+  text-align: center;
 }
 
 .form-contents {
@@ -36,6 +37,14 @@ span {
 .step-action {
   margin-top: 40px;
 }
+
+.step-action.submit-button-wrapper {
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+}
+
 .submit-button {
   background: #e0e0e0;
   color: #fff;
@@ -73,6 +82,70 @@ span {
   font-size: 14px;
   right: 0;
   transition: 150ms;
+}
+
+input {
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid;
+  color: #bdc4cc;
+  padding: 8px 15px 8px 45px;
+  direction: ltr;
+  transition: 150ms;
+  text-align: right;
+  background: #fbfbfb;
+}
+
+.input-wrapper i {
+  display: inline-block;
+  position: absolute;
+  left: 15px;
+  font-size: 21px;
+  color: #bebebe;
+  top: 11px;
+  transition: 150ms;
+}
+
+input:focus,
+input:focus + i {
+  color: #333;
+}
+
+input.active {
+  border-color: #4dc0bb;
+  color: #333;
+}
+
+input.active + i {
+  color: #4dc0bb;
+}
+
+input.active:focus,
+input.active:focus + i,
+input.active + i {
+  border-color: #4dc0bb;
+}
+
+input.error {
+  color: #333;
+  border-color: #e41c38;
+}
+
+input.error + i {
+  color: #e41c38;
+}
+
+input.error:focus,
+input.error:focus + i {
+  border-color: #e41c38;
+}
+
+.error-message {
+  color: #e41c38;
+  height: 22px;
+  direction: rtl;
+  font-size: 13px;
+  padding-top: 2px;
 }
 
 .submit-button i {
@@ -119,50 +192,88 @@ span {
   font-weight: 500;
   font-size: 23px;
 }
+
+.form-buttons-wrapper button {
+  width: 100%;
+  max-width: 95px;
+  border-radius: 8px;
+  margin: 0 7px;
+  font-size: 15px;
+}
+#stock {
+  margin-top: 20px;
+}
+.form-buttons-wrapper {
+  margin-top: 25px;
+}
 </style>
 
 <template>
   <div class="text-rtl from-wrapper">
+    <h2 class="title-contents">
+      آیا تمایل دارید درخواست خرید شما برای فروشندگان مشابه ارسال شود؟
+    </h2>
     <div class="form-contents col-xs-12">
-      <div class="row">
-        <div class="">
-          <button class="green-button">خیر</button>
-          <button
-            class="green-button bg-red"
-            type="button"
-            data-toggle="collapse"
-            data-target="#stock"
-            aria-expanded="false"
-            aria-controls="stock"
-          >
-            بله
-          </button>
-        </div>
-        <div class="collapse" id="stock">
-          <label for="user-family"> نام خانوادگی خود را وارد کنید</label>
-          <div class="input-wrapper user-information-wrapper">
-            <input
-              v-model="family"
-              :class="{
-                error: $parent.errors.family,
-                active: this.family,
-              }"
-              id="user-family"
-              type="text"
-              placeholder="نام خانوادگی شما"
-            />
-
-            <i
-              class="fa fa-check-circle"
-              v-if="this.family && !$parent.errors.family"
-            ></i>
-            <i class="fa fa-times-circle" v-else-if="$parent.errors.family"></i>
-            <i class="fa fa-edit" v-else></i>
-          </div>
-        </div>
+      <div v-if="!isStock" class="text-center form-buttons-wrapper">
+        <button
+          class="green-button"
+          type="button"
+          @click.prevent="isStock = true"
+        >
+          بله
+        </button>
+        <button class="green-button bg-red" @click.prevent="callRegisterUser()">
+          خیر
+        </button>
       </div>
-      <div class="row"></div>
-      <div class="step-action text-right">
+      <div v-else id="stock">
+        <label for="user-stock"> میزان نیازمندی <span>(کیلوگرم)</span> </label>
+        <form
+          @submit.prevent="callRegisterUser()"
+          class="input-wrapper user-information-wrapper"
+        >
+          <input
+            v-model="stock"
+            :class="{
+              error: $parent.errors.stock,
+              active: this.stock,
+            }"
+            id="user-stock"
+            type="tel"
+            placeholder="مثلا : 50,000"
+          />
+
+          <i
+            class="fa fa-check-circle"
+            v-if="this.stock && !$parent.errors.stock"
+          ></i>
+          <i class="fa fa-times-circle" v-else-if="$parent.errors.stock"></i>
+          <i class="fa fa-edit" v-else></i>
+        </form>
+        <p class="error-message">
+          <span
+            v-if="$parent.errors.stock"
+            v-text="$parent.errors.stock"
+          ></span>
+        </p>
+      </div>
+
+      <div
+        class="step-action text-right"
+        :class="{ 'submit-button-wrapper': isStock }"
+      >
+        <button
+          v-if="isStock"
+          class="submit-button disabled"
+          :class="{
+            active: !$parent.errors.stock,
+          }"
+          @click.prevent="callRegisterUser()"
+        >
+          ثبت
+
+          <i class="fa fa-check"></i>
+        </button>
         <button
           class="submit-button back-button"
           @click.prevent="$parent.currentStep--"
@@ -179,14 +290,45 @@ span {
 export default {
   data: function () {
     return {
-      name: "",
-      family: "",
+      isStock: false,
+      stock: "",
     };
   },
   methods: {
-    nextStep(route) {
-      this.$parent.route = route;
-      this.$parent.goToStep(5);
+    callRegisterUser() {
+      if (!this.$parent.errors.stock) {
+        this.$parent.registerUser();
+      }
+    },
+    stockValidator(number) {
+      var standardNumber = this.$parent.toLatinNumbersWithCommas(number);
+      if (!this.$parent.validateRegx(standardNumber, /^\d*$/)) {
+        this.$parent.errors.stock = "لطفا فقط عدد وارد کنید ";
+      }
+      if (!this.$parent.errors.stock) {
+        this.stock = this.$parent.getNumberWithCommas(standardNumber);
+      }
+      if (this.$parent.errors.stock) {
+        this.$parent.registerComponentStatistics(
+          "product-register-error",
+          "min-sale-price",
+          "input:" + number + " error:" + this.$parent.errors.stock
+        );
+      }
+    },
+  },
+  mounted() {
+    if (this.$parent.isOsIOS()) {
+      $("#phone-number").attr("type", "text");
+    }
+  },
+  watch: {
+    stock(value) {
+      this.$parent.errors.stock = "";
+      this.stockValidator(value);
+      if (!this.$parent.errors.stock) {
+        this.$parent.stock = this.$parent.toLatinNumbersWithCommas(this.stock);
+      }
     },
   },
 };
