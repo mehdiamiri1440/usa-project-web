@@ -266,9 +266,10 @@ export default {
       this.$parent.step5.cityName = cityName;
 
       if (this.$parent.route == 1) {
+        this.$parent.registerUser(this.$parent.route);
         this.$parent.goToStep(6);
       } else {
-        this.$parent.registerUser();
+        this.$parent.registerUser(this.$parent.route);
       }
     },
     itemsSearched() {

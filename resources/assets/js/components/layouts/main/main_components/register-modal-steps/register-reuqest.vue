@@ -141,9 +141,17 @@ input.error:focus + i {
   border-color: #e41c38;
 }
 
+.input-text-wrapper {
+  height: 22px;
+  padding-top: 2px;
+}
+
+.small-description-text {
+  text-align: left;
+}
+
 .error-message {
   color: #e41c38;
-  height: 22px;
   direction: rtl;
   font-size: 13px;
   padding-top: 2px;
@@ -233,7 +241,7 @@ input.error:focus + i {
           </button>
           <button
             class="green-button bg-red"
-            @click.prevent="callRegisterUser()"
+            @click.prevent="callRegisterBuyAd()"
           >
             خیر
           </button>
@@ -243,17 +251,18 @@ input.error:focus + i {
             چه میزان
             <span
               class="light-green-text"
-              v-text="
-                this.$parent.product.main.sub_category_name +
-                ' از نوع ' +
-                this.$parent.product.main.product_name
-              "
+              v-text="this.$parent.product.main.sub_category_name"
+            ></span>
+            <span v-text="' از نوع '"></span>
+            <span
+              class="light-green-text"
+              v-text="this.$parent.product.main.product_name"
             ></span>
             نیاز دارید؟
-            <span>(کیلوگرم)</span>
+            <span class="red-text">(کیلوگرم)</span>
           </label>
           <form
-            @submit.prevent="callRegisterUser()"
+            @submit.prevent="callRegisterBuyAd()"
             class="input-wrapper user-information-wrapper"
           >
             <input
@@ -274,12 +283,18 @@ input.error:focus + i {
             <i class="fa fa-times-circle" v-else-if="$parent.errors.stock"></i>
             <i class="fa fa-edit" v-else></i>
           </form>
-          <p class="error-message">
-            <span
-              v-if="$parent.errors.stock"
-              v-text="$parent.errors.stock"
-            ></span>
-          </p>
+          <div class="input-text-wrapper">
+            <p class="error-message" v-if="$parent.errors.stock">
+              <span v-text="$parent.errors.stock"></span>
+            </p>
+            <p class="small-description-text" v-else>
+              <span
+                class="blue-text"
+                v-if="stock_text"
+                v-text="stock_text"
+              ></span>
+            </p>
+          </div>
         </div>
 
         <div
@@ -292,7 +307,7 @@ input.error:focus + i {
             :class="{
               active: !$parent.errors.stock,
             }"
-            @click.prevent="callRegisterUser()"
+            @click.prevent="callRegisterBuyAd()"
           >
             ثبت
 
@@ -317,6 +332,7 @@ export default {
     return {
       isStock: false,
       stock: "",
+      stock_text: "",
     };
   },
   methods: {
@@ -326,9 +342,9 @@ export default {
         $("#stock").collapse("show");
       }
     },
-    callRegisterUser() {
+    callRegisterBuyAd() {
       if (!this.$parent.errors.stock) {
-        this.$parent.registerUser();
+        this.$parent.registerBuyAd();
       }
     },
     stockValidator(number) {
@@ -371,7 +387,10 @@ export default {
           this.$parent.stock = this.$parent.toLatinNumbersWithCommas(
             this.stock
           );
+          this.stock_text = this.$parent.convertUnits(this.$parent.stock);
         }
+      } else {
+        this.stock_text = "";
       }
     },
   },

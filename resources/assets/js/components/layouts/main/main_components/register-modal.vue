@@ -133,6 +133,10 @@ export default {
       currentStep: 1,
       route: 0,
       stock: "",
+      currentUser: {
+        profile: "",
+        user_info: "",
+      },
       errors: {
         phone: "",
         verification_code: "",
@@ -167,8 +171,20 @@ export default {
     };
   },
   methods: {
-    registerUser() {
-      this.currentStep = 7;
+    registerBuyAd() {
+      if (this.currentUser.user_info) {
+        if (this.stock) {
+          this.submitBuyAd(this.currentUser);
+        } else {
+          this.openChatOrCall(this.currentUser);
+        }
+      }
+    },
+    registerUser(isRoute = false) {
+      if (!isRoute) {
+        this.currentStep = 7;
+      }
+
       this.step4.password = this.makeRandomString(8);
 
       var object = {
@@ -197,7 +213,7 @@ export default {
               })
               .then((response) => {
                 if (response.data.status) {
-                  this.getCurrentUser();
+                  this.getCurrentUser(isRoute);
                 }
               })
               .catch((err) => {
@@ -215,16 +231,16 @@ export default {
           this.registerComponentExceptions("User register API failed", true);
         });
     },
-    getCurrentUser() {
-      this.currentStep = 7;
+    getCurrentUser(isRoute = false) {
+      if (!isRoute) {
+        this.currentStep = 7;
+      }
+
       axios.post("/user/profile_info").then((response) => {
-        if (response.data.status) {
+        this.currentUser = response.data;
+        if (response.data.status && !isRoute) {
           $("#register-modal").modal("hide");
-          if (this.stock) {
-            this.submitBuyAd(response.data);
-          } else {
-            this.openChatOrCall(response.data);
-          }
+          this.openChatOrCall(this.currentUser);
         }
       });
     },
@@ -249,6 +265,7 @@ export default {
         });
     },
     openChatOrCall(currentUser) {
+      $("#register-modal").modal("hide");
       setTimeout(() => {
         this.$parent.currentUser = currentUser;
         // if (this.$parent.currentUser.user_info) {
@@ -403,6 +420,7 @@ export default {
         }
       }
     },
+
     updateCounterDownTimer(seconds) {
       if (seconds !== 1) {
         this.step2.timeCounterDown = seconds;
@@ -447,6 +465,28 @@ export default {
         .replace(/[\u06f0-\u06f9]/g, function (c) {
           return c.charCodeAt(0) - 0x06f0;
         });
+    },
+    convertUnits: function (number) {
+      let data = number / 1000;
+      let text = "";
+      if (number < 1000) {
+        return number + " " + "کیلوگرم";
+      } else {
+        let ton = data.toString().split(".")[0];
+        ton = this.getNumberWithCommas(ton);
+        let kg = number.toString().substr(ton.length);
+        kg = kg.replace(/^0+/, "");
+        ton = ton + " " + "تن";
+
+        if (kg) {
+          kg = " و " + kg + " کیلوگرم";
+          text = ton + kg;
+        } else {
+          text = ton;
+        }
+
+        return text;
+      }
     },
     getNumberWithCommas: function (number) {
       if (number || typeof number === "number")
@@ -517,6 +557,11 @@ export default {
     this.checkMobileWidth();
     $("#register-modal").on("show.bs.modal", (e) => {
       this.handleBackKeys();
+    });
+    $("#register-modal").on("hidden.bs.modal", (e) => {
+      if (this.currentUser.user_info) {
+        this.openChatOrCall(this.currentUser);
+      }
     });
   },
   watch: {
