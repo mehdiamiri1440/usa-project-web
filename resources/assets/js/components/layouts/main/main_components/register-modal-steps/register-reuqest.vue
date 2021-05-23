@@ -207,20 +207,27 @@ input.error:focus + i {
 .form-buttons-wrapper {
   margin-top: 25px;
 }
+
+.green-button.disabled,
+.green-button.disabled:hover {
+  background: #e0e0e0 !important;
+}
 </style>
 
 <template>
   <div class="text-rtl from-wrapper">
     <h2 class="title-contents">
-      آیا تمایل دارید درخواست خرید شما برای فروشندگان مشابه ارسال شود؟
+      آیا تمایل به ارسال درخواست خرید به فروشندگان مشابه دارید؟
     </h2>
     <div class="form-contents col-xs-12">
       <div class="row">
-        <div v-if="!isStock" class="text-center form-buttons-wrapper">
+        <div class="text-center form-buttons-wrapper">
           <button
             class="green-button"
             type="button"
-            @click.prevent="isStock = true"
+            :class="{ disabled: isStock }"
+            @click.prevent="stockCollapse()"
+            :disabled="isStock"
           >
             بله
           </button>
@@ -231,9 +238,19 @@ input.error:focus + i {
             خیر
           </button>
         </div>
-        <div v-else id="stock">
+        <div id="stock" class="collapse">
           <label for="user-stock">
-            میزان نیازمندی <span>(کیلوگرم)</span>
+            چه میزان
+            <span
+              class="light-green-text"
+              v-text="
+                this.$parent.product.main.sub_category_name +
+                ' از نوع ' +
+                this.$parent.product.main.product_name
+              "
+            ></span>
+            نیاز دارید؟
+            <span>(کیلوگرم)</span>
           </label>
           <form
             @submit.prevent="callRegisterUser()"
@@ -303,6 +320,12 @@ export default {
     };
   },
   methods: {
+    stockCollapse() {
+      if (!this.isStock) {
+        this.isStock = true;
+        $("#stock").collapse("show");
+      }
+    },
     callRegisterUser() {
       if (!this.$parent.errors.stock) {
         this.$parent.registerUser();
