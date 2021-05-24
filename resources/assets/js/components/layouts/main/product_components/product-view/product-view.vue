@@ -207,6 +207,8 @@ button.send-message-button {
 
 <template>
   <div class="container">
+    <RegisterModal v-if="!currentUser.user_info" :is-chat="isChat" :product="product" />
+
     <main id="main" class="row">
       <div class="col-xs-12 col-lg-9 pull-right">
         <section class="main-content">
@@ -337,7 +339,7 @@ button.send-message-button {
         </button>
         <button
           v-else-if="!currentUser.user_info"
-          @click.prevent="loginModal()"
+          @click.prevent="loginModal(true)"
           :class="{
             'send-message-button': product.user_info.has_phone,
             'green-button': !product.user_info.has_phone,
@@ -367,7 +369,7 @@ button.send-message-button {
         </button>
         <button
           v-else-if="!currentUser.user_info && product.user_info.has_phone"
-          @click.prevent="loginModal()"
+          @click.prevent="loginModal(false)"
           class="green-button"
           :class="{ disable: isActivePhone }"
           :disabled="isActivePhone"
@@ -395,17 +397,20 @@ import ProductCarousel from "../../main_components/product-list-carousel";
 import ProductContents from "./product";
 import UserInfo from "./user_info";
 // import registerInquerForm from "../../main_components/register-inquiry-form.vue";
+import RegisterModal from "../../main_components/register-modal";
 
 export default {
   components: {
     ProductContents,
     UserInfo,
     ProductCarousel,
+    RegisterModal,
     // registerInquerForm,
   },
   props: ["str", "assets", "userType"],
   data: function () {
     return {
+      isChat: true,
       currentUser: {
         profile: "",
         user_info: "",
@@ -487,6 +492,7 @@ export default {
       });
     },
     openChat: function (product) {
+      this.isChat = true;
       this.registerComponentStatistics(
         "product",
         "openChat",
@@ -523,29 +529,32 @@ export default {
         eventBus.$emit("modal", "sendMsg");
       }
     },
-    loginModal() {
-      swal({
-        title: "ارتباط با مخاطب",
-        icon: "info",
-        text:
-          "برای ارتباط با هزاران خریدار و فروشنده در باسکول ابتدا ثبت نام کنید.",
-        className: "custom-swal-with-cancel",
-        buttons: {
-          success: {
-            text: "ورود سریع / ثبت نام",
-          },
-          close: {
-            text: "بستن",
-            className: "bg-cancel",
-          },
-        },
-      }).then((value) => {
-        if (value == "success") {
-          this.$router.push({ name: "register" });
-        }
-      });
+    loginModal(isChat) {
+      this.isChat = isChat;
+      $("#register-modal").modal("show");
+      // swal({
+      //   title: "ارتباط با مخاطب",
+      //   icon: "info",
+      //   text:
+      //     "برای ارتباط با هزاران خریدار و فروشنده در باسکول ابتدا ثبت نام کنید.",
+      //   className: "custom-swal-with-cancel",
+      //   buttons: {
+      //     success: {
+      //       text: "ورود سریع / ثبت نام",
+      //     },
+      //     close: {
+      //       text: "بستن",
+      //       className: "bg-cancel",
+      //     },
+      //   },
+      // }).then((value) => {
+      //   if (value == "success") {
+      //     this.$router.push({ name: "register" });
+      //   }
+      // });
     },
     openChatModal: function (product) {
+      this.isChat = true;
       this.registerComponentStatistics(
         "product",
         "openChat",
@@ -579,6 +588,7 @@ export default {
       }
     },
     activePhoneCall: function (isModal) {
+      this.isChat = false;
       this.getPhoneLoader = true;
       this.isActivePhone = true;
       axios

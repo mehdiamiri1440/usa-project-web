@@ -26,9 +26,9 @@
 
   left: 15px;
 
-  border-radius: 4px;
+  border-radius: 12px;
 
-  border: 2px solid #00c569;
+  border: 1px solid #00c569;
 
   transition: 1s;
 

@@ -476,7 +476,7 @@ label {
           </button>
           <button
             v-else-if="!$parent.currentUser.user_info"
-            @click.prevent="$parent.loginModal()"
+            @click.prevent="$parent.loginModal(true)"
             class="hidden-xs hidden-sm"
             :class="{
               'send-message-button': $parent.product.user_info.has_phone,
@@ -523,7 +523,7 @@ label {
               !$parent.currentUser.user_info &&
               $parent.product.user_info.has_phone
             "
-            @click.prevent="$parent.loginModal()"
+            @click.prevent="$parent.loginModal(false)"
             class="green-button phone-call hidden-xs hidden-sm"
             :class="{ disable: $parent.isActivePhone }"
             :disabled="$parent.isActivePhone"
