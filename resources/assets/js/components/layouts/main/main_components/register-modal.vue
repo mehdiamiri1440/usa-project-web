@@ -130,7 +130,7 @@ export default {
   data: function () {
     return {
       isMobile: false,
-      currentStep: 6,
+      currentStep: 1,
       route: 0,
       stock: "",
       productName: "",
