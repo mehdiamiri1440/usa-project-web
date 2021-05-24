@@ -142,6 +142,7 @@ class sms_controller extends Controller
                         'client' => $last_login_client,
                         'plain' => false,
                         'device_id' => $device_id,
+                        'user_agent' => $request->server('HTTP_USER_AGENT')
                     ]);
 
                     $user_controller_object = new user_controller(new userService);

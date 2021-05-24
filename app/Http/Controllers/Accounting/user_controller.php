@@ -136,9 +136,16 @@ class user_controller extends Controller
         else{
             $role = 'BUYER';
         }
+        
+        if($request->filled('user_agent') && $request->has('plain') && $request->plain == false){
+            $user_agent = $request->user_agent;
+        }
+        else{
+            $user_agent = $request->server('HTTP_USER_AGENT');
+        }
 
         $meta_data = [
-            'user_agent' => $request->server('HTTP_USER_AGENT'),
+            'user_agent' => $user_agent,
             'ip' => $request->ip(),
             'device_id' => $device_id,
             'created_at' => $now,
