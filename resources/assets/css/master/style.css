@@ -670,13 +670,13 @@ select#bd-month-end-date-id option {
   font-weight: bold;
 }
 
+
 .imageuploadify {
   margin: 0;
-  border-radius: 5px;
-  border: 3px dashed #d2d2d2;
+  border-radius: 12px;
+  border: 2px dashed #d2d2d2;
   color: #333;
 }
-
 .file-uploads.file-uploads-html5 label {
   margin: 0;
 }

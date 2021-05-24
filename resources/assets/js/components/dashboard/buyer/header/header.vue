@@ -611,14 +611,31 @@ export default {
       productId: "",
       searchValueText: "",
       resetTextSearch: false,
+      verificationAlert: false,
+      disableVerificationAlertRoutes: [
+        "profileBasicBuyerVeficiation",
+        "messagesBuyer",
+      ],
+      disableVerificationAlert: false,
     };
   },
   methods: {
     init: function () {
       this.isLoaded = true;
+
       axios.post("/user/profile_info").then((response) => {
         this.isLoading = false;
         this.$parent.currentUser = response.data;
+        if (
+          !response.data.user_info.is_verified &&
+          this.checkVerificationAlert(this.$route.name)
+        ) {
+          if (!this.disableVerificationAlert) {
+            this.verificationAlert = true;
+          }
+        } else {
+          this.verificationAlert = false;
+        }
         return (this.currentUser = response.data);
       });
     },
@@ -901,6 +918,13 @@ export default {
         event_label: labelName,
       });
     },
+    checkVerificationAlert(routeName) {
+      let routeIsDisable = this.disableVerificationAlertRoutes.some((item) => {
+        return item == routeName;
+      });
+
+      return !routeIsDisable;
+    },
   },
   mounted() {
     var self = this;
@@ -951,6 +975,26 @@ export default {
     resetTextSearch: function (value) {
       if (value == true) {
         this.searchValueText = "";
+      }
+    },
+    $route(route) {
+      if (
+        !this.$parent.currentUser.user_info.is_verified &&
+        this.checkVerificationAlert(route.name)
+      ) {
+        if (!this.disableVerificationAlert) {
+          this.verificationAlert = true;
+        }
+      } else {
+        this.verificationAlert = false;
+      }
+    },
+    verificationAlert(value) {
+      this.$parent.verificationAlert = value;
+    },
+    disableVerificationAlert(isDisable) {
+      if (isDisable) {
+        this.verificationAlert = false;
       }
     },
   },

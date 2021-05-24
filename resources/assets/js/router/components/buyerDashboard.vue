@@ -4,6 +4,9 @@
   margin-top: 59px;
   position: relative;
 }
+#main.has-verification-alert {
+  margin-top: 99px;
+}
 
 #main.little-main {
   margin-right: 80px;
@@ -26,7 +29,11 @@
       :search-text="searchText"
     ></header-dash-buyer>
 
-    <div id="main" class="h-100">
+    <div
+      id="main"
+      class="h-100"
+      :class="{ 'has-verification-alert': verificationAlert }"
+    >
       <router-view
         :str="storagePath"
         :assets="assets"
@@ -64,6 +71,7 @@ export default {
         },
         user_info: "",
       },
+      verificationAlert: false,
     };
   },
   mounted: function () {

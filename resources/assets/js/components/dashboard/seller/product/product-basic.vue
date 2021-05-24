@@ -131,7 +131,7 @@
 }
 .custom-progressbar.active-item {
   background: #00c569;
-  width: 8.7%;
+  width: 0%;
   left: initial;
 }
 
@@ -147,7 +147,7 @@
   left: 41px;
 }
 .active-progress-wrapper .custom-progressbar {
-  right: -34px;
+  right: 0;
 }
 
 .success-register {
@@ -191,7 +191,6 @@
 
   .main-content > div.wrapper-section {
     border: none;
-    border-top: 1px solid #dadce0;
     border-radius: 0;
   }
 
@@ -984,26 +983,26 @@ export default {
     currentStep: function (step) {
       switch (step) {
         case 1:
-          $(".custom-progressbar.active-item").css("width", "8.7%");
+          $(".custom-progressbar.active-item").css("width", "0");
           break;
         case 2:
-          $(".custom-progressbar.active-item").css("width", "29%");
+          $(".custom-progressbar.active-item").css("width", "20%");
           break;
 
         case 3:
-          $(".custom-progressbar.active-item").css("width", "49%");
+          $(".custom-progressbar.active-item").css("width", "41%");
           break;
 
         case 4:
-          $(".custom-progressbar.active-item").css("width", "69%");
+          $(".custom-progressbar.active-item").css("width", "62%");
           break;
 
         case 5:
-          $(".custom-progressbar.active-item").css("width", "88%");
+          $(".custom-progressbar.active-item").css("width", "81%");
           break;
 
         case 6:
-          $(".custom-progressbar.active-item").css("width", "107%");
+          $(".custom-progressbar.active-item").css("width", "99%");
           break;
 
         default:

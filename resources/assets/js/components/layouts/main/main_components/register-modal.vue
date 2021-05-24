@@ -206,10 +206,18 @@ export default {
         .then((response) => {
           if (response.status === 201) {
             this.createCookie("registerNewUser", true, 60);
+
+            let deviceInfo = new device.DeviceUUID();
+            let deviceId = null;
+            if(deviceInfo.get()){
+              deviceId = deviceInfo.get();
+            }
+
             axios
               .post("/dologin", {
                 phone: object.phone,
                 password: object.password,
+                device_id: deviceId
               })
               .then((response) => {
                 if (response.data.status) {
