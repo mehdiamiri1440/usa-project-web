@@ -264,18 +264,9 @@ export default {
       this.allCitiesList = this.$parent.step3.provinceList.find(
         (item) => item.id == provinceId
       ).cities;
-
-      if (
-        !this.allCitiesList ||
-        (!Array.isArray(this.allCitiesList) &&
-          !Object.entries(this.allCitiesList).length)
-      )
-        this.allCitiesList = {};
-
-      if (!Array.isArray(this.cities))
+      if (!Array.isArray(this.allCitiesList))
         this.allCitiesList = Object.values(this.allCitiesList);
       this.cities = this.allCitiesList;
-
       this.isProvince = false;
     },
     setCity(cityName) {
@@ -313,7 +304,9 @@ export default {
     },
     setScrollToTop() {
       this.$nextTick(() => {
-        this.$refs.isProvinces.scrollTop = 0;
+        if (this.$refs.isProvinces) {
+          this.$refs.isProvinces.scrollTop = 0;
+        }
       });
     },
   },
