@@ -130,9 +130,10 @@ export default {
   data: function () {
     return {
       isMobile: false,
-      currentStep: 1,
+      currentStep: 6,
       route: 0,
       stock: "",
+      productName: "",
       currentUser: {
         profile: "",
         user_info: "",
@@ -143,6 +144,7 @@ export default {
         name: "",
         family: "",
         stock: "",
+        productName: "",
       },
       step1: {
         phone: "",
@@ -174,7 +176,9 @@ export default {
     registerBuyAd() {
       if (this.currentUser.user_info) {
         if (this.stock) {
-          this.submitBuyAd(this.currentUser);
+          if (!this.errors.productName) {
+            this.submitBuyAd(this.currentUser);
+          }
         } else {
           this.openChatOrCall(this.currentUser);
         }
@@ -287,6 +291,7 @@ export default {
     getBuyAdFormFields() {
       let formData = new FormData();
 
+      formData.append("name", this.productName);
       formData.append("requirement_amount", this.stock);
       formData.append("category_id", this.product.main.sub_category_id);
       return formData;
@@ -404,6 +409,8 @@ export default {
       if (text != "") {
         if (!this.validateRegx(text, /^[\u0600-\u06FF\s]+$/)) {
           return `لطفا ${name} را به فارسی وارد کنید`;
+        } else {
+          return false;
         }
       }
     },
@@ -420,7 +427,6 @@ export default {
         }
       }
     },
-
     updateCounterDownTimer(seconds) {
       if (seconds !== 1) {
         this.step2.timeCounterDown = seconds;
@@ -565,6 +571,9 @@ export default {
     });
   },
   watch: {
+    product() {
+      this.productName = this.product.main.product_name;
+    },
     "step2.timeCounterDown"() {
       var self = this;
       var now = new Date().getTime();
