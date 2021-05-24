@@ -731,7 +731,7 @@ class product_controller extends Controller
                                             ->get()
                                             ->count();
 
-        if ($max_allowed_prodcut_register + $user_record->extra_product_capacity > $user_confirmed_products_count) {
+        if (($max_allowed_prodcut_register + $user_record->extra_product_capacity > $user_confirmed_products_count) && $user_record->is_blocked == false) {
             return true;
         } else {
             return false;

@@ -18,6 +18,10 @@ class CreateClientMetaDatasTable extends Migration
             $table->timestamps();
             $table->string('user_agent',500)->nullable();
             $table->string('device_id',250)->nullable();
+            $table->enum('user_role', [
+                'BUYER',
+                'SELLER',
+            ]);
             $table->string('ip')->nullable();
             $table->unsignedBigInteger('myuser_id');
 

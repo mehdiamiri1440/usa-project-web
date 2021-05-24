@@ -56,7 +56,7 @@ class user_controller extends Controller
             $user_confirmed_profile_record_status = $this->does_user_have_confirmed_profile_record($user->id);
 
             $this->set_user_session($user);
-            $this->set_last_login_info($user->id,$request);
+            $this->set_last_login_info($user,$request);
             $jwt_token = JWTAuth::fromUser($user,['exp' => Carbon::now()->addDays(7)->timestamp]);
 
             return response()->json([
@@ -102,8 +102,10 @@ class user_controller extends Controller
         ]);
     }
 
-    protected function set_last_login_info($user_id,&$request)
+    protected function set_last_login_info($user,&$request)
     {
+        $user_id = $user->id;
+
         if($request->has('client') && $request->client == 'mobile')
         {
             $last_login_client = 'mobile';
@@ -128,16 +130,48 @@ class user_controller extends Controller
             $device_id = NULL;
         }
 
+        if($user->is_seller == true){
+            $role = 'SELLER';
+        }
+        else{
+            $role = 'BUYER';
+        }
+
         $meta_data = [
             'user_agent' => $request->server('HTTP_USER_AGENT'),
             'ip' => $request->ip(),
             'device_id' => $device_id,
             'created_at' => $now,
             'updated_at' => $now,
-            'myuser_id' => $user_id
+            'myuser_id' => $user_id,
+            'user_role' => $role
         ];
 
         DB::table('client_meta_datas')->insert($meta_data);
+
+        if(! is_null($device_id)){
+            $this->block_user_if_already_has_been_blocked_on_this_device($device_id,$user_id);
+        }
+    }
+
+    protected function block_user_if_already_has_been_blocked_on_this_device($device_id,$user_id)
+    {
+        $already_blocked_users_count_on_this_device = DB::table('myusers')
+                                                        ->join('client_meta_datas','client_meta_datas.myuser_id','myusers.id')
+                                                        ->where('client_meta_datas.device_id',$device_id)
+                                                        ->where('myusers.is_blocked',true)
+                                                        ->get()
+                                                        ->count();
+
+        if($already_blocked_users_count_on_this_device > 0)
+        {
+            DB::table('myusers')->where('id',$user_id)
+                                    ->update(['is_blocked' => true]);
+
+            \Session::flush();
+            \Session::save();
+        }
+                                                        
     }
 
     public function does_user_name_already_exists(Request $request)

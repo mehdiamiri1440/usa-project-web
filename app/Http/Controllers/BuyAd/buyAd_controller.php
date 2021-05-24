@@ -216,9 +216,16 @@ class buyAd_controller extends Controller
     protected function add_buyAd_to_DB($request)
     {
         try {
+            $user_id = session('user_id');
+            $is_user_blocked = DB::table('myusers')->where('id',$user_id)->first()->is_blocked;
+
+            if($is_user_blocked){
+                return 'حساب کاربری شما مسدود شده است.';
+            }
+
             $buyAd = new buyAd();
 
-            $user_id = session('user_id');
+            
 
             foreach ($this->buyAd_register_fields_array as $field_name) {
                 if (!is_null($request->$field_name)) {
@@ -750,12 +757,19 @@ class buyAd_controller extends Controller
 
                 //sort buyAds according to recency and response rate
                 usort($filtered_buyAds,function($item1,$item2){
-                    $a = Carbon::now()->subHours(12)->gte(Carbon::parse($item1->updated_at)) ?  $item1->response_rate : 100;
-                    $b = Carbon::now()->subHours(12)->gte(Carbon::parse($item2->updated_at)) ?  $item2->response_rate : 100;
+                    $a = $item1->is_golden ? 1 : 0;
+                    $b = $item2->is_golden ? 1: 0;
 
                     if($a == $b){
-                        return ($item1->updated_at < $item2->updated_at) ? 1 : -1;
-                    }
+                        $c = Carbon::now()->subHours(12)->gte(Carbon::parse($item1->updated_at)) ?  $item1->response_rate : 100;
+                        $d = Carbon::now()->subHours(12)->gte(Carbon::parse($item2->updated_at)) ?  $item2->response_rate : 100;
+
+                        if($c == $d){
+                            return ($item1->updated_at < $item2->updated_at) ? 1 : -1;
+                        }
+
+                        return ($c < $d) ? 1 : -1;
+                    } 
 
                     return ($a < $b) ? 1 : -1;
                     
@@ -786,11 +800,18 @@ class buyAd_controller extends Controller
                 $b =  (in_array($item2->category_id,$user_registered_products_categories_array) == true) ? 1 : -1;
 
                 if($a == $b){
-                    $c = $item1->response_rate;
-                    $d = $item2->response_rate;
+                    $c = $item1->is_golden ? 1 : 0;
+                    $d = $item2->is_golden ? 1 : 0;
 
                     if($c == $d){
-                        return ($item1->updated_at < $item2->updated_at) ? 1 : -1;
+                        $e = $item1->response_rate;
+                        $f = $item2->response_rate;
+
+                        if($e == $f){
+                            return ($item1->updated_at < $item2->updated_at) ? 1 : -1;
+                        }
+
+                        return ($e < $f) ? 1 : -1;
                     }
 
                     return ($c < $d) ? 1 : -1;
@@ -806,7 +827,7 @@ class buyAd_controller extends Controller
 
             return response()->json([
                 'status' => true,
-                'buyAds' => $result_buyAds,
+                'buyAds' => collect($result_buyAds),
             ], 200);
         } else {
             return response()->json([
@@ -822,6 +843,7 @@ class buyAd_controller extends Controller
                     ->join('myusers', 'buy_ads.myuser_id', '=', 'myusers.id')
                     ->join('categories as c', 'buy_ads.category_id', '=', 'c.id')
                     ->where('buy_ads.confirmed', true)
+                    ->where('myusers.is_blocked',false)
                     ->where(function($q){
                         return $q = $q->where('buy_ads.reply_capacity','>',0)
                                         ->orWhere('buy_ads.phone_view_capacity','>',0);

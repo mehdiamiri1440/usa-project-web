@@ -300,6 +300,7 @@ class product_list_controller extends Controller
                             ) as response_time,(select categories.category_name from categories where c.parent_id = categories.id) as category_name,(select categories.id from categories where c.parent_id = categories.id) as category_id,(select count(id) from product_media where product_media.product_id = products.id) as photos_count,(select file_path from product_media where product_media.product_id = products.id order by product_media.id asc limit 1) as file_path,(select count(distinct(messages.sender_id)) from messages where messages.receiver_id = products.myuser_id) as ums,(select count(distinct(phone_number_view_logs.viewer_id)) from phone_number_view_logs where phone_number_view_logs.myuser_id = products.myuser_id) as upr')
                         ->distinct('products.id')
                         ->whereNull('products.deleted_at')
+                        ->where('myusers.is_blocked',false)
                         ->where('products.confirmed', true)
                         ->get();
 

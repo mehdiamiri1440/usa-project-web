@@ -47,10 +47,8 @@ class MessagingAnomalyDetection implements ShouldQueue
 
         $final_block_candidate_user_ids = array_unique(array_merge($block_candidate_user_ids,$same_device_user_ids));
 
-        // var_dump($block_candidate_user_ids);
-
-        // DB::table('myusers')->whereIn('id',$block_candidate_user_ids)
-        //                         ->update('is_block',false);
+        DB::table('myusers')->whereIn('id',$block_candidate_user_ids)
+                                ->update('is_block',false);
 
         // if(count($abnormal_users) > 0){
         //     //Deli
@@ -120,7 +118,7 @@ class MessagingAnomalyDetection implements ShouldQueue
     protected function detect_length_anomaly(&$messages)
     {
         $long_messages = DB::table('messages')
-                                ->whereBetween('created_at',[Carbon::now()->subDays(60),Carbon::now()])
+                                ->whereBetween('created_at',[Carbon::now()->subMinutes(20),Carbon::now()])
                                 ->where(DB::raw("CHAR_LENGTH(text) >= 250"))
                                 ->get();
 
@@ -152,7 +150,7 @@ class MessagingAnomalyDetection implements ShouldQueue
     protected function get_block_candidate_user_ids()
     {
         $messages = DB::table('messages')
-                        ->whereBetween('created_at',[Carbon::now()->subDays(60),Carbon::now()])
+                        ->whereBetween('created_at',[Carbon::now()->subMinutes(20),Carbon::now()])
                         ->get();
 
         $abnormal_user_ids = [];
@@ -163,7 +161,6 @@ class MessagingAnomalyDetection implements ShouldQueue
             $abnormal_user_ids = array_merge($abnormal_user_ids,$tmp);
         }
 
-        var_dump($abnormal_user_ids);
         $abnormal_user_ids = array_unique($abnormal_user_ids,SORT_REGULAR);
 
         return $abnormal_user_ids;
@@ -221,8 +218,8 @@ class MessagingAnomalyDetection implements ShouldQueue
         $device_ids = DB::table('client_meta_datas')
                             ->whereIn('myuser_id',$user_ids)
                             ->whereNotNull('device_id')
-                            ->distinct('id')
-                            ->get('device_id');
+                            ->distinct('device_id')
+                            ->pluck('device_id');
 
         $same_device_user_ids = DB::table('client_meta_datas')
                                     ->join('myusers','myusers.id','=','client_meta_datas.myuser_id')
@@ -231,8 +228,6 @@ class MessagingAnomalyDetection implements ShouldQueue
                                     ->whereIn('client_meta_datas.device_id',$device_ids)
                                     ->pluck('myuser_id')
                                     ->toArray();
-
-        var_dump($same_device_user_ids);
 
         return $same_device_user_ids;
     }
