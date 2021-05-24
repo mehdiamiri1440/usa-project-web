@@ -146,7 +146,7 @@ class user_controller extends Controller
 
         $meta_data = [
             'user_agent' => $user_agent,
-            'ip' => $request->ip(),
+            'ip' => $request->server('REMOTE_ADDR'),
             'device_id' => $device_id,
             'created_at' => $now,
             'updated_at' => $now,
