@@ -532,6 +532,7 @@ a.profile-info-wrapper:focus {
       v-if="$parent.verificationAlert"
       :to="{ name: 'profileBasicSellerVeficiation' }"
       class="verification-wrapper-contents"
+      
     >
       <i class="fa fa-angle-left"></i>
       <span class="verification-text"> برای احراز هویت کلیک کنید </span>
