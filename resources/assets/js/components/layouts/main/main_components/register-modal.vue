@@ -115,6 +115,8 @@ import ChoseRoute from "./register-modal-steps/chose-route";
 import Location from "./register-modal-steps/location";
 import RegisterRequest from "./register-modal-steps/register-reuqest";
 import RegisterLoader from "./register-modal-steps/register-loader";
+import device from 'device-uuid/lib/device-uuid';
+
 
 export default {
   props: ["isChat", "product"],
