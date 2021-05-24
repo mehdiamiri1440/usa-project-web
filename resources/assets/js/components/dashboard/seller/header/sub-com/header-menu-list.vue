@@ -141,6 +141,10 @@ a.active {
     transform: translate3d(0, -1px, 0);
   }
 }
+.verified-user::before {
+  left: 8px;
+  top: 8px;
+}
 </style>
 <template>
   <div>
@@ -206,13 +210,7 @@ a.active {
           </li>
 
           <li class="list-item">
-            <router-link
-              :to="{ name: 'profileBasicSeller' }"
-              :class="{
-                'router-link-exact-active':
-                  $route.name == 'profileBasicSellerVeficiation',
-              }"
-            >
+            <router-link :to="{ name: 'profileBasicSeller' }">
               <i class="fa fa-user" aria-hidden="true"></i>
               <span>ویرایش پروفایل</span>
             </router-link>
@@ -235,6 +233,14 @@ a.active {
               <i class="fa fa-arrow-up" aria-hidden="true"></i>
               <span>ارتقا عضویت</span>
               <span class="custom-badge upgrade">ویژه</span>
+            </router-link>
+          </li>
+          <li class="list-item">
+            <router-link :to="{ name: 'profileBasicSellerVeficiation' }">
+              <span class="verified-user" title>
+                <i class="fa fa-certificate"></i>
+              </span>
+              <span>احراز هویت</span>
             </router-link>
           </li>
           <li class="list-item">
