@@ -133,6 +133,7 @@ export default {
       currentStep: 1,
       route: 0,
       stock: "",
+      productName: "",
       currentUser: {
         profile: "",
         user_info: "",
@@ -143,6 +144,7 @@ export default {
         name: "",
         family: "",
         stock: "",
+        productName: "",
       },
       step1: {
         phone: "",
@@ -174,70 +176,73 @@ export default {
     registerBuyAd() {
       if (this.currentUser.user_info) {
         if (this.stock) {
-          this.submitBuyAd(this.currentUser);
+          if (!this.errors.productName) {
+            this.submitBuyAd(this.currentUser);
+          }
         } else {
           this.openChatOrCall(this.currentUser);
         }
       }
     },
     registerUser(isRoute = false) {
-      if (!isRoute) {
-        this.currentStep = 7;
-      }
+      if (!this.currentUser.user_info) {
+        if (!isRoute) {
+          this.currentStep = 7;
+        }
+        this.step4.password = this.makeRandomString(8);
 
-      this.step4.password = this.makeRandomString(8);
+        var object = {
+          phone: this.step1.phone,
+          first_name: this.step4.name,
+          last_name: this.step4.family,
+          verification_code: this.step2.verification_code,
+          password: this.step4.password,
+          user_name: "",
+          sex: "آقا",
+          province: this.step5.provinceName,
+          city: this.step5.cityName,
+          activity_type: 1,
+          national_code: "",
+          category_id: this.product.main.category_id,
+        };
+        axios
+          .post("/api/v1/users", object)
+          .then((response) => {
+            if (response.status === 201) {
+              this.createCookie("registerNewUser", true, 60);
 
-      var object = {
-        phone: this.step1.phone,
-        first_name: this.step4.name,
-        last_name: this.step4.family,
-        verification_code: this.step2.verification_code,
-        password: this.step4.password,
-        user_name: "",
-        sex: "آقا",
-        province: this.step5.provinceName,
-        city: this.step5.cityName,
-        activity_type: 1,
-        national_code: "",
-        category_id: this.product.main.category_id,
-      };
-      axios
-        .post("/api/v1/users", object)
-        .then((response) => {
-          if (response.status === 201) {
-            this.createCookie("registerNewUser", true, 60);
+              let deviceInfo = new device.DeviceUUID();
+              let deviceId = null;
+              if (deviceInfo.get()) {
+                deviceId = deviceInfo.get();
+              }
 
-            let deviceInfo = new device.DeviceUUID();
-            let deviceId = null;
-            if(deviceInfo.get()){
-              deviceId = deviceInfo.get();
+              axios
+                .post("/dologin", {
+                  phone: object.phone,
+                  password: object.password,
+                  device_id: deviceId,
+                })
+                .then((response) => {
+                  if (response.data.status) {
+                    this.getCurrentUser(isRoute);
+                  }
+                })
+                .catch((err) => {
+                  console.log("err");
+                });
+              this.registerComponentStatistics(
+                "Register",
+                "successful-register",
+                "user-registered-successfully"
+              );
             }
-
-            axios
-              .post("/dologin", {
-                phone: object.phone,
-                password: object.password,
-                device_id: deviceId
-              })
-              .then((response) => {
-                if (response.data.status) {
-                  this.getCurrentUser(isRoute);
-                }
-              })
-              .catch((err) => {
-                console.log("err");
-              });
-            this.registerComponentStatistics(
-              "Register",
-              "successful-register",
-              "user-registered-successfully"
-            );
-          }
-        })
-        .catch((err) => {
-          console.log("User register API failed");
-          this.registerComponentExceptions("User register API failed", true);
-        });
+          })
+          .catch((err) => {
+            console.log("User register API failed");
+            this.registerComponentExceptions("User register API failed", true);
+          });
+      }
     },
     getCurrentUser(isRoute = false) {
       if (!isRoute) {
@@ -295,6 +300,7 @@ export default {
     getBuyAdFormFields() {
       let formData = new FormData();
 
+      formData.append("name", this.productName);
       formData.append("requirement_amount", this.stock);
       formData.append("category_id", this.product.main.sub_category_id);
       return formData;
@@ -412,6 +418,8 @@ export default {
       if (text != "") {
         if (!this.validateRegx(text, /^[\u0600-\u06FF\s]+$/)) {
           return `لطفا ${name} را به فارسی وارد کنید`;
+        } else {
+          return false;
         }
       }
     },
@@ -428,7 +436,6 @@ export default {
         }
       }
     },
-
     updateCounterDownTimer(seconds) {
       if (seconds !== 1) {
         this.step2.timeCounterDown = seconds;
@@ -573,6 +580,9 @@ export default {
     });
   },
   watch: {
+    product() {
+      this.productName = this.product.main.product_name;
+    },
     "step2.timeCounterDown"() {
       var self = this;
       var now = new Date().getTime();

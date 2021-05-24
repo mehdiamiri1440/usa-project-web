@@ -142,6 +142,16 @@ input.focus + i {
 .list-wrapper li:last-of-type button {
   border: none;
 }
+.search-not-found {
+  text-align: center;
+  font-size: 60px;
+  padding-top: 40px;
+  color: #bebebe;
+}
+.search-not-found p {
+  font-size: 24px;
+  margin-top: -20px;
+}
 
 @media screen and (max-width: 991px) {
   .list-wrapper > ul {
@@ -184,7 +194,7 @@ input.focus + i {
             </button>
           </div>
           <div class="list-wrapper">
-            <ul v-if="isProvince" ref="isProvinces">
+            <ul v-if="isProvince && provinces.length" ref="isProvinces">
               <li v-for="(item, index) in provinces" :key="index">
                 <button
                   @click.prevent="setProvince(item.id, item.province_name)"
@@ -194,12 +204,18 @@ input.focus + i {
                 </button>
               </li>
             </ul>
-            <ul v-else ref="isProvinces">
+            <ul v-else-if="!isProvince && cities.length" ref="isProvinces">
               <li v-for="(city, index) in cities" :key="index">
                 <button @click.prevent="setCity(city.city_name)">
                   <span v-text="city.city_name"></span>
                   <i class="fa fa-angle-left"></i>
                 </button>
+              </li>
+            </ul>
+            <ul v-else>
+              <li class="search-not-found">
+                <i class="fa fa-search"></i>
+                <p>موردی یافت نشد.</p>
               </li>
             </ul>
           </div>
@@ -248,18 +264,9 @@ export default {
       this.allCitiesList = this.$parent.step3.provinceList.find(
         (item) => item.id == provinceId
       ).cities;
-
-      if (
-        !this.allCitiesList ||
-        (!Array.isArray(this.allCitiesList) &&
-          !Object.entries(this.allCitiesList).length)
-      )
-        this.allCitiesList = {};
-
-      if (!Array.isArray(this.cities))
+      if (!Array.isArray(this.allCitiesList))
         this.allCitiesList = Object.values(this.allCitiesList);
       this.cities = this.allCitiesList;
-
       this.isProvince = false;
     },
     setCity(cityName) {
@@ -297,7 +304,9 @@ export default {
     },
     setScrollToTop() {
       this.$nextTick(() => {
-        this.$refs.isProvinces.scrollTop = 0;
+        if (this.$refs.isProvinces) {
+          this.$refs.isProvinces.scrollTop = 0;
+        }
       });
     },
   },

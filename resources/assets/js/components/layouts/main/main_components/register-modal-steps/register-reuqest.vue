@@ -246,7 +246,49 @@ input.error:focus + i {
             خیر
           </button>
         </div>
-        <div id="stock" class="collapse">
+        <form
+          v-on:submit.prevent="callRegisterBuyAd()"
+          id="stock"
+          class="collapse"
+        >
+          <label for="product-type" class="description">
+            نوع
+            <span
+              class="light-green-text"
+              v-text="this.$parent.product.main.sub_category_name"
+            >
+            </span>
+            مورد نیاز خود را وارد کنید.
+          </label>
+
+          <div class="input-wrapper user-information-wrapper">
+            <input
+              v-model="$parent.productName"
+              id="product-type"
+              type="text"
+              :class="{
+                active: $parent.productName,
+                error: $parent.errors.productName,
+              }"
+              placeholder="نوع محصول مورد نیاز خود را وارد کنید"
+            />
+
+            <i
+              v-if="$parent.productName && !$parent.errors.productName"
+              class="fa fa-check-circle"
+            ></i>
+            <i
+              v-else-if="$parent.errors.productName"
+              class="fa fa-times-circle"
+            ></i>
+            <i v-else class="fa fa-edit"></i>
+          </div>
+          <div class="input-text-wrapper">
+            <p class="error-message" v-if="$parent.errors.productName">
+              <span v-text="$parent.errors.productName"></span>
+            </p>
+          </div>
+
           <label for="user-stock">
             چه میزان
             <span
@@ -261,10 +303,7 @@ input.error:focus + i {
             نیاز دارید؟
             <span class="red-text">(کیلوگرم)</span>
           </label>
-          <form
-            @submit.prevent="callRegisterBuyAd()"
-            class="input-wrapper user-information-wrapper"
-          >
+          <div class="input-wrapper user-information-wrapper">
             <input
               v-model="stock"
               :class="{
@@ -282,7 +321,7 @@ input.error:focus + i {
             ></i>
             <i class="fa fa-times-circle" v-else-if="$parent.errors.stock"></i>
             <i class="fa fa-edit" v-else></i>
-          </form>
+          </div>
           <div class="input-text-wrapper">
             <p class="error-message" v-if="$parent.errors.stock">
               <span v-text="$parent.errors.stock"></span>
@@ -295,7 +334,7 @@ input.error:focus + i {
               ></span>
             </p>
           </div>
-        </div>
+        </form>
 
         <div
           class="step-action text-right"
@@ -305,7 +344,8 @@ input.error:focus + i {
             v-if="isStock"
             class="submit-button disabled"
             :class="{
-              active: !$parent.errors.stock,
+              active:
+                !this.$parent.errors.stock && !this.$parent.errors.productName,
             }"
             @click.prevent="callRegisterBuyAd()"
           >
@@ -343,7 +383,7 @@ export default {
       }
     },
     callRegisterBuyAd() {
-      if (!this.$parent.errors.stock) {
+      if (!this.$parent.errors.stock && !this.$parent.errors.productName) {
         this.$parent.registerBuyAd();
       }
     },
@@ -378,6 +418,14 @@ export default {
     }
   },
   watch: {
+    "$parent.productName"(productName) {
+      this.$parent.errors.productName = "";
+      let error = this.$parent.textValidator(productName, "نوع محصول");
+
+      if (error) {
+        this.$parent.errors.productName = error;
+      }
+    },
     stock(value) {
       this.$parent.errors.stock = "";
 
