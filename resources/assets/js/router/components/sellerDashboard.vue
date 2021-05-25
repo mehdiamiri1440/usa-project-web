@@ -311,6 +311,7 @@
       </div>
     </div>
     <!-- end regex pricing modal -->
+    <promotion-modal />
 
     <header-dash-seller
       :storage="storagePath"
@@ -359,12 +360,15 @@
 <script>
 import HeaderDashSeller from "../../components/dashboard/seller/header/header";
 import pricingContents from "../../components/dashboard/seller/pricing-seller-page/pricing-tables/pricing-package-contents";
+import PromotionModal from "../../components/layouts/main/promotion-modal";
+
 import { eventBus } from "../router.js";
 
 export default {
   components: {
     "header-dash-seller": HeaderDashSeller,
     "pricing-contents": pricingContents,
+    PromotionModal,
   },
   props: [
     "userId",
@@ -579,10 +583,42 @@ export default {
         event_label: labelName,
       });
     },
+    promotionModal() {
+      $("#promotion-modal").on("hidden.bs.modal", (e) => {
+        this.createCookie("closePromotionModal", true, 60 * 24);
+      });
+      $("#promotion-modal").on("show.bs.modal", (e) => {
+        this.handleBackKeys();
+      });
+      if (
+        !this.getCookie("closePromotionModal") &&
+        !this.getCookie("registerNewUser") &&
+        this.currentUser.user_info.active_pakage_type == 0
+      ) {
+        setTimeout(() => {
+          $("#promotion-modal").modal("show");
+        }, 5000);
+      }
+    },
+    routePromotionModal() {
+      $("#promotion-modal").modal("hide");
+      this.$router.push({ name: "dashboardPricingTableSeller" });
+    },
+    handleBackKeys: function () {
+      if (window.history.state) {
+        history.pushState(null, null, window.location);
+      }
+      $(window).on("popstate", function (e) {
+        $(".modal").modal("hide");
+      });
+    },
   },
   watch: {
     currentUser(user) {
-      if (user.user_info.id) this.$parent.currentUser = user;
+      if (user.user_info.id) {
+        this.$parent.currentUser = user;
+        this.promotionModal();
+      }
     },
     $route() {
       this.checkButtonIsHide();

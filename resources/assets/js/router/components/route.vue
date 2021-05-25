@@ -272,6 +272,8 @@
 
     <!-- end regex download App modal  -->
 
+    
+
     <chat-modal />
 
     <share-to-social-modal :share-modal-url="shareModalUrl" />
@@ -1307,13 +1309,13 @@ export default {
       let currentDate = new Date();
       currentDate = new Date(currentDate.getTime() - 60 * 60000);
       if (currentDate > userCreatedAt) {
-        this.activateDownloadApp();
+        // this.activateDownloadApp();
       }
     },
     walletBalance(balance) {
       let activePackageType = this.currentUser.user_info.active_pakage_type;
       if (balance == 0 && Number(activePackageType) == 0) {
-        this.initShowNumberGuide();
+        // this.initShowNumberGuide();
       }
     },
   },
