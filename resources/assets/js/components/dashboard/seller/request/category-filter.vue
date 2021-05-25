@@ -126,9 +126,11 @@ export default {
           self.dataList = self.categories;
         });
 
+      $("#fitler-modal").on("show.bs.modal", function (e) {
+        self.handleBackBtnClickOnDevices();
+      });
       $("#fitler-modal").on("hide.bs.modal", function (e) {
         self.resetData();
-        self.handleBackBtnClickOnDevices();
       });
     },
 

@@ -733,7 +733,11 @@ export default {
       ProductId: "",
       verificationAlert: false,
       disableVerificationAlertRoutes: [
+        "registerProductSeller",
         "profileBasicSellerVeficiation",
+        "dashboardPricingTableSeller",
+        "dashboardProductPricing",
+        "dashboardBuyAdPricing",
         "messagesSeller",
         "messagesRequestSeller",
       ],
@@ -1068,8 +1072,19 @@ export default {
       let routeIsDisable = this.disableVerificationAlertRoutes.some((item) => {
         return item == routeName;
       });
+      if (!this.cehckPageWidth() && routeName == "registerProductSeller") {
+        return routeIsDisable;
+      }
 
       return !routeIsDisable;
+    },
+    cehckPageWidth() {
+      let pageWidth = window.outerWidth;
+      if (pageWidth <= 991) {
+        return true;
+      } else {
+        return false;
+      }
     },
   },
   mounted() {
