@@ -155,13 +155,13 @@ class sms_controller extends Controller
 			return response()->json([
                 'status' => true,
                 'redirected' => false,
-				'msg' => 'verification code is correct.'
+				'msg' => '.کد وارد شده صحیح نیست'
 			]);
 		}
 		else{
 			return response()->json([
 				'status'=> FALSE,
-				'msg' => 'verification time expired or code is incoorect.'
+				'msg' => 'کد منقضی شده یا اشتباه است.'
 			]);
 		}
 	}

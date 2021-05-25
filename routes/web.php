@@ -1057,6 +1057,11 @@ Route::group(['prefix' => 'admin', 'middleware' => [admin_login::class]], functi
     Route::get('/add-category-meta-data-detail',function(){
         return view('admin_panel.addNewCategoryMetaData');
     });
+
+    Route::get('/same-device-users-list/{user_id}',[
+        'uses' => 'admin_panel\admin_user_controller@load_same_device_users',
+        'as' => 'admin_panel_same_device_users_list'
+    ])->where('user_id','[0-9]+');
     
 });
 
