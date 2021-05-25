@@ -613,6 +613,7 @@ export default {
       resetTextSearch: false,
       verificationAlert: false,
       disableVerificationAlertRoutes: [
+        "registerRequestBuyer",
         "profileBasicBuyerVeficiation",
         "messagesBuyer",
       ],
@@ -922,8 +923,19 @@ export default {
       let routeIsDisable = this.disableVerificationAlertRoutes.some((item) => {
         return item == routeName;
       });
+      if (!this.cehckPageWidth() && routeName == "registerRequestBuyer") {
+        return routeIsDisable;
+      }
 
       return !routeIsDisable;
+    },
+    cehckPageWidth() {
+      let pageWidth = window.outerWidth;
+      if (pageWidth <= 991) {
+        return true;
+      } else {
+        return false;
+      }
     },
   },
   mounted() {
