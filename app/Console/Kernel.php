@@ -131,8 +131,7 @@ class Kernel extends ConsoleKernel
 
         $user_automatic_blocking_job = new MessagingAnomalyDetection();
         $schedule->job($user_automatic_blocking_job)
-                                ->dailyAt('19:24');
-                        // ->cron('*/18 * * * *');
+                        ->cron('*/18 * * * *');
 
 
         // $schedule->command('backup:clean')->daily()->at('12:27');
