@@ -353,7 +353,7 @@ export default {
   data: function () {
     return {
       isImageLoad: false,
-      isChatMessagesLoaded: true,
+      chatMessagesLoader: true,
       isFirstMessageLoading: true,
       selectedIndex: -1,
       items: [
@@ -459,7 +459,7 @@ export default {
       if (index !== -10) self.isFirstMessageLoading = true;
       self.selectedIndex = index;
       self.selectedGroup = group;
-      this.isChatMessagesLoaded = true;
+      this.chatMessagesLoader = true;
 
       axios
         .post("/group/get_group_chats", {
@@ -513,7 +513,7 @@ export default {
           0,
           "swing",
           () => {
-            self.isChatMessagesLoaded = false;
+            self.chatMessagesLoader = false;
           }
         );
       }, time);
@@ -750,7 +750,7 @@ export default {
             100,
             "swing",
             () => {
-              self.isChatMessagesLoaded = false;
+              self.chatMessagesLoader = false;
             }
           );
         }, 0);
