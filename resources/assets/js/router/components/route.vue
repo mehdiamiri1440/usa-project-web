@@ -487,7 +487,7 @@ export default {
       // code here
       this.createCookie("downloadAppModal", true, 60 * 24);
       window.location.href =
-        "https://play.google.com/store/apps/details?id=com.buskool";
+        "https://play.google.com/store/search?q=%D8%A8%D8%A7%D8%B3%DA%A9%D9%88%D9%84";
     },
     isOsIOS: function () {
       var userAgent = window.navigator.userAgent.toLowerCase(),

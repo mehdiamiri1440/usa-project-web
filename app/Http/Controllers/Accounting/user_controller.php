@@ -47,6 +47,8 @@ class user_controller extends Controller
 
         if ($user) {
             if($user->is_blocked == true){
+                $this->set_last_login_info($user,$request);
+
                 return response()->json([
                     'status' => false,
                     'msg' => 'حساب کاربری شما مسدود شده است. برای پیگیری با پشتیبانی باسکول تماس بگیرید.'
