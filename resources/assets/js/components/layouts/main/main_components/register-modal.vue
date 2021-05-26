@@ -115,8 +115,7 @@ import ChoseRoute from "./register-modal-steps/chose-route";
 import Location from "./register-modal-steps/location";
 import RegisterRequest from "./register-modal-steps/register-reuqest";
 import RegisterLoader from "./register-modal-steps/register-loader";
-import device from 'device-uuid/lib/device-uuid';
-
+import device from "device-uuid/lib/device-uuid";
 
 export default {
   props: ["isChat", "product"],
@@ -182,7 +181,7 @@ export default {
             this.submitBuyAd(this.currentUser);
           }
         } else {
-          this.openChatOrCall(this.currentUser);
+          $("#register-modal").modal("hide");
         }
       }
     },
@@ -255,7 +254,6 @@ export default {
         this.currentUser = response.data;
         if (response.data.status && !isRoute) {
           $("#register-modal").modal("hide");
-          this.openChatOrCall(this.currentUser);
         }
       });
     },
@@ -266,7 +264,7 @@ export default {
         .post("/user/add_buyAd", formData)
         .then((response) => {
           if (response.status === 201) {
-            this.openChatOrCall(currentUser);
+            $("#register-modal").modal("hide");
             this.registerComponentStatistics(
               "buyAd-register",
               "buyAd-registered-successfully",
@@ -280,7 +278,6 @@ export default {
         });
     },
     openChatOrCall(currentUser) {
-      $("#register-modal").modal("hide");
       setTimeout(() => {
         this.$parent.currentUser = currentUser;
         // if (this.$parent.currentUser.user_info) {
@@ -582,9 +579,6 @@ export default {
     });
   },
   watch: {
-    product() {
-      this.productName = this.product.main.product_name;
-    },
     "step2.timeCounterDown"() {
       var self = this;
       var now = new Date().getTime();

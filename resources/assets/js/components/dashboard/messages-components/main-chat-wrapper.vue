@@ -457,7 +457,7 @@
 }
 
 .mobile-like-user.success .title-item {
-  margin: 25px auto;
+  margin: 17px auto 23px;
 }
 
 .mobile-like-user.success .likes-wrapper > div {
@@ -976,7 +976,7 @@
               <i class="fa fa-times"></i>
             </button>
             <p class="title-item">
-              از
+              <span class="gray-text"> از ارتباط با </span>
               <span>
                 {{
                   $parent.selectedContact.first_name +
@@ -1007,7 +1007,7 @@
               <div>
                 <i class="fa fa-check"></i>
               </div>
-              <p class="title-item">از نظر شما سپاسگذاریم.</p>
+              <p class="title-item">از ثبت نظر شما سپاسگزاریم.</p>
             </div>
           </div>
         </li>

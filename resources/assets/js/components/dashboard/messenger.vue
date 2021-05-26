@@ -905,6 +905,7 @@ export default {
       };
 
       let self = this;
+      self.reviewSubmitLoader = false;
 
       axios.post("/profile/add-comment", reviewObg).then(function (response) {
         self.reviewSubmitLoader = false;
