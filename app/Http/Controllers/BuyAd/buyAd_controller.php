@@ -1504,11 +1504,12 @@ class buyAd_controller extends Controller
             });
         }
         else{
-            $products = product::where('myuser_id',$user_id)
-                                    ->whereNull('deleted_at')
+            $products = DB::table('products')
+                                    ->where('myuser_id',$user_id)
+                                    // ->whereNull('deleted_at') 
                                     ->where(function($q){
                                         return $q = $q->where('confirmed',true)
-                                                        ->orWhereBetween('created_at',[Carbon::now()->subHours(12),Carbon::now()]);
+                                                            ->orWhereBetween('created_at',[Carbon::now()->subHours(12),Carbon::now()]);
                                     })
                                     ->orderBy('created_at','desc')
                                     ->get();
