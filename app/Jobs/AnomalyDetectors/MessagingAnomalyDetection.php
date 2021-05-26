@@ -85,8 +85,6 @@ class MessagingAnomalyDetection implements ShouldQueue
             ->pluck('phone')
             ->toArray();
 
-        // var_dump($already_blocked_phone_numbers);
-
         foreach($messages as $msg)
         {
             $phones = null;
@@ -96,9 +94,8 @@ class MessagingAnomalyDetection implements ShouldQueue
             {
                 foreach($phones[0] as $phone){
                     $phone = $this->convert_persian_numbers_to_latin_numbers($phone);
-                    echo "$phone\n";
+                    
                     if(in_array($phone,$already_blocked_phone_numbers)){
-                        echo $msg->sender_id . "\n";
                         $user_ids[] = $msg->sender_id;
                         continue 2;
                     }
