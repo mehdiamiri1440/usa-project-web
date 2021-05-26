@@ -38,7 +38,7 @@ input {
   border: 1px solid;
   color: #bdc4cc;
   padding: 8px 15px 8px 45px;
-  direction: ltr;
+  direction: rtl;
   transition: 150ms;
   text-align: right;
   background: #fbfbfb;
@@ -287,6 +287,7 @@ export default {
   },
   watch: {
     name(text) {
+      text = $.trim(text);
       this.$parent.errors.name = "";
       if (text) {
         let error = this.$parent.textValidator(text, "نام");
@@ -298,6 +299,7 @@ export default {
       }
     },
     family(text) {
+      text = $.trim(text);
       this.$parent.errors.family = "";
 
       if (text) {

@@ -39,7 +39,7 @@ input {
   border: 1px solid;
   color: #bdc4cc;
   padding: 8px 15px 8px 45px;
-  direction: ltr;
+  direction: rtl;
   transition: 150ms;
   text-align: right;
   background: #fbfbfb;
