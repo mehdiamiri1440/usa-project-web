@@ -20,7 +20,7 @@ class MessagingAnomalyDetection implements ShouldQueue
     protected $anomaly_detectors = [
         'detect_links_anomaly',
         'detect_length_anomaly',
-        // 'detect_copy_paste',
+        // 'detect_already_blocked_phone_numbers',
     ];
     protected $contacts_max = 10;
 
@@ -48,7 +48,7 @@ class MessagingAnomalyDetection implements ShouldQueue
         $final_block_candidate_user_ids = array_unique(array_merge($block_candidate_user_ids,$same_device_user_ids));
 
         DB::table('myusers')->whereIn('id',$block_candidate_user_ids)
-                                ->update('is_block',false);
+                                ->update(['is_blocked' => false]);
 
         // if(count($abnormal_users) > 0){
         //     //Deli
@@ -63,7 +63,7 @@ class MessagingAnomalyDetection implements ShouldQueue
     protected function get_abnormal_message_info()
     {
         $messages = DB::table('messages')
-                        ->whereBetween('created_at',[Carbon::now()->subMinutes(20),Carbon::now()])
+                        ->whereBetween('created_at',[Carbon::now()->subDays(30),Carbon::now()])
                         ->get();
 
         $abnormal_messages = [];
@@ -80,8 +80,31 @@ class MessagingAnomalyDetection implements ShouldQueue
     protected function detect_links_anomaly(&$messages)
     {
         $user_ids = [];
+        $already_blocked_phone_numbers = DB::table('myusers')
+            ->where('is_blocked',true)
+            ->pluck('phone')
+            ->toArray();
+
+        // var_dump($already_blocked_phone_numbers);
+
         foreach($messages as $msg)
         {
+            $phones = null;
+            preg_match_all('/((09[0-9]{9})|(\x{06F0}\x{06F9}[\x{06F0}-\x{06F9}]{9}))/u',$msg->text,$phones);
+
+            if(count($phones) > 0)
+            {
+                foreach($phones[0] as $phone){
+                    $phone = $this->convert_persian_numbers_to_latin_numbers($phone);
+                    echo "$phone\n";
+                    if(in_array($phone,$already_blocked_phone_numbers)){
+                        echo $msg->sender_id . "\n";
+                        $user_ids[] = $msg->sender_id;
+                        continue 2;
+                    }
+                }
+            }
+
             preg_match_all('/[-A-Z0-9+&@#\/%=~_|$?!:,.]*[A-Z0-9+&@#\/%=~_|$]/i', $msg->text, $result, PREG_PATTERN_ORDER);
             foreach($result[0] as $possible_link)
             {
@@ -96,7 +119,7 @@ class MessagingAnomalyDetection implements ShouldQueue
             }
         }
 
-        return $user_ids;
+        return array_unique($user_ids);
     }
 
     protected function detect_copy_paste(&$messages)
@@ -150,7 +173,7 @@ class MessagingAnomalyDetection implements ShouldQueue
     protected function get_block_candidate_user_ids()
     {
         $messages = DB::table('messages')
-                        ->whereBetween('created_at',[Carbon::now()->subMinutes(20),Carbon::now()])
+                        ->whereBetween('created_at',[Carbon::now()->subDays(30),Carbon::now()])
                         ->get();
 
         $abnormal_user_ids = [];
@@ -231,6 +254,18 @@ class MessagingAnomalyDetection implements ShouldQueue
 
         return $same_device_user_ids;
     }
+
+    function convert_persian_numbers_to_latin_numbers($string) {
+        $persian = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+        $arabic = ['٩', '٨', '٧', '٦', '٥', '٤', '٣', '٢', '١','٠'];
+    
+        $num = range(0, 9);
+        $convertedPersianNums = str_replace($persian, $num, $string);
+        $englishNumbersOnly = str_replace($arabic, $num, $convertedPersianNums);
+    
+        return $englishNumbersOnly;
+    }
+
 
 
 }

@@ -129,6 +129,12 @@ class Kernel extends ConsoleKernel
                         ->dailyAt('20:13');
 
 
+        $user_automatic_blocking_job = new MessagingAnomalyDetection();
+        $schedule->job($user_automatic_blocking_job)
+                                ->dailyAt('19:24');
+                        // ->cron('*/18 * * * *');
+
+
         // $schedule->command('backup:clean')->daily()->at('12:27');
         $schedule->command('backup:run --only-db')->cron('15 */6 * * *'); // every 6 hours 15 mins after hour
         $schedule->command('media:sync --days=1')->cron('30 */4 * * *'); // every 4 hours 30 mins after hour
