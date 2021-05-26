@@ -48,7 +48,7 @@ class MessagingAnomalyDetection implements ShouldQueue
         $final_block_candidate_user_ids = array_unique(array_merge($block_candidate_user_ids,$same_device_user_ids));
 
         DB::table('myusers')->whereIn('id',$block_candidate_user_ids)
-                                ->update(['is_blocked' => false]);
+                                ->update(['is_blocked' => true]);
 
         // if(count($abnormal_users) > 0){
         //     //Deli
