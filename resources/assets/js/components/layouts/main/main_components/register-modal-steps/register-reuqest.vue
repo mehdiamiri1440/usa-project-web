@@ -91,10 +91,14 @@ input {
   border: 1px solid;
   color: #bdc4cc;
   padding: 8px 15px 8px 45px;
-  direction: ltr;
+  direction: rtl;
   transition: 150ms;
   text-align: right;
   background: #fbfbfb;
+}
+
+input#user-stock {
+  direction: ltr;
 }
 
 .input-wrapper i {
@@ -263,7 +267,7 @@ input.error:focus + i {
 
           <div class="input-wrapper user-information-wrapper">
             <input
-              v-model="$parent.productName"
+              v-model="productName"
               id="product-type"
               type="text"
               :class="{
@@ -295,10 +299,14 @@ input.error:focus + i {
               class="light-green-text"
               v-text="this.$parent.product.main.sub_category_name"
             ></span>
-            <span v-text="' از نوع '"></span>
             <span
+              v-if="productName && !$parent.errors.productName"
+              v-text="' از نوع '"
+            ></span>
+            <span
+              v-if="productName && !$parent.errors.productName"
               class="light-green-text"
-              v-text="this.$parent.product.main.product_name"
+              v-text="productName"
             ></span>
             نیاز دارید؟
             <span class="red-text">(کیلوگرم)</span>
@@ -326,6 +334,7 @@ input.error:focus + i {
             <p class="error-message" v-if="$parent.errors.stock">
               <span v-text="$parent.errors.stock"></span>
             </p>
+
             <p class="small-description-text" v-else>
               <span
                 class="blue-text"
@@ -373,6 +382,7 @@ export default {
       isStock: false,
       stock: "",
       stock_text: "",
+      productName: "",
     };
   },
   methods: {
@@ -418,12 +428,17 @@ export default {
     }
   },
   watch: {
-    "$parent.productName"(productName) {
+    "$parent.product"() {
+      this.productName = this.$parent.product.main.product_name;
+    },
+    productName(productName) {
       this.$parent.errors.productName = "";
       let error = this.$parent.textValidator(productName, "نوع محصول");
 
       if (error) {
         this.$parent.errors.productName = error;
+      } else {
+        this.$parent.productName = this.productName;
       }
     },
     stock(value) {
@@ -438,6 +453,7 @@ export default {
           this.stock_text = this.$parent.convertUnits(this.$parent.stock);
         }
       } else {
+        this.$parent.stock = "";
         this.stock_text = "";
       }
     },

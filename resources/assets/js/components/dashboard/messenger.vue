@@ -388,7 +388,7 @@ export default {
     return {
       isImageLoad: false,
       isImageOpened: false,
-      isChatMessagesLoaded: true,
+      chatMessagesLoader: true,
       isFirstMessageLoading: true,
       selectedIndex: -1,
       items: [
@@ -406,6 +406,8 @@ export default {
       },
       chatMessages: "",
       isNoticeActive: true,
+      isLikeBoxActive: true,
+      isLatestMessage: false,
       isGuideActive: false,
       selectedContact: "",
       currentUserId: "",
@@ -425,6 +427,9 @@ export default {
       isChatUpdate: true,
       userDataLoader: true,
       isChanleActive: false,
+      userAllowedReview: false,
+      isReviewSubmited: false,
+      reviewSubmitLoader: false,
     };
   },
 
@@ -496,7 +501,7 @@ export default {
 
       self.isChatLoadeMore = false;
       self.handleBackBtnClickOnDevices();
-      self.isChatMessagesLoaded = true;
+      self.chatMessagesLoader = true;
       if (index !== -10) self.isFirstMessageLoading = true;
       self.selectedIndex = index;
 
@@ -511,6 +516,9 @@ export default {
         .then(function (response) {
           self.isNoticeActive = true;
           let data = response.data.messages;
+
+          // convert to time to new design
+
           // let itemDate = "";
           // data = data.map((item) => {
           //   let date = item.created_at.substr(0, 10);
@@ -521,13 +529,21 @@ export default {
           //   itemDate = date;
           //   return item;
           // });
+
           self.chatMessages = data;
           if (!self.chatMessages.length) {
             self.isNoticeActive = false;
           }
           self.userHasNotice();
           self.currentUserId = response.data.current_user_id;
-          self.scrollToEnd(0);
+
+          self.$nextTick(() => {
+            self.isLatestMessage = self.lastMessageMins(
+              10,
+              data[data.length - 1].created_at
+            );
+            self.scrollToEnd(0);
+          });
         })
         .catch(function (e) {
           //
@@ -605,6 +621,37 @@ export default {
       }
       this.isNoticeActive = false;
     },
+    setLikeBoxCookie() {
+      let contactUserId = this.selectedContact.contact_id;
+      let cookie = this.getCookie("closeLikeBox");
+      if (cookie) {
+        let getAllCookies = JSON.parse(cookie).userCloseLikeBox;
+        if (!getAllCookies.find(this.cookieHasUser)) {
+          getAllCookies.push(contactUserId);
+          this.createCookie(
+            "closeLikeBox",
+            JSON.stringify({ userCloseLikeBox: getAllCookies }),
+            60 * 24
+          );
+        }
+      } else {
+        this.createCookie(
+          "closeLikeBox",
+          JSON.stringify({ userCloseLikeBox: [contactUserId] }),
+          60 * 24
+        );
+      }
+      this.isLikeBoxActive = false;
+    },
+    userHasLikeBox() {
+      let cookie = this.getCookie("closeLikeBox");
+      if (cookie) {
+        let getAlCookies = JSON.parse(cookie).userCloseLikeBox;
+        if (getAlCookies.find(this.cookieHasUser)) {
+          this.isLikeBoxActive = false;
+        }
+      }
+    },
     userHasNotice() {
       let cookie = this.getCookie("messengerNoticeData");
       if (cookie) {
@@ -651,7 +698,9 @@ export default {
     },
     appendMessageToChatHistory: function (contact) {
       var self = this;
-      self.isChatMessagesLoaded = false;
+      self.isLatestMessage = true;
+
+      self.chatMessagesLoader = false;
 
       this.selectedContact = contact;
       this.currentContactUserId = contact.contact_id;
@@ -662,6 +711,14 @@ export default {
         })
         .then(function (response) {
           self.chatMessages = response.data.messages;
+          console.log(
+            self.chatMessages[self.chatMessages.length - 1].created_at
+          );
+          self.isLatestMessage = self.lastMessageMins(
+            10,
+            self.chatMessages[self.chatMessages.length - 1].created_at
+          );
+
           self.currentUserId = response.data.current_user_id;
           self.scrollToEnd(0);
         })
@@ -678,13 +735,14 @@ export default {
           0,
           "swing",
           () => {
-            self.isChatMessagesLoaded = false;
+            self.chatMessagesLoader = false;
           }
         );
       }, time);
     },
     sendMessage: function () {
       var self = this;
+      self.isLatestMessage = true;
 
       let tempMsg = self.msgToSend;
       self.msgToSend = "";
@@ -838,8 +896,38 @@ export default {
 
       eventBus.$emit("reviewUserData", selectedUserData);
     },
+    registerReview: function (reviewScore) {
+      this.reviewSubmitLoader = true;
+
+      let reviewObg = {
+        user_id: this.selectedContact.contact_id,
+        rating_score: reviewScore,
+      };
+
+      let self = this;
+      self.reviewSubmitLoader = false;
+
+      axios.post("/profile/add-comment", reviewObg).then(function (response) {
+        self.reviewSubmitLoader = false;
+        if (response.data.status == true) {
+          self.isReviewSubmited = true;
+
+          setTimeout(() => {
+            $(".mobile-like-user").fadeOut();
+            setTimeout(() => {
+              self.userAllowedReview = false;
+            }, 1500);
+          }, 3000);
+        }
+      });
+    },
     activeChanel() {
       // this.isChanleActive = true
+    },
+    lastMessageMins(mins, time) {
+      const currentTime = new Date();
+      const diffInMins = (currentTime - Date.parse(time)) / (1000 * 60);
+      return diffInMins < mins;
     },
   },
 
@@ -925,12 +1013,16 @@ export default {
       }
     },
     selectedContact: function (value) {
+      this.userAllowedReview = false;
       eventBus.$emit("activeContactId", value.contact_id);
     },
     isChanleActive(isChanel) {
       if (isChanel) {
         this.activeChanel();
       }
+    },
+    userAllowedReview() {
+      this.scrollToEnd(0);
     },
   },
 

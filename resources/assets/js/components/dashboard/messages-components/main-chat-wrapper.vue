@@ -422,6 +422,95 @@
   padding: 4px 2px;
 }
 
+.mobile-like-user {
+  position: absolute;
+  z-index: 1;
+  background: #e8f4f8;
+  text-align: center;
+  border-radius: 12px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.16);
+  padding: 25px 0;
+  margin-top: 20px;
+}
+
+.mobile-like-user.success {
+  background: #f2f6e7;
+  padding: 20px 0 0;
+}
+
+.mobile-like-user .close-rating {
+  position: absolute;
+  right: 0;
+  background: none;
+  border: none;
+  color: #777;
+  padding: 5px 15px;
+  top: 0px;
+}
+
+.mobile-like-user .title-item {
+  color: #313a43;
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0 auto 15px;
+  line-height: 1.618;
+}
+
+.mobile-like-user.success .title-item {
+  margin: 17px auto 23px;
+}
+
+.mobile-like-user.success .likes-wrapper > div {
+  font-size: 45px;
+  background: #fff;
+  width: 80px;
+  height: 80px;
+  margin: 0 auto;
+  border-radius: 55px;
+  padding-top: 19px;
+  color: #50a791;
+}
+
+.mobile-like-user .likes-wrapper {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.mobile-like-user.success .likes-wrapper {
+  display: block;
+}
+
+.mobile-like-user .likes-wrapper > button {
+  flex: 1;
+  max-width: 120px;
+  background: none;
+  border: none;
+  color: #21ad93;
+}
+
+.mobile-like-user .likes-wrapper > button.dislike {
+  color: #e41c38;
+}
+
+.mobile-like-user .likes-wrapper > button.dislike i {
+  background: #e41c38;
+  transform: rotate(-180deg);
+}
+
+.mobile-like-user .likes-wrapper > button i {
+  display: block;
+  font-size: 25px;
+  background: #21ad93;
+  color: #fff;
+  width: 48px;
+  height: 48px;
+  margin: 0 auto;
+  border-radius: 50px;
+  padding-top: 11px;
+}
+
 .messenger-notice {
   text-align: center;
   background: #fff8c1;
@@ -430,7 +519,7 @@
   margin-top: 20px;
   line-height: 1.618;
   color: #777;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.16);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.16);
 }
 
 .messenger-notice .notice-title {
@@ -496,6 +585,20 @@
   text-align: center;
   padding: 15px;
   line-height: 1.618;
+}
+
+.review-loader {
+  padding: 15px 0;
+}
+
+.spinner-border {
+  width: 4.1rem;
+  height: 4.1rem;
+  top: -5px;
+  position: relative;
+  left: 2px;
+  border-width: 3px;
+  color: #23ae95;
 }
 
 @media screen and (max-width: 1199px) {
@@ -741,7 +844,7 @@
       <div class="bg-wrapper"></div>
       <ul
         :class="[
-          $parent.isChatMessagesLoaded && $parent.isFirstMessageLoading
+          $parent.chatMessagesLoader && $parent.isFirstMessageLoading
             ? 'chat-not-loaded'
             : 'chat-loaded',
         ]"
@@ -839,7 +942,7 @@
           </div>
         </li>
         <li
-          v-if="$parent.isNoticeActive && !$parent.isChatMessagesLoaded"
+          v-if="$parent.isNoticeActive && !$parent.chatMessagesLoader"
           class="messenger-notice"
         >
           <p class="notice-title">
@@ -857,10 +960,61 @@
             </router-link>
           </div>
         </li>
+        <li
+          v-if="
+            checkMobileWidth() &&
+            $parent.userAllowedReview &&
+            $parent.isLikeBoxActive &&
+            !$parent.isLatestMessage &&
+            !$parent.chatMessagesLoader
+          "
+          class="mobile-like-user"
+          :class="{ success: $parent.isReviewSubmited }"
+        >
+          <div v-if="!$parent.isReviewSubmited">
+            <button class="close-rating" @click="$parent.setLikeBoxCookie()">
+              <i class="fa fa-times"></i>
+            </button>
+            <p class="title-item">
+              <span class="gray-text"> از ارتباط با </span>
+              <span>
+                {{
+                  $parent.selectedContact.first_name +
+                  " " +
+                  $parent.selectedContact.last_name
+                }}
+              </span>
+            </p>
+            <div class="likes-wrapper" v-if="!$parent.reviewSubmitLoader">
+              <button class="like" @click="$parent.registerReview(5)">
+                <i class="fa fa-thumbs-up"></i>
+                <span> راضی هستم </span>
+              </button>
+
+              <button class="dislike" @click="$parent.registerReview(1)">
+                <i class="fa fa-thumbs-up"></i>
+                <span> راضی نیستم </span>
+              </button>
+            </div>
+            <div class="review-loader" v-else>
+              <div class="spinner-border">
+                <span class="sr-only"></span>
+              </div>
+            </div>
+          </div>
+          <div v-else>
+            <div class="likes-wrapper">
+              <div>
+                <i class="fa fa-check"></i>
+              </div>
+              <p class="title-item">از ثبت نظر شما سپاسگزاریم.</p>
+            </div>
+          </div>
+        </li>
       </ul>
       <div
         class="loading-container"
-        v-if="$parent.isChatMessagesLoaded && $parent.isFirstMessageLoading"
+        v-if="$parent.chatMessagesLoader && $parent.isFirstMessageLoading"
       >
         <div class="image-wrapper">
           <div class="lds-ring">
@@ -872,6 +1026,7 @@
           <!-- <span v-text="alt" class="lds-ring-alt"></span> -->
         </div>
       </div>
+
       <div class="send-message-form">
         <form @v-on:submit.prevent="$parent.sendMessage()">
           <div class="message-input">
@@ -931,8 +1086,8 @@ export default {
       this.userGuide();
       this.hideCollapses();
       this.$parent.userHasNotice();
+      this.$parent.userHasLikeBox();
     },
-
     hideCollapses: function () {
       $(document).on("click", function (e) {
         /* bootstrap collapse js adds "in" class to your collapsible element*/
@@ -978,6 +1133,13 @@ export default {
         myMessage = false;
       }
       return myMessage;
+    },
+    checkMobileWidth() {
+      if ($(window).width() <= 1199) {
+        return true;
+      } else {
+        return false;
+      }
     },
     recordVoice() {
       console.log("voice");
