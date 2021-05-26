@@ -504,7 +504,6 @@ export default {
       self.chatMessagesLoader = true;
       if (index !== -10) self.isFirstMessageLoading = true;
       self.selectedIndex = index;
-
       this.setUserGuideCookie();
 
       this.currentContactUserId = contact.contact_id;
@@ -536,12 +535,12 @@ export default {
           }
           self.userHasNotice();
           self.currentUserId = response.data.current_user_id;
-
+          self.isLatestMessage = self.lastMessageMins(
+            10,
+            data[data.length - 1].created_at
+          );
+          self.chatMessagesLoader = false;
           self.$nextTick(() => {
-            self.isLatestMessage = self.lastMessageMins(
-              10,
-              data[data.length - 1].created_at
-            );
             self.scrollToEnd(0);
           });
         })
@@ -711,9 +710,6 @@ export default {
         })
         .then(function (response) {
           self.chatMessages = response.data.messages;
-          console.log(
-            self.chatMessages[self.chatMessages.length - 1].created_at
-          );
           self.isLatestMessage = self.lastMessageMins(
             10,
             self.chatMessages[self.chatMessages.length - 1].created_at
@@ -755,6 +751,7 @@ export default {
         };
 
         self.chatMessages.push(msgObject);
+
         self.scrollToEnd(0);
 
         axios
@@ -905,7 +902,6 @@ export default {
       };
 
       let self = this;
-      self.reviewSubmitLoader = false;
 
       axios.post("/profile/add-comment", reviewObg).then(function (response) {
         self.reviewSubmitLoader = false;
@@ -913,10 +909,12 @@ export default {
           self.isReviewSubmited = true;
 
           setTimeout(() => {
-            $(".mobile-like-user").fadeOut();
-            setTimeout(() => {
-              self.userAllowedReview = false;
-            }, 1500);
+            if (self.isReviewSubmited) {
+              $(".mobile-like-user").fadeOut();
+              setTimeout(() => {
+                self.userAllowedReview = false;
+              }, 1500);
+            }
           }, 3000);
         }
       });
@@ -974,10 +972,6 @@ export default {
         }
       });
     }
-
-    // eventBus.$on("userAllowedReview", ($event) => {
-    //   this.userAllowedReview = $event;
-    // });
   },
   watch: {
     contactNameSearchText: function (value) {
@@ -1013,7 +1007,9 @@ export default {
       }
     },
     selectedContact: function (value) {
+      this.isReviewSubmited = false;
       this.userAllowedReview = false;
+
       eventBus.$emit("activeContactId", value.contact_id);
     },
     isChanleActive(isChanel) {
@@ -1022,7 +1018,9 @@ export default {
       }
     },
     userAllowedReview() {
-      this.scrollToEnd(0);
+      this.$nextTick(() => {
+        this.scrollToEnd(0);
+      });
     },
   },
 
