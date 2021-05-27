@@ -172,6 +172,7 @@ input.error:focus + i {
                   error: $parent.errors.name,
                   active: this.name,
                 }"
+                @keydown.space="preventLeadingSpace"
                 id="user-name"
                 type="text"
                 placeholder="نام شما"
@@ -284,21 +285,37 @@ export default {
         this.name.length
       );
     },
+    preventLeadingSpace(e) {
+      // only prevent the keypress if the value is blank
+      if (!e.target.value) e.preventDefault();
+      // otherwise, if the leading character is a space, remove all leading white-space
+      else if (e.target.value[0] == " ")
+        e.target.value = e.target.value.replace(/^\s*/, "");
+    },
   },
   watch: {
     name(text) {
+      if (text == " ") {
+        this.name = "";
+      }
       text = $.trim(text);
+
       this.$parent.errors.name = "";
       if (text) {
         let error = this.$parent.textValidator(text, "نام");
         if (error) {
           this.$parent.errors.name = error;
         } else {
-          this.$parent.step4.name = text;
+          this.$parent.step4.name = this.name;
         }
+      } else {
+        this.$parent.step4.name = "";
       }
     },
     family(text) {
+      if (text == " ") {
+        this.family = "";
+      }
       text = $.trim(text);
       this.$parent.errors.family = "";
 
@@ -309,6 +326,8 @@ export default {
         } else {
           this.$parent.step4.family = text;
         }
+      } else {
+        this.$parent.step4.family = "";
       }
     },
   },
