@@ -280,8 +280,8 @@ export default {
       return (
         !this.$parent.errors.name &&
         !this.$parent.errors.family &&
-        this.family.length >= 2 &&
-        this.name.length >= 3
+        this.family.length &&
+        this.name.length
       );
     },
   },
