@@ -510,7 +510,7 @@ import PersonalInformatin from "./register_steps/personal_information";
 import Location from "./register_steps/location";
 import UserAccount from "./register_steps/user_account";
 import ActivityDomain from "./register_steps/activity_domain";
-import device from 'device-uuid/lib/device-uuid';
+import device from "device-uuid/lib/device-uuid";
 
 export default {
   components: {
@@ -729,7 +729,7 @@ export default {
 
       let deviceInfo = new device.DeviceUUID();
       let deviceId = null;
-      if(deviceInfo.get()){
+      if (deviceInfo.get()) {
         deviceId = deviceInfo.get();
       }
 
@@ -737,7 +737,7 @@ export default {
         .post("/verify_code", {
           verification_code: this.toLatinNumbers(this.step2.verification_code),
           phone: this.toLatinNumbers(this.step1.phone),
-          device_id: deviceId
+          device_id: deviceId,
         })
         .then(function (response) {
           self.verifyCodeBtnLoading = false;
@@ -750,12 +750,10 @@ export default {
               self.goToStep(3);
               self.getProvinceList();
             }
-          } else if (response.data.status === false) {
+          } else {
             self.goToStep(2);
             self.errors.verification_code = [];
-            self.errors.verification_code.push(
-              "کد وارد شده صحیح نیست یا منقضی شده است"
-            );
+            self.errors.verification_code.push(response.data.msg);
             self.registerComponentStatistics(
               "Register-Error",
               "verification-code-wrong",
@@ -817,11 +815,11 @@ export default {
           .then(function (response) {
             if (response.status === 201) {
               eventBus.$emit("modal", "userRegisterSuccess");
-              self.createCookie('registerNewUser',true,60);
+              self.createCookie("registerNewUser", true, 60);
 
               let deviceInfo = new device.DeviceUUID();
               let deviceId = null;
-              if(deviceInfo.get()){
+              if (deviceInfo.get()) {
                 deviceId = deviceInfo.get();
               }
 
@@ -829,7 +827,7 @@ export default {
                 .post("/dologin", {
                   phone: object.phone,
                   password: object.password,
-                  device_id:  deviceId
+                  device_id: deviceId,
                 })
                 .then((response) => {
                   if (response.data.status) {

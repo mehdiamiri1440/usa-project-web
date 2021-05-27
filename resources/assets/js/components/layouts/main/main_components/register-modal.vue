@@ -360,7 +360,7 @@ export default {
         .then((response) => {
           this.step3.verifyCodeLoader = false;
 
-          if (response.data.status === true && response.data.msg == "") {
+          if (response.data.status === true) {
             if (response.data.redirected) {
               //   window.location.href = "/login";
               this.getCurrentUser();
