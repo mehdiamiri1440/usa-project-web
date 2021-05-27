@@ -149,11 +149,17 @@ class sms_controller extends Controller
                     
                     return $user_controller_object->login($req);
                 }
+
+                return response()->json([
+                    'status' => true,
+                    'redirected' => false,
+                    'msg' => 'کد درست است',
+                ]);
                 
             }
 
 			return response()->json([
-                'status' => true,
+                'status' => false,
                 'redirected' => false,
 				'msg' => '.کد وارد شده صحیح نیست'
 			]);
