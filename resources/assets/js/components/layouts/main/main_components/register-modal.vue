@@ -360,7 +360,7 @@ export default {
         .then((response) => {
           this.step3.verifyCodeLoader = false;
 
-          if (response.data.status === true) {
+          if (response.data.status === true && response.data.msg == "") {
             if (response.data.redirected) {
               //   window.location.href = "/login";
               this.getCurrentUser();
@@ -368,9 +368,8 @@ export default {
               this.getProvinceList();
               this.goToStep(3);
             }
-          } else if (response.data.status === false) {
-            this.errors.verification_code =
-              "کد وارد شده صحیح نیست یا منقضی شده است";
+          } else {
+            this.errors.verification_code = response.data.msg;
 
             this.registerComponentStatistics(
               "Register-Error",
