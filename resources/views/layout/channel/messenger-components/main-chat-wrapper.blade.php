@@ -60,7 +60,7 @@
        
    
     </ul>
-    <a class="footer-button" href="https://play.google.com/store/apps/details?id=com.buskool" id="download-app" >
+    <a class="footer-button" href="https://play.google.com/store/search?q=%D8%A8%D8%A7%D8%B3%DA%A9%D9%88%D9%84&c=apps" id="download-app" >
         دانلود اپلیکیشن باسکول
         <i class="fa fa-download"></i>
     </a>
