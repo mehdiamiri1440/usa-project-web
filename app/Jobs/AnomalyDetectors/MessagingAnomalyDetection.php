@@ -47,7 +47,7 @@ class MessagingAnomalyDetection implements ShouldQueue
 
         $final_block_candidate_user_ids = array_unique(array_merge($block_candidate_user_ids,$same_device_user_ids));
 
-        DB::table('myusers')->whereIn('id',$block_candidate_user_ids)
+        DB::table('myusers')->whereIn('id',$final_block_candidate_user_ids)
                                 ->update(['is_blocked' => true]);
 
         // if(count($abnormal_users) > 0){
@@ -170,7 +170,7 @@ class MessagingAnomalyDetection implements ShouldQueue
     protected function get_block_candidate_user_ids()
     {
         $messages = DB::table('messages')
-                        ->whereBetween('created_at',[Carbon::now()->subDays(30),Carbon::now()])
+                        ->whereBetween('created_at',[Carbon::now()->subMinutes(20),Carbon::now()])
                         ->get();
 
         $abnormal_user_ids = [];
@@ -246,7 +246,8 @@ class MessagingAnomalyDetection implements ShouldQueue
                                     ->where('myusers.is_blocked',false)
                                     ->whereNotIn('myusers.id',$user_ids)
                                     ->whereIn('client_meta_datas.device_id',$device_ids)
-                                    ->pluck('myuser_id')
+                                    ->distinct('client_meta_datas.myuser_id')
+                                    ->pluck('client_meta_datas.myuser_id')
                                     ->toArray();
 
         return $same_device_user_ids;
