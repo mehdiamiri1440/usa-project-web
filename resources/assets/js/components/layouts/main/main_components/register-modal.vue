@@ -258,6 +258,8 @@ export default {
       });
     },
     submitBuyAd(currentUser) {
+      this.currentStep = 7;
+
       let formData = this.getBuyAdFormFields();
 
       axios
