@@ -137,24 +137,28 @@ class MessagingAnomalyDetection implements ShouldQueue
 
     protected function detect_length_anomaly(&$messages)
     {
+        $from = Carbon::now()->subMinutes(20);
+        $until = Carbon::now();
+
         $long_messages = DB::table('messages')
-                                ->whereBetween('created_at',[Carbon::now()->subMinutes(20),Carbon::now()])
-                                ->where(DB::raw("CHAR_LENGTH(text) >= 250"))
+                                ->whereRaw("CHAR_LENGTH(text) >= 250 and created_at between '$from' and '$until'")
                                 ->get();
+
+        var_dump($long_messages);
 
 
         $user_ids = [];
         foreach($long_messages as $msg)
         {
             $phone = null;
-            preg_match_all('/((09[0-9]{9})|(\x{06F0}\x{06F9}[\x{06F0}-\x{06F9}]{9}))/u',$msg,$phone);
+            preg_match_all('/((09[0-9]{9})|(\x{06F0}\x{06F9}[\x{06F0}-\x{06F9}]{9}))/u',$msg->text,$phone);
             if(count($phone) > 0){
                 $repeat_count = 0;
 
                 foreach($long_messages as $tmp_msg){
-                    if(strcmp($msg->text,$temp_msg->text) == 0 && $msg->id != $tmp_msg->id && $msg->sender_id == $tmp_msg->sender_id){
+                    if(strcmp($msg->text,$tmp_msg->text) == 0 && $msg->id != $tmp_msg->id && $msg->sender_id == $tmp_msg->sender_id){
                         $repeat_count++;
-
+                        
                         if($repeat_count >= 3){
                             $user_ids[] = $msg->sender_id;
                             break;
