@@ -272,17 +272,17 @@ p.response-rate {
       >
     </div>
     <div class="article-action-buttons">
-      <button
+      <!-- <button
         v-if="!is_my_profile_status"
         @click.prevent="$parent.openChat($parent.product)"
         class="green-button"
       >
         <i class="fa fa-envelope"></i>
         استعلام قیمت
-      </button>
+      </button> -->
 
       <button
-        v-else="!is_my_profile_status"
+        v-if="is_my_profile_status"
         class="blue-button"
         data-toggle="modal"
         :data-target="'#article-modal' + $parent.product.main.id"
