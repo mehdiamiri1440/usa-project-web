@@ -159,7 +159,12 @@ class user_controller extends Controller
         DB::table('client_meta_datas')->insert($meta_data);
 
         if(! is_null($device_id)){
-            $this->block_user_if_already_has_been_blocked_on_this_device($device_id,$user_id);
+            if($user->is_blocked == false){
+                $this->block_user_if_already_has_been_blocked_on_this_device($device_id,$user_id);
+            }
+            else{
+                $this->block_previous_accounts_on_this_device($device_id);
+            }
         }
     }
 
@@ -181,6 +186,17 @@ class user_controller extends Controller
             \Session::save();
         }
                                                         
+    }
+
+    protected function block_previous_accounts_on_this_device($device_id)
+    {
+        $blocking_user_ids = DB::table('client_meta_datas')
+                                ->where('device_id',$device_id)
+                                ->distinct('myuser_id')
+                                ->pluck('myuser_id');
+
+        DB::table('myusers')->whereIn('id',$blocking_user_ids)
+                                ->update(['is_blocked' => true]);
     }
 
     public function does_user_name_already_exists(Request $request)
