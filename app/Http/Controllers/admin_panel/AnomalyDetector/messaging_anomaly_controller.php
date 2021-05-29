@@ -167,6 +167,7 @@ class messaging_anomaly_controller extends Controller
 
         $device_ids = DB::table('client_meta_datas')
                                 ->where('myuser_id',$user_id)
+                                ->whereNotNull('device_id')
                                 ->distinct('device_id')
                                 ->pluck('device_id');
 
