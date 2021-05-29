@@ -389,7 +389,7 @@ export default {
       isImageLoad: false,
       isImageOpened: false,
       chatMessagesLoader: true,
-      isFirstMessageLoading: true,
+      isFirstMessageLoading: false,
       selectedIndex: -1,
       items: [
         {
@@ -1007,8 +1007,13 @@ export default {
       }
     },
     selectedContact: function (value) {
+      // reset like message datas
       this.isReviewSubmited = false;
       this.userAllowedReview = false;
+      this.isLikeBoxActive = true;
+
+      // check like message active box
+      this.userHasLikeBox();
 
       eventBus.$emit("activeContactId", value.contact_id);
     },

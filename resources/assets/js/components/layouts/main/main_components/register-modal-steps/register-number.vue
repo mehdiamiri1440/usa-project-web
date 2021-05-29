@@ -225,7 +225,8 @@ export default {
 
         let number = this.$parent.toLatinNumbers(value);
         if (!this.$parent.validateRegx(number, /^\d*$/)) {
-          this.$parent.errors.phone = "لطفا  فقط عدد وارد کنید";
+          this.$parent.errors.phone =
+            "لطفا شماره موبایل را به صورت عددی وارد کنید";
         } else if (number.length >= 2) {
           if (number.substring(0, 2) != "09") {
             this.$parent.errors.phone = "فرمت شماره موبایل درست نیست";

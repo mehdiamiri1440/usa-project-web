@@ -366,13 +366,16 @@ export default {
 
       this.currentCode = this.$parent.toLatinNumbers(code);
     },
-    reSendCode() {
+    resetNumbers() {
       this.currentCode = "";
       this.code.number1 = "";
       this.code.number2 = "";
       this.code.number3 = "";
       this.code.number4 = "";
       this.$parent.errors.verification_code = "";
+    },
+    reSendCode() {
+      this.resetNumbers();
       this.$parent.sendVerificationCode();
     },
   },
@@ -416,6 +419,9 @@ export default {
       if (value) {
         this.$parent.step2.verification_code = value;
       }
+    },
+    "$parent.step2.verification_code"(code) {
+      if (!code) [this.resetNumbers()];
     },
   },
 };
