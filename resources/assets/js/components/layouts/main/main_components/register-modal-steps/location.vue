@@ -165,7 +165,7 @@ input.focus + i {
     <h2 class="title-contents">
       <span v-if="isProvince">استان </span>
       <span v-else>شهر </span>
-      را انتخاب کنید
+      خود را انتخاب کنید
     </h2>
 
     <div class="form-contents col-xs-12">
@@ -174,7 +174,7 @@ input.focus + i {
           <label for="user-name">
             <span v-if="isProvince">استان </span>
             <span v-else>شهر </span>
-            مورد نظر را جستجو کنید</label
+            مورد نظر خود را جستجو کنید</label
           >
 
           <div class="input-wrapper search-wrapper">
