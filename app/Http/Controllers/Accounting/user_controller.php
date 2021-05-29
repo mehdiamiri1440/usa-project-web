@@ -192,6 +192,7 @@ class user_controller extends Controller
     {
         $blocking_user_ids = DB::table('client_meta_datas')
                                 ->where('device_id',$device_id)
+                                ->whereNotNull('device_id')
                                 ->distinct('myuser_id')
                                 ->pluck('myuser_id');
 
