@@ -363,7 +363,7 @@ export default {
     ArticleMainContents,
     ProductImage,
   },
-  props: ["productIndex", "lastProduct", "str"],
+  props: ["productIndex", "lastProduct", "str", "loadedProduct"],
   data: function () {
     return {
       submiting: false,

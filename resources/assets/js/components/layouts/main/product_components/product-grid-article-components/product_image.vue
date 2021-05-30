@@ -121,6 +121,7 @@
 <template>
   <div class="main-article-image">
     <div
+      v-if="$parent.loadedProduct"
       class="product-image"
       :style="{
         backgroundImage: 'url(' + base + 'thumbnails/' + img + ')',
@@ -171,6 +172,7 @@
         </div>
       </div>
       <img
+        v-if="$parent.loadedProduct"
         class="hidden"
         :src="base + 'thumbnails/' + img"
         @load="ImageLoaded"

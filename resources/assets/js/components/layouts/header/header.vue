@@ -220,9 +220,14 @@ nav > li > a.green-button.router-link-exact-active:hover {
 .buskool-logo .navbar-brand {
   overflow: hidden;
   width: 140px;
-  height: initial;
+  height: 28px;
   margin: 6px 15px 6px 0;
   padding: 0;
+}
+
+.buskool-logo .navbar-brand img {
+  width: 140px;
+  height: 28px;
 }
 
 #buskool-nav {
@@ -512,7 +517,12 @@ a.profile-info-wrapper:hover {
 
   .buskool-logo .navbar-brand {
     width: 100px;
+    height: 20px;
     margin-top: 4px;
+  }
+  .buskool-logo .navbar-brand img {
+    width: 100px;
+    height: 20px;
   }
 
   .buskool-logo {

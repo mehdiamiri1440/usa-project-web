@@ -71,14 +71,17 @@
 
 .main-image {
   position: absolute;
-
   top: 50%;
-
   left: 50%;
-
   transition: 300ms;
-
   transform: translate(-50%, -50%);
+  z-index: 1;
+  opacity: 0;
+  transition: 150ms;
+}
+
+.main-image-load {
+  opacity: 1;
 }
 
 .carousel-title {
@@ -118,10 +121,10 @@
   display: inline-block;
 }
 .spinner-border {
-  width: 6rem;
-  height: 6rem;
-  border-width: 0.3em;
-  color: #00c569;
+  width: 5.5rem;
+  height: 5.5rem;
+  border-width: 0.35em;
+  color: #d0d0d0;
   position: absolute;
   top: calc(50% - 30px);
   left: calc(50% - 30px);
@@ -134,17 +137,17 @@
 
 <template>
   <article class="carousel-item box-content">
-    <router-link :to="link" class="carousel-img">
-      <div v-show="isImageLoad">
-        <transition>
-          <img @load="ImageLoaded" :src="img" class="main-image" />
-        </transition>
-      </div>
+    <router-link :to="link" class="carousel-img text-center">
+      <img
+        loading="lazy"
+        :src="img"
+        @load="ImageLoaded"
+        class="main-image"
+        :class="{ 'main-image-load': isImageLoad }"
+      />
 
-      <div v-show="!isImageLoad" class="text-center">
-        <div class="spinner-border">
-          <span class="sr-only">Loading...</span>
-        </div>
+      <div class="spinner-border">
+        <span class="sr-only">Loading...</span>
       </div>
     </router-link>
 
@@ -225,9 +228,6 @@ export default {
     });
   },
   methods: {
-    created: function () {
-      this.loadImage();
-    },
     loadImage: function () {
       this.isImageLoad = false;
     },
