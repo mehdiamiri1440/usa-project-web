@@ -125,7 +125,7 @@ class user_controller extends Controller
                 'last_login_date'   => $now
             ]);
         
-        if($request->has('device_id') && $request->client == 'mobile'){
+        if($request->has('device_id') && $request->has('client') && $request->client == 'mobile'){
             $device_id = $request->device_id;
         }
         else{
