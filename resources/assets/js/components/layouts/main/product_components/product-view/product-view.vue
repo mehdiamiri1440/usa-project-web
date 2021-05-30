@@ -32,6 +32,7 @@ span {
   padding-bottom: 10px;
   border-radius: 12px;
   border: 1px solid #e0e0e0;
+  min-height: 212px;
 }
 
 .title-box {
@@ -64,7 +65,7 @@ span {
   margin: 30px 0 15px;
 }
 .box-title-placeholder {
-  margin: 30px 0 15px;
+  margin: 30px 0 0;
 }
 
 .box-title::after {
@@ -171,6 +172,9 @@ button.send-message-button {
   padding: 0 15px;
 }
 
+.default-carousel-item .box-content {
+  margin-bottom: 15px;
+}
 @media screen and (max-width: 1199px) {
   .box-title {
     margin: 0 auto 15px;
@@ -207,7 +211,11 @@ button.send-message-button {
 
 <template>
   <div class="container">
-    <RegisterModal v-if="!currentUser.user_info" :is-chat="isChat" :product="product" />
+    <RegisterModal
+      v-if="!currentUser.user_info"
+      :is-chat="isChat"
+      :product="product"
+    />
 
     <main id="main" class="row">
       <div class="col-xs-12 col-lg-9 pull-right">
@@ -251,41 +259,38 @@ button.send-message-button {
       </section>
 
       <section
-        v-else-if="relatedProducts.length == 0 && isLoading == true"
         class="section-wrapper container-fluid"
+        v-else-if="relatedProducts.length == 0 && isLoading == true"
       >
         <div class="container">
           <div class="row">
             <div class="col-xs-12">
               <div class="box-title-placeholder col-xs-12">
-                <span class="placeholder-content content-full-width"></span>
-                <br />
+                <h3 class="box-title">محصولات مرتبط</h3>
               </div>
 
               <div class="col-xs-12 products-contents">
-                <div class="row">
-                  <div
-                    v-for="(item, index) in 4"
-                    :key="index"
-                    :class="{ 'hidden-xs': index >= 2 }"
-                    class="col-lg-3 col-md-4 col-xs-6 default-carousel-item"
-                  >
-                    <article class="carousel-item box-content col-xs-12">
-                      <span
-                        class="default-index-product-image placeholder-content col-xs-12"
-                      ></span>
+                <div
+                  v-for="(item, index) in 4"
+                  :key="index"
+                  :class="{ 'hidden-xs': index >= 2 }"
+                  class="col-lg-3 col-md-4 col-xs-6 default-carousel-item"
+                >
+                  <article class="carousel-item box-content col-xs-12">
+                    <span
+                      class="default-index-product-image placeholder-content col-xs-12"
+                    ></span>
 
-                      <span
-                        class="content-default-width placeholder-content margin-10 col-xs-10 col-xs-offset-1"
-                      ></span>
+                    <span
+                      class="content-default-width placeholder-content margin-10 col-xs-10 col-xs-offset-1"
+                    ></span>
 
-                      <span
-                        class="content-default-width placeholder-content col-xs-8 col-xs-offset-2"
-                      ></span>
+                    <span
+                      class="content-default-width placeholder-content col-xs-8 col-xs-offset-2"
+                    ></span>
 
-                      <span class="margin-10"></span>
-                    </article>
-                  </div>
+                    <span class="margin-10"></span>
+                  </article>
                 </div>
               </div>
             </div>

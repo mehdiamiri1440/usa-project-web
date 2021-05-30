@@ -188,6 +188,11 @@ nav .green-button {
   border-radius: 8px;
 }
 
+nav .green-button.static-layout {
+  padding: 10px 0 9px;
+  width: 167px;
+}
+
 nav .green-button-alt {
   font-size: 17px;
   padding: 10px 20px 9px;
@@ -930,7 +935,7 @@ a.profile-info-wrapper:hover {
           <ul v-else class="nav navbar-nav">
             <li class="hidden-xs">
               <router-link class="green-button" :to="{ name: 'register' }">
-                <i class="fa fa-user"></i>
+                <i class="fa fa-user static-layout"></i>
                 ثبت نام رایگان
               </router-link>
             </li>
@@ -945,7 +950,7 @@ a.profile-info-wrapper:hover {
 
             <li class="hidden-xs">
               <router-link
-                class="green-button green-button-alt"
+                class="green-button green-button-alt static-layout"
                 :to="{ name: 'login' }"
               >
                 <i class="fa fa-sign-in-alt"></i>

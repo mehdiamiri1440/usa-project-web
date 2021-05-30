@@ -16,7 +16,7 @@
   <div class="image-wrapper">
     <a v-show="isImageLoad" :href="base + img">
       <transition>
-        <img :src="base + img" loading="lazy" @load="ImageLoaded" :alt="alt" />
+        <img :src="base + img" @load="ImageLoaded" :alt="alt" />
       </transition>
     </a>
 
