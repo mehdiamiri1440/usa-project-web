@@ -64,9 +64,6 @@ span {
   direction: rtl;
   margin: 30px 0 15px;
 }
-.box-title-placeholder {
-  margin: 30px 0 0;
-}
 
 .box-title::after {
   content: " ";
@@ -76,10 +73,6 @@ span {
   display: block;
   border-radius: 5px;
   margin-top: 10px;
-}
-
-.section-wrapper {
-  margin-top: 30px;
 }
 
 .section-wrapper .title-box {
@@ -235,63 +228,57 @@ button.send-message-button {
       <section
         v-if="relatedProducts.length > 0 && isLoading == false"
         id="product-section"
-        class="section-wrapper container-fluid latest-product"
+        class="section-wrapper col-xs-12 latest-product"
       >
-        <div class="col-xs-12">
-          <div class="row">
-            <h3 class="box-title">محصولات مرتبط</h3>
+        <div class="row">
+          <h3 class="box-title">محصولات مرتبط</h3>
 
-            <div class="products-contents">
-              <div class="owl-carousel">
-                <ProductCarousel
-                  v-for="(product, index) in relatedProducts"
-                  :key="index"
-                  :img="str + '/thumbnails/' + product.photo"
-                  :title="product.product_name"
-                  :stock="getConvertedNumbers(product.stock)"
-                  :link="getRelatedProductUrl(product)"
-                  column="4"
-                />
-              </div>
+          <div class="products-contents">
+            <div class="owl-carousel">
+              <ProductCarousel
+                v-for="(product, index) in relatedProducts"
+                :key="index"
+                :img="str + '/thumbnails/' + product.photo"
+                :title="product.product_name"
+                :stock="getConvertedNumbers(product.stock)"
+                :link="getRelatedProductUrl(product)"
+                column="4"
+              />
             </div>
           </div>
         </div>
       </section>
 
       <section
-        class="section-wrapper container-fluid"
+        class="section-wrapper col-xs-12"
         v-else-if="relatedProducts.length == 0 && isLoading == true"
       >
-        <div class="container">
-          <div class="row">
-            <div class="col-xs-12">
-              <div class="box-title-placeholder col-xs-12">
-                <h3 class="box-title">محصولات مرتبط</h3>
-              </div>
+        <div class="row">
+          <h3 class="box-title">محصولات مرتبط</h3>
 
-              <div class="col-xs-12 products-contents">
-                <div
-                  v-for="(item, index) in 4"
-                  :key="index"
-                  :class="{ 'hidden-xs': index >= 2 }"
-                  class="col-lg-3 col-md-4 col-xs-6 default-carousel-item"
-                >
-                  <article class="carousel-item box-content col-xs-12">
-                    <span
-                      class="default-index-product-image placeholder-content col-xs-12"
-                    ></span>
+          <div class="col-xs-12 products-contents">
+            <div class="row">
+              <div
+                v-for="(item, index) in 4"
+                :key="index"
+                :class="{ 'hidden-xs': index >= 2 }"
+                class="col-lg-3 col-md-4 col-xs-6 default-carousel-item"
+              >
+                <article class="carousel-item box-content col-xs-12">
+                  <span
+                    class="default-index-product-image placeholder-content col-xs-12"
+                  ></span>
 
-                    <span
-                      class="content-default-width placeholder-content margin-10 col-xs-10 col-xs-offset-1"
-                    ></span>
+                  <span
+                    class="content-default-width placeholder-content margin-10 col-xs-10 col-xs-offset-1"
+                  ></span>
 
-                    <span
-                      class="content-default-width placeholder-content col-xs-8 col-xs-offset-2"
-                    ></span>
+                  <span
+                    class="content-default-width placeholder-content col-xs-8 col-xs-offset-2"
+                  ></span>
 
-                    <span class="margin-10"></span>
-                  </article>
-                </div>
+                  <span class="margin-10"></span>
+                </article>
               </div>
             </div>
           </div>
@@ -867,6 +854,7 @@ export default {
   },
   mounted() {
     this.init();
+
     var self = this;
     document.onreadystatechange = () => {
       if (document.readyState === "complete") {

@@ -146,7 +146,7 @@
         :class="{ 'main-image-load': isImageLoad }"
       />
 
-      <div class="spinner-border">
+      <div v-if="!isImageLoad" class="spinner-border">
         <span class="sr-only">Loading...</span>
       </div>
     </router-link>
