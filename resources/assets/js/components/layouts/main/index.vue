@@ -1333,7 +1333,14 @@ li > ul > li.active > ul > li {
         Intro SECTION
     ==============================-->
 
-    <section id="intro" class="container-fluid " :class="{'intro-web':!checkIsMobile(),'intro-mobile':checkIsMobile()}">
+    <section
+      id="intro"
+      class="container-fluid"
+      :class="{
+        'intro-web': !checkIsMobile(),
+        'intro-mobile': checkIsMobile(),
+      }"
+    >
       <!-- <div class="particle-network-animation"></div> -->
       <div class="container">
         <div class="row">
@@ -2748,16 +2755,15 @@ export default {
     },
     productInViewPort() {
       $(window).scroll((scroll) => {
-        if (
-          100 + $(window).scrollTop() + $(window).height() >=
-          this.isElementOutViewport($("#product-section"))
-        ) {
-          this.showLatestProducts = true;
+        if ($("body").has("#product-section").length) {
+          if (
+            100 + $(window).scrollTop() + $(window).height() >=
+            this.isElementOutViewport($("#product-section"))
+          ) {
+            this.showLatestProducts = true;
+          }
         }
       });
-      // if(!isElementOutViewport($("#product-section"))){
-
-      // }
     },
     isElementOutViewport(el) {
       return el.offset().top;
