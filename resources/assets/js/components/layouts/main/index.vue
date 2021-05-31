@@ -1333,7 +1333,7 @@ li > ul > li.active > ul > li {
         Intro SECTION
     ==============================-->
 
-    <section id="intro" class="container-fluid">
+    <section id="intro" class="container-fluid " :class="{'intro-web':!checkIsMobile(),'intro-mobile':checkIsMobile()}">
       <!-- <div class="particle-network-animation"></div> -->
       <div class="container">
         <div class="row">
@@ -1524,7 +1524,7 @@ li > ul > li.active > ul > li {
         </div>
       </div>
       <div
-        v-if="checkPageWidth()"
+        v-if="checkIsMobile()"
         class="mobile-banner-wrapper hidden-md hidden-lg"
       >
         <div class="row">
@@ -2738,7 +2738,7 @@ export default {
         stagePadding: 3,
       });
     },
-    checkPageWidth() {
+    checkIsMobile() {
       let pageWidth = window.outerWidth;
       if (pageWidth <= 991) {
         return true;
