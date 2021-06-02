@@ -571,6 +571,17 @@ class product_controller extends Controller
         $product_related_data['main']->category_id = $product_parent_category_data['parent_id'];
         $product_related_data['main']->category_name = (category::find($product_parent_category_data['parent_id']))['category_name'];
 
+        if(session()->has('user_id')){
+            DB::table('user_products')->insert([
+                'created_at' => $now,
+                'updated_at' => $now,
+                'product_id' => $product->id,
+                'myuser_id' => session('user_id'),
+            ]);
+        }
+
+        DB::table('products')->where('id',$product->id)->increment('product_view_count');
+
         return response()->json([
             'status' => true,
             'product' => $product_related_data,
