@@ -683,9 +683,15 @@ li > ul > li.active > ul > li {
 }
 
 .box-image img {
-  width: initial;
+  width: 100px;
 
-  height: 100%;
+  height: 80px;
+}
+
+.box-image.logo img {
+  width: 200px;
+
+  height: 80px;
 }
 
 .service-box {
@@ -1327,7 +1333,14 @@ li > ul > li.active > ul > li {
         Intro SECTION
     ==============================-->
 
-    <section id="intro" class="container-fluid">
+    <section
+      id="intro"
+      class="container-fluid"
+      :class="{
+        'intro-web': !checkIsMobile(),
+        'intro-mobile': checkIsMobile(),
+      }"
+    >
       <!-- <div class="particle-network-animation"></div> -->
       <div class="container">
         <div class="row">
@@ -1517,7 +1530,10 @@ li > ul > li.active > ul > li {
           </div>
         </div>
       </div>
-      <div class="mobile-banner-wrapper hidden-md hidden-lg">
+      <div
+        v-if="checkIsMobile()"
+        class="mobile-banner-wrapper hidden-md hidden-lg"
+      >
         <div class="row">
           <div class="mobile-banner">
             <div class="banner-item-wrapper">
@@ -1535,7 +1551,8 @@ li > ul > li.active > ul > li {
                     <div
                       class="item-image"
                       :style="{
-                        backgroundImage: 'url(' + getImageUrl(index + 1) + ')',
+                        backgroundImage:
+                          'url(' + getMobileImageUrl(index + 1) + ')',
                       }"
                     ></div>
                     <p class="item-text" v-text="item.category_name"></p>
@@ -1601,6 +1618,7 @@ li > ul > li.active > ul > li {
                       :key="'product-item-' + product.id"
                       :last-product="product"
                       :str="str"
+                      :loadedProduct="showLatestProducts"
                     />
                   </div>
                 </div>
@@ -1618,6 +1636,7 @@ li > ul > li.active > ul > li {
                     :key="'product-item-' + product.id"
                     :last-product="product"
                     :str="str"
+                    :loadedProduct="showLatestProducts"
                   />
                 </div>
               </div>
@@ -1827,8 +1846,11 @@ li > ul > li.active > ul > li {
             <div class="col-xs-12 col-md-4 hidden-md hidden-lg">
               <article class="service-box main-incobac-logo">
                 <router-link :to="{ name: 'help' }">
-                  <div class="box-image">
-                    <img src="../../../../img/logo/web-logo.svg" />
+                  <div class="box-image logo">
+                    <img
+                      loading="lazy"
+                      src="../../../../img/logo/web-logo.svg"
+                    />
                   </div>
                   <h4>باسکول چیست؟</h4>
                   <p>
@@ -1845,7 +1867,7 @@ li > ul > li.active > ul > li {
               <article class="service-box">
                 <router-link :to="{ name: 'help' }">
                   <div class="box-image">
-                    <img src="../../../../img/seller.jpg" />
+                    <img loading="lazy" src="../../../../img/seller.jpg" />
                   </div>
                   <h4>خدمات فروشندگان</h4>
 
@@ -1863,8 +1885,11 @@ li > ul > li.active > ul > li {
             >
               <article class="service-box main-incobac-logo">
                 <router-link :to="{ name: 'help' }">
-                  <div class="box-image">
-                    <img src="../../../../img/logo/web-logo.svg" />
+                  <div class="box-image logo">
+                    <img
+                      loading="lazy"
+                      src="../../../../img/logo/web-logo.svg"
+                    />
                   </div>
                   <h4>باسکول چیست؟</h4>
                   <p>
@@ -1881,7 +1906,7 @@ li > ul > li.active > ul > li {
               <article class="service-box">
                 <router-link :to="{ name: 'help' }">
                   <div class="box-image">
-                    <img src="../../../../img/buyer.jpg" />
+                    <img loading="lazy" src="../../../../img/buyer.jpg" />
                   </div>
                   <h4>خدمات خریداران</h4>
 
@@ -2242,6 +2267,7 @@ export default {
       isCollapse: false,
       isCategories: false,
       categoryModalList: "",
+      showLatestProducts: false,
       footerLinks: {
         wholesaleDate: [
           {
@@ -2400,6 +2426,7 @@ export default {
       }
     },
     init: function () {
+      this.productInViewPort();
       var self = this;
       $("#categories-modal").on("show.bs.modal", (e) => {
         this.handleBackKeys();
@@ -2531,6 +2558,9 @@ export default {
     getImageUrl(index) {
       return this.assets + "assets/img/banners/banner-" + index + ".jpg";
     },
+    getMobileImageUrl(index) {
+      return this.assets + "assets/img/banners/mobile/banner-" + index + ".jpg";
+    },
     imageParallax() {
       var parallax = -0.13;
       var staticHeight = -80;
@@ -2608,14 +2638,14 @@ export default {
           var ot = offset_tops[i];
           $(el).css(
             "background-position",
-            "50% " + ((dy - ot) * parallax + staticHeight) + "px"
+            "50% " + ((dy - ot) * 0.1 + staticHeight) + "px"
           );
         });
         $bg_image7.each(function (i, el) {
           var ot = offset_tops[i];
           $(el).css(
             "background-position",
-            "50% " + ((dy - ot) * parallax + staticHeight) + "px"
+            "50% " + ((dy - ot) * 0.03 + -20) + "px"
           );
         });
       });
@@ -2714,6 +2744,29 @@ export default {
         dots: true,
         stagePadding: 3,
       });
+    },
+    checkIsMobile() {
+      let pageWidth = window.outerWidth;
+      if (pageWidth <= 991) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    productInViewPort() {
+      $(window).scroll((scroll) => {
+        if ($("body").has("#product-section").length) {
+          if (
+            100 + $(window).scrollTop() + $(window).height() >=
+            this.isElementOutViewport($("#product-section"))
+          ) {
+            this.showLatestProducts = true;
+          }
+        }
+      });
+    },
+    isElementOutViewport(el) {
+      return el.offset().top;
     },
   },
   mounted: function () {

@@ -504,6 +504,7 @@ export default {
       productUrl: "",
       jsonLDObject: "",
       verifiedUserContent: this.$parent.verifiedUserContent,
+      loadedProduct: true,
     };
   },
   methods: {

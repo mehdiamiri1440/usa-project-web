@@ -16,7 +16,12 @@
   <div class="image-wrapper">
     <a v-show="isImageLoad" :href="base + img">
       <transition>
-        <img :src="base + img" @load="ImageLoaded" :alt="alt" />
+        <img
+          class="owl-lazy"
+          :data-src="base + img"
+          @load="ImageLoaded"
+          :alt="alt"
+        />
       </transition>
     </a>
 
@@ -53,6 +58,7 @@ export default {
       loop: false,
       items: 1,
       margin: 10,
+      lazyLoad: true,
       nav: true,
       navText: [
         '<span class="fa fa-angle-left"></span>',

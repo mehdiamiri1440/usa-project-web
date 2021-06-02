@@ -188,6 +188,11 @@ nav .green-button {
   border-radius: 8px;
 }
 
+nav .green-button.static-layout {
+  padding: 10px 0 9px;
+  width: 167px;
+}
+
 nav .green-button-alt {
   font-size: 17px;
   padding: 10px 20px 9px;
@@ -220,9 +225,14 @@ nav > li > a.green-button.router-link-exact-active:hover {
 .buskool-logo .navbar-brand {
   overflow: hidden;
   width: 140px;
-  height: initial;
+  height: 28px;
   margin: 6px 15px 6px 0;
   padding: 0;
+}
+
+.buskool-logo .navbar-brand img {
+  width: 140px;
+  height: 28px;
 }
 
 #buskool-nav {
@@ -512,7 +522,12 @@ a.profile-info-wrapper:hover {
 
   .buskool-logo .navbar-brand {
     width: 100px;
+    height: 20px;
     margin-top: 4px;
+  }
+  .buskool-logo .navbar-brand img {
+    width: 100px;
+    height: 20px;
   }
 
   .buskool-logo {
@@ -920,7 +935,7 @@ a.profile-info-wrapper:hover {
           <ul v-else class="nav navbar-nav">
             <li class="hidden-xs">
               <router-link class="green-button" :to="{ name: 'register' }">
-                <i class="fa fa-user"></i>
+                <i class="fa fa-user static-layout"></i>
                 ثبت نام رایگان
               </router-link>
             </li>
@@ -935,7 +950,7 @@ a.profile-info-wrapper:hover {
 
             <li class="hidden-xs">
               <router-link
-                class="green-button green-button-alt"
+                class="green-button green-button-alt static-layout"
                 :to="{ name: 'login' }"
               >
                 <i class="fa fa-sign-in-alt"></i>

@@ -206,8 +206,11 @@ label {
 
 .default-product-contents-wrapper {
   padding: 15px;
+  min-height: 840px;
 }
-
+.main-product-wrapper {
+  min-height: 840px;
+}
 .phone-number-wrapper {
   margin-top: 15px;
 }
@@ -272,6 +275,7 @@ label {
   .images-wrapper,
   .main-product-wrapper {
     padding: 0;
+    min-height: initial;
   }
   .main-product-wrapper {
     border: none;
@@ -655,17 +659,29 @@ label {
       <div
         class="default-button-min-with placeholder-content margin-15-0 hidden-xs hidden-sm"
       ></div>
-      <p
-        class="content-default-width placeholder-content hidden-xs hidden-sm"
-      ></p>
-      <p
-        class="content-half-width placeholder-content margin-15-0 hidden-xs hidden-sm"
-      ></p>
+      <a
+        href="https://blog.buskool.com/%d8%b1%d8%a7%d9%87%d9%86%d9%85%d8%a7%db%8c-%d8%ae%d8%b1%db%8c%d8%af-%d8%a7%d9%85%d9%86/"
+        target="_blank"
+        class="warning-wrapper info-wrapper hidden-xs hidden-sm"
+      >
+        <p class="warning-title">
+          <i class="fa fa-question-circle"></i>
+
+          راهنمای خرید امن
+        </p>
+        <p class="warning-text">
+          باسکول هیچ‌گونه منفعت و مسئولیتی در قبال معامله شما ندارد. با مطالعه‌ی
+          راهنمای خرید امن ، آسوده‌تر معامله کنید.
+        </p>
+      </a>
     </div>
 
     <div class="default-product-contents text-rtl pull-right">
       <div
-        class="content-default-width placeholder-content padding-15-0 margin-15-0"
+        class="content-default-width placeholder-content padding-10-0 h-25"
+      ></div>
+      <div
+        class="default-button-min-with placeholder-content default-mdedium-button-width h-40 margin-top-25 hidden-xs hidden-sm"
       ></div>
       <div class="default-action-buttons hidden-md hidden-lg">
         <div class="default-button placeholder-content pull-right"></div>
@@ -714,10 +730,13 @@ label {
           ></span>
         </li>
       </ul>
-      <p class="content-default-width placeholder-content margin-15-0"></p>
-      <p class="content-full-width placeholder-content"></p>
-      <p class="content-default-width placeholder-content margin-15-0"></p>
-      <p class="content-half-width placeholder-content"></p>
+      <span
+        class="placeholder-content content-min-width placeholder-content margin-15-0"
+      ></span>
+      <p class="content-default-width h-20 placeholder-content margin-30-0"></p>
+      <p class="content-full-width h-20 placeholder-content"></p>
+      <p class="content-default-width h-20 placeholder-content margin-30-0"></p>
+      <p class="content-half-width h-20 placeholder-content"></p>
     </div>
   </div>
 </template>
