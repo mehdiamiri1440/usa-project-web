@@ -572,6 +572,8 @@ class product_controller extends Controller
         $product_related_data['main']->category_name = (category::find($product_parent_category_data['parent_id']))['category_name'];
 
         if(session()->has('user_id')){
+            $now = Carbon::now();
+            
             DB::table('user_products')->insert([
                 'created_at' => $now,
                 'updated_at' => $now,
