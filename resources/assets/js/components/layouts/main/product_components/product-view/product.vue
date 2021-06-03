@@ -410,7 +410,7 @@ label {
 
     <div class="images-wrapper">
       <div class="images">
-        <div class="owl-carousel">
+        <div v-if="$parent.product.photos" class="owl-carousel">
           <Carousel
             v-for="photo in $parent.product.photos"
             :key="photo.id"
@@ -428,6 +428,25 @@ label {
             "
           />
         </div>
+        <svg
+          v-else
+          version="1"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 48 48"
+          enable-background="new 0 0 48 48"
+        >
+          <path
+            fill="#ccc"
+            d="M41,42H13c-2.2,0-4-1.8-4-4V18c0-2.2,1.8-4,4-4h28c2.2,0,4,1.8,4,4v20C45,40.2,43.2,42,41,42z"
+          />
+          <path
+            fill="#ddd"
+            d="M35,36H7c-2.2,0-4-1.8-4-4V12c0-2.2,1.8-4,4-4h28c2.2,0,4,1.8,4,4v20C39,34.2,37.2,36,35,36z"
+          />
+          <circle fill="#ccc" cx="30" cy="16" r="3" />
+          <polygon fill="#bbb" points="17,17.9 8,31 26,31" />
+          <polygon fill="#eee" points="28,23.5 22,31 34,31" />
+        </svg>
       </div>
       <div class="share hidden-xs hidden-sm">
         <button

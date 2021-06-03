@@ -109,7 +109,6 @@
 }
 
 .main-modal-chat .bg-wrapper {
-  background: url("../../../../../img/whatsappbg.png") repeat;
   opacity: 0.06;
   position: absolute;
   z-index: 1;
@@ -117,7 +116,11 @@
   right: 0;
   top: 50px;
   bottom: 60px;
-  background-size: 80%;
+}
+
+.main-modal-chat .bg-wrapper.background-chat {
+  background: url("../../../../../img/whatsappbg.png") repeat;
+  background-size: 90%;
 }
 
 .main-modal-chat ul {
@@ -317,7 +320,7 @@
         <span class="header-chat-image" v-if="contactInfo.profile_photo">
           <img :src="$parent.assets + 'storage/' + contactInfo.profile_photo" />
         </span>
-        <span class="header-chat-image" v-else>
+        <span class="header-chat-image" v-else-if="!chatMessagesLoader">
           <img :src="$parent.assets + 'assets/img/user-defult.png'" />
         </span>
 
@@ -344,7 +347,10 @@
     </div>
 
     <div class="main-modal-chat">
-      <div class="bg-wrapper"></div>
+      <div
+        class="bg-wrapper"
+        :class="{ 'background-chat': !chatMessagesLoader }"
+      ></div>
 
       <div
         class="loading-container"

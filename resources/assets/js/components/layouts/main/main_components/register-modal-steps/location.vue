@@ -310,9 +310,9 @@ export default {
       });
     },
   },
-  mounted() {
-    this.$parent.getProvinceList();
-  },
+  // mounted() {
+  //   this.$parent.getProvinceList();
+  // },
   watch: {
     "$parent.step3.provinceList"() {
       this.provinces = this.$parent.step3.provinceList;

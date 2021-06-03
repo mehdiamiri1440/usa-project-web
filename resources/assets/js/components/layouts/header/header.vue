@@ -717,7 +717,7 @@ a.profile-info-wrapper:hover {
     <!-- loading -->
     <div :class="{ 'loader-wrapper': !submiting, 'loader-display': submiting }">
       <div class="main-loader">
-        <img src="../../../../img/gif/prload.gif" />
+        <img v-if="submiting" src="../../../../img/gif/prload.gif" />
         <p dir="rtl">در حال بارگذاری...</p>
       </div>
     </div>
