@@ -401,7 +401,6 @@ tr:nth-child(even) {
 
 <script>
 import { eventBus } from "../../../../router/router";
-import moment from "vue-jalali-moment";
 
 export default {
   props: ["storage"],

@@ -272,7 +272,7 @@
 
     <!-- end regex download App modal  -->
 
-    <chat-modal />
+    <ChatModal />
 
     <share-to-social-modal :share-modal-url="shareModalUrl" />
     <report-modal :reported-user-id="reportedUserId" />

@@ -686,7 +686,6 @@ i.fa-star {
 
 
 <script >
-import moment from "vue-jalali-moment";
 
 export default {
   data: function () {

@@ -1,7 +1,6 @@
 let mix = require('laravel-mix');
 require('laravel-mix-bundle-analyzer');
-
-
+const webpack = require("webpack");
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -13,11 +12,17 @@ require('laravel-mix-bundle-analyzer');
  |
  */
 
+
+
 mix.webpackConfig({
    output: {
       chunkFilename: 'chunks/[name].[chunkhash].js',
       publicPath: '/',
    },
+   plugins: [
+      new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
+   ]
+
 });
 
 mix.js('resources/assets/js/app.js', 'public/js')
@@ -27,3 +32,4 @@ mix.js('resources/assets/js/app.js', 'public/js')
 if (!mix.inProduction()) {
    mix.bundleAnalyzer();
 }
+

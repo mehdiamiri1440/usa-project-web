@@ -35,7 +35,7 @@ window.Vue = require('vue');
 
 Vue.prototype.$http = Axios;
 Vue.config.productionTip = false;
-// Vue.use(require('vue-jalali-moment'));
+Vue.use(require('vue-jalali-moment'));
 Vue.use(Meta);
 
 

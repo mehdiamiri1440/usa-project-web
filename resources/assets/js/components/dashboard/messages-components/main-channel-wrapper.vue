@@ -954,7 +954,6 @@
 import MessageImage from "./messege-image";
 import { eventBus } from "../../../router/router";
 import magnificPopup from "../../../jquery.magnific-popup.min";
-import moment from "vue-jalali-moment";
 
 export default {
   components: {

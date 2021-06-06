@@ -192,7 +192,6 @@ li:nth-of-type(2n + 1) .user-items-wrapper {
 
 <script>
 import { eventBus } from "../../../router/router";
-import moment from "vue-jalali-moment";
 
 export default {
   data: function () {

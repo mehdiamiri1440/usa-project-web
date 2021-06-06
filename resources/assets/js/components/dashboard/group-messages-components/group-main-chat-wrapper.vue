@@ -739,8 +739,6 @@ div {
 </template>
 
 <script>
-import moment from "vue-jalali-moment";
-
 export default {};
 </script>
 
