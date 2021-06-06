@@ -34,6 +34,9 @@
 </template>
 
 <script>
+import owlCarousel from "../../../../../owl.carousel.min.js";
+import magnificPopup from "../../../../../jquery.magnific-popup.min";
+
 export default {
   data: function () {
     return {

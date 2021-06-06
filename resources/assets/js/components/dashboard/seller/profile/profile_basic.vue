@@ -573,7 +573,12 @@ textarea.error:focus + i {
             ></p>
             <p class="user-name" v-else>
               <span
-                class="placeholder-content content-default-width h-25 margin-auto"
+                class="
+                  placeholder-content
+                  content-default-width
+                  h-25
+                  margin-auto
+                "
               ></span>
             </p>
           </div>
@@ -1015,6 +1020,8 @@ textarea.error:focus + i {
 <script>
 import { eventBus } from "../../../../router/router";
 import UploadFile from "../../upload-image";
+import swal from "../../../../sweetalert.min.js";
+import imageuploadify from "../../../../imageuploadify.min";
 
 export default {
   props: ["str", "assets"],
@@ -1381,9 +1388,8 @@ export default {
       eventBus.$emit("uploadPercentage", this.uploadPercentage);
     },
     "currentUser.profile.company_register_code": function (value) {
-      this.currentUser.profile.company_register_code = this.toLatinNumbers(
-        value
-      );
+      this.currentUser.profile.company_register_code =
+        this.toLatinNumbers(value);
     },
     "currentUser.profile.public_phone": function (value) {
       if (value.length >= 11) {

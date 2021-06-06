@@ -168,6 +168,8 @@
 </template>
 
 <script>
+import owlCarousel from "../../../../owl.carousel.min.js";
+
 export default {
   data: function () {
     return {

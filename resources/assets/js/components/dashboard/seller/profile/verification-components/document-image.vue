@@ -290,7 +290,7 @@
 
 <script>
 import UploadFile from "../../../upload-image";
-
+import imageuploadify from "../../../../../imageuploadify.min";
 export default {
   components: {
     UploadFile,

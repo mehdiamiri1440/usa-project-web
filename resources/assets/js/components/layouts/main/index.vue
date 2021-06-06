@@ -1654,18 +1654,42 @@ li > ul > li.active > ul > li {
               >
                 <article class="carousel-item default-item col-xs-12">
                   <span
-                    class="default-index-product-image placeholder-content col-xs-12 pull-right"
+                    class="
+                      default-index-product-image
+                      placeholder-content
+                      col-xs-12
+                      pull-right
+                    "
                   ></span>
 
                   <span
-                    class="content-default-width placeholder-content margin-10 col-xs-10 col-xs-offset-1 pull-right"
+                    class="
+                      content-default-width
+                      placeholder-content
+                      margin-10
+                      col-xs-10 col-xs-offset-1
+                      pull-right
+                    "
                   ></span>
                   <span
-                    class="content-default-width placeholder-content col-xs-8 margin-10 col-xs-offset-2 pull-right"
+                    class="
+                      content-default-width
+                      placeholder-content
+                      col-xs-8
+                      margin-10
+                      col-xs-offset-2
+                      pull-right
+                    "
                   ></span>
 
                   <span
-                    class="content-default-width placeholder-content margin-10 col-xs-10 col-xs-offset-1 pull-right"
+                    class="
+                      content-default-width
+                      placeholder-content
+                      margin-10
+                      col-xs-10 col-xs-offset-1
+                      pull-right
+                    "
                   ></span>
 
                   <span class="margin-10"></span>
@@ -1747,7 +1771,11 @@ li > ul > li.active > ul > li {
             </div>
 
             <div
-              class="owl-carousel hidden-sm hidden-md hidden-lg last-buyAds-carousel"
+              class="
+                owl-carousel
+                hidden-sm hidden-md hidden-lg
+                last-buyAds-carousel
+              "
             >
               <LandingPageBuyAds
                 :buyAd="buyAd"
@@ -1765,16 +1793,35 @@ li > ul > li.active > ul > li {
             >
               <article class="buyAds-placeholder">
                 <span
-                  class="content-default-width placeholder-content padding-10-0 margin-10 col-xs-6 col-xs-offset-3 pull-right"
+                  class="
+                    content-default-width
+                    placeholder-content
+                    padding-10-0
+                    margin-10
+                    col-xs-6 col-xs-offset-3
+                    pull-right
+                  "
                 ></span>
 
                 <span
-                  class="content-default-width placeholder-content padding-10-0 margin-10 col-xs-10 col-xs-offset-1"
+                  class="
+                    content-default-width
+                    placeholder-content
+                    padding-10-0
+                    margin-10
+                    col-xs-10 col-xs-offset-1
+                  "
                 ></span>
 
                 <div class="text-center">
                   <span
-                    class="content-default-width placeholder-content padding-10-0 margin-10 col-xs-6 col-xs-offset-3"
+                    class="
+                      content-default-width
+                      placeholder-content
+                      padding-10-0
+                      margin-10
+                      col-xs-6 col-xs-offset-3
+                    "
                   ></span>
                 </div>
               </article>
@@ -2242,10 +2289,10 @@ import { eventBus } from "../../../router/router";
 import MainRegisterRequestForm from "./main_components/main-register-request-form";
 import LandingPageBuyAds from "./main_components/landing-page-buyAds";
 import ProductGridArticle from "./product_components/landing_page_product_grid_article";
+import owlCarousel from "../../../owl.carousel.min.js";
+import Route from "../../../router/components/route";
 
 var visible = false;
-
-import Route from "../../../router/components/route";
 
 export default {
   components: {

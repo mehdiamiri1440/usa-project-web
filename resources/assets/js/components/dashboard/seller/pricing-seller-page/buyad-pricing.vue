@@ -497,6 +497,7 @@ input[type="number"] {
 <script>
 import ProductPricing from "./pricing-tables/pricing-packages.vue";
 import productPricingContents from "./pricing-tables/pricing-package-contents";
+import swal from "../../../../sweetalert.min.js";
 
 export default {
   props: ["offerTime"],

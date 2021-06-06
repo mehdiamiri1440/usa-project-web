@@ -383,7 +383,12 @@ tr:nth-child(even) {
               </div>
               <div class="margin-top-10">
                 <p
-                  class="placeholder-content padding-15-0 margin-auto content-half-width"
+                  class="
+                    placeholder-content
+                    padding-15-0
+                    margin-auto
+                    content-half-width
+                  "
                 ></p>
               </div>
             </article>
@@ -396,6 +401,8 @@ tr:nth-child(even) {
 
 <script>
 import { eventBus } from "../../../../router/router";
+import moment from "vue-jalali-moment";
+
 export default {
   props: ["storage"],
   data: function () {

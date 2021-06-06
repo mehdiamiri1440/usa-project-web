@@ -498,14 +498,18 @@ div {
               <img v-else :src="$parent.assets + 'assets/img/group-images/group-category.jpg'" />-->
             </div>
 
-            <span v-if="$parent.selectedGroup.name" v-text="'گروه ' + $parent.selectedGroup.name"></span>
+            <span
+              v-if="$parent.selectedGroup.name"
+              v-text="'گروه ' + $parent.selectedGroup.name"
+            ></span>
           </div>
           <div class="back-state hidden-sm hidden-md hidden-lg pull-left">
             <a
               href="#"
               @click.prevent="$parent.selectedGroup = !$parent.selectedGroup"
               class="green-button"
-            >بازگشت</a>
+              >بازگشت</a
+            >
           </div>
         </div>
 
@@ -523,24 +527,25 @@ div {
               $parent.isGroupChatMessagesLoaded && $parent.isFirstMessageLoading
                 ? 'chat-not-loaded'
                 : 'chat-loaded',
-              { 'reply-is-true': $parent.loadReplyData }
+              { 'reply-is-true': $parent.loadReplyData },
             ]"
           >
             <li
               v-for="(msg, index) in $parent.groupChatMessages"
               class="group-chat-list-item"
               :class="[
-            
-                $parent.checkMessageName(index, index - 1) ? 'margin-top-10' : ''
+                $parent.checkMessageName(index, index - 1)
+                  ? 'margin-top-10'
+                  : '',
               ]"
               :key="msg.id"
             >
               <div
-                @click.prevent="$parent.replyMessageData($event,msg)"
+                @click.prevent="$parent.replyMessageData($event, msg)"
                 :class="[
-                 msg.user_id == $parent.currentUserId
+                  msg.user_id == $parent.currentUserId
                     ? 'message-send'
-                    : 'message-receive'
+                    : 'message-receive',
                 ]"
               >
                 <span class="reply-icon">
@@ -550,8 +555,8 @@ div {
                   <p
                     v-text="
                       msg.parent_author_first_name +
-                        ' ' +
-                        msg.parent_author_last_name
+                      ' ' +
+                      msg.parent_author_last_name
                     "
                   ></p>
                   <p v-text="msg.parent_text"></p>
@@ -562,20 +567,23 @@ div {
                 >
                   <p v-text="msg.first_name + ' ' + msg.last_name"></p>
                 </router-link>
-                <span class="message-has-link" v-if="msg.is_link" v-html="msg.text"></span>
+                <span
+                  class="message-has-link"
+                  v-if="msg.is_link"
+                  v-html="msg.text"
+                ></span>
                 <span v-else v-html="msg.text"></span>
                 <span class="message-chat-date">
                   <span v-if="msg.created_at">
-                    {{
-                    msg.created_at | moment("jYY/jMM/jDD, h:mm A")
-                    }}
+                    {{ msg.created_at | moment("jYY/jMM/jDD, h:mm A") }}
                   </span>
                   <span v-else>
-                    {{
-                    Date() | moment("jYY/jMM/jDD, h:mm A")
-                    }}
+                    {{ Date() | moment("jYY/jMM/jDD, h:mm A") }}
                   </span>
-                  <span class="check-items" v-if="msg.user_id == $parent.currentUserId">
+                  <span
+                    class="check-items"
+                    v-if="msg.user_id == $parent.currentUserId"
+                  >
                     <i class="fa fa-check" v-if="msg.created_at"></i>
                     <i class="far fa-clock" v-else></i>
                   </span>
@@ -607,7 +615,10 @@ div {
             </div>
           </div>
           <div class="send-message-form">
-            <div class="reply-message-wrapper" :class="{ 'reply-active': $parent.loadReplyData }">
+            <div
+              class="reply-message-wrapper"
+              :class="{ 'reply-active': $parent.loadReplyData }"
+            >
               <div class="cancle-reply">
                 <button @click.prevent="$parent.resetReplyMessage()">
                   <i class="fa fa-times"></i>
@@ -617,8 +628,8 @@ div {
                 <p
                   v-text="
                     $parent.replyMessage.first_name +
-                      ' ' +
-                      $parent.replyMessage.last_name
+                    ' ' +
+                    $parent.replyMessage.last_name
                   "
                 ></p>
                 <p v-text="$parent.replyMessage.text"></p>
@@ -626,11 +637,18 @@ div {
             </div>
             <form>
               <div class="message-input">
-                <input type="text" placeholder="پیغامی بگذارید " v-model="$parent.msgToSend" />
+                <input
+                  type="text"
+                  placeholder="پیغامی بگذارید "
+                  v-model="$parent.msgToSend"
+                />
               </div>
 
               <div class="button-wrapper">
-                <button type="submit" @click.prevent="$parent.sendMessageToGroup()">
+                <button
+                  type="submit"
+                  @click.prevent="$parent.sendMessageToGroup()"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="13.347"
@@ -661,8 +679,8 @@ div {
       class="col-xs-12 default-message-wrapper col-sm-8 col-md-9"
       v-if="
         !$parent.selectedGroup &&
-          $parent.UnsubscribeGroups.length == 0 &&
-          $parent.allGroupsIsSubscribe
+        $parent.UnsubscribeGroups.length == 0 &&
+        $parent.allGroupsIsSubscribe
       "
     >
       <div class="default-main-contents">
@@ -671,13 +689,16 @@ div {
       </div>
     </div>
 
-    <div class="col-xs-12 group-message-wrapper col-sm-8 col-md-9" v-if="!$parent.selectedGroup">
+    <div
+      class="col-xs-12 group-message-wrapper col-sm-8 col-md-9"
+      v-if="!$parent.selectedGroup"
+    >
       <h2>برای عضویت در گروه کلیک کنید</h2>
       <div class="main-group-message">
         <div
           v-if="
             $parent.UnsubscribeGroups.length == 0 &&
-              !$parent.allGroupsIsSubscribe
+            !$parent.allGroupsIsSubscribe
           "
           class="loade-more-messages"
         >
@@ -718,6 +739,8 @@ div {
 </template>
 
 <script>
+import moment from "vue-jalali-moment";
+
 export default {};
 </script>
 

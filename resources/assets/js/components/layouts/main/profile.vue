@@ -887,7 +887,11 @@ p.response-rate span {
             </div>
 
             <div
-              class="info_user_wrapper_mobile hidden-sm hidden-md hidden-lg col-xs-8 col-sm-4 col-md-3"
+              class="
+                info_user_wrapper_mobile
+                hidden-sm hidden-md hidden-lg
+                col-xs-8 col-sm-4 col-md-3
+              "
             >
               <div class="row">
                 <div
@@ -902,7 +906,12 @@ p.response-rate span {
                 </div>
                 <div class="col-xs-6 text-center" v-else>
                   <div
-                    class="info-num placeholder-content content-min-width margin-auto"
+                    class="
+                      info-num
+                      placeholder-content
+                      content-min-width
+                      margin-auto
+                    "
                   ></div>
                 </div>
 
@@ -934,14 +943,23 @@ p.response-rate span {
 
                 <div class="col-xs-6 text-center" v-else>
                   <div
-                    class="info-num placeholder-content content-min-width margin-auto"
+                    class="
+                      info-num
+                      placeholder-content
+                      content-min-width
+                      margin-auto
+                    "
                   ></div>
                 </div>
 
                 <div class="col-xs-12">
                   <div v-if="!profileOwner.user_info.id">
                     <div
-                      class="default-boxing-size placeholder-content content-full-width"
+                      class="
+                        default-boxing-size
+                        placeholder-content
+                        content-full-width
+                      "
                     ></div>
                   </div>
 
@@ -984,7 +1002,11 @@ p.response-rate span {
 
                   <div v-if="!profileOwner.user_info.id">
                     <div
-                      class="placeholder-content padding-15-0 content-full-width"
+                      class="
+                        placeholder-content
+                        padding-15-0
+                        content-full-width
+                      "
                     ></div>
                   </div>
 
@@ -1074,7 +1096,11 @@ p.response-rate span {
                   <div class="back_page col-xs-12 col-sm-4 col-md-3">
                     <div v-if="!profileOwner.user_info.id">
                       <div
-                        class="default-boxing-size placeholder-content content-full-width"
+                        class="
+                          default-boxing-size
+                          placeholder-content
+                          content-full-width
+                        "
                       ></div>
                     </div>
                     <div v-else>
@@ -1116,7 +1142,11 @@ p.response-rate span {
 
                     <div v-if="!profileOwner.user_info.id">
                       <div
-                        class="default-boxing-size placeholder-content content-full-width"
+                        class="
+                          default-boxing-size
+                          placeholder-content
+                          content-full-width
+                        "
                       ></div>
                     </div>
                     <button
@@ -1188,7 +1218,11 @@ p.response-rate span {
             </div>
 
             <div
-              class="content_user_wrapper_mobile hidden-sm hidden-md hidden-lg col-xs-12"
+              class="
+                content_user_wrapper_mobile
+                hidden-sm hidden-md hidden-lg
+                col-xs-12
+              "
             >
               <div class="user-contents row">
                 <div class="title_content col-xs-12">
@@ -1256,10 +1290,18 @@ p.response-rate span {
                   </h1>
                   <h1
                     v-else
-                    class="placeholder-content margin-15-0 content-half-width padding-15-0"
+                    class="
+                      placeholder-content
+                      margin-15-0
+                      content-half-width
+                      padding-15-0
+                    "
                   ></h1>
                   <div
-                    class="profile-rating-box-wrapper hidden-sm hidden-md hidden-lg"
+                    class="
+                      profile-rating-box-wrapper
+                      hidden-sm hidden-md hidden-lg
+                    "
                     v-if="profileOwnerStatistics.rating_info.total_count > 0"
                   >
                     <div class="profile-rating-box">
@@ -1435,10 +1477,20 @@ p.response-rate span {
               ></div>
               <div v-else>
                 <span
-                  class="content-default-width placeholder-content margin-15 h-20"
+                  class="
+                    content-default-width
+                    placeholder-content
+                    margin-15
+                    h-20
+                  "
                 ></span>
                 <span
-                  class="content-half-width placeholder-content margin-0-15 h-20"
+                  class="
+                    content-half-width
+                    placeholder-content
+                    margin-0-15
+                    h-20
+                  "
                 ></span>
                 <span
                   class="content-full-width placeholder-content margin-15"
@@ -1588,24 +1640,51 @@ p.response-rate span {
                     class="default-items col-xs-12"
                   >
                     <div
-                      class="col-xs-12 padding-15 margin-15-0 default-item-wrapper shadow-content"
+                      class="
+                        col-xs-12
+                        padding-15
+                        margin-15-0
+                        default-item-wrapper
+                        shadow-content
+                      "
                     >
                       <div class="default-user-contents col-xs-12 padding-0">
                         <div
-                          class="placeholder-content default-article-user-image pull-right"
+                          class="
+                            placeholder-content
+                            default-article-user-image
+                            pull-right
+                          "
                         ></div>
 
                         <span
-                          class="padding-top-5 placeholder-content margin-15 pull-right content-min-width"
+                          class="
+                            padding-top-5
+                            placeholder-content
+                            margin-15
+                            pull-right
+                            content-min-width
+                          "
                         ></span>
 
                         <span
-                          class="margin-0 placeholder-content default-button-min-with pull-left mobile-hidden"
+                          class="
+                            margin-0
+                            placeholder-content
+                            default-button-min-with
+                            pull-left
+                            mobile-hidden
+                          "
                         ></span>
                       </div>
 
                       <div
-                        class="default-article-contents padding-0 margin-top-10 col-xs-12"
+                        class="
+                          default-article-contents
+                          padding-0
+                          margin-top-10
+                          col-xs-12
+                        "
                       >
                         <div class="default-wrapper-main-image pull-right">
                           <span
@@ -1623,7 +1702,11 @@ p.response-rate span {
                           ></span>
 
                           <span
-                            class="content-min-width placeholder-content mobile-hidden"
+                            class="
+                              content-min-width
+                              placeholder-content
+                              mobile-hidden
+                            "
                           ></span>
 
                           <span
@@ -1631,7 +1714,13 @@ p.response-rate span {
                           ></span>
                         </div>
                         <span
-                          class="margin-top-10 placeholder-content default-button-min-with pull-left hidden-afetr-mobile-hidden"
+                          class="
+                            margin-top-10
+                            placeholder-content
+                            default-button-min-with
+                            pull-left
+                            hidden-afetr-mobile-hidden
+                          "
                         ></span>
                       </div>
                     </div>
@@ -1647,7 +1736,11 @@ p.response-rate span {
                 <PopupImageCertificate
                   v-for="photo in profileOwner.relateds"
                   :key="photo.id"
-                  class="ceteficate-image col-xs-6 hidden-sm hidden-md hidden-lg"
+                  class="
+                    ceteficate-image
+                    col-xs-6
+                    hidden-sm hidden-md hidden-lg
+                  "
                   :base="str + '/'"
                   :img="photo"
                 />
@@ -1686,7 +1779,11 @@ p.response-rate span {
               <div v-if="profileOwner.certificates[0]">
                 <article
                   v-for="(photo, index) in profileOwner.certificates"
-                  class="ceteficate-image col-xs-6 hidden-sm hidden-md hidden-lg"
+                  class="
+                    ceteficate-image
+                    col-xs-6
+                    hidden-sm hidden-md hidden-lg
+                  "
                   :key="index"
                 >
                   <a :href="str + '/' + photo">
@@ -1732,6 +1829,8 @@ import ProductArticle from "./product_components/product_article";
 import ArticleReview from "./main_components/review-components/article-review";
 import PlaceholderArticleReview from "./main_components/review-components/placeholder-article-review";
 import { eventBus } from "../../../router/router";
+import owlCarousel from "../../../owl.carousel.min.js";
+import magnificPopup from "../../../jquery.magnific-popup.min";
 
 var visible = false;
 var PopupImage = {

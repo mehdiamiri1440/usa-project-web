@@ -425,6 +425,7 @@
 
 <script>
 import { eventBus } from "../../../../router/router.js";
+import moment from "vue-jalali-moment";
 
 export default {
   data: function () {
