@@ -11,6 +11,21 @@
 
     <link rel="icon" href="{{asset('assets/img/logo/mobile-logo.svg')}}">
 
+
+    <!-- fonts -->
+    <link rel="preload" href="{{asset('assets/fonts/woff2/IRANSansWeb(FaNum)_Bold.woff2')}}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{asset('assets/fonts/woff2/IRANSansWeb(FaNum).woff2')}}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{asset('assets/fonts/woff2/IRANSansWeb(FaNum)_Medium.woff2')}}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{asset('assets/webfonts/fa-solid-900.woff2')}}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{asset('assets/webfonts/fa-regular-400.woff2')}}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{asset('assets/webfonts/fa-brands-400.woff2')}}" as="font" type="font/woff2" crossorigin>
+    
+    
+    <!-- Main Styles -->
+    <link rel="stylesheet" href="{{asset('assets/css/fontiran.min.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('assets/css/all.min.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('css/app.css')}}" type="text/css">
+
     <title>باسکول | بازارگاه کشاورزی </title>
 
 
@@ -35,6 +50,85 @@
     </script>
 
     <style>
+
+      /* @font-face {
+        font-family: IRANSans;
+        font-style: normal;
+        font-display: swap;
+        font-weight: bold;
+        src: url("../../assets/fonts/woff2/IRANSansWeb(FaNum)_Bold.woff2");
+        src: url("../../assets/fonts/eot/IRANSansWeb(FaNum)_Bold.eot?#iefix")
+          format("embedded-opentype"),
+             url("../../assets/fonts/woff2/IRANSansWeb(FaNum)_Bold.woff2")
+          format("woff2"),
+
+          url("../../assets/fonts/woff/IRANSansWeb(FaNum)_Bold.woff") format("woff"),
+
+          url("../../assets/fonts/ttf/IRANSansWeb(FaNum)_Bold.ttf") format("truetype");
+      }
+      @font-face {
+        font-family: IRANSans;
+        font-style: normal;
+        font-display: swap;
+        font-weight: 500;
+
+        src: url("../../assets/fonts/woff2/IRANSansWeb(FaNum)_Medium.woff2");
+        src: url("../../assets/fonts/eot/IRANSansWeb(FaNum)_Medium.eot?#iefix")
+            format("embedded-opentype"),
+             url("../../assets/fonts/woff2/IRANSansWeb(FaNum)_Medium.woff2")
+            format("woff2"),
+
+            url("../../assets/fonts/woff/IRANSansWeb(FaNum)_Medium.woff") format("woff"),
+
+            url("../../assets/fonts/ttf/IRANSansWeb(FaNum)_Medium.ttf") format("truetype");
+      }
+      @font-face {
+        font-family: IRANSans;
+        font-style: normal;
+        font-display: swap;
+        font-weight: 300;
+
+        src: url("../../assets/fonts/woff2/IRANSansWeb(FaNum)_Light.woff2");
+        src: url("../../assets/fonts/eot/IRANSansWeb(FaNum)_Light.eot?#iefix")
+            format("embedded-opentype"),
+             url("../../assets/fonts/woff2/IRANSansWeb(FaNum)_Light.woff2")
+            format("woff2"),
+
+            url("../../assets/fonts/woff/IRANSansWeb(FaNum)_Light.woff") format("woff"),
+
+            url("../../assets/fonts/ttf/IRANSansWeb(FaNum)_Light.ttf") format("truetype");
+      }
+      @font-face {
+        font-family: IRANSans;
+        font-style: normal;
+        font-display: swap;
+        font-weight: 200;
+
+        src: url("../../assets/fonts/woff2/IRANSansWeb(FaNum)_UltraLight.woff2");
+        src: url("../../assets/fonts/eot/IRANSansWeb(FaNum)_UltraLight.eot?#iefix")
+            format("embedded-opentype"),
+             url("../../assets/fonts/woff2/IRANSansWeb(FaNum)_UltraLight.woff2")
+            format("woff2"),
+
+            url("../../assets/fonts/woff/IRANSansWeb(FaNum)_UltraLight.woff") format("woff"),
+
+            url("../../assets/fonts/ttf/IRANSansWeb(FaNum)_UltraLight.ttf") format("truetype");
+      }
+      @font-face {
+        font-family: IRANSans;
+        font-style: normal;
+        font-display: swap;
+        font-weight: normal;
+
+        src: url("../../assets/fonts/woff2/IRANSansWeb(FaNum).woff2");
+        src: url("../../assets/fonts/eot/IRANSansWeb(FaNum).eot?#iefix")
+            format("embedded-opentype"),
+             url("../../assets/fonts/woff2/IRANSansWeb(FaNum).woff2") format("woff2"),
+             url("../../assets/fonts/woff/IRANSansWeb(FaNum).woff")
+            format("woff"),
+
+            url("../../assets/fonts/ttf/IRANSansWeb(FaNum).ttf") format("truetype");
+      } */
       .main-loader-wrapper {
         
         position: fixed;

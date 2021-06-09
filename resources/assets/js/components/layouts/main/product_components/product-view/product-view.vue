@@ -405,6 +405,11 @@ import UserInfo from "./user_info";
 import RegisterModal from "../../main_components/register-modal";
 import swal from "../../../../../sweetalert.min.js";
 
+require("../../../../../../css/owl.carousel.min.css");
+require("../../../../../../css/owl.theme.default.min.css");
+require("../../../../../../css/magnific-popup.css");
+require("../../../../../../css/owl-custom-style.css");
+
 export default {
   components: {
     ProductContents,

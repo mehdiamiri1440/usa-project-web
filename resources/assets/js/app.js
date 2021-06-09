@@ -14,21 +14,21 @@ require('./bootstrap');
 
 
 
-require('../css/placeholder-content.css')
-require('../css/fontiran.css')
-require('../css/all.min.css')
-require('../css/bootstrap.min.css')
-require('../css/bootstrap-theme.min.css')
-require('../css/owl.carousel.min.css')
-require('../css/owl.theme.default.min.css')
-require('../css/magnific-popup.css')
-require('../css/owl-custom-style.css')
-require('../css/imageuploadify.min.css')
-require('../css/cropper.css')
-require('../css/master/style.css')
-require('../css/popup.css')
-require('../css/sweetalert.css')
-require('../css/custom-animation.css')
+// require('../css/placeholder-content.css')
+// require('../css/bootstrap.min.css')
+// require('../css/bootstrap-theme.min.css')
+// require('../css/fontiran.min.css')
+// require('../css/all.min.css')
+// require('../css/owl.carousel.min.css')
+// require('../css/owl.theme.default.min.css')
+// require('../css/magnific-popup.css')
+// require('../css/owl-custom-style.css')
+// require('../css/imageuploadify.min.css')
+// require('../css/cropper.css')
+// require('../css/master/style.css')
+// require('../css/popup.css')
+// require('../css/sweetalert.css')
+// require('../css/custom-animation.css')
 
 
 window.Vue = require('vue');

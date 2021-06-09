@@ -1832,6 +1832,11 @@ import { eventBus } from "../../../router/router";
 import owlCarousel from "../../../owl.carousel.min.js";
 import magnificPopup from "../../../jquery.magnific-popup.min";
 
+require("../../../../css/owl.carousel.min.css");
+require("../../../../css/owl.theme.default.min.css");
+require("../../../../css/magnific-popup.css");
+require("../../../../css/owl-custom-style.css");
+
 var visible = false;
 var PopupImage = {
   data: function () {

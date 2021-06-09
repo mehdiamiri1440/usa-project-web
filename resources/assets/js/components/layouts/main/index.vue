@@ -2292,6 +2292,13 @@ import ProductGridArticle from "./product_components/landing_page_product_grid_a
 import owlCarousel from "../../../owl.carousel.min.js";
 import Route from "../../../router/components/route";
 
+
+
+require("../../../../css/owl.carousel.min.css");
+require("../../../../css/owl.theme.default.min.css");
+require("../../../../css/magnific-popup.css");
+require("../../../../css/owl-custom-style.css");
+
 var visible = false;
 
 export default {
