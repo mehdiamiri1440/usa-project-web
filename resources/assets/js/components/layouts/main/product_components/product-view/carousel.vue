@@ -1,14 +1,15 @@
 
 
 <style scoped>
+@import url("../../../../../../css/owl-product-view-style.css");
 .spinner-border {
-  width: 6rem;
-  height: 6rem;
+  width: 5rem;
+  height: 5rem;
   border-width: 0.3em;
-  color: #00c569;
+  color: #d0d0d0;
   position: absolute;
-  top: calc(50% - 30px);
-  left: calc(50% - 30px);
+  top: calc(50% - 25px);
+  left: calc(50% - 25px);
 }
 </style>
 
@@ -36,10 +37,6 @@
 <script>
 import owlCarousel from "../../../../../owl.carousel.min.js";
 import magnificPopup from "../../../../../jquery.magnific-popup.min";
-require("../../../../../../css/owl.carousel.min.css");
-require("../../../../../../css/owl.theme.default.min.css");
-require("../../../../../../css/magnific-popup.css");
-require("../../../../../../css/owl-custom-style.css");
 
 export default {
   data: function () {

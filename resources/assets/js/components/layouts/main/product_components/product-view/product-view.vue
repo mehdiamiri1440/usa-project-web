@@ -1,4 +1,7 @@
 <style scoped>
+@import url("../../../../../../css/owl.carousel.min.css");
+@import url("../../../../../../css/magnific-popup.css");
+@import url("../../../../../../css/owl-product-items-style.css");
 div,
 p,
 span {
@@ -188,6 +191,9 @@ button.send-message-button {
   #main {
     padding-top: 96px;
   }
+  .box-title {
+    margin: 0 10px 15px;
+  }
 }
 
 @media screen and (max-width: 450px) {
@@ -234,7 +240,7 @@ button.send-message-button {
           <h3 class="box-title">محصولات مرتبط</h3>
 
           <div class="products-contents">
-            <div class="owl-carousel">
+            <div class="owl-carousel product-carousel">
               <ProductCarousel
                 v-for="(product, index) in relatedProducts"
                 :key="index"
@@ -404,11 +410,6 @@ import UserInfo from "./user_info";
 // import registerInquerForm from "../../main_components/register-inquiry-form.vue";
 import RegisterModal from "../../main_components/register-modal";
 import swal from "../../../../../sweetalert.min.js";
-
-require("../../../../../../css/owl.carousel.min.css");
-require("../../../../../../css/owl.theme.default.min.css");
-require("../../../../../../css/magnific-popup.css");
-require("../../../../../../css/owl-custom-style.css");
 
 export default {
   components: {
