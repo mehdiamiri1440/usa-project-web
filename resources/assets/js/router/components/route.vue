@@ -272,7 +272,7 @@
 
     <!-- end regex download App modal  -->
 
-    <chat-modal />
+    <ChatModal />
 
     <share-to-social-modal :share-modal-url="shareModalUrl" />
     <report-modal :reported-user-id="reportedUserId" />
@@ -339,6 +339,7 @@ import ReportModal from "../../components/layouts/main/main_components/report";
 import ReviewModal from "../../components/layouts/main/main_components/review-component/review";
 import shareToSocialModal from "../../components/layouts/main/main_components/share-to-social-modal";
 import walletComponent from "../../components/layouts/main/wallet";
+import swal from "../../sweetalert.min.js";
 
 export default {
   components: {
@@ -629,8 +630,7 @@ export default {
 
       swal({
         title: "ارتباط با مخاطب",
-        text:
-          "برای ارتباط با هزاران خریدار و فروشنده در باسکول ابتدا ثبت نام کنید.",
+        text: "برای ارتباط با هزاران خریدار و فروشنده در باسکول ابتدا ثبت نام کنید.",
         className: "custom-swal-with-cancel",
         buttons: {
           success: {
@@ -999,8 +999,7 @@ export default {
       this.handleBackBtn();
       swal({
         title: "ویرایش پروفایل",
-        text:
-          "ویرایش پروفایل شما با موفقیت انجام شد.پس از تایید کارشناسان پروفایل شما برای همه قابل نمایش خواهد بود.",
+        text: "ویرایش پروفایل شما با موفقیت انجام شد.پس از تایید کارشناسان پروفایل شما برای همه قابل نمایش خواهد بود.",
         className: "custom-swal-with-cancel",
         icon: "success",
         buttons: {
@@ -1068,8 +1067,7 @@ export default {
 
       swal({
         title: "حذف نظر",
-        text:
-          "تعداد نظرات حذف شده توسط شما به کاربران نمایش داده خواهد شد. آیا می خواهید این نظر را حذف کنید؟",
+        text: "تعداد نظرات حذف شده توسط شما به کاربران نمایش داده خواهد شد. آیا می خواهید این نظر را حذف کنید؟",
         className: "custom-swal-with-cancel",
         icon: "warning",
         buttons: {
@@ -1098,8 +1096,7 @@ export default {
       this.handleBackBtn();
       swal({
         title: "احراز هویت",
-        text:
-          "اطلاعات شما با موفقیت ارسال شد. در صورت تایید کارشناسان باسکول نشان احراز هویت به حساب کاربری شما داده می شود.",
+        text: "اطلاعات شما با موفقیت ارسال شد. در صورت تایید کارشناسان باسکول نشان احراز هویت به حساب کاربری شما داده می شود.",
         className: "custom-swal-with-cancel",
         icon: "success",
         buttons: {
@@ -1267,8 +1264,7 @@ export default {
         if (this.numberGuideCountCookie() < 5) {
           swal({
             title: "نمایش اطلاعات تماس",
-            text:
-              "شماره تماس شما به خریداران نمایش داده نمی شود. اگر مایل به نمایش شماره تماس خود به خریداران هستید. راهنمای زیر را مطالعه کنید.",
+            text: "شماره تماس شما به خریداران نمایش داده نمی شود. اگر مایل به نمایش شماره تماس خود به خریداران هستید. راهنمای زیر را مطالعه کنید.",
             className: "custom-swal-with-cancel",
             icon: "info",
             buttons: {

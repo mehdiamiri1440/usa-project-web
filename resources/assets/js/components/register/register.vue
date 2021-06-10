@@ -511,6 +511,7 @@ import Location from "./register_steps/location";
 import UserAccount from "./register_steps/user_account";
 import ActivityDomain from "./register_steps/activity_domain";
 import device from "device-uuid/lib/device-uuid";
+import swal from "../../sweetalert.min.js";
 
 export default {
   components: {

@@ -424,6 +424,10 @@ import ProductImage from "./register-product-steps/product_image";
 import Terms from "./register-product-steps/terms";
 import MoreDetails from "./register-product-steps/more_details";
 import FinishStage from "./register-product-steps/finish_stage";
+import imageuploadify from "../../../../imageuploadify.min";
+
+require("../../../../../css/imageuploadify.min.css");
+require("../../../../../css/cropper.css");
 
 export default {
   components: {

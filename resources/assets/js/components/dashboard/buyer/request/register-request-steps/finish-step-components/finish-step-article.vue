@@ -343,6 +343,8 @@ button i {
 </template>
 
 <script>
+import swal from "../../../../../../sweetalert.min.js";
+
 export default {
   props: ["product", "str"],
   data: function () {

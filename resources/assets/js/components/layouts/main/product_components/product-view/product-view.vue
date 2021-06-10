@@ -266,15 +266,28 @@ button.send-message-button {
               >
                 <article class="carousel-item box-content col-xs-12">
                   <span
-                    class="default-index-product-image placeholder-content col-xs-12"
+                    class="
+                      default-index-product-image
+                      placeholder-content
+                      col-xs-12
+                    "
                   ></span>
 
                   <span
-                    class="content-default-width placeholder-content margin-10 col-xs-10 col-xs-offset-1"
+                    class="
+                      content-default-width
+                      placeholder-content
+                      margin-10
+                      col-xs-10 col-xs-offset-1
+                    "
                   ></span>
 
                   <span
-                    class="content-default-width placeholder-content col-xs-8 col-xs-offset-2"
+                    class="
+                      content-default-width
+                      placeholder-content
+                      col-xs-8 col-xs-offset-2
+                    "
                   ></span>
 
                   <span class="margin-10"></span>
@@ -390,6 +403,12 @@ import ProductContents from "./product";
 import UserInfo from "./user_info";
 // import registerInquerForm from "../../main_components/register-inquiry-form.vue";
 import RegisterModal from "../../main_components/register-modal";
+import swal from "../../../../../sweetalert.min.js";
+
+require("../../../../../../css/owl.carousel.min.css");
+require("../../../../../../css/owl.theme.default.min.css");
+require("../../../../../../css/magnific-popup.css");
+require("../../../../../../css/owl-custom-style.css");
 
 export default {
   components: {

@@ -173,7 +173,12 @@ li:nth-of-type(2n + 1) .user-items-wrapper {
             <div class="user-items-wrapper">
               <p class="placeholder-content h-30 content-default-width"></p>
               <span
-                class="default-chat-button placeholder-content h-30 content-min-width"
+                class="
+                  default-chat-button
+                  placeholder-content
+                  h-30
+                  content-min-width
+                "
               >
               </span>
             </div>

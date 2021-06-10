@@ -618,7 +618,12 @@ li .buyad-button.send-message-button:hover {
             buyAd.is_golden &&
             $parent.currentUser.user_info.active_pakage_type == 0
           "
-          class="buyad-button single-send-message-button detail-success hover-effect"
+          class="
+            buyad-button
+            single-send-message-button
+            detail-success
+            hover-effect
+          "
           :id="'loader-chat' + buyAd.id"
           @click.prevent="openGoldenChatRestrictionModal()"
         >
@@ -673,6 +678,7 @@ li .buyad-button.send-message-button:hover {
 
 <script>
 import { eventBus } from "../../../../../router/router";
+import swal from "../../../../../sweetalert.min.js";
 
 export default {
   methods: {

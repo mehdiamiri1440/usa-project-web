@@ -454,6 +454,11 @@
 <script>
 import { eventBus } from "../../../../router/router";
 import UploadFile from "../../upload-image";
+import imageuploadify from "../../../../imageuploadify.min";
+import magnificPopup from "../../../../jquery.magnific-popup.min";
+require("../../../../../css/imageuploadify.min.css");
+require("../../../../../css/cropper.css");
+
 export default {
   components: {
     UploadFile,
