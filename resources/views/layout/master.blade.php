@@ -51,84 +51,7 @@
 
     <style>
 
-      /* @font-face {
-        font-family: IRANSans;
-        font-style: normal;
-        font-display: swap;
-        font-weight: bold;
-        src: url("../../assets/fonts/woff2/IRANSansWeb(FaNum)_Bold.woff2");
-        src: url("../../assets/fonts/eot/IRANSansWeb(FaNum)_Bold.eot?#iefix")
-          format("embedded-opentype"),
-             url("../../assets/fonts/woff2/IRANSansWeb(FaNum)_Bold.woff2")
-          format("woff2"),
-
-          url("../../assets/fonts/woff/IRANSansWeb(FaNum)_Bold.woff") format("woff"),
-
-          url("../../assets/fonts/ttf/IRANSansWeb(FaNum)_Bold.ttf") format("truetype");
-      }
-      @font-face {
-        font-family: IRANSans;
-        font-style: normal;
-        font-display: swap;
-        font-weight: 500;
-
-        src: url("../../assets/fonts/woff2/IRANSansWeb(FaNum)_Medium.woff2");
-        src: url("../../assets/fonts/eot/IRANSansWeb(FaNum)_Medium.eot?#iefix")
-            format("embedded-opentype"),
-             url("../../assets/fonts/woff2/IRANSansWeb(FaNum)_Medium.woff2")
-            format("woff2"),
-
-            url("../../assets/fonts/woff/IRANSansWeb(FaNum)_Medium.woff") format("woff"),
-
-            url("../../assets/fonts/ttf/IRANSansWeb(FaNum)_Medium.ttf") format("truetype");
-      }
-      @font-face {
-        font-family: IRANSans;
-        font-style: normal;
-        font-display: swap;
-        font-weight: 300;
-
-        src: url("../../assets/fonts/woff2/IRANSansWeb(FaNum)_Light.woff2");
-        src: url("../../assets/fonts/eot/IRANSansWeb(FaNum)_Light.eot?#iefix")
-            format("embedded-opentype"),
-             url("../../assets/fonts/woff2/IRANSansWeb(FaNum)_Light.woff2")
-            format("woff2"),
-
-            url("../../assets/fonts/woff/IRANSansWeb(FaNum)_Light.woff") format("woff"),
-
-            url("../../assets/fonts/ttf/IRANSansWeb(FaNum)_Light.ttf") format("truetype");
-      }
-      @font-face {
-        font-family: IRANSans;
-        font-style: normal;
-        font-display: swap;
-        font-weight: 200;
-
-        src: url("../../assets/fonts/woff2/IRANSansWeb(FaNum)_UltraLight.woff2");
-        src: url("../../assets/fonts/eot/IRANSansWeb(FaNum)_UltraLight.eot?#iefix")
-            format("embedded-opentype"),
-             url("../../assets/fonts/woff2/IRANSansWeb(FaNum)_UltraLight.woff2")
-            format("woff2"),
-
-            url("../../assets/fonts/woff/IRANSansWeb(FaNum)_UltraLight.woff") format("woff"),
-
-            url("../../assets/fonts/ttf/IRANSansWeb(FaNum)_UltraLight.ttf") format("truetype");
-      }
-      @font-face {
-        font-family: IRANSans;
-        font-style: normal;
-        font-display: swap;
-        font-weight: normal;
-
-        src: url("../../assets/fonts/woff2/IRANSansWeb(FaNum).woff2");
-        src: url("../../assets/fonts/eot/IRANSansWeb(FaNum).eot?#iefix")
-            format("embedded-opentype"),
-             url("../../assets/fonts/woff2/IRANSansWeb(FaNum).woff2") format("woff2"),
-             url("../../assets/fonts/woff/IRANSansWeb(FaNum).woff")
-            format("woff"),
-
-            url("../../assets/fonts/ttf/IRANSansWeb(FaNum).ttf") format("truetype");
-      } */
+     
       .main-loader-wrapper {
         
         position: fixed;
@@ -149,101 +72,35 @@
         }
 
         .logo-main-loader {
-        display: inline-block;
-
-        position: absolute;
-
-        left: 50%;
-
-        top: 45%;
-
-        transform: translate(-50%, -50%);
-
-        text-align: center;
-
-        line-height: 1.618;
-
-        width: 100%;
-
-        padding: 0 15px;
+          display: inline-block;
+          position: absolute;
+          left: 50%;
+          top: 40%;
+          transform: translate(-50%, -50%);
+          text-align: center;
+          line-height: 1.618;
+          width: 100%;
+          padding: 0 15px;
         }
 
         .logo-main-loader svg {
             width: 60px;
             height: 70px;
         }
-
-        .logo-main-loader p {
-        font-size: 16px;
-        font-weight: bold;
-        line-height: 2;
-        }
-
         .main-loader-shape-wrapper {
-        position: absolute;
-        padding: 40px 0;
-        bottom: 80px;
-        left: 50%;
+          position: absolute;
+          padding: 40px 0;
+          bottom: 20%;
+          left: calc(50% - 23px);
         }
 
 
         /* preloader image style*/
-        .lds-ring {
-        display: inline-block;
-
-        position: absolute;
-
-        width: 64px;
-
-        height: 64px;
-
-        left: 50%;
-
-        top: 50%;
-
-        transform: translate(-50%, -50%);
-        }
-
-        .lds-ring div {
-        box-sizing: border-box;
-        display: block;
-        position: absolute;
-        width: 51px;
-        height: 51px;
-        margin: 6px;
-        border: 5px solid #28a745;
-        border-radius: 50%;
-        animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-        border-color: #28a745 transparent transparent transparent;
-        }
-
-        .lds-ring-alt {
-        display: block;
-        margin-top: 50px;
-        direction: rtl;
-        text-align: center;
-        }
-
-        .lds-ring div:nth-child(1) {
-        animation-delay: -0.45s;
-        }
-
-        .lds-ring div:nth-child(2) {
-        animation-delay: -0.3s;
-        }
-
-        .lds-ring div:nth-child(3) {
-        animation-delay: -0.15s;
-        }
-
-        @keyframes lds-ring {
-        0% {
-            transform: rotate(0deg);
-        }
-
-        100% {
-            transform: rotate(360deg);
-        }
+        .spinner-border{
+          width: 4.5rem;
+          height: 4.5rem;
+          color: #bbb;
+          border-width: 3px;
         }
     </style>
 </head>
@@ -287,11 +144,8 @@
       </svg>
     </div>
     <div class="main-loader-shape-wrapper">
-      <div class="lds-ring">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
+      <div class="spinner-border" >
+        <span class="sr-only">Loading...</span>
       </div>
     </div>
   </div>
