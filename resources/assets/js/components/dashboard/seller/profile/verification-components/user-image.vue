@@ -272,8 +272,6 @@
 <script>
 import UploadFile from "../../../upload-image";
 import imageuploadify from "../../../../../imageuploadify.min";
-require("../../../../../../css/imageuploadify.min.css");
-require("../../../../../../css/cropper.css");
 
 export default {
   components: {

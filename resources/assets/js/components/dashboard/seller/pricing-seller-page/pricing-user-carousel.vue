@@ -1,5 +1,4 @@
 <style scoped>
-@import url("../../../../../css/owl.carousel.min.css");
 /* preloader image style*/
 
 .box-content {
