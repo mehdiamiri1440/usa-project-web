@@ -337,6 +337,8 @@ class message_controller extends Controller
     {
         $this->validate($request, [
             'user_id' => 'required|integer|exists:myusers,id',
+            'from' => 'integer|min:0',
+            'to' => 'integer|min:1',
         ]);
 
         $user_id = session('user_id');
@@ -360,9 +362,16 @@ class message_controller extends Controller
 
         $is_verified = myuser::find($request->user_id)->is_verified;
 
+        $total_count = count($messages);
+
+        if($request->filled('from') && $request->filled('to')){
+            $messages = array_splice($messages,$request->from,$request->to);
+        }
+
         return response()->json([
             'status' => true,
             'messages' => $messages,
+            'total_count' => $total_count,
             'is_verified' => $is_verified,
             'current_user_id' => $user_id,
         ], 200);
