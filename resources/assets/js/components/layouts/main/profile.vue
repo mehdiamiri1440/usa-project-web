@@ -1,4 +1,8 @@
 <style scoped>
+@import url("../../../../css/owl.carousel.min.css");
+@import url("../../../../css/magnific-popup.css");
+@import url("../../../../css/owl-product-items-style.css");
+
 .info_user_wrapper_mobile .green-button,
 .back_page .green-button {
   margin: 3px 0;
@@ -1745,7 +1749,7 @@ p.response-rate span {
                   :img="photo"
                 />
 
-                <div class="owl-carousel hidden-xs">
+                <div class="owl-carousel product-carousel hidden-xs">
                   <OwlCarousel
                     @click="
                       registerComponentStatistics(
@@ -1791,7 +1795,7 @@ p.response-rate span {
                   </a>
                 </article>
 
-                <div class="owl-carousel hidden-xs">
+                <div class="owl-carousel product-carousel hidden-xs">
                   <OwlCarousel
                     @click="
                       registerComponentStatistics(
@@ -1831,11 +1835,6 @@ import PlaceholderArticleReview from "./main_components/review-components/placeh
 import { eventBus } from "../../../router/router";
 import owlCarousel from "../../../owl.carousel.min.js";
 import magnificPopup from "../../../jquery.magnific-popup.min";
-
-// require("../../../../css/owl.carousel.min.css");
-// require("../../../../css/owl.theme.default.min.css");
-// require("../../../../css/magnific-popup.css");
-// require("../../../../css/owl-custom-style.css");
 
 var visible = false;
 var PopupImage = {
@@ -1936,6 +1935,10 @@ var OwlCarousel = {
       loop: false,
       margin: 10,
       nav: true,
+      navText: [
+        '<span class="fa fa-angle-left"></span>',
+        '<span class="fa fa-angle-right"></span>',
+      ],
       dots: false,
     });
     $(this.$el)

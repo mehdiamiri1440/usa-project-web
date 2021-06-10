@@ -86,7 +86,7 @@
 /******/ 		if (__webpack_require__.nc) {
 /******/ 			script.setAttribute("nonce", __webpack_require__.nc);
 /******/ 		}
-/******/ 		script.src = __webpack_require__.p + "chunks/" + ({}[chunkId]||chunkId) + "." + {"0":"6d0915ba35fd385d3441","1":"69dd5f8c9009f5917090","2":"22a4155d002210a0a0c1","3":"6cb809c97c9e75a2af9d","4":"8b6cb83d9b0ed91849aa","5":"7f8462a067bcc2af57a1","6":"94edb61839b70c082a58","7":"8bcafe2442af5a1935fc","8":"dbcc2d37c902000fd9b6","9":"abbc12932da7a6bfd4f8","10":"053391d45ecd08401124","11":"a06ec99ba976cba16661","12":"ca89c937fc755df2f598","13":"3a3349bb38389f7aa7da","14":"0db8286caa568d878f46","15":"93ea5c77879bb6fadb5f","16":"062ef72a29117dec02a0","17":"10272a81dd37aa0639e4","18":"bd76e2ebb86b4dcc6ced","19":"6b70dba8fa6d5b275b4b","20":"5ebf7fa1815d699aa0be","21":"db585f0d7ba98772a720","22":"106b4b9fc250beeadc1c","23":"34d1b8e71673effa1ca2","24":"521c0b01da5e4f8be583","25":"180f6c8bf8f982ba64c9","26":"4a92533a0c0d426bb5d9","27":"b66b2baee62a1f6a1aa7","28":"8c963a225b3d4f6df5ee","29":"f840ceda57dc93a25f4d","30":"a9348629003bad69db22","31":"135e4f0dc83cf9a7c934","32":"9f6b9a228e639c05e50c","33":"8f38dc7ba4671bec5e32","34":"d8a49add3e439e835e9a","35":"70a61f1700a8b4846d97","36":"035f43af476f5cc27efa","37":"b89311a7cb993aea7ae1","38":"32923d63a817b5312626","39":"c272637ea3cd610bc0cd","40":"cb128eafad406f6b81fb","41":"20bd2fa820cb209b4273"}[chunkId] + ".js";
+/******/ 		script.src = __webpack_require__.p + "chunks/" + ({}[chunkId]||chunkId) + "." + {"0":"f69394689fa4a724739e","1":"3baca6c35c65a92565dd","2":"2d8238ffe57080fc03e5","3":"32d998a714c503f9b95f","4":"880f0acd38ad3846a45d","5":"593c7ff7e0cb094e84e9","6":"0bed98b3718f98db8ca3","7":"d44b663550022ddfac91","8":"fffa648aa4ef0bc5be53","9":"eba249c0d9c36a8aff0e","10":"1ce036b6c1a62deb3e7d","11":"7e8448937e33627ff5be","12":"d8d00a1fb64bec95e34f","13":"7b681344b5d0a533d471","14":"abd1f08b21d0ff00004a","15":"d347c733bbfa3d812f77","16":"0b218b1ee0114eee2d0d","17":"93c1806946ac858271e2","18":"1b780ab4b04ffd153279","19":"750eae81603c110e0f42","20":"fa2d60f8b2fe61490286","21":"2acfa2ed0abf3b3818c7","22":"45025b9610b9a7e1749d","23":"f24a07823a0012abad85","24":"68e41a6aefc5c23ae7ce","25":"5c8c983cf824610ccc54","26":"92030c94e6a92df463a0","27":"69279b5a3ff796a0f207","28":"e8f13dd731ceea2c5ec0","29":"51b05e2e76355595b580","30":"05b4efc6f290f82a2186","31":"903d4dfc5f9df881a639","32":"ed2cbc0892d1c01e615e","33":"168f23d277970a0ee9a8","34":"ce74ebe2e174b1077fb9","35":"b38056d4a817e2188099","36":"6ce896dfe4f4790c13bf","37":"36b41bcfe35d1691e1c8","38":"a1cb97de85a9836f3cec","39":"5fd0896060b8503af16e","40":"4d2b8e2a1eadef0294ca","41":"035815a458c02858274a"}[chunkId] + ".js";
 /******/ 		var timeout = setTimeout(onScriptComplete, 120000);
 /******/ 		script.onerror = script.onload = onScriptComplete;
 /******/ 		function onScriptComplete() {
@@ -998,7 +998,7 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
       name: "dashboardPricingTableSeller",
       components: {
         default: function _default(resolve) {
-          __webpack_require__.e/* require */(15).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(133)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+          __webpack_require__.e/* require */(20).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(133)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
         }
       }
     }, {
@@ -1022,7 +1022,7 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
       name: "profileBasicSeller",
       components: {
         default: function _default(resolve) {
-          __webpack_require__.e/* require */(18).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(136)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+          __webpack_require__.e/* require */(17).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(136)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
         }
       }
     }, {
@@ -1070,7 +1070,7 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
       name: "myProductsSeller",
       components: {
         default: function _default(resolve) {
-          __webpack_require__.e/* require */(17).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(140)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+          __webpack_require__.e/* require */(16).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(140)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
         }
       }
     }, {
@@ -1151,7 +1151,7 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
       name: "profileBasicBuyer",
       components: {
         default: function _default(resolve) {
-          __webpack_require__.e/* require */(19).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(145)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+          __webpack_require__.e/* require */(18).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(145)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
         }
       }
     }, {
@@ -1191,7 +1191,7 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
       name: "specialProducts",
       components: {
         default: function _default(resolve) {
-          __webpack_require__.e/* require */(16).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(148)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+          __webpack_require__.e/* require */(15).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(148)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
         }
       }
     }, {
@@ -1301,7 +1301,7 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
         name: "productView",
         components: {
           default: function _default(resolve) {
-            __webpack_require__.e/* require */(5).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(160)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+            __webpack_require__.e/* require */(6).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(160)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
           }
         }
       }]
@@ -1318,7 +1318,7 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
       name: "productCategory",
       components: {
         default: function _default(resolve) {
-          __webpack_require__.e/* require */(6).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(161)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+          __webpack_require__.e/* require */(5).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(161)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
         }
       }
     }, {
@@ -1334,7 +1334,7 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
       name: "login",
       components: {
         default: function _default(resolve) {
-          __webpack_require__.e/* require */(20).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(163)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+          __webpack_require__.e/* require */(19).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(163)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
         }
       }
     }, {
@@ -33423,30 +33423,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 __webpack_require__(66);
-//// require('./imageuploadify.min');
-//// require('./owl.carousel.min.js');
-//// require('./jquery.magnific-popup.min');
-//// require('./stickySidebar');
-// require('./ResizeSensor.js');
-//// require('./sweetalert.min.js');
-
-
-// require('../css/placeholder-content.css')
-// require('../css/bootstrap.min.css')
-// require('../css/bootstrap-theme.min.css')
-// require('../css/fontiran.min.css')
-// require('../css/all.min.css')
-// require('../css/owl.carousel.min.css')
-// require('../css/owl.theme.default.min.css')
-// require('../css/magnific-popup.css')
-// require('../css/owl-custom-style.css')
-// require('../css/imageuploadify.min.css')
-// require('../css/cropper.css')
-// require('../css/master/style.css')
-// require('../css/popup.css')
-// require('../css/sweetalert.css')
-// require('../css/custom-animation.css')
-
 
 window.Vue = __webpack_require__(6);
 

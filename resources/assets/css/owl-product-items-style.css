@@ -31,28 +31,8 @@
  .product-carousel .owl-nav {
     display: flex;
     justify-content: space-between;
-    flex-direction: row-reverse;
+    direction: ltr;
+    height: 0;
 }
 
 
-@media screen and (max-width: 767px ){
-    
-    .owl-dots {
-
-        position: absolute;
-
-        left: 50px;
-
-        z-index: 1;
-
-        padding-top: 18px;
-
-        display: block;
-
-        text-align: center;
-
-        width: calc(100% - 100px);
-
-    }
-
-} 
