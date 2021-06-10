@@ -365,7 +365,8 @@ class message_controller extends Controller
         $total_count = count($messages);
 
         if($request->filled('from') && $request->filled('to')){
-            $messages = array_splice($messages,$request->from,$request->to);
+            $messages = array_reverse($messages);
+            $messages = array_slice($messages,$request->from,$request->to - $request->from);
         }
 
         return response()->json([
