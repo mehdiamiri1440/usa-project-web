@@ -290,6 +290,7 @@ label {
 
 <template>
   <div v-if="$parent.product.main.id" class="wrapper-bg main-product-wrapper">
+  
     <!--article modal-->
 
     <div
@@ -417,7 +418,8 @@ label {
       <div class="images">
         <div v-if="$parent.product.photos" class="owl-carousel">
           <Carousel
-            v-for="photo in $parent.product.photos"
+            v-for="(photo,index) in $parent.product.photos"
+            :index="index"
             :key="photo.id"
             :base="$parent.str + '/'"
             :img="photo.file_path"
@@ -789,9 +791,11 @@ label {
 
 <script >
 import Carousel from "./carousel";
+
 export default {
   components: {
     Carousel,
+
   },
   methods: {
     getNumberWithCommas: function (number) {

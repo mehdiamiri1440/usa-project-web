@@ -15,15 +15,19 @@
 
 <template>
   <div class="image-wrapper">
+    <!-- this is work for preload images and improve google analytics -->
+    <image-preloader
+      v-if="index == 0"
+      :src="base + img"
+      @loaded="ImageLoaded"
+    />
     <a v-show="isImageLoad" :href="base + img">
-      <transition>
-        <img
-          class="owl-lazy"
-          :data-src="base + img"
-          @load="ImageLoaded"
-          :alt="alt"
-        />
-      </transition>
+      <img
+        class="owl-lazy"
+        :data-src="base + img"
+        @load="ImageLoaded"
+        :alt="alt"
+      />
     </a>
 
     <div v-show="!isImageLoad" class="text-center">
@@ -37,8 +41,11 @@
 <script>
 import owlCarousel from "../../../../../owl.carousel.min.js";
 import magnificPopup from "../../../../../jquery.magnific-popup.min";
-
+import { imagePreloader } from "vue-image-preloader";
 export default {
+  components: {
+    imagePreloader,
+  },
   data: function () {
     return {
       imgSrcs: "",
@@ -56,6 +63,7 @@ export default {
     "base",
     "popUpLoaded",
     "alt",
+    "index",
   ],
   mounted: function () {
     $(".owl-carousel").owlCarousel({
