@@ -479,6 +479,12 @@ a.profile-info-wrapper:hover {
 }
 
 @media screen and (max-width: 991px) {
+  nav .green-button.static-layout {
+    padding: 6px 8px 5px;
+    font-size: 13px;
+    width: initial;
+  }
+
   .search-input button:hover {
     padding-left: 19px;
 

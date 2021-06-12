@@ -11,16 +11,27 @@
   top: calc(50% - 25px);
   left: calc(50% - 25px);
 }
+.image-wrapper {
+  border-radius: 12px;
+}
 </style>
 
 <template>
-  <div class="image-wrapper">
+  <div v-if="index == 0" class="image-wrapper">
     <!-- this is work for preload images and improve google analytics -->
-    <image-preloader
-      v-if="index == 0"
-      :src="base + img"
-      @loaded="ImageLoaded"
-    />
+    <image-preloader :src="base + img" @loaded="ImageLoaded" />
+    <a v-if="isImageLoad" :href="base + img">
+      <img :src="base + img" :alt="alt" />
+    </a>
+
+    <div v-show="!isImageLoad" class="text-center">
+      <div class="spinner-border">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+  </div>
+  <div v-else class="image-wrapper">
+    <!-- this is work for preload images and improve google analytics -->
     <a v-show="isImageLoad" :href="base + img">
       <img
         class="owl-lazy"
@@ -66,42 +77,9 @@ export default {
     "index",
   ],
   mounted: function () {
-    $(".owl-carousel").owlCarousel({
-      loop: false,
-      items: 1,
-      margin: 10,
-      lazyLoad: true,
-      nav: true,
-      navText: [
-        '<span class="fa fa-angle-left"></span>',
-        '<span class="fa fa-angle-right"></span>',
-      ],
-      dots: true,
-    });
-    $(this.$el)
-      .parent()
-      .parent()
-      .parent()
-      .magnificPopup({
-        delegate: "a",
-        type: "image",
-        gallery: {
-          enabled: true,
-          navigateByImgClick: true,
-          preload: [0, 1], // Will preload 0 - before current, and 1 after the current image
-        },
-        callbacks: {
-          open: function () {
-            if (!window.history.state) {
-              window.history.pushState({ pushed: true }, "", "/product-list");
-            }
-
-            $(window).on("popstate", function (e) {
-              $.magnificPopup.close();
-            });
-          },
-        },
-      });
+    if (this.index != 0) {
+      this.loadCarousel();
+    }
   },
   created: function () {
     this.loadImage();
@@ -112,6 +90,53 @@ export default {
     },
     ImageLoaded: function () {
       this.isImageLoad = true;
+    },
+    loadCarousel() {
+      $(".owl-carousel").owlCarousel({
+        loop: false,
+        items: 1,
+        margin: 10,
+        lazyLoad: true,
+        nav: true,
+        navText: [
+          '<span class="fa fa-angle-left"></span>',
+          '<span class="fa fa-angle-right"></span>',
+        ],
+        dots: true,
+      });
+      $(this.$el)
+        .parent()
+        .parent()
+        .parent()
+        .magnificPopup({
+          delegate: "a",
+          type: "image",
+          gallery: {
+            enabled: true,
+            navigateByImgClick: true,
+            preload: [0, 1], // Will preload 0 - before current, and 1 after the current image
+          },
+          callbacks: {
+            open: function () {
+              if (!window.history.state) {
+                window.history.pushState({ pushed: true }, "", "/product-list");
+              }
+
+              $(window).on("popstate", function (e) {
+                $.magnificPopup.close();
+              });
+            },
+          },
+        });
+    },
+  },
+  watch: {
+    isImageLoad(value) {
+      if (value && this.index == 0) {
+        this.$nextTick(() => {
+          this.loadCarousel();
+        });
+      }
     },
   },
 };

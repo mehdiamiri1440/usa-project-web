@@ -123,7 +123,7 @@ footer a {
 
 .social-icon li a svg {
   max-width: 17px;
-  margin-top: 11px;
+  margin-top: 15px;
 }
 
 .social-icon li a:hover {
