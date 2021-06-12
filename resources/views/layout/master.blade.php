@@ -18,7 +18,7 @@
     <link rel="preload" href="{{asset('assets/fonts/woff2/IRANSansWeb(FaNum)_Medium.woff2')}}" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="{{asset('assets/webfonts/fa-solid-900.woff2')}}" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="{{asset('assets/webfonts/fa-regular-400.woff2')}}" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="{{asset('assets/webfonts/fa-brands-400.woff2')}}" as="font" type="font/woff2" crossorigin>
+    <!-- <link rel="preload" href="{{asset('assets/webfonts/fa-brands-400.woff2')}}" as="font" type="font/woff2" crossorigin> -->
     
     
     <!-- Main Styles -->
