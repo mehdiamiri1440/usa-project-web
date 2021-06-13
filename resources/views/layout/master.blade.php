@@ -21,11 +21,12 @@
     <!-- <link rel="preload" href="{{asset('assets/webfonts/fa-brands-400.woff2')}}" as="font" type="font/woff2" crossorigin> -->
     
     
-    <!-- Main Styles -->
-    <link rel="stylesheet" href="{{asset('assets/css/fontiran.min.css')}}" type="text/css">
-    <link rel="stylesheet" href="{{asset('assets/css/all.min.css')}}" type="text/css">
-    <link rel="stylesheet" href="{{asset('css/app.css')}}" type="text/css">
-
+    <!-- Main Styles
+    // improve for blocking request 
+    -->
+    <link rel="preload" href="{{asset('assets/css/fontiran.min.css')}}" as="style" onload="this.rel='stylesheet'" crossorigin>
+    <link rel="preload" href="{{asset('assets/css/all.min.css')}}" as="style" onload="this.rel='stylesheet'" crossorigin>
+    <link rel="preload" href="{{asset('css/app.css')}}" as="style" onload="this.rel='stylesheet'" crossorigin>
     <title>باسکول | بازارگاه کشاورزی </title>
 
 
