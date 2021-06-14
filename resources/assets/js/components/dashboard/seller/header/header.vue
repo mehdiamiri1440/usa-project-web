@@ -678,7 +678,7 @@ import HeaderMenuList from "./sub-com/header-menu-list.vue";
 import HeaderTop from "./sub-com/header-top.vue";
 import SwitchButtons from "./sub-com/swith-buttons.vue";
 
-import { eventBus } from "../../../../router/router";
+// import { eventBus } from "../../../../router/router";
 
 export default {
   components: {

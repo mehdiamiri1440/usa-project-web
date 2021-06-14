@@ -362,7 +362,7 @@ import HeaderDashSeller from "../../components/dashboard/seller/header/header";
 import pricingContents from "../../components/dashboard/seller/pricing-seller-page/pricing-tables/pricing-package-contents";
 import PromotionModal from "../../components/layouts/main/promotion-modal";
 
-import { eventBus } from "../router.js";
+// import { eventBus } from "../router.js";
 
 export default {
   components: {

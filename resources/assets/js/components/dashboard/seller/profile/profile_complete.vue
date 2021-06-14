@@ -636,7 +636,7 @@
 </template>
 
 <script>
-import { eventBus } from "../../../../router/router";
+// import { eventBus } from "../../../../router/router";
 import UploadFile from "../../upload-image";
 import imageuploadify from "../../../../imageuploadify.min";
 export default {

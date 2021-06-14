@@ -22,7 +22,6 @@
   max-width: 1280px;
 }
 
-
 @media screen and (min-width: 1200px) {
   #main-content {
     padding-top: 122px;
@@ -349,7 +348,7 @@ li.active a::after {
   border-radius: 12px;
   border: 1px solid #e0e0e0;
   overflow: hidden;
-  margin-bottom:5px
+  margin-bottom: 5px;
 }
 
 .rate-filter-desktop-wrapper > ul {
@@ -1110,7 +1109,11 @@ div.items-wrapper {
     </div>
 
     <div
-      class="sub-header-fix sub-header hidden-lg hidden-md hidden-sm container-fluid"
+      class="
+        sub-header-fix sub-header
+        hidden-lg hidden-md hidden-sm
+        container-fluid
+      "
     >
       <div class="rate-filter-mobile-wrapper">
         <div class="rate-filter">
@@ -1234,7 +1237,13 @@ div.items-wrapper {
                       <router-link
                         :to="{ name: 'register' }"
                         v-if="!currentUser.user_info"
-                        class="btn green-button banner-button hover-effect hidden-sm hidden-md hidden-lg"
+                        class="
+                          btn
+                          green-button
+                          banner-button
+                          hover-effect
+                          hidden-sm hidden-md hidden-lg
+                        "
                       >
                         ثبت درخواست خرید
                         <i class="fa fa-arrow-left"> </i>
@@ -1371,20 +1380,40 @@ div.items-wrapper {
                 class="default-items col-xs-12"
               >
                 <div
-                  class="col-xs-12 padding-15 margin-15-0 default-item-wrapper default-main-wrapper"
+                  class="
+                    col-xs-12
+                    padding-15
+                    margin-15-0
+                    default-item-wrapper default-main-wrapper
+                  "
                 >
                   <div class="default-user-contents col-xs-12 padding-0">
                     <div
-                      class="placeholder-content default-article-user-image pull-right"
+                      class="
+                        placeholder-content
+                        default-article-user-image
+                        pull-right
+                      "
                     ></div>
 
                     <span
-                      class="padding-top-5 placeholder-content margin-15 pull-right content-min-width"
+                      class="
+                        padding-top-5
+                        placeholder-content
+                        margin-15
+                        pull-right
+                        content-min-width
+                      "
                     ></span>
                   </div>
 
                   <div
-                    class="default-article-contents padding-0 margin-top-10 col-xs-12"
+                    class="
+                      default-article-contents
+                      padding-0
+                      margin-top-10
+                      col-xs-12
+                    "
                   >
                     <div class="default-wrapper-main-image pull-right">
                       <span
@@ -1401,7 +1430,11 @@ div.items-wrapper {
                       ></span>
 
                       <span
-                        class="content-min-width placeholder-content mobile-hidden"
+                        class="
+                          content-min-width
+                          placeholder-content
+                          mobile-hidden
+                        "
                       ></span>
 
                       <span
@@ -1409,7 +1442,13 @@ div.items-wrapper {
                       ></span>
                     </div>
                     <span
-                      class="margin-top-10 placeholder-content default-button-min-with pull-left hidden-afetr-mobile-hidden"
+                      class="
+                        margin-top-10
+                        placeholder-content
+                        default-button-min-with
+                        pull-left
+                        hidden-afetr-mobile-hidden
+                      "
                     ></span>
                   </div>
                 </div>
@@ -1422,14 +1461,23 @@ div.items-wrapper {
                 class="default-items col-xs-6 col-sm-4 col-md-3 default-grid"
               >
                 <div
-                  class="col-xs-12 margin-15-0 default-item-wrapper default-main-wrapper"
+                  class="
+                    col-xs-12
+                    margin-15-0
+                    default-item-wrapper default-main-wrapper
+                  "
                 >
                   <div class="default-wrapper-main-image pull-right">
                     <span class="default-main-image placeholder-content"></span>
                   </div>
 
                   <div
-                    class="default-article-contents padding-0 margin-top-10 col-xs-12"
+                    class="
+                      default-article-contents
+                      padding-0
+                      margin-top-10
+                      col-xs-12
+                    "
                   >
                     <div class="default-main-article-content">
                       <span
@@ -1440,10 +1488,21 @@ div.items-wrapper {
                         class="content-default-width placeholder-content"
                       ></span>
                       <span
-                        class="margin-top-10 placeholder-content default-button-min-with pull-left hidden-afetr-mobile-hidden"
+                        class="
+                          margin-top-10
+                          placeholder-content
+                          default-button-min-with
+                          pull-left
+                          hidden-afetr-mobile-hidden
+                        "
                       ></span>
                       <span
-                        class="placeholder-content default-button-full-with pull-left mobile-hidden"
+                        class="
+                          placeholder-content
+                          default-button-full-with
+                          pull-left
+                          mobile-hidden
+                        "
                       ></span>
                     </div>
                   </div>
@@ -1472,11 +1531,11 @@ div.items-wrapper {
         </div>
       </aside>
 
-      <script
+      <!-- <script
         v-if="jsonLDObject"
         v-html="jsonLDObject"
         type="application/ld+json"
-      ></script>
+      ></script> -->
     </main>
     <footer
       class="category-footer container"
@@ -1514,7 +1573,7 @@ import ProductArticle from "./product_components/product_article";
 import ProductGridArticle from "./product_components/Product_grid_article";
 import ProductAsideCategories from "./product_components/sidebar/product_aside_categories";
 import searchNotFound from "./main_components/search-not-found";
-import { eventBus } from "../../../router/router";
+// import { eventBus } from "../../../router/router";
 import StickySidebar from "../../../stickySidebar.js";
 
 var visible = false;

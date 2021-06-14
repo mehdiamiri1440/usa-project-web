@@ -49,7 +49,7 @@
 
 
 <script>
-import { eventBus } from "../../router/router";
+// import { eventBus } from "../../router/router";
 import PricingTableSellerContent from "./seller/pricing-seller-page/pricing-table-seller-content";
 
 export default {

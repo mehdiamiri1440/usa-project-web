@@ -368,7 +368,7 @@
 </template>
 
 <script>
-import { eventBus } from "../../router/router";
+// import { eventBus } from "../../router/router";
 import Push from "push.js";
 
 import myContactList from "./messages-components/my-contact-list";

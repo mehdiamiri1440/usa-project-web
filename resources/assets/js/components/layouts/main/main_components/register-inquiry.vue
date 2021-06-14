@@ -38,7 +38,7 @@
 
 <script>
 import registerInquiryForm from "./register-inquiry-form.vue";
-import { eventBus } from "../../../../router/router";
+// import { eventBus } from "../../../../router/router";
 
 export default {
   components: {

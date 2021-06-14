@@ -131,7 +131,7 @@
 </template>
 
 <script>
-import { eventBus } from "../../../../router/router";
+// import { eventBus } from "../../../../router/router";
 export default {
   data: function() {
     return {

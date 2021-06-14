@@ -389,7 +389,7 @@
 </template>
 
 <script>
-import { eventBus } from "../../../../router/router";
+// import { eventBus } from "../../../../router/router";
 import IdCard from "./verification-components/id-card";
 import UserImage from "./verification-components/user-image";
 import DocumentImage from "./verification-components/document-image";

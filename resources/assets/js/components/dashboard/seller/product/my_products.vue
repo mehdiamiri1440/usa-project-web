@@ -227,7 +227,7 @@
 
 <script>
 import ProductArticle from "../../../layouts/main/product_components/product_article";
-import { eventBus } from "../../../../router/router";
+// import { eventBus } from "../../../../router/router";
 
 export default {
   components: {

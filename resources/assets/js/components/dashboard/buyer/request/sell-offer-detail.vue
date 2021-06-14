@@ -537,7 +537,7 @@
 </template>
 
 <script>
-import { eventBus } from "../../../../router/router";
+// import { eventBus } from "../../../../router/router";
 import owlCarousel from "../../../../owl.carousel.min.js";
 import magnificPopup from "../../../../jquery.magnific-popup.min";
 

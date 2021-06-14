@@ -302,7 +302,7 @@
 import ProductGridArticle from "../../../layouts/main/product_components/Product_grid_article";
 // import ProductGridArticle from "./product_components/Product_grid_article";
 
-import { eventBus } from "../../../../router/router";
+// import { eventBus } from "../../../../router/router";
 
 export default {
   components: {

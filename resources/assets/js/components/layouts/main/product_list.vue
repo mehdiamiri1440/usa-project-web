@@ -1494,7 +1494,7 @@ import ProductArticle from "./product_components/product_article";
 import ProductGridArticle from "./product_components/Product_grid_article";
 import ProductAsideCategories from "./product_components/sidebar/product_aside_categories";
 import searchNotFound from "./main_components/search-not-found";
-import { eventBus } from "../../../router/router";
+// import { eventBus } from "../../../router/router";
 import StickySidebar from "../../../stickySidebar.js";
 
 var visible = false;

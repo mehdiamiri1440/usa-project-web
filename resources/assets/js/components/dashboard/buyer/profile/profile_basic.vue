@@ -1022,7 +1022,7 @@ textarea.error:focus + i {
 </template>
 
 <script>
-import { eventBus } from "../../../../router/router";
+// import { eventBus } from "../../../../router/router";
 import UploadFile from "../../upload-image";
 import swal from "../../../../sweetalert.min.js";
 import imageuploadify from "../../../../imageuploadify.min";

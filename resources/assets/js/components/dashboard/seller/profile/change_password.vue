@@ -620,7 +620,7 @@ input[type="password"]:focus {
 </template>
 
 <script>
-import { eventBus } from "../../../../router/router";
+// import { eventBus } from "../../../../router/router";
 
 export default {
   props: ["str"],

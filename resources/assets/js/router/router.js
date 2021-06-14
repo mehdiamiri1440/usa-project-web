@@ -1,20 +1,16 @@
-import Vue from "vue";
-import Router from "vue-router";
+// const Vue = require("vue");
 
-window.Vue = require("vue");
-
-Vue.use(Router);
-
+// window.Vue = Vue
 
 // Errors Components
 import notFound from "../components/errors/404";
 
-export const eventBus = new Vue();
+// export const eventBus = new Vue();
+export const eventBus = '';
 
-const router = new Router({
-  mode: "history",
-  base: process.env.BASE_URL,
-  routes: [
+
+export default
+  [
     {
       path: "/seller",
       components: {
@@ -561,15 +557,5 @@ const router = new Router({
         next("/404");
       },
     },
-  ],
-  scrollBehavior(to, from, savedPosition) {
-    // if (savedPosition) {
-    //     JSON.stringify(localStorage.setItem('scroll', savedPosition.y));
-    //     return savedPosition
-    // }
-    return { x: 0, y: 0 };
-  },
-});
+  ]
 
-
-export default router;

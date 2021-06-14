@@ -806,7 +806,7 @@ p.response-rate span {
 
 <template>
   <div>
-    <script v-html="jsonLDObject" type="application/ld+json"></script>
+    <!-- <script v-html="jsonLDObject" type="application/ld+json"></script> -->
 
     <header class="hidden-xs profile-header main-header">
       <div class="title-page col-xs-12">پروفایل</div>
@@ -1853,7 +1853,7 @@ p.response-rate span {
 import ProductArticle from "./product_components/product_article";
 import ArticleReview from "./main_components/review-components/article-review";
 import PlaceholderArticleReview from "./main_components/review-components/placeholder-article-review";
-import { eventBus } from "../../../router/router";
+// import { eventBus } from "../../../router/router";
 import owlCarousel from "../../../owl.carousel.min.js";
 import magnificPopup from "../../../jquery.magnific-popup.min";
 

@@ -415,7 +415,7 @@
 </template>
 
 <script>
-import { eventBus } from "../../../../router/router";
+// import { eventBus } from "../../../../router/router";
 import ProductCategory from "./register-product-steps/product_category";
 import StartRegisterProduct from "./register-product-steps/start_register_product";
 import StockAndPrice from "./register-product-steps/stock_and_price";

@@ -424,7 +424,7 @@
 </template>
 
 <script>
-import { eventBus } from "../../../../router/router.js";
+// import { eventBus } from "../../../../router/router.js";
 
 export default {
   data: function () {

@@ -277,7 +277,7 @@
 </template>
 
 <script>
-import { eventBus } from "../../../../router/router";
+// import { eventBus } from "../../../../router/router";
 import StartRegisterRequest from "./register-request-steps/start-register-request";
 import RegisterRequest from "./register-request-steps/register-request-content";
 import FinishRegisterRequestRelated from "./register-request-steps/fnish-register-request-related";

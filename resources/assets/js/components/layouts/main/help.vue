@@ -624,7 +624,7 @@
 </template>
 
 <script>
-    import {eventBus} from "../../../router/router";
+    // import {eventBus} from "../../../router/router";
     import Route from "../../../router/components/route";
 
     export default {

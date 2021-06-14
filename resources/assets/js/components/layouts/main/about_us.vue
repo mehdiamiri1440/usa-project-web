@@ -165,7 +165,7 @@ h3 {
 </template>
 
 <script>
-import { eventBus } from "../../../router/router";
+// import { eventBus } from "../../../router/router";
 import Route from "../../../router/components/route";
 
 export default {

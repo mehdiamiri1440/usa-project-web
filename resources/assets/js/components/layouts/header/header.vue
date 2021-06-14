@@ -1323,7 +1323,7 @@ a.profile-info-wrapper:hover {
 </template>
 <script>
 var visible = false;
-import { eventBus } from "../../../router/router";
+// import { eventBus } from "../../../router/router";
 
 export default {
   data() {

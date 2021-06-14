@@ -272,7 +272,7 @@
 
     <!-- end regex download App modal  -->
 
-    <ChatModal />
+    <!-- <ChatModal />
 
     <share-to-social-modal :share-modal-url="shareModalUrl" />
     <report-modal :reported-user-id="reportedUserId" />
@@ -306,7 +306,7 @@
       :assets="assets"
       :storage-path="storagePath"
       :verified-user-content="verifiedUserContent"
-    />
+    /> -->
 
     <!-- add android app download  -->
 
@@ -331,23 +331,23 @@
 
 <script>
 import router from "../router.js";
-import { eventBus } from "../router.js";
-import Cookies from "js-cookie";
-import IsWebview from "is-webview";
-import ChatModal from "../../components/layouts/main/main_components/chat_modal";
-import ReportModal from "../../components/layouts/main/main_components/report";
-import ReviewModal from "../../components/layouts/main/main_components/review-component/review";
-import shareToSocialModal from "../../components/layouts/main/main_components/share-to-social-modal";
-import walletComponent from "../../components/layouts/main/wallet";
-import swal from "../../sweetalert.min.js";
+// import { eventBus } from "../router.js";
+// import Cookies from "js-cookie";
+// import IsWebview from "is-webview";
+// import ChatModal from "../../components/layouts/main/main_components/chat_modal";
+// import ReportModal from "../../components/layouts/main/main_components/report";
+// import ReviewModal from "../../components/layouts/main/main_components/review-component/review";
+// import shareToSocialModal from "../../components/layouts/main/main_components/share-to-social-modal";
+// import walletComponent from "../../components/layouts/main/wallet";
+// import swal from "../../sweetalert.min.js";
 
 export default {
   components: {
-    ChatModal,
-    ReportModal,
-    ReviewModal,
-    shareToSocialModal,
-    walletComponent,
+    // ChatModal,
+    // ReportModal,
+    // ReviewModal,
+    // shareToSocialModal,
+    // walletComponent,
   },
   data: function () {
     return {

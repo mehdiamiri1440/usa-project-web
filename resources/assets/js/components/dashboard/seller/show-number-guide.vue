@@ -165,7 +165,7 @@ ul.list-info-wrapper li::after {
 </template>
 
 <script>
-import { eventBus } from "../../../router/router";
+// import { eventBus } from "../../../router/router";
 
 export default {
   data: function () {

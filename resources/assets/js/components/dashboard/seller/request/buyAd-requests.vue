@@ -1007,7 +1007,7 @@ button.disable {
 </template>
 
 <script>
-import { eventBus } from "../../../../router/router";
+// import { eventBus } from "../../../../router/router";
 import CategoryFilter from "./category-filter";
 import swal from "../../../../sweetalert.min.js";
 

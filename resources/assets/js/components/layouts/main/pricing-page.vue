@@ -26,7 +26,7 @@
 
 
 <script>
-import { eventBus } from "../../../router/router";
+// import { eventBus } from "../../../router/router";
 import PricingTableComponent from "./pricing-table-content";
 
 export default {

@@ -191,7 +191,7 @@ li:nth-of-type(2n + 1) .user-items-wrapper {
 </template>
 
 <script>
-import { eventBus } from "../../../router/router";
+// import { eventBus } from "../../../router/router";
 
 export default {
   data: function () {

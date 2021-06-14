@@ -336,7 +336,7 @@
 </template>
 
 <script>
-import { eventBus } from "../../router/router";
+// import { eventBus } from "../../router/router";
 import Push from "push.js";
 
 import MyGroupList from "./group-messages-components/my-group-list";

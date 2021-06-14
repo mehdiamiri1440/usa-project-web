@@ -497,12 +497,12 @@ label {
       </div>
     </div>
     <!--google codes-->
-    <script v-html="jsonLDObject" type="application/ld+json"></script>
+    <!-- <script v-html="jsonLDObject" type="application/ld+json"></script> -->
     <!--end google codes-->
   </article>
 </template>
 <script>
-import { eventBus } from "../../../../router/router";
+// import { eventBus } from "../../../../router/router";
 
 import ProductUserInfo from "./product-article-components/product_user_info";
 import ArticleMainContents from "./product-article-components/article_main_contents";

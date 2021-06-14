@@ -1,6 +1,7 @@
 let mix = require('laravel-mix');
-require('laravel-mix-bundle-analyzer');
+// require('laravel-mix-bundle-analyzer');
 const webpack = require("webpack");
+
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -26,10 +27,11 @@ mix.webpackConfig({
 });
 
 mix.js('resources/assets/js/app.js', 'public/js')
-   .sass('resources/assets/sass/app.scss', 'public/css');
+   .sass('resources/assets/sass/app.scss', 'public/css').options({ processCssUrls: false })
+   .vue({ version: 3 });
 
 
-if (!mix.inProduction()) {
-   mix.bundleAnalyzer();
-}
+// if (!mix.inProduction()) {
+//    mix.bundleAnalyzer();
+// }
 
