@@ -20510,16 +20510,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
 /* harmony import */ var _modules_route_store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/route.store */ "./resources/assets/js/store/modules/route.store.js");
 /* harmony import */ var _modules_messages_store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/messages.store */ "./resources/assets/js/store/modules/messages.store.js");
+/* harmony import */ var _modules_dashboard_store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/dashboard.store */ "./resources/assets/js/store/modules/dashboard.store.js");
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,vuex__WEBPACK_IMPORTED_MODULE_2__.createStore)({
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,vuex__WEBPACK_IMPORTED_MODULE_3__.createStore)({
   modules: {
     routeStore: _modules_route_store__WEBPACK_IMPORTED_MODULE_0__.default,
-    messagesStore: _modules_messages_store__WEBPACK_IMPORTED_MODULE_1__.default
+    messagesStore: _modules_messages_store__WEBPACK_IMPORTED_MODULE_1__.default,
+    dashboardStore: _modules_dashboard_store__WEBPACK_IMPORTED_MODULE_2__.default
   }
 }));
 
@@ -21163,6 +21166,28 @@ var raiseGoldenBuyAdReplyLimitModal = function raiseGoldenBuyAdReplyLimitModal()
   raiseVerificationUploadSuccessModal: raiseVerificationUploadSuccessModal,
   raiseGoldenBuyAdReplyLimitModal: raiseGoldenBuyAdReplyLimitModal,
   openRelatedSwalModal: openRelatedSwalModal
+});
+
+/***/ }),
+
+/***/ "./resources/assets/js/store/modules/dashboard.store.js":
+/*!**************************************************************!*\
+  !*** ./resources/assets/js/store/modules/dashboard.store.js ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+// State object
+var state = {
+  submitSuccess: ""
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  namespaced: true,
+  state: state
 });
 
 /***/ }),
@@ -61982,7 +62007,7 @@ var index = {
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames based on template
-/******/ 			return "chunks/" + chunkId + "." + {"resources_assets_js_router_components_masterRoute_vue":"9eed5718e9edfe6abfb2","resources_assets_js_components_register_register_vue":"6c8f676252b5ccc99eff"}[chunkId] + ".js";
+/******/ 			return "chunks/" + chunkId + "." + {"resources_assets_js_router_components_masterRoute_vue":"d8d46a2c7dfc9146cc99","resources_assets_js_components_register_register_vue":"6c8f676252b5ccc99eff"}[chunkId] + ".js";
 /******/ 		};
 /******/ 	})();
 /******/ 	

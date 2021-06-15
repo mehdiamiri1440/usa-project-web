@@ -1423,9 +1423,9 @@ export default {
       }
     });
 
-    eventBus.$on("submitSuccess", ($event) => {
-      this.popUpMsg = $event;
-    });
+    // eventBus.$on("submitSuccess", ($event) => {
+    //   this.popUpMsg = $event;
+    // });
     eventBus.$on("submiting", ($event) => {
       this.submiting = $event;
     });

@@ -252,7 +252,11 @@
 <template>
   <div>
     <div
-      class="sub-header-fix sub-header hidden-lg hidden-md hidden-sm container-fluid"
+      class="
+        sub-header-fix sub-header
+        hidden-lg hidden-md hidden-sm
+        container-fluid
+      "
     >
       <div class="search-box col-sm-8 col-xs-12 col-lg-5 pull-right">
         <input
@@ -321,13 +325,13 @@ export default {
           this.$router.push({ name: "registerRequestBuyer" });
         } else {
           this.popUpMsg = "حساب کاربری شما از نوع خریدار نیست.";
-          eventBus.$emit("submitSuccess", this.popUpMsg);
+          this.$store.state.dashboardStore.submitSuccess = this.popUpMsg;
           $("#custom-main-modal").modal("show");
         }
       } else {
         this.popUpMsg =
           "تنها کاربران تایید شده ی باسکول مجاز به ثبت درخواست هستند.اگر کاربر ما هستید ابتدا وارد سامانه شوید درغیر اینصورت ثبت نام کنید.";
-        eventBus.$emit("submitSuccess", this.popUpMsg);
+        this.$store.state.dashboardStore.submitSuccess = this.popUpMsg;
         $("#auth-popup").modal("show");
       }
     },
@@ -360,7 +364,7 @@ export default {
 
         this.popUpMsg =
           "برای ثبت آگهی خرید یا فروش  ابتدا وارد سامانه شوید یا ثبت نام کنید.";
-        eventBus.$emit("submitSuccess", this.popUpMsg);
+        this.$store.state.dashboardStore.submitSuccess = this.popUpMsg;
         $("#auth-popup").modal("show");
       }
     },

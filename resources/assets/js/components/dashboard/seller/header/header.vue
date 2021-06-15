@@ -349,87 +349,6 @@ span.min {
 
     <div class="container">
       <div
-        id="deleteModal"
-        class="modal"
-        tabindex="-1"
-        role="dialog"
-        aria-labelledby="myLargeModalLabel"
-      >
-        <div class="modal-dialog modal-lg" role="document">
-          <div class="modal-content">
-            <div class="main_popup_content">
-              <a href="#" data-dismiss="modal">
-                <i class="fa fa-times"></i>
-              </a>
-              <p class="main-pop-up" v-text="popUpMsg"></p>
-
-              <a
-                href="#"
-                class="btn green-button delete"
-                data-dismiss="modal"
-                @click.prevent="deleteProduct()"
-                v-text="deleteButtonText"
-              ></a>
-
-              <a
-                href="#"
-                class="btn green-button"
-                data-dismiss="modal"
-                v-text="cancelButtonText"
-              ></a>
-            </div>
-          </div>
-          <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-      </div>
-    </div>
-
-    <div class="container">
-      <div
-        class="modal fade"
-        id="modal-buttons"
-        tabindex="-1"
-        ref="myModal"
-        role="dialog"
-        aria-labelledby="myModalLabel"
-        aria-hidden="true"
-      >
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="main_popup_content">
-              <a href="#" data-dismiss="modal">
-                <i class="fa fa-close"></i>
-              </a>
-              <p class="main-pop-up">{{ popUpMsg }}</p>
-              <p class="main-pop-up red-text">
-                <b>برای افزایش ظرفیت لطفا عضویت خود را ارتقا دهید.</b>
-              </p>
-              <div class="row">
-                <div class="col-xs-6">
-                  <button class="btn gray-button" data-dismiss="modal">
-                    متوجه شدم
-                  </button>
-                </div>
-                <div class="col-xs-6">
-                  <router-link
-                    data-dismiss="modal"
-                    class="btn green-button"
-                    :to="{ name: 'dashboardPricingTableSeller' }"
-                    >ارتقا عضویت</router-link
-                  >
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-      </div>
-    </div>
-
-    <div class="container">
-      <div
         class="modal fade"
         id="custom-main-modal"
         tabindex="-1"
@@ -462,67 +381,6 @@ span.min {
       </div>
     </div>
 
-    <div class="container">
-      <div
-        class="modal fade"
-        id="confirmation-modal"
-        tabindex="-1"
-        ref="confirmation-modal"
-        role="dialog"
-        aria-labelledby="confirmation-modal-label"
-        aria-hidden="true"
-      >
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="main_popup_content">
-              <a href="#" data-dismiss="modal">
-                <i class="fa fa-times"></i>
-              </a>
-              <p class="main-pop-up" id="popUpMsg">
-                لطفا پس از تکمیل اطلاعات پروفایل خود، منتظر تماس کارشناسان
-                باسکول جهت تکمیل اطلاعات باشید. از شکیبایی شما سپاسگزاریم.
-              </p>
-              <button class="btn green-button" data-dismiss="modal">
-                متوجه شدم
-              </button>
-            </div>
-          </div>
-          <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-      </div>
-    </div>
-
-    <div class="container">
-      <div
-        class="modal fade"
-        id="contract-modal-wrapper"
-        tabindex="-1"
-        ref="contract-modal-wrapper"
-        role="dialog"
-        aria-labelledby="contract-modal-wrapper-label"
-        aria-hidden="true"
-      >
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="main_popup_content">
-              <a href="#" data-dismiss="modal">
-                <i class="fa fa-times"></i>
-              </a>
-              <p class="main-pop-up" id="contractModal">
-                برای شروع استفاده از خدمات باسکول ابتدا در قسمت ویرایش پروفایل،
-                قرارداد همکاری را مطالعه و تایید کنید.
-              </p>
-              <button class="btn green-button" data-dismiss="modal">
-                متوجه شدم
-              </button>
-            </div>
-          </div>
-          <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-      </div>
-    </div>
     <!-- /.modal -->
     <!--loader-->
     <!--loading upload-->
@@ -533,7 +391,10 @@ span.min {
         <div class="progress-upload-wrapper">
           <div class="progress">
             <div
-              class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+              class="
+                progress-bar progress-bar-striped progress-bar-animated
+                bg-success
+              "
               role="progressbar"
               :aria-valuenow="uploadPercentage"
               aria-valuemin="0"
@@ -793,8 +654,7 @@ export default {
         .then(function (response) {
           if (response.status == 200) {
             self.submiting = false;
-            eventBus.$emit("submitSuccess", self.popUpMsg);
-
+            self.$store.state.dashboardStore.submitSuccess = self.popUpMsg;
             self.popUpMsg = "تغییرات با موفقیت اعمال شد";
             $("#custom-main-modal").modal("show");
           }
@@ -1103,9 +963,9 @@ export default {
     eventBus.$on("submiting", (event) => {
       this.submiting = event;
     });
-    eventBus.$on("submitSuccess", (event) => {
-      this.popUpMsg = event;
-    });
+    // eventBus.$on("submitSuccess", (event) => {
+    //   this.popUpMsg = event;
+    // });
     eventBus.$on("uploadPercentage", (event) => {
       this.uploadPercentage = event;
     });

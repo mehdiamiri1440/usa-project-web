@@ -678,7 +678,7 @@ export default {
           // this.$router.push({name : 'registerInquiry'});
         } else {
           this.popUpMsg = "شما نمیتوانید به خودتان پیام دهید.";
-          eventBus.$emit("submitSuccess", this.popUpMsg);
+          this.$store.state.dashboardStore.submitSuccess = this.popUpMsg;
           $("#custom-main-modal").modal("show");
         }
       } else {
@@ -736,7 +736,7 @@ export default {
         document.body.removeChild(input);
         if (result) {
           this.popUpMsg = "آدرس محصول کپی شد.";
-          eventBus.$emit("submitSuccess", this.popUpMsg);
+          this.$store.state.dashboardStore.submitSuccess = this.popUpMsg;
           $("#custom-main-modal").modal("show");
         }
       }

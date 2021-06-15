@@ -221,7 +221,7 @@ export default {
           // this.$router.push({name : 'registerInquiry'});
         } else {
           this.popUpMsg = "شما نمی توانید به خودتان پیام دهید.";
-          eventBus.$emit("submitSuccess", this.popUpMsg);
+          this.$store.state.dashboardStore.submitSuccess = this.popUpMsg;
           $("#custom-main-modal").modal("show");
         }
       } else {

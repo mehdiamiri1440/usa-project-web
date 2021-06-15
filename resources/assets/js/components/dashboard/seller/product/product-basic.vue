@@ -593,7 +593,7 @@ export default {
       if (this.product.rules !== true) {
         this.popUpMsg = "موافقت با قوانین ثبت آگهی الزامی است";
 
-        eventBus.$emit("submitSuccess", this.popUpMsg);
+        this.$store.state.dashboardStore.submitSuccess = this.popUpMsg;
         eventBus.$emit("submiting", false);
 
         $("#custom-main-modal").modal("show");
@@ -617,7 +617,7 @@ export default {
 
               self.disableSubmit = true;
               self.popUpMsg = self.getProductRegisterSuccessMessage();
-              eventBus.$emit("submitSuccess", self.popUpMsg);
+              self.$store.state.dashboardStore.submitSuccess = self.popUpMsg;
               eventBus.$emit("submiting", false);
 
               self.registerComponentStatistics(
@@ -647,7 +647,7 @@ export default {
               self.resetAllImages = true;
 
               self.popUpMsg = response.data.msg;
-              eventBus.$emit("submitSuccess", self.popUpMsg);
+              self.$store.state.dashboardStore.submitSuccess = self.popUpMsg;
               eventBus.$emit("submiting", false);
               self.load = false;
               self.successRegisterProduct = true;

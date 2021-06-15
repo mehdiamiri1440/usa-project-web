@@ -1201,7 +1201,8 @@ export default {
             if (err.response.status === 413) {
               self.popUpMsg =
                 "اندازه تصاویر بزرگ تر 5  از مگابایت است یا فرمت مناسبی ندارد";
-              eventBus.$emit("submitSuccess", self.popUpMsg);
+
+              self.$store.state.dashboardStore.submitSuccess = self.popUpMsg;
               $("#custom-main-modal").modal("show");
             }
 
@@ -1218,7 +1219,7 @@ export default {
               eventBus.$emit("uploadPercentage", 0);
               self.popUpMsg =
                 "اندازه تصاویر بزرگ تر 5  از مگابایت است یا فرمت مناسبی ندارد";
-              eventBus.$emit("submitSuccess", self.popUpMsg);
+              self.$store.state.dashboardStore.submitSuccess = self.popUpMsg;
               $("#custom-main-modal").modal("show");
             }
             eventBus.$emit("submiting", false);

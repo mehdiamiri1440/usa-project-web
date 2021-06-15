@@ -665,7 +665,7 @@ export default {
           .then(function (response) {
             if (response.data.status === true) {
               self.popUpMsg = "کلمه عبور با موفقیت تغییر یافت";
-              eventBus.$emit("submitSuccess", self.popUpMsg);
+              self.$store.state.dashboardStore.submitSuccess = self.popUpMsg;
               $("#custom-main-modal").modal("show");
             } else if (response.data.status === false) {
               self.errors.current_password.push("رمز عبور فعلی درست نیست");

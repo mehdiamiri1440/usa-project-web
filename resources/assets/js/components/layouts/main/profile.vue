@@ -2208,19 +2208,19 @@ export default {
           if (response.data.status === true) {
             self.popUpMsg =
               "محصول شما بروز رسانی شد و در صدر لیست محصولات قرار گرفت.";
-            eventBus.$emit("submitSuccess", self.popUpMsg);
+            self.$store.state.dashboardStore.submitSuccess = self.popUpMsg;
             $("#custom-main-modal").modal("show");
           } else {
             self.popUpMsg =
               "هم اکنون قادر به انجام عملیات نیستیم.دوباره تلاش کنید.";
-            eventBus.$emit("submitSuccess", self.popUpMsg);
+            self.$store.state.dashboardStore.submitSuccess = self.popUpMsg;
             $("#custom-main-modal").modal("show");
           }
         })
         .catch(function (err) {
           self.popUpMsg =
             "هم اکنون قادر به انجام عملیات نیستیم.دوباره تلاش کنید.";
-          eventBus.$emit("submitSuccess", self.popUpMsg);
+          self.$store.state.dashboardStore.submitSuccess = self.popUpMsg;
           $("#custom-main-modal").modal("show");
         });
     },

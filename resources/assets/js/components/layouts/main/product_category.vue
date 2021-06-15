@@ -1794,13 +1794,13 @@ export default {
           window.location.href = "/buyer/register-request";
         } else {
           this.popUpMsg = "حساب کاربری شما از نوع خریدار نیست.";
-          eventBus.$emit("submitSuccess", this.popUpMsg);
+          this.$store.state.dashboardStore.submitSuccess = this.popUpMsg;
           $("#custom-main-modal").modal("show");
         }
       } else {
         this.popUpMsg =
           "تنها کاربران تایید شده ی باسکول مجاز به ثبت درخواست هستند.اگر کاربر ما هستید ابتدا وارد سامانه شوید درغیر اینصورت ثبت نام کنید.";
-        eventBus.$emit("submitSuccess", this.popUpMsg);
+        this.$store.state.dashboardStore.submitSuccess = this.popUpMsg;
         $("#auth-popup").modal("show");
       }
     },
@@ -1837,10 +1837,9 @@ export default {
           "unauthorized-user-clicks-on-plus-btn"
         );
 
-
         this.$store.commit("routeStore/setModal", {
-              name: "guide",
-            });
+          name: "guide",
+        });
       }
     },
     resetFilter: function () {
@@ -2062,8 +2061,8 @@ export default {
     },
     openStickyGuide: function () {
       this.$store.commit("routeStore/setModal", {
-              name: "guide",
-            });
+        name: "guide",
+      });
     },
     swithToListOnMobile() {
       window.addEventListener("resize", (event) => {

@@ -303,7 +303,7 @@ img.image-blur:hover {
     open modal
   </button>
   <h3>
-    {{ $store.state.routeStore.elevatorText }}
+    {{ $store.state.dashboardStore.submitSuccess }}
   </h3>
   <div id="wrap-footer">
     <footer id="footer">
@@ -716,6 +716,9 @@ img.image-blur:hover {
 
 <script>
 export default {
+  mounted() {
+    this.$store.state.dashboardStore.submitSuccess = "success submit";
+  },
   methods: {
     registerComponentStatistics: function (
       categoryName,
