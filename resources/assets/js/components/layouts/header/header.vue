@@ -721,9 +721,17 @@ a.profile-info-wrapper:hover {
 <template>
   <div>
     <!-- loading -->
-    <div :class="{ 'loader-wrapper': !submiting, 'loader-display': submiting }">
+    <div
+      :class="{
+        'loader-wrapper': !$store.state.dashboardStore.submiting,
+        'loader-display': $store.state.dashboardStore.submiting,
+      }"
+    >
       <div class="main-loader">
-        <img v-if="submiting" src="../../../../img/gif/prload.gif" />
+        <img
+          v-if="$store.state.dashboardStore.submiting"
+          src="../../../../img/gif/prload.gif"
+        />
         <p dir="rtl">در حال بارگذاری...</p>
       </div>
     </div>
@@ -1286,18 +1294,12 @@ a.profile-info-wrapper:hover {
 </template>
 <script>
 var visible = false;
-// import { eventBus } from "../../../router/router";
 
 export default {
   data() {
     return {
       popUpMsg: "",
-      submiting: false,
-      isLoading: true,
       deleteText: "",
-      deleteButtonText: "",
-      cancelButtonText: "",
-      ProductId: "",
       mainSearchBoxText: "",
     };
   },
@@ -1340,11 +1342,6 @@ export default {
       gtag("event", actionName, {
         event_category: categoryName,
         event_label: labelName,
-      });
-    },
-    deleteProduct: function () {
-      this.$store.commit("routeStore/deleteProductModal", {
-        productId: this.productId,
       });
     },
     search: function () {
@@ -1421,28 +1418,6 @@ export default {
       if (!$(e.target).is(".search-input input") && menu_opened === true) {
         $("#buskool-nav").collapse("toggle");
       }
-    });
-
-    // eventBus.$on("submitSuccess", ($event) => {
-    //   this.popUpMsg = $event;
-    // });
-    eventBus.$on("submiting", ($event) => {
-      this.submiting = $event;
-    });
-    eventBus.$on("isLoading", ($event) => {
-      this.isLoading = $event;
-    });
-
-    eventBus.$on("deleteButtonText", (event) => {
-      this.deleteButtonText = event;
-    });
-
-    eventBus.$on("cancelButtonText", (event) => {
-      this.cancelButtonText = event;
-    });
-
-    eventBus.$on("productId", (event) => {
-      this.productId = event;
     });
 
     eventBus.$on("textSearch", (event) => {

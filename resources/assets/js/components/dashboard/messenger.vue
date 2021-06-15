@@ -368,7 +368,6 @@
 </template>
 
 <script>
-// import { eventBus } from "../../router/router";
 import Push from "push.js";
 
 import myContactList from "./messages-components/my-contact-list";
@@ -932,7 +931,7 @@ export default {
 
   mounted: function () {
     this.init();
-    eventBus.$emit("subHeader", false);
+    this.$store.state.dashboardStore.subHeader = false;
   },
 
   created: function () {
@@ -964,14 +963,20 @@ export default {
           // Happen if user deney permission
           console.log("Unable to get permission to notify.", err);
         });
-
-      eventBus.$on("contanctMessageReceived", ($event) => {
+      if (this.$store.state.messagesStore.contanctMessageReceived) {
         if (self.selectedContact) {
           self.appendMessageToChatHistory(self.selectedContact);
         } else if (self.isComponentActive) {
           self.loadContactList();
         }
-      });
+      }
+      // eventBus.$on("contanctMessageReceived", ($event) => {
+      //   if (self.selectedContact) {
+      //     self.appendMessageToChatHistory(self.selectedContact);
+      //   } else if (self.isComponentActive) {
+      //     self.loadContactList();
+      //   }
+      // });
     }
   },
   watch: {

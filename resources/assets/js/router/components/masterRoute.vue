@@ -18,6 +18,9 @@
       :user-type="isSeller"
       :verifiedUserContent="verifiedUserContent"
     ></router-view> -->
+    <h3>
+      {{ $store.state.messagesStore.contanctMessageReceived }}
+    </h3>
     <footer-master-layouts />
   </div>
 </template>

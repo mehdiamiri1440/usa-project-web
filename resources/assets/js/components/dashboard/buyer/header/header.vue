@@ -316,7 +316,12 @@ span.min {
     <!--loader-->
     <!--loading upload-->
 
-    <div :class="{ 'loader-wrapper': !submiting, 'loader-display': submiting }">
+    <div
+      :class="{
+        'loader-wrapper': !$store.state.dashboardStore.submiting,
+        'loader-display': $store.state.dashboardStore.submiting,
+      }"
+    >
       <div class="main-loader progress-upload-files">
         <p dir="rtl">در حال بارگذاری...</p>
         <div class="progress-upload-wrapper">
@@ -480,12 +485,7 @@ export default {
       ],
       profilePhoto: "",
       errors: "",
-      submiting: false,
       uploadPercentage: 0,
-      deleteText: "",
-      deleteButtonText: "",
-      cancelButtonText: "",
-      productId: "",
       searchValueText: "",
       resetTextSearch: false,
       verificationAlert: false,
@@ -518,7 +518,7 @@ export default {
       });
     },
     RegisterBasicProfileInfo: function () {
-      this.submiting = true;
+      this.$store.state.dashboardStore.submiting = true;
       this.errors = "";
       var self = this;
       var data = new FormData();
@@ -544,17 +544,17 @@ export default {
         .post("/user/profile_modification", data)
         .then(function (response) {
           if (response.status == 200) {
-            self.submiting = false;
+            self.$store.state.dashboardStore.submiting = false;
             self.$store.state.dashboardStore.submitSuccess =
               "تغییرات با موفقیت اعمال شد";
             $("#custom-main-modal").modal("show");
           }
-          self.submiting = false;
+          self.$store.state.dashboardStore.submiting = false;
         })
         .catch(function (err) {
           self.errors = "";
           self.errors = err.response.data.errors;
-          self.submiting = false;
+          self.$store.state.dashboardStore.submiting = false;
         });
     },
     toLatinNumbers: function (num) {
@@ -751,11 +751,6 @@ export default {
         }
       });
     },
-    deleteProduct: function () {
-      this.$store.commit("routeStore/deleteProductModal", {
-        productId: this.productId,
-      });
-    },
     registerComponentStatistics: function (
       categoryName,
       actionName,
@@ -786,10 +781,6 @@ export default {
     },
   },
   mounted() {
-    var self = this;
-    eventBus.$on("firstDashboardSeen", (event) => {
-      self.isfirstDashboardSeen = event;
-    });
     this.init();
     this.toggleHeader();
     this.toggleShowHeader();
@@ -798,23 +789,9 @@ export default {
     var self = this;
     self.showSnapShot = localStorage.getItem("showSnapShot");
     localStorage.removeItem("showSnapShot");
-    eventBus.$on("submiting", (event) => {
-      this.submiting = event;
-    });
 
     eventBus.$on("uploadPercentage", (event) => {
       this.uploadPercentage = event;
-    });
-    eventBus.$on("deleteButtonText", (event) => {
-      this.deleteButtonText = event;
-    });
-
-    eventBus.$on("cancelButtonText", (event) => {
-      this.cancelButtonText = event;
-    });
-
-    eventBus.$on("productId", (event) => {
-      this.productId = event;
     });
 
     eventBus.$on("resetTextSearch", (event) => {

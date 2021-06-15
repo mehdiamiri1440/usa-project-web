@@ -1007,7 +1007,6 @@ button.disable {
 </template>
 
 <script>
-// import { eventBus } from "../../../../router/router";
 import CategoryFilter from "./category-filter";
 import swal from "../../../../sweetalert.min.js";
 
@@ -1091,9 +1090,9 @@ export default {
               "click on open chatBox"
             );
           } else {
-            self.$store.commit('routeStore/setModal', {
-              name: 'buyAdReplyLimit',
-            })
+            self.$store.commit("routeStore/setModal", {
+              name: "buyAdReplyLimit",
+            });
             self.registerComponentStatistics(
               "buyAdReply",
               "openChat",
@@ -1185,9 +1184,9 @@ export default {
       $(itemFirst).show();
     },
     openGoldenChatRestrictionModal: function () {
-      this.$store.commit('routeStore/setModal', {
-        name: 'goldenBuyAdReplyLimit',
-      })
+      this.$store.commit("routeStore/setModal", {
+        name: "goldenBuyAdReplyLimit",
+      });
 
       this.registerComponentStatistics(
         "buyAdReply",
@@ -1249,7 +1248,7 @@ export default {
   },
   mounted() {
     this.init();
-    eventBus.$emit("subHeader", false);
+    this.$store.state.dashboardStore.subHeader = false;
   },
   created() {
     gtag("config", "UA-129398000-1", { page_path: "/buyAd-requests" });

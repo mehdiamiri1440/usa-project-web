@@ -128,7 +128,12 @@
 
           <div class="col-xs-12 product-wrapper">
             <div
-              class="col-xs-12 default-main-wrapper text-center my-products-info-text"
+              class="
+                col-xs-12
+                default-main-wrapper
+                text-center
+                my-products-info-text
+              "
             >
               <i class="fas fa-chart-line"></i>
               <span
@@ -181,24 +186,49 @@
               class="default-items col-xs-12"
             >
               <div
-                class="col-xs-12 padding-15 margin-15-0 default-item-wrapper default-main-wrapper"
+                class="
+                  col-xs-12
+                  padding-15
+                  margin-15-0
+                  default-item-wrapper default-main-wrapper
+                "
               >
                 <div class="default-user-contents col-xs-12 padding-0">
                   <div
-                    class="placeholder-content default-article-user-image pull-right"
+                    class="
+                      placeholder-content
+                      default-article-user-image
+                      pull-right
+                    "
                   ></div>
 
                   <span
-                    class="padding-top-5 placeholder-content margin-15 pull-right content-min-width"
+                    class="
+                      padding-top-5
+                      placeholder-content
+                      margin-15
+                      pull-right
+                      content-min-width
+                    "
                   ></span>
 
                   <span
-                    class="margin-0 placeholder-content default-button-min-with pull-left"
+                    class="
+                      margin-0
+                      placeholder-content
+                      default-button-min-with
+                      pull-left
+                    "
                   ></span>
                 </div>
 
                 <div
-                  class="default-article-contents padding-0 margin-15-0 col-xs-12"
+                  class="
+                    default-article-contents
+                    padding-0
+                    margin-15-0
+                    col-xs-12
+                  "
                 >
                   <div class="default-wrapper-main-image pull-right">
                     <span class="default-main-image placeholder-content"></span>
@@ -227,7 +257,6 @@
 
 <script>
 import ProductArticle from "../../../layouts/main/product_components/product_article";
-// import { eventBus } from "../../../../router/router";
 
 export default {
   components: {
@@ -288,7 +317,7 @@ export default {
   },
   mounted() {
     this.init();
-    eventBus.$emit("subHeader", false);
+    this.$store.state.dashboardStore.subHeader = false;
   },
   created() {
     gtag("config", "UA-129398000-1", { page_path: "/my-products" });

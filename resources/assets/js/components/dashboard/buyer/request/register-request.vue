@@ -277,7 +277,6 @@
 </template>
 
 <script>
-// import { eventBus } from "../../../../router/router";
 import StartRegisterRequest from "./register-request-steps/start-register-request";
 import RegisterRequest from "./register-request-steps/register-request-content";
 import FinishRegisterRequestRelated from "./register-request-steps/fnish-register-request-related";
@@ -318,7 +317,6 @@ export default {
       popUpMsg: "",
       profileConfirmed: false,
       disableSubmit: false,
-      submiting: false,
       relatedProducts: "",
       inquirySent: false,
       relatedProductsToInquiry: null,
@@ -351,7 +349,7 @@ export default {
       this.errors = "";
       var self = this;
 
-      eventBus.$emit("submitingEvent", true);
+      self.$store.state.dashboardStore.submiting = true;
 
       let formData = this.getBuyAdFormFields();
 
@@ -362,7 +360,7 @@ export default {
             self.disableSubmit = true;
 
             window.localStorage.removeItem("buyAd");
-            eventBus.$emit("submitingEvent", false);
+            self.$store.state.dashboardStore.submiting = false;
 
             self.registerComponentStatistics(
               "buyAd-register",
@@ -375,13 +373,13 @@ export default {
             }
             self.goToStep(2);
           }
-          eventBus.$emit("submitingEvent", false);
+          self.$store.state.dashboardStore.submiting = false;
           self.formLoader = false;
         })
         .catch(function (err) {
           self.errors = err.response.data.errors;
 
-          eventBus.$emit("submitingEvent", false);
+          self.$store.state.dashboardStore.submiting = false;
 
           self.registerComponentExceptions("validation error in buyAd-request");
           self.formLoader = false;
@@ -572,7 +570,7 @@ export default {
   mounted() {
     this.init();
 
-    eventBus.$emit("subHeader", false);
+    this.$store.state.dashboardStore.subHeader = false;
   },
   created() {
     gtag("config", "UA-129398000-1", { page_path: "/register-request" });

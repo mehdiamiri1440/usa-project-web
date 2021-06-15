@@ -566,7 +566,6 @@ export default {
       popUpMsg: "",
       profileConfirmed: false,
       disableSubmit: false,
-      submiting: false,
       relatedProducts: null,
       requirement_amount_text: "",
       categoryName: "میوه",

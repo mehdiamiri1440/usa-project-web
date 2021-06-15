@@ -270,14 +270,23 @@
             class="default-items col-xs-6 col-sm-4 col-md-3 default-grid"
           >
             <div
-              class="col-xs-12 margin-15-0 default-item-wrapper default-main-wrapper"
+              class="
+                col-xs-12
+                margin-15-0
+                default-item-wrapper default-main-wrapper
+              "
             >
               <div class="default-wrapper-main-image pull-right">
                 <span class="default-main-image placeholder-content"></span>
               </div>
 
               <div
-                class="default-article-contents padding-0 margin-top-10 col-xs-12"
+                class="
+                  default-article-contents
+                  padding-0
+                  margin-top-10
+                  col-xs-12
+                "
               >
                 <div class="default-main-article-content">
                   <span class="content-half-width placeholder-content"></span>
@@ -286,7 +295,12 @@
                     class="content-default-width placeholder-content"
                   ></span>
                   <span
-                    class="placeholder-content default-button-full-with pull-left mobile-hidden"
+                    class="
+                      placeholder-content
+                      default-button-full-with
+                      pull-left
+                      mobile-hidden
+                    "
                   ></span>
                 </div>
               </div>
@@ -301,8 +315,6 @@
 <script>
 import ProductGridArticle from "../../../layouts/main/product_components/Product_grid_article";
 // import ProductGridArticle from "./product_components/Product_grid_article";
-
-// import { eventBus } from "../../../../router/router";
 
 export default {
   components: {
@@ -355,7 +367,7 @@ export default {
               self.products = response.data.products;
               self.loading = false;
               localStorage.removeItem("productCountInPage");
-              eventBus.$emit("submiting", false);
+              self.$store.state.dashboardStore.submiting = false;
             });
         })
         .catch((error) => reject(error));
@@ -380,7 +392,7 @@ export default {
             localStorage.productCountInPage = JSON.stringify(
               self.productCountInPage
             );
-            eventBus.$emit("submiting", false);
+            self.$store.state.dashboardStore.submiting = false;
             if (self.products.length + 1 < self.productCountInPage) {
               self.continueToLoadProducts = false;
             }
@@ -440,7 +452,7 @@ export default {
   },
   mounted() {
     this.init();
-    eventBus.$emit("subHeader", false);
+    this.$store.state.dashboardStore.subHeader = false;
   },
   created() {
     gtag("config", "UA-129398000-1", { page_path: "/my-products" });

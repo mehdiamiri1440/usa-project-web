@@ -6,7 +6,8 @@ const state = {
     activeContactId: '',
     reportedUserId: '',
     shareModalUrl: '',
-    reviewUserData: ''
+    reviewUserData: '',
+    isLoading: false
 }
 
 // Mutations

@@ -49,7 +49,6 @@
 
 
 <script>
-// import { eventBus } from "../../router/router";
 import PricingTableSellerContent from "./seller/pricing-seller-page/pricing-table-seller-content";
 
 export default {
@@ -64,7 +63,7 @@ export default {
   },
   mounted: function () {
     let self = this;
-    // eventBus.$emit("subHeader", false);
+    this.$store.state.dashboardStore.subHeader = false;
 
     axios.post("/get_special_users_info").then(function (resposne) {
       self.activeUsers = resposne.data.users;

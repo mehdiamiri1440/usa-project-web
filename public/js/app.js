@@ -17795,11 +17795,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-// import { eventBus } from "../../router/router";
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ["assets"],
   methods: {
-    stopLoader: function stopLoader() {// eventBus.$emit("isLoading", false);
+    stopLoader: function stopLoader() {
+      this.$store.state.routeStore.isLoading = false;
     }
   },
   mounted: function mounted() {
@@ -18346,7 +18346,6 @@ __webpack_require__.r(__webpack_exports__);
       iswebview: navigator.userAgent == "webView" ? true : false,
       isConditionSatisfied: false,
       downloadAppButton: false,
-      productId: "",
       buyAdId: "",
       msg: "",
       reviewCurrentStep: 0,
@@ -18375,8 +18374,9 @@ __webpack_require__.r(__webpack_exports__);
         if (payload.notification.tag == "buskool") {
           if (!this.$store.state.routeStore.activeContactId) {
             this.$store.state.messageStore.messageCount = 1;
-          } // eventBus.$emit("contanctMessageReceived", true);
+          }
 
+          this.$store.state.messagesStore.contanctMessageReceived = true;
         }
       });
     }
@@ -21183,7 +21183,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 // State object
 var state = {
-  submitSuccess: ""
+  submitSuccess: "",
+  subHeader: "",
+  submiting: false
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   namespaced: true,
@@ -21206,7 +21208,8 @@ __webpack_require__.r(__webpack_exports__);
 // State object
 var state = {
   messageCount: 0,
-  userAllowedReview: false
+  userAllowedReview: false,
+  contanctMessageReceived: ""
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   namespaced: true,
@@ -21234,7 +21237,8 @@ var state = {
   activeContactId: '',
   reportedUserId: '',
   shareModalUrl: '',
-  reviewUserData: ''
+  reviewUserData: '',
+  isLoading: false
 }; // Mutations
 
 var mutations = {
@@ -62007,7 +62011,7 @@ var index = {
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames based on template
-/******/ 			return "chunks/" + chunkId + "." + {"resources_assets_js_router_components_masterRoute_vue":"d8d46a2c7dfc9146cc99","resources_assets_js_components_register_register_vue":"6c8f676252b5ccc99eff"}[chunkId] + ".js";
+/******/ 			return "chunks/" + chunkId + "." + {"resources_assets_js_router_components_masterRoute_vue":"ca40971156129c5a8ce4","resources_assets_js_components_register_register_vue":"d29069ce1bf7735a6447"}[chunkId] + ".js";
 /******/ 		};
 /******/ 	})();
 /******/ 	

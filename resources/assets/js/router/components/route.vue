@@ -359,7 +359,6 @@ export default {
       iswebview: navigator.userAgent == "webView" ? true : false,
       isConditionSatisfied: false,
       downloadAppButton: false,
-      productId: "",
       buyAdId: "",
       msg: "",
       reviewCurrentStep: 0,
@@ -401,7 +400,7 @@ export default {
           if (!this.$store.state.routeStore.activeContactId) {
             this.$store.state.messageStore.messageCount = 1;
           }
-          // eventBus.$emit("contanctMessageReceived", true);
+          this.$store.state.messagesStore.contanctMessageReceived = true;
         }
       });
     }

@@ -191,8 +191,6 @@ li:nth-of-type(2n + 1) .user-items-wrapper {
 </template>
 
 <script>
-// import { eventBus } from "../../../router/router";
-
 export default {
   data: function () {
     return {
@@ -255,7 +253,7 @@ export default {
   },
   mounted() {
     this.init();
-    eventBus.$emit("subHeader", false);
+    this.$store.state.dashboardStore.subHeader = false;
   },
 };
 </script>

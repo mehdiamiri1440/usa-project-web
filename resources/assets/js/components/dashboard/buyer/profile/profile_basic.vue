@@ -1022,7 +1022,6 @@ textarea.error:focus + i {
 </template>
 
 <script>
-// import { eventBus } from "../../../../router/router";
 import UploadFile from "../../upload-image";
 import swal from "../../../../sweetalert.min.js";
 import imageuploadify from "../../../../imageuploadify.min";
@@ -1130,10 +1129,10 @@ export default {
       }
 
       if (!formError) {
-        eventBus.$emit("submiting", true);
-
         var self = this;
         var data = new FormData();
+
+        self.$store.state.dashboardStore.submiting = true;
 
         for (var i = 0, cnt = this.profileBasicFields.length; i < cnt; i++) {
           if (this.currentUser.profile[this.profileBasicFields[i]] != null) {
@@ -1179,7 +1178,7 @@ export default {
           })
           .then(function (response) {
             if (response.status === 200) {
-              eventBus.$emit("submiting", false);
+              self.$store.state.dashboardStore.submiting = false;
               eventBus.$emit("uploadPercentage", 0);
               this.$store.commit("routeStore/setModal", {
                 name: "profileEditSuccess",
@@ -1194,7 +1193,7 @@ export default {
                 self.sumProgressNumber();
               });
             }
-            self.submiting = false;
+            self.$store.state.dashboardStore.submiting = false;
           })
           .catch(function (err) {
             self.scrollToTop();
@@ -1215,14 +1214,14 @@ export default {
               (tmpArray.join() + "").includes("related") ||
               (tmpArray.join() + "").includes("certificate")
             ) {
-              eventBus.$emit("submiting", false);
+              self.$store.state.dashboardStore.submiting = false;
               eventBus.$emit("uploadPercentage", 0);
               self.popUpMsg =
                 "اندازه تصاویر بزرگ تر 5  از مگابایت است یا فرمت مناسبی ندارد";
               self.$store.state.dashboardStore.submitSuccess = self.popUpMsg;
               $("#custom-main-modal").modal("show");
             }
-            eventBus.$emit("submiting", false);
+            self.$store.state.dashboardStore.submiting = false;
             eventBus.$emit("uploadPercentage", 0);
           });
       }
@@ -1378,7 +1377,7 @@ export default {
   },
   mounted() {
     this.init();
-    eventBus.$emit("subHeader", this.items);
+    this.$store.state.dashboardStore.subHeader = this.items;
     var self = this;
 
     $("#imgInp").change(function () {

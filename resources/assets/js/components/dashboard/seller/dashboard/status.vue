@@ -291,7 +291,12 @@
               </div>
               <div class="box-upgrade-link">
                 <span
-                  class="content-full-width placeholder-content default-item-wrapper col-xs-12"
+                  class="
+                    content-full-width
+                    placeholder-content
+                    default-item-wrapper
+                    col-xs-12
+                  "
                 ></span>
               </div>
             </div>
@@ -304,8 +309,6 @@
 
 
 <script>
-// import { eventBus } from "../../../../router/router";
-
 export default {
   data: function () {
     return {
@@ -343,7 +346,7 @@ export default {
   },
   methods: {
     init: function () {
-      eventBus.$emit("subHeader", false);
+      this.$store.state.dashboardStore.subHeader = false;
 
       var self = this;
       axios

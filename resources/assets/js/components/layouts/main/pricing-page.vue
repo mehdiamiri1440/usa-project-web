@@ -26,7 +26,6 @@
 
 
 <script>
-// import { eventBus } from "../../../router/router";
 import PricingTableComponent from "./pricing-table-content";
 
 export default {
@@ -35,7 +34,7 @@ export default {
   },
   methods: {
     stopLoader: function () {
-      eventBus.$emit("isLoading", false);
+      this.$store.state.routeStore.isLoading = false;
     },
     trElement: function (element) {
       var elementClass = $(element).attr("class");

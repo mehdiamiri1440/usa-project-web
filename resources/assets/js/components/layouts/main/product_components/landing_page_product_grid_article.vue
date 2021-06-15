@@ -366,7 +366,6 @@ export default {
   props: ["productIndex", "lastProduct", "str", "loadedProduct"],
   data: function () {
     return {
-      submiting: false,
       errors: "",
       popUpMsg: "",
       popUpLoaded: false,

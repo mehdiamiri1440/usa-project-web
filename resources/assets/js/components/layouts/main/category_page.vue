@@ -369,7 +369,7 @@ export default {
       }
     },
     resetFilter: function () {
-      eventBus.$emit("submiting", true);
+      this.$store.state.dashboardStore.submiting = true;
 
       $(".box-sidebar option").prop("selected", function () {
         return this.defaultSelected;
@@ -386,7 +386,7 @@ export default {
     applyFilter: function () {
       var self = this;
 
-      eventBus.$emit("submiting", true);
+      self.$store.state.dashboardStore.submiting = true;
 
       var searchObject = {};
 
@@ -428,7 +428,7 @@ export default {
         .post("/user/get_product_list", searchObject)
         .then(function (response) {
           self.products = response.data.products;
-          eventBus.$emit("submiting", false);
+          self.$store.state.dashboardStore.submiting = false;
           // self.scrollToTop();
         })
         .catch(function (err) {

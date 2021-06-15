@@ -385,7 +385,12 @@ span.min {
     <!--loader-->
     <!--loading upload-->
 
-    <div :class="{ 'loader-wrapper': !submiting, 'loader-display': submiting }">
+    <div
+      :class="{
+        'loader-wrapper': !$store.state.dashboardStore.submiting,
+        'loader-display': $store.state.dashboardStore.submiting,
+      }"
+    >
       <div class="main-loader progress-upload-files">
         <p dir="rtl">در حال بارگذاری...</p>
         <div class="progress-upload-wrapper">
@@ -586,12 +591,7 @@ export default {
       profilePhoto: "",
       errors: "",
       popUpMsg: "",
-      submiting: false,
       uploadPercentage: 0,
-      deleteText: "",
-      deleteButtonText: "",
-      cancelButtonText: "",
-      ProductId: "",
       verificationAlert: false,
       disableVerificationAlertRoutes: [
         "registerProductSeller",
@@ -627,7 +627,7 @@ export default {
       });
     },
     RegisterBasicProfileInfo: function () {
-      this.submiting = true;
+      this.$store.state.dashboardStore.submiting = true;
       this.errors = "";
       var self = this;
       var data = new FormData();
@@ -653,17 +653,17 @@ export default {
         .post("/user/profile_modification", data)
         .then(function (response) {
           if (response.status == 200) {
-            self.submiting = false;
+            self.$store.state.dashboardStore.submiting = false;
             self.$store.state.dashboardStore.submitSuccess = self.popUpMsg;
             self.popUpMsg = "تغییرات با موفقیت اعمال شد";
             $("#custom-main-modal").modal("show");
           }
-          self.submiting = false;
+          self.$store.state.dashboardStore.submiting = false;
         })
         .catch(function (err) {
           self.errors = "";
           self.errors = err.response.data.errors;
-          self.submiting = false;
+          self.$store.state.dashboardStore.submiting = false;
         });
     },
     toLatinNumbers: function (num) {
@@ -861,40 +861,6 @@ export default {
         }
       });
     },
-    deleteProduct: function () {
-      var self = this;
-
-      axios
-        .post("/delete_product_by_id", {
-          product_id: self.productId,
-        })
-        .then(function (response) {
-          //show product deleted message
-          //code
-          self.popUpMsg = "حذف شد.";
-          $("#custom-main-modal").modal("show");
-
-          self.registerComponentStatistics(
-            "product",
-            "product-deleted",
-            "product-deleted-successfully"
-          );
-
-          setTimeout(function () {
-            window.location.reload();
-          }, 3000);
-        })
-        .catch(function (err) {
-          self.registerComponentStatistics(
-            "product",
-            "product-delete-failed",
-            "product-delete-failed"
-          );
-          //show modal
-          self.popUpMsg = "خطایی رخ داده است.لطفا دوباره تلاش کنید.";
-          $("#custom-main-modal").modal("show");
-        });
-    },
     registerComponentStatistics: function (
       categoryName,
       actionName,
@@ -948,10 +914,6 @@ export default {
     },
   },
   mounted() {
-    var self = this;
-    eventBus.$on("firstDashboardSeen", (event) => {
-      self.isfirstDashboardSeen = event;
-    });
     this.init();
     this.toggleHeader();
     this.toggleShowHeader();
@@ -960,25 +922,9 @@ export default {
     var self = this;
     self.showSnapShot = localStorage.getItem("showSnapShot");
     localStorage.removeItem("showSnapShot");
-    eventBus.$on("submiting", (event) => {
-      this.submiting = event;
-    });
-    // eventBus.$on("submitSuccess", (event) => {
-    //   this.popUpMsg = event;
-    // });
+
     eventBus.$on("uploadPercentage", (event) => {
       this.uploadPercentage = event;
-    });
-    eventBus.$on("deleteButtonText", (event) => {
-      this.deleteButtonText = event;
-    });
-
-    eventBus.$on("cancelButtonText", (event) => {
-      this.cancelButtonText = event;
-    });
-
-    eventBus.$on("productId", (event) => {
-      this.productId = event;
     });
   },
   watch: {

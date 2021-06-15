@@ -952,7 +952,6 @@
 
 <script>
 import MessageImage from "./messege-image";
-// import { eventBus } from "../../../router/router";
 import magnificPopup from "../../../jquery.magnific-popup.min";
 
 export default {

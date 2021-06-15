@@ -400,8 +400,6 @@ tr:nth-child(even) {
 </template>
 
 <script>
-// import { eventBus } from "../../../../router/router";
-
 export default {
   props: ["storage"],
   data: function () {
@@ -501,7 +499,7 @@ export default {
   mounted() {
     this.isOsAndroid();
     this.init();
-    eventBus.$emit("subHeader", false);
+    this.$store.state.dashboardStore.subHeader = false;
   },
   created() {
     gtag("config", "UA-129398000-1", { page_path: "/buyAd-requests" });

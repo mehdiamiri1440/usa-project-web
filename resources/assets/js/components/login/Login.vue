@@ -450,7 +450,7 @@ export default {
   },
   methods: {
     stopLoader: function() {
-      eventBus.$emit("isLoading", false);
+      this.$store.state.routeStore.isLoading = false
     },
     goToStep: function(step) {
       this.currentStep = step;

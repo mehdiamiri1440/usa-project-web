@@ -335,8 +335,6 @@
 </template>
 
 <script>
-// import { eventBus } from "../../../../router/router";
-
 export default {
   data: function () {
     return {
@@ -347,7 +345,6 @@ export default {
       buyAds: "",
       popUpMsg: "",
       loading: false,
-      submiting: false,
       items: [
         {
           message: "درخواست های خرید من ",
@@ -376,7 +373,7 @@ export default {
   },
   mounted() {
     this.init();
-    eventBus.$emit("subHeader", this.items);
+    this.$store.state.dashboardStore.subHeader = this.items;
   },
   created() {
     gtag("config", "UA-129398000-1", { page_path: "/my-buyAds" });

@@ -415,7 +415,6 @@
 </template>
 
 <script>
-// import { eventBus } from "../../../../router/router";
 import ProductCategory from "./register-product-steps/product_category";
 import StartRegisterProduct from "./register-product-steps/start_register_product";
 import StockAndPrice from "./register-product-steps/stock_and_price";
@@ -587,14 +586,14 @@ export default {
       }
     },
     submitProduct: function () {
-      eventBus.$emit("submiting", true);
       var self = this;
 
+      self.$store.state.dashboardStore.submiting = true;
       if (this.product.rules !== true) {
         this.popUpMsg = "موافقت با قوانین ثبت آگهی الزامی است";
 
         this.$store.state.dashboardStore.submitSuccess = this.popUpMsg;
-        eventBus.$emit("submiting", false);
+        this.$store.state.dashboardStore.submiting = false;
 
         $("#custom-main-modal").modal("show");
       } else {
@@ -618,7 +617,7 @@ export default {
               self.disableSubmit = true;
               self.popUpMsg = self.getProductRegisterSuccessMessage();
               self.$store.state.dashboardStore.submitSuccess = self.popUpMsg;
-              eventBus.$emit("submiting", false);
+              self.$store.state.dashboardStore.submiting = false;
 
               self.registerComponentStatistics(
                 "product-register",
@@ -648,7 +647,7 @@ export default {
 
               self.popUpMsg = response.data.msg;
               self.$store.state.dashboardStore.submitSuccess = self.popUpMsg;
-              eventBus.$emit("submiting", false);
+              self.$store.state.dashboardStore.submiting = false;
               self.load = false;
               self.successRegisterProduct = true;
               self.resetComponent();
@@ -666,7 +665,7 @@ export default {
           .catch(function (err) {
             self.errors = [];
             self.errors = err.response.data.errors;
-            eventBus.$emit("submiting", false);
+            self.$store.state.dashboardStore.submiting = false;
           });
       }
     },
@@ -971,7 +970,7 @@ export default {
   mounted() {
     this.init();
     $('input[type="file"]').imageuploadify();
-    eventBus.$emit("subHeader", false);
+    this.$store.state.dashboardStore.subHeader = false;
   },
   created() {
     gtag("config", "UA-129398000-1", { page_path: "/register-product" });

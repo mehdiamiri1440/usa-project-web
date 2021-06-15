@@ -410,8 +410,7 @@ export default {
   },
   methods: {
     uploadFiles: function () {
-      eventBus.$emit("submiting", true);
-
+      this.$store.state.dashboardStore.submiting = true;
       let data = new FormData();
 
       data.append("images_count", 3);
@@ -433,7 +432,7 @@ export default {
           }.bind(this),
         })
         .then((response) => {
-          eventBus.$emit("submiting", false);
+          this.$store.state.dashboardStore.submiting = false
           eventBus.$emit("uploadPercentage", 0);
 
           this.currentStep = 3;
@@ -443,7 +442,7 @@ export default {
           // }, 3000);
         })
         .catch((e) => {
-          eventBus.$emit("submiting", false);
+          this.$store.state.dashboardStore.submiting = false
           eventBus.$emit("uploadPercentage", 0);
         });
     },

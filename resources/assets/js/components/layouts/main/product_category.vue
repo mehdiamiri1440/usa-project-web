@@ -1573,7 +1573,7 @@ import ProductArticle from "./product_components/product_article";
 import ProductGridArticle from "./product_components/Product_grid_article";
 import ProductAsideCategories from "./product_components/sidebar/product_aside_categories";
 import searchNotFound from "./main_components/search-not-found";
-// import { eventBus } from "../../../router/router";
+
 import StickySidebar from "../../../stickySidebar.js";
 
 var visible = false;
@@ -1614,7 +1614,6 @@ export default {
       searchActive: false,
       errors: "",
       popUpMsg: "",
-      submiting: false,
       loading: false,
       bottom: false,
       loadMoreActive: false,
@@ -1704,7 +1703,7 @@ export default {
               setTimeout(function () {
                 self.sidebarScroll();
               }, 500);
-              eventBus.$emit("submiting", false);
+              self.$store.state.dashboardStore.submiting = false;
             });
         }
       });
@@ -1732,7 +1731,7 @@ export default {
           .then(function (response) {
             self.products = self.products.concat(response.data.products);
 
-            eventBus.$emit("submiting", false);
+            self.$store.state.dashboardStore.submiting = false;
             if (self.products.length + 1 < self.productCountInPage) {
               self.continueToLoadProducts = false;
             }
@@ -1843,7 +1842,7 @@ export default {
       }
     },
     resetFilter: function () {
-      eventBus.$emit("submiting", true);
+      this.$store.state.dashboardStore.submiting = true;
 
       $(".box-sidebar option").prop("selected", function () {
         return this.defaultSelected;
@@ -1860,7 +1859,7 @@ export default {
     applyFilter: function () {
       var self = this;
 
-      eventBus.$emit("submiting", true);
+      self.$store.state.dashboardStore.submiting = true;
 
       self.fromProductCount = 0;
       self.productCountInPage = 12;
@@ -1893,7 +1892,7 @@ export default {
         .post("/user/get_product_list", searchObject)
         .then(function (response) {
           self.products = response.data.products;
-          eventBus.$emit("submiting", false);
+          self.$store.state.dashboardStore.submiting = false;
 
           self.scrollToTop();
 
@@ -1941,7 +1940,7 @@ export default {
       window.scrollTo(0, 0);
     },
     stopLoader: function () {
-      eventBus.$emit("isLoading", false);
+      this.$store.state.routeStore.isLoading = false;
     },
     registerComponentStatistics: function (
       categoryName,

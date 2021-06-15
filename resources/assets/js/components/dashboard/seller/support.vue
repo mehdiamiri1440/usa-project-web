@@ -93,14 +93,12 @@
 </template>
 
 <script>
-// import { eventBus } from "../../../router/router";
-
 export default {
   data: function () {
     return {};
   },
   mounted() {
-    eventBus.$emit("subHeader", false);
+    this.$store.state.dashboardStore.subHeader = false;
   },
 };
 </script>

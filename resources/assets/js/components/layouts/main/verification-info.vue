@@ -105,14 +105,14 @@ h3 {
 </template>
 
 <script>
-// import { eventBus } from "../../../router/router";
+
 import Route from "../../../router/components/route";
 
 export default {
   components: { Route },
   methods: {
     stopLoader: function() {
-      eventBus.$emit("isLoading", false);
+      this.$store.state.routeStore.isLoading = false
     }
   },
   mounted: function() {

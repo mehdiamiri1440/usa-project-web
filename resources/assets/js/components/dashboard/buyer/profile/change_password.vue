@@ -621,8 +621,6 @@ input[type="password"]:focus {
 
 
 <script>
-// import { eventBus } from "../../../../router/router";
-
 export default {
   props: ["str"],
   data: function () {
@@ -722,7 +720,7 @@ export default {
     },
   },
   mounted() {
-    eventBus.$emit("subHeader", false);
+    this.$store.state.dashboardStore.subHeader = false;
   },
   created() {
     gtag("config", "UA-129398000-1", { page_path: "/change-password" });

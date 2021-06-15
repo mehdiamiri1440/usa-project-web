@@ -2458,7 +2458,7 @@ export default {
   },
   methods: {
     stopLoader: function () {
-      eventBus.$emit("isLoading", false);
+      this.$store.state.routeStore.isLoading = false;
     },
     collapseDropDown: function () {
       $(".profile-list").fadeIn("slow", function () {

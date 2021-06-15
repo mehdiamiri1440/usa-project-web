@@ -638,7 +638,7 @@ export default {
       }
     },
     stopLoader: function () {
-      eventBus.$emit("isLoading", false);
+      this.$store.state.routeStore.isLoading = false
     },
     goToStep: function (step) {
       if (step < 1) {

@@ -81,32 +81,25 @@
 </style>
 
 <template>
-  <div class="sub-header text-rtl" v-if="items">
+  <div class="sub-header text-rtl" v-if="$store.state.dashboardStore.subHeader">
     <ul class="list-inline">
-      <li class="list-item" v-for="(item,index) in items" :class="item.active" :key="index">
+      <li
+        class="list-item"
+        v-for="(item, index) in $store.state.dashboardStore.subHeader"
+        :class="item.active"
+        :key="index"
+      >
         <router-link
-          :to="{ name : item.url }"
+          :to="{ name: item.url }"
           v-text="item.message"
-          :class="{'new-badge' : item.url == 'profileBasicSellerVeficiation' || item.url == 'profileBasicBuyerVeficiation'}"
+          :class="{
+            'new-badge':
+              item.url == 'profileBasicSellerVeficiation' ||
+              item.url == 'profileBasicBuyerVeficiation',
+          }"
         />
       </li>
     </ul>
   </div>
 </template>
 
-<script>
-// import { eventBus } from "../../../../../../router/router";
-
-export default {
-  data: function() {
-    return {
-      items: ""
-    };
-  },
-  created() {
-    eventBus.$on("subHeader", event => {
-      this.items = event;
-    });
-  }
-};
-</script>

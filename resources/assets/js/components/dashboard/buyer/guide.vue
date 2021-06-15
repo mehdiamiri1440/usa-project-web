@@ -72,8 +72,8 @@ ul {
             </li>
             <li>
               به قسمت
-              <router-link :to="{ name: 'registerRequestBuyer' }"
-                > ثبت درخواست خرید </router-link
+              <router-link :to="{ name: 'registerRequestBuyer' }">
+                ثبت درخواست خرید </router-link
               >رفته و اطلاعات لازم جهت خرید محصول مورد نظر خود را وارد کنید.
               <router-link
                 :to="{ name: 'registerRequestBuyer' }"
@@ -96,26 +96,23 @@ ul {
               پیدا کرده و نسبت به انجام معامله با وی و کسب اطلاعات بیشتر، با
               مراجعه به صفحه ی پروفایل فروشنده و کلیک روی دکمه ی ارسال پیام با
               او وارد چت شوید.
-              <router-link
-                :to="{ name: 'productList' }"
-                class="guide-link"
-              >
+              <router-link :to="{ name: 'productList' }" class="guide-link">
                 لیست محصولات
                 <i class="fa fa-arrow-left"></i>
               </router-link>
             </li>
             <li>
-              پس از ثبت درخواست خرید و تایید آن توسط کارشناسان باسکول شماره تماس شما برای فروشندگان واقعی قابل دسترسی است برای تغییر تنظیمات از قسمت ویرایش پروفایل، دسترسی به شماره تماس را غیر فعال کنید.
+              پس از ثبت درخواست خرید و تایید آن توسط کارشناسان باسکول شماره تماس
+              شما برای فروشندگان واقعی قابل دسترسی است برای تغییر تنظیمات از
+              قسمت ویرایش پروفایل، دسترسی به شماره تماس را غیر فعال کنید.
             </li>
             <li>
               هر گونه بروز رسانی پروفایل، پس از تایید کارشناسان ما برای دیگران
               قابل مشاهده خواهد بود.
             </li>
-            <li>در صورت بروز هرگونه مشکل با خدمتگزاران خود تماس بگیرید.
-              <router-link
-                :to="{ name: 'supportBuyer' }"
-                class="guide-link"
-              >
+            <li>
+              در صورت بروز هرگونه مشکل با خدمتگزاران خود تماس بگیرید.
+              <router-link :to="{ name: 'supportBuyer' }" class="guide-link">
                 پشتیبانی باسکول
                 <i class="fa fa-arrow-left"></i>
               </router-link>
@@ -128,8 +125,6 @@ ul {
 </template>
 
 <script>
-// import { eventBus } from "../../../router/router";
-
 export default {
   data: function () {
     return {
@@ -142,7 +137,7 @@ export default {
     };
   },
   mounted() {
-    eventBus.$emit("subHeader", false);
+    this.$store.state.dashboardStore.subHeader = false;
   },
   created() {
     gtag("config", "UA-129398000-1", { page_path: "/guide" });

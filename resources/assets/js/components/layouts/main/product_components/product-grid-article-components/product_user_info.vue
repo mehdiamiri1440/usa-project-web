@@ -190,8 +190,6 @@ export default {
   data() {
     return {
       popUpMsg: "",
-      deleteButtonText: "",
-      cancelButtonText: "",
     };
   },
   methods: {

@@ -1856,7 +1856,7 @@ p.response-rate span {
 import ProductArticle from "./product_components/product_article";
 import ArticleReview from "./main_components/review-components/article-review";
 import PlaceholderArticleReview from "./main_components/review-components/placeholder-article-review";
-// import { eventBus } from "../../../router/router";
+
 import owlCarousel from "../../../owl.carousel.min.js";
 import magnificPopup from "../../../jquery.magnific-popup.min";
 
@@ -2024,7 +2024,6 @@ export default {
       loading: false,
       isMyProfile: false,
       popUpMsg: "",
-      submiting: "",
       copyLinkText: "",
       copyLinkClass: "",
       profileOwnerStatistics: {
@@ -2057,7 +2056,7 @@ export default {
   },
   methods: {
     stopLoader: function () {
-      eventBus.$emit("isLoading", false);
+      this.$store.state.routeStore.isLoading = false;
     },
     collapseDropDown: function () {
       $(".profile-list").fadeIn("slow", function () {
