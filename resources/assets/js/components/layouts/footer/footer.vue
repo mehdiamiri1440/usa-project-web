@@ -286,23 +286,6 @@ img.image-blur:hover {
 
 
 <template>
-  <!-- <button
-    @click="
-      $store.commit('routeStore/deleteProductModal', {
-        productId: 1,
-      })
-    "
-  > -->
-  <button
-    @click="
-      $store.commit('routeStore/setModal', {
-        name: 'userRegisterSuccess',
-      })
-    "
-  >
-    open modal
-  </button>
-  {{ $store.state.routeStore.isLoading }}
   <div id="wrap-footer">
     <footer id="footer">
       <div class="container">

@@ -3,7 +3,8 @@
 const state = {
     messageCount: 0,
     userAllowedReview: false,
-    contanctMessageReceived: ""
+    contanctMessageReceived: "",
+    chatInfo: ""
 }
 
 export default {

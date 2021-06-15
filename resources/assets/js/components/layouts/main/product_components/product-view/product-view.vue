@@ -525,7 +525,7 @@ export default {
       var self = this;
       if (this.currentUser.user_info) {
         if (this.currentUser.user_info.id !== product.user_info.id) {
-          eventBus.$emit("ChatInfo", contact);
+          this.$store.state.messagesStore.chatInfo = contact;
           //   window.localStorage.setItem("contact", JSON.stringify(contact));
 
           //   this.$router.push({ name: "registerInquiry" });
@@ -587,7 +587,7 @@ export default {
         if (this.currentUser.user_info.id !== product.user_info.id) {
           window.localStorage.setItem("contact", JSON.stringify(contact));
 
-          eventBus.$emit("ChatInfo", contact);
+          this.$store.state.messagesStore.chatInfo = contact;
         } else {
           this.popUpMsg = "شما نمی توانید به خودتان پیام دهید.";
           this.$store.state.dashboardStore.submitSuccess = this.popUpMsg;

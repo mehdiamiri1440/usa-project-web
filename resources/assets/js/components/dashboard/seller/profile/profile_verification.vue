@@ -389,7 +389,6 @@
 </template>
 
 <script>
-// import { eventBus } from "../../../../router/router";
 import IdCard from "./verification-components/id-card";
 import UserImage from "./verification-components/user-image";
 import DocumentImage from "./verification-components/document-image";
@@ -433,7 +432,7 @@ export default {
         })
         .then((response) => {
           this.$store.state.dashboardStore.submiting = false;
-          eventBus.$emit("uploadPercentage", 0);
+          this.$store.state.dashboardStore.uploadPercentage = 0;
 
           this.currentStep = 3;
 
@@ -443,7 +442,7 @@ export default {
         })
         .catch((e) => {
           this.$store.state.dashboardStore.submiting = false;
-          eventBus.$emit("uploadPercentage", 0);
+          this.$store.state.dashboardStore.uploadPercentage = 0;
         });
     },
     scrollToTop() {
@@ -452,7 +451,7 @@ export default {
   },
   watch: {
     uploadPercentage: function () {
-      eventBus.$emit("uploadPercentage", this.uploadPercentage);
+      this.$store.state.dashboardStore.uploadPercentage = this.uploadPercentage;
     },
     "product.product_name": function (name) {
       this.errors.product_name = "";

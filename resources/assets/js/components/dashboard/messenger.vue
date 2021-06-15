@@ -970,13 +970,6 @@ export default {
           self.loadContactList();
         }
       }
-      // eventBus.$on("contanctMessageReceived", ($event) => {
-      //   if (self.selectedContact) {
-      //     self.appendMessageToChatHistory(self.selectedContact);
-      //   } else if (self.isComponentActive) {
-      //     self.loadContactList();
-      //   }
-      // });
     }
   },
   watch: {

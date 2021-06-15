@@ -637,14 +637,14 @@ export default {
   mounted: function () {
     this.init();
 
-    eventBus.$on("buyAdbuttonActive", (event) => {
-      this.buttonActiveInSteps = event;
-    });
+    // eventBus.$on("buyAdbuttonActive", (event) => {
+    //   this.buttonActiveInSteps = event;
+    // });
 
-    eventBus.$on("paymentData", (event) => {
-      this.paymentData = event;
-      $("#factor-pricing-modal").modal("show");
-    });
+    // eventBus.$on("paymentData", (event) => {
+    //   this.paymentData = event;
+    //   $("#factor-pricing-modal").modal("show");
+    // });
   },
   created: function () {
     // this.checkCookie();

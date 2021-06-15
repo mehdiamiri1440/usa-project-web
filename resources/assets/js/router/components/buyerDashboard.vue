@@ -48,7 +48,6 @@
 
 <script>
 import HeaderDashBuyer from "../../components/dashboard/buyer/header/header";
-// import { eventBus } from "../router.js";
 
 export default {
   components: {

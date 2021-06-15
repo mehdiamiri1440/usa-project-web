@@ -2510,7 +2510,7 @@ export default {
     },
     search: function () {
       if (this.mainSearchBoxText !== "") {
-        eventBus.$emit("textSearch", this.mainSearchBoxText);
+        // eventBus.$emit("textSearch", this.mainSearchBoxText);
 
         let searchValue = this.mainSearchBoxText;
         let queryValue = searchValue.replace(/ /g, "+");
@@ -2830,9 +2830,9 @@ export default {
     this.$nextTick(this.stopLoader());
   },
   created() {
-    eventBus.$on("textSearch", (event) => {
-      this.mainSearchBoxText = event;
-    });
+    // eventBus.$on("textSearch", (event) => {
+    //   this.mainSearchBoxText = event;
+    // });
 
     gtag("config", "UA-129398000-1", { page_path: "/home-page" });
 
@@ -2851,7 +2851,7 @@ export default {
   watch: {
     mainSearchBoxText: function (value) {
       this.enterKeyActiveForSearch = this.mainSearchBoxText !== "";
-      eventBus.$emit("textSearch", value);
+      // eventBus.$emit("textSearch", value);
     },
   },
   metaInfo() {

@@ -446,8 +446,7 @@ export default {
     },
     resetFilter: function () {
       // reset text data from header for syncing
-
-      eventBus.$emit("resetTextSearch", true);
+      // eventBus.$emit("resetTextSearch", true);
     },
   },
   mounted() {

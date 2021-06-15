@@ -1171,8 +1171,8 @@ export default {
           })
           .then(function (response) {
             if (response.status === 200) {
-              self.$store.state.dashboardStore.submiting = false
-              eventBus.$emit("uploadPercentage", 0);
+              self.$store.state.dashboardStore.submiting = false;
+              self.$store.state.dashboardStore.uploadPercentage = 0;
               this.$store.commit("routeStore/setModal", {
                 name: "profileEditSuccess",
               });
@@ -1186,7 +1186,7 @@ export default {
                 self.sumProgressNumber();
               });
             }
-            self.$store.state.dashboardStore.submiting = false
+            self.$store.state.dashboardStore.submiting = false;
           })
           .catch(function (err) {
             self.scrollToTop();
@@ -1206,15 +1206,15 @@ export default {
               (tmpArray.join() + "").includes("related") ||
               (tmpArray.join() + "").includes("certificate")
             ) {
-              self.$store.state.dashboardStore.submiting = false
-              eventBus.$emit("uploadPercentage", 0);
+              self.$store.state.dashboardStore.submiting = false;
+              self.$store.state.dashboardStore.uploadPercentage = 0;
               self.popUpMsg =
                 "اندازه تصاویر بزرگ تر 5  از مگابایت است یا فرمت مناسبی ندارد";
               self.$store.state.dashboardStore.submitSuccess = self.popUpMsg;
               $("#custom-main-modal").modal("show");
             }
-            self.$store.state.dashboardStore.submiting = false
-            eventBus.$emit("uploadPercentage", 0);
+            self.$store.state.dashboardStore.submiting = false;
+            self.$store.state.dashboardStore.uploadPercentage = 0;
           });
       }
     },
@@ -1385,7 +1385,7 @@ export default {
   },
   watch: {
     uploadPercentage: function () {
-      eventBus.$emit("uploadPercentage", this.uploadPercentage);
+      this.$store.state.dashboardStore.uploadPercentage = this.uploadPercentage;
     },
     "currentUser.profile.company_register_code": function (value) {
       this.currentUser.profile.company_register_code =

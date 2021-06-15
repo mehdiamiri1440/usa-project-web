@@ -401,12 +401,14 @@ span.min {
                 bg-success
               "
               role="progressbar"
-              :aria-valuenow="uploadPercentage"
+              :aria-valuenow="$store.state.dashboardStore.uploadPercentage"
               aria-valuemin="0"
               aria-valuemax="100"
-              :style="{ width: uploadPercentage + '%' }"
+              :style="{
+                width: $store.state.dashboardStore.uploadPercentage + '%',
+              }"
             >
-              {{ uploadPercentage + "%" }}
+              {{ $store.state.dashboardStore.uploadPercentage + "%" }}
             </div>
           </div>
         </div>
@@ -544,8 +546,6 @@ import HeaderMenuList from "./sub-com/header-menu-list.vue";
 import HeaderTop from "./sub-com/header-top.vue";
 import SwitchButtons from "./sub-com/swith-buttons.vue";
 
-// import { eventBus } from "../../../../router/router";
-
 export default {
   components: {
     ProfileInfo,
@@ -591,7 +591,6 @@ export default {
       profilePhoto: "",
       errors: "",
       popUpMsg: "",
-      uploadPercentage: 0,
       verificationAlert: false,
       disableVerificationAlertRoutes: [
         "registerProductSeller",
@@ -922,10 +921,6 @@ export default {
     var self = this;
     self.showSnapShot = localStorage.getItem("showSnapShot");
     localStorage.removeItem("showSnapShot");
-
-    eventBus.$on("uploadPercentage", (event) => {
-      this.uploadPercentage = event;
-    });
   },
   watch: {
     $route(route) {

@@ -336,7 +336,7 @@ export default {
 
       if (this.current_user.user_info) {
         if (this.current_user.user_info.id !== this.user_info.id) {
-          eventBus.$emit("ChatInfo", contact);
+          this.$store.state.messagesStore.chatInfo = contact;
           // window.localStorage.setItem("contact", JSON.stringify(contact));
 
           // this.$router.push({name : 'registerInquiry'});

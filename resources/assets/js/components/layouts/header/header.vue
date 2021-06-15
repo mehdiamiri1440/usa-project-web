@@ -1420,9 +1420,9 @@ export default {
       }
     });
 
-    eventBus.$on("textSearch", (event) => {
-      this.mainSearchBoxText = event;
-    });
+    // eventBus.$on("textSearch", (event) => {
+    //   this.mainSearchBoxText = event;
+    // });
 
     $(window).resize(this.jqUpdateSize); // When the browser changes size
   },
@@ -1447,7 +1447,7 @@ export default {
   },
   watch: {
     mainSearchBoxText: function (value) {
-      eventBus.$emit("textSearch", value);
+      // eventBus.$emit("textSearch", value);
     },
   },
 };

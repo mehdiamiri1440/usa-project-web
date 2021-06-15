@@ -2286,7 +2286,7 @@ export default {
       };
 
       if (this.currentUser.user_info) {
-        eventBus.$emit("ChatInfo", contact);
+        this.$store.state.messagesStore.chatInfo = contact;
       } else {
         window.localStorage.setItem("contact", JSON.stringify(contact));
         window.localStorage.setItem("pathname", window.location.pathname);

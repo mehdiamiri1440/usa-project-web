@@ -502,7 +502,6 @@ label {
   </article>
 </template>
 <script>
-// import { eventBus } from "../../../../router/router";
 
 import ProductUserInfo from "./product-article-components/product_user_info";
 import ArticleMainContents from "./product-article-components/article_main_contents";
@@ -672,7 +671,7 @@ export default {
 
       if (this.currentUser.user_info) {
         if (this.currentUser.user_info.id !== product.user_info.id) {
-          eventBus.$emit("ChatInfo", contact);
+          this.$store.state.messagesStore.chatInfo = contact;
           // window.localStorage.setItem("contact", JSON.stringify(contact));
 
           // this.$router.push({name : 'registerInquiry'});

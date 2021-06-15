@@ -1130,7 +1130,7 @@ export default {
               buyAd_id: buyAd.id,
             };
 
-            eventBus.$emit("ChatInfo", contact);
+            self.$store.state.messagesStore.chatInfo = contact;
 
             self.registerComponentStatistics(
               "suggestedBuyAdReply",

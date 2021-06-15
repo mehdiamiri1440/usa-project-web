@@ -510,7 +510,7 @@ export default {
             user_name: product.user_name,
           };
 
-          eventBus.$emit("ChatInfo", contact);
+          this.$store.state.messagesStore.chatInfo = contact;
         })
         .catch(function (err) {
           //

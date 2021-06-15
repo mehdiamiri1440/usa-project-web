@@ -765,7 +765,7 @@ a.profile-info-wrapper:focus {
 <script>
 var visible = false;
 import SubMenu from "./sub-menu/sub-menu.vue";
-// import { eventBus } from "../../../../../router/router";
+
 export default {
   components: {
     SubMenu,
@@ -809,12 +809,6 @@ export default {
   },
   mounted() {
     this.init();
-  },
-  created() {
-    var self = this;
-    eventBus.$on("active", (event) => {
-      this.activeElement = event;
-    });
   },
   registerComponentStatistics: function (categoryName, actionName, labelName) {
     gtag("event", actionName, {

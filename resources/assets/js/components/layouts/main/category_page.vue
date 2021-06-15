@@ -488,9 +488,9 @@ export default {
   },
   created() {
     gtag("config", "UA-129398000-1", { page_path: "/product-list" });
-    eventBus.$on("textSearch", (event) => {
-      this.searchText = event;
-    });
+    // eventBus.$on("textSearch", (event) => {
+    //   this.searchText = event;
+    // });
 
     // document.addEventListener('click', this.documentClick);
   },

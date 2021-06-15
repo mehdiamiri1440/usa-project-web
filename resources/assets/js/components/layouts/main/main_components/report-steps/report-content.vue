@@ -93,8 +93,6 @@
 </template>
 
 <script>
-// import { eventBus } from "../../../../../router/router.js";
-
 export default {
   data: function () {
     return {

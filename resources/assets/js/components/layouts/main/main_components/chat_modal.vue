@@ -424,7 +424,7 @@
 </template>
 
 <script>
-// import { eventBus } from "../../../../router/router.js";
+import { mapState } from "vuex";
 
 export default {
   data: function () {
@@ -602,16 +602,25 @@ export default {
         });
     },
   },
-
-  created: function () {
-    eventBus.$on("ChatInfo", ($event) => {
-      this.contactInfo = $event;
-      this.chatMessages = "";
-      this.openChatBox = true;
-      this.msgToSend = "";
-      this.setUpChat();
-    });
-  },
+  computed: mapState({
+    chatInfo: (state) => {
+      // this.contactInfo = $event;
+      // this.chatMessages = "";
+      // this.openChatBox = true;
+      // this.msgToSend = "";
+      // this.setUpChat();
+      return state.routeStore.elevatorText;
+    },
+  }),
+  // created: function () {
+  //   eventBus.$on("ChatInfo", ($event) => {
+  //     this.contactInfo = $event;
+  //     this.chatMessages = "";
+  //     this.openChatBox = true;
+  //     this.msgToSend = "";
+  //     this.setUpChat();
+  //   });
+  // },
   watch: {
     openChatBox: function (value) {
       if (value == true) {

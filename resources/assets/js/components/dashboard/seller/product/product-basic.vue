@@ -977,7 +977,7 @@ export default {
   },
   watch: {
     uploadPercentage: function () {
-      eventBus.$emit("uploadPercentage", this.uploadPercentage);
+      this.$store.state.dashboardStore.uploadPercentage = this.uploadPercentage;
     },
     "product.product_name": function (name) {
       this.errors.product_name = "";

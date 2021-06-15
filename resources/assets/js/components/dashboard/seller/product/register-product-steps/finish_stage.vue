@@ -677,7 +677,6 @@ li .buyad-button.send-message-button:hover {
 </template>
 
 <script>
-// import { eventBus } from "../../../../../router/router";
 import swal from "../../../../../sweetalert.min.js";
 
 export default {
@@ -726,7 +725,7 @@ export default {
               buyAd_id: buyAd.id,
             };
 
-            eventBus.$emit("ChatInfo", contact);
+            self.$store.state.messagesStore.chatInfo = contact;
 
             self.registerComponentStatistics(
               "buyAdReply",

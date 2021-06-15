@@ -2097,7 +2097,7 @@ export default {
           self.searchText
         );
 
-        eventBus.$emit("textSearch", value);
+        // eventBus.$emit("textSearch", value);
 
         self.$router.replace({
           name: "productList",

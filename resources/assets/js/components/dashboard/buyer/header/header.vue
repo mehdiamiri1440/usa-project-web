@@ -332,12 +332,14 @@ span.min {
                 bg-success
               "
               role="progressbar"
-              :aria-valuenow="uploadPercentage"
+              :aria-valuenow="$store.state.dashboardStore.uploadPercentage"
               aria-valuemin="0"
               aria-valuemax="100"
-              :style="{ width: uploadPercentage + '%' }"
+              :style="{
+                width: $store.state.dashboardStore.uploadPercentage + '%',
+              }"
             >
-              {{ uploadPercentage + "%" }}
+              {{ $store.state.dashboardStore.uploadPercentage + "%" }}
             </div>
           </div>
         </div>
@@ -447,7 +449,6 @@ import ProfileInfo from "./sub-com/profile_info.vue";
 import HeaderMenuList from "./sub-com/header-menu-list.vue";
 import HeaderTop from "./sub-com/header-top.vue";
 import SwitchButtons from "./sub-com/swith-buttons.vue";
-// import { eventBus } from "../../../../router/router";
 
 export default {
   components: {
@@ -485,9 +486,7 @@ export default {
       ],
       profilePhoto: "",
       errors: "",
-      uploadPercentage: 0,
       searchValueText: "",
-      resetTextSearch: false,
       verificationAlert: false,
       disableVerificationAlertRoutes: [
         "registerRequestBuyer",
@@ -789,28 +788,19 @@ export default {
     var self = this;
     self.showSnapShot = localStorage.getItem("showSnapShot");
     localStorage.removeItem("showSnapShot");
-
-    eventBus.$on("uploadPercentage", (event) => {
-      this.uploadPercentage = event;
-    });
-
-    eventBus.$on("resetTextSearch", (event) => {
-      this.resetTextSearch = event;
-    });
   },
   watch: {
     searchValueText: function (value) {
-      this.resetTextSearch = false;
       this.$parent.searchText = value;
     },
     "$parent.searchText"(text) {
       this.searchValueText = text;
     },
-    resetTextSearch: function (value) {
-      if (value == true) {
-        this.searchValueText = "";
-      }
-    },
+    // resetTextSearch: function (value) {
+    //   if (value == true) {
+    //     this.searchValueText = "";
+    //   }
+    // },
     $route(route) {
       if (
         !this.$parent.currentUser.user_info.is_verified &&

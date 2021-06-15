@@ -231,7 +231,7 @@ export default {
         last_name: user.last_name,
         user_name: user.user_name,
       };
-      eventBus.$emit("ChatInfo", contact);
+      this.$store.state.messagesStore.chatInfo = contact;
     },
     registerComponentStatistics: function (
       categoryName,

@@ -223,8 +223,6 @@ a.active {
 </template>
 
 <script>
-// import { eventBus } from "../../../../../router/router";
-
 export default {
   props: [
     "profilebasic",
@@ -273,10 +271,6 @@ export default {
   created() {
     var self = this;
     var userId = window.localStorage.getItem("userId");
-
-    eventBus.$on("active", (event) => {
-      this.activeElement = event;
-    });
   },
 };
 </script>

@@ -638,7 +638,7 @@ export default {
       }
     },
     stopLoader: function () {
-      this.$store.state.routeStore.isLoading = false
+      this.$store.state.routeStore.isLoading = false;
     },
     goToStep: function (step) {
       if (step < 1) {
@@ -815,9 +815,9 @@ export default {
           .post("api/v1/users", object)
           .then(function (response) {
             if (response.status === 201) {
-              self.$store.commit('routeStore/setModal', {
-                name: 'passwordResetSuccess',
-              })
+              self.$store.commit("routeStore/setModal", {
+                name: "passwordResetSuccess",
+              });
               self.createCookie("registerNewUser", true, 60);
 
               let deviceInfo = new device.DeviceUUID();
@@ -1237,7 +1237,7 @@ export default {
 
           this.$router.push({ path: pathname });
 
-          eventBus.$emit("ChatInfo", contact);
+          this.$store.state.messagesStore.chatInfo = contact;
         } else {
           this.redirectUserToPanel(userInfo);
         }

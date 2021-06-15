@@ -1876,7 +1876,7 @@ export default {
       window.scrollTo(0, 0);
     },
     stopLoader: function () {
-      this.$store.state.routeStore.isLoading = false
+      this.$store.state.routeStore.isLoading = false;
     },
     registerComponentStatistics: function (
       categoryName,
@@ -1980,7 +1980,7 @@ export default {
     searchText: function (value) {
       var self = this;
 
-      eventBus.$emit("textSearch", value);
+      // eventBus.$emit("textSearch", value);
 
       clearTimeout(this.searchTextTimeout);
 
@@ -2018,9 +2018,9 @@ export default {
   },
   created() {
     gtag("config", "UA-129398000-1", { page_path: "/product-list" });
-    eventBus.$on("textSearch", (event) => {
-      this.searchText = event;
-    });
+    // eventBus.$on("textSearch", (event) => {
+    //   this.searchText = event;
+    // });
 
     // document.addEventListener('click', this.documentClick);
   },
