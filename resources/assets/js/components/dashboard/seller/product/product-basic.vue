@@ -426,7 +426,6 @@ import MoreDetails from "./register-product-steps/more_details";
 import FinishStage from "./register-product-steps/finish_stage";
 import imageuploadify from "../../../../imageuploadify.min";
 
-
 export default {
   components: {
     ProductCategory,
@@ -554,7 +553,9 @@ export default {
           self.isStartLoading = false;
 
           if (self.limited.isLimited) {
-            eventBus.$emit("modal", "registerProductLimit");
+            self.$store.commit("routeStore/setModal", {
+              name: "registerProductLimit",
+            });
           } else {
             eventBus.$emit("buyAdbuttonActive", false);
             self.goToStep(1);

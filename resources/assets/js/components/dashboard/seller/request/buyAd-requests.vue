@@ -1091,7 +1091,9 @@ export default {
               "click on open chatBox"
             );
           } else {
-            eventBus.$emit("modal", "buyAdReplyLimit");
+            self.$store.commit('routeStore/setModal', {
+              name: 'buyAdReplyLimit',
+            })
             self.registerComponentStatistics(
               "buyAdReply",
               "openChat",
@@ -1183,7 +1185,9 @@ export default {
       $(itemFirst).show();
     },
     openGoldenChatRestrictionModal: function () {
-      eventBus.$emit("modal", "goldenBuyAdReplyLimit");
+      this.$store.commit('routeStore/setModal', {
+        name: 'goldenBuyAdReplyLimit',
+      })
 
       this.registerComponentStatistics(
         "buyAdReply",

@@ -624,7 +624,9 @@ export default {
         .then(function (response) {
           $(".modal").modal("hide");
 
-          this.$store.commit("routeStore/editProductModal");
+          this.$store.commit("routeStore/setModal", {
+            name: "editProductModal",
+          });
 
           self.registerComponentStatistics(
             "product",
@@ -678,7 +680,10 @@ export default {
         window.localStorage.setItem("contact", JSON.stringify(contact));
 
         // this.$router.push({ name: "registerInquiry" });
-        eventBus.$emit("modal", "sendMsg");
+
+        this.$store.commit("routeStore/setModal", {
+          name: "sendMsg",
+        });
       }
     },
     updatePopUpStatus: function (popUpOpenStatus) {

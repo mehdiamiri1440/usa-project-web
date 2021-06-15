@@ -212,7 +212,6 @@ export default {
         user_name: this.user_info.user_name,
         product_name: productName,
       };
-      var self = this;
 
       if (this.current_user.user_info) {
         if (this.current_user.user_info.id !== this.user_info.id) {
@@ -228,7 +227,9 @@ export default {
       } else {
         window.localStorage.setItem("contact", JSON.stringify(contact));
         // this.$router.push({ name: "registerInquiry" });
-        eventBus.$emit("modal", "sendMsg");
+        this.$store.commit("routeStore/setModal", {
+          name: "sendMsg",
+        });
       }
     },
     scrollToTheRequestRegisterBox: function (element) {

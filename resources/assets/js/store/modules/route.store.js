@@ -6,8 +6,7 @@ const state = {
     activeContactId: '',
     reportedUserId: '',
     shareModalUrl: '',
-    reviewUserData: '',
-    modal: '',
+    reviewUserData: ''
 }
 
 // Mutations
@@ -26,9 +25,6 @@ const mutations = {
     deleteBuyAdModal(state, data) {
         modals.raiseDeleteBuyAdModal(data.buyAdId);
     },
-    editProductModal(state) {
-        modals.raiseProductEditSuccessModal();
-    },
     reoprtModal(state, data) {
         state.reportedUserId = data.reportedUserId;
         $("#report-modal").modal("show");
@@ -38,10 +34,11 @@ const mutations = {
         $("#share-modal").modal("show");
     },
     reviewUserModal(state, data) {
-        state.reviewUserData = data
+        state.reviewUserData = data;
+        $("#review-modal").modal("show");
     },
     setModal(state, data) {
-        state.modal = data
+        modals.openRelatedSwalModal(data.name);
     },
 }
 

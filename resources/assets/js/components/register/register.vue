@@ -815,7 +815,9 @@ export default {
           .post("api/v1/users", object)
           .then(function (response) {
             if (response.status === 201) {
-              eventBus.$emit("modal", "userRegisterSuccess");
+              self.$store.commit('routeStore/setModal', {
+                name: 'passwordResetSuccess',
+              })
               self.createCookie("registerNewUser", true, 60);
 
               let deviceInfo = new device.DeviceUUID();

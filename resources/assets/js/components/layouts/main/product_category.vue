@@ -1837,7 +1837,10 @@ export default {
           "unauthorized-user-clicks-on-plus-btn"
         );
 
-        eventBus.$emit("modal", "guide");
+
+        this.$store.commit("routeStore/setModal", {
+              name: "guide",
+            });
       }
     },
     resetFilter: function () {
@@ -2058,7 +2061,9 @@ export default {
       return jsonDL;
     },
     openStickyGuide: function () {
-      eventBus.$emit("modal", "guide");
+      this.$store.commit("routeStore/setModal", {
+              name: "guide",
+            });
     },
     swithToListOnMobile() {
       window.addEventListener("resize", (event) => {

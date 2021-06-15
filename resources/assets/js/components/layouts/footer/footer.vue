@@ -293,7 +293,13 @@ img.image-blur:hover {
       })
     "
   > -->
-  <button @click="$store.commit('routeStore/editProductModal')">
+  <button
+    @click="
+      $store.commit('routeStore/setModal', {
+        name: 'userRegisterSuccess',
+      })
+    "
+  >
     open modal
   </button>
   <h3>

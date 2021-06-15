@@ -1174,7 +1174,9 @@ export default {
             if (response.status === 200) {
               eventBus.$emit("submiting", false);
               eventBus.$emit("uploadPercentage", 0);
-              eventBus.$emit("modal", "profileEditSuccess");
+              this.$store.commit("routeStore/setModal", {
+                name: "profileEditSuccess",
+              });
               self.relatedFilesReset = true;
               self.certificateFilesReset = true;
               axios.post("/user/profile_info").then(function (response) {

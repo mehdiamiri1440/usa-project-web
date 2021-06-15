@@ -538,7 +538,9 @@ export default {
         window.localStorage.setItem("contact", JSON.stringify(contact));
 
         // this.$router.push({ name: "registerInquiry" });
-        eventBus.$emit("modal", "sendMsg");
+        this.$store.commit("routeStore/setModal", {
+          name: "sendMsg",
+        });
       }
     },
     loginModal(isChat) {
@@ -581,7 +583,6 @@ export default {
         user_name: product.user_info.user_name,
       };
 
-      var self = this;
       if (this.currentUser.user_info) {
         if (this.currentUser.user_info.id !== product.user_info.id) {
           window.localStorage.setItem("contact", JSON.stringify(contact));
@@ -596,7 +597,9 @@ export default {
         window.localStorage.setItem("contact", JSON.stringify(contact));
         window.localStorage.setItem("pathname", window.location.pathname);
 
-        eventBus.$emit("modal", "sendMsg");
+        this.$store.commit("routeStore/setModal", {
+          name: "sendMsg",
+        });
       }
     },
     activePhoneCall: function (isModal) {
@@ -803,7 +806,9 @@ export default {
         .then(function (response) {
           $(".modal").modal("hide");
 
-          this.$store.commit("routeStore/editProductModal");
+          this.$store.commit("routeStore/setModal", {
+            name: "editProductModal",
+          });
 
           self.registerComponentStatistics(
             "product",

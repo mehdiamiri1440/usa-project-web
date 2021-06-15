@@ -383,16 +383,6 @@ export default {
     window.localStorage.setItem("userId", this.userId);
     window.localStorage.setItem("userType", this.isSeller);
 
-    // eventBus.$on("reviewUserData", ($event) => {
-    //   this.reviewUserData = $event;
-    //   this.reviewUserPrfileId = $event.id;
-    //   $("#review-modal").modal("show");
-    // });
-
-    // eventBus.$on("modal", ($event) => {
-    //   this.openRelatedSwalModal($event);
-    // });
-
     let self = this;
 
     $(document).on("mouseleave", function () {

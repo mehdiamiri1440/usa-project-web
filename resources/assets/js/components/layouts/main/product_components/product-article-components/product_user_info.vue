@@ -350,7 +350,9 @@ export default {
       } else {
         window.localStorage.setItem("contact", JSON.stringify(contact));
         // this.$router.push({ name: "registerInquiry" });
-        eventBus.$emit("modal", "sendMsg");
+        this.$store.commit("routeStore/setModal", {
+          name: "sendMsg",
+        });
       }
     },
     scrollToTheRequestRegisterBox: function (element) {

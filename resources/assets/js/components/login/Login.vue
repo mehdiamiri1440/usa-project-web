@@ -573,7 +573,9 @@ export default {
           if (response.data.status === true) {
             self.errors = [];
 
-            eventBus.$emit("modal", "passwordResetSuccess");
+            self.$store.commit('routeStore/setModal', {
+              name: 'passwordResetSuccess',
+            })
 
             self.currentStep = 1;
             self.createPassword = false;

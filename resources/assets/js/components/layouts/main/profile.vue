@@ -2285,7 +2285,6 @@ export default {
         profile_photo: this.profileOwner.profile.profile_photo,
         user_name: this.profileOwner.user_info.user_name,
       };
-      var self = this;
 
       if (this.currentUser.user_info) {
         eventBus.$emit("ChatInfo", contact);
@@ -2293,7 +2292,9 @@ export default {
         window.localStorage.setItem("contact", JSON.stringify(contact));
         window.localStorage.setItem("pathname", window.location.pathname);
 
-        eventBus.$emit("modal", "sendMsg");
+        this.$store.commit("routeStore/setModal", {
+          name: "sendMsg",
+        });
       }
     },
     createJsonLDObject: function (profileOwner) {

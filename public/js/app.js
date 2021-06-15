@@ -18359,15 +18359,7 @@ __webpack_require__.r(__webpack_exports__);
   props: ["userId", "isSeller", "assets", "storagePath", "profilePhoto", "userFullName", "userLogoutPath"],
   created: function created() {
     window.localStorage.setItem("userId", this.userId);
-    window.localStorage.setItem("userType", this.isSeller); // eventBus.$on("reviewUserData", ($event) => {
-    //   this.reviewUserData = $event;
-    //   this.reviewUserPrfileId = $event.id;
-    //   $("#review-modal").modal("show");
-    // });
-    // eventBus.$on("modal", ($event) => {
-    //   this.openRelatedSwalModal($event);
-    // });
-
+    window.localStorage.setItem("userType", this.isSeller);
     var self = this;
     $(document).on("mouseleave", function () {
       if (!self.userId) {
@@ -20582,52 +20574,66 @@ __webpack_require__.r(__webpack_exports__);
 // eventBus.$on("modal", ($event) => {
 //   this.openRelatedSwalModal($event);
 // });
-// const openRelatedSwalModal = (modalName) => {
-//     switch (modalName) {
-//         case "sendMsg":
-//             this.raiseSendMessageModal();
-//             break;
-//         case "elevator":
-//             this.raiseElevatorModal();
-//             break;
-//         case "deleteProduct":
-//             this.raiseDeleteProductModal();
-//             break;
-//         case "deleteBuyAdModal":
-//             this.raiseDeleteBuyAdModal();
-//             break;
-//         case "productEditDone":
-//             this.raiseProductEditSuccessModal();
-//             break;
-//         case "userRegisterSuccess":
-//             this.raiseUserRegisterSuccessModal();
-//             break;
-//         case "registerProductLimit":
-//             this.raiseRegisterProductLimitModal();
-//             break;
-//         case "buyAdReplyLimit":
-//             this.raiseBuyAdReplyLimitModal();
-//             break;
-//         case "profileEditSuccess":
-//             this.raiseProfileEditSuccessModal();
-//             break;
-//         case "passwordResetSuccess":
-//             this.raisePasswordResetSuccessModal();
-//             break;
-//         case "guide":
-//             this.raiseGuideModal();
-//             break;
-//         case "deleteUserComment":
-//             this.raiseDeleteUserCommentModal();
-//             break;
-//         case "verificationInfoUploadDone":
-//             this.raiseVerificationUploadSuccessModal();
-//             break;
-//         case "goldenBuyAdReplyLimit":
-//             this.raiseGoldenBuyAdReplyLimitModal();
-//             break;
-//     }
-// }
+
+var openRelatedSwalModal = function openRelatedSwalModal(modalName) {
+  switch (modalName) {
+    case "sendMsg":
+      raiseSendMessageModal();
+      break;
+
+    case "elevator":
+      raiseElevatorModal();
+      break;
+
+    case "deleteProduct":
+      raiseDeleteProductModal();
+      break;
+
+    case "deleteBuyAdModal":
+      raiseDeleteBuyAdModal();
+      break;
+
+    case "editProductModal":
+      raiseProductEditSuccessModal();
+      break;
+
+    case "userRegisterSuccess":
+      raiseUserRegisterSuccessModal();
+      break;
+
+    case "registerProductLimit":
+      raiseRegisterProductLimitModal();
+      break;
+
+    case "buyAdReplyLimit":
+      raiseBuyAdReplyLimitModal();
+      break;
+
+    case "profileEditSuccess":
+      raiseProfileEditSuccessModal();
+      break;
+
+    case "passwordResetSuccess":
+      raisePasswordResetSuccessModal();
+      break;
+
+    case "guide":
+      raiseGuideModal();
+      break;
+
+    case "deleteUserComment":
+      raiseDeleteUserCommentModal();
+      break;
+
+    case "verificationInfoUploadDone":
+      raiseVerificationUploadSuccessModal();
+      break;
+
+    case "goldenBuyAdReplyLimit":
+      raiseGoldenBuyAdReplyLimitModal();
+      break;
+  }
+};
 
 function handleBackBtn() {
   if (window.history.state) {
@@ -21155,7 +21161,8 @@ var raiseGoldenBuyAdReplyLimitModal = function raiseGoldenBuyAdReplyLimitModal()
   raiseGuideModal: raiseGuideModal,
   raiseDeleteUserCommentModal: raiseDeleteUserCommentModal,
   raiseVerificationUploadSuccessModal: raiseVerificationUploadSuccessModal,
-  raiseGoldenBuyAdReplyLimitModal: raiseGoldenBuyAdReplyLimitModal
+  raiseGoldenBuyAdReplyLimitModal: raiseGoldenBuyAdReplyLimitModal,
+  openRelatedSwalModal: openRelatedSwalModal
 });
 
 /***/ }),
@@ -21202,8 +21209,7 @@ var state = {
   activeContactId: '',
   reportedUserId: '',
   shareModalUrl: '',
-  reviewUserData: '',
-  modal: ''
+  reviewUserData: ''
 }; // Mutations
 
 var mutations = {
@@ -21221,9 +21227,6 @@ var mutations = {
   deleteBuyAdModal: function deleteBuyAdModal(state, data) {
     _modals__WEBPACK_IMPORTED_MODULE_0__.default.raiseDeleteBuyAdModal(data.buyAdId);
   },
-  editProductModal: function editProductModal(state) {
-    _modals__WEBPACK_IMPORTED_MODULE_0__.default.raiseProductEditSuccessModal();
-  },
   reoprtModal: function reoprtModal(state, data) {
     state.reportedUserId = data.reportedUserId;
     $("#report-modal").modal("show");
@@ -21234,9 +21237,10 @@ var mutations = {
   },
   reviewUserModal: function reviewUserModal(state, data) {
     state.reviewUserData = data;
+    $("#review-modal").modal("show");
   },
   setModal: function setModal(state, data) {
-    state.modal = data;
+    _modals__WEBPACK_IMPORTED_MODULE_0__.default.openRelatedSwalModal(data.name);
   }
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -61978,7 +61982,7 @@ var index = {
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames based on template
-/******/ 			return "chunks/" + chunkId + "." + {"resources_assets_js_router_components_masterRoute_vue":"f2f6cd783f90fadd2da4","resources_assets_js_components_register_register_vue":"9060f24fb6b36f36ae66"}[chunkId] + ".js";
+/******/ 			return "chunks/" + chunkId + "." + {"resources_assets_js_router_components_masterRoute_vue":"9eed5718e9edfe6abfb2","resources_assets_js_components_register_register_vue":"6c8f676252b5ccc99eff"}[chunkId] + ".js";
 /******/ 		};
 /******/ 	})();
 /******/ 	

@@ -45,52 +45,52 @@ import axios from 'axios'
 // });
 
 
-// const openRelatedSwalModal = (modalName) => {
-//     switch (modalName) {
-//         case "sendMsg":
-//             this.raiseSendMessageModal();
-//             break;
-//         case "elevator":
-//             this.raiseElevatorModal();
-//             break;
-//         case "deleteProduct":
-//             this.raiseDeleteProductModal();
-//             break;
-//         case "deleteBuyAdModal":
-//             this.raiseDeleteBuyAdModal();
-//             break;
-//         case "productEditDone":
-//             this.raiseProductEditSuccessModal();
-//             break;
-//         case "userRegisterSuccess":
-//             this.raiseUserRegisterSuccessModal();
-//             break;
-//         case "registerProductLimit":
-//             this.raiseRegisterProductLimitModal();
-//             break;
-//         case "buyAdReplyLimit":
-//             this.raiseBuyAdReplyLimitModal();
-//             break;
-//         case "profileEditSuccess":
-//             this.raiseProfileEditSuccessModal();
-//             break;
-//         case "passwordResetSuccess":
-//             this.raisePasswordResetSuccessModal();
-//             break;
-//         case "guide":
-//             this.raiseGuideModal();
-//             break;
-//         case "deleteUserComment":
-//             this.raiseDeleteUserCommentModal();
-//             break;
-//         case "verificationInfoUploadDone":
-//             this.raiseVerificationUploadSuccessModal();
-//             break;
-//         case "goldenBuyAdReplyLimit":
-//             this.raiseGoldenBuyAdReplyLimitModal();
-//             break;
-//     }
-// }
+const openRelatedSwalModal = (modalName) => {
+    switch (modalName) {
+        case "sendMsg":
+            raiseSendMessageModal();
+            break;
+        case "elevator":
+            raiseElevatorModal();
+            break;
+        case "deleteProduct":
+            raiseDeleteProductModal();
+            break;
+        case "deleteBuyAdModal":
+            raiseDeleteBuyAdModal();
+            break;
+        case "editProductModal":
+            raiseProductEditSuccessModal();
+            break;
+        case "userRegisterSuccess":
+            raiseUserRegisterSuccessModal();
+            break;
+        case "registerProductLimit":
+            raiseRegisterProductLimitModal();
+            break;
+        case "buyAdReplyLimit":
+            raiseBuyAdReplyLimitModal();
+            break;
+        case "profileEditSuccess":
+            raiseProfileEditSuccessModal();
+            break;
+        case "passwordResetSuccess":
+            raisePasswordResetSuccessModal();
+            break;
+        case "guide":
+            raiseGuideModal();
+            break;
+        case "deleteUserComment":
+            raiseDeleteUserCommentModal();
+            break;
+        case "verificationInfoUploadDone":
+            raiseVerificationUploadSuccessModal();
+            break;
+        case "goldenBuyAdReplyLimit":
+            raiseGoldenBuyAdReplyLimitModal();
+            break;
+    }
+}
 
 function handleBackBtn() {
 
@@ -659,4 +659,5 @@ export default {
     raiseDeleteUserCommentModal,
     raiseVerificationUploadSuccessModal,
     raiseGoldenBuyAdReplyLimitModal,
+    openRelatedSwalModal
 }
