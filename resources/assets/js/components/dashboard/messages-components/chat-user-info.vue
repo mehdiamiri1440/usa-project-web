@@ -473,7 +473,10 @@ li.score-item i {
             </div>
           </div> -->
         </li>
-        <li v-if="$parent.userAllowedReview" class="col-xs-12">
+        <li
+          v-if="$store.state.messageStore.userAllowedReview"
+          class="col-xs-12"
+        >
           <ChatReviewComponent
             :user-full-name="
               selectedContact.first_name + ' ' + selectedContact.last_name

@@ -274,9 +274,10 @@
 
     <!-- <ChatModal />
 
-    <share-to-social-modal :share-modal-url="shareModalUrl" />
-    <report-modal :reported-user-id="reportedUserId" />
-    <review-modal :review-user-data="reviewUserData" />
+    -->
+    <ReviewModal />
+    <ShareToSocialModal />
+    <ReportModal />
 
     <router-view
       :user-id="userId"
@@ -289,7 +290,7 @@
       :verified-user-content="verifiedUserContent"
     />
 
-    <router-view
+    <!-- <router-view
       name="buyer"
       :user-id="userId"
       :is-seller="isSeller"
@@ -331,22 +332,26 @@
 
 <script>
 import router from "../router.js";
+// import { mapState } from "vuex";
+
 // import { eventBus } from "../router.js";
-// import Cookies from "js-cookie";
-// import IsWebview from "is-webview";
 // import ChatModal from "../../components/layouts/main/main_components/chat_modal";
-// import ReportModal from "../../components/layouts/main/main_components/report";
-// import ReviewModal from "../../components/layouts/main/main_components/review-component/review";
-// import shareToSocialModal from "../../components/layouts/main/main_components/share-to-social-modal";
+import ReportModal from "../../components/layouts/main/main_components/report";
+import ReviewModal from "../../components/layouts/main/main_components/review-component/review";
+import ShareToSocialModal from "../../components/layouts/main/main_components/share-to-social-modal";
 // import walletComponent from "../../components/layouts/main/wallet";
-// import swal from "../../sweetalert.min.js";
 
 export default {
+  // computed: mapState({
+  //   elevatorText: (state) => {
+  //     return state.routeStore.elevatorText;
+  //   },
+  // }),
   components: {
     // ChatModal,
-    // ReportModal,
-    // ReviewModal,
-    // shareToSocialModal,
+    ReportModal,
+    ReviewModal,
+    ShareToSocialModal,
     // walletComponent,
   },
   data: function () {
@@ -354,18 +359,10 @@ export default {
       iswebview: navigator.userAgent == "webView" ? true : false,
       isConditionSatisfied: false,
       downloadAppButton: false,
-      elevatorText: "",
       productId: "",
       buyAdId: "",
-      joinGroupMessage: "",
-      joinGroupId: "",
-      activeContactId: "",
-      reportedUserId: "",
-      shareModalUrl: "",
       msg: "",
       reviewCurrentStep: 0,
-      reviewUserData: "",
-      reviewUserPrfileId: "",
       currentUser: "",
       walletBalance: "",
       verifiedUserContent:
@@ -386,48 +383,15 @@ export default {
     window.localStorage.setItem("userId", this.userId);
     window.localStorage.setItem("userType", this.isSeller);
 
-    eventBus.$on("elevatorText", ($event) => {
-      this.elevatorText = $event;
-    });
+    // eventBus.$on("reviewUserData", ($event) => {
+    //   this.reviewUserData = $event;
+    //   this.reviewUserPrfileId = $event.id;
+    //   $("#review-modal").modal("show");
+    // });
 
-    eventBus.$on("productId", ($event) => {
-      this.productId = $event;
-    });
-
-    eventBus.$on("buyAdId", ($event) => {
-      this.buyAdId = $event;
-    });
-
-    eventBus.$on("joinGroupId", ($event) => {
-      this.joinGroupId = $event;
-    });
-    eventBus.$on("joinGroupMessage", ($event) => {
-      this.joinGroupMessage = $event;
-    });
-
-    eventBus.$on("activeContactId", ($event) => {
-      this.activeContactId = $event;
-    });
-
-    eventBus.$on("reoprtModal", ($event) => {
-      this.reportedUserId = $event;
-      $("#report-modal").modal("show");
-    });
-
-    eventBus.$on("shareModalUrl", ($event) => {
-      this.shareModalUrl = $event;
-      $("#share-modal").modal("show");
-    });
-
-    eventBus.$on("reviewUserData", ($event) => {
-      this.reviewUserData = $event;
-      this.reviewUserPrfileId = $event.id;
-      $("#review-modal").modal("show");
-    });
-
-    eventBus.$on("modal", ($event) => {
-      this.openRelatedSwalModal($event);
-    });
+    // eventBus.$on("modal", ($event) => {
+    //   this.openRelatedSwalModal($event);
+    // });
 
     let self = this;
 
@@ -444,16 +408,15 @@ export default {
     if (messaging) {
       messaging.onMessage(function (payload) {
         if (payload.notification.tag == "buskool") {
-          if (!self.activeContactId) {
-            eventBus.$emit("messageCount", 1);
+          if (!this.$store.state.routeStore.activeContactId) {
+            this.$store.state.messageStore.messageCount = 1;
           }
-          eventBus.$emit("contanctMessageReceived", true);
-        } else {
-          eventBus.$emit("groupMessageReceived", true);
+          // eventBus.$emit("contanctMessageReceived", true);
         }
       });
     }
   },
+
   router,
   methods: {
     isDeviceMobile: function () {
@@ -548,7 +511,7 @@ export default {
       }
     },
     closeGlobalChatBox() {
-      eventBus.$emit("ChatBoxStatus", false);
+      // eventBus.$emit("ChatBoxStatus", false);
     },
     registerComponentStatistics: function (
       categoryName,
@@ -560,603 +523,8 @@ export default {
         event_label: labelName,
       });
     },
-    subscribeUserToGroup: function () {
-      var self = this;
-      var groupId = this.joinGroupId;
-      axios
-        .post("/group/subscribe_user", {
-          group_id: groupId,
-        })
-        .then(function (response) {
-          self.popUpMsg = "شما با موفقییت در گروه عضو شدید";
-          eventBus.$emit("submitSuccess", self.popUpMsg);
-          $("#custom-main-modal").modal("show");
-          eventBus.$emit("reloadAllGroupLists", true);
-        });
-    },
     extractSenderIdFromTag: function (tag) {
       return tag.split("FCM")[1];
-    },
-    openRelatedSwalModal: function (modalName) {
-      switch (modalName) {
-        case "sendMsg":
-          this.raiseSendMessageModal();
-          break;
-        case "elevator":
-          this.raiseElevatorModal();
-          break;
-        case "deleteProduct":
-          this.raiseDeleteProductModal();
-          break;
-        case "deleteBuyAdModal":
-          this.raiseDeleteBuyAdModal();
-          break;
-        case "productEditDone":
-          this.raiseProductEditSuccessModal();
-          break;
-        case "userRegisterSuccess":
-          this.raiseUserRegisterSuccessModal();
-          break;
-        case "registerProductLimit":
-          this.raiseRegisterProductLimitModal();
-          break;
-        case "buyAdReplyLimit":
-          this.raiseBuyAdReplyLimitModal();
-          break;
-        case "profileEditSuccess":
-          this.raiseProfileEditSuccessModal();
-          break;
-        case "passwordResetSuccess":
-          this.raisePasswordResetSuccessModal();
-          break;
-        case "guide":
-          this.raiseGuideModal();
-          break;
-        case "deleteUserComment":
-          this.raiseDeleteUserCommentModal();
-          break;
-        case "verificationInfoUploadDone":
-          this.raiseVerificationUploadSuccessModal();
-          break;
-        case "goldenBuyAdReplyLimit":
-          this.raiseGoldenBuyAdReplyLimitModal();
-          break;
-      }
-    },
-    raiseSendMessageModal: function () {
-      let self = this;
-
-      this.handleBackBtn();
-
-      swal({
-        title: "ارتباط با مخاطب",
-        text: "برای ارتباط با هزاران خریدار و فروشنده در باسکول ابتدا ثبت نام کنید.",
-        className: "custom-swal-with-cancel",
-        buttons: {
-          success: {
-            text: "ورود سریع / ثبت نام",
-            value: "register",
-          },
-          close: {
-            text: "بستن",
-            className: "bg-cancel",
-          },
-        },
-      }).then((value) => {
-        switch (value) {
-          case "register":
-            self.$router.push({ name: "register" });
-            break;
-          default:
-            window.localStorage.removeItem("contact");
-            window.localStorage.removeItem("pathname");
-            break;
-        }
-      });
-    },
-    raiseElevatorModal: function () {
-      let self = this;
-
-      this.handleBackBtn();
-
-      let price = document.createElement("div");
-      price.innerHTML =
-        '<h1 class="green-text" dir="rtl"><span>25,000</span> تومان </h1><br/><p class="swal-text">با استفاده از نردبان، محصول شما تا زمان دریافت محصول تازه تر در همان دسته بندی، به عنوان اولین محصول نمایش داده می‌شود.</p>';
-
-      swal({
-        title: "اعمال نردبان",
-        content: price,
-        className: "custom-swal-with-cancel",
-        buttons: {
-          success: {
-            text: "پرداخت از طریق درگاه",
-            value: "pay",
-          },
-          // wallet: {
-          //   text: "پرداخت از کیف پول",
-          //   value: "wallet",
-          //   className: "bg-blue",
-          // },
-          close: {
-            text: "بستن",
-            className: "bg-cancel",
-          },
-        },
-      }).then((value) => {
-        switch (value) {
-          case "pay":
-            window.location.href = "/payment/elevator/" + self.productId;
-            break;
-          case "wallet":
-            axios
-              .post("/wallet-expend/elevator", {
-                product_id: self.productId,
-              })
-              .then((response) => {
-                swal({
-                  title: "نردبان اعمال شد",
-                  text: "اعمال نردبان با موفقیت انجام شد.",
-                  icon: "success",
-                  className: "custom-swal-with-cancel",
-                  buttons: {
-                    close: {
-                      text: "بستن",
-                      value: "close",
-                      className: "bg-cancel",
-                    },
-                  },
-                }).then((value) => {
-                  if (value == "close") {
-                    window.location.reload();
-                  }
-                });
-              })
-              .catch((err) => {
-                swal({
-                  title: "خطا",
-                  text: err.response.data.msg,
-                  icon: "error",
-                  className: "custom-swal-with-cancel",
-                  buttons: {
-                    wallet: {
-                      text: "افزایش موجودی",
-                      value: "wallet",
-                      className: "bg-blue",
-                    },
-                    close: {
-                      text: "بستن",
-                      value: "close",
-                      className: "bg-cancel",
-                    },
-                  },
-                });
-              });
-            break;
-        }
-      });
-    },
-    raiseDeleteProductModal: function () {
-      let self = this;
-
-      this.handleBackBtn();
-
-      swal({
-        title: "حذف محصول",
-        text: "آیا میخواهید این محصول را حذف کنید؟",
-        // content: closeIconBtn,
-        className: "custom-swal-with-cancel",
-        buttons: {
-          delete: {
-            text: "حذف کن",
-            value: "delete",
-            className: "bg-red",
-          },
-          reject: {
-            text: "انصراف",
-          },
-          close: {
-            text: "بستن",
-            className: "bg-cancel",
-          },
-        },
-      }).then((value) => {
-        switch (value) {
-          case "delete":
-            axios
-              .post("/delete_product_by_id", {
-                product_id: self.productId,
-              })
-              .then(function (response) {
-                swal({
-                  title: "حذف شد",
-                  text: "محصول شما از لیست محصولات باسکول حذف شد.",
-                  icon: "success",
-                  className: "custom-swal-with-cancel",
-                  buttons: {
-                    close: {
-                      text: "بستن",
-                      value: "close",
-                      className: "bg-cancel",
-                    },
-                  },
-                }).then((value) => {
-                  if (value == "close") {
-                    window.location.reload();
-                  }
-                });
-
-                self.registerComponentStatistics(
-                  "product",
-                  "product-deleted",
-                  "product-deleted-successfully"
-                );
-              })
-              .catch(function (err) {
-                console.log(err);
-                self.registerComponentStatistics(
-                  "product",
-                  "product-delete-failed",
-                  "product-delete-failed"
-                );
-                //show modal
-                swal({
-                  title: "خطا",
-                  text: "خطایی رخ داده است. دوباره تلاش کنید.",
-                  icon: "error",
-                  className: "custom-swal-with-cancel",
-                  buttons: {
-                    close: {
-                      text: "بستن",
-                      value: "close",
-                      className: "bg-cancel",
-                    },
-                  },
-                });
-              });
-
-            break;
-        }
-      });
-    },
-    raiseDeleteBuyAdModal: function () {
-      let self = this;
-
-      this.handleBackBtn();
-
-      swal({
-        title: "حذف درخواست",
-        text: "آیا میخواهید این درخواست را حذف کنید؟",
-        // content: closeIconBtn,
-        className: "custom-swal-with-cancel",
-        buttons: {
-          delete: {
-            text: "حذف کن",
-            value: "delete",
-            className: "bg-red",
-          },
-          reject: {
-            text: "انصراف",
-          },
-          close: {
-            text: "بستن",
-            className: "bg-cancel",
-          },
-        },
-      }).then((value) => {
-        switch (value) {
-          case "delete":
-            axios
-              .post("/delete_buy_ad_by_id", {
-                buy_ad_id: self.buyAdId,
-              })
-              .then(function (response) {
-                swal({
-                  title: "حذف شد",
-                  text: "درخواست خرید شما با موفقیت حذف شد.",
-                  icon: "success",
-                  className: "custom-swal-with-cancel",
-                  buttons: {
-                    close: {
-                      text: "بستن",
-                      value: "close",
-                      className: "bg-cancel",
-                    },
-                  },
-                }).then((value) => {
-                  if (value == "close") {
-                    window.location.reload();
-                  }
-                });
-
-                self.registerComponentStatistics(
-                  "product",
-                  "product-deleted",
-                  "product-deleted-successfully"
-                );
-              })
-              .catch(function (err) {
-                console.log(err);
-                self.registerComponentStatistics(
-                  "product",
-                  "product-delete-failed",
-                  "product-delete-failed"
-                );
-                //show modal
-                swal({
-                  title: "خطا",
-                  text: "خطایی رخ داده است. دوباره تلاش کنید.",
-                  icon: "error",
-                  className: "custom-swal-with-cancel",
-                  buttons: {
-                    close: {
-                      text: "بستن",
-                      value: "close",
-                      className: "bg-cancel",
-                    },
-                  },
-                });
-              });
-
-            break;
-        }
-      });
-    },
-    raiseProductEditSuccessModal: function () {
-      this.handleBackBtn();
-      swal({
-        title: "ویرایش محصول",
-        text: "ویرایش محصول شما با موفقیت انجام شد.",
-        className: "custom-swal-with-cancel",
-        icon: "success",
-        buttons: {
-          close: {
-            text: "بستن",
-            className: "bg-cancel",
-          },
-        },
-      });
-    },
-    raiseUserRegisterSuccessModal: function () {
-      this.handleBackBtn();
-      swal({
-        title: "ثبت نام موفق",
-        text: "به باسکول خوش آمدید. لطفا کمی صبر کنید...",
-        className: "custom-swal-with-cancel",
-        icon: "success",
-        buttons: {
-          close: {
-            text: "بستن",
-            className: "bg-cancel",
-          },
-        },
-      });
-    },
-    raiseRegisterProductLimitModal: function () {
-      let self = this;
-
-      this.handleBackBtn();
-
-      let content = document.createElement("div");
-      content.innerHTML =
-        '<p dir="rtl" class="swal-guide">سقف تعداد محصولات ثبت شده شما پر شده است.</p><br/><p class="red-text swal-guide" dir="rtl"><b>برای ثبت محصولات جدید، لطفا دکمه افزایش ظرفیت را بزنید.</b></p>';
-      swal({
-        title: "محدودیت ثبت محصول جدید",
-        content: content,
-        className: "custom-swal-with-cancel",
-        icon: "warning",
-        buttons: {
-          success: {
-            text: "افزایش ظرفیت",
-            value: "promote",
-            // className: "button-new-badge",
-          },
-          close: {
-            text: "بستن",
-            className: "bg-cancel",
-          },
-        },
-      }).then((value) => {
-        switch (value) {
-          case "promote":
-            self.$router.push({ name: "dashboardProductPricing" });
-            break;
-        }
-      });
-    },
-    raiseBuyAdReplyLimitModal: function () {
-      let self = this;
-
-      this.handleBackBtn();
-
-      let content = document.createElement("div");
-      content.innerHTML =
-        '<p class="swal-guide" dir="rtl">ظرفیت روزانه پاسخ به درخواست های خرید شما پر شده است.</p><br/><p class="red-text swal-guide" dir="rtl"><b>برای افزایش ظرفیت، لطفا دکمه افزایش ظرفیت را بزنید.</b></p>';
-      swal({
-        title: "محدودیت پاسخ به درخواست ها",
-        content: content,
-        className: "custom-swal-with-cancel",
-        icon: "warning",
-        buttons: {
-          success: {
-            text: "افزایش ظرفیت",
-            value: "promote",
-            // className: "button-new-badge",
-          },
-          close: {
-            text: "بستن",
-            className: "bg-cancel",
-          },
-        },
-      }).then((value) => {
-        switch (value) {
-          case "promote":
-            self.$router.push({ name: "dashboardBuyAdPricing" });
-            break;
-        }
-      });
-    },
-    raiseProfileEditSuccessModal: function () {
-      this.handleBackBtn();
-      swal({
-        title: "ویرایش پروفایل",
-        text: "ویرایش پروفایل شما با موفقیت انجام شد.پس از تایید کارشناسان پروفایل شما برای همه قابل نمایش خواهد بود.",
-        className: "custom-swal-with-cancel",
-        icon: "success",
-        buttons: {
-          close: {
-            text: "بستن",
-            className: "bg-cancel",
-          },
-        },
-      });
-    },
-    raisePasswordResetSuccessModal: function () {
-      this.handleBackBtn();
-      swal({
-        title: "بازیابی کلمه عبور",
-        text: "کلمه عبور جدید به تلفن همراهتان ارسال شد.",
-        className: "custom-swal-with-cancel",
-        icon: "success",
-        buttons: {
-          close: {
-            text: "بستن",
-            className: "bg-cancel",
-          },
-        },
-      });
-    },
-    raiseGuideModal: function () {
-      let self = this;
-
-      this.handleBackBtn();
-
-      swal({
-        title: "راهنما",
-        text: "خریدار عمده هستید یا فروشنده عمده؟",
-        className: "custom-swal-with-cancel",
-        // icon: "success",
-        buttons: {
-          buyer: {
-            text: "خریدارم",
-            value: "buyer",
-          },
-          seller: {
-            text: "فروشنده ام",
-            value: "seller",
-          },
-          close: {
-            text: "بستن",
-            className: "bg-cancel",
-          },
-        },
-      }).then((value) => {
-        switch (value) {
-          case "buyer":
-            self.$router.push({ name: "mainRegisterRequest" });
-            break;
-          case "seller":
-            self.$router.push({ name: "register" });
-            break;
-        }
-      });
-    },
-    raiseDeleteUserCommentModal: function () {
-      let self = this;
-
-      this.handleBackBtn();
-
-      swal({
-        title: "حذف نظر",
-        text: "تعداد نظرات حذف شده توسط شما به کاربران نمایش داده خواهد شد. آیا می خواهید این نظر را حذف کنید؟",
-        className: "custom-swal-with-cancel",
-        icon: "warning",
-        buttons: {
-          delete: {
-            text: "حذف کن",
-            value: "delete",
-            className: "bg-red",
-          },
-          reject: {
-            text: "انصراف",
-          },
-          close: {
-            text: "بستن",
-            className: "bg-cancel",
-          },
-        },
-      }).then((value) => {
-        switch (value) {
-          case "delete":
-            self.$router.push({ name: "mainRegisterRequest" });
-            break;
-        }
-      });
-    },
-    raiseVerificationUploadSuccessModal: function () {
-      this.handleBackBtn();
-      swal({
-        title: "احراز هویت",
-        text: "اطلاعات شما با موفقیت ارسال شد. در صورت تایید کارشناسان باسکول نشان احراز هویت به حساب کاربری شما داده می شود.",
-        className: "custom-swal-with-cancel",
-        icon: "success",
-        buttons: {
-          close: {
-            text: "بستن",
-            className: "bg-cancel",
-          },
-        },
-      });
-    },
-    raiseGoldenBuyAdReplyLimitModal: function () {
-      let self = this;
-
-      this.handleBackBtn();
-
-      let content = document.createElement("div");
-      content.innerHTML =
-        '<p><span class="swal-star-badge"><i class="fa fa-star"></i></span></p><br/><p class="swal-guide" dir="rtl">شما به درخواست هایی طلایی دسترسی ندارید.</p><br/><p class="red-text swal-guide" dir="rtl"><b>برای دسترسی به تمام درخواست های طلایی، عضویت خود را ارتقا دهید.</b></p>';
-      swal({
-        title: "درخواست های طلایی",
-        content: content,
-        className: "custom-swal-with-cancel",
-        icon: "warning",
-        buttons: {
-          success: {
-            text: "ارتقا عضویت",
-            value: "promote",
-          },
-          close: {
-            text: "بستن",
-            className: "bg-cancel",
-          },
-        },
-      }).then((value) => {
-        switch (value) {
-          case "promote":
-            self.$router.push({ name: "dashboardPricingTableSeller" });
-            break;
-        }
-      });
-    },
-    isModalOpen: function () {
-      return swal.getState().isOpen;
-    },
-    handleBackBtn: function () {
-      var self = this;
-
-      if (window.history.state) {
-        history.pushState(null, null, window.location);
-      }
-
-      $(window).on("popstate", function (e) {
-        if (self.isModalOpen()) {
-          swal.close();
-          window.localStorage.removeItem("contact"); // it's been set before modal openning
-          window.localStorage.removeItem("msgToSend");
-          window.localStorage.removeItem("pathname");
-          // window.location.href = window.location.pathname;
-        }
-      });
     },
     handleBackKeys: function () {
       if (window.history.state) {
@@ -1167,14 +535,14 @@ export default {
       });
     },
     isUserAuthorizedToPostComment: function () {
-      let self = this;
       let userObg = {
-        user_id: this.reviewUserPrfileId,
+        user_id: this.$store.state.routeStore.reviewUserData.id,
       };
       axios
         .post("/profile/is-user-authorized-to-post-comment", userObg)
-        .then(function (response) {
-          eventBus.$emit("userAllowedReview", response.data.is_allowed);
+        .then((response) => {
+          this.$store.state.messageStore.userAllowedReview =
+            response.data.is_allowed;
         });
     },
     createCookie: function (name, value, minutes) {
@@ -1294,7 +662,7 @@ export default {
     $("#wallet-modal").on("show.bs.modal", (e) => {
       this.handleBackKeys();
     });
-    eventBus.$emit("globalVerifiedBadgeContents", 1);
+    // eventBus.$emit("globalVerifiedBadgeContents", 1);
   },
   watch: {
     currentUser(user) {

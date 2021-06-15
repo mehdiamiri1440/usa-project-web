@@ -79,7 +79,7 @@ export default {
       .post("/get_total_unread_messages_for_current_user")
       .then(function (response) {
         let messageCount = response.data.msg_count;
-        eventBus.$emit("messageCount", messageCount);
+        this.$store.state.messageStore.messageCount = messageCount;
       })
       .catch(function (error) {
         console.log("error", error);

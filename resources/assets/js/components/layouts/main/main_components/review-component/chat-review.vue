@@ -430,7 +430,6 @@ export default {
       axios.post("/profile/add-comment", reviewObg).then(function (response) {
         self.submitLoader = false;
         if (response.data.status == true) {
-          // self.$parent.isUserAuthorizedToPostComment();
           self.resetData();
           if (reviewObg.text) {
             self.$parent.successMessage =

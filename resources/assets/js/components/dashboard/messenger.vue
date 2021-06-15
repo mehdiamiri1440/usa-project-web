@@ -427,7 +427,6 @@ export default {
       isChatUpdate: true,
       userDataLoader: true,
       isChanleActive: false,
-      userAllowedReview: false,
       isReviewSubmited: false,
       reviewSubmitLoader: false,
     };
@@ -553,7 +552,8 @@ export default {
         this.contactList
       );
 
-      eventBus.$emit("messageCount", -1 * contact.unread_msgs_count);
+      this.$store.state.messageStore.messageCount =
+        -1 * contact.unread_msgs_count;
 
       contact.unread_msgs_count = 0;
 
@@ -873,7 +873,9 @@ export default {
       this.$parent.groupStep = 1;
     },
     activeReportModal: function (reportedUserId) {
-      eventBus.$emit("reoprtModal", reportedUserId);
+      this.$store.state.commit("routeStore/reoprtModal", {
+        reportedUserId: reportedUserId,
+      });
     },
     activeReviewModal: function () {
       let userImage = "";
@@ -890,8 +892,9 @@ export default {
         userImage = this.str + "/" + this.selectedContact.profile_photo;
         selectedUserData.img = userImage;
       }
-
-      eventBus.$emit("reviewUserData", selectedUserData);
+      $store.commit("routeStore/reviewUserModal", {
+        reviewUserData: selectedUserData,
+      });
     },
     registerReview: function (reviewScore) {
       this.reviewSubmitLoader = true;
@@ -901,18 +904,16 @@ export default {
         rating_score: reviewScore,
       };
 
-      let self = this;
-
-      axios.post("/profile/add-comment", reviewObg).then(function (response) {
-        self.reviewSubmitLoader = false;
+      axios.post("/profile/add-comment", reviewObg).then((response) => {
+        this.reviewSubmitLoader = false;
         if (response.data.status == true) {
-          self.isReviewSubmited = true;
+          this.isReviewSubmited = true;
 
           setTimeout(() => {
-            if (self.isReviewSubmited) {
+            if (this.isReviewSubmited) {
               $(".mobile-like-user").fadeOut();
               setTimeout(() => {
-                self.userAllowedReview = false;
+                this.$store.state.messageStore.userAllowedReview = false;
               }, 1500);
             }
           }, 3000);
@@ -1009,13 +1010,13 @@ export default {
     selectedContact: function (value) {
       // reset like message datas
       this.isReviewSubmited = false;
-      this.userAllowedReview = false;
+      this.$store.state.messageStore.userAllowedReview = false;
       this.isLikeBoxActive = true;
 
       // check like message active box
       this.userHasLikeBox();
 
-      eventBus.$emit("activeContactId", value.contact_id);
+      this.$store.state.routeStore.elevatorText = value.contact_id;
     },
     isChanleActive(isChanel) {
       if (isChanel) {
@@ -1038,7 +1039,7 @@ export default {
   beforeDestroy() {
     this.isComponentActive = false;
     this.selectedContact = "";
-    eventBus.$emit("activeContactId", "");
+    this.$store.state.routeStore.elevatorText = "";
   },
 };
 </script>

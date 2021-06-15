@@ -174,8 +174,8 @@ a.active {
             <span>پیام ها</span>
             <span
               class="custom-badge"
-              v-if="messageCount > 0"
-              v-text="messageCount"
+              v-if="$store.state.messageStore.messageCount > 0"
+              v-text="$store.state.messageStore.messageCount"
             ></span>
           </router-link>
         </li>
@@ -237,7 +237,6 @@ export default {
   data() {
     return {
       activeElement: 0,
-      messageCount: "",
       linksPath: ["/buyer/messenger/group-messages"],
     };
   },
@@ -275,9 +274,6 @@ export default {
     var self = this;
     var userId = window.localStorage.getItem("userId");
 
-    eventBus.$on("messageCount", (event) => {
-      this.messageCount += event;
-    });
     eventBus.$on("active", (event) => {
       this.activeElement = event;
     });

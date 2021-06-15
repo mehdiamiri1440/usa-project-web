@@ -644,11 +644,15 @@ a.profile-info-wrapper:focus {
     </router-link>
     <div class="show-header hidden-md hidden-lg">
       <div
-        v-if="messageCount > 0"
+        v-if="$store.state.messageStore.messageCount > 0"
         class="message-notification hide-message-notification"
       >
         <span>
-          {{ messageCount > 100 ? "+99" : messageCount }}
+          {{
+            $store.state.messageStore.messageCount > 100
+              ? "+99"
+              : $store.state.messageStore.messageCount
+          }}
         </span>
       </div>
       <button class="button-height">
@@ -736,7 +740,11 @@ a.profile-info-wrapper:focus {
         <li>
           <div class="col display-loading">
             <div
-              class="user_name placeholder-content placeholder-user-name margin-loading"
+              class="
+                user_name
+                placeholder-content placeholder-user-name
+                margin-loading
+              "
             ></div>
             <div
               class="placeholder-image-header-profile placeholder-content"
@@ -811,11 +819,6 @@ var visible = false;
 import SubMenu from "./sub-menu/sub-menu.vue";
 // import { eventBus } from "../../../../../router/router";
 export default {
-  data: function () {
-    return {
-      messageCount: "",
-    };
-  },
   components: {
     SubMenu,
   },
@@ -859,24 +862,9 @@ export default {
   mounted() {
     var self = this;
     this.init();
-
-    // axios
-    //   .post("/get_total_unread_messages_for_current_user")
-    //   .then(function(response) {
-    //     self.messageCount = response.data.msg_count;
-    //       if (self.messageCount >= 100) {
-    //           self.messageCount = "+99"
-    //       }
-    //   })
-    //   .catch(function(error) {
-    //     console.log("error", error);
-    //   });
   },
   created() {
     var self = this;
-    eventBus.$on("messageCount", (event) => {
-      this.messageCount += event;
-    });
     eventBus.$on("active", (event) => {
       this.activeElement = event;
     });

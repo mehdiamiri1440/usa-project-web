@@ -238,24 +238,9 @@ export default {
         .animate({ scrollTop: newPosition.top - 380 }, 1000);
     },
     deleteProduct: function () {
-      //show modal
-      // this.popUpMsg = "آیا محصول حذف شود؟";
-      // this.deleteButtonText = "حذف";
-      // this.cancelButtonText = "انصراف";
-
-      // eventBus.$emit("submitSuccess", this.popUpMsg);
-      // eventBus.$emit("deleteButtonText", this.deleteButtonText);
-      // eventBus.$emit("cancelButtonText", this.cancelButtonText);
-      eventBus.$emit("productId", this.product_id);
-      eventBus.$emit("modal", "deleteProduct");
-
-      // $("#deleteModal").modal("show");
-
-      this.registerComponentStatistics(
-        "product",
-        "delete-product",
-        "click on delete product-btn"
-      );
+      this.$store.commit("routeStore/deleteProductModal", {
+        productId: this.product_id,
+      });
     },
     registerComponentStatistics: function (
       categoryName,

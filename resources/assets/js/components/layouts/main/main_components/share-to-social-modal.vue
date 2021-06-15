@@ -288,7 +288,10 @@ header {
                 </a>
               </div>
               <div class="link">
-                <div class="pen-url" v-text="shareModalUrl"></div>
+                <div
+                  class="pen-url"
+                  v-text="$store.state.routeStore.shareModalUrl"
+                ></div>
                 <button class="copy-link" @click.prevent="copyLink()">
                   کپی لینک
                 </button>
@@ -385,7 +388,6 @@ header {
 
 <script>
 export default {
-  props: ["shareModalUrl"],
   data: function () {
     return {};
   },
@@ -416,7 +418,9 @@ export default {
     shareLink(social) {
       let url = "";
       var linkElement = document.createElement("a");
-      let shareModalUrl = encodeURIComponent(this.shareModalUrl);
+      let shareModalUrl = encodeURIComponent(
+        this.$store.state.routeStore.shareModalUrl
+      );
       switch (social) {
         case 0:
           url = "https://wa.me/?text=" + shareModalUrl;
@@ -449,7 +453,7 @@ export default {
       let inputWrapper = $("#share-modal");
       inputWrapper.append(
         '<input id="copy-url-to-share" style=" opacity: 0 !important; width: 0 !important; height: 0 !important; position: fixed !important;" type="text" value="' +
-          this.shareModalUrl +
+          this.$store.state.routeStore.shareModalUrl +
           '" />'
       );
       let input = $("#copy-url-to-share");

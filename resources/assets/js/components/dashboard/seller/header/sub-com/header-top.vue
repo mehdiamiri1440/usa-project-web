@@ -532,7 +532,6 @@ a.profile-info-wrapper:focus {
       v-if="$parent.verificationAlert"
       :to="{ name: 'profileBasicSellerVeficiation' }"
       class="verification-wrapper-contents"
-      
     >
       <i class="fa fa-angle-left"></i>
       <span class="verification-text"> برای احراز هویت کلیک کنید </span>
@@ -583,11 +582,15 @@ a.profile-info-wrapper:focus {
     </div>
     <div class="show-header hidden-md hidden-lg">
       <div
-        v-if="messageCount > 0"
+        v-if="$store.state.messageStore.messageCount > 0"
         class="message-notification hide-message-notification"
       >
         <span>
-          {{ messageCount > 100 ? "+99" : messageCount }}
+          {{
+            $store.state.messageStore.messageCount > 100
+              ? "+99"
+              : $store.state.messageStore.messageCount
+          }}
         </span>
       </div>
       <button>
@@ -701,7 +704,11 @@ a.profile-info-wrapper:focus {
         <li>
           <div class="col display-loading">
             <div
-              class="user_name placeholder-content placeholder-user-name margin-loading"
+              class="
+                user_name
+                placeholder-content placeholder-user-name
+                margin-loading
+              "
             ></div>
             <div
               class="placeholder-image-header-profile placeholder-content"
@@ -760,11 +767,6 @@ var visible = false;
 import SubMenu from "./sub-menu/sub-menu.vue";
 // import { eventBus } from "../../../../../router/router";
 export default {
-  data: function () {
-    return {
-      messageCount: 0,
-    };
-  },
   components: {
     SubMenu,
   },
@@ -810,9 +812,6 @@ export default {
   },
   created() {
     var self = this;
-    eventBus.$on("messageCount", (event) => {
-      this.messageCount += event;
-    });
     eventBus.$on("active", (event) => {
       this.activeElement = event;
     });

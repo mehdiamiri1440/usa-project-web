@@ -235,13 +235,16 @@
     <div class="user-data">
       <div class="user-image">
         <img
-          v-if="$parent.reviewUserData.img"
-          :src="$parent.reviewUserData.img"
+          v-if="$store.state.routeStore.reviewUserData.img"
+          :src="$store.state.routeStore.reviewUserData.img"
           alt
         />
         <img v-else src="../../../../../../../img/user-defult.png" />
       </div>
-      <p class="user-name" v-text="$parent.reviewUserData.name"></p>
+      <p
+        class="user-name"
+        v-text="$store.state.routeStore.reviewUserData.name"
+      ></p>
     </div>
     <div class="rate-score-wrapper">
       <div class="main-text">

@@ -483,15 +483,9 @@ export default {
       }
     },
     deleteBuyAd(id) {
-      eventBus.$emit("buyAdId", id);
-
-      eventBus.$emit("modal", "deleteBuyAdModal");
-
-      this.registerComponentStatistics(
-        "product",
-        "delete-product",
-        "click on delete product-btn"
-      );
+      this.$store.commit("routeStore/deleteBuyAdModal", {
+        buyAdId: id,
+      });
     },
     createCookie: function (name, value, minutes) {
       if (minutes) {

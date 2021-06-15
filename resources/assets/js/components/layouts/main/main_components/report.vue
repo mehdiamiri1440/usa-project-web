@@ -73,15 +73,9 @@
             </a>
 
             <div class="modal-title">
-              <span v-if="reportCurrentStep == 0">
-                دلیل گزارش تخلف چیست؟
-              </span>
-              <span v-if="reportCurrentStep == 1">
-                دلیل گزارش تخلف چیست؟
-              </span>
-              <span v-if="reportCurrentStep == 2">
-                گزارش تخلف شما ثبت شد
-              </span>
+              <span v-if="reportCurrentStep == 0"> دلیل گزارش تخلف چیست؟ </span>
+              <span v-if="reportCurrentStep == 1"> دلیل گزارش تخلف چیست؟ </span>
+              <span v-if="reportCurrentStep == 2"> گزارش تخلف شما ثبت شد </span>
             </div>
           </div>
           <div class="modal-body col-xs-12">
@@ -103,7 +97,6 @@ import ReportDescription from "./report-steps/report-description";
 import FinalStep from "./report-steps/final-step";
 
 export default {
-  props: ["reportedUserId"],
   components: {
     ReportContent,
     ReportDescription,
@@ -132,7 +125,7 @@ export default {
         self.resetData();
       });
 
-      $("#report-modal").on("show.bs.modal", function(e) {
+      $("#report-modal").on("show.bs.modal", function (e) {
         self.handleBackBtnClickOnDevices();
       });
     },
@@ -156,7 +149,7 @@ export default {
       self.sendLinkActive = false;
       axios
         .post("/send_user_report", {
-          reported_id: self.reportedUserId,
+          reported_id: this.$store.state.routeStore.reportedUserId,
           option_id: self.reportData.reportTitle,
           description: self.reportData.reportText,
         })

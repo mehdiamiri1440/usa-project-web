@@ -1100,7 +1100,9 @@ export default {
     activeShareModal: function (contentId) {
       let baseUrl = getBase();
       let url = baseUrl + "public-channel/" + contentId;
-      eventBus.$emit("shareModalUrl", url);
+      this.$store.commit("routeStore/shareModalUrl", {
+        shareModalUrl: url,
+      });
     },
     getProductInfo(text, isTitle) {
       let splitText = text.split("\n");
@@ -1167,7 +1169,9 @@ export default {
           baseUrl +
           "shared-profile/" +
           this.$parent.currentUser.user_info.user_name;
-        eventBus.$emit("shareModalUrl", url);
+        this.$store.commit("routeStore/shareModalUrl", {
+          shareModalUrl: url,
+        });
       }
     },
   },

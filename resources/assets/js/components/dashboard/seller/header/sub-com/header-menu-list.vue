@@ -203,8 +203,8 @@ a.active {
               <span>پیام ها</span>
               <span
                 class="custom-badge"
-                v-if="messageCount > 0"
-                v-text="messageCount"
+                v-if="$store.state.messageStore.messageCount > 0"
+                v-text="$store.state.messageStore.messageCount"
               ></span>
             </router-link>
           </li>
@@ -278,24 +278,12 @@ export default {
     return {
       activeElement: null,
       isLoading: true,
-      messageCount: 0,
       linksPath: ["/seller/messenger/group-messages"],
     };
   },
   methods: {
     init: function () {
       var self = this;
-      // axios
-      //     .post("/get_total_unread_messages_for_current_user")
-      //     .then(function (response) {
-      //         self.messageCount = response.data.msg_count;
-      //         if (self.messageCount >= 100) {
-      //             self.messageCount = "+99"
-      //         }
-      //     })
-      //     .catch(function (err) {
-      //         //
-      //     });
     },
     subIsActive(input) {
       const paths = Array.isArray(input) ? input : [input];
@@ -326,9 +314,6 @@ export default {
     var self = this;
     var userId = window.localStorage.getItem("userId");
 
-    eventBus.$on("messageCount", (event) => {
-      this.messageCount += event;
-    });
     eventBus.$on("active", (event) => {
       this.activeElement = event;
     });

@@ -284,7 +284,21 @@ img.image-blur:hover {
 }
 </style>
 
+
 <template>
+  <!-- <button
+    @click="
+      $store.commit('routeStore/deleteProductModal', {
+        productId: 1,
+      })
+    "
+  > -->
+  <button @click="$store.commit('routeStore/editProductModal')">
+    open modal
+  </button>
+  <h3>
+    {{ $store.state.routeStore.elevatorText }}
+  </h3>
   <div id="wrap-footer">
     <footer id="footer">
       <div class="container">

@@ -447,7 +447,10 @@ span.min {
         <div class="progress-upload-wrapper">
           <div class="progress">
             <div
-              class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+              class="
+                progress-bar progress-bar-striped progress-bar-animated
+                bg-success
+              "
               role="progressbar"
               :aria-valuenow="uploadPercentage"
               aria-valuemin="0"
@@ -876,38 +879,9 @@ export default {
       });
     },
     deleteProduct: function () {
-      var self = this;
-
-      axios
-        .post("/delete_product_by_id", {
-          product_id: self.productId,
-        })
-        .then(function (response) {
-          //show product deleted message
-          //code
-          self.popUpMsg = "حذف شد.";
-          $("#custom-main-modal").modal("show");
-
-          self.registerComponentStatistics(
-            "product",
-            "product-deleted",
-            "product-deleted-successfully"
-          );
-
-          setTimeout(function () {
-            window.location.reload();
-          }, 3000);
-        })
-        .catch(function (err) {
-          self.registerComponentStatistics(
-            "product",
-            "product-delete-failed",
-            "product-delete-failed"
-          );
-          //show modal
-          self.popUpMsg = "خطایی رخ داده است.لطفا دوباره تلاش کنید.";
-          $("#custom-main-modal").modal("show");
-        });
+      this.$store.commit("routeStore/deleteProductModal", {
+        productId: this.productId,
+      });
     },
     registerComponentStatistics: function (
       categoryName,

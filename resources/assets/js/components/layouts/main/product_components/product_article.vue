@@ -629,7 +629,7 @@ export default {
         .then(function (response) {
           $(".modal").modal("hide");
 
-          eventBus.$emit("modal", "productEditDone");
+          this.$store.commit("routeStore/editProductModal");
 
           self.registerComponentStatistics(
             "product",
@@ -807,13 +807,10 @@ export default {
       });
     },
     elevatorEvent: function () {
-      // eventBus.$emit(
-      //   "elevatorText",
-      //   "با استفاده از نردبان، محصول شما تا زمان دریافت محصول تازه تر در همان دسته بندی، به عنوان اولین محصول نمایش داده می‌شود."
-      // );
-
-      eventBus.$emit("productId", this.product.main.id);
-      eventBus.$emit("modal", "elevator");
+      this.$store.commit("routeStore/elevatorModal", {
+        text: "default",
+        productId: this.product.main.id,
+      });
     },
   },
   mounted() {

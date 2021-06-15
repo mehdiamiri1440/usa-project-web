@@ -963,7 +963,7 @@
         <li
           v-if="
             checkMobileWidth() &&
-            $parent.userAllowedReview &&
+            this.$store.state.messageStore.userAllowedReview &&
             $parent.isLikeBoxActive &&
             !$parent.isLatestMessage &&
             !$parent.chatMessagesLoader
@@ -1074,7 +1074,6 @@
 </template>
 
 <script>
-
 export default {
   data() {
     return {

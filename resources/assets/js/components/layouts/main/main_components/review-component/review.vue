@@ -47,7 +47,12 @@
 
 <template>
   <div class="container">
-    <div id="review-modal" class="review-modal modal fade" tabindex="-1" role="dialog">
+    <div
+      id="review-modal"
+      class="review-modal modal fade"
+      tabindex="-1"
+      role="dialog"
+    >
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -77,66 +82,65 @@ import StartStep from "./review-steps/start-step";
 // import ReviewDescription from "./review-steps/review-description";
 import FinalStep from "./review-steps/final-step";
 export default {
-  props: ["reviewUserData"],
   components: {
     StartStep,
-    FinalStep
+    FinalStep,
   },
-  data: function() {
+  data: function () {
     return {
       reviewData: {
         rate: "",
-        reviewText: ""
+        reviewText: "",
       },
       errors: {
         reviewData: "",
-        reviewText: ""
+        reviewText: "",
       },
       submitLoader: false,
-      successMessage: ""
+      successMessage: "",
     };
   },
   methods: {
-    init: function() {
+    init: function () {
       let self = this;
-      
-      $("#review-modal").on("hide.bs.modal", function(e) {
+
+      $("#review-modal").on("hide.bs.modal", function (e) {
         setTimeout(() => {
           self.reviewSteps(0);
         }, 200);
         self.resetData();
       });
 
-      $("#review-modal").on("show.bs.modal", function(e) {
+      $("#review-modal").on("show.bs.modal", function (e) {
         self.handleBackBtnClickOnDevices();
       });
     },
-    reviewSteps: function(step) {
+    reviewSteps: function (step) {
       this.$parent.reviewCurrentStep = step;
     },
-    resetData: function() {
+    resetData: function () {
       let self = this;
       this.emptyErros();
       this.reviewData = {
         rate: "",
-        reviewText: ""
+        reviewText: "",
       };
       $("#report-form").collapse("hide");
-      setTimeout(function() {
-        self.$parent.reviewUserData = "";
+      setTimeout(() => {
+        this.$store.state.routeStore.reviewUserData = "";
       }, 200);
     },
-    reviewResetData: function() {
+    reviewResetData: function () {
       $("#review-modal").modal("hide");
       this.resetData();
     },
-    emptyErros: function() {
+    emptyErros: function () {
       this.errors = {
         reviewData: "",
-        reviewText: ""
+        reviewText: "",
       };
     },
-    reviewTextValidator: function(reviewText) {
+    reviewTextValidator: function (reviewText) {
       this.errors.reviewText = "";
 
       if (reviewText != "") {
@@ -150,10 +154,10 @@ export default {
         }
       }
     },
-    validateRegx: function(input, regx) {
+    validateRegx: function (input, regx) {
       return regx.test(input);
     },
-    submitReview: function() {
+    submitReview: function () {
       let self = this;
       this.reviewTextValidator(self.reviewData.reviewText);
       if (self.reviewData.rate == "" && self.reviewData.reviewText == "") {
@@ -163,12 +167,12 @@ export default {
         this.registerReview();
       }
     },
-    registerReview: function() {
+    registerReview: function () {
       let self = this;
       this.submitLoader = true;
 
       let reviewObg = {
-        user_id: self.reviewUserData.id
+        user_id: this.$store.state.routeStore.reviewUserData.id,
       };
 
       if (self.reviewData.rate) {
@@ -178,7 +182,7 @@ export default {
         reviewObg.text = self.reviewData.reviewText;
       }
 
-      axios.post("/profile/add-comment", reviewObg).then(function(response) {
+      axios.post("/profile/add-comment", reviewObg).then(function (response) {
         self.submitLoader = false;
         if (response.data.status == true) {
           self.$parent.isUserAuthorizedToPostComment();
@@ -196,28 +200,28 @@ export default {
         }
       });
     },
-    handleBackBtnClickOnDevices: function() {
+    handleBackBtnClickOnDevices: function () {
       let self = this;
 
       if (window.history.state) {
         history.pushState(null, null, window.location);
       }
 
-      $(window).on("popstate", function(e) {
-          self.reviewResetData();
+      $(window).on("popstate", function (e) {
+        self.reviewResetData();
       });
     },
   },
-  mounted: function() {
+  mounted: function () {
     this.init();
   },
   watch: {
-    "reviewData.rate": function() {
+    "reviewData.rate": function () {
       this.emptyErros();
     },
-    "reviewData.reviewText": function() {
+    "reviewData.reviewText": function () {
       this.emptyErros();
-    }
-  }
+    },
+  },
 };
 </script>

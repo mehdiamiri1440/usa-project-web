@@ -1,4 +1,0 @@
-
-<template>
-  <h1>hi this is test</h1>
-</template>

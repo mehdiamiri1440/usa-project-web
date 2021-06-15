@@ -1530,7 +1530,10 @@ p.response-rate span {
                   <div class="header-reviews text-center">
                     <div
                       class="actions"
-                      v-if="userAllowedReview && !isMyProfile"
+                      v-if="
+                        $store.state.messageStore.userAllowedReview &&
+                        !isMyProfile
+                      "
                     >
                       <!-- <button
                       v-if="userAllowedReview && !isMyProfile"
@@ -2041,7 +2044,6 @@ export default {
       doDeletereview: false,
       reviewsLoader: false,
       userLogin: true,
-      userAllowedReview: false,
       verifiedUserContent: this.$parent.verifiedUserContent,
       userDataLoader: true,
       userData: {
@@ -2249,47 +2251,11 @@ export default {
       } else {
         let url =
           baseUrl + "shared-profile/" + this.profileOwner.user_info.user_name;
-        eventBus.$emit("shareModalUrl", url);
+        this.$store.commit("routeStore/shareModalUrl", {
+          shareModalUrl: url,
+        });
       }
     },
-    // copyProfileLinkToClipBoard: function () {
-    //   this.registerComponentStatistics(
-    //     "profileView",
-    //     "CopyProfileLink",
-    //     "click on copy profile link"
-    //   );
-    //   let base = getBase();
-
-    //   if (this.isDeviceMobile()) {
-    //     var linkElement = document.createElement("a");
-    //     var Message =
-    //       base + "shared-profile/" + this.profileOwner.user_info.user_name;
-    //     var messageToWhatsApp = encodeURIComponent(Message);
-    //     var url = "whatsapp://send?text=" + messageToWhatsApp;
-    //     linkElement.setAttribute("href", url);
-    //     linkElement.setAttribute("data-action", "share/whatsapp/share");
-    //     document.body.appendChild(linkElement);
-
-    //     linkElement.click();
-
-    //     document.body.removeChild(linkElement);
-    //   } else {
-    //     var input = document.createElement("input");
-    //     input.setAttribute(
-    //       "value",
-    //       base + "shared-profile/" + this.profileOwner.user_info.user_name
-    //     );
-    //     document.body.appendChild(input);
-    //     input.select();
-    //     var result = document.execCommand("copy");
-    //     document.body.removeChild(input);
-    //     if (result) {
-    //       this.popUpMsg = "آدرس پروفایل کاربر کپی شد.";
-    //       eventBus.$emit("submitSuccess", this.popUpMsg);
-    //       $("#custom-main-modal").modal("show");
-    //     }
-    //   }
-    // },
     isDeviceMobile: function () {
       if (
         navigator.userAgent.match(/Android/i) ||
@@ -2403,17 +2369,19 @@ export default {
         selectedUserData.img = userImage;
       }
 
-      eventBus.$emit("reviewUserData", selectedUserData);
+      $store.commit("routeStore/reviewUserModal", {
+        reviewUserData: selectedUserData,
+      });
     },
     isUserAuthorizedToPostComment: function () {
-      let self = this;
       let userObg = {
         user_id: this.profileOwner.user_info.id,
       };
       axios
         .post("/profile/is-user-authorized-to-post-comment", userObg)
-        .then(function (response) {
-          self.userAllowedReview = response.data.is_allowed;
+        .then((response) => {
+          this.$store.state.messageStore.userAllowedReview =
+            response.data.is_allowed;
         });
     },
     getReviews: function () {
@@ -2459,9 +2427,6 @@ export default {
     gtag("config", "UA-129398000-1", { page_path: "/profile" });
 
     document.addEventListener("click", this.documentClick);
-    // eventBus.$on("userAllowedReview", ($event) => {
-    //   this.userAllowedReview = $event;
-    // });
   },
   watch: {
     userLogin: function (val) {

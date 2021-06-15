@@ -64,7 +64,7 @@ export default {
   },
   mounted: function () {
     let self = this;
-    eventBus.$emit("subHeader", false);
+    // eventBus.$emit("subHeader", false);
 
     axios.post("/get_special_users_info").then(function (resposne) {
       self.activeUsers = resposne.data.users;

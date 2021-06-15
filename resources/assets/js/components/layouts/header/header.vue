@@ -728,43 +728,6 @@ a.profile-info-wrapper:hover {
       </div>
     </div>
     <!-- Modals -->
-    <div class="container">
-      <div
-        id="deleteModal"
-        class="modal fade"
-        tabindex="-1"
-        role="dialog"
-        aria-labelledby="myLargeModalLabel"
-      >
-        <div class="modal-dialog modal-lg" role="document">
-          <div class="modal-content">
-            <div class="main_popup_content">
-              <a href="#" data-dismiss="modal">
-                <i class="fa fa-times"></i>
-              </a>
-              <p class="main-pop-up" v-text="popUpMsg"></p>
-
-              <a
-                href="#"
-                class="btn green-button delete"
-                data-dismiss="modal"
-                @click.prevent="deleteProduct()"
-                v-text="deleteButtonText"
-              ></a>
-
-              <a
-                href="#"
-                class="btn green-button"
-                data-dismiss="modal"
-                v-text="cancelButtonText"
-              ></a>
-            </div>
-          </div>
-          <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-      </div>
-    </div>
 
     <div class="container">
       <div
@@ -849,8 +812,8 @@ a.profile-info-wrapper:hover {
           >
             <span
               class="message-count"
-              v-if="messageCount > 0"
-              v-text="messageCount"
+              v-if="$store.state.messageStore.messageCount > 0"
+              v-text="$store.state.messageStore.messageCount"
             ></span>
             <i class="fa fa-bars"></i>
           </button>
@@ -1018,8 +981,8 @@ a.profile-info-wrapper:hover {
                   پیام ها
                   <span
                     class="message-count"
-                    v-if="messageCount > 0"
-                    v-text="messageCount"
+                    v-if="$store.state.messageStore.messageCount > 0"
+                    v-text="$store.state.messageStore.messageCount"
                   ></span>
                 </router-link>
 
@@ -1038,8 +1001,8 @@ a.profile-info-wrapper:hover {
                   پیام ها
                   <span
                     class="message-count"
-                    v-if="messageCount > 0"
-                    v-text="messageCount"
+                    v-if="$store.state.messageStore.messageCount > 0"
+                    v-text="$store.state.messageStore.messageCount"
                   ></span>
                 </router-link>
               </li>
@@ -1196,8 +1159,8 @@ a.profile-info-wrapper:hover {
               پیام ها
               <span
                 class="message-count"
-                v-if="messageCount > 0"
-                v-text="messageCount"
+                v-if="$store.state.messageStore.messageCount > 0"
+                v-text="$store.state.messageStore.messageCount"
               ></span>
             </router-link>
 
@@ -1216,8 +1179,8 @@ a.profile-info-wrapper:hover {
               پیام ها
               <span
                 class="message-count"
-                v-if="messageCount > 0"
-                v-text="messageCount"
+                v-if="$store.state.messageStore.messageCount > 0"
+                v-text="$store.state.messageStore.messageCount"
               ></span>
             </router-link>
           </li>
@@ -1336,7 +1299,6 @@ export default {
       cancelButtonText: "",
       ProductId: "",
       mainSearchBoxText: "",
-      messageCount: 0,
     };
   },
   props: [
@@ -1381,38 +1343,9 @@ export default {
       });
     },
     deleteProduct: function () {
-      var self = this;
-
-      axios
-        .post("/delete_product_by_id", {
-          product_id: self.productId,
-        })
-        .then(function (response) {
-          //show product deleted message
-          //code
-          self.popUpMsg = "حذف شد.";
-          $("#custom-main-modal").modal("show");
-
-          self.registerComponentStatistics(
-            "product",
-            "product-deleted",
-            "product-deleted-successfully"
-          );
-
-          setTimeout(function () {
-            window.location.reload();
-          }, 3000);
-        })
-        .catch(function (err) {
-          self.registerComponentStatistics(
-            "product",
-            "product-delete-failed",
-            "product-delete-failed"
-          );
-          //show modal
-          self.popUpMsg = "خطایی رخ داده است.لطفا دوباره تلاش کنید.";
-          $("#custom-main-modal").modal("show");
-        });
+      this.$store.commit("routeStore/deleteProductModal", {
+        productId: this.productId,
+      });
     },
     search: function () {
       if (this.mainSearchBoxText !== "") {
@@ -1434,7 +1367,7 @@ export default {
         .post("/get_total_unread_messages_for_current_user")
         .then(function (response) {
           let messageCount = response.data.msg_count;
-          eventBus.$emit("messageCount", messageCount);
+          this.$store.state.messageStore.messageCount = messageCount;
         })
         .catch(function (error) {
           console.log("error", error);
@@ -1514,10 +1447,6 @@ export default {
 
     eventBus.$on("textSearch", (event) => {
       this.mainSearchBoxText = event;
-    });
-
-    eventBus.$on("messageCount", (event) => {
-      this.messageCount += event;
     });
 
     $(window).resize(this.jqUpdateSize); // When the browser changes size

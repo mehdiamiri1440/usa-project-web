@@ -99,7 +99,6 @@ export default {
   data: function () {
     return {
       reportOptions: "",
-      loadReportOptions:false,
       textsData: {
         reviewItems: [],
         reviewText: "",
@@ -115,23 +114,12 @@ export default {
     },
   },
   mounted: function () {
-    //
-  },
-  created:function(){
-    let self = this;
-
-    eventBus.$on("reoprtModal", ($event) => {
-      if($event){
-        self.loadReportOptions = true;
+    $("#report-modal").on("show.bs.modal", (e) => {
+      this.handleBackKeys();
+      if (!this.reportOptions) {
+        this.init();
       }
     });
   },
-  watch:{
-    "loadReportOptions":function(value){
-        if(value){
-            this.init();
-        }
-    }
-  }
 };
 </script>

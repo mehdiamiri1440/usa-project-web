@@ -1,6 +1,6 @@
 <template>
   <div>
-    <header-master-layouts
+    <!-- <header-master-layouts
       :assets="assets"
       :user_id="userId"
       :is_seller="isSeller"
@@ -9,27 +9,26 @@
       :user_logout_path="userLogoutPath"
       :storage_path="storagePath"
       :login_page_path="userLogoutPath"
-    />
-    <router-view
+    /> -->
+    <!-- <router-view
       id="main-content"
       :str="storagePath"
       :assets="assets"
       :is-user-login="userId"
       :user-type="isSeller"
       :verifiedUserContent="verifiedUserContent"
-    ></router-view>
-
+    ></router-view> -->
     <footer-master-layouts />
   </div>
 </template>
 
 <script>
-import HeaderMasterLayouts from "../../components/layouts/header/header";
+// import HeaderMasterLayouts from "../../components/layouts/header/header";
 import FooterMasterLayouts from "../../components/layouts/footer/footer";
 
 export default {
   components: {
-    HeaderMasterLayouts,
+    // HeaderMasterLayouts,
     FooterMasterLayouts,
   },
   data: function () {

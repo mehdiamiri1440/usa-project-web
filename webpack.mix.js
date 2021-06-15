@@ -1,5 +1,5 @@
 let mix = require('laravel-mix');
-// require('laravel-mix-bundle-analyzer');
+require('laravel-mix-bundle-analyzer');
 const webpack = require("webpack");
 
 /*
@@ -31,7 +31,7 @@ mix.js('resources/assets/js/app.js', 'public/js')
    .vue({ version: 3 });
 
 
-// if (!mix.inProduction()) {
-//    mix.bundleAnalyzer();
-// }
+if (!mix.inProduction()) {
+   mix.bundleAnalyzer();
+}
 

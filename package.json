@@ -1,11 +1,11 @@
 {
   "private": true,
   "scripts": {
-    "development": "mix",
+    "dev": "mix",
     "watch": "mix watch",
     "watch-poll": "mix watch -- --watch-options-poll=1000",
     "hot": "mix watch --hot",
-    "production": "mix --production"
+    "prod": "mix --production"
   },
   "devDependencies": {
     "@babel/cli": "^7.14.5",
@@ -87,7 +87,7 @@
     "vue-sweetalert2": "^4.3.1",
     "vue-upload-component": "^2.8.22",
     "vue-wow": "^1.2.0",
-    "vue3-jalali-moment": "^1.0.1",
+    "vue3-jalali-moment": "^3.0.1",
     "vuex": "^4.0.1",
     "webpack-livereload-plugin": "^3.0.1"
   }

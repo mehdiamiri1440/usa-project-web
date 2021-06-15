@@ -146,7 +146,7 @@ export default {
   props: ["assets"],
   methods: {
     stopLoader: function () {
-      eventBus.$emit("isLoading", false);
+      // eventBus.$emit("isLoading", false);
     },
   },
   mounted: function () {
