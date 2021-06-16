@@ -474,7 +474,7 @@ li.score-item i {
           </div> -->
         </li>
         <li
-          v-if="$store.state.messageStore.userAllowedReview"
+          v-if="$store.state.messagesStore.userAllowedReview"
           class="col-xs-12"
         >
           <ChatReviewComponent

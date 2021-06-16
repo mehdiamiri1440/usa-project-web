@@ -1980,7 +1980,7 @@ export default {
     searchText: function (value) {
       var self = this;
 
-      // eventBus.$emit("textSearch", value);
+      this.$store.state.routeStore.textSearch = value;
 
       clearTimeout(this.searchTextTimeout);
 

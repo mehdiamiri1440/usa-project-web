@@ -1,0 +1,15 @@
+/*!
+ * Image Compressor v0.5.3
+ * https://github.com/xkeshi/image-compressor
+ *
+ * Copyright (c) 2017 Xkeshi
+ * Released under the MIT license
+ *
+ * Date: 2017-12-29T06:11:20.022Z
+ */
+
+/*!
+ * Name: vue-upload-component
+ * Version: 2.8.21
+ * Author: Marco Lang
+ */

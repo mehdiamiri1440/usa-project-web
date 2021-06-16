@@ -170,7 +170,7 @@ input.error:focus + i {
                 v-model="name"
                 :class="{
                   error: $parent.errors.name,
-                  active: this.name,
+                  active: name,
                 }"
                 @keydown.space="preventLeadingSpace"
                 id="user-name"
@@ -180,7 +180,7 @@ input.error:focus + i {
 
               <i
                 class="fa fa-check-circle"
-                v-if="this.name && !$parent.errors.name"
+                v-if="name && !$parent.errors.name"
               ></i>
               <i class="fa fa-times-circle" v-else-if="$parent.errors.name"></i>
               <i class="fa fa-edit" v-else></i>
@@ -201,7 +201,7 @@ input.error:focus + i {
                 v-model="family"
                 :class="{
                   error: $parent.errors.family,
-                  active: this.family,
+                  active: family,
                 }"
                 id="user-family"
                 type="text"
@@ -210,7 +210,7 @@ input.error:focus + i {
 
               <i
                 class="fa fa-check-circle"
-                v-if="this.family && !$parent.errors.family"
+                v-if="family && !$parent.errors.family"
               ></i>
               <i
                 class="fa fa-times-circle"

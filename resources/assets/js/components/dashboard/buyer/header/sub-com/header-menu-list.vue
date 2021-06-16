@@ -174,8 +174,8 @@ a.active {
             <span>پیام ها</span>
             <span
               class="custom-badge"
-              v-if="$store.state.messageStore.messageCount > 0"
-              v-text="$store.state.messageStore.messageCount"
+              v-if="$store.state.messagesStore.messageCount > 0"
+              v-text="$store.state.messagesStore.messageCount"
             ></span>
           </router-link>
         </li>

@@ -259,7 +259,7 @@ input.error:focus + i {
             نوع
             <span
               class="light-green-text"
-              v-text="this.$parent.product.main.sub_category_name"
+              v-text="$parent.product.main.sub_category_name"
             >
             </span>
             مورد نیاز خود را وارد کنید.
@@ -297,7 +297,7 @@ input.error:focus + i {
             چه میزان
             <span
               class="light-green-text"
-              v-text="this.$parent.product.main.sub_category_name"
+              v-text="$parent.product.main.sub_category_name"
             ></span>
             <span
               v-if="productName && !$parent.errors.productName"
@@ -316,7 +316,7 @@ input.error:focus + i {
               v-model="stock"
               :class="{
                 error: $parent.errors.stock,
-                active: this.stock,
+                active: stock,
               }"
               id="user-stock"
               type="tel"
@@ -325,7 +325,7 @@ input.error:focus + i {
 
             <i
               class="fa fa-check-circle"
-              v-if="this.stock && !$parent.errors.stock"
+              v-if="stock && !$parent.errors.stock"
             ></i>
             <i class="fa fa-times-circle" v-else-if="$parent.errors.stock"></i>
             <i class="fa fa-edit" v-else></i>
@@ -353,8 +353,7 @@ input.error:focus + i {
             v-if="isStock"
             class="submit-button disabled"
             :class="{
-              active:
-                !this.$parent.errors.stock && !this.$parent.errors.productName,
+              active: !$parent.errors.stock && !$parent.errors.productName,
             }"
             @click.prevent="callRegisterBuyAd()"
           >
@@ -407,9 +406,8 @@ export default {
         if (number.length <= 13) {
           this.stock = this.$parent.getNumberWithCommas(standardNumber);
         } else {
-          let numberWithCommas = this.$parent.getNumberWithCommas(
-            standardNumber
-          );
+          let numberWithCommas =
+            this.$parent.getNumberWithCommas(standardNumber);
           this.stock = numberWithCommas.substring(0, 13);
         }
       }

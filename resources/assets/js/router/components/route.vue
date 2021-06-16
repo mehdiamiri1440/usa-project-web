@@ -334,7 +334,6 @@
 import router from "../router.js";
 // import { mapState } from "vuex";
 
-// import { eventBus } from "../router.js";
 // import ChatModal from "../../components/layouts/main/main_components/chat_modal";
 import ReportModal from "../../components/layouts/main/main_components/report";
 import ReviewModal from "../../components/layouts/main/main_components/review-component/review";
@@ -398,7 +397,7 @@ export default {
       messaging.onMessage(function (payload) {
         if (payload.notification.tag == "buskool") {
           if (!this.$store.state.routeStore.activeContactId) {
-            this.$store.state.messageStore.messageCount = 1;
+            this.$store.state.messagesStore.messageCount = 1;
           }
           this.$store.state.messagesStore.contanctMessageReceived = true;
         }
@@ -499,9 +498,6 @@ export default {
         }
       }
     },
-    closeGlobalChatBox() {
-      // eventBus.$emit("ChatBoxStatus", false);
-    },
     registerComponentStatistics: function (
       categoryName,
       actionName,
@@ -530,7 +526,7 @@ export default {
       axios
         .post("/profile/is-user-authorized-to-post-comment", userObg)
         .then((response) => {
-          this.$store.state.messageStore.userAllowedReview =
+          this.$store.state.messagesStore.userAllowedReview =
             response.data.is_allowed;
         });
     },
@@ -646,12 +642,10 @@ export default {
     },
   },
   mounted() {
-    // eventBus.$emit("globalVerifiedBadgeContents", this.verifiedUserContent);
     this.activateDownloadAppButton();
     $("#wallet-modal").on("show.bs.modal", (e) => {
       this.handleBackKeys();
     });
-    // eventBus.$emit("globalVerifiedBadgeContents", 1);
   },
   watch: {
     currentUser(user) {

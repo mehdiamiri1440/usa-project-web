@@ -721,7 +721,7 @@ a.profile-info-wrapper:hover {
 <template>
   <div>
     <!-- loading -->
-    <div
+    <!-- <div
       :class="{
         'loader-wrapper': !$store.state.dashboardStore.submiting,
         'loader-display': $store.state.dashboardStore.submiting,
@@ -734,10 +734,10 @@ a.profile-info-wrapper:hover {
         />
         <p dir="rtl">در حال بارگذاری...</p>
       </div>
-    </div>
+    </div> -->
     <!-- Modals -->
 
-    <div class="container">
+    <!-- <div class="container">
       <div
         id="custom-main-modal"
         class="modal fade"
@@ -759,9 +759,7 @@ a.profile-info-wrapper:hover {
               </button>
             </div>
           </div>
-          <!-- /.modal-content -->
         </div>
-        <!-- /.modal-dialog -->
       </div>
     </div>
 
@@ -799,11 +797,9 @@ a.profile-info-wrapper:hover {
               </button>
             </div>
           </div>
-          <!-- /.modal-content -->
         </div>
-        <!-- /.modal-dialog -->
       </div>
-    </div>
+    </div> -->
 
     <!-- end modals -->
 
@@ -820,8 +816,8 @@ a.profile-info-wrapper:hover {
           >
             <span
               class="message-count"
-              v-if="$store.state.messageStore.messageCount > 0"
-              v-text="$store.state.messageStore.messageCount"
+              v-if="$store.state.messagesStore.messageCount > 0"
+              v-text="$store.state.messagesStore.messageCount"
             ></span>
             <i class="fa fa-bars"></i>
           </button>
@@ -950,7 +946,7 @@ a.profile-info-wrapper:hover {
               <input
                 type="text"
                 placeholder="محصول مورد نظر خود را جستجو کنید"
-                v-model="mainSearchBoxText"
+                v-model="$store.state.routeStore.textSearch"
               />
 
               <button class="hidden-xs" @click="search">
@@ -989,8 +985,8 @@ a.profile-info-wrapper:hover {
                   پیام ها
                   <span
                     class="message-count"
-                    v-if="$store.state.messageStore.messageCount > 0"
-                    v-text="$store.state.messageStore.messageCount"
+                    v-if="$store.state.messagesStore.messageCount > 0"
+                    v-text="$store.state.messagesStore.messageCount"
                   ></span>
                 </router-link>
 
@@ -1009,8 +1005,8 @@ a.profile-info-wrapper:hover {
                   پیام ها
                   <span
                     class="message-count"
-                    v-if="$store.state.messageStore.messageCount > 0"
-                    v-text="$store.state.messageStore.messageCount"
+                    v-if="$store.state.messagesStore.messageCount > 0"
+                    v-text="$store.state.messagesStore.messageCount"
                   ></span>
                 </router-link>
               </li>
@@ -1124,7 +1120,7 @@ a.profile-info-wrapper:hover {
         <input
           type="text"
           placeholder="محصول مورد نظر خود را جستجو کنید"
-          v-model="mainSearchBoxText"
+          v-model="$store.state.routeStore.textSearch"
         />
         <button class="fa fa-search" @click="search"></button>
 
@@ -1167,8 +1163,8 @@ a.profile-info-wrapper:hover {
               پیام ها
               <span
                 class="message-count"
-                v-if="$store.state.messageStore.messageCount > 0"
-                v-text="$store.state.messageStore.messageCount"
+                v-if="$store.state.messagesStore.messageCount > 0"
+                v-text="$store.state.messagesStore.messageCount"
               ></span>
             </router-link>
 
@@ -1187,8 +1183,8 @@ a.profile-info-wrapper:hover {
               پیام ها
               <span
                 class="message-count"
-                v-if="$store.state.messageStore.messageCount > 0"
-                v-text="$store.state.messageStore.messageCount"
+                v-if="$store.state.messagesStore.messageCount > 0"
+                v-text="$store.state.messagesStore.messageCount"
               ></span>
             </router-link>
           </li>
@@ -1300,7 +1296,6 @@ export default {
     return {
       popUpMsg: "",
       deleteText: "",
-      mainSearchBoxText: "",
     };
   },
   props: [
@@ -1345,8 +1340,8 @@ export default {
       });
     },
     search: function () {
-      if (this.mainSearchBoxText !== "") {
-        let searchValue = this.mainSearchBoxText;
+      if (this.$store.state.routeStore.textSearch !== "") {
+        let searchValue = this.$store.state.routeStore.textSearch;
         let queryValue = searchValue.replace(/ /g, "+");
 
         this.$router.push({
@@ -1362,9 +1357,9 @@ export default {
     if (this.user_id) {
       axios
         .post("/get_total_unread_messages_for_current_user")
-        .then(function (response) {
+        .then((response) => {
           let messageCount = response.data.msg_count;
-          this.$store.state.messageStore.messageCount = messageCount;
+          this.$store.state.messagesStore.messageCount = messageCount;
         })
         .catch(function (error) {
           console.log("error", error);
@@ -1420,10 +1415,6 @@ export default {
       }
     });
 
-    // eventBus.$on("textSearch", (event) => {
-    //   this.mainSearchBoxText = event;
-    // });
-
     $(window).resize(this.jqUpdateSize); // When the browser changes size
   },
   created() {
@@ -1444,11 +1435,6 @@ export default {
         }
       }
     });
-  },
-  watch: {
-    mainSearchBoxText: function (value) {
-      // eventBus.$emit("textSearch", value);
-    },
   },
 };
 </script>

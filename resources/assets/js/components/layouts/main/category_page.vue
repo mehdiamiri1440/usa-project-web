@@ -261,7 +261,7 @@
       <div class="search-box col-sm-8 col-xs-12 col-lg-5 pull-right">
         <input
           type="text"
-          v-model="searchText"
+          v-model="$store.state.routeStore.textSearch"
           placeholder="اینجا جستجو کنید"
         />
 
@@ -375,7 +375,7 @@ export default {
         return this.defaultSelected;
       });
 
-      this.searchText = "";
+      this.$store.state.routeStore.textSearch = "";
       this.provinceId = "";
       this.categoryId = "";
       this.subCategoryId = "";
@@ -387,6 +387,8 @@ export default {
       var self = this;
 
       self.$store.state.dashboardStore.submiting = true;
+
+      let searchText = this.$store.state.routeStore.textSearch;
 
       var searchObject = {};
 
@@ -404,20 +406,20 @@ export default {
       if (this.cityId) {
         searchObject.city_id = this.cityId;
       }
-      if (this.searchText) {
+      if (searchText) {
         this.$router.replace({
           name: "productList",
           query: {
-            s: this.searchText.replace(/ /g, "+"),
+            s: searchText.replace(/ /g, "+"),
           },
         });
-        searchObject.search_text = this.searchText;
+        searchObject.search_text = searchText;
       }
 
       if (jQuery.isEmptyObject(searchObject)) {
         searchObject.from_record_number = 0;
         searchObject.to_record_number = 10;
-        if (this.searchText == "") {
+        if (searchText == "") {
           this.$router.push({
             name: "productList",
           });
@@ -457,7 +459,7 @@ export default {
     searchText: function (value) {
       var self = this;
 
-      eventBus.$emit("textSearch", value);
+      this.$store.state.routeStore.textSearch = value;
 
       clearTimeout(this.searchTextTimeout);
 
@@ -488,9 +490,6 @@ export default {
   },
   created() {
     gtag("config", "UA-129398000-1", { page_path: "/product-list" });
-    // eventBus.$on("textSearch", (event) => {
-    //   this.searchText = event;
-    // });
 
     // document.addEventListener('click', this.documentClick);
   },

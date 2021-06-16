@@ -1,5 +1,6 @@
 let mix = require('laravel-mix');
 require('laravel-mix-bundle-analyzer');
+require('laravel-mix-purgecss');
 const webpack = require("webpack");
 
 /*
@@ -27,7 +28,13 @@ mix.webpackConfig({
 });
 
 mix.js('resources/assets/js/app.js', 'public/js')
-   .sass('resources/assets/sass/app.scss', 'public/css').options({ processCssUrls: false })
+   .sass('resources/assets/sass/app.scss', 'public/css')
+   .purgeCss(
+      {
+         whitelistPatterns: [/Cookie--nx-theme$/],
+         whitelistPatternsChildren: [/Cookie--nx-theme$/]
+      }
+   )
    .vue({ version: 3 });
 
 

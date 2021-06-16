@@ -963,7 +963,7 @@
         <li
           v-if="
             checkMobileWidth() &&
-            this.$store.state.messageStore.userAllowedReview &&
+            this.$store.state.messagesStore.userAllowedReview &&
             $parent.isLikeBoxActive &&
             !$parent.isLatestMessage &&
             !$parent.chatMessagesLoader

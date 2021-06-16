@@ -133,7 +133,7 @@ input.error:focus + i {
             v-model="phoneNumber"
             :class="{
               error: $parent.errors.phone[0],
-              active: this.phoneNumber.length >= 11,
+              active: phoneNumber.length >= 11,
             }"
             id="phone-number"
             type="tel"
@@ -159,7 +159,7 @@ input.error:focus + i {
         <button
           class="submit-button disabled"
           :class="{
-            active: this.phoneNumber.length >= 11 && $parent.step1.sendCode,
+            active: phoneNumber.length >= 11 && $parent.step1.sendCode,
           }"
           @click.prevent="getPhoneNumber()"
           :disabled="!$parent.step1.sendCode"

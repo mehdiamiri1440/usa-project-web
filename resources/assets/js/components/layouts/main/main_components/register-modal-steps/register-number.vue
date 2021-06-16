@@ -147,7 +147,7 @@ input.error:focus + i {
             v-model="phoneNumber"
             :class="{
               error: $parent.errors.phone,
-              active: this.phoneNumber.length >= 11,
+              active: phoneNumber.length >= 11,
             }"
             id="phone-number"
             type="tel"
@@ -157,7 +157,7 @@ input.error:focus + i {
 
           <i
             class="fa fa-check-circle"
-            v-if="this.phoneNumber.length >= 11 && !$parent.errors.phone"
+            v-if="phoneNumber.length >= 11 && !$parent.errors.phone"
           ></i>
           <i class="fa fa-times-circle" v-else-if="$parent.errors.phone"></i>
           <i class="fa fa-phone-square-alt" v-else></i>
@@ -174,7 +174,7 @@ input.error:focus + i {
             class="submit-button disabled"
             :class="{
               active:
-                this.phoneNumber.length >= 11 &&
+                phoneNumber.length >= 11 &&
                 !$parent.step1.sendCode &&
                 !$parent.errors.phone,
             }"

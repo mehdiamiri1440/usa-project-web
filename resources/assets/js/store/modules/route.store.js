@@ -7,7 +7,8 @@ const state = {
     reportedUserId: '',
     shareModalUrl: '',
     reviewUserData: '',
-    isLoading: false
+    isLoading: false,
+    textSearch: ''
 }
 
 // Mutations

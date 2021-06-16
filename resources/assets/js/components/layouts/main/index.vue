@@ -2296,7 +2296,6 @@ import ProductGridArticle from "./product_components/landing_page_product_grid_a
 import owlCarousel from "../../../owl.carousel.min.js";
 import Route from "../../../router/components/route";
 
-
 var visible = false;
 
 export default {
@@ -2510,8 +2509,7 @@ export default {
     },
     search: function () {
       if (this.mainSearchBoxText !== "") {
-        // eventBus.$emit("textSearch", this.mainSearchBoxText);
-
+        this.$store.state.routeStore.textSearch = this.mainSearchBoxText;
         let searchValue = this.mainSearchBoxText;
         let queryValue = searchValue.replace(/ /g, "+");
 
@@ -2830,9 +2828,7 @@ export default {
     this.$nextTick(this.stopLoader());
   },
   created() {
-    // eventBus.$on("textSearch", (event) => {
-    //   this.mainSearchBoxText = event;
-    // });
+    this.mainSearchBoxText = this.$store.state.routeStore.textSearch;
 
     gtag("config", "UA-129398000-1", { page_path: "/home-page" });
 

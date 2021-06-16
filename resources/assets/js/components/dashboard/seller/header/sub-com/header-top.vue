@@ -582,14 +582,14 @@ a.profile-info-wrapper:focus {
     </div>
     <div class="show-header hidden-md hidden-lg">
       <div
-        v-if="$store.state.messageStore.messageCount > 0"
+        v-if="$store.state.messagesStore.messageCount > 0"
         class="message-notification hide-message-notification"
       >
         <span>
           {{
-            $store.state.messageStore.messageCount > 100
+            $store.state.messagesStore.messageCount > 100
               ? "+99"
-              : $store.state.messageStore.messageCount
+              : $store.state.messagesStore.messageCount
           }}
         </span>
       </div>

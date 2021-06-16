@@ -503,7 +503,6 @@ input[type="number"]::-webkit-outer-spin-button {
 
 
 <script>
-// import { eventBus } from "../../router/router";
 import RegisterNumber from "./register_steps/register_number";
 import VerifyCode from "./register_steps/verify_code";
 import PersonalInformatin from "./register_steps/personal_information";

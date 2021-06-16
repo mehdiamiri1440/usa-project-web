@@ -551,7 +551,7 @@ export default {
         this.contactList
       );
 
-      this.$store.state.messageStore.messageCount =
+      this.$store.state.messagesStore.messageCount =
         -1 * contact.unread_msgs_count;
 
       contact.unread_msgs_count = 0;
@@ -912,7 +912,7 @@ export default {
             if (this.isReviewSubmited) {
               $(".mobile-like-user").fadeOut();
               setTimeout(() => {
-                this.$store.state.messageStore.userAllowedReview = false;
+                this.$store.state.messagesStore.userAllowedReview = false;
               }, 1500);
             }
           }, 3000);
@@ -1008,7 +1008,7 @@ export default {
     selectedContact: function (value) {
       // reset like message datas
       this.isReviewSubmited = false;
-      this.$store.state.messageStore.userAllowedReview = false;
+      this.$store.state.messagesStore.userAllowedReview = false;
       this.isLikeBoxActive = true;
 
       // check like message active box

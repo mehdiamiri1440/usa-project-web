@@ -192,7 +192,7 @@ input.error:focus + i {
             pattern="[0-9]*"
             onfocus="this.select();"
             :class="{
-              error: this.$parent.errors.verification_code,
+              error: $parent.errors.verification_code,
               active: code.number1.length,
             }"
           />
@@ -206,7 +206,7 @@ input.error:focus + i {
             pattern="[0-9]*"
             onfocus="this.select();"
             :class="{
-              error: this.$parent.errors.verification_code,
+              error: $parent.errors.verification_code,
               active: code.number2.length,
             }"
           />
@@ -220,7 +220,7 @@ input.error:focus + i {
             pattern="[0-9]*"
             onfocus="this.select();"
             :class="{
-              error: this.$parent.errors.verification_code,
+              error: $parent.errors.verification_code,
               active: code.number3.length,
             }"
           />
@@ -234,7 +234,7 @@ input.error:focus + i {
             pattern="[0-9]*"
             onfocus="this.select();"
             :class="{
-              error: this.$parent.errors.verification_code,
+              error: $parent.errors.verification_code,
               active: code.number4.length,
             }"
           />
@@ -272,7 +272,7 @@ input.error:focus + i {
             :class="{
               active:
                 currentCode.length >= 4 &&
-                !this.$parent.errors.verification_code &&
+                !$parent.errors.verification_code &&
                 !$parent.step3.verifyCodeLoader,
             }"
             @click.prevent="submitVerifyCode()"

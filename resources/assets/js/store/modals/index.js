@@ -4,47 +4,6 @@ import axios from 'axios'
 
 
 
-
-// eventBus.$on("productId", ($event) => {
-//   this.productId = $event;
-// });
-
-// eventBus.$on("buyAdId", ($event) => {
-//   this.buyAdId = $event;
-// });
-
-// eventBus.$on("joinGroupId", ($event) => {
-//   this.joinGroupId = $event;
-// });
-// eventBus.$on("joinGroupMessage", ($event) => {
-//   this.joinGroupMessage = $event;
-// });
-
-// eventBus.$on("activeContactId", ($event) => {
-//   this.activeContactId = $event;
-// });
-
-// eventBus.$on("reoprtModal", ($event) => {
-//   this.reportedUserId = $event;
-//   $("#report-modal").modal("show");
-// });
-
-// eventBus.$on("shareModalUrl", ($event) => {
-//   this.shareModalUrl = $event;
-//   $("#share-modal").modal("show");
-// });
-
-// eventBus.$on("reviewUserData", ($event) => {
-//   this.reviewUserData = $event;
-//   this.reviewUserPrfileId = $event.id;
-//   $("#review-modal").modal("show");
-// });
-
-// eventBus.$on("modal", ($event) => {
-//   this.openRelatedSwalModal($event);
-// });
-
-
 const openRelatedSwalModal = (modalName) => {
     switch (modalName) {
         case "sendMsg":

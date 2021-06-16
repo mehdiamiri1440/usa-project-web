@@ -1531,7 +1531,7 @@ p.response-rate span {
                     <div
                       class="actions"
                       v-if="
-                        $store.state.messageStore.userAllowedReview &&
+                        $store.state.messagesStore.userAllowedReview &&
                         !isMyProfile
                       "
                     >
@@ -2380,7 +2380,7 @@ export default {
       axios
         .post("/profile/is-user-authorized-to-post-comment", userObg)
         .then((response) => {
-          this.$store.state.messageStore.userAllowedReview =
+          this.$store.state.messagesStore.userAllowedReview =
             response.data.is_allowed;
         });
     },

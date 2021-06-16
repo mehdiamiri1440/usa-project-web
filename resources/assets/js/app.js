@@ -1,7 +1,6 @@
 import { createApp } from 'vue'
 import Axios from 'axios'
-import { createMetaManager } from 'vue-meta'
-
+import { createMetaManager, plugin as metaPlugin } from 'vue-meta'
 import store from "./store"
 import vue3JalaliMoment from "vue3-jalali-moment"
 import router from './router/router.js'
@@ -22,7 +21,8 @@ app.config.productionTip = false;
 
 app.use(store);
 app.use(vue3JalaliMoment);
-app.use(createMetaManager());
+app.use(createMetaManager())
+app.use(metaPlugin)
 app.use(router);
 
 app.mount("#app")
