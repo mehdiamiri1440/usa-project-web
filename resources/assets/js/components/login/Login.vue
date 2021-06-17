@@ -451,6 +451,35 @@ export default {
       popUpMsg: "",
     };
   },
+  created() {
+    gtag("config", "UA-129398000-1", { page_path: "/login" });
+    var self = this;
+
+    let userInfo = {
+      is_buyer: !self.userType,
+      is_seller: self.userType,
+    };
+
+    if (self.isUserLogin && self.userType == 1) {
+      if (self.isUserInInquirySubmissionProcess()) {
+        self.returnUserToPreviousPageAndChatBox(userInfo);
+      } else {
+        self.$router.push("seller/register-product");
+      }
+    } else if (self.isUserLogin && self.userType != 1) {
+      // self.returnUserToPreviousPageAndChatBox(userInfo);
+      self.$router.push("buyer/register-request");
+    } else {
+      self.loginCheckerLoading = false;
+    }
+    window.addEventListener("keydown", function (event) {
+      if (window.location.pathname == "/login") {
+        if (event.keyCode === 13) {
+          self.doLogin();
+        }
+      }
+    });
+  },
   methods: {
     stopLoader: function () {
       this.$store.state.routeStore.isLoading = false;
@@ -762,37 +791,42 @@ export default {
       }
       return false;
     },
+    metaInfo() {
+      return {
+        title: "ورود",
+        titleTemplate: "باسکول | %s",
+        meta: [
+          {
+            name: "description",
+            content:
+              "خرید عمده و قیمت میوه | خرید عمده و قیمت غلات | خرید عمده و قیمت صیفی جات | خرید و قیمت عمده خشکبار",
+          },
+          {
+            name: "author",
+            content: "باسکول",
+          },
+          {
+            property: "og:description",
+            content:
+              "مرجع تخصصی خرید و فروش عمده و قیمت محصولات کشاورزی ایران | صادرات محصولات کشاورزی",
+          },
+          {
+            property: "og:site_name",
+            content: "باسکول بازارآنلاین خرید و فروش محصولات کشاورزی ایران",
+          },
+          {
+            property: "og:title",
+            content: "باسکول | ورود",
+          },
+        ],
+      };
+    },
   },
-  created() {
-    gtag("config", "UA-129398000-1", { page_path: "/login" });
-    var self = this;
 
-    let userInfo = {
-      is_buyer: !self.userType,
-      is_seller: self.userType,
-    };
-
-    if (self.isUserLogin && self.userType == 1) {
-      if (self.isUserInInquirySubmissionProcess()) {
-        self.returnUserToPreviousPageAndChatBox(userInfo);
-      } else {
-        self.$router.push("seller/register-product");
-      }
-    } else if (self.isUserLogin && self.userType != 1) {
-      // self.returnUserToPreviousPageAndChatBox(userInfo);
-      self.$router.push("buyer/register-request");
-    } else {
-      self.loginCheckerLoading = false;
-    }
-    window.addEventListener("keydown", function (event) {
-      if (window.location.pathname == "/login") {
-        if (event.keyCode === 13) {
-          self.doLogin();
-        }
-      }
-    });
-  },
   mounted: function () {
+    this.$store.commit("routeStore/setMeta", {
+      meta: this.metaInfo(),
+    });
     var self = this;
     document.onreadystatechange = () => {
       if (document.readyState === "complete") {
@@ -802,36 +836,6 @@ export default {
   },
   updated: function () {
     this.$nextTick(this.stopLoader());
-  },
-  metaInfo() {
-    return {
-      title: "ورود",
-      titleTemplate: "باسکول | %s",
-      meta: [
-        {
-          name: "description",
-          content:
-            "خرید عمده و قیمت میوه | خرید عمده و قیمت غلات | خرید عمده و قیمت صیفی جات | خرید و قیمت عمده خشکبار",
-        },
-        {
-          name: "author",
-          content: "باسکول",
-        },
-        {
-          property: "og:description",
-          content:
-            "مرجع تخصصی خرید و فروش عمده و قیمت محصولات کشاورزی ایران | صادرات محصولات کشاورزی",
-        },
-        {
-          property: "og:site_name",
-          content: "باسکول بازارآنلاین خرید و فروش محصولات کشاورزی ایران",
-        },
-        {
-          property: "og:title",
-          content: "باسکول | ورود",
-        },
-      ],
-    };
   },
 };
 </script>

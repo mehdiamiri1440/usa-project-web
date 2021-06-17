@@ -217,7 +217,7 @@
               <a href="#" data-dismiss="modal">
                 <i class="fa fa-times"></i>
               </a>
-              <wallet-component
+              <WalletComponent
                 :user-name="userFullName"
                 :walletBalance="walletBalance"
               />
@@ -272,9 +272,7 @@
 
     <!-- end regex download App modal  -->
 
-    <!-- <ChatModal />
-
-    -->
+    <ChatModal />
     <ReviewModal />
     <ShareToSocialModal />
     <ReportModal />
@@ -332,26 +330,20 @@
 
 <script>
 import router from "../router.js";
-// import { mapState } from "vuex";
 
-// import ChatModal from "../../components/layouts/main/main_components/chat_modal";
+import ChatModal from "../../components/layouts/main/main_components/chat_modal";
 import ReportModal from "../../components/layouts/main/main_components/report";
 import ReviewModal from "../../components/layouts/main/main_components/review-component/review";
 import ShareToSocialModal from "../../components/layouts/main/main_components/share-to-social-modal";
-// import walletComponent from "../../components/layouts/main/wallet";
+import WalletComponent from "../../components/layouts/main/wallet";
 
 export default {
-  // computed: mapState({
-  //   elevatorText: (state) => {
-  //     return state.routeStore.elevatorText;
-  //   },
-  // }),
   components: {
-    // ChatModal,
+    ChatModal,
     ReportModal,
     ReviewModal,
     ShareToSocialModal,
-    // walletComponent,
+    WalletComponent,
   },
   data: function () {
     return {

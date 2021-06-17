@@ -865,19 +865,7 @@ export default {
     stopLoader: function () {
       this.$store.state.routeStore.isLoading = false;
     },
-  },
-  mounted: function () {
-    var self = this;
-    document.onreadystatechange = () => {
-      if (document.readyState == "complete") {
-        self.$nextTick(this.stopLoader());
-      }
-    };
-  },
-  updated: function () {
-    this.$nextTick(this.stopLoader());
-  },
-  metaInfo() {
+    metaInfo() {
     return {
       title: " باسکول چگونه کار می کند؟ ",
       titleTemplate: "باسکول | %s",
@@ -907,5 +895,21 @@ export default {
       ],
     };
   },
+  },
+  mounted: function () {
+     this.$store.commit("routeStore/setMeta", {
+      meta: this.metaInfo(),
+    });
+    var self = this;
+    document.onreadystatechange = () => {
+      if (document.readyState == "complete") {
+        self.$nextTick(this.stopLoader());
+      }
+    };
+  },
+  updated: function () {
+    this.$nextTick(this.stopLoader());
+  },
+  
 };
 </script>

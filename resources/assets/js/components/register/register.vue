@@ -579,6 +579,29 @@ export default {
       verifyCodeBtnLoading: false,
     };
   },
+
+  created() {
+    var self = this;
+
+    let userInfo = {
+      is_buyer: !self.userType,
+      is_seller: self.userType,
+    };
+
+    if (self.isUserLogin && self.userType == 1) {
+      if (self.isUserInInquirySubmissionProcess()) {
+        self.returnUserToPreviousPageAndChatBox(userInfo);
+      } else {
+        self.$router.push("/seller/register-product");
+      }
+    } else if (self.isUserLogin && self.userType != 1) {
+      // self.returnUserToPreviousPageAndChatBox(userInfo);
+      self.$router.push("/buyer/register-request");
+    } else {
+      self.loginCheckerLoading = false;
+    }
+    gtag("config", "UA-129398000-1", { page_path: "/register" });
+  },
   methods: {
     ImageLoaded: function () {
       this.isImageLoad = true;
@@ -1272,99 +1295,42 @@ export default {
       }
       document.cookie = name + "=" + value + expires + "; path=/";
     },
-  },
-  watch: {
-    "step2.timeCounterDown": function () {
-      var self = this;
-      var now = new Date().getTime();
-
-      var distance = now - this.step2.now;
-
-      var seconds = 119 - Math.floor((distance % (1000 * 120)) / 1000) + 1;
-
-      setTimeout(function () {
-        self.updateCounterDownTimer(seconds);
-      }, 1000);
-    },
-    "step3.user_name": function () {
-      var self = this;
-      if (this.step3.user_name.length > 0) {
-        axios
-          .post("/user/is_user_name_unique", {
-            user_name: this.step3.user_name,
-          })
-          .then(function (response) {
-            if (response.data.status === true) {
-              self.errors.user_name = [];
-              self.userNameUnique = true;
-            }
-          })
-          .catch(function (err) {
-            self.errors.user_name = [];
-            self.errors.user_name.push("نام کاربری قبلا گرفته شده");
-
-            self.errorFlag = true;
-            self.userNameUnique = false;
-          });
-      }
-    },
-    "step3.national_code": function () {
-      var self = this;
-
-      this.step3.national_code = this.toLatinNumbers(this.step3.national_code);
-
-      if (
-        this.step3.national_code.length > 0 &&
-        this.step3.national_code < 10
-      ) {
-        this.errors.national_code = [];
-        this.errors.national_code.push("کد ملی ۱۰ رقمی است");
-
-        this.errorFlag = true;
-      } else if (this.step3.national_code.length === 10) {
-        axios
-          .post("user/is_national_code_unique", {
-            national_code: this.toLatinNumbers(this.step3.national_code),
-          })
-          .then(function (response) {
-            if (response.data.status === true) {
-              self.errors.national_code = [];
-              self.nationalCodeUnique = true;
-            }
-          })
-          .catch(function (err) {
-            self.errors.national_code = [];
-            self.errors.national_code.push("کد ملی قبلا گرفته شده");
-
-            self.errorFlag = true;
-            self.nationalCodeUnique = false;
-          });
-      }
+    metaInfo() {
+      return {
+        title: "ثبت نام",
+        titleTemplate: "باسکول | %s",
+        meta: [
+          {
+            name: "description",
+            content:
+              "خرید عمده و قیمت میوه | خرید عمده و قیمت غلات | خرید عمده و قیمت صیفی جات | خرید و قیمت عمده خشکبار",
+          },
+          {
+            name: "author",
+            content: "باسکول",
+          },
+          {
+            property: "og:description",
+            content:
+              "مرجع تخصصی خرید و فروش عمده و قیمت محصولات کشاورزی ایران | صادرات محصولات کشاورزی",
+          },
+          {
+            property: "og:site_name",
+            content: "باسکول بازارآنلاین خرید و فروش محصولات کشاورزی ایران",
+          },
+          {
+            property: "og:title",
+            content: "باسکول | ثبت نام",
+          },
+        ],
+      };
     },
   },
-  created() {
-    var self = this;
 
-    let userInfo = {
-      is_buyer: !self.userType,
-      is_seller: self.userType,
-    };
-
-    if (self.isUserLogin && self.userType == 1) {
-      if (self.isUserInInquirySubmissionProcess()) {
-        self.returnUserToPreviousPageAndChatBox(userInfo);
-      } else {
-        self.$router.push("/seller/register-product");
-      }
-    } else if (self.isUserLogin && self.userType != 1) {
-      // self.returnUserToPreviousPageAndChatBox(userInfo);
-      self.$router.push("/buyer/register-request");
-    } else {
-      self.loginCheckerLoading = false;
-    }
-    gtag("config", "UA-129398000-1", { page_path: "/register" });
-  },
   mounted: function () {
+    this.$store.commit("routeStore/setMeta", {
+      meta: this.metaInfo(),
+    });
     document.onreadystatechange = () => {
       if (document.readyState === "complete") {
         // self.$nextTick(this.stopLoader());
@@ -1374,36 +1340,6 @@ export default {
   },
   updated: function () {
     this.$nextTick(this.stopLoader());
-  },
-  metaInfo() {
-    return {
-      title: "ثبت نام",
-      titleTemplate: "باسکول | %s",
-      meta: [
-        {
-          name: "description",
-          content:
-            "خرید عمده و قیمت میوه | خرید عمده و قیمت غلات | خرید عمده و قیمت صیفی جات | خرید و قیمت عمده خشکبار",
-        },
-        {
-          name: "author",
-          content: "باسکول",
-        },
-        {
-          property: "og:description",
-          content:
-            "مرجع تخصصی خرید و فروش عمده و قیمت محصولات کشاورزی ایران | صادرات محصولات کشاورزی",
-        },
-        {
-          property: "og:site_name",
-          content: "باسکول بازارآنلاین خرید و فروش محصولات کشاورزی ایران",
-        },
-        {
-          property: "og:title",
-          content: "باسکول | ثبت نام",
-        },
-      ],
-    };
   },
 };
 </script>

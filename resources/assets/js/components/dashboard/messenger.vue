@@ -872,7 +872,7 @@ export default {
       this.$parent.groupStep = 1;
     },
     activeReportModal: function (reportedUserId) {
-      this.$store.state.commit("routeStore/reoprtModal", {
+      this.$store.commit("routeStore/reoprtModal", {
         reportedUserId: reportedUserId,
       });
     },

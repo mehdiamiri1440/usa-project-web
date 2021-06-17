@@ -1625,6 +1625,11 @@ export default {
       listIsGrid: true,
     };
   },
+  created() {
+    gtag("config", "UA-129398000-1", { page_path: "/product-list" });
+
+    document.addEventListener("click", this.documentClick);
+  },
   methods: {
     filterProducts: function (productsFilter) {
       this.products = productsFilter;
@@ -2079,8 +2084,83 @@ export default {
       //   this.listIsGrid = true;
       // }
     },
+    metaInfo() {
+      let categoryName = this.getCategoryName();
+
+      let canonicalLink =
+        window.location.host +
+        "/product-list/category/" +
+        categoryName.split(" ").join("-");
+
+      return {
+        title:
+          "خرید و فروش عمده " +
+          categoryName +
+          " - " +
+          "قیمت " +
+          categoryName +
+          " عمده صادراتی - خرید و فروش مستقیم",
+        titleTemplate: "%s | باسکول",
+        meta: [
+          {
+            name: "description",
+            content:
+              "خرید و فروش عمده " +
+              categoryName +
+              " به صورت مستقیم و بدون واسطه از بهترین کشاورزان و تامین کنندگان ☀️☀️ آخرین قیمت " +
+              categoryName +
+              " عمده ☀️☀️ بازار باسکول ",
+          },
+          {
+            name: "author",
+            content: "باسکول",
+          },
+          {
+            property: "og:description",
+            content:
+              "خرید و فروش عمده " +
+              categoryName +
+              " - قیمت  " +
+              categoryName +
+              " عمده مستقیم + صادراتی |‌ باسکول ",
+          },
+          {
+            property: "og:site_name",
+            content: "باسکول بازارآنلاین خرید و فروش محصولات کشاورزی ایران",
+          },
+          {
+            property: "og:title",
+            content: "باسکول | خرید و فروش عمده و قیمت " + categoryName,
+          },
+        ],
+        link: [{ rel: "canonical", href: canonicalLink }],
+      };
+    },
+    updateMeta() {
+      console.log("metaUpdate");
+      this.$store.commit("routeStore/setMeta", {
+        meta: this.metaInfo(),
+      });
+    },
+  },
+
+  mounted() {
+    this.updateMeta();
+    this.scrollToTop();
+
+    this.infiniteScrollHandler();
+
+    this.init();
+
+    this.stopLoader();
   },
   watch: {
+    $route(to, from) {
+      console.log(to, from);
+      if (to.name == from.name) {
+        this.updateMeta();
+      }
+    },
     "$route.params.categoryName": function (name) {
       this.init();
     },
@@ -2124,72 +2204,6 @@ export default {
         this.feed();
       }
     },
-  },
-  created() {
-    gtag("config", "UA-129398000-1", { page_path: "/product-list" });
-
-    document.addEventListener("click", this.documentClick);
-  },
-  mounted() {
-    this.scrollToTop();
-
-    this.infiniteScrollHandler();
-
-    this.init();
-
-    this.stopLoader();
-  },
-  metaInfo() {
-    let categoryName = this.getCategoryName();
-
-    let canonicalLink =
-      window.location.host +
-      "/product-list/category/" +
-      categoryName.split(" ").join("-");
-
-    return {
-      title:
-        "خرید و فروش عمده " +
-        categoryName +
-        " - " +
-        "قیمت " +
-        categoryName +
-        " عمده صادراتی - خرید و فروش مستقیم",
-      titleTemplate: "%s | باسکول",
-      meta: [
-        {
-          name: "description",
-          content:
-            "خرید و فروش عمده " +
-            categoryName +
-            " به صورت مستقیم و بدون واسطه از بهترین کشاورزان و تامین کنندگان ☀️☀️ آخرین قیمت " +
-            categoryName +
-            " عمده ☀️☀️ بازار باسکول ",
-        },
-        {
-          name: "author",
-          content: "باسکول",
-        },
-        {
-          property: "og:description",
-          content:
-            "خرید و فروش عمده " +
-            categoryName +
-            " - قیمت  " +
-            categoryName +
-            " عمده مستقیم + صادراتی |‌ باسکول ",
-        },
-        {
-          property: "og:site_name",
-          content: "باسکول بازارآنلاین خرید و فروش محصولات کشاورزی ایران",
-        },
-        {
-          property: "og:title",
-          content: "باسکول | خرید و فروش عمده و قیمت " + categoryName,
-        },
-      ],
-      link: [{ rel: "canonical", href: canonicalLink }],
-    };
   },
 };
 </script>

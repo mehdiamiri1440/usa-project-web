@@ -313,7 +313,6 @@
 
 <template>
   <!--  #regex Chat Message Modal -->
-
   <div class="chat-modal-wrapper" :class="{ 'open-chat': openChatBox }">
     <div class="header-chat-modal" v-if="contactInfo">
       <button @click.prevent="routeToProfile" class="header-info-wrapper">
@@ -377,11 +376,13 @@
             <div class="message-info">
               <span class="time" v-if="msg.created_at"
                 >{{
-                  msg.created_at | moment("jYY/jMM/jDD, h:mm A")
+                  $filter.moment(msg.created_at, "jYY/jMM/jDD, h:mm A")
                 }}
                 &nbsp</span
               >
-              <span v-else>{{ Date() | moment("jYY/jMM/jDD, h:mm A") }}</span>
+              <span v-else>{{
+                $filter.moment(Date(), "jYY/jMM/jDD, h:mm A")
+              }}</span>
               <span class="visited" v-if="msg.sender_id === currentUserId">
                 <i class="fa fa-check" v-if="msg.created_at"></i>
                 <i class="far fa-clock" v-else></i>
@@ -604,24 +605,19 @@ export default {
   },
   computed: mapState({
     chatInfo: (state) => {
-      // this.contactInfo = $event;
-      // this.chatMessages = "";
-      // this.openChatBox = true;
-      // this.msgToSend = "";
-      // this.setUpChat();
-      return state.routeStore.elevatorText;
+      return state.messagesStore.chatInfo;
     },
   }),
-  // created: function () {
-  //   eventBus.$on("ChatInfo", ($event) => {
-  //     this.contactInfo = $event;
-  //     this.chatMessages = "";
-  //     this.openChatBox = true;
-  //     this.msgToSend = "";
-  //     this.setUpChat();
-  //   });
-  // },
   watch: {
+    chatInfo(value) {
+      if (value) {
+        this.contactInfo = value;
+        this.chatMessages = "";
+        this.openChatBox = true;
+        this.msgToSend = "";
+        this.setUpChat();
+      }
+    },
     openChatBox: function (value) {
       if (value == true) {
         $("body").addClass("overflow-hidden");

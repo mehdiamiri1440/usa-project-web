@@ -2455,6 +2455,23 @@ export default {
       },
     };
   },
+  created() {
+    this.mainSearchBoxText = this.$store.state.routeStore.textSearch;
+
+    gtag("config", "UA-129398000-1", { page_path: "/home-page" });
+
+    document.addEventListener("click", this.documentClick);
+
+    var self = this;
+
+    window.addEventListener("keydown", function (event) {
+      if (event.keyCode === 13) {
+        if (self.enterKeyActiveForSearch) {
+          self.search();
+        }
+      }
+    });
+  },
   methods: {
     stopLoader: function () {
       this.$store.state.routeStore.isLoading = false;
@@ -2818,8 +2835,42 @@ export default {
     isElementOutViewport(el) {
       return el.offset().top;
     },
+    metaInfo() {
+      return {
+        title: " بازار خرید و فروش عمده محصولات کشاورزی ",
+        titleTemplate: "باسکول | %s",
+        meta: [
+          {
+            name: "description",
+            content:
+              "خرید و فروش عمده مواد غذایی و کشاورزی ایران ☀️☀️☀️ قیمت عمده مواد غذایی و محصولات کشاورزی - ارتباط مستقیم با صادرکنندگان خریداران فروشندگان عمده",
+          },
+          {
+            name: "author",
+            content: "باسکول",
+          },
+          {
+            property: "og:description",
+            content:
+              "مرجع تخصصی خرید و فروش عمده و قیمت محصولات کشاورزی ایران | صادرات محصولات کشاورزی",
+          },
+          {
+            property: "og:site_name",
+            content:
+              "باسکول بازارآنلاین خرید و فروش عمده محصولات کشاورزی ایران",
+          },
+          {
+            property: "og:title",
+            content: " باسکول | بازار خرید و فروش عمده محصولات کشاورزی ",
+          },
+        ],
+      };
+    },
   },
   mounted: function () {
+    this.$store.commit("routeStore/setMeta", {
+      meta: this.metaInfo(),
+    });
     this.init();
     this.imageParallax();
     this.isLoading = true;
@@ -2827,58 +2878,12 @@ export default {
   updated() {
     this.$nextTick(this.stopLoader());
   },
-  created() {
-    this.mainSearchBoxText = this.$store.state.routeStore.textSearch;
 
-    gtag("config", "UA-129398000-1", { page_path: "/home-page" });
-
-    document.addEventListener("click", this.documentClick);
-
-    var self = this;
-
-    window.addEventListener("keydown", function (event) {
-      if (event.keyCode === 13) {
-        if (self.enterKeyActiveForSearch) {
-          self.search();
-        }
-      }
-    });
-  },
   watch: {
     mainSearchBoxText: function (value) {
       this.enterKeyActiveForSearch = this.mainSearchBoxText !== "";
       // eventBus.$emit("textSearch", value);
     },
-  },
-  metaInfo() {
-    return {
-      title: " بازار خرید و فروش عمده محصولات کشاورزی ",
-      titleTemplate: "باسکول | %s",
-      meta: [
-        {
-          name: "description",
-          content:
-            "خرید و فروش عمده مواد غذایی و کشاورزی ایران ☀️☀️☀️ قیمت عمده مواد غذایی و محصولات کشاورزی - ارتباط مستقیم با صادرکنندگان خریداران فروشندگان عمده",
-        },
-        {
-          name: "author",
-          content: "باسکول",
-        },
-        {
-          property: "og:description",
-          content:
-            "مرجع تخصصی خرید و فروش عمده و قیمت محصولات کشاورزی ایران | صادرات محصولات کشاورزی",
-        },
-        {
-          property: "og:site_name",
-          content: "باسکول بازارآنلاین خرید و فروش عمده محصولات کشاورزی ایران",
-        },
-        {
-          property: "og:title",
-          content: " باسکول | بازار خرید و فروش عمده محصولات کشاورزی ",
-        },
-      ],
-    };
   },
 };
 </script>

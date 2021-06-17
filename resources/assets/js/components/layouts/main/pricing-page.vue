@@ -32,6 +32,9 @@ export default {
   components: {
     PricingTableComponent,
   },
+  created() {
+    gtag("config", "UA-129398000-1", { page_path: "/pricing" });
+  },
   methods: {
     stopLoader: function () {
       this.$store.state.routeStore.isLoading = false;
@@ -44,8 +47,42 @@ export default {
         // console.log("false");
       }
     },
+    metaInfo() {
+      return {
+        title: "ارتقا عضویت ",
+        titleTemplate: "باسکول | %s",
+        meta: [
+          {
+            name: "description",
+            content:
+              "مرجع تخصصی خرید و فروش عمده و قیمت محصولات کشاورزی ایران | صادرات محصولات کشاورزی",
+          },
+          {
+            name: "author",
+            content: "باسکول",
+          },
+          {
+            property: "og:description",
+            content:
+              "مرجع تخصصی خرید و فروش عمده و قیمت محصولات کشاورزی ایران | صادرات محصولات کشاورزی",
+          },
+          {
+            property: "og:site_name",
+            content:
+              "باسکول بازارآنلاین خرید و فروش عمده محصولات کشاورزی ایران",
+          },
+          {
+            property: "og:title",
+            content: " باسکول | بازار خرید و فروش عمده محصولات کشاورزی ",
+          },
+        ],
+      };
+    },
   },
   mounted: function () {
+    this.$store.commit("routeStore/setMeta", {
+      meta: this.metaInfo(),
+    });
     var self = this;
     document.onreadystatechange = () => {
       if (document.readyState === "complete") {
@@ -55,39 +92,6 @@ export default {
   },
   updated: function () {
     this.$nextTick(this.stopLoader());
-  },
-  created() {
-    gtag("config", "UA-129398000-1", { page_path: "/pricing" });
-  },
-  metaInfo() {
-    return {
-      title: "ارتقا عضویت ",
-      titleTemplate: "باسکول | %s",
-      meta: [
-        {
-          name: "description",
-          content:
-            "مرجع تخصصی خرید و فروش عمده و قیمت محصولات کشاورزی ایران | صادرات محصولات کشاورزی",
-        },
-        {
-          name: "author",
-          content: "باسکول",
-        },
-        {
-          property: "og:description",
-          content:
-            "مرجع تخصصی خرید و فروش عمده و قیمت محصولات کشاورزی ایران | صادرات محصولات کشاورزی",
-        },
-        {
-          property: "og:site_name",
-          content: "باسکول بازارآنلاین خرید و فروش عمده محصولات کشاورزی ایران",
-        },
-        {
-          property: "og:title",
-          content: " باسکول | بازار خرید و فروش عمده محصولات کشاورزی ",
-        },
-      ],
-    };
   },
 };
 </script>

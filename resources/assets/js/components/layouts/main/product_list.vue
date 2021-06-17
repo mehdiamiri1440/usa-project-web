@@ -1544,6 +1544,14 @@ export default {
       isMyProfile: false,
     };
   },
+  created() {
+    gtag("config", "UA-129398000-1", { page_path: "/product-list" });
+    // eventBus.$on("textSearch", (event) => {
+    //   this.searchText = event;
+    // });
+
+    // document.addEventListener('click', this.documentClick);
+  },
   methods: {
     filterProducts: function (productsFilter) {
       this.products = productsFilter;
@@ -1606,6 +1614,7 @@ export default {
             })
             .then(function (response) {
               self.products = response.data.products;
+
               //                                localStorage.removeItem('productCountInPage')
               //                                resolve(self.loading = false);
               self.$store.state.dashboardStore.submiting = false;
@@ -1975,6 +1984,67 @@ export default {
       //   this.listIsGrid = true;
       // }
     },
+    metaInfo() {
+      let canonicalLink = window.location.host + "/product-list";
+
+      let title = "";
+      let description = "";
+
+      if (this.searchText) {
+        title = "لیست محصولات و قیمت عمده " + this.searchText;
+        description = "خرید و قیمت عمده " + title;
+      } else {
+        title = "لیست محصولات و قیمت عمده محصولات کشاورزی";
+        description =
+          "خرید عمده و قیمت میوه | خرید عمده و قیمت غلات | خرید عمده و قیمت صیفی جات | خرید و قیمت عمده خشکبار";
+      }
+
+      return {
+        title: title,
+        titleTemplate: "%s | باسکول",
+        meta: [
+          {
+            name: "description",
+            content: description,
+          },
+          {
+            name: "author",
+            content: "باسکول",
+          },
+          {
+            property: "og:description",
+            content:
+              "مرجع تخصصی خرید و فروش عمده و قیمت محصولات کشاورزی ایران | صادرات محصولات کشاورزی",
+          },
+          {
+            property: "og:site_name",
+            content: "باسکول بازارآنلاین خرید و فروش محصولات کشاورزی ایران",
+          },
+          {
+            property: "og:title",
+            content: "باسکول | لیست محصولات و قیمت " + title,
+          },
+        ],
+        link: [{ rel: "canonical", href: canonicalLink }],
+      };
+    },
+    updateMeta() {
+      this.$store.commit("routeStore/setMeta", {
+        meta: this.metaInfo(),
+      });
+    },
+  },
+
+  mounted() {
+    this.updateMeta();
+    let self = this;
+
+    this.scrollToTop();
+
+    this.infiniteScrollHandler();
+
+    this.init();
+    this.stopLoader();
   },
   watch: {
     searchText: function (value) {
@@ -1994,7 +2064,10 @@ export default {
         self.applyFilter();
       }, 1500);
     },
-    $route: function () {
+    $route: function (to, from) {
+      if (to.name == from.name) {
+        this.updateMeta();
+      }
       if (this.$route.query.s) {
         this.searchText = this.$route.query.s.split("+").join(" ");
       }
@@ -2015,74 +2088,6 @@ export default {
         //this.feed()
       }
     },
-  },
-  created() {
-    gtag("config", "UA-129398000-1", { page_path: "/product-list" });
-    // eventBus.$on("textSearch", (event) => {
-    //   this.searchText = event;
-    // });
-
-    // document.addEventListener('click', this.documentClick);
-  },
-  mounted() {
-    let self = this;
-
-    this.scrollToTop();
-
-    this.infiniteScrollHandler();
-
-    this.init(); //.then(loading=>{
-    //              if(!loading){
-    //                   let scrollPosition=(localStorage.getItem('scroll'))||{x:0,y:0};
-    //                   window.scrollTo(0,scrollPosition);
-    //                   localStorage.removeItem('scroll')
-    //                   }
-    //            });
-    this.stopLoader();
-  },
-  metaInfo() {
-    let canonicalLink = window.location.host + "/product-list";
-
-    let title = "";
-    let description = "";
-
-    if (this.searchText) {
-      title = "لیست محصولات و قیمت عمده " + this.searchText;
-      description = "خرید و قیمت عمده " + title;
-    } else {
-      title = "لیست محصولات و قیمت عمده محصولات کشاورزی";
-      description =
-        "خرید عمده و قیمت میوه | خرید عمده و قیمت غلات | خرید عمده و قیمت صیفی جات | خرید و قیمت عمده خشکبار";
-    }
-
-    return {
-      title: title,
-      titleTemplate: "%s | باسکول",
-      meta: [
-        {
-          name: "description",
-          content: description,
-        },
-        {
-          name: "author",
-          content: "باسکول",
-        },
-        {
-          property: "og:description",
-          content:
-            "مرجع تخصصی خرید و فروش عمده و قیمت محصولات کشاورزی ایران | صادرات محصولات کشاورزی",
-        },
-        {
-          property: "og:site_name",
-          content: "باسکول بازارآنلاین خرید و فروش محصولات کشاورزی ایران",
-        },
-        {
-          property: "og:title",
-          content: "باسکول | لیست محصولات و قیمت " + title,
-        },
-      ],
-      link: [{ rel: "canonical", href: canonicalLink }],
-    };
   },
 };
 </script>

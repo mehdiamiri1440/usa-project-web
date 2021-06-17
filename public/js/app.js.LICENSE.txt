@@ -34,11 +34,3 @@
  *
  * Date: 2019-05-01T21:04Z
  */
-
-/**
- * vue-meta v3.0.0-alpha.7
- * (c) 2021
- * - Pim (@pimlie)
- * - All the amazing contributors
- * @license MIT
- */

@@ -822,11 +822,5 @@ export default {
       }
     },
   },
-  metaInfo() {
-    return {
-      title: "بازارگاه کشاورزی",
-      titleTemplate: "باسکول | %s",
-    };
-  },
 };
 </script>

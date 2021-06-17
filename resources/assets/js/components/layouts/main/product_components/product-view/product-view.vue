@@ -475,6 +475,11 @@ export default {
           })
           .then(function (response) {
             self.product = response.data.product;
+            self.$nextTick(() => {
+              self.$store.commit("routeStore/setMeta", {
+                meta: self.metaInfo(),
+              });
+            });
             self.categoryUrl =
               "/product-list/category/" + self.getCategoryName();
             self.starScore = Math.floor(
@@ -871,6 +876,92 @@ export default {
     closePhoneModal() {
       $(".modal").modal("hide");
     },
+    metaInfo() {
+      let productSubCategory = this.product.main.sub_category_name;
+      let productName = this.product.main.product_name;
+      let productCity = this.product.main.city_name;
+      let productProvince = this.product.main.province_name;
+      let productOwnerFullName =
+        this.product.user_info.first_name +
+        " " +
+        this.product.user_info.last_name;
+      let productStock = this.product.main.stock;
+      let productDescription = this.product.main.description
+        ? this.product.main.description.split("<hr/>").join("")
+        : "";
+
+      let pageUrl = this.getProductUrl();
+      let canonicalLink = window.location.host + pageUrl;
+      return {
+        title:
+          productOwnerFullName +
+          " " +
+          "خرید و فروش عمده و قیمت " +
+          productSubCategory +
+          " " +
+          productName +
+          " " +
+          productCity +
+          " " +
+          productProvince,
+        meta: [
+          // {
+          //   name: "keywords",
+          //   content: "ye chi dige",
+          // },
+          {
+            name: "description",
+            content:
+              productOwnerFullName +
+              " " +
+              "خرید و فروش عمده و قیمت " +
+              productSubCategory +
+              " " +
+              productName +
+              " " +
+              productCity +
+              " " +
+              productProvince +
+              " " +
+              "موجودی : " +
+              productStock +
+              " کیلوگرم" +
+              productDescription,
+          },
+          {
+            name: "author",
+            content: "باسکول",
+          },
+          {
+            property: "og:description",
+            content:
+              "خرید و فروش عمده و قیمت " +
+              productSubCategory +
+              " از بهترین تولیدکنندگان ایران - باسکول بازار آنلاین کشاورزی ایران",
+          },
+          {
+            property: "og:site_name",
+            content: "باسکول بازارآنلاین خرید و فروش محصولات کشاورزی ایران",
+          },
+          {
+            property: "og:title",
+            content:
+              "باسکول | خرید و فروش عمده و قیمت " +
+              productSubCategory +
+              " " +
+              productName +
+              " " +
+              productCity +
+              " " +
+              productProvince +
+              " " +
+              productOwnerFullName,
+          },
+        ],
+        link: [{ rel: "canonical", href: canonicalLink }],
+      };
+    },
+    resetData() {},
   },
   created() {
     gtag("config", "UA-129398000-1", { page_path: "/product-view" });
@@ -892,101 +983,10 @@ export default {
   },
   watch: {
     $route(to, from) {
-      this.currentUser = "";
-      this.relatedProducts = "";
-      this.product.user_info = "";
-      this.errors = "";
-      this.popUpMsg = "";
-      this.submiting = false;
-      this.loading = false;
-      this.isMyProfile = false;
-      this.product.main.id = "";
-      this.init();
+      if (to.name == from.name) {
+        $("html, body").animate({ scrollTop: 0 }, 300, function () {});
+      }
     },
-  },
-  metaInfo() {
-    // let productSubCategory = this.product.main.sub_category_name;
-    // let productName = this.product.main.product_name;
-    // let productCity = this.product.main.city_name;
-    // let productProvince = this.product.main.province_name;
-    // let productOwnerFullName =
-    //   this.product.user_info.first_name +
-    //   " " +
-    //   this.product.user_info.last_name;
-    // let productStock = this.product.main.stock;
-    // let productDescription = this.product.main.description
-    //   ? this.product.main.description.split("<hr/>").join("")
-    //   : "";
-
-    // let pageUrl = this.getProductUrl();
-    // let canonicalLink = window.location.host + pageUrl;
-
-    // //
-    // return {
-    //   title:
-    //     productOwnerFullName +
-    //     " " +
-    //     "خرید و فروش عمده و قیمت " +
-    //     productSubCategory +
-    //     " " +
-    //     productName +
-    //     " " +
-    //     productCity +
-    //     " " +
-    //     productProvince,
-    //   titleTemplate: "%s | باسکول",
-    //   meta: [
-    //     {
-    //       name: "description",
-    //       content:
-    //         productOwnerFullName +
-    //         " " +
-    //         "خرید و فروش عمده و قیمت " +
-    //         productSubCategory +
-    //         " " +
-    //         productName +
-    //         " " +
-    //         productCity +
-    //         " " +
-    //         productProvince +
-    //         " " +
-    //         "موجودی : " +
-    //         productStock +
-    //         " کیلوگرم" +
-    //         productDescription,
-    //     },
-    //     {
-    //       name: "author",
-    //       content: "باسکول",
-    //     },
-    //     {
-    //       property: "og:description",
-    //       content:
-    //         "خرید و فروش عمده و قیمت " +
-    //         productSubCategory +
-    //         " از بهترین تولیدکنندگان ایران - باسکول بازار آنلاین کشاورزی ایران",
-    //     },
-    //     {
-    //       property: "og:site_name",
-    //       content: "باسکول بازارآنلاین خرید و فروش محصولات کشاورزی ایران",
-    //     },
-    //     {
-    //       property: "og:title",
-    //       content:
-    //         "باسکول | خرید و فروش عمده و قیمت " +
-    //         productSubCategory +
-    //         " " +
-    //         productName +
-    //         " " +
-    //         productCity +
-    //         " " +
-    //         productProvince +
-    //         " " +
-    //         productOwnerFullName,
-    //     },
-    //   ],
-    //   link: [{ rel: "canonical", href: canonicalLink }],
-    // };
   },
 };
 </script>

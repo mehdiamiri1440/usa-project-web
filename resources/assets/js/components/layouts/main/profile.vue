@@ -2054,6 +2054,11 @@ export default {
       successMessage: "نظر شما با موفقیت ثبت شد",
     };
   },
+  created() {
+    gtag("config", "UA-129398000-1", { page_path: "/profile" });
+
+    document.addEventListener("click", this.documentClick);
+  },
   methods: {
     stopLoader: function () {
       this.$store.state.routeStore.isLoading = false;
@@ -2115,6 +2120,11 @@ export default {
             self.profileOwnerStatistics.rating_info = {};
           }
           self.statisticsLoader = false;
+          self.$nextTick(() => {
+            self.$store.commit("routeStore/setMeta", {
+              meta: self.metaInfo(),
+            });
+          });
         })
         .catch(function (err) {
           //
@@ -2415,6 +2425,87 @@ export default {
           }, 300);
         });
     },
+    metaInfo() {
+      let fullName =
+        this.profileOwner.user_info.first_name +
+        " " +
+        this.profileOwner.user_info.last_name;
+
+      let url =
+        window.location.host +
+        "/profile/" +
+        this.profileOwner.user_info.user_name;
+      let profilePhoto = "";
+
+      if (this.profileOwner.profile.profile_photo) {
+        profilePhoto = this.str + "/" + this.profileOwner.profile.profile_photo;
+      } else {
+        profilePhoto = this.assets + "assets/img/user-defult.png";
+      }
+
+      let indexingStatus = "";
+      if (
+        !!this.profileOwner.profile.description &&
+        this.profileOwner.profile.description.length > 500
+      ) {
+        indexingStatus = "index";
+      } else {
+        indexingStatus = "noindex";
+      }
+
+      return {
+        title: fullName,
+        titleTemplate: "%s | باسکول",
+        meta: [
+          {
+            name: "description",
+            content:
+              " محصولات کشاورزی و تصاویر محصولات من را در این صفحه مشاهده کنید",
+          },
+          {
+            name: "robots",
+            content: indexingStatus,
+          },
+          {
+            property: "og:type",
+            content: "website",
+          },
+          {
+            property: "og:image:height",
+            content: "256",
+          },
+          {
+            property: "og:image:width",
+            content: "256",
+          },
+          {
+            property: "og:image:type",
+            content: "image/jpeg",
+          },
+          {
+            property: "og:description",
+            content: "صفحه ی پروفایل کاربران باسکول",
+          },
+          {
+            property: "og:site_name",
+            content: "باسکول",
+          },
+          {
+            property: "og:url",
+            content: url,
+          },
+          {
+            property: "og:title",
+            content: fullName,
+          },
+          {
+            property: "og:image",
+            content: profilePhoto,
+          },
+        ],
+        link: [{ rel: "canonical", href: url }],
+      };
+    },
   },
   mounted() {
     this.init();
@@ -2423,11 +2514,7 @@ export default {
   updated: function () {
     this.$nextTick(this.stopLoader());
   },
-  created() {
-    gtag("config", "UA-129398000-1", { page_path: "/profile" });
 
-    document.addEventListener("click", this.documentClick);
-  },
   watch: {
     userLogin: function (val) {
       // console.log(val);
@@ -2439,87 +2526,6 @@ export default {
         }, 10);
       }
     },
-  },
-  metaInfo() {
-    let fullName =
-      this.profileOwner.user_info.first_name +
-      " " +
-      this.profileOwner.user_info.last_name;
-
-    let url =
-      window.location.host +
-      "/profile/" +
-      this.profileOwner.user_info.user_name;
-    let profilePhoto = "";
-
-    if (this.profileOwner.profile.profile_photo) {
-      profilePhoto = this.str + "/" + this.profileOwner.profile.profile_photo;
-    } else {
-      profilePhoto = this.assets + "assets/img/user-defult.png";
-    }
-
-    let indexingStatus = "";
-    if (
-      !!this.profileOwner.profile.description &&
-      this.profileOwner.profile.description.length > 500
-    ) {
-      indexingStatus = "index";
-    } else {
-      indexingStatus = "noindex";
-    }
-
-    return {
-      title: fullName,
-      titleTemplate: "%s | باسکول",
-      meta: [
-        {
-          name: "description",
-          content:
-            " محصولات کشاورزی و تصاویر محصولات من را در این صفحه مشاهده کنید",
-        },
-        {
-          name: "robots",
-          content: indexingStatus,
-        },
-        {
-          property: "og:type",
-          content: "website",
-        },
-        {
-          property: "og:image:height",
-          content: "256",
-        },
-        {
-          property: "og:image:width",
-          content: "256",
-        },
-        {
-          property: "og:image:type",
-          content: "image/jpeg",
-        },
-        {
-          property: "og:description",
-          content: "صفحه ی پروفایل کاربران باسکول",
-        },
-        {
-          property: "og:site_name",
-          content: "باسکول",
-        },
-        {
-          property: "og:url",
-          content: url,
-        },
-        {
-          property: "og:title",
-          content: fullName,
-        },
-        {
-          property: "og:image",
-          content: profilePhoto,
-        },
-      ],
-      link: [{ rel: "canonical", href: url }],
-    };
   },
 };
 </script>

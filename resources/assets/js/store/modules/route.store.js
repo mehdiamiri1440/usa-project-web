@@ -1,5 +1,5 @@
 import modals from '../modals'
-
+import siteMeta from '../../metaManager'
 // State object
 const state = {
     elevatorText: 'با استفاده از نردبان، محصول شما تا زمان دریافت محصول تازه تر در همان دسته بندی، به عنوان اولین محصول نمایش داده می‌شود.',
@@ -8,7 +8,11 @@ const state = {
     shareModalUrl: '',
     reviewUserData: '',
     isLoading: false,
-    textSearch: ''
+    textSearch: '',
+    meta: '',
+    defaultMetaInfo: {
+        title: "بازارگاه کشاورزی",
+    }
 }
 
 // Mutations
@@ -42,6 +46,9 @@ const mutations = {
     setModal(state, data) {
         modals.openRelatedSwalModal(data.name);
     },
+    setMeta(state, data) {
+        siteMeta.metaManager(data.meta);
+    }
 }
 
 export default {
