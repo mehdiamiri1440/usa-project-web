@@ -210,7 +210,7 @@ span {
           $parent.product.main.province_name
         "
         :image-count="$parent.product.main.photos_count"
-        :product-url="this.$parent.productUrl"
+        :product-url="$parent.productUrl"
       />
     </div>
     <div class="main-article-contents" @click="setScroll()">
@@ -255,7 +255,7 @@ span {
       <div>
         <h3 class="article-title">
           <router-link
-            :to="this.$parent.productUrl"
+            :to="$parent.productUrl"
             v-html="getProductName()"
           ></router-link>
         </h3>
@@ -275,13 +275,13 @@ span {
           توضیحات
           <router-link
             v-if="$parent.product.main.description < 100"
-            :to="this.$parent.productUrl"
+            :to="$parent.productUrl"
             v-html="$parent.product.main.description"
           ></router-link>
 
           <router-link
             v-else
-            :to="this.$parent.productUrl"
+            :to="$parent.productUrl"
             v-html="$parent.product.main.description.substring(0, 100)"
           ></router-link>
         </p>

@@ -364,17 +364,17 @@ i.fa-star {
         <input
           type="text"
           placeholder="جستجو مخاطب"
-          v-model="$parent.contactNameSearchText"
+          v-model="$store.state.messagesStore.contactNameSearchText"
         />
         <i class="fa fa-search"></i>
         <button
-          v-if="$parent.contactNameSearchText"
-          @click.prevent="$parent.contactNameSearchText = ''"
+          v-if="contactNameSearchText"
+          @click.prevent="contactNameSearchText = ''"
         >
           <i class="fa fa-times"></i>
         </button>
       </div>
-      <div v-if="$parent.userType" class="contacts-switch-buttons-wrapper">
+      <div v-if="userType" class="contacts-switch-buttons-wrapper">
         <div class="switch-button-item">
           <router-link
             :to="{ name: 'messagesRequestSeller' }"
@@ -396,15 +396,12 @@ i.fa-star {
       </div>
     </div>
 
-    <div v-if="$parent.contactList.length === 0" class="not-found-item">
+    <div v-if="contactList.length === 0" class="not-found-item">
       <div
         class="image-wrapper"
-        v-if="!$parent.contactNameSearchText && !$parent.isContactListLoaded"
+        v-if="!contactNameSearchText && !isContactListLoaded"
       >
-        <div
-          v-show="!$parent.isImageLoad || $parent.isImageLoad"
-          class="lds-ring"
-        >
+        <div v-show="!isImageLoad || isImageLoad" class="lds-ring">
           <div></div>
           <div></div>
           <div></div>
@@ -413,16 +410,14 @@ i.fa-star {
         <!-- <span v-text="alt" class="lds-ring-alt"></span> -->
       </div>
 
-      <div
-        v-else-if="$parent.contactNameSearchText && !$parent.isSearchingContact"
-      >
+      <div v-else-if="contactNameSearchText && !isSearchingContact">
         <p class="user-not-fount">
           <img src="../../../../img/empty-message.svg" alt="" />
           <span>مخاطب یافت نشد</span>
         </p>
       </div>
 
-      <div v-else-if="$parent.isSearchingContact" class="contact-is-search">
+      <div v-else-if="isSearchingContact" class="contact-is-search">
         <div class="lds-ring">
           <div></div>
           <div></div>
@@ -431,24 +426,24 @@ i.fa-star {
         </div>
       </div>
       <div
-        v-else-if="$parent.isContactListLoaded"
+        v-else-if="isContactListLoaded"
         class="contact-items"
-        :class="{ 'is-buyer-list': !$parent.userType }"
+        :class="{ 'is-buyer-list': !userType }"
       >
         <ul>
           <li class="contact-item">
             <a
               href="#"
-              @click.prevent="$parent.openChannel()"
+              @click.prevent="$emit('openChannel')"
               :class="{
-                active: $parent.isChanleActive,
+                active: isChanleActive,
               }"
             >
               <div class="channel-image">
                 <img src="../../../../img/logo/512-buskool-logo.jpg" />
               </div>
               <div
-                v-if="$parent.channelInfo.unread_contents == 0"
+                v-if="channelInfo.unread_contents == 0"
                 class="my-channel-name-wraopper"
               >
                 <span class="contact-name text-rtl"> کانال رسمی باسکول </span>
@@ -458,7 +453,7 @@ i.fa-star {
                   data-container="body"
                   data-toggle="popover"
                   data-placement="bottom"
-                  :data-content="$parent.verifiedUserContent"
+                  :data-content="$store.state.routeStore.verifiedUserContent"
                   title
                 >
                   <i class="fa fa-certificate"></i>
@@ -476,15 +471,17 @@ i.fa-star {
                   data-container="body"
                   data-toggle="popover"
                   data-placement="bottom"
-                  :data-content="$parent.verifiedUserContent"
+                  :data-content="$store.state.routeStore.verifiedUserContent"
                   title
                 >
                   <i class="fa fa-certificate"></i>
                 </button>
                 <p class="last-message-date">
                   {{
-                    $parent.channelInfo.last_content_date
-                      | moment("jYYYY/jMM/jDD")
+                    $filter.moment(
+                      channelInfo.last_content_date,
+                      "jYYYY/jMM/jDD"
+                    )
                   }}
                 </p>
               </div>
@@ -492,14 +489,14 @@ i.fa-star {
               <div class="my-contact-info-wrapper">
                 <span
                   class="contact-last-message"
-                  v-text="$parent.channelInfo.last_content_title"
+                  v-text="channelInfo.last_content_title"
                 ></span>
 
                 <div class="count-number-wrapper">
                   <p
                     class="count-number"
-                    v-if="$parent.channelInfo.unread_contents !== 0"
-                    v-text="$parent.channelInfo.unread_contents"
+                    v-if="channelInfo.unread_contents !== 0"
+                    v-text="channelInfo.unread_contents"
                   ></p>
                 </div>
               </div>
@@ -511,7 +508,7 @@ i.fa-star {
               <p>در حال حاضر مخاطبی وجود ندارد</p>
 
               <router-link
-                v-if="$parent.userType"
+                v-if="userType"
                 :to="{ name: 'buyAdRequestsSeller' }"
                 tag="button"
                 class="user-button"
@@ -533,25 +530,21 @@ i.fa-star {
       </div>
     </div>
 
-    <div
-      v-else
-      class="contact-items"
-      :class="{ 'is-buyer-list': !$parent.userType }"
-    >
+    <div v-else class="contact-items" :class="{ 'is-buyer-list': !userType }">
       <ul>
         <li class="contact-item">
           <a
             href="#"
-            @click.prevent="$parent.openChannel()"
+            @click.prevent="$emit('openChannel')"
             :class="{
-              active: $parent.isChanleActive,
+              active: isChanleActive,
             }"
           >
             <div class="channel-image">
               <img src="../../../../img/logo/512-buskool-logo.jpg" />
             </div>
             <div
-              v-if="$parent.channelInfo.unread_contents == 0"
+              v-if="channelInfo.unread_contents == 0"
               class="my-channel-name-wraopper"
             >
               <span class="contact-name text-rtl"> کانال رسمی باسکول </span>
@@ -561,7 +554,7 @@ i.fa-star {
                 data-container="body"
                 data-toggle="popover"
                 data-placement="bottom"
-                :data-content="$parent.verifiedUserContent"
+                :data-content="$store.state.routeStore.verifiedUserContent"
                 title
               >
                 <i class="fa fa-certificate"></i>
@@ -579,15 +572,14 @@ i.fa-star {
                 data-container="body"
                 data-toggle="popover"
                 data-placement="bottom"
-                :data-content="$parent.verifiedUserContent"
+                :data-content="$store.state.routeStore.verifiedUserContent"
                 title
               >
                 <i class="fa fa-certificate"></i>
               </button>
               <p class="last-message-date">
                 {{
-                  $parent.channelInfo.last_content_date
-                    | moment("jYYYY/jMM/jDD")
+                  $filter.moment(channelInfo.last_content_date, "jYYYY/jMM/jDD")
                 }}
               </p>
             </div>
@@ -595,14 +587,14 @@ i.fa-star {
             <div class="my-contact-info-wrapper">
               <span
                 class="contact-last-message"
-                v-text="$parent.channelInfo.last_content_title"
+                v-text="channelInfo.last_content_title"
               ></span>
 
               <div class="count-number-wrapper">
                 <p
                   class="count-number"
-                  v-if="$parent.channelInfo.unread_contents !== 0"
-                  v-text="$parent.channelInfo.unread_contents"
+                  v-if="channelInfo.unread_contents !== 0"
+                  v-text="channelInfo.unread_contents"
                 ></p>
               </div>
             </div>
@@ -610,22 +602,22 @@ i.fa-star {
         </li>
         <li
           class="contact-item"
-          v-for="(contact, index) in $parent.contactList"
+          v-for="(contact, index) in contactList"
           :key="index"
         >
           <a
             href="#"
-            @click.prevent="$parent.loadChatHistory(contact, index, false)"
+            @click.prevent="$emit('loadChatHistory', contact, index, false)"
             :class="{
               active:
-                $parent.selectedContact.contact_id == contact.contact_id &&
-                !$parent.isChanleActive,
+                selectedContact.contact_id == contact.contact_id &&
+                !isChanleActive,
             }"
           >
             <div class="contact-image">
               <img
                 v-if="contact.profile_photo"
-                :src="$parent.str + '/' + contact.profile_photo"
+                :src="str + '/' + contact.profile_photo"
                 :alt="contact.first_name[0]"
               />
 
@@ -642,13 +634,15 @@ i.fa-star {
                 data-container="body"
                 data-toggle="popover"
                 data-placement="bottom"
-                :data-content="$parent.verifiedUserContent"
+                :data-content="$store.state.routeStore.verifiedUserContent"
                 title
               >
                 <i class="fa fa-certificate"></i>
               </button>
               <p class="last-message-date">
-                {{ contact.last_msg_time_date | moment("jYYYY/jMM/jDD") }}
+                {{
+                  $filter.moment(contact.last_msg_time_date, "jYYYY/jMM/jDD")
+                }}
               </p>
             </div>
 
@@ -669,12 +663,12 @@ i.fa-star {
           </a>
         </li>
         <li
-          v-if="$parent.showLoadMoreBtn && !$parent.contactNameSearchText"
+          v-if="showLoadMoreBtn && !contactNameSearchText"
           class="contact-item"
         >
           <button
             class="btn load-more"
-            @click.prevent="$parent.loadMoreContacts()"
+            @click.prevent="$emit('loadMoreContacts')"
           >
             ادامه مخاطبین
           </button>
@@ -686,8 +680,20 @@ i.fa-star {
 
 
 <script >
-
 export default {
+  props: [
+    "contactList",
+    "channelInfo",
+    "isChanleActive",
+    "selectedContact",
+    "isContactListLoaded",
+    "userType",
+    "isImageLoad",
+    "isSearchingContact",
+    "str",
+    "showLoadMoreBtn",
+  ],
+  emits: ["loadChatHistory", "openChannel", "loadMoreContacts"],
   data: function () {
     return {
       is_contact: true,
@@ -715,15 +721,15 @@ export default {
     },
   },
   watch: {
-    "$parent.contactList": function () {
-      if (this.$parent.contactList) {
+    contactList: function () {
+      if (this.contactList) {
         setTimeout(() => {
           this.activeComponentTooltip();
         }, 10);
       }
     },
-    "$parent.isChanleActive": function () {
-      if (this.$parent.isChanleActive) {
+    isChanleActive: function () {
+      if (this.isChanleActive) {
         setTimeout(() => {
           this.activeComponentTooltip();
         }, 10);

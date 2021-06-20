@@ -341,7 +341,6 @@ export default {
       loadMoreActive: false,
       loading: false,
       searchTextTimeout: null,
-      verifiedUserContent: this.$parent.verifiedUserContent,
     };
   },
   methods: {

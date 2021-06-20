@@ -220,7 +220,7 @@ button.send-message-button {
       <div class="col-xs-12 col-lg-9 pull-right">
         <section class="main-content">
           <div class="row">
-            <ProductContents />
+            <ProductContents :product="product" :userId="userId" />
           </div>
         </section>
       </div>
@@ -447,7 +447,6 @@ export default {
       isMyProfile: false,
       showRegisterRequestBox: true,
       starScore: "",
-      verifiedUserContent: this.$parent.verifiedUserContent,
       categoryUrl: "",
       isActivePhone: false,
       userPhone: "",
@@ -847,7 +846,7 @@ export default {
       });
     },
     inquiry: function () {
-      //eventBus.$emit("productUserInfo", this.product);
+      this.$store.state.routeStore.productUserInfo = this.product;
       this.$router.push({ name: "registerinquiry" });
     },
     getConvertedNumbers: function (number) {
@@ -961,7 +960,6 @@ export default {
         link: [{ rel: "canonical", href: canonicalLink }],
       };
     },
-    resetData() {},
   },
   created() {
     gtag("config", "UA-129398000-1", { page_path: "/product-view" });

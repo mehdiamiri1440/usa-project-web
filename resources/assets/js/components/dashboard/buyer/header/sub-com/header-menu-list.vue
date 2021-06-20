@@ -168,7 +168,7 @@ a.active {
         <li class="list-item">
           <router-link
             :to="{ name: 'messagesBuyer' }"
-            :class="{ 'router-link-exact-active ': this.activeElement === 0 }"
+            :class="{ 'router-link-exact-active ': activeElement === 0 }"
           >
             <i class="fas fa-comment-alt" aria-hidden="true"></i>
             <span>پیام ها</span>

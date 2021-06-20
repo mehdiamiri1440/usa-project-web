@@ -265,7 +265,6 @@
             :products="relatedProducts"
             :currentUser="currentUser"
             :str="str"
-            :verifiedUserContent="verifiedUserContent"
           />
           <finish-register-request v-else-if="currentStep == 2" />
         </main>
@@ -283,7 +282,7 @@ import FinishRegisterRequestRelated from "./register-request-steps/fnish-registe
 import FinishRegisterRequest from "./register-request-steps/fnish-register-request";
 
 export default {
-  props: ["str", "verifiedUserContent"],
+  props: ["str"],
   components: {
     StartRegisterRequest,
     RegisterRequest,

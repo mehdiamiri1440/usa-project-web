@@ -89,7 +89,7 @@
       />
 
       <div v-if="!isImageLoad" class="spinner-border">
-        <span class="sr-only">Loading...</span>
+        <span class="sr-only"></span>
       </div>
     </router-link>
 

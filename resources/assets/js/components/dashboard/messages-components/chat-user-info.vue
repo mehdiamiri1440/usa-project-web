@@ -318,7 +318,7 @@ li.score-item i {
                     data-container="body"
                     data-toggle="popover"
                     data-placement="bottom"
-                    :data-content="$parent.verifiedUserContent"
+                    :data-content="$store.state.routeStore.verifiedUserContent"
                   >
                     <i class="fa fa-certificate"></i>
                   </button>
@@ -490,7 +490,7 @@ li.score-item i {
 
       <div v-else class="text-center spinner-wrapper">
         <div class="spinner-border">
-          <span class="sr-only">Loading...</span>
+          <span class="sr-only"></span>
         </div>
       </div>
     </div>

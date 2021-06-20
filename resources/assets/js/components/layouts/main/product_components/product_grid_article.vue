@@ -501,7 +501,6 @@ export default {
       isMyProfile: false,
       productUrl: "",
       jsonLDObject: "",
-      verifiedUserContent: this.$parent.verifiedUserContent,
       loadedProduct: true,
     };
   },

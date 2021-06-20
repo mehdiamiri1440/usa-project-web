@@ -293,7 +293,6 @@ export default {
         },
       ],
       loading: false,
-      verifiedUserContent: this.$parent.verifiedUserContent,
     };
   },
   methods: {

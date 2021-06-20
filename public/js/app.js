@@ -18627,7 +18627,6 @@ __webpack_require__.r(__webpack_exports__);
       reviewCurrentStep: 0,
       currentUser: "",
       walletBalance: "",
-      verifiedUserContent: "<div class='tooltip-wrapper text-rtl'>اطلاعات هویتی این کاربر احراز شده است.<br/><a href='/verification'>اطلاعات بیشتر</a> </div>",
       doPaymentLoader: false
     };
   },
@@ -19114,7 +19113,7 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
   /* PROPS */
   , ["src"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.contactInfo.first_name + " " + _ctx.contactInfo.last_name), 1
   /* TEXT */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <button\n            @click.prevent\n            class=\"verified-user\"\n            data-container=\"body\"\n            data-toggle=\"popover\"\n            data-placement=\"bottom\"\n            :data-content=\"$parent.verifiedUserContent\"\n            title\n          >\n            <i class=\"fa fa-certificate\"></i>\n          </button>")])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <button\n            @click.prevent\n            class=\"verified-user\"\n            data-container=\"body\"\n            data-toggle=\"popover\"\n            data-placement=\"bottom\"\n            :data-content=\"$store.state.routeStore.verifiedUserContent\"\n            title\n          >\n            <i class=\"fa fa-certificate\"></i>\n          </button>")])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
     onClick: _cache[2] || (_cache[2] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
       return _ctx.openChatBox = false;
     }, ["prevent"])),
@@ -20446,11 +20445,27 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
     "storage-path": $props.storagePath,
     "profile-photo": $props.profilePhoto,
     "user-full-name": $props.userFullName,
-    "user-logout-path": $props.userLogoutPath,
-    "verified-user-content": _ctx.verifiedUserContent
+    "user-logout-path": $props.userLogoutPath
   }, null, 8
   /* PROPS */
-  , ["user-id", "is-seller", "assets", "storage-path", "profile-photo", "user-full-name", "user-logout-path", "verified-user-content"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <router-view\n      name=\"buyer\"\n      :user-id=\"userId\"\n      :is-seller=\"isSeller\"\n      :assets=\"assets\"\n      :storage-path=\"storagePath\"\n      :verified-user-content=\"verifiedUserContent\"\n    />\n\n    <router-view\n      name=\"seller\"\n      class=\"h-100\"\n      :user-id=\"userId\"\n      :is-seller=\"isSeller\"\n      :assets=\"assets\"\n      :storage-path=\"storagePath\"\n      :verified-user-content=\"verifiedUserContent\"\n    /> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" add android app download  "), _ctx.downloadAppButton ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_26, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+  , ["user-id", "is-seller", "assets", "storage-path", "profile-photo", "user-full-name", "user-logout-path"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_view, {
+    name: "buyer",
+    "user-id": $props.userId,
+    "is-seller": $props.isSeller,
+    assets: $props.assets,
+    "storage-path": $props.storagePath
+  }, null, 8
+  /* PROPS */
+  , ["user-id", "is-seller", "assets", "storage-path"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_view, {
+    name: "seller",
+    "class": "h-100",
+    "user-id": $props.userId,
+    "is-seller": $props.isSeller,
+    assets: $props.assets,
+    "storage-path": $props.storagePath
+  }, null, 8
+  /* PROPS */
+  , ["user-id", "is-seller", "assets", "storage-path"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" add android app download  "), _ctx.downloadAppButton ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_26, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
     "class": "close-android-download-alert-wrapper",
     onClick: _cache[3] || (_cache[3] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
       return _ctx.downloadAppButton = false;
@@ -20617,58 +20632,60 @@ function checkLink(link, pageMeta) {
 }
 
 var metaManager = function metaManager(pageMeta) {
-  if (pageMeta.titleTemplate) {
-    titleTemplate = pageMeta.titleTemplate;
+  if (pageMeta) {
+    if (pageMeta.titleTemplate) {
+      titleTemplate = pageMeta.titleTemplate;
+    }
+
+    var buskoolMeta = $('*[data-sync="buskool-meta"]');
+    var siteMeta = $("meta");
+    var siteLinks = $("link"); // Reset custom metas
+
+    buskoolMeta.remove();
+    siteMeta.each(function () {
+      if ($(this).attr("name")) {
+        checkMetaName($(this), pageMeta);
+      } else if ($(this).attr("property")) {
+        checkProperty($(this), pageMeta);
+      }
+    });
+    siteLinks.each(function () {
+      if ($(this).attr("rel") == "canonical") {
+        checkLink($(this), pageMeta);
+      }
+    });
+    $.each(pageMeta, function (key, metaItem) {
+      switch (key) {
+        case "title":
+          metaItem ? $("title").text(titleTemplate.replace("%s", metaItem)) : $("title").text(defaultTitle);
+          break;
+
+        case "meta":
+          var myArray = [];
+          metaItem.forEach(function (item) {
+            var keyValues = Object.entries(item);
+            var str = "";
+            myArray.push(keyValues.forEach(function (newItem) {
+              str = str + "".concat(newItem[0], "=\"").concat(newItem[1], "\" ");
+            }));
+            $("head").append("<meta data-sync='buskool-meta' ".concat(str, " />"));
+          });
+          break;
+
+        case "link":
+          var linkArray = [];
+          metaItem.forEach(function (item) {
+            var keyValues = Object.entries(item);
+            var str = "";
+            linkArray.push(keyValues.forEach(function (newItem) {
+              str = str + "".concat(newItem[0], "=\"").concat(newItem[1], "\" ");
+            }));
+            $("head").append("<link data-sync='buskool-meta' ".concat(str, " />"));
+          });
+          break;
+      }
+    });
   }
-
-  var buskoolMeta = $('*[data-sync="buskool-meta"]');
-  var siteMeta = $("meta");
-  var siteLinks = $("link"); // Reset custom metas
-
-  buskoolMeta.remove();
-  siteMeta.each(function () {
-    if ($(this).attr("name")) {
-      checkMetaName($(this), pageMeta);
-    } else if ($(this).attr("property")) {
-      checkProperty($(this), pageMeta);
-    }
-  });
-  siteLinks.each(function () {
-    if ($(this).attr("rel") == "canonical") {
-      checkLink($(this), pageMeta);
-    }
-  });
-  $.each(pageMeta, function (key, metaItem) {
-    switch (key) {
-      case "title":
-        metaItem ? $("title").text(titleTemplate.replace("%s", metaItem)) : $("title").text(defaultTitle);
-        break;
-
-      case "meta":
-        var myArray = [];
-        metaItem.forEach(function (item) {
-          var keyValues = Object.entries(item);
-          var str = "";
-          myArray.push(keyValues.forEach(function (newItem) {
-            str = str + "".concat(newItem[0], "=\"").concat(newItem[1], "\" ");
-          }));
-          $("head").append("<meta data-sync='buskool-meta' ".concat(str, " />"));
-        });
-        break;
-
-      case "link":
-        var linkArray = [];
-        metaItem.forEach(function (item) {
-          var keyValues = Object.entries(item);
-          var str = "";
-          linkArray.push(keyValues.forEach(function (newItem) {
-            str = str + "".concat(newItem[0], "=\"").concat(newItem[1], "\" ");
-          }));
-          $("head").append("<link data-sync='buskool-meta' ".concat(str, " />"));
-        });
-        break;
-    }
-  });
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -20691,173 +20708,186 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_errors_404__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/errors/404 */ "./resources/assets/js/components/errors/404.vue");
 // Errors Components
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ([// {
-//     path: "/seller",
-//     components: {
-//         seller: () => import("./components/sellerDashboard.vue")
-//     },
-//     redirect: "/404",
-//     children: [
-//         {
-//             path: "/password",
-//             name: "passwordSeller",
-//             components: {
-//                 default: () => import("../components/dashboard/seller/profile/change_password.vue")
-//             },
-//         },
-//         {
-//             path: "/status",
-//             name: "statusSeller",
-//             components: {
-//                 default: () => import("../components/dashboard/seller/dashboard/status.vue")
-//             },
-//         },
-//         {
-//             path: "/phone-viewers",
-//             name: "sellerViewer",
-//             components: {
-//                 default: () => import("../components/dashboard/seller/seller-viewer.vue")
-//             },
-//         },
-//         {
-//             path: "/pricing",
-//             name: "dashboardPricingTableSeller",
-//             components: {
-//                 default: () => import("../components/dashboard/dashboard-pricing-table")
-//             },
-//         },
-//         {
-//             path: "/product-pricing",
-//             name: "dashboardProductPricing",
-//             components: {
-//                 default: () => import("../components/dashboard/seller/pricing-seller-page/product-pricing.vue")
-//             },
-//         },
-//         {
-//             path: "/buyad-pricing",
-//             name: "dashboardBuyAdPricing",
-//             components: {
-//                 default: () => import("../components/dashboard/seller/pricing-seller-page/buyad-pricing.vue")
-//             },
-//         },
-//         {
-//             path: "/profile",
-//             name: "profileBasicSeller",
-//             components: {
-//                 default: () => import("../components/dashboard/seller/profile/profile_basic.vue")
-//             },
-//         },
-//         {
-//             path: "/profile/verification",
-//             name: "profileBasicSellerVeficiation",
-//             components: {
-//                 default: () => import("../components/dashboard/seller/profile/profile_verification.vue")
-//             },
-//         },
-//         {
-//             path: "/messenger",
-//             components: {
-//                 default: () => import("../components/dashboard/messenger.vue")
-//             },
-//             children: [
-//                 {
-//                     path: "/contacts",
-//                     name: "messagesSeller",
-//                     components: {
-//                         "messenger-list": () => import("../components/dashboard/messages-components/my-contact-list.vue")
-//                     },
-//                 },
-//                 {
-//                     path: '/buy-ads',
-//                     name: "messagesRequestSeller",
-//                     components: {
-//                         "messenger-list": () => import("../components/dashboard/messages-components/my-buyad-list.vue")
-//                     },
-//                 },
-//                 // {
-//                 //   path: "group-messages",
-//                 //   name: "groupMessagesSeller",
-//                 //   components: {
-//                 //     "group-list": resolve => {
-//                 //       require([
-//                 //         "../components/dashboard/group-messages.vue"
-//                 //       ], resolve);
-//                 //     }
-//                 //   }
-//                 // }
-//             ],
-//         },
-//         {
-//             path: "/buyAd-requests",
-//             name: "buyAdRequestsSeller",
-//             components: {
-//                 default: () => import("../components/dashboard/seller/request/buyAd-requests.vue")
-//             },
-//         },
-//         {
-//             path: "/my-products",
-//             name: "myProductsSeller",
-//             components: {
-//                 default: () => import("../components/dashboard/seller/product/my_products")
-//             },
-//         },
-//         {
-//             path: "/register-product",
-//             name: "registerProductSeller",
-//             components: {
-//                 default: () => import("../components/dashboard/seller/product/product-basic.vue")
-//             },
-//             children: [
-//                 {
-//                     path: "/success",
-//                     name: "successRegisterProduct",
-//                     components: {
-//                         default: () => import(
-//                             "../components/dashboard/seller/product/product-basic.vue"
-//                         )
-//                     },
-//                 },
-//             ]
-//         },
-//         {
-//             path: "/guide",
-//             name: "guideSeller",
-//             components: {
-//                 default: () => import("../components/dashboard/seller/guide.vue")
-//             },
-//         },
-//         {
-//             path: "/show-number-guide",
-//             name: "showNumberGuideSeller",
-//             components: {
-//                 default: () => import("../components/dashboard/seller/show-number-guide.vue")
-//             },
-//         },
-//         // {
-//         //   path: "/wallet",
-//         //   name: "walletSeller",
-//         //   components: {
-//         //     default: (resolve) => {
-//         //       require(["../components/dashboard/seller/wallet.vue"], resolve);
-//         //     },
-//         //   },
-//         // },
-//         {
-//             path: "/support",
-//             name: "supportSeller",
-//             components: {
-//                 default: () => import("../components/dashboard/seller/support.vue")
-//             },
-//         },
-//     ],
-//     beforeEnter: (to, from, next) => {
-//         var userId = window.localStorage.getItem("userId");
-//         var userType = window.localStorage.getItem("userType");
-//         if (userId && userType == 1) next();
-//         else next("/login");
-//     },
-// },
-{
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ([{
+  path: "/seller",
+  components: {
+    seller: function seller() {
+      return __webpack_require__.e(/*! import() */ "resources_assets_js_router_components_sellerDashboard_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/sellerDashboard.vue */ "./resources/assets/js/router/components/sellerDashboard.vue"));
+    }
+  },
+  redirect: "/404",
+  children: [{
+    path: "/password",
+    name: "passwordSeller",
+    components: {
+      "default": function _default() {
+        return __webpack_require__.e(/*! import() */ "resources_assets_js_components_dashboard_seller_profile_change_password_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../components/dashboard/seller/profile/change_password.vue */ "./resources/assets/js/components/dashboard/seller/profile/change_password.vue"));
+      }
+    }
+  }, {
+    path: "/status",
+    name: "statusSeller",
+    components: {
+      "default": function _default() {
+        return __webpack_require__.e(/*! import() */ "resources_assets_js_components_dashboard_seller_dashboard_status_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../components/dashboard/seller/dashboard/status.vue */ "./resources/assets/js/components/dashboard/seller/dashboard/status.vue"));
+      }
+    }
+  }, {
+    path: "/phone-viewers",
+    name: "sellerViewer",
+    components: {
+      "default": function _default() {
+        return __webpack_require__.e(/*! import() */ "resources_assets_js_components_dashboard_seller_seller-viewer_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../components/dashboard/seller/seller-viewer.vue */ "./resources/assets/js/components/dashboard/seller/seller-viewer.vue"));
+      }
+    }
+  }, {
+    path: "/pricing",
+    name: "dashboardPricingTableSeller",
+    components: {
+      "default": function _default() {
+        return __webpack_require__.e(/*! import() */ "resources_assets_js_components_dashboard_dashboard-pricing-table_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../components/dashboard/dashboard-pricing-table */ "./resources/assets/js/components/dashboard/dashboard-pricing-table.vue"));
+      }
+    }
+  }, {
+    path: "/product-pricing",
+    name: "dashboardProductPricing",
+    components: {
+      "default": function _default() {
+        return __webpack_require__.e(/*! import() */ "resources_assets_js_components_dashboard_seller_pricing-seller-page_product-pricing_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../components/dashboard/seller/pricing-seller-page/product-pricing.vue */ "./resources/assets/js/components/dashboard/seller/pricing-seller-page/product-pricing.vue"));
+      }
+    }
+  }, {
+    path: "/buyad-pricing",
+    name: "dashboardBuyAdPricing",
+    components: {
+      "default": function _default() {
+        return __webpack_require__.e(/*! import() */ "resources_assets_js_components_dashboard_seller_pricing-seller-page_buyad-pricing_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../components/dashboard/seller/pricing-seller-page/buyad-pricing.vue */ "./resources/assets/js/components/dashboard/seller/pricing-seller-page/buyad-pricing.vue"));
+      }
+    }
+  }, {
+    path: "/profile",
+    name: "profileBasicSeller",
+    components: {
+      "default": function _default() {
+        return __webpack_require__.e(/*! import() */ "resources_assets_js_components_dashboard_seller_profile_profile_basic_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../components/dashboard/seller/profile/profile_basic.vue */ "./resources/assets/js/components/dashboard/seller/profile/profile_basic.vue"));
+      }
+    }
+  }, {
+    path: "/profile/verification",
+    name: "profileBasicSellerVeficiation",
+    components: {
+      "default": function _default() {
+        return __webpack_require__.e(/*! import() */ "resources_assets_js_components_dashboard_seller_profile_profile_verification_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../components/dashboard/seller/profile/profile_verification.vue */ "./resources/assets/js/components/dashboard/seller/profile/profile_verification.vue"));
+      }
+    }
+  }, {
+    path: "/messenger",
+    components: {
+      "default": function _default() {
+        return __webpack_require__.e(/*! import() */ "resources_assets_js_components_dashboard_messenger_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../components/dashboard/messenger.vue */ "./resources/assets/js/components/dashboard/messenger.vue"));
+      }
+    },
+    children: [{
+      path: "/contacts",
+      name: "messagesSeller",
+      components: {
+        "messenger-list": function messengerList() {
+          return __webpack_require__.e(/*! import() */ "resources_assets_js_components_dashboard_messages-components_my-contact-list_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../components/dashboard/messages-components/my-contact-list.vue */ "./resources/assets/js/components/dashboard/messages-components/my-contact-list.vue"));
+        }
+      }
+    }, {
+      path: '/buy-ads',
+      name: "messagesRequestSeller",
+      components: {
+        "messenger-list": function messengerList() {
+          return __webpack_require__.e(/*! import() */ "resources_assets_js_components_dashboard_messages-components_my-buyad-list_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../components/dashboard/messages-components/my-buyad-list.vue */ "./resources/assets/js/components/dashboard/messages-components/my-buyad-list.vue"));
+        }
+      }
+    } // {
+    //   path: "/group-messages",
+    //   name: "groupMessagesSeller",
+    //   components: {
+    //     "group-list": resolve => {
+    //       require([
+    //         "../components/dashboard/group-messages.vue"
+    //       ], resolve);
+    //     }
+    //   }
+    // }
+    ]
+  }, {
+    path: "/buyAd-requests",
+    name: "buyAdRequestsSeller",
+    components: {
+      "default": function _default() {
+        return __webpack_require__.e(/*! import() */ "resources_assets_js_components_dashboard_seller_request_buyAd-requests_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../components/dashboard/seller/request/buyAd-requests.vue */ "./resources/assets/js/components/dashboard/seller/request/buyAd-requests.vue"));
+      }
+    }
+  }, {
+    path: "/my-products",
+    name: "myProductsSeller",
+    components: {
+      "default": function _default() {
+        return __webpack_require__.e(/*! import() */ "resources_assets_js_components_dashboard_seller_product_my_products_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../components/dashboard/seller/product/my_products */ "./resources/assets/js/components/dashboard/seller/product/my_products.vue"));
+      }
+    }
+  }, {
+    path: "/register-product",
+    name: "registerProductSeller",
+    components: {
+      "default": function _default() {
+        return __webpack_require__.e(/*! import() */ "resources_assets_js_components_dashboard_seller_product_product-basic_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../components/dashboard/seller/product/product-basic.vue */ "./resources/assets/js/components/dashboard/seller/product/product-basic.vue"));
+      }
+    },
+    children: [{
+      path: "/success",
+      name: "successRegisterProduct",
+      components: {
+        "default": function _default() {
+          return __webpack_require__.e(/*! import() */ "resources_assets_js_components_dashboard_seller_product_product-basic_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../components/dashboard/seller/product/product-basic.vue */ "./resources/assets/js/components/dashboard/seller/product/product-basic.vue"));
+        }
+      }
+    }]
+  }, {
+    path: "/guide",
+    name: "guideSeller",
+    components: {
+      "default": function _default() {
+        return __webpack_require__.e(/*! import() */ "resources_assets_js_components_dashboard_seller_guide_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../components/dashboard/seller/guide.vue */ "./resources/assets/js/components/dashboard/seller/guide.vue"));
+      }
+    }
+  }, {
+    path: "/show-number-guide",
+    name: "showNumberGuideSeller",
+    components: {
+      "default": function _default() {
+        return __webpack_require__.e(/*! import() */ "resources_assets_js_components_dashboard_seller_show-number-guide_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../components/dashboard/seller/show-number-guide.vue */ "./resources/assets/js/components/dashboard/seller/show-number-guide.vue"));
+      }
+    }
+  }, // {
+  //   path: "/wallet",
+  //   name: "walletSeller",
+  //   components: {
+  //     default: (resolve) => {
+  //       require(["../components/dashboard/seller/wallet.vue"], resolve);
+  //     },
+  //   },
+  // },
+  {
+    path: "/support",
+    name: "supportSeller",
+    components: {
+      "default": function _default() {
+        return __webpack_require__.e(/*! import() */ "resources_assets_js_components_dashboard_seller_support_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../components/dashboard/seller/support.vue */ "./resources/assets/js/components/dashboard/seller/support.vue"));
+      }
+    }
+  }],
+  beforeEnter: function beforeEnter(to, from, next) {
+    var userId = window.localStorage.getItem("userId");
+    var userType = window.localStorage.getItem("userType");
+    if (userId && userType == 1) next();else next("/login");
+  }
+}, {
   path: "/buyer",
   components: {
     buyer: function buyer() {
@@ -20881,14 +20911,15 @@ __webpack_require__.r(__webpack_exports__);
         return __webpack_require__.e(/*! import() */ "resources_assets_js_components_dashboard_buyer_profile_profile_basic_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../components/dashboard/buyer/profile/profile_basic.vue */ "./resources/assets/js/components/dashboard/buyer/profile/profile_basic.vue"));
       }
     }
-  }, // {
-  //     path: "/profile/verification",
-  //     name: "profileBasicBuyerVeficiation",
-  //     components: {
-  //         default: () => import("../components/dashboard/buyer/profile/profile_verification.vue")
-  //     },
-  // },
-  {
+  }, {
+    path: "/profile/verification",
+    name: "profileBasicBuyerVeficiation",
+    components: {
+      "default": function _default() {
+        return __webpack_require__.e(/*! import() */ "resources_assets_js_components_dashboard_buyer_profile_profile_verification_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../components/dashboard/buyer/profile/profile_verification.vue */ "./resources/assets/js/components/dashboard/buyer/profile/profile_verification.vue"));
+      }
+    }
+  }, {
     path: "/messenger",
     components: {
       "default": function _default() {
@@ -20923,41 +20954,44 @@ __webpack_require__.r(__webpack_exports__);
         return __webpack_require__.e(/*! import() */ "resources_assets_js_components_dashboard_buyer_request_register-request_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../components/dashboard/buyer/request/register-request */ "./resources/assets/js/components/dashboard/buyer/request/register-request.vue"));
       }
     }
-  } //         {
-  //             path: "/special-products",
-  //             name: "specialProducts",
-  //             components: {
-  //                 default: () => import("../components/dashboard/buyer/products/special-products")
-  //             },
-  //         },
-  //         {
-  //             path: "/my-buyAd-requests",
-  //             name: "myBuyAdRequestsBuyer",
-  //             components: {
-  //                 default: () => import("../components/dashboard/buyer/my-requests/buyAd-requests.vue")
-  //             },
-  //         },
-  //         {
-  //             path: "/guide",
-  //             name: "guideBuyer",
-  //             components: {
-  //                 default: () => import("../components/dashboard/buyer/guide.vue")
-  //             },
-  //         },
-  //         {
-  //             path: "/support",
-  //             name: "supportBuyer",
-  //             components: {
-  //                 default: () => import("../components/dashboard/buyer/support.vue")
-  //             },
-  //         },
-  ] //     beforeEnter: (to, from, next) => {
-  //         var userId = window.localStorage.getItem("userId");
-  //         var userType = window.localStorage.getItem("userType");
-  //         if (userId && userType == 0) next();
-  //         else next("/login");
-  //     },
-
+  }, {
+    path: "/special-products",
+    name: "specialProducts",
+    components: {
+      "default": function _default() {
+        return __webpack_require__.e(/*! import() */ "resources_assets_js_components_dashboard_buyer_products_special-products_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../components/dashboard/buyer/products/special-products */ "./resources/assets/js/components/dashboard/buyer/products/special-products.vue"));
+      }
+    }
+  }, {
+    path: "/my-buyAd-requests",
+    name: "myBuyAdRequestsBuyer",
+    components: {
+      "default": function _default() {
+        return __webpack_require__.e(/*! import() */ "resources_assets_js_components_dashboard_buyer_my-requests_buyAd-requests_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../components/dashboard/buyer/my-requests/buyAd-requests.vue */ "./resources/assets/js/components/dashboard/buyer/my-requests/buyAd-requests.vue"));
+      }
+    }
+  }, {
+    path: "/guide",
+    name: "guideBuyer",
+    components: {
+      "default": function _default() {
+        return __webpack_require__.e(/*! import() */ "resources_assets_js_components_dashboard_buyer_guide_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../components/dashboard/buyer/guide.vue */ "./resources/assets/js/components/dashboard/buyer/guide.vue"));
+      }
+    }
+  }, {
+    path: "/support",
+    name: "supportBuyer",
+    components: {
+      "default": function _default() {
+        return __webpack_require__.e(/*! import() */ "resources_assets_js_components_dashboard_buyer_support_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../components/dashboard/buyer/support.vue */ "./resources/assets/js/components/dashboard/buyer/support.vue"));
+      }
+    }
+  }],
+  beforeEnter: function beforeEnter(to, from, next) {
+    var userId = window.localStorage.getItem("userId");
+    var userType = window.localStorage.getItem("userType");
+    if (userId && userType == 0) next();else next("/login");
+  }
 }, {
   path: "/",
   components: {
@@ -20974,7 +21008,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
   }, {
-    path: "about-us",
+    path: "/about-us",
     name: "aboutUs",
     components: {
       "default": function _default() {
@@ -21825,7 +21859,8 @@ var state = {
   messageCount: 0,
   userAllowedReview: false,
   contanctMessageReceived: "",
-  chatInfo: ""
+  chatInfo: "",
+  contactNameSearchText: ""
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   namespaced: true,
@@ -21861,7 +21896,9 @@ var state = {
   meta: '',
   defaultMetaInfo: {
     title: "بازارگاه کشاورزی"
-  }
+  },
+  productUserInfo: '',
+  verifiedUserContent: "<div class='tooltip-wrapper text-rtl'>اطلاعات هویتی این کاربر احراز شده است.<br/><a href='/verification'>اطلاعات بیشتر</a> </div>"
 }; // Mutations
 
 var mutations = {
@@ -62941,7 +62978,7 @@ var index = {
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames based on template
-/******/ 			return "chunks/" + chunkId + "." + {"resources_assets_js_router_components_buyerDashboard_vue":"88be71d3d0d3ead19c1b","resources_assets_js_components_dashboard_seller_profile_change_password_vue":"3264fa44e216749f159e","resources_assets_js_components_dashboard_buyer_profile_profile_basic_vue":"76f7c53f8d820e2af600","resources_assets_js_components_dashboard_messenger_vue":"45fe326cb8fc1ce6b666","resources_assets_js_components_dashboard_messages-components_my-contact-list_vue":"ae00e174270fbfd58572","resources_assets_js_components_dashboard_buyer_request_register-request_vue":"d6b5af38f982d23db810","resources_assets_js_router_components_masterRoute_vue":"8d309ccc922f1d1f23ff","resources_assets_js_components_layouts_main_index_vue":"20c79ec1bc20095d68dc","resources_assets_js_components_layouts_main_about_us_vue":"b267b518fe5185cd11e8","resources_assets_js_components_layouts_main_help_vue":"eace315875da64411ba0","resources_assets_js_components_layouts_main_contact_us_vue":"e8e25f98dc252df28f6f","resources_assets_js_components_layouts_main_verification-info_vue":"2c9ebdb3e44fd48f7765","resources_assets_js_components_layouts_main_privacy_and_policy_vue":"ee43bc51560343977661","resources_assets_js_components_layouts_main_product_list_vue":"424cd73778c64d8d5552","resources_assets_js_components_layouts_main_product_components_product-view-route_vue":"92a7c51c36e58bf9a6af","resources_assets_js_components_layouts_main_product_components_product-view_product-view_vue":"0beea96f3f33567b6ddd","resources_assets_js_components_layouts_main_product_category_vue":"c922f4b68b8a1f1d877d","resources_assets_js_components_layouts_main_profile_vue":"6ed6c0acc23ca5e7d89f","resources_assets_js_components_login_Login_vue":"d3872081a3b2999c1756","resources_assets_js_components_register_register_vue":"887d91eb3c8f225b9e57","resources_assets_js_components_layouts_main_main_components_main-register-request_vue":"362674c0744f7ca09c48","resources_assets_js_components_layouts_main_main_components_register-inquiry_vue":"a60014ab57216e963558"}[chunkId] + ".js";
+/******/ 			return "chunks/" + chunkId + "." + {"resources_assets_js_router_components_sellerDashboard_vue":"71c90c62673e2b009cfb","resources_assets_js_components_dashboard_seller_profile_change_password_vue":"3264fa44e216749f159e","resources_assets_js_components_dashboard_seller_dashboard_status_vue":"a8f94751334878627627","resources_assets_js_components_dashboard_seller_seller-viewer_vue":"8774063265b4f345d466","resources_assets_js_components_dashboard_dashboard-pricing-table_vue":"ae1493745a8fa6b609eb","resources_assets_js_components_dashboard_seller_pricing-seller-page_product-pricing_vue":"da6ff507beb71eb50147","resources_assets_js_components_dashboard_seller_pricing-seller-page_buyad-pricing_vue":"ddb3a25c368d5c81a626","resources_assets_js_components_dashboard_seller_profile_profile_basic_vue":"d309c60fb0b9697ffe6e","resources_assets_js_components_dashboard_seller_profile_profile_verification_vue":"9616ae399f0e7ee3881a","resources_assets_js_components_dashboard_messenger_vue":"a2b1ce5fe2b5eb447dcf","resources_assets_js_components_dashboard_messages-components_my-contact-list_vue":"cdfc94016ed723f26d6c","resources_assets_js_components_dashboard_messages-components_my-buyad-list_vue":"08bdda30c5c2259fee6a","resources_assets_js_components_dashboard_seller_request_buyAd-requests_vue":"ce7917733d4827eebb66","resources_assets_js_components_dashboard_seller_product_my_products_vue":"2ad701a3061f68a12b2c","resources_assets_js_components_dashboard_seller_product_product-basic_vue":"35e5a3794f7fd4bf0c09","resources_assets_js_components_dashboard_seller_guide_vue":"94ae8d2352ece405821c","resources_assets_js_components_dashboard_seller_show-number-guide_vue":"ff563b34e66cc5c89abd","resources_assets_js_components_dashboard_seller_support_vue":"6a0c164ac57a89607a88","resources_assets_js_router_components_buyerDashboard_vue":"88b05274046677e0c1a2","resources_assets_js_components_dashboard_buyer_profile_profile_basic_vue":"01347602e1d5cfcef300","resources_assets_js_components_dashboard_buyer_profile_profile_verification_vue":"adf24766ec8f8cd4c564","resources_assets_js_components_dashboard_buyer_request_register-request_vue":"026f0fdcbf89b01e5ec1","resources_assets_js_components_dashboard_buyer_products_special-products_vue":"e4db09210ddae754a508","resources_assets_js_components_dashboard_buyer_my-requests_buyAd-requests_vue":"6b4640ee76fb35882346","resources_assets_js_components_dashboard_buyer_guide_vue":"e734ee1e6a802133da73","resources_assets_js_components_dashboard_buyer_support_vue":"4a2c63bc5aaf03b7dc64","resources_assets_js_router_components_masterRoute_vue":"309a9092551441a179b6","resources_assets_js_components_layouts_main_index_vue":"9227d4a1c2c1e3bcebea","resources_assets_js_components_layouts_main_about_us_vue":"b267b518fe5185cd11e8","resources_assets_js_components_layouts_main_help_vue":"eace315875da64411ba0","resources_assets_js_components_layouts_main_contact_us_vue":"e8e25f98dc252df28f6f","resources_assets_js_components_layouts_main_verification-info_vue":"2c9ebdb3e44fd48f7765","resources_assets_js_components_layouts_main_privacy_and_policy_vue":"ee43bc51560343977661","resources_assets_js_components_layouts_main_product_list_vue":"2da9b9bb5aa886ae92f3","resources_assets_js_components_layouts_main_product_components_product-view-route_vue":"311e25e82615a27f1448","resources_assets_js_components_layouts_main_product_components_product-view_product-view_vue":"58d831228ec649644c7b","resources_assets_js_components_layouts_main_product_category_vue":"2b86de2925a2a6f2d06f","resources_assets_js_components_layouts_main_profile_vue":"51bc3e89d53741d843f1","resources_assets_js_components_login_Login_vue":"d3872081a3b2999c1756","resources_assets_js_components_register_register_vue":"0c5eba819adc2cdb0113","resources_assets_js_components_layouts_main_main_components_main-register-request_vue":"362674c0744f7ca09c48","resources_assets_js_components_layouts_main_main_components_register-inquiry_vue":"3c7358f08dc0ce274a39"}[chunkId] + ".js";
 /******/ 		};
 /******/ 	})();
 /******/ 	

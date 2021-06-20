@@ -85,43 +85,44 @@
 </style>
 <template>
   <router-link
-    :to="'/profile/' + userprof"
-    tag="section"
-    class="profile"
     v-if="!isLoading"
+    :to="'/profile/' + userprof"
+    custom
+    v-slot="{ href, navigate }"
   >
-    <div
-      class="profile-img"
-      v-if="photoLink"
-      :style="{
-        backgroundImage: 'url(' + storage + '/' + photoLink + ')',
-      }"
-    ></div>
+    <section class="profile" :href="href" @click="navigate">
+      <div
+        class="profile-img"
+        v-if="photoLink"
+        :style="{
+          backgroundImage: 'url(' + storage + '/' + photoLink + ')',
+        }"
+      ></div>
 
-    <div
-      class="profile-img"
-      v-else
-      :style="{
-        backgroundImage:
-          'url(' + $parent.assets + 'assets/img/user-defult.png' + ')',
-      }"
-    ></div>
+      <div
+        class="profile-img"
+        v-else
+        :style="{
+          backgroundImage:
+            'url(' + $parent.assets + 'assets/img/user-defult.png' + ')',
+        }"
+      ></div>
 
-    <div class="profile-content">
-      <div class="profile-name" v-text="username"></div>
+      <div class="profile-content">
+        <div class="profile-name" v-text="username"></div>
 
-      <div class="profile-city" v-text="usercity"></div>
-    </div>
-    <div class="profile-icon-wrapper">
-      <i class="fa fa-angle-left"></i>
-    </div>
+        <div class="profile-city" v-text="usercity"></div>
+      </div>
+      <div class="profile-icon-wrapper">
+        <i class="fa fa-angle-left"></i>
+      </div>
 
-    <!-- 
+      <!-- 
         <router-link :to="'/profile/' + userprof" class="green-button"
           >نمایش پروفایل من</router-link
         > -->
+    </section>
   </router-link>
-
   <!-- loading section  -->
   <section v-else id="loadingSection">
     <div class="profile">

@@ -9,11 +9,6 @@
 
 <script>
 export default {
-  data: function () {
-    return {
-      verifiedUserContent: this.$parent.verifiedUserContent,
-    };
-  },
   props: ["str", "assets", "userType"],
 };
 </script>

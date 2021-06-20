@@ -12,7 +12,11 @@ const state = {
     meta: '',
     defaultMetaInfo: {
         title: "بازارگاه کشاورزی",
-    }
+    },
+    productUserInfo: '',
+    verifiedUserContent:
+        "<div class='tooltip-wrapper text-rtl'>اطلاعات هویتی این کاربر احراز شده است.<br/><a href='/verification'>اطلاعات بیشتر</a> </div>",
+
 }
 
 // Mutations

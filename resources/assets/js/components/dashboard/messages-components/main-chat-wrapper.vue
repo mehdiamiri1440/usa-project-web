@@ -816,7 +816,7 @@
             data-container="body"
             data-toggle="popover"
             data-placement="bottom"
-            :data-content="$parent.verifiedUserContent"
+            :data-content="$store.state.routeStore.verifiedUserContent"
             title
           >
             <i class="fa fa-certificate"></i>

@@ -4,7 +4,8 @@ const state = {
     messageCount: 0,
     userAllowedReview: false,
     contanctMessageReceived: "",
-    chatInfo: ""
+    chatInfo: "",
+    contactNameSearchText: ""
 }
 
 export default {

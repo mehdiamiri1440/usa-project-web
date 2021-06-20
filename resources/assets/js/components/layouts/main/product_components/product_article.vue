@@ -502,7 +502,6 @@ label {
   </article>
 </template>
 <script>
-
 import ProductUserInfo from "./product-article-components/product_user_info";
 import ArticleMainContents from "./product-article-components/article_main_contents";
 
@@ -521,7 +520,6 @@ export default {
       // isMyProfile: false,
       productUrl: "",
       jsonLDObject: "",
-      verifiedUserContent: this.$parent.verifiedUserContent,
     };
   },
   methods: {
@@ -628,7 +626,7 @@ export default {
         .then(function (response) {
           $(".modal").modal("hide");
 
-          this.$store.commit("routeStore/setModal", {
+          self.$store.commit("routeStore/setModal", {
             name: "editProductModal",
           });
 

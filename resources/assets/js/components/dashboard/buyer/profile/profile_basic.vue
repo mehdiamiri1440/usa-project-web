@@ -889,7 +889,7 @@ textarea.error:focus + i {
                 >
               </div>
 
-              <UploadFile
+              <!-- <UploadFile
                 class="margin-15-auto"
                 uploadName="relatedFiles"
                 uploadAccept="image/*"
@@ -902,7 +902,7 @@ textarea.error:focus + i {
                 :uploadOCompress="1024 * 1024"
                 :uploadUploadAuto="false"
                 :imageWrapperSize="'col-xs-12 col-sm-6'"
-              />
+              /> -->
             </div>
           </div>
 
@@ -956,7 +956,7 @@ textarea.error:focus + i {
                 >
               </div>
 
-              <UploadFile
+              <!-- <UploadFile
                 class="margin-15-auto"
                 uploadName="certificateFiles"
                 :isImageReset="certificateFilesReset"
@@ -969,7 +969,7 @@ textarea.error:focus + i {
                 :uploadOCompress="1024 * 1024"
                 :uploadUploadAuto="false"
                 :imageWrapperSize="'col-xs-12 col-sm-6'"
-              />
+              /> -->
             </div>
           </div>
 

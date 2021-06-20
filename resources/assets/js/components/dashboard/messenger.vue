@@ -318,7 +318,23 @@
       ]"
     >
       <div class="row">
-        <router-view name="messenger-list" />
+        <router-view
+          name="messenger-list"
+          :contactList="contactList"
+          :channelInfo="channelInfo"
+          :isChanleActive="isChanleActive"
+          :selectedContact="selectedContact"
+          :contactNameSearchText="contactNameSearchText"
+          :userType="userType"
+          :isContactListLoaded="isContactListLoaded"
+          :isImageLoad="isImageLoad"
+          :isSearchingContact="isSearchingContact"
+          :str="str"
+          :showLoadMoreBtn="showLoadMoreBtn"
+          @loadChatHistory="loadChatHistory"
+          @openChannel="openChannel"
+          @loadMoreContacts="loadMoreContacts"
+        />
       </div>
     </div>
 
@@ -370,15 +386,16 @@
 <script>
 import Push from "push.js";
 
-import myContactList from "./messages-components/my-contact-list";
+import MyContactList from "./messages-components/my-contact-list";
 import chatUserInfo from "./messages-components/chat-user-info";
 import MainChatWrapper from "./messages-components/main-chat-wrapper";
 import MainChannelWrapper from "./messages-components/main-channel-wrapper";
+import { mapState } from "vuex";
 
 export default {
   props: ["isRequiredFixAlert", "userType", "currentUser", "str"],
   components: {
-    myContactList,
+    MyContactList,
     chatUserInfo,
     MainChatWrapper,
     MainChannelWrapper,
@@ -413,24 +430,26 @@ export default {
       currentContactUserId: "",
       msgToSend: "",
       isComponentActive: true,
-      contactNameSearchText: "",
       isContactListLoaded: false,
       isCurrentStep: 0,
-      assets: this.$parent.assets,
       fromContact: 0,
       toContact: 15,
       contactsCountInEachLoad: 20,
       showLoadMoreBtn: false,
-      verifiedUserContent: this.$parent.verifiedUserContent,
       isCurrentUserVerified: false,
       isChatUpdate: true,
       userDataLoader: true,
       isChanleActive: false,
       isReviewSubmited: false,
       reviewSubmitLoader: false,
+      contactNameSearchText: "",
     };
   },
-
+  computed: mapState({
+    globalContactNameSearchText: (state) => {
+      return state.messagesStore.contactNameSearchText;
+    },
+  }),
   methods: {
     init: function () {
       this.loadContactList();
@@ -867,10 +886,6 @@ export default {
           window.localStorage.setItem("storedToken", token);
         });
     },
-    goToGroupList: function () {
-      this.$router.push("group-messages");
-      this.$parent.groupStep = 1;
-    },
     activeReportModal: function (reportedUserId) {
       this.$store.commit("routeStore/reoprtModal", {
         reportedUserId: reportedUserId,
@@ -973,6 +988,9 @@ export default {
     }
   },
   watch: {
+    globalContactNameSearchText(text) {
+      this.contactNameSearchText = text;
+    },
     contactNameSearchText: function (value) {
       var self = this;
       if (self.contactNameSearchText !== "") {

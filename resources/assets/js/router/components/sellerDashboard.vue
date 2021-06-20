@@ -374,7 +374,6 @@ export default {
     "assets",
     "storagePath",
     "messageCount",
-    "verifiedUserContent",
   ],
   data: function () {
     return {

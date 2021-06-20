@@ -38,36 +38,43 @@
 
 <script>
 import registerInquiryForm from "./register-inquiry-form.vue";
-// import { eventBus } from "../../../../router/router";
+import { mapState } from "vuex";
 
 export default {
   components: {
-    registerInquiryForm
+    registerInquiryForm,
   },
   props: ["str"],
-  data: function() {
+  data: function () {
     return {
-      productUserInfo: ""
+      productUserInfo: "",
     };
   },
+  computed: mapState({
+    userInfo: (state) => {
+      return state.routeStore.productUserInfo;
+    },
+  }),
   methods: {
-    setUpProductOwnerInfo: function() {
+    setUpProductOwnerInfo: function () {
       let contact = JSON.parse(window.localStorage.getItem("contact"));
       if (contact) {
         this.productUserInfo = contact;
-        // console.log(this.productUserInfo.first_name);
       }
-    }
+    },
   },
-  mounted: function() {
+  mounted: function () {
     this.setUpProductOwnerInfo();
   },
-  created: function() {
+  created: function () {
     this.setUpProductOwnerInfo();
-    // eventBus.$on("productUserInfo", ($event) => {
-    //   this.productUserInfo = $event;
-    //   console.log(productUserInfo);
-    // });
-  }
+  },
+  watch: {
+    userInfo(value) {
+      if (value) {
+        this.productUserInfo = value;
+      }
+    },
+  },
 };
 </script>

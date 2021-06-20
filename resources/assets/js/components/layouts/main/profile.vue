@@ -1856,7 +1856,6 @@ p.response-rate span {
 import ProductArticle from "./product_components/product_article";
 import ArticleReview from "./main_components/review-components/article-review";
 import PlaceholderArticleReview from "./main_components/review-components/placeholder-article-review";
-
 import owlCarousel from "../../../owl.carousel.min.js";
 import magnificPopup from "../../../jquery.magnific-popup.min";
 
@@ -2043,7 +2042,6 @@ export default {
       doDeletereview: false,
       reviewsLoader: false,
       userLogin: true,
-      verifiedUserContent: this.$parent.verifiedUserContent,
       userDataLoader: true,
       userData: {
         user_info: "",
@@ -2120,11 +2118,6 @@ export default {
             self.profileOwnerStatistics.rating_info = {};
           }
           self.statisticsLoader = false;
-          self.$nextTick(() => {
-            self.$store.commit("routeStore/setMeta", {
-              meta: self.metaInfo(),
-            });
-          });
         })
         .catch(function (err) {
           //
@@ -2152,6 +2145,11 @@ export default {
           } else {
             self.userLogin = false;
           }
+          self.$nextTick(() => {
+            self.$store.commit("routeStore/setMeta", {
+              meta: self.metaInfo(),
+            });
+          });
         })
         .catch(function (err) {
           if (err.response.status === 404) {
@@ -2430,19 +2428,16 @@ export default {
         this.profileOwner.user_info.first_name +
         " " +
         this.profileOwner.user_info.last_name;
-
       let url =
         window.location.host +
         "/profile/" +
         this.profileOwner.user_info.user_name;
       let profilePhoto = "";
-
       if (this.profileOwner.profile.profile_photo) {
         profilePhoto = this.str + "/" + this.profileOwner.profile.profile_photo;
       } else {
         profilePhoto = this.assets + "assets/img/user-defult.png";
       }
-
       let indexingStatus = "";
       if (
         !!this.profileOwner.profile.description &&
@@ -2452,7 +2447,6 @@ export default {
       } else {
         indexingStatus = "noindex";
       }
-
       return {
         title: fullName,
         titleTemplate: "%s | باسکول",

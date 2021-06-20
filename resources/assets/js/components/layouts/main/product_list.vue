@@ -1494,8 +1494,9 @@ import ProductArticle from "./product_components/product_article";
 import ProductGridArticle from "./product_components/Product_grid_article";
 import ProductAsideCategories from "./product_components/sidebar/product_aside_categories";
 import searchNotFound from "./main_components/search-not-found";
-
 import StickySidebar from "../../../stickySidebar.js";
+
+import { mapState } from "vuex";
 
 var visible = false;
 export default {
@@ -1539,16 +1540,17 @@ export default {
       loadMoreActive: false,
       searchTextTimeout: null,
       sortOption: "BM",
-      verifiedUserContent: this.$parent.verifiedUserContent,
       listIsGrid: true,
       isMyProfile: false,
     };
   },
+  computed: mapState({
+    globalSearchText: (state) => {
+      return state.routeStore.searchText;
+    },
+  }),
   created() {
     gtag("config", "UA-129398000-1", { page_path: "/product-list" });
-    // eventBus.$on("textSearch", (event) => {
-    //   this.searchText = event;
-    // });
 
     // document.addEventListener('click', this.documentClick);
   },
@@ -2047,6 +2049,9 @@ export default {
     this.stopLoader();
   },
   watch: {
+    globalSearchText(text) {
+      this.searchText = text;
+    },
     searchText: function (value) {
       var self = this;
 

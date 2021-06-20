@@ -54,7 +54,7 @@
 
      
       .main-loader-wrapper {
-        display: none;
+
         
         position: fixed;
 
@@ -147,7 +147,7 @@
     </div>
     <div class="main-loader-shape-wrapper">
       <div class="spinner-border" >
-        <span class="sr-only">Loading...</span>
+        <span class="sr-only"></span>
       </div>
     </div>
   </div>
@@ -194,15 +194,15 @@
  <script src="{{asset('assets/js/idleTimer.js')}}"></script>  --}}
 
 <script>
-    // $(document).ready(function () {
-    //     // $(document).idleTimer(7200000);
+    $(document).ready(function () {
+        // $(document).idleTimer(7200000);
         
-    //     $('.main-loader-wrapper').css('display','none');
-    // });
+        $('.main-loader-wrapper').css('display','none');
+    });
     
-    // $(document).on("idle.idleTimer", function () {
-    //     window.location.href = '/login'
-    // });
+    $(document).on("idle.idleTimer", function () {
+        window.location.href = '/login'
+    });
 
     function getUserId(){
         let userId = <?php if(session('user_id')){echo session('user_id');} else echo -1; ?>;

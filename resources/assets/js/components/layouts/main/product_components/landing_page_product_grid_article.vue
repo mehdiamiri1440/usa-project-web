@@ -375,7 +375,6 @@ export default {
       },
       productUrl: "",
       jsonLDObject: "",
-      verifiedUserContent: this.$parent.verifiedUserContent,
     };
   },
   methods: {

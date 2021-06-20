@@ -2305,7 +2305,7 @@ export default {
     MainRegisterRequestForm,
     ProductGridArticle,
   },
-  props: ["isUserLogin", "userType", "assets", "str", "verifiedUserContent"],
+  props: ["isUserLogin", "userType", "assets", "str"],
   data: function () {
     return {
       mainSearchBoxText: "",
@@ -2882,7 +2882,7 @@ export default {
   watch: {
     mainSearchBoxText: function (value) {
       this.enterKeyActiveForSearch = this.mainSearchBoxText !== "";
-      // eventBus.$emit("textSearch", value);
+      this.$store.state.routeStore.textSearch = value;
     },
   },
 };

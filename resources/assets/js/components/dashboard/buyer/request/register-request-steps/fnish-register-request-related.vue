@@ -93,7 +93,7 @@ p {
 import FinishStepArticle from "./finish-step-components/finish-step-article";
 
 export default {
-  props: ["products", "str", "verifiedUserContent"],
+  props: ["products", "str"],
   components: {
     FinishStepArticle,
   },

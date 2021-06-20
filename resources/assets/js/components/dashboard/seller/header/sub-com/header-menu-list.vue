@@ -180,7 +180,7 @@ a.active {
               :to="{ name: 'registerProductSeller' }"
               :class="{
                 'router-link-exact-active ':
-                  this.activeElement === 0 ||
+                  activeElement === 0 ||
                   $route.name == 'successRegisterProduct',
               }"
             >
@@ -193,7 +193,7 @@ a.active {
             <router-link
               :to="{ name: 'messagesSeller' }"
               :class="{
-                'router-link-exact-active ': this.activeElement === 0,
+                'router-link-exact-active ': activeElement === 0,
               }"
             >
               <!-- ||

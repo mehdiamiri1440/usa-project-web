@@ -275,7 +275,7 @@
           <!-- v-if="isCompressor" -->
           <i class="fa fa-check" :class="{ empty: isCompressor }"></i>
           <div class="spinner-border" :class="{ empty: !isCompressor }">
-            <span class="sr-only">Loading...</span>
+            <span class="sr-only"></span>
           </div>
         </div>
       </button>

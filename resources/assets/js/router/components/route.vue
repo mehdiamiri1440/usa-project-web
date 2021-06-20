@@ -285,16 +285,14 @@
       :profile-photo="profilePhoto"
       :user-full-name="userFullName"
       :user-logout-path="userLogoutPath"
-      :verified-user-content="verifiedUserContent"
     />
 
-    <!-- <router-view
+    <router-view
       name="buyer"
       :user-id="userId"
       :is-seller="isSeller"
       :assets="assets"
       :storage-path="storagePath"
-      :verified-user-content="verifiedUserContent"
     />
 
     <router-view
@@ -304,8 +302,7 @@
       :is-seller="isSeller"
       :assets="assets"
       :storage-path="storagePath"
-      :verified-user-content="verifiedUserContent"
-    /> -->
+    />
 
     <!-- add android app download  -->
 
@@ -355,8 +352,6 @@ export default {
       reviewCurrentStep: 0,
       currentUser: "",
       walletBalance: "",
-      verifiedUserContent:
-        "<div class='tooltip-wrapper text-rtl'>اطلاعات هویتی این کاربر احراز شده است.<br/><a href='/verification'>اطلاعات بیشتر</a> </div>",
       doPaymentLoader: false,
     };
   },

@@ -39,7 +39,6 @@
         :assets="assets"
         :user-type="currentUser.user_info.is_seller"
         :currentUser="currentUser"
-        :verifiedUserContent="verifiedUserContent"
       ></router-view>
     </div>
   </div>
@@ -53,7 +52,7 @@ export default {
   components: {
     "header-dash-buyer": HeaderDashBuyer,
   },
-  props: ["userId", "isSeller", "assets", "storagePath", "verifiedUserContent"],
+  props: ["userId", "isSeller", "assets", "storagePath"],
   data: function () {
     return {
       searchText: "",
@@ -76,7 +75,7 @@ export default {
   mounted: function () {
     axios
       .post("/get_total_unread_messages_for_current_user")
-      .then(function (response) {
+      .then((response) => {
         let messageCount = response.data.msg_count;
         this.$store.state.messagesStore.messageCount = messageCount;
       })

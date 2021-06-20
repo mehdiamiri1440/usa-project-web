@@ -1621,7 +1621,6 @@ export default {
       headerSearchText: "",
       jsonLDObject: "",
       sortOption: "BM",
-      verifiedUserContent: this.$parent.verifiedUserContent,
       listIsGrid: true,
     };
   },
@@ -1972,9 +1971,10 @@ export default {
       });
     },
     getCategoryName: function () {
-      let name = this.$route.params.categoryName;
-
-      return name.split("-").join(" ");
+      let routeName = this.$route.params.categoryName;
+      if (routeName) {
+        return routeName.split("-").join(" ");
+      }
     },
     infiniteScrollHandler: function () {
       let lastOffset = 0;
@@ -2137,7 +2137,6 @@ export default {
       };
     },
     updateMeta() {
-      console.log("metaUpdate");
       this.$store.commit("routeStore/setMeta", {
         meta: this.metaInfo(),
       });
@@ -2156,13 +2155,10 @@ export default {
   },
   watch: {
     $route(to, from) {
-      console.log(to, from);
       if (to.name == from.name) {
         this.updateMeta();
+        this.init();
       }
-    },
-    "$route.params.categoryName": function (name) {
-      this.init();
     },
 
     headerSearchText: function (value) {

@@ -208,7 +208,7 @@ p.response-rate {
               data-container="body"
               data-toggle="popover"
               data-placement="bottom"
-              :data-content="$parent.verifiedUserContent"
+              :data-content="$store.state.routeStore.verifiedUserContent"
               title
             >
               <i v-if="user_info.is_verified" class="fa fa-certificate"></i>
@@ -235,7 +235,7 @@ p.response-rate {
               data-container="body"
               data-toggle="popover"
               data-placement="bottom"
-              :data-content="$parent.verifiedUserContent"
+              :data-content="$store.state.routeStore.verifiedUserContent"
               title
             >
               <i class="fa fa-certificate"></i>
