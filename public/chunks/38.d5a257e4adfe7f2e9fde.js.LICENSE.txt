@@ -1,0 +1,18 @@
+/*!
+ * Image Compressor v0.5.3
+ * https://github.com/xkeshi/image-compressor
+ *
+ * Copyright (c) 2017 Xkeshi
+ * Released under the MIT license
+ *
+ * Date: 2017-12-29T06:11:20.022Z
+ */
+
+/*!
+ Name: vue-upload-component 
+Component URI: https://github.com/lian-yue/vue-upload-component#readme 
+Version: 3.0.49 
+Author: LianYue 
+License: Apache-2.0 
+Description: Vue.js file upload component, Multi-file upload, Upload directory, Drag upload, Drag the directory, Upload multiple files at the same time, html4 (IE 9), `PUT` method, Customize the filter 
+ */
