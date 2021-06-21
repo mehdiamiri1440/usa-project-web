@@ -34,7 +34,7 @@ class product_list_controller extends Controller
 
     protected $product_info_sent_by_product_array = [
         'products.id as product_id',
-        'products.updated_at', 
+        'products.updated_at',  
         'products.product_name', 
         'products.stock', 
         'products.min_sale_price', 
@@ -79,6 +79,7 @@ class product_list_controller extends Controller
             'product_name',
             'stock',
             'min_sale_amount',
+            'min_sale_price',
             'description',
             'myuser_id',
             'sub_category_id',

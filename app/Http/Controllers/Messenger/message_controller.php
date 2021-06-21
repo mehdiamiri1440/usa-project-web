@@ -28,6 +28,11 @@ class message_controller extends Controller
         'text' => 'required|string'
     ];
 
+    protected $product_reply_validation_rules = [
+        'product_id' => 'required|exists:products,id',
+        'text' => 'required|string'
+    ];
+
     //methods
     public function send_message(Request $request)
     {
@@ -175,6 +180,88 @@ class message_controller extends Controller
 
         return $buyAd_record->myuser_id;
     }
+
+    public function send_reply_message_to_the_product(Request $request)
+    {
+        $this->validate($request,$this->product_reply_validation_rules);
+
+        $sender_id = session('user_id');
+
+        $product_record = DB::table('products')->where('confirmed',true)
+                                ->whereNull('deleted_at')
+                                ->where('id',$request->product_id)
+                                ->get()
+                                ->first();
+
+        if($product_record){
+            $receiver_id = $product_record->myuser_id;
+        }
+        else{
+            return response()->json([
+                'status' => false,
+                'msg' => 'invalid data!',
+            ],200);
+        }
+
+        $previous_message_records_count = DB::table('messages')
+                                            ->where([
+                                                ['receiver_id', '=', $receiver_id],
+                                                ['sender_id', '=', $sender_id]
+                                            ])
+                                            ->orWhere([
+                                                ['receiver_id', '=', $sender_id],
+                                                ['sender_id', '=', $receiver_id]
+                                            ])
+                                            ->get()
+                                            ->count();
+
+        if($previous_message_records_count > 0){
+            $req = Request::create('/messanger/send_message', 'POST',[
+                'sender_id' => $sender_id,
+                'receiver_id' => $receiver_id,
+                'text' => $request->text
+            ]);
+    
+            return $this->send_message($req);
+        }
+        else{
+            $related_product_view_records = DB::table('user_products')->where('myuser_id',$sender_id)
+                                                ->where('product_id',$request->product_id)
+                                                ->orderBy('created_at')
+                                                ->get();
+
+            $now = Carbon::now();
+            
+            if($related_product_view_records->count() > 0){
+                $last_record = $related_product_view_records->last();
+
+                DB::table('user_products')->where('id',$last_record->id)
+                                                ->update([
+                                                    'updated_at' => $now,
+                                                    'has_sent_msg' => true,
+                                                ]);
+            }
+            else{
+                DB::table('user_products')->insert([
+                    'created_at' => $now,
+                    'updated_at' => $now,
+                    'myuser_id' => $sender_id,
+                    'product_id' => $request->product_id,
+                    'has_sent_msg' => true,
+                ]);
+            }
+
+            $req = Request::create('/messanger/send_message', 'POST',[
+                'sender_id' => $sender_id,
+                'receiver_id' => $receiver_id,
+                'text' => $request->text
+            ]);
+    
+            return $this->send_message($req);
+        }
+        
+    }
+
 
     //public method
     public function get_current_user_contact_list(Request $request)

@@ -73,10 +73,15 @@ return [
     
     'elevator' => [
         'price' => 250000,
-        'expiration-time-in-days' => 7
+        'expiration-time-in-days' => 3
     ],
     'phone-number' => [
         'view-price' => 500, //Toman
         'max-daily-access-count' => 10
     ],
+    'sellers-share-plus-count' => [
+        '1' => 4, // payed
+        '2' => 1, // verified
+        '3' => 1, // new
+    ]
 ];

@@ -11,6 +11,7 @@ use DB;
 use App\Http\Controllers\Notification\sms_controller;
 use App\Http\Library\date_convertor;
 use App\Jobs\NotifySellersIfANewRelatedBuyAdRegistered;
+use Carbon\Carbon;
 
 class admin_buyAd_controller extends Controller
 {
@@ -212,6 +213,8 @@ class admin_buyAd_controller extends Controller
             // $sms_controller_object->send_status_sms_message($buyAd_record,$this->buyAd_confirmation_sms_text);
             NotifySellersIfANewRelatedBuyAdRegistered::dispatch($buyAd_record);
 
+            $this->register_lead_info($buyAd_record);
+
             return redirect()->route('admin_panel_buyAd');
         } elseif ($request->type == 'reject') {
             //send SMS
@@ -269,5 +272,28 @@ class admin_buyAd_controller extends Controller
             'status' => true,
            'msg' => 'photo deleted',
         ]);
+    }
+
+    protected function register_lead_info($buyAd)
+    {
+        $leads = [];
+        $expiry_date = Carbon::now()->addDays(2); // 2 days after buyAd register
+    
+        for($i = 0 ; $i < $buyAd->reply_capacity ; $i++)
+        {
+            $lead = [];
+
+            $lead['buyer_id'] = $buyAd->myuser_id;
+            $lead['lead_class_id'] = 1;
+            $lead['expiry_date'] = $expiry_date;
+            $lead['category_id'] = $buyAd->category_id;
+            $lead['keywords'] = $buyAd->name;
+            $lead['created_at'] = $buyAd->created_at;
+            $lead['updated_at'] = $buyAd->created_at;
+
+            $leads[] = $lead;
+        }
+
+        DB::table('leads')->insert($leads);
     }
 }
