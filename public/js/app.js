@@ -20717,7 +20717,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   redirect: "/404",
   children: [{
-    path: "/password",
+    path: "password",
     name: "passwordSeller",
     components: {
       "default": function _default() {
@@ -20725,7 +20725,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
   }, {
-    path: "/status",
+    path: "status",
     name: "statusSeller",
     components: {
       "default": function _default() {
@@ -20733,7 +20733,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
   }, {
-    path: "/phone-viewers",
+    path: "phone-viewers",
     name: "sellerViewer",
     components: {
       "default": function _default() {
@@ -20741,7 +20741,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
   }, {
-    path: "/pricing",
+    path: "pricing",
     name: "dashboardPricingTableSeller",
     components: {
       "default": function _default() {
@@ -20749,7 +20749,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
   }, {
-    path: "/product-pricing",
+    path: "product-pricing",
     name: "dashboardProductPricing",
     components: {
       "default": function _default() {
@@ -20757,7 +20757,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
   }, {
-    path: "/buyad-pricing",
+    path: "buyad-pricing",
     name: "dashboardBuyAdPricing",
     components: {
       "default": function _default() {
@@ -20765,7 +20765,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
   }, {
-    path: "/profile",
+    path: "profile",
     name: "profileBasicSeller",
     components: {
       "default": function _default() {
@@ -20773,7 +20773,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
   }, {
-    path: "/profile/verification",
+    path: "profile/verification",
     name: "profileBasicSellerVeficiation",
     components: {
       "default": function _default() {
@@ -20781,14 +20781,14 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
   }, {
-    path: "/messenger",
+    path: "messenger",
     components: {
       "default": function _default() {
         return __webpack_require__.e(/*! import() */ "resources_assets_js_components_dashboard_messenger_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../components/dashboard/messenger.vue */ "./resources/assets/js/components/dashboard/messenger.vue"));
       }
     },
     children: [{
-      path: "/contacts",
+      path: "contacts",
       name: "messagesSeller",
       components: {
         "messenger-list": function messengerList() {
@@ -20796,7 +20796,7 @@ __webpack_require__.r(__webpack_exports__);
         }
       }
     }, {
-      path: '/buy-ads',
+      path: 'buy-ads',
       name: "messagesRequestSeller",
       components: {
         "messenger-list": function messengerList() {
@@ -20804,7 +20804,7 @@ __webpack_require__.r(__webpack_exports__);
         }
       }
     } // {
-    //   path: "/group-messages",
+    //   path: "group-messages",
     //   name: "groupMessagesSeller",
     //   components: {
     //     "group-list": resolve => {
@@ -20816,7 +20816,7 @@ __webpack_require__.r(__webpack_exports__);
     // }
     ]
   }, {
-    path: "/buyAd-requests",
+    path: "buyAd-requests",
     name: "buyAdRequestsSeller",
     components: {
       "default": function _default() {
@@ -20824,7 +20824,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
   }, {
-    path: "/my-products",
+    path: "my-products",
     name: "myProductsSeller",
     components: {
       "default": function _default() {
@@ -20832,7 +20832,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
   }, {
-    path: "/register-product",
+    path: "register-product",
     name: "registerProductSeller",
     components: {
       "default": function _default() {
@@ -20840,7 +20840,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     children: [{
-      path: "/success",
+      path: "success",
       name: "successRegisterProduct",
       components: {
         "default": function _default() {
@@ -20849,7 +20849,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     }]
   }, {
-    path: "/guide",
+    path: "guide",
     name: "guideSeller",
     components: {
       "default": function _default() {
@@ -20857,7 +20857,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
   }, {
-    path: "/show-number-guide",
+    path: "show-number-guide",
     name: "showNumberGuideSeller",
     components: {
       "default": function _default() {
@@ -20865,7 +20865,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
   }, // {
-  //   path: "/wallet",
+  //   path: "wallet",
   //   name: "walletSeller",
   //   components: {
   //     default: (resolve) => {
@@ -20874,7 +20874,7 @@ __webpack_require__.r(__webpack_exports__);
   //   },
   // },
   {
-    path: "/support",
+    path: "support",
     name: "supportSeller",
     components: {
       "default": function _default() {
@@ -20912,7 +20912,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
   }, {
-    path: "/profile/verification",
+    path: "profile/verification",
     name: "profileBasicBuyerVeficiation",
     components: {
       "default": function _default() {
@@ -20920,7 +20920,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
   }, {
-    path: "/messenger",
+    path: "messenger",
     components: {
       "default": function _default() {
         return __webpack_require__.e(/*! import() */ "resources_assets_js_components_dashboard_messenger_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../components/dashboard/messenger.vue */ "./resources/assets/js/components/dashboard/messenger.vue"));
@@ -20935,7 +20935,7 @@ __webpack_require__.r(__webpack_exports__);
         }
       }
     } // {
-    //   path: "/group-messages",
+    //   path: "group-messages",
     //   name: "groupMessagesBuyer",
     //   components: {
     //     "group-list": resolve => {
@@ -20955,7 +20955,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
   }, {
-    path: "/special-products",
+    path: "special-products",
     name: "specialProducts",
     components: {
       "default": function _default() {
@@ -20963,7 +20963,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
   }, {
-    path: "/my-buyAd-requests",
+    path: "my-buyAd-requests",
     name: "myBuyAdRequestsBuyer",
     components: {
       "default": function _default() {
@@ -20971,7 +20971,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
   }, {
-    path: "/guide",
+    path: "guide",
     name: "guideBuyer",
     components: {
       "default": function _default() {
@@ -20979,7 +20979,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
   }, {
-    path: "/support",
+    path: "support",
     name: "supportBuyer",
     components: {
       "default": function _default() {
@@ -21836,9 +21836,27 @@ var state = {
   submiting: false,
   uploadPercentage: 0
 };
+var actions = {// getCurrentUser() {
+  //     axios.post("/user/profile_info").then((response) => {
+  //         store.currentUser = response.data;
+  // if (
+  //   !response.data.user_info.is_verified &&
+  //   this.checkVerificationAlert(this.$route.name)
+  // ) {
+  //   if (!this.disableVerificationAlert) {
+  //     this.verificationAlert = true;
+  //   }
+  // } else {
+  //   this.verificationAlert = false;
+  // }
+  // return (this.currentUser = response.data);
+  // });
+  // }
+};
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   namespaced: true,
-  state: state
+  state: state,
+  actions: actions
 });
 
 /***/ }),
@@ -62978,7 +62996,7 @@ var index = {
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames based on template
-/******/ 			return "chunks/" + chunkId + "." + {"resources_assets_js_router_components_sellerDashboard_vue":"71c90c62673e2b009cfb","resources_assets_js_components_dashboard_seller_profile_change_password_vue":"3264fa44e216749f159e","resources_assets_js_components_dashboard_seller_dashboard_status_vue":"a8f94751334878627627","resources_assets_js_components_dashboard_seller_seller-viewer_vue":"8774063265b4f345d466","resources_assets_js_components_dashboard_dashboard-pricing-table_vue":"ae1493745a8fa6b609eb","resources_assets_js_components_dashboard_seller_pricing-seller-page_product-pricing_vue":"da6ff507beb71eb50147","resources_assets_js_components_dashboard_seller_pricing-seller-page_buyad-pricing_vue":"ddb3a25c368d5c81a626","resources_assets_js_components_dashboard_seller_profile_profile_basic_vue":"d309c60fb0b9697ffe6e","resources_assets_js_components_dashboard_seller_profile_profile_verification_vue":"9616ae399f0e7ee3881a","resources_assets_js_components_dashboard_messenger_vue":"a2b1ce5fe2b5eb447dcf","resources_assets_js_components_dashboard_messages-components_my-contact-list_vue":"cdfc94016ed723f26d6c","resources_assets_js_components_dashboard_messages-components_my-buyad-list_vue":"08bdda30c5c2259fee6a","resources_assets_js_components_dashboard_seller_request_buyAd-requests_vue":"ce7917733d4827eebb66","resources_assets_js_components_dashboard_seller_product_my_products_vue":"2ad701a3061f68a12b2c","resources_assets_js_components_dashboard_seller_product_product-basic_vue":"35e5a3794f7fd4bf0c09","resources_assets_js_components_dashboard_seller_guide_vue":"94ae8d2352ece405821c","resources_assets_js_components_dashboard_seller_show-number-guide_vue":"ff563b34e66cc5c89abd","resources_assets_js_components_dashboard_seller_support_vue":"6a0c164ac57a89607a88","resources_assets_js_router_components_buyerDashboard_vue":"88b05274046677e0c1a2","resources_assets_js_components_dashboard_buyer_profile_profile_basic_vue":"01347602e1d5cfcef300","resources_assets_js_components_dashboard_buyer_profile_profile_verification_vue":"adf24766ec8f8cd4c564","resources_assets_js_components_dashboard_buyer_request_register-request_vue":"026f0fdcbf89b01e5ec1","resources_assets_js_components_dashboard_buyer_products_special-products_vue":"e4db09210ddae754a508","resources_assets_js_components_dashboard_buyer_my-requests_buyAd-requests_vue":"6b4640ee76fb35882346","resources_assets_js_components_dashboard_buyer_guide_vue":"e734ee1e6a802133da73","resources_assets_js_components_dashboard_buyer_support_vue":"4a2c63bc5aaf03b7dc64","resources_assets_js_router_components_masterRoute_vue":"309a9092551441a179b6","resources_assets_js_components_layouts_main_index_vue":"9227d4a1c2c1e3bcebea","resources_assets_js_components_layouts_main_about_us_vue":"b267b518fe5185cd11e8","resources_assets_js_components_layouts_main_help_vue":"eace315875da64411ba0","resources_assets_js_components_layouts_main_contact_us_vue":"e8e25f98dc252df28f6f","resources_assets_js_components_layouts_main_verification-info_vue":"2c9ebdb3e44fd48f7765","resources_assets_js_components_layouts_main_privacy_and_policy_vue":"ee43bc51560343977661","resources_assets_js_components_layouts_main_product_list_vue":"2da9b9bb5aa886ae92f3","resources_assets_js_components_layouts_main_product_components_product-view-route_vue":"311e25e82615a27f1448","resources_assets_js_components_layouts_main_product_components_product-view_product-view_vue":"58d831228ec649644c7b","resources_assets_js_components_layouts_main_product_category_vue":"2b86de2925a2a6f2d06f","resources_assets_js_components_layouts_main_profile_vue":"51bc3e89d53741d843f1","resources_assets_js_components_login_Login_vue":"d3872081a3b2999c1756","resources_assets_js_components_register_register_vue":"0c5eba819adc2cdb0113","resources_assets_js_components_layouts_main_main_components_main-register-request_vue":"362674c0744f7ca09c48","resources_assets_js_components_layouts_main_main_components_register-inquiry_vue":"3c7358f08dc0ce274a39"}[chunkId] + ".js";
+/******/ 			return "chunks/" + chunkId + "." + {"resources_assets_js_router_components_sellerDashboard_vue":"71c90c62673e2b009cfb","resources_assets_js_components_dashboard_seller_profile_change_password_vue":"3264fa44e216749f159e","resources_assets_js_components_dashboard_seller_dashboard_status_vue":"a8f94751334878627627","resources_assets_js_components_dashboard_seller_seller-viewer_vue":"9f23d00dc0769ae71e4c","resources_assets_js_components_dashboard_dashboard-pricing-table_vue":"ae1493745a8fa6b609eb","resources_assets_js_components_dashboard_seller_pricing-seller-page_product-pricing_vue":"da6ff507beb71eb50147","resources_assets_js_components_dashboard_seller_pricing-seller-page_buyad-pricing_vue":"ddb3a25c368d5c81a626","resources_assets_js_components_dashboard_seller_profile_profile_basic_vue":"a27ef919447a25e69489","resources_assets_js_components_dashboard_seller_profile_profile_verification_vue":"406677807377675752f4","resources_assets_js_components_dashboard_messenger_vue":"37ec3b389067768c822c","resources_assets_js_components_dashboard_messages-components_my-contact-list_vue":"cdfc94016ed723f26d6c","resources_assets_js_components_dashboard_messages-components_my-buyad-list_vue":"08bdda30c5c2259fee6a","resources_assets_js_components_dashboard_seller_request_buyAd-requests_vue":"ce7917733d4827eebb66","resources_assets_js_components_dashboard_seller_product_my_products_vue":"2ad701a3061f68a12b2c","resources_assets_js_components_dashboard_seller_product_product-basic_vue":"be76b65664c357698e08","resources_assets_js_components_dashboard_seller_guide_vue":"94ae8d2352ece405821c","resources_assets_js_components_dashboard_seller_show-number-guide_vue":"ff563b34e66cc5c89abd","resources_assets_js_components_dashboard_seller_support_vue":"6a0c164ac57a89607a88","resources_assets_js_router_components_buyerDashboard_vue":"88b05274046677e0c1a2","resources_assets_js_components_dashboard_buyer_profile_profile_basic_vue":"782c63394d082a3fb022","resources_assets_js_components_dashboard_buyer_profile_profile_verification_vue":"c7cd15f7a47f1b531983","resources_assets_js_components_dashboard_buyer_request_register-request_vue":"026f0fdcbf89b01e5ec1","resources_assets_js_components_dashboard_buyer_products_special-products_vue":"e4db09210ddae754a508","resources_assets_js_components_dashboard_buyer_my-requests_buyAd-requests_vue":"6273d1a29680fe68890f","resources_assets_js_components_dashboard_buyer_guide_vue":"e734ee1e6a802133da73","resources_assets_js_components_dashboard_buyer_support_vue":"4a2c63bc5aaf03b7dc64","resources_assets_js_router_components_masterRoute_vue":"309a9092551441a179b6","resources_assets_js_components_layouts_main_index_vue":"9227d4a1c2c1e3bcebea","resources_assets_js_components_layouts_main_about_us_vue":"b267b518fe5185cd11e8","resources_assets_js_components_layouts_main_help_vue":"eace315875da64411ba0","resources_assets_js_components_layouts_main_contact_us_vue":"e8e25f98dc252df28f6f","resources_assets_js_components_layouts_main_verification-info_vue":"2c9ebdb3e44fd48f7765","resources_assets_js_components_layouts_main_privacy_and_policy_vue":"ee43bc51560343977661","resources_assets_js_components_layouts_main_product_list_vue":"2da9b9bb5aa886ae92f3","resources_assets_js_components_layouts_main_product_components_product-view-route_vue":"311e25e82615a27f1448","resources_assets_js_components_layouts_main_product_components_product-view_product-view_vue":"915ce98671b8cd167b7a","resources_assets_js_components_layouts_main_product_category_vue":"2b86de2925a2a6f2d06f","resources_assets_js_components_layouts_main_profile_vue":"d7db666b4af143b38c74","resources_assets_js_components_login_Login_vue":"f8c737b5de7ba99898b5","resources_assets_js_components_register_register_vue":"0c5eba819adc2cdb0113","resources_assets_js_components_layouts_main_main_components_main-register-request_vue":"362674c0744f7ca09c48","resources_assets_js_components_layouts_main_main_components_register-inquiry_vue":"3c7358f08dc0ce274a39"}[chunkId] + ".js";
 /******/ 		};
 /******/ 	})();
 /******/ 	

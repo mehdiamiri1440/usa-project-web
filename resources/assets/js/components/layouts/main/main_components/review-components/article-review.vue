@@ -146,7 +146,7 @@
             v-text="review.city + ' - ' + review.province"
           ></p>
           <p class="comment-date hidden-sm hidden-md hidden-lg">
-            {{ review.created_at | moment("jYYYY/jMM/jDD") }}
+            {{ $filter.moment(review.created_at, "jYYYY/jMM/jDD") }}
           </p>
         </div>
       </div>
@@ -166,7 +166,7 @@
       </div>
       <div class="review-rate text-center col-xs-12 col-sm-2 pull-right">
         <p class="comment-date hidden-xs">
-          {{ review.created_at | moment("jYYYY/jMM/jDD") }}
+          {{ $filter.moment(review.created_at, "jYYYY/jMM/jDD") }}
         </p>
         <div
           class="review-likes-wrapper text-center"

@@ -707,6 +707,10 @@ input,textarea {
   box-shadow: 0 0 4px 0 #888;
 }
 
+.imageuploadify-container{
+  display: none;
+}
+
 .imageuploadify
   .imageuploadify-images-list
   .imageuploadify-container

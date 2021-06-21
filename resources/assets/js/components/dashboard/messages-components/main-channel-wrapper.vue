@@ -806,7 +806,7 @@
         <li :key="msg.id" v-for="msg in channelMessages">
           <!-- <div class="message-date" v-if="msg.isDateShow">
             <span>
-              {{ msg.created_at | moment("jYYYY/jMM/jDD") }}
+              {{  $filter.moment(msg.created_at,"jYYYY/jMM/jDD") }}
             </span>
           </div> -->
           <div class="message-contents">
@@ -882,7 +882,7 @@
                 </div>
                 <span class="message-chat-date">
                   <span v-if="msg.created_at">{{
-                    msg.created_at | moment("jYYYY/jMM/jDD, HH:mm")
+                    $filter.moment(msg.created_at ,"jYYYY/jMM/jDD, HH:mm")
                   }}</span>
                 </span>
               </router-link>
@@ -897,7 +897,7 @@
                 <span class="message-text" v-text="msg.text"></span>
                 <span class="message-chat-date">
                   <span v-if="msg.created_at">{{
-                    msg.created_at | moment("jYYYY/jMM/jDD, HH:mm")
+                    $filter.moment(msg.created_at ,"jYYYY/jMM/jDD, HH:mm")
                   }}</span>
                 </span>
               </div>

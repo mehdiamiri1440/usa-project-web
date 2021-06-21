@@ -856,7 +856,7 @@
         >
           <!-- <div class="message-date" v-if="msg.isDateShow">
             <span>
-              {{ msg.created_at | moment("jYYYY/jMM/jDD") }}
+              {{ $filter.moment(msg.created_at,"jYYYY/jMM/jDD") }}
             </span>
           </div> -->
           <div
@@ -871,7 +871,7 @@
               v-if="msg.is_phone && !checkMessageListClass(msg.sender_id)"
               class="message-content-wrapper is-phone-active-wrapper"
             >
-              <!--msg.created_at | moment("jYY/jMM/jDD, HH:mm") -->
+              <!--$filter.moment(msg.created_at,"jYY/jMM/jDD, HH:mm") -->
               <a
                 :href="'tel:' + msg.text"
                 class="hidden-sm hidden-md hidden-lg"
@@ -881,10 +881,10 @@
                 </span>
                 <span class="message-chat-date">
                   <span v-if="msg.created_at">{{
-                    msg.created_at | moment("jYYYY/jMM/jDD, HH:mm")
+                     $filter.moment(msg.created_at,"jYYYY/jMM/jDD, HH:mm")
                   }}</span>
                   <span v-else>{{
-                    Date() | moment("jYYYY/jMM/jDD, HH:mm")
+                     $filter.moment(Date(),"jYYYY/jMM/jDD, HH:mm")
                   }}</span>
                   <div class="message-button-wrapper">
                     <button>
@@ -898,10 +898,10 @@
                 <span v-text="msg.text"></span>
                 <span class="message-chat-date">
                   <span v-if="msg.created_at">{{
-                    msg.created_at | moment("jYYYY/jMM/jDD, HH:mm")
+                     $filter.moment(msg.created_at,"jYYYY/jMM/jDD, HH:mm")
                   }}</span>
                   <span v-else>{{
-                    Date() | moment("jYYYY/jMM/jDD, HH:mm")
+                     $filter.moment(Date(),"jYYYY/jMM/jDD, HH:mm")
                   }}</span>
                 </span>
               </div>
@@ -911,10 +911,10 @@
               <span v-text="msg.text"></span>
               <span class="message-chat-date">
                 <span v-if="msg.created_at">{{
-                  msg.created_at | moment("jYYYY/jMM/jDD, HH:mm")
+                   $filter.moment(msg.created_at,"jYYYY/jMM/jDD, HH:mm")
                 }}</span>
                 <span v-else>{{
-                  Date() | moment("jYYYY/jMM/jDD, HH:mm")
+                   $filter.moment(Date(),"jYYYY/jMM/jDD, HH:mm")
                 }}</span>
                 <span
                   class="check-items"

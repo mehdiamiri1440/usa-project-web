@@ -464,11 +464,11 @@ export default {
       if (self.isUserInInquirySubmissionProcess()) {
         self.returnUserToPreviousPageAndChatBox(userInfo);
       } else {
-        self.$router.push("seller/register-product");
+        self.$router.push({ name: "registerProductSeller" });
       }
     } else if (self.isUserLogin && self.userType != 1) {
       // self.returnUserToPreviousPageAndChatBox(userInfo);
-      self.$router.push("buyer/register-request");
+      self.$router.push({ name: "registerRequestBuyer" });
     } else {
       self.loginCheckerLoading = false;
     }

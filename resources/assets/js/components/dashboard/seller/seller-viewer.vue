@@ -128,7 +128,7 @@ li:nth-of-type(2n + 1) .user-items-wrapper {
           <li v-for="(user, index) in users" :key="index">
             <div v-if="user.isDateShow" class="date-wrapper">
               <p>
-                {{ user.created_at | moment("jYYYY/jMM/jDD") }}
+                {{ $filter.moment(user.created_at, "jYYYY/jMM/jDD") }}
               </p>
             </div>
             <div class="user-items-wrapper">

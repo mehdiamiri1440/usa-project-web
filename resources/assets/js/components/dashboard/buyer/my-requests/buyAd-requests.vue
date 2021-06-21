@@ -284,7 +284,7 @@ tr:nth-child(even) {
                   <tr>
                     <td class="gray-text">زمان ثبت</td>
                     <td>
-                      {{ buyAd.created_at | moment("jYYYY/jMM/jDD") }}
+                      {{ $filter.moment(buyAd.created_at, "jYYYY/jMM/jDD") }}
                     </td>
                   </tr>
                   <tr>

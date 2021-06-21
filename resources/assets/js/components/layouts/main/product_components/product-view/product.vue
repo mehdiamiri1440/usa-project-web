@@ -289,14 +289,13 @@ label {
 </style>
 
 <template>
-  <div v-if="$parent.product.main.id" class="wrapper-bg main-product-wrapper">
-  
+  <div v-if="product.main.id" class="wrapper-bg main-product-wrapper">
     <!--article modal-->
 
     <div
       v-if="$parent.isMyProfile"
       class="modal fade"
-      :id="'article-modal' + $parent.product.main.id"
+      :id="'article-modal' + product.main.id"
       tabindex="-1"
       role="dialog"
       aria-hidden="true"
@@ -312,9 +311,9 @@ label {
               class="modal-title"
               v-text="
                 'ویرایش ' +
-                $parent.product.main.category_name +
+                product.main.category_name +
                 ' | ' +
-                $parent.product.main.sub_category_name
+                product.main.sub_category_name
               "
             ></div>
           </div>
@@ -323,7 +322,7 @@ label {
               <input
                 type="hidden"
                 class="product-id"
-                :value="$parent.product.main.id"
+                :value="product.main.id"
               />
               <div class="col-xs-12 col-sm-6 pull-right">
                 <label class="content-label">مقدار موجودی (کیلوگرم)</label>
@@ -332,7 +331,7 @@ label {
                   placeholder="مثلا : 5000 "
                   type="text"
                   class="form-control stock"
-                  :value="$parent.product.main.stock"
+                  :value="product.main.stock"
                 />
 
                 <div class="text-danger">
@@ -350,7 +349,7 @@ label {
                   placeholder="مثلا : 200 "
                   type="text"
                   class="form-control min-sale-amount"
-                  :value="$parent.product.main.min_sale_amount"
+                  :value="product.main.min_sale_amount"
                 />
 
                 <div class="text-danger">
@@ -368,7 +367,7 @@ label {
                   placeholder="مثلا : 10000 "
                   type="text"
                   class="form-control min-sale-price"
-                  :value="$parent.product.main.min_sale_price"
+                  :value="product.main.min_sale_price"
                 />
 
                 <div class="text-danger">
@@ -386,7 +385,7 @@ label {
                   placeholder="مثلا : 50000 "
                   type="text"
                   class="form-control max-sale-price"
-                  :value="$parent.product.main.max_sale_price"
+                  :value="product.main.max_sale_price"
                 />
 
                 <div class="text-danger">
@@ -398,9 +397,7 @@ label {
               </div>
             </div>
             <button
-              @click="
-                $parent.editProduct('article-modal' + $parent.product.main.id)
-              "
+              @click="$parent.editProduct('article-modal' + product.main.id)"
               type="submit"
               style="border: none"
               class="green-button"
@@ -416,22 +413,22 @@ label {
 
     <div class="images-wrapper">
       <div class="images">
-        <div v-if="$parent.product.photos" class="owl-carousel">
+        <div v-if="product.photos" class="owl-carousel">
           <Carousel
-            v-for="(photo,index) in $parent.product.photos"
+            v-for="(photo, index) in product.photos"
             :index="index"
             :key="photo.id"
             :base="$parent.str + '/'"
             :img="photo.file_path"
             :alt="
               'فروش عمده ی ' +
-              $parent.product.main.sub_category_name +
+              product.main.sub_category_name +
               ' ' +
-              $parent.product.main.product_name +
+              product.main.product_name +
               ' ' +
-              $parent.product.main.city_name +
+              product.main.city_name +
               ' - ' +
-              $parent.product.main.province_name
+              product.main.province_name
             "
           />
         </div>
@@ -484,20 +481,20 @@ label {
 
     <div class="main-contents-wrapper">
       <div class="main-contents">
-        <h1 v-text="$parent.product.main.product_name"></h1>
+        <h1 v-text="product.main.product_name"></h1>
 
         <div class="actions">
           <button
             v-if="!$parent.isMyProfile && $parent.currentUser.user_info"
-            @click.prevent="$parent.openChat($parent.product)"
+            @click.prevent="$parent.openChat(product)"
             class="hidden-xs hidden-sm"
             :class="{
               'send-message-button':
-                $parent.product.user_info.has_phone &&
+                product.user_info.has_phone &&
                 $parent.currentUser.user_info.is_buyer,
               'green-button':
-                !$parent.product.user_info.has_phone ||
-                ($parent.product.user_info.has_phone &&
+                !product.user_info.has_phone ||
+                (product.user_info.has_phone &&
                   !$parent.currentUser.user_info.is_buyer),
             }"
           >
@@ -509,8 +506,8 @@ label {
             @click.prevent="$parent.loginModal(true)"
             class="hidden-xs hidden-sm"
             :class="{
-              'send-message-button': $parent.product.user_info.has_phone,
-              'green-button': !$parent.product.user_info.has_phone,
+              'send-message-button': product.user_info.has_phone,
+              'green-button': !product.user_info.has_phone,
             }"
           >
             چت با فروشنده
@@ -521,7 +518,7 @@ label {
             v-else
             class="green-button blue-button"
             data-toggle="modal"
-            :data-target="'#article-modal' + $parent.product.main.id"
+            :data-target="'#article-modal' + product.main.id"
           >
             ویرایش
             <i class="fa fa-pencil-alt"></i>
@@ -531,7 +528,7 @@ label {
             v-if="
               !$parent.isMyProfile &&
               $parent.currentUser.user_info &&
-              $parent.product.user_info.has_phone &&
+              product.user_info.has_phone &&
               $parent.currentUser.user_info.is_buyer
             "
             @click.prevent="$parent.activePhoneCall(false)"
@@ -550,8 +547,7 @@ label {
           </button>
           <button
             v-else-if="
-              !$parent.currentUser.user_info &&
-              $parent.product.user_info.has_phone
+              !$parent.currentUser.user_info && product.user_info.has_phone
             "
             @click.prevent="$parent.loginModal(false)"
             class="green-button phone-call hidden-xs hidden-sm"
@@ -618,7 +614,7 @@ label {
                 <i class="fa fa-folder"></i> دسته بندی
               </span>
 
-              <span v-text="$parent.product.main.sub_category_name"></span>
+              <span v-text="product.main.sub_category_name"></span>
             </li>
             <li>
               <span class="gray-text">
@@ -627,9 +623,7 @@ label {
 
               <span
                 v-text="
-                  $parent.product.main.province_name +
-                  ' - ' +
-                  $parent.product.main.city_name
+                  product.main.province_name + ' - ' + product.main.city_name
                 "
               ></span>
             </li>
@@ -638,9 +632,7 @@ label {
                 <i class="fa fa-box-open"></i> مقدار موجودی</span
               >
 
-              <span
-                v-text="getConvertedNumbers($parent.product.main.stock)"
-              ></span>
+              <span v-text="getConvertedNumbers(product.main.stock)"></span>
             </li>
             <li>
               <span class="gray-text">
@@ -648,9 +640,7 @@ label {
               >
 
               <span
-                v-text="
-                  getConvertedNumbers($parent.product.main.min_sale_amount)
-                "
+                v-text="getConvertedNumbers(product.main.min_sale_amount)"
               ></span>
             </li>
             <li v-if="!$parent.isMyProfile">
@@ -661,12 +651,9 @@ label {
               <span>استعلام بگیرید</span>
             </li>
           </ul>
-          <div
-            v-if="$parent.product.main.description"
-            class="product-description"
-          >
+          <div v-if="product.main.description" class="product-description">
             <span class="gray-text">توضیحات</span>
-            <p v-html="$parent.product.main.description"></p>
+            <p v-html="product.main.description"></p>
           </div>
         </div>
       </div>
@@ -795,8 +782,8 @@ import Carousel from "./carousel";
 export default {
   components: {
     Carousel,
-
   },
+  props: ["product"],
   methods: {
     getNumberWithCommas: function (number) {
       if (number || typeof number === "number")

@@ -518,7 +518,7 @@ p.response-rate span {
               data-container="body"
               data-toggle="popover"
               data-placement="bottom"
-              :data-content="$parent.verifiedUserContent"
+              :data-content="$store.state.routeStore.verifiedUserContent"
               title
             >
               <i class="fa fa-certificate"></i>
@@ -637,10 +637,19 @@ p.response-rate span {
       </div>
       <div class="default-user-action-buttons">
         <div
-          class="placeholder-content default-button-full-with margin-0 hidden-xs hidden-md hidden-sm"
+          class="
+            placeholder-content
+            default-button-full-with
+            margin-0
+            hidden-xs hidden-md hidden-sm
+          "
         ></div>
         <div
-          class="placeholder-content default-button-user-item default-button-full-with margin-10-0"
+          class="
+            placeholder-content
+            default-button-user-item default-button-full-with
+            margin-10-0
+          "
         ></div>
       </div>
     </div>

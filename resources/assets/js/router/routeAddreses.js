@@ -14,83 +14,83 @@ export default
             redirect: "/404",
             children: [
                 {
-                    path: "/password",
+                    path: "password",
                     name: "passwordSeller",
                     components: {
                         default: () => import("../components/dashboard/seller/profile/change_password.vue")
                     },
                 },
                 {
-                    path: "/status",
+                    path: "status",
                     name: "statusSeller",
                     components: {
                         default: () => import("../components/dashboard/seller/dashboard/status.vue")
                     },
                 },
                 {
-                    path: "/phone-viewers",
+                    path: "phone-viewers",
                     name: "sellerViewer",
                     components: {
                         default: () => import("../components/dashboard/seller/seller-viewer.vue")
                     },
                 },
                 {
-                    path: "/pricing",
+                    path: "pricing",
                     name: "dashboardPricingTableSeller",
                     components: {
                         default: () => import("../components/dashboard/dashboard-pricing-table")
                     },
                 },
                 {
-                    path: "/product-pricing",
+                    path: "product-pricing",
                     name: "dashboardProductPricing",
                     components: {
                         default: () => import("../components/dashboard/seller/pricing-seller-page/product-pricing.vue")
                     },
                 },
                 {
-                    path: "/buyad-pricing",
+                    path: "buyad-pricing",
                     name: "dashboardBuyAdPricing",
                     components: {
                         default: () => import("../components/dashboard/seller/pricing-seller-page/buyad-pricing.vue")
                     },
                 },
                 {
-                    path: "/profile",
+                    path: "profile",
                     name: "profileBasicSeller",
                     components: {
                         default: () => import("../components/dashboard/seller/profile/profile_basic.vue")
                     },
                 },
                 {
-                    path: "/profile/verification",
+                    path: "profile/verification",
                     name: "profileBasicSellerVeficiation",
                     components: {
                         default: () => import("../components/dashboard/seller/profile/profile_verification.vue")
                     },
                 },
                 {
-                    path: "/messenger",
+                    path: "messenger",
                     components: {
                         default: () => import("../components/dashboard/messenger.vue")
                     },
                     children: [
                         {
-                            path: "/contacts",
+                            path: "contacts",
                             name: "messagesSeller",
                             components: {
                                 "messenger-list": () => import("../components/dashboard/messages-components/my-contact-list.vue")
                             },
                         },
                         {
-                            path: '/buy-ads',
+                            path: 'buy-ads',
                             name: "messagesRequestSeller",
                             components: {
                                 "messenger-list": () => import("../components/dashboard/messages-components/my-buyad-list.vue")
                             },
                         },
                         // {
-                        //   path: "/group-messages",
+                        //   path: "group-messages",
                         //   name: "groupMessagesSeller",
                         //   components: {
                         //     "group-list": resolve => {
@@ -103,28 +103,28 @@ export default
                     ],
                 },
                 {
-                    path: "/buyAd-requests",
+                    path: "buyAd-requests",
                     name: "buyAdRequestsSeller",
                     components: {
                         default: () => import("../components/dashboard/seller/request/buyAd-requests.vue")
                     },
                 },
                 {
-                    path: "/my-products",
+                    path: "my-products",
                     name: "myProductsSeller",
                     components: {
                         default: () => import("../components/dashboard/seller/product/my_products")
                     },
                 },
                 {
-                    path: "/register-product",
+                    path: "register-product",
                     name: "registerProductSeller",
                     components: {
                         default: () => import("../components/dashboard/seller/product/product-basic.vue")
                     },
                     children: [
                         {
-                            path: "/success",
+                            path: "success",
                             name: "successRegisterProduct",
                             components: {
                                 default: () => import(
@@ -135,21 +135,21 @@ export default
                     ]
                 },
                 {
-                    path: "/guide",
+                    path: "guide",
                     name: "guideSeller",
                     components: {
                         default: () => import("../components/dashboard/seller/guide.vue")
                     },
                 },
                 {
-                    path: "/show-number-guide",
+                    path: "show-number-guide",
                     name: "showNumberGuideSeller",
                     components: {
                         default: () => import("../components/dashboard/seller/show-number-guide.vue")
                     },
                 },
                 // {
-                //   path: "/wallet",
+                //   path: "wallet",
                 //   name: "walletSeller",
                 //   components: {
                 //     default: (resolve) => {
@@ -158,7 +158,7 @@ export default
                 //   },
                 // },
                 {
-                    path: "/support",
+                    path: "support",
                     name: "supportSeller",
                     components: {
                         default: () => import("../components/dashboard/seller/support.vue")
@@ -194,14 +194,14 @@ export default
                     },
                 },
                 {
-                    path: "/profile/verification",
+                    path: "profile/verification",
                     name: "profileBasicBuyerVeficiation",
                     components: {
                         default: () => import("../components/dashboard/buyer/profile/profile_verification.vue")
                     },
                 },
                 {
-                    path: "/messenger",
+                    path: "messenger",
                     components: {
                         default: () => import("../components/dashboard/messenger.vue")
                     },
@@ -214,7 +214,7 @@ export default
                             },
                         },
                         // {
-                        //   path: "/group-messages",
+                        //   path: "group-messages",
                         //   name: "groupMessagesBuyer",
                         //   components: {
                         //     "group-list": resolve => {
@@ -234,28 +234,28 @@ export default
                     },
                 },
                 {
-                    path: "/special-products",
+                    path: "special-products",
                     name: "specialProducts",
                     components: {
                         default: () => import("../components/dashboard/buyer/products/special-products")
                     },
                 },
                 {
-                    path: "/my-buyAd-requests",
+                    path: "my-buyAd-requests",
                     name: "myBuyAdRequestsBuyer",
                     components: {
                         default: () => import("../components/dashboard/buyer/my-requests/buyAd-requests.vue")
                     },
                 },
                 {
-                    path: "/guide",
+                    path: "guide",
                     name: "guideBuyer",
                     components: {
                         default: () => import("../components/dashboard/buyer/guide.vue")
                     },
                 },
                 {
-                    path: "/support",
+                    path: "support",
                     name: "supportBuyer",
                     components: {
                         default: () => import("../components/dashboard/buyer/support.vue")

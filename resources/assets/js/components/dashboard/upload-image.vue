@@ -1,5 +1,4 @@
 <style scoped>
-
 .btn-crop {
   display: inline-block;
   background: #00c569;
@@ -66,6 +65,7 @@
   width: 100%;
   min-height: 100%;
   min-width: 100%;
+  height: initial;
 }
 
 .image-upload-wrapper .btn-group .dropdown-menu {
