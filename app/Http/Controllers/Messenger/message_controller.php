@@ -470,9 +470,24 @@ class message_controller extends Controller
         foreach($messages as $msg){
             if($this->is_this_string_a_valid_phone_number($msg->text)){
                 $msg->is_phone = true;
+
+                continue;
             }
             else{
                 $msg->is_phone = false;
+            }
+
+            if(preg_match("/:p=\d/u",$msg->text) !== 1) {
+                continue;
+            }
+
+            $tmp1 = explode("\n",$msg->text);
+            if(count($tmp1) >= 2){
+                $last_string = $tmp1[$index = array_key_last($tmp1)];
+                if(sscanf($last_string,":p=%d",$product_id)){
+                    $msg->text = implode("\n",array_slice($tmp1,0,$index));
+                    $msg->p_id = $product_id;
+                }
             }
         }
 
