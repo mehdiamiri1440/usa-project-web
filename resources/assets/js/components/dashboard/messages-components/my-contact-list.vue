@@ -53,8 +53,11 @@
   float: right;
   border-radius: 50px;
   overflow: hidden;
-  border: 1px solid #f2f2f2;
+  /* border: 1px solid #f2f2f2; */
   position: relative;
+  background-position: center;
+  background-size: cover;
+  background-color: #f2f2f2;
 }
 
 .contact-body .channel-image img {
@@ -378,12 +381,14 @@ i.fa-star {
         <div class="switch-button-item">
           <router-link
             :to="{ name: 'messagesRequestSeller' }"
-            tag="button"
-            class="contact-button"
+            custom
+            v-slot="{ navigate }"
           >
-            <i class="fa fa-star"></i>
+            <button @click="navigate" class="contact-button">
+              <i class="fa fa-star"></i>
 
-            خریداران پیشنهادی
+              خریداران پیشنهادی
+            </button>
           </router-link>
         </div>
 
@@ -510,19 +515,23 @@ i.fa-star {
               <router-link
                 v-if="userType"
                 :to="{ name: 'buyAdRequestsSeller' }"
-                tag="button"
-                class="user-button"
+                v-slot="{ navigate }"
+                custom
               >
-                شروع چت با خریداران
+                <button @click="navigate" class="user-button">
+                  شروع چت با خریداران
+                </button>
               </router-link>
 
               <router-link
                 v-else
                 :to="{ name: 'productList' }"
-                tag="button"
-                class="user-button"
+                v-slot="{ navigate }"
+                custom
               >
-                شروع چت با فروشندگان
+                <button @click="navigate" class="user-button">
+                  شروع چت با فروشندگان
+                </button>
               </router-link>
             </div>
           </li>
@@ -614,15 +623,31 @@ i.fa-star {
                 !isChanleActive,
             }"
           >
-            <div class="contact-image">
-              <img
+            <div
+              v-if="contact.profile_photo"
+              class="contact-image"
+              :style="{
+                backgroundImage:
+                  'url(' + str + '/' + contact.profile_photo + ')',
+              }"
+            >
+              <!-- <img
                 v-if="contact.profile_photo"
                 :src="str + '/' + contact.profile_photo"
                 :alt="contact.first_name[0]"
-              />
+              /> -->
 
-              <img v-else src="../../../../img/user-defult.png" />
+              <!-- <img v-else src="../../../../img/user-defult.png" /> -->
             </div>
+            <div
+              v-else
+              class="contact-image"
+              :style="{
+                backgroundImage:
+                  'url(' + getBaseUrl() + 'assets/img/user-defult.png)',
+              }"
+            ></div>
+
             <div class="my-contact-info-wrapper">
               <span class="contact-name text-rtl">
                 {{ contact.first_name + " " + contact.last_name }}
@@ -700,6 +725,9 @@ export default {
     };
   },
   methods: {
+    getBaseUrl() {
+      return getBase();
+    },
     activeComponentTooltip() {
       $(".verified-user")
         .popover({ trigger: "manual", html: true, animation: false })

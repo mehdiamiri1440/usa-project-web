@@ -10,6 +10,7 @@
   position: relative;
   align-items: center;
   z-index: 1;
+  margin-top: 10%;
 }
 
 .loading-container .lds-ring {
@@ -760,7 +761,7 @@
         >
           <img src="../../../../img/logo/512-buskool-logo.jpg" />
         </div>
-        <div tag="div" class="message-contact-title-img hidden-xs">
+        <div class="message-contact-title-img hidden-xs">
           <img src="../../../../img/logo/512-buskool-logo.jpg" />
         </div>
 
@@ -882,7 +883,7 @@
                 </div>
                 <span class="message-chat-date">
                   <span v-if="msg.created_at">{{
-                    $filter.moment(msg.created_at ,"jYYYY/jMM/jDD, HH:mm")
+                    $filter.moment(msg.created_at, "jYYYY/jMM/jDD, HH:mm")
                   }}</span>
                 </span>
               </router-link>
@@ -897,7 +898,7 @@
                 <span class="message-text" v-text="msg.text"></span>
                 <span class="message-chat-date">
                   <span v-if="msg.created_at">{{
-                    $filter.moment(msg.created_at ,"jYYYY/jMM/jDD, HH:mm")
+                    $filter.moment(msg.created_at, "jYYYY/jMM/jDD, HH:mm")
                   }}</span>
                 </span>
               </div>

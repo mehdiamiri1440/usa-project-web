@@ -250,10 +250,13 @@
               <div class="text-center no-product-buttons">
                 <router-link
                   :to="{ name: 'registerRequestBuyer' }"
-                  class="green-button"
-                  tag="button"
-                  >ثبت درخواست خرید</router-link
+                  v-slot="{ navigate }"
+                  custom
                 >
+                  <button @click="navigate" class="green-button">
+                    ثبت درخواست خرید
+                  </button>
+                </router-link>
 
                 <button class="green-button" @click.prevent="resetFilter()">
                   نمایش همه محصولات

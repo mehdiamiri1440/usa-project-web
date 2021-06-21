@@ -34,6 +34,9 @@
   overflow: hidden;
   position: relative;
   margin-left: 10px;
+  background-position: center;
+  background-size: cover;
+  background-color: #f2f2f2;
 }
 
 .user-contents {
@@ -255,15 +258,26 @@ li.score-item i {
     <div class="main-section">
       <ul v-if="!$parent.userDataLoader">
         <li class="user-info">
-          <div class="user-image">
-            <img
-              v-if="selectedContact.profile_photo"
-              :src="$parent.str + '/' + selectedContact.profile_photo"
-              :alt="selectedContact.first_name[0]"
-            />
-
-            <img v-else src="../../../../img/user-defult.png" />
-          </div>
+          <div
+            class="user-image"
+            v-if="selectedContact.profile_photo"
+            :style="{
+              backgroundImage:
+                'url(' +
+                $parent.str +
+                '/' +
+                selectedContact.profile_photo +
+                ')',
+            }"
+          ></div>
+          <div
+            class="user-image"
+            v-else
+            :style="{
+              backgroundImage:
+                'url(' + getBaseUrl() + 'assets/img/user-defult.png)',
+            }"
+          ></div>
           <div class="user-contents">
             <p
               :class="{
@@ -515,6 +529,9 @@ export default {
     };
   },
   methods: {
+    getBaseUrl() {
+      return getBase();
+    },
     init() {
       // if (!this.checkMobileWidth()) {
       this.isUserAuthorizedToPostComment();

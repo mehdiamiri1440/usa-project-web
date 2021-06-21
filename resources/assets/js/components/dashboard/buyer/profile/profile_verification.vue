@@ -355,20 +355,24 @@
       <router-link
         v-if="currentUser.user_info.is_buyer"
         :to="{ name: 'productList' }"
-        tag="button"
-        class="green-button"
+        v-slot="{ navigate }"
+        custom
       >
-        لیست محصولات
-        <i class="fa fa-arrow-left"></i>
+        <button @click="navigate" class="green-button">
+          لیست محصولات
+          <i class="fa fa-arrow-left"></i>
+        </button>
       </router-link>
       <router-link
         v-else
         :to="{ name: 'buyAdRequestsSeller' }"
-        tag="button"
-        class="green-button"
+        v-slot="{ navigate }"
+        custom
       >
-        درخواست های خرید
-        <i class="fa fa-arrow-left"></i>
+        <button @click="navigate" class="green-button">
+          درخواست های خرید
+          <i class="fa fa-arrow-left"></i>
+        </button>
       </router-link>
     </div>
   </section>

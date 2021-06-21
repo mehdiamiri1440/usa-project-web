@@ -10,6 +10,7 @@
   position: relative;
   align-items: center;
   z-index: 1;
+  margin-top: 20%;
 }
 
 .loading-container .lds-ring {
@@ -787,16 +788,18 @@
         </div>
         <router-link
           :to="{ path: '/profile/' + $parent.selectedContact.user_name }"
-          tag="div"
-          class="message-contact-title-img hidden-xs"
+          v-slot="{ navigate }"
+          custom
         >
-          <img
-            v-if="$parent.selectedContact.profile_photo"
-            :src="$parent.str + '/' + $parent.selectedContact.profile_photo"
-            :alt="$parent.selectedContact.first_name[0]"
-          />
+          <div @click="navigate" class="message-contact-title-img hidden-xs">
+            <img
+              v-if="$parent.selectedContact.profile_photo"
+              :src="$parent.str + '/' + $parent.selectedContact.profile_photo"
+              :alt="$parent.selectedContact.first_name[0]"
+            />
 
-          <img v-else src="../../../../img/user-defult.png" />
+            <img v-else src="../../../../img/user-defult.png" />
+          </div>
         </router-link>
 
         <router-link
@@ -881,10 +884,10 @@
                 </span>
                 <span class="message-chat-date">
                   <span v-if="msg.created_at">{{
-                     $filter.moment(msg.created_at,"jYYYY/jMM/jDD, HH:mm")
+                    $filter.moment(msg.created_at, "jYYYY/jMM/jDD, HH:mm")
                   }}</span>
                   <span v-else>{{
-                     $filter.moment(Date(),"jYYYY/jMM/jDD, HH:mm")
+                    $filter.moment(Date(), "jYYYY/jMM/jDD, HH:mm")
                   }}</span>
                   <div class="message-button-wrapper">
                     <button>
@@ -898,10 +901,10 @@
                 <span v-text="msg.text"></span>
                 <span class="message-chat-date">
                   <span v-if="msg.created_at">{{
-                     $filter.moment(msg.created_at,"jYYYY/jMM/jDD, HH:mm")
+                    $filter.moment(msg.created_at, "jYYYY/jMM/jDD, HH:mm")
                   }}</span>
                   <span v-else>{{
-                     $filter.moment(Date(),"jYYYY/jMM/jDD, HH:mm")
+                    $filter.moment(Date(), "jYYYY/jMM/jDD, HH:mm")
                   }}</span>
                 </span>
               </div>
@@ -911,10 +914,10 @@
               <span v-text="msg.text"></span>
               <span class="message-chat-date">
                 <span v-if="msg.created_at">{{
-                   $filter.moment(msg.created_at,"jYYYY/jMM/jDD, HH:mm")
+                  $filter.moment(msg.created_at, "jYYYY/jMM/jDD, HH:mm")
                 }}</span>
                 <span v-else>{{
-                   $filter.moment(Date(),"jYYYY/jMM/jDD, HH:mm")
+                  $filter.moment(Date(), "jYYYY/jMM/jDD, HH:mm")
                 }}</span>
                 <span
                   class="check-items"
@@ -954,9 +957,15 @@
           </p>
           <div class="notice-actions">
             <button @click="$parent.setNoticeCookie()">متوجه شدم</button>
-            <router-link tag="button" :to="{ name: 'verificationInfo' }">
-              <i class="fa fa-info"></i>
-              اطلاعات بیشتر
+            <router-link
+              v-slot="{ navigate }"
+              custom
+              :to="{ name: 'verificationInfo' }"
+            >
+              <button @click="navigate">
+                <i class="fa fa-info"></i>
+                اطلاعات بیشتر
+              </button>
             </router-link>
           </div>
         </li>

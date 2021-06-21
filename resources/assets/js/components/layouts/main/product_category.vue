@@ -291,23 +291,15 @@ li.active a::after {
 }
 
 .load-more-button button {
-  border: 2px solid;
-
+  border: 1px solid;
   padding: 15px 30px;
-
   height: initial;
-
   background: #fff;
-
   position: relative;
-
   top: 0;
-
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0, 0.2);
-
   transition: 200ms;
-
   color: #00c569;
+  border-radius: 12px;
 }
 
 .load-more-button button:hover {

@@ -191,12 +191,14 @@
 
         <div class="success-actions pull-left">
           <router-link
-            class="text-rtl"
             :to="{ path: 'messenger/contacts' }"
-            tag="button"
+            v-slot="{ navigate }"
+            custom
           >
-            <i class="fa fa-comment-alt"></i>
-            مشاهده پیام ها
+            <button @click="navigate" class="text-rtl">
+              <i class="fa fa-comment-alt"></i>
+              مشاهده پیام ها
+            </button>
           </router-link>
         </div>
       </section>

@@ -161,11 +161,13 @@ li:nth-of-type(2n + 1) .user-items-wrapper {
           <i class="fa fa-users"></i>
           <p>هنوز کاربری شماره تماس شما را ندیده است</p>
           <router-link
-            tag="button"
+            v-slot="{ navigate }"
+            custom
             :to="{ name: 'showNumberGuideSeller' }"
-            class="green-button"
           >
-            راهنمای نمایش اطلاعات تماس
+            <button @click="navigate" class="green-button">
+              راهنمای نمایش اطلاعات تماس
+            </button>
           </router-link>
         </div>
         <ul v-else>

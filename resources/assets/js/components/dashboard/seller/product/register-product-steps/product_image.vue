@@ -193,11 +193,11 @@ label {
           class="submit-button disabled pull-left"
           :class="{
             active:
-              !this.errors.images_count[0] &&
-              this.$parent.productFiles[0] &&
-              !this.errors.images_type &&
+              !errors.images_count[0] &&
+              $parent.productFiles[0] &&
+              !errors.images_type &&
               !isCompressor &&
-              !this.errors.images_size,
+              !errors.images_size,
           }"
           :disabled="isCompressor"
           @click.prevent="submitImages()"

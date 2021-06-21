@@ -1086,7 +1086,9 @@ p.response-rate span {
                         data-container="body"
                         data-toggle="popover"
                         data-placement="bottom"
-                        :data-content="verifiedUserContent"
+                        :data-content="
+                          $store.state.routeStore.verifiedUserContent
+                        "
                         title
                       >
                         <i class="fa fa-certificate"></i>

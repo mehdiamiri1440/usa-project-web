@@ -595,7 +595,7 @@ li.static-item > button i {
           <i class="fa fa-times"></i>
         </button>
       </div>
-      <div v-if="$parent.userType" class="contacts-switch-buttons-wrapper">
+      <div v-if="userType" class="contacts-switch-buttons-wrapper">
         <div class="switch-button-item">
           <button class="contact-button active">
             <i class="fa fa-star"></i>
@@ -606,11 +606,13 @@ li.static-item > button i {
         <div class="switch-button-item">
           <router-link
             :to="{ name: 'messagesSeller' }"
-            tag="button"
-            class="contact-button"
+            custom
+            v-slot="{ navigate }"
           >
-            <i class="fa fa-user"></i>
-            مخاطبین من
+            <button @click="navigate" class="contact-button">
+              <i class="fa fa-user"></i>
+              مخاطبین من
+            </button>
           </router-link>
         </div>
       </div>
@@ -655,10 +657,10 @@ li.static-item > button i {
         </p>
         <router-link
           :to="{ name: 'registerProductSeller' }"
-          tag="button"
-          class="buyad-button"
+          v-slot="{ navigate }"
+          custom
         >
-          ثبت محصول
+          <button @click="navigate" class="buyad-button">ثبت محصول</button>
         </router-link>
       </div>
     </div>
@@ -1042,12 +1044,14 @@ li.static-item > button i {
           <li class="col-xs-12 static-item">
             <i class="fa fa-list-alt"></i>
             <router-link
-              tag="button"
-              class="buyad-button"
+              v-slot="{ navigate }"
+              custom
               :to="{ name: 'buyAdRequestsSeller' }"
             >
-              همه درخواست های خرید
-              <i class="fa fa-arrow-left"></i>
+              <button @click="navigate" class="buyad-button">
+                همه درخواست های خرید
+                <i class="fa fa-arrow-left"></i>
+              </button>
             </router-link>
           </li>
         </ul>
@@ -1061,6 +1065,7 @@ li.static-item > button i {
 import swal from "../../../sweetalert.min.js";
 
 export default {
+  props: ["userType"],
   data: function () {
     return {
       buyAds: "",

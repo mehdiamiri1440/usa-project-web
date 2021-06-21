@@ -282,7 +282,7 @@
 <template>
   <section
     class="main-content col-xs-12"
-    v-if="!$parent.currentUser.user_info.is_verified"
+    v-if="!currentUser.user_info.is_verified"
   >
     <div class="row title-wrapper">
       <div class="section-title" v-if="currentStep >= 0 && currentStep <= 2">
@@ -353,22 +353,26 @@
     </div>
     <div v-if="currentStep == 3" class="main-button-wrapper">
       <router-link
-        v-if="$parent.currentUser.user_info.is_buyer"
+        v-if="currentUser.user_info.is_buyer"
         :to="{ name: 'productList' }"
-        tag="button"
-        class="green-button"
+        v-slot="{ navigate }"
+        custom
       >
-        لیست محصولات
-        <i class="fa fa-arrow-left"></i>
+        <button @click="navigate" class="green-button">
+          لیست محصولات
+          <i class="fa fa-arrow-left"></i>
+        </button>
       </router-link>
       <router-link
         v-else
         :to="{ name: 'buyAdRequestsSeller' }"
-        tag="button"
-        class="green-button"
+        v-slot="{ navigate }"
+        custom
       >
-        درخواست های خرید
-        <i class="fa fa-arrow-left"></i>
+        <button @click="navigate" class="green-button">
+          درخواست های خرید
+          <i class="fa fa-arrow-left"></i>
+        </button>
       </router-link>
     </div>
   </section>
@@ -399,6 +403,7 @@ export default {
     UserImage,
     DocumentImage,
   },
+  props: ["currentUser"],
   data: function () {
     return {
       currentStep: 0,

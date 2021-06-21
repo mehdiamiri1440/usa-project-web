@@ -257,10 +257,7 @@
 
             <div class="modal-body col-xs-12 col-lg-8 col-lg-offset-2">
               <div class="row">
-                <pricing-contents
-                  justPro="false"
-                  :offer-time="this.offerTime"
-                />
+                <pricing-contents justPro="false" :offer-time="offerTime" />
               </div>
             </div>
           </div>
@@ -319,8 +316,8 @@
       :logout="'/logout'"
       :user-id="userId"
       :messageCount="messageCount"
-      :is-required-fix-alert="this.isRequiredFixAlert"
-      :offer-time="this.offerTime"
+      :is-required-fix-alert="isRequiredFixAlert"
+      :offer-time="offerTime"
     ></header-dash-seller>
 
     <div
@@ -334,9 +331,9 @@
       <router-view
         :str="storagePath"
         :assets="assets"
-        :user-type="currentUser.user_info.is_seller"
+        :user-type="isSeller"
         :current-user="currentUser"
-        :offer-time="this.offerTime"
+        :offer-time="offerTime"
       ></router-view>
     </div>
 
@@ -345,12 +342,14 @@
       class="fixed-action-button-wrapper hidden-sm hidden-md hidden-lg"
     >
       <router-link
-        tag="button"
         :to="{ name: 'messagesRequestSeller' }"
-        class="fixed-action"
+        v-slot="{ navigate }"
+        custom
       >
-        <i class="fa fa-list-alt"></i>
-        <span> خریداران </span>
+        <button @click="navigate" class="fixed-action">
+          <i class="fa fa-list-alt"></i>
+          <span> خریداران </span>
+        </button>
       </router-link>
     </div>
   </div>
@@ -368,13 +367,7 @@ export default {
     "pricing-contents": pricingContents,
     PromotionModal,
   },
-  props: [
-    "userId",
-    "isSeller",
-    "assets",
-    "storagePath",
-    "messageCount",
-  ],
+  props: ["userId", "isSeller", "assets", "storagePath", "messageCount"],
   data: function () {
     return {
       linkHideStates: [
@@ -442,11 +435,11 @@ export default {
 
       axios
         .post("/get_total_unread_messages_for_current_user")
-        .then(function (response) {
+        .then((response) => {
           let messageCount = response.data.msg_count;
           this.$store.state.messagesStore.messageCount = messageCount;
         })
-        .catch(function (error) {
+        .catch((error) => {
           console.log("error", error);
         });
 

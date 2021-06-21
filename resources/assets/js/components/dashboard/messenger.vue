@@ -492,6 +492,7 @@ export default {
       this.loadContactList();
     },
     openChannel() {
+      this.selectedContact = "";
       this.channelInfo.unread_contents = 0;
       this.channelInfo.last_content_title = "";
       this.channelInfo.last_content_date = "";
@@ -505,6 +506,9 @@ export default {
       );
     },
     loadChatHistory: function (contact, index, isUpdate) {
+      if (contact == this.selectedContact) {
+        return;
+      }
       this.isChanleActive = false;
       if (!isUpdate) {
         this.selectedContact = "";

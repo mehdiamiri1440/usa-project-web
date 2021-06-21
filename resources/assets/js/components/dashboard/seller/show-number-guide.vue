@@ -120,11 +120,13 @@ ul.list-info-wrapper li::after {
       <div class="info-wrapper upgrade">
         <p>ارتقا عضویت در باسکول</p>
         <router-link
-          tag="button"
-          class="green-button bg-light-green"
+          v-slot="{ navigate }"
+          custom
           :to="{ name: 'dashboardPricingTableSeller' }"
         >
-          ارتقا عضویت
+          <button @click="navigate" class="green-button bg-light-green">
+            ارتقا عضویت
+          </button>
         </router-link>
       </div>
       <div class="info-wrapper">
