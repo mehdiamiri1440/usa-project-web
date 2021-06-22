@@ -595,7 +595,8 @@ class LeadDistributorBot implements ShouldQueue
 
         $price_msg = '';
         if(Carbon::parse($product['user_info']->created_at)->diffInDays(Carbon::now()) <= 7){
-            $price_msg = "حدود کف قیمت برای هر کیلو {$product['main']->min_sale_price } تومان است." . "\n\n";
+            $price = number_format($product['main']->min_sale_price);
+            $price_msg = "حدود کف قیمت برای هر کیلو {$price} تومان است." . "\n\n";
         }
 
         $msg = "سلام" . "\n";
