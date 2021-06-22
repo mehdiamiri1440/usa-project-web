@@ -556,7 +556,7 @@ export default {
               name: "registerProductLimit",
             });
           } else {
-            eventBus.$emit("buyAdbuttonActive", false);
+            self.$store.state.routeStore.buyAdbuttonActive = false
             self.goToStep(1);
           }
         });

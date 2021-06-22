@@ -26,7 +26,6 @@
       :storage="storagePath"
       :assets="assets"
       :logout="'/logout'"
-      :search-text="searchText"
     ></header-dash-buyer>
 
     <div
@@ -55,7 +54,6 @@ export default {
   props: ["userId", "isSeller", "assets", "storagePath"],
   data: function () {
     return {
-      searchText: "",
       currentUser: {
         profile: {
           is_company: "",

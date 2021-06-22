@@ -47,6 +47,11 @@
   color: #fff;
   border-radius: 50px;
 }
+
+.image-count-item i {
+  margin-left: 5px;
+}
+
 .spinner-border {
   position: absolute;
   left: calc(50% - 20px);
@@ -181,6 +186,7 @@
 
       <div v-if="imageCount" class="image-count-item">
         <i class="fas fa-images"></i>
+
         <span v-text="imageCount"></span>
       </div>
       <h3 class="article-title">

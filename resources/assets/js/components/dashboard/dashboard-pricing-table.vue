@@ -40,7 +40,7 @@
       <div class="row">
         <PricingTableSellerContent
           :active-users="activeUsers"
-          :offer-time="this.offerTime"
+          :offer-time="offerTime"
         />
       </div>
     </section>

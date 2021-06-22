@@ -790,17 +790,6 @@ export default {
     localStorage.removeItem("showSnapShot");
   },
   watch: {
-    searchValueText: function (value) {
-      this.$parent.searchText = value;
-    },
-    "$parent.searchText"(text) {
-      this.searchValueText = text;
-    },
-    // resetTextSearch: function (value) {
-    //   if (value == true) {
-    //     this.searchValueText = "";
-    //   }
-    // },
     $route(route) {
       if (
         !this.$parent.currentUser.user_info.is_verified &&

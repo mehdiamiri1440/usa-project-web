@@ -721,7 +721,7 @@ a.profile-info-wrapper:hover {
 <template>
   <div>
     <!-- loading -->
-    <!-- <div
+    <div
       :class="{
         'loader-wrapper': !$store.state.dashboardStore.submiting,
         'loader-display': $store.state.dashboardStore.submiting,
@@ -734,7 +734,7 @@ a.profile-info-wrapper:hover {
         />
         <p dir="rtl">در حال بارگذاری...</p>
       </div>
-    </div> -->
+    </div>
     <!-- Modals -->
 
     <!-- <div class="container">

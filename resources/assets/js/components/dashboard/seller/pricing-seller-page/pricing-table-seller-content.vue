@@ -458,7 +458,7 @@
             </div>
           </div>
           <!-- show pricing items -->
-          <pricing-contents justPro="false" :offer-time="this.offerTime" />
+          <pricing-contents justPro="false" :offer-time="offerTime" />
 
           <!-- after pricing items  -->
           <div class="col-xs-12 text-center mobile-padding-5">

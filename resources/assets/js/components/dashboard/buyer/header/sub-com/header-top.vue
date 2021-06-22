@@ -800,7 +800,7 @@ a.profile-info-wrapper:focus {
       <div class="search-box col-sm-6 col-xs-12 col-lg-4 pull-right">
         <input
           type="text"
-          v-model="$parent.searchValueText"
+          v-model="$store.state.dashboardStore.specialProductSearchText"
           placeholder="اینجا جستجو کنید"
         />
 

@@ -113,7 +113,7 @@ export default {
   },
   mounted: function () {
     $("#report-modal").on("show.bs.modal", (e) => {
-      this.handleBackKeys();
+      // this.handleBackKeys();
       if (!this.reportOptions) {
         this.init();
       }

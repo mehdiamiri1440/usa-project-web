@@ -14,6 +14,7 @@ const state = {
         title: "بازارگاه کشاورزی",
     },
     productUserInfo: '',
+    buyAdbuttonActive: true,
     verifiedUserContent:
         "<div class='tooltip-wrapper text-rtl'>اطلاعات هویتی این کاربر احراز شده است.<br/><a href='/verification'>اطلاعات بیشتر</a> </div>",
 

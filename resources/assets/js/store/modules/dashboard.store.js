@@ -5,6 +5,7 @@ const state = {
     subHeader: "",
     submiting: false,
     uploadPercentage: 0,
+    specialProductSearchText: ''
 }
 
 

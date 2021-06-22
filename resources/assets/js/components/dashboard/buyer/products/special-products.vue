@@ -66,7 +66,7 @@
 }
 
 .load-more-button button {
-  border: 2px solid;
+  border: 1px solid;
 
   padding: 15px 30px;
 
@@ -78,7 +78,7 @@
 
   top: 0;
 
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
 
   transition: 200ms;
 
@@ -206,7 +206,7 @@
           </div>
           <div
             class="load-more-button col-xs-12"
-            v-if="$parent.searchText === '' && continueToLoadProducts === true"
+            v-if="searchText === '' && continueToLoadProducts === true"
           >
             <button class="btn btn-loader" @click.prevent="feed()">
               <div class="btn-content">
@@ -233,7 +233,7 @@
 
         <div
           class="col-xs-12"
-          v-else-if="products.length == 0 && $parent.searchText && !loading"
+          v-else-if="products.length == 0 && searchText && !loading"
         >
           <div class="wrapper_no_pro">
             <div class="content_no_pic">
@@ -318,7 +318,7 @@
 <script>
 import ProductGridArticle from "../../../layouts/main/product_components/Product_grid_article";
 // import ProductGridArticle from "./product_components/Product_grid_article";
-
+import { mapState } from "vuex";
 export default {
   components: {
     ProductGridArticle,
@@ -346,13 +346,18 @@ export default {
       searchTextTimeout: null,
     };
   },
+  computed: mapState({
+    searchText: (state) => {
+      return state.dashboardStore.specialProductSearchText;
+    },
+  }),
   methods: {
     init: function () {
       var self = this;
 
       this.loading = true;
 
-      this.$parent.searchText = "";
+      this.$store.state.dashboardStore.specialProductSearchText = "";
 
       axios
         .post("/user/profile_info")
@@ -379,7 +384,7 @@ export default {
 
       var self = this;
 
-      if (this.$parent.searchText === "" && this.continueToLoadProducts) {
+      if (this.searchText === "" && this.continueToLoadProducts) {
         this.loadMoreActive = true;
         this.productCountInPage += this.productCountInEachLoad;
 
@@ -425,8 +430,8 @@ export default {
 
       searchObject.special_products = true;
 
-      if (this.$parent.searchText) {
-        searchObject.search_text = this.$parent.searchText;
+      if (this.searchText) {
+        searchObject.search_text = this.searchText;
       }
 
       if (jQuery.isEmptyObject(searchObject)) {
@@ -448,7 +453,7 @@ export default {
     },
     resetFilter: function () {
       // reset text data from header for syncing
-      // eventBus.$emit("resetTextSearch", true);
+      this.$store.state.dashboardStore.specialProductSearchText = "";
     },
   },
   mounted() {
@@ -459,7 +464,7 @@ export default {
     gtag("config", "UA-129398000-1", { page_path: "/my-products" });
   },
   watch: {
-    "$parent.searchText": function (value) {
+    searchText: function (value) {
       var self = this;
 
       clearTimeout(this.searchTextTimeout);
@@ -468,7 +473,7 @@ export default {
         self.registerComponentStatistics(
           "product-list",
           "search-text",
-          self.$parent.searchText
+          self.searchText
         );
 
         self.applyFilter();

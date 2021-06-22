@@ -1513,7 +1513,6 @@ export default {
         },
         photos: [],
       },
-      searchText: "",
       provinceId: "",
       categoryId: "",
       subCategoryId: "",
@@ -1537,8 +1536,8 @@ export default {
     };
   },
   computed: mapState({
-    globalSearchText: (state) => {
-      return state.routeStore.searchText;
+    searchText: (state) => {
+      return state.routeStore.textSearch;
     },
   }),
   created() {
@@ -2041,23 +2040,13 @@ export default {
     this.stopLoader();
   },
   watch: {
-    globalSearchText(text) {
-      this.searchText = text;
-    },
     searchText: function (value) {
       var self = this;
-
-      this.$store.state.routeStore.textSearch = value;
 
       clearTimeout(this.searchTextTimeout);
 
       this.searchTextTimeout = setTimeout(function () {
-        self.registerComponentStatistics(
-          "product-list",
-          "search-text",
-          self.searchText
-        );
-
+        self.registerComponentStatistics("product-list", "search-text", value);
         self.applyFilter();
       }, 1500);
     },
@@ -2066,7 +2055,9 @@ export default {
         this.updateMeta();
       }
       if (this.$route.query.s) {
-        this.searchText = this.$route.query.s.split("+").join(" ");
+        this.$store.state.routeStore.searchText = this.$route.query.s
+          .split("+")
+          .join(" ");
       }
     },
     "$parent.productByResponseRate": function () {

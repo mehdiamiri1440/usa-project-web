@@ -804,7 +804,6 @@
 
 
 <script>
-// import { eventBus } from "../../../../../router/router";
 export default {
   props: ["justPro", "offerTime"],
   data: function () {

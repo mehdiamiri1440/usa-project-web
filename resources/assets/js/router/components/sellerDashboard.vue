@@ -360,7 +360,7 @@
 import HeaderDashSeller from "../../components/dashboard/seller/header/header";
 import pricingContents from "../../components/dashboard/seller/pricing-seller-page/pricing-tables/pricing-package-contents";
 import PromotionModal from "../../components/layouts/main/promotion-modal";
-
+import { mapState } from "vuex";
 export default {
   components: {
     "header-dash-seller": HeaderDashSeller,
@@ -404,6 +404,11 @@ export default {
       verificationAlert: false,
     };
   },
+  computed: mapState({
+    buyAdbuttonActive(state) {
+      return state.routeStore.buyAdbuttonActive;
+    },
+  }),
   methods: {
     init: function () {
       this.checkButtonIsHide();
@@ -623,13 +628,14 @@ export default {
         $("#pricing-modal").modal("show");
       }
     },
+    buyAdbuttonActive(value) {
+      this.buttonActiveInSteps = value;
+    },
   },
   mounted: function () {
     this.init();
 
-    // eventBus.$on("buyAdbuttonActive", (event) => {
-    //   this.buttonActiveInSteps = event;
-    // });
+    // this section for factor payment
 
     // eventBus.$on("paymentData", (event) => {
     //   this.paymentData = event;

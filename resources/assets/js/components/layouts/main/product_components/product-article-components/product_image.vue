@@ -98,6 +98,10 @@
   color: #fff;
 }
 
+.image-count-item i {
+  margin-left: 5px;
+}
+
 @media screen and (max-width: 555px) {
   .main-article-image {
     width: 90px;
@@ -122,6 +126,7 @@
 
     <div v-if="imageCount" class="image-count-item">
       <i class="fas fa-images"></i>
+
       <span v-text="imageCount"></span>
     </div>
   </div>
