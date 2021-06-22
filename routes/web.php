@@ -17,9 +17,6 @@ use App\Models\profile;
 use Illuminate\Http\Request;
 
 use App\Jobs\sendSMS;
-use App\Jobs\LeadHandler\LeadDistributorBot;
-use App\Jobs\LeadHandler\LeadGenerator;
-use App\Jobs\LeadHandler\ShareCalculator;
 
 
 
@@ -1124,17 +1121,6 @@ Route::get('/shared-profile/{username}',[
     'uses' => 'Accounting\profile_controller@get_user_shared_profile_info'
 ])->name('sharedProfile')->where("username","[A-Za-z0-9_]+$");
 
-Route::get('/lead',function(){
-    LeadDistributorBot::dispatch();
-});
-
-Route::get('/lead-generator',function(){
-    LeadGenerator::dispatch();
-});
-
-Route::get('/calc',function(){
-    ShareCalculator::dispatch();
-});
 //-----------------------------------------------------
 //    in code bayad bad az har chizi ke any dare biad
 Route::get('/{any}', function (Request $request) {
