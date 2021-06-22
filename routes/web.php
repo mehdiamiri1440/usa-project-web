@@ -23,6 +23,10 @@ use App\Jobs\LeadHandler\ShareCalculator;
 
 
 
+Route::get('/test', function () {
+            return view('layout.product-view');
+        });
+
 Route::get('/product-list',[
     'uses' => 'Product\product_list_controller@get_product_list_blade',
 ]);
