@@ -35,10 +35,10 @@ class SendFCMNotification implements ShouldQueue
      */
     public function handle()
     {
-        $topicResponse = FCM::sendToTopic($this->topic, null, $this->notification, $this->data);
+        // $topicResponse = FCM::sendToTopic($this->topic, null, $this->notification, $this->data);
 
-        $topicResponse->isSuccess();
-        $topicResponse->shouldRetry();
-        $topicResponse->error();
+        // $topicResponse->isSuccess();
+        // $topicResponse->shouldRetry();
+        // $topicResponse->error();
     }
 }
