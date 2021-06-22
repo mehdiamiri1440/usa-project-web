@@ -48,9 +48,9 @@ class Kernel extends ConsoleKernel
         $send_sms_notification_for_new_unread_messages_job = (new sendNewMessageSMSNotification())
             ->onQueue('sms');
 
-        $schedule->job($send_sms_notification_for_new_unread_messages_job)
-            ->hourly()
-            ->between('9:00', '23:00');
+        // $schedule->job($send_sms_notification_for_new_unread_messages_job)
+        //     ->hourly()
+        //     ->between('9:00', '23:00');
 
         $schedule->call(function () {
             DB::table('daily_sms_blacklists')->delete();
@@ -81,9 +81,6 @@ class Kernel extends ConsoleKernel
         $schedule->job($cache_product_list_job)
                 ->everyTenMinutes();
 
-                        // $retention_reminder_notifier_job = new RetentionReminder();
-                        // $schedule->job($retention_reminder_notifier_job)
-                        //         ->monthlyOn(15, '14:30');
 
         $product_register_reminder_job = new ProductRegisterReminder();
         $schedule->job($product_register_reminder_job)
@@ -113,20 +110,20 @@ class Kernel extends ConsoleKernel
         // $schedule->job($daily_product_avertisement_for_premium_sellers)
         //                 ->dailyAt('10:45');
 
-        $daily_product_avertisement_for_first_day_after_register_product = new AdvertiseProductsPeriodically(1,false,false);
-        $schedule->job($daily_product_avertisement_for_first_day_after_register_product)
-                        ->dailyAt('16:45');
+        // $daily_product_avertisement_for_first_day_after_register_product = new AdvertiseProductsPeriodically(1,false,false);
+        // $schedule->job($daily_product_avertisement_for_first_day_after_register_product)
+        //                 ->dailyAt('16:45');
 
-        $daily_product_avertisement_for_third_day_after_register_product = new AdvertiseProductsPeriodically(3,false,false);
-        $schedule->job($daily_product_avertisement_for_third_day_after_register_product)
-                        ->dailyAt('17:45');
+        // $daily_product_avertisement_for_third_day_after_register_product = new AdvertiseProductsPeriodically(3,false,false);
+        // $schedule->job($daily_product_avertisement_for_third_day_after_register_product)
+        //                 ->dailyAt('17:45');
 
-        $daily_buyAds_advertisement = new AdvertiseBuyAdsPeriodically();
-        $schedule->job($daily_buyAds_advertisement)
-                        ->dailyAt('8:13');
+        // $daily_buyAds_advertisement = new AdvertiseBuyAdsPeriodically();
+        // $schedule->job($daily_buyAds_advertisement)
+        //                 ->dailyAt('8:13');
 
-        $schedule->job($daily_buyAds_advertisement)
-                        ->dailyAt('20:13');
+        // $schedule->job($daily_buyAds_advertisement)
+        //                 ->dailyAt('20:13');
 
 
         $user_automatic_blocking_job = new MessagingAnomalyDetection();

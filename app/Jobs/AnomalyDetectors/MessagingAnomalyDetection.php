@@ -144,7 +144,6 @@ class MessagingAnomalyDetection implements ShouldQueue
                                 ->whereRaw("CHAR_LENGTH(text) >= 250 and created_at between '$from' and '$until'")
                                 ->get();
 
-        var_dump($long_messages);
 
 
         $user_ids = [];
