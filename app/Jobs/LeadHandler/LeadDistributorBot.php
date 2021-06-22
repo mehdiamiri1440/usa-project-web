@@ -30,7 +30,7 @@ class LeadDistributorBot implements ShouldQueue
     protected $time_frame;
 
     protected $words_blacklist = [
-        'در', 'به', 'را', 'از', 'و', 'برای', 'تا', 'که', 'بر', 'بی', 'مگر','درجه'
+        'در', 'به', 'را', 'از', 'و', 'برای', 'تا', 'که', 'بر', 'بی', 'مگر','درجه','یک'
     ];
 
     protected $selected_products = [];
@@ -224,7 +224,7 @@ class LeadDistributorBot implements ShouldQueue
 
         $sellers_used_share_array = $this->get_sellers_used_share_info(array_unique($seller_ids),$category_id);
 
-        $last_acceptable_date = Carbon::now()->subDays(50);
+        $last_acceptable_date = Carbon::now()->subDays(7);
 
         $package_owner_sellers_products = [];
         $verified_sellers_products = [];
@@ -458,7 +458,7 @@ class LeadDistributorBot implements ShouldQueue
 
         foreach ($words as $word) {
             $index = array_search($word, $this->words_blacklist);
-            if ($index === false) {
+            if ($index === false && strlen($word) >= 2) {
                 $result[] = $word;
             }
         }
@@ -617,6 +617,20 @@ class LeadDistributorBot implements ShouldQueue
             if($item['product']['user_info']->id == $seller_id && $item['buyer_id'] == $buyer_id){
                 return true;
             }
+        }
+
+        $old_msgs_count = DB::table('messages')
+                                ->where(function($q) use($seller_id,$buyer_id){
+                                    return $q->where('sender_id',$seller_id)
+                                                ->where('receiver_id',$buyer_id);
+                                })->orWhere(function($q) use($seller_id,$buyer_id){
+                                    return $q->where('sender_id',$buyer_id)
+                                                ->where('receiver_id',$seller_id);
+                                })->get()
+                                ->count();
+
+        if($old_msgs_count > 0){
+            return true;
         }
 
         return false;

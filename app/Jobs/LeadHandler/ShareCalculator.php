@@ -43,7 +43,7 @@ class ShareCalculator implements ShouldQueue
 
         $total_leads = DB::table('leads')
                             ->selectRaw("count(distinct(id)) as cnt,category_id")
-                            ->whereBetween('created_at',[Carbon::now()->subDays(60),Carbon::now()])
+                            ->whereBetween('created_at',[Carbon::now()->subDays($this->time_period_in_days),Carbon::now()])
                             ->groupBy('category_id')
                             ->get();
 
