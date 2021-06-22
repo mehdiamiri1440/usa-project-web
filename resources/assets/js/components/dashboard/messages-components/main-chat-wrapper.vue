@@ -238,10 +238,16 @@
   padding: 5px 10px;
   display: block;
 }
+
+.message-text {
+  white-space: pre-line;
+}
+
 .message-wrapper .chat-page .message-item-wrapper.message-receive {
   float: left;
   background: #fff;
   border-radius: 0 8px 8px 8px;
+  min-width: 150px;
 }
 .message-wrapper .chat-page .message-receive::after {
   content: "";
@@ -601,6 +607,37 @@
   color: #23ae95;
 }
 
+.messenger-notice .notice-actions button {
+  width: 100%;
+  text-align: right;
+  background: none;
+  padding: 5px 0;
+}
+.messenger-notice .notice-actions button:hover {
+  background: initial;
+  border-color: initial;
+  color: #21ad92;
+}
+.message-button-wrapper {
+  margin: 0 -10px -5px;
+  overflow: hidden;
+  border-radius: 0 0 8px 8px;
+}
+.message-button-wrapper button {
+  display: block;
+  width: 100%;
+  background: #21ad93;
+  text-align: center;
+  color: #fff;
+  border: none;
+  font-size: 14px;
+  padding: 5px;
+  margin-top: 8px;
+}
+.message-button-wrapper.link-button button {
+  background: #1da1f2;
+}
+
 @media screen and (max-width: 1199px) {
   .message-wrapper .message-contact-title {
     position: relative;
@@ -630,35 +667,9 @@
   .notice-actions {
     width: 100%;
   }
-  .messenger-notice .notice-actions button {
-    width: 100%;
-    text-align: right;
-    background: none;
-    padding: 5px 0;
-  }
-  .messenger-notice .notice-actions button:hover {
-    background: initial;
-    border-color: initial;
-    color: #21ad92;
-  }
-  .message-button-wrapper {
-    margin: 0 -10px -5px;
-    overflow: hidden;
-    border-radius: 0 0 4px 4px;
-  }
-  .message-button-wrapper button {
-    display: block;
-    width: 100%;
-    background: #21ad93;
-    text-align: center;
-    color: #fff;
-    border: none;
-    font-size: 14px;
-    padding: 5px;
-    margin-top: 8px;
-  }
+
   .message-button-wrapper button i {
-    font-size: 11px;
+    font-size: 12px;
   }
   .is-phone-active-wrapper {
     min-width: 200px;
@@ -888,14 +899,14 @@
                   }}</span>
                   <div class="message-button-wrapper">
                     <button>
-                      <i class="fa fa-phone-alt"></i>
                       تماس
+                      <i class="fa fa-phone-alt"></i>
                     </button>
                   </div>
                 </span>
               </a>
-              <div class="message-content-wrapper hidden-xs">
-                <span v-text="msg.text"></span>
+              <div class="hidden-xs">
+                <span class="message-text" v-text="msg.text"></span>
                 <span class="message-chat-date">
                   <span v-if="msg.created_at">{{
                     msg.created_at | moment("jYYYY/jMM/jDD, HH:mm")
@@ -906,9 +917,39 @@
                 </span>
               </div>
             </div>
+            <div
+              v-else-if="
+                msg.p_id &&
+                !checkMessageListClass(msg.sender_id) &&
+                $parent.currentUser.user_info.is_buyer
+              "
+              class="message-content-wrapper is-phone-active-wrapper"
+            >
+              <!--msg.created_at | moment("jYY/jMM/jDD, HH:mm") -->
+              <div>
+                <span class="message-text" v-text="msg.text"></span>
+
+                <span class="message-chat-date">
+                  <span v-if="msg.created_at">{{
+                    msg.created_at | moment("jYYYY/jMM/jDD, HH:mm")
+                  }}</span>
+                  <span v-else>{{
+                    Date() | moment("jYYYY/jMM/jDD, HH:mm")
+                  }}</span>
+                  <div class="message-button-wrapper link-button">
+                    <button @click.prevent="openProduct(msg.p_id)">
+                      جزئیات محصول
+                      <i v-if="!openProductLoader" class="fa fa-link"></i>
+                      <i v-else class="fas fa-circle-notch fa-spin"></i>
+                    </button>
+                  </div>
+                </span>
+              </div>
+            </div>
 
             <div v-else class="message-content-wrapper">
-              <span v-text="msg.text"></span>
+              <span class="message-text" v-text="msg.text"></span>
+
               <span class="message-chat-date">
                 <span v-if="msg.created_at">{{
                   msg.created_at | moment("jYYYY/jMM/jDD, HH:mm")
@@ -1074,12 +1115,12 @@
 </template>
 
 <script>
-
 export default {
   data() {
     return {
       isVoiceRecord: false,
       isChat: false,
+      openProductLoader: false,
     };
   },
   methods: {
@@ -1156,6 +1197,25 @@ export default {
           $(".overlay-bg-guide").fadeOut();
         }, 1000);
       }
+    },
+    openProduct(productId) {
+      this.openProductLoader = true;
+      axios
+        .post("/get_product_by_id", { product_id: productId })
+        .then((response) => {
+          window.open(this.getProductUrl(response.data.product));
+          this.openProductLoader = false;
+        });
+    },
+    getProductUrl(product) {
+      return (
+        "/product-view/خرید-عمده-" +
+        product.main.sub_category_name.replace(" ", "-") +
+        "/" +
+        product.main.category_name.replace(" ", "-") +
+        "/" +
+        product.main.id
+      );
     },
   },
   mounted: function () {
