@@ -458,7 +458,7 @@ class LeadDistributorBot implements ShouldQueue
 
         foreach ($words as $word) {
             $index = array_search($word, $this->words_blacklist);
-            if ($index === false && strlen($word) >= 2) {
+            if ($index === false && strlen($word) >= 3) {
                 $result[] = $word;
             }
         }
