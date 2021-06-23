@@ -1590,7 +1590,6 @@ class product_controller extends Controller
                                                 ->file_path;
         }
 
-        var_dump($related_products);
         return view('layout.product-detail',[
             'product' => $product_related_data,
             'related_products' => $related_products
