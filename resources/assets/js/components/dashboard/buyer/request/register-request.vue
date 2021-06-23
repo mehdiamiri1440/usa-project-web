@@ -510,6 +510,7 @@ export default {
             last_name: product.last_name,
             profile_photo: profile_photo,
             user_name: product.user_name,
+            product_id: product.id,
           };
 
           eventBus.$emit("ChatInfo", contact);

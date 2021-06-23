@@ -494,6 +494,10 @@ export default {
           text: tempMsg,
         };
 
+        if (self.contactInfo.product_id) {
+          msgObject.product_id = self.contactInfo.product_id;
+        }
+
         self.chatMessages.push(msgObject);
         self.scrollToEnd(0);
 
@@ -513,7 +517,21 @@ export default {
             .catch(function (e) {
               //
             });
-        } else {
+        } else if (
+          self.contactInfo.product_id &&
+          self.contactInfo.product_id !== undefined &&
+          self.contactInfo.product_id != null
+        )
+          axios
+            .post("/send_reply_to_product", msgObject)
+            .then(function (response) {
+              self.isFirstMessageLoading = false;
+              self.loadChatHistory(self.contactInfo, -10);
+            })
+            .catch(function (e) {
+              //
+            });
+        else {
           axios
             .post("/messanger/send_message", msgObject)
             .then(function (response) {

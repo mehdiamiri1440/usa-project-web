@@ -520,6 +520,7 @@ export default {
         profile_photo: product.profile_info.profile_photo,
         user_name: product.user_info.user_name,
         product_name: productName,
+        product_id: product.main.id,
       };
 
       var self = this;
