@@ -61,7 +61,6 @@
                   <input type="submit" class="btn btn-primary" value="برو">
                 </div>
               </div>
-              
             </form>
             <div class="box-body">
               <table id="example1" class="table table-bordered table-striped">

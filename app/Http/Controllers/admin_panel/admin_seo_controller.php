@@ -64,11 +64,18 @@ class admin_seo_controller extends Controller
         return redirect()->route('admin_panel_load_meta_contents_list');
     }
 
-    public function load_meta_contents_list()
+    public function load_meta_contents_list(Request $request)
     {
-        $meta_records = DB::table('tags')
-                        ->orderBy('updated_at','desc')
-                        ->paginate(10);
+        $query = DB::table('tags')
+            ->orderBy('updated_at','desc');
+
+        if($request->filled('search')){
+            $text = strip_tags($request->search);
+
+            $query = $query->where('header','like',"%$text%");
+        }
+
+        $meta_records = $query->paginate(10);
 
         return view('admin_panel.categoryMetaDataList',[
             'meta_records' => $meta_records

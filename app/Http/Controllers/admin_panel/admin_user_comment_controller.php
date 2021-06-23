@@ -15,6 +15,7 @@ class admin_user_comment_controller extends Controller
                             ->join('myusers as a','a.id','=','user_comments.myuser_id')
                             ->join('myusers as b','b.id','=','user_comments.commenter_id')
                             ->where('confirmed',false)
+                            ->whereNotNull('user_comments.text')
                             ->select([
                                 'a.first_name as f_name',
                                 'a.last_name as l_name',
