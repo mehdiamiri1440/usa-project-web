@@ -276,6 +276,17 @@ class admin_buyAd_controller extends Controller
 
     protected function register_lead_info($buyAd)
     {
+        $recent_leads_count_in_this_category = DB::table('leads')
+                                        ->whereBetween('created_at',[Carbon::now()->subDays(1),Carbon::now()])
+                                        ->where('category_id',$buyAd->category_id)
+                                        ->where('buyer_id',$buyAd->myuser_id)
+                                        ->get()
+                                        ->count();
+
+        if($recent_leads_count_in_this_category > 0){
+            return null;
+        }
+
         $leads = [];
         $expiry_date = Carbon::now()->addDays(2); // 2 days after buyAd register
     
