@@ -28,6 +28,10 @@ Route::get('/product-list/category/{category_name}',[
     'uses' => 'Product\product_list_controller@get_product_list_blade',
 ])->name('product-list');
 
+Route::get('/product-view/{product_id}/{category_name}/{extra_text}',[
+    'uses' => 'Product\product_controller@get_product_blade',
+]);
+
 // Route::group(['prefix' => 'master'], function () {
 //     Route::get('/', function () {
 //         return view('layout.master');
