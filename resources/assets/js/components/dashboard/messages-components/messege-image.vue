@@ -2,6 +2,7 @@
 
 
 <style scoped>
+@import url("../../../../css/magnific-popup.css");
 .message-image {
   text-align: center;
   height: 445px;
