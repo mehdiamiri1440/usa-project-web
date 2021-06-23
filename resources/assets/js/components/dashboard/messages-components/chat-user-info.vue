@@ -487,7 +487,7 @@ li.score-item i {
 
       <div v-else class="text-center spinner-wrapper">
         <div class="spinner-border">
-          <span class="sr-only">Loading...</span>
+          <span class="sr-only"></span>
         </div>
       </div>
     </div>

@@ -10,6 +10,7 @@
   position: relative;
   align-items: center;
   z-index: 1;
+  margin-top: 20%;
 }
 
 .loading-container .lds-ring {
@@ -631,7 +632,7 @@
   color: #fff;
   border: none;
   font-size: 14px;
-  padding: 5px;
+  padding: 5px 15px;
   margin-top: 8px;
 }
 .message-button-wrapper.link-button button {
@@ -918,11 +919,7 @@
               </div>
             </div>
             <div
-              v-else-if="
-                msg.p_id &&
-                !checkMessageListClass(msg.sender_id) &&
-                $parent.currentUser.user_info.is_buyer
-              "
+              v-else-if="msg.p_id && !checkMessageListClass(msg.sender_id)"
               class="message-content-wrapper is-phone-active-wrapper"
             >
               <!--msg.created_at | moment("jYY/jMM/jDD, HH:mm") -->
@@ -938,7 +935,7 @@
                   }}</span>
                   <div class="message-button-wrapper link-button">
                     <button @click.prevent="openProduct(msg.p_id)">
-                      جزئیات محصول
+                      جزییات و تصاویر محصول
                       <i v-if="!openProductLoader" class="fa fa-link"></i>
                       <i v-else class="fas fa-circle-notch fa-spin"></i>
                     </button>
@@ -1203,7 +1200,10 @@ export default {
       axios
         .post("/get_product_by_id", { product_id: productId })
         .then((response) => {
-          window.open(this.getProductUrl(response.data.product));
+          var anchor = document.createElement("a");
+          anchor.href = this.getProductUrl(response.data.product);
+          anchor.target = "_blank";
+          anchor.click();
           this.openProductLoader = false;
         });
     },

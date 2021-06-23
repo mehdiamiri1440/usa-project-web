@@ -1,11 +1,14 @@
 <div class="user-info-section-wrapper">
+  @if($product['user_info']->active_pakage_type == 3)
+  <div
+    class="user-info-wrapper wrapper-bg active">
+    @else
     <div
-      v-if="$parent.product.user_info"
-      class="user-info-wrapper wrapper-bg"
-      :class="{ active: $parent.product.user_info.active_pakage_type == 3 }"
-    >
+    class="user-info-wrapper wrapper-bg ">
+    @endif
+  
       <a 
-        href="'/profile/' + $parent.product.user_info.user_name"
+        href="'/profile/' + <?php echo $product['user_info']->user_name ?>"
         class="user-information-link text-rtl"
       >
         <div class="user-information-content-image">

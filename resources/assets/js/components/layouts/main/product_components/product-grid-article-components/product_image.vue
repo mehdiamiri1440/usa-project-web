@@ -129,7 +129,7 @@
     ></div>
     <div v-show="!isImageLoad" class="text-center spinner-wrapper">
       <div class="spinner-border">
-        <span class="sr-only">Loading...</span>
+        <span class="sr-only"></span>
       </div>
     </div>
     <div class="image-wrapper-contents">

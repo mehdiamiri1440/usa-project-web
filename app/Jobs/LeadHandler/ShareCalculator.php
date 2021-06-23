@@ -43,7 +43,7 @@ class ShareCalculator implements ShouldQueue
 
         $total_leads = DB::table('leads')
                             ->selectRaw("count(distinct(id)) as cnt,category_id")
-                            ->whereBetween('created_at',[Carbon::now()->subDays(60),Carbon::now()])
+                            ->whereBetween('created_at',[Carbon::now()->subDays($this->time_period_in_days),Carbon::now()])
                             ->groupBy('category_id')
                             ->get();
 
@@ -94,6 +94,10 @@ class ShareCalculator implements ShouldQueue
         $x_coef_in_eq_2 = 1;
         $y_coef_in_eq_1 = $sellers_count_in_classes['class_4'] ;
         $y_coef_in_eq_2 = -1;
+
+        if(($x_coef_in_eq_1 + $x_coef_in_eq_2 * $sellers_count_in_classes['class_4']) == 0){
+            return [-1,-1];
+        }
 
         $x = ( ( (abs($base_record->upper_limit - $base_record->lower_limit) * $sellers_count_in_classes['class_4']) + $category_lead_info->cnt) - ($sellers_count_in_classes['class_1'] * config("subscriptionPakage.sellers-share-plus-count.1") + $sellers_count_in_classes['class_2'] * config("subscriptionPakage.sellers-share-plus-count.2") + $sellers_count_in_classes['class_3'] * config("subscriptionPakage.sellers-share-plus-count.3") ) ) / ($x_coef_in_eq_1 + $x_coef_in_eq_2 * $sellers_count_in_classes['class_4']);
         $y = $x - abs($base_record->upper_limit - $base_record->lower_limit);

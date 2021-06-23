@@ -17,15 +17,9 @@ use App\Models\profile;
 use Illuminate\Http\Request;
 
 use App\Jobs\sendSMS;
-use App\Jobs\LeadHandler\LeadDistributorBot;
-use App\Jobs\LeadHandler\LeadGenerator;
-use App\Jobs\LeadHandler\ShareCalculator;
 
 
 
-Route::get('/test', function () {
-            return view('layout.product-view');
-        });
 
 Route::get('/product-list',[
     'uses' => 'Product\product_list_controller@get_product_list_blade',
@@ -34,6 +28,10 @@ Route::get('/product-list',[
 Route::get('/product-list/category/{category_name}',[
     'uses' => 'Product\product_list_controller@get_product_list_blade',
 ])->name('product-list');
+
+Route::get('/product-view/{category_name}/{extra_text}/{product_id}',[
+    'uses' => 'Product\product_controller@get_product_blade',
+])->where('product_id','[0-9]+');
 
 // Route::group(['prefix' => 'master'], function () {
 //     Route::get('/', function () {
@@ -1128,17 +1126,6 @@ Route::get('/shared-profile/{username}',[
     'uses' => 'Accounting\profile_controller@get_user_shared_profile_info'
 ])->name('sharedProfile')->where("username","[A-Za-z0-9_]+$");
 
-Route::get('/lead',function(){
-    LeadDistributorBot::dispatch();
-});
-
-Route::get('/lead-generator',function(){
-    LeadGenerator::dispatch();
-});
-
-Route::get('/calc',function(){
-    ShareCalculator::dispatch();
-});
 //-----------------------------------------------------
 //    in code bayad bad az har chizi ke any dare biad
 Route::get('/{any}', function (Request $request) {

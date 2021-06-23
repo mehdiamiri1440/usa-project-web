@@ -51,6 +51,15 @@
           <div class="box">
             <div class="box-header">
               <h3 class="box-title">جدول داده ها</h3>
+                <form method="GET" action="{{route('admin_panel_load_meta_contents_list')}}">
+                  <div class="row">
+                    <div class="col-xs-4 col-xs-offset-4">
+                      <label>جستوجو‌ :‌ </label>
+                      <input type="text" name="search" placeholder="عنوان...">
+                      <input type="submit" class="btn btn-primary" value="برو">
+                    </div>
+                  </div>
+                </form>
             </div>
             <div class="row text-center">
                 <a href='/admin/add-category-meta-data-detail'>اضافه کردن اطلاعات جدید</a>

@@ -20,6 +20,9 @@ use DB;
 use App\Jobs\PhoneNumberAutoSend\ProductAutoDeleteForUnresponsiveSellers;
 use App\Jobs\Notifiers\AdvertiseProductsPeriodically;
 use App\Jobs\Notifiers\AdvertiseBuyAdsPeriodically;
+use App\Jobs\LeadHandler\LeadDistributorBot;
+use App\Jobs\LeadHandler\LeadGenerator;
+use App\Jobs\LeadHandler\ShareCalculator;
 
 
 class Kernel extends ConsoleKernel
@@ -129,6 +132,21 @@ class Kernel extends ConsoleKernel
         $user_automatic_blocking_job = new MessagingAnomalyDetection();
         $schedule->job($user_automatic_blocking_job)
                         ->cron('*/18 * * * *');
+
+        $lead_generator_job = new LeadGenerator();
+        $schedule->job($lead_generator_job)
+                        ->cron('44 */4 * * *');
+
+        $lead_distributor_job = new LeadDistributorBot();
+        $schedule->job($lead_distributor_job)
+                        ->cron('47 */2 * * *')
+                        ->between('6:00','23:00');
+
+        $lead_balance_calculator_job = new ShareCalculator();
+        $schedule->job($lead_balance_calculator_job)
+                ->weekly()
+                ->saturdays()
+                ->at('00:47');
 
 
         // $schedule->command('backup:clean')->daily()->at('12:27');
