@@ -26,7 +26,7 @@
 
     <div v-show="!isImageLoad" class="text-center">
       <div class="spinner-border">
-        <span class="sr-only">Loading...</span>
+        <span class="sr-only"></span>
       </div>
     </div>
   </div>
@@ -43,7 +43,7 @@
 
     <div v-show="!isImageLoad" class="text-center">
       <div class="spinner-border">
-        <span class="sr-only">Loading...</span>
+        <span class="sr-only"></span>
       </div>
     </div>
   </div>

@@ -44,6 +44,7 @@
   border-radius: 8px;
   background: #38485f;
   color: #fff;
+  padding: 3px 7px 0;
 }
 
 .main-article-title {

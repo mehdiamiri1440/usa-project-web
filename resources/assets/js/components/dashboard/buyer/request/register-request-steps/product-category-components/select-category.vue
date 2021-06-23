@@ -90,7 +90,7 @@ ul li.item button i {
         </ul>
         <div v-else class="text-center">
           <div class="spinner-border">
-            <span class="sr-only">Loading...</span>
+            <span class="sr-only"></span>
           </div>
         </div>
       </div>

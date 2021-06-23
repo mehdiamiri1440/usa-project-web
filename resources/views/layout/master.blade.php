@@ -146,7 +146,7 @@
     </div>
     <div class="main-loader-shape-wrapper">
       <div class="spinner-border" >
-        <span class="sr-only">Loading...</span>
+        <span class="sr-only"></span>
       </div>
     </div>
   </div>

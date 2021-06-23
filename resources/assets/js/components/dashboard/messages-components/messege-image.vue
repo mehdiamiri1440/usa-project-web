@@ -94,7 +94,7 @@
   >
     <div class="spinner-wrapper">
       <div v-show="!isImageLoad" class="spinner-border">
-        <span class="sr-only">Loading...</span>
+        <span class="sr-only"></span>
       </div>
     </div>
     <div class="h-100" v-if="!isProduct">

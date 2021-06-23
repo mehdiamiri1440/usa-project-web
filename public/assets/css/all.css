@@ -111,6 +111,9 @@
 .fa-comment-alt:before {
     content: "\f27a"
 }
+.fa-list:before {
+    content: "\f03a"
+}
 .fa-list-ol:before {
     content: "\f0cb"
 }

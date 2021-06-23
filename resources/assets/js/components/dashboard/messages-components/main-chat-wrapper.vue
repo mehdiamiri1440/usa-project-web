@@ -10,6 +10,7 @@
   position: relative;
   align-items: center;
   z-index: 1;
+  margin-top: 20%;
 }
 
 .loading-container .lds-ring {
@@ -1074,7 +1075,6 @@
 </template>
 
 <script>
-
 export default {
   data() {
     return {
