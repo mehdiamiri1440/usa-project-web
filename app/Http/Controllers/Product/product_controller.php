@@ -1574,9 +1574,26 @@ class product_controller extends Controller
         $product_related_data['main']->category_id = $product_parent_category_data['parent_id'];
         $product_related_data['main']->category_name = (category::find($product_parent_category_data['parent_id']))['category_name'];
 
-        
+        //getting related products
+        $subcategory_related_products = $this->get_related_products_to_the_given_subcategory($product->category_id);
+
+        $related_products = $this->get_related_products_to_the_given_product_from_given_products($product, $subcategory_related_products);
+
+        $category_info = $this->get_category_and_subcategory_name($product->category_id);
+
+        foreach ($related_products as $product) {
+            $product->category_name = $category_info['category_name'];
+            $product->subcategory_name = $category_info['subcategory_name'];
+            $product->photo = product_media::where('product_id', $product->id)
+                                                ->get()
+                                                ->first()
+                                                ->file_path;
+        }
+
+        var_dump($related_products);
         return view('layout.product-detail',[
             'product' => $product_related_data,
+            'related_products' => $related_products
         ]);
     }
 
