@@ -1,4 +1,5 @@
 <style scoped>
+
 .btn-crop {
   display: inline-block;
   background: #00c569;

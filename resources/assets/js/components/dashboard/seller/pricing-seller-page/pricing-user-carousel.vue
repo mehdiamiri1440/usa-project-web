@@ -170,11 +170,6 @@
 <script>
 import owlCarousel from "../../../../owl.carousel.min.js";
 
-require("../../../../../css/owl.carousel.min.css");
-require("../../../../../css/owl.theme.default.min.css");
-require("../../../../../css/magnific-popup.css");
-require("../../../../../css/owl-custom-style.css");
-
 export default {
   data: function () {
     return {
@@ -196,10 +191,7 @@ export default {
         loop: false,
         rewind: true,
         nav: true,
-        navText: [
-          '<span class="fa fa-angle-left"></span>',
-          '<span class="fa fa-angle-right"></span>',
-        ],
+        navText: false,
         mouseDrag: true,
         margin: 30,
         dots: true,

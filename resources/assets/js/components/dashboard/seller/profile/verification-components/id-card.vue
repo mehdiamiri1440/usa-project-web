@@ -233,7 +233,7 @@
           <!-- v-if="isCompressor" -->
           <i class="fa fa-arrow-left" :class="{ empty: isCompressor }"></i>
           <div class="spinner-border" :class="{ empty: !isCompressor }">
-            <span class="sr-only">Loading...</span>
+            <span class="sr-only"></span>
           </div>
         </div>
       </button>
@@ -244,8 +244,6 @@
 <script>
 import UploadFile from "../../../upload-image";
 import imageuploadify from "../../../../../imageuploadify.min";
-require("../../../../../../css/imageuploadify.min.css");
-require("../../../../../../css/cropper.css");
 
 export default {
   components: {

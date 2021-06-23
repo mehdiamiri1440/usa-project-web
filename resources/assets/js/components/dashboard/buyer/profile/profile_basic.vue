@@ -1028,9 +1028,6 @@ import swal from "../../../../sweetalert.min.js";
 import imageuploadify from "../../../../imageuploadify.min";
 
 
-require("../../../../../css/imageuploadify.min.css");
-require("../../../../../css/cropper.css");
-
 export default {
   props: ["str", "assets"],
   components: {

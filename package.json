@@ -94,6 +94,7 @@
     "vendor": "^1.7.0",
     "vue": "^2.5.17",
     "vue-cropperjs": "^3.0.0",
+    "vue-image-preloader": "^0.2.8",
     "vue-jalali-moment": "^1.0.0",
     "vue-meta": "^1.6.0",
     "vue-persian-datetime-picker": "^1.1.3",

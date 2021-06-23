@@ -79,7 +79,7 @@ label {
 .images {
   height: 380px;
   background: #eeeeee;
-  border-radius: 4px;
+  border-radius: 12px;
 }
 
 .share {
@@ -272,11 +272,16 @@ label {
 }
 
 @media screen and (max-width: 767px) {
+  .images {
+    border-radius: 0;
+  }
+
   .images-wrapper,
   .main-product-wrapper {
     padding: 0;
     min-height: initial;
   }
+
   .main-product-wrapper {
     border: none;
   }
@@ -412,7 +417,8 @@ label {
       <div class="images">
         <div v-if="$parent.product.photos" class="owl-carousel">
           <Carousel
-            v-for="photo in $parent.product.photos"
+            v-for="(photo, index) in $parent.product.photos"
+            :index="index"
             :key="photo.id"
             :base="$parent.str + '/'"
             :img="photo.file_path"
@@ -672,11 +678,21 @@ label {
   >
     <div class="default-image-wrapper text-right text-rtl pull-left">
       <div
-        class="default-product-image placeholder-content content-full-width padding-0"
+        class="
+          default-product-image
+          placeholder-content
+          content-full-width
+          padding-0
+        "
       ></div>
 
       <div
-        class="default-button-min-with placeholder-content margin-15-0 hidden-xs hidden-sm"
+        class="
+          default-button-min-with
+          placeholder-content
+          margin-15-0
+          hidden-xs hidden-sm
+        "
       ></div>
       <a
         href="https://blog.buskool.com/%d8%b1%d8%a7%d9%87%d9%86%d9%85%d8%a7%db%8c-%d8%ae%d8%b1%db%8c%d8%af-%d8%a7%d9%85%d9%86/"
@@ -700,7 +716,14 @@ label {
         class="content-default-width placeholder-content padding-10-0 h-25"
       ></div>
       <div
-        class="default-button-min-with placeholder-content default-mdedium-button-width h-40 margin-top-25 hidden-xs hidden-sm"
+        class="
+          default-button-min-with
+          placeholder-content
+          default-mdedium-button-width
+          h-40
+          margin-top-25
+          hidden-xs hidden-sm
+        "
       ></div>
       <div class="default-action-buttons hidden-md hidden-lg">
         <div class="default-button placeholder-content pull-right"></div>
@@ -750,7 +773,12 @@ label {
         </li>
       </ul>
       <span
-        class="placeholder-content content-min-width placeholder-content margin-15-0"
+        class="
+          placeholder-content
+          content-min-width
+          placeholder-content
+          margin-15-0
+        "
       ></span>
       <p class="content-default-width h-20 placeholder-content margin-30-0"></p>
       <p class="content-full-width h-20 placeholder-content"></p>
@@ -762,6 +790,7 @@ label {
 
 <script >
 import Carousel from "./carousel";
+
 export default {
   components: {
     Carousel,

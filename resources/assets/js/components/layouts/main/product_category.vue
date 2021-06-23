@@ -292,7 +292,7 @@ li.active a::after {
 }
 
 .load-more-button button {
-  border: 2px solid;
+  border: 1px solid;
 
   padding: 15px 30px;
 
@@ -304,7 +304,7 @@ li.active a::after {
 
   top: 0;
 
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0, 0.2);
+  border-radius: 12px;
 
   transition: 200ms;
 
@@ -314,7 +314,7 @@ li.active a::after {
 .load-more-button button:hover {
   top: -3px;
 
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
 
   transition: 200ms;
 }

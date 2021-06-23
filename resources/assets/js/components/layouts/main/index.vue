@@ -1,4 +1,8 @@
 <style scoped>
+@import url("../../../../css/owl.carousel.min.css");
+@import url("../../../../css/magnific-popup.css");
+@import url("../../../../css/owl-product-items-style.css");
+
 /*general styles*/
 
 h1,
@@ -1608,7 +1612,7 @@ li > ul > li.active > ul > li {
           <div class="col-xs-12 products-contents">
             <div v-if="lastProducts" class="row">
               <div class="hidden-sm hidden-md hidden-lg">
-                <div class="owl-carousel">
+                <div class="owl-carousel product-carousel">
                   <div
                     v-for="(product, productIndex) in lastProducts"
                     :key="'products-carousel-' + productIndex"
@@ -2292,12 +2296,6 @@ import ProductGridArticle from "./product_components/landing_page_product_grid_a
 import owlCarousel from "../../../owl.carousel.min.js";
 import Route from "../../../router/components/route";
 
-
-
-require("../../../../css/owl.carousel.min.css");
-require("../../../../css/owl.theme.default.min.css");
-require("../../../../css/magnific-popup.css");
-require("../../../../css/owl-custom-style.css");
 
 var visible = false;
 
