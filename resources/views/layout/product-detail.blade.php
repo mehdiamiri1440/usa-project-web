@@ -1,4 +1,4 @@
-@include('layout.header.header-meta')
+@include('layout.header.product-detail-meta-header')
 
 <link rel="stylesheet" href="{{asset('assets/css/product-view/style.css')}}">
 
