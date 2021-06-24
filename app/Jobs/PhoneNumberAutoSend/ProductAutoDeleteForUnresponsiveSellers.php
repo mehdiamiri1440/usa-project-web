@@ -75,7 +75,7 @@ class ProductAutoDeleteForUnresponsiveSellers implements ShouldQueue
                                                     ->orderBy('created_at','desc')
                                                     ->get();
 
-        if($seller_auto_sent_phone_numbers_records->count() >= 5){
+        if($seller_auto_sent_phone_numbers_records->count() >= 2){
                 return true;
         }
 
