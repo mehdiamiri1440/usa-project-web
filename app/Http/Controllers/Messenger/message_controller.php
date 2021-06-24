@@ -303,6 +303,10 @@ class message_controller extends Controller
 
         if (sizeof($contact_list) > 0) {
             usort($contact_list, function ($a, $b) {
+                if($b->last_msg_time_date == $a->last_msg_time_date){
+                    return $b->contact_id > $a->contact_id;
+                }
+                
                 return $b->last_msg_time_date > $a->last_msg_time_date;
             });
         }

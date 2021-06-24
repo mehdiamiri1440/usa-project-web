@@ -1116,7 +1116,7 @@ Route::post('/is_user_from_webview', [
     'uses' => 'Accounting\user_controller@is_user_from_webview',
 ]);
 
-Route::get('/sitemap.xml', [
+Route::get('/sitemap-buskool-txwhgvuikd.xml', [
     'uses' => 'General\sitemap_controller@get_required_data_for_sitemap',
     'as' => 'get_sitemap',
 ]);
