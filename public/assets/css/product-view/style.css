@@ -327,6 +327,7 @@ button.send-message-button {
   
   .main-contents-wrapper h1 {
     font-size: 23px;
+    font-weight: 500;
   }
   
   .actions .green-button,
@@ -435,6 +436,7 @@ button.send-message-button {
   }
   
   @media screen and (max-width: 991px) {
+
     .actions {
       margin-top: 15px;
     }
@@ -450,6 +452,7 @@ button.send-message-button {
     .share {
       position: absolute;
       top: -4px;
+      left: 15px;
       padding: 0;
     }
     .images-wrapper,
@@ -479,6 +482,7 @@ button.send-message-button {
   }
   
   @media screen and (max-width: 767px) {
+
     .images {
       border-radius: 0;
     }
@@ -1001,3 +1005,134 @@ button.send-message-button {
     padding: 4px 15px;
     margin: 10px auto 15px;
   }
+  .image-wrapper {
+    height: 380px;
+    overflow: hidden;
+    border-radius: 12px;
+  }
+
+.image-wrapper a {
+    position: relative;
+    display: block;
+    height: 100%;
+}
+
+.image-wrapper img{
+    transition: 300ms;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.owl-dots {
+    text-align: center;
+    position: absolute;
+    left: initial;
+    width: 100%;
+}
+
+.owl-dot {
+    width: 7px !important;
+    height: 7px !important;
+    background: #d4d4d4 !important;
+    margin: 0 3px !important;
+    border-radius: 50px !important;
+
+}
+
+.owl-dot.active{
+
+    width: 9px !important;
+    height: 9px !important;
+    background: #a8a8a8  !important;
+
+}
+
+.buttom-carousel-items-wrapper{
+    font-size: 35px;
+    padding: 10px 20px;
+
+}
+
+.buttom-carousel-items-wrapper a{
+    color: #000546;
+}
+
+.owl-carousel .owl-item img{
+
+    display: block;
+
+    width: 100%;
+
+
+}
+
+.wrapper-bg .owl-carousel .owl-item img{
+
+    display: block;
+
+    width: initial;
+
+    height: 100%;
+
+}
+
+.wrapper-bg  .owl-nav{
+
+    position: absolute;
+
+    width: 100%;
+
+    margin-top: -10px;
+
+    top: 50%;
+
+}
+
+.wrapper-bg .owl-nav {
+    display: flex;
+    justify-content: space-between;
+}
+
+.wrapper-bg .owl-nav span{
+    height: 40px;
+    width: 40px;
+    border-radius: 0;
+    font-size: 22px;
+    color: #fff;
+    background: rgba(0,0,0,0.4);
+    padding-top: 9px;
+}
+
+.wrapper-bg .owl-nav .owl-prev span{
+    border-radius: 0 8px 8px 0;
+}
+
+.wrapper-bg .owl-nav .owl-next span{
+    border-radius:  8px 0 0 8px ;
+}
+
+@media screen and (max-width: 767px ){
+  .image-wrapper {
+    border-radius: 0;
+  }
+    .owl-dots {
+
+        position: absolute;
+
+        left: 50px;
+
+        z-index: 1;
+
+        padding-top: 18px;
+
+        display: block;
+
+        text-align: center;
+
+        width: calc(100% - 100px);
+
+    }
+
+}

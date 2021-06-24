@@ -24,11 +24,60 @@
           <h3 class="box-title">محصولات مرتبط</h3>
 
           <div class="products-contents">
-              @for ($i = 0; $i < 4; $i++)
-              <div class="owl-carousel product-carousel col-xs-12 col-sm-3">
-                @include('layout.product-view-components.product-carousel')
-            </div>
-              @endfor
+              @php 
+              $i = 0
+              @endphp
+              @foreach ($related_products as $product_item)
+                
+                <div class="owl-carousel product-carousel col-xs-12  @php
+                  if($i > 3){
+                    echo ' hidden ';
+                  }
+                   if($i > 2){
+                    echo ' hidden-sm col-md-3 ';
+                  }
+                   if($i > 0){
+                    echo ' hidden-xs col-sm-4 col-md-3 ';
+                  }else{
+                    echo ' col-sm-4 col-md-3 ';
+                  }
+                @endphp"
+                >
+                  <article class="carousel-item box-content">
+                    <a href="{{'/product-view/'  . str_replace(' ', '-', 'خرید-عمده-' .$product_item->sub_category_name) .'/' . str_replace(' ', '-', $product_item->category_name) . '/' .   $product_item->id  }}" class="carousel-img text-center">
+                      <img
+
+                        src="{{url('storage/') . '/' .$product_item->photo}}"
+                        class="main-image main-image-load"
+                      />
+                    </a>
+                    
+                    <a href="#" class="carousel-title">
+                      
+                    <h4 >
+                      {{
+                        $product_item->product_name
+                      }}
+                    </h4>
+                  
+                  </a>
+                  <a href="#" class="stock-wrapper">
+
+                      <span>موجودی</span>
+                      <span >
+                        {{
+                          $product_item->stock
+                        }}
+                      </span>
+                  
+                  </a>
+                  </article>
+                </div>
+
+                @php
+                $i++
+                @endphp
+              @endforeach
             
           </div>
         </div>
@@ -44,70 +93,42 @@
         >
       </div>
 
-      <!-- <register-inquer-form
-        v-if="showRegisterRequestBox"
-        wrapper-bg="true"
-        :str="str"
-        :user-profile-info="product.user_info"
-        :user-profile-photo="
-          product.profile_info.profile_photo
-            ? str + '/' + product.profile_info.profile_photo
-            : assets + 'assets/img/user-defult.png'
-        "
-      /> -->
-
       <div
         v-if="product.main.product_name && !isMyProfile"
         class="fix-send-message-wrapper hidden-lg hidden-md"
       >
-        <button
-          v-if="!isMyProfile && currentUser.user_info"
-          @click.prevent="openChat(product)"
-          :class="{
-            'send-message-button':
-              product.user_info.has_phone && currentUser.user_info.is_buyer,
-            'green-button':
-              !product.user_info.has_phone ||
-              (product.user_info.has_phone && currentUser.user_info.is_seller),
-          }"
+      
+      @if($product['user_info']->has_phone)
+      <button
+          class="green-button"
         >
-          <span
-            v-if="product.user_info.has_phone && currentUser.user_info.is_buyer"
+        <i class="fas fa-phone-square-alt" ></i>
+
+          اطلاعات تماس
+        </button>
+      @endif
+
+      @if($product['user_info']->has_phone)
+          <button
+            class=" send-message-button green-button"
           >
+          <span
+          >
+          <i class="fas fa-comment-alt"></i>
             چت
           </span>
-          <span v-else> چت با فروشنده </span>
+          </button>
+          @else
+          <button
+            class=" green-button"
+          >
+          <span >
+            <i class="fas fa-comment-alt"></i>
+             چت با فروشنده </span>
+          </button>
+          @endif
 
-          <i class="fas fa-comment-alt"></i>
-        </button>
-        {{-- <button
-          v-else-if="!currentUser.user_info"
-          @click.prevent="loginModal(true)"
-          :class="{
-            'send-message-button': product.user_info.has_phone,
-            'green-button': !product.user_info.has_phone,
-          }"
-        >
-          <span v-if="product.user_info.has_phone"> چت </span>
-          <span v-else> چت با فروشنده </span>
-          <i class="fas fa-comment-alt"></i>
-        </button> --}}
-        <button
-          v-if="
-            !isMyProfile &&
-            currentUser.user_info &&
-            product.user_info.has_phone &&
-            currentUser.user_info.is_buyer
-          "
-          @click.prevent="activePhoneCall(true)"
-          class="green-button"
-          :class="{ disable: isActivePhone }"
-          :disabled="isActivePhone"
-        >
-          اطلاعات تماس
-          <i class="fas fa-phone-square-alt" v-if="!getPhoneLoader"></i>
-         
-        </button>
+        
         {{-- <button
           v-else-if="!currentUser.user_info && product.user_info.has_phone"
           @click.prevent="loginModal(false)"
