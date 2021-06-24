@@ -115,7 +115,6 @@
 
               <button class="hidden-xs" >
                 <i class="fa fa-search"></i>
-                <span class="hidden-sm"> جستجو </span>
               </button>
             </div>
 
@@ -165,7 +164,6 @@
 
         <button class="hidden-xs" >
           <i class="fa fa-search"></i>
-          <span class="hidden-sm"> جستجو </span>
         </button>
       </div>
       <div class="container-fluid buskool-sub-menu hidden-xs">

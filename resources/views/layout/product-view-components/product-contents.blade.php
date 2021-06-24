@@ -112,7 +112,8 @@
 
               <span
               >
-              {{$product['main']->stock}}
+              {{$product['main']->stock}} 
+              کیلوگرم
             </span>
             </li>
             <li>
@@ -123,6 +124,8 @@
               <span
               >
               {{$product['main']->min_sale_amount}}
+              کیلوگرم
+
             </span>
             </li>
             <li >

@@ -29,19 +29,7 @@
               @endphp
               @foreach ($related_products as $product_item)
                 
-                <div class="owl-carousel product-carousel col-xs-12  @php
-                  if($i > 3){
-                    echo ' hidden ';
-                  }
-                   if($i > 2){
-                    echo ' hidden-sm col-md-3 ';
-                  }
-                   if($i > 0){
-                    echo ' hidden-xs col-sm-4 col-md-3 ';
-                  }else{
-                    echo ' col-sm-4 col-md-3 ';
-                  }
-                @endphp"
+                <div class="owl-carousel product-carousel col-xs-12 col-sm-4 col-md-3"
                 >
                   <article class="carousel-item box-content">
                     <a href="{{'/product-view/'  . str_replace(' ', '-', 'خرید-عمده-' .$product_item->sub_category_name) .'/' . str_replace(' ', '-', $product_item->category_name) . '/' .   $product_item->id  }}" class="carousel-img text-center">
@@ -86,10 +74,10 @@
 
 
       <div class="buttons-wrapper col-xs-12">
-        <router-link
-          :to="{ path: this.categoryUrl }"
+        <a
+          href="/product-list/category/<?php echo $product['main']->sub_category_name ?>"
           class="green-button blue-button"
-          >مشاهده همه محصولات</router-link
+          >مشاهده همه محصولات</a
         >
       </div>
 
