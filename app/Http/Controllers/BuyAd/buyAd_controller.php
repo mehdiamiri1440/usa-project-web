@@ -761,8 +761,8 @@ class buyAd_controller extends Controller
                     $b = $item2->is_golden ? 1: 0;
 
                     if($a == $b){
-                        $c = Carbon::now()->subHours(12)->gte(Carbon::parse($item1->updated_at)) ?  $item1->response_rate : 100;
-                        $d = Carbon::now()->subHours(12)->gte(Carbon::parse($item2->updated_at)) ?  $item2->response_rate : 100;
+                        $c = is_null($item1->response_rate) ? 100 : $item1->response_rate;
+                        $d = is_null($item2->response_rate) ? 100 : $item2->response_rate;
 
                         if($c == $d){
                             return ($item1->updated_at < $item2->updated_at) ? 1 : -1;
@@ -849,7 +849,7 @@ class buyAd_controller extends Controller
                                         ->orWhere('buy_ads.phone_view_capacity','>',0);
                     })
                     ->whereNull('buy_ads.deleted_at')
-                    ->whereBetween('buy_ads.updated_at',[Carbon::now()->subWeeks(2),Carbon::now()]);
+                    ->whereBetween('buy_ads.updated_at',[Carbon::now()->subWeeks(3),Carbon::now()]);
                     // ->where('buy_ads.myuser_id','<>',$user->id);
 
         $query = $query->selectRaw(implode(', ',$this->related_buyAd_list_required_fields) . ",(FLOOR((select count(distinct(m1.sender_id)) from messages as m1 where m1.is_read = true and m1.receiver_id = buy_ads.myuser_id and not exists(select * from messages where messages.receiver_id = buy_ads.myuser_id and m1.is_read = false ))/(select count(distinct(messages.sender_id)) from messages where messages.receiver_id = buy_ads.myuser_id) * 100 )) as response_rate,
@@ -857,6 +857,10 @@ class buyAd_controller extends Controller
                     ->orderBy('buy_ads.updated_at', 'desc');
 
         $buyAds = $query->get();
+
+        $buyAds = $buyAds->filter(function($buyAd){
+            return is_null($buyAd->response_rate) || $buyAd->response_rate >= 50;
+        });
 
         $golden_buyAds_update_date = Carbon::now()->subHours(2);
         $buyAds->each(function($buyAd) use($golden_buyAds_update_date){
