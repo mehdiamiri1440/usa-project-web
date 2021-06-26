@@ -9,7 +9,7 @@
     <link rel="icon" href="{{asset('assets/img/logo/mobile-logo.svg')}}">
 
     @if(config('app.name') != 'Laravel')
-    <meta name=”robots” content=”nofollow” />
+    <meta name="robots" content="noindex" />
     @endif
 
     <?php
