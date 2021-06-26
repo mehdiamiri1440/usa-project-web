@@ -11,6 +11,10 @@
 
     <link rel="icon" href="{{asset('assets/img/logo/mobile-logo.svg')}}">
 
+    @if(config('app.name') != 'Laravel')
+    <meta name=”robots” content=”nofollow” />
+    @endif
+
 
     <!-- fonts -->
     <link rel="preload" href="{{asset('assets/fonts/woff2/IRANSansWeb(FaNum)_Bold.woff2')}}" as="font" type="font/woff2" crossorigin>

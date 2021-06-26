@@ -1490,10 +1490,20 @@ class product_controller extends Controller
             ->first();
 
         if (is_null($product)) {
-            return response()->json([
-                'status' => false,
-                'msg' => 'product not found.',
-            ], 404);
+            $category_record = DB::table('products')
+                                ->where('products.id',$product_id)
+                                ->where('confirmed',true)
+                                ->selectRaw('products.*,(select category_name from categories where categories.id = products.category_id) as category_name')
+                                ->get()
+                                ->first();
+
+            if($category_record){
+                $category_name = implode('-',explode(' ',$category_record->category_name));
+
+                return redirect("/product-list/category/$category_name",301);
+            }
+
+            return 'Not Found!';
         }
 
         $main_records = $this->product_info_sent_by_product_array;

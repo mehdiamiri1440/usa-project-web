@@ -8,23 +8,34 @@
 
     <link rel="icon" href="{{asset('assets/img/logo/mobile-logo.svg')}}">
 
-    @if(isset($category_name))
-    <title>{{'خرید و فروش عمده ' . $category_name . ' - قیمت ' . $category_name . ' عمده مستقیم +‌ صادراتی |‌ باسکول' }}</title>
-    <meta name="description" content='{{"خرید و فروش عمده " . $category_name . " به صورت مستقیم و بدون واسطه از بهترین کشاورزان و تامین کنندگان ☀️☀️ آخرین قیمت " . $category_name . " عمده ☀️☀️ بازار باسکول"}}'>
-    <meta name="og:description" content='{{"خرید و فروش عمده " . $category_name . " به صورت مستقیم و بدون واسطه از بهترین کشاورزان و تامین کنندگان ☀️☀️ آخرین قیمت " . $category_name . " عمده ☀️☀️ بازار باسکول"}}'>
-    <meta name="og:site_name" content="باسکول بازارآنلاین خرید و فروش محصولات کشاورزی ایران">
-    <meta name="og:title" content="{{'خرید و فروش عمده ' . $category_name . ' - قیمت ' . $category_name . ' عمده صادراتی - خرید و فروش مستقیم |‌ باسکول' }}" >
-    <link rel="canonical" href="{{url('/product-list/category/' . implode(explode(' ',$category_name),'-'))}}">
-
-    @else
-    <title>لیست محصولات و قیمت عمده محصولات کشاورزی | باسکول</title>
-    <meta name="description" content="خرید عمده و قیمت میوه | خرید عمده و قیمت غلات | خرید عمده و قیمت صیفی جات | خرید و قیمت عمده خشکبار">
-    <meta name="og:description" content="مرجع تخصصی خرید و فروش عمده و قیمت محصولات کشاورزی ایران | صادرات محصولات کشاورزی">
-    <meta name="og:site_name" content="باسکول بازارآنلاین خرید و فروش محصولات کشاورزی ایران">
-    <meta name="og:title" content="لیست محصولات و قیمت عمده محصولات کشاورزی | باسکول">
+    @if(config('app.name') != 'Laravel')
+    <meta name=”robots” content=”nofollow” />
     @endif
 
-    <meta property="og:image" content="{{asset('assets/img/logo/512-buskool-logo.jpg')}}" />
+    <?php
+        $content = $product['user_info']->first_name . ' ' . 
+        $product['user_info']->last_name . ' ' . 
+        "خرید و فروش عمده و قیمت " . 
+        $product['main']->product_name . ' ' . 
+        $product['main']->city_name . ' ' . 
+        $product['main']->province_name . ' ' . 
+        "موجودی :‌ " . 
+        $product['main']->stock . 'کیلوگرم ' . 
+        implode(' ', explode('<hr/>',$product['main']->description));
+    ?>
+
+    <title>{{'خرید و قیمت ' . $product['main']->sub_category_name .' '. $product['main']->product_name .  ' عمده '  . $product['main']->city_name . ' ' . $product['main']->province_name . ' ' . $product['user_info']->first_name . ' ' . $product['user_info']->last_name . ' | باسکول' }}</title>
+    <meta name="description" content='{{$content}}'>
+    <meta name="og:description" content='{{$content}}'>
+    <meta name="og:site_name" content="باسکول بازارآنلاین خرید و فروش محصولات کشاورزی ایران">
+    <meta name="og:title" content="{{'خرید و قیمت ' . $product['main']->sub_category_name .' '. $product['main']->product_name .  ' عمده '  . $product['main']->city_name . ' ' . $product['main']->province_name . ' ' . $product['user_info']->first_name . ' ' . $product['user_info']->last_name . ' | باسکول' }}" >
+    <link rel="canonical" href="{{url('/product-view/' . 'خرید-عمده-' .  implode(explode(' ',$product['main']->sub_category_name),'-') . '/' . $product['main']->category_name . '/' . $product['main']->id)}}">
+
+    <meta property="og:image" content="{{asset('/storage/' . $product['photos'][0]->file_path)}}" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="400" />
+    <meta property="og:image:height" content="300" />
+    <meta property="og:url" content="{{url('/product-view/' . 'خرید-عمده-' .  implode(explode(' ',$product['main']->sub_category_name),'-') . '/' . $product['main']->category_name . '/' . $product['main']->id)}}"/>
 
     <!-- Bootstrap css -->
     <link rel="stylesheet" href="{{asset('index/css/bootstrap.min.css')}}">

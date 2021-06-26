@@ -32,7 +32,7 @@
                 <div class="owl-carousel product-carousel col-xs-12 col-sm-4 col-md-3"
                 >
                   <article class="carousel-item box-content">
-                    <a href="{{'/product-view/'  . str_replace(' ', '-', 'خرید-عمده-' .$product_item->sub_category_name) .'/' . str_replace(' ', '-', $product_item->category_name) . '/' .   $product_item->id  }}" class="carousel-img text-center">
+                    <a href="{{'/product-view/' . 'خرید-عمده-' .  implode(explode(' ',$product_item->subcategory_name),'-') . '/' . $product_item->category_name . '/' . $product_item->id }}" class="carousel-img text-center">
                       <img
 
                         src="{{url('storage/') . '/' .$product_item->photo}}"
@@ -40,7 +40,7 @@
                       />
                     </a>
                     
-                    <a href="#" class="carousel-title">
+                    <a href="{{'/product-view/' . 'خرید-عمده-' .  implode(explode(' ',$product_item->subcategory_name),'-') . '/' . $product_item->category_name . '/' . $product_item->id }}" class="carousel-title">
                       
                     <h4 >
                       {{
@@ -55,7 +55,7 @@
                       <span >
                         {{
                           $product_item->stock
-                        }}
+                        }} کیلوگرم
                       </span>
                   
                   </a>
@@ -75,7 +75,7 @@
 
       <div class="buttons-wrapper col-xs-12">
         <a
-          href="/product-list/category/<?php echo $product['main']->sub_category_name ?>"
+          href="{{'/product-list/category/' . implode('-',explode(' ',$product['main']->sub_category_name)) }}"
           class="green-button blue-button"
           >مشاهده همه محصولات</a
         >
@@ -116,18 +116,6 @@
           </button>
           @endif
 
-        
-        {{-- <button
-          v-else-if="!currentUser.user_info && product.user_info.has_phone"
-          @click.prevent="loginModal(false)"
-          class="green-button"
-          :class="{ disable: isActivePhone }"
-          :disabled="isActivePhone"
-        >
-          اطلاعات تماس
-          <i class="fas fa-phone-square-alt" v-if="!getPhoneLoader"></i>
-        
-        </button> --}}
       </div>
       
     </main>

@@ -8,6 +8,10 @@
 
     <link rel="icon" href="{{asset('assets/img/logo/mobile-logo.svg')}}">
 
+    @if(config('app.name') != 'Laravel')
+    <meta name=”robots” content=”nofollow” />
+    @endif
+
     @if(isset($category_name))
     <title>{{'خرید و فروش عمده ' . $category_name . ' - قیمت ' . $category_name . ' عمده مستقیم +‌ صادراتی |‌ باسکول' }}</title>
     <meta name="description" content='{{"خرید و فروش عمده " . $category_name . " به صورت مستقیم و بدون واسطه از بهترین کشاورزان و تامین کنندگان ☀️☀️ آخرین قیمت " . $category_name . " عمده ☀️☀️ بازار باسکول"}}'>

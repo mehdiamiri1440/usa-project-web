@@ -921,16 +921,16 @@ export default {
     //
     return {
       title:
-        productOwnerFullName +
-        " " +
-        "خرید و فروش عمده و قیمت " +
+        "خرید و قیمت " + 
         productSubCategory +
         " " +
         productName +
-        " " +
+        " عمده " + 
         productCity +
         " " +
-        productProvince,
+        productProvince + 
+        " " + 
+        productOwnerFullName,
       titleTemplate: "%s | باسکول",
       meta: [
         {
