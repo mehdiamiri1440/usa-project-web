@@ -89,10 +89,12 @@ class ShareCalculator implements ShouldQueue
         if(is_null($base_record)) return [-1,-1];
 
         $sellers_count_in_classes = $this->get_sellers_count_in_each_class($category_lead_info->category_id);
+
+        if(is_null($sellers_count_in_classes)) return [-1,-1];
         //EQ #1
         $x_coef_in_eq_1 = $sellers_count_in_classes['class_1'] + $sellers_count_in_classes['class_2'] + $sellers_count_in_classes['class_3'];
         $x_coef_in_eq_2 = 1;
-        $y_coef_in_eq_1 = $sellers_count_in_classes['class_4'] ;
+        $y_coef_in_eq_1 = $sellers_count_in_classes['class_4'];
         $y_coef_in_eq_2 = -1;
 
         if(($x_coef_in_eq_1 + $x_coef_in_eq_2 * $sellers_count_in_classes['class_4']) == 0){
@@ -142,7 +144,7 @@ class ShareCalculator implements ShouldQueue
             'class_4' => [],
         ];
 
-        $last_acceptable_date = Carbon::now()->subDays(50);
+        $last_acceptable_date = Carbon::now()->subDays(7);
         foreach($products as $product)
         {
             if($product['user_info']->active_pakage_type > 0){

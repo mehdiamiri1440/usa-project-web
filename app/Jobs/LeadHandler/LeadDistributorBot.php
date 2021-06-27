@@ -277,16 +277,18 @@ class LeadDistributorBot implements ShouldQueue
 
     protected function get_time_locked_sellers($category_id)
     {
-        $time_locked_seller_ids = DB::table('leads')->where('category_id',$category_id)
-                                        ->where(function($q){
+        $time_locked_seller_ids = DB::table('leads')
+                                        ->where(function($q) use($category_id){
                                             return $q->whereNotNull('assign_date')
+                                                        ->where('category_id',$category_id)
                                                         ->whereIn('seller_class_id',[1,2,3])
-                                                        ->whereNotBetween('assign_date',[Carbon::now()->subHours($this->upper_time_limit),Carbon::now()]);
+                                                        ->whereBetween('assign_date',[Carbon::now()->subHours($this->upper_time_limit),Carbon::now()]);
                                         })
-                                        ->orWhere(function($q){
+                                        ->orWhere(function($q) use($category_id){
                                             return $q->whereNotNull('assign_date')
+                                                        ->where('category_id',$category_id)
                                                         ->whereIn('seller_class_id',[4])
-                                                        ->whereNotBetween('assign_date',[Carbon::now()->subHours($this->lower_time_limit),Carbon::now()]);
+                                                        ->whereBetween('assign_date',[Carbon::now()->subHours($this->lower_time_limit),Carbon::now()]);
                                         })
                                         ->pluck('seller_id')
                                         ->toArray();
