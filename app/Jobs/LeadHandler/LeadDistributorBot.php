@@ -607,7 +607,7 @@ class LeadDistributorBot implements ShouldQueue
         if($price_msg){
             $msg = $msg . $price_msg;
         }
-        $msg = $msg . "*** ارسال شده توسط دلسا (منشی خودکار باسکول) ***" . "\n";
+        $msg = $msg . "ارسال شده توسط دلسا (منشی خودکار باسکول ❤️) - " . "\n";
         $msg = $msg . ":p={$product['main']->id}";
 
         return $msg;

@@ -6,7 +6,7 @@
 
   width: 100%;
 
-  background: #e41c38;
+  background: orange;
 
   text-align: center;
 
@@ -15,6 +15,10 @@
   direction: rtl;
 
   z-index: 1020;
+
+  font-weight: bold;
+
+  font-size: 20px;
 }
 
 .android-apk-download {
