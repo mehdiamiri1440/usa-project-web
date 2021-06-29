@@ -22,6 +22,12 @@ class SendUpgradeAccoutnSMSToSellers implements ShouldQueue
      * @return void
      */
 
+    protected $sellers_related_sms = [
+        'first_day' => 21579,
+        // 'third_day' => 10,
+        // 'seventh_day' => 10
+    ];
+
     protected $product_stock_threshold = 10000;
 
     public function __construct()
@@ -36,28 +42,70 @@ class SendUpgradeAccoutnSMSToSellers implements ShouldQueue
      */
     public function handle()
     {
-        $potential_sellers_user_id = $this->get_potential_sellers_user_id_list();
+        $potential_sellers_user_ids = $this->get_potential_sellers_user_id_list();
 
-        $users_phone_numbers = $this->get_users_phone_numbers($potential_sellers_user_id);
+        foreach($this->sellers_related_sms as $key => $code)
+        {
+            $users_phone_numbers = $this->get_users_phone_numbers($potential_sellers_user_ids[$key]);
 
-        $users_phone_numbers->each(function($user){
-            sendSMS::dispatch($user->phone,21579)->onQueue('sms');
-        });
+            $users_phone_numbers->each(function($user) use($code){
+                sendSMS::dispatch($user->phone,$code)->onQueue('sms');
+            });
+        }
     }
 
     protected function get_potential_sellers_user_id_list()
     {
         $non_free_sellers = $this->get_non_free_sellers_user_id_list();
 
-        $user_ids = product::where('confirmed',true)
-                            ->whereBetween('created_at',[Carbon::now()->subHours(24),Carbon::now()])
-                            ->whereNotIn('myuser_id',$non_free_sellers)
-                            ->where('stock','>=',$this->product_stock_threshold)
-                            ->select('myuser_id')
-                            ->distinct()
-                            ->get();
+        $first_day_seller_ids = product::where('confirmed',true)
+                                    ->whereBetween('created_at',[Carbon::now()->subHours(24),Carbon::now()])
+                                    ->whereNotIn('myuser_id',$non_free_sellers)
+                                    // ->where('stock','>=',$this->product_stock_threshold)
+                                    ->select('myuser_id')
+                                    ->distinct()
+                                    ->get();
 
-        return $user_ids;
+        // $third_day_seller_ids = DB::table('myusers')
+        //                             ->whereNotIn('myusers.id',$non_free_sellers)
+        //                             ->whereBetween('created_at',[Carbon::now()->subDays(3),Carbon::now()->subDays(2)])
+        //                             ->where('is_seller',true)
+        //                             ->where('is_blocked',false)
+        //                             ->whereExists(function($q){
+        //                                 $q->select(DB::raw(1))
+        //                                     ->from('products')
+        //                                     ->whereRaw('myusers.id = products.myuser_id and products.confirmed = true');
+        //                             })->whereExists(function($q){
+        //                                 $q->select(DB::raw(1))
+        //                                     ->from('messages')
+        //                                     ->whereRaw('messages.receiver_id = myusers.id and messages.is_read = true');
+        //                             })->select('myusers.id')
+        //                             ->distinct()
+        //                             ->get();
+
+
+        // $seventh_day_seller_ids = DB::table('myusers')
+        //                                 ->whereNotIn('myusers.id',$non_free_sellers)
+        //                                 ->whereBetween('created_at',[Carbon::now()->subDays(7),Carbon::now()->subDays(6)])
+        //                                 ->where('is_seller',true)
+        //                                 ->where('is_blocked',false)
+        //                                 ->whereExists(function($q){
+        //                                     $q->select(DB::raw(1))
+        //                                         ->from('products')
+        //                                         ->whereRaw('myusers.id = products.myuser_id and products.confirmed = true');
+        //                                 })->whereExists(function($q){
+        //                                     $q->select(DB::raw(1))
+        //                                         ->from('messages')
+        //                                         ->whereRaw('messages.receiver_id = myusers.id and messages.is_read = true');
+        //                                 })->select('myusers.id')
+        //                                 ->distinct()
+        //                                 ->get();
+
+        return [
+            'first_day' => $first_day_seller_ids,
+            // 'third_day' => $third_day_seller_ids,
+            // 'seventh_day' => $seventh_day_seller_ids
+        ];
     }
 
     protected function get_non_free_sellers_user_id_list()
