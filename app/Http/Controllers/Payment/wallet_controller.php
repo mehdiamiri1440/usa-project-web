@@ -205,7 +205,7 @@ class wallet_controller extends Controller
             return response()->json([
                 'status' => false,
                 'msg' => 'موجودی کیف پول شما کافی نیست. لطفا ابتدا موجودی کیف پول خود را افزایش دهید.'
-            ],400);
+            ],423);
         }
 
         $expiration_time_in_days = config("subscriptionPakage.elevator.expiration-time-in-days");
