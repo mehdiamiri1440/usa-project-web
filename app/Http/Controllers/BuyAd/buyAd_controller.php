@@ -376,7 +376,7 @@ class buyAd_controller extends Controller
 
         return response()->json([
             'status' => true,
-            'buy_ads' => $result_buyAds,
+            'buyAds' => $result_buyAds,
         ], 200);
     }
 
