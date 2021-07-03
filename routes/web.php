@@ -96,10 +96,10 @@ Route::post('/user/get_product_list', [
     'as' => 'get_product_list',
 ]);
 
-// Route::post('/user/get_buyAd_list',[
-//     'uses' => 'BuyAd\buyAd_controller@get_buyAd_list',
-//     'as' => 'get_buyAd_list'
-// ]);
+Route::post('/get_buyAd_list',[
+    'uses' => 'BuyAd\buyAd_controller@get_buyAd_list',
+    'as' => 'get_buyAd_list'
+]);
 
 Route::post('/location/get_location_info', [
     'uses' => 'General\location_controller@get_all_provinces_or_cities_in_the_province_in_iran',
@@ -1093,6 +1093,7 @@ Route::post('/get_wp_posts', [
     'uses' => 'index_controller@get_wp_posts',
     'as' => 'get_wp_posts',
 ]);
+
 
 Route::get('download-media','General\media_controller@download_media');
 

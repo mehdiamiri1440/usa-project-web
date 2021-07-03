@@ -62,6 +62,28 @@ class LeadGenerator implements ShouldQueue
                                 ->groupBy('user_products.myuser_id')
                                 ->get();
 
+        $phone_number_view_records = DB::table('user_products')
+                                        ->join('products','products.id','=','user_products.product_id')
+                                        ->join('myusers','myusers.id','=','user_products.myuser_id')
+                                        ->where('myusers.is_buyer',true)
+                                        ->where('myusers.is_blocked',false)
+                                        ->where('user_products.has_sent_msg',false)
+                                        ->whereBetween('user_products.updated_at',[Carbon::now()->subHours(4),Carbon::now()])
+                                        ->whereExists(function($q){
+                                            $q->select(DB::raw(1))
+                                                ->from('phone_number_view_logs')
+                                                ->whereRaw('phone_number_view_logs.myuser_id = products.myuser_id and phone_number_view_logs.viewer_id = user_products.myuser_id and phone_number_view_logs.viewer_role = "BUYER" and phone_number_view_logs.related_item = "PRODUCT" ');
+                                        })
+                                        ->whereNotExists(function($q){
+                                            $q->select(DB::raw(1))
+                                                ->from('leads')
+                                                ->whereRaw('leads.buyer_id = user_products.myuser_id')
+                                                ->whereBetween('leads.created_at',[Carbon::now()->subDays(1),Carbon::now()]);
+                                        })
+                                        ->select('user_products.*','products.category_id','products.product_name')
+                                        ->groupBy('user_products.myuser_id')
+                                        ->get();
+
 
         $leads = [];
         $now = Carbon::now();
@@ -86,7 +108,23 @@ class LeadGenerator implements ShouldQueue
 
                 $leads[] = $tmp;
             }
-            
+        }
+
+        foreach($phone_number_view_records as $record)
+        {
+            for($i = 0; $i < 3 ; $i++){
+                $tmp = [
+                    'created_at' => $now,
+                    'updated_at' => $now,
+                    'buyer_id' => $record->myuser_id,
+                    'expiry_date' => $expiry_date,
+                    'lead_class_id' => 3,
+                    'keywords' => $record->product_name,
+                    'category_id' => $record->category_id
+                ];
+
+                $leads[] = $tmp;
+            }
         }
 
         

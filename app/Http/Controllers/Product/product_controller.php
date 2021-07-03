@@ -552,7 +552,6 @@ class product_controller extends Controller
         }
 
         unset($product_related_data['user_info']->wallet_balance);
-        unset($product_related_data['user_info']->phone_view_permission);
 
         $product_related_data['profile_info'] = new \StdClass;
         foreach($profile_records as $property_name)
@@ -574,14 +573,24 @@ class product_controller extends Controller
 
         if(session()->has('user_id')){
             $now = Carbon::now();
-            
+
+            $user_id = session('user_id');
+
+            if($product_related_data['user_info']->has_phone == false){
+                if(str_split($product_related_data['user_info']->phone_view_permission)[0] == 1 && $this->does_Delsa_already_send_this_product_to_this_user($product_id,$product_related_data['user_info']->id,$user_id) == true){
+                    $product_related_data['user_info']->has_phone = true;
+                }
+            }
+
             DB::table('user_products')->insert([
                 'created_at' => $now,
                 'updated_at' => $now,
                 'product_id' => $product->id,
-                'myuser_id' => session('user_id'),
+                'myuser_id' => $user_id,
             ]);
         }
+
+        unset($product_related_data['user_info']->phone_view_permission);
 
         DB::table('products')->where('id',$product->id)->increment('product_view_count');
 
@@ -589,6 +598,23 @@ class product_controller extends Controller
             'status' => true,
             'product' => $product_related_data,
         ], 201);
+    }
+
+    protected function does_Delsa_already_send_this_product_to_this_user($product_id,$seller_id,$user_id)
+    {
+        $related_records_count = DB::table('leads')
+                                ->where('related_product_id',$product_id)
+                                ->where('buyer_id',$user_id)
+                                ->where('seller_id',$seller_id)
+                                ->get()
+                                ->count();
+
+        if($related_records_count > 0)
+        {
+            return true;
+        }
+
+        return false;
     }
 
     //public method

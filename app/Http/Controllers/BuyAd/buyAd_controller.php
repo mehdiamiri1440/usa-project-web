@@ -89,6 +89,19 @@ class buyAd_controller extends Controller
         'c.category_name as subcategory_name'
     ];
 
+    protected $related_public_buyAd_list_required_fields = [
+        'buy_ads.id',
+        'buy_ads.name',
+        'buy_ads.created_at',
+        'buy_ads.updated_at',
+        'buy_ads.category_id',
+        'buy_ads.requirement_amount',
+        // 'myusers.user_name',
+        'myusers.first_name',
+        'myusers.last_name',
+        'c.category_name as subcategory_name'
+    ];
+
     protected $my_sell_offer_required_fields = [
         'buy_ad_id',
         'myuser_id',
@@ -326,20 +339,44 @@ class buyAd_controller extends Controller
     public function get_buyAd_list(Request $request)
     {
         $this->validate($request, [
-            'from_record_number' => 'integer|min:1',
-            'to_record_number' => 'integer|min:1',
+            'from' => 'integer|min:1',
+            'to' => 'integer|min:1',
         ]);
 
-        $all_buyAds = null;
-        if ($request->filled('from_record_number') && $request->filled('to_record_number')) {
-            $all_buyAds = $this->get_all_buy_ads_with_related_media($request->form_record_number, $request->to_record_number);
-        } else {
-            $all_buyAds = $this->get_all_buy_ads_with_related_media();
+        $query = DB::table('buy_ads')
+                    ->join('myusers', 'buy_ads.myuser_id', '=', 'myusers.id')
+                    ->join('categories as c', 'buy_ads.category_id', '=', 'c.id')
+                    ->where('buy_ads.confirmed', true)
+                    ->where('myusers.is_blocked',false)
+                    ->where(function($q){
+                        return $q = $q->where('buy_ads.reply_capacity','>',0)
+                                        ->orWhere('buy_ads.phone_view_capacity','>',0);
+                    })
+                    ->whereNull('buy_ads.deleted_at')
+                    ->whereBetween('buy_ads.updated_at',[Carbon::now()->subWeeks(3),Carbon::now()]);
+                    // ->where('buy_ads.myuser_id','<>',$user->id);
+
+        $query = $query->select($this->related_public_buyAd_list_required_fields)
+                        ->orderBy('buy_ads.updated_at','desc');
+
+        $buyAds = $query->get()->toArray();
+
+        if ($request->filled('from') && $request->filled('to')) {
+            $buyAds = array_slice($buyAds,$request->from, abs($request->to - $request->from));
+        } 
+        
+        $date_convertor_object = new date_convertor();
+        $result_buyAds = [];
+        foreach ($buyAds as $buyAd) {
+            $buyAd->register_date = $date_convertor_object->get_persian_date_with_month_name($buyAd->created_at);
+
+            $result_buyAds[] = $buyAd;
         }
+        
 
         return response()->json([
             'status' => true,
-            'buy_ads' => $all_buyAds,
+            'buy_ads' => $result_buyAds,
         ], 200);
     }
 
@@ -883,18 +920,6 @@ class buyAd_controller extends Controller
             unset($buyAd->phone_view_permission);
         });
                     
-        //relevance
-        // $buyAds = $buyAds->filter(function ($buyAd) {
-        //     $user_id = session('user_id');
-
-        //     $category_record = category::find($buyAd->category_id);
-        //     $user_record = myuser::find($user_id);
-
-        //     $relevence = ($user_record->category_id == $category_record->parent_id) ? true : false;
-        //     // $user_already_offered_for_buyAd = false;
-
-        //     return  $relevence;
-        // });
 
         return $buyAds;
     }
