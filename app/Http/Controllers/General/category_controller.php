@@ -16,7 +16,7 @@ class category_controller extends Controller
         $parent_id = $request->parent_id;
         $casade_list = $request->cascade_list;
 
-        $all_categories = Cache::remember(md5('categories'),24 * 60,function(){
+        $all_categories = Cache::remember(md5('categories'),1,function(){
             return DB::table('categories')
                         ->leftJoin('products','products.category_id','=','categories.id')
                         ->select('categories.*',DB::raw('count(products.id) as score'))
@@ -25,7 +25,9 @@ class category_controller extends Controller
                         ->get();
         });
 
-        if (!$request->has('parent_id')) {
+        // var_dump($all_categories);
+
+        if ( ! $request->has('parent_id')) {
             $categories = $all_categories->filter(function($category){
                 return $category->parent_id == null;
             });
@@ -46,6 +48,19 @@ class category_controller extends Controller
                         return $category->parent_id == $item->id;
                     });
 
+                    $item->subcategories->each(function($item) use($all_categories){
+                        $other = null;
+                        $item->subcategories = $all_categories->filter(function($category) use($item,&$other){
+                            if($category->parent_id == $item->id && $category->category_name == 'سایر'){
+                                $other = $category;
+                                return false;
+                            }
+
+                            return $category->parent_id == $item->id;
+                        });
+                    });
+                    
+
                     if(! is_null($other)){
                         ($item->subcategories)[] = $other;
                     }
@@ -65,6 +80,7 @@ class category_controller extends Controller
 
                 // $categories['subcategories'] = category::where('parent_id', $parent_id)
                 //     ->get();
+                
                 $other = null;
                 $categories->subcategories = $all_categories->filter(function($category) use($parent_id,&$other){
                     if($category->parent_id == $parent_id && $category->category_name == 'سایر'){
@@ -74,31 +90,31 @@ class category_controller extends Controller
                     return $category->parent_id == $parent_id;
                 });
 
-                if(! is_null($other)){
-                    ($categories->subcategories)[] = $other;
-                }
-            } else {
-                // $categories = category::where('parent_id', $parent_id)
-                //     ->get();
-                $other = null;
-                $categories = $all_categories->filter(function($category) use($parent_id,&$other){
-                    if($category->parent_id == $parent_id && $category->category_name == 'سایر'){
-                        $other = $category;
-                        return false;
+            if(! is_null($other)){
+                                ($categories->subcategories)[] = $other;
+                            }
+                        } else {
+                            // $categories = category::where('parent_id', $parent_id)
+                            //     ->get();
+                            $other = null;
+                            $categories = $all_categories->filter(function($category) use($parent_id,&$other){
+                                if($category->parent_id == $parent_id && $category->category_name == 'سایر'){
+                                    $other = $category;
+                                    return false;
+                                }
+
+                                return $category->parent_id == $parent_id;
+                            });
+
+                            if(! is_null($other)){
+                                $categories[] = $other;
+                            }
+                        }
                     }
 
-                    return $category->parent_id == $parent_id;
-                });
-
-                if(! is_null($other)){
-                    $categories[] = $other;
+                    return response()->json([
+                        'status' => true,
+                        'categories' => array_values($categories->toArray()),
+                    ], 200);
                 }
-            }
-        }
-
-        return response()->json([
-            'status' => true,
-            'categories' => array_values($categories->toArray()),
-        ], 200);
     }
-}
