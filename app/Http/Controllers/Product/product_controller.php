@@ -24,6 +24,7 @@ use App\Http\Controllers\General\media_controller;
 use Illuminate\Support\Facades\Cache;
 use App\Http\Controllers\Accounting\comment_controller;
 use App\Http\Middleware\login;
+use App\Jobs\Notifiers\NotifyPriceUpdateForOldBuyers;
 
 class product_controller extends Controller
 {
@@ -807,6 +808,10 @@ class product_controller extends Controller
                 DB::table('products')
                         ->where('id', $product_id)
                         ->update($data);
+
+                if($data['min_sale_price'] != $product->min_sale_price){
+                    NotifyPriceUpdateForOldBuyers::dispatch($product);
+                }
 
                 return response()->json([
                     'status' => true,

@@ -38,6 +38,9 @@ class LeadGenerator implements ShouldQueue
 
     protected function generate_leads()
     {
+        $now = Carbon::now();
+        $from = Carbon::now()->subDays(1);
+
         $records = DB::table('user_products')
                                 ->join('products','products.id','=','user_products.product_id')
                                 ->join('myusers','myusers.id','=','user_products.myuser_id')
@@ -74,11 +77,10 @@ class LeadGenerator implements ShouldQueue
                                                 ->from('phone_number_view_logs')
                                                 ->whereRaw('phone_number_view_logs.myuser_id = products.myuser_id and phone_number_view_logs.viewer_id = user_products.myuser_id and phone_number_view_logs.viewer_role = "BUYER" and phone_number_view_logs.related_item = "PRODUCT" ');
                                         })
-                                        ->whereNotExists(function($q){
+                                        ->whereNotExists(function($q) use($from,$now){
                                             $q->select(DB::raw(1))
                                                 ->from('leads')
-                                                ->whereRaw('leads.buyer_id = user_products.myuser_id')
-                                                ->whereBetween('leads.created_at',[Carbon::now()->subDays(1),Carbon::now()]);
+                                                ->whereRaw("leads.buyer_id = user_products.myuser_id and leads.created_at between '" . $from . "' and '" . $now . "'");
                                         })
                                         ->select('user_products.*','products.category_id','products.product_name')
                                         ->groupBy('user_products.myuser_id')

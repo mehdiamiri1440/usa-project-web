@@ -1305,7 +1305,7 @@ class product_list_controller extends Controller
             }
             else{
                 $result = array_filter($products,function($product) use($viewer_info){
-                    return $product['main']->category_id == $viewer_info->category_id && $product['user_info']->response_rate >= 70;
+                    return $product['user_info']->response_rate >= 70;
                 });
             }
             

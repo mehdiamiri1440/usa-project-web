@@ -33,6 +33,50 @@ Route::get('/product-view/{category_name}/{extra_text}/{product_id}',[
     'uses' => 'Product\product_controller@get_product_blade',
 ])->where('product_id','[0-9]+');
 
+Route::get('/pricing',function(){
+    if(session()->has('user_id')){
+        if(session('is_seller') == true){
+            return redirect('/seller/pricing');
+        }
+        else if(session('is_buyer') == true){
+
+            return redirect('/switch-role');
+        }
+    }
+    else{
+        return redirect('/register');
+    }
+});
+
+Route::get('/msg',function(){
+    if(session()->has('user_id')){
+        if(session('is_seller') == true){
+            return redirect('/seller/messenger/contacts');
+        }
+        else if(session('is_buyer') == true){
+            return redirect('/buyer/messenger/contacts');
+        }
+    }
+    else{
+        return redirect('/register');
+    }
+});
+
+Route::get('/buyers',function(){
+    if(session()->has('user_id')){
+        if(session('is_seller') == true){
+            return redirect('/seller/messenger/buy-ads');
+        }
+        else if(session('is_buyer') == true){
+
+            return redirect('/switch-role');
+        }
+    }
+    else{
+        return redirect('/register');
+    }
+});
+
 // Route::group(['prefix' => 'master'], function () {
 //     Route::get('/', function () {
 //         return view('layout.master');

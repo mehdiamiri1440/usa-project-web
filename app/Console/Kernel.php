@@ -135,7 +135,7 @@ class Kernel extends ConsoleKernel
 
         $lead_generator_job = new LeadGenerator();
         $schedule->job($lead_generator_job)
-                        ->cron('44 */4 * * *');
+                        ->cron('44 */2 * * *');
 
         $lead_distributor_job = new LeadDistributorBot();
         $schedule->job($lead_distributor_job)
