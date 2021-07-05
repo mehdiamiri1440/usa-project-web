@@ -855,6 +855,8 @@
     <div class="chat-page" v-if="$parent.selectedContact">
       <div class="bg-wrapper"></div>
       <ul
+        @scroll="myFunction()"
+        id="chat-list"
         :class="[
           $parent.chatMessagesLoader && $parent.isFirstMessageLoading
             ? 'chat-not-loaded'
@@ -1121,6 +1123,24 @@ export default {
     };
   },
   methods: {
+    myFunction() {
+      let listWrapper = $("#chat-list");
+      let scrollPosition = listWrapper.scrollTop();
+      let totalHeight = listWrapper[0].scrollHeight;
+      let position = {
+        scrollPosition   ,
+        wrapperHeight : listWrapper.height() + 20, 
+        totalHeight
+      }
+      if (scrollPosition <= 100 && !this.$parent.chatMessagesLoader) {
+        this.$parent.getMoreChat(position);
+      }
+      // var elmnt = document.getElementById("myDIV");
+      // var x = elmnt.scrollLeft;
+      // var y = elmnt.scrollTop;
+      // console.log("Horizontally: " + x + "px<br>Vertically: " + y + "px");
+    },
+
     init: function () {
       this.userGuide();
       this.hideCollapses();
