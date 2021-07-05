@@ -639,10 +639,68 @@
   background: #1da1f2;
 }
 
+.modal-dialog {
+  width: 400px;
+}
+.modal-content {
+  overflow: hidden;
+  border-radius: 12px;
+}
+.close-modal {
+  font-size: 20px;
+
+  color: #777;
+
+  position: absolute;
+
+  right: 0;
+
+  padding: 8px 15px 2px;
+
+  top: 0;
+}
+
+.modal-title {
+  font-size: 16px;
+
+  font-weight: 800;
+
+  color: #474747;
+
+  text-align: center;
+}
+
+.modal-header {
+  padding: 9px 15px 10px;
+}
+
+.modal-body {
+  padding: 0 15px;
+}
+
 @media screen and (max-width: 1199px) {
   .message-wrapper .message-contact-title {
     position: relative;
     z-index: 5;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  #fitler-modal > div {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .modal-content {
+    min-height: 100%;
+
+    border-radius: 0;
+
+    border: none;
+
+    float: right;
+
+    width: 100%;
   }
 }
 
@@ -943,6 +1001,43 @@
                 </span>
               </div>
             </div>
+            <div
+              v-else-if="msg.p_id && checkMessageListClass(msg.sender_id)"
+              class="message-content-wrapper is-phone-active-wrapper"
+            >
+              <!--msg.created_at | moment("jYY/jMM/jDD, HH:mm") -->
+              <div>
+                <span class="message-text" v-text="msg.text"></span>
+
+                <span class="message-chat-date">
+                  <span v-if="msg.created_at">{{
+                    msg.created_at | moment("jYYYY/jMM/jDD, HH:mm")
+                  }}</span>
+                  <span v-else>{{
+                    Date() | moment("jYYYY/jMM/jDD, HH:mm")
+                  }}</span>
+                  <div class="message-button-wrapper link-button">
+                    <button
+                      v-if="
+                        $parent.currentUser.user_info.active_pakage_type == 0
+                      "
+                      @click.prevent="openClerkModal()"
+                    >
+                      استخدام منشی آنلاین
+                      <i class="fa fa-user"></i>
+                    </button>
+                    <button
+                      v-else
+                      @click.prevent="openEditPriceModal(msg.p_id)"
+                    >
+                      ویرایش قیمت
+                      <i v-if="!editPriceLoader" class="fa fa-edit"></i>
+                      <i v-else class="fas fa-circle-notch fa-spin"></i>
+                    </button>
+                  </div>
+                </span>
+              </div>
+            </div>
 
             <div v-else class="message-content-wrapper">
               <span class="message-text" v-text="msg.text"></span>
@@ -1105,13 +1200,17 @@
   </div>
 </template>
 
+
 <script>
+import swal from "../../../sweetalert.min.js";
+import { eventBus } from "../../../router/router";
 export default {
   data() {
     return {
       isVoiceRecord: false,
       isChat: false,
       openProductLoader: false,
+      editPriceLoader: false,
     };
   },
   methods: {
@@ -1227,6 +1326,41 @@ export default {
       } else {
         return false;
       }
+    },
+    openClerkModal() {
+      swal({
+        title: "استخدام منشی",
+        text: "آیا میخواهید یه منشی استخدام کنید؟",
+        icon: "info",
+        className: "custom-swal-with-cancel",
+        buttons: {
+          success: {
+            text: "ارتقا عضویت",
+            value: "promote",
+          },
+          close: {
+            text: "بستن",
+            className: "bg-cancel",
+          },
+        },
+      }).then((value) => {
+        switch (value) {
+          case "promote":
+            this.$router.push({ name: "dashboardPricingTableSeller" });
+            break;
+        }
+      });
+    },
+    openEditPriceModal(productId) {
+      this.editPriceLoader = true;
+
+      axios
+        .post("/get_product_by_id", { product_id: productId })
+        .then((response) => {
+          eventBus.$emit("editProductData", response.data.product);
+          $("#edit-price-modal").modal("show");
+          this.editPriceLoader = false;
+        });
     },
   },
   mounted: function () {
