@@ -999,13 +999,7 @@
           </div>
         </li>
         <li
-          v-if="
-            checkMobileWidth() &&
-            $parent.userAllowedReview &&
-            $parent.isLikeBoxActive &&
-            !$parent.isLatestMessage &&
-            !$parent.chatMessagesLoader
-          "
+          v-if="checkMobileWidth() && checkReviewIsActive()"
           class="mobile-like-user"
           :class="{ success: $parent.isReviewSubmited }"
         >
@@ -1216,6 +1210,23 @@ export default {
         "/" +
         product.main.id
       );
+    },
+    checkReviewIsActive() {
+      if (
+        this.$parent.chatMessages.length == 1 &&
+        this.$parent.chatMessages[0].p_id
+      ) {
+        return false;
+      } else if (
+        this.$parent.userAllowedReview &&
+        this.$parent.isLikeBoxActive &&
+        !this.$parent.isLatestMessage &&
+        !this.$parent.chatMessagesLoader
+      ) {
+        return true;
+      } else {
+        return false;
+      }
     },
   },
   mounted: function () {
