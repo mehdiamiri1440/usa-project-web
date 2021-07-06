@@ -180,7 +180,7 @@ input.error:focus + i {
 }
 
 @media screen and (max-width: 768px) {
-  #fitler-modal > div {
+  #edit-price-modal > div {
     margin: 0;
     width: 100%;
     height: 100%;
@@ -217,7 +217,7 @@ input.error:focus + i {
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <a class="close-modal" @click.prevent="fitlerResetData()">
+          <a class="close-modal" data-dismiss="modal">
             <i class="fa fa-times"></i>
           </a>
 

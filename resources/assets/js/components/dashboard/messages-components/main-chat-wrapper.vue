@@ -1019,20 +1019,17 @@
                   <div class="message-button-wrapper link-button">
                     <button
                       v-if="
-                        $parent.currentUser.user_info.active_pakage_type == 0
+                        $parent.currentUser.user_info.active_pakage_type > 0
                       "
-                      @click.prevent="openClerkModal()"
-                    >
-                      استخدام منشی آنلاین
-                      <i class="fa fa-user"></i>
-                    </button>
-                    <button
-                      v-else
                       @click.prevent="openEditPriceModal(msg.p_id)"
                     >
                       ویرایش قیمت
                       <i v-if="!editPriceLoader" class="fa fa-edit"></i>
                       <i v-else class="fas fa-circle-notch fa-spin"></i>
+                    </button>
+                    <button v-else @click.prevent="openClerkModal()">
+                      استخدام منشی آنلاین
+                      <i class="fa fa-user"></i>
                     </button>
                   </div>
                 </span>
@@ -1329,7 +1326,6 @@ export default {
     },
     openClerkModal() {
       swal({
-        // title: "استخدام منشی",
         text: "سلام، من دلسا هستم، ربات خودکار باسکول. اگر مایل هستید بازاریابی بیشتری برای محصولات شما انجام بدهیم کافی است نوع عضویت خود را ارتقا دهید.",
         icon: "info",
         className: "custom-swal-with-cancel",
