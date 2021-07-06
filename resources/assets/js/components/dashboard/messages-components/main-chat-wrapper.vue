@@ -10,7 +10,7 @@
   position: relative;
   align-items: center;
   z-index: 1;
-  margin-top: 20%;
+  margin-top: 25%;
 }
 
 .loading-container .lds-ring {
@@ -1128,17 +1128,13 @@ export default {
       let scrollPosition = listWrapper.scrollTop();
       let totalHeight = listWrapper[0].scrollHeight;
       let position = {
-        scrollPosition   ,
-        wrapperHeight : listWrapper.height() + 20, 
-        totalHeight
-      }
-      if (scrollPosition <= 100 && !this.$parent.chatMessagesLoader) {
+        scrollPosition,
+        wrapperHeight: listWrapper.height() + 20,
+        totalHeight,
+      };
+      if (scrollPosition <= 150 && !this.$parent.chatMessagesLoader) {
         this.$parent.getMoreChat(position);
       }
-      // var elmnt = document.getElementById("myDIV");
-      // var x = elmnt.scrollLeft;
-      // var y = elmnt.scrollTop;
-      // console.log("Horizontally: " + x + "px<br>Vertically: " + y + "px");
     },
 
     init: function () {
