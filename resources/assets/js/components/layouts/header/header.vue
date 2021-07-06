@@ -109,31 +109,28 @@ a.close-dialog-popup {
 
 .search-input {
   transition: 150ms;
-  min-width: 480px;
+  min-width: 590px;
   overflow: hidden;
   position: relative;
   border-radius: 8px;
 }
 
 .search-input input {
-  padding: 8px 15px;
-
+  padding: 8px 175px 8px 15px;
   margin: 0;
-
   float: right;
-
-  border: none;
-
-  background: #f8f8f8;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
 }
 
 .search-input button {
   transition: 150ms;
   border: none;
   margin: 0;
-  padding: 8px 27px;
-  color: #fff;
-  background: #000546;
+  padding: 8px 17px;
+  color: #868686;
+  background: none;
   position: absolute;
   left: 0;
   top: 0;
@@ -141,12 +138,18 @@ a.close-dialog-popup {
   font-weight: 500;
 }
 
-.search-input button:hover {
-  transition: 150ms;
+.search-input button.open-categories {
+  left: initial;
+  right: 0;
+  background: #eee;
+  color: #313a43;
+  font-weight: 400;
+  padding: 9px 15px;
+  font-size: 16px;
+}
 
-  padding-left: 30px;
-
-  padding-right: 30px;
+.search-input button.open-categories span {
+  margin-left: 22px;
 }
 
 .search-input button i:before {
@@ -172,7 +175,8 @@ nav.navbar {
 }
 
 .nav > li > a.green-button:hover {
-  background: #00c569;
+  background: #f0f7e7;
+  color: #5f6368 !important;
 }
 
 .nav > li > a.green-button.router-link-exact-active:hover {
@@ -180,34 +184,66 @@ nav.navbar {
 }
 
 nav .green-button {
-  font-size: 17px;
-  padding: 10px 20px 9px;
+  font-size: 14px;
+  background: none;
+  color: #5f6368;
   margin-top: 0;
-  margin-right: 15px;
   font-weight: 400;
-  border-radius: 8px;
+  padding: 0;
+  padding: 5px 10px;
+  /* padding: 10px 20px 9px;
+  
+  margin-right: 15px; */
+
+  border-radius: 12px;
 }
 
-nav .green-button.static-layout {
-  padding: 10px 0 9px;
-  width: 167px;
+nav .green-button .item-icon {
+  font-size: 19px;
+}
+
+nav .green-button .item-icon.register::before {
+  content: "\F067";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  font-size: 10px;
+  position: relative;
+  top: -5px;
+  color: #21ad93;
+}
+.user-auth-info-wrapper .navbar-nav > li {
+  margin: -5px auto;
+  padding: 0 10px;
+}
+.user-auth-info-wrapper .navbar-nav > li:before {
+  content: " ";
+  width: 1px;
+  height: 35px;
+  position: absolute;
+  right: 0;
+  background: #eee;
+  top: 8px;
+}
+.user-auth-info-wrapper .navbar-nav > li:last-of-type:before {
+  display: none;
 }
 
 nav .green-button-alt {
-  font-size: 17px;
-  padding: 10px 20px 9px;
+  padding: 5px 10px;
+  font-size: 14px;
   margin-top: 0;
   margin-right: 15px;
   font-weight: 400;
-  border-radius: 8px;
+  border-radius: 12px;
   border: none;
   background: none;
-  color: #1da1f2;
+  /* color: #1da1f2; */
+  color: #5f6368;
 }
 
 .nav > li > a.green-button.green-button-alt:hover {
   color: #fff;
-  background: #1da1f2 !important;
+  background: #e6f4f8 !important;
 }
 
 .green-button-alt:focus,
@@ -219,6 +255,14 @@ nav .green-button.router-link-exact-active,
 nav > li > a.green-button.router-link-exact-active:hover {
   background-color: #eee;
   border-color: #eee;
+  color: #fff !important;
+}
+
+nav .green-button.router-link-exact-active:hover,
+nav .green-button.router-link-exact-active span,
+nav .green-button.router-link-exact-active div,
+nav .green-button.router-link-exact-active i,
+nav .green-button.router-link-exact-active .item-icon.register::before {
   color: #fff !important;
 }
 
@@ -241,6 +285,13 @@ nav > li > a.green-button.router-link-exact-active:hover {
 
 .buskool-sub-menu .navbar-right {
   margin-right: 193px;
+  position: absolute;
+}
+
+.buskool-sub-menu .navbar-right > li > ul {
+  position: absolute;
+  width: 600px;
+  background: #fff;
 }
 
 .buskool-sub-menu {
@@ -248,6 +299,7 @@ nav > li > a.green-button.router-link-exact-active:hover {
   height: 33px;
   overflow: hidden;
   margin-bottom: -1px;
+  background-color: #fafafa;
 }
 
 .buskool-sub-menu.scrollUp {
@@ -260,17 +312,30 @@ nav > li > a.green-button.router-link-exact-active:hover {
 }
 
 .buskool-sub-menu a {
-  color: #5f6368;
+  color: #404b55;
   padding: 6px 15px;
   position: relative;
+  border-left: 1px solid #eee;
+  font-weight: 300;
 }
 
-.buskool-sub-menu a:hover,
+.buskool-sub-menu a.menu-title {
+  font-size: 15px;
+  display: block;
+  border-bottom: 1px solid #e9ecef;
+  color: #000;
+}
+
+.buskool-sub-menu li:last-of-type a {
+  border-left: none;
+}
+
+/* .buskool-sub-menu a:hover,
 .buskool-sub-menu a.router-link-exact-active {
   color: #4dc0bb;
   background: #fff;
   border-bottom: 1px solid;
-}
+} */
 
 a.profile-info-wrapper {
   overflow: hidden;
@@ -485,12 +550,6 @@ a.profile-info-wrapper:hover {
     width: initial;
   }
 
-  .search-input button:hover {
-    padding-left: 19px;
-
-    padding-right: 19px;
-  }
-
   #buskool-nav {
     margin: 0;
   }
@@ -510,12 +569,8 @@ a.profile-info-wrapper:hover {
 }
 
 @media screen and (max-width: 767px) {
-  .search-input button:hover {
-    transition: 150ms;
-
-    padding-left: 9px;
-
-    padding-right: 9px;
+  .navbar-nav > li {
+    border-right: none;
   }
 
   a.profile-info-wrapper {
@@ -941,15 +996,17 @@ a.profile-info-wrapper:hover {
           <ul v-else class="nav navbar-nav">
             <li class="hidden-xs">
               <router-link class="green-button" :to="{ name: 'register' }">
-                <i class="fa fa-user static-layout"></i>
-                ثبت نام رایگان
+                <div class="item-icon register">
+                  <i class="fa fa-user static-layout light-green-text"></i>
+                </div>
+                ثبت نام
+                <span class="light-green-text"> رایگان </span>
               </router-link>
             </li>
 
             <li class="mobile-login-link hidden-sm hidden-md hidden-lg">
               <router-link class="green-button" :to="{ name: 'register' }">
                 <i class="fa fa-user"></i>
-
                 <span>ورود / ثبت نام</span>
               </router-link>
             </li>
@@ -959,7 +1016,9 @@ a.profile-info-wrapper:hover {
                 class="green-button green-button-alt static-layout"
                 :to="{ name: 'login' }"
               >
-                <i class="fa fa-sign-in-alt"></i>
+                <div class="item-icon">
+                  <i class="fa fa-sign-in-alt"></i>
+                </div>
                 ورود به باسکول
               </router-link>
             </li>
@@ -976,6 +1035,10 @@ a.profile-info-wrapper:hover {
         >
           <div class="wrapper-nav">
             <div class="search-input hidden-xs">
+              <button class="open-categories">
+                <span> همه محصولات </span>
+                <i class="fa fa-angle-down"></i>
+              </button>
               <input
                 type="text"
                 placeholder="محصول مورد نظر خود را جستجو کنید"
@@ -987,7 +1050,7 @@ a.profile-info-wrapper:hover {
               </button>
             </div>
             <ul class="mobile-navigation hidden-lg hidden-sm hidden-md">
-              <li>
+              <!-- <li>
                 <router-link
                   class="smoothScroll"
                   :to="{ name: 'indexPage' }"
@@ -1119,14 +1182,14 @@ a.profile-info-wrapper:hover {
                   >وبلاگ</a
                 >
               </li>
-              <!--  <li>
+               <li>
                             <router-link
                               class="smoothScroll"
                               :to="{ name: 'pricing'}"
                               @click="registerComponentStatistics('header','pricing','click-on-pricing')"
                             >ارتقا عضویت</router-link>
                           </li>
-              -->
+             
               <li>
                 <router-link
                   class="smoothScroll"
@@ -1141,7 +1204,7 @@ a.profile-info-wrapper:hover {
                 >
                   درباره ما
                 </router-link>
-              </li>
+              </li> -->
             </ul>
           </div>
         </div>
@@ -1164,7 +1227,43 @@ a.profile-info-wrapper:hover {
       </div>
       <div class="container-fluid buskool-sub-menu hidden-xs">
         <ul class="nav navbar-right navbar-nav">
-          <li>
+          <li
+            v-for="(category, index) in categoryList"
+            :key="index"
+            class="smoothScroll"
+          >
+            <a href="#" @click.prevent v-text="category.category_name"> </a>
+            <ul>
+              <li
+                v-for="(subCategory, index) in category.subcategories"
+                :key="index + 'sub-menu'"
+                class="col-xs-12"
+                :class="[setMenuClass(subCategory)]"
+              >
+                <a
+                  href="#"
+                  class="menu-title"
+                  v-text="subCategory.category_name"
+                >
+                </a>
+                <ul>
+                  <li
+                    v-for="(item, index) in subCategory.subcategories"
+                    :key="index + 'last-sub-menu'"
+                  >
+                    <a
+                      href="#"
+                      class="sub-menu-title"
+                      v-text="item.category_name"
+                    >
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+
+          <!-- <li>
             <router-link
               class="smoothScroll"
               :to="{ name: 'indexPage' }"
@@ -1293,14 +1392,14 @@ a.profile-info-wrapper:hover {
               >وبلاگ</a
             >
           </li>
-          <!--  <li>
+           <li>
                         <router-link
                           class="smoothScroll"
                           :to="{ name: 'pricing'}"
                           @click="registerComponentStatistics('header','pricing','click-on-pricing')"
                         >ارتقا عضویت</router-link>
                       </li>
-          -->
+         
           <li>
             <router-link
               class="smoothScroll"
@@ -1315,7 +1414,7 @@ a.profile-info-wrapper:hover {
             >
               درباره ما
             </router-link>
-          </li>
+          </li> -->
         </ul>
       </div>
     </nav>
@@ -1348,6 +1447,7 @@ export default {
     "user_logout_path",
     "storage_path",
     "login_page_path",
+    "categoryList",
   ],
   methods: {
     // jQuery
@@ -1426,6 +1526,29 @@ export default {
           },
         });
       }
+    },
+    setMenuClass(categories) {
+      let categoryLength = Object.keys(categories.subcategories).length;
+      console.log(categoryLength);
+      if (categoryLength <= 5) {
+        return "col-md-3";
+      } else if (categoryLength <= 10) {
+        return "col-md-6";
+      }
+      // switch (categoryLength) {
+      //   case categoryLength >= 10:
+      //     console.log(categoryLength <= 10);
+      //     return "col-xs-12 ", "col-md-6";
+      //     break;
+      //   case categoryLength <= 5:
+      //     console.log(categoryLength <= 5);
+      //     return "col-xs-12 ", " col-md-3";
+      //     break;
+
+      // default:
+      //   return "col-xs-12";
+      //   break;
+      // }
     },
   },
   mounted() {
