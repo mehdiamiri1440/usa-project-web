@@ -1325,27 +1325,7 @@ export default {
       }
     },
     openClerkModal() {
-      swal({
-        text: "سلام، من دلسا هستم، ربات خودکار باسکول. اگر مایل هستید بازاریابی بیشتری برای محصولات شما انجام بدهیم کافی است نوع عضویت خود را ارتقا دهید.",
-        icon: "info",
-        className: "custom-swal-with-cancel",
-        buttons: {
-          success: {
-            text: "ارتقا عضویت",
-            value: "promote",
-          },
-          close: {
-            text: "بستن",
-            className: "bg-cancel",
-          },
-        },
-      }).then((value) => {
-        switch (value) {
-          case "promote":
-            this.$router.push({ name: "dashboardPricingTableSeller" });
-            break;
-        }
-      });
+      $("#delsa-promotion-modal").modal("show")
     },
     openEditPriceModal(productId) {
       this.editPriceLoader = true;

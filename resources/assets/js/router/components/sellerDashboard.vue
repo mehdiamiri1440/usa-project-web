@@ -312,6 +312,7 @@
     </div>
     <!-- end regex pricing modal -->
     <promotion-modal />
+    <DelsaPromotionModal />
 
     <header-dash-seller
       :storage="storagePath"
@@ -361,7 +362,7 @@
 import HeaderDashSeller from "../../components/dashboard/seller/header/header";
 import pricingContents from "../../components/dashboard/seller/pricing-seller-page/pricing-tables/pricing-package-contents";
 import PromotionModal from "../../components/layouts/main/promotion-modal";
-
+import DelsaPromotionModal from "../../components/layouts/main/delsa-promotion-modal.vue";
 import { eventBus } from "../router.js";
 
 export default {
@@ -369,6 +370,7 @@ export default {
     "header-dash-seller": HeaderDashSeller,
     "pricing-contents": pricingContents,
     PromotionModal,
+    DelsaPromotionModal,
   },
   props: [
     "userId",
