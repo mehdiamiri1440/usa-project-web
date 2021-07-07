@@ -110,9 +110,45 @@ a.close-dialog-popup {
 .search-input {
   transition: 150ms;
   min-width: 590px;
-  overflow: hidden;
   position: relative;
   border-radius: 8px;
+}
+
+.search-input .dropdown-categories {
+  position: absolute;
+  width: 100%;
+}
+
+.search-input .dropdown-categories > ul {
+  position: absolute;
+  top: 40px;
+  width: 160px;
+  background: #fafafa;
+  border-radius: 0 0 12px 0;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+  z-index: 1;
+}
+
+.search-input .dropdown-categories > ul > li > button {
+  display: block;
+  width: 100%;
+  border: none;
+  border-radius: 0;
+  background: none;
+}
+
+.search-input .dropdown-categories > ul > li > button:hover {
+  background: #eee;
+}
+
+.search-input .dropdown-categories > ul > li > button > ul {
+  position: absolute;
+  right: 100%;
+  top: 0;
+  background: #fff;
+  box-shadow: -3px 3px 6px rgba(0, 0, 0, 0.16);
+  border-radius: 0 0 12px 12px;
+  width: 430px;
 }
 
 .search-input input {
@@ -124,7 +160,7 @@ a.close-dialog-popup {
   border-radius: 12px;
 }
 
-.search-input button {
+.search-input > button {
   transition: 150ms;
   border: none;
   margin: 0;
@@ -146,6 +182,14 @@ a.close-dialog-popup {
   font-weight: 400;
   padding: 9px 15px;
   font-size: 16px;
+  position: absolute;
+  border: none;
+  border-radius: 0 12px 12px 0;
+}
+
+.search-input .dropdown-categories .category-name {
+  display: flex;
+  justify-content: space-around;
 }
 
 .search-input button.open-categories span {
@@ -285,18 +329,42 @@ nav .green-button.router-link-exact-active .item-icon.register::before {
 
 .buskool-sub-menu .navbar-right {
   margin-right: 193px;
+}
+
+.absolute-position > ul {
   position: absolute;
+}
+
+.buskool-sub-menu .navbar-right > li > a + ul {
+  display: none;
+  height: 0;
+}
+
+.buskool-sub-menu .navbar-right > li > a:hover + ul,
+.buskool-sub-menu .navbar-right > li > ul:hover {
+  display: block;
+  height: initial;
+}
+.buskool-sub-menu .navbar-right > li > ul:hover + a {
+  background: red;
 }
 
 .buskool-sub-menu .navbar-right > li > ul {
   position: absolute;
   width: 600px;
   background: #fff;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+  border-radius: 0 0 12px 12px;
+}
+
+.buskool-sub-menu .navbar-right > li > ul > li {
+  padding-bottom: 17px;
 }
 
 .buskool-sub-menu {
   transition: 0.3s;
   height: 33px;
+  opacity: 1;
   overflow: hidden;
   margin-bottom: -1px;
   background-color: #fafafa;
@@ -304,6 +372,7 @@ nav .green-button.router-link-exact-active .item-icon.register::before {
 
 .buskool-sub-menu.scrollUp {
   height: 0;
+  opacity: 0;
   transition: 0.3s;
 }
 
@@ -311,7 +380,7 @@ nav .green-button.router-link-exact-active .item-icon.register::before {
   float: right;
 }
 
-.buskool-sub-menu a {
+.buskool-sub-menu .smoothScroll > a {
   color: #404b55;
   padding: 6px 15px;
   position: relative;
@@ -319,23 +388,32 @@ nav .green-button.router-link-exact-active .item-icon.register::before {
   font-weight: 300;
 }
 
-.buskool-sub-menu a.menu-title {
+a.menu-title {
   font-size: 15px;
   display: block;
   border-bottom: 1px solid #e9ecef;
   color: #000;
+  padding: 13px 0;
+}
+
+a.sub-menu-title {
+  font-size: 13px;
+  color: #707070;
+  display: block;
+  padding: 7px 0;
+  font-weight: 300;
+  transition: 300ms;
+  transform: translateX(0);
+}
+
+a.sub-menu-title:hover {
+  color: #21ad93;
+  transform: translateX(-5px);
 }
 
 .buskool-sub-menu li:last-of-type a {
   border-left: none;
 }
-
-/* .buskool-sub-menu a:hover,
-.buskool-sub-menu a.router-link-exact-active {
-  color: #4dc0bb;
-  background: #fff;
-  border-bottom: 1px solid;
-} */
 
 a.profile-info-wrapper {
   overflow: hidden;
@@ -1035,10 +1113,52 @@ a.profile-info-wrapper:hover {
         >
           <div class="wrapper-nav">
             <div class="search-input hidden-xs">
-              <button class="open-categories">
-                <span> همه محصولات </span>
-                <i class="fa fa-angle-down"></i>
-              </button>
+              <div class="dropdown-categories">
+                <button class="open-categories">
+                  <span> همه محصولات </span>
+                  <i class="fa fa-angle-down"></i>
+                </button>
+                <ul>
+                  <li v-for="(category, index) in categoryList" :key="index">
+                    <button>
+                      <div class="category-name">
+                        <span v-text="category.category_name"></span>
+                        <i class="fa fa-angle-left"></i>
+                      </div>
+                      <ul>
+                        <li
+                          v-for="(subCategory, index) in category.subcategories"
+                          :key="index + 'sub-menu'"
+                          class="col-xs-12 text-right"
+                          :class="[setMenuClass(subCategory)]"
+                        >
+                          <a
+                            href="#"
+                            class="menu-title"
+                            v-text="subCategory.category_name"
+                          >
+                          </a>
+                          <ul>
+                            <li
+                              v-for="(item, index) in subCategory.subcategories"
+                              :key="index + 'last-sub-menu'"
+                              class="col-xs-12"
+                              :class="[setSubMenuClass(subCategory)]"
+                            >
+                              <router-link
+                                :to="getSubCategoryUrl(item)"
+                                class="sub-menu-title"
+                                v-text="item.category_name"
+                              >
+                              </router-link>
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </button>
+                  </li>
+                </ul>
+              </div>
               <input
                 type="text"
                 placeholder="محصول مورد نظر خود را جستجو کنید"
@@ -1225,7 +1345,7 @@ a.profile-info-wrapper:hover {
           <span class="hidden-sm"> جستجو </span>
         </button>
       </div>
-      <div class="container-fluid buskool-sub-menu hidden-xs">
+      <div class="container-fluid buskool-sub-menu absolute-position hidden-xs">
         <ul class="nav navbar-right navbar-nav">
           <li
             v-for="(category, index) in categoryList"
@@ -1250,13 +1370,15 @@ a.profile-info-wrapper:hover {
                   <li
                     v-for="(item, index) in subCategory.subcategories"
                     :key="index + 'last-sub-menu'"
+                    class="col-xs-12"
+                    :class="[setSubMenuClass(subCategory)]"
                   >
-                    <a
-                      href="#"
+                    <router-link
+                      :to="getSubCategoryUrl(item)"
                       class="sub-menu-title"
                       v-text="item.category_name"
                     >
-                    </a>
+                    </router-link>
                   </li>
                 </ul>
               </li>
@@ -1527,28 +1649,88 @@ export default {
         });
       }
     },
+
     setMenuClass(categories) {
       let categoryLength = Object.keys(categories.subcategories).length;
-      console.log(categoryLength);
       if (categoryLength <= 5) {
-        return "col-md-3";
+        return "col-sm-3";
       } else if (categoryLength <= 10) {
-        return "col-md-6";
+        return "col-sm-6";
       }
-      // switch (categoryLength) {
-      //   case categoryLength >= 10:
-      //     console.log(categoryLength <= 10);
-      //     return "col-xs-12 ", "col-md-6";
-      //     break;
-      //   case categoryLength <= 5:
-      //     console.log(categoryLength <= 5);
-      //     return "col-xs-12 ", " col-md-3";
-      //     break;
+    },
+    setSubMenuClass(categories) {
+      let categoryLength = Object.keys(categories.subcategories).length;
+      if (categoryLength <= 5) {
+        return "col-sm-12";
+      } else if (categoryLength <= 10) {
+        return "col-sm-6";
+      } else {
+        return "col-sm-3";
+      }
+    },
+    handelScroll() {
+      // scroll handeling hide in web
+      var lastScroll = 0;
+      var navbar = $("nav.navbar .buskool-sub-menu");
+      $(window).scroll(function () {
+        var state = $(window).scrollTop();
 
-      // default:
-      //   return "col-xs-12";
-      //   break;
-      // }
+        if ($(window).scrollTop() > 60 && state > lastScroll) {
+          navbar.removeClass("absolute-position").addClass("scrollUp");
+        } else if (
+          ($(window).scrollTop() < 60 && state < lastScroll) ||
+          ($(window).scrollTop() > 60 && state < lastScroll)
+        ) {
+          navbar.removeClass("scrollUp");
+          setTimeout(() => {
+            navbar.addClass("absolute-position");
+          }, 300);
+        }
+
+        lastScroll = state;
+      });
+
+      $("#buskool-nav").on("hide.bs.collapse", function () {
+        $(".mobile-background-shadow").fadeTo(0, 0, function () {
+          $(this).css("display", "none");
+        });
+      });
+
+      $("#buskool-nav").on("show.bs.collapse", function () {
+        $(".mobile-background-shadow").fadeTo(0, 0.8);
+      });
+
+      $(document).on("click", function (e) {
+        /* bootstrap collapse js adds "in" class to your collapsible element*/
+
+        var user_menu_opened = $("#web-profile-items").hasClass("in");
+
+        if (
+          !$(e.target).closest("#web-profile-items").length &&
+          !$(e.target).is("#web-profile-items") &&
+          user_menu_opened === true
+        ) {
+          $("#web-profile-items").collapse("toggle");
+        }
+
+        /* bootstrap collapse js adds "in" class to your collapsible element*/
+
+        var menu_opened = $("#buskool-nav").hasClass("in");
+
+        if (!$(e.target).is(".search-input input") && menu_opened === true) {
+          $("#buskool-nav").collapse("toggle");
+        }
+      });
+    },
+    getSubCategoryUrl: function (t) {
+      let element = $(".buskool-sub-menu .navbar-right > li >  ul");
+      element.addClass("hidden");
+      setTimeout(() => {
+        element.removeClass("hidden");
+      }, 20);
+      let url =
+        "/product-list/category/" + t.category_name.split(" ").join("-");
+      return url;
     },
   },
   mounted() {
@@ -1563,55 +1745,7 @@ export default {
           console.log("error", error);
         });
     }
-    // scroll handeling hide in web
-    var lastScroll = 0;
-    var navbar = $("nav.navbar .buskool-sub-menu");
-    $(window).scroll(function () {
-      var state = $(window).scrollTop();
-
-      if ($(window).scrollTop() > 60 && state > lastScroll) {
-        navbar.addClass("scrollUp");
-      } else if (
-        ($(window).scrollTop() < 60 && state < lastScroll) ||
-        ($(window).scrollTop() > 60 && state < lastScroll)
-      ) {
-        navbar.removeClass("scrollUp");
-      }
-
-      lastScroll = state;
-    });
-
-    $("#buskool-nav").on("hide.bs.collapse", function () {
-      $(".mobile-background-shadow").fadeTo(0, 0, function () {
-        $(this).css("display", "none");
-      });
-    });
-
-    $("#buskool-nav").on("show.bs.collapse", function () {
-      $(".mobile-background-shadow").fadeTo(0, 0.8);
-    });
-
-    $(document).on("click", function (e) {
-      /* bootstrap collapse js adds "in" class to your collapsible element*/
-
-      var user_menu_opened = $("#web-profile-items").hasClass("in");
-
-      if (
-        !$(e.target).closest("#web-profile-items").length &&
-        !$(e.target).is("#web-profile-items") &&
-        user_menu_opened === true
-      ) {
-        $("#web-profile-items").collapse("toggle");
-      }
-
-      /* bootstrap collapse js adds "in" class to your collapsible element*/
-
-      var menu_opened = $("#buskool-nav").hasClass("in");
-
-      if (!$(e.target).is(".search-input input") && menu_opened === true) {
-        $("#buskool-nav").collapse("toggle");
-      }
-    });
+    this.handelScroll();
 
     eventBus.$on("submitSuccess", ($event) => {
       this.popUpMsg = $event;
