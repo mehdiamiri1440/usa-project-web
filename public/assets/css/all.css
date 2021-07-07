@@ -57,8 +57,11 @@
      }
  }
 
- .fa-user:before {
+.fa-user:before {
     content: "\f007"
+}
+.fa-chess-queen:before {
+    content: "\f445"
 }
 .fa-users:before {
     content: "\f0c0"

@@ -631,12 +631,58 @@
   text-align: center;
   color: #fff;
   border: none;
-  font-size: 14px;
+  font-size: 13px;
   padding: 5px 15px;
   margin-top: 8px;
 }
+.message-button-wrapper button i {
+  width: 15px;
+  transform: translateX(0);
+  transition: 300ms;
+}
+
 .message-button-wrapper.link-button button {
-  background: #1da1f2;
+  background: #5d9fd8;
+}
+
+.message-button-wrapper.link-button button.edit-button {
+  background: #556080;
+}
+
+.message-button-wrapper.link-button button i.angle-icon {
+  position: relative;
+  top: 2px;
+  margin-right: 6px;
+}
+
+.message-button-wrapper.link-button button:hover i.angle-icon {
+  transform: translateX(-3px);
+  transition: 300ms;
+}
+
+.message-button-wrapper.link-button button.delsa-button {
+  background: linear-gradient(-90deg, #21ad93, #4dc0bb);
+  transition: 300ms;
+}
+
+.message-button-wrapper.link-button button.delsa-button {
+  background: linear-gradient(-45deg, #00c569, #23d5ab, #21ad93, #23a6d5);
+  background-size: 400% 400%;
+  animation: gradient 10s ease infinite;
+  color: #fff !important;
+  border: none;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .modal-dialog {
@@ -993,8 +1039,12 @@
                   }}</span>
                   <div class="message-button-wrapper link-button">
                     <button @click.prevent="openProduct(msg.p_id)">
+                      <i class="fa fa-angle-left angle-icon"></i>
                       جزییات و تصاویر محصول
-                      <i v-if="!openProductLoader" class="fa fa-link"></i>
+                      <i
+                        v-if="!openProductLoader"
+                        class="fas fa-clipboard-check"
+                      ></i>
                       <i v-else class="fas fa-circle-notch fa-spin"></i>
                     </button>
                   </div>
@@ -1002,7 +1052,11 @@
               </div>
             </div>
             <div
-              v-else-if="msg.p_id && checkMessageListClass(msg.sender_id)"
+              v-else-if="
+                msg.p_id &&
+                checkMessageListClass(msg.sender_id) &&
+                $parent.currentUser.user_info.is_seller
+              "
               class="message-content-wrapper is-phone-active-wrapper"
             >
               <!--msg.created_at | moment("jYY/jMM/jDD, HH:mm") -->
@@ -1018,18 +1072,25 @@
                   }}</span>
                   <div class="message-button-wrapper link-button">
                     <button
+                      class="edit-button"
                       v-if="
                         $parent.currentUser.user_info.active_pakage_type > 0
                       "
                       @click.prevent="openEditPriceModal(msg.p_id)"
                     >
+                      <i class="fa fa-angle-left angle-icon"></i>
                       ویرایش قیمت
                       <i v-if="!editPriceLoader" class="fa fa-edit"></i>
                       <i v-else class="fas fa-circle-notch fa-spin"></i>
                     </button>
-                    <button v-else @click.prevent="openClerkModal()">
+                    <button
+                      v-else
+                      class="delsa-button"
+                      @click.prevent="openDelasModal()"
+                    >
+                      <i class="fa fa-angle-left angle-icon"></i>
                       استخدام منشی آنلاین
-                      <i class="fa fa-user"></i>
+                      <i class="fas fa-chess-queen"></i>
                     </button>
                   </div>
                 </span>
@@ -1324,8 +1385,8 @@ export default {
         return false;
       }
     },
-    openClerkModal() {
-      $("#delsa-promotion-modal").modal("show")
+    openDelasModal() {
+      $("#delsa-promotion-modal").modal("show");
     },
     openEditPriceModal(productId) {
       this.editPriceLoader = true;
