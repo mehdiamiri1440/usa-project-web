@@ -430,6 +430,9 @@ export default {
       userAllowedReview: false,
       isReviewSubmited: false,
       reviewSubmitLoader: false,
+      totalChatCount: "",
+      initialLoadChatCount: 30,
+      LoadChatCount: "",
     };
   },
 
@@ -511,11 +514,13 @@ export default {
       axios
         .post("/get_user_chat_history", {
           user_id: contact.contact_id,
+          from: 0,
+          to: this.initialLoadChatCount,
         })
         .then(function (response) {
           self.isNoticeActive = true;
-          let data = response.data.messages;
-
+          let data = response.data.messages.reverse();
+          self.totalChatCount = response.data.total_count;
           // convert to time to new design
 
           // let itemDate = "";
@@ -559,6 +564,34 @@ export default {
 
       this.contactList.splice(index, 1, contact);
     },
+    getMoreChat(position) {
+      let contact = this.selectedContact;
+      let tempCount = this.LoadChatCount + this.initialLoadChatCount;
+      let chatWrapper = $("#chat-list");
+      if (this.totalChatCount > this.chatMessages.length) {
+        this.chatMessagesLoader = true;
+
+        axios
+          .post("/get_user_chat_history", {
+            user_id: contact.contact_id,
+            from: this.LoadChatCount,
+            to: tempCount,
+          })
+          .then((response) => {
+            this.LoadChatCount = tempCount;
+            let data = response.data.messages.reverse();
+            this.chatMessages.unshift(...data);
+
+            this.$nextTick(() => {
+              chatWrapper.scrollTop(
+                chatWrapper[0].scrollHeight - position.totalHeight
+              );
+              this.chatMessagesLoader = false;
+            });
+          });
+      }
+    },
+
     cookieHasUser(userId) {
       return userId == this.selectedContact.contact_id;
     },
@@ -1011,6 +1044,7 @@ export default {
       this.isReviewSubmited = false;
       this.userAllowedReview = false;
       this.isLikeBoxActive = true;
+      this.LoadChatCount = this.initialLoadChatCount;
 
       // check like message active box
       this.userHasLikeBox();

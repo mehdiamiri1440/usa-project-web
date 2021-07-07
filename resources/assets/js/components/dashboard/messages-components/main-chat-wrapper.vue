@@ -10,7 +10,7 @@
   position: relative;
   align-items: center;
   z-index: 1;
-  margin-top: 20%;
+  margin-top: 25%;
 }
 
 .loading-container .lds-ring {
@@ -913,6 +913,8 @@
     <div class="chat-page" v-if="$parent.selectedContact">
       <div class="bg-wrapper"></div>
       <ul
+        @scroll="myFunction()"
+        id="chat-list"
         :class="[
           $parent.chatMessagesLoader && $parent.isFirstMessageLoading
             ? 'chat-not-loaded'
@@ -1211,6 +1213,20 @@ export default {
     };
   },
   methods: {
+    myFunction() {
+      let listWrapper = $("#chat-list");
+      let scrollPosition = listWrapper.scrollTop();
+      let totalHeight = listWrapper[0].scrollHeight;
+      let position = {
+        scrollPosition,
+        wrapperHeight: listWrapper.height() + 20,
+        totalHeight,
+      };
+      if (scrollPosition <= 150 && !this.$parent.chatMessagesLoader) {
+        this.$parent.getMoreChat(position);
+      }
+    },
+
     init: function () {
       this.userGuide();
       this.hideCollapses();
