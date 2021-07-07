@@ -178,38 +178,6 @@
         </p>
       </div>
     </div>
-    <!-- Chat Join Modals -->
-    <div class="container">
-      <div id="join-to-group" class="modal fade" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-lg" role="document">
-          <div class="modal-content">
-            <div class="main_popup_content">
-              <a href="#" data-dismiss="modal">
-                <i class="fa fa-times"></i>
-              </a>
-              <p class="main-pop-up" v-text="joinGroupMessage"></p>
-
-              <a
-                href="#"
-                class="btn green-button delete"
-                data-dismiss="modal"
-                @click.prevent="subscribeUserToGroup()"
-                v-text="'عضویت در گروه'"
-              ></a>
-
-              <a
-                href="#"
-                class="btn green-button bg-gray"
-                data-dismiss="modal"
-                v-text="'انصراف'"
-              ></a>
-            </div>
-          </div>
-          <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-      </div>
-    </div>
 
     <!--  #regex elevator modal  -->
 
@@ -277,10 +245,10 @@
     <!-- end regex download App modal  -->
 
     <ChatModal />
-
-    <share-to-social-modal :share-modal-url="shareModalUrl" />
-    <report-modal :reported-user-id="reportedUserId" />
-    <review-modal :review-user-data="reviewUserData" />
+    <EditProductModal />
+    <ShareToSocialModal :share-modal-url="shareModalUrl" />
+    <ReportModal :reported-user-id="reportedUserId" />
+    <ReviewModal :review-user-data="reviewUserData" />
 
     <router-view
       :user-id="userId"
@@ -339,18 +307,20 @@ import { eventBus } from "../router.js";
 import Cookies from "js-cookie";
 import IsWebview from "is-webview";
 import ChatModal from "../../components/layouts/main/main_components/chat_modal";
+import EditProductModal from "../../components/layouts/main/main_components/edit-product-modal";
 import ReportModal from "../../components/layouts/main/main_components/report";
 import ReviewModal from "../../components/layouts/main/main_components/review-component/review";
-import shareToSocialModal from "../../components/layouts/main/main_components/share-to-social-modal";
+import ShareToSocialModal from "../../components/layouts/main/main_components/share-to-social-modal";
 import walletComponent from "../../components/layouts/main/wallet";
 import swal from "../../sweetalert.min.js";
 
 export default {
   components: {
     ChatModal,
+    EditProductModal,
     ReportModal,
     ReviewModal,
-    shareToSocialModal,
+    ShareToSocialModal,
     walletComponent,
   },
   data: function () {
