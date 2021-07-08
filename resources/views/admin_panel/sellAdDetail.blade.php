@@ -95,15 +95,7 @@
                             <td class="col-xs-2"><b>توضیحات</b></td>
                              <td class="col-xs-10">
                                 <div class="form-group">
-                                    <textarea type="text" name="description" class="form-control" rows="4">{{$sellAd->description}}</textarea>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="col-xs-2"><b>آدرس</b></td>
-                            <td class="col-xs-10">
-                                <div class="form-group">
-                                    <input type="text" name="address" class="form-control" value="{{$sellAd->address}}">
+                                    <textarea type="text" name="description" class="form-control" rows="6">{{$sellAd->description}}</textarea>
                                 </div>
                             </td>
                         </tr>
@@ -116,13 +108,47 @@
                             <td class="col-xs-10">{{$sellAd->city_name}}</td>
                         </tr>
                         <tr>
-                            <td class="col-xs-2"><b>دسته بندی</b></td>
-                            <td class="col-xs-10">{{$category_name}}</td>
+
+                            <td class="col-xs-2">
+                                <label for="super_categories" class="">سر دسته بندی</label>
+                            </td>
+                            <td class="col-xs-10">
+                                <div class="md-form">
+                                    
+
+                                    <select  onchange="getCategories(this)" class="form-control" id="super_categories">
+                                        <option  selected value="{{$super_category_record->id}}">{{$super_category_record->category_name}}</option>
+                                    </select>                             
+                                </div>
+                            </td>
                         </tr>
                         <tr>
-                            <td class="col-xs-2"><b>زیر دسته بندی</b></td>
-                            <td class="col-xs-10">{{$sellAd->subcategory_name}}</td>
+
+                            <td class="col-xs-2">
+                                <label for="categories" class="">دسته بندی</label>
+                            </td>
+                            <td class="col-xs-10">
+                                <div class="md-form">
+                                    
+                                    <select  onchange="getSubCategories(this)" class="form-control" id="categories">
+                                        <option  selected value="{{$category_record->id}}">{{$category_record->category_name}}</option>
+                                    </select>                             
+                                </div>
+                            </td>
                         </tr>
+                        <tr>
+                            <td class="col-xs-2">
+                                <label for="sub_categories" class="">زیر دسته بندی</label>
+                            </td>
+                            <td class="col-xs-10">
+                                <div class="md-form">
+                                    <select  class="form-control" name="category_id" id="sub_categories">
+                                        <option  selected value="">{{$sellAd->subcategory_name}}</option>
+                                    </select>                             
+                                </div>
+                            </td>
+                            
+                        </tr> 
                   </tbody>
               </table>
             </div>
@@ -236,5 +262,67 @@
 
         });   
     }
+
+    let superCategories = '';
+    let categories = '';
+
+    function getSuperCategories(){
+            $.post("/get_category_list",
+                {cascade_list:true},
+                 function(data, status){
+                    superCategories = data.categories;
+                    data.categories.map((item)=>{
+                        $('#super_categories').append('<option value="' + item.id +'">' + item.category_name + '</option>')
+                    })
+                    // for(let i = 0; data.categories.length > i ; i++){
+                    //     $('#categories').append('<option>category</option>')
+                    // }
+                },
+        );
+    }  
+
+    function getCategories(categoryIndex){
+            $('#categories').find('option').remove();
+
+            let getItemFromCategory = superCategories.filter((item)=>{
+                return categoryIndex.value == item.id;
+            })
+
+            // convert obj to array 
+            categories = $.map(getItemFromCategory[0].subcategories, function(value, index) {
+                return [value];
+            });
+
+            categories.map((item)=>{
+                $('#categories').append('<option value="' + item.id +'">' + item.category_name + '</option>')
+            })
+            
+    } 
+
+    function getSubCategories(categoryIndex){
+            $('#sub_categories').find('option').remove();
+
+            let getItemFromCategory = categories.filter((item)=>{
+                return categoryIndex.value == item.id;
+            })
+
+            // convert obj to array 
+            let subCategories = $.map(getItemFromCategory[0].subcategories, function(value, index) {
+                return [value];
+            });
+
+            subCategories.map((item)=>{
+                $('#sub_categories').append('<option value="' + item.id +'">' + item.category_name + '</option>')
+            })
+            
+    } 
+
+
+    $(document).ready(function() {
+
+        getSuperCategories();
+
+    });
+    
 </script>
 @endsection

@@ -53,6 +53,7 @@ class admin_buyAd_controller extends Controller
         'address',
         'pack_type',
         'description',
+        'category_id',
     ];
 
     protected $buyAd_confirmation_sms_text = 'آگهی خرید شما در سامانه ی باسکول تایید گردید.';
@@ -144,12 +145,14 @@ class admin_buyAd_controller extends Controller
             ->select(['id', 'file_path'])
             ->get();
 
-        $category_name = category::find($buyAd_record_with_related_data->parent_id)->category_name;
+        $category_record = category::find($buyAd_record_with_related_data->parent_id);
+        $super_category_record = category::find($category_record->parent_id);
 
         return view('admin_panel.buyAdDetail', [
            'buyAd' => $buyAd_record_with_related_data,
            'related_media' => $buyAd_media_records,
-           'category_name' => $category_name,
+           'category_record' => $category_record,
+           'super_category_record' => $super_category_record
         ]);
     }
 
@@ -165,12 +168,14 @@ class admin_buyAd_controller extends Controller
             ->select(['id', 'file_path'])
             ->get();
 
-        $category_name = category::find($buyAd_record_with_related_data->parent_id)->category_name;
+        $category_record = category::find($buyAd_record_with_related_data->parent_id);
+        $super_category_record = category::find($category_record->parent_id);
 
         return view('admin_panel.buyAdDetail', [
            'buyAd' => $buyAd_record_with_related_data,
            'related_media' => $buyAd_media_records,
-           'category_name' => $category_name,
+           'category_record' => $category_record,
+           'super_category_record' => $super_category_record
         ]);
     }
 

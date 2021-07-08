@@ -23,9 +23,9 @@ class SendUpgradeAccoutnSMSToSellers implements ShouldQueue
      */
 
     protected $sellers_related_sms = [
-        'first_day' => 21579,
+        'first_day' => 51393,
         // 'third_day' => 10,
-        // 'seventh_day' => 10
+        'seventh_day' => 50873
     ];
 
     protected $product_stock_threshold = 10000;
@@ -84,27 +84,27 @@ class SendUpgradeAccoutnSMSToSellers implements ShouldQueue
         //                             ->get();
 
 
-        // $seventh_day_seller_ids = DB::table('myusers')
-        //                                 ->whereNotIn('myusers.id',$non_free_sellers)
-        //                                 ->whereBetween('created_at',[Carbon::now()->subDays(7),Carbon::now()->subDays(6)])
-        //                                 ->where('is_seller',true)
-        //                                 ->where('is_blocked',false)
-        //                                 ->whereExists(function($q){
-        //                                     $q->select(DB::raw(1))
-        //                                         ->from('products')
-        //                                         ->whereRaw('myusers.id = products.myuser_id and products.confirmed = true');
-        //                                 })->whereExists(function($q){
-        //                                     $q->select(DB::raw(1))
-        //                                         ->from('messages')
-        //                                         ->whereRaw('messages.receiver_id = myusers.id and messages.is_read = true');
-        //                                 })->select('myusers.id')
-        //                                 ->distinct()
-        //                                 ->get();
+        $seventh_day_seller_ids = DB::table('myusers')
+                                        ->whereNotIn('myusers.id',$non_free_sellers)
+                                        ->whereBetween('created_at',[Carbon::now()->subDays(7),Carbon::now()->subDays(6)])
+                                        ->where('is_seller',true)
+                                        ->where('is_blocked',false)
+                                        ->whereExists(function($q){
+                                            $q->select(DB::raw(1))
+                                                ->from('products')
+                                                ->whereRaw('myusers.id = products.myuser_id and products.confirmed = true');
+                                        })->whereExists(function($q){
+                                            $q->select(DB::raw(1))
+                                                ->from('messages')
+                                                ->whereRaw('messages.receiver_id = myusers.id and messages.is_read = true');
+                                        })->select('myusers.id')
+                                        ->distinct()
+                                        ->get();
 
         return [
             'first_day' => $first_day_seller_ids,
             // 'third_day' => $third_day_seller_ids,
-            // 'seventh_day' => $seventh_day_seller_ids
+            'seventh_day' => $seventh_day_seller_ids
         ];
     }
 
