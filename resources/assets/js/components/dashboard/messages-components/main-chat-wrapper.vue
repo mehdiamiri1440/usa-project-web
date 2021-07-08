@@ -182,7 +182,7 @@
 }
 
 .message-wrapper .chat-page ul {
-  padding: 20px 20px 0;
+  padding: 20px;
 
   overflow-x: hidden;
 
@@ -1179,20 +1179,7 @@
           </div>
         </li>
         <li
-          v-if="checkDelsaInfoBoxIsActive()"
-          class="mobile-like-user delsa-info-box"
-        >
-          <button class="close-rating" @click="$parent.delsaInfo = false">
-            <i class="fa fa-times"></i>
-          </button>
-          <p class="title-item">منشی آنلاین خود را استخدام کنید.</p>
-          <button class="green-button" @click.prevent="openDelasModal()">
-            <i class="fa fa-info-circle"></i>
-            اطلاعات بیشتر
-          </button>
-        </li>
-        <li
-          v-else-if="checkMobileWidth() && checkReviewIsActive()"
+          v-if="checkMobileWidth() && checkReviewIsActive()"
           class="mobile-like-user"
           :class="{ success: $parent.isReviewSubmited }"
         >
@@ -1235,6 +1222,19 @@
               <p class="title-item">از ثبت نظر شما سپاسگزاریم.</p>
             </div>
           </div>
+        </li>
+        <li
+          v-else-if="checkDelsaInfoBoxIsActive()"
+          class="mobile-like-user delsa-info-box"
+        >
+          <button class="close-rating" @click="$parent.delsaInfo = false">
+            <i class="fa fa-times"></i>
+          </button>
+          <p class="title-item">منشی آنلاین خود را استخدام کنید.</p>
+          <button class="green-button" @click.prevent="openDelasModal()">
+            <i class="fa fa-info-circle"></i>
+            اطلاعات بیشتر
+          </button>
         </li>
       </ul>
       <div
@@ -1425,11 +1425,12 @@ export default {
     checkDelsaInfoBoxIsActive() {
       if (
         this.$parent.delsaInfo &&
-        this.$parent.chatMessages.length == 1 &&
-        this.$parent.chatMessages[0].p_id &&
+        // this.$parent.chatMessages.length == 1 &&
+        // this.$parent.chatMessages[0].p_id &&
         !this.$parent.isLatestMessage &&
         this.$parent.currentUser.user_info.is_seller &&
-        this.$parent.currentUser.user_info.active_pakage_type == 0
+        this.$parent.currentUser.user_info.active_pakage_type == 0 &&
+        !this.$parent.chatMessagesLoader
       ) {
         return true;
       } else {
