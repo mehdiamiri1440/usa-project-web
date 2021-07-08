@@ -22,7 +22,6 @@
   max-width: 1280px;
 }
 
-
 @media screen and (min-width: 1200px) {
   #main-content {
     padding-top: 122px;
@@ -143,7 +142,7 @@ a.close-dialog-popup {
 }
 
 .sub-header {
-  background: #f0f3f6;
+  background: #fff;
   padding: 0 15px;
 }
 
@@ -340,8 +339,7 @@ li.active a::after {
   color: #999;
 }
 
-.rate-filter-desktop-wrapper,
-.rate-filter-mobile-wrapper {
+.rate-filter-desktop-wrapper {
   background: #fff;
   direction: rtl;
   margin: 15px auto 0;
@@ -349,7 +347,64 @@ li.active a::after {
   border-radius: 12px;
   border: 1px solid #e0e0e0;
   overflow: hidden;
-  margin-bottom:5px
+  margin-bottom: 5px;
+}
+
+.rate-filter-mobile-wrapper {
+  direction: rtl;
+  display: flex;
+  overflow-y: hidden;
+  overflow-x: scroll;
+  border-bottom: 1px solid #ebebeb;
+  padding: 10px;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.rate-filter-mobile-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.rate-filter-mobile-wrapper > button {
+  flex-shrink: 0;
+  border: 1px solid #ededed;
+  background: #fff;
+  border-radius: 12px;
+  font-size: 15px;
+  color: #707070;
+  padding: 3px 15px;
+  display: inline-flex;
+  height: 32px;
+  margin-left: 10px;
+}
+
+.rate-filter-mobile-wrapper > button.mobile-category-item.filter-item {
+  border-color: #fa8888;
+  color: #e41c38;
+  background: #fcf6f6;
+}
+
+.rate-filter-mobile-wrapper > button i {
+  position: relative;
+  top: 2px;
+  margin-left: 5px;
+}
+
+.rate-filter-mobile-wrapper > button i.fa-times {
+  position: relative;
+  top: 2px;
+  margin-left: 0;
+  margin-right: 10px;
+  font-size: 11px;
+  top: 6px;
+}
+
+.rate-filter-mobile-wrapper > button:first-of-type {
+  background: #fafafa;
+}
+
+.rate-filter-mobile-wrapper > button:last-of-type {
+  margin-left: 0;
 }
 
 .rate-filter-desktop-wrapper > ul {
@@ -813,8 +868,7 @@ div.items-wrapper {
     margin-right: 0 !important;
   }
 
-  .rate-filter-desktop-wrapper,
-  .rate-filter-mobile-wrapper {
+  .rate-filter-desktop-wrapper {
     background: #fbfbfb;
     border: none;
     border-radius: 0;
@@ -827,13 +881,14 @@ div.items-wrapper {
   }
 
   #main {
-    padding-top: 52px;
+    padding-top: 18px;
   }
 
   .sub-header {
     position: fixed;
-    z-index: 3;
+    z-index: 1011;
     width: 100%;
+    background: #fff;
   }
 
   .search-box {
@@ -848,10 +903,6 @@ div.items-wrapper {
 
   .main-content > .row {
     margin: 0;
-  }
-
-  .sub-header {
-    background: #f0f3f6;
   }
 
   .links-sub-header {
@@ -1090,6 +1141,10 @@ div.items-wrapper {
         <!-- /.modal-dialog -->
       </div>
     </div>
+    <CategoriesModal
+      :categoryList="categoryList"
+      :modalSubCategory="modalSubCategory"
+    />
 
     <div
       v-if="!currentUser.user_info"
@@ -1110,18 +1165,50 @@ div.items-wrapper {
     </div>
 
     <div
-      class="sub-header-fix sub-header hidden-lg hidden-md hidden-sm container-fluid"
+      class="
+        sub-header-fix sub-header
+        hidden-lg hidden-md hidden-sm
+        container-fluid
+      "
     >
       <div class="rate-filter-mobile-wrapper">
-        <div class="rate-filter">
-          <button class="green-button bg-gray" @click.prevent="openSortModal()">
-            <i class="fas fa-sort-amount-down-alt"></i>
-            مرتب سازی
-          </button>
-        </div>
-        <button class="btn-filter hidden-lg" @click.prevent="openFilterModal()">
-          <i class="fa fa-filter"></i>
-          دسته ها و فیلتر
+        <button class="mobile-category-item" @click.prevent="openFilterModal(false)">
+          <i class="fa fa-list"></i>
+          دسته ها
+        </button>
+        <button
+          v-if="sortOption == 'BM'"
+          class="mobile-category-item"
+          @click.prevent="openSortModal()"
+        >
+          <i class="fas fa-sort-amount-down-alt"></i>
+          مرتب سازی
+        </button>
+        <button
+          v-else
+          class="mobile-category-item filter-item"
+          @click.prevent="sortOption = 'BM'"
+        >
+          <i class="fa fa-sort-amount-down-alt"></i>
+          {{ getSortOptionName() }}
+          <i class="fa fa-times"></i>
+        </button>
+        <router-link
+          tag="button"
+          :to="{ name: 'productList' }"
+          v-if="$route.params.categoryName"
+          class="mobile-category-item filter-item"
+        >
+          {{ getCategoryName() }}
+          <i class="fa fa-times"></i>
+        </router-link>
+        <button
+          v-for="(category, index) in categoryList"
+          :key="index + '-sub-header-category'"
+          class="mobile-category-item"
+          @click.prevent="openFilterModal(category)"
+        >
+          {{ category.category_name }}
         </button>
       </div>
     </div>
@@ -1137,6 +1224,14 @@ div.items-wrapper {
                     <i class="fa fa-sort-amount-down-alt"> </i>
                     مرتب سازی بر اساس :
                   </p>
+                </li>
+                <li>
+                  <button
+                    @click="setSortOption('BM')"
+                    :class="{ 'light-green-text': sortOption == 'BM' }"
+                  >
+                    پیش فرض
+                  </button>
                 </li>
                 <li>
                   <button
@@ -1234,7 +1329,13 @@ div.items-wrapper {
                       <router-link
                         :to="{ name: 'register' }"
                         v-if="!currentUser.user_info"
-                        class="btn green-button banner-button hover-effect hidden-sm hidden-md hidden-lg"
+                        class="
+                          btn
+                          green-button
+                          banner-button
+                          hover-effect
+                          hidden-sm hidden-md hidden-lg
+                        "
                       >
                         ثبت درخواست خرید
                         <i class="fa fa-arrow-left"> </i>
@@ -1371,20 +1472,40 @@ div.items-wrapper {
                 class="default-items col-xs-12"
               >
                 <div
-                  class="col-xs-12 padding-15 margin-15-0 default-item-wrapper default-main-wrapper"
+                  class="
+                    col-xs-12
+                    padding-15
+                    margin-15-0
+                    default-item-wrapper default-main-wrapper
+                  "
                 >
                   <div class="default-user-contents col-xs-12 padding-0">
                     <div
-                      class="placeholder-content default-article-user-image pull-right"
+                      class="
+                        placeholder-content
+                        default-article-user-image
+                        pull-right
+                      "
                     ></div>
 
                     <span
-                      class="padding-top-5 placeholder-content margin-15 pull-right content-min-width"
+                      class="
+                        padding-top-5
+                        placeholder-content
+                        margin-15
+                        pull-right
+                        content-min-width
+                      "
                     ></span>
                   </div>
 
                   <div
-                    class="default-article-contents padding-0 margin-top-10 col-xs-12"
+                    class="
+                      default-article-contents
+                      padding-0
+                      margin-top-10
+                      col-xs-12
+                    "
                   >
                     <div class="default-wrapper-main-image pull-right">
                       <span
@@ -1401,7 +1522,11 @@ div.items-wrapper {
                       ></span>
 
                       <span
-                        class="content-min-width placeholder-content mobile-hidden"
+                        class="
+                          content-min-width
+                          placeholder-content
+                          mobile-hidden
+                        "
                       ></span>
 
                       <span
@@ -1409,7 +1534,13 @@ div.items-wrapper {
                       ></span>
                     </div>
                     <span
-                      class="margin-top-10 placeholder-content default-button-min-with pull-left hidden-afetr-mobile-hidden"
+                      class="
+                        margin-top-10
+                        placeholder-content
+                        default-button-min-with
+                        pull-left
+                        hidden-afetr-mobile-hidden
+                      "
                     ></span>
                   </div>
                 </div>
@@ -1422,14 +1553,23 @@ div.items-wrapper {
                 class="default-items col-xs-6 col-sm-4 col-md-3 default-grid"
               >
                 <div
-                  class="col-xs-12 margin-15-0 default-item-wrapper default-main-wrapper"
+                  class="
+                    col-xs-12
+                    margin-15-0
+                    default-item-wrapper default-main-wrapper
+                  "
                 >
                   <div class="default-wrapper-main-image pull-right">
                     <span class="default-main-image placeholder-content"></span>
                   </div>
 
                   <div
-                    class="default-article-contents padding-0 margin-top-10 col-xs-12"
+                    class="
+                      default-article-contents
+                      padding-0
+                      margin-top-10
+                      col-xs-12
+                    "
                   >
                     <div class="default-main-article-content">
                       <span
@@ -1440,10 +1580,21 @@ div.items-wrapper {
                         class="content-default-width placeholder-content"
                       ></span>
                       <span
-                        class="margin-top-10 placeholder-content default-button-min-with pull-left hidden-afetr-mobile-hidden"
+                        class="
+                          margin-top-10
+                          placeholder-content
+                          default-button-min-with
+                          pull-left
+                          hidden-afetr-mobile-hidden
+                        "
                       ></span>
                       <span
-                        class="placeholder-content default-button-full-with pull-left mobile-hidden"
+                        class="
+                          placeholder-content
+                          default-button-full-with
+                          pull-left
+                          mobile-hidden
+                        "
                       ></span>
                     </div>
                   </div>
@@ -1483,13 +1634,13 @@ div.items-wrapper {
       v-if="categoryMetaData.length > 0 && categoryMetaData[0]"
     >
       <div class="col-xs-12">
-        <div data-v-c5ebe4ce class="title-section col-xs-12">
-          <div data-v-c5ebe4ce class="row">
-            <h1 data-v-c5ebe4ce>
+        <div class="title-section col-xs-12">
+          <div class="row">
+            <h1>
               خرید عمده
               <span v-text="this.getCategoryName()"></span>
             </h1>
-            <hr data-v-c5ebe4ce />
+            <hr />
           </div>
         </div>
 
@@ -1516,6 +1667,7 @@ import ProductAsideCategories from "./product_components/sidebar/product_aside_c
 import searchNotFound from "./main_components/search-not-found";
 import { eventBus } from "../../../router/router";
 import StickySidebar from "../../../stickySidebar.js";
+import CategoriesModal from "./main_components/categories-modal.vue";
 
 var visible = false;
 export default {
@@ -1524,8 +1676,9 @@ export default {
     ProductGridArticle,
     ProductAsideCategories,
     searchNotFound,
+    CategoriesModal,
   },
-  props: ["assets", "str"],
+  props: ["assets", "str", "categoryList"],
   data: function () {
     return {
       currentUser: {
@@ -1565,6 +1718,7 @@ export default {
       sortOption: "BM",
       verifiedUserContent: this.$parent.verifiedUserContent,
       listIsGrid: true,
+      modalSubCategory: false,
     };
   },
   methods: {
@@ -1942,19 +2096,39 @@ export default {
         $("#filter-modal").modal("hide");
       });
     },
+    getSortOptionName() {
+      switch (this.sortOption) {
+        case "BM":
+          return "پیش فرض";
+          break;
+        case "RR":
+          return "احتمال پاسخگویی";
+          break;
+        case "RT":
+          return "سرعت پاسخگویی";
+          break;
+        case "RD":
+          return "جدیدترین ها";
+          break;
+
+        default:
+          return "پیش فرض";
+
+          break;
+      }
+    },
     closeSortModal: function () {
       $("#filter-modal").modal("hide");
       history.go(-1);
     },
-    openFilterModal() {
-      $("#searchFilter").modal("show");
-
-      if (window.history.state) {
-        history.pushState(null, null, window.location);
+    openFilterModal(category) {
+      if (category) {
+        this.modalSubCategory = category;
+        $("#categories-modal").modal("show");
+      } else {
+        this.modalSubCategory = false;
+        $("#categories-modal").modal("show");
       }
-      $(window).on("popstate", function (e) {
-        $("#searchFilter").modal("hide");
-      });
     },
     closeFilterModal: function () {
       $("#searchFilter").modal("hide");
@@ -2016,6 +2190,11 @@ export default {
       // } else {
       //   this.listIsGrid = true;
       // }
+    },
+    selectCategoryItem(category, url) {
+      this.$nextTick(() => {
+        this.$router.push({ path: url });
+      });
     },
   },
   watch: {

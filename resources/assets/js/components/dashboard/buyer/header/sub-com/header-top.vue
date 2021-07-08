@@ -270,10 +270,10 @@ a.profile-info-wrapper:focus {
   min-width: 150px;
   text-align: right;
   direction: rtl;
-  border-radius: 4px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0px 3px 9px rgba(0, 0, 0, 0.05);
   line-height: 1.618;
-  -webkit-box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
-  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
   z-index: 6;
 }
 #web-profile-items > li a {
@@ -736,7 +736,11 @@ a.profile-info-wrapper:focus {
         <li>
           <div class="col display-loading">
             <div
-              class="user_name placeholder-content placeholder-user-name margin-loading"
+              class="
+                user_name
+                placeholder-content placeholder-user-name
+                margin-loading
+              "
             ></div>
             <div
               class="placeholder-image-header-profile placeholder-content"

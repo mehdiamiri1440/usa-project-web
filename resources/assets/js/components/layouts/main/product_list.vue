@@ -119,7 +119,7 @@ a.close-dialog-popup {
 }
 
 .sub-header {
-  background: #f0f3f6;
+  background: #fff;
   padding: 0 15px;
 }
 
@@ -226,7 +226,6 @@ button.btn-filter {
   left: 0;
   right: 0;
   z-index: 2;
-  background: #f0f3f6;
   padding: 0;
 }
 
@@ -305,24 +304,75 @@ li.active a::after {
   margin-top: -15px;
 }
 
-.rate-filter {
-  float: right;
-}
-
 .static-sort-item {
   color: #999;
 }
 
-.rate-filter-desktop-wrapper,
-.rate-filter-mobile-wrapper {
+.rate-filter-desktop-wrapper {
   background: #fff;
   direction: rtl;
   margin: 15px auto 0;
-  padding: 7px 15px;
+  padding: 5px 15px 4px;
   border-radius: 12px;
   border: 1px solid #e0e0e0;
   overflow: hidden;
   margin-bottom: 5px;
+}
+
+.rate-filter-mobile-wrapper {
+  direction: rtl;
+  display: flex;
+  overflow-y: hidden;
+  overflow-x: scroll;
+  border-bottom: 1px solid #ebebeb;
+  padding: 10px;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.rate-filter-mobile-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.rate-filter-mobile-wrapper > button {
+  flex-shrink: 0;
+  border: 1px solid #ededed;
+  background: #fff;
+  border-radius: 12px;
+  font-size: 15px;
+  color: #707070;
+  padding: 3px 15px;
+  display: inline-flex;
+  height: 32px;
+  margin-left: 10px;
+}
+
+.rate-filter-mobile-wrapper > button.mobile-category-item.filter-item {
+  border-color: #fa8888;
+  color: #e41c38;
+  background: #fcf6f6;
+}
+
+.rate-filter-mobile-wrapper > button i {
+  position: relative;
+  top: 2px;
+  margin-left: 5px;
+}
+.rate-filter-mobile-wrapper > button i.fa-times {
+  position: relative;
+  top: 2px;
+  margin-left: 0;
+  margin-right: 10px;
+  font-size: 11px;
+  top: 6px;
+}
+
+.rate-filter-mobile-wrapper > button:first-of-type {
+  background: #fafafa;
+}
+
+.rate-filter-mobile-wrapper > button:last-of-type {
+  margin-left: 0;
 }
 
 .rate-filter-desktop-wrapper > ul {
@@ -338,24 +388,6 @@ li.active a::after {
   background: none;
 
   border: none;
-}
-.rate-filter label {
-  float: right;
-  margin-left: 7px;
-}
-
-.rate-filter > button {
-  padding: 8px 0;
-
-  font-size: 14px;
-
-  margin: 0;
-
-  font-weight: 400;
-
-  width: 140px;
-
-  border-radius: 8px;
 }
 
 .filter-select-input-wrapper {
@@ -420,11 +452,17 @@ li.active a::after {
   padding-top: 2px;
 }
 .show-list-items button {
-  background: #eee;
-  border: 1px solid #999;
-  border-radius: 5px;
-  padding: 3px 14px 0;
+  background: none;
+  border: 1px solid #556080;
+  border-radius: 12px;
+  padding: 4px 9px 0px;
+  -webkit-transition: 300ms;
   transition: 300ms;
+  color: #556080;
+  font-size: 16px;
+}
+.show-list-items button .fa-grip-horizontal {
+  font-size: 16px;
 }
 .show-list-items button:hover {
   background: #556080;
@@ -438,37 +476,6 @@ li.active a::after {
   border-color: #556080;
   transition: 300ms;
 }
-
-/* 
-.rate-filter-desktop-wrapper .checkbox,
-.rate-filter-mobile-wrapper .chekbox {
-  margin: 0;
-  float: right;
-}
-
-.rate-filter-mobile-wrapper .checkbox-slider--b-flat {
-  margin: 0 auto 5px;
-}
-
-.rate-filter-mobile-wrapper
-  .checkbox-slider--b-flat
-  input
-  + span::before,
-.rate-filter-mobile-wrapper
-  .checkbox-slider--b-flat
-  input
-  + span::after {
-  top: 0;
-}
-
-.rate-filter-mobile-wrapper {
-  padding: 7px 15px;
-  margin: 0;
-  overflow: hidden;
-  float: right;
-  width: 100%;
-  border-radius: 0;
-} */
 
 /* 
 ---------------------------------------------------------------------------------
@@ -768,8 +775,7 @@ div.items-wrapper {
     margin-right: 0 !important;
   }
 
-  .rate-filter-desktop-wrapper,
-  .rate-filter-mobile-wrapper {
+  .rate-filter-desktop-wrapper {
     background: #fbfbfb;
     border: none;
     border-radius: 0;
@@ -780,13 +786,14 @@ div.items-wrapper {
   }
 
   .main-content {
-    padding-top: 52px;
+    padding-top: 18px;
   }
 
   .sub-header {
     position: fixed;
-    z-index: 3;
+    z-index: 1011;
     width: 100%;
+    background: #fff;
   }
 
   .search-box {
@@ -801,10 +808,6 @@ div.items-wrapper {
 
   .main-content > .row {
     margin: 0;
-  }
-
-  .sub-header {
-    background: #f0f3f6;
   }
 
   .links-sub-header {
@@ -1045,7 +1048,7 @@ div.items-wrapper {
         <!-- /.modal-dialog -->
       </div>
     </div>
-
+    <CategoriesModal :categoryList="categoryList" :modalSubCategory="modalSubCategory" />
     <div
       v-if="!currentUser.user_info"
       class="flat-plust-icon hidden-lg hidden-md"
@@ -1072,15 +1075,43 @@ div.items-wrapper {
       "
     >
       <div class="rate-filter-mobile-wrapper">
-        <div class="rate-filter">
-          <button class="green-button bg-gray" @click.prevent="openSortModal()">
-            <i class="fas fa-sort-amount-down-alt"></i>
-            مرتب سازی
-          </button>
-        </div>
-        <button class="btn-filter hidden-lg" @click.prevent="openFilterModal()">
-          <i class="fa fa-filter"></i>
-          دسته ها و فیلتر
+        <button class="mobile-category-item" @click.prevent="openFilterModal(false)">
+          <i class="fa fa-list"></i>
+          دسته ها
+        </button>
+        <button
+          v-if="sortOption == 'BM'"
+          class="mobile-category-item"
+          @click.prevent="openSortModal()"
+        >
+          <i class="fas fa-sort-amount-down-alt"></i>
+          مرتب سازی
+        </button>
+        <button
+          v-else
+          class="mobile-category-item filter-item"
+          @click.prevent="sortOption = 'BM'"
+        >
+          <i class="fa fa-sort-amount-down-alt"></i>
+          {{ getSortOptionName() }}
+          <i class="fa fa-times"></i>
+        </button>
+        <button
+          v-if="$route.query.s && searchText"
+          tag="button"
+          @click.prevent="searchText = ''"
+          class="mobile-category-item filter-item"
+        >
+          {{ searchText }}
+          <i class="fa fa-times"></i>
+        </button>
+        <button
+          v-for="(category, index) in categoryList"
+          :key="index + '-sub-header-category'"
+          class="mobile-category-item"
+          @click.prevent="openFilterModal(category)"
+        >
+          {{ category.category_name }}
         </button>
       </div>
     </div>
@@ -1099,8 +1130,16 @@ div.items-wrapper {
                 </li>
                 <li>
                   <button
+                    @click="setSortOption('BM')"
+                    :class="{ 'light-green-text': sortOption == 'BM' }"
+                  >
+                    پیش فرض
+                  </button>
+                </li>
+                <li>
+                  <button
                     @click="setSortOption('RR')"
-                    :class="{ 'text-green': sortOption == 'RR' }"
+                    :class="{ 'light-green-text': sortOption == 'RR' }"
                   >
                     احتمال پاسخگویی
                   </button>
@@ -1108,7 +1147,7 @@ div.items-wrapper {
                 <li>
                   <button
                     @click="setSortOption('RT')"
-                    :class="{ 'text-green': sortOption == 'RT' }"
+                    :class="{ 'light-green-text': sortOption == 'RT' }"
                   >
                     سرعت پاسخگویی
                   </button>
@@ -1116,7 +1155,7 @@ div.items-wrapper {
                 <li>
                   <button
                     @click="setSortOption('RD')"
-                    :class="{ 'text-green': sortOption == 'RD' }"
+                    :class="{ 'light-green-text': sortOption == 'RD' }"
                   >
                     جدیدترین ها
                   </button>
@@ -1496,7 +1535,7 @@ import ProductAsideCategories from "./product_components/sidebar/product_aside_c
 import searchNotFound from "./main_components/search-not-found";
 import { eventBus } from "../../../router/router";
 import StickySidebar from "../../../stickySidebar.js";
-
+import CategoriesModal from "./main_components/categories-modal.vue";
 var visible = false;
 export default {
   components: {
@@ -1504,8 +1543,9 @@ export default {
     ProductGridArticle,
     ProductAsideCategories,
     searchNotFound,
+    CategoriesModal,
   },
-  props: ["assets", "str", "user_id"],
+  props: ["assets", "str", "user_id", "categoryList"],
   data: function () {
     return {
       currentUser: {
@@ -1543,6 +1583,7 @@ export default {
       verifiedUserContent: this.$parent.verifiedUserContent,
       listIsGrid: true,
       isMyProfile: false,
+      modalSubCategory:false
     };
   },
   methods: {
@@ -1927,19 +1968,39 @@ export default {
         $("#filter-modal").modal("hide");
       });
     },
+    getSortOptionName() {
+      switch (this.sortOption) {
+        case "BM":
+          return "پیش فرض";
+          break;
+        case "RR":
+          return "احتمال پاسخگویی";
+          break;
+        case "RT":
+          return "سرعت پاسخگویی";
+          break;
+        case "RD":
+          return "جدیدترین ها";
+          break;
+
+        default:
+          return "پیش فرض";
+
+          break;
+      }
+    },
     closeSortModal: function () {
       $("#filter-modal").modal("hide");
       history.go(-1);
     },
-    openFilterModal() {
-      $("#searchFilter").modal("show");
-
-      if (window.history.state) {
-        history.pushState(null, null, window.location);
+    openFilterModal(category) {
+      if(category){
+        this.modalSubCategory = category
+        $("#categories-modal").modal("show");
+      }else{
+        this.modalSubCategory = false
+        $("#categories-modal").modal("show");
       }
-      $(window).on("popstate", function (e) {
-        $("#searchFilter").modal("hide");
-      });
     },
     closeFilterModal: function () {
       $("#searchFilter").modal("hide");
@@ -1971,6 +2032,11 @@ export default {
       // } else {
       //   this.listIsGrid = true;
       // }
+    },
+    selectCategoryItem(category, url) {
+      this.$nextTick(() => {
+        this.$router.push({ path: url });
+      });
     },
   },
   watch: {

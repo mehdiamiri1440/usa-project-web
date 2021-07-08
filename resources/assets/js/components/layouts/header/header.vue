@@ -114,43 +114,6 @@ a.close-dialog-popup {
   border-radius: 8px;
 }
 
-.search-input .dropdown-categories {
-  position: absolute;
-  width: 100%;
-}
-
-.search-input .dropdown-categories > ul {
-  position: absolute;
-  top: 40px;
-  width: 160px;
-  background: #fafafa;
-  border-radius: 0 0 12px 0;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
-  z-index: 1;
-}
-
-.search-input .dropdown-categories > ul > li > button {
-  display: block;
-  width: 100%;
-  border: none;
-  border-radius: 0;
-  background: none;
-}
-
-.search-input .dropdown-categories > ul > li > button:hover {
-  background: #eee;
-}
-
-.search-input .dropdown-categories > ul > li > button > ul {
-  position: absolute;
-  right: 100%;
-  top: 0;
-  background: #fff;
-  box-shadow: -3px 3px 6px rgba(0, 0, 0, 0.16);
-  border-radius: 0 0 12px 12px;
-  width: 430px;
-}
-
 .search-input input {
   padding: 8px 175px 8px 15px;
   margin: 0;
@@ -175,19 +138,81 @@ a.close-dialog-popup {
 }
 
 .search-input button.open-categories {
-  left: initial;
-  right: 0;
   background: #eee;
   color: #313a43;
   font-weight: 400;
   padding: 9px 15px;
   font-size: 16px;
-  position: absolute;
   border: none;
   border-radius: 0 12px 12px 0;
 }
 
-.search-input .dropdown-categories .category-name {
+.custom-mega-menu .col-xs-12 {
+  padding: 0 10px;
+}
+
+.custom-mega-menu ul {
+  position: absolute;
+  margin: 0;
+  list-style: none;
+  z-index: 2;
+}
+
+.custom-mega-menu li:hover > ul {
+  display: block;
+}
+
+.custom-mega-menu li:hover .open-categories {
+  border-bottom-right-radius: 0;
+}
+
+.custom-mega-menu ul ul {
+  position: absolute;
+  display: none;
+  margin: 0;
+  background: #fff;
+}
+.custom-mega-menu ul ul li {
+  display: block;
+}
+
+.custom-mega-menu ul ul ul {
+  position: absolute;
+  top: 0;
+  right: 100%;
+  width: 430px;
+}
+
+.custom-mega-menu .lvl1-wrapper {
+  background: none;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  border-bottom-right-radius: 12px;
+}
+
+.custom-mega-menu .lvl2-wrapper {
+  box-shadow: -5px 7px 9px rgba(0, 0, 0, 0.02);
+  border-radius: 0 0 12px 12px;
+  padding-bottom: 25px;
+}
+
+.custom-mega-menu .lvl2-wrapper > li > div > div {
+  padding: 0 3px;
+}
+
+.custom-mega-menu .lvl1-list button {
+  border: none;
+  background: #fafafa;
+  padding: 10px 0;
+}
+
+.custom-mega-menu .lvl1-list button:hover {
+  background: #eeeeee;
+}
+.custom-mega-menu .lvl1-list:last-of-type button {
+  border-bottom-right-radius: 12px;
+}
+
+.category-name {
   display: flex;
   justify-content: space-around;
 }
@@ -235,10 +260,7 @@ nav .green-button {
   font-weight: 400;
   padding: 0;
   padding: 5px 10px;
-  /* padding: 10px 20px 9px;
-  
-  margin-right: 15px; */
-
+  min-width: 80px;
   border-radius: 12px;
 }
 
@@ -259,16 +281,16 @@ nav .green-button .item-icon.register::before {
   margin: -5px auto;
   padding: 0 10px;
 }
-.user-auth-info-wrapper .navbar-nav > li:before {
+.user-auth-info-wrapper .navbar-nav > li:after {
   content: " ";
   width: 1px;
   height: 35px;
   position: absolute;
-  right: 0;
+  left: 0;
   background: #eee;
   top: 8px;
 }
-.user-auth-info-wrapper .navbar-nav > li:last-of-type:before {
+.user-auth-info-wrapper .navbar-nav > li:first-of-type::after {
   display: none;
 }
 
@@ -290,24 +312,26 @@ nav .green-button-alt {
   background: #e6f4f8 !important;
 }
 
-.green-button-alt:focus,
-.green-button-alt:hover {
+.green-button:focus,
+.green-button:hover {
   color: #fff !important;
 }
 
-nav .green-button.router-link-exact-active,
-nav > li > a.green-button.router-link-exact-active:hover {
-  background-color: #eee;
-  border-color: #eee;
+.user-auth-info-wrapper .nav > li > a.green-button:focus,
+.user-auth-info-wrapper .nav > li > a.router-link-exact-active,
+.user-auth-info-wrapper
+  .nav
+  > li
+  > a.router-link-exact-active
+  .light-green-text,
+.user-auth-info-wrapper
+  .nav
+  > li
+  > a.router-link-exact-active
+  .item-icon::before,
+.user-auth-info-wrapper .nav > li > a.router-link-exact-active:hover {
   color: #fff !important;
-}
-
-nav .green-button.router-link-exact-active:hover,
-nav .green-button.router-link-exact-active span,
-nav .green-button.router-link-exact-active div,
-nav .green-button.router-link-exact-active i,
-nav .green-button.router-link-exact-active .item-icon.register::before {
-  color: #fff !important;
+  background: #eee !important;
 }
 
 .buskool-logo .navbar-brand {
@@ -341,6 +365,8 @@ nav .green-button.router-link-exact-active .item-icon.register::before {
 }
 
 .buskool-sub-menu .navbar-right > li > a:hover + ul,
+.buskool-sub-menu .navbar-right > li > a:active + ul,
+.buskool-sub-menu .navbar-right > li > a:focus + ul,
 .buskool-sub-menu .navbar-right > li > ul:hover {
   display: block;
   height: initial;
@@ -475,23 +501,15 @@ a.profile-info-wrapper:hover {
 
 #web-profile-items {
   position: absolute;
-
   top: 50px;
-
   background: #fff;
-
   width: 100%;
-
   text-align: right;
-
   direction: rtl;
-
-  border-radius: 4px;
-
   line-height: 1.618;
-
-  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
-
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0px 3px 9px rgba(0, 0, 0, 0.05);
   z-index: 6;
 }
 
@@ -522,6 +540,7 @@ a.profile-info-wrapper:hover {
 .mobile-menu-button {
   float: right;
   position: relative;
+  padding-top: 2px;
 }
 
 .mobile-menu-button .message-count {
@@ -533,14 +552,14 @@ a.profile-info-wrapper:hover {
   margin: 0;
   border: 1px solid;
   border-radius: 8px;
-  height: 31px;
-  width: 46px;
+  height: 27px;
+  width: 35px;
   padding: 0;
   padding-top: 9px;
   margin-bottom: 2px;
 }
 .navbar-toggle i {
-  font-size: 21px;
+  font-size: 15px;
   line-height: 1;
   position: relative;
   top: -6px;
@@ -609,15 +628,20 @@ a.profile-info-wrapper:hover {
   }
 }
 
-@media screen and (max-width: 1199px) {
-  .search-input button {
-    padding: 8px 17px;
+@media screen and (max-width: 1245px) {
+  .search-input {
+    min-width: 545px;
   }
-  nav .green-button {
-    padding: 10px 15px 9px;
+}
+@media screen and (max-width: 1199px) {
+  .search-input .open-categories {
+    display: none;
+  }
+  .search-input input {
+    padding: 8px 15px 8px 15px;
   }
   .search-input {
-    min-width: 400px;
+    min-width: 300px;
   }
 }
 
@@ -640,13 +664,28 @@ a.profile-info-wrapper:hover {
     padding: 6px 8px 5px;
     font-size: 13px;
   }
-
-  .search-input {
-    min-width: 300px;
+  .profile-image-wrapper {
+    margin-left: 0;
+  }
+  nav .green-button {
+    padding: 6px 0 5px;
+    font-size: 13px;
+    width: initial;
+    margin: 0;
+    min-width: 65px;
   }
 }
 
 @media screen and (max-width: 767px) {
+  .search-input {
+    overflow: hidden;
+  }
+
+  .search-input input {
+    border: none;
+    background: #f2f2f2;
+  }
+
   .navbar-nav > li {
     border-right: none;
   }
@@ -657,6 +696,7 @@ a.profile-info-wrapper:hover {
   a.profile-info-wrapper .profile-image-wrapper {
     width: 35px;
     height: 35px;
+    margin-top: 3px;
   }
 
   .buskool-logo .navbar-brand {
@@ -677,7 +717,6 @@ a.profile-info-wrapper:hover {
 
   .buskool-main-nav {
     padding: 6px 0 1px;
-    border-bottom: 1px solid #ebebeb;
     margin: 0 10px;
   }
 
@@ -714,7 +753,7 @@ a.profile-info-wrapper:hover {
 
     background: #fff;
 
-    top: 97px;
+    top: 93px;
 
     right: -1px;
 
@@ -1024,7 +1063,10 @@ a.profile-info-wrapper:hover {
                   }"
                 ></div>
                 <div class="profile-information">
-                  <span class="hidden-xs" v-text="user_full_name"></span>
+                  <span
+                    class="hidden-xs hidden-sm"
+                    v-text="user_full_name"
+                  ></span>
                   <i class="fa fa-angle-down"></i>
                 </div>
               </a>
@@ -1070,7 +1112,53 @@ a.profile-info-wrapper:hover {
                 </li>
               </ul>
             </li>
+            <li class="hidden-xs">
+              <router-link
+                v-if="is_seller"
+                class="green-button"
+                :to="{ name: 'messagesSeller' }"
+              >
+                <div class="item-icon">
+                  <i class="fas fa-comment-alt"></i>
+                </div>
+                پیام ها
+              </router-link>
+              <router-link
+                v-else
+                class="green-button"
+                :to="{ name: 'messagesBuyer' }"
+              >
+                <div class="item-icon">
+                  <i class="fas fa-comment-alt"></i>
+                </div>
+                پیام ها
+              </router-link>
+            </li>
+
+            <li class="hidden-xs">
+              <router-link
+                v-if="is_seller"
+                class="green-button green-button-alt static-layout"
+                :to="{ name: 'buyAdRequestsSeller' }"
+              >
+                <div class="item-icon">
+                  <i class="fa fa-users"></i>
+                </div>
+                خریداران
+              </router-link>
+              <router-link
+                v-else
+                class="green-button green-button-alt static-layout"
+                :to="{ name: 'specialProducts' }"
+              >
+                <div class="item-icon">
+                  <i class="fa fa-users"></i>
+                </div>
+                فروشندگان
+              </router-link>
+            </li>
           </ul>
+
           <ul v-else class="nav navbar-nav">
             <li class="hidden-xs">
               <router-link class="green-button" :to="{ name: 'register' }">
@@ -1113,52 +1201,64 @@ a.profile-info-wrapper:hover {
         >
           <div class="wrapper-nav">
             <div class="search-input hidden-xs">
-              <div class="dropdown-categories">
-                <button class="open-categories">
-                  <span> همه محصولات </span>
-                  <i class="fa fa-angle-down"></i>
-                </button>
+              <nav class="custom-mega-menu">
                 <ul>
-                  <li v-for="(category, index) in categoryList" :key="index">
-                    <button>
-                      <div class="category-name">
-                        <span v-text="category.category_name"></span>
-                        <i class="fa fa-angle-left"></i>
-                      </div>
-                      <ul>
-                        <li
-                          v-for="(subCategory, index) in category.subcategories"
-                          :key="index + 'sub-menu'"
-                          class="col-xs-12 text-right"
-                          :class="[setMenuClass(subCategory)]"
-                        >
-                          <a
-                            href="#"
-                            class="menu-title"
-                            v-text="subCategory.category_name"
-                          >
-                          </a>
-                          <ul>
-                            <li
-                              v-for="(item, index) in subCategory.subcategories"
-                              :key="index + 'last-sub-menu'"
-                              class="col-xs-12"
-                              :class="[setSubMenuClass(subCategory)]"
-                            >
-                              <router-link
-                                :to="getSubCategoryUrl(item)"
-                                class="sub-menu-title"
-                                v-text="item.category_name"
-                              >
-                              </router-link>
-                            </li>
-                          </ul>
-                        </li>
-                      </ul>
+                  <li>
+                    <button class="open-categories">
+                      <span> همه محصولات </span>
+                      <i class="fa fa-angle-down"></i>
                     </button>
+                    <ul class="w-100 lvl1-wrapper">
+                      <li
+                        class="w-100 lvl1-list"
+                        v-for="(category, index) in categoryList"
+                        :key="index"
+                      >
+                        <button class="w-100">
+                          <div class="category-name">
+                            <span v-text="category.category_name"></span>
+                            <i class="fa fa-angle-left"></i>
+                          </div>
+                        </button>
+                        <ul class="lvl2-wrapper">
+                          <li
+                            v-for="(
+                              subCategory, index
+                            ) in category.subcategories"
+                            :key="index + 'sub-menu'"
+                            class="col-xs-12 pull-right text-right"
+                            :class="[setMenuClass(subCategory, false)]"
+                          >
+                            <a
+                              href="#"
+                              class="menu-title"
+                              v-text="subCategory.category_name"
+                            >
+                            </a>
+                            <div>
+                              <div
+                                v-for="(
+                                  item, index
+                                ) in subCategory.subcategories"
+                                :key="index + 'last-sub-menu'"
+                                class="col-xs-12 pull-right"
+                                :class="[setSubMenuClass(subCategory, false)]"
+                              >
+                                <router-link
+                                  :to="getSubCategoryUrl(item)"
+                                  class="sub-menu-title"
+                                  v-text="item.category_name"
+                                >
+                                </router-link>
+                              </div>
+                            </div>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
                   </li>
                 </ul>
-              </div>
+              </nav>
               <input
                 type="text"
                 placeholder="محصول مورد نظر خود را جستجو کنید"
@@ -1170,7 +1270,7 @@ a.profile-info-wrapper:hover {
               </button>
             </div>
             <ul class="mobile-navigation hidden-lg hidden-sm hidden-md">
-              <!-- <li>
+              <li>
                 <router-link
                   class="smoothScroll"
                   :to="{ name: 'indexPage' }"
@@ -1302,14 +1402,21 @@ a.profile-info-wrapper:hover {
                   >وبلاگ</a
                 >
               </li>
-               <li>
-                            <router-link
-                              class="smoothScroll"
-                              :to="{ name: 'pricing'}"
-                              @click="registerComponentStatistics('header','pricing','click-on-pricing')"
-                            >ارتقا عضویت</router-link>
-                          </li>
-             
+              <li>
+                <router-link
+                  class="smoothScroll"
+                  :to="{ name: 'pricing' }"
+                  @click="
+                    registerComponentStatistics(
+                      'header',
+                      'pricing',
+                      'click-on-pricing'
+                    )
+                  "
+                  >ارتقا عضویت</router-link
+                >
+              </li>
+
               <li>
                 <router-link
                   class="smoothScroll"
@@ -1324,7 +1431,7 @@ a.profile-info-wrapper:hover {
                 >
                   درباره ما
                 </router-link>
-              </li> -->
+              </li>
             </ul>
           </div>
         </div>
@@ -1358,7 +1465,7 @@ a.profile-info-wrapper:hover {
                 v-for="(subCategory, index) in category.subcategories"
                 :key="index + 'sub-menu'"
                 class="col-xs-12"
-                :class="[setMenuClass(subCategory)]"
+                :class="[setMenuClass(subCategory, true)]"
               >
                 <a
                   href="#"
@@ -1371,7 +1478,7 @@ a.profile-info-wrapper:hover {
                     v-for="(item, index) in subCategory.subcategories"
                     :key="index + 'last-sub-menu'"
                     class="col-xs-12"
-                    :class="[setSubMenuClass(subCategory)]"
+                    :class="[setSubMenuClass(subCategory, true)]"
                   >
                     <router-link
                       :to="getSubCategoryUrl(item)"
@@ -1572,6 +1679,16 @@ export default {
     "categoryList",
   ],
   methods: {
+    headerMenuStyles() {
+      let lvl1 = $(".lvl1-list");
+      lvl1
+        .mouseenter(() => {
+          $(".search-input > input").css("border-bottom-left-radius", "0");
+        })
+        .mouseleave(() => {
+          $(".search-input > input").css("border-bottom-left-radius", "12px");
+        });
+    },
     // jQuery
     jqUpdateSize: function () {
       // Get the dimensions of the viewport
@@ -1650,22 +1767,30 @@ export default {
       }
     },
 
-    setMenuClass(categories) {
+    setMenuClass(categories, bigScreen) {
       let categoryLength = Object.keys(categories.subcategories).length;
       if (categoryLength <= 5) {
-        return "col-sm-3";
+        if (bigScreen) {
+          return "col-sm-3";
+        } else {
+          return "col-sm-4";
+        }
       } else if (categoryLength <= 10) {
         return "col-sm-6";
       }
     },
-    setSubMenuClass(categories) {
+    setSubMenuClass(categories, bigScreen) {
       let categoryLength = Object.keys(categories.subcategories).length;
       if (categoryLength <= 5) {
         return "col-sm-12";
       } else if (categoryLength <= 10) {
         return "col-sm-6";
       } else {
-        return "col-sm-3";
+        if (bigScreen) {
+          return "col-sm-3";
+        } else {
+          return "col-sm-4";
+        }
       }
     },
     handelScroll() {
@@ -1723,9 +1848,12 @@ export default {
       });
     },
     getSubCategoryUrl: function (t) {
+      let searchElement = $(".lvl1-wrapper");
       let element = $(".buskool-sub-menu .navbar-right > li >  ul");
+      searchElement.addClass("hidden");
       element.addClass("hidden");
       setTimeout(() => {
+        searchElement.removeClass("hidden");
         element.removeClass("hidden");
       }, 20);
       let url =
@@ -1801,6 +1929,11 @@ export default {
   watch: {
     mainSearchBoxText: function (value) {
       eventBus.$emit("textSearch", value);
+    },
+    categoryList() {
+      this.$nextTick(() => {
+        this.headerMenuStyles();
+      });
     },
   },
 };

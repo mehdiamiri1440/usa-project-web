@@ -86,7 +86,7 @@
 /******/ 		if (__webpack_require__.nc) {
 /******/ 			script.setAttribute("nonce", __webpack_require__.nc);
 /******/ 		}
-/******/ 		script.src = __webpack_require__.p + "chunks/" + ({}[chunkId]||chunkId) + "." + {"0":"bbc6d0e0c5cdcf290db7","1":"34a86135cced8f484bc6","2":"adacb66a30962916a663","3":"6daf06fc757cd0bac889","4":"f2683fd8ec26d284b827","5":"82db5dd2635d10956a55","6":"f0dd740c473e0bc25190","7":"49fb3cd210df7e286a32","8":"ff5999583e78c90b316b","9":"e51b426f3c7f08e25f39","10":"c1b74b1e902e13b434c4","11":"3f356cce9d2ff12888a9","12":"6ddf472cbc994fb7502a","13":"839d96ffabdb739a8299","14":"a11146b48dde20216dc3","15":"9275289f3fd630d0a021","16":"20ebede045ad265685d6","17":"15ed436689fe2d539004","18":"c86052b7bc75d6edc308","19":"52dee3720a152d8630d5","20":"f6a7c5d076f768a1f7f0","21":"d5a4a9ba7e18ef076770","22":"e0e1431af13bda3917c0","23":"fa6e4516669a4d4259f3","24":"e44fbad1ac5ef1dd623c","25":"2e6d47a7ed88ef758150","26":"5b144c8b90d1cc06c7a1","27":"ef71ad81922bf567a028","28":"8baeaf5a772f467dff72","29":"b2725e61b068bbfeae9f","30":"0699003d38916224a28d","31":"75de8f4ce3722ed69135","32":"069367182ef4d5d8965c","33":"33a21e1bf0c12c0377b1","34":"ac6ebe657eb141a8f62a","35":"554a2a1106728dbb5f25","36":"d2f5b0407a1163fa4700","37":"671d72f39f8216d2874e","38":"b0043ef8110d8e4596ad","39":"2596db1d2a85570f82a4","40":"21ff4cce5869f35f0c53","41":"cd3e1512fb99cc064c8f"}[chunkId] + ".js";
+/******/ 		script.src = __webpack_require__.p + "chunks/" + ({}[chunkId]||chunkId) + "." + {"0":"8a20218532c00648a8dd","1":"1dc8e4f8a99883fc348b","2":"06c102198217d9cebfb8","3":"6daf06fc757cd0bac889","4":"ff53fda0b37e56754e2b","5":"db5f3983dab2d20c7784","6":"33ef7e115120f5d06dcc","7":"507a2428a7d127f71ed8","8":"b1d135e697cf5dd0ab69","9":"28517626d3c1a4a567c8","10":"7ddf9a5a36fb8596edf7","11":"56193f45c9711447a068","12":"7b386ae6372660eae2a1","13":"fdfca8a9530250b609dc","14":"d26a9b04e4088bdd2ffa","15":"21821e5ea9630efbe826","16":"8320eb9ec6abd175dc3b","17":"9b9798def6f04916e15a","18":"d66bc7d0a9dae222c504","19":"a6ccbb49aa6ae6654cd4","20":"8bef7ac0f0ff25213987","21":"baa51d090ec2fded8f34","22":"6e821de5674ecce3c62b","23":"1619b0ebda3db8f2132c","24":"135b865c6c0da752d87f","25":"d068c6e652fc96852211","26":"8f1f25d3b683a6cd486b","27":"a83e1e77df1a13bf14dc","28":"60d7b1aa99acba9c83ac","29":"7f5059ace4d95c665242","30":"b16e0a092c507f116542","31":"7669131ff106a9a71077","32":"2a3c5ac94a90e7b229e8","33":"445710c3aa65b240cf1f","34":"dbecbbe505c1103c9a52","35":"9ff88c2dbba27183c22b","36":"af3efeeeea966299707c","37":"189dd37e413d86b157c9","38":"ca21ff76c5a580e05efe","39":"762953487418e291bd1e","40":"6ebc94909f29ad0eae3a","41":"28e25bfedf9834578d73"}[chunkId] + ".js";
 /******/ 		var timeout = setTimeout(onScriptComplete, 120000);
 /******/ 		script.onerror = script.onload = onScriptComplete;
 /******/ 		function onScriptComplete() {
@@ -938,7 +938,7 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
     path: "/seller",
     components: {
       seller: function seller(resolve) {
-        __webpack_require__.e/* require */(11).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(133)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+        __webpack_require__.e/* require */(9).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(133)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
       }
     },
     redirect: "/404",
@@ -1003,7 +1003,7 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
       name: "profileBasicSellerVeficiation",
       components: {
         default: function _default(resolve) {
-          __webpack_require__.e/* require */(9).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(140)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+          __webpack_require__.e/* require */(10).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(140)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
         }
       }
     }, {
@@ -1132,7 +1132,7 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
       name: "profileBasicBuyerVeficiation",
       components: {
         default: function _default(resolve) {
-          __webpack_require__.e/* require */(10).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(149)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+          __webpack_require__.e/* require */(11).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(149)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
         }
       }
     }, {

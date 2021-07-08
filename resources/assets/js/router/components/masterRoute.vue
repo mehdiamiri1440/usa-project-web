@@ -11,6 +11,7 @@
       :login_page_path="userLogoutPath"
       :categoryList="categoryList"
     />
+
     <router-view
       id="main-content"
       :str="storagePath"
