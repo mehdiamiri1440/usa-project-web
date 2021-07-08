@@ -182,7 +182,7 @@
 }
 
 .message-wrapper .chat-page ul {
-  padding: 20px 20px 0;
+  padding: 20px;
 
   overflow-x: hidden;
 
@@ -438,6 +438,31 @@
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.16);
   padding: 25px 0;
   margin-top: 20px;
+}
+
+.mobile-like-user.delsa-info-box {
+  background: #edf8e6;
+  padding: 23px 0;
+  max-width: 460px;
+  margin-left: auto;
+  float: initial !important;
+  overflow: hidden;
+  margin-right: auto;
+  position: relative;
+  top: 17px;
+}
+
+.mobile-like-user.delsa-info-box .title-item {
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0;
+}
+
+.mobile-like-user.delsa-info-box .green-button {
+  margin: 20px 0 0;
+  background: #4dc0bb;
+  border-radius: 8px;
+  padding: 7px 25px;
 }
 
 .mobile-like-user.success {
@@ -1198,6 +1223,19 @@
             </div>
           </div>
         </li>
+        <li
+          v-else-if="checkDelsaInfoBoxIsActive()"
+          class="mobile-like-user delsa-info-box"
+        >
+          <button class="close-rating" @click="$parent.delsaInfo = false">
+            <i class="fa fa-times"></i>
+          </button>
+          <p class="title-item">منشی آنلاین خود را استخدام کنید.</p>
+          <button class="green-button" @click.prevent="openDelasModal()">
+            <i class="fa fa-info-circle"></i>
+            اطلاعات بیشتر
+          </button>
+        </li>
       </ul>
       <div
         class="loading-container"
@@ -1384,13 +1422,23 @@ export default {
         product.main.id
       );
     },
+    checkDelsaInfoBoxIsActive() {
+      if (
+        this.$parent.delsaInfo &&
+        // this.$parent.chatMessages.length == 1 &&
+        // this.$parent.chatMessages[0].p_id &&
+        !this.$parent.isLatestMessage &&
+        this.$parent.currentUser.user_info.is_seller &&
+        this.$parent.currentUser.user_info.active_pakage_type == 0 &&
+        !this.$parent.chatMessagesLoader
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    },
     checkReviewIsActive() {
       if (
-        this.$parent.chatMessages.length == 1 &&
-        this.$parent.chatMessages[0].p_id
-      ) {
-        return false;
-      } else if (
         this.$parent.userAllowedReview &&
         this.$parent.isLikeBoxActive &&
         !this.$parent.isLatestMessage &&

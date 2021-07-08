@@ -433,6 +433,7 @@ export default {
       totalChatCount: "",
       initialLoadChatCount: 30,
       LoadChatCount: "",
+      delsaInfo: true,
     };
   },
 
@@ -568,6 +569,7 @@ export default {
       let contact = this.selectedContact;
       let tempCount = this.LoadChatCount + this.initialLoadChatCount;
       let chatWrapper = $("#chat-list");
+
       if (this.totalChatCount > this.chatMessages.length) {
         this.chatMessagesLoader = true;
 
@@ -733,7 +735,6 @@ export default {
       self.isLatestMessage = true;
 
       self.chatMessagesLoader = false;
-
       this.selectedContact = contact;
       this.currentContactUserId = contact.contact_id;
 
@@ -1040,6 +1041,7 @@ export default {
       }
     },
     selectedContact: function (value) {
+      this.delsaInfo = true;
       // reset like message datas
       this.isReviewSubmited = false;
       this.userAllowedReview = false;
