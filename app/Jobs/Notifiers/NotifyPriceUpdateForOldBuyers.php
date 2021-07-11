@@ -43,17 +43,19 @@ class NotifyPriceUpdateForOldBuyers implements ShouldQueue
 
     protected function get_old_buyers_ids_from_seller_contact_list($seller_id,$product_id)
     {
+        $from = Carbon::now()->subDays(7);
+        $until = Carbon::now();
+
         $old_buyer_contacts_ids = DB::table('messages as m1')
                                         ->join('user_products','m1.sender_id','=','user_products.myuser_id')
                                         ->where('user_products.has_sent_msg',true)
                                         ->where('user_products.product_id',$product_id)
                                         ->where('m1.receiver_id',$seller_id)
                                         ->where('m1.is_read',true)
-                                        ->whereNotExists(function($q) use($seller_id){
+                                        ->whereNotExists(function($q) use($seller_id,$from,$until){
                                             $q->select(DB::raw(1))
                                                 ->from('messages as m2')
-                                                ->whereRaw("m1.sender_id = $seller_id and m2.receiver_id = m1.sender_id")
-                                                ->whereBetween('m2.created_at',[Carbon::now()->subDays(7),Carbon::now()]);
+                                                ->whereRaw("m1.sender_id = $seller_id and m2.receiver_id = m1.sender_id and m2.created_at between '" . $from . "' and '" . $until . "'");
                                         })
                                         ->whereNotExists(function($q){
                                             $q->select(DB::raw(1))

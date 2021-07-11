@@ -203,43 +203,28 @@ class message_controller extends Controller
             ],200);
         }
 
-        $previous_message_records_count = DB::table('messages')
-                                            ->where([
-                                                ['receiver_id', '=', $receiver_id],
-                                                ['sender_id', '=', $sender_id]
-                                            ])
-                                            ->orWhere([
-                                                ['receiver_id', '=', $sender_id],
-                                                ['sender_id', '=', $receiver_id]
-                                            ])
-                                            ->get()
-                                            ->count();
+        $related_product_view_records = DB::table('user_products')->where('myuser_id',$sender_id)
+                                            ->where('product_id',$request->product_id)
+                                            ->where('has_sent_msg',true)
+                                            ->orderBy('created_at')
+                                            ->get();
 
-        if($previous_message_records_count > 0){
-            $req = Request::create('/messanger/send_message', 'POST',[
-                'sender_id' => $sender_id,
-                'receiver_id' => $receiver_id,
-                'text' => $request->text
-            ]);
-    
-            return $this->send_message($req);
-        }
-        else{
-            $related_product_view_records = DB::table('user_products')->where('myuser_id',$sender_id)
-                                                ->where('product_id',$request->product_id)
-                                                ->orderBy('created_at')
-                                                ->get();
+        $now = Carbon::now();
+        
+        if($related_product_view_records->count() == 0){
+            $last_related_product_view_record = DB::table('user_products')->where('myuser_id',$sender_id)
+                                                    ->where('product_id',$request->product_id)
+                                                    ->where('has_sent_msg',false)
+                                                    ->orderBy('created_at')
+                                                    ->get()
+                                                    ->last();
 
-            $now = Carbon::now();
-            
-            if($related_product_view_records->count() > 0){
-                $last_record = $related_product_view_records->last();
-
-                DB::table('user_products')->where('id',$last_record->id)
-                                                ->update([
-                                                    'updated_at' => $now,
-                                                    'has_sent_msg' => true,
-                                                ]);
+            if($last_related_product_view_record){
+                DB::table('user_products')->where('id',$last_related_product_view_record->id)
+                                            ->update([
+                                                'updated_at' => $now,
+                                                'has_sent_msg' => true,
+                                            ]);
             }
             else{
                 DB::table('user_products')->insert([
@@ -251,14 +236,16 @@ class message_controller extends Controller
                 ]);
             }
 
-            $req = Request::create('/messanger/send_message', 'POST',[
-                'sender_id' => $sender_id,
-                'receiver_id' => $receiver_id,
-                'text' => $request->text
-            ]);
-    
-            return $this->send_message($req);
+            
         }
+
+        $req = Request::create('/messanger/send_message', 'POST',[
+            'sender_id' => $sender_id,
+            'receiver_id' => $receiver_id,
+            'text' => $request->text
+        ]);
+
+        return $this->send_message($req);
         
     }
 
