@@ -9,12 +9,7 @@
 }
 
 .content-sidebar hr {
-  margin: 15px auto;
-}
-
-.content-sidebar i {
-  margin-left: 5px;
-  font-size: 17px;
+  margin: 10px auto 0;
 }
 
 .sidebar-buttons div > a:first-of-type {
@@ -35,8 +30,8 @@
 
 <template>
   <div>
-    <CategoryFilter />
-    <GeoLocationFilter />
+    <CategoryFilter :categoryList="categories" class="hidden-xs" />
+    <GeoLocationFilter :resetLocationFilter="resetLocation" />
   </div>
 </template>
 
@@ -53,15 +48,14 @@ export default {
     "productsInfo",
     "categoryId",
     "subCategoryId",
-    "provinceId",
     "cityId",
+    "categories",
+    "resetLocation",
   ],
   data() {
     return {
-      provinceIdChild: "",
-      cityIdChild: "",
-      categoryList: "",
-      subCategoryList: "",
+      provinceChild: "",
+      cityChild: "",
       provinceList: "",
       cityList: "",
       products: this.productsInfo,
@@ -106,14 +100,17 @@ export default {
       });
     },
     setProvinceFilterChild: function () {
-      this.$parent.provinceId = this.provinceIdChild;
+      this.$parent.province = this.provinceChild;
       this.$parent.applyFilter();
     },
     setCityFilterChild: function () {
-      this.$parent.cityId = this.cityIdChild;
+      this.$parent.province = this.provinceChild;
+      this.$parent.city = this.cityChild;
       this.$parent.applyFilter();
     },
     resetFilterChild: function () {
+      this.provinceChild = "";
+      this.cityChild = "";
       this.$parent.resetFilter();
     },
   },

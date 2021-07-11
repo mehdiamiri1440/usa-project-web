@@ -964,11 +964,12 @@ div.items-wrapper {
       >
         <div class="modal-dialog">
           <div class="modal-header">
-            <a href="#" class="close-modal" @click.prevent="closeFilterModal()">
+            <a href="#" class="close-modal" data-dismiss="modal">
               <i class="fa fa-times"></i>
             </a>
             <div class="modal-title">
-              <span>دسته ها و فیلتر</span>
+              <span class="hidden-xs">دسته ها و فیلتر</span>
+              <span class="hidden-sm hidden-md hidden-lg">فیلتر مکان</span>
             </div>
           </div>
 
@@ -979,9 +980,8 @@ div.items-wrapper {
                   :productsInfo="products"
                   :categoryId="categoryId"
                   :subCategoryId="subCategoryId"
-                  :provinceId="provinceId"
-                  :cityId="cityId"
-                  v-on:productsToParent="filterProducts($event)"
+                  :categories="categoryList"
+                  :resetLocation="resetLocation"
                 />
               </div>
             </div>
@@ -1048,7 +1048,10 @@ div.items-wrapper {
         <!-- /.modal-dialog -->
       </div>
     </div>
-    <CategoriesModal :categoryList="categoryList" :modalSubCategory="modalSubCategory" />
+    <CategoriesModal
+      :categoryList="categoryList"
+      :modalSubCategory="modalSubCategory"
+    />
     <div
       v-if="!currentUser.user_info"
       class="flat-plust-icon hidden-lg hidden-md"
@@ -1075,7 +1078,10 @@ div.items-wrapper {
       "
     >
       <div class="rate-filter-mobile-wrapper">
-        <button class="mobile-category-item" @click.prevent="openFilterModal(false)">
+        <button
+          class="mobile-category-item"
+          @click.prevent="openFilterModal(false)"
+        >
           <i class="fa fa-list"></i>
           دسته ها
         </button>
@@ -1090,10 +1096,19 @@ div.items-wrapper {
         <button
           v-else
           class="mobile-category-item filter-item"
-          @click.prevent="sortOption = 'BM'"
+          @click.prevent="sedOptionAsDefault()"
         >
           <i class="fa fa-sort-amount-down-alt"></i>
           {{ getSortOptionName() }}
+          <i class="fa fa-times"></i>
+        </button>
+        <button
+          v-if="city || province"
+          class="mobile-category-item filter-item"
+          @click.prevent="resetLocation = !resetLocation"
+        >
+          <span v-if="city" v-text="city.city_name"> </span>
+          <span v-else-if="province" v-text="province.province_name"> </span>
           <i class="fa fa-times"></i>
         </button>
         <button
@@ -1518,9 +1533,8 @@ div.items-wrapper {
               :productsInfo="products"
               :categoryId="categoryId"
               :subCategoryId="subCategoryId"
-              :provinceId="provinceId"
-              :cityId="cityId"
-              v-on:productsToParent="filterProducts($event)"
+              :categories="categoryList"
+              :resetLocation="resetLocation"
             />
           </div>
         </div>
@@ -1561,10 +1575,11 @@ export default {
         photos: [],
       },
       searchText: "",
-      provinceId: "",
+      province: "",
+      city: "",
+      resetLocation: false,
       categoryId: "",
       subCategoryId: "",
-      cityId: "",
       searchValue: "",
       scrolled: false,
       productCountInPage: 16,
@@ -1583,7 +1598,7 @@ export default {
       verifiedUserContent: this.$parent.verifiedUserContent,
       listIsGrid: true,
       isMyProfile: false,
-      modalSubCategory:false
+      modalSubCategory: false,
     };
   },
   methods: {
@@ -1607,7 +1622,21 @@ export default {
         visible = false;
       }
     },
+    handleBackKeys: function () {
+      let self = this;
+      if (window.history.state) {
+        history.pushState(null, null, window.location);
+      }
+      $(window).on("popstate", function (e) {
+        $(".modal").modal("hide");
+      });
+    },
     init: function () {
+      $(".modal").on("hide.bs.modal", () => {
+        this.handleBackKeys();
+      });
+      this.checkSortOption();
+      this.checkLocationFilter();
       //              return new Promise((resolve,reject)=>{
       var self = this;
       $(".show-list-items button").tooltip();
@@ -1639,13 +1668,21 @@ export default {
           self.fromProductCount = 0;
           self.productCountInPage = 16;
 
+          let getProductsData = {
+            from_record_number: self.fromProductCount,
+            response_rate: self.$parent.productByResponseRate,
+            to_record_number: self.productCountInPage,
+            sort_by: self.sortOption,
+          };
+          if (self.province.id) {
+            getProductsData.province_id = self.province.id;
+          }
+          if (self.city.id) {
+            getProductsData.city_id = self.city.id;
+          }
+
           axios
-            .post("/user/get_product_list", {
-              from_record_number: self.fromProductCount,
-              response_rate: self.$parent.productByResponseRate,
-              to_record_number: self.productCountInPage,
-              sort_by: self.sortOption,
-            })
+            .post("/user/get_product_list", getProductsData)
             .then(function (response) {
               self.products = response.data.products;
               //                                localStorage.removeItem('productCountInPage')
@@ -1667,7 +1704,7 @@ export default {
       var self = this;
       if (
         this.searchText === "" &&
-        this.provinceId === "" &&
+        this.province.id === "" &&
         this.categoryId === "" &&
         this.continueToLoadProducts
       ) {
@@ -1710,11 +1747,11 @@ export default {
         if (this.subCategoryId) {
           searchObject.sub_category_id = this.subCategoryId;
         }
-        if (this.provinceId) {
-          searchObject.province_id = this.provinceId;
+        if (this.province.id) {
+          searchObject.province_id = this.province.id;
         }
-        if (this.cityId) {
-          searchObject.city_id = this.cityId;
+        if (this.city.id) {
+          searchObject.city_id = this.city.id;
         }
         if (this.searchText) {
           this.$router.replace({
@@ -1815,10 +1852,10 @@ export default {
       });
 
       this.searchText = "";
-      this.provinceId = "";
+      this.province = "";
       this.categoryId = "";
       this.subCategoryId = "";
-      this.cityId = "";
+      this.city = "";
 
       this.applyFilter();
     },
@@ -1841,11 +1878,11 @@ export default {
       if (this.subCategoryId) {
         searchObject.sub_category_id = this.subCategoryId;
       }
-      if (this.provinceId) {
-        searchObject.province_id = this.provinceId;
+      if (this.province.id) {
+        searchObject.province_id = this.province.id;
       }
-      if (this.cityId) {
-        searchObject.city_id = this.cityId;
+      if (this.city.id) {
+        searchObject.city_id = this.city.id;
       }
       if (this.searchText) {
         this.$router.replace({
@@ -1881,6 +1918,7 @@ export default {
         });
     },
     setSortOption: function (sortOption) {
+      localStorage.setItem("sortOption", sortOption);
       $("#filter-modal").modal("hide");
       if (this.isDeviceMobile()) {
         history.go(-1);
@@ -1994,16 +2032,16 @@ export default {
       history.go(-1);
     },
     openFilterModal(category) {
-      if(category){
-        this.modalSubCategory = category
+      if (category) {
+        this.modalSubCategory = category;
         $("#categories-modal").modal("show");
-      }else{
-        this.modalSubCategory = false
+      } else {
+        this.modalSubCategory = false;
         $("#categories-modal").modal("show");
       }
     },
     closeFilterModal: function () {
-      $("#searchFilter").modal("hide");
+      $(".modal").modal("hide");
       history.go(-1);
     },
     sidebarScroll() {
@@ -2037,6 +2075,23 @@ export default {
       this.$nextTick(() => {
         this.$router.push({ path: url });
       });
+    },
+    checkSortOption() {
+      const sortOption = localStorage.getItem("sortOption");
+      if (sortOption) {
+        this.sortOption = sortOption;
+      }
+    },
+    sedOptionAsDefault() {
+      this.sortOption = "BM";
+      localStorage.removeItem("sortOption");
+      this.applyFilter();
+    },
+    checkLocationFilter() {
+      const province = localStorage.getItem("selectedProvince");
+      const city = localStorage.getItem("selectedCity");
+      this.province = province ? JSON.parse(province) : "";
+      this.city = city ? JSON.parse(city) : "";
     },
   },
   watch: {

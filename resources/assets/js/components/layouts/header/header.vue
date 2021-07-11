@@ -137,7 +137,7 @@ a.close-dialog-popup {
   font-weight: 500;
 }
 
-.search-input button.open-categories {
+button.open-categories {
   background: #eee;
   color: #313a43;
   font-weight: 400;
@@ -217,11 +217,11 @@ a.close-dialog-popup {
   justify-content: space-around;
 }
 
-.search-input button.open-categories span {
+.search-input > button.open-categories span {
   margin-left: 22px;
 }
 
-.search-input button i:before {
+.search-input > button i:before {
   position: relative;
   left: 2px;
   top: 3px;
@@ -233,10 +233,18 @@ nav.navbar {
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 1010;
+  z-index: 1012;
   border-radius: 0;
   border: none;
   border-bottom: 1px solid #ebebeb;
+}
+
+nav.navbar.navbar-category {
+  border-bottom: none !important;
+}
+
+nav.navbar.navbar-category .search-input {
+  margin-bottom: 0;
 }
 
 .buskool-main-nav {
@@ -501,7 +509,7 @@ a.profile-info-wrapper:hover {
 
 #web-profile-items {
   position: absolute;
-  top: 50px;
+  top: 45px;
   background: #fff;
   width: 100%;
   text-align: right;
@@ -726,7 +734,7 @@ a.profile-info-wrapper:hover {
     padding: 0 10px;
   }
 
-  .search-input button {
+  .search-input > button {
     font-weight: bold;
     top: 0;
     bottom: 0;
@@ -735,6 +743,20 @@ a.profile-info-wrapper:hover {
     padding: 9px;
     background: none;
     color: #5f6368;
+  }
+
+  .search-input > .location-filter-wrapper {
+    position: absolute;
+    left: 10px;
+    top: 0;
+  }
+
+  .search-input > .location-filter-wrapper button {
+    border: none;
+    color: #7e7e7e;
+    padding: 6px 10px;
+    background: #f2f2f2;
+    border-radius: 8px;
   }
 
   .search-input input {
@@ -1010,7 +1032,13 @@ a.profile-info-wrapper:hover {
 
     <!--nav-->
     <div class="mobile-background-shadow"></div>
-    <nav class="navbar text-rtl">
+    <nav
+      class="navbar text-rtl"
+      :class="{
+        'navbar-category':
+          $route.name == 'productList' || $route.name == 'productCategory',
+      }"
+    >
       <div class="container-fluid buskool-main-nav">
         <div class="hidden-md hidden-sm hidden-lg mobile-menu-button">
           <button
@@ -1405,21 +1433,6 @@ a.profile-info-wrapper:hover {
               <li>
                 <router-link
                   class="smoothScroll"
-                  :to="{ name: 'pricing' }"
-                  @click="
-                    registerComponentStatistics(
-                      'header',
-                      'pricing',
-                      'click-on-pricing'
-                    )
-                  "
-                  >ارتقا عضویت</router-link
-                >
-              </li>
-
-              <li>
-                <router-link
-                  class="smoothScroll"
                   :to="{ name: 'aboutUs' }"
                   @click="
                     registerComponentStatistics(
@@ -1451,6 +1464,23 @@ a.profile-info-wrapper:hover {
           <i class="fa fa-search"></i>
           <span class="hidden-sm"> جستجو </span>
         </button>
+        <div
+          v-if="
+            $route.name == 'productList' || $route.name == 'productCategory'
+          "
+          class="hidden-sm hidden-md hidden-lg location-filter-wrapper"
+        >
+          <button data-toggle="modal" data-target="#searchFilter">
+            <span v-if="selectedCity" v-text="selectedCity.city_name"> </span>
+            <span
+              v-else-if="selectedProvince"
+              v-text="selectedProvince.province_name"
+            >
+            </span>
+            <span v-else> همه ایران </span>
+            <i class="fa fa-map-marker-alt"></i>
+          </button>
+        </div>
       </div>
       <div class="container-fluid buskool-sub-menu absolute-position hidden-xs">
         <ul class="nav navbar-right navbar-nav">
@@ -1491,166 +1521,12 @@ a.profile-info-wrapper:hover {
               </li>
             </ul>
           </li>
-
-          <!-- <li>
-            <router-link
-              class="smoothScroll"
-              :to="{ name: 'indexPage' }"
-              @click="
-                registerComponentStatistics(
-                  'header',
-                  'home-page',
-                  'click-on-home-page'
-                )
-              "
-            >
-              صفحه نخست
-            </router-link>
-          </li>
-
-          <li v-if="user_id !== ''">
-            <router-link
-              v-if="is_seller == 1"
-              class="smoothScroll"
-              :to="{ name: 'messagesSeller' }"
-              @click="
-                registerComponentStatistics(
-                  'header',
-                  'dashboard',
-                  'click-on-dashboard'
-                )
-              "
-            >
-              پیام ها
-              <span
-                class="message-count"
-                v-if="messageCount > 0"
-                v-text="messageCount"
-              ></span>
-            </router-link>
-
-            <router-link
-              v-else
-              class="smoothScroll"
-              :to="{ name: 'messagesBuyer' }"
-              @click="
-                registerComponentStatistics(
-                  'header',
-                  'dashboard',
-                  'click-on-dashboard'
-                )
-              "
-            >
-              پیام ها
-              <span
-                class="message-count"
-                v-if="messageCount > 0"
-                v-text="messageCount"
-              ></span>
-            </router-link>
-          </li>
-          <li v-if="user_id !== ''">
-            <router-link
-              v-if="is_seller == 1"
-              class="smoothScroll"
-              :to="{ name: 'buyAdRequestsSeller' }"
-              @click="
-                registerComponentStatistics(
-                  'header',
-                  'dashboard',
-                  'click-on-dashboard'
-                )
-              "
-              >درخواست های خرید</router-link
-            >
-            <router-link
-              v-else
-              class="smoothScroll"
-              :to="{ name: 'registerRequestBuyer' }"
-              @click="
-                registerComponentStatistics(
-                  'header',
-                  'dashboard',
-                  'click-on-dashboard'
-                )
-              "
-              >ثبت درخواست خرید</router-link
-            >
-          </li>
-          <li v-if="user_id !== ''">
-            <router-link
-              v-if="is_seller == 1"
-              class="smoothScroll"
-              :to="{ name: 'messagesRequestSeller' }"
-              @click="
-                registerComponentStatistics(
-                  'header',
-                  'dashboard',
-                  'click-on-dashboard'
-                )
-              "
-            >
-              <span class="star-badge">
-                <i class="fa fa-star"></i>
-              </span>
-              خریداران پیشنهادی
-            </router-link>
-          </li>
-          <li>
-            <router-link
-              class="smoothScroll"
-              :to="{ name: 'productList' }"
-              @click="
-                registerComponentStatistics(
-                  'header',
-                  'product-list',
-                  'click-on-product-list'
-                )
-              "
-            >
-              لیست محصولات
-            </router-link>
-          </li>
-          <li>
-            <a
-              href="https:\\blog.buskool.com"
-              class="smoothScroll"
-              @click="
-                registerComponentStatistics('header', 'blog', 'click-on-blog')
-              "
-              >وبلاگ</a
-            >
-          </li>
-           <li>
-                        <router-link
-                          class="smoothScroll"
-                          :to="{ name: 'pricing'}"
-                          @click="registerComponentStatistics('header','pricing','click-on-pricing')"
-                        >ارتقا عضویت</router-link>
-                      </li>
-         
-          <li>
-            <router-link
-              class="smoothScroll"
-              :to="{ name: 'aboutUs' }"
-              @click="
-                registerComponentStatistics(
-                  'header',
-                  'about-us',
-                  'click-on-about-us'
-                )
-              "
-            >
-              درباره ما
-            </router-link>
-          </li> -->
         </ul>
       </div>
     </nav>
   </div>
 </template>
 <script>
-var visible = false;
 import { eventBus } from "../../../router/router";
 
 export default {
@@ -1665,6 +1541,8 @@ export default {
       ProductId: "",
       mainSearchBoxText: "",
       messageCount: 0,
+      selectedProvince: "",
+      selectedCity: "",
     };
   },
   props: [
@@ -1860,8 +1738,15 @@ export default {
         "/product-list/category/" + t.category_name.split(" ").join("-");
       return url;
     },
+    checkLocationFilter() {
+      const province = localStorage.getItem("selectedProvince");
+      const city = localStorage.getItem("selectedCity");
+      this.selectedProvince = province ? JSON.parse(province) : "";
+      this.selectedCity = city ? JSON.parse(city) : "";
+    },
   },
   mounted() {
+    this.checkLocationFilter();
     if (this.user_id) {
       axios
         .post("/get_total_unread_messages_for_current_user")
@@ -1903,6 +1788,13 @@ export default {
 
     eventBus.$on("messageCount", (event) => {
       this.messageCount += event;
+    });
+
+    eventBus.$on("selectedProvince", (event) => {
+      this.selectedProvince = event;
+    });
+    eventBus.$on("selectedCity", (event) => {
+      this.selectedCity = event;
     });
 
     $(window).resize(this.jqUpdateSize); // When the browser changes size
