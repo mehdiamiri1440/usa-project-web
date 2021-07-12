@@ -2,19 +2,26 @@
 hr {
   margin-bottom: 0;
 }
+.title-widget {
+  text-align: right;
+  padding: 15px 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.title-widget .remove-filter {
+  background: none;
+  border: none;
+  color: #e41c38;
+  font-size: 14px;
+  padding: 0;
+}
+.title-widget div {
+  font-size: 18px;
+}
 
 .content-sidebar h2 {
   padding: 0 15px;
-}
-
-.category-products-widget > ul > li {
-  border-bottom: 1px solid #eee;
-
-  padding-top: 12px;
-}
-
-.category-products-widget > ul > li:last-of-type {
-  border-bottom: none;
 }
 
 .content-sidebar {
@@ -44,6 +51,10 @@ hr {
   font-weight: 700;
   position: relative;
   top: 2px;
+}
+
+.category-products-widget {
+  padding: 10px 0;
 }
 
 .category-products-widget i {
@@ -128,6 +139,126 @@ hr {
 
   display: block;
 }
+
+.default-category-title {
+  border: none;
+  background: none;
+  color: #313a43;
+  font-size: 15px;
+  font-weight: 500;
+  width: 100%;
+  text-align: right;
+  padding: 0 22px;
+}
+
+.default-category-title > i {
+  display: none;
+}
+
+.category-title {
+  font-size: 15px;
+  font-weight: 400;
+  color: #5f6368;
+  display: flex;
+  justify-content: space-between;
+  border: none;
+  background: none;
+  width: 100%;
+  padding: 10px 0;
+}
+
+.default-category-title.category-title > i {
+  font-size: 17px;
+  color: #868686;
+  display: block;
+}
+
+.category-title:hover,
+.category-title:hover i {
+  color: #00c569;
+}
+
+.category-title span {
+  position: relative;
+  right: 0;
+  transition: 150ms;
+}
+.category-title:hover span {
+  right: 5px;
+  transition: 150ms;
+}
+
+.category-title.back-item {
+  position: relative;
+  right: 0;
+  transition: 150ms;
+  margin-bottom: 5px;
+  color: #1da1f2;
+}
+
+.category-title.back-item i {
+  font-size: 14px;
+  position: relative;
+  top: 2px;
+  margin-left: 3px;
+}
+
+.category-title.back-item:hover,
+.category-title.back-item:hover i {
+  color: #1da1f2;
+  transition: 150ms;
+}
+
+.category-title.back-item:hover span {
+  right: -5px;
+  transition: 150ms;
+}
+
+.sub-category-list {
+  display: none;
+}
+
+.current-category .sub-category-list {
+  display: block;
+  margin-top: 9px;
+}
+
+.sub-category-list .category-title {
+  padding: 7px 15px;
+}
+
+.sub-category-list > li {
+  padding-right: 35px;
+}
+
+.categories-list {
+  display: none;
+}
+
+.current-sub-category .categories-list {
+  display: block;
+}
+
+.categories-list li {
+  padding-right: 40px;
+}
+
+.categories-list a {
+  color: #777;
+  display: inline-block;
+  border-right: 1px solid #e9ecef;
+  padding: 10px 15px;
+  width: 100%;
+  transition: 150ms;
+}
+
+.categories-list a:hover,
+.categories-list a.active {
+  transition: 150ms;
+  color: #00c569;
+  border-right-color: #00c569;
+}
+
 @media screen and (max-width: 768px) {
   .content-sidebar {
     margin: 0 auto;
@@ -136,68 +267,79 @@ hr {
 }
 </style>
 <template>
-  <div v-if="categoryList" class="content-sidebar">
+  <div v-if="categoryList" class="content-sidebar col-xs-12">
     <div class="title-widget">
       <div>دسته بندی محصولات</div>
-      <hr />
     </div>
-
+    <hr />
     <div class="category-products-widget">
       <ul>
+        <li v-if="selectedCategory">
+          <button
+            class="category-title back-item"
+            @click="(selectedCategory = ''), (selectedSubCategory = '')"
+          >
+            <span>
+              <i class="fa fa-arrow-right"></i>
+              همه دسته ها
+            </span>
+          </button>
+        </li>
         <li
           v-for="(category, index) in categoryList"
-          :key="category.id"
-          :class="'collapse-category-' + category.id"
+          :key="index"
+          v-show="selectedCategory == '' || selectedCategory == index + 1"
+          :class="{ 'current-category': selectedCategory == index + 1 }"
         >
-          <h2>
-            <a
-              :class="'collapse-button-' + category.id"
-              href="#"
-              @click.prevent="
-                collapseMethod(
-                  category.id,
-                  index,
-                  category.subcategories.length
-                )
+          <button
+            v-if="selectedCategory == ''"
+            class="default-category-title category-title"
+            @click="selectedCategory = index + 1"
+          >
+            <span v-text="category.category_name"></span>
+            <i class="fa fa-angle-left"></i>
+          </button>
+          <button
+            v-else
+            class="default-category-title"
+            @click="selectedSubCategory = ''"
+          >
+            <span v-text="category.category_name"></span>
+            <i class="fa fa-angle-left"></i>
+          </button>
+          <ul class="sub-category-list">
+            <li
+              v-for="(subCategory, subCategoryIndex) in category.subcategories"
+              :key="subCategoryIndex"
+              v-show="
+                selectedSubCategory == '' ||
+                selectedSubCategory == subCategory.id
               "
+              :class="{
+                'current-sub-category': selectedSubCategory == subCategory.id,
+              }"
+              :data-test="subCategory.id"
             >
-              <i class="fa fa-angle-left"></i>
-
-              <span v-text="category.category_name"></span>
-            </a>
-          </h2>
-
-          <ul class="sub-category-product little">
-            <li class="sub-category-item" v-for="subCategory in category.subcategories">
-              <h4>
-                <router-link
-                  :class="{
-                    active: getCategoryName() === subCategory.category_name,
-                  }"
-                  :to="getSubCategoryUrl(subCategory)"
-                  v-text="subCategory.category_name"
-                  data-dismiss="modal"
-                ></router-link>
-              </h4>
+              <button
+                class="category-title"
+                @click="selectedSubCategory = subCategory.id"
+              >
+                <span v-text="subCategory.category_name"></span>
+              </button>
+              <ul class="categories-list">
+                <li
+                  v-for="(item, index) in subCategory.subcategories"
+                  :key="index + '-category-item'"
+                >
+                  <router-link
+                    :class="{ active: item.category_name == getCategoryName() }"
+                    :to="getSubCategoryUrl(item)"
+                    v-text="item.category_name"
+                  ></router-link>
+                </li>
+              </ul>
             </li>
           </ul>
-
-          <div class="button-wrapper">
-            <button
-              class="green-button button-toggle"
-              @click.prevent="
-                collapseMethod(
-                  category.id,
-                  index,
-                  category.subcategories.length
-                )
-              "
-            >
-              <span>مشاهده بیشتر</span>
-
-              <i class="fa fa-angle-down"></i>
-            </button>
-          </div>
         </li>
       </ul>
     </div>
@@ -205,16 +347,20 @@ hr {
 
   <div v-else class="default-content content-sidebar">
     <div class="title-widget">
-      <span class="placeholder-content content-half-width"></span>
-      <hr />
+      <p class="col-xs-12">
+        <span class="placeholder-content content-half-width"></span>
+      </p>
     </div>
+    <hr />
 
     <div class="category-products-widget-default">
       <ul>
         <li>
-          <span class="placeholder-content default-boxing-size content-full-width"></span>
-          <span class="placeholder-content default-boxing-size content-full-width"></span>
-          <span class="placeholder-content default-boxing-size content-full-width"></span>
+          <span class="placeholder-content h-20 content-full-width"></span>
+          <span
+            class="placeholder-content h-20 margin-15-0 content-half-width"
+          ></span>
+          <span class="placeholder-content h-20 content-default-width"></span>
         </li>
       </ul>
     </div>
@@ -223,157 +369,60 @@ hr {
 
 <script>
 export default {
-  props: ["fotnLoad"],
+  props: ["categoryList"],
   data() {
     return {
-      categoryList: "",
-      fontIsLoad: false
+      selectedCategory: "",
+      selectedSubCategory: "",
     };
   },
   methods: {
-    init: function() {
-      var self = this;
-      var categoryParameterName = this.getCategoryName();
-      axios
-        .post("/get_category_list", {
-          cascade_list: true
-        })
-        .then(function(response) {
-          self.categoryList = response.data.categories;
-          setTimeout(function() {
-            for (var i = 0; i < self.categoryList.length; i++) {
-              for (
-                var j = 0;
-                j < self.categoryList[i].subcategories.length;
-                j++
-              ) {
-                if (
-                  self.categoryList[i].subcategories[j].category_name ===
-                  categoryParameterName
-                ) {
-                  self.collapseMethod(
-                    self.categoryList[i].id,
-                    i,
-                    self.categoryList[i].subcategories.length
-                  );
-                }
-              }
-
-              self.checkListHeight(
-                self.categoryList[i].id,
-                self.categoryList[i].subcategories.length
-              );
-            }
-          });
-        }, 500);
-    },
-    collapseMethod: function(id, index, listItems) {
-      var wrapperlistElemetn = $(" aside .collapse-category-" + id);
-      var listElemetn = $(
-        "aside .collapse-category-" + id + " .sub-category-product"
-      );
-      var buttonElemetn = $("aside .collapse-category-" + id + " button span");
-      let subCategoryLength = Object.keys(
-        this.categoryList[index].subcategories
-      ).length;
-      var initialHeight = subCategoryLength * 47;
-      if (this.checkListHeight(id, listItems) !== true) {
-        if (listElemetn.hasClass("little")) {
-          listElemetn.css("height", initialHeight + "px");
-          listElemetn.removeClass("little", 500);
-        } else {
-          listElemetn.css("height", "145px");
-          listElemetn.addClass("little", 500);
-        }
-        wrapperlistElemetn.toggleClass("list-open", 500);
-        buttonElemetn.text(function(i, v) {
-          return v === "بستن" ? "مشاهده بیشتر" : "بستن";
-        });
-
-        var wrapperlistElemetnMobile = $(
-          " #searchFilter .collapse-category-" + id
-        );
-        var listElemetnMobile = $(
-          "#searchFilter .collapse-category-" + id + " .sub-category-product"
-        );
-        var buttonElemetnMobile = $(
-          "#searchFilter .collapse-category-" + id + " button span"
-        );
-
-        if (listElemetnMobile.hasClass("little")) {
-          listElemetnMobile.css("height", initialHeight + "px");
-          listElemetnMobile.removeClass("little", 500);
-        } else {
-          listElemetnMobile.css("height", "145px");
-          listElemetnMobile.addClass("little", 500);
-        }
-        wrapperlistElemetnMobile.toggleClass("list-open", 500);
-        buttonElemetnMobile.text(function(i, v) {
-          return v === "بستن" ? "مشاهده بیشتر" : "بستن";
-        });
-      }
-
-      this.$parent.setSidebarHeight();
-    },
-    checkListHeight(id, listItems) {
-      var buttonFilter = $(
-        " aside .collapse-category-" + id + " .green-button.button-toggle"
-      );
-
-      var mobileButton = $(
-        " #searchFilter .collapse-category-" +
-          id +
-          " .green-button.button-toggle"
-      );
-
-      if (listItems < 3) {
-        buttonFilter.css("display", "none");
-        mobileButton.css("display", "none");
-
-        return true;
-      } else {
-        return false;
-      }
-    },
-    checkListHeightUpdate() {
-      var elements = $(" .category-products-widget > ul > li");
-      var elementClass = "";
-      var elementLenght = null;
-      var buttonFilter = "";
-
-      for (var i = 0; i < elements.length; i++) {
-        elementClass = $(elements[i]).attr("class");
-        elementLenght = $("." + elementClass + " .sub-category-item").length;
-        buttonFilter = $(" ." + elementClass + " .green-button.button-toggle");
-
-        if (elementLenght < 3) {
-          buttonFilter.css("display", "none");
-        }
-      }
-    },
-    getSubCategoryUrl: function(t) {
+    getSubCategoryUrl: function (t) {
       let url =
         "/product-list/category/" + t.category_name.split(" ").join("-");
       return url;
     },
-    getCategoryName: function() {
+    getCategoryName: function () {
       let name = this.$route.params.categoryName
         ? this.$route.params.categoryName
         : "";
 
       return name.split("-").join(" ");
-    }
+    },
+    getCategoryItem(categories) {
+      let data = "";
+
+      for (let i = 0; i < categories.length; i++) {
+        if (!data) {
+          let categoryItem = Object.values(categories[i].subcategories);
+
+          categoryItem.map((category, index) => {
+            let subCategories = Object.values(category.subcategories);
+            data = subCategories.find((item) => {
+              if (item.category_name == this.getCategoryName()) {
+                return true;
+              }
+            });
+            if (data) {
+              this.selectedCategory = i + 1;
+              this.selectedSubCategory = data.parent_id;
+              return true;
+            }
+          });
+        }
+      }
+    },
   },
   mounted() {
-    this.init();
-    var self = this;
-
-    document.fonts.ready.then(function() {
-      self.fontIsLoad = true;
-    });
+    this.getCategoryItem(this.categoryList);
   },
-  updated() {
-    this.checkListHeightUpdate();
-  }
+  watch: {
+    categoryList(categories) {
+      this.getCategoryItem(categories);
+    },
+    $route(route) {
+      this.getCategoryItem(this.categoryList);
+    },
+  },
 };
 </script>

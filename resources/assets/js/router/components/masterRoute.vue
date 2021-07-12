@@ -9,7 +9,9 @@
       :user_logout_path="userLogoutPath"
       :storage_path="storagePath"
       :login_page_path="userLogoutPath"
+      :categoryList="categoryList"
     />
+
     <router-view
       id="main-content"
       :str="storagePath"
@@ -17,6 +19,7 @@
       :is-user-login="userId"
       :user-type="isSeller"
       :verifiedUserContent="verifiedUserContent"
+      :categoryList="categoryList"
     ></router-view>
 
     <footer-master-layouts />
@@ -32,11 +35,6 @@ export default {
     HeaderMasterLayouts,
     FooterMasterLayouts,
   },
-  data: function () {
-    return {
-      productByResponseRate: false,
-    };
-  },
   props: [
     "userId",
     "isSeller",
@@ -47,5 +45,21 @@ export default {
     "userLogoutPath",
     "verifiedUserContent",
   ],
+  data: function () {
+    return {
+      productByResponseRate: false,
+      categoryList: "",
+    };
+  },
+  methods: {
+    getCategories() {
+      axios
+        .post("/get_category_list", { cascade_list: true })
+        .then((response) => (this.categoryList = response.data.categories));
+    },
+  },
+  mounted() {
+    this.getCategories();
+  },
 };
 </script>

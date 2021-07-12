@@ -1,7 +1,8 @@
 <style scoped>
 .contents .green-button {
-  padding: 4px 12px;
+  padding: 5px 15px;
   margin-top: 40px;
+  border-radius: 8px;
 }
 
 .search-not-found {
@@ -41,6 +42,7 @@
 
 .text-content {
   color: #777;
+  line-height: 1.618;
 }
 
 .category-item {
@@ -53,17 +55,24 @@
 
 .title-section {
   direction: rtl;
-  margin-bottom: 8px;
 }
 
 .title-section p {
-  font-size: 16px;
+  font-size: 18px;
   color: #00c569;
   float: right;
 }
 
+.categories-list h2 {
+  font-size: 16px;
+  color: #333;
+  float: right;
+  width: 100%;
+  margin: 30px 0 15px;
+}
+
 .title-section hr {
-  margin: 15px 15px 10px auto;
+  margin: 15px 15px 0 auto;
   position: relative;
 }
 
@@ -150,6 +159,29 @@
             <li
               v-for="(subCategory, catIndex) in category.subcategories"
               :key="catIndex"
+              class="col-xs-12"
+            >
+              <h2 v-text="subCategory.category_name"></h2>
+              <ul class="categories-list">
+                <li
+                  v-for="(
+                    categoryItem, subCategoryIndex
+                  ) in subCategory.subcategories"
+                  :key="subCategoryIndex"
+                  class="list-item col-xs-6 col-sm-4 col-md-2 pull-right"
+                >
+                  <router-link
+                    :to="getSubCategoryUrl(categoryItem)"
+                    v-text="categoryItem.category_name"
+                  ></router-link>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <!-- <ul class="categories-list">
+            <li
+              v-for="(subCategory, catIndex) in category.subcategories"
+              :key="catIndex"
               class="list-item col-xs-4 col-sm-3 col-md-2 pull-right"
             >
               <router-link
@@ -157,7 +189,7 @@
                 v-text="subCategory.category_name"
               ></router-link>
             </li>
-          </ul>
+          </ul> -->
         </div>
       </div>
     </div>

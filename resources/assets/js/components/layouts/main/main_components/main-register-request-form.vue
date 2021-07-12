@@ -11,7 +11,6 @@
 
 .form-wrapper {
   margin: 0 auto;
-  max-width: 767px;
 }
 .form-contents {
   margin-top: 26px;
@@ -325,17 +324,19 @@ label .small-label {
 
           <div class="form-contents col-xs-12">
             <div class="row">
-              <div class="col-xs-12 col-md-6 pull-right">
+              <div class="col-xs-12 col-md-4 pull-right">
                 <h2 class="title-contents col-xs-12">
                   دسته بندی محصول
                   <span class="red-text"> * </span>
                 </h2>
-                <label for="category" class="description"> مثلا: میوه </label>
+                <label for="category" class="description">
+                  مثلا: کشاورزی
+                </label>
 
                 <div class="input-wrapper select-items">
                   <select
                     :class="{
-                      active: categorySelected,
+                      active: categorySelected !== '',
                       error: errors.categorySelected,
                     }"
                     id="category"
@@ -344,7 +345,7 @@ label .small-label {
                     <option value="" selected disabled>انتخاب دسته بندی</option>
                     <option
                       v-for="(category, index) in categoryList"
-                      v-bind:value="category"
+                      v-bind:value="index"
                       :key="index"
                       v-text="category.category_name"
                     ></option>
@@ -357,8 +358,46 @@ label .small-label {
                   ></span>
                 </p>
               </div>
+              <div class="col-xs-12 col-md-4 pull-right">
+                <h2 class="title-contents col-xs-12">
+                  زیر دسته بندی
+                  <span class="red-text"> * </span>
+                </h2>
+                <label for="mainSubcategory" class="description">
+                  مثلا: میوه
+                </label>
 
-              <div class="col-xs-12 col-md-6">
+                <div class="input-wrapper select-items">
+                  <select
+                    :class="{
+                      active: selectedMainSubCategory,
+                      error: errors.selectedMainSubCategory,
+                    }"
+                    id="mainSubcategory"
+                    v-model="selectedMainSubCategory"
+                  >
+                    <option value="" selected disabled>
+                      انتخاب زیر دسته بندی
+                    </option>
+                    <option
+                      v-for="(
+                        category, mainSubCategoryindex
+                      ) in mainSubCategories"
+                      v-bind:value="mainSubCategoryindex"
+                      :key="mainSubCategoryindex"
+                      v-text="category.category_name"
+                    ></option>
+                  </select>
+                </div>
+                <p class="error-message">
+                  <span
+                    v-if="errors.selectedMainSubCategory"
+                    v-text="errors.selectedMainSubCategory"
+                  ></span>
+                </p>
+              </div>
+
+              <div class="col-xs-12 col-md-4">
                 <h2 class="title-contents col-xs-12">
                   نام محصول
 
@@ -377,9 +416,7 @@ label .small-label {
                     id="sub-category"
                     v-model="selectedSubCategory"
                   >
-                    <option value="" disabled selected>
-                      انتخاب زیر دسته بندی
-                    </option>
+                    <option value="" disabled selected>انتخاب نام محصول</option>
                     <option
                       v-for="(subCategory, index) in subCategoryList"
                       v-bind:value="subCategory"
@@ -518,7 +555,7 @@ label .small-label {
                     active:
                       buyAd.sub_category_id &&
                       buyAd.requirement_amount &&
-                      !errors.requirement_amount 
+                      !errors.requirement_amount,
                   }"
                   @click.prevent="formValidator()"
                 >
@@ -536,11 +573,12 @@ label .small-label {
 
 <script>
 export default {
-  props: ["wrapperBg", "isUserLogin"],
+  props: ["wrapperBg", "isUserLogin", "categoryList"],
   data: function () {
     return {
       errors: {
         categorySelected: "",
+        selectedMainSubCategory: "",
         sub_category_id: "",
         requirement_amount: "",
         name: "",
@@ -557,7 +595,8 @@ export default {
       },
       buyAdFields: ["name", "requirement_amount", "sub_category_id"],
       categorySelected: "",
-      categoryList: "",
+      mainSubCategories: "",
+      selectedMainSubCategory: "",
       subCategoryList: "",
       selectedSubCategory: "",
       subCategoryName: "محصول",
@@ -583,22 +622,13 @@ export default {
       axios
         .post("/user/profile_info")
         .then((response) => (this.currentUser = response.data));
-
-      axios
-        .post("/get_category_list")
-        .then((response) => (this.categoryList = response.data.categories));
-    },
-    loadSubCategoryList: function (category) {
-      var categoryId = category.id;
-      axios
-        .post("/get_category_list", {
-          parent_id: categoryId,
-        })
-        .then((response) => (this.subCategoryList = response.data.categories));
     },
     formValidator: function () {
-      if (!this.categorySelected) {
+      if (this.categorySelected === "") {
         this.errors.categorySelected = "دسته بندی الزامی است";
+      }
+      if (!this.selectedMainSubCategory) {
+        this.errors.selectedMainSubCategory = "زیر دسته بندی الزامی است";
       }
       if (!this.buyAd.sub_category_id) {
         this.errors.sub_category_id = "نام محصول الزامی است";
@@ -608,6 +638,7 @@ export default {
 
       if (
         !this.errors.categorySelected &&
+        !this.errors.selectedMainSubCategory &&
         !this.errors.sub_category_id &&
         !this.errors.name &&
         !this.errors.requirement_amount
@@ -617,12 +648,7 @@ export default {
     },
     submitBuyAd: function () {
       this.errors = "";
-      var self = this;
-
-      this.buyAd.category_id = this.categorySelected.id;
-
       window.localStorage.setItem("buyAd", JSON.stringify(this.buyAd));
-
       if (this.isUserLogin) {
         window.location.href = "/buyer/register-request";
       } else {
@@ -726,6 +752,16 @@ export default {
         this.errors.name = "لطفا نوع محصول را فارسی وارد کنید.";
       }
     },
+    resetSelectData() {
+      this.errors.categorySelected = "";
+      this.errors.selectedMainSubCategory = "";
+      this.errors.sub_category_id = "";
+      this.selectedMainSubCategory = "";
+      this.mainSubCategories = "";
+      this.selectedSubCategory = "";
+      this.buyAd.sub_category_id = "";
+      this.subCategoryList = "";
+    },
   },
   mounted() {
     if (this.isOsIOS()) {
@@ -734,19 +770,35 @@ export default {
     this.init();
   },
   watch: {
-    categorySelected: function (category) {
-      this.categoryName = category.category_name;
-      this.loadSubCategoryList(category);
+    categorySelected(index) {
+      this.resetSelectData();
+      this.mainSubCategories = this.categoryList[index].subcategories;
       this.errors.categorySelected = "";
     },
-    selectedSubCategory: function (subCategory) {
-      this.subCategoryName = subCategory.category_name;
-      this.setCategoryId(subCategory);
+    selectedMainSubCategory(index) {
+      this.errors.selectedMainSubCategory = "";
+      if (index) {
+        this.selectedSubCategory = "";
+        this.buyAd.sub_category_id = "";
+
+        let category =
+          this.categoryList[this.categorySelected].subcategories[index];
+
+        this.buyAd.category_id = category.id;
+        this.subCategoryList = category.subcategories;
+        this.categoryName = category.category_name;
+      }
     },
-    "buyAd.sub_category_id": function () {
+    selectedSubCategory(subCategory) {
+      if (subCategory) {
+        this.subCategoryName = subCategory.category_name;
+        this.setCategoryId(subCategory);
+      }
+    },
+    "buyAd.sub_category_id"() {
       this.errors.sub_category_id = "";
     },
-    "buyAd.requirement_amount": function (value) {
+    "buyAd.requirement_amount"(value) {
       this.errors.requirement_amount = "";
       if (value) {
         if (value.length >= 13) {
@@ -765,7 +817,7 @@ export default {
       }
     },
 
-    "buyAd.name": function (text) {
+    "buyAd.name"(text) {
       this.errors.name = "";
       if (text) {
         this.productNameValidator(text);

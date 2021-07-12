@@ -189,10 +189,14 @@ button.send-message-button {
 
 @media screen and (max-width: 767px) {
   #main {
-    padding-top: 96px;
+    padding-top: 94px;
   }
+
   .box-title {
     margin: 0 10px 15px;
+  }
+  .main-product-wrapper {
+    border-radius: 0;
   }
 }
 
@@ -580,7 +584,7 @@ export default {
         last_name: product.user_info.last_name,
         profile_photo: product.profile_info.profile_photo,
         user_name: product.user_info.user_name,
-        product_id: product.main.id
+        product_id: product.main.id,
       };
 
       var self = this;
@@ -921,15 +925,15 @@ export default {
     //
     return {
       title:
-        "خرید و قیمت " + 
+        "خرید و قیمت " +
         productSubCategory +
         " " +
         productName +
-        " عمده " + 
+        " عمده " +
         productCity +
         " " +
-        productProvince + 
-        " " + 
+        productProvince +
+        " " +
         productOwnerFullName,
       titleTemplate: "%s | باسکول",
       meta: [

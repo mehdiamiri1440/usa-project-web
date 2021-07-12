@@ -20,7 +20,10 @@
         </div>
 
         <div class="main-request-content">
-          <main-register-request-form wrapper-bg="true" />
+          <main-register-request-form
+            wrapper-bg="true"
+            :categoryList="categoryList"
+          />
         </div>
       </div>
     </div>
@@ -31,6 +34,7 @@
 import mainRegisterRequestForm from "./main-register-request-form";
 
 export default {
+  props: ["categoryList"],
   components: {
     mainRegisterRequestForm,
   },

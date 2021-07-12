@@ -17,7 +17,7 @@
 
   background: #fafafa;
 
-  z-index: 1012;
+  z-index: 1013;
 
   width: 450px;
   height: 550px;

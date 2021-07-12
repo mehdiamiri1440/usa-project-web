@@ -5,6 +5,7 @@
       v-else-if="step == 1"
       :index="selectedCategoryIndex"
       :sub-categories="subCategoryList"
+      :mainCategories="mainCategories"
     />
     <TypeCategory v-else :sub-categories="subCategoryList" />
   </div>
@@ -27,6 +28,7 @@ export default {
       step: 0,
       selectedCategoryIndex: "",
       subCategoryList: "",
+      mainCategories: "",
       categoryName: "",
       subCategoryName: "",
       productName: "",
@@ -37,12 +39,18 @@ export default {
   },
   methods: {
     selectedCategory(index) {
+      this.categoryName = "";
       this.selectedCategoryIndex = index;
-      this.categoryName = this.categoryList[index].category_name;
       this.subCategoryList = this.categoryList[index].subcategories;
       this.step = 1;
     },
-    selectedSubCategory(item) {
+    selectedSubCategory(index) {
+      let currentCategory =
+        this.categoryList[this.selectedCategoryIndex].subcategories[index];
+      this.categoryName = currentCategory.category_name;
+      this.mainCategories = currentCategory.subcategories;
+    },
+    selectedMainCategory(item) {
       this.subCategoryName = item.category_name;
       this.$parent.product.category_id = item.id;
       this.step = 2;
