@@ -19,8 +19,6 @@ use Illuminate\Http\Request;
 use App\Jobs\sendSMS;
 
 
-
-
 Route::get('/product-list',[
     'uses' => 'Product\product_list_controller@get_product_list_blade',
 ]);
@@ -1170,6 +1168,7 @@ Route::get('/sitemap-buskool-txwhgvuikd.xml', [
 Route::get('/shared-profile/{username}',[
     'uses' => 'Accounting\profile_controller@get_user_shared_profile_info'
 ])->name('sharedProfile')->where("username","[A-Za-z0-9_]+$");
+
 
 //-----------------------------------------------------
 //    in code bayad bad az har chizi ke any dare biad

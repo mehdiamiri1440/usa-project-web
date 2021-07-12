@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\myuser;
 use App\Http\Controllers\Product\product_controller;
 use App\Models\category;
+use DB;
 
 class sitemap_controller extends Controller
 {
@@ -35,12 +36,18 @@ class sitemap_controller extends Controller
         // $user_names = myuser::select('user_name')
         //                     ->get();
 
-        $category_names = category::whereNotNull('parent_id')
-                                        ->select('category_name')
-                                        ->get()
+        $category_names = DB::table('categories')
+                                        ->whereNotNull('parent_id')
+                                        ->whereNotExists(function($q){
+                                            $q->select(DB::raw(1))
+                                                ->from('categories as c')
+                                                ->whereRaw('c.parent_id = categories.id');
+                                        })
+                                        ->pluck('category_name')
+                                        // ->get()
                                         ->toArray();
 
-        $category_names = array_column($category_names,'category_name');
+        // $category_names = array_column($category_names,'category_name');
 
         $category_names = array_merge($category_names,$this->extra_categories);
 

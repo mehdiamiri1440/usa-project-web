@@ -129,9 +129,9 @@ class product_list_controller extends Controller
 
         $products = $this->get_products_from_cache();
 
-        // $products = array_filter($products,function($product){
-        //     return $product['user_info']->response_rate >= 50;
-        // });
+        $products = array_filter($products,function($product){
+            return $product['user_info']->response_rate >= 50;
+        });
 
         $is_filter_applied = $this->apply_product_filters($request,$products);
 
@@ -762,8 +762,14 @@ class product_list_controller extends Controller
 
     protected function apply_search_text_filter(&$products,$search_text)
     {
-        $category_record = category::where('category_name',$search_text)
+        $category_record = DB::table('categories')
+                                        ->where('category_name',$search_text)
                                         ->whereNotNull('parent_id')
+                                        ->whereNotExists(function($q){
+                                            $q->select(DB::raw(1))
+                                                ->from('categories as c')
+                                                ->whereRaw('c.parent_id = categories.id');
+                                        })
                                         ->first();
 
         if($category_record){

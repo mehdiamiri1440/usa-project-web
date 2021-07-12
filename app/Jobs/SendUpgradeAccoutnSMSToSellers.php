@@ -11,6 +11,7 @@ use App\Models\product;
 use App\Models\myuser;
 use App\Jobs\sendSMS;
 use Carbon\Carbon;
+use DB;
 
 class SendUpgradeAccoutnSMSToSellers implements ShouldQueue
 {
@@ -58,13 +59,12 @@ class SendUpgradeAccoutnSMSToSellers implements ShouldQueue
     {
         $non_free_sellers = $this->get_non_free_sellers_user_id_list();
 
-        $first_day_seller_ids = product::where('confirmed',true)
-                                    ->whereBetween('created_at',[Carbon::now()->subHours(24),Carbon::now()])
+        $first_day_seller_ids = DB::table('products')
+                                    ->where('confirmed',true)
+                                    ->whereBetween('created_at',[Carbon::now()->subDays(20),Carbon::now()])
                                     ->whereNotIn('myuser_id',$non_free_sellers)
                                     // ->where('stock','>=',$this->product_stock_threshold)
-                                    ->select('myuser_id')
-                                    ->distinct()
-                                    ->get();
+                                    ->pluck('myuser_id');
 
         // $third_day_seller_ids = DB::table('myusers')
         //                             ->whereNotIn('myusers.id',$non_free_sellers)
@@ -86,7 +86,7 @@ class SendUpgradeAccoutnSMSToSellers implements ShouldQueue
 
         $seventh_day_seller_ids = DB::table('myusers')
                                         ->whereNotIn('myusers.id',$non_free_sellers)
-                                        ->whereBetween('created_at',[Carbon::now()->subDays(7),Carbon::now()->subDays(6)])
+                                        ->whereBetween('created_at',[Carbon::now()->subDays(40),Carbon::now()->subDays(39)])
                                         ->where('is_seller',true)
                                         ->where('is_blocked',false)
                                         ->whereExists(function($q){
@@ -97,14 +97,13 @@ class SendUpgradeAccoutnSMSToSellers implements ShouldQueue
                                             $q->select(DB::raw(1))
                                                 ->from('messages')
                                                 ->whereRaw('messages.receiver_id = myusers.id and messages.is_read = true');
-                                        })->select('myusers.id')
-                                        ->distinct()
-                                        ->get();
+                                        })->pluck('myusers.id');
+                                        
 
         return [
-            'first_day' => $first_day_seller_ids,
+            'first_day' => array_unique($first_day_seller_ids->toArray()),
             // 'third_day' => $third_day_seller_ids,
-            'seventh_day' => $seventh_day_seller_ids
+            'seventh_day' => array_unique($seventh_day_seller_ids->toArray())
         ];
     }
 
@@ -120,7 +119,7 @@ class SendUpgradeAccoutnSMSToSellers implements ShouldQueue
 
     protected function get_users_phone_numbers($user_ids)
     {
-        $user_ids_array = $user_ids->toArray();
+        $user_ids_array = $user_ids;
         
         $phone_numbers = myuser::whereIn('id',$user_ids_array)
                                 ->select('phone')
