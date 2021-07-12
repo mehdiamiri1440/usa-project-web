@@ -115,7 +115,7 @@ a.close-dialog-popup {
 }
 
 .search-input input {
-  padding: 8px 175px 8px 15px;
+  padding: 8px 157px 8px 15px;
   margin: 0;
   float: right;
   background: #fff;
@@ -180,7 +180,7 @@ button.open-categories {
   position: absolute;
   top: 0;
   right: 100%;
-  width: 430px;
+  width: 452px;
 }
 
 .custom-mega-menu .lvl1-wrapper {
@@ -193,6 +193,7 @@ button.open-categories {
   box-shadow: -5px 7px 9px rgba(0, 0, 0, 0.02);
   border-radius: 0 0 12px 12px;
   padding-bottom: 25px;
+  min-height: calc(100% + 20px);
 }
 
 .custom-mega-menu .lvl2-wrapper > li > div > div {
@@ -675,16 +676,15 @@ a.profile-info-wrapper:hover {
   .profile-image-wrapper {
     margin-left: 0;
   }
-  nav .green-button {
-    padding: 6px 0 5px;
-    font-size: 13px;
-    width: initial;
-    margin: 0;
-    min-width: 65px;
-  }
 }
 
 @media screen and (max-width: 767px) {
+  .user-auth-info-wrapper .navbar-nav > li:after {
+    display: none;
+  }
+  .user-auth-info-wrapper .navbar-nav > li {
+    padding: 0;
+  }
   .search-input {
     overflow: hidden;
   }
@@ -863,6 +863,13 @@ a.profile-info-wrapper:hover {
   nav > li > a.green-button.router-link-exact-active:hover {
     display: none;
   }
+  .mobile-login-link a {
+    font-size: 12px;
+    color: #fff;
+    background: #00c569;
+    padding: 4px 9px;
+    margin-top: 6px;
+  }
 }
 
 @media screen and (max-width: 550px) {
@@ -894,7 +901,7 @@ a.profile-info-wrapper:hover {
     float: left;
   }
 
-  .mobile-login-link a {
+  .mobile-login-link {
     font-size: 11px;
   }
 }

@@ -163,15 +163,15 @@ i {
 .hero-search-input {
   display: block;
   min-width: 455px;
-  overflow: hidden;
+  /* overflow: hidden; */
   position: relative;
   border-radius: 8px;
   margin: 35px auto 0;
   max-width: 670px;
 }
 
-.hero-search-input input {
-  padding: 11px 15px;
+.hero-search-input > input {
+  padding: 11px 162px 11px 15px;
   border-radius: 12px;
   margin: 0;
   float: right;
@@ -179,40 +179,18 @@ i {
   font-size: 16px;
 }
 
-.hero-search-input button {
+.hero-search-input > button {
   transition: 300ms;
-
   border: none;
-
   margin: 0;
-
-  padding: 16px 31px;
-
-  color: #fff;
-
-  background: #000546;
-
+  padding: 15px 20px 10px;
+  color: #868686;
+  background: none;
   border-radius: 8px 0 0 8px;
-
   position: absolute;
-
   left: 0;
-
   top: 0;
-
   font-size: 20px;
-}
-
-.hero-search-input button:hover {
-  transition: 300ms;
-  padding-left: 33px;
-  padding-right: 33px;
-}
-
-.hero-search-input button:before {
-  position: relative;
-
-  top: 2px;
 }
 
 .main-cta-page {
@@ -322,131 +300,6 @@ i {
   position: relative;
   top: 3px;
   right: 5px;
-}
-
-nav {
-  position: relative;
-}
-
-nav li {
-  opacity: 0;
-
-  cursor: pointer;
-}
-
-nav li.active > h2 a:before {
-  content: " ";
-
-  background: #00c569;
-
-  width: 100%;
-
-  display: block;
-
-  position: absolute;
-
-  left: 0;
-
-  bottom: 0;
-
-  height: 3px;
-}
-
-nav li.active > h2 a:after {
-  content: " ";
-
-  display: inline-block;
-
-  width: 0;
-
-  height: 0;
-
-  border-style: solid;
-
-  border-width: 8px 8px 0 8px;
-
-  border-color: #00c569 transparent transparent transparent;
-
-  position: absolute;
-
-  bottom: -8px;
-
-  left: calc(50% - 8px);
-
-  z-index: 1001;
-}
-
-nav li > ul {
-  position: absolute;
-
-  pointer-events: none;
-
-  left: 0;
-
-  opacity: 0;
-
-  transition: 500ms;
-
-  border: 1px solid #f1f1f1;
-}
-
-nav > ul > li {
-  opacity: 1;
-
-  padding: 0;
-
-  direction: ltr;
-
-  transition: 500ms;
-}
-
-li.active > ul {
-  opacity: 1;
-
-  pointer-events: initial;
-
-  background: #fff;
-
-  border-radius: 0 0 4px 4px;
-
-  box-shadow: 0 5px 6px rgba(0, 0, 0, 0.07);
-
-  padding: 20px 15px;
-
-  z-index: 1000;
-}
-
-li.active > ul > li,
-ul:hover > li {
-  opacity: 1;
-}
-
-nav > ul > li li ul {
-  transform: translateX(100%);
-  top: 0;
-  right: 0;
-}
-
-nav > ul > li > ul > li {
-  transition: transform 0.4s, opacity 0.4s;
-  transform: translateY(150%);
-  opacity: 0;
-}
-
-nav > ul > li.active > ul > li {
-  transform: translateY(0%);
-  opacity: 1;
-}
-
-li > ul > li > ul > li {
-  transition: transform 0.4s, opacity 0.4s;
-  transform: translateX(195px) translateY(0%);
-  opacity: 0;
-}
-
-li > ul > li.active > ul > li {
-  transform: translateX(0) translateY(0%);
-  opacity: 1;
 }
 
 .default-item.carousel-item {
@@ -1159,6 +1012,121 @@ li > ul > li.active > ul > li {
   padding: 0 3px;
 }
 
+.custom-mega-menu .col-xs-12 {
+  padding: 0 10px;
+}
+
+.custom-mega-menu ul {
+  position: absolute;
+  margin: 0;
+  list-style: none;
+  z-index: 2;
+}
+
+.custom-mega-menu li:hover > ul {
+  display: block;
+}
+
+.custom-mega-menu li:hover .open-categories {
+  border-bottom-right-radius: 0;
+}
+
+.custom-mega-menu ul ul {
+  position: absolute;
+  display: none;
+  margin: 0;
+  background: #fff;
+}
+.custom-mega-menu ul ul li {
+  display: block;
+}
+
+.custom-mega-menu ul ul ul {
+  position: absolute;
+  top: 0;
+  right: 100%;
+  width: 451px;
+}
+
+.custom-mega-menu .lvl1-wrapper {
+  background: none;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  border-bottom-right-radius: 12px;
+}
+
+.custom-mega-menu .lvl2-wrapper {
+  box-shadow: -5px 7px 9px rgba(0, 0, 0, 0.02);
+  border-radius: 0 0 12px 12px;
+  padding-bottom: 25px;
+  min-height: calc(100% + 20px);
+}
+
+.custom-mega-menu .lvl2-wrapper > li > div > div {
+  padding: 0 3px;
+}
+
+.custom-mega-menu .lvl1-list button {
+  border: none;
+  background: #fafafa;
+  padding: 10px 0;
+}
+
+.custom-mega-menu .lvl1-list button:hover {
+  background: #eeeeee;
+}
+.custom-mega-menu .lvl1-list:last-of-type button {
+  border-bottom-right-radius: 12px;
+}
+
+.category-name {
+  display: flex;
+  justify-content: space-around;
+}
+
+.search-input > button.open-categories span {
+  margin-left: 22px;
+}
+
+.search-input > button i:before {
+  position: relative;
+  left: 2px;
+  top: 3px;
+}
+
+button.open-categories {
+  background: #eee;
+  color: #313a43;
+  font-weight: 400;
+  padding: 12px 15px 11px;
+  font-size: 16px;
+  border: none;
+  border-radius: 0 12px 12px 0;
+  position: relative;
+}
+
+a.menu-title {
+  font-size: 15px;
+  display: block;
+  border-bottom: 1px solid #e9ecef;
+  color: #000;
+  padding: 13px 0;
+}
+
+a.sub-menu-title {
+  font-size: 13px;
+  color: #707070;
+  display: block;
+  padding: 7px 0;
+  font-weight: 300;
+  transition: 300ms;
+  transform: translateX(0);
+}
+
+a.sub-menu-title:hover {
+  color: #21ad93;
+  transform: translateX(-5px);
+}
+
 @media screen and (max-width: 1199px) {
   .title-box a {
     font-size: 15px;
@@ -1179,6 +1147,9 @@ li > ul > li.active > ul > li {
   }
 }
 @media screen and (max-width: 767px) {
+  .hero-search-input > input {
+    padding: 11px 15px;
+  }
   .form-check-wrapper li:last-of-type button {
     border: none;
   }
@@ -1371,6 +1342,64 @@ li > ul > li.active > ul > li {
 
             <div class="search-wrapper">
               <div class="hero-search-input">
+                <nav class="custom-mega-menu hidden-xs">
+                  <ul>
+                    <li>
+                      <button class="open-categories">
+                        <span> همه محصولات </span>
+                        <i class="fa fa-angle-down"></i>
+                      </button>
+                      <ul class="w-100 lvl1-wrapper">
+                        <li
+                          class="w-100 lvl1-list"
+                          v-for="(category, index) in categoryList"
+                          :key="index"
+                        >
+                          <button class="w-100">
+                            <div class="category-name">
+                              <span v-text="category.category_name"></span>
+                              <i class="fa fa-angle-left"></i>
+                            </div>
+                          </button>
+                          <ul class="lvl2-wrapper">
+                            <li
+                              v-for="(
+                                subCategory, index
+                              ) in category.subcategories"
+                              :key="index + 'sub-menu'"
+                              class="col-xs-12 pull-right text-right"
+                              :class="[setMenuClass(subCategory, false)]"
+                            >
+                              <a
+                                href="#"
+                                class="menu-title"
+                                v-text="subCategory.category_name"
+                              >
+                              </a>
+                              <div>
+                                <div
+                                  v-for="(
+                                    item, index
+                                  ) in subCategory.subcategories"
+                                  :key="index + 'last-sub-menu'"
+                                  class="col-xs-12 pull-right"
+                                  :class="[setSubMenuClass(subCategory, false)]"
+                                >
+                                  <router-link
+                                    :to="getSubCategoryUrl(item.category_name)"
+                                    class="sub-menu-title"
+                                    v-text="item.category_name"
+                                  >
+                                  </router-link>
+                                </div>
+                              </div>
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </nav>
                 <input
                   type="text"
                   placeholder="محصول مورد نظر خود را جستجو کنید"
@@ -2296,7 +2325,6 @@ import ProductGridArticle from "./product_components/landing_page_product_grid_a
 import owlCarousel from "../../../owl.carousel.min.js";
 import Route from "../../../router/components/route";
 
-
 var visible = false;
 
 export default {
@@ -2306,7 +2334,14 @@ export default {
     MainRegisterRequestForm,
     ProductGridArticle,
   },
-  props: ["isUserLogin", "userType", "assets", "str", "verifiedUserContent"],
+  props: [
+    "isUserLogin",
+    "userType",
+    "assets",
+    "str",
+    "verifiedUserContent",
+    "categoryList",
+  ],
   data: function () {
     return {
       mainSearchBoxText: "",
@@ -2314,7 +2349,6 @@ export default {
       lastRequests: "",
       lastProducts: "",
       isLoading: false,
-      categoryList: "",
       subCategoryList: "",
       isCollapse: false,
       isCategories: false,
@@ -2479,20 +2513,13 @@ export default {
     },
     init: function () {
       this.productInViewPort();
+      this.headerMenuStyles();
       var self = this;
       $("#categories-modal").on("show.bs.modal", (e) => {
         this.handleBackKeys();
       });
 
       window.scrollTo(0, 0);
-
-      axios
-        .post("/get_category_list", {
-          cascade_list: true,
-        })
-        .then(function (response) {
-          self.categoryList = response.data.categories;
-        });
 
       axios.post("/get_sample_products", {}).then(function (response) {
         self.lastProducts = response.data.products;
@@ -2820,6 +2847,45 @@ export default {
     isElementOutViewport(el) {
       return el.offset().top;
     },
+    setMenuClass(categories, bigScreen) {
+      let categoryLength = Object.keys(categories.subcategories).length;
+      if (categoryLength <= 5) {
+        if (bigScreen) {
+          return "col-sm-3";
+        } else {
+          return "col-sm-4";
+        }
+      } else if (categoryLength <= 10) {
+        return "col-sm-6";
+      }
+    },
+    setSubMenuClass(categories, bigScreen) {
+      let categoryLength = Object.keys(categories.subcategories).length;
+      if (categoryLength <= 5) {
+        return "col-sm-12";
+      } else if (categoryLength <= 10) {
+        return "col-sm-6";
+      } else {
+        if (bigScreen) {
+          return "col-sm-3";
+        } else {
+          return "col-sm-4";
+        }
+      }
+    },
+    headerMenuStyles() {
+      let lvl1 = $(".lvl1-list");
+      lvl1
+        .mouseenter(() => {
+          $(".hero-search-input > input").css("border-bottom-left-radius", "0");
+        })
+        .mouseleave(() => {
+          $(".hero-search-input > input").css(
+            "border-bottom-left-radius",
+            "12px"
+          );
+        });
+    },
   },
   mounted: function () {
     this.init();
@@ -2852,6 +2918,11 @@ export default {
     mainSearchBoxText: function (value) {
       this.enterKeyActiveForSearch = this.mainSearchBoxText !== "";
       eventBus.$emit("textSearch", value);
+    },
+    categoryList() {
+      this.$nextTick(() => {
+        this.headerMenuStyles();
+      });
     },
   },
   metaInfo() {
