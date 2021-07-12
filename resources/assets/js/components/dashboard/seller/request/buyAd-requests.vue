@@ -180,6 +180,7 @@ button.disable {
   margin: 0;
   padding: 3px 14px;
   margin-right: 6px;
+  border-radius: 8px;
 }
 
 #main.little-main .fix-request-header-box,

@@ -1275,7 +1275,7 @@ div.items-wrapper {
                 <li>
                   <button
                     @click="setSortOption('RR')"
-                    :class="{ 'text-green': sortOption == 'RR' }"
+                    :class="{ 'light-green-text': sortOption == 'RR' }"
                   >
                     احتمال پاسخگویی
                   </button>
@@ -1283,7 +1283,7 @@ div.items-wrapper {
                 <li>
                   <button
                     @click="setSortOption('RT')"
-                    :class="{ 'text-green': sortOption == 'RT' }"
+                    :class="{ 'light-green-text': sortOption == 'RT' }"
                   >
                     سرعت پاسخگویی
                   </button>
@@ -1291,7 +1291,7 @@ div.items-wrapper {
                 <li>
                   <button
                     @click="setSortOption('RD')"
-                    :class="{ 'text-green': sortOption == 'RD' }"
+                    :class="{ 'light-green-text': sortOption == 'RD' }"
                   >
                     جدیدترین ها
                   </button>

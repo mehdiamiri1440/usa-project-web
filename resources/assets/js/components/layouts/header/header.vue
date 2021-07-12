@@ -291,6 +291,11 @@ nav .green-button .item-icon.register::before {
   margin: -5px auto;
   padding: 0 10px;
 }
+
+.user-auth-info-wrapper .navbar-nav > li:last-of-type .green-button-alt {
+  margin-right: 0;
+}
+
 .user-auth-info-wrapper .navbar-nav > li:after {
   content: " ";
   width: 1px;
@@ -521,6 +526,8 @@ a.profile-info-wrapper:hover {
   overflow: hidden;
   box-shadow: 0px 3px 9px rgba(0, 0, 0, 0.05);
   z-index: 6;
+  min-width: 160px;
+  left: 0;
 }
 
 #web-profile-items a {
@@ -651,7 +658,7 @@ a.profile-info-wrapper:hover {
     padding: 8px 15px 8px 15px;
   }
   .search-input {
-    min-width: 300px;
+    min-width: 360px;
   }
 }
 
@@ -660,6 +667,10 @@ a.profile-info-wrapper:hover {
     padding: 6px 8px 5px;
     font-size: 13px;
     width: initial;
+  }
+
+  .search-input {
+    min-width: 277px;
   }
 
   #buskool-nav {

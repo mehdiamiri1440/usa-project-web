@@ -97,7 +97,6 @@ span {
 
 #main {
   margin-top: 21px;
-  background: #f9f9f9;
 
   height: 100%;
 
@@ -203,11 +202,12 @@ input[type="number"]::-webkit-outer-spin-button {
 /*main contents styles */
 .main-contents {
   background: #fff;
-  border-radius: 9px;
+  border-radius: 12px;
   overflow: hidden;
   margin-top: 16px;
-  box-shadow: 0 0 10px #c5c5c5;
+  border: 1px solid #e0e0e0;
   height: 500px;
+  position: relative;
 }
 
 /*main content headers styles*/
