@@ -31,7 +31,10 @@
 <template>
   <div>
     <CategoryFilter :categoryList="categories" class="hidden-xs" />
-    <GeoLocationFilter :resetLocationFilter="resetLocation" />
+    <GeoLocationFilter
+      :resetLocationFilter="resetLocation"
+      :provinceList="provinceList"
+    />
   </div>
 </template>
 
@@ -51,12 +54,12 @@ export default {
     "cityId",
     "categories",
     "resetLocation",
+    "provinceList",
   ],
   data() {
     return {
       provinceChild: "",
       cityChild: "",
-      provinceList: "",
       cityList: "",
       products: this.productsInfo,
     };
@@ -108,7 +111,7 @@ export default {
       this.$parent.city = this.cityChild;
       this.$parent.applyFilter();
     },
-    resetFilterChild: function () {
+    resetFilterChild() {
       this.provinceChild = "";
       this.cityChild = "";
       this.$parent.resetFilter();

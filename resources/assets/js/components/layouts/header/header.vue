@@ -249,6 +249,7 @@ nav.navbar.navbar-category .search-input {
 }
 
 .buskool-main-nav {
+  border-bottom: 1px solid #fafafa;
   padding: 10px 15px;
 }
 
@@ -725,6 +726,7 @@ a.profile-info-wrapper:hover {
 
   .buskool-main-nav {
     padding: 6px 0 1px;
+    border-bottom: none;
     margin: 0 10px;
   }
 
@@ -908,9 +910,9 @@ a.profile-info-wrapper:hover {
 
 @media screen and (max-width: 360px) {
   .mobile-login-link a {
-    margin: 0;
     padding: 6px 16px 4px;
     font-size: 17px;
+    min-width: initial;
   }
 
   .mobile-login-link span {

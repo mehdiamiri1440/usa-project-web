@@ -563,7 +563,7 @@ button.disable {
 </style>
 <template>
   <div>
-    <category-filter v-if="categoryModal" />
+    <CategoriesModal :categoryList="categoryList" />
     <div
       class="
         fix-request-bottom
@@ -1008,13 +1008,13 @@ button.disable {
 
 <script>
 import { eventBus } from "../../../../router/router";
-import CategoryFilter from "./category-filter";
 import swal from "../../../../sweetalert.min.js";
+import CategoriesModal from "../../../layouts/main/main_components/categories-modal.vue";
 
 export default {
   props: ["storage"],
   components: {
-    CategoryFilter,
+    CategoriesModal,
   },
   data: function () {
     return {
@@ -1034,9 +1034,9 @@ export default {
         },
       ],
       isRequests: true,
-      categoryModal: false,
       filterCategory: "",
       emptyItem: 0,
+      categoryList: "",
     };
   },
   methods: {
@@ -1047,6 +1047,13 @@ export default {
       axios.post("/user/profile_info").then(function (response) {
         self.currentUser = response.data;
       });
+      axios
+        .post("/get_category_list", {
+          cascade_list: true,
+        })
+        .then(function (response) {
+          self.categoryList = response.data.categories;
+        });
 
       axios
         .post("/get_related_buyAds_list_to_the_seller")
@@ -1217,11 +1224,8 @@ export default {
         event_label: labelName,
       });
     },
-    openCategoryModal: function () {
-      this.categoryModal = true;
-      setTimeout(function () {
-        $("#fitler-modal").modal("show");
-      }, 200);
+    openCategoryModal() {
+      $("#categories-modal").modal("show");
     },
     filterBuyAdByCategory: function () {
       this.buyAds = "";
@@ -1241,6 +1245,9 @@ export default {
     },
     scrollToTop() {
       window.scrollTo(0, 0);
+    },
+    selectCategoryItem(category, url) {
+      this.filterCategory = category;
     },
   },
   mounted() {

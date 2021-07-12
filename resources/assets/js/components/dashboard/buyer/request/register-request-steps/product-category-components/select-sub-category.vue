@@ -148,13 +148,25 @@ ul li.item button i {
 
     <div class="form-contents col-xs-12">
       <div class="row">
-        <ul class="list-wrapper">
+        <ul class="list-wrapper" v-if="mainCategories">
+          <li
+            v-for="(item, index) in mainCategories"
+            :key="index"
+            class="item col-xs-12"
+          >
+            <button @click.prevent="$parent.selectedMainCategory(item)">
+              <span v-text="item.category_name"> </span>
+              <i class="fa fa-angle-left"></i>
+            </button>
+          </li>
+        </ul>
+        <ul class="list-wrapper" v-else-if="subCategories">
           <li
             v-for="(item, index) in subCategories"
             :key="index"
             class="item col-xs-12"
           >
-            <button @click.prevent="$parent.selectedSubCategory(item)">
+            <button @click.prevent="$parent.selectedSubCategory(index)">
               <span v-text="item.category_name"> </span>
               <i class="fa fa-angle-left"></i>
             </button>
@@ -164,6 +176,16 @@ ul li.item button i {
     </div>
     <div class="col-xs-12 action-control-wrapper">
       <button
+        v-if="mainCategories"
+        class="submit-button default-back-button pull-right"
+        @click.prevent="$parent.mainCategories = ''"
+      >
+        <i class="fa fa-arrow-right"></i>
+
+        مرحله قبل
+      </button>
+      <button
+        v-else
         class="submit-button default-back-button pull-right"
         @click.prevent="$parent.step--"
       >
@@ -179,6 +201,6 @@ ul li.item button i {
 
 <script>
 export default {
-  props: ["index", "subCategories"],
+  props: ["index", "subCategories", "mainCategories"],
 };
 </script>

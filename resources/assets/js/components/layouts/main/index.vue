@@ -2012,6 +2012,7 @@ a.sub-menu-title:hover {
       <main-register-request-form
         wrapper-bg="true"
         :is-user-login="isUserLogin"
+        :categoryList="categoryList"
       />
     </section>
 

@@ -18,7 +18,6 @@
 }
 
 #main {
-  padding-top: 32px;
   max-width: 1280px;
 }
 
@@ -27,7 +26,7 @@
 }
 
 .fade-opacity {
-  opacity: 0.05;
+  opacity: 0.1;
 }
 .spinner-border {
   width: 5rem;
@@ -1110,6 +1109,7 @@ div.items-wrapper {
                   :subCategoryId="subCategoryId"
                   :categories="categoryList"
                   :resetLocation="resetLocation"
+                  :provinceList="provinceList"
                 />
               </div>
             </div>
@@ -1709,6 +1709,7 @@ div.items-wrapper {
               :subCategoryId="subCategoryId"
               :categories="categoryList"
               :resetLocation="resetLocation"
+              :provinceList="provinceList"
             />
           </div>
         </div>
@@ -1811,6 +1812,7 @@ export default {
       verifiedUserContent: this.$parent.verifiedUserContent,
       listIsGrid: true,
       modalSubCategory: false,
+      provinceList: "",
     };
   },
   methods: {
@@ -1835,7 +1837,8 @@ export default {
       }
     },
     init: function () {
-      $(".modal").on("hide.bs.modal", () => {
+      this.getLocations();
+      $(".modal").on("show.bs.modal", () => {
         this.handleBackKeys();
       });
       this.checkLocationFilter();
@@ -2306,6 +2309,7 @@ export default {
     sedOptionAsDefault() {
       this.sortOption = "BM";
       localStorage.removeItem("sortOption");
+      this.applyFilter();
     },
     checkLocationFilter() {
       const province = localStorage.getItem("selectedProvince");
@@ -2321,6 +2325,11 @@ export default {
       $(window).on("popstate", function (e) {
         $(".modal").modal("hide");
       });
+    },
+    getLocations() {
+      axios
+        .post("/location/get_location_info", { cascade_list: true })
+        .then((response) => (this.provinceList = response.data.provinces));
     },
   },
   watch: {

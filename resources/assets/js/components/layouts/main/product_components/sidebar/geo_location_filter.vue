@@ -148,7 +148,7 @@ hr {
 
 <template>
   <div>
-    <div v-if="fontIsLoad && provinceList" class="content-sidebar col-xs-12">
+    <div v-if="provinceList" class="content-sidebar col-xs-12">
       <div class="title-widget">
         <div>موقعیت جغرافیایی</div>
         <button
@@ -169,13 +169,13 @@ hr {
           </p>
 
           <div class="select-wrapper">
-            <select v-model="selectedProvince">
+            <select v-model="provinceIndex">
               <option value="" disabled selected>استان را انتخاب کنید</option>
 
               <option
                 v-for="(province, index) in provinceList"
                 :key="'province-' + index"
-                v-bind:value="province"
+                v-bind:value="index"
                 v-text="province.province_name"
               ></option>
             </select>
@@ -217,8 +217,8 @@ hr {
     <div v-else class="content-sidebar col-xs-12">
       <div class="title-widget">
         <span class="placeholder-content content-half-width"></span>
-        <hr />
       </div>
+      <hr />
       <div class="category-products-widget-default">
         <ul>
           <li>
@@ -242,33 +242,22 @@ hr {
 import { eventBus } from "../../../../../router/router";
 
 export default {
-  props: ["resetLocationFilter"],
+  props: ["resetLocationFilter", "provinceList"],
   data() {
     return {
+      provinceIndex: "",
       selectedProvince: "",
       selectedCity: "",
-      provinceList: "",
       cityList: "",
       fontIsLoad: false,
     };
   },
   methods: {
-    init: function () {
-      axios
-        .post("/location/get_location_info")
-        .then((response) => (this.provinceList = response.data.provinces));
-    },
-    setProvinceFilter(provinceId) {
-      axios
-        .post("/location/get_location_info", {
-          province_id: provinceId,
-        })
-        .then((response) => (this.cityList = response.data.cities));
-    },
     filterProducts() {
       if (this.selectedCity) {
         this.$parent.provinceChild = this.selectedProvince;
         this.$parent.cityChild = this.selectedCity;
+        localStorage.setItem("provinceIndex", parseInt(this.provinceIndex));
         localStorage.setItem(
           "selectedProvince",
           JSON.stringify(this.selectedProvince)
@@ -281,6 +270,7 @@ export default {
         );
         this.$parent.setCityFilterChild();
       } else if (this.selectedProvince) {
+        localStorage.setItem("provinceIndex", parseInt(this.provinceIndex));
         localStorage.setItem(
           "selectedProvince",
           JSON.stringify(this.selectedProvince)
@@ -305,47 +295,48 @@ export default {
       });
     },
     resetFitler() {
+      this.provinceIndex = "";
       this.selectedProvince = "";
       this.selectedCity = "";
       this.cityList = "";
       eventBus.$emit("selectedProvince", "");
       eventBus.$emit("selectedCity", "");
+      localStorage.removeItem("provinceIndex");
       localStorage.removeItem("selectedProvince");
       localStorage.removeItem("selectedCity");
       this.$parent.resetFilterChild();
     },
     checkLocationFilter() {
+      const index = localStorage.getItem("provinceIndex");
       const province = localStorage.getItem("selectedProvince");
       const city = localStorage.getItem("selectedCity");
+      this.provinceIndex = index ? index : "";
       this.selectedProvince = province ? JSON.parse(province) : "";
-      this.selectedCity = city ? JSON.parse(city) : "";
+      this.$nextTick(() => {
+        this.selectedCity = city ? JSON.parse(city) : "";
+        this.$parent.provinceChild = this.selectedProvince;
+        this.$parent.cityChild = this.selectedCity;
+      });
     },
   },
-  mounted() {
-    this.init();
-    var self = this;
-    // this.$parent.scrollSet();
-    document.fonts.ready.then(function () {
-      setTimeout(function () {
-        self.fontIsLoad = true;
-      }, 500);
-    });
-  },
   watch: {
-    selectedProvince(province) {
-      eventBus.$emit("selectedProvince", province);
-      eventBus.$emit("selectedCity", "");
-      this.selectedCity = "";
-      if (province) {
-        this.setProvinceFilter(province.id);
+    provinceList(provinces) {
+      if (provinces) {
+        this.checkLocationFilter();
+      }
+    },
+    provinceIndex(index) {
+      if (index && this.provinceList) {
+        this.selectedProvince = this.provinceList[Number(index)];
+        this.cityList = this.selectedProvince.cities;
+        eventBus.$emit("selectedProvince", this.selectedProvince);
+        this.selectedCity = "";
       }
     },
     selectedCity(city) {
       eventBus.$emit("selectedCity", city);
     },
-
     resetLocationFilter(reset) {
-      this.checkLocationFilter();
       if (this.selectedProvince || this.selectedCity) {
         this.resetFitler();
       }
