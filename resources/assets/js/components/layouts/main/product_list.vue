@@ -2142,6 +2142,7 @@ export default {
       // }
     },
     selectCategoryItem(category, url) {
+      $(".modal").modal("hide");
       this.$nextTick(() => {
         this.$router.push({ path: url });
       });
