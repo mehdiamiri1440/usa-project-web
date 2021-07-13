@@ -177,6 +177,7 @@ i {
   float: right;
   border: none;
   font-size: 16px;
+  line-height: 27px;
 }
 
 .hero-search-input > button {
@@ -1097,11 +1098,12 @@ button.open-categories {
   background: #eee;
   color: #313a43;
   font-weight: 400;
-  padding: 12px 15px 11px;
+  padding: 11px 15px;
   font-size: 16px;
   border: none;
   border-radius: 0 12px 12px 0;
   position: relative;
+  line-height: 27px;
 }
 
 button.menu-title {

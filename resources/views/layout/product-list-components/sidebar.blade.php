@@ -1,9 +1,9 @@
 <div v-if="categoryList" class="content-sidebar">
     <div class="title-widget">
       <div>دسته بندی محصولات</div>
-      <hr />
+      
     </div>
-
+    <hr />
     <div class="category-products-widget">
       <ul>
         <li v-if="selectedCategory">
@@ -36,11 +36,8 @@
             <span > {{$sub_category->category_name}}</span>
             </button>
 
-            @php
-                var_dump($sub_category);
-            @endphp
 
-            {{-- <ul class="categories-list">
+             <ul class="categories-list">
               @foreach ($sub_category->subcategories as $item)
               <li
             >
@@ -50,7 +47,7 @@
                 {{$item->category_name}}
               </a>
             </li>
-              @endforeach--}}
+              @endforeach
               
             </ul> 
           </li>

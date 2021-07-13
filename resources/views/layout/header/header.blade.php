@@ -130,32 +130,15 @@
               <li>
                 <a
                   class="smoothScroll"
-                  href="/"
                 >
-                  صفحه نخست
+                  کشاورزی
                 </a>
               </li>
               <li>
                 <a
-                  class="smoothScroll router-link-exact-active"
-                  href="/product-list"
-                >
-                  لیست محصولات
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https:\\blog.buskool.com"
                   class="smoothScroll"
-                  >وبلاگ</a
                 >
-              </li>
-              <li>
-                <a
-                  class="smoothScroll"
-                  href="/about-us"
-                >
-                  درباره ما
+                فرآورده های غذایی
                 </a>
               </li>
             </ul>

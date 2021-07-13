@@ -82,6 +82,7 @@ a:focus {
 
 .navbar-nav > li > a{
     padding: initial;
+    border: none;
     line-height: initial;
 }
 
@@ -695,6 +696,10 @@ a.profile-info-wrapper:hover {
 }
 
 @media screen and (max-width: 767px) {
+  .main-content{
+    padding: 0;
+  }
+
   .user-auth-info-wrapper .navbar-nav > li:after {
     display: none;
   }
@@ -881,11 +886,11 @@ a.profile-info-wrapper:hover {
     display: none;
   }
   .mobile-login-link a {
-    font-size: 12px;
-    color: #fff;
+    font-size: 12px !important;
+    color: #fff !important;
     background: #00c569;
-    padding: 4px 9px;
-    margin-top: 6px;
+    padding: 4px 9px !important;
+    margin-top: 6px !important;
   }
 }
 
