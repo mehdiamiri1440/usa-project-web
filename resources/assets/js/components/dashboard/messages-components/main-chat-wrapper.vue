@@ -1438,7 +1438,17 @@ export default {
       }
     },
     checkReviewIsActive() {
+      let chatMessagePid = "";
+      let isDelsaMessageActive = false;
+      if (this.$parent.chatMessages) {
+        chatMessagePid = this.$parent.chatMessages[0].p_id;
+        if (chatMessagePid && this.$parent.chatMessages.length == 1) {
+          isDelsaMessageActive = true;
+        }
+      }
       if (
+        !isDelsaMessageActive &&
+        !chatMessagePid &&
         this.$parent.userAllowedReview &&
         this.$parent.isLikeBoxActive &&
         !this.$parent.isLatestMessage &&
