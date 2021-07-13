@@ -190,7 +190,7 @@ button.open-categories {
 }
 
 .custom-mega-menu .lvl2-wrapper {
-  box-shadow: -5px 7px 9px rgba(0, 0, 0, 0.02);
+  box-shadow: 0px 7px 9px rgba(0, 0, 0, 0.05);
   border-radius: 0 0 12px 12px;
   padding-bottom: 25px;
   min-height: calc(100% + 20px);
@@ -200,22 +200,23 @@ button.open-categories {
   padding: 0 3px;
 }
 
-.custom-mega-menu .lvl1-list button {
+.custom-mega-menu .lvl1-list > button {
   border: none;
   background: #fafafa;
   padding: 10px 0;
 }
 
-.custom-mega-menu .lvl1-list button:hover {
+.custom-mega-menu .lvl1-list > button:hover {
   background: #eeeeee;
 }
-.custom-mega-menu .lvl1-list:last-of-type button {
+.custom-mega-menu .lvl1-list:last-of-type > button {
   border-bottom-right-radius: 12px;
 }
 
 .category-name {
   display: flex;
   justify-content: space-around;
+  font-size: 15px;
 }
 
 .search-input > button.open-categories span {
@@ -396,10 +397,12 @@ nav .green-button-alt {
   background: #fff;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
   border-radius: 0 0 12px 12px;
+  display: block;
+  height: initial;
 }
 
 .buskool-sub-menu .navbar-right > li > ul > li {
-  padding-bottom: 17px;
+  padding: 0 5px 10px;
 }
 
 .buskool-sub-menu {
@@ -429,19 +432,42 @@ nav .green-button-alt {
   font-weight: 300;
 }
 
-a.menu-title {
-  font-size: 15px;
-  display: block;
-  border-bottom: 1px solid #e9ecef;
-  color: #000;
+button.menu-title {
+  font-size: 16px;
+  color: #444;
   padding: 13px 0;
+  font-weight: 500;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  background: none;
+  border: none;
 }
 
+button.menu-title hr {
+  background: #e0e0e0;
+  margin: 11px 8px;
+  flex: 1;
+  border: none;
+  height: 1px;
+  position: relative;
+}
+
+button.menu-title hr::after {
+  content: "";
+  position: absolute;
+  width: 45px;
+  background: #00c569;
+  height: 4px;
+  top: -2px;
+  right: 0;
+  border-radius: 5px;
+}
 a.sub-menu-title {
-  font-size: 13px;
+  font-size: 15px;
   color: #707070;
   display: block;
-  padding: 7px 0;
+  padding: 10px 0;
   font-weight: 300;
   transition: 300ms;
   transform: translateX(0);
@@ -658,7 +684,7 @@ a.profile-info-wrapper:hover {
     padding: 8px 15px 8px 15px;
   }
   .search-input {
-    min-width: 360px;
+    min-width: 354px;
   }
 }
 
@@ -1277,12 +1303,10 @@ a.profile-info-wrapper:hover {
                             class="col-xs-12 pull-right text-right"
                             :class="[setMenuClass(subCategory, false)]"
                           >
-                            <a
-                              href="#"
-                              class="menu-title"
-                              v-text="subCategory.category_name"
-                            >
-                            </a>
+                            <button class="menu-title">
+                              <span v-text="subCategory.category_name"></span>
+                              <hr />
+                            </button>
                             <div>
                               <div
                                 v-for="(
@@ -1517,12 +1541,16 @@ a.profile-info-wrapper:hover {
                 class="col-xs-12"
                 :class="[setMenuClass(subCategory, true)]"
               >
-                <a
+                <!-- <a
                   href="#"
                   class="menu-title"
                   v-text="subCategory.category_name"
-                >
-                </a>
+                > -->
+                <button class="menu-title">
+                  <span v-text="subCategory.category_name"></span>
+                  <hr />
+                </button>
+
                 <ul>
                   <li
                     v-for="(item, index) in subCategory.subcategories"
