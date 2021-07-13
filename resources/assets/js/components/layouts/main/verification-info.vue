@@ -61,17 +61,26 @@ h3 {
             <h3 class="text-right">کاربران احراز هویت شده چه کسانی هستند؟</h3>
             <div class="col-xs-12">
               <div class="col-xs-12 about-us-icon">
-                <img src="../../../../img/verification-icons/verify-icon-1.jpg" alt />
+                <img
+                  src="../../../../img/verification-icons/verify-icon-1.jpg"
+                  alt
+                />
 
                 <p>اطلاعات کارت ملی آن ها نزد باسکول است.</p>
               </div>
               <div class="col-xs-12 about-us-icon">
-                <img src="../../../../img/verification-icons/verify-icon-3.jpg" alt />
+                <img
+                  src="../../../../img/verification-icons/verify-icon-3.jpg"
+                  alt
+                />
 
                 <p>مطابقت تصویر کارت ملی با تصویر خودشان انجام شده است.</p>
               </div>
               <div class="col-xs-12 about-us-icon">
-                <img src="../../../../img/verification-icons/verify-icon-2.jpg" alt />
+                <img
+                  src="../../../../img/verification-icons/verify-icon-2.jpg"
+                  alt
+                />
 
                 <p>اطلاعات آدرس مکانی انها احراز شده است.</p>
               </div>
@@ -79,23 +88,25 @@ h3 {
               <h3 class="text-center">
                 <router-link
                   v-if="$parent.userId && $parent.isSeller == 1"
-                  :to="{name : 'profileBasicSellerVeficiation'}"
+                  :to="{ name: 'profileBasicSellerVeficiation' }"
                   class="green-button"
-                >شما هم احراز هویت کنید</router-link>
+                  >شما هم احراز هویت کنید</router-link
+                >
                 <router-link
                   v-else-if="$parent.userId && $parent.isSeller == 0"
-                  :to="{name : 'profileBasicBuyerVeficiation'}"
+                  :to="{ name: 'profileBasicBuyerVeficiation' }"
                   class="green-button"
-                >شما هم احراز هویت کنید</router-link>
-                <router-link
-                  v-else
-                  :to="{name : 'login'}"
-                  class="green-button"
-                >شما هم احراز هویت کنید</router-link>
+                  >شما هم احراز هویت کنید</router-link
+                >
+                <router-link v-else :to="{ name: 'login' }" class="green-button"
+                  >شما هم احراز هویت کنید</router-link
+                >
               </h3>
-              <p
-                class="text-center gray-text info-text"
-              >باسکول هیچ مسئولیتی در قبال سو رفتار کاربران احراز هویت شده به عهده نمی گیرد و صرفا اطلاعات هویتی آنها را مطابق توضیحات بالا تایید می کند.</p>
+              <p class="text-center gray-text info-text">
+                باسکول هیچ مسئولیتی در قبال سو رفتار کاربران احراز هویت شده به
+                عهده نمی گیرد و صرفا اطلاعات هویتی آنها را مطابق توضیحات بالا
+                تایید می کند.
+              </p>
             </div>
           </div>
         </div>
@@ -111,11 +122,11 @@ import Route from "../../../router/components/route";
 export default {
   components: { Route },
   methods: {
-    stopLoader: function() {
+    stopLoader: function () {
       eventBus.$emit("isLoading", false);
-    }
+    },
   },
-  mounted: function() {
+  mounted: function () {
     var self = this;
     document.onreadystatechange = () => {
       if (document.readyState === "complete") {
@@ -123,7 +134,7 @@ export default {
       }
     };
   },
-  updated: function() {
+  updated: function () {
     this.$nextTick(this.stopLoader);
   },
   created() {
@@ -137,27 +148,28 @@ export default {
         {
           name: "description",
           content:
-            "مرجع تخصصی خرید و فروش عمده و قیمت محصولات کشاورزی ایران | صادرات محصولات کشاورزی"
+            "مرجع تخصصی خرید و فروش عمده و قیمت محصولات غذایی و کشاورزی ایران | صادرات محصولات غذایی و کشاورزی",
         },
         {
           name: "author",
-          content: "باسکول"
+          content: "باسکول",
         },
         {
           property: "og:description",
           content:
-            "مرجع تخصصی خرید و فروش عمده و قیمت محصولات کشاورزی ایران | صادرات محصولات کشاورزی"
+            "مرجع تخصصی خرید و فروش عمده و قیمت محصولات غذایی و کشاورزی ایران | صادرات محصولات غذایی و کشاورزی",
         },
         {
           property: "og:site_name",
-          content: "باسکول بازارآنلاین خرید و فروش عمده محصولات کشاورزی ایران"
+          content:
+            "باسکول بازارآنلاین خرید و فروش عمده محصولات غذایی و کشاورزی ایران",
         },
         {
           property: "og:title",
-          content: " باسکول | بازار خرید و فروش عمده محصولات کشاورزی "
-        }
-      ]
+          content: " باسکول | بازار خرید و فروش عمده محصولات غذایی و کشاورزی ",
+        },
+      ],
     };
-  }
+  },
 };
 </script>
