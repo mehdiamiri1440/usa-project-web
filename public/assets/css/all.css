@@ -168,9 +168,13 @@
 .fa-edit:before {
     content: "\f044"
 }
+.fa-info:before {
+    content: "\f129"
+}
 .fa-info-circle:before {
     content: "\f05a"
 }
+
 .fa-phone-square-alt:before {
     content: "\f87b"
 }
