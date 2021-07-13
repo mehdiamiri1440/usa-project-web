@@ -1065,16 +1065,16 @@ i {
   padding: 0 3px;
 }
 
-.custom-mega-menu .lvl1-list button {
+.custom-mega-menu .lvl1-list > button {
   border: none;
   background: #fafafa;
   padding: 10px 0;
 }
 
-.custom-mega-menu .lvl1-list button:hover {
+.custom-mega-menu .lvl1-list > button:hover {
   background: #eeeeee;
 }
-.custom-mega-menu .lvl1-list:last-of-type button {
+.custom-mega-menu .lvl1-list:last-of-type > button {
   border-bottom-right-radius: 12px;
 }
 
@@ -1104,19 +1104,43 @@ button.open-categories {
   position: relative;
 }
 
-a.menu-title {
-  font-size: 15px;
-  display: block;
-  border-bottom: 1px solid #e9ecef;
-  color: #000;
+button.menu-title {
+  font-size: 16px;
+  color: #444;
   padding: 13px 0;
+  font-weight: 500;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  background: none;
+  border: none;
+}
+
+button.menu-title hr {
+  background: #e0e0e0;
+  margin: 11px 8px;
+  flex: 1;
+  border: none;
+  height: 1px;
+  position: relative;
+}
+
+button.menu-title hr::after {
+  content: "";
+  position: absolute;
+  width: 45px;
+  background: #00c569;
+  height: 4px;
+  top: -2px;
+  right: 0;
+  border-radius: 5px;
 }
 
 a.sub-menu-title {
-  font-size: 13px;
+  font-size: 15px;
   color: #707070;
   display: block;
-  padding: 7px 0;
+  padding: 10px 0;
   font-weight: 300;
   transition: 300ms;
   transform: translateX(0);
@@ -1213,22 +1237,6 @@ a.sub-menu-title:hover {
     margin: 15px 0 0;
   }
 
-  #categories-modal > div {
-    margin: 0;
-    width: 100%;
-    height: 100%;
-  }
-  .modal-content {
-    min-height: 100%;
-
-    border-radius: 0;
-
-    border: none;
-
-    float: right;
-
-    width: 100%;
-  }
   .title-box p {
     text-align: center;
   }
@@ -1246,61 +1254,6 @@ a.sub-menu-title:hover {
     >
       <div class="main-loader">
         <img src="../../../../img/gif/loading.gif" />
-      </div>
-    </div>
-
-    <div class="container">
-      <div
-        id="categories-modal"
-        class="categories-modal modal fade"
-        tabindex="-1"
-        role="dialog"
-      >
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <a href="#" class="close-modal" @click.prevent="closeModal()">
-                <i class="fa fa-times"></i>
-              </a>
-
-              <div class="modal-title">
-                <span> دسته بندی ها </span>
-              </div>
-            </div>
-            <div class="modal-body row">
-              <ul class="form-check-wrapper" v-if="!isCategories">
-                <li
-                  class="col-xs-12 col-sm-4 pull-right"
-                  v-for="(item, index) in categoryModalList"
-                  :key="item.category_name + index"
-                >
-                  <button
-                    @click.prevent="routeCategories(item.category_name)"
-                    class="default-button-list"
-                    v-text="item.category_name"
-                  ></button>
-                  <i class="fa fa-angle-left"></i>
-                </li>
-              </ul>
-              <ul class="form-check-wrapper" v-else>
-                <li
-                  class="col-xs-12 col-sm-4 pull-right"
-                  v-for="(item, index) in categoryModalList"
-                  :key="item.category_name + index"
-                >
-                  <button
-                    class="default-button-list"
-                    @click.prevent="activeSubCategories(item.id)"
-                    v-text="item.category_name"
-                  ></button>
-                  <i class="fa fa-angle-left"></i>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
       </div>
     </div>
 
@@ -1345,11 +1298,18 @@ a.sub-menu-title:hover {
                 <nav class="custom-mega-menu hidden-xs">
                   <ul>
                     <li>
-                      <button class="open-categories">
+                      <button
+                        @click.prevent="openFilterModal(false)"
+                        class="open-categories hidden-lg"
+                      >
                         <span> همه محصولات </span>
                         <i class="fa fa-angle-down"></i>
                       </button>
-                      <ul class="w-100 lvl1-wrapper">
+                      <button class="open-categories hidden-sm hidden-md">
+                        <span> همه محصولات </span>
+                        <i class="fa fa-angle-down"></i>
+                      </button>
+                      <ul class="w-100 lvl1-wrapper hidden-sm hidden-md">
                         <li
                           class="w-100 lvl1-list"
                           v-for="(category, index) in categoryList"
@@ -1370,11 +1330,10 @@ a.sub-menu-title:hover {
                               class="col-xs-12 pull-right text-right"
                               :class="[setMenuClass(subCategory, false)]"
                             >
-                              <a
-                                href="#"
-                                class="menu-title"
-                                v-text="subCategory.category_name"
-                              >
+                              <button class="menu-title">
+                              <span v-text="subCategory.category_name"></span>
+                              <hr />
+                            </button>
                               </a>
                               <div>
                                 <div
@@ -2741,10 +2700,6 @@ export default {
         this.closeModal();
       });
     },
-    routeCategories(categoryName) {
-      this.closeModal();
-      this.$router.push(this.getSubCategoryUrl(categoryName));
-    },
     openCategoriesModal(categoryname) {
       $("#categories-modal").modal("show");
       if (categoryname) {
@@ -2886,6 +2841,15 @@ export default {
             "12px"
           );
         });
+    },
+    openFilterModal(category) {
+      if (category) {
+        this.$parent.modalSubCategory = category;
+        $("#categories-modal").modal("show");
+      } else {
+        this.$parent.modalSubCategory = false;
+        $("#categories-modal").modal("show");
+      }
     },
   },
   mounted: function () {

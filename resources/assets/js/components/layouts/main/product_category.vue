@@ -1176,10 +1176,7 @@ div.items-wrapper {
         <!-- /.modal-dialog -->
       </div>
     </div>
-    <CategoriesModal
-      :categoryList="categoryList"
-      :modalSubCategory="modalSubCategory"
-    />
+  
 
     <div
       v-if="!currentUser.user_info"
@@ -1759,7 +1756,7 @@ import ProductAsideCategories from "./product_components/sidebar/product_aside_c
 import searchNotFound from "./main_components/search-not-found";
 import { eventBus } from "../../../router/router";
 import StickySidebar from "../../../stickySidebar.js";
-import CategoriesModal from "./main_components/categories-modal.vue";
+
 
 var visible = false;
 export default {
@@ -1768,7 +1765,7 @@ export default {
     ProductGridArticle,
     ProductAsideCategories,
     searchNotFound,
-    CategoriesModal,
+    
   },
   props: ["assets", "str", "categoryList"],
   data: function () {
@@ -1811,7 +1808,7 @@ export default {
       sortOption: "BM",
       verifiedUserContent: this.$parent.verifiedUserContent,
       listIsGrid: true,
-      modalSubCategory: false,
+      
       provinceList: "",
     };
   },
@@ -2231,10 +2228,10 @@ export default {
     },
     openFilterModal(category) {
       if (category) {
-        this.modalSubCategory = category;
+        this.$parent.modalSubCategory = category;
         $("#categories-modal").modal("show");
       } else {
-        this.modalSubCategory = false;
+        this.$parent.modalSubCategory = false;
         $("#categories-modal").modal("show");
       }
     },
@@ -2294,12 +2291,6 @@ export default {
       // } else {
       //   this.listIsGrid = true;
       // }
-    },
-    selectCategoryItem(category, url) {
-      $(".modal").modal("hide");
-      this.$nextTick(() => {
-        this.$router.push({ path: url });
-      });
     },
     checkSortOption() {
       const sortOption = localStorage.getItem("sortOption");
