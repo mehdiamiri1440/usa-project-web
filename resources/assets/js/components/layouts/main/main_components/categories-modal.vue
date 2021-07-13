@@ -112,7 +112,12 @@ import SubCategories from "./categories-steps/sub-categories.vue";
 import LastStep from "./categories-steps/last-step.vue";
 
 export default {
-  props: ["reportedUserId", "categoryList", "modalSubCategory"],
+  props: [
+    "reportedUserId",
+    "categoryList",
+    "modalSubCategory",
+    "mainSubCategories",
+  ],
   components: {
     Categoreis,
     SubCategories,
@@ -211,6 +216,13 @@ export default {
         this.selectedCategory = item;
         this.subCategoriesData = item.subcategories;
         this.currentStep = 1;
+      }
+    },
+    mainSubCategories(categories) {
+      if (categories) {
+        this.selectedSubCategory = categories;
+        this.lastStepCategories = categories.subcategories;
+        this.currentStep = 2;
       }
     },
   },
