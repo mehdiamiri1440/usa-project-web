@@ -1105,7 +1105,7 @@ class product_list_controller extends Controller
 
     protected function get_all_categories()
     {
-        $all_categories = Cache::remember(md5('categories'),24 * 60,function(){
+        $all_categories = Cache::remember(md5('categories'),1,function(){
             return DB::table('categories')
                         ->leftJoin('products','products.category_id','=','categories.id')
                         ->select('categories.*',DB::raw('count(products.id) as score'))
@@ -1114,14 +1114,13 @@ class product_list_controller extends Controller
                         ->get();
         });
 
-        $categories = [];
-
         $categories = $all_categories->filter(function($category){
             return $category->parent_id == null;
         });
 
         $categories->each(function ($item) use($all_categories){
-    
+            // $item['subcategories'] = category::where('parent_id', $item->id)
+            //     ->get();
             $other = null;
             $item->subcategories = $all_categories->filter(function($category) use($item,&$other){
                 if($category->parent_id == $item->id && $category->category_name == 'سایر'){
@@ -1132,10 +1131,22 @@ class product_list_controller extends Controller
                 return $category->parent_id == $item->id;
             });
 
+            $item->subcategories->each(function($item) use($all_categories){
+                $other = null;
+                $item->subcategories = $all_categories->filter(function($category) use($item,&$other){
+                    if($category->parent_id == $item->id && $category->category_name == 'سایر'){
+                        $other = $category;
+                        return false;
+                    }
+
+                    return $category->parent_id == $item->id;
+                });
+            });
+            
+
             if(! is_null($other)){
                 ($item->subcategories)[] = $other;
             }
-
         });
 
         return $categories;

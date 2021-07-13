@@ -25,8 +25,6 @@ class category_controller extends Controller
                         ->get();
         });
 
-        // var_dump($all_categories);
-
         if ( ! $request->has('parent_id')) {
             $categories = $all_categories->filter(function($category){
                 return $category->parent_id == null;
@@ -90,10 +88,11 @@ class category_controller extends Controller
                     return $category->parent_id == $parent_id;
                 });
 
-            if(! is_null($other)){
-                                ($categories->subcategories)[] = $other;
-                            }
-                        } else {
+                    if(! is_null($other))
+                    {
+                        ($categories->subcategories)[] = $other;
+                    }
+            } else {
                             // $categories = category::where('parent_id', $parent_id)
                             //     ->get();
                             $other = null;
