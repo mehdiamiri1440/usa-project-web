@@ -381,14 +381,9 @@ nav .green-button-alt {
 }
 
 .buskool-sub-menu .navbar-right > li > a:hover + ul,
-.buskool-sub-menu .navbar-right > li > a:active + ul,
-.buskool-sub-menu .navbar-right > li > a:focus + ul,
 .buskool-sub-menu .navbar-right > li > ul:hover {
   display: block;
   height: initial;
-}
-.buskool-sub-menu .navbar-right > li > ul:hover + a {
-  background: red;
 }
 
 .buskool-sub-menu .navbar-right > li > ul {
@@ -430,6 +425,10 @@ nav .green-button-alt {
   position: relative;
   border-left: 1px solid #eee;
   font-weight: 300;
+}
+
+.buskool-sub-menu .smoothScroll > a:focus {
+  background: none;
 }
 
 button.menu-title {
@@ -1533,8 +1532,21 @@ a.profile-info-wrapper:hover {
             :key="index"
             class="smoothScroll"
           >
-            <a href="#" @click.prevent v-text="category.category_name"> </a>
-            <ul>
+            <a
+              href="#"
+              class="hidden-lg"
+              @click.prevent="openFilterModal(category)"
+              v-text="category.category_name"
+            >
+            </a>
+            <a
+              href="#"
+              class="hidden-md hidden-sm"
+              @click.prevent
+              v-text="category.category_name"
+            >
+            </a>
+            <ul class="hidden-md hidden-sm">
               <li
                 v-for="(subCategory, index) in category.subcategories"
                 :key="index + 'sub-menu'"
@@ -1791,6 +1803,15 @@ export default {
       const city = localStorage.getItem("selectedCity");
       this.selectedProvince = province ? JSON.parse(province) : "";
       this.selectedCity = city ? JSON.parse(city) : "";
+    },
+    openFilterModal(category) {
+      if (category) {
+        this.$parent.modalSubCategory = category;
+        $("#categories-modal").modal("show");
+      } else {
+        this.$parent.modalSubCategory = false;
+        $("#categories-modal").modal("show");
+      }
     },
   },
   mounted() {
