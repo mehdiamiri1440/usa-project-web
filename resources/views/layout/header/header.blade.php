@@ -171,15 +171,20 @@
       </div>
       <div class="container-fluid buskool-sub-menu absolute-position hidden-xs">
         <ul class="nav navbar-right navbar-nav">
-          @foreach ($categories as $category)
           <li class="smoothScroll">
             <a
               href="/"
             >
-            {{$category->category_name}}
+            کشاورزی
             </a>
           </li>
-          @endforeach
+          <li class="smoothScroll">
+            <a
+              href="/"
+            >
+            فرآورده های غذایی
+            </a>
+          </li>
         </ul>
       </div>
     </nav>
