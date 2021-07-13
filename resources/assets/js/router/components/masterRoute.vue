@@ -11,7 +11,10 @@
       :login_page_path="userLogoutPath"
       :categoryList="categoryList"
     />
-
+    <CategoriesModal
+      :categoryList="categoryList"
+      :modalSubCategory="modalSubCategory"
+    />
     <router-view
       id="main-content"
       :str="storagePath"
@@ -29,11 +32,13 @@
 <script>
 import HeaderMasterLayouts from "../../components/layouts/header/header";
 import FooterMasterLayouts from "../../components/layouts/footer/footer";
+import CategoriesModal from "../../components/layouts/main/main_components/categories-modal.vue";
 
 export default {
   components: {
     HeaderMasterLayouts,
     FooterMasterLayouts,
+    CategoriesModal,
   },
   props: [
     "userId",
@@ -49,6 +54,7 @@ export default {
     return {
       productByResponseRate: false,
       categoryList: "",
+      modalSubCategory: false,
     };
   },
   methods: {
@@ -56,6 +62,12 @@ export default {
       axios
         .post("/get_category_list", { cascade_list: true })
         .then((response) => (this.categoryList = response.data.categories));
+    },
+    selectCategoryItem(category, url) {
+      $(".modal").modal("hide");
+      this.$nextTick(() => {
+        this.$router.push({ path: url });
+      });
     },
   },
   mounted() {
