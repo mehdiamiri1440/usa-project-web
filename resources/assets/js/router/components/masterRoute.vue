@@ -14,6 +14,7 @@
     <CategoriesModal
       :categoryList="categoryList"
       :modalSubCategory="modalSubCategory"
+      :mainSubCategories="mainSubCategories"
     />
     <router-view
       id="main-content"
@@ -55,6 +56,7 @@ export default {
       productByResponseRate: false,
       categoryList: "",
       modalSubCategory: false,
+      mainSubCategories: "",
     };
   },
   methods: {

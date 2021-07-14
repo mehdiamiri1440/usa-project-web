@@ -1176,7 +1176,6 @@ div.items-wrapper {
         <!-- /.modal-dialog -->
       </div>
     </div>
-  
 
     <div
       v-if="!currentUser.user_info"
@@ -1757,7 +1756,6 @@ import searchNotFound from "./main_components/search-not-found";
 import { eventBus } from "../../../router/router";
 import StickySidebar from "../../../stickySidebar.js";
 
-
 var visible = false;
 export default {
   components: {
@@ -1765,7 +1763,6 @@ export default {
     ProductGridArticle,
     ProductAsideCategories,
     searchNotFound,
-    
   },
   props: ["assets", "str", "categoryList"],
   data: function () {
@@ -1808,7 +1805,7 @@ export default {
       sortOption: "BM",
       verifiedUserContent: this.$parent.verifiedUserContent,
       listIsGrid: true,
-      
+
       provinceList: "",
     };
   },
@@ -2425,7 +2422,8 @@ export default {
         },
         {
           property: "og:site_name",
-          content: "باسکول بازارآنلاین خرید و فروش محصولات کشاورزی ایران",
+          content:
+            "باسکول بازارآنلاین خرید و فروش محصولات غذایی و کشاورزی ایران",
         },
         {
           property: "og:title",
