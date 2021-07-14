@@ -151,9 +151,12 @@ export default {
       });
     },
     resetData: function () {
-      var self = this;
       setTimeout(() => {
         this.currentStep = 0;
+        this.subCategoriesData = "";
+        this.lastStepCategories = "";
+        this.$parent.modalSubCategory = "";
+        this.$parent.mainSubCategories = "";
       }, 200);
     },
     resetModalData: function () {
@@ -206,6 +209,11 @@ export default {
         "/product-list/category/" + t.category_name.split(" ").join("-");
       return url;
     },
+    setModalSubCategories(item) {
+      this.selectedCategory = item;
+      this.subCategoriesData = item.subcategories;
+      this.currentStep = 1;
+    },
   },
   mounted: function () {
     this.init();
@@ -213,12 +221,13 @@ export default {
   watch: {
     modalSubCategory(item) {
       if (item) {
-        this.selectedCategory = item;
-        this.subCategoriesData = item.subcategories;
-        this.currentStep = 1;
+        this.setModalSubCategories(item);
       }
     },
     mainSubCategories(categories) {
+      if (this.modalSubCategory) {
+        this.setModalSubCategories(this.modalSubCategory);
+      }
       if (categories) {
         this.selectedSubCategory = categories;
         this.lastStepCategories = categories.subcategories;

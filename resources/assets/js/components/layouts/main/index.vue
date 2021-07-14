@@ -2704,15 +2704,13 @@ export default {
       });
     },
     openCategoriesModal(categoryname) {
-      $("#categories-modal").modal("show");
-
       if (categoryname) {
         for (let i = 0; i < this.categoryList.length; i++) {
           if (this.categoryList[i].category_name == "کشاورزی") {
+            this.$parent.modalSubCategory = this.categoryList[i];
             let subCategories = Object.values(
               this.categoryList[i].subcategories
             );
-
             let subcategoryItems = subCategories.find((item) => {
               return item.category_name == categoryname;
             });
@@ -2720,6 +2718,9 @@ export default {
           }
         }
       }
+      this.$nextTick(() => {
+        $("#categories-modal").modal("show");
+      });
     },
     productOwlCarouselEnabled() {
       $(".latest-product .owl-carousel").owlCarousel({
@@ -2894,7 +2895,8 @@ export default {
   },
   metaInfo() {
     return {
-      title: " بازار خرید و فروش عمده محصولات غذایی و کشاورزی ایران بدون واسطه ",
+      title:
+        " بازار خرید و فروش عمده محصولات غذایی و کشاورزی ایران بدون واسطه ",
       titleTemplate: "باسکول | %s",
       meta: [
         {
