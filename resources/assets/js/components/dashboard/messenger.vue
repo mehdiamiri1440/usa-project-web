@@ -158,20 +158,25 @@
 
 .default-message-wrapper .default-main-contents.delsa-box .delsa-image {
   max-width: 455px;
-  margin: 0 auto;
+  margin: 0 auto 30px;
+  min-height: 254px;
 }
 
 .default-message-wrapper .default-main-contents .delsa-title {
   font-size: 29px;
   color: #222222;
   font-weight: 400;
-  margin: 33px auto 30px;
+  margin: 18px auto 20px;
 }
 
 .default-message-wrapper .default-main-contents .delsa-title-active {
   font-size: 29px;
   font-weight: 400;
   margin: 33px auto 30px;
+}
+
+small {
+  font-size: 16px;
 }
 
 .default-message-wrapper .default-main-contents .check-icon-title {
@@ -368,21 +373,23 @@
           </p>
         </div>
         <div v-else>
-          <p class="delsa-title">
+          <p class="delsa-text text-right">سلام</p>
+          <p class="delsa-title text-right">
             <i class="fas fa-chess-queen light-green-text"></i>
-            منشی آنلاین شما (دلسا)
+            من دلسا هستم
+            <small> (ربات خودکار باسکول) </small>
           </p>
-          <p class="delsa-text">
-            ورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
-            استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در
-            ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد
+          <p class="delsa-text text-right">
+            کار اصلی من بازاریابی برای محصولات شماست. اگر مایل هستید بازاریابی
+            بیشتری برای محصولات شما انجام بدهم کافی است نوع عضویت خود را ارتقا
+            دهید.
           </p>
-          <button
-            @click.prevent="openDelasModal()"
+          <router-link
+            :to="{name:'dashboardPricingTableSeller'}"
             class="green-button hover-effect"
           >
-            استخدام منشی آنلاین
-          </button>
+            ارتقا عضویت
+          </router-link>
         </div>
       </div>
       <div v-else class="default-main-contents">
