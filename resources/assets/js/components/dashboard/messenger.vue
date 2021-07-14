@@ -366,13 +366,16 @@ small {
         <div class="delsa-image">
           <img src="../../../img/delsa-messenger.svg" alt="" />
         </div>
-        <div v-if="currentUser.user_info.active_pakage_type > 0">
+        <div
+          v-if="currentUser.user_info.active_pakage_type > 0"
+          class="col-xs-12"
+        >
           <i class="fa fa-check light-green-text check-icon-title"></i>
           <p class="delsa-title-active light-green-text">
-            منشی آنلاین شما (دلسا) فعال است
+            منشی آنلاین شما (دلسا) فعال است.
           </p>
         </div>
-        <div v-else>
+        <div v-else class="col-xs-12">
           <p class="delsa-text text-right">سلام</p>
           <p class="delsa-title text-right">
             <i class="fas fa-chess-queen light-green-text"></i>
@@ -385,7 +388,7 @@ small {
             دهید.
           </p>
           <router-link
-            :to="{name:'dashboardPricingTableSeller'}"
+            :to="{ name: 'dashboardPricingTableSeller' }"
             class="green-button hover-effect"
           >
             ارتقا عضویت

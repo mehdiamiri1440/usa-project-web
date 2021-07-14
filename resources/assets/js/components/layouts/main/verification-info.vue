@@ -10,6 +10,7 @@ h3 {
   width: initial;
   padding: 13px 15px;
   font-size: 16px;
+  border-radius: 12px;
 }
 
 .about-us-icon {
@@ -17,7 +18,8 @@ h3 {
   border-radius: 4px;
   padding: 15px;
   margin-bottom: 15px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
 }
 
 .about-us-icon img {

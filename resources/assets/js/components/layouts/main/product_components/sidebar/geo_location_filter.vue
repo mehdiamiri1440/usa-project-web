@@ -249,7 +249,7 @@ export default {
       selectedProvince: "",
       selectedCity: "",
       cityList: "",
-      fontIsLoad: false,
+      isResetData: false,
     };
   },
   methods: {
@@ -295,6 +295,7 @@ export default {
       });
     },
     resetFitler() {
+      this.isResetData = true;
       this.provinceIndex = "";
       this.selectedProvince = "";
       this.selectedCity = "";
@@ -326,11 +327,13 @@ export default {
       }
     },
     provinceIndex(index) {
-      if (index >= 0 && this.provinceList) {
+      if (index >= 0 && this.provinceList && !this.isResetData) {
         this.selectedProvince = this.provinceList[Number(index)];
         this.cityList = this.selectedProvince.cities;
         eventBus.$emit("selectedProvince", this.selectedProvince);
         this.selectedCity = "";
+      } else {
+        this.isResetData = false;
       }
     },
     selectedCity(city) {
