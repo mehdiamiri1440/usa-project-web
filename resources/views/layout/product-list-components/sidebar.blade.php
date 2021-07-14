@@ -1,72 +1,60 @@
 <div v-if="categoryList" class="content-sidebar">
     <div class="title-widget">
       <div>دسته بندی محصولات</div>
-      <hr />
+      
     </div>
-
+    <hr />
     <div class="category-products-widget">
       <ul>
+        <li v-if="selectedCategory">
+          <button
+            class="category-title back-item"
+          >
+            <span>
+              <i class="fa fa-arrow-right"></i>
+              همه دسته ها
+            </span>
+          </button>
+        </li>
         @foreach ($categories as $category)
-
-          <li
-          class="collapse-category-1"
+        <li
         >
-          <h2>
-            <a
-              class="'collapse-button-1"
-              href="#"
-              onclick="collapseMethod()"
+          <button
 
-            >
-              <i class="fa fa-angle-left"></i>
-
-              <span >
-                {{$category->category_name}}
-              </span>
-            </a>
-          </h2>
-
-          <ul class="sub-category-product ">
+            class="default-category-title category-title"
+          >
+            <span > {{$category->category_name}}</span>
+            <i class="fa fa-angle-left"></i>
+          </button>
+          <ul class="sub-category-list">
             @foreach ($category->subcategories as $sub_category)
-              <li class="sub-category-item">
-                <h4>
-
-                  @if($category_name)
-                    @if($sub_category->category_name == $category_name)
-                    <a
-                    class="active"
-                      href="{{'/product-list/category/' . str_replace(' ','-',$sub_category->category_name)}}"
-                    >
-                    @else
-                    <a
-                      href="{{'/product-list/category/' . str_replace(' ','-',$sub_category->category_name)}}"
-                    >
-                    @endif
-                  
-                    @else
-                    <a
-                      href="{{'/product-list/category/' . str_replace(' ','-',$sub_category->category_name)}}"
-                    >
-                    @endif
-                  {{$sub_category->category_name}}
-                </a>
-                </h4>
-              </li>
-            @endforeach 
-
-
-          </ul>
-
-          <div class="button-wrapper">
+            <li
+          >
             <button
-              class="green-button button-toggle"
-              
+              class="category-title"
             >
-              <span>مشاهده بیشتر</span>
-
-              <i class="fa fa-angle-down"></i>
+            <span > {{$sub_category->category_name}}</span>
             </button>
-          </div>
+
+
+             <ul class="categories-list">
+              @foreach ($sub_category->subcategories as $item)
+              <li
+            >
+              <a
+              href="{{'/product-list/category/' . str_replace(' ','-',$item->category_name)}}"
+              >
+                {{$item->category_name}}
+              </a>
+            </li>
+              @endforeach
+              
+            </ul> 
+          </li>
+            @endforeach
+                
+            
+          </ul>
         </li>
         @endforeach
       </ul>

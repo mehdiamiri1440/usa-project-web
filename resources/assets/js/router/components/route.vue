@@ -24,7 +24,7 @@
 .android-apk-download {
   padding: 15px;
 
-  background: none;
+  background: #e41c38;
 
   border: none;
 
