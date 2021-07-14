@@ -377,7 +377,12 @@
             استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در
             ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد
           </p>
-          <button class="green-button hover-effect">استخدام منشی آنلاین</button>
+          <button
+            @click.prevent="openDelasModal()"
+            class="green-button hover-effect"
+          >
+            استخدام منشی آنلاین
+          </button>
         </div>
       </div>
       <div v-else class="default-main-contents">
@@ -994,6 +999,9 @@ export default {
       const currentTime = new Date();
       const diffInMins = (currentTime - Date.parse(time)) / (1000 * 60);
       return diffInMins < mins;
+    },
+    openDelasModal() {
+      $("#delsa-promotion-modal").modal("show");
     },
   },
 

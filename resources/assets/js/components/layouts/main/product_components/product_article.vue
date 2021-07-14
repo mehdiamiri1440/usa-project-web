@@ -168,7 +168,7 @@ label {
 }
 
 .is-user-valid {
-  border: 2px solid #00c569;
+  border: 1px solid #00c569;
 }
 
 .modal-content {

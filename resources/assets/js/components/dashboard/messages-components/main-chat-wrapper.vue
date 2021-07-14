@@ -1113,7 +1113,7 @@
                     <button
                       v-else
                       class="delsa-button"
-                      @click.prevent="openDelasModal()"
+                      @click.prevent="$parent.openDelasModal()"
                     >
                       <i class="fa fa-angle-left angle-icon"></i>
                       استخدام منشی آنلاین
@@ -1231,7 +1231,7 @@
             <i class="fa fa-times"></i>
           </button>
           <p class="title-item">منشی آنلاین خود را استخدام کنید.</p>
-          <button class="green-button" @click.prevent="openDelasModal()">
+          <button class="green-button" @click.prevent="$parent.openDelasModal()">
             <i class="fa fa-info-circle"></i>
             اطلاعات بیشتر
           </button>
@@ -1458,9 +1458,6 @@ export default {
       } else {
         return false;
       }
-    },
-    openDelasModal() {
-      $("#delsa-promotion-modal").modal("show");
     },
     openEditPriceModal(productId) {
       this.editPriceLoader = true;
