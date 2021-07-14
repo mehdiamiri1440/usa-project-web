@@ -824,7 +824,6 @@ export default {
           helpDescription:
             "بر روی اولین محصول ثبت شده ویژگی نردبان به صورت خودکار اعمال خواهد شد",
         },
-
         {
           title: "امکان ارتباط با خریداران طلایی",
           contentUnit: true,
@@ -832,6 +831,11 @@ export default {
         },
         {
           title: "دسترسی به اطلاعات تماس خریداران",
+          contentUnit: true,
+          helpDescription: "",
+        },
+        {
+          title: "استخدام منشی آنلاین (دلسا)",
           contentUnit: true,
           helpDescription: "",
         },
@@ -877,6 +881,11 @@ export default {
         },
         {
           title: "نمایش اطلاعات تماس شما به خریداران",
+          contentUnit: true,
+          helpDescription: "",
+        },
+        {
+          title: "استخدام منشی آنلاین (دلسا)",
           contentUnit: true,
           helpDescription: "",
         },

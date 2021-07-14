@@ -326,7 +326,7 @@ export default {
       }
     },
     provinceIndex(index) {
-      if (index && this.provinceList) {
+      if (index >= 0 && this.provinceList) {
         this.selectedProvince = this.provinceList[Number(index)];
         this.cityList = this.selectedProvince.cities;
         eventBus.$emit("selectedProvince", this.selectedProvince);

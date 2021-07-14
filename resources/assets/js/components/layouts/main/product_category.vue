@@ -540,7 +540,9 @@ li.active a::after {
   transition: 300ms;
   color: #556080;
   font-size: 16px;
+  min-width: 36px;
 }
+
 .show-list-items button .fa-grip-horizontal {
   font-size: 16px;
 }
@@ -1176,7 +1178,6 @@ div.items-wrapper {
         <!-- /.modal-dialog -->
       </div>
     </div>
-  
 
     <div
       v-if="!currentUser.user_info"
@@ -1757,7 +1758,6 @@ import searchNotFound from "./main_components/search-not-found";
 import { eventBus } from "../../../router/router";
 import StickySidebar from "../../../stickySidebar.js";
 
-
 var visible = false;
 export default {
   components: {
@@ -1765,7 +1765,6 @@ export default {
     ProductGridArticle,
     ProductAsideCategories,
     searchNotFound,
-    
   },
   props: ["assets", "str", "categoryList"],
   data: function () {
@@ -1808,7 +1807,7 @@ export default {
       sortOption: "BM",
       verifiedUserContent: this.$parent.verifiedUserContent,
       listIsGrid: true,
-      
+
       provinceList: "",
     };
   },
