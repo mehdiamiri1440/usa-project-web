@@ -1727,8 +1727,9 @@ div.items-wrapper {
         <div class="title-section col-xs-12">
           <div class="row">
             <h1>
-              خرید عمده
+               خرید
               <span v-text="this.getCategoryName()"></span>
+               عمده
             </h1>
             <hr />
           </div>

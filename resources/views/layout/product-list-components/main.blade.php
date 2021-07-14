@@ -573,7 +573,7 @@
       >
       @if($categoryMetaData['category_info'])
         <div class="col-xs-12">
-
+          <h1>خرید {{$category_name}} عمده </h1>
           <div class="footer-note-wrapper main-box-shadow">
             <div class="wrapper-contents">
               <div
