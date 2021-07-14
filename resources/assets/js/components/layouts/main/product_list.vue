@@ -490,6 +490,7 @@ li.active a::after {
   transition: 300ms;
   color: #556080;
   font-size: 16px;
+  min-width: 36px;
 }
 .show-list-items button .fa-grip-horizontal {
   font-size: 16px;

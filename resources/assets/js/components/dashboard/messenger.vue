@@ -128,70 +128,88 @@
   overflow-y: scroll;
   float: right;
   width: 100%;
+  border-left: 1px solid #e0e0e0;
 }
 
 .default-message-wrapper {
   position: relative;
   height: 100%;
-  background: #f6f6f6;
 }
 
 .default-message-wrapper .default-main-contents {
-  width: 250px;
-
-  height: 250px;
-
   background: #fff;
-
   border-radius: 250px;
-
   position: absolute;
-
   left: 50%;
-
   top: 50%;
-
   transform: translate(-50%, -50%);
-
   text-align: center;
-
   padding-top: 60px;
-  box-shadow: 0 0 10px #ebebeb;
 }
 
-.default-message-wrapper .default-main-contents.seller-buyAd-picture {
+.default-message-wrapper .default-main-contents > img {
+  max-width: 260px;
+}
+
+.default-message-wrapper .default-main-contents.delsa-box {
   width: 100%;
-  max-width: 400px;
-  border-radius: 10px;
-  padding: 0;
-  padding-top: 30px;
-  height: 435px;
+  max-width: 585px;
 }
 
-.default-message-wrapper .default-main-contents.seller-buyAd-picture .red-text {
-  margin: 30px 0px -24px;
-  z-index: 1;
-  padding: 0 15px;
-  line-height: 1.618;
-  position: relative;
-}
-
-.default-message-wrapper
-  .default-main-contents.seller-buyAd-picture
-  p:last-of-type {
-  max-width: 320px;
+.default-message-wrapper .default-main-contents.delsa-box .delsa-image {
+  max-width: 455px;
   margin: 0 auto;
 }
 
-.default-message-wrapper .default-main-contents i {
-  font-size: 55px;
+.default-message-wrapper .default-main-contents .delsa-title {
+  font-size: 29px;
+  color: #222222;
+  font-weight: 400;
+  margin: 33px auto 30px;
 }
 
-.default-message-wrapper .default-main-contents p {
+.default-message-wrapper .default-main-contents .delsa-title-active {
+  font-size: 29px;
+  font-weight: 400;
+  margin: 33px auto 30px;
+}
+
+.default-message-wrapper .default-main-contents .check-icon-title {
+  width: 80px;
+  height: 80px;
+  font-size: 50px;
+  background: #edf8e6;
+  border-radius: 50px;
+  padding-top: 15px;
+  margin-top: 14px;
+}
+
+.default-message-wrapper .title-item {
+  font-size: 18px;
+  color: #222222;
+  font-weight: 400;
+  margin: 33px auto 30px;
+}
+
+.default-message-wrapper .default-main-contents .delsa-text {
+  color: #777;
+  line-height: 1.618;
+  font-size: 15px;
+}
+
+.default-message-wrapper .default-main-contents.delsa-box .green-button {
+  background-image: linear-gradient(to left, #21ad93, #4dc0bb);
+  border-radius: 12px;
   font-size: 16px;
-
-  margin: 20px 0;
+  font-weight: 400;
+  padding: 10px 40px;
+  margin-top: 26px;
 }
+
+.default-message-wrapper .default-main-contents i {
+  font-size: 26px;
+}
+
 .contact-not-found {
   text-align: center;
   margin: 15px auto;
@@ -339,16 +357,37 @@
       class="col-xs-12 default-message-wrapper hidden-xs col-sm-8 col-lg-9"
       v-if="!selectedContact && isCurrentStep == 0 && !isChanleActive"
     >
-      <div v-if="userType" class="default-main-contents seller-buyAd-picture">
-        <p class="red-text">
-          برای دسترسی به خریداران پیشنهادی از این قسمت در منوی سمت راست اقدام
-          کنید
-          <img src="../../../img/messegs-buy-ads.jpg" alt="" />
-        </p>
+      <div v-if="userType" class="default-main-contents delsa-box">
+        <div class="delsa-image">
+          <img src="../../../img/delsa-messenger.svg" alt="" />
+        </div>
+        <div v-if="currentUser.user_info.active_pakage_type > 0">
+          <i class="fa fa-check light-green-text check-icon-title"></i>
+          <p class="delsa-title-active light-green-text">
+            منشی آنلاین شما (دلسا) فعال است
+          </p>
+        </div>
+        <div v-else>
+          <p class="delsa-title">
+            <i class="fas fa-chess-queen light-green-text"></i>
+            منشی آنلاین شما (دلسا)
+          </p>
+          <p class="delsa-text">
+            ورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
+            استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در
+            ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد
+          </p>
+          <button
+            @click.prevent="openDelasModal()"
+            class="green-button hover-effect"
+          >
+            استخدام منشی آنلاین
+          </button>
+        </div>
       </div>
       <div v-else class="default-main-contents">
-        <i class="fa fa-user"></i>
-        <p>برای شروع چت لطفا یک مخاطب انتخاب کنید</p>
+        <img src="../../../img/empty-message.svg" alt="" />
+        <p class="title-item">برای شروع چت لطفا یک مخاطب انتخاب کنید</p>
       </div>
     </div>
 
@@ -960,6 +999,9 @@ export default {
       const currentTime = new Date();
       const diffInMins = (currentTime - Date.parse(time)) / (1000 * 60);
       return diffInMins < mins;
+    },
+    openDelasModal() {
+      $("#delsa-promotion-modal").modal("show");
     },
   },
 

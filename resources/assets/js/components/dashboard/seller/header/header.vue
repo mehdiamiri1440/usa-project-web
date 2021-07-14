@@ -1145,7 +1145,7 @@ export default {
   },
   metaInfo() {
     return {
-      title: "بازارگاه کشاورزی",
+      title: "بازارگاه محصولات غذایی و کشاورزی ",
       titleTemplate: "باسکول | %s",
     };
   },
