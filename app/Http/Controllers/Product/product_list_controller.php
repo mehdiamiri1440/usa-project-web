@@ -762,18 +762,47 @@ class product_list_controller extends Controller
 
     protected function apply_search_text_filter(&$products,$search_text)
     {
+        $search_text = str_ireplace( array( '\'', '"',
+                    ',' , ';', '<', '>' , 'or', 'and','--'), ' ', $search_text);
+
+
         $category_record = DB::table('categories')
                                         ->where('category_name',$search_text)
-                                        ->whereNotNull('parent_id')
-                                        ->whereNotExists(function($q){
-                                            $q->select(DB::raw(1))
-                                                ->from('categories as c')
-                                                ->whereRaw('c.parent_id = categories.id');
-                                        })
                                         ->first();
 
         if($category_record){
-            $this->apply_category_filter($products,$category_record->id);
+            if(is_null($category_record->parent_id)){
+                $child_categories = DB::table('categories')
+                                    ->where('parent_id',$category_record->id)
+                                    ->pluck('id')
+                                    ->toArray();
+                
+                if($child_categories){
+                    $products = array_filter($products,function($product) use($child_categories){
+                        return in_array($product['main']->category_id,$child_categories) == true;
+                    });
+                }
+
+            }
+            else{
+                $child_categories = DB::table('categories')
+                                    ->where('parent_id',$category_record->id)
+                                    ->pluck('id')
+                                    ->toArray();
+
+                if($child_categories){
+                    $products = array_filter($products,function($product) use($child_categories){
+                        return in_array($product['main']->sub_category_id,$child_categories) == true;
+                    });
+                }
+                else{
+                    $this->apply_category_filter($products,$category_record->id);
+                }
+            }
+            
+
+
+            
         }
         else{
             $search_text = str_replace('\\', '', $search_text);
