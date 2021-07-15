@@ -6,26 +6,36 @@
         <div class="row" v-if="product">
           <?php 
 
-          var_dump($super_category_name)
+          
 ?>
-          <router-link :to="{ name: 'productList' }">
+          <a 
+          href="{{'/product-list'}}"
+          >
             همه دسته ها
             <i class="fa fa-angle-left"></i>
-          </router-link>
+          </a>
 
-          <router-link
-            v-for="(item, index) in breadCrumbs"
-            :key="index"
-            :to="{
-              name: 'productCategory',
-              params: {
-                categoryName: item,
-              },
-            }"
+          <a
+          href="{{'/product-list/category/' . str_replace(' ','-',$product['main']->super_category_name)}}"
           >
+          {{$product['main']->super_category_name}}
             <i class="fa fa-angle-left"></i>
-          </router-link>
-          <span v-text="product.main.product_name"></span>
+          </a>
+          <a
+          href="{{'/product-list/category/' . str_replace(' ','-',$product['main']->category_name)}}"
+          >
+          {{$product['main']->category_name}}
+            <i class="fa fa-angle-left"></i>
+          </a>
+          <a
+          href="{{'/product-list/category/' . str_replace(' ','-',$product['main']->sub_category_name)}}"
+          >
+          {{$product['main']->sub_category_name}}
+            <i class="fa fa-angle-left"></i>
+          </a>
+          <span>
+            {{$product['main']->product_name}}
+          </span>
         </div>
       </div>
       <div class="col-xs-12 col-lg-9 pull-right">

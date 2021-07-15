@@ -29,6 +29,7 @@ span {
 
 .bread-crumbs-wrapper {
   margin: 10px auto;
+  height: 21px;
 }
 
 .bread-crumbs-wrapper a {
@@ -246,7 +247,7 @@ button.send-message-button {
 
     <main id="main" class="row">
       <div class="col-xs-12 text-rtl text-right bread-crumbs-wrapper hidden-xs">
-        <div class="row" v-if="product">
+        <div class="row" v-if="breadCrumbs">
           <router-link :to="{ name: 'productList' }">
             همه دسته ها
             <i class="fa fa-angle-left"></i>
@@ -923,20 +924,9 @@ export default {
     getBreadCrumbs() {
       let items = [];
 
-      for (let i = 0; i < this.categoryList.length; i++) {
-        let subCategoris = this.categoryList[i].subcategories;
-        subCategoris = Object.values(subCategoris);
-
-        let find = subCategoris.find((item) => {
-          return item.category_name == this.product.main.category_name;
-        });
-
-        if (find) {
-          items.push(this.categoryList[i].category_name);
-          items.push(find.category_name);
-          items.push(this.product.main.sub_category_name);
-        }
-      }
+      items.push(this.product.main.super_category_name);
+      items.push(this.product.main.category_name);
+      items.push(this.product.main.sub_category_name);
 
       this.breadCrumbs = items;
     },

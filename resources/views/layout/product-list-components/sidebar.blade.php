@@ -7,34 +7,36 @@
     <div class="category-products-widget">
       <ul>
         <li v-if="selectedCategory">
-          <button
+          <a
+            href="{{'/product-list'}}"
             class="category-title back-item"
           >
             <span>
               <i class="fa fa-arrow-right"></i>
               همه دسته ها
             </span>
-          </button>
+          </a>
         </li>
         @foreach ($categories as $category)
         <li
         >
-          <button
-
+          <a
+            href="{{'/product-list/category/' . str_replace(' ','-',$category->category_name)}}"
             class="default-category-title category-title"
           >
             <span > {{$category->category_name}}</span>
             <i class="fa fa-angle-left"></i>
-          </button>
+          </a>
           <ul class="sub-category-list">
             @foreach ($category->subcategories as $sub_category)
             <li
           >
-            <button
+            <a
+              href="{{'/product-list/category/' . str_replace(' ','-',$sub_category->category_name)}}"
               class="category-title"
             >
             <span > {{$sub_category->category_name}}</span>
-            </button>
+            </a>
 
 
              <ul class="categories-list">

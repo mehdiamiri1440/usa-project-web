@@ -167,6 +167,18 @@ hr {
   padding: 10px 0;
 }
 
+.category-title span i.fa-spin {
+  color: #bebebe;
+  font-size: 13px;
+  width: 13px;
+  height: 15px;
+  opacity: 0;
+}
+
+.category-title.router-link-exact-active {
+  color: #00c569;
+}
+
 .default-category-title.category-title > i {
   font-size: 17px;
   color: #868686;
@@ -275,15 +287,16 @@ hr {
     <div class="category-products-widget">
       <ul>
         <li v-if="selectedCategory">
-          <button
+          <router-link
+            :to="{ name: 'productList' }"
+            tag="button"
             class="category-title back-item"
-            @click="(selectedCategory = ''), (selectedSubCategory = '')"
           >
             <span>
               <i class="fa fa-arrow-right"></i>
               همه دسته ها
             </span>
-          </button>
+          </router-link>
         </li>
         <li
           v-for="(category, index) in categoryList"
@@ -291,22 +304,25 @@ hr {
           v-show="selectedCategory == '' || selectedCategory == index + 1"
           :class="{ 'current-category': selectedCategory == index + 1 }"
         >
-          <button
+          <router-link
+            :to="getSubCategoryUrl(category)"
             v-if="selectedCategory == ''"
             class="default-category-title category-title"
-            @click="selectedCategory = index + 1"
           >
-            <span v-text="category.category_name"></span>
+            <span>
+              {{ category.category_name }}
+              <i class="fas fa-circle-notch fa-spin"></i>
+            </span>
             <i class="fa fa-angle-left"></i>
-          </button>
-          <button
+          </router-link>
+          <router-link
+            :to="getSubCategoryUrl(category)"
             v-else
             class="default-category-title"
-            @click="selectedSubCategory = ''"
           >
             <span v-text="category.category_name"></span>
             <i class="fa fa-angle-left"></i>
-          </button>
+          </router-link>
           <ul class="sub-category-list">
             <li
               v-for="(subCategory, subCategoryIndex) in category.subcategories"
@@ -320,12 +336,12 @@ hr {
               }"
               :data-test="subCategory.id"
             >
-              <button
+              <router-link
+                :to="getSubCategoryUrl(subCategory)"
                 class="category-title"
-                @click="selectedSubCategory = subCategory.id"
               >
                 <span v-text="subCategory.category_name"></span>
-              </button>
+              </router-link>
               <ul class="categories-list">
                 <li
                   v-for="(item, index) in subCategory.subcategories"
@@ -378,9 +394,14 @@ export default {
   },
   methods: {
     getSubCategoryUrl: function (t) {
-      let url =
-        "/product-list/category/" + t.category_name.split(" ").join("-");
-      return url;
+      // let url =
+      //   "/product-list/category/" + t.category_name.split(" ").join("-");
+      return {
+        name: "productCategory",
+        params: {
+          categoryName: t.category_name.split(" ").join("-"),
+        },
+      };
     },
     getCategoryName: function () {
       let name = this.$route.params.categoryName
@@ -390,30 +411,49 @@ export default {
       return name.split("-").join(" ");
     },
     getCategoryItem(categories) {
-      let data = "";
-
+      this.selectedCategory = "";
+      this.selectedSubCategory = "";
       for (let i = 0; i < categories.length; i++) {
-        if (!data) {
-          let categoryItem = Object.values(categories[i].subcategories);
+        let categoryName = this.getCategoryName();
 
-          categoryItem.map((category, index) => {
-            let subCategories = Object.values(category.subcategories);
-            data = subCategories.find((item) => {
-              if (item.category_name == this.getCategoryName()) {
+        if (categories[i].category_name == categoryName) {
+          this.selectedCategory = i + 1;
+          return;
+        } else {
+          let categoryItem = Object.values(categories[i].subcategories);
+          let subCategoryItem = categoryItem.find((item) => {
+            return item.category_name == categoryName;
+          });
+          if (subCategoryItem) {
+            this.selectedCategory = i + 1;
+            this.selectedSubCategory = subCategoryItem.id;
+            return;
+          } else {
+            categoryItem.map((category, index) => {
+              let subCategories = Object.values(category.subcategories);
+              let data = subCategories.find((item) => {
+                if (item.category_name == categoryName) {
+                  return true;
+                }
+              });
+              if (data) {
+                this.selectedCategory = i + 1;
+                this.selectedSubCategory = data.parent_id;
                 return true;
               }
             });
-            if (data) {
-              this.selectedCategory = i + 1;
-              this.selectedSubCategory = data.parent_id;
-              return true;
-            }
-          });
+          }
         }
       }
     },
+    changePageLoader() {
+      $(".category-title").on("click", function (e) {
+        $(this).find("i.fa-spin").css("opacity", "1");
+      });
+    },
   },
   mounted() {
+    this.changePageLoader();
     this.getCategoryItem(this.categoryList);
   },
   watch: {
