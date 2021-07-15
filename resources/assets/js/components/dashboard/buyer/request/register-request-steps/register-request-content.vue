@@ -70,18 +70,6 @@ export default {
     }
   },
   methods: {
-    // selectedCategory(index) {
-    //   window.localStorage.removeItem("buyAd");
-    //   this.selectedCategoryIndex = index;
-    //   this.categoryName = this.categoryList[index].category_name;
-    //   this.subCategoryList = this.categoryList[index].subcategories;
-    //   this.step = 1;
-    // },
-    // selectedSubCategory(item) {
-    //   this.subCategoryName = item.category_name;
-    //   this.$parent.buyAd.category_id = item.id;
-    //   this.step = 2;
-    // },
     selectedCategory(index) {
       window.localStorage.removeItem("buyAd");
       this.categoryName = "";
@@ -130,6 +118,11 @@ export default {
       this.errors.productName = "";
       if (value) {
         this.productNameValidator(value);
+      }
+    },
+    mainCategories(category) {
+      if (category == "") {
+        this.categoryName = "";
       }
     },
     requirement_amount: function (value) {

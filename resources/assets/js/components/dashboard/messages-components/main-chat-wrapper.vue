@@ -1448,7 +1448,6 @@ export default {
       }
       if (
         !isDelsaMessageActive &&
-        !chatMessagePid &&
         this.$parent.userAllowedReview &&
         this.$parent.isLikeBoxActive &&
         !this.$parent.isLatestMessage &&

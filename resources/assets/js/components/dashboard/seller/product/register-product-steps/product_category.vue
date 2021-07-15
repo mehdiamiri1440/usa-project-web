@@ -97,6 +97,11 @@ export default {
         this.productNameValidator(name);
       }
     },
+    mainCategories(category) {
+      if (category == "") {
+        this.categoryName = "";
+      }
+    },
     "errors.productName"(error) {
       if (error) {
         this.$parent.registerComponentStatistics(
