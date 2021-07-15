@@ -8,7 +8,7 @@ span {
   line-height: 1.5em;
 }
 #main {
-  padding-top: 160px;
+  padding-top: 120px;
 }
 
 .main-content > h4 {
@@ -25,6 +25,30 @@ span {
   font-size: 16px;
   padding: 8px 20px;
   border-radius: 8px;
+}
+
+.bread-crumbs-wrapper {
+  margin: 10px auto;
+}
+
+.bread-crumbs-wrapper a {
+  color: #999;
+  font-size: 14px;
+  margin-left: 5px;
+}
+
+.bread-crumbs-wrapper span {
+  color: #bbb;
+  font-size: 14px;
+}
+
+.bread-crumbs-wrapper a i {
+  margin-right: 2px;
+  font-size: 11px;
+}
+
+.bread-crumbs-wrapper a:hover {
+  color: #555;
 }
 
 .box-content {
@@ -221,6 +245,29 @@ button.send-message-button {
     />
 
     <main id="main" class="row">
+      <div class="col-xs-12 text-rtl text-right bread-crumbs-wrapper">
+        <div class="row" v-if="product">
+          <router-link :to="{ name: 'productList' }">
+            همه دسته ها
+            <i class="fa fa-angle-left"></i>
+          </router-link>
+
+          <router-link
+            v-for="(item, index) in breadCrumbs"
+            :key="index"
+            :to="{
+              name: 'productCategory',
+              params: {
+                categoryName: item,
+              },
+            }"
+          >
+            {{ item }}
+            <i class="fa fa-angle-left"></i>
+          </router-link>
+          <span v-text="product.main.product_name"></span>
+        </div>
+      </div>
       <div class="col-xs-12 col-lg-9 pull-right">
         <section class="main-content">
           <div class="row">
@@ -423,7 +470,7 @@ export default {
     RegisterModal,
     // registerInquerForm,
   },
-  props: ["str", "assets", "userType"],
+  props: ["str", "assets", "userType", "categoryList"],
   data: function () {
     return {
       isChat: true,
@@ -456,6 +503,7 @@ export default {
       isActivePhone: false,
       userPhone: "",
       getPhoneLoader: false,
+      breadCrumbs: "",
     };
   },
   methods: {
@@ -492,7 +540,7 @@ export default {
                 self.$emit("isMyProfile", self.isMyProfile);
               }
             }
-
+            self.getBreadCrumbs();
             axios
               .post("/get_related_products", {
                 product_id: self.product.main.id,
@@ -871,6 +919,26 @@ export default {
     },
     closePhoneModal() {
       $(".modal").modal("hide");
+    },
+    getBreadCrumbs() {
+      let items = [];
+
+      for (let i = 0; i < this.categoryList.length; i++) {
+        let subCategoris = this.categoryList[i].subcategories;
+        subCategoris = Object.values(subCategoris);
+
+        let find = subCategoris.find((item) => {
+          return item.category_name == this.product.main.category_name;
+        });
+
+        if (find) {
+          items.push(this.categoryList[i].category_name);
+          items.push(find.category_name);
+          items.push(this.product.main.sub_category_name);
+        }
+      }
+
+      this.breadCrumbs = items;
     },
   },
   created() {
