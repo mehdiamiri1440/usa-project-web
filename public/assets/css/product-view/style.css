@@ -1159,3 +1159,28 @@ button.send-message-button {
     }
 
 }
+
+
+.bread-crumbs-wrapper {
+  margin: 10px auto;
+}
+
+.bread-crumbs-wrapper a {
+  color: #999;
+  font-size: 14px;
+  margin-left: 5px;
+}
+
+.bread-crumbs-wrapper span {
+  color: #bbb;
+  font-size: 14px;
+}
+
+.bread-crumbs-wrapper a i {
+  margin-right: 2px;
+  font-size: 11px;
+}
+
+.bread-crumbs-wrapper a:hover {
+  color: #555;
+}
