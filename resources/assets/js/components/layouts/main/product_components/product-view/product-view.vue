@@ -245,7 +245,7 @@ button.send-message-button {
     />
 
     <main id="main" class="row">
-      <div class="col-xs-12 text-rtl text-right bread-crumbs-wrapper">
+      <div class="col-xs-12 text-rtl text-right bread-crumbs-wrapper hidden-xs">
         <div class="row" v-if="product">
           <router-link :to="{ name: 'productList' }">
             همه دسته ها
