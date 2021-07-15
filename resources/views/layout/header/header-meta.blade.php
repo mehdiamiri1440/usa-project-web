@@ -13,11 +13,11 @@
     @endif
 
     @if(isset($category_name))
-    <title>{{'قیمت امروز ' . $category_name . ' - خرید و فروش ' . $category_name . ' عمده - بهترین قیمت روز | باسکول ' }}</title>
+    <title>{{'قیمت ' . $category_name . ' - خرید و فروش ' . $category_name . ' عمده - بهترین قیمت روز | باسکول ' }}</title>
     <meta name="description" content='{{"قیمت امروز " . $category_name . " - خرید و فروش " . $category_name . " عمده بدون واسطه از بهترین تامین کنندگان ☀️☀️ آخرین قیمت " . $category_name . " ☀️☀️ بازار باسکول"}}'>
     <meta name="og:description" content='{{"قیمت امروز " . $category_name . " - خرید و فروش " . $category_name . " عمده بدون واسطه از بهترین تامین کنندگان ☀️☀️ آخرین قیمت " . $category_name . " ☀️☀️ بازار باسکول"}}'>
     <meta name="og:site_name" content="باسکول بازارآنلاین خرید و فروش محصولات غذایی و کشاورزی ایران">
-    <meta name="og:title" content="{{'قیمت امروز ' . $category_name . ' - خرید و فروش ' . $category_name . ' عمده - بهترین قیمت روز | باسکول ' }}" >
+    <meta name="og:title" content="{{'قیمت ' . $category_name . ' - خرید و فروش ' . $category_name . ' عمده - بهترین قیمت روز | باسکول ' }}" >
     <link rel="canonical" href="{{url('/product-list/category/' . implode(explode(' ',$category_name),'-'))}}">
 
     @else
