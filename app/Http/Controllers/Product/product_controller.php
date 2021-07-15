@@ -570,7 +570,8 @@ class product_controller extends Controller
 
         $product_parent_category_data = $product->category;
         $product_related_data['main']->category_id = $product_parent_category_data['parent_id'];
-        $product_related_data['main']->category_name = (category::find($product_parent_category_data['parent_id']))['category_name'];
+        $product_related_data['main']->category_name = ($category_record = category::find($product_parent_category_data['parent_id']))['category_name'];
+        $product_related_data['main']->super_category_name = (category::find($category_record->parent_id))['category_name'];
 
         if(session()->has('user_id')){
             $now = Carbon::now();
@@ -1613,7 +1614,8 @@ class product_controller extends Controller
 
         $product_parent_category_data = $product->category;
         $product_related_data['main']->category_id = $product_parent_category_data['parent_id'];
-        $product_related_data['main']->category_name = (category::find($product_parent_category_data['parent_id']))['category_name'];
+        $product_related_data['main']->category_name = ($category_record = category::find($product_parent_category_data['parent_id']))['category_name'];
+        $product_related_data['main']->super_category_name = (category::find($category_record->parent_id))['category_name'];
 
         //getting related products
         $subcategory_related_products = $this->get_related_products_to_the_given_subcategory($product->category_id);
