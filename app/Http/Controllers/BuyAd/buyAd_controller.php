@@ -874,7 +874,7 @@ class buyAd_controller extends Controller
         }
     }
 
-    protected function get_related_buyAds_list_to_the_user()
+    public function get_related_buyAds_list_to_the_user()
     {
         $query = DB::table('buy_ads')
                     ->join('myusers', 'buy_ads.myuser_id', '=', 'myusers.id')

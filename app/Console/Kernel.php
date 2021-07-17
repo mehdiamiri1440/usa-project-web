@@ -10,6 +10,7 @@ use App\Jobs\SendReminderSMSToSellers;
 use App\Jobs\CheckElevatorExpiry;
 use App\Jobs\SendUpgradeAccoutnSMSToSellers;
 use App\Jobs\CacheProductList;
+use App\Jobs\CacheBuyAdList;
 use App\Jobs\PhoneNumberAutoSend\SendPhoneNumberToBuyerIfConditionsIsSatisfied;
 use App\Jobs\Notifiers\RetentionReminder;
 use App\Jobs\Notifiers\BuyAdRegisterReminder;
@@ -83,6 +84,11 @@ class Kernel extends ConsoleKernel
 
         $schedule->job($cache_product_list_job)
                 ->everyTenMinutes();
+
+        $cache_buyAd_list_job = new CacheBuyAdList();
+
+        $schedule->job($cache_buyAd_list_job)
+                ->cron('*/7 * * * *');
 
 
         $product_register_reminder_job = new ProductRegisterReminder();
