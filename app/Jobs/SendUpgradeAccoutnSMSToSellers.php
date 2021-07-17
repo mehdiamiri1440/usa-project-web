@@ -61,7 +61,7 @@ class SendUpgradeAccoutnSMSToSellers implements ShouldQueue
 
         $first_day_seller_ids = DB::table('products')
                                     ->where('confirmed',true)
-                                    ->whereBetween('created_at',[Carbon::now()->subDays(20),Carbon::now()])
+                                    ->whereBetween('created_at',[Carbon::now()->subDays(1),Carbon::now()])
                                     ->whereNotIn('myuser_id',$non_free_sellers)
                                     // ->where('stock','>=',$this->product_stock_threshold)
                                     ->pluck('myuser_id');
@@ -86,7 +86,7 @@ class SendUpgradeAccoutnSMSToSellers implements ShouldQueue
 
         $seventh_day_seller_ids = DB::table('myusers')
                                         ->whereNotIn('myusers.id',$non_free_sellers)
-                                        ->whereBetween('created_at',[Carbon::now()->subDays(40),Carbon::now()->subDays(39)])
+                                        ->whereBetween('created_at',[Carbon::now()->subDays(7),Carbon::now()->subDays(6)])
                                         ->where('is_seller',true)
                                         ->where('is_blocked',false)
                                         ->whereExists(function($q){
