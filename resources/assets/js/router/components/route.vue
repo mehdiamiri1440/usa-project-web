@@ -1,52 +1,46 @@
 <style scoped>
 .android-download-alert-wrapper {
   position: fixed;
-
   bottom: 0;
-
   width: 100%;
-
-  background: orange;
-
+  background: #fff;
   text-align: center;
-
   color: #fff;
-
   direction: rtl;
-
   z-index: 1020;
-
   font-weight: bold;
-
   font-size: 20px;
+  padding: 5px;
+  box-shadow: 0 -8px 8px rgba(0, 0, 0, 0.1);
 }
 
 .android-apk-download {
-  padding: 15px;
-
-  background: #e41c38;
-
+  padding: 10px 15px;
+  background: linear-gradient(-35deg, #ff9300, #f60);
   border: none;
-
   width: 100%;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
 
-  height: 100%;
+.android-apk-download img {
+  width: 28px;
+  position: absolute;
+  left: 15px;
 }
 
 .close-android-download-alert-wrapper {
   background: none;
-
   border: none;
-
   font-size: 20px;
-
   position: absolute;
-
-  right: 15px;
-
-  top: 13px;
-
+  right: 5px;
+  top: 5px;
   z-index: 1021;
+  padding: 11px 15px 8px;
 }
 /* 
 .modal-dialog {
@@ -290,12 +284,16 @@
         class="close-android-download-alert-wrapper"
         @click.prevent="downloadAppButton = false"
       >
-        <i class="fa fa-times-circle"></i>
+        <i class="fa fa-times"></i>
       </button>
 
       <button class="android-apk-download" @click.prevent="doDownload">
-        <i class="fas fa-download"></i>
         دانلود اپلیکیشن باسکول
+
+        <img
+          src="../../../img/google-play-icon.svg"
+          alt="دانلود اپلیکیشن باسکول"
+        />
       </button>
     </div>
   </div>

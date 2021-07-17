@@ -141,6 +141,9 @@ a.active {
     transform: translate3d(0, -1px, 0);
   }
 }
+.verified-user {
+  display: inline-block !important ;
+}
 .verified-user::before {
   left: 8px;
   top: 8px;

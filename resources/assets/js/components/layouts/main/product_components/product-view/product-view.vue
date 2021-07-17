@@ -256,12 +256,7 @@ button.send-message-button {
           <router-link
             v-for="(item, index) in breadCrumbs"
             :key="index"
-            :to="{
-              name: 'productCategory',
-              params: {
-                categoryName: item,
-              },
-            }"
+            :to="getSubCategoryUrl(item)"
           >
             {{ item }}
             <i class="fa fa-angle-left"></i>
@@ -929,6 +924,10 @@ export default {
       items.push(this.product.main.sub_category_name);
 
       this.breadCrumbs = items;
+    },
+    getSubCategoryUrl: function (category) {
+      let url = "/product-list/category/" + category.split(" ").join("-");
+      return url;
     },
   },
   created() {

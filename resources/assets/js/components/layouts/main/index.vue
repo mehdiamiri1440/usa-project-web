@@ -1132,7 +1132,7 @@ button.menu-title hr::after {
   position: absolute;
   width: 45px;
   background: #00c569;
-  height: 4px;
+  height: 3px;
   top: -2px;
   right: 0;
   border-radius: 5px;
