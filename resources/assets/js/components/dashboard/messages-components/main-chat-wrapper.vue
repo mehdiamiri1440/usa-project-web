@@ -984,7 +984,7 @@
     <div class="chat-page" v-if="$parent.selectedContact">
       <div class="bg-wrapper"></div>
       <ul
-        @scroll="myFunction()"
+        @scroll="infinityScroll()"
         id="chat-list"
         :class="[
           $parent.chatMessagesLoader && $parent.isFirstMessageLoading
@@ -1231,7 +1231,10 @@
             <i class="fa fa-times"></i>
           </button>
           <p class="title-item">منشی آنلاین خود را استخدام کنید.</p>
-          <button class="green-button" @click.prevent="$parent.openDelasModal()">
+          <button
+            class="green-button"
+            @click.prevent="$parent.openDelasModal()"
+          >
             <i class="fa fa-info-circle"></i>
             اطلاعات بیشتر
           </button>
@@ -1312,7 +1315,7 @@ export default {
     };
   },
   methods: {
-    myFunction() {
+    infinityScroll() {
       let listWrapper = $("#chat-list");
       let scrollPosition = listWrapper.scrollTop();
       let totalHeight = listWrapper[0].scrollHeight;
@@ -1402,13 +1405,11 @@ export default {
     },
     openProduct(productId) {
       this.openProductLoader = true;
+      let win = window.open("about:blank", "_blank");
       axios
         .post("/get_product_by_id", { product_id: productId })
         .then((response) => {
-          var anchor = document.createElement("a");
-          anchor.href = this.getProductUrl(response.data.product);
-          anchor.target = "_blank";
-          anchor.click();
+          win.location.href = this.getProductUrl(response.data.product);
           this.openProductLoader = false;
         });
     },
