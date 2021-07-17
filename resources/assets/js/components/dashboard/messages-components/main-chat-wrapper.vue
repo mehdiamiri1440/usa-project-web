@@ -1411,6 +1411,10 @@ export default {
         .then((response) => {
           win.location.href = this.getProductUrl(response.data.product);
           this.openProductLoader = false;
+        })
+        .catch((err) => {
+          win.location.href = "/404";
+          this.openProductLoader = false;
         });
     },
     getProductUrl(product) {
