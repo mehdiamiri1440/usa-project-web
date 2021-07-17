@@ -141,6 +141,9 @@ a.active {
     transform: translate3d(0, -1px, 0);
   }
 }
+.verified-user {
+  display: inline-block !important ;
+}
 .verified-user::before {
   left: 8px;
   top: 8px;
@@ -237,7 +240,7 @@ a.active {
           </li>
           <li class="list-item">
             <router-link :to="{ name: 'profileBasicSellerVeficiation' }">
-              <span class="verified-user" title>
+              <span class="verified-user">
                 <i class="fa fa-certificate"></i>
               </span>
               <span>احراز هویت</span>

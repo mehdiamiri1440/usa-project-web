@@ -563,14 +563,11 @@ li.active a::after {
   direction: rtl;
   margin: 15px auto;
   padding: 7px 15px;
-  border-radius: 5px;
-  -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+  border-radius: 12px;
   overflow: hidden;
   max-height: 220px;
-
   overflow-y: auto;
-
+  border: 1px solid #e0e0e0;
   line-height: 1.628;
 }
 
@@ -1727,9 +1724,9 @@ div.items-wrapper {
         <div class="title-section col-xs-12">
           <div class="row">
             <h1>
-               خرید
+              خرید
               <span v-text="this.getCategoryName()"></span>
-               عمده
+              عمده
             </h1>
             <hr />
           </div>
@@ -1929,7 +1926,9 @@ export default {
             sort_by: self.sortOption,
           })
           .then(function (response) {
-            self.products = self.products.concat(response.data.products);
+            if (Array.isArray(self.products)) {
+              self.products = self.products.concat(response.data.products);
+            }
 
             self.submiting = false;
             if (self.products.length + 1 < self.productCountInPage) {
@@ -1974,7 +1973,9 @@ export default {
         axios
           .post("/user/get_product_list", searchObject)
           .then(function (response) {
-            self.products = self.products.concat(response.data.products);
+            if (Array.isArray(self.products)) {
+              self.products = self.products.concat(response.data.products);
+            }
 
             self.loadMoreActive = false;
 
@@ -2408,9 +2409,9 @@ export default {
             categoryName +
             " خرید و فروش " +
             categoryName +
-            " عمده بدون واسطه از بهترین تامین کنندگان ☀️☀️ آخرین قیمت " + 
-            categoryName + 
-            " ☀️☀️ بازار باسکول"
+            " عمده بدون واسطه از بهترین تامین کنندگان ☀️☀️ آخرین قیمت " +
+            categoryName +
+            " ☀️☀️ بازار باسکول",
         },
         {
           name: "author",

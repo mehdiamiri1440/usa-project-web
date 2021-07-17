@@ -1850,8 +1850,9 @@ export default {
         axios
           .post("/user/get_product_list", searchObject)
           .then(function (response) {
-            self.products = self.products.concat(response.data.products);
-
+            if (Array.isArray(self.products)) {
+              self.products = self.products.concat(response.data.products);
+            }
             self.loadMoreActive = false;
 
             setTimeout(function () {
@@ -2272,7 +2273,8 @@ export default {
         },
         {
           property: "og:site_name",
-          content: "باسکول بازارآنلاین خرید و فروش محصولات غذایی و کشاورزی ایران",
+          content:
+            "باسکول بازارآنلاین خرید و فروش محصولات غذایی و کشاورزی ایران",
         },
         {
           property: "og:title",

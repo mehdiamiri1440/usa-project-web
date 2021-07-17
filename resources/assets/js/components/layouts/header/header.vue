@@ -457,8 +457,8 @@ button.menu-title hr::after {
   position: absolute;
   width: 45px;
   background: #00c569;
-  height: 4px;
-  top: -2px;
+  height: 3px;
+top: -2px;
   right: 0;
   border-radius: 5px;
 }
@@ -1293,6 +1293,7 @@ a.profile-info-wrapper:hover {
                             <i class="fa fa-angle-left"></i>
                           </div>
                         </button>
+
                         <ul class="lvl2-wrapper">
                           <li
                             v-for="(
@@ -1302,10 +1303,19 @@ a.profile-info-wrapper:hover {
                             class="col-xs-12 pull-right text-right"
                             :class="[setMenuClass(subCategory, false)]"
                           >
-                            <button class="menu-title">
+                            <router-link
+                              :to="{
+                                name: 'productCategory',
+                                params: {
+                                  categoryName: subCategory.category_name,
+                                },
+                              }"
+                              tag="button"
+                              class="menu-title"
+                            >
                               <span v-text="subCategory.category_name"></span>
                               <hr />
-                            </button>
+                            </router-link>
                             <div>
                               <div
                                 v-for="(
@@ -1558,10 +1568,19 @@ a.profile-info-wrapper:hover {
                   class="menu-title"
                   v-text="subCategory.category_name"
                 > -->
-                <button class="menu-title">
+                <router-link
+                  :to="{
+                    name: 'productCategory',
+                    params: {
+                      categoryName: subCategory.category_name,
+                    },
+                  }"
+                  tag="button"
+                  class="menu-title"
+                >
                   <span v-text="subCategory.category_name"></span>
                   <hr />
-                </button>
+                </router-link>
 
                 <ul>
                   <li

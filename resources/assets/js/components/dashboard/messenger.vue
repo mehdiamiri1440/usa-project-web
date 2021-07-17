@@ -134,6 +134,7 @@
 .default-message-wrapper {
   position: relative;
   height: 100%;
+  overflow: auto;
 }
 
 .default-message-wrapper .default-main-contents {
@@ -144,7 +145,8 @@
   top: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  padding-top: 60px;
+  padding-top: 70px;
+  padding-bottom: 30px;
 }
 
 .default-message-wrapper .default-main-contents > img {
@@ -154,6 +156,7 @@
 .default-message-wrapper .default-main-contents.delsa-box {
   width: 100%;
   max-width: 585px;
+  min-height: 550px;
 }
 
 .default-message-wrapper .default-main-contents.delsa-box .delsa-image {
