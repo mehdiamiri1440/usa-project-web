@@ -194,6 +194,8 @@ button.open-categories {
   border-radius: 0 0 12px 12px;
   padding-bottom: 25px;
   min-height: calc(100% + 20px);
+  max-height: 450px;
+  overflow-y: auto;
 }
 
 .custom-mega-menu .lvl2-wrapper > li > div > div {
@@ -376,6 +378,8 @@ nav .green-button-alt {
 }
 
 .buskool-sub-menu .navbar-right > li > a + ul {
+  max-height: 450px;
+  overflow-y: auto;
   display: none;
   height: 0;
 }
@@ -458,7 +462,7 @@ button.menu-title hr::after {
   width: 45px;
   background: #00c569;
   height: 3px;
-top: -2px;
+  top: -2px;
   right: 0;
   border-radius: 5px;
 }
@@ -587,8 +591,8 @@ a.profile-info-wrapper:hover {
 
 .mobile-menu-button .message-count {
   padding-top: 0px;
-  left: -16px;
-  top: -4px;
+  left: -12px;
+  top: -5px;
 }
 .navbar-toggle {
   margin: 0;
@@ -638,6 +642,16 @@ a.profile-info-wrapper:hover {
   padding-top: 1px;
   text-align: center;
   z-index: 1;
+}
+
+.message-count.desktop-message-count {
+  left: 13px;
+  border: 3px solid #fff;
+  top: -5px;
+  padding-top: 0px;
+  font-size: 11px;
+  width: 25px;
+  height: 25px;
 }
 
 .star-badge {
@@ -1195,6 +1209,11 @@ a.profile-info-wrapper:hover {
                   <i class="fas fa-comment-alt"></i>
                 </div>
                 پیام ها
+                <span
+                  class="message-count desktop-message-count"
+                  v-if="messageCount > 0"
+                  v-text="messageCount"
+                ></span>
               </router-link>
               <router-link
                 v-else
@@ -1205,6 +1224,11 @@ a.profile-info-wrapper:hover {
                   <i class="fas fa-comment-alt"></i>
                 </div>
                 پیام ها
+                <span
+                  class="message-count desktop-message-count"
+                  v-if="messageCount > 0"
+                  v-text="messageCount"
+                ></span>
               </router-link>
             </li>
 

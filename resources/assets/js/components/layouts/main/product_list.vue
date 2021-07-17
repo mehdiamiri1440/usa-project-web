@@ -1418,7 +1418,11 @@ div.items-wrapper {
                   class="load-more-button col-xs-12"
                   v-if="continueToLoadProducts === true"
                 >
-                  <button class="btn btn-loader" @click.prevent="feed()">
+                  <button
+                    class="btn btn-loader"
+                    :disabled="loadMoreActive"
+                    @click.prevent="feed()"
+                  >
                     <div class="btn-content">
                       <span class="hidden-xs text-rtl" v-show="!loadMoreActive">
                         مشاهده محصولات بیشتر
