@@ -999,8 +999,8 @@ div.items-wrapper {
               <i class="fa fa-times"></i>
             </a>
             <div class="modal-title">
-              <span class="hidden-xs">دسته ها و فیلتر</span>
-              <span class="hidden-sm hidden-md hidden-lg">فیلتر مکان</span>
+              <!-- <span class="hidden-xs">دسته ها و فیلتر</span> -->
+              <span>فیلتر مکان</span>
             </div>
           </div>
 
@@ -1206,8 +1206,9 @@ div.items-wrapper {
                 data-toggle="modal"
                 data-target="#searchFilter"
               >
-                <i class="fa fa-filter"></i>
-                دسته ها و فیلتر
+                <i class="fa fa-map-marker-alt"></i>
+                <!-- دسته ها و فیلتر -->
+                فیلتر مکان
               </button>
               <div class="show-list-items hidden-xs hidden-sm">
                 <button

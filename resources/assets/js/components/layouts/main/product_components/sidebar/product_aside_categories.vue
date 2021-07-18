@@ -30,7 +30,10 @@
 
 <template>
   <div>
-    <CategoryFilter :categoryList="categories" class="hidden-xs" />
+    <CategoryFilter
+      :categoryList="categories"
+      class="hidden-xs hidden-sm hidden-md"
+    />
     <GeoLocationFilter
       :resetLocationFilter="resetLocation"
       :provinceList="provinceList"
