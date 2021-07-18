@@ -40,6 +40,7 @@ class admin_sellAd_controller extends Controller
         'products.description',
         'products.address',
         'products.confirmed',
+        'products.category_id as subcategory_id',
         'categories.category_name as subcategory_name',
         'categories.parent_id',
         'cities.city_name',

@@ -143,7 +143,7 @@
                             <td class="col-xs-10">
                                 <div class="md-form">
                                     <select  class="form-control" name="category_id" id="sub_categories">
-                                        <option  selected value="">{{$sellAd->subcategory_name}}</option>
+                                        <option  selected value="{{$sellAd->subcategory_id}}">{{$sellAd->subcategory_name}}</option>
                                     </select>                             
                                 </div>
                             </td>
