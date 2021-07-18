@@ -11,6 +11,7 @@ use App\Models\admin_note;
 use DB;
 use Carbon\carbon;
 use App\Http\Library\date_convertor;
+use Illuminate\Support\Facades\Cache;
 
 
 class admin_user_controller extends Controller
@@ -186,6 +187,11 @@ class admin_user_controller extends Controller
         return view('admin_panel.userList',[
             'users' => $users
         ]);
+    }
+
+    public function clear_categories_cached_file()
+    {
+        Cache::forget(md5('categories'));
     }
 
 }

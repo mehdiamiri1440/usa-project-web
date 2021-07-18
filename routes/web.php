@@ -1114,6 +1114,10 @@ Route::group(['prefix' => 'admin', 'middleware' => [admin_login::class]], functi
         'uses' => 'admin_panel\admin_user_controller@load_same_device_users',
         'as' => 'admin_panel_same_device_users_list'
     ])->where('user_id','[0-9]+');
+
+    Route::get('/clear-storage-cache',[
+        'uses' => 'admin_panel\admin_user_controller@clear_categories_cached_file',
+    ]);
     
 });
 
