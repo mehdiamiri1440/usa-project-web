@@ -665,7 +665,7 @@ filter modal styles
 }
 
 .modal-body {
-  padding: 0 15px;
+  padding: 0;
 }
 .form-check-wrapper button {
   width: 100%;
@@ -1108,7 +1108,7 @@ div.items-wrapper {
                   :subCategoryId="subCategoryId"
                   :categories="categoryList"
                   :resetLocation="resetLocation"
-                  :provinceList="provinceList"
+                  :provinceList="$parent.provinceList"
                 />
               </div>
             </div>
@@ -1231,6 +1231,7 @@ div.items-wrapper {
           class="mobile-category-item filter-item"
           @click.prevent="resetLocation = !resetLocation"
         >
+          <i class="fa fa-map-marker-alt"></i>
           <span v-if="city" v-text="city.city_name"> </span>
           <span v-else-if="province" v-text="province.province_name"> </span>
           <i class="fa fa-times"></i>
@@ -1337,6 +1338,7 @@ div.items-wrapper {
                 class="mobile-category-item filter-item"
                 @click.prevent="resetLocation = !resetLocation"
               >
+                <i class="fa fa-map-marker-alt"></i>
                 <span v-if="city" v-text="city.city_name"> </span>
                 <span v-else-if="province" v-text="province.province_name">
                 </span>
@@ -1708,7 +1710,7 @@ div.items-wrapper {
               :subCategoryId="subCategoryId"
               :categories="categoryList"
               :resetLocation="resetLocation"
-              :provinceList="provinceList"
+              :provinceList="$parent.provinceList"
             />
           </div>
         </div>
@@ -1809,8 +1811,6 @@ export default {
       sortOption: "BM",
       verifiedUserContent: this.$parent.verifiedUserContent,
       listIsGrid: true,
-
-      provinceList: "",
     };
   },
   methods: {
@@ -1835,7 +1835,9 @@ export default {
       }
     },
     init: function () {
-      this.getLocations();
+      if (!this.$parent.provinceList) {
+        this.getLocations();
+      }
       $(".modal").on("show.bs.modal", () => {
         this.handleBackKeys();
       });
@@ -2326,7 +2328,9 @@ export default {
     getLocations() {
       axios
         .post("/location/get_location_info", { cascade_list: true })
-        .then((response) => (this.provinceList = response.data.provinces));
+        .then(
+          (response) => (this.$parent.provinceList = response.data.provinces)
+        );
     },
   },
   watch: {

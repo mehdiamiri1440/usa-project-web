@@ -2,7 +2,7 @@
 /* Create a custom radio button */
 
 .radio-wrapper {
-  margin: 0 auto 10px;
+  margin: 10px auto;
   padding-right: 10px;
 }
 
@@ -28,7 +28,7 @@
   font-size: 14px;
 }
 .label-radio:nth-of-type(2) {
-  margin-right: 10px;
+  margin-right: 6px;
 }
 
 .label-radio label {
@@ -175,9 +175,7 @@
           @click="switchRole()"
           :checked="isSwitch"
         />
-
         <span v-if="!isSwitch" class="checkmark"> </span>
-
         <span v-else class="checkmark active">
           <i class="fa fa-check"></i>
         </span>
@@ -207,11 +205,9 @@
               />
             </g>
           </svg>
-
           <span>فروشنده</span>
         </label>
       </div>
-
       <div class="label-radio" :class="{ active: !isSwitch }">
         <input
           type="radio"
@@ -219,13 +215,10 @@
           :name="mobile == 1 ? 'mobileMyRadio' : 'myRadio'"
           :checked="!isSwitch"
         />
-
         <span v-if="isSwitch" class="checkmark"> </span>
-
         <span v-else class="checkmark active">
           <i class="fa fa-check"></i>
         </span>
-
         <label>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -262,7 +255,6 @@
               transform="translate(-93.045 -89.797)"
             />
           </svg>
-
           <span>خریدار</span>
         </label>
       </div>

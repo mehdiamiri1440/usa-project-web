@@ -362,6 +362,13 @@ button.send-message-button {
     border-radius: 8px;
   }
   
+  
+  .green-button {
+    background: #00c569;
+    color: #fff;
+    border: none;
+  }
+  
   .send-message-button {
     background: none;
     border-radius: 8px;

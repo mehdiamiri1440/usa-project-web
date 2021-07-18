@@ -26,6 +26,7 @@ body,
   z-index: 9;
   background: #151c2e;
   direction: rtl;
+  overflow-y: auto;
 }
 
 .little_header {
@@ -89,22 +90,6 @@ body,
   text-align: right;
   color: #fff;
   position: relative;
-}
-
-.copy-right {
-  text-align: center;
-  padding: 15px 15px 0;
-  direction: rtl;
-  line-height: 1.618;
-  position: absolute;
-  bottom: 15px;
-  z-index: 10;
-  color: #fff;
-}
-
-.copy-right p {
-  font-size: 12px;
-  font-weight: 200;
 }
 
 .image-header-profile img {
@@ -533,7 +518,10 @@ span.min {
         <div class="progress-upload-wrapper">
           <div class="progress">
             <div
-              class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+              class="
+                progress-bar progress-bar-striped progress-bar-animated
+                bg-success
+              "
               role="progressbar"
               :aria-valuenow="uploadPercentage"
               aria-valuemin="0"
@@ -653,10 +641,6 @@ span.min {
         <SwitchButtons />
         <HeaderMenuList />
       </section>
-
-      <div class="copy-right">
-        <p dir="rtl">تمام حقوق مادی و معنوی سایت متعلق به باسکول است.</p>
-      </div>
     </section>
 
     <HeaderTop
@@ -827,7 +811,7 @@ export default {
       var headerMenu = $(".header-menu span");
       var headerMenuLink = $(".header-menu a");
       var logo = $(".logo");
-      var copyRight = $(".copy-right");
+
       var rightHeaderDesktop = $(".right-header.desktop-header");
       var littleMainHeader = $(".main-header");
       var main = $("#main");
@@ -840,7 +824,7 @@ export default {
           headerMenuLink.css({
             "text-align": "right",
           });
-          copyRight.css("display", "block");
+
           headerMenu.css("display", "inline");
 
           menuCloseButtonIcon
@@ -861,7 +845,7 @@ export default {
           });
           profile.css("display", "none");
           headerMenu.css("display", "none");
-          copyRight.css("display", "none");
+
           logo.css("display", "none");
           headerMenuLink.css({
             "text-align": "center",

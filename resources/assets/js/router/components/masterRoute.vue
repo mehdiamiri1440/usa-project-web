@@ -55,6 +55,7 @@ export default {
     return {
       productByResponseRate: false,
       categoryList: "",
+      provinceList: "",
       modalSubCategory: false,
       mainSubCategories: "",
     };

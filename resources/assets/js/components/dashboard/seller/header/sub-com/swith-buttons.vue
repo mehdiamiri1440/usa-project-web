@@ -28,7 +28,7 @@
   font-size: 14px;
 }
 .label-radio:nth-of-type(2) {
-  margin-right: 10px;
+  margin-right: 6px;
 }
 
 .label-radio label {
@@ -174,9 +174,7 @@
           :name="mobile == 1 ? 'mobileMyRadio' : 'myRadio'"
           :checked="!isSwitch"
         />
-
         <span v-if="isSwitch" class="checkmark"> </span>
-
         <span v-else class="checkmark active">
           <i class="fa fa-check"></i>
         </span>
@@ -210,7 +208,6 @@
           <span>فروشنده</span>
         </label>
       </div>
-
       <div class="label-radio" :class="{ active: isSwitch }">
         <input
           type="radio"
@@ -219,13 +216,10 @@
           :checked="isSwitch"
           @click="switchRole()"
         />
-
         <span v-if="!isSwitch" class="checkmark"> </span>
-
         <span v-else class="checkmark active">
           <i class="fa fa-check"></i>
         </span>
-
         <label>
           <svg
             xmlns="http://www.w3.org/2000/svg"
