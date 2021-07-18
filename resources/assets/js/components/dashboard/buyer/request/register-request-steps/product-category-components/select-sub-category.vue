@@ -119,7 +119,7 @@ ul li.item button i {
 <template>
   <div>
     <h2 class="title-contents col-xs-12">
-      <img
+      <!-- <img
         v-if="$parent.categoryName == 'میوه'"
         src="../../../../../../../img/orange.svg"
       />
@@ -142,7 +142,7 @@ ul li.item button i {
       <img
         v-else-if="$parent.categoryName == 'دامپروری'"
         src="../../../../../../../img/bee.svg"
-      />
+      /> -->
       انتخاب دسته بندی محصول
     </h2>
 
