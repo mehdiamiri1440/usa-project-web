@@ -52,9 +52,9 @@ class Kernel extends ConsoleKernel
         $send_sms_notification_for_new_unread_messages_job = (new sendNewMessageSMSNotification())
             ->onQueue('sms');
 
-        // $schedule->job($send_sms_notification_for_new_unread_messages_job)
-        //     ->hourly()
-        //     ->between('9:00', '23:00');
+        $schedule->job($send_sms_notification_for_new_unread_messages_job)
+            ->hourly()
+            ->between('9:00', '23:00');
 
         $schedule->call(function () {
             DB::table('daily_sms_blacklists')->delete();
