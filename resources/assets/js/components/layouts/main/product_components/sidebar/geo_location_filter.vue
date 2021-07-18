@@ -253,6 +253,11 @@ export default {
     };
   },
   methods: {
+    init() {
+      if (this.provinceList) {
+        this.checkLocationFilter();
+      }
+    },
     filterProducts() {
       if (this.selectedCity) {
         this.$parent.provinceChild = this.selectedProvince;
@@ -319,6 +324,9 @@ export default {
         this.$parent.cityChild = this.selectedCity;
       });
     },
+  },
+  mounted() {
+    this.init();
   },
   watch: {
     provinceList(provinces) {

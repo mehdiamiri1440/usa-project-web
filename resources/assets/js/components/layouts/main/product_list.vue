@@ -547,7 +547,7 @@ filter modal styles
 }
 
 .modal-body {
-  padding: 0 15px;
+  padding: 0;
 }
 .form-check-wrapper button {
   width: 100%;
@@ -1013,7 +1013,7 @@ div.items-wrapper {
                   :subCategoryId="subCategoryId"
                   :categories="categoryList"
                   :resetLocation="resetLocation"
-                  :provinceList="provinceList"
+                  :provinceList="$parent.provinceList"
                 />
               </div>
             </div>
@@ -1618,7 +1618,7 @@ div.items-wrapper {
               :subCategoryId="subCategoryId"
               :categories="categoryList"
               :resetLocation="resetLocation"
-              :provinceList="provinceList"
+              :provinceList="$parent.provinceList"
             />
           </div>
         </div>
@@ -1683,7 +1683,6 @@ export default {
       listIsGrid: true,
       isMyProfile: false,
       modalSubCategory: false,
-      provinceList: "",
     };
   },
   methods: {
@@ -1708,7 +1707,9 @@ export default {
       }
     },
     init: function () {
-      this.getLocations();
+      if (!this.$parent.provinceList) {
+        this.getLocations();
+      }
       $(".modal").on("show.bs.modal", () => {
         this.handleBackKeys();
       });
@@ -2178,7 +2179,9 @@ export default {
     getLocations() {
       axios
         .post("/location/get_location_info", { cascade_list: true })
-        .then((response) => (this.provinceList = response.data.provinces));
+        .then(
+          (response) => (this.$parent.provinceList = response.data.provinces)
+        );
     },
   },
   watch: {
