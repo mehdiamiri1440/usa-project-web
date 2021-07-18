@@ -1231,6 +1231,7 @@ div.items-wrapper {
           class="mobile-category-item filter-item"
           @click.prevent="resetLocation = !resetLocation"
         >
+        <i class="fa fa-map-marker-alt"></i>
           <span v-if="city" v-text="city.city_name"> </span>
           <span v-else-if="province" v-text="province.province_name"> </span>
           <i class="fa fa-times"></i>
@@ -1337,6 +1338,7 @@ div.items-wrapper {
                 class="mobile-category-item filter-item"
                 @click.prevent="resetLocation = !resetLocation"
               >
+              <i class="fa fa-map-marker-alt"></i>
                 <span v-if="city" v-text="city.city_name"> </span>
                 <span v-else-if="province" v-text="province.province_name">
                 </span>
