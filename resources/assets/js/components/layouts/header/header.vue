@@ -150,6 +150,14 @@ button.open-categories {
 .custom-mega-menu .col-xs-12 {
   padding: 0 10px;
 }
+/* 
+.custom-mega-menu .col-xs-12 > div {
+  height: 160px;
+  float: right;
+  width: 100%;
+  display: flex;
+  flex-flow: column wrap;
+} */
 
 .custom-mega-menu ul {
   position: absolute;
@@ -382,6 +390,7 @@ nav .green-button-alt {
   overflow-y: auto;
   display: none;
   height: 0;
+  padding-bottom: 30px;
 }
 
 .buskool-sub-menu .navbar-right > li > a:hover + ul,
@@ -392,7 +401,8 @@ nav .green-button-alt {
 
 .buskool-sub-menu .navbar-right > li > ul {
   position: absolute;
-  width: 600px;
+  /* width: 600px; */
+  width: 450px;
   background: #fff;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
   border-radius: 0 0 12px 12px;
@@ -400,8 +410,10 @@ nav .green-button-alt {
   height: initial;
 }
 
-.buskool-sub-menu .navbar-right > li > ul > li {
-  padding: 0 5px 10px;
+.buskool-sub-menu .navbar-right > li > ul > li > ul {
+  /* display: flex;
+  flex-flow: column wrap;
+  height: 160px; */
 }
 
 .buskool-sub-menu {
@@ -438,36 +450,36 @@ nav .green-button-alt {
 button.menu-title {
   font-size: 16px;
   color: #444;
-  padding: 13px 0;
+  padding: 25px 0 0;
   font-weight: 500;
   width: 100%;
-  display: flex;
-  justify-content: space-between;
+  /* display: flex;
+  justify-content: space-between; */
   background: none;
   border: none;
+  text-align: right;
 }
 
 button.menu-title hr {
   background: #e0e0e0;
-  margin: 11px 8px;
-  flex: 1;
+  margin: 7px 0;
   border: none;
   height: 1px;
   position: relative;
 }
 
-button.menu-title hr::after {
+/* button.menu-title hr::after {
   content: "";
   position: absolute;
-  width: 45px;
+  width: 35px;
   background: #00c569;
-  height: 3px;
-  top: -2px;
+  height: 2px;
+  top: -1px;
   right: 0;
   border-radius: 5px;
-}
+} */
 a.sub-menu-title {
-  font-size: 15px;
+  font-size: 14px;
   color: #707070;
   display: block;
   padding: 10px 0;
@@ -1749,30 +1761,18 @@ export default {
     },
 
     setMenuClass(categories, bigScreen) {
-      let categoryLength = Object.keys(categories.subcategories).length;
-      if (categoryLength <= 5) {
-        if (bigScreen) {
-          return "col-sm-3";
-        } else {
-          return "col-sm-4";
-        }
-      } else if (categoryLength <= 10) {
-        return "col-sm-6";
-      }
+      // let categoryLength = Object.keys(categories.subcategories).length;
+      // if (categoryLength <= 10) {
+      //   return "col-sm-6";
+      // }
     },
     setSubMenuClass(categories, bigScreen) {
-      let categoryLength = Object.keys(categories.subcategories).length;
-      if (categoryLength <= 5) {
-        return "col-sm-12";
-      } else if (categoryLength <= 10) {
-        return "col-sm-6";
-      } else {
-        if (bigScreen) {
-          return "col-sm-3";
-        } else {
-          return "col-sm-4";
-        }
-      }
+      // let categoryLength = Object.keys(categories.subcategories).length;
+      // if (categoryLength <= 10) {
+      //   return "col-sm-6";
+      // } else {
+      return "col-sm-4";
+      // }
     },
     handelScroll() {
       // scroll handeling hide in web
