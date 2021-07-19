@@ -785,6 +785,9 @@ class buyAd_controller extends Controller
                                 return false;
                             }
 
+                            $word = str_replace("\\","",$word);
+                            $word = str_replace("/","",$word);
+
                             return preg_match("/$word/", $buyAd->name) && $buyAd->category_id == $product->category_id && $buyAd->myuser_id != $user->id;
                         });
                     }

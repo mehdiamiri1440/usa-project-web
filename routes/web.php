@@ -17,6 +17,7 @@ use App\Models\profile;
 use Illuminate\Http\Request;
 
 use App\Jobs\sendSMS;
+use App\Jobs\LeadHandler\LeadDistributorBot;
 
 
 Route::get('/product-list',[
@@ -1118,6 +1119,10 @@ Route::group(['prefix' => 'admin', 'middleware' => [admin_login::class]], functi
     Route::get('/clear-storage-cache',[
         'uses' => 'admin_panel\admin_user_controller@clear_categories_cached_file',
     ]);
+
+    Route::get('/d-leads',function(){
+        LeadDistributorBot::dispatch();
+    });
     
 });
 
