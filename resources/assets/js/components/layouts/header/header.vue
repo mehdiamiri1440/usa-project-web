@@ -1213,7 +1213,7 @@ a.profile-info-wrapper:hover {
             </li>
             <li class="hidden-xs">
               <router-link
-                v-if="is_seller"
+                v-if="is_seller == 1"
                 class="green-button"
                 :to="{ name: 'messagesSeller' }"
               >
