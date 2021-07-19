@@ -280,6 +280,10 @@ class admin_sellAd_controller extends Controller
         $sellAd_id = $request->sellAd_id;
         
         $sellAd_record = product::find($sellAd_id);
+
+        if(is_null($sellAd_record)){
+            return redirect()->route('admin_panel_sellAd_list');
+        }
         
         foreach($this->sellAd_editable_fields as $field_name)
         {
