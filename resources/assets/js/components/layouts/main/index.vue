@@ -133,6 +133,7 @@ i {
 
   position: relative;
   background-color: #404b55;
+  z-index: 2;
 }
 
 #intro h1 {
@@ -1013,10 +1014,13 @@ i {
   padding: 0 3px;
 }
 
-.custom-mega-menu .col-xs-12 {
-  padding: 0 10px;
+.custom-mega-menu .col-xs-12 > div {
+  /* height: 170px; */
+  float: right;
+  width: 100%;
+  /* display: flex;
+  flex-flow: column wrap; */
 }
-
 .custom-mega-menu ul {
   position: absolute;
   margin: 0;
@@ -1056,7 +1060,7 @@ i {
 }
 
 .custom-mega-menu .lvl2-wrapper {
-  box-shadow: -5px 7px 9px rgba(0, 0, 0, 0.02);
+  box-shadow: 0 7px 9px rgba(0, 0, 0, 0.02);
   border-radius: 0 0 12px 12px;
   padding-bottom: 25px;
   min-height: calc(100% + 20px);
@@ -1109,37 +1113,36 @@ button.open-categories {
 button.menu-title {
   font-size: 16px;
   color: #444;
-  padding: 13px 0;
+  padding: 25px 0 0;
   font-weight: 500;
   width: 100%;
-  display: flex;
-  justify-content: space-between;
+  /* display: flex;
+  justify-content: space-between; */
   background: none;
   border: none;
+  text-align: right;
 }
 
 button.menu-title hr {
   background: #e0e0e0;
-  margin: 11px 8px;
-  flex: 1;
+  margin: 7px 0;
   border: none;
   height: 1px;
   position: relative;
 }
 
-button.menu-title hr::after {
+/* button.menu-title hr::after {
   content: "";
   position: absolute;
-  width: 45px;
+  width: 35px;
   background: #00c569;
-  height: 3px;
-  top: -2px;
+  height: 2px;
+  top: -1px;
   right: 0;
   border-radius: 5px;
-}
-
+} */
 a.sub-menu-title {
-  font-size: 15px;
+  font-size: 14px;
   color: #707070;
   display: block;
   padding: 10px 0;
@@ -2793,30 +2796,18 @@ export default {
       return el.offset().top;
     },
     setMenuClass(categories, bigScreen) {
-      let categoryLength = Object.keys(categories.subcategories).length;
-      if (categoryLength <= 5) {
-        if (bigScreen) {
-          return "col-sm-3";
-        } else {
-          return "col-sm-4";
-        }
-      } else if (categoryLength <= 10) {
-        return "col-sm-6";
-      }
+      // let categoryLength = Object.keys(categories.subcategories).length;
+      // if (categoryLength <= 10) {
+      //   return "col-sm-6";
+      // }
     },
     setSubMenuClass(categories, bigScreen) {
-      let categoryLength = Object.keys(categories.subcategories).length;
-      if (categoryLength <= 5) {
-        return "col-sm-12";
-      } else if (categoryLength <= 10) {
-        return "col-sm-6";
-      } else {
-        if (bigScreen) {
-          return "col-sm-3";
-        } else {
-          return "col-sm-4";
-        }
-      }
+      // let categoryLength = Object.keys(categories.subcategories).length;
+      // if (categoryLength <= 10) {
+      //   return "col-sm-6";
+      // } else {
+      return "col-sm-4";
+      // }
     },
     headerMenuStyles() {
       let lvl1 = $(".lvl1-list");

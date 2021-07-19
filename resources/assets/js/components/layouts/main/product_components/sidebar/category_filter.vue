@@ -308,6 +308,7 @@ hr {
             :to="getSubCategoryUrl(category)"
             v-if="selectedCategory == ''"
             class="default-category-title category-title"
+            data-dismiss="modal"
           >
             <span>
               {{ category.category_name }}
@@ -319,6 +320,7 @@ hr {
             :to="getSubCategoryUrl(category)"
             v-else
             class="default-category-title"
+            data-dismiss="modal"
           >
             <span v-text="category.category_name"></span>
             <i class="fa fa-angle-left"></i>
@@ -339,6 +341,7 @@ hr {
               <router-link
                 :to="getSubCategoryUrl(subCategory)"
                 class="category-title"
+                data-dismiss="modal"
               >
                 <span v-text="subCategory.category_name"></span>
               </router-link>
@@ -351,6 +354,7 @@ hr {
                     :class="{ active: item.category_name == getCategoryName() }"
                     :to="getSubCategoryUrl(item)"
                     v-text="item.category_name"
+                    data-dismiss="modal"
                   ></router-link>
                 </li>
               </ul>
