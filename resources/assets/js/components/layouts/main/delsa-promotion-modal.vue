@@ -69,6 +69,7 @@
 
 .modal-contents h3 {
   font-size: 22px;
+  direction: rtl;
   color: #374761;
   margin-top: 8px;
 }

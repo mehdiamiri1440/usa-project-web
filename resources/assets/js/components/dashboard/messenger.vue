@@ -911,13 +911,23 @@ export default {
         return false;
       }
     },
+    handleBackKeys: function () {
+      if (window.history.state) {
+        history.pushState(null, null, window.location);
+      }
+      $(window).on("popstate", function (e) {
+        $(".modal").modal("hide");
+      });
+    },
     handleBackBtnClickOnDevices: function () {
       var self = this;
       if (window.history.state) {
         history.pushState(null, null, window.location);
       }
       $(window).on("popstate", function (e) {
-        if (self.isDeviceMobile()) {
+        let delsaModal = $("#delsa-promotion-modal").hasClass("in");
+
+        if (self.isDeviceMobile() && !delsaModal) {
           if (
             window.location.pathname == "/seller/messenger/contacts" ||
             window.location.pathname == "/buyer/messenger/contacts"
@@ -1015,6 +1025,9 @@ export default {
     },
     openDelasModal() {
       $("#delsa-promotion-modal").modal("show");
+      $("#delsa-promotion-modal").on("shown.bs.modal", (e) => {
+        this.handleBackKeys();
+      });
     },
   },
 

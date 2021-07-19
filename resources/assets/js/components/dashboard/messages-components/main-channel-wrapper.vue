@@ -10,7 +10,7 @@
   position: relative;
   align-items: center;
   z-index: 1;
-  margin-top: 20%;
+  margin-top: 120px;
 }
 
 .loading-container .lds-ring {
