@@ -196,6 +196,15 @@ button.send-message-button {
 .default-carousel-item .box-content {
   margin-bottom: 15px;
 }
+
+.spinner-border {
+  width: 1.5rem;
+  height: 1.5rem;
+  top: -8px;
+  position: relative;
+  left: 2px;
+}
+
 @media screen and (max-width: 1199px) {
   .box-title {
     margin: 0 auto 15px;
