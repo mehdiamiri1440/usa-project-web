@@ -132,7 +132,8 @@ i {
 
 #intro h1 {
   margin-top: 18px;
-  margin-bottom: 6px;
+  font-size: 30px;
+  margin-bottom: 16px;
 }
 
 #intro h1,
@@ -142,6 +143,35 @@ i {
 
 #intro h2 {
   margin-bottom: 16px;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+#intro .custom-mega-menu ul {
+  position: absolute;
+  margin: 0;
+  list-style: none;
+  z-index: 2;
+}
+
+#intro button.open-categories {
+  background: #eee;
+  color: #313a43;
+  font-weight: 400;
+  padding: 11px 15px;
+  font-size: 16px;
+  border: none;
+  border-radius: 0 12px 12px 0;
+  position: relative;
+  line-height: 27px;
+  max-width: 143px;
+  direction: rtl;
+}
+
+#intro button.open-categories i {
+  position: relative;
+  top: 1px;
+  padding: 0 2px;
 }
 
 .search-wrapper {
@@ -153,42 +183,36 @@ i {
 }
 
 .hero-search-input {
-  display: inline-block;
+  display: block;
   min-width: 455px;
-  overflow: hidden;
   position: relative;
   border-radius: 8px;
+  margin: 35px auto 0;
+  max-width: 670px;
 }
 
 .hero-search-input input {
-  padding: 9px 15px 8px;
-  border-radius: 0 4px 4px 0;
+  padding: 11px 162px 11px 15px;
+  border-radius: 12px;
   margin: 0;
   float: right;
   border: none;
-  width: calc(100% - 20px);
+  font-size: 16px;
+  line-height: 27px;
 }
 
-.hero-search-input button {
-  transition: 300ms;
-
+.hero-search-input > button {
+  transition: .3s;
   border: none;
-
   margin: 0;
-
-  padding: 8px 15px 11px;
-
-  color: #fff;
-
-  background: #1da1f2;
-
-  border-radius: 4px 0 0 4px;
-
+  padding: 12px 20px 5px;
+  color: #868686;
+  background: none;
+  border-radius: 8px 0 0 8px;
   position: absolute;
-
   left: 0;
-
   top: 0;
+  font-size: 20px;
 }
 
 .hero-search-input button:hover {
@@ -204,15 +228,18 @@ i {
 }
 
 #intro a.green-button {
-  font-size: 17px;
+  font-size: 20px;
   margin: 0 auto;
-  width: initial;
-  padding: 6px 33px 11px;
+  width: auto;
+  padding: 13px 33px;
   font-weight: 400;
   line-height: 1;
-  border-radius: 8px;
+  border-radius: 12px;
   margin-top: 62px;
   margin-bottom: 30px;
+  display: inline-block;
+  color: #fff;
+  background: #00c569;
 }
 
 #intro a.green-button i {
@@ -283,6 +310,12 @@ i {
   margin-top: 20px;
   border: 1px solid #ddd;
   transition: 150ms;
+}
+
+.green-button {
+  display: inline-block;
+  background: #00c569;
+  color: #fff;
 }
 
 .product-link.green-button {

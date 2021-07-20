@@ -1,52 +1,6 @@
 <div>
  
 
-    <div class="container">
-      <div
-        id="categories-modal"
-        class="categories-modal modal fade"
-        tabindex="-1"
-        role="dialog"
-      >
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <a class="close-modal" @click.prevent="closeModal()">
-                <i class="fa fa-times"></i>
-              </a>
-
-              <div class="modal-title">
-                <span> دسته بندی ها </span>
-              </div>
-            </div>
-            <div class="modal-body col-xs-12">
-              <ul class="form-check-wrapper" v-if="!isCategories">
-                <li v-for="(item, index) in categoryModalList" :key="index">
-                  <button
-                    @click.prevent="routeCategories(item.category_name)"
-                    class="default-button-list"
-                    v-text="item.category_name"
-                  ></button>
-                  <i class="fa fa-angle-left"></i>
-                </li>
-              </ul>
-              <ul class="form-check-wrapper" v-else>
-                <li v-for="(item, index) in categoryModalList" :key="index">
-                  <button
-                    class="default-button-list"
-                    @click.prevent="activeSubCategories(item.id)"
-                    v-text="item.category_name"
-                  ></button>
-                  <i class="fa fa-angle-left"></i>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-      </div>
-    </div>
 
     <!-- =========================
         Intro SECTION
@@ -56,10 +10,10 @@
       <!-- <div class="particle-network-animation"></div> -->
       <div class="container">
         <div class="row">
-          <div class="col-xs-12 pull-left col-md-9">
+          <div class="col-xs-12">
             <div name="fadeIn">
               <h1 class="intro-site-title">
-                باسکول | بازار خرید و فروش عمده محصولات کشاورزی
+                باسکول | بازار خرید و فروش عمده محصولات غذایی و کشاورزی
               </h1>
             </div>
 
@@ -73,12 +27,30 @@
               :begin="false"
             >
               <h2 class="intro-site-title">
-                ارتباط مستقیم با خریداران و فروشندگان عمده محصولات کشاورزی
+                ارتباط مستقیم با خریداران و فروشندگان عمده محصولات غذایی و
+                کشاورزی
               </h2>
             </div>
 
             <div class="search-wrapper">
               <div class="hero-search-input">
+                <nav class="custom-mega-menu hidden-xs">
+                  <ul>
+                    <li>
+                      <button
+                        @click.prevent="openFilterModal(false)"
+                        class="open-categories hidden-lg"
+                      >
+                        <span> همه محصولات </span>
+                        <i class="fa fa-angle-down"></i>
+                      </button>
+                      <button class="open-categories hidden-sm hidden-md">
+                        <span> همه محصولات </span>
+                        <i class="fa fa-angle-down"></i>
+                      </button>
+                    </li>
+                  </ul>
+                </nav>
                 <input
                   type="text"
                   placeholder="محصول مورد نظر خود را جستجو کنید"
@@ -86,112 +58,17 @@
                 />
                 <button
                   class="hidden-sm hidden-md hidden-lg fa fa-search"
-                  @click="search"
                 ></button>
 
-                <button class="hidden-xs" @click="search">
+                <button class="hidden-xs" >
                   <i class="fa fa-search"></i>
-                  جستجو
                 </button>
               </div>
 
-              <a :to="{ name: 'productList' }" class="green-button"
-                >شروع خرید و فروش عمده
+              <a href="/product-list" class="green-button">
+                لیست محصولات
                 <i class="fa fa-angle-left"></i>
               </a>
-            </div>
-          </div>
-          <div class="col-xs-12 hidden-xs hidden-sm col-md-3">
-            <div class="web-category-wrapper">
-              <div class="section-title">دسته بندی ها</div>
-              <ul  id="web-categories">
-                <li
-                >
-                  <ul class="sub-categories-wrapper" :data-index="index">
-                    <li
-                      class="col-md-3 pull-right"
-                    >
-                      <a
-                      class="sub-category-item"
-                      >
-                    سیب
-                    </a>
-                    </li>
-                    <li
-                      class="col-md-3 pull-right"
-                    >
-                      <a
-                      class="sub-category-item"
-                      >
-                    خیار
-                    </a>
-                    </li>
-                    <li
-                      class="col-md-3 pull-right"
-                    >
-                      <a
-                      class="sub-category-item"
-                      >
-                    هویج
-                    </a>
-                    </li>
-                  </ul>
-                  <button>
-                    <span >
-                      میوه
-                    </span>
-
-                    <i class="fa fa-angle-left"></i>
-                  </button>
-                </li>
-                <li
-                >
-                  <ul class="sub-categories-wrapper" :data-index="index">
-                    <li
-                      class="col-md-3 pull-right"
-                    >
-                      <a
-                      class="sub-category-item"
-                      >
-                    سیب
-                    </a>
-                    </li>
-                    <li
-                      class="col-md-3 pull-right"
-                    >
-                      <a
-                      class="sub-category-item"
-                      >
-                    خیار
-                    </a>
-                    </li>
-                    <li
-                      class="col-md-3 pull-right"
-                    >
-                      <a
-                      class="sub-category-item"
-                      >
-                    هویج
-                    </a>
-                    </li>
-                  </ul>
-                  <button>
-                    <span >
-                      صیفی
-                    </span>
-
-                    <i class="fa fa-angle-left"></i>
-                  </button>
-                </li>
-              </ul>
-              <button
-                class="load-more-categories"
-              >
-                <span>دسته های بیشتر</span>
-                <i
-                  class="fa fa-angle-down"
-                ></i>
-              </button>
             </div>
           </div>
         </div>
@@ -588,7 +465,7 @@
                 عمده هم اکنون ثبت نام کنید
               </p>
 
-              <a class="green-button" :to="{ name: 'register' }"
+              <a class="green-button" href="/register"
                 >ثبت نام رایگان
                 <i class="fa fa-angle-left"></i>
               </a>
