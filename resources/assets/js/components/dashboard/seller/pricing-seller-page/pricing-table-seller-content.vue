@@ -1,4 +1,6 @@
 <style scoped>
+@import url("../../../../../css/owl.carousel.min.css");
+
 .item-action .green-button {
   padding: 10px 35px;
   margin: 0 auto 15px;
@@ -514,6 +516,8 @@
 <script>
 import pricingUserCarousel from "./pricing-user-carousel";
 import pricingContents from "./pricing-tables/pricing-package-contents";
+import swal from "../../../../sweetalert.min.js";
+
 export default {
   props: ["offerTime"],
   components: { pricingUserCarousel, pricingContents },

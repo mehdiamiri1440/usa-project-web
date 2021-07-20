@@ -61,7 +61,6 @@
                   <input type="submit" class="btn btn-primary" value="برو">
                 </div>
               </div>
-              
             </form>
             <div class="box-body">
               <table id="example1" class="table table-bordered table-striped">
@@ -75,6 +74,7 @@
                   <th>تلفن</th>
                   <th>نوع عضوبت</th>
                   <th>آی دی</th>
+                  <th>دیگر حساب ها</th>
                   <th>بلاک</th>
                 </tr>
                 </thead>
@@ -97,6 +97,9 @@
                           <td>ویژه</td>
                         @endif
                         <td>{{$user->id}}</td>
+                        <td>
+                          <a href="{{route('admin_panel_same_device_users_list',['user_id' => $user->id])}}">مشاهده</a>
+                        </td>
                         <td>
                             @if($user->is_blocked == false)
                                 <button class="btn btn-danger" id="{{$user->id}}" onclick="block_user(event)">بلاک کردن</button>

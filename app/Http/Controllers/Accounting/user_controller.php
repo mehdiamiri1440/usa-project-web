@@ -12,6 +12,7 @@ use App\Models\product;
 use App\Http\Controllers\Notification\sms_controller;
 use DB;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Cache;
 
 class user_controller extends Controller
 {
@@ -46,6 +47,8 @@ class user_controller extends Controller
 
         if ($user) {
             if($user->is_blocked == true){
+                $this->set_last_login_info($user,$request);
+
                 return response()->json([
                     'status' => false,
                     'msg' => 'حساب کاربری شما مسدود شده است. برای پیگیری با پشتیبانی باسکول تماس بگیرید.'
@@ -55,7 +58,7 @@ class user_controller extends Controller
             $user_confirmed_profile_record_status = $this->does_user_have_confirmed_profile_record($user->id);
 
             $this->set_user_session($user);
-            $this->set_last_login_info($user->id,$request);
+            $this->set_last_login_info($user,$request);
             $jwt_token = JWTAuth::fromUser($user,['exp' => Carbon::now()->addDays(7)->timestamp]);
 
             return response()->json([
@@ -101,8 +104,10 @@ class user_controller extends Controller
         ]);
     }
 
-    protected function set_last_login_info($user_id,&$request)
+    protected function set_last_login_info($user,&$request)
     {
+        $user_id = $user->id;
+
         if($request->has('client') && $request->client == 'mobile')
         {
             $last_login_client = 'mobile';
@@ -111,12 +116,88 @@ class user_controller extends Controller
             $last_login_client = 'web';
         }
 
+        $now = Carbon::now();
+
         DB::table('myusers')
             ->where('id',$user_id)
             ->update([
                 'last_login_client' => $last_login_client,
-                'last_login_date'   => Carbon::now()
+                'last_login_date'   => $now
             ]);
+        
+        if($request->has('device_id') && $request->has('client') && $request->client == 'mobile'){
+            $device_id = $request->device_id;
+        }
+        else{
+            $device_id = NULL;
+        }
+
+        if($user->is_seller == true){
+            $role = 'SELLER';
+        }
+        else{
+            $role = 'BUYER';
+        }
+        
+        if($request->filled('user_agent') && $request->has('plain') && $request->plain == false){
+            $user_agent = $request->user_agent;
+        }
+        else{
+            $user_agent = $request->server('HTTP_USER_AGENT');
+        }
+
+        $meta_data = [
+            'user_agent' => $user_agent,
+            'ip' => $request->server('REMOTE_ADDR'),
+            'device_id' => $device_id,
+            'created_at' => $now,
+            'updated_at' => $now,
+            'myuser_id' => $user_id,
+            'user_role' => $role
+        ];
+
+        DB::table('client_meta_datas')->insert($meta_data);
+
+        if(! is_null($device_id)){
+            if($user->is_blocked == false){
+                $this->block_user_if_already_has_been_blocked_on_this_device($device_id,$user_id);
+            }
+            else{
+                $this->block_previous_accounts_on_this_device($device_id);
+            }
+        }
+    }
+
+    protected function block_user_if_already_has_been_blocked_on_this_device($device_id,$user_id)
+    {
+        $already_blocked_users_count_on_this_device = DB::table('myusers')
+                                                        ->join('client_meta_datas','client_meta_datas.myuser_id','myusers.id')
+                                                        ->where('client_meta_datas.device_id',$device_id)
+                                                        ->where('myusers.is_blocked',true)
+                                                        ->get()
+                                                        ->count();
+
+        if($already_blocked_users_count_on_this_device > 0)
+        {
+            DB::table('myusers')->where('id',$user_id)
+                                    ->update(['is_blocked' => true]);
+
+            \Session::flush();
+            \Session::save();
+        }
+                                                        
+    }
+
+    protected function block_previous_accounts_on_this_device($device_id)
+    {
+        $blocking_user_ids = DB::table('client_meta_datas')
+                                ->where('device_id',$device_id)
+                                ->whereNotNull('device_id')
+                                ->distinct('myuser_id')
+                                ->pluck('myuser_id');
+
+        DB::table('myusers')->whereIn('id',$blocking_user_ids)
+                                ->update(['is_blocked' => true]);
     }
 
     public function does_user_name_already_exists(Request $request)
@@ -417,6 +498,8 @@ class user_controller extends Controller
 
             $user->is_seller = false;
             $user->is_buyer = true;
+
+            Cache::forget(md5('products-' . session('user_id')));
         }
         else if(session('is_buyer') == true){
             session([
@@ -426,6 +509,8 @@ class user_controller extends Controller
 
             $user->is_buyer  = false;
             $user->is_seller = true;
+
+            Cache::forget(md5('products-' . session('user_id')));
         }
 
         $user->save();

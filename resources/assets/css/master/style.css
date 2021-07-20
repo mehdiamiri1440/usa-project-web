@@ -670,13 +670,13 @@ select#bd-month-end-date-id option {
   font-weight: bold;
 }
 
+
 .imageuploadify {
   margin: 0;
-  border-radius: 5px;
-  border: 3px dashed #d2d2d2;
+  border-radius: 12px;
+  border: 2px dashed #d2d2d2;
   color: #333;
 }
-
 .file-uploads.file-uploads-html5 label {
   margin: 0;
 }
@@ -1226,10 +1226,16 @@ border: 1px solid #F0F0F1;
 
 /*index page global style */
 
-#intro {
+#intro.intro-web {
   background: url("../../../assets/img/hero-section.jpg");
+  background-position: center left;
   background-size: cover;
-  background-position: center right;
+}
+
+#intro.intro-mobile {
+  background: url("../../../assets/img/mobile/mobile-hero-section.jpg");
+  background-position: center center;
+  background-size: cover;
 }
 
 .title-page {
@@ -1382,6 +1388,38 @@ span.min {
   text-decoration: underline !important;
 }
 
+.main_popup_content .main-pop-up {
+  font-size: 15px;
+  line-height: 1.618;
+  margin-bottom: 15px;
+}
+
+
+.main_popup_content {
+  position: relative;
+  text-align: center;
+  background: #fff;
+  border-radius: 3px;
+  padding: 50px;
+  margin: 0;
+  direction: rtl;
+}
+.main_popup_content i.fa-times {
+  color: #fff;
+  position: absolute;
+  top: -16px;
+  right: -14px;
+  font-size: 18px;
+  background: rgba(0,0,0,0.6);
+  border-radius: 50px;
+  height: 30px;
+  width: 30px;
+  padding-top: 5px;
+}
+
+.swal-text:last-child{
+  margin-bottom: 0  !important;
+}
 
 @media screen and (max-width: 338px) {
   .custom-navbar .navbar-brand {

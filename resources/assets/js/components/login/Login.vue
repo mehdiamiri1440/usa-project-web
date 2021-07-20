@@ -40,7 +40,6 @@ span {
 
 #main {
   margin-top: 21px;
-  background: #f9f9f9;
 
   height: 100%;
 
@@ -202,11 +201,12 @@ input[type="number"]::-webkit-outer-spin-button {
 /*main contents styles */
 .main-contents {
   background: #fff;
-  border-radius: 9px;
+  border-radius: 12px;
   overflow: hidden;
   margin-top: 16px;
-  box-shadow: 0 0 10px #c5c5c5;
+  border: 1px solid #e0e0e0;
   height: 500px;
+  position: relative;
 }
 
 /*main content headers styles*/
@@ -361,7 +361,9 @@ input[type="number"]::-webkit-outer-spin-button {
               </header>
               <main class="col-xs-12">
                 <div class="row">
-                  <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2">
+                  <div
+                    class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2"
+                  >
                     <div class="wraper-main-contents row">
                       <loginPage v-if="currentStep == 1" />
 
@@ -392,7 +394,9 @@ input[type="number"]::-webkit-outer-spin-button {
               <img src @load="ImageLoaded" alt="alt" />
             </transition>
           </a>
-          <div class="text-loader text-muted">... در حال انتقال به پنل کاربری</div>
+          <div class="text-loader text-muted">
+            ... در حال انتقال به پنل کاربری
+          </div>
           <div v-show="!isImageLoad" class="lds-ring">
             <div></div>
             <div></div>
@@ -412,15 +416,16 @@ import { eventBus } from "../../router/router";
 import loginPage from "./login_steps/login_page";
 import ForgotPassword from "./login_steps/forgot_password";
 import VerifyCode from "./login_steps/verify_code";
+import device from "device-uuid/lib/device-uuid";
 
 export default {
   components: {
     loginPage,
     ForgotPassword,
-    VerifyCode
+    VerifyCode,
   },
   props: ["isUserLogin", "userType"],
-  data: function() {
+  data: function () {
     return {
       loginCheckerLoading: true,
       isImageLoad: false,
@@ -431,41 +436,48 @@ export default {
       step1: {
         phone: "",
         password: "",
-        msg: ""
+        msg: "",
       },
       step2: {
         phone: "",
         sendCode: true,
-        msg: ""
+        msg: "",
       },
       step3: {
         verification_code: "",
         msg: "",
-        reSendCode: false
+        reSendCode: false,
       },
       createPassword: false,
-      popUpMsg: ""
+      popUpMsg: "",
     };
   },
   methods: {
-    stopLoader: function() {
+    stopLoader: function () {
       eventBus.$emit("isLoading", false);
     },
-    goToStep: function(step) {
+    goToStep: function (step) {
       this.currentStep = step;
       this.scrollToTop();
     },
-    doLogin: function() {
+    doLogin: function () {
       var self = this;
 
       self.loginBtnLoading = true;
 
+      let deviceInfo = new device.DeviceUUID();
+      let deviceId = null;
+      if (deviceInfo.get()) {
+        deviceId = deviceInfo.get();
+      }
+
       axios
         .post("/dologin", {
           phone: this.step1.phone,
-          password: this.step1.password
+          password: this.step1.password,
+          device_id: deviceId,
         })
-        .then(function(response) {
+        .then(function (response) {
           if (response.data.status === true) {
             if (response.data.confirmed_profile_record === true) {
               if (
@@ -509,7 +521,7 @@ export default {
             );
           }
         })
-        .catch(function(err) {
+        .catch(function (err) {
           self.loginBtnLoading = false;
 
           self.errors = [];
@@ -521,7 +533,7 @@ export default {
           );
         });
     },
-    sendPhoneVerificationCode: function() {
+    sendPhoneVerificationCode: function () {
       this.step3.reSendCode = false;
       this.step2.sendCode = false;
       this.errors = [];
@@ -529,20 +541,20 @@ export default {
 
       axios
         .post("/send_phone_verification_code_for_password_reset", {
-          phone: this.toLatinNumbers(this.step2.phone)
+          phone: this.toLatinNumbers(this.step2.phone),
         })
-        .then(function(response) {
+        .then(function (response) {
           if (response.status === 200) {
             self.goToStep(3);
 
             self.step2.sendCode = true;
 
-            setTimeout(function() {
+            setTimeout(function () {
               self.step3.reSendCode = true;
             }, 60000);
           }
         })
-        .catch(function(err) {
+        .catch(function (err) {
           if (err.response.status === 500) {
             self.errors[0] = err.response.data.msg;
           } else {
@@ -552,16 +564,16 @@ export default {
           self.step2.sendCode = true;
         });
     },
-    verifyCode: function() {
+    verifyCode: function () {
       var self = this;
       this.showMsg = false;
       this.createPassword = true;
       axios
         .post("/reset_password", {
           phone: this.toLatinNumbers(this.step2.phone),
-          verification_code: this.toLatinNumbers(this.step3.verification_code)
+          verification_code: this.toLatinNumbers(this.step3.verification_code),
         })
-        .then(function(response) {
+        .then(function (response) {
           if (response.data.status === true) {
             self.errors = [];
 
@@ -575,54 +587,58 @@ export default {
             self.createPassword = false;
           }
         })
-        .catch(function(err) {
+        .catch(function (err) {
           self.errors = [];
           self.errors = err.response.data.errors;
         });
     },
-    loadImage: function() {
+    loadImage: function () {
       this.isImageLoad = false;
     },
-    ImageLoaded: function() {
+    ImageLoaded: function () {
       this.isImageLoad = true;
     },
-    toLatinNumbers: function(num) {
+    toLatinNumbers: function (num) {
       if (num == null) {
         return null;
       }
 
       return num
         .toString()
-        .replace(/[\u0660-\u0669]/g, function(c) {
+        .replace(/[\u0660-\u0669]/g, function (c) {
           return c.charCodeAt(0) - 0x0660;
         })
-        .replace(/[\u06f0-\u06f9]/g, function(c) {
+        .replace(/[\u06f0-\u06f9]/g, function (c) {
           return c.charCodeAt(0) - 0x06f0;
         });
     },
-    registerComponentStatistics: function(categoryName, actionName, labelName) {
+    registerComponentStatistics: function (
+      categoryName,
+      actionName,
+      labelName
+    ) {
       gtag("event", actionName, {
         event_category: categoryName,
-        event_label: labelName
+        event_label: labelName,
       });
     },
-    registerComponentExceptions: function(description, fatal = false) {
+    registerComponentExceptions: function (description, fatal = false) {
       gtag("event", "exception", {
         description: description,
-        fatal: fatal
+        fatal: fatal,
       });
     },
     scrollToTop() {
       window.scrollTo(0, 0);
     },
-    isOsIOS: function() {
+    isOsIOS: function () {
       var userAgent = window.navigator.userAgent.toLowerCase(),
         safari = /safari/.test(userAgent),
         ios = /iphone|ipod|ipad/.test(userAgent);
 
       return ios;
     },
-    isUserComeFromChatBoxOpen: function() {
+    isUserComeFromChatBoxOpen: function () {
       if (
         window.localStorage.getItem("contact") &&
         window.localStorage.getItem("pathname")
@@ -631,7 +647,7 @@ export default {
       }
       return false;
     },
-    returnUserToPreviousPageAndChatBox: function(userInfo) {
+    returnUserToPreviousPageAndChatBox: function (userInfo) {
       if (this.isUserInInquirySubmissionProcess()) {
         let contact = JSON.parse(window.localStorage.getItem("contact"));
         let msg = window.localStorage.getItem("msgToSend");
@@ -670,20 +686,20 @@ export default {
         this.redirectUserToPanel(userInfo);
       }
     },
-    redirectUserToPanel: function(userInfo) {
+    redirectUserToPanel: function (userInfo) {
       var self = this;
 
       if (userInfo.is_buyer) {
         axios
           .post("/get_total_unread_messages_for_current_user")
-          .then(function(response) {
+          .then(function (response) {
             if (response.data.msg_count) {
               window.location.href = "/buyer/messenger/contacts";
             } else {
               window.location.href = "/buyer/register-request";
             }
           })
-          .catch(function(err) {
+          .catch(function (err) {
             //
           });
 
@@ -698,13 +714,13 @@ export default {
       } else if (userInfo.is_seller) {
         axios
           .post("/get_total_unread_messages_for_current_user")
-          .then(function(response) {
+          .then(function (response) {
             if (response.data.msg_count) {
               window.location.href = "/seller/messenger/contacts";
             } else {
               axios
                 .post("/get_seller_dashboard_required_data")
-                .then(function(response) {
+                .then(function (response) {
                   if (response.data.confirmed_products_count !== 0) {
                     window.location.href = "/seller/buyAd-requests";
                   } else {
@@ -713,7 +729,7 @@ export default {
                 });
             }
           })
-          .catch(function(err) {
+          .catch(function (err) {
             //
           });
 
@@ -736,7 +752,7 @@ export default {
         );
       }
     },
-    isUserInInquirySubmissionProcess: function() {
+    isUserInInquirySubmissionProcess: function () {
       if (
         window.localStorage.getItem("contact") &&
         window.localStorage.getItem("msgToSend")
@@ -744,7 +760,7 @@ export default {
         return true;
       }
       return false;
-    }
+    },
   },
   created() {
     gtag("config", "UA-129398000-1", { page_path: "/login" });
@@ -752,7 +768,7 @@ export default {
 
     let userInfo = {
       is_buyer: !self.userType,
-      is_seller: self.userType
+      is_seller: self.userType,
     };
 
     if (self.isUserLogin && self.userType == 1) {
@@ -767,7 +783,7 @@ export default {
     } else {
       self.loginCheckerLoading = false;
     }
-    window.addEventListener("keydown", function(event) {
+    window.addEventListener("keydown", function (event) {
       if (window.location.pathname == "/login") {
         if (event.keyCode === 13) {
           self.doLogin();
@@ -775,7 +791,7 @@ export default {
       }
     });
   },
-  mounted: function() {
+  mounted: function () {
     var self = this;
     document.onreadystatechange = () => {
       if (document.readyState === "complete") {
@@ -783,7 +799,7 @@ export default {
       }
     };
   },
-  updated: function() {
+  updated: function () {
     this.$nextTick(this.stopLoader());
   },
   metaInfo() {
@@ -794,28 +810,29 @@ export default {
         {
           name: "description",
           content:
-            "خرید عمده و قیمت میوه | خرید عمده و قیمت غلات | خرید عمده و قیمت صیفی جات | خرید و قیمت عمده خشکبار"
+            "خرید عمده و قیمت میوه | خرید عمده و قیمت غلات | خرید عمده و قیمت صیفی جات | خرید و قیمت عمده خشکبار",
         },
         {
           name: "author",
-          content: "باسکول"
+          content: "باسکول",
         },
         {
           property: "og:description",
           content:
-            "مرجع تخصصی خرید و فروش عمده و قیمت محصولات کشاورزی ایران | صادرات محصولات کشاورزی"
+            "مرجع تخصصی خرید و فروش عمده و قیمت محصولات غذایی و کشاورزی ایران | صادرات محصولات غذایی و کشاورزی",
         },
         {
           property: "og:site_name",
-          content: "باسکول بازارآنلاین خرید و فروش محصولات کشاورزی ایران"
+          content:
+            "باسکول بازارآنلاین خرید و فروش محصولات غذایی و کشاورزی ایران",
         },
         {
           property: "og:title",
-          content: "باسکول | ورود"
-        }
-      ]
+          content: "باسکول | ورود",
+        },
+      ],
     };
-  }
+  },
 };
 </script>
 

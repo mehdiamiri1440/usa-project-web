@@ -1,4 +1,8 @@
 <style scoped>
+@import url("../../../../css/owl.carousel.min.css");
+@import url("../../../../css/magnific-popup.css");
+@import url("../../../../css/owl-product-items-style.css");
+
 /*general styles*/
 
 h1,
@@ -51,8 +55,8 @@ i {
   background: rgba(25, 102, 142, 0.4);
   background: radial-gradient(
     circle,
-    rgba(0, 0, 0, 0.3) 0%,
-    rgba(0, 0, 0, 0.6) 100%
+    rgba(0, 0, 0, 0.2) 0%,
+    rgba(0, 0, 0, 0.4) 100%
   );
   z-index: 0;
 }
@@ -129,20 +133,24 @@ i {
 
   position: relative;
   background-color: #404b55;
+  z-index: 2;
 }
 
 #intro h1 {
   margin-top: 18px;
-  margin-bottom: 6px;
+  font-size: 30px;
+  margin-bottom: 16px;
 }
 
 #intro h1,
 #intro h2 {
   color: #fff;
+  font-weight: bold;
 }
 
 #intro h2 {
   margin-bottom: 16px;
+  font-size: 15px;
 }
 
 .search-wrapper {
@@ -154,54 +162,37 @@ i {
 }
 
 .hero-search-input {
-  display: inline-block;
+  display: block;
   min-width: 455px;
-  overflow: hidden;
+  /* overflow: hidden; */
   position: relative;
   border-radius: 8px;
+  margin: 35px auto 0;
+  max-width: 670px;
 }
 
-.hero-search-input input {
-  padding: 9px 15px 8px;
-  border-radius: 0 4px 4px 0;
+.hero-search-input > input {
+  padding: 11px 162px 11px 15px;
+  border-radius: 12px;
   margin: 0;
   float: right;
   border: none;
-  width: calc(100% - 20px);
+  font-size: 16px;
+  line-height: 27px;
 }
 
-.hero-search-input button {
+.hero-search-input > button {
   transition: 300ms;
-
   border: none;
-
   margin: 0;
-
-  padding: 8px 15px 11px;
-
-  color: #fff;
-
-  background: #1da1f2;
-
-  border-radius: 4px 0 0 4px;
-
+  padding: 15px 20px 10px;
+  color: #868686;
+  background: none;
+  border-radius: 8px 0 0 8px;
   position: absolute;
-
   left: 0;
-
   top: 0;
-}
-
-.hero-search-input button:hover {
-  transition: 300ms;
-  padding-left: 18px;
-  padding-right: 18px;
-}
-
-.hero-search-input button:before {
-  position: relative;
-
-  top: 2px;
+  font-size: 20px;
 }
 
 .main-cta-page {
@@ -216,13 +207,13 @@ i {
 }
 
 #intro a.green-button {
-  font-size: 17px;
+  font-size: 20px;
   margin: 0 auto;
   width: initial;
-  padding: 6px 33px 11px;
+  padding: 13px 33px;
   font-weight: 400;
   line-height: 1;
-  border-radius: 8px;
+  border-radius: 12px;
   margin-top: 62px;
   margin-bottom: 30px;
 }
@@ -311,131 +302,6 @@ i {
   position: relative;
   top: 3px;
   right: 5px;
-}
-
-nav {
-  position: relative;
-}
-
-nav li {
-  opacity: 0;
-
-  cursor: pointer;
-}
-
-nav li.active > h2 a:before {
-  content: " ";
-
-  background: #00c569;
-
-  width: 100%;
-
-  display: block;
-
-  position: absolute;
-
-  left: 0;
-
-  bottom: 0;
-
-  height: 3px;
-}
-
-nav li.active > h2 a:after {
-  content: " ";
-
-  display: inline-block;
-
-  width: 0;
-
-  height: 0;
-
-  border-style: solid;
-
-  border-width: 8px 8px 0 8px;
-
-  border-color: #00c569 transparent transparent transparent;
-
-  position: absolute;
-
-  bottom: -8px;
-
-  left: calc(50% - 8px);
-
-  z-index: 1001;
-}
-
-nav li > ul {
-  position: absolute;
-
-  pointer-events: none;
-
-  left: 0;
-
-  opacity: 0;
-
-  transition: 500ms;
-
-  border: 1px solid #f1f1f1;
-}
-
-nav > ul > li {
-  opacity: 1;
-
-  padding: 0;
-
-  direction: ltr;
-
-  transition: 500ms;
-}
-
-li.active > ul {
-  opacity: 1;
-
-  pointer-events: initial;
-
-  background: #fff;
-
-  border-radius: 0 0 4px 4px;
-
-  box-shadow: 0 5px 6px rgba(0, 0, 0, 0.07);
-
-  padding: 20px 15px;
-
-  z-index: 1000;
-}
-
-li.active > ul > li,
-ul:hover > li {
-  opacity: 1;
-}
-
-nav > ul > li li ul {
-  transform: translateX(100%);
-  top: 0;
-  right: 0;
-}
-
-nav > ul > li > ul > li {
-  transition: transform 0.4s, opacity 0.4s;
-  transform: translateY(150%);
-  opacity: 0;
-}
-
-nav > ul > li.active > ul > li {
-  transform: translateY(0%);
-  opacity: 1;
-}
-
-li > ul > li > ul > li {
-  transition: transform 0.4s, opacity 0.4s;
-  transform: translateX(195px) translateY(0%);
-  opacity: 0;
-}
-
-li > ul > li.active > ul > li {
-  transform: translateX(0) translateY(0%);
-  opacity: 1;
 }
 
 .default-item.carousel-item {
@@ -676,9 +542,15 @@ li > ul > li.active > ul > li {
 }
 
 .box-image img {
-  width: initial;
+  width: 100px;
 
-  height: 100%;
+  height: 80px;
+}
+
+.box-image.logo img {
+  width: 200px;
+
+  height: 80px;
 }
 
 .service-box {
@@ -1028,9 +900,6 @@ li > ul > li.active > ul > li {
 /* categories modal styles 
 ******************************************/
 
-.modal-dialog {
-  width: 400px;
-}
 .modal-content {
   overflow: hidden;
   border-radius: 12px;
@@ -1061,10 +930,6 @@ li > ul > li.active > ul > li {
 
 .modal-header {
   padding: 9px 15px 10px;
-}
-
-.modal-body {
-  padding: 0 15px;
 }
 
 .form-check-wrapper {
@@ -1111,9 +976,6 @@ li > ul > li.active > ul > li {
   position: relative;
 }
 
-.form-check-wrapper li:last-of-type button {
-  border: none;
-}
 .form-check-wrapper li i {
   position: absolute;
 
@@ -1142,7 +1004,7 @@ li > ul > li.active > ul > li {
 }
 
 .main-contents-wrapper > p {
-  margin-top: 20px;
+  margin: 20px auto;
 }
 .main-contents-wrapper p:last-of-type {
   margin-bottom: 30px;
@@ -1150,6 +1012,148 @@ li > ul > li.active > ul > li {
 
 .items-wrapper {
   padding: 0 3px;
+}
+
+.custom-mega-menu .col-xs-12 > div {
+  /* height: 170px; */
+  float: right;
+  width: 100%;
+  /* display: flex;
+  flex-flow: column wrap; */
+}
+.custom-mega-menu ul {
+  position: absolute;
+  margin: 0;
+  list-style: none;
+  z-index: 2;
+}
+
+.custom-mega-menu li:hover > ul {
+  display: block;
+}
+
+.custom-mega-menu li:hover .open-categories {
+  border-bottom-right-radius: 0;
+}
+
+.custom-mega-menu ul ul {
+  position: absolute;
+  display: none;
+  margin: 0;
+  background: #fff;
+}
+.custom-mega-menu ul ul li {
+  display: block;
+}
+
+.custom-mega-menu ul ul ul {
+  position: absolute;
+  top: 0;
+  right: 100%;
+  width: 451px;
+}
+
+.custom-mega-menu .lvl1-wrapper {
+  background: none;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  border-bottom-right-radius: 12px;
+}
+
+.custom-mega-menu .lvl2-wrapper {
+  box-shadow: 0 7px 9px rgba(0, 0, 0, 0.02);
+  border-radius: 0 0 12px 12px;
+  padding-bottom: 25px;
+  min-height: calc(100% + 20px);
+}
+
+.custom-mega-menu .lvl2-wrapper > li > div > div {
+  padding: 0 3px;
+}
+
+.custom-mega-menu .lvl1-list > button {
+  border: none;
+  background: #fafafa;
+  padding: 10px 0;
+}
+
+.custom-mega-menu .lvl1-list > button:hover {
+  background: #eeeeee;
+}
+.custom-mega-menu .lvl1-list:last-of-type > button {
+  border-bottom-right-radius: 12px;
+}
+
+.category-name {
+  display: flex;
+  justify-content: space-around;
+}
+
+.search-input > button.open-categories span {
+  margin-left: 22px;
+}
+
+.search-input > button i:before {
+  position: relative;
+  left: 2px;
+  top: 3px;
+}
+
+button.open-categories {
+  background: #eee;
+  color: #313a43;
+  font-weight: 400;
+  padding: 11px 15px;
+  font-size: 16px;
+  border: none;
+  border-radius: 0 12px 12px 0;
+  position: relative;
+  line-height: 27px;
+}
+
+button.menu-title {
+  font-size: 16px;
+  color: #444;
+  padding: 25px 0 0;
+  font-weight: 500;
+  width: 100%;
+  /* display: flex;
+  justify-content: space-between; */
+  background: none;
+  border: none;
+  text-align: right;
+}
+
+button.menu-title hr {
+  background: #e0e0e0;
+  margin: 7px 0;
+  border: none;
+  height: 1px;
+  position: relative;
+}
+
+/* button.menu-title hr::after {
+  content: "";
+  position: absolute;
+  width: 35px;
+  background: #00c569;
+  height: 2px;
+  top: -1px;
+  right: 0;
+  border-radius: 5px;
+} */
+a.sub-menu-title {
+  font-size: 14px;
+  color: #707070;
+  display: block;
+  padding: 10px 0;
+  font-weight: 300;
+  transition: 300ms;
+  transform: translateX(0);
+}
+
+a.sub-menu-title:hover {
+  color: #21ad93;
+  transform: translateX(-5px);
 }
 
 @media screen and (max-width: 1199px) {
@@ -1172,11 +1176,23 @@ li > ul > li.active > ul > li {
   }
 }
 @media screen and (max-width: 767px) {
+  .hero-search-input > input {
+    padding: 11px 15px;
+  }
+  .form-check-wrapper li:last-of-type button {
+    border: none;
+  }
+  .modal-body {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
   .mobile-banner .banner-item-wrapper .banner-item p {
     height: 35px;
   }
   #intro {
     margin-top: 75px;
+    padding: 20px 0;
   }
   .hero-search-input {
     width: 100%;
@@ -1189,11 +1205,15 @@ li > ul > li.active > ul > li {
   }
 
   .hero-search-input button {
-    padding: 13px 15px 15px;
+    padding: 14px 20px 15px;
+  }
+
+  .hero-search-input button:hover {
+    padding: 14px 20px 15px;
   }
 
   #intro a.green-button {
-    margin: 0 auto;
+    margin: 15px auto;
 
     float: none !important;
   }
@@ -1222,22 +1242,6 @@ li > ul > li.active > ul > li {
     margin: 15px 0 0;
   }
 
-  #categories-modal > div {
-    margin: 0;
-    width: 100%;
-    height: 100%;
-  }
-  .modal-content {
-    min-height: 100%;
-
-    border-radius: 0;
-
-    border: none;
-
-    float: right;
-
-    width: 100%;
-  }
   .title-box p {
     text-align: center;
   }
@@ -1258,71 +1262,25 @@ li > ul > li.active > ul > li {
       </div>
     </div>
 
-    <div class="container">
-      <div
-        id="categories-modal"
-        class="categories-modal modal fade"
-        tabindex="-1"
-        role="dialog"
-      >
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <a href="#" class="close-modal" @click.prevent="closeModal()">
-                <i class="fa fa-times"></i>
-              </a>
-
-              <div class="modal-title">
-                <span> دسته بندی ها </span>
-              </div>
-            </div>
-            <div class="modal-body col-xs-12">
-              <ul class="form-check-wrapper" v-if="!isCategories">
-                <li
-                  v-for="(item, index) in categoryModalList"
-                  :key="item.category_name + index"
-                >
-                  <button
-                    @click.prevent="routeCategories(item.category_name)"
-                    class="default-button-list"
-                    v-text="item.category_name"
-                  ></button>
-                  <i class="fa fa-angle-left"></i>
-                </li>
-              </ul>
-              <ul class="form-check-wrapper" v-else>
-                <li
-                  v-for="(item, index) in categoryModalList"
-                  :key="item.category_name + index"
-                >
-                  <button
-                    class="default-button-list"
-                    @click.prevent="activeSubCategories(item.id)"
-                    v-text="item.category_name"
-                  ></button>
-                  <i class="fa fa-angle-left"></i>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-      </div>
-    </div>
-
     <!-- =========================
         Intro SECTION
     ==============================-->
 
-    <section id="intro" class="container-fluid">
+    <section
+      id="intro"
+      class="container-fluid"
+      :class="{
+        'intro-web': !checkIsMobile(),
+        'intro-mobile': checkIsMobile(),
+      }"
+    >
       <!-- <div class="particle-network-animation"></div> -->
       <div class="container">
         <div class="row">
-          <div class="col-xs-12 col-md-9">
+          <div class="col-xs-12">
             <div name="fadeIn">
               <h1 class="intro-site-title">
-                باسکول | بازار خرید و فروش عمده محصولات کشاورزی
+                باسکول | بازار خرید و فروش عمده محصولات غذایی و کشاورزی
               </h1>
             </div>
 
@@ -1336,12 +1294,77 @@ li > ul > li.active > ul > li {
               :begin="false"
             >
               <h2 class="intro-site-title">
-                ارتباط مستقیم با خریداران و فروشندگان عمده محصولات کشاورزی
+                ارتباط مستقیم با خریداران و فروشندگان عمده محصولات غذایی و
+                کشاورزی
               </h2>
             </div>
 
             <div class="search-wrapper">
               <div class="hero-search-input">
+                <nav class="custom-mega-menu hidden-xs">
+                  <ul>
+                    <li>
+                      <button
+                        @click.prevent="openFilterModal(false)"
+                        class="open-categories hidden-lg"
+                      >
+                        <span> همه محصولات </span>
+                        <i class="fa fa-angle-down"></i>
+                      </button>
+                      <button class="open-categories hidden-sm hidden-md">
+                        <span> همه محصولات </span>
+                        <i class="fa fa-angle-down"></i>
+                      </button>
+                      <ul class="w-100 lvl1-wrapper hidden-sm hidden-md">
+                        <li
+                          class="w-100 lvl1-list"
+                          v-for="(category, index) in categoryList"
+                          :key="index"
+                        >
+                          <button class="w-100">
+                            <div class="category-name">
+                              <span v-text="category.category_name"></span>
+                              <i class="fa fa-angle-left"></i>
+                            </div>
+                          </button>
+                          <ul class="lvl2-wrapper">
+                            <li
+                              v-for="(
+                                subCategory, index
+                              ) in category.subcategories"
+                              :key="index + 'sub-menu'"
+                              class="col-xs-12 pull-right text-right"
+                              :class="[setMenuClass(subCategory, false)]"
+                            >
+                              <button class="menu-title">
+                                <span v-text="subCategory.category_name"></span>
+                                <hr />
+                              </button>
+
+                              <div>
+                                <div
+                                  v-for="(
+                                    item, index
+                                  ) in subCategory.subcategories"
+                                  :key="index + 'last-sub-menu'"
+                                  class="col-xs-12 pull-right"
+                                  :class="[setSubMenuClass(subCategory, false)]"
+                                >
+                                  <router-link
+                                    :to="getSubCategoryUrl(item.category_name)"
+                                    class="sub-menu-title"
+                                    v-text="item.category_name"
+                                  >
+                                  </router-link>
+                                </div>
+                              </div>
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </nav>
                 <input
                   type="text"
                   placeholder="محصول مورد نظر خود را جستجو کنید"
@@ -1354,69 +1377,13 @@ li > ul > li.active > ul > li {
 
                 <button class="hidden-xs" @click="search">
                   <i class="fa fa-search"></i>
-                  جستجو
                 </button>
               </div>
 
-              <router-link :to="{ name: 'productList' }" class="green-button"
-                >شروع خرید و فروش عمده
+              <router-link :to="{ name: 'productList' }" class="green-button">
+                لیست محصولات
                 <i class="fa fa-angle-left"></i>
               </router-link>
-            </div>
-          </div>
-          <div class="col-xs-12 hidden-xs hidden-sm col-md-3">
-            <div class="web-category-wrapper">
-              <div class="section-title">دسته بندی ها</div>
-              <ul v-if="categoryList.length" id="web-categories">
-                <li
-                  v-for="(category, index) in categoryList"
-                  :id="'menu-' + index"
-                  :key="'banner-category-' + index"
-                >
-                  <ul class="sub-categories-wrapper" :data-index="index">
-                    <li
-                      class="col-md-3 pull-right"
-                      v-for="(
-                        subCategory, subCategoryIndex
-                      ) in category.subcategories"
-                      :key="'banner-sub-category-' + subCategoryIndex"
-                    >
-                      <router-link
-                        class="sub-category-item"
-                        :to="getSubCategoryUrl(subCategory.category_name)"
-                        v-text="subCategory.category_name"
-                      ></router-link>
-                    </li>
-                  </ul>
-                  <button>
-                    <span v-text="category.category_name"></span>
-
-                    <i class="fa fa-angle-left"></i>
-                  </button>
-                </li>
-              </ul>
-              <ul v-else>
-                <li
-                  v-for="(category, index) in 6"
-                  :key="'placeholder-banner-category-' + index"
-                >
-                  <button>
-                    <span class="placeholder-content content-full-width"></span>
-                  </button>
-                </li>
-              </ul>
-              <button
-                v-if="categoryList.length > 6"
-                @click.prevent="collapseMenu()"
-                class="load-more-categories"
-              >
-                <span v-if="!this.isCollapse">دسته های بیشتر</span>
-                <span v-else>بستن</span>
-                <i
-                  class="fa fa-angle-down"
-                  :class="{ 'rotate-icon': this.isCollapse }"
-                ></i>
-              </button>
             </div>
           </div>
         </div>
@@ -1434,7 +1401,7 @@ li > ul > li.active > ul > li {
               <button
                 id="banner-item-1"
                 class="banner-item"
-                @click.prevent="openCategoriesModal(50)"
+                @click.prevent="openCategoriesModal('حبوبات')"
                 :style="{ backgroundImage: 'url(' + getImageUrl(7) + ')' }"
               >
                 <div class="banner-contents">
@@ -1450,7 +1417,7 @@ li > ul > li.active > ul > li {
               <button
                 id="banner-item-2"
                 class="banner-item"
-                @click.prevent="openCategoriesModal(1)"
+                @click.prevent="openCategoriesModal('میوه')"
                 :style="{ backgroundImage: 'url(' + getImageUrl(1) + ')' }"
               >
                 <div class="banner-contents">
@@ -1466,7 +1433,7 @@ li > ul > li.active > ul > li {
               <button
                 id="banner-item-3"
                 class="banner-item"
-                @click.prevent="openCategoriesModal(45)"
+                @click.prevent="openCategoriesModal('ادویه')"
                 :style="{ backgroundImage: 'url(' + getImageUrl(5) + ')' }"
               >
                 <div class="banner-contents">
@@ -1482,7 +1449,7 @@ li > ul > li.active > ul > li {
               <button
                 id="banner-item-4"
                 class="banner-item"
-                @click.prevent="openCategoriesModal(2)"
+                @click.prevent="openCategoriesModal('صیفی')"
                 :style="{ backgroundImage: 'url(' + getImageUrl(2) + ')' }"
               >
                 <div class="banner-contents">
@@ -1498,7 +1465,7 @@ li > ul > li.active > ul > li {
               <button
                 id="banner-item-5"
                 class="banner-item"
-                @click.prevent="openCategoriesModal(42)"
+                @click.prevent="openCategoriesModal('غلات')"
                 :style="{ backgroundImage: 'url(' + getImageUrl(3) + ')' }"
               >
                 <div class="banner-contents">
@@ -1514,7 +1481,7 @@ li > ul > li.active > ul > li {
               <button
                 id="banner-item-6"
                 class="banner-item"
-                @click.prevent="openCategoriesModal(44)"
+                @click.prevent="openCategoriesModal('خشکبار')"
                 :style="{ backgroundImage: 'url(' + getImageUrl(4) + ')' }"
               >
                 <div class="banner-contents">
@@ -1530,7 +1497,7 @@ li > ul > li.active > ul > li {
               <button
                 id="banner-item-7"
                 class="banner-item"
-                @click.prevent="openCategoriesModal(46)"
+                @click.prevent="openCategoriesModal('دامپروری')"
                 :style="{ backgroundImage: 'url(' + getImageUrl(6) + ')' }"
               >
                 <div class="banner-contents">
@@ -1561,25 +1528,29 @@ li > ul > li.active > ul > li {
           </div>
         </div>
       </div>
-      <div class="mobile-banner-wrapper hidden-md hidden-lg">
+      <div
+        v-if="checkIsMobile()"
+        class="mobile-banner-wrapper hidden-md hidden-lg"
+      >
         <div class="row">
           <div class="mobile-banner">
             <div class="banner-item-wrapper">
-              <div v-if="categoryList.length">
+              <div v-if="mobileCategoryList">
                 <div
                   class="col-xs-3 pull-right"
-                  v-for="(item, index) in categoryList"
+                  v-for="(item, index) in mobileCategoryList"
                   :key="'mobile-banner-category-' + index"
                   :class="{ hidden: index > 6 }"
                 >
                   <button
                     class="banner-item"
-                    @click.prevent="openCategoriesModal(item.id)"
+                    @click.prevent="openCategoriesModal(item.category_name)"
                   >
                     <div
                       class="item-image"
                       :style="{
-                        backgroundImage: 'url(' + getImageUrl(index + 1) + ')',
+                        backgroundImage:
+                          'url(' + getMobileImageUrl(index + 1) + ')',
                       }"
                     ></div>
                     <p class="item-text" v-text="item.category_name"></p>
@@ -1635,7 +1606,7 @@ li > ul > li.active > ul > li {
           <div class="col-xs-12 products-contents">
             <div v-if="lastProducts" class="row">
               <div class="hidden-sm hidden-md hidden-lg">
-                <div class="owl-carousel">
+                <div class="owl-carousel product-carousel">
                   <div
                     v-for="(product, productIndex) in lastProducts"
                     :key="'products-carousel-' + productIndex"
@@ -1645,6 +1616,7 @@ li > ul > li.active > ul > li {
                       :key="'product-item-' + product.id"
                       :last-product="product"
                       :str="str"
+                      :loadedProduct="showLatestProducts"
                     />
                   </div>
                 </div>
@@ -1662,6 +1634,7 @@ li > ul > li.active > ul > li {
                     :key="'product-item-' + product.id"
                     :last-product="product"
                     :str="str"
+                    :loadedProduct="showLatestProducts"
                   />
                 </div>
               </div>
@@ -1679,18 +1652,42 @@ li > ul > li.active > ul > li {
               >
                 <article class="carousel-item default-item col-xs-12">
                   <span
-                    class="default-index-product-image placeholder-content col-xs-12 pull-right"
+                    class="
+                      default-index-product-image
+                      placeholder-content
+                      col-xs-12
+                      pull-right
+                    "
                   ></span>
 
                   <span
-                    class="content-default-width placeholder-content margin-10 col-xs-10 col-xs-offset-1 pull-right"
+                    class="
+                      content-default-width
+                      placeholder-content
+                      margin-10
+                      col-xs-10 col-xs-offset-1
+                      pull-right
+                    "
                   ></span>
                   <span
-                    class="content-default-width placeholder-content col-xs-8 margin-10 col-xs-offset-2 pull-right"
+                    class="
+                      content-default-width
+                      placeholder-content
+                      col-xs-8
+                      margin-10
+                      col-xs-offset-2
+                      pull-right
+                    "
                   ></span>
 
                   <span
-                    class="content-default-width placeholder-content margin-10 col-xs-10 col-xs-offset-1 pull-right"
+                    class="
+                      content-default-width
+                      placeholder-content
+                      margin-10
+                      col-xs-10 col-xs-offset-1
+                      pull-right
+                    "
                   ></span>
 
                   <span class="margin-10"></span>
@@ -1738,8 +1735,8 @@ li > ul > li.active > ul > li {
           <div v-else class="title-box">
             <div class="section-title">ثبت نام خریداران</div>
             <p>
-              برای استعلام قیمت و خرید محصولات کشاورزی از بهترین فروشندگان عمده
-              هم اکنون ثبت نام کنید
+              برای استعلام قیمت و خرید محصولات غذایی و کشاورزی از بهترین
+              فروشندگان عمده هم اکنون ثبت نام کنید
             </p>
 
             <router-link class="green-button" :to="{ name: 'register' }"
@@ -1772,7 +1769,11 @@ li > ul > li.active > ul > li {
             </div>
 
             <div
-              class="owl-carousel hidden-sm hidden-md hidden-lg last-buyAds-carousel"
+              class="
+                owl-carousel
+                hidden-sm hidden-md hidden-lg
+                last-buyAds-carousel
+              "
             >
               <LandingPageBuyAds
                 :buyAd="buyAd"
@@ -1790,16 +1791,35 @@ li > ul > li.active > ul > li {
             >
               <article class="buyAds-placeholder">
                 <span
-                  class="content-default-width placeholder-content padding-10-0 margin-10 col-xs-6 col-xs-offset-3 pull-right"
+                  class="
+                    content-default-width
+                    placeholder-content
+                    padding-10-0
+                    margin-10
+                    col-xs-6 col-xs-offset-3
+                    pull-right
+                  "
                 ></span>
 
                 <span
-                  class="content-default-width placeholder-content padding-10-0 margin-10 col-xs-10 col-xs-offset-1"
+                  class="
+                    content-default-width
+                    placeholder-content
+                    padding-10-0
+                    margin-10
+                    col-xs-10 col-xs-offset-1
+                  "
                 ></span>
 
                 <div class="text-center">
                   <span
-                    class="content-default-width placeholder-content padding-10-0 margin-10 col-xs-6 col-xs-offset-3"
+                    class="
+                      content-default-width
+                      placeholder-content
+                      padding-10-0
+                      margin-10
+                      col-xs-6 col-xs-offset-3
+                    "
                   ></span>
                 </div>
               </article>
@@ -1846,8 +1866,8 @@ li > ul > li.active > ul > li {
           <div v-else class="title-box">
             <div class="section-title">ثبت نام فروشندگان</div>
             <p>
-              برای فروش بدون واسطه محصولات کشاورزی خود به خریداران مستقیم و
-              صادرکنندگان هم اکنون ثبت نام کنید
+              برای فروش بدون واسطه محصولات غذایی و کشاورزی خود به خریداران
+              مستقیم و صادرکنندگان هم اکنون ثبت نام کنید
             </p>
             <router-link
               v-if="!isUserLogin"
@@ -1863,7 +1883,7 @@ li > ul > li.active > ul > li {
     <section id="services-section" class="section-wrapper container">
       <div class="row">
         <h3 class="col-xs-12">
-          ارتباط مستقیم با خریداران و فروشندگان عمده محصولات کشاورزی
+          ارتباط مستقیم با خریداران و فروشندگان عمده محصولات غذایی و کشاورزی
         </h3>
 
         <div class="service-boxs-wrapper col-xs-12">
@@ -1871,12 +1891,15 @@ li > ul > li.active > ul > li {
             <div class="col-xs-12 col-md-4 hidden-md hidden-lg">
               <article class="service-box main-incobac-logo">
                 <router-link :to="{ name: 'help' }">
-                  <div class="box-image">
-                    <img src="../../../../img/logo/web-logo.svg" />
+                  <div class="box-image logo">
+                    <img
+                      loading="lazy"
+                      src="../../../../img/logo/web-logo.svg"
+                    />
                   </div>
                   <h4>باسکول چیست؟</h4>
                   <p>
-                    باسکول بازار خرید و فروش عمده محصولات کشاورزی
+                    باسکول بازار خرید و فروش عمده محصولات غذایی و کشاورزی
                     <br />است که خریداران را به فروشندگان عمده متصل کرده <br />و
                     خریداران و فروشندگان بدون واسطه می توانند با یکدیگر ارتباط
                     برقرار کنند
@@ -1889,7 +1912,7 @@ li > ul > li.active > ul > li {
               <article class="service-box">
                 <router-link :to="{ name: 'help' }">
                   <div class="box-image">
-                    <img src="../../../../img/seller.jpg" />
+                    <img loading="lazy" src="../../../../img/seller.jpg" />
                   </div>
                   <h4>خدمات فروشندگان</h4>
 
@@ -1907,12 +1930,15 @@ li > ul > li.active > ul > li {
             >
               <article class="service-box main-incobac-logo">
                 <router-link :to="{ name: 'help' }">
-                  <div class="box-image">
-                    <img src="../../../../img/logo/web-logo.svg" />
+                  <div class="box-image logo">
+                    <img
+                      loading="lazy"
+                      src="../../../../img/logo/web-logo.svg"
+                    />
                   </div>
                   <h4>باسکول چیست؟</h4>
                   <p>
-                    باسکول بازار خرید و فروش عمده محصولات کشاورزی
+                    باسکول بازار خرید و فروش عمده محصولات غذایی و کشاورزی
                     <br />است که خریداران را به فروشندگان عمده متصل کرده <br />و
                     خریداران و فروشندگان بدون واسطه می توانند با یکدیگر ارتباط
                     برقرار کنند
@@ -1925,7 +1951,7 @@ li > ul > li.active > ul > li {
               <article class="service-box">
                 <router-link :to="{ name: 'help' }">
                   <div class="box-image">
-                    <img src="../../../../img/buyer.jpg" />
+                    <img loading="lazy" src="../../../../img/buyer.jpg" />
                   </div>
                   <h4>خدمات خریداران</h4>
 
@@ -1948,7 +1974,11 @@ li > ul > li.active > ul > li {
       class="container"
       v-if="userType != 1"
     >
-      <main-register-request-form wrapper-bg="true" />
+      <main-register-request-form
+        wrapper-bg="true"
+        :is-user-login="isUserLogin"
+        :categoryList="categoryList"
+      />
     </section>
 
     <section id="main-contents-section" class="container">
@@ -2046,41 +2076,41 @@ li > ul > li.active > ul > li {
               شناخته شده است و روزانه هزاران فروشنده عمده در این سایت به فعالیت
               میپردازند.
             </p>
-            <h2 class="section-title">فروش عمده محصولات کشاورزی</h2>
+            <h2 class="section-title">فروش عمده محصولات غذایی و کشاورزی</h2>
             <p>
-              فروش عمده محصولات کشاورزی به صورت مستقیم و بدون واسطه باعث می شود
-              هر دو طرف معامله، یعنی فروشنده و خریدار سود بیشتری کسب کنند، در
-              واقع در این حالت نیازی به پرداخت هزینه به واسطه های متعدد نیست و
-              شما میتوانید محصول کشاورزی را با قیمت واقعی خریداری کنید که این
-              موضوع در خصوص اقلام کشاورزی نیز صدق می کند و فروشنده یا کشاورز می
-              تواند سود بیشتری از فروش محصولات خودش به دست آورد.
+              فروش عمده محصولات غذایی و کشاورزی به صورت مستقیم و بدون واسطه باعث
+              می شود هر دو طرف معامله، یعنی فروشنده و خریدار سود بیشتری کسب
+              کنند، در واقع در این حالت نیازی به پرداخت هزینه به واسطه های متعدد
+              نیست و شما میتوانید محصول کشاورزی را با قیمت واقعی خریداری کنید که
+              این موضوع در خصوص اقلام کشاورزی نیز صدق می کند و فروشنده یا کشاورز
+              می تواند سود بیشتری از فروش محصولات خودش به دست آورد.
             </p>
             <p>
               سایت باسکول این امکان را در اختیار شما قرار داده است که بعد از ثبت
               نام و قرار دادن کالا در سایت، محصول خودتان را با قیمت واقعی و بدون
               دخالت هیچ واسطه ای به فروش برسانید.
             </p>
-            <h2 class="section-title">قیمت عمده محصولات کشاورزی</h2>
+            <h2 class="section-title">قیمت عمده محصولات غذایی و کشاورزی</h2>
             <p>
-              محصولات کشاورزی به نسبت کیفیت، نوسانات ارز، بسته بندی، نوع محصول و
-              نحوه تحویل به صورت فله و بسته بندی، دارای قیمت های بسیار مختلفی می
-              باشند و این امکان وجود ندارد که قیمت محصولات کشاورزی به صورت ثابت
-              در یک بازه زمانی بماند. بنابراین بهترین راه برای به دست آوردن قیمت
-              عمده محصولات کشاورزی برقراری ارتباط با فروشندگان عمده است. در حال
-              حاضر هزاران فروشنده محصولات غذایی در سایت باسکول فعالیت دارند که
-              شما می توانید برای اطلاع از قیمت عمده انواع محصولات کشاورزی به
-              صورت دقیق و به روز، با آنها به صورت مستقیم ارتباط برقرار کرده و از
-              آنها استعلام قیمت بگیرید.
+              محصولات غذایی و کشاورزی به نسبت کیفیت، نوسانات ارز، بسته بندی، نوع
+              محصول و نحوه تحویل به صورت فله و بسته بندی، دارای قیمت های بسیار
+              مختلفی می باشند و این امکان وجود ندارد که قیمت محصولات غذایی و
+              کشاورزی به صورت ثابت در یک بازه زمانی بماند. بنابراین بهترین راه
+              برای به دست آوردمحصولات غذایی و کشاورزیولات کشاورزی برقراری ارتباط
+              با فروشندگان عمده است. در حال حاضر هزاران فروشنده محصولات غذایی در
+              سایت باسکول فعالیت دارند که شما می توانید برای اطلاع از قیمت عمده
+              انواع محصولات غذایی و کشاورزی به صورت دقیق و به روز، با آنها به
+              صورت مستقیم ارتباط برقرار کرده و از آنها استعلام قیمت بگیرید.
             </p>
             <h2 class="section-title">بازار کشاورزی</h2>
             <p>
               همانطور که میدانید بخش کشاورزی یکی مهمترین بخش های تامین نیازهای
               افراد است که شامل بسیاری از مواد غذایی می باشد. در چند سال اخیر
               توجه بسیار زیادی به بازار کشاورزی آنلاین شده است تا جایی که عمده
-              خرید و فروش های محصولات کشاورزی به صورت آنلاین صورت می گیرد. در
-              حال حاضر پلتفرم های بسیار زیادی در زمینه بازار کشاورزی فعالیت
-              دارند و باعث رونق بیشتر بازار خرید و فروش محصولات کشاورزی در جهان
-              شده اند.
+              خرید و فروش های محصولات غذایی و کشاورزی به صورت آنلاین صورت می
+              گیرد. در حال حاضر پلتفرم های بسیار زیادی در زمینه بازار کشاورزی
+              فعالیت دارند و باعث رونق بیشتر بازار خرید محصولات غذایی و
+              کشاورزیکشاورزی در جهان شده اند.
             </p>
             <p>
               باسکول به عنوان یک پلتفرم که در زمینه بازار کشاورزی آنلاین فعالیت
@@ -2092,30 +2122,30 @@ li > ul > li.active > ul > li {
             <p>
               باسکول به عنوان یک پلتفرم آنلاین، یک فضای دو طرفه ایجاد کرده و سعی
               دارد با حذف واسطه ها در وقت و هزینه شما تا میزان زیادی صرفه جویی
-              کند، عدم دسترسی به فروشندگان و خریداران عمده محصولات کشاورزی باعث
-              شده است که بازار خرید آن ها رو به رکود برود و زمینه فعالیت واسطه
-              ها را تا حد زیادی گسترش داده است. هدف باسکول این است که یک ارتباط
-              مستقیم و بدون واسطه را بین خریدار عمده با فروشنده اصلی ایجاد کند
-              تا هر دو طرف، محصول را با قیمت اصلی معامله کنند.
+              کند، عدم دسترسی به فروشندگان و خریداران عمده محصولات غذایی و
+              کشاورزی باعث شده است که بازار خرید آن ها رو به رکود برود و زمینه
+              فعالیت واسطه ها را تا حد زیادی گسترش داده است. هدف باسکول این است
+              که یک ارتباط مستقیم و بدون واسطه را بین خریدار عمده با فروشنده
+              اصلی ایجاد کند تا هر دو طرف، محصول را با قیمت اصلی معامله کنند.
             </p>
             <p>
               در حال حاضر باسکول به عنوان بازارگاه کشاورزی آنلاین، هزاران کشاورز
-              یا فروشنده عمده محصولات کشاورزی را در خود جای داده است و شما
-              میتوانید به راحتی و با چند کلیک با آنها ارتباط برقرار کنید، در
+              یا فروشنده عمده محصولات غذایی و کشاورزی را در خود جای داده است و
+              شما میتوانید به راحتی و با چند کلیک با آنها ارتباط برقرار کنید، در
               صورتی که خود شما فروشنده هستید پیشنهاد می کنیم در سایت باسکول ثبت
               نام کنید و از خدمات متنوع باسکول همچون اطلاع از آخرین درخواست های
               خرید و ارتباط با هزاران خریدار از سراسر کشور برخوردار شوید.
             </p>
-            <h2 class="section-title">فروش مستقیم محصولات کشاورزی</h2>
+            <h2 class="section-title">فروش مستقیم محصولات غذایی و کشاورزی</h2>
             <p>
-              در سال های گذشته فروش مستقیم محصولات کشاورزی برای همه افراد وجود
-              نداشت و واسطه گری افراد باعث می شد که کشاورز محصول خود را با هزینه
-              کمتر به فروش برساند و از طرف دیگر خریدار قیمت بیشتری برای آن
-              پرداخت کند. در حال حاضر سایت ها و پلتفرم هایی وجود دارند که به شما
-              امکان فروش مستقیم محصولات کشاورزی را می دهند. سایت باسکول با هدف
-              ارتباط دادن تولید کننده اصلی محصولات کشاورزی با خریدار، سعی در
-              کاهش هزینه های هر دو طرف دارد و باعث می شود در زمان و هزینه خریدار
-              و فروشنده صرفه جویی شود.
+              در سال های گذشته فروش مستقیم محصولات غذایی و کشاورزی برای همه
+              افراد وجود نداشت و واسطه گری افراد باعث می شد که کشاورز محصول خود
+              را با هزینه کمتر به فروش برساند و از طرف دیگر خریدار قیمت بیشتری
+              برای آن پرداخت کند. در حال حاضر سایت ها و پلتفرم هایی وجود دارند
+              که به شما امکان فرمحصولات غذایی و کشاورزیات کشاورزی را می دهند.
+              سایت باسکول با هدف ارتباط دادن تولید کننده محصولات غذایی و
+              کشاورزیاورزی با خریدار، سعی در کاهش هزینه های هر دو طرف دارد و
+              باعث می شود در زمان و هزینه خریدار و فروشنده صرفه جویی شود.
             </p>
             <p>
               در حال حاضر هزاران نفر از افرادی که به دنبال فروش مستقیم محصولات
@@ -2211,9 +2241,9 @@ li > ul > li.active > ul > li {
               <!-- end loop  -->
 
               <!-- loop for wholesale  -->
-              <div v-if="categoryList.length">
+              <div v-if="mobileCategoryList">
                 <div
-                  v-for="(category, index) in categoryList"
+                  v-for="(category, index) in mobileCategoryList"
                   :key="'wholesale-categories-item-' + index"
                 >
                   <h4
@@ -2258,10 +2288,10 @@ import { eventBus } from "../../../router/router";
 import MainRegisterRequestForm from "./main_components/main-register-request-form";
 import LandingPageBuyAds from "./main_components/landing-page-buyAds";
 import ProductGridArticle from "./product_components/landing_page_product_grid_article";
+import owlCarousel from "../../../owl.carousel.min.js";
+import Route from "../../../router/components/route";
 
 var visible = false;
-
-import Route from "../../../router/components/route";
 
 export default {
   components: {
@@ -2270,7 +2300,14 @@ export default {
     MainRegisterRequestForm,
     ProductGridArticle,
   },
-  props: ["isUserLogin", "userType", "assets", "str", "verifiedUserContent"],
+  props: [
+    "isUserLogin",
+    "userType",
+    "assets",
+    "str",
+    "verifiedUserContent",
+    "categoryList",
+  ],
   data: function () {
     return {
       mainSearchBoxText: "",
@@ -2278,11 +2315,10 @@ export default {
       lastRequests: "",
       lastProducts: "",
       isLoading: false,
-      categoryList: "",
-      subCategoryList: "",
+      mobileCategoryList: "",
       isCollapse: false,
-      isCategories: false,
       categoryModalList: "",
+      showLatestProducts: false,
       footerLinks: {
         wholesaleDate: [
           {
@@ -2291,11 +2327,11 @@ export default {
           },
           {
             name: "خرمای مضافتی",
-            link: "خرما",
+            link: "خرمای-مضافتی",
           },
           {
             name: "خرمای بم",
-            link: "خرما",
+            link: "خرمای-مضافتی",
           },
           {
             name: "خرمای زاهدی",
@@ -2307,7 +2343,15 @@ export default {
           },
           {
             name: "خرمای کبکاب",
-            link: "خرما",
+            link: "خرما-کبکاب",
+          },
+          {
+            name: "خرما خاصویی",
+            link: "خرما-خاصویی",
+          },
+          {
+            name: "خرما ربی",
+            link: "خرما-ربی",
           },
           {
             name: "خرمای خوزستان",
@@ -2341,6 +2385,22 @@ export default {
             name: "زعفران",
             link: "زعفران",
           },
+          {
+            name: "پسته اکبری",
+            link: "پسته-اکبری",
+          },
+          {
+            name: "پسته فندقی",
+            link: "پسته-فندقی",
+          },
+          {
+            name: "پسته احمد آقایی",
+            link: "پسته-احمد-آقایی",
+          },
+          {
+            name: "پسته کله قوچی",
+            link: "پسته-کله-قوچی",
+          },
         ],
         wholesaleRise: [
           {
@@ -2373,11 +2433,11 @@ export default {
           },
           {
             name: "شمال",
-            link: "برنج",
+            link: "برنج-شمال",
           },
           {
             name: "طارم",
-            link: "برنج",
+            link: "برنج-طارم",
           },
           {
             name: "دم سیاه",
@@ -2385,7 +2445,7 @@ export default {
           },
           {
             name: "هاشمی",
-            link: "برنج",
+            link: "برنج-هاشمی",
           },
           {
             name: "صدری",
@@ -2417,20 +2477,15 @@ export default {
       }
     },
     init: function () {
+      this.setMobileCategories();
+      this.productInViewPort();
+      this.headerMenuStyles();
       var self = this;
       $("#categories-modal").on("show.bs.modal", (e) => {
         this.handleBackKeys();
       });
 
       window.scrollTo(0, 0);
-
-      axios
-        .post("/get_category_list", {
-          cascade_list: true,
-        })
-        .then(function (response) {
-          self.categoryList = response.data.categories;
-        });
 
       axios.post("/get_sample_products", {}).then(function (response) {
         self.lastProducts = response.data.products;
@@ -2548,8 +2603,12 @@ export default {
     getImageUrl(index) {
       return this.assets + "assets/img/banners/banner-" + index + ".jpg";
     },
+    getMobileImageUrl(index) {
+      return this.assets + "assets/img/banners/mobile/banner-" + index + ".jpg";
+    },
     imageParallax() {
-      var parallax = -0.1;
+      var parallax = -0.13;
+      var staticHeight = -80;
 
       var $bg_image1 = $("#banner-item-1");
       var $bg_image2 = $("#banner-item-2");
@@ -2589,49 +2648,49 @@ export default {
           var ot = offset_tops[i];
           $(el).css(
             "background-position",
-            "50% " + ((dy - ot) * parallax + -50) + "px"
+            "50% " + ((dy - ot) * parallax + staticHeight) + "px"
           );
         });
         $bg_image2.each(function (i, el) {
           var ot = offset_tops[i];
           $(el).css(
             "background-position",
-            "50% " + ((dy - ot) * parallax + -50) + "px"
+            "50% " + ((dy - ot) * parallax + staticHeight) + "px"
           );
         });
         $bg_image3.each(function (i, el) {
           var ot = offset_tops[i];
           $(el).css(
             "background-position",
-            "50% " + ((dy - ot) * parallax + -50) + "px"
+            "50% " + ((dy - ot) * parallax + staticHeight) + "px"
           );
         });
         $bg_image4.each(function (i, el) {
           var ot = offset_tops[i];
           $(el).css(
             "background-position",
-            "50% " + ((dy - ot) * parallax + -50) + "px"
+            "50% " + ((dy - ot) * parallax + staticHeight) + "px"
           );
         });
         $bg_image5.each(function (i, el) {
           var ot = offset_tops[i];
           $(el).css(
             "background-position",
-            "50% " + ((dy - ot) * parallax + -50) + "px"
+            "50% " + ((dy - ot) * parallax + staticHeight) + "px"
           );
         });
         $bg_image6.each(function (i, el) {
           var ot = offset_tops[i];
           $(el).css(
             "background-position",
-            "50% " + ((dy - ot) * parallax + -50) + "px"
+            "50% " + ((dy - ot) * 0.1 + staticHeight) + "px"
           );
         });
         $bg_image7.each(function (i, el) {
           var ot = offset_tops[i];
           $(el).css(
             "background-position",
-            "50% " + ((dy - ot) * parallax + -50) + "px"
+            "50% " + ((dy - ot) * 0.03 + -20) + "px"
           );
         });
       });
@@ -2647,31 +2706,24 @@ export default {
         this.closeModal();
       });
     },
-    routeCategories(categoryName) {
-      this.closeModal();
-      this.$router.push(this.getSubCategoryUrl(categoryName));
-    },
-    openCategoriesModal(categoryId) {
-      $("#categories-modal").modal("show");
-      if (categoryId) {
+    openCategoriesModal(categoryname) {
+      if (categoryname) {
         for (let i = 0; i < this.categoryList.length; i++) {
-          if (this.categoryList[i].id == categoryId) {
-            this.categoryModalList = this.categoryList[i].subcategories;
+          if (this.categoryList[i].category_name == "کشاورزی") {
+            this.$parent.modalSubCategory = this.categoryList[i];
+            let subCategories = Object.values(
+              this.categoryList[i].subcategories
+            );
+            let subcategoryItems = subCategories.find((item) => {
+              return item.category_name == categoryname;
+            });
+            this.$parent.mainSubCategories = subcategoryItems;
           }
         }
-      } else {
-        this.isCategories = true;
-        this.categoryModalList = this.categoryList;
       }
-    },
-    activeSubCategories(categoryId) {
-      for (let i = 0; i < this.categoryList.length; i++) {
-        if (this.categoryList[i].id == categoryId) {
-          this.categoryModalList = this.categoryList[i].subcategories;
-        }
-      }
-
-      this.isCategories = false;
+      this.$nextTick(() => {
+        $("#categories-modal").modal("show");
+      });
     },
     productOwlCarouselEnabled() {
       $(".latest-product .owl-carousel").owlCarousel({
@@ -2720,6 +2772,75 @@ export default {
         stagePadding: 3,
       });
     },
+    checkIsMobile() {
+      let pageWidth = window.outerWidth;
+      if (pageWidth <= 991) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    productInViewPort() {
+      $(window).scroll((scroll) => {
+        if ($("body").has("#product-section").length) {
+          if (
+            100 + $(window).scrollTop() + $(window).height() >=
+            this.isElementOutViewport($("#product-section"))
+          ) {
+            this.showLatestProducts = true;
+          }
+        }
+      });
+    },
+    isElementOutViewport(el) {
+      return el.offset().top;
+    },
+    setMenuClass(categories, bigScreen) {
+      // let categoryLength = Object.keys(categories.subcategories).length;
+      // if (categoryLength <= 10) {
+      //   return "col-sm-6";
+      // }
+    },
+    setSubMenuClass(categories, bigScreen) {
+      // let categoryLength = Object.keys(categories.subcategories).length;
+      // if (categoryLength <= 10) {
+      //   return "col-sm-6";
+      // } else {
+      return "col-sm-4";
+      // }
+    },
+    headerMenuStyles() {
+      let lvl1 = $(".lvl1-list");
+      lvl1
+        .mouseenter(() => {
+          $(".hero-search-input > input").css("border-bottom-left-radius", "0");
+        })
+        .mouseleave(() => {
+          $(".hero-search-input > input").css(
+            "border-bottom-left-radius",
+            "12px"
+          );
+        });
+    },
+    openFilterModal(category) {
+      if (category) {
+        this.$parent.modalSubCategory = category;
+        $("#categories-modal").modal("show");
+      } else {
+        this.$parent.modalSubCategory = false;
+        $("#categories-modal").modal("show");
+      }
+    },
+    setMobileCategories() {
+      let categories = this.categoryList;
+      if (categories) {
+        let mainCategories = categories.find((item) => {
+          return item.category_name == "کشاورزی";
+        });
+        mainCategories = Object.values(mainCategories.subcategories);
+        this.mobileCategoryList = mainCategories;
+      }
+    },
   },
   mounted: function () {
     this.init();
@@ -2753,16 +2874,26 @@ export default {
       this.enterKeyActiveForSearch = this.mainSearchBoxText !== "";
       eventBus.$emit("textSearch", value);
     },
+    categoryList(categories) {
+      if (categories) {
+        this.setMobileCategories();
+      }
+
+      this.$nextTick(() => {
+        this.headerMenuStyles();
+      });
+    },
   },
   metaInfo() {
     return {
-      title: " بازار خرید و فروش عمده محصولات کشاورزی ",
+      title:
+        " بازار خرید و فروش عمده محصولات غذایی و کشاورزی ایران بدون واسطه ",
       titleTemplate: "باسکول | %s",
       meta: [
         {
           name: "description",
           content:
-            "مرجع تخصصی خرید و فروش عمده و قیمت محصولات کشاورزی ایران | صادرات محصولات کشاورزی",
+            "خرید و فروش عمده مواد غذایی و کشاورزی ایران ☀️☀️☀️ قیمت عمده مواد غذایی و محصولات غذایی و کشاورزی - ارتباط مستقیم با صادرکنندگان خریداران فروشندگان عمده",
         },
         {
           name: "author",
@@ -2771,15 +2902,16 @@ export default {
         {
           property: "og:description",
           content:
-            "مرجع تخصصی خرید و فروش عمده و قیمت محصولات کشاورزی ایران | صادرات محصولات کشاورزی",
+            "مرجع تخصصی خرید و فروش عمده و قیمت محصولات غذایی و کشاورزی ایران | صادرات محصولات غذایی و کشاورزی",
         },
         {
           property: "og:site_name",
-          content: "باسکول بازارآنلاین خرید و فروش عمده محصولات کشاورزی ایران",
+          content:
+            "باسکول بازارآنلاین خرید و فروش عمده محصولات غذایی و کشاورزی ایران",
         },
         {
           property: "og:title",
-          content: " باسکول | بازار خرید و فروش عمده محصولات کشاورزی ",
+          content: " باسکول | بازار خرید و فروش عمده محصولات غذایی و کشاورزی ",
         },
       ],
     };

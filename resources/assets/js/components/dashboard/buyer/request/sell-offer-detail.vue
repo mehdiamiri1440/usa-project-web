@@ -411,35 +411,56 @@
           <div class="info_profile col-xs-12 col-sm-7">
             <div class="user_image">
               <div v-if="sellOfferDetail.profile_photo">
-                <img :src="str + '/' + sellOfferDetail.profile_photo" id="blah" alt="تصویر پروفایل" />
+                <img
+                  :src="str + '/' + sellOfferDetail.profile_photo"
+                  id="blah"
+                  alt="تصویر پروفایل"
+                />
               </div>
               <div v-else>
-                <img src="../../../../../img/user-defult.png" align="تصویر پروفایل" />
+                <img
+                  src="../../../../../img/user-defult.png"
+                  align="تصویر پروفایل"
+                />
               </div>
             </div>
             <div class="user_name">
               <p>
-                {{sellOfferDetail.sell_offer_user_info.first_name + ' ' +
-                sellOfferDetail.sell_offer_user_info.last_name}}
+                {{
+                  sellOfferDetail.sell_offer_user_info.first_name +
+                  " " +
+                  sellOfferDetail.sell_offer_user_info.last_name
+                }}
                 <span>-</span>
-                {{sellOfferDetail.sell_offer_user_info.province
-                + ' | ' + sellOfferDetail.sell_offer_user_info.city }}
+                {{
+                  sellOfferDetail.sell_offer_user_info.province +
+                  " | " +
+                  sellOfferDetail.sell_offer_user_info.city
+                }}
               </p>
             </div>
           </div>
           <div class="profile_link col-xs-12 col-sm-5">
-            <a href="/dashboard/my-buyAds" class="black-bot">بازگشت به صفحه قبل</a>
+            <a href="/dashboard/my-buyAds" class="black-bot"
+              >بازگشت به صفحه قبل</a
+            >
             <a
-              :href="'/profile/' + sellOfferDetail.sell_offer_user_info.user_name"
+              :href="
+                '/profile/' + sellOfferDetail.sell_offer_user_info.user_name
+              "
               class="green-button"
-            >پروفایل تامین کننده</a>
+              >پروفایل تامین کننده</a
+            >
           </div>
         </div>
         <div class="info-contents col-xs-12">
           <div class="image-article-content col-xs-12 col-md-5">
             <div class="main-image col-xs-12">
               <a :href="str + '/' + sellOfferDetail.sell_offer.photos[0]">
-                <img :src="str + '/' + sellOfferDetail.sell_offer.photos[0]" alt />
+                <img
+                  :src="str + '/' + sellOfferDetail.sell_offer.photos[0]"
+                  alt
+                />
               </a>
             </div>
             <div class="owl-carousel col-xs-12">
@@ -457,24 +478,27 @@
                   قیمت واحد
                   <span class>(هر کیلو به تومان)</span> :
                 </td>
-                <td>{{sellOfferDetail.sell_offer.price}} تومان</td>
+                <td>{{ sellOfferDetail.sell_offer.price }} تومان</td>
               </tr>
               <tr>
                 <td>محل تحویل کالا:</td>
-                <td>{{sellOfferDetail.sell_offer.deliver_at}}</td>
+                <td>{{ sellOfferDetail.sell_offer.deliver_at }}</td>
               </tr>
 
               <tr>
                 <td>زمان موجودی:</td>
                 <td>
-                  {{sellOfferDetail.sell_offer.date_from + ' - ' +
-                  sellOfferDetail.sell_offer.date_to}}
+                  {{
+                    sellOfferDetail.sell_offer.date_from +
+                    " - " +
+                    sellOfferDetail.sell_offer.date_to
+                  }}
                 </td>
               </tr>
             </table>
             <p class="description-text">
               توضیحات:
-              <span>{{sellOfferDetail.sell_offer.description}}</span>
+              <span>{{ sellOfferDetail.sell_offer.description }}</span>
             </p>
             <div class="col-xs-12 actions">
               <div v-show="sellOfferDetail.sell_offer.is_pending">
@@ -485,18 +509,25 @@
                                         <button type="button" class="green-button" @click=rejectBuy(sellOfferDetail.sell_offer.id)>رد این پیشنهاد</button>
                 </div>-->
                 <a href="#" @click.prevent="openChat()" class="green-button">
-                  <i class="fas fa-comment-alt"></i> ارسال
-                  پیام
+                  <i class="fas fa-comment-alt"></i> ارسال پیام
                 </a>
               </div>
-              <p class="text-success" v-show="sellOfferDetail.sell_offer.is_accepted">
-                شما قبلا این پیشنهاد
-                را پذیرفته اید.منتظر ارتباط ما باشید.
+              <p
+                class="text-success"
+                v-show="sellOfferDetail.sell_offer.is_accepted"
+              >
+                شما قبلا این پیشنهاد را پذیرفته اید.منتظر ارتباط ما باشید.
               </p>
               <p
                 class="text-danger"
-                v-show="sellOfferDetail.sell_offer.is_pending == 0 && sellOfferDetail.sell_offer.is_accepted == 0 "
-              >شما قبلا این پیشنهاد را رد کرده اید.درصورت تغییر نظر با ما تماس بگیرید</p>
+                v-show="
+                  sellOfferDetail.sell_offer.is_pending == 0 &&
+                  sellOfferDetail.sell_offer.is_accepted == 0
+                "
+              >
+                شما قبلا این پیشنهاد را رد کرده اید.درصورت تغییر نظر با ما تماس
+                بگیرید
+              </p>
             </div>
           </div>
         </div>
@@ -507,11 +538,13 @@
 
 <script>
 import { eventBus } from "../../../../router/router";
+import owlCarousel from "../../../../owl.carousel.min.js";
+import magnificPopup from "../../../../jquery.magnific-popup.min";
 
 var OwlCarousel = {
-  data: function() {
+  data: function () {
     return {
-      imgSrcs: ""
+      imgSrcs: "",
     };
   },
   props: ["img"],
@@ -521,7 +554,7 @@ var OwlCarousel = {
     '<img :src="img">' +
     "</a>" +
     "</div>",
-  mounted: function() {
+  mounted: function () {
     /*$(".owl-carousel").owlCarousel({
                 loop: false,
                 margin: 10,
@@ -538,18 +571,18 @@ var OwlCarousel = {
         gallery: {
           enabled: true,
           navigateByImgClick: true,
-          preload: [0, 1] // Will preload 0 - before current, and 1 after the current image
-        }
+          preload: [0, 1], // Will preload 0 - before current, and 1 after the current image
+        },
       });
-  }
+  },
 };
 
 export default {
   props: ["str"],
   components: {
-    "image-wrapper": OwlCarousel
+    "image-wrapper": OwlCarousel,
   },
-  data: function() {
+  data: function () {
     return {
       currentUser: {
         profile: {
@@ -560,16 +593,16 @@ export default {
           public_phone: "",
           profile_photo: this.storage + "",
           postal_code: "",
-          shaba_code: ""
+          shaba_code: "",
         },
-        user_info: ""
+        user_info: "",
       },
       sellOfferDetail: {
         sell_offer: {
-          photos: ""
+          photos: "",
         },
         sell_offer_user_info: "",
-        profile_photo: ""
+        profile_photo: "",
       },
       popUpMsg: "",
       loading: false,
@@ -577,23 +610,23 @@ export default {
       items: [
         {
           message: "جزئیات درخواست ",
-          url: "myBuyAds"
-        }
-      ]
+          url: "myBuyAds",
+        },
+      ],
     };
   },
   methods: {
-    init: function() {
+    init: function () {
       this.loading = true;
       axios
         .post("/user/profile_info")
-        .then(response => (this.currentUser = response.data));
+        .then((response) => (this.currentUser = response.data));
       var self = this;
       axios
         .post("/dashboard/sell-offer-detail", {
-          sell_offer_id: this.$route.params.id
+          sell_offer_id: this.$route.params.id,
         })
-        .then(function(response) {
+        .then(function (response) {
           self.sellOfferDetail = response.data;
         });
     },
@@ -602,9 +635,9 @@ export default {
 
       axios
         .post("/accept_sell_offer_by_id", {
-          sell_offer_id: id
+          sell_offer_id: id,
         })
-        .then(function(response) {
+        .then(function (response) {
           if (response.data.status == true) {
             self.popUpMsg =
               "جهت تسهیل در ادامه ی فرآیند خرید شما کارشناسان باسکول برای هماهنگی های اولیه ی معامله با شما تماس خواهند گرفت.";
@@ -612,29 +645,29 @@ export default {
             eventBus.$emit("submitSuccess", self.popUpMsg);
 
             $("#custom-main-modal").modal("show");
-            $("#custom-main-modal").on("shown.bs.modal", function(e) {
-              $("#close-btn").on("click", function(e) {
+            $("#custom-main-modal").on("shown.bs.modal", function (e) {
+              $("#close-btn").on("click", function (e) {
                 $("#custom-main-modal").modal("hide");
                 window.location.href = "/dashboard/my-buyAds";
               });
             });
           }
         })
-        .catch(function(err) {
+        .catch(function (err) {
           self.popUpMsg =
             "خطایی رخ داده است.لطفا اتصال به اینترنت خود را بررسی کنید سپس دوباره تلاش کنید.";
 
           $("#custom-main-modal").modal("show");
         });
     },
-    rejectBuy: function(id) {
+    rejectBuy: function (id) {
       var self = this;
 
       axios
         .post("/reject_sell_offer_by_id", {
-          sell_offer_id: id
+          sell_offer_id: id,
         })
-        .then(function(response) {
+        .then(function (response) {
           if (response.data.status == true) {
             self.popUpMsg =
               "شما این پیشنهاد را رد کرده اید.در صورت تغییر تصمیمتان با ما تماس بگیرید.";
@@ -642,15 +675,15 @@ export default {
             eventBus.$emit("submitSuccess", self.popUpMsg);
 
             $("#custom-main-modal").modal("show");
-            $("#custom-main-modal").on("shown.bs.modal", function(e) {
-              $("#close-btn").on("click", function(e) {
+            $("#custom-main-modal").on("shown.bs.modal", function (e) {
+              $("#close-btn").on("click", function (e) {
                 $("#custom-main-modal").modal("hide");
                 window.location.href = "/dashboard/my-buyAds";
               });
             });
           }
         })
-        .catch(function(err) {
+        .catch(function (err) {
           self.popUpMsg =
             "خطایی رخ داده است.لطفا اتصال به اینترنت خود را بررسی کنید سپس دوباره تلاش کنید.";
 
@@ -659,24 +692,24 @@ export default {
           $("#custom-main-modal").modal("show");
         });
     },
-    openChat: function() {
+    openChat: function () {
       var contact = {
         contact_id: this.sellOfferDetail.sell_offer_user_info.id,
         first_name: this.sellOfferDetail.sell_offer_user_info.first_name,
         last_name: this.sellOfferDetail.sell_offer_user_info.last_name,
         profile_photo: this.sellOfferDetail.profile_photo,
-        user_name: this.sellOfferDetail.sell_offer_user_info.user_name
+        user_name: this.sellOfferDetail.sell_offer_user_info.user_name,
       };
 
       axios
         .post("/set_last_chat_contact", contact)
-        .then(function(response) {
+        .then(function (response) {
           window.location.href = "/dashboard/messages";
         })
-        .catch(function(e) {
+        .catch(function (e) {
           alert("Error");
         });
-    }
+    },
   },
   mounted() {
     this.init();
@@ -687,12 +720,12 @@ export default {
       gallery: {
         enabled: true,
         navigateByImgClick: true,
-        preload: [0, 1] // Will preload 0 - before current, and 1 after the current image
-      }
+        preload: [0, 1], // Will preload 0 - before current, and 1 after the current image
+      },
     });
   },
   created() {
     gtag("config", "UA-129398000-1", { page_path: "/sell-offer-detail" });
-  }
+  },
 };
 </script>

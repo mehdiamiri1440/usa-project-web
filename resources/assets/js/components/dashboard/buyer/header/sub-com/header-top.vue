@@ -4,6 +4,10 @@
   padding-right: 0;
 }
 
+.show-header {
+  position: relative;
+}
+
 .show-header button {
   float: right;
   border: none;
@@ -266,10 +270,10 @@ a.profile-info-wrapper:focus {
   min-width: 150px;
   text-align: right;
   direction: rtl;
-  border-radius: 4px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0px 3px 9px rgba(0, 0, 0, 0.05);
   line-height: 1.618;
-  -webkit-box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
-  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
   z-index: 6;
 }
 #web-profile-items > li a {
@@ -338,6 +342,9 @@ a.profile-info-wrapper:focus {
   text-align: center;
   border-bottom: 1px solid #e6e6e6;
   /* border-top: 1px solid #e6e6e6; */
+}
+.sub-header.is-verification-alert-active {
+  top: 99px;
 }
 
 .sub-header ul {
@@ -554,180 +561,252 @@ a.profile-info-wrapper:focus {
     transform: translate3d(4px, 0, 0);
   }
 }
+
 .button-height {
   line-height: 1;
+}
+
+.verification-wrapper-contents {
+  font-size: 18px;
+  font-weight: 500;
+  display: block;
+  text-align: center;
+  color: #fff;
+  background: #1da1f2;
+  position: relative;
+  padding: 2px 0 8px;
+}
+
+.verification-text {
+  margin: 0 5px;
+}
+
+.verification-wrapper-contents > i {
+  transition: 120ms;
+}
+
+.verification-wrapper-contents:hover {
+  background: #0a91e4;
+}
+
+.verification-wrapper-contents:hover > i {
+  transform: translateX(-5px);
+  transition: 120ms;
+}
+
+.verified-user {
+  color: #fff;
+  font-size: 23px;
+  top: 4px;
+}
+
+.verified-user::before {
+  color: #1da1f2;
+  top: 7px;
+  font-size: 11px;
+  left: 6px;
+}
+
+.close-info {
+  background: none;
+  border: none;
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 8px 14px;
+}
+
+@media screen and (max-width: 768px) {
+  .verification-wrapper-contents {
+    padding: 2px 15px 8px 0;
+  }
 }
 </style>
 
 <template>
-  <div>
-    <header id="header" class="main-header">
-      <div class="show-header hidden-md hidden-lg">
-        <div
-          v-if="messageCount > 0"
-          class="message-notification hide-message-notification"
-        >
-          <span>
-            {{ messageCount > 100 ? "+99" : messageCount }}
-          </span>
-        </div>
-        <button class="button-height">
-          <span :class="menuClosed ? 'rotation' : ''" class="fa fa-bars"></span>
+  <header id="header" class="main-header">
+    <router-link
+      v-if="$parent.verificationAlert"
+      :to="{ name: 'profileBasicBuyerVeficiation' }"
+      class="verification-wrapper-contents"
+    >
+      <i class="fa fa-angle-left"></i>
+      <span class="verification-text"> برای احراز هویت کلیک کنید </span>
+      <span @click.prevent class="verified-user" title>
+        <i class="fa fa-certificate"></i>
+      </span>
+      <button
+        class="close-info"
+        @click.prevent="$parent.disableVerificationAlert = true"
+      >
+        <i class="fa fa-times"></i>
+      </button>
+    </router-link>
+    <div class="show-header hidden-md hidden-lg">
+      <div
+        v-if="messageCount > 0"
+        class="message-notification hide-message-notification"
+      >
+        <span>
+          {{ messageCount > 100 ? "+99" : messageCount }}
+        </span>
+      </div>
+      <button class="button-height">
+        <span :class="menuClosed ? 'rotation' : ''" class="fa fa-bars"></span>
+      </button>
+    </div>
+
+    <div class="user-auth-info-wrapper">
+      <ul v-if="!isLoading" class="nav navbar-nav">
+        <li>
+          <a
+            class="profile-info-wrapper"
+            data-toggle="collapse"
+            href="#web-profile-items"
+            role="button"
+          >
+            <div
+              v-if="photoLink"
+              class="profile-image-wrapper"
+              :style="{
+                backgroundImage: 'url(' + storage + '/' + photoLink + ')',
+              }"
+            ></div>
+            <div
+              v-else
+              class="profile-image-wrapper"
+              :style="{
+                backgroundImage:
+                  'url(' + $parent.assets + 'assets/img/user-defult.png' + ')',
+              }"
+            ></div>
+
+            <div class="profile-information">
+              <span class="user_name" v-text="username"></span>
+              <i class="fa fa-angle-down"></i>
+            </div>
+          </a>
+
+          <ul id="web-profile-items" class="collapse">
+            <li class="list-item">
+              <router-link
+                data-toggle="collapse"
+                href="#web-profile-items"
+                :to="{ name: 'profileBasicBuyer' }"
+                @click="
+                  registerComponentStatistics(
+                    'seller-dashboard-header',
+                    'profile-link',
+                    'click-on-profile-link-in-dashboard'
+                  )
+                "
+              >
+                <i class="fa fa-user"></i>
+                پروفایل
+              </router-link>
+            </li>
+
+            <li class="list-item">
+              <router-link
+                data-toggle="collapse"
+                href="#web-profile-items"
+                :to="{ name: 'passwordBuyer' }"
+                @click="
+                  registerComponentStatistics(
+                    'seller-dashboard-header',
+                    'change-password',
+                    'click-on-change-password-dashboard'
+                  )
+                "
+              >
+                <i class="fa fa-lock"></i>
+                تغییر کلمه عبور
+              </router-link>
+            </li>
+
+            <li class="list-item">
+              <a :href="out" @click="logUserOut()">
+                <i class="fas fa-sign-out-alt"></i> خروج
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <ul v-else class="nav navbar-nav">
+        <li>
+          <div class="col display-loading">
+            <div
+              class="
+                user_name
+                placeholder-content placeholder-user-name
+                margin-loading
+              "
+            ></div>
+            <div
+              class="placeholder-image-header-profile placeholder-content"
+            ></div>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="right-menu-header">
+      <ul class="list-inline">
+        <li>
+          <router-link
+            class="product-list-link"
+            :to="{ name: 'productList' }"
+            @click="
+              registerComponentStatistics(
+                'dashboard-header',
+                'product-list-btn',
+                'click-on-product-list-in-dashboard'
+              )
+            "
+          >
+            <span class="hidden-xs hidden-sm"> لیست محصولات </span>
+            <span class="hidden-md hidden-lg">
+              <i class="fa fa-list-ul"></i>
+            </span>
+          </router-link>
+        </li>
+
+        <li>
+          <router-link
+            :to="{ name: 'indexPage' }"
+            @click="
+              registerComponentStatistics(
+                'dashboard-header',
+                'home-page-btn',
+                'click-on-home-page-in-dashboard'
+              )
+            "
+            class="home-button"
+          >
+            <i class="fa fa-home" aria-hidden="true"></i>
+          </router-link>
+        </li>
+      </ul>
+    </div>
+
+    <div
+      v-if="$route.path === '/buyer/special-products'"
+      class="sub-header col-xs-12"
+      :class="{ 'is-verification-alert-active ': $parent.verificationAlert }"
+    >
+      <div class="search-box col-sm-6 col-xs-12 col-lg-4 pull-right">
+        <input
+          type="text"
+          v-model="$parent.searchValueText"
+          placeholder="اینجا جستجو کنید"
+        />
+
+        <button class="btn-search">
+          <i class="fa-search fa"></i>
         </button>
       </div>
-
-      <div class="user-auth-info-wrapper">
-        <ul v-if="!isLoading" class="nav navbar-nav">
-          <li>
-            <a
-              class="profile-info-wrapper"
-              data-toggle="collapse"
-              href="#web-profile-items"
-              role="button"
-            >
-              <div
-                v-if="photoLink"
-                class="profile-image-wrapper"
-                :style="{
-                  backgroundImage: 'url(' + storage + '/' + photoLink + ')',
-                }"
-              ></div>
-              <div
-                v-else
-                class="profile-image-wrapper"
-                :style="{
-                  backgroundImage:
-                    'url(' +
-                    $parent.assets +
-                    'assets/img/user-defult.png' +
-                    ')',
-                }"
-              ></div>
-
-              <div class="profile-information">
-                <span class="user_name" v-text="username"></span>
-                <i class="fa fa-angle-down"></i>
-              </div>
-            </a>
-
-            <ul id="web-profile-items" class="collapse">
-              <li class="list-item">
-                <router-link
-                  data-toggle="collapse"
-                  href="#web-profile-items"
-                  :to="{ name: 'profileBasicBuyer' }"
-                  @click="
-                    registerComponentStatistics(
-                      'seller-dashboard-header',
-                      'profile-link',
-                      'click-on-profile-link-in-dashboard'
-                    )
-                  "
-                >
-                  <i class="fa fa-user"></i>
-                  پروفایل
-                </router-link>
-              </li>
-
-              <li class="list-item">
-                <router-link
-                  data-toggle="collapse"
-                  href="#web-profile-items"
-                  :to="{ name: 'passwordBuyer' }"
-                  @click="
-                    registerComponentStatistics(
-                      'seller-dashboard-header',
-                      'change-password',
-                      'click-on-change-password-dashboard'
-                    )
-                  "
-                >
-                  <i class="fa fa-lock"></i>
-                  تغییر کلمه عبور
-                </router-link>
-              </li>
-
-              <li class="list-item">
-                <a :href="out" @click="logUserOut()">
-                  <i class="fas fa-sign-out-alt"></i> خروج
-                </a>
-              </li>
-            </ul>
-          </li>
-        </ul>
-        <ul v-else class="nav navbar-nav">
-          <li>
-            <div class="col display-loading">
-              <div
-                class="user_name placeholder-content placeholder-user-name margin-loading"
-              ></div>
-              <div
-                class="placeholder-image-header-profile placeholder-content"
-              ></div>
-            </div>
-          </li>
-        </ul>
-      </div>
-      <div class="right-menu-header">
-        <ul class="list-inline">
-          <li>
-            <router-link
-              class="product-list-link"
-              :to="{ name: 'productList' }"
-              @click="
-                registerComponentStatistics(
-                  'dashboard-header',
-                  'product-list-btn',
-                  'click-on-product-list-in-dashboard'
-                )
-              "
-            >
-              <span class="hidden-xs hidden-sm"> لیست محصولات </span>
-              <span class="hidden-md hidden-lg">
-                <i class="fa fa-list-ul"></i>
-              </span>
-            </router-link>
-          </li>
-
-          <li>
-            <router-link
-              :to="{ name: 'indexPage' }"
-              @click="
-                registerComponentStatistics(
-                  'dashboard-header',
-                  'home-page-btn',
-                  'click-on-home-page-in-dashboard'
-                )
-              "
-              class="home-button"
-            >
-              <i class="fa fa-home" aria-hidden="true"></i>
-            </router-link>
-          </li>
-        </ul>
-      </div>
-
-      <div
-        v-if="$route.path === '/buyer/special-products'"
-        class="sub-header col-xs-12"
-      >
-        <div class="search-box col-sm-6 col-xs-12 col-lg-4 pull-right">
-          <input
-            type="text"
-            v-model="$parent.searchValueText"
-            placeholder="اینجا جستجو کنید"
-          />
-
-          <button class="btn-search">
-            <i class="fa-search fa"></i>
-          </button>
-        </div>
-      </div>
-      <SubMenu
-        :class="{ 'header-with-fix-alert': $parent.isRequiredFixAlert }"
-      />
-    </header>
-  </div>
+    </div>
+    <SubMenu :class="{ 'header-with-fix-alert': $parent.isRequiredFixAlert }" />
+  </header>
 </template>
 
 

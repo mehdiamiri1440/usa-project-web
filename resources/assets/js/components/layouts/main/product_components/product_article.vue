@@ -168,7 +168,7 @@ label {
 }
 
 .is-user-valid {
-  border: 2px solid #00c569;
+  border: 1px solid #00c569;
 }
 
 .modal-content {
@@ -460,7 +460,7 @@ label {
           data-toggle="tooltip"
           data-placement="bottom"
           title="نردبان اعمال شده است"
-          class="elevator-event active disable"
+          class="elevator-event hidden-xs active disable"
         >
           <i class="fas fa-chart-line"></i>
         </button>
@@ -476,17 +476,17 @@ label {
           },
         ]"
       >
-        <button
+        <!-- <button
           v-if="!isMyProfile"
           @click.prevent="openChat(product)"
           class="green-button"
         >
           <i class="fa fa-envelope"></i>
           استعلام قیمت
-        </button>
+        </button> -->
 
         <button
-          v-else
+          v-if="isMyProfile"
           class="blue-button"
           data-toggle="modal"
           :data-target="'#article-modal' + product.main.id"

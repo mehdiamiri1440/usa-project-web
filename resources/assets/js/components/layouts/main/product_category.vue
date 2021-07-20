@@ -18,7 +18,32 @@
 }
 
 #main {
-  padding-top: 32px;
+  max-width: 1280px;
+}
+
+#main .main-product-wrapper {
+  position: relative;
+}
+
+.fade-opacity {
+  opacity: 0.1;
+}
+.spinner-border {
+  width: 5rem;
+  height: 5rem;
+  color: #999;
+  border-width: 3px;
+  top: 170px;
+  left: calc(50% - 25px);
+}
+
+.filter-loader-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
 }
 
 @media screen and (min-width: 1200px) {
@@ -94,7 +119,7 @@ a.close-dialog-popup {
   position: fixed;
   right: 15px;
   bottom: 15px;
-  z-index: 2;
+  z-index: 3;
 }
 
 .flat-plust-icon a {
@@ -141,7 +166,7 @@ a.close-dialog-popup {
 }
 
 .sub-header {
-  background: #f0f3f6;
+  background: #fff;
   padding: 0 15px;
 }
 
@@ -290,7 +315,7 @@ li.active a::after {
 }
 
 .load-more-button button {
-  border: 2px solid;
+  border: 1px solid;
 
   padding: 15px 30px;
 
@@ -302,7 +327,7 @@ li.active a::after {
 
   top: 0;
 
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0, 0.2);
+  border-radius: 12px;
 
   transition: 200ms;
 
@@ -312,7 +337,7 @@ li.active a::after {
 .load-more-button button:hover {
   top: -3px;
 
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
 
   transition: 200ms;
 }
@@ -338,15 +363,77 @@ li.active a::after {
   color: #999;
 }
 
-.rate-filter-desktop-wrapper,
-.rate-filter-mobile-wrapper {
+.rate-filter-desktop-wrapper {
   background: #fff;
   direction: rtl;
   margin: 15px auto 0;
-  padding: 7px 15px;
+  padding: 5px 15px 4px;
   border-radius: 12px;
   border: 1px solid #e0e0e0;
   overflow: hidden;
+  margin-bottom: 5px;
+}
+
+.rate-filter-mobile-wrapper {
+  direction: rtl;
+  display: flex;
+  overflow-y: hidden;
+  overflow-x: scroll;
+  border-bottom: 1px solid #ebebeb;
+  padding: 10px;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.rate-filter-mobile-wrapper.desktop-filter-items {
+  border-bottom: none;
+  padding: 5px 0 10px;
+}
+
+.rate-filter-mobile-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.rate-filter-mobile-wrapper > button {
+  flex-shrink: 0;
+  border: 1px solid #ededed;
+  background: #fff;
+  border-radius: 12px;
+  font-size: 15px;
+  color: #707070;
+  padding: 3px 15px;
+  display: inline-flex;
+  height: 32px;
+  margin-left: 10px;
+}
+
+.rate-filter-mobile-wrapper > button.mobile-category-item.filter-item {
+  border-color: #fa8888;
+  color: #e41c38;
+  background: #fcf6f6;
+}
+
+.rate-filter-mobile-wrapper > button i {
+  position: relative;
+  top: 2px;
+  margin-left: 5px;
+}
+
+.rate-filter-mobile-wrapper > button i.fa-times {
+  position: relative;
+  top: 2px;
+  margin-left: 0;
+  margin-right: 10px;
+  font-size: 11px;
+  top: 6px;
+}
+
+.rate-filter-mobile-wrapper > button:first-of-type {
+  background: #fafafa;
+}
+
+.rate-filter-mobile-wrapper > button:last-of-type {
+  margin-left: 0;
 }
 
 .rate-filter-desktop-wrapper > ul {
@@ -445,11 +532,19 @@ li.active a::after {
   padding-top: 2px;
 }
 .show-list-items button {
-  background: #eee;
-  border: 1px solid #999;
-  border-radius: 5px;
-  padding: 3px 14px 0;
+  background: none;
+  border: 1px solid #556080;
+  border-radius: 12px;
+  padding: 4px 9px 0px;
+  -webkit-transition: 300ms;
   transition: 300ms;
+  color: #556080;
+  font-size: 16px;
+  min-width: 36px;
+}
+
+.show-list-items button .fa-grip-horizontal {
+  font-size: 16px;
 }
 .show-list-items button:hover {
   background: #556080;
@@ -463,20 +558,16 @@ li.active a::after {
   border-color: #556080;
   transition: 300ms;
 }
-
 .footer-note-wrapper {
   background: #fff;
   direction: rtl;
   margin: 15px auto;
   padding: 7px 15px;
-  border-radius: 5px;
-  -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+  border-radius: 12px;
   overflow: hidden;
   max-height: 220px;
-
   overflow-y: auto;
-
+  border: 1px solid #e0e0e0;
   line-height: 1.628;
 }
 
@@ -574,7 +665,7 @@ filter modal styles
 }
 
 .modal-body {
-  padding: 0 15px;
+  padding: 0;
 }
 .form-check-wrapper button {
   width: 100%;
@@ -624,7 +715,7 @@ filter modal styles
 }
 
 .default-grid {
-  padding: 0 3px;
+  padding: 0 7px;
 }
 
 .default-grid .default-main-article-content {
@@ -720,7 +811,7 @@ end filter modal styles
 }
 
 div.items-wrapper {
-  padding: 0 3px;
+  padding: 0 7px;
 }
 
 .banner-wrapper .circle-item-wrapper img {
@@ -810,8 +901,7 @@ div.items-wrapper {
     margin-right: 0 !important;
   }
 
-  .rate-filter-desktop-wrapper,
-  .rate-filter-mobile-wrapper {
+  .rate-filter-desktop-wrapper {
     background: #fbfbfb;
     border: none;
     border-radius: 0;
@@ -824,13 +914,14 @@ div.items-wrapper {
   }
 
   #main {
-    padding-top: 52px;
+    padding-top: 18px;
   }
 
   .sub-header {
     position: fixed;
-    z-index: 3;
+    z-index: 1011;
     width: 100%;
+    background: #fff;
   }
 
   .search-box {
@@ -845,10 +936,6 @@ div.items-wrapper {
 
   .main-content > .row {
     margin: 0;
-  }
-
-  .sub-header {
-    background: #f0f3f6;
   }
 
   .links-sub-header {
@@ -1004,11 +1091,12 @@ div.items-wrapper {
       >
         <div class="modal-dialog">
           <div class="modal-header">
-            <a href="#" class="close-modal" @click.prevent="closeFilterModal()">
+            <a href="#" class="close-modal" data-dismiss="modal">
               <i class="fa fa-times"></i>
             </a>
             <div class="modal-title">
-              <span>دسته ها و فیلتر</span>
+              <!-- <span class="hidden-xs">دسته ها و فیلتر</span> -->
+              <span>فیلتر مکان</span>
             </div>
           </div>
           <div class="main_popup_content">
@@ -1018,9 +1106,9 @@ div.items-wrapper {
                   :productsInfo="products"
                   :categoryId="categoryId"
                   :subCategoryId="subCategoryId"
-                  :provinceId="provinceId"
-                  :cityId="cityId"
-                  v-on:productsToParent="filterProducts($event)"
+                  :categories="categoryList"
+                  :resetLocation="resetLocation"
+                  :provinceList="$parent.provinceList"
                 />
               </div>
             </div>
@@ -1107,24 +1195,69 @@ div.items-wrapper {
     </div>
 
     <div
-      class="sub-header-fix sub-header hidden-lg hidden-md hidden-sm container-fluid"
+      class="
+        sub-header-fix sub-header
+        hidden-lg hidden-md hidden-sm
+        container-fluid
+      "
     >
       <div class="rate-filter-mobile-wrapper">
-        <div class="rate-filter">
-          <button class="green-button bg-gray" @click.prevent="openSortModal()">
-            <i class="fas fa-sort-amount-down-alt"></i>
-            مرتب سازی
-          </button>
-        </div>
-        <button class="btn-filter hidden-lg" @click.prevent="openFilterModal()">
-          <i class="fa fa-filter"></i>
-          دسته ها و فیلتر
+        <button
+          class="mobile-category-item"
+          @click.prevent="openFilterModal(false)"
+        >
+          <i class="fa fa-list"></i>
+          دسته ها
+        </button>
+        <button
+          v-if="sortOption == 'BM'"
+          class="mobile-category-item"
+          @click.prevent="openSortModal()"
+        >
+          <i class="fas fa-sort-amount-down-alt"></i>
+          مرتب سازی
+        </button>
+        <button
+          v-else
+          class="mobile-category-item filter-item"
+          @click.prevent="sedOptionAsDefault()"
+        >
+          <i class="fa fa-sort-amount-down-alt"></i>
+          {{ getSortOptionName() }}
+          <i class="fa fa-times"></i>
+        </button>
+        <button
+          v-if="city || province"
+          class="mobile-category-item filter-item"
+          @click.prevent="resetLocation = !resetLocation"
+        >
+          <i class="fa fa-map-marker-alt"></i>
+          <span v-if="city" v-text="city.city_name"> </span>
+          <span v-else-if="province" v-text="province.province_name"> </span>
+          <i class="fa fa-times"></i>
+        </button>
+        <router-link
+          tag="button"
+          :to="{ name: 'productList' }"
+          v-if="$route.params.categoryName"
+          class="mobile-category-item filter-item"
+        >
+          {{ getCategoryName() }}
+          <i class="fa fa-times"></i>
+        </router-link>
+        <button
+          v-for="(category, index) in categoryList"
+          :key="index + '-sub-header-category'"
+          class="mobile-category-item"
+          @click.prevent="openFilterModal(category)"
+        >
+          {{ category.category_name }}
         </button>
       </div>
     </div>
 
-    <main id="main" class="container">
-      <div class="col-xs-12 col-lg-9">
+    <main id="main" class="container-fluid">
+      <div class="col-xs-12 main-product-wrapper col-lg-9">
         <div class="row">
           <section class="hidden-xs col-xs-12">
             <div class="rate-filter-desktop-wrapper">
@@ -1138,7 +1271,7 @@ div.items-wrapper {
                 <li>
                   <button
                     @click="setSortOption('RR')"
-                    :class="{ 'text-green': sortOption == 'RR' }"
+                    :class="{ 'light-green-text': sortOption == 'RR' }"
                   >
                     احتمال پاسخگویی
                   </button>
@@ -1146,7 +1279,7 @@ div.items-wrapper {
                 <li>
                   <button
                     @click="setSortOption('RT')"
-                    :class="{ 'text-green': sortOption == 'RT' }"
+                    :class="{ 'light-green-text': sortOption == 'RT' }"
                   >
                     سرعت پاسخگویی
                   </button>
@@ -1154,7 +1287,7 @@ div.items-wrapper {
                 <li>
                   <button
                     @click="setSortOption('RD')"
-                    :class="{ 'text-green': sortOption == 'RD' }"
+                    :class="{ 'light-green-text': sortOption == 'RD' }"
                   >
                     جدیدترین ها
                   </button>
@@ -1166,7 +1299,8 @@ div.items-wrapper {
                 data-target="#searchFilter"
               >
                 <i class="fa fa-filter"></i>
-                دسته ها و فیلتر
+                <!-- دسته ها و فیلتر -->
+                فیلتر مکان
               </button>
               <div class="show-list-items hidden-xs hidden-sm">
                 <button
@@ -1190,264 +1324,378 @@ div.items-wrapper {
                 </button>
               </div>
             </div>
+            <div class="rate-filter-mobile-wrapper desktop-filter-items">
+              <button
+                v-if="sortOption != 'BM'"
+                class="mobile-category-item filter-item"
+                @click.prevent="sedOptionAsDefault()"
+              >
+                <i class="fa fa-sort-amount-down-alt"></i>
+                {{ getSortOptionName() }}
+                <i class="fa fa-times"></i>
+              </button>
+              <button
+                v-if="city || province"
+                class="mobile-category-item filter-item"
+                @click.prevent="resetLocation = !resetLocation"
+              >
+                <i class="fa fa-map-marker-alt"></i>
+                <span v-if="city" v-text="city.city_name"> </span>
+                <span v-else-if="province" v-text="province.province_name">
+                </span>
+                <i class="fa fa-times"></i>
+              </button>
+              <router-link
+                tag="button"
+                :to="{ name: 'productList' }"
+                v-if="$route.params.categoryName"
+                class="mobile-category-item filter-item"
+              >
+                {{ getCategoryName() }}
+                <i class="fa fa-times"></i>
+              </router-link>
+            </div>
           </section>
-
-          <section class="main-content col-xs-12" v-if="products.length > 0">
-            <div
-              id="article-list"
-              class="row"
-              :class="{ 'grid-items-wrapper': listIsGrid }"
-            >
-              <div v-if="!listIsGrid">
-                <div
-                  class="col-xs-12"
-                  :key="productIndex"
-                  v-for="(product, productIndex) in products"
-                >
-                  <div
-                    v-if="
-                      (productIndex % 9 == 0 &&
-                        productIndex != 0 &&
-                        currentUser.user_info &&
-                        currentUser.user_info.is_buyer) ||
-                      (productIndex % 9 == 0 &&
-                        productIndex != 0 &&
-                        !currentUser.user_info)
-                    "
-                    class="banner-wrapper"
-                  >
-                    <div class="banner-bg-striped"></div>
-                    <div class="main-wrapper">
-                      <p>آیا محصول مورد نظر خود را پیدا نکرده اید؟</p>
-                      <p>درخواست خرید ثبت کنید.</p>
-                      <router-link
-                        :to="{ name: 'registerRequestBuyer' }"
-                        class="btn green-button banner-button hover-effect"
-                        :class="{ 'hidden-xs': !currentUser.user_info }"
-                      >
-                        ثبت درخواست خرید
-                        <i class="fa fa-arrow-left"> </i>
-                      </router-link>
-                      <router-link
-                        :to="{ name: 'register' }"
-                        v-if="!currentUser.user_info"
-                        class="btn green-button banner-button hover-effect hidden-sm hidden-md hidden-lg"
-                      >
-                        ثبت درخواست خرید
-                        <i class="fa fa-arrow-left"> </i>
-                      </router-link>
-                    </div>
-                    <div class="circle-item-wrapper">
-                      <img src="../../../../img/request.svg" alt="" />
-                    </div>
-                  </div>
-
-                  <ProductArticle
-                    :productIndex="productIndex"
-                    v-if="products.length >= productIndex"
-                    :key="product.main.id"
-                    :product="product"
-                    :str="str"
-                    :currentUser="currentUser"
-                    :isMyProfile="
-                      currentUser.user_info &&
-                      currentUser.user_info.id == product.main.myuser_id
-                        ? true
-                        : false
-                    "
-                  />
-                </div>
-              </div>
-              <div v-else>
-                <div
-                  :key="productIndex"
-                  v-for="(product, productIndex) in products"
-                >
+          <div class="filter-loader-wrapper" v-if="submiting">
+            <div class="spinner-border">
+              <span class="sr-only"></span>
+            </div>
+          </div>
+          <div :class="{ 'fade-opacity': submiting }">
+            <section class="main-content col-xs-12" v-if="products.length > 0">
+              <div
+                id="article-list"
+                class="row"
+                :class="{ 'grid-items-wrapper': listIsGrid }"
+              >
+                <div v-if="!listIsGrid">
                   <div
                     class="col-xs-12"
-                    v-if="
-                      (productIndex % 12 == 0 &&
-                        productIndex != 0 &&
-                        currentUser.user_info &&
-                        currentUser.user_info.is_buyer) ||
-                      (productIndex % 12 == 0 &&
-                        productIndex != 0 &&
-                        !currentUser.user_info)
-                    "
+                    :key="productIndex"
+                    v-for="(product, productIndex) in products"
                   >
-                    <div class="row">
-                      <div class="banner-wrapper">
-                        <div class="banner-bg-striped"></div>
-                        <div class="main-wrapper">
-                          <p>آیا محصول مورد نظر خود را پیدا نکرده اید؟</p>
-                          <p>درخواست خرید ثبت کنید.</p>
-                          <router-link
-                            v-if="!currentUser.user_info"
-                            :to="{ name: 'register' }"
-                            class="btn green-button banner-button hover-effect"
-                          >
-                            ثبت درخواست خرید
-                            <i class="fa fa-arrow-left"> </i>
-                          </router-link>
-                          <router-link
-                            v-else
-                            :to="{ name: 'registerRequestBuyer' }"
-                            class="btn green-button banner-button hover-effect"
-                          >
-                            ثبت درخواست خرید
-                            <i class="fa fa-arrow-left"> </i>
-                          </router-link>
-                        </div>
-                        <div class="circle-item-wrapper">
-                          <img src="../../../../img/request.svg" alt="" />
-                        </div>
+                    <div
+                      v-if="
+                        (productIndex % 9 == 0 &&
+                          productIndex != 0 &&
+                          currentUser.user_info &&
+                          currentUser.user_info.is_buyer) ||
+                        (productIndex % 9 == 0 &&
+                          productIndex != 0 &&
+                          !currentUser.user_info)
+                      "
+                      class="banner-wrapper"
+                    >
+                      <div class="banner-bg-striped"></div>
+                      <div class="main-wrapper">
+                        <p>آیا محصول مورد نظر خود را پیدا نکرده اید؟</p>
+                        <p>درخواست خرید ثبت کنید.</p>
+                        <router-link
+                          :to="{ name: 'registerRequestBuyer' }"
+                          class="btn green-button banner-button hover-effect"
+                          :class="{ 'hidden-xs': !currentUser.user_info }"
+                        >
+                          ثبت درخواست خرید
+                          <i class="fa fa-arrow-left"> </i>
+                        </router-link>
+                        <router-link
+                          :to="{ name: 'register' }"
+                          v-if="!currentUser.user_info"
+                          class="
+                            btn
+                            green-button
+                            banner-button
+                            hover-effect
+                            hidden-sm hidden-md hidden-lg
+                          "
+                        >
+                          ثبت درخواست خرید
+                          <i class="fa fa-arrow-left"> </i>
+                        </router-link>
+                      </div>
+                      <div class="circle-item-wrapper">
+                        <img src="../../../../img/request.svg" alt="" />
                       </div>
                     </div>
-                  </div>
-                  <div
-                    class="col-xs-6 col-sm-4 items-wrapper pull-right col-md-3"
-                  >
-                    <ProductGridArticle
+
+                    <ProductArticle
                       :productIndex="productIndex"
                       v-if="products.length >= productIndex"
                       :key="product.main.id"
                       :product="product"
                       :str="str"
                       :currentUser="currentUser"
+                      :isMyProfile="
+                        currentUser.user_info &&
+                        currentUser.user_info.id == product.main.myuser_id
+                          ? true
+                          : false
+                      "
                     />
                   </div>
                 </div>
-              </div>
-              <div
-                class="load-more-button col-xs-12"
-                v-if="continueToLoadProducts === true"
-              >
-                <button class="btn btn-loader" @click.prevent="feed()">
-                  <div class="btn-content">
-                    <span class="hidden-xs text-rtl" v-show="!loadMoreActive">
-                      مشاهده محصولات بیشتر
-                      <i class="fa fa-plus"></i>
-                    </span>
-
-                    <span
-                      class="hidden-sm hidden-md hidden-lg text-rtl"
-                      v-show="!loadMoreActive"
-                    >
-                      محصولات بیشتر
-                      <i class="fa fa-plus"></i>
-                    </span>
-
+                <div v-else>
+                  <div
+                    :key="productIndex"
+                    v-for="(product, productIndex) in products"
+                  >
                     <div
-                      v-show="loadMoreActive"
-                      class="btn-loader-active-wrapper"
+                      class="col-xs-12"
+                      v-if="
+                        (productIndex % 12 == 0 &&
+                          productIndex != 0 &&
+                          currentUser.user_info &&
+                          currentUser.user_info.is_buyer) ||
+                        (productIndex % 12 == 0 &&
+                          productIndex != 0 &&
+                          !currentUser.user_info)
+                      "
                     >
-                      <img src="../../../../img/gif/loading.gif" />
+                      <div class="row">
+                        <div class="banner-wrapper">
+                          <div class="banner-bg-striped"></div>
+                          <div class="main-wrapper">
+                            <p>آیا محصول مورد نظر خود را پیدا نکرده اید؟</p>
+                            <p>درخواست خرید ثبت کنید.</p>
+                            <router-link
+                              v-if="!currentUser.user_info"
+                              :to="{ name: 'register' }"
+                              class="
+                                btn
+                                green-button
+                                banner-button
+                                hover-effect
+                              "
+                            >
+                              ثبت درخواست خرید
+                              <i class="fa fa-arrow-left"> </i>
+                            </router-link>
+                            <router-link
+                              v-else
+                              :to="{ name: 'registerRequestBuyer' }"
+                              class="
+                                btn
+                                green-button
+                                banner-button
+                                hover-effect
+                              "
+                            >
+                              ثبت درخواست خرید
+                              <i class="fa fa-arrow-left"> </i>
+                            </router-link>
+                          </div>
+                          <div class="circle-item-wrapper">
+                            <img src="../../../../img/request.svg" alt="" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="
+                        col-xs-6 col-sm-4
+                        items-wrapper
+                        pull-right
+                        col-md-3
+                      "
+                    >
+                      <ProductGridArticle
+                        :productIndex="productIndex"
+                        v-if="products.length >= productIndex"
+                        :key="product.main.id"
+                        :product="product"
+                        :str="str"
+                        :currentUser="currentUser"
+                      />
                     </div>
                   </div>
-                </button>
-              </div>
-            </div>
-          </section>
-          <!-- test -->
-
-          <search-not-found
-            v-else-if="products.length === 0 && searchActive === true"
-          />
-          <search-not-found
-            v-else-if="products.length === 0 && searchText !== ''"
-          />
-          <search-not-found
-            v-else-if="products.length === 0 && searchText === ''"
-          />
-
-          <section v-else class="main-content col-xs-12">
-            <div class="row" v-if="!listIsGrid">
-              <div
-                v-for="(defaultItem, index) in 8"
-                :key="index"
-                class="default-items col-xs-12"
-              >
+                </div>
                 <div
-                  class="col-xs-12 padding-15 margin-15-0 default-item-wrapper default-main-wrapper"
+                  class="load-more-button col-xs-12"
+                  v-if="continueToLoadProducts === true"
                 >
-                  <div class="default-user-contents col-xs-12 padding-0">
-                    <div
-                      class="placeholder-content default-article-user-image pull-right"
-                    ></div>
+                  <button
+                    class="btn btn-loader"
+                    :disabled="loadMoreActive"
+                    @click.prevent="feed()"
+                  >
+                    <div class="btn-content">
+                      <span class="hidden-xs text-rtl" v-show="!loadMoreActive">
+                        مشاهده محصولات بیشتر
+                        <i class="fa fa-plus"></i>
+                      </span>
 
-                    <span
-                      class="padding-top-5 placeholder-content margin-15 pull-right content-min-width"
-                    ></span>
-                  </div>
+                      <span
+                        class="hidden-sm hidden-md hidden-lg text-rtl"
+                        v-show="!loadMoreActive"
+                      >
+                        محصولات بیشتر
+                        <i class="fa fa-plus"></i>
+                      </span>
 
+                      <div
+                        v-show="loadMoreActive"
+                        class="btn-loader-active-wrapper"
+                      >
+                        <img src="../../../../img/gif/loading.gif" />
+                      </div>
+                    </div>
+                  </button>
+                </div>
+              </div>
+            </section>
+            <!-- test -->
+
+            <search-not-found
+              v-else-if="products.length === 0 && searchActive === true"
+            />
+            <search-not-found
+              v-else-if="products.length === 0 && searchText !== ''"
+            />
+            <search-not-found
+              v-else-if="products.length === 0 && searchText === ''"
+            />
+
+            <section v-else class="main-content col-xs-12">
+              <div class="row" v-if="!listIsGrid">
+                <div
+                  v-for="(defaultItem, index) in 8"
+                  :key="index"
+                  class="default-items col-xs-12"
+                >
                   <div
-                    class="default-article-contents padding-0 margin-top-10 col-xs-12"
+                    class="
+                      col-xs-12
+                      padding-15
+                      margin-15-0
+                      default-item-wrapper default-main-wrapper
+                    "
+                  >
+                    <div class="default-user-contents col-xs-12 padding-0">
+                      <div
+                        class="
+                          placeholder-content
+                          default-article-user-image
+                          pull-right
+                        "
+                      ></div>
+
+                      <span
+                        class="
+                          padding-top-5
+                          placeholder-content
+                          margin-15
+                          pull-right
+                          content-min-width
+                        "
+                      ></span>
+                    </div>
+
+                    <div
+                      class="
+                        default-article-contents
+                        padding-0
+                        margin-top-10
+                        col-xs-12
+                      "
+                    >
+                      <div class="default-wrapper-main-image pull-right">
+                        <span
+                          class="default-main-image placeholder-content"
+                        ></span>
+                      </div>
+                      <div class="default-main-article-content">
+                        <span
+                          class="content-half-width placeholder-content"
+                        ></span>
+
+                        <span
+                          class="content-default-width placeholder-content"
+                        ></span>
+
+                        <span
+                          class="
+                            content-min-width
+                            placeholder-content
+                            mobile-hidden
+                          "
+                        ></span>
+
+                        <span
+                          class="content-half-width placeholder-content"
+                        ></span>
+                      </div>
+                      <span
+                        class="
+                          margin-top-10
+                          placeholder-content
+                          default-button-min-with
+                          pull-left
+                          hidden-afetr-mobile-hidden
+                        "
+                      ></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div v-else>
+                <div
+                  v-for="(defaultItem, index) in 12"
+                  :key="index"
+                  class="default-items col-xs-6 col-sm-4 col-md-3 default-grid"
+                >
+                  <div
+                    class="
+                      col-xs-12
+                      margin-15-0
+                      default-item-wrapper default-main-wrapper
+                    "
                   >
                     <div class="default-wrapper-main-image pull-right">
                       <span
                         class="default-main-image placeholder-content"
                       ></span>
                     </div>
-                    <div class="default-main-article-content">
-                      <span
-                        class="content-half-width placeholder-content"
-                      ></span>
 
-                      <span
-                        class="content-default-width placeholder-content"
-                      ></span>
+                    <div
+                      class="
+                        default-article-contents
+                        padding-0
+                        margin-top-10
+                        col-xs-12
+                      "
+                    >
+                      <div class="default-main-article-content">
+                        <span
+                          class="content-half-width placeholder-content"
+                        ></span>
 
-                      <span
-                        class="content-min-width placeholder-content mobile-hidden"
-                      ></span>
-
-                      <span
-                        class="content-half-width placeholder-content"
-                      ></span>
-                    </div>
-                    <span
-                      class="margin-top-10 placeholder-content default-button-min-with pull-left hidden-afetr-mobile-hidden"
-                    ></span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div v-else>
-              <div
-                v-for="(defaultItem, index) in 12"
-                :key="index"
-                class="default-items col-xs-6 col-sm-4 col-md-3 default-grid"
-              >
-                <div
-                  class="col-xs-12 margin-15-0 default-item-wrapper default-main-wrapper"
-                >
-                  <div class="default-wrapper-main-image pull-right">
-                    <span class="default-main-image placeholder-content"></span>
-                  </div>
-
-                  <div
-                    class="default-article-contents padding-0 margin-top-10 col-xs-12"
-                  >
-                    <div class="default-main-article-content">
-                      <span
-                        class="content-half-width placeholder-content"
-                      ></span>
-
-                      <span
-                        class="content-default-width placeholder-content"
-                      ></span>
-                      <span
-                        class="margin-top-10 placeholder-content default-button-min-with pull-left hidden-afetr-mobile-hidden"
-                      ></span>
-                      <span
-                        class="placeholder-content default-button-full-with pull-left mobile-hidden"
-                      ></span>
+                        <span
+                          class="content-default-width placeholder-content"
+                        ></span>
+                        <span
+                          class="
+                            margin-top-10
+                            placeholder-content
+                            default-button-min-with
+                            pull-left
+                            hidden-afetr-mobile-hidden
+                          "
+                        ></span>
+                        <span
+                          class="
+                            placeholder-content
+                            default-button-full-with
+                            pull-left
+                            mobile-hidden
+                          "
+                        ></span>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </section>
+            </section>
+          </div>
         </div>
       </div>
 
@@ -1461,9 +1709,9 @@ div.items-wrapper {
               :productsInfo="products"
               :categoryId="categoryId"
               :subCategoryId="subCategoryId"
-              :provinceId="provinceId"
-              :cityId="cityId"
-              v-on:productsToParent="filterProducts($event)"
+              :categories="categoryList"
+              :resetLocation="resetLocation"
+              :provinceList="$parent.provinceList"
             />
           </div>
         </div>
@@ -1480,13 +1728,14 @@ div.items-wrapper {
       v-if="categoryMetaData.length > 0 && categoryMetaData[0]"
     >
       <div class="col-xs-12">
-        <div data-v-c5ebe4ce class="title-section col-xs-12">
-          <div data-v-c5ebe4ce class="row">
-            <h1 data-v-c5ebe4ce>
-              خرید عمده
+        <div class="title-section col-xs-12">
+          <div class="row">
+            <h1>
+              خرید
               <span v-text="this.getCategoryName()"></span>
+              عمده
             </h1>
-            <hr data-v-c5ebe4ce />
+            <hr />
           </div>
         </div>
 
@@ -1512,6 +1761,7 @@ import ProductGridArticle from "./product_components/Product_grid_article";
 import ProductAsideCategories from "./product_components/sidebar/product_aside_categories";
 import searchNotFound from "./main_components/search-not-found";
 import { eventBus } from "../../../router/router";
+import StickySidebar from "../../../stickySidebar.js";
 
 var visible = false;
 export default {
@@ -1521,7 +1771,7 @@ export default {
     ProductAsideCategories,
     searchNotFound,
   },
-  props: ["assets", "str"],
+  props: ["assets", "str", "categoryList"],
   data: function () {
     return {
       currentUser: {
@@ -1537,10 +1787,11 @@ export default {
         photos: [],
       },
       searchText: "",
-      provinceId: "",
+      province: "",
+      city: "",
+      resetLocation: false,
       categoryId: "",
       subCategoryId: "",
-      cityId: "",
       categoryMetaData: "",
       searchValue: this.$route.params.searchText,
       scrolled: false,
@@ -1585,6 +1836,15 @@ export default {
       }
     },
     init: function () {
+      if (!this.$parent.provinceList) {
+        this.getLocations();
+      }
+      $(".modal").on("show.bs.modal", () => {
+        this.handleBackKeys();
+      });
+      this.checkLocationFilter();
+      this.checkSortOption();
+      $("#searchFilter").modal("hide");
       this.products = {};
       this.scrollToTop();
       $(".show-list-items button").tooltip();
@@ -1621,15 +1881,21 @@ export default {
 
           self.fromProductCount = 0;
           self.productCountInPage = 16;
-
+          let getProductsData = {
+            from_record_number: self.fromProductCount,
+            response_rate: self.$parent.productByResponseRate,
+            to_record_number: self.productCountInPage,
+            search_text: categoryName,
+            sort_by: self.sortOption,
+          };
+          if (self.province.id) {
+            getProductsData.province_id = self.province.id;
+          }
+          if (self.city.id) {
+            getProductsData.city_id = self.city.id;
+          }
           axios
-            .post("/user/get_product_list", {
-              from_record_number: self.fromProductCount,
-              response_rate: self.$parent.productByResponseRate,
-              to_record_number: self.productCountInPage,
-              search_text: categoryName,
-              sort_by: self.sortOption,
-            })
+            .post("/user/get_product_list", getProductsData)
             .then(function (response) {
               self.products = response.data.products;
               self.loading = false;
@@ -1641,7 +1907,7 @@ export default {
               setTimeout(function () {
                 self.sidebarScroll();
               }, 500);
-              eventBus.$emit("submiting", false);
+              self.submiting = false;
             });
         }
       });
@@ -1651,7 +1917,7 @@ export default {
 
       if (
         this.searchText === "" &&
-        this.provinceId === "" &&
+        this.province.id === "" &&
         this.categoryId === "" &&
         this.continueToLoadProducts
       ) {
@@ -1667,9 +1933,11 @@ export default {
             sort_by: self.sortOption,
           })
           .then(function (response) {
-            self.products = self.products.concat(response.data.products);
+            if (Array.isArray(self.products)) {
+              self.products = self.products.concat(response.data.products);
+            }
 
-            eventBus.$emit("submiting", false);
+            self.submiting = false;
             if (self.products.length + 1 < self.productCountInPage) {
               self.continueToLoadProducts = false;
             }
@@ -1695,11 +1963,11 @@ export default {
         if (this.subCategoryId) {
           searchObject.sub_category_id = this.subCategoryId;
         }
-        if (this.provinceId) {
-          searchObject.province_id = this.provinceId;
+        if (this.province) {
+          searchObject.province_id = this.province.id;
         }
-        if (this.cityId) {
-          searchObject.city_id = this.cityId;
+        if (this.city) {
+          searchObject.city_id = this.city.id;
         }
 
         searchObject.search_text = this.getCategoryName();
@@ -1712,7 +1980,9 @@ export default {
         axios
           .post("/user/get_product_list", searchObject)
           .then(function (response) {
-            self.products = self.products.concat(response.data.products);
+            if (Array.isArray(self.products)) {
+              self.products = self.products.concat(response.data.products);
+            }
 
             self.loadMoreActive = false;
 
@@ -1778,24 +2048,24 @@ export default {
       }
     },
     resetFilter: function () {
-      eventBus.$emit("submiting", true);
+      this.submiting = true;
 
       $(".box-sidebar option").prop("selected", function () {
         return this.defaultSelected;
       });
 
       this.searchText = "";
-      this.provinceId = "";
+      this.province = "";
       this.categoryId = "";
       this.subCategoryId = "";
-      this.cityId = "";
+      this.city = "";
 
       this.init();
     },
     applyFilter: function () {
       var self = this;
 
-      eventBus.$emit("submiting", true);
+      this.submiting = true;
 
       self.fromProductCount = 0;
       self.productCountInPage = 12;
@@ -1811,11 +2081,11 @@ export default {
       if (this.subCategoryId) {
         searchObject.sub_category_id = this.subCategoryId;
       }
-      if (this.provinceId) {
-        searchObject.province_id = this.provinceId;
+      if (this.province) {
+        searchObject.province_id = this.province.id;
       }
-      if (this.cityId) {
-        searchObject.city_id = this.cityId;
+      if (this.city) {
+        searchObject.city_id = this.city.id;
       }
 
       searchObject.search_text = this.getCategoryName();
@@ -1828,7 +2098,7 @@ export default {
         .post("/user/get_product_list", searchObject)
         .then(function (response) {
           self.products = response.data.products;
-          eventBus.$emit("submiting", false);
+          self.submiting = false;
 
           self.scrollToTop();
 
@@ -1841,6 +2111,7 @@ export default {
         });
     },
     setSortOption: function (sortOption) {
+      localStorage.setItem("sortOption", sortOption);
       $("#filter-modal").modal("hide");
       if (this.isDeviceMobile()) {
         history.go(-1);
@@ -1854,7 +2125,7 @@ export default {
         );
 
         this.sortOption = sortOption;
-        this.init();
+        this.applyFilter();
       }
     },
     isDeviceMobile: function () {
@@ -1938,23 +2209,39 @@ export default {
         $("#filter-modal").modal("hide");
       });
     },
+    getSortOptionName() {
+      switch (this.sortOption) {
+        case "BM":
+          return "پیش فرض";
+          break;
+        case "RR":
+          return "احتمال پاسخگویی";
+          break;
+        case "RT":
+          return "سرعت پاسخگویی";
+          break;
+        case "RD":
+          return "جدیدترین ها";
+          break;
+
+        default:
+          return "پیش فرض";
+
+          break;
+      }
+    },
     closeSortModal: function () {
       $("#filter-modal").modal("hide");
       history.go(-1);
     },
-    openFilterModal() {
-      $("#searchFilter").modal("show");
-
-      if (window.history.state) {
-        history.pushState(null, null, window.location);
+    openFilterModal(category) {
+      if (category) {
+        this.$parent.modalSubCategory = category;
+        $("#categories-modal").modal("show");
+      } else {
+        this.$parent.modalSubCategory = false;
+        $("#categories-modal").modal("show");
       }
-      $(window).on("popstate", function (e) {
-        $("#searchFilter").modal("hide");
-      });
-    },
-    closeFilterModal: function () {
-      $("#searchFilter").modal("hide");
-      history.go(-1);
     },
     createJsonLDObject: function () {
       var fullName =
@@ -2012,6 +2299,39 @@ export default {
       // } else {
       //   this.listIsGrid = true;
       // }
+    },
+    checkSortOption() {
+      const sortOption = localStorage.getItem("sortOption");
+      if (sortOption) {
+        this.sortOption = sortOption;
+      }
+    },
+    sedOptionAsDefault() {
+      this.sortOption = "BM";
+      localStorage.removeItem("sortOption");
+      this.applyFilter();
+    },
+    checkLocationFilter() {
+      const province = localStorage.getItem("selectedProvince");
+      const city = localStorage.getItem("selectedCity");
+      this.province = province ? JSON.parse(province) : "";
+      this.city = city ? JSON.parse(city) : "";
+    },
+    handleBackKeys: function () {
+      let self = this;
+      if (window.history.state) {
+        history.pushState(null, null, window.location);
+      }
+      $(window).on("popstate", function (e) {
+        $(".modal").modal("hide");
+      });
+    },
+    getLocations() {
+      axios
+        .post("/location/get_location_info", { cascade_list: true })
+        .then(
+          (response) => (this.$parent.provinceList = response.data.provinces)
+        );
     },
   },
   watch: {
@@ -2083,22 +2403,24 @@ export default {
 
     return {
       title:
-        "خرید و فروش عمده " +
-        categoryName +
-        " - " +
         "قیمت " +
         categoryName +
-        " عمده صادراتی - خرید و فروش مستقیم",
+        " - " +
+        " خرید و فروش " +
+        categoryName +
+        " عمده - بهترین قیمت روز ",
       titleTemplate: "%s | باسکول",
       meta: [
         {
           name: "description",
           content:
-            "خرید و فروش عمده " +
+            " قیمت امروز - " +
             categoryName +
-            " به صورت مستقیم و بدون واسطه از بهترین کشاورزان و تامین کنندگان ☀️☀️ آخرین قیمت " +
+            " خرید و فروش " +
             categoryName +
-            " عمده ☀️☀️ بازار باسکول ",
+            " عمده بدون واسطه از بهترین تامین کنندگان ☀️☀️ آخرین قیمت " +
+            categoryName +
+            " ☀️☀️ بازار باسکول",
         },
         {
           name: "author",
@@ -2109,13 +2431,14 @@ export default {
           content:
             "خرید و فروش عمده " +
             categoryName +
-            " به صورت مستقیم و بدون واسطه از بهترین کشاورزان و تامین کنندگان ☀️☀️ آخرین قیمت " +
+            " - قیمت  " +
             categoryName +
-            " عمده ☀️☀️ بازار باسکول ",
+            " عمده مستقیم + صادراتی |‌ باسکول ",
         },
         {
           property: "og:site_name",
-          content: "باسکول بازارآنلاین خرید و فروش محصولات کشاورزی ایران",
+          content:
+            "باسکول بازارآنلاین خرید و فروش محصولات غذایی و کشاورزی ایران",
         },
         {
           property: "og:title",

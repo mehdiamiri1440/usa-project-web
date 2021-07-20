@@ -1,11 +1,14 @@
 <style scoped>
+@import url("../../../../../../css/owl.carousel.min.css");
+@import url("../../../../../../css/magnific-popup.css");
+@import url("../../../../../../css/owl-product-items-style.css");
 div,
 p,
 span {
   line-height: 1.5em;
 }
 #main {
-  padding-top: 160px;
+  padding-top: 120px;
 }
 
 .main-content > h4 {
@@ -24,6 +27,31 @@ span {
   border-radius: 8px;
 }
 
+.bread-crumbs-wrapper {
+  margin: 10px auto;
+  height: 21px;
+}
+
+.bread-crumbs-wrapper a {
+  color: #999;
+  font-size: 14px;
+  margin-left: 5px;
+}
+
+.bread-crumbs-wrapper span {
+  color: #bbb;
+  font-size: 14px;
+}
+
+.bread-crumbs-wrapper a i {
+  margin-right: 2px;
+  font-size: 11px;
+}
+
+.bread-crumbs-wrapper a:hover {
+  color: #555;
+}
+
 .box-content {
   overflow: hidden;
   background: #fff;
@@ -32,6 +60,7 @@ span {
   padding-bottom: 10px;
   border-radius: 12px;
   border: 1px solid #e0e0e0;
+  min-height: 212px;
 }
 
 .title-box {
@@ -63,9 +92,6 @@ span {
   direction: rtl;
   margin: 30px 0 15px;
 }
-.box-title-placeholder {
-  margin: 30px 0 15px;
-}
 
 .box-title::after {
   content: " ";
@@ -75,10 +101,6 @@ span {
   display: block;
   border-radius: 5px;
   margin-top: 10px;
-}
-
-.section-wrapper {
-  margin-top: 30px;
 }
 
 .section-wrapper .title-box {
@@ -171,6 +193,18 @@ button.send-message-button {
   padding: 0 15px;
 }
 
+.default-carousel-item .box-content {
+  margin-bottom: 15px;
+}
+
+.spinner-border {
+  width: 1.5rem;
+  height: 1.5rem;
+  top: -8px;
+  position: relative;
+  left: 2px;
+}
+
 @media screen and (max-width: 1199px) {
   .box-title {
     margin: 0 auto 15px;
@@ -189,7 +223,14 @@ button.send-message-button {
 
 @media screen and (max-width: 767px) {
   #main {
-    padding-top: 96px;
+    padding-top: 94px;
+  }
+
+  .box-title {
+    margin: 0 10px 15px;
+  }
+  .main-product-wrapper {
+    border-radius: 0;
   }
 }
 
@@ -207,7 +248,31 @@ button.send-message-button {
 
 <template>
   <div class="container">
+    <RegisterModal
+      v-if="!currentUser.user_info"
+      :is-chat="isChat"
+      :product="product"
+    />
+
     <main id="main" class="row">
+      <div class="col-xs-12 text-rtl text-right bread-crumbs-wrapper hidden-xs">
+        <div class="row" v-if="breadCrumbs">
+          <router-link :to="{ name: 'productList' }">
+            همه دسته ها
+            <i class="fa fa-angle-left"></i>
+          </router-link>
+
+          <router-link
+            v-for="(item, index) in breadCrumbs"
+            :key="index"
+            :to="getSubCategoryUrl(item)"
+          >
+            {{ item }}
+            <i class="fa fa-angle-left"></i>
+          </router-link>
+          <span v-text="product.main.product_name"></span>
+        </div>
+      </div>
       <div class="col-xs-12 col-lg-9 pull-right">
         <section class="main-content">
           <div class="row">
@@ -225,66 +290,70 @@ button.send-message-button {
       <section
         v-if="relatedProducts.length > 0 && isLoading == false"
         id="product-section"
-        class="section-wrapper container-fluid latest-product"
+        class="section-wrapper col-xs-12 latest-product"
       >
-        <div class="col-xs-12">
-          <div class="row">
-            <h3 class="box-title">محصولات مرتبط</h3>
+        <div class="row">
+          <h3 class="box-title">محصولات مرتبط</h3>
 
-            <div class="products-contents">
-              <div class="owl-carousel">
-                <ProductCarousel
-                  v-for="(product, index) in relatedProducts"
-                  :key="index"
-                  :img="str + '/thumbnails/' + product.photo"
-                  :title="product.product_name"
-                  :stock="getConvertedNumbers(product.stock)"
-                  :link="getRelatedProductUrl(product)"
-                  column="4"
-                />
-              </div>
+          <div class="products-contents">
+            <div class="owl-carousel product-carousel">
+              <ProductCarousel
+                v-for="(product, index) in relatedProducts"
+                :key="index"
+                :img="str + '/thumbnails/' + product.photo"
+                :title="product.product_name"
+                :stock="getConvertedNumbers(product.stock)"
+                :link="getRelatedProductUrl(product)"
+                column="4"
+              />
             </div>
           </div>
         </div>
       </section>
 
       <section
+        class="section-wrapper col-xs-12"
         v-else-if="relatedProducts.length == 0 && isLoading == true"
-        class="section-wrapper container-fluid"
       >
-        <div class="container">
-          <div class="row">
-            <div class="col-xs-12">
-              <div class="box-title-placeholder col-xs-12">
-                <span class="placeholder-content content-full-width"></span>
-                <br />
-              </div>
+        <div class="row">
+          <h3 class="box-title">محصولات مرتبط</h3>
 
-              <div class="col-xs-12 products-contents">
-                <div class="row">
-                  <div
-                    v-for="(item, index) in 4"
-                    :key="index"
-                    :class="{ 'hidden-xs': index >= 2 }"
-                    class="col-lg-3 col-md-4 col-xs-6 default-carousel-item"
-                  >
-                    <article class="carousel-item box-content col-xs-12">
-                      <span
-                        class="default-index-product-image placeholder-content col-xs-12"
-                      ></span>
+          <div class="col-xs-12 products-contents">
+            <div class="row">
+              <div
+                v-for="(item, index) in 4"
+                :key="index"
+                :class="{ 'hidden-xs': index >= 2 }"
+                class="col-lg-3 col-md-4 col-xs-6 default-carousel-item"
+              >
+                <article class="carousel-item box-content col-xs-12">
+                  <span
+                    class="
+                      default-index-product-image
+                      placeholder-content
+                      col-xs-12
+                    "
+                  ></span>
 
-                      <span
-                        class="content-default-width placeholder-content margin-10 col-xs-10 col-xs-offset-1"
-                      ></span>
+                  <span
+                    class="
+                      content-default-width
+                      placeholder-content
+                      margin-10
+                      col-xs-10 col-xs-offset-1
+                    "
+                  ></span>
 
-                      <span
-                        class="content-default-width placeholder-content col-xs-8 col-xs-offset-2"
-                      ></span>
+                  <span
+                    class="
+                      content-default-width
+                      placeholder-content
+                      col-xs-8 col-xs-offset-2
+                    "
+                  ></span>
 
-                      <span class="margin-10"></span>
-                    </article>
-                  </div>
-                </div>
+                  <span class="margin-10"></span>
+                </article>
               </div>
             </div>
           </div>
@@ -337,7 +406,7 @@ button.send-message-button {
         </button>
         <button
           v-else-if="!currentUser.user_info"
-          @click.prevent="loginModal()"
+          @click.prevent="loginModal(true)"
           :class="{
             'send-message-button': product.user_info.has_phone,
             'green-button': !product.user_info.has_phone,
@@ -367,7 +436,7 @@ button.send-message-button {
         </button>
         <button
           v-else-if="!currentUser.user_info && product.user_info.has_phone"
-          @click.prevent="loginModal()"
+          @click.prevent="loginModal(false)"
           class="green-button"
           :class="{ disable: isActivePhone }"
           :disabled="isActivePhone"
@@ -395,17 +464,21 @@ import ProductCarousel from "../../main_components/product-list-carousel";
 import ProductContents from "./product";
 import UserInfo from "./user_info";
 // import registerInquerForm from "../../main_components/register-inquiry-form.vue";
+import RegisterModal from "../../main_components/register-modal";
+import swal from "../../../../../sweetalert.min.js";
 
 export default {
   components: {
     ProductContents,
     UserInfo,
     ProductCarousel,
+    RegisterModal,
     // registerInquerForm,
   },
-  props: ["str", "assets", "userType"],
+  props: ["str", "assets", "userType", "categoryList"],
   data: function () {
     return {
+      isChat: true,
       currentUser: {
         profile: "",
         user_info: "",
@@ -435,6 +508,7 @@ export default {
       isActivePhone: false,
       userPhone: "",
       getPhoneLoader: false,
+      breadCrumbs: "",
     };
   },
   methods: {
@@ -471,7 +545,7 @@ export default {
                 self.$emit("isMyProfile", self.isMyProfile);
               }
             }
-
+            self.getBreadCrumbs();
             axios
               .post("/get_related_products", {
                 product_id: self.product.main.id,
@@ -487,6 +561,7 @@ export default {
       });
     },
     openChat: function (product) {
+      this.isChat = true;
       this.registerComponentStatistics(
         "product",
         "openChat",
@@ -502,6 +577,7 @@ export default {
         profile_photo: product.profile_info.profile_photo,
         user_name: product.user_info.user_name,
         product_name: productName,
+        product_id: product.main.id,
       };
 
       var self = this;
@@ -523,29 +599,32 @@ export default {
         eventBus.$emit("modal", "sendMsg");
       }
     },
-    loginModal() {
-      swal({
-        title: "ارتباط با مخاطب",
-        icon: "info",
-        text:
-          "برای ارتباط با هزاران خریدار و فروشنده در باسکول ابتدا ثبت نام کنید.",
-        className: "custom-swal-with-cancel",
-        buttons: {
-          success: {
-            text: "ورود سریع / ثبت نام",
-          },
-          close: {
-            text: "بستن",
-            className: "bg-cancel",
-          },
-        },
-      }).then((value) => {
-        if (value == "success") {
-          this.$router.push({ name: "register" });
-        }
-      });
+    loginModal(isChat) {
+      this.isChat = isChat;
+      $("#register-modal").modal("show");
+      // swal({
+      //   title: "ارتباط با مخاطب",
+      //   icon: "info",
+      //   text:
+      //     "برای ارتباط با هزاران خریدار و فروشنده در باسکول ابتدا ثبت نام کنید.",
+      //   className: "custom-swal-with-cancel",
+      //   buttons: {
+      //     success: {
+      //       text: "ورود سریع / ثبت نام",
+      //     },
+      //     close: {
+      //       text: "بستن",
+      //       className: "bg-cancel",
+      //     },
+      //   },
+      // }).then((value) => {
+      //   if (value == "success") {
+      //     this.$router.push({ name: "register" });
+      //   }
+      // });
     },
     openChatModal: function (product) {
+      this.isChat = true;
       this.registerComponentStatistics(
         "product",
         "openChat",
@@ -558,6 +637,7 @@ export default {
         last_name: product.user_info.last_name,
         profile_photo: product.profile_info.profile_photo,
         user_name: product.user_info.user_name,
+        product_id: product.main.id,
       };
 
       var self = this;
@@ -579,6 +659,7 @@ export default {
       }
     },
     activePhoneCall: function (isModal) {
+      this.isChat = false;
       this.getPhoneLoader = true;
       this.isActivePhone = true;
       axios
@@ -844,6 +925,19 @@ export default {
     closePhoneModal() {
       $(".modal").modal("hide");
     },
+    getBreadCrumbs() {
+      let items = [];
+
+      items.push(this.product.main.super_category_name);
+      items.push(this.product.main.category_name);
+      items.push(this.product.main.sub_category_name);
+
+      this.breadCrumbs = items;
+    },
+    getSubCategoryUrl: function (category) {
+      let url = "/product-list/category/" + category.split(" ").join("-");
+      return url;
+    },
   },
   created() {
     gtag("config", "UA-129398000-1", { page_path: "/product-view" });
@@ -852,6 +946,7 @@ export default {
   },
   mounted() {
     this.init();
+
     var self = this;
     document.onreadystatechange = () => {
       if (document.readyState === "complete") {
@@ -896,16 +991,16 @@ export default {
     //
     return {
       title:
-        productOwnerFullName +
-        " " +
-        "خرید و فروش عمده و قیمت " +
+        "خرید و قیمت " +
         productSubCategory +
         " " +
         productName +
-        " " +
+        " عمده " +
         productCity +
         " " +
-        productProvince,
+        productProvince +
+        " " +
+        productOwnerFullName,
       titleTemplate: "%s | باسکول",
       meta: [
         {
@@ -940,7 +1035,8 @@ export default {
         },
         {
           property: "og:site_name",
-          content: "باسکول بازارآنلاین خرید و فروش محصولات کشاورزی ایران",
+          content:
+            "باسکول بازارآنلاین خرید و فروش محصولات غذایی و کشاورزی ایران",
         },
         {
           property: "og:title",

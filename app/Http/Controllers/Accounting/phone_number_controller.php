@@ -44,9 +44,14 @@ class phone_number_controller extends Controller
                                 ->where('myusers.id','<>',$viewer_user_id)
                                 ->where('products.id',$request->p_id)
                                 ->where('products.confirmed',true)
-                                ->where(function($q){
+                                ->where(function($q) use($viewer_user_id,$request){
                                     return $q = $q->where('myusers.wallet_balance','>=',config('subscriptionPakage.phone-number.view-price'))
-                                                    ->orWhere('myusers.active_pakage_type','>',0);
+                                                    ->orWhere('myusers.active_pakage_type','>',0)
+                                                    ->orWhereExists(function($q) use($viewer_user_id,$request){
+                                                        $q->select(DB::raw(1))
+                                                            ->from('leads')
+                                                            ->whereRaw("leads.buyer_id = $viewer_user_id and leads.seller_id = {$request->s_id} and leads.related_product_id = {$request->p_id}");
+                                                    });
                                 })
                                 ->whereIn('myusers.phone_view_permission',['1010','1110','1011','1111'])
                                 ->select('myusers.*')
@@ -370,7 +375,7 @@ class phone_number_controller extends Controller
     {
         $now = Carbon::now();
 
-        if(Carbon::parse($now)->format('H') >= 22  || Carbon::parse($now)->format('H') < 7){
+        if(Carbon::parse($now)->format('H') < 5){
             return false;
         }
 

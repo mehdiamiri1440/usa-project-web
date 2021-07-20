@@ -8,21 +8,25 @@
 
     <link rel="icon" href="{{asset('assets/img/logo/mobile-logo.svg')}}">
 
-    {{-- @if($category_name)
-    <title>{{'خرید و فروش عمده ' . $category_name . ' - قیمت ' . $category_name . ' عمده صادراتی - خرید و فروش مستقیم |‌ باسکول' }}</title>
-    <meta name="description" content='{{"خرید و فروش عمده " . $category_name . " به صورت مستقیم و بدون واسطه از بهترین کشاورزان و تامین کنندگان ☀️☀️ آخرین قیمت " . $category_name . " عمده ☀️☀️ بازار باسکول"}}'>
-    <meta name="og:description" content='{{"خرید و فروش عمده " . $category_name . " به صورت مستقیم و بدون واسطه از بهترین کشاورزان و تامین کنندگان ☀️☀️ آخرین قیمت " . $category_name . " عمده ☀️☀️ بازار باسکول"}}'>
-    <meta name="og:site_name" content="باسکول بازارآنلاین خرید و فروش محصولات کشاورزی ایران">
-    <meta name="og:title" content="{{'خرید و فروش عمده ' . $category_name . ' - قیمت ' . $category_name . ' عمده صادراتی - خرید و فروش مستقیم |‌ باسکول' }}" >
+    @if(config('app.name') != 'Laravel')
+    <meta name="robots" content="noindex" />
+    @endif
+
+    @if(isset($category_name))
+    <title>{{'قیمت ' . $category_name . ' - خرید و فروش ' . $category_name . ' عمده - بهترین قیمت روز | باسکول ' }}</title>
+    <meta name="description" content='{{"قیمت امروز " . $category_name . " - خرید و فروش " . $category_name . " عمده بدون واسطه از بهترین تامین کنندگان ☀️☀️ آخرین قیمت " . $category_name . " ☀️☀️ بازار باسکول"}}'>
+    <meta name="og:description" content='{{"قیمت امروز " . $category_name . " - خرید و فروش " . $category_name . " عمده بدون واسطه از بهترین تامین کنندگان ☀️☀️ آخرین قیمت " . $category_name . " ☀️☀️ بازار باسکول"}}'>
+    <meta name="og:site_name" content="باسکول بازارآنلاین خرید و فروش محصولات غذایی و کشاورزی ایران">
+    <meta name="og:title" content="{{'قیمت ' . $category_name . ' - خرید و فروش ' . $category_name . ' عمده - بهترین قیمت روز | باسکول ' }}" >
     <link rel="canonical" href="{{url('/product-list/category/' . implode(explode(' ',$category_name),'-'))}}">
 
-    @else --}}
+    @else
     <title>لیست محصولات و قیمت عمده محصولات کشاورزی | باسکول</title>
     <meta name="description" content="خرید عمده و قیمت میوه | خرید عمده و قیمت غلات | خرید عمده و قیمت صیفی جات | خرید و قیمت عمده خشکبار">
     <meta name="og:description" content="مرجع تخصصی خرید و فروش عمده و قیمت محصولات کشاورزی ایران | صادرات محصولات کشاورزی">
     <meta name="og:site_name" content="باسکول بازارآنلاین خرید و فروش محصولات کشاورزی ایران">
     <meta name="og:title" content="لیست محصولات و قیمت عمده محصولات کشاورزی | باسکول">
-    {{-- @endif --}}
+    @endif
 
     <meta property="og:image" content="{{asset('assets/img/logo/512-buskool-logo.jpg')}}" />
 

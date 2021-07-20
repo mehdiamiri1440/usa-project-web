@@ -19,14 +19,6 @@ use Illuminate\Http\Request;
 use App\Jobs\sendSMS;
 
 
-
-Route::get('/test', function () {
-            return view('layout.index');
-        });
-
-
-
-
 Route::get('/product-list',[
     'uses' => 'Product\product_list_controller@get_product_list_blade',
 ]);
@@ -34,6 +26,54 @@ Route::get('/product-list',[
 Route::get('/product-list/category/{category_name}',[
     'uses' => 'Product\product_list_controller@get_product_list_blade',
 ])->name('product-list');
+
+Route::get('/product-view/{category_name}/{extra_text}/{product_id}',[
+    'uses' => 'Product\product_controller@get_product_blade',
+])->where('product_id','[0-9]+');
+
+Route::get('/pricing',function(){
+    if(session()->has('user_id')){
+        if(session('is_seller') == true){
+            return redirect('/seller/pricing');
+        }
+        else if(session('is_buyer') == true){
+
+            return redirect('/switch-role');
+        }
+    }
+    else{
+        return redirect('/register');
+    }
+});
+
+Route::get('/msg',function(){
+    if(session()->has('user_id')){
+        if(session('is_seller') == true){
+            return redirect('/seller/messenger/contacts');
+        }
+        else if(session('is_buyer') == true){
+            return redirect('/buyer/messenger/contacts');
+        }
+    }
+    else{
+        return redirect('/register');
+    }
+});
+
+Route::get('/buyers',function(){
+    if(session()->has('user_id')){
+        if(session('is_seller') == true){
+            return redirect('/seller/messenger/buy-ads');
+        }
+        else if(session('is_buyer') == true){
+
+            return redirect('/switch-role');
+        }
+    }
+    else{
+        return redirect('/register');
+    }
+});
 
 // Route::group(['prefix' => 'master'], function () {
 //     Route::get('/', function () {
@@ -98,10 +138,10 @@ Route::post('/user/get_product_list', [
     'as' => 'get_product_list',
 ]);
 
-// Route::post('/user/get_buyAd_list',[
-//     'uses' => 'BuyAd\buyAd_controller@get_buyAd_list',
-//     'as' => 'get_buyAd_list'
-// ]);
+Route::post('/get_buyAd_list',[
+    'uses' => 'BuyAd\buyAd_controller@get_buyAd_list',
+    'as' => 'get_buyAd_list'
+]);
 
 Route::post('/location/get_location_info', [
     'uses' => 'General\location_controller@get_all_provinces_or_cities_in_the_province_in_iran',
@@ -319,6 +359,11 @@ Route::group(['middleware' => [login::class]], function () {
     Route::post('/send_reply_to_buyAd',[
         'uses' => 'Messenger\message_controller@send_reply_message_to_the_buyAd',
         'as' => 'send_reply_to_buyAd'
+    ]);
+
+    Route::post('/send_reply_to_product',[
+        'uses' => 'Messenger\message_controller@send_reply_message_to_the_product',
+        'as' => 'send_reply_to_product'
     ]);
 
     Route::post('/get_contact_list', [
@@ -1041,6 +1086,39 @@ Route::group(['prefix' => 'admin', 'middleware' => [admin_login::class]], functi
         'as' => 'admin_panel_submit_to_channel'
     ]);
     
+    Route::get('/categories-meta-data-list', [
+        'uses' => 'admin_panel\admin_seo_controller@load_meta_contents_list',
+        'as' => 'admin_panel_load_meta_contents_list'
+    ]);
+
+    Route::get('/meta-data-detail/{id}', [
+        'uses' => 'admin_panel\admin_seo_controller@load_meta_content_details',
+        'as' => 'load_meta_content_details_by_id',
+    ]);
+
+    Route::post('/edit-category-meta-data-detail', [
+        'uses' => 'admin_panel\admin_seo_controller@edit_meta_content_to_a_category',
+        'as' => 'admin_panel_edit_meta_content_to_a_category',
+    ]);
+
+    Route::post('/add-category-meta-data-detail', [
+        'uses' => 'admin_panel\admin_seo_controller@add_meta_content_to_a_category',
+        'as' => 'admin_panel_add_meta_content_to_a_category',
+    ]);
+
+    Route::get('/add-category-meta-data-detail',function(){
+        return view('admin_panel.addNewCategoryMetaData');
+    });
+
+    Route::get('/same-device-users-list/{user_id}',[
+        'uses' => 'admin_panel\admin_user_controller@load_same_device_users',
+        'as' => 'admin_panel_same_device_users_list'
+    ])->where('user_id','[0-9]+');
+
+    Route::get('/clear-storage-cache',[
+        'uses' => 'admin_panel\admin_user_controller@clear_categories_cached_file',
+    ]);
+    
 });
 
 Route::post('/refresh-token',[
@@ -1061,6 +1139,7 @@ Route::post('/get_wp_posts', [
     'uses' => 'index_controller@get_wp_posts',
     'as' => 'get_wp_posts',
 ]);
+
 
 Route::get('download-media','General\media_controller@download_media');
 
@@ -1085,7 +1164,7 @@ Route::post('/is_user_from_webview', [
     'uses' => 'Accounting\user_controller@is_user_from_webview',
 ]);
 
-Route::get('/sitemap.xml', [
+Route::get('/sitemap-buskool-txwhgvuikd.xml', [
     'uses' => 'General\sitemap_controller@get_required_data_for_sitemap',
     'as' => 'get_sitemap',
 ]);

@@ -1,4 +1,5 @@
 <style scoped>
+
 .btn-crop {
   display: inline-block;
   background: #00c569;
@@ -116,7 +117,7 @@
   left: 0;
   position: absolute;
   z-index: 9999;
-  opacity: 0.6;
+  opacity: 0;
   text-align: center;
   background: #000;
 }
@@ -377,7 +378,7 @@ button.close {
 <template>
   <div class="image-upload-wrapper">
     <div v-show="$refs.upload && $refs.upload.dropActive" class="drop-active">
-      <h3>Drop files to upload</h3>
+      <h2>تصویر را اینجا رها کنید</h2>
     </div>
 
     <div class="col-xs-12">
@@ -395,11 +396,6 @@ button.close {
             <img v-if="file.thumb" :src="file.thumb" width="40" height="auto" />
             <span v-else>No Image</span>
             <div class="actions-content">
-              <!-- <a
-                                       href="#"
-                                       class="edit-image"
-                                       @click.prevent="file.active || file.success || file.error === 'compressing' ? false :  onEditFileShow(file)"><i
-                                            aria-hidden="true" class="fa fa-pencil-alt"></i></a> -->
               <a
                 class="delete"
                 href="#"
@@ -409,36 +405,18 @@ button.close {
             </div>
           </div>
         </article>
-
-        <!-- <file-upload
-          v-show="!isOption"
-          class="upload pull-right"
-          :class="[
-            imageWrapperSize ? imageWrapperSize : 'col-md-4 col-xs-6 col-lg-3',
-          ]"
-          :accept="accept"
-          :multiple="uploadMultiple"
-          :directory="directory"
-          :size="size || 0"
-          :thread="thread < 1 ? 1 : thread > 5 ? 5 : thread"
-          :drop="drop"
-          :drop-directory="dropDirectory"
-          :add-index="addIndex"
-          :name="uploadName"
-          v-model="$parent.files"
-          @input-filter="inputFilter"
-          @input-file="inputFile"
-          ref="upload"
-        >
-        </file-upload> -->
         <file-upload
           v-show="!isOption"
           class="upload pull-right"
           :class="[
             imageWrapperSize ? imageWrapperSize : 'col-md-4 col-xs-6 col-lg-3',
+            imageAccessUploadCount && files.length >= imageAccessUploadCount
+              ? 'hidden'
+              : '',
           ]"
           :accept="accept"
           :multiple="uploadMultiple"
+          :maximum="maximum"
           :directory="directory"
           :size="size || 0"
           :thread="thread < 1 ? 1 : thread > 5 ? 5 : thread"
@@ -532,6 +510,8 @@ export default {
     "imageWrapperSize",
     "isCompressor",
     "isImageReset",
+    "imageAccessUploadCount",
+    "maximum",
   ],
   components: {
     FileUpload,

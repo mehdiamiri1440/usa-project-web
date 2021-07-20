@@ -132,7 +132,12 @@
   <div class="col-xs-12">
     <article class="review-item-wrapper">
       <div
-        class="reviewer-information-wrapper text-center col-xs-12 col-sm-2 pull-right"
+        class="
+          reviewer-information-wrapper
+          text-center
+          col-xs-12 col-sm-2
+          pull-right
+        "
       >
         <div class="reviewer-information">
           <p class="user-name" v-text="filterUserName"></p>
@@ -262,8 +267,7 @@ export default {
 
       swal({
         title: "حذف نظر",
-        text:
-          "تعداد نظرات حذف شده توسط شما به کاربران نمایش داده خواهد شد. آیا می خواهید این نظر را حذف کنید؟",
+        text: "تعداد نظرات حذف شده توسط شما به کاربران نمایش داده خواهد شد. آیا می خواهید این نظر را حذف کنید؟",
         className: "custom-swal-with-cancel",
         icon: "warning",
         buttons: {

@@ -9,6 +9,12 @@
       :user_logout_path="userLogoutPath"
       :storage_path="storagePath"
       :login_page_path="userLogoutPath"
+      :categoryList="categoryList"
+    />
+    <CategoriesModal
+      :categoryList="categoryList"
+      :modalSubCategory="modalSubCategory"
+      :mainSubCategories="mainSubCategories"
     />
     <router-view
       id="main-content"
@@ -17,6 +23,7 @@
       :is-user-login="userId"
       :user-type="isSeller"
       :verifiedUserContent="verifiedUserContent"
+      :categoryList="categoryList"
     ></router-view>
 
     <footer-master-layouts />
@@ -26,16 +33,13 @@
 <script>
 import HeaderMasterLayouts from "../../components/layouts/header/header";
 import FooterMasterLayouts from "../../components/layouts/footer/footer";
+import CategoriesModal from "../../components/layouts/main/main_components/categories-modal.vue";
 
 export default {
   components: {
     HeaderMasterLayouts,
     FooterMasterLayouts,
-  },
-  data: function () {
-    return {
-      productByResponseRate: false,
-    };
+    CategoriesModal,
   },
   props: [
     "userId",
@@ -47,5 +51,30 @@ export default {
     "userLogoutPath",
     "verifiedUserContent",
   ],
+  data: function () {
+    return {
+      productByResponseRate: false,
+      categoryList: "",
+      provinceList: "",
+      modalSubCategory: false,
+      mainSubCategories: "",
+    };
+  },
+  methods: {
+    getCategories() {
+      axios
+        .post("/get_category_list", { cascade_list: true })
+        .then((response) => (this.categoryList = response.data.categories));
+    },
+    selectCategoryItem(category, url) {
+      $(".modal").modal("hide");
+      this.$nextTick(() => {
+        this.$router.push({ path: url });
+      });
+    },
+  },
+  mounted() {
+    this.getCategories();
+  },
 };
 </script>

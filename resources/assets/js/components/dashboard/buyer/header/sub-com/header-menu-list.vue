@@ -141,6 +141,28 @@ a.active {
     transform: translate3d(0, -1px, 0);
   }
 }
+.verified-user {
+  display: inline-block !important ;
+}
+.verified-user::before {
+  left: 8px;
+  top: 8px;
+}
+
+.copy-right {
+  text-align: center;
+  padding: 15px 15px 0;
+  direction: rtl;
+  line-height: 1.618;
+  position: relative;
+  z-index: 10;
+  color: #fff;
+}
+
+.copy-right p {
+  font-size: 12px;
+  font-weight: 200;
+}
 </style>
 
 <template>
@@ -148,13 +170,7 @@ a.active {
     <div class="header-menu">
       <ul class="list-unstyled">
         <li class="list-item">
-          <router-link
-            :to="{ name: 'profileBasicBuyer' }"
-            :class="{
-              'router-link-exact-active':
-                $route.name == 'profileBasicBuyerVeficiation',
-            }"
-          >
+          <router-link :to="{ name: 'profileBasicBuyer' }">
             <i class="fa fa-user" aria-hidden="true"></i>
             <span>ویرایش پروفایل</span>
           </router-link>
@@ -198,7 +214,14 @@ a.active {
             <span>درخواست های من</span>
           </router-link>
         </li>
-
+        <li class="list-item">
+          <router-link :to="{ name: 'profileBasicBuyerVeficiation' }">
+            <span class="verified-user" title>
+              <i class="fa fa-certificate"></i>
+            </span>
+            <span>احراز هویت</span>
+          </router-link>
+        </li>
         <li class="list-item">
           <router-link :to="{ name: 'guideBuyer' }">
             <i class="fa fa-question-circle" aria-hidden="true"></i>
@@ -211,6 +234,11 @@ a.active {
             <i class="fas fa-headset"></i>
             <span>پشتیبانی</span>
           </router-link>
+        </li>
+        <li class="list-item">
+          <span class="copy-right">
+            <p dir="rtl">تمام حقوق مادی و معنوی سایت متعلق به باسکول است.</p>
+          </span>
         </li>
       </ul>
     </div>

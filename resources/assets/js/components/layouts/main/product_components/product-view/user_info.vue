@@ -50,6 +50,15 @@ i {
   margin: 0 auto 10px;
   border-radius: 90px;
   overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  background-color: #bebebe;
+}
+
+.user-information-content-image .user-image img,
+.user-info-wrapper .default-wrapper-main-image {
+  width: 90px;
+  height: 90px;
 }
 
 .user-information-content-image img {
@@ -246,10 +255,13 @@ p.response-rate span {
     width: 100%;
   }
 
-  .user-information-content-image .user-image {
+  .user-information-content-image .user-image,
+  .user-information-content-image .user-image img,
+  .user-info-wrapper .default-wrapper-main-image {
     width: 70px;
     height: 70px;
   }
+
   .rating-stars p > span > span {
     margin: 0 1px;
     font-size: 14px;
@@ -430,8 +442,18 @@ p.response-rate span {
           <div
             class="user-image"
             v-if="$parent.product.profile_info.profile_photo"
+            :style="{
+              backgroundImage:
+                'url(' +
+                base +
+                'storage/' +
+                $parent.product.profile_info.profile_photo +
+                ')',
+            }"
           >
             <img
+              class="hidden"
+              loading="lazy"
               v-bind:src="
                 '/storage/' + $parent.product.profile_info.profile_photo
               "
@@ -641,6 +663,11 @@ p.response-rate span {
 
 <script >
 export default {
+  data() {
+    return {
+      base: "",
+    };
+  },
   methods: {
     activeComponentTooltip() {
       $(".verified-user")
@@ -661,6 +688,9 @@ export default {
           }, 300);
         });
     },
+  },
+  mounted() {
+    this.base = getBase();
   },
   watch: {
     "$parent.product.user_info": function () {

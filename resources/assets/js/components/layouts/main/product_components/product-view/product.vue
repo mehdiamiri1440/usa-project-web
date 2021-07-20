@@ -79,7 +79,7 @@ label {
 .images {
   height: 380px;
   background: #eeeeee;
-  border-radius: 4px;
+  border-radius: 12px;
 }
 
 .share {
@@ -206,8 +206,11 @@ label {
 
 .default-product-contents-wrapper {
   padding: 15px;
+  min-height: 840px;
 }
-
+.main-product-wrapper {
+  min-height: 840px;
+}
 .phone-number-wrapper {
   margin-top: 15px;
 }
@@ -269,10 +272,16 @@ label {
 }
 
 @media screen and (max-width: 767px) {
+  .images {
+    border-radius: 0;
+  }
+
   .images-wrapper,
   .main-product-wrapper {
     padding: 0;
+    min-height: initial;
   }
+
   .main-product-wrapper {
     border: none;
   }
@@ -406,9 +415,10 @@ label {
 
     <div class="images-wrapper">
       <div class="images">
-        <div class="owl-carousel">
+        <div v-if="$parent.product.photos" class="owl-carousel">
           <Carousel
-            v-for="photo in $parent.product.photos"
+            v-for="(photo, index) in $parent.product.photos"
+            :index="index"
             :key="photo.id"
             :base="$parent.str + '/'"
             :img="photo.file_path"
@@ -424,6 +434,25 @@ label {
             "
           />
         </div>
+        <svg
+          v-else
+          version="1"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 48 48"
+          enable-background="new 0 0 48 48"
+        >
+          <path
+            fill="#ccc"
+            d="M41,42H13c-2.2,0-4-1.8-4-4V18c0-2.2,1.8-4,4-4h28c2.2,0,4,1.8,4,4v20C45,40.2,43.2,42,41,42z"
+          />
+          <path
+            fill="#ddd"
+            d="M35,36H7c-2.2,0-4-1.8-4-4V12c0-2.2,1.8-4,4-4h28c2.2,0,4,1.8,4,4v20C39,34.2,37.2,36,35,36z"
+          />
+          <circle fill="#ccc" cx="30" cy="16" r="3" />
+          <polygon fill="#bbb" points="17,17.9 8,31 26,31" />
+          <polygon fill="#eee" points="28,23.5 22,31 34,31" />
+        </svg>
       </div>
       <div class="share hidden-xs hidden-sm">
         <button
@@ -476,7 +505,7 @@ label {
           </button>
           <button
             v-else-if="!$parent.currentUser.user_info"
-            @click.prevent="$parent.loginModal()"
+            @click.prevent="$parent.loginModal(true)"
             class="hidden-xs hidden-sm"
             :class="{
               'send-message-button': $parent.product.user_info.has_phone,
@@ -523,7 +552,7 @@ label {
               !$parent.currentUser.user_info &&
               $parent.product.user_info.has_phone
             "
-            @click.prevent="$parent.loginModal()"
+            @click.prevent="$parent.loginModal(false)"
             class="green-button phone-call hidden-xs hidden-sm"
             :class="{ disable: $parent.isActivePhone }"
             :disabled="$parent.isActivePhone"
@@ -649,23 +678,52 @@ label {
   >
     <div class="default-image-wrapper text-right text-rtl pull-left">
       <div
-        class="default-product-image placeholder-content content-full-width padding-0"
+        class="
+          default-product-image
+          placeholder-content
+          content-full-width
+          padding-0
+        "
       ></div>
 
       <div
-        class="default-button-min-with placeholder-content margin-15-0 hidden-xs hidden-sm"
+        class="
+          default-button-min-with
+          placeholder-content
+          margin-15-0
+          hidden-xs hidden-sm
+        "
       ></div>
-      <p
-        class="content-default-width placeholder-content hidden-xs hidden-sm"
-      ></p>
-      <p
-        class="content-half-width placeholder-content margin-15-0 hidden-xs hidden-sm"
-      ></p>
+      <a
+        href="https://blog.buskool.com/%d8%b1%d8%a7%d9%87%d9%86%d9%85%d8%a7%db%8c-%d8%ae%d8%b1%db%8c%d8%af-%d8%a7%d9%85%d9%86/"
+        target="_blank"
+        class="warning-wrapper info-wrapper hidden-xs hidden-sm"
+      >
+        <p class="warning-title">
+          <i class="fa fa-question-circle"></i>
+
+          راهنمای خرید امن
+        </p>
+        <p class="warning-text">
+          باسکول هیچ‌گونه منفعت و مسئولیتی در قبال معامله شما ندارد. با مطالعه‌ی
+          راهنمای خرید امن ، آسوده‌تر معامله کنید.
+        </p>
+      </a>
     </div>
 
     <div class="default-product-contents text-rtl pull-right">
       <div
-        class="content-default-width placeholder-content padding-15-0 margin-15-0"
+        class="content-default-width placeholder-content padding-10-0 h-25"
+      ></div>
+      <div
+        class="
+          default-button-min-with
+          placeholder-content
+          default-mdedium-button-width
+          h-40
+          margin-top-25
+          hidden-xs hidden-sm
+        "
       ></div>
       <div class="default-action-buttons hidden-md hidden-lg">
         <div class="default-button placeholder-content pull-right"></div>
@@ -714,16 +772,25 @@ label {
           ></span>
         </li>
       </ul>
-      <p class="content-default-width placeholder-content margin-15-0"></p>
-      <p class="content-full-width placeholder-content"></p>
-      <p class="content-default-width placeholder-content margin-15-0"></p>
-      <p class="content-half-width placeholder-content"></p>
+      <span
+        class="
+          placeholder-content
+          content-min-width
+          placeholder-content
+          margin-15-0
+        "
+      ></span>
+      <p class="content-default-width h-20 placeholder-content margin-30-0"></p>
+      <p class="content-full-width h-20 placeholder-content"></p>
+      <p class="content-default-width h-20 placeholder-content margin-30-0"></p>
+      <p class="content-half-width h-20 placeholder-content"></p>
     </div>
   </div>
 </template>
 
 <script >
 import Carousel from "./carousel";
+
 export default {
   components: {
     Carousel,

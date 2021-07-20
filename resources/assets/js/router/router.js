@@ -18,7 +18,9 @@ const router = new Router({
     {
       path: "/seller",
       components: {
-        seller: getComponent("sellerDashboard"),
+        seller: (resolve) => {
+          require(["./components/sellerDashboard.vue"], resolve);
+        },
       },
       redirect: "/404",
       children: [
@@ -242,7 +244,9 @@ const router = new Router({
     {
       path: "/buyer",
       components: {
-        buyer: getComponent("buyerDashboard"),
+        buyer: (resolve) => {
+          require(["./components/buyerDashboard.vue"], resolve);
+        },
       },
       redirect: "/404",
       children: [
@@ -371,7 +375,9 @@ const router = new Router({
     {
       path: "/",
       components: {
-        default: getComponent("masterRoute"),
+        default: (resolve) => {
+          require(["./components/masterRoute.vue"], resolve);
+        },
       },
       children: [
         {
@@ -565,14 +571,5 @@ const router = new Router({
   },
 });
 
-/**
- * Asynchronously load view (Webpack Lazy loading compatible)
- * @param  {string}   name     the filename (basename) of the view to load.
- */
-function getComponent(name) {
-  return function (resolve) {
-    require([`./components/${name}.vue`], resolve);
-  };
-}
 
 export default router;

@@ -1,14 +1,20 @@
 <template>
-  <router-view :key="$route.fullPath" :str="str" :assets="assets" :userType="userType" />
+  <router-view
+    :key="$route.fullPath"
+    :str="str"
+    :assets="assets"
+    :userType="userType"
+    :categoryList="categoryList"
+  />
 </template>
 
 <script>
 export default {
-  data: function() {
+  data: function () {
     return {
-      verifiedUserContent: this.$parent.verifiedUserContent
+      verifiedUserContent: this.$parent.verifiedUserContent,
     };
   },
-  props: ["str", "assets", "userType"]
+  props: ["str", "assets", "userType", "categoryList"],
 };
 </script>

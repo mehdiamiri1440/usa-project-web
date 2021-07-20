@@ -180,6 +180,7 @@ button.disable {
   margin: 0;
   padding: 3px 14px;
   margin-right: 6px;
+  border-radius: 8px;
 }
 
 #main.little-main .fix-request-header-box,
@@ -563,9 +564,14 @@ button.disable {
 </style>
 <template>
   <div>
-    <category-filter v-if="categoryModal" />
+    <CategoriesModal :categoryList="categoryList" />
     <div
-      class="fix-request-bottom hidden-sm hidden-md hidden-lg shadow-content text-center"
+      class="
+        fix-request-bottom
+        hidden-sm hidden-md hidden-lg
+        shadow-content
+        text-center
+      "
     >
       <div class="col-xs-12 text-right">
         <button
@@ -600,7 +606,13 @@ button.disable {
               </h1>
             </div>
             <div
-              class="col-xs-12 col-sm-4 hidden-xs request-update pull-left text-left"
+              class="
+                col-xs-12 col-sm-4
+                hidden-xs
+                request-update
+                pull-left
+                text-left
+              "
             >
               <button
                 type="button"
@@ -726,7 +738,7 @@ button.disable {
                       <span class="request-count">{{ "0+" }}</span>
                     </button>
                     <button
-                    v-else
+                      v-else
                       class="btn"
                       type="button"
                       data-toggle="tooltip"
@@ -925,7 +937,13 @@ button.disable {
               class="buyAd-wrapper-item col-xs-12"
             >
               <p
-                class="default-list-title pull-right col-sm-9 hidden-xs margin-10-0"
+                class="
+                  default-list-title
+                  pull-right
+                  col-sm-9
+                  hidden-xs
+                  margin-10-0
+                "
               >
                 <span
                   class="placeholder-content content-full-width h-20"
@@ -933,21 +951,39 @@ button.disable {
               </p>
 
               <p
-                class="list-title col-sm-2 col-xs-12 hidden-md hidden-lg hidden-sm"
+                class="
+                  list-title
+                  col-sm-2 col-xs-12
+                  hidden-md hidden-lg hidden-sm
+                "
               >
                 <span
-                  class="placeholder-content content-half-width h-20 margin-auto"
+                  class="
+                    placeholder-content
+                    content-half-width
+                    h-20
+                    margin-auto
+                  "
                 ></span>
               </p>
 
               <p class="needs col-sm-4 col-xs-12 hidden-md hidden-lg hidden-sm">
                 <span
-                  class="placeholder-content content-default-width h-20 margin-auto"
+                  class="
+                    placeholder-content
+                    content-default-width
+                    h-20
+                    margin-auto
+                  "
                 ></span>
               </p>
 
               <p
-                class="list-time col-sm-2 col-xs-12 hidden-md hidden-lg hidden-sm"
+                class="
+                  list-time
+                  col-sm-2 col-xs-12
+                  hidden-md hidden-lg hidden-sm
+                "
               >
                 <span
                   class="placeholder-content content-min-width h-20 margin-auto"
@@ -956,7 +992,11 @@ button.disable {
 
               <p class="col-sm-3 col-xs-12">
                 <span
-                  class="placeholder-content default-button-full-with margin-10-auto"
+                  class="
+                    placeholder-content
+                    default-button-full-with
+                    margin-10-auto
+                  "
                 ></span>
               </p>
             </li>
@@ -969,11 +1009,13 @@ button.disable {
 
 <script>
 import { eventBus } from "../../../../router/router";
-import CategoryFilter from "./category-filter";
+import swal from "../../../../sweetalert.min.js";
+import CategoriesModal from "../../../layouts/main/main_components/categories-modal.vue";
+
 export default {
   props: ["storage"],
   components: {
-    CategoryFilter,
+    CategoriesModal,
   },
   data: function () {
     return {
@@ -993,9 +1035,9 @@ export default {
         },
       ],
       isRequests: true,
-      categoryModal: false,
       filterCategory: "",
       emptyItem: 0,
+      categoryList: "",
     };
   },
   methods: {
@@ -1006,6 +1048,13 @@ export default {
       axios.post("/user/profile_info").then(function (response) {
         self.currentUser = response.data;
       });
+      axios
+        .post("/get_category_list", {
+          cascade_list: true,
+        })
+        .then(function (response) {
+          self.categoryList = response.data.categories;
+        });
 
       axios
         .post("/get_related_buyAds_list_to_the_seller")
@@ -1176,11 +1225,8 @@ export default {
         event_label: labelName,
       });
     },
-    openCategoryModal: function () {
-      this.categoryModal = true;
-      setTimeout(function () {
-        $("#fitler-modal").modal("show");
-      }, 200);
+    openCategoryModal() {
+      $("#categories-modal").modal("show");
     },
     filterBuyAdByCategory: function () {
       this.buyAds = "";
@@ -1200,6 +1246,9 @@ export default {
     },
     scrollToTop() {
       window.scrollTo(0, 0);
+    },
+    selectCategoryItem(category, url) {
+      this.filterCategory = category;
     },
   },
   mounted() {

@@ -154,26 +154,32 @@ class wallet_controller extends Controller
 
         $amount = $service_record->current_unit_cost * $count;
 
-        $this->update_user_account_balance($amount,$user_id);
+        $is_balance_updated = $this->update_user_account_balance($amount,$user_id);
 
-        $now = Carbon::now();
+        if($is_balance_updated == true){
+            $now = Carbon::now();
 
-        DB::table('expending_logs')
-                ->insert([
-                    'created_at' => $now,
-                    'updated_at' => $now,
-                    'service_id' => $service_record->id,
-                    'myuser_id'  => $user_id,
-                    'amount'     => $amount,
-                    'count'      => $count
-                ]);
+            DB::table('expending_logs')
+                    ->insert([
+                        'created_at' => $now,
+                        'updated_at' => $now,
+                        'service_id' => $service_record->id,
+                        'myuser_id'  => $user_id,
+                        'amount'     => $amount,
+                        'count'      => $count
+                    ]);
+        }
+        
     }
 
     protected function update_user_account_balance($price,$user_id)
     {
-        DB::table('myusers')
+        $result = DB::table('myusers')
                     ->where('id', $user_id)
+                    ->where('wallet_balance','>=',$price)
                     ->decrement('wallet_balance',$price);
+
+        return $result;
     }
 
     public function do_elevator_payment_from_wallet(Request $request)
@@ -199,7 +205,7 @@ class wallet_controller extends Controller
             return response()->json([
                 'status' => false,
                 'msg' => 'موجودی کیف پول شما کافی نیست. لطفا ابتدا موجودی کیف پول خود را افزایش دهید.'
-            ],403);
+            ],423);
         }
 
         $expiration_time_in_days = config("subscriptionPakage.elevator.expiration-time-in-days");

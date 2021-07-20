@@ -66,7 +66,7 @@
 }
 
 .load-more-button button {
-  border: 2px solid;
+  border: 1px solid;
 
   padding: 15px 30px;
 
@@ -78,7 +78,7 @@
 
   top: 0;
 
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
 
   transition: 200ms;
 
@@ -88,7 +88,7 @@
 .load-more-button button:hover {
   top: -3px;
 
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
 
   transition: 200ms;
 }
@@ -270,14 +270,23 @@
             class="default-items col-xs-6 col-sm-4 col-md-3 default-grid"
           >
             <div
-              class="col-xs-12 margin-15-0 default-item-wrapper default-main-wrapper"
+              class="
+                col-xs-12
+                margin-15-0
+                default-item-wrapper default-main-wrapper
+              "
             >
               <div class="default-wrapper-main-image pull-right">
                 <span class="default-main-image placeholder-content"></span>
               </div>
 
               <div
-                class="default-article-contents padding-0 margin-top-10 col-xs-12"
+                class="
+                  default-article-contents
+                  padding-0
+                  margin-top-10
+                  col-xs-12
+                "
               >
                 <div class="default-main-article-content">
                   <span class="content-half-width placeholder-content"></span>
@@ -286,7 +295,12 @@
                     class="content-default-width placeholder-content"
                   ></span>
                   <span
-                    class="placeholder-content default-button-full-with pull-left mobile-hidden"
+                    class="
+                      placeholder-content
+                      default-button-full-with
+                      pull-left
+                      mobile-hidden
+                    "
                   ></span>
                 </div>
               </div>
@@ -338,35 +352,25 @@ export default {
 
       this.loading = true;
 
-      var searchValueText = this.$parent.searchText;
+      this.$parent.searchText = "";
 
       axios
         .post("/user/profile_info")
         .then(function (response) {
           self.currentUser = response.data;
 
-          if (searchValueText) {
-            self.registerComponentStatistics(
-              "homePage",
-              "search-text",
-              searchValueText
-            );
-            self.searchValue = searchValueText;
-            eventBus.$emit("submiting", false);
-          } else {
-            axios
-              .post("/user/get_product_list", {
-                from_record_number: 0,
-                special_products: true,
-                to_record_number: self.productCountInPage,
-              })
-              .then(function (response) {
-                self.products = response.data.products;
-                self.loading = false;
-                localStorage.removeItem("productCountInPage");
-                eventBus.$emit("submiting", false);
-              });
-          }
+          axios
+            .post("/user/get_product_list", {
+              from_record_number: 0,
+              special_products: true,
+              to_record_number: self.productCountInPage,
+            })
+            .then(function (response) {
+              self.products = response.data.products;
+              self.loading = false;
+              localStorage.removeItem("productCountInPage");
+              eventBus.$emit("submiting", false);
+            });
         })
         .catch((error) => reject(error));
     },

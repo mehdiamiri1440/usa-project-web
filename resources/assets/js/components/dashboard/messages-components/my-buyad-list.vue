@@ -1059,6 +1059,7 @@ li.static-item > button i {
 
 <script >
 import { eventBus } from "../../../router/router";
+import swal from "../../../sweetalert.min.js";
 
 export default {
   data: function () {

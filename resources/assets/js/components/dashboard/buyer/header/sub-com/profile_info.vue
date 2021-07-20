@@ -5,6 +5,7 @@
   position: relative;
   overflow: hidden;
   transition: 150ms;
+  margin-bottom: 5px;
 }
 
 .profile:hover {

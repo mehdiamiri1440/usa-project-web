@@ -34,7 +34,7 @@ class product_list_controller extends Controller
 
     protected $product_info_sent_by_product_array = [
         'products.id as product_id',
-        'products.updated_at', 
+        'products.updated_at',  
         'products.product_name', 
         'products.stock', 
         'products.min_sale_price', 
@@ -79,6 +79,7 @@ class product_list_controller extends Controller
             'product_name',
             'stock',
             'min_sale_amount',
+            'min_sale_price',
             'description',
             'myuser_id',
             'sub_category_id',
@@ -127,6 +128,10 @@ class product_list_controller extends Controller
         $this->validate($request,$this->product_list_validation_rules);
 
         $products = $this->get_products_from_cache();
+
+        $products = array_filter($products,function($product){
+            return $product['user_info']->response_rate >= 50;
+        });
 
         $is_filter_applied = $this->apply_product_filters($request,$products);
 
@@ -277,7 +282,6 @@ class product_list_controller extends Controller
             if($product['user_info']->active_pakage_type > 0 && $product['user_info']->response_rate > 70){
                 $product['user_info']->ums = (integer) (($product['user_info']->ums)/(Carbon::now()->diffInWeeks($product['main']->updated_at) + 1));
             }
-            
         }
 
         return $products;
@@ -300,6 +304,7 @@ class product_list_controller extends Controller
                             ) as response_time,(select categories.category_name from categories where c.parent_id = categories.id) as category_name,(select categories.id from categories where c.parent_id = categories.id) as category_id,(select count(id) from product_media where product_media.product_id = products.id) as photos_count,(select file_path from product_media where product_media.product_id = products.id order by product_media.id asc limit 1) as file_path,(select count(distinct(messages.sender_id)) from messages where messages.receiver_id = products.myuser_id) as ums,(select count(distinct(phone_number_view_logs.viewer_id)) from phone_number_view_logs where phone_number_view_logs.myuser_id = products.myuser_id) as upr')
                         ->distinct('products.id')
                         ->whereNull('products.deleted_at')
+                        ->where('myusers.is_blocked',false)
                         ->where('products.confirmed', true)
                         ->get();
 
@@ -483,29 +488,9 @@ class product_list_controller extends Controller
         $tmp_products = [];
         //this condition checks if buyer has buyAd request to show five related products at top list
         if($user_info->is_buyer == true){
-            // $the_buyer_last_buyAd_request = buyAd::where('myuser_id',$user_id)
-            //                                         // ->where('confirmed',true)
-            //                                         ->orderBy('updated_at','desc')
-            //                                         ->get()
-            //                                         ->first();
-
-
-            // if($the_buyer_last_buyAd_request){
-            //     $tmp_products =  $products;
-            //     $tmp_products = $this->get_the_most_related_products_to_buyer($the_buyer_last_buyAd_request,$tmp_products);
-            //     usort($tmp_products,function($item1,$item2){
-            //         return $item1['main']->updated_at <= $item2['main']->updated_at ? 1 : -1;
-            //     });
-
-            //     $tmp_products = array_slice($tmp_products,0,10);
-            // }
-            // else{
-            //     if($user_info->created_at->diffInHours(Carbon::now()) <= 6){
-            //         return $this->sort_products_by_response_time($products);
-            //     }
-            // }
+            
             $tmp_products = $this->apply_customized_related_products_filter_for_buyers($products,$user_info);
-            $products =  $this->sort_products_by_response_rate($products);
+            $products =  $this->sort_products_by_response_time($products);
 
             if(count($tmp_products) > 0){
                 $tmp_product_ids = [];
@@ -519,32 +504,13 @@ class product_list_controller extends Controller
                 });
             }
 
-            return array_unique(array_merge($tmp_products,$products),SORT_REGULAR);
+            $products = array_unique(array_merge($tmp_products,$products),SORT_REGULAR);
         }
         else if($user_info->is_seller == true){
-            if($user_info->active_pakage_type == 0){
-                $eleveted_products = product::where('myuser_id',$user_id)
-                                            ->where('confirmed',true)
-                                            ->where('is_elevated',true)
-                                            ->get()
-                                            ->count();
-
-                if($eleveted_products == 0 && $user_info->created_at->diffInDays(Carbon::now()) <= 7){
-                    $products =  $this->sort_products_by_response_rate($products);
-                    $products = $this->remove_duplicated_paying_sellers($products);
-
-                    return $products;
-                }
-            }
+            $products = $this->sort_products_by_response_rate($products);
         }
 
-        $user_response_info = $this->get_user_response_info($user_id);
-        $user_response_info['created_at'] = $user_info->created_at;
-        
-
-        $sorting_callback_function = $this->get_best_match_call_back_function($user_response_info);
-
-        usort($products,$sorting_callback_function);
+        $products = $this->remove_duplicated_sellers($products);
 
         return $products;
     }
@@ -796,12 +762,47 @@ class product_list_controller extends Controller
 
     protected function apply_search_text_filter(&$products,$search_text)
     {
-        $category_record = category::where('category_name',$search_text)
-                                        ->whereNotNull('parent_id')
+        $search_text = str_ireplace( array( '\'', '"',
+                    ',' , ';', '<', '>' , 'or', 'and','--'), ' ', $search_text);
+
+
+        $category_record = DB::table('categories')
+                                        ->where('category_name',$search_text)
                                         ->first();
 
         if($category_record){
-            $this->apply_category_filter($products,$category_record->id);
+            if(is_null($category_record->parent_id)){
+                $child_categories = DB::table('categories')
+                                    ->where('parent_id',$category_record->id)
+                                    ->pluck('id')
+                                    ->toArray();
+                
+                if($child_categories){
+                    $products = array_filter($products,function($product) use($child_categories){
+                        return in_array($product['main']->category_id,$child_categories) == true;
+                    });
+                }
+
+            }
+            else{
+                $child_categories = DB::table('categories')
+                                    ->where('parent_id',$category_record->id)
+                                    ->pluck('id')
+                                    ->toArray();
+
+                if($child_categories){
+                    $products = array_filter($products,function($product) use($child_categories){
+                        return in_array($product['main']->sub_category_id,$child_categories) == true;
+                    });
+                }
+                else{
+                    $this->apply_category_filter($products,$category_record->id);
+                }
+            }
+            
+
+
+            
         }
         else{
             $search_text = str_replace('\\', '', $search_text);
@@ -879,8 +880,12 @@ class product_list_controller extends Controller
 
             $user_id = session('user_id');
             $buyAds = DB::table('buy_ads')
+                            ->whereNull('deleted_at')
                             ->where('buy_ads.myuser_id',$user_id)
-                            ->where('confirmed',true)
+                            ->where(function($q){
+                                return $q = $q->where('confirmed',true)
+                                                ->orWhereBetween('created_at',[Carbon::now()->subHours(24),Carbon::now()]);
+                            })
                             ->whereNull('deleted_at')
                             ->orderBy('created_at','desc')
                             ->get();
@@ -912,7 +917,7 @@ class product_list_controller extends Controller
                 $result = array_merge($result,$filtered_products);
             }
             if(count($result) > 0){
-                $products = $this->remove_duplicated_paying_sellers($result);
+                $products = $this->remove_duplicated_sellers($result);
             }
         }
     }
@@ -969,20 +974,28 @@ class product_list_controller extends Controller
     protected function sort_products_by_response_rate(&$products)
     {
         usort($products,function($item1,$item2){
-            $a = $item1['user_info']->response_rate;
-            $b = $item2['user_info']->response_rate;
+            $a = $item1['main']->is_elevated == true ? $item1['main']->updated_at :  $item1['main']->is_elevated;
+            $b = $item2['main']->is_elevated == true ? $item2['main']->updated_at :  $item2['main']->is_elevated;
 
             if($a == $b){
-                $c = $item1['user_info']->active_pakage_type;
-                $d = $item2['user_info']->active_pakage_type;
+                $c = $item1['user_info']->response_rate;
+                $d = $item2['user_info']->response_rate;
 
                 if($c == $d){
-                    return $item1['main']->updated_at < $item2['main']->updated_at;
+                    $e = $item1['user_info']->active_pakage_type;
+                    $f = $item2['user_info']->active_pakage_type;
+
+                    if($e == $f){
+                        return $item1['main']->updated_at < $item2['main']->updated_at;
+                    }
+                    return ($e < $f) ? 1 : -1;
                 }
+
                 return ($c < $d) ? 1 : -1;
             }
 
             return ($a < $b) ? 1 : -1;
+            
         });
 
         return $products;
@@ -991,20 +1004,27 @@ class product_list_controller extends Controller
     protected function sort_products_by_response_time(&$products)
     {
         usort($products,function($item1,$item2){
-            $a = ($item1['user_info']->response_time > 0 && $item1['user_info']->response_rate > 70) ? ($item1['user_info']->response_time + ((100 - $item1['user_info']->response_rate) * $item1['user_info']->ums)) : 10000;
-            $b = ($item2['user_info']->response_time > 0 && $item2['user_info']->response_rate > 70) ? ($item2['user_info']->response_time + ((100 - $item2['user_info']->response_rate) * $item2['user_info']->ums)) : 10000;
+            $a = $item1['main']->is_elevated == true ? $item1['main']->updated_at :  $item1['main']->is_elevated;
+            $b = $item2['main']->is_elevated == true ? $item2['main']->updated_at :  $item2['main']->is_elevated;
 
             if($a == $b){
-                $c = $item1['user_info']->response_rate > 70 ? $item1['user_info']->response_rate : 0;
-                $d = $item2['user_info']->response_rate > 70 ? $item2['user_info']->response_rate : 0;
+                $c = ($item1['user_info']->response_time > 0 && $item1['user_info']->response_rate > 75) ? ($item1['user_info']->response_time + ((100 - $item1['user_info']->response_rate) * $item1['user_info']->ums)) : 10000;
+                $d = ($item2['user_info']->response_time > 0 && $item2['user_info']->response_rate > 75) ? ($item2['user_info']->response_time + ((100 - $item2['user_info']->response_rate) * $item2['user_info']->ums)) : 10000;
 
                 if($c == $d){
-                    return $item1['main']->updated_at < $item2['main']->updated_at;
-                }
-                return ($c < $d) ? 1 : -1;
-            }
+                    $e = $item1['user_info']->response_rate > 75 ? $item1['user_info']->response_rate : 0;
+                    $f = $item2['user_info']->response_rate > 75 ? $item2['user_info']->response_rate : 0;
 
-            return ($a > $b) ? 1 : -1;
+                    if($e == $f){
+                        return $item1['main']->updated_at < $item2['main']->updated_at;
+                    }
+                    return ($e < $f) ? 1 : -1;
+                }
+
+                return ($c > $d) ? 1 : -1;
+            }
+            return ($a < $b) ? 1 : -1;
+            
         });
 
         return $products;
@@ -1030,9 +1050,9 @@ class product_list_controller extends Controller
         return $products;
     }
 
-    protected function remove_duplicated_paying_sellers(&$products)
+    protected function remove_duplicated_sellers(&$products)
     {
-        $first_products = array_slice($products,0,100);
+        $first_products = array_slice($products,0,250);
 
         $tmp_user_ids = [];
         $duplicated_keys = [];
@@ -1102,7 +1122,7 @@ class product_list_controller extends Controller
             return ($a < $b) ? 1 : -1;
         });
 
-        $products = array_slice($products,0,16);
+        $products = array_slice($products,0,72);
         
         return view('layout.product-list',[
             'products' => $products,
@@ -1114,7 +1134,7 @@ class product_list_controller extends Controller
 
     protected function get_all_categories()
     {
-        $all_categories = Cache::remember(md5('categories'),24 * 60,function(){
+        $all_categories = Cache::remember(md5('categories'),1,function(){
             return DB::table('categories')
                         ->leftJoin('products','products.category_id','=','categories.id')
                         ->select('categories.*',DB::raw('count(products.id) as score'))
@@ -1123,14 +1143,13 @@ class product_list_controller extends Controller
                         ->get();
         });
 
-        $categories = [];
-
         $categories = $all_categories->filter(function($category){
             return $category->parent_id == null;
         });
 
         $categories->each(function ($item) use($all_categories){
-    
+            // $item['subcategories'] = category::where('parent_id', $item->id)
+            //     ->get();
             $other = null;
             $item->subcategories = $all_categories->filter(function($category) use($item,&$other){
                 if($category->parent_id == $item->id && $category->category_name == 'سایر'){
@@ -1141,10 +1160,22 @@ class product_list_controller extends Controller
                 return $category->parent_id == $item->id;
             });
 
+            $item->subcategories->each(function($item) use($all_categories){
+                $other = null;
+                $item->subcategories = $all_categories->filter(function($category) use($item,&$other){
+                    if($category->parent_id == $item->id && $category->category_name == 'سایر'){
+                        $other = $category;
+                        return false;
+                    }
+
+                    return $category->parent_id == $item->id;
+                });
+            });
+            
+
             if(! is_null($other)){
                 ($item->subcategories)[] = $other;
             }
-
         });
 
         return $categories;
@@ -1301,9 +1332,29 @@ class product_list_controller extends Controller
             });
         }
         else{
-            $result = array_filter($products,function($product) use($viewer_info){
-                return $product['main']->category_id == $viewer_info->category_id && $product['user_info']->response_rate >= 70;
-            });
+            $leads = DB::table('leads')
+                            ->where('buyer_id',$user_id)
+                            ->orderBy('updated_at','desc')
+                            ->get();
+
+                        
+            if(count($leads) > 0)
+            {
+                $related_buyAds_subcategory_id_array = [];
+                foreach($leads as $lead){
+                    $related_buyAds_subcategory_id_array[] = $lead->category_id;
+                }
+
+                $result = array_filter($products,function($product) use($related_buyAds_subcategory_id_array){
+                    return in_array($product['main']->category_id,$related_buyAds_subcategory_id_array) == true && $product['user_info']->response_rate >= 70;
+                });
+            }
+            else{
+                $result = array_filter($products,function($product) use($viewer_info){
+                    return $product['user_info']->response_rate >= 70;
+                });
+            }
+            
 
             usort($result, function ($item1, $item2){
                 $a = $item1['main']->is_elevated;
@@ -1407,6 +1458,8 @@ class product_list_controller extends Controller
 
             $result = array_merge($tmp,$result);
         }
+
+        $result = $this->remove_duplicated_sellers($result);
 
         return $result;
     }

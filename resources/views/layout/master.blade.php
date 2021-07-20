@@ -11,9 +11,28 @@
 
     <link rel="icon" href="{{asset('assets/img/logo/mobile-logo.svg')}}">
 
-    <title>باسکول | بازارگاه کشاورزی </title>
+    @if(config('app.name') != 'Laravel')
+    <meta name="robots" content="noindex" />
+    @endif
 
-    <link rel="stylesheet" href="{{asset('assets/css/main-loader.css')}}">
+
+    <!-- fonts -->
+    <link rel="preload" href="{{asset('assets/fonts/woff2/IRANSansWeb(FaNum)_Bold.woff2')}}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{asset('assets/fonts/woff2/IRANSansWeb(FaNum).woff2')}}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{asset('assets/fonts/woff2/IRANSansWeb(FaNum)_Medium.woff2')}}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{asset('assets/webfonts/fa-solid-900.woff2')}}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{asset('assets/webfonts/fa-regular-400.woff2')}}" as="font" type="font/woff2" crossorigin>
+    <!-- <link rel="preload" href="{{asset('assets/webfonts/fa-brands-400.woff2')}}" as="font" type="font/woff2" crossorigin> -->
+    
+    
+    <!-- Main Styles
+    // improve for blocking request 
+    -->
+    <link rel="preload" href="{{asset('assets/css/fontiran.min.css')}}" as="style" onload="this.rel='stylesheet'" crossorigin>
+    <link rel="preload" href="{{asset('assets/css/all.min.css')}}" as="style" onload="this.rel='stylesheet'" crossorigin>
+    <link rel="preload" href="{{asset('css/app.css')}}" as="style" onload="this.rel='stylesheet'" crossorigin>
+    <title>باسکول | بازار خرید و فروش عمده محصولات غذایی و کشاورزی ایران بدون واسطه</title>
+
 
 
 
@@ -35,7 +54,60 @@
         gtag('config', 'UA-129398000-1', {'send_page_view': false});
     </script>
 
+    <style>
 
+     
+      .main-loader-wrapper {
+        
+        position: fixed;
+
+        bottom: 20px;
+
+        z-index: 1030;
+
+        background: #fff;
+
+        width: 100%;
+
+        height: 100%;
+
+        left: 0;
+
+        top: 0;
+        }
+
+        .logo-main-loader {
+          display: inline-block;
+          position: absolute;
+          left: 50%;
+          top: 40%;
+          transform: translate(-50%, -50%);
+          text-align: center;
+          line-height: 1.618;
+          width: 100%;
+          padding: 0 15px;
+        }
+
+        .logo-main-loader svg {
+            width: 60px;
+            height: 70px;
+        }
+        .main-loader-shape-wrapper {
+          position: absolute;
+          padding: 40px 0;
+          bottom: 20%;
+          left: calc(50% - 23px);
+        }
+
+
+        /* preloader image style*/
+        .spinner-border{
+          width: 4.5rem;
+          height: 4.5rem;
+          color: #bbb;
+          border-width: 3px;
+        }
+    </style>
 </head>
 <body >
 
@@ -77,11 +149,8 @@
       </svg>
     </div>
     <div class="main-loader-shape-wrapper">
-      <div class="lds-ring">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
+      <div class="spinner-border" >
+        <span class="sr-only"></span>
       </div>
     </div>
   </div>

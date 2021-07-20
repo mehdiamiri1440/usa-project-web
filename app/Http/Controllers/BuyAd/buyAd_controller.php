@@ -89,6 +89,19 @@ class buyAd_controller extends Controller
         'c.category_name as subcategory_name'
     ];
 
+    protected $related_public_buyAd_list_required_fields = [
+        'buy_ads.id',
+        'buy_ads.name',
+        'buy_ads.created_at',
+        'buy_ads.updated_at',
+        'buy_ads.category_id',
+        'buy_ads.requirement_amount',
+        // 'myusers.user_name',
+        'myusers.first_name',
+        'myusers.last_name',
+        'c.category_name as subcategory_name'
+    ];
+
     protected $my_sell_offer_required_fields = [
         'buy_ad_id',
         'myuser_id',
@@ -216,9 +229,16 @@ class buyAd_controller extends Controller
     protected function add_buyAd_to_DB($request)
     {
         try {
+            $user_id = session('user_id');
+            $is_user_blocked = DB::table('myusers')->where('id',$user_id)->first()->is_blocked;
+
+            if($is_user_blocked){
+                return 'حساب کاربری شما مسدود شده است.';
+            }
+
             $buyAd = new buyAd();
 
-            $user_id = session('user_id');
+            
 
             foreach ($this->buyAd_register_fields_array as $field_name) {
                 if (!is_null($request->$field_name)) {
@@ -319,20 +339,44 @@ class buyAd_controller extends Controller
     public function get_buyAd_list(Request $request)
     {
         $this->validate($request, [
-            'from_record_number' => 'integer|min:1',
-            'to_record_number' => 'integer|min:1',
+            'from' => 'integer|min:1',
+            'to' => 'integer|min:1',
         ]);
 
-        $all_buyAds = null;
-        if ($request->filled('from_record_number') && $request->filled('to_record_number')) {
-            $all_buyAds = $this->get_all_buy_ads_with_related_media($request->form_record_number, $request->to_record_number);
-        } else {
-            $all_buyAds = $this->get_all_buy_ads_with_related_media();
+        $query = DB::table('buy_ads')
+                    ->join('myusers', 'buy_ads.myuser_id', '=', 'myusers.id')
+                    ->join('categories as c', 'buy_ads.category_id', '=', 'c.id')
+                    ->where('buy_ads.confirmed', true)
+                    ->where('myusers.is_blocked',false)
+                    ->where(function($q){
+                        return $q = $q->where('buy_ads.reply_capacity','>',0)
+                                        ->orWhere('buy_ads.phone_view_capacity','>',0);
+                    })
+                    ->whereNull('buy_ads.deleted_at')
+                    ->whereBetween('buy_ads.updated_at',[Carbon::now()->subWeeks(3),Carbon::now()]);
+                    // ->where('buy_ads.myuser_id','<>',$user->id);
+
+        $query = $query->select($this->related_public_buyAd_list_required_fields)
+                        ->orderBy('buy_ads.updated_at','desc');
+
+        $buyAds = $query->get()->toArray();
+
+        if ($request->filled('from') && $request->filled('to')) {
+            $buyAds = array_slice($buyAds,$request->from, abs($request->to - $request->from));
+        } 
+        
+        $date_convertor_object = new date_convertor();
+        $result_buyAds = [];
+        foreach ($buyAds as $buyAd) {
+            $buyAd->register_date = $date_convertor_object->get_persian_date_with_month_name($buyAd->created_at);
+
+            $result_buyAds[] = $buyAd;
         }
+        
 
         return response()->json([
             'status' => true,
-            'buy_ads' => $all_buyAds,
+            'buyAds' => $result_buyAds,
         ], 200);
     }
 
@@ -721,6 +765,7 @@ class buyAd_controller extends Controller
             }
 
             $user_registered_products = DB::table('products')->where('myuser_id',$seller_id)
+                                                ->whereNull('deleted_at')
                                                 ->where(function($q){
                                                     return $q = $q->where('confirmed',true)
                                                                     ->orWhereBetween('created_at',[Carbon::now()->subHours(24),Carbon::now()]);
@@ -731,9 +776,9 @@ class buyAd_controller extends Controller
             if(count($user_registered_products) > 0){
 
                 foreach($user_registered_products as $product){
-
+                    
                     $product_name_array = array_slice($this->get_product_name_array($product),0,3);
-
+                    $tmp = [];
                     foreach($product_name_array as $word){
                         $tmp = array_filter($result_buyAds,function($buyAd) use($product,$word,$user){
                             if(is_null($buyAd->name)){
@@ -749,16 +794,25 @@ class buyAd_controller extends Controller
 
                 //sort buyAds according to recency and response rate
                 usort($filtered_buyAds,function($item1,$item2){
-                    $a = Carbon::now()->subHours(12)->gte(Carbon::parse($item1->updated_at)) ?  $item1->response_rate : 100;
-                    $b = Carbon::now()->subHours(12)->gte(Carbon::parse($item2->updated_at)) ?  $item2->response_rate : 100;
+                    $a = $item1->is_golden ? 1 : 0;
+                    $b = $item2->is_golden ? 1: 0;
 
                     if($a == $b){
-                        return ($item1->updated_at < $item2->updated_at) ? 1 : -1;
-                    }
+                        $c = is_null($item1->response_rate) ? 100 : $item1->response_rate;
+                        $d = is_null($item2->response_rate) ? 100 : $item2->response_rate;
+
+                        if($c == $d){
+                            return ($item1->updated_at < $item2->updated_at) ? 1 : -1;
+                        }
+
+                        return ($c < $d) ? 1 : -1;
+                    } 
 
                     return ($a < $b) ? 1 : -1;
                     
                 });
+
+                
 
             }
 
@@ -769,22 +823,48 @@ class buyAd_controller extends Controller
             }
             
 
-            usort($result_buyAds,function($item1,$item2){
-                $a = $item1->response_rate;
-                $b = $item2->response_rate;
+            $user_registered_products_categories_array = [];
+
+            foreach($user_registered_products as $product)
+            {
+                $user_registered_products_categories_array[] = $product->category_id;
+            }
+
+            $user_registered_products_categories_array = array_unique($user_registered_products_categories_array);
+
+            usort($result_buyAds,function($item1,$item2) use($user_registered_products_categories_array){
+                $a =  (in_array($item1->category_id,$user_registered_products_categories_array) == true) ? 1 : -1;
+                $b =  (in_array($item2->category_id,$user_registered_products_categories_array) == true) ? 1 : -1;
 
                 if($a == $b){
-                    return ($item1->updated_at < $item2->updated_at) ? 1 : -1;
+                    $c = $item1->is_golden ? 1 : 0;
+                    $d = $item2->is_golden ? 1 : 0;
+
+                    if($c == $d){
+                        $e = $item1->response_rate;
+                        $f = $item2->response_rate;
+
+                        if($e == $f){
+                            return ($item1->updated_at < $item2->updated_at) ? 1 : -1;
+                        }
+
+                        return ($e < $f) ? 1 : -1;
+                    }
+
+                    return ($c < $d) ? 1 : -1;
                 }
 
                 return ($a < $b) ? 1 : -1;
+                
             });
 
             $result_buyAds = array_merge($filtered_buyAds,$result_buyAds);
 
+            $result_buyAds = array_unique($result_buyAds,SORT_REGULAR);
+
             return response()->json([
                 'status' => true,
-                'buyAds' => $result_buyAds,
+                'buyAds' => collect($result_buyAds),
             ], 200);
         } else {
             return response()->json([
@@ -794,18 +874,19 @@ class buyAd_controller extends Controller
         }
     }
 
-    protected function get_related_buyAds_list_to_the_user()
+    public function get_related_buyAds_list_to_the_user()
     {
         $query = DB::table('buy_ads')
                     ->join('myusers', 'buy_ads.myuser_id', '=', 'myusers.id')
                     ->join('categories as c', 'buy_ads.category_id', '=', 'c.id')
                     ->where('buy_ads.confirmed', true)
+                    ->where('myusers.is_blocked',false)
                     ->where(function($q){
                         return $q = $q->where('buy_ads.reply_capacity','>',0)
                                         ->orWhere('buy_ads.phone_view_capacity','>',0);
                     })
                     ->whereNull('buy_ads.deleted_at')
-                    ->whereBetween('buy_ads.updated_at',[Carbon::now()->subWeeks(2),Carbon::now()]);
+                    ->whereBetween('buy_ads.updated_at',[Carbon::now()->subWeeks(3),Carbon::now()]);
                     // ->where('buy_ads.myuser_id','<>',$user->id);
 
         $query = $query->selectRaw(implode(', ',$this->related_buyAd_list_required_fields) . ",(FLOOR((select count(distinct(m1.sender_id)) from messages as m1 where m1.is_read = true and m1.receiver_id = buy_ads.myuser_id and not exists(select * from messages where messages.receiver_id = buy_ads.myuser_id and m1.is_read = false ))/(select count(distinct(messages.sender_id)) from messages where messages.receiver_id = buy_ads.myuser_id) * 100 )) as response_rate,
@@ -813,6 +894,10 @@ class buyAd_controller extends Controller
                     ->orderBy('buy_ads.updated_at', 'desc');
 
         $buyAds = $query->get();
+
+        $buyAds = $buyAds->filter(function($buyAd){
+            return is_null($buyAd->response_rate) || $buyAd->response_rate >= 50;
+        });
 
         $golden_buyAds_update_date = Carbon::now()->subHours(2);
         $buyAds->each(function($buyAd) use($golden_buyAds_update_date){
@@ -835,18 +920,6 @@ class buyAd_controller extends Controller
             unset($buyAd->phone_view_permission);
         });
                     
-        //relevance
-        // $buyAds = $buyAds->filter(function ($buyAd) {
-        //     $user_id = session('user_id');
-
-        //     $category_record = category::find($buyAd->category_id);
-        //     $user_record = myuser::find($user_id);
-
-        //     $relevence = ($user_record->category_id == $category_record->parent_id) ? true : false;
-        //     // $user_already_offered_for_buyAd = false;
-
-        //     return  $relevence;
-        // });
 
         return $buyAds;
     }
@@ -1460,10 +1533,12 @@ class buyAd_controller extends Controller
             });
         }
         else{
-            $products = product::where('myuser_id',$user_id)
+            $products = DB::table('products')
+                                    ->where('myuser_id',$user_id)
+                                    // ->whereNull('deleted_at') 
                                     ->where(function($q){
                                         return $q = $q->where('confirmed',true)
-                                                        ->orWhereBetween('created_at',[Carbon::now()->subHours(12),Carbon::now()]);
+                                                            ->orWhereBetween('created_at',[Carbon::now()->subHours(12),Carbon::now()]);
                                     })
                                     ->orderBy('created_at','desc')
                                     ->get();
@@ -1645,7 +1720,7 @@ class buyAd_controller extends Controller
         $high_degree_buyers = [];
         foreach($query_result as $item)
         {
-            if($item->in_degree >= 10 && $item->out_degree >= 10)
+            if($item->in_degree >= 20 && $item->out_degree >= 20)
             {
                 $high_degree_buyers[] = $item->user_id;
             }

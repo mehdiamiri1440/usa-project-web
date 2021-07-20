@@ -11,6 +11,7 @@ use App\Models\product;
 use App\Models\myuser;
 use App\Jobs\sendSMS;
 use Carbon\Carbon;
+use DB;
 
 class SendUpgradeAccoutnSMSToSellers implements ShouldQueue
 {
@@ -21,6 +22,12 @@ class SendUpgradeAccoutnSMSToSellers implements ShouldQueue
      *
      * @return void
      */
+
+    protected $sellers_related_sms = [
+        'first_day' => 51393,
+        // 'third_day' => 10,
+        'seventh_day' => 50873
+    ];
 
     protected $product_stock_threshold = 10000;
 
@@ -36,28 +43,68 @@ class SendUpgradeAccoutnSMSToSellers implements ShouldQueue
      */
     public function handle()
     {
-        $potential_sellers_user_id = $this->get_potential_sellers_user_id_list();
+        $potential_sellers_user_ids = $this->get_potential_sellers_user_id_list();
 
-        $users_phone_numbers = $this->get_users_phone_numbers($potential_sellers_user_id);
+        foreach($this->sellers_related_sms as $key => $code)
+        {
+            $users_phone_numbers = $this->get_users_phone_numbers($potential_sellers_user_ids[$key]);
 
-        $users_phone_numbers->each(function($user){
-            sendSMS::dispatch($user->phone,21579)->onQueue('sms');
-        });
+            $users_phone_numbers->each(function($user) use($code){
+                sendSMS::dispatch($user->phone,$code)->onQueue('sms');
+            });
+        }
     }
 
     protected function get_potential_sellers_user_id_list()
     {
         $non_free_sellers = $this->get_non_free_sellers_user_id_list();
 
-        $user_ids = product::where('confirmed',true)
-                            ->whereBetween('created_at',[Carbon::now()->subHours(24),Carbon::now()])
-                            ->whereNotIn('myuser_id',$non_free_sellers)
-                            ->where('stock','>=',$this->product_stock_threshold)
-                            ->select('myuser_id')
-                            ->distinct()
-                            ->get();
+        $first_day_seller_ids = DB::table('products')
+                                    ->where('confirmed',true)
+                                    ->whereBetween('created_at',[Carbon::now()->subDays(1),Carbon::now()])
+                                    ->whereNotIn('myuser_id',$non_free_sellers)
+                                    // ->where('stock','>=',$this->product_stock_threshold)
+                                    ->pluck('myuser_id');
 
-        return $user_ids;
+        // $third_day_seller_ids = DB::table('myusers')
+        //                             ->whereNotIn('myusers.id',$non_free_sellers)
+        //                             ->whereBetween('created_at',[Carbon::now()->subDays(3),Carbon::now()->subDays(2)])
+        //                             ->where('is_seller',true)
+        //                             ->where('is_blocked',false)
+        //                             ->whereExists(function($q){
+        //                                 $q->select(DB::raw(1))
+        //                                     ->from('products')
+        //                                     ->whereRaw('myusers.id = products.myuser_id and products.confirmed = true');
+        //                             })->whereExists(function($q){
+        //                                 $q->select(DB::raw(1))
+        //                                     ->from('messages')
+        //                                     ->whereRaw('messages.receiver_id = myusers.id and messages.is_read = true');
+        //                             })->select('myusers.id')
+        //                             ->distinct()
+        //                             ->get();
+
+
+        $seventh_day_seller_ids = DB::table('myusers')
+                                        ->whereNotIn('myusers.id',$non_free_sellers)
+                                        ->whereBetween('created_at',[Carbon::now()->subDays(7),Carbon::now()->subDays(6)])
+                                        ->where('is_seller',true)
+                                        ->where('is_blocked',false)
+                                        ->whereExists(function($q){
+                                            $q->select(DB::raw(1))
+                                                ->from('products')
+                                                ->whereRaw('myusers.id = products.myuser_id and products.confirmed = true');
+                                        })->whereExists(function($q){
+                                            $q->select(DB::raw(1))
+                                                ->from('messages')
+                                                ->whereRaw('messages.receiver_id = myusers.id and messages.is_read = true');
+                                        })->pluck('myusers.id');
+                                        
+
+        return [
+            'first_day' => array_unique($first_day_seller_ids->toArray()),
+            // 'third_day' => $third_day_seller_ids,
+            'seventh_day' => array_unique($seventh_day_seller_ids->toArray())
+        ];
     }
 
     protected function get_non_free_sellers_user_id_list()
@@ -72,7 +119,7 @@ class SendUpgradeAccoutnSMSToSellers implements ShouldQueue
 
     protected function get_users_phone_numbers($user_ids)
     {
-        $user_ids_array = $user_ids->toArray();
+        $user_ids_array = $user_ids;
         
         $phone_numbers = myuser::whereIn('id',$user_ids_array)
                                 ->select('phone')

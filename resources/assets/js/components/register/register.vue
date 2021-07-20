@@ -97,7 +97,6 @@ span {
 
 #main {
   margin-top: 21px;
-  background: #f9f9f9;
 
   height: 100%;
 
@@ -203,11 +202,12 @@ input[type="number"]::-webkit-outer-spin-button {
 /*main contents styles */
 .main-contents {
   background: #fff;
-  border-radius: 9px;
+  border-radius: 12px;
   overflow: hidden;
   margin-top: 16px;
-  box-shadow: 0 0 10px #c5c5c5;
+  border: 1px solid #e0e0e0;
   height: 500px;
+  position: relative;
 }
 
 /*main content headers styles*/
@@ -510,6 +510,8 @@ import PersonalInformatin from "./register_steps/personal_information";
 import Location from "./register_steps/location";
 import UserAccount from "./register_steps/user_account";
 import ActivityDomain from "./register_steps/activity_domain";
+import device from "device-uuid/lib/device-uuid";
+import swal from "../../sweetalert.min.js";
 
 export default {
   components: {
@@ -683,6 +685,7 @@ export default {
       this.step2.now = new Date().getTime();
       this.step2.showTimer = true;
       this.step2.timeCounterDown = 119;
+
       axios
         .post("/send_verification_code", {
           phone: this.toLatinNumbers(this.step1.phone),
@@ -725,10 +728,17 @@ export default {
 
       self.verifyCodeBtnLoading = true;
 
+      let deviceInfo = new device.DeviceUUID();
+      let deviceId = null;
+      if (deviceInfo.get()) {
+        deviceId = deviceInfo.get();
+      }
+
       axios
         .post("/verify_code", {
           verification_code: this.toLatinNumbers(this.step2.verification_code),
           phone: this.toLatinNumbers(this.step1.phone),
+          device_id: deviceId,
         })
         .then(function (response) {
           self.verifyCodeBtnLoading = false;
@@ -741,12 +751,10 @@ export default {
               self.goToStep(3);
               self.getProvinceList();
             }
-          } else if (response.data.status === false) {
+          } else {
             self.goToStep(2);
             self.errors.verification_code = [];
-            self.errors.verification_code.push(
-              "کد وارد شده صحیح نیست یا منقضی شده است"
-            );
+            self.errors.verification_code.push(response.data.msg);
             self.registerComponentStatistics(
               "Register-Error",
               "verification-code-wrong",
@@ -792,7 +800,7 @@ export default {
         phone: this.toLatinNumbers(this.step1.phone),
         first_name: this.step3.first_name,
         last_name: this.step3.last_name,
-        verification_code: this.step2.verification_code,
+        verification_code: this.toLatinNumbers(this.step2.verification_code),
         password: this.step3.password,
         user_name: this.step3.user_name,
         sex: this.step3.sex,
@@ -808,11 +816,19 @@ export default {
           .then(function (response) {
             if (response.status === 201) {
               eventBus.$emit("modal", "userRegisterSuccess");
-              self.createCookie('registerNewUser',true,60);
+              self.createCookie("registerNewUser", true, 60);
+
+              let deviceInfo = new device.DeviceUUID();
+              let deviceId = null;
+              if (deviceInfo.get()) {
+                deviceId = deviceInfo.get();
+              }
+
               axios
                 .post("/dologin", {
                   phone: object.phone,
                   password: object.password,
+                  device_id: deviceId,
                 })
                 .then((response) => {
                   if (response.data.status) {
@@ -1375,11 +1391,12 @@ export default {
         {
           property: "og:description",
           content:
-            "مرجع تخصصی خرید و فروش عمده و قیمت محصولات کشاورزی ایران | صادرات محصولات کشاورزی",
+            "مرجع تخصصی خرید و فروش عمده و قیمت محصولات غذایی و کشاورزی ایران | صادرات محصولات غذایی و کشاورزی",
         },
         {
           property: "og:site_name",
-          content: "باسکول بازارآنلاین خرید و فروش محصولات کشاورزی ایران",
+          content:
+            "باسکول بازارآنلاین خرید و فروش محصولات غذایی و کشاورزی ایران",
         },
         {
           property: "og:title",

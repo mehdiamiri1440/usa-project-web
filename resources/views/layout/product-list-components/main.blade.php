@@ -1,31 +1,36 @@
-
     <div
-    class="sub-header-fix sub-header hidden-lg hidden-md hidden-sm container-fluid"
+      class="
+        sub-header-fix sub-header
+        hidden-lg hidden-md hidden-sm
+        container-fluid
+      "
     >
-      <div class="search-box col-sm-8 col-xs-12 col-lg-5 pull-right">
-        <input
-          type="text"
-          v-model="searchText"
-          placeholder="اینجا جستجو کنید"
-        />
-
-        <button class="btn-search">
-          <i class="fa-search fa"></i>
-        </button>
-      </div>
       <div class="rate-filter-mobile-wrapper">
-        <div class="rate-filter">
-          <button class="green-button bg-gray" @click.prevent="openSortModal()">
-            <i class="fas fa-sort-amount-down-alt"></i>
-            مرتب سازی
-          </button>
-        </div>
-        <button class="btn-filter hidden-lg" @click.prevent="openFilterModal()">
-          <i class="fa fa-filter"></i>
-          دسته ها و فیلتر
+        <button
+          class="mobile-category-item"
+        >
+          <i class="fa fa-list"></i>
+          دسته ها
+        </button>
+        <button
+          class="mobile-category-item"
+        >
+          <i class="fas fa-sort-amount-down-alt"></i>
+          مرتب سازی
+        </button>
+        <button
+          class="mobile-category-item"
+        >
+          کشاورزی
+        </button>
+        <button
+          class="mobile-category-item"
+        >
+        فرآورده های غذایی
         </button>
       </div>
     </div>
+
     <main id="main" class="container">
       <div class="col-xs-12 pull-left col-lg-9">
         <div class="row">
@@ -568,7 +573,7 @@
       >
       @if($categoryMetaData['category_info'])
         <div class="col-xs-12">
-
+          <h1>خرید {{$category_name}} عمده </h1>
           <div class="footer-note-wrapper main-box-shadow">
             <div class="wrapper-contents">
               <div

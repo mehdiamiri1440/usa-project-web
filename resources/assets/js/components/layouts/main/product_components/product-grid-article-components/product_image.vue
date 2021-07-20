@@ -6,7 +6,7 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  height: 140px;
+  height: 130px;
 
   overflow: hidden;
 
@@ -19,17 +19,15 @@
 
 .main-article-image .product-image {
   display: block;
-
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-
   position: absolute;
   top: 0;
   left: 0;
   height: 100%;
   width: 100%;
-  z-index: 1;
+  z-index: 0;
 }
 
 .image-wrapper-contents {
@@ -64,21 +62,23 @@
   min-height: 40px;
   width: 100%;
   right: 0;
-  background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5));
+  background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.6));
   display: flex;
   align-items: center;
-  padding-top: 6px;
+  padding-top: 16px;
+  padding-bottom: 2px;
 }
 
 .article-title p {
-  font-size: 15px;
+  font-size: 17px;
   padding: 0 5px;
-  color: #ebebeb;
+  color: #fff;
   overflow: hidden;
-  height: 25px;
+  height: 29px;
   line-height: 1.618;
   white-space: nowrap;
   text-overflow: ellipsis;
+  font-weight: 500;
 }
 
 .valid-user-badge {
@@ -119,6 +119,7 @@
 <template>
   <div class="main-article-image">
     <div
+      v-if="$parent.loadedProduct"
       class="product-image"
       :style="{
         backgroundImage: 'url(' + base + 'thumbnails/' + img + ')',
@@ -126,7 +127,7 @@
     ></div>
     <div v-show="!isImageLoad" class="text-center spinner-wrapper">
       <div class="spinner-border">
-        <span class="sr-only">Loading...</span>
+        <span class="sr-only"></span>
       </div>
     </div>
     <div class="image-wrapper-contents">
@@ -169,6 +170,7 @@
         </div>
       </div>
       <img
+        v-if="$parent.loadedProduct"
         class="hidden"
         :src="base + 'thumbnails/' + img"
         @load="ImageLoaded"
@@ -210,7 +212,7 @@ export default {
       var productName = "";
       productName =
         this.$parent.product.main.sub_category_name +
-        ' <span style="color: #fff">' +
+        ' | <span style="color: #fff">' +
         this.$parent.product.main.product_name +
         "</span>";
       return productName;

@@ -131,7 +131,7 @@
 }
 .custom-progressbar.active-item {
   background: #00c569;
-  width: 8.7%;
+  width: 0%;
   left: initial;
 }
 
@@ -147,7 +147,7 @@
   left: 41px;
 }
 .active-progress-wrapper .custom-progressbar {
-  right: -34px;
+  right: 0;
 }
 
 .success-register {
@@ -185,17 +185,12 @@
     margin: 0px auto;
   }
 
-  .main-content .section-title {
-    padding: 0 10px;
-  }
-
   .main-content .section-title p {
     line-height: 1.618;
   }
 
   .main-content > div.wrapper-section {
     border: none;
-    border-top: 1px solid #dadce0;
     border-radius: 0;
   }
 
@@ -262,12 +257,14 @@
           </div>
           <p>پس از تایید کارشناسان، محصول شما در لیست قرار خواهد گرفت.</p>
         </div>
-        <div v-if="buyAds.length != 0" class="section-title">
-          <h2>خریداران</h2>
-          <p>
-            خریداران پیشنهادی از طرف
-            <span class="light-green-text">باسکول</span> برای محصول شما.
-          </p>
+        <div class="col-xs-12" v-if="buyAds.length != 0">
+          <div class="section-title">
+            <h2>خریداران</h2>
+            <p>
+              خریداران پیشنهادی از طرف
+              <span class="light-green-text">باسکول</span> برای محصول شما.
+            </p>
+          </div>
         </div>
       </div>
       <div
@@ -307,9 +304,7 @@
       v-show="$route.name != 'successRegisterProduct'"
       class="main-content col-xs-12"
     >
-      <div class="row">
-        <h2 class="section-title">ثبت محصول جدید</h2>
-      </div>
+      <h2 class="section-title">ثبت محصول جدید</h2>
       <div
         class="row wrapper-section"
         :class="{ 'empty-section': currentStep == 7 && buyAds.length == 0 }"
@@ -429,6 +424,8 @@ import ProductImage from "./register-product-steps/product_image";
 import Terms from "./register-product-steps/terms";
 import MoreDetails from "./register-product-steps/more_details";
 import FinishStage from "./register-product-steps/finish_stage";
+import imageuploadify from "../../../../imageuploadify.min";
+
 
 export default {
   components: {
@@ -988,26 +985,26 @@ export default {
     currentStep: function (step) {
       switch (step) {
         case 1:
-          $(".custom-progressbar.active-item").css("width", "8.7%");
+          $(".custom-progressbar.active-item").css("width", "0");
           break;
         case 2:
-          $(".custom-progressbar.active-item").css("width", "29%");
+          $(".custom-progressbar.active-item").css("width", "20%");
           break;
 
         case 3:
-          $(".custom-progressbar.active-item").css("width", "49%");
+          $(".custom-progressbar.active-item").css("width", "41%");
           break;
 
         case 4:
-          $(".custom-progressbar.active-item").css("width", "69%");
+          $(".custom-progressbar.active-item").css("width", "62%");
           break;
 
         case 5:
-          $(".custom-progressbar.active-item").css("width", "88%");
+          $(".custom-progressbar.active-item").css("width", "81%");
           break;
 
         case 6:
-          $(".custom-progressbar.active-item").css("width", "107%");
+          $(".custom-progressbar.active-item").css("width", "99%");
           break;
 
         default:

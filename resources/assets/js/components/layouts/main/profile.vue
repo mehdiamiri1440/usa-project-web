@@ -1,4 +1,8 @@
 <style scoped>
+@import url("../../../../css/owl.carousel.min.css");
+@import url("../../../../css/magnific-popup.css");
+@import url("../../../../css/owl-product-items-style.css");
+
 .info_user_wrapper_mobile .green-button,
 .back_page .green-button {
   margin: 3px 0;
@@ -325,6 +329,11 @@
 .btn.btn-copy {
   width: 100%;
   background: #f0f0f0;
+}
+
+.btn.btn-copy > span.icon-wrapper {
+  display: inline-block;
+  max-width: 12px;
 }
 
 .content_user_wrapper_mobile {
@@ -887,7 +896,11 @@ p.response-rate span {
             </div>
 
             <div
-              class="info_user_wrapper_mobile hidden-sm hidden-md hidden-lg col-xs-8 col-sm-4 col-md-3"
+              class="
+                info_user_wrapper_mobile
+                hidden-sm hidden-md hidden-lg
+                col-xs-8 col-sm-4 col-md-3
+              "
             >
               <div class="row">
                 <div
@@ -902,7 +915,12 @@ p.response-rate span {
                 </div>
                 <div class="col-xs-6 text-center" v-else>
                   <div
-                    class="info-num placeholder-content content-min-width margin-auto"
+                    class="
+                      info-num
+                      placeholder-content
+                      content-min-width
+                      margin-auto
+                    "
                   ></div>
                 </div>
 
@@ -934,14 +952,23 @@ p.response-rate span {
 
                 <div class="col-xs-6 text-center" v-else>
                   <div
-                    class="info-num placeholder-content content-min-width margin-auto"
+                    class="
+                      info-num
+                      placeholder-content
+                      content-min-width
+                      margin-auto
+                    "
                   ></div>
                 </div>
 
                 <div class="col-xs-12">
                   <div v-if="!profileOwner.user_info.id">
                     <div
-                      class="default-boxing-size placeholder-content content-full-width"
+                      class="
+                        default-boxing-size
+                        placeholder-content
+                        content-full-width
+                      "
                     ></div>
                   </div>
 
@@ -984,7 +1011,11 @@ p.response-rate span {
 
                   <div v-if="!profileOwner.user_info.id">
                     <div
-                      class="placeholder-content padding-15-0 content-full-width"
+                      class="
+                        placeholder-content
+                        padding-15-0
+                        content-full-width
+                      "
                     ></div>
                   </div>
 
@@ -994,7 +1025,23 @@ p.response-rate span {
                     class="btn btn-copy"
                     @click.prevent="copyProfileLinkToClipBoard"
                   >
-                    <i class="fab fa-whatsapp"></i>
+                    <span class="icon-wrapper">
+                      <svg
+                        aria-hidden="true"
+                        focusable="false"
+                        data-prefix="fab"
+                        data-icon="whatsapp"
+                        class="svg-inline--fa fa-whatsapp fa-w-14"
+                        role="img"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 448 512"
+                      >
+                        <path
+                          fill="#333"
+                          d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"
+                        ></path>
+                      </svg>
+                    </span>
                     اشتراک در واتس آپ
                   </button>
                 </div>
@@ -1074,7 +1121,11 @@ p.response-rate span {
                   <div class="back_page col-xs-12 col-sm-4 col-md-3">
                     <div v-if="!profileOwner.user_info.id">
                       <div
-                        class="default-boxing-size placeholder-content content-full-width"
+                        class="
+                          default-boxing-size
+                          placeholder-content
+                          content-full-width
+                        "
                       ></div>
                     </div>
                     <div v-else>
@@ -1116,7 +1167,11 @@ p.response-rate span {
 
                     <div v-if="!profileOwner.user_info.id">
                       <div
-                        class="default-boxing-size placeholder-content content-full-width"
+                        class="
+                          default-boxing-size
+                          placeholder-content
+                          content-full-width
+                        "
                       ></div>
                     </div>
                     <button
@@ -1125,7 +1180,7 @@ p.response-rate span {
                       @click="copyProfileLinkToClipBoard"
                       :value="copyLinkText"
                     >
-                      <i :class="copyLinkClass" aria-hidden="true"></i>
+                      <span class="icon-wrapper" v-html="copyLinkClass"></span>
                       <span v-text="copyLinkText"></span>
                     </button>
                   </div>
@@ -1188,7 +1243,11 @@ p.response-rate span {
             </div>
 
             <div
-              class="content_user_wrapper_mobile hidden-sm hidden-md hidden-lg col-xs-12"
+              class="
+                content_user_wrapper_mobile
+                hidden-sm hidden-md hidden-lg
+                col-xs-12
+              "
             >
               <div class="user-contents row">
                 <div class="title_content col-xs-12">
@@ -1256,10 +1315,18 @@ p.response-rate span {
                   </h1>
                   <h1
                     v-else
-                    class="placeholder-content margin-15-0 content-half-width padding-15-0"
+                    class="
+                      placeholder-content
+                      margin-15-0
+                      content-half-width
+                      padding-15-0
+                    "
                   ></h1>
                   <div
-                    class="profile-rating-box-wrapper hidden-sm hidden-md hidden-lg"
+                    class="
+                      profile-rating-box-wrapper
+                      hidden-sm hidden-md hidden-lg
+                    "
                     v-if="profileOwnerStatistics.rating_info.total_count > 0"
                   >
                     <div class="profile-rating-box">
@@ -1435,10 +1502,20 @@ p.response-rate span {
               ></div>
               <div v-else>
                 <span
-                  class="content-default-width placeholder-content margin-15 h-20"
+                  class="
+                    content-default-width
+                    placeholder-content
+                    margin-15
+                    h-20
+                  "
                 ></span>
                 <span
-                  class="content-half-width placeholder-content margin-0-15 h-20"
+                  class="
+                    content-half-width
+                    placeholder-content
+                    margin-0-15
+                    h-20
+                  "
                 ></span>
                 <span
                   class="content-full-width placeholder-content margin-15"
@@ -1588,24 +1665,51 @@ p.response-rate span {
                     class="default-items col-xs-12"
                   >
                     <div
-                      class="col-xs-12 padding-15 margin-15-0 default-item-wrapper shadow-content"
+                      class="
+                        col-xs-12
+                        padding-15
+                        margin-15-0
+                        default-item-wrapper
+                        shadow-content
+                      "
                     >
                       <div class="default-user-contents col-xs-12 padding-0">
                         <div
-                          class="placeholder-content default-article-user-image pull-right"
+                          class="
+                            placeholder-content
+                            default-article-user-image
+                            pull-right
+                          "
                         ></div>
 
                         <span
-                          class="padding-top-5 placeholder-content margin-15 pull-right content-min-width"
+                          class="
+                            padding-top-5
+                            placeholder-content
+                            margin-15
+                            pull-right
+                            content-min-width
+                          "
                         ></span>
 
                         <span
-                          class="margin-0 placeholder-content default-button-min-with pull-left mobile-hidden"
+                          class="
+                            margin-0
+                            placeholder-content
+                            default-button-min-with
+                            pull-left
+                            mobile-hidden
+                          "
                         ></span>
                       </div>
 
                       <div
-                        class="default-article-contents padding-0 margin-top-10 col-xs-12"
+                        class="
+                          default-article-contents
+                          padding-0
+                          margin-top-10
+                          col-xs-12
+                        "
                       >
                         <div class="default-wrapper-main-image pull-right">
                           <span
@@ -1623,7 +1727,11 @@ p.response-rate span {
                           ></span>
 
                           <span
-                            class="content-min-width placeholder-content mobile-hidden"
+                            class="
+                              content-min-width
+                              placeholder-content
+                              mobile-hidden
+                            "
                           ></span>
 
                           <span
@@ -1631,7 +1739,13 @@ p.response-rate span {
                           ></span>
                         </div>
                         <span
-                          class="margin-top-10 placeholder-content default-button-min-with pull-left hidden-afetr-mobile-hidden"
+                          class="
+                            margin-top-10
+                            placeholder-content
+                            default-button-min-with
+                            pull-left
+                            hidden-afetr-mobile-hidden
+                          "
                         ></span>
                       </div>
                     </div>
@@ -1647,12 +1761,16 @@ p.response-rate span {
                 <PopupImageCertificate
                   v-for="photo in profileOwner.relateds"
                   :key="photo.id"
-                  class="ceteficate-image col-xs-6 hidden-sm hidden-md hidden-lg"
+                  class="
+                    ceteficate-image
+                    col-xs-6
+                    hidden-sm hidden-md hidden-lg
+                  "
                   :base="str + '/'"
                   :img="photo"
                 />
 
-                <div class="owl-carousel hidden-xs">
+                <div class="owl-carousel product-carousel hidden-xs">
                   <OwlCarousel
                     @click="
                       registerComponentStatistics(
@@ -1686,7 +1804,11 @@ p.response-rate span {
               <div v-if="profileOwner.certificates[0]">
                 <article
                   v-for="(photo, index) in profileOwner.certificates"
-                  class="ceteficate-image col-xs-6 hidden-sm hidden-md hidden-lg"
+                  class="
+                    ceteficate-image
+                    col-xs-6
+                    hidden-sm hidden-md hidden-lg
+                  "
                   :key="index"
                 >
                   <a :href="str + '/' + photo">
@@ -1694,7 +1816,7 @@ p.response-rate span {
                   </a>
                 </article>
 
-                <div class="owl-carousel hidden-xs">
+                <div class="owl-carousel product-carousel hidden-xs">
                   <OwlCarousel
                     @click="
                       registerComponentStatistics(
@@ -1732,6 +1854,8 @@ import ProductArticle from "./product_components/product_article";
 import ArticleReview from "./main_components/review-components/article-review";
 import PlaceholderArticleReview from "./main_components/review-components/placeholder-article-review";
 import { eventBus } from "../../../router/router";
+import owlCarousel from "../../../owl.carousel.min.js";
+import magnificPopup from "../../../jquery.magnific-popup.min";
 
 var visible = false;
 var PopupImage = {
@@ -1832,6 +1956,10 @@ var OwlCarousel = {
       loop: false,
       margin: 10,
       nav: true,
+      navText: [
+        '<span class="fa fa-angle-left"></span>',
+        '<span class="fa fa-angle-right"></span>',
+      ],
       dots: false,
     });
     $(this.$el)
@@ -1951,10 +2079,24 @@ export default {
       this.getProfileOwnerProducts();
       if (this.isDeviceMobile()) {
         this.copyLinkText = " اشتراک در واتساپ";
-        this.copyLinkClass = "fab fa-whatsapp fa-2x";
+        this.copyLinkClass = `<svg
+                        aria-hidden="true"
+                        focusable="false"
+                        data-prefix="fab"
+                        data-icon="whatsapp"
+                        class="svg-inline--fa fa-whatsapp fa-w-14"
+                        role="img"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 448 512"
+                      >
+                        <path
+                          fill="#333"
+                          d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"
+                        ></path>
+                      </svg>`;
       } else {
         this.copyLinkText = "اشتراک پروفایل";
-        this.copyLinkClass = "fa fa-share-alt";
+        this.copyLinkClass = "<i class='fa fa-share-alt'></i>";
       }
       self.statisticsLoader = true;
       axios
@@ -2368,7 +2510,7 @@ export default {
         {
           name: "description",
           content:
-            " محصولات کشاورزی و تصاویر محصولات من را در این صفحه مشاهده کنید",
+            " محصولات غذایی و کشاورزی و تصاویر محصولات من را در این صفحه مشاهده کنید",
         },
         {
           name: "robots",
