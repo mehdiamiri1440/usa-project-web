@@ -474,7 +474,7 @@ class message_controller extends Controller
 
             $tmp1 = explode("\n",$msg->text);
             if(count($tmp1) >= 2){
-                $last_string = $tmp1[$index = array_key_last($tmp1)];
+                $last_string = $tmp1[$index = $this->my_array_key_last($tmp1)];
                 if(sscanf($last_string,":p=%d",$product_id)){
                     $msg->text = implode("\n",array_slice($tmp1,0,$index));
                     $msg->p_id = $product_id;
@@ -483,6 +483,10 @@ class message_controller extends Controller
         }
 
         return $messages;
+    }
+
+    function my_array_key_last(array $array) {
+        if( !empty($array) ) return key(array_slice($array, -1, 1, true));
     }
 
     protected function is_this_string_a_valid_phone_number($string)
