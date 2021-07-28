@@ -867,12 +867,12 @@ export default {
           }, 300);
         });
     },
-  },
-  mounted() {
-    setTimeout(() => {
+    userDescriptionStatus() {
       console.log($("#user-description").height());
       console.log($("#user-description span").height());
-    }, 2000);
+    },
+  },
+  mounted() {
     this.base = getBase();
   },
   watch: {
