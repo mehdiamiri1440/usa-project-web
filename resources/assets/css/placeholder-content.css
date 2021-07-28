@@ -292,6 +292,10 @@ input,textarea {
   padding: 0 15px !important;
 }
 
+.padding-0-30 {
+  padding: 0 30px !important;
+}
+
 .h-20 {
   height: 20px;
 }
@@ -336,6 +340,7 @@ input,textarea {
 .green-text {
   color: #00c569;
 }
+
 .light-green-text {
   color: #21ad93;
 }
@@ -371,6 +376,10 @@ input,textarea {
 
 .bg-gray {
   background-color: #556080 !important;
+}
+
+.bg-gradient-green{
+  background: linear-gradient(90deg,#21AD93,#00C569);
 }
 
 .category-products-widget-default {

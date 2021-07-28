@@ -67,11 +67,11 @@ label {
 
 .wrapper-bg {
   overflow: hidden;
-  padding: 15px 0;
+  padding: 0;
+  border: none;
 }
 
 .images-wrapper {
-  padding: 0 15px;
   width: 380px;
   float: left;
 }
@@ -83,24 +83,18 @@ label {
 }
 
 .share {
-  text-align: right;
-  padding: 18px 0;
+  text-align: left;
+  padding: 25px 0 20px;
 }
 
 .share .share-button {
-  color: #777;
-
+  color: #808c9b;
   background: none;
-
   font-size: 12px;
-
-  font-weight: bold;
-
-  border: 2px solid;
-
-  border-radius: 4px;
-
-  padding: 3px 5px 2px;
+  font-weight: 500;
+  border: 1px solid;
+  border-radius: 12px;
+  padding: 4px 15px 3px;
 }
 
 .buskool-default-text {
@@ -113,9 +107,9 @@ label {
 .main-contents-wrapper {
   width: calc(100% - 380px);
   float: right;
-  padding: 0 15px;
   text-align: right;
   position: relative;
+  padding-left: 30px;
 }
 
 .main-contents-wrapper h1 {
@@ -140,6 +134,7 @@ label {
 }
 .phone-call {
   margin-left: 15px;
+  background: linear-gradient(90deg, #21ad93, #00c569);
 }
 
 .send-message-button:hover {
@@ -151,7 +146,7 @@ label {
   transition: 300ms;
 }
 
-.actions button.elevator-event {
+.actions .elevator-event {
   background: #e41c38;
   color: #fff;
   border-radius: 4px;
@@ -164,26 +159,27 @@ label {
 
 .product-info-table li {
   display: flex;
-
   justify-content: space-between;
-
   direction: rtl;
-
   font-weight: bold;
-
-  border-bottom: 1px solid #f1f1f1;
-
   width: 100%;
-
-  padding: 22px 0;
-
+  padding: 12px 20px;
   font-size: 16px;
+  border-radius: 12px;
+  margin-bottom: 11px;
+  font-weight: 500;
+  color: #313a43;
+}
+
+.product-info-table li:nth-of-type(odd) {
+  background: #fafafa;
 }
 
 .product-info-table i {
   width: 20px;
   text-align: center;
   margin-left: 5px;
+  color: #808c9b;
 }
 
 .product-description {
@@ -198,18 +194,19 @@ label {
 }
 
 .product-description > span {
-  font-weight: bold;
+  font-weight: 500;
   font-size: 16px;
   display: inline-block;
   margin-bottom: 9px;
+  color: #333333;
 }
 
 .default-product-contents-wrapper {
   padding: 15px;
-  min-height: 840px;
+  min-height: 740px;
 }
 .main-product-wrapper {
-  min-height: 840px;
+  min-height: 740px;
 }
 .phone-number-wrapper {
   margin-top: 15px;
@@ -225,6 +222,19 @@ label {
   top: -5px;
   position: relative;
   left: 2px;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.actions .min-button-style {
+  max-width: 225px;
+  width: 100% !important;
+  border-radius: 12px;
+  margin: 15px 0;
+  padding: 11px 15px 10px;
 }
 
 @media screen and (max-width: 991px) {
@@ -487,14 +497,22 @@ label {
 
         <div class="actions">
           <button
+            v-if="$parent.isMyProfile"
+            class="elevator-event min-button-style green-button"
+            @click.prevent="$parent.elevatorEvent()"
+          >
+            اعمال نردبان
+            <i class="fas fa-chart-line"></i>
+          </button>
+          <button
             v-if="!$parent.isMyProfile && $parent.currentUser.user_info"
             @click.prevent="$parent.openChat($parent.product)"
-            class="hidden-xs hidden-sm"
+            class="hidden-xs hidden-sm min-button-style"
             :class="{
               'send-message-button':
                 $parent.product.user_info.has_phone &&
                 $parent.currentUser.user_info.is_buyer,
-              'green-button':
+              'green-button bg-gradient-green':
                 !$parent.product.user_info.has_phone ||
                 ($parent.product.user_info.has_phone &&
                   !$parent.currentUser.user_info.is_buyer),
@@ -506,10 +524,11 @@ label {
           <button
             v-else-if="!$parent.currentUser.user_info"
             @click.prevent="$parent.loginModal(true)"
-            class="hidden-xs hidden-sm"
+            class="hidden-xs hidden-sm min-button-style"
             :class="{
               'send-message-button': $parent.product.user_info.has_phone,
-              'green-button': !$parent.product.user_info.has_phone,
+              'green-button bg-gradient-green':
+                !$parent.product.user_info.has_phone,
             }"
           >
             چت با فروشنده
@@ -518,7 +537,7 @@ label {
 
           <button
             v-else
-            class="green-button blue-button"
+            class="green-button blue-button min-button-style"
             data-toggle="modal"
             :data-target="'#article-modal' + $parent.product.main.id"
           >
@@ -534,7 +553,7 @@ label {
               $parent.currentUser.user_info.is_buyer
             "
             @click.prevent="$parent.activePhoneCall(false)"
-            class="green-button phone-call hidden-xs hidden-sm"
+            class="green-button min-button-style phone-call hidden-xs hidden-sm"
             :class="{ disable: $parent.isActivePhone }"
             :disabled="$parent.isActivePhone"
           >
@@ -553,7 +572,7 @@ label {
               $parent.product.user_info.has_phone
             "
             @click.prevent="$parent.loginModal(false)"
-            class="green-button phone-call hidden-xs hidden-sm"
+            class="green-button min-button-style phone-call hidden-xs hidden-sm"
             :class="{ disable: $parent.isActivePhone }"
             :disabled="$parent.isActivePhone"
           >
@@ -565,16 +584,6 @@ label {
             <div v-else class="spinner-border">
               <span class="sr-only"></span>
             </div>
-          </button>
-
-          <button
-            v-if="$parent.isMyProfile"
-            class="elevator-event green-button"
-            @click.prevent="$parent.elevatorEvent()"
-          >
-            <i class="fas fa-chart-line"></i>
-
-            اعمال نردبان
           </button>
 
           <div class="share hidden-md hidden-lg pull-left">
@@ -664,7 +673,7 @@ label {
             v-if="$parent.product.main.description"
             class="product-description"
           >
-            <span class="gray-text">توضیحات</span>
+            <span>توضیحات</span>
             <p v-html="$parent.product.main.description"></p>
           </div>
         </div>

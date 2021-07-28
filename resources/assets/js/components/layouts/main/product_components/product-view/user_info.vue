@@ -1,10 +1,4 @@
 <style scoped>
-i {
-  position: relative;
-  top: 1px;
-  padding: 0 2px;
-}
-
 .green-button {
   font-size: 14px;
   font-weight: bold;
@@ -13,14 +7,14 @@ i {
   border-radius: 8px;
 }
 
-.green-button-o {
+.green-button-alt {
   color: #00c569;
   background: none;
   border: 2px solid #00c569;
   padding: 8px 0;
 }
 
-.green-button-o:hover {
+.green-button-alt:hover {
   background: #00c569;
   color: #fff;
 }
@@ -31,6 +25,8 @@ i {
   font-weight: bold;
   margin-bottom: 30px;
   position: relative;
+  float: right;
+  width: 100%;
 }
 
 .user-info-wrapper.active {
@@ -38,14 +34,75 @@ i {
   border: 1px solid #00c569;
 }
 
+.user-information-content {
+  text-align: right;
+  float: right;
+  margin-right: 15px;
+}
+
 .user-information-content-image {
   position: relative;
-  min-width: 110px;
+  width: 82px;
+  height: 82px;
+  border-radius: 100px;
+  padding-top: 4px;
+  float: right;
+  /* background: linear-gradient(230deg, #2ed888, #85b9fb);
+  background-size: 500% 300%;
+  -webkit-animation: profile-bg 2s ease infinite;
+  -moz-animation: profile-bg 2s ease infinite;
+  -o-animation: profile-bg 2s ease infinite;
+  animation: profile-bg 2s ease infinite; */
+}
+
+@-webkit-keyframes profile-bg {
+  0% {
+    background-position: 0% 11%;
+  }
+  50% {
+    background-position: 100% 90%;
+  }
+  100% {
+    background-position: 0% 11%;
+  }
+}
+@-moz-keyframes profile-bg {
+  0% {
+    background-position: 0% 11%;
+  }
+  50% {
+    background-position: 100% 90%;
+  }
+  100% {
+    background-position: 0% 11%;
+  }
+}
+@-o-keyframes profile-bg {
+  0% {
+    background-position: 0% 11%;
+  }
+  50% {
+    background-position: 100% 90%;
+  }
+  100% {
+    background-position: 0% 11%;
+  }
+}
+@keyframes profile-bg {
+  0% {
+    background-position: 0% 11%;
+  }
+  50% {
+    background-position: 100% 90%;
+  }
+  100% {
+    background-position: 0% 11%;
+  }
 }
 
 .user-information-content-image .user-image {
-  width: 90px;
-  height: 90px;
+  width: 74px;
+  height: 74px;
   position: relative;
   margin: 0 auto 10px;
   border-radius: 90px;
@@ -57,8 +114,8 @@ i {
 
 .user-information-content-image .user-image img,
 .user-info-wrapper .default-wrapper-main-image {
-  width: 90px;
-  height: 90px;
+  width: 74px;
+  height: 74px;
 }
 
 .user-information-content-image img {
@@ -72,100 +129,66 @@ i {
 }
 .valid-icon {
   background: #00c569;
-
   width: 31px;
-
   height: 31px;
-
   border-radius: 50px;
-
   padding-top: 3px;
-
   position: absolute;
-
-  bottom: -12px;
-
-  right: auto;
-
-  left: 50%;
-
+  top: -7px;
+  right: 0px;
   margin-left: -15px;
 }
 
 .user-information-content > p {
-  font-size: 18px;
-
-  font-weight: bold;
-
-  color: #333;
-
+  font-size: 22px;
+  font-weight: 500;
+  color: #313a43;
   direction: rtl;
+  padding-top: 12px;
 }
 
 .user-information-content p.user-position {
-  font-size: 12px;
+  font-size: 16px;
+  font-weight: 500;
   color: #777;
 }
 
 p.user-valid-text {
-  font-size: 13px;
-
-  font-weight: bold;
-
+  font-size: 16px;
+  font-weight: 500;
   color: #00c569;
 }
 
-p.user-valid-text,
-p.user-position {
-  padding-top: 5px;
-}
-
-p.response-rate {
+p.info-text {
   color: #777;
-  font-size: 12px;
-  padding-top: 5px;
+  font-size: 15px;
+  padding-top: 3px;
   direction: rtl;
-}
-
-p.response-rate span {
-  color: #e41c38;
 }
 
 /* stars styles */
 
-.profile-rating-box-wrapper {
-  padding-left: 10px;
-}
-
-.profile-rating-box {
-  border: 1px solid #f6f6f6;
-  border-radius: 4px;
-  width: 100%;
-  max-width: 180px;
-  margin: 5px auto;
-  overflow: hidden;
-}
-
 .stars-wrapper {
-  padding-right: 2px;
+  padding-right: 5px;
 }
 
 .rating-stars {
-  /* width: calc(100% - 40px); */
+  margin: 0 10px;
   text-align: center;
 }
 
 .rating-stars p > span {
   position: relative;
   display: inline-block;
+  margin-left: 6px;
 }
 
 .rating-stars p > span i {
   position: absolute;
-  left: 2px;
-  font-size: 17px;
+  left: 0px;
+  font-size: 19px;
   z-index: 0;
-  top: 0px;
+  top: 2px;
   color: #bdc4cc;
 }
 
@@ -173,10 +196,11 @@ p.response-rate span {
   display: block;
   position: relative;
   z-index: 1;
-  font-size: 9px;
+  font-size: 11px;
   width: 18px;
   text-align: center;
-  margin-left: 5px;
+  margin-left: 2px;
+  padding-top: 3px;
   color: #777;
 }
 .rating-stars .review-count-wrapper {
@@ -234,17 +258,140 @@ p.response-rate span {
   top: 4px;
 }
 
+.user-data-wrapper {
+  border-radius: 12px;
+  background: #fafafa;
+  margin: 15px 0;
+}
+
+.user-data-wrapper {
+  padding: 20px 0;
+}
+
+.user-data-wrapper ul {
+  padding: 0 15px;
+}
+
+.user-data-wrapper li {
+  overflow: hidden;
+  padding: 0 5px 20px;
+}
+
+.user-data-wrapper li:last-of-type {
+  overflow: hidden;
+  padding: 0 5px;
+}
+
+.user-data-wrapper .icon-wrapper {
+  float: right;
+  text-align: center;
+  width: 25px;
+  font-size: 21px;
+  color: #777;
+}
+
+.user-data-wrapper .icon-wrapper i.fa-award {
+  font-size: 24px;
+}
+
+.rating-section {
+  margin-right: 10px;
+  float: right;
+}
+
+.rating-section > span {
+  font-size: 16px;
+  color: #777;
+  font-weight: 400;
+  position: relative;
+  top: 4px;
+}
+
+.rating-section > span.brand-text {
+  font-size: 15px;
+  letter-spacing: 1px;
+}
+
+.verified-user {
+  font-size: 21px;
+  color: initial;
+}
+
+.verified-user::before {
+  top: 5px;
+}
+
+.gray-text {
+  color: #777 !important;
+}
+
+.user-info-actions > .green-button {
+  direction: rtl;
+  font-size: 18px;
+  font-weight: 500;
+  border-width: 1px;
+}
+
+.user-info-actions > .green-button i {
+  position: relative;
+  top: 2px;
+}
+
+.description-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 9px;
+}
+
+.user-description-wrapper {
+  margin: 30px auto;
+  float: right;
+  width: 100%;
+}
+
+#user-description {
+  font-size: 15px;
+  color: #777;
+  font-weight: 300;
+}
+
+#user-description.collapse[aria-expanded="false"] {
+  display: block;
+  height: 85px !important;
+  overflow: hidden;
+  font-size: 15px;
+  color: #777;
+  font-weight: 300;
+  line-height: 1.618;
+}
+
+#user-description.collapsing[aria-expanded="false"] {
+  height: 85px !important;
+}
+
+a#note-close {
+  color: #1da1f2;
+  font-weight: 300;
+  margin-top: 3px;
+  display: inline-block;
+}
+
+a.collapsed:after {
+  content: "مشاهده بیشتر +";
+}
+
+a#note-close:not(.collapsed):after {
+  content: "بستن -";
+}
+
 @media screen and (max-width: 1199px) {
   .default-button-user-item {
     height: 20px;
     margin-top: 27px;
   }
 
-  .rating-stars .review-count-wrapper {
-    padding: 12px;
-  }
   .user-info-section-wrapper {
-    padding: 0;
     margin-top: 30px;
   }
 
@@ -262,19 +409,6 @@ p.response-rate span {
     height: 70px;
   }
 
-  .rating-stars p > span > span {
-    margin: 0 1px;
-    font-size: 14px;
-    left: 4px;
-  }
-  .rating-stars p > span i {
-    left: -1px;
-    font-size: 23px;
-  }
-
-  .rating-score {
-    padding: 9px 0;
-  }
   .user-information-content-image,
   .default-wrapper-main-image,
   .default-image-info {
@@ -291,18 +425,6 @@ p.response-rate span {
     padding-top: 6px;
 
     width: calc(100% - 125px);
-  }
-
-  .profile-rating-box {
-    max-width: initial;
-    float: right;
-    width: initial;
-  }
-
-  .profile-rating-box-wrapper {
-    padding-left: 0;
-    width: 100%;
-    float: right;
   }
 
   .user-info-actions,
@@ -358,10 +480,6 @@ p.response-rate span {
   .user-info-actions {
     margin-top: 5px;
   }
-
-  .profile-rating-box-wrapper {
-    padding-left: 0;
-  }
 }
 
 @media screen and (max-width: 767px) {
@@ -381,10 +499,6 @@ p.response-rate span {
   .rating-stars p > span i {
     left: -1px;
     font-size: 17px;
-  }
-
-  .user-information-content {
-    width: calc(100% - 85px);
   }
 
   .user-information-content p.stars-wrapper {
@@ -511,26 +625,6 @@ p.response-rate span {
               " " +
               $parent.product.user_info.last_name
             }}
-            <button
-              v-if="$parent.product.user_info.is_verified"
-              @click.prevent
-              class="verified-user"
-              data-container="body"
-              data-toggle="popover"
-              data-placement="bottom"
-              :data-content="$parent.verifiedUserContent"
-              title
-            >
-              <i class="fa fa-certificate"></i>
-            </button>
-          </p>
-
-          <p
-            v-if="$parent.product.user_info.response_rate"
-            class="response-rate"
-          >
-            احتمال پاسخ گویی
-            <span v-text="$parent.product.user_info.response_rate + '%'"></span>
           </p>
           <p
             v-if="$parent.product.user_info.active_pakage_type == 3"
@@ -539,13 +633,20 @@ p.response-rate span {
             فروشنده ویژه
           </p>
           <p v-else class="user-position">فروشنده</p>
-
-          <div
-            class="profile-rating-box-wrapper"
-            v-if="$parent.product.user_info.review_info.avg_score > 0"
-          >
-            <div class="profile-rating-box">
-              <div class="rating-stars pull-left">
+        </div>
+      </router-link>
+      <div class="user-data-wrapper text-rtl col-xs-12">
+        <ul>
+          <li v-if="$parent.product.user_info.review_info.avg_score">
+            <div class="icon-wrapper">
+              <i class="fa fa-star"> </i>
+            </div>
+            <div class="content-wrapper rating-section">
+              <span
+                class="pull-right"
+                v-text="$parent.product.user_info.review_info.avg_score"
+              ></span>
+              <div class="rating-stars pull-right">
                 <p class="stars-wrapper">
                   <span v-for="(star, index) in 5" :key="index">
                     <span v-text="index + 1"></span>
@@ -556,70 +657,139 @@ p.response-rate span {
                     ></i>
                   </span>
                 </p>
-                <p class="review-count-wrapper">
-                  <span
-                    v-text="$parent.product.user_info.review_info.total_count"
-                  ></span>
-                  نظر
-                </p>
               </div>
-              <span class="rating-score pull-right">
-                <span
-                  v-text="$parent.product.user_info.review_info.avg_score"
-                ></span>
-              </span>
+              <span
+                class="pull-right brand-text"
+                v-text="
+                  '(' +
+                  $parent.product.user_info.review_info.total_count +
+                  ' نظر)'
+                "
+              ></span>
             </div>
-          </div>
-        </div>
-        <div class="user-info-actions hidden-xs hidden-sm hidden-md">
-          <router-link
-            :to="'/profile/' + $parent.product.user_info.user_name"
-            class="green-button green-button-o"
-            >مشاهده پروفایل</router-link
-          >
+          </li>
+          <li>
+            <div class="icon-wrapper">
+              <i class="fa fa-award"> </i>
+            </div>
+            <div class="content-wrapper rating-section">
+              <p
+                v-if="$parent.product.user_info.response_rate"
+                class="info-text"
+              >
+                اعتبار کاربر
+                <span
+                  class="light-green-text"
+                  v-text="$parent.product.user_info.response_rate"
+                ></span>
+              </p>
+            </div>
+          </li>
+          <li>
+            <div class="icon-wrapper">
+              <i class="fa fa-exchange-alt"> </i>
+            </div>
+            <div class="content-wrapper rating-section">
+              <p
+                v-if="$parent.product.user_info.response_rate"
+                class="info-text"
+              >
+                احتمال پاسخ گویی
+                <span
+                  class="red-text"
+                  v-text="$parent.product.user_info.response_rate + '%'"
+                ></span>
+              </p>
+            </div>
+          </li>
+          <li>
+            <div class="icon-wrapper">
+              <button
+                :class="[
+                  $parent.product.user_info.is_verified
+                    ? 'blue-text'
+                    : 'gray-text',
+                ]"
+                @click.prevent
+                class="verified-user"
+                data-container="body"
+                data-toggle="popover"
+                data-placement="bottom"
+                :data-content="$parent.verifiedUserContent"
+              >
+                <i class="fa fa-certificate"></i>
+              </button>
+            </div>
+            <div class="content-wrapper rating-section">
+              <span
+                class="blue-text"
+                v-if="$parent.product.user_info.is_verified"
+                v-text="'احراز هویت شده'"
+              ></span>
+              <span v-else v-text="'احراز هویت نشده'"></span>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="user-info-actions text-rtl hidden-xs hidden-sm hidden-md">
+        <button
+          v-if="!$parent.isMyProfile && $parent.currentUser.user_info"
+          @click.prevent="$parent.openChatModal($parent.product)"
+          class="green-button green-button-alt"
+        >
+          <i class="fa fa-comment-alt"></i>
 
-          <button
-            v-if="!$parent.isMyProfile && $parent.currentUser.user_info"
-            @click.prevent="$parent.openChatModal($parent.product)"
-            class="green-button"
-          >
-            <i class="fa fa-comment-alt"></i>
+          ارسال پیام
+        </button>
+        <button
+          v-else-if="!$parent.isMyProfile && !$parent.currentUser.user_info"
+          @click.prevent="$parent.loginModal()"
+          class="green-button green-button-alt"
+        >
+          <i class="fa fa-comment-alt"></i>
 
-            ارسال پیام
-          </button>
-          <button
-            v-else-if="!$parent.isMyProfile && !$parent.currentUser.user_info"
-            @click.prevent="$parent.loginModal()"
-            class="green-button"
-          >
-            <i class="fa fa-comment-alt"></i>
+          ارسال پیام
+        </button>
 
-            ارسال پیام
-          </button>
+        <router-link
+          v-else-if="$parent.userType == 0"
+          :to="{ name: 'profileBasicBuyer' }"
+          class="green-button"
+        >
+          <i class="fa fa-pencil-alt"></i>
+          ویرایش پروفایل
+        </router-link>
 
-          <router-link
-            v-else-if="$parent.userType == 0"
-            :to="{ name: 'profileBasicBuyer' }"
-            class="green-button"
-          >
-            ویرایش پروفایل
-            <i class="fa fa-pencil-alt"></i>
-          </router-link>
-
-          <router-link
-            v-else-if="$parent.userType == 1"
-            :to="{ name: 'profileBasicSeller' }"
-            class="green-button"
-          >
-            ویرایش پروفایل
-            <i class="fa fa-pencil-alt"></i>
-          </router-link>
-        </div>
-        <span class="more-info hidden-lg">
-          مشاهده پروفایل
-          <i class="fa fa-angle-left"></i>
-        </span>
-      </router-link>
+        <router-link
+          v-else-if="$parent.userType == 1"
+          :to="{ name: 'profileBasicSeller' }"
+          class="green-button"
+        >
+          <i class="fa fa-pencil-alt"></i>
+          ویرایش پروفایل
+        </router-link>
+      </div>
+      <div class="user-description-wrapper text-right">
+        <p class="description-title">توضیحات فروشنده</p>
+        <p
+          id="user-description"
+          class="user-description collapse"
+          aria-expanded="false"
+        >
+          <span>
+            فروش برنج طارم هاشمی از شالیزارهای آمل به سفره و یا مراکز فروش شما
+            به صورت مستقیم با قیمت مناسب ..کشت اول آماده فروش به
+          </span>
+        </p>
+        <a
+          role="button"
+          class="collapsed"
+          id="note-close"
+          data-toggle="collapse"
+          href="#user-description"
+          aria-expanded="false"
+        ></a>
+      </div>
     </div>
 
     <div class="user-info-wrapper default-user-info-wrapper wrapper-bg" v-else>
@@ -637,10 +807,19 @@ p.response-rate span {
       </div>
       <div class="default-user-action-buttons">
         <div
-          class="placeholder-content default-button-full-with margin-0 hidden-xs hidden-md hidden-sm"
+          class="
+            placeholder-content
+            default-button-full-with
+            margin-0
+            hidden-xs hidden-md hidden-sm
+          "
         ></div>
         <div
-          class="placeholder-content default-button-user-item default-button-full-with margin-10-0"
+          class="
+            placeholder-content
+            default-button-user-item default-button-full-with
+            margin-10-0
+          "
         ></div>
       </div>
     </div>
@@ -690,6 +869,10 @@ export default {
     },
   },
   mounted() {
+    setTimeout(() => {
+      console.log($("#user-description").height());
+      console.log($("#user-description span").height());
+    }, 2000);
     this.base = getBase();
   },
   watch: {

@@ -28,8 +28,8 @@ span {
 }
 
 .bread-crumbs-wrapper {
-  margin: 10px auto;
-  height: 21px;
+  margin: 3px auto 11px;
+  height: 25px;
 }
 
 .bread-crumbs-wrapper a {
@@ -205,7 +205,31 @@ button.send-message-button {
   left: 2px;
 }
 
+.main-content-wrapper {
+  max-width: 1336px;
+}
+
+.product-section-wrapper {
+  width: calc(100% - 400px);
+}
+
+#product-section {
+  border-top: 1px solid #e0e0e0;
+}
+
+.user-section-wrapper {
+  padding: 0;
+  max-width: 370px;
+}
+
 @media screen and (max-width: 1199px) {
+  .product-section-wrapper {
+    width: 100%;
+  }
+  .user-section-wrapper {
+    max-width: initial;
+  }
+
   .box-title {
     margin: 0 auto 15px;
   }
@@ -247,7 +271,7 @@ button.send-message-button {
 </style>
 
 <template>
-  <div class="container">
+  <div class="container-fluid padding-0-30 main-content-wrapper">
     <RegisterModal
       v-if="!currentUser.user_info"
       :is-chat="isChat"
@@ -273,92 +297,91 @@ button.send-message-button {
           <span v-text="product.main.product_name"></span>
         </div>
       </div>
-      <div class="col-xs-12 col-lg-9 pull-right">
+      <div class="col-xs-12 col-lg-8 product-section-wrapper pull-right">
         <section class="main-content">
           <div class="row">
             <ProductContents />
           </div>
         </section>
-      </div>
+        <section
+          v-if="relatedProducts.length > 0 && isLoading == false"
+          id="product-section"
+          class="section-wrapper col-xs-12 latest-product"
+        >
+          <div class="row">
+            <h3 class="box-title">محصولات مرتبط</h3>
 
-      <div class="col-xs-12 col-lg-3 pull-left">
-        <div class="row">
-          <UserInfo />
-        </div>
-      </div>
-
-      <section
-        v-if="relatedProducts.length > 0 && isLoading == false"
-        id="product-section"
-        class="section-wrapper col-xs-12 latest-product"
-      >
-        <div class="row">
-          <h3 class="box-title">محصولات مرتبط</h3>
-
-          <div class="products-contents">
-            <div class="owl-carousel product-carousel">
-              <ProductCarousel
-                v-for="(product, index) in relatedProducts"
-                :key="index"
-                :img="str + '/thumbnails/' + product.photo"
-                :title="product.product_name"
-                :stock="getConvertedNumbers(product.stock)"
-                :link="getRelatedProductUrl(product)"
-                column="4"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section
-        class="section-wrapper col-xs-12"
-        v-else-if="relatedProducts.length == 0 && isLoading == true"
-      >
-        <div class="row">
-          <h3 class="box-title">محصولات مرتبط</h3>
-
-          <div class="col-xs-12 products-contents">
-            <div class="row">
-              <div
-                v-for="(item, index) in 4"
-                :key="index"
-                :class="{ 'hidden-xs': index >= 2 }"
-                class="col-lg-3 col-md-4 col-xs-6 default-carousel-item"
-              >
-                <article class="carousel-item box-content col-xs-12">
-                  <span
-                    class="
-                      default-index-product-image
-                      placeholder-content
-                      col-xs-12
-                    "
-                  ></span>
-
-                  <span
-                    class="
-                      content-default-width
-                      placeholder-content
-                      margin-10
-                      col-xs-10 col-xs-offset-1
-                    "
-                  ></span>
-
-                  <span
-                    class="
-                      content-default-width
-                      placeholder-content
-                      col-xs-8 col-xs-offset-2
-                    "
-                  ></span>
-
-                  <span class="margin-10"></span>
-                </article>
+            <div class="products-contents">
+              <div class="owl-carousel product-carousel">
+                <ProductCarousel
+                  v-for="(product, index) in relatedProducts"
+                  :key="index"
+                  :img="str + '/thumbnails/' + product.photo"
+                  :title="product.product_name"
+                  :stock="getConvertedNumbers(product.stock)"
+                  :link="getRelatedProductUrl(product)"
+                  column="4"
+                />
               </div>
             </div>
           </div>
+        </section>
+
+        <section
+          class="section-wrapper col-xs-12"
+          v-else-if="relatedProducts.length == 0 && isLoading == true"
+        >
+          <div class="row">
+            <h3 class="box-title">محصولات مرتبط</h3>
+
+            <div class="col-xs-12 products-contents">
+              <div class="row">
+                <div
+                  v-for="(item, index) in 4"
+                  :key="index"
+                  :class="{ 'hidden-xs': index >= 2 }"
+                  class="col-lg-3 col-md-4 col-xs-6 default-carousel-item"
+                >
+                  <article class="carousel-item box-content col-xs-12">
+                    <span
+                      class="
+                        default-index-product-image
+                        placeholder-content
+                        col-xs-12
+                      "
+                    ></span>
+
+                    <span
+                      class="
+                        content-default-width
+                        placeholder-content
+                        margin-10
+                        col-xs-10 col-xs-offset-1
+                      "
+                    ></span>
+
+                    <span
+                      class="
+                        content-default-width
+                        placeholder-content
+                        col-xs-8 col-xs-offset-2
+                      "
+                    ></span>
+
+                    <span class="margin-10"></span>
+                  </article>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <aside class="col-xs-12 col-lg-4 user-section-wrapper pull-left">
+        <div class="row">
+          <UserInfo />
         </div>
-      </section>
+      </aside>
 
       <div class="buttons-wrapper col-xs-12">
         <router-link
@@ -367,18 +390,6 @@ button.send-message-button {
           >مشاهده همه محصولات</router-link
         >
       </div>
-
-      <!-- <register-inquer-form
-        v-if="showRegisterRequestBox"
-        wrapper-bg="true"
-        :str="str"
-        :user-profile-info="product.user_info"
-        :user-profile-photo="
-          product.profile_info.profile_photo
-            ? str + '/' + product.profile_info.profile_photo
-            : assets + 'assets/img/user-defult.png'
-        "
-      /> -->
 
       <div
         v-if="product.main.product_name && !isMyProfile"
@@ -466,6 +477,7 @@ import UserInfo from "./user_info";
 // import registerInquerForm from "../../main_components/register-inquiry-form.vue";
 import RegisterModal from "../../main_components/register-modal";
 import swal from "../../../../../sweetalert.min.js";
+import StickySidebar from "../../../../../stickySidebar.js";
 
 export default {
   components: {
@@ -938,6 +950,14 @@ export default {
       let url = "/product-list/category/" + category.split(" ").join("-");
       return url;
     },
+    sidebarScroll() {
+      // let sidebarHeight = $("#sidebar").outerHeight();
+      // $("#main .main-content").css("min-height", sidebarHeight);
+      $("aside").StickySidebar({
+        // Settings
+        additionalMarginTop: 157,
+      });
+    },
   },
   created() {
     gtag("config", "UA-129398000-1", { page_path: "/product-view" });
@@ -946,7 +966,9 @@ export default {
   },
   mounted() {
     this.init();
-
+    setTimeout(() => {
+      this.sidebarScroll();
+    }, 1000);
     var self = this;
     document.onreadystatechange = () => {
       if (document.readyState === "complete") {
