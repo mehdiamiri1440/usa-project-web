@@ -354,20 +354,19 @@ p.info-text {
   font-size: 15px;
   color: #777;
   font-weight: 300;
+  line-height: 1.618;
 }
 
 #user-description.collapse[aria-expanded="false"] {
   display: block;
-  height: 85px !important;
+  height: 95px !important;
   overflow: hidden;
   font-size: 15px;
   color: #777;
-  font-weight: 300;
-  line-height: 1.618;
 }
 
 #user-description.collapsing[aria-expanded="false"] {
-  height: 85px !important;
+  height: 95px !important;
 }
 
 a#note-close {
@@ -777,8 +776,9 @@ a#note-close:not(.collapsed):after {
           aria-expanded="false"
         >
           <span>
-            فروش برنج طارم هاشمی از شالیزارهای آمل به سفره و یا مراکز فروش شما
-            به صورت مستقیم با قیمت مناسب ..کشت اول آماده فروش به
+            فروش برنج طارم هاشمی از شالیزارهای آمل به قیمت مناسبقیمت مناسبسفره و
+            یا مراکز فروش شما به صورت مستقیم با قیمت مناسبقیمت مناسب ..کشت اول
+            آماده فروش به با قیمت مناسبقیمت مناسب با قیمت مناسبقیمت مناسب
           </span>
         </p>
         <a
@@ -868,8 +868,11 @@ export default {
         });
     },
     userDescriptionStatus() {
-      console.log($("#user-description").height());
-      console.log($("#user-description span").height());
+      let wrapperDescriptionHeight = $("#user-description").height();
+      let descriptionHeight = $("#user-description span").height();
+      if (wrapperDescriptionHeight >= descriptionHeight) {
+        $("#note-close").css("display", "none");
+      }
     },
   },
   mounted() {
@@ -878,9 +881,10 @@ export default {
   watch: {
     "$parent.product.user_info": function () {
       if (this.$parent.product.user_info) {
-        setTimeout(() => {
+        this.$nextTick(() => {
           this.activeComponentTooltip();
-        }, 10);
+          this.userDescriptionStatus();
+        });
       }
     },
   },
