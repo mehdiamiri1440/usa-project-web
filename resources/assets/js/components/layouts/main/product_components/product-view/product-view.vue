@@ -213,10 +213,6 @@ button.send-message-button {
   width: calc(100% - 400px);
 }
 
-#product-section {
-  border-top: 1px solid #e0e0e0;
-}
-
 .user-section-wrapper {
   padding: 0;
   max-width: 370px;
@@ -237,6 +233,11 @@ button.send-message-button {
   .default-carousel-item:last-of-type {
     display: none;
   }
+
+  .bread-crumbs-wrapper {
+    padding: 0 15px;
+    margin: 11px auto;
+  }
 }
 
 @media screen and (max-width: 991px) {
@@ -246,6 +247,14 @@ button.send-message-button {
 }
 
 @media screen and (max-width: 767px) {
+  .bread-crumbs-wrapper a {
+    font-size: 12px;
+  }
+
+  .main-content-wrapper {
+    padding: 0 15px !important;
+  }
+
   #main {
     padding-top: 94px;
   }
@@ -277,111 +286,44 @@ button.send-message-button {
       :is-chat="isChat"
       :product="product"
     />
-
     <main id="main" class="row">
-      <div class="col-xs-12 text-rtl text-right bread-crumbs-wrapper hidden-xs">
-        <div class="row" v-if="breadCrumbs">
-          <router-link :to="{ name: 'productList' }">
-            همه دسته ها
-            <i class="fa fa-angle-left"></i>
-          </router-link>
-
-          <router-link
-            v-for="(item, index) in breadCrumbs"
-            :key="index"
-            :to="getSubCategoryUrl(item)"
-          >
-            {{ item }}
-            <i class="fa fa-angle-left"></i>
-          </router-link>
-          <span v-text="product.main.product_name"></span>
-        </div>
-      </div>
-      <div class="col-xs-12 col-lg-8 product-section-wrapper pull-right">
-        <section class="main-content">
-          <div class="row">
-            <ProductContents />
-          </div>
-        </section>
-        <section
-          v-if="relatedProducts.length > 0 && isLoading == false"
-          id="product-section"
-          class="section-wrapper col-xs-12 latest-product"
-        >
-          <div class="row">
-            <h3 class="box-title">محصولات مرتبط</h3>
-
-            <div class="products-contents">
-              <div class="owl-carousel product-carousel">
-                <ProductCarousel
-                  v-for="(product, index) in relatedProducts"
-                  :key="index"
-                  :img="str + '/thumbnails/' + product.photo"
-                  :title="product.product_name"
-                  :stock="getConvertedNumbers(product.stock)"
-                  :link="getRelatedProductUrl(product)"
-                  column="4"
-                />
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section
-          class="section-wrapper col-xs-12"
-          v-else-if="relatedProducts.length == 0 && isLoading == true"
-        >
-          <div class="row">
-            <h3 class="box-title">محصولات مرتبط</h3>
-
-            <div class="col-xs-12 products-contents">
-              <div class="row">
-                <div
-                  v-for="(item, index) in 4"
-                  :key="index"
-                  :class="{ 'hidden-xs': index >= 2 }"
-                  class="col-lg-3 col-md-4 col-xs-6 default-carousel-item"
-                >
-                  <article class="carousel-item box-content col-xs-12">
-                    <span
-                      class="
-                        default-index-product-image
-                        placeholder-content
-                        col-xs-12
-                      "
-                    ></span>
-
-                    <span
-                      class="
-                        content-default-width
-                        placeholder-content
-                        margin-10
-                        col-xs-10 col-xs-offset-1
-                      "
-                    ></span>
-
-                    <span
-                      class="
-                        content-default-width
-                        placeholder-content
-                        col-xs-8 col-xs-offset-2
-                      "
-                    ></span>
-
-                    <span class="margin-10"></span>
-                  </article>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      </div>
-
-      <aside class="col-xs-12 col-lg-4 user-section-wrapper pull-left">
+      <div class="col-xs-12">
         <div class="row">
-          <UserInfo />
+          <div class="text-rtl text-right bread-crumbs-wrapper">
+            <div v-if="breadCrumbs">
+              <router-link :to="{ name: 'productList' }">
+                همه دسته ها
+                <i class="fa fa-angle-left"></i>
+              </router-link>
+
+              <router-link
+                v-for="(item, index) in breadCrumbs"
+                :key="index"
+                :to="getSubCategoryUrl(item)"
+              >
+                {{ item }}
+                <i class="fa fa-angle-left"></i>
+              </router-link>
+              <span v-text="product.main.product_name"></span>
+            </div>
+          </div>
+          <div class="col-xs-12 col-lg-8 product-section-wrapper pull-right">
+            <section class="main-content">
+              <div class="row">
+                <ProductContents />
+              </div>
+            </section>
+            <UserData />
+          </div>
+
+          <aside class="col-xs-12 col-lg-4 user-section-wrapper pull-left">
+            <UserInfo />
+          </aside>
         </div>
-      </aside>
+      </div>
+      <div class="col-xs-12">
+        <h1>this is other</h1>
+      </div>
 
       <div class="buttons-wrapper col-xs-12">
         <router-link
@@ -401,7 +343,7 @@ button.send-message-button {
           :class="{
             'send-message-button':
               product.user_info.has_phone && currentUser.user_info.is_buyer,
-            'green-button':
+            'green-button bg-gradient-green':
               !product.user_info.has_phone ||
               (product.user_info.has_phone && currentUser.user_info.is_seller),
           }"
@@ -420,7 +362,7 @@ button.send-message-button {
           @click.prevent="loginModal(true)"
           :class="{
             'send-message-button': product.user_info.has_phone,
-            'green-button': !product.user_info.has_phone,
+            'green-button bg-gradient-green': !product.user_info.has_phone,
           }"
         >
           <span v-if="product.user_info.has_phone"> چت </span>
@@ -471,9 +413,10 @@ button.send-message-button {
 
 <script>
 import { eventBus } from "../../../../../router/router";
-import ProductCarousel from "../../main_components/product-list-carousel";
+
 import ProductContents from "./product";
 import UserInfo from "./user_info";
+import UserData from "./User-data";
 // import registerInquerForm from "../../main_components/register-inquiry-form.vue";
 import RegisterModal from "../../main_components/register-modal";
 import swal from "../../../../../sweetalert.min.js";
@@ -483,7 +426,7 @@ export default {
   components: {
     ProductContents,
     UserInfo,
-    ProductCarousel,
+    UserData,
     RegisterModal,
     // registerInquerForm,
   },

@@ -128,8 +128,8 @@ label {
 .send-message-button {
   background: none;
   border-radius: 8px;
-  border: 1px solid #404b55;
-  color: #404b55;
+  border: 1px solid #404b55 !important;
+  color: #404b55 !important;
   transition: 300ms;
 }
 .phone-call {
@@ -140,9 +140,9 @@ label {
 .send-message-button:hover {
   background: none;
   border-radius: 8px;
-  border: 1px solid #404b55;
-  background: #404b55;
-  color: #fff;
+  border: 1px solid #404b55 !important;
+  background: #404b55 !important;
+  color: #fff !important;
   transition: 300ms;
 }
 
@@ -227,6 +227,7 @@ label {
 .actions {
   display: flex;
   justify-content: space-between;
+  direction: rtl;
 }
 
 .actions .min-button-style {
@@ -234,7 +235,17 @@ label {
   width: 100% !important;
   border-radius: 12px;
   margin: 15px 0;
-  padding: 11px 15px 10px;
+  padding: 10px 15px 9px;
+  border: none;
+  color: #fff;
+}
+
+.actions .min-button-style.phone-call {
+  margin-left: 10px;
+}
+
+.actions .min-button-style.send-message-button {
+  margin-right: 10px;
 }
 
 @media screen and (max-width: 991px) {
@@ -254,15 +265,20 @@ label {
     position: absolute;
     top: -4px;
     padding: 0;
+    left: 15px;
   }
+
   .images-wrapper,
   .main-contents-wrapper {
     width: initial;
     float: inherit;
   }
+
   .main-contents-wrapper {
     margin: 30px auto;
+    padding: 0 15px;
   }
+
   .default-action-buttons {
     overflow: hidden;
   }
@@ -504,46 +520,6 @@ label {
             اعمال نردبان
             <i class="fas fa-chart-line"></i>
           </button>
-          <button
-            v-if="!$parent.isMyProfile && $parent.currentUser.user_info"
-            @click.prevent="$parent.openChat($parent.product)"
-            class="hidden-xs hidden-sm min-button-style"
-            :class="{
-              'send-message-button':
-                $parent.product.user_info.has_phone &&
-                $parent.currentUser.user_info.is_buyer,
-              'green-button bg-gradient-green':
-                !$parent.product.user_info.has_phone ||
-                ($parent.product.user_info.has_phone &&
-                  !$parent.currentUser.user_info.is_buyer),
-            }"
-          >
-            چت با فروشنده
-            <i class="fas fa-comment-alt"></i>
-          </button>
-          <button
-            v-else-if="!$parent.currentUser.user_info"
-            @click.prevent="$parent.loginModal(true)"
-            class="hidden-xs hidden-sm min-button-style"
-            :class="{
-              'send-message-button': $parent.product.user_info.has_phone,
-              'green-button bg-gradient-green':
-                !$parent.product.user_info.has_phone,
-            }"
-          >
-            چت با فروشنده
-            <i class="fas fa-comment-alt"></i>
-          </button>
-
-          <button
-            v-else
-            class="green-button blue-button min-button-style"
-            data-toggle="modal"
-            :data-target="'#article-modal' + $parent.product.main.id"
-          >
-            ویرایش
-            <i class="fa fa-pencil-alt"></i>
-          </button>
 
           <button
             v-if="
@@ -557,7 +533,6 @@ label {
             :class="{ disable: $parent.isActivePhone }"
             :disabled="$parent.isActivePhone"
           >
-            اطلاعات تماس
             <i
               class="fas fa-phone-square-alt"
               v-if="!$parent.getPhoneLoader"
@@ -565,6 +540,7 @@ label {
             <div v-else class="spinner-border">
               <span class="sr-only"></span>
             </div>
+            اطلاعات تماس
           </button>
           <button
             v-else-if="
@@ -576,7 +552,6 @@ label {
             :class="{ disable: $parent.isActivePhone }"
             :disabled="$parent.isActivePhone"
           >
-            اطلاعات تماس
             <i
               class="fas fa-phone-square-alt"
               v-if="!$parent.getPhoneLoader"
@@ -584,6 +559,47 @@ label {
             <div v-else class="spinner-border">
               <span class="sr-only"></span>
             </div>
+            اطلاعات تماس
+          </button>
+
+          <button
+            v-if="!$parent.isMyProfile && $parent.currentUser.user_info"
+            @click.prevent="$parent.openChat($parent.product)"
+            class="hidden-xs hidden-sm min-button-style"
+            :class="{
+              'send-message-button':
+                $parent.product.user_info.has_phone &&
+                $parent.currentUser.user_info.is_buyer,
+              'bg-gradient-green':
+                !$parent.product.user_info.has_phone ||
+                ($parent.product.user_info.has_phone &&
+                  !$parent.currentUser.user_info.is_buyer),
+            }"
+          >
+            <i class="fas fa-comment-alt"></i>
+            چت با فروشنده
+          </button>
+          <button
+            v-else-if="!$parent.currentUser.user_info"
+            @click.prevent="$parent.loginModal(true)"
+            class="hidden-xs hidden-sm min-button-style"
+            :class="{
+              'send-message-button': $parent.product.user_info.has_phone,
+              'bg-gradient-green': !$parent.product.user_info.has_phone,
+            }"
+          >
+            <i class="fas fa-comment-alt"></i>
+            چت با فروشنده
+          </button>
+
+          <button
+            v-else
+            class="green-button blue-button min-button-style"
+            data-toggle="modal"
+            :data-target="'#article-modal' + $parent.product.main.id"
+          >
+            <i class="fa fa-pencil-alt"></i>
+            ویرایش
           </button>
 
           <div class="share hidden-md hidden-lg pull-left">

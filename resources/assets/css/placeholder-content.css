@@ -379,7 +379,7 @@ input,textarea {
 }
 
 .bg-gradient-green{
-  background: linear-gradient(90deg,#21AD93,#00C569);
+  background: linear-gradient(90deg,#21AD93,#00C569) !important;
 }
 
 .category-products-widget-default {
