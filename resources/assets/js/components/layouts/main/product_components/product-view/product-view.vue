@@ -321,8 +321,11 @@ button.send-message-button {
           </aside>
         </div>
       </div>
-      <div class="col-xs-12">
-        <h1>this is other</h1>
+      <div class="section-wrapper col-xs-12 related-product">
+        <div class="row">
+          <h3 class="box-title">محصولات مرتبط</h3>
+          <RelatedProducts />
+        </div>
       </div>
 
       <div class="buttons-wrapper col-xs-12">
@@ -417,10 +420,11 @@ import { eventBus } from "../../../../../router/router";
 import ProductContents from "./product";
 import UserInfo from "./user_info";
 import UserData from "./User-data";
-// import registerInquerForm from "../../main_components/register-inquiry-form.vue";
+import RelatedProducts from "./related-products.vue";
 import RegisterModal from "../../main_components/register-modal";
 import swal from "../../../../../sweetalert.min.js";
 import StickySidebar from "../../../../../stickySidebar.js";
+// import registerInquerForm from "../../main_components/register-inquiry-form.vue";
 
 export default {
   components: {
@@ -428,6 +432,7 @@ export default {
     UserInfo,
     UserData,
     RegisterModal,
+    RelatedProducts,
     // registerInquerForm,
   },
   props: ["str", "assets", "userType", "categoryList"],
@@ -894,10 +899,7 @@ export default {
       return url;
     },
     sidebarScroll() {
-      // let sidebarHeight = $("#sidebar").outerHeight();
-      // $("#main .main-content").css("min-height", sidebarHeight);
       $("aside").StickySidebar({
-        // Settings
         additionalMarginTop: 157,
       });
     },

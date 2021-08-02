@@ -512,7 +512,7 @@ export default {
     init: function () {
       this.productUrl = this.getProductUrl();
 
-      if (this.currentUser.user_info) {
+      if (this.currentUser && this.currentUser.user_info) {
         if (this.currentUser.user_info.id === this.product.main.myuser_id) {
           this.isMyProfile = true;
           this.$emit("isMyProfile", this.isMyProfile);
@@ -560,7 +560,7 @@ export default {
     openEditBox: function (e) {
       e.preventDefault();
 
-      if (this.currentUser.profile) {
+      if (this.currentUser && this.currentUser.profile) {
         var event = $(e.target);
         this.errors = "";
         var element = event.parents("article").find(".buy_details");
@@ -664,7 +664,7 @@ export default {
 
       var self = this;
 
-      if (this.currentUser.user_info) {
+      if (this.currentUser && this.currentUser.user_info) {
         if (this.currentUser.user_info.id !== product.user_info.id) {
           eventBus.$emit("ChatInfo", contact);
           // window.localStorage.setItem("contact", JSON.stringify(contact));

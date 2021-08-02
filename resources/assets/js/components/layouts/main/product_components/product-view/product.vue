@@ -441,7 +441,7 @@ label {
 
     <div class="images-wrapper">
       <div class="images">
-        <div v-if="$parent.product.photos" class="owl-carousel">
+        <div v-if="$parent.product.photos" class="owl-carousel main-product-carousel">
           <Carousel
             v-for="(photo, index) in $parent.product.photos"
             :index="index"

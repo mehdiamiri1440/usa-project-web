@@ -384,6 +384,10 @@ a#note-close:not(.collapsed):after {
   content: "بستن -";
 }
 
+.default-image-info {
+  width: calc(100% - 105px);
+}
+
 @media screen and (max-width: 1199px) {
   .user-link-wrapper {
     display: flex;
@@ -736,7 +740,7 @@ a#note-close:not(.collapsed):after {
                 </span>
               </div>
             </li>
-            <li>
+            <!-- <li>
               <div class="icon-wrapper">
                 <i class="fa fa-award"> </i>
               </div>
@@ -752,7 +756,7 @@ a#note-close:not(.collapsed):after {
                   ></span>
                 </p>
               </div>
-            </li>
+            </li> -->
             <li>
               <div class="icon-wrapper">
                 <i class="fa fa-exchange-alt"> </i>
@@ -864,31 +868,94 @@ a#note-close:not(.collapsed):after {
 
     <div class="user-info-wrapper default-user-info-wrapper wrapper-bg" v-else>
       <div
-        class="default-wrapper-main-image placeholder-content text-center"
+        class="
+          default-wrapper-main-image
+          pull-right
+          placeholder-content
+          text-center
+        "
       ></div>
 
-      <div class="default-image-info text-rtl text-center margin-15-0">
-        <span
-          class="placeholder-content content-half-width inline-block"
-        ></span>
+      <div class="default-image-info text-rtl text-right margin-15 pull-right">
         <span
           class="placeholder-content content-default-width inline-block"
         ></span>
+        <span
+          class="placeholder-content content-half-width inline-block"
+        ></span>
+      </div>
+      <div class="user-data-wrapper text-rtl col-xs-12">
+        <ul>
+          <li>
+            <div class="text-right">
+              <span
+                class="placeholder-content small-icon pull-right inline-block"
+              ></span>
+              <span
+                class="
+                  placeholder-content
+                  content-default-width
+                  margin-h-10 margin-v-5
+                  inline-block
+                "
+              ></span>
+            </div>
+          </li>
+          <li>
+            <div class="text-right">
+              <span
+                class="placeholder-content small-icon pull-right inline-block"
+              ></span>
+              <span
+                class="
+                  placeholder-content
+                  content-default-width
+                  margin-h-10 margin-v-5
+                  inline-block
+                "
+              ></span>
+            </div>
+          </li>
+          <li>
+            <div class="text-right">
+              <span
+                class="placeholder-content small-icon pull-right inline-block"
+              ></span>
+              <span
+                class="
+                  placeholder-content
+                  content-default-width
+                  margin-h-10 margin-v-5
+                  inline-block
+                "
+              ></span>
+            </div>
+          </li>
+          <li>
+            <div class="text-right">
+              <span
+                class="placeholder-content small-icon pull-right inline-block"
+              ></span>
+              <span
+                class="
+                  placeholder-content
+                  content-default-width
+                  margin-h-10 margin-v-5
+                  inline-block
+                "
+              ></span>
+            </div>
+          </li>
+          <li></li>
+        </ul>
       </div>
       <div class="default-user-action-buttons">
         <div
           class="
             placeholder-content
             default-button-full-with
-            margin-0
+            h-45
             hidden-xs hidden-md hidden-sm
-          "
-        ></div>
-        <div
-          class="
-            placeholder-content
-            default-button-user-item default-button-full-with
-            margin-10-0
           "
         ></div>
       </div>

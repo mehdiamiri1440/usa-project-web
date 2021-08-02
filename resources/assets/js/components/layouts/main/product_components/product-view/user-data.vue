@@ -47,15 +47,41 @@
   margin-top: 35px;
 }
 
-#product-section {
+.section-wrapper {
   border-top: 1px solid #e0e0e0;
+}
+
+.default-grid {
+  padding: 0 3px;
+}
+
+.default-grid .default-main-article-content {
+  width: 100%;
+}
+.default-grid .default-wrapper-main-image {
+  width: 100%;
+  height: 160px;
+}
+.default-grid > div {
+  padding: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #f0f0f1;
+}
+
+.default-grid .default-article-contents {
+  padding: 15px;
+}
+
+#reviews-section {
+  margin-top: 67px;
 }
 </style>
 
 <template>
   <div class="row">
     <section
-      v-if="$parent.relatedProducts.length > 0 && $parent.isLoading == false"
+      v-if="userProducts.length > 0 && userProductsLoader == false"
       id="product-section"
       class="section-wrapper col-xs-12 latest-product"
     >
@@ -64,15 +90,16 @@
 
         <div class="products-contents">
           <div class="owl-carousel product-carousel">
-            <ProductCarousel
-              v-for="(product, index) in $parent.relatedProducts"
-              :key="index"
-              :img="$parent.str + '/thumbnails/' + product.photo"
-              :title="product.product_name"
-              :stock="$parent.getConvertedNumbers(product.stock)"
-              :link="$parent.getRelatedProductUrl(product)"
-              column="4"
-            />
+            <div
+              v-for="(product, productIndex) in userProducts"
+              :key="'user-product-' + productIndex"
+            >
+              <ProductGridArticle
+                :product="product"
+                :str="$parent.str"
+                :productIndex="productIndex"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -80,9 +107,7 @@
 
     <section
       class="section-wrapper col-xs-12"
-      v-else-if="
-        $parent.relatedProducts.length == 0 && $parent.isLoading == true
-      "
+      v-else-if="!userProducts.length && userProductsLoader == true"
     >
       <div class="row">
         <h3 class="box-title">محصولات مرتبط</h3>
@@ -93,36 +118,44 @@
               v-for="(item, index) in 4"
               :key="index"
               :class="{ 'hidden-xs': index >= 2 }"
-              class="col-lg-3 col-md-4 col-xs-6 default-carousel-item"
+              class="default-items col-xs-6 col-sm-4 col-md-3 default-grid"
             >
-              <article class="carousel-item box-content col-xs-12">
-                <span
+              <div
+                class="
+                  col-xs-12
+                  margin-15-0
+                  default-item-wrapper default-main-wrapper
+                "
+              >
+                <div class="default-wrapper-main-image pull-right">
+                  <span class="default-main-image placeholder-content"></span>
+                </div>
+
+                <div
                   class="
-                    default-index-product-image
-                    placeholder-content
+                    default-article-contents
+                    padding-0
+                    margin-top-10
                     col-xs-12
                   "
-                ></span>
+                >
+                  <div class="default-main-article-content">
+                    <span class="content-half-width placeholder-content"></span>
 
-                <span
-                  class="
-                    content-default-width
-                    placeholder-content
-                    margin-10
-                    col-xs-10 col-xs-offset-1
-                  "
-                ></span>
-
-                <span
-                  class="
-                    content-default-width
-                    placeholder-content
-                    col-xs-8 col-xs-offset-2
-                  "
-                ></span>
-
-                <span class="margin-10"></span>
-              </article>
+                    <span
+                      class="content-default-width placeholder-content"
+                    ></span>
+                    <span
+                      class="
+                        placeholder-content
+                        default-button-full-with
+                        pull-left
+                        mobile-hidden
+                      "
+                    ></span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -147,12 +180,18 @@
             :review="comment"
           />
         </div>
-        <div class="reviews-wrapper" v-else-if="reviewsLoader">
+      </div>
+    </section>
+    <section
+      id="reviews-section"
+      v-else-if="reviewsLoader"
+      class="section-wrapper col-xs-12 reviews-product"
+    >
+      <div class="row">
+        <h3 class="box-title">نظرات کاربران</h3>
+        <div class="reviews-wrapper">
           <div class="default-review">
-            <PlaceholderArticle-review
-              v-for="(item, index) in 2"
-              :key="index"
-            />
+            <PlaceholderArticleReview v-for="(item, index) in 4" :key="index" />
           </div>
         </div>
       </div>
@@ -165,23 +204,31 @@
 import ProductCarousel from "../../main_components/product-list-carousel";
 import ArticleReview from "../../main_components/review-components/article-review";
 import PlaceholderArticleReview from "../../main_components/review-components/placeholder-article-review";
+import ProductGridArticle from "../../product_components/Product_grid_article";
+import owlCarousel from "../../../../../owl.carousel.min.js";
 
 export default {
   components: {
     ProductCarousel,
     ArticleReview,
     PlaceholderArticleReview,
+    ProductGridArticle,
   },
   data() {
     return {
       reviews: {
         comments: [],
       },
-      reviewsLoader: false,
+      reviewsLoader: true,
+      userProductsLoader: true,
+      userProducts: [],
     };
   },
   methods: {
-    init() {},
+    init() {
+      this.getReviews();
+      this.getProductByUserName();
+    },
     getReviews() {
       this.reviewsLoader = true;
       axios
@@ -189,18 +236,76 @@ export default {
           user_id: this.$parent.product.user_info.id,
         })
         .then((response) => {
-          //   this.doDeletereview = false;
           this.reviewsLoader = false;
           this.reviews = response.data;
         });
     },
+    getProductByUserName() {
+      this.registerComponentStatistics(
+        "productDetail",
+        "showUserProducts",
+        "show user products"
+      );
+      axios
+        .post("/get_product_list_by_user_name", {
+          user_name: this.$parent.product.user_info.user_name,
+        })
+        .then((response) => {
+          let data = response.data.products;
+          this.userProducts = data.filter((item) => {
+            return item.main.id != this.$route.params.id;
+          });
+          this.userProductsLoader = false;
+          this.$nextTick(() => {
+            this.userProductCarouselEnabled();
+          });
+        });
+    },
+    userProductCarouselEnabled() {
+      $(".owl-carousel.product-carousel").owlCarousel({
+        autoplay: true,
+        autoplayTimeout: 4000,
+        loop: false,
+        rewind: true,
+        nav: true,
+        navText: [
+          '<span class="fa fa-angle-left"></span>',
+          '<span class="fa fa-angle-right"></span>',
+        ],
+        mouseDrag: true,
+        margin: 6,
+        dots: true,
+        stagePadding: 6,
+        rtl: true,
+        responsive: {
+          0: {
+            items: 2,
+            navText: false,
+            dots: true,
+          },
+          590: {
+            items: 3,
+            navText: false,
+            dots: true,
+          },
+          992: {
+            items: 4,
+          },
+        },
+      });
+    },
+    registerComponentStatistics(categoryName, actionName, labelName) {
+      this.$parent.registerComponentStatistics(
+        categoryName,
+        actionName,
+        labelName
+      );
+    },
   },
-  mounted() {
-    this.init();
-  },
+  // mounted() {},
   watch: {
     "$parent.product.user_info"() {
-      this.getReviews();
+      this.init();
     },
   },
 };

@@ -158,7 +158,7 @@ div.user-information-link {
       </button>
       <div class="response-rate-wrapper pull-left">
         <button
-          v-if="user_info.response_rate != 0"
+          v-if="user_info.response_rate && user_info.response_rate != 0"
           data-toggle="tooltip"
           data-placement="right"
           title="احتمال پاسخ گویی"

@@ -117,6 +117,13 @@ input,textarea {
   margin: 0 auto;
 }
 
+.small-icon {
+  width: 25px;
+  height: 25px;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
 .default-icon {
   width: 50px;
   height: 50px;
@@ -130,7 +137,7 @@ input,textarea {
   margin: 15px auto;
   width: 100%;
   overflow: hidden;
-  border-radius: 3px;
+  border-radius: 8px;
   display: inline-block;
 }
 
@@ -139,7 +146,7 @@ input,textarea {
   margin-top: 3px;
   width: 80px;
   overflow: hidden;
-  border-radius: 3px;
+border-radius: 8px;
   display: inline-block;
 }
 
@@ -149,7 +156,7 @@ input,textarea {
   min-width: 130px;
   padding: 0 15px;
   overflow: hidden;
-  border-radius: 3px;
+border-radius: 8px;
   display: inline-block;
 }
 
@@ -194,6 +201,10 @@ input,textarea {
   direction: ltr;
 }
 
+.margin-5-0 {
+  margin: 10px 0;
+}
+
 .margin-10-0 {
   margin: 10px 0;
 }
@@ -228,6 +239,16 @@ input,textarea {
 
 .margin-15-auto {
   margin: 15px auto;
+}
+
+.margin-h-10 {
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.margin-v-5 {
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .margin-top-10 {
@@ -298,8 +319,13 @@ input,textarea {
   height: 30px;
 }
 
+
 .h-40 {
   height: 40px;
+}
+
+.h-45 {
+  height: 45px;
 }
 
 .h-100 {

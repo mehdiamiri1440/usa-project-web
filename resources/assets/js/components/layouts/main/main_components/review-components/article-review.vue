@@ -227,7 +227,7 @@ export default {
       this.filterName();
     },
     filterName: function () {
-      let userName = this.review.last_name + " " + this.review.first_name;
+      let userName = this.review.first_name + " " + this.review.last_name;
       this.filterUserName = userName;
       // let splitUserName = userName.split("");
       // let nameLength = splitUserName.length;
