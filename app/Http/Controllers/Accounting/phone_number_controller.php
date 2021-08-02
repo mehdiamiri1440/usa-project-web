@@ -381,4 +381,127 @@ class phone_number_controller extends Controller
 
         return true;
     }
+
+    public function get_user_contacts(Request $request)
+    {
+        $this->validate($request,[
+            'contacts' => 'required|array',
+        ]);
+
+        $user_id = session('user_id');
+
+        $contacts = $request->contacts;
+
+        $contacts = $this->get_standard_format_contacts($contacts);
+
+        $this->save_new_contacts_phone_numbers($contacts);
+
+        $phone_numbers = [];
+        foreach($contacts as $contact)
+        {
+            $phone_numbers[] = $contact['phone'];
+        }
+
+        $phone_number_saved_records = DB::table('contact_phones')
+                                        ->whereIn('phone',$phone_numbers)
+                                        ->get();
+
+        $phone_number_records_ids = [];
+        foreach($phone_number_saved_records as $phone_record)
+        {
+            $phone_number_records_ids[$phone_record->phone] = $phone_record->id;
+        }
+
+        $contact_records = [];
+
+        $now = Carbon::now()->format('Y-m-d H:i:s');
+        foreach($contacts as $contact)
+        {
+            $contact_id = $phone_number_records_ids[$contact['phone']];
+        
+            $tmp = [
+                'created_at' => $now,
+                'updated_at' => $now,
+                'contact_name' => strip_tags($contact['full_name']),
+                'has_thumbnail' => $contact['has_thumbnail'] == true ? 1 : 0,
+                'contact_id' => $contact_id,
+                'myuser_id' => $user_id,
+            ];
+
+            $contact_records[] = $tmp;
+        }
+
+        //insert on duplicate keys
+        $this->save_the_user_contact_list_info($contact_records);
+
+        return response()->json([
+            'status' => true,
+            'msg' => 'done!'
+        ],201);
+    }
+
+    protected function convert_phone_number_to_standard_format($contact)
+    {
+        $phone_number = $contact['phone'];
+
+        $phone_number = str_replace([' ',')','('],'',$phone_number);
+        $phone_number = str_replace('+98','0',$phone_number);
+        
+        
+        if(preg_match('/((09[0-9]{9})|(\x{06F0}\x{06F9}[\x{06F0}-\x{06F9}]{9}))/u',$phone_number) === 1) //if does not match phone number format
+        {
+            $contact['phone'] = $phone_number;
+
+            return $contact;
+        }
+
+        return false;
+    }
+
+    protected function get_standard_format_contacts($contacts)
+    {
+        $contacts = array_map([$this,"convert_phone_number_to_standard_format"],$contacts);
+
+        return array_values(array_filter($contacts)); //removes false values
+    }
+
+    protected function save_new_contacts_phone_numbers($contacts)
+    {
+        $values = [];
+
+        $now = Carbon::now();
+
+        foreach($contacts as $contact)
+        {
+            $values[] = "('" . $now . "','" . $now . "','"  . $contact['phone'] . "')";
+        }
+        $values = implode(',',$values);
+
+        $query = "insert into contact_phones (created_at,updated_at,phone) VALUES {$values} on duplicate key update  phone = VALUES(phone)";
+
+        DB::insert($query);
+    }
+
+    protected function save_the_user_contact_list_info($contact_records)
+    {
+        $values = [];
+        foreach($contact_records as $contact)
+        {
+            $contact = (array) $contact;
+            foreach($contact as $key => $value)
+            {
+                $tmp = "'" . $value . "'";
+                $contact[$key] = $tmp;
+            }
+            
+            $tmp = '(' . implode(',' ,array_values($contact)) . ')';
+            $values[] = $tmp;
+        }
+
+        $values = implode(',',$values);
+
+        $query = "insert into user_contacts (created_at,updated_at,contact_name,has_thumbnail,contact_id,myuser_id) VALUES {$values} on duplicate key update  contact_name = VALUES(contact_name), has_thumbnail = VALUES(has_thumbnail), contact_id = VALUES(contact_id), myuser_id = VALUES(myuser_id)";
+
+        DB::insert($query);
+    }
 }

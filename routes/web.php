@@ -20,8 +20,12 @@ use App\Jobs\sendSMS;
 use App\Jobs\LeadHandler\LeadDistributorBot;
 
 
+Route::get('/',[
+    'uses' => 'index_controller@load_home_page_blade'
+]);
+
 Route::get('/product-list',[
-    'uses' => 'Product\product_list_controller@get_product_list_blade',
+    'uses' => 'Product\product_list_controller@load_hompe_page_blade',
 ]);
 
 Route::get('/product-list/category/{category_name}',[
@@ -679,6 +683,11 @@ Route::group(['middleware' => [login::class]], function () {
     Route::post('/app/get_product_list', [
         'uses' => 'Product\product_list_controller@get_product_list',
         'as' => 'get_product_list',
+    ]);
+
+    Route::post('/get-user-phone-contacts',[
+        'uses' => 'Accounting\phone_number_controller@get_user_contacts',
+        'as' => 'get_user_phone_contact_list'
     ]);
     
 });
