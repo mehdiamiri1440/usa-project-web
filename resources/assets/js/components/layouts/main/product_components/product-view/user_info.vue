@@ -23,7 +23,6 @@
   padding: 15px 20px 25px;
   text-align: center;
   font-weight: bold;
-  margin-bottom: 30px;
   position: relative;
   float: right;
   width: 100%;
@@ -275,11 +274,6 @@ p.info-text {
 .user-data-wrapper li {
   overflow: hidden;
   padding-bottom: 20px;
-}
-
-.user-data-wrapper li:last-of-type {
-  overflow: hidden;
-  padding: 0 5px;
 }
 
 .user-data-wrapper .icon-wrapper {
@@ -931,22 +925,6 @@ a#note-close:not(.collapsed):after {
               ></span>
             </div>
           </li>
-          <li>
-            <div class="text-right">
-              <span
-                class="placeholder-content small-icon pull-right inline-block"
-              ></span>
-              <span
-                class="
-                  placeholder-content
-                  content-default-width
-                  margin-h-10 margin-v-5
-                  inline-block
-                "
-              ></span>
-            </div>
-          </li>
-          <li></li>
         </ul>
       </div>
       <div class="default-user-action-buttons">

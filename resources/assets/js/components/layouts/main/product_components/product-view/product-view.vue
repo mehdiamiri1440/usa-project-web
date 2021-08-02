@@ -218,6 +218,43 @@ button.send-message-button {
   max-width: 370px;
 }
 
+.section-wrapper .title-box {
+  text-align: center;
+
+  margin-top: 35px;
+}
+
+.section-wrapper {
+  border-top: 1px solid #e0e0e0;
+}
+
+.default-grid {
+  padding: 0 3px;
+}
+
+.default-grid .default-main-article-content {
+  width: 100%;
+}
+.default-grid .default-wrapper-main-image {
+  width: 100%;
+  height: 160px;
+}
+.default-grid > div {
+  padding: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #f0f0f1;
+}
+
+.default-grid .default-article-contents {
+  padding: 15px;
+}
+
+.related-product,
+.default-related-product {
+  margin-top: 70px;
+}
+
 @media screen and (max-width: 1199px) {
   .product-section-wrapper {
     width: 100%;
@@ -321,19 +358,70 @@ button.send-message-button {
           </aside>
         </div>
       </div>
-      <div class="section-wrapper col-xs-12 related-product">
+      <div
+        class="section-wrapper col-xs-12 related-product"
+        v-show="isRelatedProducts"
+      >
         <div class="row">
           <h3 class="box-title">محصولات مرتبط</h3>
           <RelatedProducts />
         </div>
       </div>
+      <div
+        v-show="!isRelatedProducts"
+        class="section-wrapper col-xs-12 default-related-product"
+      >
+        <div class="row">
+          <h3 class="box-title">محصولات مرتبط</h3>
+          <div>
+            <div
+              v-for="(defaultItem, index) in 12"
+              :key="index"
+              class="
+                default-items
+                col-xs-6 col-sm-4 col-md-3 col-lg-2
+                default-grid
+              "
+            >
+              <div
+                class="
+                  col-xs-12
+                  margin-15-0
+                  default-item-wrapper default-main-wrapper
+                "
+              >
+                <div class="default-wrapper-main-image pull-right">
+                  <span class="default-main-image placeholder-content"></span>
+                </div>
 
-      <div class="buttons-wrapper col-xs-12">
-        <router-link
-          :to="{ path: this.categoryUrl }"
-          class="green-button blue-button"
-          >مشاهده همه محصولات</router-link
-        >
+                <div
+                  class="
+                    default-article-contents
+                    padding-0
+                    margin-top-10
+                    col-xs-12
+                  "
+                >
+                  <div class="default-main-article-content">
+                    <span class="content-half-width placeholder-content"></span>
+
+                    <span
+                      class="content-default-width placeholder-content"
+                    ></span>
+                    <span
+                      class="
+                        placeholder-content
+                        default-button-full-with
+                        pull-left
+                        mobile-hidden
+                      "
+                    ></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div
@@ -454,7 +542,7 @@ export default {
         },
         photos: [],
       },
-      relatedProducts: "",
+      isRelatedProducts: false,
       relatedLoad: false,
       errors: "",
       popUpMsg: "",
@@ -492,6 +580,7 @@ export default {
           })
           .then(function (response) {
             self.product = response.data.product;
+
             self.categoryUrl =
               "/product-list/category/" + self.getCategoryName();
             self.starScore = Math.floor(
@@ -505,15 +594,8 @@ export default {
                 self.$emit("isMyProfile", self.isMyProfile);
               }
             }
+            self.sidebarScroll();
             self.getBreadCrumbs();
-            axios
-              .post("/get_related_products", {
-                product_id: self.product.main.id,
-              })
-              .then(function (response) {
-                self.relatedProducts = response.data.related_products;
-                self.isLoading = false;
-              });
           })
           .catch(function (err) {
             window.location.href = "/404";
@@ -911,9 +993,6 @@ export default {
   },
   mounted() {
     this.init();
-    setTimeout(() => {
-      this.sidebarScroll();
-    }, 1000);
     var self = this;
     document.onreadystatechange = () => {
       if (document.readyState === "complete") {

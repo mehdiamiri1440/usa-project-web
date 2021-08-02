@@ -106,6 +106,7 @@
     </section>
 
     <section
+      id="product-section"
       class="section-wrapper col-xs-12"
       v-else-if="!userProducts.length && userProductsLoader == true"
     >
@@ -191,7 +192,7 @@
         <h3 class="box-title">نظرات کاربران</h3>
         <div class="reviews-wrapper">
           <div class="default-review">
-            <PlaceholderArticleReview v-for="(item, index) in 4" :key="index" />
+            <PlaceholderArticleReview v-for="(item, index) in 2" :key="index" />
           </div>
         </div>
       </div>
@@ -206,6 +207,7 @@ import ArticleReview from "../../main_components/review-components/article-revie
 import PlaceholderArticleReview from "../../main_components/review-components/placeholder-article-review";
 import ProductGridArticle from "../../product_components/Product_grid_article";
 import owlCarousel from "../../../../../owl.carousel.min.js";
+import { isElementShownInView } from "../../../../../custom";
 
 export default {
   components: {
@@ -226,8 +228,24 @@ export default {
   },
   methods: {
     init() {
-      this.getReviews();
-      this.getProductByUserName();
+      isElementShownInView(
+        "#reviews-section",
+        (isInView) => {
+          if (isInView) {
+            this.getReviews();
+          }
+        },
+        100
+      );
+      isElementShownInView(
+        "#product-section",
+        (isInView) => {
+          if (isInView) {
+            this.getProductByUserName();
+          }
+        },
+        100
+      );
     },
     getReviews() {
       this.reviewsLoader = true;
@@ -237,6 +255,7 @@ export default {
         })
         .then((response) => {
           this.reviewsLoader = false;
+          this.$parent.doneGetReviews = true;
           this.reviews = response.data;
         });
     },
