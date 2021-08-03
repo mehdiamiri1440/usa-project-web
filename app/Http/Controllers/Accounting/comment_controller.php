@@ -67,7 +67,7 @@ class comment_controller extends Controller
                             ['user_comments.confirmed','=',true],
                             ['user_comments.deleted_by_owner','=',false]
                         ])
-                        ->whereNotNull('user_comments.text')
+                        // ->whereNotNull('user_comments.text')
                         ->select([
                             'myusers.id as user_id',
                             'myusers.first_name',

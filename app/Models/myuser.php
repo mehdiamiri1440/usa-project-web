@@ -5,10 +5,14 @@ namespace App\Models;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Http\Controllers\Accounting\profile_controller;
+use App\Http\Controllers\Accounting\user_controller;
+
 
 class myuser extends Authenticatable
 {
     use Notifiable;
+
+    public $referred_user_name = null;
 
     public function product()
     {
@@ -55,6 +59,11 @@ class myuser extends Authenticatable
             $profile_controller_object = new profile_controller();
 
             $profile_controller_object->add_a_confirmed_profile_record_for_user($user);
+
+            if( ! is_null($user->referred_user_name))
+            {
+                $profile_controller_object->register_referred_user_info_of_given_user_id($user->id,$user->referred_user_name);
+            }
         });
     }
 }
