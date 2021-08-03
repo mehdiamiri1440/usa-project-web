@@ -588,10 +588,6 @@ Route::group(['middleware' => [login::class]], function () {
         'as' => 'post_comment_on_user_porfile'
      ]);
 
-     Route::post('/profile/get-user-comments',[
-         'uses' => 'Accounting\comment_controller@get_user_comments',
-         'as' => 'get_user_comments'
-     ]);
 
      Route::post('/profile/do-like',[
         'uses' => 'Accounting\comment_controller@do_like_actions',
@@ -689,6 +685,11 @@ Route::group(['middleware' => [login::class]], function () {
         'uses' => 'Accounting\phone_number_controller@get_user_contacts',
         'as' => 'get_user_phone_contact_list'
     ]);
+
+    Route::post('/get-user-referral-credit',[
+        'uses' => 'Accounting\user_controller@get_referral_credit_amount',
+        'as' => 'get_user_referral_credit'
+    ]);
     
 });
 
@@ -700,6 +701,11 @@ Route::post('/send_phone_verification_code_for_password_reset', [
 Route::post('/reset_password', [
     'uses' => 'Accounting\user_controller@reset_password',
     'as' => 'reset_password',
+]);
+
+Route::post('/profile/get-user-comments',[
+    'uses' => 'Accounting\comment_controller@get_user_comments',
+    'as' => 'get_user_comments'
 ]);
 
 // Route::post('/get_buyAd_list_by_user_name', [
