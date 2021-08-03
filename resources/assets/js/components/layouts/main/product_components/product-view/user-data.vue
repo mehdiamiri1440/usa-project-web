@@ -76,6 +76,11 @@
 #reviews-section {
   margin-top: 67px;
 }
+@media screen and (max-width: 767px) {
+  #reviews-section {
+    padding: 0 25px;
+  }
+}
 </style>
 
 <template>

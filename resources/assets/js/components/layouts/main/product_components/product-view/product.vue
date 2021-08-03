@@ -248,6 +248,12 @@ label {
   margin-right: 10px;
 }
 
+@media screen and (max-width: 1199px) {
+  .main-product-wrapper {
+    min-height: initial;
+    margin-bottom: 50px;
+  }
+}
 @media screen and (max-width: 991px) {
   .actions {
     margin-top: 15px;
@@ -276,7 +282,7 @@ label {
 
   .main-contents-wrapper {
     margin: 30px auto;
-    padding: 0 15px;
+    padding: 0 10px;
   }
 
   .default-action-buttons {
@@ -441,7 +447,10 @@ label {
 
     <div class="images-wrapper">
       <div class="images">
-        <div v-if="$parent.product.photos" class="owl-carousel main-product-carousel">
+        <div
+          v-if="$parent.product.photos"
+          class="owl-carousel main-product-carousel"
+        >
           <Carousel
             v-for="(photo, index) in $parent.product.photos"
             :index="index"

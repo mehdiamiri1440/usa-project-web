@@ -410,7 +410,9 @@ a#note-close:not(.collapsed):after {
   }
 
   .user-info-section-wrapper {
-    margin-top: 30px;
+    margin-bottom: 50px;
+    overflow: hidden;
+    padding: 0;
   }
 
   .user-info-wrapper,

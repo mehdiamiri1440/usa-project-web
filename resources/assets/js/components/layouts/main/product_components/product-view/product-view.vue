@@ -262,11 +262,6 @@ button.send-message-button {
   .user-section-wrapper {
     max-width: initial;
   }
-
-  .box-title {
-    margin: 0 auto 15px;
-  }
-
   .default-carousel-item:last-of-type {
     display: none;
   }
@@ -296,9 +291,6 @@ button.send-message-button {
     padding-top: 94px;
   }
 
-  .box-title {
-    margin: 0 10px 15px;
-  }
   .main-product-wrapper {
     border-radius: 0;
   }
@@ -350,10 +342,29 @@ button.send-message-button {
                 <ProductContents />
               </div>
             </section>
+            <div
+              class="
+                col-xs-12 col-lg-4
+                hidden-lg
+                user-section-wrapper
+                pull-left
+              "
+            >
+              <div class="row">
+                <UserInfo />
+              </div>
+            </div>
             <UserData />
           </div>
 
-          <aside class="col-xs-12 col-lg-4 user-section-wrapper pull-left">
+          <aside
+            class="
+              col-xs-12 col-lg-4
+              hidden-xs hidden-sm hidden-md
+              user-section-wrapper
+              pull-left
+            "
+          >
             <UserInfo />
           </aside>
         </div>
