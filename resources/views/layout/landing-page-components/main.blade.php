@@ -84,8 +84,7 @@
           <div class="banner-item-wrapper">
             <div class="pull-right col-xs-3">
               <button
-                id="banner-item-1"
-                class="banner-item"
+                class="banner-item banner-item-1"
               >
                 <div class="banner-contents">
                   <p>حبوبات</p>
@@ -98,10 +97,7 @@
             </div>
             <div class="pull-right col-xs-9">
               <button
-                id="banner-item-2"
-                class="banner-item"
-                @click.prevent="openCategoriesModal(1)"
-                :style="{ backgroundImage: 'url(' + getImageUrl(1) + ')' }"
+                class="banner-item banner-item-2"
               >
                 <div class="banner-contents">
                   <p>میوه</p>
@@ -114,10 +110,7 @@
             </div>
             <div class="pull-right col-xs-3">
               <button
-                id="banner-item-3"
-                class="banner-item"
-                @click.prevent="openCategoriesModal(45)"
-                :style="{ backgroundImage: 'url(' + getImageUrl(5) + ')' }"
+                class="banner-item banner-item-3"
               >
                 <div class="banner-contents">
                   <p>ادویه</p>
@@ -130,10 +123,8 @@
             </div>
             <div class="pull-right col-xs-6">
               <button
-                id="banner-item-4"
-                class="banner-item"
+                class="banner-item banner-item-4"
                 @click.prevent="openCategoriesModal(2)"
-                :style="{ backgroundImage: 'url(' + getImageUrl(2) + ')' }"
               >
                 <div class="banner-contents">
                   <p>صیفی</p>
@@ -146,10 +137,8 @@
             </div>
             <div class="pull-right col-xs-3">
               <button
-                id="banner-item-5"
-                class="banner-item"
+                class="banner-item banner-item-5"
                 @click.prevent="openCategoriesModal(42)"
-                :style="{ backgroundImage: 'url(' + getImageUrl(3) + ')' }"
               >
                 <div class="banner-contents">
                   <p>غلات</p>
@@ -162,10 +151,7 @@
             </div>
             <div class="pull-right col-xs-6">
               <button
-                id="banner-item-6"
-                class="banner-item"
-                @click.prevent="openCategoriesModal(44)"
-                :style="{ backgroundImage: 'url(' + getImageUrl(4) + ')' }"
+                class="banner-item banner-item-6"
               >
                 <div class="banner-contents">
                   <p>خشکبار</p>
@@ -178,10 +164,8 @@
             </div>
             <div class="pull-right col-xs-3">
               <button
-                id="banner-item-7"
-                class="banner-item"
+                class="banner-item banner-item-7"
                 @click.prevent="openCategoriesModal(46)"
-                :style="{ backgroundImage: 'url(' + getImageUrl(6) + ')' }"
               >
                 <div class="banner-contents">
                   <p>دامپروری</p>
@@ -215,29 +199,65 @@
         <div class="row">
           <div class="mobile-banner">
             <div class="banner-item-wrapper">
-              <div
-                class="col-xs-3 pull-right"
-                v-for="(item, index) in categoryList"
-                :key="index"
-                :class="{ hidden: index > 6 }"
-              >
-                <button
-                  class="banner-item"
-                  @click.prevent="openCategoriesModal(item.id)"
-                >
-                  <div
-                    class="item-image"
-                    :style="{
-                      backgroundImage: 'url(' + getImageUrl(index + 1) + ')',
-                    }"
-                  ></div>
-                  <p class="item-text" v-text="item.category_name"></p>
-                </button>
-              </div>
+              
+              @foreach ($categories as $item)
+
+                  @if($item->category_name == "کشاورزی")
+                    @foreach ($item->subcategories as $subcategory) 
+                      <div
+                      class="col-xs-3 pull-right"
+                    >
+                      <a
+                      href="{{'/product-list/category/'  . str_replace(' ', '-', $subcategory->category_name)  }}"
+                        class="banner-item"
+                      >
+                      <?php
+                          $banner_class = '';
+                            switch ($subcategory->category_name) {
+                              case  'میوه':
+                                $banner_class = 'banner-item-2';
+                                break;
+                              case  'صیفی':
+                                $banner_class = 'banner-item-4';
+                                break;
+                              case  'غلات':
+                                $banner_class = 'banner-item-5';
+                                break;
+                              case  'خشکبار':
+                                $banner_class = 'banner-item-6';
+                                break;
+                              case  'ادیه':
+                                $banner_class = 'banner-item-3';
+                                break;
+                              case  'دامپروری':
+                                $banner_class = 'banner-item-7';
+                                break;
+                              case  'حبوبات':
+                                $banner_class = 'banner-item-1';
+                                break;
+
+                              default:
+                                $banner_class = 'banner-item-2';
+                                break;
+                            }
+                          ?>
+                        <div
+                          class="item-image <?php echo $banner_class; ?> "
+                        ></div>
+                        <p class="item-text">
+                          {{$subcategory->category_name}}
+                        </p>
+                      </a>
+                    </div>
+                    @endforeach
+                  @endif
+
+              @endforeach
+
+              
               <div class="col-xs-3 pull-right">
                 <button
                   class="banner-item all-banners"
-                  @click.prevent="openCategoriesModal(false)"
                 >
                   <div class="item-image">
                     <i class="fa fa-list"></i>
@@ -266,113 +286,46 @@
             <div class="col-xs-12 products-contents">
               <div v-if="lastProducts" class="row">
                 <?php 
-                for ($i=0; $i < 8; $i++) { 
-                  
+                foreach ($sample_products as  $product) {
                 ?>
                 <div
-                class="col-xs-6 grid-list col-sm-4 col-md-3 pull-right <?php echo $i > 1 ? 'hidden-xs' : '' ?> "
+                class="col-xs-6 grid-list col-sm-4 col-md-3 pull-right"
                 >
-                
-                    {{-- @if($product['user_info']->active_pakage_type == 3) --}}
                       <article
-                        class="main-content-item is-user-valid"
-                      >
-                    {{-- @else --}}
-                      {{-- <article
                         class="main-content-item "
-                      > --}}
-                    {{-- @endif --}}
-  
-                      {{-- @if($product['user_info']->active_pakage_type != 3) --}}
-                      {{-- <a target="_blank"  rel="nofollow" href="{{'/product-view/'  . str_replace(' ', '-', 'خرید-عمده-' .$product['main']->sub_category_name) .'/' . str_replace(' ', '-', $product['main']->category_name) . '/' .   $product['main']->id  }}"
-                        class="main-article-contents-wrapper pointer-class "
-                      > --}}
-                      {{-- @else --}}
-                      {{-- <a target="_blank"  rel="nofollow" href="{{'/product-view/'  . str_replace(' ', '-', 'خرید-عمده-' .$product['main']->sub_category_name) .'/' . str_replace(' ', '-', $product['main']->category_name) . '/' .   $product['main']->id  }}" --}}
-                      <a target="_blank"  rel="nofollow" href="{{'/product-view/'  . str_replace(' ', '-', 'خرید-عمده-خرما')  }}"
+                      >
+                      <a target="_blank"  rel="nofollow" 
+                      href="{{'/product-view/'  . str_replace(' ', '-', 'خرید-عمده-' .$product->subcategory_name) .'/' . str_replace(' ', '-', $product->category_name) . '/' .   $product->id  }}"
                       class="main-article-contents-wrapper pointer-class is-user-valid-content"
                       >
-                      {{-- @endif --}}
                       <div class="main-article-contents-image-wrapper" >
                       
                         <div class="main-article-image">
                           <div class="image" >
-                            {{-- <img src="{{url('/storage') . '/thumbnails/' . $product['photos'][0]->file_path}}"  alt=" {{$product['main']->category_name . ' | ' . $product['main']->sub_category_name . ' ' .  $product['main']->product_name }}" /> --}}
-                            </div>
-                            <div  class="image-count-item">
-                            <i class="fas fa-images"></i>
-                            <span >
-                              {{-- {{$product['main']->photos_count}} --}}
-                              5
-                            </span>
+                            <img src="{{url('/storage') . '/thumbnails/' . $product->photo}}"  alt=" {{$product->category_name . ' | ' . $product->subcategory_name . ' ' .  $product->product_name }}" />
                             </div>
                         </div>
                         <h3 class="article-title grid-list-title">
                          <p>
-                          {{-- {{$product['main']->category_name . ' | ' . $product['main']->sub_category_name  }} --}}
-                          خرما | مضافتی
+                          {{$product->category_name . ' | ' . $product->subcategory_name  }}
                           <span>
-                            {{-- {{$product['main']->product_name}} --}}
+                            {{$product->product_name}}
                           </span>
                          </p>
                         </h3>
-                        {{-- @if($product['user_info']->active_pakage_type == 3) --}}
-                              <div
-                                class="valid-user-badge"
-                              >
-                                <div class="wrapper-icon">
-                                <svg width="24.965" height="30.574" viewBox="0 0 24.965 30.574">
-                                    <g
-                                    id="buskool-icon"
-                                    data-name="buskool"
-                                    transform="translate(-273.1 -715.025)"
-                                    >
-                                    <path
-                                        id="Subtraction_1"
-                                        data-name="Subtraction 1"
-                                        d="M-1951.5,35.792a12.419,12.419,0,0,1-8.839-3.661A12.419,12.419,0,0,1-1964,23.292a12.361,12.361,0,0,1,1.378-5.71,12.614,12.614,0,0,1,3.679-4.333l3.175,3.175a7.967,7.967,0,0,0-3.732,6.768,8.009,8.009,0,0,0,8,8,8.036,8.036,0,0,0,7.917-6.85l2.185-2.149,2.34,2.3a12.464,12.464,0,0,1-4.012,8.026A12.467,12.467,0,0,1-1951.5,35.792Zm12.465-13.44,0,0-2.361-2.33-2.169,2.14a8.029,8.029,0,0,0-4.052-5.965l3.2-3.2a12.44,12.44,0,0,1,5.381,9.357Z"
-                                        transform="translate(2237.1 709.808)"
-                                        fill="#fff"
-                                    />
-                                    <g id="Group_24" data-name="Group 24">
-                                        <path
-                                        id="Rectangle_12"
-                                        data-name="Rectangle 12"
-                                        d="M3,0H9.5a0,0,0,0,1,0,0V5.5a0,0,0,0,1,0,0H0a0,0,0,0,1,0,0V3A3,3,0,0,1,3,0Z"
-                                        transform="translate(282.389 717.5) rotate(45)"
-                                        fill="#fff"
-                                        />
-                                        <path
-                                        id="Rectangle_13"
-                                        data-name="Rectangle 13"
-                                        d="M0,0H13.5a0,0,0,0,1,0,0V5a0,0,0,0,1,0,0H4A4,4,0,0,1,0,1V0A0,0,0,0,1,0,0Z"
-                                        transform="translate(294.935 718.561) rotate(135)"
-                                        fill="#fff"
-                                        />
-                                    </g>
-                                    </g>
-                                </svg>
-                                </div>
-                              </div>
-                            {{-- @endif --}}
                       </div>
-                          {{-- <a href="{{'/profile/' . $product['user_info']->user_name}}" class="user-information-link"> --}}
                           <a href="#" class="user-information-link">
-                              
-                            
                               <div
                                 class="user-information-content"
                               >
                               <a
                               class="user-name-link"
-                              {{-- href="{{'/profile/' . $product['user_info']->user_name}}" --}}
                               href="#"
                             >
                             <i class="fa fa-user-circle"></i>
-                              {{-- {{$product['user_info']->first_name . ' ' . $product['user_info']->last_name}} --}}
-                              محمدامین دلداری
+                              {{$product->first_name . ' ' . $product->last_name}}
                               </a>
-                              {{-- @if($product['user_info']->is_verified) 
+                              @if($product->is_verified) 
                               <button
                                   class="verified-user"
                                   data-container="body"
@@ -381,21 +334,8 @@
                                 >
                                   <i class="fa fa-certificate"></i>
                                 </button>
-                                @endif --}}
-                              {{-- @if( $product['user_info']->response_rate) --}}
-                              <div class="response-rate-wrapper pull-left">
-                                <button
-                                  data-toggle="tooltip"
-                                  data-placement="right"
-                                  title="احتمال پاسخ گویی"
-                                  class="response-rate"
-                                >
-                                  <i class="fa fa-exchange-alt"></i>
-                                  {{-- {{ $product['user_info']->response_rate }} --}}
-                                  85%
-                                </button>
-                              </div>
-                              {{-- @endif --}}
+                                @endif
+                              
                             </div>
                           </a>
                           <div class="main-article-contents" >
@@ -406,44 +346,26 @@
   
                                 <span
                                 >
-                                فارس - شیراز
-                                {{-- {{$product['main']->province_name . ' - ' . $product['main']->city_name  }} --}}
+
+                                {{$product->province_name . ' - ' . $product->city_name  }}
                               </span>
                                 </p>
                                 <p>
                                  <i class="fa fa-box-open"></i>
                                 <span >
-                                  500
-                                  {{-- @php 
-                                  $stock = $product['main']->stock;
-  
+                                  @php 
+                                  $stock = $product->stock;
                                   if($stock > 1000){
                                     $stock = $stock / 1000 . ' تن';
                                   }else{
                                     $stock = $stock . ' کیلوگرم';
                                   }
-  
                                   @endphp
-   --}}
-                                  {{-- {{ $stock }} --}}
+                                  {{ $stock }}
                                   </span>
                                 </p>
                             </div>
                         </div>
-                        {{-- @if($product['main']->is_elevated)
-                        <div
-                            class="article-features pull-left"
-                          >
-                            <button
-                              data-toggle="tooltip"
-                              data-placement="bottom"
-                              title="نردبان اعمال شده است"
-                              class="elevator-event active disable"
-                            >
-                              <i class="fas fa-chart-line"></i>
-                            </button>
-                          </div>
-                        @endif --}}
                       </a>
   
                     </article>
@@ -487,50 +409,63 @@
         <div class="row">
           <div class="col-xs-12 pull-left col-md-9">
             <div class="section-title">آخرین درخواست های خرید</div>
-
-            <div
-                class="col-xs-12 col-sm-6 col-md-4"
-              >
-              <div class="buyAd-wrapper-item col-xs-12">
-                <div class="list-title list-name col-xs-12">
-                  <div class="user-information-wrapper">
-                    <div class="user-information-content">
-                      <div class="user-content">
-                        <i class="fa fa-user-circle"></i>
-                        <span
-                          class="user-name-link"
-                        >
-                        محمدامین دلداری
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="buyer-text">
-                    <div>
-                      <span> خریدار </span>
-                      <span
-                        class="red-text"
-                      >
-                      ۵۰۰ تن
-                    </span>
-                      <span class="brand-text">
-                        گوجه
-                      </span>
-                      <span v-if="buyAd.name"> از نوع </span>
-                      <span class="brand-text">
-                        صادراتی
-                      </span>
             
-                      <span> هستم </span>
-                    </div>
+            @foreach ($sample_buyAds as $buyAd)
+            <div
+            class="col-xs-12 col-sm-6 col-md-4"
+          >
+          <div class="buyAd-wrapper-item col-xs-12">
+            <div class="list-title list-name col-xs-12">
+              <div class="user-information-wrapper">
+                <div class="user-information-content">
+                  <div class="user-content">
+                    <i class="fa fa-user-circle"></i>
+                    <span
+                      class="user-name-link"
+                    >
+                    {{$buyAd->first_name . ' ' . $buyAd->last_name}}
+
+                    </span>
                   </div>
                 </div>
+              </div>
+              <div class="buyer-text">
+                <div>
+                  <span> خریدار </span>
+                  <span
+                    class="red-text"
+                  >
+                  @php 
+                  $requirement_amount = $buyAd->requirement_amount;
+                  if($requirement_amount > 1000){
+                    $requirement_amount = $requirement_amount / 1000 . ' تن';
+                  }else{
+                    $requirement_amount = $requirement_amount . ' کیلوگرم';
+                  }
+                  @endphp
+                  {{ $requirement_amount }}
+                </span>
+                  <span class="brand-text">
+                    {{$buyAd->subcategory_name}}
+                  </span>
+                  @if ($buyAd->name)
+                  <span v-if="buyAd.name"> از نوع </span>
+                  <span class="brand-text">
+                    {{$buyAd->name}}
+                  </span>
+                  @endif
+                  <span> هستم </span>
+                </div>
+              </div>
+            </div>
+        
+            <p class="list-time" >
+              {{$buyAd->register_date}}
+            </p>
+          </div>
+          </div>
+            @endforeach
             
-                <p class="list-time" >
-                  ۱۹ اردیبهشت، ۱۳۹۹
-                </p>
-              </div>
-              </div>
           </div>
 
           <div class="col-xs-12 col-md-3 pull-right">
@@ -648,107 +583,169 @@
         <div
           class="text-right col-xs-12 form-contents-wrapper"
         >
-          <div class="form-wrapper">
-            <div class="section-title">ثبت درخواست خرید</div>
-  
-            <div class="form-contents col-xs-12">
-              <div class="row">
-                <div class="col-xs-12 col-md-6 pull-right">
-                  <h2 class="title-contents col-xs-12">
-                    دسته بندی محصول
-                    <span class="red-text"> * </span>
-                  </h2>
-                  <label for="category" class="description"> مثلا: میوه </label>
-  
-                  <div class="input-wrapper select-items">
-                    <select
-                      id="category"
-                    >
-                      <option value="" selected disabled>انتخاب دسته بندی</option>
-                    </select>
-                  </div>
+        <div class="form-wrapper">
+          <div class="section-title">ثبت درخواست خرید</div>
+
+          <div class="form-contents col-xs-12">
+            <div class="row">
+              <div class="col-xs-12 col-md-4 pull-right">
+                <h2 class="title-contents col-xs-12">
+                  دسته بندی محصول
+                  <span class="red-text"> * </span>
+                </h2>
+                <label for="category" class="description">
+                  مثلا: کشاورزی
+                </label>
+
+                <div class="input-wrapper select-items">
+                  <select
+               
+                    id="category"
+                  >
+                    <option value="" selected disabled>انتخاب دسته بندی</option>
+                  </select>
                 </div>
-  
-                <div class="col-xs-12 col-md-6">
-                  <h2 class="title-contents col-xs-12">
-                    نام محصول
-  
-                    <span class="red-text"> * </span>
-                  </h2>
-                  <label for="sub-category" class="description">
-                    مثلا: خرما
-                  </label>
-  
-                  <div class="input-wrapper select-items">
-                    <select
-                      id="sub-category"
-                    >
-                      <option value="" disabled selected>
-                        انتخاب زیر دسته بندی
-                      </option>
-                    </select>
-                  </div>
+     
+              </div>
+              <div class="col-xs-12 col-md-4 pull-right">
+                <h2 class="title-contents col-xs-12">
+                  زیر دسته بندی
+                  <span class="red-text"> * </span>
+                </h2>
+                <label for="mainSubcategory" class="description">
+                  مثلا: میوه
+                </label>
+
+                <div class="input-wrapper select-items">
+                  <select
+           
+                    id="mainSubcategory"
+                
+                  >
+                    <option value="" selected disabled>
+                      انتخاب زیر دسته بندی
+                    </option>
+                  </select>
                 </div>
-  
-                <div class="col-xs-12 col-md-6 pull-right">
-                  <h2 class="title-contents col-xs-12">
-                    نوع
+              
+              </div>
+
+              <div class="col-xs-12 col-md-4">
+                <h2 class="title-contents col-xs-12">
+                  نام محصول
+
+                  <span class="red-text"> * </span>
+                </h2>
+                <label for="sub-category" class="description">
+                  مثلا: خرما
+                </label>
+
+                <div class="input-wrapper select-items">
+                  <select
+                    id="sub-category"
+                  >
+                    <option value="" disabled selected>انتخاب نام محصول</option>
+                  </select>
+                </div>
+                
+              </div>
+
+              <div class="col-xs-12 col-md-6 pull-right">
+                <h2 class="title-contents col-xs-12">
+                  نوع
+                  <span
+                    class="light-green-text"
+                    v-text="' ' + subCategoryName + ' '"
+                  >
+                  </span>
+                  مورد نیاز خود را وارد کنید.
+                </h2>
+                <label for="product-type" class="description">
+                  <span > مثلا: مضافتی</span>
+                </label>
+                <div class="text-input-wrapper">
+                  <input
+                    id="product-type"
+                    type="text"
+                    placeholder="نوع محصول مورد نیاز خود را وارد کنید"
+                  />
+           
+                  <i  class="fa fa-edit"></i>
+                </div>
+                <div class="input-text-wrapper">
+                  <p class="error-message">
                     <span
-                      class="light-green-text"
-                    >
-                    محصول
-                    </span>
-                    مورد نیاز خود را وارد کنید.
-                  </h2>
-                  <label for="product-type" class="description">
-                    <span > مثلا: مضافتی</span>
-                  </label>
-                  <div class="text-input-wrapper">
-                    <input
-                      id="product-type"
-                      type="text"
-                      placeholder="نوع محصول مورد نیاز خود را وارد کنید"
-                      pattern="[0-9]*"
-                    />
-                  </div>
-                </div>
-  
-                <div class="col-xs-12 col-md-6">
-                  <h2 class="title-contents col-xs-12">
-                    میزان نیازمندی
-  
-                    <span class="small-label">(کیلوگرم)</span>
-  
-                    <span class="red-text"> * </span>
-                  </h2>
-                  <label for="requirement_amount" class="description">
-                    مثلا: 50,000
-                  </label>
-  
-                  <div class="text-input-wrapper">
-                    <input
-                      id="requirement_amount"
-                      type="tel"
-                      placeholder="میزان نیازمندی را وارد کنید"
-                      pattern="[0-9]*"
-                    />
-                  </div>
-  
+                      class="red-text"
+                    ></span>
+                  </p>
                 </div>
               </div>
-  
-              <div class="submit-button-wrapper col-xs-12">
-                <div class="row">
-                  <button
-                    class="submit-button disabled"
+
+              <div class="col-xs-12 col-md-6">
+                <h2 class="title-contents col-xs-12">
+                  میزان نیازمندی
+
+                  <span class="small-label">(کیلوگرم)</span>
+
+                  <span class="red-text"> * </span>
+                </h2>
+                <label for="requirement_amount" class="description">
+                  مثلا: 50,000
+                </label>
+
+                <div class="text-input-wrapper">
+                  <input
+              
+                    id="requirement_amount"
+                    type="tel"
+              
+                    placeholder="میزان نیازمندی را وارد کنید"
+                    pattern="[0-9]*"
+                  />
+                  <i class="fa fa-edit"></i>
+                </div>
+
+                <div class="input-text-wrapper">
+                  <p
+                    class="small-description-text"
+                    v-if="!errors.requirement_amount"
                   >
-                    ثبت درخواست
-                    <i class="fa fa-check"></i>
-                  </button>
+                    <span
+                      class="blue-text"
+                      v-if="requirement_amount_text"
+                      v-text="requirement_amount_text"
+                    ></span>
+                  </p>
+                  <p class="error-message">
+                    <span
+                      class="red-text"
+                      v-if="errors.requirement_amount"
+                      v-text="errors.requirement_amount"
+                    ></span>
+                  </p>
                 </div>
               </div>
             </div>
+
+            <div class="submit-button-wrapper col-xs-12">
+              <div class="row">
+                <button
+                  class="submit-button disabled"
+                  :class="{
+                    active:
+                      buyAd.sub_category_id &&
+                      buyAd.requirement_amount &&
+                      !errors.requirement_amount,
+                  }"
+                  @click.prevent="formValidator()"
+                >
+                  ثبت درخواست
+                  <i class="fa fa-check"></i>
+                </button>
+              </div>
+            </div>
           </div>
+        </div>
         </div>
       </div>
     </div>

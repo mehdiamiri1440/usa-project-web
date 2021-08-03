@@ -22,6 +22,23 @@
   left: calc(50% - 25px);
 }
 
+.more-product-wrapper {
+  float: right;
+  width: 100%;
+  position: relative;
+}
+
+.more-product-wrapper .spinner-border {
+  top: 30px;
+  width: 4rem;
+  height: 4rem;
+}
+
+.more-product-wrapper p {
+  margin-top: 40px;
+  color: #999;
+}
+
 .filter-loader-wrapper {
   position: absolute;
   top: 0;
@@ -281,39 +298,6 @@ li.active a::after {
   float: right;
 }
 
-.load-more-button {
-  text-align: center;
-
-  margin: 15px auto;
-}
-
-.load-more-button button {
-  border: 1px solid;
-
-  padding: 15px 30px;
-
-  height: initial;
-
-  background: #fff;
-
-  position: relative;
-
-  top: 0;
-
-  border-radius: 12px;
-
-  transition: 200ms;
-
-  color: #00c569;
-}
-
-.load-more-button button:hover {
-  top: -3px;
-
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
-
-  transition: 200ms;
-}
 
 .btn-loader {
   overflow: hidden;
@@ -1417,7 +1401,13 @@ div.items-wrapper {
                     </div>
                   </div>
                 </div>
-                <div
+                <div class="more-product-wrapper" v-if="loadMoreActive">
+                  <div class="spinner-border">
+                    <span class="sr-only"></span>
+                  </div>
+                  <p class="text-center text-rtl">درحال دریافت اطلاعات ...</p>
+                </div>
+                <!-- <div
                   class="load-more-button col-xs-12"
                   v-if="continueToLoadProducts === true"
                 >
@@ -1448,7 +1438,7 @@ div.items-wrapper {
                       </div>
                     </div>
                   </button>
-                </div>
+                </div> -->
               </div>
             </section>
             <!-- test -->
@@ -1676,7 +1666,6 @@ export default {
       popUpMsg: "",
       submiting: false,
       loading: false,
-      bottom: false,
       loadMoreActive: false,
       searchTextTimeout: null,
       sortOption: "BM",
@@ -1798,10 +1787,12 @@ export default {
             sort_by: self.sortOption,
           })
           .then(function (response) {
+            if (!response.data.products.length) {
+              self.continueToLoadProducts = false;
+            }
             if (self.products && self.products.length) {
               self.products = self.products.concat([...response.data.products]);
             }
-            //                      localStorage.productCountInPage=JSON.stringify(self.productCountInPage)
             self.submiting = false;
             if (self.products.length + 1 < self.productCountInPage) {
               self.continueToLoadProducts = false;
@@ -1858,6 +1849,9 @@ export default {
         axios
           .post("/user/get_product_list", searchObject)
           .then(function (response) {
+            if (!response.data.products.length) {
+              self.continueToLoadProducts = false;
+            }
             if (Array.isArray(self.products)) {
               self.products = self.products.concat(response.data.products);
             }
@@ -2052,29 +2046,17 @@ export default {
         fatal: fatal,
       });
     },
-    infiniteScrollHandler: function () {
-      let lastOffset = 0;
-
-      window.onscroll = () => {
+    infiniteScrollHandler() {
+      $(window).scroll(() => {
         if (
-          window.location.pathname.includes("product-list") &&
-          !window.location.pathname.includes("category")
+          $(window).scrollTop() >=
+            ($(document).height() - $(window).height() - 100) / 2 &&
+          !this.loadMoreActive &&
+          this.continueToLoadProducts
         ) {
-          var bottom =
-            document.documentElement.scrollTop + window.innerHeight >
-            document.documentElement.offsetHeight -
-              document.documentElement.scrollTop / 2;
-
-          let newOffset = document.documentElement.offsetHeight;
-
-          if (bottom) {
-            if (newOffset > lastOffset + 100) {
-              lastOffset = document.documentElement.offsetHeight;
-              this.feed();
-            }
-          }
+          this.feed();
         }
-      };
+      });
     },
     openSortModal() {
       $("#filter-modal").modal("show");
@@ -2217,11 +2199,6 @@ export default {
         this.applyFilter();
       } else {
         this.init();
-      }
-    },
-    bottom(bottom) {
-      if (bottom) {
-        //this.feed()
       }
     },
   },

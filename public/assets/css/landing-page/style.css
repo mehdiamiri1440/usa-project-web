@@ -797,6 +797,24 @@ li > ul > li.active > ul > li {
   overflow: hidden;
 }
 
+.section-title {
+  text-align: right;
+  font-size: 18px;
+  font-weight: 500;
+  color: #313a43;
+  position: relative;
+  padding-bottom: 9px;
+}
+
+.section-title::after {
+  content: " ";
+  background-color: #00c569;
+  width: 100px;
+  height: 3px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
 /* .web-category-wrapper > ul > li {
   position: relative;
 } */
@@ -973,25 +991,25 @@ li > ul > li.active > ul > li {
 
 /* mobile categories styles 
 ******************************************/
-#banner-item-1{
+.banner-item-1{
   background-image: url("../../img/banners/banner-7.jpg");
 }
-#banner-item-2{
+.banner-item-2{
   background-image: url("../../img/banners/banner-1.jpg");
 }
-#banner-item-3{
+.banner-item-3{
   background-image: url("../../img/banners/banner-5.jpg");
 }
-#banner-item-4{
+.banner-item-4{
   background-image: url("../../img/banners/banner-2.jpg");
 }
-#banner-item-5{
+.banner-item-5{
   background-image: url("../../img/banners/banner-3.jpg");
 }
-#banner-item-6{
+.banner-item-6{
   background-image: url("../../img/banners/banner-4.jpg");
 }
-#banner-item-7{
+.banner-item-7{
   background-image: url("../../img/banners/banner-6.jpg");
 }
 
@@ -2013,7 +2031,6 @@ overflow-y: scroll;
   
   .form-wrapper {
     margin: 0 auto;
-    max-width: 767px;
   }
   .form-contents {
     margin-top: 26px;
@@ -2300,6 +2317,10 @@ overflow-y: scroll;
                 -----------------------------------------*/
 
 @media screen and (max-width: 767px) {
+
+  .hero-search-input > input {
+    padding: 11px 15px;
+  }
 
   select {
     font-size: 12px;

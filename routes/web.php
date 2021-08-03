@@ -17,16 +17,15 @@ use App\Models\profile;
 use Illuminate\Http\Request;
 
 use App\Jobs\sendSMS;
+use App\Jobs\LeadHandler\LeadDistributorBot;
 
 
-
-Route::get('/test', function () {
-            return view('layout.index');
-        });
-
+Route::get('/',[
+    'uses' => 'index_controller@load_home_page_blade'
+]);
 
 Route::get('/product-list',[
-    'uses' => 'Product\product_list_controller@get_product_list_blade',
+    'uses' => 'Product\product_list_controller@load_hompe_page_blade',
 ]);
 
 Route::get('/product-list/category/{category_name}',[
@@ -685,6 +684,11 @@ Route::group(['middleware' => [login::class]], function () {
         'uses' => 'Product\product_list_controller@get_product_list',
         'as' => 'get_product_list',
     ]);
+
+    Route::post('/get-user-phone-contacts',[
+        'uses' => 'Accounting\phone_number_controller@get_user_contacts',
+        'as' => 'get_user_phone_contact_list'
+    ]);
     
 });
 
@@ -1124,6 +1128,10 @@ Route::group(['prefix' => 'admin', 'middleware' => [admin_login::class]], functi
     Route::get('/clear-storage-cache',[
         'uses' => 'admin_panel\admin_user_controller@clear_categories_cached_file',
     ]);
+
+    Route::get('/d-leads',function(){
+        LeadDistributorBot::dispatch();
+    });
     
 });
 

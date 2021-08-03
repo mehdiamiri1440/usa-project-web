@@ -108,7 +108,7 @@ class LeadDistributorBot implements ShouldQueue
         
         foreach($this->lead_seller_class_matches_with_priority as $item)
         {
-            $this->assign_the_leads_to_the_products($leads[array_key_first($item)],$products[$item[array_key_first($item)]],$category_id,$this->sellers_class_name_and_id_map[$item[array_key_first($item)]]);
+            $this->assign_the_leads_to_the_products($leads[$this->my_array_key_first($item)],$products[$item[$this->my_array_key_first($item)]],$category_id,$this->sellers_class_name_and_id_map[$item[$this->my_array_key_first($item)]]);
         }
 
         $forbidden_lead_ids = [];
@@ -637,5 +637,13 @@ class LeadDistributorBot implements ShouldQueue
         }
 
         return false;
+    }
+
+    protected function my_array_key_first(array $arr)
+    {
+        foreach($arr as $key => $unused) {
+            return $key;
+        }
+        return NULL; 
     }
 }
