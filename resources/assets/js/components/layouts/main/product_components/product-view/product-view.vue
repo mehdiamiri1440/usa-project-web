@@ -479,7 +479,7 @@ button.send-message-button {
             currentUser.user_info.is_buyer
           "
           @click.prevent="activePhoneCall(true)"
-          class="green-button"
+          class="green-button bg-gradient-green"
           :class="{ disable: isActivePhone }"
           :disabled="isActivePhone"
         >
@@ -492,7 +492,7 @@ button.send-message-button {
         <button
           v-else-if="!currentUser.user_info && product.user_info.has_phone"
           @click.prevent="loginModal(false)"
-          class="green-button"
+          class="green-button bg-gradient-green"
           :class="{ disable: isActivePhone }"
           :disabled="isActivePhone"
         >
