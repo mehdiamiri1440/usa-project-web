@@ -15,6 +15,7 @@ use DB;
 use App\Models\message;
 use App\Http\Controllers\General\media_controller;
 use App\Http\Controllers\Accounting\comment_controller;
+use Carbon\Carbon;
 
 class profile_controller extends Controller
 {
@@ -754,5 +755,23 @@ class profile_controller extends Controller
 
         return abort(404);
         
+    }
+
+    public function register_referred_user_info_of_given_user_id($user_id,$referred_user_name)
+    {
+        $referred_user_record = DB::table('myusers')->where('user_name',$referred_user_name)
+                                                ->first();
+
+        if($referred_user_record)
+        {
+            $now = Carbon::now();
+
+            DB::table('referred_users')->insert([
+                'myuser_id' => $referred_user_record->id,
+                'referred_user_id' => $user_id,
+                'created_at' => $now,
+                'updated_at' => $now
+            ]);
+        }
     }
 }
