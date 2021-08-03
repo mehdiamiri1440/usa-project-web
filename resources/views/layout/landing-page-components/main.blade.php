@@ -83,103 +83,110 @@
         <div class="row">
           <div class="banner-item-wrapper">
             <div class="pull-right col-xs-3">
-              <button
+              <a
+                href="{{'/product-list/category/'  . str_replace(' ', '-', 'حبوبات')  }}"
+
                 class="banner-item banner-item-1"
               >
-                <div class="banner-contents">
+              <div class="banner-contents">
                   <p>حبوبات</p>
                   <div>
                     مشاهده همه
                     <i class="fa fa-arrow-left"></i>
                   </div>
                 </div>
-              </button>
+              </a>
             </div>
             <div class="pull-right col-xs-9">
-              <button
+              <a
+                href="{{'/product-list/category/'  . str_replace(' ', '-', 'میوه')  }}"
+
                 class="banner-item banner-item-2"
               >
-                <div class="banner-contents">
+              <div class="banner-contents">
                   <p>میوه</p>
                   <div>
                     مشاهده همه
                     <i class="fa fa-arrow-left"></i>
                   </div>
                 </div>
-              </button>
+              </a>
             </div>
             <div class="pull-right col-xs-3">
-              <button
+              <a
+                href="{{'/product-list/category/'  . str_replace(' ', '-', 'ادویه')  }}"
+
                 class="banner-item banner-item-3"
               >
-                <div class="banner-contents">
+              <div class="banner-contents">
                   <p>ادویه</p>
                   <div>
                     مشاهده همه
                     <i class="fa fa-arrow-left"></i>
                   </div>
                 </div>
-              </button>
+              </a>
             </div>
             <div class="pull-right col-xs-6">
-              <button
+              <a
+                href="{{'/product-list/category/'  . str_replace(' ', '-', 'صیفی')  }}"
                 class="banner-item banner-item-4"
-                @click.prevent="openCategoriesModal(2)"
               >
-                <div class="banner-contents">
+              <div class="banner-contents">
                   <p>صیفی</p>
                   <div>
                     مشاهده همه
                     <i class="fa fa-arrow-left"></i>
                   </div>
                 </div>
-              </button>
+              </a>
             </div>
             <div class="pull-right col-xs-3">
-              <button
+              <a
+                href="{{'/product-list/category/'  . str_replace(' ', '-', 'غلات')  }}"
                 class="banner-item banner-item-5"
-                @click.prevent="openCategoriesModal(42)"
               >
-                <div class="banner-contents">
+              <div class="banner-contents">
                   <p>غلات</p>
                   <div>
                     مشاهده همه
                     <i class="fa fa-arrow-left"></i>
                   </div>
                 </div>
-              </button>
+              </a>
             </div>
             <div class="pull-right col-xs-6">
-              <button
+              <a
+                href="{{'/product-list/category/'  . str_replace(' ', '-', 'خشکبار')  }}"
                 class="banner-item banner-item-6"
               >
-                <div class="banner-contents">
+              <div class="banner-contents">
                   <p>خشکبار</p>
                   <div>
                     مشاهده همه
                     <i class="fa fa-arrow-left"></i>
                   </div>
                 </div>
-              </button>
+              </a>
             </div>
             <div class="pull-right col-xs-3">
-              <button
+              <a
+                href="{{'/product-list/category/'  . str_replace(' ', '-', 'دامپروری')  }}"
                 class="banner-item banner-item-7"
-                @click.prevent="openCategoriesModal(46)"
               >
-                <div class="banner-contents">
+              <div class="banner-contents">
                   <p>دامپروری</p>
                   <div>
                     مشاهده همه
                     <i class="fa fa-arrow-left"></i>
                   </div>
                 </div>
-              </button>
+              </a>
             </div>
             <div class="pull-right col-xs-3">
-              <button
+              <a
                 class="banner-more-categories"
-                @click.prevent="openCategoriesModal(false)"
+                href="/product-list"
               >
                 <div class="banner-contents">
                   <p>
@@ -190,7 +197,7 @@
                     <i class="fa fa-arrow-left"></i>
                   </div>
                 </div>
-              </button>
+              </a>
             </div>
           </div>
         </div>
@@ -256,14 +263,15 @@
 
               
               <div class="col-xs-3 pull-right">
-                <button
+                <a
+                href="/product-list"
                   class="banner-item all-banners"
                 >
                   <div class="item-image">
                     <i class="fa fa-list"></i>
                   </div>
                   <p class="item-text">همه</p>
-                </button>
+                </a>
               </div>
             </div>
           </div>
@@ -476,9 +484,8 @@
                 صادرکنندگان هم اکنون ثبت نام کنید
               </p>
               <a
-                v-if="!isUserLogin"
+              href="/register"
                 class="green-button"
-                :to="{ name: 'register' }"
                 >ثبت نام رایگان <i class="fa fa-angle-left"></i
               ></a>
             </div>
@@ -500,7 +507,7 @@
             <div class="row">
               <div class="col-xs-12 col-md-4 hidden-md hidden-lg">
                 <article class="service-box main-incobac-logo">
-                  <a :to="{ name: 'help' }">
+                  <a  href="/help">
                     <div class="box-image">
                       <img src="{{asset('assets/img/logo/web-logo.svg')}}" />
                     </div>
@@ -517,7 +524,7 @@
 
               <div class="col-xs-12 col-sm-6 col-md-4 pull-right">
                 <article class="service-box">
-                  <a :to="{ name: 'help' }">
+                  <a href="/help">
                     <div class="box-image">
                       <img src="{{asset('assets/img/seller.jpg')}}" />
                     </div>
@@ -536,7 +543,7 @@
                 class="col-xs-12 col-sm-6 col-md-4 pull-right hidden-xs hidden-sm"
               >
                 <article class="service-box main-incobac-logo">
-                  <a :to="{ name: 'help' }">
+                  <a href="/help">
                     <div class="box-image">
                       <img src="{{asset('assets/img/logo/web-logo.svg')}}" />
                     </div>
@@ -553,7 +560,7 @@
 
               <div class="col-xs-12 col-sm-6 col-md-4 pull-right">
                 <article class="service-box">
-                  <a :to="{ name: 'help' }">
+                  <a href="/help">
                     <div class="box-image">
                       <img src="{{asset('assets/img/seller.jpg')}}" />
                     </div>
@@ -731,13 +738,6 @@
               <div class="row">
                 <button
                   class="submit-button disabled"
-                  :class="{
-                    active:
-                      buyAd.sub_category_id &&
-                      buyAd.requirement_amount &&
-                      !errors.requirement_amount,
-                  }"
-                  @click.prevent="formValidator()"
                 >
                   ثبت درخواست
                   <i class="fa fa-check"></i>
@@ -1040,7 +1040,7 @@
                 class="col-xs-6 col-sm-4 col-md-2 pull-right"
               >
                   <a
-                    :to="getSubCategoryUrl(item.link)"
+                    href="{{'/product-list/category/'  . str_replace(' ', '-', $product) }}"
                   >
                   <?php echo ' فروش عمده ' . $product ?>
                 </a>
@@ -1056,15 +1056,21 @@
                 v-if="categoryList.length"
                 v-for="(category, index) in categoryList"
               >
-                <h4
-                  v-for="subCategory in category.subcategories"
-                  class="col-xs-6 col-sm-4 col-md-2 pull-right"
-                >
-                  <a
-                    :to="getSubCategoryUrl(subCategory.category_name)"
-                    v-text="'فروش عمده' + ' ' + subCategory.category_name"
-                  ></a>
-                </h4>
+              @foreach ($categories as $master_category)
+                @foreach ($master_category->subcategories as $category)
+                  @foreach ($category->subcategories as $sub_category)
+                    
+                    <h4 class="col-xs-6 col-sm-4 col-md-2 pull-right">
+                      <a href="{{'/product-list/category/'  . str_replace(' ', '-', $sub_category->category_name) }}"
+                        v-text="'فروش عمده' + ' ' + subCategory.category_name" >
+                        <?php echo ' فروش عمده ' . $sub_category->category_name ?>
+                      </a>
+                     </h4>
+
+                  @endforeach
+                @endforeach
+              @endforeach
+                
               </div>
               <!-- end loop  -->
 
@@ -1076,7 +1082,7 @@
                   class="col-xs-6 col-sm-4 col-md-2 pull-right"
                 >
                     <a
-                      :to="getSubCategoryUrl(item.link)"
+                    href="{{'/product-list/category/'  . str_replace(' ', '-', 'برنج') }}"
                     >
                     <?php echo ' فروش عمده ' . $product ?>
                   </a>

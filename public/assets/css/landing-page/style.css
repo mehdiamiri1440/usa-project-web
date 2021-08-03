@@ -912,6 +912,7 @@ li > ul > li.active > ul > li {
   border: none;
   width: 100%;
   z-index: 0;
+  display: block;
 }
 .web-banner-wrapper .banner-contents {
   position: relative;
