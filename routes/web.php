@@ -25,7 +25,7 @@ Route::get('/',[
 ]);
 
 Route::get('/product-list',[
-    'uses' => 'Product\product_list_controller@load_hompe_page_blade',
+    'uses' => 'Product\product_list_controller@get_product_list_blade',
 ]);
 
 Route::get('/product-list/category/{category_name}',[
