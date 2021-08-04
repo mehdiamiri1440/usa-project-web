@@ -32,7 +32,7 @@ return [
        'buyAd-reply-count' => 10,
        'elevetor-count' => 0,
        'price' => 2970000,
-       'price-1' => 2490000, //old price
+       'price-1' => 10000, //old price
        'price-discount' => 1990000
    ],
    'type-2' => [

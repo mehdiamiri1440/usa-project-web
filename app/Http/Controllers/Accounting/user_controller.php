@@ -627,4 +627,43 @@ class user_controller extends Controller
             'msg' => 'unAuthorized Access!'
         ],404);
     }
+
+    public function get_referral_credit_amount()
+    {
+        $user_id = session('user_id');
+
+        $referred_users_ids = DB::table('referred_users')
+                                    ->where('myuser_id',$user_id)
+                                    ->pluck('referred_user_id');
+
+        if(count($referred_users_ids) == 0 ){
+            return response()->json([
+                'status' => true,
+                'credit' => 0
+            ]);
+        }
+
+        $reffered_users_payment_records = DB::table('payment_logs')
+                            ->join('gateway_transactions','gateway_transactions.id','=','payment_logs.transaction_id')
+                            ->where('gateway_transactions.status','SUCCEED')
+                            ->whereNotNull('gateway_transactions.payment_date')
+                            ->whereIn('payment_logs.myuser_id',$referred_users_ids)
+                            ->pluck('gateway_transactions.price');
+
+        if(count($reffered_users_payment_records) > 0)
+        {
+            $credit = $reffered_users_payment_records->sum();
+
+            return response()->json([
+                'status' => true,
+                'credit' => $credit
+            ]);
+        }
+
+
+        return response()->json([
+            'status' => true,
+            'credit' => 0
+        ]);
+    }
 }
