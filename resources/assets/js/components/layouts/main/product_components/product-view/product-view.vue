@@ -912,7 +912,7 @@ export default {
     getCategoryName: function () {
       let name = this.product.main.sub_category_name;
 
-      return name.split("-").join(" ");
+      return name ? name.split("-").join(" ") : "";
     },
     handleBackKeys: function () {
       if (window.history.state) {
