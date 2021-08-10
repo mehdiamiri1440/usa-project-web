@@ -1762,7 +1762,7 @@ a.sub-menu-title:hover {
               <div
                 v-for="(buyAd, index) in lastRequests"
                 :key="'buyAd-item-' + index"
-                class="col-xs-12 col-sm-6 col-md-4"
+                class="col-xs-12 col-sm-6 col-md-4 pull-right"
               >
                 <LandingPageBuyAds :buyAd="buyAd" />
               </div>

@@ -137,7 +137,8 @@ class Kernel extends ConsoleKernel
 
         $user_automatic_blocking_job = new MessagingAnomalyDetection();
         $schedule->job($user_automatic_blocking_job)
-                        ->cron('*/18 * * * *');
+                        ->everyMinute();
+                        // ->cron('*/18 * * * *');
 
         $lead_generator_job = new LeadGenerator();
         $schedule->job($lead_generator_job)

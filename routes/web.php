@@ -25,7 +25,7 @@ Route::get('/',[
 ]);
 
 Route::get('/product-list',[
-    'uses' => 'Product\product_list_controller@load_hompe_page_blade',
+    'uses' => 'Product\product_list_controller@get_product_list_blade',
 ]);
 
 Route::get('/product-list/category/{category_name}',[
@@ -674,6 +674,11 @@ Route::group(['middleware' => [login::class]], function () {
     Route::post('/wallet-expend/buyAd-capacity',[
         'uses' => 'Payment\wallet_controller@do_extra_buyAd_capacity_payment_from_wallet',
         'as' => 'do_extra_buyad_capacity_payment_from_wallet'
+    ]);
+
+    Route::post('/wallet-expend/buy-package',[
+        'uses' => 'Payment\wallet_controller@do_package_payemnt_from_wallet',
+        'as' => 'do_package_payment_from_wallet'
     ]);
     
     Route::post('/app/get_product_list', [
