@@ -675,6 +675,11 @@ Route::group(['middleware' => [login::class]], function () {
         'uses' => 'Payment\wallet_controller@do_extra_buyAd_capacity_payment_from_wallet',
         'as' => 'do_extra_buyad_capacity_payment_from_wallet'
     ]);
+
+    Route::post('/wallet-expend/buy-package',[
+        'uses' => 'Payment\wallet_controller@do_package_payemnt_from_wallet',
+        'as' => 'do_package_payment_from_wallet'
+    ]);
     
     Route::post('/app/get_product_list', [
         'uses' => 'Product\product_list_controller@get_product_list',

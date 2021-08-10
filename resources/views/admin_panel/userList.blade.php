@@ -73,6 +73,7 @@
                   <th>تاریخ ثبت نام</th>
                   <th>تلفن</th>
                   <th>نوع عضوبت</th>
+                  <th>تاریخچه</th>
                   <th>آی دی</th>
                   <th>دیگر حساب ها</th>
                   <th>بلاک</th>
@@ -96,6 +97,9 @@
                         @elseif($user->active_pakage_type == 3)
                           <td>ویژه</td>
                         @endif
+                        <td>
+                          <a href="{{route('admin_panel_load_user_notes_by_id',['user_id' => $user->id])}}">مشاهده</a>
+                        </td>
                         <td>{{$user->id}}</td>
                         <td>
                           <a href="{{route('admin_panel_same_device_users_list',['user_id' => $user->id])}}">مشاهده</a>

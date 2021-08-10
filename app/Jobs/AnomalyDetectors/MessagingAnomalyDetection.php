@@ -41,23 +41,51 @@ class MessagingAnomalyDetection implements ShouldQueue
      */
     public function handle()
     {
-        $block_candidate_user_ids = $this->get_block_candidate_user_ids();
+        $block_candidate_users = $this->get_block_candidate_user_ids();
+
+        $block_candidate_user_ids = [];
+        $admin_notes = [];
+        $now = Carbon::now();
+
+        foreach($block_candidate_users as $item)
+        {
+            $block_candidate_user_ids[] = $item['id'];
+
+            $tmp = [
+                'created_at' => $now,
+                'updated_at' => $now,
+                'note' => $item['reason'],
+                'myuser_id' => $item['id']
+            ];
+
+            $admin_notes = $tmp;
+        }
 
         $same_device_user_ids = $this->get_same_device_users($block_candidate_user_ids);
+
+
+        foreach($same_device_user_ids as $user_id)
+        {
+            $tmp = [
+                'created_at' => $now,
+                'updated_at' => $now,
+                'note' => 'مسدود شده به دلیل استفاده از دستگاه یکسان با کسی که قبلا مسدود شده.',
+                'myuser_id' => $user_id
+            ];
+
+            $admin_notes[] = $tmp;
+        }
 
         $final_block_candidate_user_ids = array_unique(array_merge($block_candidate_user_ids,$same_device_user_ids));
 
         DB::table('myusers')->whereIn('id',$final_block_candidate_user_ids)
                                 ->update(['is_blocked' => true]);
 
-        // if(count($abnormal_users) > 0){
-        //     //Deli
-        //     sendSMS::dispatch('09118413054', 27257);
-        //     sendSMS::dispatch('09172021943', 27257);
-        //     //Ghasem
-        //     sendSMS::dispatch('09217985653', 27257);
-        //     sendSMS::dispatch('09178928266', 27257);
-        // }
+
+        $admin_notes = array_unique($admin_notes,SORT_REGULAR);
+        
+        DB::table('admin_notes')->insert($admin_notes);
+
     }
 
     protected function get_abnormal_message_info()
@@ -79,7 +107,7 @@ class MessagingAnomalyDetection implements ShouldQueue
 
     protected function detect_links_anomaly(&$messages)
     {
-        $user_ids = [];
+        $users = [];
         $already_blocked_phone_numbers = DB::table('myusers')
             ->where('is_blocked',true)
             ->pluck('phone')
@@ -96,7 +124,13 @@ class MessagingAnomalyDetection implements ShouldQueue
                     $phone = $this->convert_persian_numbers_to_latin_numbers($phone);
                     
                     if(in_array($phone,$already_blocked_phone_numbers)){
-                        $user_ids[] = $msg->sender_id;
+                        $tmp = [
+                            'id' => $msg->sender_id,
+                            'reason' => "ارسال شماره تماس $phone که قبلا مسدود شده است"
+                        ];
+
+                        $users[] = $tmp;
+
                         continue 2;
                     }
                 }
@@ -111,12 +145,17 @@ class MessagingAnomalyDetection implements ShouldQueue
                         continue;
                     }
 
-                    $user_ids[] = $msg->sender_id;
+                    $tmp = [
+                        'id' => $msg->sender_id,
+                        'reason' => "ارسال لینک $possible_link در متن پیام."
+                    ];
+
+                    $users[] = $tmp;
                 }
             }
         }
 
-        return array_unique($user_ids);
+        return array_unique($users);
     }
 
     protected function detect_copy_paste(&$messages)
@@ -146,7 +185,7 @@ class MessagingAnomalyDetection implements ShouldQueue
 
 
 
-        $user_ids = [];
+        $users = [];
         foreach($long_messages as $msg)
         {
             $phone = null;
@@ -159,7 +198,12 @@ class MessagingAnomalyDetection implements ShouldQueue
                         $repeat_count++;
                         
                         if($repeat_count >= 3){
-                            $user_ids[] = $msg->sender_id;
+                            $tmp = [
+                                'id' => $msg->sender_id,
+                                'reason' => 'مسدود شده به دلیل ارسال پیام های تکراری بالای ۲۵۰ کاراکتر که شامل شماره تماس است.'
+                            ];
+                            
+                            $users[] = $tmp;
                             break;
                         }   
                     }
@@ -167,7 +211,7 @@ class MessagingAnomalyDetection implements ShouldQueue
             }
         }
 
-        return $user_ids;
+        return $users;
     }
 
     protected function get_block_candidate_user_ids()

@@ -158,7 +158,7 @@ class user_controller extends Controller
 
         DB::table('client_meta_datas')->insert($meta_data);
 
-        if(! is_null($device_id)){
+        if( ! is_null($device_id)){
             if($user->is_blocked == false){
                 $this->block_user_if_already_has_been_blocked_on_this_device($device_id,$user_id);
             }
@@ -182,6 +182,14 @@ class user_controller extends Controller
             DB::table('myusers')->where('id',$user_id)
                                     ->update(['is_blocked' => true]);
 
+            $now = Carbon::now();
+            DB::table('admin_notes')->insert([
+                'created_at' => $now,
+                'updated_at' => $now,
+                'note' => 'مسدود شده به دلیل مسدود بودن حساب های دیگر رو این دستگاه',
+                'myuser_id' => $user_id
+            ]);
+
             \Session::flush();
             \Session::save();
         }
@@ -198,6 +206,14 @@ class user_controller extends Controller
 
         DB::table('myusers')->whereIn('id',$blocking_user_ids)
                                 ->update(['is_blocked' => true]);
+
+        $now = Carbon::now();
+        DB::table('admin_notes')->insert([
+            'created_at' => $now,
+            'updated_at' => $now,
+            'note' => 'مسدود شده چون حساب کاربری جدیدتری که رو همین دستگاه ساخته شده مسدود شده است.',
+            'myuser_id' => $user_id
+        ]);
     }
 
     public function does_user_name_already_exists(Request $request)

@@ -83,5 +83,7 @@ return [
         '1' => 4, // payed
         '2' => 1, // verified
         '3' => 1, // new
-    ]
+    ],
+    'buyAd-capacity-price' => 250000,
+    'product-capacity-price' => 250000,
 ];
