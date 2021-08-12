@@ -343,7 +343,7 @@ class wallet_controller extends Controller
                 $this->insert_expendig_log_record(5,$user_id);
                 break;
             case 3:
-                $this->insert_expendig_log_record(6,$user_id,$extra_capacity_count);
+                $this->insert_expendig_log_record(6,$user_id);
                 break;
         }
 
