@@ -698,14 +698,24 @@ class user_controller extends Controller
     {
         $users = DB::table('myusers')
                         ->join('referred_users','referred_users.referred_user_id','=','myusers.id')
+                        ->join('profiles',function($q){
+                            $q->on('myusers.id','=','profiles.myuser_id')
+                                ->whereRaw('profiles.id in (select MAX(p.id) from profiles as p join myusers as u on p.myuser_id = u.id and p.confirmed = true group by u.id)');
+                        })
                         ->where('referred_users.myuser_id',$user_id)
+                        ->where('profiles.confirmed',true)
                         ->select([
                             'myusers.id',
                             'myusers.first_name',
                             'myusers.last_name',
-                            'myusers.user_name'
+                            'myusers.user_name',
+                            'profiles.profile_photo'
                         ])
+                        ->orderBy('referred_users.created_at','desc')
                         ->get();
+        
+
+        return $users;
 
         foreach($users as $user)
         {
