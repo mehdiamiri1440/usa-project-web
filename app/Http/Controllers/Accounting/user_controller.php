@@ -715,8 +715,6 @@ class user_controller extends Controller
                         ->get();
         
 
-        return $users;
-
         foreach($users as $user)
         {
             $user->credit = $this->get_user_purchase_volume($user->id) / config('subscriptionPakage.referred-credit-divider');
