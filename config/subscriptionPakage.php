@@ -86,4 +86,5 @@ return [
     ],
     'buyAd-capacity-price' => 250000,
     'product-capacity-price' => 250000,
+    'referred-credit-divider' => 2, // half 
 ];

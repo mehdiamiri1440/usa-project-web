@@ -43,7 +43,7 @@ class GiveReferralReward implements ShouldQueue
 
             if($are_they_logged_in_from_same_device == false){
                 DB::table('myusers')->where('id',$related_referral_record->myuser_id)
-                                    ->increment('wallet_balance',(integer)($this->payment_amount / 2));
+                                    ->increment('wallet_balance',(integer)($this->payment_amount / config('subscriptionPakage.referred-credit-divider') ));
             } 
         }  
     }
