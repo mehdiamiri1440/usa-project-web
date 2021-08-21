@@ -100,6 +100,39 @@ class comment_controller extends Controller
         ],200);
     }
 
+    public function get_pure_user_comments($user_id)
+    {
+        $comments = DB::table('user_comments')
+                        ->join('myusers','myusers.id','=','user_comments.commenter_id')
+                        ->where([
+                            ['user_comments.myuser_id','=',$user_id],
+                            ['user_comments.confirmed','=',true],
+                            ['user_comments.deleted_by_owner','=',false]
+                        ])
+                        // ->whereNotNull('user_comments.text')
+                        ->select([
+                            'myusers.id as user_id',
+                            'myusers.first_name',
+                            'myusers.last_name',
+                            'myusers.city',
+                            'myusers.province',
+                            'user_comments.id as c_id',
+                            'user_comments.created_at',
+                            'user_comments.text',
+                            'user_comments.rating_score'
+                        ])
+                        ->orderBy('user_comments.created_at','desc')
+                        ->get();
+
+        $comments->each(function($item){
+            $likes_info = $this->get_comment_likes_count($item->c_id);
+            $item->likes = $likes_info['likes'];
+            $item->already_liked = $likes_info['already_liked'];
+        });
+
+        return $comments;
+    }
+
     protected function get_comment_likes_count($comment_id)
     {
         $records = DB::table('user_comment_likes')
