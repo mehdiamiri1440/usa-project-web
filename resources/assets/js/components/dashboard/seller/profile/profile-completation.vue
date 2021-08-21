@@ -97,9 +97,9 @@
               با احراز هویت، اعتماد خریداران و فروشندگان را به خود جلب کنید.
             </p>
             <div class="text-center">
-              <button class="content-button green-button">
+              <router-link class="content-button green-button">
                 احراز هویت کنید
-              </button>
+              </router-link>
             </div>
           </article>
         </div>
@@ -123,3 +123,4 @@
     </div>
   </div>
 </template>
+
