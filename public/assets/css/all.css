@@ -160,6 +160,10 @@
 .fa-phone-square-alt:before {
     content: "\f87b"
 }
+
+.fa-phone-square:before {
+    content: "\f098"; }
+  
 .fa-envelope:before {
     content: "\f0e0"
 }
