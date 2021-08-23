@@ -1263,6 +1263,7 @@ export default {
         company_name: "",
         company_register_code: "",
       },
+      profileDescription: "",
       popUpMsg: "",
       items: "",
       relatedFiles: [],
@@ -1296,6 +1297,7 @@ export default {
     getProfileInfo() {
       axios.post("/user/profile_info").then((response) => {
         this.currentUser = response.data;
+        this.profileDescription = this.currentUser.profile.description;
         this.isLoaded = false;
         if (this.currentUser.profile.is_company) {
           $("#company-box").collapse("show");
@@ -1374,6 +1376,7 @@ export default {
               self.certificateFilesReset = true;
               axios.post("/user/profile_info").then(function (response) {
                 self.currentUser = response.data;
+                self.profileDescription = self.currentUser.profile.description;
                 if (self.currentUser.profile.is_company) {
                   $("#company-box").collapse("show");
                 }
