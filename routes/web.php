@@ -691,7 +691,7 @@ Route::group(['middleware' => [login::class]], function () {
         'as' => 'get_user_phone_contact_list'
     ]);
 
-    Route::post('/get-user-referral-credit',[
+    Route::post('/get-user-referral-info',[
         'uses' => 'Accounting\user_controller@get_referral_credit_amount',
         'as' => 'get_user_referral_credit'
     ]);

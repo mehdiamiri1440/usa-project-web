@@ -647,6 +647,9 @@ class user_controller extends Controller
     public function get_referral_credit_amount()
     {
         $user_id = session('user_id');
+        $invited_users = [];
+
+        $wallet_balance = DB::table('myusers')->where('id',$user_id)->first()->wallet_balance;
 
         $referred_users_ids = DB::table('referred_users')
                                     ->where('myuser_id',$user_id)
@@ -655,31 +658,81 @@ class user_controller extends Controller
         if(count($referred_users_ids) == 0 ){
             return response()->json([
                 'status' => true,
-                'credit' => 0
+                'credit' => 0,
+                'invited_users' => $invited_users,
+                'wallet_balance' => $wallet_balance
             ]);
         }
 
-        $reffered_users_payment_records = DB::table('payment_logs')
+        $refered_users_payment_records = DB::table('payment_logs')
                             ->join('gateway_transactions','gateway_transactions.id','=','payment_logs.transaction_id')
                             ->where('gateway_transactions.status','SUCCEED')
                             ->whereNotNull('gateway_transactions.payment_date')
                             ->whereIn('payment_logs.myuser_id',$referred_users_ids)
                             ->pluck('gateway_transactions.price');
 
-        if(count($reffered_users_payment_records) > 0)
+        $invited_users = $this->get_the_user_referred_users($user_id);
+
+        if(count($refered_users_payment_records) > 0)
         {
-            $credit = $reffered_users_payment_records->sum();
+            $credit = $refered_users_payment_records->sum() / config('subscriptionPakage.referred-credit-divider');
 
             return response()->json([
                 'status' => true,
-                'credit' => $credit
+                'credit' => $credit,
+                'invited_users' => $invited_users,
+                'wallet_balance' => $wallet_balance
             ]);
         }
 
 
         return response()->json([
             'status' => true,
-            'credit' => 0
+            'credit' => 0,
+            'invited_users' => $invited_users,
+            'wallet_balance' => $wallet_balance
         ]);
+    }
+
+    protected function get_the_user_referred_users($user_id)
+    {
+        $users = DB::table('myusers')
+                        ->join('referred_users','referred_users.referred_user_id','=','myusers.id')
+                        ->join('profiles',function($q){
+                            $q->on('myusers.id','=','profiles.myuser_id')
+                                ->whereRaw('profiles.id in (select MAX(p.id) from profiles as p join myusers as u on p.myuser_id = u.id and p.confirmed = true group by u.id)');
+                        })
+                        ->where('referred_users.myuser_id',$user_id)
+                        ->where('profiles.confirmed',true)
+                        ->select([
+                            'myusers.id',
+                            'myusers.first_name',
+                            'myusers.last_name',
+                            'myusers.user_name',
+                            'profiles.profile_photo'
+                        ])
+                        ->orderBy('referred_users.created_at','desc')
+                        ->get();
+        
+
+        foreach($users as $user)
+        {
+            $user->credit = $this->get_user_purchase_volume($user->id) / config('subscriptionPakage.referred-credit-divider');
+        }
+
+        return $users;
+    }
+
+    protected function get_user_purchase_volume($user_id)
+    {
+        $purchase_volume = DB::table('payment_logs')
+                            ->join('gateway_transactions','gateway_transactions.id','=','payment_logs.transaction_id')
+                            ->where('gateway_transactions.status','SUCCEED')
+                            ->whereNotNull('gateway_transactions.payment_date')
+                            ->where('payment_logs.myuser_id',$user_id)
+                            ->pluck('gateway_transactions.price')
+                            ->sum();
+
+        return $purchase_volume;
     }
 }
