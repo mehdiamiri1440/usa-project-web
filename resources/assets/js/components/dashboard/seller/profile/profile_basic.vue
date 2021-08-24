@@ -881,8 +881,8 @@ textarea.error:focus + i {
     </div>
     <div class="row">
       <div class="col-xs-12 margin-15-auto">
-      <ProfileCompletion />
-    </div>
+        <ProfileCompletion />
+      </div>
     </div>
     <div class="row">
       <div class="col-xs-12 col-md-4 pull-right">
@@ -1309,7 +1309,6 @@ export default {
           $("#company-box").collapse("show");
         }
         this.sumProgressNumber();
-        this.$nextTick(() => {});
       });
     },
     RegisterBasicProfileInfo: function () {
