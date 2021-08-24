@@ -880,6 +880,11 @@ textarea.error:focus + i {
       </div>
     </div>
     <div class="row">
+      <div class="col-xs-12 margin-15-auto">
+      <ProfileCompletion />
+    </div>
+    </div>
+    <div class="row">
       <div class="col-xs-12 col-md-4 pull-right">
         <div class="box-wrapper">
           <span class="profile-badge"> %34 </span>
@@ -1046,9 +1051,6 @@ textarea.error:focus + i {
             </div>
           </div>
         </div>
-      </div>
-      <div class="col-xs-12">
-        <ProfileCompletion />
       </div>
     </div>
 
@@ -1285,6 +1287,7 @@ export default {
       completeProfileProgress: 0,
       uploadPercentage: 0,
       isLoaded: false,
+      invitedUsers: "",
     };
   },
   methods: {
@@ -1296,6 +1299,9 @@ export default {
     },
     getProfileInfo() {
       axios.post("/user/profile_info").then((response) => {
+        axios.post("/get-user-referral-info").then((response) => {
+          this.invitedUsers = response.data.invited_users;
+        });
         this.currentUser = response.data;
         this.profileDescription = this.currentUser.profile.description;
         this.isLoaded = false;
@@ -1303,6 +1309,7 @@ export default {
           $("#company-box").collapse("show");
         }
         this.sumProgressNumber();
+        this.$nextTick(() => {});
       });
     },
     RegisterBasicProfileInfo: function () {

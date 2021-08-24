@@ -39,6 +39,7 @@ p {
   color: #7e7e7e;
   margin: 13px 0 10px;
   line-height: 1.618;
+  min-height: 45px;
 }
 
 .content-button {
@@ -67,9 +68,13 @@ p {
 }
 </style>
 <template>
-  <div class="complete-the-profile padding-buttom-fixed">
+  <div class="complete-the-profile padding-buttom-fixed" v-if="itemCount < 4">
     <div class="box-title">
-      میزان تکمیل پروفایل : <span class="red-text">ضعیف</span>
+      میزان تکمیل پروفایل :
+      <span v-if="itemCount == 0" class="red-text">خیلی ضعیف</span>
+      <span v-else-if="itemCount == 1" class="yellow-text">ضعیف</span>
+      <span v-else-if="itemCount == 2" class="blue-text">متوسط</span>
+      <span v-else-if="itemCount == 3" class="green-text">خوب</span>
     </div>
     <div class="progress-item-wrapper">
       <span
@@ -130,8 +135,8 @@ p {
         </article>
       </div>
       <div
-        v-if="$parent.profileDescription.length < 200"
-        :class="{ 'ready-clone': $parent.profileDescription.length < 200 }"
+        v-if="!$parent.currentUser.profile.profile_photo"
+        :class="{ 'ready-clone': !$parent.currentUser.profile.profile_photo }"
         class="pull-right"
       >
         <article class="item">
@@ -150,7 +155,11 @@ p {
         </article>
       </div>
 
-      <div class="pull-right ready-clone">
+      <div
+        class="pull-right"
+        v-if="$parent.invitedUsers.length <= 0"
+        :class="{ 'ready-clone': $parent.invitedUsers.length <= 0 }"
+      >
         <article class="item">
           <p class="title-item">
             <i class="fa fa-share-alt brand-text"></i>
@@ -181,17 +190,22 @@ export default {
       progressItems: [0, 0, 0, 0],
       description: 0,
       verification: 0,
+      userImage: 0,
+      referral: 0,
     };
   },
   methods: {
     resetData() {
       this.description = 0;
       this.verification = 0;
+      this.userImage = 0;
+      this.referral = 0;
     },
     sumCount() {
       this.itemCount = 0;
 
-      this.itemCount = this.description + this.verification;
+      this.itemCount =
+        this.description + this.verification + this.userImage + this.referral;
     },
     updateProgress() {
       this.sumCount();
@@ -232,7 +246,15 @@ export default {
       this.loadCarosel(); //re-initialise the owl
     },
     loadCarosel() {
-      $(".owl-carousel.item-wrapper").owlCarousel({
+      let owl = $(".owl-carousel.item-wrapper");
+      let resetCssStyle = {
+        width: "initial",
+        marginRight: "auto",
+        marginLeft: "auto",
+      };
+      owl.css(resetCssStyle);
+
+      owl.owlCarousel({
         autoplay: this.autoplay ? this.autoplay : true,
         autoplayTimeout: 3000,
         loop: false,
@@ -270,6 +292,20 @@ export default {
           },
         },
       });
+
+      if (this.isDeviceMobile()) {
+        let styles = {
+          width: "400px",
+          marginRight: "-15px",
+          marginLeft: "-15px",
+        };
+
+        this.$nextTick(() => {
+          setTimeout(() => {
+            owl.css(styles);
+          }, 1000);
+        });
+      }
     },
     openImageInput() {
       $(".owl-carousel .upload-image").on("click", () => {
@@ -278,6 +314,21 @@ export default {
     },
     verificationButtonClick() {
       this.$router.push({ name: "profileBasicSellerVeficiation" });
+    },
+    isDeviceMobile: function () {
+      if (
+        navigator.userAgent.match(/Android/i) ||
+        navigator.userAgent.match(/webOS/i) ||
+        navigator.userAgent.match(/iPhone/i) ||
+        navigator.userAgent.match(/iPad/i) ||
+        navigator.userAgent.match(/iPod/i) ||
+        navigator.userAgent.match(/BlackBerry/i) ||
+        navigator.userAgent.match(/Windows Phone/i)
+      ) {
+        return true;
+      } else {
+        return false;
+      }
     },
   },
   watch: {
@@ -294,6 +345,30 @@ export default {
         this.verification = 1;
       } else {
         this.verification = 0;
+      }
+
+      if (this.$parent.currentUser.profile.profile_photo) {
+        this.userImage = 1;
+      } else {
+        this.userImage = 0;
+      }
+
+      this.updateProgress();
+    },
+    "$parent.currentUser.profile.profile_photo"(userProfileImage) {
+      if (userProfileImage) {
+        this.userImage = 1;
+      } else {
+        this.userImage = 0;
+      }
+
+      this.updateProgress();
+    },
+    "$parent.invitedUsers"(users) {
+      if (users.length > 0) {
+        this.referral = 1;
+      } else {
+        this.referral = 0;
       }
       this.updateProgress();
     },
