@@ -195,7 +195,7 @@
   font-weight: bold;
   width: initial;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
-  border-radius: 4px;
+  border-radius: 12px;
 }
 
 .input-text-wrapper {
