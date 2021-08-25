@@ -645,7 +645,7 @@
   color: #21ad92;
 }
 .message-button-wrapper {
-border-top: 1px solid rgba(0,0,0,0.04);
+  border-top: 1px solid rgba(0, 0, 0, 0.04);
   margin: 10px -10px -5px;
   padding: 10px;
   overflow: hidden;
@@ -668,7 +668,7 @@ border-top: 1px solid rgba(0,0,0,0.04);
 }
 
 .message-button-wrapper.link-button button {
-  background: linear-gradient(-45deg, #00c569, #23d5ab, #21ad93, #23a6d5);
+  background: linear-gradient(-45deg, #fea858, #ed765e, #fea858);
   animation: gradient 2s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
   background-size: 400% 400%;
 }
