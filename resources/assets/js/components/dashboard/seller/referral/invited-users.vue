@@ -183,6 +183,7 @@
 .user-price,
 .empty-list > p {
   font-size: 17px;
+  line-height: 1.618;
   font-weight: 500;
 }
 
@@ -197,6 +198,10 @@
 .invited-users ul > li {
   overflow: hidden;
   padding-top: 20px;
+}
+
+.invited-users ul > li:last-of-type .user-info {
+  border-bottom: none;
 }
 
 .users-wrapper {
@@ -237,9 +242,13 @@
     direction: rtl;
     transform: translate(0, 0);
     top: 0;
-    padding-top: 20px;
+    padding-top: 0;
     width: 100%;
     left: 0;
+  }
+
+  .special-package {
+    padding: 0 25px;
   }
 }
 </style>
@@ -283,18 +292,24 @@
         <div class="invited-users">
           <div
             class="users-wrapper"
-            v-if="referralUsers.invited_users.lentgh && !referralLoader"
+            v-if="referralUsers.invited_users.length && !referralLoader"
           >
             <p class="invited-title">مدعوین شما</p>
             <ul>
-              <li v-for="(item, i) in 5" :key="i">
+              <li
+                v-for="(item, index) in referralUsers.invited_users"
+                :key="index"
+              >
                 <div class="user-icon">
                   <i class="fa fa-user-circle"></i>
                 </div>
                 <div class="user-info">
-                  <p class="user-name">محمدامین</p>
+                  <p
+                    class="user-name"
+                    v-text="item.first_name + ' ' + item.last_name"
+                  ></p>
                   <p class="user-price light-green-text">
-                    150,000
+                    {{ getNumberWithCommas(item.credit) }}
                     <span class="brand-text">تومان</span>
                   </p>
                 </div>
