@@ -579,6 +579,8 @@ Route::group(['middleware' => [login::class]], function () {
 
      });
 
+     ////////////////////////////////////////////////
+
      Route::post('/profile/add-comment',[
         'uses' => 'Accounting\comment_controller@post_comment',
         'as' => 'post_comment_on_user_porfile'
@@ -603,6 +605,8 @@ Route::group(['middleware' => [login::class]], function () {
         'uses' => 'Accounting\comment_controller@delete_comment',
         'as'   => 'delete_user_comment'
     ]);
+
+    ////////////////////////////////////////////
 
     Route::post('/get_special_users_info',[
         'uses' => 'General\marketing_data_controller@get_special_users_info',
@@ -636,6 +640,8 @@ Route::group(['middleware' => [login::class]], function () {
         'uses' => 'Messenger\channel_controller@get_channel_contents'
     ]);
 
+    //////////////////////////////////////////////
+
     Route::post('/get_seller_phone_number',[
         'uses' => 'Accounting\phone_number_controller@get_seller_phone_number',
         'as' => 'get_seller_phone_number'
@@ -655,6 +661,8 @@ Route::group(['middleware' => [login::class]], function () {
         'uses' => 'Accounting\phone_number_controller@get_my_phone_number_viewers_list',
         'as' => 'get_my_phone_number_viewers_list'
     ]);
+
+    /////////////////////////////////////////////////////
     
     Route::post('/get_my_account_balance',[
         'uses' => 'Accounting\user_controller@get_my_account_balance',

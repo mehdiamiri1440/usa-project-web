@@ -9,6 +9,7 @@ use Carbon\Carbon;
 
 class comment_controller extends Controller
 {
+    // name violation this end point set rating or text comment or both and this is not what its name tell  
     public function post_comment(Request $request)
     {
         $this->validate($request,[
@@ -18,7 +19,7 @@ class comment_controller extends Controller
         ]);
 
         $commenter_id = session('user_id');
-        $user_id = $request->user_id;
+        $user_id = $request->user_id;// better name is commentee_id
 
         if($this->is_user_authorized($user_id,$commenter_id) == false)
         {
@@ -39,7 +40,7 @@ class comment_controller extends Controller
 
 
         $comment['commenter_id'] = $commenter_id;
-        $comment['myuser_id'] = $request->user_id;
+        $comment['myuser_id'] = $request->user_id; // clould use $user_id insted
         $comment['created_at'] = $comment['updated_at'] = Carbon::now();
 
         DB::table('user_comments')
@@ -51,6 +52,41 @@ class comment_controller extends Controller
         ],201);
     }
 
+    // what kind of authorizathion would you mean ?
+    protected function is_user_authorized($user_id,$commenter_id)
+    {
+        // indention
+        $msg_records = DB::table('messages')
+            ->where([
+                ['sender_id','=',$commenter_id],
+                ['receiver_id','=',$user_id]
+            ])->orWhere([
+                ['sender_id','=',$user_id],
+                ['receiver_id','=',$commenter_id]
+            ])->get();
+        // count of records could have been gotten out of query builder some cpu or interpreter instractions wont heppen this way
+        if($msg_records->count() > 0)
+        {
+            $comment_record = DB::table('user_comments')
+                                    ->where([
+                                        ['commenter_id','=',$commenter_id],
+                                        ['myuser_id','=',$user_id]
+                                    ])
+                                    ->first();
+            if($comment_record){
+                return false; // user already had left a comment on this user
+            }
+
+            return true;
+        }     
+        else{
+            return false;
+        } 
+    }
+
+    ////////////////////////////////////////////////////////////
+
+    // name violation can not understand if this end point return the comments who the given user id sends to others or the comments who the others put for this user by the name of this function
     public function get_user_comments(Request $request)
     {
         
@@ -60,6 +96,7 @@ class comment_controller extends Controller
 
         $user_id = $request->user_id;
 
+        // this query can have limitations for performance reasons
         $comments = DB::table('user_comments')
                         ->join('myusers','myusers.id','=','user_comments.commenter_id')
                         ->where([
@@ -83,6 +120,7 @@ class comment_controller extends Controller
                         ->get();
 
         $comments->each(function($item){
+            // the following function can happens inside subquery in this we dont need to query database for every record
             $likes_info = $this->get_comment_likes_count($item->c_id);
             $item->likes = $likes_info['likes'];
             $item->already_liked = $likes_info['already_liked'];
@@ -99,7 +137,7 @@ class comment_controller extends Controller
             'rating' => $rating_score_array
         ],200);
     }
-
+    // name violation this end point do something more than returning like counts in already_liked part
     protected function get_comment_likes_count($comment_id)
     {
         $records = DB::table('user_comment_likes')
@@ -108,6 +146,8 @@ class comment_controller extends Controller
                                 ->get();
 
         $result['likes'] = $records->count();
+        // question why do we need to find if user logged in here unless proper middleware wont work
+        // two following lines can get combine
         if(session()->has('user_id')){
             $user_id = session('user_id');
 
@@ -132,6 +172,7 @@ class comment_controller extends Controller
 
     protected function get_deleted_comments_count($user_id)
     {
+        // could return instantly without putting in a variable
         $cnt = DB::table('user_comments')
                 ->where('myuser_id',$user_id)
                 ->where('deleted_by_owner',true)
@@ -142,7 +183,29 @@ class comment_controller extends Controller
 
         return $cnt;
     }
+    // name violation this end point returns avrage rating score and total count of scores
+    // this method did not call in route part and should be protected
+    public function get_user_avg_rating_score($user_id)
+    {
+        $records = DB::table('user_comments')
+                        ->where([
+                            ['myuser_id','=',$user_id],
+                            ['rating_score','>',0],
+                        ])->select('rating_score')
+                        ->get();
+        
+        
+        $result = [
+            'total_count' => $records->count(),
+            'avg_score' => round($records->avg('rating_score'),1)
+        ];
 
+        return $result;
+    }
+
+    //////////////////////////////////////////////////////
+
+    // name violation action in likes can interprete as something other than like or dislike something (like do some actions with current likes that we have now)
     public function do_like_actions(Request $request)
     {
         $this->validate($request,[
@@ -153,6 +216,7 @@ class comment_controller extends Controller
         $user_id = session('user_id');
         $comment_id = $request->comment_id;
         
+        // at first seen i could not recognize the word action here can be mean like or dislike
         if($this->did_user_already_like_the_comment($user_id,$comment_id) == true && $request->action == 1){
             return response()->json([
                 'status' => false,
@@ -176,12 +240,12 @@ class comment_controller extends Controller
                             ->where([
                                 ['myuser_id','=',$user_id],
                                 ['comment_id','=',$comment_id]
-                            ])->delete();
+                            ])->delete();// warning hard delete likes
         }
 
         return response()->json([
             'status' => true,
-            'msg' => 'done!'
+            'msg' => 'done!' // this response message in this file does not follow general rules (there is no rule for positive and negative messages alongside each other)
         ],200);
         
     }
@@ -201,6 +265,9 @@ class comment_controller extends Controller
         return false;
     }
 
+    //////////////////////////////////////////////////
+
+    // name of the following function did not sence specially on_the_user part
     public function is_user_authorized_to_post_comment_on_the_user(Request $request)
     {
         $this->validate($request,[
@@ -209,7 +276,7 @@ class comment_controller extends Controller
 
         $user_id = $request->user_id;
         $commenter_id = session('user_id');
-
+        // this query also happens in (is_user_authorized()) part of this controller too
         $msg_records = DB::table('messages')
             ->where([
                 ['sender_id','=',$commenter_id],
@@ -221,6 +288,7 @@ class comment_controller extends Controller
 
         if($msg_records->count() > 0)
         {
+            // this query also happens in (is_user_authorized()) part of this controller too
             $comment_record = DB::table('user_comments')
                                     ->where([
                                         ['commenter_id','=',$commenter_id],
@@ -248,56 +316,14 @@ class comment_controller extends Controller
         } 
     }
 
-    protected function is_user_authorized($user_id,$commenter_id)
-    {
-        $msg_records = DB::table('messages')
-            ->where([
-                ['sender_id','=',$commenter_id],
-                ['receiver_id','=',$user_id]
-            ])->orWhere([
-                ['sender_id','=',$user_id],
-                ['receiver_id','=',$commenter_id]
-            ])->get();
+    //////////////////////////////////////////////////////////////
 
-        if($msg_records->count() > 0)
-        {
-            $comment_record = DB::table('user_comments')
-                                    ->where([
-                                        ['commenter_id','=',$commenter_id],
-                                        ['myuser_id','=',$user_id]
-                                    ])
-                                    ->first();
-            if($comment_record){
-                return false; // user already had left a comment on this user
-            }
-
-            return true;
-        }     
-        else{
-            return false;
-        } 
-    }
-
-    public function get_user_avg_rating_score($user_id)
-    {
-        $records = DB::table('user_comments')
-                        ->where([
-                            ['myuser_id','=',$user_id],
-                            ['rating_score','>',0],
-                        ])->select('rating_score')
-                        ->get();
-        
-        
-        $result = [
-            'total_count' => $records->count(),
-            'avg_score' => round($records->avg('rating_score'),1)
-        ];
-
-        return $result;
-    }
-
+    // name violation i can not understand this function will delete a user comment by request of the user or this comment will delete by admin for some reason also it is soft delete
     public function delete_comment(Request $request)
     {
+        // validation response in the time that this comment is not present in the database at all is difrent from when the comment is soft deleted becuase 
+        // validation checks whether the comment id is present in the database or not but doesnt care about soft delete flag
+
         $this->validate($request,[
             'c_id' => 'required|exists:user_comments,id'
         ]);
@@ -319,3 +345,10 @@ class comment_controller extends Controller
         ],200);
     }
 }
+/*
+    conclusion :
+    
+    this file can be convert into three different controllers with one trait
+
+
+*/ 
