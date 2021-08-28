@@ -61,7 +61,9 @@ class profile_controller extends Controller
         'created_at',
         'updated_at',
     ];
-
+    // name violation this function only modifiy buyer or seller profile and its not contain its name and does not grant any idea about admin profile
+    // profile modification does not return anything as modifiyed status
+    // name violation this function create new profile if not exist and this is not what its name says
     public function profile_modification(Request $request)
     {
         $validation_rules = $this->set_user_profile_modification_rules($request);
@@ -69,7 +71,36 @@ class profile_controller extends Controller
 
         $user_id = session('user_id');
 
+        // $profile = profile::find()->where('myuser_id',$user_id)->first();
+
+        // if(!$profile){
+        //     $profile = new profile();
+        //     $profile->myuser_id = $user_id;
+            
+        // }else{
+        //     $profile->confirmed = false;
+        // }
+
+        // foreach ($this->profile_fields_array as $field_name) {
+        //     if($request->has($field_name)){
+        //         $profile->$field_name = $request->$field_name;
+        //     }
+            
+        // }
+        // $profile->save();
+
+        // todo adding file handdling part is required
+        
+
         $last_unconfirmed_profile_record = $this->get_user_last_profile_record(false, $user_id);
+        /*
+        something vired happens here 
+        first current profile object retrives from database as eloquent model 
+        second new profile model created wihout retriving any records and vaules have been set into it from two different conditions
+        copying a whole profile model while the original stage model has all the informations
+        */
+        
+        
 
         if ($last_unconfirmed_profile_record) {
             $action = 'Edit';
@@ -81,6 +112,7 @@ class profile_controller extends Controller
                 $action = 'Edit';
                 $profile_object = new profile();
 
+                // object of type model have stage information for both old and new informations that we change so you cloud use that stage insted of copying
                 $this->copy_profile_object_fields_listed_in_profile_fields_array($profile_object, $last_confirmed_profile_record);
 
                 $profile_object->confirmed = false;
@@ -96,63 +128,7 @@ class profile_controller extends Controller
         }
     }
 
-    protected function change_user_profile_record(&$request, $profile_record_object, $last_confirmed_profile_record_id = null)
-    {
-        $company_flag = false;
-        //checking for all fields except files
-        foreach ($this->profile_fields_array as $field_name) {
-            if ($request->has($field_name)) {
-                if ($field_name == 'is_company' && $request->$field_name == 0) {
-                    $profile_record_object->company_name = '';
-                    $profile_record_object->company_register_code = '';
-
-                    $profile_record_object->$field_name = $request->$field_name;
-
-                    $company_flag = true;
-                } else {
-                    if ($field_name == 'company_name' || $field_name == 'company_register_code') {
-                        if ($company_flag == false) {
-                            $profile_record_object->$field_name = $request->$field_name;
-                        }
-                    } else {
-                        $profile_record_object->$field_name = $request->$field_name;
-                    }
-                }
-            }
-        }
-
-        //cheking for profile pic
-        if ($request->hasFile('profile_photo')) {
-            $file_path = $this->store_photo_file($request->profile_photo, $directory_to_save = 'profile_photos');
-
-            $profile_record_object->profile_photo = $file_path;
-        }
-
-        if ($request->filled('photos_to_remove')) {
-            $photos_file_path = json_decode($request->photos_to_remove);
-
-            foreach ($photos_file_path as $photo_path) {
-                $this->soft_delete_the_photo_from_profile_media($photo_path);
-            }
-        }
-
-        try {
-            $profile_record_object->myuser_id = session('user_id');
-            $profile_record_object->save();
-
-            if (!is_null($last_confirmed_profile_record_id)) {
-                $this->copy_old_profile_record_related_media_if_exist_into_new_record($last_confirmed_profile_record_id, $profile_record_object);
-            }
-
-            $this->save_user_profile_other_images_beside_profile_image($request, 'certificate_image_count', 'certificates', $profile_record_object);
-            $this->save_user_profile_other_images_beside_profile_image($request, 'related_image_count', 'relateds', $profile_record_object);
-
-            return true;
-        } catch (\Exception $e) {
-            return $e->getMessage();
-        }
-    }
-
+    // name violation this function just return some rules not seting anything
     protected function set_user_profile_modification_rules($request)
     {
         $rules = [
@@ -186,25 +162,14 @@ class profile_controller extends Controller
 
         return $rules;
     }
-
-    protected function store_photo_file($photo_data, $directory_to_save)
-    {
-        $file_path = $photo_data->store($directory_to_save);
-
-        if($directory_to_save == 'profile_photos'){
-            $media_controller_object = new media_controller();
-
-            $thumbnail_path = storage_path('app/public/'.$file_path);
-            $media_controller_object->create_thumbnail($thumbnail_path,150,150);
-        }
-        
-        return $file_path;
-    }
-
+    // name violation: this function tends to return profile record base on confirmation status or profile regardless of confirmation ? this function can have three diffrent functinality and its not represented by its name
+    // null confirm_status only used once on this controller
     protected function get_user_last_profile_record($confirm_status, $user_id)
     {
+        // interpreter logic: boolean could be sent and skip one step of comparing 
+        // query can be build only by one line if, less interpration time is the result
         if ($confirm_status !== null) {
-            try {
+            try {// no need for try catch
                 $last_profile_record = profile::where('myuser_id', $user_id)
                             ->where('confirmed', $confirm_status)
                             ->get()
@@ -213,7 +178,7 @@ class profile_controller extends Controller
                 return $e;
             }
         } else {
-            try {
+            try {// no need for try catch
                 $last_profile_record = profile::where('myuser_id', $user_id)
                 ->get()
                 ->last();
@@ -221,12 +186,85 @@ class profile_controller extends Controller
                 return $e;
             }
         }
-
+        // failing in this method can result returning null acording to its logic
         return $last_profile_record;
     }
+    // this part acts differently with is campany and did not described in function name
+    protected function change_user_profile_record(&$request, $profile_record_object, $last_confirmed_profile_record_id = null)
+    {
+        $company_flag = false;
+        //checking for all fields except files
+        foreach ($this->profile_fields_array as $field_name) {
+            if ($request->has($field_name)) {
+
+                // this condition does not describe something logically comparing to program logic
+                if ($field_name == 'is_company' && $request->$field_name == 0) {
+                    $profile_record_object->company_name = '';
+                    $profile_record_object->company_register_code = '';
+
+                    $profile_record_object->$field_name = $request->$field_name;
+
+                    $company_flag = true;
+                } else {
+                    if ($field_name == 'company_name' || $field_name == 'company_register_code') {
+                        if ($company_flag == false) {
+                            $profile_record_object->$field_name = $request->$field_name;
+                        }
+                    } else {
+                        $profile_record_object->$field_name = $request->$field_name;
+                    }
+                }
+            }
+        }
+
+        //cheking for profile pic
+        if ($request->hasFile('profile_photo')) {
+            // unnessessery variable declaration
+            $file_path = $this->store_photo_file($request->profile_photo, $directory_to_save = 'profile_photos');
+
+            $profile_record_object->profile_photo = $file_path;
+        }
+
+        if ($request->filled('photos_to_remove')) {
+            $photos_file_path = json_decode($request->photos_to_remove);
+
+            foreach ($photos_file_path as $photo_path) {
+                // while using model here you can prevent loop and send it an array this way one query will do all the stuffs for all pahtes
+                $this->soft_delete_the_photo_from_profile_media($photo_path);
+            }
+        }
+
+        try {
+            $profile_record_object->myuser_id = session('user_id');
+            $profile_record_object->save();
+
+            if (!is_null($last_confirmed_profile_record_id)) {
+                $this->copy_old_profile_record_related_media_if_exist_into_new_record($last_confirmed_profile_record_id, $profile_record_object);
+            }
+
+            $this->save_user_profile_other_images_beside_profile_image($request, 'certificate_image_count', 'certificates', $profile_record_object);
+            $this->save_user_profile_other_images_beside_profile_image($request, 'related_image_count', 'relateds', $profile_record_object);
+
+            return true;// this function return value does not used anywhere 
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
+    protected function copy_profile_object_fields_listed_in_profile_fields_array($profile_object_copy_to, $profile_object_copy_from)
+    {
+        foreach ($this->profile_fields_array as $field_name) {
+            $profile_object_copy_to->$field_name = $profile_object_copy_from->$field_name;
+        }
+    }
+    
+    
+
+    
 
     protected function soft_delete_the_photo_from_profile_media($photo_path)
     {
+        // unnessessary variable declaration
         $photo_related_record = profile_media::where('file_path', $photo_path)
             ->delete();
     }
@@ -241,22 +279,32 @@ class profile_controller extends Controller
             for ($index = 0; $index < $image_count; ++$index) {
                 $image_name = "{$image_prefix}_{$index}";
                 if ($request->hasFile($image_name)) {
-                    $file_path = $this->store_photo_file($request->$image_name, $directory_to_save);
+                    $file_path = $this->store_photo_file($request->$image_name, $directory_to_save);// failur of this method can result in unwanted records in database
 
                     $photo = new profile_media();
                     $photo->file_path = $file_path;
-                    $profile_record_object->profile_media()->save($photo);
+                    $profile_record_object->profile_media()->save($photo);// save can be done after loop
                 }
             }
         }
     }
-
-    protected function copy_profile_object_fields_listed_in_profile_fields_array($profile_object_copy_to, $profile_object_copy_from)
+    
+    // name violation: this function do something more than just storing photos
+    protected function store_photo_file($photo_data, $directory_to_save)
     {
-        foreach ($this->profile_fields_array as $field_name) {
-            $profile_object_copy_to->$field_name = $profile_object_copy_from->$field_name;
+        $file_path = $photo_data->store($directory_to_save);// what happens if laravel could not store file ?
+        // resizing can be done by queue for performance reasons
+        if($directory_to_save == 'profile_photos'){
+            $media_controller_object = new media_controller();
+            
+            $thumbnail_path = storage_path('app/public/'.$file_path);// warning: security of this part does not effect laravel documentation ask us to store tings in storage and create symbolic links to public folder
+            $media_controller_object->create_thumbnail($thumbnail_path,150,150);
         }
+        
+        return $file_path;
     }
+
+    
 
     protected function copy_old_profile_record_related_media_if_exist_into_new_record($old_profile_record_id, $new_profile_record)
     {
@@ -264,22 +312,28 @@ class profile_controller extends Controller
                                             ->select('file_path')
                                             ->get();
 
-        $old_media_count = $old_media_photos_path->count();
+        $old_media_count = $old_media_photos_path->count();// this line is useless
 
         foreach ($old_media_photos_path as $key => $value) {
             $photo = new profile_media();
             $photo->file_path = $value->file_path;
 
-            $new_profile_record->profile_media()->save($photo);
+            $new_profile_record->profile_media()->save($photo);// this line can be done after loop with create method
         }
     }
 
     //public method
+    // name violation all related contents is ambiguous also this function excludes some information 
+    // too long function 
     public function get_last_profile_info_with_all_related_content(Request $request)
     {
         $confirmed_status = $request->confirmed;
         $result = array();
+        /*
+            confirmation have three different status but its not a proper way to decide base on false true or null 
 
+            dplicate code fragments end of all conditions below
+        */
         if ($confirmed_status == true) {
             $user_id = null;
             if ($request->filled('user_name')) {
@@ -299,6 +353,7 @@ class profile_controller extends Controller
 
             $last_confirmed_profile_record = $this->get_user_last_profile_record(true, $user_id);
 
+            // duplicate code fragment
             $result = $this->fill_profile_related_data($last_confirmed_profile_record);
 
             $result['user_info'] = collect(myuser::find($user_id))
@@ -315,6 +370,7 @@ class profile_controller extends Controller
             $result['user_info'] = collect(myuser::find($user_id))
                 ->except($this->user_fields_exclude_array);
         } else {
+            // duplicate code fragment
             if (!session()->has('user_id')) {
                 return redirect('/login');
             }
@@ -369,7 +425,7 @@ class profile_controller extends Controller
             ]);
         }
     }
-
+    // name violation: get user is "from" "given" user name  
     protected function get_user_id_for_the_user_name($user_name)
     {
         $user_info = myuser::where('user_name', $user_name)
@@ -382,7 +438,7 @@ class profile_controller extends Controller
             return null;
         }
     }
-
+    // name violation: what is related data ?
     protected function fill_profile_related_data(&$last_profile_record)
     {
         if ($last_profile_record) {
@@ -395,6 +451,7 @@ class profile_controller extends Controller
                                     ->select('file_path')
                                     ->get();
 
+            // can be done by ->toArray() from query builder
             $result['certificates'] = $this->get_file_path_array($certificates);
             $result['relateds'] = $this->get_file_path_array($relateds);
 
@@ -438,11 +495,13 @@ class profile_controller extends Controller
     }
 
     //public method
+    // name violation: all related content is ambiguous 
     public function get_last_profile_info_with_all_related_content_by_user_name(Request $request)
     {
         $result = array();
         $user_id = $this->get_user_id_for_the_user_name($request->user_name);
 
+        // this return value does not tell a proper message as api response
         if (is_null($user_id)) {
             return abort(404);
         }
@@ -477,11 +536,11 @@ class profile_controller extends Controller
         ]);
 
         $user_record = myuser::where('user_name', $request->user_name)
-                            ->get()
+                            ->get()// first() is also do get() and ultimately the return result is from first
                             ->first();
 
         if (!$user_record) {
-            return abort(404);
+            return abort(404);// not a proper message for api
         }
 
         $user_id = $user_record->id;
@@ -490,7 +549,7 @@ class profile_controller extends Controller
             $user_statistics = $this->get_seller_statistics($user_id, $user_record->active_pakage_type);
         } elseif ($user_record->is_buyer) {
             $user_statistics = $this->get_buyer_statistics($user_id);
-        } else {
+        } else {// this else does not seem to happen ever, since is_seller is boolean
             return response()->json([
                 'status' => false,
                 'msg' => 'user type is undefined!',
@@ -517,13 +576,13 @@ class profile_controller extends Controller
                                     ->get()
                                     ->count();
 
-        $reputation_controller_object = new reputation_controller();
+        $reputation_controller_object = new reputation_controller();// trait
 
         $reputation_score = $reputation_controller_object->calculate_user_reputation_score($user_id);
 
-        $response_rate = $this->get_user_response_rate($user_id);
+        $response_rate = $this->get_user_response_rate($user_id);// can be done by other threds
 
-        $user_comment_controller = new comment_controller();
+        $user_comment_controller = new comment_controller();// trait
         $rating_info = $user_comment_controller->get_user_avg_rating_score($user_id);
 
         $result_array = [
@@ -553,7 +612,7 @@ class profile_controller extends Controller
         $reputation_controller_object = new reputation_controller();
         $reputation_score = $reputation_controller_object->calculate_user_reputation_score($user_id);
 
-        $response_rate = $this->get_user_response_rate($user_id);
+        $response_rate = $this->get_user_response_rate($user_id);// can be done by other threds
 
         $user_comment_controller = new comment_controller();
         $rating_info = $user_comment_controller->get_user_avg_rating_score($user_id);
@@ -570,6 +629,7 @@ class profile_controller extends Controller
         return $result_array;
     }
 
+    // zombie function
     public function add_a_confirmed_profile_record_for_user($user)
     {
         $profile_record = new profile();
@@ -597,7 +657,7 @@ class profile_controller extends Controller
     }
 
     //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
+    // zombie function
     public function migrate_users()
     {
         $users = myuser::all();
@@ -619,6 +679,7 @@ class profile_controller extends Controller
 
     protected function add_a_confirmed_profile_record_for_user_migration($user, $profile_record = null)
     {
+        // duplicate code fragment
         if ($profile_record == null) {
             $profile_record = new profile();
 
@@ -660,7 +721,7 @@ class profile_controller extends Controller
     public function get_user_last_confirmed_profile_photo(Request $request)
     {
         $this->validate($request, [
-            'user_id' => 'required|integer',
+            'user_id' => 'required|integer',// does not check if user id is exist in database
         ]);
 
         $profile_photo = profile::where('myuser_id', $request->user_id)
@@ -677,6 +738,7 @@ class profile_controller extends Controller
     }
 
     //public method
+    // zombie method the related route commnted out in web.php
     public function increment_user_profile_visit_count(Request $request)
     {
         $this->validate($request, [
@@ -737,7 +799,7 @@ class profile_controller extends Controller
     {
         $user_name = strip_tags($user_name);
 
-        $profile_info = DB::table('myusers')
+        $profile_info = DB::table('myusers')// order by does not effect because you find user base on user_name and it is unique
                                 ->join('profiles','profiles.myuser_id','=','myusers.id')
                                 ->where('myusers.user_name',$user_name)
                                 ->where('profiles.confirmed',true)
@@ -756,3 +818,24 @@ class profile_controller extends Controller
         
     }
 }
+/*
+    conclusion:
+        a trait for file handling with related queues needed to highly increase performance
+
+        a big naming issue is is_seller because it does not tell us that if the user is not seller then the oposite is buyer 
+        and does not have anything to say about not registred
+
+        this file seem to have logical related paters with other parts of project and because of that changing it could result in changing other  places that i could not recognize
+
+        changing user name to user id can be done with ...
+
+        in some conditions changing the function place will result in unwanted git behaviour : last commit time and following information and changes inside functoin could get missed
+
+        statistics can be done by other threds
+
+        responses in this controller does not follow specific rules
+
+        this controller can refactor into seprate end points with their related threds 
+
+
+*/

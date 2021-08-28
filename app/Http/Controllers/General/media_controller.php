@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Image;
 use DB;
 
+//  can change to trait
 class media_controller extends Controller
 {
     public function create_thumbnail($path, $width, $height)

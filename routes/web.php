@@ -1154,7 +1154,7 @@ Route::post('/get_wp_posts', [
 ]);
 
 
-Route::get('download-media','General\media_controller@download_media');
+Route::get('download-media','General\media_controller@download_media');// download media does not exist in media_controller
 
 
 // Route::group(['middleware' => [cors::class]], function () {
