@@ -1,6 +1,7 @@
 <template>
   <div>
     <header-master-layouts
+      v-if="$route.name != 'invite'"
       :assets="assets"
       :user_id="userId"
       :is_seller="isSeller"
@@ -11,6 +12,7 @@
       :login_page_path="userLogoutPath"
       :categoryList="categoryList"
     />
+    <InviteHeaderMasterLayouts v-else />
     <CategoriesModal
       :categoryList="categoryList"
       :modalSubCategory="modalSubCategory"
@@ -32,12 +34,14 @@
 
 <script>
 import HeaderMasterLayouts from "../../components/layouts/header/header";
+import InviteHeaderMasterLayouts from "../../components/layouts/header/invite-header.vue";
 import FooterMasterLayouts from "../../components/layouts/footer/footer";
 import CategoriesModal from "../../components/layouts/main/main_components/categories-modal.vue";
 
 export default {
   components: {
     HeaderMasterLayouts,
+    InviteHeaderMasterLayouts,
     FooterMasterLayouts,
     CategoriesModal,
   },
