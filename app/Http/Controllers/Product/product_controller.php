@@ -46,7 +46,7 @@ class product_controller extends Controller
     ];
     protected $profile_info_sent_by_product_array = [
         'profiles.profile_photo',
-        'profiles.description',
+        'profiles.description as profile_description',
     ];
 
     protected $product_register_fields_array = [
