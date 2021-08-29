@@ -7,10 +7,13 @@ use App\Http\Controllers\Controller;
 use DB;
 use Carbon\Carbon;
 use App\Models\myuser;
-use App\Http\Controllers\Payment\wallet_controller;
+use App\Http\Controllers\Payment\wallet;
 
 class phone_number_controller extends Controller
 {
+    
+    use wallet;
+
     protected $phone_number_viewers_list = [
         'myusers.id',
         'myusers.first_name',
@@ -19,6 +22,8 @@ class phone_number_controller extends Controller
         'phone_number_view_logs.is_free',
         'phone_number_view_logs.created_at'
     ];
+
+    ///////////////////////////////////////////////////
 
     public function get_seller_phone_number(Request $request)
     {
@@ -36,10 +41,7 @@ class phone_number_controller extends Controller
         }
 
         $viewer_user_id = session('user_id');
-        // magic methods used for accessing variables from request more than one time
-
-        // this part can happens in async format or from seprate end points as there is some seprate conditions but all of them shuold have true logic resualt
-        // name violation what related records ?
+       
         $related_record = DB::table('myusers')
                                 ->join('products','products.myuser_id','=','myusers.id')
                                 ->whereNull('products.deleted_at')
@@ -51,7 +53,6 @@ class phone_number_controller extends Controller
                                     return $q = $q->where('myusers.wallet_balance','>=',config('subscriptionPakage.phone-number.view-price'))
                                                     ->orWhere('myusers.active_pakage_type','>',0)
                                                     ->orWhereExists(function($q) use($viewer_user_id,$request){
-                                                        // question why does not return $q  ?
                                                         $q->select(DB::raw(1))
                                                             ->from('leads')
                                                             ->whereRaw("leads.buyer_id = $viewer_user_id and leads.seller_id = {$request->s_id} and leads.related_product_id = {$request->p_id}");
@@ -71,14 +72,7 @@ class phone_number_controller extends Controller
         
         if($this->does_viewer_already_seen_the_user_phone_number($viewer_user_id,$related_record->id) === false){
 
-            $viewer_daily_access_count = DB::table('phone_number_view_logs')
-                                                ->where('viewer_id',$viewer_user_id)
-                                                ->whereBetween('created_at',[Carbon::today(),Carbon::tomorrow()])
-                                                ->groupBy('myuser_id')
-                                                ->get()
-                                                ->count();
-    
-            if($viewer_daily_access_count > config('subscriptionPakage.phone-number.max-daily-access-count')){
+            if($this->does_viewer_daily_access_count_is_more_than_max_viewer_daily_access_count($viewer_user_id)){
                 return response()->json([
                     'status' => false,
                     'msg' => 'سقف تعداد روزانه دسترسی شما به شماره تماس کاربران پر شده است. لطفا پیام ارسال کنید.'
@@ -88,9 +82,7 @@ class phone_number_controller extends Controller
             if($related_record->active_pakage_type == 0){
                 $this->insert_phone_number_view_log_record($viewer_user_id,$request->s_id,'SELLER',$request->item,false);
                 
-                // can be use as trait
-                $wallet_controller_object = new wallet_controller();
-                $wallet_controller_object->insert_expendig_log_record(1,$request->s_id);
+                $this->insert_expendig_log_record(1,$request->s_id);
             }
             else{
                 $this->insert_phone_number_view_log_record($viewer_user_id,$request->s_id,'SELLER',$request->item,true);
@@ -104,52 +96,7 @@ class phone_number_controller extends Controller
             'status' => true,
             'phone' => $related_record->phone,
         ],200);
-        // conclusion : i did not get what happens if the user have free account or not by the name of functions or variables
-    }
-
-
-    // this function called more than one time 
-    protected function does_viewer_already_seen_the_user_phone_number($viewer_id,$user_id)
-    {
-        // cout can be chaned in query builder for performance reason
-        $log_record = DB::table('phone_number_view_logs')
-                                ->where('viewer_id',$viewer_id)
-                                ->where('myuser_id',$user_id)
-                                ->get();
-
-        if(count($log_record) > 0){
-            return true;
-        }
-
-        return false;
-    }
-
-    // this function can be done by queue for performance reasons
-    protected function insert_phone_number_view_log_record($viewer_id,$user_id,$user_role,$item,$is_free = false)
-    {
-        $now = Carbon::now();
-
-        $viewer_user_record = myuser::find($viewer_id);
-
-        // security warning  could result in failer if the user change its role while this process happens
-        if($viewer_user_record->is_buyer == true){
-            $viewer_role = 'BUYER';
-        }
-        else{
-            $viewer_role = 'SELLER';
-        }
-        // can be seprate into two seprate tables base on item it make sence when count of records related to finding user access status in main end point
-        DB::table('phone_number_view_logs')
-                    ->insert([
-                        'created_at' => $now,
-                        'updated_at' => $now,
-                        'viewer_role' => $viewer_role,
-                        'user_role' => $user_role,
-                        'viewer_id' => $viewer_id,
-                        'myuser_id' => $user_id,
-                        'related_item' => $item,
-                        'is_free' => $is_free
-                    ]);
+        
     }
 
     ////////////////////////////////////////////
@@ -162,10 +109,11 @@ class phone_number_controller extends Controller
             'item' => 'required|in:BUYAD,PROFILE',
         ]);
 
-        $viewr_user_record = myuser::find(session('user_id'));
+        $user_id = session('user_id');
+        $viewr_user_record = myuser::find($user_id);
         $buyAd_id = $request->ba_id;
         $buyer_id = $request->b_id;
-        $user_id = session('user_id');
+        
 
         if($viewr_user_record && $viewr_user_record->active_pakage_type == 0){
             return response()->json([
@@ -201,18 +149,9 @@ class phone_number_controller extends Controller
             ],404);
         }
 
-        // duplicate code fragment in (get_seller_phone_number) and here
         if($this->does_viewer_already_seen_the_user_phone_number(session('user_id'),$related_record->id) === false){
-
-            // this query also happens in (get_seller_phone_number) 
-            $viewer_daily_access_count = DB::table('phone_number_view_logs')
-                                                ->where('viewer_id',session('user_id'))
-                                                ->whereBetween('created_at',[Carbon::today(),Carbon::tomorrow()])
-                                                ->groupBy('myuser_id')
-                                                ->get()
-                                                ->count();
     
-            if($viewer_daily_access_count > config('subscriptionPakage.phone-number.max-daily-access-count')){
+            if($this->does_viewer_daily_access_count_is_more_than_max_viewer_daily_access_count(session('user_id'))){
                 return response()->json([
                     'status' => false,
                     'msg' => 'سقف تعداد روزانه دسترسی شما به شماره تماس کاربران پر شده است. لطفا پیام ارسال کنید.'
@@ -220,15 +159,11 @@ class phone_number_controller extends Controller
             }  
         }
 
-        $already_replied_to_the_buyAd = DB::table('buy_ad_reply_meta_datas')
-                                                ->where([
-                                                    ['buy_ad_id','=',$buyAd_id],
-                                                    ['replier_id','=',$user_id],
-                                                ])->get()->count();
+        $already_replied_to_the_buyAd = $this->get_user_replay_count_to_buy_ad($user_id,$buyAd_id);
 
         if($already_replied_to_the_buyAd == 0){
             $now = Carbon::now();
-            // i did not understand this part
+            
             DB::table('buy_ad_reply_meta_datas')->insert([
                 'created_at' => $now,
                 'updated_at' => $now,
@@ -239,30 +174,29 @@ class phone_number_controller extends Controller
             DB::table('buy_ads')->where('id',$buyAd_id)->decrement('phone_view_capacity', 1);
         }
 
-        $this->insert_phone_number_view_log_record(session('user_id'),$request->b_id,'BUYER',$request->item,true);
-        
+        $this->insert_phone_number_view_log_record(session('user_id'),$request->b_id,'BUYER',$request->item,true);    
 
         return response()->json([
             'status' => true,
             'phone' => $related_record->phone
         ]);
 
-        // conclusion: some code of this function does not happen in the same abstract level and can be seprate into sub functions
     }
 
-    //////////////////////////////////////////////////////////
+    protected function get_user_replay_count_to_buy_ad($replier_id,$buy_ad_id){
 
-    // this is a zombie function
-    protected function update_user_account_balance($user_id)
-    {
-        DB::table('myusers')
-                    ->where('id', $user_id)
-                    ->decrement('wallet_balance',config('subscriptionPakage.phone-number.view-price'));
+        $count = DB::table('buy_ad_reply_meta_datas')
+                    ->where([
+                        ['buy_ad_id','=',$buy_ad_id],
+                        ['replier_id','=',$replier_id],
+                    ])->get()
+                    ->count();
+        
+        return $count;
     }
 
     /////////////////////////////////////////////////////////////////
 
-    // name violation exactly whos phone number view permission ?
     public function set_my_phone_number_view_permissions(Request $request)
     {
         $this->validate($request,[
@@ -274,44 +208,29 @@ class phone_number_controller extends Controller
         $user_record = myuser::find($user_id);
 
         if($user_record){
-            if($user_record->is_seller){
-                // duplicate code fragment with else section
-                $temp = str_split($user_record->phone_view_permission);
-                $temp[0] = (integer) $request->permission;
-                $updated_permission = implode('',$temp);
-                
-                DB::table('myusers')
-                        ->where('id',$user_record->id)
-                        ->update([
-                            'phone_view_permission' => $updated_permission
-                        ]);
+            $temp = str_split($user_record->phone_view_permission);
 
-                return response()->json([
-                    'status' => true,
-                    'msg' => 'permission updated!'
-                ],200);
+            if($user_record->is_seller){
+                
+                $temp[0] = (integer) $request->permission;
             }
             else if($user_record->is_buyer){
-                $temp = str_split($user_record->phone_view_permission);
+                
                 $temp[1] = (integer) $request->permission;
-                $updated_permission = implode('',$temp);
-
-                DB::table('myusers')
-                        ->where('id',$user_record->id)
-                        ->update([
-                            'phone_view_permission' => $updated_permission
-                        ]);
-
-                return response()->json([
-                    'status' => true,
-                    'msg' => 'permission updated!'
-                ],200);
             }
+            $updated_permission = implode('',$temp);
+                
+            DB::table('myusers')
+                    ->where('id',$user_record->id)
+                    ->update([
+                        'phone_view_permission' => $updated_permission
+                    ]);
 
             return response()->json([
-                'status' => false,
-                'msg' => 'unable to change permission'
-             ]);
+                'status' => true,
+                'msg' => 'permission updated!'
+            ],200);
+            
         }
 
         return response()->json([
@@ -342,81 +261,82 @@ class phone_number_controller extends Controller
         ],200);
     }
 
+    ////////////////////////////////////// incommon methods
 
-    // zombie method 
-    protected function is_user_allowed_to_reply_the_buyAd($sender_id,$buyAd_id)
+    protected function does_viewer_already_seen_the_user_phone_number($viewer_id,$user_id)
     {
-        $today = Carbon::today();
-        $tomorrow = Carbon::tomorrow();
-        // duplicate code fragment (get_buyer_phone_number)
-        $already_replied_to_the_buyAd = DB::table('buy_ad_reply_meta_datas')
-                                                ->where([
-                                                    ['buy_ad_id','=',$buyAd_id],
-                                                    ['replier_id','=',$sender_id],
-                                                ])->get()->count();
 
-        if($already_replied_to_the_buyAd > 0){
-            $buyAd_record = buyAd::find($buyAd_id);
+        $log_record = DB::table('phone_number_view_logs')
+                                ->where('viewer_id',$viewer_id)
+                                ->where('myuser_id',$user_id)
+                                ->get();
 
-            return $buyAd_record->myuser_id;
+        if(count($log_record) > 0){
+            return true;
         }
 
-        $user_reply_records = DB::table('buy_ad_reply_meta_datas')
-                                    ->join('myusers','myusers.id','=','buy_ad_reply_meta_datas.replier_id')
-                                    ->where('replier_id',$sender_id)
-                                    ->whereBetween('buy_ad_reply_meta_datas.created_at',[$today, $tomorrow])
-                                    ->get();
-        
-        $today_replies_count = $user_reply_records->count();
-        if($today_replies_count > 0){
-            $user_daily_reply_capacity = config("subscriptionPakage.type-{$user_reply_records->first()->active_pakage_type}.buyAd-reply-count");
-            
-            if($today_replies_count > $user_daily_reply_capacity + $user_reply_records->first()->extra_buyAd_reply_capacity){
-                return false;
-            }
-        }
-
-        $buyAd_record = buyAd::find($buyAd_id);
-
-        if($already_replied_to_the_buyAd == true)
-        {
-            return $buyAd_record->myuser_id;
-        }
-        
-        $now = Carbon::now();
-        // duplicate code fragment
-        DB::table('buy_ad_reply_meta_datas')->insert([
-            'created_at' => $now,
-            'updated_at' => $now,
-            'replier_id' => $sender_id,
-            'buy_ad_id'  => $buyAd_record->id
-        ]);
-
-        DB::table('buy_ads')->where('id',$buyAd_record->id)->decrement('reply_capacity', 1);
-
-        return $buyAd_record->myuser_id;
+        return false;
     }
 
-    // used by more than one method and has potential to be trait
+    protected function insert_phone_number_view_log_record($viewer_id,$user_id,$user_role,$item,$is_free = false)
+    {
+        $now = Carbon::now();
+
+        $viewer_user_record = myuser::find($viewer_id);
+
+        if($viewer_user_record->is_buyer == true){
+            $viewer_role = 'BUYER';
+        }
+        else{
+            $viewer_role = 'SELLER';
+        }
+        
+        DB::table('phone_number_view_logs')
+                    ->insert([
+                        'created_at' => $now,
+                        'updated_at' => $now,
+                        'viewer_role' => $viewer_role,
+                        'user_role' => $user_role,
+                        'viewer_id' => $viewer_id,
+                        'myuser_id' => $user_id,
+                        'related_item' => $item,
+                        'is_free' => $is_free
+                    ]);
+    }
+
+    protected function does_viewer_daily_access_count_is_more_than_max_viewer_daily_access_count($viewer_user_id)
+    {
+
+        $viewer_daily_access_count = $this->get_viewer_daily_access_count($viewer_user_id);
+
+        $max_daily_access_count = config('subscriptionPakage.phone-number.max-daily-access-count');
+
+        return $viewer_daily_access_count > $max_daily_access_count;
+
+    }
+
+    protected function get_viewer_daily_access_count($viewer_user_id)
+    {
+
+        $viewer_daily_access_count = DB::table('phone_number_view_logs')
+                                                ->where('viewer_id',$viewer_user_id)
+                                                ->whereBetween('created_at',[Carbon::today(),Carbon::tomorrow()])
+                                                ->groupBy('myuser_id')
+                                                ->get()
+                                                ->count();
+
+        return $viewer_daily_access_count;
+    }
+
     protected function is_proper_time_for_phone_call()
     {
         $now = Carbon::now();
-        // warning am or pm format or 24 hour format ?
+        
         if(Carbon::parse($now)->format('H') < 5){
             return false;
         }
 
         return true;
     }
+
 }
-
-/*
-    conclusion 
-
-    this method can be seprate into four seprate controller and one trait 
-
-    wallet here can be trait
-
-    functions with more than one caller can be seprate
-
-*/ 

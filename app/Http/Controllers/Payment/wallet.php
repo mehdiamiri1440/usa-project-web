@@ -8,7 +8,7 @@ use App\Models\product;
 use DB;
 use App\Models\premium_service;
 
-trait wallet_controller 
+trait wallet
 {
     public function do_charge_wallet($amount)
     {
