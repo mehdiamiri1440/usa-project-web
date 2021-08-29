@@ -645,9 +645,10 @@
   color: #21ad92;
 }
 .message-button-wrapper {
-  margin: 0 -10px -5px;
+  border-top: 1px solid rgba(0, 0, 0, 0.04);
+  margin: 10px -10px -5px;
+  padding: 10px;
   overflow: hidden;
-  border-radius: 0 0 8px 8px;
 }
 .message-button-wrapper button {
   display: block;
@@ -656,9 +657,9 @@
   text-align: center;
   color: #fff;
   border: none;
-  font-size: 13px;
-  padding: 5px 15px;
-  margin-top: 8px;
+  font-size: 16px;
+  padding: 10px 26px;
+  border-radius: 8px;
 }
 .message-button-wrapper button i {
   width: 15px;
@@ -667,7 +668,21 @@
 }
 
 .message-button-wrapper.link-button button {
-  background: #5d9fd8;
+  background: linear-gradient(-45deg, #fea858, #ed765e, #fea858);
+  animation: gradient 2s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+  background-size: 400% 400%;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .message-button-wrapper.link-button button.edit-button {
