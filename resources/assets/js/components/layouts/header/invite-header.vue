@@ -106,53 +106,29 @@ nav .green-button .item-icon.register::before {
   .profile-image-wrapper {
     margin-left: 0;
   }
-}
 
-@media screen and (max-width: 767px) {
-  .buskool-logo .navbar-brand {
-    width: 100px;
-    height: 20px;
-    margin-top: 4px;
+  .navbar-right {
+    float: right;
+  }
+
+  .navbar-nav {
+    float: left;
+    max-width: 140px;
+    margin: 0;
+    margin-top: 3px;
+  }
+
+  .buskool-main-nav {
+    padding: 5px 10px;
   }
   .buskool-logo .navbar-brand img {
-    width: 100px;
-    height: 20px;
-  }
-
-  .buskool-logo {
-    margin: 0 auto;
-    position: absolute;
-    right: calc(50% - 50px);
-  }
-}
-
-@media screen and (max-width: 550px) {
-  .buskool-logo {
-    margin: 0 auto;
-
-    float: right;
-
-    position: relative;
-
-    right: calc(50% - 95px);
+    width: 120px;
   }
 
   .buskool-logo .navbar-brand {
-    width: 100px;
-
-    margin-top: 5px;
-
-    margin-right: 0;
-  }
-
-  .profile-image-wrapper,
-  .user-auth-info-wrapper,
-  .user-auth-info-wrapper .navbar-nav {
-    margin: 0;
-  }
-
-  .user-auth-info-wrapper {
-    float: left;
+    width: 120px;
+    height: 28px;
+    margin: 14px 15px 6px 0;
   }
 }
 </style>
@@ -173,8 +149,8 @@ nav .green-button .item-icon.register::before {
 
         <div class="user-auth-info-wrapper navbar-nav">
           <ul class="nav navbar-nav">
-            <li class="hidden-xs">
-              <a class="green-button" href="#">
+            <li>
+              <a @click.prevent="doDownload()" class="green-button" href>
                 <img
                   src="../../../../img/google-play-img.png"
                   alt="دانلود از گوگل پلی"
@@ -191,6 +167,42 @@ nav .green-button .item-icon.register::before {
 export default {
   data() {
     return {};
+  },
+  methods: {
+    doDownload: function () {
+      //ga
+      this.registerComponentStatistics(
+        "download",
+        "app download btn",
+        "download app btn in popUp"
+      );
+      // code here
+      this.createCookie("downloadAppModal", true, 60 * 24);
+      // window.location.href =
+      //   "https://play.google.com/store/apps/details?id=com.buskool";
+      window.location.href =
+        "https://play.google.com/store/search?q=%D8%A8%D8%A7%D8%B3%DA%A9%D9%88%D9%84&c=apps";
+    },
+    createCookie: function (name, value, minutes) {
+      if (minutes) {
+        var date = new Date();
+        date.setTime(date.getTime() + minutes * 60 * 1000);
+        var expires = "; expires=" + date.toGMTString();
+      } else {
+        var expires = "";
+      }
+      document.cookie = name + "=" + value + expires + "; path=/";
+    },
+    registerComponentStatistics: function (
+      categoryName,
+      actionName,
+      labelName
+    ) {
+      gtag("event", actionName, {
+        event_category: categoryName,
+        event_label: labelName,
+      });
+    },
   },
 };
 </script>

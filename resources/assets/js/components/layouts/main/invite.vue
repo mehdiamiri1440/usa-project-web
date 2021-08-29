@@ -87,6 +87,8 @@ h2 {
 .user-info-wrapper {
   padding-right: 105px;
   padding-top: 50px;
+  position: relative;
+  z-index: 1;
 }
 
 .growth-section {
@@ -169,8 +171,8 @@ h2 {
 }
 
 .review-image-wrapper {
-  width: 70px;
-  height: 70px;
+  width: 60px;
+  height: 60px;
   border-radius: 70px;
   box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.26);
   float: right;
@@ -227,6 +229,7 @@ h2 {
   right: -430px;
   width: 920px;
   top: 280px;
+  z-index: -1;
 }
 
 .reviews-section-wrapper .invite-button-wrapper {
@@ -250,6 +253,123 @@ h2 {
   font-weight: bold;
   text-shadow: 0 2px 9px rgba(33, 173, 147, 0.43);
   padding: 5px;
+}
+
+.svg-content svg {
+  position: absolute;
+  right: -430px;
+  max-width: 587px;
+  top: 0;
+}
+
+@media screen and (max-width: 1199px) {
+  .growth-section svg {
+    left: -60%;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .user-info-wrapper {
+    padding: 20px;
+  }
+  .svg-content svg {
+    position: absolute;
+    right: -520px;
+    max-width: 587px;
+    top: -330px;
+  }
+  .main-categories > svg {
+    left: -630px;
+  }
+  .reviews-section-wrapper svg {
+    right: -520px;
+    top: 380px;
+  }
+  .carousel-item {
+    height: 250px;
+    padding: 15px;
+    text-align: center;
+    line-height: 1.618;
+    padding-top: 50px;
+    background-position: center !important;
+  }
+  .item-title {
+    font-size: 25px;
+  }
+  .item-content {
+    font-size: 15px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .user-info-wrapper {
+    padding: 0;
+  }
+
+  .register-invited-user {
+    margin-top: 55px;
+    border-top: 1px solid #e0e0e0;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 0;
+  }
+
+  .main-categories,
+  .reviews-section-wrapper {
+    padding: 0;
+  }
+  .register-invited-user {
+    background: none;
+  }
+
+  .register-invited-user h2 {
+    font-size: 30px;
+  }
+
+  .svg-content svg {
+    position: absolute;
+    right: -520px;
+    max-width: 587px;
+    top: -330px;
+  }
+  .main-categories > svg {
+    left: -630px;
+  }
+  .reviews-section-wrapper svg {
+    right: -520px;
+    top: 380px;
+  }
+  .carousel-item {
+    height: 250px;
+    padding: 15px;
+    text-align: center;
+    line-height: 1.618;
+    padding-top: 50px;
+    background-position: center !important;
+  }
+  .item-title {
+    font-size: 25px;
+  }
+  .item-content {
+    font-size: 15px;
+  }
+  .image-wrapper {
+    width: 60px;
+    height: 60px;
+  }
+  .user-info > p {
+    font-size: 27px;
+    padding: 14px 18px 0;
+  }
+  .invite-content {
+    font-size: 19px;
+  }
+
+.banner-contents p {
+  font-size: 25px;
+padding: 18px 10px;
+line-height: 1.618;
+}
+
 }
 </style>
 
@@ -328,7 +448,9 @@ h2 {
           باسکول، بپیوندید.
         </p>
         <div class="invite-button-wrapper text-right">
-          <button class="invite-button">قبول دعوت</button>
+          <button @click.prevent="setScrollToRegister()" class="invite-button">
+            قبول دعوت
+          </button>
         </div>
       </div>
       <div class="col-md-6 hidden-xs hidden-sm growth-section">
@@ -351,7 +473,41 @@ h2 {
       </div>
     </section>
     <div class="row">
-      <section class="register-invited-user col-xs-12">
+      <section
+        id="register-invited-user"
+        class="register-invited-user col-xs-12"
+      >
+        <div class="svg-content">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="582.87"
+            height="747.571"
+            viewBox="0 0 582.87 747.571"
+          >
+            <g
+              id="Group_462"
+              data-name="Group 462"
+              transform="translate(-1213.983 -684.908)"
+            >
+              <path
+                id="Path_32"
+                data-name="Path 32"
+                d="M35.352,153.418S-34,338.192,21.574,484.719,25.34,684.9,42.263,734.477s48.222-61.548,161.935-7.212,358.847-62.859,357.668-314.828S302.707,62.7,251.319,57.728,185.679,5.75,136.409.145,35.352,153.418,35.352,153.418Z"
+                transform="translate(1775.853 1432.479) rotate(180)"
+                fill="#21ad93"
+                opacity="0.105"
+              />
+              <path
+                id="Path_33"
+                data-name="Path 33"
+                d="M35.352,153.418S-34,338.192,21.574,484.719,25.34,684.9,42.263,734.477s48.222-61.548,161.935-7.212,358.847-62.859,357.668-314.828S302.707,62.7,251.319,57.728,185.679,5.75,136.409.145,35.352,153.418,35.352,153.418Z"
+                transform="translate(1796.853 1432.479) rotate(180)"
+                fill="#21ad93"
+                opacity="0.105"
+              />
+            </g>
+          </svg>
+        </div>
         <div class="text-center"><h2>ثبت نام رایگان</h2></div>
         <RegisterInvitedUser :categoryList="categoryList" />
       </section>
@@ -488,7 +644,9 @@ h2 {
         </div>
       </div>
       <div class="invite-button-wrapper text-center">
-        <button class="invite-button">ثبت نام رایگان</button>
+        <button @click.prevent="setScrollToRegister()" class="invite-button">
+          ثبت نام رایگان
+        </button>
       </div>
     </section>
   </div>
@@ -542,7 +700,33 @@ export default {
         stagePadding: 0,
         rtl: true,
         items: 2,
+        responsive: {
+          0: {
+            items: 1,
+            stagePadding: 0,
+            navText: false,
+            dots: true,
+          },
+          768: {
+            items: 2,
+            stagePadding: 0,
+            navText: false,
+            dots: true,
+          },
+        },
       });
+    },
+    setScrollToRegister() {
+      let element = $("#register-invited-user");
+      let elementTop = element.offset().top;
+      let elementHeight = element.height();
+      let windowHeight = $(window).height();
+      $("html, body").animate(
+        {
+          scrollTop: elementTop - (windowHeight - elementHeight) / 2,
+        },
+        700
+      );
     },
     getInviterUser() {
       let userName = this.$route.params.userName;

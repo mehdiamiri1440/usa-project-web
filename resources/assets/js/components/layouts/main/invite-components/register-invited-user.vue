@@ -8,13 +8,6 @@
   box-shadow: 0px 3px 9px rgba(0, 0, 0, 0.05);
 }
 
-.svg-content svg {
-  position: absolute;
-  right: -430px;
-  max-width: 587px;
-  top: 0;
-}
-
 /*progressbar styles*/
 
 .wrapper-progressbar {
@@ -102,6 +95,15 @@
 
     width: 100%;
   }
+  .register-content-wrapper {
+    box-shadow: none;
+  }
+}
+
+@media screen and (max-width: 413px) {
+  .progrees-item p {
+    font-size: 11px;
+  }
 }
 </style>
 
@@ -155,37 +157,6 @@
       </div>
     </div>
 
-    <div class="svg-content">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="582.87"
-        height="747.571"
-        viewBox="0 0 582.87 747.571"
-      >
-        <g
-          id="Group_462"
-          data-name="Group 462"
-          transform="translate(-1213.983 -684.908)"
-        >
-          <path
-            id="Path_32"
-            data-name="Path 32"
-            d="M35.352,153.418S-34,338.192,21.574,484.719,25.34,684.9,42.263,734.477s48.222-61.548,161.935-7.212,358.847-62.859,357.668-314.828S302.707,62.7,251.319,57.728,185.679,5.75,136.409.145,35.352,153.418,35.352,153.418Z"
-            transform="translate(1775.853 1432.479) rotate(180)"
-            fill="#21ad93"
-            opacity="0.105"
-          />
-          <path
-            id="Path_33"
-            data-name="Path 33"
-            d="M35.352,153.418S-34,338.192,21.574,484.719,25.34,684.9,42.263,734.477s48.222-61.548,161.935-7.212,358.847-62.859,357.668-314.828S302.707,62.7,251.319,57.728,185.679,5.75,136.409.145,35.352,153.418,35.352,153.418Z"
-            transform="translate(1796.853 1432.479) rotate(180)"
-            fill="#21ad93"
-            opacity="0.105"
-          />
-        </g>
-      </svg>
-    </div>
     <RegisterNumber v-show="currentStep == 1" />
     <VerifiedCode v-show="currentStep == 2" />
     <PersonalInformation v-show="currentStep == 3" />
