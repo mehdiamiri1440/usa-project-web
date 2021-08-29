@@ -5,9 +5,10 @@ namespace App\Exceptions;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-
+use Illuminate\Support\Facades\Log;
 class Handler extends ExceptionHandler
 {
+    
     /**
      * A list of the exception types that should not be reported.
      *
@@ -48,7 +49,28 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        return $this->log_error_and_return_internal_server_error($exception);
+        
         return parent::render($request, $exception);
+    }
+
+    public function log_error_and_return_internal_server_error($error){
+
+        $this->log_error($error);
+        
+        return $this->return_internal_server_error();
+    }
+
+    public function log_error($error){
+
+        Log::error(''.$error);
+    }
+
+    public function return_internal_server_error(){
+        return response()->json([
+            'status' => false,
+            'msg'    => 'internal server error!',
+        ],500);
     }
 
     /**
