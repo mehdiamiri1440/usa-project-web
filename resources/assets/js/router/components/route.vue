@@ -240,7 +240,10 @@
 
     <ChatModal />
     <EditProductModal />
-    <ShareToSocialModal :share-modal-url="shareModalUrl" />
+    <ShareToSocialModal
+      :share-modal-url="shareModalUrl"
+      :share-modal-text="shareModalText"
+    />
     <ReportModal :reported-user-id="reportedUserId" />
     <ReviewModal :review-user-data="reviewUserData" />
 
@@ -277,7 +280,7 @@
     <!-- add android app download  -->
 
     <div
-      v-if="downloadAppButton"
+      v-if="downloadAppButton && $route.name != 'invite'"
       class="android-download-alert-wrapper hidden-lg hidden-md"
     >
       <button
@@ -287,7 +290,7 @@
         <i class="fa fa-times"></i>
       </button>
 
-      <button class="android-apk-download" @click.prevent="doDownload">
+      <button class="android-apk-download" @click.prevent="doDownload()">
         دانلود اپلیکیشن باسکول
 
         <img
@@ -334,6 +337,7 @@ export default {
       activeContactId: "",
       reportedUserId: "",
       shareModalUrl: "",
+      shareModalText: "",
       msg: "",
       reviewCurrentStep: 0,
       reviewUserData: "",
@@ -387,7 +391,11 @@ export default {
     });
 
     eventBus.$on("shareModalUrl", ($event) => {
-      this.shareModalUrl = $event;
+      let shareItem = $event;
+      this.shareModalUrl = shareItem.shareModalUrl;
+      if (shareItem.shareModalText) {
+        this.shareModalText = shareItem.shareModalText;
+      }
       $("#share-modal").modal("show");
     });
 

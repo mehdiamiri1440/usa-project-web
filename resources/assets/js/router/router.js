@@ -47,6 +47,28 @@ const router = new Router({
           },
         },
         {
+          path: "referral",
+          name: "referralSeller",
+          components: {
+            default: (resolve) => {
+              require([
+                "../components/dashboard/seller/referral/referral.vue",
+              ], resolve);
+            },
+          },
+        },
+        {
+          path: "invited-users",
+          name: "invitedUsers",
+          components: {
+            default: (resolve) => {
+              require([
+                "../components/dashboard/seller/referral/invited-users.vue",
+              ], resolve);
+            },
+          },
+        },
+        {
           path: "phone-viewers",
           name: "sellerViewer",
           components: {
@@ -536,6 +558,15 @@ const router = new Router({
               require([
                 "../components/layouts/main/main_components/register-inquiry.vue",
               ], resolve);
+            },
+          },
+        },
+        {
+          path: "invite/:userName",
+          name: "invite",
+          components: {
+            default: (resolve) => {
+              require(["../components/layouts/main/invite.vue"], resolve);
             },
           },
         },
