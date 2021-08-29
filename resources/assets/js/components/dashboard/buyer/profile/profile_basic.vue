@@ -694,6 +694,11 @@ textarea.error:focus + i {
       </div>
     </div>
     <div class="row">
+      <div class="col-xs-12 margin-15-auto">
+        <ProfileCompletion />
+      </div>
+    </div>
+    <div class="row">
       <div class="col-xs-12 col-md-4 pull-right">
         <div class="box-wrapper">
           <span class="profile-badge"> %34 </span>
@@ -1026,12 +1031,13 @@ import { eventBus } from "../../../../router/router";
 import UploadFile from "../../upload-image";
 import swal from "../../../../sweetalert.min.js";
 import imageuploadify from "../../../../imageuploadify.min";
-
+import ProfileCompletion from "./profile-completation.vue";
 
 export default {
   props: ["str", "assets"],
   components: {
     UploadFile,
+    ProfileCompletion,
   },
   data: function () {
     return {
@@ -1074,6 +1080,7 @@ export default {
         company_name: "",
         company_register_code: "",
       },
+      profileDescription: "",
       popUpMsg: "",
       items: "",
       relatedFiles: [],
@@ -1095,6 +1102,7 @@ export default {
       completeProfileProgress: 0,
       uploadPercentage: 0,
       isLoaded: false,
+      invitedUsers: "",
     };
   },
   methods: {
@@ -1106,7 +1114,11 @@ export default {
     },
     getProfileInfo() {
       axios.post("/user/profile_info").then((response) => {
+        axios.post("/get-user-referral-info").then((response) => {
+          this.invitedUsers = response.data.invited_users;
+        });
         this.currentUser = response.data;
+        this.profileDescription = this.currentUser.profile.description;
         this.isLoaded = false;
 
         if (this.currentUser.profile.is_company) {
@@ -1187,6 +1199,7 @@ export default {
               self.certificateFilesReset = true;
               axios.post("/user/profile_info").then(function (response) {
                 self.currentUser = response.data;
+                self.profileDescription = self.currentUser.profile.description;
                 if (self.currentUser.profile.is_company) {
                   $("#company-box").collapse("show");
                 }
