@@ -280,7 +280,7 @@
     <!-- add android app download  -->
 
     <div
-      v-if="downloadAppButton"
+      v-if="downloadAppButton && $route.name != 'invite'"
       class="android-download-alert-wrapper hidden-lg hidden-md"
     >
       <button
@@ -290,7 +290,7 @@
         <i class="fa fa-times"></i>
       </button>
 
-      <button class="android-apk-download" @click.prevent="doDownload">
+      <button class="android-apk-download" @click.prevent="doDownload()">
         دانلود اپلیکیشن باسکول
 
         <img

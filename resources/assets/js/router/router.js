@@ -561,6 +561,15 @@ const router = new Router({
             },
           },
         },
+        {
+          path: "invite/:userName",
+          name: "invite",
+          components: {
+            default: (resolve) => {
+              require(["../components/layouts/main/invite.vue"], resolve);
+            },
+          },
+        },
         // {
         //     path: 'pricing',
         //     name: 'pricing',
