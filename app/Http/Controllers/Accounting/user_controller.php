@@ -13,7 +13,7 @@ use App\Http\Controllers\Notification\sms_controller;
 use DB;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
-
+// test comment
 class user_controller extends Controller
 {
     public $users;
