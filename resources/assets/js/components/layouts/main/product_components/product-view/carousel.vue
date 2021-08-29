@@ -92,7 +92,7 @@ export default {
       this.isImageLoad = true;
     },
     loadCarousel() {
-      $(".owl-carousel").owlCarousel({
+      $(".owl-carousel.main-product-carousel").owlCarousel({
         loop: false,
         items: 1,
         margin: 10,
@@ -111,6 +111,8 @@ export default {
         .magnificPopup({
           delegate: "a",
           type: "image",
+          removalDelay: 100,
+          mainClass: "mfp-fade",
           gallery: {
             enabled: true,
             navigateByImgClick: true,

@@ -2,13 +2,13 @@
 .review-item-wrapper {
   float: right;
   width: 100%;
-  border-radius: 3px;
-  border: 1px solid #bdc4cc;
+  border-radius: 12px;
+  border: 1px solid #f0f0f1;
   padding: 10px 0 0;
   margin-bottom: 30px;
 }
 .reviewer-information {
-  border-left: 1px solid #bdc4cc;
+  border-left: 1px solid #f0f0f1;
   overflow: hidden;
   padding-bottom: 7px;
   margin-bottom: 12px;
@@ -120,17 +120,19 @@
     <div class="row">
       <div class="review-item-wrapper">
         <div
-          class="reviewer-information-wrapper text-center col-xs-12 col-sm-2 pull-right"
+          class="
+            reviewer-information-wrapper
+            text-center
+            col-xs-12 col-sm-2
+            pull-right
+          "
         >
           <div class="reviewer-information">
-            <span
-              class="placeholder-content content-default-width margin-auto"
-            ></span>
             <span
               class="placeholder-content content-default-width margin-10-auto"
             ></span>
             <span
-              class="placeholder-content content-half-width margin-auto"
+              class="placeholder-content content-default-width margin-10-auto"
             ></span>
           </div>
         </div>
@@ -142,7 +144,7 @@
               </span>
             </p>
           </div>
-          <p>
+          <p class="text-rtl">
             <span class="placeholder-content content-full-width"></span>
             <span
               class="placeholder-content content-half-width margin-top-10"
@@ -152,7 +154,11 @@
         <div class="review-rate text-center col-xs-12 col-sm-2 pull-right">
           <p class="comment-date hidden-xs">
             <span
-              class="placeholder-content content-half-width margin-auto margin-top-10"
+              class="
+                placeholder-content
+                content-half-width
+                margin-auto margin-top-10
+              "
             ></span>
           </p>
           <div class="review-likes-wrapper text-center">

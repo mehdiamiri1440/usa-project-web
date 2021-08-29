@@ -28,8 +28,8 @@ span {
 }
 
 .bread-crumbs-wrapper {
-  margin: 10px auto;
-  height: 21px;
+  margin: 3px auto 11px;
+  height: 25px;
 }
 
 .bread-crumbs-wrapper a {
@@ -205,13 +205,70 @@ button.send-message-button {
   left: 2px;
 }
 
-@media screen and (max-width: 1199px) {
-  .box-title {
-    margin: 0 auto 15px;
-  }
+.main-content-wrapper {
+  max-width: 1336px;
+}
 
+.product-section-wrapper {
+  width: calc(100% - 400px);
+}
+
+.user-section-wrapper {
+  padding: 0;
+  max-width: 370px;
+}
+
+.section-wrapper .title-box {
+  text-align: center;
+
+  margin-top: 35px;
+}
+
+.section-wrapper {
+  border-top: 1px solid #e0e0e0;
+}
+
+.default-grid {
+  padding: 0 3px;
+}
+
+.default-grid .default-main-article-content {
+  width: 100%;
+}
+.default-grid .default-wrapper-main-image {
+  width: 100%;
+  height: 160px;
+}
+.default-grid > div {
+  padding: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #f0f0f1;
+}
+
+.default-grid .default-article-contents {
+  padding: 15px;
+}
+
+.related-product,
+.default-related-product {
+  margin-top: 70px;
+}
+
+@media screen and (max-width: 1199px) {
+  .product-section-wrapper {
+    width: 100%;
+  }
+  .user-section-wrapper {
+    max-width: initial;
+  }
   .default-carousel-item:last-of-type {
     display: none;
+  }
+
+  .bread-crumbs-wrapper {
+    padding: 0 15px;
+    margin: 11px auto;
   }
 }
 
@@ -222,13 +279,18 @@ button.send-message-button {
 }
 
 @media screen and (max-width: 767px) {
+  .bread-crumbs-wrapper a {
+    font-size: 12px;
+  }
+
+  .main-content-wrapper {
+    padding: 0 15px !important;
+  }
+
   #main {
     padding-top: 94px;
   }
 
-  .box-title {
-    margin: 0 10px 15px;
-  }
   .main-product-wrapper {
     border-radius: 0;
   }
@@ -247,138 +309,131 @@ button.send-message-button {
 </style>
 
 <template>
-  <div class="container">
+  <div class="container-fluid padding-0-30 main-content-wrapper">
     <RegisterModal
       v-if="!currentUser.user_info"
       :is-chat="isChat"
       :product="product"
     />
-
     <main id="main" class="row">
-      <div class="col-xs-12 text-rtl text-right bread-crumbs-wrapper hidden-xs">
-        <div class="row" v-if="breadCrumbs">
-          <router-link :to="{ name: 'productList' }">
-            همه دسته ها
-            <i class="fa fa-angle-left"></i>
-          </router-link>
-
-          <router-link
-            v-for="(item, index) in breadCrumbs"
-            :key="index"
-            :to="getSubCategoryUrl(item)"
-          >
-            {{ item }}
-            <i class="fa fa-angle-left"></i>
-          </router-link>
-          <span v-text="product.main.product_name"></span>
-        </div>
-      </div>
-      <div class="col-xs-12 col-lg-9 pull-right">
-        <section class="main-content">
-          <div class="row">
-            <ProductContents />
-          </div>
-        </section>
-      </div>
-
-      <div class="col-xs-12 col-lg-3 pull-left">
+      <div class="col-xs-12">
         <div class="row">
-          <UserInfo />
-        </div>
-      </div>
+          <div class="text-rtl text-right bread-crumbs-wrapper">
+            <div v-if="breadCrumbs">
+              <router-link :to="{ name: 'productList' }">
+                همه دسته ها
+                <i class="fa fa-angle-left"></i>
+              </router-link>
 
-      <section
-        v-if="relatedProducts.length > 0 && isLoading == false"
-        id="product-section"
-        class="section-wrapper col-xs-12 latest-product"
-      >
-        <div class="row">
-          <h3 class="box-title">محصولات مرتبط</h3>
-
-          <div class="products-contents">
-            <div class="owl-carousel product-carousel">
-              <ProductCarousel
-                v-for="(product, index) in relatedProducts"
+              <router-link
+                v-for="(item, index) in breadCrumbs"
                 :key="index"
-                :img="str + '/thumbnails/' + product.photo"
-                :title="product.product_name"
-                :stock="getConvertedNumbers(product.stock)"
-                :link="getRelatedProductUrl(product)"
-                column="4"
-              />
+                :to="getSubCategoryUrl(item)"
+              >
+                {{ item }}
+                <i class="fa fa-angle-left"></i>
+              </router-link>
+              <span v-text="product.main.product_name"></span>
             </div>
           </div>
-        </div>
-      </section>
+          <div class="col-xs-12 col-lg-8 product-section-wrapper pull-right">
+            <section class="main-content">
+              <div class="row">
+                <ProductContents />
+              </div>
+            </section>
+            <div
+              class="
+                col-xs-12 col-lg-4
+                hidden-lg
+                user-section-wrapper
+                pull-left
+              "
+            >
+              <div class="row">
+                <UserInfo />
+              </div>
+            </div>
+            <UserData />
+          </div>
 
-      <section
-        class="section-wrapper col-xs-12"
-        v-else-if="relatedProducts.length == 0 && isLoading == true"
+          <aside
+            class="
+              col-xs-12 col-lg-4
+              hidden-xs hidden-sm hidden-md
+              user-section-wrapper
+              pull-left
+            "
+          >
+            <UserInfo />
+          </aside>
+        </div>
+      </div>
+      <div
+        class="section-wrapper col-xs-12 related-product"
+        v-show="isRelatedProducts"
       >
         <div class="row">
           <h3 class="box-title">محصولات مرتبط</h3>
-
-          <div class="col-xs-12 products-contents">
-            <div class="row">
+          <RelatedProducts />
+        </div>
+      </div>
+      <div
+        v-show="!isRelatedProducts"
+        class="section-wrapper col-xs-12 default-related-product"
+      >
+        <div class="row">
+          <h3 class="box-title">محصولات مرتبط</h3>
+          <div>
+            <div
+              v-for="(defaultItem, index) in 12"
+              :key="index"
+              class="
+                default-items
+                col-xs-6 col-sm-4 col-md-3 col-lg-2
+                default-grid
+              "
+            >
               <div
-                v-for="(item, index) in 4"
-                :key="index"
-                :class="{ 'hidden-xs': index >= 2 }"
-                class="col-lg-3 col-md-4 col-xs-6 default-carousel-item"
+                class="
+                  col-xs-12
+                  margin-15-0
+                  default-item-wrapper default-main-wrapper
+                "
               >
-                <article class="carousel-item box-content col-xs-12">
-                  <span
-                    class="
-                      default-index-product-image
-                      placeholder-content
-                      col-xs-12
-                    "
-                  ></span>
+                <div class="default-wrapper-main-image pull-right">
+                  <span class="default-main-image placeholder-content"></span>
+                </div>
 
-                  <span
-                    class="
-                      content-default-width
-                      placeholder-content
-                      margin-10
-                      col-xs-10 col-xs-offset-1
-                    "
-                  ></span>
+                <div
+                  class="
+                    default-article-contents
+                    padding-0
+                    margin-top-10
+                    col-xs-12
+                  "
+                >
+                  <div class="default-main-article-content">
+                    <span class="content-half-width placeholder-content"></span>
 
-                  <span
-                    class="
-                      content-default-width
-                      placeholder-content
-                      col-xs-8 col-xs-offset-2
-                    "
-                  ></span>
-
-                  <span class="margin-10"></span>
-                </article>
+                    <span
+                      class="content-default-width placeholder-content"
+                    ></span>
+                    <span
+                      class="
+                        placeholder-content
+                        default-button-full-with
+                        pull-left
+                        mobile-hidden
+                      "
+                    ></span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </section>
-
-      <div class="buttons-wrapper col-xs-12">
-        <router-link
-          :to="{ path: this.categoryUrl }"
-          class="green-button blue-button"
-          >مشاهده همه محصولات</router-link
-        >
       </div>
-
-      <!-- <register-inquer-form
-        v-if="showRegisterRequestBox"
-        wrapper-bg="true"
-        :str="str"
-        :user-profile-info="product.user_info"
-        :user-profile-photo="
-          product.profile_info.profile_photo
-            ? str + '/' + product.profile_info.profile_photo
-            : assets + 'assets/img/user-defult.png'
-        "
-      /> -->
 
       <div
         v-if="product.main.product_name && !isMyProfile"
@@ -390,7 +445,7 @@ button.send-message-button {
           :class="{
             'send-message-button':
               product.user_info.has_phone && currentUser.user_info.is_buyer,
-            'green-button':
+            'green-button bg-gradient-green':
               !product.user_info.has_phone ||
               (product.user_info.has_phone && currentUser.user_info.is_seller),
           }"
@@ -409,7 +464,7 @@ button.send-message-button {
           @click.prevent="loginModal(true)"
           :class="{
             'send-message-button': product.user_info.has_phone,
-            'green-button': !product.user_info.has_phone,
+            'green-button bg-gradient-green': !product.user_info.has_phone,
           }"
         >
           <span v-if="product.user_info.has_phone"> چت </span>
@@ -424,7 +479,7 @@ button.send-message-button {
             currentUser.user_info.is_buyer
           "
           @click.prevent="activePhoneCall(true)"
-          class="green-button"
+          class="green-button bg-gradient-green"
           :class="{ disable: isActivePhone }"
           :disabled="isActivePhone"
         >
@@ -437,7 +492,7 @@ button.send-message-button {
         <button
           v-else-if="!currentUser.user_info && product.user_info.has_phone"
           @click.prevent="loginModal(false)"
-          class="green-button"
+          class="green-button bg-gradient-green"
           :class="{ disable: isActivePhone }"
           :disabled="isActivePhone"
         >
@@ -460,19 +515,23 @@ button.send-message-button {
 
 <script>
 import { eventBus } from "../../../../../router/router";
-import ProductCarousel from "../../main_components/product-list-carousel";
+
 import ProductContents from "./product";
 import UserInfo from "./user_info";
-// import registerInquerForm from "../../main_components/register-inquiry-form.vue";
+import UserData from "./User-data";
+import RelatedProducts from "./related-products.vue";
 import RegisterModal from "../../main_components/register-modal";
 import swal from "../../../../../sweetalert.min.js";
+import StickySidebar from "../../../../../stickySidebar.js";
+// import registerInquerForm from "../../main_components/register-inquiry-form.vue";
 
 export default {
   components: {
     ProductContents,
     UserInfo,
-    ProductCarousel,
+    UserData,
     RegisterModal,
+    RelatedProducts,
     // registerInquerForm,
   },
   props: ["str", "assets", "userType", "categoryList"],
@@ -494,7 +553,7 @@ export default {
         },
         photos: [],
       },
-      relatedProducts: "",
+      isRelatedProducts: false,
       relatedLoad: false,
       errors: "",
       popUpMsg: "",
@@ -532,6 +591,7 @@ export default {
           })
           .then(function (response) {
             self.product = response.data.product;
+
             self.categoryUrl =
               "/product-list/category/" + self.getCategoryName();
             self.starScore = Math.floor(
@@ -545,15 +605,8 @@ export default {
                 self.$emit("isMyProfile", self.isMyProfile);
               }
             }
+            self.sidebarScroll();
             self.getBreadCrumbs();
-            axios
-              .post("/get_related_products", {
-                product_id: self.product.main.id,
-              })
-              .then(function (response) {
-                self.relatedProducts = response.data.related_products;
-                self.isLoading = false;
-              });
           })
           .catch(function (err) {
             window.location.href = "/404";
@@ -938,6 +991,11 @@ export default {
       let url = "/product-list/category/" + category.split(" ").join("-");
       return url;
     },
+    sidebarScroll() {
+      $("aside").StickySidebar({
+        additionalMarginTop: 157,
+      });
+    },
   },
   created() {
     gtag("config", "UA-129398000-1", { page_path: "/product-view" });
@@ -946,7 +1004,6 @@ export default {
   },
   mounted() {
     this.init();
-
     var self = this;
     document.onreadystatechange = () => {
       if (document.readyState === "complete") {

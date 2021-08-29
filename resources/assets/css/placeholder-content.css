@@ -121,6 +121,13 @@ input,textarea {
   margin: 0 auto;
 }
 
+.small-icon {
+  width: 25px;
+  height: 25px;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
 .default-icon {
   width: 50px;
   height: 50px;
@@ -136,7 +143,7 @@ input,textarea {
   overflow: hidden;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
-  border-radius: 3px;
+  border-radius: 8px;
   display: inline-block;
 }
 
@@ -147,7 +154,7 @@ input,textarea {
   overflow: hidden;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
-  border-radius: 3px;
+border-radius: 8px;
   display: inline-block;
 }
 
@@ -159,7 +166,7 @@ input,textarea {
   overflow: hidden;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
-  border-radius: 3px;
+border-radius: 8px;
   display: inline-block;
 }
 
@@ -204,6 +211,10 @@ input,textarea {
   direction: ltr;
 }
 
+.margin-5-0 {
+  margin: 10px 0;
+}
+
 .margin-10-0 {
   margin: 10px 0;
 }
@@ -240,6 +251,16 @@ input,textarea {
   margin: 15px auto;
 }
 
+.margin-h-10 {
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.margin-v-5 {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
 .margin-top-10 {
   margin-top: 10px;
 }
@@ -258,6 +279,10 @@ input,textarea {
 
 .margin-top-30 {
   margin-top: 30px;
+}
+
+.margin-top-50 {
+  margin-top: 50px;
 }
 
 .padding-top-5 {
@@ -292,6 +317,10 @@ input,textarea {
   padding: 0 15px !important;
 }
 
+.padding-0-30 {
+  padding: 0 30px !important;
+}
+
 .h-20 {
   height: 20px;
 }
@@ -304,8 +333,13 @@ input,textarea {
   height: 30px;
 }
 
+
 .h-40 {
   height: 40px;
+}
+
+.h-45 {
+  height: 45px;
 }
 
 .h-100 {
@@ -336,6 +370,7 @@ input,textarea {
 .green-text {
   color: #00c569;
 }
+
 .light-green-text {
   color: #21ad93;
 }
@@ -371,6 +406,10 @@ input,textarea {
 
 .bg-gray {
   background-color: #556080 !important;
+}
+
+.bg-gradient-green{
+  background: linear-gradient(90deg,#21AD93,#00C569) !important;
 }
 
 .category-products-widget-default {
