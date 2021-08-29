@@ -2249,7 +2249,11 @@ export default {
       } else {
         let url =
           baseUrl + "shared-profile/" + this.profileOwner.user_info.user_name;
-        eventBus.$emit("shareModalUrl", url);
+           let shareItem = {
+        shareModalUrl:url,
+shareModalText:'',
+      }
+        eventBus.$emit("shareModalUrl", shareItem);
       }
     },
     // copyProfileLinkToClipBoard: function () {

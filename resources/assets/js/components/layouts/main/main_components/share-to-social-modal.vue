@@ -385,7 +385,7 @@ header {
 
 <script>
 export default {
-  props: ["shareModalUrl"],
+  props: ["shareModalUrl", "shareModalText"],
   data: function () {
     return {};
   },
@@ -416,7 +416,12 @@ export default {
     shareLink(social) {
       let url = "";
       var linkElement = document.createElement("a");
-      let shareModalUrl = encodeURIComponent(this.shareModalUrl);
+      let text = this.shareModalUrl;
+      if (this.shareModalText) {
+        text = `${this.shareModalText}\n${this.shareModalUrl}`;
+      }
+
+      let shareModalUrl = encodeURIComponent(text);
       switch (social) {
         case 0:
           url = "https://wa.me/?text=" + shareModalUrl;
@@ -447,10 +452,12 @@ export default {
     },
     copyLink() {
       let inputWrapper = $("#share-modal");
+      let text = this.shareModalUrl;
+      if (this.shareModalText) {
+        text = `${this.shareModalText}\n${this.shareModalUrl}`;
+      }
       inputWrapper.append(
-        '<input id="copy-url-to-share" style=" opacity: 0 !important; width: 0 !important; height: 0 !important; position: fixed !important;" type="text" value="' +
-          this.shareModalUrl +
-          '" />'
+        `<textarea id="copy-url-to-share" style=" opacity: 0 !important; width: 0 !important; height: 0 !important; position: fixed !important;" type="text" >${text}</textarea>`
       );
       let input = $("#copy-url-to-share");
       // /* Select the text field */
