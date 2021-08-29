@@ -57,6 +57,39 @@ class LeadDistributorBot implements ShouldQueue
         'other_sellers_products' => 4,
     ];
 
+
+    protected $greeting_lines = [
+        'سلام، وقت بخیر',
+        'سلام',
+        'درود بر شما',
+        'سلام، وقت بخیر',
+        'درود، وقت شما بخیر باشه',
+        '',
+        'درود',
+        'با عرض سلام و خسته نباشید،',
+        'ارادت',
+        '',
+        '',
+    ];
+
+    protected $description_lines = [
+        '{NAME} هستم فروشنده عمده {CATEGORY} از نوع {PRODUCT}',
+        'چه نوع {CATEGORY} نیاز دارید؟ بنده {NAME} هستم فروشنده ی عمده {CATEGORY}',
+        '{CATEGORY} از نوع {PRODUCT} موجود داریم. {NAME} هستم فروشنده ی عمده',
+        '{NAME} هستم. شما دنبال خرید عمده ی {CATEGORY} از نوع {PRODUCT} هستید؟',
+    ];
+
+    protected $call_to_action_lines = [
+        'تصاویر محصول رو میتونید با زدن روی دکمه ی انتهای پیام ببینید.',
+        'اگر قصد خرید دارید هم اینجا برای من پیام بذارید.',
+        'برای انجام هماهنگی ها، هم اینجا پیام بذارید لطفا',
+        'توضیح کامل و تصاویر محصول رو میتونید با زدن روی دکمه ی انتهای این پیام مشاهده کنید.',
+        'لطفا بفرمایید چه مقداری نیاز دارید تا بتونم بهتر  شما رو راهنمایی کنم.',
+        'چه تناژی قصد خرید دارید؟',
+        'محصول با چه کیفیتی مورد نظرتون هست و در چه تناژی قصد خرید دارید؟',
+        'تصاویر محصول و سایر توضیحات رو با زدن روی دکمه ی انتهای پیام می تونید مشاهده کنید.',
+    ];
+
     public function __construct()
     {
         //
@@ -493,7 +526,16 @@ class LeadDistributorBot implements ShouldQueue
         $product_info[] = $product['main']->description;
 
         $result = array_filter($product_info, function ($item) use ($search_expresion) {
-            return preg_match("/$search_expresion/", $item);
+            try{
+                $search_expresion = str_replace("\\","",$search_expresion);
+                $search_expresion = str_replace("/","",$search_expresion);
+
+                return preg_match("/$search_expresion/", $item);
+            }
+            catch(\Exception $e){
+                return false;
+            }
+            
         });
 
         if (sizeof($result) > 0) {
@@ -595,15 +637,23 @@ class LeadDistributorBot implements ShouldQueue
     {
         $seller_full_name = $product['user_info']->first_name . ' ' . $product['user_info']->last_name;
 
+        $random_key = array_rand($this->description_lines);
+        $description = $this->description_lines[$random_key];
+
+        $description = str_replace(['{NAME}','{CATEGORY}','{PRODUCT}'],
+                                   [$seller_full_name,$product['main']->sub_category_name,$product['main']->product_name],
+                                   $description
+                                );
+
         $price_msg = '';
         if(Carbon::parse($product['user_info']->created_at)->diffInDays(Carbon::now()) <= 7){
             $price = number_format($product['main']->min_sale_price);
             $price_msg = "حدود کف قیمت برای هر کیلو {$price} تومان است." . "\n\n";
         }
 
-        $msg = "سلام" . "\n";
-        $msg = $msg . "من $seller_full_name هستم فروشنده عمده ی {$product['main']->sub_category_name} از نوع {$product['main']->product_name}" . "\n\n";
-        $msg = $msg . "در صورت تمایل به خرید و انجام هماهنگی ها پیام بگذارید. جزییات محصول و تصاویر رو میتونید در لینک زیر مشاهده کنید." . "\n\n";
+        $msg = $this->greeting_lines[array_rand($this->greeting_lines)] . "\n";
+        $msg = $msg . $description . "\n\n";
+        $msg = $msg . $this->call_to_action_lines[array_rand($this->call_to_action_lines)] . "\n\n";
         if($price_msg){
             $msg = $msg . $price_msg;
         }
