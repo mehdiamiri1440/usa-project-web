@@ -71,6 +71,7 @@ class admin_sellAd_controller extends Controller
     
     protected $sellAd_confirmation_sms_text = 'آگهی فروش شما در سامانه ی باسکول تایید گردید.';
     
+    ////////////////////////////////////
     public function load_unconfirmed_sellAd_list(Request $request)
     {
         $unconfirmed_sellAd_list = $this->get_sellAd_list(0,$request);
@@ -83,6 +84,7 @@ class admin_sellAd_controller extends Controller
         ]);
     }
     
+    //////////////////////////////////////
     public function load_confirmed_sellAd_list(Request $request)
     {
         $confirmed_sellAd_list = $this->get_sellAd_list(1,$request);
@@ -95,6 +97,7 @@ class admin_sellAd_controller extends Controller
         ]);
     }
     
+    //////////////////////////////// incommon local functions
     protected function get_sellAd_list($confirm_status,&$request)
     {
         if($request->filled('search'))
@@ -150,7 +153,20 @@ class admin_sellAd_controller extends Controller
             $sellAd->remained_capacity = (config("subscriptionPakage.type-{$sellAd->active_pakage_type}.max-products") + $sellAd->extra_product_capacity ) - $sellAd_owner_confirmed_products;
         });
     }
-    
+
+    protected function get_seller_confirmed_products_count($seller_id)
+    {
+        $count = DB::table('products')
+                        ->where('myuser_id',$seller_id)
+                        ->where('confirmed',true)
+                        ->whereNull('deleted_at')
+                        ->get()
+                        ->count();
+
+        return $count;
+    }
+
+    ////////////////////////////////////
     public function load_unconfirmed_sellAd_by_id($sellAd_id)
     {
         if(!is_numeric($sellAd_id))
@@ -175,18 +191,7 @@ class admin_sellAd_controller extends Controller
         ]);
     }
 
-    protected function get_seller_confirmed_products_count($seller_id)
-    {
-        $count = DB::table('products')
-                        ->where('myuser_id',$seller_id)
-                        ->where('confirmed',true)
-                        ->whereNull('deleted_at')
-                        ->get()
-                        ->count();
-
-        return $count;
-    }
-    
+    ///////////////////////////////
     public function load_confirmed_sellAd_by_id($sellAd_id)
     {
         if(!is_numeric($sellAd_id))
@@ -211,22 +216,7 @@ class admin_sellAd_controller extends Controller
         ]);
     }
     
-    protected function get_sellAd_by_id_with_related_data($sellAd_id,$confirm_status)
-    {
-        $sellAd_with_related_data = DB::table('products')
-													->join('categories','products.category_id','=','categories.id')
-													->leftJoin('cities','cities.id','=','products.city_id')
-													->leftJoin('provinces','provinces.id','=','cities.province_id')
-													->select($this->sellAd_detail_fields_array)
-													->where('products.id',$sellAd_id)
-                                                    ->where('confirmed',$confirm_status)
-													->get()
-													->first();
-        
-        return $sellAd_with_related_data;
-    }
-    
-    
+    /////////////////////////////
     public function admin_sellAd_confirmation(Request $request)
     {
         $sellAd_id = $request->sellAd_id;
@@ -262,8 +252,8 @@ class admin_sellAd_controller extends Controller
 
             // SaveProductPhotosInCloud::dispatch($sellAd_record->id);
             //send SMS
-//            $sms_controller_object = new sms_controller();            
-//            $sms_controller_object->send_status_sms_message($sellAd_record,$this->sellAd_confirmation_sms_text);
+            //$sms_controller_object = new sms_controller();            
+            //$sms_controller_object->send_status_sms_message($sellAd_record,$this->sellAd_confirmation_sms_text);
             
             return redirect()->route('admin_panel_sellAd');
         }
@@ -274,7 +264,32 @@ class admin_sellAd_controller extends Controller
             return redirect()->route('admin_panel_sellAd');
         }
     }
+
+    protected function is_user_package_active($user_id)
+    {
+        $user_record = myuser::find($user_id);
+        
+        if($user_record->active_pakage_type >= 2){
+            return true;
+        }
+        
+        return false;
+    }
+
+    protected function is_it_user_first_confirmed_product($user_id)
+    {
+        $products = DB::table('products')->where('myuser_id',$user_id)
+                            ->where('confirmed',true)
+                            ->get();
+        
+        if($products->count() > 0){
+            return false;
+        }
+        
+        return true;
+    }
     
+    //////////////////////////////
     public function admin_sellAd_edit(Request $request)
     {
         $sellAd_id = $request->sellAd_id;
@@ -298,7 +313,7 @@ class admin_sellAd_controller extends Controller
         return redirect()->route('admin_panel_sellAd_list');
     }
     
-    
+    //////////////////////////////
     public function admin_sellAd_photo_delete_by_id(Request $request)
     {
         $this->validate($request,[
@@ -324,29 +339,22 @@ class admin_sellAd_controller extends Controller
            'msg' => 'photo deleted', 
         ]);
     }
-    
-    protected function is_user_package_active($user_id)
+
+    ///////////////////////////// incommon functions
+
+    protected function get_sellAd_by_id_with_related_data($sellAd_id,$confirm_status)
     {
-        $user_record = myuser::find($user_id);
+        $sellAd_with_related_data = DB::table('products')
+													->join('categories','products.category_id','=','categories.id')
+													->leftJoin('cities','cities.id','=','products.city_id')
+													->leftJoin('provinces','provinces.id','=','cities.province_id')
+													->select($this->sellAd_detail_fields_array)
+													->where('products.id',$sellAd_id)
+                                                    ->where('confirmed',$confirm_status)
+													->get()
+													->first();
         
-        if($user_record->active_pakage_type >= 2){
-            return true;
-        }
-        
-        return false;
-    }
-    
-    protected function is_it_user_first_confirmed_product($user_id)
-    {
-        $products = DB::table('products')->where('myuser_id',$user_id)
-                            ->where('confirmed',true)
-                            ->get();
-        
-        if($products->count() > 0){
-            return false;
-        }
-        
-        return true;
+        return $sellAd_with_related_data;
     }
     
 }
