@@ -20,8 +20,10 @@ class user_controller extends Controller
 
     public function __construct(userService $service)
     {
-        $this->users = $service;
+        $this->users = $service;// can it be trait ?
     }
+
+    //////////////////////////////////////
 
     public function login(Request $request)
     {
@@ -76,7 +78,8 @@ class user_controller extends Controller
                     ))
                  ->withCookie(cookie(
                         'user_password', $user->password, 46400 // 60 days in minutes
-                    ));
+                    ))
+            ;
         } else {
             return response()->json([
             'status' => false,
@@ -85,27 +88,8 @@ class user_controller extends Controller
         }
     }
 
-    protected function set_user_session($user_info)
-    {
-        $user_profile_record = profile::where('myuser_id', $user_info->id)
-                ->select('profile_photo')
-                ->get()
-                ->last();
-
-        session([
-            'user_id' => $user_info->id,
-            'is_buyer' => $user_info->is_buyer,
-            'is_seller' => $user_info->is_seller,
-            'user_name' => $user_info->user_name,
-            'full_name' => $user_info->first_name.' '.$user_info->last_name,
-            'city' => $user_info->city,
-            'province' => $user_info->province,
-            'profile_photo' => $user_profile_record ? $user_profile_record->profile_photo : null,
-        ]);
-    }
-
     protected function set_last_login_info($user,&$request)
-    {
+    { 
         $user_id = $user->id;
 
         if($request->has('client') && $request->client == 'mobile')
@@ -200,30 +184,6 @@ class user_controller extends Controller
                                 ->update(['is_blocked' => true]);
     }
 
-    public function does_user_name_already_exists(Request $request)
-    {
-        $request->user_name = strtolower($request->user_name);
-
-        $this->validate($request, [
-           'user_name' => 'required|unique:myusers',
-        ]);
-
-        return response()->json([
-           'status' => true,
-        ], 200);
-    }
-
-    public function does_national_code_already_exists(Request $request)
-    {
-        $this->validate($request, [
-           'national_code' => 'required|unique:myusers',
-        ]);
-
-        return response()->json([
-            'status' => true,
-        ], 200);
-    }
-
     protected function does_user_have_confirmed_profile_record($user_id)
     {
         $profile_record = profile::where('myuser_id', $user_id)
@@ -239,50 +199,52 @@ class user_controller extends Controller
         }
     }
 
-    public function initial_contract_confirmation_by_user()
+    protected function set_user_session($user_info)
     {
-        $user_id = session('user_id');
+        $user_profile_record = profile::where('myuser_id', $user_info->id)
+                ->select('profile_photo')
+                ->get()
+                ->last();
 
-        try {
-            $user_record = myuser::find($user_id);
-
-            $user_record->contract_confirmed = true;
-
-            $user_record->save();
-
-            return response()->json([
-                'status' => true,
-                'msg' => 'DONE',
-            ], 200);
-        } catch (\Exception $e) {
-            return response()->json([
-                'status' => false,
-                'msg' => 'failed',
-            ], 500);
-        }
-    }
-
-    public function api_login(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'phone' => 'required|string',
-            'password' => 'required',
+        session([
+            'user_id' => $user_info->id,
+            'is_buyer' => $user_info->is_buyer,
+            'is_seller' => $user_info->is_seller,
+            'user_name' => $user_info->user_name,
+            'full_name' => $user_info->first_name.' '.$user_info->last_name,
+            'city' => $user_info->city,
+            'province' => $user_info->province,
+            'profile_photo' => $user_profile_record ? $user_profile_record->profile_photo : null,
         ]);
-        if ($validator->fails()) {
-            return response()->json($validator->errors());
-        }
-        $credentials = $request->only('phone', 'password');
-        try {
-            if (!$token = JWTAuth::attempt($credentials)) {
-                return response()->json(['error' => 'invalid_credentials'], 401);
-            }
-        } catch (JWTException $e) {
-            return response()->json(['error' => 'could_not_create_token'], 500);
-        }
-
-        return response()->json(compact('token'));
     }
 
+    //////////////////////////////////////////////////
+
+    public function does_user_name_already_exists(Request $request)
+    {
+        $request->user_name = strtolower($request->user_name);
+
+        $this->validate($request, [
+           'user_name' => 'required|unique:myusers',
+        ]);
+
+        return response()->json([
+           'status' => true,
+        ], 200);
+    }
+    /////////////////////////////
+    public function does_national_code_already_exists(Request $request)
+    {
+        $this->validate($request, [
+           'national_code' => 'required|unique:myusers',
+        ]);
+
+        return response()->json([
+            'status' => true,
+        ], 200);
+    }
+
+    //////////////////////////////////////
     public function change_password(Request $request)
     {
         $this->validate($request, [
@@ -298,7 +260,7 @@ class user_controller extends Controller
                                 ->first();
 
         if ($user_record) {
-//            DB::transaction(function() use($request){
+        // DB::transaction(function() use($request){
             try {
                 $user_record->password = sha1($request->new_password);
                 $user_record->save();
@@ -313,7 +275,7 @@ class user_controller extends Controller
                         'status' => true,
                         'msg' => 'Password changed successfully!',
                     ], 200);
-//            });
+        // });
         } else {
             return response()->json([
                 'status' => false,
@@ -321,6 +283,8 @@ class user_controller extends Controller
             ], 200);
         }
     }
+
+    //////////////////////////////////
 
     public function reset_password(Request $request)
     {
@@ -377,35 +341,7 @@ class user_controller extends Controller
         return $result;
     }
 
-    //public method
-    public function get_contract_sides_user_info(Request $request)
-    {
-        $this->validate($request, [
-           'seller_user_id' => 'required|integer|min:1',
-           'buyer_user_id' => 'required|integer|min:1',
-        ]);
-
-        $seller_user_id = $request->seller_user_id;
-        $buyer_user_id = $request->buyer_user_id;
-
-        $seller_user_record = myuser::find($seller_user_id);
-        $buyer_user_record = myuser::find($buyer_user_id);
-
-        if ($seller_user_record && $buyer_user_record) {
-            $fields = ['first_name', 'last_name', 'national_code'];
-
-            return response()->json([
-                'status' => true,
-                'seller_user_info' => $seller_user_record->only($fields),
-                'buyer_user_info' => $buyer_user_record->only($fields),
-            ], 200);
-        } else {
-            return response()->json([
-                'status' => false,
-                'msg' => 'user not found!',
-            ], 404);
-        }
-    }
+    ///////////////////////////////////
 
     //public method
     public function is_user_from_webview(Request $request)
@@ -418,19 +354,7 @@ class user_controller extends Controller
         ], 200);
     }
 
-    protected function generate_jwt_token($request)
-    {
-        $credentials = $request->only('phone', 'password');
-        try {
-            if (!$token = JWTAuth::attempt($credentials)) {
-                return response()->json(['error' => 'invalid_credentials'], 401);
-            }
-        } catch (JWTException $e) {
-            return response()->json(['error' => 'could_not_create_token'], 500);
-        }
-
-        return $token;
-    }
+    ///////////////////////////////////
 
     //public method
     public function get_seller_dashboard_required_data(Request $request)
@@ -461,17 +385,6 @@ class user_controller extends Controller
         ]), 200);
     }
 
-    protected function get_user_reputation_score()
-    {
-        $user_id = session('user_id');
-
-        $reputaion_controller_object = new reputation_controller();
-
-        $score = $reputaion_controller_object->calculate_user_reputation_score($user_id);
-
-        return $score;
-    }
-
     protected function get_user_confirmed_products_count()
     {
         $user_id = session('user_id');
@@ -483,6 +396,20 @@ class user_controller extends Controller
 
         return $confirmed_products_count;
     }
+
+
+    protected function get_user_reputation_score()
+    {
+        $user_id = session('user_id');
+
+        $reputaion_controller_object = new reputation_controller();
+
+        $score = $reputaion_controller_object->calculate_user_reputation_score($user_id);
+
+        return $score;
+    }
+
+    ///////////////////////////////////
 
     public function switch_user_role(Request $request)
     {
@@ -526,6 +453,8 @@ class user_controller extends Controller
         }
         
     }
+
+    ///////////////////////////////////
 
     public function get_pricing_page_visit_status(Request $request)
     {
@@ -572,6 +501,8 @@ class user_controller extends Controller
         ],200);
     }
 
+    //////////////////////////////////
+
     protected function refresh_token(Request $request)
     {
         try{
@@ -601,6 +532,8 @@ class user_controller extends Controller
         }
     }
 
+    //////////////////////////////////
+
     public function get_my_account_balance()
     {
         $user_id = session('user_id');
@@ -627,4 +560,98 @@ class user_controller extends Controller
             'msg' => 'unAuthorized Access!'
         ],404);
     }
+
+    //////////////////////////////////  following functions have problems to solve
+    
+    // this functions route commented out
+    public function initial_contract_confirmation_by_user()
+    {
+        $user_id = session('user_id');
+
+        try {
+            $user_record = myuser::find($user_id);
+
+            $user_record->contract_confirmed = true;
+
+            $user_record->save();
+
+            return response()->json([
+                'status' => true,
+                'msg' => 'DONE',
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => false,
+                'msg' => 'failed',
+            ], 500);
+        }
+    }
+
+    public function api_login(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'phone' => 'required|string',
+            'password' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return response()->json($validator->errors());
+        }
+        $credentials = $request->only('phone', 'password');
+        try {
+            if (!$token = JWTAuth::attempt($credentials)) {
+                return response()->json(['error' => 'invalid_credentials'], 401);
+            }
+        } catch (JWTException $e) {
+            return response()->json(['error' => 'could_not_create_token'], 500);
+        }
+
+        return response()->json(compact('token'));
+    }
+
+    //public method
+    public function get_contract_sides_user_info(Request $request)
+    {
+        $this->validate($request, [
+           'seller_user_id' => 'required|integer|min:1',
+           'buyer_user_id' => 'required|integer|min:1',
+        ]);
+
+        $seller_user_id = $request->seller_user_id;
+        $buyer_user_id = $request->buyer_user_id;
+
+        $seller_user_record = myuser::find($seller_user_id);
+        $buyer_user_record = myuser::find($buyer_user_id);
+
+        if ($seller_user_record && $buyer_user_record) {
+            $fields = ['first_name', 'last_name', 'national_code'];
+
+            return response()->json([
+                'status' => true,
+                'seller_user_info' => $seller_user_record->only($fields),
+                'buyer_user_info' => $buyer_user_record->only($fields),
+            ], 200);
+        } else {
+            return response()->json([
+                'status' => false,
+                'msg' => 'user not found!',
+            ], 404);
+        }
+    }
+
+    // zombie functions
+    protected function generate_jwt_token($request)
+    {
+        $credentials = $request->only('phone', 'password');
+        try {
+            if (!$token = JWTAuth::attempt($credentials)) {
+                return response()->json(['error' => 'invalid_credentials'], 401);
+            }
+        } catch (JWTException $e) {
+            return response()->json(['error' => 'could_not_create_token'], 500);
+        }
+
+        return $token;
+    }
+
+    
 }
