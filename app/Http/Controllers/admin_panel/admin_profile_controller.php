@@ -42,6 +42,7 @@ class admin_profile_controller extends Controller
     
     protected $profile_confirmation_text = 'پروفایل کاربری شما در سامانه ی باسکول تایید شد.در صورت تمایل می توانید آگهی های خود را در سامانه ثبت کنید.';
     
+    //////////////////////////////////////////////
     public function load_unconfirmed_profile_records(Request $request)
     {
         $unconfirmed_profile_records = $this->get_profile_records($request,false);
@@ -110,19 +111,7 @@ class admin_profile_controller extends Controller
             //
         }
     }
-    
-    protected function add_profile_related_media_to_each_record(&$profile_records)
-    {
-        $profile_records->each(function($profile_record){
-           $related_media = profile_media::where('profile_id',$profile_record->id)
-                                            ->select($this->media_neccessary_fields_array)
-                                            ->get();
-            
-            $profile_record['media'] = $related_media; 
-            
-        });
-    }
-    
+
     protected function add_user_info_to_each_profile_record(&$profile_records)
     {
         $date_convertor_object = new date_convertor();
@@ -139,6 +128,8 @@ class admin_profile_controller extends Controller
         });
     }
     
+    
+    //////////////////////////////////////////
     //public
     public function load_profile_by_id($profile_id = null)
     {
@@ -180,6 +171,7 @@ class admin_profile_controller extends Controller
         return $related_media;
     }
     
+    //////////////////////////////////
     public function admin_profile_confirmation(Request $request)
     {
         if($request->type == 'accept'){
@@ -211,6 +203,7 @@ class admin_profile_controller extends Controller
         }
     }
     
+    ////////////////////////////////////////
     public function admin_profile_related_photo_delete_by_id(Request $request)
     {
         $this->validate($request,[
@@ -237,5 +230,22 @@ class admin_profile_controller extends Controller
            'msg' => 'photo Deleted', 
         ]);
     }
+
+    ///////////////////////////////////////////
+    
+    // zombie function
+    protected function add_profile_related_media_to_each_record(&$profile_records)
+    {
+        $profile_records->each(function($profile_record){
+           $related_media = profile_media::where('profile_id',$profile_record->id)
+                                            ->select($this->media_neccessary_fields_array)
+                                            ->get();
+            
+            $profile_record['media'] = $related_media; 
+            
+        });
+    }
+
+
     
 }
