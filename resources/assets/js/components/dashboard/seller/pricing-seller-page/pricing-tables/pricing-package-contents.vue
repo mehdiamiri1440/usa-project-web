@@ -630,7 +630,7 @@
             <a
               v-else-if="offerTime"
               href
-              @click.prevent="doPayment(4)"
+              @click.prevent="openPaymentModal(4)"
               class="green-button bg-gradient text-rtl"
             >
               ارتقا عضویت
@@ -639,7 +639,7 @@
             <a
               v-else
               href
-              @click.prevent="doPayment(3)"
+              @click.prevent="openPaymentModal(3)"
               class="green-button bg-gradient text-rtl"
             >
               ارتقا عضویت
@@ -790,7 +790,7 @@
             <a
               v-else
               href
-              @click.prevent="doPayment(1)"
+              @click.prevent="openPaymentModal(1)"
               class="green-button bg-gray text-rtl"
             >
               ارتقا عضویت
@@ -935,19 +935,49 @@ export default {
         return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       else return "";
     },
-    doPayment: function (packageType) {
-      this.$parent.doPaymentLoader = true;
+    getTotalPriceForPay(packageType) {
+      let price = "";
+      switch (packageType) {
+        case 1:
+          if (this.prices["type-1-discount"]) {
+            price = this.prices["type-1-discount"] / 10;
+          } else {
+            price = this.prices["type-1"] / 10;
+          }
+          break;
+        case 3:
+          if (this.prices["type-3-discount"]) {
+            price = this.prices["type-3-discount"] / 10;
+          } else {
+            price = this.prices["type-3"] / 10;
+          }
+          break;
+
+        default:
+          if (this.prices["type-3-discount"]) {
+            price = this.prices["type-3-discount"] / 10;
+          } else {
+            price = this.prices["type-3"] / 10;
+          }
+          break;
+      }
+
+      return price;
+    },
+    openPaymentModal(packageType) {
+      let totalPrice = this.getTotalPriceForPay(packageType);
       let userId = getUserId();
-
-      this.registerComponentStatistics(
-        "payment",
-        "type-" + packageType,
-        "userId: " + userId
-      );
-      window.location.href = "/payment/" + packageType;
-
+      let paymentData = {
+        paymentName: "pricingData",
+        packageType: packageType,
+        userId: userId,
+        totalPrice: totalPrice,
+      };
+      eventBus.$emit("peymentMethodData", paymentData);
+      $("#payment-type-modal").modal("show");
+    },
+    doPayment: function (packageType) {
       // *****  payment width factor  *****
-
       // let paymentData = {
       //   paymentItems: "",
       //   selectedPackage: "",
