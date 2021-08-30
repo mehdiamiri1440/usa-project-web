@@ -111,7 +111,7 @@ class admin_message_controller extends Controller
     {
         $msgs = message::where('sender_id',$contact_id)
                                 ->where('receiver_id', $user_id)
-//                                ->where('is_read',false)
+        //                  ->where('is_read',false)
                                 ->get();
         $unread_msgs = [];
         
