@@ -16,6 +16,8 @@ use App\Models\phone_number_view_log;
 
 class admin_chart_controller extends Controller
 {
+    /////////////////////////////////
+
     public function chart_loader(Request $request)
     {    
         if($request->filled('start_date') && $request->filled('end_date')){
@@ -91,7 +93,7 @@ class admin_chart_controller extends Controller
             'activeUsersChart' => $active_users_chart,
             'sellersPhoneNumberViewersChart' => $sellers_phone_number_viewers_chart,
             // 'returningUsersChart' => $returning_users_chart
-//            'packageBuyersChart' => $package_buyers_chart
+        // 'packageBuyersChart' => $package_buyers_chart
         ]);
     }
     
@@ -367,6 +369,7 @@ class admin_chart_controller extends Controller
         return $active_users_chart;
     }
 
+    // this functions usage commented out
     protected function get_returning_users_chart($from,$to,$user_type,$retention_period)
     {
         // print $retention_period;
