@@ -15,6 +15,7 @@ use DB;
 
 class admin_sell_offer_controller extends Controller
 {
+    //////////////////////////////
     public function load_unconfirmed_sell_offer_list()
     {
         $sell_offers = DB::table('sell_offers')
@@ -38,11 +39,11 @@ class admin_sell_offer_controller extends Controller
             
             $sell_offer->created_at = $date_convertor_object->get_persian_date($sell_offer->created_at);
             
-//            $sell_offer_media_records = sell_offer_media::where('sell_offer_id',$sell_offer->id)
-//                ->select(['id','file_path'])
-//                ->get();
-//            
-//            $sell_offer['photos'] = $this->get_file_path_array($sell_offer_media_records);
+            // $sell_offer_media_records = sell_offer_media::where('sell_offer_id',$sell_offer->id)
+            //     ->select(['id','file_path'])
+            //     ->get();
+            // 
+            // $sell_offer['photos'] = $this->get_file_path_array($sell_offer_media_records);
         });
         
         return view('admin_panel.sellOffer',[
@@ -50,7 +51,7 @@ class admin_sell_offer_controller extends Controller
         ]);
     }
     
-    
+    ///////////////////////////////
     public function get_sell_offer_with_related_buyAd($sell_offer_id)
     {
         $sell_offer = sell_offer::find($sell_offer_id);
@@ -83,6 +84,22 @@ class admin_sell_offer_controller extends Controller
             'buyAd_user_info' => $buyAd_user_info,
         ]);
     }
+
+    protected function get_file_path_array(&$records)
+    {
+        $result = array();
+        
+        foreach($records as $record){
+            $temp = [
+                'id' => $record->id,
+                'file_path' => $record->file_path
+            ];
+            
+            $result[] = $temp;
+        }
+        
+        return $result;
+    }
     
     protected function get_category_and_subcategory_name($subcategory_id)
     {
@@ -101,23 +118,8 @@ class admin_sell_offer_controller extends Controller
             'subcategory_name' => $subcategory_record->category_name,
         ];
     }
-    
-    protected function get_file_path_array(&$records)
-    {
-        $result = array();
-        
-        foreach($records as $record){
-            $temp = [
-                'id' => $record->id,
-                'file_path' => $record->file_path
-            ];
-            
-            $result[] = $temp;
-        }
-        
-        return $result;
-    }
-    
+      
+    //////////////////////////////////
     public function confirm_sell_offer_by_id(Request $request)
     {
         $this->validate($request,[
@@ -158,6 +160,7 @@ class admin_sell_offer_controller extends Controller
         $sms_controller_object->send_notify_sms_to_user($msg_array,$buyer_user_id);
         
     }
+
     protected function get_buyer_user_id_by_buyAd_id($buyAd_id)
     {
         $buyAd_record = buyAd::find($buyAd_id);
@@ -167,6 +170,8 @@ class admin_sell_offer_controller extends Controller
         return $user_record->id;
     }
     
+    ///////////////////////////////////// 
+    // zombie function
     public function load_accepted_sell_offer_list()
     {
          $sell_offers = sell_offer::where('confirmed',true)
@@ -181,11 +186,11 @@ class admin_sell_offer_controller extends Controller
             $sell_offer['date_from'] = $date_convertor_object->get_persian_date($sell_offer->valid_date_from);
             $sell_offer['date_to'] = $date_convertor_object->get_persian_date($sell_offer->valid_date_to);
             
-//            $sell_offer_media_records = sell_offer_media::where('sell_offer_id',$sell_offer->id)
-//                ->select(['id','file_path'])
-//                ->get();
-//            
-//            $sell_offer['photos'] = $this->get_file_path_array($sell_offer_media_records);
+            //$sell_offer_media_records = sell_offer_media::where('sell_offer_id',$sell_offer->id)
+            //    ->select(['id','file_path'])
+            //    ->get();
+            //
+            //$sell_offer['photos'] = $this->get_file_path_array($sell_offer_media_records);
         });
         
         return view('admin_panel.pendingList',[
