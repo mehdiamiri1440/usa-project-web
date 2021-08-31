@@ -56,6 +56,7 @@ class channel_controller extends Controller
         'title'
     ];
 
+    ///////////////////////////////
     public function add_content(Request $request)
     {
         $this->validate($request,$this->channel_validation_rules);
@@ -89,6 +90,7 @@ class channel_controller extends Controller
         return redirect()->route('admin_panel_channel_content_list');
     }
 
+    /////////////////////////////////
     public function get_channel_contents()
     {
         $user_id = session('user_id');
@@ -222,6 +224,16 @@ class channel_controller extends Controller
         
     }
 
+    protected function update_user_last_channel_opening_date($user_id)
+    {
+        DB::table('myusers')
+                ->where('id',$user_id)
+                ->update([
+                    'last_channel_opening_date' => Carbon::now()
+                ]);
+    }
+
+    //////////////////////////////
     public function delete_channel_content(Request $request)
     {
         $this->validate($request,[
@@ -236,6 +248,7 @@ class channel_controller extends Controller
         ]);
     }
 
+    /////////////////////////////
     public function get_all_channel_contents()
     {
         $contents = DB::table('channel_contents')
@@ -247,11 +260,13 @@ class channel_controller extends Controller
         ]);
     }
     
+    ////////////////////////////////
     public function submit_contents_to_channel()
     {
         return view('admin_panel.channel-pages.channel');
     }
 
+    ///////////////////////////////
     public function get_channel_content_by_id($slug)
     {
         // $exploded_slug = explode('-',$slug);
@@ -290,21 +305,8 @@ class channel_controller extends Controller
         }
 
     }
-
-    protected function slugify_url($slug,$content_id,$title)
-    {
-        $real_slug = implode(explode(' ',$title),'-') . '-' . $content_id;
-        
-        if($real_slug != $slug)
-        {
-            return $real_slug;
-        }
-
-        else{
-            return false;
-        }
-    }
-
+    
+    // used in message controller check if it can be trait
     public function get_channel_info_for_this_user($user_record)
     {
         $sending_contacts_count = DB::table('messages')
@@ -420,14 +422,20 @@ class channel_controller extends Controller
         
     }
 
-    protected function update_user_last_channel_opening_date($user_id)
+    ///////////////////////////////////////
+    // zombie function
+    protected function slugify_url($slug,$content_id,$title)
     {
-        DB::table('myusers')
-                ->where('id',$user_id)
-                ->update([
-                    'last_channel_opening_date' => Carbon::now()
-                ]);
-    }
+        $real_slug = implode(explode(' ',$title),'-') . '-' . $content_id;
+        
+        if($real_slug != $slug)
+        {
+            return $real_slug;
+        }
 
+        else{
+            return false;
+        }
+    }
 
 }
