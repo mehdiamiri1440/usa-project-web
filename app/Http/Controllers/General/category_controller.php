@@ -10,20 +10,14 @@ use DB;
 
 class category_controller extends Controller
 {
+    ////////////////////////////
     public function get_all_categories(Request $request)
     {
         $categories = null;
         $parent_id = $request->parent_id;
         $casade_list = $request->cascade_list;
 
-        $all_categories = Cache::remember(md5('categories'),1,function(){
-            return DB::table('categories')
-                        ->leftJoin('products','products.category_id','=','categories.id')
-                        ->select('categories.*',DB::raw('count(products.id) as score'))
-                        ->groupBy('categories.id','categories.created_at','categories.updated_at','categories.category_name','categories.parent_id')
-                        ->orderByRaw('score desc, categories.id')
-                        ->get();
-        });
+        $all_categories = $this->cache_all_categories_and_return_cache();
 
         if ( ! $request->has('parent_id')) {
             $categories = $all_categories->filter(function($category){
@@ -67,8 +61,11 @@ class category_controller extends Controller
                 });
             }
         } 
-        else {
+        else 
+        {
+
             if ($request->has('cascade_list') && $casade_list == true) {
+
                 $categories = [];
 
                 // $categories['category'] = category::find($parent_id);
@@ -88,32 +85,56 @@ class category_controller extends Controller
                     return $category->parent_id == $parent_id;
                 });
 
-                    if(! is_null($other))
-                    {
-                        ($categories->subcategories)[] = $other;
-                    }
-            } else {
-                            // $categories = category::where('parent_id', $parent_id)
-                            //     ->get();
-                            $other = null;
-                            $categories = $all_categories->filter(function($category) use($parent_id,&$other){
-                                if($category->parent_id == $parent_id && $category->category_name == 'سایر'){
-                                    $other = $category;
-                                    return false;
-                                }
-
-                                return $category->parent_id == $parent_id;
-                            });
-
-                            if(! is_null($other)){
-                                $categories[] = $other;
-                            }
-                        }
-                    }
-
-                    return response()->json([
-                        'status' => true,
-                        'categories' => array_values($categories->toArray()),
-                    ], 200);
+                if(! is_null($other))
+                {
+                    ($categories->subcategories)[] = $other;
                 }
+            } 
+            else 
+            {
+
+                // $categories = category::where('parent_id', $parent_id)
+                //     ->get();
+                $other = null;
+                $categories = $all_categories->filter(function($category) use($parent_id,&$other){
+                    if($category->parent_id == $parent_id && $category->category_name == 'سایر'){
+                        $other = $category;
+                        return false;
+                    }
+
+                    return $category->parent_id == $parent_id;
+                });
+
+                if(! is_null($other)){
+                    $categories[] = $other;
+                }
+            }
+        }
+
+        return response()->json([
+            'status' => true,
+            'categories' => array_values($categories->toArray()),
+        ], 200);
+    }    
+
+    public function cache_all_categories_and_return_cache(){
+
+        $all_categories = Cache::remember(md5('categories'),1,function(){
+            return $this->get_all_categories_from_DB();
+        });
+        return $all_categories;
     }
+    
+
+    public function get_all_categories_from_DB(){
+
+        $all_categories = DB::table('categories')
+                    ->leftJoin('products','products.category_id','=','categories.id')
+                    ->select('categories.*',DB::raw('count(products.id) as score'))
+                    ->groupBy('categories.id','categories.created_at','categories.updated_at','categories.category_name','categories.parent_id')
+                    ->orderByRaw('score desc, categories.id')
+                    ->get();
+        return $all_categories;
+    }
+
+}
