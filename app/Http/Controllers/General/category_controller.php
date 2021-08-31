@@ -115,5 +115,59 @@ class category_controller extends Controller
                         'status' => true,
                         'categories' => array_values($categories->toArray()),
                     ], 200);
-                }
     }
+
+
+    public function get_related_category_names(Request $request)
+    {
+        $this->validate($request,[
+            'category_id' => 'required|exists:categories,id',
+            'category_name' => 'required|string'
+        ]);
+
+        $category_id = $request->category_id;
+        $category_name = $request->category_name;
+
+        $category_names = $this->get_related_category_names_array($category_id,$category_name);
+
+        return response()->json([
+            'status' => true,
+            'category_names' => $category_names
+        ]);
+    }
+
+    public function get_related_category_names_array($category_id,$category_name)
+    {
+        $related_category_names = DB::table('tags')
+                            ->where('category_id',$category_id)
+                            ->where('header','<>',$category_name)
+                            ->pluck('header')
+                            ->toArray();
+
+        $related_category_names = array_filter($related_category_names,function($item){
+            return $item == strip_tags($item);
+        });
+
+        return array_unique($related_category_names);
+    }
+
+    public function get_all_extra_category_names()
+    {
+        $category_names = DB::table('tags')
+                                ->whereNotExists(function($q){
+                                    $q->select(DB::raw(1))
+                                        ->from('categories')
+                                        ->where('categories.category_name','tags.header');
+                                })->pluck('header')
+                                ->toArray();
+
+        $category_names = array_filter($category_names,function($item){
+            return $item == strip_tags($item);
+        });
+
+        return array_unique($category_names);
+    }
+}
+
+    
+

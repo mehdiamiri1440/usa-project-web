@@ -133,6 +133,10 @@ Route::post('/get_category_list', [
     'as' => 'get_category_list',
 ]);
 
+Route::post('/get_related_categories',[
+    'uses' => 'General\category_controller@get_related_category_names'
+]);
+
 Route::post('/get_category_meta_data',[
     'uses' => 'Product\product_controller@get_category_tags_data_if_any',
     'as' => 'get_gategory_meta_data'
@@ -712,6 +716,7 @@ Route::post('/profile/get-user-comments',[
     'uses' => 'Accounting\comment_controller@get_user_comments',
     'as' => 'get_user_comments'
 ]);
+
 
 // Route::post('/get_buyAd_list_by_user_name', [
 //     'uses' => 'BuyAd\buyAd_controller@get_buyAd_list_by_user_name',

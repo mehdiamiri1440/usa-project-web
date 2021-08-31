@@ -30,7 +30,7 @@
         </button>
       </div>
     </div>
-
+   
     <main id="main" class="container">
       <div class="col-xs-12 pull-left col-lg-9">
         <div class="row">
@@ -580,8 +580,8 @@
                 class="contents"
               >
               @foreach($categoryMetaData['category_info'] as $categoryMeta)
-                <div>{!! $categoryMeta['header'] ?? $categoryMeta[0]['header'] !!}</div>
-                <div>{!! $categoryMeta['content'] ?? $categoryMeta[0]['content'] !!}</div>
+                  <div>{!! $categoryMeta['header'] ?? $categoryMeta[0]['header'] !!}</div>
+                  <div>{!! $categoryMeta['content'] ?? $categoryMeta[0]['content'] !!}</div>
               @endforeach
               </div>
             </div>
