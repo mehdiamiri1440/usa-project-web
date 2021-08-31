@@ -14,6 +14,8 @@ class buyAd_recommender_controller extends Controller
     protected $sold_coef = 1;
     protected $previous_transaction_with_buyer_coef = 1 ;
     
+
+    // all of this controller contain zombie functions no route no usage in project
     public function buyAd_list_recommender_for_seller(&$buyAd_list,$seller_user_id)
     {
         $registered_product_sub_category_array = $this->get_seller_registered_products_sub_category_array($seller_user_id);
