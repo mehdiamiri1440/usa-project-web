@@ -5,10 +5,11 @@ namespace App\Http\Controllers\Payment;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Models\product;
+use App\Http\Controllers\Controller;
 use DB;
 use App\Models\premium_service;
 
-trait wallet_controller 
+class wallet_controller extends Controller
 {
     public function do_charge_wallet($amount)
     {
