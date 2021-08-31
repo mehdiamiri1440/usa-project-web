@@ -11,6 +11,8 @@ use App\Models\premium_service;
 
 class wallet_controller extends Controller
 {
+
+    /////////////////////
     public function do_charge_wallet($amount)
     {
         if($amount >= 1000){
@@ -50,6 +52,7 @@ class wallet_controller extends Controller
         } 
     }
 
+    ///////////////////////
     public function do_app_charge_wallet($user_id,$amount)
     {
         if($amount >= 1000){
@@ -90,6 +93,7 @@ class wallet_controller extends Controller
         } 
     }
 
+    ///////////////////////
     public function wallet_payment_callback()
     {
         try{ 
@@ -112,6 +116,7 @@ class wallet_controller extends Controller
         }
     }
 
+    /////////////////////////////
     public function app_wallet_payment_callback()
     {
         try{ 
@@ -134,51 +139,7 @@ class wallet_controller extends Controller
         }
     }
 
-    protected function do_after_payment_changes_for_wallet_charge($payment_amount,$user_id)
-    {
-        if($user_id && is_integer((integer)$payment_amount)){
-            DB::table('myusers')
-                        ->where('id',$user_id)
-                        ->increment('wallet_balance',$payment_amount);
-        }
-
-        return redirect('/pricing');  
-    }
-
-    public function insert_expendig_log_record($service_id,$user_id,$count = 1)
-    {
-        $service_record = premium_service::find($service_id);
-
-        $amount = $service_record->current_unit_cost * $count;
-
-        $is_balance_updated = $this->update_user_account_balance($amount,$user_id);
-
-        if($is_balance_updated == true){
-            $now = Carbon::now();
-
-            DB::table('expending_logs')
-                    ->insert([
-                        'created_at' => $now,
-                        'updated_at' => $now,
-                        'service_id' => $service_record->id,
-                        'myuser_id'  => $user_id,
-                        'amount'     => $amount,
-                        'count'      => $count
-                    ]);
-        }
-        
-    }
-
-    protected function update_user_account_balance($price,$user_id)
-    {
-        $result = DB::table('myusers')
-                    ->where('id', $user_id)
-                    ->where('wallet_balance','>=',$price)
-                    ->decrement('wallet_balance',$price);
-
-        return $result;
-    }
-
+    ////////////////////////
     public function do_elevator_payment_from_wallet(Request $request)
     {
         $this->validate($request,[
@@ -223,16 +184,61 @@ class wallet_controller extends Controller
             'msg' => 'done!'
         ],200);
     }
-
-    public function do_extra_buyAd_capacity_payment_from_wallet(Request $request)
+    
+    // used in other places too
+    public function insert_expendig_log_record($service_id,$user_id,$count = 1)
     {
-        //
+        $service_record = premium_service::find($service_id);
+
+        $amount = $service_record->current_unit_cost * $count;
+
+        $is_balance_updated = $this->update_user_account_balance($amount,$user_id);
+
+        if($is_balance_updated == true){
+            $now = Carbon::now();
+
+            DB::table('expending_logs')
+                    ->insert([
+                        'created_at' => $now,
+                        'updated_at' => $now,
+                        'service_id' => $service_record->id,
+                        'myuser_id'  => $user_id,
+                        'amount'     => $amount,
+                        'count'      => $count
+                    ]);
+        }
+        
     }
 
-    public function do_extra_product_capacity_payment_from_wallet(Request $request)
+    protected function update_user_account_balance($price,$user_id)
     {
-        //
+        $result = DB::table('myusers')
+                    ->where('id', $user_id)
+                    ->where('wallet_balance','>=',$price)
+                    ->decrement('wallet_balance',$price);
+
+        return $result;
     }
+
+    ///////////////////////////// incommon functions
+
+    protected function record_payment_log($payment)
+    {
+        DB::table('payment_logs')->insert($payment);
+    }
+
+    protected function do_after_payment_changes_for_wallet_charge($payment_amount,$user_id)
+    {
+        if($user_id && is_integer((integer)$payment_amount)){
+            DB::table('myusers')
+                        ->where('id',$user_id)
+                        ->increment('wallet_balance',$payment_amount);
+        }
+
+        return redirect('/pricing');  
+    }
+
+    ///////////////////////// zombie functions 
 
     protected function do_after_payment_changes_for_elevator($product_id)
     {   
@@ -255,8 +261,14 @@ class wallet_controller extends Controller
         
     }
 
-    protected function record_payment_log($payment)
+    public function do_extra_buyAd_capacity_payment_from_wallet(Request $request)
     {
-        DB::table('payment_logs')->insert($payment);
+        //
     }
+
+    public function do_extra_product_capacity_payment_from_wallet(Request $request)
+    {
+        //
+    }
+
 }
