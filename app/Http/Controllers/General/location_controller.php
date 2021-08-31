@@ -11,6 +11,8 @@ use DB;
 
 class location_controller extends Controller
 {
+
+    //////////////////////////////////
     public function get_all_provinces_or_cities_in_the_province_in_iran(Request $request)
     {
 
@@ -21,9 +23,11 @@ class location_controller extends Controller
             });
 
             if($request->has('cascade_list') && $request->cascade_list == true){
+
                 $all_cities = DB::table('cities')->get();
 
                 $cascade_provinces = $provinces->each(function($province) use($all_cities){
+                    
                     $province_id = $province->id;
 
                     $province->cities = $all_cities->filter(function($city) use($province_id){
@@ -41,7 +45,8 @@ class location_controller extends Controller
                 'status' => true,
                 'provinces' => array_values($provinces->toArray()),
             ], 200);
-        } else {
+        } else 
+        {
             $this->validate($request, [
                 'province_id' => 'numeric|exists:cities,province_id',
             ]);
