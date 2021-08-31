@@ -34,6 +34,7 @@ class message_controller extends Controller
     ];
 
     //methods
+    ////////////////////////
     public function send_message(Request $request)
     {
         $this->validate_input($request, $this->sendig_msg_validation_rules);
@@ -75,11 +76,6 @@ class message_controller extends Controller
         return false;
     }
 
-    protected function validate_input(&$request, $validation_rules)
-    {
-        $this->validate($request, $validation_rules);
-    }
-
     protected function save_msg_in_database($request)
     {
         $msg_object = new message();
@@ -96,12 +92,18 @@ class message_controller extends Controller
         }
     }
 
+    protected function validate_input(&$request, $validation_rules)
+    {
+        $this->validate($request, $validation_rules);
+    }
+
     protected function notify_msg_receiver($msg)
     {
         SendNewMessageNotification::dispatch($msg);
     }
 
     //public method
+    /////////////////////////////
     public function send_reply_message_to_the_buyAd(Request $request)
     {
         $this->validate($request,$this->buyAd_reply_validation_rules);
@@ -249,8 +251,8 @@ class message_controller extends Controller
         
     }
 
-
     //public method
+    ////////////////////////////
     public function get_current_user_contact_list(Request $request)
     {
         $this->validate($request,[
@@ -354,43 +356,8 @@ class message_controller extends Controller
         return $contact_info;
     }
 
-    protected function get_user_contact_unread_messages_count($user_id, $contact_id)
-    {
-        $msgs = message::where([
-                ['sender_id', '=', $contact_id],
-                ['receiver_id', '=', $user_id],
-            ])
-            ->orWhere([
-                ['sender_id', '=', $user_id],
-                ['receiver_id', '=', $contact_id],
-            ])->get();
-            
-        $unread_msgs = [];
-
-        $msgs->each(function ($msg) use (&$unread_msgs,$contact_id) {
-            if ($msg->sender_id == $contact_id && $msg->is_read == false) {
-                $unread_msgs[] = $msg;
-            }
-        });
-
-        $unread_msgs_count = sizeof($unread_msgs);
-
-        $last_msg_time_date = null;
-
-        if ($msgs->count() > 0) {
-            $last_msg_record = $msgs->sortBy('created_at')->last();
-            $last_msg_time_date = $msgs->max('created_at')
-                ->format('Y-m-d H:i:s');
-        }
-        //get the last msg time here in order to arrange contact list(regardless of read or not)
-        return [
-            'last_msg_text' => $last_msg_record->text, 
-            'unread_msgs_count' => $unread_msgs_count,
-            'last_msg_time_date' => $last_msg_time_date,
-        ];
-    }
-
     //public method
+    ////////////////////////////
     public function get_total_unread_messages_for_current_user()
     {
         $user_id = session('user_id');
@@ -485,15 +452,6 @@ class message_controller extends Controller
         return $messages;
     }
 
-    function my_array_key_last(array $array) {
-        if( !empty($array) ) return key(array_slice($array, -1, 1, true));
-    }
-
-    protected function is_this_string_a_valid_phone_number($string)
-    {
-        return preg_match("/^((09[0-9]{9})|(\x{06F0}\x{06F9}[\x{06F0}-\x{06F9}]{9}))$/u",$string) === 1;
-    }
-
     protected function mark_all_messages_as_read($reciver_id, $sender_id)
     {
         DB::table('messages')
@@ -504,8 +462,18 @@ class message_controller extends Controller
                     'updated_at' => Carbon::now(),
                     ]);
     }
+    
+    protected function my_array_key_last(array $array) {
+        if( !empty($array) ) return key(array_slice($array, -1, 1, true));
+    }
+
+    protected function is_this_string_a_valid_phone_number($string)
+    {
+        return preg_match("/^((09[0-9]{9})|(\x{06F0}\x{06F9}[\x{06F0}-\x{06F9}]{9}))$/u",$string) === 1;
+    }
 
     //public method
+    /////////////////////////////////
     public function set_last_chat_contact(Request $request)
     {
         $this->validate($request, [
@@ -531,6 +499,7 @@ class message_controller extends Controller
         session(['last_contact' => collect($contact)]);
     }
 
+    /////////////////////////////////
     public function get_last_chat_contact_info_from_session(Request $request)
     {
         $contact = session('last_contact');
@@ -541,6 +510,45 @@ class message_controller extends Controller
         ]);
     }
 
+    //////////////////////// incommon functions
+
+    protected function get_user_contact_unread_messages_count($user_id, $contact_id)
+    {
+        $msgs = message::where([
+                ['sender_id', '=', $contact_id],
+                ['receiver_id', '=', $user_id],
+            ])
+            ->orWhere([
+                ['sender_id', '=', $user_id],
+                ['receiver_id', '=', $contact_id],
+            ])->get();
+            
+        $unread_msgs = [];
+
+        $msgs->each(function ($msg) use (&$unread_msgs,$contact_id) {
+            if ($msg->sender_id == $contact_id && $msg->is_read == false) {
+                $unread_msgs[] = $msg;
+            }
+        });
+
+        $unread_msgs_count = sizeof($unread_msgs);
+
+        $last_msg_time_date = null;
+
+        if ($msgs->count() > 0) {
+            $last_msg_record = $msgs->sortBy('created_at')->last();
+            $last_msg_time_date = $msgs->max('created_at')
+                ->format('Y-m-d H:i:s');
+        }
+        //get the last msg time here in order to arrange contact list(regardless of read or not)
+        return [
+            'last_msg_text' => $last_msg_record->text, 
+            'unread_msgs_count' => $unread_msgs_count,
+            'last_msg_time_date' => $last_msg_time_date,
+        ];
+    }
+
+    ////////////////////////// these four functions does not used in this controller
     public function get_users_who_have_unread_messages($exclude_users_from_sms_daily_black_list = true)
     {
         $to = Carbon::now();
@@ -653,4 +661,5 @@ class message_controller extends Controller
 
         return $user_array;
     }
+
 }
