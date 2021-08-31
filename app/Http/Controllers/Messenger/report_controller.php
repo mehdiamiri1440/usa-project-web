@@ -10,6 +10,7 @@ use DB;
 
 class report_controller extends Controller
 {
+    //////////////////////////
     public function get_report_options()
     {
         $report_options = DB::table('report_options')
@@ -22,6 +23,7 @@ class report_controller extends Controller
         ],200);
     }
 
+    //////////////////////////
     public function send_user_report(Request $request)
     {
         $rules = $this->set_report_validation_rules($request);
@@ -79,7 +81,7 @@ class report_controller extends Controller
         $this->validate($request,$rules);
 
         if($request->has('option_id')){
-            if(is_integer($request->option_id)){
+            if(is_integer($request->option_id)){// these two above conditions were tested in validate part
                 $report_option_record = DB::table('report_options')
                                             ->where('id',$request->option_id)
                                             ->get();
