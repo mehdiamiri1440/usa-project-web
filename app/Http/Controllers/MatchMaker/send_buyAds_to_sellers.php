@@ -9,6 +9,7 @@ use DB;
 
 class send_buyAds_to_sellers extends Controller
 {
+    // combie controller
     public function send_buyAd_to_sellers($buyAd_id,&$sellers_user_id)
     {
         $records_to_insert = [];
