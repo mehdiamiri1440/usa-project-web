@@ -32,6 +32,7 @@ class group_message_controller extends Controller
         'users.last_name as parent_author_last_name',
     ];
 
+    ////////////////////////////
     public function send_message(Request $request)
     {
         $this->validate_rules($request,[
@@ -181,12 +182,14 @@ class group_message_controller extends Controller
         return $link_flag;
     }
 
+    // uncompeleted function
     protected function does_text_contain_taboo_words($text)
     {
         return false;
     }
 
-    protected function str_replace_once($str_pattern, $str_replacement, $string){
+    protected function str_replace_once($str_pattern, $str_replacement, $string)
+    {
 
         if (strpos($string, $str_pattern) !== false){
             $occurrence = strpos($string, $str_pattern);
@@ -203,50 +206,7 @@ class group_message_controller extends Controller
         SendGroupMessageNotification::dispatch($group_record->topic_name)->onQueue('fcm');
     }
 
-    public function make_message_accessible_for_group_subscribers($msg,$group_id)
-    {
-        $group_subscription_ids = $this->get_group_subscription_ids($group_id);
-
-        $data_to_be_inserted = $this->get_data_to_be_inserted_in_receivers_table_as_array($msg,$group_subscription_ids);
-        
-        DB::table('group_message_receivers')->insert($data_to_be_inserted);
-    }
-
-    protected function get_group_subscription_ids($group_id)
-    {
-        $group_subscibers_ids = messenger_group_subscriber::where('group_id',$group_id)
-                                                            ->select('id','myuser_id')
-                                                            ->distinct()
-                                                            ->get();
-        return $group_subscibers_ids;
-    }
-
-    protected function get_data_to_be_inserted_in_receivers_table_as_array($msg,$group_subscription_ids)
-    {
-        $result = [];
-        $now = Carbon::now();
-
-        $user_id = session('user_id');
-
-        $group_subscription_ids->each(function($subscription_record) use(&$result,$now,$msg){
-            $temp = [
-                'created_at' => $now,
-                'updated_at' => $now,
-                'subscription_id' => $subscription_record->id,
-                'message_id' => $msg->id,
-                'is_read' => false,
-            ];
-
-            if($msg->sender_id == $subscription_record->myuser_id){
-                $temp['is_read'] = true;
-            }
-
-            $result[] = $temp;
-        });
-
-        return $result;
-    }
-
+    //////////////////////////////////
     public function get_user_groups_list(Request $request)
     {
         $user_id = session('user_id');
@@ -295,6 +255,7 @@ class group_message_controller extends Controller
         
     }
 
+    ////////////////////////////////////
     public function get_group_chats(Request $request)
     {
         $this->validate_rules($request,[
@@ -350,7 +311,7 @@ class group_message_controller extends Controller
         return $subsciption_id;
     }
 
-
+    ///////////////////////////////
     public function subscribe_user_in_group(Request $request)
     {
         $this->validate_rules($request,[
@@ -389,16 +350,7 @@ class group_message_controller extends Controller
         ],201);
     }
 
-    protected function is_user_already_subscribed($user_id,$group_id)
-    {
-        $status = messenger_group_subscriber::where('myuser_id',$user_id)
-                                            ->where('group_id',$group_id)
-                                            ->get()
-                                            ->count();
-        
-        return $status;
-    }
-
+    /////////////////////////////
     public function unsubscribe_user_from_group(Request $request)
     {
         $this->validate_rules($request,[
@@ -412,7 +364,84 @@ class group_message_controller extends Controller
                                         ->where('group_id',$group_id)
                                         ->delete();
     }
+    
+    //////////////////////////
+    public function get_all_groups()
+    {
+        $groups = messenger_group::select('id','name','photo')
+                            ->get();
 
+        return response()->json([
+            'status' => true,
+            'all_groups' => $groups
+        ],200);
+    }
+
+    ///////////////////// incommon functions
+
+    protected function is_user_already_subscribed($user_id,$group_id)
+    {
+        $status = messenger_group_subscriber::where('myuser_id',$user_id)
+                                            ->where('group_id',$group_id)
+                                            ->get()
+                                            ->count();
+        
+        return $status;
+    }
+
+    protected function validate_rules($request,$rules)
+    {
+        $this->validate($request,$rules);
+    }
+
+    //////////////////// incommon functions end
+
+    /////////////////////////// three following functions does not used in this controller
+    public function make_message_accessible_for_group_subscribers($msg,$group_id)
+    {
+        $group_subscription_ids = $this->get_group_subscription_ids($group_id);
+
+        $data_to_be_inserted = $this->get_data_to_be_inserted_in_receivers_table_as_array($msg,$group_subscription_ids);
+        
+        DB::table('group_message_receivers')->insert($data_to_be_inserted);
+    }
+
+    protected function get_group_subscription_ids($group_id)
+    {
+        $group_subscibers_ids = messenger_group_subscriber::where('group_id',$group_id)
+                                                            ->select('id','myuser_id')
+                                                            ->distinct()
+                                                            ->get();
+        return $group_subscibers_ids;
+    }
+
+    protected function get_data_to_be_inserted_in_receivers_table_as_array($msg,$group_subscription_ids)
+    {
+        $result = [];
+        $now = Carbon::now();
+
+        $user_id = session('user_id');
+
+        $group_subscription_ids->each(function($subscription_record) use(&$result,$now,$msg){
+            $temp = [
+                'created_at' => $now,
+                'updated_at' => $now,
+                'subscription_id' => $subscription_record->id,
+                'message_id' => $msg->id,
+                'is_read' => false,
+            ];
+
+            if($msg->sender_id == $subscription_record->myuser_id){
+                $temp['is_read'] = true;
+            }
+
+            $result[] = $temp;
+        });
+
+        return $result;
+    }
+
+    // this function does not used in this controller
     public function make_latest_group_messages_accessible_for_new_subscriber($subscription_record)
     {
         $subscription_id = messenger_group_subscriber::where('group_id',$subscription_record->group_id)
@@ -444,19 +473,4 @@ class group_message_controller extends Controller
 
     }
 
-    public function get_all_groups()
-    {
-        $groups = messenger_group::select('id','name','photo')
-                            ->get();
-
-        return response()->json([
-            'status' => true,
-            'all_groups' => $groups
-        ],200);
-    }
-
-    protected function validate_rules($request,$rules)
-    {
-        $this->validate($request,$rules);
-    }
 }
