@@ -70,6 +70,38 @@ class seller_finder_controller extends Controller
         return $buyAd_name_array;
     }
 
+    protected function get_category_and_subcategory_name($subcategory_id)
+    {
+        $subcategory_record = category::where('id', $subcategory_id)
+            ->select('category_name', 'parent_id')
+            ->get()
+            ->first();
+
+        $category_record = category::where('id', $subcategory_record->parent_id)
+            ->select('category_name')
+            ->get()
+            ->first();
+
+        return [
+            'category_name' => $category_record->category_name,
+            'subcategory_name' => $subcategory_record->category_name,
+        ];
+    }
+
+    protected function remove_black_list_words(&$words)
+    {
+        $result = [];
+
+        foreach ($words as $word) {
+            $index = array_search($word, $this->words_blacklist);
+            if ($index === false) {
+                $result[] = $word;
+            }
+        }
+
+        return $result;
+    }
+
     protected function get_related_products_to_the_given_buyAd($buyAd,$buyAd_name_array)
     {
         $until_date = Carbon::now();
@@ -211,37 +243,6 @@ class seller_finder_controller extends Controller
         return $result;
     }
 
-    protected function remove_black_list_words(&$words)
-    {
-        $result = [];
-
-        foreach ($words as $word) {
-            $index = array_search($word, $this->words_blacklist);
-            if ($index === false) {
-                $result[] = $word;
-            }
-        }
-
-        return $result;
-    }
-
-    protected function get_category_and_subcategory_name($subcategory_id)
-    {
-        $subcategory_record = category::where('id', $subcategory_id)
-            ->select('category_name', 'parent_id')
-            ->get()
-            ->first();
-
-        $category_record = category::where('id', $subcategory_record->parent_id)
-            ->select('category_name')
-            ->get()
-            ->first();
-
-        return [
-            'category_name' => $category_record->category_name,
-            'subcategory_name' => $subcategory_record->category_name,
-        ];
-    }
 
     protected function apply_selection_algorithm($buyAd_id,$seller_ids,$premium_seller_ids)
     {
@@ -290,6 +291,55 @@ class seller_finder_controller extends Controller
         return $final_filtered_sellers;
     }
 
+    ///////////////////////////////// incommon functions
+
+    protected function get_user_last_activity_date($user_id)
+    {
+        $sending_message_records = DB::table('messages')
+                                ->where('sender_id',$user_id)
+                                ->whereNotExists(function($q) use($user_id){ //prevent duplication
+                                    $q->select(DB::raw(1))
+                                            ->from('auto_sent_phone_numbers_meta_datas as tmp')
+                                            ->whereRaw("tmp.sender_id = $user_id")
+                                            ->whereRaw('messages.receiver_id <> tmp.receiver_id');
+                                })
+                                ->select(DB::raw("distinct(created_at) as date"));
+
+        $seen_message_records = DB::table('messages')->where('receiver_id',$user_id)
+                                        ->where('is_read',true)
+                                        ->select(DB::raw("distinct(updated_at) as date"));
+
+        $profile_records = DB::table('profiles')->where('myuser_id',$user_id)
+                                            ->select(DB::raw("distinct(updated_at) as date"));
+
+        $product_records = DB::table('products')->where('products.myuser_id',$user_id)
+                                            ->select(DB::raw("distinct(updated_at) as date"));
+
+        $user_record = DB::table('myusers')->where('id',$user_id)
+                                            ->select(DB::raw("updated_at as date"));
+
+        $phone_view_record = DB::table('phone_number_view_logs')->where('myuser_id',$user_id)
+                                                            ->select(DB::raw('created_at as date'));
+
+        $last_activity_date = DB::table('buy_ads')->where('buy_ads.myuser_id',$user_id)
+                                            ->select(DB::raw("distinct(updated_at) as date"))
+                                            ->union($sending_message_records)
+                                            ->union($profile_records)
+                                            ->union($product_records)
+                                            ->union($sending_message_records)
+                                            ->union($user_record)
+                                            ->union($phone_view_record)
+                                            ->orderBy('date','desc')
+                                            ->get()
+                                            ->first()
+                                            ->date;
+
+
+        return $last_activity_date;
+    }
+
+    /////////////////////////////////////// zombie functions
+    // zombie function
     protected function apply_sellers_filters($seller_ids,$premium_seller_ids)
     {
         $filtered_sellers = [];
@@ -327,48 +377,6 @@ class seller_finder_controller extends Controller
 
         return $filtered_sellers;
 
-    }
-
-    protected function apply_detailed_conditions_for_selecting_sellers($filtered_sellers,$filtered_sellers_helper,$premium_seller_ids)
-    {
-        
-        $tmp = buy_ad_suggestion::whereIn('seller_id',$filtered_sellers)
-                                    ->select(DB::raw('MAX(created_at) as date,seller_id as user_id'))
-                                    // ->distinct('seller_id')
-                                    ->groupBy('user_id')
-                                    ->orderBy('date')
-                                    ->get()
-                                    ->values()
-                                    ->toArray();
-
-        $related_previous_buyAd_suggestion_records = [];
-        foreach($tmp as $seller){
-            $related_previous_buyAd_suggestion_records[] = $seller['user_id'];
-        }
-        
-        if(count($related_previous_buyAd_suggestion_records) > 0){
-            $filtered_sellers = array_filter($filtered_sellers,function($seller_id) use($related_previous_buyAd_suggestion_records){
-                return  in_array($seller_id,$related_previous_buyAd_suggestion_records) === false;
-            });
-            
-            if(count($filtered_sellers) < 12){
-                $shortage_count = 12 - count($filtered_sellers);
-                $filtered_sellers = array_merge($filtered_sellers,array_slice($related_previous_buyAd_suggestion_records,0,$shortage_count));
-                $filtered_sellers_helper['others'] = $filtered_sellers;
-            }
-            else{
-                $filtered_sellers_helper['others'] = $filtered_sellers;
-                $filtered_sellers = array_slice($filtered_sellers,0,12);
-            }
-        }
-        else{
-            $filtered_sellers_helper['others'] = $filtered_sellers;
-            $filtered_sellers = array_slice($filtered_sellers,0,12);
-        }
-        
-        $filtered_sellers = $this->distribute_buyAd_suggestions_in_sellers($filtered_sellers,$filtered_sellers_helper,$premium_seller_ids);
-
-        return $filtered_sellers;
     }
 
     protected function get_user_response_info($user_id,$product_last_uptade_date = null,$viewer_response_time = 0)
@@ -419,31 +427,46 @@ class seller_finder_controller extends Controller
         return compact('response_rate','response_time','ums'); // UMS stands for unique message senders to this user
     }
 
-    protected function get_suggested_buyAds_sent_to_seller($seller_id)
+    protected function apply_detailed_conditions_for_selecting_sellers($filtered_sellers,$filtered_sellers_helper,$premium_seller_ids)
     {
-        $suggested_buyAds = DB::table('buy_ad_suggestions')
-                                        ->where('seller_id',$seller_id)
-                                        ->get();
         
-        return $suggested_buyAds;
-    }
+        $tmp = buy_ad_suggestion::whereIn('seller_id',$filtered_sellers)
+                                    ->select(DB::raw('MAX(created_at) as date,seller_id as user_id'))
+                                    // ->distinct('seller_id')
+                                    ->groupBy('user_id')
+                                    ->orderBy('date')
+                                    ->get()
+                                    ->values()
+                                    ->toArray();
 
-    protected function get_seller_response_rate_to_previous_buyAd_suggestions($seller_id,$suggested_buyAds)
-    {
-        $contacts_count_from_suggested_buyAd_reply = DB::table('buy_ad_reply_meta_datas')
-                                                            ->whereIn('buy_ad_reply_meta_datas.buy_ad_id',$suggested_buyAds->pluck('buy_ad_id')->all())
-                                                            ->where('buy_ad_reply_meta_datas.replier_id',$seller_id)
-                                                            ->get()
-                                                            ->count();
+        $related_previous_buyAd_suggestion_records = [];
+        foreach($tmp as $seller){
+            $related_previous_buyAd_suggestion_records[] = $seller['user_id'];
+        }
+        
+        if(count($related_previous_buyAd_suggestion_records) > 0){
+            $filtered_sellers = array_filter($filtered_sellers,function($seller_id) use($related_previous_buyAd_suggestion_records){
+                return  in_array($seller_id,$related_previous_buyAd_suggestion_records) === false;
+            });
+            
+            if(count($filtered_sellers) < 12){
+                $shortage_count = 12 - count($filtered_sellers);
+                $filtered_sellers = array_merge($filtered_sellers,array_slice($related_previous_buyAd_suggestion_records,0,$shortage_count));
+                $filtered_sellers_helper['others'] = $filtered_sellers;
+            }
+            else{
+                $filtered_sellers_helper['others'] = $filtered_sellers;
+                $filtered_sellers = array_slice($filtered_sellers,0,12);
+            }
+        }
+        else{
+            $filtered_sellers_helper['others'] = $filtered_sellers;
+            $filtered_sellers = array_slice($filtered_sellers,0,12);
+        }
+        
+        $filtered_sellers = $this->distribute_buyAd_suggestions_in_sellers($filtered_sellers,$filtered_sellers_helper,$premium_seller_ids);
 
-        $phone_number_view_count_from_suggested_buyAds = DB::tabl('phone_number_view_logs')
-                                                            ->whereIn('phone_number_view_logs.myuser_id',$suggested_buyAds->pluck('buy_ad_id')->all())
-                                                            ->where('phone_number_view_logs.viewer_id',$seller_id)
-                                                            ->get()
-                                                            ->count();
-
-
-        return round(( ($contacts_count_from_suggested_buyAd_reply + $phone_number_view_count_from_suggested_buyAds) * 100) / count($suggested_buyAds));
+        return $filtered_sellers;
     }
 
     protected function distribute_buyAd_suggestions_in_sellers($filtered_sellers,$filtered_sellers_helper,$premium_seller_ids)
@@ -535,49 +558,34 @@ class seller_finder_controller extends Controller
         return $result_array;
     }
 
-    protected function get_user_last_activity_date($user_id)
+    protected function get_suggested_buyAds_sent_to_seller($seller_id)
     {
-        $sending_message_records = DB::table('messages')
-                                ->where('sender_id',$user_id)
-                                ->whereNotExists(function($q) use($user_id){ //prevent duplication
-                                    $q->select(DB::raw(1))
-                                            ->from('auto_sent_phone_numbers_meta_datas as tmp')
-                                            ->whereRaw("tmp.sender_id = $user_id")
-                                            ->whereRaw('messages.receiver_id <> tmp.receiver_id');
-                                })
-                                ->select(DB::raw("distinct(created_at) as date"));
-
-        $seen_message_records = DB::table('messages')->where('receiver_id',$user_id)
-                                        ->where('is_read',true)
-                                        ->select(DB::raw("distinct(updated_at) as date"));
-
-        $profile_records = DB::table('profiles')->where('myuser_id',$user_id)
-                                            ->select(DB::raw("distinct(updated_at) as date"));
-
-        $product_records = DB::table('products')->where('products.myuser_id',$user_id)
-                                            ->select(DB::raw("distinct(updated_at) as date"));
-
-        $user_record = DB::table('myusers')->where('id',$user_id)
-                                            ->select(DB::raw("updated_at as date"));
-
-        $phone_view_record = DB::table('phone_number_view_logs')->where('myuser_id',$user_id)
-                                                            ->select(DB::raw('created_at as date'));
-
-        $last_activity_date = DB::table('buy_ads')->where('buy_ads.myuser_id',$user_id)
-                                            ->select(DB::raw("distinct(updated_at) as date"))
-                                            ->union($sending_message_records)
-                                            ->union($profile_records)
-                                            ->union($product_records)
-                                            ->union($sending_message_records)
-                                            ->union($user_record)
-                                            ->union($phone_view_record)
-                                            ->orderBy('date','desc')
-                                            ->get()
-                                            ->first()
-                                            ->date;
-
-
-        return $last_activity_date;
+        $suggested_buyAds = DB::table('buy_ad_suggestions')
+                                        ->where('seller_id',$seller_id)
+                                        ->get();
+        
+        return $suggested_buyAds;
     }
+
+    protected function get_seller_response_rate_to_previous_buyAd_suggestions($seller_id,$suggested_buyAds)
+    {
+        $contacts_count_from_suggested_buyAd_reply = DB::table('buy_ad_reply_meta_datas')
+                                                            ->whereIn('buy_ad_reply_meta_datas.buy_ad_id',$suggested_buyAds->pluck('buy_ad_id')->all())
+                                                            ->where('buy_ad_reply_meta_datas.replier_id',$seller_id)
+                                                            ->get()
+                                                            ->count();
+
+        $phone_number_view_count_from_suggested_buyAds = DB::tabl('phone_number_view_logs')
+                                                            ->whereIn('phone_number_view_logs.myuser_id',$suggested_buyAds->pluck('buy_ad_id')->all())
+                                                            ->where('phone_number_view_logs.viewer_id',$seller_id)
+                                                            ->get()
+                                                            ->count();
+
+
+        return round(( ($contacts_count_from_suggested_buyAd_reply + $phone_number_view_count_from_suggested_buyAds) * 100) / count($suggested_buyAds));
+    }
+
+    ///////////////////////////////// zombie functions end
+
 
 }
