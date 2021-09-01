@@ -1,0 +1,10 @@
+app/get_product_list
+get_buyAd_list
+get_my_account_balance
+get-user-phone-contacts
+get-user-referral-info
+logout
+switch-role
+wallet-expend/buyAd-capacity
+wallet-expend/buy-package
+wallet-expend/product-capacity

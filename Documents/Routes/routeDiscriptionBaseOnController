@@ -1,0 +1,353 @@
+profile/add-comment=>
+App\Http\Controllers\Accounting\comment_controller@post_comment
+
+    arguments: text, rating_score, user_id
+
+    this will crate a comment for given user id and by already logged in user with the text and score provided
+
+profile/get-user-comments=>
+App\Http\Controllers\Accounting\comment_controller@get_user_comments
+
+    arguments: user_id,
+
+    it gets a user id and return all informations about that specific user comments
+
+profile/do-like=>
+App\Http\Controllers\Accounting\comment_controller@do_like_actions
+
+    arguments: comment_id, action
+
+    it gets an specific comment id and like or dislike as an actoin and store it in database
+
+profile/is-user-authorized-to-post-comment=>
+App\Http\Controllers\Accounting\comment_controller@is_user_authorized_to_post_comment_on_the_user
+
+    arguments: user_id,
+
+    gets apecific user id and checks whether already logged in user have the right to send comment on the  given user id
+
+profile/delete-user-comment=>
+App\Http\Controllers\Accounting\comment_controller@delete_comment
+
+    arguments: c_id,
+
+    gets a comment id and soft delete it if the comment is belong to already logged in user
+
+////////////////////////////////////////////////////////////////////////////////////////////
+
+get_seller_phone_number=>
+App\Http\Controllers\Accounting\phone_number_controller@get_seller_phone_number
+
+    arguments: p_id, s_id, item,
+
+    gets a product id and a seller id and checks whether the logged in user have the right to see
+    the seller phone number and if true it will send the phone number
+
+get_buyer_phone_number=>
+App\Http\Controllers\Accounting\phone_number_controller@get_buyer_phone_number
+
+    arguments: ba_id, b_id, item,
+
+    gets a buy advertisement id and a buyer id and checks whether already logged in user have the right 
+    to see phone number of the person who registred the advertisement if the b_id is the owner of ba_id
+
+set_phone_number_view_permission=>
+App\Http\Controllers\Accounting\phone_number_controller@set_my_phone_number_view_permissions
+
+    arguments: permission,
+
+    gets a boolean permission on whether the logged in user wants others be able to see his/her
+    phone number when they request it
+
+get_phone_number_viewers_list=>
+App\Http\Controllers\Accounting\phone_number_controller@get_my_phone_number_viewers_list
+
+    artguments: 
+
+    return last fifty persons who view the already logged in users phone number
+
+
+////////////////////////////////////////////////////////////////////////////////////////////
+
+shared-profile/{username}=>
+App\Http\Controllers\Accounting\profile_controller@get_user_shared_profile_info
+
+get_user_last_confirmed_profile_photo=>
+App\Http\Controllers\Accounting\profile_controller@get_user_last_confirmed_profile_photo
+
+user/profile_info=>
+App\Http\Controllers\Accounting\profile_controller@get_last_profile_info_with_all_related_content
+
+user/profile_modification=>
+App\Http\Controllers\Accounting\profile_controller@profile_modification
+
+get_user_statistics_by_user_name=>
+App\Http\Controllers\Accounting\profile_controller@get_user_statistics_by_user_name
+
+load_profile_by_user_name=>
+App\Http\Controllers\Accounting\profile_controller@get_last_profile_info_with_all_related_content_by_user_name
+
+////////////////////////////////////////////////////////////////////////////////////////////
+
+get_user_reputation_score=>
+App\Http\Controllers\Accounting\reputation_controller@calculate_user_reputation_score
+
+    arguments: user_id
+
+    calculate reputation score for the given user_id 
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+dologin=>
+App\Http\Controllers\Accounting\user_controller@login
+
+    arguments: phone, password, client, plain,
+
+    get phone number and password from a user and log in the user if information were true after that 
+    insert user login information in database
+
+    if the user redirect here from register part plain is false
+
+    if the information are true but the user is blocked does not let him/her to do login
+
+user/is_user_name_unique=>
+App\Http\Controllers\Accounting\user_controller@does_user_name_already_exists
+
+    arguments: user_name,
+
+    gets a user name and cheks if it already have been taken by other users or not
+
+user/is_national_code_unique=>
+App\Http\Controllers\Accounting\user_controller@does_national_code_already_exists
+
+    arguments: national_code,
+
+    get a national code and checks if it already set to other people or not
+
+change_password=>
+App\Http\Controllers\Accounting\user_controller@change_password
+
+    arguments: current_password, new_password,
+
+    gets current password and new password from logged in user and check if they are valid and
+    set new password in database after that
+
+get_seller_dashboard_required_data=>
+App\Http\Controllers\Accounting\user_controller@get_seller_dashboard_required_data
+
+    arguments:
+
+    return some data for ui to show logged in user dashboard information
+
+switch-role=>
+App\Http\Controllers\Accounting\user_controller@switch_user_role
+
+    arguments: 
+
+    get logged in user current role form session and change it to the oposite role buyer=>seller
+
+    return error if the request has sent with get method 
+
+get_show_pricing_page_status=>
+App\Http\Controllers\Accounting\user_controller@get_pricing_page_visit_status
+
+    arguments: 
+
+    return show and show_off and pricing_view_count  base on some logged in user information and 
+
+get_my_account_balance=>
+App\Http\Controllers\Accounting\user_controller@get_my_account_balance
+
+    arguments: 
+
+    return logged in users account balance if user logged in and exist and its role is seller
+
+reset_password=>
+App\Http\Controllers\Accounting\user_controller@reset_password
+
+    arguments: phone, verification_code,
+
+    gets phone number of the user and the verification code who the user recived and generate 
+    new password for user and sms it to already verified phone number and set it as user password
+    in database
+
+refresh-token=>
+App\Http\Controllers\Accounting\user_controller@refresh_token
+
+    arguments: 
+
+    reset jwt auth token and return new one and if token have problems it will send 
+    redirect to login as true for client
+
+is_user_from_webview=>
+App\Http\Controllers\Accounting\user_controller@is_user_from_webview
+
+    arguments:
+
+    checks if the request header have User-Agent equal to web-view and return its result as boolean
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+verify/upload-photos=>
+App\Http\Controllers\Accounting\verification_controller@upload_verification_photos
+
+    arguments: some image files 
+
+    verify recived image and store them in database
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+get_buyAd_list=>
+App\Http\Controllers\BuyAd\buyAd_controller@get_buyAd_list
+
+    arguments: from, to,
+
+    return buy advertisements with specific start and end index of founded ads
+
+get_sample_buyAds=>
+App\Http\Controllers\BuyAd\buyAd_controller@get_sample_buyAds
+
+    arguments: 
+
+    return buy ad from last two weeks until now
+
+user/add_buyAd=>
+App\Http\Controllers\BuyAd\buyAd_controller@add_buyAd
+
+    arguments: values of this end point generates in run time (name, requirement_amount, category_id,)
+
+    get new buy ad informations and set new ad in database if successfull find related products to
+    the just inserted records and set some cokies base on products
+
+    return related products or  failur object if failed
+
+delete_buy_ad_by_id=>
+App\Http\Controllers\BuyAd\buyAd_controller@delete_buy_ad_by_id
+
+    arguments: buy_ad_id,
+
+    gets a buy ad and soft delete it if exist and belongs to logged in user
+
+get_related_buyAds_list_to_the_seller=>
+App\Http\Controllers\BuyAd\buyAd_controller@get_related_buyAds_list_to_the_seller
+
+    arguments: 
+
+    fetch the buy ad for currently logged in seller and return them after some filtring
+
+get_user_permission_for_buyAd_reply=>
+App\Http\Controllers\BuyAd\buyAd_controller@check_user_permisson_for_sending_buyAd_reply
+
+    arguments: buy_ad_id,
+
+    checks if the logged in user have the right to send replay to the given buy_ad_id advertisement
+
+
+get_my_buyAd_suggestions=>
+App\Http\Controllers\BuyAd\buyAd_controller@get_my_buyAd_suggestions
+
+    arguments: 
+
+    find buy ad sugestions for logged in user and find the golden sugestions 
+    and return the after some sort and filter
+
+get_my_buyAds=>
+App\Http\Controllers\BuyAd\buyAd_controller@get_my_buyAds
+
+    arguments:
+
+    return the buy ads which belongs to the logged in user 
+
+//////////////////////////////////////////////////////////////////////////////////////
+
+    have some duplicate code fragment
+
+get_category_list=>
+App\Http\Controllers\General\category_controller@get_all_categories
+
+    arguments:
+
+    get all categories from database and cache them
+
+    restructure categories and return them to user
+
+//////////////////////////////////////////////////////////////////////////////////////
+
+    have some duplicate code fragment
+
+location/get_location_info=>
+App\Http\Controllers\General\location_controller@get_all_provinces_or_cities_in_the_province_in_iran
+
+    arguments: province_id, cascade_list, 
+
+    return all iran provinces with their location if no argument passed
+
+    return all province cities if province id has passed 
+
+    cascade do something here but i dont know what is it exactly
+
+///////////////////////////////////////////////////////////////////////////////////////
+
+get_special_users_info=>
+App\Http\Controllers\General\marketing_data_controller@get_special_users_info
+
+    arguments: 
+
+    return users with pakage type three as special users
+
+//////////////////////////////////////////////////////////////////////////////////////
+
+download-media=>
+App\Http\Controllers\General\media_controller@download_media
+
+this route is registred but download_media does not exist in controller
+
+//////////////////////////////////////////////////////////////////////////////////////
+
+sitemap-buskool-txwhgvuikd.xml=>
+App\Http\Controllers\General\sitemap_controller@get_required_data_for_sitemap
+
+    arguments: 
+
+    creates a site map xml for google 
+
+//////////////////////////////////////////////////////////////////////////////////////
+
+get_channel_contents=>
+App\Http\Controllers\Messenger\channel_controller@get_channel_contents
+
+    arguments: 
+
+    return some contents from database for logged in user
+
+public-channel/{slug}=>
+App\Http\Controllers\Messenger\channel_controller@get_channel_content_by_id
+
+    arguments: slug,
+
+    return official buskool channel contents with given id
+
+//////////////////////////////////////////////////////////////////////////////////////
+
+    //////////////////// following routes are in this controller but do things for admins //////////
+
+admin/add-channel-content=>
+App\Http\Controllers\Messenger\channel_controller@add_content
+
+admin/d-channel-content=>
+App\Http\Controllers\Messenger\channel_controller@delete_channel_content
+
+admin/channel-contents-list=>
+App\Http\Controllers\Messenger\channel_controller@get_all_channel_contents
+
+admin/submit-to-channel=>
+App\Http\Controllers\Messenger\channel_controller@submit_contents_to_channel
+
+
+
+
+
+
+
+
+
