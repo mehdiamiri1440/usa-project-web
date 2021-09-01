@@ -6,6 +6,8 @@ use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Support\Facades\Log;
+use App\Exceptions\paymentException;
+
 class Handler extends ExceptionHandler
 {
     
@@ -49,6 +51,22 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+
+        if($exception instanceof paymentException) {
+            switch ($exception->getMessage()){
+                case 'low_balance':{
+                    return response()->json([
+                        'status' => false,
+                        'msg' => 'your balance is low please charge your account balance'
+                    ]);
+                    break;
+                }
+            }
+         }
+
+         echo $exception->getMessage();
+         
+
         return $this->log_error_and_return_internal_server_error($exception);
         
         return parent::render($request, $exception);

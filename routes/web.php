@@ -19,6 +19,90 @@ use Illuminate\Http\Request;
 use App\Jobs\sendSMS;
 use App\Jobs\LeadHandler\LeadDistributorBot;
 
+use App\Exceptions\paymentException;
+use RuntimeException;
+use LogicException;
+
+Route::get('exceptionTest',function(){
+
+    // local usage
+    try{
+
+        throw new RuntimeException('some_casee');
+    }
+    catch(RuntimeException $e){
+
+        try{
+
+            switch($e->getMessage()){
+
+                case 'some_case':{
+
+                    throw new paymentException('some_balance_case',0,$e);
+
+                    break;
+                }
+                default:{
+                    throw $e;
+                }
+
+            }
+
+            throw new LogicException('if code gets here we have logic exception something like never');
+        }
+        
+        catch(paymentException $pe){
+
+            switch($pe->getMessage()){
+
+                case 'some_balance_case':{
+
+                    throw new paymentException('low_balance',0,$pe);
+
+                    break;
+                }
+                default:{
+                    throw $e;
+                }
+
+            }
+        }
+        catch(RuntimeException $re){
+            throw new RuntimeException('after_payment',0,$re);
+        }
+        catch(LogicException $le){
+            return 'hello world!';
+        }
+        
+        
+    }
+    
+
+});
+
+// Route::get('routelist',function(){
+    
+//     $controllers = [];
+
+//     foreach (Route::getRoutes()->getRoutes() as $route)
+//     {
+//         $action = $route->getAction();
+//         //dd($route);
+        
+//         if (array_key_exists('controller', $action))
+//         {
+//             // You can also use explode('@', $action['controller']); here
+//             // to separate the class name from the method
+//             //$controllers[] = $action['controller'];
+//             //echo $route->uri.'=><br>'.$action['controller'] .'<br><br>';
+//             //dd($action);
+//             $r = explode('@', $action['controller']);
+//             echo $route->uri.'=><br>'.$r[1].'<br><br>';
+//         }
+        
+//     }
+    
+// });
 
 Route::get('/product-list',[
     'uses' => 'Product\product_list_controller@get_product_list_blade',
@@ -93,16 +177,20 @@ Route::get('download/app', function () {
     return redirect(asset('storage/download/buskool.apk'));
 })->name('download-app');
 
-Route::post('/dologin', [
-    'uses' => 'Accounting\user_controller@login',
-    'as' => 'login',
-]);
+
 
 Route::get('/register-from-blog', function () {
     session(['is_from_QA_blog' => true]);
 
     return redirect('/register');
 });
+
+/////////////////////////////////////
+
+Route::post('/dologin', [
+    'uses' => 'Accounting\user_controller@login',
+    'as' => 'login',
+]);
 
 Route::post('/user/is_user_name_unique', [
     'uses' => 'Accounting\user_controller@does_user_name_already_exists',
@@ -113,6 +201,7 @@ Route::post('/user/is_national_code_unique', [
     'uses' => 'Accounting\user_controller@does_national_code_already_exists',
     'as' => 'does_national_code_already_exists',
 ]);
+
 
 Route::post('send_verification_code', [
     'uses' => 'Notification\sms_controller@send_phone_verification_code',
@@ -1203,3 +1292,5 @@ Route::get('/{any}', function (Request $request) {
     return  view('layout.master');
 })->where('any', '.*');
 //-----------------------------------------------------
+
+
