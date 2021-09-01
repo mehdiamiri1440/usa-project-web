@@ -51,7 +51,7 @@
          
           @if($product['user_info']->has_phone)
           <button
-          class="green-button hidden-xs hidden-sm"
+          class="green-button min-button-style phone-call hidden-xs hidden-sm"
         >
         <i class="fas fa-phone-square-alt" ></i>
           اطلاعات تماس
@@ -59,7 +59,7 @@
           @endif
           @if($product['user_info']->has_phone)
           <button
-            class="hidden-xs hidden-sm send-message-button green-button"
+            class="hidden-xs hidden-sm send-message-button green-button min-button-style"
           >
           <i class="fas fa-comment-alt"></i>
 
@@ -67,7 +67,7 @@
           </button>
           @else
           <button
-            class="hidden-xs hidden-sm green-button"
+            class="hidden-xs hidden-sm green-button phone-call min-button-style"
           >
           <i class="fas fa-comment-alt"></i>
 
@@ -140,7 +140,7 @@
             class="product-description"
           >
             <span class="gray-text">توضیحات</span>
-            <p >
+            <p>
               {!! $product['main']->description !!}
             </p>
           </div>

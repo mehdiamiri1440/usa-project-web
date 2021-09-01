@@ -1,4 +1,4 @@
-<div class="container">
+<div id="main-content" class="container-fluid padding-0-30 main-content-wrapper">
 
 
     <main id="main" class="row">
@@ -38,7 +38,7 @@
           </span>
         </div>
       </div>
-      <div class="col-xs-12 col-lg-9 pull-right">
+      <div class="col-xs-12 product-section-wrapper col-lg-8 pull-right">
         <section class="main-content">
           <div class="row">
             @include('layout.product-view-components.product-contents')
@@ -46,10 +46,11 @@
         </section>
       </div>
 
-      <div class="col-xs-12 col-lg-3 pull-left">
-        <div class="row">
+      <div class="col-xs-12 col-lg-4
+                  hidden-xs hidden-sm hidden-md
+                  user-section-wrapper
+                  pull-left">
             @include('layout.product-view-components.profile-info')
-        </div>
       </div>
 
       <section
@@ -58,9 +59,10 @@
       >
         <div class="row">
           <h3 class="box-title">محصولات مرتبط</h3>
-
+        
           <div class="products-contents">
               @php 
+              var_dump($product);
               $i = 0
               @endphp
               @foreach ($related_products as $product_item)
