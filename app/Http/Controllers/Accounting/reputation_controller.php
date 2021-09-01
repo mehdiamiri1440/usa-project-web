@@ -51,9 +51,6 @@ class reputation_controller extends Controller
         return (integer) $total_score;
     }
     
-    // zombie functions : all of this controller where not used anywhere from this point untill end of file
-    // this controller does not found in routs at all for following functions
-    // all of functions tested with ide usage tracker tool and nothing found
     protected function get_register_time_score($user_record)
     {
         if($user_record){
@@ -112,6 +109,7 @@ class reputation_controller extends Controller
         return $score;
     }
     
+    // two following functions usage were commented out
     protected function get_messaging_score($user_record)
     {
         $user_id = $user_record->id;
