@@ -166,6 +166,35 @@ class buyAd_controller extends Controller
         $this->date_convertor = new date_convertor();
     }
 
+    ///////////////////////////////////////
+    public function get_my_buyAds()
+    {
+        $user_id = session('user_id');
+
+        $my_buyAds = DB::table('buy_ads')
+                            ->join('myusers','myusers.id','=','buy_ads.myuser_id')
+                            ->join('categories as subcategories','subcategories.id','=','buy_ads.category_id')
+                            ->join('categories','subcategories.parent_id','=','categories.id')
+                            ->whereNull('deleted_at')
+                            ->where('confirmed',true)
+                            ->where('buy_ads.myuser_id',$user_id)
+                            ->orderBy('buy_ads.created_at','desc')
+                            ->select($this->my_buyAds_required_fields)
+                            ->get();
+                        
+        foreach($my_buyAds as $buyAd)
+        {
+            $buyAd->reply_capacity = abs(10 - $buyAd->reply_capacity);
+        }
+
+        
+        return response()->json([
+            'status' => true,
+            'buyAds' => $my_buyAds,
+        ],200);
+        
+    }
+
 
     ///////////////////////////////////////////
 
@@ -1800,35 +1829,7 @@ class buyAd_controller extends Controller
         ], 200);
     }
 
-    // zombie route commented
-    public function get_my_buyAds()
-    {
-        $user_id = session('user_id');
-
-        $my_buyAds = DB::table('buy_ads')
-                            ->join('myusers','myusers.id','=','buy_ads.myuser_id')
-                            ->join('categories as subcategories','subcategories.id','=','buy_ads.category_id')
-                            ->join('categories','subcategories.parent_id','=','categories.id')
-                            ->whereNull('deleted_at')
-                            ->where('confirmed',true)
-                            ->where('buy_ads.myuser_id',$user_id)
-                            ->orderBy('buy_ads.created_at','desc')
-                            ->select($this->my_buyAds_required_fields)
-                            ->get();
-                        
-        foreach($my_buyAds as $buyAd)
-        {
-            $buyAd->reply_capacity = abs(10 - $buyAd->reply_capacity);
-        }
-
-        
-        return response()->json([
-            'status' => true,
-            'buyAds' => $my_buyAds,
-        ],200);
-        
-    }
-
+    
     ////////////////////////////////// zombie end
 
 
