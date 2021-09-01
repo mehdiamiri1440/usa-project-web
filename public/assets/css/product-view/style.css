@@ -196,9 +196,7 @@ button.send-message-button {
   margin-bottom: 15px;
 }
 @media screen and (max-width: 1199px) {
-  .box-title {
-    margin: 0 auto 15px;
-  }
+
 
   .default-carousel-item:last-of-type {
     display: none;
@@ -215,9 +213,7 @@ button.send-message-button {
   #main {
     padding-top: 96px;
   }
-  .box-title {
-    margin: 0 10px 15px;
-  }
+
 }
 
 @media screen and (max-width: 450px) {
@@ -1394,6 +1390,11 @@ text-align: center;
   margin-top: 3px;
 }
 @media screen and (max-width: 767px) {
+  
+  .product-section-wrapper{
+    width: 100%;
+  }
+
   .reviewer-information {
     border-left: none;
     border-bottom: 1px solid #bdc4cc;

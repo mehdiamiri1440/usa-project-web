@@ -2,7 +2,7 @@
 
 
     <main id="main" class="row">
-      <div class="col-xs-12 text-rtl text-right bread-crumbs-wrapper hidden-xs">
+      <div class="col-xs-12 text-rtl text-right bread-crumbs-wrapper">
         <div class="row" v-if="product">
           <?php 
 
@@ -54,100 +54,60 @@
       </div>
 
 
-      <div
-      class="section-wrapper col-xs-12 related-product"
+      <section
+      id="product-section"
+      class="section-wrapper col-xs-12 latest-product"
     >
       <div class="row">
         <h3 class="box-title">محصولات مرتبط</h3>
-        <div id="related-products-wrapper" class="products-contents">
-          
-          @foreach ($related_products as $product_item)
-              
-          
-          <div
-            class="col-xs-6 col-sm-4 items-wrapper pull-right col-md-3 col-lg-2"
-          >
-          <?php// var_dump($product_item)
-           ?>
-          <article
-              class="main-content-item "
-            >
 
-              <a target="_blank"  rel="nofollow" href="{{'/product-view/'  . str_replace(' ', '-', 'خرید-عمده-' .$product_item->subcategory_name) .'/' . str_replace(' ', '-', $product_item->category_name) . '/' .   $product_item->id  }}"
-                class="main-article-contents-wrapper pointer-class "
+        <div class="products-contents">
+            @php 
+            $i = 0
+            @endphp
+            @foreach ($related_products as $product_item)
+              
+              <div class="owl-carousel product-carousel col-xs-12 col-sm-4 col-md-3"
               >
+                <article class="carousel-item box-content">
+                  <a href="{{'/product-view/' . 'خرید-عمده-' .  implode(explode(' ',$product_item->subcategory_name),'-') . '/' . $product_item->category_name . '/' . $product_item->id }}" class="carousel-img text-center">
+                    <img
 
-              <div class="main-article-contents-image-wrapper" >
-              
-                <div class="main-article-image">
-                  <div class="image" >
-                    <img src="{{url('/storage') . '/thumbnails/' . $product_item->photo}}"  alt=" {{$product_item->category_name . ' | ' . $product_item->subcategory_name . ' ' .  $product_item->product_name }}" />
-                    </div>
-                </div>
-                <h3 class="article-title grid-list-title">
-                <p>
-                  {{$product_item->category_name . ' | ' . $product_item->subcategory_name  }}
-                  <span>
-                    {{$product_item->product_name}}
-                  </span>
-                </p>
-                </h3>
-              </div>
-                  <a href="{{'/profile/' . $product_item->user_name}}" class="user-information-link">
-                      
-                    
-                      <div
-                        class="user-information-content"
-                      >
-                      <a
-                      class="user-name-link"
-                      href="{{'/profile/' . $product_item->user_name}}"
-                    >
-                    <i class="fa fa-user-circle"></i>
-                      {{$product_item->first_name . ' ' . $product_item->last_name}}
-                    
-                      </a>
-                    </div>
+                      src="{{url('storage/') . '/' .$product_item->photo}}"
+                      class="main-image main-image-load"
+                    />
                   </a>
-                  <div class="main-article-contents" >
+                  
+                  <a href="{{'/product-view/' . 'خرید-عمده-' .  implode(explode(' ',$product_item->subcategory_name),'-') . '/' . $product_item->category_name . '/' . $product_item->id }}" class="carousel-title">
                     
-                    <div>
-                      <p>
-                        <i class="fa fa-map-marker-alt"></i>
+                  <h4 >
+                    {{
+                      $product_item->product_name
+                    }}
+                  </h4>
+                
+                </a>
+                <a href="#" class="stock-wrapper">
 
-                        <span
-                        >
-                        {{$product_item->province_name . ' - ' . $product_item->city_name  }}
-                      </span>
-                        </p>
-                        <p>
-                        <i class="fa fa-box-open"></i>
-                        <span >
-                          
-                          @php 
-                          $stock = $product_item->stock;
+                    <span>موجودی</span>
+                    <span >
+                      {{
+                        $product_item->stock
+                      }} کیلوگرم
+                    </span>
+                
+                </a>
+                </article>
+              </div>
 
-                          if($stock > 1000){
-                            $stock = $stock / 1000 . ' تن';
-                          }else{
-                            $stock = $stock . ' کیلوگرم';
-                          }
-
-                          @endphp
-
-                          {{ $stock }}
-                          </span>
-                        </p>
-                    </div>
-                </div>
-              </a>
-
-            </article>
-          </div>
-          @endforeach
+              @php
+              $i++
+              @endphp
+            @endforeach
+          
         </div>
       </div>
-    </div>
+    </section>
 
       <div class="buttons-wrapper col-xs-12">
         <a
