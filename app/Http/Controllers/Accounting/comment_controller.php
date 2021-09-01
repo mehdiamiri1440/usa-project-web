@@ -286,7 +286,8 @@ class comment_controller extends Controller
         } 
     }
 
-    protected function make_post_comment_authorization_response($is_allowed){
+    protected function make_post_comment_authorization_response($is_allowed)
+    {
 
         return response()->json([
             'status' => true,
