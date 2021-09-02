@@ -67,7 +67,7 @@
             @endphp
             @foreach ($related_products as $product_item)
               
-              <div class="owl-carousel product-carousel col-xs-12 col-sm-4 col-md-3"
+              <div class=" product-carousel col-xs-6 col-sm-4 col-md-3"
               >
                 <article class="carousel-item box-content">
                   <a href="{{'/product-view/' . 'خرید-عمده-' .  implode(explode(' ',$product_item->subcategory_name),'-') . '/' . $product_item->category_name . '/' . $product_item->id }}" class="carousel-img text-center">
@@ -112,7 +112,7 @@
       <div class="buttons-wrapper col-xs-12">
         <a
           href="{{'/product-list/category/' . implode('-',explode(' ',$product['main']->sub_category_name)) }}"
-          class="green-button blue-button"
+          class="green-button blue-button all-products-button"
           >مشاهده همه محصولات</a
         >
       </div>
@@ -124,7 +124,7 @@
       
       @if($product['user_info']->has_phone)
       <button
-          class="green-button"
+          class="green-button phone-call"
         >
         <i class="fas fa-phone-square-alt" ></i>
 
@@ -144,7 +144,7 @@
           </button>
           @else
           <button
-            class=" green-button"
+            class=" green-button phone-call"
           >
           <span >
             <i class="fas fa-comment-alt"></i>
