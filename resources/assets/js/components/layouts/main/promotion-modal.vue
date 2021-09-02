@@ -35,7 +35,8 @@
   padding: 8px 15px 2px;
 
   top: 0;
-  z-index: 1;
+
+  z-index: 2;
 }
 
 .modal-header {
@@ -453,11 +454,12 @@ export default {
       },
     };
   },
-  mounted() {
-    let buyAds = this.$parent.buyAdsGolden;
-    let randomBuyAd = Math.floor(Math.random() * buyAds.length - 1);
-
-    this.buyAd = buyAds[randomBuyAd];
+  watch: {
+    "$parent.buyAdsGolden"(goldens) {
+      let buyAds = goldens;
+      let randomBuyAd = Math.floor(Math.random() * buyAds.length - 1);
+      this.buyAd = buyAds[randomBuyAd];
+    },
   },
 };
 </script>

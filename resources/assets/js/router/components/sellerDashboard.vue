@@ -427,166 +427,11 @@ export default {
       paymentData: "",
       doPaymentLoader: false,
       verificationAlert: false,
-      buyAdsGolden: [
-        {
-          id: 25369,
-          name: "مضافتی",
-          updated_at: "2021-07-14 02:34:45",
-          category_id: 6,
-          requirement_amount: 5000,
-          buyer_id: 7923,
-          subcategory_name: "خرما",
-          category_name: "میوه",
-          first_name: "سعید",
-          last_name: "مقدسی",
-          is_golden: true,
-          has_phone: false,
-        },
-        {
-          id: 25882,
-          name: "مضافتی زاهدی",
-          updated_at: "2021-07-14 02:34:45",
-          category_id: 6,
-          requirement_amount: 3000,
-          buyer_id: 44404,
-          subcategory_name: "خرما",
-          category_name: "میوه",
-          first_name: "محمد",
-          last_name: "بهرپیمایب",
-          is_golden: true,
-          has_phone: true,
-        },
-        {
-          id: 25655,
-          name: "مضافتی جعبه ۵ کیلویی",
-          updated_at: "2021-07-14 02:34:45",
-          category_id: 6,
-          requirement_amount: 5000,
-          buyer_id: 35063,
-          subcategory_name: "خرما",
-          category_name: "میوه",
-          first_name: "سالار",
-          last_name: "قلیزاده",
-          is_golden: true,
-          has_phone: true,
-        },
-        {
-          id: 26558,
-          name: "مضافتی",
-          updated_at: "2021-07-14 02:34:45",
-          category_id: 6,
-          requirement_amount: 4000,
-          buyer_id: 15063,
-          subcategory_name: "خرما",
-          category_name: "میوه",
-          first_name: "محمد",
-          last_name: "حیدرزاده",
-          is_golden: true,
-          has_phone: true,
-        },
-        {
-          id: 25079,
-          name: "مضافتی",
-          updated_at: "2021-07-14 02:34:45",
-          category_id: 6,
-          requirement_amount: 800,
-          buyer_id: 42728,
-          subcategory_name: "خرما",
-          category_name: "میوه",
-          first_name: "حمید رضا",
-          last_name: "مهدیخانلو",
-          is_golden: true,
-          has_phone: true,
-        },
-        {
-          id: 27140,
-          name: null,
-          updated_at: "2021-07-14 02:34:45",
-          category_id: 5,
-          requirement_amount: 2500,
-          buyer_id: 42531,
-          subcategory_name: "گوجه",
-          category_name: "صیفی",
-          first_name: "امین",
-          last_name: "اسدزاده",
-          is_golden: true,
-          has_phone: true,
-        },
-        {
-          id: 26238,
-          name: "گوجه",
-          updated_at: "2021-07-14 02:34:45",
-          category_id: 5,
-          requirement_amount: 2000,
-          buyer_id: 45117,
-          subcategory_name: "گوجه",
-          category_name: "صیفی",
-          first_name: "هوشنگ",
-          last_name: "لزومی",
-          is_golden: true,
-          has_phone: true,
-        },
-        {
-          id: 26303,
-          name: "گوجه",
-          updated_at: "2021-07-14 02:34:45",
-          category_id: 5,
-          requirement_amount: 2000,
-          buyer_id: 33766,
-          subcategory_name: "گوجه",
-          category_name: "صیفی",
-          first_name: "خسرو",
-          last_name: "حاجی اقا",
-          is_golden: true,
-          has_phone: true,
-        },
-        {
-          id: 22811,
-          name: "رطب مضافتی",
-          updated_at: "2021-07-12 02:34:45",
-          category_id: 6,
-          requirement_amount: 5000,
-          buyer_id: 10546,
-          subcategory_name: "خرما",
-          category_name: "میوه",
-          first_name: "محمد رضا",
-          last_name: "صالح بیک",
-          is_golden: true,
-          has_phone: true,
-        },
-        {
-          id: 22976,
-          name: "مضافتی",
-          updated_at: "2021-07-12 02:34:45",
-          category_id: 6,
-          requirement_amount: 2000,
-          buyer_id: 39375,
-          subcategory_name: "خرما",
-          category_name: "میوه",
-          first_name: "میرسعید",
-          last_name: "حسینی",
-          is_golden: true,
-          has_phone: true,
-        },
-        {
-          id: 23410,
-          name: "گوجه گلخانه دافنیس",
-          updated_at: "2021-07-12 02:34:45",
-          category_id: 5,
-          requirement_amount: 2000,
-          buyer_id: 27307,
-          subcategory_name: "گوجه",
-          category_name: "صیفی",
-          first_name: "نیهاد",
-          last_name: "مرادی",
-          is_golden: true,
-          has_phone: true,
-        },
-      ],
+      buyAdsGolden: [],
     };
   },
   methods: {
-    init: function () {
+    init() {
       this.checkButtonIsHide();
 
       $("#factor-pricing-modal").on("show.bs.modal", (e) => {
@@ -756,34 +601,24 @@ export default {
     },
     promotionModal() {
       $("#promotion-modal").on("hidden.bs.modal", (e) => {
-        // this.createCookie("closePromotionModal", true, 60 * 24);
+        this.createCookie("closePromotionModal", true, 60 * 24);
       });
       $("#promotion-modal").on("show.bs.modal", (e) => {
         this.handleBackKeys();
       });
       if (
-        // !this.getCookie("closePromotionModal") &&
-        // !this.getCookie("registerNewUser") &&
-        // this.currentUser.user_info.active_pakage_type == 0
-        true
+        !this.getCookie("closePromotionModal") &&
+        !this.getCookie("registerNewUser") &&
+        this.currentUser.user_info.active_pakage_type == 0
       ) {
-        // if (this.buyAdsGolden.length == 0) {
-        //   this.checkGoldenBuyAd();
-        // } else {
-        setTimeout(() => {
-          $("#promotion-modal").modal("show");
-        }, 5000);
-        // }
+        if (this.buyAdsGolden.length == 0) {
+          this.checkGoldenBuyAd();
+        } else {
+          setTimeout(() => {
+            $("#promotion-modal").modal("show");
+          }, 5000);
+        }
       }
-      // if (
-      //   !this.getCookie("closePromotionModal") &&
-      //   !this.getCookie("registerNewUser") &&
-      //   this.currentUser.user_info.active_pakage_type == 0
-      // ) {
-      //   setTimeout(() => {
-      //     $("#promotion-modal").modal("show");
-      //   }, 5000);
-      // }
     },
     checkGoldenBuyAd() {
       axios.post("/get_my_buyAd_suggestions").then((response) => {
