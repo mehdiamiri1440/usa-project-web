@@ -2137,20 +2137,17 @@ export default {
     getCategoryName: function () {
       let name = this.$route.params.categoryName;
 
-      return name ? name.split("-").join(" ") : '';
+      return name ? name.split("-").join(" ") : "";
     },
     infiniteScrollHandler() {
       $(window).scroll(() => {
-        if (window.location.pathname.includes("product-list/category")) {
         if (
           $(window).scrollTop() >=
             ($(document).height() - $(window).height() - 100) / 2 &&
           !this.loadMoreActive &&
           this.continueToLoadProducts
         ) {
-
           this.feed();
-        }
         }
       });
     },
