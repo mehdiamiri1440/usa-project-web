@@ -344,6 +344,287 @@ admin/submit-to-channel=>
 App\Http\Controllers\Messenger\channel_controller@submit_contents_to_channel
 
 
+//////////////////////////////////////////////////////////////////////////////////////
+
+group/get_groups_list=>
+App\Http\Controllers\Messenger\group_message_controller@get_user_groups_list
+
+    arguments: 
+
+    return the groups that the user has subscribed with related informations and unread message count
+
+group/subscribe_user=>
+App\Http\Controllers\Messenger\group_message_controller@subscribe_user_in_group
+
+    arguments: group_id,
+
+    gets a group id and checks if the group is active and subscribe logged in user in that 
+    group if he/she has not been subscribed already
+
+group/send_message=>
+App\Http\Controllers\Messenger\group_message_controller@send_message
+
+    arguments: text, group_id, replied_msg_id,
+
+    gets a messege form logged in user and cheks if he/she can send message to the requested 
+    group if so checks if the text does not have any problem in case of impolite words or spams
+    then insert it into database and send notification to group get_my_phone_number_viewers_list
+
+    if replied_msg_id was sent, sets the message who the user replayed to  
+
+group/get_group_chats=>
+App\Http\Controllers\Messenger\group_message_controller@get_group_chats
+
+    arguments: group_id, message_count,
+
+    return messages form given group id with given count from logged in user and mark them as read
+    before returning
+
+group/get_all_groups=>
+App\Http\Controllers\Messenger\group_message_controller@get_all_groups
+
+    arguments: 
+
+    return all groups who the logged in user have joined
+
+group/unsubscribe_user=>
+App\Http\Controllers\Messenger\group_message_controller@unsubscribe_user_from_group
+
+    arguments: group_id,
+
+    hard delete user to channel subscription even though there is a feild in database named is_active
+
+////////////////////////////////////////////////////////////////////////////////////////////
+
+messanger/send_message=>
+App\Http\Controllers\Messenger\message_controller@send_message
+
+    arguments: sender_id, receiver_id, text,
+
+    send a message from logged in user to the receiver_id with given text and store message in database
+    if the reciver user is valid and not blocked
+
+send_reply_to_buyAd=>
+App\Http\Controllers\Messenger\message_controller@send_reply_message_to_the_buyAd
+
+    arguments: buy_ad_id, text,
+
+    cheks if the logged in user allowed to replay to given buy ad and create new request to
+    send message end point and return them if user was allowed
+
+send_reply_to_product=>
+App\Http\Controllers\Messenger\message_controller@send_reply_message_to_the_product
+
+    arguments: product_id, text,
+
+    checks if product is still exist and set some records for user_products for the product 
+    who the user sent msg on if no product view recodrd was not found and send message by
+    creating request to send message end point
+
+
+
+get_contact_list=>
+App\Http\Controllers\Messenger\message_controller@get_current_user_contact_list
+
+    arguments: from, to,
+
+    return contact list form given index to given index with chat information unread messages
+    and channel informations the verification status of the logged in user if the logged in user 
+    does not block and exist and if blocked will do the logout get_all_provinces_or_cities_in_the_province_in_iran
+
+get_total_unread_messages_for_current_user=>
+App\Http\Controllers\Messenger\message_controller@get_total_unread_messages_for_current_user
+
+    arguments:
+
+    return count of total unread messages who the logged in user did not see them until now
+
+get_user_chat_history=>
+App\Http\Controllers\Messenger\message_controller@get_user_chat_history
+
+    arguments: user_id, form, to,
+
+    return the a chat history between logged in user and given user_id limited by from
+    as start of message index and to as end of message index
+
+set_last_chat_contact=>
+App\Http\Controllers\Messenger\message_controller@set_last_chat_contact
+
+    arguments: contact_id, first_name, last_name, user_name,
+
+    set a session as last chat contact for logged in user with all given information and
+    count of unread message and profile photo 
+
+get_last_chat_contact_info_from_session=>
+App\Http\Controllers\Messenger\message_controller@get_last_chat_contact_info_from_session
+
+    arguments: 
+
+    get the information that stored in session from above method and return them 
+
+///////////////////////////////////////////////////////////////////////////////////////////
+
+get_report_options=>
+App\Http\Controllers\Messenger\report_controller@get_report_options
+
+    arguments: 
+
+    return options form database who the user can set a report action with their id for other users
+
+send_user_report=>
+App\Http\Controllers\Messenger\report_controller@send_user_report
+
+    arguments: reported_id, option_id, description,
+
+    sets a report form logged in user to given reported_id user 
+
+    if the report needs desciption it will be added to validation rules
+
+///////////////////////////////////////////////////////////////////////////////////////////
+
+fcm/register_token=>
+App\Http\Controllers\Notification\fcm_controller@subscribe_token_in_topic
+
+    arguments: token, topic,
+
+    subscribe a token in firebase google api and return it to user
+
+fcm/register_token_in_groups=>
+App\Http\Controllers\Notification\fcm_controller@subscribe_token_in_groups
+
+    arguments: token,
+
+    set a recived token in a related queue for settin in firebase
+
+fcm/unregister_token=>
+App\Http\Controllers\Notification\fcm_controller@unsubscribe_token_from_groups
+
+    arguments: token,
+
+    gets a firebase token and unregister it
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+send_phone_verification_code_for_password_reset=>
+App\Http\Controllers\Notification\sms_controller@send_phone_verification_code_for_password_reset
+
+    arguments: phone,
+
+    recives a new phone number and send a verification code to it as sms
+    if some user already register with given phone number
+
+send_verification_code=>
+App\Http\Controllers\Notification\sms_controller@send_phone_verification_code
+
+    arguments: phone,
+
+    send a generated validation code as sms to the given phone number and store
+    verification code in session 
+
+verify_code=>
+App\Http\Controllers\Notification\sms_controller@verify_code
+
+    arguments: verification_code, phone, client,
+
+    verify verification code sended in previous step and checks if the code is confirmed
+    then create a login request and redirect user to login page 
+
+///////////////////////////////////////////////////////////////////////////////////////////
+
+app/get_product_list=>
+App\Http\Controllers\Product\product_list_controller@get_product_list
+
+///////////////////////////////////////////////////////////////////////////////////////////
+
+product-view/{category_name}/{extra_text}/{product_id}=>
+App\Http\Controllers\Product\product_controller@get_product_blade
+
+    arguments: $extra_text, $category_name, $product_id,
+
+
+
+get_category_meta_data=>
+App\Http\Controllers\Product\product_controller@get_category_tags_data_if_any
+
+get_product_by_id=>
+App\Http\Controllers\Product\product_controller@get_product_by_id
+
+get_related_products=>
+App\Http\Controllers\Product\product_controller@get_related_products_to_given_the_product
+
+get_product_list_by_user_name=>
+App\Http\Controllers\Product\product_controller@get_product_list_by_user_name
+
+get_sample_products=>
+App\Http\Controllers\Product\product_controller@get_sample_products
+
+user/add_product=>
+App\Http\Controllers\Product\product_controller@add_product
+
+delete_product_by_id=>
+App\Http\Controllers\Product\product_controller@delete_product_by_id
+
+edit_product=>
+App\Http\Controllers\Product\product_controller@edit_product_by_id
+
+is_user_allowed_to_register_product=>
+App\Http\Controllers\Product\product_controller@is_user_allowed_to_register_product
+
+get_related_buyAds_to_my_product=>
+App\Http\Controllers\Product\product_controller@get_related_buyAds_to_the_last_registered_product
+
+payment/get-packages-price=>
+App\Http\Controllers\Payment\payment_controller@get_packages_price
+
+user/get_product_list=>
+App\Http\Controllers\Product\product_list_controller@get_product_list
+
+
+//////////////////////////////////////////////////////////////////////////////////
+
+wallet-expend/buyAd-capacity=>
+App\Http\Controllers\Payment\wallet_controller@do_extra_buyAd_capacity_payment_from_wallet
+
+wallet-expend/elevator=>
+App\Http\Controllers\Payment\wallet_controller@do_elevator_payment_from_wallet
+
+wallet-expend/product-capacity=>
+App\Http\Controllers\Payment\wallet_controller@do_extra_product_capacity_payment_from_wallet
+
+
+logout
+
+
+api/v1/users
+
+//////////////////////////////////// routes from client who does not exist in laravel ///////////////////
+
+dashboard/buyAd-request-detail
+dashboard/sell-offer-detail
+
+
+get-user-phone-contacts
+get-user-referral-info
+refresh_my_product_by_id
+wallet-expend/elevatorapi/v1/users
+
+
+//////////////////////////////////////// commented routes 
+accept_sell_offer_by_id
+add_sell_offer
+confirm_initial_contract
+get_my_buyAds_with_related_sell_offers
+get_my_sell_offer_list
+reject_sell_offer_by_id
+
+
+///////////////////// route exist
+
+
+
+wallet-expend/buy-package
+
+
 
 
 
