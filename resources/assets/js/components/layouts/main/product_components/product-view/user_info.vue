@@ -349,18 +349,19 @@ p.info-text {
   color: #777;
   font-weight: 300;
   line-height: 1.618;
+  direction: rtl;
 }
 
 #user-description.collapse[aria-expanded="false"] {
   display: block;
-  height: 95px !important;
+  height: 75px !important;
   overflow: hidden;
   font-size: 15px;
   color: #777;
 }
 
 #user-description.collapsing[aria-expanded="false"] {
-  height: 95px !important;
+  height: 75px !important;
 }
 
 a#note-close {
@@ -838,18 +839,19 @@ a#note-close:not(.collapsed):after {
           ویرایش پروفایل
         </router-link>
       </div>
-      <div class="user-description-wrapper text-right">
+      <div
+        v-if="$parent.product.profile_info.profile_description"
+        class="user-description-wrapper text-right"
+      >
         <p class="description-title">توضیحات فروشنده</p>
         <p
           id="user-description"
           class="user-description collapse"
           aria-expanded="false"
         >
-          <span>
-            فروش برنج طارم هاشمی از شالیزارهای آمل به قیمت مناسبقیمت مناسبسفره و
-            یا مراکز فروش شما به صورت مستقیم با قیمت مناسبقیمت مناسب ..کشت اول
-            آماده فروش به با قیمت مناسبقیمت مناسب با قیمت مناسبقیمت مناسب
-          </span>
+          <span
+            v-text="$parent.product.profile_info.profile_description"
+          ></span>
         </p>
         <a
           role="button"
@@ -987,16 +989,26 @@ export default {
     userDescriptionStatus() {
       let wrapperDescriptionHeight = $("#user-description").height();
       let descriptionHeight = $("#user-description span").height();
+      console.log(
+        wrapperDescriptionHeight,
+        descriptionHeight,
+        wrapperDescriptionHeight >= descriptionHeight
+      );
       if (wrapperDescriptionHeight >= descriptionHeight) {
         $("#note-close").css("display", "none");
+      } else {
+        $("#note-close").css("display", "block");
       }
     },
   },
   mounted() {
+    $(window).on("resize", (size) => {
+      this.userDescriptionStatus();
+    });
     this.base = getBase();
   },
   watch: {
-    "$parent.product.user_info": function () {
+    "$parent.product.user_info"() {
       if (this.$parent.product.user_info) {
         this.$nextTick(() => {
           this.activeComponentTooltip();
