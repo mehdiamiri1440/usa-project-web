@@ -23,7 +23,7 @@
 
   direction: rtl;
 
-  padding: 0 29px 0 8px;
+  padding: 0 27px 0 5px;
 
   font-size: 14px;
 }

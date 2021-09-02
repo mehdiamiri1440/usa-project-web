@@ -42,8 +42,9 @@ body,
 .little_header .wallet-main .icon-wrapper {
   text-align: center;
   top: 16px;
-  left: 15px;
   font-size: 18px;
+  right: 10px;
+  left: 10px;
 }
 
 .little_header .wallet-main > i {
@@ -240,31 +241,31 @@ span.min {
 
 .wallet-main > .icon-wrapper {
   position: absolute;
-  top: 32px;
-  left: 10px;
+  top: 31px;
+  left: 7px;
   font-size: 11px;
   background: #fff;
   color: #333;
   border-radius: 8px;
-  padding: 5px 7px;
+  padding: 5px;
+  direction: ltr;
 }
 
 .wallet-main > .icon-wrapper i {
   color: #21ad93;
-}
-
-.wallet-main > p {
-  font-weight: bold;
-  font-size: 15px;
+  position: relative;
+  top: 1px;
 }
 
 .wallet-main > p.wallet-price {
-  font-size: 23px;
-  margin-top: 13px;
+  font-size: 18px;
+  margin-top: 21px;
+  font-weight: 500;
 }
 
 .wallet-main > p.wallet-price > span {
-  font-size: 16px;
+  font-size: 14px;
+  font-weight: 300;
 }
 
 @media screen and (max-width: 991px) {
@@ -827,13 +828,13 @@ export default {
 
           headerMenu.css("display", "inline");
 
-          menuCloseButtonIcon
-            .addClass("fa-angle-right", 200)
-            .removeClass("fa-angle-left");
+          // menuCloseButtonIcon
+          //   .addClass("fa-angle-right", 200)
+          //   .removeClass("fa-angle-left");
 
-          rightHeaderDesktop.removeClass("little_header", 200);
-          littleMainHeader.removeClass("little-main-header", 200);
-          main.removeClass("little-main", 200);
+          rightHeaderDesktop.removeClass("little_header", 0);
+          littleMainHeader.removeClass("little-main-header", 0);
+          main.removeClass("little-main", 0);
 
           nextMove = "shrink";
 
@@ -851,13 +852,13 @@ export default {
             "text-align": "center",
           });
 
-          menuCloseButtonIcon
-            .addClass("fa-angle-left", 200)
-            .removeClass("fa-angle-right", 200);
+          // menuCloseButtonIcon
+          //   .addClass("fa-angle-left", 200)
+          //   .removeClass("fa-angle-right", 200);
 
-          rightHeaderDesktop.addClass("little_header", 200);
-          littleMainHeader.addClass("little-main-header", 200);
-          main.addClass("little-main", 200);
+          rightHeaderDesktop.addClass("little_header", 0);
+          littleMainHeader.addClass("little-main-header", 0);
+          main.addClass("little-main", 0);
 
           nextMove = "expand";
         }

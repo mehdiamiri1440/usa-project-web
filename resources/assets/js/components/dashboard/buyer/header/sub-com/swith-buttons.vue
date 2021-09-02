@@ -2,7 +2,7 @@
 /* Create a custom radio button */
 
 .radio-wrapper {
-  margin: 10px auto;
+  margin: 25px auto 10px;
   padding-right: 10px;
 }
 
@@ -23,7 +23,7 @@
 
   direction: rtl;
 
-  padding: 0 29px 0 8px;
+  padding: 0 27px 0 5px;
 
   font-size: 14px;
 }
