@@ -8,7 +8,7 @@
   top: calc(50% - 10px);
   direction: ltr;
   padding: 0 15px;
-  height:0
+  height: 0;
 }
 </style>
 <style scoped>
@@ -427,10 +427,11 @@ export default {
       paymentData: "",
       doPaymentLoader: false,
       verificationAlert: false,
+      buyAdsGolden: [],
     };
   },
   methods: {
-    init: function () {
+    init() {
       this.checkButtonIsHide();
 
       $("#factor-pricing-modal").on("show.bs.modal", (e) => {
@@ -610,10 +611,22 @@ export default {
         !this.getCookie("registerNewUser") &&
         this.currentUser.user_info.active_pakage_type == 0
       ) {
+        if (this.buyAdsGolden.length == 0) {
+          this.checkGoldenBuyAd();
+        } else {
+          setTimeout(() => {
+            $("#promotion-modal").modal("show");
+          }, 5000);
+        }
+      }
+    },
+    checkGoldenBuyAd() {
+      axios.post("/get_my_buyAd_suggestions").then((response) => {
+        this.buyAdsGolden = response.data.golden_buyAds;
         setTimeout(() => {
           $("#promotion-modal").modal("show");
-        }, 5000);
-      }
+        }, 4000);
+      });
     },
     routePromotionModal() {
       $("#promotion-modal").modal("hide");
@@ -624,8 +637,21 @@ export default {
         history.pushState(null, null, window.location);
       }
       $(window).on("popstate", function (e) {
-        $(".modal").modal("hide");
+        if (swal.getState().isOpen) {
+          swal.close();
+        } else {
+          $(".modal").modal("hide");
+        }
       });
+    },
+    openGoldenChatRestrictionModal() {
+      eventBus.$emit("modal", "goldenBuyAdReplyLimit");
+
+      this.registerComponentStatistics(
+        "suggestedBuyAdReply",
+        "openChat",
+        "permission denied"
+      );
     },
   },
   watch: {
