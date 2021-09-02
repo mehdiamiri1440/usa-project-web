@@ -351,7 +351,7 @@ button.send-message-button {
               "
             >
               <div class="row">
-                <UserInfo />
+                <UserInfo v-if="checkIsMobile()" />
               </div>
             </div>
             <UserData />
@@ -365,7 +365,7 @@ button.send-message-button {
               pull-left
             "
           >
-            <UserInfo />
+            <UserInfo v-if="!checkIsMobile()" />
           </aside>
         </div>
       </div>
@@ -807,16 +807,17 @@ export default {
         this.product.main.id
       );
     },
-    copyProductLinkToClipBoard: function () {
-      this.registerComponentStatistics(
-        "product",
-        "copy-product-link",
-        "click on copy poduct link"
-      );
-
+    shareMyProfile() {
+      let baseUrl = getBase();
+      baseUrl = baseUrl.substring(0, baseUrl.length - 1);
       if (this.isDeviceMobile()) {
+        this.registerComponentStatistics(
+          "product",
+          "copy-product-link",
+          "click on copy poduct link"
+        );
         var linkElement = document.createElement("a");
-        var Message = "https://buskool.com" + this.getProductUrl();
+        var Message = baseUrl + this.getProductUrl();
         var messageToWhatsApp = encodeURIComponent(Message);
         var url = "whatsapp://send?text=" + messageToWhatsApp;
 
@@ -829,20 +830,12 @@ export default {
 
         document.body.removeChild(linkElement);
       } else {
-        var input = document.createElement("input");
-        input.setAttribute(
-          "value",
-          "https://buskool.com" + this.getProductUrl()
-        );
-        document.body.appendChild(input);
-        input.select();
-        var result = document.execCommand("copy");
-        document.body.removeChild(input);
-        if (result) {
-          this.popUpMsg = "آدرس محصول کپی شد.";
-          eventBus.$emit("submitSuccess", this.popUpMsg);
-          $("#custom-main-modal").modal("show");
-        }
+        let url = baseUrl + this.getProductUrl();
+        let shareItem = {
+          shareModalUrl: url,
+          shareModalText: "",
+        };
+        eventBus.$emit("shareModalUrl", shareItem);
       }
     },
     isDeviceMobile: function () {
@@ -995,6 +988,14 @@ export default {
       $("aside").StickySidebar({
         additionalMarginTop: 157,
       });
+    },
+    checkIsMobile() {
+      let pageWidth = window.outerWidth;
+      if (pageWidth <= 1199) {
+        return true;
+      } else {
+        return false;
+      }
     },
   },
   created() {

@@ -490,10 +490,7 @@ label {
         </svg>
       </div>
       <div class="share hidden-xs hidden-sm">
-        <button
-          @click.prevent="$parent.copyProductLinkToClipBoard"
-          class="share-button"
-        >
+        <button @click.prevent="$parent.shareMyProfile()" class="share-button">
           <span>اشتراک گذاری</span>
           <i class="fa fa-share"></i>
         </button>
@@ -613,7 +610,7 @@ label {
 
           <div class="share hidden-md hidden-lg pull-left">
             <button
-              @click.prevent="$parent.copyProductLinkToClipBoard"
+              @click.prevent="$parent.shareMyProfile()"
               class="share-button"
             >
               <i class="fa fa-share-alt"></i>

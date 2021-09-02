@@ -76,6 +76,14 @@
 #reviews-section {
   margin-top: 67px;
 }
+
+.load-more-comments {
+  border-radius: 12px;
+  color: #555;
+  background: #e0e0e0;
+  min-width: 200px;
+}
+
 @media screen and (max-width: 767px) {
   #reviews-section {
     padding: 0 25px;
@@ -182,9 +190,20 @@
         >
           <ArticleReview
             v-for="(comment, index) in reviews.comments"
+            v-show="index < defaultCommentsCount"
             :key="index"
             :review="comment"
           />
+        </div>
+
+        <div class="text-center">
+          <button
+            class="load-more-comments green-button hover-effect"
+            v-if="defaultCommentsCount <= reviews.comments.length - 1"
+            @click="defaultCommentsCount = reviews.comments.length"
+          >
+            نظرات بیشتر
+          </button>
         </div>
       </div>
     </section>
@@ -226,6 +245,7 @@ export default {
       reviews: {
         comments: [],
       },
+      defaultCommentsCount: 6,
       reviewsLoader: true,
       userProductsLoader: true,
       userProducts: [],

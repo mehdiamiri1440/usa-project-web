@@ -1102,9 +1102,9 @@ export default {
       let baseUrl = getBase();
       let url = baseUrl + "public-channel/" + contentId;
       let shareItem = {
-        shareModalUrl:url,
-shareModalText:'',
-      }
+        shareModalUrl: url,
+        shareModalText: "",
+      };
       eventBus.$emit("shareModalUrl", shareItem);
     },
     getProductInfo(text, isTitle) {
@@ -1172,10 +1172,10 @@ shareModalText:'',
           baseUrl +
           "shared-profile/" +
           this.$parent.currentUser.user_info.user_name;
-          let shareItem = {
-        shareModalUrl:url,
-shareModalText:'',
-      }
+        let shareItem = {
+          shareModalUrl: url,
+          shareModalText: "",
+        };
         eventBus.$emit("shareModalUrl", shareItem);
       }
     },
