@@ -48,6 +48,26 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if($request->expectsJson()){
+
+            $code = 400;
+            $error_msg = 'خطایی رخ داده است. دوباره تلاش کنید';
+
+            if(method_exists($exception,'getStatusCode')){
+                $code = $exception->getStatusCode();
+            }
+            
+            if ($exception instanceof \Symfony\Component\HttpKernel\Exception\HttpExceptionInterface) {
+                $error_msg = $exception->getMessage();
+            }
+
+            return response()->json([
+                'status' => false,
+                'msg' => $error_msg
+            ],$code);
+
+        }
+        
         return parent::render($request, $exception);
     }
 
