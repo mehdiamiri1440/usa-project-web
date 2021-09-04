@@ -1879,6 +1879,7 @@ export default {
         this.loadMoreActive = true;
         this.fromProductCount = this.productCountInPage;
         this.productCountInPage += this.productCountInEachLoad;
+
         axios
           .post("/user/get_product_list", {
             from_record_number: this.fromProductCount,
@@ -1935,25 +1936,27 @@ export default {
         searchObject.to_record_number = self.productCountInPage;
         searchObject.sort_by = self.sortOption;
 
-        axios
-          .post("/user/get_product_list", searchObject)
-          .then(function (response) {
-            if (!response.data.products.length) {
-              self.continueToLoadProducts = false;
-            }
-            if (Array.isArray(self.products)) {
-              self.products = self.products.concat(response.data.products);
-            }
+        if (searchObject.search_text) {
+          axios
+            .post("/user/get_product_list", searchObject)
+            .then(function (response) {
+              if (!response.data.products.length) {
+                self.continueToLoadProducts = false;
+              }
+              if (Array.isArray(self.products)) {
+                self.products = self.products.concat(response.data.products);
+              }
 
-            self.loadMoreActive = false;
+              self.loadMoreActive = false;
 
-            setTimeout(function () {
-              self.sidebarScroll();
-            }, 500);
-          })
-          .catch(function (err) {
-            alert("خطایی رخ داده است. دوباره تلاش کنید.");
-          });
+              setTimeout(function () {
+                self.sidebarScroll();
+              }, 500);
+            })
+            .catch(function (err) {
+              alert("خطایی رخ داده است. دوباره تلاش کنید.");
+            });
+        }
       }
     },
     registerRequestInSearchNotFoundCase: function () {
@@ -2137,7 +2140,7 @@ export default {
     getCategoryName: function () {
       let name = this.$route.params.categoryName;
 
-      return name ? name.split("-").join(" ") : "";
+      return name ? name.toString().split("-").join(" ") : "";
     },
     infiniteScrollHandler() {
       $(window).scroll(() => {

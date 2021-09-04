@@ -989,11 +989,6 @@ export default {
     userDescriptionStatus() {
       let wrapperDescriptionHeight = $("#user-description").height();
       let descriptionHeight = $("#user-description span").height();
-      console.log(
-        wrapperDescriptionHeight,
-        descriptionHeight,
-        wrapperDescriptionHeight >= descriptionHeight
-      );
       if (wrapperDescriptionHeight >= descriptionHeight) {
         $("#note-close").css("display", "none");
       } else {

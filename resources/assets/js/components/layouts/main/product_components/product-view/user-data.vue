@@ -99,7 +99,14 @@
       class="section-wrapper col-xs-12 latest-product"
     >
       <div class="row">
-        <h3 class="box-title">محصولات مرتبط</h3>
+        <h3 class="box-title">
+          محصولات
+          {{
+            $parent.product.user_info.first_name +
+            " " +
+            $parent.product.user_info.last_name
+          }}
+        </h3>
 
         <div class="products-contents">
           <div class="owl-carousel product-carousel">
@@ -124,7 +131,7 @@
       v-else-if="!userProducts.length && userProductsLoader == true"
     >
       <div class="row">
-        <h3 class="box-title">محصولات مرتبط</h3>
+        <h3 class="box-title">محصولات</h3>
 
         <div class="col-xs-12 products-contents">
           <div class="row">
