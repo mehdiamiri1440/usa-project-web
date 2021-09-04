@@ -634,6 +634,18 @@ App\Http\Controllers\Payment\payment_controller@get_packages_price
 
     reads the buskool pakage prices and return them 
 
+app-payment/elevator/{product_id}=>
+App\Http\Controllers\Payment\payment_controller@app_do_elevator_payment
+
+app-payment/product-capacity/{user_id}/{extra_capacity}=>
+App\Http\Controllers\Payment\payment_controller@app_do_product_capacity_payment
+
+app-payment/buyAd-reply-capacity/{user_id}/{extra_capacity}=>
+App\Http\Controllers\Payment\payment_controller@app_do_buyAd_reply_capacity_payment
+
+app-payment/payment/{user_id}/{pakageType}=>
+App\Http\Controllers\Payment\payment_controller@app_do_payment
+
 //////////////////////////////////////////////////////////////////////////////////
 
 user/get_product_list=>
