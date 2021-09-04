@@ -13,6 +13,7 @@ use App\Models\profile;
 use Carbon\Carbon;
 use JWTAuth;
 
+// all of this controller routes were commented
 class sell_offer_controller extends Controller
 {
     protected $sell_offer_mandetory_fields_with_validation_rules_array = [

@@ -9,6 +9,7 @@ use App\Http\Library\date_convertor;
 use DB;
 use App\Http\Controllers\Notification\sms_controller;
 
+// all of this controller were commented in routes
 class instant_transaction_controller extends Controller
 {
     protected $necessary_fields_for_transaction = [
