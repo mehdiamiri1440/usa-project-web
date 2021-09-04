@@ -8,6 +8,7 @@ use DB;
 
 class marketing_data_controller extends Controller
 {
+    ///////////////////////
     public function get_special_users_info()
     {
         $users = DB::table('myusers')

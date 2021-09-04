@@ -30,6 +30,7 @@ class sitemap_controller extends Controller
 
     ];
 
+    //////////////////////////
     public function get_required_data_for_sitemap(){
         
         $product_controller_object = new product_controller();
