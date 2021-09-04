@@ -569,6 +569,11 @@ const router = new Router({
               require(["../components/layouts/main/invite.vue"], resolve);
             },
           },
+          beforeEnter: (to, from, next) => {
+            var userId = window.localStorage.getItem("userId");
+            if (!userId) next();
+            else next("/login");
+          },
         },
         // {
         //     path: 'pricing',

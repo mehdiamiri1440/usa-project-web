@@ -1694,14 +1694,14 @@ export default {
         });
       }
     },
-    logUserOut: function () {
-      localStorage.removeItem("userRoute");
-      this.registerComponentStatistics(
-        "header",
-        "register-login",
-        "click-on-register-login"
-      );
-    },
+    // logUserOut: function () {
+    //   localStorage.removeItem("userRoute");
+    //   this.registerComponentStatistics(
+    //     "header",
+    //     "register-login",
+    //     "click-on-register-login"
+    //   );
+    // },
     registerComponentStatistics: function (
       categoryName,
       actionName,

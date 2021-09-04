@@ -165,9 +165,7 @@ nav .green-button .item-icon.register::before {
 </template>
 <script>
 export default {
-  data() {
-    return {};
-  },
+  props: ["isUserLogin"],
   methods: {
     doDownload: function () {
       //ga

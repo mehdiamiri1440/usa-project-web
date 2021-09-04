@@ -725,9 +725,7 @@ a.profile-info-wrapper:focus {
             </li>
 
             <li class="list-item">
-              <a :href="out" @click="logUserOut()">
-                <i class="fas fa-sign-out-alt"></i> خروج
-              </a>
+              <a :href="out"> <i class="fas fa-sign-out-alt"></i> خروج </a>
             </li>
           </ul>
         </li>
@@ -836,14 +834,14 @@ export default {
     init: function () {
       this.closeCollapses();
     },
-    logUserOut: function () {
-      localStorage.removeItem("userRoute");
-      this.registerComponentStatistics(
-        "seller-dashboard-header",
-        "logout",
-        "click-on-logout-in-dashboard"
-      );
-    },
+    // logUserOut: function () {
+    //   localStorage.removeItem("userRoute");
+    //   this.registerComponentStatistics(
+    //     "seller-dashboard-header",
+    //     "logout",
+    //     "click-on-logout-in-dashboard"
+    //   );
+    // },
     closeCollapses: function () {
       $(document).on("click", function (e) {
         /* bootstrap collapse js adds "in" class to your collapsible element*/

@@ -12,7 +12,7 @@
       :login_page_path="userLogoutPath"
       :categoryList="categoryList"
     />
-    <InviteHeaderMasterLayouts v-else />
+    <InviteHeaderMasterLayouts v-else :is-user-login="userId" />
     <CategoriesModal
       :categoryList="categoryList"
       :modalSubCategory="modalSubCategory"
