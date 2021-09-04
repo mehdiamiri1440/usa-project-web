@@ -541,43 +541,121 @@ App\Http\Controllers\Product\product_controller@get_product_blade
 
     arguments: $extra_text, $category_name, $product_id,
 
+    checks if request is from a bot or not next checks if the given product id is not correct
+    find a category and redirec user to that category page unless gains some statistics about 
+    user and return a view with that information
 
 
 get_category_meta_data=>
 App\Http\Controllers\Product\product_controller@get_category_tags_data_if_any
 
+    arguments: category_name,
+
+    finds  tags related to given category id and return them if exist 
+
 get_product_by_id=>
 App\Http\Controllers\Product\product_controller@get_product_by_id
+
+    arguments: product_id,
+
+    return a product with all related data in database 
+
+    set a record as user product seen in database
+
+    increment product view 
 
 get_related_products=>
 App\Http\Controllers\Product\product_controller@get_related_products_to_given_the_product
 
+    arguments: product_id,
+
+    gets a product id and return related products from their subcategory and with checking 
+    products by products 
+
 get_product_list_by_user_name=>
 App\Http\Controllers\Product\product_controller@get_product_list_by_user_name
+
+    arguments: user_name, from_record_number, to_record_number, 
+
+    gets a user name and find all of the ueser products and return them base on indexes
+    from_record_number and to_record_number 
 
 get_sample_products=>
 App\Http\Controllers\Product\product_controller@get_sample_products
 
+    arguments: 
+
+    return products form ten days ago until now 
+
 user/add_product=>
 App\Http\Controllers\Product\product_controller@add_product
+
+    arguments:stock, min_sale_price, max_sale_price, min_sale_amount, product_name, category_id, city_id, images_count, (image files)
+
+    gets product basic information and create new product advertisement in database for the logged in
+    user if the user have permission to register an other product and return most related buy ads if any
+    exist if not the inserted product information will return
 
 delete_product_by_id=>
 App\Http\Controllers\Product\product_controller@delete_product_by_id
 
+    arguments: product_id, 
+
+    gets a poduct id and if the product owns by logged in user soft deletes it
+    unless response will be permission denied
+
 edit_product=>
 App\Http\Controllers\Product\product_controller@edit_product_by_id
+
+    arguments: product_id, min_sale_price, max_sale_price, min_sale_amount, stock
+
+    checks if the product is owned by logged in user if so edit product id with given values
 
 is_user_allowed_to_register_product=>
 App\Http\Controllers\Product\product_controller@is_user_allowed_to_register_product
 
+    arguments:
+
+    checks if the logged in user have the right to register an other product or not
+
 get_related_buyAds_to_my_product=>
 App\Http\Controllers\Product\product_controller@get_related_buyAds_to_the_last_registered_product
+
+    arguments: 
+
+    return most related buy ads to the buy ads owned by logged in user if registered before
+
+//////////////////////////////////////////////////////////////////////////////////
 
 payment/get-packages-price=>
 App\Http\Controllers\Payment\payment_controller@get_packages_price
 
+    arguments: 
+
+    reads the buskool pakage prices and return them 
+
+//////////////////////////////////////////////////////////////////////////////////
+
 user/get_product_list=>
 App\Http\Controllers\Product\product_list_controller@get_product_list
+
+    arguments:
+        from_record_number
+        to_record_number
+        category_id
+        province_id
+        city_id
+        search_text
+        special_products
+        sort_by
+
+    sortings types: 
+        'RR' =>  response rate
+        'RT' => response time
+        'RD' =>  product owner registration date
+        'BM' => sort products by best match
+
+    return product list with given filters and sortings 
 
 
 //////////////////////////////////////////////////////////////////////////////////
@@ -585,11 +663,19 @@ App\Http\Controllers\Product\product_list_controller@get_product_list
 wallet-expend/buyAd-capacity=>
 App\Http\Controllers\Payment\wallet_controller@do_extra_buyAd_capacity_payment_from_wallet
 
+    empty function
+
 wallet-expend/elevator=>
 App\Http\Controllers\Payment\wallet_controller@do_elevator_payment_from_wallet
 
+    arguments: product_id,
+
+    elevate the given product id for already logged in user if user balance is enough
+
 wallet-expend/product-capacity=>
 App\Http\Controllers\Payment\wallet_controller@do_extra_product_capacity_payment_from_wallet
+
+    empty function
 
 
 logout
@@ -620,9 +706,7 @@ reject_sell_offer_by_id
 
 ///////////////////// route exist
 
-
-
-wallet-expend/buy-package
+wallet-expend/buy-package // is a new route and does not exist in this version
 
 
 
