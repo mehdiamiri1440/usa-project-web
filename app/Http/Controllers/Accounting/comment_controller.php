@@ -9,7 +9,7 @@ use Carbon\Carbon;
 
 class comment_controller extends Controller
 {
-    
+    ////////////////////////
     public function post_comment(Request $request)
     {
         $this->validate($request,[
@@ -75,8 +75,6 @@ class comment_controller extends Controller
     }
 
     ////////////////////////////////////////////////////////////
-
-    
     public function get_user_comments(Request $request)
     {
         
@@ -85,6 +83,30 @@ class comment_controller extends Controller
         ]);
 
         $user_id = $request->user_id;
+
+        $comments = $this->get_user_comments_by_user_id($user_id);
+
+        $comments->each(function($item){
+            
+            $likes_info = $this->get_comment_likes_count($item->c_id);
+            $item->likes = $likes_info['likes'];
+            $item->already_liked = $likes_info['already_liked'];
+        });
+
+        $deleted_comments_count = $this->get_deleted_comments_count($user_id);
+
+        $rating_score_array = $this->get_user_avg_rating_score($user_id);
+
+        return response()->json([
+            'status' => true,
+            'comments' => $comments,
+            'deleted_count' => $deleted_comments_count,
+            'rating' => $rating_score_array
+        ],200);
+    }
+
+    protected function get_user_comments_by_user_id($user_id)
+    {
 
         $comments = DB::table('user_comments')
                     ->join('myusers','myusers.id','=','user_comments.commenter_id')
@@ -107,25 +129,8 @@ class comment_controller extends Controller
                     ])
                     ->orderBy('user_comments.created_at','desc')
                     ->get();
-        
 
-        $comments->each(function($item){
-            
-            $likes_info = $this->get_comment_likes_count($item->c_id);
-            $item->likes = $likes_info['likes'];
-            $item->already_liked = $likes_info['already_liked'];
-        });
-
-        $deleted_comments_count = $this->get_deleted_comments_count($user_id);
-
-        $rating_score_array = $this->get_user_avg_rating_score($user_id);
-
-        return response()->json([
-            'status' => true,
-            'comments' => $comments,
-            'deleted_count' => $deleted_comments_count,
-            'rating' => $rating_score_array
-        ],200);
+        return $comments;
     }
     
     protected function get_comment_likes_count($comment_id)
@@ -193,7 +198,6 @@ class comment_controller extends Controller
     }
 
     //////////////////////////////////////////////////////
-
     public function do_like_actions(Request $request)
     {
         $this->validate($request,[
@@ -214,22 +218,17 @@ class comment_controller extends Controller
         if($request->action == 1){
             $now = Carbon::now();
 
-            DB::table('user_comment_likes')
-                    ->insert([
+            $this->insert_new_user_comment_like([
                         'created_at' => $now,
                         'updated_at' => $now,
                         'myuser_id' => $user_id,
                         'comment_id' => $comment_id
                     ]);
+            
         }
         else if($request->action == 0){
-              
-            DB::table('user_comment_likes')
-                        ->where([
-                            ['myuser_id','=',$user_id],
-                            ['comment_id','=',$comment_id]
-                        ])->delete();
-
+            
+            $this->delete_comment_likes_from_user_id_to_comment_id($user_id,$comment_id);
         }
 
         return response()->json([
@@ -255,8 +254,28 @@ class comment_controller extends Controller
         return false;
     }
 
-    //////////////////////////////////////////////////
+    protected function insert_new_user_comment_like($info)
+    {
 
+        $insert = DB::table('user_comment_likes')
+        ->insert($info);
+
+        return $insert;
+    }
+
+    protected function delete_comment_likes_from_user_id_to_comment_id($user_id,$comment_id)
+    {
+
+        $delete =  DB::table('user_comment_likes')
+                        ->where([
+                            ['myuser_id','=',$user_id],
+                            ['comment_id','=',$comment_id]
+                        ])->delete();
+
+        return $delete;
+    }
+
+    //////////////////////////////////////////////////
     public function is_user_authorized_to_post_comment_on_the_user(Request $request)
     {
         $this->validate($request,[
@@ -288,7 +307,6 @@ class comment_controller extends Controller
 
     protected function make_post_comment_authorization_response($is_allowed)
     {
-
         return response()->json([
             'status' => true,
             'is_allowed' => $is_allowed
@@ -296,7 +314,6 @@ class comment_controller extends Controller
     }
 
     //////////////////////////////////////////////////////////////
-
     public function delete_comment(Request $request)
     {
 
@@ -308,19 +325,25 @@ class comment_controller extends Controller
 
         $page_owner_user_id = session('user_id');
 
+        $this->soft_delete_user_comment($page_owner_user_id,$comment_id);
         
-        DB::table('user_comments')
-            ->where('id',$comment_id)
-            ->where('myuser_id',$page_owner_user_id)
-            ->update([
-                'deleted_by_owner' => true
-            ]);
-        
-
         return response()->json([
             'status' => true,
             'msg' => 'you deleted the comment!'
         ],200);
+    }
+
+    protected function soft_delete_user_comment($user_id,$comment_id)
+    {
+
+        $delete = DB::table('user_comments')
+                    ->where('id',$comment_id)
+                    ->where('myuser_id',$user_id)
+                    ->update([
+                        'deleted_by_owner' => true
+                    ]);
+
+        return $delete;
     }
 
     ///////////////////////////////////// incommon methods
