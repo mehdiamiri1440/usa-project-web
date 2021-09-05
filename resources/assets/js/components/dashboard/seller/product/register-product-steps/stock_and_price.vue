@@ -143,6 +143,34 @@ input.error:focus + i {
   border-color: #e41c38;
 }
 
+.custom-tooltip {
+  position: absolute;
+  left: 0;
+  top: -39px;
+  background: #1da1f2;
+  color: #fff;
+  border-radius: 8px;
+  padding: 7px 15px;
+  opacity: 0;
+  transition: 300ms;
+}
+
+.custom-tooltip::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  width: 8px;
+  height: 8px;
+  background: #1da1f2;
+  border-radius: 2px;
+  transform: rotate(45deg);
+  left: calc(50% - 4px);
+}
+
+.text-input-wrapper:focus-within span {
+  opacity: 1;
+}
+
 @media screen and (max-width: 767px) {
   select {
     font-size: 12px;
@@ -171,10 +199,16 @@ input.error:focus + i {
           <label for="stock" class="description"> مثلا: 50,000 </label>
 
           <div class="text-input-wrapper">
+            <span
+              v-show="$parent.stock_text && !$parent.errors.stock"
+              class="custom-tooltip"
+              v-text="$parent.stock_text"
+            ></span>
             <input
               v-model="$parent.product.stock"
               id="stock"
               type="tel"
+              name="stock"
               :class="{
                 active: $parent.product.stock,
                 error: $parent.errors.stock,
@@ -192,13 +226,13 @@ input.error:focus + i {
           </div>
 
           <div class="input-text-wrapper">
-            <p class="small-description-text" v-if="!$parent.errors.stock">
+            <!-- <p class="small-description-text" v-if="!$parent.errors.stock">
               <span
                 class="blue-text"
                 v-if="$parent.stock_text"
                 v-text="$parent.stock_text"
               ></span>
-            </p>
+            </p> -->
             <p class="error-message">
               <span
                 class="red-text"
@@ -220,6 +254,13 @@ input.error:focus + i {
           <label for="stock" class="description"> مثلا: 25,000 </label>
 
           <div class="text-input-wrapper">
+            <span
+              v-show="
+                $parent.min_sale_amount_text && !$parent.errors.min_sale_amount
+              "
+              class="custom-tooltip"
+              v-text="$parent.min_sale_amount_text"
+            ></span>
             <input
               v-model="$parent.product.min_sale_amount"
               id="min-sale-amount"
@@ -247,7 +288,7 @@ input.error:focus + i {
           </div>
 
           <div class="input-text-wrapper">
-            <p
+            <!-- <p
               class="small-description-text"
               v-if="!$parent.errors.min_sale_amount"
             >
@@ -256,7 +297,7 @@ input.error:focus + i {
                 v-if="$parent.min_sale_amount_text"
                 v-text="$parent.min_sale_amount_text"
               ></span>
-            </p>
+            </p> -->
             <p class="error-message">
               <span
                 class="red-text"
@@ -278,6 +319,13 @@ input.error:focus + i {
           <label for="stock" class="description"> مثلا: 15,000 </label>
 
           <div class="text-input-wrapper">
+            <span
+              v-show="
+                $parent.min_sale_price_text && !$parent.errors.min_sale_price
+              "
+              class="custom-tooltip"
+              v-text="$parent.min_sale_price_text"
+            ></span>
             <input
               v-model="$parent.product.min_sale_price"
               id="min-sale-amount"
@@ -325,6 +373,13 @@ input.error:focus + i {
           <label for="stock" class="description"> مثلا: 30,000 </label>
 
           <div class="text-input-wrapper">
+            <span
+              v-show="
+                $parent.max_sale_price_text && !$parent.errors.max_sale_price
+              "
+              class="custom-tooltip"
+              v-text="$parent.max_sale_price_text"
+            ></span>
             <input
               v-model="$parent.product.max_sale_price"
               id="min-sale-amount"
