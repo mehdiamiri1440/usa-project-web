@@ -81,7 +81,6 @@ class phone_number_controller extends Controller
             if($related_record->active_pakage_type == 0){
                 $this->insert_phone_number_view_log_record($viewer_user_id,$request->s_id,'SELLER',$request->item,false);
                 
-                // can be use as trait
                 $wallet_controller_object = new wallet_controller();
                 $wallet_controller_object->insert_expendig_log_record(1,$request->s_id);
             }
@@ -165,14 +164,14 @@ class phone_number_controller extends Controller
         if($already_replied_to_the_buyAd == 0){
             $now = Carbon::now();
             
-            DB::table('buy_ad_reply_meta_datas')->insert([
+            $this->insert_new_buy_ad_reply_meta_data([
                 'created_at' => $now,
                 'updated_at' => $now,
                 'replier_id' => $user_id,
                 'buy_ad_id'  => $buyAd_id
             ]);
 
-            DB::table('buy_ads')->where('id',$buyAd_id)->decrement('phone_view_capacity', 1);
+            $this->decrement_phone_view_capacity_for_buy_ad($buyAd_id,1);
         }
 
         $this->insert_phone_number_view_log_record(session('user_id'),$request->b_id,'BUYER',$request->item,true);    
@@ -196,6 +195,22 @@ class phone_number_controller extends Controller
         return $count;
     }
 
+    protected function insert_new_buy_ad_reply_meta_data($info){ 
+
+        $insert = DB::table('buy_ad_reply_meta_datas')
+        ->insert($info);
+
+        return $insert;
+    }
+
+    protected function decrement_phone_view_capacity_for_buy_ad($buy_ad_id,$count){
+
+        $decrement = DB::table('buy_ads')
+                            ->where('id',$buy_ad_id)
+                            ->decrement('phone_view_capacity', $count);
+
+        return $decrement;
+    }
     /////////////////////////////////////////////////////////////////
 
     public function set_my_phone_number_view_permissions(Request $request)
