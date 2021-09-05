@@ -329,23 +329,6 @@ App\Http\Controllers\Messenger\channel_controller@get_channel_content_by_id
 
 //////////////////////////////////////////////////////////////////////////////////////
 
-    //////////////////// following routes are in this controller but do things for admins //////////
-
-admin/add-channel-content=>
-App\Http\Controllers\Messenger\channel_controller@add_content
-
-admin/d-channel-content=>
-App\Http\Controllers\Messenger\channel_controller@delete_channel_content
-
-admin/channel-contents-list=>
-App\Http\Controllers\Messenger\channel_controller@get_all_channel_contents
-
-admin/submit-to-channel=>
-App\Http\Controllers\Messenger\channel_controller@submit_contents_to_channel
-
-
-//////////////////////////////////////////////////////////////////////////////////////
-
 group/get_groups_list=>
 App\Http\Controllers\Messenger\group_message_controller@get_user_groups_list
 
@@ -634,17 +617,35 @@ App\Http\Controllers\Payment\payment_controller@get_packages_price
 
     reads the buskool pakage prices and return them 
 
+app-payment/payment/{user_id}/{pakageType}=>
+App\Http\Controllers\Payment\payment_controller@app_do_payment
+
+    arguments: user_id, package_type
+
+    if the user is allowed to buy package create transaction and redirect him/her
+
 app-payment/elevator/{product_id}=>
 App\Http\Controllers\Payment\payment_controller@app_do_elevator_payment
+
+    arguments: product_id,
+
+    create a transaction for elavate a product 
+
 
 app-payment/product-capacity/{user_id}/{extra_capacity}=>
 App\Http\Controllers\Payment\payment_controller@app_do_product_capacity_payment
 
+    arguments: user_id, extra_capacity,
+
+    create transaction for buying extra capacity 
+
 app-payment/buyAd-reply-capacity/{user_id}/{extra_capacity}=>
 App\Http\Controllers\Payment\payment_controller@app_do_buyAd_reply_capacity_payment
 
-app-payment/payment/{user_id}/{pakageType}=>
-App\Http\Controllers\Payment\payment_controller@app_do_payment
+    arguments: user_id, extra_capacity,
+
+    create transaction for buying extra replay capacity
+
 
 //////////////////////////////////////////////////////////////////////////////////
 
