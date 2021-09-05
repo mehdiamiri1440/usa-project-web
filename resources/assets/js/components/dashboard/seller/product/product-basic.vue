@@ -426,7 +426,6 @@ import MoreDetails from "./register-product-steps/more_details";
 import FinishStage from "./register-product-steps/finish_stage";
 import imageuploadify from "../../../../imageuploadify.min";
 
-
 export default {
   components: {
     ProductCategory,
@@ -510,6 +509,9 @@ export default {
       isStartLoading: false,
       stock_text: "",
       min_sale_amount_text: "",
+      min_sale_amount_text: "",
+      min_sale_price_text: "",
+      max_sale_price_text: "",
       buyAds: [],
       load: true,
       successRegisterProduct: false,
@@ -945,6 +947,14 @@ export default {
         return text;
       }
     },
+    convertCurrencyUnits(number) {
+      let price = "";
+      if (number) {
+        price = this.getNumberWithCommas(number);
+        price = price + " " + "تومان";
+      }
+      return price;
+    },
     getNumberWithCommas: function (number) {
       if (number || typeof number === "number")
         return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -1067,7 +1077,10 @@ export default {
         }
         if (!this.errors.min_sale_price) {
           this.product.min_sale_price = this.getNumberWithCommas(number);
+          this.min_sale_price_text = this.convertCurrencyUnits(number);
         }
+      } else {
+        this.min_sale_price_text = "";
       }
     },
     "product.max_sale_price": function (value) {
@@ -1085,7 +1098,10 @@ export default {
         }
         if (!this.errors.max_sale_price) {
           this.product.max_sale_price = this.getNumberWithCommas(number);
+          this.max_sale_price_text = this.convertCurrencyUnits(number);
         }
+      } else {
+        this.max_sale_price_text = "";
       }
     },
   },
