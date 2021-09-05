@@ -24,7 +24,6 @@ class user_controller extends Controller
     }
 
     //////////////////////////////////////
-
     public function login(Request $request)
     {
         $rules = array(
@@ -92,37 +91,17 @@ class user_controller extends Controller
     { 
         $user_id = $user->id;
 
-        if($request->has('client') && $request->client == 'mobile')
-        {
-            $last_login_client = 'mobile';
-        }
-        else {
-            $last_login_client = 'web';
-        }
+        $last_login_client = $this->get_last_login_client($request);
 
         $now = Carbon::now();
 
-        DB::table('myusers')
-            ->where('id',$user_id)
-            ->update([
-                'last_login_client' => $last_login_client,
-                'last_login_date'   => $now
-            ]);
+        $this->update_user_last_login_info($user_id,$last_login_client,$now);
         
-        if($request->has('device_id') && $request->has('client') && $request->client == 'mobile'){
-            $device_id = $request->device_id;
-        }
-        else{
-            $device_id = NULL;
-        }
+        $device_id = $this->get_user_login_device_id_if_exist($request);
 
-        if($user->is_seller == true){
-            $role = 'SELLER';
-        }
-        else{
-            $role = 'BUYER';
-        }
+        $role = $this->get_user_role_in_latin_words($user->is_seller);
         
+        // following condition seems to have logical relation that i dont undrestand
         if($request->filled('user_agent') && $request->has('plain') && $request->plain == false){
             $user_agent = $request->user_agent;
         }
@@ -150,6 +129,50 @@ class user_controller extends Controller
                 $this->block_previous_accounts_on_this_device($device_id);
             }
         }
+    }
+
+    protected function get_last_login_client(&$request){
+
+        if($request->has('client') && $request->client == 'mobile')
+        {
+            $last_login_client = 'mobile';
+        }
+        else {
+            $last_login_client = 'web';
+        }
+
+        return $last_login_client;
+
+    }
+
+    protected function update_user_last_login_info($user_id,$last_login_client,$last_login_date){
+
+        $update = DB::table('myusers')
+                        ->where('id',$user_id)
+                        ->update([
+                            'last_login_client' => $last_login_client,
+                            'last_login_date'   => $last_login_date
+                        ]);
+
+        return $update;
+    }
+
+    protected function get_user_login_device_id_if_exist(&$request){
+
+        if($request->has('device_id') && $request->has('client') && $request->client == 'mobile'){
+            return $request->device_id;
+        }
+
+        return NULL;
+    }
+
+    protected function get_user_role_in_latin_words($is_seller){
+
+        if($is_seller == true){
+            return 'SELLER';
+        }
+
+        return 'BUYER';      
     }
 
     protected function block_user_if_already_has_been_blocked_on_this_device($device_id,$user_id)
@@ -219,7 +242,6 @@ class user_controller extends Controller
     }
 
     //////////////////////////////////////////////////
-
     public function does_user_name_already_exists(Request $request)
     {
         $request->user_name = strtolower($request->user_name);
@@ -285,7 +307,6 @@ class user_controller extends Controller
     }
 
     //////////////////////////////////
-
     public function reset_password(Request $request)
     {
         $rules = [
@@ -354,23 +375,25 @@ class user_controller extends Controller
         ], 200);
     }
 
-    ///////////////////////////////////
-
     //public method
+    ///////////////////////////////////
     public function get_seller_dashboard_required_data(Request $request)
     {
-        $user_record = myuser::find(session('user_id'));
+        $user_record      = myuser::find(session('user_id'));
         $user_pakage_type = $user_record->active_pakage_type;
 
-        $pakage_info = config("subscriptionPakage.type-$user_pakage_type");
+        $pakage_info              = config("subscriptionPakage.type-$user_pakage_type");
         $confirmed_products_count = $this->get_user_confirmed_products_count();
 
         $active_pakage_type = $user_pakage_type;
-        $reputation_score = $this->get_user_reputation_score();
+        $reputation_score   = $this->get_user_reputation_score();
+
         $max_buyAds_reply = $pakage_info['buyAd-reply-count'] + $user_record->extra_buyAd_reply_capacity;
-        $is_valid = $pakage_info['validated-seller'];
+        $is_valid         = $pakage_info['validated-seller'];
+
         $max_allowed_product_register_count = $pakage_info['max-products'] + $user_record->extra_product_capacity - $confirmed_products_count;
-        $is_verified = $user_record->is_verified;
+
+        $is_verified             = $user_record->is_verified;
         $access_to_golden_buyAds = $user_pakage_type > 0 ? true : false;
 
         return response()->json(compact([
@@ -415,32 +438,25 @@ class user_controller extends Controller
     {
         $user_id = session('user_id');
 
-        $user = myuser::find($user_id);
-        
         if(session('is_seller') == true){
-            session([
-                'is_seller' => false,
-                'is_buyer' => true
-            ]);
 
-            $user->is_seller = false;
-            $user->is_buyer = true;
-
-            Cache::forget(md5('products-' . session('user_id')));
+            $is_seller = false;
+            $is_buyer  = true;
         }
         else if(session('is_buyer') == true){
-            session([
-                'is_buyer' => false,
-                'is_seller' => true
-            ]);
 
-            $user->is_buyer  = false;
-            $user->is_seller = true;
-
-            Cache::forget(md5('products-' . session('user_id')));
+            $is_buyer  = false;
+            $is_seller = true;
         }
 
-        $user->save();
+        session([
+            'is_buyer' => $is_buyer,
+            'is_seller' => $is_seller
+        ]);
+
+        Cache::forget(md5('products-' . $user_id));
+
+        $user = $this->change_user_role_in_database_and_return_new_user_model($user_id,$is_seller,$is_buyer);  
 
         if($request->isMethod('get')){
             return redirect('/login');
@@ -454,6 +470,19 @@ class user_controller extends Controller
         
     }
 
+    protected function change_user_role_in_database_and_return_new_user_model($user_id,$is_seller,$is_buyer)
+    {
+
+        $user = myuser::find($user_id);
+
+        $user->is_seller = $is_seller;
+        $user->is_buyer = $is_buyer;
+
+        $user->save();
+
+        return $user;
+    }
+
     ///////////////////////////////////
 
     public function get_pricing_page_visit_status(Request $request)
@@ -465,12 +494,7 @@ class user_controller extends Controller
                             ->get()
                             ->first();
 
-        $received_contacts_count = DB::table('messages')
-                                    ->where('receiver_id',$user_id)
-                                    ->select('sender_id')
-                                    ->distinct()
-                                    ->get()
-                                    ->count();
+        $received_contacts_count = $this->get_user_received_contacts_count($user_id);
 
         if($request->cookie('pricingViewCount')){
             $pricing_view_count = $request->cookie('pricingViewCount');
@@ -499,6 +523,18 @@ class user_controller extends Controller
             'show' => false,
             'show_off' => false
         ],200);
+    }
+
+    protected function get_user_received_contacts_count($user_id)
+    {
+        $received_contacts_count = DB::table('messages')
+                                    ->where('receiver_id',$user_id)
+                                    ->select('sender_id')
+                                    ->distinct()
+                                    ->get()
+                                    ->count();
+
+        return $received_contacts_count;
     }
 
     //////////////////////////////////
