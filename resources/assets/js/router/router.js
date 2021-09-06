@@ -284,6 +284,17 @@ const router = new Router({
           },
         },
         {
+          path: "my-buskool",
+          name: "myBuskoolBuyer",
+          components: {
+            default: (resolve) => {
+              require([
+                "../components/dashboard/buyer/my-buskool/my-buskool.vue",
+              ], resolve);
+            },
+          },
+        },
+        {
           path: "profile",
           name: "profileBasicBuyer",
           components: {

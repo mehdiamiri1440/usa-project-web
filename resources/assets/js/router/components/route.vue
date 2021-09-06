@@ -173,11 +173,11 @@
     width: 100%;
   }
 
-  #payment-type-modal .modal-dialog{
+  #payment-type-modal .modal-dialog {
     margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
+    padding: 0;
+    width: 100%;
+    height: 100%;
   }
 }
 </style>
@@ -307,6 +307,8 @@
     <ReportModal :reported-user-id="reportedUserId" />
     <ReviewModal :review-user-data="reviewUserData" />
 
+    <Navigation />
+
     <router-view
       :user-id="userId"
       :is-seller="isSeller"
@@ -375,6 +377,7 @@ import ShareToSocialModal from "../../components/layouts/main/main_components/sh
 import WalletComponent from "../../components/layouts/main/wallet";
 import PaymentTypes from "../../components/layouts/main/payment-types.vue";
 import swal from "../../sweetalert.min.js";
+import Navigation from "./navigation.vue";
 
 export default {
   components: {
@@ -385,6 +388,7 @@ export default {
     ShareToSocialModal,
     WalletComponent,
     PaymentTypes,
+    Navigation,
   },
   data: function () {
     return {
@@ -404,7 +408,11 @@ export default {
       reviewCurrentStep: 0,
       reviewUserData: "",
       reviewUserPrfileId: "",
-      currentUser: "",
+      currentUser: {
+        profile: {
+          profile_photo: "",
+        },
+      },
       walletBalance: "",
       peymentMethodData: "",
       verifiedUserContent:
