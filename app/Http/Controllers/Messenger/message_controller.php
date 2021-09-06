@@ -178,11 +178,22 @@ class message_controller extends Controller
             'buy_ad_id'  => $buyAd_record->id
         ]);
 
-        DB::table('buy_ads')->where('id',$buyAd_record->id)->decrement('reply_capacity', 1);
+        $this->decrement_buy_ad_reply_capacity($buyAd_record->id,1);
 
         return $buyAd_record->myuser_id;
     }
 
+    protected function decrement_buy_ad_reply_capacity($buy_ad_id,$count)
+    {
+
+        $decrement = DB::table('buy_ads')
+                        ->where('id',$buy_ad_id)
+                        ->decrement('reply_capacity', $count);
+
+        return $decrement;
+    }
+
+    ///////////////////////////////
     public function send_reply_message_to_the_product(Request $request)
     {
         $this->validate($request,$this->product_reply_validation_rules);
@@ -463,7 +474,8 @@ class message_controller extends Controller
                     ]);
     }
     
-    protected function my_array_key_last(array $array) {
+    protected function my_array_key_last(array $array)
+     {
         if( !empty($array) ) return key(array_slice($array, -1, 1, true));
     }
 

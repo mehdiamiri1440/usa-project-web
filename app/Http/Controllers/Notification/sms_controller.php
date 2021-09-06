@@ -29,6 +29,7 @@ class sms_controller extends Controller
 		$random_number = $this->generate_random_number();
 		
 		try{
+
             Smsir::sendVerification($random_number,$request->phone);
             
             $this->set_generated_code_in_session($random_number);
@@ -39,6 +40,7 @@ class sms_controller extends Controller
             ]);
         }
         catch(\Exception $e){
+
             return response()->json([
                'status' => FALSE,
                'msg' => 'ارتباط خود با اینترنت را بررسی کنید.',
@@ -65,6 +67,7 @@ class sms_controller extends Controller
             $random_number = $this->generate_random_number();
 		
             try{
+
                 Smsir::sendVerification($random_number,$request->phone);
 
                 $this->set_generated_code_in_session($random_number);
@@ -75,6 +78,7 @@ class sms_controller extends Controller
                 ],200);
             }
             catch(\Exception $e){
+
                 return response()->json([
                    'status' => FALSE,
                    'msg' => 'ارتباط خود با اینترنت را بررسی کنید.',
@@ -83,6 +87,7 @@ class sms_controller extends Controller
              }
         }
 		else{
+
             return response()->json([
                 'status' => false,
                 'msg' => 'این شماره در باسکول ثبت نشده است. شاید با شماره دیگری ثبت نام کرده اید.',
@@ -118,21 +123,28 @@ class sms_controller extends Controller
 		if((session('OTP_start') + 20 * 60) >= time() && session('sms_OTP') == $request->verification_code)
 		{
             if($request->filled('phone')){
+
                 $phone = $request->phone;
 
                 $user_record = myuser::where('phone',$phone)->first();
+
                 if($user_record){
+
                     if($request->filled('client') && $request->client == 'mobile'){
+
                         $last_login_client = 'mobile';
                     }
                     else{
+
                         $last_login_client = 'web';
                     }
 
                     if($request->filled('device_id')){
+
                         $device_id = $request->device_id;
                     }
                     else{
+
                         $device_id = null;
                     }
 
@@ -165,6 +177,7 @@ class sms_controller extends Controller
 			]);
 		}
 		else{
+
 			return response()->json([
 				'status'=> FALSE,
 				'msg' => 'کد منقضی شده یا اشتباه است.'
@@ -224,10 +237,12 @@ class sms_controller extends Controller
                             ->first_name;
 
         $sending_data = [
+            
             'name' => $user_first_name
         ];
 
         if(! is_null($data)){
+
             $sending_data = array_merge($sending_data,$data);
         }
 

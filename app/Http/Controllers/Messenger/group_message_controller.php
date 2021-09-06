@@ -211,17 +211,7 @@ class group_message_controller extends Controller
     {
         $user_id = session('user_id');
 
-        
-
-        $subscribed_groups = DB::table('messenger_group_subscribers')
-                                    ->join('messenger_groups','messenger_groups.id','=','messenger_group_subscribers.group_id')
-                                    ->where([
-                                        ['messenger_group_subscribers.myuser_id','=',$user_id],
-                                        ['messenger_group_subscribers.is_active','=',true],
-                                        ['messenger_groups.is_active','=',true],
-                                    ])
-                                    ->select('messenger_groups.id','messenger_groups.name','messenger_groups.photo')
-                                    ->get();
+        $subscribed_groups = $this->get_group_info_which_user_subscribed_to_them($user_id);
        
         $subscribed_groups->each(function($group_info) use($user_id){
             $group_info->unread_messages = $this->get_user_unread_messages_count_in_group($group_info->id,$user_id);
@@ -232,6 +222,21 @@ class group_message_controller extends Controller
             'status' => true,
             'groups' => $subscribed_groups
         ],200);
+    }
+
+    protected function get_group_info_which_user_subscribed_to_them($user_id){
+
+        $subscribed_groups = DB::table('messenger_group_subscribers')
+                                    ->join('messenger_groups','messenger_groups.id','=','messenger_group_subscribers.group_id')
+                                    ->where([
+                                        ['messenger_group_subscribers.myuser_id','=',$user_id],
+                                        ['messenger_group_subscribers.is_active','=',true],
+                                        ['messenger_groups.is_active','=',true],
+                                    ])
+                                    ->select('messenger_groups.id','messenger_groups.name','messenger_groups.photo')
+                                    ->get();
+
+        return $subscribed_groups;
     }
 
     protected function get_user_unread_messages_count_in_group($group_id,$user_id)

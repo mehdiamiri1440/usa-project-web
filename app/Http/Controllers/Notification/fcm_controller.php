@@ -28,7 +28,9 @@ class fcm_controller extends Controller
         ]);
 
         $token = $request->token;
+
         if($request->has('topic')){
+
             $topic = $request->topic;
         }
         else{
@@ -75,6 +77,7 @@ class fcm_controller extends Controller
 
         $user_id = session('user_id');
         $token = $request->token;
+        
         $user_subscribed_topics = $this->get_user_topic_list($user_id);
         
         FCMSubscriber::dispatch($token,$user_subscribed_topics,true)->onQueue('fcm');

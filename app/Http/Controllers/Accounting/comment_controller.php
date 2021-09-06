@@ -144,9 +144,11 @@ class comment_controller extends Controller
         $result['likes'] = $records->count();
         
         if(session()->has('user_id')){
+
             $user_id = session('user_id');
 
             $tmp = $records->filter(function($comment) use($user_id){
+
                 return $comment->myuser_id == $user_id;
             });
 
@@ -209,6 +211,7 @@ class comment_controller extends Controller
         $comment_id = $request->comment_id;
         
         if($this->did_user_already_like_the_comment($user_id,$comment_id) == true && $request->action == 1){
+
             return response()->json([
                 'status' => false,
                 'msg' => 'you already liked this!'
@@ -348,7 +351,8 @@ class comment_controller extends Controller
 
     ///////////////////////////////////// incommon methods
 
-    protected function get_count_of_messages_that_sends_and_recived_between_two_users_in_total($user_one_id,$user_two_id){
+    protected function get_count_of_messages_that_sends_and_recived_between_two_users_in_total($user_one_id,$user_two_id)
+    {
 
         $message_count = DB::table('messages')
                             ->where([
@@ -364,7 +368,8 @@ class comment_controller extends Controller
         return $message_count;
     }
 
-    protected function get_user_comment_between_two_users($user_one,$user_two){
+    protected function get_user_comment_between_two_users($user_one,$user_two)
+    {
 
         $comment_record = DB::table('user_comments')
                                 ->where([

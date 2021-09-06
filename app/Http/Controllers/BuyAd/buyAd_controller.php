@@ -197,7 +197,6 @@ class buyAd_controller extends Controller
 
 
     ///////////////////////////////////////////
-
     public function add_buyAd(Request $request)
     {
         $rules = $this->set_buyAd_validation_rules($request);
@@ -721,7 +720,6 @@ class buyAd_controller extends Controller
     }
 
     /////////////////////////////////////
-
     public function check_user_permisson_for_sending_buyAd_reply(Request $request)
     {
         $this->validate($request,[
@@ -734,11 +732,8 @@ class buyAd_controller extends Controller
         $today = Carbon::today();
         $tomorrow = Carbon::tomorrow();
 
-        $already_replied_to_the_buyAd = DB::table('buy_ad_reply_meta_datas')
-                ->where([
-                    ['buy_ad_id','=',$buyAd_id],
-                    ['replier_id','=',$sender_id],
-                ])->get()->count();
+
+        $already_replied_to_the_buyAd = $this->get_count_of_replay_to_specific_buy_ad_by_specific_user($buyAd_id,$sender_id);
 
         if($already_replied_to_the_buyAd > 0){
             return response()->json([
@@ -747,11 +742,7 @@ class buyAd_controller extends Controller
             ],200);
         }
 
-        $user_reply_records = DB::table('buy_ad_reply_meta_datas')
-                                    ->join('myusers','myusers.id','=','buy_ad_reply_meta_datas.replier_id')
-                                    ->where('replier_id',$sender_id)
-                                    ->whereBetween('buy_ad_reply_meta_datas.created_at',[$today, $tomorrow])
-                                    ->get();
+        $user_reply_records = $this->get_user_reply_buy_ad_records_for_a_period_of_time($sender_id,$today,$tomorrow);
         
         $today_replies_count = $user_reply_records->count();
         if($today_replies_count > 0){
@@ -772,8 +763,32 @@ class buyAd_controller extends Controller
         ],200);
     }
 
-    ////////////////////////////////////
+    protected function get_user_reply_buy_ad_records_for_a_period_of_time($user_id,$start,$end)
+    {
 
+        $user_reply_records = DB::table('buy_ad_reply_meta_datas')
+                                    ->join('myusers','myusers.id','=','buy_ad_reply_meta_datas.replier_id')
+                                    ->where('replier_id',$user_id)
+                                    ->whereBetween('buy_ad_reply_meta_datas.created_at',[$start, $end])
+                                    ->get();
+
+        return $user_reply_records;
+
+    }
+
+    protected function get_count_of_replay_to_specific_buy_ad_by_specific_user($buy_ad_id,$user_id)
+    {
+
+        $already_replied_to_the_buyAd = DB::table('buy_ad_reply_meta_datas')
+                ->where([
+                    ['buy_ad_id','=',$buy_ad_id],
+                    ['replier_id','=',$user_id],
+                ])->get()->count();
+
+        return $already_replied_to_the_buyAd;
+    }
+
+    ////////////////////////////////////
     public function get_buyAd_list(Request $request)
     {
         $this->validate($request, [
@@ -819,7 +834,6 @@ class buyAd_controller extends Controller
     }
 
     ///////////////////////////////////
-
     public function delete_buy_ad_by_id(Request $request)
     {
         $this->validate($request, [
@@ -863,7 +877,6 @@ class buyAd_controller extends Controller
     }
 
     ///////////////////////////////////
-
     public function get_related_buyAds_list_to_the_seller(Request $request)
     {
         $seller_id = session('user_id');
@@ -1056,7 +1069,6 @@ class buyAd_controller extends Controller
     }
 
     /////////////////////////////////
-
     public function get_sample_buyAds()
     {
         $until_date = Carbon::now();
@@ -1091,7 +1103,6 @@ class buyAd_controller extends Controller
     }
 
     ////////////////////////////////////
-
     public function get_my_buyAd_suggestions(Request $request)
     {
         $user_id = session('user_id');
@@ -1377,7 +1388,6 @@ class buyAd_controller extends Controller
     }
 
     /////////////////////////////////// incommon functions start
-
     protected function get_category_and_subcategory_name($subcategory_id)
     {
         $subcategory_record = category::where('id', $subcategory_id)

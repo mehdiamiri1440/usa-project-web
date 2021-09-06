@@ -18,9 +18,8 @@ class location_controller extends Controller
 
         if (!$request->has('province_id')) {
             // $provinces = province::all();
-            $provinces = Cache::remember(md5('provinces'),24 * 60 , function(){
-                return DB::table('provinces')->get();
-            });
+
+            $provinces = $this->get_provinces_from_cache();
 
             if($request->has('cascade_list') && $request->cascade_list == true){
 
@@ -51,9 +50,7 @@ class location_controller extends Controller
                 'province_id' => 'numeric|exists:cities,province_id',
             ]);
 
-            $cities = Cache::remember(md5('cities'),24 * 60,function(){
-                return DB::table('cities')->get();
-            });
+            $cities = $this->get_cities_from_cache();
 
             $province_id = $request->province_id;
 
@@ -70,4 +67,25 @@ class location_controller extends Controller
             ], 200);
         }
     }
+
+    protected function get_provinces_from_cache()
+    {
+
+        $provinces = Cache::remember(md5('provinces'),24 * 60 , function(){
+            return DB::table('provinces')->get();
+        });
+
+        return $provinces;
+    }
+
+    protected function get_cities_from_cache()
+    {
+
+        $cities = Cache::remember(md5('cities'),24 * 60,function(){
+            return DB::table('cities')->get();
+        });
+
+        return $cities;
+    }
+
 }

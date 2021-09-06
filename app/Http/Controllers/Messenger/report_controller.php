@@ -38,6 +38,7 @@ class report_controller extends Controller
                                 ])->first();
 
         if($report_record){
+
             $report_record->option_id = $request->option_id;
 
             if($request->has('description')){
@@ -52,11 +53,14 @@ class report_controller extends Controller
             ],200);
         }
         else{
+
             $report_record = new report();
             
             $report_record->reporter_id = $reporter_id;
             $report_record->reported_id = $reported_id;
+
             $report_record->option_id   = $request->option_id;
+
             if($request->has('description')){
                 $report_record->description = $request->description;
             }
@@ -82,12 +86,15 @@ class report_controller extends Controller
 
         if($request->has('option_id')){
             if(is_integer($request->option_id)){// these two above conditions were tested in validate part
+
                 $report_option_record = DB::table('report_options')
                                             ->where('id',$request->option_id)
                                             ->get();
 
                 if($report_option_record){
+
                     if($report_option_record->first()->is_description_needed){
+                        
                         $rules['description'] = 'required|string';
                         return $rules;
                     }

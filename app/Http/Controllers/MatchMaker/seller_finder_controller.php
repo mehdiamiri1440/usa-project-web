@@ -73,14 +73,14 @@ class seller_finder_controller extends Controller
     protected function get_category_and_subcategory_name($subcategory_id)
     {
         $subcategory_record = category::where('id', $subcategory_id)
-            ->select('category_name', 'parent_id')
-            ->get()
-            ->first();
+                                        ->select('category_name', 'parent_id')
+                                        ->get()
+                                        ->first();
 
         $category_record = category::where('id', $subcategory_record->parent_id)
-            ->select('category_name')
-            ->get()
-            ->first();
+                                    ->select('category_name')
+                                    ->get()
+                                    ->first();
 
         return [
             'category_name' => $category_record->category_name,
@@ -93,8 +93,10 @@ class seller_finder_controller extends Controller
         $result = [];
 
         foreach ($words as $word) {
+
             $index = array_search($word, $this->words_blacklist);
             if ($index === false) {
+                
                 $result[] = $word;
             }
         }

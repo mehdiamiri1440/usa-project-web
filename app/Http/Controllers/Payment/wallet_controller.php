@@ -23,6 +23,7 @@ class wallet_controller extends Controller
             }
         }
         else{
+
             return redirect()->back()->withErrors([
                 'error' => 'شما مجاز به انجام این پرداخت نیستید' 
              ]);
@@ -32,7 +33,9 @@ class wallet_controller extends Controller
             $gateway = \Gateway::zarinpal();
             $gateway->setCallback(url('/wallet_payment_callback'));
             $gateway->price($payment_amount)->ready();
+
             $refId =  $gateway->refId();
+
             $transID = $gateway->transactionId();
 
             // Your code here
@@ -40,6 +43,7 @@ class wallet_controller extends Controller
             session(['payment_amount' => $amount]);
 
             $this->record_payment_log([
+
                 'myuser_id' => session('user_id'),
                 'transaction_id' => $transID,
                 'pay_for' => 'wallet-charge',
@@ -48,6 +52,7 @@ class wallet_controller extends Controller
             
             return $gateway->redirect(); 
         }catch (\Exception $e){ 
+
             return redirect('/contact-us');
         } 
     }
@@ -56,6 +61,7 @@ class wallet_controller extends Controller
     public function do_app_charge_wallet($user_id,$amount)
     {
         if($amount >= 1000){
+
             $payment_amount = $amount * 10; //converting toman to Rial
 
             if(session()->has('payment_amount')){
@@ -63,16 +69,20 @@ class wallet_controller extends Controller
             }
         }
         else{
+
             return redirect()->back()->withErrors([
                 'error' => 'شما مجاز به انجام این پرداخت نیستید' 
              ]);
         }
 
         try{
+
             $gateway = \Gateway::zarinpal();
             $gateway->setCallback(url('/app-wallet-payment-callback'));
             $gateway->price($payment_amount)->ready();
+
             $refId =  $gateway->refId();
+
             $transID = $gateway->transactionId();
 
             // Your code here
@@ -81,6 +91,7 @@ class wallet_controller extends Controller
             session(['app_user_id' => $user_id]);
 
             $this->record_payment_log([
+
                 'myuser_id' => $user_id,
                 'transaction_id' => $transID,
                 'pay_for' => 'wallet-charge',
@@ -88,7 +99,9 @@ class wallet_controller extends Controller
             ]);
             
             return $gateway->redirect(); 
+
         }catch (\Exception $e){ 
+
             return redirect('/contact-us');
         } 
     }
@@ -99,7 +112,9 @@ class wallet_controller extends Controller
         try{ 
             $gateway = \Gateway::verify();
             $trackingCode = $gateway->trackingCode();
+
             $refId = $gateway->refId();
+
             $cardNumber = $gateway->cardNumber();
 
             // عملیات خرید با موفقیت انجام شده است
@@ -122,7 +137,9 @@ class wallet_controller extends Controller
         try{ 
             $gateway = \Gateway::verify();
             $trackingCode = $gateway->trackingCode();
+
             $refId = $gateway->refId();
+
             $cardNumber = $gateway->cardNumber();
 
             // عملیات خرید با موفقیت انجام شده است
@@ -147,7 +164,9 @@ class wallet_controller extends Controller
         ]);
 
         $user_id = session('user_id');
+
         $product_id = $request->product_id;
+
         $min_required_balance = config("subscriptionPakage.elevator.price")/10;
 
         $related_record = DB::table('products')
@@ -160,6 +179,7 @@ class wallet_controller extends Controller
                                 ->get();
 
         if(count($related_record) == 0){
+
             return response()->json([
                 'status' => false,
                 'msg' => 'موجودی کیف پول شما کافی نیست. لطفا ابتدا موجودی کیف پول خود را افزایش دهید.'
@@ -167,6 +187,7 @@ class wallet_controller extends Controller
         }
 
         $expiration_time_in_days = config("subscriptionPakage.elevator.expiration-time-in-days");
+
         $elevator_expiry = Carbon::now()->addDays($expiration_time_in_days);
 
         DB::table('products')
@@ -195,6 +216,7 @@ class wallet_controller extends Controller
         $is_balance_updated = $this->update_user_account_balance($amount,$user_id);
 
         if($is_balance_updated == true){
+
             $now = Carbon::now();
 
             DB::table('expending_logs')
@@ -230,6 +252,7 @@ class wallet_controller extends Controller
     protected function do_after_payment_changes_for_wallet_charge($payment_amount,$user_id)
     {
         if($user_id && is_integer((integer)$payment_amount)){
+            
             DB::table('myusers')
                         ->where('id',$user_id)
                         ->increment('wallet_balance',$payment_amount);

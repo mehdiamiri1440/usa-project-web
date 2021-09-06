@@ -54,6 +54,7 @@ class reputation_controller extends Controller
     protected function get_register_time_score($user_record)
     {
         if($user_record){
+
             $user_register_date_time = $user_record->created_at;
         
             $today = Carbon::now();
@@ -94,10 +95,13 @@ class reputation_controller extends Controller
                                                     ->last();
         
         if($last_confirmed_profile_record){
+
             if($last_confirmed_profile_record->profile_photo){
+
                 $score += $this->profile_photo_coef;
             }
             if($last_confirmed_profile_record->is_company){
+
                 $score += $this->is_company_coef;
             }
             
@@ -107,47 +111,6 @@ class reputation_controller extends Controller
         }
         
         return $score;
-    }
-    
-    // two following functions usage were commented out
-    protected function get_messaging_score($user_record)
-    {
-        $user_id = $user_record->id;
-
-        $messaging_contacts_count = $this->get_messaging_contacts_count($user_id);
-        return $messaging_contacts_count * 10;
-    }
-    
-    protected function get_profile_visit_score($user_record)
-    {
-        $user_id = $user_record->id;
-
-        $profile_visit_count = myuser::find($user_id)->profile_visit;
-        
-        return $profile_visit_count * $this->profile_visit_coef;
-    }
-    
-    protected function get_messaging_contacts_count($user_record)
-    {
-        $user_id = $user_record->id;
-
-        // $related_records = message::where('sender_id',$user_id)
-        //                         ->orWhere('receiver_id',$user_id)
-        //                         ->select('sender_id','receiver_id')
-        //                         ->distinct()
-        //                         ->orderBy('created_at')
-        //                         ->get();
-        // $contact_id_array = [];
-        
-        // $related_records->each(function($record) use(&$contact_id_array,$user_id){
-        //     if($record->sender_id != $user_id){
-        //         $contact_id_array[] = $record->sender_id;
-        //     }
-        //     else{
-        //         $contact_id_array[] = $record->receiver_id;
-        //     }
-        // });
-
     }
     
     protected function get_pakage_score($user_record)
@@ -193,5 +156,48 @@ class reputation_controller extends Controller
         else{
             return 0;
         }
+    }
+
+    /////////////////////// zombie functions
+
+    // two following functions usage were commented out
+    protected function get_messaging_score($user_record)
+    {
+        $user_id = $user_record->id;
+
+        $messaging_contacts_count = $this->get_messaging_contacts_count($user_id);
+        return $messaging_contacts_count * 10;
+    }
+    
+    protected function get_profile_visit_score($user_record)
+    {
+        $user_id = $user_record->id;
+
+        $profile_visit_count = myuser::find($user_id)->profile_visit;
+        
+        return $profile_visit_count * $this->profile_visit_coef;
+    }
+    
+    protected function get_messaging_contacts_count($user_record)
+    {
+        $user_id = $user_record->id;
+
+        // $related_records = message::where('sender_id',$user_id)
+        //                         ->orWhere('receiver_id',$user_id)
+        //                         ->select('sender_id','receiver_id')
+        //                         ->distinct()
+        //                         ->orderBy('created_at')
+        //                         ->get();
+        // $contact_id_array = [];
+        
+        // $related_records->each(function($record) use(&$contact_id_array,$user_id){
+        //     if($record->sender_id != $user_id){
+        //         $contact_id_array[] = $record->sender_id;
+        //     }
+        //     else{
+        //         $contact_id_array[] = $record->receiver_id;
+        //     }
+        // });
+
     }
 }

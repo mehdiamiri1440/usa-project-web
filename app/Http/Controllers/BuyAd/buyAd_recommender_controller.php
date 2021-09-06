@@ -53,12 +53,14 @@ class buyAd_recommender_controller extends Controller
     protected function apply_registered_product_filter_to_buyAd_list(&$buyAd_list,$sub_category_array)
     {
         $filtered_buyAd_list = $buyAd_list->filter(function($buyAd) use($sub_category_array){
+
            if(!property_exists($buyAd,'score')){
                $buyAd->score = 0;
            } 
            
            $flag = false;
            foreach($sub_category_array as $item){
+               
                if($item->sub_category_id == $buyAd->category_id){
                    $flag = true;
                }
@@ -96,12 +98,14 @@ class buyAd_recommender_controller extends Controller
     protected function apply_registered_sell_offer_filter_to_buyAd_list(&$buyAd_list,$sub_category_array)
     {
         $filtered_buyAd_list = $buyAd_list->filter(function($buyAd) use($sub_category_array){
+
             if( ! isset($buyAd['score'])){
                 $buyAd['score'] = 0;
             } 
             
             $flag = false;
             foreach($sub_category_array as $item){
+
                 if($item->sub_category_id == $buyAd->category_id){
                     $flag = true;
                 }
@@ -111,6 +115,7 @@ class buyAd_recommender_controller extends Controller
         });
         
         $filtered_buyAd_list->each(function(&$buyAd){
+
             $this->increase_buyAd_score($buyAd,$this->registered_sell_offer_coef);
         });
     }
@@ -129,13 +134,17 @@ class buyAd_recommender_controller extends Controller
     protected function apply_previous_transaction_with_the_buyers_filter_to_buyAd_list(&$buyAd_list,$buyers_user_id_array)
     {
          $filtered_buyAd_list = $buyAd_list->filter(function($buyAd) use($buyers_user_id_array){
+
             if( ! isset($buyAd['score'])){
+
                 $buyAd['score'] = 0;
             } 
             
             $flag = false;
             foreach($buyers_user_id_array as $item){
+
                 if($item->buyer_id == $buyAd->myuser_id){
+
                     unset($buyAd->myuser_id);
 
                     $flag = true;
@@ -146,6 +155,7 @@ class buyAd_recommender_controller extends Controller
         });
         
         $filtered_buyAd_list->each(function(&$buyAd){
+
             $this->increase_buyAd_score($buyAd,$this->previous_transaction_with_buyer_coef);
         });
     }
@@ -170,6 +180,7 @@ class buyAd_recommender_controller extends Controller
         }
 
         $seen_by_user_contacts_count = $contacts->filter(function($msg){
+
             return $msg->delay != 0;
         })->count();
 

@@ -34,11 +34,15 @@ class payment_controller extends Controller
     public function app_do_elevator_payment($product_id)
     {
         $payment_amount = config("subscriptionPakage.elevator.price");
+
         try{
+
             $gateway = \Gateway::zarinpal();
             $gateway->setCallback(url('app-payment/elevator_payment_callback'));
             $gateway->price($payment_amount)->ready();
+
             $refId =  $gateway->refId();
+
             $transID = $gateway->transactionId();
 
             // Your code here
@@ -70,10 +74,13 @@ class payment_controller extends Controller
             $payment_amount = $payment_amount * $extra_capacity;
 
             try{
+
                 $gateway = \Gateway::zarinpal();
                 $gateway->setCallback(url('app-payment/product_capacity_payment_callback'));
                 $gateway->price($payment_amount)->ready();
+
                 $refId =  $gateway->refId();
+
                 $transID = $gateway->transactionId();
 
                 // Your code here
@@ -82,6 +89,7 @@ class payment_controller extends Controller
                 session(['app_user_id' => $user_id]);
 
                 $this->record_payment_log([
+
                     'myuser_id' => $user_id,
                     'transaction_id' => $transID,
                     'pay_for' => "product-capacity",
@@ -95,6 +103,7 @@ class payment_controller extends Controller
             }  
         }
         else{
+
             return redirect()->back()->withErrors([
                 'error' => 'شما مجاز به انجام این پرداخت نیستید' 
              ]);
@@ -114,7 +123,9 @@ class payment_controller extends Controller
                 $gateway = \Gateway::zarinpal();
                 $gateway->setCallback(url('app-payment/buyAd_reply_capacity_payment_callback'));
                 $gateway->price($payment_amount)->ready();
+
                 $refId =  $gateway->refId();
+
                 $transID = $gateway->transactionId();
 
                 // Your code here
@@ -123,6 +134,7 @@ class payment_controller extends Controller
                 session(['app_user_id' => $user_id]);
 
                 $this->record_payment_log([
+
                     'myuser_id' => $user_id,
                     'transaction_id' => $transID,
                     'pay_for' => "buyAd-capacity",
@@ -146,11 +158,15 @@ class payment_controller extends Controller
     public function do_elevator_payment($product_id)
     {
         $payment_amount = config("subscriptionPakage.elevator.price");
+
         try{
+
             $gateway = \Gateway::zarinpal();
             $gateway->setCallback(url('/elevator_payment_callback'));
             $gateway->price($payment_amount)->ready();
+
             $refId =  $gateway->refId();
+
             $transID = $gateway->transactionId();
 
             // Your code here
@@ -160,6 +176,7 @@ class payment_controller extends Controller
             $user_id = product::find($product_id)->myuser_id;
 
             $this->record_payment_log([
+
                 'myuser_id' => $user_id,
                 'transaction_id' => $transID,
                 'pay_for' => "elevator",
@@ -176,6 +193,7 @@ class payment_controller extends Controller
     public function do_product_capacity_payment($extra_capacity)
     {
         if(!session()->has('user_id')){
+
             return redirect()->back()->withErrors([
                 'error' => 'شما مجاز به انجام این پرداخت نیستید' 
              ]);
@@ -193,7 +211,9 @@ class payment_controller extends Controller
                 $gateway = \Gateway::zarinpal();
                 $gateway->setCallback(url('/product_capacity_payment_callback'));
                 $gateway->price($payment_amount)->ready();
+
                 $refId =  $gateway->refId();
+
                 $transID = $gateway->transactionId();
 
                 // Your code here
@@ -203,6 +223,7 @@ class payment_controller extends Controller
 
 
                 $this->record_payment_log([
+
                     'myuser_id' => $user_id,
                     'transaction_id' => $transID,
                     'pay_for' => "product-capacity",
@@ -226,6 +247,7 @@ class payment_controller extends Controller
     public function do_buyAd_reply_capacity_payment($extra_reply_capacity)
     {
         if(!session()->has('user_id')){
+
             return redirect()->back()->withErrors([
                 'error' => 'شما مجاز به انجام این پرداخت نیستید' 
              ]);
@@ -242,7 +264,9 @@ class payment_controller extends Controller
                 $gateway = \Gateway::zarinpal();
                 $gateway->setCallback(url('/buyAd_reply_capacity_payment_callback'));
                 $gateway->price($payment_amount)->ready();
+
                 $refId =  $gateway->refId();
+
                 $transID = $gateway->transactionId();
 
                 // Your code here
@@ -251,6 +275,7 @@ class payment_controller extends Controller
                 session(['uid' => $user_id]);
 
                 $this->record_payment_log([
+
                     'myuser_id' => $user_id,
                     'transaction_id' => $transID,
                     'pay_for' => "buyAd-capacity",
@@ -276,7 +301,9 @@ class payment_controller extends Controller
         try{ 
             $gateway = \Gateway::verify();
             $trackingCode = $gateway->trackingCode();
+
             $refId = $gateway->refId();
+
             $cardNumber = $gateway->cardNumber();
 
             // عملیات خرید با موفقیت انجام شده است
@@ -297,9 +324,12 @@ class payment_controller extends Controller
     public function app_elevator_payment_callback()
     {
         try{ 
+
             $gateway = \Gateway::verify();
             $trackingCode = $gateway->trackingCode();
+
             $refId = $gateway->refId();
+
             $cardNumber = $gateway->cardNumber();
 
             // عملیات خرید با موفقیت انجام شده است
@@ -322,6 +352,7 @@ class payment_controller extends Controller
         // $product_id = session()->pull('product_id');
         
         try{
+
             $product_record = product::find($product_id);
         
             $now = Carbon::now();
@@ -358,6 +389,7 @@ class payment_controller extends Controller
 
         
         if(!in_array($pakage_type,$this->allowed_package_types_to_pay)){
+
             return redirect()->back()->withErrors([
                'error' => 'شما مجاز به انجام این پرداخت نیستید' 
             ]);
@@ -367,16 +399,20 @@ class payment_controller extends Controller
                 $gateway = \Gateway::zarinpal();
                 $gateway->setCallback(url('/payment_callback'));
                 $gateway->price($payment_amount)->ready();
+
                 $refId =  $gateway->refId();
+
                 $transID = $gateway->transactionId();
 
                 // Your code here
                 session(['gateway_transaction_id' => $transID]);
                 session(['pakage_type' => $pakage_type]);
+
                 session(['pakage_duration_in_months' => config("subscriptionPakage.type-$pakage_type.pakage-duration-in-months")]);
                 session(['elevator_count' => config("subscriptionPakage.type-$pakage_type.elevetor-count")]);
 
                 $this->record_payment_log([
+
                     'myuser_id' => session('user_id'),
                     'transaction_id' => $transID,
                     'pay_for' => "package-type-$pakage_type",
@@ -394,29 +430,38 @@ class payment_controller extends Controller
     public function app_do_payment($user_id,$pakage_type)
     {
         $prices_array = $this->get_packages_price_array($user_id);
+
         $payment_amount = $prices_array['type-' . $pakage_type .'-discount'] ?? $prices_array['type-' . $pakage_type];
         
         if(!in_array($pakage_type,$this->allowed_package_types_to_pay)){
+
             return redirect()->back()->withErrors([
                'error' => 'شما مجاز به انجام این پرداخت نیستید' 
             ]);
         }        
         else{
+
             try{
+
                 $gateway = \Gateway::zarinpal();
                 $gateway->setCallback(url('app-payment/payment_callback'));
                 $gateway->price($payment_amount)->ready();
+
                 $refId =  $gateway->refId();
+
                 $transID = $gateway->transactionId();
 
                 // Your code here
                 session(['gateway_transaction_id' => $transID]);
                 session(['pakage_type' => $pakage_type]);
+
                 session(['pakage_duration_in_months' => config("subscriptionPakage.type-$pakage_type.pakage-duration-in-months")]);
                 session(['elevator_count' => config("subscriptionPakage.type-$pakage_type.elevetor-count")]);
+
                 session(['app_user_id' => $user_id]);
 
                 $this->record_payment_log([
+
                     'myuser_id' => $user_id,
                     'transaction_id' => $transID,
                     'pay_for' => "package-type-$pakage_type",
@@ -436,13 +481,16 @@ class payment_controller extends Controller
         $pricing_change_date = Carbon::createFromFormat('m/d/Y H:i:s', '03/01/2021 00:00:00');
 
         if(is_null($user_id)){
+
             $user_id = session('user_id');
         }
 
         $user_record = myuser::find($user_id);
 
         if($user_record->created_at->lt($pricing_change_date)){
+
             $prices = [
+
                 'type-1' => config("subscriptionPakage.type-1.price-1"),
                 'type-3' => config("subscriptionPakage.type-3.price-1"),
                 'type-1-discount' => null,
@@ -450,7 +498,9 @@ class payment_controller extends Controller
             ];
         }
         else{
+
             $prices = [
+
                 'type-1' => config("subscriptionPakage.type-1.price"),
                 'type-3' => config("subscriptionPakage.type-3.price"),
             ];
@@ -474,9 +524,12 @@ class payment_controller extends Controller
     {
         
         try { 
+
             $gateway = \Gateway::verify();
             $trackingCode = $gateway->trackingCode();
+
             $refId = $gateway->refId();
+
             $cardNumber = $gateway->cardNumber();
 
             // عملیات خرید با موفقیت انجام شده است
@@ -490,6 +543,7 @@ class payment_controller extends Controller
                                                     ->count();
             
             if($lastest_registered_product_count > 0){
+
                 return redirect('/seller/register-product/success');
             }
 
@@ -509,7 +563,9 @@ class payment_controller extends Controller
         try { 
             $gateway = \Gateway::verify();
             $trackingCode = $gateway->trackingCode();
+
             $refId = $gateway->refId();
+
             $cardNumber = $gateway->cardNumber();
 
             // عملیات خرید با موفقیت انجام شده است
@@ -524,6 +580,7 @@ class payment_controller extends Controller
                                                     ->count();
             
             if($lastest_registered_product_count > 0){
+
                 return redirect('buskool://register-product-successfully');
             }
             
@@ -543,6 +600,7 @@ class payment_controller extends Controller
         $user_record = myuser::find($user_id);
         
         $user_record->active_pakage_type = session()->pull('pakage_type');
+
         $user_record->pakage_start = Carbon::now();
         $user_record->pakage_end   = Carbon::now()->addMonths(session()->pull('pakage_duration_in_months'));
         
@@ -551,12 +609,14 @@ class payment_controller extends Controller
         $elevator_count = session()->pull('elevator_count');
 
         if($elevator_count){
+
             $user_product_record = product::where('myuser_id',$user_id)
                                     ->where('confirmed',true)
                                     ->orderBy('created_at') 
                                     ->first();
             
             if($user_product_record){
+
                 $user_product_record->is_elevated = true;
                 $user_product_record->elevator_expiry = Carbon::now()->addDays(7);
 
@@ -572,7 +632,9 @@ class payment_controller extends Controller
         try{ 
             $gateway = \Gateway::verify();
             $trackingCode = $gateway->trackingCode();
+
             $refId = $gateway->refId();
+
             $cardNumber = $gateway->cardNumber();
 
             // عملیات خرید با موفقیت انجام شده است
@@ -595,7 +657,9 @@ class payment_controller extends Controller
         try{ 
             $gateway = \Gateway::verify();
             $trackingCode = $gateway->trackingCode();
+
             $refId = $gateway->refId();
+
             $cardNumber = $gateway->cardNumber();
 
             // عملیات خرید با موفقیت انجام شده است
@@ -618,6 +682,7 @@ class payment_controller extends Controller
         // $user_id = session('user_id');
 
         try{
+
             DB::table('myusers')
                         ->where('id',$user_id)
                         ->increment('extra_product_capacity',$extra_capacity);
@@ -633,7 +698,9 @@ class payment_controller extends Controller
         try{ 
             $gateway = \Gateway::verify();
             $trackingCode = $gateway->trackingCode();
+
             $refId = $gateway->refId();
+
             $cardNumber = $gateway->cardNumber();
 
             // عملیات خرید با موفقیت انجام شده است
@@ -658,7 +725,9 @@ class payment_controller extends Controller
         try{ 
             $gateway = \Gateway::verify();
             $trackingCode = $gateway->trackingCode();
+
             $refId = $gateway->refId();
+
             $cardNumber = $gateway->cardNumber();
 
             // عملیات خرید با موفقیت انجام شده است
@@ -682,6 +751,7 @@ class payment_controller extends Controller
         // $user_id = session('user_id');
 
         try{
+            
             DB::table('myusers')
                         ->where('id',$user_id)
                         ->increment('extra_buyAd_reply_capacity',$extra_capacity);

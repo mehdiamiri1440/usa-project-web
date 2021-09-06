@@ -103,17 +103,9 @@ class channel_controller extends Controller
             ],404);
         }
 
-        $sending_contacts_count = DB::table('messages')
-                    ->select(DB::raw("count(distinct(receiver_id)) as cnt"))
-                    ->where('sender_id',$user_record->id)
-                    ->get()
-                    ->first()->cnt;
+        $sending_contacts_count = $this->get_count_of_contacts_who_the_user_had_sent_message_to_them($user_record->id);
 
-        $receiving_contacts_count = DB::table('messages')
-                    ->select(DB::raw("count(distinct(sender_id)) as cnt"))
-                    ->where('receiver_id',$user_record->id)
-                    ->get()
-                    ->first()->cnt;
+        $receiving_contacts_count = $this->get_count_of_contacts_who_sent_message_to_given_user($user_record->id);
 
         $total_contacts_count = $sending_contacts_count + $receiving_contacts_count;
 
@@ -213,7 +205,6 @@ class channel_controller extends Controller
                 unset($content->product_id);
             }
         });
-
         
 
         return response()->json([
@@ -309,15 +300,9 @@ class channel_controller extends Controller
     // used in message controller check if it can be trait
     public function get_channel_info_for_this_user($user_record)
     {
-        $sending_contacts_count = DB::table('messages')
-                    ->select(DB::raw("count(distinct(receiver_id)) as cnt"))
-                    ->where('sender_id',$user_record->id)
-                    ->get()->first()->cnt;
+        $sending_contacts_count = $this->get_count_of_contacts_who_the_user_had_sent_message_to_them($user_record->id);
 
-        $receiving_contacts_count = DB::table('messages')
-                        ->select(DB::raw("count(distinct(sender_id)) as cnt"))
-                        ->where('receiver_id',$user_record->id)
-                        ->get()->first()->cnt;
+        $receiving_contacts_count = $this->get_count_of_contacts_who_sent_message_to_given_user($user_record->id);
 
         $total_contacts_count = $sending_contacts_count + $receiving_contacts_count;
 
@@ -420,6 +405,31 @@ class channel_controller extends Controller
 
         return $channel_info;
         
+    }
+
+    ////////////////////////////// incommon functions
+
+    protected function get_count_of_contacts_who_the_user_had_sent_message_to_them($user_id)
+    {
+
+        $sending_contacts_count = DB::table('messages')
+                    ->select(DB::raw("count(distinct(receiver_id)) as cnt"))
+                    ->where('sender_id',$user_id)
+                    ->get()
+                    ->first()->cnt;
+
+        return $sending_contacts_count;
+    }
+
+    protected function get_count_of_contacts_who_sent_message_to_given_user($user_id)
+    {
+        $receiving_contacts_count = DB::table('messages')
+                    ->select(DB::raw("count(distinct(sender_id)) as cnt"))
+                    ->where('receiver_id',$user_id)
+                    ->get()
+                    ->first()->cnt;
+
+        return $receiving_contacts_count;
     }
 
     ///////////////////////////////////////

@@ -107,6 +107,7 @@ class product_controller extends Controller
     public function add_product(Request $request)
     {
         if ($this->is_user_allowed_to_register_another_product() == false) {
+
             return response()->json([
                 'status' => true,
                 'msg' => ' سقف تعداد محصولات ثبت شده شما پر شده است.برای اضافه کردن محصولات بیشتر بخش ارتقا عضویت را بررسی کنید.',
@@ -119,20 +120,24 @@ class product_controller extends Controller
         $product_object_or_failuire_message = $this->add_product_to_DB($request);
 
         if (is_object($product_object_or_failuire_message)) {
+
             $most_related_buyAds = $this->get_new_most_related_buyAds($product_object_or_failuire_message); //$this->get_the_most_related_buyAd_to_the_given_product_if_there_is_any($product_object_or_failuire_message);
 
             if ($most_related_buyAds) {
+
                 return response()->json([
                     'status' => true,
                     'buyAds' => $most_related_buyAds,
                 ], 201);
             } else {
+
                 return response()->json([
                     'status' => true,
                     'product' => $product_object_or_failuire_message,
                 ], 201);
             }
         } else {
+
             return response()->json([
                 'status' => false,
                 'msg' => $product_object_or_failuire_message,
@@ -154,13 +159,16 @@ class product_controller extends Controller
         ];
 
         foreach ($this->product_register_nullable_fields_array_with_validation_rules as $field_name => $validation_rules) {
+
             if (!is_null($request->$field_name)) {
                 $rules[$field_name] = $validation_rules;
             }
         }
 
         $photos_count = $request->images_count;
+
         foreach (range(0, $photos_count - 1) as $index) {
+
             $rules['image_'.$index] = 'image|mimes:png,jpg,jpeg|min:2|max:5000';
         }
 
@@ -170,11 +178,15 @@ class product_controller extends Controller
     protected function add_product_to_DB($request)
     {
         try {
+
             $product = new product();
+
             $user = myuser::find(session('user_id'));
 
             foreach ($this->product_register_fields_array as $field_name) {
+
                 if (!is_null($request->$field_name)) {
+
                     $product->$field_name = strip_tags($request->$field_name,'<hr>');
                 }
             }
@@ -182,12 +194,14 @@ class product_controller extends Controller
             $user->product()->save($product);
 
             $files_path_array = $this->save_product_photos($request, $request->images_count);
+
             $this->register_photos_path_in_DB($files_path_array, $product);
 
             $product['active_package_type'] = $user->active_pakage_type;
 
             return $product;
         } catch (\Exception $e) {
+
             return $e->getMessage();
         }
     }
@@ -198,6 +212,7 @@ class product_controller extends Controller
         $media_controller_object = new media_controller();
 
         for ($i = 0; $i < $image_count; ++$i) {
+
             $image_name = 'image_'.$i;
             $img = $request->$image_name;
 
@@ -221,6 +236,7 @@ class product_controller extends Controller
     protected function register_photos_path_in_DB($photos_path_array, $product)
     {
         foreach ($photos_path_array as $file_path) {
+
             $media = new product_media();
 
             $media->file_path = $file_path;
@@ -238,11 +254,13 @@ class product_controller extends Controller
         ]);
 
         $product_id = $request->product_id;
+
         $product = product::where('id', $product_id)
             ->where('confirmed', true)
             ->first();
 
         if (is_null($product)) {
+
             return response()->json([
                 'status' => false,
                 'msg' => 'product not found.',
@@ -250,39 +268,49 @@ class product_controller extends Controller
         }
 
         $main_records = $this->product_info_sent_by_product_array;
+
         array_walk($main_records,function(&$property_name){
+
             $new_value = explode('.',$property_name)[1];
             $new_value_array = explode(' as ',$new_value);
+            
             $property_name = sizeof($new_value_array) > 1 ? $new_value_array[1] : $new_value_array[0]; 
         });
         
         $user_records = $this->user_info_sent_by_product_array;
         array_walk($user_records,function(&$property_name){
+
             $new_value = explode('.',$property_name)[1];
             $new_value_array = explode(' as ',$new_value);
+
             $property_name = sizeof($new_value_array) > 1 ? $new_value_array[1] : $new_value_array[0]; 
         });
 
         $profile_records = $this->profile_info_sent_by_product_array;
         array_walk($profile_records,function(&$property_name){
+
             $new_value = explode('.',$property_name)[1];
             $new_value_array = explode(' as ',$new_value);
+
             $property_name = sizeof($new_value_array) > 1 ? $new_value_array[1] : $new_value_array[0]; 
         });
 
         $product_related_photos = product_media::where('product_id',$product->id)
-                ->select('file_path')
-                ->get();
+                                                ->select('file_path')
+                                                ->get();
 
         $product_related_data_tmp = $this->get_product_related_data($product->id);
 
         $product_related_data['main'] = new \StdClass;
+
         foreach($main_records as $property_name)
         {
             if($property_name == 'product_id'){
+
                 $product_related_data['main']->id = $product_related_data_tmp->$property_name;
             }
             else{
+
                 $product_related_data['main']->$property_name = $product_related_data_tmp->$property_name;
             }
         }
@@ -291,9 +319,11 @@ class product_controller extends Controller
         foreach($user_records as $property_name)
         {
             if($property_name == 'user_id'){
+
                 $product_related_data['user_info']->id = $product_related_data_tmp->$property_name;
             }  
             else{
+
                 $product_related_data['user_info']->$property_name = $product_related_data_tmp->$property_name;
             }
         }
@@ -303,6 +333,7 @@ class product_controller extends Controller
             $product_related_data['user_info']->has_phone = true;
         }
         else{
+
             $product_related_data['user_info']->has_phone = false;
         }
 
@@ -328,17 +359,21 @@ class product_controller extends Controller
         $product_related_data['main']->super_category_name = (category::find($category_record->parent_id))['category_name'];
 
         if(session()->has('user_id')){
+
             $now = Carbon::now();
 
             $user_id = session('user_id');
 
             if($product_related_data['user_info']->has_phone == false){
+
                 if(str_split($product_related_data['user_info']->phone_view_permission)[0] == 1 && $this->does_Delsa_already_send_this_product_to_this_user($product_id,$product_related_data['user_info']->id,$user_id) == true){
+
                     $product_related_data['user_info']->has_phone = true;
                 }
             }
 
             DB::table('user_products')->insert([
+
                 'created_at' => $now,
                 'updated_at' => $now,
                 'product_id' => $product->id,
@@ -351,6 +386,7 @@ class product_controller extends Controller
         DB::table('products')->where('id',$product->id)->increment('product_view_count');
 
         return response()->json([
+
             'status' => true,
             'product' => $product_related_data,
         ], 201);
@@ -382,11 +418,14 @@ class product_controller extends Controller
         ]);
 
         $product_id = $request->product_id;
+
         $user_id = session('user_id');
 
         try {
+
             $product = product::findOrFail($product_id);
         } catch (\Exception $e) {
+
             return response()->json([
                'status' => false,
                 'msg' => 'product_id does not exist or already deleted.',
@@ -394,6 +433,7 @@ class product_controller extends Controller
         }
 
         if ($this->is_the_user_the_product_owner($user_id, $product)) {
+
             $product->delete();
 
             return response()->json([
@@ -401,6 +441,7 @@ class product_controller extends Controller
                 'msg' => 'محصول حذف شد.',
             ]);
         } else {
+
             return response()->json([
                 'status' => false,
                 'msg' => 'the user has not delete permission on this product',
@@ -415,11 +456,13 @@ class product_controller extends Controller
         $this->validate($request, [
            'user_name' => 'required|alpha_dash',
         ]);
+
         $user_name = $request->user_name;
 
         $user_id = $this->get_user_id_for_the_user_name($user_name);
 
         if ($user_id) {
+
             $this->validate($request, [
                 'from_record_number' => 'numeric',
                 'to_record_number' => 'numeric',
@@ -428,11 +471,13 @@ class product_controller extends Controller
             $current_user_products = null;
 
             if ($request->filled('from_record_number') && $request->filled('to_record_number')) {
+
                 $from_record_number = $request->from_record_number;
                 $to_record_number = $request->to_record_number;
 
                 $current_user_products = $this->get_current_user_products_with_related_media($user_id, $from_record_number, $to_record_number);
             } else {
+
                 $current_user_products = $this->get_current_user_products_with_related_media($user_id);
             }
 
@@ -440,7 +485,9 @@ class product_controller extends Controller
                 'status' => true,
                 'products' => $current_user_products,
             ], 200);
+
         } else {
+
             return response()->json([
                 'status' => false,
                 'msg' => "the user_name '{$user_name}' doesn't exists.",
@@ -455,6 +502,7 @@ class product_controller extends Controller
         $products = null;
 
         if ($from_record_number !== null) {
+
             $take_count = abs($to_record_number - $from_record_number);
 
             $products = product::where('myuser_id', $current_user_id)
@@ -463,6 +511,7 @@ class product_controller extends Controller
                 ->take($take_count)
                 ->get();
         } else {
+
             $products = product::where('myuser_id', $current_user_id)
                         ->where('confirmed', true)
                         ->orderBy('updated_at', 'desc')
@@ -471,28 +520,35 @@ class product_controller extends Controller
 
         $main_records = $this->product_info_sent_by_product_array;
         array_walk($main_records,function(&$property_name){
+
             $new_value = explode('.',$property_name)[1];
             $new_value_array = explode(' as ',$new_value);
+
             $property_name = sizeof($new_value_array) > 1 ? $new_value_array[1] : $new_value_array[0]; 
         });
         
         $user_records = $this->user_info_sent_by_product_array;
         array_walk($user_records,function(&$property_name){
+
             $new_value = explode('.',$property_name)[1];
             $new_value_array = explode(' as ',$new_value);
+
             $property_name = sizeof($new_value_array) > 1 ? $new_value_array[1] : $new_value_array[0]; 
         });
 
         $profile_records = $this->profile_info_sent_by_product_array;
         array_walk($profile_records,function(&$property_name){
+
             $new_value = explode('.',$property_name)[1];
             $new_value_array = explode(' as ',$new_value);
+
             $property_name = sizeof($new_value_array) > 1 ? $new_value_array[1] : $new_value_array[0]; 
         });
 
         $result_products = array();
 
         foreach ($products as $product) {
+
             $temp = array();
             $product_related_photos = product_media::where('product_id',$product->id)
                 ->select('file_path')
@@ -504,9 +560,11 @@ class product_controller extends Controller
             foreach($main_records as $property_name)
             {
                 if($property_name == 'product_id'){
+
                     $product_related_data['main']->id = $product_related_data_tmp->$property_name;
                 }
                 else{
+
                     $product_related_data['main']->$property_name = $product_related_data_tmp->$property_name;
                 }
             }
@@ -515,9 +573,11 @@ class product_controller extends Controller
             foreach($user_records as $property_name)
             {
                 if($property_name == 'user_id'){
+
                     $product_related_data['user_info']->id = $product_related_data_tmp->$property_name;
                 }   
                 else{
+
                     $product_related_data['user_info']->$property_name = $product_related_data_tmp->$property_name;
                 }
             }
@@ -572,7 +632,9 @@ class product_controller extends Controller
         $product = product::find($product_id);
 
         if ($product) {
+
             if ($this->is_the_user_the_product_owner($user_id, $product)) {
+
                 $data = [
                     'min_sale_price' => $request->min_sale_price,
                     'max_sale_price' => $request->max_sale_price,
@@ -585,6 +647,7 @@ class product_controller extends Controller
                         ->update($data);
 
                 if($data['min_sale_price'] != $product->min_sale_price){
+
                     NotifyPriceUpdateForOldBuyers::dispatch($product);
                 }
 
@@ -592,13 +655,16 @@ class product_controller extends Controller
                     'status' => true,
                     'msg' => 'ویرایش با موفقیت انجام شد',
                 ], 200);
+
             } else {
+
                 return response()->json([
                     'status' => false,
                     'msg' => 'شما مجاز به انجام این عملیات نیستید.',
                 ]);
             }
         } else {
+
             return response()->json([
                 'status' => false,
                 'msg' => 'محصول مورد نظر یافت نشد.',
@@ -611,12 +677,15 @@ class product_controller extends Controller
     public function is_user_allowed_to_register_product(Request $request)
     {
         if ($this->is_user_allowed_to_register_another_product() == false) {
+
             return response()->json([
                 'status' => true,
                 'is_limited' => true,
                 'msg' => ' سقف تعداد محصولات ثبت شده شما پر شده است.برای اضافه کردن محصولات بیشتر بخش ارتقا عضویت را بررسی کنید.',
             ], 200);
+
         } else {
+
             return response()->json([
                 'status' => true,
                 'is_limited' => false,
@@ -645,6 +714,7 @@ class product_controller extends Controller
                                 ->slice(0, 9);
 
         $products->map(function ($product) {
+
             $category_info = $this->get_category_and_subcategory_name($product->category_id);
 
             $product->category_name = $category_info['category_name'];
@@ -674,6 +744,7 @@ class product_controller extends Controller
         $product = product::find($product_id);
 
         if (is_null($product)) {
+
             return response()->json([
                 'status' => false,
                 'msg' => 'product not found!',
@@ -687,8 +758,10 @@ class product_controller extends Controller
         $category_info = $this->get_category_and_subcategory_name($product->category_id);
 
         foreach ($related_products as $product) {
+
             $product->category_name = $category_info['category_name'];
             $product->subcategory_name = $category_info['subcategory_name'];
+
             $product->photo = product_media::where('product_id', $product->id)
                                                 ->get()
                                                 ->first()
@@ -715,6 +788,7 @@ class product_controller extends Controller
         $schema_object = '';
 
         if($category_record){
+
             $category_id = $category_record->id;
 
             $tags_info = $this->get_category_meta_data($category_id)->first();
@@ -731,6 +805,7 @@ class product_controller extends Controller
             // }
 
             if(! is_null($tags_info)){
+
                 $schema_object = $tags_info->schema_object;
                 unset($tags_info->schema_object);
             }
@@ -743,6 +818,7 @@ class product_controller extends Controller
             ]);
         }
         else{
+
             $tags_info = tag::where('header',$request->category_name)
                                 ->where('is_visible',true)
                                 ->select([
@@ -753,6 +829,7 @@ class product_controller extends Controller
                                 ])->get();
 
             if(sizeof($tags_info) > 0){
+
                 $temp = $tags_info->first();
                 $schema_object = $temp->schema_object;
                 
@@ -762,6 +839,7 @@ class product_controller extends Controller
             
 
             if($tags_info){
+
                 return response()->json([
                     'status' => true,
                     'category_info' => $tags_info,
@@ -769,6 +847,7 @@ class product_controller extends Controller
                 ]);
             }
             else{
+
                 return response()->json([
                     'status' => true,
                     'msg' => 'wrong category name given!'
@@ -800,6 +879,7 @@ class product_controller extends Controller
         $user_record = myuser::find($user_id);
 
         if(is_null($user_record)){
+
             return response()->json([
                 'status' => false,
                 'msg' => 'شما به این قسمت دسترسی ندارید.'
@@ -813,6 +893,7 @@ class product_controller extends Controller
                                 ->first();
 
         if(is_null($product)){
+
             return response()->json([
                 'status' => false,
                 'msg' => 'شما به این قسمت دسترسی ندارید.'
@@ -833,11 +914,14 @@ class product_controller extends Controller
     public function get_product_blade(Request $request,$extra_text = null,$category_name = null,$product_id)
     {
         if($this->_bot_detected() == false){
+
             if (!$request->session()->has('user_id')) {
+
                 $user_phone = $request->cookie('user_phone');
                 $user_hashed_password = $request->cookie('user_password');
         
                 if ($user_phone && $user_hashed_password) {
+
                     $login_middleware_object = new login();
                     $status = $login_middleware_object->set_user_session($user_phone, $user_hashed_password);
                 }
@@ -853,6 +937,7 @@ class product_controller extends Controller
             ->first();
 
         if (is_null($product)) {
+
             $category_record = DB::table('products')
                                 ->where('products.id',$product_id)
                                 ->where('confirmed',true)
@@ -861,6 +946,7 @@ class product_controller extends Controller
                                 ->first();
 
             if($category_record){
+
                 $category_name = implode('-',explode(' ',$category_record->category_name));
 
                 return redirect("/product-list/category/$category_name",301);
@@ -871,22 +957,28 @@ class product_controller extends Controller
 
         $main_records = $this->product_info_sent_by_product_array;
         array_walk($main_records,function(&$property_name){
+
             $new_value = explode('.',$property_name)[1];
             $new_value_array = explode(' as ',$new_value);
+
             $property_name = sizeof($new_value_array) > 1 ? $new_value_array[1] : $new_value_array[0]; 
         });
         
         $user_records = $this->user_info_sent_by_product_array;
         array_walk($user_records,function(&$property_name){
+            
             $new_value = explode('.',$property_name)[1];
             $new_value_array = explode(' as ',$new_value);
+
             $property_name = sizeof($new_value_array) > 1 ? $new_value_array[1] : $new_value_array[0]; 
         });
 
         $profile_records = $this->profile_info_sent_by_product_array;
         array_walk($profile_records,function(&$property_name){
+
             $new_value = explode('.',$property_name)[1];
             $new_value_array = explode(' as ',$new_value);
+
             $property_name = sizeof($new_value_array) > 1 ? $new_value_array[1] : $new_value_array[0]; 
         });
 
@@ -900,9 +992,11 @@ class product_controller extends Controller
         foreach($main_records as $property_name)
         {
             if($property_name == 'product_id'){
+
                 $product_related_data['main']->id = $product_related_data_tmp->$property_name;
             }
             else{
+
                 $product_related_data['main']->$property_name = $product_related_data_tmp->$property_name;
             }
         }
@@ -911,9 +1005,11 @@ class product_controller extends Controller
         foreach($user_records as $property_name)
         {
             if($property_name == 'user_id'){
+
                 $product_related_data['user_info']->id = $product_related_data_tmp->$property_name;
             }  
             else{
+
                 $product_related_data['user_info']->$property_name = $product_related_data_tmp->$property_name;
             }
         }
@@ -923,6 +1019,7 @@ class product_controller extends Controller
             $product_related_data['user_info']->has_phone = true;
         }
         else{
+
             $product_related_data['user_info']->has_phone = false;
         }
 
@@ -956,8 +1053,10 @@ class product_controller extends Controller
         $category_info = $this->get_category_and_subcategory_name($product->category_id);
 
         foreach ($related_products as $product) {
+
             $product->category_name = $category_info['category_name'];
             $product->subcategory_name = $category_info['subcategory_name'];
+
             $product->photo = product_media::where('product_id', $product->id)
                                                 ->get()
                                                 ->first()
@@ -1063,6 +1162,7 @@ class product_controller extends Controller
         $buyAds = $this->get_most_valuable_buyAds($buyAds);
 
         foreach($buyAds as $buyAd){
+            
             if(str_split($buyAd->phone_view_permission)[1] == true){
                 $buyAd->has_phone = true;
             }
@@ -1083,7 +1183,9 @@ class product_controller extends Controller
         $category_info = $this->get_category_and_subcategory_name($product->category_id);
 
         if (count($product_name_array)) {
+
             if ($product_name_array[0] == $category_info['subcategory_name']) {
+
                 array_splice($product_name_array, 0, 1);
             }
         }
@@ -1098,8 +1200,11 @@ class product_controller extends Controller
         $result = [];
 
         foreach ($words as $word) {
+
             $index = array_search($word, $this->words_blacklist);
+
             if ($index === false) {
+
                 $result[] = $word;
             }
         }
@@ -1110,6 +1215,7 @@ class product_controller extends Controller
     protected function get_most_valuable_buyAds($buyAds)
     {
         $buyer_ids = $buyAds->map(function($buyAd){
+
             return collect($buyAd)->only('myuser_id');
         });
 
@@ -1124,6 +1230,7 @@ class product_controller extends Controller
         $result = array_column($result,'user_id');
 
         $important_buyAds = $buyAds->filter(function($buyAd) use($result){ //extract selected buyers from all related buyAds
+            
             return in_array($buyAd->myuser_id,$result) == true;
         });
 
@@ -1158,7 +1265,9 @@ class product_controller extends Controller
     protected function prioritize_buyAds_according_to_buyers_last_activity_date(&$buyAds)
     {
         $buyAds->each(function($buyAd){
+
             $activity_info = $this->get_user_activity_ratio($buyAd->myuser_id,$buyAd->created_at);
+
             $buyAd->activity_ratio = $activity_info['activity_ratio'];
             $buyAd->score = $activity_info['score'];
         });
@@ -1166,7 +1275,9 @@ class product_controller extends Controller
         $buyAds = $buyAds->all();
 
         usort($buyAds,function($item1,$item2){
+
             if($item1->score == $item2->score){
+
                 return $item1->activity_ratio < $item2->activity_ratio ? 1 : -1;
             }
 
@@ -1232,11 +1343,13 @@ class product_controller extends Controller
         $days_between_last_activity_and_user_signup = Carbon::parse($user_register_date)->diffInDays(Carbon::parse($result[0]->date));
 
         if($days_since_buyAd_register != 0){
+
             $activity_ratio = round($total_number_of_active_days / $days_since_buyAd_register , 2) * 100;
 
             $score = round($days_between_last_activity_and_user_signup / $days_since_buyAd_register, 2);
         }
         else{
+
             $activity_ratio = $score = 0;
         }
         
@@ -1264,7 +1377,9 @@ class product_controller extends Controller
         
         $total_contacts_count = $contacts->count();
         if ($total_contacts_count == 0) {
+
             if(is_null($product_last_uptade_date)){
+
                 return [
                     'response_rate' => 100,
                     'response_time' => 0,
@@ -1272,6 +1387,7 @@ class product_controller extends Controller
                 ];
             }
             else{
+
                 return [
                     'response_rate' => 100,
                     'response_time' => pow(Carbon::now()->diffInDays($product_last_uptade_date),2),
@@ -1282,6 +1398,7 @@ class product_controller extends Controller
         }
 
         $seen_by_user_contacts_count = $contacts->filter(function($msg){
+
             return $msg->delay != 0;
         })->count();
 
@@ -1290,9 +1407,11 @@ class product_controller extends Controller
         $total_delay = (integer) ($contacts->sum('delay')/3600); //converting to hours
 
         if($total_delay == 0){ // it means user have messages but did not read any of them
+
             $response_time = -1;
         }
         else{
+
             $response_time =  round($total_delay/$total_contacts_count);
         }
 
@@ -1364,6 +1483,7 @@ class product_controller extends Controller
         $product_name_array = array_filter(array_map('trim', explode(' ', str_replace('،', ' ', $product->product_name))));
 
         foreach ($products as $product_item) {
+
             if ($product->id == $product_item->id) {
                 continue;
             }
@@ -1373,13 +1493,16 @@ class product_controller extends Controller
             $current_product_name_array = array_filter(array_map('trim', explode(' ', str_replace('،', ' ', $product_item->product_name))));
 
             foreach ($current_product_name_array as $word) {
+
                 $index = array_search($word, $product_name_array);
                 if ($index !== false) {
+
                     $matched = true;
                 }
             }
 
             if ($matched == true) {
+                
                 $result_products[] = $product_item;
 
                 if (count($result_products) > 10) {

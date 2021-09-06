@@ -23,7 +23,6 @@ class phone_number_controller extends Controller
     ];
 
     ///////////////////////////////////////////////////
-
     public function get_seller_phone_number(Request $request)
     {
         $this->validate($request,[
@@ -100,7 +99,6 @@ class phone_number_controller extends Controller
     }
 
     ////////////////////////////////////////////
-
     public function get_buyer_phone_number(Request $request)
     {
         $this->validate($request,[
@@ -183,7 +181,8 @@ class phone_number_controller extends Controller
 
     }
 
-    protected function get_user_replay_count_to_buy_ad($replier_id,$buy_ad_id){
+    protected function get_user_replay_count_to_buy_ad($replier_id,$buy_ad_id)
+    {
 
         $count = DB::table('buy_ad_reply_meta_datas')
                     ->where([
@@ -195,7 +194,8 @@ class phone_number_controller extends Controller
         return $count;
     }
 
-    protected function insert_new_buy_ad_reply_meta_data($info){ 
+    protected function insert_new_buy_ad_reply_meta_data($info)
+    { 
 
         $insert = DB::table('buy_ad_reply_meta_datas')
         ->insert($info);
@@ -203,7 +203,8 @@ class phone_number_controller extends Controller
         return $insert;
     }
 
-    protected function decrement_phone_view_capacity_for_buy_ad($buy_ad_id,$count){
+    protected function decrement_phone_view_capacity_for_buy_ad($buy_ad_id,$count)
+    {
 
         $decrement = DB::table('buy_ads')
                             ->where('id',$buy_ad_id)
@@ -211,8 +212,8 @@ class phone_number_controller extends Controller
 
         return $decrement;
     }
-    /////////////////////////////////////////////////////////////////
 
+    /////////////////////////////////////////////////////////////////
     public function set_my_phone_number_view_permissions(Request $request)
     {
         $this->validate($request,[
@@ -257,7 +258,6 @@ class phone_number_controller extends Controller
     }
 
     ///////////////////////////////////////////////////////////
-
     public function get_my_phone_number_viewers_list()
     {
         $user_id = session('user_id');
@@ -278,7 +278,6 @@ class phone_number_controller extends Controller
     }
 
     ////////////////////////////////////// incommon methods
-
     protected function does_viewer_already_seen_the_user_phone_number($viewer_id,$user_id)
     {
 
