@@ -172,32 +172,12 @@ class product_list_controller extends Controller
                 }
             }
             else{
-                    usort($products, function ($item1, $item2) {
-
-                        $a = $item1['main']->is_elevated;
-                        $b = $item2['main']->is_elevated;
-
-                        if ($a == $b) {
-
-                            return $item1['main']->updated_at < $item2['main']->updated_at;
-                        }
-
-                        return ($a < $b) ? 1 : -1;
-                    });
+                    $this->sort_products_base_on_elevating_then_update_date($products);
                 }
         }
         else{
 
-            usort($products, function ($item1, $item2) {
-                $a = $item1['main']->is_elevated;
-                $b = $item2['main']->is_elevated;
-
-                if ($a == $b) {
-                    return $item1['main']->updated_at < $item2['main']->updated_at;
-                }
-
-                return ($a < $b) ? 1 : -1;
-            });
+            $this->sort_products_base_on_elevating_then_update_date($products);
         }
 
         if ($request->filled('from_record_number') && $request->filled('to_record_number')) {
@@ -429,33 +409,7 @@ class product_list_controller extends Controller
                 });
             }
             
-
-            usort($result, function ($item1, $item2){
-                $a = $item1['main']->is_elevated;
-                $b = $item2['main']->is_elevated;
-
-                if($a == $b){
-
-                    $c = $item1['user_info']->is_verified;
-                    $d = $item2['user_info']->is_verified;
-                    
-                    if ($c == $d) {
-
-                        $e = $item1['user_info']->active_pakage_type;
-                        $f = $item2['user_info']->active_pakage_type;
-
-                        if($e == $f){
-                            return ($item1['main']->updated_at < $item2['main']->updated_at) ? 1 : -1;
-                        }
-
-                        return ($e < $f) ? 1 : -1;
-                    }
-        
-                    return ($c < $d) ? 1 : -1;
-                } 
-
-                return ($a < $b) ? 1 : -1;
-            });
+            $this->sort_result_base_on_elavating_verifiying_active_package_type($result);
 
             return $result;
         }
@@ -499,32 +453,8 @@ class product_list_controller extends Controller
         $advertised_products_for_the_buyer = array_column($advertised_products_for_the_buyer,'id');
 
         if(count($result) > 0){
-            usort($result, function ($item1, $item2){
 
-                $a = $item1['main']->is_elevated;
-                $b = $item2['main']->is_elevated;
-    
-                if($a == $b){
-                    $c = $item1['user_info']->is_verified;
-                    $d = $item2['user_info']->is_verified;
-
-                    if ($c == $d) {
-                        $e = $item1['user_info']->response_rate;
-                        $f = $item2['user_info']->response_rate;
-
-                        if($e == $f){
-                            return ($item1['main']->updated_at < $item2['main']->updated_at) ? 1 : -1;
-                        }
-                        
-                        return ($e < $f) ? 1 : -1;
-                    }
-                    
-                    return ($c < $d) ? 1 : -1;
-
-                }
-    
-                return ($a < $b) ? 1 : -1;
-            });
+            $this->sort_result_base_on_elavating_verifiying_response_rate($result);
         }
         
 
@@ -541,6 +471,69 @@ class product_list_controller extends Controller
         $result = $this->remove_duplicated_sellers($result);
 
         return $result;
+    }
+
+    protected function sort_result_base_on_elavating_verifiying_active_package_type(&$result)
+    {
+
+        usort($result, function ($item1, $item2){
+            $a = $item1['main']->is_elevated;
+            $b = $item2['main']->is_elevated;
+
+            if($a == $b){
+
+                $c = $item1['user_info']->is_verified;
+                $d = $item2['user_info']->is_verified;
+                
+                if ($c == $d) {
+
+                    $e = $item1['user_info']->active_pakage_type;
+                    $f = $item2['user_info']->active_pakage_type;
+
+                    if($e == $f){
+                        return ($item1['main']->updated_at < $item2['main']->updated_at) ? 1 : -1;
+                    }
+
+                    return ($e < $f) ? 1 : -1;
+                }
+    
+                return ($c < $d) ? 1 : -1;
+            } 
+
+            return ($a < $b) ? 1 : -1;
+        });
+    }
+
+    protected function sort_result_base_on_elavating_verifiying_response_rate(&$result)
+    {
+
+        usort($result, function ($item1, $item2){
+
+            $a = $item1['main']->is_elevated;
+            $b = $item2['main']->is_elevated;
+
+            if($a == $b){
+                $c = $item1['user_info']->is_verified;
+                $d = $item2['user_info']->is_verified;
+
+                if ($c == $d) {
+                    $e = $item1['user_info']->response_rate;
+                    $f = $item2['user_info']->response_rate;
+
+                    if($e == $f){
+                        return ($item1['main']->updated_at < $item2['main']->updated_at) ? 1 : -1;
+                    }
+                    
+                    return ($e < $f) ? 1 : -1;
+                }
+                
+                return ($c < $d) ? 1 : -1;
+
+            }
+
+            return ($a < $b) ? 1 : -1;
+        });
+
     }
 
     protected function sort_products_by_response_rate(&$products)
@@ -658,17 +651,7 @@ class product_list_controller extends Controller
             $meta_info = $this->get_category_tags_data_if_any($category_name);
         }
 
-        usort($products, function ($item1, $item2) {
-
-            $a = $item1['main']->is_elevated;
-            $b = $item2['main']->is_elevated;
-
-            if ($a == $b) {
-                return $item1['main']->updated_at < $item2['main']->updated_at;
-            }
-
-            return ($a < $b) ? 1 : -1;
-        });
+        $this->sort_products_base_on_elevating_then_update_date($products);
 
         $products = array_slice($products,0,72);
         
@@ -826,6 +809,23 @@ class product_list_controller extends Controller
     }
 
     ////////////////////// incommon functions
+
+    protected function sort_products_base_on_elevating_then_update_date(&$products){
+
+        usort($products, function ($item1, $item2) {
+
+            $a = $item1['main']->is_elevated;
+            $b = $item2['main']->is_elevated;
+
+            if ($a == $b) {
+
+                return $item1['main']->updated_at < $item2['main']->updated_at;
+            }
+
+            return ($a < $b) ? 1 : -1;
+        });
+
+    }
 
     protected function get_products_from_cache()
     {

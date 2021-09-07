@@ -1274,15 +1274,7 @@ class product_controller extends Controller
 
         $buyAds = $buyAds->all();
 
-        usort($buyAds,function($item1,$item2){
-
-            if($item1->score == $item2->score){
-
-                return $item1->activity_ratio < $item2->activity_ratio ? 1 : -1;
-            }
-
-            return $item1->score < $item2->score ? 1 : -1;
-        });
+        $this->sort_buy_ad_base_on_score_then_activity_ratio($buyAds);
 
         $golden_buyAds = array_slice($buyAds,0,3);
 
@@ -1355,6 +1347,20 @@ class product_controller extends Controller
         
 
         return compact('activity_ratio','score');
+    }
+
+    protected function sort_buy_ad_base_on_score_then_activity_ratio(&$buy_ads)
+    {
+
+        usort($buy_ads,function($item1,$item2){
+
+            if($item1->score == $item2->score){
+
+                return $item1->activity_ratio < $item2->activity_ratio ? 1 : -1;
+            }
+
+            return $item1->score < $item2->score ? 1 : -1;
+        });
     }
 
     protected function is_the_user_the_product_owner($user_id, &$product)

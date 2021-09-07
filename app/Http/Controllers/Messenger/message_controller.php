@@ -302,13 +302,8 @@ class message_controller extends Controller
         }
 
         if (sizeof($contact_list) > 0) {
-            usort($contact_list, function ($a, $b) {
-                if($b->last_msg_time_date == $a->last_msg_time_date){
-                    return $b->contact_id > $a->contact_id;
-                }
-                
-                return $b->last_msg_time_date > $a->last_msg_time_date;
-            });
+
+            $this->sort_contact_list_base_on_last_msg_time_then_id($contact_list);
         }
 
         $channel_controller_object = new channel_controller();
@@ -345,13 +340,24 @@ class message_controller extends Controller
 
         $contact_id_array = array_unique($contact_id_array);
 
-        $blocked_users = DB::table('myusers')->where('is_blocked',true)->pluck('id')->toArray();
+        $blocked_users = $this->get_all_blocked_users();
 
         $contact_id_array = array_filter($contact_id_array,function($contact_id) use($blocked_users){
             return in_array($contact_id,$blocked_users) == false;
         });
 
         return $contact_id_array;
+    }
+
+    protected function get_all_blocked_users()
+    {
+
+        $blocked_users = DB::table('myusers')
+                            ->where('is_blocked',true)
+                            ->pluck('id')
+                            ->toArray();
+
+        return $blocked_users;
     }
 
     protected function get_contact_info($contact_id)
@@ -367,13 +373,26 @@ class message_controller extends Controller
         return $contact_info;
     }
 
+    protected function sort_contact_list_base_on_last_msg_time_then_id(&$contact_list)
+    {
+
+        usort($contact_list, function ($a, $b) {
+            if($b->last_msg_time_date == $a->last_msg_time_date){
+                return $b->contact_id > $a->contact_id;
+            }
+            
+            return $b->last_msg_time_date > $a->last_msg_time_date;
+        });
+    }
+
     //public method
     ////////////////////////////
     public function get_total_unread_messages_for_current_user()
     {
         $user_id = session('user_id');
 
-        $unread_msgs_count = DB::table('messages')->where('receiver_id', $user_id)
+        $unread_msgs_count = DB::table('messages')
+                                ->where('receiver_id', $user_id)
                                 ->where('is_read', false)
                                 ->whereNotExists(function($q){
                                     $q->select(DB::raw(1))
@@ -416,7 +435,7 @@ class message_controller extends Controller
 
         $messages = $this->tag_phone_number_messages($messages);
 
-        $is_verified = myuser::find($request->user_id)->is_verified;
+        $is_verified = $this->get_user_verification_status($request->user_id);
 
         $total_count = count($messages);
 
@@ -432,6 +451,14 @@ class message_controller extends Controller
             'is_verified' => $is_verified,
             'current_user_id' => $user_id,
         ], 200);
+    }
+
+    protected function get_user_verification_status($user_id)
+    {
+
+        $is_verified = myuser::find($user_id)->is_verified;
+
+        return $is_verified;
     }
 
     protected function tag_phone_number_messages(&$messages)
@@ -475,7 +502,7 @@ class message_controller extends Controller
     }
     
     protected function my_array_key_last(array $array)
-     {
+    {
         if( !empty($array) ) return key(array_slice($array, -1, 1, true));
     }
 

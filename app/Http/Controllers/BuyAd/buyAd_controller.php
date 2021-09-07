@@ -470,6 +470,16 @@ class buyAd_controller extends Controller
             return isset($product->score) == true;
         });
         
+        $this->sort_products_base_on_score_then_creation_date($products);
+
+        $final_products = array_slice($products,0,3);
+
+        return $final_products;
+    }
+
+    protected function sort_products_base_on_score_then_creation_date(&$products)
+    {
+
         usort($products,function($item1,$item2){
             if($item1->score == $item2->score){
                 return $item1->created_at < $item2->created_at ? 1 : -1;
@@ -478,9 +488,6 @@ class buyAd_controller extends Controller
             return $item1->score > $item2->score ? 1 : -1;
         });
 
-        $final_products = array_slice($products,0,3);
-
-        return $final_products;
     }
 
     protected function get_the_most_free_related_products_to_the_given_buyAd(&$buyAd, &$products)
@@ -616,6 +623,16 @@ class buyAd_controller extends Controller
             $product->score = $activity_info['score'];
         }
 
+        $this->sort_products_base_on_score_then_activity_ratio($products);
+
+        $result_products = array_slice($products,0,6);
+
+        return $result_products;
+    }
+
+    protected function sort_products_base_on_score_then_activity_ratio(&$products)
+    {
+
         usort($products,function($item1,$item2){
             if($item1->score == $item2->score){
                 return $item1->activity_ratio < $item2->activity_ratio ? 1 : -1;
@@ -623,10 +640,6 @@ class buyAd_controller extends Controller
 
             return $item1->score < $item2->score ? 1 : -1;
         });
-
-        $result_products = array_slice($products,0,6);
-
-        return $result_products;
     }
 
     protected function get_user_activity_ratio($user_id,$product_register_date)
@@ -936,27 +949,7 @@ class buyAd_controller extends Controller
                     $filtered_buyAds = array_merge($filtered_buyAds,$tmp);
                 }
 
-                //sort buyAds according to recency and response rate
-                usort($filtered_buyAds,function($item1,$item2){
-                    $a = $item1->is_golden ? 1 : 0;
-                    $b = $item2->is_golden ? 1: 0;
-
-                    if($a == $b){
-                        $c = is_null($item1->response_rate) ? 100 : $item1->response_rate;
-                        $d = is_null($item2->response_rate) ? 100 : $item2->response_rate;
-
-                        if($c == $d){
-                            return ($item1->updated_at < $item2->updated_at) ? 1 : -1;
-                        }
-
-                        return ($c < $d) ? 1 : -1;
-                    } 
-
-                    return ($a < $b) ? 1 : -1;
-                    
-                });
-
-                
+                $this->sort_buyAds_according_to_recency_and_response_rate($filtered_buyAds);
 
             }
 
@@ -1066,6 +1059,29 @@ class buyAd_controller extends Controller
                     
 
         return $buyAds;
+    }
+
+    protected function sort_buyAds_according_to_recency_and_response_rate(&$buyAds)
+    {
+
+        usort($buyAds,function($item1,$item2){
+            $a = $item1->is_golden ? 1 : 0;
+            $b = $item2->is_golden ? 1: 0;
+
+            if($a == $b){
+                $c = is_null($item1->response_rate) ? 100 : $item1->response_rate;
+                $d = is_null($item2->response_rate) ? 100 : $item2->response_rate;
+
+                if($c == $d){
+                    return ($item1->updated_at < $item2->updated_at) ? 1 : -1;
+                }
+
+                return ($c < $d) ? 1 : -1;
+            } 
+
+            return ($a < $b) ? 1 : -1;
+            
+        });
     }
 
     /////////////////////////////////
