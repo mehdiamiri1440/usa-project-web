@@ -3,12 +3,22 @@ App\Http\Controllers\Accounting\comment_controller@post_comment
 
     arguments: text, rating_score, user_id
 
+        validation:
+
+            'text'         => 'string|required_without:rating_score',
+            'rating_score' => 'integer|min:1|max:5|required_without:text',
+            'user_id'      => 'required|exists:myusers,id'
+
     this will crate a comment for given user id and by already logged in user with the text and score provided
 
 profile/get-user-comments=>
 App\Http\Controllers\Accounting\comment_controller@get_user_comments
 
     arguments: user_id,
+
+        validation:
+        
+            'user_id' => 'required|exists:myusers,id'
 
     it gets a user id and return all informations about that specific user comments
 
@@ -17,6 +27,11 @@ App\Http\Controllers\Accounting\comment_controller@do_like_actions
 
     arguments: comment_id, action
 
+        validation:
+        
+            'comment_id' => 'required|exists:user_comments,id',
+            'action'     => 'required|boolean'
+
     it gets an specific comment id and like or dislike as an actoin and store it in database
 
 profile/is-user-authorized-to-post-comment=>
@@ -24,12 +39,20 @@ App\Http\Controllers\Accounting\comment_controller@is_user_authorized_to_post_co
 
     arguments: user_id,
 
+        validation:
+        
+            'user_id' => 'required|exists:myusers,id'
+
     gets apecific user id and checks whether already logged in user have the right to send comment on the  given user id
 
 profile/delete-user-comment=>
 App\Http\Controllers\Accounting\comment_controller@delete_comment
 
     arguments: c_id,
+
+        validation:
+        
+            'c_id' => 'required|exists:user_comments,id'
 
     gets a comment id and soft delete it if the comment is belong to already logged in user
 
@@ -40,6 +63,12 @@ App\Http\Controllers\Accounting\phone_number_controller@get_seller_phone_number
 
     arguments: p_id, s_id, item,
 
+        validation:
+        
+            'p_id' => 'required|integer|exists:products,id',
+            's_id' => 'required|integer|exists:myusers,id',
+            'item' => 'required|in:PRODUCT,PROFILE',
+
     gets a product id and a seller id and checks whether the logged in user have the right to see
     the seller phone number and if true it will send the phone number
 
@@ -47,6 +76,12 @@ get_buyer_phone_number=>
 App\Http\Controllers\Accounting\phone_number_controller@get_buyer_phone_number
 
     arguments: ba_id, b_id, item,
+
+    validation:
+        
+            'ba_id' => 'required|integer|exists:buy_ads,id',
+            'b_id'  => 'required|integer|exists:myusers,id',
+            'item'  => 'required|in:BUYAD,PROFILE',
 
     gets a buy advertisement id and a buyer id and checks whether already logged in user have the right 
     to see phone number of the person who registred the advertisement if the b_id is the owner of ba_id
@@ -56,6 +91,10 @@ App\Http\Controllers\Accounting\phone_number_controller@set_my_phone_number_view
 
     arguments: permission,
 
+    validation:
+        
+            'permission' => 'required|boolean'
+
     gets a boolean permission on whether the logged in user wants others be able to see his/her
     phone number when they request it
 
@@ -63,6 +102,9 @@ get_phone_number_viewers_list=>
 App\Http\Controllers\Accounting\phone_number_controller@get_my_phone_number_viewers_list
 
     artguments: 
+
+        validation:
+        
 
     return last fifty persons who view the already logged in users phone number
 
@@ -94,6 +136,10 @@ App\Http\Controllers\Accounting\reputation_controller@calculate_user_reputation_
 
     arguments: user_id
 
+        validation:
+        
+            no validation found !!!
+
     calculate reputation score for the given user_id 
 
 /////////////////////////////////////////////////////////////////////////////////////////////
@@ -102,6 +148,13 @@ dologin=>
 App\Http\Controllers\Accounting\user_controller@login
 
     arguments: phone, password, client, plain,
+
+        validation:
+        
+            'phone'    => 'required',
+            'password' => 'required',
+            'client'   => 'string',
+            'plain'    => 'boolean'
 
     get phone number and password from a user and log in the user if information were true after that 
     insert user login information in database
@@ -115,6 +168,10 @@ App\Http\Controllers\Accounting\user_controller@does_user_name_already_exists
 
     arguments: user_name,
 
+        validation:
+        
+            'user_name' => 'required|unique:myusers',
+
     gets a user name and cheks if it already have been taken by other users or not
 
 user/is_national_code_unique=>
@@ -122,12 +179,21 @@ App\Http\Controllers\Accounting\user_controller@does_national_code_already_exist
 
     arguments: national_code,
 
+        validation:
+        
+            'national_code' => 'required|unique:myusers',
+
     get a national code and checks if it already set to other people or not
 
 change_password=>
 App\Http\Controllers\Accounting\user_controller@change_password
 
     arguments: current_password, new_password,
+
+        validation:
+        
+            'current_password' => 'required',
+            'new_password'     => 'required',
 
     gets current password and new password from logged in user and check if they are valid and
     set new password in database after that
@@ -167,6 +233,11 @@ App\Http\Controllers\Accounting\user_controller@reset_password
 
     arguments: phone, verification_code,
 
+        validation:
+        
+            'phone' => ['required', 'regex:/^((09[0-9]{9})|(\x{06F0}\x{06F9}[\x{06F0}-\x{06F9}]{9}))$/u'],
+            'verification_code' => 'required',
+
     gets phone number of the user and the verification code who the user recived and generate 
     new password for user and sms it to already verified phone number and set it as user password
     in database
@@ -193,6 +264,12 @@ App\Http\Controllers\Accounting\verification_controller@upload_verification_phot
 
     arguments: some image files 
 
+        validation:
+        
+            'images_count' => 'required|integer|min:3|max:6',
+
+                for each image: 'required|image|mimes:png,jpg,jpeg|min:2|max:5000';
+
     verify recived image and store them in database
 
 /////////////////////////////////////////////////////////////////////////////////////////////
@@ -201,6 +278,11 @@ get_buyAd_list=>
 App\Http\Controllers\BuyAd\buyAd_controller@get_buyAd_list
 
     arguments: from, to,
+
+    validation:
+        
+            'from' => 'integer|min:1',
+            'to'   => 'integer|min:1',
 
     return buy advertisements with specific start and end index of founded ads
 
@@ -216,6 +298,15 @@ App\Http\Controllers\BuyAd\buyAd_controller@add_buyAd
 
     arguments: values of this end point generates in run time (name, requirement_amount, category_id,)
 
+        validation:
+        
+            first:
+            'requirement_amount' => 'required|integer|min:0',
+            'category_id'        => 'required|integer|min:1',
+
+            then:
+            'name' => 'string',
+
     get new buy ad informations and set new ad in database if successfull find related products to
     the just inserted records and set some cokies base on products
 
@@ -225,6 +316,10 @@ delete_buy_ad_by_id=>
 App\Http\Controllers\BuyAd\buyAd_controller@delete_buy_ad_by_id
 
     arguments: buy_ad_id,
+
+    validation:
+        
+            'buy_ad_id' => 'required|numeric',
 
     gets a buy ad and soft delete it if exist and belongs to logged in user
 
@@ -239,6 +334,10 @@ get_user_permission_for_buyAd_reply=>
 App\Http\Controllers\BuyAd\buyAd_controller@check_user_permisson_for_sending_buyAd_reply
 
     arguments: buy_ad_id,
+
+        validation:
+        
+            'buy_ad_id' => 'required|exists:buy_ads,id'
 
     checks if the logged in user have the right to send replay to the given buy_ad_id advertisement
 
@@ -280,6 +379,20 @@ App\Http\Controllers\General\location_controller@get_all_provinces_or_cities_in_
 
     arguments: province_id, cascade_list, 
 
+        validation:
+        
+            first: 
+            not required
+            $request->has('province_id')
+
+            then
+            'province_id' => 'numeric|exists:cities,province_id',
+
+            not required
+            $request->has('cascade_list')
+
+            
+
     return all iran provinces with their location if no argument passed
 
     return all province cities if province id has passed 
@@ -300,7 +413,7 @@ App\Http\Controllers\General\marketing_data_controller@get_special_users_info
 download-media=>
 App\Http\Controllers\General\media_controller@download_media
 
-this route is registred but download_media does not exist in controller
+this route is registred but download_media does not exist in controllers
 
 //////////////////////////////////////////////////////////////////////////////////////
 
@@ -325,6 +438,10 @@ App\Http\Controllers\Messenger\channel_controller@get_channel_content_by_id
 
     arguments: slug,
 
+        validation: 
+            
+            if slug is not numeric then abort(404);
+
     return official buskool channel contents with given id
 
 //////////////////////////////////////////////////////////////////////////////////////
@@ -341,6 +458,10 @@ App\Http\Controllers\Messenger\group_message_controller@subscribe_user_in_group
 
     arguments: group_id,
 
+        validation:
+        
+            'group_id' => 'required|exists:messenger_groups,id'
+
     gets a group id and checks if the group is active and subscribe logged in user in that 
     group if he/she has not been subscribed already
 
@@ -348,6 +469,12 @@ group/send_message=>
 App\Http\Controllers\Messenger\group_message_controller@send_message
 
     arguments: text, group_id, replied_msg_id,
+
+        validation:
+        
+            'text'           => 'required',
+            'group_id'       => 'required|exists:messenger_groups,id',
+            'replied_msg_id' => 'exists:group_messages,id'
 
     gets a messege form logged in user and cheks if he/she can send message to the requested 
     group if so checks if the text does not have any problem in case of impolite words or spams
@@ -359,6 +486,13 @@ group/get_group_chats=>
 App\Http\Controllers\Messenger\group_message_controller@get_group_chats
 
     arguments: group_id, message_count,
+
+        validation:
+        
+            'group_id'      => 'required|exists:messenger_groups,id',
+            'message_count' => 'required|integer|min:50|max:2000'
+
+            $user_id = session('user_id');
 
     return messages form given group id with given count from logged in user and mark them as read
     before returning
@@ -375,6 +509,12 @@ App\Http\Controllers\Messenger\group_message_controller@unsubscribe_user_from_gr
 
     arguments: group_id,
 
+        validation:
+        
+            'group_id' => 'required|exists:messenger_groups,id'
+
+            $user_id = session('user_id');
+
     hard delete user to channel subscription even though there is a feild in database named is_active
 
 ////////////////////////////////////////////////////////////////////////////////////////////
@@ -384,6 +524,12 @@ App\Http\Controllers\Messenger\message_controller@send_message
 
     arguments: sender_id, receiver_id, text,
 
+        validation:
+        
+            'sender_id'   => 'required|integer|min:1',
+            'receiver_id' => 'required|exists:myusers,id',
+            'text'        => 'required|string',
+
     send a message from logged in user to the receiver_id with given text and store message in database
     if the reciver user is valid and not blocked
 
@@ -392,6 +538,11 @@ App\Http\Controllers\Messenger\message_controller@send_reply_message_to_the_buyA
 
     arguments: buy_ad_id, text,
 
+        validation:
+        
+            'buy_ad_id' => 'required|exists:buy_ads,id',
+            'text'      => 'required|string'
+
     cheks if the logged in user allowed to replay to given buy ad and create new request to
     send message end point and return them if user was allowed
 
@@ -399,6 +550,11 @@ send_reply_to_product=>
 App\Http\Controllers\Messenger\message_controller@send_reply_message_to_the_product
 
     arguments: product_id, text,
+
+        validation:
+        
+            'product_id' => 'required|exists:products,id',
+            'text'       => 'required|string'
 
     checks if product is still exist and set some records for user_products for the product 
     who the user sent msg on if no product view recodrd was not found and send message by
@@ -410,6 +566,11 @@ get_contact_list=>
 App\Http\Controllers\Messenger\message_controller@get_current_user_contact_list
 
     arguments: from, to,
+
+        validation:
+        
+            'from' => 'integer|min:0',
+            'to'   => 'required_with:from|integer|min:15'
 
     return contact list form given index to given index with chat information unread messages
     and channel informations the verification status of the logged in user if the logged in user 
@@ -427,6 +588,12 @@ App\Http\Controllers\Messenger\message_controller@get_user_chat_history
 
     arguments: user_id, form, to,
 
+        validation:
+        
+            'user_id' => 'required|integer|exists:myusers,id',
+            'from'    => 'integer|min:0',
+            'to'      => 'integer|min:1',
+
     return the a chat history between logged in user and given user_id limited by from
     as start of message index and to as end of message index
 
@@ -434,6 +601,13 @@ set_last_chat_contact=>
 App\Http\Controllers\Messenger\message_controller@set_last_chat_contact
 
     arguments: contact_id, first_name, last_name, user_name,
+
+        validation:
+        
+            'contact_id' => 'required|integer',
+            'first_name' => 'required|string',
+            'last_name'  => 'required|string',
+            'user_name'  => 'required|string',
 
     set a session as last chat contact for logged in user with all given information and
     count of unread message and profile photo 
@@ -459,6 +633,16 @@ App\Http\Controllers\Messenger\report_controller@send_user_report
 
     arguments: reported_id, option_id, description,
 
+        validation:
+        
+            'reported_id' => 'required|integer|exists:myusers,id',
+            'option_id'   => 'required|integer|exists:report_options,id',
+
+            if database say this reoport needs description
+
+            'required|string';
+
+
     sets a report form logged in user to given reported_id user 
 
     if the report needs desciption it will be added to validation rules
@@ -470,6 +654,11 @@ App\Http\Controllers\Notification\fcm_controller@subscribe_token_in_topic
 
     arguments: token, topic,
 
+        validation:
+        
+            'token' => 'required|string',
+            'topic' => 'string'
+
     subscribe a token in firebase google api and return it to user
 
 fcm/register_token_in_groups=>
@@ -477,12 +666,20 @@ App\Http\Controllers\Notification\fcm_controller@subscribe_token_in_groups
 
     arguments: token,
 
+        validation:
+        
+            'token' => 'required|string'
+
     set a recived token in a related queue for settin in firebase
 
 fcm/unregister_token=>
 App\Http\Controllers\Notification\fcm_controller@unsubscribe_token_from_groups
 
     arguments: token,
+
+        validation:
+        
+            'token' => 'required|string'
 
     gets a firebase token and unregister it
 
@@ -493,6 +690,10 @@ App\Http\Controllers\Notification\sms_controller@send_phone_verification_code_fo
 
     arguments: phone,
 
+        validation:
+        
+            'phone' => ['required','regex:/^((09[0-9]{9})|(\x{06F0}\x{06F9}[\x{06F0}-\x{06F9}]{9}))$/u']
+
     recives a new phone number and send a verification code to it as sms
     if some user already register with given phone number
 
@@ -500,6 +701,10 @@ send_verification_code=>
 App\Http\Controllers\Notification\sms_controller@send_phone_verification_code
 
     arguments: phone,
+
+        validation:
+        
+            'phone' => ['required','regex:/^((09[0-9]{9})|(\x{06F0}\x{06F9}[\x{06F0}-\x{06F9}]{9}))$/u']
 
     send a generated validation code as sms to the given phone number and store
     verification code in session 
@@ -509,13 +714,14 @@ App\Http\Controllers\Notification\sms_controller@verify_code
 
     arguments: verification_code, phone, client,
 
+        validation:
+        
+            'verification_code' => 'required',
+            'phone'  => ['required','regex:/^((09[0-9]{9})|(\x{06F0}\x{06F9}[\x{06F0}-\x{06F9}]{9}))$/u'],
+            'client' => 'string',
+
     verify verification code sended in previous step and checks if the code is confirmed
     then create a login request and redirect user to login page 
-
-///////////////////////////////////////////////////////////////////////////////////////////
-
-app/get_product_list=>
-App\Http\Controllers\Product\product_list_controller@get_product_list
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 
@@ -523,6 +729,16 @@ product-view/{category_name}/{extra_text}/{product_id}=>
 App\Http\Controllers\Product\product_controller@get_product_blade
 
     arguments: $extra_text, $category_name, $product_id,
+
+        validation:
+        
+            ->where('product_id','[0-9]+');// from routes
+
+            $request->session()->has('user_id')
+
+            $extra_text and $category_name does not have any validations
+
+            get_product_blade(Request $request,$extra_text = null,$category_name = null,$product_id)
 
     checks if request is from a bot or not next checks if the given product id is not correct
     find a category and redirec user to that category page unless gains some statistics about 
@@ -534,12 +750,20 @@ App\Http\Controllers\Product\product_controller@get_category_tags_data_if_any
 
     arguments: category_name,
 
+            validation:
+        
+                'category_name' => 'required|string'
+
     finds  tags related to given category id and return them if exist 
 
 get_product_by_id=>
 App\Http\Controllers\Product\product_controller@get_product_by_id
 
     arguments: product_id,
+
+    validation:
+        
+            'product_id' => 'required|integer|min:1',
 
     return a product with all related data in database 
 
@@ -552,6 +776,10 @@ App\Http\Controllers\Product\product_controller@get_related_products_to_given_th
 
     arguments: product_id,
 
+        validation:
+        
+            'product_id' => 'required|integer|min:1',
+
     gets a product id and return related products from their subcategory and with checking 
     products by products 
 
@@ -559,6 +787,15 @@ get_product_list_by_user_name=>
 App\Http\Controllers\Product\product_controller@get_product_list_by_user_name
 
     arguments: user_name, from_record_number, to_record_number, 
+
+        validation:
+        
+            first
+            'user_name' => 'required|alpha_dash',
+
+            then:
+            'from_record_number' => 'numeric',
+            'to_record_number'   => 'numeric',
 
     gets a user name and find all of the ueser products and return them base on indexes
     from_record_number and to_record_number 
@@ -575,6 +812,23 @@ App\Http\Controllers\Product\product_controller@add_product
 
     arguments:stock, min_sale_price, max_sale_price, min_sale_amount, product_name, category_id, city_id, images_count, (image files)
 
+        validation:
+        
+            first: check if user is allowed to register new product
+            $user_id = session('user_id');
+
+            then:
+            'stock'           => 'required|numeric|min:0',
+            'min_sale_price'  => 'required|integer|min:0',
+            'max_sale_price'  => 'required|integer|min:0',
+            'min_sale_amount' => 'required|integer|min:0',
+            'product_name'    => 'required|string',
+            'category_id'     => 'required',
+            'city_id'         => 'required',
+            'images_count'    => 'required|integer|min:1',
+
+            for passed images: 'image|mimes:png,jpg,jpeg|min:2|max:5000';
+
     gets product basic information and create new product advertisement in database for the logged in
     user if the user have permission to register an other product and return most related buy ads if any
     exist if not the inserted product information will return
@@ -584,6 +838,10 @@ App\Http\Controllers\Product\product_controller@delete_product_by_id
 
     arguments: product_id, 
 
+        validation:
+        
+            'product_id' => 'required|integer|min:1',
+
     gets a poduct id and if the product owns by logged in user soft deletes it
     unless response will be permission denied
 
@@ -591,6 +849,14 @@ edit_product=>
 App\Http\Controllers\Product\product_controller@edit_product_by_id
 
     arguments: product_id, min_sale_price, max_sale_price, min_sale_amount, stock
+
+        validation:
+        
+            'product_id'      => 'required|integer|min:1',
+            'min_sale_price'  => 'required|integer|min:0',
+            'max_sale_price'  => 'required|integer|min:1',
+            'min_sale_amount' => 'required|integer|min:1',
+            'stock'           => 'required|integer:min:1',
 
     checks if the product is owned by logged in user if so edit product id with given values
 
@@ -622,12 +888,20 @@ App\Http\Controllers\Payment\payment_controller@app_do_payment
 
     arguments: user_id, package_type
 
+        validation:
+        
+            no validation found !!!
+
     if the user is allowed to buy package create transaction and redirect him/her
 
 app-payment/elevator/{product_id}=>
 App\Http\Controllers\Payment\payment_controller@app_do_elevator_payment
 
     arguments: product_id,
+
+        validation:
+        
+            ->where('product_id', '[0-9]+');// from route
 
     create a transaction for elavate a product 
 
@@ -637,12 +911,20 @@ App\Http\Controllers\Payment\payment_controller@app_do_product_capacity_payment
 
     arguments: user_id, extra_capacity,
 
+        validation:
+        
+            ->where('extra_capacity', '[0-9]+');// from route
+
     create transaction for buying extra capacity 
 
 app-payment/buyAd-reply-capacity/{user_id}/{extra_capacity}=>
 App\Http\Controllers\Payment\payment_controller@app_do_buyAd_reply_capacity_payment
 
     arguments: user_id, extra_capacity,
+
+        validation:
+        
+            ->where('extra_capacity', '[0-9]+');
 
     create transaction for buying extra replay capacity
 
@@ -653,20 +935,23 @@ user/get_product_list=>
 App\Http\Controllers\Product\product_list_controller@get_product_list
 
     arguments:
-        from_record_number
-        to_record_number
-        category_id
-        province_id
-        city_id
-        search_text
-        special_products
-        sort_by
 
-    sortings types: 
-        'RR' =>  response rate
-        'RT' => response time
-        'RD' =>  product owner registration date
-        'BM' => sort products by best match
+        validation:
+        
+            'from_record_number' => 'integer|min:0',
+            'to_record_number'   => 'integer|min:1',
+            'category_id'        => 'integer|exists:categories,id',
+            'province_id'        => 'integer|exists:provinces,id',
+            'city_id'            => 'integer|exists:cities,id',
+            'search_text'        => 'string',
+            'special_products'   => 'boolean',
+            'sort_by'            => 'string'
+
+            sortings types: 
+                'RR' =>  response rate
+                'RT' => response time
+                'RD' =>  product owner registration date
+                'BM' => sort products by best match
 
     return product list with given filters and sortings 
 
@@ -682,6 +967,10 @@ wallet-expend/elevator=>
 App\Http\Controllers\Payment\wallet_controller@do_elevator_payment_from_wallet
 
     arguments: product_id,
+
+        validation:
+        
+            'product_id' => 'required|integer|exists:products,id',
 
     elevate the given product id for already logged in user if user balance is enough
 
