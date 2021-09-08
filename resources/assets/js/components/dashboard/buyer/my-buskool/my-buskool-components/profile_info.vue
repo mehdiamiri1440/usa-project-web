@@ -1,11 +1,13 @@
 <style scoped>
 .profile {
-  padding: 20px 10px;
+  padding: 10px;
+  margin-top: 10px;
   text-align: center;
   position: relative;
   overflow: hidden;
   transition: 150ms;
   border-radius: 12px;
+  top: 5px;
 }
 
 .profile:hover {
@@ -29,6 +31,7 @@
   font-size: 27px;
   left: 17px;
   transition: 150ms;
+  color: #ccc;
 }
 
 .profile-img {

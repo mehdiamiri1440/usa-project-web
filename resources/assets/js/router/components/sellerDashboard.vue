@@ -656,8 +656,8 @@ export default {
   },
   watch: {
     currentUser(user) {
+      this.$parent.currentUser = user;
       if (user.user_info.id) {
-        this.$parent.currentUser = user;
         this.promotionModal();
       }
     },

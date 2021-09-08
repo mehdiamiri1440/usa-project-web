@@ -11,7 +11,7 @@
 .item-wrapper {
   display: flex;
   justify-content: space-around;
-  padding-top: 7px;
+  padding-top: 4px;
 }
 
 .item-wrapper .icon-wrapper {
@@ -23,7 +23,7 @@
   position: relative;
   display: flex;
   align-items: center;
-  margin: 0 auto;
+  margin: 0 auto -4px;
 }
 .item-wrapper .icon-wrapper i {
   flex: 1;
@@ -79,6 +79,17 @@
   border-radius: 12px;
   overflow: hidden;
 }
+.counter-item {
+  width: 12px;
+  height: 12px;
+  background: red;
+  position: absolute;
+  right: 0;
+  top: 0;
+  border: 2px solid #313a43;
+  z-index: 1;
+  border-radius: 12px;
+}
 </style>
 <template>
   <nav class="custom-navigation">
@@ -113,6 +124,10 @@
         :to="{ name: item.name }"
       >
         <div class="icon-wrapper" :class="{ 'main-icon': item.mainIcon }">
+          <span
+            class="counter-item"
+            v-if="messageCount > 0 && item.icon == 'fa-comment-alt'"
+          ></span>
           <i v-if="item.icon" class="fa" :class="item.icon"></i>
           <div
             v-else-if="$parent.currentUser.profile.profile_photo"
@@ -126,6 +141,7 @@
                 ')',
             }"
           ></div>
+
           <div
             v-else
             class="user-image-wrapper"
@@ -147,6 +163,10 @@
         :to="{ name: item.name }"
       >
         <div class="icon-wrapper" :class="{ 'main-icon': item.mainIcon }">
+          <span
+            class="counter-item"
+            v-if="messageCount > 0 && item.icon == 'fa-comment-alt'"
+          ></span>
           <i v-if="item.icon" class="fa" :class="item.icon"></i>
           <div
             v-else-if="$parent.currentUser.profile.profile_photo"
@@ -178,6 +198,7 @@
 
 <script>
 export default {
+  props: ["messageCount"],
   data() {
     return {
       sellerRoutes: [

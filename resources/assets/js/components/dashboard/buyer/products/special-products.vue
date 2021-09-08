@@ -1,7 +1,7 @@
 <style scoped>
 .product-wrapper {
   max-width: 1170px;
-  margin: 0 auto;
+  margin: 20px auto;
   float: initial;
 }
 
@@ -128,7 +128,11 @@
 
 @media screen and (max-width: 767px) {
   #main-content {
-    margin-top: 123px;
+    margin-top: 105px;
+  }
+
+  .has-verification-alert #main-content {
+    margin-top: 135px;
   }
 
   .product-wrapper,
@@ -159,6 +163,7 @@
     margin-top: 111px;
     background: #fff;
     padding: 0;
+    height: calc(100% + 70px);
   }
 
   .user-contents .user-image,
@@ -187,10 +192,6 @@
   <div>
     <main id="main-content" class="col-sm-12 contents">
       <div class="row">
-        <div class="title col-xs-12">
-          <h1>فروشندگان پیشنهادی</h1>
-        </div>
-
         <div v-if="products.length > 0" class="product-wrapper">
           <div
             v-for="(product, productIndex) in products"

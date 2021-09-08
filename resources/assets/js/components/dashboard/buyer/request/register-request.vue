@@ -7,7 +7,7 @@
   left: calc(50% - 342px);
   top: 65px;
   margin-bottom: 50px;
-  height: 100%;
+  height: calc(100% + 70px);
   direction: rtl;
 }
 

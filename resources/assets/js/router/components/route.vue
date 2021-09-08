@@ -307,7 +307,7 @@
     <ReportModal :reported-user-id="reportedUserId" />
     <ReviewModal :review-user-data="reviewUserData" />
 
-    <Navigation />
+    <Navigation :messageCount="messageCount" class="hidden-lg hidden-md" />
 
     <router-view
       :user-id="userId"
@@ -418,6 +418,7 @@ export default {
       verifiedUserContent:
         "<div class='tooltip-wrapper text-rtl'>اطلاعات هویتی این کاربر احراز شده است.<br/><a href='/verification'>اطلاعات بیشتر</a> </div>",
       doPaymentLoader: false,
+      messageCount: "",
     };
   },
   props: [
@@ -1343,6 +1344,9 @@ export default {
 
       eventBus.$on("peymentMethodData", ($event) => {
         this.peymentMethodData = $event;
+      });
+      eventBus.$on("messageCount", (event) => {
+        this.messageCount += event;
       });
     },
   },

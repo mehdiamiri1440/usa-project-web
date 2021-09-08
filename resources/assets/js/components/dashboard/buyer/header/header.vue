@@ -199,13 +199,6 @@ span.min {
     display: none;
   }
 
-  .right-header.mobile-header {
-    display: block;
-    right: -300px;
-    overflow: auto;
-    direction: rtl;
-  }
-
   .close_menu {
     display: none;
   }
@@ -223,16 +216,6 @@ span.min {
   .img-profile .submit label {
     width: 40%;
     padding: 12px 0;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .mobile-header .green-button {
-    margin: 15px 0 0;
-  }
-
-  .mobile-header ul a {
-    padding: 15px 20px;
   }
 }
 
@@ -457,41 +440,6 @@ span.min {
     </div>-->
 
     <!--end loader-->
-
-    <section class="right-header mobile-header">
-      <header class="header-right-header">
-        <button class="close_menu_mob">
-          <i class="fa fa-bars"></i>
-        </button>
-
-        <button class="close_menu">
-          <i class="fa fa-bars"></i>
-        </button>
-
-        <router-link class="logo" :to="{ name: 'indexPage' }">
-          <img src="../../../../../img/logo/web-logo-white.svg" alt="buskool" />
-        </router-link>
-      </header>
-
-      <section class="main-right-header">
-        <ProfileInfo
-          :isLoading="isLoading"
-          :photoLink="currentUser.profile.profile_photo"
-          :storage="storage"
-          :username="
-            currentUser.user_info.first_name +
-            ' ' +
-            currentUser.user_info.last_name
-          "
-          :usercity="
-            currentUser.user_info.province + ' - ' + currentUser.user_info.city
-          "
-          :userprof="currentUser.user_info.user_name"
-        />
-        <SwitchButtons mobile="1" />
-        <HeaderMenuList />
-      </section>
-    </section>
 
     <div class="background_mob_sec"></div>
 
@@ -735,127 +683,7 @@ export default {
         }
       });
     },
-    toggleShowHeader() {
-      var self = this;
-      var showHeaderButtonElement = $(".show-header");
-      var closeHeaderButtonMobile = $(".close_menu_mob ");
-      var flag = true;
-      var rightHeader = $(".right-header.mobile-header");
-      var back = $(".background_mob_sec");
-      var closeHeaderButtonMobileLinks = $(".mobile-header .header-menu a");
-      rightHeader.animate(
-        {
-          right: "0",
-        },
-        800
-      );
-      setTimeout(() => {
-        rightHeader.animate(
-          {
-            right: "-300",
-          },
-          800,
-          undefined,
-          function () {
-            self.menuClosed = true;
-          }
-        );
-      }, 2000);
-      showHeaderButtonElement.on("click", function () {
-        rightHeader.animate({ scrollTop: 0 }, "fast");
 
-        if (flag === true) {
-          rightHeader.animate(
-            {
-              right: "0",
-            },
-            300
-          );
-
-          back.fadeIn();
-
-          flag = false;
-        } else {
-          rightHeader.animate(
-            {
-              right: "-300px",
-            },
-            300
-          );
-
-          flag = true;
-        }
-      });
-      closeHeaderButtonMobile.on("click", function () {
-        if (flag === true) {
-          rightHeader.animate(
-            {
-              right: "0",
-            },
-            300
-          );
-
-          flag = false;
-        } else {
-          rightHeader.animate(
-            {
-              right: "-300px",
-            },
-            300
-          );
-
-          back.fadeOut();
-
-          flag = true;
-        }
-      });
-      closeHeaderButtonMobileLinks.on("click", function () {
-        if (flag === true) {
-          rightHeader.animate(
-            {
-              right: "0",
-            },
-            300
-          );
-
-          flag = false;
-        } else {
-          rightHeader.animate(
-            {
-              right: "-300px",
-            },
-            300
-          );
-
-          back.fadeOut();
-
-          flag = true;
-        }
-      });
-      back.on("click", function () {
-        if (flag === true) {
-          rightHeader.animate(
-            {
-              right: "0",
-            },
-            300
-          );
-
-          flag = false;
-        } else {
-          rightHeader.animate(
-            {
-              right: "-300px",
-            },
-            300
-          );
-
-          back.fadeOut();
-
-          flag = true;
-        }
-      });
-    },
     deleteProduct: function () {
       var self = this;
 
@@ -921,12 +749,11 @@ export default {
   },
   mounted() {
     var self = this;
-    eventBus.$on("firstDashboardSeen", (event) => {
-      self.isfirstDashboardSeen = event;
-    });
+    // eventBus.$on("firstDashboardSeen", (event) => {
+    //   self.isfirstDashboardSeen = event;
+    // });
     this.init();
     this.toggleHeader();
-    this.toggleShowHeader();
   },
   created() {
     var self = this;
@@ -958,6 +785,9 @@ export default {
     });
   },
   watch: {
+    currentUser(user) {
+      this.$parent.currentUser = user;
+    },
     searchValueText: function (value) {
       this.resetTextSearch = false;
       this.$parent.searchText = value;

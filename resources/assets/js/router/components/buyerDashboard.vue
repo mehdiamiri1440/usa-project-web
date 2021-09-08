@@ -1,7 +1,7 @@
 <style scoped>
 #main {
   margin-right: 250px;
-  margin-top: 59px;
+  margin-top: 42px;
   position: relative;
 }
 #main.has-verification-alert {
@@ -16,6 +16,9 @@
   #main,
   #main.little-main {
     margin-right: 0 !important;
+  }
+  #main.has-verification-alert {
+    margin-top: 81px;
   }
 }
 </style>
@@ -87,6 +90,8 @@ export default {
   },
   watch: {
     currentUser(user) {
+      this.$parent.currentUser = user;
+
       if (user.profile.created_at)
         this.$parent.currentUserCreatedAt = user.profile.created_at;
     },

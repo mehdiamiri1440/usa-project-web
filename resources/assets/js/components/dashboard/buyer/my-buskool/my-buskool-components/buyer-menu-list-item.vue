@@ -47,7 +47,7 @@ a.active {
 }
 
 .main-menu {
-  padding: 0 10px;
+  padding: 10px;
 }
 
 .main-menu a:hover {
@@ -248,10 +248,13 @@ a.active {
             <span>پشتیبانی</span>
           </router-link>
         </li>
+
         <li class="list-item">
-          <span class="copy-right">
-            <p dir="rtl">تمام حقوق مادی و معنوی سایت متعلق به باسکول است.</p>
-          </span>
+          <!-- <router-link :to="{ name: 'supportBuyer' }">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>خروج</span>
+          </router-link> -->
+          <a href="/logout"> <i class="fas fa-sign-out-alt"></i> خروج </a>
         </li>
       </ul>
     </div>

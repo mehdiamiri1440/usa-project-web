@@ -1107,6 +1107,9 @@ export default {
     });
   },
   watch: {
+    currentUser(user) {
+      this.$parent.currentUser = user;
+    },
     $route(route) {
       if (
         !this.$parent.currentUser.user_info.is_verified &&

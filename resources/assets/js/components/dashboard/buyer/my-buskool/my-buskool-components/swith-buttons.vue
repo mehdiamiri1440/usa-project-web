@@ -4,6 +4,8 @@
 .radio-wrapper {
   margin: 25px auto 10px;
   padding-right: 10px;
+  text-align: center;
+  direction: rtl;
 }
 
 .label-radio {
@@ -23,9 +25,8 @@
 
   direction: rtl;
 
-  padding: 0 27px 0 5px;
-
-  font-size: 14px;
+  padding: 0px 36px 0 12px;
+  font-size: 16px;
 }
 .label-radio:nth-of-type(2) {
   margin-right: 6px;
@@ -92,7 +93,8 @@
 }
 
 .label-radio input:checked ~ label::after {
-  background-color: #fff;
+  background-color: #4dc0bb;
+  border-color: #4dc0bb;
 }
 
 .label-radio label::after {
@@ -118,7 +120,7 @@
 
   border-radius: 12px;
 
-  border: 1px solid #fff;
+  border: 1px solid #556080;
 }
 
 .label-radio.error label::after {
@@ -137,35 +139,42 @@
 }
 
 .label-radio.active label span {
-  color: #313a43;
+  color: #fff;
 }
 
 .label-radio.active .checkmark.active {
-  color: #4dc0bb;
+  color: #fff;
 }
 
 .active .cls-1 {
-  fill: #313a43;
+  fill: #fff;
 }
 .active .cls-2 {
-  fill: #313a43;
+  fill: #fff;
 }
 
 .cls-1 {
-  fill: #fff;
+  fill: #556080;
 }
 .cls-2 {
-  fill: #fff;
+  fill: #556080;
 }
 
 .little_header .main-right-header .label-radio {
   margin-right: 0;
+}
+.button-title {
+  font-size: 18px;
+  font-weight: 500;
+  text-align: center;
 }
 </style>
 
 
 <template>
   <div class="switch-buttons">
+    <p class="button-title">نوع کاربری فروشنده فعال است</p>
+
     <div class="radio-wrapper">
       <div class="label-radio" :class="{ active: isSwitch }">
         <input

@@ -8,6 +8,10 @@
   padding: 20px 15px;
 }
 
+.promotion-wrapper {
+  margin-top: 10px;
+}
+
 .promotion-image {
   background: linear-gradient(-45deg, #474d6f, #313442);
   height: 37px;
@@ -121,6 +125,19 @@
   position: absolute;
   right: 40px;
 }
+
+.switch-wrapper {
+  border-top: 10px solid #ebebeb;
+  padding: 30px 0;
+}
+
+@media screen and (max-width: 991px) {
+  .main-buskool-wrapper {
+    padding: 0px 15px;
+    margin-bottom: 65px;
+    border: none;
+  }
+}
 </style>
 <template>
   <div class="main-buskool-wrapper">
@@ -133,7 +150,10 @@
       :userprof="currentUser.user_info.user_name"
     />
 
-    <div class="promotion-wrapper">
+    <div
+      class="promotion-wrapper"
+      v-if="$parent.currentUser.user_info.is_seller == 1"
+    >
       <router-link
         :to="{ name: 'dashboardPricingTableSeller' }"
         class="promotion-image"
@@ -145,10 +165,13 @@
       </router-link>
     </div>
 
-    <div class="invite-section">
+    <div
+      class="invite-section"
+      v-if="$parent.currentUser.user_info.is_seller == 1"
+    >
       <div class="invite-box">
         <div class="invite-image-wrapper pull-left">
-          <img src="../../../../../img/alert-image.jpg" alt="promotion text" />
+          <img src="../../../../../img/alert-image.svg" alt="promotion text" />
         </div>
         <div class="invite-content text-rtl pull-right">
           <p>با معرفی باسکول به همکارانتان, کسب در آمد کنید!</p>
@@ -156,7 +179,10 @@
         </div>
       </div>
     </div>
-    <div class="invited-users">
+    <div
+      class="invited-users"
+      v-if="$parent.currentUser.user_info.is_seller == 1"
+    >
       <button>
         <i class="fa fa-angle-left"></i>
         <span class="button-text"> درآمد ها </span>
@@ -168,8 +194,11 @@
     <div class="menu-list text-rtl">
       <BuyerMenuList />
     </div>
-    <div class="switch-wrapper">
+    <div class="switch-wrapper row">
       <SwitchButtons />
+      <div class="image-wrapper">
+        <img src="../../../../../img/my-buskool.jpg" alt="my buskool" />
+      </div>
     </div>
   </div>
 </template>
@@ -186,7 +215,7 @@ export default {
     BuyerMenuList,
     SwitchButtons,
   },
-  props: ["currentUser", "str"],
+  props: ["currentUser", "str", "assets"],
   data() {
     return {
       isLoading: false,
