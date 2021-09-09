@@ -159,7 +159,7 @@
         class="promotion-image"
       >
         <img
-          src="../../../../../img/vertical-promotion-text.gif"
+          src="../../../../img/vertical-promotion-text.gif"
           alt="promotion text"
         />
       </router-link>
@@ -171,7 +171,7 @@
     >
       <div class="invite-box">
         <div class="invite-image-wrapper pull-left">
-          <img src="../../../../../img/alert-image.svg" alt="promotion text" />
+          <img src="../../../../img/alert-image.svg" alt="promotion text" />
         </div>
         <div class="invite-content text-rtl pull-right">
           <p>با معرفی باسکول به همکارانتان, کسب در آمد کنید!</p>
@@ -197,7 +197,7 @@
     <div class="switch-wrapper row">
       <SwitchButtons />
       <div class="image-wrapper">
-        <img src="../../../../../img/my-buskool.jpg" alt="my buskool" />
+        <img src="../../../../img/my-buskool.jpg" alt="my buskool" />
       </div>
     </div>
   </div>

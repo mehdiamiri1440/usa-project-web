@@ -851,7 +851,7 @@ a.profile-info-wrapper:focus {
           </button>
         </div>
       </div>
-      <SubMenu
+      <SubMenu />
     </div>
   </header>
 </template>
