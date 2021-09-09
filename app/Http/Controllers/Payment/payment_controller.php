@@ -536,11 +536,10 @@ class payment_controller extends Controller
             // در اینجا کالا درخواستی را به کاربر ارائه میکنم
             $this->do_after_payment_changes_for_subscription(session('user_id'));
             
-            $lastest_registered_product_count = DB::table('products')
-                                                    ->where('myuser_id',session('user_id'))
-                                                    ->whereBetween('created_at',[Carbon::now()->subMinutes(20),Carbon::now()])
-                                                    ->orderBy('created_at','desc')
-                                                    ->count();
+            $user_id = session('user_id');
+
+            $lastest_registered_product_count 
+            = $this->get_user_latest_registred_product_count($user_id,20);
             
             if($lastest_registered_product_count > 0){
 
@@ -555,6 +554,7 @@ class payment_controller extends Controller
             return redirect('/seller/pricing');
         }
     }
+
 
     ///////////////////////////////
     public function app_payment_callback()
@@ -572,12 +572,10 @@ class payment_controller extends Controller
             // در اینجا کالا درخواستی را به کاربر ارائه میکنم
             $this->do_after_payment_changes_for_subscription(session()->pull('app_user_id'));
 
+            $user_id = session('user_id');
 
-            $lastest_registered_product_count = DB::table('products')
-                                                    ->where('myuser_id',session('user_id'))
-                                                    ->whereBetween('created_at',[Carbon::now()->subMinutes(20),Carbon::now()])
-                                                    ->orderBy('created_at','desc')
-                                                    ->count();
+            $lastest_registered_product_count = 
+            $this->get_user_latest_registred_product_count($user_id,20); 
             
             if($lastest_registered_product_count > 0){
 
@@ -624,6 +622,20 @@ class payment_controller extends Controller
             }
         }
         
+    }
+
+    // incommon function for two above end point
+    protected function get_user_latest_registred_product_count($user_id,$past_time_in_minit)
+    {
+        $now = Carbon::now();
+
+        $latest_registered_product_count = DB::table('products')
+                                                ->where('myuser_id',$user_id)
+                                                ->whereBetween('created_at',[$now->subMinutes($past_time_in_minit),$now])
+                                                ->orderBy('created_at','desc')
+                                                ->count();
+
+        return $latest_registered_product_count;
     }
 
     ///////////////////////////

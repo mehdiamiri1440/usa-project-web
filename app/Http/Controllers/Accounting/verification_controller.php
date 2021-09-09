@@ -16,6 +16,7 @@ class verification_controller extends Controller
         $this->validate($request,$rules);
 
         $files_path_array = $this->save_verification_photos($request, $request->images_count);
+        
         $this->register_verifivation_photos_path_in_DB($files_path_array);
 
         return response()->json([

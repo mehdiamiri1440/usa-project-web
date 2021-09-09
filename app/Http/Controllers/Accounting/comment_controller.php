@@ -136,10 +136,7 @@ class comment_controller extends Controller
     protected function get_comment_likes_count($comment_id)
     {
         
-        $records = DB::table('user_comment_likes')
-                            // ->selectRaw('count(distinct(myuser_id)) as likes')
-                            ->where('comment_id',$comment_id)
-                            ->get();
+        $records = $this->get_users_who_liked_given_comment($comment_id);
         
         $result['likes'] = $records->count();
         
@@ -167,6 +164,16 @@ class comment_controller extends Controller
         return $result;
     }
 
+    protected function get_user_ids_who_liked_given_comment($comment_id){
+
+        $records = DB::table('user_comment_likes')
+                            // ->selectRaw('count(distinct(myuser_id)) as likes')
+                            ->where('comment_id',$comment_id)
+                            ->get();
+
+        return $records;
+    }
+
     protected function get_deleted_comments_count($user_id)
     {
 
@@ -184,12 +191,7 @@ class comment_controller extends Controller
     protected function get_user_avg_rating_score($user_id)
     {
         
-        $records = DB::table('user_comments')
-                    ->where([
-                        ['myuser_id','=',$user_id],
-                        ['rating_score','>',0],
-                    ])->select('rating_score')
-                    ->get();
+        $records = $this->get_above_zero_user_rating_scores($user_id);
         
         $result = [
             'total_count' => $records->count(),
@@ -197,6 +199,20 @@ class comment_controller extends Controller
         ];
 
         return $result;
+    }
+
+    protected function get_above_zero_user_rating_scores($user_id)
+    {
+
+        $records = DB::table('user_comments')
+                        ->where([
+                            ['myuser_id','=',$user_id],
+                            ['rating_score','>',0],
+                        ])
+                        ->select('rating_score')
+                        ->get();
+
+        return $records;
     }
 
     //////////////////////////////////////////////////////
@@ -244,11 +260,7 @@ class comment_controller extends Controller
     protected function did_user_already_like_the_comment($user_id,$comment_id)
     {
         
-        $likes_record = DB::table('user_comment_likes')
-                        ->where([
-                            ['myuser_id','=',$user_id],
-                            ['comment_id','=',$comment_id]
-                        ])->first();
+        $likes_record = $this->get_user_comment_likes_record($user_id,$comment_id);
         
         if($likes_record){
             return true;
@@ -257,11 +269,23 @@ class comment_controller extends Controller
         return false;
     }
 
+    protected function get_user_comment_likes_record($user_id,$comment_id){
+
+        $likes_record = DB::table('user_comment_likes')
+                        ->where([
+                            ['myuser_id','=',$user_id],
+                            ['comment_id','=',$comment_id]
+                        ])
+                        ->first();
+
+        return $likes_record;
+    }
+
     protected function insert_new_user_comment_like($info)
     {
 
         $insert = DB::table('user_comment_likes')
-        ->insert($info);
+                        ->insert($info);
 
         return $insert;
     }
@@ -273,7 +297,8 @@ class comment_controller extends Controller
                         ->where([
                             ['myuser_id','=',$user_id],
                             ['comment_id','=',$comment_id]
-                        ])->delete();
+                        ])
+                        ->delete();
 
         return $delete;
     }

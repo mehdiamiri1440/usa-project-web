@@ -126,7 +126,7 @@ class sms_controller extends Controller
 
                 $phone = $request->phone;
 
-                $user_record = myuser::where('phone',$phone)->first();
+                $user_record = $this->get_user_by_phone_number($phone);
 
                 if($user_record){
 
@@ -184,6 +184,14 @@ class sms_controller extends Controller
 			]);
 		}
 	}
+
+    protected function get_user_by_phone_number($phone_number)
+    {
+
+        $user_record = myuser::where('phone',$phone_number)->first();
+
+        return $user_record;
+    }
     
     // used in other places 
     public function send_new_generated_password($password,$user_phone)
@@ -229,12 +237,7 @@ class sms_controller extends Controller
     
     public function send_sms_to_given_phone_number($phone_number,$pattern_code,$data = [])
     {
-        $user_first_name = DB::table('myusers')
-                            ->where('phone',$phone_number)
-                            ->select('first_name')
-                            ->get()
-                            ->first()
-                            ->first_name;
+        $user_first_name = $this->get_user_first_name_by_phone_number($phone_number);
 
         $sending_data = [
             
@@ -253,6 +256,19 @@ class sms_controller extends Controller
         catch(\Exception $e){
             echo $e->getMessage();
         }
+    }
+
+    protected function get_user_first_name_by_phone_number($phone_number)
+    {
+        $user_first_name = DB::table('myusers')
+                            ->where('phone',$phone_number)
+                            ->select('first_name')
+                            ->get()
+                            ->first()
+                            ->first_name;
+
+        return $user_first_name;
+
     }
 
     /////////////////////// incommon functions

@@ -16,11 +16,9 @@ class wallet_controller extends Controller
     public function do_charge_wallet($amount)
     {
         if($amount >= 1000){
-            $payment_amount = $amount * 10; //converting toman to Rial
+            $payment_amount = $this->convert_toman_to_rial($amount);
 
-            if(session()->has('payment_amount')){
-                session()->pull('payment_amount'); //remove session from previous payment
-            }
+            $this->remove_from_session('payment_amount');//remove session from previous payment
         }
         else{
 
@@ -62,11 +60,9 @@ class wallet_controller extends Controller
     {
         if($amount >= 1000){
 
-            $payment_amount = $amount * 10; //converting toman to Rial
+            $payment_amount = $this->convert_toman_to_rial($amount );
 
-            if(session()->has('payment_amount')){
-                session()->pull('payment_amount'); //remove session from previous payment
-            }
+            $this->remove_from_session('payment_amount');//remove session from previous payment
         }
         else{
 
@@ -261,6 +257,17 @@ class wallet_controller extends Controller
         return redirect('/pricing');  
     }
 
+    protected function convert_toman_to_rial($toman)
+    {
+        return $toman * 10;
+    }
+
+    protected function remove_from_session($key)
+    {
+        if(session()->has($key)){
+            session()->pull($key);
+        }
+    }
     ///////////////////////// zombie functions 
 
     protected function do_after_payment_changes_for_elevator($product_id)

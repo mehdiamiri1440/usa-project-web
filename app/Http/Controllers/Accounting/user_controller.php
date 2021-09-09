@@ -81,9 +81,9 @@ class user_controller extends Controller
             ;
         } else {
             return response()->json([
-            'status' => false,
-             'msg' => 'شماره تلفن یا گذر واژه اشتباه است.',
-         ], 200);
+                'status' => false,
+                'msg' => 'شماره تلفن یا گذر واژه اشتباه است.',
+            ], 200);
         }
     }
 
@@ -103,6 +103,7 @@ class user_controller extends Controller
         
         // following condition seems to have logical relation that i dont undrestand
         if($request->filled('user_agent') && $request->has('plain') && $request->plain == false){
+
             $user_agent = $request->user_agent;
         }
         else{
@@ -145,7 +146,8 @@ class user_controller extends Controller
 
     }
 
-    protected function update_user_last_login_info($user_id,$last_login_client,$last_login_date){
+    protected function update_user_last_login_info($user_id,$last_login_client,$last_login_date)
+    {
 
         $update = DB::table('myusers')
                         ->where('id',$user_id)
@@ -157,7 +159,8 @@ class user_controller extends Controller
         return $update;
     }
 
-    protected function get_user_login_device_id_if_exist(&$request){
+    protected function get_user_login_device_id_if_exist(&$request)
+    {
 
         if($request->has('device_id') && $request->has('client') && $request->client == 'mobile'){
             return $request->device_id;
@@ -166,7 +169,8 @@ class user_controller extends Controller
         return NULL;
     }
 
-    protected function get_user_role_in_latin_words($is_seller){
+    protected function get_user_role_in_latin_words($is_seller)
+    {
 
         if($is_seller == true){
             return 'SELLER';
@@ -177,6 +181,23 @@ class user_controller extends Controller
 
     protected function block_user_if_already_has_been_blocked_on_this_device($device_id,$user_id)
     {
+        $already_blocked_users_count_on_this_device 
+        = $this->get_already_blocked_users_count_on_given_device_id($device_id);
+
+        if($already_blocked_users_count_on_this_device > 0)
+        {
+            DB::table('myusers')
+            ->where('id',$user_id)
+            ->update(['is_blocked' => true]);
+
+            \Session::flush();
+            \Session::save();
+        }
+                                                        
+    }
+
+    protected function get_already_blocked_users_count_on_given_device_id($device_id)
+    {
         $already_blocked_users_count_on_this_device = DB::table('myusers')
                                                         ->join('client_meta_datas','client_meta_datas.myuser_id','myusers.id')
                                                         ->where('client_meta_datas.device_id',$device_id)
@@ -184,15 +205,7 @@ class user_controller extends Controller
                                                         ->get()
                                                         ->count();
 
-        if($already_blocked_users_count_on_this_device > 0)
-        {
-            DB::table('myusers')->where('id',$user_id)
-                                    ->update(['is_blocked' => true]);
-
-            \Session::flush();
-            \Session::save();
-        }
-                                                        
+        return $already_blocked_users_count_on_this_device;
     }
 
     protected function block_previous_accounts_on_this_device($device_id)
@@ -225,18 +238,18 @@ class user_controller extends Controller
     protected function set_user_session($user_info)
     {
         $user_profile_record = profile::where('myuser_id', $user_info->id)
-                ->select('profile_photo')
-                ->get()
-                ->last();
+                                        ->select('profile_photo')
+                                        ->get()
+                                        ->last();
 
         session([
-            'user_id' => $user_info->id,
-            'is_buyer' => $user_info->is_buyer,
+            'user_id'   => $user_info->id,
+            'is_buyer'  => $user_info->is_buyer,
             'is_seller' => $user_info->is_seller,
             'user_name' => $user_info->user_name,
             'full_name' => $user_info->first_name.' '.$user_info->last_name,
-            'city' => $user_info->city,
-            'province' => $user_info->province,
+            'city'      => $user_info->city,
+            'province'  => $user_info->province,
             'profile_photo' => $user_profile_record ? $user_profile_record->profile_photo : null,
         ]);
     }
@@ -294,9 +307,9 @@ class user_controller extends Controller
             }
 
             return response()->json([
-                        'status' => true,
-                        'msg' => 'Password changed successfully!',
-                    ], 200);
+                    'status' => true,
+                    'msg' => 'Password changed successfully!',
+                ], 200);
         // });
         } else {
             return response()->json([
@@ -362,9 +375,8 @@ class user_controller extends Controller
         return $result;
     }
 
-    ///////////////////////////////////
-
     //public method
+    ///////////////////////////////////
     public function is_user_from_webview(Request $request)
     {
         $is_webview = $request->header('User-Agent') == 'webView';
@@ -379,11 +391,13 @@ class user_controller extends Controller
     ///////////////////////////////////
     public function get_seller_dashboard_required_data(Request $request)
     {
-        $user_record      = myuser::find(session('user_id'));
+        $user_id = session('user_id');
+
+        $user_record      = myuser::find($user_id);
         $user_pakage_type = $user_record->active_pakage_type;
 
         $pakage_info              = config("subscriptionPakage.type-$user_pakage_type");
-        $confirmed_products_count = $this->get_user_confirmed_products_count();
+        $confirmed_products_count = $this->get_user_confirmed_products_count($user_id);
 
         $active_pakage_type = $user_pakage_type;
         $reputation_score   = $this->get_user_reputation_score();
@@ -408,9 +422,8 @@ class user_controller extends Controller
         ]), 200);
     }
 
-    protected function get_user_confirmed_products_count()
+    protected function get_user_confirmed_products_count($user_id)
     {
-        $user_id = session('user_id');
 
         $confirmed_products_count = product::where('myuser_id', $user_id)
                                             ->where('confirmed', true)
@@ -433,7 +446,6 @@ class user_controller extends Controller
     }
 
     ///////////////////////////////////
-
     public function switch_user_role(Request $request)
     {
         $user_id = session('user_id');
@@ -484,7 +496,6 @@ class user_controller extends Controller
     }
 
     ///////////////////////////////////
-
     public function get_pricing_page_visit_status(Request $request)
     {
         $user_id = session('user_id');
@@ -505,10 +516,11 @@ class user_controller extends Controller
 
         $show_off = $pricing_view_count + 1 == 2 ;
 
-        if(  $user_record->active_pakage_type == 0 &&
-             Carbon::now()->diffInDays($user_record->created_at) < 30 && 
-             $received_contacts_count > 1)
-        {
+        if(  
+            $user_record->active_pakage_type == 0 
+            && Carbon::now()->diffInDays($user_record->created_at) < 30 
+            && $received_contacts_count > 1
+        ){
             return response()->json([
                 'status' => true,
                 'show' => true,
@@ -569,7 +581,6 @@ class user_controller extends Controller
     }
 
     //////////////////////////////////
-
     public function get_my_account_balance()
     {
         $user_id = session('user_id');

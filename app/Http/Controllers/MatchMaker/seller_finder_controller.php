@@ -281,6 +281,7 @@ class seller_finder_controller extends Controller
         $final_filtered_sellers = array_unique(array_merge(array_slice($final_sellers,0,(integer) ($this->max_notified_sellers / 2)),array_slice($final_premium_sellers,0,(integer) ($this->max_notified_sellers / 2)) ) );
 
         if(count($final_filtered_sellers) < $this->max_notified_sellers){
+            
             $shortage = abs($this->max_notified_sellers - count($final_filtered_sellers));
             $final_filtered_sellers = array_merge($final_filtered_sellers,array_slice($final_premium_sellers,(integer) ($this->max_notified_sellers / 2), $shortage));
 

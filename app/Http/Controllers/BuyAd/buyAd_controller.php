@@ -171,16 +171,7 @@ class buyAd_controller extends Controller
     {
         $user_id = session('user_id');
 
-        $my_buyAds = DB::table('buy_ads')
-                            ->join('myusers','myusers.id','=','buy_ads.myuser_id')
-                            ->join('categories as subcategories','subcategories.id','=','buy_ads.category_id')
-                            ->join('categories','subcategories.parent_id','=','categories.id')
-                            ->whereNull('deleted_at')
-                            ->where('confirmed',true)
-                            ->where('buy_ads.myuser_id',$user_id)
-                            ->orderBy('buy_ads.created_at','desc')
-                            ->select($this->my_buyAds_required_fields)
-                            ->get();
+        $my_buyAds = $this->get_all_buy_ad_belongs_to_given_user($user_id);
                         
         foreach($my_buyAds as $buyAd)
         {
@@ -193,6 +184,22 @@ class buyAd_controller extends Controller
             'buyAds' => $my_buyAds,
         ],200);
         
+    }
+
+    protected function get_all_buy_ad_belongs_to_given_user($user_id)
+    {
+        $user_buy_ads = DB::table('buy_ads')
+                            ->join('myusers','myusers.id','=','buy_ads.myuser_id')
+                            ->join('categories as subcategories','subcategories.id','=','buy_ads.category_id')
+                            ->join('categories','subcategories.parent_id','=','categories.id')
+                            ->whereNull('deleted_at')
+                            ->where('confirmed',true)
+                            ->where('buy_ads.myuser_id',$user_id)
+                            ->orderBy('buy_ads.created_at','desc')
+                            ->select($this->my_buyAds_required_fields)
+                            ->get();
+
+        return $user_buy_ads;
     }
 
 
@@ -224,17 +231,22 @@ class buyAd_controller extends Controller
             Cache::forget(md5('products-' . session('user_id')));
 
             if ($most_related_products) {
+
                 return response()->json([
                     'status' => true,
                     'products' => $most_related_products,
                 ], 201)->withCookie(cookie('interestedCategories',$interested_categories,43200));
-            } else {
+            } 
+            else {
+
                 return response()->json([
                     'status' => true,
                     'buyAd' => $buyAd_object_or_failuire_message,
-                    ], 201)->withCookie(cookie('interestedCategories',$interested_categories,43200));
+                ], 201)->withCookie(cookie('interestedCategories',$interested_categories,43200));
             }
-        } else {
+
+        } 
+        else {
             return response()->json([
                 'status' => false,
                 'msg' => $buyAd_object_or_failuire_message,
@@ -261,7 +273,8 @@ class buyAd_controller extends Controller
     {
         try {
             $user_id = session('user_id');
-            $is_user_blocked = DB::table('myusers')->where('id',$user_id)->first()->is_blocked;
+
+            $is_user_blocked = $this->is_user_blocked($user_id);
 
             if($is_user_blocked){
                 return 'حساب کاربری شما مسدود شده است.';
@@ -269,10 +282,10 @@ class buyAd_controller extends Controller
 
             $buyAd = new buyAd();
 
-            
-
             foreach ($this->buyAd_register_fields_array as $field_name) {
+
                 if (!is_null($request->$field_name)) {
+
                     $buyAd->$field_name = strip_tags($request->$field_name);
                 }
             }
@@ -286,6 +299,16 @@ class buyAd_controller extends Controller
         } catch (\Exception $e) {
             return $e->getMessage();
         }
+    }
+
+    protected function is_user_blocked($user_id)
+    {
+        $is_blocked = DB::table('myusers')
+                            ->where('id',$user_id)
+                            ->first()
+                            ->is_blocked;
+
+        return $is_blocked;
     }
 
     // this function usage commented out
@@ -391,19 +414,7 @@ class buyAd_controller extends Controller
             $the_most_related_free_product_record = $the_most_related_free_product_record ??  [];
         }
 
-        if(count($the_most_related_premium_product_record) < 3 && count($the_most_related_free_product_record) > 3){
-            $result = array_merge($the_most_related_premium_product_record,
-                                                    array_slice($the_most_related_free_product_record,
-                                                    0,
-                                                    count($the_most_related_free_product_record) - count($the_most_related_premium_product_record)
-                                                    )
-                                            );
-        }
-        else{
-            $result = array_merge($the_most_related_premium_product_record,
-                                            array_slice($the_most_related_free_product_record,0,3)
-            );
-        }
+        $result = $this->get_most_related_free_and_premium_product_records($the_most_related_free_product_record,$the_most_related_premium_product_record);
         
         if(count($result) > 0){
             $this->append_related_info_to_most_related_products($result);
@@ -561,7 +572,8 @@ class buyAd_controller extends Controller
             $tmp_seller_ids[] = $product->myuser_id;
         }
 
-        $prioritized_products_according_to_sellers_last_activity_date = $this->prioritize_products_according_to_sellers_last_activity_date($final_important_products);
+        $prioritized_products_according_to_sellers_last_activity_date 
+        = $this->prioritize_products_according_to_sellers_last_activity_date($final_important_products);
         
         return $prioritized_products_according_to_sellers_last_activity_date;
     }
@@ -703,16 +715,54 @@ class buyAd_controller extends Controller
         return compact('activity_ratio','score');
     }
 
+    protected function get_most_related_free_and_premium_product_records(&$the_most_related_free_product_record,&$the_most_related_premium_product_record)
+    {
+        $the_most_related_premium_product_record_count = count($the_most_related_premium_product_record);
+        $the_most_related_free_product_record_count    = count($the_most_related_free_product_record);
+
+        if( $the_most_related_premium_product_record_count < 3 && $the_most_related_free_product_record_count > 3){
+
+            $the_most_related_free_and_premium_product_record_count_diffrence 
+            = $the_most_related_free_product_record_count - $the_most_related_premium_product_record_count;
+
+            $the_most_related_free_product_record_slice 
+            = array_slice(
+                $the_most_related_free_product_record,
+                0,
+                $the_most_related_free_and_premium_product_record_count_diffrence 
+            );
+
+            $result = array_merge(
+                $the_most_related_premium_product_record,
+                $the_most_related_free_product_record_slice
+            );
+        }
+        else{
+
+            $the_most_related_free_product_record_slice 
+            = array_slice($the_most_related_free_product_record,0,3);
+
+            $result = array_merge(
+                $the_most_related_premium_product_record,
+                $the_most_related_free_product_record_slice
+            );
+        }
+
+        return $result;
+
+    }
+
     protected function append_related_info_to_most_related_products(&$products)
     {
         foreach($products as $product){
+
             $this->append_related_media_to_most_related_product_record($product);
 
             $phone_view_permission = str_split($product->phone_view_permission)[0];
             if( 
                 ($phone_view_permission == true && $product->wallet_balance >= config("subscriptionPakage.phone-number.view-price")) 
                 || ($phone_view_permission == true && $product->active_pakage_type > 0)
-              ){
+            ){
                 $product->has_phone = true;
             }
             else{
@@ -730,6 +780,8 @@ class buyAd_controller extends Controller
                                             ->select('file_path')
                                             ->first()
                                             ->file_path;
+
+        // no return no call by refrence ?
     }
 
     /////////////////////////////////////
@@ -760,9 +812,10 @@ class buyAd_controller extends Controller
         $today_replies_count = $user_reply_records->count();
         if($today_replies_count > 0){
             
-            $user_daily_reply_capacity = config("subscriptionPakage.type-{$user_reply_records->first()->active_pakage_type}.buyAd-reply-count");
+            $user_reply_records_first = $user_reply_records->first();
+            $user_daily_reply_capacity = config("subscriptionPakage.type-{$user_reply_records_first->active_pakage_type}.buyAd-reply-count");
             // var_dump($user_daily_reply_capacity);
-            if($today_replies_count >= $user_daily_reply_capacity + $user_reply_records->first()->extra_buyAd_reply_capacity){
+            if($today_replies_count >= $user_daily_reply_capacity + $user_reply_records_first->extra_buyAd_reply_capacity){
                 return response()->json([
                     'status' => false,
                     'permission' => false,
@@ -969,31 +1022,7 @@ class buyAd_controller extends Controller
 
             $user_registered_products_categories_array = array_unique($user_registered_products_categories_array);
 
-            usort($result_buyAds,function($item1,$item2) use($user_registered_products_categories_array){
-                $a =  (in_array($item1->category_id,$user_registered_products_categories_array) == true) ? 1 : -1;
-                $b =  (in_array($item2->category_id,$user_registered_products_categories_array) == true) ? 1 : -1;
-
-                if($a == $b){
-                    $c = $item1->is_golden ? 1 : 0;
-                    $d = $item2->is_golden ? 1 : 0;
-
-                    if($c == $d){
-                        $e = $item1->response_rate;
-                        $f = $item2->response_rate;
-
-                        if($e == $f){
-                            return ($item1->updated_at < $item2->updated_at) ? 1 : -1;
-                        }
-
-                        return ($e < $f) ? 1 : -1;
-                    }
-
-                    return ($c < $d) ? 1 : -1;
-                }
-
-                return ($a < $b) ? 1 : -1;
-                
-            });
+            $this->sort_buy_ads_result_base_on_category($result_buyAds,$user_registered_products_categories_array);
 
             $result_buyAds = array_merge($filtered_buyAds,$result_buyAds);
 
@@ -1078,6 +1107,35 @@ class buyAd_controller extends Controller
 
                 return ($c < $d) ? 1 : -1;
             } 
+
+            return ($a < $b) ? 1 : -1;
+            
+        });
+    }
+
+    protected function sort_buy_ads_result_base_on_category(&$result_buyAds,&$user_registered_products_categories_array)
+    {
+        usort($result_buyAds,function($item1,$item2) use($user_registered_products_categories_array){
+            $a =  (in_array($item1->category_id,$user_registered_products_categories_array) == true) ? 1 : -1;
+            $b =  (in_array($item2->category_id,$user_registered_products_categories_array) == true) ? 1 : -1;
+
+            if($a == $b){
+                $c = $item1->is_golden ? 1 : 0;
+                $d = $item2->is_golden ? 1 : 0;
+
+                if($c == $d){
+                    $e = $item1->response_rate;
+                    $f = $item2->response_rate;
+
+                    if($e == $f){
+                        return ($item1->updated_at < $item2->updated_at) ? 1 : -1;
+                    }
+
+                    return ($e < $f) ? 1 : -1;
+                }
+
+                return ($c < $d) ? 1 : -1;
+            }
 
             return ($a < $b) ? 1 : -1;
             

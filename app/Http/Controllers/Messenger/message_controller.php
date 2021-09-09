@@ -408,6 +408,7 @@ class message_controller extends Controller
         ], 200);
     }
 
+    ////////////////////
     public function get_user_chat_history(Request $request)
     {
         $this->validate($request, [

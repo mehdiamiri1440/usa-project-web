@@ -108,12 +108,12 @@ class phone_number_controller extends Controller
         ]);
 
         $user_id = session('user_id');
-        $viewr_user_record = myuser::find($user_id);
+        
         $buyAd_id = $request->ba_id;
         $buyer_id = $request->b_id;
         
+        if($this->does_user_has_any_active_package($user_id) == false ){
 
-        if($viewr_user_record && $viewr_user_record->active_pakage_type == 0){
             return response()->json([
                 'status' => false,
                 'msg' => 'برای دسترسی به شماره تماس خریداران لطفا نوع عضویت خود را ارتقا دهید.'
@@ -147,14 +147,16 @@ class phone_number_controller extends Controller
             ],404);
         }
 
-        if($this->does_viewer_already_seen_the_user_phone_number(session('user_id'),$related_record->id) === false){
-    
-            if($this->does_viewer_daily_access_count_is_more_than_max_viewer_daily_access_count(session('user_id'))){
-                return response()->json([
-                    'status' => false,
-                    'msg' => 'سقف تعداد روزانه دسترسی شما به شماره تماس کاربران پر شده است. لطفا پیام ارسال کنید.'
-                ],404);
-            }  
+        if(
+            
+            ($this->does_viewer_already_seen_the_user_phone_number($user_id,$related_record->id) === false)
+            && $this->does_viewer_daily_access_count_is_more_than_max_viewer_daily_access_count($user_id)
+        ){
+
+            return response()->json([
+                'status' => false,
+                'msg' => 'سقف تعداد روزانه دسترسی شما به شماره تماس کاربران پر شده است. لطفا پیام ارسال کنید.'
+            ],404);
         }
 
         $already_replied_to_the_buyAd = $this->get_user_replay_count_to_buy_ad($user_id,$buyAd_id);
@@ -172,13 +174,25 @@ class phone_number_controller extends Controller
             $this->decrement_phone_view_capacity_for_buy_ad($buyAd_id,1);
         }
 
-        $this->insert_phone_number_view_log_record(session('user_id'),$request->b_id,'BUYER',$request->item,true);    
+        $this->insert_phone_number_view_log_record($user_id,$buyer_id,'BUYER',$request->item,true);    
 
         return response()->json([
             'status' => true,
             'phone' => $related_record->phone
         ]);
 
+    }
+
+    protected function does_user_has_any_active_package($user_id)
+    {
+
+        $viewer_user_record = myuser::find($user_id);
+
+        if($viewer_user_record && $viewer_user_record->active_pakage_type == 0){
+            return false;
+        }
+
+        return true;
     }
 
     protected function get_user_replay_count_to_buy_ad($replier_id,$buy_ad_id)
@@ -235,13 +249,10 @@ class phone_number_controller extends Controller
                 
                 $temp[1] = (integer) $request->permission;
             }
+            
             $updated_permission = implode('',$temp);
                 
-            DB::table('myusers')
-                    ->where('id',$user_record->id)
-                    ->update([
-                        'phone_view_permission' => $updated_permission
-                    ]);
+            $this->change_user_phone_view_permission($user_record->id,$updated_permission);
 
             return response()->json([
                 'status' => true,
@@ -255,6 +266,17 @@ class phone_number_controller extends Controller
             'msg' => 'unable to change permission'
          ]);
 
+    }
+
+    protected function change_user_phone_view_permission($user_id,$new_permission)
+    {
+        $update = DB::table('myusers')
+                    ->where('id',$user_id)
+                    ->update([
+                        'phone_view_permission' => $new_permission
+                    ]);
+
+        return $update;
     }
 
     ///////////////////////////////////////////////////////////

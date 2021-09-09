@@ -45,6 +45,7 @@ class group_message_controller extends Controller
         $group_id = $request->group_id;
 
         if(!$this->is_user_allowed_to_send_message_in_this_group($user_id,$group_id)){
+
             return response()->json([
                 'status' => false,
                 'msg' => 'user is not allowed to send message in this group'
@@ -54,6 +55,7 @@ class group_message_controller extends Controller
         $text_processing_result = $this->do_the_text_processing($request->text);
 
         if($text_processing_result['is_allowed_to_send'] == false){
+            
             return response()->json([
                 'status' => false,
                 'errors' => $text_processing_result['errors']
@@ -64,12 +66,15 @@ class group_message_controller extends Controller
             $message_record = new group_message([],$group_id);
             $message_record->sender_id = $user_id;
             $message_record->text = $text_processing_result['text'];
+
             if($request->has('replied_msg_id')){
                 $message_record->parent_id = $request->replied_msg_id;
             }
+
             if($text_processing_result['has_link'] == true){
                 $message_record->is_link = true;
             }
+
             $message_record->save();
 
             $this->notify_group_members($group_id);

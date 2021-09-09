@@ -71,17 +71,31 @@ class reputation_controller extends Controller
     {
         $user_id = $user_record->id;
 
+        $registered_products_count = $this->get_user_registred_products_count($user_id);
+        
+        $registered_buyAds_count = $this->get_user_registred_buy_ad_count($user_id);
+        
+        return ($registered_products_count * $this->product_registeration_coef + $registered_buyAds_count * $this->buyAd_registration_coef) ;
+    }
+
+    protected function get_user_registred_products_count($user_id)
+    {
         $registered_products_count = product::where('myuser_id',$user_id)
                                         ->where('confirmed',true)
                                         ->get()
                                         ->count();
-        
+
+        return $registered_products_count;
+    }
+
+    protected function get_user_registred_buy_ad_count($user_id)
+    {
         $registered_buyAds_count = buyAd::where('myuser_id',$user_id)
                                         ->where('confirmed',true)
                                         ->get()
                                         ->count();
-        
-        return ($registered_products_count * $this->product_registeration_coef + $registered_buyAds_count * $this->buyAd_registration_coef) ;
+                                        
+        return $registered_buyAds_count;
     }
     
     protected function get_level_of_profile_completeness_score($user_record)
@@ -100,6 +114,7 @@ class reputation_controller extends Controller
 
                 $score += $this->profile_photo_coef;
             }
+            
             if($last_confirmed_profile_record->is_company){
 
                 $score += $this->is_company_coef;

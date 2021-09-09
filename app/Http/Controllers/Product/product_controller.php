@@ -719,10 +719,7 @@ class product_controller extends Controller
 
             $product->category_name = $category_info['category_name'];
             $product->subcategory_name = $category_info['subcategory_name'];
-            $product->photo = product_media::where('product_id', $product->id)
-                                                ->get()
-                                                ->first()
-                                                ->file_path ?? null;
+            $product->photo = $this->get_product_photo_file_path_by_product_id($product->id) ?? null;
         });
 
         return response()->json([
@@ -730,6 +727,8 @@ class product_controller extends Controller
             'products' => $products,
         ], 200);
     }
+
+    
 
     //public method
     ///////////////////////
@@ -762,10 +761,7 @@ class product_controller extends Controller
             $product->category_name = $category_info['category_name'];
             $product->subcategory_name = $category_info['subcategory_name'];
 
-            $product->photo = product_media::where('product_id', $product->id)
-                                                ->get()
-                                                ->first()
-                                                ->file_path;
+            $product->photo = $this->get_product_photo_file_path_by_product_id($product->id);
         }
 
         return response()->json([
@@ -1096,6 +1092,16 @@ class product_controller extends Controller
     }
 
     ////////////////////// incommon methods
+
+    protected function get_product_photo_file_path_by_product_id($product_id)
+    {
+        $file_path = product_media::where('product_id', $product_id)
+                                                ->get()
+                                                ->first()
+                                                ->file_path;
+
+        return $file_path;
+    }
 
     protected function is_user_allowed_to_register_another_product()
     {
