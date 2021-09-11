@@ -532,7 +532,7 @@ button.disable {
 
   .main-content,
   .wrapper-items {
-    padding: 0;
+    padding-top: 20px;
   }
 
   .title {

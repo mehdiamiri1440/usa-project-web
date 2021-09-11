@@ -9,7 +9,14 @@
 }
 
 .promotion-wrapper {
-  margin-top: 10px;
+  margin: 10px 15px 0;
+}
+
+.promotion-wrapper .default-button-full-with {
+  margin: 0;
+  display: block;
+  height: 37px;
+  border-radius: 12px 12px 0 0;
 }
 
 .promotion-image {
@@ -148,31 +155,32 @@
       "
       :userprof="currentUser.user_info.user_name"
     />
-
-    <div
-      class="promotion-wrapper"
-      v-if="
-        $parent.currentUser.user_info.is_seller == 1 &&
-        $parent.currentUser.user_info.active_pakage_type == 0
-      "
-    >
-      <router-link
-        :to="{ name: 'dashboardPricingTableSeller' }"
-        class="promotion-image"
+    <div class="row" v-if="$parent.isSeller == 1">
+      <div
+        class="promotion-wrapper"
+        v-if="
+          $parent.currentUser.user_info &&
+          $parent.currentUser.user_info.active_pakage_type == 0
+        "
       >
-        <img
-          src="../../../../img/vertical-promotion-text.gif"
-          alt="promotion text"
-        />
-      </router-link>
-    </div>
+        <router-link
+          :to="{ name: 'dashboardPricingTableSeller' }"
+          class="promotion-image"
+        >
+          <img
+            src="../../../../img/vertical-promotion-text.gif"
+            alt="promotion text"
+          />
+        </router-link>
+      </div>
+      <div class="promotion-wrapper" v-else-if="!$parent.currentUser.user_info">
+        <p class="placeholder-content default-button-full-with"></p>
+      </div>
 
-    <div class="row">
       <router-link
         :to="{ name: 'referralSeller' }"
         tag="button"
         class="invite-section"
-        v-if="$parent.currentUser.user_info.is_seller == 1"
       >
         <div class="invite-box">
           <div class="invite-image-wrapper pull-left">
@@ -184,10 +192,7 @@
           </div>
         </div>
       </router-link>
-      <div
-        class="invited-users"
-        v-if="$parent.currentUser.user_info.is_seller == 1"
-      >
+      <div class="invited-users">
         <router-link tag="button" :to="{ name: 'invitedUsers' }">
           <i class="fa fa-angle-left"></i>
           <span class="button-text"> درآمد ها </span>
@@ -198,11 +203,11 @@
     </div>
 
     <div class="menu-list text-rtl">
-      <SellerMenuList v-if="$parent.currentUser.user_info.is_seller == 1" />
+      <SellerMenuList v-if="$parent.isSeller == 1" />
       <BuyerMenuList v-else />
     </div>
     <div class="switch-wrapper row">
-      <SwitchButtons :isSeller="$parent.currentUser.user_info.is_seller" />
+      <SwitchButtons :isSeller="$parent.isSeller" />
       <div class="my-biskool-image-wrapper">
         <img src="../../../../img/my-buskool.jpg" alt="my buskool" />
       </div>
