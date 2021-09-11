@@ -2050,13 +2050,15 @@ export default {
     },
     infiniteScrollHandler() {
       $(window).scroll(() => {
-        if (
-          $(window).scrollTop() >=
-            ($(document).height() - $(window).height() - 100) / 2 &&
-          !this.loadMoreActive &&
-          this.continueToLoadProducts
-        ) {
-          this.feed();
+        if (this.$route.name == "productList") {
+          if (
+            $(window).scrollTop() >=
+              ($(document).height() - $(window).height() - 100) / 2 &&
+            !this.loadMoreActive &&
+            this.continueToLoadProducts
+          ) {
+            this.feed();
+          }
         }
       });
     },

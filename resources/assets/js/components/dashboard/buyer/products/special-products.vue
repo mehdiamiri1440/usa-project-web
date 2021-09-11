@@ -127,6 +127,11 @@
 }
 
 @media screen and (max-width: 767px) {
+  .product-wrapper {
+    margin: 15px auto 100px;
+    overflow: hidden;
+  }
+
   #main-content {
     margin-top: 105px;
   }
@@ -358,7 +363,7 @@ export default {
           special_products: true,
           to_record_number: this.productCountInPage,
         })
-        .then( (response) => {
+        .then((response) => {
           this.products = response.data.products;
           this.loading = false;
           localStorage.removeItem("productCountInPage");
