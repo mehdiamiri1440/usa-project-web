@@ -176,15 +176,15 @@
     <p class="button-title">نوع کاربری فروشنده فعال است</p>
 
     <div class="radio-wrapper">
-      <div class="label-radio" :class="{ active: isSwitch }">
+      <div class="label-radio" :class="{ active: isSeller == 1 }">
         <input
           type="radio"
           value="0"
           :name="mobile == 1 ? 'mobileMyRadio' : 'myRadio'"
           @click="switchRole()"
-          :checked="isSwitch"
+          :checked="isSeller == 1"
         />
-        <span v-if="!isSwitch" class="checkmark"> </span>
+        <span v-if="isSeller == 0" class="checkmark"> </span>
         <span v-else class="checkmark active">
           <i class="fa fa-check"></i>
         </span>
@@ -217,14 +217,15 @@
           <span>فروشنده</span>
         </label>
       </div>
-      <div class="label-radio" :class="{ active: !isSwitch }">
+      <div class="label-radio" :class="{ active: isSeller == 0 }">
         <input
           type="radio"
           value="1"
           :name="mobile == 1 ? 'mobileMyRadio' : 'myRadio'"
-          :checked="!isSwitch"
+          :checked="isSeller == 0"
+          @click="switchRole()"
         />
-        <span v-if="isSwitch" class="checkmark"> </span>
+        <span v-if="isSeller == 1" class="checkmark"> </span>
         <span v-else class="checkmark active">
           <i class="fa fa-check"></i>
         </span>
@@ -273,7 +274,7 @@
 
 <script>
 export default {
-  props: ["mobile"],
+  props: ["mobile", "isSeller"],
   data() {
     return {
       isSwitch: false,

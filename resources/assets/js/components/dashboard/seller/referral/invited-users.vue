@@ -207,7 +207,7 @@
 .users-wrapper {
   padding: 15px;
   max-width: 700px;
-  margin: 20px auto;
+  margin: 20px auto 100px;
 }
 
 .spinner-wrapper {

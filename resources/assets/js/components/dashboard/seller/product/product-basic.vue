@@ -222,7 +222,7 @@
   }
 
   .success-register {
-    margin-top: -20px;
+    margin-top: -37px;
   }
 
   .success-register p {
@@ -304,7 +304,7 @@
       v-show="$route.name != 'successRegisterProduct'"
       class="main-content col-xs-12"
     >
-      <h2 class="section-title">ثبت محصول جدید</h2>
+      <h2 class="section-title hidden-xs hidden-sm">ثبت محصول جدید</h2>
       <div
         class="row wrapper-section"
         :class="{ 'empty-section': currentStep == 7 && buyAds.length == 0 }"
@@ -425,7 +425,6 @@ import Terms from "./register-product-steps/terms";
 import MoreDetails from "./register-product-steps/more_details";
 import FinishStage from "./register-product-steps/finish_stage";
 import imageuploadify from "../../../../imageuploadify.min";
-
 
 export default {
   components: {

@@ -275,6 +275,12 @@ img.image-blur:hover {
   content: "بستن -";
 }
 
+@media screen and (max-width: 991px) {
+  .footer-bottom {
+    padding: 20px 0 100px;
+  }
+}
+
 @media screen and (max-width: 767px) {
   .contact-us {
     border-top: 2px solid #000111;

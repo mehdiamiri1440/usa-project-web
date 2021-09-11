@@ -168,13 +168,17 @@ button.disable {
 
 .fix-request-bottom {
   position: fixed;
-  bottom: 0;
+  bottom: 58px;
   left: 0;
   z-index: 5;
   width: 100%;
   background: #fff;
   border-radius: 0;
   padding: 10px 0;
+}
+
+.fix-request-bottom .green-button {
+  border-radius: 8px;
 }
 .request-update button {
   margin: 0;
@@ -456,13 +460,33 @@ button.disable {
   text-align: center !important;
 }
 
+.mobile-filter-button {
+  position: fixed;
+  background: #fff;
+  top: 42px;
+  width: 100%;
+  z-index: 1010;
+  padding: 7px 0px;
+}
+
+.mobile-filter-button.active-verification-alert {
+  top: 82px;
+}
+
 @media screen and (max-width: 991px) {
+  .active-category-filter {
+    padding-top: 50px;
+  }
+
   .fix-request-header-box,
   .title {
     right: 0;
   }
   .default-list-title {
     padding: 4px 15px;
+  }
+  .requests .main-content {
+    padding: 0 0 150px !important;
   }
 }
 @media screen and (max-width: 767px) {
@@ -510,9 +534,7 @@ button.disable {
   .wrapper-items {
     padding: 0;
   }
-  .requests .main-content {
-    padding: 0 0 100px !important;
-  }
+
   .title {
     position: relative;
     z-index: 0;
@@ -566,12 +588,7 @@ button.disable {
   <div>
     <CategoriesModal :categoryList="categoryList" />
     <div
-      class="
-        fix-request-bottom
-        hidden-sm hidden-md hidden-lg
-        shadow-content
-        text-center
-      "
+      class="fix-request-bottom hidden-md hidden-lg shadow-content text-center"
     >
       <div class="col-xs-12 text-right">
         <button
@@ -586,7 +603,7 @@ button.disable {
     </div>
     <div class="requests" v-show="isRequests">
       <section class="main-content col-xs-12 padding-0-15'">
-        <div class="title">
+        <div class="title hidden-xs hidden-sm">
           <div class="row">
             <div class="col-xs-12 text-rtl text-right col-sm-8 pull-right">
               <h1>
@@ -625,7 +642,25 @@ button.disable {
             </div>
           </div>
         </div>
-        <div v-if="buyAds.length != 0">
+        <div
+          class="mobile-filter-button text-rtl hiddne-md hidden-lg"
+          :class="{ 'active-verification-alert': $parent.verificationAlert }"
+          v-if="filterCategory"
+        >
+          <button
+            class="green-button remove-filter-button"
+            @click.prevent="filterCategory = ''"
+          >
+            <span class="red-text remove-filter-icon">
+              <i class="fa fa-times"></i>
+            </span>
+            <span v-text="'دسته بندی : ' + filterCategory.category_name"></span>
+          </button>
+        </div>
+        <div
+          v-if="buyAds.length != 0"
+          :class="{ 'active-category-filter': filterCategory }"
+        >
           <ul class="list-unstyled wrapper-items">
             <li v-for="(buyAd, index) in buyAds" :key="index">
               <div v-if="buyAd.has_msg || buyAd.has_phone">
@@ -1228,14 +1263,18 @@ export default {
     openCategoryModal() {
       $("#categories-modal").modal("show");
     },
-    filterBuyAdByCategory: function () {
+    filterBuyAdByCategory() {
       this.buyAds = "";
       this.isRequests = true;
       if (this.filterCategory.id) {
         let filterBuyAd = this.allBuyAds;
+        if (!Array.isArray(filterBuyAd)) {
+          filterBuyAd = Object.values(filterBuyAd);
+        }
         filterBuyAd = filterBuyAd.filter(
           (buyAd) => buyAd.category_id == this.filterCategory.id
         );
+
         this.buyAds = filterBuyAd;
       } else {
         this.buyAds = this.allBuyAds;
@@ -1259,7 +1298,7 @@ export default {
     gtag("config", "UA-129398000-1", { page_path: "/buyAd-requests" });
   },
   watch: {
-    filterCategory: function () {
+    filterCategory() {
       this.filterBuyAdByCategory();
     },
   },

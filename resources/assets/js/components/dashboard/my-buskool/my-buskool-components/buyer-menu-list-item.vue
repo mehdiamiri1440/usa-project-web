@@ -61,7 +61,7 @@ a.active {
 
 .custom-badge {
   position: absolute;
-  left: 20px;
+  left: 30px;
   background: #e41c38;
   height: 20px;
   border-radius: 20px;
@@ -72,7 +72,7 @@ a.active {
   padding: 5px 3px;
   min-width: 20px;
   font-size: 12px;
-  top: 9px;
+  top: 22px;
 }
 
 .custom-badge.upgrade {
@@ -250,10 +250,6 @@ a.active {
         </li>
 
         <li class="list-item">
-          <!-- <router-link :to="{ name: 'supportBuyer' }">
-            <i class="fas fa-sign-out-alt"></i>
-            <span>خروج</span>
-          </router-link> -->
           <a href="/logout"> <i class="fas fa-sign-out-alt"></i> خروج </a>
         </li>
       </ul>

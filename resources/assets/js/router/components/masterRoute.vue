@@ -62,6 +62,19 @@ export default {
       provinceList: "",
       modalSubCategory: false,
       mainSubCategories: "",
+      currentUser: {
+        profile: {
+          is_company: "",
+          company_name: "",
+          company_register_code: "",
+          address: "",
+          public_phone: "",
+          profile_photo: this.storage + "",
+          postal_code: "",
+          shaba_code: "",
+        },
+        user_info: "",
+      },
     };
   },
   methods: {
@@ -79,6 +92,11 @@ export default {
   },
   mounted() {
     this.getCategories();
+  },
+  watch: {
+    currentUser(user) {
+      this.$parent.currentUser = user;
+    },
   },
 };
 </script>

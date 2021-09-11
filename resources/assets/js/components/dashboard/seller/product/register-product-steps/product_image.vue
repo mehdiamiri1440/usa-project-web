@@ -102,6 +102,9 @@ label {
   .title-contents {
     margin-top: 40px;
   }
+  .submit-button-wrapper {
+    margin: 15px auto 100px;
+  }
 }
 </style>
 

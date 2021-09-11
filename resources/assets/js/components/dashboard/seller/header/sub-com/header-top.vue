@@ -45,7 +45,6 @@
 }
 
 .main-header {
-  min-height: 59px;
   position: fixed;
   left: 0;
   right: 250px;
@@ -502,6 +501,26 @@ a.profile-info-wrapper:focus {
   perspective: 1000px;
 }
 
+.mobile-header-title {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 500;
+  color: #333;
+  padding: 11px 5px;
+  line-height: 1;
+  position: relative;
+}
+
+.mobile-header-title button {
+  position: absolute;
+  right: 0;
+  top: 0;
+  border: none;
+  padding: 10px 15px;
+  line-height: 1;
+  background: none;
+}
+
 @keyframes shake {
   10%,
   90% {
@@ -896,8 +915,7 @@ export default {
   methods: {
     init: function () {
       this.closeCollapses();
-            this.checkName(this.$route.name);
-
+      this.checkName(this.$route.name);
     },
     closeCollapses: function () {
       $(document).on("click", function (e) {
@@ -914,13 +932,17 @@ export default {
         }
       });
     },
-     registerComponentStatistics: function (categoryName, actionName, labelName) {
-    gtag("event", actionName, {
-      event_category: categoryName,
-      event_label: labelName,
-    });
-  },
-  checkName(routeName) {
+    registerComponentStatistics: function (
+      categoryName,
+      actionName,
+      labelName
+    ) {
+      gtag("event", actionName, {
+        event_category: categoryName,
+        event_label: labelName,
+      });
+    },
+    checkName(routeName) {
       this.pages.map((item) => {
         if (item.name == routeName) {
           this.pageTitle = item.title;
@@ -940,7 +962,7 @@ export default {
       this.activeElement = event;
     });
   },
-   watch: {
+  watch: {
     "$route.name"(route) {
       this.checkName(route);
     },

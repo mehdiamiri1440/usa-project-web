@@ -29,7 +29,7 @@
   width: 60px;
   height: 60px;
   right: 25px;
-  bottom: 25px;
+  bottom: 75px;
   font-weight: bold;
   font-size: 10px;
   background: #e51c38;
@@ -197,6 +197,9 @@
   }
   #main.is-required-fix-alert {
     margin-top: 89px !important;
+  }
+  #main.has-verification-alert {
+    margin-top: 81px;
   }
 }
 

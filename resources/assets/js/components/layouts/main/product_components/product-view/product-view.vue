@@ -276,6 +276,9 @@ button.send-message-button {
   .default-carousel-item:nth-child(3) {
     display: none;
   }
+  .fix-send-message-wrapper {
+    bottom: 59px;
+  }
 }
 
 @media screen and (max-width: 767px) {
@@ -940,10 +943,10 @@ export default {
 
       // eventBus.$emit("productId", this.product.main.id);
       // eventBus.$emit("modal", "elevator");
-        let paymentData = {
+      let paymentData = {
         paymentName: "elevatorPricingData",
         productId: this.product.main.id,
-        totalPrice:"25000"
+        totalPrice: "25000",
       };
       eventBus.$emit("peymentMethodData", paymentData);
       $("#payment-type-modal").modal("show");

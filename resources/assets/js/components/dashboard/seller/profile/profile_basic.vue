@@ -1197,7 +1197,7 @@ textarea.error:focus + i {
       </div>
     </div>
     <div class="row">
-      <div class="col-xs-12 text-center margin-15-auto">
+      <div class="col-xs-12 text-center margin-15-auto margin-bottom-100">
         <button
           @click="RegisterBasicProfileInfo()"
           :disabled="isLoaded"

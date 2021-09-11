@@ -3,7 +3,7 @@
 .main-buskool-wrapper {
   max-width: 600px;
   border: 1px solid #e0e0e0;
-  margin: 50px auto;
+  margin: 150px auto;
   border-radius: 12px;
   padding: 20px 15px;
 }
@@ -39,8 +39,9 @@
   padding: 15px 10px;
   background: linear-gradient(#f6566c, #e62540);
   overflow: hidden;
+  border: none;
   border-top: 10px solid #ebebeb;
-  margin: 0 -15px;
+  width: 100%;
 }
 
 .invite-box {
@@ -66,16 +67,13 @@
   padding: 25px 15px 25px 0;
   width: calc(100% - 110px);
   line-height: 1.618;
+  text-align: right;
 }
 
 .invite-content p {
   font-size: 18px;
   color: #444;
   font-weight: 500;
-}
-
-.invited-users {
-  margin: 0 -15px;
 }
 
 .invited-users button {
@@ -133,6 +131,7 @@
 
 @media screen and (max-width: 991px) {
   .main-buskool-wrapper {
+    margin: 50px auto;
     padding: 0px 15px;
     margin-bottom: 65px;
     border: none;
@@ -152,7 +151,10 @@
 
     <div
       class="promotion-wrapper"
-      v-if="$parent.currentUser.user_info.is_seller == 1"
+      v-if="
+        $parent.currentUser.user_info.is_seller == 1 &&
+        $parent.currentUser.user_info.active_pakage_type == 0
+      "
     >
       <router-link
         :to="{ name: 'dashboardPricingTableSeller' }"
@@ -165,38 +167,43 @@
       </router-link>
     </div>
 
-    <div
-      class="invite-section"
-      v-if="$parent.currentUser.user_info.is_seller == 1"
-    >
-      <div class="invite-box">
-        <div class="invite-image-wrapper pull-left">
-          <img src="../../../../img/alert-image.svg" alt="promotion text" />
+    <div class="row">
+      <router-link
+        :to="{ name: 'referralSeller' }"
+        tag="button"
+        class="invite-section"
+        v-if="$parent.currentUser.user_info.is_seller == 1"
+      >
+        <div class="invite-box">
+          <div class="invite-image-wrapper pull-left">
+            <img src="../../../../img/alert-image.svg" alt="promotion text" />
+          </div>
+          <div class="invite-content text-rtl pull-right">
+            <p>با معرفی باسکول به همکارانتان, کسب در آمد کنید!</p>
+            <button class="bg-red">کسب در آمد</button>
+          </div>
         </div>
-        <div class="invite-content text-rtl pull-right">
-          <p>با معرفی باسکول به همکارانتان, کسب در آمد کنید!</p>
-          <button class="bg-red">کسب در آمد</button>
-        </div>
-      </div>
-    </div>
-    <div
-      class="invited-users"
-      v-if="$parent.currentUser.user_info.is_seller == 1"
-    >
-      <button>
-        <i class="fa fa-angle-left"></i>
-        <span class="button-text"> درآمد ها </span>
+      </router-link>
+      <div
+        class="invited-users"
+        v-if="$parent.currentUser.user_info.is_seller == 1"
+      >
+        <router-link tag="button" :to="{ name: 'invitedUsers' }">
+          <i class="fa fa-angle-left"></i>
+          <span class="button-text"> درآمد ها </span>
 
-        <i class="fa fa-dollar-sign button-icon"></i>
-      </button>
+          <i class="fa fa-dollar-sign button-icon"></i>
+        </router-link>
+      </div>
     </div>
 
     <div class="menu-list text-rtl">
-      <BuyerMenuList />
+      <SellerMenuList v-if="$parent.currentUser.user_info.is_seller == 1" />
+      <BuyerMenuList v-else />
     </div>
     <div class="switch-wrapper row">
-      <SwitchButtons />
-      <div class="image-wrapper">
+      <SwitchButtons :isSeller="$parent.currentUser.user_info.is_seller" />
+      <div class="my-biskool-image-wrapper">
         <img src="../../../../img/my-buskool.jpg" alt="my buskool" />
       </div>
     </div>
@@ -212,6 +219,7 @@ import SwitchButtons from "./my-buskool-components/swith-buttons.vue";
 export default {
   components: {
     ProfileInfo,
+    SellerMenuList,
     BuyerMenuList,
     SwitchButtons,
   },

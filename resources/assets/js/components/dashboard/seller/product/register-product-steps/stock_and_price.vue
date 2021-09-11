@@ -150,6 +150,9 @@ input.error:focus + i {
   .input-wrapper::after {
     left: 14px;
   }
+  .action-control-wrapper {
+    padding: 20px 15px 150px;
+  }
 }
 </style>
 

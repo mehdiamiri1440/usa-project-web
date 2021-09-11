@@ -255,9 +255,9 @@ nav.navbar.navbar-category {
   border-bottom: none !important;
 }
 
-nav.navbar.navbar-category .search-input {
+/* nav.navbar.navbar-category .search-input {
   margin-bottom: 0;
-}
+} */
 
 .buskool-main-nav {
   border-bottom: 1px solid #fafafa;
@@ -782,14 +782,13 @@ a.profile-info-wrapper:hover {
 
   .buskool-logo {
     margin: 0 auto;
-    position: absolute;
-    right: calc(50% - 50px);
   }
 
   .buskool-main-nav {
     padding: 6px 0 1px;
     border-bottom: none;
     margin: 0 10px;
+    display: flex;
   }
 
   .search-input {
@@ -937,16 +936,6 @@ a.profile-info-wrapper:hover {
 }
 
 @media screen and (max-width: 550px) {
-  .buskool-logo {
-    margin: 0 auto;
-
-    float: right;
-
-    position: relative;
-
-    right: calc(50% - 95px);
-  }
-
   .buskool-logo .navbar-brand {
     width: 100px;
 
@@ -1111,7 +1100,7 @@ a.profile-info-wrapper:hover {
       }"
     >
       <div class="container-fluid buskool-main-nav">
-        <div class="hidden-md hidden-sm hidden-lg mobile-menu-button">
+        <div class="hidden mobile-menu-button">
           <button
             type="button"
             class="navbar-toggle"
@@ -1136,7 +1125,7 @@ a.profile-info-wrapper:hover {
           </router-link>
         </div>
 
-        <div class="user-auth-info-wrapper navbar-nav">
+        <div class="user-auth-info-wrapper navbar-nav hidden-xs">
           <ul v-if="user_id != ''" class="nav navbar-nav">
             <li>
               <a

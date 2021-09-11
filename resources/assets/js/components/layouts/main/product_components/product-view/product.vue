@@ -234,7 +234,7 @@ label {
   max-width: 225px;
   width: 100% !important;
   border-radius: 12px;
-  margin: 15px 0;
+  margin: 15px 5px;
   padding: 10px 15px 9px;
   border: none;
   color: #fff;
