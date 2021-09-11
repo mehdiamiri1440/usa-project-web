@@ -201,7 +201,6 @@
             <ProductGridArticle
               :product="product"
               :str="str"
-              :currentUser="currentUser"
               :productIndex="productIndex"
             />
           </div>
@@ -334,7 +333,6 @@ export default {
         },
         photos: [],
       },
-      currentUser: "",
       categoryId: "",
       subCategoryId: "",
       searchValue: "",
@@ -349,31 +347,23 @@ export default {
   },
   methods: {
     init: function () {
-      var self = this;
-
       this.loading = true;
-
       this.$parent.searchText = "";
-
+      this.getProducts();
+    },
+    getProducts() {
       axios
-        .post("/user/profile_info")
-        .then(function (response) {
-          self.currentUser = response.data;
-
-          axios
-            .post("/user/get_product_list", {
-              from_record_number: 0,
-              special_products: true,
-              to_record_number: self.productCountInPage,
-            })
-            .then(function (response) {
-              self.products = response.data.products;
-              self.loading = false;
-              localStorage.removeItem("productCountInPage");
-              eventBus.$emit("submiting", false);
-            });
+        .post("/user/get_product_list", {
+          from_record_number: 0,
+          special_products: true,
+          to_record_number: this.productCountInPage,
         })
-        .catch((error) => reject(error));
+        .then( (response) => {
+          this.products = response.data.products;
+          this.loading = false;
+          localStorage.removeItem("productCountInPage");
+          eventBus.$emit("submiting", false);
+        });
     },
     feed() {
       this.loading = true;

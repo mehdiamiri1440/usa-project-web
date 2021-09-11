@@ -2113,9 +2113,7 @@ export default {
         .catch(function (err) {
           //
         });
-      axios.post("/user/profile_info").then((response) => {
-        this.currentUser = response.data;
-      });
+      this.checkCurrentUser();
 
       axios
         .post("/load_profile_by_user_name", {
@@ -2142,6 +2140,11 @@ export default {
             window.location.href = "/404";
           }
         });
+    },
+    checkCurrentUser() {
+      if (this.$parent.currentUser.user_info) {
+        this.currentUser = this.$parent.currentUser;
+      }
     },
     getProfileOwnerProducts: function () {
       this.registerComponentStatistics(
@@ -2244,51 +2247,13 @@ export default {
       } else {
         let url =
           baseUrl + "shared-profile/" + this.profileOwner.user_info.user_name;
-           let shareItem = {
-        shareModalUrl:url,
-shareModalText:'',
-      }
+        let shareItem = {
+          shareModalUrl: url,
+          shareModalText: "",
+        };
         eventBus.$emit("shareModalUrl", shareItem);
       }
     },
-    // copyProfileLinkToClipBoard: function () {
-    //   this.registerComponentStatistics(
-    //     "profileView",
-    //     "CopyProfileLink",
-    //     "click on copy profile link"
-    //   );
-    //   let base = getBase();
-
-    //   if (this.isDeviceMobile()) {
-    //     var linkElement = document.createElement("a");
-    //     var Message =
-    //       base + "shared-profile/" + this.profileOwner.user_info.user_name;
-    //     var messageToWhatsApp = encodeURIComponent(Message);
-    //     var url = "whatsapp://send?text=" + messageToWhatsApp;
-    //     linkElement.setAttribute("href", url);
-    //     linkElement.setAttribute("data-action", "share/whatsapp/share");
-    //     document.body.appendChild(linkElement);
-
-    //     linkElement.click();
-
-    //     document.body.removeChild(linkElement);
-    //   } else {
-    //     var input = document.createElement("input");
-    //     input.setAttribute(
-    //       "value",
-    //       base + "shared-profile/" + this.profileOwner.user_info.user_name
-    //     );
-    //     document.body.appendChild(input);
-    //     input.select();
-    //     var result = document.execCommand("copy");
-    //     document.body.removeChild(input);
-    //     if (result) {
-    //       this.popUpMsg = "آدرس پروفایل کاربر کپی شد.";
-    //       eventBus.$emit("submitSuccess", this.popUpMsg);
-    //       $("#custom-main-modal").modal("show");
-    //     }
-    //   }
-    // },
     isDeviceMobile: function () {
       if (
         navigator.userAgent.match(/Android/i) ||
@@ -2472,6 +2437,9 @@ shareModalText:'',
           this.activeComponentTooltip();
         }, 10);
       }
+    },
+    "$parent.currentUser"(user) {
+      this.checkCurrentUser();
     },
   },
   metaInfo() {

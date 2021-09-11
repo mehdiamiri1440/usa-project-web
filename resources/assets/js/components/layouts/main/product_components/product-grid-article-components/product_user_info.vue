@@ -183,7 +183,6 @@ export default {
     "user_info",
     "user_full_name",
     "user_name",
-    "current_user",
     "product_id",
     "is_my_profile_status",
   ],
@@ -195,67 +194,11 @@ export default {
     };
   },
   methods: {
-    openChat: function (product) {
-      this.registerComponentStatistics(
-        "product",
-        "openChat",
-        "click on open chatBox"
-      );
-
-      let productName =
-        product.main.sub_category_name + " " + product.main.product_name;
-      var contact = {
-        contact_id: this.user_info.id,
-        first_name: this.user_info.first_name,
-        last_name: this.user_info.last_name,
-        profile_photo: this.profile_photo,
-        user_name: this.user_info.user_name,
-        product_name: productName,
-      };
-      var self = this;
-
-      if (this.current_user.user_info) {
-        if (this.current_user.user_info.id !== this.user_info.id) {
-          eventBus.$emit("ChatInfo", contact);
-          // window.localStorage.setItem("contact", JSON.stringify(contact));
-
-          // this.$router.push({name : 'registerInquiry'});
-        } else {
-          this.popUpMsg = "شما نمی توانید به خودتان پیام دهید.";
-          eventBus.$emit("submitSuccess", this.popUpMsg);
-          $("#custom-main-modal").modal("show");
-        }
-      } else {
-        window.localStorage.setItem("contact", JSON.stringify(contact));
-        // this.$router.push({ name: "registerInquiry" });
-        eventBus.$emit("modal", "sendMsg");
-      }
-    },
     scrollToTheRequestRegisterBox: function (element) {
       var newPosition = $(element).offset();
       $("html, body")
         .stop()
         .animate({ scrollTop: newPosition.top - 380 }, 1000);
-    },
-    deleteProduct: function () {
-      //show modal
-      // this.popUpMsg = "آیا محصول حذف شود؟";
-      // this.deleteButtonText = "حذف";
-      // this.cancelButtonText = "انصراف";
-
-      // eventBus.$emit("submitSuccess", this.popUpMsg);
-      // eventBus.$emit("deleteButtonText", this.deleteButtonText);
-      // eventBus.$emit("cancelButtonText", this.cancelButtonText);
-      eventBus.$emit("productId", this.product_id);
-      eventBus.$emit("modal", "deleteProduct");
-
-      // $("#deleteModal").modal("show");
-
-      this.registerComponentStatistics(
-        "product",
-        "delete-product",
-        "click on delete product-btn"
-      );
     },
     registerComponentStatistics: function (
       categoryName,

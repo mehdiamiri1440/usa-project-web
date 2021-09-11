@@ -151,7 +151,7 @@ input.error:focus + i {
     left: 14px;
   }
   .action-control-wrapper {
-    padding: 20px 15px 150px;
+    padding: 20px 15px 100px;
   }
 }
 </style>

@@ -576,45 +576,45 @@ export default {
   methods: {
     init: function () {
       this.isLoading = true;
-      var self = this;
-      axios.post("/user/profile_info").then(function (response) {
-        if (response.data.status) {
-          self.currentUser = response.data;
+      
+      this.checkCurrentUser();
 
-          if (self.currentUser.user_info) {
-            if (self.currentUser.user_info.is_seller == true) {
-              self.showRegisterRequestBox = false;
-            }
-          }
-        }
+      
+    },
+    checkCurrentUser() {
+      var self = this;
+      
+      if (this.$parent.currentUser.user_info) {
+        this.currentUser = this.$parent.currentUser;
+              let userId = getUserId();
 
         axios
-          .post("/get_product_by_id", {
-            product_id: self.$route.params.id,
-          })
-          .then(function (response) {
-            self.product = response.data.product;
-
-            self.categoryUrl =
-              "/product-list/category/" + self.getCategoryName();
-            self.starScore = Math.floor(
-              self.product.user_info.review_info.avg_score
-            );
-            if (self.currentUser.user_info) {
-              if (
-                self.currentUser.user_info.id === self.product.main.myuser_id
-              ) {
-                self.isMyProfile = true;
-                self.$emit("isMyProfile", self.isMyProfile);
-              }
+        .post("/get_product_by_id", {
+          product_id: self.$route.params.id,
+        })
+        .then(function (response) {
+          self.product = response.data.product;
+          if (userId) {
+            if (userId === self.product.main.myuser_id) {
+              self.isMyProfile = true;
+              self.$emit("isMyProfile", self.isMyProfile);
             }
-            self.sidebarScroll();
-            self.getBreadCrumbs();
-          })
-          .catch(function (err) {
-            window.location.href = "/404";
-          });
-      });
+          }
+          self.categoryUrl = "/product-list/category/" + self.getCategoryName();
+          self.starScore = Math.floor(
+            self.product.user_info.review_info.avg_score
+          );
+
+          self.sidebarScroll();
+          self.getBreadCrumbs();
+        })
+        .catch(function (err) {
+          window.location.href = "/404";
+        });
+        if (this.currentUser.user_info.is_seller == true) {
+          this.showRegisterRequestBox = false;
+        }
+      }
     },
     openChat: function (product) {
       this.isChat = true;
@@ -658,26 +658,6 @@ export default {
     loginModal(isChat) {
       this.isChat = isChat;
       $("#register-modal").modal("show");
-      // swal({
-      //   title: "ارتباط با مخاطب",
-      //   icon: "info",
-      //   text:
-      //     "برای ارتباط با هزاران خریدار و فروشنده در باسکول ابتدا ثبت نام کنید.",
-      //   className: "custom-swal-with-cancel",
-      //   buttons: {
-      //     success: {
-      //       text: "ورود سریع / ثبت نام",
-      //     },
-      //     close: {
-      //       text: "بستن",
-      //       className: "bg-cancel",
-      //     },
-      //   },
-      // }).then((value) => {
-      //   if (value == "success") {
-      //     this.$router.push({ name: "register" });
-      //   }
-      // });
     },
     openChatModal: function (product) {
       this.isChat = true;
@@ -1037,6 +1017,9 @@ export default {
       this.isMyProfile = false;
       this.product.main.id = "";
       this.init();
+    },
+    "$parent.currentUser"(user) {
+      this.checkCurrentUser();
     },
   },
   metaInfo() {

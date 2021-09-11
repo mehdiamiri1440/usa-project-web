@@ -26,6 +26,7 @@
       :user-type="isSeller"
       :verifiedUserContent="verifiedUserContent"
       :categoryList="categoryList"
+      :currentUser="currentUser"
     ></router-view>
 
     <footer-master-layouts />
@@ -89,14 +90,16 @@ export default {
         this.$router.push({ path: url });
       });
     },
+    getCurrentUser() {
+      axios.post("/user/profile_info").then((response) => {
+        this.currentUser = response.data;
+        this.$parent.currentUser = response.data;
+      });
+    },
   },
   mounted() {
+    this.getCurrentUser();
     this.getCategories();
-  },
-  watch: {
-    currentUser(user) {
-      this.$parent.currentUser = user;
-    },
   },
 };
 </script>
