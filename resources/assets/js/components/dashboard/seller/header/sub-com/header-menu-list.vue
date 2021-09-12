@@ -34,7 +34,7 @@ a.active {
 }
 
 .header-menu {
-  padding: 0 10px;
+  padding: 20px 10px;
 }
 
 .header-menu a:hover {
@@ -115,7 +115,7 @@ a.active {
 }
 
 .list-item {
-  padding-bottom: 2px;
+  padding-bottom: 6px;
 }
 @keyframes gradient {
   0% {
@@ -183,12 +183,6 @@ a.active {
       <div class="header-menu">
         <ul class="list-unstyled">
           <li class="list-item">
-            <router-link :to="{ name: 'statusSeller' }">
-              <i class="fa fa-chart-line"></i>
-              <span>داشبورد</span>
-            </router-link>
-          </li>
-          <li class="list-item">
             <router-link :to="{ name: 'myBuskoolSeller' }">
               <i class="buskool-icon-wrapper">
                 <svg
@@ -227,7 +221,6 @@ a.active {
               <span>باسکول من</span>
             </router-link>
           </li>
-
           <li class="list-item">
             <router-link :to="{ name: 'buyAdRequestsSeller' }">
               <i class="fa fa-list-alt" aria-hidden="true"></i>
@@ -279,19 +272,6 @@ a.active {
             </router-link>
           </li>
 
-          <li class="list-item">
-            <router-link :to="{ name: 'profileBasicSeller' }">
-              <i class="fa fa-user" aria-hidden="true"></i>
-              <span>ویرایش پروفایل</span>
-            </router-link>
-          </li>
-
-          <li class="list-item">
-            <router-link :to="{ name: 'myProductsSeller' }">
-              <i class="fas fa-list-ol" aria-hidden="true"></i>
-              <span>محصولات من</span>
-            </router-link>
-          </li>
           <li
             v-show="$parent.currentUser.user_info.active_pakage_type < 3"
             class="list-item"
@@ -311,19 +291,6 @@ a.active {
                 <i class="fa fa-certificate"></i>
               </span>
               <span>احراز هویت</span>
-            </router-link>
-          </li>
-          <li class="list-item">
-            <router-link :to="{ name: 'guideSeller' }">
-              <i class="fa fa-question" aria-hidden="true"></i>
-              <span>راهنما</span>
-            </router-link>
-          </li>
-
-          <li class="list-item">
-            <router-link :to="{ name: 'supportSeller' }">
-              <i class="fas fa-headset"></i>
-              <span>پشتیبانی</span>
             </router-link>
           </li>
           <li class="list-item">

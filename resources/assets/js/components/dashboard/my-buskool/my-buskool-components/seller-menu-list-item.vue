@@ -176,11 +176,35 @@ a.active {
   font-size: 12px;
   font-weight: 200;
 }
+
+.wallet-badge {
+  position: absolute;
+  top: 24px;
+  left: 30px;
+}
 </style>
 <template>
   <div>
     <div class="main-menu">
       <ul class="list-unstyled">
+        <li class="list-item hidden-md hidden-lg">
+          <a href="#" @click.prevent="showWallet()">
+            <i class="fa fa-wallet"></i>
+            <span>کیف پول شما</span>
+            <span class="wallet-badge">
+              اعتبار :
+              <span
+                class="blue-text"
+                v-text="
+                  getNumberWithCommas(
+                    $parent.currentUser.user_info.wallet_balance
+                  )
+                "
+              ></span>
+              <small class="blue-text">تومان</small>
+            </span>
+          </a>
+        </li>
         <li class="list-item">
           <router-link :to="{ name: 'statusSeller' }">
             <i class="fa fa-chart-line"></i>
@@ -254,7 +278,7 @@ a.active {
         </li>
         <li
           v-show="$parent.currentUser.user_info.active_pakage_type < 3"
-          class="list-item"
+          class="list-item hidden-md hidden-lg"
         >
           <router-link
             id="pricing-link"
@@ -332,6 +356,14 @@ export default {
           this.activeElement = null;
         }
       }
+    },
+    showWallet: function () {
+      $("#wallet-modal").modal("show");
+    },
+    getNumberWithCommas: function (number) {
+      if (number || typeof number === "number")
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      else return "";
     },
   },
   watch: {

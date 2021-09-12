@@ -34,7 +34,7 @@ a.active {
 }
 
 .header-menu {
-  padding: 0 10px;
+  padding: 20px 10px;
 }
 
 .header-menu a:hover {
@@ -115,7 +115,7 @@ a.active {
 }
 
 .list-item {
-  padding-bottom: 2px;
+  padding-bottom: 6px;
 }
 @keyframes gradient {
   0% {
@@ -217,12 +217,6 @@ a.active {
             <span>باسکول من</span>
           </router-link>
         </li>
-        <li class="list-item">
-          <router-link :to="{ name: 'profileBasicBuyer' }">
-            <i class="fa fa-user" aria-hidden="true"></i>
-            <span>ویرایش پروفایل</span>
-          </router-link>
-        </li>
 
         <li class="list-item">
           <router-link :to="{ name: 'registerRequestBuyer' }">
@@ -257,30 +251,11 @@ a.active {
         </li>
 
         <li class="list-item">
-          <router-link :to="{ name: 'myBuyAdRequestsBuyer' }">
-            <i class="fa fa-list-alt" aria-hidden="true"></i>
-            <span>درخواست های من</span>
-          </router-link>
-        </li>
-        <li class="list-item">
           <router-link :to="{ name: 'profileBasicBuyerVeficiation' }">
             <span class="verified-user" title>
               <i class="fa fa-certificate"></i>
             </span>
             <span>احراز هویت</span>
-          </router-link>
-        </li>
-        <li class="list-item">
-          <router-link :to="{ name: 'guideBuyer' }">
-            <i class="fa fa-question-circle" aria-hidden="true"></i>
-            <span>راهنما</span>
-          </router-link>
-        </li>
-
-        <li class="list-item">
-          <router-link :to="{ name: 'supportBuyer' }">
-            <i class="fas fa-headset"></i>
-            <span>پشتیبانی</span>
           </router-link>
         </li>
         <li class="list-item">
