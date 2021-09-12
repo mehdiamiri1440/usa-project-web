@@ -85,7 +85,8 @@ class phone_number_controller extends Controller
                 $this->insert_phone_number_view_log_record($viewer_user_id,$request->s_id,'SELLER',$request->item,false);
                 
                 $wallet_controller_object = new wallet_controller();
-                $wallet_controller_object->insert_expendig_log_record(1,$request->s_id);
+                $unit_cost = config("subscriptionPakage.phone-number.view-price");
+                $wallet_controller_object->insert_expendig_log_record('phone-number-view',$unit_cost,$request->s_id);
             }
             else{
                 $this->insert_phone_number_view_log_record($viewer_user_id,$request->s_id,'SELLER',$request->item,true);

@@ -505,6 +505,7 @@ class product_controller extends Controller
         }
 
         unset($product_related_data['user_info']->phone_view_permission);
+        unset($product_related_data['user_info']->wallet_balance);
 
         DB::table('products')->where('id',$product->id)->increment('product_view_count');
 
@@ -1530,8 +1531,6 @@ class product_controller extends Controller
             $product_related_data['user_info']->has_phone = false;
         }
 
-        unset($product_related_data['user_info']->wallet_balance);
-        unset($product_related_data['user_info']->phone_view_permission);
 
         $product_related_data['profile_info'] = new \StdClass;
         foreach($product_required_properties['profile_records'] as $property_name)

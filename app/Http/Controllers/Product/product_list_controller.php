@@ -214,7 +214,9 @@ class product_list_controller extends Controller
         else{
             $products = $this->get_all_products_with_related_media();
 
-            Cache::put($cache_key,$products,30);  
+            if(! Cache::has($cache_key)){
+                Cache::put($cache_key,$products,30);
+            }    
         }
 
         return $products;

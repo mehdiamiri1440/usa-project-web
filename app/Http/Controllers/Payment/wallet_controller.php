@@ -12,6 +12,8 @@ use App\Models\product;
 use DB;
 use App\Models\premium_service;
 use App\Traits\Payment;
+use App\Http\Controllers\Payment\payment_controller;
+
 
 class wallet_controller extends Controller
 {
@@ -145,11 +147,9 @@ class wallet_controller extends Controller
         return redirect('/pricing');  
     }
 
-    public function insert_expendig_log_record($service_id,$user_id,$count = 1)
+    public function insert_expendig_log_record($service_name,$unit_cost,$user_id,$count = 1)
     {
-        $service_record = premium_service::find($service_id);
-
-        $amount = $service_record->current_unit_cost * $count;
+        $amount = $unit_cost * $count;
 
         $is_balance_updated = $this->update_user_account_balance($amount,$user_id);
 
@@ -160,7 +160,7 @@ class wallet_controller extends Controller
                     ->insert([
                         'created_at' => $now,
                         'updated_at' => $now,
-                        'service_id' => $service_record->id,
+                        'service_name' => $service_name,
                         'myuser_id'  => $user_id,
                         'amount'     => $amount,
                         'count'      => $count
@@ -216,7 +216,8 @@ class wallet_controller extends Controller
                     'elevator_expiry' => $elevator_expiry
                 ]);
 
-        $this->insert_expendig_log_record(2,$user_id);
+        $unit_cost = config("subscriptionPakage.elevator.price") / 10;
+        $this->insert_expendig_log_record('product-elevator',$unit_cost,$user_id);
 
         return response()->json([
             'status' => true,
@@ -249,7 +250,8 @@ class wallet_controller extends Controller
                     ->where('id',$user_record->id)
                     ->increment('extra_buyAd_reply_capacity',$extra_capacity_count);
 
-            $this->insert_expendig_log_record(3,$user_id,$extra_capacity_count);
+            $unit_cost = config("subscriptionPakage.buyAd-capacity-price") / 10;
+            $this->insert_expendig_log_record('buyAd-capacity',$unit_cost,$user_id,$extra_capacity_count);
 
             return response()->json([
                 'status' => true,
@@ -289,7 +291,8 @@ class wallet_controller extends Controller
                     ->where('id',$user_record->id)
                     ->increment('extra_product_capacity',$extra_capacity_count);
 
-            $this->insert_expendig_log_record(4,$user_id,$extra_capacity_count);
+            $unit_cost = config("subscriptionPakage.product-capacity-price") / 10;
+            $this->insert_expendig_log_record('product-capacity',$unit_cost,$user_id,$extra_capacity_count);
 
             return response()->json([
                 'status' => true,
@@ -338,14 +341,9 @@ class wallet_controller extends Controller
                                 'pakage_end' => Carbon::now()->addMonths(config("subscriptionPakage.type-$package_type.pakage-duration-in-months"))
                             ]);
 
-        switch($package_type){
-            case 1 :
-                $this->insert_expendig_log_record(5,$user_id);
-                break;
-            case 3:
-                $this->insert_expendig_log_record(6,$user_id);
-                break;
-        }
+        $unit_cost = $this->get_package_price($package_type,$user_id) / 10;
+
+        $this->insert_expendig_log_record("package-type-$package_type",$unit_cost,$user_id);
 
         return response()->json([
             'status' => true,
@@ -377,5 +375,15 @@ class wallet_controller extends Controller
     protected function record_payment_log($payment)
     {
         DB::table('payment_logs')->insert($payment);
+    }
+
+    protected function get_package_price($pakage_type,$user_id)
+    {
+        $payment_controller_object = new payment_controller();
+        $prices_array = $payment_controller_object->get_packages_price_array($user_id);
+
+        $unit_cost = $prices_array['type-' . $pakage_type .'-discount'] ?? $prices_array['type-' . $pakage_type];
+
+        return $unit_cost;
     }
 }
