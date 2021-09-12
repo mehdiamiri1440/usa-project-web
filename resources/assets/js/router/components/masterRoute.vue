@@ -96,6 +96,46 @@ export default {
         this.$parent.currentUser = response.data;
       });
     },
+    getCategoryName: function () {
+      let name = this.$route.params.categoryName;
+
+      return name ? name.toString().split("-").join(" ") : "";
+    },
+    getCategoryItem(categories) {
+      let selectedCategory = "";
+      let categoryName = this.getCategoryName();
+      if (categoryName) {
+        for (let i = 0; i < categories.length; i++) {
+          if (categories[i].category_name == categoryName) {
+            selectedCategory = categories[i];
+            return;
+          } else {
+            let categoryItem = Object.values(categories[i].subcategories);
+            let subCategoryItem = categoryItem.find((item) => {
+              return item.category_name == categoryName;
+            });
+            if (subCategoryItem) {
+              selectedCategory = subCategoryItem;
+              return;
+            } else {
+              categoryItem.map((category, index) => {
+                let subCategories = Object.values(category.subcategories);
+                let data = subCategories.find((item) => {
+                  if (item.category_name == categoryName) {
+                    return true;
+                  }
+                });
+                if (data) {
+                  selectedCategory = data;
+                  return true;
+                }
+              });
+            }
+          }
+        }
+      }
+      return selectedCategory;
+    },
   },
   mounted() {
     this.getCurrentUser();

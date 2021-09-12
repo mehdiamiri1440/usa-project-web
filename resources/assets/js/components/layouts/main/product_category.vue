@@ -827,6 +827,25 @@ div.items-wrapper {
   z-index: 1;
 }
 
+.tag-item {
+  background: #f2f2f2;
+  border: 1px solid #e0e0e0;
+  color: #313942;
+  border-radius: 12px;
+  padding: 8px 27px;
+  margin-left: 10px;
+  display: inline-block;
+  margin-bottom: 15px;
+}
+
+.tag-item:hover {
+  background: #e0e0e0;
+}
+
+.data-tag-wrapper {
+  margin-top: 50px;
+}
+
 @media screen and (max-width: 1199px) {
   .search-box input {
     width: 100%;
@@ -1682,6 +1701,17 @@ div.items-wrapper {
       class="category-footer container"
       v-if="categoryMetaData.length > 0 && categoryMetaData[0]"
     >
+      <div class="col-xs-12" v-if="dataTags.length">
+        <div class="data-tag-wrapper text-rtl">
+          <router-link
+            class="tag-item"
+            v-for="(tag, index) in dataTags"
+            :key="index"
+            v-text="tag"
+            :to="{ name: 'productList' }"
+          ></router-link>
+        </div>
+      </div>
       <div class="col-xs-12">
         <div class="title-section col-xs-12">
           <div class="row">
@@ -1766,6 +1796,8 @@ export default {
       sortOption: "BM",
       verifiedUserContent: this.$parent.verifiedUserContent,
       listIsGrid: true,
+      selectedCategory: "",
+      dataTags: [],
     };
   },
   methods: {
@@ -2290,10 +2322,31 @@ export default {
           (response) => (this.$parent.provinceList = response.data.provinces)
         );
     },
+    
   },
   watch: {
+    categoryList(categories) {
+      if (categories) {
+        this.selectedCategory = this.$parent.getCategoryItem(categories);
+      }
+    },
+    selectedCategory(category) {
+      if (category) {
+        axios
+          .post("/get_related_categories", {
+            category_id: category.id,
+            category_name: this.getCategoryName(),
+          })
+          .then((response) => {
+            this.dataTags = response.data.category_names;
+          });
+      }
+    },
     "$route.params.categoryName": function (name) {
       this.init();
+      if (this.categoryList) {
+        this.selectedCategory = this.$parent.getCategoryItem(this.categoryList);
+      }
     },
 
     headerSearchText: function (value) {

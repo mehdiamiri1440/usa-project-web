@@ -566,8 +566,23 @@
           </div>
         </div>
       </aside>
+      @if(isset($related_categories))
+          <div class="col-xs-12" >
+            <div class="data-tag-wrapper text-rtl">
+              @foreach ($related_categories as $item)
+              <a
+                class="tag-item"
+                href="{{'/product-list/category/'  . str_replace(' ', '-', $item)}}"
+              >
+                {{$item}}
+              </a>
+              @endforeach
+              
+            </div>
+          </div>
+        @endif
     </main>
-
+  
      <footer
       class="category-footer container"
       >

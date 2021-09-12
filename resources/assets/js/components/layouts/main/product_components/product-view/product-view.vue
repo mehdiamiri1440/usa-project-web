@@ -255,6 +255,25 @@ button.send-message-button {
   margin-top: 70px;
 }
 
+.tag-item {
+  background: #f2f2f2;
+  border: 1px solid #e0e0e0;
+  color: #313942;
+  border-radius: 12px;
+  padding: 8px 27px;
+  margin-left: 10px;
+  display: inline-block;
+  margin-bottom: 15px;
+}
+
+.tag-item:hover {
+  background: #e0e0e0;
+}
+
+.data-tag-wrapper {
+  margin-top: 50px;
+}
+
 @media screen and (max-width: 1199px) {
   .product-section-wrapper {
     width: 100%;
@@ -438,6 +457,18 @@ button.send-message-button {
         </div>
       </div>
 
+      <div class="col-xs-12" v-if="dataTags.length">
+        <div class="data-tag-wrapper text-rtl">
+          <router-link
+            class="tag-item"
+            v-for="(tag, index) in dataTags"
+            :key="index"
+            v-text="tag"
+            :to="{ name: 'productList' }"
+          ></router-link>
+        </div>
+      </div>
+
       <div
         v-if="product.main.product_name && !isMyProfile"
         class="fix-send-message-wrapper hidden-lg hidden-md"
@@ -571,46 +602,47 @@ export default {
       userPhone: "",
       getPhoneLoader: false,
       breadCrumbs: "",
+      dataTags: "",
     };
   },
   methods: {
     init: function () {
       this.isLoading = true;
-      
-      this.checkCurrentUser();
 
-      
+      this.checkCurrentUser();
     },
     checkCurrentUser() {
       var self = this;
-      
+
       if (this.$parent.currentUser.user_info) {
         this.currentUser = this.$parent.currentUser;
-              let userId = getUserId();
+        let userId = getUserId();
 
         axios
-        .post("/get_product_by_id", {
-          product_id: self.$route.params.id,
-        })
-        .then(function (response) {
-          self.product = response.data.product;
-          if (userId) {
-            if (userId === self.product.main.myuser_id) {
-              self.isMyProfile = true;
-              self.$emit("isMyProfile", self.isMyProfile);
+          .post("/get_product_by_id", {
+            product_id: self.$route.params.id,
+          })
+          .then(function (response) {
+            self.product = response.data.product;
+            self.getRelatedCategories(self.product.main.sub_category_id);
+            if (userId) {
+              if (userId === self.product.main.myuser_id) {
+                self.isMyProfile = true;
+                self.$emit("isMyProfile", self.isMyProfile);
+              }
             }
-          }
-          self.categoryUrl = "/product-list/category/" + self.getCategoryName();
-          self.starScore = Math.floor(
-            self.product.user_info.review_info.avg_score
-          );
+            self.categoryUrl =
+              "/product-list/category/" + self.getCategoryName();
+            self.starScore = Math.floor(
+              self.product.user_info.review_info.avg_score
+            );
 
-          self.sidebarScroll();
-          self.getBreadCrumbs();
-        })
-        .catch(function (err) {
-          window.location.href = "/404";
-        });
+            self.sidebarScroll();
+            self.getBreadCrumbs();
+          })
+          .catch(function (err) {
+            window.location.href = "/404";
+          });
         if (this.currentUser.user_info.is_seller == true) {
           this.showRegisterRequestBox = false;
         }
@@ -986,6 +1018,16 @@ export default {
       } else {
         return false;
       }
+    },
+    getRelatedCategories(categroyId) {
+      axios
+        .post("/get_related_categories", {
+          category_id: categroyId,
+          category_name: this.getCategoryName(),
+        })
+        .then((response) => {
+          this.dataTags = response.data.category_names;
+        });
     },
   },
   created() {
