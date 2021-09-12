@@ -1063,10 +1063,7 @@ div.items-wrapper {
         <!-- /.modal-dialog -->
       </div>
     </div>
-    <CategoriesModal
-      :categoryList="categoryList"
-      :modalSubCategory="modalSubCategory"
-    />
+
     <div
       v-if="!currentUser.user_info"
       class="flat-plust-icon hidden-lg hidden-md"
@@ -1623,7 +1620,6 @@ import ProductAsideCategories from "./product_components/sidebar/product_aside_c
 import searchNotFound from "./main_components/search-not-found";
 import { eventBus } from "../../../router/router";
 import StickySidebar from "../../../stickySidebar.js";
-import CategoriesModal from "./main_components/categories-modal.vue";
 var visible = false;
 export default {
   components: {
@@ -1631,7 +1627,6 @@ export default {
     ProductGridArticle,
     ProductAsideCategories,
     searchNotFound,
-    CategoriesModal,
   },
   props: ["assets", "str", "user_id", "categoryList"],
   data: function () {

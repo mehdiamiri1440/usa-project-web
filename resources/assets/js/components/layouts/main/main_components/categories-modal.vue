@@ -201,8 +201,13 @@ export default {
     },
     submitCategory(category) {
       this.resetModalData();
-      let url = this.getSubCategoryUrl(category);
-      this.$parent.selectCategoryItem(category, url);
+
+      if (this.$route.name == "buyAdRequestsSeller") {
+        this.$parent.selectBuyAdCategoryFilter(category);
+      } else {
+        let url = this.getSubCategoryUrl(category);
+        this.$parent.selectCategoryItem(category, url);
+      }
     },
     getSubCategoryUrl: function (t) {
       let url =

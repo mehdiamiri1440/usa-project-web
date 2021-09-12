@@ -587,7 +587,6 @@ button.disable {
 </style>
 <template>
   <div>
-    <CategoriesModal :categoryList="categoryList" />
     <div
       class="fix-request-bottom hidden-md hidden-lg shadow-content text-center"
     >
@@ -612,15 +611,17 @@ button.disable {
                 <h1>
                   درخواست های خرید
                   <button
-                    v-if="filterCategory"
+                    v-if="$parent.filterCategory"
                     class="green-button remove-filter-button"
-                    @click.prevent="filterCategory = ''"
+                    @click.prevent="$parent.filterCategory = ''"
                   >
                     <span class="red-text remove-filter-icon">
                       <i class="fa fa-times"></i>
                     </span>
                     <span
-                      v-text="'دسته بندی : ' + filterCategory.category_name"
+                      v-text="
+                        'دسته بندی : ' + $parent.filterCategory.category_name
+                      "
                     ></span>
                   </button>
                 </h1>
@@ -647,24 +648,24 @@ button.disable {
           </div>
           <div
             class="mobile-filter-button text-rtl hiddne-md hidden-lg"
-            v-if="filterCategory"
+            v-if="$parent.filterCategory"
           >
             <!-- :class="{ 'active-verification-alert': $parent.verificationAlert }" -->
             <button
               class="green-button remove-filter-button"
-              @click.prevent="filterCategory = ''"
+              @click.prevent="$parent.filterCategory = ''"
             >
               <span class="red-text remove-filter-icon">
                 <i class="fa fa-times"></i>
               </span>
               <span
-                v-text="'دسته بندی : ' + filterCategory.category_name"
+                v-text="'دسته بندی : ' + $parent.filterCategory.category_name"
               ></span>
             </button>
           </div>
           <div
             v-if="buyAds.length != 0"
-            :class="{ 'active-category-filter': filterCategory }"
+            :class="{ 'active-category-filter': $parent.filterCategory }"
           >
             <ul class="list-unstyled wrapper-items">
               <li v-for="(buyAd, index) in buyAds" :key="index">
@@ -1156,13 +1157,9 @@ button.disable {
 <script>
 import { eventBus } from "../../../router/router";
 import swal from "../../../sweetalert.min.js";
-import CategoriesModal from "./main_components/categories-modal.vue";
 
 export default {
   props: ["storage", "isUserLogin", "currentUser"],
-  components: {
-    CategoriesModal,
-  },
   data: function () {
     return {
       buyAds: "",
@@ -1171,7 +1168,6 @@ export default {
       load: false,
       textActive: false,
       isRequests: true,
-      filterCategory: "",
       emptyItem: 0,
       categoryList: "",
     };
@@ -1369,13 +1365,13 @@ export default {
     filterBuyAdByCategory() {
       this.buyAds = "";
       this.isRequests = true;
-      if (this.filterCategory.id) {
+      if (this.$parent.filterCategory.id) {
         let filterBuyAd = this.allBuyAds;
         if (!Array.isArray(filterBuyAd)) {
           filterBuyAd = Object.values(filterBuyAd);
         }
         filterBuyAd = filterBuyAd.filter(
-          (buyAd) => buyAd.category_id == this.filterCategory.id
+          (buyAd) => buyAd.category_id == this.$parent.filterCategory.id
         );
 
         this.buyAds = filterBuyAd;
@@ -1389,9 +1385,6 @@ export default {
     scrollToTop() {
       window.scrollTo(0, 0);
     },
-    selectCategoryItem(category, url) {
-      this.filterCategory = category;
-    },
   },
   mounted() {
     this.init();
@@ -1401,7 +1394,7 @@ export default {
     gtag("config", "UA-129398000-1", { page_path: "/buyAd-requests" });
   },
   watch: {
-    filterCategory() {
+    "$parent.filterCategory"() {
       this.filterBuyAdByCategory();
     },
   },
