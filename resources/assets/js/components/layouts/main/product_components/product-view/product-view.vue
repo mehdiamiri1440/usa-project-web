@@ -464,7 +464,9 @@ button.send-message-button {
             v-for="(tag, index) in dataTags"
             :key="index"
             v-text="tag"
-            :to="{ name: 'productList' }"
+             :to="{ name: 'productCategory',params:{
+              categoryName:convertCategoryname(tag)
+            } }"
           ></router-link>
         </div>
       </div>
@@ -981,6 +983,9 @@ export default {
       let name = this.product.main.sub_category_name;
 
       return name ? name.split("-").join(" ") : "";
+    },
+     convertCategoryname (name) {
+      return name ? name.toString().split("-").join(" ") : "";
     },
     handleBackKeys: function () {
       if (window.history.state) {

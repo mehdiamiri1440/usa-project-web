@@ -1708,7 +1708,9 @@ div.items-wrapper {
             v-for="(tag, index) in dataTags"
             :key="index"
             v-text="tag"
-            :to="{ name: 'productList' }"
+            :to="{ name: 'productCategory',params:{
+              categoryName:convertCategoryname(tag)
+            } }"
           ></router-link>
         </div>
       </div>
@@ -1717,7 +1719,7 @@ div.items-wrapper {
           <div class="row">
             <h1>
               خرید
-              <span v-text="this.getCategoryName()"></span>
+              <span v-text="getCategoryName()"></span>
               عمده
             </h1>
             <hr />
@@ -2174,6 +2176,9 @@ export default {
     getCategoryName: function () {
       let name = this.$route.params.categoryName;
 
+      return name ? name.toString().split("-").join(" ") : "";
+    },
+    convertCategoryname (name) {
       return name ? name.toString().split("-").join(" ") : "";
     },
     infiniteScrollHandler() {
