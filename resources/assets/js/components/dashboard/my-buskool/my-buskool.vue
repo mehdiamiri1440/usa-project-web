@@ -206,7 +206,7 @@
       <SellerMenuList v-if="$parent.isSeller == 1" />
       <BuyerMenuList v-else />
     </div>
-    <div class="switch-wrapper row">
+    <div class="switch-wrapper row hidden-md hidden-lg">
       <SwitchButtons :isSeller="$parent.isSeller" />
       <div class="my-biskool-image-wrapper">
         <img src="../../../../img/my-buskool.jpg" alt="my buskool" />

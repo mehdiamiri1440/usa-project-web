@@ -91,10 +91,6 @@
   border: none;
 }
 
-.label-radio input:checked ~ label::after {
-  background-color: #fff;
-}
-
 .label-radio label::after {
   content: "";
 
@@ -121,6 +117,9 @@
   border: 1px solid #fff;
 }
 
+.label-radio.active label::after {
+  background-color: #fff;
+}
 .label-radio.error label::after {
   border: 1px solid #e41c38;
 }

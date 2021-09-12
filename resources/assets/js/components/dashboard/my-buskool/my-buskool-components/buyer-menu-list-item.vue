@@ -189,14 +189,14 @@ a.active {
           </router-link>
         </li>
 
-        <li class="list-item">
+        <li class="list-item hidden-md hidden-lg">
           <router-link :to="{ name: 'registerRequestBuyer' }">
             <i class="fa fa-plus-square" aria-hidden="true"></i>
             <span>ثبت درخواست خرید</span>
           </router-link>
         </li>
 
-        <li class="list-item">
+        <li class="list-item hidden-md hidden-lg">
           <router-link
             :to="{ name: 'messagesBuyer' }"
             :class="{ 'router-link-exact-active ': this.activeElement === 0 }"
@@ -211,7 +211,7 @@ a.active {
           </router-link>
         </li>
 
-        <li class="list-item">
+        <li class="list-item hidden-md hidden-lg">
           <router-link :to="{ name: 'specialProducts' }">
             <i class="fas fa-list-ol" aria-hidden="true"></i>
             <span>فروشندگان پیشنهادی</span>
@@ -227,7 +227,7 @@ a.active {
             <span>درخواست های من</span>
           </router-link>
         </li>
-        <li class="list-item">
+        <li class="list-item hidden-md hidden-lg">
           <router-link :to="{ name: 'profileBasicBuyerVeficiation' }">
             <span class="verified-user" title>
               <i class="fa fa-certificate"></i>
@@ -249,7 +249,7 @@ a.active {
           </router-link>
         </li>
 
-        <li class="list-item">
+        <li class="list-item hidden-md hidden-lg">
           <a href="/logout"> <i class="fas fa-sign-out-alt"></i> خروج </a>
         </li>
       </ul>

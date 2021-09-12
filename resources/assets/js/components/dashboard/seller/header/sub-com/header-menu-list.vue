@@ -163,6 +163,19 @@ a.active {
   font-size: 12px;
   font-weight: 200;
 }
+
+.cls-1 {
+  fill: #fff;
+}
+.cls-2 {
+  fill: #00c569;
+}
+.buskool-icon-wrapper svg {
+  width: 15px;
+  height: 16px;
+  position: relative;
+  top: 3px;
+}
 </style>
 <template>
   <div>
@@ -173,6 +186,45 @@ a.active {
             <router-link :to="{ name: 'statusSeller' }">
               <i class="fa fa-chart-line"></i>
               <span>داشبورد</span>
+            </router-link>
+          </li>
+          <li class="list-item">
+            <router-link :to="{ name: 'myBuskoolSeller' }">
+              <i class="buskool-icon-wrapper">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 29.36 34.01"
+                >
+                  <defs></defs>
+                  <g id="Layer_2" data-name="Layer 2">
+                    <g id="Layer_1-2" data-name="Layer 1">
+                      <g id="buskool-icon">
+                        <path
+                          id="Subtraction_1"
+                          data-name="Subtraction 1"
+                          class="cls-1"
+                          d="M14.7,34A14.71,14.71,0,0,1,1.62,12.59,14.87,14.87,0,0,1,6,7.5l3.73,3.73A9.41,9.41,0,1,0,24,20.54L26.58,18l2.75,2.71A14.71,14.71,0,0,1,14.7,34ZM29.36,18.2h0l-2.78-2.74L24,18a9.48,9.48,0,0,0-4.76-7L23,7.2a14.64,14.64,0,0,1,6.33,11Z"
+                        />
+                        <g id="Group_24" data-name="Group 24">
+                          <path
+                            id="Rectangle_12"
+                            data-name="Rectangle 12"
+                            class="cls-2"
+                            d="M13.42,3.46l5.4,5.4h0l-4.57,4.57h0l-7.9-7.9h0L8.43,3.46A3.52,3.52,0,0,1,13.42,3.46Z"
+                          />
+                          <path
+                            id="Rectangle_13"
+                            data-name="Rectangle 13"
+                            class="cls-2"
+                            d="M25.68,2.21,14.45,13.43h0L10.29,9.28h0l7.9-7.9a4.71,4.71,0,0,1,6.66,0l.83.83Z"
+                          />
+                        </g>
+                      </g>
+                    </g>
+                  </g>
+                </svg>
+              </i>
+              <span>باسکول من</span>
             </router-link>
           </li>
 

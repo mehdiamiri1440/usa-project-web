@@ -1766,6 +1766,7 @@ export default {
       sortOption: "BM",
       verifiedUserContent: this.$parent.verifiedUserContent,
       listIsGrid: true,
+      selectedCategory: "",
     };
   },
   methods: {
@@ -2290,10 +2291,60 @@ export default {
           (response) => (this.$parent.provinceList = response.data.provinces)
         );
     },
+    getCategoryItem(categories) {
+      for (let i = 0; i < categories.length; i++) {
+        let categoryName = this.getCategoryName();
+
+        if (categories[i].category_name == categoryName) {
+          this.selectedCategory = categories[i];
+          return;
+        } else {
+          let categoryItem = Object.values(categories[i].subcategories);
+          let subCategoryItem = categoryItem.find((item) => {
+            return item.category_name == categoryName;
+          });
+          if (subCategoryItem) {
+            this.selectedCategory = subCategoryItem;
+            return;
+          } else {
+            categoryItem.map((category, index) => {
+              let subCategories = Object.values(category.subcategories);
+              let data = subCategories.find((item) => {
+                if (item.category_name == categoryName) {
+                  return true;
+                }
+              });
+              if (data) {
+                this.selectedCategory = data;
+                return true;
+              }
+            });
+          }
+        }
+      }
+      console.log(this.selectedCategory);
+    },
   },
   watch: {
+    categoryList(categories) {
+      if (categories) {
+        this.getCategoryItem(categories);
+      }
+    },
+    selectedCategory(category){
+      if(category){
+        axios.post('/get_related_categories',{
+          category_id:category.id,
+          category_name:this.getCategoryName()
+        }).then((response)=>{
+        });
+      }
+    },
     "$route.params.categoryName": function (name) {
       this.init();
+      if(this.categoryList){
+        this.getCategoryItem(this.categoryList);
+      }
     },
 
     headerSearchText: function (value) {

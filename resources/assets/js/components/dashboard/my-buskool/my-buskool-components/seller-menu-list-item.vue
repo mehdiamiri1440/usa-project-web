@@ -188,14 +188,14 @@ a.active {
           </router-link>
         </li>
 
-        <li class="list-item">
+        <li class="list-item hidden-md hidden-lg">
           <router-link :to="{ name: 'buyAdRequestsSeller' }">
             <i class="fa fa-list-alt" aria-hidden="true"></i>
             <span>درخواست های خرید</span>
           </router-link>
         </li>
 
-        <li class="list-item">
+        <li class="list-item hidden-md hidden-lg">
           <router-link :to="{ name: 'messagesRequestSeller' }">
             <i class="fa fa-list-ul" aria-hidden="true"></i>
             <span>خریداران پیشنهادی</span>
@@ -205,7 +205,7 @@ a.active {
           </router-link>
         </li>
 
-        <li class="list-item">
+        <li class="list-item hidden-md hidden-lg">
           <router-link
             :to="{ name: 'registerProductSeller' }"
             :class="{
@@ -219,7 +219,7 @@ a.active {
           </router-link>
         </li>
 
-        <li class="list-item">
+        <li class="list-item hidden-md hidden-lg">
           <router-link
             :to="{ name: 'messagesSeller' }"
             :class="{
@@ -265,7 +265,7 @@ a.active {
             <span class="custom-badge upgrade">ویژه</span>
           </router-link>
         </li>
-        <li class="list-item">
+        <li class="list-item hidden-md hidden-lg">
           <router-link :to="{ name: 'profileBasicSellerVeficiation' }">
             <span class="verified-user">
               <i class="fa fa-certificate"></i>
@@ -286,7 +286,7 @@ a.active {
             <span>پشتیبانی</span>
           </router-link>
         </li>
-        <li class="list-item">
+        <li class="list-item hidden-md hidden-lg">
           <a href="/logout"> <i class="fas fa-sign-out-alt"></i> خروج </a>
         </li>
       </ul>
