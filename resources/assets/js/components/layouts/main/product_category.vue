@@ -827,6 +827,25 @@ div.items-wrapper {
   z-index: 1;
 }
 
+.tag-item {
+  background: #f2f2f2;
+  border: 1px solid #e0e0e0;
+  color: #313942;
+  border-radius: 12px;
+  padding: 8px 27px;
+  margin-left: 10px;
+  display: inline-block;
+  margin-bottom: 15px;
+}
+
+.tag-item:hover {
+  background: #e0e0e0;
+}
+
+.data-tag-wrapper {
+  margin-top: 50px;
+}
+
 @media screen and (max-width: 1199px) {
   .search-box input {
     width: 100%;
@@ -1682,12 +1701,28 @@ div.items-wrapper {
       class="category-footer container"
       v-if="categoryMetaData.length > 0 && categoryMetaData[0]"
     >
+      <div class="col-xs-12" v-if="dataTags.length">
+        <div class="data-tag-wrapper text-rtl">
+          <router-link
+            class="tag-item"
+            v-for="(tag, index) in dataTags"
+            :key="index"
+            v-text="tag"
+            :to="{
+              name: 'productCategory',
+              params: {
+                categoryName: convertCategoryname(tag),
+              },
+            }"
+          ></router-link>
+        </div>
+      </div>
       <div class="col-xs-12">
         <div class="title-section col-xs-12">
           <div class="row">
             <h1>
               خرید
-              <span v-text="this.getCategoryName()"></span>
+              <span v-text="getCategoryName()"></span>
               عمده
             </h1>
             <hr />
@@ -1767,6 +1802,7 @@ export default {
       verifiedUserContent: this.$parent.verifiedUserContent,
       listIsGrid: true,
       selectedCategory: "",
+      dataTags: [],
     };
   },
   methods: {
@@ -2145,6 +2181,9 @@ export default {
 
       return name ? name.toString().split("-").join(" ") : "";
     },
+    convertCategoryname(name) {
+      return name ? name.toString().split("-").join(" ") : "";
+    },
     infiniteScrollHandler() {
       $(window).scroll(() => {
         if (
@@ -2291,59 +2330,29 @@ export default {
           (response) => (this.$parent.provinceList = response.data.provinces)
         );
     },
-    getCategoryItem(categories) {
-      for (let i = 0; i < categories.length; i++) {
-        let categoryName = this.getCategoryName();
-
-        if (categories[i].category_name == categoryName) {
-          this.selectedCategory = categories[i];
-          return;
-        } else {
-          let categoryItem = Object.values(categories[i].subcategories);
-          let subCategoryItem = categoryItem.find((item) => {
-            return item.category_name == categoryName;
-          });
-          if (subCategoryItem) {
-            this.selectedCategory = subCategoryItem;
-            return;
-          } else {
-            categoryItem.map((category, index) => {
-              let subCategories = Object.values(category.subcategories);
-              let data = subCategories.find((item) => {
-                if (item.category_name == categoryName) {
-                  return true;
-                }
-              });
-              if (data) {
-                this.selectedCategory = data;
-                return true;
-              }
-            });
-          }
-        }
-      }
-      console.log(this.selectedCategory);
-    },
   },
   watch: {
     categoryList(categories) {
       if (categories) {
-        this.getCategoryItem(categories);
+        this.selectedCategory = this.$parent.getCategoryItem(categories);
       }
     },
-    selectedCategory(category){
-      if(category){
-        axios.post('/get_related_categories',{
-          category_id:category.id,
-          category_name:this.getCategoryName()
-        }).then((response)=>{
-        });
+    selectedCategory(category) {
+      if (category) {
+        axios
+          .post("/get_related_categories", {
+            category_id: category.id,
+            category_name: this.getCategoryName(),
+          })
+          .then((response) => {
+            this.dataTags = response.data.category_names;
+          });
       }
     },
     "$route.params.categoryName": function (name) {
       this.init();
-      if(this.categoryList){
-        this.getCategoryItem(this.categoryList);
+      if (this.categoryList) {
+        this.selectedCategory = this.$parent.getCategoryItem(this.categoryList);
       }
     },
 

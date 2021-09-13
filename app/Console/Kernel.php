@@ -155,6 +155,8 @@ class Kernel extends ConsoleKernel
                 ->saturdays()
                 ->at('00:47');
 
+        $schedule->command('cache:clear-expired')->cron("45 3 * * *");
+
 
         // $schedule->command('backup:clean')->daily()->at('12:27');
         $schedule->command('backup:run --only-db')->cron('15 */6 * * *'); // every 6 hours 15 mins after hour
