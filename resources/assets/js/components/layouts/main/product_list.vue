@@ -114,7 +114,7 @@ a.close-dialog-popup {
 .flat-plust-icon {
   position: fixed;
   right: 15px;
-  bottom: 15px;
+  bottom: 70px;
   z-index: 3;
 }
 

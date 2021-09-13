@@ -518,7 +518,7 @@ i.fa-star {
 
               <router-link
                 v-if="$parent.userType"
-                :to="{ name: 'buyAdRequestsSeller' }"
+                :to="{ name: 'mainBuyAdRequests' }"
                 tag="button"
                 class="user-button"
               >

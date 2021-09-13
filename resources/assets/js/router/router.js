@@ -534,7 +534,7 @@ const router = new Router({
         },
         {
           path: "buyAd-requests",
-          name: "buyAdRequestsSeller",
+          name: "mainBuyAdRequests",
           components: {
             default: (resolve) => {
               require([

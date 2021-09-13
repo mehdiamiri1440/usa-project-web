@@ -213,7 +213,7 @@ a.active {
         </li>
 
         <li class="list-item hidden-md hidden-lg">
-          <router-link :to="{ name: 'buyAdRequestsSeller' }">
+          <router-link :to="{ name: 'mainBuyAdRequests' }">
             <i class="fa fa-list-alt" aria-hidden="true"></i>
             <span>درخواست های خرید</span>
           </router-link>

@@ -648,7 +648,7 @@ li .buyad-button.send-message-button:hover {
       </div>
     </li>
     <li class="col-xs-12 static-item">
-      <router-link :to="{ name: 'buyAdRequestsSeller' }">
+      <router-link :to="{ name: 'mainBuyAdRequests' }">
         سایر درخواست های خرید (مرتبط و غیر مرتبط)
         <i class="fa fa-arrow-left"></i>
       </router-link>
@@ -662,7 +662,7 @@ li .buyad-button.send-message-button:hover {
     <div class="col-xs-12">
       <div class="text-input-wrapper">
         <p class="red-text large-text">چه خریدارنی به دنبال محصول شما هستند؟</p>
-        <router-link class="green-button" :to="{ name: 'buyAdRequestsSeller' }">
+        <router-link class="green-button" :to="{ name: 'mainBuyAdRequests' }">
           <span class="bold-text">مشاهده درخواست های خرید</span>
         </router-link>
       </div>

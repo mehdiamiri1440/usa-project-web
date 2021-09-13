@@ -487,7 +487,7 @@ button.disable {
     padding: 4px 15px;
   }
   .requests .main-content {
-    padding: 0 0 150px !important;
+    padding: 105px 0 150px !important;
   }
 }
 @media screen and (max-width: 767px) {
@@ -584,9 +584,110 @@ button.disable {
     padding-top: 6px;
   }
 }
+
+.sub-header-fix {
+  position: fixed;
+  top: 83px;
+  left: 0;
+  right: 0;
+  z-index: 1012;
+  padding: 0;
+  width: 100%;
+  background: #fff;
+}
+
+.rate-filter-mobile-wrapper {
+  direction: rtl;
+  display: flex;
+  overflow-y: hidden;
+  overflow-x: scroll;
+  border-bottom: 1px solid #ebebeb;
+  padding: 10px;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.rate-filter-mobile-wrapper.desktop-filter-items {
+  border-bottom: none;
+  padding: 5px 0 10px;
+}
+
+.rate-filter-mobile-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.rate-filter-mobile-wrapper > button {
+  flex-shrink: 0;
+  border: 1px solid #ededed;
+  background: #fff;
+  border-radius: 12px;
+  font-size: 15px;
+  color: #707070;
+  padding: 3px 15px;
+  display: inline-flex;
+  height: 32px;
+  margin-left: 10px;
+}
+
+.rate-filter-mobile-wrapper > button.mobile-category-item.filter-item {
+  border-color: #fa8888;
+  color: #e41c38;
+  background: #fcf6f6;
+}
+
+.rate-filter-mobile-wrapper > button i {
+  position: relative;
+  top: 2px;
+  margin-left: 5px;
+}
+.rate-filter-mobile-wrapper > button i.fa-times {
+  position: relative;
+  top: 2px;
+  margin-left: 0;
+  margin-right: 10px;
+  font-size: 11px;
+  top: 6px;
+}
+
+.rate-filter-mobile-wrapper > button:first-of-type {
+  background: #fafafa;
+}
+
+.rate-filter-mobile-wrapper > button:last-of-type {
+  margin-left: 0;
+}
 </style>
 <template>
   <div>
+    <div
+      class="
+        sub-header-fix sub-header
+        hidden-lg hidden-md hidden-sm
+        container-fluid
+      "
+      v-if="$parent.filterCategory"
+    >
+      <div class="rate-filter-mobile-wrapper">
+        <!-- <button
+          class="mobile-category-item"
+          @click.prevent="openCategoryModal()"
+        >
+          <i class="fa fa-list"></i>
+          دسته ها
+        </button> -->
+
+        <button
+          class="mobile-category-item filter-item"
+          @click.prevent="$parent.filterCategory = ''"
+        >
+          <span
+            v-text="'دسته بندی: ' + $parent.filterCategory.category_name"
+          ></span>
+          <i class="fa fa-times"></i>
+        </button>
+      </div>
+    </div>
+
     <div
       class="fix-request-bottom hidden-md hidden-lg shadow-content text-center"
     >

@@ -97,6 +97,9 @@ export default {
         this.$parent.currentUser = response.data;
       });
     },
+    selectBuyAdCategoryFilter(category) {
+      this.filterCategory = category;
+    },
     getCategoryName: function () {
       let name = this.$route.params.categoryName;
 

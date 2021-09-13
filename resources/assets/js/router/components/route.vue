@@ -518,7 +518,7 @@ export default {
           if (
             window.location.pathname != "/buyer/messenger/contacts" &&
             window.location.pathname != "/seller/messenger/contacts" &&
-            window.location.pathname != "/seller/buyAd-requests" &&
+            window.location.pathname != "/buyAd-requests" &&
             !window.location.pathname.includes("product-view") &&
             !this.iswebview
           ) {
@@ -541,7 +541,7 @@ export default {
           if (
             window.location.pathname != "/buyer/messenger/contacts" &&
             window.location.pathname != "/seller/messenger/contacts" &&
-            window.location.pathname != "/seller/buyAd-requests" &&
+            window.location.pathname != "/buyAd-requests" &&
             !window.location.pathname.includes("product-view") &&
             !this.iswebview
           ) {
