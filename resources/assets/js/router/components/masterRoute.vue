@@ -97,10 +97,6 @@ export default {
         this.$parent.currentUser = response.data;
       });
     },
-<<<<<<< HEAD
-    selectBuyAdCategoryFilter(category) {
-      this.filterCategory = category;
-=======
     getCategoryName: function () {
       let name = this.$route.params.categoryName;
 
@@ -140,7 +136,6 @@ export default {
         }
       }
       return selectedCategory;
->>>>>>> develope
     },
   },
   mounted() {
