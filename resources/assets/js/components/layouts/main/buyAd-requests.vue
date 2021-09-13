@@ -656,6 +656,32 @@ button.disable {
 .rate-filter-mobile-wrapper > button:last-of-type {
   margin-left: 0;
 }
+.spinner-border {
+  width: 5rem;
+  height: 5rem;
+  color: #999;
+  border-width: 3px;
+  top: 170px;
+  left: calc(50% - 25px);
+}
+
+.more-buyAds-wrapper {
+  float: right;
+  width: 100%;
+  min-height: 96px;
+  position: relative;
+}
+
+.more-buyAds-wrapper .spinner-border {
+  top: 30px;
+  width: 4rem;
+  height: 4rem;
+}
+
+.more-buyAds-wrapper p {
+  margin-top: 40px;
+  color: #999;
+}
 </style>
 <template>
   <div>
@@ -1249,6 +1275,14 @@ button.disable {
               </li>
             </ul>
           </div>
+          <div class="more-buyAds-wrapper">
+            <div v-if="loadMoreActive">
+              <div class="spinner-border">
+                <span class="sr-only"></span>
+              </div>
+              <p class="text-center text-rtl">درحال دریافت اطلاعات ...</p>
+            </div>
+          </div>
         </section>
       </div>
     </main>
@@ -1271,6 +1305,9 @@ export default {
       isRequests: true,
       emptyItem: 0,
       categoryList: "",
+      buyAdPostCount: 11,
+      loadMoreActive: false,
+      continueToLoadProducts: true,
     };
   },
   methods: {
@@ -1284,23 +1321,21 @@ export default {
           .then((response) => {
             this.allBuyAds = response.data.buyAds;
             this.buyAds = this.allBuyAds;
-
             this.load = false;
-            // setTimeout(function () {
-            //   $(".list-notice button").tooltip();
-            // }, 100);
+            this.continueToLoadProducts = false;
           });
       } else {
-        console.log("user logout");
-        axios.post("/get_buyAd_list").then((response) => {
-          this.allBuyAds = response.data.buyAds;
-          this.buyAds = this.allBuyAds;
-
-          this.load = false;
-          // setTimeout(function () {
-          //   $(".list-notice button").tooltip();
-          // }, 100);
-        });
+        axios
+          .post("/get_buyAd_list", {
+            from: this.buyAdPostCount - 10,
+            to: this.buyAdPostCount,
+          })
+          .then((response) => {
+            this.allBuyAds = response.data.buyAds;
+            this.buyAds = this.allBuyAds;
+            this.load = false;
+            this.infiniteScrollHandler();
+          });
       }
     },
     openChat: function (buyAd) {
@@ -1486,6 +1521,60 @@ export default {
     scrollToTop() {
       window.scrollTo(0, 0);
     },
+    infiniteScrollHandler() {
+      $(window).scroll(() => {
+        if (
+          this.$route.name == "mainBuyAdRequests" &&
+          !this.$parent.filterCategory &&
+          this.continueToLoadProducts
+        ) {
+          if (
+            $(window).scrollTop() >=
+              ($(document).height() - $(window).height() - 100) / 2 &&
+            !this.loadMoreActive &&
+            this.continueToLoadProducts
+          ) {
+            this.feed();
+          }
+        }
+      });
+    },
+    feed() {
+      this.loadMoreActive = true;
+
+      // use 51 because from start as 1 and get 49 item
+
+      this.buyAdPostCount += 11;
+
+      let data = {};
+      if (!this.$parent.filterCategory) {
+        data = {
+          from: this.buyAdPostCount - 10,
+          to: this.buyAdPostCount,
+        };
+      } else if (this.continueToLoadProducts) {
+        this.load = true;
+        this.buyAds = "";
+      }
+
+      axios.post("/get_buyAd_list", data).then((response) => {
+        if (response.data.buyAds.length > 0) {
+          this.allBuyAds = this.allBuyAds.concat(response.data.buyAds);
+          if (this.$parent.filterCategory) {
+            this.$nextTick(() => {
+              this.filterBuyAdByCategory();
+            });
+            this.load = false;
+            this.continueToLoadProducts = false;
+          } else {
+            this.buyAds = this.allBuyAds;
+          }
+        } else {
+          this.continueToLoadProducts = false;
+        }
+        this.loadMoreActive = false;
+      });
+    },
   },
   mounted() {
     this.init();
@@ -1495,8 +1584,16 @@ export default {
     gtag("config", "UA-129398000-1", { page_path: "/buyAd-requests" });
   },
   watch: {
-    "$parent.filterCategory"() {
-      this.filterBuyAdByCategory();
+    "$parent.filterCategory"(category) {
+      if (category) {
+        if (this.continueToLoadProducts) {
+          this.feed();
+        } else {
+          this.filterBuyAdByCategory();
+        }
+      } else if (this.allBuyAds) {
+        this.filterBuyAdByCategory();
+      }
     },
   },
 };
