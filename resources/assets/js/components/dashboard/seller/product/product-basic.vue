@@ -222,7 +222,7 @@
   }
 
   .success-register {
-    margin-top: -۱۹px;
+    margin-top: -19px;
   }
 
   .success-register p {
