@@ -348,12 +348,12 @@ export default {
       popUpMsg: "",
       loading: false,
       submiting: false,
-      items: [
-        {
-          message: "درخواست های خرید من ",
-          url: "myBuyAds",
-        },
-      ],
+      // items: [
+      //   {
+      //     message: "درخواست های خرید من ",
+      //     url: "myBuyAds",
+      //   },
+      // ],
     };
   },
   methods: {

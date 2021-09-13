@@ -298,7 +298,6 @@ li.active a::after {
   float: right;
 }
 
-
 .btn-loader {
   overflow: hidden;
 }
@@ -1719,50 +1718,53 @@ export default {
       }
 
       var searchValueText = searchValue;
+      self.checkCurrentUser();
 
-      axios.post("/user/profile_info").then(function (response) {
-        self.currentUser = response.data;
-        if (searchValueText) {
-          self.registerComponentStatistics(
-            "homePage",
-            "search-text",
-            searchValueText
-          );
-          self.searchText = searchValueText;
-          self.submiting = false;
-        } else {
-          self.loading = true;
+      if (searchValueText) {
+        self.registerComponentStatistics(
+          "homePage",
+          "search-text",
+          searchValueText
+        );
+        self.searchText = searchValueText;
+        self.submiting = false;
+      } else {
+        self.loading = true;
 
-          self.fromProductCount = 0;
-          self.productCountInPage = 16;
+        self.fromProductCount = 0;
+        self.productCountInPage = 16;
 
-          let getProductsData = {
-            from_record_number: self.fromProductCount,
-            response_rate: self.$parent.productByResponseRate,
-            to_record_number: self.productCountInPage,
-            sort_by: self.sortOption,
-          };
-          if (self.province.id) {
-            getProductsData.province_id = self.province.id;
-          }
-          if (self.city.id) {
-            getProductsData.city_id = self.city.id;
-          }
-
-          axios
-            .post("/user/get_product_list", getProductsData)
-            .then(function (response) {
-              self.products = response.data.products;
-              //                                localStorage.removeItem('productCountInPage')
-              //                                resolve(self.loading = false);
-              self.submiting = false;
-              setTimeout(function () {
-                self.sidebarScroll();
-              }, 500);
-            });
+        let getProductsData = {
+          from_record_number: self.fromProductCount,
+          response_rate: self.$parent.productByResponseRate,
+          to_record_number: self.productCountInPage,
+          sort_by: self.sortOption,
+        };
+        if (self.province.id) {
+          getProductsData.province_id = self.province.id;
         }
-        //                    }).catch(error=>reject(error));
-      });
+        if (self.city.id) {
+          getProductsData.city_id = self.city.id;
+        }
+
+        axios
+          .post("/user/get_product_list", getProductsData)
+          .then(function (response) {
+            self.products = response.data.products;
+            //                                localStorage.removeItem('productCountInPage')
+            //                                resolve(self.loading = false);
+            self.submiting = false;
+            setTimeout(function () {
+              self.sidebarScroll();
+            }, 500);
+          });
+      }
+      //                    }).catch(error=>reject(error));
+    },
+    checkCurrentUser() {
+      if (this.$parent.currentUser.user_info) {
+        this.currentUser = this.$parent.currentUser;
+      }
     },
     feed() {
       if (this.products.isEmptyObject == true) {
@@ -2048,13 +2050,15 @@ export default {
     },
     infiniteScrollHandler() {
       $(window).scroll(() => {
-        if (
-          $(window).scrollTop() >=
-            ($(document).height() - $(window).height() - 100) / 2 &&
-          !this.loadMoreActive &&
-          this.continueToLoadProducts
-        ) {
-          this.feed();
+        if (this.$route.name == "productList") {
+          if (
+            $(window).scrollTop() >=
+              ($(document).height() - $(window).height() - 100) / 2 &&
+            !this.loadMoreActive &&
+            this.continueToLoadProducts
+          ) {
+            this.feed();
+          }
         }
       });
     },
@@ -2200,6 +2204,9 @@ export default {
       } else {
         this.init();
       }
+    },
+    "$parent.currentUser"(user) {
+      this.checkCurrentUser();
     },
   },
   created() {

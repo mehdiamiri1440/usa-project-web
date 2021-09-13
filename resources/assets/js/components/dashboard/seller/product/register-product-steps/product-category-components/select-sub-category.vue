@@ -50,7 +50,7 @@
   transform: translateX(-5px);
 }
 .action-control-wrapper {
-  margin: 40px auto 20px;
+  margin: 40px auto 100px;
 }
 
 .title-contents {

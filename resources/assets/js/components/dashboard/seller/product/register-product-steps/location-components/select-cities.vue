@@ -113,6 +113,9 @@ ul li.item button i {
   .title-contents {
     margin-top: 0;
   }
+  .action-control-wrapper {
+    padding: 40px 15px 100px;
+  }
 }
 </style>
 

@@ -91,7 +91,7 @@
   color: #fff;
   font-size: 20px;
   padding: 12px 15px;
-  margin: 30px auto 50px;
+  margin: 30px auto 100px;
 }
 
 @media screen and (max-width: 767px) {

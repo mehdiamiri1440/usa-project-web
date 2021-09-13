@@ -26,6 +26,7 @@
       :user-type="isSeller"
       :verifiedUserContent="verifiedUserContent"
       :categoryList="categoryList"
+      :currentUser="currentUser"
     ></router-view>
 
     <footer-master-layouts />
@@ -62,6 +63,19 @@ export default {
       provinceList: "",
       modalSubCategory: false,
       mainSubCategories: "",
+      currentUser: {
+        profile: {
+          is_company: "",
+          company_name: "",
+          company_register_code: "",
+          address: "",
+          public_phone: "",
+          profile_photo: this.storage + "",
+          postal_code: "",
+          shaba_code: "",
+        },
+        user_info: "",
+      },
     };
   },
   methods: {
@@ -76,8 +90,15 @@ export default {
         this.$router.push({ path: url });
       });
     },
+    getCurrentUser() {
+      axios.post("/user/profile_info").then((response) => {
+        this.currentUser = response.data;
+        this.$parent.currentUser = response.data;
+      });
+    },
   },
   mounted() {
+    this.getCurrentUser();
     this.getCategories();
   },
 };

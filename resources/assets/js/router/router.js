@@ -25,6 +25,17 @@ const router = new Router({
       redirect: "/404",
       children: [
         {
+          path: "my-buskool",
+          name: "myBuskoolSeller",
+          components: {
+            default: (resolve) => {
+              require([
+                "../components/dashboard/my-buskool/my-buskool.vue",
+              ], resolve);
+            },
+          },
+        },
+        {
           path: "password",
           name: "passwordSeller",
           components: {
@@ -279,6 +290,17 @@ const router = new Router({
             default: (resolve) => {
               require([
                 "../components/dashboard/seller/profile/change_password.vue",
+              ], resolve);
+            },
+          },
+        },
+        {
+          path: "my-buskool",
+          name: "myBuskoolBuyer",
+          components: {
+            default: (resolve) => {
+              require([
+                "../components/dashboard/my-buskool/my-buskool.vue",
               ], resolve);
             },
           },

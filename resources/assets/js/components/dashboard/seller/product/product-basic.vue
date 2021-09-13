@@ -222,7 +222,7 @@
   }
 
   .success-register {
-    margin-top: -20px;
+    margin-top: -۱۹px;
   }
 
   .success-register p {
@@ -304,7 +304,7 @@
       v-show="$route.name != 'successRegisterProduct'"
       class="main-content col-xs-12"
     >
-      <h2 class="section-title">ثبت محصول جدید</h2>
+      <h2 class="section-title hidden-xs hidden-sm">ثبت محصول جدید</h2>
       <div
         class="row wrapper-section"
         :class="{ 'empty-section': currentStep == 7 && buyAds.length == 0 }"

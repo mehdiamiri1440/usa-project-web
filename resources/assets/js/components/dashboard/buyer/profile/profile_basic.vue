@@ -446,6 +446,10 @@ textarea.error:focus + i {
     line-height: 1.618;
     padding: 5px;
   }
+
+  .main-wrapper {
+    padding-bottom: 80px;
+  }
 }
 
 @media screen and (max-width: 767px) {

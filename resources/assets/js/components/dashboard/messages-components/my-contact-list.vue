@@ -355,6 +355,12 @@ i.fa-star {
 .user-not-fount p {
   font-weight: 500;
 }
+
+@media screen and (max-width: 991px) {
+  .contact-items {
+    padding-bottom: 42px;
+  }
+}
 </style>
 
 <template>
@@ -686,7 +692,6 @@ i.fa-star {
 
 
 <script >
-
 export default {
   data: function () {
     return {

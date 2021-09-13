@@ -1487,7 +1487,6 @@ div.items-wrapper {
                         :key="product.main.id"
                         :product="product"
                         :str="str"
-                        :currentUser="currentUser"
                       />
                     </div>
                   </div>
@@ -1767,6 +1766,7 @@ export default {
       sortOption: "BM",
       verifiedUserContent: this.$parent.verifiedUserContent,
       listIsGrid: true,
+      selectedCategory: "",
     };
   },
   methods: {
@@ -1818,54 +1818,57 @@ export default {
           self.categoryMetaData = response.data.category_info;
           self.jsonLDObject = response.data.schema_object;
         });
-      axios.post("/user/profile_info").then(function (response) {
-        self.currentUser = response.data;
+      self.checkCurrentUser();
 
-        if (searchValueText) {
-          self.registerComponentStatistics(
-            "homePage",
-            "search-text",
-            searchValueText
-          );
-          self.searchText = searchValueText;
-          setTimeout(function () {
-            self.sidebarScroll();
-          }, 500);
-        } else {
-          self.loading = true;
+      if (searchValueText) {
+        self.registerComponentStatistics(
+          "homePage",
+          "search-text",
+          searchValueText
+        );
+        self.searchText = searchValueText;
+        setTimeout(function () {
+          self.sidebarScroll();
+        }, 500);
+      } else {
+        self.loading = true;
 
-          self.fromProductCount = 0;
-          self.productCountInPage = 16;
-          let getProductsData = {
-            from_record_number: self.fromProductCount,
-            response_rate: self.$parent.productByResponseRate,
-            to_record_number: self.productCountInPage,
-            search_text: categoryName,
-            sort_by: self.sortOption,
-          };
-          if (self.province.id) {
-            getProductsData.province_id = self.province.id;
-          }
-          if (self.city.id) {
-            getProductsData.city_id = self.city.id;
-          }
-          axios
-            .post("/user/get_product_list", getProductsData)
-            .then(function (response) {
-              self.products = response.data.products;
-              self.loading = false;
-              if (self.products.length < self.productCountInPage) {
-                self.continueToLoadProducts = false;
-              } else {
-                self.continueToLoadProducts = true;
-              }
-              setTimeout(function () {
-                self.sidebarScroll();
-              }, 500);
-              self.submiting = false;
-            });
+        self.fromProductCount = 0;
+        self.productCountInPage = 16;
+        let getProductsData = {
+          from_record_number: self.fromProductCount,
+          response_rate: self.$parent.productByResponseRate,
+          to_record_number: self.productCountInPage,
+          search_text: categoryName,
+          sort_by: self.sortOption,
+        };
+        if (self.province.id) {
+          getProductsData.province_id = self.province.id;
         }
-      });
+        if (self.city.id) {
+          getProductsData.city_id = self.city.id;
+        }
+        axios
+          .post("/user/get_product_list", getProductsData)
+          .then(function (response) {
+            self.products = response.data.products;
+            self.loading = false;
+            if (self.products.length < self.productCountInPage) {
+              self.continueToLoadProducts = false;
+            } else {
+              self.continueToLoadProducts = true;
+            }
+            setTimeout(function () {
+              self.sidebarScroll();
+            }, 500);
+            self.submiting = false;
+          });
+      }
+    },
+    checkCurrentUser() {
+      if (this.$parent.currentUser.user_info) {
+        this.currentUser = this.$parent.currentUser;
+      }
     },
     feed() {
       var self = this;
@@ -2288,10 +2291,60 @@ export default {
           (response) => (this.$parent.provinceList = response.data.provinces)
         );
     },
+    getCategoryItem(categories) {
+      for (let i = 0; i < categories.length; i++) {
+        let categoryName = this.getCategoryName();
+
+        if (categories[i].category_name == categoryName) {
+          this.selectedCategory = categories[i];
+          return;
+        } else {
+          let categoryItem = Object.values(categories[i].subcategories);
+          let subCategoryItem = categoryItem.find((item) => {
+            return item.category_name == categoryName;
+          });
+          if (subCategoryItem) {
+            this.selectedCategory = subCategoryItem;
+            return;
+          } else {
+            categoryItem.map((category, index) => {
+              let subCategories = Object.values(category.subcategories);
+              let data = subCategories.find((item) => {
+                if (item.category_name == categoryName) {
+                  return true;
+                }
+              });
+              if (data) {
+                this.selectedCategory = data;
+                return true;
+              }
+            });
+          }
+        }
+      }
+      console.log(this.selectedCategory);
+    },
   },
   watch: {
+    categoryList(categories) {
+      if (categories) {
+        this.getCategoryItem(categories);
+      }
+    },
+    selectedCategory(category){
+      if(category){
+        axios.post('/get_related_categories',{
+          category_id:category.id,
+          category_name:this.getCategoryName()
+        }).then((response)=>{
+        });
+      }
+    },
     "$route.params.categoryName": function (name) {
       this.init();
+      if(this.categoryList){
+        this.getCategoryItem(this.categoryList);
+      }
     },
 
     headerSearchText: function (value) {
@@ -2332,6 +2385,9 @@ export default {
       if (bottom) {
         this.feed();
       }
+    },
+    "$parent.currentUser"(user) {
+      this.checkCurrentUser();
     },
   },
   created() {

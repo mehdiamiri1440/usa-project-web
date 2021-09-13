@@ -6,20 +6,12 @@
 }
 .main-content {
   padding: 59px 250px 0 0;
-
   direction: rtl;
-
-  /* border-bottom: 2px solid #f2f2f2; */
   height: 100%;
   position: fixed;
-
-  /*right: 0;*/
   background: #fff;
-
   left: 0;
-
   bottom: 0;
-
   top: 0;
 }
 .main-content.is-fix-alert {
@@ -283,7 +275,7 @@ small {
 @media screen and (max-width: 991px) {
   .main-content {
     padding: 0;
-    top: 59px;
+    top: 42px;
     padding-bottom: 59px;
   }
   .main-content.is-fix-alert {
@@ -321,8 +313,10 @@ small {
 
 @media screen and (max-width: 767px) {
   .is-guide-active {
-    z-index: 4 !important;
+    z-index: 1011 !important;
     background: transparent !important;
+    top: 0;
+    padding-bottom: 0;
   }
 }
 </style>
@@ -332,7 +326,7 @@ small {
     class="main-content col-xs-12"
     :class="{
       'is-fix-alert': isRequiredFixAlert,
-      'is-guide-active': selectedContact,
+      'is-guide-active': selectedContact || isChanleActive,
     }"
   >
     <div

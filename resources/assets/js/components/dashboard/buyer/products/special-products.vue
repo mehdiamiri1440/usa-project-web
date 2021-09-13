@@ -1,7 +1,7 @@
 <style scoped>
 .product-wrapper {
   max-width: 1170px;
-  margin: 0 auto;
+  margin: 20px auto;
   float: initial;
 }
 
@@ -127,8 +127,17 @@
 }
 
 @media screen and (max-width: 767px) {
+  .product-wrapper {
+    margin: 15px auto 100px;
+    overflow: hidden;
+  }
+
   #main-content {
-    margin-top: 123px;
+    margin-top: 105px;
+  }
+
+  .has-verification-alert #main-content {
+    margin-top: 135px;
   }
 
   .product-wrapper,
@@ -159,6 +168,7 @@
     margin-top: 111px;
     background: #fff;
     padding: 0;
+    height: calc(100% + 70px);
   }
 
   .user-contents .user-image,
@@ -187,10 +197,6 @@
   <div>
     <main id="main-content" class="col-sm-12 contents">
       <div class="row">
-        <div class="title col-xs-12">
-          <h1>فروشندگان پیشنهادی</h1>
-        </div>
-
         <div v-if="products.length > 0" class="product-wrapper">
           <div
             v-for="(product, productIndex) in products"
@@ -200,7 +206,6 @@
             <ProductGridArticle
               :product="product"
               :str="str"
-              :currentUser="currentUser"
               :productIndex="productIndex"
             />
           </div>
@@ -333,7 +338,6 @@ export default {
         },
         photos: [],
       },
-      currentUser: "",
       categoryId: "",
       subCategoryId: "",
       searchValue: "",
@@ -348,31 +352,23 @@ export default {
   },
   methods: {
     init: function () {
-      var self = this;
-
       this.loading = true;
-
       this.$parent.searchText = "";
-
+      this.getProducts();
+    },
+    getProducts() {
       axios
-        .post("/user/profile_info")
-        .then(function (response) {
-          self.currentUser = response.data;
-
-          axios
-            .post("/user/get_product_list", {
-              from_record_number: 0,
-              special_products: true,
-              to_record_number: self.productCountInPage,
-            })
-            .then(function (response) {
-              self.products = response.data.products;
-              self.loading = false;
-              localStorage.removeItem("productCountInPage");
-              eventBus.$emit("submiting", false);
-            });
+        .post("/user/get_product_list", {
+          from_record_number: 0,
+          special_products: true,
+          to_record_number: this.productCountInPage,
         })
-        .catch((error) => reject(error));
+        .then((response) => {
+          this.products = response.data.products;
+          this.loading = false;
+          localStorage.removeItem("productCountInPage");
+          eventBus.$emit("submiting", false);
+        });
     },
     feed() {
       this.loading = true;

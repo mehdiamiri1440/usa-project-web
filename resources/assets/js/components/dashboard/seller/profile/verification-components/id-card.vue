@@ -134,6 +134,10 @@
   .upload-error {
     text-align: center;
   }
+
+  .action-button-wrapper {
+    margin-bottom: 80px;
+  }
 }
 
 @media screen and (max-width: 768px) {
