@@ -1514,9 +1514,10 @@ export default {
       } else {
         this.buyAds = this.allBuyAds;
       }
-      setTimeout(function () {
+      this.$nextTick(() => {
+        this.scrollToTop();
         $(".list-notice button").tooltip();
-      }, 100);
+      });
     },
     scrollToTop() {
       window.scrollTo(0, 0);
@@ -1574,6 +1575,9 @@ export default {
         }
         this.loadMoreActive = false;
       });
+    },
+    scrollToTop() {
+      window.scrollTo(0, 0);
     },
   },
   mounted() {
