@@ -68,13 +68,12 @@ p {
 }
 </style>
 <template>
-  <div class="complete-the-profile padding-buttom-fixed" v-if="itemCount < 4">
+  <div class="complete-the-profile padding-buttom-fixed" v-if="itemCount < 3">
     <div class="box-title">
       میزان تکمیل پروفایل :
       <span v-if="itemCount == 0" class="red-text">خیلی ضعیف</span>
       <span v-else-if="itemCount == 1" class="yellow-text">ضعیف</span>
       <span v-else-if="itemCount == 2" class="blue-text">متوسط</span>
-      <span v-else-if="itemCount == 3" class="green-text">خوب</span>
     </div>
     <div class="progress-item-wrapper">
       <span
@@ -91,7 +90,7 @@ p {
       <div
         v-if="!verification"
         :class="{ 'ready-clone': !verification }"
-        class="pull-right"
+        data-merge="2"
       >
         <article class="item">
           <p class="title-item">
@@ -111,7 +110,7 @@ p {
       <div
         v-if="$parent.profileDescription.length < 200"
         :class="{ 'ready-clone': $parent.profileDescription.length < 200 }"
-        class="pull-right"
+        data-merge="2"
       >
         <article class="item">
           <p class="title-item">
@@ -137,7 +136,7 @@ p {
       <div
         v-if="!$parent.currentUser.profile.profile_photo"
         :class="{ 'ready-clone': !$parent.currentUser.profile.profile_photo }"
-        class="pull-right"
+        data-merge="2"
       >
         <article class="item">
           <p class="title-item">
@@ -154,29 +153,10 @@ p {
           </div>
         </article>
       </div>
-
-      <div
-        class="pull-right"
-        v-if="$parent.invitedUsers.length <= 0"
-        :class="{ 'ready-clone': $parent.invitedUsers.length <= 0 }"
-      >
-        <article class="item">
-          <p class="title-item">
-            <i class="fa fa-share-alt brand-text"></i>
-            <span>معرفی به همکاران </span>
-          </p>
-          <p class="content-item">
-            با معرفی باسکول به همکارانتان، اعتبار پروفایل خود را افزایش دهید.
-          </p>
-          <div class="text-center">
-            <button class="content-button green-button">
-              معرفی به همکاران
-            </button>
-          </div>
-        </article>
-      </div>
     </div>
-    <div class="owl-carousel profile-carosel item-wrapper"></div>
+    <div class="row">
+      <div class="owl-carousel owl-theme profile-carosel item-wrapper"></div>
+    </div>
   </div>
 </template>
 
@@ -187,11 +167,10 @@ export default {
   data() {
     return {
       itemCount: 0,
-      progressItems: [0, 0, 0, 0],
+      progressItems: [0, 0, 0],
       description: 0,
       verification: 0,
       userImage: 0,
-      referral: 0,
     };
   },
   methods: {
@@ -199,17 +178,15 @@ export default {
       this.description = 0;
       this.verification = 0;
       this.userImage = 0;
-      this.referral = 0;
     },
     sumCount() {
       this.itemCount = 0;
 
-      this.itemCount =
-        this.description + this.verification + this.userImage + this.referral;
+      this.itemCount = this.description + this.verification + this.userImage;
     },
     updateProgress() {
       this.sumCount();
-      this.progressItems = [0, 0, 0, 0];
+      this.progressItems = [0, 0, 0];
       if (this.itemCount) {
         for (let i = 1; i <= this.progressItems.length; i++) {
           if (this.itemCount >= i) {
@@ -247,12 +224,6 @@ export default {
     },
     loadCarosel() {
       let owl = $(".owl-carousel.item-wrapper");
-      let resetCssStyle = {
-        width: "initial",
-        marginRight: "auto",
-        marginLeft: "auto",
-      };
-      owl.css(resetCssStyle);
 
       owl.owlCarousel({
         autoplay: this.autoplay ? this.autoplay : true,
@@ -271,41 +242,29 @@ export default {
         rtl: true,
         responsive: {
           0: {
-            items: 1,
+            items: 2,
             stagePadding: 15,
             navText: false,
             dots: true,
+            mergeFit: true,
           },
           450: {
             items: 2,
             stagePadding: 15,
             navText: false,
             dots: true,
+            mergeFit: true,
           },
           992: {
-            items: 3,
+            items: 6,
             stagePadding: 15,
           },
           1420: {
-            items: 4,
+            items: 8,
             stagePadding: 15,
           },
         },
       });
-
-      if (this.isDeviceMobile()) {
-        let styles = {
-          width: "400px",
-          marginRight: "-15px",
-          marginLeft: "-15px",
-        };
-
-        this.$nextTick(() => {
-          setTimeout(() => {
-            owl.css(styles);
-          }, 1000);
-        });
-      }
     },
     openImageInput() {
       $(".owl-carousel .upload-image").on("click", () => {
@@ -330,6 +289,9 @@ export default {
         return false;
       }
     },
+  },
+  mounted() {
+    this.loadCarosel();
   },
   watch: {
     "$parent.profileDescription"(text) {
@@ -362,14 +324,6 @@ export default {
         this.userImage = 0;
       }
 
-      this.updateProgress();
-    },
-    "$parent.invitedUsers"(users) {
-      if (users.length > 0) {
-        this.referral = 1;
-      } else {
-        this.referral = 0;
-      }
       this.updateProgress();
     },
   },
