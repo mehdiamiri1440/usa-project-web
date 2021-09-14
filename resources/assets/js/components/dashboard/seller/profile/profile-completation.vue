@@ -169,7 +169,7 @@ p {
             با معرفی باسکول به همکارانتان، اعتبار پروفایل خود را افزایش دهید.
           </p>
           <div class="text-center">
-            <button class="content-button green-button">
+            <button class="content-button referral-button green-button">
               معرفی به همکاران
             </button>
           </div>
@@ -243,6 +243,9 @@ export default {
       $(".owl-carousel .verification-button").on("click", () => {
         this.verificationButtonClick();
       });
+      $(".owl-carousel .referral-button").on("click", () => {
+        this.referralButtonClick();
+      });
       this.loadCarosel(); //re-initialise the owl
     },
     loadCarosel() {
@@ -314,6 +317,9 @@ export default {
     },
     verificationButtonClick() {
       this.$router.push({ name: "profileBasicSellerVeficiation" });
+    },
+    referralButtonClick() {
+      this.$router.push({ name: "referralSeller" });
     },
     isDeviceMobile: function () {
       if (
