@@ -60,7 +60,7 @@ p {
 .wrapper-bg {
   border: none;
 }
-
+/* test */
 @media screen and (max-width: 768px) {
   .progress-item-wrapper > span {
     width: 65px;
