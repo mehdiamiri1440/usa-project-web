@@ -966,7 +966,6 @@ export default {
     },
     openPaymentModal(packageType) {
       let totalPrice = this.getTotalPriceForPay(packageType);
-      console.log(totalPrice);
       let userId = getUserId();
       let paymentData = {
         paymentName: "pricingData",

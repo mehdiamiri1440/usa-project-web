@@ -399,7 +399,6 @@ export default {
   data: function () {
     return {
       linkHideStates: [
-        "buyAd-requests",
         "messenger/contacts",
         "messenger/buy-ads",
         "register-product/success",
@@ -407,6 +406,8 @@ export default {
         "pricing",
         "product-pricing",
         "buyad-pricing",
+        "invited-users",
+        "referral"
       ],
       buttonIsActive: true,
       currentUser: {
