@@ -493,6 +493,9 @@ class LeadDistributorBot implements ShouldQueue
         $product_info[] = $product['main']->description;
 
         $result = array_filter($product_info, function ($item) use ($search_expresion) {
+            $search_expresion = str_replace("\\","",$search_expresion);
+            $search_expresion = str_replace("/","",$search_expresion);
+            
             return preg_match("/$search_expresion/", $item);
         });
 
