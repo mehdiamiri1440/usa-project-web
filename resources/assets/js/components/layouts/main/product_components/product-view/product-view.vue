@@ -301,10 +301,9 @@ button.send-message-button {
 }
 
 @media screen and (max-width: 767px) {
-
-.box-title {
-  padding: 0 10px;
-}
+  .box-title {
+    padding: 0 10px;
+  }
   .bread-crumbs-wrapper a {
     font-size: 12px;
   }
@@ -612,14 +611,15 @@ export default {
     };
   },
   methods: {
-    init: function () {
+    init() {
+      this.scrollToTop();
       this.isLoading = true;
     },
     checkCurrentUser() {
       var self = this;
-      let userId = "";
+      let userId = getUserId();
+
       if (this.currentUser && this.currentUser.user_info) {
-        let userId = getUserId();
         if (this.currentUser.user_info.is_seller == true) {
           this.showRegisterRequestBox = false;
         }
@@ -649,7 +649,7 @@ export default {
           window.location.href = "/404";
         });
     },
-    openChat: function (product) {
+    openChat(product) {
       this.isChat = true;
       this.registerComponentStatistics(
         "product",
@@ -692,7 +692,7 @@ export default {
       this.isChat = isChat;
       $("#register-modal").modal("show");
     },
-    openChatModal: function (product) {
+    openChatModal(product) {
       this.isChat = true;
       this.registerComponentStatistics(
         "product",
@@ -727,7 +727,7 @@ export default {
         eventBus.$emit("modal", "sendMsg");
       }
     },
-    activePhoneCall: function (isModal) {
+    activePhoneCall(isModal) {
       this.isChat = false;
       this.getPhoneLoader = true;
       this.isActivePhone = true;
@@ -803,17 +803,13 @@ export default {
           });
         });
     },
-    registerComponentStatistics: function (
-      categoryName,
-      actionName,
-      labelName
-    ) {
+    registerComponentStatistics(categoryName, actionName, labelName) {
       gtag("event", actionName, {
         event_category: categoryName,
         event_label: labelName,
       });
     },
-    getProductUrl: function () {
+    getProductUrl() {
       return (
         "/product-view/خرید-عمده-" +
         this.product.main.sub_category_name.replace(" ", "-") +
@@ -854,7 +850,7 @@ export default {
         eventBus.$emit("shareModalUrl", shareItem);
       }
     },
-    isDeviceMobile: function () {
+    isDeviceMobile() {
       if (
         navigator.userAgent.match(/Android/i) ||
         navigator.userAgent.match(/webOS/i) ||
@@ -869,7 +865,7 @@ export default {
         return false;
       }
     },
-    toLatinNumbers: function (num) {
+    toLatinNumbers(num) {
       if (num == null) {
         return null;
       }
@@ -887,7 +883,7 @@ export default {
           return c.charCodeAt(0) - 0x06f0;
         });
     },
-    editProduct: function (getProductWrapper) {
+    editProduct(getProductWrapper) {
       this.submiting = true;
       this.errors = "";
 
@@ -938,10 +934,10 @@ export default {
           // self.registerComponentExceptions('Product-component: validation errors in edit product API');
         });
     },
-    stopLoader: function () {
+    stopLoader() {
       eventBus.$emit("isLoading", false);
     },
-    getRelatedProductUrl: function (product) {
+    getRelatedProductUrl(product) {
       return (
         "/product-view/خرید-عمده-" +
         product.subcategory_name.replace(" ", "-") +
@@ -951,7 +947,7 @@ export default {
         product.id
       );
     },
-    elevatorEvent: function () {
+    elevatorEvent() {
       // eventBus.$emit("elevatorText", "با استفاده از نردبان، محصول شما تا زمان دریافت محصول تازه تر در همان دسته بندی، به عنوان اولین محصول نمایش داده می‌شود.");
 
       // eventBus.$emit("productId", this.product.main.id);
@@ -964,11 +960,11 @@ export default {
       eventBus.$emit("peymentMethodData", paymentData);
       $("#payment-type-modal").modal("show");
     },
-    inquiry: function () {
+    inquiry() {
       //eventBus.$emit("productUserInfo", this.product);
       this.$router.push({ name: "registerinquiry" });
     },
-    getConvertedNumbers: function (number) {
+    getConvertedNumbers(number) {
       if (number || typeof number === "number") {
         let data = number / 1000;
         if (number < 1000) {
@@ -978,7 +974,7 @@ export default {
         }
       } else return "";
     },
-    getCategoryName: function () {
+    getCategoryName() {
       let name = this.product.main.sub_category_name;
 
       return name ? name.split("-").join(" ") : "";
@@ -986,7 +982,7 @@ export default {
     convertCategoryname(name) {
       return name ? name.toString().split("-").join(" ") : "";
     },
-    handleBackKeys: function () {
+    handleBackKeys() {
       if (window.history.state) {
         history.pushState(null, null, window.location);
       }
@@ -1006,7 +1002,7 @@ export default {
 
       this.breadCrumbs = items;
     },
-    getSubCategoryUrl: function (category) {
+    getSubCategoryUrl(category) {
       let url = "/product-list/category/" + category.split(" ").join("-");
       return url;
     },
@@ -1040,6 +1036,9 @@ export default {
         },
         100
       );
+    },
+    scrollToTop() {
+      window.scrollTo(0, 0);
     },
   },
   created() {
