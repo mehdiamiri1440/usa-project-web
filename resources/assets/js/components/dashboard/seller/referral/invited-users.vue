@@ -131,6 +131,20 @@
   margin: 10px -8px;
 }
 
+.pricing-button {
+  border-radius: 12px;
+  color: #fff;
+  padding: 10px;
+  width: 100%;
+  max-width: 290px;
+  margin: 30px auto;
+  display: block;
+  font-size: 20px;
+  font-weight: 500;
+  transition: 300ms;
+  border: none;
+}
+
 .send-invitation {
   background: none;
   border: 1px solid #1da1f2;
@@ -262,8 +276,7 @@
         <div class="wallet-balance">
           <p class="wallet-title">میزان در آمد زایی</p>
           <p class="blue-text">
-            {{ getNumberWithCommas(referralUsers.wallet_balance)
-            }}<span>تومان</span>
+            {{ getNumberWithCommas(referralUsers.credit) }}<span>تومان</span>
           </p>
         </div>
         <div
@@ -284,10 +297,23 @@
               <span class="gray-text"></span>
             </div>
           </div>
-          <button class="send-invitation" @click="showWallet()">
+          <button
+            v-if="activePackagePercentage != 100"
+            class="send-invitation"
+            @click="showWallet()"
+          >
             <i class="fas fa-wallet"></i>
             شارژ دستی کیف پول
           </button>
+          <router-link
+            v-else
+            :to="{ name: 'dashboardPricingTableSeller' }"
+            tag="button"
+            class="bg-gradient-green pricing-button"
+          >
+            <i class="fas fa-arrow-up"></i>
+            ارتقا به عضویت ویژه
+          </router-link>
         </div>
         <div class="invited-users">
           <div
@@ -387,9 +413,12 @@ export default {
   },
   watch: {
     prices() {
-      let packagePrice = this.prices["type-3"] / 10;
+      let packagePrice =
+        (this.prices["type-3-discount"]
+          ? this.prices["type-3-discount"]
+          : this.prices["type-3"]) / 10;
       this.activePackagePercentage = Math.round(
-        (this.referralUsers.wallet_balance / packagePrice) * 100
+        (this.currentUser.user_info.wallet_balance / packagePrice) * 100
       );
       if (this.activePackagePercentage > 100) {
         this.activePackagePercentage = 100;
