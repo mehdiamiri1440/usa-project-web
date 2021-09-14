@@ -90,6 +90,12 @@
   z-index: 1;
   border-radius: 12px;
 }
+
+.plus-icon {
+  overflow: inherit !important;
+  background: #fff !important;
+  color: #00c569 !important;
+}
 </style>
 <template>
   <nav class="custom-navigation">
@@ -104,7 +110,8 @@
           class="icon-wrapper"
           :class="{
             'main-icon': item.mainIcon,
-            'default-icon': !item.mainIcon,
+            'default-icon': $route.name == 'register',
+            'plus-icon': item.icon == 'fa-plus',
           }"
         >
           <i class="fa" :class="item.icon"></i>
@@ -210,7 +217,7 @@ export default {
         },
         {
           title: "درخواست‌ ها",
-          name: "buyAdRequestsSeller",
+          name: "mainBuyAdRequests",
           icon: "fa-list-alt",
           mainIcon: false,
         },
@@ -274,7 +281,7 @@ export default {
         },
         {
           title: "درخواست‌ ها",
-          name: "buyAdRequestsSeller",
+          name: "mainBuyAdRequests",
           icon: "fa-list-alt",
           mainIcon: false,
         },

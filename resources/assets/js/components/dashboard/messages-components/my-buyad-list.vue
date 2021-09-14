@@ -1044,7 +1044,7 @@ li.static-item > button i {
             <router-link
               tag="button"
               class="buyad-button"
-              :to="{ name: 'buyAdRequestsSeller' }"
+              :to="{ name: 'mainBuyAdRequests' }"
             >
               همه درخواست های خرید
               <i class="fa fa-arrow-left"></i>

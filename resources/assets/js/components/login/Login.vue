@@ -722,7 +722,7 @@ export default {
                 .post("/get_seller_dashboard_required_data")
                 .then(function (response) {
                   if (response.data.confirmed_products_count !== 0) {
-                    window.location.href = "/seller/buyAd-requests";
+                    window.location.href = "/buyAd-requests";
                   } else {
                     window.location.href = "/seller/register-product";
                   }

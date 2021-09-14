@@ -836,7 +836,7 @@ li {
 
               <router-link
                 v-else-if="isUserLogin && userType == 1"
-                :to="{ name: 'buyAdRequestsSeller' }"
+                :to="{ name: 'mainBuyAdRequests' }"
                 class="green-button"
               >
                 لیست درخواست های خرید

@@ -76,6 +76,7 @@ export default {
         },
         user_info: "",
       },
+      filterCategory: "",
     };
   },
   methods: {
@@ -95,6 +96,9 @@ export default {
         this.currentUser = response.data;
         this.$parent.currentUser = response.data;
       });
+    },
+    selectBuyAdCategoryFilter(category) {
+      this.filterCategory = category;
     },
     getCategoryName: function () {
       let name = this.$route.params.categoryName;

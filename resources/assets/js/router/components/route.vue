@@ -412,6 +412,7 @@ export default {
         profile: {
           profile_photo: "",
         },
+        user_info: "",
       },
       walletBalance: "",
       peymentMethodData: "",
@@ -517,7 +518,7 @@ export default {
           if (
             window.location.pathname != "/buyer/messenger/contacts" &&
             window.location.pathname != "/seller/messenger/contacts" &&
-            window.location.pathname != "/seller/buyAd-requests" &&
+            window.location.pathname != "/buyAd-requests" &&
             !window.location.pathname.includes("product-view") &&
             !this.iswebview
           ) {
@@ -540,7 +541,7 @@ export default {
           if (
             window.location.pathname != "/buyer/messenger/contacts" &&
             window.location.pathname != "/seller/messenger/contacts" &&
-            window.location.pathname != "/seller/buyAd-requests" &&
+            window.location.pathname != "/buyAd-requests" &&
             !window.location.pathname.includes("product-view") &&
             !this.iswebview
           ) {
@@ -1360,14 +1361,16 @@ export default {
   },
   watch: {
     currentUser(user) {
-      this.walletBalance = user.user_info.wallet_balance;
+      if (user.user_info) {
+        this.walletBalance = user.user_info.wallet_balance;
 
-      let date = user.profile.created_at;
-      let userCreatedAt = new Date(date);
-      let currentDate = new Date();
-      currentDate = new Date(currentDate.getTime() - 60 * 60000);
-      if (currentDate > userCreatedAt) {
-        // this.activateDownloadApp();
+        let date = user.profile.created_at;
+        let userCreatedAt = new Date(date);
+        let currentDate = new Date();
+        currentDate = new Date(currentDate.getTime() - 60 * 60000);
+        if (currentDate > userCreatedAt) {
+          // this.activateDownloadApp();
+        }
       }
     },
     walletBalance(balance) {

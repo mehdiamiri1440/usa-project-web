@@ -1237,7 +1237,7 @@ a.profile-info-wrapper:hover {
               <router-link
                 v-if="is_seller"
                 class="green-button green-button-alt static-layout"
-                :to="{ name: 'buyAdRequestsSeller' }"
+                :to="{ name: 'mainBuyAdRequests' }"
               >
                 <div class="item-icon">
                   <i class="fa fa-users"></i>
@@ -1436,7 +1436,7 @@ a.profile-info-wrapper:hover {
                 <router-link
                   v-if="is_seller == 1"
                   class="smoothScroll"
-                  :to="{ name: 'buyAdRequestsSeller' }"
+                  :to="{ name: 'mainBuyAdRequests' }"
                   @click="
                     registerComponentStatistics(
                       'header',
