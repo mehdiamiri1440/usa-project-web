@@ -5,6 +5,7 @@
     :assets="assets"
     :userType="userType"
     :categoryList="categoryList"
+    :currentUser="currentUser"
   />
 </template>
 

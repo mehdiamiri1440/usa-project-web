@@ -131,7 +131,35 @@
   margin: 10px -8px;
 }
 
+.pricing-button {
+  border-radius: 12px;
+  color: #fff;
+  padding: 10px;
+  width: 100%;
+  max-width: 290px;
+  margin: 30px auto;
+  display: block;
+  font-size: 20px;
+  font-weight: 500;
+  transition: 300ms;
+  border: none;
+}
+
 .send-invitation {
+  display: block;
+  max-width: 330px;
+  width: 100%;
+  border: none;
+  background: linear-gradient(45deg, #1da1f2, #3d7db2);
+  box-shadow: 0 4px 0 #0966ad;
+  border-radius: 12px;
+  color: #fff;
+  font-size: 20px;
+  padding: 12px 15px;
+  margin: 30px auto 100px;
+}
+
+.charge-wallet-button {
   background: none;
   border: 1px solid #1da1f2;
   border-radius: 12px;
@@ -146,7 +174,7 @@
   transition: 300ms;
 }
 
-.send-invitation:hover {
+.charge-wallet-button:hover {
   background: #1da1f2;
   color: #fff;
   transition: 300ms;
@@ -220,6 +248,20 @@
 }
 
 @media screen and (max-width: 767px) {
+  .send-invitation-wrapper {
+    position: fixed;
+    width: 100%;
+    background: #fff;
+    bottom: 59px;
+    left: 0;
+    box-shadow: 0 -3px 6px rgba(0, 0, 0, 0.06);
+    padding: 0 10px;
+  }
+
+  .send-invitation-wrapper button {
+    margin: 10px auto 13px;
+  }
+
   .main-section-wrapper {
     max-width: initial;
     margin: 0px auto;
@@ -240,7 +282,7 @@
     border-radius: 0;
     box-shadow: none;
     direction: rtl;
-    transform: translate(0, 0);
+    transform: initial;
     top: 0;
     padding-top: 0;
     width: 100%;
@@ -262,8 +304,7 @@
         <div class="wallet-balance">
           <p class="wallet-title">میزان در آمد زایی</p>
           <p class="blue-text">
-            {{ getNumberWithCommas(referralUsers.wallet_balance)
-            }}<span>تومان</span>
+            {{ getNumberWithCommas(referralUsers.credit) }}<span>تومان</span>
           </p>
         </div>
         <div
@@ -284,10 +325,23 @@
               <span class="gray-text"></span>
             </div>
           </div>
-          <button class="send-invitation" @click="showWallet()">
+          <button
+            v-if="activePackagePercentage != 100"
+            class="charge-wallet-button"
+            @click="showWallet()"
+          >
             <i class="fas fa-wallet"></i>
             شارژ دستی کیف پول
           </button>
+          <router-link
+            v-else
+            :to="{ name: 'dashboardPricingTableSeller' }"
+            tag="button"
+            class="bg-gradient-green pricing-button"
+          >
+            <i class="fas fa-arrow-up"></i>
+            ارتقا به عضویت ویژه
+          </router-link>
         </div>
         <div class="invited-users">
           <div
@@ -330,6 +384,16 @@
                 اند.
               </p>
             </div>
+          </div>
+          <div class="send-invitation-wrapper">
+            <router-link
+              :to="{ name: 'referralSeller' }"
+              tag="button"
+              class="send-invitation"
+            >
+              <i class="fa fa-share-alt"></i>
+              ارسال دعوت نامه جدید
+            </router-link>
           </div>
         </div>
       </div>
@@ -387,9 +451,12 @@ export default {
   },
   watch: {
     prices() {
-      let packagePrice = this.prices["type-3"] / 10;
+      let packagePrice =
+        (this.prices["type-3-discount"]
+          ? this.prices["type-3-discount"]
+          : this.prices["type-3"]) / 10;
       this.activePackagePercentage = Math.round(
-        (this.referralUsers.wallet_balance / packagePrice) * 100
+        (this.currentUser.user_info.wallet_balance / packagePrice) * 100
       );
       if (this.activePackagePercentage > 100) {
         this.activePackagePercentage = 100;

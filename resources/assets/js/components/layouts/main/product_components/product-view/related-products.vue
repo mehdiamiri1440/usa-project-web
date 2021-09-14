@@ -13,7 +13,7 @@ div.items-wrapper {
 }
 </style>
 <template>
-  <div id="related-products-wrapper">
+  <div id="related-products-item">
     <div
       v-for="(product, productIndex) in products"
       :key="'related-product-' + productIndex"
@@ -133,7 +133,7 @@ export default {
   watch: {
     "$parent.product.main"() {
       isElementShownInView(
-        ".related-product",
+        "#related-products-wrapper",
         (isInView) => {
           if (isInView) {
             this.getRelatedProducts();
