@@ -613,9 +613,13 @@ export default {
   methods: {
     init() {
       this.scrollToTop();
-      this.isLoading = true;
+      console.log(!this.product.user_info, !this.isLoading);
+      if (!this.product.user_info && !this.isLoading) {
+        this.checkCurrentUser();
+      }
     },
     checkCurrentUser() {
+      this.isLoading = true;
       var self = this;
       let userId = getUserId();
 
@@ -1031,6 +1035,7 @@ export default {
               })
               .then((response) => {
                 this.dataTags = response.data.category_names;
+                this.isLoading = false;
               });
           }
         },
@@ -1071,9 +1076,7 @@ export default {
       this.product.main.id = "";
       this.init();
     },
-    currentUser(user) {
-      this.checkCurrentUser();
-    },
+
   },
   metaInfo() {
     let productSubCategory = this.product.main.sub_category_name;

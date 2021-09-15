@@ -1,6 +1,6 @@
 export const isElementShownInView = (element, callBack = () => { }, staticOfsset = 0, watchScroll = false) => {
     let selectedElement = $(element);
-    if (typeof selectedElement !== "undefined") {
+    if (typeof selectedElement.offset() !== "undefined") {
 
         if ($(window).scrollTop() + $(window).height() >=
             selectedElement.offset().top - staticOfsset) {
