@@ -357,7 +357,6 @@ export default {
       );
     },
   },
-  // mounted() {},
   watch: {
     "$parent.product.user_info"() {
       this.init();
