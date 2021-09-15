@@ -612,8 +612,11 @@ export default {
   },
   methods: {
     init() {
-      this.scrollToTop();
-      this.isLoading = true;
+      if (!this.product.user_info) {
+        this.scrollToTop();
+        this.isLoading = true;
+        this.checkCurrentUser();
+      }
     },
     checkCurrentUser() {
       var self = this;

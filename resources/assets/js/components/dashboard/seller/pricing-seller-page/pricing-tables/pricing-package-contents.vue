@@ -965,6 +965,7 @@ export default {
       return price;
     },
     openPaymentModal(packageType) {
+      $(".modal").modal("hide");
       let totalPrice = this.getTotalPriceForPay(packageType);
       let userId = getUserId();
       let paymentData = {

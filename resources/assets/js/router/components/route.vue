@@ -1,7 +1,7 @@
 <style scoped>
 .android-download-alert-wrapper {
   position: fixed;
-  bottom: 0;
+  bottom: 59px;
   width: 100%;
   background: #fff;
   text-align: center;

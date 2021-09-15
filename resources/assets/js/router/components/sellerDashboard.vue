@@ -407,7 +407,7 @@ export default {
         "product-pricing",
         "buyad-pricing",
         "invited-users",
-        "referral"
+        "referral",
       ],
       buttonIsActive: true,
       currentUser: {

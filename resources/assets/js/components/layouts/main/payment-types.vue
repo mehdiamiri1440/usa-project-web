@@ -315,7 +315,7 @@
   <section class="main-content h-100 col-xs-12">
     <!-- end payment loader -->
     <div class="main-wrapper col-xs-12 col-md-8 col-md-offset-2">
-      <button @click.prevent="openIncreaseModal" class="wallet-wrapper">
+      <button @click.prevent="openIncreaseModal()" class="wallet-wrapper">
         <div class="wallet">
           <div class="wallet-header">
             <p class="title">
@@ -569,12 +569,12 @@ export default {
 
       this.$nextTick(() => {
         $("#increase-wallet").on("click", () => {
+          swal.close();
           this.openIncreaseModal();
         });
       });
     },
     openIncreaseModal() {
-      swal.close();
       $(".modal").modal("hide");
       setTimeout(() => {
         $("#wallet-modal").modal("show");
@@ -590,27 +590,29 @@ export default {
         event_label: labelName,
       });
     },
-    modalHasWalletBalance(){
-      if(this.walletBalance == ""){
-         axios.post("/user/profile_info").then((response) => {
-        this.$parent.currentUser = response.data;
-        this.checkWalletBalance(this.peymentMethodData.totalPrice,response.data.user_info.wallet_balance)
-      });
+    modalHasWalletBalance() {
+      if (this.walletBalance == "") {
+        axios.post("/user/profile_info").then((response) => {
+          this.$parent.currentUser = response.data;
+          this.checkWalletBalance(
+            this.peymentMethodData.totalPrice,
+            response.data.user_info.wallet_balance
+          );
+        });
       }
     },
-    checkWalletBalance(totalPrice,walletBalance){
+    checkWalletBalance(totalPrice, walletBalance) {
       if (totalPrice <= walletBalance) {
         this.walletHasAmount = true;
       } else {
         this.walletHasAmount = false;
       }
-    }
+    },
   },
   watch: {
     peymentMethodData(payment) {
       this.modalHasWalletBalance();
       this.checkWalletBalance(payment.totalPrice, this.walletBalance);
-      
     },
   },
 };
