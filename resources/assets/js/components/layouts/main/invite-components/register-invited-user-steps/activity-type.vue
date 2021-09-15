@@ -163,23 +163,14 @@ select.error:focus + i {
 
 .label-radio {
   display: inline-block;
-
   position: relative;
-
   cursor: pointer;
-
   -webkit-user-select: none;
-
   -moz-user-select: none;
-
   -ms-user-select: none;
-
   user-select: none;
-
   direction: rtl;
-
   padding: 0 29px 0 15px;
-
   font-size: 14px;
 }
 .label-radio:nth-of-type(2) {
@@ -188,40 +179,26 @@ select.error:focus + i {
 /* Hide the browser's default radio button */
 .label-radio input {
   position: absolute;
-
   opacity: 0;
-
   cursor: pointer;
-
   z-index: 1;
-
   left: 0;
-
   right: 0;
-
-  top: 0;
-
+  top: -2px;
   bottom: 0;
-
-  height: 100%;
-
+  height: 105%;
+  width: 100%;
   margin: 0;
 }
 
 /* Create a custom radio button */
 .checkmark {
   position: absolute;
-
   top: 16px;
-
   right: 13px;
-
   height: 12px;
-
   width: 12px;
-
   background-color: #eee;
-
   border-radius: 50%;
 }
 
@@ -434,7 +411,10 @@ select.error:focus + i {
               <select
                 v-model="categoryId"
                 id="activity-domain"
-                :class="{ error: $parent.errors.categoryId }"
+                :class="{
+                  error: $parent.errors.categoryId,
+                  active: categoryId,
+                }"
                 class="dire"
               >
                 <option disabled selected value="">انتخاب کنید</option>

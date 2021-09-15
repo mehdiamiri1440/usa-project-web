@@ -174,7 +174,7 @@ import Location from "./register-invited-user-steps/location";
 import ActivityType from "./register-invited-user-steps/activity-type";
 import RegisterLoader from "./register-invited-user-steps/register-loader";
 import device from "device-uuid/lib/device-uuid";
-import pricingTableSellerContentVue from '../../../dashboard/seller/pricing-seller-page/pricing-table-seller-content.vue';
+import pricingTableSellerContentVue from "../../../dashboard/seller/pricing-seller-page/pricing-table-seller-content.vue";
 
 export default {
   props: ["categoryList"],
@@ -249,7 +249,7 @@ export default {
           activity_type: this.step6.activityType,
           national_code: "",
           category_id: this.step6.categoryId,
-          referred_user_name:true
+          referred_user_name: true,
         };
         axios
           .post("/api/v1/users", object)

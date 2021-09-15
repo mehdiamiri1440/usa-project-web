@@ -364,12 +364,11 @@ h2 {
     font-size: 19px;
   }
 
-.banner-contents p {
-  font-size: 25px;
-padding: 18px 10px;
-line-height: 1.618;
-}
-
+  .banner-contents p {
+    font-size: 25px;
+    padding: 18px 10px;
+    line-height: 1.618;
+  }
 }
 </style>
 
@@ -417,8 +416,11 @@ line-height: 1.618;
       </section>
     </div>
     <section class="user-section-wrapper">
-      <div class="col-xs-12 col-md-6 pull-right user-info-wrapper">
-        <div class="user-info" v-if="inviterUser.user_info">
+      <div
+        class="col-xs-12 col-md-6 pull-right user-info-wrapper"
+        v-if="inviterUser.user_info"
+      >
+        <div class="user-info">
           <div class="image-wrapper">
             <img
               v-if="inviterUser.profile.profile_photo"
@@ -734,6 +736,9 @@ export default {
         .post("/load_profile_by_user_name", { user_name: userName })
         .then((response) => {
           this.inviterUser = response.data;
+        })
+        .catch(function (err) {
+          window.location.href = "/404";
         });
     },
     getImageUrl(index) {
