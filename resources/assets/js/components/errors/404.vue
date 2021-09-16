@@ -85,7 +85,7 @@ img {
 
   img {
     width: 60%;
-    margin: 100px auto 20px;
+    margin: 90px auto 20px;
     display: block;
   }
 }
@@ -106,10 +106,8 @@ img {
     margin: 0 auto;
     text-align: center;
   }
-
   img {
-    margin: 150px auto 20px;
-    display: block;
+    margin: 30px auto 20px;
   }
 }
 </style>

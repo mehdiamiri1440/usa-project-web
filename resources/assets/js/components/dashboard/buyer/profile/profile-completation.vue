@@ -244,22 +244,25 @@ export default {
           0: {
             items: 2,
             stagePadding: 15,
+            loop: true,
             navText: false,
             dots: true,
             mergeFit: true,
           },
-          450: {
-            items: 2,
+          660: {
+            items: 4,
+            loop: true,
             stagePadding: 15,
             navText: false,
             dots: true,
             mergeFit: true,
           },
-          992: {
+          1199: {
             items: 6,
+            loop: false,
             stagePadding: 15,
           },
-          1420: {
+          2000: {
             items: 8,
             stagePadding: 15,
           },
