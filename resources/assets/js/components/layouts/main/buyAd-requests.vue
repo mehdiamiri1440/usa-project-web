@@ -1305,7 +1305,7 @@ export default {
       isRequests: true,
       emptyItem: 0,
       categoryList: "",
-      buyAdPostCount: 11,
+      buyAdPostCount: 51,
       loadMoreActive: false,
       continueToLoadProducts: true,
     };
@@ -1327,7 +1327,7 @@ export default {
       } else {
         axios
           .post("/get_buyAd_list", {
-            from: this.buyAdPostCount - 10,
+            from: this.buyAdPostCount - 50,
             to: this.buyAdPostCount,
           })
           .then((response) => {
@@ -1545,12 +1545,12 @@ export default {
 
       // use 51 because from start as 1 and get 49 item
 
-      this.buyAdPostCount += 11;
+      this.buyAdPostCount += 51;
 
       let data = {};
       if (!this.$parent.filterCategory) {
         data = {
-          from: this.buyAdPostCount - 10,
+          from: this.buyAdPostCount - 50,
           to: this.buyAdPostCount,
         };
       } else if (this.continueToLoadProducts) {

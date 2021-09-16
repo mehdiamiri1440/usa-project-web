@@ -235,7 +235,8 @@
 .users-wrapper {
   padding: 15px;
   max-width: 700px;
-  margin: 20px auto 100px;
+  margin: 20px auto;
+  padding-bottom: 150px;
 }
 
 .spinner-wrapper {

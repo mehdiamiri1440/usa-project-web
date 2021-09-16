@@ -37,7 +37,7 @@ a.active {
   content: "\F104";
   position: absolute;
   left: 10px;
-  top: 25px;
+  top: 24px;
   font-size: 18px;
   color: #cccccc;
 }
@@ -118,6 +118,12 @@ a.active {
   animation: gradient 7s ease infinite;
   color: #fff !important;
   border: none;
+  margin: 15px auto 0;
+  border-radius: 12px;
+}
+
+#pricing-link::before {
+  color: #fff !important;
 }
 
 #pricing-link:hover i {
