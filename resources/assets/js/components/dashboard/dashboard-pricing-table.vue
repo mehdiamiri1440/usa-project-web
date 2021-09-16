@@ -29,7 +29,7 @@
 <template>
   <div>
     <section class="main-content col-xs-12">
-      <div class="title col-xs-12">
+      <div class="title col-xs-12 hidden-xs hidden-sm">
         <div class="row">
           <div class="col-xs-12 col-sm-4 pull-right">
             <h1>ارتقا عضویت</h1>
