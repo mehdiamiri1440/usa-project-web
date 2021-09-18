@@ -94,7 +94,7 @@
         }
         .main-loader-shape-wrapper {
           position: absolute;
-          padding: 40px 0;
+          height: 70px !important;
           bottom: 20%;
           left: calc(50% - 23px);
         }

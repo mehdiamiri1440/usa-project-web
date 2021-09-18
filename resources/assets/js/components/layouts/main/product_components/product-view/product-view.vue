@@ -119,6 +119,7 @@ span {
   box-shadow: 0 -6px 15px rgba(0, 0, 0, 0.16);
   background: #fff;
   display: flex;
+  height: 59px;
 }
 
 .fix-send-message-wrapper button {
