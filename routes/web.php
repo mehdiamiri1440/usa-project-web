@@ -80,6 +80,8 @@ Route::get('/buyers',function(){
     }
 });
 
+Route::post('/store-photo','Accounting\user_controller@store_photo');
+
 // Route::group(['prefix' => 'master'], function () {
 //     Route::get('/', function () {
 //         return view('layout.master');

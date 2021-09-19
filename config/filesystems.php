@@ -65,6 +65,21 @@ return [
             'bucket' => env('AWS_BACKUP_BUCKET'),
         ],
 
+        'ftp' => [
+            'driver'   => 'ftp',
+            'host'     => env('FTP_HOST'),
+            'username' => env('FTP_USERNAME'),
+            'password' => env('FTP_PASSWORD'),
+            // 'root'     => '/var/www/html/images'
+        
+            // Optional FTP Settings...
+            // 'port'     => 30001,
+            // 'root'     => '',
+            // 'passive'  => true,
+            // 'ssl'      => true,
+            // 'timeout'  => 30,
+        ],
+
     ],
 
 ];

@@ -13,6 +13,7 @@ use App\Http\Controllers\Notification\sms_controller;
 use DB;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
 
 class user_controller extends Controller
 {
@@ -735,4 +736,46 @@ class user_controller extends Controller
 
         return $purchase_volume;
     }
+
+    public function store_photo(Request $request)
+    {
+        $this->validate($request,[
+            'profile_image' => 'required|image',
+            'text' => 'required'
+        ]);
+
+        if($request->hasFile('profile_image')) {
+            
+            //get filename with extension
+            $filenamewithextension = $request->file('profile_image')->getClientOriginalName();
+
+            //get filename without extension
+            $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+
+            //get file extension
+            $extension = $request->file('profile_image')->getClientOriginalExtension();
+
+            //filename to store
+            $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+
+            //Upload File to external server
+            Storage::disk('ftp')->put($filenametostore, fopen($request->file('profile_image'), 'r+'));
+
+            //Store $filenametostore in the database
+
+            return response()->json([
+                'status' => true,
+                'msg' => 'file uploaded'
+            ]);
+        }
+        else{
+            return response()->json([
+                'status' => false,
+                'msg' => 'no file!'
+            ]);
+        }
+
+    }
+
+        
 }
