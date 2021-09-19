@@ -1,13 +1,12 @@
 <style scoped>
 .profile {
   padding: 10px;
-  margin-top: 10px;
   text-align: center;
   position: relative;
   overflow: hidden;
   transition: 150ms;
   border-radius: 12px;
-  top: 5px;
+  margin-bottom: 15px;
 }
 
 .profile:hover {
@@ -27,7 +26,7 @@
 
 .profile-icon-wrapper {
   position: absolute;
-  top: calc(50% - 13px);
+  top: calc(50% - 14px);
   font-size: 27px;
   left: 17px;
   transition: 150ms;
@@ -80,6 +79,17 @@
   height: 33px !important;
   width: 150px;
   background-color: #dfdfe0 !important;
+}
+
+.green-text {
+  color: #00c569 !important;
+}
+
+@media screen and (max-width: 991px) {
+  .profile {
+    margin-bottom: 30px;
+    top: 15px;
+  }
 }
 </style>
 <template>

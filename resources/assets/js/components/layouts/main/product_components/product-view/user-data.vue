@@ -85,6 +85,10 @@
 }
 
 @media screen and (max-width: 767px) {
+  #product-section .box-title {
+    padding: 0 10px;
+  }
+
   #reviews-section {
     padding: 0 25px;
   }
@@ -353,7 +357,6 @@ export default {
       );
     },
   },
-  // mounted() {},
   watch: {
     "$parent.product.user_info"() {
       this.init();

@@ -301,6 +301,9 @@ button.send-message-button {
 }
 
 @media screen and (max-width: 767px) {
+  .box-title {
+    padding: 0 10px;
+  }
   .bread-crumbs-wrapper a {
     font-size: 12px;
   }
@@ -391,20 +394,20 @@ button.send-message-button {
           </aside>
         </div>
       </div>
+
       <div
+        id="related-products-wrapper"
         class="section-wrapper col-xs-12 related-product"
-        v-show="isRelatedProducts"
+        :class="{ 'default-related-product': !isRelatedProducts }"
       >
-        <div class="row">
-          <h3 class="box-title">محصولات مرتبط</h3>
-          <RelatedProducts />
+        <div v-show="isRelatedProducts">
+          <div class="row">
+            <h3 class="box-title">محصولات مرتبط</h3>
+            <RelatedProducts />
+          </div>
         </div>
-      </div>
-      <div
-        v-show="!isRelatedProducts"
-        class="section-wrapper col-xs-12 default-related-product"
-      >
-        <div class="row">
+
+        <div v-if="!isRelatedProducts" class="row">
           <h3 class="box-title">محصولات مرتبط</h3>
           <div>
             <div
@@ -457,16 +460,19 @@ button.send-message-button {
         </div>
       </div>
 
-      <div class="col-xs-12" v-if="dataTags.length">
-        <div class="data-tag-wrapper text-rtl">
+      <div class="col-xs-12" id="related-categories">
+        <div class="data-tag-wrapper text-rtl" v-if="dataTags.length">
           <router-link
             class="tag-item"
             v-for="(tag, index) in dataTags"
             :key="index"
             v-text="tag"
-             :to="{ name: 'productCategory',params:{
-              categoryName:convertCategoryname(tag)
-            } }"
+            :to="{
+              name: 'productCategory',
+              params: {
+                categoryName: convertCategoryname(tag),
+              },
+            }"
           ></router-link>
         </div>
       </div>
@@ -560,6 +566,7 @@ import RegisterModal from "../../main_components/register-modal";
 import swal from "../../../../../sweetalert.min.js";
 import StickySidebar from "../../../../../stickySidebar.js";
 // import registerInquerForm from "../../main_components/register-inquiry-form.vue";
+import { isElementShownInView } from "../../../../../custom";
 
 export default {
   components: {
@@ -570,14 +577,10 @@ export default {
     RelatedProducts,
     // registerInquerForm,
   },
-  props: ["str", "assets", "userType", "categoryList"],
+  props: ["str", "assets", "userType", "categoryList", "currentUser"],
   data: function () {
     return {
       isChat: true,
-      currentUser: {
-        profile: "",
-        user_info: "",
-      },
       product: {
         main: {
           category_name: "",
@@ -608,49 +611,48 @@ export default {
     };
   },
   methods: {
-    init: function () {
-      this.isLoading = true;
-
-      this.checkCurrentUser();
+    init() {
+      this.scrollToTop();
+      if (!this.product.user_info && !this.isLoading) {
+        this.checkCurrentUser();
+      }
     },
     checkCurrentUser() {
+      this.isLoading = true;
       var self = this;
+      let userId = getUserId();
 
-      if (this.$parent.currentUser.user_info) {
-        this.currentUser = this.$parent.currentUser;
-        let userId = getUserId();
-
-        axios
-          .post("/get_product_by_id", {
-            product_id: self.$route.params.id,
-          })
-          .then(function (response) {
-            self.product = response.data.product;
-            self.getRelatedCategories(self.product.main.sub_category_id);
-            if (userId) {
-              if (userId === self.product.main.myuser_id) {
-                self.isMyProfile = true;
-                self.$emit("isMyProfile", self.isMyProfile);
-              }
-            }
-            self.categoryUrl =
-              "/product-list/category/" + self.getCategoryName();
-            self.starScore = Math.floor(
-              self.product.user_info.review_info.avg_score
-            );
-
-            self.sidebarScroll();
-            self.getBreadCrumbs();
-          })
-          .catch(function (err) {
-            window.location.href = "/404";
-          });
+      if (this.currentUser && this.currentUser.user_info) {
         if (this.currentUser.user_info.is_seller == true) {
           this.showRegisterRequestBox = false;
         }
       }
+      axios
+        .post("/get_product_by_id", {
+          product_id: self.$route.params.id,
+        })
+        .then(function (response) {
+          self.product = response.data.product;
+          self.getRelatedCategories(self.product.main.sub_category_id);
+          if (userId) {
+            if (userId === self.product.main.myuser_id) {
+              self.isMyProfile = true;
+              self.$emit("isMyProfile", self.isMyProfile);
+            }
+          }
+          self.categoryUrl = "/product-list/category/" + self.getCategoryName();
+          self.starScore = Math.floor(
+            self.product.user_info.review_info.avg_score
+          );
+
+          self.sidebarScroll();
+          self.getBreadCrumbs();
+        })
+        .catch(function (err) {
+          window.location.href = "/404";
+        });
     },
-    openChat: function (product) {
+    openChat(product) {
       this.isChat = true;
       this.registerComponentStatistics(
         "product",
@@ -693,7 +695,7 @@ export default {
       this.isChat = isChat;
       $("#register-modal").modal("show");
     },
-    openChatModal: function (product) {
+    openChatModal(product) {
       this.isChat = true;
       this.registerComponentStatistics(
         "product",
@@ -728,7 +730,7 @@ export default {
         eventBus.$emit("modal", "sendMsg");
       }
     },
-    activePhoneCall: function (isModal) {
+    activePhoneCall(isModal) {
       this.isChat = false;
       this.getPhoneLoader = true;
       this.isActivePhone = true;
@@ -804,17 +806,13 @@ export default {
           });
         });
     },
-    registerComponentStatistics: function (
-      categoryName,
-      actionName,
-      labelName
-    ) {
+    registerComponentStatistics(categoryName, actionName, labelName) {
       gtag("event", actionName, {
         event_category: categoryName,
         event_label: labelName,
       });
     },
-    getProductUrl: function () {
+    getProductUrl() {
       return (
         "/product-view/خرید-عمده-" +
         this.product.main.sub_category_name.replace(" ", "-") +
@@ -855,7 +853,7 @@ export default {
         eventBus.$emit("shareModalUrl", shareItem);
       }
     },
-    isDeviceMobile: function () {
+    isDeviceMobile() {
       if (
         navigator.userAgent.match(/Android/i) ||
         navigator.userAgent.match(/webOS/i) ||
@@ -870,7 +868,7 @@ export default {
         return false;
       }
     },
-    toLatinNumbers: function (num) {
+    toLatinNumbers(num) {
       if (num == null) {
         return null;
       }
@@ -888,7 +886,7 @@ export default {
           return c.charCodeAt(0) - 0x06f0;
         });
     },
-    editProduct: function (getProductWrapper) {
+    editProduct(getProductWrapper) {
       this.submiting = true;
       this.errors = "";
 
@@ -939,10 +937,10 @@ export default {
           // self.registerComponentExceptions('Product-component: validation errors in edit product API');
         });
     },
-    stopLoader: function () {
+    stopLoader() {
       eventBus.$emit("isLoading", false);
     },
-    getRelatedProductUrl: function (product) {
+    getRelatedProductUrl(product) {
       return (
         "/product-view/خرید-عمده-" +
         product.subcategory_name.replace(" ", "-") +
@@ -952,7 +950,7 @@ export default {
         product.id
       );
     },
-    elevatorEvent: function () {
+    elevatorEvent() {
       // eventBus.$emit("elevatorText", "با استفاده از نردبان، محصول شما تا زمان دریافت محصول تازه تر در همان دسته بندی، به عنوان اولین محصول نمایش داده می‌شود.");
 
       // eventBus.$emit("productId", this.product.main.id);
@@ -965,11 +963,11 @@ export default {
       eventBus.$emit("peymentMethodData", paymentData);
       $("#payment-type-modal").modal("show");
     },
-    inquiry: function () {
+    inquiry() {
       //eventBus.$emit("productUserInfo", this.product);
       this.$router.push({ name: "registerinquiry" });
     },
-    getConvertedNumbers: function (number) {
+    getConvertedNumbers(number) {
       if (number || typeof number === "number") {
         let data = number / 1000;
         if (number < 1000) {
@@ -979,15 +977,15 @@ export default {
         }
       } else return "";
     },
-    getCategoryName: function () {
+    getCategoryName() {
       let name = this.product.main.sub_category_name;
 
       return name ? name.split("-").join(" ") : "";
     },
-     convertCategoryname (name) {
+    convertCategoryname(name) {
       return name ? name.toString().split("-").join(" ") : "";
     },
-    handleBackKeys: function () {
+    handleBackKeys() {
       if (window.history.state) {
         history.pushState(null, null, window.location);
       }
@@ -1007,7 +1005,7 @@ export default {
 
       this.breadCrumbs = items;
     },
-    getSubCategoryUrl: function (category) {
+    getSubCategoryUrl(category) {
       let url = "/product-list/category/" + category.split(" ").join("-");
       return url;
     },
@@ -1025,14 +1023,26 @@ export default {
       }
     },
     getRelatedCategories(categroyId) {
-      axios
-        .post("/get_related_categories", {
-          category_id: categroyId,
-          category_name: this.getCategoryName(),
-        })
-        .then((response) => {
-          this.dataTags = response.data.category_names;
-        });
+      isElementShownInView(
+        "#related-categories",
+        (isInView) => {
+          if (isInView) {
+            axios
+              .post("/get_related_categories", {
+                category_id: categroyId,
+                category_name: this.getCategoryName(),
+              })
+              .then((response) => {
+                this.dataTags = response.data.category_names;
+                this.isLoading = false;
+              });
+          }
+        },
+        100
+      );
+    },
+    scrollToTop() {
+      window.scrollTo(0, 0);
     },
   },
   created() {
@@ -1064,9 +1074,6 @@ export default {
       this.isMyProfile = false;
       this.product.main.id = "";
       this.init();
-    },
-    "$parent.currentUser"(user) {
-      this.checkCurrentUser();
     },
   },
   metaInfo() {

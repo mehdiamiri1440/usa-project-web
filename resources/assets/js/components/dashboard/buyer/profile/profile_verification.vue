@@ -183,6 +183,7 @@
   font-size: 18px;
   border-radius: 12px;
   padding: 13px 30px;
+  margin-bottom: 50px;
 }
 
 .main-button-wrapper button i {
@@ -217,7 +218,6 @@
 @media screen and (max-width: 992px) {
   .main-section-wrapper {
     overflow: hidden;
-    margin-bottom: 100px !important;
   }
 }
 
@@ -408,7 +408,7 @@ export default {
     UserImage,
     DocumentImage,
   },
-  data: function () {
+  data() {
     return {
       currentStep: 0,
       userImage: "",

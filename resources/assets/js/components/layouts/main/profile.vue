@@ -905,7 +905,7 @@ p.response-rate span {
               <div class="row">
                 <div
                   class="col-xs-6 text-center"
-                  v-if="profileOwnerStatistics.reputation_score"
+                  v-if="profileOwnerStatistics.reputation_score >= 0 "
                 >
                   <div
                     class="info-num"

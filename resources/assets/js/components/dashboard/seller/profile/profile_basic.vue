@@ -1022,15 +1022,19 @@ textarea.error:focus + i {
                 <textarea
                   rows="5"
                   :class="{
-                    active: currentUser.profile.description,
+                    active:
+                      currentUser.profile.description.length >= 200 &&
+                      currentUser.profile.description,
                     error: errors.description,
                   }"
                   v-model="currentUser.profile.description"
                   placeholder="در مورد کیفیت و نوع بسته بندی محصول خود اینجا توضیح دهید"
                 ></textarea>
-
                 <i
-                  v-if="currentUser.profile.description && !errors.description"
+                  v-if="
+                    currentUser.profile.description.length >= 200 &&
+                    !errors.description
+                  "
                   class="fa fa-check-circle"
                 ></i>
                 <i
@@ -1609,9 +1613,12 @@ export default {
     },
     "currentUser.profile.description": function (value) {
       this.errors.description = "";
-
-      if (value && this.textValidator(value)) {
-        this.errors.description = "توضیحات شامل حروف غیرمجاز است";
+      if (value.length < 200) {
+        this.errors.description = "توضیحات نباید کمتر از 200 کاراکتر باشد.";
+      } else {
+        if (value && this.textValidator(value)) {
+          this.errors.description = "توضیحات شامل حروف غیرمجاز است";
+        }
       }
     },
     "currentUser.profile.company_name": function (value) {

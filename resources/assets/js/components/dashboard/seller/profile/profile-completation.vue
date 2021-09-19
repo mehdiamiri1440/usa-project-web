@@ -91,7 +91,7 @@ p {
       <div
         v-if="!verification"
         :class="{ 'ready-clone': !verification }"
-        class="pull-right"
+        data-merge="2"
       >
         <article class="item">
           <p class="title-item">
@@ -111,7 +111,7 @@ p {
       <div
         v-if="$parent.profileDescription.length < 200"
         :class="{ 'ready-clone': $parent.profileDescription.length < 200 }"
-        class="pull-right"
+        data-merge="2"
       >
         <article class="item">
           <p class="title-item">
@@ -137,7 +137,7 @@ p {
       <div
         v-if="!$parent.currentUser.profile.profile_photo"
         :class="{ 'ready-clone': !$parent.currentUser.profile.profile_photo }"
-        class="pull-right"
+        data-merge="2"
       >
         <article class="item">
           <p class="title-item">
@@ -156,9 +156,9 @@ p {
       </div>
 
       <div
-        class="pull-right"
         v-if="$parent.invitedUsers.length <= 0"
         :class="{ 'ready-clone': $parent.invitedUsers.length <= 0 }"
+        data-merge="2"
       >
         <article class="item">
           <p class="title-item">
@@ -169,14 +169,16 @@ p {
             با معرفی باسکول به همکارانتان، اعتبار پروفایل خود را افزایش دهید.
           </p>
           <div class="text-center">
-            <button class="content-button green-button">
+            <button class="content-button referral-button green-button">
               معرفی به همکاران
             </button>
           </div>
         </article>
       </div>
     </div>
-    <div class="owl-carousel profile-carosel item-wrapper"></div>
+    <div class="row">
+      <div class="owl-carousel owl-theme profile-carosel item-wrapper"></div>
+    </div>
   </div>
 </template>
 
@@ -243,16 +245,13 @@ export default {
       $(".owl-carousel .verification-button").on("click", () => {
         this.verificationButtonClick();
       });
+      $(".owl-carousel .referral-button").on("click", () => {
+        this.referralButtonClick();
+      });
       this.loadCarosel(); //re-initialise the owl
     },
     loadCarosel() {
       let owl = $(".owl-carousel.item-wrapper");
-      let resetCssStyle = {
-        width: "initial",
-        marginRight: "auto",
-        marginLeft: "auto",
-      };
-      owl.css(resetCssStyle);
 
       owl.owlCarousel({
         autoplay: this.autoplay ? this.autoplay : true,
@@ -271,41 +270,32 @@ export default {
         rtl: true,
         responsive: {
           0: {
-            items: 1,
-            stagePadding: 15,
-            navText: false,
-            dots: true,
-          },
-          450: {
             items: 2,
             stagePadding: 15,
+            loop: true,
             navText: false,
             dots: true,
+            mergeFit: true,
           },
-          992: {
+          520: {
             items: 3,
+            loop: true,
+            stagePadding: 15,
+            navText: false,
+            dots: true,
+            mergeFit: true,
+          },
+          1199: {
+            items: 6,
+            loop: true,
             stagePadding: 15,
           },
-          1420: {
-            items: 4,
+          1450: {
+            items: 8,
             stagePadding: 15,
           },
         },
       });
-
-      if (this.isDeviceMobile()) {
-        let styles = {
-          width: "400px",
-          marginRight: "-15px",
-          marginLeft: "-15px",
-        };
-
-        this.$nextTick(() => {
-          setTimeout(() => {
-            owl.css(styles);
-          }, 1000);
-        });
-      }
     },
     openImageInput() {
       $(".owl-carousel .upload-image").on("click", () => {
@@ -314,6 +304,9 @@ export default {
     },
     verificationButtonClick() {
       this.$router.push({ name: "profileBasicSellerVeficiation" });
+    },
+    referralButtonClick() {
+      this.$router.push({ name: "referralSeller" });
     },
     isDeviceMobile: function () {
       if (
@@ -330,6 +323,9 @@ export default {
         return false;
       }
     },
+  },
+  mounted() {
+    this.loadCarosel();
   },
   watch: {
     "$parent.profileDescription"(text) {

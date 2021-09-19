@@ -31,8 +31,12 @@
 
 .spinner-border {
   position: absolute;
-  left: 19px;
-  top: 9px;
+  left: 21px;
+  top: 11px;
+  width: 1.5rem;
+  height: 1.5rem;
+  color: #fff;
+  border-width: 0.25rem;
 }
 
 .submit-button i {

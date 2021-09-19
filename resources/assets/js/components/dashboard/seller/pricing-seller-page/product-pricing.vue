@@ -224,7 +224,7 @@ input[type="number"] {
 
 .fix-botton-wraper {
   position: fixed;
-  bottom: 0;
+  bottom: 59px;
   left: 0;
   width: 100%;
   z-index: 1;
@@ -246,6 +246,10 @@ input[type="number"] {
 .fix-botton-wraper button i {
   position: relative;
   top: 2px;
+}
+
+.pricing-wrapper {
+  margin-bottom: 130px;
 }
 
 @media screen and (max-width: 1300px) {
@@ -360,7 +364,7 @@ input[type="number"] {
     <!-- end payment loader -->
     <div class="row">
       <div class="col-xs-12">
-        <div class="header-section">
+        <div class="header-section hidden-xs hidden-sm">
           <p>افزایش ظرفیت</p>
         </div>
 
@@ -449,7 +453,7 @@ input[type="number"] {
           </div>
         </div>
       </div>
-      <div class="col-xs-12">
+      <div class="col-xs-12 pricing-wrapper">
         <div class="row">
           <div class="header-section col-xs-12">
             <p>ارتقا عضویت</p>
