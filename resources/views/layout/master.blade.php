@@ -58,7 +58,6 @@
 
      
       .main-loader-wrapper {
-        
         position: fixed;
 
         bottom: 20px;
@@ -112,7 +111,7 @@
 <body >
 
  <!-- #regex main loader -->
- <div class="main-loader-wrapper">
+ <div id="master-loader-wrapper" class="main-loader-wrapper">
    
     <div class="logo-main-loader">
       <svg
@@ -191,21 +190,23 @@
         const messaging = firebase.messaging();
 </script>
 
-<script src="{{asset('js/app.js')}}"></script>
+<script src="{{asset('js/app.js')}}" defer></script>
 
  {{-- <script async src="{{asset('js/sw/app.js')}}"></script> 
  <script src="{{asset('assets/js/idleTimer.js')}}"></script>  --}}
 
 <script>
-    $(document).ready(function () {
-        // $(document).idleTimer(7200000);
+    // $(document).ready(function () {
+    //     // $(document).idleTimer(7200000);
         
-        $('.main-loader-wrapper').css('display','none');
-    });
+    //     $('.main-loader-wrapper').css('display','none');
+    // });
     
-    $(document).on("idle.idleTimer", function () {
-        window.location.href = '/login'
-    });
+   
+
+    // $(document).on("idle.idleTimer", function () {
+    //     window.location.href = '/login'
+    // });
 
     function getUserId(){
         let userId = <?php if(session('user_id')){echo session('user_id');} else echo -1; ?>;

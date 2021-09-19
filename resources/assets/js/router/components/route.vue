@@ -1353,6 +1353,9 @@ export default {
   },
   mounted() {
     // eventBus.$emit("globalVerifiedBadgeContents", this.verifiedUserContent);
+    document.addEventListener("DOMContentLoaded", function (event) {
+      document.getElementById("master-loader-wrapper").style.display = "none";
+    });
     this.activateDownloadAppButton();
     $("#wallet-modal").on("show.bs.modal", (e) => {
       this.handleBackKeys();
