@@ -65,12 +65,12 @@ return [
             'bucket' => env('AWS_BACKUP_BUCKET'),
         ],
 
-        'ftp' => [
-            'driver'   => 'ftp',
+        'sftp' => [
+            'driver'   => 'sftp',
             'host'     => env('FTP_HOST'),
             'username' => env('FTP_USERNAME'),
             'password' => env('FTP_PASSWORD'),
-            // 'root'     => '/var/www/html/images'
+            'root'     => '/var/www/html/incobac-new-cli/storage/app/public/'
         
             // Optional FTP Settings...
             // 'port'     => 30001,

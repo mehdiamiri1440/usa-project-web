@@ -68,7 +68,7 @@ class channel_controller extends Controller
                 if($key == 'media'){
                     //store file
                     $file = $request->media;
-                    $path = $file->store('channel');
+                    $path = $file->store('channel','sftp');
 
                     $channel_content_record->file_path = $path;
                 }
