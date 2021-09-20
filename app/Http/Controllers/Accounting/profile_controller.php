@@ -161,7 +161,7 @@ class profile_controller extends Controller
             'activity_domain' => 'regex:/^(?!.*[(@#!%$&*)])[\s\x{0600}-\x{06FF}_\.\-\0-9 ]+$/u|nullable',
             'related_activity_history' => 'regex:/^(?!.*[(@#!%$&*)])[\s\x{0600}-\x{06FF}_\.\-\0-9]+$/u|nullable',
             'human_resource_count' => 'regex:/^[0-9\x{06F0}-\x{06F9}]+$/u|nullable',
-            'profile_photo' => 'image|mimes:png,jpg,jpeg|max:5000',
+            'profile_photo' => 'mimes:png,jpg,jpeg|max:5000',
             'is_company' => 'required|boolean',
             'public_phone' => 'required|regex:/^[0-9\x{06F0}-\x{06F9}]+$/u|min:11',
             //'postal_code' => 'digits:10|nullable',
@@ -175,13 +175,13 @@ class profile_controller extends Controller
 
         if (($photos_count = $request->certificate_image_count) > 0) {
             foreach (range(0, $photos_count - 1) as $index) {
-                $rules['certificate_'.$index] = 'required|image|mimes:png,jpg,jpeg|max:5000';
+                $rules['certificate_'.$index] = 'required|mimes:png,jpg,jpeg|max:5000';
             }
         }
 
         if (($photos_count = $request->related_image_count) > 0) {
             foreach (range(0, $photos_count - 1) as $index) {
-                $rules['related_'.$index] = 'required|image|mimes:png,jpg,jpeg|max:5000';
+                $rules['related_'.$index] = 'required|mimes:png,jpg,jpeg|max:5000';
             }
         }
 
@@ -196,7 +196,7 @@ class profile_controller extends Controller
             $media_controller_object = new media_controller();
 
             $thumbnail_path = storage_path('app/public/'.$file_path);
-            $media_controller_object->create_thumbnail($thumbnail_path,150,150);
+            $media_controller_object->create_thumbnail($thumbnail_path,150,150,$photo_data);
         }
         
         return $file_path;
@@ -242,7 +242,7 @@ class profile_controller extends Controller
             for ($index = 0; $index < $image_count; ++$index) {
                 $image_name = "{$image_prefix}_{$index}";
                 if ($request->hasFile($image_name)) {
-                    $file_path = $this->store_photo_file($request->$image_name, $directory_to_save);
+                    $file_path = $this->store_photo_file($request->file($image_name), $directory_to_save);
 
                     $photo = new profile_media();
                     $photo->file_path = $file_path;

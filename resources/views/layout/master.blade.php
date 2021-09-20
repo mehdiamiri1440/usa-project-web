@@ -162,7 +162,7 @@
                     user-id = "{{session('user_id')}}"
                     is-seller = "{{session('is_seller')}}"
                     assets = "{{asset('')}}"
-                    storage-path = "{{url('storage/')}}"
+                    storage-path = "{{env('FILE_SYSTEM_BASE_URL') . '/storage'}}"
                     profile-photo="{{session('profile_photo')}}"
                     user-full-name="{{session('full_name')}}"
                     user-logout-path="{{route('logout')}}"
