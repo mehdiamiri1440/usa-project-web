@@ -82,4 +82,6 @@ return [
 
     ],
 
+    'base_url' => env('FILE_SYSTEM_BASE_URL'),
+
 ];
