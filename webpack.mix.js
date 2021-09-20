@@ -1,6 +1,7 @@
 let mix = require('laravel-mix');
 require('laravel-mix-bundle-analyzer');
 const webpack = require("webpack");
+
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management

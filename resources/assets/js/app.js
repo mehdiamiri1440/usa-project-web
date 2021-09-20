@@ -5,9 +5,7 @@ import Meta from 'vue-meta'
 
 
 window.$ = window.jQuery = require('jquery');
-// require('bootstrap-sass');
 
-// require('./bootstrap.min');
 
 Vue.config.productionTip = false;
 Vue.use(require('vue-jalali-moment'));

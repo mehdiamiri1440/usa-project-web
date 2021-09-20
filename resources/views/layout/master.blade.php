@@ -157,7 +157,6 @@
   <!-- end regex main loader -->
 
   <div id="app">
-
             <route-component
                     user-id = "{{session('user_id')}}"
                     is-seller = "{{session('is_seller')}}"
@@ -191,23 +190,9 @@
 </script>
 
 <script src="{{asset('js/app.js')}}" defer></script>
-<script src="{{asset('assets/js/bootstrap.min.js')}}" defer></script>
-
- {{-- <script async src="{{asset('js/sw/app.js')}}"></script> 
- <script src="{{asset('assets/js/idleTimer.js')}}"></script>  --}}
+<script src="{{asset('assets/js/custom.bootstrap.min.js')}}" defer></script>
 
 <script>
-    // $(document).ready(function () {
-    //     // $(document).idleTimer(7200000);
-        
-    //     $('.main-loader-wrapper').css('display','none');
-    // });
-    
-   
-
-    // $(document).on("idle.idleTimer", function () {
-    //     window.location.href = '/login'
-    // });
 
     function getUserId(){
         let userId = <?php if(session('user_id')){echo session('user_id');} else echo -1; ?>;
@@ -218,14 +203,7 @@
         return base + '/';
     }
 
-   
-    //     addEvent(window, "load", function (e) {
-            
-    //         });
-    //     });
 </script>
 
-
 </body>
-
 </html>
