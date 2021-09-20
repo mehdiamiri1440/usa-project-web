@@ -1,14 +1,14 @@
 
 import Vue from 'vue'
-import Axios from 'axios'
+window.axios = require('axios')
 import Meta from 'vue-meta'
 
 
-require('./bootstrap');
+window.$ = window.jQuery = require('jquery');
+// require('bootstrap-sass');
 
-window.Vue = require('vue');
+// require('./bootstrap.min');
 
-Vue.prototype.$http = Axios;
 Vue.config.productionTip = false;
 Vue.use(require('vue-jalali-moment'));
 Vue.use(Meta);

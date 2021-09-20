@@ -169,8 +169,8 @@
             />
   </div>
 
-<script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-messaging.js"></script> 
+<script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-app.js" defer></script>
+<script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-messaging.js" defer></script> 
 
 <script>
 
@@ -191,6 +191,7 @@
 </script>
 
 <script src="{{asset('js/app.js')}}" defer></script>
+<script src="{{asset('assets/js/bootstrap.min.js')}}" defer></script>
 
  {{-- <script async src="{{asset('js/sw/app.js')}}"></script> 
  <script src="{{asset('assets/js/idleTimer.js')}}"></script>  --}}
