@@ -14,13 +14,6 @@ use Illuminate\Http\Request;
 */
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+    // return $request->user();
 });
 
-//Route::middleware('jwt.auth')->post('/myuser', function (Request $request) {
-//    echo "test";
-//});
-
-Route::resource('v1/users',v1\user_controller::class)->except([
-    'create', 'update', 'destroy','show','index'
-]);;
