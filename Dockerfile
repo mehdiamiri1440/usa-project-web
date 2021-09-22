@@ -53,16 +53,6 @@ RUN docker-php-ext-install \
 # 5. composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-COPY ./start.sh  /usr/local/bin/start
-
-RUN  chmod u+x /usr/local/bin/start
-
-RUN mkdir -p /var/www/html/storage/framework/{sessions,views,cache} \
-          /var/www/html/storage/logs
-
-RUN chown -R www-data:www-data /var/www/html/storage
-
-RUN chown -R www-data:www-data storage
 # seting containers timezone to Tehran
 ENV TZ=Asia/Tehran
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
