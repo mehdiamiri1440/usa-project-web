@@ -26,8 +26,8 @@
   </script>
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script  src="{{asset('assets/js/firebase/gtag.min.js')}}" defer></script>
-  <script  src="{{asset('assets/js/firebase/firebase-app-7.13.0.min.js')}}" defer></script>
-  <script  src="{{asset('assets/js/firebase/firebase-messaging-7.13.0.min.js')}}" defer></script>
+  <script  src="{{asset('assets/js/firebase/firebase-app-7.13.0.min.js')}}" ></script>
+  <script  src="{{asset('assets/js/firebase/firebase-messaging-7.13.0.min.js')}}" ></script>
 
   <script>
     //  gtag configs
