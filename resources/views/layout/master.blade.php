@@ -25,7 +25,7 @@
       window.Laravel = {csrfToken: '{{csrf_token()}}'}
   </script>
   <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script  src="{{asset('assets/js/firebase/gtag.min.js')}}" defer></script>
+  <script  src="{{asset('assets/js/firebase/gtag.min.js')}}" async></script>
   <script  src="{{asset('assets/js/firebase/firebase-app-7.13.0.min.js')}}" defer></script>
   <script  src="{{asset('assets/js/firebase/firebase-messaging-7.13.0.min.js')}}" defer></script>
 
