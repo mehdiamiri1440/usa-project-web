@@ -142,7 +142,7 @@ class sell_offer_controller extends Controller
 			$image_name = 'img_'.$i ;
 			$img = $request->$image_name;
 
-			$path = $img->store('sell_offers','sftp');
+			$path = $img->store('sell_offers');
 
 			$files_path[] = $path;
 		}

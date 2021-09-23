@@ -190,7 +190,7 @@ class profile_controller extends Controller
 
     protected function store_photo_file($photo_data, $directory_to_save)
     {
-        $file_path = $photo_data->store($directory_to_save,'sftp');
+        $file_path = $photo_data->store($directory_to_save);
 
         if($directory_to_save == 'profile_photos'){
             $media_controller_object = new media_controller();

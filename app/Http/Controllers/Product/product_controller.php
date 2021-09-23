@@ -201,10 +201,10 @@ class product_controller extends Controller
             $image_name = 'image_'.$i;
             $img = $request->$image_name;
 
-            $path = $img->store('products','sftp');
+            $path = $img->store('products');
 
             $file_name = explode('/',$path)[1];
-            $tmp_path = $img->storeAs('thumbnails/products',$file_name,'sftp');
+            $tmp_path = $img->storeAs('thumbnails/products',$file_name);
 
             $thumbnail_path = storage_path('app/public/'.$tmp_path);
             $media_controller_object->create_thumbnail($thumbnail_path,230,335,$img);

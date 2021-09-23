@@ -15,8 +15,8 @@ class media_controller extends Controller
         $img = Image::make($photo)->resize($width, $height, function ($constraint) {
             $constraint->aspectRatio();
         });
-        // $img->save($path);
-        Storage::disk('sftp')->put($path,$img->encode());
+        $img->save($path);
+        // Storage::disk('sftp')->put($path,$img->encode());
     }
 
     public function put_water_mark_on_photo($path,$position)
