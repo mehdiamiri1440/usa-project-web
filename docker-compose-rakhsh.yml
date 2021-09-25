@@ -139,7 +139,7 @@ services:
     volumes:
         - .:/var/www/html
     environment:
-        CONTAINER_ROLE: queue
+        CONTAINER_ROLE: scheduler
     networks:
         - backend
  
