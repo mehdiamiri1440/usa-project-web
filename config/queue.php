@@ -41,17 +41,24 @@ return [
             'retry_after' => 90,
         ],
         
-        'database' => [
+        'database_1' => [
             'driver' => 'database',
             'table' => 'sms_jobs',
             'queue' => 'sms',
             'retry_after' => 90,
         ],
 
-        'database' => [
+        'database_2' => [
             'driver' => 'database',
             'table' => 'fcm_jobs',
             'queue' => 'fcm',
+            'retry_after' => 90,
+        ],
+
+        'database_3' => [
+            'driver' => 'database',
+            'table' => 'jobs',
+            'queue' => 'main',
             'retry_after' => 90,
         ],
         
