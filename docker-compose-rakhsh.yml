@@ -145,7 +145,7 @@ services:
         
   queue-helper-5:
     image: buskool-app
-    container_name: laravel-helper-4
+    container_name: laravel-helper-5
     restart: always
     depends_on:
         - laravel-app
