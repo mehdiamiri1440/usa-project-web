@@ -242,7 +242,7 @@
             data:{
                 photo_id:photo_id,
             },
-            type:"DELETE",
+            type:"POST",
             datatype:'json'
         })
         .done(function(json){
