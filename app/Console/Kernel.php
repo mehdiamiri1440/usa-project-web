@@ -50,7 +50,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $send_sms_notification_for_new_unread_messages_job = (new sendNewMessageSMSNotification())
-            ->onQueue('sms');
+            ->onQueue('sms')->onConnection('database_1');
 
         $schedule->job($send_sms_notification_for_new_unread_messages_job)
             ->hourly()
@@ -60,42 +60,42 @@ class Kernel extends ConsoleKernel
             DB::table('daily_sms_blacklists')->delete();
         })->dailyAt('5:45');
 
-        $check_pakage_expiry_time_job = new CheckPakageExpiry();
+        $check_pakage_expiry_time_job = (new CheckPakageExpiry())->onQueue('fcm')->onConnection('database_2');
 
         $schedule->job($check_pakage_expiry_time_job)
                 ->dailyAt('3:00');
 
-        $send_sms_for_sellers_who_did_not_registered_product_job = new SendReminderSMSToSellers();
+        $send_sms_for_sellers_who_did_not_registered_product_job = (new SendReminderSMSToSellers())->onQueue('fcm')->onConnection('database_2');
 
         $schedule->job($send_sms_for_sellers_who_did_not_registered_product_job)
                 ->dailyAt('10:30');
 
-        $check_product_elevator_expiry_time_job = new CheckElevatorExpiry();
+        $check_product_elevator_expiry_time_job = (new CheckElevatorExpiry())->onQueue('fcm')->onConnection('database_2');
 
         $schedule->job($check_product_elevator_expiry_time_job)
                 ->dailyAt('3:30');
 
-        $send_sms_to_potential_sellers_for_upgrading_account_job = new SendUpgradeAccoutnSMSToSellers();
+        $send_sms_to_potential_sellers_for_upgrading_account_job = (new SendUpgradeAccoutnSMSToSellers())->onQueue('sms')->onConnection('database_1');
 
         $schedule->job($send_sms_to_potential_sellers_for_upgrading_account_job)
                 ->dailyAt('9:30');
 
-        $cache_product_list_job = (new CacheProductList())->onQueue('main');
+        $cache_product_list_job = (new CacheProductList())->onQueue('main')->onConnection('database_3');
 
         $schedule->job($cache_product_list_job)
-                ->everyTenMinutes();
+                ->everyMinute();
 
-        $cache_buyAd_list_job = (new CacheBuyAdList())->onQueue('main');
+        $cache_buyAd_list_job = (new CacheBuyAdList())->onQueue('main')->onConnection('database_3');
 
         $schedule->job($cache_buyAd_list_job)
                 ->cron('*/7 * * * *');
 
 
-        $product_register_reminder_job = new ProductRegisterReminder();
+        $product_register_reminder_job = (new ProductRegisterReminder())->onQueue('default');
         $schedule->job($product_register_reminder_job)
                 ->dailyAt('11:30');
 
-        $buyAd_register_reminder_job = new BuyAdRegisterReminder();
+        $buyAd_register_reminder_job = (new BuyAdRegisterReminder())->onQueue('default');
         $schedule->job($buyAd_register_reminder_job)
                 ->dailyAt('12:30');
 
@@ -105,12 +105,12 @@ class Kernel extends ConsoleKernel
             ->tuesdays()
             ->at('11:45');
 
-        $phone_number_auto_sending_job = new SendPhoneNumberToBuyerIfConditionsIsSatisfied();
+        $phone_number_auto_sending_job = (new SendPhoneNumberToBuyerIfConditionsIsSatisfied())->onQueue('fcm')->onConnection('database_2');
         $schedule->job($phone_number_auto_sending_job)
                 ->hourlyAt(22)
                 ->between('6:00', '22:00');
 
-        $product_auto_delete_job = new ProductAutoDeleteForUnresponsiveSellers();
+        $product_auto_delete_job = (new ProductAutoDeleteForUnresponsiveSellers())->onQueue('default');;
         $schedule->job($product_auto_delete_job)
                 ->dailyAt('02:33');
 
@@ -135,16 +135,16 @@ class Kernel extends ConsoleKernel
         //                 ->dailyAt('20:13');
 
 
-        $user_automatic_blocking_job = new MessagingAnomalyDetection();
+        $user_automatic_blocking_job = (new MessagingAnomalyDetection())->onQueue('fcm')->onConnection('database_2');
         $schedule->job($user_automatic_blocking_job)
-                        ->everyMinute();
-                        // ->cron('*/18 * * * *');
+                        // ->everyMinute();
+                        ->cron('*/18 * * * *');
 
-        $lead_generator_job = new LeadGenerator();
+        $lead_generator_job = (new LeadGenerator())->onQueue('default');
         $schedule->job($lead_generator_job)
                         ->cron('44 */2 * * *');
 
-        $lead_distributor_job = new LeadDistributorBot();
+        $lead_distributor_job = (new LeadDistributorBot())->onQueue('default');
         $schedule->job($lead_distributor_job)
                         ->cron('47 */2 * * *')
                         ->between('6:00','23:00');
