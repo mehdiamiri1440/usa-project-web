@@ -22,6 +22,13 @@ elif [ "$role" = "queue" ]; then
     echo "Running the queue..."
     php /var/www/html/artisan queue:work --verbose --tries=3 --timeout=90 --queue=sms,fcm,default
 
+elif [ "$role" = "mainqueue" ]; then
+
+    php /var/www/html/artisan config:cache
+    php /var/www/html/artisan migrate 
+    echo "Running the queue..."
+    php /var/www/html/artisan queue:work --verbose --tries=3 --timeout=90 --queue=main
+
 elif [ "$role" = "scheduler" ]; then
 
     php /var/www/html/artisan config:cache

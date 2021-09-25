@@ -80,12 +80,12 @@ class Kernel extends ConsoleKernel
         $schedule->job($send_sms_to_potential_sellers_for_upgrading_account_job)
                 ->dailyAt('9:30');
 
-        $cache_product_list_job = new CacheProductList();
+        $cache_product_list_job = (new CacheProductList())->onQueue('main');
 
         $schedule->job($cache_product_list_job)
                 ->everyTenMinutes();
 
-        $cache_buyAd_list_job = new CacheBuyAdList();
+        $cache_buyAd_list_job = (new CacheBuyAdList())->onQueue('main');
 
         $schedule->job($cache_buyAd_list_job)
                 ->cron('*/7 * * * *');

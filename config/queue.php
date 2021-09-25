@@ -54,6 +54,13 @@ return [
             'queue' => 'fcm',
             'retry_after' => 90,
         ],
+
+        'database' => [
+            'driver' => 'database',
+            'table' => 'jobs',
+            'queue' => 'main',
+            'retry_after' => 90,
+        ],
         
         'beanstalkd' => [
             'driver' => 'beanstalkd',
