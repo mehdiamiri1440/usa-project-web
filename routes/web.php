@@ -912,7 +912,7 @@ Route::group(['prefix' => 'admin', 'middleware' => [admin_login::class]], functi
     ]);
 
     //delete photos
-    Route::post('sellAd/delete_photo_by_id', [
+    Route::delete('sellAd/delete_photo_by_id', [
         'uses' => 'admin_panel\admin_sellAd_controller@admin_sellAd_photo_delete_by_id',
         'as' => 'delete_sellAd_photo_by_id',
     ]);
@@ -922,7 +922,7 @@ Route::group(['prefix' => 'admin', 'middleware' => [admin_login::class]], functi
         'as' => 'delete_buyAd_photo_by_id',
     ]);
 
-    Route::post('profile/delete_photo_by_id', [
+    Route::delete('profile/delete_photo_by_id', [
         'uses' => 'admin_panel\admin_profile_controller@admin_profile_related_photo_delete_by_id',
         'as' => 'delete_profile_related_photo_by_id',
     ]);
