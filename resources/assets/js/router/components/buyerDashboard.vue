@@ -1,3 +1,16 @@
+<style >
+.profile-carosel .owl-nav {
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  width: 100%;
+  margin-top: -10px;
+  top: calc(50% - 10px);
+  direction: ltr;
+  padding: 0 15px;
+  height: 0;
+}
+</style>
 <style scoped>
 #main {
   margin-right: 250px;

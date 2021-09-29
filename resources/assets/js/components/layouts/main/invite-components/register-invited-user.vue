@@ -97,6 +97,9 @@
   }
   .register-content-wrapper {
     box-shadow: none;
+    background: none;
+    position: relative;
+    z-index: 1;
   }
 }
 

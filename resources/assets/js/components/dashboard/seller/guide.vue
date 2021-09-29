@@ -128,12 +128,12 @@ ul {
             </li>
             <li>
               پیشنهاد های خرید از سوی خریداران را میتوانید در قسمت
-              <router-link :to="{ name: 'mainBuyAdRequests' }">
+              <router-link :to="{ name: 'buyAdRequestsSeller' }">
                 درخواست ها </router-link
               >مشاهده کنیدو در صورت داشتن آمادگی جهت تامین محصول، قیمت پیشنهادی،
               تصویر محصولات و توضیحات مربوطه را به خریدار ارسال نمایید.
               <router-link
-                :to="{ name: 'mainBuyAdRequests' }"
+                :to="{ name: 'buyAdRequestsSeller' }"
                 class="guide-link"
               >
                 درخواست های خرید

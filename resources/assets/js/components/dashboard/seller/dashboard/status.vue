@@ -323,7 +323,7 @@ export default {
           badge: false,
         },
         {
-          href: "mainBuyAdRequests",
+          href: "buyAdRequestsSeller",
           icon: "fa fa-list-alt",
           text: "درخواست های خرید",
           badge: false,

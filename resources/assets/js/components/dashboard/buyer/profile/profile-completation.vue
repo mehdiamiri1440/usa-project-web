@@ -60,7 +60,7 @@ p {
 .wrapper-bg {
   border: none;
 }
-/* test */
+
 @media screen and (max-width: 768px) {
   .progress-item-wrapper > span {
     width: 65px;
@@ -68,12 +68,13 @@ p {
 }
 </style>
 <template>
-  <div class="complete-the-profile padding-buttom-fixed" v-if="itemCount < 3">
+  <div class="complete-the-profile padding-buttom-fixed" v-if="itemCount < 4">
     <div class="box-title">
       میزان تکمیل پروفایل :
       <span v-if="itemCount == 0" class="red-text">خیلی ضعیف</span>
       <span v-else-if="itemCount == 1" class="yellow-text">ضعیف</span>
       <span v-else-if="itemCount == 2" class="blue-text">متوسط</span>
+      <span v-else-if="itemCount == 3" class="green-text">خوب</span>
     </div>
     <div class="progress-item-wrapper">
       <span
@@ -153,6 +154,27 @@ p {
           </div>
         </article>
       </div>
+
+      <div
+        v-if="$parent.invitedUsers.length <= 0"
+        :class="{ 'ready-clone': $parent.invitedUsers.length <= 0 }"
+        data-merge="2"
+      >
+        <article class="item">
+          <p class="title-item">
+            <i class="fa fa-share-alt brand-text"></i>
+            <span>معرفی به همکاران </span>
+          </p>
+          <p class="content-item">
+            با معرفی باسکول به همکارانتان، اعتبار پروفایل خود را افزایش دهید.
+          </p>
+          <div class="text-center">
+            <button class="content-button referral-button green-button">
+              معرفی به همکاران
+            </button>
+          </div>
+        </article>
+      </div>
     </div>
     <div class="row">
       <div class="owl-carousel owl-theme profile-carosel item-wrapper"></div>
@@ -162,15 +184,20 @@ p {
 
 <script>
 import owlCarousel from "../../../../owl.carousel.min.js";
+import { eventBus } from "../../../../router/router";
 
 export default {
   data() {
     return {
       itemCount: 0,
-      progressItems: [0, 0, 0],
+      progressItems: [0, 0, 0, 0],
       description: 0,
       verification: 0,
       userImage: 0,
+      referral: 0,
+      baseUrl: "",
+      shareText:
+        "از شما دعوت می کنم تا به جمع بازرگانان در باسکول (بزرگترین مرجع خرید و فروش عمده محصولات غذایی و کشاورزی ایران) بپیوندید. اگر این دعوت را قبول می کنید روی لینک معرف زیر بزنید",
     };
   },
   methods: {
@@ -178,15 +205,17 @@ export default {
       this.description = 0;
       this.verification = 0;
       this.userImage = 0;
+      this.referral = 0;
     },
     sumCount() {
       this.itemCount = 0;
 
-      this.itemCount = this.description + this.verification + this.userImage;
+      this.itemCount =
+        this.description + this.verification + this.userImage + this.referral;
     },
     updateProgress() {
       this.sumCount();
-      this.progressItems = [0, 0, 0];
+      this.progressItems = [0, 0, 0, 0];
       if (this.itemCount) {
         for (let i = 1; i <= this.progressItems.length; i++) {
           if (this.itemCount >= i) {
@@ -220,13 +249,16 @@ export default {
       $(".owl-carousel .verification-button").on("click", () => {
         this.verificationButtonClick();
       });
+      $(".owl-carousel .referral-button").on("click", () => {
+        this.referralButtonClick();
+      });
       this.loadCarosel(); //re-initialise the owl
     },
     loadCarosel() {
       let owl = $(".owl-carousel.item-wrapper");
 
       owl.owlCarousel({
-        autoplay: this.autoplay ? this.autoplay : true,
+        autoplay: false,
         autoplayTimeout: 3000,
         loop: false,
         rewind: true,
@@ -245,24 +277,24 @@ export default {
             items: 2,
             stagePadding: 15,
             loop: true,
-            navText: false,
+            nav: true,
             dots: true,
             mergeFit: true,
           },
-          660: {
-            items: 4,
+          520: {
+            items: 3,
             loop: true,
             stagePadding: 15,
-            navText: false,
+            nav: true,
             dots: true,
             mergeFit: true,
           },
           1199: {
             items: 6,
-            loop: false,
+            loop: true,
             stagePadding: 15,
           },
-          2000: {
+          1450: {
             items: 8,
             stagePadding: 15,
           },
@@ -275,7 +307,22 @@ export default {
       });
     },
     verificationButtonClick() {
-      this.$router.push({ name: "profileBasicSellerVeficiation" });
+      this.$router.push({ name: "profileBasicBuyerVeficiation" });
+    },
+    referralButtonClick() {
+      this.openShareModal();
+    },
+    openShareModal() {
+      this.baseUrl = getBase();
+
+      let url =
+        this.baseUrl + "invite/" + this.$parent.currentUser.user_info.user_name;
+      let shareItem = {
+        shareModalUrl: url,
+        shareModalText: this.shareText,
+        shareModalTitle: "ارسال برای همکاران",
+      };
+      eventBus.$emit("shareModalUrl", shareItem);
     },
     isDeviceMobile: function () {
       if (
@@ -327,6 +374,14 @@ export default {
         this.userImage = 0;
       }
 
+      this.updateProgress();
+    },
+    "$parent.invitedUsers"(users) {
+      if (users.length > 0) {
+        this.referral = 1;
+      } else {
+        this.referral = 0;
+      }
       this.updateProgress();
     },
   },

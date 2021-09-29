@@ -516,7 +516,7 @@ textarea.error:focus + i {
   left: 15px;
   bottom: 0;
   right: 13px;
-  text-align: left;
+  text-align: right;
   border-top: 1px solid #e0e0e0;
   padding: 7px 15px;
   background: #fbfbfb;
@@ -528,8 +528,11 @@ textarea.error:focus + i {
 .modal-textarea-wrapper {
   border: 1px solid #bdc4cc;
   border-radius: 8px;
-  padding-bottom: 40px;
   overflow: hidden;
+}
+
+.modal-textarea-wrapper.active-feature {
+  padding-bottom: 40px;
 }
 
 .modal-textarea-wrapper > textarea {
@@ -608,44 +611,43 @@ textarea.error:focus + i {
                 <div
                   class="modal-textarea-wrapper text-input-wrapper"
                   :class="{
-                    active:
-                      currentUser.profile.description.length >= 200 &&
-                      currentUser.profile.description,
-                    error: errors.description,
+                    'active-feature': editDescription.length,
+                    active: editDescription.length >= 200,
+                    error: errors.editDescription,
                   }"
                 >
                   <textarea
                     rows="5"
-                    v-model="currentUser.profile.description"
+                    v-model="editDescription"
                     placeholder="در مورد کیفیت و نوع بسته بندی محصول خود اینجا توضیح دهید"
                   ></textarea>
-                  <div class="feature-wrapper">
+                  <div class="feature-wrapper" v-if="editDescription.length">
                     <p
                       class="description-length"
                       :class="{
                         'red-text':
-                          currentUser.profile.description.length < 200,
-                        'green-text':
-                          currentUser.profile.description.length >= 200,
+                          editDescription.length &&
+                          editDescription.length < 200,
+                        'green-text': editDescription.length >= 200,
                       }"
                     >
-                      <span
-                        v-text="currentUser.profile.description.length"
-                      ></span>
-                      / 200
+                      <span v-if="editDescription.length < 200">نا کافی</span>
+                      <span v-else-if="editDescription.length >= 200">
+                        کافی</span
+                      >
                     </p>
                   </div>
 
                   <i
                     v-if="
-                      currentUser.profile.description.length >= 200 &&
-                      currentUser.profile.description &&
-                      !errors.description
+                      editDescription.length >= 200 &&
+                      editDescription &&
+                      !errors.editDescription
                     "
                     class="fa fa-check-circle green-text"
                   ></i>
                   <i
-                    v-else-if="errors.description"
+                    v-else-if="errors.editDescription"
                     class="fa fa-times-circle red-text"
                   ></i>
                   <i v-else class="fa fa-edit"></i>
@@ -654,8 +656,8 @@ textarea.error:focus + i {
                   <p class="error-message">
                     <span
                       class="red-text"
-                      v-if="errors.description"
-                      v-text="errors.description"
+                      v-if="errors.editDescription"
+                      v-text="errors.editDescription"
                     ></span>
                   </p>
                 </div>
@@ -663,17 +665,13 @@ textarea.error:focus + i {
             </div>
             <div class="col-xs-12 text-center modal-button-wrapper">
               <button
-                @click="RegisterBasicProfileInfo()"
-                :disabled="
-                  isLoaded ||
-                  currentUser.profile.description.length < 200 ||
-                  errors.description != ''
-                "
+                @click="editprofileDescription()"
+                :disabled="isLoaded || errors.editDescription != ''"
                 :class="{
                   'green-button':
                     !isLoaded &&
-                    currentUser.profile.description.length >= 200 &&
-                    !errors.description,
+                    editDescription.length >= 200 &&
+                    !errors.editDescription,
                 }"
                 class="submit-form-button hover-effect"
               >
@@ -1062,7 +1060,7 @@ textarea.error:focus + i {
                   rows="5"
                   :class="{
                     active:
-                      currentUser.profile.description.length >= 200 &&
+                      currentUser.profile.description.length >= 100 &&
                       currentUser.profile.description,
                     error: errors.description,
                   }"
@@ -1072,7 +1070,7 @@ textarea.error:focus + i {
 
                 <i
                   v-if="
-                    currentUser.profile.description.length >= 200 &&
+                    currentUser.profile.description.length >= 100 &&
                     !errors.description
                   "
                   class="fa fa-check-circle"
@@ -1307,8 +1305,10 @@ export default {
         address: "",
         company_name: "",
         company_register_code: "",
+        editDescription: "",
       },
       profileDescription: "",
+      editDescription: "",
       popUpMsg: "",
       items: "",
       relatedFiles: [],
@@ -1371,6 +1371,7 @@ export default {
       }
 
       if (!formError) {
+        $(".modal").modal("hide");
         eventBus.$emit("submiting", true);
 
         var self = this;
@@ -1428,6 +1429,8 @@ export default {
               axios.post("/user/profile_info").then(function (response) {
                 self.currentUser = response.data;
                 self.profileDescription = self.currentUser.profile.description;
+                self.editDescription = "";
+                self.errors.editDescription = "";
                 if (self.currentUser.profile.is_company) {
                   $("#company-box").collapse("show");
                 }
@@ -1614,6 +1617,16 @@ export default {
         reader.readAsDataURL(input.files[0]);
       }
     },
+    editprofileDescription() {
+      if (!this.editDescription || this.editDescription == "") {
+        this.errors.editDescription = "لطفا توضیحات را کامل کنید.";
+      } else if (this.editDescription.length < 200) {
+        this.errors.editDescription = "توضیحات نباید کمتر از 200 کاراکتر باشد.";
+      } else if (!this.errors.editDescription) {
+        this.currentUser.profile.description = this.editDescription;
+        this.RegisterBasicProfileInfo();
+      }
+    },
   },
   mounted() {
     this.init();
@@ -1622,6 +1635,7 @@ export default {
 
     $("#imgInp").change(function () {
       self.show_image_preview(this);
+      self.RegisterBasicProfileInfo();
     });
     if (this.isOsIOS()) {
       $("#phone-number").attr("type", "text");
@@ -1654,12 +1668,18 @@ export default {
     },
     "currentUser.profile.description": function (value) {
       this.errors.description = "";
-      if (value.length < 200) {
-        this.errors.description = "توضیحات نباید کمتر از 200 کاراکتر باشد.";
+      if (value.length < 100) {
+        this.errors.description = "توضیحات نباید کمتر از 100 کاراکتر باشد.";
       } else {
         if (value && this.textValidator(value)) {
           this.errors.description = "توضیحات شامل حروف غیرمجاز است";
         }
+      }
+    },
+    editDescription: function (value) {
+      this.errors.editDescription = "";
+      if (value && this.textValidator(value)) {
+        this.errors.editDescription = "توضیحات شامل حروف غیرمجاز است";
       }
     },
     "currentUser.profile.company_name": function (value) {
