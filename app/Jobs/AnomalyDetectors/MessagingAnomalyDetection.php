@@ -188,6 +188,10 @@ class MessagingAnomalyDetection implements ShouldQueue
         $users = [];
         foreach($long_messages as $msg)
         {
+            if(stripos($msg->text,':p=') === false || stripos($msg->text,':wlt=') === false){
+                continue;
+            }
+
             $phone = null;
             preg_match_all('/((09[0-9]{9})|(\x{06F0}\x{06F9}[\x{06F0}-\x{06F9}]{9}))/u',$msg->text,$phone);
             if(count($phone) > 0){
