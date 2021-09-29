@@ -149,6 +149,79 @@ class phone_number_controller extends Controller
                     ]);
     }
 
+    public function get_seller_phone_number_or_proper_message_for_interactive_chat($product_id,$seller_id,$viewer_user_id)
+    {
+        $item = 'PRODUCT';
+
+        $access_deny_message = "فروشنده در سریعترین زمان ممکن به شما پاسخ خواهد داد. \n\n";
+        $access_deny_message .= ":wlt=$product_id";
+
+        if($this->is_proper_time_for_phone_call() == false){
+            return $access_deny_message;
+        }
+
+        $related_record = DB::table('myusers')
+                                ->join('products','products.myuser_id','=','myusers.id')
+                                ->whereNull('products.deleted_at')
+                                ->where('myusers.id',$seller_id)
+                                ->where('myusers.id','<>',$viewer_user_id)
+                                ->where('products.id',$product_id)
+                                ->where('products.confirmed',true)
+                                ->where(function($q) use($viewer_user_id,$seller_id,$product_id){
+                                    return $q = $q->where('myusers.wallet_balance','>=',config('subscriptionPakage.phone-number.view-price'))
+                                                    ->orWhere('myusers.active_pakage_type','>',0)
+                                                    ->orWhereBetween('myusers.created_at',[Carbon::now()->subWeeks(1),Carbon::now()])
+                                                    ->orWhereExists(function($q) use($viewer_user_id,$seller_id,$product_id){
+                                                        $q->select(DB::raw(1))
+                                                            ->from('leads')
+                                                            ->whereRaw("leads.buyer_id = {$viewer_user_id} and leads.seller_id = {$seller_id} and leads.related_product_id = {$product_id}");
+                                                    });
+                                })
+                                ->whereExists(function($q) use($viewer_user_id,$seller_id){
+                                    $q->select(DB::raw(1))
+                                        ->from('messages')
+                                        ->whereRaw("messages.sender_id = {$seller_id} and messages.receiver_id = {$viewer_user_id} and messages.text like '%:p=%' ");
+                                })
+                                ->whereIn('myusers.phone_view_permission',['1010','1110','1011','1111'])
+                                ->select('myusers.*')
+                                ->get()
+                                ->first();
+
+        if(is_null($related_record)){
+            return $access_deny_message;
+        }
+
+        if($this->does_viewer_already_seen_the_user_phone_number($viewer_user_id,$related_record->id) === false){
+
+            $viewer_daily_access_count = DB::table('phone_number_view_logs')
+                                                ->where('viewer_id',$viewer_user_id)
+                                                ->whereBetween('created_at',[Carbon::today(),Carbon::tomorrow()])
+                                                ->groupBy('myuser_id')
+                                                ->get()
+                                                ->count();
+    
+            if($viewer_daily_access_count > config('subscriptionPakage.phone-number.max-daily-access-count')){
+                return $access_deny_message;
+            }
+
+            if($related_record->active_pakage_type == 0){
+                $this->insert_phone_number_view_log_record($viewer_user_id,$seller_id,'SELLER',$item,false);
+                
+                $wallet_controller_object = new wallet_controller();
+                $unit_cost = config("subscriptionPakage.phone-number.view-price");
+                $wallet_controller_object->insert_expendig_log_record('phone-number-view',$unit_cost,$seller_id);
+            }
+            else{
+                $this->insert_phone_number_view_log_record($viewer_user_id,$seller_id,'SELLER',$item,true);
+            }
+        }
+        else{
+            $this->insert_phone_number_view_log_record($viewer_user_id,$seller_id,'SELLER',$item,true);
+        }
+        echo 'phone->' . $related_record->phone;
+        return  $related_record->phone;
+    }
+
     public function get_buyer_phone_number(Request $request)
     {
         $this->validate($request,[
