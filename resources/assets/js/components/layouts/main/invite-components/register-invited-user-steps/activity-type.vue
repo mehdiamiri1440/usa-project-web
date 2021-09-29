@@ -448,9 +448,9 @@ select.error:focus + i {
             }"
             @click.prevent="submitUserInformation()"
           >
-            مرحله بعد
+            ثبت نهایی
 
-            <i class="fa fa-arrow-left"></i>
+            <i class="fa fa-check"></i>
           </button>
 
           <button

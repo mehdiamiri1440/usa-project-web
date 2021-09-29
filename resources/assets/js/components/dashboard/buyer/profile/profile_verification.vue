@@ -371,7 +371,7 @@
       </router-link>
       <router-link
         v-else
-        :to="{ name: 'mainBuyAdRequests' }"
+        :to="{ name: 'buyAdRequestsSeller' }"
         tag="button"
         class="green-button"
       >

@@ -254,7 +254,7 @@ export default {
       let owl = $(".owl-carousel.item-wrapper");
 
       owl.owlCarousel({
-        autoplay: this.autoplay ? this.autoplay : true,
+        autoplay: false,
         autoplayTimeout: 3000,
         loop: false,
         rewind: true,
@@ -273,7 +273,7 @@ export default {
             items: 2,
             stagePadding: 15,
             loop: true,
-            navText: false,
+            nav: true,
             dots: true,
             mergeFit: true,
           },
@@ -281,7 +281,7 @@ export default {
             items: 3,
             loop: true,
             stagePadding: 15,
-            navText: false,
+            nav: true,
             dots: true,
             mergeFit: true,
           },

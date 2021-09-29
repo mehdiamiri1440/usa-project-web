@@ -846,6 +846,10 @@ div.items-wrapper {
   margin-top: 50px;
 }
 
+.category-footer {
+  padding-bottom: 120px;
+}
+
 @media screen and (max-width: 1199px) {
   .search-box input {
     width: 100%;
@@ -898,6 +902,10 @@ div.items-wrapper {
 }
 
 @media screen and (max-width: 767px) {
+  #article-list {
+    padding-bottom: 70px;
+  }
+
   #article-list.grid-items-wrapper {
     margin-left: 0 !important;
     margin-right: 0 !important;
@@ -910,8 +918,7 @@ div.items-wrapper {
   }
 
   .main-content,
-  #main,
-  .category-footer {
+  #main {
     padding: 0;
   }
 

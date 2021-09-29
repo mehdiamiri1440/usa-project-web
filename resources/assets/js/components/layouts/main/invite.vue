@@ -451,7 +451,7 @@ h2 {
         </p>
         <div class="invite-button-wrapper text-right">
           <button @click.prevent="setScrollToRegister()" class="invite-button">
-            قبول دعوت
+            قبول دعوت می کنم
           </button>
         </div>
       </div>

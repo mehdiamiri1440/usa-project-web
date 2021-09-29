@@ -216,13 +216,13 @@ export default {
           mainIcon: false,
         },
         {
-          title: "درخواست‌ ها",
-          name: "mainBuyAdRequests",
+          title: "خریداران",
+          name: "buyAdRequestsSeller",
           icon: "fa-list-alt",
           mainIcon: false,
         },
         {
-          title: "افزودن محصول",
+          title: "ثبت محصول",
           name: "registerProductSeller",
           icon: "fa-plus",
           mainIcon: true,
@@ -254,7 +254,7 @@ export default {
           mainIcon: false,
         },
         {
-          title: "افزودن درخواست",
+          title: "ثبت درخواست",
           name: "registerRequestBuyer",
           icon: "fa-plus",
           mainIcon: true,
@@ -286,7 +286,7 @@ export default {
           mainIcon: false,
         },
         {
-          title: "افزودن محصول",
+          title: "ثبت محصول",
           name: "register",
           icon: "fa-plus",
           mainIcon: true,

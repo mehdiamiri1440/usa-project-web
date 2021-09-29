@@ -609,8 +609,8 @@ li.static-item > button i {
             tag="button"
             class="contact-button"
           >
-            <i class="fa fa-user"></i>
-            مخاطبین من
+            <i class="fas fa-comment-alt"></i>
+            پیام ها
           </router-link>
         </div>
       </div>
@@ -1044,7 +1044,7 @@ li.static-item > button i {
             <router-link
               tag="button"
               class="buyad-button"
-              :to="{ name: 'mainBuyAdRequests' }"
+              :to="{ name: 'buyAdRequestsSeller' }"
             >
               همه درخواست های خرید
               <i class="fa fa-arrow-left"></i>

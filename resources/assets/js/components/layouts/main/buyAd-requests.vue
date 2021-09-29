@@ -1159,22 +1159,40 @@ button.disable {
                     ></p>
 
                     <div class="col-sm-4 col-xs-12 pull-left">
-                      <router-link
-                        tag="button"
-                        class="detail-success hover-effect"
-                        :to="{ name: 'register' }"
-                      >
-                        <span :id="'loader-chat-' + buyAd.id">
-                          <span>
-                            <span class="fas fa-comment-alt"></span>
+                      <div class="buyAd-phone-buttons-wrapper">
+                        <router-link
+                          tag="button"
+                          class="detail-success hover-effect phone-button"
+                          :to="{ name: 'register' }"
+                        >
+                          <span :id="'loader-chat-' + buyAd.id">
+                            <span>
+                              <span class="fas fa-phone-square-alt"></span>
+                              اطلاعات تماس
+                            </span>
+                          </span>
+                        </router-link>
+                        <router-link
+                          tag="button"
+                          class="
+                            detail-success
+                            send-message-button
+                            hover-effect
+                          "
+                          :to="{ name: 'register' }"
+                        >
+                          <span :id="'loader-chat-' + buyAd.id">
+                            <span>
+                              <span class="fas fa-comment-alt"></span>
 
-                            چت با خریدار
+                              چت با خریدار
+                            </span>
+                            <span class="hide-reply text-rtl">
+                              کمی صبر کنید...
+                            </span>
                           </span>
-                          <span class="hide-reply text-rtl">
-                            کمی صبر کنید...
-                          </span>
-                        </span>
-                      </router-link>
+                        </router-link>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -1600,5 +1618,38 @@ export default {
       }
     },
   },
+  metaInfo() {
+    return {
+      title: "درخواست های خرید",
+      titleTemplate: "باسکول | %s",
+      meta: [
+        {
+          name: "description",
+          content:
+            "مرجع تخصصی خرید و فروش عمده و قیمت محصولات کشاورزی ایران | صادرات محصولات کشاورزی",
+        },
+        {
+          name: "author",
+          content: "باسکول",
+        },
+        {
+          property: "og:description",
+          content:
+            "مرجع تخصصی خرید و فروش عمده و قیمت محصولات کشاورزی ایران | صادرات محصولات کشاورزی",
+        },
+        {
+          property: "og:site_name",
+          content: "باسکول بازارآنلاین خرید و فروش عمده محصولات کشاورزی ایران",
+        },
+        {
+          property: "og:title",
+          content: " باسکول | بازار خرید و فروش عمده محصولات کشاورزی ",
+        },
+      ],
+    };
+  },
+};
+</script>
+
 };
 </script>

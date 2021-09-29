@@ -222,7 +222,7 @@ a.active {
             </router-link>
           </li>
           <li class="list-item">
-            <router-link :to="{ name: 'mainBuyAdRequests' }">
+            <router-link :to="{ name: 'buyAdRequestsSeller' }">
               <i class="fa fa-list-alt" aria-hidden="true"></i>
               <span>درخواست های خرید</span>
             </router-link>
