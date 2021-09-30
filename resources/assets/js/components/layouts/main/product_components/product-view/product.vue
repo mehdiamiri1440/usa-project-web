@@ -114,6 +114,7 @@ label {
 
 .main-contents-wrapper h1 {
   font-size: 23px;
+  line-height: 1.618;
 }
 
 .actions .green-button,
@@ -238,6 +239,7 @@ label {
   padding: 10px 15px 9px;
   border: none;
   color: #fff;
+  font-size: 18px;
 }
 
 .actions .min-button-style.phone-call {
@@ -492,7 +494,7 @@ label {
       <div class="share hidden-xs hidden-sm">
         <button @click.prevent="$parent.shareMyProfile()" class="share-button">
           <span>اشتراک گذاری</span>
-          <i class="fa fa-share"></i>
+          <i class="fa fa-share-alt"></i>
         </button>
       </div>
 

@@ -41,7 +41,7 @@
 svg {
   width: 24px;
   height: 24px;
-  margin-right: 7px;
+  margin: 0 7px;
 }
 
 button,
@@ -66,6 +66,7 @@ button,
   cursor: pointer;
   width: 100%;
   margin: 5px auto;
+  direction: rtl;
 }
 
 button:hover,
@@ -75,8 +76,7 @@ button:hover,
 
 .share-button,
 .copy-link {
-  padding-left: 30px;
-  padding-right: 30px;
+  max-width: 130px;
   background: #fff;
 }
 
@@ -224,7 +224,8 @@ header {
             </a>
 
             <div class="modal-title">
-              <span> ارسال برای دوستان </span>
+              <span v-if="shareModalTitle" v-text="shareModalTitle"></span>
+              <span v-else> ارسال برای دوستان </span>
             </div>
           </div>
           <div class="modal-body col-xs-12">
@@ -385,7 +386,7 @@ header {
 
 <script>
 export default {
-  props: ["shareModalUrl", "shareModalText"],
+  props: ["shareModalUrl", "shareModalTitle", "shareModalText"],
   data: function () {
     return {};
   },

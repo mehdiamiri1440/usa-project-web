@@ -184,12 +184,8 @@
 </template>
 
 <script>
-import ShareToSocialModal from "../../../layouts/main/main_components/share-to-social-modal";
 import { eventBus } from "../../../../router/router";
 export default {
-  components: {
-    ShareToSocialModal,
-  },
   props: ["currentUser"],
   data: function () {
     return {
@@ -208,6 +204,7 @@ export default {
       let shareItem = {
         shareModalUrl: url,
         shareModalText: this.shareText,
+        shareModalTitle: "ارسال برای همکاران",
       };
       eventBus.$emit("shareModalUrl", shareItem);
     },

@@ -254,6 +254,7 @@ button.send-message-button {
 .related-product,
 .default-related-product {
   margin-top: 70px;
+  padding-bottom: 120px;
 }
 
 .tag-item {

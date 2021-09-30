@@ -47,7 +47,7 @@ a.active {
 }
 
 .main-menu {
-  padding: 10px;
+  padding: 10px 0;
 }
 
 .main-menu a:hover {

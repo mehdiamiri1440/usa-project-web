@@ -185,6 +185,18 @@ const router = new Router({
           ],
         },
         {
+          path: "buyAd-requests",
+          name: "buyAdRequestsSeller",
+          components: {
+            default: (resolve) => {
+              require([
+                "../components/dashboard/seller/request/buyAd-requests.vue",
+              ], resolve);
+            },
+          },
+        },
+
+        {
           path: "my-products",
           name: "myProductsSeller",
           components: {

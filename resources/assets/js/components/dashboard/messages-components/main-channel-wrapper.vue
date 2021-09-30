@@ -907,7 +907,7 @@
                 @click.prevent="shareContetn(msg.id)"
                 class="forward-item"
               >
-                <i class="fa fa-share"> </i>
+                <i class="fa fa-share-alt"> </i>
               </button>
             </div>
             <button
@@ -915,7 +915,7 @@
               @click.prevent="shareContetn(msg.id)"
               class="share-button"
             >
-              <i class="fa fa-share"></i>
+              <i class="fa fa-share-alt"></i>
               ارسال برای دوستان
             </button>
             <a

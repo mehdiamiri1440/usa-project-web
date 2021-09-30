@@ -303,11 +303,16 @@
     <ShareToSocialModal
       :share-modal-url="shareModalUrl"
       :share-modal-text="shareModalText"
+      :share-modal-title="shareModalTitle"
     />
     <ReportModal :reported-user-id="reportedUserId" />
     <ReviewModal :review-user-data="reviewUserData" />
 
-    <Navigation :messageCount="messageCount" class="hidden-lg hidden-md" />
+    <Navigation
+      v-if="$route.name != 'invite'"
+      :messageCount="messageCount"
+      class="hidden-lg hidden-md"
+    />
 
     <router-view
       :user-id="userId"
@@ -404,6 +409,7 @@ export default {
       reportedUserId: "",
       shareModalUrl: "",
       shareModalText: "",
+      shareModalTitle: "",
       msg: "",
       reviewCurrentStep: 0,
       reviewUserData: "",
@@ -1330,6 +1336,13 @@ export default {
         if (shareItem.shareModalText) {
           this.shareModalText = shareItem.shareModalText;
         }
+
+        if (shareItem.shareModalTitle) {
+          this.shareModalTitle = shareItem.shareModalTitle;
+        } else {
+          this.shareModalTitle = "";
+        }
+
         $("#share-modal").modal("show");
       });
 

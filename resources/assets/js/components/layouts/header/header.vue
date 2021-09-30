@@ -1263,8 +1263,7 @@ a.profile-info-wrapper:hover {
                 <div class="item-icon register">
                   <i class="fa fa-user static-layout light-green-text"></i>
                 </div>
-                ثبت نام
-                <span class="light-green-text"> رایگان </span>
+                ورود / ثبت نام
               </router-link>
             </li>
 
@@ -1275,7 +1274,7 @@ a.profile-info-wrapper:hover {
               </router-link>
             </li>
 
-            <li class="hidden-xs">
+            <!-- <li class="hidden-xs">
               <router-link
                 class="green-button green-button-alt static-layout"
                 :to="{ name: 'login' }"
@@ -1284,6 +1283,28 @@ a.profile-info-wrapper:hover {
                   <i class="fa fa-sign-in-alt"></i>
                 </div>
                 ورود به باسکول
+              </router-link>
+            </li> -->
+            <li class="hidden-xs">
+              <router-link
+                class="green-button green-button-alt static-layout"
+                :to="{ name: 'mainBuyAdRequests' }"
+              >
+                <div class="item-icon">
+                  <i class="fa fa-users"></i>
+                </div>
+                خریداران
+              </router-link>
+            </li>
+            <li class="hidden-xs">
+              <router-link
+                class="green-button green-button-alt static-layout"
+                :to="{ name: 'productList' }"
+              >
+                <div class="item-icon">
+                  <i class="fas fa-grip-horizontal"></i>
+                </div>
+                فروشندگان
               </router-link>
             </li>
           </ul>

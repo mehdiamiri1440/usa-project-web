@@ -47,7 +47,7 @@ a.active {
 }
 
 .main-menu {
-  padding: 10px;
+  padding: 10px 0;
 }
 
 .main-menu a:hover {
@@ -186,17 +186,23 @@ a.active {
 .wallet-badge {
   position: absolute;
   top: 24px;
-  left: 30px;
+  left: 25px;
 }
 </style>
 <template>
   <div>
     <div class="main-menu">
       <ul class="list-unstyled">
+        <li class="list-item">
+          <router-link :to="{ name: 'invitedUsers' }">
+            <i class="fa fa-dollar-sign"></i>
+            <span>درآمد ها</span>
+          </router-link>
+        </li>
         <li class="list-item hidden-md hidden-lg">
           <a href="#" @click.prevent="showWallet()">
             <i class="fa fa-wallet"></i>
-            <span>کیف پول شما</span>
+            <span>افزایش اعتبار کیف پول</span>
             <span class="wallet-badge">
               اعتبار :
               <span
@@ -219,7 +225,7 @@ a.active {
         </li>
 
         <li class="list-item hidden-md hidden-lg">
-          <router-link :to="{ name: 'mainBuyAdRequests' }">
+          <router-link :to="{ name: 'buyAdRequestsSeller' }">
             <i class="fa fa-list-alt" aria-hidden="true"></i>
             <span>درخواست های خرید</span>
           </router-link>

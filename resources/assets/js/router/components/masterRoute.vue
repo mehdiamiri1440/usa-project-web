@@ -29,7 +29,7 @@
       :currentUser="currentUser"
     ></router-view>
 
-    <footer-master-layouts />
+    <footer-master-layouts v-if="hasfooter" />
   </div>
 </template>
 
@@ -77,6 +77,14 @@ export default {
         user_info: "",
       },
       filterCategory: "",
+      hasfooter: true,
+      hiddenFooterPages: [
+        "productList",
+        "productCategory",
+        "productView",
+        "invite",
+        "mainBuyAdRequests",
+      ],
     };
   },
   methods: {
@@ -140,10 +148,24 @@ export default {
       }
       return selectedCategory;
     },
+    checkFooter(routeName) {
+      this.hasfooter = true;
+      this.hiddenFooterPages.map((pageName) => {
+        if (pageName == routeName) {
+          this.hasfooter = false;
+        }
+      });
+    },
   },
   mounted() {
     this.getCurrentUser();
     this.getCategories();
+    this.checkFooter(this.$route.name);
+  },
+  watch: {
+    $route(to, from) {
+      this.checkFooter(to.name);
+    },
   },
 };
 </script>

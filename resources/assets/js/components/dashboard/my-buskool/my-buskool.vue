@@ -26,11 +26,20 @@
   text-align: right;
   padding: 0 10px;
   display: block;
+  position: relative;
 }
 
 .promotion-image img {
   height: 37px;
   width: initial;
+}
+
+.promotion-image i {
+  position: absolute;
+  left: 15px;
+  color: #fff;
+  font-size: 17px;
+  top: 10px;
 }
 
 .invite-image-wrapper {
@@ -171,6 +180,7 @@
             src="../../../../img/vertical-promotion-text.gif"
             alt="promotion text"
           />
+          <i class="fa fa-angle-left"></i>
         </router-link>
       </div>
       <div class="promotion-wrapper" v-else-if="!$parent.currentUser.user_info">
@@ -192,14 +202,14 @@
           </div>
         </div>
       </router-link>
-      <div class="invited-users">
+      <!-- <div class="invited-users">
         <router-link tag="button" :to="{ name: 'invitedUsers' }">
           <i class="fa fa-angle-left"></i>
           <span class="button-text"> درآمد ها </span>
 
           <i class="fa fa-dollar-sign button-icon"></i>
         </router-link>
-      </div>
+      </div> -->
     </div>
 
     <div class="menu-list text-rtl">

@@ -870,7 +870,7 @@ export default {
           title: "پیام ها",
         },
         {
-          name: "mainBuyAdRequests",
+          name: "buyAdRequestsSeller",
           title: "درخواست های خرید",
         },
         {

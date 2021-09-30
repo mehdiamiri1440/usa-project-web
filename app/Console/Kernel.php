@@ -83,7 +83,7 @@ class Kernel extends ConsoleKernel
         $cache_product_list_job = (new CacheProductList())->onQueue('main')->onConnection('database_3');
 
         $schedule->job($cache_product_list_job)
-                ->everyMinute();
+                ->everyTenMinutes();
 
         $cache_buyAd_list_job = (new CacheBuyAdList())->onQueue('main')->onConnection('database_3');
 

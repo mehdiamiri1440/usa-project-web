@@ -64,10 +64,13 @@ class comment_controller extends Controller
                         ->join('myusers','myusers.id','=','user_comments.commenter_id')
                         ->where([
                             ['user_comments.myuser_id','=',$user_id],
-                            ['user_comments.confirmed','=',true],
+                            // ['user_comments.confirmed','=',true],
                             ['user_comments.deleted_by_owner','=',false]
                         ])
-                        // ->whereNotNull('user_comments.text')
+                        ->where(function($q){
+                            return $q = $q->whereNull('user_comments.text')
+                                            ->orWhere('user_comments.confirmed',true);
+                        })
                         ->select([
                             'myusers.id as user_id',
                             'myusers.first_name',
@@ -106,10 +109,13 @@ class comment_controller extends Controller
                         ->join('myusers','myusers.id','=','user_comments.commenter_id')
                         ->where([
                             ['user_comments.myuser_id','=',$user_id],
-                            ['user_comments.confirmed','=',true],
+                            // ['user_comments.confirmed','=',true],
                             ['user_comments.deleted_by_owner','=',false]
                         ])
-                        // ->whereNotNull('user_comments.text')
+                        ->where(function($q){
+                            return $q = $q->whereNull('user_comments.text')
+                                            ->orWhere('user_comments.confirmed',true);
+                        })
                         ->select([
                             'myusers.id as user_id',
                             'myusers.first_name',
