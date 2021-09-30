@@ -83,31 +83,6 @@ services:
       - "traefik.tcp.routers.db.entrypoints=mysql"
     networks:
       - default
-
-  my-phpmyadmin:
-    image: phpmyadmin/phpmyadmin:5.0.2
-    container_name: phpmyadmin
-    restart: always
-    environment:
-      - PMA_ARBITRARY=1
-      - PMA_HOST=${DB_HOST}
-      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
-      - PMA_POST=${DB_PORT}
-    depends_on:
-      - mysql-db
-    ports:
-      - 6060:3035
-    labels:
-        #### Labels define the behavior and rules of the traefik proxy for this container ####
-      - "traefik.enable=true" # <== Enable traefik to proxy this container
-      - "traefik.http.routers.phpmyadmin-secured.tls=true"
-      - "traefik.http.routers.phpmyadmin-web.rule=Host(`php-admin.${APP_BASE_URL}`) || Host(`php-admin.${APP_ALTERNATIVE_BASE_URL}`)"  # <== Your Domain Name goes here for the http rule
-      - "traefik.http.routers.phpmyadmin-web.entrypoints=web" # <== Defining the entrypoint for http, **ref: line 30
-      - "traefik.http.routers.phpmyadmin-secured.rule=Host(`php-admin.${APP_BASE_URL}`) || Host(`php-admin.${APP_ALTERNATIVE_BASE_URL}`)" # <== Your Domain Name for the https rule
-      - "traefik.http.routers.phpmyadmin-secured.entrypoints=web-secured" # <== Defining entrypoint for https, **ref: line 31
-    networks:
-      - backend
-      - web
         
  
 networks:
