@@ -1133,6 +1133,8 @@ textarea.error:focus + i {
                 :uploadOCompress="1024 * 1024"
                 :uploadUploadAuto="false"
                 :imageWrapperSize="'col-xs-12 col-sm-6'"
+                imageAccessUploadCount="4"
+                :maximum="4"
               />
             </div>
           </div>
@@ -1200,6 +1202,8 @@ textarea.error:focus + i {
                 :uploadOCompress="1024 * 1024"
                 :uploadUploadAuto="false"
                 :imageWrapperSize="'col-xs-12 col-sm-6'"
+                imageAccessUploadCount="4"
+                :maximum="4"
               />
             </div>
           </div>
