@@ -132,7 +132,8 @@ i {
 
 #intro h1 {
   margin-top: 18px;
-  margin-bottom: 6px;
+  font-size: 30px;
+  margin-bottom: 16px;
 }
 
 #intro h1,
@@ -142,6 +143,35 @@ i {
 
 #intro h2 {
   margin-bottom: 16px;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+#intro .custom-mega-menu ul {
+  position: absolute;
+  margin: 0;
+  list-style: none;
+  z-index: 2;
+}
+
+#intro button.open-categories {
+  background: #eee;
+  color: #313a43;
+  font-weight: 400;
+  padding: 11px 15px;
+  font-size: 16px;
+  border: none;
+  border-radius: 0 12px 12px 0;
+  position: relative;
+  line-height: 27px;
+  max-width: 143px;
+  direction: rtl;
+}
+
+#intro button.open-categories i {
+  position: relative;
+  top: 1px;
+  padding: 0 2px;
 }
 
 .search-wrapper {
@@ -153,42 +183,36 @@ i {
 }
 
 .hero-search-input {
-  display: inline-block;
+  display: block;
   min-width: 455px;
-  overflow: hidden;
   position: relative;
   border-radius: 8px;
+  margin: 35px auto 0;
+  max-width: 670px;
 }
 
 .hero-search-input input {
-  padding: 9px 15px 8px;
-  border-radius: 0 4px 4px 0;
+  padding: 11px 162px 11px 15px;
+  border-radius: 12px;
   margin: 0;
   float: right;
   border: none;
-  width: calc(100% - 20px);
+  font-size: 16px;
+  line-height: 27px;
 }
 
-.hero-search-input button {
-  transition: 300ms;
-
+.hero-search-input > button {
+  transition: .3s;
   border: none;
-
   margin: 0;
-
-  padding: 8px 15px 11px;
-
-  color: #fff;
-
-  background: #1da1f2;
-
-  border-radius: 4px 0 0 4px;
-
+  padding: 12px 20px 5px;
+  color: #868686;
+  background: none;
+  border-radius: 8px 0 0 8px;
   position: absolute;
-
   left: 0;
-
   top: 0;
+  font-size: 20px;
 }
 
 .hero-search-input button:hover {
@@ -204,15 +228,18 @@ i {
 }
 
 #intro a.green-button {
-  font-size: 17px;
+  font-size: 20px;
   margin: 0 auto;
-  width: initial;
-  padding: 6px 33px 11px;
+  width: auto;
+  padding: 13px 33px;
   font-weight: 400;
   line-height: 1;
-  border-radius: 8px;
+  border-radius: 12px;
   margin-top: 62px;
   margin-bottom: 30px;
+  display: inline-block;
+  color: #fff;
+  background: #00c569;
 }
 
 #intro a.green-button i {
@@ -283,6 +310,12 @@ i {
   margin-top: 20px;
   border: 1px solid #ddd;
   transition: 150ms;
+}
+
+.green-button {
+  display: inline-block;
+  background: #00c569;
+  color: #fff;
 }
 
 .product-link.green-button {
@@ -464,6 +497,7 @@ li > ul > li.active > ul > li {
   font-weight: bold;
   padding: 0;
   padding-top: 5px;
+  width: 100%;
 }
 
 .list-group-item {
@@ -763,6 +797,24 @@ li > ul > li.active > ul > li {
   overflow: hidden;
 }
 
+.section-title {
+  text-align: right;
+  font-size: 18px;
+  font-weight: 500;
+  color: #313a43;
+  position: relative;
+  padding-bottom: 9px;
+}
+
+.section-title::after {
+  content: " ";
+  background-color: #00c569;
+  width: 100px;
+  height: 3px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
 /* .web-category-wrapper > ul > li {
   position: relative;
 } */
@@ -860,6 +912,7 @@ li > ul > li.active > ul > li {
   border: none;
   width: 100%;
   z-index: 0;
+  display: block;
 }
 .web-banner-wrapper .banner-contents {
   position: relative;
@@ -939,25 +992,25 @@ li > ul > li.active > ul > li {
 
 /* mobile categories styles 
 ******************************************/
-#banner-item-1{
+.banner-item-1{
   background-image: url("../../img/banners/banner-7.jpg");
 }
-#banner-item-2{
+.banner-item-2{
   background-image: url("../../img/banners/banner-1.jpg");
 }
-#banner-item-3{
+.banner-item-3{
   background-image: url("../../img/banners/banner-5.jpg");
 }
-#banner-item-4{
+.banner-item-4{
   background-image: url("../../img/banners/banner-2.jpg");
 }
-#banner-item-5{
+.banner-item-5{
   background-image: url("../../img/banners/banner-3.jpg");
 }
-#banner-item-6{
+.banner-item-6{
   background-image: url("../../img/banners/banner-4.jpg");
 }
-#banner-item-7{
+.banner-item-7{
   background-image: url("../../img/banners/banner-6.jpg");
 }
 
@@ -1125,14 +1178,13 @@ li > ul > li.active > ul > li {
   border: 1px solid #f0f0f1;
   margin: 30px auto;
   direction: rtl;
+  max-height: 400px;
+overflow-y: scroll;
 }
 
 .main-contents-wrapper > p {
   margin-top: 20px;
 }
-
-
-
 
 
 /*---------------------------------------
@@ -1226,12 +1278,6 @@ li > ul > li.active > ul > li {
       float: right;
     }
     
-    .user-information-wrapper {
-      padding: 5px 15px;
-      border-bottom: 2px solid #eeeeee;
-      margin: 0;
-      min-height: 52px;
-    }
     
     
     .user-information-wrapper .article-action-buttons {
@@ -1582,7 +1628,66 @@ li > ul > li.active > ul > li {
       transform: rotate(360deg);
     }
   }
-  
+
+  .buyAd-wrapper-item{
+    border: 1px solid #ddd;
+    padding: 3px 5px 5px;
+    border-radius: 12px;
+    margin-top: 20px;
+    background: #fdfdfd !important;
+  }
+
+  .buyAd-wrapper-item .list-title.list-name{
+    text-align: center;
+    padding: 5px 15px;
+    direction: rtl;
+    color: #7e7e7e;
+  }
+
+  .buyAd-wrapper-item .user-information-wrapper{
+    float: right;
+    width: 100%;
+    margin-bottom: 4px;
+  }
+
+  .buyAd-wrapper-item .user-information-content{
+    display: block;
+    float: right;
+    width: 100%;
+    background: none;
+    border: none;
+    margin: 0;
+    padding: 0;
+    padding-bottom: 3px;
+  }
+  .list-title.list-name div.buyer-text{
+    text-align: center;
+    font-size: 15px;
+    font-weight: 400;
+    height: 65px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+
+  .buyAd-wrapper-item .user-content{
+    display: block;
+    max-width: 170px;
+    overflow: hidden;
+    font-size: 13px;
+    font-weight: 400;
+    color: #adadad;
+    height: 21px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-align: right;
+  }
+
+
   /*preloader image style*/
   
   .main-article-image {
@@ -1927,7 +2032,6 @@ li > ul > li.active > ul > li {
   
   .form-wrapper {
     margin: 0 auto;
-    max-width: 767px;
   }
   .form-contents {
     margin-top: 26px;
@@ -2214,6 +2318,10 @@ li > ul > li.active > ul > li {
                 -----------------------------------------*/
 
 @media screen and (max-width: 767px) {
+
+  .hero-search-input > input {
+    padding: 11px 15px;
+  }
 
   select {
     font-size: 12px;

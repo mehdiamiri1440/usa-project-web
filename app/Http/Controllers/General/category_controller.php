@@ -16,7 +16,7 @@ class category_controller extends Controller
         $parent_id = $request->parent_id;
         $casade_list = $request->cascade_list;
 
-        $all_categories = Cache::remember(md5('categories'),24 * 60,function(){
+        $all_categories = Cache::remember(md5('categories'),1,function(){
             return DB::table('categories')
                         ->leftJoin('products','products.category_id','=','categories.id')
                         ->select('categories.*',DB::raw('count(products.id) as score'))
@@ -25,7 +25,7 @@ class category_controller extends Controller
                         ->get();
         });
 
-        if (!$request->has('parent_id')) {
+        if ( ! $request->has('parent_id')) {
             $categories = $all_categories->filter(function($category){
                 return $category->parent_id == null;
             });
@@ -46,6 +46,19 @@ class category_controller extends Controller
                         return $category->parent_id == $item->id;
                     });
 
+                    $item->subcategories->each(function($item) use($all_categories){
+                        $other = null;
+                        $item->subcategories = $all_categories->filter(function($category) use($item,&$other){
+                            if($category->parent_id == $item->id && $category->category_name == 'سایر'){
+                                $other = $category;
+                                return false;
+                            }
+
+                            return $category->parent_id == $item->id;
+                        });
+                    });
+                    
+
                     if(! is_null($other)){
                         ($item->subcategories)[] = $other;
                     }
@@ -65,6 +78,7 @@ class category_controller extends Controller
 
                 // $categories['subcategories'] = category::where('parent_id', $parent_id)
                 //     ->get();
+                
                 $other = null;
                 $categories->subcategories = $all_categories->filter(function($category) use($parent_id,&$other){
                     if($category->parent_id == $parent_id && $category->category_name == 'سایر'){
@@ -74,31 +88,86 @@ class category_controller extends Controller
                     return $category->parent_id == $parent_id;
                 });
 
-                if(! is_null($other)){
-                    ($categories->subcategories)[] = $other;
-                }
+                    if(! is_null($other))
+                    {
+                        ($categories->subcategories)[] = $other;
+                    }
             } else {
-                // $categories = category::where('parent_id', $parent_id)
-                //     ->get();
-                $other = null;
-                $categories = $all_categories->filter(function($category) use($parent_id,&$other){
-                    if($category->parent_id == $parent_id && $category->category_name == 'سایر'){
-                        $other = $category;
-                        return false;
+                            // $categories = category::where('parent_id', $parent_id)
+                            //     ->get();
+                            $other = null;
+                            $categories = $all_categories->filter(function($category) use($parent_id,&$other){
+                                if($category->parent_id == $parent_id && $category->category_name == 'سایر'){
+                                    $other = $category;
+                                    return false;
+                                }
+
+                                return $category->parent_id == $parent_id;
+                            });
+
+                            if(! is_null($other)){
+                                $categories[] = $other;
+                            }
+                        }
                     }
 
-                    return $category->parent_id == $parent_id;
-                });
+                    return response()->json([
+                        'status' => true,
+                        'categories' => array_values($categories->toArray()),
+                    ], 200);
+    }
 
-                if(! is_null($other)){
-                    $categories[] = $other;
-                }
-            }
-        }
+
+    public function get_related_category_names(Request $request)
+    {
+        $this->validate($request,[
+            'category_id' => 'required|exists:categories,id',
+            'category_name' => 'required|string'
+        ]);
+
+        $category_id = $request->category_id;
+        $category_name = $request->category_name;
+
+        $category_names = $this->get_related_category_names_array($category_id,$category_name);
 
         return response()->json([
             'status' => true,
-            'categories' => array_values($categories->toArray()),
-        ], 200);
+            'category_names' => $category_names
+        ]);
+    }
+
+    public function get_related_category_names_array($category_id,$category_name)
+    {
+        $related_category_names = DB::table('tags')
+                            ->where('category_id',$category_id)
+                            ->where('header','<>',$category_name)
+                            ->pluck('header')
+                            ->toArray();
+
+        $related_category_names = array_filter($related_category_names,function($item){
+            return $item == strip_tags($item);
+        });
+
+        return array_unique($related_category_names);
+    }
+
+    public function get_all_extra_category_names()
+    {
+        $category_names = DB::table('tags')
+                                ->whereNotExists(function($q){
+                                    $q->select(DB::raw(1))
+                                        ->from('categories')
+                                        ->where('categories.category_name','tags.header');
+                                })->pluck('header')
+                                ->toArray();
+
+        $category_names = array_filter($category_names,function($item){
+            return $item == strip_tags($item);
+        });
+
+        return array_unique($category_names);
     }
 }
+
+    
+

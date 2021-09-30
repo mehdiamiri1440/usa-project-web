@@ -59,7 +59,7 @@
   transform: translateX(-5px);
 }
 .action-control-wrapper {
-  margin: 40px auto 20px;
+  margin: 40px auto;
 }
 
 label {
@@ -172,6 +172,9 @@ label {
             </span>
             <span v-else-if="$parent.categoryName == 'دامپروری'">
               مثلا: چهل گیاه
+            </span>
+            <span v-else-if="$parent.categoryName == 'حبوبات'">
+              مثلا: چیتی
             </span>
             <span v-else> مثلا: مضافتی</span>
           </label>

@@ -164,7 +164,7 @@ services:
     volumes:
       - .:/var/www/html
     environment:
-      CONTAINER_ROLE: queue
+      CONTAINER_ROLE: defaultqueue
     networks:
       - backend
 
@@ -177,7 +177,7 @@ services:
     volumes:
       - .:/var/www/html
     environment:
-      CONTAINER_ROLE: queue
+      CONTAINER_ROLE: smsqueue
     networks:
       - backend
 
@@ -190,7 +190,20 @@ services:
     volumes:
       - .:/var/www/html
     environment:
-      CONTAINER_ROLE: queue
+      CONTAINER_ROLE: fcmqueue
+    networks:
+      - backend
+
+  queue-helper-3:
+    image: buskool-app
+    container_name: laravel-helper-3
+    restart: always
+    depends_on:
+      - laravel-app
+    volumes:
+      - .:/var/www/html
+    environment:
+      CONTAINER_ROLE: mainqueue
     networks:
       - backend
 

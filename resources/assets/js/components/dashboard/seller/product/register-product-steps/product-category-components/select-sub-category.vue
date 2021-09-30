@@ -50,7 +50,7 @@
   transform: translateX(-5px);
 }
 .action-control-wrapper {
-  margin: 40px auto 20px;
+  margin: 40px auto 100px;
 }
 
 .title-contents {
@@ -121,7 +121,7 @@ ul li.item button i {
 <template>
   <div>
     <h2 class="title-contents col-xs-12">
-      <img
+      <!-- <img
         v-if="$parent.categoryName == 'میوه'"
         src="../../../../../../../img/orange.svg"
       />
@@ -144,26 +144,49 @@ ul li.item button i {
       <img
         v-else-if="$parent.categoryName == 'دامپروری'"
         src="../../../../../../../img/bee.svg"
-      />
+      /> -->
       انتخاب دسته بندی محصول
     </h2>
 
     <div class="form-contents col-xs-12">
       <div class="row">
-        <ul class="list-wrapper">
+        <ul class="list-wrapper" v-if="mainCategories">
           <li
-            v-for="(item, index) in subCategories"
+            v-for="(item, index) in mainCategories"
             :key="index"
             class="item col-xs-12"
           >
-            <button @click.prevent="$parent.selectedSubCategory(item)">
+            <button @click.prevent="$parent.selectedMainCategory(item)">
               <span v-text="item.category_name"> </span>
               <i class="fa fa-angle-left"></i>
             </button>
           </li>
         </ul>
+        <ul class="list-wrapper" v-else-if="subCategories">
+          <li
+            v-for="(item, index) in subCategories"
+            :key="index"
+            class="item col-xs-12"
+          >
+            <button @click.prevent="$parent.selectedSubCategory(index)">
+              <span v-text="item.category_name"> </span>
+              <i class="fa fa-angle-left"></i>
+            </button>
+          </li>
+        </ul>
+
         <div class="col-xs-12 action-control-wrapper">
           <button
+            v-if="mainCategories"
+            class="submit-button default-back-button pull-right"
+            @click.prevent="$parent.mainCategories = ''"
+          >
+            <i class="fa fa-arrow-right"></i>
+
+            مرحله قبل
+          </button>
+          <button
+            v-else
             class="submit-button default-back-button pull-right"
             @click.prevent="$parent.step--"
           >
@@ -181,6 +204,6 @@ ul li.item button i {
 
 <script>
 export default {
-  props: ["index", "subCategories"],
+  props: ["index", "subCategories", "mainCategories"],
 };
 </script>

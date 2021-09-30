@@ -49,7 +49,7 @@ class NotifyBuyersIfAnyNewRelatedProductRegistered implements ShouldQueue
         $the_most_related_buyAd_owners_ids = $this->get_the_most_related_buyAd_owners_id_to_the_given_product_if_any($this->product);
 
         if(count($the_most_related_buyAd_owners_ids) == 0){
-            return 0; //we can elvate product in this case or something like that
+            return 0; //we can elevate product in this case or something like that
         }
 
         $product_suggestion_records = [];
@@ -59,7 +59,7 @@ class NotifyBuyersIfAnyNewRelatedProductRegistered implements ShouldQueue
         {
             $product_suggestion_records[] = [
                 'buyer_id' => $buyer_id,
-                'product_id' => $product->id,
+                'product_id' => $this->product->id,
                 'created_at' => $now,
                 'updated_at' => $now,
             ];
@@ -85,6 +85,7 @@ class NotifyBuyersIfAnyNewRelatedProductRegistered implements ShouldQueue
             ],
         ];
 
+
         $fcm_object = new fcm_controller();
 
         $fcm_object->send_notification_to_given_topic_group($data,$topics);
@@ -99,7 +100,7 @@ class NotifyBuyersIfAnyNewRelatedProductRegistered implements ShouldQueue
     protected function get_the_most_related_buyAd_owners_id_to_the_given_product_if_any(&$product)
     {
         $until = Carbon::now()->subMonth(1);
-        $from = Carbon::now()->subMonths(4); // last 6 months
+        $from = Carbon::now()->subMonths(4); // last 4 months
 
         $until_last_year = Carbon::now()->subMonth(9);
         $from_last_year = Carbon::now()->subMonth(12);
@@ -129,8 +130,10 @@ class NotifyBuyersIfAnyNewRelatedProductRegistered implements ShouldQueue
                                 $q->select(DB::raw(1))
                                     ->from('product_suggestions')
                                     ->whereRaw("product_suggestions.buyer_id = buy_ads.myuser_id")
-                                    ->orWhereRaw("product_suggestions.product_id = {$product->id} and product_suggestions.buyer_id = buy_ads.myuser_id") //preventing from product duplication notifications for buyers
-                                    ->whereBetween('created_at',[Carbon::now()->subHours(12),Carbon::now()]);
+                                    ->where(function($q) use($product){
+                                        return $q = $q->whereBetween('created_at',[Carbon::now()->subHours(12),Carbon::now()])
+                                                            ->orWhere('product_suggestions.product_id',$product->id);
+                                    });
                             })->orderBy('buy_ads.created_at','desc')
                             ->select('buy_ads.myuser_id as buyer_id')
                             ->distinct('buyer_id')
@@ -156,8 +159,10 @@ class NotifyBuyersIfAnyNewRelatedProductRegistered implements ShouldQueue
                                 $q->select(DB::raw(1))
                                     ->from('product_suggestions')
                                     ->whereRaw("product_suggestions.buyer_id = buy_ads.myuser_id")
-                                    ->orWhereRaw("product_suggestions.product_id = {$product->id} and product_suggestions.buyer_id = buy_ads.myuser_id") //preventing from product duplication notifications for buyers
-                                    ->whereBetween('created_at',[Carbon::now()->subHours(6),Carbon::now()]);
+                                    ->where(function($q) use($product){
+                                        return $q = $q->whereBetween('created_at',[Carbon::now()->subHours(6),Carbon::now()])
+                                                            ->orWhere('product_suggestions.product_id',$product->id);
+                                    });
                             })->orderBy('buy_ads.created_at','desc')
                             ->select('buy_ads.myuser_id as buyer_id')
                             ->distinct('buyer_id')

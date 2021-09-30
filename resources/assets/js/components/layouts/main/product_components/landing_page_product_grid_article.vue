@@ -44,6 +44,7 @@
   border-radius: 8px;
   background: #38485f;
   color: #fff;
+  padding: 3px 7px 0;
 }
 
 .main-article-title {
@@ -363,7 +364,7 @@ export default {
     ArticleMainContents,
     ProductImage,
   },
-  props: ["productIndex", "lastProduct", "str"],
+  props: ["productIndex", "lastProduct", "str", "loadedProduct"],
   data: function () {
     return {
       submiting: false,
@@ -416,7 +417,7 @@ export default {
       // } else {
       //   this.$router.push(this.productUrl);
       // }
-      this.$parent.registerComponentStatistics(
+      this.registerComponentStatistics(
         "product",
         "show-product-in-seperate-page",
         "show-product-in-seperate-page"

@@ -44,9 +44,14 @@ class phone_number_controller extends Controller
                                 ->where('myusers.id','<>',$viewer_user_id)
                                 ->where('products.id',$request->p_id)
                                 ->where('products.confirmed',true)
-                                ->where(function($q){
+                                ->where(function($q) use($viewer_user_id,$request){
                                     return $q = $q->where('myusers.wallet_balance','>=',config('subscriptionPakage.phone-number.view-price'))
-                                                    ->orWhere('myusers.active_pakage_type','>',0);
+                                                    ->orWhere('myusers.active_pakage_type','>',0)
+                                                    ->orWhereExists(function($q) use($viewer_user_id,$request){
+                                                        $q->select(DB::raw(1))
+                                                            ->from('leads')
+                                                            ->whereRaw("leads.buyer_id = $viewer_user_id and leads.seller_id = {$request->s_id} and leads.related_product_id = {$request->p_id}");
+                                                    });
                                 })
                                 ->whereIn('myusers.phone_view_permission',['1010','1110','1011','1111'])
                                 ->select('myusers.*')
@@ -80,7 +85,8 @@ class phone_number_controller extends Controller
                 $this->insert_phone_number_view_log_record($viewer_user_id,$request->s_id,'SELLER',$request->item,false);
                 
                 $wallet_controller_object = new wallet_controller();
-                $wallet_controller_object->insert_expendig_log_record(1,$request->s_id);
+                $unit_cost = config("subscriptionPakage.phone-number.view-price");
+                $wallet_controller_object->insert_expendig_log_record('phone-number-view',$unit_cost,$request->s_id);
             }
             else{
                 $this->insert_phone_number_view_log_record($viewer_user_id,$request->s_id,'SELLER',$request->item,true);
@@ -141,6 +147,79 @@ class phone_number_controller extends Controller
                         'related_item' => $item,
                         'is_free' => $is_free
                     ]);
+    }
+
+    public function get_seller_phone_number_or_proper_message_for_interactive_chat($product_id,$seller_id,$viewer_user_id)
+    {
+        $item = 'PRODUCT';
+
+        $access_deny_message = "فروشنده در سریعترین زمان ممکن به شما پاسخ خواهد داد. \n\n";
+        $access_deny_message .= ":wlt=$product_id";
+
+        if($this->is_proper_time_for_phone_call() == false){
+            return $access_deny_message;
+        }
+
+        $related_record = DB::table('myusers')
+                                ->join('products','products.myuser_id','=','myusers.id')
+                                ->whereNull('products.deleted_at')
+                                ->where('myusers.id',$seller_id)
+                                ->where('myusers.id','<>',$viewer_user_id)
+                                ->where('products.id',$product_id)
+                                ->where('products.confirmed',true)
+                                ->where(function($q) use($viewer_user_id,$seller_id,$product_id){
+                                    return $q = $q->where('myusers.wallet_balance','>=',config('subscriptionPakage.phone-number.view-price'))
+                                                    ->orWhere('myusers.active_pakage_type','>',0)
+                                                    ->orWhereBetween('myusers.created_at',[Carbon::now()->subWeeks(1),Carbon::now()])
+                                                    ->orWhereExists(function($q) use($viewer_user_id,$seller_id,$product_id){
+                                                        $q->select(DB::raw(1))
+                                                            ->from('leads')
+                                                            ->whereRaw("leads.buyer_id = {$viewer_user_id} and leads.seller_id = {$seller_id} and leads.related_product_id = {$product_id}");
+                                                    });
+                                })
+                                ->whereExists(function($q) use($viewer_user_id,$seller_id){
+                                    $q->select(DB::raw(1))
+                                        ->from('messages')
+                                        ->whereRaw("messages.sender_id = {$seller_id} and messages.receiver_id = {$viewer_user_id} and messages.text like '%:p=%' ");
+                                })
+                                ->whereIn('myusers.phone_view_permission',['1010','1110','1011','1111'])
+                                ->select('myusers.*')
+                                ->get()
+                                ->first();
+
+        if(is_null($related_record)){
+            return $access_deny_message;
+        }
+
+        if($this->does_viewer_already_seen_the_user_phone_number($viewer_user_id,$related_record->id) === false){
+
+            $viewer_daily_access_count = DB::table('phone_number_view_logs')
+                                                ->where('viewer_id',$viewer_user_id)
+                                                ->whereBetween('created_at',[Carbon::today(),Carbon::tomorrow()])
+                                                ->groupBy('myuser_id')
+                                                ->get()
+                                                ->count();
+    
+            if($viewer_daily_access_count > config('subscriptionPakage.phone-number.max-daily-access-count')){
+                return $access_deny_message;
+            }
+
+            if($related_record->active_pakage_type == 0){
+                $this->insert_phone_number_view_log_record($viewer_user_id,$seller_id,'SELLER',$item,false);
+                
+                $wallet_controller_object = new wallet_controller();
+                $unit_cost = config("subscriptionPakage.phone-number.view-price");
+                $wallet_controller_object->insert_expendig_log_record('phone-number-view',$unit_cost,$seller_id);
+            }
+            else{
+                $this->insert_phone_number_view_log_record($viewer_user_id,$seller_id,'SELLER',$item,true);
+            }
+        }
+        else{
+            $this->insert_phone_number_view_log_record($viewer_user_id,$seller_id,'SELLER',$item,true);
+        }
+        echo 'phone->' . $related_record->phone;
+        return  $related_record->phone;
     }
 
     public function get_buyer_phone_number(Request $request)
@@ -370,10 +449,133 @@ class phone_number_controller extends Controller
     {
         $now = Carbon::now();
 
-        if(Carbon::parse($now)->format('H') >= 22  || Carbon::parse($now)->format('H') < 7){
+        if(Carbon::parse($now)->format('H') < 5){
             return false;
         }
 
         return true;
+    }
+
+    public function get_user_contacts(Request $request)
+    {
+        $this->validate($request,[
+            'contacts' => 'required|array',
+        ]);
+
+        $user_id = session('user_id');
+
+        $contacts = $request->contacts;
+
+        $contacts = $this->get_standard_format_contacts($contacts);
+
+        $this->save_new_contacts_phone_numbers($contacts);
+
+        $phone_numbers = [];
+        foreach($contacts as $contact)
+        {
+            $phone_numbers[] = $contact['phone'];
+        }
+
+        $phone_number_saved_records = DB::table('contact_phones')
+                                        ->whereIn('phone',$phone_numbers)
+                                        ->get();
+
+        $phone_number_records_ids = [];
+        foreach($phone_number_saved_records as $phone_record)
+        {
+            $phone_number_records_ids[$phone_record->phone] = $phone_record->id;
+        }
+
+        $contact_records = [];
+
+        $now = Carbon::now()->format('Y-m-d H:i:s');
+        foreach($contacts as $contact)
+        {
+            $contact_id = $phone_number_records_ids[$contact['phone']];
+        
+            $tmp = [
+                'created_at' => $now,
+                'updated_at' => $now,
+                'contact_name' => strip_tags($contact['full_name']),
+                'has_thumbnail' => $contact['has_thumbnail'] == true ? 1 : 0,
+                'contact_id' => $contact_id,
+                'myuser_id' => $user_id,
+            ];
+
+            $contact_records[] = $tmp;
+        }
+
+        //insert on duplicate keys
+        $this->save_the_user_contact_list_info($contact_records);
+
+        return response()->json([
+            'status' => true,
+            'msg' => 'done!'
+        ],201);
+    }
+
+    protected function convert_phone_number_to_standard_format($contact)
+    {
+        $phone_number = $contact['phone'];
+
+        $phone_number = str_replace([' ',')','('],'',$phone_number);
+        $phone_number = str_replace('+98','0',$phone_number);
+        
+        
+        if(preg_match('/((09[0-9]{9})|(\x{06F0}\x{06F9}[\x{06F0}-\x{06F9}]{9}))/u',$phone_number) === 1) //if does not match phone number format
+        {
+            $contact['phone'] = $phone_number;
+
+            return $contact;
+        }
+
+        return false;
+    }
+
+    protected function get_standard_format_contacts($contacts)
+    {
+        $contacts = array_map([$this,"convert_phone_number_to_standard_format"],$contacts);
+
+        return array_values(array_filter($contacts)); //removes false values
+    }
+
+    protected function save_new_contacts_phone_numbers($contacts)
+    {
+        $values = [];
+
+        $now = Carbon::now();
+
+        foreach($contacts as $contact)
+        {
+            $values[] = "('" . $now . "','" . $now . "','"  . $contact['phone'] . "')";
+        }
+        $values = implode(',',$values);
+
+        $query = "insert into contact_phones (created_at,updated_at,phone) VALUES {$values} on duplicate key update  phone = VALUES(phone)";
+
+        DB::insert($query);
+    }
+
+    protected function save_the_user_contact_list_info($contact_records)
+    {
+        $values = [];
+        foreach($contact_records as $contact)
+        {
+            $contact = (array) $contact;
+            foreach($contact as $key => $value)
+            {
+                $tmp = "'" . $value . "'";
+                $contact[$key] = $tmp;
+            }
+            
+            $tmp = '(' . implode(',' ,array_values($contact)) . ')';
+            $values[] = $tmp;
+        }
+
+        $values = implode(',',$values);
+
+        $query = "insert into user_contacts (created_at,updated_at,contact_name,has_thumbnail,contact_id,myuser_id) VALUES {$values} on duplicate key update  contact_name = VALUES(contact_name), has_thumbnail = VALUES(has_thumbnail), contact_id = VALUES(contact_id), myuser_id = VALUES(myuser_id)";
+
+        DB::insert($query);
     }
 }

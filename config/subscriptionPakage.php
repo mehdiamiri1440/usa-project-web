@@ -23,7 +23,7 @@ return [
        'sms-to-buyers' => true,
        'immediate-confirm' => true,
        'view-in-special-products' => false,
-       'reputation-score' => 0,
+       'reputation-score' => 150,
        'validated-seller' => false,
        'access-to-buy-requests' => false,
        'show-profile-link-in-blog' => false,
@@ -58,7 +58,7 @@ return [
         'sms-to-buyers' => true,
         'immediate-confirm' => true,
         'view-in-special-products' => true,
-        'reputation-score' => 420,
+        'reputation-score' => 500,
         'validated-seller' => true,
         'access-to-buy-requests' => true,
         'show-profile-link-in-blog' => true,
@@ -73,10 +73,18 @@ return [
     
     'elevator' => [
         'price' => 250000,
-        'expiration-time-in-days' => 7
+        'expiration-time-in-days' => 3
     ],
     'phone-number' => [
         'view-price' => 500, //Toman
         'max-daily-access-count' => 10
     ],
+    'sellers-share-plus-count' => [
+        '1' => 4, // payed
+        '2' => 1, // verified
+        '3' => 1, // new
+    ],
+    'buyAd-capacity-price' => 250000,
+    'product-capacity-price' => 250000,
+    'referred-credit-divider' => 2, // half 
 ];

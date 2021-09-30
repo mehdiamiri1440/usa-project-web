@@ -609,8 +609,8 @@ li.static-item > button i {
             tag="button"
             class="contact-button"
           >
-            <i class="fa fa-user"></i>
-            مخاطبین من
+            <i class="fas fa-comment-alt"></i>
+            پیام ها
           </router-link>
         </div>
       </div>
@@ -1059,6 +1059,7 @@ li.static-item > button i {
 
 <script >
 import { eventBus } from "../../../router/router";
+import swal from "../../../sweetalert.min.js";
 
 export default {
   data: function () {

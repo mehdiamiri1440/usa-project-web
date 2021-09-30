@@ -2,10 +2,11 @@
 .review-item-wrapper {
   float: right;
   width: 100%;
-  border-radius: 3px;
-  border: 1px solid #bdc4cc;
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
   padding: 10px 0;
   margin-bottom: 30px;
+  direction: rtl;
 }
 .reviewer-information {
   border-left: 1px solid #bdc4cc;
@@ -130,77 +131,84 @@
 
 <template>
   <div class="col-xs-12">
-    <article class="review-item-wrapper">
-      <div
-        class="reviewer-information-wrapper text-center col-xs-12 col-sm-2 pull-right"
-      >
-        <div class="reviewer-information">
-          <p class="user-name" v-text="filterUserName"></p>
-          <p
-            class="user-city"
-            v-text="review.city + ' - ' + review.province"
-          ></p>
-          <p class="comment-date hidden-sm hidden-md hidden-lg">
+    <div class="row">
+      <article class="review-item-wrapper">
+        <div
+          class="
+            reviewer-information-wrapper
+            text-center
+            col-xs-12 col-sm-2
+            pull-right
+          "
+        >
+          <div class="reviewer-information">
+            <p class="user-name" v-text="filterUserName"></p>
+            <p
+              class="user-city"
+              v-text="review.province + ' - ' + review.city"
+            ></p>
+            <p class="comment-date hidden-sm hidden-md hidden-lg">
+              {{ review.created_at | moment("jYYYY/jMM/jDD") }}
+            </p>
+          </div>
+        </div>
+        <div class="review-message col-xs-12 col-sm-8 pull-right">
+          <div class="rate-stars" v-if="review.rating_score > 0">
+            <p class="stars-wrapper text-right">
+              <span v-for="(star, index) in 5" :key="index">
+                <span v-text="index + 1"></span>
+                <i
+                  class="fa fa-star"
+                  :class="{ 'yellow-text': index < review.rating_score }"
+                ></i>
+              </span>
+            </p>
+          </div>
+          <p v-text="review.text"></p>
+        </div>
+        <div class="review-rate text-center col-xs-12 col-sm-2 pull-right">
+          <p class="comment-date hidden-xs">
             {{ review.created_at | moment("jYYYY/jMM/jDD") }}
           </p>
-        </div>
-      </div>
-      <div class="review-message col-xs-12 col-sm-8 pull-right">
-        <div class="rate-stars" v-if="review.rating_score > 0">
-          <p class="stars-wrapper text-right">
-            <span v-for="(star, index) in 5" :key="index">
-              <span v-text="index + 1"></span>
-              <i
-                class="fa fa-star"
-                :class="{ 'yellow-text': index < review.rating_score }"
-              ></i>
-            </span>
-          </p>
-        </div>
-        <p v-text="review.text"></p>
-      </div>
-      <div class="review-rate text-center col-xs-12 col-sm-2 pull-right">
-        <p class="comment-date hidden-xs">
-          {{ review.created_at | moment("jYYYY/jMM/jDD") }}
-        </p>
-        <div
-          class="review-likes-wrapper text-center"
-          v-if="!$parent.isMyProfile"
-        >
-          <button
-            @click.prevent="doLike()"
-            class="review-likes"
-            :class="{ active: likeAction }"
+          <div
+            class="review-likes-wrapper text-center"
+            v-if="!$parent.isMyProfile"
           >
-            <span class="like-icon">
-              <span v-text="likesCount"></span>
-              <i class="fa fa-thumbs-up"></i>
-            </span>
-            <span v-if="likeAction">پسندیدم</span>
-            <span v-else>می پسندم</span>
-          </button>
-        </div>
-
-        <div class="review-likes-wrapper owner-profile text-center" v-else>
-          <div class="review-likes">
-            <span class="like-icon">
-              <span v-text="likesCount"></span>
-              <i class="fa fa-thumbs-up"></i>
-            </span>
-          </div>
-          <div class="delete-comment-wrapper">
             <button
-              @click.prevent="deleteComment()"
-              :disabled="$parent.doDeletereview"
-              class="delete-comment red-text review-likes"
-              :class="{ 'disable-text ': $parent.doDeletereview }"
+              @click.prevent="doLike()"
+              class="review-likes"
+              :class="{ active: likeAction }"
             >
-              حذف این نظر
+              <span class="like-icon">
+                <span v-text="likesCount"></span>
+                <i class="fa fa-thumbs-up"></i>
+              </span>
+              <span v-if="likeAction">پسندیدم</span>
+              <span v-else>می پسندم</span>
             </button>
           </div>
+
+          <div class="review-likes-wrapper owner-profile text-center" v-else>
+            <div class="review-likes">
+              <span class="like-icon">
+                <span v-text="likesCount"></span>
+                <i class="fa fa-thumbs-up"></i>
+              </span>
+            </div>
+            <div class="delete-comment-wrapper">
+              <button
+                @click.prevent="deleteComment()"
+                :disabled="$parent.doDeletereview"
+                class="delete-comment red-text review-likes"
+                :class="{ 'disable-text ': $parent.doDeletereview }"
+              >
+                حذف این نظر
+              </button>
+            </div>
+          </div>
         </div>
-      </div>
-    </article>
+      </article>
+    </div>
   </div>
 </template>
 
@@ -262,8 +270,7 @@ export default {
 
       swal({
         title: "حذف نظر",
-        text:
-          "تعداد نظرات حذف شده توسط شما به کاربران نمایش داده خواهد شد. آیا می خواهید این نظر را حذف کنید؟",
+        text: "تعداد نظرات حذف شده توسط شما به کاربران نمایش داده خواهد شد. آیا می خواهید این نظر را حذف کنید؟",
         className: "custom-swal-with-cancel",
         icon: "warning",
         buttons: {

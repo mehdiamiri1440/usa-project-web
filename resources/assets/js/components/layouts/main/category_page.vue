@@ -252,7 +252,11 @@
 <template>
   <div>
     <div
-      class="sub-header-fix sub-header hidden-lg hidden-md hidden-sm container-fluid"
+      class="
+        sub-header-fix sub-header
+        hidden-lg hidden-md hidden-sm
+        container-fluid
+      "
     >
       <div class="search-box col-sm-8 col-xs-12 col-lg-5 pull-right">
         <input
@@ -503,7 +507,7 @@ export default {
   },
   metaInfo() {
     return {
-      title: "لیست محصولات و قیمت عمده محصولات کشاورزی",
+      title: "لیست محصولات و قیمت عمده محصولات غذایی و کشاورزی",
       titleTemplate: "باسکول | %s",
       meta: [
         {
@@ -518,15 +522,16 @@ export default {
         {
           property: "og:description",
           content:
-            "مرجع تخصصی خرید و فروش عمده و قیمت محصولات کشاورزی ایران | صادرات محصولات کشاورزی",
+            "مرجع تخصصی خرید و فروش عمده و قیمت محصولات غذایی و کشاورزی ایران | صادرات محصولات غذایی و کشاورزی",
         },
         {
           property: "og:site_name",
-          content: "باسکول بازارآنلاین خرید و فروش محصولات کشاورزی ایران",
+          content:
+            "باسکول بازارآنلاین خرید و فروش محصولات غذایی و کشاورزی ایران",
         },
         {
           property: "og:title",
-          content: "باسکول | لیست محصولات و قیمت محصولات کشاورزی",
+          content: "باسکول | لیست محصولات و قیمت محصولات غذایی و کشاورزی",
         },
       ],
     };

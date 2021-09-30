@@ -10,6 +10,7 @@
   position: relative;
   align-items: center;
   z-index: 1;
+  margin-top: 120px;
 }
 
 .loading-container .lds-ring {
@@ -906,7 +907,7 @@
                 @click.prevent="shareContetn(msg.id)"
                 class="forward-item"
               >
-                <i class="fa fa-share"> </i>
+                <i class="fa fa-share-alt"> </i>
               </button>
             </div>
             <button
@@ -914,7 +915,7 @@
               @click.prevent="shareContetn(msg.id)"
               class="share-button"
             >
-              <i class="fa fa-share"></i>
+              <i class="fa fa-share-alt"></i>
               ارسال برای دوستان
             </button>
             <a
@@ -953,6 +954,8 @@
 <script>
 import MessageImage from "./messege-image";
 import { eventBus } from "../../../router/router";
+import magnificPopup from "../../../jquery.magnific-popup.min";
+
 export default {
   components: {
     MessageImage,
@@ -1098,7 +1101,11 @@ export default {
     activeShareModal: function (contentId) {
       let baseUrl = getBase();
       let url = baseUrl + "public-channel/" + contentId;
-      eventBus.$emit("shareModalUrl", url);
+      let shareItem = {
+        shareModalUrl: url,
+        shareModalText: "",
+      };
+      eventBus.$emit("shareModalUrl", shareItem);
     },
     getProductInfo(text, isTitle) {
       let splitText = text.split("\n");
@@ -1165,7 +1172,11 @@ export default {
           baseUrl +
           "shared-profile/" +
           this.$parent.currentUser.user_info.user_name;
-        eventBus.$emit("shareModalUrl", url);
+        let shareItem = {
+          shareModalUrl: url,
+          shareModalText: "",
+        };
+        eventBus.$emit("shareModalUrl", shareItem);
       }
     },
   },

@@ -6,20 +6,12 @@
 }
 .main-content {
   padding: 59px 250px 0 0;
-
   direction: rtl;
-
-  /* border-bottom: 2px solid #f2f2f2; */
   height: 100%;
   position: fixed;
-
-  /*right: 0;*/
   background: #fff;
-
   left: 0;
-
   bottom: 0;
-
   top: 0;
 }
 .main-content.is-fix-alert {
@@ -128,70 +120,96 @@
   overflow-y: scroll;
   float: right;
   width: 100%;
+  border-left: 1px solid #e0e0e0;
 }
 
 .default-message-wrapper {
   position: relative;
   height: 100%;
-  background: #f6f6f6;
+  overflow: auto;
 }
 
 .default-message-wrapper .default-main-contents {
-  width: 250px;
-
-  height: 250px;
-
   background: #fff;
-
   border-radius: 250px;
-
   position: absolute;
-
   left: 50%;
-
   top: 50%;
-
   transform: translate(-50%, -50%);
-
   text-align: center;
-
-  padding-top: 60px;
-  box-shadow: 0 0 10px #ebebeb;
+  padding-top: 70px;
+  padding-bottom: 30px;
 }
 
-.default-message-wrapper .default-main-contents.seller-buyAd-picture {
+.default-message-wrapper .default-main-contents > img {
+  max-width: 260px;
+}
+
+.default-message-wrapper .default-main-contents.delsa-box {
   width: 100%;
-  max-width: 400px;
-  border-radius: 10px;
-  padding: 0;
-  padding-top: 30px;
-  height: 435px;
+  max-width: 585px;
+  min-height: 550px;
 }
 
-.default-message-wrapper .default-main-contents.seller-buyAd-picture .red-text {
-  margin: 30px 0px -24px;
-  z-index: 1;
-  padding: 0 15px;
+.default-message-wrapper .default-main-contents.delsa-box .delsa-image {
+  max-width: 455px;
+  margin: 0 auto 30px;
+  min-height: 254px;
+}
+
+.default-message-wrapper .default-main-contents .delsa-title {
+  font-size: 29px;
+  color: #222222;
+  font-weight: 400;
+  margin: 18px auto 20px;
+}
+
+.default-message-wrapper .default-main-contents .delsa-title-active {
+  font-size: 29px;
+  font-weight: 400;
+  margin: 33px auto 30px;
+}
+
+small {
+  font-size: 16px;
+}
+
+.default-message-wrapper .default-main-contents .check-icon-title {
+  width: 80px;
+  height: 80px;
+  font-size: 50px;
+  background: #edf8e6;
+  border-radius: 50px;
+  padding-top: 15px;
+  margin-top: 14px;
+}
+
+.default-message-wrapper .title-item {
+  font-size: 18px;
+  color: #222222;
+  font-weight: 400;
+  margin: 33px auto 30px;
+}
+
+.default-message-wrapper .default-main-contents .delsa-text {
+  color: #777;
   line-height: 1.618;
-  position: relative;
+  font-size: 15px;
 }
 
-.default-message-wrapper
-  .default-main-contents.seller-buyAd-picture
-  p:last-of-type {
-  max-width: 320px;
-  margin: 0 auto;
+.default-message-wrapper .default-main-contents.delsa-box .green-button {
+  background-image: linear-gradient(to left, #21ad93, #4dc0bb);
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 400;
+  padding: 10px 40px;
+  margin-top: 26px;
 }
 
 .default-message-wrapper .default-main-contents i {
-  font-size: 55px;
+  font-size: 26px;
 }
 
-.default-message-wrapper .default-main-contents p {
-  font-size: 16px;
-
-  margin: 20px 0;
-}
 .contact-not-found {
   text-align: center;
   margin: 15px auto;
@@ -257,7 +275,7 @@
 @media screen and (max-width: 991px) {
   .main-content {
     padding: 0;
-    top: 59px;
+    top: 42px;
     padding-bottom: 59px;
   }
   .main-content.is-fix-alert {
@@ -295,8 +313,10 @@
 
 @media screen and (max-width: 767px) {
   .is-guide-active {
-    z-index: 4 !important;
+    z-index: 1011 !important;
     background: transparent !important;
+    top: 0;
+    padding-bottom: 0;
   }
 }
 </style>
@@ -306,7 +326,7 @@
     class="main-content col-xs-12"
     :class="{
       'is-fix-alert': isRequiredFixAlert,
-      'is-guide-active': selectedContact,
+      'is-guide-active': selectedContact || isChanleActive,
     }"
   >
     <div
@@ -339,16 +359,42 @@
       class="col-xs-12 default-message-wrapper hidden-xs col-sm-8 col-lg-9"
       v-if="!selectedContact && isCurrentStep == 0 && !isChanleActive"
     >
-      <div v-if="userType" class="default-main-contents seller-buyAd-picture">
-        <p class="red-text">
-          برای دسترسی به خریداران پیشنهادی از این قسمت در منوی سمت راست اقدام
-          کنید
-          <img src="../../../img/messegs-buy-ads.jpg" alt="" />
-        </p>
+      <div v-if="userType" class="default-main-contents delsa-box">
+        <div class="delsa-image">
+          <img src="../../../img/delsa-messenger.svg" alt="" />
+        </div>
+        <div
+          v-if="currentUser.user_info.active_pakage_type > 0"
+          class="col-xs-12"
+        >
+          <i class="fa fa-check light-green-text check-icon-title"></i>
+          <p class="delsa-title-active light-green-text">
+            منشی آنلاین شما (دلسا) فعال است.
+          </p>
+        </div>
+        <div v-else class="col-xs-12">
+          <p class="delsa-text text-right">سلام</p>
+          <p class="delsa-title text-right">
+            <i class="fas fa-chess-queen light-green-text"></i>
+            من دلسا هستم
+            <small> (ربات خودکار باسکول) </small>
+          </p>
+          <p class="delsa-text text-right">
+            کار اصلی من بازاریابی برای محصولات شماست. اگر مایل هستید بازاریابی
+            بیشتری برای محصولات شما انجام بدهم کافی است نوع عضویت خود را ارتقا
+            دهید.
+          </p>
+          <router-link
+            :to="{ name: 'dashboardPricingTableSeller' }"
+            class="green-button hover-effect"
+          >
+            ارتقا عضویت
+          </router-link>
+        </div>
       </div>
       <div v-else class="default-main-contents">
-        <i class="fa fa-user"></i>
-        <p>برای شروع چت لطفا یک مخاطب انتخاب کنید</p>
+        <img src="../../../img/empty-message.svg" alt="" />
+        <p class="title-item">برای شروع چت لطفا یک مخاطب انتخاب کنید</p>
       </div>
     </div>
 
@@ -388,8 +434,8 @@ export default {
     return {
       isImageLoad: false,
       isImageOpened: false,
-      isChatMessagesLoaded: true,
-      isFirstMessageLoading: true,
+      chatMessagesLoader: true,
+      isFirstMessageLoading: false,
       selectedIndex: -1,
       items: [
         {
@@ -406,6 +452,8 @@ export default {
       },
       chatMessages: "",
       isNoticeActive: true,
+      isLikeBoxActive: true,
+      isLatestMessage: false,
       isGuideActive: false,
       selectedContact: "",
       currentUserId: "",
@@ -425,6 +473,13 @@ export default {
       isChatUpdate: true,
       userDataLoader: true,
       isChanleActive: false,
+      userAllowedReview: false,
+      isReviewSubmited: false,
+      reviewSubmitLoader: false,
+      totalChatCount: "",
+      initialLoadChatCount: 30,
+      LoadChatCount: "",
+      delsaInfo: true,
     };
   },
 
@@ -496,10 +551,9 @@ export default {
 
       self.isChatLoadeMore = false;
       self.handleBackBtnClickOnDevices();
-      self.isChatMessagesLoaded = true;
+      self.chatMessagesLoader = true;
       if (index !== -10) self.isFirstMessageLoading = true;
       self.selectedIndex = index;
-
       this.setUserGuideCookie();
 
       this.currentContactUserId = contact.contact_id;
@@ -507,10 +561,15 @@ export default {
       axios
         .post("/get_user_chat_history", {
           user_id: contact.contact_id,
+          from: 0,
+          to: this.initialLoadChatCount,
         })
         .then(function (response) {
           self.isNoticeActive = true;
-          let data = response.data.messages;
+          let data = response.data.messages.reverse();
+          self.totalChatCount = response.data.total_count;
+          // convert to time to new design
+
           // let itemDate = "";
           // data = data.map((item) => {
           //   let date = item.created_at.substr(0, 10);
@@ -521,13 +580,21 @@ export default {
           //   itemDate = date;
           //   return item;
           // });
+
           self.chatMessages = data;
           if (!self.chatMessages.length) {
             self.isNoticeActive = false;
           }
           self.userHasNotice();
           self.currentUserId = response.data.current_user_id;
-          self.scrollToEnd(0);
+          self.isLatestMessage = self.lastMessageMins(
+            10,
+            data[data.length - 1].created_at
+          );
+          self.chatMessagesLoader = false;
+          self.$nextTick(() => {
+            self.scrollToEnd(0);
+          });
         })
         .catch(function (e) {
           //
@@ -544,6 +611,35 @@ export default {
 
       this.contactList.splice(index, 1, contact);
     },
+    getMoreChat(position) {
+      let contact = this.selectedContact;
+      let tempCount = this.LoadChatCount + this.initialLoadChatCount;
+      let chatWrapper = $("#chat-list");
+
+      if (this.totalChatCount > this.chatMessages.length) {
+        this.chatMessagesLoader = true;
+
+        axios
+          .post("/get_user_chat_history", {
+            user_id: contact.contact_id,
+            from: this.LoadChatCount,
+            to: tempCount,
+          })
+          .then((response) => {
+            this.LoadChatCount = tempCount;
+            let data = response.data.messages.reverse();
+            this.chatMessages.unshift(...data);
+
+            this.$nextTick(() => {
+              chatWrapper.scrollTop(
+                chatWrapper[0].scrollHeight - position.totalHeight
+              );
+              this.chatMessagesLoader = false;
+            });
+          });
+      }
+    },
+
     cookieHasUser(userId) {
       return userId == this.selectedContact.contact_id;
     },
@@ -605,6 +701,37 @@ export default {
       }
       this.isNoticeActive = false;
     },
+    setLikeBoxCookie() {
+      let contactUserId = this.selectedContact.contact_id;
+      let cookie = this.getCookie("closeLikeBox");
+      if (cookie) {
+        let getAllCookies = JSON.parse(cookie).userCloseLikeBox;
+        if (!getAllCookies.find(this.cookieHasUser)) {
+          getAllCookies.push(contactUserId);
+          this.createCookie(
+            "closeLikeBox",
+            JSON.stringify({ userCloseLikeBox: getAllCookies }),
+            60 * 24
+          );
+        }
+      } else {
+        this.createCookie(
+          "closeLikeBox",
+          JSON.stringify({ userCloseLikeBox: [contactUserId] }),
+          60 * 24
+        );
+      }
+      this.isLikeBoxActive = false;
+    },
+    userHasLikeBox() {
+      let cookie = this.getCookie("closeLikeBox");
+      if (cookie) {
+        let getAlCookies = JSON.parse(cookie).userCloseLikeBox;
+        if (getAlCookies.find(this.cookieHasUser)) {
+          this.isLikeBoxActive = false;
+        }
+      }
+    },
     userHasNotice() {
       let cookie = this.getCookie("messengerNoticeData");
       if (cookie) {
@@ -651,8 +778,9 @@ export default {
     },
     appendMessageToChatHistory: function (contact) {
       var self = this;
-      self.isChatMessagesLoaded = false;
+      self.isLatestMessage = true;
 
+      self.chatMessagesLoader = false;
       this.selectedContact = contact;
       this.currentContactUserId = contact.contact_id;
 
@@ -662,6 +790,11 @@ export default {
         })
         .then(function (response) {
           self.chatMessages = response.data.messages;
+          self.isLatestMessage = self.lastMessageMins(
+            10,
+            self.chatMessages[self.chatMessages.length - 1].created_at
+          );
+
           self.currentUserId = response.data.current_user_id;
           self.scrollToEnd(0);
         })
@@ -678,13 +811,14 @@ export default {
           0,
           "swing",
           () => {
-            self.isChatMessagesLoaded = false;
+            self.chatMessagesLoader = false;
           }
         );
       }, time);
     },
     sendMessage: function () {
       var self = this;
+      self.isLatestMessage = true;
 
       let tempMsg = self.msgToSend;
       self.msgToSend = "";
@@ -697,6 +831,7 @@ export default {
         };
 
         self.chatMessages.push(msgObject);
+
         self.scrollToEnd(0);
 
         axios
@@ -770,13 +905,23 @@ export default {
         return false;
       }
     },
+    handleBackKeys: function () {
+      if (window.history.state) {
+        history.pushState(null, null, window.location);
+      }
+      $(window).on("popstate", function (e) {
+        $(".modal").modal("hide");
+      });
+    },
     handleBackBtnClickOnDevices: function () {
       var self = this;
       if (window.history.state) {
         history.pushState(null, null, window.location);
       }
       $(window).on("popstate", function (e) {
-        if (self.isDeviceMobile()) {
+        let delsaModal = $("#delsa-promotion-modal").hasClass("in");
+
+        if (self.isDeviceMobile() && !delsaModal) {
           if (
             window.location.pathname == "/seller/messenger/contacts" ||
             window.location.pathname == "/buyer/messenger/contacts"
@@ -838,8 +983,45 @@ export default {
 
       eventBus.$emit("reviewUserData", selectedUserData);
     },
+    registerReview: function (reviewScore) {
+      this.reviewSubmitLoader = true;
+
+      let reviewObg = {
+        user_id: this.selectedContact.contact_id,
+        rating_score: reviewScore,
+      };
+
+      let self = this;
+
+      axios.post("/profile/add-comment", reviewObg).then(function (response) {
+        self.reviewSubmitLoader = false;
+        if (response.data.status == true) {
+          self.isReviewSubmited = true;
+
+          setTimeout(() => {
+            if (self.isReviewSubmited) {
+              $(".mobile-like-user").fadeOut();
+              setTimeout(() => {
+                self.userAllowedReview = false;
+              }, 1500);
+            }
+          }, 3000);
+        }
+      });
+    },
     activeChanel() {
       // this.isChanleActive = true
+    },
+    lastMessageMins(mins, time) {
+      const currentTime = new Date();
+      const diffInMins = (currentTime - Date.parse(time)) / (1000 * 60);
+      return diffInMins < mins;
+    },
+    openDelasModal() {
+      $("#delsa-promotion-modal").modal("show");
+      $("#delsa-promotion-modal").on("shown.bs.modal", (e) => {
+        this.handleBackKeys();
+      });
     },
   },
 
@@ -886,10 +1068,6 @@ export default {
         }
       });
     }
-
-    // eventBus.$on("userAllowedReview", ($event) => {
-    //   this.userAllowedReview = $event;
-    // });
   },
   watch: {
     contactNameSearchText: function (value) {
@@ -925,12 +1103,27 @@ export default {
       }
     },
     selectedContact: function (value) {
+      this.delsaInfo = true;
+      // reset like message datas
+      this.isReviewSubmited = false;
+      this.userAllowedReview = false;
+      this.isLikeBoxActive = true;
+      this.LoadChatCount = this.initialLoadChatCount;
+
+      // check like message active box
+      this.userHasLikeBox();
+
       eventBus.$emit("activeContactId", value.contact_id);
     },
     isChanleActive(isChanel) {
       if (isChanel) {
         this.activeChanel();
       }
+    },
+    userAllowedReview() {
+      this.$nextTick(() => {
+        this.scrollToEnd(0);
+      });
     },
   },
 

@@ -17,7 +17,7 @@
 
   background: #fafafa;
 
-  z-index: 1012;
+  z-index: 1013;
 
   width: 450px;
   height: 550px;
@@ -26,9 +26,9 @@
 
   left: 15px;
 
-  border-radius: 4px;
+  border-radius: 12px;
 
-  border: 2px solid #00c569;
+  border: 1px solid #00c569;
 
   transition: 1s;
 
@@ -109,7 +109,6 @@
 }
 
 .main-modal-chat .bg-wrapper {
-  background: url("../../../../../img/whatsappbg.png") repeat;
   opacity: 0.06;
   position: absolute;
   z-index: 1;
@@ -117,7 +116,11 @@
   right: 0;
   top: 50px;
   bottom: 60px;
-  background-size: 80%;
+}
+
+.main-modal-chat .bg-wrapper.background-chat {
+  background: url("../../../../../img/whatsappbg.png") repeat;
+  background-size: 90%;
 }
 
 .main-modal-chat ul {
@@ -317,7 +320,7 @@
         <span class="header-chat-image" v-if="contactInfo.profile_photo">
           <img :src="$parent.assets + 'storage/' + contactInfo.profile_photo" />
         </span>
-        <span class="header-chat-image" v-else>
+        <span class="header-chat-image" v-else-if="!chatMessagesLoader">
           <img :src="$parent.assets + 'assets/img/user-defult.png'" />
         </span>
 
@@ -344,11 +347,14 @@
     </div>
 
     <div class="main-modal-chat">
-      <div class="bg-wrapper"></div>
+      <div
+        class="bg-wrapper"
+        :class="{ 'background-chat': !chatMessagesLoader }"
+      ></div>
 
       <div
         class="loading-container"
-        v-show="isChatMessagesLoaded && isFirstMessageLoading"
+        v-show="chatMessagesLoader && isFirstMessageLoading"
       >
         <div class="image-wrapper">
           <div class="lds-ring">
@@ -423,7 +429,7 @@ import { eventBus } from "../../../../router/router.js";
 export default {
   data: function () {
     return {
-      isChatMessagesLoaded: true,
+      chatMessagesLoader: true,
       isFirstMessageLoading: true,
       openChatBox: false,
       contactInfo: "",
@@ -441,7 +447,7 @@ export default {
     },
     loadChatHistory: function (contact, index) {
       var self = this;
-      self.isChatMessagesLoaded = true;
+      self.chatMessagesLoader = true;
       if (index !== -10) self.isFirstMessageLoading = true;
       // self.selectedIndex = index;
       // this.selectedContact = contact;
@@ -470,7 +476,7 @@ export default {
           500,
           "swing",
           function () {
-            self.isChatMessagesLoaded = false;
+            self.chatMessagesLoader = false;
           }
         );
       }, time);
@@ -487,6 +493,10 @@ export default {
           receiver_id: self.currentContactUserId,
           text: tempMsg,
         };
+
+        if (self.contactInfo.product_id) {
+          msgObject.product_id = self.contactInfo.product_id;
+        }
 
         self.chatMessages.push(msgObject);
         self.scrollToEnd(0);
@@ -507,7 +517,21 @@ export default {
             .catch(function (e) {
               //
             });
-        } else {
+        } else if (
+          self.contactInfo.product_id &&
+          self.contactInfo.product_id !== undefined &&
+          self.contactInfo.product_id != null
+        )
+          axios
+            .post("/send_reply_to_product", msgObject)
+            .then(function (response) {
+              self.isFirstMessageLoading = false;
+              self.loadChatHistory(self.contactInfo, -10);
+            })
+            .catch(function (e) {
+              //
+            });
+        else {
           axios
             .post("/messanger/send_message", msgObject)
             .then(function (response) {

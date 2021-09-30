@@ -1,8 +1,24 @@
+<style >
+.profile-carosel .owl-nav {
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  width: 100%;
+  margin-top: -10px;
+  top: calc(50% - 10px);
+  direction: ltr;
+  padding: 0 15px;
+  height: 0;
+}
+</style>
 <style scoped>
 #main {
   margin-right: 250px;
-  margin-top: 59px;
+  margin-top: 42px;
   position: relative;
+}
+#main.has-verification-alert {
+  margin-top: 99px;
 }
 
 #main.little-main {
@@ -13,6 +29,9 @@
   #main,
   #main.little-main {
     margin-right: 0 !important;
+  }
+  #main.has-verification-alert {
+    margin-top: 81px;
   }
 }
 </style>
@@ -26,7 +45,11 @@
       :search-text="searchText"
     ></header-dash-buyer>
 
-    <div id="main" class="h-100">
+    <div
+      id="main"
+      class="h-100"
+      :class="{ 'has-verification-alert': verificationAlert }"
+    >
       <router-view
         :str="storagePath"
         :assets="assets"
@@ -64,6 +87,7 @@ export default {
         },
         user_info: "",
       },
+      verificationAlert: false,
     };
   },
   mounted: function () {
@@ -79,6 +103,8 @@ export default {
   },
   watch: {
     currentUser(user) {
+      this.$parent.currentUser = user;
+
       if (user.profile.created_at)
         this.$parent.currentUserCreatedAt = user.profile.created_at;
     },

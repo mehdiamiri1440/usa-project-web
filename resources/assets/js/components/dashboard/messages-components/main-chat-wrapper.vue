@@ -10,6 +10,7 @@
   position: relative;
   align-items: center;
   z-index: 1;
+  margin-top: 120px;
 }
 
 .loading-container .lds-ring {
@@ -181,7 +182,7 @@
 }
 
 .message-wrapper .chat-page ul {
-  padding: 20px 20px 0;
+  padding: 20px;
 
   overflow-x: hidden;
 
@@ -238,10 +239,16 @@
   padding: 5px 10px;
   display: block;
 }
+
+.message-text {
+  white-space: pre-line;
+}
+
 .message-wrapper .chat-page .message-item-wrapper.message-receive {
   float: left;
   background: #fff;
   border-radius: 0 8px 8px 8px;
+  min-width: 150px;
 }
 .message-wrapper .chat-page .message-receive::after {
   content: "";
@@ -422,6 +429,120 @@
   padding: 4px 2px;
 }
 
+.mobile-like-user {
+  position: absolute;
+  z-index: 1;
+  background: #e8f4f8;
+  text-align: center;
+  border-radius: 12px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.16);
+  padding: 25px 0;
+  margin-top: 20px;
+}
+
+.mobile-like-user.delsa-info-box {
+  background: #edf8e6;
+  padding: 23px 0;
+  max-width: 460px;
+  margin-left: auto;
+  float: initial !important;
+  overflow: hidden;
+  margin-right: auto;
+  position: relative;
+  top: 17px;
+}
+
+.mobile-like-user.delsa-info-box .title-item {
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0;
+}
+
+.mobile-like-user.delsa-info-box .green-button {
+  margin: 20px 0 0;
+  background: #4dc0bb;
+  border-radius: 8px;
+  padding: 7px 25px;
+}
+
+.mobile-like-user.success {
+  background: #f2f6e7;
+  padding: 20px 0 0;
+}
+
+.mobile-like-user .close-rating {
+  position: absolute;
+  right: 0;
+  background: none;
+  border: none;
+  color: #777;
+  padding: 5px 15px;
+  top: 0px;
+}
+
+.mobile-like-user .title-item {
+  color: #313a43;
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0 auto 15px;
+  line-height: 1.618;
+}
+
+.mobile-like-user.success .title-item {
+  margin: 17px auto 23px;
+}
+
+.mobile-like-user.success .likes-wrapper > div {
+  font-size: 45px;
+  background: #fff;
+  width: 80px;
+  height: 80px;
+  margin: 0 auto;
+  border-radius: 55px;
+  padding-top: 19px;
+  color: #50a791;
+}
+
+.mobile-like-user .likes-wrapper {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.mobile-like-user.success .likes-wrapper {
+  display: block;
+}
+
+.mobile-like-user .likes-wrapper > button {
+  flex: 1;
+  max-width: 120px;
+  background: none;
+  border: none;
+  color: #21ad93;
+}
+
+.mobile-like-user .likes-wrapper > button.dislike {
+  color: #e41c38;
+}
+
+.mobile-like-user .likes-wrapper > button.dislike i {
+  background: #e41c38;
+  transform: rotate(-180deg);
+}
+
+.mobile-like-user .likes-wrapper > button i {
+  display: block;
+  font-size: 25px;
+  background: #21ad93;
+  color: #fff;
+  width: 48px;
+  height: 48px;
+  margin: 0 auto;
+  border-radius: 50px;
+  padding-top: 11px;
+}
+
 .messenger-notice {
   text-align: center;
   background: #fff8c1;
@@ -430,7 +551,7 @@
   margin-top: 20px;
   line-height: 1.618;
   color: #777;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.16);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.16);
 }
 
 .messenger-notice .notice-title {
@@ -498,10 +619,174 @@
   line-height: 1.618;
 }
 
+.review-loader {
+  padding: 15px 0;
+}
+
+.spinner-border {
+  width: 4.1rem;
+  height: 4.1rem;
+  top: -5px;
+  position: relative;
+  left: 2px;
+  border-width: 3px;
+  color: #23ae95;
+}
+
+.messenger-notice .notice-actions button {
+  width: 100%;
+  text-align: right;
+  background: none;
+  padding: 5px 0;
+}
+.messenger-notice .notice-actions button:hover {
+  background: initial;
+  border-color: initial;
+  color: #21ad92;
+}
+.message-button-wrapper {
+  border-top: 1px solid rgba(0, 0, 0, 0.04);
+  margin: 10px -10px -5px;
+  padding: 10px;
+  overflow: hidden;
+}
+.message-button-wrapper button {
+  display: block;
+  width: 100%;
+  background: #21ad93;
+  text-align: center;
+  color: #fff;
+  border: none;
+  font-size: 16px;
+  padding: 10px 26px;
+  border-radius: 8px;
+}
+.message-button-wrapper button i {
+  width: 15px;
+  transform: translateX(0);
+  transition: 300ms;
+}
+
+.message-button-wrapper.link-button button {
+  background: linear-gradient(-45deg, #fea858, #ed765e, #fea858);
+  animation: gradient 2s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+  background-size: 400% 400%;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.message-button-wrapper.link-button button.edit-button {
+  background: #556080;
+}
+
+.message-button-wrapper.link-button button i.angle-icon {
+  position: relative;
+  top: 2px;
+  margin-right: 6px;
+}
+
+.message-button-wrapper.link-button button:hover i.angle-icon {
+  transform: translateX(-3px);
+  transition: 300ms;
+}
+
+.message-button-wrapper.link-button button.delsa-button {
+  background: linear-gradient(-90deg, #21ad93, #4dc0bb);
+  transition: 300ms;
+}
+
+.message-button-wrapper.link-button button.delsa-button {
+  background: linear-gradient(-45deg, #00c569, #23d5ab, #21ad93, #23a6d5);
+  background-size: 400% 400%;
+  animation: gradient 10s ease infinite;
+  color: #fff !important;
+  border: none;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.modal-dialog {
+  width: 400px;
+}
+.modal-content {
+  overflow: hidden;
+  border-radius: 12px;
+}
+.close-modal {
+  font-size: 20px;
+
+  color: #777;
+
+  position: absolute;
+
+  right: 0;
+
+  padding: 8px 15px 2px;
+
+  top: 0;
+}
+
+.modal-title {
+  font-size: 16px;
+
+  font-weight: 800;
+
+  color: #474747;
+
+  text-align: center;
+}
+
+.modal-header {
+  padding: 9px 15px 10px;
+}
+
+.modal-body {
+  padding: 0 15px;
+}
+
 @media screen and (max-width: 1199px) {
   .message-wrapper .message-contact-title {
     position: relative;
     z-index: 5;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  #fitler-modal > div {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .modal-content {
+    min-height: 100%;
+
+    border-radius: 0;
+
+    border: none;
+
+    float: right;
+
+    width: 100%;
   }
 }
 
@@ -527,35 +812,9 @@
   .notice-actions {
     width: 100%;
   }
-  .messenger-notice .notice-actions button {
-    width: 100%;
-    text-align: right;
-    background: none;
-    padding: 5px 0;
-  }
-  .messenger-notice .notice-actions button:hover {
-    background: initial;
-    border-color: initial;
-    color: #21ad92;
-  }
-  .message-button-wrapper {
-    margin: 0 -10px -5px;
-    overflow: hidden;
-    border-radius: 0 0 4px 4px;
-  }
-  .message-button-wrapper button {
-    display: block;
-    width: 100%;
-    background: #21ad93;
-    text-align: center;
-    color: #fff;
-    border: none;
-    font-size: 14px;
-    padding: 5px;
-    margin-top: 8px;
-  }
+
   .message-button-wrapper button i {
-    font-size: 11px;
+    font-size: 12px;
   }
   .is-phone-active-wrapper {
     min-width: 200px;
@@ -740,8 +999,10 @@
     <div class="chat-page" v-if="$parent.selectedContact">
       <div class="bg-wrapper"></div>
       <ul
+        @scroll="infinityScroll()"
+        id="chat-list"
         :class="[
-          $parent.isChatMessagesLoaded && $parent.isFirstMessageLoading
+          $parent.chatMessagesLoader && $parent.isFirstMessageLoading
             ? 'chat-not-loaded'
             : 'chat-loaded',
         ]"
@@ -785,14 +1046,14 @@
                   }}</span>
                   <div class="message-button-wrapper">
                     <button>
-                      <i class="fa fa-phone-alt"></i>
                       تماس
+                      <i class="fa fa-phone-alt"></i>
                     </button>
                   </div>
                 </span>
               </a>
-              <div class="message-content-wrapper hidden-xs">
-                <span v-text="msg.text"></span>
+              <div class="hidden-xs">
+                <span class="message-text" v-text="msg.text"></span>
                 <span class="message-chat-date">
                   <span v-if="msg.created_at">{{
                     msg.created_at | moment("jYYYY/jMM/jDD, HH:mm")
@@ -803,9 +1064,84 @@
                 </span>
               </div>
             </div>
+            <div
+              v-else-if="msg.p_id && !checkMessageListClass(msg.sender_id)"
+              class="message-content-wrapper is-phone-active-wrapper"
+            >
+              <!--msg.created_at | moment("jYY/jMM/jDD, HH:mm") -->
+              <div>
+                <span class="message-text" v-text="msg.text"></span>
+
+                <span class="message-chat-date">
+                  <span v-if="msg.created_at">{{
+                    msg.created_at | moment("jYYYY/jMM/jDD, HH:mm")
+                  }}</span>
+                  <span v-else>{{
+                    Date() | moment("jYYYY/jMM/jDD, HH:mm")
+                  }}</span>
+                  <div class="message-button-wrapper link-button">
+                    <button @click.prevent="openProduct(msg.p_id)">
+                      <i class="fa fa-angle-left angle-icon"></i>
+                      جزییات و تصاویر محصول
+                      <i
+                        v-if="!openProductLoader"
+                        class="fas fa-clipboard-check"
+                      ></i>
+                      <i v-else class="fas fa-circle-notch fa-spin"></i>
+                    </button>
+                  </div>
+                </span>
+              </div>
+            </div>
+            <div
+              v-else-if="
+                msg.p_id &&
+                checkMessageListClass(msg.sender_id) &&
+                $parent.currentUser.user_info.is_seller
+              "
+              class="message-content-wrapper is-phone-active-wrapper"
+            >
+              <!--msg.created_at | moment("jYY/jMM/jDD, HH:mm") -->
+              <div>
+                <span class="message-text" v-text="msg.text"></span>
+
+                <span class="message-chat-date">
+                  <span v-if="msg.created_at">{{
+                    msg.created_at | moment("jYYYY/jMM/jDD, HH:mm")
+                  }}</span>
+                  <span v-else>{{
+                    Date() | moment("jYYYY/jMM/jDD, HH:mm")
+                  }}</span>
+                  <div class="message-button-wrapper link-button">
+                    <button
+                      class="edit-button"
+                      v-if="
+                        $parent.currentUser.user_info.active_pakage_type > 0
+                      "
+                      @click.prevent="openEditPriceModal(msg.p_id)"
+                    >
+                      <i class="fa fa-angle-left angle-icon"></i>
+                      ویرایش قیمت
+                      <i v-if="!editPriceLoader" class="fa fa-edit"></i>
+                      <i v-else class="fas fa-circle-notch fa-spin"></i>
+                    </button>
+                    <button
+                      v-else
+                      class="delsa-button"
+                      @click.prevent="$parent.openDelasModal()"
+                    >
+                      <i class="fa fa-angle-left angle-icon"></i>
+                      استخدام منشی آنلاین
+                      <i class="fas fa-chess-queen"></i>
+                    </button>
+                  </div>
+                </span>
+              </div>
+            </div>
 
             <div v-else class="message-content-wrapper">
-              <span v-text="msg.text"></span>
+              <span class="message-text" v-text="msg.text"></span>
+
               <span class="message-chat-date">
                 <span v-if="msg.created_at">{{
                   msg.created_at | moment("jYYYY/jMM/jDD, HH:mm")
@@ -839,7 +1175,7 @@
           </div>
         </li>
         <li
-          v-if="$parent.isNoticeActive && !$parent.isChatMessagesLoaded"
+          v-if="$parent.isNoticeActive && !$parent.chatMessagesLoader"
           class="messenger-notice"
         >
           <p class="notice-title">
@@ -857,10 +1193,71 @@
             </router-link>
           </div>
         </li>
+        <li
+          v-if="checkMobileWidth() && checkReviewIsActive()"
+          class="mobile-like-user"
+          :class="{ success: $parent.isReviewSubmited }"
+        >
+          <div v-if="!$parent.isReviewSubmited">
+            <button class="close-rating" @click="$parent.setLikeBoxCookie()">
+              <i class="fa fa-times"></i>
+            </button>
+            <p class="title-item">
+              <span class="gray-text"> از ارتباط با </span>
+              <span>
+                {{
+                  $parent.selectedContact.first_name +
+                  " " +
+                  $parent.selectedContact.last_name
+                }}
+              </span>
+            </p>
+            <div class="likes-wrapper" v-if="!$parent.reviewSubmitLoader">
+              <button class="like" @click="$parent.registerReview(5)">
+                <i class="fa fa-thumbs-up"></i>
+                <span> راضی هستم </span>
+              </button>
+
+              <button class="dislike" @click="$parent.registerReview(1)">
+                <i class="fa fa-thumbs-up"></i>
+                <span> راضی نیستم </span>
+              </button>
+            </div>
+            <div class="review-loader" v-else>
+              <div class="spinner-border">
+                <span class="sr-only"></span>
+              </div>
+            </div>
+          </div>
+          <div v-else>
+            <div class="likes-wrapper">
+              <div>
+                <i class="fa fa-check"></i>
+              </div>
+              <p class="title-item">از ثبت نظر شما سپاسگزاریم.</p>
+            </div>
+          </div>
+        </li>
+        <li
+          v-else-if="checkDelsaInfoBoxIsActive()"
+          class="mobile-like-user delsa-info-box"
+        >
+          <button class="close-rating" @click="$parent.delsaInfo = false">
+            <i class="fa fa-times"></i>
+          </button>
+          <p class="title-item">منشی آنلاین خود را استخدام کنید.</p>
+          <button
+            class="green-button"
+            @click.prevent="$parent.openDelasModal()"
+          >
+            <i class="fa fa-info-circle"></i>
+            اطلاعات بیشتر
+          </button>
+        </li>
       </ul>
       <div
         class="loading-container"
-        v-if="$parent.isChatMessagesLoaded && $parent.isFirstMessageLoading"
+        v-if="$parent.chatMessagesLoader && $parent.isFirstMessageLoading"
       >
         <div class="image-wrapper">
           <div class="lds-ring">
@@ -872,6 +1269,7 @@
           <!-- <span v-text="alt" class="lds-ring-alt"></span> -->
         </div>
       </div>
+
       <div class="send-message-form">
         <form @v-on:submit.prevent="$parent.sendMessage()">
           <div class="message-input">
@@ -918,21 +1316,40 @@
   </div>
 </template>
 
+
 <script>
+import swal from "../../../sweetalert.min.js";
+import { eventBus } from "../../../router/router";
 export default {
   data() {
     return {
       isVoiceRecord: false,
       isChat: false,
+      openProductLoader: false,
+      editPriceLoader: false,
     };
   },
   methods: {
+    infinityScroll() {
+      let listWrapper = $("#chat-list");
+      let scrollPosition = listWrapper.scrollTop();
+      let totalHeight = listWrapper[0].scrollHeight;
+      let position = {
+        scrollPosition,
+        wrapperHeight: listWrapper.height() + 20,
+        totalHeight,
+      };
+      if (scrollPosition <= 150 && !this.$parent.chatMessagesLoader) {
+        this.$parent.getMoreChat(position);
+      }
+    },
+
     init: function () {
       this.userGuide();
       this.hideCollapses();
       this.$parent.userHasNotice();
+      this.$parent.userHasLikeBox();
     },
-
     hideCollapses: function () {
       $(document).on("click", function (e) {
         /* bootstrap collapse js adds "in" class to your collapsible element*/
@@ -979,6 +1396,13 @@ export default {
       }
       return myMessage;
     },
+    checkMobileWidth() {
+      if ($(window).width() <= 1199) {
+        return true;
+      } else {
+        return false;
+      }
+    },
     recordVoice() {
       console.log("voice");
     },
@@ -993,6 +1417,77 @@ export default {
           $(".overlay-bg-guide").fadeOut();
         }, 1000);
       }
+    },
+    openProduct(productId) {
+      this.openProductLoader = true;
+      let win = window.open("about:blank", "_blank");
+      axios
+        .post("/get_product_by_id", { product_id: productId })
+        .then((response) => {
+          win.location.href = this.getProductUrl(response.data.product);
+          this.openProductLoader = false;
+        })
+        .catch((err) => {
+          win.location.href = "/404";
+          this.openProductLoader = false;
+        });
+    },
+    getProductUrl(product) {
+      return (
+        "/product-view/خرید-عمده-" +
+        product.main.sub_category_name.replace(" ", "-") +
+        "/" +
+        product.main.category_name.replace(" ", "-") +
+        "/" +
+        product.main.id
+      );
+    },
+    checkDelsaInfoBoxIsActive() {
+      if (
+        this.$parent.delsaInfo &&
+        // this.$parent.chatMessages.length == 1 &&
+        // this.$parent.chatMessages[0].p_id &&
+        !this.$parent.isLatestMessage &&
+        this.$parent.currentUser.user_info.is_seller &&
+        this.$parent.currentUser.user_info.active_pakage_type == 0 &&
+        !this.$parent.chatMessagesLoader
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    checkReviewIsActive() {
+      let chatMessagePid = "";
+      let isDelsaMessageActive = false;
+      if (this.$parent.chatMessages) {
+        chatMessagePid = this.$parent.chatMessages[0].p_id;
+        if (chatMessagePid && this.$parent.chatMessages.length == 1) {
+          isDelsaMessageActive = true;
+        }
+      }
+      if (
+        !isDelsaMessageActive &&
+        this.$parent.userAllowedReview &&
+        this.$parent.isLikeBoxActive &&
+        !this.$parent.isLatestMessage &&
+        !this.$parent.chatMessagesLoader
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    openEditPriceModal(productId) {
+      this.editPriceLoader = true;
+
+      axios
+        .post("/get_product_by_id", { product_id: productId })
+        .then((response) => {
+          eventBus.$emit("editProductData", response.data.product);
+          $("#edit-price-modal").modal("show");
+          this.editPriceLoader = false;
+        });
     },
   },
   mounted: function () {

@@ -40,6 +40,7 @@ class admin_sellAd_controller extends Controller
         'products.description',
         'products.address',
         'products.confirmed',
+        'products.category_id as subcategory_id',
         'categories.category_name as subcategory_name',
         'categories.parent_id',
         'cities.city_name',
@@ -58,7 +59,8 @@ class admin_sellAd_controller extends Controller
         'min_sale_price',
         'min_sale_amount',
         'description',
-        'address'
+        'address',
+        'category_id',
     ];
     
     protected $media_neccessary_fields_array = [
@@ -158,7 +160,8 @@ class admin_sellAd_controller extends Controller
         
         $sellAd_record_with_related_data = $this->get_sellAd_by_id_with_related_data($sellAd_id,0);
         
-        $category_name = category::find($sellAd_record_with_related_data->parent_id)->category_name;
+        $category_record = category::find($sellAd_record_with_related_data->parent_id);
+        $super_category_record = category::find($category_record->parent_id);
         
         $product_related_media = product_media::where('product_id',$sellAd_record_with_related_data->id)
                                             ->select($this->media_neccessary_fields_array)
@@ -166,7 +169,8 @@ class admin_sellAd_controller extends Controller
             
         return view('admin_panel.sellAdDetail',[
            'sellAd' => $sellAd_record_with_related_data, 
-           'category_name' => $category_name,
+           'category_record' => $category_record,
+           'super_category_record' => $super_category_record,
            'related_media' => $product_related_media,
         ]);
     }
@@ -192,7 +196,8 @@ class admin_sellAd_controller extends Controller
         
         $sellAd_record_with_related_data = $this->get_sellAd_by_id_with_related_data($sellAd_id,1);
         
-        $category_name = category::find($sellAd_record_with_related_data->parent_id)->category_name;
+        $category_record = category::find($sellAd_record_with_related_data->parent_id);
+        $super_category_record = category::find($category_record->parent_id);
         
         $product_related_media = product_media::where('product_id',$sellAd_record_with_related_data->id)
                                             ->select($this->media_neccessary_fields_array)
@@ -200,7 +205,8 @@ class admin_sellAd_controller extends Controller
             
         return view('admin_panel.sellAdDetail',[
            'sellAd' => $sellAd_record_with_related_data, 
-           'category_name' => $category_name,
+           'category_record' => $category_record,
+           'super_category_record' => $super_category_record,
            'related_media' => $product_related_media,
         ]);
     }
@@ -274,6 +280,10 @@ class admin_sellAd_controller extends Controller
         $sellAd_id = $request->sellAd_id;
         
         $sellAd_record = product::find($sellAd_id);
+
+        if(is_null($sellAd_record)){
+            return redirect()->route('admin_panel_sellAd_list');
+        }
         
         foreach($this->sellAd_editable_fields as $field_name)
         {

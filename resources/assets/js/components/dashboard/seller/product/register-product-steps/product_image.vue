@@ -31,8 +31,12 @@
 
 .spinner-border {
   position: absolute;
-  left: 19px;
-  top: 9px;
+  left: 21px;
+  top: 11px;
+  width: 1.5rem;
+  height: 1.5rem;
+  color: #fff;
+  border-width: 0.25rem;
 }
 
 .submit-button i {
@@ -101,6 +105,9 @@ label {
 @media screen and (max-width: 767px) {
   .title-contents {
     margin-top: 40px;
+  }
+  .submit-button-wrapper {
+    margin: 15px auto 100px;
   }
 }
 </style>
@@ -207,7 +214,7 @@ label {
             <!-- v-if="isCompressor" -->
             <i class="fa fa-arrow-left" :class="{ empty: isCompressor }"></i>
             <div class="spinner-border" :class="{ empty: !isCompressor }">
-              <span class="sr-only">Loading...</span>
+              <span class="sr-only"></span>
             </div>
           </div>
         </button>

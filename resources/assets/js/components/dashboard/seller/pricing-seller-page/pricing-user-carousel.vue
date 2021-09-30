@@ -168,6 +168,8 @@
 </template>
 
 <script>
+import owlCarousel from "../../../../owl.carousel.min.js";
+
 export default {
   data: function () {
     return {
@@ -189,10 +191,7 @@ export default {
         loop: false,
         rewind: true,
         nav: true,
-        navText: [
-          '<span class="fa fa-angle-left"></span>',
-          '<span class="fa fa-angle-right"></span>',
-        ],
+        navText: false,
         mouseDrag: true,
         margin: 30,
         dots: true,

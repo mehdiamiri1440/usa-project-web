@@ -60,7 +60,7 @@ class AdvertiseBuyAdsPeriodically implements ShouldQueue
                         ->get();
 
         $buyAds = $buyAds->filter(function($buyAd){
-            return $buyAd->response_rate >= 70;
+            return $buyAd->response_rate >= 75;
         });
 
         $buyAds = $buyAds->toArray();

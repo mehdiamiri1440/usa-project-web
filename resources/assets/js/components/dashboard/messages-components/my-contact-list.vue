@@ -355,6 +355,12 @@ i.fa-star {
 .user-not-fount p {
   font-weight: 500;
 }
+
+@media screen and (max-width: 991px) {
+  .contact-items {
+    padding-bottom: 42px;
+  }
+}
 </style>
 
 <template>
@@ -363,7 +369,7 @@ i.fa-star {
       <div class="contact-search-input-wrapper">
         <input
           type="text"
-          placeholder="جستجو مخاطب"
+          placeholder="جستجو پیام"
           v-model="$parent.contactNameSearchText"
         />
         <i class="fa fa-search"></i>
@@ -389,8 +395,8 @@ i.fa-star {
 
         <div class="switch-button-item">
           <button class="contact-button active">
-            <i class="fa fa-user"></i>
-            مخاطبین من
+            <i class="fas fa-comment-alt"></i>
+            پیام ها
           </button>
         </div>
       </div>
@@ -418,7 +424,7 @@ i.fa-star {
       >
         <p class="user-not-fount">
           <img src="../../../../img/empty-message.svg" alt="" />
-          <span>مخاطب یافت نشد</span>
+          <span>پیام یافت نشد</span>
         </p>
       </div>
 
@@ -508,7 +514,7 @@ i.fa-star {
           <li>
             <div class="empty-list">
               <i class="fa fa-user"></i>
-              <p>در حال حاضر مخاطبی وجود ندارد</p>
+              <p>در حال حاضر پیامی وجود ندارد</p>
 
               <router-link
                 v-if="$parent.userType"
@@ -676,7 +682,7 @@ i.fa-star {
             class="btn load-more"
             @click.prevent="$parent.loadMoreContacts()"
           >
-            ادامه مخاطبین
+            ادامه پیام ها
           </button>
         </li>
       </ul>

@@ -11,6 +11,7 @@ use App\Models\admin_note;
 use DB;
 use Carbon\carbon;
 use App\Http\Library\date_convertor;
+use Illuminate\Support\Facades\Cache;
 
 
 class admin_user_controller extends Controller
@@ -148,6 +149,49 @@ class admin_user_controller extends Controller
         return redirect()->route('admin_panel_load_user_notes_by_id',[
             'user_id' => $user_id
         ]);
+    }
+
+    public function load_same_device_users($user_id)
+    {
+        $users = [];
+        $date_convertor_object = new date_convertor();
+
+        // try{
+            $device_ids = DB::table('client_meta_datas')
+                            ->where('myuser_id',$user_id)
+                            ->whereNotNull('device_id')
+                            ->distinct('device_id')
+                            ->pluck('device_id');
+
+            $users_ids = DB::table('myusers')
+                            ->join('client_meta_datas','client_meta_datas.myuser_id','=','myusers.id')
+                            ->where('myusers.id','<>',$user_id)
+                            ->whereIn('client_meta_datas.device_id',$device_ids)
+                            ->distinct('myusers.id')
+                            ->pluck('myusers.id');
+
+            $users = DB::table('myusers')->whereIn('id',$users_ids)
+                            ->orderBy('created_at','desc')
+                            ->paginate(10);
+
+
+            $users->each(function($user) use($date_convertor_object){
+                $user->register_date = $date_convertor_object->get_persian_date($user->created_at);
+            });
+
+        // }
+        // catch(\Exception $e){
+        //     //
+        // }
+
+        return view('admin_panel.userList',[
+            'users' => $users
+        ]);
+    }
+
+    public function clear_categories_cached_file()
+    {
+        Cache::forget(md5('categories'));
     }
 
 }

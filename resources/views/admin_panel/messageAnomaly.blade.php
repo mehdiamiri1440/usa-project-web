@@ -63,7 +63,7 @@
           <!-- /.box -->
 
              <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-             @isset($abnormal_users)
+             <!-- @isset($abnormal_users)
                     <p>افراد مشکوک</p>
                     
                     @foreach($abnormal_users as $user)
@@ -94,16 +94,16 @@
                             </div>
                         </div>
                     @endforeach
-                @endisset
-                 @isset($abnormal_messages)
+                @endisset -->
+                 @isset($abnormal_chats)
                     <p>پیام های غیر نرمال کشف شده</p>
                     
-                    @foreach($abnormal_messages as $msg)
+                    @foreach($abnormal_chats as $chats)
                         <div class="panel panel-default">
-                            <div class="panel-heading" role="tab" id="{{$msg->id}}">
+                            <div class="panel-heading" role="tab" id="{{$chats[0]->id}}">
                             <h4 class="panel-title">
-                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="{{'#collapse' . $msg->id}}" aria-expanded="false" aria-controls="{{'collapse' . $msg->id}}">
-                                    {{$msg->sender_first_name . ' ' . $msg->sender_last_name . '  ------> ' . $msg->receiver_first_name . ' ' . $msg->receiver_last_name}}
+                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="{{'#collapse' . $chats[0]->id}}" aria-expanded="false" aria-controls="{{'collapse' . $chats[0]->id}}">
+                                    {{$chats[0]->sender_first_name . ' ' . $chats[0]->sender_last_name . '  ------> ' . $chats[0]->receiver_first_name . ' ' . $chats[0]->receiver_last_name}}
                                 </a>
                                 <div class="row">
                                     <div class="col-xs-12">
@@ -112,16 +112,17 @@
                                 </div>
                             </h4>
                             </div>
-                            <div id="{{'collapse' . $msg->id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="{{$msg->id}}">
+                            <div id="{{'collapse' . $chats[0]->id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="{{$chats[0]->id}}">
                             <div class="panel-body">
-                                        <p class="text text-danger">شماره تماس ارسال کننده :‌ {{$msg->sender_phone}}</p>
-                                        <p class="text text-danger">زمان ارسال :‌ {{$msg->created_at}}</p>
-                                        @if($msg->sender_blocked == false)
-                                            <button class="btn btn-danger" id="{{$msg->sender_id}}" onclick="block_user(event)">مسدود کردن حساب کاربر</button>
+                                        <p class="text text-danger">شماره تماس ارسال کننده :‌ {{$chats[0]->sender_phone}}</p>
+                                        @if($chats[0]->sender_blocked == false)
+                                            <button class="btn btn-danger" id="{{$chats[0]->sender_id}}" onclick="block_user(event)">مسدود کردن حساب کاربر</button>
                                         @else
-                                            <button class="btn btn-success" id="{{$msg->sender_id}}" onclick="unblock_user(event)">خارج کردن از بلاک</button>
+                                            <button class="btn btn-success" id="{{$chats[0]->sender_id}}" onclick="unblock_user(event)">خارج کردن از بلاک</button>
                                         @endif
-                                        <p class="text text-right">{{$msg->text}}</p>
+                                        @foreach($chats as $chat)
+                                        <p class="text text-right">{{$chat->text}} --- {{$chat->created_at}}</p>
+                                        @endforeach
                                         
                             </div>
                             </div>

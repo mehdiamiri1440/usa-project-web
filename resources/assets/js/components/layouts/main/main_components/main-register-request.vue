@@ -1,4 +1,8 @@
 <style scoped>
+.header-request {
+  margin-bottom: 20px;
+}
+
 .header-request h2 {
   font-size: 22px;
   margin: 0;
@@ -11,16 +15,15 @@
     <div class="container">
       <div class="row">
         <div class="header-request wrapper-bg text-center col-xs-12">
-          <h2>
-            ثبت درخواست خرید
-          </h2>
-          <p>
-            برای ثبت درخواست خرید فرم زیر را کامل کنید
-          </p>
+          <h2>ثبت درخواست خرید</h2>
+          <p>برای ثبت درخواست خرید فرم زیر را کامل کنید</p>
         </div>
 
         <div class="main-request-content">
-          <main-register-request-form wrapper-bg="true" />
+          <main-register-request-form
+            wrapper-bg="true"
+            :categoryList="categoryList"
+          />
         </div>
       </div>
     </div>
@@ -31,6 +34,7 @@
 import mainRegisterRequestForm from "./main-register-request-form";
 
 export default {
+  props: ["categoryList"],
   components: {
     mainRegisterRequestForm,
   },

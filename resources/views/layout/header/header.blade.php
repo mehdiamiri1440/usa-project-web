@@ -79,15 +79,17 @@
           <ul  class="nav navbar-nav">
             <li class="hidden-xs">
               <a class="green-button" href="/register">
-                <i class="fa fa-user"></i>
-                ثبت نام رایگان
+                <div class="item-icon register">
+                  <i class="fa fa-user static-layout light-green-text"></i>
+                </div>
+                ثبت نام
+                <span class="light-green-text"> رایگان </span>
               </a>
             </li>
 
             <li class="mobile-login-link hidden-sm hidden-md hidden-lg">
               <a class="green-button" href="/register">
                 <i class="fa fa-user"></i>
-
                 <span>ورود / ثبت نام</span>
               </a>
             </li>
@@ -97,7 +99,9 @@
                 class="green-button green-button-alt"
                 href="/login"
               >
-                <i class="fa fa-sign-in-alt"></i>
+                <div class="item-icon">
+                  <i class="fa fa-sign-in-alt"></i>
+                </div>
                 ورود به باسکول
               </a>
             </li>
@@ -107,6 +111,10 @@
         <div class="collapse navbar-collapse navbar-right" id="buskool-nav">
           <div class="wrapper-nav">
             <div class="search-input hidden-xs">
+              <button class="open-categories">
+                <span> همه محصولات </span>
+                <i class="fa fa-angle-down"></i>
+              </button>
               <input
                 type="text"
                 placeholder="محصول مورد نظر خود را جستجو کنید"
@@ -115,7 +123,6 @@
 
               <button class="hidden-xs" >
                 <i class="fa fa-search"></i>
-                <span class="hidden-sm"> جستجو </span>
               </button>
             </div>
 
@@ -123,32 +130,15 @@
               <li>
                 <a
                   class="smoothScroll"
-                  href="/"
                 >
-                  صفحه نخست
+                  کشاورزی
                 </a>
               </li>
               <li>
                 <a
-                  class="smoothScroll router-link-exact-active"
-                  href="/product-list"
-                >
-                  لیست محصولات
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https:\\blog.buskool.com"
                   class="smoothScroll"
-                  >وبلاگ</a
                 >
-              </li>
-              <li>
-                <a
-                  class="smoothScroll"
-                  href="/about-us"
-                >
-                  درباره ما
+                فرآورده های غذایی
                 </a>
               </li>
             </ul>
@@ -167,39 +157,32 @@
           <i class="fa fa-search"></i>
           <span class="hidden-sm"> جستجو </span>
         </button>
+        <div
+          v-if="
+            $route.name == 'productList' || $route.name == 'productCategory'
+          "
+          class="hidden-sm hidden-md hidden-lg location-filter-wrapper"
+        >
+          <button >
+            <span > همه ایران </span>
+            <i class="fa fa-map-marker-alt"></i>
+          </button>
+        </div>
       </div>
-      <div class="container-fluid buskool-sub-menu hidden-xs">
+      <div class="container-fluid buskool-sub-menu absolute-position hidden-xs">
         <ul class="nav navbar-right navbar-nav">
-          <li>
+          <li class="smoothScroll">
             <a
-              class="smoothScroll"
               href="/"
             >
-              صفحه نخست
+            کشاورزی
             </a>
           </li>
-
-          <li>
+          <li class="smoothScroll">
             <a
-              class="smoothScroll router-link-exact-active"
-              href="/product-list"
+              href="/"
             >
-              لیست محصولات
-            </a>
-          </li>
-          <li>
-            <a
-              href="https:\\blog.buskool.com"
-              class="smoothScroll"
-              >وبلاگ</a
-            >
-          </li>
-          <li>
-            <a
-              class="smoothScroll"
-              href="/about-us"
-            >
-              درباره ما
+            فرآورده های غذایی
             </a>
           </li>
         </ul>

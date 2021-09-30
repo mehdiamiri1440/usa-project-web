@@ -4,6 +4,10 @@
   padding-right: 0;
 }
 
+.show-header {
+  position: relative;
+}
+
 .show-header button {
   float: right;
   border: none;
@@ -42,7 +46,7 @@
 }
 
 .main-header {
-  min-height: 59px;
+  /* min-height: 59px; */
   position: fixed;
   left: 0;
   right: 250px;
@@ -266,10 +270,10 @@ a.profile-info-wrapper:focus {
   min-width: 150px;
   text-align: right;
   direction: rtl;
-  border-radius: 4px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0px 3px 9px rgba(0, 0, 0, 0.05);
   line-height: 1.618;
-  -webkit-box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
-  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
   z-index: 6;
 }
 #web-profile-items > li a {
@@ -338,6 +342,9 @@ a.profile-info-wrapper:focus {
   text-align: center;
   border-bottom: 1px solid #e6e6e6;
   /* border-top: 1px solid #e6e6e6; */
+}
+.sub-header.is-verification-alert-active {
+  top: 99px;
 }
 
 .sub-header ul {
@@ -459,6 +466,12 @@ a.profile-info-wrapper:focus {
     flex: 1;
     text-align: center;
   }
+  .sub-header {
+    top: 41px;
+  }
+  .sub-header.is-verification-alert-active {
+    top: 82px;
+  }
 }
 @media screen and (min-width: 991px) {
   .hide-message-notification {
@@ -554,28 +567,109 @@ a.profile-info-wrapper:focus {
     transform: translate3d(4px, 0, 0);
   }
 }
+
 .button-height {
   line-height: 1;
+}
+
+.verification-wrapper-contents {
+  font-size: 18px;
+  font-weight: 500;
+  display: block;
+  text-align: center;
+  color: #fff;
+  background: #1da1f2;
+  position: relative;
+  padding: 2px 0 8px;
+}
+
+.verification-text {
+  margin: 0 5px;
+}
+
+.verification-wrapper-contents > i {
+  transition: 120ms;
+}
+
+.verification-wrapper-contents:hover {
+  background: #0a91e4;
+}
+
+.verification-wrapper-contents:hover > i {
+  transform: translateX(-5px);
+  transition: 120ms;
+}
+
+.verified-user {
+  color: #fff;
+  font-size: 23px;
+  top: 4px;
+}
+
+.verified-user::before {
+  color: #1da1f2;
+  top: 7px;
+  font-size: 11px;
+  left: 6px;
+}
+
+.close-info {
+  background: none;
+  border: none;
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 8px 14px;
+}
+
+.mobile-header-title {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 500;
+  color: #333;
+  padding: 11px 5px;
+  line-height: 1;
+  position: relative;
+}
+
+.mobile-header-title button {
+  position: absolute;
+  right: 0;
+  top: 0;
+  border: none;
+  padding: 10px 15px;
+  line-height: 1;
+  background: none;
+}
+
+@media screen and (max-width: 768px) {
+  .verification-wrapper-contents {
+    padding: 2px 15px 8px 0;
+  }
 }
 </style>
 
 <template>
-  <div>
-    <header id="header" class="main-header">
-      <div class="show-header hidden-md hidden-lg">
-        <div
-          v-if="messageCount > 0"
-          class="message-notification hide-message-notification"
-        >
-          <span>
-            {{ messageCount > 100 ? "+99" : messageCount }}
-          </span>
-        </div>
-        <button class="button-height">
-          <span :class="menuClosed ? 'rotation' : ''" class="fa fa-bars"></span>
-        </button>
-      </div>
+  <header id="header" class="main-header">
+    <router-link
+      v-if="$parent.verificationAlert"
+      :to="{ name: 'profileBasicBuyerVeficiation' }"
+      class="verification-wrapper-contents"
+    >
+      <i class="fa fa-angle-left"></i>
+      <span class="verification-text"> برای احراز هویت کلیک کنید </span>
+      <span @click.prevent class="verified-user" title>
+        <i class="fa fa-certificate"></i>
+      </span>
+      <button
+        class="close-info"
+        @click.prevent="$parent.disableVerificationAlert = true"
+      >
+        <i class="fa fa-times"></i>
+      </button>
+    </router-link>
 
+    <div class="hidden-sm hidden-xs">
       <div class="user-auth-info-wrapper">
         <ul v-if="!isLoading" class="nav navbar-nav">
           <li>
@@ -648,9 +742,7 @@ a.profile-info-wrapper:focus {
               </li>
 
               <li class="list-item">
-                <a :href="out" @click="logUserOut()">
-                  <i class="fas fa-sign-out-alt"></i> خروج
-                </a>
+                <a :href="out"> <i class="fas fa-sign-out-alt"></i> خروج </a>
               </li>
             </ul>
           </li>
@@ -659,7 +751,11 @@ a.profile-info-wrapper:focus {
           <li>
             <div class="col display-loading">
               <div
-                class="user_name placeholder-content placeholder-user-name margin-loading"
+                class="
+                  user_name
+                  placeholder-content placeholder-user-name
+                  margin-loading
+                "
               ></div>
               <div
                 class="placeholder-image-header-profile placeholder-content"
@@ -710,6 +806,7 @@ a.profile-info-wrapper:focus {
       <div
         v-if="$route.path === '/buyer/special-products'"
         class="sub-header col-xs-12"
+        :class="{ 'is-verification-alert-active ': $parent.verificationAlert }"
       >
         <div class="search-box col-sm-6 col-xs-12 col-lg-4 pull-right">
           <input
@@ -726,19 +823,90 @@ a.profile-info-wrapper:focus {
       <SubMenu
         :class="{ 'header-with-fix-alert': $parent.isRequiredFixAlert }"
       />
-    </header>
-  </div>
+    </div>
+    <div class="hidden-md hidden-lg">
+      <div class="mobile-header-title">
+        <span v-text="pageTitle"></span>
+        <button
+          class="mobile-back-button"
+          onclick="window.history.go(-1); return false;"
+        >
+          <i class="fa fa-arrow-right"></i>
+        </button>
+      </div>
+      <div
+        v-if="$route.path === '/buyer/special-products'"
+        class="sub-header col-xs-12"
+        :class="{ 'is-verification-alert-active ': $parent.verificationAlert }"
+      >
+        <div class="search-box col-sm-6 col-xs-12 col-lg-4 pull-right">
+          <input
+            type="text"
+            v-model="$parent.searchValueText"
+            placeholder="اینجا جستجو کنید"
+          />
+
+          <button class="btn-search">
+            <i class="fa-search fa"></i>
+          </button>
+        </div>
+      </div>
+      <SubMenu />
+    </div>
+  </header>
 </template>
 
 
 <script>
-var visible = false;
 import SubMenu from "./sub-menu/sub-menu.vue";
 import { eventBus } from "../../../../../router/router";
 export default {
   data: function () {
     return {
       messageCount: "",
+      pageTitle: "",
+      pages: [
+        {
+          name: "passwordBuyer",
+          title: "تغییر کلمه عبور",
+        },
+        {
+          name: "myBuskoolBuyer",
+          title: "باسکول من",
+        },
+        {
+          name: "profileBasicBuyer",
+          title: "ویرایش پروفایل",
+        },
+        {
+          name: "profileBasicBuyerVeficiation",
+          title: "احراز هویت",
+        },
+        {
+          name: "messagesBuyer",
+          title: "پیام ها",
+        },
+        {
+          name: "registerRequestBuyer",
+          title: "ثبت درخواست خرید",
+        },
+        {
+          name: "specialProducts",
+          title: "فروشندگان پیشنهادی",
+        },
+        {
+          name: "myBuyAdRequestsBuyer",
+          title: "درخواست های من",
+        },
+        {
+          name: "guideBuyer",
+          title: "راهنما",
+        },
+        {
+          name: "supportBuyer",
+          title: "پشتیبانی",
+        },
+      ],
     };
   },
   components: {
@@ -756,14 +924,7 @@ export default {
   methods: {
     init: function () {
       this.closeCollapses();
-    },
-    logUserOut: function () {
-      localStorage.removeItem("userRoute");
-      this.registerComponentStatistics(
-        "seller-dashboard-header",
-        "logout",
-        "click-on-logout-in-dashboard"
-      );
+      this.checkName(this.$route.name);
     },
     closeCollapses: function () {
       $(document).on("click", function (e) {
@@ -780,9 +941,25 @@ export default {
         }
       });
     },
+    registerComponentStatistics: function (
+      categoryName,
+      actionName,
+      labelName
+    ) {
+      gtag("event", actionName, {
+        event_category: categoryName,
+        event_label: labelName,
+      });
+    },
+    checkName(routeName) {
+      this.pages.map((item) => {
+        if (item.name == routeName) {
+          this.pageTitle = item.title;
+        }
+      });
+    },
   },
   mounted() {
-    var self = this;
     this.init();
 
     // axios
@@ -807,11 +984,11 @@ export default {
     });
     document.addEventListener("click", this.documentClick);
   },
-  registerComponentStatistics: function (categoryName, actionName, labelName) {
-    gtag("event", actionName, {
-      event_category: categoryName,
-      event_label: labelName,
-    });
+
+  watch: {
+    "$route.name"(route) {
+      this.checkName(route);
+    },
   },
 };
 </script>

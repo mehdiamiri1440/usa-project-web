@@ -1,7 +1,7 @@
 <style scoped>
 .product-wrapper {
   max-width: 1170px;
-  margin: 0 auto;
+  margin: 20px auto;
   float: initial;
 }
 
@@ -66,7 +66,7 @@
 }
 
 .load-more-button button {
-  border: 2px solid;
+  border: 1px solid;
 
   padding: 15px 30px;
 
@@ -78,7 +78,7 @@
 
   top: 0;
 
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
 
   transition: 200ms;
 
@@ -88,7 +88,7 @@
 .load-more-button button:hover {
   top: -3px;
 
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
 
   transition: 200ms;
 }
@@ -127,8 +127,17 @@
 }
 
 @media screen and (max-width: 767px) {
+  .product-wrapper {
+    margin: 15px auto 100px;
+    overflow: hidden;
+  }
+
   #main-content {
-    margin-top: 123px;
+    margin-top: 105px;
+  }
+
+  .has-verification-alert #main-content {
+    margin-top: 135px;
   }
 
   .product-wrapper,
@@ -159,6 +168,7 @@
     margin-top: 111px;
     background: #fff;
     padding: 0;
+    height: calc(100% + 70px);
   }
 
   .user-contents .user-image,
@@ -187,10 +197,6 @@
   <div>
     <main id="main-content" class="col-sm-12 contents">
       <div class="row">
-        <div class="title col-xs-12">
-          <h1>فروشندگان پیشنهادی</h1>
-        </div>
-
         <div v-if="products.length > 0" class="product-wrapper">
           <div
             v-for="(product, productIndex) in products"
@@ -200,7 +206,6 @@
             <ProductGridArticle
               :product="product"
               :str="str"
-              :currentUser="currentUser"
               :productIndex="productIndex"
             />
           </div>
@@ -270,14 +275,23 @@
             class="default-items col-xs-6 col-sm-4 col-md-3 default-grid"
           >
             <div
-              class="col-xs-12 margin-15-0 default-item-wrapper default-main-wrapper"
+              class="
+                col-xs-12
+                margin-15-0
+                default-item-wrapper default-main-wrapper
+              "
             >
               <div class="default-wrapper-main-image pull-right">
                 <span class="default-main-image placeholder-content"></span>
               </div>
 
               <div
-                class="default-article-contents padding-0 margin-top-10 col-xs-12"
+                class="
+                  default-article-contents
+                  padding-0
+                  margin-top-10
+                  col-xs-12
+                "
               >
                 <div class="default-main-article-content">
                   <span class="content-half-width placeholder-content"></span>
@@ -286,7 +300,12 @@
                     class="content-default-width placeholder-content"
                   ></span>
                   <span
-                    class="placeholder-content default-button-full-with pull-left mobile-hidden"
+                    class="
+                      placeholder-content
+                      default-button-full-with
+                      pull-left
+                      mobile-hidden
+                    "
                   ></span>
                 </div>
               </div>
@@ -319,7 +338,6 @@ export default {
         },
         photos: [],
       },
-      currentUser: "",
       categoryId: "",
       subCategoryId: "",
       searchValue: "",
@@ -334,41 +352,23 @@ export default {
   },
   methods: {
     init: function () {
-      var self = this;
-
       this.loading = true;
-
-      var searchValueText = this.$parent.searchText;
-
+      this.$parent.searchText = "";
+      this.getProducts();
+    },
+    getProducts() {
       axios
-        .post("/user/profile_info")
-        .then(function (response) {
-          self.currentUser = response.data;
-
-          if (searchValueText) {
-            self.registerComponentStatistics(
-              "homePage",
-              "search-text",
-              searchValueText
-            );
-            self.searchValue = searchValueText;
-            eventBus.$emit("submiting", false);
-          } else {
-            axios
-              .post("/user/get_product_list", {
-                from_record_number: 0,
-                special_products: true,
-                to_record_number: self.productCountInPage,
-              })
-              .then(function (response) {
-                self.products = response.data.products;
-                self.loading = false;
-                localStorage.removeItem("productCountInPage");
-                eventBus.$emit("submiting", false);
-              });
-          }
+        .post("/user/get_product_list", {
+          from_record_number: 0,
+          special_products: true,
+          to_record_number: this.productCountInPage,
         })
-        .catch((error) => reject(error));
+        .then((response) => {
+          this.products = response.data.products;
+          this.loading = false;
+          localStorage.removeItem("productCountInPage");
+          eventBus.$emit("submiting", false);
+        });
     },
     feed() {
       this.loading = true;

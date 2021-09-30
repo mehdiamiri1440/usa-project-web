@@ -418,6 +418,7 @@ input,textarea {
 
 .default-product-image {
   height: 380px;
+  border-radius: 12px;
 }
 
 .default-product-contents {
@@ -503,7 +504,6 @@ input,textarea {
 
 .default-index-product-image {
   position: relative;
-  width: 200px;
   height: 140px;
 }
 
@@ -566,7 +566,11 @@ input,textarea {
   .xs-text-right {
     text-align: right;
   }
-
+  
+  .default-product-image {
+    border-radius: 0;
+  }
+  
   .xs-text-right span {
     margin: 20px 15px;
 

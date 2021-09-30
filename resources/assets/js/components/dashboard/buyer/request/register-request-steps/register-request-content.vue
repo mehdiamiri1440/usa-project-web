@@ -6,6 +6,7 @@
     v-else-if="step == 1"
     :index="selectedCategoryIndex"
     :sub-categories="subCategoryList"
+    :mainCategories="mainCategories"
   />
   <TypeCategory v-else :sub-categories="subCategoryList" />
 </template>
@@ -29,6 +30,7 @@ export default {
       step: 0,
       selectedCategoryIndex: "",
       subCategoryList: "",
+      mainCategories: "",
       categoryName: "",
       subCategoryName: "محصول",
       productName: "",
@@ -70,12 +72,18 @@ export default {
   methods: {
     selectedCategory(index) {
       window.localStorage.removeItem("buyAd");
+      this.categoryName = "";
       this.selectedCategoryIndex = index;
-      // this.categoryName = this.categoryList[index].category_name;
       this.subCategoryList = this.categoryList[index].subcategories;
       this.step = 1;
     },
-    selectedSubCategory(item) {
+    selectedSubCategory(index) {
+      let currentCategory =
+        this.categoryList[this.selectedCategoryIndex].subcategories[index];
+      this.categoryName = currentCategory.category_name;
+      this.mainCategories = currentCategory.subcategories;
+    },
+    selectedMainCategory(item) {
       this.subCategoryName = item.category_name;
       this.$parent.buyAd.category_id = item.id;
       this.step = 2;
@@ -89,7 +97,6 @@ export default {
       return regx.test(input);
     },
     formValidator: function () {
-      this.$parent.formLoader = true;
       if (!this.requirement_amount) {
         this.errors.requirement_amount = "لطفا میزان نیازمندی را وارد کنید.";
         this.$parent.formLoader = false;
@@ -100,6 +107,7 @@ export default {
         !this.$parent.errors.category_id &&
         !this.errors.requirement_amount
       ) {
+        this.$parent.formLoader = true;
         this.$parent.submitBuyAd();
       }
     },
@@ -112,15 +120,18 @@ export default {
         this.productNameValidator(value);
       }
     },
+    mainCategories(category) {
+      if (category == "") {
+        this.categoryName = "";
+      }
+    },
     requirement_amount: function (value) {
       this.$parent.buyAd.requirement_amount = value;
       this.errors.requirement_amount = "";
       if (value) {
         if (value.length >= 13) {
-          this.$parent.buyAd.requirement_amount = this.$parent.buyAd.requirement_amount.substring(
-            0,
-            13
-          );
+          this.$parent.buyAd.requirement_amount =
+            this.$parent.buyAd.requirement_amount.substring(0, 13);
         }
         let number = this.$parent.toLatinNumbers(
           this.$parent.buyAd.requirement_amount

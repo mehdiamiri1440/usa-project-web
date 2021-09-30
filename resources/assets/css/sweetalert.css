@@ -206,7 +206,17 @@ margin-top: 20px;
   color: #00c569;
 }
 
+.increase-wallet-button{
+  border-radius: 12px;
+  direction: rtl;
+  font-size: 18px;
+  font-weight: 500;
+  margin: 30px auto 0;
+}
 
+.increase-wallet-button i{
+  margin-left: 7px;
+}
 
 
 @media screen and (max-width: 768px) {

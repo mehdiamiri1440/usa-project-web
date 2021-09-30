@@ -60,6 +60,9 @@ use Carbon\Carbon;
 			$user->password = sha1($this->generate_plain_text_password(8));
 		 }
 
+		 if($request->filled('referred_user_name')){
+			 $user->referred_user_name = $request->referred_user_name;
+		 }
 
         //  $sms_controller_object = new sms_controller();
         //  $profile_controller_object = new profile_controller();

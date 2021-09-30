@@ -26,6 +26,7 @@ body,
   z-index: 9;
   background: #151c2e;
   direction: rtl;
+  overflow-y: auto;
 }
 
 .little_header {
@@ -61,22 +62,6 @@ body,
   text-align: right;
   color: #fff;
   position: relative;
-}
-
-.copy-right {
-  text-align: center;
-  padding: 15px 15px 0;
-  direction: rtl;
-  line-height: 1.618;
-  position: absolute;
-  bottom: 15px;
-  z-index: 10;
-  color: #fff;
-}
-
-.copy-right p {
-  font-size: 12px;
-  font-weight: 200;
 }
 
 .image-header-profile img {
@@ -214,13 +199,6 @@ span.min {
     display: none;
   }
 
-  .right-header.mobile-header {
-    display: block;
-    right: -300px;
-    overflow: auto;
-    direction: rtl;
-  }
-
   .close_menu {
     display: none;
   }
@@ -238,16 +216,6 @@ span.min {
   .img-profile .submit label {
     width: 40%;
     padding: 12px 0;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .mobile-header .green-button {
-    margin: 15px 0 0;
-  }
-
-  .mobile-header ul a {
-    padding: 15px 20px;
   }
 }
 
@@ -447,7 +415,10 @@ span.min {
         <div class="progress-upload-wrapper">
           <div class="progress">
             <div
-              class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+              class="
+                progress-bar progress-bar-striped progress-bar-animated
+                bg-success
+              "
               role="progressbar"
               :aria-valuenow="uploadPercentage"
               aria-valuemin="0"
@@ -469,41 +440,6 @@ span.min {
     </div>-->
 
     <!--end loader-->
-
-    <section class="right-header mobile-header">
-      <header class="header-right-header">
-        <button class="close_menu_mob">
-          <i class="fa fa-bars"></i>
-        </button>
-
-        <button class="close_menu">
-          <i class="fa fa-bars"></i>
-        </button>
-
-        <router-link class="logo" :to="{ name: 'indexPage' }">
-          <img src="../../../../../img/logo/web-logo-white.svg" alt="buskool" />
-        </router-link>
-      </header>
-
-      <section class="main-right-header">
-        <ProfileInfo
-          :isLoading="isLoading"
-          :photoLink="currentUser.profile.profile_photo"
-          :storage="storage"
-          :username="
-            currentUser.user_info.first_name +
-            ' ' +
-            currentUser.user_info.last_name
-          "
-          :usercity="
-            currentUser.user_info.province + ' - ' + currentUser.user_info.city
-          "
-          :userprof="currentUser.user_info.user_name"
-        />
-        <SwitchButtons mobile="1" />
-        <HeaderMenuList />
-      </section>
-    </section>
 
     <div class="background_mob_sec"></div>
 
@@ -540,10 +476,6 @@ span.min {
         <SwitchButtons />
         <HeaderMenuList />
       </section>
-
-      <div class="copy-right">
-        <p dir="rtl">تمام حقوق مادی و معنوی سایت متعلق به باسکول است.</p>
-      </div>
     </section>
 
     <HeaderTop
@@ -611,14 +543,32 @@ export default {
       productId: "",
       searchValueText: "",
       resetTextSearch: false,
+      verificationAlert: false,
+      disableVerificationAlertRoutes: [
+        "registerRequestBuyer",
+        "profileBasicBuyerVeficiation",
+        "messagesBuyer",
+      ],
+      disableVerificationAlert: false,
     };
   },
   methods: {
     init: function () {
       this.isLoaded = true;
+
       axios.post("/user/profile_info").then((response) => {
         this.isLoading = false;
         this.$parent.currentUser = response.data;
+        if (
+          !response.data.user_info.is_verified &&
+          this.checkVerificationAlert(this.$route.name)
+        ) {
+          if (!this.disableVerificationAlert) {
+            this.verificationAlert = true;
+          }
+        } else {
+          this.verificationAlert = false;
+        }
         return (this.currentUser = response.data);
       });
     },
@@ -684,7 +634,6 @@ export default {
       var headerMenu = $(".header-menu span");
       var headerMenuLink = $(".header-menu a");
       var logo = $(".logo");
-      var copyRight = $(".copy-right");
       var rightHeaderDesktop = $(".right-header.desktop-header");
       var littleMainHeader = $(".main-header");
       var main = $("#main");
@@ -697,16 +646,15 @@ export default {
           headerMenuLink.css({
             "text-align": "right",
           });
-          copyRight.css("display", "block");
           headerMenu.css("display", "inline");
 
-          menuCloseButtonIcon
-            .addClass("fa-angle-right", 200)
-            .removeClass("fa-angle-left");
+          // menuCloseButtonIcon
+          //   .addClass("fa-angle-right", 200)
+          //   .removeClass("fa-angle-left");
 
-          rightHeaderDesktop.removeClass("little_header", 200);
-          littleMainHeader.removeClass("little-main-header", 200);
-          main.removeClass("little-main", 200);
+          rightHeaderDesktop.removeClass("little_header", 0);
+          littleMainHeader.removeClass("little-main-header", 0);
+          main.removeClass("little-main", 0);
 
           nextMove = "shrink";
 
@@ -718,145 +666,24 @@ export default {
           });
           profile.css("display", "none");
           headerMenu.css("display", "none");
-          copyRight.css("display", "none");
           logo.css("display", "none");
           headerMenuLink.css({
             "text-align": "center",
           });
 
-          menuCloseButtonIcon
-            .addClass("fa-angle-left", 200)
-            .removeClass("fa-angle-right", 200);
+          // menuCloseButtonIcon
+          //   .addClass("fa-angle-left", 200)
+          //   .removeClass("fa-angle-right", 200);
 
-          rightHeaderDesktop.addClass("little_header", 200);
-          littleMainHeader.addClass("little-main-header", 200);
-          main.addClass("little-main", 200);
+          rightHeaderDesktop.addClass("little_header", 0);
+          littleMainHeader.addClass("little-main-header", 0);
+          main.addClass("little-main", 0);
 
           nextMove = "expand";
         }
       });
     },
-    toggleShowHeader() {
-      var self = this;
-      var showHeaderButtonElement = $(".show-header");
-      var closeHeaderButtonMobile = $(".close_menu_mob ");
-      var flag = true;
-      var rightHeader = $(".right-header.mobile-header");
-      var back = $(".background_mob_sec");
-      var closeHeaderButtonMobileLinks = $(".mobile-header .header-menu a");
-      rightHeader.animate(
-        {
-          right: "0",
-        },
-        800
-      );
-      setTimeout(() => {
-        rightHeader.animate(
-          {
-            right: "-300",
-          },
-          800,
-          undefined,
-          function () {
-            self.menuClosed = true;
-          }
-        );
-      }, 2000);
-      showHeaderButtonElement.on("click", function () {
-        rightHeader.animate({ scrollTop: 0 }, "fast");
 
-        if (flag === true) {
-          rightHeader.animate(
-            {
-              right: "0",
-            },
-            300
-          );
-
-          back.fadeIn();
-
-          flag = false;
-        } else {
-          rightHeader.animate(
-            {
-              right: "-300px",
-            },
-            300
-          );
-
-          flag = true;
-        }
-      });
-      closeHeaderButtonMobile.on("click", function () {
-        if (flag === true) {
-          rightHeader.animate(
-            {
-              right: "0",
-            },
-            300
-          );
-
-          flag = false;
-        } else {
-          rightHeader.animate(
-            {
-              right: "-300px",
-            },
-            300
-          );
-
-          back.fadeOut();
-
-          flag = true;
-        }
-      });
-      closeHeaderButtonMobileLinks.on("click", function () {
-        if (flag === true) {
-          rightHeader.animate(
-            {
-              right: "0",
-            },
-            300
-          );
-
-          flag = false;
-        } else {
-          rightHeader.animate(
-            {
-              right: "-300px",
-            },
-            300
-          );
-
-          back.fadeOut();
-
-          flag = true;
-        }
-      });
-      back.on("click", function () {
-        if (flag === true) {
-          rightHeader.animate(
-            {
-              right: "0",
-            },
-            300
-          );
-
-          flag = false;
-        } else {
-          rightHeader.animate(
-            {
-              right: "-300px",
-            },
-            300
-          );
-
-          back.fadeOut();
-
-          flag = true;
-        }
-      });
-    },
     deleteProduct: function () {
       var self = this;
 
@@ -901,15 +728,32 @@ export default {
         event_label: labelName,
       });
     },
+    checkVerificationAlert(routeName) {
+      let routeIsDisable = this.disableVerificationAlertRoutes.some((item) => {
+        return item == routeName;
+      });
+      if (!this.cehckPageWidth() && routeName == "registerRequestBuyer") {
+        return routeIsDisable;
+      }
+
+      return !routeIsDisable;
+    },
+    cehckPageWidth() {
+      let pageWidth = window.outerWidth;
+      if (pageWidth <= 991) {
+        return true;
+      } else {
+        return false;
+      }
+    },
   },
   mounted() {
     var self = this;
-    eventBus.$on("firstDashboardSeen", (event) => {
-      self.isfirstDashboardSeen = event;
-    });
+    // eventBus.$on("firstDashboardSeen", (event) => {
+    //   self.isfirstDashboardSeen = event;
+    // });
     this.init();
     this.toggleHeader();
-    this.toggleShowHeader();
   },
   created() {
     var self = this;
@@ -941,19 +785,45 @@ export default {
     });
   },
   watch: {
+    currentUser(user) {
+      this.$parent.currentUser = user;
+    },
     searchValueText: function (value) {
       this.resetTextSearch = false;
       this.$parent.searchText = value;
+    },
+    "$parent.searchText"(text) {
+      this.searchValueText = text;
     },
     resetTextSearch: function (value) {
       if (value == true) {
         this.searchValueText = "";
       }
     },
+    $route(route) {
+      if (
+        !this.$parent.currentUser.user_info.is_verified &&
+        this.checkVerificationAlert(route.name)
+      ) {
+        if (!this.disableVerificationAlert) {
+          this.verificationAlert = true;
+        }
+      } else {
+        this.verificationAlert = false;
+      }
+    },
+    verificationAlert(value) {
+      this.$parent.verificationAlert = value;
+    },
+    disableVerificationAlert(isDisable) {
+      if (isDisable) {
+        this.verificationAlert = false;
+      }
+    },
   },
   metaInfo() {
     return {
-      title: "بازارگاه کشاورزی",
+      title: "بازارگاه محصولات غذایی و کشاورزی",
       titleTemplate: "باسکول | %s",
     };
   },

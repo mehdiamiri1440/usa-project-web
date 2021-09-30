@@ -127,6 +127,9 @@
         <li class="{{Request::is('admin/admin_panel_channel_content_list') ? 'active':''}}">
             <a href="{{route('admin_panel_channel_content_list')}}"><i class="fa fa-envelope"></i><span>همه پست های کانال</span></a>      
         </li>
+        <li class="{{Request::is('admin/categories-meta-data-list') ? 'active':''}}">
+            <a href="{{route('admin_panel_load_meta_contents_list')}}"><i class="fa fa-envelope"></i><span>اطلاعات دسته بندی ها</span></a>      
+        </li>
         <!-- <li class="{{Request::is('admin/sell-offers') || Request::is('admin/sell-offer-detail/*') ? 'active':''}}">
             <a href="{{route('admin_panel_sell_offer_list')}}"><i class="fa fa-envelope"></i><span>پیشنهادات فروش</span></a>     
         </li>

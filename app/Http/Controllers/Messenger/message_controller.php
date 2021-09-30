@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use App\Models\daily_sms_blacklist;
 use App\Models\buyAd;
 use App\Http\Controllers\Messenger\channel_controller;
+use App\Http\Controllers\Accounting\phone_number_controller;
 
 class message_controller extends Controller
 {
@@ -28,15 +29,40 @@ class message_controller extends Controller
         'text' => 'required|string'
     ];
 
+    protected $product_reply_validation_rules = [
+        'product_id' => 'required|exists:products,id',
+        'text' => 'required|string'
+    ];
+
+    protected $price_asking_keywords = [
+        'قیمت',
+        'چنده',
+        'کیلویی چند',
+        'فی چند',  
+        'کیلویی چن',  
+        'کیلو چن',  
+        'تنی چند',
+        'تنی چن',   
+    ];
+
+    protected $phone_asking_keywords = [
+        'تلفن',
+        'تماس',
+        'شماره همراه',
+        'شماره',
+        'موبایل'
+    ];
+
+
     //methods
-    public function send_message(Request $request)
+    public function send_message(Request $request,$product_id = null)
     {
         $this->validate_input($request, $this->sendig_msg_validation_rules);
 
         $is_sender_valid = $this->is_sender_valid($request->sender_id);
 
         if ($is_sender_valid) {
-            $msg = $this->save_msg_in_database($request);
+            $msg = $this->save_msg_in_database($request,$product_id);
 
             $this->notify_msg_receiver($msg);
 
@@ -75,7 +101,7 @@ class message_controller extends Controller
         $this->validate($request, $validation_rules);
     }
 
-    protected function save_msg_in_database($request)
+    protected function save_msg_in_database($request,$product_id = null)
     {
         $msg_object = new message();
 
@@ -86,9 +112,102 @@ class message_controller extends Controller
 
             $msg_object->save();
 
+            if(! is_null($product_id)){
+                $auto_reply_text_message = $this->get_message_auto_reply_if_there_is_any($request->text,$product_id,$request->receiver_id,$request->sender_id);
+
+                if(! is_null($auto_reply_text_message)){
+                    $reply_msg_object = new message();
+
+                    $reply_msg_object->sender_id = $request->receiver_id;
+                    $reply_msg_object->receiver_id = $request->sender_id;
+                    $reply_msg_object->text = $auto_reply_text_message;
+                    $reply_msg_object->created_at = Carbon::parse($msg_object->created_at)->addSeconds(3);
+
+                    $reply_msg_object->save();
+                }
+            }
+
             return $msg_object;
-        } catch (\Exception $e) {
+        } 
+        catch (\Exception $e) {
+            //
         }
+    }
+
+    protected function get_message_auto_reply_if_there_is_any($text,$product_id,$receiver_id,$sender_id)
+    {
+        try{
+            $auto_reply_text = null;
+            $is_price_asking_found = false;
+            $is_phone_number_request_found = false;
+
+            foreach($this->price_asking_keywords as $keyword)
+            {
+                if(preg_match("/$keyword/",$text)){
+                    $is_price_asking_found = true;
+                     break;
+                }
+            }
+
+            if($is_price_asking_found == true){ // match has been found
+                $auto_reply_text = $this->get_product_general_details_as_a_string($product_id);
+            }
+            else{
+        
+                foreach($this->phone_asking_keywords as $keyword)
+                {
+                    if(preg_match("/$keyword/",$text)){
+                        $is_phone_number_request_found = true;
+                         break;
+                    }
+                }
+
+                if($is_phone_number_request_found == true){
+                
+                    $auto_reply_text = $this->get_seller_phone_number_or_proper_message($product_id,$receiver_id,$sender_id);
+
+                }
+            }
+
+            return $auto_reply_text;
+        }
+        catch(\Exception $e){
+            return null;
+        }
+    }
+
+    protected function get_product_general_details_as_a_string($product_id)
+    {
+        $product_info = DB::table('products')
+                                ->whereNull('deleted_at')
+                                ->where('id',$product_id)
+                                ->select([
+                                    'id',
+                                    'min_sale_price',
+                                    'min_sale_amount',
+                                    'product_name',
+
+                                ])
+                                ->get()
+                                ->first();
+
+        $price = number_format($product_info->min_sale_price);
+        $min_sale_amount = number_format($product_info->min_sale_amount);
+
+        $text = ' حدود کف قیمت برای هر کیلو ' . $product_info->product_name . " $price تومان است. \n\n" ;
+        $text = $text . "حداقل میزان سفارش هم {$min_sale_amount} کیلو است.\n\n";
+        $text = $text . ":p={$product_id}";
+
+        return $text;
+    }
+
+    protected function get_seller_phone_number_or_proper_message($product_id,$receiver_id,$sender_id)
+    {
+        $phone_access_controller_object = new phone_number_controller();
+
+        $msg = $phone_access_controller_object->get_seller_phone_number_or_proper_message_for_interactive_chat($product_id,$receiver_id,$sender_id);
+        
+        return $msg;
     }
 
     protected function notify_msg_receiver($msg)
@@ -176,6 +295,77 @@ class message_controller extends Controller
         return $buyAd_record->myuser_id;
     }
 
+    public function send_reply_message_to_the_product(Request $request)
+    {
+        $this->validate($request,$this->product_reply_validation_rules);
+
+        $sender_id = session('user_id');
+
+        $product_record = DB::table('products')->where('confirmed',true)
+                                ->whereNull('deleted_at')
+                                ->where('id',$request->product_id)
+                                ->get()
+                                ->first();
+
+        if($product_record){
+            $receiver_id = $product_record->myuser_id;
+        }
+        else{
+            return response()->json([
+                'status' => false,
+                'msg' => 'invalid data!',
+            ],200);
+        }
+
+        $related_product_view_records = DB::table('user_products')->where('myuser_id',$sender_id)
+                                            ->where('product_id',$request->product_id)
+                                            ->where('has_sent_msg',true)
+                                            ->orderBy('created_at')
+                                            ->get();
+
+        $now = Carbon::now();
+        
+        if($related_product_view_records->count() == 0){
+            $last_related_product_view_record = DB::table('user_products')->where('myuser_id',$sender_id)
+                                                    ->where('product_id',$request->product_id)
+                                                    ->where('has_sent_msg',false)
+                                                    ->orderBy('created_at')
+                                                    ->get()
+                                                    ->last();
+
+            if($last_related_product_view_record){
+                DB::table('user_products')->where('id',$last_related_product_view_record->id)
+                                            ->update([
+                                                'updated_at' => $now,
+                                                'has_sent_msg' => true,
+                                            ]);
+            }
+            else{
+                DB::table('user_products')->insert([
+                    'created_at' => $now,
+                    'updated_at' => $now,
+                    'myuser_id' => $sender_id,
+                    'product_id' => $request->product_id,
+                    'has_sent_msg' => true,
+                ]);
+            }
+
+            
+        }
+
+
+
+        $req = Request::create('/messanger/send_message', 'POST',[
+            'sender_id' => $sender_id,
+            'receiver_id' => $receiver_id,
+            'text' => $request->text
+        ]);
+
+        return $this->send_message($req,$request->product_id);
+        
+    }
+
+
     //public method
     public function get_current_user_contact_list(Request $request)
     {
@@ -216,6 +406,10 @@ class message_controller extends Controller
 
         if (sizeof($contact_list) > 0) {
             usort($contact_list, function ($a, $b) {
+                if($b->last_msg_time_date == $a->last_msg_time_date){
+                    return $b->contact_id > $a->contact_id;
+                }
+                
                 return $b->last_msg_time_date > $a->last_msg_time_date;
             });
         }
@@ -252,7 +446,15 @@ class message_controller extends Controller
             }
         });
 
-        return array_unique($contact_id_array);
+        $contact_id_array = array_unique($contact_id_array);
+
+        $blocked_users = DB::table('myusers')->where('is_blocked',true)->pluck('id')->toArray();
+
+        $contact_id_array = array_filter($contact_id_array,function($contact_id) use($blocked_users){
+            return in_array($contact_id,$blocked_users) == false;
+        });
+
+        return $contact_id_array;
     }
 
     protected function get_contact_info($contact_id)
@@ -309,8 +511,13 @@ class message_controller extends Controller
     {
         $user_id = session('user_id');
 
-        $unread_msgs_count = message::where('receiver_id', $user_id)
+        $unread_msgs_count = DB::table('messages')->where('receiver_id', $user_id)
                                 ->where('is_read', false)
+                                ->whereNotExists(function($q){
+                                    $q->select(DB::raw(1))
+                                        ->from('myusers')
+                                        ->whereRaw('myusers.id = messages.sender_id and myusers.is_blocked = true');
+                                })
                                 ->get()
                                 ->count();
 
@@ -324,6 +531,8 @@ class message_controller extends Controller
     {
         $this->validate($request, [
             'user_id' => 'required|integer|exists:myusers,id',
+            'from' => 'integer|min:0',
+            'to' => 'integer|min:1',
         ]);
 
         $user_id = session('user_id');
@@ -347,9 +556,17 @@ class message_controller extends Controller
 
         $is_verified = myuser::find($request->user_id)->is_verified;
 
+        $total_count = count($messages);
+
+        if($request->filled('from') && $request->filled('to')){
+            $messages = array_reverse($messages);
+            $messages = array_slice($messages,$request->from,$request->to - $request->from);
+        }
+
         return response()->json([
             'status' => true,
             'messages' => $messages,
+            'total_count' => $total_count,
             'is_verified' => $is_verified,
             'current_user_id' => $user_id,
         ], 200);
@@ -360,13 +577,36 @@ class message_controller extends Controller
         foreach($messages as $msg){
             if($this->is_this_string_a_valid_phone_number($msg->text)){
                 $msg->is_phone = true;
+
+                continue;
             }
             else{
                 $msg->is_phone = false;
             }
+
+            if((preg_match("/:p=\d/u",$msg->text) !== 1) && (preg_match("/:wlt=\d/u",$msg->text) !== 1)) {
+                continue;
+            }
+
+            $tmp1 = explode("\n",$msg->text);
+            if(count($tmp1) >= 2){
+                $last_string = $tmp1[$index = $this->my_array_key_last($tmp1)];
+                if(sscanf($last_string,":p=%d",$product_id)){
+                    $msg->text = implode("\n",array_slice($tmp1,0,$index));
+                    $msg->p_id = $product_id;
+                }
+                else if(sscanf($last_string,":wlt=%d",$product_id)){
+                    $msg->text = implode("\n",array_slice($tmp1,0,$index));
+                    $msg->phone_locked = true;
+                }
+            }
         }
 
         return $messages;
+    }
+
+    function my_array_key_last(array $array) {
+        if( !empty($array) ) return key(array_slice($array, -1, 1, true));
     }
 
     protected function is_this_string_a_valid_phone_number($string)
@@ -429,6 +669,12 @@ class message_controller extends Controller
         $users_info = DB::table('myusers')
                             ->join('messages', 'messages.receiver_id', '=', 'myusers.id')
                             ->where('messages.is_read', false)
+                            ->where('myusers.is_blocked',false)
+                            ->whereNotExists(function($q){
+                                $q->select(DB::raw(1))
+                                        ->from('myusers as usr')
+                                        ->whereRaw('usr.id = messages.sender_id and usr.is_blocked = true');
+                            })
                             ->whereBetween('messages.created_at', [$from, $to])
                             ->select('myusers.id as user_id', 'myusers.phone')
                             ->distinct()

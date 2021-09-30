@@ -26,7 +26,8 @@
     <meta property="og:image:width" content="256"/>
     <meta property="og:image:height" content="256"/>
     <meta property="og:url" content="{{'https://www.buskool.com/profile/' . $user_name}}"/>
-    <meta property="og:type" content="website"/>
+    <meta property="og:type" content="profile"/>
+    <meta property="og:profile:first_name" content="{{$full_name}}"/>
 
 @endsection
 

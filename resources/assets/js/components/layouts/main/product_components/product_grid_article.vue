@@ -44,6 +44,7 @@
   border-radius: 8px;
   background: #38485f;
   color: #fff;
+  padding: 3px 7px 0;
 }
 
 .main-article-title {
@@ -456,7 +457,6 @@ label {
         product.user_info.first_name + ' ' + product.user_info.last_name
       "
       :user_name="product.user_info.user_name"
-      :current_user="currentUser"
       :product_id="product.main.id"
       :is_my_profile_status="isMyProfile"
     />
@@ -493,7 +493,7 @@ export default {
     ArticleMainContents,
     ProductImage,
   },
-  props: ["productIndex", "product", "str", "currentUser"],
+  props: ["productIndex", "product", "str"],
   data: function () {
     return {
       submiting: false,
@@ -504,14 +504,15 @@ export default {
       productUrl: "",
       jsonLDObject: "",
       verifiedUserContent: this.$parent.verifiedUserContent,
+      loadedProduct: true,
     };
   },
   methods: {
     init: function () {
       this.productUrl = this.getProductUrl();
-
-      if (this.currentUser.user_info) {
-        if (this.currentUser.user_info.id === this.product.main.myuser_id) {
+      let userId = getUserId();
+      if (userId) {
+        if (userId === this.product.main.myuser_id) {
           this.isMyProfile = true;
           this.$emit("isMyProfile", this.isMyProfile);
         }
@@ -522,15 +523,6 @@ export default {
     setScroll: function () {
       localStorage.setItem("scrollIndex", this.$props.productIndex);
       window.open(this.productUrl, "_blank");
-
-      // if (
-      //   this.isDeviceMobile() &&
-      //   window.location.pathname.includes("product-list")
-      // ) {
-      //   window.open(this.productUrl, "_blank");
-      // } else {
-      //   this.$router.push(this.productUrl);
-      // }
       this.$parent.registerComponentStatistics(
         "product",
         "show-product-in-seperate-page",
@@ -554,31 +546,6 @@ export default {
         .replace(/[\u06f0-\u06f9]/g, function (c) {
           return c.charCodeAt(0) - 0x06f0;
         });
-    },
-    openEditBox: function (e) {
-      e.preventDefault();
-
-      if (this.currentUser.profile) {
-        var event = $(e.target);
-        this.errors = "";
-        var element = event.parents("article").find(".buy_details");
-
-        element.slideToggle("125", "swing");
-        $(".buy_details").not(element).slideUp();
-
-        this.scrollToTheRequestRegisterBox(element);
-
-        this.registerComponentStatistics(
-          "product",
-          "open-edit-box",
-          "click on open edit box"
-        );
-      } else {
-        this.registerComponentExceptions(
-          "Product-component: click on open edit box while current user is undefined",
-          true
-        );
-      }
     },
     scrollToTheRequestRegisterBox: function (element) {
       var newPosition = $(element).offset();
@@ -639,46 +606,6 @@ export default {
             "Product-component: validation errors in edit product API"
           );
         });
-    },
-
-    openChat: function (product) {
-      this.registerComponentStatistics(
-        "product",
-        "openChat",
-        "click on open chatBox"
-      );
-
-      let productName =
-        product.main.sub_category_name + " " + product.main.product_name;
-
-      var contact = {
-        contact_id: product.user_info.id,
-        first_name: product.user_info.first_name,
-        last_name: product.user_info.last_name,
-        profile_photo: product.profile_info.profile_photo,
-        user_name: product.user_info.user_name,
-        product_name: productName,
-      };
-
-      var self = this;
-
-      if (this.currentUser.user_info) {
-        if (this.currentUser.user_info.id !== product.user_info.id) {
-          eventBus.$emit("ChatInfo", contact);
-          // window.localStorage.setItem("contact", JSON.stringify(contact));
-
-          // this.$router.push({name : 'registerInquiry'});
-        } else {
-          this.popUpMsg = "شما نمیتوانید به خودتان پیام دهید.";
-          eventBus.$emit("submitSuccess", this.popUpMsg);
-          $("#custom-main-modal").modal("show");
-        }
-      } else {
-        window.localStorage.setItem("contact", JSON.stringify(contact));
-
-        // this.$router.push({ name: "registerInquiry" });
-        eventBus.$emit("modal", "sendMsg");
-      }
     },
     updatePopUpStatus: function (popUpOpenStatus) {
       this.popUpLoaded = popUpOpenStatus;

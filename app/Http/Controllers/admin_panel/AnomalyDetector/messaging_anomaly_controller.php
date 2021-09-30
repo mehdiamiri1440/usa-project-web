@@ -11,44 +11,45 @@ use App\Models\message;
 class messaging_anomaly_controller extends Controller
 {
     protected $anomaly_detectors = [
-        'detect_links_anomaly',
+        // 'detect_links_anomaly',
+        // 'detect_blacklisted_keywords',
         'detect_copy_paste',
     ];
     protected $contacts_max = 10;
 
     public function load_messaging_anomaly(Request $request)
     {
-        $abnormal_info = $this->get_abnormal_info();
-        // $abnormal_user_ids = $this->get_abnormal_user_ids($messages);
-
-        $messages = DB::table('myusers')
-                        ->join('messages','myusers.id','=','messages.sender_id')
-                        ->join('myusers as users','users.id','=','messages.receiver_id')
-                        ->whereIn('messages.id',$abnormal_info['messages'])
-                        ->select([
-                            'myusers.id as sender_id',
-                            'myusers.phone as sender_phone',
-                            'myusers.first_name as sender_first_name',
-                            'myusers.last_name as sender_last_name',
-                            'myusers.created_at as sender_created_at',
-                            'myusers.is_blocked as sender_blocked',
-                            'users.id as receiver_id',
-                            'users.phone as receiver_phone',
-                            'users.first_name as receiver_first_name',
-                            'users.last_name as receiver_last_name',
-                            'users.created_at as reciever_created_at',
-                            'messages.*'
-                        ])
-                        ->orderBy('messages.created_at','desc')
-                        ->get();
-
-        $users = DB::table('myusers')
-                            ->whereIn('id',$abnormal_info['users'])
+        $abnormal_contacts = $this->get_abnormal_info();
+    
+        $chats = [];
+        foreach($abnormal_contacts['contacts'] as $contacts)
+        {
+            $chats[] = DB::table('myusers')
+                            ->join('messages','myusers.id','=','messages.sender_id')
+                            ->join('myusers as users','users.id','=','messages.receiver_id')
+                            ->where('messages.sender_id',$contacts['sender_id'])
+                            ->where('messages.receiver_id',$contacts['receiver_id'])
+                            // ->whereIn('messages.id',$abnormal_info['messages'])
+                            ->select([
+                                'myusers.id as sender_id',
+                                'myusers.phone as sender_phone',
+                                'myusers.first_name as sender_first_name',
+                                'myusers.last_name as sender_last_name',
+                                'myusers.created_at as sender_created_at',
+                                'myusers.is_blocked as sender_blocked',
+                                'users.id as receiver_id',
+                                'users.phone as receiver_phone',
+                                'users.first_name as receiver_first_name',
+                                'users.last_name as receiver_last_name',
+                                'users.created_at as reciever_created_at',
+                                'messages.*'
+                            ])
+                            ->orderBy('messages.created_at')
                             ->get();
+        }
 
         return view('admin_panel.messageAnomaly',[
-            'abnormal_messages' => $messages,
-            'abnormal_users'    => $users
+            'abnormal_chats' => $chats
         ]);
     }
 
@@ -58,21 +59,12 @@ class messaging_anomaly_controller extends Controller
                         ->whereBetween('created_at',[Carbon::now()->subDays(3),Carbon::now()])
                         ->get();
         
-        $abnormal_user_ids = $this->get_abnormal_user_ids($messages);
-        
         $abnormal_message_ids = [];
-        // foreach($this->anomaly_detectors as $method_name)
-        // {
-        //     array_merge($abnormal_message_ids,$this->$method_name($messages));
-        // }
-        $abnormal_message_ids = $this->detect_links_anomaly($messages);
-        $abnormal_message_ids = array_merge($abnormal_message_ids,$this->detect_copy_paste($messages));
-        
-        $abnormal_message_ids = array_unique($abnormal_message_ids);
+    
+        $abnormal_contacts = $this->detect_copy_paste($messages);
 
         return [
-            'messages' => $abnormal_message_ids,
-            'users' => $abnormal_user_ids
+            'contacts' => $abnormal_contacts
         ];
     }
 
@@ -96,18 +88,22 @@ class messaging_anomaly_controller extends Controller
 
     protected function detect_copy_paste(&$messages)
     {
-        $msgs = [];
+        $contacts = [];
         $temp_msgs = $messages->toArray();
 
-        usort($temp_msgs,function($msg1,$msg2) use(&$msgs){
-            if(strcmp($msg1->text,$msg2->text) == 0){
-                if( ! in_array($msg1->id,$msgs)){
-                    $msgs[] = $msg1->id;
-                }
+        usort($temp_msgs,function($msg1,$msg2) use(&$contacts){
+            if(strcmp($msg1->text,$msg2->text) == 0 && $msg1->sender_id == $msg2->sender_id && $msg1->text != 'سلام'){
+
+                $tmp = [
+                    'sender_id' => $msg1->sender_id,
+                    'receiver_id' => $msg1->receiver_id
+                ];
+
+                $contacts[] = $tmp;
             }
         });
 
-        return $msgs;
+        return array_unique($contacts,SORT_REGULAR);
     }
 
     protected function get_abnormal_user_ids(&$messages)
@@ -144,7 +140,8 @@ class messaging_anomaly_controller extends Controller
         $related_records->each(function ($record) use (&$contact_id_array,$user_id) {
             if ($record->sender_id != $user_id) {
                 $contact_id_array[] = $record->sender_id;
-            } else {
+            }
+            else {
                 $contact_id_array[] = $record->receiver_id;
             }
         });
@@ -167,6 +164,32 @@ class messaging_anomaly_controller extends Controller
             ->update([
                 'is_blocked' => $block_status
             ]);
+
+        $device_ids = DB::table('client_meta_datas')
+                                ->where('myuser_id',$user_id)
+                                ->whereNotNull('device_id')
+                                ->distinct('device_id')
+                                ->pluck('device_id');
+
+        $same_device_user_ids = DB::table('client_meta_datas')
+                                    ->whereIn('device_id',$device_ids)
+                                    ->where('myuser_id','<>',$user_id)
+                                    ->distinct('myuser_id')
+                                    ->pluck('myuser_id');
+
+        if(count($same_device_user_ids) > 0)
+        {
+            if($block_status)
+            {
+                DB::table('myusers')->whereIn('id',$same_device_user_ids)
+                                    ->update(['is_blocked' => true]);
+            }
+            else{
+                DB::table('myusers')->whereIn('id',$same_device_user_ids)
+                                    ->update(['is_blocked' => false]);
+            }  
+        }
+
 
         return response()->json([
             'status' => true,

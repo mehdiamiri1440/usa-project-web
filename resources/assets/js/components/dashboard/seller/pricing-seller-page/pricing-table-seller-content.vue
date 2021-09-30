@@ -1,4 +1,6 @@
 <style scoped>
+@import url("../../../../../css/owl.carousel.min.css");
+
 .item-action .green-button {
   padding: 10px 35px;
   margin: 0 auto 15px;
@@ -271,7 +273,7 @@
 
 .fix-botton-wraper {
   position: fixed;
-  bottom: 0;
+  bottom: 59px;
   left: 0;
   width: 100%;
   z-index: 1;
@@ -294,6 +296,11 @@
   position: relative;
   top: 2px;
 }
+
+.pricing-wrapper {
+  margin-bottom: 130px;
+}
+
 @media screen and (max-width: 991px) {
   .list-title,
   .needs,
@@ -482,7 +489,7 @@
         </div>
       </div>
 
-      <div class="users-review-carousel-wrapper col-xs-12">
+      <div class="users-review-carousel-wrapper col-xs-12 pricing-wrapper">
         <div class="title-section">تعدادی از اعضای ویژه در باسکول</div>
         <div class="owl-carousel">
           <pricing-user-carousel
@@ -501,7 +508,7 @@
       </div>
     </div>
 
-    <div class="fix-botton-wraper hidden-sm hidden-md hidden-lg">
+    <div class="fix-botton-wraper hidden-md hidden-lg">
       <button class="green-button" @click="openCreditCardGuide()">
         پرداخت از طریق کارت به کارت
         <i class="fa fa-credit-card"></i>
@@ -514,6 +521,8 @@
 <script>
 import pricingUserCarousel from "./pricing-user-carousel";
 import pricingContents from "./pricing-tables/pricing-package-contents";
+import swal from "../../../../sweetalert.min.js";
+
 export default {
   props: ["offerTime"],
   components: { pricingUserCarousel, pricingContents },

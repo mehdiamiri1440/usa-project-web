@@ -367,7 +367,7 @@
 
 <!-- page script -->
 <script>
-    var categories = '';
+    let categories = '';
 
     function getCategories(){
             $.post("/get_category_list",
@@ -403,8 +403,7 @@
 
     $(document).ready(function() {
 
-    getCategories();
-    console.log(categories)
+        getCategories();
 
     });
     

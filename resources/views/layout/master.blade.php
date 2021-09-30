@@ -11,9 +11,28 @@
 
     <link rel="icon" href="{{asset('assets/img/logo/mobile-logo.svg')}}">
 
-    <title>باسکول | بازارگاه کشاورزی </title>
+    @if(config('app.name') != 'Laravel')
+    <meta name="robots" content="noindex" />
+    @endif
 
-    <link rel="stylesheet" href="{{asset('assets/css/main-loader.css')}}">
+
+    <!-- fonts -->
+    <link rel="preload" href="{{asset('assets/fonts/woff2/IRANSansWeb(FaNum)_Bold.woff2')}}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{asset('assets/fonts/woff2/IRANSansWeb(FaNum).woff2')}}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{asset('assets/fonts/woff2/IRANSansWeb(FaNum)_Medium.woff2')}}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{asset('assets/webfonts/fa-solid-900.woff2')}}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{asset('assets/webfonts/fa-regular-400.woff2')}}" as="font" type="font/woff2" crossorigin>
+    <!-- <link rel="preload" href="{{asset('assets/webfonts/fa-brands-400.woff2')}}" as="font" type="font/woff2" crossorigin> -->
+    
+    
+    <!-- Main Styles
+    // improve for blocking request 
+    -->
+    <link rel="preload" href="{{asset('assets/css/fontiran.min.css')}}" as="style" onload="this.rel='stylesheet'" crossorigin>
+    <link rel="preload" href="{{asset('assets/css/all.min.css')}}" as="style" onload="this.rel='stylesheet'" crossorigin>
+    <link rel="preload" href="{{asset('css/app.css')}}" as="style" onload="this.rel='stylesheet'" crossorigin>
+    <title>باسکول | بازار خرید و فروش عمده محصولات غذایی و کشاورزی ایران بدون واسطه</title>
+
 
 
 
@@ -35,12 +54,64 @@
         gtag('config', 'UA-129398000-1', {'send_page_view': false});
     </script>
 
+    <style>
 
+     
+      .main-loader-wrapper {
+        position: fixed;
+
+        bottom: 20px;
+
+        z-index: 1030;
+
+        background: #fff;
+
+        width: 100%;
+
+        height: 100%;
+
+        left: 0;
+
+        top: 0;
+        }
+
+        .logo-main-loader {
+          display: inline-block;
+          position: absolute;
+          left: 50%;
+          top: 40%;
+          transform: translate(-50%, -50%);
+          text-align: center;
+          line-height: 1.618;
+          width: 100%;
+          padding: 0 15px;
+        }
+
+        .logo-main-loader svg {
+            width: 60px;
+            height: 70px;
+        }
+        .main-loader-shape-wrapper {
+          position: absolute;
+          height: 70px !important;
+          bottom: 20%;
+          left: calc(50% - 23px);
+        }
+
+
+        /* preloader image style*/
+        .spinner-border{
+          width: 4.5rem;
+          height: 4.5rem;
+          color: #bbb;
+          border-width: 3px;
+        }
+    </style>
 </head>
 <body >
 
  <!-- #regex main loader -->
- <div class="main-loader-wrapper">
+ <div id="master-loader-wrapper" class="main-loader-wrapper">
    
     <div class="logo-main-loader">
       <svg
@@ -77,11 +148,8 @@
       </svg>
     </div>
     <div class="main-loader-shape-wrapper">
-      <div class="lds-ring">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
+      <div class="spinner-border" >
+        <span class="sr-only"></span>
       </div>
     </div>
   </div>
@@ -94,7 +162,7 @@
                     user-id = "{{session('user_id')}}"
                     is-seller = "{{session('is_seller')}}"
                     assets = "{{asset('')}}"
-                    storage-path = "{{url('storage/')}}"
+                    storage-path = "{{url('/storage')}}"
                     profile-photo="{{session('profile_photo')}}"
                     user-full-name="{{session('full_name')}}"
                     user-logout-path="{{route('logout')}}"
@@ -122,21 +190,23 @@
         const messaging = firebase.messaging();
 </script>
 
-<script src="{{asset('js/app.js')}}"></script>
+<script src="{{asset('js/app.js')}}" defer></script>
 
  {{-- <script async src="{{asset('js/sw/app.js')}}"></script> 
  <script src="{{asset('assets/js/idleTimer.js')}}"></script>  --}}
 
 <script>
-    $(document).ready(function () {
-        // $(document).idleTimer(7200000);
+    // $(document).ready(function () {
+    //     // $(document).idleTimer(7200000);
         
-        $('.main-loader-wrapper').css('display','none');
-    });
+    //     $('.main-loader-wrapper').css('display','none');
+    // });
     
-    $(document).on("idle.idleTimer", function () {
-        window.location.href = '/login'
-    });
+   
+
+    // $(document).on("idle.idleTimer", function () {
+    //     window.location.href = '/login'
+    // });
 
     function getUserId(){
         let userId = <?php if(session('user_id')){echo session('user_id');} else echo -1; ?>;
