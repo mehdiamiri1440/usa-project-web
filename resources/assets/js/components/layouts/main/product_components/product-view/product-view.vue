@@ -29,7 +29,6 @@ span {
 
 .bread-crumbs-wrapper {
   margin: 3px auto 11px;
-  height: 25px;
 }
 
 .bread-crumbs-wrapper a {
