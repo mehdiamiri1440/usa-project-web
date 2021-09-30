@@ -124,6 +124,8 @@ class message_controller extends Controller
                     $reply_msg_object->created_at = Carbon::parse($msg_object->created_at)->addSeconds(3);
 
                     $reply_msg_object->save();
+
+                    $this->notify_msg_receiver($reply_msg_object);
                 }
             }
 
