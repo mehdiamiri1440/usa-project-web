@@ -1403,38 +1403,7 @@ div.items-wrapper {
                   </div>
                   <p class="text-center text-rtl">درحال دریافت اطلاعات ...</p>
                 </div>
-                <!-- <div
-                  class="load-more-button col-xs-12"
-                  v-if="continueToLoadProducts === true"
-                >
-                  <button
-                    class="btn btn-loader"
-                    :disabled="loadMoreActive"
-                    @click.prevent="feed()"
-                  >
-                    <div class="btn-content">
-                      <span class="hidden-xs text-rtl" v-show="!loadMoreActive">
-                        مشاهده محصولات بیشتر
-                        <i class="fa fa-plus"></i>
-                      </span>
-
-                      <span
-                        class="hidden-sm hidden-md hidden-lg text-rtl"
-                        v-show="!loadMoreActive"
-                      >
-                        محصولات بیشتر
-                        <i class="fa fa-plus"></i>
-                      </span>
-
-                      <div
-                        v-show="loadMoreActive"
-                        class="btn-loader-active-wrapper"
-                      >
-                        <img src="../../../../img/gif/loading.gif" />
-                      </div>
-                    </div>
-                  </button>
-                </div> -->
+                
               </div>
             </section>
             <!-- test -->
