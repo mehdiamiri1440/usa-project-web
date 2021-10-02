@@ -61,6 +61,13 @@ return [
             'queue' => 'main',
             'retry_after' => 90,
         ],
+
+        'database_4' => [
+            'driver' => 'database',
+            'table' => 'jobs',
+            'queue' => 'rakhshmain',
+            'retry_after' => 90,
+        ],
         
         'beanstalkd' => [
             'driver' => 'beanstalkd',
