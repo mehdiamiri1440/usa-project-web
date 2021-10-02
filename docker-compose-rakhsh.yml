@@ -156,6 +156,20 @@ services:
     networks:
         - backend
 
+
+  queue-helper-6:
+    image: buskool-app
+    container_name: laravel-helper-6
+    restart: always
+    depends_on:
+        - laravel-app
+    volumes:
+        - .:/var/www/html
+    environment:
+        CONTAINER_ROLE: mainqueue
+    networks:
+        - backend
+
     
  
 networks:
