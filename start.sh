@@ -43,7 +43,15 @@ elif [ "$role" = "mainqueue" ]; then
     php /var/www/html/artisan config:cache
     php /var/www/html/artisan migrate 
     echo "Running the queue..."
-    php /var/www/html/artisan queue:work --verbose --tries=3 --timeout=90 --queue=main
+    php /var/www/html/artisan queue:work database_3 --verbose --tries=3 --timeout=90 --queue=main
+
+
+elif [ "$role" = "rakhshmainqueue" ]; then
+
+    php /var/www/html/artisan config:cache
+    php /var/www/html/artisan migrate 
+    echo "Running the queue..."
+    php /var/www/html/artisan queue:work database_4 --verbose --tries=3 --timeout=90 --queue=rakhshmain
 
 elif [ "$role" = "scheduler" ]; then
 
