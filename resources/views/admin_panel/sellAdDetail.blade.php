@@ -245,10 +245,13 @@
 
         $.ajax({
             url:"{{route('delete_sellAd_photo_by_id')}}",
+            xhrFields: {
+                withCredentials: true
+            },
             data:{
                 photo_id:photo_id,
             },
-            type:"POST",
+            type:"DELETE",
             datatype:'json'
         })
         .done(function(json){

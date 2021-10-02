@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use App\Models\daily_sms_blacklist;
 use App\Models\buyAd;
 use App\Http\Controllers\Messenger\channel_controller;
+use App\Http\Controllers\Accounting\phone_number_controller;
 
 class message_controller extends Controller
 {
@@ -33,15 +34,35 @@ class message_controller extends Controller
         'text' => 'required|string'
     ];
 
+    protected $price_asking_keywords = [
+        'قیمت',
+        'چنده',
+        'کیلویی چند',
+        'فی چند',  
+        'کیلویی چن',  
+        'کیلو چن',  
+        'تنی چند',
+        'تنی چن',   
+    ];
+
+    protected $phone_asking_keywords = [
+        'تلفن',
+        'تماس',
+        'شماره همراه',
+        'شماره',
+        'موبایل'
+    ];
+
+
     //methods
-    public function send_message(Request $request)
+    public function send_message(Request $request,$product_id = null)
     {
         $this->validate_input($request, $this->sendig_msg_validation_rules);
 
         $is_sender_valid = $this->is_sender_valid($request->sender_id);
 
         if ($is_sender_valid) {
-            $msg = $this->save_msg_in_database($request);
+            $msg = $this->save_msg_in_database($request,$product_id);
 
             $this->notify_msg_receiver($msg);
 
@@ -80,7 +101,7 @@ class message_controller extends Controller
         $this->validate($request, $validation_rules);
     }
 
-    protected function save_msg_in_database($request)
+    protected function save_msg_in_database($request,$product_id = null)
     {
         $msg_object = new message();
 
@@ -91,9 +112,104 @@ class message_controller extends Controller
 
             $msg_object->save();
 
+            if(! is_null($product_id)){
+                $auto_reply_text_message = $this->get_message_auto_reply_if_there_is_any($request->text,$product_id,$request->receiver_id,$request->sender_id);
+
+                if(! is_null($auto_reply_text_message)){
+                    $reply_msg_object = new message();
+
+                    $reply_msg_object->sender_id = $request->receiver_id;
+                    $reply_msg_object->receiver_id = $request->sender_id;
+                    $reply_msg_object->text = $auto_reply_text_message;
+                    $reply_msg_object->created_at = Carbon::parse($msg_object->created_at)->addSeconds(3);
+
+                    $reply_msg_object->save();
+
+                    $this->notify_msg_receiver($reply_msg_object);
+                }
+            }
+
             return $msg_object;
-        } catch (\Exception $e) {
+        } 
+        catch (\Exception $e) {
+            //
         }
+    }
+
+    protected function get_message_auto_reply_if_there_is_any($text,$product_id,$receiver_id,$sender_id)
+    {
+        try{
+            $auto_reply_text = null;
+            $is_price_asking_found = false;
+            $is_phone_number_request_found = false;
+
+            foreach($this->price_asking_keywords as $keyword)
+            {
+                if(preg_match("/$keyword/",$text)){
+                    $is_price_asking_found = true;
+                     break;
+                }
+            }
+
+            if($is_price_asking_found == true){ // match has been found
+                $auto_reply_text = $this->get_product_general_details_as_a_string($product_id);
+            }
+            else{
+        
+                foreach($this->phone_asking_keywords as $keyword)
+                {
+                    if(preg_match("/$keyword/",$text)){
+                        $is_phone_number_request_found = true;
+                         break;
+                    }
+                }
+
+                if($is_phone_number_request_found == true){
+                
+                    $auto_reply_text = $this->get_seller_phone_number_or_proper_message($product_id,$receiver_id,$sender_id);
+
+                }
+            }
+
+            return $auto_reply_text;
+        }
+        catch(\Exception $e){
+            return null;
+        }
+    }
+
+    protected function get_product_general_details_as_a_string($product_id)
+    {
+        $product_info = DB::table('products')
+                                ->whereNull('deleted_at')
+                                ->where('id',$product_id)
+                                ->select([
+                                    'id',
+                                    'min_sale_price',
+                                    'min_sale_amount',
+                                    'product_name',
+
+                                ])
+                                ->get()
+                                ->first();
+
+        $price = number_format($product_info->min_sale_price);
+        $min_sale_amount = number_format($product_info->min_sale_amount);
+
+        $text = ' حدود کف قیمت برای هر کیلو ' . $product_info->product_name . " $price تومان است. \n\n" ;
+        $text = $text . "حداقل میزان سفارش هم {$min_sale_amount} کیلو است.\n\n";
+        $text = $text . ":p={$product_id}";
+
+        return $text;
+    }
+
+    protected function get_seller_phone_number_or_proper_message($product_id,$receiver_id,$sender_id)
+    {
+        $phone_access_controller_object = new phone_number_controller();
+
+        $msg = $phone_access_controller_object->get_seller_phone_number_or_proper_message_for_interactive_chat($product_id,$receiver_id,$sender_id);
+        
+        return $msg;
     }
 
     protected function notify_msg_receiver($msg)
@@ -239,13 +355,15 @@ class message_controller extends Controller
             
         }
 
+
+
         $req = Request::create('/messanger/send_message', 'POST',[
             'sender_id' => $sender_id,
             'receiver_id' => $receiver_id,
             'text' => $request->text
         ]);
 
-        return $this->send_message($req);
+        return $this->send_message($req,$request->product_id);
         
     }
 
@@ -468,7 +586,7 @@ class message_controller extends Controller
                 $msg->is_phone = false;
             }
 
-            if(preg_match("/:p=\d/u",$msg->text) !== 1) {
+            if((preg_match("/:p=\d/u",$msg->text) !== 1) && (preg_match("/:wlt=\d/u",$msg->text) !== 1)) {
                 continue;
             }
 
@@ -478,6 +596,10 @@ class message_controller extends Controller
                 if(sscanf($last_string,":p=%d",$product_id)){
                     $msg->text = implode("\n",array_slice($tmp1,0,$index));
                     $msg->p_id = $product_id;
+                }
+                else if(sscanf($last_string,":wlt=%d",$product_id)){
+                    $msg->text = implode("\n",array_slice($tmp1,0,$index));
+                    $msg->phone_locked = true;
                 }
             }
         }

@@ -22,11 +22,11 @@ use App\Jobs\LeadHandler\LeadDistributorBot;
 
 Route::get('/',[
     'uses' => 'index_controller@load_home_page_blade'
-]);
+])->middleware('throttle:10,1');
 
 Route::get('/product-list',[
     'uses' => 'Product\product_list_controller@get_product_list_blade',
-]);
+])->middleware('throttle:10,1');;
 
 Route::get('/product-list/category/{category_name}',[
     'uses' => 'Product\product_list_controller@get_product_list_blade',
@@ -80,8 +80,6 @@ Route::get('/buyers',function(){
     }
 });
 
-Route::post('/store-photo','Accounting\user_controller@store_photo');
-
 // Route::group(['prefix' => 'master'], function () {
 //     Route::get('/', function () {
 //         return view('layout.master');
@@ -123,12 +121,12 @@ Route::post('/user/is_national_code_unique', [
 Route::post('send_verification_code', [
     'uses' => 'Notification\sms_controller@send_phone_verification_code',
     'as' => 'send_verification_code',
-]);
+])->middleware('throttle:3,1');
 
 Route::post('/verify_code', [
     'uses' => 'Notification\sms_controller@verify_code',
     'as' => 'verify_code',
-]);
+])->middleware('throttle:10,1');
 
 Route::post('/get_category_list', [
     'uses' => 'General\category_controller@get_all_categories',
@@ -912,7 +910,7 @@ Route::group(['prefix' => 'admin', 'middleware' => [admin_login::class]], functi
     ]);
 
     //delete photos
-    Route::post('sellAd/delete_photo_by_id', [
+    Route::delete('sellAd/delete_photo_by_id', [
         'uses' => 'admin_panel\admin_sellAd_controller@admin_sellAd_photo_delete_by_id',
         'as' => 'delete_sellAd_photo_by_id',
     ]);
@@ -922,7 +920,7 @@ Route::group(['prefix' => 'admin', 'middleware' => [admin_login::class]], functi
         'as' => 'delete_buyAd_photo_by_id',
     ]);
 
-    Route::post('profile/delete_photo_by_id', [
+    Route::delete('profile/delete_photo_by_id', [
         'uses' => 'admin_panel\admin_profile_controller@admin_profile_related_photo_delete_by_id',
         'as' => 'delete_profile_related_photo_by_id',
     ]);
