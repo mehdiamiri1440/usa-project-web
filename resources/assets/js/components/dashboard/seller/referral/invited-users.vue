@@ -308,7 +308,7 @@
             {{ getNumberWithCommas(referralUsers.credit) }}<span>تومان</span>
           </p>
         </div>
-        <div
+        <!-- <div
           class="special-package"
           v-if="currentUser.user_info.active_pakage_type < 3"
         >
@@ -343,7 +343,7 @@
             <i class="fas fa-arrow-up"></i>
             ارتقا به عضویت ویژه
           </router-link>
-        </div>
+        </div> -->
         <div class="invited-users">
           <div
             class="users-wrapper"

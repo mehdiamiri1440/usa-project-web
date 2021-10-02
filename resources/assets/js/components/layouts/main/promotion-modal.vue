@@ -457,7 +457,10 @@ export default {
   watch: {
     "$parent.buyAdsGolden"(goldens) {
       let buyAds = goldens;
-      let randomBuyAd = Math.floor(Math.random() * buyAds.length - 1);
+      let randomBuyAd = 0;
+      if (buyAds.length > 1) {
+        randomBuyAd = Math.floor(Math.random() * buyAds.length - 1);
+      }
       this.buyAd = buyAds[randomBuyAd];
     },
   },

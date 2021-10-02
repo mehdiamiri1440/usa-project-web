@@ -1147,6 +1147,7 @@ export default {
       }).then((value) => {
         switch (value) {
           case "promote":
+            $('.modal').modal('hide')
             self.$router.push({ name: "dashboardPricingTableSeller" });
             break;
         }
