@@ -260,8 +260,16 @@ label {
   .actions {
     margin-top: 15px;
   }
+
+  .main-contents-wrapper h1 {
+    max-width: calc(100% - 100px);
+    float: right;
+    margin-bottom: 26px;
+  }
+
   .share .share-button {
-    font-size: 17px;
+    font-size: 12px;
+    padding: 5px 6px 2px;
   }
 
   .phone-number-wrapper,
@@ -271,7 +279,7 @@ label {
 
   .share {
     position: absolute;
-    top: -4px;
+    top: 2px;
     padding: 0;
     left: 15px;
   }
@@ -616,6 +624,7 @@ label {
               class="share-button"
             >
               <i class="fa fa-share-alt"></i>
+              <span>اشتراک گذاری</span>
             </button>
           </div>
         </div>

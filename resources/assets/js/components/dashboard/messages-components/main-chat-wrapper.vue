@@ -684,7 +684,32 @@
     background-position: 0% 50%;
   }
 }
+.scale-up-center-full {
+	-webkit-animation: scale-up-center-full 0.15s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+            animation: scale-up-center-full 0.15s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+            animation-delay: 0.15s;
 
+}
+@-webkit-keyframes scale-up-center-full {
+    0% {
+      -webkit-transform: scale(0.0);
+              transform: scale(0.0);
+    }
+    100% {
+      -webkit-transform: scale(1);
+              transform: scale(1);
+    }
+  }
+  @keyframes scale-up-center-full {
+    0% {
+      -webkit-transform: scale(0.0);
+              transform: scale(0.0);
+    }
+    100% {
+      -webkit-transform: scale(1);
+              transform: scale(1);
+    }
+  }
 .message-button-wrapper.link-button button.edit-button {
   background: #556080;
 }
@@ -764,6 +789,60 @@
   padding: 0 15px;
 }
 
+.messenger-alert {
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 48px;
+  border-radius: 50px;
+  padding: 0 3px;
+  top: 52px;
+  z-index: 2;
+  left: 15px;
+  right: 10px;
+}
+
+.messenger-alert .text-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.messenger-alert .text-wrapper span {
+  font-size: 12px;
+}
+
+.messenger-alert.danger {
+  background: red;
+  color: #fff;
+}
+.messenger-alert.danger .actions-wrapper button {
+  width: 100px;
+  border-radius: 50px;
+  border: none;
+  background: rgba(255, 255, 255, 0.75);
+  color: #264653;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+}
+
+.messenger-alert.danger .actions-wrapper button span {
+  width: 50px;
+  display: inline-block;
+  line-height: 16px;
+}
+
+.close-alert {
+  background: none;
+  border: none;
+  font-size: 15px;
+  padding: 14px 7px 10px 12px;
+  float: right;
+}
+
 @media screen and (max-width: 1199px) {
   .message-wrapper .message-contact-title {
     position: relative;
@@ -772,6 +851,11 @@
 }
 
 @media screen and (max-width: 768px) {
+  .messenger-alert {
+    left: 6px;
+    right: 6px;
+  }
+
   #fitler-modal > div {
     margin: 0;
     width: 100%;
@@ -998,6 +1082,23 @@
 
     <div class="chat-page" v-if="$parent.selectedContact">
       <div class="bg-wrapper"></div>
+      <div class="messenger-alert danger" v-if="isAlertActive">
+        <div class="text-wrapper">
+          <button class="close-alert" @click="closeWalletAlert()">
+            <i class="fa fa-times"></i>
+          </button>
+          <span>
+            شماره تماس شما به علت عدم موجودی کافی ، به خریدارن نمایش داده نمی
+            شود.
+          </span>
+        </div>
+        <div class="actions-wrapper">
+          <button @click.prevent="showWallet()">
+            <i class="fa fa-plus"></i>
+            <span>افزایش موجودی</span>
+          </button>
+        </div>
+      </div>
       <ul
         @scroll="infinityScroll()"
         id="chat-list"
@@ -1005,6 +1106,7 @@
           $parent.chatMessagesLoader && $parent.isFirstMessageLoading
             ? 'chat-not-loaded'
             : 'chat-loaded',
+          isAlertActive ? 'padding-top-60' : '',
         ]"
       >
         <li
@@ -1113,11 +1215,11 @@
                     Date() | moment("jYYYY/jMM/jDD, HH:mm")
                   }}</span>
                   <div class="message-button-wrapper link-button">
+                    <!-- v-if="
+                        $parent.currentUser.user_info.active_pakage_type > 0
+                      " -->
                     <button
                       class="edit-button"
-                      v-if="
-                        $parent.currentUser.user_info.active_pakage_type > 0
-                      "
                       @click.prevent="openEditPriceModal(msg.p_id)"
                     >
                       <i class="fa fa-angle-left angle-icon"></i>
@@ -1125,7 +1227,7 @@
                       <i v-if="!editPriceLoader" class="fa fa-edit"></i>
                       <i v-else class="fas fa-circle-notch fa-spin"></i>
                     </button>
-                    <button
+                    <!-- <button
                       v-else
                       class="delsa-button"
                       @click.prevent="$parent.openDelasModal()"
@@ -1133,7 +1235,7 @@
                       <i class="fa fa-angle-left angle-icon"></i>
                       استخدام منشی آنلاین
                       <i class="fas fa-chess-queen"></i>
-                    </button>
+                    </button> -->
                   </div>
                 </span>
               </div>
@@ -1327,6 +1429,7 @@ export default {
       isChat: false,
       openProductLoader: false,
       editPriceLoader: false,
+      isAlertActive: false,
     };
   },
   methods: {
@@ -1346,9 +1449,35 @@ export default {
 
     init: function () {
       this.userGuide();
+      this.checkWalletBalance();
       this.hideCollapses();
       this.$parent.userHasNotice();
       this.$parent.userHasLikeBox();
+    },
+    showWallet: function () {
+      $("#wallet-modal").modal("show");
+    },
+    checkWalletBalance() {
+      if (this.$parent.userType) {
+        let isCookieSet = this.$parent.getCookie("walletAlert");
+        let userInfo = this.$parent.currentUser.user_info;
+        if (!isCookieSet) {
+          if (
+            userInfo.active_pakage_type == 0 &&
+            userInfo.wallet_balance == 0
+          ) {
+            this.isAlertActive = true;
+          }
+        }
+      }
+    },
+    closeWalletAlert() {
+      this.$parent.createCookie(
+        "walletAlert",
+        JSON.stringify(true),
+        60 * 1 // 1 hour
+      );
+      this.isAlertActive = false;
     },
     hideCollapses: function () {
       $(document).on("click", function (e) {

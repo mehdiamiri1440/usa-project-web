@@ -1254,13 +1254,13 @@ a.sub-menu-title:hover {
 
 <template>
   <div>
-    <div
+    <!-- <div
       :class="{ 'loader-wrapper': isLoading, 'finish-loader-show': !isLoading }"
     >
       <div class="main-loader">
         <img src="../../../../img/gif/loading.gif" />
       </div>
-    </div>
+    </div> -->
 
     <!-- =========================
         Intro SECTION
