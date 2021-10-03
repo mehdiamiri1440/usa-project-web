@@ -60,47 +60,42 @@ class Kernel extends ConsoleKernel
             DB::table('daily_sms_blacklists')->delete();
         })->dailyAt('5:45');
 
-        $check_pakage_expiry_time_job = (new CheckPakageExpiry())->onQueue('fcm');
+        $check_pakage_expiry_time_job = new CheckPakageExpiry();
 
         $schedule->job($check_pakage_expiry_time_job)
                 ->dailyAt('3:00');
 
-        $send_sms_for_sellers_who_did_not_registered_product_job = (new SendReminderSMSToSellers())->onQueue('fcm');
+        $send_sms_for_sellers_who_did_not_registered_product_job = new SendReminderSMSToSellers();
 
         $schedule->job($send_sms_for_sellers_who_did_not_registered_product_job)
                 ->dailyAt('10:30');
 
-        $check_product_elevator_expiry_time_job = (new CheckElevatorExpiry())->onQueue('fcm');
+        $check_product_elevator_expiry_time_job = new CheckElevatorExpiry();
 
         $schedule->job($check_product_elevator_expiry_time_job)
                 ->dailyAt('3:30');
 
-        $send_sms_to_potential_sellers_for_upgrading_account_job = (new SendUpgradeAccoutnSMSToSellers())->onQueue('sms');
+        $send_sms_to_potential_sellers_for_upgrading_account_job = new SendUpgradeAccoutnSMSToSellers();
 
         $schedule->job($send_sms_to_potential_sellers_for_upgrading_account_job)
                 ->dailyAt('9:30');
 
-        $cache_product_list_job = (new CacheProductList())->onQueue('main');
+        $cache_product_list_job = new CacheProductList();
 
         $schedule->job($cache_product_list_job)
                 ->everyTenMinutes();
 
-        // $cache_product_list_job_in_rakhshs = (new CacheProductList())->onQueue('mainrakhsh');
-
-        // $schedule->job($cache_product_list_job_in_rakhshs)
-        //         ->everyFifteenMinutes();
-
-        $cache_buyAd_list_job = (new CacheBuyAdList())->onQueue('main');
+        $cache_buyAd_list_job = new CacheBuyAdList();
 
         $schedule->job($cache_buyAd_list_job)
                 ->cron('*/7 * * * *');
 
 
-        $product_register_reminder_job = (new ProductRegisterReminder())->onQueue('default');
+        $product_register_reminder_job = new ProductRegisterReminder();
         $schedule->job($product_register_reminder_job)
                 ->dailyAt('11:30');
 
-        $buyAd_register_reminder_job = (new BuyAdRegisterReminder())->onQueue('default');
+        $buyAd_register_reminder_job = new BuyAdRegisterReminder();
         $schedule->job($buyAd_register_reminder_job)
                 ->dailyAt('12:30');
 
@@ -110,12 +105,12 @@ class Kernel extends ConsoleKernel
             ->tuesdays()
             ->at('11:45');
 
-        $phone_number_auto_sending_job = (new SendPhoneNumberToBuyerIfConditionsIsSatisfied())->onQueue('fcm');
+        $phone_number_auto_sending_job = new SendPhoneNumberToBuyerIfConditionsIsSatisfied();
         $schedule->job($phone_number_auto_sending_job)
                 ->hourlyAt(22)
                 ->between('6:00', '22:00');
 
-        $product_auto_delete_job = (new ProductAutoDeleteForUnresponsiveSellers())->onQueue('default');;
+        $product_auto_delete_job = new ProductAutoDeleteForUnresponsiveSellers();
         $schedule->job($product_auto_delete_job)
                 ->dailyAt('02:33');
 
@@ -140,16 +135,15 @@ class Kernel extends ConsoleKernel
         //                 ->dailyAt('20:13');
 
 
-        $user_automatic_blocking_job = (new MessagingAnomalyDetection())->onQueue('fcm');
+        $user_automatic_blocking_job = new MessagingAnomalyDetection();
         $schedule->job($user_automatic_blocking_job)
-                        // ->everyMinute();
                         ->cron('*/18 * * * *');
 
-        $lead_generator_job = (new LeadGenerator())->onQueue('default');
+        $lead_generator_job = new LeadGenerator();
         $schedule->job($lead_generator_job)
                         ->cron('44 */2 * * *');
 
-        $lead_distributor_job = (new LeadDistributorBot())->onQueue('default');
+        $lead_distributor_job = new LeadDistributorBot();
         $schedule->job($lead_distributor_job)
                         ->cron('47 */2 * * *')
                         ->between('6:00','23:00');
@@ -160,7 +154,8 @@ class Kernel extends ConsoleKernel
                 ->saturdays()
                 ->at('00:47');
 
-        $schedule->command('cache:clear-expired')->cron("45 3 * * *");
+
+        // $schedule->command('cache:clear-expired')->cron("45 3 * * *");
 
 
         // $schedule->command('backup:clean')->daily()->at('12:27');
