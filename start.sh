@@ -15,43 +15,12 @@ if [ "$role" = "app" ]; then
     # php /var/www/html/artisan fetch:media
 
 
-elif [ "$role" = "defaultqueue" ]; then
+elif [ "$role" = "queue" ]; then
 
     php /var/www/html/artisan config:cache
     php /var/www/html/artisan migrate 
     echo "Running the queue..."
-    php /var/www/html/artisan queue:work  --verbose --tries=3 --timeout=90 --queue=default
-
-
-elif [ "$role" = "smsqueue" ]; then
-
-    php /var/www/html/artisan config:cache
-    php /var/www/html/artisan migrate 
-    echo "Running the queue..."
-    php /var/www/html/artisan queue:work database_1 --verbose --tries=3 --timeout=90 --queue=sms
-
-
-elif [ "$role" = "fcmqueue" ]; then
-
-    php /var/www/html/artisan config:cache
-    php /var/www/html/artisan migrate 
-    echo "Running the queue..."
-    php /var/www/html/artisan queue:work  database_2 --verbose --tries=3 --timeout=90 --queue=fcm
-
-elif [ "$role" = "mainqueue" ]; then
-
-    php /var/www/html/artisan config:cache
-    php /var/www/html/artisan migrate 
-    echo "Running the queue..."
-    php /var/www/html/artisan queue:work database_3 --verbose --tries=3 --timeout=90 --queue=main
-
-
-elif [ "$role" = "rakhshmainqueue" ]; then
-
-    php /var/www/html/artisan config:cache
-    php /var/www/html/artisan migrate 
-    echo "Running the queue..."
-    php /var/www/html/artisan queue:work database_4 --verbose --tries=3 --timeout=90 --queue=rakhshmain
+    php /var/www/html/artisan queue:work  --verbose --tries=3 --timeout=90 --queue=main,default,sms,fcm
 
 elif [ "$role" = "scheduler" ]; then
 

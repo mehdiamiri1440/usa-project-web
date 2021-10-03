@@ -50,7 +50,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $send_sms_notification_for_new_unread_messages_job = (new sendNewMessageSMSNotification())
-            ->onQueue('sms')->onConnection('database_1');
+            ->onQueue('sms');
 
         $schedule->job($send_sms_notification_for_new_unread_messages_job)
             ->hourly()
@@ -60,37 +60,37 @@ class Kernel extends ConsoleKernel
             DB::table('daily_sms_blacklists')->delete();
         })->dailyAt('5:45');
 
-        $check_pakage_expiry_time_job = (new CheckPakageExpiry())->onQueue('fcm')->onConnection('database_2');
+        $check_pakage_expiry_time_job = (new CheckPakageExpiry())->onQueue('fcm');
 
         $schedule->job($check_pakage_expiry_time_job)
                 ->dailyAt('3:00');
 
-        $send_sms_for_sellers_who_did_not_registered_product_job = (new SendReminderSMSToSellers())->onQueue('fcm')->onConnection('database_2');
+        $send_sms_for_sellers_who_did_not_registered_product_job = (new SendReminderSMSToSellers())->onQueue('fcm');
 
         $schedule->job($send_sms_for_sellers_who_did_not_registered_product_job)
                 ->dailyAt('10:30');
 
-        $check_product_elevator_expiry_time_job = (new CheckElevatorExpiry())->onQueue('fcm')->onConnection('database_2');
+        $check_product_elevator_expiry_time_job = (new CheckElevatorExpiry())->onQueue('fcm');
 
         $schedule->job($check_product_elevator_expiry_time_job)
                 ->dailyAt('3:30');
 
-        $send_sms_to_potential_sellers_for_upgrading_account_job = (new SendUpgradeAccoutnSMSToSellers())->onQueue('sms')->onConnection('database_1');
+        $send_sms_to_potential_sellers_for_upgrading_account_job = (new SendUpgradeAccoutnSMSToSellers())->onQueue('sms');
 
         $schedule->job($send_sms_to_potential_sellers_for_upgrading_account_job)
                 ->dailyAt('9:30');
 
-        $cache_product_list_job = (new CacheProductList())->onQueue('main')->onConnection('database_3');
+        $cache_product_list_job = (new CacheProductList())->onQueue('main');
 
         $schedule->job($cache_product_list_job)
                 ->everyTenMinutes();
 
-        $cache_product_list_job_in_rakhshs = (new CacheProductList())->onQueue('mainrakhsh')->onConnection('database_4');
+        // $cache_product_list_job_in_rakhshs = (new CacheProductList())->onQueue('mainrakhsh');
 
-        $schedule->job($cache_product_list_job_in_rakhshs)
-                ->everyFifteenMinutes();
+        // $schedule->job($cache_product_list_job_in_rakhshs)
+        //         ->everyFifteenMinutes();
 
-        $cache_buyAd_list_job = (new CacheBuyAdList())->onQueue('main')->onConnection('database_3');
+        $cache_buyAd_list_job = (new CacheBuyAdList())->onQueue('main');
 
         $schedule->job($cache_buyAd_list_job)
                 ->cron('*/7 * * * *');
@@ -110,7 +110,7 @@ class Kernel extends ConsoleKernel
             ->tuesdays()
             ->at('11:45');
 
-        $phone_number_auto_sending_job = (new SendPhoneNumberToBuyerIfConditionsIsSatisfied())->onQueue('fcm')->onConnection('database_2');
+        $phone_number_auto_sending_job = (new SendPhoneNumberToBuyerIfConditionsIsSatisfied())->onQueue('fcm');
         $schedule->job($phone_number_auto_sending_job)
                 ->hourlyAt(22)
                 ->between('6:00', '22:00');
@@ -140,7 +140,7 @@ class Kernel extends ConsoleKernel
         //                 ->dailyAt('20:13');
 
 
-        $user_automatic_blocking_job = (new MessagingAnomalyDetection())->onQueue('fcm')->onConnection('database_2');
+        $user_automatic_blocking_job = (new MessagingAnomalyDetection())->onQueue('fcm');
         $schedule->job($user_automatic_blocking_job)
                         // ->everyMinute();
                         ->cron('*/18 * * * *');
