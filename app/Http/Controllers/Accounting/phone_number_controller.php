@@ -218,7 +218,7 @@ class phone_number_controller extends Controller
         else{
             $this->insert_phone_number_view_log_record($viewer_user_id,$seller_id,'SELLER',$item,true);
         }
-        echo 'phone->' . $related_record->phone;
+        
         return  $related_record->phone;
     }
 
