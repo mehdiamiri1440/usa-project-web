@@ -155,7 +155,7 @@ class Kernel extends ConsoleKernel
                 ->at('00:47');
 
 
-        // $schedule->command('cache:clear-expired')->cron("45 3 * * *");
+        $schedule->command('cache:clear-expired')->cron("45 3 * * *");
 
 
         // $schedule->command('backup:clean')->daily()->at('12:27');
