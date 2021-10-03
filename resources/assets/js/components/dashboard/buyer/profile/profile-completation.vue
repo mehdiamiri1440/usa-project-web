@@ -88,11 +88,7 @@ p {
       فروشندگان این یک متن تستی است که باید ویرایش شود.
     </p>
     <div id="clone-box" class="hidden">
-      <div
-        v-if="!verification"
-        :class="{ 'ready-clone': !verification }"
-        data-merge="2"
-      >
+      <div v-if="!verification" :class="{ 'ready-clone': !verification }">
         <article class="item">
           <p class="title-item">
             <i class="fa fa-phone-square brand-text"></i>
@@ -111,7 +107,6 @@ p {
       <div
         v-if="$parent.profileDescription.length < 200"
         :class="{ 'ready-clone': $parent.profileDescription.length < 200 }"
-        data-merge="2"
       >
         <article class="item">
           <p class="title-item">
@@ -137,7 +132,6 @@ p {
       <div
         v-if="!$parent.currentUser.profile.profile_photo"
         :class="{ 'ready-clone': !$parent.currentUser.profile.profile_photo }"
-        data-merge="2"
       >
         <article class="item">
           <p class="title-item">
@@ -158,7 +152,6 @@ p {
       <div
         v-if="$parent.invitedUsers.length <= 0"
         :class="{ 'ready-clone': $parent.invitedUsers.length <= 0 }"
-        data-merge="2"
       >
         <article class="item">
           <p class="title-item">
@@ -267,35 +260,26 @@ export default {
           '<span class="fa fa-angle-left"></span>',
           '<span class="fa fa-angle-right"></span>',
         ],
-        mouseDrag: true,
         margin: 15,
         dots: true,
         stagePadding: 5,
         rtl: true,
         responsive: {
           0: {
+            items: 1,
+            stagePadding: 15,
+            nav: true,
+          },
+          580: {
             items: 2,
             stagePadding: 15,
-            loop: true,
-            nav: true,
-            dots: true,
-            mergeFit: true,
-          },
-          520: {
-            items: 3,
-            loop: true,
-            stagePadding: 15,
-            nav: true,
-            dots: true,
-            mergeFit: true,
           },
           1199: {
-            items: 6,
-            loop: true,
+            items: 3,
             stagePadding: 15,
           },
           1450: {
-            items: 8,
+            items: 4,
             stagePadding: 15,
           },
         },

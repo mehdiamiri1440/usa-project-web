@@ -1147,6 +1147,7 @@ export default {
       }).then((value) => {
         switch (value) {
           case "promote":
+            $('.modal').modal('hide')
             self.$router.push({ name: "dashboardPricingTableSeller" });
             break;
         }
@@ -1366,9 +1367,9 @@ export default {
   },
   mounted() {
     // eventBus.$emit("globalVerifiedBadgeContents", this.verifiedUserContent);
-    document.addEventListener("DOMContentLoaded", function (event) {
-      document.getElementById("master-loader-wrapper").style.display = "none";
-    });
+    // document.addEventListener("DOMContentLoaded", function (event) {
+    //   document.getElementById("master-loader-wrapper").style.display = "none";
+    // });
     this.activateDownloadAppButton();
     $("#wallet-modal").on("show.bs.modal", (e) => {
       this.handleBackKeys();
