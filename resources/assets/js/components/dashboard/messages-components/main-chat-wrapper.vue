@@ -685,31 +685,31 @@
   }
 }
 .scale-up-center-full {
-	-webkit-animation: scale-up-center-full 0.15s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
-            animation: scale-up-center-full 0.15s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
-            animation-delay: 0.15s;
-
+  -webkit-animation: scale-up-center-full 0.15s
+    cubic-bezier(0.39, 0.575, 0.565, 1) both;
+  animation: scale-up-center-full 0.15s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+  animation-delay: 0.15s;
 }
 @-webkit-keyframes scale-up-center-full {
-    0% {
-      -webkit-transform: scale(0.0);
-              transform: scale(0.0);
-    }
-    100% {
-      -webkit-transform: scale(1);
-              transform: scale(1);
-    }
+  0% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
   }
-  @keyframes scale-up-center-full {
-    0% {
-      -webkit-transform: scale(0.0);
-              transform: scale(0.0);
-    }
-    100% {
-      -webkit-transform: scale(1);
-              transform: scale(1);
-    }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
   }
+}
+@keyframes scale-up-center-full {
+  0% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
 .message-button-wrapper.link-button button.edit-button {
   background: #556080;
 }

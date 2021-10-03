@@ -105,6 +105,14 @@
   .promotion-image-wrapper {
     padding-top: 38px;
   }
+  .modal-dialog.modal-dialog-centered{
+    margin: 0;
+    height: 100%;
+  }
+  .modal-content{
+    height: 100%;
+width: 100%;
+  }
 }
 </style>
 
