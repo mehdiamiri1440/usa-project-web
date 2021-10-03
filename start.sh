@@ -20,7 +20,7 @@ elif [ "$role" = "queue" ]; then
     php /var/www/html/artisan config:cache
     php /var/www/html/artisan migrate 
     echo "Running the queue..."
-    php /var/www/html/artisan queue:work --verbose --tries=3 --timeout=90 --queue=default,sms,fcm
+    php /var/www/html/artisan queue:work --verbose --tries=3 --timeout=90 --queue=sms,fcm,default
 
 elif [ "$role" = "scheduler" ]; then
 
