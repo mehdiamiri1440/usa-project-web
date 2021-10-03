@@ -843,6 +843,28 @@
   float: right;
 }
 
+.delsa-message-item {
+  font-size: 12px;
+  margin: 0 10px;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.exclamation-alert {
+  width: 24px;
+  height: 24px;
+  border-radius: 20px;
+  border: none;
+  background: #f03738;
+  color: #fff;
+  text-align: center;
+  padding-top: 2px;
+  padding-right: 4px;
+  position: absolute;
+  right: calc(100% + 13px);
+  font-size: 12px;
+  top: calc(50% - 12px);
+}
+
 @media screen and (max-width: 1199px) {
   .message-wrapper .message-contact-title {
     position: relative;
@@ -1088,8 +1110,8 @@
             <i class="fa fa-times"></i>
           </button>
           <span>
-            شماره تماس شما به علت عدم موجودی کافی ، به خریدارن نمایش داده نمی
-            شود.
+            شماره تماس شما به علت عدم موجودی کیف پول شما، به خریدارن نمایش داده
+            نمی شود.
           </span>
         </div>
         <div class="actions-wrapper">
@@ -1119,6 +1141,7 @@
               {{ msg.created_at | moment("jYYYY/jMM/jDD") }}
             </span>
           </div> -->
+
           <div
             class="message-item-wrapper"
             :class="[
@@ -1127,6 +1150,21 @@
                 : 'message-receive',
             ]"
           >
+            <button
+              class="exclamation-alert"
+              data-toggle="modal"
+              data-target="#phone-locked-modal"
+              v-if="checkMessageListClass(msg.sender_id) && msg.phone_locked"
+            >
+              <i class="fa fa-exclamation"></i>
+            </button>
+            <span
+              class="delsa-message-item"
+              v-if="msg.p_id || msg.phone_locked"
+            >
+              ارسال شده توسط ربات خودکار دلسا
+            </span>
+
             <div
               v-if="msg.is_phone && !checkMessageListClass(msg.sender_id)"
               class="message-content-wrapper is-phone-active-wrapper"
