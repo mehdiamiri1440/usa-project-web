@@ -15,6 +15,7 @@ class admin_user_comment_controller extends Controller
                             ->join('myusers as a','a.id','=','user_comments.myuser_id')
                             ->join('myusers as b','b.id','=','user_comments.commenter_id')
                             ->where('confirmed',false)
+                            ->whereNotNull('user_comments.text')
                             ->select([
                                 'a.first_name as f_name',
                                 'a.last_name as l_name',
@@ -24,7 +25,8 @@ class admin_user_comment_controller extends Controller
                                 'user_comments.created_at',
                                 'user_comments.id as id',
                             ])
-                            ->get();
+                            ->orderBy('user_comments.created_at','desc')
+                            ->paginate(10);
 
         return view('admin_panel.userComment',[
             'comments' => $comments

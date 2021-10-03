@@ -1,15 +1,14 @@
 <style scoped>
+@import url("../../../../../../css/owl.carousel.min.css");
+@import url("../../../../../../css/magnific-popup.css");
+@import url("../../../../../../css/owl-product-items-style.css");
 div,
 p,
 span {
   line-height: 1.5em;
 }
 #main {
-  padding-top: 160px;
-}
-
-.main-content {
-  margin-bottom: 30px;
+  padding-top: 120px;
 }
 
 .main-content > h4 {
@@ -25,6 +24,32 @@ span {
   width: initial;
   font-size: 16px;
   padding: 8px 20px;
+  border-radius: 8px;
+}
+
+.bread-crumbs-wrapper {
+  margin: 3px auto 11px;
+  height: 25px;
+}
+
+.bread-crumbs-wrapper a {
+  color: #999;
+  font-size: 14px;
+  margin-left: 5px;
+}
+
+.bread-crumbs-wrapper span {
+  color: #bbb;
+  font-size: 14px;
+}
+
+.bread-crumbs-wrapper a i {
+  margin-right: 2px;
+  font-size: 11px;
+}
+
+.bread-crumbs-wrapper a:hover {
+  color: #555;
 }
 
 .box-content {
@@ -33,8 +58,9 @@ span {
   padding: 0;
   text-align: center;
   padding-bottom: 10px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
-  border-radius: 4px;
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
+  min-height: 212px;
 }
 
 .title-box {
@@ -60,34 +86,21 @@ span {
   padding: 9px 22px 6px;
 }
 
-.title-section {
+.box-title {
+  font-size: 18px;
+  color: #313a43;
   direction: rtl;
-  margin-bottom: 8px;
+  margin: 30px 0 15px;
 }
 
-.title-section h3 {
-  font-size: 16px;
-  color: #00c569;
-  float: right;
-}
-
-.title-section hr {
-  margin: 15px 15px 10px auto;
-  position: relative;
-}
-
-.title-section hr::after {
+.box-title::after {
   content: " ";
-  height: 3px;
-  width: 50px;
+  width: 100px;
+  height: 4px;
   background: #00c569;
-  position: absolute;
-  top: -4px;
-  right: 0;
-}
-
-.section-wrapper {
-  margin-top: 30px;
+  display: block;
+  border-radius: 5px;
+  margin-top: 10px;
 }
 
 .section-wrapper .title-box {
@@ -105,6 +118,8 @@ span {
   padding: 5px;
   box-shadow: 0 -6px 15px rgba(0, 0, 0, 0.16);
   background: #fff;
+  display: flex;
+  height: 59px;
 }
 
 .fix-send-message-wrapper button {
@@ -112,12 +127,169 @@ span {
   border-radius: 6px;
   margin: 0;
   font-size: 18px;
+  padding: 10px 15px;
+}
+
+.fix-send-message-wrapper button.disable {
+  background: #e0e0e0;
+}
+
+button.send-message-button {
+  background: none;
+  border-radius: 8px;
+  border: 1px solid #404b55;
+  color: #404b55;
+  transition: 300ms;
+  margin-right: 10px;
+}
+
+.send-message-button:hover {
+  background: none;
+  border-radius: 8px;
+  border: 1px solid #404b55;
+  background: #404b55;
+  color: #fff;
+  transition: 300ms;
+}
+
+/* 
+---------------------------------------------------------------------------------
+
+ modal styles
+*/
+
+.modal-content {
+  overflow: hidden;
+  border-radius: 12px;
+}
+.close-modal {
+  font-size: 20px;
+
+  color: #777;
+
+  position: absolute;
+
+  right: 0;
+
+  padding: 8px 15px 2px;
+
+  top: 0;
+}
+
+.modal-title {
+  font-size: 16px;
+
+  font-weight: 800;
+
+  color: #474747;
+
+  text-align: center;
+}
+
+.modal-header {
+  padding: 9px 15px 10px;
+}
+
+.modal-body {
+  padding: 0 15px;
+}
+
+.default-carousel-item .box-content {
+  margin-bottom: 15px;
+}
+
+.spinner-border {
+  width: 1.5rem;
+  height: 1.5rem;
+  top: -8px;
+  position: relative;
+  left: 2px;
+}
+
+.main-content-wrapper {
+  max-width: 1336px;
+}
+
+.product-section-wrapper {
+  width: calc(100% - 400px);
+}
+
+.user-section-wrapper {
+  padding: 0;
+  max-width: 370px;
+}
+
+.section-wrapper .title-box {
+  text-align: center;
+
+  margin-top: 35px;
+}
+
+.section-wrapper {
+  border-top: 1px solid #e0e0e0;
+}
+
+.default-grid {
+  padding: 0 3px;
+}
+
+.default-grid .default-main-article-content {
+  width: 100%;
+}
+.default-grid .default-wrapper-main-image {
+  width: 100%;
+  height: 160px;
+}
+.default-grid > div {
+  padding: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #f0f0f1;
+}
+
+.default-grid .default-article-contents {
   padding: 15px;
 }
 
+.related-product,
+.default-related-product {
+  margin-top: 70px;
+  padding-bottom: 120px;
+}
+
+.tag-item {
+  background: #f2f2f2;
+  border: 1px solid #e0e0e0;
+  color: #313942;
+  border-radius: 12px;
+  padding: 8px 27px;
+  margin-left: 10px;
+  display: inline-block;
+  margin-bottom: 15px;
+}
+
+.tag-item:hover {
+  background: #e0e0e0;
+}
+
+.data-tag-wrapper {
+  margin-top: 50px;
+}
+
 @media screen and (max-width: 1199px) {
+  .product-section-wrapper {
+    width: 100%;
+  }
+  .user-section-wrapper {
+    max-width: initial;
+  }
   .default-carousel-item:last-of-type {
     display: none;
+  }
+
+  .bread-crumbs-wrapper {
+    padding: 0 15px;
+    margin: 11px auto;
   }
 }
 
@@ -125,145 +297,254 @@ span {
   .default-carousel-item:nth-child(3) {
     display: none;
   }
+  .fix-send-message-wrapper {
+    bottom: 59px;
+  }
 }
 
 @media screen and (max-width: 767px) {
-  #main {
-    padding-top: 56px;
+  .box-title {
+    padding: 0 10px;
   }
+  .bread-crumbs-wrapper a {
+    font-size: 12px;
+  }
+
+  .main-content-wrapper {
+    padding: 0 15px !important;
+  }
+
+  #main {
+    padding-top: 94px;
+  }
+
+  .main-product-wrapper {
+    border-radius: 0;
+  }
+}
+
+@media screen and (max-width: 450px) {
   .default-carousel-item {
     display: none;
   }
 
   .default-carousel-item:first-of-type {
     display: block;
+    width: 100%;
   }
 }
 </style>
 
 <template>
-  <div class="container">
+  <div class="container-fluid padding-0-30 main-content-wrapper">
+    <RegisterModal
+      v-if="!currentUser.user_info"
+      :is-chat="isChat"
+      :product="product"
+    />
     <main id="main" class="row">
-      <div class="col-xs-12 col-lg-9 pull-right">
-        <section class="main-content">
-          <div class="row">
-            <ProductContents />
+      <div class="col-xs-12">
+        <div class="row">
+          <div class="text-rtl text-right bread-crumbs-wrapper">
+            <div v-if="breadCrumbs">
+              <router-link :to="{ name: 'productList' }">
+                همه دسته ها
+                <i class="fa fa-angle-left"></i>
+              </router-link>
+
+              <router-link
+                v-for="(item, index) in breadCrumbs"
+                :key="index"
+                :to="getSubCategoryUrl(item)"
+              >
+                {{ item }}
+                <i class="fa fa-angle-left"></i>
+              </router-link>
+              <span v-text="product.main.product_name"></span>
+            </div>
           </div>
-        </section>
-      </div>
-
-      <div class="col-xs-12 col-lg-3 pull-left">
-        <UserInfo />
-      </div>
-
-      <section
-        v-if="relatedProducts.length > 0 && isLoading == false"
-        id="product-section"
-        class="section-wrapper container-fluid latest-product"
-      >
-        <div class="container">
-          <div class="row">
-            <div class="col-xs-12">
-              <div class="title-section col-xs-12">
-                <div class="row">
-                  <h3>محصولات مرتبط</h3>
-                  <hr />
-                </div>
+          <div class="col-xs-12 col-lg-8 product-section-wrapper pull-right">
+            <section class="main-content">
+              <div class="row">
+                <ProductContents />
               </div>
+            </section>
+            <div
+              class="
+                col-xs-12 col-lg-4
+                hidden-lg
+                user-section-wrapper
+                pull-left
+              "
+            >
+              <div class="row">
+                <UserInfo v-if="checkIsMobile()" />
+              </div>
+            </div>
+            <UserData />
+          </div>
 
-              <div class="col-xs-12 products-contents">
-                <div class="row">
-                  <div class="owl-carousel">
-                    <ProductCarousel
-                      v-for="(product, index) in relatedProducts"
-                      :key="index"
-                      :img="str + '/thumbnails/' + product.photo"
-                      :title="product.product_name"
-                      :stock="product.stock"
-                      :link="getRelatedProductUrl(product)"
-                      column="4"
-                    />
+          <aside
+            class="
+              col-xs-12 col-lg-4
+              hidden-xs hidden-sm hidden-md
+              user-section-wrapper
+              pull-left
+            "
+          >
+            <UserInfo v-if="!checkIsMobile()" />
+          </aside>
+        </div>
+      </div>
+
+      <div
+        id="related-products-wrapper"
+        class="section-wrapper col-xs-12 related-product"
+        :class="{ 'default-related-product': !isRelatedProducts }"
+      >
+        <div v-show="isRelatedProducts">
+          <div class="row">
+            <h3 class="box-title">محصولات مرتبط</h3>
+            <RelatedProducts />
+          </div>
+        </div>
+
+        <div v-if="!isRelatedProducts" class="row">
+          <h3 class="box-title">محصولات مرتبط</h3>
+          <div>
+            <div
+              v-for="(defaultItem, index) in 12"
+              :key="index"
+              class="
+                default-items
+                col-xs-6 col-sm-4 col-md-3 col-lg-2
+                default-grid
+              "
+            >
+              <div
+                class="
+                  col-xs-12
+                  margin-15-0
+                  default-item-wrapper default-main-wrapper
+                "
+              >
+                <div class="default-wrapper-main-image pull-right">
+                  <span class="default-main-image placeholder-content"></span>
+                </div>
+
+                <div
+                  class="
+                    default-article-contents
+                    padding-0
+                    margin-top-10
+                    col-xs-12
+                  "
+                >
+                  <div class="default-main-article-content">
+                    <span class="content-half-width placeholder-content"></span>
+
+                    <span
+                      class="content-default-width placeholder-content"
+                    ></span>
+                    <span
+                      class="
+                        placeholder-content
+                        default-button-full-with
+                        pull-left
+                        mobile-hidden
+                      "
+                    ></span>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </section>
-
-      <section
-        v-else-if="relatedProducts.length == 0 && isLoading == true"
-        class="section-wrapper container-fluid"
-      >
-        <div class="container">
-          <div class="row">
-            <div class="col-xs-12">
-              <div class="title-section col-xs-12">
-                <span class="placeholder-content content-full-width"></span>
-                <br />
-              </div>
-
-              <div class="col-xs-12 products-contents">
-                <div class="row">
-                  <div
-                    v-for="(item, index) in 4"
-                    :class="{ 'hidden-xs': index >= 2 }"
-                    class="col-lg-3 col-md-4 col-sm-6 col-xs-12 default-carousel-item"
-                  >
-                    <article class="carousel-item box-content col-xs-12">
-                      <span
-                        class="default-index-product-image placeholder-content col-xs-12"
-                      ></span>
-
-                      <span
-                        class="content-default-width placeholder-content margin-10 col-xs-10 col-xs-offset-1"
-                      ></span>
-
-                      <span
-                        class="content-default-width placeholder-content col-xs-8 col-xs-offset-2"
-                      ></span>
-
-                      <span class="margin-10"></span>
-                    </article>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <div class="buttons-wrapper col-xs-12">
-        <router-link
-          :to="{ name: 'productList' }"
-          class="green-button blue-button"
-          >مشاهده همه محصولات</router-link
-        >
       </div>
 
-      <register-inquer-form
-        v-if="showRegisterRequestBox"
-        wrapper-bg="true"
-        :str="str"
-        :user-profile-info="product.user_info"
-        :user-profile-photo="
-          product.profile_info.profile_photo
-            ? str + '/' + product.profile_info.profile_photo
-            : assets + 'assets/img/user-defult.png'
-        "
-      />
+      <div class="col-xs-12" id="related-categories">
+        <div class="data-tag-wrapper text-rtl" v-if="dataTags.length">
+          <router-link
+            class="tag-item"
+            v-for="(tag, index) in dataTags"
+            :key="index"
+            v-text="tag"
+            :to="{
+              name: 'productCategory',
+              params: {
+                categoryName: convertCategoryname(tag),
+              },
+            }"
+          ></router-link>
+        </div>
+      </div>
 
       <div
         v-if="product.main.product_name && !isMyProfile"
-        class="fix-send-message-wrapper hidden-lg hidden-md hidden-sm"
+        class="fix-send-message-wrapper hidden-lg hidden-md"
       >
         <button
-          v-if="!isMyProfile"
+          v-if="!isMyProfile && currentUser.user_info"
           @click.prevent="openChat(product)"
-          class="green-button"
+          :class="{
+            'send-message-button':
+              product.user_info.has_phone && currentUser.user_info.is_buyer,
+            'green-button bg-gradient-green':
+              !product.user_info.has_phone ||
+              (product.user_info.has_phone && currentUser.user_info.is_seller),
+          }"
         >
-          استعلام قیمت
-          <i class="fa fa-envelope"></i>
+          <span
+            v-if="product.user_info.has_phone && currentUser.user_info.is_buyer"
+          >
+            چت
+          </span>
+          <span v-else> چت با فروشنده </span>
+
+          <i class="fas fa-comment-alt"></i>
+        </button>
+        <button
+          v-else-if="!currentUser.user_info"
+          @click.prevent="loginModal(true)"
+          :class="{
+            'send-message-button': product.user_info.has_phone,
+            'green-button bg-gradient-green': !product.user_info.has_phone,
+          }"
+        >
+          <span v-if="product.user_info.has_phone"> چت </span>
+          <span v-else> چت با فروشنده </span>
+          <i class="fas fa-comment-alt"></i>
+        </button>
+        <button
+          v-if="
+            !isMyProfile &&
+            currentUser.user_info &&
+            product.user_info.has_phone &&
+            currentUser.user_info.is_buyer
+          "
+          @click.prevent="activePhoneCall(true)"
+          class="green-button bg-gradient-green"
+          :class="{ disable: isActivePhone }"
+          :disabled="isActivePhone"
+        >
+          اطلاعات تماس
+          <i class="fas fa-phone-square-alt" v-if="!getPhoneLoader"></i>
+          <div v-else class="spinner-border">
+            <span class="sr-only"></span>
+          </div>
+        </button>
+        <button
+          v-else-if="!currentUser.user_info && product.user_info.has_phone"
+          @click.prevent="loginModal(false)"
+          class="green-button bg-gradient-green"
+          :class="{ disable: isActivePhone }"
+          :disabled="isActivePhone"
+        >
+          اطلاعات تماس
+          <i class="fas fa-phone-square-alt" v-if="!getPhoneLoader"></i>
+          <div v-else class="spinner-border">
+            <span class="sr-only"></span>
+          </div>
         </button>
       </div>
       <div
@@ -278,25 +559,30 @@ span {
 
 <script>
 import { eventBus } from "../../../../../router/router";
-import ProductCarousel from "../../main_components/product-list-carousel";
+
 import ProductContents from "./product";
 import UserInfo from "./user_info";
-import registerInquerForm from "../../main_components/register-inquiry-form.vue";
+import UserData from "./User-data";
+import RelatedProducts from "./related-products.vue";
+import RegisterModal from "../../main_components/register-modal";
+import swal from "../../../../../sweetalert.min.js";
+import StickySidebar from "../../../../../stickySidebar.js";
+// import registerInquerForm from "../../main_components/register-inquiry-form.vue";
+import { isElementShownInView } from "../../../../../custom";
 
 export default {
   components: {
     ProductContents,
     UserInfo,
-    ProductCarousel,
-    registerInquerForm,
+    UserData,
+    RegisterModal,
+    RelatedProducts,
+    // registerInquerForm,
   },
-  props: ["str", "assets", "userType"],
+  props: ["str", "assets", "userType", "categoryList", "currentUser"],
   data: function () {
     return {
-      currentUser: {
-        profile: "",
-        user_info: "",
-      },
+      isChat: true,
       product: {
         main: {
           category_name: "",
@@ -308,7 +594,7 @@ export default {
         },
         photos: [],
       },
-      relatedProducts: "",
+      isRelatedProducts: false,
       relatedLoad: false,
       errors: "",
       popUpMsg: "",
@@ -318,54 +604,58 @@ export default {
       showRegisterRequestBox: true,
       starScore: "",
       verifiedUserContent: this.$parent.verifiedUserContent,
+      categoryUrl: "",
+      isActivePhone: false,
+      userPhone: "",
+      getPhoneLoader: false,
+      breadCrumbs: "",
+      dataTags: "",
     };
   },
   methods: {
-    init: function () {
+    init() {
+      this.scrollToTop();
+      if (!this.product.user_info && !this.isLoading) {
+        this.checkCurrentUser();
+      }
+    },
+    checkCurrentUser() {
       this.isLoading = true;
       var self = this;
-      axios.post("/user/profile_info").then(function (response) {
-        self.currentUser = response.data;
+      let userId = getUserId();
 
-        if (self.currentUser.user_info) {
-          if (self.currentUser.user_info.is_seller == true) {
-            self.showRegisterRequestBox = false;
-          }
+      if (this.currentUser && this.currentUser.user_info) {
+        if (this.currentUser.user_info.is_seller == true) {
+          this.showRegisterRequestBox = false;
         }
-
-        axios
-          .post("/get_product_by_id", {
-            product_id: self.$route.params.id,
-          })
-          .then(function (response) {
-            self.product = response.data.product;
-            self.starScore = Math.floor(
-              self.product.user_info.review_info.avg_score
-            );
-            if (self.currentUser.user_info) {
-              if (
-                self.currentUser.user_info.id === self.product.main.myuser_id
-              ) {
-                self.isMyProfile = true;
-                self.$emit("isMyProfile", self.isMyProfile);
-              }
+      }
+      axios
+        .post("/get_product_by_id", {
+          product_id: self.$route.params.id,
+        })
+        .then(function (response) {
+          self.product = response.data.product;
+          self.getRelatedCategories(self.product.main.sub_category_id);
+          if (userId) {
+            if (userId === self.product.main.myuser_id) {
+              self.isMyProfile = true;
+              self.$emit("isMyProfile", self.isMyProfile);
             }
+          }
+          self.categoryUrl = "/product-list/category/" + self.getCategoryName();
+          self.starScore = Math.floor(
+            self.product.user_info.review_info.avg_score
+          );
 
-            axios
-              .post("/get_related_products", {
-                product_id: self.product.main.id,
-              })
-              .then(function (response) {
-                self.relatedProducts = response.data.related_products;
-                self.isLoading = false;
-              });
-          })
-          .catch(function (err) {
-            window.location.href = "/404";
-          });
-      });
+          self.sidebarScroll();
+          self.getBreadCrumbs();
+        })
+        .catch(function (err) {
+          window.location.href = "/404";
+        });
     },
-    openChat: function (product) {
+    openChat(product) {
+      this.isChat = true;
       this.registerComponentStatistics(
         "product",
         "openChat",
@@ -381,6 +671,7 @@ export default {
         profile_photo: product.profile_info.profile_photo,
         user_name: product.user_info.user_name,
         product_name: productName,
+        product_id: product.main.id,
       };
 
       var self = this;
@@ -398,10 +689,16 @@ export default {
       } else {
         window.localStorage.setItem("contact", JSON.stringify(contact));
 
-        this.$router.push({ name: "registerInquiry" });
+        // this.$router.push({ name: "registerInquiry" });
+        eventBus.$emit("modal", "sendMsg");
       }
     },
-    openChatModal: function (product) {
+    loginModal(isChat) {
+      this.isChat = isChat;
+      $("#register-modal").modal("show");
+    },
+    openChatModal(product) {
+      this.isChat = true;
       this.registerComponentStatistics(
         "product",
         "openChat",
@@ -414,6 +711,7 @@ export default {
         last_name: product.user_info.last_name,
         profile_photo: product.profile_info.profile_photo,
         user_name: product.user_info.user_name,
+        product_id: product.main.id,
       };
 
       var self = this;
@@ -434,17 +732,89 @@ export default {
         eventBus.$emit("modal", "sendMsg");
       }
     },
-    registerComponentStatistics: function (
-      categoryName,
-      actionName,
-      labelName
-    ) {
+    activePhoneCall(isModal) {
+      this.isChat = false;
+      this.getPhoneLoader = true;
+      this.isActivePhone = true;
+      axios
+        .post("/get_seller_phone_number", {
+          s_id: this.product.user_info.id,
+          p_id: this.$route.params.id,
+          item: "PRODUCT",
+        })
+        .then((response) => {
+          if (isModal) {
+            this.$nextTick(() => {
+              this.userPhone = response.data.phone;
+              this.getPhoneLoader = false;
+
+              this.handleBackKeys();
+
+              var buskoolInfo = document.createElement("div");
+              buskoolInfo.className = "phone-number-wrapper";
+              buskoolInfo.innerHTML = `<a href="tel:${this.userPhone}" class="phone-number">
+                        <p>
+                          <i class="fa fa-phone-square-alt"></i>
+                          ${this.userPhone}
+                        </p>
+                        <p>شماره تماس</p>
+                      </a>
+                      <div class="warning-wrapper">
+                        <p class="warning-title">
+                          <i class="fa fa-exclamation-circle"></i>
+
+                           هشدار پلیس 
+          </p>
+          <p class="warning-text">
+            لطفاً پیش از انجام معامله و هر نوع پرداخت وجه، از صحت کالا یا خدمات ارائه شده، به صورت حضوری اطمینان حاصل نمایید. 
+          </p>
+                      </div>`;
+
+              swal({
+                content: buskoolInfo,
+                className: "custom-swal-with-cancel",
+                buttons: {
+                  close: {
+                    text: "بستن",
+                    className: "bg-cancel",
+                  },
+                },
+              }).then((value) => {
+                this.isActivePhone = false;
+              });
+            });
+          } else {
+            this.$nextTick(() => {
+              this.userPhone = response.data.phone;
+              $("#phone-number-wrapper").collapse("show");
+              this.getPhoneLoader = false;
+            });
+          }
+        })
+        .catch((error) => {
+          this.getPhoneLoader = false;
+          this.isActivePhone = false;
+
+          swal({
+            text: error.response.data.msg,
+            icon: "warning",
+            className: "custom-swal-with-cancel",
+            buttons: {
+              close: {
+                text: "بستن",
+                className: "bg-cancel",
+              },
+            },
+          });
+        });
+    },
+    registerComponentStatistics(categoryName, actionName, labelName) {
       gtag("event", actionName, {
         event_category: categoryName,
         event_label: labelName,
       });
     },
-    getProductUrl: function () {
+    getProductUrl() {
       return (
         "/product-view/خرید-عمده-" +
         this.product.main.sub_category_name.replace(" ", "-") +
@@ -454,16 +824,17 @@ export default {
         this.product.main.id
       );
     },
-    copyProductLinkToClipBoard: function () {
-      this.registerComponentStatistics(
-        "product",
-        "copy-product-link",
-        "click on copy poduct link"
-      );
-
+    shareMyProfile() {
+      let baseUrl = getBase();
+      baseUrl = baseUrl.substring(0, baseUrl.length - 1);
       if (this.isDeviceMobile()) {
+        this.registerComponentStatistics(
+          "product",
+          "copy-product-link",
+          "click on copy poduct link"
+        );
         var linkElement = document.createElement("a");
-        var Message = "https://buskool.com" + this.getProductUrl();
+        var Message = baseUrl + this.getProductUrl();
         var messageToWhatsApp = encodeURIComponent(Message);
         var url = "whatsapp://send?text=" + messageToWhatsApp;
 
@@ -476,23 +847,15 @@ export default {
 
         document.body.removeChild(linkElement);
       } else {
-        var input = document.createElement("input");
-        input.setAttribute(
-          "value",
-          "https://buskool.com" + this.getProductUrl()
-        );
-        document.body.appendChild(input);
-        input.select();
-        var result = document.execCommand("copy");
-        document.body.removeChild(input);
-        if (result) {
-          this.popUpMsg = "آدرس محصول کپی شد.";
-          eventBus.$emit("submitSuccess", this.popUpMsg);
-          $("#custom-main-modal").modal("show");
-        }
+        let url = baseUrl + this.getProductUrl();
+        let shareItem = {
+          shareModalUrl: url,
+          shareModalText: "",
+        };
+        eventBus.$emit("shareModalUrl", shareItem);
       }
     },
-    isDeviceMobile: function () {
+    isDeviceMobile() {
       if (
         navigator.userAgent.match(/Android/i) ||
         navigator.userAgent.match(/webOS/i) ||
@@ -507,7 +870,7 @@ export default {
         return false;
       }
     },
-    toLatinNumbers: function (num) {
+    toLatinNumbers(num) {
       if (num == null) {
         return null;
       }
@@ -525,7 +888,7 @@ export default {
           return c.charCodeAt(0) - 0x06f0;
         });
     },
-    editProduct: function (getProductWrapper) {
+    editProduct(getProductWrapper) {
       this.submiting = true;
       this.errors = "";
 
@@ -576,10 +939,10 @@ export default {
           // self.registerComponentExceptions('Product-component: validation errors in edit product API');
         });
     },
-    stopLoader: function () {
+    stopLoader() {
       eventBus.$emit("isLoading", false);
     },
-    getRelatedProductUrl: function (product) {
+    getRelatedProductUrl(product) {
       return (
         "/product-view/خرید-عمده-" +
         product.subcategory_name.replace(" ", "-") +
@@ -589,16 +952,99 @@ export default {
         product.id
       );
     },
-    elevatorEvent: function () {
+    elevatorEvent() {
       // eventBus.$emit("elevatorText", "با استفاده از نردبان، محصول شما تا زمان دریافت محصول تازه تر در همان دسته بندی، به عنوان اولین محصول نمایش داده می‌شود.");
 
-      eventBus.$emit("productId", this.product.main.id);
-      eventBus.$emit("modal", "elevator");
-      // $("#elevator-modal").modal("show")
+      // eventBus.$emit("productId", this.product.main.id);
+      // eventBus.$emit("modal", "elevator");
+      let paymentData = {
+        paymentName: "elevatorPricingData",
+        productId: this.product.main.id,
+        totalPrice: "25000",
+      };
+      eventBus.$emit("peymentMethodData", paymentData);
+      $("#payment-type-modal").modal("show");
     },
-    inquiry: function () {
+    inquiry() {
       //eventBus.$emit("productUserInfo", this.product);
       this.$router.push({ name: "registerinquiry" });
+    },
+    getConvertedNumbers(number) {
+      if (number || typeof number === "number") {
+        let data = number / 1000;
+        if (number < 1000) {
+          return number + " " + "کیلوگرم";
+        } else {
+          return data + " " + "تن";
+        }
+      } else return "";
+    },
+    getCategoryName() {
+      let name = this.product.main.sub_category_name;
+
+      return name ? name.split("-").join(" ") : "";
+    },
+    convertCategoryname(name) {
+      return name ? name.toString().split("-").join(" ") : "";
+    },
+    handleBackKeys() {
+      if (window.history.state) {
+        history.pushState(null, null, window.location);
+      }
+      $(window).on("popstate", function (e) {
+        $(".modal").modal("hide");
+      });
+    },
+    closePhoneModal() {
+      $(".modal").modal("hide");
+    },
+    getBreadCrumbs() {
+      let items = [];
+
+      items.push(this.product.main.super_category_name);
+      items.push(this.product.main.category_name);
+      items.push(this.product.main.sub_category_name);
+
+      this.breadCrumbs = items;
+    },
+    getSubCategoryUrl(category) {
+      let url = "/product-list/category/" + category.split(" ").join("-");
+      return url;
+    },
+    sidebarScroll() {
+      $("aside").StickySidebar({
+        additionalMarginTop: 157,
+      });
+    },
+    checkIsMobile() {
+      let pageWidth = window.outerWidth;
+      if (pageWidth <= 1199) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    getRelatedCategories(categroyId) {
+      isElementShownInView(
+        "#related-categories",
+        (isInView) => {
+          if (isInView) {
+            axios
+              .post("/get_related_categories", {
+                category_id: categroyId,
+                category_name: this.getCategoryName(),
+              })
+              .then((response) => {
+                this.dataTags = response.data.category_names;
+                this.isLoading = false;
+              });
+          }
+        },
+        100
+      );
+    },
+    scrollToTop() {
+      window.scrollTo(0, 0);
     },
   },
   created() {
@@ -652,16 +1098,16 @@ export default {
     //
     return {
       title:
-        productOwnerFullName +
-        " " +
-        "خرید و فروش عمده و قیمت " +
+        "خرید و قیمت " +
         productSubCategory +
         " " +
         productName +
-        " " +
+        " عمده " +
         productCity +
         " " +
-        productProvince,
+        productProvince +
+        " " +
+        productOwnerFullName,
       titleTemplate: "%s | باسکول",
       meta: [
         {
@@ -696,7 +1142,8 @@ export default {
         },
         {
           property: "og:site_name",
-          content: "باسکول بازارآنلاین خرید و فروش محصولات کشاورزی ایران",
+          content:
+            "باسکول بازارآنلاین خرید و فروش محصولات غذایی و کشاورزی ایران",
         },
         {
           property: "og:title",

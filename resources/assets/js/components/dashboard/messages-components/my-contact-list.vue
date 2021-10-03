@@ -1,7 +1,6 @@
 <style scoped>
 .contact-body .contact-search {
-  padding: 9px 0 0;
-  background: #eef3f3;
+  background: #f0f0f0;
   position: absolute;
   left: 0;
   right: 0;
@@ -9,7 +8,7 @@
 }
 
 .contact-items {
-  padding-top: 95px;
+  padding-top: 102px;
 }
 
 .contact-items.is-buyer-list {
@@ -18,26 +17,37 @@
 
 .contact-body .contact-search .contact-search-input-wrapper {
   position: relative;
-  padding: 0 7px;
-  margin-bottom: 5px;
+  padding: 10px 7px;
 }
 
-.contact-body .contact-search .contact-search-input-wrapper i {
+.contact-body .contact-search .contact-search-input-wrapper > i {
   position: absolute;
-  left: 15px;
-  font-size: 20px;
-  color: #c1c1c1;
-  top: 11px;
+  right: 20px;
+  font-size: 16px;
+  color: #919191;
+  top: 21px;
 }
 
 .contact-body .contact-search .contact-search-input-wrapper input {
-  padding: 9px 15px;
+  padding: 8px 40px 8px 15px;
   border-radius: 50px;
   background: #fff;
   border: none;
 }
 
-.contact-body .contact-image {
+.contact-body .contact-search .contact-search-input-wrapper > button {
+  position: absolute;
+  left: 7px;
+  font-size: 16px;
+  color: #919191;
+  top: 12px;
+  background: none;
+  border: none;
+  padding: 7px 15px 1px;
+}
+
+.contact-body .contact-image,
+.contact-body .channel-image {
   width: 45px;
   height: 45px;
   float: right;
@@ -47,29 +57,27 @@
   position: relative;
 }
 
-.contact-body .contact-image img {
-  position: absolute;
-  left: 50%;
-  top: 50%;
+.contact-body .channel-image img {
+  width: 100%;
   height: 100%;
-  width: initial;
-  transform: translate(-50%, -50%);
 }
 
 .contact-body .contact-item a {
   font-size: 13px;
-  color: #595959;
+  color: #666;
   overflow: hidden;
   padding: 10px 7px;
-  border-bottom: 1px solid #b6b6b6;
+  border-bottom: 1px solid #ededed;
   display: block;
   transition: 200ms;
+  border-left: 2px solid #fff;
 }
 
 .contact-body .contact-item a:hover,
 .contact-body .contact-item a.active {
-  background: #f6f6f6;
+  background: #fafafa;
   transition: 200ms;
+  border-left: 2px solid #00c569;
 }
 
 .contact-body .contact-item:last-of-type a {
@@ -78,14 +86,21 @@
 
 .contact-body .contact-item span.contact-name {
   float: right;
-  font-weight: bold;
+  position: relative;
+  font-size: 14px;
+  max-width: calc(100% - 85px);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: right;
+  font-weight: 500;
 }
 
 .contact-body .contact-item span.contact-last-message {
   float: right;
   width: calc(100% - 60px);
   font-weight: lighter;
-  font-size: 12px;
+  font-size: 14px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -101,7 +116,8 @@
   text-align: center;
 }
 
-.contact-body .contact-item .my-contact-info-wrapper {
+.contact-body .contact-item .my-contact-info-wrapper,
+.contact-body .contact-item .my-channel-name-wraopper {
   float: right;
   padding-top: 6px;
   direction: ltr;
@@ -110,11 +126,22 @@
   padding-right: 15px;
 }
 
+.contact-body .contact-item .my-channel-name-wraopper {
+  padding-top: 15px;
+}
+
+.contact-body .contact-item .my-channel-name-wraopper .icon-wrapper {
+  font-size: 16px;
+  color: #999;
+  float: left;
+  margin-left: 15px;
+}
+
 .last-message-date {
   display: inline-block;
   height: 17px;
-  width: 60px;
-  font-size: 10px;
+  width: 70px;
+  font-size: 12px;
   line-height: 2;
   text-align: center;
 }
@@ -134,16 +161,16 @@
   float: left;
   text-align: center;
 }
-.not-found-item {
+.empty-list {
   text-align: center;
-  padding: 100px 15px 0;
+  padding: 10px 15px 0;
 }
-.not-found-item p {
+.empty-list p {
   font-size: 16px;
   font-weight: bold;
   color: #777;
 }
-.not-found-item i {
+.empty-list i {
   margin: 5px;
 }
 
@@ -161,16 +188,24 @@
   width: 100%;
 }
 
+.verified-user {
+  line-height: 1;
+  font-size: 15px;
+  position: relative;
+  right: 3px;
+  top: -2px;
+  float: right;
+}
+
 .verified-user::before {
-  top: 3px;
+  top: 4px;
   left: 3px;
+  font-size: 9px;
 }
 
 .contacts-switch-buttons-wrapper {
   float: right;
   width: 100%;
-  background: #eef3f3;
-  border-bottom: 3px solid #e3e3e3;
 }
 
 .contacts-switch-buttons-wrapper .switch-button-item {
@@ -182,9 +217,10 @@
   border: none;
   width: 100%;
   font-size: 13px;
-  font-weight: bold;
   padding: 8px 0;
   position: relative;
+  color: #666;
+  background: #f0f0f0;
 }
 
 .contacts-switch-buttons-wrapper .contact-button .fa-plus {
@@ -203,19 +239,22 @@
   z-index: 1;
 }
 
-.total-unread-messages-badge {
-  position: absolute;
-  top: -3px;
-  background: red;
-  height: 20px;
-  width: 29px;
-  color: #fff;
-  border-radius: 10px;
-  left: 5px;
-  font-size: 11px;
-  line-height: 1;
-  padding-top: 4px;
+i.fa-star {
+  font-size: 16px;
+  background: linear-gradient(
+    21deg,
+    rgb(199, 168, 79) 0%,
+    rgb(249, 242, 159) 51%,
+    rgb(199, 168, 79) 100%
+  );
+  background-clip: border-box;
+  background-clip: border-box;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: relative;
+  top: 2px;
 }
+
 .contact-button.active {
   border-radius: 4px 4px 0 0;
 }
@@ -260,97 +299,66 @@
   width: calc(100% - 45px);
   padding-right: 8px;
 }
-
-.buyad-button p {
-  background: #00c569;
-  color: #fff;
-  border-radius: 4px;
-  padding: 3px;
-  max-width: 150px;
-  margin: 7px auto 15px;
-  transition: 300ms;
+.contact-body .contact-item .my-contact-info-wrapper:last-of-type {
+  padding-top: 6px;
 }
 
-.buyad-button p:hover {
-  background: #00c569;
-  transition: 300ms;
-}
-
-.buyad-button.disable p {
-  background: #dddddd;
-  transition: 300ms;
-}
-.user-not-fount i {
+.empty-list i {
+  color: #777;
   margin-top: 50px;
   font-size: 50px;
+  text-align: center;
   margin-bottom: 10px;
   display: block;
 }
+
+.empty-list p:first-of-type {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.618;
+  margin-top: 11px;
+}
+
+.user-button {
+  background: #00c569;
+  color: #fff;
+  border-radius: 4px;
+  padding: 8px 0;
+  max-width: 200px;
+  margin: 15px auto;
+  transition: 300ms;
+  display: block;
+  border: none;
+  width: 100%;
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.user-button :hover {
+  /* background: #00c569; */
+  transition: 300ms;
+}
+
+.user-not-fount {
+  text-align: center;
+  font-size: 20px;
+  font-weight: 500;
+  padding-top: 60px;
+}
+
+.user-not-fount img {
+  width: 200px;
+  display: block;
+  margin: 60px auto 20px;
+}
+
+.user-not-fount p {
+  font-weight: 500;
+}
+
 @media screen and (max-width: 991px) {
-  .main-content {
-    padding: 59px 0 0;
-  }
-  .main-content.is-fix-alert {
-    padding: 89px 0 0;
-  }
-}
-
-@media screen and (max-width: 767px) {
-  .send-message-form .button-wrapper button {
-    padding: 12px 13px;
-    font-size: inherit;
-  }
-
-  .send-message-form .message-input input {
-    padding: 13px 15px;
-  }
-
-  .main-content {
-    padding: 59px 0 0;
-  }
-
-  .main-content.is-fix-alert {
-    padding: 85px 0 0;
-  }
-
-  .hidden_element {
-    display: none;
-  }
-
-  .message-wrapper .message-contact-title span {
-    padding-top: 6px;
-
-    width: 170px;
-
-    overflow: hidden;
-
-    height: 40px;
-
-    line-height: 1.618;
-
-    text-overflow: ellipsis;
-
-    white-space: nowrap;
-  }
-
-  .reply-info p {
-    width: 100%;
-  }
-}
-
-@media screen and (max-width: 370px) {
-  .message-wrapper .message-contact-title span {
-    width: 130px;
-  }
-}
-
-@media screen and (max-width: 330px) {
-  .message-wrapper .message-contact-title-img {
-    margin: 0 15px;
-  }
-
-  .message-wrapper .message-contact-title span {
-    font-size: 13px;
+  .contact-items {
+    padding-bottom: 42px;
   }
 }
 </style>
@@ -361,10 +369,16 @@
       <div class="contact-search-input-wrapper">
         <input
           type="text"
-          placeholder="جستجو"
+          placeholder="جستجو پیام"
           v-model="$parent.contactNameSearchText"
         />
         <i class="fa fa-search"></i>
+        <button
+          v-if="$parent.contactNameSearchText"
+          @click.prevent="$parent.contactNameSearchText = ''"
+        >
+          <i class="fa fa-times"></i>
+        </button>
       </div>
       <div v-if="$parent.userType" class="contacts-switch-buttons-wrapper">
         <div class="switch-button-item">
@@ -373,16 +387,16 @@
             tag="button"
             class="contact-button"
           >
-            <span class="total-unread-messages-badge">جدید</span>
-            <i class="fa fa-list-alt"></i>
+            <i class="fa fa-star"></i>
+
             خریداران پیشنهادی
           </router-link>
         </div>
 
         <div class="switch-button-item">
           <button class="contact-button active">
-            <i class="fa fa-user"></i>
-            مخاطبین من
+            <i class="fas fa-comment-alt"></i>
+            پیام ها
           </button>
         </div>
       </div>
@@ -409,8 +423,8 @@
         v-else-if="$parent.contactNameSearchText && !$parent.isSearchingContact"
       >
         <p class="user-not-fount">
-          <i class="fa fa-user"></i>
-          <span>مخاطب یافت نشد</span>
+          <img src="../../../../img/empty-message.svg" alt="" />
+          <span>پیام یافت نشد</span>
         </p>
       </div>
 
@@ -422,11 +436,106 @@
           <div></div>
         </div>
       </div>
-      <div v-else-if="$parent.isContactListLoaded">
-        <p>
-          <i class="fa fa-user"></i>
-          <span>مخاطب یافت نشد</span>
-        </p>
+      <div
+        v-else-if="$parent.isContactListLoaded"
+        class="contact-items"
+        :class="{ 'is-buyer-list': !$parent.userType }"
+      >
+        <ul>
+          <li class="contact-item">
+            <a
+              href="#"
+              @click.prevent="$parent.openChannel()"
+              :class="{
+                active: $parent.isChanleActive,
+              }"
+            >
+              <div class="channel-image">
+                <img src="../../../../img/logo/512-buskool-logo.jpg" />
+              </div>
+              <div
+                v-if="$parent.channelInfo.unread_contents == 0"
+                class="my-channel-name-wraopper"
+              >
+                <span class="contact-name text-rtl"> کانال رسمی باسکول </span>
+                <button
+                  @click.prevent
+                  class="verified-user"
+                  data-container="body"
+                  data-toggle="popover"
+                  data-placement="bottom"
+                  :data-content="$parent.verifiedUserContent"
+                  title
+                >
+                  <i class="fa fa-certificate"></i>
+                </button>
+                <p class="icon-wrapper">
+                  <i class="fa fa-bullhorn"></i>
+                </p>
+              </div>
+              <div v-else class="my-contact-info-wrapper">
+                <span class="contact-name text-rtl"> کانال رسمی باسکول </span>
+
+                <button
+                  @click.prevent
+                  class="verified-user"
+                  data-container="body"
+                  data-toggle="popover"
+                  data-placement="bottom"
+                  :data-content="$parent.verifiedUserContent"
+                  title
+                >
+                  <i class="fa fa-certificate"></i>
+                </button>
+                <p class="last-message-date">
+                  {{
+                    $parent.channelInfo.last_content_date
+                      | moment("jYYYY/jMM/jDD")
+                  }}
+                </p>
+              </div>
+
+              <div class="my-contact-info-wrapper">
+                <span
+                  class="contact-last-message"
+                  v-text="$parent.channelInfo.last_content_title"
+                ></span>
+
+                <div class="count-number-wrapper">
+                  <p
+                    class="count-number"
+                    v-if="$parent.channelInfo.unread_contents !== 0"
+                    v-text="$parent.channelInfo.unread_contents"
+                  ></p>
+                </div>
+              </div>
+            </a>
+          </li>
+          <li>
+            <div class="empty-list">
+              <i class="fa fa-user"></i>
+              <p>در حال حاضر پیامی وجود ندارد</p>
+
+              <router-link
+                v-if="$parent.userType"
+                :to="{ name: 'buyAdRequestsSeller' }"
+                tag="button"
+                class="user-button"
+              >
+                شروع چت با خریداران
+              </router-link>
+
+              <router-link
+                v-else
+                :to="{ name: 'productList' }"
+                tag="button"
+                class="user-button"
+              >
+                شروع چت با فروشندگان
+              </router-link>
+            </div>
+          </li>
+        </ul>
       </div>
     </div>
 
@@ -436,12 +545,89 @@
       :class="{ 'is-buyer-list': !$parent.userType }"
     >
       <ul>
+        <li class="contact-item">
+          <a
+            href="#"
+            @click.prevent="$parent.openChannel()"
+            :class="{
+              active: $parent.isChanleActive,
+            }"
+          >
+            <div class="channel-image">
+              <img src="../../../../img/logo/512-buskool-logo.jpg" />
+            </div>
+            <div
+              v-if="$parent.channelInfo.unread_contents == 0"
+              class="my-channel-name-wraopper"
+            >
+              <span class="contact-name text-rtl"> کانال رسمی باسکول </span>
+              <button
+                @click.prevent
+                class="verified-user"
+                data-container="body"
+                data-toggle="popover"
+                data-placement="bottom"
+                :data-content="$parent.verifiedUserContent"
+                title
+              >
+                <i class="fa fa-certificate"></i>
+              </button>
+              <p class="icon-wrapper">
+                <i class="fa fa-bullhorn"></i>
+              </p>
+            </div>
+            <div v-else class="my-contact-info-wrapper">
+              <span class="contact-name text-rtl"> کانال رسمی باسکول </span>
+
+              <button
+                @click.prevent
+                class="verified-user"
+                data-container="body"
+                data-toggle="popover"
+                data-placement="bottom"
+                :data-content="$parent.verifiedUserContent"
+                title
+              >
+                <i class="fa fa-certificate"></i>
+              </button>
+              <p class="last-message-date">
+                {{
+                  $parent.channelInfo.last_content_date
+                    | moment("jYYYY/jMM/jDD")
+                }}
+              </p>
+            </div>
+
+            <div class="my-contact-info-wrapper">
+              <span
+                class="contact-last-message"
+                v-text="$parent.channelInfo.last_content_title"
+              ></span>
+
+              <div class="count-number-wrapper">
+                <p
+                  class="count-number"
+                  v-if="$parent.channelInfo.unread_contents !== 0"
+                  v-text="$parent.channelInfo.unread_contents"
+                ></p>
+              </div>
+            </div>
+          </a>
+        </li>
         <li
           class="contact-item"
           v-for="(contact, index) in $parent.contactList"
           :key="index"
         >
-          <a href="#" @click.prevent="$parent.loadChatHistory(contact, index)">
+          <a
+            href="#"
+            @click.prevent="$parent.loadChatHistory(contact, index, false)"
+            :class="{
+              active:
+                $parent.selectedContact.contact_id == contact.contact_id &&
+                !$parent.isChanleActive,
+            }"
+          >
             <div class="contact-image">
               <img
                 v-if="contact.profile_photo"
@@ -454,22 +640,21 @@
             <div class="my-contact-info-wrapper">
               <span class="contact-name text-rtl">
                 {{ contact.first_name + " " + contact.last_name }}
-                <button
-                  v-if="contact.is_verified"
-                  @click.prevent
-                  class="verified-user"
-                  data-container="body"
-                  data-toggle="popover"
-                  data-placement="bottom"
-                  :data-content="$parent.verifiedUserContent"
-                  title
-                >
-                  <i class="fa fa-certificate"></i>
-                </button>
               </span>
-
+              <button
+                v-if="contact.is_verified"
+                @click.prevent
+                class="verified-user"
+                data-container="body"
+                data-toggle="popover"
+                data-placement="bottom"
+                :data-content="$parent.verifiedUserContent"
+                title
+              >
+                <i class="fa fa-certificate"></i>
+              </button>
               <p class="last-message-date">
-                {{ contact.last_msg_time_date | moment("jYY/jMM/jDD") }}
+                {{ contact.last_msg_time_date | moment("jYYYY/jMM/jDD") }}
               </p>
             </div>
 
@@ -497,7 +682,7 @@
             class="btn load-more"
             @click.prevent="$parent.loadMoreContacts()"
           >
-            ادامه مخاطبین
+            ادامه پیام ها
           </button>
         </li>
       </ul>
@@ -537,6 +722,13 @@ export default {
   watch: {
     "$parent.contactList": function () {
       if (this.$parent.contactList) {
+        setTimeout(() => {
+          this.activeComponentTooltip();
+        }, 10);
+      }
+    },
+    "$parent.isChanleActive": function () {
+      if (this.$parent.isChanleActive) {
         setTimeout(() => {
           this.activeComponentTooltip();
         }, 10);

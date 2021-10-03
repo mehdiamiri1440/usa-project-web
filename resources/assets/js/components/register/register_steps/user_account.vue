@@ -1,10 +1,9 @@
 <style scoped>
-  p, span{
-    line-height: 1.5;
-  }
-.text-red {
-  color: red;
+p,
+span {
+  line-height: 1.5;
 }
+
 .submit-button {
   background: #dddddd;
   color: #fff;
@@ -127,7 +126,7 @@ input.error:focus + i {
       <div class="row">
         <!-- <label for="user-name">
           یک نام کاربری
-          <span class="text-red">(انگلیسی و بدون فاصله)</span>
+          <span class="red-text ">(انگلیسی و بدون فاصله)</span>
           وارد کنید
         </label> -->
 
@@ -153,14 +152,18 @@ input.error:focus + i {
 
         <div class="row">
           <div class="col-xs-12">
-            <label for="password">یک گذرواژه انتخاب کنید
-               <span class="text-red">(۸ کاراکتر یا بیشتر)</span>
+            <label for="password"
+              >یک گذرواژه انتخاب کنید
+              <span class="red-text">(۸ کاراکتر یا بیشتر)</span>
             </label>
 
             <div class="input-wrapper password-wrapper">
               <input
                 v-model="password"
-                :class="{'error' : $parent.errors.password[0], 'active' : password.length}"
+                :class="{
+                  error: $parent.errors.password[0],
+                  active: password.length,
+                }"
                 id="password"
                 type="password"
                 class="dire"
@@ -169,7 +172,10 @@ input.error:focus + i {
 
               <i class="fa fa-lock"></i>
               <p class="error-message">
-                <span v-if="$parent.errors.password[0]" v-text="$parent.errors.password[0]"></span>
+                <span
+                  v-if="$parent.errors.password[0]"
+                  v-text="$parent.errors.password[0]"
+                ></span>
               </p>
             </div>
           </div>
@@ -200,9 +206,11 @@ input.error:focus + i {
 
         <button
           class="submit-button disabled"
-          :class="{'active' : password.length >= 8}"
+          :class="{ active: password.length >= 8 }"
           @click.prevent="$parent.setAccount()"
-        >مرحله بعد</button>
+        >
+          مرحله بعد
+        </button>
       </div>
     </div>
   </div>
@@ -210,18 +218,18 @@ input.error:focus + i {
 
 <script>
 export default {
-  data: function() {
+  data: function () {
     return {
       password: "",
       rePassword: "",
-      userName: ""
+      userName: "",
     };
   },
   watch: {
     // userName: function(value) {
     //   this.$parent.step3.user_name = this.userName;
     // },
-    password: function(value) {
+    password: function (value) {
       this.$parent.errors.password = "";
       this.$parent.step3.password = this.password;
     },
@@ -234,6 +242,6 @@ export default {
     // this.userName = this.$parent.step3.user_name;
     this.password = this.$parent.step3.password;
     // this.rePassword = this.$parent.step3.re_password;
-  }
+  },
 };
 </script>

@@ -7,24 +7,24 @@ i {
 .verified-user {
   font-size: 16px;
 }
-.user-information-wrapper,
-.article-action-buttons button {
+.user-information-wrapper {
   font-size: 14px;
 
   font-weight: bold;
 
-  padding: 4px 7px 5px;
+  padding: 4px 0 5px;
 
   margin: 0;
 
-  margin-top: 3px;
+  margin: 3px 5px;
 
   line-height: 1.618;
+  border-bottom: 1px solid #e9ecef;
+}
+.user-information-wrapper:hover {
+  cursor: pointer;
 }
 
-.user-information-wrapper {
-  height: 55px;
-}
 .article-action-buttons button {
   margin-top: 7px;
   width: 100%;
@@ -90,24 +90,6 @@ i {
   float: right;
 }
 
-.user-information-wrapper {
-  padding: 5px 15px;
-  border-bottom: 2px solid #eeeeee;
-  margin: 0;
-}
-
-.user-information-wrapper > div,
-.user-information-content,
-.user-action-link,
-.user-information-link {
-  float: right;
-  display: block;
-  overflow: hidden;
-}
-
-.user-information-link {
-  min-height: 43px;
-}
 .user-action-link {
   padding-right: 10px;
   font-size: 11px;
@@ -115,149 +97,78 @@ i {
   text-align: left;
 }
 
+.response-rate-wrapper {
+  width: 50px;
+}
+
+.response-rate-wrapper button {
+  background: #f2f2f2;
+  border: none;
+  border-radius: 20px;
+  font-size: 13px;
+  text-align: center;
+  color: #e41c38;
+  width: 100%;
+  line-height: initial;
+  padding: 0;
+}
+
+.user-information-content {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: calc(100% - 70px);
+}
+
 .user-action-link.default {
   padding-top: 9px;
 }
 
-.user-information-contents p,
-a.user-name-link {
+div.user-information-link {
   display: block;
-
-  max-width: 170px;
-
   overflow: hidden;
-
-  font-size: 14px;
-
+  font-size: 13px;
   font-weight: bold;
-
   color: #777;
-
-  height: 21px;
-
   padding-top: 0;
-
   white-space: nowrap;
-
   text-overflow: ellipsis;
-}
-
-.user-information-contents p.response-rate {
-  max-width: 115px;
-  float: right;
-  font-size: 10px;
-  height: 19px;
-  padding: 0;
-}
-
-.user-information-content.default {
-  padding-top: 8px;
-}
-
-.user-image img,
-.user-image > div {
-  height: 100%;
-}
-
-p.response-rate {
-  font-size: 10px;
-  height: 21px;
-  padding: 0;
-}
-.response-rate span {
-  color: #e41c38;
+  width: 100%;
 }
 </style>
 
 <template>
-  <div class="user-information-wrapper row">
-    <div class="user-information-contents">
-      <router-link :to="'/profile/' + user_name" class="user-information-link">
-        <div class="user-information-content-image">
-          <div class="user-image" v-if="profile_photo">
-            <img v-bind:src="'/storage/' + profile_photo" />
-          </div>
-
-          <div class="user-image" v-else>
-            <img
-              src="../../../../../../img/user-defult.png"
-              class="image_defult"
-            />
-          </div>
-        </div>
-
-        <div v-if="user_info.response_rate" class="user-information-content">
-          <router-link
-            class="user-name-link"
-            :to="'/profile/' + user_name"
-            v-if="user_info"
-          >
-            {{ user_full_name }}
-            <button
-              v-if="user_info.is_verified"
-              @click.prevent
-              class="verified-user"
-              data-container="body"
-              data-toggle="popover"
-              data-placement="bottom"
-              :data-content="$parent.verifiedUserContent"
-              title
-            >
-              <i v-if="user_info.is_verified" class="fa fa-certificate"></i>
-            </button>
-          </router-link>
-
-          <div class="under-name-section">
-            <p v-if="user_info" class="response-rate">
-              احتمال پاسخ گویی
-              <span v-text="'%' + user_info.response_rate"></span>
-            </p>
-          </div>
-        </div>
-
-        <div v-else class="user-information-content default">
-          <router-link
-            class="user-name-link"
-            :to="'/profile/' + user_name"
-            v-if="user_info"
-          >
-            {{ user_full_name }}
-            <button
-              v-if="user_info.is_verified"
-              @click.prevent
-              class="verified-user"
-              data-container="body"
-              data-toggle="popover"
-              data-placement="bottom"
-              :data-content="$parent.verifiedUserContent"
-              title
-            >
-              <i class="fa fa-certificate"></i>
-            </button>
-          </router-link>
-        </div>
-      </router-link>
+  <div class="user-information-wrapper" @click.prevent="$parent.setScroll()">
+    <div class="user-information-link">
+      <div class="user-information-content pull-right">
+        <i class="fa fa-user-circle"></i>
+        {{ user_full_name }}
+      </div>
+      <button
+        v-if="!!user_info.is_verified"
+        @click.prevent
+        class="verified-user"
+        data-container="body"
+        data-toggle="popover"
+        data-placement="bottom"
+        :data-content="$parent.verifiedUserContent"
+        title
+      >
+        <i class="fa fa-certificate"></i>
+      </button>
+      <div class="response-rate-wrapper pull-left">
+        <button
+          v-if="user_info.response_rate && user_info.response_rate != 0"
+          data-toggle="tooltip"
+          data-placement="right"
+          title="احتمال پاسخ گویی"
+          class="response-rate"
+        >
+          <i class="fa fa-exchange-alt"></i>
+          {{ "%" + user_info.response_rate }}
+        </button>
+      </div>
     </div>
-    <!-- <div class="article-action-buttons">
-      <button
-        v-if="!is_my_profile_status"
-        @click.prevent="$parent.openChat($parent.product)"
-        class="green-button"
-      >
-        <i class="fa fa-envelope"></i>
-        استعلام قیمت
-      </button>
-
-      <button
-        v-else="!is_my_profile_status"
-        class="blue-button"
-        data-toggle="modal"
-        :data-target="'#article-modal' + $parent.product.main.id"
-      >
-        <i class="fa fa-pencil-alt"></i>
-        ویرایش
-      </button>
-    </div> -->
   </div>
 </template>
 
@@ -272,7 +183,6 @@ export default {
     "user_info",
     "user_full_name",
     "user_name",
-    "current_user",
     "product_id",
     "is_my_profile_status",
   ],
@@ -284,66 +194,11 @@ export default {
     };
   },
   methods: {
-    openChat: function (product) {
-      this.registerComponentStatistics(
-        "product",
-        "openChat",
-        "click on open chatBox"
-      );
-
-      let productName =
-        product.main.sub_category_name + " " + product.main.product_name;
-      var contact = {
-        contact_id: this.user_info.id,
-        first_name: this.user_info.first_name,
-        last_name: this.user_info.last_name,
-        profile_photo: this.profile_photo,
-        user_name: this.user_info.user_name,
-        product_name: productName,
-      };
-      var self = this;
-
-      if (this.current_user.user_info) {
-        if (this.current_user.user_info.id !== this.user_info.id) {
-          eventBus.$emit("ChatInfo", contact);
-          // window.localStorage.setItem("contact", JSON.stringify(contact));
-
-          // this.$router.push({name : 'registerInquiry'});
-        } else {
-          this.popUpMsg = "شما نمی توانید به خودتان پیام دهید.";
-          eventBus.$emit("submitSuccess", this.popUpMsg);
-          $("#custom-main-modal").modal("show");
-        }
-      } else {
-        window.localStorage.setItem("contact", JSON.stringify(contact));
-        this.$router.push({ name: "registerInquiry" });
-      }
-    },
     scrollToTheRequestRegisterBox: function (element) {
       var newPosition = $(element).offset();
       $("html, body")
         .stop()
         .animate({ scrollTop: newPosition.top - 380 }, 1000);
-    },
-    deleteProduct: function () {
-      //show modal
-      // this.popUpMsg = "آیا محصول حذف شود؟";
-      // this.deleteButtonText = "حذف";
-      // this.cancelButtonText = "انصراف";
-
-      // eventBus.$emit("submitSuccess", this.popUpMsg);
-      // eventBus.$emit("deleteButtonText", this.deleteButtonText);
-      // eventBus.$emit("cancelButtonText", this.cancelButtonText);
-      eventBus.$emit("productId", this.product_id);
-      eventBus.$emit("modal", "deleteProduct");
-
-      // $("#deleteModal").modal("show");
-
-      this.registerComponentStatistics(
-        "product",
-        "delete-product",
-        "click on delete product-btn"
-      );
     },
     registerComponentStatistics: function (
       categoryName,
@@ -379,6 +234,7 @@ export default {
             }
           }, 300);
         });
+      $(".response-rate").tooltip();
     },
   },
   mounted: function () {

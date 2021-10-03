@@ -1,7 +1,8 @@
 <style scoped>
-  p, span{
-    line-height: 1.5;
-  }
+p,
+span {
+  line-height: 1.5;
+}
 .submit-button {
   background: #dddddd;
   color: #fff;
@@ -125,13 +126,16 @@ input.error:focus + i {
   <div>
     <div class="form-contents col-xs-12">
       <div class="row">
-         <br/>
+        <br />
         <label for="phone-number">لطفا شماره موبایل خود را وارد کنید</label>
 
-        <div class="input-wrapper phone-number-wrapper">
+        <div class="input-wrapper user-phone-number-wrapper">
           <input
             v-model="phoneNumber"
-            :class="{'error' : $parent.errors[0] , 'active' : phoneNumber.length >= 11}"
+            :class="{
+              error: $parent.errors[0],
+              active: phoneNumber.length >= 11,
+            }"
             id="phone-number"
             type="tel"
             class="dire"
@@ -144,19 +148,24 @@ input.error:focus + i {
         <p class="error-message">
           <span v-if="$parent.errors" v-text="$parent.errors[0]"></span>
         </p>
-        <span
-          class="small-description"
-        >پس از وارد کردن شماره موبایل ما یک کد برای شما ارسال میکنیم تا از صحت شماره وارد شده اطمینان حاصل کنیم</span>
-      
+        <span class="small-description"
+          >پس از وارد کردن شماره موبایل ما یک کد برای شما ارسال میکنیم تا از صحت
+          شماره وارد شده اطمینان حاصل کنیم</span
+        >
+
         <p>
-            <br/> 
+          <br />
         </p>
         <button
           class="submit-button disabled"
-          :class="{'active' : phoneNumber.length >= 11 && $parent.step2.sendCode}"
+          :class="{
+            active: phoneNumber.length >= 11 && $parent.step2.sendCode,
+          }"
           @click.prevent="getPhoneNumber()"
           :disabled="!$parent.step2.sendCode"
-        >ارسال کد تایید</button>
+        >
+          ارسال کد تایید
+        </button>
       </div>
     </div>
   </div>
@@ -164,29 +173,29 @@ input.error:focus + i {
 
 <script>
 export default {
-  data: function() {
+  data: function () {
     return {
-      phoneNumber: this.$parent.step2.phone
+      phoneNumber: this.$parent.step2.phone,
     };
   },
   methods: {
     getPhoneNumber() {
       this.$parent.step2.phone = this.phoneNumber;
       this.$parent.sendPhoneVerificationCode();
-    }
+    },
   },
   watch: {
-    phoneNumber: function(value) {
+    phoneNumber: function (value) {
       this.$parent.errors[0] = "";
       if (this.phoneNumber.length >= 11) {
         this.phoneNumber = this.phoneNumber.substring(0, 11);
       }
-    }
+    },
   },
   mounted() {
     if (this.$parent.isOsIOS()) {
       $("#phone-number").attr("type", "text");
     }
-  }
+  },
 };
 </script>

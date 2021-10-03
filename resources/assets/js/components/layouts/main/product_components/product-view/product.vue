@@ -67,11 +67,11 @@ label {
 
 .wrapper-bg {
   overflow: hidden;
-  padding: 15px 0;
+  padding: 0;
+  border: none;
 }
 
 .images-wrapper {
-  padding: 0 15px;
   width: 380px;
   float: left;
 }
@@ -79,26 +79,22 @@ label {
 .images {
   height: 380px;
   background: #eeeeee;
-  border-radius: 4px;
+  border-radius: 12px;
 }
 
 .share {
-  text-align: right;
-  padding: 18px 0;
+  text-align: left;
+  padding: 25px 0 20px;
 }
 
 .share .share-button {
-  color: #777;
-
+  color: #808c9b;
+  background: none;
   font-size: 12px;
-
-  font-weight: bold;
-
-  border: 2px solid;
-
-  border-radius: 4px;
-
-  padding: 3px 5px 2px;
+  font-weight: 500;
+  border: 1px solid;
+  border-radius: 12px;
+  padding: 4px 15px 3px;
 }
 
 .buskool-default-text {
@@ -111,25 +107,47 @@ label {
 .main-contents-wrapper {
   width: calc(100% - 380px);
   float: right;
-  padding: 0 15px;
   text-align: right;
+  position: relative;
+  padding-left: 30px;
 }
 
 .main-contents-wrapper h1 {
   font-size: 23px;
+  line-height: 1.618;
 }
 
-.actions .green-button {
+.actions .green-button,
+.send-message-button {
   font-size: 14px;
-
   font-weight: bold;
-
   width: initial;
-
   padding: 8px 15px;
+  border-radius: 8px;
 }
 
-.actions button.elevator-event {
+.send-message-button {
+  background: none;
+  border-radius: 8px;
+  border: 1px solid #404b55 !important;
+  color: #404b55 !important;
+  transition: 300ms;
+}
+.phone-call {
+  margin-left: 15px;
+  background: linear-gradient(90deg, #21ad93, #00c569);
+}
+
+.send-message-button:hover {
+  background: none;
+  border-radius: 8px;
+  border: 1px solid #404b55 !important;
+  background: #404b55 !important;
+  color: #fff !important;
+  transition: 300ms;
+}
+
+.actions .elevator-event {
   background: #e41c38;
   color: #fff;
   border-radius: 4px;
@@ -142,18 +160,27 @@ label {
 
 .product-info-table li {
   display: flex;
-
   justify-content: space-between;
-
   direction: rtl;
-
   font-weight: bold;
-
-  border-bottom: 1px solid #f1f1f1;
-
   width: 100%;
+  padding: 12px 20px;
+  font-size: 16px;
+  border-radius: 12px;
+  margin-bottom: 11px;
+  font-weight: 500;
+  color: #313a43;
+}
 
-  padding: 15px 0;
+.product-info-table li:nth-of-type(odd) {
+  background: #fafafa;
+}
+
+.product-info-table i {
+  width: 20px;
+  text-align: center;
+  margin-left: 5px;
+  color: #808c9b;
 }
 
 .product-description {
@@ -168,24 +195,98 @@ label {
 }
 
 .product-description > span {
-  font-weight: bold;
+  font-weight: 500;
+  font-size: 16px;
   display: inline-block;
   margin-bottom: 9px;
+  color: #333333;
 }
 
 .default-product-contents-wrapper {
   padding: 15px;
+  min-height: 740px;
+}
+.main-product-wrapper {
+  min-height: 740px;
+}
+.phone-number-wrapper {
+  margin-top: 15px;
 }
 
+.green-button.disable {
+  background: #e0e0e0;
+}
+
+.spinner-border {
+  width: 1.5rem;
+  height: 1.5rem;
+  top: -5px;
+  position: relative;
+  left: 2px;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  direction: rtl;
+}
+
+.actions .min-button-style {
+  max-width: 225px;
+  width: 100% !important;
+  border-radius: 12px;
+  margin: 15px 5px;
+  padding: 10px 15px 9px;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+}
+
+.actions .min-button-style.phone-call {
+  margin-left: 10px;
+}
+
+.actions .min-button-style.send-message-button {
+  margin-right: 10px;
+}
+
+@media screen and (max-width: 1199px) {
+  .main-product-wrapper {
+    min-height: initial;
+    margin-bottom: 50px;
+  }
+}
 @media screen and (max-width: 991px) {
+  .actions {
+    margin-top: 15px;
+  }
+  .share .share-button {
+    font-size: 17px;
+  }
+
+  .phone-number-wrapper,
+  .warning-wrapper {
+    margin-top: 25px;
+  }
+
+  .share {
+    position: absolute;
+    top: -4px;
+    padding: 0;
+    left: 15px;
+  }
+
   .images-wrapper,
   .main-contents-wrapper {
     width: initial;
     float: inherit;
   }
+
   .main-contents-wrapper {
     margin: 30px auto;
+    padding: 0 10px;
   }
+
   .default-action-buttons {
     overflow: hidden;
   }
@@ -202,18 +303,21 @@ label {
   .default-product-list {
     padding: 9px 0;
   }
-
-  .actions button.elevator-event,
-  .actions .green-button {
-    float: right;
-    margin-left: 10px;
-  }
 }
 
 @media screen and (max-width: 767px) {
+  .images {
+    border-radius: 0;
+  }
+
   .images-wrapper,
   .main-product-wrapper {
     padding: 0;
+    min-height: initial;
+  }
+
+  .main-product-wrapper {
+    border: none;
   }
 }
 </style>
@@ -345,9 +449,13 @@ label {
 
     <div class="images-wrapper">
       <div class="images">
-        <div class="owl-carousel">
+        <div
+          v-if="$parent.product.photos"
+          class="owl-carousel main-product-carousel"
+        >
           <Carousel
-            v-for="photo in $parent.product.photos"
+            v-for="(photo, index) in $parent.product.photos"
+            :index="index"
             :key="photo.id"
             :base="$parent.str + '/'"
             :img="photo.file_path"
@@ -363,26 +471,48 @@ label {
             "
           />
         </div>
+        <svg
+          v-else
+          version="1"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 48 48"
+          enable-background="new 0 0 48 48"
+        >
+          <path
+            fill="#ccc"
+            d="M41,42H13c-2.2,0-4-1.8-4-4V18c0-2.2,1.8-4,4-4h28c2.2,0,4,1.8,4,4v20C45,40.2,43.2,42,41,42z"
+          />
+          <path
+            fill="#ddd"
+            d="M35,36H7c-2.2,0-4-1.8-4-4V12c0-2.2,1.8-4,4-4h28c2.2,0,4,1.8,4,4v20C39,34.2,37.2,36,35,36z"
+          />
+          <circle fill="#ccc" cx="30" cy="16" r="3" />
+          <polygon fill="#bbb" points="17,17.9 8,31 26,31" />
+          <polygon fill="#eee" points="28,23.5 22,31 34,31" />
+        </svg>
       </div>
       <div class="share hidden-xs hidden-sm">
-        <button
-          @click.prevent="$parent.copyProductLinkToClipBoard"
-          class="share-button"
-        >
+        <button @click.prevent="$parent.shareMyProfile()" class="share-button">
           <span>اشتراک گذاری</span>
-          <i class="fa fa-share"></i>
+          <i class="fa fa-share-alt"></i>
         </button>
       </div>
-      <p class="buskool-default-text hidden-xs hidden-sm">
-        باسکول هیچ‌گونه منفعت و مسئولیتی در قبال معامله شما ندارد. با مطالعه‌ی
-        راهنمای
-        <a
-          href="https://blog.buskool.com/%d8%b1%d8%a7%d9%87%d9%86%d9%85%d8%a7%db%8c-%d8%ae%d8%b1%db%8c%d8%af-%d8%a7%d9%85%d9%86/"
-          target="_blank"
-          >خرید امن</a
-        >
-        ، آسوده‌تر معامله کنید.
-      </p>
+
+      <a
+        href="https://blog.buskool.com/%d8%b1%d8%a7%d9%87%d9%86%d9%85%d8%a7%db%8c-%d8%ae%d8%b1%db%8c%d8%af-%d8%a7%d9%85%d9%86/"
+        target="_blank"
+        class="warning-wrapper info-wrapper hidden-xs hidden-sm"
+      >
+        <p class="warning-title">
+          <i class="fa fa-question-circle"></i>
+
+          راهنمای خرید امن
+        </p>
+        <p class="warning-text">
+          باسکول هیچ‌گونه منفعت و مسئولیتی در قبال معامله شما ندارد. با مطالعه‌ی
+          راهنمای خرید امن ، آسوده‌تر معامله کنید.
+        </p>
+      </a>
     </div>
 
     <div class="main-contents-wrapper">
@@ -391,53 +521,141 @@ label {
 
         <div class="actions">
           <button
-            v-if="!$parent.isMyProfile"
-            @click.prevent="$parent.openChat($parent.product)"
-            class="green-button"
+            v-if="$parent.isMyProfile"
+            class="elevator-event min-button-style green-button"
+            @click.prevent="$parent.elevatorEvent()"
           >
-            استعلام قیمت
-            <i class="fa fa-envelope"></i>
+            اعمال نردبان
+            <i class="fas fa-chart-line"></i>
+          </button>
+
+          <button
+            v-if="
+              !$parent.isMyProfile &&
+              $parent.currentUser.user_info &&
+              $parent.product.user_info.has_phone &&
+              $parent.currentUser.user_info.is_buyer
+            "
+            @click.prevent="$parent.activePhoneCall(false)"
+            class="green-button min-button-style phone-call hidden-xs hidden-sm"
+            :class="{ disable: $parent.isActivePhone }"
+            :disabled="$parent.isActivePhone"
+          >
+            <i
+              class="fas fa-phone-square-alt"
+              v-if="!$parent.getPhoneLoader"
+            ></i>
+            <div v-else class="spinner-border">
+              <span class="sr-only"></span>
+            </div>
+            اطلاعات تماس
+          </button>
+          <button
+            v-else-if="
+              !$parent.currentUser.user_info &&
+              $parent.product.user_info.has_phone
+            "
+            @click.prevent="$parent.loginModal(false)"
+            class="green-button min-button-style phone-call hidden-xs hidden-sm"
+            :class="{ disable: $parent.isActivePhone }"
+            :disabled="$parent.isActivePhone"
+          >
+            <i
+              class="fas fa-phone-square-alt"
+              v-if="!$parent.getPhoneLoader"
+            ></i>
+            <div v-else class="spinner-border">
+              <span class="sr-only"></span>
+            </div>
+            اطلاعات تماس
+          </button>
+
+          <button
+            v-if="!$parent.isMyProfile && $parent.currentUser.user_info"
+            @click.prevent="$parent.openChat($parent.product)"
+            class="hidden-xs hidden-sm min-button-style"
+            :class="{
+              'send-message-button':
+                $parent.product.user_info.has_phone &&
+                $parent.currentUser.user_info.is_buyer,
+              'bg-gradient-green':
+                !$parent.product.user_info.has_phone ||
+                ($parent.product.user_info.has_phone &&
+                  !$parent.currentUser.user_info.is_buyer),
+            }"
+          >
+            <i class="fas fa-comment-alt"></i>
+            چت با فروشنده
+          </button>
+          <button
+            v-else-if="!$parent.currentUser.user_info"
+            @click.prevent="$parent.loginModal(true)"
+            class="hidden-xs hidden-sm min-button-style"
+            :class="{
+              'send-message-button': $parent.product.user_info.has_phone,
+              'bg-gradient-green': !$parent.product.user_info.has_phone,
+            }"
+          >
+            <i class="fas fa-comment-alt"></i>
+            چت با فروشنده
           </button>
 
           <button
             v-else
-            class="green-button blue-button"
+            class="green-button blue-button min-button-style"
             data-toggle="modal"
             :data-target="'#article-modal' + $parent.product.main.id"
           >
-            ویرایش
             <i class="fa fa-pencil-alt"></i>
-          </button>
-
-          <button
-            v-if="$parent.isMyProfile"
-            class="elevator-event green-button"
-            @click.prevent="$parent.elevatorEvent()"
-          >
-            <i class="fas fa-chart-line"></i>
-
-            اعمال نردبان
+            ویرایش
           </button>
 
           <div class="share hidden-md hidden-lg pull-left">
             <button
-              @click.prevent="$parent.copyProductLinkToClipBoard"
+              @click.prevent="$parent.shareMyProfile()"
               class="share-button"
             >
-              <span>اشتراک گذاری</span>
-              <i class="fa fa-share"></i>
+              <i class="fa fa-share-alt"></i>
             </button>
+          </div>
+        </div>
+        <div
+          id="phone-number-wrapper"
+          v-if="$parent.isActivePhone"
+          class="phone-number-wrapper collapse"
+        >
+          <a :href="'tel:' + $parent.userPhone" class="phone-number">
+            <p>
+              <i class="fa fa-phone-square-alt"></i>
+              {{ $parent.userPhone }}
+            </p>
+            <p>شماره تماس</p>
+          </a>
+          <div class="warning-wrapper">
+            <p class="warning-title">
+              <i class="fa fa-exclamation-circle"></i>
+
+              هشدار پلیس
+            </p>
+            <p class="warning-text">
+              لطفاً پیش از انجام معامله و هر نوع پرداخت وجه، از صحت کالا یا
+              خدمات ارائه شده، به صورت حضوری اطمینان حاصل نمایید.
+            </p>
           </div>
         </div>
         <div class="product-info-table">
           <ul class="product-info-list">
             <li>
-              <span class="gray-text">دسته بندی</span>
+              <span class="gray-text">
+                <i class="fa fa-folder"></i> دسته بندی
+              </span>
 
               <span v-text="$parent.product.main.sub_category_name"></span>
             </li>
             <li>
-              <span class="gray-text">استان / شهر</span>
+              <span class="gray-text">
+                <i class="fa fa-map-marker-alt"></i> استان / شهر</span
+              >
 
               <span
                 v-text="
@@ -448,26 +666,29 @@ label {
               ></span>
             </li>
             <li>
-              <span class="gray-text">مقدار موجودی</span>
+              <span class="gray-text">
+                <i class="fa fa-box-open"></i> مقدار موجودی</span
+              >
 
               <span
-                v-text="
-                  getNumberWithCommas($parent.product.main.stock) + ' کیلوگرم '
-                "
+                v-text="getConvertedNumbers($parent.product.main.stock)"
               ></span>
             </li>
             <li>
-              <span class="gray-text">حداقل سفارش</span>
+              <span class="gray-text">
+                <i class="fas fa-clipboard-check"></i> حداقل سفارش</span
+              >
 
               <span
                 v-text="
-                  getNumberWithCommas($parent.product.main.min_sale_amount) +
-                  ' کیلوگرم '
+                  getConvertedNumbers($parent.product.main.min_sale_amount)
                 "
               ></span>
             </li>
             <li v-if="!$parent.isMyProfile">
-              <span class="gray-text">قیمت</span>
+              <span class="gray-text">
+                <i class="fas fa-dollar-sign"></i> قیمت</span
+              >
 
               <span>استعلام بگیرید</span>
             </li>
@@ -476,7 +697,7 @@ label {
             v-if="$parent.product.main.description"
             class="product-description"
           >
-            <span class="gray-text">توضیحات</span>
+            <span>توضیحات</span>
             <p v-html="$parent.product.main.description"></p>
           </div>
         </div>
@@ -490,23 +711,52 @@ label {
   >
     <div class="default-image-wrapper text-right text-rtl pull-left">
       <div
-        class="default-product-image placeholder-content content-full-width padding-0"
+        class="
+          default-product-image
+          placeholder-content
+          content-full-width
+          padding-0
+        "
       ></div>
 
       <div
-        class="default-button-min-with placeholder-content margin-15-0 hidden-xs hidden-sm"
+        class="
+          default-button-min-with
+          placeholder-content
+          margin-15-0
+          hidden-xs hidden-sm
+        "
       ></div>
-      <p
-        class="content-default-width placeholder-content hidden-xs hidden-sm"
-      ></p>
-      <p
-        class="content-half-width placeholder-content margin-15-0 hidden-xs hidden-sm"
-      ></p>
+      <a
+        href="https://blog.buskool.com/%d8%b1%d8%a7%d9%87%d9%86%d9%85%d8%a7%db%8c-%d8%ae%d8%b1%db%8c%d8%af-%d8%a7%d9%85%d9%86/"
+        target="_blank"
+        class="warning-wrapper info-wrapper hidden-xs hidden-sm"
+      >
+        <p class="warning-title">
+          <i class="fa fa-question-circle"></i>
+
+          راهنمای خرید امن
+        </p>
+        <p class="warning-text">
+          باسکول هیچ‌گونه منفعت و مسئولیتی در قبال معامله شما ندارد. با مطالعه‌ی
+          راهنمای خرید امن ، آسوده‌تر معامله کنید.
+        </p>
+      </a>
     </div>
 
     <div class="default-product-contents text-rtl pull-right">
       <div
-        class="content-default-width placeholder-content padding-15-0 margin-15-0"
+        class="content-default-width placeholder-content padding-10-0 h-25"
+      ></div>
+      <div
+        class="
+          default-button-min-with
+          placeholder-content
+          default-mdedium-button-width
+          h-40
+          margin-top-25
+          hidden-xs hidden-sm
+        "
       ></div>
       <div class="default-action-buttons hidden-md hidden-lg">
         <div class="default-button placeholder-content pull-right"></div>
@@ -555,16 +805,25 @@ label {
           ></span>
         </li>
       </ul>
-      <p class="content-default-width placeholder-content margin-15-0"></p>
-      <p class="content-full-width placeholder-content"></p>
-      <p class="content-default-width placeholder-content margin-15-0"></p>
-      <p class="content-half-width placeholder-content"></p>
+      <span
+        class="
+          placeholder-content
+          content-min-width
+          placeholder-content
+          margin-15-0
+        "
+      ></span>
+      <p class="content-default-width h-20 placeholder-content margin-30-0"></p>
+      <p class="content-full-width h-20 placeholder-content"></p>
+      <p class="content-default-width h-20 placeholder-content margin-30-0"></p>
+      <p class="content-half-width h-20 placeholder-content"></p>
     </div>
   </div>
 </template>
 
 <script >
 import Carousel from "./carousel";
+
 export default {
   components: {
     Carousel,
@@ -574,6 +833,17 @@ export default {
       if (number || typeof number === "number")
         return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       else return "";
+    },
+    getConvertedNumbers: function (number) {
+      if (number || typeof number === "number") {
+        let data = number / 1000;
+        if (number < 1000) {
+          return number + " " + "کیلوگرم";
+        } else {
+          data = this.getNumberWithCommas(data);
+          return data + " " + "تن";
+        }
+      } else return "";
     },
   },
 };

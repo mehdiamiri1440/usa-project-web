@@ -1,448 +1,253 @@
 
 <style scoped>
-.main-wrapper main {
-  padding-bottom: 50px;
-}
-
-.submit-button {
-  background: #dddddd;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  width: 100%;
-  font-size: 16px;
-  padding: 10px 0 9px;
-  transition: 300ms;
-  cursor: default;
-}
-
-.submit-button.active {
-  background: #00c569;
-  color: #fff !important;
-  cursor: pointer;
-}
-
-.padding-0 {
-  padding: 0;
-}
-
-input[type="number"] {
-  -moz-appearance: textfield;
-}
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-input,
-textarea {
-  padding: 9px 15px;
-}
-input.disabled {
-  color: #fff;
-  background: #f6f6f6;
-  border: 1px solid;
-  font-weight: bold;
-}
-
-input {
-  width: 100%;
-  background: none;
-  border-radius: 4px;
-  border: 1px solid;
-  color: #bebebe;
-  transition: 300ms;
-}
-
-input:focus,
-textarea:focus {
-  color: #333;
-  border-color: #333;
-}
-
-input.active,
-textarea.active {
-  color: #333;
-  border-color: #00c569;
-}
-
-input.active:focus,
-textarea.active:focus {
-  color: #333;
-  border-color: #00c569;
-}
-
-input.error {
-  color: #e41c38;
-}
-
-input.error:focus {
-  color: #e41c38;
-}
-
-textarea {
-  background: none;
-  min-height: 120px;
-  max-height: 140px;
-  transition: 300ms;
-  line-height: 1.618;
-  max-width: 100%;
-  min-width: 100%;
-}
-
-.error-message {
-  text-align: center;
-  color: #e41c38;
-  font-weight: bold;
-  height: 16px;
-  margin: 4px auto 0;
-  direction: rtl;
-  font-size: 12px;
-  display: block;
+a {
+  color: #1da1f2;
 }
 
 .main-wrapper {
-  direction: rtl;
-  background: #f6f6f6;
-  font-size: 13px;
-  padding-top: 50px;
-}
-
-.title {
-  padding: 13px 15px;
-}
-
-.title h1 {
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.title p {
-  color: #e41c38;
-  padding-top: 4px;
-  text-align: center;
-  font-size: 13px;
-}
-
-/*progress styles*/
-
-.progress-wrapper {
   background: #fff;
-  border-radius: 4px;
-  position: relative;
-  overflow: hidden;
+  padding-top: 15px;
+  padding-bottom: 50px;
 }
 
-.custom-progress {
-  background: #00c569;
+.info-box-wrapper {
+  background: #e8f4f8;
+  border-radius: 12px;
+  text-align: right;
+  color: #404b55;
+  padding: 5px 20px;
+  margin-bottom: 15px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: center;
+  min-height: 41px;
+}
+
+.info-text-fix {
+  position: relative;
+  top: -2px;
+  line-height: 1.618;
+}
+
+.info-description {
+  margin: 5px auto 10px;
+}
+
+.info-box-wrapper i {
+  font-size: 23px;
+  position: relative;
+  top: 5px;
+  margin-left: 6px;
+}
+
+.description .text-input-wrapper {
+  margin: 9px auto;
+}
+
+.button {
+  background: #1da1f2;
   color: #fff;
-  width: 25%;
-  text-align: center;
-  padding: 3px 0;
-  font-weight: bold;
-  min-width: 25%;
+  border-radius: 12px;
+  padding: 4px 25px;
+}
+
+.verification-button {
+  padding: 1px 25px 8px;
+}
+
+.verification-button i {
+  font-size: 20px;
+  top: 3px;
+  margin-left: 1px;
+}
+.certificate-cehck::after {
+  content: "\F00C";
+  position: absolute;
+  left: 3px;
+  color: #1da1f2;
+  font-size: 13px;
+  top: 3px;
+}
+
+.valid-user {
+  position: absolute;
+  font-size: 30px;
+  color: #1da1f2;
+  left: calc(50% - 15px);
+  top: 104px;
+  z-index: 1;
+}
+.valid-user .certificate-cehck::after {
+  color: #fff;
+  left: 6px;
+  font-size: 19px;
+  top: 6px;
+}
+.bg-main {
+  background: #f7f7f7;
+}
+
+.action-link {
+  font-size: 18px;
+  border: none;
+  background: none;
+}
+
+.action-link i {
   transition: 300ms;
 }
-
-.custom-progress p {
-  display: inline;
+.action-link i.rotate-down-icon {
+  transform: rotate(180deg);
 }
 
-/*form styles*/
-
-.content-wrapper {
+.box-wrapper {
+  border-radius: 12px;
+  border: 1px solid #f7f7f7;
+  padding: 20px;
+  margin-bottom: 15px;
   background: #fff;
-  box-shadow: 0 0 10px #c5c5c5;
-  border-radius: 9px;
-  margin: 15px auto;
-}
-
-/*user image*/
-
-.user-image-wrapper {
-  text-align: center;
-}
-
-.user-image-wrapper > p {
-  margin-bottom: 7px;
-}
-
-.content-wrapper {
-  padding: 15px 0;
-}
-
-.user-image {
-  width: 86px;
-  height: 86px;
   overflow: hidden;
-  margin: 0 auto;
-  border-radius: 50px;
   position: relative;
 }
 
-.user-image img {
-  position: absolute;
-
-  width: initial;
-
-  height: 100%;
-
-  left: 50%;
-
-  top: 50%;
-
-  transform: translate(-50%, -50%);
+.padding-buttom-fixed {
+  padding-bottom: 1px;
 }
 
-.submit {
-  position: relative;
-
-  max-width: 105px;
-
-  margin: 7px auto 0;
-
-  height: 25px;
-
-  background: #00c569;
-
-  text-align: center;
-
-  color: #fff;
-
-  overflow: hidden;
-
-  border-radius: 4px;
-}
-
-#imgInp {
-  max-width: 100%;
-  position: relative;
-  opacity: 0;
-  height: 100%;
-  z-index: 1;
-}
-
-#imgInp:hover {
-  cursor: pointer;
-}
-
-.submit label {
-  position: absolute;
-  z-index: 0;
-  top: 3px;
-  margin: 0;
-  left: 0;
-  right: 0;
-  font-weight: normal;
-}
-
-/*inputs styles*/
-
-.inputs-wrapper {
-  margin-bottom: 10px;
-}
-
-/*redio button styles*/
-
-.label-radio {
-  display: inline-block;
-
-  position: relative;
-
-  cursor: pointer;
-
-  -webkit-user-select: none;
-
-  -moz-user-select: none;
-
-  -ms-user-select: none;
-
-  user-select: none;
-
-  direction: rtl;
-
-  padding: 0 29px 0 15px;
-
-  font-size: 14px;
-}
-
-.label-radio:nth-of-type(1) {
-  margin-left: 16px;
-}
-
-/* Hide the browser's default radio button */
-.label-radio input {
-  position: absolute;
-
-  opacity: 0;
-
-  cursor: pointer;
-
-  z-index: 1;
-
-  left: 0;
-
-  right: 0;
-
-  top: 0;
-
-  bottom: 0;
-
-  height: 100%;
-
-  margin: 0;
-
-  width: 100%;
-}
-
-/* Create a custom radio button */
-.checkmark {
-  position: absolute;
-
-  top: 11px;
-
-  right: 13px;
-
-  height: 12px;
-
-  width: 12px;
-
-  background-color: #eee;
-
-  border-radius: 50%;
-}
-
-/* On mouse-over, add a grey background color */
-.label-radio:hover input ~ .checkmark {
-  background-color: #ccc;
-}
-
-/* When the radio button is checked, add a blue background */
-.label-radio input:checked ~ .checkmark {
-  background-color: #00c569;
-}
-
-.label-radio input:checked ~ label::after {
-  border-color: #00c569;
-}
-
-.label-radio label::after {
-  content: "";
-
-  display: block;
-
-  position: absolute;
-
-  left: 0;
-
-  right: 0;
-
-  top: -2px;
-
-  bottom: 0;
-
-  z-index: 0;
-
-  margin: 0;
-
+.box-wrapper.user-info-box {
   padding: 0;
-
-  border-radius: 3px;
-
-  border: 1px solid #bdc4cc;
 }
 
-.label-radio label i {
-  margin: 0 4px;
+.box-title {
+  font-size: 18px;
+  color: #313a43;
 }
 
-.label-text {
-  margin-bottom: 10px;
+.modal-box-title {
+  font-size: 18px;
+  font-weight: 500;
+  color: #555;
+  padding: 30px 15px 15px;
 }
 
-/*link help style*/
-
-.link-help {
-  text-align: right;
-}
-
-.link-help a {
-  color: #00c569;
-
-  padding: 2px 15px;
-
-  border-radius: 4px;
-
-  border: 1px solid;
-
-  display: inline-block;
-
-  font-weight: bold;
-
-  margin-bottom: 5px;
-}
-
-.link-help a {
-  color: #00c569;
-
-  padding: 2px 15px;
-
-  border-radius: 4px;
-
-  border: 1px solid;
-
-  display: inline-block;
-
-  font-weight: bold;
-}
-
-.link-help a:hover {
-  color: #fff;
+.box-title::after {
+  content: " ";
+  width: 100px;
+  height: 4px;
   background: #00c569;
-}
-
-.link-help i {
-  -ms-transform: matrix(-1, 0, 0, 1, 0, 0); /* Standard syntax */
-  -webkit-transform: matrix(-1, 0, 0, 1, 0, 0); /* Standard syntax */
-  transform: matrix(-1, 0, 0, 1, 0, 0); /* Standard syntax */
-}
-
-.link-help p {
-  color: #bdc4cc;
-
-  font-size: 12px;
-
-  line-height: 19px;
-
-  font-weight: bold;
-}
-
-.default-images {
-  text-align: center;
-  border: 3px dashed;
-  border-radius: 3px;
-  padding: 19px 0px;
-  font-size: 15px;
-  font-weight: bold;
-  color: #d2d2d2;
-}
-
-.default-images i {
   display: block;
-  font-size: 50px;
-  margin: 6px auto;
+  border-radius: 5px;
+  margin-top: 10px;
 }
 
-.images-content i.fa-times {
+.header-wrapper {
+  position: relative;
+  margin: 33px auto 22px;
+}
+
+.header-wrapper > svg {
   position: absolute;
-  color: red;
+  left: 13px;
+  top: -3px;
+  z-index: 1;
 }
 
-.small-description {
-  font-size: 12px;
-  color: #bdc4cc;
+.user-img-wrapper {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+  border-radius: 120px;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
 }
 
+.upload-image {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  overflow: hidden;
+  border-radius: 120px;
+  top: 0px;
+  left: calc(50% - 60px);
+}
+
+.upload-image > input {
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  position: relative;
+  z-index: 3;
+}
+
+.upload-image > input:hover {
+  cursor: pointer;
+}
+
+.upload-image > span {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  top: 0;
+  font-size: 30px;
+  color: #fff;
+  -webkit-transition: 100ms;
+  transition: 100ms;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.upload-image > span i {
+  flex: 1;
+}
+
+.upload-image > input:hover + span {
+  font-size: 35px;
+  transition: 100ms;
+}
+
+.user-name {
+  text-align: center;
+  font-size: 23px;
+  font-weight: bold;
+  color: #313a43;
+  margin: 16px auto 31px;
+}
+
+.user-phone-number-wrapper {
+  margin-top: 15px;
+}
+
+.info-description-wrapper {
+  display: block;
+}
+
+.info-description .row > div {
+  margin: 6px auto;
+  color: #777;
+}
+
+.submit-form-button {
+  border: none;
+  color: #fff;
+  font-size: 21px;
+  padding: 12px;
+  max-width: 280px;
+  width: 100%;
+  border-radius: 12px;
+}
+
+.submit-form-button i {
+  position: relative;
+  top: 1px;
+}
 .images-content > article {
   padding: 5px;
 }
@@ -454,409 +259,871 @@ textarea {
   border-radius: 3px;
   position: relative;
   height: 115px;
+  background-size: cover;
+  background-position: center;
+}
+.small-description {
+  font-size: 14px;
+  color: #bdc4cc;
+}
+.images-content i.fa-times {
+  position: absolute;
+  color: red;
+  background: none;
+  border: none;
+  z-index: 1;
+  right: 10px;
+  top: 10px;
 }
 
-.images-content .image-item img {
+.profile-badge {
+  background: #f7f7f7;
+  width: 27px;
+  height: 27px;
+  border-radius: 30px;
+  top: 15px;
+  left: 15px;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  width: initial;
-  height: 100%;
+  color: #bdc4cc;
+  font-size: 11px;
+  text-align: center;
+  padding-top: 7px;
+}
+/********
+ input design  
+*********/
+.error-input-wrapper {
+  height: 25px;
+  padding-top: 5px;
+}
+
+.text-input-wrapper {
+  margin: 0 auto;
+  position: relative;
+  background: #fbfbfb;
+}
+
+.title-contents {
+  font-size: 18px;
+  margin-bottom: 10px;
+  padding: 0;
+}
+
+.title-contents.active-number-title {
+  font-size: 15px;
+  margin-top: 3px;
+}
+
+.active-number-button {
+  font-size: 18px;
+  background: #00c569;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 30px 9px;
+}
+
+.deactive-number-button {
+  font-size: 18px;
+  background: #f7f7f7;
+  color: #556080;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 30px 9px;
+}
+
+input {
+  background: none;
+  z-index: 1;
+  position: relative;
+  width: 100%;
+  padding: 8px 15px;
+  border: 1px solid #bdc4cc;
+  border-radius: 4px;
+  box-shadow: none;
+}
+
+.text-input-wrapper i {
+  position: absolute;
+  left: 15px;
+  top: 11px;
+  font-size: 18px;
+  transition: 300ms;
+}
+
+i.fa-edit {
+  color: #bdc4cc;
+}
+
+input:focus,
+input:focus + i {
+  color: #333;
+  border-color: #333;
+}
+
+input.active {
+  border-color: #00c569;
+  color: #333;
+}
+
+input.active + i {
+  color: #00c569;
+}
+
+input.active:focus,
+input.active:focus + i,
+input.active + i {
+  border-color: #00c569;
+}
+
+input.error {
+  color: #333;
+  border-color: #e41c38;
+}
+
+input.error + i {
+  color: #e41c38;
+}
+
+input.error:focus,
+input.error:focus + i {
+  border-color: #e41c38;
+}
+
+textarea {
+  background: none;
+  z-index: 1;
+  position: relative;
+  width: 100%;
+  padding: 8px 15px;
+  border: 1px solid #bdc4cc;
+  border-radius: 4px;
+  box-shadow: none;
+  max-width: 100%;
+  min-height: 113px;
+  max-height: 300px;
   min-width: 100%;
 }
 
-.progressbar {
-  margin-top: 20px;
+.modal-textarea-wrapper.active,
+textarea:focus,
+textarea:focus + i {
+  color: #333;
+  border-color: #333;
 }
-.progressbar .progress-title {
-  margin-bottom: 10px;
-  font-size: 15px;
+
+.modal-textarea-wrapper.active,
+textarea.active {
+  border-color: #00c569;
+  color: #333;
+}
+
+textarea.active + i {
+  color: #00c569;
+}
+
+textarea.active:focus,
+textarea.active:focus + i,
+textarea.active + i {
+  border-color: #00c569;
+}
+
+textarea.error {
+  color: #333;
+  border-color: #e41c38;
+}
+
+textarea.error + i {
+  color: #e41c38;
+}
+
+.modal-textarea-wrapper.error,
+textarea.error:focus,
+textarea.error:focus + i {
+  border-color: #e41c38;
+}
+
+.modal-content {
+  overflow: hidden;
+  border-radius: 12px;
+}
+.close-modal {
+  font-size: 20px;
+
   color: #777;
+
+  position: absolute;
+
+  right: 0;
+
+  padding: 8px 15px 2px;
+
+  top: 0;
 }
 
-@media screen and (max-width: 1120px) {
-  .label-radio {
-    padding: 0 25px 0 11px;
-    font-size: 14px;
-  }
+.modal-title {
+  font-size: 16px;
 
-  .label-radio:nth-of-type(1) {
-    margin-left: 10px;
-  }
+  font-weight: 800;
 
-  .checkmark {
-    right: 8px;
-  }
-  .link-help a {
-    padding: 2px 10px;
-  }
+  color: #474747;
+
+  text-align: center;
 }
 
-@media only screen and (max-width: 991px) {
-  .radio-wrapper {
-    margin-bottom: 10px;
-  }
-
-  .label-radio {
-    padding: 0 29px 0 15px;
-  }
-
-  .label-radio:nth-of-type(1) {
-    margin-left: 16px;
-  }
-
-  .checkmark {
-    right: 13px;
-  }
-
-  .description {
-    margin: 15px auto;
-  }
-
-  .description hr {
-    margin: 0 auto 15px;
-  }
-
-  .link-help a {
-    float: right;
-    margin-left: 15px;
-  }
-
-  .link-help {
-    padding: 0 15px;
-  }
-
-  .form-control-wrapper {
-    margin-bottom: 7px;
-  }
-  .description {
-    margin: 8px auto 15px;
-  }
-
-  .activity-type {
-    padding: 0 15px;
-  }
-
-  .images-content .image-item {
-    height: 150px;
-  }
+.modal-header {
+  padding: 9px 15px 10px;
 }
 
-@media only screen and (max-width: 767px) {
-  .title {
-    text-align: center;
-    padding: 5px 15px;
-  }
-  .user-image-wrapper {
-    margin-top: 23px;
-  }
-  .title p,
-  .title h1 {
-    padding-top: 0;
-    margin: 5px auto;
-  }
-  .link-help a {
-    float: initial;
-    margin: 0 auto;
-  }
+.modal-body {
+  padding: 0;
+}
 
-  .link-help {
-    text-align: center;
-  }
+.feature-wrapper {
+  position: absolute;
+  left: 15px;
+  bottom: 0;
+  right: 13px;
+  text-align: right;
+  border-top: 1px solid #e0e0e0;
+  padding: 7px 15px;
+  background: #fbfbfb;
+  z-index: 1;
+  margin: 1px;
+  border-radius: 0 0 6px 6px;
+}
 
-  main,
-  .form-wrapper {
+.modal-textarea-wrapper {
+  border: 1px solid #bdc4cc;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.modal-textarea-wrapper.active-feature {
+  padding-bottom: 40px;
+}
+
+.modal-textarea-wrapper > textarea {
+  border: none;
+  border-radius: 8px;
+}
+
+.modal-button-wrapper {
+  margin: 15px auto 50px;
+}
+
+@media screen and (max-width: 992px) {
+  .address-wrapper {
+    margin-top: 15px;
+  }
+  .box-title {
+    font-size: 16px;
+    line-height: 1.618;
+  }
+  .submited-images {
+    margin-top: 30px;
     padding: 0;
   }
-  .content-wrapper {
-    border-radius: 0;
-  }
-
-  .images-content .image-item {
-    height: 200px;
-  }
-
-  .main-wrapper main {
-    padding-bottom: 110px !important;
+  .info-box-wrapper {
+    line-height: 1.618;
+    padding: 5px;
   }
 }
 
-@media only screen and (max-width: 512px) {
-  .images-content .image-item {
-    height: 150px;
+@media screen and (max-width: 767px) {
+  .info-box-wrapper {
+    flex-direction: column;
+  }
+  .verification-button {
+    max-width: 180px;
+    margin: 6px auto;
+    padding: 5px 25px 7px;
   }
 }
 </style>
 
 <template>
-  <div class="main-wrapper col-xs-12">
-    <header class="col-xs-12">
-      <div class="progressbar col-xs-12">
-        <p class="text-center progress-title hidden-sm hidden-md hidden-lg">میزان تکمیل پروفایل</p>
+  <div class="main-wrapper col-xs-12 text-rtl">
+    <!-- Modal -->
+    <div
+      class="description-modal modal fade"
+      id="description-modal"
+      tabindex="-1"
+      role="dialog"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <div class="modal-title">
+              <span> درباره شما </span>
+            </div>
+          </div>
+          <div class="modal-body col-xs-12">
+            <div class="modal-box-title">
+              درباره ی خودتان حد اقل <span class="hidden-xs">۳</span
+              ><span class="hidden-lg hidden-md hidden-sm">۵</span> خط بنویسید.
+            </div>
+            <div class="description">
+              <div class="col-xs-12">
+                <div
+                  class="modal-textarea-wrapper text-input-wrapper"
+                  :class="{
+                    'active-feature': editDescription.length,
+                    active: editDescription.length >= 200,
+                    error: errors.editDescription,
+                  }"
+                >
+                  <textarea
+                    rows="5"
+                    v-model="editDescription"
+                    placeholder="در مورد کیفیت و نوع بسته بندی محصول خود اینجا توضیح دهید"
+                  ></textarea>
+                  <div class="feature-wrapper" v-if="editDescription.length">
+                    <p
+                      class="description-length"
+                      :class="{
+                        'red-text':
+                          editDescription.length &&
+                          editDescription.length < 200,
+                        'green-text': editDescription.length >= 200,
+                      }"
+                    >
+                      <span v-if="editDescription.length < 200">نا کافی</span>
+                      <span v-else-if="editDescription.length >= 200">
+                        کافی</span
+                      >
+                    </p>
+                  </div>
 
-        <div class="progress-wrapper row">
-          <div class="custom-progress">
-            <p class="hidden-xs">میزان تکمیل پروفایل</p>
-
-            <span>{{completeProfileProgress}}%</span>
+                  <i
+                    v-if="
+                      editDescription.length >= 200 &&
+                      editDescription &&
+                      !errors.editDescription
+                    "
+                    class="fa fa-check-circle green-text"
+                  ></i>
+                  <i
+                    v-else-if="errors.editDescription"
+                    class="fa fa-times-circle red-text"
+                  ></i>
+                  <i v-else class="fa fa-edit"></i>
+                </div>
+                <div class="error-input-wrapper">
+                  <p class="error-message">
+                    <span
+                      class="red-text"
+                      v-if="errors.editDescription"
+                      v-text="errors.editDescription"
+                    ></span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-12 text-center modal-button-wrapper">
+              <button
+                @click="editprofileDescription()"
+                :disabled="isLoaded || errors.editDescription != ''"
+                :class="{
+                  'green-button':
+                    !isLoaded &&
+                    editDescription.length >= 200 &&
+                    !errors.editDescription,
+                }"
+                class="submit-form-button hover-effect"
+              >
+                ذخیره
+              </button>
+            </div>
           </div>
         </div>
       </div>
-    </header>
+    </div>
 
-    <main class="col-xs-12">
-      <section class="wrapper-section">
-        <div class="content-wrapper row">
-          <div class="form-wrapper col-xs-12">
-            <div class="user-image-wrapper col-xs-4 col-sm-2 pull-right">
-              <p class="hidden-xs">تصویر پروفایل</p>
-              <div class="user-image">
-                <img
-                  v-if="currentUser.profile.profile_photo"
-                  :src="str + '/' + currentUser.profile.profile_photo"
-                  class="image-preview"
-                  alt="تصویر پروفایل"
-                />
+    <div class="row">
+      <div class="col-xs-12 col-md-4 pull-right">
+        <div class="info-box-wrapper">
+          <a
+            target="_blank"
+            href="https://www.buskool.com/profile/buskools"
+            class="info-text-fix"
+          >
+            <i class="fa fa-question-circle"></i>
+            نمونه پروفایل تکمیل شده
+          </a>
+        </div>
+      </div>
+      <div class="col-xs-12 col-md-8">
+        <div class="info-box-wrapper bg-main">
+          <p
+            class="pull-right info-text-fix light-green-text"
+            v-if="currentUser.user_info.is_verified"
+          >
+            <i class="fas fa-check"></i>
+            اطلاعات هویتی شما احراز شده است.
+          </p>
+          <p v-else class="pull-right info-text-fix red-text">
+            <i class="fas fa-exclamation-circle"></i>
+            اطلاعات هویتی شما احراز نشده است.
+          </p>
+          <router-link
+            v-if="!currentUser.user_info.is_verified"
+            class="button verification-button"
+            :to="{ name: 'profileBasicSellerVeficiation' }"
+          >
+            <i class="fa fa-certificate certificate-cehck"></i>
+            احراز هویت کنید
+          </router-link>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-md-4 pull-right">
+        <div class="box-wrapper user-info-box">
+          <span class="profile-badge"> %11 </span>
 
-                <img
-                  v-else
-                  src="../../../../../img/user-defult.png"
-                  align="تصویر پروفایل"
-                  class="image-preview"
-                />
-              </div>
-
-              <div class="submit">
-                <input type="file" id="imgInp" ref="profilePhoto" />
-
-                <label>ویرایش تصویر</label>
-
-                <br />
-
-                <span
-                  v-if="errors.profile_photo"
-                  class="text-danger tex-left"
-                  v-text="errors.profile_photo[0]"
-                ></span>
-              </div>
+          <div class="header-wrapper">
+            <svg width="150" height="150" viewBox="0 0 120 120">
+              <linearGradient id="linear" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#a6ceff" />
+                <stop offset="100%" stop-color="#2ed8a7" />
+              </linearGradient>
+              <circle
+                stroke-linecap="round"
+                cx="50"
+                cy="50"
+                r="48"
+                stroke="url(#linear)"
+                stroke-width="5"
+                fill="none"
+                stroke-dasharray="315"
+                stroke-dashoffset="315"
+                stroke-mitterlimit="0"
+                transform="rotate(-90 ) translate(-100 0)"
+              />
+            </svg>
+            <div
+              class="user-img-wrapper"
+              v-if="currentUser.profile.profile_photo"
+              :style="{
+                backgroundImage:
+                  'url(' + str + '/' + currentUser.profile.profile_photo + ')',
+              }"
+            ></div>
+            <div
+              class="user-img-wrapper"
+              v-else
+              :style="{
+                backgroundImage:
+                  'url(' + assets + 'assets/img/user-defult.png)',
+              }"
+            ></div>
+            <div class="upload-image">
+              <input
+                id="imgInp"
+                type="file"
+                accept="image/*"
+                ref="profilePhoto"
+              />
+              <span>
+                <i class="fa fa-camera"></i>
+              </span>
             </div>
-
-            <div class="user-information col-xs-8 col-sm-10">
-              <div class="row">
-                <div class="activity-type padding-0 col-xs-12 col-md-4 pull-right">
-                  <p class="label-text">نوع کاربری</p>
-                  <div class="radio-wrapper">
-                    <div class="label-radio">
-                      <input
-                        @click="disableForm()"
-                        type="radio"
-                        value="0"
-                        name="radio"
-                        :checked="0  == currentUser.profile.is_company"
-                        v-model="currentUser.profile.is_company"
-                      />
-
-                      <span class="checkmark"></span>
-
-                      <label>حقیقی</label>
-                    </div>
-
-                    <div class="label-radio">
-                      <input
-                        type="radio"
-                        @click="enableForm()"
-                        value="1"
-                        :checked="1  == currentUser.profile.is_company"
-                        name="radio"
-                        v-model="currentUser.profile.is_company"
-                      />
-                      <span class="checkmark"></span>
-
-                      <label>حقوقی</label>
-                    </div>
-                  </div>
-
-                  <div class="error-message">
-                    <span v-if="errors.is_company" v-text="errors.is_company[0]"></span>
-                  </div>
-                </div>
-
-                <div class="inputs-wrapper col-xs-12 col-md-8 pull-left">
-                  <div class="row">
-                    <div class="form-control-wrapper col-xs-12 col-sm-6 pull-right">
-                      <p class="label-text">نام شرکت</p>
-
-                      <div class="input-wrapper company-name-wrapper">
-                        <input
-                          type="text"
-                          id="company-name"
-                          name="company-name"
-                          placeholder="نام شرکت"
-                          v-model="currentUser.profile.company_name"
-                          :disabled="!formEnabled"
-                          :class="{'disabled' : formEnabled == false , 'active' : currentUser.profile.company_name}"
-                        />
-                      </div>
-
-                      <div class="error-message">
-                        <span v-if="errors.company_name" v-text="errors.company_name[0]"></span>
-                      </div>
-                    </div>
-
-                    <div class="form-control-wrapper col-xs-12 col-sm-6">
-                      <p class="label-text">شماره ثبت شرکت</p>
-
-                      <div class="input-wrapper company-number-wrapper">
-                        <input
-                          id="company-number"
-                          type="tel"
-                          name="company-number"
-                          placeholder="شماره ثبت شرکت"
-                          v-model="currentUser.profile.company_register_code"
-                          :disabled="!formEnabled"
-                          :class="{'disabled' : formEnabled == false , 'active' : currentUser.profile.company_register_code}"
-                          pattern="[0-9]*"
-                        />
-
-                        <div class="error-message">
-                          <span
-                            v-if="errors.company_register_code"
-                            v-text="errors.company_register_code[0]"
-                          ></span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="user-form col-xs-12 col-sm-10">
-              <div class="row">
-                <div class="col-xs-12 col-md-8 pull-left">
-                  <div class="row">
-                    <div class="form-control-wrapper col-xs-6 pull-right">
-                      <p class="label-text">شماره تماس عمومی</p>
-
-                      <div class="input-wrapper phone-number-wrapper">
-                        <input
-                          id="phone-number"
-                          type="tel"
-                          class="dire"
-                          placeholder="شماره موبایل"
-                          pattern="[0-9]*"
-                          v-model="currentUser.profile.public_phone"
-                          :class="{'active' : currentUser.profile.public_phone}"
-                        />
-
-                        <div class="error-message">
-                          <span v-if="errors.public_phone" v-text="errors.public_phone[0]"></span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="col-xs-6 form-control-wrapper">
-                      <p class="label-text">آدرس</p>
-
-                      <div class="input-wrapper address-wrapper">
-                        <input
-                          id="address"
-                          type="text"
-                          class="dire"
-                          placeholder="آدرس شما"
-                          v-model="currentUser.profile.address"
-                          :class="{'active' : currentUser.profile.address}"
-                        />
-
-                        <div class="error-message">
-                          <span v-if="errors.address" v-text="errors.address[0]"></span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <div class="valid-user" v-if="currentUser.user_info.is_verified">
+              <i class="fa fa-certificate certificate-cehck"></i>
             </div>
           </div>
+          <div class="user-name">
+            <p class="blue-aqua-text text-center">
+              میزان تکمیل پروفایل
+              <span v-if="completeProfileProgress">
+                {{ completeProfileProgress }}%
+              </span>
+            </p>
+            <p
+              class="user-name"
+              v-if="currentUser.user_info.first_name"
+              v-text="
+                currentUser.user_info.first_name +
+                ' ' +
+                currentUser.user_info.last_name
+              "
+            ></p>
+            <p class="user-name" v-else>
+              <span
+                class="
+                  placeholder-content
+                  content-default-width
+                  h-25
+                  margin-auto
+                "
+              ></span>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-md-8">
+        <div class="box-wrapper padding-buttom-fixed">
+          <span class="profile-badge"> %22 </span>
+          <div class="box-title">اطلاعات شما</div>
+          <div class="user-phone-number-wrapper row">
+            <div class="col-xs-12 pull-right col-md-7">
+              <p class="title-contents">
+                شماره موبایل
+                <span class="red-text"> * </span>
+              </p>
+              <div class="text-input-wrapper">
+                <input
+                  v-model="currentUser.profile.public_phone"
+                  type="tel"
+                  :class="{
+                    active: currentUser.profile.public_phone,
+                    error: errors.public_phone,
+                  }"
+                  placeholder="شماره موبایل را وارد کنید"
+                  pattern="[0-9]*"
+                />
 
-          <div class="form-wrapper col-xs-12 col-md-10 pull-left">
-            <div class="description col-xs-12 col-md-8">
-              <hr class="hidden-md hidden-lg" />
-              <p class="label-text">درباره کسب و کارتان بنویسید</p>
-
-              <div class="input-wrapper address-wrapper">
-                <textarea
-                  rows="3"
-                  id="description"
-                  class="dire"
-                  placeholder=" درباره کسب و کارتان بنویسید "
-                  v-model="currentUser.profile.description"
-                  :class="{'active' : currentUser.profile.description}"
-                ></textarea>
-
-                <div class="error-message">
-                  <span v-if="errors.description" v-text="errors.description[0]"></span>
-                </div>
+                <i
+                  v-if="
+                    currentUser.profile.public_phone && !errors.public_phone
+                  "
+                  class="fa fa-check-circle"
+                ></i>
+                <i
+                  v-else-if="errors.public_phone"
+                  class="fa fa-times-circle"
+                ></i>
+                <i v-else class="fa fa-edit"></i>
+              </div>
+              <div class="error-input-wrapper">
+                <p class="error-message">
+                  <span
+                    class="red-text"
+                    v-if="errors.public_phone"
+                    v-text="errors.public_phone"
+                  ></span>
+                </p>
               </div>
             </div>
-
-            <div class="link-help padding-0 col-xs-12 col-md-4">
-              <a target="_blank" href="https://www.buskool.com/profile/buskools">
-                نمونه پروفایل تکمیل شده
-                <i class="fa fa-question-circle"></i>
-              </a>
-              <p>
-                در بخش (درباره کسب و کارتان بنویسید) به این سوالات پاسخ دهید.
-                <br />1- چه محصولاتی برای فروش دارید؟ 2- میزان تولید ماهانه یا سالانه محصولات چقدر است ؟ 3- محصولات در چه زمانی از سال آماده فروش می باشند؟ 4- چند سال سابقه فعالیت دارید؟
+            <div class="col-xs-12 active-number-wrapper col-md-5">
+              <p class="title-contents active-number-title">
+                نمايش شماره به خریداران
+                <span
+                  class="red-text"
+                  v-if="!currentUser.user_info.phone_allowed"
+                >
+                  غیر فعال است
+                </span>
+                <span class="green-text" v-else> فعال است </span>
               </p>
+              <button
+                v-if="!currentUser.user_info.phone_allowed"
+                class="active-number-button hover-effect"
+                @click.prevent="switchPhoneActivation(true)"
+              >
+                فعال کردن
+              </button>
+              <button
+                v-else
+                @click.prevent="switchPhoneActivation(false)"
+                class="deactive-number-button hover-effect"
+              >
+                غیرفعال
+              </button>
+            </div>
+          </div>
+          <div class="address-wrapper row">
+            <div class="col-xs-12 pull-right col-md-7">
+              <p class="title-contents">آدرس</p>
+              <div class="text-input-wrapper">
+                <input
+                  v-model="currentUser.profile.address"
+                  type="text"
+                  :class="{
+                    active: currentUser.profile.address,
+                    error: errors.address,
+                  }"
+                  placeholder="آدرس را وارد کنید"
+                />
+
+                <i
+                  v-if="currentUser.profile.address && !errors.address"
+                  class="fa fa-check-circle"
+                ></i>
+                <i v-else-if="errors.address" class="fa fa-times-circle"></i>
+                <i v-else class="fa fa-edit"></i>
+              </div>
+              <div class="error-input-wrapper">
+                <p class="error-message">
+                  <span
+                    class="red-text"
+                    v-if="errors.address"
+                    v-text="errors.address"
+                  ></span>
+                </p>
+              </div>
+            </div>
+            <div class="col-xs-12 col-md-5"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 margin-15-auto">
+        <ProfileCompletion />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-md-4 pull-right">
+        <div class="box-wrapper">
+          <span class="profile-badge"> %34 </span>
+
+          <div class="box-title">افزودن اطلاعات حقوقی</div>
+          <p class="margin-15-0">
+            با تکمیل اطلاعات حقوقی، اعتبار حساب خود را بیشتر کنید.
+          </p>
+          <button
+            class="action-link blue-text"
+            type="button"
+            data-toggle="collapse"
+            data-target="#company-box"
+            aria-expanded="false"
+            aria-controls="company-box"
+          >
+            <span v-if="!currentUser.profile.is_company"
+              >افزودن اطلاعات حقوقی</span
+            >
+            <span v-else>بستن</span>
+            <i
+              class="fa fa-angle-down"
+              :class="{ 'rotate-down-icon': currentUser.profile.is_company }"
+            ></i>
+          </button>
+
+          <div class="form-wrapper collapse" id="company-box">
+            <div class="margin-top-15">
+              <p class="title-contents">
+                نام شرکت
+                <span class="red-text"> * </span>
+              </p>
+              <div class="text-input-wrapper">
+                <input
+                  v-model="currentUser.profile.company_name"
+                  type="text"
+                  :class="{
+                    active: currentUser.profile.company_name,
+                    error: errors.company_name,
+                  }"
+                  placeholder="نام شرکت را وارد کنید"
+                />
+
+                <i
+                  v-if="
+                    currentUser.profile.company_name && !errors.company_name
+                  "
+                  class="fa fa-check-circle"
+                ></i>
+                <i
+                  v-else-if="errors.company_name"
+                  class="fa fa-times-circle"
+                ></i>
+                <i v-else class="fa fa-edit"></i>
+              </div>
+              <div class="error-input-wrapper">
+                <p class="error-message">
+                  <span
+                    class="red-text"
+                    v-if="errors.company_name"
+                    v-text="errors.company_name"
+                  ></span>
+                </p>
+              </div>
+            </div>
+            <div class="">
+              <p class="title-contents">
+                شماره ثبت شرکت
+                <span class="red-text"> * </span>
+              </p>
+              <div class="text-input-wrapper">
+                <input
+                  v-model="currentUser.profile.company_register_code"
+                  type="tel"
+                  :class="{
+                    active: currentUser.profile.company_register_code,
+                    error: errors.company_register_code,
+                  }"
+                  placeholder="شماره ثبت شرکت را وارد کنید"
+                  pattern="[0-9]*"
+                />
+
+                <i
+                  v-if="
+                    currentUser.profile.company_register_code &&
+                    !errors.company_register_code
+                  "
+                  class="fa fa-check-circle"
+                ></i>
+                <i
+                  v-else-if="errors.company_register_code"
+                  class="fa fa-times-circle"
+                ></i>
+                <i v-else class="fa fa-edit"></i>
+              </div>
+              <div class="error-input-wrapper">
+                <p class="error-message">
+                  <span
+                    class="red-text"
+                    v-if="errors.company_register_code"
+                    v-text="errors.company_register_code"
+                  ></span>
+                </p>
+              </div>
             </div>
           </div>
         </div>
+      </div>
+      <div class="col-xs-12 col-md-8">
+        <div class="box-wrapper padding-buttom-fixed">
+          <span class="profile-badge"> %11 </span>
+          <div class="box-title">درباره کسب و کارتان بنویسید</div>
+          <div class="info-box-wrapper info-description-wrapper margin-15-0">
+            <p class="pull-right info-text-fix col-xs-12">
+              <i class="fas fa-question-circle"></i>
+              در بخش (درباره کسب و کارتان بنویسید) به این سوالات پاسخ دهید.
+            </p>
+            <div class="info-description col-xs-12">
+              <div class="row">
+                <div class="col-xs-12 pull-right col-md-6">
+                  1- در چه زمینه ای فعالیت می کنید؟
+                </div>
+                <div class="col-xs-12 pull-right col-md-6">
+                  2- بازار فعالیت شما داخلی است یا خارجی؟
+                </div>
+                <div class="col-xs-12 pull-right col-md-6">
+                  3- چند سال سابقه فعالیت دارید؟
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="description row">
+            <div class="col-xs-12">
+              <div class="text-input-wrapper">
+                <textarea
+                  rows="5"
+                  :class="{
+                    active:
+                      currentUser.profile.description.length >= 100 &&
+                      currentUser.profile.description,
+                    error: errors.description,
+                  }"
+                  v-model="currentUser.profile.description"
+                  placeholder="در مورد کیفیت و نوع بسته بندی محصول خود اینجا توضیح دهید"
+                ></textarea>
+                <i
+                  v-if="
+                    currentUser.profile.description.length >= 100 &&
+                    !errors.description
+                  "
+                  class="fa fa-check-circle"
+                ></i>
+                <i
+                  v-else-if="errors.description"
+                  class="fa fa-times-circle"
+                ></i>
+                <i v-else class="fa fa-edit"></i>
+              </div>
+              <div class="error-input-wrapper">
+                <p class="error-message">
+                  <span
+                    class="red-text"
+                    v-if="errors.description"
+                    v-text="errors.description"
+                  ></span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-        <div class="content-wrapper row">
+    <div class="row">
+      <div class="col-xs-12 text-center margin-15-auto">
+        <button
+          @click="RegisterBasicProfileInfo()"
+          :disabled="isLoaded"
+          class="submit-form-button bg-blue hover-effect"
+        >
+          <i class="fa fa-check"></i>
+          ثبت تغییرات
+        </button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="box-wrapper margin-15-auto">
+          <span class="profile-badge"> %11 </span>
           <div class="col-xs-12 col-sm-6 pull-right">
-            <label>
-              افزودن تصاویر مربوطه
-              <span class="small-description">(محصولات | شرکت | کارکنان)</span>
-            </label>
+            <div class="row">
+              <div class="box-title">
+                افزودن تصاویر مربوطه
+                <span class="small-description"
+                  >(محصولات | شرکت | کارکنان)</span
+                >
+              </div>
 
-            <UploadFile
-              uploadName="related_files"
-              uploadAccept="image/*"
-              :uploadMinSize="1024"
-              :uploadSize="1024 * 1024 * 10"
-              :uploadMultiple="true"
-              :uploadDrop="true"
-              :uploadDropDirectory="true"
-              :uploadAddIndex="false"
-              :uploadThread="3"
-              :uploadOCompress="1024 * 1024"
-              :uploadUploadAuto="false"
-              :uploadRef="relatedFiles"
-            />
+              <UploadFile
+                class="margin-15-auto"
+                uploadName="relatedFiles"
+                uploadAccept="image/*"
+                :uploadMultiple="true"
+                :isImageReset="relatedFilesReset"
+                :uploadDrop="true"
+                :uploadDropDirectory="true"
+                :uploadAddIndex="false"
+                :uploadThread="3"
+                :uploadOCompress="1024 * 1024"
+                :uploadUploadAuto="false"
+                :imageWrapperSize="'col-xs-12 col-sm-6'"
+              />
+            </div>
           </div>
 
-          <div class="col-xs-12 col-sm-6 pull-left">
-            <label>تصاویر ثبت شده</label>
-
+          <div class="col-xs-12 submited-images col-sm-6 pull-left">
             <div class="row">
-              <div class="images-content col-xs-12">
-                <article
-                  class="col-md-4 col-xs-6 col-lg-3 pull-right"
-                  v-for="photo in currentUser.relateds"
+              <div class="box-title">تصاویر ثبت شده</div>
+
+              <div class="row margin-15-auto">
+                <div
+                  class="images-content col-xs-12"
                   v-if="currentUser.relateds.length"
                 >
-                  <!--                                             <a href="#">
-                                                <i class="fa fa-times"></i>
-                  </a>-->
+                  <article
+                    class="col-md-4 col-xs-6 col-lg-3 pull-right"
+                    v-for="(photo, index) in currentUser.relateds"
+                    :key="index"
+                  >
+                    <!-- <a href="#">
+                      <i class="fa fa-times"></i>
+                    </a> -->
 
-                  <div class="image-item">
-                    <img :src=" str + '/' + photo" alt />
-                  </div>
-                </article>
-
+                    <div
+                      class="image-item"
+                      :style="{
+                        backgroundImage: 'url(' + str + '/' + photo + ')',
+                      }"
+                    ></div>
+                  </article>
+                </div>
                 <div v-else class="default-images">
                   <i class="fa fa-picture-o"></i>
                   هنوز تصویری ثبت نشده است
@@ -865,78 +1132,101 @@ textarea {
             </div>
           </div>
         </div>
+      </div>
+    </div>
 
-        <div class="content-wrapper row">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="box-wrapper margin-15-auto">
+          <span class="profile-badge"> %11 </span>
           <div class="col-xs-12 col-sm-6 pull-right">
-            <label>
-              افزودن گواهی های مربوطه
-              <span
-                class="small-description"
-              >(گواهی های ثبت شرکت | استاندارد محصول)</span>
-            </label>
+            <div class="row">
+              <div class="box-title">
+                افزودن گواهی های مربوطه
+                <span class="small-description"
+                  >(گواهی های ثبت شرکت | استاندارد محصول)</span
+                >
+              </div>
 
-            <UploadFile
-              uploadName="certificate_files"
-              uploadAccept="image/*"
-              :uploadMinSize="1024"
-              :uploadSize="1024 * 1024"
-              :uploadMultiple="true"
-              :uploadDrop="true"
-              :uploadDropDirectory="true"
-              :uploadAddIndex="false"
-              :uploadThread="3"
-              :uploadOCompress="1024 * 1024"
-              :uploadUploadAuto="false"
-              :uploadRef="certificateFiles"
-            />
+              <UploadFile
+                class="margin-15-auto"
+                uploadName="certificateFiles"
+                :isImageReset="certificateFilesReset"
+                uploadAccept="image/*"
+                :uploadMultiple="true"
+                :uploadDrop="true"
+                :uploadDropDirectory="true"
+                :uploadAddIndex="false"
+                :uploadThread="3"
+                :uploadOCompress="1024 * 1024"
+                :uploadUploadAuto="false"
+                :imageWrapperSize="'col-xs-12 col-sm-6'"
+              />
+            </div>
           </div>
 
-          <div class="col-xs-12 col-sm-6 pull-left">
-            <label>تصاویر ثبت شده</label>
+          <div class="col-xs-12 submited-images col-sm-6 pull-left">
+            <div class="box-title">تصاویر ثبت شده</div>
 
-            <div class="row">
-              <div class="images-content col-xs-12">
+            <div class="row margin-15-auto">
+              <div
+                class="images-content col-xs-12"
+                v-if="currentUser.certificates.length"
+              >
                 <article
-                  v-if="currentUser.certificates.length"
                   class="col-md-4 col-xs-6 col-lg-3 pull-right"
-                  v-for="photo in currentUser.certificates"
+                  v-for="(photo, index) in currentUser.certificates"
+                  :key="index"
                 >
-                  <!--   <a href="#">
-                                                <i class="fa fa-times"></i>
-                  </a>-->
-                  <div class="image-item">
-                    <img :src=" str + '/' + photo" alt />
-                  </div>
+                  <!-- <a href="#">
+                    <i class="fa fa-times"></i>
+                  </a> -->
+                  <div
+                    class="image-item"
+                    :style="{
+                      backgroundImage: 'url(' + str + '/' + photo + ')',
+                    }"
+                  ></div>
                 </article>
-                <div v-else class="default-images">
-                  <i class="fa fa-picture-o"></i>
-                  هنوز تصویری ثبت نشده است
-                </div>
+              </div>
+              <div v-else class="default-images">
+                <i class="fa fa-picture-o"></i>
+                هنوز تصویری ثبت نشده است
               </div>
             </div>
           </div>
         </div>
-
-        <div class="col-xs-12 col-md-3 col-sm-4 pull-right">
-          <div class="row">
-            <button class="submit-button active" @click="RegisterBasicProfileInfo">ثبت تغییرات</button>
-          </div>
-        </div>
-      </section>
-    </main>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 text-center margin-15-auto margin-bottom-100">
+        <button
+          @click="RegisterBasicProfileInfo()"
+          :disabled="isLoaded"
+          class="submit-form-button bg-blue hover-effect"
+        >
+          <i class="fa fa-check"></i>
+          ثبت تصاویر
+        </button>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import { eventBus } from "../../../../router/router";
 import UploadFile from "../../upload-image";
+import swal from "../../../../sweetalert.min.js";
+import imageuploadify from "../../../../imageuploadify.min";
+import ProfileCompletion from "./profile-completation.vue";
 
 export default {
-  props: ["str"],
+  props: ["str", "assets"],
   components: {
-    UploadFile
+    UploadFile,
+    ProfileCompletion,
   },
-  data: function() {
+  data: function () {
     return {
       currentUser: {
         profile: {
@@ -946,12 +1236,11 @@ export default {
           address: "",
           public_phone: "",
           profile_photo: "",
-          postal_code: "",
-          shaba_code: ""
+          description: "",
         },
         user_info: "",
         relateds: "",
-        certificates: ""
+        certificates: "",
       },
       profileBasicFields: [
         "is_company",
@@ -960,30 +1249,33 @@ export default {
         "public_phone",
         "address",
         "postal_code",
-        "shaba_code"
+        "description",
       ],
-      profileComplementaryFields: [
-        "is_company",
+
+      profileErrors: [
+        "public_phone",
+        "description",
+        "address",
         "company_name",
         "company_register_code",
-        "public_phone",
-        "description"
       ],
       profilePhoto: "",
-      errors: "",
+      errors: {
+        public_phone: "",
+        description: "",
+        address: "",
+        company_name: "",
+        company_register_code: "",
+        editDescription: "",
+      },
+      profileDescription: "",
+      editDescription: "",
       popUpMsg: "",
-      items: [
-        {
-          message: "پروفایل",
-          url: "profileBasicSeller"
-        },
-        {
-          message: "احراز هویت",
-          url: "profileBasicSellerVeficiation"
-        }
-      ],
+      items: "",
       relatedFiles: [],
       certificateFiles: [],
+      relatedFilesReset: false,
+      certificateFilesReset: false,
       formEnabled: false,
       rankState: {
         is_company: 12,
@@ -994,158 +1286,181 @@ export default {
         description: 11,
         profile_photo: 11,
         certificates: 11,
-        relateds: 11
+        relateds: 11,
       },
       completeProfileProgress: 0,
-      uploadPercentage: 0
+      uploadPercentage: 0,
+      isLoaded: false,
+      invitedUsers: "",
     };
   },
   methods: {
-    init: function() {
+    init: function () {
+      this.activeisCompanyCollapse();
       this.isLoaded = true;
       $('input[type="file"]').imageuploadify();
-      var self = this;
-      axios.post("/user/profile_info").then(function(response) {
-        self.currentUser = response.data;
-        self.sumProgressNumber();
+      this.getProfileInfo();
+    },
+    getProfileInfo() {
+      axios.post("/user/profile_info").then((response) => {
+        axios.post("/get-user-referral-info").then((response) => {
+          this.invitedUsers = response.data.invited_users;
+        });
+        this.currentUser = response.data;
+        this.profileDescription = this.currentUser.profile.description;
+        this.isLoaded = false;
+        if (this.currentUser.profile.is_company) {
+          $("#company-box").collapse("show");
+        }
+        this.sumProgressNumber();
       });
     },
-    RegisterBasicProfileInfo: function() {
-      eventBus.$emit("submiting", true);
-      this.errors = "";
-      var self = this;
-      var data = new FormData();
-
-      for (var i = 0, cnt = this.profileBasicFields.length; i < cnt; i++) {
-        if (this.currentUser.profile[this.profileBasicFields[i]] != null) {
-          data.append(
-            this.profileBasicFields[i],
-            this.toLatinNumbers(
-              this.currentUser.profile[this.profileBasicFields[i]]
-            )
-          );
+    RegisterBasicProfileInfo: function () {
+      if (this.currentUser.profile.is_company) {
+        this.checkIsCompany();
+      } else {
+        this.errors.company_name = "";
+        this.errors.company_register_code = "";
+      }
+      let formError = 0;
+      for (var i = 0; i < this.profileErrors.length; i++) {
+        if (this.errors[this.profileErrors[i]]) {
+          formError += 1;
         }
       }
+      if (!formError) {
+        $(".modal").modal("hide");
+        eventBus.$emit("submiting", true);
 
-      // Complementary  form check
+        var self = this;
+        var data = new FormData();
 
-      for (var i = 0; i < this.profileComplementaryFields.length; i++) {
-        if (
-          this.profileComplementaryFields[i] === "description" &&
-          (this.currentUser.profile["description"] == null ||
-            this.currentUser.profile["description"] === "")
-        ) {
-          continue;
-        }
-        data.append(
-          this.profileComplementaryFields[i],
-          this.currentUser.profile[this.profileComplementaryFields[i]]
-        );
-      }
-
-      for (var i = 0; i < this.relatedFiles.length; i++) {
-        let file = this.relatedFiles[i];
-        data.append("related_" + i, file);
-      }
-
-      for (var i = 0; i < this.certificateFiles.length; i++) {
-        let file = this.certificateFiles[i];
-        data.append("certificate_" + i, file);
-      }
-
-      data.append("related_image_count", this.relatedFiles.length);
-      data.append("certificate_image_count", this.certificateFiles.length);
-
-      // end Complementary  form check
-
-      let profilePhoto = this.$refs.profilePhoto.files[0];
-      if (profilePhoto) {
-        data.append("profile_photo", profilePhoto);
-      }
-
-      axios
-        .post("/user/profile_modification", data, {
-          headers: {
-            "X-Requested-With": "XMLHttpRequest",
-            "Content-Type": "application/json"
-          },
-          onUploadProgress: function(progressEvent) {
-            this.uploadPercentage = parseInt(
-              Math.round((progressEvent.loaded * 100) / progressEvent.total)
+        for (var i = 0, cnt = this.profileBasicFields.length; i < cnt; i++) {
+          if (this.currentUser.profile[this.profileBasicFields[i]] != null) {
+            data.append(
+              this.profileBasicFields[i],
+              this.toLatinNumbers(
+                this.currentUser.profile[this.profileBasicFields[i]]
+              )
             );
-          }.bind(this)
-        })
-        .then(function(response) {
-          if (response.status === 200) {
+          }
+        }
+
+        for (var i = 0; i < this.relatedFiles.length; i++) {
+          let file = this.relatedFiles[i];
+          data.append("related_" + i, file.file);
+        }
+
+        for (var i = 0; i < this.certificateFiles.length; i++) {
+          let file = this.certificateFiles[i];
+          data.append("certificate_" + i, file.file);
+        }
+
+        data.append("related_image_count", this.relatedFiles.length);
+        data.append("certificate_image_count", this.certificateFiles.length);
+
+        // end Complementary  form check
+
+        let profilePhoto = this.$refs.profilePhoto.files[0];
+        if (profilePhoto) {
+          data.append("profile_photo", profilePhoto);
+        }
+        axios
+          .post("/user/profile_modification", data, {
+            headers: {
+              "X-Requested-With": "XMLHttpRequest",
+              "Content-Type": "application/json",
+            },
+            onUploadProgress: function (progressEvent) {
+              this.uploadPercentage = parseInt(
+                Math.round((progressEvent.loaded * 100) / progressEvent.total)
+              );
+            }.bind(this),
+          })
+          .then(function (response) {
+            if (response.status === 200) {
+              eventBus.$emit("submiting", false);
+              eventBus.$emit("uploadPercentage", 0);
+              eventBus.$emit("modal", "profileEditSuccess");
+              self.relatedFilesReset = true;
+              self.certificateFilesReset = true;
+              axios.post("/user/profile_info").then(function (response) {
+                self.currentUser = response.data;
+                self.profileDescription = self.currentUser.profile.description;
+                self.editDescription = "";
+                self.errors.editDescription = "";
+                if (self.currentUser.profile.is_company) {
+                  $("#company-box").collapse("show");
+                }
+                self.sumProgressNumber();
+              });
+            }
+            self.submiting = false;
+          })
+          .catch(function (err) {
+            self.scrollToTop();
+            if (err.response.status === 413) {
+              self.popUpMsg =
+                "اندازه تصاویر بزرگ تر 5  از مگابایت است یا فرمت مناسبی ندارد";
+              eventBus.$emit("submitSuccess", self.popUpMsg);
+              $("#custom-main-modal").modal("show");
+            }
+
+            self.errors = "";
+            self.errors = err.response.data.errors;
+
+            let tmpArray = Object.keys(self.errors);
+            //console.log((tmpArray.join() + "").includes('related') || (tmpArray.join() + "").includes('certificate') );
+            if (
+              (tmpArray.join() + "").includes("related") ||
+              (tmpArray.join() + "").includes("certificate")
+            ) {
+              eventBus.$emit("submiting", false);
+              eventBus.$emit("uploadPercentage", 0);
+              self.popUpMsg =
+                "اندازه تصاویر بزرگ تر 5  از مگابایت است یا فرمت مناسبی ندارد";
+              eventBus.$emit("submitSuccess", self.popUpMsg);
+              $("#custom-main-modal").modal("show");
+            }
             eventBus.$emit("submiting", false);
             eventBus.$emit("uploadPercentage", 0);
-
-            eventBus.$emit("modal", "profileEditSuccess");
-          }
-          self.submiting = false;
-        })
-        .catch(function(err) {
-          self.scrollToTop();
-          if (err.response.status === 413) {
-            self.popUpMsg =
-              "اندازه تصاویر بزرگ تر 5  از مگابایت است یا فرمت مناسبی ندارد";
-            eventBus.$emit("submitSuccess", self.popUpMsg);
-            $("#custom-main-modal").modal("show");
-          }
-
-          self.errors = "";
-          self.errors = err.response.data.errors;
-
-          let tmpArray = Object.keys(self.errors);
-          //console.log((tmpArray.join() + "").includes('related') || (tmpArray.join() + "").includes('certificate') );
-          if (
-            (tmpArray.join() + "").includes("related") ||
-            (tmpArray.join() + "").includes("certificate")
-          ) {
-            eventBus.$emit("submiting", false);
-            eventBus.$emit("uploadPercentage", 0);
-            self.popUpMsg =
-              "اندازه تصاویر بزرگ تر 5  از مگابایت است یا فرمت مناسبی ندارد";
-            eventBus.$emit("submitSuccess", self.popUpMsg);
-            $("#custom-main-modal").modal("show");
-          }
-          eventBus.$emit("submiting", false);
-          eventBus.$emit("uploadPercentage", 0);
+          });
+      }
+    },
+    switchPhoneActivation(active) {
+      axios
+        .post("/set_phone_number_view_permission", { permission: active })
+        .then((response) => {
+          this.getProfileInfo();
+          swal({
+            title: "تغییرات شماره تماس",
+            text: "تغییرات شماره تماس با موفقیت اعمال شد",
+            icon: "success",
+            className: "custom-swal-with-cancel",
+            buttons: {
+              close: {
+                text: "بستن",
+                className: "bg-cancel",
+              },
+            },
+          });
         });
     },
-    toLatinNumbers: function(num) {
+    toLatinNumbers: function (num) {
       if (num == null) {
         return null;
       }
 
       return num
         .toString()
-        .replace(/[\u0660-\u0669]/g, function(c) {
+        .replace(/[\u0660-\u0669]/g, function (c) {
           return c.charCodeAt(0) - 0x0660;
         })
-        .replace(/[\u06f0-\u06f9]/g, function(c) {
+        .replace(/[\u06f0-\u06f9]/g, function (c) {
           return c.charCodeAt(0) - 0x06f0;
         });
     },
-    disableForm: function() {
-      var companyNumber = $("#company-number");
-      var companyName = $("#company-name");
 
-      this.currentUser.profile.company_register_code = "";
-      this.currentUser.profile.company_name = "";
-
-      companyNumber.attr("disabled", true);
-      companyName.attr("disabled", true);
-      this.formEnabled = false;
-    },
-    enableForm: function() {
-      var companyNumber = $("#company-number");
-      var companyName = $("#company-name");
-      companyName.val("");
-      companyNumber.prop("disabled", false);
-      companyName.prop("disabled", false);
-      this.formEnabled = true;
-    },
     sumProgressNumber() {
       this.completeProfileProgress = 0;
 
@@ -1177,8 +1492,15 @@ export default {
       if (this.currentUser.relateds.length) {
         this.completeProfileProgress += this.rankState.relateds;
       }
+      this.circleProgress();
     },
-    isOsIOS: function() {
+    circleProgress() {
+      let circle = 315;
+      let percentage = circle - (this.completeProfileProgress * circle) / 100;
+      $("circle").attr("stroke-dashoffset", percentage);
+    },
+
+    isOsIOS: function () {
       var userAgent = window.navigator.userAgent.toLowerCase(),
         safari = /safari/.test(userAgent),
         ios = /iphone|ipod|ipad/.test(userAgent);
@@ -1187,41 +1509,92 @@ export default {
     },
     scrollToTop() {
       window.scrollTo(0, 0);
-    }
+    },
+    activeisCompanyCollapse() {
+      $("#company-box").on("hidden.bs.collapse", () => {
+        this.currentUser.profile.is_company = 0;
+      });
+      $("#company-box").on("show.bs.collapse", () => {
+        this.currentUser.profile.is_company = 1;
+      });
+    },
+    checkIsCompany() {
+      if (
+        this.currentUser.profile.company_name &&
+        !this.currentUser.profile.company_register_code
+      ) {
+        this.errors.company_register_code = "لطفا شماره ثبت شرکت را وارد کنید";
+      } else if (
+        !this.currentUser.profile.company_name &&
+        this.currentUser.profile.company_register_code
+      ) {
+        this.errors.company_name = "لطفا  نام شرکت را وارد کنید";
+      } else if (
+        !this.currentUser.profile.company_name &&
+        !this.currentUser.profile.company_register_code
+      ) {
+        this.errors.company_register_code = "";
+        this.errors.company_name = "";
+        $("#company-box").collapse("hide");
+        this.currentUser.profile.is_company = 0;
+      }
+    },
+    phoneValidator: function (number) {
+      this.errors.public_phone = "";
+      var standardNumber = this.toLatinNumbers(number);
+      if (standardNumber == "") {
+        this.errors.public_phone = "لطفا  شماره را وارد کنید";
+      } else if (!this.validateRegx(standardNumber, /^\d*$/)) {
+        this.errors.public_phone = "لطفا فقط عدد وارد کنید ";
+      }
+    },
+    companyRegisterCodeValidator: function (number) {
+      this.errors.company_register_code = "";
+      var standardNumber = this.toLatinNumbers(number);
+      if (!this.validateRegx(standardNumber, /^\d*$/)) {
+        this.errors.company_register_code = "لطفا فقط عدد وارد کنید ";
+      }
+    },
+    textValidator: function (text) {
+      if (text != "") {
+        if (!this.validateRegx(text, /^[\u0600-\u06FF\s_,.:/;()+-\d]+$/)) {
+          return true;
+        }
+      }
+    },
+    validateRegx: function (input, regx) {
+      return regx.test(input);
+    },
+    show_image_preview(input) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        var image = $(".user-img-wrapper");
+        reader.onload = function (e) {
+          image.css("background-image", "url('" + e.target.result + "')");
+        };
+        reader.readAsDataURL(input.files[0]);
+      }
+    },
+    editprofileDescription() {
+      if (!this.editDescription || this.editDescription == "") {
+        this.errors.editDescription = "لطفا توضیحات را کامل کنید.";
+      } else if (this.editDescription.length < 200) {
+        this.errors.editDescription = "توضیحات نباید کمتر از 200 کاراکتر باشد.";
+      } else if (!this.errors.editDescription) {
+        this.currentUser.profile.description = this.editDescription;
+        this.RegisterBasicProfileInfo();
+      }
+    },
   },
   mounted() {
     this.init();
     eventBus.$emit("subHeader", this.items);
     var self = this;
-    function show_image_preview(input) {
-      if (input.files && input.files[0]) {
-        var reader = new FileReader();
-        var image = $(".image-preview");
-        var iconProfile = $("#icon-pro");
-        reader.onload = function(e) {
-          image.attr("src", e.target.result);
-          image.css("display", "inline");
-          iconProfile.css("display", "none");
-        };
-        reader.readAsDataURL(input.files[0]);
-      }
-    }
 
-    function image_checked() {
-      var image = $(".image-preview");
-      var iconProfile = $("#icon-pro");
-      if (image.attr("src") !== "") {
-        image.css("display", "inline");
-        iconProfile.css("display", "none");
-      }
-    }
-
-    image_checked();
-
-    $("#imgInp").change(function() {
-      show_image_preview(this);
+    $("#imgInp").change(function () {
+      self.show_image_preview(this);
+      self.RegisterBasicProfileInfo();
     });
-
     if (this.isOsIOS()) {
       $("#phone-number").attr("type", "text");
       $("#company-number").attr("type", "text");
@@ -1231,24 +1604,53 @@ export default {
     gtag("config", "UA-129398000-1", { page_path: "/profile-basic" });
   },
   watch: {
-    uploadPercentage: function() {
+    uploadPercentage: function () {
       eventBus.$emit("uploadPercentage", this.uploadPercentage);
     },
-    "currentUser.profile.is_company": function(value) {
-      if (value == 1) {
-        this.enableForm();
-      } else {
-        this.disableForm();
+    "currentUser.profile.company_register_code": function (value) {
+      this.currentUser.profile.company_register_code =
+        this.toLatinNumbers(value);
+    },
+    "currentUser.profile.public_phone": function (value) {
+      if (value.length >= 11) {
+        this.currentUser.profile.public_phone = value.substring(0, 11);
+      }
+      this.phoneValidator(value);
+    },
+    "currentUser.profile.address": function (value) {
+      this.errors.address = "";
+
+      if (value && this.textValidator(value)) {
+        this.errors.address = "آدرس شامل حروف غیرمجاز است";
       }
     },
-    "currentUser.profile.company_register_code": function(value) {
-      this.currentUser.profile.company_register_code = this.toLatinNumbers(
-        value
-      );
+    "currentUser.profile.description": function (value) {
+      this.errors.description = "";
+      if (value.length < 100) {
+        this.errors.description = "توضیحات نباید کمتر از 100 کاراکتر باشد.";
+      } else {
+        if (value && this.textValidator(value)) {
+          this.errors.description = "توضیحات شامل حروف غیرمجاز است";
+        }
+      }
     },
-    completeProfileProgress: function(value) {
-      $(".custom-progress").css("width", value + "%");
-    }
-  }
+    editDescription: function (value) {
+      this.errors.editDescription = "";
+      if (value && this.textValidator(value)) {
+        this.errors.editDescription = "توضیحات شامل حروف غیرمجاز است";
+      }
+    },
+    "currentUser.profile.company_name": function (value) {
+      this.errors.company_name = "";
+
+      if (value && this.textValidator(value)) {
+        this.errors.company_name = "نام شرکت شامل حروف غیرمجاز است";
+      }
+    },
+    "currentUser.profile.company_register_code": function (value) {
+      this.companyRegisterCodeValidator(value);
+    },
+  },
 };
 </script>
+

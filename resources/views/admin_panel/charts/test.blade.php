@@ -105,7 +105,7 @@
         
               </div>
     </section>
-
+    
     <!-- Main content -->
     <section class="content">
       <div class="row">        
@@ -124,6 +124,8 @@
                 <!-- <hr/><br/> -->
                 <hr/><br/>
                 {!! $buyAdPostingChart->container() !!}
+                <hr/><br/>
+                {!! $sellersPhoneNumberViewersChart->container() !!}
                 <hr/><br/>
                 {!! $productElevatorChart->container() !!}
                 
@@ -190,6 +192,7 @@
 {!! $activeUsersChart->script() !!}
 {!! $buyAdPostingChart->script() !!}
 {!! $productElevatorChart->script() !!}
+{!! $sellersPhoneNumberViewersChart->script() !!}
 
 
 @endsection

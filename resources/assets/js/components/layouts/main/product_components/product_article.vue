@@ -25,12 +25,16 @@
 .main-content-item {
   direction: rtl;
   margin: 15px auto;
-  border-radius: 5px;
-  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.16);
   padding: 0;
   background: #fff;
   float: right;
   width: 100%;
+  border: 1px solid #e9ecef;
+  border-radius: 12px;
+}
+
+.main-content-item.diffrent-bg {
+  background: #fdfdfd;
 }
 
 .main-article-title {
@@ -164,7 +168,7 @@ label {
 }
 
 .is-user-valid {
-  border: 2px solid #00c569;
+  border: 1px solid #00c569;
 }
 
 .modal-content {
@@ -236,8 +240,11 @@ label {
 }
 
 .article-action-buttons > button {
-  margin: 0;
-  padding: 4px 15px;
+  width: 100% !important;
+  max-width: 280px;
+  margin: 0 auto;
+  padding: 7px;
+  font-size: 18px;
 }
 
 .article-features button.disable {
@@ -249,7 +256,8 @@ label {
   background: #e41c38;
   color: #fff;
   border-radius: 4px;
-  padding: 4px 14px;
+  padding: 7px 14px;
+  font-size: 17px;
 }
 
 .article-features button.disable {
@@ -293,7 +301,10 @@ label {
 <template>
   <article
     class="main-content-item"
-    :class="{ 'is-user-valid': product.user_info.active_pakage_type == 3 }"
+    :class="{
+      'is-user-valid': product.user_info.active_pakage_type == 3,
+      'diffrent-bg': productIndex % 2 == 0,
+    }"
   >
     <!--article modal-->
 
@@ -449,7 +460,7 @@ label {
           data-toggle="tooltip"
           data-placement="bottom"
           title="نردبان اعمال شده است"
-          class="elevator-event active disable"
+          class="elevator-event hidden-xs active disable"
         >
           <i class="fas fa-chart-line"></i>
         </button>
@@ -465,17 +476,17 @@ label {
           },
         ]"
       >
-        <button
+        <!-- <button
           v-if="!isMyProfile"
           @click.prevent="openChat(product)"
           class="green-button"
         >
           <i class="fa fa-envelope"></i>
           استعلام قیمت
-        </button>
+        </button> -->
 
         <button
-          v-else
+          v-if="isMyProfile"
           class="blue-button"
           data-toggle="modal"
           :data-target="'#article-modal' + product.main.id"
@@ -501,14 +512,14 @@ export default {
     ProductUserInfo,
     ArticleMainContents,
   },
-  props: ["productIndex", "product", "str", "currentUser"],
+  props: ["productIndex", "product", "str", "currentUser", "isMyProfile"],
   data: function () {
     return {
       submiting: false,
       errors: "",
       popUpMsg: "",
       popUpLoaded: false,
-      isMyProfile: false,
+      // isMyProfile: false,
       productUrl: "",
       jsonLDObject: "",
       verifiedUserContent: this.$parent.verifiedUserContent,
@@ -517,15 +528,20 @@ export default {
   methods: {
     init: function () {
       this.productUrl = this.getProductUrl();
+      // console.log(
+      //   this.$parent.currentUser.user_info.id,
+      //   this.product.main.myuser_id
+      // );
+      // this.$nextTick(() => {
+      //   if (this.currentUser.user_info) {
+      //     if (this.currentUser.user_info.id === this.product.main.myuser_id) {
+      //       this.isMyProfile = true;
+      //       this.$emit("isMyProfile", this.isMyProfile);
+      //     }
+      //   }
+      // });
 
-      if (this.currentUser.user_info) {
-        if (this.currentUser.user_info.id === this.product.main.myuser_id) {
-          this.isMyProfile = true;
-          this.$emit("isMyProfile", this.isMyProfile);
-        }
-      }
-
-      // this.jsonLDObject = this.createJsonLDObject();
+      this.jsonLDObject = this.createJsonLDObject();
     },
     toLatinNumbers: function (num) {
       if (num == null) {
@@ -666,8 +682,8 @@ export default {
       } else {
         window.localStorage.setItem("contact", JSON.stringify(contact));
 
-        this.$router.push({ name: "registerInquiry" });
-        // eventBus.$emit('modal','sendMsg');
+        // this.$router.push({ name: "registerInquiry" });
+        eventBus.$emit("modal", "sendMsg");
       }
     },
     updatePopUpStatus: function (popUpOpenStatus) {
@@ -692,7 +708,7 @@ export default {
 
       if (this.isDeviceMobile()) {
         var linkElement = document.createElement("a");
-        var Message = "https://buskool.com" + this.getProductUrl();
+        var Message = "https://www.buskool.com" + this.getProductUrl();
         var messageToWhatsApp = encodeURIComponent(Message);
         var url = "whatsapp://send?text=" + messageToWhatsApp;
 
@@ -708,7 +724,7 @@ export default {
         var input = document.createElement("input");
         input.setAttribute(
           "value",
-          "https://buskool.com" + this.getProductUrl()
+          "https://www.buskool.com" + this.getProductUrl()
         );
         document.body.appendChild(input);
         input.select();
@@ -796,9 +812,15 @@ export default {
       //   "با استفاده از نردبان، محصول شما تا زمان دریافت محصول تازه تر در همان دسته بندی، به عنوان اولین محصول نمایش داده می‌شود."
       // );
 
-      eventBus.$emit("productId", this.product.main.id);
-      eventBus.$emit("modal", "elevator");
-      // $("#elevator-modal").modal("show");
+      // eventBus.$emit("productId", this.product.main.id);
+      // eventBus.$emit("modal", "elevator");
+      let paymentData = {
+        paymentName: "elevatorPricingData",
+        productId: this.product.main.id,
+        totalPrice:"25000"
+      };
+      eventBus.$emit("peymentMethodData", paymentData);
+      $("#payment-type-modal").modal("show");
     },
   },
   mounted() {

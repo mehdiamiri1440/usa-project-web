@@ -3,9 +3,8 @@
 
 .box-content {
   background: #fff;
-  -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
-  border-radius: 4px;
+  border: 1px solid #e9ecef;
+  border-radius: 12px;
   padding: 15px;
   text-align: center;
   line-height: 1.618;
@@ -138,7 +137,7 @@
 <template>
   <article class="carousel-item box-content">
     <div class="carousel-img">
-      <div v-show="isImageLoad ">
+      <div v-show="isImageLoad">
         <transition v-if="img">
           <img @load="ImageLoaded" :src="img" class="main-image" />
         </transition>
@@ -169,31 +168,30 @@
 </template>
 
 <script>
+import owlCarousel from "../../../../owl.carousel.min.js";
+
 export default {
-  data: function() {
+  data: function () {
     return {
-      isImageLoad: false
+      isImageLoad: false,
     };
   },
   props: ["img", "title", "city", "parentClass"],
   methods: {
-    created: function() {
+    created: function () {
       this.loadImage();
     },
-    loadImage: function() {
+    loadImage: function () {
       this.isImageLoad = false;
     },
-    runOwlCarousel: function() {
+    runOwlCarousel: function () {
       $(this.parentClass).owlCarousel({
         autoplayTimeout: 3000,
         autoplay: true,
         loop: false,
         rewind: true,
         nav: true,
-        navText: [
-          '<span class="fa fa-angle-left"></span>',
-          '<span class="fa fa-angle-right"></span>'
-        ],
+        navText: false,
         mouseDrag: true,
         margin: 30,
         dots: true,
@@ -204,35 +202,35 @@ export default {
             items: 1,
             stagePadding: 15,
             navText: false,
-            dots: true
+            dots: true,
           },
           400: {
             items: 2,
             stagePadding: 15,
             navText: false,
-            dots: true
+            dots: true,
           },
           600: {
             items: 3,
-            stagePadding: 15
+            stagePadding: 15,
           },
           992: {
             items: 4,
-            stagePadding: 15
+            stagePadding: 15,
           },
           1199: {
             items: 5,
-            stagePadding: 15
-          }
-        }
+            stagePadding: 15,
+          },
+        },
       });
     },
-    ImageLoaded: function() {
+    ImageLoaded: function () {
       this.isImageLoad = true;
-    }
+    },
   },
-  mounted: function() {
+  mounted: function () {
     this.runOwlCarousel();
-  }
+  },
 };
 </script>

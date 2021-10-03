@@ -24,13 +24,15 @@ class NotifySellersIfANewRelatedBuyAdRegistered implements ShouldQueue
      * Create a new job instance.
      */
     protected $buyAd;
+    protected $max_notified_sellers;
     protected $words_blacklist = [
         'در', 'به', 'را', 'از', 'و', 'برای', 'تا', 'که', 'بر', 'بی', 'مگر',
     ];
 
-    public function __construct(buyAd $buyAd)
+    public function __construct($buyAd,$max_notified_sellers = 12)
     {
         $this->buyAd = $buyAd;
+        $this->max_notified_sellers = $max_notified_sellers;
     }
 
     /**
@@ -38,9 +40,11 @@ class NotifySellersIfANewRelatedBuyAdRegistered implements ShouldQueue
      */
     public function handle()
     {
-        $seller_finder_controller_object = new seller_finder_controller();
+        $seller_finder_controller_object = new seller_finder_controller($this->max_notified_sellers);
         $the_most_related_product_owners_ids = $seller_finder_controller_object->get_the_most_related_product_owners_id_to_the_given_buyAd_if_any($this->buyAd);
-        
+        $the_most_related_product_owners_ids = array_unique($the_most_related_product_owners_ids); 
+
+
         $now = Carbon::now();
 
         if (count($the_most_related_product_owners_ids) > 0) {
@@ -61,16 +65,6 @@ class NotifySellersIfANewRelatedBuyAdRegistered implements ShouldQueue
             DB::table('buy_ad_suggestions')->insert($buyAd_suggestion_records);
         }
 
-        // $topics = $this->generate_related_topics($old_related_product_owners_ids);
-
-        // $data = [
-        //     'title' => 'باسکول',
-        //     'message' => 'یک درخواست خرید مرتبط با محصول شما ثبت شد',
-        // ];
-
-
-        // $fcm_controller_object = new fcm_controller();
-        // $fcm_controller_object->send_notification_to_given_topic_group($data, $topics);
     }
 
     protected function get_the_most_related_product_owners_id_to_the_given_buyAd_if_any(&$buyAd)
@@ -80,7 +74,7 @@ class NotifySellersIfANewRelatedBuyAdRegistered implements ShouldQueue
 
         $related_subcategory_products = product::where('category_id', $buyAd->category_id)
                                             ->where('confirmed', true)
-                                            ->whereBetween('created_at', [$from_date, $until_date])
+                                            ->whereBetween('updated_at', [$from_date, $until_date])
                                             ->where('myuser_id','<>'.$buyAd->myuser_id)
                                             ->orderBy('created_at')
                                             ->get();
@@ -180,28 +174,27 @@ class NotifySellersIfANewRelatedBuyAdRegistered implements ShouldQueue
     {
         $user_record = myuser::find($user_id);
 
-        if($user_record->id >= 15950){
-            $this->notify_product_owner_via_sms($user_record->phone);
-            // if($user_record->active_pakage_type > 0){
-                // $this->notify_product_owner_via_sms($user_record->phone);
-            // }
-            // else{
-            //     $this->notify_product_owner_via_sms($user_record->phone,$delayed = true);
-            // }
-            
+        $this->notify_product_owner_via_sms($user_record->phone);
+        // if($user_record->active_pakage_type > 0){
+            // $this->notify_product_owner_via_sms($user_record->phone);
+        // }
+        // else{
+        //     $this->notify_product_owner_via_sms($user_record->phone,$delayed = true);
+        // }
+        
 
-            $this->notify_product_owner_via_app_notification($user_id);
-        }
+        $this->notify_product_owner_via_app_notification($user_id);
+        
         
     }
 
     protected function notify_product_owner_via_sms($user_phone,$delayed = false)
     {
         if($delayed){
-            sendSMS::dispatch($user_phone, 20689)->delay(Carbon::now()->addHours(2))->onQueue('sms');
+            sendSMS::dispatch($user_phone, 51386)->delay(Carbon::now()->addHours(2))->onQueue('sms');
         }
         else{
-            sendSMS::dispatch($user_phone, 20689)->onQueue('sms');
+            sendSMS::dispatch($user_phone, 51386)->onQueue('sms');
         }
         
     }

@@ -60,8 +60,6 @@ class BuyAdRegisterReminder implements ShouldQueue
                     ->select('id')
                     ->get();
 
-        var_dump($users);
-
         return $users;
     }
 

@@ -2,9 +2,60 @@
 #main-content {
   padding-top: 122px;
 }
+#main {
+  max-width: 1280px;
+}
+
+#main .main-product-wrapper {
+  position: relative;
+}
+
+.fade-opacity {
+  opacity: 0.1;
+}
+.spinner-border {
+  width: 5rem;
+  height: 5rem;
+  color: #999;
+  border-width: 3px;
+  top: 170px;
+  left: calc(50% - 25px);
+}
+
+.more-product-wrapper {
+  float: right;
+  width: 100%;
+  position: relative;
+}
+
+.more-product-wrapper .spinner-border {
+  top: 30px;
+  width: 4rem;
+  height: 4rem;
+}
+
+.more-product-wrapper p {
+  margin-top: 40px;
+  color: #999;
+}
+
+.filter-loader-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+}
 
 .shadow-content {
   background: #fff;
+}
+
+.default-main-wrapper {
+  border: 1px solid #e9ecef;
+  border-radius: 12px;
+  overflow: hidden;
 }
 
 .sidebar {
@@ -63,8 +114,8 @@ a.close-dialog-popup {
 .flat-plust-icon {
   position: fixed;
   right: 15px;
-  bottom: 15px;
-  z-index: 2;
+  bottom: 70px;
+  z-index: 3;
 }
 
 .flat-plust-icon a {
@@ -110,7 +161,7 @@ a.close-dialog-popup {
 }
 
 .sub-header {
-  background: #f0f3f6;
+  background: #fff;
   padding: 0 15px;
 }
 
@@ -146,12 +197,13 @@ a.close-dialog-popup {
 
 button.btn-filter {
   float: left;
-  padding: 4px 10px;
-  border-radius: 5px;
+  padding: 6px 10px 7px;
+  border-radius: 3px;
   border: none;
   background: #000546;
   color: #fff;
   width: 140px;
+  border-radius: 8px;
   margin-right: 15px;
 }
 
@@ -212,11 +264,10 @@ button.btn-filter {
 
 .sub-header-fix {
   position: fixed;
-  top: 56px;
+  top: 83px;
   left: 0;
   right: 0;
   z-index: 2;
-  background: #f0f3f6;
   padding: 0;
 }
 
@@ -247,40 +298,6 @@ li.active a::after {
   float: right;
 }
 
-.load-more-button {
-  text-align: center;
-
-  margin: 15px auto;
-}
-
-.load-more-button button {
-  border: 2px solid;
-
-  padding: 15px 30px;
-
-  height: initial;
-
-  background: #fff;
-
-  position: relative;
-
-  top: 0;
-
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
-
-  transition: 200ms;
-
-  color: #00c569;
-}
-
-.load-more-button button:hover {
-  top: -3px;
-
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
-
-  transition: 200ms;
-}
-
 .btn-loader {
   overflow: hidden;
 }
@@ -295,20 +312,80 @@ li.active a::after {
   margin-top: -15px;
 }
 
-.rate-filter {
-  float: right;
+.static-sort-item {
+  color: #999;
 }
 
-.rate-filter-desktop-wrapper,
-.rate-filter-mobile-wrapper {
+.rate-filter-desktop-wrapper {
   background: #fff;
   direction: rtl;
   margin: 15px auto 0;
-  padding: 7px 15px;
-  border-radius: 5px;
-  -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+  padding: 5px 15px 4px;
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
   overflow: hidden;
+  margin-bottom: 5px;
+}
+
+.rate-filter-mobile-wrapper {
+  direction: rtl;
+  display: flex;
+  overflow-y: hidden;
+  overflow-x: scroll;
+  border-bottom: 1px solid #ebebeb;
+  padding: 10px;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.rate-filter-mobile-wrapper.desktop-filter-items {
+  border-bottom: none;
+  padding: 5px 0 10px;
+}
+
+.rate-filter-mobile-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.rate-filter-mobile-wrapper > button {
+  flex-shrink: 0;
+  border: 1px solid #ededed;
+  background: #fff;
+  border-radius: 12px;
+  font-size: 15px;
+  color: #707070;
+  padding: 3px 15px;
+  display: inline-flex;
+  height: 32px;
+  margin-left: 10px;
+}
+
+.rate-filter-mobile-wrapper > button.mobile-category-item.filter-item {
+  border-color: #fa8888;
+  color: #e41c38;
+  background: #fcf6f6;
+}
+
+.rate-filter-mobile-wrapper > button i {
+  position: relative;
+  top: 2px;
+  margin-left: 5px;
+}
+.rate-filter-mobile-wrapper > button i.fa-times {
+  position: relative;
+  top: 2px;
+  margin-left: 0;
+  margin-right: 10px;
+  font-size: 11px;
+  top: 6px;
+}
+
+.rate-filter-mobile-wrapper > button:first-of-type {
+  background: #fafafa;
+}
+
+.rate-filter-mobile-wrapper > button:last-of-type {
+  margin-left: 0;
 }
 
 .rate-filter-desktop-wrapper > ul {
@@ -324,22 +401,6 @@ li.active a::after {
   background: none;
 
   border: none;
-}
-.rate-filter label {
-  float: right;
-  margin-left: 7px;
-}
-
-.rate-filter > button {
-  padding: 8px 0;
-
-  font-size: 14px;
-
-  margin: 0;
-
-  font-weight: 400;
-
-  width: 140px;
 }
 
 .filter-select-input-wrapper {
@@ -404,11 +465,18 @@ li.active a::after {
   padding-top: 2px;
 }
 .show-list-items button {
-  background: #eee;
-  border: 1px solid #999;
-  border-radius: 5px;
-  padding: 3px 14px 0;
+  background: none;
+  border: 1px solid #556080;
+  border-radius: 12px;
+  padding: 4px 9px 0px;
+  -webkit-transition: 300ms;
   transition: 300ms;
+  color: #556080;
+  font-size: 16px;
+  min-width: 36px;
+}
+.show-list-items button .fa-grip-horizontal {
+  font-size: 16px;
 }
 .show-list-items button:hover {
   background: #556080;
@@ -422,37 +490,6 @@ li.active a::after {
   border-color: #556080;
   transition: 300ms;
 }
-
-/* 
-.rate-filter-desktop-wrapper .checkbox,
-.rate-filter-mobile-wrapper .chekbox {
-  margin: 0;
-  float: right;
-}
-
-.rate-filter-mobile-wrapper .checkbox-slider--b-flat {
-  margin: 0 auto 5px;
-}
-
-.rate-filter-mobile-wrapper
-  .checkbox-slider--b-flat
-  input
-  + span::before,
-.rate-filter-mobile-wrapper
-  .checkbox-slider--b-flat
-  input
-  + span::after {
-  top: 0;
-}
-
-.rate-filter-mobile-wrapper {
-  padding: 7px 15px;
-  margin: 0;
-  overflow: hidden;
-  float: right;
-  width: 100%;
-  border-radius: 0;
-} */
 
 /* 
 ---------------------------------------------------------------------------------
@@ -493,7 +530,7 @@ filter modal styles
 }
 
 .modal-body {
-  padding: 0 15px;
+  padding: 0;
 }
 .form-check-wrapper button {
   width: 100%;
@@ -542,10 +579,157 @@ filter modal styles
   color: #777;
 }
 
+.default-grid {
+  padding: 0 7px;
+}
+
+.default-grid .default-main-article-content {
+  width: 100%;
+}
+.default-grid .default-wrapper-main-image {
+  width: 100%;
+  height: 160px;
+}
+.default-grid > div {
+  padding: 0;
+}
+
+.default-grid .default-article-contents {
+  padding: 15px;
+}
+
 /* 
 end filter modal styles
 ---------------------------------------------------------------------------------
 */
+
+.guide-button {
+  height: 32px;
+  border: solid 1px white;
+  background: #e41c38;
+  width: 100px;
+  line-height: 32px;
+  -webkit-transform: rotate(-90deg);
+  font-weight: 500;
+  color: white;
+  transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  text-align: center;
+  font-size: 17px;
+  position: fixed;
+  left: -40px;
+  top: 50%;
+  z-index: 999;
+}
+
+.banner-wrapper {
+  background: linear-gradient(90deg, #060446, #21ad93);
+  min-height: 130px;
+  position: relative;
+  direction: rtl;
+  overflow: hidden;
+  border-radius: 12px;
+  margin: 15px auto;
+  z-index: 2;
+}
+
+.banner-wrapper .main-wrapper {
+  position: relative;
+  padding: 20px 100px;
+  overflow: hidden;
+  z-index: 1;
+  border-radius: 12px;
+}
+
+.banner-button {
+  width: initial;
+  font-size: 18px;
+  padding: 10px 20px;
+  border-radius: 7px;
+  background: #1da1f2;
+  box-shadow: 0 3px 2px rgba(0, 0, 0, 0.16);
+}
+
+.banner-button i {
+  position: relative;
+  top: 2px;
+  margin-right: 5px;
+}
+
+.green-button.banner-button:hover {
+  background: #1da1f2;
+}
+
+.banner-wrapper .banner-bg-striped {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url("../../../../img/bg-striped.png") repeat;
+  opacity: 0.2;
+}
+
+.banner-wrapper p {
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+  text-align: right;
+  margin-bottom: 17px;
+}
+
+.banner-wrapper .circle-item-wrapper {
+  position: absolute;
+  left: 100px;
+  width: 180px;
+  height: 180px;
+  background: #fff;
+  top: calc(50% - 70px);
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 3px 2px rgba(0, 0, 0, 0.16);
+}
+
+.banner-wrapper .circle-item-wrapper img {
+  position: relative;
+  top: -20px;
+}
+
+.banner-wrapper .circle-item-wrapper::after {
+  width: 315px;
+  height: 195px;
+  content: " ";
+  background: #8ca6ec;
+  position: absolute;
+  top: -163px;
+  right: -105px;
+  border-radius: 170px;
+  opacity: 0.3;
+  z-index: 1;
+}
+
+.banner-wrapper .circle-item-wrapper::before {
+  width: 295px;
+  height: 185px;
+  content: " ";
+  background: rgba(0, 156, 131, 0.5);
+  position: absolute;
+  bottom: -110px;
+  left: -180px;
+  border-radius: 170px;
+  z-index: 1;
+}
+
+#article-list.grid-items-wrapper {
+  margin-right: -3px;
+  margin-left: -3px;
+}
+
+div.items-wrapper {
+  padding: 0 7px;
+}
 
 @media screen and (max-width: 1199px) {
   .search-box input {
@@ -590,22 +774,40 @@ end filter modal styles
   .main_popup_content {
     padding: 0;
   }
+  .banner-wrapper .main-wrapper {
+    padding: 20px 15px;
+  }
+
+  .banner-wrapper .circle-item-wrapper {
+    left: 15px;
+  }
 }
 
 @media screen and (max-width: 767px) {
+  #article-list.grid-items-wrapper {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  .rate-filter-desktop-wrapper {
+    background: #fbfbfb;
+    border: none;
+    border-radius: 0;
+  }
   .main-content,
   #main {
     padding: 0;
   }
 
   .main-content {
-    padding-top: 52px;
+    padding-top: 18px;
   }
 
   .sub-header {
     position: fixed;
-    z-index: 2;
+    z-index: 1011;
     width: 100%;
+    background: #fff;
   }
 
   .search-box {
@@ -620,10 +822,6 @@ end filter modal styles
 
   .main-content > .row {
     margin: 0;
-  }
-
-  .sub-header {
-    background: #f0f3f6;
   }
 
   .links-sub-header {
@@ -665,26 +863,6 @@ end filter modal styles
   .create_buy {
     display: none;
   }
-}
-
-.guide-button {
-  height: 32px;
-  border: solid 1px white;
-  background: #e41c38;
-  width: 100px;
-  line-height: 32px;
-  -webkit-transform: rotate(-90deg);
-  font-weight: 500;
-  color: white;
-  transform: rotate(-90deg);
-  -ms-transform: rotate(-90deg);
-  -moz-transform: rotate(-90deg);
-  text-align: center;
-  font-size: 17px;
-  position: fixed;
-  left: -40px;
-  top: 50%;
-  z-index: 999;
 }
 
 @media screen and (max-width: 715px) {
@@ -732,7 +910,17 @@ end filter modal styles
   }
 
   .default-items {
-    padding: 0;
+    padding: 3px;
+  }
+  .banner-wrapper .main-wrapper {
+    padding: 20px 10px;
+  }
+
+  .banner-wrapper .circle-item-wrapper {
+    left: -20px;
+    width: 190px;
+    height: 190px;
+    top: calc(50% - 48px);
   }
 }
 
@@ -749,16 +937,7 @@ end filter modal styles
     float: left;
   }
 }
-.default-grid .default-main-article-content {
-  width: calc(100% - 90px);
-}
-.default-grid .default-wrapper-main-image {
-  width: 80px;
-  height: 80px;
-}
-.default-grid > div {
-  padding-bottom: 0;
-}
+
 @media screen and (max-width: 370px) {
   .mobile-hidden {
     display: none;
@@ -773,6 +952,9 @@ end filter modal styles
   }
   .default-button-min-with {
     width: 100%;
+  }
+  .banner-wrapper p {
+    font-size: 16px;
   }
 }
 
@@ -796,11 +978,12 @@ end filter modal styles
       >
         <div class="modal-dialog">
           <div class="modal-header">
-            <a href="#" class="close-modal" @click.prevent="closeFilterModal()">
+            <a href="#" class="close-modal" data-dismiss="modal">
               <i class="fa fa-times"></i>
             </a>
             <div class="modal-title">
-              <span>دسته ها و فیلتر</span>
+              <!-- <span class="hidden-xs">دسته ها و فیلتر</span> -->
+              <span>فیلتر مکان</span>
             </div>
           </div>
 
@@ -811,9 +994,9 @@ end filter modal styles
                   :productsInfo="products"
                   :categoryId="categoryId"
                   :subCategoryId="subCategoryId"
-                  :provinceId="provinceId"
-                  :cityId="cityId"
-                  v-on:productsToParent="filterProducts($event)"
+                  :categories="categoryList"
+                  :resetLocation="resetLocation"
+                  :provinceList="$parent.provinceList"
                 />
               </div>
             </div>
@@ -900,43 +1083,83 @@ end filter modal styles
     </div>
 
     <div
-      class="sub-header-fix sub-header hidden-lg hidden-md hidden-sm container-fluid"
+      class="
+        sub-header-fix sub-header
+        hidden-lg hidden-md hidden-sm
+        container-fluid
+      "
     >
-      <div class="search-box col-sm-8 col-xs-12 col-lg-5 pull-right">
-        <input
-          type="text"
-          v-model="searchText"
-          placeholder="اینجا جستجو کنید"
-        />
-
-        <button class="btn-search">
-          <i class="fa-search fa"></i>
-        </button>
-      </div>
       <div class="rate-filter-mobile-wrapper">
-        <div class="rate-filter">
-          <button class="green-button bg-gray" @click.prevent="openSortModal()">
-            <i class="fas fa-sort-amount-down-alt"></i>
-            مرتب سازی
-          </button>
-        </div>
-        <button class="btn-filter hidden-lg" @click.prevent="openFilterModal()">
-          <i class="fa fa-filter"></i>
-          دسته ها و فیلتر
+        <button
+          class="mobile-category-item"
+          @click.prevent="openFilterModal(false)"
+        >
+          <i class="fa fa-list"></i>
+          دسته ها
+        </button>
+        <button
+          v-if="sortOption == 'BM'"
+          class="mobile-category-item"
+          @click.prevent="openSortModal()"
+        >
+          <i class="fas fa-sort-amount-down-alt"></i>
+          مرتب سازی
+        </button>
+        <button
+          v-else
+          class="mobile-category-item filter-item"
+          @click.prevent="sedOptionAsDefault()"
+        >
+          <i class="fa fa-sort-amount-down-alt"></i>
+          {{ getSortOptionName() }}
+          <i class="fa fa-times"></i>
+        </button>
+        <button
+          v-if="city || province"
+          class="mobile-category-item filter-item"
+          @click.prevent="resetLocation = !resetLocation"
+        >
+          <i class="fa fa-map-marker-alt"></i>
+          <span v-if="city" v-text="city.city_name"> </span>
+          <span v-else-if="province" v-text="province.province_name"> </span>
+          <i class="fa fa-times"></i>
+        </button>
+        <button
+          v-if="$route.query.s && searchText"
+          tag="button"
+          @click.prevent="searchText = ''"
+          class="mobile-category-item filter-item"
+        >
+          {{ searchText }}
+          <i class="fa fa-times"></i>
+        </button>
+        <button
+          v-for="(category, index) in categoryList"
+          :key="index + '-sub-header-category'"
+          class="mobile-category-item"
+          @click.prevent="openFilterModal(category)"
+        >
+          {{ category.category_name }}
         </button>
       </div>
     </div>
 
-    <main id="main" class="container">
-      <div class="col-xs-12 col-lg-9">
+    <main id="main" class="container-fluid">
+      <div class="col-xs-12 main-product-wrapper col-lg-9">
         <div class="row">
           <section class="hidden-xs col-xs-12">
             <div class="rate-filter-desktop-wrapper">
               <ul class="list-unstiled list-inline">
+                <li class="static-sort-item">
+                  <p>
+                    <i class="fa fa-sort-amount-down-alt"> </i>
+                    مرتب سازی بر اساس :
+                  </p>
+                </li>
                 <li>
                   <button
                     @click="setSortOption('RR')"
-                    :class="{ 'text-green': sortOption == 'RR' }"
+                    :class="{ 'light-green-text': sortOption == 'RR' }"
                   >
                     احتمال پاسخگویی
                   </button>
@@ -944,7 +1167,7 @@ end filter modal styles
                 <li>
                   <button
                     @click="setSortOption('RT')"
-                    :class="{ 'text-green': sortOption == 'RT' }"
+                    :class="{ 'light-green-text': sortOption == 'RT' }"
                   >
                     سرعت پاسخگویی
                   </button>
@@ -952,7 +1175,7 @@ end filter modal styles
                 <li>
                   <button
                     @click="setSortOption('RD')"
-                    :class="{ 'text-green': sortOption == 'RD' }"
+                    :class="{ 'light-green-text': sortOption == 'RD' }"
                   >
                     جدیدترین ها
                   </button>
@@ -963,8 +1186,9 @@ end filter modal styles
                 data-toggle="modal"
                 data-target="#searchFilter"
               >
-                <i class="fa fa-filter"></i>
-                دسته ها و فیلتر
+                <i class="fa fa-map-marker-alt"></i>
+                <!-- دسته ها و فیلتر -->
+                فیلتر مکان
               </button>
               <div class="show-list-items hidden-xs hidden-sm">
                 <button
@@ -988,106 +1212,337 @@ end filter modal styles
                 </button>
               </div>
             </div>
+            <div class="rate-filter-mobile-wrapper desktop-filter-items">
+              <button
+                v-if="sortOption != 'BM'"
+                class="mobile-category-item filter-item"
+                @click.prevent="sedOptionAsDefault()"
+              >
+                <i class="fa fa-sort-amount-down-alt"></i>
+                {{ getSortOptionName() }}
+                <i class="fa fa-times"></i>
+              </button>
+              <button
+                v-if="city || province"
+                class="mobile-category-item filter-item"
+                @click.prevent="resetLocation = !resetLocation"
+              >
+                <i class="fa fa-map-marker-alt"></i>
+                <span v-if="city" v-text="city.city_name"> </span>
+                <span v-else-if="province" v-text="province.province_name">
+                </span>
+                <i class="fa fa-times"></i>
+              </button>
+              <button
+                v-if="$route.query.s && searchText"
+                tag="button"
+                @click.prevent="searchText = ''"
+                class="mobile-category-item filter-item"
+              >
+                {{ searchText }}
+                <i class="fa fa-times"></i>
+              </button>
+            </div>
           </section>
+          <div class="filter-loader-wrapper" v-if="submiting">
+            <div class="spinner-border">
+              <span class="sr-only"></span>
+            </div>
+          </div>
+          <div :class="{ 'fade-opacity': submiting }">
+            <section class="main-content col-xs-12" v-if="products.length > 0">
+              <div
+                id="article-list"
+                class="row"
+                :class="{ 'grid-items-wrapper': listIsGrid }"
+              >
+                <div v-if="!listIsGrid">
+                  <div
+                    class="col-xs-12"
+                    :key="productIndex"
+                    v-for="(product, productIndex) in products"
+                  >
+                    <div
+                      v-if="
+                        (productIndex % 9 == 0 &&
+                          productIndex != 0 &&
+                          currentUser.user_info &&
+                          currentUser.user_info.is_buyer) ||
+                        (productIndex % 9 == 0 &&
+                          productIndex != 0 &&
+                          !currentUser.user_info)
+                      "
+                      class="banner-wrapper"
+                    >
+                      <div class="banner-bg-striped"></div>
+                      <div class="main-wrapper">
+                        <p>آیا محصول مورد نظر خود را پیدا نکرده اید؟</p>
+                        <p>درخواست خرید ثبت کنید.</p>
+                        <router-link
+                          :to="{ name: 'registerRequestBuyer' }"
+                          class="btn green-button banner-button hover-effect"
+                          :class="{ 'hidden-xs': !currentUser.user_info }"
+                        >
+                          ثبت درخواست خرید
+                          <i class="fa fa-arrow-left"> </i>
+                        </router-link>
+                        <router-link
+                          :to="{ name: 'register' }"
+                          v-if="!currentUser.user_info"
+                          class="
+                            btn
+                            green-button
+                            banner-button
+                            hover-effect
+                            hidden-sm hidden-md hidden-lg
+                          "
+                        >
+                          ثبت درخواست خرید
+                          <i class="fa fa-arrow-left"> </i>
+                        </router-link>
+                      </div>
+                      <div class="circle-item-wrapper">
+                        <img src="../../../../img/request.svg" alt="" />
+                      </div>
+                    </div>
 
-          <section class="main-content col-xs-12" v-if="products.length > 0">
-            <div id="article-list" class="row">
-              <div v-if="!listIsGrid">
-                <div
-                  class="col-xs-12"
-                  :key="productIndex"
-                  v-for="(product, productIndex) in products"
+                    <ProductArticle
+                      :productIndex="productIndex"
+                      v-if="products.length >= productIndex"
+                      :key="product.main.id"
+                      :product="product"
+                      :str="str"
+                      :currentUser="currentUser"
+                      :isMyProfile="
+                        currentUser.user_info &&
+                        currentUser.user_info.id == product.main.myuser_id
+                          ? true
+                          : false
+                      "
+                    />
+                  </div>
+                </div>
+                <div v-else>
+                  <div
+                    :key="productIndex"
+                    v-for="(product, productIndex) in products"
+                  >
+                    <div
+                      class="col-xs-12"
+                      v-if="
+                        (productIndex % 12 == 0 &&
+                          productIndex != 0 &&
+                          currentUser.user_info &&
+                          currentUser.user_info.is_buyer) ||
+                        (productIndex % 12 == 0 &&
+                          productIndex != 0 &&
+                          !currentUser.user_info)
+                      "
+                    >
+                      <div class="row">
+                        <div class="banner-wrapper">
+                          <div class="banner-bg-striped"></div>
+                          <div class="main-wrapper">
+                            <p>آیا محصول مورد نظر خود را پیدا نکرده اید؟</p>
+                            <p>درخواست خرید ثبت کنید.</p>
+                            <router-link
+                              v-if="!currentUser.user_info"
+                              :to="{ name: 'register' }"
+                              class="
+                                btn
+                                green-button
+                                banner-button
+                                hover-effect
+                              "
+                            >
+                              ثبت درخواست خرید
+                              <i class="fa fa-arrow-left"> </i>
+                            </router-link>
+                            <router-link
+                              v-else
+                              :to="{ name: 'registerRequestBuyer' }"
+                              class="
+                                btn
+                                green-button
+                                banner-button
+                                hover-effect
+                              "
+                            >
+                              ثبت درخواست خرید
+                              <i class="fa fa-arrow-left"> </i>
+                            </router-link>
+                          </div>
+                          <div class="circle-item-wrapper">
+                            <img src="../../../../img/request.svg" alt="" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="
+                        col-xs-6 col-sm-4
+                        items-wrapper
+                        pull-right
+                        col-md-3
+                      "
+                    >
+                      <ProductGridArticle
+                        :productIndex="productIndex"
+                        v-if="products.length >= productIndex"
+                        :key="product.main.id"
+                        :product="product"
+                        :str="str"
+                        :currentUser="currentUser"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="more-product-wrapper" v-if="loadMoreActive">
+                  <div class="spinner-border">
+                    <span class="sr-only"></span>
+                  </div>
+                  <p class="text-center text-rtl">درحال دریافت اطلاعات ...</p>
+                </div>
+                <!-- <div
+                  class="load-more-button col-xs-12"
+                  v-if="continueToLoadProducts === true"
                 >
-                  <ProductArticle
-                    :productIndex="productIndex"
-                    v-if="products.length >= productIndex"
-                    :key="product.main.id"
-                    :product="product"
-                    :str="str"
-                    :currentUser="currentUser"
-                  />
+                  <button
+                    class="btn btn-loader"
+                    :disabled="loadMoreActive"
+                    @click.prevent="feed()"
+                  >
+                    <div class="btn-content">
+                      <span class="hidden-xs text-rtl" v-show="!loadMoreActive">
+                        مشاهده محصولات بیشتر
+                        <i class="fa fa-plus"></i>
+                      </span>
+
+                      <span
+                        class="hidden-sm hidden-md hidden-lg text-rtl"
+                        v-show="!loadMoreActive"
+                      >
+                        محصولات بیشتر
+                        <i class="fa fa-plus"></i>
+                      </span>
+
+                      <div
+                        v-show="loadMoreActive"
+                        class="btn-loader-active-wrapper"
+                      >
+                        <img src="../../../../img/gif/loading.gif" />
+                      </div>
+                    </div>
+                  </button>
+                </div> -->
+              </div>
+            </section>
+            <!-- test -->
+
+            <search-not-found
+              v-else-if="products.length === 0 && searchActive === true"
+            />
+            <search-not-found
+              v-else-if="products.length === 0 && searchText !== ''"
+            />
+            <search-not-found
+              v-else-if="products.length === 0 && searchText === ''"
+            />
+
+            <section v-else class="main-content col-xs-12">
+              <div class="row" v-if="!listIsGrid">
+                <div
+                  v-for="(defaultItem, index) in 8"
+                  :key="index"
+                  class="default-items col-xs-12"
+                >
+                  <div
+                    class="
+                      col-xs-12
+                      padding-15
+                      margin-15-0
+                      default-item-wrapper default-main-wrapper
+                    "
+                  >
+                    <div class="default-user-contents col-xs-12 padding-0">
+                      <div
+                        class="
+                          placeholder-content
+                          default-article-user-image
+                          pull-right
+                        "
+                      ></div>
+
+                      <span
+                        class="
+                          padding-top-5
+                          placeholder-content
+                          margin-15
+                          pull-right
+                          content-min-width
+                        "
+                      ></span>
+                    </div>
+
+                    <div
+                      class="
+                        default-article-contents
+                        padding-0
+                        margin-top-10
+                        col-xs-12
+                      "
+                    >
+                      <div class="default-wrapper-main-image pull-right">
+                        <span
+                          class="default-main-image placeholder-content"
+                        ></span>
+                      </div>
+                      <div class="default-main-article-content">
+                        <span
+                          class="content-half-width placeholder-content"
+                        ></span>
+
+                        <span
+                          class="content-default-width placeholder-content"
+                        ></span>
+
+                        <span
+                          class="
+                            content-min-width
+                            placeholder-content
+                            mobile-hidden
+                          "
+                        ></span>
+
+                        <span
+                          class="content-half-width placeholder-content"
+                        ></span>
+                      </div>
+                      <span
+                        class="
+                          margin-top-10
+                          placeholder-content
+                          default-button-min-with
+                          pull-left
+                          hidden-afetr-mobile-hidden
+                        "
+                      ></span>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div v-else>
                 <div
-                  class="col-xs-12 col-md-4 pull-right"
-                  :key="productIndex"
-                  v-for="(product, productIndex) in products"
+                  v-for="(defaultItem, index) in 12"
+                  :key="index"
+                  class="default-items col-xs-6 col-sm-4 col-md-3 default-grid"
                 >
-                  <ProductGridArticle
-                    :productIndex="productIndex"
-                    v-if="products.length >= productIndex"
-                    :key="product.main.id"
-                    :product="product"
-                    :str="str"
-                    :currentUser="currentUser"
-                  />
-                </div>
-              </div>
-              <div
-                class="load-more-button col-xs-12"
-                v-if="continueToLoadProducts === true"
-              >
-                <button class="btn btn-loader" @click.prevent="feed()">
-                  <div class="btn-content">
-                    <span class="hidden-xs text-rtl" v-show="!loadMoreActive">
-                      مشاهده محصولات بیشتر
-                      <i class="fa fa-plus"></i>
-                    </span>
-
-                    <span
-                      class="hidden-sm hidden-md hidden-lg text-rtl"
-                      v-show="!loadMoreActive"
-                    >
-                      محصولات بیشتر
-                      <i class="fa fa-plus"></i>
-                    </span>
-
-                    <div
-                      v-show="loadMoreActive"
-                      class="btn-loader-active-wrapper"
-                    >
-                      <img src="../../../../img/gif/loading.gif" />
-                    </div>
-                  </div>
-                </button>
-              </div>
-            </div>
-          </section>
-          <!-- test -->
-
-          <search-not-found
-            v-else-if="products.length === 0 && searchActive === true"
-          />
-          <search-not-found
-            v-else-if="products.length === 0 && searchText !== ''"
-          />
-          <search-not-found
-            v-else-if="products.length === 0 && searchText === ''"
-          />
-
-          <section v-else class="main-content col-xs-12">
-            <div class="row" v-if="!listIsGrid">
-              <div
-                v-for="(defaultItem, index) in 8"
-                :key="index"
-                class="default-items col-xs-12"
-              >
-                <div
-                  class="col-xs-12 padding-15 margin-15-0 default-item-wrapper shadow-content"
-                >
-                  <div class="default-user-contents col-xs-12 padding-0">
-                    <div
-                      class="placeholder-content default-article-user-image pull-right"
-                    ></div>
-
-                    <span
-                      class="padding-top-5 placeholder-content margin-15 pull-right content-min-width"
-                    ></span>
-                  </div>
-
                   <div
-                    class="default-article-contents padding-0 margin-top-10 col-xs-12"
+                    class="
+                      col-xs-12
+                      margin-15-0
+                      default-item-wrapper default-main-wrapper
+                    "
                   >
                     <div class="default-wrapper-main-image pull-right">
                       <span
@@ -1095,80 +1550,46 @@ end filter modal styles
                       ></span>
                     </div>
 
-                    <div class="default-main-article-content">
-                      <span
-                        class="content-half-width placeholder-content"
-                      ></span>
-
-                      <span
-                        class="content-default-width placeholder-content"
-                      ></span>
-
-                      <span
-                        class="content-min-width placeholder-content mobile-hidden"
-                      ></span>
-
-                      <span
-                        class="content-half-width placeholder-content"
-                      ></span>
-                    </div>
-                    <span
-                      class="margin-top-10 placeholder-content default-button-min-with pull-left hidden-afetr-mobile-hidden"
-                    ></span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row" v-else>
-              <div
-                v-for="(defaultItem, index) in 12"
-                :key="index"
-                class="default-items col-md-4 default-grid"
-              >
-                <div
-                  class="col-xs-12 padding-15 margin-15-0 default-item-wrapper shadow-content"
-                >
-                  <div
-                    class="default-user-contents col-xs-12 padding-0 padding-10-0"
-                  >
                     <div
-                      class="placeholder-content default-article-user-image pull-right"
-                    ></div>
+                      class="
+                        default-article-contents
+                        padding-0
+                        margin-top-10
+                        col-xs-12
+                      "
+                    >
+                      <div class="default-main-article-content">
+                        <span
+                          class="content-half-width placeholder-content"
+                        ></span>
 
-                    <span
-                      class="placeholder-content margin-10 pull-right content-half-width"
-                    ></span>
-                  </div>
-
-                  <div
-                    class="default-article-contents padding-0 margin-top-10 col-xs-12"
-                  >
-                    <div class="default-wrapper-main-image pull-right">
-                      <span
-                        class="default-main-image placeholder-content"
-                      ></span>
+                        <span
+                          class="content-default-width placeholder-content"
+                        ></span>
+                        <span
+                          class="
+                            margin-top-10
+                            placeholder-content
+                            default-button-min-with
+                            pull-left
+                            hidden-afetr-mobile-hidden
+                          "
+                        ></span>
+                        <span
+                          class="
+                            placeholder-content
+                            default-button-full-with
+                            pull-left
+                            mobile-hidden
+                          "
+                        ></span>
+                      </div>
                     </div>
-
-                    <div class="default-main-article-content">
-                      <span
-                        class="content-half-width placeholder-content"
-                      ></span>
-
-                      <span
-                        class="content-default-width placeholder-content"
-                      ></span>
-                    </div>
-                    <span
-                      class="margin-top-10 placeholder-content default-button-min-with pull-left hidden-afetr-mobile-hidden"
-                    ></span>
                   </div>
-                  <span
-                    class="placeholder-content default-button-full-with pull-left mobile-hidden"
-                  ></span>
                 </div>
               </div>
-            </div>
-          </section>
+            </section>
+          </div>
         </div>
       </div>
 
@@ -1182,9 +1603,9 @@ end filter modal styles
               :productsInfo="products"
               :categoryId="categoryId"
               :subCategoryId="subCategoryId"
-              :provinceId="provinceId"
-              :cityId="cityId"
-              v-on:productsToParent="filterProducts($event)"
+              :categories="categoryList"
+              :resetLocation="resetLocation"
+              :provinceList="$parent.provinceList"
             />
           </div>
         </div>
@@ -1198,7 +1619,7 @@ import ProductGridArticle from "./product_components/Product_grid_article";
 import ProductAsideCategories from "./product_components/sidebar/product_aside_categories";
 import searchNotFound from "./main_components/search-not-found";
 import { eventBus } from "../../../router/router";
-
+import StickySidebar from "../../../stickySidebar.js";
 var visible = false;
 export default {
   components: {
@@ -1207,7 +1628,7 @@ export default {
     ProductAsideCategories,
     searchNotFound,
   },
-  props: ["assets", "str"],
+  props: ["assets", "str", "user_id", "categoryList"],
   data: function () {
     return {
       currentUser: {
@@ -1223,14 +1644,15 @@ export default {
         photos: [],
       },
       searchText: "",
-      provinceId: "",
+      province: "",
+      city: "",
+      resetLocation: false,
       categoryId: "",
       subCategoryId: "",
-      cityId: "",
       searchValue: "",
       scrolled: false,
-      productCountInPage: 12,
-      productCountInEachLoad: 12,
+      productCountInPage: 16,
+      productCountInEachLoad: 16,
       fromProductCount: 0,
       continueToLoadProducts: true,
       searchActive: false,
@@ -1238,12 +1660,13 @@ export default {
       popUpMsg: "",
       submiting: false,
       loading: false,
-      bottom: false,
       loadMoreActive: false,
       searchTextTimeout: null,
       sortOption: "BM",
       verifiedUserContent: this.$parent.verifiedUserContent,
       listIsGrid: true,
+      isMyProfile: false,
+      modalSubCategory: false,
     };
   },
   methods: {
@@ -1268,6 +1691,14 @@ export default {
       }
     },
     init: function () {
+      if (!this.$parent.provinceList) {
+        this.getLocations();
+      }
+      $(".modal").on("show.bs.modal", () => {
+        this.handleBackKeys();
+      });
+      this.checkSortOption();
+      this.checkLocationFilter();
       //              return new Promise((resolve,reject)=>{
       var self = this;
       $(".show-list-items button").tooltip();
@@ -1282,43 +1713,53 @@ export default {
       }
 
       var searchValueText = searchValue;
+      self.checkCurrentUser();
 
-      axios.post("/user/profile_info").then(function (response) {
-        self.currentUser = response.data;
+      if (searchValueText) {
+        self.registerComponentStatistics(
+          "homePage",
+          "search-text",
+          searchValueText
+        );
+        self.searchText = searchValueText;
+        self.submiting = false;
+      } else {
+        self.loading = true;
 
-        if (searchValueText) {
-          self.registerComponentStatistics(
-            "homePage",
-            "search-text",
-            searchValueText
-          );
-          self.searchText = searchValueText;
-          eventBus.$emit("submiting", false);
-        } else {
-          self.loading = true;
+        self.fromProductCount = 0;
+        self.productCountInPage = 16;
 
-          self.fromProductCount = 0;
-          self.productCountInPage = 12;
-
-          axios
-            .post("/user/get_product_list", {
-              from_record_number: self.fromProductCount,
-              response_rate: self.$parent.productByResponseRate,
-              to_record_number: self.productCountInPage,
-              sort_by: self.sortOption,
-            })
-            .then(function (response) {
-              self.products = response.data.products;
-              //                                localStorage.removeItem('productCountInPage')
-              //                                resolve(self.loading = false);
-              eventBus.$emit("submiting", false);
-              setTimeout(function () {
-                self.sidebarScroll();
-              }, 500);
-            });
+        let getProductsData = {
+          from_record_number: self.fromProductCount,
+          response_rate: self.$parent.productByResponseRate,
+          to_record_number: self.productCountInPage,
+          sort_by: self.sortOption,
+        };
+        if (self.province.id) {
+          getProductsData.province_id = self.province.id;
         }
-        //                    }).catch(error=>reject(error));
-      });
+        if (self.city.id) {
+          getProductsData.city_id = self.city.id;
+        }
+
+        axios
+          .post("/user/get_product_list", getProductsData)
+          .then(function (response) {
+            self.products = response.data.products;
+            //                                localStorage.removeItem('productCountInPage')
+            //                                resolve(self.loading = false);
+            self.submiting = false;
+            setTimeout(function () {
+              self.sidebarScroll();
+            }, 500);
+          });
+      }
+      //                    }).catch(error=>reject(error));
+    },
+    checkCurrentUser() {
+      if (this.$parent.currentUser.user_info) {
+        this.currentUser = this.$parent.currentUser;
+      }
     },
     feed() {
       if (this.products.isEmptyObject == true) {
@@ -1328,7 +1769,7 @@ export default {
       var self = this;
       if (
         this.searchText === "" &&
-        this.provinceId === "" &&
+        this.province.id === "" &&
         this.categoryId === "" &&
         this.continueToLoadProducts
       ) {
@@ -1343,11 +1784,13 @@ export default {
             sort_by: self.sortOption,
           })
           .then(function (response) {
+            if (!response.data.products.length) {
+              self.continueToLoadProducts = false;
+            }
             if (self.products && self.products.length) {
               self.products = self.products.concat([...response.data.products]);
             }
-            //                      localStorage.productCountInPage=JSON.stringify(self.productCountInPage)
-            eventBus.$emit("submiting", false);
+            self.submiting = false;
             if (self.products.length + 1 < self.productCountInPage) {
               self.continueToLoadProducts = false;
             }
@@ -1371,11 +1814,11 @@ export default {
         if (this.subCategoryId) {
           searchObject.sub_category_id = this.subCategoryId;
         }
-        if (this.provinceId) {
-          searchObject.province_id = this.provinceId;
+        if (this.province.id) {
+          searchObject.province_id = this.province.id;
         }
-        if (this.cityId) {
-          searchObject.city_id = this.cityId;
+        if (this.city.id) {
+          searchObject.city_id = this.city.id;
         }
         if (this.searchText) {
           this.$router.replace({
@@ -1403,8 +1846,12 @@ export default {
         axios
           .post("/user/get_product_list", searchObject)
           .then(function (response) {
-            self.products = self.products.concat(response.data.products);
-
+            if (!response.data.products.length) {
+              self.continueToLoadProducts = false;
+            }
+            if (Array.isArray(self.products)) {
+              self.products = self.products.concat(response.data.products);
+            }
             self.loadMoreActive = false;
 
             setTimeout(function () {
@@ -1469,24 +1916,24 @@ export default {
       }
     },
     resetFilter: function () {
-      eventBus.$emit("submiting", true);
+      this.submiting = true;
 
       $(".box-sidebar option").prop("selected", function () {
         return this.defaultSelected;
       });
 
       this.searchText = "";
-      this.provinceId = "";
+      this.province = "";
       this.categoryId = "";
       this.subCategoryId = "";
-      this.cityId = "";
+      this.city = "";
 
       this.applyFilter();
     },
     applyFilter: function () {
       var self = this;
 
-      eventBus.$emit("submiting", true);
+      this.submiting = true;
 
       self.fromProductCount = 0;
       self.productCountInPage = 12;
@@ -1502,11 +1949,11 @@ export default {
       if (this.subCategoryId) {
         searchObject.sub_category_id = this.subCategoryId;
       }
-      if (this.provinceId) {
-        searchObject.province_id = this.provinceId;
+      if (this.province.id) {
+        searchObject.province_id = this.province.id;
       }
-      if (this.cityId) {
-        searchObject.city_id = this.cityId;
+      if (this.city.id) {
+        searchObject.city_id = this.city.id;
       }
       if (this.searchText) {
         this.$router.replace({
@@ -1534,7 +1981,7 @@ export default {
         .post("/user/get_product_list", searchObject)
         .then(function (response) {
           self.products = response.data.products;
-          eventBus.$emit("submiting", false);
+          self.submiting = false;
           self.scrollToTop();
         })
         .catch(function (err) {
@@ -1542,6 +1989,7 @@ export default {
         });
     },
     setSortOption: function (sortOption) {
+      localStorage.setItem("sortOption", sortOption);
       $("#filter-modal").modal("hide");
       if (this.isDeviceMobile()) {
         history.go(-1);
@@ -1595,29 +2043,19 @@ export default {
         fatal: fatal,
       });
     },
-    infiniteScrollHandler: function () {
-      let lastOffset = 0;
-
-      window.onscroll = () => {
-        if (
-          window.location.pathname.includes("product-list") &&
-          !window.location.pathname.includes("category")
-        ) {
-          var bottom =
-            document.documentElement.scrollTop + window.innerHeight >
-            document.documentElement.offsetHeight -
-              document.documentElement.scrollTop / 2;
-
-          let newOffset = document.documentElement.offsetHeight;
-
-          if (bottom) {
-            if (newOffset > lastOffset + 100) {
-              lastOffset = document.documentElement.offsetHeight;
-              this.feed();
-            }
+    infiniteScrollHandler() {
+      $(window).scroll(() => {
+        if (this.$route.name == "productList") {
+          if (
+            $(window).scrollTop() >=
+              ($(document).height() - $(window).height() - 100) / 2 &&
+            !this.loadMoreActive &&
+            this.continueToLoadProducts
+          ) {
+            this.feed();
           }
         }
-      };
+      });
     },
     openSortModal() {
       $("#filter-modal").modal("show");
@@ -1629,22 +2067,42 @@ export default {
         $("#filter-modal").modal("hide");
       });
     },
+    getSortOptionName() {
+      switch (this.sortOption) {
+        case "BM":
+          return "پیش فرض";
+          break;
+        case "RR":
+          return "احتمال پاسخگویی";
+          break;
+        case "RT":
+          return "سرعت پاسخگویی";
+          break;
+        case "RD":
+          return "جدیدترین ها";
+          break;
+
+        default:
+          return "پیش فرض";
+
+          break;
+      }
+    },
     closeSortModal: function () {
       $("#filter-modal").modal("hide");
       history.go(-1);
     },
-    openFilterModal() {
-      $("#searchFilter").modal("show");
-
-      if (window.history.state) {
-        history.pushState(null, null, window.location);
+    openFilterModal(category) {
+      if (category) {
+        this.$parent.modalSubCategory = category;
+        $("#categories-modal").modal("show");
+      } else {
+        this.$parent.modalSubCategory = false;
+        $("#categories-modal").modal("show");
       }
-      $(window).on("popstate", function (e) {
-        $("#searchFilter").modal("hide");
-      });
     },
     closeFilterModal: function () {
-      $("#searchFilter").modal("hide");
+      $(".modal").modal("hide");
       history.go(-1);
     },
     sidebarScroll() {
@@ -1664,12 +2122,48 @@ export default {
       });
     },
     cehckPageWidth() {
-      let pageWidth = window.outerWidth;
-      if (pageWidth <= 991) {
-        this.listIsGrid = false;
-      } else {
-        this.listIsGrid = true;
+      this.listIsGrid = true;
+      // let pageWidth = window.outerWidth;
+      // if (pageWidth <= 555) {
+      //   this.listIsGrid = true;
+      // } else if (pageWidth <= 991) {
+      //   this.listIsGrid = false;
+      // } else {
+      //   this.listIsGrid = true;
+      // }
+    },
+    checkSortOption() {
+      const sortOption = localStorage.getItem("sortOption");
+      if (sortOption) {
+        this.sortOption = sortOption;
       }
+    },
+    sedOptionAsDefault() {
+      this.sortOption = "BM";
+      localStorage.removeItem("sortOption");
+      this.applyFilter();
+    },
+    checkLocationFilter() {
+      const province = localStorage.getItem("selectedProvince");
+      const city = localStorage.getItem("selectedCity");
+      this.province = province ? JSON.parse(province) : "";
+      this.city = city ? JSON.parse(city) : "";
+    },
+    handleBackKeys: function () {
+      let self = this;
+      if (window.history.state) {
+        history.pushState(null, null, window.location);
+      }
+      $(window).on("popstate", function (e) {
+        $(".modal").modal("hide");
+      });
+    },
+    getLocations() {
+      axios
+        .post("/location/get_location_info", { cascade_list: true })
+        .then(
+          (response) => (this.$parent.provinceList = response.data.provinces)
+        );
     },
   },
   watch: {
@@ -1706,10 +2200,8 @@ export default {
         this.init();
       }
     },
-    bottom(bottom) {
-      if (bottom) {
-        //this.feed()
-      }
+    "$parent.currentUser"(user) {
+      this.checkCurrentUser();
     },
   },
   created() {
@@ -1746,7 +2238,7 @@ export default {
       title = "لیست محصولات و قیمت عمده " + this.searchText;
       description = "خرید و قیمت عمده " + title;
     } else {
-      title = "لیست محصولات و قیمت عمده محصولات کشاورزی";
+      title = "لیست محصولات و قیمت عمده محصولات غذایی و کشاورزی";
       description =
         "خرید عمده و قیمت میوه | خرید عمده و قیمت غلات | خرید عمده و قیمت صیفی جات | خرید و قیمت عمده خشکبار";
     }
@@ -1766,11 +2258,12 @@ export default {
         {
           property: "og:description",
           content:
-            "مرجع تخصصی خرید و فروش عمده و قیمت محصولات کشاورزی ایران | صادرات محصولات کشاورزی",
+            "مرجع تخصصی خرید و فروش عمده و قیمت محصولات غذایی و کشاورزی ایران | صادرات محصولات غذایی و کشاورزی",
         },
         {
           property: "og:site_name",
-          content: "باسکول بازارآنلاین خرید و فروش محصولات کشاورزی ایران",
+          content:
+            "باسکول بازارآنلاین خرید و فروش محصولات غذایی و کشاورزی ایران",
         },
         {
           property: "og:title",

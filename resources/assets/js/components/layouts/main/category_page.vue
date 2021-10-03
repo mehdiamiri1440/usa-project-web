@@ -251,15 +251,29 @@
 
 <template>
   <div>
-    <div class="sub-header-fix sub-header hidden-lg hidden-md hidden-sm container-fluid">
+    <div
+      class="
+        sub-header-fix sub-header
+        hidden-lg hidden-md hidden-sm
+        container-fluid
+      "
+    >
       <div class="search-box col-sm-8 col-xs-12 col-lg-5 pull-right">
-        <input type="text" v-model="searchText" placeholder="اینجا جستجو کنید" />
+        <input
+          type="text"
+          v-model="searchText"
+          placeholder="اینجا جستجو کنید"
+        />
 
         <button class="btn-search">
           <i class="fa-search fa"></i>
         </button>
 
-        <button class="btn-filter hidden-lg" data-toggle="modal" data-target="#searchFilter">
+        <button
+          class="btn-filter hidden-lg"
+          data-toggle="modal"
+          data-target="#searchFilter"
+        >
           فیلتر
           <i class="fa fa-filter"></i>
         </button>
@@ -269,20 +283,22 @@
     <main id="main" class="container">
       <div class="row">
         <div
-          v-for="(item,index) in 3"
+          v-for="(item, index) in 3"
           :key="index"
           class="category-item col-xs-6 col-sm-4 col-md-3 pull-right"
         >
           <div
             class="wrapper-item"
-            style="background-image : url('http://localhost:8000/assets/img/product.jpg')"
+            style="
+              background-image: url('http://localhost:8000/assets/img/product.jpg');
+            "
           >
             <router-link to>خرما</router-link>
           </div>
         </div>
 
         <div
-          v-for="(item,index) in 6"
+          v-for="(item, index) in 6"
           :key="index"
           class="category-item col-xs-6 col-sm-4 col-md-3 pull-right"
         >
@@ -293,19 +309,17 @@
   </div>
 </template>
 <script>
-import ProductArticle from "./product_components/product_article";
-import ProductAsideCategories from "./product_components/sidebar/product_aside_categories";
 import { eventBus } from "../../../router/router";
 
 export default {
   props: ["str"],
-  data: function() {
+  data: function () {
     return {};
   },
   methods: {
-    init: function() {},
+    init: function () {},
 
-    registerRequestInSearchNotFoundCase: function() {
+    registerRequestInSearchNotFoundCase: function () {
       if (this.currentUser.profile) {
         if (this.currentUser.user_info.is_buyer) {
           this.$router.push({ name: "registerRequestBuyer" });
@@ -322,7 +336,7 @@ export default {
       }
     },
 
-    addProductOrRequest: function() {
+    addProductOrRequest: function () {
       if (this.currentUser.user_info) {
         if (this.currentUser.user_info.is_seller) {
           this.registerComponentStatistics(
@@ -354,10 +368,10 @@ export default {
         $("#auth-popup").modal("show");
       }
     },
-    resetFilter: function() {
+    resetFilter: function () {
       eventBus.$emit("submiting", true);
 
-      $(".box-sidebar option").prop("selected", function() {
+      $(".box-sidebar option").prop("selected", function () {
         return this.defaultSelected;
       });
 
@@ -369,7 +383,7 @@ export default {
 
       this.applyFilter();
     },
-    applyFilter: function() {
+    applyFilter: function () {
       var self = this;
 
       eventBus.$emit("submiting", true);
@@ -394,8 +408,8 @@ export default {
         this.$router.replace({
           name: "productList",
           query: {
-            s: this.searchText.replace(/ /g, "+")
-          }
+            s: this.searchText.replace(/ /g, "+"),
+          },
         });
         searchObject.search_text = this.searchText;
       }
@@ -405,45 +419,49 @@ export default {
         searchObject.to_record_number = 10;
         if (this.searchText == "") {
           this.$router.push({
-            name: "productList"
+            name: "productList",
           });
         }
       }
 
       axios
         .post("/user/get_product_list", searchObject)
-        .then(function(response) {
+        .then(function (response) {
           self.products = response.data.products;
           eventBus.$emit("submiting", false);
           // self.scrollToTop();
         })
-        .catch(function(err) {
+        .catch(function (err) {
           alert("خطایی رخ داده است. دوباره تلاش کنید.");
         });
     },
 
-    registerComponentStatistics: function(categoryName, actionName, labelName) {
+    registerComponentStatistics: function (
+      categoryName,
+      actionName,
+      labelName
+    ) {
       gtag("event", actionName, {
         event_category: categoryName,
-        event_label: labelName
+        event_label: labelName,
       });
     },
-    registerComponentExceptions: function(description, fatal = false) {
+    registerComponentExceptions: function (description, fatal = false) {
       gtag("event", "exception", {
         description: description,
-        fatal: fatal
+        fatal: fatal,
       });
-    }
+    },
   },
   watch: {
-    searchText: function(value) {
+    searchText: function (value) {
       var self = this;
 
       eventBus.$emit("textSearch", value);
 
       clearTimeout(this.searchTextTimeout);
 
-      this.searchTextTimeout = setTimeout(function() {
+      this.searchTextTimeout = setTimeout(function () {
         self.registerComponentStatistics(
           "product-list",
           "search-text",
@@ -453,12 +471,12 @@ export default {
         self.applyFilter();
       }, 1500);
     },
-    $route: function() {
+    $route: function () {
       if (this.$route.query.s) {
         this.searchText = this.$route.query.s.split("+").join(" ");
       }
     },
-    "$parent.productByResponseRate": function() {
+    "$parent.productByResponseRate": function () {
       this.products = {};
 
       if (this.searchText) {
@@ -466,11 +484,11 @@ export default {
       } else {
         this.init();
       }
-    }
+    },
   },
   created() {
     gtag("config", "UA-129398000-1", { page_path: "/product-list" });
-    eventBus.$on("textSearch", event => {
+    eventBus.$on("textSearch", (event) => {
       this.searchText = event;
     });
 
@@ -478,7 +496,7 @@ export default {
   },
   mounted() {
     let self = this;
-    this.init().then(loading => {
+    this.init().then((loading) => {
       if (!loading) {
         let scrollPosition = localStorage.getItem("scroll") || { x: 0, y: 0 };
         window.scrollTo(0, scrollPosition);
@@ -489,33 +507,34 @@ export default {
   },
   metaInfo() {
     return {
-      title: "لیست محصولات و قیمت عمده محصولات کشاورزی",
+      title: "لیست محصولات و قیمت عمده محصولات غذایی و کشاورزی",
       titleTemplate: "باسکول | %s",
       meta: [
         {
           name: "description",
           content:
-            "خرید عمده و قیمت میوه | خرید عمده و قیمت غلات | خرید عمده و قیمت صیفی جات | خرید و قیمت عمده خشکبار"
+            "خرید عمده و قیمت میوه | خرید عمده و قیمت غلات | خرید عمده و قیمت صیفی جات | خرید و قیمت عمده خشکبار",
         },
         {
           name: "author",
-          content: "باسکول"
+          content: "باسکول",
         },
         {
           property: "og:description",
           content:
-            "مرجع تخصصی خرید و فروش عمده و قیمت محصولات کشاورزی ایران | صادرات محصولات کشاورزی"
+            "مرجع تخصصی خرید و فروش عمده و قیمت محصولات غذایی و کشاورزی ایران | صادرات محصولات غذایی و کشاورزی",
         },
         {
           property: "og:site_name",
-          content: "باسکول بازارآنلاین خرید و فروش محصولات کشاورزی ایران"
+          content:
+            "باسکول بازارآنلاین خرید و فروش محصولات غذایی و کشاورزی ایران",
         },
         {
           property: "og:title",
-          content: "باسکول | لیست محصولات و قیمت محصولات کشاورزی"
-        }
-      ]
+          content: "باسکول | لیست محصولات و قیمت محصولات غذایی و کشاورزی",
+        },
+      ],
     };
-  }
+  },
 };
 </script>

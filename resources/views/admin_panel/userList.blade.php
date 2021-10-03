@@ -61,7 +61,6 @@
                   <input type="submit" class="btn btn-primary" value="برو">
                 </div>
               </div>
-              
             </form>
             <div class="box-body">
               <table id="example1" class="table table-bordered table-striped">
@@ -74,7 +73,10 @@
                   <th>تاریخ ثبت نام</th>
                   <th>تلفن</th>
                   <th>نوع عضوبت</th>
+                  <th>تاریخچه</th>
                   <th>آی دی</th>
+                  <th>دیگر حساب ها</th>
+                  <th>بلاک</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -95,7 +97,20 @@
                         @elseif($user->active_pakage_type == 3)
                           <td>ویژه</td>
                         @endif
+                        <td>
+                          <a href="{{route('admin_panel_load_user_notes_by_id',['user_id' => $user->id])}}">مشاهده</a>
+                        </td>
                         <td>{{$user->id}}</td>
+                        <td>
+                          <a href="{{route('admin_panel_same_device_users_list',['user_id' => $user->id])}}">مشاهده</a>
+                        </td>
+                        <td>
+                            @if($user->is_blocked == false)
+                                <button class="btn btn-danger" id="{{$user->id}}" onclick="block_user(event)">بلاک کردن</button>
+                            @else
+                                <button class="btn btn-success" id="{{$user->id}}" onclick="unblock_user(event)">رفع بلاک</button>
+                            @endif
+                        </td>
                     </tr>
                     @endforeach
               </table>
@@ -195,5 +210,59 @@
       setTimeout(notif, 5000);
     });
     
+</script>
+
+<script>
+    
+    function block_user(event)
+    {
+        event.preventDefault();
+        var e = event.currentTarget;
+
+        var user_id = $(e).attr('id');
+
+        $.ajax({
+            url:"{{route('admin_panel_block_operator')}}",
+            data:{
+                user_id:user_id,
+                block:1
+            },
+            type:"POST",
+            datatype:'json'
+        })
+        .done(function(json){
+            alert(json.msg); 
+            window.location.reload();          
+        })
+        .fail(function(xhr,status,errorThrown){
+
+        });   
+    }
+
+    function unblock_user(event)
+    {
+        event.preventDefault();
+        var e = event.currentTarget;
+
+        var user_id = $(e).attr('id');
+
+        $.ajax({
+            url:"{{route('admin_panel_block_operator')}}",
+            data:{
+                user_id:user_id,
+                block:0
+            },
+            type:"POST",
+            datatype:'json'
+        })
+        .done(function(json){
+            alert(json.msg); 
+            window.location.reload();          
+        })
+        .fail(function(xhr,status,errorThrown){
+
+        });   
+    }
+
 </script>
 @endsection

@@ -109,7 +109,8 @@ class sms_controller extends Controller
 	{
 		$rules = [
             'verification_code' => 'required',
-            'phone' => ['required','regex:/^((09[0-9]{9})|(\x{06F0}\x{06F9}[\x{06F0}-\x{06F9}]{9}))$/u']
+            'phone' => ['required','regex:/^((09[0-9]{9})|(\x{06F0}\x{06F9}[\x{06F0}-\x{06F9}]{9}))$/u'],
+            'client' => 'string',
 		];
 		
 		$this->validate($request,$rules);
@@ -121,29 +122,52 @@ class sms_controller extends Controller
 
                 $user_record = myuser::where('phone',$phone)->first();
                 if($user_record){
+                    if($request->filled('client') && $request->client == 'mobile'){
+                        $last_login_client = 'mobile';
+                    }
+                    else{
+                        $last_login_client = 'web';
+                    }
+
+                    if($request->filled('device_id')){
+                        $device_id = $request->device_id;
+                    }
+                    else{
+                        $device_id = null;
+                    }
+
                     $req = Request::create('/dologin', 'POST',[
                         'phone' => $user_record->phone,
                         'password' => $user_record->password,
-                        'plain' => false
+                        'client' => $last_login_client,
+                        'plain' => false,
+                        'device_id' => $device_id,
+                        'user_agent' => $request->server('HTTP_USER_AGENT')
                     ]);
 
                     $user_controller_object = new user_controller(new userService);
                     
                     return $user_controller_object->login($req);
                 }
+
+                return response()->json([
+                    'status' => true,
+                    'redirected' => false,
+                    'msg' => 'کد درست است',
+                ]);
                 
             }
 
 			return response()->json([
-                'status' => true,
+                'status' => false,
                 'redirected' => false,
-				'msg' => 'verification code is correct.'
+				'msg' => '.کد وارد شده صحیح نیست'
 			]);
 		}
 		else{
 			return response()->json([
 				'status'=> FALSE,
-				'msg' => 'verification time expired or code is incoorect.'
+				'msg' => 'کد منقضی شده یا اشتباه است.'
 			]);
 		}
 	}
@@ -280,17 +304,26 @@ class sms_controller extends Controller
         }
     }
     
-    public function send_sms_to_given_phone_number($phone_number,$pattern_code)
+    public function send_sms_to_given_phone_number($phone_number,$pattern_code,$data = [])
     {
         $user_first_name = DB::table('myusers')
                             ->where('phone',$phone_number)
                             ->select('first_name')
-                            ->get()->first()
+                            ->get()
+                            ->first()
                             ->first_name;
 
-        var_dump($user_first_name);
+        $sending_data = [
+            'name' => $user_first_name
+        ];
+
+        if(! is_null($data)){
+            $sending_data = array_merge($sending_data,$data);
+        }
+
+        
         try{
-            Smsir::ultraFastSend(['name' => $user_first_name],$pattern_code,$phone_number);
+            Smsir::ultraFastSend($sending_data,$pattern_code,$phone_number);
         }
         catch(\Exception $e){
             echo $e->getMessage();

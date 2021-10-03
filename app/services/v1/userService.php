@@ -27,10 +27,16 @@ use Carbon\Carbon;
 	 {
 		 $user = new myuser();
 
+		 if(session('sms_OTP') != $request->verification_code){
+			return response()->json([
+				'status' => false,
+				'msg' => 'Get The F*CK Out!'
+			],404);
+		}
+
 		 $user->first_name = $request->first_name;
 		 $user->last_name = $request->last_name;
 		 $user->phone = $request->phone;
-		 $user->password  = sha1($request->password);
 		 $user->sex = $request->sex;
 		 $user->province = $request->province;
 		 $user->city = $request->city;
@@ -45,10 +51,21 @@ use Carbon\Carbon;
          }
          else if($request->activity_type == 1){
              $user->is_buyer = true;
-         }
+		 }
+		 
+		 if($request->filled('password')){
+			$user->password  = sha1($request->password);
+		 }
+		 else{
+			$user->password = sha1($this->generate_plain_text_password(8));
+		 }
 
-         $sms_controller_object = new sms_controller();
-         $profile_controller_object = new profile_controller();
+		 if($request->filled('referred_user_name')){
+			 $user->referred_user_name = $request->referred_user_name;
+		 }
+
+        //  $sms_controller_object = new sms_controller();
+        //  $profile_controller_object = new profile_controller();
 
 		 try{
 			 $user->save();
@@ -153,6 +170,19 @@ use Carbon\Carbon;
 			 return $generated_user_name;
 		 }
 	 }
+
+	protected function generate_plain_text_password($password_len)
+    {
+        $result = '';
+        $chars = 'abcdefghijkmnpqrstuvwxyz123456789';
+        $charArray = str_split($chars);
+        for ($i = 0; $i < $password_len; ++$i) {
+            $randItem = array_rand($charArray);
+            $result .= ''.$charArray[$randItem];
+        }
+
+        return $result;
+    }
 
 
  }

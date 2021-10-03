@@ -1,17 +1,23 @@
 <style scoped>
-.show-header button {
-  float: right;
-  border: none;
-  background: none;
-  font-size: 25px;
-  padding: 17px 30px 11px 24px;
-  display: none;
+.list-inline > li {
+  padding-left: 0;
+  padding-right: 0;
+}
+.show-header {
+  position: relative;
 }
 
 .show-header button {
+  float: right;
+  border: none;
+  font-size: 25px;
+  padding: 7px 14px 6px;
   display: block;
-  background: #000546;
+  background: #151c2e;
   color: #fff;
+  border-radius: 12px;
+  margin-top: 8px;
+  margin-right: 10px;
 }
 
 .display-loading {
@@ -39,7 +45,6 @@
 }
 
 .main-header {
-  min-height: 59px;
   position: fixed;
   left: 0;
   right: 250px;
@@ -140,7 +145,7 @@
 
 .right-menu-header {
   position: relative;
-  padding: 6px;
+  padding: 9px;
 }
 
 .right-menu-header li ul a {
@@ -160,7 +165,6 @@
 .right-menu-header a,
 .profile-menu-header > a {
   color: #7f8c9b;
-  margin: 0 5px;
 }
 
 .profile-menu-header > a {
@@ -191,19 +195,27 @@
   background: #00ac5c;
 }
 
+a.home-button {
+  display: inline-block;
+  color: #fff;
+  background: #151c2e;
+  padding: 2px 10px 6px;
+  border-radius: 12px;
+  margin-left: 5px;
+}
 i.fa-home {
   position: relative;
-  top: 5px;
+  top: 4px;
+  font-size: 25px;
 }
 
-.product-list-link {
-  font-size: 17px !important;
-  padding: 7px 20px !important;
-  background: #00c569 !important;
-  border-radius: 4px;
-  border: 1px solid;
+a.product-list-link {
+  font-size: 18px;
+  padding: 9px 15px 8px;
+  background: #4dc0bb;
+  border-radius: 12px;
   display: inline-block;
-  color: #fff !important;
+  color: #fff;
 }
 
 /* profile info styles */
@@ -229,16 +241,10 @@ a.profile-info-wrapper:focus {
   float: right;
   margin-left: 10px;
   position: relative;
-}
-
-.profile-image-wrapper > img {
-  width: initial;
-  height: 100%;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  min-width: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #dddddd;
 }
 
 .profile-information {
@@ -261,11 +267,11 @@ a.profile-info-wrapper:focus {
   min-width: 150px;
   text-align: right;
   direction: rtl;
-  border-radius: 4px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0px 3px 9px rgba(0, 0, 0, 0.05);
   line-height: 1.618;
-  -webkit-box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
-  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
-  z-index: 1;
+  z-index: 6;
 }
 #web-profile-items > li a {
   background: none;
@@ -305,20 +311,83 @@ a.profile-info-wrapper:focus {
 }
 
 .upgrade-account {
+  background: #fff;
   color: #556080;
   border: 1px solid;
-  padding: 2px 15px;
-  border-radius: 4px;
+  padding: 6px 12px 5px;
+  border-radius: 12px;
   position: relative;
-  margin-left: 20px;
-  top: 10px;
+  margin-left: 10px;
+  top: 5px;
   transition: 300ms;
+}
+
+.upgrade-account.wallet {
+  color: #1da1f2;
+  margin-left: 20px;
 }
 
 .upgrade-account:hover {
   color: #fff;
   background: #556080;
+  border-color: #556080;
+
   transition: 300ms;
+}
+
+.upgrade-account.wallet:hover {
+  background: #1da1f2;
+  border-color: #1da1f2;
+}
+
+.verification-wrapper-contents {
+  font-size: 18px;
+  font-weight: 500;
+  display: block;
+  text-align: center;
+  color: #fff;
+  background: #1da1f2;
+  position: relative;
+  padding: 2px 0 8px;
+}
+
+.verification-text {
+  margin: 0 5px;
+}
+
+.verification-wrapper-contents > i {
+  transition: 120ms;
+}
+
+.verification-wrapper-contents:hover {
+  background: #0a91e4;
+}
+
+.verification-wrapper-contents:hover > i {
+  transform: translateX(-5px);
+  transition: 120ms;
+}
+
+.verified-user {
+  color: #fff;
+  font-size: 23px;
+  top: 4px;
+}
+
+.verified-user::before {
+  color: #1da1f2;
+  top: 7px;
+  font-size: 11px;
+  left: 6px;
+}
+
+.close-info {
+  background: none;
+  border: none;
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 8px 14px;
 }
 
 @media screen and (max-width: 991px) {
@@ -326,15 +395,46 @@ a.profile-info-wrapper:focus {
   .little-main-header {
     right: 0 !important;
   }
+  a.home-button {
+    background: none;
+    border: 1px solid #151c2e;
+    border-radius: 12px;
+    color: #151c2e;
+    padding: 2px 10px 4px;
+  }
+  a.product-list-link {
+    background: none;
+    color: #4dc0bb;
+    border: 1px solid;
+  }
+  .message-notification {
+    top: 4px;
+    cursor: pointer;
+    right: 45px;
+    z-index: 10;
+    position: absolute;
+    background-color: #e41c38;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    color: #fff;
+  }
+  .message-notification span {
+    flex: 1;
+    text-align: center;
+  }
+}
+@media screen and (min-width: 991px) {
+  .hide-message-notification {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 768px) {
-  span.min {
-    display: inherit;
-  }
-
-  span.full {
-    display: none;
+  .verification-wrapper-contents {
+    padding: 2px 15px 8px 0;
   }
   .mobile-header .green-button {
     margin: 15px 0 0;
@@ -386,10 +486,6 @@ a.profile-info-wrapper:focus {
   .profile-image-wrapper {
     margin: 0;
   }
-  .right-menu-header {
-    padding: 6px;
-    border-right: 1px solid #eff3f6;
-  }
 
   .profile-menu-header .user_name {
     display: none;
@@ -398,48 +494,31 @@ a.profile-info-wrapper:focus {
     padding: 10px 15px;
   }
 }
-
-@media screen and (max-width: 345px) {
-  .sub-header a {
-    font-size: 10px;
-  }
-
-  .show-header button {
-    padding: 19px 17px 16px 17px;
-  }
-
-  .right-menu-header {
-    padding: 6px;
-  }
-}
-@media only screen and (max-width: 991px) {
-  .message-notification {
-    top: 4px;
-    cursor: pointer;
-    border: 1px solid white;
-    right: 35px;
-    z-index: 10;
-    position: absolute;
-    background-color: #e41c38;
-    border-radius: 50%;
-    width: 28px;
-    height: 28px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: wheat;
-  }
-}
-@media only screen and (min-width: 991px) {
-  .hide-message-notification {
-    display: none;
-  }
-}
 .rotation {
   animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
   transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
   perspective: 1000px;
+}
+
+.mobile-header-title {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 500;
+  color: #333;
+  padding: 11px 5px;
+  line-height: 1;
+  position: relative;
+}
+
+.mobile-header-title button {
+  position: absolute;
+  right: 0;
+  top: 0;
+  border: none;
+  padding: 10px 15px;
+  line-height: 1;
+  background: none;
 }
 
 @keyframes shake {
@@ -464,14 +543,28 @@ a.profile-info-wrapper:focus {
     transform: translate3d(4px, 0, 0);
   }
 }
-.button-height {
-  line-height: 1;
-}
 </style>
 
 <template>
-  <div>
-    <header id="header" class="main-header">
+  <header id="header" class="main-header">
+    <router-link
+      v-if="$parent.verificationAlert"
+      :to="{ name: 'profileBasicSellerVeficiation' }"
+      class="verification-wrapper-contents"
+    >
+      <i class="fa fa-angle-left"></i>
+      <span class="verification-text"> برای احراز هویت کلیک کنید </span>
+      <span @click.prevent class="verified-user" title>
+        <i class="fa fa-certificate"></i>
+      </span>
+      <button
+        class="close-info"
+        @click.prevent="$parent.disableVerificationAlert = true"
+      >
+        <i class="fa fa-times"></i>
+      </button>
+    </router-link>
+    <div class="hidden-xs hidden-sm">
       <div v-if="$parent.isRequiredFixAlert" class="required-fix-alert">
         <div class="fix-alert-wrapper">
           <!-- remove pricing offer -->
@@ -512,20 +605,36 @@ a.profile-info-wrapper:focus {
           v-if="messageCount > 0"
           class="message-notification hide-message-notification"
         >
-          {{ messageCount }}
+          <span>
+            {{ messageCount > 100 ? "+99" : messageCount }}
+          </span>
         </div>
-        <button class="button-height">
+        <button>
           <span :class="menuClosed ? 'rotation' : ''" class="fa fa-bars"></span>
         </button>
       </div>
 
       <div class="user-auth-info-wrapper">
+        <button
+          @click.prevent="$parent.showWallet()"
+          class="upgrade-account wallet hidden-xs hidden-sm"
+          :to="{ name: 'dashboardPricingTableSeller' }"
+        >
+          موجودی :
+          {{
+            $parent.getNumberWithCommas(
+              $parent.currentUser.user_info.wallet_balance
+            )
+          }}
+          تومان
+          <i class="fa fa-wallet"></i>
+        </button>
         <router-link
           v-if="
             $route.name != 'dashboardPricingTableSeller' &&
             $parent.currentUser.user_info.active_pakage_type != 3
           "
-          class="upgrade-account hidden-xs"
+          class="upgrade-account hidden-xs hidden-sm"
           :to="{ name: 'dashboardPricingTableSeller' }"
         >
           ارتقا عضویت
@@ -540,10 +649,24 @@ a.profile-info-wrapper:focus {
               href="#web-profile-items"
               role="button"
             >
-              <div class="profile-image-wrapper">
-                <img v-if="photoLink" :src="storage + '/' + photoLink" />
-                <img v-else src="../../../../../../img/user-defult.png" />
-              </div>
+              <div
+                v-if="photoLink"
+                class="profile-image-wrapper"
+                :style="{
+                  backgroundImage: 'url(' + storage + '/' + photoLink + ')',
+                }"
+              ></div>
+              <div
+                v-else
+                class="profile-image-wrapper"
+                :style="{
+                  backgroundImage:
+                    'url(' +
+                    $parent.assets +
+                    'assets/img/user-defult.png' +
+                    ')',
+                }"
+              ></div>
 
               <div class="profile-information">
                 <span class="user_name" v-text="username"></span>
@@ -589,9 +712,7 @@ a.profile-info-wrapper:focus {
               </li>
 
               <li class="list-item">
-                <a :href="out" @click="logUserOut()">
-                  <i class="fas fa-sign-out-alt"></i> خروج
-                </a>
+                <a :href="out"> <i class="fas fa-sign-out-alt"></i> خروج </a>
               </li>
             </ul>
           </li>
@@ -600,7 +721,11 @@ a.profile-info-wrapper:focus {
           <li>
             <div class="col display-loading">
               <div
-                class="user_name placeholder-content placeholder-user-name margin-loading"
+                class="
+                  user_name
+                  placeholder-content placeholder-user-name
+                  margin-loading
+                "
               ></div>
               <div
                 class="placeholder-image-header-profile placeholder-content"
@@ -624,9 +749,9 @@ a.profile-info-wrapper:focus {
                 )
               "
             >
-              <span class="full">لیست محصولات</span>
-              <span class="min">
-                <i class="fa fa-th-list" aria-hidden="true"></i>
+              <span class="hidden-xs hidden-sm"> لیست محصولات </span>
+              <span class="hidden-md hidden-lg">
+                <i class="fa fa-list-ul"></i>
               </span>
             </router-link>
           </li>
@@ -641,6 +766,7 @@ a.profile-info-wrapper:focus {
                 )
               "
               :to="{ name: 'statusSeller' }"
+              class="home-button"
             >
               <i class="fa fa-home" aria-hidden="true"></i>
             </router-link>
@@ -651,8 +777,37 @@ a.profile-info-wrapper:focus {
       <SubMenu
         :class="{ 'header-with-fix-alert': $parent.isRequiredFixAlert }"
       />
-    </header>
-  </div>
+    </div>
+    <div class="hidden-md hidden-lg">
+      <div class="mobile-header-title">
+        <span v-text="pageTitle"></span>
+        <button
+          class="mobile-back-button"
+          onclick="window.history.go(-1); return false;"
+        >
+          <i class="fa fa-arrow-right"></i>
+        </button>
+      </div>
+      <div
+        v-if="$route.path === '/buyer/special-products'"
+        class="sub-header col-xs-12"
+        :class="{ 'is-verification-alert-active ': $parent.verificationAlert }"
+      >
+        <div class="search-box col-sm-6 col-xs-12 col-lg-4 pull-right">
+          <input
+            type="text"
+            v-model="$parent.searchValueText"
+            placeholder="اینجا جستجو کنید"
+          />
+
+          <button class="btn-search">
+            <i class="fa-search fa"></i>
+          </button>
+        </div>
+      </div>
+      <SubMenu />
+    </div>
+  </header>
 </template>
 
 
@@ -664,6 +819,85 @@ export default {
   data: function () {
     return {
       messageCount: 0,
+      pageTitle: "",
+      pages: [
+        {
+          name: "passwordSeller",
+          title: "تغییر کلمه عبور",
+        },
+        {
+          name: "myBuskoolSeller",
+          title: "باسکول من",
+        },
+        {
+          name: "statusSeller",
+          title: "داشبورد",
+        },
+        {
+          name: "referralSeller",
+          title: "دعوت از همکاران",
+        },
+        {
+          name: "invitedUsers",
+          title: "در آمد زایی",
+        },
+        {
+          name: "sellerViewer",
+          title: "کاربران",
+        },
+        {
+          name: "dashboardPricingTableSeller",
+          title: "ارتقا عضویت",
+        },
+        {
+          name: "dashboardProductPricing",
+          title: "افزایش ظرفیت",
+        },
+        {
+          name: "dashboardBuyAdPricing",
+          title: "افزایش ظرفیت",
+        },
+        {
+          name: "profileBasicSeller",
+          title: "ویرایش پروفایل",
+        },
+        {
+          name: "profileBasicSellerVeficiation",
+          title: "احراز هویت",
+        },
+        {
+          name: "messagesSeller",
+          title: "پیام ها",
+        },
+        {
+          name: "buyAdRequestsSeller",
+          title: "درخواست های خرید",
+        },
+        {
+          name: "myProductsSeller",
+          title: "محصولات من",
+        },
+        {
+          name: "registerProductSeller",
+          title: "ثبت محصول جدید",
+        },
+        {
+          name: "successRegisterProduct",
+          title: "محصول",
+        },
+        {
+          name: "guideSeller",
+          title: "راهنما",
+        },
+        {
+          name: "showNumberGuideSeller",
+          title: "راهنمای اطلاعات تماس",
+        },
+        {
+          name: "supportSeller",
+          title: "پشتیبانی",
+        },
+      ],
     };
   },
   components: {
@@ -681,14 +915,7 @@ export default {
   methods: {
     init: function () {
       this.closeCollapses();
-    },
-    logUserOut: function () {
-      localStorage.removeItem("userRoute");
-      this.registerComponentStatistics(
-        "seller-dashboard-header",
-        "logout",
-        "click-on-logout-in-dashboard"
-      );
+      this.checkName(this.$route.name);
     },
     closeCollapses: function () {
       $(document).on("click", function (e) {
@@ -705,6 +932,23 @@ export default {
         }
       });
     },
+    registerComponentStatistics: function (
+      categoryName,
+      actionName,
+      labelName
+    ) {
+      gtag("event", actionName, {
+        event_category: categoryName,
+        event_label: labelName,
+      });
+    },
+    checkName(routeName) {
+      this.pages.map((item) => {
+        if (item.name == routeName) {
+          this.pageTitle = item.title;
+        }
+      });
+    },
   },
   mounted() {
     this.init();
@@ -718,11 +962,10 @@ export default {
       this.activeElement = event;
     });
   },
-  registerComponentStatistics: function (categoryName, actionName, labelName) {
-    gtag("event", actionName, {
-      event_category: categoryName,
-      event_label: labelName,
-    });
+  watch: {
+    "$route.name"(route) {
+      this.checkName(route);
+    },
   },
 };
 </script>

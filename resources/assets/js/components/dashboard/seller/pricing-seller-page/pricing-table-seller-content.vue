@@ -1,4 +1,6 @@
 <style scoped>
+@import url("../../../../../css/owl.carousel.min.css");
+
 .item-action .green-button {
   padding: 10px 35px;
   margin: 0 auto 15px;
@@ -16,18 +18,14 @@
   right: 4px;
 }
 
-.text-red {
-  color: #e41c38;
-}
-
 .text-green {
   color: #00ac5c;
 }
 
 .wrapper-background {
   background: #fff;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
-  border-radius: 4px;
+  border: 1px solid #e9ecef;
+  border-radius: 12px;
   padding: 15px;
   line-height: 1.618;
   margin-bottom: 30px;
@@ -36,9 +34,10 @@
 
 .header-wrapper {
   text-align: center;
-  padding: 15px 115px;
-  float: left;
+  padding: 15px;
   width: 100%;
+  max-width: 680px;
+  margin: 0 auto;
 }
 
 .header-title {
@@ -198,33 +197,108 @@
   margin-left: 5px;
 }
 
-.special-badge {
+.offer-price {
   position: absolute;
-  left: -29px;
+  text-align: center;
+  top: -23px;
+  left: 15px;
+  right: 15px;
+}
+
+.offer-notice > span {
   background: #e41c38;
   color: #fff;
-  font-size: 17px;
+  border-radius: 4px;
+  padding: 0 15px;
+}
+
+.offer-item-price-content {
+  font-weight: 400;
+  -webkit-text-decoration: line-through;
+  text-decoration: line-through;
+  color: #777;
+}
+
+.item-content-wrapper {
+  direction: rtl;
+  max-width: 680px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 10px 0;
+  border-bottom: 1px solid #f2f2f2;
+  overflow: hidden;
+}
+.item-content-wrapper:last-of-type {
+  border-bottom: none;
+}
+
+.item-content-wrapper > div {
+  float: right;
+}
+
+.main-text-wrapper {
+  color: #38485f;
+  font-size: 19px;
   font-weight: bold;
-  width: 120px;
-  text-align: center;
-  padding: 3px;
-  transform: rotate(-45deg);
-  top: 14px;
+  direction: rtl;
+  margin: 5px auto 15px;
+  float: right;
+  width: 100%;
 }
 
-.item-header {
-  overflow: hidden;
-  direction: rtl;
+.icon-wrapper {
+  float: right;
+  font-size: 45px;
+  height: 45px;
+  width: 45px;
+  line-height: 1;
+}
+
+.content-wrapper {
+  float: right;
+  font-size: 15px;
+  color: #707070;
+  padding-top: 11px;
+  padding-right: 15px;
+  width: calc(100% - 45px);
+}
+
+.content-wrapper > strong {
+  color: #313a43;
+}
+
+.important-text {
+  font-weight: bold;
+}
+
+.fix-botton-wraper {
+  position: fixed;
+  bottom: 59px;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+  padding: 5px;
+  box-shadow: 0 -6px 15px rgba(0, 0, 0, 0.16);
+  background: #fff;
+  display: flex;
+}
+
+.fix-botton-wraper button {
+  width: 100%;
+  border-radius: 6px;
+  margin: 0;
+  font-size: 18px;
+  padding: 10px 15px;
   background: #556080;
-  color: #fff;
 }
 
-.item-header.pro-version {
-  overflow: hidden;
-  direction: rtl;
-  background: linear-gradient(90deg, #00c569 0%, #21ad93 100%);
+.fix-botton-wraper button i {
+  position: relative;
+  top: 2px;
+}
 
-  color: #fff;
+.pricing-wrapper {
+  margin-bottom: 130px;
 }
 
 @media screen and (max-width: 991px) {
@@ -241,6 +315,12 @@
     width: 50px;
     text-align: center;
   }
+  .item-content-wrapper {
+    padding: 15px 0;
+  }
+  .main-text-wrapper {
+    margin: 15px auto;
+  }
 
   .header-icon-wrapper i {
     font-size: 69px;
@@ -255,16 +335,6 @@
     float: left;
     width: 100%;
     padding: 0;
-  }
-
-  .header-icon-wrapper i::after {
-    content: "\F00C";
-    font-size: 19px;
-    text-align: center;
-    width: 100%;
-    display: block;
-    position: absolute;
-    top: 14px;
   }
 
   .header-description {
@@ -308,7 +378,15 @@
     right: 0;
     top: 45px;
   }
-
+  .item-content-list li {
+    padding: 12px 7px !important;
+  }
+  .mobile-padding-5 {
+    padding: 0 5px !important;
+  }
+  .mobile-padding-7 {
+    padding: 15px 7px !important;
+  }
   .special-badge {
     padding: 0 3px 3px;
     border-radius: 4px;
@@ -323,14 +401,95 @@
 </style>
 <template>
   <div class="col-xs-12">
+    <!-- payment loader -->
+    <div v-if="doPaymentLoader" class="main-loader-content">
+      <div class="pricing-loader-icon">
+        <div class="lds-ring">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <p class="pricing-loader-text text-rtl">
+          در حال انتقال به درگاه پرداخت . . .
+        </p>
+      </div>
+    </div>
+
     <div class="row">
       <div class="main-content-wrapper col-xs-12 col-lg-10 col-lg-offset-1">
         <div class="row">
+          <div class="col-xs-12 text-center mobile-padding-5">
+            <div class="wrapper-background mobile-padding-7">
+              <div class="header-wrapper">
+                <div class="header-title">
+                  <span>آیا میدانستید؟</span>
+                </div>
+
+                <div class="item-content-wrapper">
+                  <div>
+                    <div class="icon-wrapper">
+                      <i class="fa fa-frown-open red-text"></i>
+                    </div>
+                    <div class="content-wrapper">
+                      شما سالانه
+                      <span class="red-text important-text">
+                        10 ها میلیون تومان پول
+                      </span>
+                      را به دلیل دسترسی نداشتن به خریدار ها از دست می دهید.
+                    </div>
+                  </div>
+                </div>
+                <div class="item-content-wrapper">
+                  <div>
+                    <div class="icon-wrapper">
+                      <i class="fa fa-grin green-text"></i>
+                    </div>
+                    <div class="content-wrapper">
+                      برای ارتباط با هزاران
+                      <span class="green-text important-text">
+                        خریدار واقعی
+                      </span>
+                      از سراسر کشور به جمع
+                      <strong> فروشندگان ویژه باسکول </strong>
+                      بپیوندید.
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- <p class="main-text-wrapper">
+                حرفه ای ها فرصت ها را از دست نمی دهند!
+              </p> -->
+            </div>
+          </div>
+          <!-- show pricing items -->
           <pricing-contents justPro="false" :offer-time="this.offerTime" />
+
+          <!-- after pricing items  -->
+          <div class="col-xs-12 text-center mobile-padding-5">
+            <div class="wrapper-background">
+              <div class="header-wrapper">
+                <div class="header-title">
+                  <span>بسته ی ویژه فروش چیست؟</span>
+                </div>
+
+                <p class="header-description">
+                  <strong>
+                    این بسته شامل مجموعه امکاناتی مانند اعمال نردبان رایگان،
+                    مشاهده بدون تاخیر درخواست های خرید، دریافت پیامک درخواست های
+                    خرید مرتبط و ... است که
+                    <span class="green-text"
+                      >باعث فروش محصولات شما در سریع ترین زمان ممکن می شود</span
+                    >
+                  </strong>
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div class="users-review-carousel-wrapper col-xs-12">
+      <div class="users-review-carousel-wrapper col-xs-12 pricing-wrapper">
         <div class="title-section">تعدادی از اعضای ویژه در باسکول</div>
         <div class="owl-carousel">
           <pricing-user-carousel
@@ -348,6 +507,13 @@
         </div>
       </div>
     </div>
+
+    <div class="fix-botton-wraper hidden-md hidden-lg">
+      <button class="green-button" @click="openCreditCardGuide()">
+        پرداخت از طریق کارت به کارت
+        <i class="fa fa-credit-card"></i>
+      </button>
+    </div>
   </div>
 </template>
 
@@ -355,79 +521,41 @@
 <script>
 import pricingUserCarousel from "./pricing-user-carousel";
 import pricingContents from "./pricing-tables/pricing-package-contents";
+import swal from "../../../../sweetalert.min.js";
+
 export default {
   props: ["offerTime"],
   components: { pricingUserCarousel, pricingContents },
   data: function () {
     return {
       // statusData: "",
-      // doPaymentLoader: false
-      //  priceItemSix: [
-      //   {
-      //     title: "تعداد آگهی ها",
-      //     contentUnit: "2",
-      //     helpDescription:
-      //       " تعداد آگهی های همزمان شما که در لیست محصولات نمایش داده می شود. "
-      //   },
-      //   {
-      //     title: "تعداد نردبان ",
-      //     contentUnit: "1",
-      //     helpDescription:
-      //       "بر روی اولین محصول ثبت شده ویژگی نردبان به صورت خودکار اعمال خواهد شد"
-      //   },
-      //   {
-      //     title: "نمایش در لیست محصولات ویژه",
-      //     contentUnit:
-      //       '<i class="text-green fa fa-times-circle" style="color:#e41c38"></i>',
-      //     helpDescription:
-      //       "محصولات ثبت شده شما، در قسمت محصولات ویژه در پنل خریداران به آنها نمایش داده می شود"
-      //   },
-      //   {
-      //     title: "تایید فوری ",
-      //     contentUnit:
-      //       '<i class="text-green fa fa-check-circle" style="color:#00c569"></i>',
-      //     helpDescription:
-      //       " آگهی های فروش ثبت شده بلافاصله پس از ثبت در لیست محصولات نمایش داده می شود. "
-      //   },
-      //   {
-      //     title: " میزان افزایش خوشنامی ",
-      //     contentUnit: "100",
-      //     helpDescription: " مقدار اعتبار اضافه شده به صفحه پروفایل شما "
-      //   },
-      //   {
-      //     title: " نشان فروشنده معتبر ",
-      //     contentUnit:
-      //       '<i class="text-green fa fa-times-circle" style="color:#e41c38"></i>',
-      //     helpDescription:
-      //       " این نشان در صفحه پروفایل فروشنده نمایش داده می شود. "
-      //   },
-      //   {
-      //     title: " سقف روزانه پاسخ به درخواست ها ",
-      //     contentUnit: "10",
-      //     helpDescription: "سقف تعداد روزانه پاسخگویی به درخواست های خرید"
-      //   },
-      //   {
-      //     title: "مشاهده بلافاصله درخواست خرید ",
-      //     contentUnit:
-      //       '<i class="text-green fa fa-check-circle" style="color:#00c569"></i>',
-      //     helpDescription:
-      //       " درخواست های خرید جدید بدون تاخیر به شما نمایش داده می شود. "
-      //   },
-      //   {
-      //     title: "تضمین بازگشت وجه ",
-      //     contentUnit:
-      //       '<i class="text-green fa fa-times-circle" style="color:#e41c38"></i>',
-      //     helpDescription:
-      //       " اگر پس از سه ماه از نتیجه آن رضایت نداشته باشید 100% مبلغ پرداختی به شما بازگردانده می شود. "
-      //   }
-      // ],
+      doPaymentLoader: false,
     };
   },
   methods: {
-    init: function () {},
-  },
-  mounted() {
-    this.init();
+    openCreditCardGuide() {
+      var buskoolInfo = document.createElement("div");
+      buskoolInfo.className = "credit-card-wrapper";
+      buskoolInfo.innerHTML = `<i class="fa fa-credit-card"></i><p>
+      درصورت نیاز به پرداخت از طریق کارت به کارت، با ما تماس بگیرید
+      </p> <div>
+      <a href='tel:09178928266'><span><i class='fa fa-phone-alt'></i> 09178928266</span></a>
+      <a href='tel:09118413054'><span><i class='fa fa-phone-alt'></i> 09118413054</span></a>
+      </div>`;
+
+      swal({
+        content: buskoolInfo,
+        className: "custom-swal-with-cancel",
+        buttons: {
+          close: {
+            text: "بستن",
+            className: "bg-cancel",
+          },
+        },
+      }).then((value) => {
+        this.isActivePhone = false;
+      });
+    },
   },
 };
 </script>

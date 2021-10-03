@@ -78,9 +78,9 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">منو</li>
-        <li class="{{Request::is('admin/statistics') ? 'active':''}}">
+        <!-- <li class="{{Request::is('admin/statistics') ? 'active':''}}">
                 <a href="{{route('admin_panel_load_statistics')}}"><i class="fa fa-envelope"></i><span>آمار سایت</span></a>      
-        </li>
+        </li> -->
         <li class="{{Request::is('admin/statisticsCharts') ? 'active':''}}">
                 <a href="{{route('admin_panel_load_statistics_chart')}}"><i class="fa fa-envelope"></i><span>نمودارها</span></a>      
         </li>
@@ -117,6 +117,18 @@
         </li>
         <li class="{{Request::is('admin/unverified-user-list') ? 'active':''}}">
             <a href="{{route('admin_load_unverified_documents')}}"><i class="fa fa-envelope"></i><span>اطلاعات احراز هویت</span></a>      
+        </li>
+        <li class="{{Request::is('admin/payment-list') ? 'active':''}}">
+            <a href="{{route('admin_panel_payment_list')}}"><i class="fa fa-envelope"></i><span>وضعیت تراکنش ها</span></a>      
+        </li>
+        <li class="{{Request::is('admin/submit-to-channel') ? 'active':''}}">
+            <a href="{{route('admin_panel_submit_to_channel')}}"><i class="fa fa-envelope"></i><span>ارسال در کانال</span></a>      
+        </li>
+        <li class="{{Request::is('admin/admin_panel_channel_content_list') ? 'active':''}}">
+            <a href="{{route('admin_panel_channel_content_list')}}"><i class="fa fa-envelope"></i><span>همه پست های کانال</span></a>      
+        </li>
+        <li class="{{Request::is('admin/categories-meta-data-list') ? 'active':''}}">
+            <a href="{{route('admin_panel_load_meta_contents_list')}}"><i class="fa fa-envelope"></i><span>اطلاعات دسته بندی ها</span></a>      
         </li>
         <!-- <li class="{{Request::is('admin/sell-offers') || Request::is('admin/sell-offer-detail/*') ? 'active':''}}">
             <a href="{{route('admin_panel_sell_offer_list')}}"><i class="fa fa-envelope"></i><span>پیشنهادات فروش</span></a>     

@@ -16,11 +16,14 @@ use App\Models\myuser;
 use Carbon\Carbon;
 use App\Models\product;
 use DB;
+use App\Models\premium_service;
+use App\Traits\Payment;
     
 
 class payment_controller extends Controller
 {
-    
+    use Payment;
+
     public function __construct()
     {
 //        session_start();
@@ -31,7 +34,9 @@ class payment_controller extends Controller
     
     public function do_payment($pakage_type)
     {
-        $payment_amount = config("subscriptionPakage.type-$pakage_type.price");
+        $prices_array = $this->get_packages_price_array();
+        $payment_amount = $prices_array['type-' . $pakage_type .'-discount'] ?? $prices_array['type-' . $pakage_type];
+
         
         if(!in_array($pakage_type,$this->allowed_package_types_to_pay)){
             return redirect()->back()->withErrors([
@@ -51,17 +56,26 @@ class payment_controller extends Controller
                 session(['pakage_type' => $pakage_type]);
                 session(['pakage_duration_in_months' => config("subscriptionPakage.type-$pakage_type.pakage-duration-in-months")]);
                 session(['elevator_count' => config("subscriptionPakage.type-$pakage_type.elevetor-count")]);
+                session(['payment_amount' => $payment_amount]);
+
+                $this->record_payment_log([
+                    'myuser_id' => session('user_id'),
+                    'transaction_id' => $transID,
+                    'pay_for' => "package-type-$pakage_type",
+                    'client' => 'web'
+                ]);
                 
                 return $gateway->redirect(); 
-            }catch (Exception $e){ 
-                echo $e->getMessage();
+            }catch (\Exception $e){ 
+                return redirect('/contact-us');
             }   
         }
     } 
     
     public function app_do_payment($user_id,$pakage_type)
     {
-        $payment_amount = config("subscriptionPakage.type-$pakage_type.price");
+        $prices_array = $this->get_packages_price_array($user_id);
+        $payment_amount = $prices_array['type-' . $pakage_type .'-discount'] ?? $prices_array['type-' . $pakage_type];
         
         if(!in_array($pakage_type,$this->allowed_package_types_to_pay)){
             return redirect()->back()->withErrors([
@@ -82,27 +96,41 @@ class payment_controller extends Controller
                 session(['pakage_duration_in_months' => config("subscriptionPakage.type-$pakage_type.pakage-duration-in-months")]);
                 session(['elevator_count' => config("subscriptionPakage.type-$pakage_type.elevetor-count")]);
                 session(['app_user_id' => $user_id]);
+                session(['payment_amount' => $payment_amount]);
+
+                $this->record_payment_log([
+                    'myuser_id' => $user_id,
+                    'transaction_id' => $transID,
+                    'pay_for' => "package-type-$pakage_type",
+                    'client' => 'mobile'
+                ]);
                 
                 return $gateway->redirect(); 
-            }catch (Exception $e){ 
-                echo $e->getMessage();
+            }catch (\Exception $e){ 
+                return redirect('/contact-us');
             }   
         }
     } 
     
     public function payment_callback()
     {
-        
         try { 
-            $gateway = \Gateway::verify();
-            $trackingCode = $gateway->trackingCode();
-            $refId = $gateway->refId();
-            $cardNumber = $gateway->cardNumber();
+            $this->do_payment_callback(session('user_id'),session()->pull('payment_amount'));
 
             // عملیات خرید با موفقیت انجام شده است
             // در اینجا کالا درخواستی را به کاربر ارائه میکنم
             $this->do_after_payment_changes_for_subscription(session('user_id'));
             
+            $lastest_registered_product_count = DB::table('products')
+                                                    ->where('myuser_id',session('user_id'))
+                                                    ->whereBetween('created_at',[Carbon::now()->subMinutes(20),Carbon::now()])
+                                                    ->orderBy('created_at','desc')
+                                                    ->count();
+            
+            if($lastest_registered_product_count > 0){
+                return redirect('/seller/register-product/success');
+            }
+
             return redirect('/seller/buyAd-requests');
 
         } 
@@ -116,14 +144,22 @@ class payment_controller extends Controller
     {
         
         try { 
-            $gateway = \Gateway::verify();
-            $trackingCode = $gateway->trackingCode();
-            $refId = $gateway->refId();
-            $cardNumber = $gateway->cardNumber();
+            $this->do_payment_callback(session('app_user_id'),session()->pull('payment_amount'));
 
             // عملیات خرید با موفقیت انجام شده است
             // در اینجا کالا درخواستی را به کاربر ارائه میکنم
             $this->do_after_payment_changes_for_subscription(session()->pull('app_user_id'));
+
+
+            $lastest_registered_product_count = DB::table('products')
+                                                    ->where('myuser_id',session('user_id'))
+                                                    ->whereBetween('created_at',[Carbon::now()->subMinutes(20),Carbon::now()])
+                                                    ->orderBy('created_at','desc')
+                                                    ->count();
+            
+            if($lastest_registered_product_count > 0){
+                return redirect('buskool://register-product-successfully');
+            }
             
             return redirect('buskool://buyAd-requests');
 
@@ -132,32 +168,6 @@ class payment_controller extends Controller
         {
             return redirect('buskool://pricing');
         }
-    }
-    
-    protected function do_after_payment_changes($payed_amount_in_gateway,$base_factor_model)
-    {
-        $factor_id = $_SESSION['factor_id'];
-        
-        if($base_factor_model == 'instant_factor'){
-            $factor_record = instant_factor::find($factor_id);
-        }
-        else if($base_factor_model == 'factor'){
-            $factor_record = factor::find($factor_id);
-        }
-        
-        
-        $factor_record->payed_so_far = $factor_record->payed_so_far + intval($payed_amount_in_gateway)/10 ;
-        
-        if($factor_record->payed_so_far == $factor_record->amount_to_pay){
-            $factor_record->is_payed = true;
-        }
-        
-        $factor_record->save();
-        
-        if($factor_record->payed_so_far == $factor_record->amount_to_pay){
-            return true;
-        }
-        else return false;
     }
     
     protected function do_after_payment_changes_for_subscription($user_id)
@@ -197,86 +207,6 @@ class payment_controller extends Controller
         }
     }
     
-    public function do_external_url_payment($payment_amount)
-    {
-        $payment_amount = (int) $payment_amount ;
-        
-        if(is_integer($payment_amount) ){
-
-            $payment_amount = $payment_amount * 10 > $this->gateway_max_amount_to_pay_value ? false : $payment_amount * 10 ;
-
-            if($payment_amount != false){
-                $_SESSION['merchantId'] = $this->MerchantId;
-                $_SESSION['sha1Key'] = $this->sha1Key;
-                $_SESSION['admin_email'] = 'ali_delkhosh@ymail.com';
-                $_SESSION['amount'] = $payment_amount ;
-                $_SESSION['PayOrderId'] = time();
-
-                $revertURL = route('external_url_payment_callback');
-
-                $client = new SoapClient('https://ikc.shaparak.ir/XToken/Tokens.xml', array('soap_version'   => SOAP_1_1));
-
-                $params['amount'] =  $payment_amount;
-                $params['merchantId'] = $this->MerchantId;
-                $params['invoiceNo'] = $_SESSION['PayOrderId'];
-                $params['paymentId'] = $_SESSION['PayOrderId'];
-                $params['specialPaymentId'] = $_SESSION['PayOrderId'];
-                $params['revertURL'] = $revertURL;
-                $params['description'] = "";
-                $result = $client->__soapCall("MakeToken", array($params));
-                $_SESSION['token'] = $result->MakeTokenResult->token;
-                $data['token'] = $_SESSION['token'];
-                $data['merchantId'] = $_SESSION['merchantId'];
-
-                $this->redirect_post('https://ikc.shaparak.ir/TPayment/Payment/index',$data);
-            }
-        }
-        else echo 'error';
-          
-    }
-    
-    public function external_url_payment_callback()
-    {
-        
-        if(isset($_POST['resultCode'])){
-            if ($_POST['resultCode'] == '100'){
-                
-                $referenceId = isset($_POST['referenceId']) ? $_POST['referenceId'] : 0;
-                $client = new SoapClient('https://ikc.shaparak.ir/XVerify/Verify.xml', array('soap_version'   => SOAP_1_1));
-                $params['token'] =  $_SESSION['token'];
-                $params['merchantId'] = $this->MerchantId;
-                $params['referenceNumber'] = $referenceId;
-                $params['sha1Key'] = $this->sha1Key;
-
-
-                $result = $client->__soapCall("KicccPaymentsVerification", array($params));
-                $result = ($result->KicccPaymentsVerificationResult);
-
-
-                if (floatval($result) > 0 && floatval($result) == floatval($_SESSION['amount']) ){	
-                    //Payment verified and OK !
-                    //
-                    // payed amount value in gateway
-                    return view('payment.external_url_payment_callback',[
-                            'payed_amount' => $result,
-                            'reference_id'=> $referenceId,
-                            'payment_id' => $_POST['paymentId'] ? $_POST['paymentId'] : 0,
-                    ]);
-                    
-                }
-                else{
-                    //flush session
-                    $this->flush_global_session();
-
-                    return abort(404);
-                }
-            }
-            else{
-                return redirect()->back();
-            }
-    }
-        
-}
     
     public function do_elevator_payment($product_id)
     {
@@ -291,11 +221,20 @@ class payment_controller extends Controller
             // Your code here
             session(['gateway_transaction_id' => $transID]);
             session(['product_id' => $product_id]);
+            session(['payment_amount' => $payment_amount]);
             
-//            return 'id'.session()->pull('product_id');
+            $user_id = product::find($product_id)->myuser_id;
+
+            $this->record_payment_log([
+                'myuser_id' => $user_id,
+                'transaction_id' => $transID,
+                'pay_for' => "elevator",
+                'client' => 'web'
+            ]);
+
             return $gateway->redirect(); 
-        }catch (Exception $e){ 
-            echo $e->getMessage();
+        }catch (\Exception $e){ 
+            return redirect('/contact-us');
         }   
     }  
 
@@ -312,20 +251,27 @@ class payment_controller extends Controller
             // Your code here
             session(['gateway_transaction_id' => $transID]);
             session(['product_id' => $product_id]);
+            session(['payment_amount' => $payment_amount]);
+
+            $user_id = product::find($product_id)->myuser_id;
+
+            $this->record_payment_log([
+                'myuser_id' => $user_id,
+                'transaction_id' => $transID,
+                'pay_for' => "elevator",
+                'client' => 'mobile'
+            ]);
  
             return $gateway->redirect(); 
-        }catch (Exception $e){ 
-            echo $e->getMessage();
+        }catch (\Exception $e){ 
+            return redirect('/contact-us');
         }   
     }  
     
     public function elevator_payment_callback()
     {
         try{ 
-            $gateway = \Gateway::verify();
-            $trackingCode = $gateway->trackingCode();
-            $refId = $gateway->refId();
-            $cardNumber = $gateway->cardNumber();
+            $this->do_payment_callback(session('user_id'),session()->pull('payment_amount'));
 
             // عملیات خرید با موفقیت انجام شده است
             // در اینجا کالا درخواستی را به کاربر ارائه میکنم
@@ -344,10 +290,7 @@ class payment_controller extends Controller
     public function app_elevator_payment_callback()
     {
         try{ 
-            $gateway = \Gateway::verify();
-            $trackingCode = $gateway->trackingCode();
-            $refId = $gateway->refId();
-            $cardNumber = $gateway->cardNumber();
+            $this->do_payment_callback(session('app_user_id'),session()->pull('payment_amount'));
 
             // عملیات خرید با موفقیت انجام شده است
             // در اینجا کالا درخواستی را به کاربر ارائه میکنم
@@ -413,11 +356,20 @@ class payment_controller extends Controller
                 session(['gateway_transaction_id' => $transID]);
                 session(['extra_capacity' => $extra_capacity]);
                 session(['uid' => $user_id]);
+                session(['payment_amount' => $payment_amount]);
+
+
+                $this->record_payment_log([
+                    'myuser_id' => $user_id,
+                    'transaction_id' => $transID,
+                    'pay_for' => "product-capacity",
+                    'client' => 'web'
+                ]);
 
                 
                 return $gateway->redirect(); 
             }catch (Exception $e){ 
-                echo $e->getMessage();
+                return redirect('/contact-us');
             }  
         }
         else{
@@ -446,11 +398,19 @@ class payment_controller extends Controller
                 session(['gateway_transaction_id' => $transID]);
                 session(['extra_capacity' => $extra_capacity]);
                 session(['app_user_id' => $user_id]);
+                session(['payment_amount' => $payment_amount]);
+
+                $this->record_payment_log([
+                    'myuser_id' => $user_id,
+                    'transaction_id' => $transID,
+                    'pay_for' => "product-capacity",
+                    'client' => 'mobile'
+                ]);
 
                 
                 return $gateway->redirect(); 
-            }catch (Exception $e){ 
-                echo $e->getMessage();
+            }catch (\Exception $e){ 
+                return redirect('/contact-us');
             }  
         }
         else{
@@ -463,10 +423,7 @@ class payment_controller extends Controller
     public function product_capacity_payment_callback()
     {
         try{ 
-            $gateway = \Gateway::verify();
-            $trackingCode = $gateway->trackingCode();
-            $refId = $gateway->refId();
-            $cardNumber = $gateway->cardNumber();
+            $this->do_payment_callback(session('user_id'),session()->pull('payment_amount'));
 
             // عملیات خرید با موفقیت انجام شده است
             // در اینجا کالا درخواستی را به کاربر ارائه میکنم
@@ -485,10 +442,7 @@ class payment_controller extends Controller
     public function app_product_capacity_payment_callback()
     {
         try{ 
-            $gateway = \Gateway::verify();
-            $trackingCode = $gateway->trackingCode();
-            $refId = $gateway->refId();
-            $cardNumber = $gateway->cardNumber();
+            $this->do_payment_callback(session('app_user_id'),session()->pull('payment_amount'));
 
             // عملیات خرید با موفقیت انجام شده است
             // در اینجا کالا درخواستی را به کاربر ارائه میکنم
@@ -545,11 +499,19 @@ class payment_controller extends Controller
                 session(['gateway_transaction_id' => $transID]);
                 session(['extra_reply_capacity' => $extra_reply_capacity]);
                 session(['uid' => $user_id]);
+                session(['payment_amount' => $payment_amount]);
+
+                $this->record_payment_log([
+                    'myuser_id' => $user_id,
+                    'transaction_id' => $transID,
+                    'pay_for' => "buyAd-capacity",
+                    'client' => 'web'
+                ]);
 
                 
                 return $gateway->redirect(); 
-            }catch (Exception $e){ 
-                echo $e->getMessage();
+            }catch (\Exception $e){ 
+                return redirect('/contact-us');
             } 
         }
         else{
@@ -578,11 +540,19 @@ class payment_controller extends Controller
                 session(['gateway_transaction_id' => $transID]);
                 session(['extra_reply_capacity' => $extra_reply_capacity]);
                 session(['app_user_id' => $user_id]);
+                session(['payment_amount' => $payment_amount]);
+
+                $this->record_payment_log([
+                    'myuser_id' => $user_id,
+                    'transaction_id' => $transID,
+                    'pay_for' => "buyAd-capacity",
+                    'client' => 'mobile'
+                ]);
 
                 
                 return $gateway->redirect(); 
-            }catch (Exception $e){ 
-                echo $e->getMessage();
+            }catch (\Exception $e){ 
+                return redirect('/contact-us');
             } 
         }
         else{
@@ -595,10 +565,7 @@ class payment_controller extends Controller
     public function buyAd_reply_capacity_payment_callback()
     {
         try{ 
-            $gateway = \Gateway::verify();
-            $trackingCode = $gateway->trackingCode();
-            $refId = $gateway->refId();
-            $cardNumber = $gateway->cardNumber();
+            $this->do_payment_callback(session('user_id'),session()->pull('payment_amount'));
 
             // عملیات خرید با موفقیت انجام شده است
             // در اینجا کالا درخواستی را به کاربر ارائه میکنم
@@ -619,10 +586,7 @@ class payment_controller extends Controller
     public function app_buyAd_reply_capacity_payment_callback()
     {
         try{ 
-            $gateway = \Gateway::verify();
-            $trackingCode = $gateway->trackingCode();
-            $refId = $gateway->refId();
-            $cardNumber = $gateway->cardNumber();
+            $this->do_payment_callback(session('app_user_id'),session()->pull('payment_amount'));
 
             // عملیات خرید با موفقیت انجام شده است
             // در اینجا کالا درخواستی را به کاربر ارائه میکنم
@@ -652,6 +616,61 @@ class payment_controller extends Controller
             //
         }
     }
+
+
+    protected function record_payment_log($payment)
+    {
+        DB::table('payment_logs')->insert($payment);
+    }
+
+    public function get_packages_price_array($user_id = null)
+    {
+        $pricing_change_date = Carbon::createFromFormat('m/d/Y H:i:s', '03/01/2021 00:00:00');
+
+        if(is_null($user_id)){
+            $user_id = session('user_id');
+        }
+
+        $user_record = myuser::find($user_id);
+
+        if($user_record->created_at->lt($pricing_change_date)){
+            $prices = [
+                'type-1' => config("subscriptionPakage.type-1.price-1"),
+                'type-3' => config("subscriptionPakage.type-3.price-1"),
+                'type-1-discount' => null,
+                'type-3-discount' => null
+            ];
+        }
+        else{
+            $prices = [
+                'type-1' => config("subscriptionPakage.type-1.price"),
+                'type-3' => config("subscriptionPakage.type-3.price"),
+            ];
+
+            if(($time_diff = Carbon::now()->diffInHours($user_record->created_at)) < 3 * 24)
+            {
+                $prices['type-1-discount'] = config("subscriptionPakage.type-1.price-discount");
+                $prices['type-3-discount'] = config("subscriptionPakage.type-3.price-discount");
+
+                $prices['discount-deadline']['days'] = (integer) (abs(3 * 24 - $time_diff)/24); 
+                $prices['discount-deadline']['hours'] = (integer) abs(3 * 24 - $time_diff) % 24; 
+            }
+        }
+
+        return $prices;
+        
+    }
+
+    public function get_packages_price(){
+        $prices = $this->get_packages_price_array();
+
+        return response()->json([
+            'prices' => $prices
+        ],200);
+    }
+
+
+
     
     
 }

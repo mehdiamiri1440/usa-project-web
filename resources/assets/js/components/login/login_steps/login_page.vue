@@ -190,10 +190,13 @@ input.error:focus + i {
       <div class="row">
         <label for="phone-number">شماره موبایل</label>
 
-        <div class="input-wrapper phone-number-wrapper">
+        <div class="input-wrapper user-phone-number-wrapper">
           <input
             v-model="phoneNumber"
-            :class="{'error' : $parent.errors.phone , 'active' : phoneNumber.length >= 11}"
+            :class="{
+              error: $parent.errors.phone,
+              active: phoneNumber.length >= 11,
+            }"
             id="phone-number"
             type="tel"
             class="dire"
@@ -205,15 +208,18 @@ input.error:focus + i {
         </div>
 
         <p class="error-message">
-          <span v-if="$parent.errors.phone" v-text="$parent.errors.phone[0]"></span>
+          <span
+            v-if="$parent.errors.phone"
+            v-text="$parent.errors.phone[0]"
+          ></span>
         </p>
 
         <label for="phone-number">کلمه عبور</label>
 
-        <div class="input-wrapper phone-number-wrapper">
+        <div class="input-wrapper user-phone-number-wrapper">
           <input
             v-model="password"
-            :class="{'error' : $parent.errors.password , 'active' : password.length}"
+            :class="{ error: $parent.errors.password, active: password.length }"
             id="password"
             type="password"
             class="dire"
@@ -224,23 +230,31 @@ input.error:focus + i {
         </div>
 
         <p class="error-message">
-          <span v-if="$parent.errors.password" v-text="$parent.errors.password[0]"></span>
+          <span
+            v-if="$parent.errors.password"
+            v-text="$parent.errors.password[0]"
+          ></span>
         </p>
 
-        <a
-          href="#"
-          class="text-green"
-          @click.prevent="$parent.goToStep(2)"
-        >رمز عبور خود را فراموش کرده اید؟</a>
+        <a href="#" class="text-green" @click.prevent="$parent.goToStep(2)"
+          >رمز عبور خود را فراموش کرده اید؟</a
+        >
 
         <button
           class="submit-button disabled"
-          :class="{'active' : phoneNumber.length >= 11 && password.length}"
+          :class="{ active: phoneNumber.length >= 11 && password.length }"
           @click.prevent="doLogin()"
         >
-        <span v-if="phoneNumber.length >= 11 && password.length && $parent.loginBtnLoading" class="fas fa-circle-notch fa-spin"></span>
+          <span
+            v-if="
+              phoneNumber.length >= 11 &&
+              password.length &&
+              $parent.loginBtnLoading
+            "
+            class="fas fa-circle-notch fa-spin"
+          ></span>
 
-         ورود
+          ورود
         </button>
 
         <div class="register-form">
@@ -249,7 +263,9 @@ input.error:focus + i {
             <img src="./img/banner-arrow.png" />
           </p>
 
-          <router-link to="/register" class="register-button vertical-padding">ثبت نام در باسکول</router-link>
+          <router-link to="/register" class="register-button vertical-padding"
+            >ثبت نام در باسکول</router-link
+          >
         </div>
       </div>
     </div>
@@ -258,7 +274,7 @@ input.error:focus + i {
 
 <script>
 export default {
-  data: function() {
+  data: function () {
     return {
       phoneNumber: this.$parent.step1.phone,
       password: this.$parent.step1.password,
@@ -267,26 +283,26 @@ export default {
   methods: {
     doLogin() {
       this.$parent.doLogin();
-    }
+    },
   },
   watch: {
-    phoneNumber: function(value) {
+    phoneNumber: function (value) {
       this.$parent.errors.phone = "";
 
       // if (this.phoneNumber.length >= 11) {
-        this.phoneNumber = this.phoneNumber.substring(0, 11);
-        this.$parent.step1.phone = this.phoneNumber;
+      this.phoneNumber = this.phoneNumber.substring(0, 11);
+      this.$parent.step1.phone = this.phoneNumber;
       // }
     },
-    password: function(value) {
+    password: function (value) {
       this.$parent.errors.password = "";
       this.$parent.step1.password = this.password;
-    }
+    },
   },
   mounted() {
     if (this.$parent.isOsIOS()) {
       $("#phone-number").attr("type", "text");
     }
-  }
+  },
 };
 </script>

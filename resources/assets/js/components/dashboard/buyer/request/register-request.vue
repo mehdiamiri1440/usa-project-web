@@ -1,230 +1,147 @@
 <style scoped>
 /*main style*/
 
-.main-content-wrapper {
-  padding: 30px;
+.main-content {
+  max-width: 685px;
+  position: absolute;
+  left: calc(50% - 342px);
+  top: 65px;
+  margin-bottom: 50px;
+  height: calc(100% + 70px);
+  direction: rtl;
 }
 
-.success-inquiry-wrapper,
-.main-content,
-.recent-products-wrapper {
+.main-content > div.wrapper-section {
+  border: 1px solid #dadce0;
+  border-radius: 12px;
+  min-height: 400px;
+}
+.main-content > div.wrapper-section.empty-section {
+  border: none;
+  background: #fff;
+}
+
+.main-content .section-title {
+  line-height: 1.618;
+  font-size: 25px;
   margin-bottom: 30px;
 }
-.main-content {
-  padding: 0 15px;
-}
-.success-message-wrapper > span.fa {
-  color: #00c569;
 
-  font-weight: 400;
-
-  font-size: 19px;
-
-  position: relative;
-
-  top: 3px;
-
-  margin-left: 5px;
+.main-content .section-title.related-product h2 {
+  font-size: 25px;
+  margin-bottom: 15px;
 }
 
-.success-actions button {
-  color: #00c569;
-
-  background: none;
-
-  border: 1px solid;
-
-  border-radius: 3px;
-
-  font-size: 14px;
-
-  padding: 1px 15px;
+.main-content .section-title.related-product p {
+  font-size: 15px;
 }
 
-.success-actions button i {
-  position: relative;
-
-  top: 2px;
+.section-background {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: white;
+  content: "";
+  z-index: -1;
 }
 
 .wrapper-progressbar.title h2 {
-  font-size: 22px;
-
+  font-size: 23px;
   font-weight: bold;
-
-  text-align: center;
-
-  color: #555;
+  text-align: right;
 }
 
 .main-section-wrapper {
-  margin: 15px auto;
-
-  overflow: hidden;
+  max-width: 420px;
+  margin: 42px auto;
+  background: #fff;
 }
-
 .main-section-wrapper-full-width {
   max-width: 100%;
   margin: 25px auto 0;
 }
 
-/*progressbar styles*/
-
-.wrapper-progressbar {
-  position: relative;
-  padding: 15px;
-  border-bottom: 2px solid #00c569;
+.header-section > h2 {
+  font-weight: 600;
 }
 
-.progressbar-items {
-  display: flex;
-  justify-content: space-between;
-  direction: rtl;
-  position: relative;
-}
-
-.progrees-item {
-  text-align: center;
-  color: #bebebe;
-}
-
-.progrees-item p {
-  font-size: 12px;
-}
-
-.progrees-item span {
-  width: 20px;
-  height: 20px;
-  font-size: 13px;
-  background: #bebebe;
-  border-radius: 50px;
-  color: #fff;
-  display: inline-block;
-  margin-bottom: 6px;
-  padding-top: 4px;
-}
-
-.progrees-item.active-item {
-  color: #333;
-}
-
-.progrees-item.active-item p {
-  font-weight: bold;
-}
-
-.progrees-item.active-item span {
-  background: #00c569;
-}
-
-.custom-progressbar {
-  display: block;
-  height: 3px;
-  background: #bebebe;
-  right: 40px;
-  left: 34px;
-  position: absolute;
-  top: 23px;
-  z-index: 0;
-}
-
-.custom-progressbar.active-item {
-  background: #00c569;
-  width: 0;
-  left: initial;
-}
-
-.custom-progressbar .progress-bar {
-  background: #00c569;
-  float: right;
-}
-
-.active-progress-wrapper {
-  position: absolute;
-
-  right: 37px;
-
-  left: 41px;
-}
-
-.active-progress-wrapper .custom-progressbar {
-  right: 0px;
-  left: 0px;
-  top: 8px !important;
-}
-
-.title-section {
-  direction: rtl;
-  margin-bottom: 8px;
-}
-
-.title-section h3 {
-  font-size: 16px;
-  color: #00c569;
-  float: right;
-}
-
-.title-section hr {
-  margin: 15px 15px 10px auto;
-  position: relative;
-}
-
-.title-section hr::after {
-  content: " ";
-  height: 3px;
-  width: 50px;
-  background: #00c569;
-  position: absolute;
-  top: -4px;
-  right: 0;
-}
-
-.box-content {
-  overflow: hidden;
-  background: #fff;
-  padding: 15px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+.success-inquiry-wrapper {
+  background: #edf8e6;
+  color: "#a5dc86";
   border-radius: 4px;
+  padding: 15px;
 }
-.carousel-item {
-  padding: 0;
+
+.info-inquiry-wrapper {
+  background: #e6f4f8;
+  border-radius: 12px;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+.info-inquiry-wrapper p {
+  line-height: 1.618;
+}
+
+.success-register {
+  background: #edf8e6;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  padding: 10px 15px 20px;
+  color: #21ad93;
   text-align: center;
 }
-.title-box {
-  text-align: center;
+
+.success-register.mini {
+  padding: 10px 15px 6px;
 }
 
-.title-box h3 {
-  font-size: 17px;
-  font-weight: bold;
-  color: #4b4b4b;
-  margin-bottom: 12px;
+.success-register h2 {
+  font-size: 19px;
+  margin-bottom: 10px;
 }
 
-.title-box a {
-  margin: 20px auto 10px;
-
-  width: inherit;
-
-  font-size: 14px;
-
-  font-weight: bold;
-
-  padding: 9px 22px 6px;
+.success-register h2 i {
+  font-size: 26px;
+  width: 38px;
+  height: 38px;
+  background: #fff;
+  border-radius: 50px;
+  padding-top: 6px;
 }
 
-.inquiry-button {
-  padding: 4px 15px;
-  margin: 10px auto 15px;
-  transition: 200ms;
-}
-
-@media screen and (max-width: 991px) {
-  .finish-state-main-content {
-    padding: 0;
-  }
+.success-register h2 span {
+  position: relative;
+  top: -4px;
+  margin-right: 5px;
 }
 
 @media screen and (max-width: 767px) {
+  .main-section-wrapper {
+    margin: 0px auto;
+  }
+
+  .main-content > div.wrapper-section {
+    border: none;
+    border-top: 1px solid #dadce0;
+    border-radius: 0;
+  }
+
+  .main-content {
+    max-width: initial;
+    background: #fff;
+    border-radius: 0;
+    box-shadow: none;
+    direction: rtl;
+    transform: translate(0, 0);
+    top: 0;
+    padding-top: 0;
+    width: 100%;
+    left: 0;
+  }
+
   .progrees-item p {
     display: none;
   }
@@ -239,31 +156,27 @@
     left: 26px;
   }
 
-  .active-progress-wrapper .custom-progressbar {
-    right: 0px;
-    left: 0px;
-    top: 8px;
-  }
-}
-
-@media screen and (max-width: 555px) {
-  .success-message-wrapper,
-  .success-actions {
-    text-align: center;
-
-    width: 100%;
+  .success-register p {
+    line-height: 1.618;
   }
 
-  .success-message-wrapper {
-    margin-bottom: 15px;
+  .success-register h2 i {
+    display: block;
+    margin: 0 auto 20px;
+    width: 80px;
+    height: 80px;
+    font-size: 45px;
+    padding-top: 17px;
+  }
+  .info-inquiry-wrapper {
+    padding: 20px;
+    border-radius: 0px;
   }
 }
 </style>
 
 <template>
-  <div
-    class="col-sm-10 col-sm-offset-1 col-lg-8 col-lg-offset-2 main-content-wrapper"
-  >
+  <section class="main-content col-xs-12">
     <div class="row">
       <section
         v-if="currentStep == 1 && inquirySent"
@@ -288,107 +201,79 @@
         </div>
       </section>
 
-      <section
-        v-if="currentStep == 1"
-        class="success-inquiry-wrapper wrapper-bg col-xs-12"
-      >
-        <p class="red-text success-message-wrapper text-rtl pull-right">
-          &nbsp&nbsp&nbspآیا قصد خرید عمده محصولی را دارید؟
-        </p>
-        <p class="success-message-wrapper text-rtl">
-          همین حالا درخواست خرید ثبت کنید&nbsp .
+      <section v-if="currentStep == 1" class="info-inquiry-wrapper col-xs-12">
+        <p class="success-message-wrapper text-rtl pull-right">
+          <i class="fa fa-info-circle"></i>
+          <span class="red-text"> آیا قصد خرید عمده محصولی را دارید؟ </span>
+          همین حالا درخواست خرید ثبت کنید.
         </p>
       </section>
+    </div>
 
-      <section
-        v-if="!relatedProducts && currentStep <= 2"
-        class="main-content wrapper-bg col-xs-12"
-      >
-        <div class="row">
-          <header class="header-section">
-            <div v-if="currentStep <= 1" class="wrapper-progressbar title">
-              <h2>ثبت درخواست خرید</h2>
-            </div>
-
-            <div v-else class="wrapper-progressbar title">
-              <h2>درخواست شما با موفقیت ثبت شد</h2>
-            </div>
-          </header>
-
-          <main class="main-section-wrapper text-rtl">
-            <start-register-request v-if="currentStep == 0" />
-            <register-request v-else-if="currentStep == 1" />
-            <finish-register-request v-else-if="currentStep == 2" />
-          </main>
-        </div>
-      </section>
-
-      <section
-        v-else-if="currentStep == 2 && relatedProducts"
-        class="finish-state-main-content col-xs-12"
-      >
-        <main class="finish-state-wrapper">
-          <finish-register-request-related
-            :products="relatedProducts"
-            :str="str"
-          />
-        </main>
-      </section>
-
-      <!-- <section v-if="currentStep == 1 && inquirySent && relatedProductsToInquiry" class="recent-products-wrapper">
-        <div class="title-section col-xs-12">
-          <div class="row">
-            <h3>
-              محصولاتی که شاید بخواهید بخرید
-            </h3>
-            <hr />
+    <div class="row">
+      <div class="col-xs-12" v-if="currentStep <= 1">
+        <h2 class="section-title">ثبت درخواست خرید</h2>
+      </div>
+      <div v-else-if="currentStep == 2 && relatedProducts">
+        <div class="success-register">
+          <div class="title-success">
+            <h2>
+              <i class="fa fa-check"></i>
+              <span>درخواست شما با موفقیت ثبت شد</span>
+            </h2>
+            <p>
+              درخواست خرید شما پس از تایید کارشناسان
+              <span class="light-green-text">باسکول،</span> برای کشاورزان و
+              تامین کنندگان مرتبط ارسال می شود.
+            </p>
           </div>
         </div>
-        <div class="col-xs-12 products-contents latest-product">
-          <div class="row">
-            <div class="owl-carousel">
-              <product-carousel
-                v-for="(product, index) in 6"
-                :key="index"
-                img="http://localhost:8000/storage/products/YQny6p20xGGkx65yIPvONtKolPSEpqYve50v9PAv.jpeg"
-                title="خرما مضافتی"
-                stock="2000"
-                link=""
-                column="3"
-                auto-play="false"
-                inquiry-button="true"
-              />
-            </div>
-      </div>-->
-
-      <!-- <div v-else class="row">
-            <div
-              v-for="(item, index) in 3"
-              :key="index"
-              :class="{ 'hidden-xs': index >= 2 }"
-              class="col-md-4 col-sm-4 col-xs-6"
-            >
-              <article class="carousel-item box-content col-xs-12">
-                <span
-                  class="default-index-product-image placeholder-content col-xs-12"
-                ></span>
-
-                <span
-                  class="content-default-width placeholder-content margin-10 col-xs-10 col-xs-offset-1"
-                ></span>
-
-                <span
-                  class="content-default-width placeholder-content col-xs-8 col-xs-offset-2"
-                ></span>
-
-                <span class="margin-10 content-default-width"></span>
-              </article>
-            </div>
-      </div>-->
-      <!-- </div>
-      </section>-->
+        <div class="section-title related-product">
+          <h2>فروشندگان پیشنهادی</h2>
+          <p>
+            فروشندگان پیشنهادی از طرف
+            <span class="light-green-text">باسکول</span> برای درخواست شما.
+          </p>
+        </div>
+      </div>
+      <div class="success-register mini" v-else>
+        <div class="title-success">
+          <h2>
+            <i class="fa fa-check"></i>
+            <span>درخواست شما با موفقیت ثبت شد</span>
+          </h2>
+        </div>
+      </div>
     </div>
-  </div>
+    <div
+      class="row wrapper-section"
+      :class="{ 'empty-section': relatedProducts && currentStep == 2 }"
+    >
+      <div class="main-section">
+        <main
+          class="main-section-wrapper row"
+          :class="{ 'main-section-wrapper-full-width': currentStep == 2 }"
+        >
+          <start-register-request v-if="currentStep == 0" />
+          <register-request
+            :categoryList="categoryList"
+            v-else-if="currentStep == 1"
+            :form-loader="formLoader"
+          />
+          <finish-register-request-related
+            v-else-if="currentStep == 2 && relatedProducts"
+            :products="relatedProducts"
+            :currentUser="currentUser"
+            :str="str"
+            :verifiedUserContent="verifiedUserContent"
+          />
+          <finish-register-request v-else-if="currentStep == 2" />
+        </main>
+      </div>
+
+      <div class="section-background"></div>
+    </div>
+  </section>
 </template>
 
 <script>
@@ -397,16 +282,14 @@ import StartRegisterRequest from "./register-request-steps/start-register-reques
 import RegisterRequest from "./register-request-steps/register-request-content";
 import FinishRegisterRequestRelated from "./register-request-steps/fnish-register-request-related";
 import FinishRegisterRequest from "./register-request-steps/fnish-register-request";
-import ProductCarousel from "../../../layouts/main/main_components/product-list-carousel";
 
 export default {
-  props: ["str"],
+  props: ["str", "verifiedUserContent"],
   components: {
     StartRegisterRequest,
     RegisterRequest,
     FinishRegisterRequestRelated,
     FinishRegisterRequest,
-    ProductCarousel,
   },
   data: function () {
     return {
@@ -415,7 +298,7 @@ export default {
         categorySelected: "",
         category_id: "",
         requirement_amount: "",
-        name: "",
+        productName: "",
       },
       currentUser: {
         profile: "",
@@ -424,13 +307,7 @@ export default {
       buyAd: {
         name: "",
         requirement_amount: "",
-        price: "",
-        description: "",
-        address: "",
-        pack_type: "",
         category_id: "",
-        rules: false,
-        categorySelected: "",
       },
       buyAdFields: ["name", "requirement_amount", "category_id"],
       categorySelected: "",
@@ -442,15 +319,17 @@ export default {
       profileConfirmed: false,
       disableSubmit: false,
       submiting: false,
-      relatedProducts: null,
+      relatedProducts: "",
       inquirySent: false,
       relatedProductsToInquiry: null,
+      requirement_amount_text: "",
       items: [
         {
           message: " ثبت درخواست جدید",
           url: "registerRequest",
         },
       ],
+      formLoader: false,
     };
   },
   methods: {
@@ -459,49 +338,14 @@ export default {
 
       axios.post("/user/profile_info").then(function (response) {
         self.currentUser = response.data;
-
         if (self.isThereInquiryToSend()) {
           self.sendInquiry();
         }
       });
 
       axios
-        .post("/get_category_list")
+        .post("/get_category_list", { cascade_list: true })
         .then((response) => (this.categoryList = response.data.categories));
-    },
-    loadSubCategoryList: function (e) {
-      e.preventDefault();
-      var categoryId = $(e.target).val();
-      this.categorySelected = categoryId;
-
-      this.buyAd.categorySelected = categoryId;
-
-      axios
-        .post("/get_category_list", {
-          parent_id: categoryId,
-        })
-        .then((response) => (this.subCategoryList = response.data.categories));
-    },
-    formValidator: function () {
-      if (!this.categorySelected) {
-        this.errors.categorySelected = "دسته بندی الزامی است";
-      }
-      if (!this.buyAd.category_id) {
-        this.errors.category_id = "نام محصول الزامی است";
-      }
-
-      // this.nameValidator(this.buyAd.name);
-      //console.log(this.nameValidator(this.buyAd.name));
-      this.requirementAmountValidator(this.buyAd.requirement_amount);
-
-      if (
-        !this.errors.categorySelected &&
-        !this.errors.category_id &&
-        !this.errors.name &&
-        !this.errors.requirement_amount
-      ) {
-        this.submitBuyAd();
-      }
     },
     submitBuyAd: function () {
       this.errors = "";
@@ -516,14 +360,8 @@ export default {
         .then(function (response) {
           if (response.status === 201) {
             self.disableSubmit = true;
-            // self.popUpMsg = "درخواست شما با موفقیت ثبت شد";
 
             window.localStorage.removeItem("buyAd");
-
-            // eventBus.$emit("submitSuccess", self.popUpMsg);
-
-            // $('#custom-main-modal').modal('show');
-
             eventBus.$emit("submitingEvent", false);
 
             self.registerComponentStatistics(
@@ -535,10 +373,10 @@ export default {
             if (response.data.products) {
               self.relatedProducts = response.data.products;
             }
-
             self.goToStep(2);
           }
           eventBus.$emit("submitingEvent", false);
+          self.formLoader = false;
         })
         .catch(function (err) {
           self.errors = err.response.data.errors;
@@ -546,6 +384,7 @@ export default {
           eventBus.$emit("submitingEvent", false);
 
           self.registerComponentExceptions("validation error in buyAd-request");
+          self.formLoader = false;
         });
     },
     getBuyAdFormFields: function () {
@@ -573,6 +412,7 @@ export default {
         return null;
       }
 
+      num = num.toString().replace(/,/g, "");
       num = num.toString().replace(/^0+/, "");
       num = num.toString().replace(/^\u0660+/, "");
       num = num.toString().replace(/^\u06f0+/, "");
@@ -616,22 +456,32 @@ export default {
     scrollToTop() {
       window.scrollTo(0, 0);
     },
-    nameValidator: function (name) {
-      this.toLatinNumbers(name);
-      if (!name) {
-        this.errors.name = "";
-      } else if (!this.validateRegx(name, /^[\u0600-\u06FF\s\d]+$/)) {
-        this.errors.name = "نوع محصول فرمت مناسبی نیست";
+    convertUnits: function (number) {
+      let data = number / 1000;
+      let text = "";
+      if (number < 1000) {
+        return number + " " + "کیلوگرم";
+      } else {
+        let ton = data.toString().split(".")[0];
+        let kg = number.toString().substr(ton.length);
+        kg = kg.replace(/^0+/, "");
+        ton = this.getNumberWithCommas(ton);
+        ton = ton + " " + "تن";
+
+        if (kg) {
+          kg = " و " + kg + " کیلوگرم";
+          text = ton + kg;
+        } else {
+          text = ton;
+        }
+
+        return text;
       }
     },
-    requirementAmountValidator: function (number) {
-      this.errors.requirement_amount = "";
-      var standardNumber = this.toLatinNumbers(number);
-      if (standardNumber == "") {
-        this.errors.requirement_amount = "فیلد میزان نیاز الزامی است";
-      } else if (!this.validateRegx(standardNumber, /^\d*$/)) {
-        this.errors.requirement_amount = "فقط عدد وارد کنید";
-      }
+    getNumberWithCommas: function (number) {
+      if (number || typeof number === "number")
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      else return "";
     },
     validateRegx: function (input, regx) {
       return regx.test(input);
@@ -660,6 +510,7 @@ export default {
             last_name: product.last_name,
             profile_photo: profile_photo,
             user_name: product.user_name,
+            product_id: product.id,
           };
 
           eventBus.$emit("ChatInfo", contact);
@@ -668,6 +519,7 @@ export default {
           //
         });
     },
+
     getProductUrl: function () {
       return (
         "/product-view/خرید-عمده-" +

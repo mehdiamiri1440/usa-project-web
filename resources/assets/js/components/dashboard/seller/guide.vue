@@ -24,7 +24,8 @@ ul {
   font-size: 14px;
   font-weight: 400;
   padding: 15px 30px;
-  box-shadow: 0 0 9px rgba(0, 0, 0, 0.075);
+  border: 1px solid #e9ecef;
+  border-radius: 12px;
   background: #fff;
 }
 
@@ -42,6 +43,16 @@ ul {
   font-weight: bold;
 }
 
+.guide-link {
+  margin: 20px auto 5px;
+  display: inline-block;
+  font-size: 17px;
+  font-weight: bold;
+  color: #1da1f2;
+  -webkit-transition: 300ms;
+  transition: 300ms;
+}
+
 @media screen and (max-width: 767px) {
   .title {
     text-align: center;
@@ -57,9 +68,10 @@ ul {
     <div class="help">
       <div class="title col-xs-12">
         <div class="row">
-          <div class="col-xs-12 col-sm-4 pull-right">
+          <div class="col-xs-12 col-sm-4 pull-right hidden-xs hidden-sm">
             <h1>راهنما</h1>
           </div>
+          <br />
         </div>
       </div>
 
@@ -74,11 +86,30 @@ ul {
               دسترسی پیدا کنید.
             </li>
             <li>
-              تکمیل کردن هر چه بیشتر پرفایل سبب رغبت بیشتر خریداران با شما می
+              تکمیل کردن هر چه بیشتر پروفایل سبب رغبت بیشتر خریداران با شما می
               شود. شما میتواننید در قسمت
               <router-link :to="{ name: 'profileBasicSeller' }">
                 ویرایش پروفایل </router-link
               >نسبت به تکمیل و به روز رسانی پروفایل خود اقدام کنید.
+
+              <router-link
+                :to="{ name: 'profileBasicSeller' }"
+                class="guide-link"
+              >
+                ویرایش پروفایل
+                <i class="fa fa-arrow-left"></i>
+              </router-link>
+            </li>
+            <li>
+              شما میتوانید نسبت به احراز هویت مشخصات حقیقی یا حقوقی خود برای جلب
+              اعتماد خریداران اقدام کنید.
+              <router-link
+                :to="{ name: 'profileBasicSellerVeficiation' }"
+                class="guide-link"
+              >
+                انجام احراز هویت
+                <i class="fa fa-arrow-left"></i>
+              </router-link>
             </li>
             <li>
               به قسمت
@@ -87,26 +118,68 @@ ul {
               >رفته و اطلاعات محصولات خود را بصورت کامل پر کنید. این محصولات
               بهمراه جزییات در صفحه پروفایل شخصی شما به خریداران نمایش داده می
               شود.
+              <router-link
+                :to="{ name: 'registerProductSeller' }"
+                class="guide-link"
+              >
+                ثبت محصول
+                <i class="fa fa-arrow-left"></i>
+              </router-link>
             </li>
             <li>
               پیشنهاد های خرید از سوی خریداران را میتوانید در قسمت
-              <router-link :to="{ name: 'buyAdRequestsSeller' }"
-                >درخواست ها</router-link
+              <router-link :to="{ name: 'buyAdRequestsSeller' }">
+                درخواست ها </router-link
               >مشاهده کنیدو در صورت داشتن آمادگی جهت تامین محصول، قیمت پیشنهادی،
-              عکس محصولات و توضیحات مربوطه را به خریدار ارسال نمایید.
+              تصویر محصولات و توضیحات مربوطه را به خریدار ارسال نمایید.
+              <router-link
+                :to="{ name: 'buyAdRequestsSeller' }"
+                class="guide-link"
+              >
+                درخواست های خرید
+                <i class="fa fa-arrow-left"></i>
+              </router-link>
             </li>
             <li>
-              خریداران در صورت رغبت از طریق پیام با شما در ارتباط خواهند بود.
-              لیست پیام های شما در قسمت
-              <router-link :to="{ name: 'messagesSeller' }">پیام ها</router-link
+              شما میتوانید در قسمت خریداران پیشنهادی با خریدارانی که به دنبال
+              محصولات شما هستند ارتباط برقرار کنید.
+              <router-link
+                :to="{ name: 'messagesRequestSeller' }"
+                class="guide-link"
+              >
+                خریداران
+                <i class="fa fa-arrow-left"></i>
+              </router-link>
+            </li>
+            <li>
+              خریداران در صورت رغبت از طریق پیام یا تماس تلفنی با شما در ارتباط
+              خواهند بود. لیست پیام های شما در قسمت
+              <router-link :to="{ name: 'messagesSeller' }">
+                پیام ها </router-link
               >قرار دارد.
+              <router-link :to="{ name: 'messagesSeller' }" class="guide-link">
+                پیام ها
+                <i class="fa fa-arrow-left"></i>
+              </router-link>
             </li>
             <li>
-              سامانه ی باسکول به منظور حفظ حریم خصوصی افراد شماره فروشندگان و
-              خریداران را به دیگران نمایش نمی دهد. افراد در صورت تمایل میتوانند
-              شماره تماس خود را در پیام رد و بدل کنند.
+              در صورتیکه مایل به نمایش شماره تماس خود به خریدران هستید راهنمای
+              نمایش اطلاعات تماس را که در لینک مقابل آمده مطالعه کنید.
+              <router-link
+                :to="{ name: 'showNumberGuideSeller' }"
+                class="guide-link"
+              >
+                راهنمای نمایش اطلاعات تماس
+                <i class="fa fa-arrow-left"></i>
+              </router-link>
             </li>
-            <li>در صورت بروز هرگونه مشکل با خدمتگزاران خود تماس بگیرید.</li>
+            <li>
+              در صورت بروز هرگونه مشکل با خدمتگزاران خود تماس بگیرید.
+              <router-link :to="{ name: 'supportSeller' }" class="guide-link">
+                پشتیبانی باسکول
+                <i class="fa fa-arrow-left"></i>
+              </router-link>
+            </li>
           </ol>
           <!--                    <p class="text-center text-danger">  پشتیبانی :‌۰۹۱۱۸۴۱۳۰۵۴ </p>-->
         </li>

@@ -6,6 +6,7 @@
 .green-button {
   padding: 10px 15px;
   width: initial;
+  border-radius: 8px;
 }
 
 .special-button {
@@ -49,9 +50,9 @@
 .box {
   background: #fff;
 
-  border-radius: 4px;
+  border: 1px solid #e9ecef;
 
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16);
+  border-radius: 12px;
 
   padding: 0;
 
@@ -127,6 +128,20 @@
   left: 10px;
 }
 
+.header-links-wrapper a.viewers-link {
+  margin: 20px auto 5px;
+  display: inline-block;
+  font-size: 17px;
+  font-weight: bold;
+  color: #1da1f2;
+  transition: 300ms;
+}
+
+.header-links-wrapper a.viewers-link:hover {
+  transition: 300ms;
+  transform: translateX(-5px);
+}
+
 @keyframes shake {
   10%,
   90% {
@@ -194,6 +209,12 @@
       </div>
       <div class="header-links col-xs-12">
         <div class="header-links-wrapper">
+          <div>
+            <router-link :to="{ name: 'sellerViewer' }" class="viewers-link">
+              <span> خریدارانی که شماره تماس شما را دیده اند </span>
+              <i class="fa fa-arrow-left"></i>
+            </router-link>
+          </div>
           <router-link
             v-for="(link, index) in linkItems"
             :key="index"
@@ -234,7 +255,7 @@
                 <router-link
                   :to="{ name: box.routerName }"
                   class="green-button"
-                  :class="{'gray-brand-background' : index > 0}"
+                  :class="{ 'gray-brand-background': index > 0 }"
                 >
                   <i v-if="box.linkIcon" :class="box.linkIcon"></i>
                   {{ box.linkName }}
@@ -270,7 +291,12 @@
               </div>
               <div class="box-upgrade-link">
                 <span
-                  class="content-full-width placeholder-content default-item-wrapper col-xs-12"
+                  class="
+                    content-full-width
+                    placeholder-content
+                    default-item-wrapper
+                    col-xs-12
+                  "
                 ></span>
               </div>
             </div>
@@ -310,7 +336,7 @@ export default {
         },
         {
           href: "messagesRequestSeller",
-          icon: "fas fa-list-alt",
+          icon: "fas fa-list-ul",
           text: "خریداران پیشنهادی",
           badge: true,
         },

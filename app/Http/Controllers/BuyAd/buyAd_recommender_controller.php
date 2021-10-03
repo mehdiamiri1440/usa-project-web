@@ -66,9 +66,9 @@ class buyAd_recommender_controller extends Controller
         });
         
         $filtered_buyAd_list->each(function(&$buyAd){
-            $response_score = $this->get_user_response_score($buyAd->myuser_id);
-
+            
             if(Carbon::now()->diffInHours($buyAd->created_at) > 24){
+                $response_score = $this->get_user_response_score($buyAd->myuser_id);
                 $score =  $this->registered_product_coef - $response_score;
             }
             else{

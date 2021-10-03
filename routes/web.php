@@ -17,6 +17,68 @@ use App\Models\profile;
 use Illuminate\Http\Request;
 
 use App\Jobs\sendSMS;
+use App\Jobs\LeadHandler\LeadDistributorBot;
+
+
+Route::get('/',[
+    'uses' => 'index_controller@load_home_page_blade'
+])->middleware('throttle:10,1');
+
+Route::get('/product-list',[
+    'uses' => 'Product\product_list_controller@get_product_list_blade',
+])->middleware('throttle:10,1');;
+
+Route::get('/product-list/category/{category_name}',[
+    'uses' => 'Product\product_list_controller@get_product_list_blade',
+])->name('product-list');
+
+Route::get('/product-view/{category_name}/{extra_text}/{product_id}',[
+    'uses' => 'Product\product_controller@get_product_blade',
+])->where('product_id','[0-9]+');
+
+Route::get('/pricing',function(){
+    if(session()->has('user_id')){
+        if(session('is_seller') == true){
+            return redirect('/seller/pricing');
+        }
+        else if(session('is_buyer') == true){
+
+            return redirect('/switch-role');
+        }
+    }
+    else{
+        return redirect('/register');
+    }
+});
+
+Route::get('/msg',function(){
+    if(session()->has('user_id')){
+        if(session('is_seller') == true){
+            return redirect('/seller/messenger/contacts');
+        }
+        else if(session('is_buyer') == true){
+            return redirect('/buyer/messenger/contacts');
+        }
+    }
+    else{
+        return redirect('/register');
+    }
+});
+
+Route::get('/buyers',function(){
+    if(session()->has('user_id')){
+        if(session('is_seller') == true){
+            return redirect('/seller/messenger/buy-ads');
+        }
+        else if(session('is_buyer') == true){
+
+            return redirect('/switch-role');
+        }
+    }
+    else{
+        return redirect('/register');
+    }
+});
 
 // Route::group(['prefix' => 'master'], function () {
 //     Route::get('/', function () {
@@ -59,16 +121,20 @@ Route::post('/user/is_national_code_unique', [
 Route::post('send_verification_code', [
     'uses' => 'Notification\sms_controller@send_phone_verification_code',
     'as' => 'send_verification_code',
-]);
+])->middleware('throttle:3,1');
 
 Route::post('/verify_code', [
     'uses' => 'Notification\sms_controller@verify_code',
     'as' => 'verify_code',
-]);
+])->middleware('throttle:10,1');
 
 Route::post('/get_category_list', [
     'uses' => 'General\category_controller@get_all_categories',
     'as' => 'get_category_list',
+]);
+
+Route::post('/get_related_categories',[
+    'uses' => 'General\category_controller@get_related_category_names'
 ]);
 
 Route::post('/get_category_meta_data',[
@@ -81,10 +147,10 @@ Route::post('/user/get_product_list', [
     'as' => 'get_product_list',
 ]);
 
-// Route::post('/user/get_buyAd_list',[
-//     'uses' => 'BuyAd\buyAd_controller@get_buyAd_list',
-//     'as' => 'get_buyAd_list'
-// ]);
+Route::post('/get_buyAd_list',[
+    'uses' => 'BuyAd\buyAd_controller@get_buyAd_list',
+    'as' => 'get_buyAd_list'
+]);
 
 Route::post('/location/get_location_info', [
     'uses' => 'General\location_controller@get_all_provinces_or_cities_in_the_province_in_iran',
@@ -174,10 +240,10 @@ Route::group(['middleware' => [login::class]], function () {
         'as' => 'delete_product_by_id',
     ]);
 
-    // Route::delete('/delete_buy_ad_by_id', [
-    //     'uses' => 'BuyAd\buyAd_controller@delete_buy_ad_by_id',
-    //     'as' => 'delete_buy_ad_by_id',
-    // ]);
+    Route::post('/delete_buy_ad_by_id', [
+        'uses' => 'BuyAd\buyAd_controller@delete_buy_ad_by_id',
+        'as' => 'delete_buy_ad_by_id',
+    ]);
 
     // Route::post('/add_sell_offer', [
     //     'uses' => 'sell_offer_controller@add_sell_offer',
@@ -304,6 +370,11 @@ Route::group(['middleware' => [login::class]], function () {
         'as' => 'send_reply_to_buyAd'
     ]);
 
+    Route::post('/send_reply_to_product',[
+        'uses' => 'Messenger\message_controller@send_reply_message_to_the_product',
+        'as' => 'send_reply_to_product'
+    ]);
+
     Route::post('/get_contact_list', [
         'uses' => 'Messenger\message_controller@get_current_user_contact_list',
         'as' => 'get_current_user_contact_list',
@@ -364,6 +435,15 @@ Route::group(['middleware' => [login::class]], function () {
         'as' => 'do_buyAd_reply_capacity_payment',
     ])->where('extra_pacacity', '[0-9]+');
 
+    Route::post('/payment/get-packages-price',[
+        'uses' => 'Payment\payment_controller@get_packages_price'
+    ]);
+
+    Route::get('/wallet-payment/charge/{amount}',[
+        'uses' => 'Payment\wallet_controller@do_charge_wallet'
+    ])->where('amount','[0-9]+');
+
+
     // Route::get('app/payment/{user_id}/{pakageType}', [
     //     'uses' => 'Payment\payment_controller@app_do_payment',
     //     'as' => 'app_do_payment',
@@ -402,6 +482,11 @@ Route::group(['middleware' => [login::class]], function () {
     Route::any('/buyAd_reply_capacity_payment_callback', [
         'uses' => 'Payment\payment_controller@buyAd_reply_capacity_payment_callback',
         'as' => 'buyAd_reply_capacity_payment_callback',
+    ]);
+
+    Route::any('/wallet_payment_callback', [
+        'uses' => 'Payment\wallet_controller@wallet_payment_callback',
+        'as' => 'wallet_payment_callback',
     ]);
 
     // Route::any('app/payment_callback', [
@@ -507,10 +592,6 @@ Route::group(['middleware' => [login::class]], function () {
         'as' => 'post_comment_on_user_porfile'
      ]);
 
-     Route::post('/profile/get-user-comments',[
-         'uses' => 'Accounting\comment_controller@get_user_comments',
-         'as' => 'get_user_comments'
-     ]);
 
      Route::post('/profile/do-like',[
         'uses' => 'Accounting\comment_controller@do_like_actions',
@@ -546,6 +627,78 @@ Route::group(['middleware' => [login::class]], function () {
         'uses' => 'BuyAd\buyAd_controller@get_my_buyAd_suggestions',
         'as'   => 'get_my_buyAd_suggestions'
     ]);
+
+    Route::post('/get_related_buyAds_to_my_product',[
+        'uses' => 'Product\product_controller@get_related_buyAds_to_the_last_registered_product'
+    ]);
+
+    Route::post('/get_my_buyAds',[
+        'uses' => 'BuyAd\buyAd_controller@get_my_buyAds'
+    ]); 
+
+    Route::post('/get_channel_contents',[
+        'uses' => 'Messenger\channel_controller@get_channel_contents'
+    ]);
+
+    Route::post('/get_seller_phone_number',[
+        'uses' => 'Accounting\phone_number_controller@get_seller_phone_number',
+        'as' => 'get_seller_phone_number'
+    ]);
+
+    Route::post('/get_buyer_phone_number',[
+        'uses' => 'Accounting\phone_number_controller@get_buyer_phone_number',
+        'as' => 'get_buyer_phone_number'
+    ]);
+    
+    Route::post('/set_phone_number_view_permission',[
+        'uses' => 'Accounting\phone_number_controller@set_my_phone_number_view_permissions',
+        'as' => 'set_my_phone_number_view_permissions'
+    ]);
+    
+    Route::post('/get_phone_number_viewers_list',[
+        'uses' => 'Accounting\phone_number_controller@get_my_phone_number_viewers_list',
+        'as' => 'get_my_phone_number_viewers_list'
+    ]);
+    
+    Route::post('/get_my_account_balance',[
+        'uses' => 'Accounting\user_controller@get_my_account_balance',
+        'as' => 'get_my_account_balance'
+    ]);
+
+    Route::post('/wallet-expend/elevator',[
+        'uses' => 'Payment\wallet_controller@do_elevator_payment_from_wallet',
+        'as' => 'do_elevator_payment_from_wallet'
+    ]);
+
+    Route::post('/wallet-expend/product-capacity',[
+        'uses' => 'Payment\wallet_controller@do_extra_product_capacity_payment_from_wallet',
+        'as' => 'do_extra_product_capacity_payment_from_wallet'
+    ]);
+
+    Route::post('/wallet-expend/buyAd-capacity',[
+        'uses' => 'Payment\wallet_controller@do_extra_buyAd_capacity_payment_from_wallet',
+        'as' => 'do_extra_buyad_capacity_payment_from_wallet'
+    ]);
+
+    Route::post('/wallet-expend/buy-package',[
+        'uses' => 'Payment\wallet_controller@do_package_payemnt_from_wallet',
+        'as' => 'do_package_payment_from_wallet'
+    ]);
+    
+    Route::post('/app/get_product_list', [
+        'uses' => 'Product\product_list_controller@get_product_list',
+        'as' => 'get_product_list',
+    ]);
+
+    Route::post('/get-user-phone-contacts',[
+        'uses' => 'Accounting\phone_number_controller@get_user_contacts',
+        'as' => 'get_user_phone_contact_list'
+    ]);
+
+    Route::post('/get-user-referral-info',[
+        'uses' => 'Accounting\user_controller@get_referral_credit_amount',
+        'as' => 'get_user_referral_credit'
+    ]);
     
 });
 
@@ -558,6 +711,12 @@ Route::post('/reset_password', [
     'uses' => 'Accounting\user_controller@reset_password',
     'as' => 'reset_password',
 ]);
+
+Route::post('/profile/get-user-comments',[
+    'uses' => 'Accounting\comment_controller@get_user_comments',
+    'as' => 'get_user_comments'
+]);
+
 
 // Route::post('/get_buyAd_list_by_user_name', [
 //     'uses' => 'BuyAd\buyAd_controller@get_buyAd_list_by_user_name',
@@ -590,6 +749,10 @@ Route::get('app-payment/buyAd-reply-capacity/{user_id}/{extra_capacity}', [
     'as' => 'app_do_buyAd_reply_capacity_payment',
 ])->where('extra_capacity', '[0-9]+');
 
+Route::get('/app-wallet-payment/charge/{user_id}/{amount}',[
+    'uses' => 'Payment\wallet_controller@do_app_charge_wallet'
+])->where('amount','[0-9]+');
+
 Route::any('app-payment/payment_callback', [
     'uses' => 'Payment\payment_controller@app_payment_callback',
     'as' => 'app_payment_callback',
@@ -610,7 +773,25 @@ Route::any('app-payment/buyAd_reply_capacity_payment_callback', [
     'as' => 'app_buyAd_reply_capacity_payment_callback',
 ]);
 
+Route::any('/app-wallet-payment-callback', [
+    'uses' => 'Payment\wallet_controller@app_wallet_payment_callback',
+    'as' => 'app_wallet_payment_callback',
+]);
+
+
 //------------------------- End of app payment routes-------------------------------------------------------
+
+
+
+//------------------------- Channel routes ---------------------------------------------------------
+
+Route::get('/public-channel/{slug}',[
+    'uses' => 'Messenger\channel_controller@get_channel_content_by_id',
+    'as' => 'load_channel_content_by_id'
+]);
+
+//------------------------- End of Channel routes ---------------------------------------------------------
+
 Route::get('/logout', function () {
     Session::flush();
     Session::save();
@@ -905,7 +1086,74 @@ Route::group(['prefix' => 'admin', 'middleware' => [admin_login::class]], functi
         'uses' => 'admin_panel\admin_verification_controller@verify_user_account',
         'as' => 'verify_user_account_by_id',
     ]);
+
+    Route::get('/payment-list',[
+        'uses' => 'admin_panel\admin_payment_controller@get_payment_logs',
+        'as' => 'admin_panel_payment_list'
+    ]);
+
+    Route::post('/add-channel-content',[
+        'uses' => 'Messenger\channel_controller@add_content',
+        'as' => 'admin_panel_add_channel_content'
+    ]);
+
+    Route::delete('/d-channel-content',[
+        'uses' => 'Messenger\channel_controller@delete_channel_content',
+        'as' => 'delete_channel_content_by_admin'
+    ]);
+
+    Route::get('/channel-contents-list',[
+        'uses' => 'Messenger\channel_controller@get_all_channel_contents',
+        'as' => 'admin_panel_channel_content_list'
+    ]);
+
+    Route::get('/submit-to-channel', [
+        'uses' => 'Messenger\channel_controller@submit_contents_to_channel',
+        'as' => 'admin_panel_submit_to_channel'
+    ]);
+    
+    Route::get('/categories-meta-data-list', [
+        'uses' => 'admin_panel\admin_seo_controller@load_meta_contents_list',
+        'as' => 'admin_panel_load_meta_contents_list'
+    ]);
+
+    Route::get('/meta-data-detail/{id}', [
+        'uses' => 'admin_panel\admin_seo_controller@load_meta_content_details',
+        'as' => 'load_meta_content_details_by_id',
+    ]);
+
+    Route::post('/edit-category-meta-data-detail', [
+        'uses' => 'admin_panel\admin_seo_controller@edit_meta_content_to_a_category',
+        'as' => 'admin_panel_edit_meta_content_to_a_category',
+    ]);
+
+    Route::post('/add-category-meta-data-detail', [
+        'uses' => 'admin_panel\admin_seo_controller@add_meta_content_to_a_category',
+        'as' => 'admin_panel_add_meta_content_to_a_category',
+    ]);
+
+    Route::get('/add-category-meta-data-detail',function(){
+        return view('admin_panel.addNewCategoryMetaData');
+    });
+
+    Route::get('/same-device-users-list/{user_id}',[
+        'uses' => 'admin_panel\admin_user_controller@load_same_device_users',
+        'as' => 'admin_panel_same_device_users_list'
+    ])->where('user_id','[0-9]+');
+
+    Route::get('/clear-storage-cache',[
+        'uses' => 'admin_panel\admin_user_controller@clear_categories_cached_file',
+    ]);
+
+    Route::get('/d-leads',function(){
+        LeadDistributorBot::dispatch();
+    });
+    
 });
+
+Route::post('/refresh-token',[
+    'uses' => 'Accounting\user_controller@refresh_token'
+]);
 
 //Route::any('/payment_callback',[
 //    'uses' => 'Payment\payment_controller@my_payment_callback',
@@ -921,6 +1169,7 @@ Route::post('/get_wp_posts', [
     'uses' => 'index_controller@get_wp_posts',
     'as' => 'get_wp_posts',
 ]);
+
 
 Route::get('download-media','General\media_controller@download_media');
 
@@ -945,10 +1194,15 @@ Route::post('/is_user_from_webview', [
     'uses' => 'Accounting\user_controller@is_user_from_webview',
 ]);
 
-Route::get('/sitemap.xml', [
+Route::get('/sitemap-buskool-txwhgvuikd.xml', [
     'uses' => 'General\sitemap_controller@get_required_data_for_sitemap',
     'as' => 'get_sitemap',
 ]);
+
+Route::get('/shared-profile/{username}',[
+    'uses' => 'Accounting\profile_controller@get_user_shared_profile_info'
+])->name('sharedProfile')->where("username","[A-Za-z0-9_]+$");
+
 
 //-----------------------------------------------------
 //    in code bayad bad az har chizi ke any dare biad

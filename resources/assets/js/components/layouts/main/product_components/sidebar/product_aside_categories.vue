@@ -1,25 +1,15 @@
 <style >
 .content-sidebar {
-  background: #fff;
-
   direction: rtl;
 
   margin: 15px auto;
-
-  border-radius: 5px;
-
-  -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
-
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
 }
 
 .content-sidebar hr {
-  margin: 15px auto;
-}
-
-.content-sidebar i {
-  margin-left: 5px;
-  font-size: 17px;
+  margin: 10px auto 0;
 }
 
 .sidebar-buttons div > a:first-of-type {
@@ -40,8 +30,14 @@
 
 <template>
   <div>
-    <CategoryFilter />
-    <GeoLocationFilter />
+    <CategoryFilter
+      :categoryList="categories"
+      class="hidden-xs hidden-sm hidden-md"
+    />
+    <GeoLocationFilter
+      :resetLocationFilter="resetLocation"
+      :provinceList="provinceList"
+    />
   </div>
 </template>
 
@@ -52,48 +48,47 @@ import CategoryFilter from "./category_filter";
 export default {
   components: {
     GeoLocationFilter,
-    CategoryFilter
+    CategoryFilter,
   },
   props: [
     "productsInfo",
     "categoryId",
     "subCategoryId",
-    "provinceId",
-    "cityId"
+    "cityId",
+    "categories",
+    "resetLocation",
+    "provinceList",
   ],
   data() {
     return {
-      provinceIdChild: "",
-      cityIdChild: "",
-      categoryList: "",
-      subCategoryList: "",
-      provinceList: "",
+      provinceChild: "",
+      cityChild: "",
       cityList: "",
-      products: this.productsInfo
+      products: this.productsInfo,
     };
   },
   methods: {
-    setSidebarHeight: function() {
+    setSidebarHeight: function () {
       setTimeout(() => {
         this.$parent.sidebarScroll();
       }, 500);
     },
-    scrull_css_header: function() {
+    scrull_css_header: function () {
       var get_with = $(window).width();
       var mainElement = $("#main");
 
       if (get_with > 751) {
         mainElement.removeClass("main-padding-fix");
       }
-      $(window).resize(function() {
+      $(window).resize(function () {
         get_with = $(window).width();
         if (get_with > 751) {
           mainElement.removeClass("main-padding-fix");
         }
       });
-      $(window).scroll(function() {
+      $(window).scroll(function () {
         var sc = $(this).scrollTop();
-        $(window).resize(function() {
+        $(window).resize(function () {
           get_with = $(window).width();
           if (get_with > 751) {
             mainElement.removeClass("main-padding-fix");
@@ -110,20 +105,23 @@ export default {
         }
       });
     },
-    setProvinceFilterChild: function() {
-      this.$parent.provinceId = this.provinceIdChild;
+    setProvinceFilterChild: function () {
+      this.$parent.province = this.provinceChild;
       this.$parent.applyFilter();
     },
-    setCityFilterChild: function() {
-      this.$parent.cityId = this.cityIdChild;
+    setCityFilterChild: function () {
+      this.$parent.province = this.provinceChild;
+      this.$parent.city = this.cityChild;
       this.$parent.applyFilter();
     },
-    resetFilterChild: function() {
+    resetFilterChild() {
+      this.provinceChild = "";
+      this.cityChild = "";
       this.$parent.resetFilter();
-    }
+    },
   },
   mounted() {
     this.scrull_css_header();
-  }
+  },
 };
 </script>

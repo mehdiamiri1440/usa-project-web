@@ -15,6 +15,7 @@ use DB;
 use App\Models\message;
 use App\Http\Controllers\General\media_controller;
 use App\Http\Controllers\Accounting\comment_controller;
+use Carbon\Carbon;
 
 class profile_controller extends Controller
 {
@@ -47,7 +48,10 @@ class profile_controller extends Controller
         'updated_at',
         'extra_product_capacity',
         'profile_visit',
-        'is_blocked'
+        'is_blocked',
+        'last_login_client',
+        'last_channel_opening_date',
+        'last_login_date',
     ];
 
     protected $profile_fields_exclude_array = [
@@ -157,7 +161,7 @@ class profile_controller extends Controller
             'activity_domain' => 'regex:/^(?!.*[(@#!%$&*)])[\s\x{0600}-\x{06FF}_\.\-\0-9 ]+$/u|nullable',
             'related_activity_history' => 'regex:/^(?!.*[(@#!%$&*)])[\s\x{0600}-\x{06FF}_\.\-\0-9]+$/u|nullable',
             'human_resource_count' => 'regex:/^[0-9\x{06F0}-\x{06F9}]+$/u|nullable',
-            'profile_photo' => 'image|mimes:png,jpg,jpeg|max:5000',
+            'profile_photo' => 'mimes:png,jpg,jpeg|max:5000',
             'is_company' => 'required|boolean',
             'public_phone' => 'required|regex:/^[0-9\x{06F0}-\x{06F9}]+$/u|min:11',
             //'postal_code' => 'digits:10|nullable',
@@ -171,13 +175,13 @@ class profile_controller extends Controller
 
         if (($photos_count = $request->certificate_image_count) > 0) {
             foreach (range(0, $photos_count - 1) as $index) {
-                $rules['certificate_'.$index] = 'required|image|mimes:png,jpg,jpeg|max:5000';
+                $rules['certificate_'.$index] = 'required|mimes:png,jpg,jpeg|max:5000';
             }
         }
 
         if (($photos_count = $request->related_image_count) > 0) {
             foreach (range(0, $photos_count - 1) as $index) {
-                $rules['related_'.$index] = 'required|image|mimes:png,jpg,jpeg|max:5000';
+                $rules['related_'.$index] = 'required|mimes:png,jpg,jpeg|max:5000';
             }
         }
 
@@ -192,7 +196,7 @@ class profile_controller extends Controller
             $media_controller_object = new media_controller();
 
             $thumbnail_path = storage_path('app/public/'.$file_path);
-            $media_controller_object->create_thumbnail($thumbnail_path,150,150);
+            $media_controller_object->create_thumbnail($thumbnail_path,150,150,$photo_data);
         }
         
         return $file_path;
@@ -238,7 +242,7 @@ class profile_controller extends Controller
             for ($index = 0; $index < $image_count; ++$index) {
                 $image_name = "{$image_prefix}_{$index}";
                 if ($request->hasFile($image_name)) {
-                    $file_path = $this->store_photo_file($request->$image_name, $directory_to_save);
+                    $file_path = $this->store_photo_file($request->file($image_name), $directory_to_save);
 
                     $photo = new profile_media();
                     $photo->file_path = $file_path;
@@ -323,6 +327,27 @@ class profile_controller extends Controller
             $result['user_info'] = collect(myuser::find($user_id))
                 ->except($this->user_fields_exclude_array);
         }
+
+        //adding user phone view permission status
+        if($result['user_info']['is_seller']){
+            if(str_split($result['user_info']['phone_view_permission'])[0] == 1){
+                $result['user_info']['phone_allowed'] = true;
+            }
+            else{
+                $result['user_info']['phone_allowed'] = false;
+            }
+        }
+        else{
+            if(str_split($result['user_info']['phone_view_permission'])[1] == 1){
+                $result['user_info']['phone_allowed'] = true;
+            }
+            else{
+                $result['user_info']['phone_allowed'] = false;
+            }
+        }
+        
+
+        unset($result['user_info']['phone_view_permission']);
 
         if ($request->isMethod('post')) {
             if ($result['user_info']['id'] == session('user_id')) {
@@ -707,5 +732,46 @@ class profile_controller extends Controller
                                             ->count();
 
         return round(($seen_by_user_contacts_count / $total_contacts_count) * 100, 2);
+    }
+
+    public function get_user_shared_profile_info($user_name)
+    {
+        $user_name = strip_tags($user_name);
+
+        $profile_info = DB::table('myusers')
+                                ->join('profiles','profiles.myuser_id','=','myusers.id')
+                                ->where('myusers.user_name',$user_name)
+                                ->where('profiles.confirmed',true)
+                                ->orderBy('profiles.created_at','desc')
+                                ->select('myusers.first_name','myusers.last_name','profiles.profile_photo','myusers.user_name')
+                                ->get()
+                                ->first();
+
+        if($profile_info){
+            return view('layout.shared-profile',[
+                'profile' => $profile_info
+            ]);
+        }
+
+        return abort(404);
+        
+    }
+
+    public function register_referred_user_info_of_given_user_id($user_id,$referred_user_name)
+    {
+        $referred_user_record = DB::table('myusers')->where('user_name',$referred_user_name)
+                                                ->first();
+
+        if($referred_user_record)
+        {
+            $now = Carbon::now();
+
+            DB::table('referred_users')->insert([
+                'myuser_id' => $referred_user_record->id,
+                'referred_user_id' => $user_id,
+                'created_at' => $now,
+                'updated_at' => $now
+            ]);
+        }
     }
 }

@@ -112,7 +112,7 @@ body {
   line-height: 1.1;
   font-family: IRANSans, sans-serif;
   font-size: 14px;
-  background: #f6f6f6;
+  background: #fff;
 }
 
 ol,
@@ -340,13 +340,34 @@ select {
   background-color: #d71a34 !important;
 }
 
+.section-title {
+  text-align: right;
+  font-size: 18px;
+  font-weight: 500;
+  color: #313a43;
+  position: relative;
+  padding-bottom: 9px;
+}
+
+.section-title::after {
+  content: " ";
+  background-color: #00c569;
+  width: 100px;
+  height: 3px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+/* 
 .message-wrapper .chat-page ul,
 .main-modal-chat ul,
 .send-message-form,
 .footer-modal-chat,
 .group-message-wrapper {
-  background: url("../../img/whatsappbg.jpg") repeat;
-}
+  background-image: url("../../img/whatsappbg.png") repeat;
+  background-color: #E5DDD6;
+} */
 
 .loading_images img {
   display: block;
@@ -649,13 +670,13 @@ select#bd-month-end-date-id option {
   font-weight: bold;
 }
 
+
 .imageuploadify {
   margin: 0;
-  border-radius: 5px;
-  border: 3px dashed #d2d2d2;
+  border-radius: 12px;
+  border: 2px dashed #d2d2d2;
   color: #333;
 }
-
 .file-uploads.file-uploads-html5 label {
   margin: 0;
 }
@@ -776,7 +797,7 @@ select#bd-month-end-date-id option {
 
 .main-loader-content{
   position: fixed;
-  z-index: 999;
+  z-index: 9999;
   background: rgba(0,0,0,0.8);
   width: 100%;
   height: 100%;
@@ -844,6 +865,61 @@ select#bd-month-end-date-id option {
   -webkit-animation: progress-bar-stripes 1s linear infinite;
   animation: progress-bar-stripes 1s linear infinite;
 }
+
+
+
+.phone-number-wrapper {
+  margin: 35px 0;
+  padding: 0 15px;
+  line-height: 1.618;
+}
+
+.phone-number {
+  display: flex;
+  justify-content: space-between;
+  color: #404b55;
+  direction: ltr;
+}
+
+.phone-number p {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.warning-wrapper {
+  background: #fffbe5;
+  border-radius: 12px;
+  direction: rtl;
+  padding: 7px 15px 15px;
+  margin-top: 15px;
+  text-align: right;
+  display: block;
+}
+
+.info-wrapper{
+  background: #f5fbff;
+}
+
+.warning-title {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.warning-title i {
+  font-size: 23px;
+  position: relative;
+  top: 4px;
+}
+
+.spinner-border {
+  width: 1.5rem;
+  height: 1.5rem;
+  top: -5px;
+  position: relative;
+  left: 2px;
+}
+
 
 /*******************************************************
 Slider B-flat
@@ -1143,20 +1219,23 @@ Sizes
 
 .wrapper-bg {
   background: #fff;
-
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
-
-  border-radius: 4px;
-
-  padding: 15px;
+padding: 15px;
+border-radius: 12px;
+border: 1px solid #F0F0F1;
 }
 
 /*index page global style */
 
-#intro {
+#intro.intro-web {
   background: url("../../../assets/img/hero-section.jpg");
+  background-position: center left;
   background-size: cover;
-  background-position: center right;
+}
+
+#intro.intro-mobile {
+  background: url("../../../assets/img/mobile/mobile-hero-section.jpg");
+  background-position: center center;
+  background-size: cover;
 }
 
 .title-page {
@@ -1309,6 +1388,38 @@ span.min {
   text-decoration: underline !important;
 }
 
+.main_popup_content .main-pop-up {
+  font-size: 15px;
+  line-height: 1.618;
+  margin-bottom: 15px;
+}
+
+
+.main_popup_content {
+  position: relative;
+  text-align: center;
+  background: #fff;
+  border-radius: 3px;
+  padding: 50px;
+  margin: 0;
+  direction: rtl;
+}
+.main_popup_content i.fa-times {
+  color: #fff;
+  position: absolute;
+  top: -16px;
+  right: -14px;
+  font-size: 18px;
+  background: rgba(0,0,0,0.6);
+  border-radius: 50px;
+  height: 30px;
+  width: 30px;
+  padding-top: 5px;
+}
+
+.swal-text:last-child{
+  margin-bottom: 0  !important;
+}
 
 @media screen and (max-width: 338px) {
   .custom-navbar .navbar-brand {
@@ -1343,10 +1454,6 @@ span.min {
 }
 
 @media only screen and (max-width: 767px) {
-  .main-content-index-pages {
-    padding-top: 70px;
-  }
-
   .overflow-hidden {
     overflow: hidden;
   }

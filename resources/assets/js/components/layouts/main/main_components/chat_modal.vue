@@ -17,19 +17,18 @@
 
   background: #fafafa;
 
-  z-index: 1012;
+  z-index: 1013;
 
-  width: 365px;
-
-  height: 450px;
+  width: 450px;
+  height: 550px;
 
   bottom: -800px;
 
   left: 15px;
 
-  border-radius: 4px;
+  border-radius: 12px;
 
-  border: 2px solid #00c569;
+  border: 1px solid #00c569;
 
   transition: 1s;
 
@@ -106,6 +105,22 @@
   float: right;
   width: 100%;
   height: calc(100% - 110px);
+  background-color: #e5ddd6;
+}
+
+.main-modal-chat .bg-wrapper {
+  opacity: 0.06;
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  top: 50px;
+  bottom: 60px;
+}
+
+.main-modal-chat .bg-wrapper.background-chat {
+  background: url("../../../../../img/whatsappbg.png") repeat;
+  background-size: 90%;
 }
 
 .main-modal-chat ul {
@@ -117,8 +132,13 @@
 
 .main-modal-chat li {
   float: left;
-
+  position: relative;
+  z-index: 1;
   width: 100%;
+}
+
+.main-modal-chat li:last-of-type {
+  margin-bottom: 10px;
 }
 
 .main-modal-chat li > div {
@@ -185,23 +205,21 @@
 
 /*footer chat modal styles*/
 .footer-modal-chat {
-  position: absolute;
-
-  bottom: 0;
-
   left: 0;
-
-  right: 0;
-
-  padding: 4px 15px;
+  overflow: hidden;
+  padding: 8px 15px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: #f0f0f0;
 }
 
 .send-message-button {
   float: right;
 
-  width: 50px;
+  width: 40px;
 
-  height: 50px;
+  height: 40px;
 
   color: #fff;
 
@@ -236,7 +254,7 @@
 
   border: none;
 
-  padding: 13px 15px;
+  padding: 7px 15px 8px 15px;
 
   direction: rtl;
 
@@ -302,12 +320,12 @@
         <span class="header-chat-image" v-if="contactInfo.profile_photo">
           <img :src="$parent.assets + 'storage/' + contactInfo.profile_photo" />
         </span>
-        <span class="header-chat-image" v-else>
+        <span class="header-chat-image" v-else-if="!chatMessagesLoader">
           <img :src="$parent.assets + 'assets/img/user-defult.png'" />
         </span>
 
         <span class="header-chat-content">
-          {{contactInfo.first_name + ' ' + contactInfo.last_name}}
+          {{ contactInfo.first_name + " " + contactInfo.last_name }}
           <!-- <button
             @click.prevent
             class="verified-user"
@@ -329,7 +347,15 @@
     </div>
 
     <div class="main-modal-chat">
-      <div class="loading-container" v-show="isChatMessagesLoaded && isFirstMessageLoading">
+      <div
+        class="bg-wrapper"
+        :class="{ 'background-chat': !chatMessagesLoader }"
+      ></div>
+
+      <div
+        class="loading-container"
+        v-show="chatMessagesLoader && isFirstMessageLoading"
+      >
         <div class="image-wrapper">
           <div class="lds-ring">
             <div></div>
@@ -349,10 +375,12 @@
           <div>
             <p v-text="msg.text"></p>
             <div class="message-info">
-              <span
-                class="time"
-                v-if="msg.created_at"
-              >{{ msg.created_at | moment("jYY/jMM/jDD, h:mm A") }} &nbsp</span>
+              <span class="time" v-if="msg.created_at"
+                >{{
+                  msg.created_at | moment("jYY/jMM/jDD, h:mm A")
+                }}
+                &nbsp</span
+              >
               <span v-else>{{ Date() | moment("jYY/jMM/jDD, h:mm A") }}</span>
               <span class="visited" v-if="msg.sender_id === currentUserId">
                 <i class="fa fa-check" v-if="msg.created_at"></i>
@@ -366,27 +394,29 @@
     </div>
 
     <div class="footer-modal-chat">
-      <button class="send-message-button" @click.prevent="sendMessage">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="13.347"
-          height="12.766"
-          viewBox="0 0 13.347 12.766"
-        >
-          <path
-            id="send-message-icon"
-            data-name="send-message-icon"
-            d="M2511.158-3909.893l12.347-5.929-12.347-5.837.235,4.51,10.029,1.327-10.029,1.477Z"
-            transform="translate(-2510.658 3922.159)"
-            fill="#fff"
-            stroke="#fff"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="1"
-          />
-        </svg>
-      </button>
-      <input type="text" v-model="msgToSend" placeholder="پیغامی بگذارید" />
+      <form v-on:submit.prevent="sendMessage()">
+        <button class="send-message-button" @click.prevent="sendMessage">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="13.347"
+            height="12.766"
+            viewBox="0 0 13.347 12.766"
+          >
+            <path
+              id="send-message-icon"
+              data-name="send-message-icon"
+              d="M2511.158-3909.893l12.347-5.929-12.347-5.837.235,4.51,10.029,1.327-10.029,1.477Z"
+              transform="translate(-2510.658 3922.159)"
+              fill="#fff"
+              stroke="#fff"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1"
+            />
+          </svg>
+        </button>
+        <input type="text" v-model="msgToSend" placeholder="پیغامی بگذارید" />
+      </form>
     </div>
   </div>
 
@@ -397,27 +427,27 @@
 import { eventBus } from "../../../../router/router.js";
 
 export default {
-  data: function() {
+  data: function () {
     return {
-      isChatMessagesLoaded: true,
+      chatMessagesLoader: true,
       isFirstMessageLoading: true,
       openChatBox: false,
       contactInfo: "",
       chatMessages: "",
       currentContactUserId: "",
       currentUserId: "",
-      msgToSend: ""
+      msgToSend: "",
     };
   },
   methods: {
-    setUpChat: function() {
+    setUpChat: function () {
       this.handleBackBtnClickOnDevices();
 
       this.loadChatHistory(this.contactInfo);
     },
-    loadChatHistory: function(contact, index) {
+    loadChatHistory: function (contact, index) {
       var self = this;
-      self.isChatMessagesLoaded = true;
+      self.chatMessagesLoader = true;
       if (index !== -10) self.isFirstMessageLoading = true;
       // self.selectedIndex = index;
       // this.selectedContact = contact;
@@ -425,33 +455,33 @@ export default {
 
       axios
         .post("/get_user_chat_history", {
-          user_id: contact.contact_id
+          user_id: contact.contact_id,
         })
-        .then(function(response) {
+        .then(function (response) {
           self.chatMessages = response.data.messages;
           self.currentUserId = response.data.current_user_id;
           self.scrollToEnd(0);
         })
-        .catch(function(e) {
+        .catch(function (e) {
           //
         });
     },
-    scrollToEnd: function(time) {
+    scrollToEnd: function (time) {
       var chatPageElementList = $(".main-modal-chat ul");
 
       var self = this;
-      setTimeout(function() {
+      setTimeout(function () {
         chatPageElementList.animate(
           { scrollTop: chatPageElementList.prop("scrollHeight") },
           500,
           "swing",
-          function() {
-            self.isChatMessagesLoaded = false;
+          function () {
+            self.chatMessagesLoader = false;
           }
         );
       }, time);
     },
-    sendMessage: function() {
+    sendMessage: function () {
       var self = this;
 
       let tempMsg = self.msgToSend;
@@ -461,39 +491,60 @@ export default {
         let msgObject = {
           sender_id: self.currentUserId,
           receiver_id: self.currentContactUserId,
-          text: tempMsg
+          text: tempMsg,
         };
+
+        if (self.contactInfo.product_id) {
+          msgObject.product_id = self.contactInfo.product_id;
+        }
 
         self.chatMessages.push(msgObject);
         self.scrollToEnd(0);
 
-        if (self.contactInfo.buyAd_id !== undefined && self.contactInfo.buyAd_id != null) {
-            axios
-              .post("/send_reply_to_buyAd", {
-                buy_ad_id: self.contactInfo.buyAd_id,
-                text: msgObject.text
-              })
-              .then(function(response) {
-                self.isFirstMessageLoading = false;
-                self.loadChatHistory(self.contactInfo, -10);
-              })
-              .catch(function(e) {
-                //
-              });
-        } else {
+        if (
+          self.contactInfo.buyAd_id !== undefined &&
+          self.contactInfo.buyAd_id != null
+        ) {
           axios
-            .post("/messanger/send_message", msgObject)
-            .then(function(response) {
+            .post("/send_reply_to_buyAd", {
+              buy_ad_id: self.contactInfo.buyAd_id,
+              text: msgObject.text,
+            })
+            .then(function (response) {
               self.isFirstMessageLoading = false;
               self.loadChatHistory(self.contactInfo, -10);
             })
-            .catch(function(e) {
+            .catch(function (e) {
+              //
+            });
+        } else if (
+          self.contactInfo.product_id &&
+          self.contactInfo.product_id !== undefined &&
+          self.contactInfo.product_id != null
+        )
+          axios
+            .post("/send_reply_to_product", msgObject)
+            .then(function (response) {
+              self.isFirstMessageLoading = false;
+              self.loadChatHistory(self.contactInfo, -10);
+            })
+            .catch(function (e) {
+              //
+            });
+        else {
+          axios
+            .post("/messanger/send_message", msgObject)
+            .then(function (response) {
+              self.isFirstMessageLoading = false;
+              self.loadChatHistory(self.contactInfo, -10);
+            })
+            .catch(function (e) {
               //
             });
         }
       }
     },
-    handleInitialMessage: function() {
+    handleInitialMessage: function () {
       let self = this;
 
       return new Promise((resolve, reject) => {
@@ -503,14 +554,14 @@ export default {
         self.sendMessage();
       });
     },
-    handleBackBtnClickOnDevices: function() {
+    handleBackBtnClickOnDevices: function () {
       var self = this;
 
       if (window.history.state) {
         history.pushState(null, null, window.location);
       }
 
-      $(window).on("popstate", function(e) {
+      $(window).on("popstate", function (e) {
         self.openChatBox = false;
 
         if (self.doesUserComeFromAuthenticationPages()) {
@@ -521,7 +572,7 @@ export default {
         }
       });
     },
-    isDeviceMobile: function() {
+    isDeviceMobile: function () {
       if (
         navigator.userAgent.match(/Android/i) ||
         navigator.userAgent.match(/webOS/i) ||
@@ -536,14 +587,14 @@ export default {
         return false;
       }
     },
-    doesUserComeFromAuthenticationPages: function() {
+    doesUserComeFromAuthenticationPages: function () {
       if (window.localStorage.getItem("comeFromAuthentication")) {
         return true;
       } else {
         return false;
       }
     },
-    routeToProfile: function() {
+    routeToProfile: function () {
       if (this.contactInfo.user_name) {
         this.openChatBox = false;
         this.$router.push({ path: "/profile/" + this.contactInfo.user_name });
@@ -552,26 +603,26 @@ export default {
     activeComponentTooltip() {
       $(".verified-user")
         .popover({ trigger: "manual", html: true, animation: false })
-        .on("mouseenter", function() {
+        .on("mouseenter", function () {
           var _this = this;
           $(this).popover("show");
-          $(".popover").on("mouseleave", function() {
+          $(".popover").on("mouseleave", function () {
             $(_this).popover("hide");
           });
         })
-        .on("mouseleave", function() {
+        .on("mouseleave", function () {
           var _this = this;
-          setTimeout(function() {
+          setTimeout(function () {
             if (!$(".popover:hover").length) {
               $(_this).popover("hide");
             }
           }, 300);
         });
-    }
+    },
   },
 
-  created: function() {
-    eventBus.$on("ChatInfo", $event => {
+  created: function () {
+    eventBus.$on("ChatInfo", ($event) => {
       this.contactInfo = $event;
       this.chatMessages = "";
       this.openChatBox = true;
@@ -580,7 +631,7 @@ export default {
     });
   },
   watch: {
-    openChatBox: function(value) {
+    openChatBox: function (value) {
       if (value == true) {
         $("body").addClass("overflow-hidden");
         setTimeout(() => {
@@ -589,7 +640,7 @@ export default {
       } else {
         $("body").removeClass("overflow-hidden");
       }
-    }
-  }
+    },
+  },
 };
 </script>

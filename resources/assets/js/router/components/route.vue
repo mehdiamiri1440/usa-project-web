@@ -1,53 +1,51 @@
 <style scoped>
 .android-download-alert-wrapper {
   position: fixed;
-
-  bottom: 0;
-
+  bottom: 59px;
   width: 100%;
-
-  background: #e41c38;
-
+  background: #fff;
   text-align: center;
-
   color: #fff;
-
   direction: rtl;
-
   z-index: 1020;
+  font-weight: bold;
+  font-size: 20px;
+  padding: 5px;
+  box-shadow: 0 -8px 8px rgba(0, 0, 0, 0.1);
 }
 
 .android-apk-download {
-  padding: 15px;
-
-  background: none;
-
+  padding: 10px 15px;
+  background: linear-gradient(-35deg, #ff9300, #f60);
   border: none;
-
   width: 100%;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
 
-  height: 100%;
+.android-apk-download img {
+  width: 28px;
+  position: absolute;
+  left: 15px;
 }
 
 .close-android-download-alert-wrapper {
   background: none;
-
   border: none;
-
   font-size: 20px;
-
   position: absolute;
-
-  right: 15px;
-
-  top: 13px;
-
+  right: 5px;
+  top: 5px;
   z-index: 1021;
+  padding: 11px 15px 8px;
 }
-
+/* 
 .modal-dialog {
   width: 400px;
-}
+} */
 .modal-content {
   overflow: hidden;
   border-radius: 12px;
@@ -118,7 +116,46 @@
   display: block;
   margin: 50px auto;
 }
+
+.main_popup_content i.fa-times {
+  color: #777;
+  background: none;
+  top: 0;
+  right: 0;
+}
+
+.main_popup_content {
+  padding: 50px 0;
+}
+
+#payment-type-modal.modal {
+  text-align: center;
+  padding: 0 !important;
+}
+
+#payment-type-modal.modal:before {
+  content: "";
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -4px;
+}
+
+#payment-type-modal .modal-dialog {
+  display: inline-block;
+  text-align: right;
+  vertical-align: middle;
+}
+
 @media screen and (max-width: 768px) {
+  #wallet-modal .modal-dialog {
+    margin: 0;
+    height: 100%;
+  }
+  #wallet-modal {
+    padding: 0 !important;
+  }
+
   #download-app-modal > div {
     margin: 0;
     width: 100%;
@@ -135,31 +172,47 @@
 
     width: 100%;
   }
+
+  #payment-type-modal .modal-dialog {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+  }
 }
 </style>
 
 <template>
   <div>
-    <!-- Chat Join Modals -->
+    <!-- payment loader -->
+    <div v-if="doPaymentLoader" class="main-loader-content">
+      <div class="pricing-loader-icon">
+        <div class="lds-ring">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <p class="pricing-loader-text text-rtl">
+          در حال انتقال به درگاه پرداخت . . .
+        </p>
+      </div>
+    </div>
+
+    <!--  #regex wallet modal  -->
+
     <div class="container">
-      <div id="join-to-group" class="modal fade" tabindex="-1" role="dialog">
+      <div id="wallet-modal" class="modal fade" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg" role="document">
           <div class="modal-content">
-            <div class="main_popup_content">
+            <div class="main_popup_content col-xs-12">
               <a href="#" data-dismiss="modal">
                 <i class="fa fa-times"></i>
               </a>
-              <p class="main-pop-up" v-text="joinGroupMessage"></p>
-
-              <a
-                href="#"
-                class="btn green-button delete"
-                data-dismiss="modal"
-                @click.prevent="subscribeUserToGroup()"
-                v-text="'عضویت در گروه'"
-              ></a>
-
-              <a href="#" class="btn green-button bg-gray" data-dismiss="modal" v-text="'انصراف'"></a>
+              <WalletComponent
+                :user-name="userFullName"
+                :walletBalance="walletBalance"
+              />
             </div>
           </div>
           <!-- /.modal-content -->
@@ -168,26 +221,32 @@
       </div>
     </div>
 
-    <!--  #regex elevator modal  -->
+    <!-- end regex wallet modal -->
+
+    <!--  #regex payment type modal  -->
 
     <div class="container">
-      <div id="elevator-modal" class="modal fade" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-lg" role="document">
+      <div
+        id="payment-type-modal"
+        class="modal fade"
+        tabindex="-1"
+        role="dialog"
+      >
+        <div
+          class="modal-dialog modal-lg modal-dialog-centered"
+          role="document"
+        >
           <div class="modal-content">
-            <div class="main_popup_content">
-              <a href="#" data-dismiss="modal">
-                <i class="fa fa-times"></i>
-              </a>
-              <h1 class="green-text">
-                <span>25,000</span>
-                تومان
-              </h1>
-              <br />
-              <p class="main-pop-up" v-text="elevatorText"></p>
-
-              <a href class="btn green-button bg-gray" data-dismiss="modal">متوجه شدم</a>
-
-              <a :href="'/payment/elevator/' + productId" class="btn green-button">خرید نردبان</a>
+            <div class="modal-body col-xs-12">
+              <div class="main_popup_content modal-body col-xs-12">
+                <a href="#" data-dismiss="modal">
+                  <i class="fa fa-times"></i>
+                </a>
+                <PaymentTypes
+                  :peyment-method-data="peymentMethodData"
+                  :wallet-balance="walletBalance"
+                />
+              </div>
             </div>
           </div>
           <!-- /.modal-content -->
@@ -196,7 +255,7 @@
       </div>
     </div>
 
-    <!-- end regex elevator modal -->
+    <!-- end regex payment type modal -->
 
     <!--  #regex download App modal  -->
 
@@ -221,7 +280,10 @@
                 <img src="../../../img/logo/mobile-logo.svg" alt />
               </div>
               <h3>اپلیکیشن جدید باسکول</h3>
-              <p>برای دسترسی سریعتر و راحت تر به خریداران و فروشندگان عمده برنامه جدید باسکول را نصب کنید.</p>
+              <p class="text-rtl">
+                برای دسترسی سریعتر و راحت تر به خریداران و فروشندگان عمده برنامه
+                جدید باسکول را نصب کنید.
+              </p>
               <a href @click.prevent="doDownload()">
                 دانلود اپلیکیشن باسکول
                 <i class="fa fa-download"></i>
@@ -236,10 +298,21 @@
 
     <!-- end regex download App modal  -->
 
-    <chat-modal />
+    <ChatModal />
+    <EditProductModal />
+    <ShareToSocialModal
+      :share-modal-url="shareModalUrl"
+      :share-modal-text="shareModalText"
+      :share-modal-title="shareModalTitle"
+    />
+    <ReportModal :reported-user-id="reportedUserId" />
+    <ReviewModal :review-user-data="reviewUserData" />
 
-    <report-modal :reported-user-id="reportedUserId" />
-    <review-modal :review-user-data="reviewUserData" />
+    <Navigation
+      v-if="$route.name != 'invite'"
+      :messageCount="messageCount"
+      class="hidden-lg hidden-md"
+    />
 
     <router-view
       :user-id="userId"
@@ -263,6 +336,7 @@
 
     <router-view
       name="seller"
+      class="h-100"
       :user-id="userId"
       :is-seller="isSeller"
       :assets="assets"
@@ -272,17 +346,24 @@
 
     <!-- add android app download  -->
 
-    <div v-if="isConditionSatisfied" class="android-download-alert-wrapper hidden-lg hidden-md">
+    <div
+      v-if="downloadAppButton && $route.name != 'invite'"
+      class="android-download-alert-wrapper hidden-lg hidden-md"
+    >
       <button
         class="close-android-download-alert-wrapper"
-        @click.prevent="isConditionSatisfied = false"
+        @click.prevent="downloadAppButton = false"
       >
-        <i class="fa fa-times-circle"></i>
+        <i class="fa fa-times"></i>
       </button>
 
-      <button class="android-apk-download" @click.prevent="doDownload">
-        <i class="fas fa-download"></i>
+      <button class="android-apk-download" @click.prevent="doDownload()">
         دانلود اپلیکیشن باسکول
+
+        <img
+          src="../../../img/google-play-icon.svg"
+          alt="دانلود اپلیکیشن باسکول"
+        />
       </button>
     </div>
   </div>
@@ -294,31 +375,57 @@ import { eventBus } from "../router.js";
 import Cookies from "js-cookie";
 import IsWebview from "is-webview";
 import ChatModal from "../../components/layouts/main/main_components/chat_modal";
+import EditProductModal from "../../components/layouts/main/main_components/edit-product-modal";
 import ReportModal from "../../components/layouts/main/main_components/report";
 import ReviewModal from "../../components/layouts/main/main_components/review-component/review";
+import ShareToSocialModal from "../../components/layouts/main/main_components/share-to-social-modal";
+import WalletComponent from "../../components/layouts/main/wallet";
+import PaymentTypes from "../../components/layouts/main/payment-types.vue";
+import swal from "../../sweetalert.min.js";
+import Navigation from "./navigation.vue";
 
 export default {
   components: {
     ChatModal,
+    EditProductModal,
     ReportModal,
     ReviewModal,
+    ShareToSocialModal,
+    WalletComponent,
+    PaymentTypes,
+    Navigation,
   },
   data: function () {
     return {
       iswebview: navigator.userAgent == "webView" ? true : false,
       isConditionSatisfied: false,
+      downloadAppButton: false,
       elevatorText: "",
       productId: "",
+      buyAdId: "",
       joinGroupMessage: "",
       joinGroupId: "",
       activeContactId: "",
       reportedUserId: "",
+      shareModalUrl: "",
+      shareModalText: "",
+      shareModalTitle: "",
       msg: "",
       reviewCurrentStep: 0,
       reviewUserData: "",
       reviewUserPrfileId: "",
+      currentUser: {
+        profile: {
+          profile_photo: "",
+        },
+        user_info: "",
+      },
+      walletBalance: "",
+      peymentMethodData: "",
       verifiedUserContent:
         "<div class='tooltip-wrapper text-rtl'>اطلاعات هویتی این کاربر احراز شده است.<br/><a href='/verification'>اطلاعات بیشتر</a> </div>",
+      doPaymentLoader: false,
+      messageCount: "",
     };
   },
   props: [
@@ -334,38 +441,7 @@ export default {
     window.localStorage.setItem("userId", this.userId);
     window.localStorage.setItem("userType", this.isSeller);
 
-    eventBus.$on("elevatorText", ($event) => {
-      this.elevatorText = $event;
-    });
-
-    eventBus.$on("productId", ($event) => {
-      this.productId = $event;
-    });
-
-    eventBus.$on("joinGroupId", ($event) => {
-      this.joinGroupId = $event;
-    });
-    eventBus.$on("joinGroupMessage", ($event) => {
-      this.joinGroupMessage = $event;
-    });
-
-    eventBus.$on("activeContactId", ($event) => {
-      this.activeContactId = $event;
-    });
-
-    eventBus.$on("reoprtModal", ($event) => {
-      this.reportedUserId = $event;
-      $("#report-modal").modal("show");
-    });
-    eventBus.$on("reviewUserData", ($event) => {
-      this.reviewUserData = $event;
-      this.reviewUserPrfileId = $event.id;
-      $("#review-modal").modal("show");
-    });
-
-    eventBus.$on("modal", ($event) => {
-      this.openRelatedSwalModal($event);
-    });
+    this.setEventBus();
 
     let self = this;
 
@@ -423,8 +499,10 @@ export default {
       );
       // code here
       this.createCookie("downloadAppModal", true, 60 * 24);
+      // window.location.href =
+      //   "https://play.google.com/store/apps/details?id=com.buskool";
       window.location.href =
-        "https://app-download.s3.ir-thr-at1.arvanstorage.com/buskool.apk";
+        "https://play.google.com/store/search?q=%D8%A8%D8%A7%D8%B3%DA%A9%D9%88%D9%84&c=apps";
     },
     isOsIOS: function () {
       var userAgent = window.navigator.userAgent.toLowerCase(),
@@ -446,17 +524,40 @@ export default {
           if (
             window.location.pathname != "/buyer/messenger/contacts" &&
             window.location.pathname != "/seller/messenger/contacts" &&
-            window.location.pathname != "/seller/buyAd-requests" &&
-            !window.location.pathname.includes('product-view') &&
+            window.location.pathname != "/buyAd-requests" &&
+            !window.location.pathname.includes("product-view") &&
             !this.iswebview
           ) {
             this.isConditionSatisfied = true;
           }
+
           if (!this.checkCookie() && this.userId && !this.iswebview) {
             setTimeout(() => {
               $("#download-app-modal").modal("show");
-            }, 5000);
+            }, 1000);
           }
+        }
+      }
+    },
+    activateDownloadAppButton: function () {
+      let self = this;
+      if (this.isDeviceMobile() && !this.isOsIOS()) {
+        let androidVersion = this.getAndroidVersion();
+        if (parseInt(androidVersion) >= 5) {
+          if (
+            window.location.pathname != "/buyer/messenger/contacts" &&
+            window.location.pathname != "/seller/messenger/contacts" &&
+            window.location.pathname != "/buyAd-requests" &&
+            !window.location.pathname.includes("product-view") &&
+            !this.iswebview
+          ) {
+            this.downloadAppButton = true;
+          }
+          // if (!this.checkCookie() && !this.iswebview) {
+          // setTimeout(() => {
+          //   $("#download-app-modal").modal("show");
+          // }, 1000);
+          // }
         }
       }
     },
@@ -501,6 +602,9 @@ export default {
         case "deleteProduct":
           this.raiseDeleteProductModal();
           break;
+        case "deleteBuyAdModal":
+          this.raiseDeleteBuyAdModal();
+          break;
         case "productEditDone":
           this.raiseProductEditSuccessModal();
           break;
@@ -540,8 +644,7 @@ export default {
 
       swal({
         title: "ارتباط با مخاطب",
-        text:
-          "برای ارتباط با هزاران خریدار و فروشنده در باسکول ابتدا ثبت نام کنید.",
+        text: "برای ارتباط با هزاران خریدار و فروشنده در باسکول ابتدا ثبت نام کنید.",
         className: "custom-swal-with-cancel",
         buttons: {
           success: {
@@ -580,9 +683,14 @@ export default {
         className: "custom-swal-with-cancel",
         buttons: {
           success: {
-            text: "پرداخت",
+            text: "پرداخت از طریق درگاه",
             value: "pay",
           },
+          // wallet: {
+          //   text: "پرداخت از کیف پول",
+          //   value: "wallet",
+          //   className: "bg-blue",
+          // },
           close: {
             text: "بستن",
             className: "bg-cancel",
@@ -592,7 +700,51 @@ export default {
         switch (value) {
           case "pay":
             window.location.href = "/payment/elevator/" + self.productId;
-
+            break;
+          case "wallet":
+            axios
+              .post("/wallet-expend/elevator", {
+                product_id: self.productId,
+              })
+              .then((response) => {
+                swal({
+                  title: "نردبان اعمال شد",
+                  text: "اعمال نردبان با موفقیت انجام شد.",
+                  icon: "success",
+                  className: "custom-swal-with-cancel",
+                  buttons: {
+                    close: {
+                      text: "بستن",
+                      value: "close",
+                      className: "bg-cancel",
+                    },
+                  },
+                }).then((value) => {
+                  if (value == "close") {
+                    window.location.reload();
+                  }
+                });
+              })
+              .catch((err) => {
+                swal({
+                  title: "خطا",
+                  text: err.response.data.msg,
+                  icon: "error",
+                  className: "custom-swal-with-cancel",
+                  buttons: {
+                    wallet: {
+                      text: "افزایش موجودی",
+                      value: "wallet",
+                      className: "bg-blue",
+                    },
+                    close: {
+                      text: "بستن",
+                      value: "close",
+                      className: "bg-cancel",
+                    },
+                  },
+                });
+              });
             break;
         }
       });
@@ -680,6 +832,89 @@ export default {
         }
       });
     },
+    raiseDeleteBuyAdModal: function () {
+      let self = this;
+
+      this.handleBackBtn();
+
+      swal({
+        title: "حذف درخواست",
+        text: "آیا میخواهید این درخواست را حذف کنید؟",
+        // content: closeIconBtn,
+        className: "custom-swal-with-cancel",
+        buttons: {
+          delete: {
+            text: "حذف کن",
+            value: "delete",
+            className: "bg-red",
+          },
+          reject: {
+            text: "انصراف",
+          },
+          close: {
+            text: "بستن",
+            className: "bg-cancel",
+          },
+        },
+      }).then((value) => {
+        switch (value) {
+          case "delete":
+            axios
+              .post("/delete_buy_ad_by_id", {
+                buy_ad_id: self.buyAdId,
+              })
+              .then(function (response) {
+                swal({
+                  title: "حذف شد",
+                  text: "درخواست خرید شما با موفقیت حذف شد.",
+                  icon: "success",
+                  className: "custom-swal-with-cancel",
+                  buttons: {
+                    close: {
+                      text: "بستن",
+                      value: "close",
+                      className: "bg-cancel",
+                    },
+                  },
+                }).then((value) => {
+                  if (value == "close") {
+                    window.location.reload();
+                  }
+                });
+
+                self.registerComponentStatistics(
+                  "product",
+                  "product-deleted",
+                  "product-deleted-successfully"
+                );
+              })
+              .catch(function (err) {
+                console.log(err);
+                self.registerComponentStatistics(
+                  "product",
+                  "product-delete-failed",
+                  "product-delete-failed"
+                );
+                //show modal
+                swal({
+                  title: "خطا",
+                  text: "خطایی رخ داده است. دوباره تلاش کنید.",
+                  icon: "error",
+                  className: "custom-swal-with-cancel",
+                  buttons: {
+                    close: {
+                      text: "بستن",
+                      value: "close",
+                      className: "bg-cancel",
+                    },
+                  },
+                });
+              });
+
+            break;
+        }
+      });
+    },
     raiseProductEditSuccessModal: function () {
       this.handleBackBtn();
       swal({
@@ -717,7 +952,7 @@ export default {
 
       let content = document.createElement("div");
       content.innerHTML =
-        '<p dir="rtl">سقف تعداد محصولات ثبت شده شما پر شده است.</p><br/><p class="red-text" dir="rtl"><b>برای ثبت محصولات جدید، لطفا دکمه افزایش ظرفیت را بزنید.</b></p>';
+        '<p dir="rtl" class="swal-guide">سقف تعداد محصولات ثبت شده شما پر شده است.</p><br/><p class="red-text swal-guide" dir="rtl"><b>برای ثبت محصولات جدید، لطفا دکمه افزایش ظرفیت را بزنید.</b></p>';
       swal({
         title: "محدودیت ثبت محصول جدید",
         content: content,
@@ -749,7 +984,7 @@ export default {
 
       let content = document.createElement("div");
       content.innerHTML =
-        '<p dir="rtl">ظرفیت روزانه پاسخ به درخواست های خرید شما پر شده است.</p><br/><p class="red-text" dir="rtl"><b>برای افزایش ظرفیت، لطفا دکمه افزایش ظرفیت را بزنید.</b></p>';
+        '<p class="swal-guide" dir="rtl">ظرفیت روزانه پاسخ به درخواست های خرید شما پر شده است.</p><br/><p class="red-text swal-guide" dir="rtl"><b>برای افزایش ظرفیت، لطفا دکمه افزایش ظرفیت را بزنید.</b></p>';
       swal({
         title: "محدودیت پاسخ به درخواست ها",
         content: content,
@@ -778,8 +1013,7 @@ export default {
       this.handleBackBtn();
       swal({
         title: "ویرایش پروفایل",
-        text:
-          "ویرایش پروفایل شما با موفقیت انجام شد.پس از تایید کارشناسان پروفایل شما برای همه قابل نمایش خواهد بود.",
+        text: "ویرایش پروفایل شما با موفقیت انجام شد.پس از تایید کارشناسان پروفایل شما برای همه قابل نمایش خواهد بود.",
         className: "custom-swal-with-cancel",
         icon: "success",
         buttons: {
@@ -847,8 +1081,7 @@ export default {
 
       swal({
         title: "حذف نظر",
-        text:
-          "تعداد نظرات حذف شده توسط شما به کاربران نمایش داده خواهد شد. آیا می خواهید این نظر را حذف کنید؟",
+        text: "تعداد نظرات حذف شده توسط شما به کاربران نمایش داده خواهد شد. آیا می خواهید این نظر را حذف کنید؟",
         className: "custom-swal-with-cancel",
         icon: "warning",
         buttons: {
@@ -877,8 +1110,7 @@ export default {
       this.handleBackBtn();
       swal({
         title: "احراز هویت",
-        text:
-          "اطلاعات شما با موفقیت ارسال شد. در صورت تایید کارشناسان باسکول نشان احراز هویت به حساب کاربری شما داده می شود.",
+        text: "اطلاعات شما با موفقیت ارسال شد. در صورت تایید کارشناسان باسکول نشان احراز هویت به حساب کاربری شما داده می شود.",
         className: "custom-swal-with-cancel",
         icon: "success",
         buttons: {
@@ -896,7 +1128,7 @@ export default {
 
       let content = document.createElement("div");
       content.innerHTML =
-        '<p dir="rtl">شما به درخواست هایی طلایی دسترسی ندارید.</p><br/><p class="red-text" dir="rtl"><b>برای دسترسی به تمام درخواست های طلایی، عضویت خود را ارتقا دهید.</b></p>';
+        '<p><span class="swal-star-badge"><i class="fa fa-star"></i></span></p><br/><p class="swal-guide" dir="rtl">شما به درخواست هایی طلایی دسترسی ندارید.</p><br/><p class="red-text swal-guide" dir="rtl"><b>برای دسترسی به تمام درخواست های طلایی، عضویت خود را ارتقا دهید.</b></p>';
       swal({
         title: "درخواست های طلایی",
         content: content,
@@ -945,7 +1177,7 @@ export default {
         history.pushState(null, null, window.location);
       }
       $(window).on("popstate", function (e) {
-        $("#download-app-modal").modal("hide");
+        $(".modal").modal("hide");
       });
     },
     isUserAuthorizedToPostComment: function () {
@@ -990,11 +1222,179 @@ export default {
         return false;
       }
     },
+    rechargeWalletPayment(price) {
+      this.doPaymentLoader = true;
+      let amount = Number(this.toLatinNumbers(price));
+
+      this.registerComponentStatistics(
+        "payment",
+        "increase-wallet-capacity",
+        amount
+      );
+
+      window.location.href = "/wallet-payment/charge/" + amount;
+    },
+    toLatinNumbers(num) {
+      if (num == null) {
+        return null;
+      }
+      num = num.toString().replace(/,/g, "");
+      num = num.toString().replace(/^0+/, "");
+      num = num.toString().replace(/^\u0660+/, "");
+      num = num.toString().replace(/^\u06f0+/, "");
+
+      return num
+        .toString()
+        .replace(/[\u0660-\u0669]/g, function (c) {
+          return c.charCodeAt(0) - 0x0660;
+        })
+        .replace(/[\u06f0-\u06f9]/g, function (c) {
+          return c.charCodeAt(0) - 0x06f0;
+        });
+    },
+    numberGuideCountCookie() {
+      let showNumberCount = this.getCookie("showNumberCount");
+      if (!showNumberCount) {
+        showNumberCount = 1;
+      } else {
+        showNumberCount++;
+      }
+      this.createCookie("showNumberCount", showNumberCount, 60 * 24 * 365);
+
+      return showNumberCount;
+    },
+    isShowNumberGuideActive() {
+      let showNumberGuideActive = this.getCookie("showNumberGuideActive");
+      if (!showNumberGuideActive) {
+        this.createCookie("showNumberGuideActive", true, 24 * 60); //for one day
+        return true;
+      } else {
+        return false;
+      }
+    },
+    initShowNumberGuide() {
+      let registerNewUser = this.getCookie("registerNewUser");
+      if (this.isShowNumberGuideActive() && !registerNewUser) {
+        if (this.numberGuideCountCookie() < 5) {
+          swal({
+            title: "نمایش اطلاعات تماس",
+            text: "شماره تماس شما به خریداران نمایش داده نمی شود. اگر مایل به نمایش شماره تماس خود به خریداران هستید. راهنمای زیر را مطالعه کنید.",
+            className: "custom-swal-with-cancel",
+            icon: "info",
+            buttons: {
+              success: {
+                text: "راهنمای اطلاعات تماس",
+                value: "guide",
+              },
+              close: {
+                text: "بستن",
+                className: "bg-cancel",
+              },
+            },
+          }).then((value) => {
+            switch (value) {
+              case "guide":
+                this.$router.push({ name: "showNumberGuideSeller" });
+                break;
+            }
+          });
+        }
+      }
+    },
+    setEventBus() {
+      eventBus.$on("elevatorText", ($event) => {
+        this.elevatorText = $event;
+      });
+
+      eventBus.$on("productId", ($event) => {
+        this.productId = $event;
+      });
+
+      eventBus.$on("buyAdId", ($event) => {
+        this.buyAdId = $event;
+      });
+
+      eventBus.$on("joinGroupId", ($event) => {
+        this.joinGroupId = $event;
+      });
+      eventBus.$on("joinGroupMessage", ($event) => {
+        this.joinGroupMessage = $event;
+      });
+
+      eventBus.$on("activeContactId", ($event) => {
+        this.activeContactId = $event;
+      });
+
+      eventBus.$on("reoprtModal", ($event) => {
+        this.reportedUserId = $event;
+        $("#report-modal").modal("show");
+      });
+
+      eventBus.$on("shareModalUrl", ($event) => {
+        let shareItem = $event;
+        this.shareModalUrl = shareItem.shareModalUrl;
+        if (shareItem.shareModalText) {
+          this.shareModalText = shareItem.shareModalText;
+        }
+
+        if (shareItem.shareModalTitle) {
+          this.shareModalTitle = shareItem.shareModalTitle;
+        } else {
+          this.shareModalTitle = "";
+        }
+
+        $("#share-modal").modal("show");
+      });
+
+      eventBus.$on("reviewUserData", ($event) => {
+        this.reviewUserData = $event;
+        this.reviewUserPrfileId = $event.id;
+        $("#review-modal").modal("show");
+      });
+
+      eventBus.$on("modal", ($event) => {
+        this.openRelatedSwalModal($event);
+      });
+
+      eventBus.$on("peymentMethodData", ($event) => {
+        this.peymentMethodData = $event;
+      });
+      eventBus.$on("messageCount", (event) => {
+        this.messageCount += event;
+      });
+    },
   },
   mounted() {
-    this.activateDownloadApp();
     // eventBus.$emit("globalVerifiedBadgeContents", this.verifiedUserContent);
+    document.addEventListener("DOMContentLoaded", function (event) {
+      document.getElementById("master-loader-wrapper").style.display = "none";
+    });
+    this.activateDownloadAppButton();
+    $("#wallet-modal").on("show.bs.modal", (e) => {
+      this.handleBackKeys();
+    });
     eventBus.$emit("globalVerifiedBadgeContents", 1);
+  },
+  watch: {
+    currentUser(user) {
+      if (user.user_info) {
+        this.walletBalance = user.user_info.wallet_balance;
+
+        let date = user.profile.created_at;
+        let userCreatedAt = new Date(date);
+        let currentDate = new Date();
+        currentDate = new Date(currentDate.getTime() - 60 * 60000);
+        if (currentDate > userCreatedAt) {
+          // this.activateDownloadApp();
+        }
+      }
+    },
+    walletBalance(balance) {
+      let activePackageType = this.currentUser.user_info.active_pakage_type;
+      if (balance == 0 && Number(activePackageType) == 0) {
+        // this.initShowNumberGuide();
+      }
+    },
   },
 };
 </script>

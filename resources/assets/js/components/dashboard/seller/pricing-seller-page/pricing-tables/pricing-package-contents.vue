@@ -1,11 +1,34 @@
 <style scoped>
+.bg-gradient {
+  background: linear-gradient(90deg, #00c569 0%, #21ad93 100%);
+}
+
+.wrapper-background {
+  background: #fff;
+  border: 1px solid #e9ecef;
+  border-radius: 12px;
+  padding: 15px;
+  line-height: 1.618;
+  margin-bottom: 30px;
+  overflow: hidden;
+}
+
 .item-action .green-button {
   padding: 10px 35px;
-  margin: 0 auto 15px;
+  margin: 0 auto 30px;
   font-size: 16px;
   font-weight: bold;
   width: initial;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+  border-radius: 4px;
+}
+
+.item-action .green-button.bg-gray {
+  background-color: #556080 !important;
+}
+
+.item-action .green-button.btn-disabled {
+  margin: 0 auto 17px;
 }
 
 .item-action .green-button i {
@@ -16,51 +39,61 @@
   right: 4px;
 }
 
-.wrapper-background {
-  background: #fff;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
-  border-radius: 4px;
-  padding: 15px;
-  line-height: 1.618;
-  margin-bottom: 30px;
-  overflow: hidden;
-}
-
-.header-title {
-  margin-bottom: 9px;
-}
-
-.header-title span {
-  font-size: 20px;
-  color: #333;
-  font-weight: bold;
-}
-
 .item-wrapper {
   position: relative;
   padding: 0;
   float: left;
   width: 100%;
+  min-height: 577px;
+}
+
+.item-wrapper.pro-version {
+  border: 1px solid #21ad93;
 }
 
 .item-title {
-  font-size: 16px;
-  padding: 3px 0 4px;
-  font-weight: bold;
+  margin-top: 10px;
+}
+
+.item-title > h2 {
+  font-size: 25px;
+  color: #556080;
+}
+
+.item-wrapper.pro-version .item-title > h2 {
+  color: #21ad93;
 }
 
 .item-price {
-  font-size: 16px;
-  font-weight: bold;
-  color: #00c569;
+  font-size: 18px;
+  font-weight: 500;
+  color: #808c9b;
   text-align: center;
   margin-bottom: 10px;
   margin-top: 5px;
 }
 
+.item-price span.price {
+  color: #1da1f2;
+  font-size: 24px;
+}
+
+.small-unit {
+  font-size: 16px;
+  font-weight: normal;
+}
+
 .detail-wrapper {
   float: right;
   width: 100%;
+  text-align: center;
+  margin: 15px auto 12px;
+}
+
+.detail-wrapper > p {
+  font-size: 20px;
+  font-weight: 500;
+  color: #1da1f2;
 }
 .item-price .item-currency {
   font-size: 13px;
@@ -80,6 +113,7 @@
   position: relative;
   float: left;
   width: 100%;
+  margin-bottom: 20px;
 }
 
 .item-action {
@@ -114,12 +148,15 @@
 
 .item-content-title {
   float: right;
-
-  font-size: 14px;
-
+  font-size: 16px;
   color: #777;
+  font-weight: 500;
+  padding-top: 5px;
+  direction: rtl;
+}
 
-  font-weight: bold;
+.item-content-title.disable-text {
+  color: #bebebe;
 }
 
 .item-content-amount {
@@ -129,19 +166,41 @@
   text-align: center;
   font-size: 20px;
 }
+
 .item-content-amount > i {
   font-size: 20px;
 }
+
+.item-content-list {
+  float: right;
+  width: 100%;
+}
+
 .item-content-list li {
   float: left;
   width: 100%;
-  padding: 12px 0;
+  padding: 12px 15px;
   position: relative;
-  border-bottom: 1px solid #bdc4cc;
+}
+.item-content-list li:nth-last-of-type(2n + 1) {
+  background: #fafafa;
 }
 
-.item-content-list li:last-of-type {
-  border-bottom: none;
+.item-content-list li.free-item {
+  direction: rtl;
+  text-align: center;
+  padding: 4px 0 3px;
+  background-color: transparent;
+}
+
+.pro-version .item-content-list li.free-item {
+  background: #eefef6;
+}
+
+.item-content-list li.free-item > p {
+  font-size: 16px;
+  font-weight: 500;
+  color: #808c9b;
 }
 
 .wrapper-icon {
@@ -155,37 +214,18 @@
 .item-header {
   overflow: hidden;
   direction: rtl;
-  background: #556080;
-  color: #fff;
-}
-
-.item-header.pro-version {
-  overflow: hidden;
-  direction: rtl;
-  background: linear-gradient(90deg, #00c569 0%, #21ad93 100%);
-
-  color: #fff;
 }
 
 .item-title > span {
   font-size: 13px;
 }
 
-.wrapper-background {
-  background: #fff;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
-  border-radius: 4px;
-  padding: 15px;
-  line-height: 1.618;
-  margin-bottom: 30px;
-  overflow: hidden;
-}
-
 .header-wrapper {
   text-align: center;
-  padding: 15px 115px;
-  float: left;
+  padding: 15px;
   width: 100%;
+  max-width: 680px;
+  margin: 0 auto;
 }
 
 .header-title {
@@ -198,25 +238,19 @@
   font-weight: bold;
 }
 
-.item-wrapper {
-  position: relative;
-  padding: 0;
-  float: left;
-}
-
 .special-badge {
   position: absolute;
-  left: -38px;
+  left: -52px;
   background: #e41c38;
   color: #fff;
-  font-size: 17px;
+  font-size: 21px;
   font-weight: bold;
-  width: 120px;
+  width: 145px;
   text-align: center;
-  padding: 3px;
-  transform: rotate(-45deg);
-  top: 8px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
+  padding: 16px 3px 7px;
+  -webkit-transform: rotate(-41deg);
+  transform: rotate(-41deg);
+  top: -7px;
 }
 
 .offer-price {
@@ -240,6 +274,112 @@
   text-decoration: line-through;
   color: #777;
 }
+
+.item-content-wrapper {
+  direction: rtl;
+  max-width: 680px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 10px 0;
+  border-bottom: 1px solid #f2f2f2;
+  overflow: hidden;
+}
+
+.item-content-wrapper > div {
+  float: right;
+}
+
+.main-text-wrapper {
+  color: #38485f;
+  font-size: 19px;
+  font-weight: bold;
+  direction: rtl;
+  margin: 5px auto 15px;
+  float: right;
+  width: 100%;
+}
+
+.icon-wrapper {
+  float: right;
+  font-size: 45px;
+  height: 45px;
+  width: 45px;
+  line-height: 1;
+}
+
+.content-wrapper {
+  float: right;
+  font-size: 16px;
+  color: #707070;
+  padding-top: 11px;
+  padding-right: 15px;
+  width: calc(100% - 45px);
+}
+
+.content-wrapper > strong {
+  color: #313a43;
+}
+
+.important-text {
+  font-weight: bold;
+}
+
+.recomended-item {
+  text-align: center;
+  font-size: 17px;
+  font-weight: 500;
+  background: #21ad93;
+  color: #fff;
+  padding: 2px;
+}
+
+.main-discount-wrapper {
+  float: right;
+  width: 100%;
+  text-align: center;
+  direction: rtl;
+  margin-bottom: 18px;
+}
+
+.discount-item span {
+  display: inline-block;
+  padding: 8px 15px 5px;
+  background: #e41c38;
+  color: #fff;
+  font-size: 17px;
+  border-radius: 4px;
+  line-height: 1;
+}
+
+.discount-title {
+  font-weight: bold;
+  font-size: 17px;
+  color: #555;
+  margin-top: 10px;
+}
+
+.discount-main-price {
+  font-weight: bold;
+  font-size: 30px;
+  color: #1da1f2;
+  margin-top: 10px;
+}
+
+.discount-price {
+  font-size: 20px;
+  font-weight: 500;
+  color: #808c9b;
+  text-decoration: line-through;
+  margin-top: -13px;
+}
+
+.discount-time {
+  color: #808c9b;
+  font-size: 16px;
+  font-weight: 500;
+  margin-top: 8px;
+}
+
 @media screen and (max-width: 991px) {
   .list-title,
   .needs,
@@ -249,10 +389,19 @@
 }
 
 @media screen and (max-width: 767px) {
+  .item-wrapper {
+    min-height: initial;
+  }
   .header-icon-wrapper {
     float: right;
     width: 50px;
     text-align: center;
+  }
+  .item-content-wrapper {
+    padding: 15px 0;
+  }
+  .main-text-wrapper {
+    margin: 15px auto;
   }
 
   .header-icon-wrapper i {
@@ -284,6 +433,13 @@
     font-size: 13px;
   }
 
+  .content-wrapper {
+    font-size: 15px;
+
+    padding-top: 0;
+    padding-right: 5px;
+  }
+
   .header-title {
     margin-bottom: 0;
   }
@@ -295,10 +451,6 @@
   .item-date span {
     padding: 0 0 0 6px;
     display: inline-block;
-  }
-
-  .item-content-list li {
-    padding: 9px 0;
   }
 
   .title {
@@ -321,43 +473,51 @@
     right: 0;
     top: 45px;
   }
-  .mobile-padding-0 {
-    padding: 0 !important;
+  .item-content-list li {
+    padding: 12px 7px !important;
+  }
+  .mobile-padding-5 {
+    padding: 0 5px !important;
+  }
+  .mobile-padding-7 {
+    padding: 15px 7px !important;
   }
 }
 </style>
 <template>
   <div class="col-xs-12">
-    <div v-if="doPaymentLoader" class="main-loader-content">
-      <div class="pricing-loader-icon">
-        <div class="lds-ring">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-        <p class="pricing-loader-text text-rtl">
-          در حال انتقال به درگاه پرداخت . . .
-        </p>
-      </div>
-    </div>
-
     <div class="row">
       <div
         :class="{ 'col-sm-offset-3': justPro == 'true' }"
-        class="pull-left mobile-padding-0 col-xs-12 col-sm-6 col-lg-6"
+        class="pull-left mobile-padding-5 col-xs-12 col-sm-6 col-lg-6"
       >
-        <div class="item-wrapper wrapper-background">
-          <div class="item-header pro-version text-center">
+        <div class="item-wrapper pro-version wrapper-background">
+          <div class="recomended-item">پیشنهادی به شما</div>
+          <div class="item-header text-center">
             <span class="special-badge">ویژه</span>
             <div class="item-title">
-              عضویت ویژه
-              <span>/ سالانه</span>
+              <h2>عضویت ویژه</h2>
+              <p class="item-price">
+                سالانه
+                <span
+                  class="price"
+                  v-if="prices['type-3']"
+                  v-text="convertToToman(prices['type-3'])"
+                ></span>
+                <span v-else class="price">---,---</span>
+                <span class="small-unit"> تومان</span>
+              </p>
             </div>
           </div>
 
           <div class="item-content">
-            <ul class="item-content-list col-xs-12">
+            <ul class="item-content-list">
+              <!-- <li class="free-item">
+                <p>
+                  <i class="fa fa-plus-circle"></i>
+                  یک ماه رایگان
+                </p>
+              </li> -->
               <li v-for="(item, index) in priceItemPro" :key="index">
                 <a
                   data-toggle="collapse"
@@ -366,9 +526,24 @@
                   :title="item.helpDescription"
                 ></a>
 
-                <p class="item-content-title" v-text="item.title"></p>
+                <p class="item-content-title" v-html="item.title"></p>
 
-                <p class="item-content-amount" v-html="item.contentUnit"></p>
+                <p class="item-content-amount">
+                  <i
+                    v-if="!item.contentUnit"
+                    class="text-green fa fa-times-circle"
+                    style="color: #e41c38"
+                  ></i>
+
+                  <i
+                    v-else-if="
+                      item.contentUnit == true && item.contentUnit != ''
+                    "
+                    class="text-green fa fa-check-circle"
+                    style="color: #00c569"
+                  ></i>
+                  <span v-else v-text="item.contentUnit"></span>
+                </p>
               </li>
             </ul>
           </div>
@@ -389,15 +564,55 @@
             </div>
           </div>-->
 
-          <div class="detail-wrapper">
-            <!-- remove pricing offer contents -->
-            <!-- <br class="hidden-xs" /> -->
-            <div class="item-price text-rtl">
-              <span class="item-price-content">689,000</span>
-              <span class="item-currency">تومان</span>
-              <span class="item-date">/ سالانه</span>
+          <div
+            class="main-discount-wrapper"
+            v-if="
+              prices['type-3-discount'] && statusData.active_pakage_type < 3
+            "
+          >
+            <div class="discount-item">
+              <span>30% تخفیف</span>
+            </div>
+            <div class="discount-title">برای شما عضو جدید باسکول</div>
+            <div class="discount-main-price">
+              {{ convertToToman(prices["type-3-discount"]) }}
+              <span class="small-unit">تومان</span>
+            </div>
+            <div class="discount-price">
+              {{ convertToToman(prices["type-3"]) }}
+              <span class="small-unit">تومان</span>
+            </div>
+            <div class="discount-time" v-if="prices['discount-deadline']">
+              <i class="fa fa-clock red-text"></i>
+              <span
+                class="red-text"
+                v-if="prices['discount-deadline'].days"
+                v-text="prices['discount-deadline'].days + ' روز'"
+              ></span>
+              <span
+                class="red-text"
+                v-if="
+                  prices['discount-deadline'].days &&
+                  prices['discount-deadline'].hours
+                "
+              >
+                و
+              </span>
+              <span
+                class="red-text"
+                v-if="prices['discount-deadline'].hours"
+                v-text="prices['discount-deadline'].hours + ' ساعت'"
+              >
+              </span>
+              تا پایان تخفیف
             </div>
           </div>
+          <!-- <div class="detail-wrapper">
+            <p>امکان خرید به صورت سالانه</p>
+            <p>
+              <br />
+            </p>
+          </div> -->
 
           <div class="item-action">
             <p v-if="statusData.active_pakage_type == 3" class="text-green">
@@ -409,67 +624,156 @@
               class="green-button btn-disabled text-rtl"
               disabled
             >
-              پرداخت
-              <i class="fa fa-angle-left"></i>
+              ارتقا عضویت
             </button>
 
             <a
               v-else-if="offerTime"
               href
-              @click.prevent="doPayment(4)"
-              class="green-button text-rtl"
+              @click.prevent="openPaymentModal(4)"
+              class="green-button bg-gradient text-rtl"
             >
-              پرداخت
-              <i class="fa fa-angle-left"></i>
+              ارتقا عضویت
             </a>
 
             <a
               v-else
               href
-              @click.prevent="doPayment(3)"
-              class="green-button text-rtl"
+              @click.prevent="openPaymentModal(3)"
+              class="green-button bg-gradient text-rtl"
             >
-              پرداخت
-              <i class="fa fa-angle-left"></i>
+              ارتقا عضویت
             </a>
           </div>
         </div>
       </div>
       <div
         v-if="justPro == 'false'"
-        class="pull-right mobile-padding-0 col-xs-12 col-sm-6 col-lg-6"
+        class="pull-right mobile-padding-5 col-xs-12 col-sm-6 col-lg-6"
       >
         <div class="item-wrapper wrapper-background">
+          <div class="recomended-item empty">پیشنهادی به شما</div>
+
           <div class="item-header text-center">
             <div class="item-title">
-              عضویت پایه
-              <span>/ سه ماهه</span>
+              <h2>عضویت پایه</h2>
+              <p class="item-price">
+                سه ماهه
+                <span
+                  class="price"
+                  v-if="prices['type-3']"
+                  v-text="convertToToman(prices['type-1'])"
+                ></span>
+                <span v-else class="price">---,---</span>
+                <span class="small-unit"> تومان</span>
+              </p>
             </div>
           </div>
 
           <div class="item-content">
-            <ul class="item-content-list col-xs-12">
+            <ul class="item-content-list">
+              <!-- <li class="free-item hidden-xs">
+                <p>
+                  <br />
+                </p>
+              </li> -->
+              <li class="empty hidden-xs">
+                <a data-toggle="collapse" class="item-help" title=""></a>
+
+                <p class="item-content-title">عنوان</p>
+
+                <p class="item-content-amount">
+                  <i
+                    class="text-green fa fa-times-circle"
+                    style="color: #e41c38"
+                  ></i>
+                </p>
+              </li>
               <li v-for="(item, index) in priceItemBasic" :key="index">
                 <a
                   data-toggle="collapse"
-                  :href="'#content-item-' + index"
+                  :href="'#content-item-pro-' + index"
                   class="item-help"
                   :title="item.helpDescription"
                 ></a>
 
-                <p class="item-content-title" v-text="item.title"></p>
+                <p
+                  class="item-content-title"
+                  :class="{ 'disable-text': !item.contentUnit }"
+                  v-html="item.title"
+                ></p>
 
-                <p class="item-content-amount" v-html="item.contentUnit"></p>
+                <p class="item-content-amount">
+                  <i
+                    v-if="!item.contentUnit"
+                    class="text-green fa fa-times-circle"
+                    style="color: #e41c38"
+                  ></i>
+
+                  <i
+                    v-else-if="
+                      item.contentUnit == true && item.contentUnit != ''
+                    "
+                    class="text-green fa fa-check-circle"
+                    style="color: #00c569"
+                  ></i>
+                  <span v-else v-text="item.contentUnit"></span>
+                </p>
               </li>
             </ul>
           </div>
-          <div class="detail-wrapper">
-            <div class="item-price text-rtl">
-              <span class="item-price-content">249,000</span>
-              <span class="item-currency">تومان</span>
-              <span class="item-date">/ سه ماهه</span>
+
+          <div
+            class="main-discount-wrapper"
+            v-if="
+              prices['type-1-discount'] && statusData.active_pakage_type < 1
+            "
+          >
+            <div class="discount-item">
+              <span>30% تخفیف</span>
+            </div>
+            <div class="discount-title">برای شما عضو جدید باسکول</div>
+            <div class="discount-main-price">
+              {{ convertToToman(prices["type-1-discount"]) }}
+              <span class="small-unit">تومان</span>
+            </div>
+            <div class="discount-price">
+              {{ convertToToman(prices["type-1"]) }}
+              <span class="small-unit">تومان</span>
+            </div>
+            <div class="discount-time" v-if="prices['discount-deadline']">
+              <i class="fa fa-clock red-text"></i>
+              <span
+                class="red-text"
+                v-if="prices['discount-deadline'].days"
+                v-text="prices['discount-deadline'].days + ' روز'"
+              ></span>
+              <span
+                class="red-text"
+                v-if="
+                  prices['discount-deadline'].days &&
+                  prices['discount-deadline'].hours
+                "
+              >
+                و
+              </span>
+              <span
+                class="red-text"
+                v-if="prices['discount-deadline'].hours"
+                v-text="prices['discount-deadline'].hours + ' ساعت'"
+              >
+              </span>
+              تا پایان تخفیف
             </div>
           </div>
+
+          <!-- <div class="detail-wrapper">
+            <p>امکان خرید به صورت ۳ ماهه</p>
+            <p>
+              <br />
+            </p>
+          </div> -->
+
           <div class="item-action">
             <p v-if="statusData.active_pakage_type == 1" class="green-text">
               در حال استفاده
@@ -480,40 +784,17 @@
               class="green-button btn-disabled text-rtl"
               disabled
             >
-              پرداخت
-              <i class="fa fa-angle-left"></i>
+              ارتقا عضویت
             </button>
 
             <a
               v-else
               href
-              @click.prevent="doPayment(1)"
-              class="green-button text-rtl"
+              @click.prevent="openPaymentModal(1)"
+              class="green-button bg-gray text-rtl"
             >
-              پرداخت
-              <i class="fa fa-angle-left"></i>
+              ارتقا عضویت
             </a>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-xs-12 text-center mobile-padding-0">
-        <div class="wrapper-background">
-          <div class="header-wrapper">
-            <div class="header-title">
-              <span>بسته ی ویژه فروش چیست؟</span>
-            </div>
-
-            <p class="header-description">
-              <strong>
-                این بسته شامل مجموعه امکاناتی مانند اعمال نردبان رایگان، مشاهده
-                بدون تاخیر درخواست های خرید، دریافت پیامک درخواست های خرید مرتبط
-                و ... است که
-                <span class="green-text"
-                  >باعث فروش محصولات شما در سریع ترین زمان ممکن می شود</span
-                >
-              </strong>
-            </p>
           </div>
         </div>
       </div>
@@ -523,65 +804,106 @@
 
 
 <script>
+import { eventBus } from "../../../../../router/router";
 export default {
   props: ["justPro", "offerTime"],
   data: function () {
     return {
+      prices: "",
       statusData: "",
-      doPaymentLoader: false,
-
       priceItemBasic: [
         {
-          title: "تعداد محصولات",
+          title: "تعداد محصولات قابل تبلیغ",
           contentUnit: "3",
           helpDescription:
             " تعداد آگهی های همزمان شما که در لیست محصولات نمایش داده می شود. ",
         },
         {
-          title: "ظرفیت درخواستهای خرید روزانه",
+          title: "تعداد روزانه خریداران در دسترس",
           contentUnit: "10",
           helpDescription:
             "بر روی اولین محصول ثبت شده ویژگی نردبان به صورت خودکار اعمال خواهد شد",
         },
         {
-          title: "بسته ی ویژه فروش",
-          contentUnit:
-            '<i class="text-green fa fa-times-circle" style="color:#e41c38"></i>',
-          helpDescription:
-            "محصولات ثبت شده شما، در قسمت محصولات ویژه در پنل خریداران به آنها نمایش داده می شود",
+          title: "امکان ارتباط با خریداران طلایی",
+          contentUnit: true,
+          helpDescription: "",
         },
         {
-          title: "دسترسی به درخواست های خرید طلایی",
-          contentUnit:
-            '<i class="text-green fa fa-check-circle" style="color:#00c569"></i>',
+          title: "دسترسی به اطلاعات تماس خریداران",
+          contentUnit: true,
           helpDescription: "",
+        },
+        {
+          title: "استخدام منشی آنلاین (دلسا)",
+          contentUnit: true,
+          helpDescription: "",
+        },
+        {
+          title: "نمایش اطلاعات تماس شما به خریداران",
+          contentUnit: true,
+          helpDescription: "",
+        },
+        {
+          title: "تبلیغ محصولات در کانال باسکول",
+          contentUnit: false,
+          helpDescription: "",
+        },
+        {
+          title: "بسته ی ویژه فروش",
+          contentUnit: false,
+          helpDescription:
+            "محصولات ثبت شده شما، در قسمت محصولات ویژه در پنل خریداران به آنها نمایش داده می شود",
         },
       ],
       priceItemPro: [
         {
-          title: "تعداد محصولات",
+          title: "تعداد محصولات قابل تبلیغ",
           contentUnit: "7",
           helpDescription:
             " تعداد آگهی های همزمان شما که در لیست محصولات نمایش داده می شود. ",
         },
         {
-          title: "ظرفیت درخواستهای خرید روزانه",
+          title: "تعداد روزانه خریداران در دسترس",
           contentUnit: "30",
           helpDescription:
             "بر روی اولین محصول ثبت شده ویژگی نردبان به صورت خودکار اعمال خواهد شد",
         },
         {
-          title: "بسته ی ویژه فروش",
-          contentUnit:
-            '<i class="text-green fa fa-check-circle" style="color:#00c569"></i>',
-          helpDescription:
-            "محصولات ثبت شده شما، در قسمت محصولات ویژه در پنل خریداران به آنها نمایش داده می شود",
+          title: "امکان ارتباط با خریداران طلایی",
+          contentUnit: true,
+          helpDescription: "",
         },
         {
-          title: "دسترسی به درخواست های خرید طلایی",
-          contentUnit:
-            '<i class="text-green fa fa-check-circle" style="color:#00c569"></i>',
+          title: "دسترسی به اطلاعات تماس خریداران",
+          contentUnit: true,
           helpDescription: "",
+        },
+        {
+          title: "نمایش اطلاعات تماس شما به خریداران",
+          contentUnit: true,
+          helpDescription: "",
+        },
+        {
+          title: "استخدام منشی آنلاین (دلسا)",
+          contentUnit: true,
+          helpDescription: "",
+        },
+        {
+          title: "تبلیغ محصولات در کانال باسکول",
+          contentUnit: true,
+          helpDescription: "",
+        },
+        {
+          title: "5 برابر ارتباطات بیشتر با خریداران",
+          contentUnit: true,
+          helpDescription: "",
+        },
+        {
+          title: "بسته ی ویژه فروش <span class='red-text'>*</span>",
+          contentUnit: true,
+          helpDescription:
+            "محصولات ثبت شده شما، در قسمت محصولات ویژه در پنل خریداران به آنها نمایش داده می شود",
         },
       ],
     };
@@ -596,19 +918,74 @@ export default {
             self.statusData = response.data;
           }
         });
+      this.getPrices();
+    },
+    getPrices() {
+      axios.post("/payment/get-packages-price").then((response) => {
+        this.prices = response.data.prices;
+      });
+    },
+    convertToToman(price) {
+      price = price.toString().slice(0, -1);
+      let priceWithComma = this.getNumberWithCommas(price);
+      return priceWithComma;
+    },
+    getNumberWithCommas: function (number) {
+      if (number || typeof number === "number")
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      else return "";
+    },
+    getTotalPriceForPay(packageType) {
+      let price = "";
+      switch (packageType) {
+        case 1:
+          if (this.prices["type-1-discount"]) {
+            price = this.prices["type-1-discount"] / 10;
+          } else {
+            price = this.prices["type-1"] / 10;
+          }
+          break;
+        case 3:
+          if (this.prices["type-3-discount"]) {
+            price = this.prices["type-3-discount"] / 10;
+          } else {
+            price = this.prices["type-3"] / 10;
+          }
+          break;
+
+        default:
+          if (this.prices["type-3-discount"]) {
+            price = this.prices["type-3-discount"] / 10;
+          } else {
+            price = this.prices["type-3"] / 10;
+          }
+          break;
+      }
+
+      return price;
+    },
+    openPaymentModal(packageType) {
+      $(".modal").modal("hide");
+      let totalPrice = this.getTotalPriceForPay(packageType);
+      let userId = getUserId();
+      let paymentData = {
+        paymentName: "pricingData",
+        packageType: packageType,
+        userId: userId,
+        totalPrice: totalPrice,
+      };
+      eventBus.$emit("peymentMethodData", paymentData);
+      $("#payment-type-modal").modal("show");
     },
     doPayment: function (packageType) {
-      this.doPaymentLoader = true;
-
-      let userId = getUserId();
-
-      this.registerComponentStatistics(
-        "payment",
-        "type-" + packageType,
-        "userId: " + userId
-      );
-
-      window.location.href = "/payment/" + packageType;
+      // *****  payment width factor  *****
+      // let paymentData = {
+      //   paymentItems: "",
+      //   selectedPackage: "",
+      // };
+      // paymentData.paymentItems = this.calculateData(packageType);
+      // paymentData.selectedPackage = packageType;
+      // eventBus.$emit("paymentData", paymentData);
     },
     registerComponentStatistics: function (
       categoryName,
@@ -619,6 +996,69 @@ export default {
         event_category: categoryName,
         event_label: labelName,
       });
+    },
+    calculateData(payment) {
+      let item = "";
+      switch (payment) {
+        case 1:
+          return (item = [
+            {
+              title: "تعداد ماه های فعال",
+              value: "3",
+              unit: "ماه",
+            },
+            {
+              title: "تعداد ماه های رایگان",
+              value: "0",
+              unit: "ماه",
+            },
+            {
+              title: "تعداد ماه های قابل پرداخت",
+              value: "3",
+              unit: "ماه",
+            },
+            {
+              title: "هزینه هر ماه",
+              value: "99,000",
+              unit: "تومان",
+            },
+            {
+              title: "مجموع",
+              value: "297,000",
+              unit: "تومان",
+            },
+          ]);
+          break;
+        case 3:
+          return (item = [
+            {
+              title: "تعداد ماه های فعال",
+              value: "12",
+              unit: "ماه",
+            },
+            {
+              title: "تعداد ماه های رایگان",
+              value: "1",
+              unit: "ماه",
+            },
+            {
+              title: "تعداد ماه های قابل پرداخت",
+              value: "11",
+              unit: "ماه",
+            },
+            {
+              title: "هزینه هر ماه",
+              value: "89,000",
+              unit: "تومان",
+            },
+            {
+              title: "مجموع",
+              value: "979,000",
+              unit: "تومان",
+            },
+          ]);
+          break;
+      }
     },
   },
   mounted() {

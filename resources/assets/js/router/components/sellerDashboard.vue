@@ -1,10 +1,25 @@
+<style >
+.profile-carosel .owl-nav {
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  width: 100%;
+  margin-top: -10px;
+  top: calc(50% - 10px);
+  direction: ltr;
+  padding: 0 15px;
+  height: 0;
+}
+</style>
 <style scoped>
 #main {
   margin-right: 250px;
   margin-top: 59px;
   position: relative;
 }
-
+#main.has-verification-alert {
+  margin-top: 99px;
+}
 #main.little-main {
   margin-right: 80px;
 }
@@ -14,7 +29,7 @@
   width: 60px;
   height: 60px;
   right: 25px;
-  bottom: 25px;
+  bottom: 75px;
   font-weight: bold;
   font-size: 10px;
   background: #e51c38;
@@ -41,19 +56,102 @@
   margin-top: 84px !important;
 }
 
-#pricing-modal {
+#pricing-modal,
+#factor-pricing-modal {
   margin: 0;
   width: 100%;
   height: 100%;
   padding: 0 !important ;
 }
-#pricing-modal .modal-content {
+
+#pricing-modal .modal-body,
+#factor-pricing-modal .modal-body {
+  padding: 20px 15px 0;
+}
+
+#pricing-modal .modal-content,
+#factor-pricing-modal .modal-content {
   min-height: 100%;
   border-radius: 0;
   border: none;
   float: right;
   width: 100%;
   background: #f6f6f6;
+}
+
+#factor-pricing-modal .modal-content {
+  background: #fff;
+}
+
+#factor-pricing-modal .modal-body {
+  text-align: center;
+}
+
+#factor-pricing-modal p.factor-title {
+  font-size: 22px;
+  margin-top: 10px;
+  font-weight: bold;
+  color: #313a43;
+  text-align: right;
+}
+
+#factor-pricing-modal ul {
+  text-align: right;
+  margin-top: 20px;
+}
+
+#factor-pricing-modal ul li {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  direction: rtl;
+  padding: 20px 0;
+  border-top: 1px solid #f2f2f2;
+}
+
+#factor-pricing-modal ul li .item-title {
+  font-size: 18px;
+  font-weight: 500;
+  color: #556080;
+}
+
+#factor-pricing-modal ul li .item-value {
+  font-size: 18px;
+  font-weight: bold;
+  color: #666;
+}
+
+#factor-pricing-modal ul li.checkout-item .item-title {
+  color: #00c569;
+}
+
+#factor-pricing-modal ul li.checkout-item .item-value {
+  color: #00c569;
+}
+
+#factor-pricing-modal ul li .item-value span {
+  color: #666;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+#factor-pricing-modal ul li.checkout-item {
+  border-top: 1px solid #bebebe;
+}
+
+#factor-pricing-modal ul li:first-of-type {
+  border-top: none;
+}
+
+#factor-pricing-modal button.pay {
+  background: linear-gradient(-45deg, #00c569, #23d5ab, #21ad93, #23a6d5);
+  background-size: 400% 400%;
+  animation: gradient 7s ease infinite;
+  font-size: 22px;
+  padding: 13px;
+  width: 100%;
+  max-width: 250px;
+  border-radius: 8px;
 }
 
 .modal-header {
@@ -95,10 +193,13 @@
     margin-right: 0 !important;
   }
   .modal-body {
-    padding-top: 40px;
+    padding: 20px 7px;
   }
   #main.is-required-fix-alert {
     margin-top: 89px !important;
+  }
+  #main.has-verification-alert {
+    margin-top: 81px;
   }
 }
 
@@ -107,10 +208,48 @@
     margin-top: 84px !important;
   }
 }
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes shake {
+  0% {
+    transform: translate3d(0, -1px, 0);
+  }
+
+  50% {
+    transform: translate3d(0, -5px, 0);
+  }
+  100% {
+    transform: translate3d(0, -1px, 0);
+  }
+}
 </style>
 
 <template>
   <div>
+    <div v-if="doPaymentLoader" class="main-loader-content">
+      <div class="pricing-loader-icon">
+        <div class="lds-ring">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <p class="pricing-loader-text text-rtl">
+          در حال انتقال به درگاه پرداخت . . .
+        </p>
+      </div>
+    </div>
     <!--  #regex pricing modal  -->
 
     <!--modal-->
@@ -133,7 +272,12 @@
             </div>
 
             <div class="modal-body col-xs-12 col-lg-8 col-lg-offset-2">
-              <pricing-contents justPro="false" :offer-time="this.offerTime" />
+              <div class="row">
+                <pricing-contents
+                  justPro="false"
+                  :offer-time="this.offerTime"
+                />
+              </div>
             </div>
           </div>
           <!-- /.modal-content -->
@@ -142,10 +286,53 @@
       </div>
     </div>
 
+    <!--modal-->
+    <div class="container">
+      <div
+        id="factor-pricing-modal"
+        class="factor-pricing-modal modal fade"
+        tabindex="-1"
+        role="dialog"
+      >
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-body col-xs-12 col-lg-4 col-lg-offset-4">
+              <p class="factor-title">جزئيات پرداخت</p>
+              <ul>
+                <li
+                  v-for="(item, index) in paymentData.paymentItems"
+                  :key="index"
+                  :class="{
+                    'checkout-item':
+                      index == paymentData.paymentItems.length - 1,
+                  }"
+                >
+                  <p class="item-title" v-text="item.title"></p>
+                  <p class="item-value" v-if="item.value != '0'">
+                    {{ item.value }}
+                    <span v-text="item.unit"> </span>
+                  </p>
+                  <p class="item-value" v-else>ندارد</p>
+                </li>
+              </ul>
+
+              <button class="green-button pay" @click.prevent="doPayment">
+                پرداخت
+              </button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+    </div>
     <!-- end regex pricing modal -->
+    <promotion-modal />
+    <DelsaPromotionModal />
 
     <header-dash-seller
       :storage="storagePath"
+      :assets="assets"
       :logout="'/logout'"
       :user-id="userId"
       :messageCount="messageCount"
@@ -153,9 +340,17 @@
       :offer-time="this.offerTime"
     ></header-dash-seller>
 
-    <div id="main" :class="{ 'is-required-fix-alert': isRequiredFixAlert }">
+    <div
+      id="main"
+      class="h-100"
+      :class="{
+        'is-required-fix-alert': isRequiredFixAlert,
+        'has-verification-alert': verificationAlert,
+      }"
+    >
       <router-view
         :str="storagePath"
+        :assets="assets"
         :user-type="currentUser.user_info.is_seller"
         :current-user="currentUser"
         :offer-time="this.offerTime"
@@ -168,11 +363,11 @@
     >
       <router-link
         tag="button"
-        :to="{ name: 'buyAdRequestsSeller' }"
+        :to="{ name: 'messagesRequestSeller' }"
         class="fixed-action"
       >
         <i class="fa fa-list-alt"></i>
-        <span>درخواست ها</span>
+        <span> خریداران </span>
       </router-link>
     </div>
   </div>
@@ -182,12 +377,16 @@
 <script>
 import HeaderDashSeller from "../../components/dashboard/seller/header/header";
 import pricingContents from "../../components/dashboard/seller/pricing-seller-page/pricing-tables/pricing-package-contents";
+import PromotionModal from "../../components/layouts/main/promotion-modal";
+import DelsaPromotionModal from "../../components/layouts/main/delsa-promotion-modal.vue";
 import { eventBus } from "../router.js";
 
 export default {
   components: {
     "header-dash-seller": HeaderDashSeller,
     "pricing-contents": pricingContents,
+    PromotionModal,
+    DelsaPromotionModal,
   },
   props: [
     "userId",
@@ -200,9 +399,15 @@ export default {
   data: function () {
     return {
       linkHideStates: [
-        "buyAd-requests",
         "messenger/contacts",
         "messenger/buy-ads",
+        "register-product/success",
+        // "register-product",
+        "pricing",
+        "product-pricing",
+        "buyad-pricing",
+        "invited-users",
+        "referral",
       ],
       buttonIsActive: true,
       currentUser: {
@@ -223,11 +428,19 @@ export default {
       offerTime: "",
       active_pakage_type: 3,
       is_pricing_active: false,
+      paymentData: "",
+      doPaymentLoader: false,
+      verificationAlert: false,
+      buyAdsGolden: [],
     };
   },
   methods: {
-    init: function () {
+    init() {
       this.checkButtonIsHide();
+
+      $("#factor-pricing-modal").on("show.bs.modal", (e) => {
+        this.handleBackKeys();
+      });
 
       $("#pricing-modal").on("show.bs.modal", (e) => {
         this.handleBackKeys();
@@ -355,6 +568,7 @@ export default {
         history.pushState(null, null, window.location);
       }
       $(window).on("popstate", function (e) {
+        $("#factor-pricing-modal").modal("hide");
         $("#pricing-modal").modal("hide");
       });
     },
@@ -368,8 +582,89 @@ export default {
       } else {
       }
     },
+    doPayment: function () {
+      this.doPaymentLoader = true;
+      let userId = getUserId();
+
+      this.registerComponentStatistics(
+        "payment",
+        "type-" + this.paymentData.selectedPackage,
+        "userId: " + userId
+      );
+      window.location.href = "/payment/" + this.paymentData.selectedPackage;
+    },
+    registerComponentStatistics: function (
+      categoryName,
+      actionName,
+      labelName
+    ) {
+      gtag("event", actionName, {
+        event_category: categoryName,
+        event_label: labelName,
+      });
+    },
+    promotionModal() {
+      $("#promotion-modal").on("hidden.bs.modal", (e) => {
+        this.createCookie("closePromotionModal", true, 60 * 24);
+      });
+      $("#promotion-modal").on("show.bs.modal", (e) => {
+        this.handleBackKeys();
+      });
+      if (
+        !this.getCookie("closePromotionModal") &&
+        !this.getCookie("registerNewUser") &&
+        this.currentUser.user_info.active_pakage_type == 0
+      ) {
+        if (this.buyAdsGolden.length == 0) {
+          this.checkGoldenBuyAd();
+        } else {
+          setTimeout(() => {
+            $("#promotion-modal").modal("show");
+          }, 5000);
+        }
+      }
+    },
+    checkGoldenBuyAd() {
+      axios.post("/get_my_buyAd_suggestions").then((response) => {
+        this.buyAdsGolden = response.data.golden_buyAds;
+        setTimeout(() => {
+          $("#promotion-modal").modal("show");
+        }, 4000);
+      });
+    },
+    routePromotionModal() {
+      $("#promotion-modal").modal("hide");
+      this.$router.push({ name: "dashboardPricingTableSeller" });
+    },
+    handleBackKeys: function () {
+      if (window.history.state) {
+        history.pushState(null, null, window.location);
+      }
+      $(window).on("popstate", function (e) {
+        if (swal.getState().isOpen) {
+          swal.close();
+        } else {
+          $(".modal").modal("hide");
+        }
+      });
+    },
+    openGoldenChatRestrictionModal() {
+      eventBus.$emit("modal", "goldenBuyAdReplyLimit");
+
+      this.registerComponentStatistics(
+        "suggestedBuyAdReply",
+        "openChat",
+        "permission denied"
+      );
+    },
   },
   watch: {
+    currentUser(user) {
+      this.$parent.currentUser = user;
+      if (user.user_info.id) {
+        this.promotionModal();
+      }
+    },
     $route() {
       this.checkButtonIsHide();
       this.checkPricingModal();
@@ -389,6 +684,11 @@ export default {
 
     eventBus.$on("buyAdbuttonActive", (event) => {
       this.buttonActiveInSteps = event;
+    });
+
+    eventBus.$on("paymentData", (event) => {
+      this.paymentData = event;
+      $("#factor-pricing-modal").modal("show");
     });
   },
   created: function () {

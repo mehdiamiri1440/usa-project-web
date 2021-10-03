@@ -1,62 +1,4 @@
 <style scoped>
-/* preloader image style*/
-.lds-ring {
-  display: inline-block;
-
-  position: absolute;
-
-  width: 64px;
-
-  height: 64px;
-
-  left: 50%;
-
-  top: 50%;
-
-  transform: translate(-50%, -50%);
-}
-
-.lds-ring div {
-  box-sizing: border-box;
-  display: block;
-  position: absolute;
-  width: 51px;
-  height: 51px;
-  margin: 6px;
-  border: 5px solid #28a745;
-  border-radius: 50%;
-  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-  border-color: #28a745 transparent transparent transparent;
-}
-
-.lds-ring-alt {
-  display: block;
-  margin-top: 50px;
-  direction: rtl;
-  text-align: center;
-}
-
-.lds-ring div:nth-child(1) {
-  animation-delay: -0.45s;
-}
-
-.lds-ring div:nth-child(2) {
-  animation-delay: -0.3s;
-}
-
-.lds-ring div:nth-child(3) {
-  animation-delay: -0.15s;
-}
-
-@keyframes lds-ring {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
 /*preloader image style*/
 
 .carousel-img {
@@ -71,14 +13,17 @@
 
 .main-image {
   position: absolute;
-
   top: 50%;
-
   left: 50%;
-
   transition: 300ms;
-
   transform: translate(-50%, -50%);
+  z-index: 1;
+  opacity: 0;
+  transition: 150ms;
+}
+
+.main-image-load {
+  opacity: 1;
 }
 
 .carousel-title {
@@ -117,6 +62,15 @@
 
   display: inline-block;
 }
+.spinner-border {
+  width: 5.5rem;
+  height: 5.5rem;
+  border-width: 0.35em;
+  color: #d0d0d0;
+  position: absolute;
+  top: calc(50% - 30px);
+  left: calc(50% - 30px);
+}
 .inquiry-button.green-button {
   padding: 4px 15px;
   margin: 10px auto 15px;
@@ -125,18 +79,17 @@
 
 <template>
   <article class="carousel-item box-content">
-    <router-link :to="link" class="carousel-img">
-      <div v-show="isImageLoad">
-        <transition>
-          <img @load="ImageLoaded" :src="img" class="main-image" />
-        </transition>
-      </div>
+    <router-link :to="link" class="carousel-img text-center">
+      <img
+        loading="lazy"
+        :src="img"
+        @load="ImageLoaded"
+        class="main-image"
+        :class="{ 'main-image-load': isImageLoad }"
+      />
 
-      <div v-show="!isImageLoad" class="lds-ring">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
+      <div v-if="!isImageLoad" class="spinner-border">
+        <span class="sr-only"></span>
       </div>
     </router-link>
 
@@ -150,7 +103,6 @@
     <router-link :to="link" class="stock-wrapper">
       <span>موجودی</span>
       <span v-text="stock"></span>
-      <span>کیلوگرم</span>
     </router-link>
     <div class="inquiry-button-wrapper">
       <button class="inquiry-button green-button" v-if="inquiryButtonActive">
@@ -161,6 +113,8 @@
 </template>
 
 <script>
+import owlCarousel from "../../../../owl.carousel.min.js";
+
 export default {
   data: function () {
     return {
@@ -218,9 +172,6 @@ export default {
     });
   },
   methods: {
-    created: function () {
-      this.loadImage();
-    },
     loadImage: function () {
       this.isImageLoad = false;
     },

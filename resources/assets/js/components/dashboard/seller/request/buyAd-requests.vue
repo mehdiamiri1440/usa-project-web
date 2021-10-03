@@ -3,6 +3,46 @@
   padding-top: 50px;
 } */
 
+.user-information-wrapper {
+  float: right;
+  width: 100%;
+  margin-bottom: 4px;
+}
+
+.user-information-content {
+  display: block;
+  float: right;
+  width: 100%;
+  background: none;
+  border: none;
+  padding-bottom: 3px;
+}
+.user-image {
+  width: 25px;
+  height: 25px;
+  float: right;
+  margin-left: 10px;
+}
+.user-content {
+  display: block;
+  max-width: 170px;
+  overflow: hidden;
+  font-size: 13px;
+  font-weight: 400;
+  color: #adadad;
+  height: 21px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  text-align: right;
+}
+
+.user-content i {
+  margin-left: 1px;
+  position: relative;
+  top: 3px;
+  font-size: 15px;
+}
+
 .wrapper_no_pro {
   text-align: center;
   font-size: 23px;
@@ -31,23 +71,44 @@
   padding: 5px;
 }
 
-.list-group-item {
+.buyAd-wrapper-item {
   border: 1px solid #ddd;
-  padding: 11px 0;
+  padding: 11px 5px 15px;
+  border-radius: 12px;
+  margin-bottom: 20px;
 }
-.list-group-item:nth-last-of-type(2n + 1) {
+
+.buyAd-wrapper-item.golden {
+  padding: 11px 15px 15px 0;
+}
+
+.buyAd-wrapper-item:nth-last-of-type(2n + 1) {
   background: #fdfdfd !important;
 }
 
+.buyAd-phone-buttons-wrapper {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
 .detail-success {
-  padding: 8px 0;
+  padding: 10px 0;
   width: 100%;
   background: #00c569;
+  border: none;
   color: #fff;
   text-align: center;
-  border-radius: 5px;
-  font-size: 13px;
+  border-radius: 8px;
+  font-size: 15px;
   font-weight: bold;
+  display: block;
+  max-width: 250px;
+  margin: 13px auto 0;
+  direction: rtl;
+}
+
+button.disable {
+  background: #e0e0e0 !important;
 }
 
 .main-content > ul {
@@ -56,9 +117,12 @@
   overflow: hidden;
 }
 
-.main-content .list-group-item p {
+.main-content .buyAd-wrapper-item > p {
   text-align: center;
   direction: rtl;
+  padding-top: 25px;
+  font-size: 15px;
+  font-weight: bold;
 }
 
 #main.little-main {
@@ -72,10 +136,6 @@
   line-height: 1.618;
 }
 
-.text-red {
-  color: #e41c38;
-}
-
 .request-detail .green-button {
   font-size: 16px;
   padding: 8px 30px;
@@ -85,7 +145,7 @@
   position: fixed;
   right: 250px;
   left: 0;
-  z-index: 1;
+  z-index: 4;
   border-radius: 0;
   padding: 13px 15px;
 }
@@ -110,7 +170,7 @@
   position: fixed;
   bottom: 0;
   left: 0;
-  z-index: 1;
+  z-index: 5;
   width: 100%;
   background: #fff;
   border-radius: 0;
@@ -120,6 +180,7 @@
   margin: 0;
   padding: 3px 14px;
   margin-right: 6px;
+  border-radius: 8px;
 }
 
 #main.little-main .fix-request-header-box,
@@ -146,7 +207,7 @@
 
   border: none;
 
-  color: #777;
+  color: #556080;
 
   padding: 0;
 
@@ -183,7 +244,8 @@
 }
 
 .wrapper-items {
-  padding-top: 60px;
+  padding-top: 75px;
+  overflow: hidden;
 }
 .remove-filter-button {
   background: #fff;
@@ -200,22 +262,7 @@
   right: -6px;
 }
 .golden {
-  border: 2px solid transparent;
-  border-image-outset: 0;
-  border-image-repeat: stretch;
-  border-image-slice: 100%;
-  border-image-source: none;
-  border-image-width: 1;
-  -moz-border-image: -moz-linear-gradient(left, #3acfd5 0%, #3a4ed5 100%);
-  -webkit-border-image: -webkit-linear-gradient(left, #3acfd5 0%, #3a4ed5 100%);
-  border-image: linear-gradient(
-    21deg,
-    rgb(199, 168, 79) 0%,
-    rgb(249, 242, 159) 51%,
-    rgb(199, 168, 79) 100%
-  );
-  border-image-slice: 100%;
-  border-image-slice: 1;
+  border: 2px solid #c5a75b;
   position: relative;
 }
 .golden::after {
@@ -231,6 +278,7 @@
   position: absolute;
   right: 0;
   top: 0;
+  border-radius: 0 10px 10px 0;
 }
 .golden .detail-success {
   background: linear-gradient(
@@ -242,18 +290,170 @@
   color: #333;
 }
 
-.lock > p {
-  filter: blur(7px);
+.buyAd-phone-buttons-wrapper > .send-message-button {
+  background: none;
+  border: 1px solid #404b55;
+  color: #404b55;
+  transition: 300ms;
+  margin-right: 20px;
 }
 
-.lock > span.lock-text {
+.buyAd-phone-buttons-wrapper > .send-message-button:hover {
+  background: #404b55;
+  color: #fff;
+  transition: 300ms;
+}
+
+.lock p,
+.lock .list-name .buyer-text {
+  filter: blur(10px);
+}
+
+.lock span.lock-text {
   position: absolute;
   left: 0;
   text-align: right;
-  right: 90px;
+  right: 30px;
   font-size: 20px;
   font-weight: bold;
-  top: 14px;
+  color: #7e7e7e;
+  top: 45px;
+}
+.list-title.list-name {
+  text-align: right;
+  padding: 5px 15px;
+  direction: rtl;
+  color: #7e7e7e;
+}
+.list-title.list-name div.buyer-text {
+  text-align: right;
+  font-size: 18px;
+}
+
+.phone-number-wrapper {
+  padding: 15px 0 0;
+}
+
+.guide-button {
+  height: 32px;
+  border: solid 1px white;
+  background: #e41c38;
+  width: 100px;
+  line-height: 32px;
+  -webkit-transform: rotate(-90deg);
+  font-weight: 500;
+  color: white;
+  transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  text-align: center;
+  font-size: 17px;
+  position: fixed;
+  left: -40px;
+  top: 50%;
+  z-index: 999;
+}
+
+.banner-wrapper {
+  background: linear-gradient(90deg, #060446, #21ad93);
+  min-height: 130px;
+  position: relative;
+  direction: rtl;
+  overflow: hidden;
+  margin-bottom: 15px;
+  border-radius: 12px;
+}
+
+.banner-wrapper .main-wrapper {
+  position: relative;
+  padding: 20px 100px;
+  overflow: hidden;
+  z-index: 2;
+  text-align: right;
+}
+
+.banner-button {
+  width: initial;
+  font-size: 18px;
+  padding: 10px 20px;
+  border-radius: 7px;
+  background: #1da1f2;
+  box-shadow: 0 3px 2px rgba(0, 0, 0, 0.16);
+}
+
+.banner-button i {
+  position: relative;
+  top: 2px;
+  margin-right: 5px;
+}
+
+.green-button.banner-button:hover {
+  background: #1da1f2;
+}
+
+.banner-wrapper .banner-bg-striped {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url("../../../../../img/bg-striped.png") repeat;
+  opacity: 0.2;
+}
+
+.banner-wrapper p {
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+  text-align: right;
+  margin-bottom: 17px;
+}
+
+.banner-wrapper .circle-item-wrapper {
+  position: absolute;
+  left: 100px;
+  width: 200px;
+  height: 200px;
+  background: #fff;
+  top: calc(50% - 70px);
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 3px 2px rgba(0, 0, 0, 0.16);
+}
+
+.banner-wrapper .circle-item-wrapper img {
+  position: relative;
+  top: -20px;
+}
+
+.banner-wrapper .circle-item-wrapper::after {
+  width: 315px;
+  height: 195px;
+  content: " ";
+  background: #8ca6ec;
+  position: absolute;
+  top: -163px;
+  right: -105px;
+  border-radius: 170px;
+  opacity: 0.3;
+  z-index: 1;
+}
+
+.banner-wrapper .circle-item-wrapper::before {
+  width: 295px;
+  height: 185px;
+  content: " ";
+  background: rgba(0, 156, 131, 0.5);
+  position: absolute;
+  bottom: -110px;
+  left: -180px;
+  border-radius: 170px;
+  z-index: 1;
+}
+
+.text-center {
+  text-align: center !important;
 }
 
 @media screen and (max-width: 991px) {
@@ -266,17 +466,46 @@
   }
 }
 @media screen and (max-width: 767px) {
-  .lock > span.lock-text {
+  .banner-wrapper .main-wrapper {
+    padding: 20px 10px;
+  }
+
+  .banner-wrapper .circle-item-wrapper {
+    left: -20px;
+    width: 190px;
+    height: 190px;
+    top: calc(50% - 48px);
+  }
+
+  .buyAd-phone-buttons-wrapper {
+    margin-top: 15px;
+  }
+
+  .list-title.list-name div.buyer-text {
+    text-align: center;
+    min-height: 83px;
+    display: flex;
+    width: 100%;
+    align-items: center;
+  }
+
+  .list-title.list-name div.buyer-text > div {
+    flex: 1;
+  }
+
+  .button-wrapper {
+    margin: 10px auto;
+  }
+
+  .main-content .buyAd-wrapper-item > p {
+    padding-top: 10px;
+  }
+  .lock span.lock-text {
     text-align: center;
     right: 0;
-    top: 60px;
+    top: 90px;
   }
-  .golden {
-    padding: 25px 0;
-  }
-  .golden::after {
-    display: none;
-  }
+
   .main-content,
   .wrapper-items {
     padding: 0;
@@ -286,6 +515,7 @@
   }
   .title {
     position: relative;
+    z-index: 0;
   }
   .title h1 {
     text-align: center;
@@ -293,7 +523,7 @@
 
   .detail-success {
     max-width: 300px;
-    margin: 0 auto;
+    margin: 13px auto 0;
   }
 
   .default-button-full-with {
@@ -316,13 +546,32 @@
   .list-notice button > span.request-count {
     font-size: 15px;
   }
+  .list-title.list-name {
+    text-align: center !important;
+  }
+
+  .main-content .buyAd-wrapper-item > p.list-notice {
+    text-align: left;
+    padding-left: 30px;
+  }
+
+  .main-content .buyAd-wrapper-item > p.list-time {
+    text-align: right;
+    padding-right: 30px;
+    padding-top: 6px;
+  }
 }
 </style>
 <template>
   <div>
-    <category-filter v-if="categoryModal" />
+    <CategoriesModal :categoryList="categoryList" />
     <div
-      class="fix-request-bottom hidden-sm hidden-md hidden-lg shadow-content text-center"
+      class="
+        fix-request-bottom
+        hidden-sm hidden-md hidden-lg
+        shadow-content
+        text-center
+      "
     >
       <div class="col-xs-12 text-right">
         <button
@@ -336,17 +585,6 @@
       </div>
     </div>
     <div class="requests" v-show="isRequests">
-      <!-- <div
-        v-if="currentUser.user_info.active_pakage_type == 0"
-        class="fix-request-header-box request-update shadow-content text-center text-rtl"
-      >
-        <span>شما به درخواست های طلایی دسترسی ندارید</span>
-        <button
-          class="green-button bg-red hover-effect"
-          @click="isRequests = !isRequests"
-        >جزییات</button>
-      </div> -->
-      <!-- :class="{'padding-0-15' : currentUser.user_info.active_pakage_type != 0}" -->
       <section class="main-content col-xs-12 padding-0-15'">
         <div class="title">
           <div class="row">
@@ -358,7 +596,7 @@
                   class="green-button remove-filter-button"
                   @click.prevent="filterCategory = ''"
                 >
-                  <span class="text-red remove-filter-icon">
+                  <span class="red-text remove-filter-icon">
                     <i class="fa fa-times"></i>
                   </span>
                   <span
@@ -368,7 +606,13 @@
               </h1>
             </div>
             <div
-              class="col-xs-12 col-sm-4 hidden-xs request-update pull-left text-left"
+              class="
+                col-xs-12 col-sm-4
+                hidden-xs
+                request-update
+                pull-left
+                text-left
+              "
             >
               <button
                 type="button"
@@ -383,130 +627,291 @@
         </div>
         <div v-if="buyAds.length != 0">
           <ul class="list-unstyled wrapper-items">
-            <li
-              v-for="(buyAd, index) in buyAds"
-              :key="index"
-              class="list-group-item col-xs-12"
-              :class="{
-                golden: buyAd.is_golden,
-                lock:
-                  buyAd.is_golden &&
-                  currentUser.user_info.active_pakage_type == 0,
-              }"
-            >
-              <span
-                v-if="
-                  buyAd.is_golden &&
-                  currentUser.user_info.active_pakage_type == 0
-                "
-                class="lock-text"
-                v-text="buyAd.subcategory_name"
-              ></span>
-              <p class="list-title col-sm-3 col-xs-12">
-                <span v-text="buyAd.category_name"></span>
+            <li v-for="(buyAd, index) in buyAds" :key="index">
+              <div v-if="buyAd.has_msg || buyAd.has_phone">
+                <div class="col-xs-12" v-if="index % 9 == 0 && index != 0">
+                  <div class="row">
+                    <div class="banner-wrapper">
+                      <div class="banner-bg-striped"></div>
+                      <div class="main-wrapper">
+                        <p>آیا خریدار مورد نظر خود را پیدا نکرده اید؟</p>
+                        <p>محصول خود را ثبت کنید.</p>
+                        <router-link
+                          :to="{ name: 'registerProductSeller' }"
+                          class="btn green-button banner-button hover-effect"
+                        >
+                          ثبت محصول
+                          <i class="fa fa-arrow-left"> </i>
+                        </router-link>
+                      </div>
+                      <div class="circle-item-wrapper">
+                        <img src="../../../../../img/request.svg" alt="" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
-                <span>|</span>
-
-                <span v-text="buyAd.subcategory_name"></span>
-
-                <span v-if="buyAd.name" v-text="' | ' + buyAd.name"></span>
-                <!-- <span v-else v-text="' | ' + buyAd.name"></span> -->
-              </p>
-
-              <p class="needs col-sm-3 col-xs-12">
-                <span class="static-content">میزان نیازمندی :</span>
-
-                <span
-                  v-if="
-                    buyAd.is_golden &&
-                    currentUser.user_info.active_pakage_type == 0
-                  "
-                  v-text="'0000'"
-                ></span>
-                <span
-                  v-else
-                  v-text="getNumberWithCommas(buyAd.requirement_amount)"
-                ></span>
-
-                <span class="static-content">کیلوگرم</span>
-              </p>
-
-              <p
-                class="list-time col-sm-2 col-xs-12"
-                v-if="
-                  buyAd.is_golden &&
-                  currentUser.user_info.active_pakage_type == 0
-                "
-                v-text="'۱۳ تیر , ۱۳۰۴'"
-              ></p>
-              <p
-                class="list-time col-sm-2 col-xs-12"
-                v-else
-                v-text="buyAd.register_date"
-              ></p>
-
-              <p class="list-notice col-sm-1 col-xs-12 pull-right">
-                <button
-                  v-if="
-                    buyAd.is_golden &&
-                    currentUser.user_info.active_pakage_type == 0
-                  "
-                  class="btn"
-                  type="button"
+                <div
+                  class="buyAd-wrapper-item col-xs-12"
+                  :class="{
+                    golden: buyAd.is_golden,
+                    lock:
+                      buyAd.is_golden &&
+                      currentUser.user_info.active_pakage_type == 0,
+                  }"
                 >
-                  <span>
-                    <i class="fas fa-comment-alt"></i>
-                    <i class="fas fa-exclamation"></i>
+                  <span
+                    v-if="
+                      buyAd.is_golden &&
+                      currentUser.user_info.active_pakage_type == 0
+                    "
+                    class="lock-text"
+                  >
+                    <span> خریدار </span>
+                    <span
+                      class="brand-text"
+                      v-text="buyAd.subcategory_name"
+                    ></span>
+                    <span> هستم </span>
                   </span>
-                  <span class="request-count red-text">{{ "0+" }}</span>
-                </button>
-                <button
-                  v-else
-                  class="btn"
-                  type="button"
-                  data-toggle="tooltip"
-                  data-placement="top"
-                  title="ظرفیت باقی مانده برای ارسال پیام به خریدار این محصول"
-                >
-                  <span>
-                    <i class="fas fa-comment-alt"></i>
-                    <i class="fas fa-exclamation"></i>
-                  </span>
-                  <span class="request-count red-text">{{
-                    buyAd.reply_capacity + "+"
-                  }}</span>
-                </button>
-              </p>
+                  <div class="list-title list-name col-sm-5 col-xs-12">
+                    <div class="user-information-wrapper">
+                      <div class="user-information-content">
+                        <div class="user-content">
+                          <i class="fa fa-user-circle"></i>
+                          <span
+                            class="user-name-link"
+                            v-text="buyAd.first_name + ' ' + buyAd.last_name"
+                          >
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="buyer-text">
+                      <div>
+                        <span> خریدار </span>
+                        <span
+                          class="red-text"
+                          v-if="
+                            buyAd.is_golden &&
+                            currentUser.user_info.active_pakage_type == 0
+                          "
+                          v-text="'0000'"
+                        ></span>
+                        <span
+                          class="red-text"
+                          v-else
+                          v-text="getConvertedNumbers(buyAd.requirement_amount)"
+                        ></span>
 
-              <a
-                v-if="
-                  buyAd.is_golden &&
-                  currentUser.user_info.active_pakage_type == 0
-                "
-                class="col-sm-3 col-xs-12 pull-left"
-                href
-                @click.prevent="openGoldenChatRestrictionModal()"
-              >
-                <p class="detail-success hover-effect">
-                  <span class="fas fa-comment-alt"></span> پیام به خریدار
-                </p>
-                <p class="detail-success hide-reply" :id="'loader-' + buyAd.id">
-                  کمی صبر کنید...
-                </p>
-              </a>
-              <a
-                v-else
-                class="col-sm-3 col-xs-12 pull-left"
-                href
-                @click.prevent="openChat(buyAd, $event)"
-              >
-                <p class="detail-success hover-effect">
-                  <span class="fas fa-comment-alt"></span> پیام به خریدار
-                </p>
-                <p class="detail-success hide-reply" :id="'loader-' + buyAd.id">
-                  کمی صبر کنید...
-                </p>
-              </a>
+                        <span
+                          class="brand-text"
+                          v-text="buyAd.subcategory_name"
+                        ></span>
+                        <span v-if="buyAd.name"> از نوع </span>
+                        <span
+                          class="brand-text"
+                          v-if="buyAd.name"
+                          v-text="buyAd.name"
+                        ></span>
+
+                        <span> هستم </span>
+                      </div>
+                    </div>
+                  </div>
+                  <p
+                    v-if="buyAd.reply_capacity > 0"
+                    class="list-notice col-sm-1 col-xs-6 pull-right"
+                  >
+                    <button
+                      v-if="
+                        buyAd.is_golden &&
+                        currentUser.user_info.active_pakage_type == 0
+                      "
+                      class="btn"
+                      type="button"
+                    >
+                      <span class="gray-text">
+                        <i class="fas fa-comment-alt"></i>
+                        <i class="fas fa-exclamation"></i>
+                      </span>
+                      <span class="request-count">{{ "0+" }}</span>
+                    </button>
+                    <button
+                      v-else
+                      class="btn"
+                      type="button"
+                      data-toggle="tooltip"
+                      data-placement="top"
+                      title="ظرفیت باقی مانده برای ارسال پیام به خریدار این محصول"
+                    >
+                      <span class="gray-text">
+                        <i class="fas fa-comment-alt"></i>
+                        <i class="fas fa-exclamation"></i>
+                      </span>
+                      <span class="request-count">{{
+                        buyAd.reply_capacity + "+"
+                      }}</span>
+                    </button>
+                  </p>
+                  <p
+                    class="list-time"
+                    :class="[
+                      buyAd.reply_capacity > 0
+                        ? 'col-sm-2 col-xs-6'
+                        : 'col-sm-3 col-xs-12',
+                    ]"
+                    v-if="
+                      buyAd.is_golden &&
+                      currentUser.user_info.active_pakage_type == 0
+                    "
+                    v-text="'۱۳ تیر , ۱۳۰۴'"
+                  ></p>
+                  <p
+                    class="list-time"
+                    :class="[
+                      buyAd.reply_capacity
+                        ? 'col-sm-2 col-xs-6'
+                        : 'col-sm-3 col-xs-12 text-center',
+                    ]"
+                    v-else
+                    v-text="buyAd.register_date"
+                  ></p>
+
+                  <div
+                    v-if="buyAd.has_phone"
+                    class="col-sm-4 col-xs-12 pull-left"
+                  >
+                    <div class="buyAd-phone-buttons-wrapper">
+                      <button
+                        v-if="
+                          buyAd.is_golden &&
+                          currentUser.user_info.active_pakage_type == 0
+                        "
+                        class="detail-success hover-effect phone-button"
+                        :id="'loader-phone-' + buyAd.id"
+                        @click.prevent="openGoldenChatRestrictionModal()"
+                      >
+                        <span>
+                          <span class="fas fa-phone-square-alt"></span>
+                          اطلاعات تماس
+                        </span>
+                        <span class="hide-reply text-rtl">
+                          کمی صبر کنید...
+                        </span>
+                      </button>
+                      <button
+                        v-else
+                        class="detail-success hover-effect phone-button"
+                        @click.prevent="
+                          activePhoneCall(buyAd.myuser_id, buyAd.id)
+                        "
+                        :id="'loader-phone-' + buyAd.id"
+                      >
+                        <span>
+                          <span class="fas fa-phone-square-alt"></span>
+                          اطلاعات تماس
+                        </span>
+                        <span class="hide-reply text-rtl">
+                          کمی صبر کنید...
+                        </span>
+                      </button>
+                      <button
+                        class="detail-success send-message-button hover-effect"
+                        @click.prevent="openGoldenChatRestrictionModal()"
+                        :id="'loader-chat-' + buyAd.id"
+                        v-if="
+                          buyAd.is_golden &&
+                          currentUser.user_info.active_pakage_type == 0 &&
+                          buyAd.has_msg
+                        "
+                      >
+                        <span>
+                          <span class="fas fa-comment-alt"></span>
+                          چت با خریدار
+                        </span>
+                        <span class="hide-reply text-rtl">
+                          کمی صبر کنید...
+                        </span>
+                      </button>
+                      <button
+                        class="detail-success send-message-button hover-effect"
+                        @click.prevent="openChat(buyAd)"
+                        :id="'loader-chat-' + buyAd.id"
+                        v-else-if="buyAd.has_msg"
+                      >
+                        <span>
+                          <span class="fas fa-comment-alt"></span>
+                          چت با خریدار
+                        </span>
+                        <span class="hide-reply text-rtl">
+                          کمی صبر کنید...
+                        </span>
+                      </button>
+                    </div>
+                    <div
+                      :id="buyAd.id + '-phone-number-wrapper'"
+                      class="phone-number-wrapper collapse"
+                    >
+                      <a class="phone-number">
+                        <p>
+                          <i class="fa fa-phone-square-alt"></i>
+                          <span class="phone"></span>
+                        </p>
+                        <p>شماره تماس</p>
+                      </a>
+                      <div class="warning-wrapper">
+                        <p class="warning-title">
+                          <i class="fa fa-exclamation-circle"></i>
+
+                          توصیه باسکول
+                        </p>
+                        <p class="warning-text">
+                          توصیه باسکول همواره به انجام معاملات حضوری است.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div v-else class="col-sm-4 col-xs-12 pull-left">
+                    <button
+                      v-if="
+                        buyAd.is_golden &&
+                        currentUser.user_info.active_pakage_type == 0
+                      "
+                      class="detail-success hover-effect"
+                      @click.prevent="openGoldenChatRestrictionModal()"
+                    >
+                      <span :id="'loader-chat-' + buyAd.id">
+                        <span>
+                          <span class="fas fa-comment-alt"></span>
+
+                          چت با خریدار
+                        </span>
+                        <span class="hide-reply text-rtl">
+                          کمی صبر کنید...
+                        </span>
+                      </span>
+                    </button>
+                    <button
+                      v-else
+                      href
+                      class="detail-success hover-effect"
+                      @click.prevent="openChat(buyAd)"
+                    >
+                      <span :id="'loader-chat-' + buyAd.id">
+                        <span>
+                          <span class="fas fa-comment-alt"></span>
+
+                          چت با خریدار
+                        </span>
+                        <span class="hide-reply text-rtl">
+                          کمی صبر کنید...
+                        </span>
+                      </span>
+                    </button>
+                  </div>
+                </div>
+              </div>
             </li>
           </ul>
         </div>
@@ -529,10 +934,16 @@
             <li
               v-for="(item, index) in 5"
               :key="index"
-              class="list-group-item col-xs-12"
+              class="buyAd-wrapper-item col-xs-12"
             >
               <p
-                class="default-list-title pull-right col-sm-9 hidden-xs margin-10-0"
+                class="
+                  default-list-title
+                  pull-right
+                  col-sm-9
+                  hidden-xs
+                  margin-10-0
+                "
               >
                 <span
                   class="placeholder-content content-full-width h-20"
@@ -540,21 +951,39 @@
               </p>
 
               <p
-                class="list-title col-sm-2 col-xs-12 hidden-md hidden-lg hidden-sm"
+                class="
+                  list-title
+                  col-sm-2 col-xs-12
+                  hidden-md hidden-lg hidden-sm
+                "
               >
                 <span
-                  class="placeholder-content content-half-width h-20 margin-auto"
+                  class="
+                    placeholder-content
+                    content-half-width
+                    h-20
+                    margin-auto
+                  "
                 ></span>
               </p>
 
               <p class="needs col-sm-4 col-xs-12 hidden-md hidden-lg hidden-sm">
                 <span
-                  class="placeholder-content content-default-width h-20 margin-auto"
+                  class="
+                    placeholder-content
+                    content-default-width
+                    h-20
+                    margin-auto
+                  "
                 ></span>
               </p>
 
               <p
-                class="list-time col-sm-2 col-xs-12 hidden-md hidden-lg hidden-sm"
+                class="
+                  list-time
+                  col-sm-2 col-xs-12
+                  hidden-md hidden-lg hidden-sm
+                "
               >
                 <span
                   class="placeholder-content content-min-width h-20 margin-auto"
@@ -563,7 +992,11 @@
 
               <p class="col-sm-3 col-xs-12">
                 <span
-                  class="placeholder-content default-button-full-with margin-10-auto"
+                  class="
+                    placeholder-content
+                    default-button-full-with
+                    margin-10-auto
+                  "
                 ></span>
               </p>
             </li>
@@ -571,32 +1004,18 @@
         </div>
       </section>
     </div>
-
-    <!-- <div class="request-detail" v-show="!isRequests">
-      <section class="main-content col-xs-12">
-        <div class="detail-contents shadow-content text-center text-rtl">
-          <div>
-            <p>
-              درخواست های خرید طلایی درخواست هایی است که احتمال خرید از سوی خریدار آن وجود بالاست. برای دسترسی به این درخواست ها نوع عضویت خود را ارتقا دهید.
-            </p>
-            <router-link
-              class="green-button"
-              :to="{ name : 'dashboardPricingTableSeller' }"
-            >ارتقا عضویت</router-link>
-          </div>
-        </div>
-      </section>
-    </div> -->
   </div>
 </template>
 
 <script>
 import { eventBus } from "../../../../router/router";
-import CategoryFilter from "./category-filter";
+import swal from "../../../../sweetalert.min.js";
+import CategoriesModal from "../../../layouts/main/main_components/categories-modal.vue";
+
 export default {
   props: ["storage"],
   components: {
-    CategoryFilter,
+    CategoriesModal,
   },
   data: function () {
     return {
@@ -616,8 +1035,9 @@ export default {
         },
       ],
       isRequests: true,
-      categoryModal: false,
       filterCategory: "",
+      emptyItem: 0,
+      categoryList: "",
     };
   },
   methods: {
@@ -628,6 +1048,13 @@ export default {
       axios.post("/user/profile_info").then(function (response) {
         self.currentUser = response.data;
       });
+      axios
+        .post("/get_category_list", {
+          cascade_list: true,
+        })
+        .then(function (response) {
+          self.categoryList = response.data.categories;
+        });
 
       axios
         .post("/get_related_buyAds_list_to_the_seller")
@@ -641,18 +1068,18 @@ export default {
           }, 100);
         });
     },
-    openChat: function (buyAd, event) {
+    openChat: function (buyAd) {
       var self = this;
 
-      let id = "#loader-" + buyAd.id;
-      self.hideReplyBtn(event, id);
+      let id = "#loader-chat-" + buyAd.id;
+      self.hideReplyBtn(id);
 
       axios
         .post("/get_user_permission_for_buyAd_reply", {
           buy_ad_id: buyAd.id,
         })
         .then(function (response) {
-          self.showReplyBtn(event, id);
+          self.showReplyBtn(id);
 
           if (response.data.permission == true) {
             var contact = {
@@ -681,26 +1108,92 @@ export default {
           }
         });
     },
-    hideReplyBtn: function (e, id) {
-      return new Promise((resolve, reject) => {
-        $(e.target).hide();
-        resolve(true);
-      }).then(() => {
-        $(id).show();
-      });
+    activePhoneCall: function (buyAdUserId, buyAdId) {
+      let id = "#loader-phone-" + buyAdId;
+
+      $(id).prop("disabled", true);
+      $(id).addClass("disable");
+
+      this.hideReplyBtn(id);
+
+      axios
+        .post("/get_buyer_phone_number", {
+          b_id: buyAdUserId,
+          ba_id: buyAdId,
+          item: "BUYAD",
+        })
+        .then((response) => {
+          this.$nextTick(() => {
+            // this.userPhone = response.data.phone;
+            $("#" + buyAdId + "-phone-number-wrapper .phone").text(
+              response.data.phone
+            );
+            $("#" + buyAdId + "-phone-number-wrapper a.phone-number").attr(
+              "href",
+              "tel:" + response.data.phone
+            );
+            $("#" + buyAdId + "-phone-number-wrapper").collapse("show");
+            this.showReplyBtn(id);
+          });
+        })
+        .catch((error) => {
+          this.showReplyBtn(id);
+          $(id).prop("disabled", false);
+          $(id).removeClass("disable");
+          if (error.response.status == 423) {
+            swal({
+              title: "ارتقا عضویت",
+              text: error.response.data.msg,
+              icon: "warning",
+              className: "custom-swal-with-cancel",
+              buttons: {
+                success: {
+                  text: "ارتقا عضویت",
+                  value: "promote",
+                },
+                close: {
+                  text: "بستن",
+                  className: "bg-cancel",
+                },
+              },
+            }).then((value) => {
+              switch (value) {
+                case "promote":
+                  this.$router.push({ name: "dashboardPricingTableSeller" });
+                  break;
+              }
+            });
+          } else {
+            swal({
+              text: error.response.data.msg,
+              icon: "warning",
+              className: "custom-swal-with-cancel",
+              buttons: {
+                close: {
+                  text: "بستن",
+                  className: "bg-cancel",
+                },
+              },
+            });
+          }
+        });
     },
-    showReplyBtn: function (e, id) {
-      return new Promise((resolve, reject) => {
-        $(id).hide();
-        resolve(true);
-      }).then(() => {
-        $(e.target).show();
-      });
+    hideReplyBtn: function (id) {
+      let itemFirst = id + " span:first-child";
+      let itemLast = id + " span:last-child";
+      $(itemFirst).hide();
+      $(itemLast).show();
+    },
+    showReplyBtn: function (id) {
+      let itemFirst = id + " span:first-child";
+      let itemLast = id + " span:last-child";
+      $(itemLast).hide();
+      $(itemFirst).show();
     },
     openGoldenChatRestrictionModal: function () {
       eventBus.$emit("modal", "goldenBuyAdReplyLimit");
 
-      self.registerComponentStatistics(
+      this.registerComponentStatistics(
         "buyAdReply",
         "openChat",
         "permission denied"
@@ -710,6 +1203,17 @@ export default {
       if (number || typeof number === "number")
         return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       else return "";
+    },
+    getConvertedNumbers: function (number) {
+      if (number || typeof number === "number") {
+        let data = number / 1000;
+        if (number < 1000) {
+          return number + " " + "کیلوگرم";
+        } else {
+          data = this.getNumberWithCommas(data);
+          return data + " " + "تن";
+        }
+      } else return "";
     },
     registerComponentStatistics: function (
       categoryName,
@@ -721,11 +1225,8 @@ export default {
         event_label: labelName,
       });
     },
-    openCategoryModal: function () {
-      this.categoryModal = true;
-      setTimeout(function () {
-        $("#fitler-modal").modal("show");
-      }, 200);
+    openCategoryModal() {
+      $("#categories-modal").modal("show");
     },
     filterBuyAdByCategory: function () {
       this.buyAds = "";
@@ -742,6 +1243,12 @@ export default {
       setTimeout(function () {
         $(".list-notice button").tooltip();
       }, 100);
+    },
+    scrollToTop() {
+      window.scrollTo(0, 0);
+    },
+    selectCategoryItem(category, url) {
+      this.filterCategory = category;
     },
   },
   mounted() {

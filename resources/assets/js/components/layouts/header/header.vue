@@ -91,9 +91,9 @@ a.close-dialog-popup {
 
   border: none;
 
-  -webkit-transition: 300ms;
+  -webkit-transition: 150ms;
 
-  transition: 300ms;
+  transition: 150ms;
 
   width: initial;
 }
@@ -108,71 +108,135 @@ a.close-dialog-popup {
 /*start header styles*/
 
 .search-input {
-  transition: 300ms;
-
-  display: inline-block;
-
-  min-width: 455px;
-
-  overflow: hidden;
-
+  transition: 150ms;
+  min-width: 590px;
   position: relative;
-
-  float: right;
+  border-radius: 8px;
 }
 
 .search-input input {
-  padding: 9px 15px 8px;
-
-  border-radius: 0 4px 4px 0;
-
+  padding: 8px 157px 8px 15px;
   margin: 0;
-
   float: right;
-
-  border: none;
-
-  width: calc(100% - 20px);
-
-  background: #f8f8f8;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
 }
 
-.search-input button {
-  transition: 300ms;
-
+.search-input > button {
+  transition: 150ms;
   border: none;
-
   margin: 0;
-
-  padding: 8px 15px;
-
-  color: #fff;
-
-  background: #000546;
-
-  border-radius: 4px 0 0 4px;
-
+  padding: 8px 17px;
+  color: #868686;
+  background: none;
   position: absolute;
-
   left: 0;
-
   top: 0;
+  font-size: 17px;
+  font-weight: 500;
 }
 
-.search-input button:hover {
-  transition: 300ms;
-
-  background: #00032b;
-
-  padding-left: 18px;
-
-  padding-right: 18px;
+button.open-categories {
+  background: #eee;
+  color: #313a43;
+  font-weight: 400;
+  padding: 9px 15px;
+  font-size: 16px;
+  border: none;
+  border-radius: 0 12px 12px 0;
 }
 
-.search-input button:before {
+.custom-mega-menu .col-xs-12 {
+  padding: 0 10px;
+}
+/* 
+.custom-mega-menu .col-xs-12 > div {
+  height: 160px;
+  float: right;
+  width: 100%;
+  display: flex;
+  flex-flow: column wrap;
+} */
+
+.custom-mega-menu ul {
+  position: absolute;
+  margin: 0;
+  list-style: none;
+  z-index: 2;
+}
+
+.custom-mega-menu li:hover > ul {
+  display: block;
+}
+
+.custom-mega-menu li:hover .open-categories {
+  border-bottom-right-radius: 0;
+}
+
+.custom-mega-menu ul ul {
+  position: absolute;
+  display: none;
+  margin: 0;
+  background: #fff;
+}
+.custom-mega-menu ul ul li {
+  display: block;
+}
+
+.custom-mega-menu ul ul ul {
+  position: absolute;
+  top: 0;
+  right: 100%;
+  width: 452px;
+}
+
+.custom-mega-menu .lvl1-wrapper {
+  background: none;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  border-bottom-right-radius: 12px;
+}
+
+.custom-mega-menu .lvl2-wrapper {
+  box-shadow: 0px 7px 9px rgba(0, 0, 0, 0.05);
+  border-radius: 0 0 12px 12px;
+  padding-bottom: 25px;
+  min-height: calc(100% + 20px);
+  max-height: 450px;
+  overflow-y: auto;
+}
+
+.custom-mega-menu .lvl2-wrapper > li > div > div {
+  padding: 0 3px;
+}
+
+.custom-mega-menu .lvl1-list > button {
+  border: none;
+  background: #fafafa;
+  padding: 10px 0;
+}
+
+.custom-mega-menu .lvl1-list > button:hover {
+  background: #eeeeee;
+}
+.custom-mega-menu .lvl1-list:last-of-type > button {
+  border-bottom-right-radius: 12px;
+}
+
+.category-name {
+  display: flex;
+  justify-content: space-around;
+  font-size: 15px;
+}
+
+.search-input > button.open-categories span {
+  margin-left: 22px;
+}
+
+.search-input > button i:before {
   position: relative;
-
-  top: 2px;
+  left: 2px;
+  top: 3px;
 }
 
 nav.navbar {
@@ -181,19 +245,28 @@ nav.navbar {
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 1010;
+  z-index: 1012;
   border-radius: 0;
   border: none;
-  box-shadow: 0 7px 8px 0 rgba(0, 0, 0, 0.04);
+  border-bottom: 1px solid #ebebeb;
 }
 
+nav.navbar.navbar-category {
+  border-bottom: none !important;
+}
+
+/* nav.navbar.navbar-category .search-input {
+  margin-bottom: 0;
+} */
+
 .buskool-main-nav {
-  padding: 10px 15px 8px;
-  border-bottom: 2px solid #f8f9fa;
+  border-bottom: 1px solid #fafafa;
+  padding: 10px 15px;
 }
 
 .nav > li > a.green-button:hover {
-  background: #00c569;
+  background: #f0f7e7;
+  color: #5f6368 !important;
 }
 
 .nav > li > a.green-button.router-link-exact-active:hover {
@@ -201,61 +274,160 @@ nav.navbar {
 }
 
 nav .green-button {
-  font-size: 13px;
-  padding: 8px 7px 7px;
+  font-size: 14px;
+  background: none;
+  color: #5f6368;
   margin-top: 0;
-  margin-right: 15px;
+  font-weight: 400;
+  padding: 0;
+  padding: 5px 10px;
+  min-width: 80px;
+  border-radius: 12px;
+}
+
+nav .green-button .item-icon {
+  font-size: 19px;
+}
+
+nav .green-button .item-icon.register::before {
+  content: "\F067";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  font-size: 10px;
+  position: relative;
+  top: -5px;
+  color: #21ad93;
+}
+.user-auth-info-wrapper .navbar-nav > li {
+  margin: -5px auto;
+  padding: 0 10px;
+}
+
+.user-auth-info-wrapper .navbar-nav > li:last-of-type .green-button-alt {
+  margin-right: 0;
+}
+
+.user-auth-info-wrapper .navbar-nav > li:after {
+  content: " ";
+  width: 1px;
+  height: 35px;
+  position: absolute;
+  left: 0;
+  background: #eee;
+  top: 8px;
+}
+.user-auth-info-wrapper .navbar-nav > li:first-of-type::after {
+  display: none;
 }
 
 nav .green-button-alt {
-  background: #fff;
-  color: #00c569 !important;
-  border: 2px solid #00c569;
-  padding: 6px 7px 5px;
+  padding: 5px 10px;
+  font-size: 14px;
+  margin-top: 0;
+  margin-right: 15px;
+  font-weight: 400;
+  border-radius: 12px;
+  border: none;
+  background: none;
+  /* color: #1da1f2; */
+  color: #5f6368;
 }
 
-.green-button-alt:focus,
-.green-button-alt:hover {
+.nav > li > a.green-button.green-button-alt:hover {
+  color: #fff;
+  background: #e6f4f8 !important;
+}
+
+.green-button:focus,
+.green-button:hover {
   color: #fff !important;
 }
 
-nav .green-button.router-link-exact-active,
-nav > li > a.green-button.router-link-exact-active:hover {
-  background-color: #eee;
-  border-color: #eee;
+.user-auth-info-wrapper .nav > li > a.green-button:focus,
+.user-auth-info-wrapper .nav > li > a.router-link-exact-active,
+.user-auth-info-wrapper
+  .nav
+  > li
+  > a.router-link-exact-active
+  .light-green-text,
+.user-auth-info-wrapper
+  .nav
+  > li
+  > a.router-link-exact-active
+  .item-icon::before,
+.user-auth-info-wrapper .nav > li > a.router-link-exact-active:hover {
   color: #fff !important;
+  background: #eee !important;
 }
 
 .buskool-logo .navbar-brand {
   overflow: hidden;
-
-  width: 132px;
-}
-
-.buskool-logo .navbar-brand {
-  height: initial;
-
-  margin: 0;
-
+  width: 140px;
+  height: 28px;
+  margin: 6px 15px 6px 0;
   padding: 0;
 }
 
+.buskool-logo .navbar-brand img {
+  width: 140px;
+  height: 28px;
+}
+
 #buskool-nav {
-  margin-right: 46px;
+  margin-right: 35px;
 }
 
 .buskool-sub-menu .navbar-right {
   margin-right: 193px;
 }
 
+.absolute-position > ul {
+  position: absolute;
+}
+
+.buskool-sub-menu .navbar-right > li > a + ul {
+  max-height: 450px;
+  overflow-y: auto;
+  display: none;
+  height: 0;
+  padding-bottom: 30px;
+}
+
+.buskool-sub-menu .navbar-right > li > a:hover + ul,
+.buskool-sub-menu .navbar-right > li > ul:hover {
+  display: block;
+  height: initial;
+}
+
+.buskool-sub-menu .navbar-right > li > ul {
+  position: absolute;
+  /* width: 600px; */
+  width: 450px;
+  background: #fff;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+  border-radius: 0 0 12px 12px;
+  display: block;
+  height: initial;
+}
+
+.buskool-sub-menu .navbar-right > li > ul > li > ul {
+  /* display: flex;
+  flex-flow: column wrap;
+  height: 160px; */
+}
+
 .buskool-sub-menu {
   transition: 0.3s;
-  height: 38px;
+  height: 33px;
+  opacity: 1;
   overflow: hidden;
+  margin-bottom: -1px;
+  background-color: #fafafa;
 }
 
 .buskool-sub-menu.scrollUp {
   height: 0;
+  opacity: 0;
   transition: 0.3s;
 }
 
@@ -263,27 +435,66 @@ nav > li > a.green-button.router-link-exact-active:hover {
   float: right;
 }
 
-.buskool-sub-menu a {
-  color: #777;
-  padding: 9px 15px;
+.buskool-sub-menu .smoothScroll > a {
+  color: #404b55;
+  padding: 6px 15px;
+  position: relative;
+  border-left: 1px solid #eee;
+  font-weight: 300;
+}
+
+.buskool-sub-menu .smoothScroll > a:focus {
+  background: none;
+}
+
+button.menu-title {
+  font-size: 16px;
+  color: #444;
+  padding: 25px 0 0;
+  font-weight: 500;
+  width: 100%;
+  /* display: flex;
+  justify-content: space-between; */
+  background: none;
+  border: none;
+  text-align: right;
+}
+
+button.menu-title hr {
+  background: #e0e0e0;
+  margin: 7px 0;
+  border: none;
+  height: 1px;
   position: relative;
 }
 
-.buskool-sub-menu a:hover,
-.buskool-sub-menu a.router-link-exact-active {
-  color: #00c569;
-  background: #fbfbfb;
+/* button.menu-title hr::after {
+  content: "";
+  position: absolute;
+  width: 35px;
+  background: #00c569;
+  height: 2px;
+  top: -1px;
+  right: 0;
+  border-radius: 5px;
+} */
+a.sub-menu-title {
+  font-size: 14px;
+  color: #707070;
+  display: block;
+  padding: 10px 0;
+  font-weight: 300;
+  transition: 300ms;
+  transform: translateX(0);
 }
 
-.buskool-sub-menu a:hover:after,
-.buskool-sub-menu a.router-link-exact-active:after {
-  content: "";
-  background: #00c569;
-  position: absolute;
-  top: 0;
-  width: 100%;
-  height: 2px;
-  right: 0;
+a.sub-menu-title:hover {
+  color: #21ad93;
+  transform: translateX(-5px);
+}
+
+.buskool-sub-menu li:last-of-type a {
+  border-left: none;
 }
 
 a.profile-info-wrapper {
@@ -334,36 +545,30 @@ a.profile-info-wrapper:hover {
   float: right;
 
   margin-left: 10px;
-}
 
-.profile-image-wrapper img {
-  width: initial;
-  height: 100%;
-  position: relative;
-  left: -50%;
-  transform: translate(50%, 0);
+  background-position: center;
+
+  background-size: cover;
+
+  background-repeat: no-repeat;
+
+  background-color: #dddddd;
 }
 
 #web-profile-items {
   position: absolute;
-
-  top: 50px;
-
+  top: 45px;
   background: #fff;
-
   width: 100%;
-
   text-align: right;
-
   direction: rtl;
-
-  border-radius: 4px;
-
   line-height: 1.618;
-
-  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
-
-  z-index: 1;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0px 3px 9px rgba(0, 0, 0, 0.05);
+  z-index: 6;
+  min-width: 160px;
+  left: 0;
 }
 
 #web-profile-items a {
@@ -393,21 +598,29 @@ a.profile-info-wrapper:hover {
 .mobile-menu-button {
   float: right;
   position: relative;
+  padding-top: 2px;
 }
 
 .mobile-menu-button .message-count {
-  padding-top: 5px;
-  left: -10px;
-  top: -8px;
+  padding-top: 0px;
+  left: -12px;
+  top: -5px;
 }
 .navbar-toggle {
   margin: 0;
-
-  border: 2px solid #000546;
+  border: 1px solid;
+  border-radius: 8px;
+  height: 27px;
+  width: 35px;
+  padding: 0;
+  padding-top: 9px;
+  margin-bottom: 2px;
 }
-
-.navbar-toggle .icon-bar {
-  background: #000546;
+.navbar-toggle i {
+  font-size: 15px;
+  line-height: 1;
+  position: relative;
+  top: -6px;
 }
 
 .mobile-background-shadow {
@@ -417,7 +630,7 @@ a.profile-info-wrapper:hover {
 
   display: none;
 
-  transition: 300ms;
+  transition: 150ms;
 
   position: fixed;
 
@@ -431,7 +644,7 @@ a.profile-info-wrapper:hover {
   background: #e41c39;
   border-radius: 50px;
   font-size: 12px;
-  width: 24px;
+  width: 20px;
   height: 20px;
   display: inline-block;
   position: absolute;
@@ -442,6 +655,33 @@ a.profile-info-wrapper:hover {
   text-align: center;
   z-index: 1;
 }
+
+.message-count.desktop-message-count {
+  left: 13px;
+  border: 3px solid #fff;
+  top: -5px;
+  padding-top: 0px;
+  font-size: 11px;
+  width: 25px;
+  height: 25px;
+}
+
+.star-badge {
+  color: rgb(249, 242, 159);
+}
+
+.star-badge i {
+  background: linear-gradient(
+    21deg,
+    rgb(199, 168, 79) 0%,
+    rgb(249, 242, 159) 51%,
+    rgb(199, 168, 79) 100%
+  );
+  background-clip: border-box;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 .mobile-navigation li {
   position: relative;
 }
@@ -456,7 +696,34 @@ a.profile-info-wrapper:hover {
   }
 }
 
+@media screen and (max-width: 1245px) {
+  .search-input {
+    min-width: 545px;
+  }
+}
+@media screen and (max-width: 1199px) {
+  .search-input .open-categories {
+    display: none;
+  }
+  .search-input input {
+    padding: 8px 15px 8px 15px;
+  }
+  .search-input {
+    min-width: 354px;
+  }
+}
+
 @media screen and (max-width: 991px) {
+  nav .green-button.static-layout {
+    padding: 6px 8px 5px;
+    font-size: 13px;
+    width: initial;
+  }
+
+  .search-input {
+    min-width: 277px;
+  }
+
   #buskool-nav {
     margin: 0;
   }
@@ -465,12 +732,101 @@ a.profile-info-wrapper:hover {
     margin-right: 149px;
   }
 
-  .search-input {
-    min-width: 300px;
+  nav .green-button {
+    padding: 6px 8px 5px;
+    font-size: 13px;
+  }
+  .profile-image-wrapper {
+    margin-left: 0;
   }
 }
 
 @media screen and (max-width: 767px) {
+  .user-auth-info-wrapper .navbar-nav > li:after {
+    display: none;
+  }
+  .user-auth-info-wrapper .navbar-nav > li {
+    padding: 0;
+  }
+  .search-input {
+    overflow: hidden;
+  }
+
+  .search-input input {
+    border: none;
+    background: #f2f2f2;
+  }
+
+  .navbar-nav > li {
+    border-right: none;
+  }
+
+  a.profile-info-wrapper {
+    margin-top: -4px;
+  }
+  a.profile-info-wrapper .profile-image-wrapper {
+    width: 35px;
+    height: 35px;
+    margin-top: 3px;
+  }
+
+  .buskool-logo .navbar-brand {
+    width: 100px;
+    height: 20px;
+    margin-top: 4px;
+  }
+  .buskool-logo .navbar-brand img {
+    width: 100px;
+    height: 20px;
+  }
+
+  .buskool-logo {
+    margin: 0 auto;
+  }
+
+  .buskool-main-nav {
+    padding: 6px 0 1px;
+    border-bottom: none;
+    margin: 0 10px;
+    display: flex;
+  }
+
+  .search-input {
+    min-width: 100%;
+    margin: 10px auto;
+    padding: 0 10px;
+  }
+
+  .search-input > button {
+    font-weight: bold;
+    top: 0;
+    bottom: 0;
+    left: initial;
+    right: 10px;
+    padding: 9px;
+    background: none;
+    color: #5f6368;
+  }
+
+  .search-input > .location-filter-wrapper {
+    position: absolute;
+    left: 10px;
+    top: 0;
+  }
+
+  .search-input > .location-filter-wrapper button {
+    border: none;
+    color: #7e7e7e;
+    padding: 6px 10px;
+    background: #f2f2f2;
+    border-radius: 8px;
+  }
+
+  .search-input input {
+    padding: 6px 35px 5px 15px;
+    border-radius: 8px;
+  }
+
   #buskool-nav {
     padding: 0;
 
@@ -482,13 +838,15 @@ a.profile-info-wrapper:hover {
 
     background: #fff;
 
-    top: 56px;
+    top: 93px;
 
     right: -1px;
 
     left: -1px;
+  }
 
-    border-top: 2px solid #00c569;
+  #buskool-nav.hidden-search {
+    top: 50px;
   }
 
   #buskool-nav:after {
@@ -509,20 +867,6 @@ a.profile-info-wrapper:hover {
     top: -10px;
 
     right: 29px;
-  }
-
-  #buskool-nav .wrapper-nav {
-    padding: 30px 0 0;
-  }
-
-  .buskool-logo {
-    margin: 0 auto;
-
-    float: right;
-
-    position: relative;
-
-    right: calc(50% - 114px);
   }
 
   .profile-image-wrapper,
@@ -549,14 +893,6 @@ a.profile-info-wrapper:hover {
 
   #buskool-nav .search-input input {
     border: 1px solid #e6e6e6;
-  }
-
-  .search-input button {
-    left: 15px;
-
-    padding: 13px 15px;
-
-    height: 100%;
   }
 
   #buskool-nav ul.mobile-navigation a {
@@ -586,23 +922,26 @@ a.profile-info-wrapper:hover {
 
     left: 0;
   }
+  nav .green-button.router-link-exact-active,
+  nav > li > a.green-button.router-link-exact-active:hover {
+    display: none;
+  }
+  .mobile-login-link a {
+    font-size: 12px;
+    color: #fff;
+    background: #00c569;
+    padding: 4px 9px;
+    margin-top: 6px;
+  }
 }
 
 @media screen and (max-width: 550px) {
-  .buskool-logo {
-    margin: 0 auto;
-
-    float: right;
-
-    position: relative;
-
-    right: calc(50% - 95px);
-  }
-
   .buskool-logo .navbar-brand {
     width: 100px;
 
     margin-top: 5px;
+
+    margin-right: 0;
   }
 
   .profile-image-wrapper,
@@ -615,18 +954,16 @@ a.profile-info-wrapper:hover {
     float: left;
   }
 
-  .mobile-login-link a {
+  .mobile-login-link {
     font-size: 11px;
   }
 }
 
 @media screen and (max-width: 360px) {
   .mobile-login-link a {
-    margin: 0;
-
-    padding: 8px 16px 7px;
-
+    padding: 6px 16px 4px;
     font-size: 17px;
+    min-width: initial;
   }
 
   .mobile-login-link span {
@@ -640,7 +977,7 @@ a.profile-info-wrapper:hover {
     <!-- loading -->
     <div :class="{ 'loader-wrapper': !submiting, 'loader-display': submiting }">
       <div class="main-loader">
-        <img src="../../../../img/gif/prload.gif" />
+        <img v-if="submiting" src="../../../../img/gif/prload.gif" />
         <p dir="rtl">در حال بارگذاری...</p>
       </div>
     </div>
@@ -711,43 +1048,6 @@ a.profile-info-wrapper:hover {
       </div>
     </div>
 
-    <!-- <div class="container">
-      <div
-        id="DownloadApp"
-        class="modal fade"
-        tabindex="-1"
-        role="dialog"
-        aria-labelledby="myLargeModalLabel"
-      >
-        <div class="modal-dialog modal-lg" role="document">
-          <a href="#" class="close-dialog-popup" data-dismiss="modal">
-            <i class="fa fa-times"></i>
-          </a>
-
-          <div class="main_popup_content">
-            <div>
-              <div class="main-logo-popup">
-                <img src="../../../../img/logo/mobile-logo-white.svg" alt />
-                <p class="title">باسکول</p>
-              </div>
-
-              <p class="main-pop-up">دانلود اپلیکیشن اندروید باسکول</p>
-
-              <a
-                href="#"
-                class="btn green-button"
-                data-dismiss="modal"
-                @click.prevent="doDownload()"
-              >دریافت اپلیکیشن</a>
-
-              <a href="#" class="btn green-button" data-dismiss="modal">متوجه شدم</a>
-            </div>
-          </div>
-        </div>
-        //.modal-dialog
-      </div>
-    </div>-->
-
     <div class="container">
       <div
         class="modal fade"
@@ -769,7 +1069,7 @@ a.profile-info-wrapper:hover {
 
               <router-link
                 data-dismiss="modal"
-                :to="{ name: 'login' }"
+                :to="{ name: 'register' }"
                 class="btn green-button"
                 >ورود/ثبت نام</router-link
               >
@@ -792,23 +1092,27 @@ a.profile-info-wrapper:hover {
 
     <!--nav-->
     <div class="mobile-background-shadow"></div>
-    <nav class="navbar text-rtl">
+    <nav
+      class="navbar text-rtl"
+      :class="{
+        'navbar-category':
+          $route.name == 'productList' || $route.name == 'productCategory',
+      }"
+    >
       <div class="container-fluid buskool-main-nav">
-        <div class="hidden-md hidden-sm hidden-lg mobile-menu-button">
-          <span
-            class="message-count"
-            v-if="messageCount > 0"
-            v-text="messageCount"
-          ></span>
+        <div class="hidden mobile-menu-button">
           <button
             type="button"
             class="navbar-toggle"
             data-toggle="collapse"
             data-target="#buskool-nav"
           >
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
+            <span
+              class="message-count"
+              v-if="messageCount > 0"
+              v-text="messageCount"
+            ></span>
+            <i class="fa fa-bars"></i>
           </button>
         </div>
 
@@ -821,7 +1125,7 @@ a.profile-info-wrapper:hover {
           </router-link>
         </div>
 
-        <div class="user-auth-info-wrapper navbar-nav">
+        <div class="user-auth-info-wrapper navbar-nav hidden-xs">
           <ul v-if="user_id != ''" class="nav navbar-nav">
             <li>
               <a
@@ -830,20 +1134,27 @@ a.profile-info-wrapper:hover {
                 href="#web-profile-items"
                 role="button"
               >
-                <div class="profile-image-wrapper">
-                  <img
-                    v-if="profile_photo"
-                    :src="storage_path + '/' + profile_photo"
-                    :alt="user_full_name"
-                  />
-                  <img
-                    v-else
-                    src="../../../../img/user-defult.png"
-                    :alt="user_full_name"
-                  />
-                </div>
+                <div
+                  class="profile-image-wrapper"
+                  v-if="profile_photo"
+                  :style="{
+                    backgroundImage:
+                      'url(' + storage_path + '/' + profile_photo + ')',
+                  }"
+                ></div>
+                <div
+                  v-else
+                  class="profile-image-wrapper"
+                  :style="{
+                    backgroundImage:
+                      'url(' + assets + 'assets/img/user-defult.png)',
+                  }"
+                ></div>
                 <div class="profile-information">
-                  <span class="hidden-xs" v-text="user_full_name"></span>
+                  <span
+                    class="hidden-xs hidden-sm"
+                    v-text="user_full_name"
+                  ></span>
                   <i class="fa fa-angle-down"></i>
                 </div>
               </a>
@@ -889,53 +1200,202 @@ a.profile-info-wrapper:hover {
                 </li>
               </ul>
             </li>
-          </ul>
-          <ul v-else class="nav navbar-nav">
             <li class="hidden-xs">
-              <router-link class="green-button" :to="{ name: 'register' }">
-                <i class="fa fa-user"></i>
-                ثبت نام رایگان
+              <router-link
+                v-if="is_seller == 1"
+                class="green-button"
+                :to="{ name: 'messagesSeller' }"
+              >
+                <div class="item-icon">
+                  <i class="fas fa-comment-alt"></i>
+                </div>
+                پیام ها
+                <span
+                  class="message-count desktop-message-count"
+                  v-if="messageCount > 0"
+                  v-text="messageCount"
+                ></span>
               </router-link>
-            </li>
-
-            <li class="mobile-login-link hidden-sm hidden-md hidden-lg">
-              <router-link class="green-button" :to="{ name: 'login' }">
-                <i class="fa fa-user"></i>
-
-                <span>ورود / ثبت نام</span>
+              <router-link
+                v-else
+                class="green-button"
+                :to="{ name: 'messagesBuyer' }"
+              >
+                <div class="item-icon">
+                  <i class="fas fa-comment-alt"></i>
+                </div>
+                پیام ها
+                <span
+                  class="message-count desktop-message-count"
+                  v-if="messageCount > 0"
+                  v-text="messageCount"
+                ></span>
               </router-link>
             </li>
 
             <li class="hidden-xs">
               <router-link
-                class="green-button green-button-alt"
+                v-if="is_seller"
+                class="green-button green-button-alt static-layout"
+                :to="{ name: 'mainBuyAdRequests' }"
+              >
+                <div class="item-icon">
+                  <i class="fa fa-users"></i>
+                </div>
+                خریداران
+              </router-link>
+              <router-link
+                v-else
+                class="green-button green-button-alt static-layout"
+                :to="{ name: 'specialProducts' }"
+              >
+                <div class="item-icon">
+                  <i class="fa fa-users"></i>
+                </div>
+                فروشندگان
+              </router-link>
+            </li>
+          </ul>
+
+          <ul v-else class="nav navbar-nav">
+            <li class="hidden-xs">
+              <router-link class="green-button" :to="{ name: 'register' }">
+                <div class="item-icon register">
+                  <i class="fa fa-user static-layout light-green-text"></i>
+                </div>
+                ورود / ثبت نام
+              </router-link>
+            </li>
+
+            <li class="mobile-login-link hidden-sm hidden-md hidden-lg">
+              <router-link class="green-button" :to="{ name: 'register' }">
+                <i class="fa fa-user"></i>
+                <span>ورود / ثبت نام</span>
+              </router-link>
+            </li>
+
+            <!-- <li class="hidden-xs">
+              <router-link
+                class="green-button green-button-alt static-layout"
                 :to="{ name: 'login' }"
               >
-                <i class="fa fa-sign-in-alt"></i>
+                <div class="item-icon">
+                  <i class="fa fa-sign-in-alt"></i>
+                </div>
                 ورود به باسکول
+              </router-link>
+            </li> -->
+            <li class="hidden-xs">
+              <router-link
+                class="green-button green-button-alt static-layout"
+                :to="{ name: 'mainBuyAdRequests' }"
+              >
+                <div class="item-icon">
+                  <i class="fa fa-users"></i>
+                </div>
+                خریداران
+              </router-link>
+            </li>
+            <li class="hidden-xs">
+              <router-link
+                class="green-button green-button-alt static-layout"
+                :to="{ name: 'productList' }"
+              >
+                <div class="item-icon">
+                  <i class="fas fa-grip-horizontal"></i>
+                </div>
+                فروشندگان
               </router-link>
             </li>
           </ul>
         </div>
 
-        <div class="collapse navbar-collapse navbar-right" id="buskool-nav">
+        <div
+          class="collapse navbar-collapse navbar-right"
+          id="buskool-nav"
+          :class="{
+            'hidden-search':
+              $route.name == 'login' || $route.name == 'register',
+          }"
+        >
           <div class="wrapper-nav">
-            <div class="search-input">
+            <div class="search-input hidden-xs">
+              <nav class="custom-mega-menu">
+                <ul>
+                  <li>
+                    <button class="open-categories">
+                      <span> همه محصولات </span>
+                      <i class="fa fa-angle-down"></i>
+                    </button>
+                    <ul class="w-100 lvl1-wrapper">
+                      <li
+                        class="w-100 lvl1-list"
+                        v-for="(category, index) in categoryList"
+                        :key="index"
+                      >
+                        <button class="w-100">
+                          <div class="category-name">
+                            <span v-text="category.category_name"></span>
+                            <i class="fa fa-angle-left"></i>
+                          </div>
+                        </button>
+
+                        <ul class="lvl2-wrapper">
+                          <li
+                            v-for="(
+                              subCategory, index
+                            ) in category.subcategories"
+                            :key="index + 'sub-menu'"
+                            class="col-xs-12 pull-right text-right"
+                            :class="[setMenuClass(subCategory, false)]"
+                          >
+                            <router-link
+                              :to="{
+                                name: 'productCategory',
+                                params: {
+                                  categoryName: subCategory.category_name,
+                                },
+                              }"
+                              tag="button"
+                              class="menu-title"
+                            >
+                              <span v-text="subCategory.category_name"></span>
+                              <hr />
+                            </router-link>
+                            <div>
+                              <div
+                                v-for="(
+                                  item, index
+                                ) in subCategory.subcategories"
+                                :key="index + 'last-sub-menu'"
+                                class="col-xs-12 pull-right"
+                                :class="[setSubMenuClass(subCategory, false)]"
+                              >
+                                <router-link
+                                  :to="getSubCategoryUrl(item)"
+                                  class="sub-menu-title"
+                                  v-text="item.category_name"
+                                >
+                                </router-link>
+                              </div>
+                            </div>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </nav>
               <input
                 type="text"
                 placeholder="محصول مورد نظر خود را جستجو کنید"
                 v-model="mainSearchBoxText"
               />
-              <button
-                class="hidden-sm hidden-md hidden-lg fa fa-search"
-                @click="search"
-              ></button>
 
               <button class="hidden-xs" @click="search">
                 <i class="fa fa-search"></i>
               </button>
             </div>
-
             <ul class="mobile-navigation hidden-lg hidden-sm hidden-md">
               <li>
                 <router-link
@@ -997,7 +1457,7 @@ a.profile-info-wrapper:hover {
                 <router-link
                   v-if="is_seller == 1"
                   class="smoothScroll"
-                  :to="{ name: 'buyAdRequestsSeller' }"
+                  :to="{ name: 'mainBuyAdRequests' }"
                   @click="
                     registerComponentStatistics(
                       'header',
@@ -1020,6 +1480,25 @@ a.profile-info-wrapper:hover {
                   "
                   >ثبت درخواست خرید</router-link
                 >
+              </li>
+              <li v-if="user_id !== ''">
+                <router-link
+                  v-if="is_seller == 1"
+                  class="smoothScroll"
+                  :to="{ name: 'messagesRequestSeller' }"
+                  @click="
+                    registerComponentStatistics(
+                      'header',
+                      'dashboard',
+                      'click-on-dashboard'
+                    )
+                  "
+                >
+                  <span class="star-badge">
+                    <i class="fa fa-star"></i>
+                  </span>
+                  خریداران پیشنهادی
+                </router-link>
               </li>
               <li>
                 <router-link
@@ -1050,14 +1529,6 @@ a.profile-info-wrapper:hover {
                   >وبلاگ</a
                 >
               </li>
-              <!--  <li>
-                            <router-link
-                              class="smoothScroll"
-                              :to="{ name: 'pricing'}"
-                              @click="registerComponentStatistics('header','pricing','click-on-pricing')"
-                            >ارتقا عضویت</router-link>
-                          </li>
-              -->
               <li>
                 <router-link
                   class="smoothScroll"
@@ -1077,143 +1548,103 @@ a.profile-info-wrapper:hover {
           </div>
         </div>
       </div>
+      <div
+        v-if="$route.name != 'login' && $route.name != 'register'"
+        class="search-input hidden-sm hidden-md hidden-lg"
+      >
+        <input
+          type="text"
+          placeholder="محصول مورد نظر خود را جستجو کنید"
+          v-model="mainSearchBoxText"
+        />
+        <button class="fa fa-search" @click="search"></button>
 
-      <div class="container-fluid buskool-sub-menu hidden-xs">
+        <button class="hidden-xs" @click="search">
+          <i class="fa fa-search"></i>
+          <span class="hidden-sm"> جستجو </span>
+        </button>
+        <div
+          v-if="
+            $route.name == 'productList' || $route.name == 'productCategory'
+          "
+          class="hidden-sm hidden-md hidden-lg location-filter-wrapper"
+        >
+          <button data-toggle="modal" data-target="#searchFilter">
+            <span v-if="selectedCity" v-text="selectedCity.city_name"> </span>
+            <span
+              v-else-if="selectedProvince"
+              v-text="selectedProvince.province_name"
+            >
+            </span>
+            <span v-else> همه ایران </span>
+            <i class="fa fa-map-marker-alt"></i>
+          </button>
+        </div>
+      </div>
+      <div class="container-fluid buskool-sub-menu absolute-position hidden-xs">
         <ul class="nav navbar-right navbar-nav">
-          <li>
-            <router-link
-              class="smoothScroll"
-              :to="{ name: 'indexPage' }"
-              @click="
-                registerComponentStatistics(
-                  'header',
-                  'home-page',
-                  'click-on-home-page'
-                )
-              "
-            >
-              صفحه نخست
-            </router-link>
-          </li>
-
-          <li v-if="user_id !== ''">
-            <router-link
-              v-if="is_seller == 1"
-              class="smoothScroll"
-              :to="{ name: 'messagesSeller' }"
-              @click="
-                registerComponentStatistics(
-                  'header',
-                  'dashboard',
-                  'click-on-dashboard'
-                )
-              "
-            >
-              پیام ها
-              <span
-                class="message-count"
-                v-if="messageCount > 0"
-                v-text="messageCount"
-              ></span>
-            </router-link>
-
-            <router-link
-              v-else
-              class="smoothScroll"
-              :to="{ name: 'messagesBuyer' }"
-              @click="
-                registerComponentStatistics(
-                  'header',
-                  'dashboard',
-                  'click-on-dashboard'
-                )
-              "
-            >
-              پیام ها
-              <span
-                class="message-count"
-                v-if="messageCount > 0"
-                v-text="messageCount"
-              ></span>
-            </router-link>
-          </li>
-
-          <li v-if="user_id !== ''">
-            <router-link
-              v-if="is_seller == 1"
-              class="smoothScroll"
-              :to="{ name: 'buyAdRequestsSeller' }"
-              @click="
-                registerComponentStatistics(
-                  'header',
-                  'dashboard',
-                  'click-on-dashboard'
-                )
-              "
-              >درخواست های خرید</router-link
-            >
-            <router-link
-              v-else
-              class="smoothScroll"
-              :to="{ name: 'registerRequestBuyer' }"
-              @click="
-                registerComponentStatistics(
-                  'header',
-                  'dashboard',
-                  'click-on-dashboard'
-                )
-              "
-              >ثبت درخواست خرید</router-link
-            >
-          </li>
-
-          <li>
-            <router-link
-              class="smoothScroll"
-              :to="{ name: 'productList' }"
-              @click="
-                registerComponentStatistics(
-                  'header',
-                  'product-list',
-                  'click-on-product-list'
-                )
-              "
-            >
-              لیست محصولات
-            </router-link>
-          </li>
-          <li>
+          <li
+            v-for="(category, index) in categoryList"
+            :key="index"
+            class="smoothScroll"
+          >
             <a
-              href="https:\\blog.buskool.com"
-              class="smoothScroll"
-              @click="
-                registerComponentStatistics('header', 'blog', 'click-on-blog')
-              "
-              >وبلاگ</a
+              href="#"
+              class="hidden-lg"
+              @click.prevent="openFilterModal(category)"
+              v-text="category.category_name"
             >
-          </li>
-          <!--  <li>
-                        <router-link
-                          class="smoothScroll"
-                          :to="{ name: 'pricing'}"
-                          @click="registerComponentStatistics('header','pricing','click-on-pricing')"
-                        >ارتقا عضویت</router-link>
-                      </li>
-          -->
-          <li>
-            <router-link
-              class="smoothScroll"
-              :to="{ name: 'aboutUs' }"
-              @click="
-                registerComponentStatistics(
-                  'header',
-                  'about-us',
-                  'click-on-about-us'
-                )
-              "
+            </a>
+            <a
+              href="#"
+              class="hidden-md hidden-sm"
+              @click.prevent
+              v-text="category.category_name"
             >
-              درباره ما
-            </router-link>
+            </a>
+            <ul class="hidden-md hidden-sm">
+              <li
+                v-for="(subCategory, index) in category.subcategories"
+                :key="index + 'sub-menu'"
+                class="col-xs-12"
+                :class="[setMenuClass(subCategory, true)]"
+              >
+                <!-- <a
+                  href="#"
+                  class="menu-title"
+                  v-text="subCategory.category_name"
+                > -->
+                <router-link
+                  :to="{
+                    name: 'productCategory',
+                    params: {
+                      categoryName: subCategory.category_name,
+                    },
+                  }"
+                  tag="button"
+                  class="menu-title"
+                >
+                  <span v-text="subCategory.category_name"></span>
+                  <hr />
+                </router-link>
+
+                <ul>
+                  <li
+                    v-for="(item, index) in subCategory.subcategories"
+                    :key="index + 'last-sub-menu'"
+                    class="col-xs-12"
+                    :class="[setSubMenuClass(subCategory, true)]"
+                  >
+                    <router-link
+                      :to="getSubCategoryUrl(item)"
+                      class="sub-menu-title"
+                      v-text="item.category_name"
+                    >
+                    </router-link>
+                  </li>
+                </ul>
+              </li>
+            </ul>
           </li>
         </ul>
       </div>
@@ -1221,7 +1652,6 @@ a.profile-info-wrapper:hover {
   </div>
 </template>
 <script>
-var visible = false;
 import { eventBus } from "../../../router/router";
 
 export default {
@@ -1236,6 +1666,8 @@ export default {
       ProductId: "",
       mainSearchBoxText: "",
       messageCount: 0,
+      selectedProvince: "",
+      selectedCity: "",
     };
   },
   props: [
@@ -1247,8 +1679,19 @@ export default {
     "user_logout_path",
     "storage_path",
     "login_page_path",
+    "categoryList",
   ],
   methods: {
+    headerMenuStyles() {
+      let lvl1 = $(".lvl1-list");
+      lvl1
+        .mouseenter(() => {
+          $(".search-input > input").css("border-bottom-left-radius", "0");
+        })
+        .mouseleave(() => {
+          $(".search-input > input").css("border-bottom-left-radius", "12px");
+        });
+    },
     // jQuery
     jqUpdateSize: function () {
       // Get the dimensions of the viewport
@@ -1261,14 +1704,14 @@ export default {
         });
       }
     },
-    logUserOut: function () {
-      localStorage.removeItem("userRoute");
-      this.registerComponentStatistics(
-        "header",
-        "register-login",
-        "click-on-register-login"
-      );
-    },
+    // logUserOut: function () {
+    //   localStorage.removeItem("userRoute");
+    //   this.registerComponentStatistics(
+    //     "header",
+    //     "register-login",
+    //     "click-on-register-login"
+    //   );
+    // },
     registerComponentStatistics: function (
       categoryName,
       actionName,
@@ -1326,8 +1769,106 @@ export default {
         });
       }
     },
+
+    setMenuClass(categories, bigScreen) {
+      // let categoryLength = Object.keys(categories.subcategories).length;
+      // if (categoryLength <= 10) {
+      //   return "col-sm-6";
+      // }
+    },
+    setSubMenuClass(categories, bigScreen) {
+      // let categoryLength = Object.keys(categories.subcategories).length;
+      // if (categoryLength <= 10) {
+      //   return "col-sm-6";
+      // } else {
+      return "col-sm-4";
+      // }
+    },
+    handelScroll() {
+      // scroll handeling hide in web
+      var lastScroll = 0;
+      var navbar = $("nav.navbar .buskool-sub-menu");
+      $(window).scroll(function () {
+        var state = $(window).scrollTop();
+
+        if ($(window).scrollTop() > 60 && state > lastScroll) {
+          navbar.removeClass("absolute-position").addClass("scrollUp");
+        } else if (
+          ($(window).scrollTop() < 60 && state < lastScroll) ||
+          ($(window).scrollTop() > 60 && state < lastScroll)
+        ) {
+          navbar.removeClass("scrollUp");
+          setTimeout(() => {
+            navbar.addClass("absolute-position");
+          }, 300);
+        }
+
+        lastScroll = state;
+      });
+
+      $("#buskool-nav").on("hide.bs.collapse", function () {
+        $(".mobile-background-shadow").fadeTo(0, 0, function () {
+          $(this).css("display", "none");
+        });
+      });
+
+      $("#buskool-nav").on("show.bs.collapse", function () {
+        $(".mobile-background-shadow").fadeTo(0, 0.8);
+      });
+
+      $(document).on("click", function (e) {
+        /* bootstrap collapse js adds "in" class to your collapsible element*/
+
+        var user_menu_opened = $("#web-profile-items").hasClass("in");
+
+        if (
+          !$(e.target).closest("#web-profile-items").length &&
+          !$(e.target).is("#web-profile-items") &&
+          user_menu_opened === true
+        ) {
+          $("#web-profile-items").collapse("toggle");
+        }
+
+        /* bootstrap collapse js adds "in" class to your collapsible element*/
+
+        var menu_opened = $("#buskool-nav").hasClass("in");
+
+        if (!$(e.target).is(".search-input input") && menu_opened === true) {
+          $("#buskool-nav").collapse("toggle");
+        }
+      });
+    },
+    getSubCategoryUrl: function (t) {
+      let searchElement = $(".lvl1-wrapper");
+      let element = $(".buskool-sub-menu .navbar-right > li >  ul");
+      searchElement.addClass("hidden");
+      element.addClass("hidden");
+      setTimeout(() => {
+        searchElement.removeClass("hidden");
+        element.removeClass("hidden");
+      }, 20);
+      let url =
+        "/product-list/category/" + t.category_name.split(" ").join("-");
+      return url;
+    },
+    checkLocationFilter() {
+      const province = localStorage.getItem("selectedProvince");
+      const city = localStorage.getItem("selectedCity");
+      this.selectedProvince = province ? JSON.parse(province) : "";
+      this.selectedCity = city ? JSON.parse(city) : "";
+    },
+    openFilterModal(category) {
+      if (category) {
+        this.$parent.modalSubCategory = category;
+        $("#categories-modal").modal("show");
+      } else {
+        this.$parent.modalSubCategory = false;
+        $("#categories-modal").modal("show");
+      }
+    },
   },
   mounted() {
+    this.checkLocationFilter();
     if (this.user_id) {
       axios
         .post("/get_total_unread_messages_for_current_user")
@@ -1339,55 +1880,7 @@ export default {
           console.log("error", error);
         });
     }
-    // scroll handeling hide in web
-    var lastScroll = 0;
-    var navbar = $("nav.navbar .buskool-sub-menu");
-    $(window).scroll(function () {
-      var state = $(window).scrollTop();
-
-      if ($(window).scrollTop() > 60 && state > lastScroll) {
-        navbar.addClass("scrollUp");
-      } else if (
-        ($(window).scrollTop() < 60 && state < lastScroll) ||
-        ($(window).scrollTop() > 60 && state < lastScroll)
-      ) {
-        navbar.removeClass("scrollUp");
-      }
-
-      lastScroll = state;
-    });
-
-    $("#buskool-nav").on("hide.bs.collapse", function () {
-      $(".mobile-background-shadow").fadeTo(0, 0, function () {
-        $(this).css("display", "none");
-      });
-    });
-
-    $("#buskool-nav").on("show.bs.collapse", function () {
-      $(".mobile-background-shadow").fadeTo(0, 0.8);
-    });
-
-    $(document).on("click", function (e) {
-      /* bootstrap collapse js adds "in" class to your collapsible element*/
-
-      var user_menu_opened = $("#web-profile-items").hasClass("in");
-
-      if (
-        !$(e.target).closest("#web-profile-items").length &&
-        !$(e.target).is("#web-profile-items") &&
-        user_menu_opened === true
-      ) {
-        $("#web-profile-items").collapse("toggle");
-      }
-
-      /* bootstrap collapse js adds "in" class to your collapsible element*/
-
-      var menu_opened = $("#buskool-nav").hasClass("in");
-
-      if (!$(e.target).is(".search-input input") && menu_opened === true) {
-        $("#buskool-nav").collapse("toggle");
-      }
-    });
+    this.handelScroll();
 
     eventBus.$on("submitSuccess", ($event) => {
       this.popUpMsg = $event;
@@ -1419,6 +1912,13 @@ export default {
       this.messageCount += event;
     });
 
+    eventBus.$on("selectedProvince", (event) => {
+      this.selectedProvince = event;
+    });
+    eventBus.$on("selectedCity", (event) => {
+      this.selectedCity = event;
+    });
+
     $(window).resize(this.jqUpdateSize); // When the browser changes size
   },
   created() {
@@ -1443,6 +1943,11 @@ export default {
   watch: {
     mainSearchBoxText: function (value) {
       eventBus.$emit("textSearch", value);
+    },
+    categoryList() {
+      this.$nextTick(() => {
+        this.headerMenuStyles();
+      });
     },
   },
 };

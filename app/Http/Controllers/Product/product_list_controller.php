@@ -10,8 +10,13 @@ use DB;
 use App\Models\product_media;
 use App\Models\product;
 use App\Models\buyAd;
+use App\Models\tag;
 use Illuminate\Support\Facades\Cache;
 use Carbon\Carbon;
+use App\Http\Middleware\login;
+use App\Models\phone_number_view_log;
+use App\Http\Controllers\General\category_controller;
+
 
 class product_list_controller extends Controller
 {
@@ -25,12 +30,12 @@ class product_list_controller extends Controller
         'myusers.is_verified'
     ];
     protected $profile_info_sent_by_product_array = [
-        'profiles.profile_photo',
+        // 'profiles.profile_photo',
     ];
 
     protected $product_info_sent_by_product_array = [
         'products.id as product_id',
-        'products.updated_at', 
+        'products.updated_at',  
         'products.product_name', 
         'products.stock', 
         'products.min_sale_price', 
@@ -45,7 +50,7 @@ class product_list_controller extends Controller
         'provinces.id as province_id', 
         'cities.city_name', 
         'cities.id as city_id', 
-        'categories.category_name as sub_category_name', 
+        'c.category_name as sub_category_name', 
         'products.is_elevated',
     ];
 
@@ -69,6 +74,53 @@ class product_list_controller extends Controller
         'sort_by' => 'string'
     ];
 
+    protected $output_attributes = [
+        'main' => [
+            'product_id',
+            'product_name',
+            'stock',
+            'min_sale_amount',
+            'min_sale_price',
+            'description',
+            'myuser_id',
+            'sub_category_id',
+            'province_name',
+            'province_id',
+            'city_name',
+            'city_id',
+            'sub_category_name',
+            'category_name',
+            'category_id',
+            'is_elevated',
+            'updated_at',
+            'photos_count',
+            'photo'
+        ],
+        'user_info' => [
+            'user_id',
+            'user_name',
+            'first_name',
+            'last_name',
+            'is_verified',
+            'active_pakage_type',
+            'response_rate',
+            'response_time',
+            'ums', // unique message senders to the user
+            'upr', // unique phone number receivers
+            'created_at',
+        ],
+        'profile_info' => [
+            'profile_photo',
+        ],
+        'photos' => [
+            'file_path',
+        ],
+    ];
+
+    protected $words_blacklist = [
+        'در', 'به', 'را', 'از', 'و', 'برای', 'تا', 'که', 'بر', 'بی', 'مگر','-','(',')','،',','
+    ];
+
     protected $activate_cache = true;
     protected $is_search_text_category_name = true;
 
@@ -78,7 +130,11 @@ class product_list_controller extends Controller
 
         $products = $this->get_products_from_cache();
 
-        $this->apply_product_filters($request,$products);
+        $products = array_filter($products,function($product){
+            return $product['user_info']->response_rate >= 50;
+        });
+
+        $is_filter_applied = $this->apply_product_filters($request,$products);
 
         if(is_null($products)){
             return response()->json([
@@ -92,7 +148,18 @@ class product_list_controller extends Controller
             if($this->is_sorting_option_valid($request->sort_by)){
                 
                 if($request->sort_by == 'BM'){
-                    $products = $this->{$this->sorting_options_array[$request->sort_by]}($products);
+                    $cache_key = md5('products-' . session('user_id'));
+
+                    if($is_filter_applied == false && Cache::has($cache_key)){
+                        $products = Cache::get($cache_key);
+                    }
+                    else{
+                        $products = $this->{$this->sorting_options_array[$request->sort_by]}($products);
+
+                        if($is_filter_applied == false){
+                            Cache::put($cache_key,$products,15);  
+                        }
+                    }
                 }
                 else{
                     $products = $this->{$this->sorting_options_array[$request->sort_by]}($products);
@@ -147,7 +214,9 @@ class product_list_controller extends Controller
         else{
             $products = $this->get_all_products_with_related_media();
 
-            Cache::put($cache_key,$products,30);  
+            if(! Cache::has($cache_key)){
+                Cache::put($cache_key,$products,30);
+            }    
         }
 
         return $products;
@@ -166,50 +235,56 @@ class product_list_controller extends Controller
     
     protected function apply_product_filters($request,&$products)
     {
+        $is_filter_applied = false;
+
         if($request->has('category_id')){
             $this->apply_category_filter($products,$request->category_id);
+            $is_filter_applied = true;
         }
 
         if($request->has('province_id')){
             $this->apply_province_filter($products,$request->province_id);
+            $is_filter_applied = true;
         }
 
         if($request->has('city_id')){
             $this->apply_city_filter($products,$request->city_id);
+            $is_filter_applied = true;
         }
 
         if($request->has('search_text')){
             $this->apply_search_text_filter($products,$request->search_text);
+            $is_filter_applied = true;
         }
 
         if($request->has('special_products')){
             $this->apply_special_products_filter($products,$request->special_products);
+            $is_filter_applied = true;
         }
+
+        return $is_filter_applied;
     }
 
     public function get_all_products_with_related_media()
     {
         $products = $this->get_all_products();
 
-        $products = $this->append_related_data_to_given_products($products);
+        // $products = $this->append_related_data_to_given_products($products);
 
         foreach($products as $product)
         {
-            $response_info = $this->get_user_response_info($product['user_info']->id);
+            // $response_info = $this->get_user_response_info($product['user_info']->id);
             if(Carbon::now()->diffInMonths($product['main']->updated_at) >= 3){
                 $product['user_info']->response_time =  -1;
             }
             else{
-                $product['user_info']->response_time =  $response_info['response_time'];
+                $product['user_info']->response_time =  $product['user_info']->response_time ?? -1;
             }
-            $product['user_info']->response_rate = $response_info['response_rate'];
+            $product['user_info']->response_rate = $product['user_info']->response_rate ?? 100;
+
             if($product['user_info']->active_pakage_type > 0 && $product['user_info']->response_rate > 70){
-                $product['user_info']->ums = (integer) ($response_info['ums']/(Carbon::now()->diffInWeeks($product['main']->updated_at) + 1));
+                $product['user_info']->ums = (integer) (($product['user_info']->ums)/(Carbon::now()->diffInWeeks($product['main']->updated_at) + 1));
             }
-            else{
-                $product['user_info']->ums = $response_info['ums'];
-            }
-            
         }
 
         return $products;
@@ -217,66 +292,86 @@ class product_list_controller extends Controller
 
     protected function get_all_products()
     {
-        $query = product::where('confirmed', true);
+        $selected_items = array_merge($this->product_info_sent_by_product_array,
+                                        $this->user_info_sent_by_product_array);
 
-        // if ($request->special_products == true) {
-        //     $package_buyers_user_id = $this->get_package_buyers_user_id_array();
+        $products = DB::table('products')
+                        ->join('categories as c', 'products.category_id', '=', 'c.id')
+                        ->join('myusers','products.myuser_id','=','myusers.id')
+                        ->leftJoin('cities', 'cities.id', '=', 'products.city_id')
+                        ->leftJoin('provinces', 'provinces.id', '=', 'cities.province_id')
+                        ->selectRaw(implode(', ' , $selected_items) . ',( 
+                            FLOOR((select count(distinct(m1.sender_id)) from messages as m1 where m1.is_read = true and m1.receiver_id = products.myuser_id and not exists(select * from messages where messages.receiver_id = products.myuser_id and m1.is_read = false ))/(select count(distinct(messages.sender_id)) from messages where messages.receiver_id = products.myuser_id) * 100 )) as response_rate,
+                            (
+                                (select sum(TIMESTAMPDIFF(HOUR,messages.created_at,messages.updated_at)) from messages where messages.receiver_id = products.myuser_id and messages.is_read = true and messages.created_at between SUBDATE(NOW(), INTERVAL 3 MONTH) and NOW() ) / (select count(messages.id) from messages where messages.is_read = true and messages.receiver_id = products.myuser_id and messages.created_at between SUBDATE(NOW(), INTERVAL 3 MONTH) and NOW() )
+                            ) as response_time,(select categories.category_name from categories where c.parent_id = categories.id) as category_name,(select categories.id from categories where c.parent_id = categories.id) as category_id,(select count(id) from product_media where product_media.product_id = products.id) as photos_count,(select file_path from product_media where product_media.product_id = products.id order by product_media.id asc limit 1) as file_path,(select count(distinct(messages.sender_id)) from messages where messages.receiver_id = products.myuser_id) as ums,(select count(distinct(phone_number_view_logs.viewer_id)) from phone_number_view_logs where phone_number_view_logs.myuser_id = products.myuser_id) as upr')
+                        ->distinct('products.id')
+                        ->whereNull('products.deleted_at')
+                        ->where('myusers.is_blocked',false)
+                        ->where('products.confirmed', true)
+                        ->get();
 
-        //     $query = $query->whereIn('myuser_id', $package_buyers_user_id);
-        // }
-        // if($request->has('sub_category_id')){
-        //     $query->where('category_id',$request->sub_category_id);
-
-        //     $this->activate_cache = false;
-        // }
-        // if($request->has('city_id')){
-        //     $query->where('city_id',$request->city_id);
-
-        //     $this->activate_cache = false;
-        // }
-        // if($request->has('province_id')){
-        //     $province_id = $request->province_id;
-
-        //     $query = $this->apply_province_filter($query,$province_id);
-
-        //     $this->activate_cache = false;
-        // }
-        // if($request->has('category_id')){
-        //     $category_id = $request->category_id;
-
-        //     $query = $this->apply_category_filter($query,$category_id);
-
-        //     $this->activate_cache = false;
-        // }
-        // if($request->has('search_text')){
-        //     $search_text = $request->search_text;
-            
-        //     $query = $this->apply_search_text_filter($query,$search_text);
-        // }
-
-        $query = $query->orderBy('updated_at', 'desc');
-
-        // if($$request->has('to_record_number')){
-        //     $to_record_number = $request->to_record_number;
-
-        //     if($request->response_rate == false){
-        //         $helper_query = clone $query;
-
-        //         $products = $query->whereBetween('updated_at',[Carbon::now()->subDays(((integer) $to_record_number/10) * 7),Carbon::now()])->get();
-        //         if($products->count() < $to_record_number){
-        //             $products = $helper_query->get();
-        //         }
-        //     }
-        //     else{
-        //         $products = $query->get();
-        //     }
-        // }
-        // else {
-        //     $products = $query->get();
-        // }
-        $products = $query->get();
+        $products = $this->prepare_data_for_client($products);
 
         return $products;
+    }
+
+    protected function prepare_data_for_client(&$products)
+    {
+        $profiles = DB::table('profiles')
+                        ->where('confirmed',true)
+                        ->whereIn('myuser_id',array_column($products->all(),'myuser_id'))
+                        ->selectRaw('profiles.myuser_id,profiles.profile_photo,MAX(profiles.created_at)')
+                        ->groupBy(DB::raw('profiles.myuser_id desc'))
+                        ->get();
+
+        $result_products = [];
+        foreach($products as $product){
+            foreach($profiles as $profile){
+                if($profile->myuser_id == $product->myuser_id){
+                    $product->profile_photo = $profile->profile_photo;
+                    continue;
+                }
+            }
+            $result_products[] = $this->categorize_product_data($product);
+        }
+
+        return $result_products;
+    }
+
+    protected function categorize_product_data($product)
+    {
+        $categorized_product['main'] = new \stdClass;
+        $categorized_product['user_info'] = new \stdClass;
+        $categorized_product['profile_info'] = new \stdClass;
+        $categorized_product['photos'] = [];
+
+        $product_attributes = get_object_vars($product);
+        foreach($product_attributes as $key => $value)
+        {
+            if(in_array($key,$this->output_attributes['main']) === true ){
+                if($key == 'product_id'){
+                    $key = 'id';
+                }
+                $categorized_product['main']->$key = $value;
+            }
+            else if(in_array($key,$this->output_attributes['user_info']) === true){
+                if($key == 'user_id'){
+                    $key = 'id';
+                }
+                $categorized_product['user_info']->$key = $value;
+            }
+            else if(in_array($key,$this->output_attributes['profile_info']) === true){
+                $categorized_product['profile_info']->$key = $value;
+            }
+            else if(in_array($key,$this->output_attributes['photos']) === true){
+                $tmp = new \stdClass;
+                $tmp->$key = $value;
+                $categorized_product['photos'][] = $tmp;
+            }
+        }
+
+        return $categorized_product;
     }
 
     protected function get_package_buyers_user_id_array()
@@ -396,42 +491,29 @@ class product_list_controller extends Controller
         $tmp_products = [];
         //this condition checks if buyer has buyAd request to show five related products at top list
         if($user_info->is_buyer == true){
-            $the_buyer_last_buyAd_request = buyAd::where('myuser_id',$user_id)
-                                                    // ->where('confirmed',true)
-                                                    ->orderBy('updated_at')
-                                                    ->get()
-                                                    ->last();
+            
+            $tmp_products = $this->apply_customized_related_products_filter_for_buyers($products,$user_info);
+            $products =  $this->sort_products_by_response_time($products);
 
-            if($the_buyer_last_buyAd_request){
-                $tmp_products =  $products;
-                $tmp_products = $this->get_the_most_related_products_to_buyer($the_buyer_last_buyAd_request,$tmp_products);
-                $tmp_products = array_slice($tmp_products,0,5);
-            }
-        }
-
-        $user_response_info = $this->get_user_response_info($user_id);
-        $user_response_info['created_at'] = $user_info->created_at;
-
-        if($tmp_products){
-            $tmp_product_ids = [];
-            foreach($tmp_products as $product)
-            {
-                $tmp_product_ids[] = $product['main']->id;
+            if(count($tmp_products) > 0){
+                $tmp_product_ids = [];
+                foreach($tmp_products as $product)
+                {
+                    $tmp_product_ids[] = $product['main']->id;
+                }
+                
+                $products = array_filter($products,function($product) use($tmp_product_ids){
+                    return in_array($product['main']->id,$tmp_product_ids) == false;
+                });
             }
 
-            $products = array_filter($products,function($product) use($tmp_product_ids){
-                return in_array($product['main']->id,$tmp_product_ids) === false;
-            });
+            $products = array_unique(array_merge($tmp_products,$products),SORT_REGULAR);
         }
-        
-
-        $sorting_callback_function = $this->get_best_match_call_back_function($user_response_info);
-
-        usort($products,$sorting_callback_function);
-
-        if($tmp_products){
-            $products = array_merge($tmp_products,$products);
+        else if($user_info->is_seller == true){
+            $products = $this->sort_products_by_response_rate($products);
         }
+
+        $products = $this->remove_duplicated_sellers($products);
 
         return $products;
     }
@@ -469,8 +551,11 @@ class product_list_controller extends Controller
                 $b = $item2['main']->is_elevated == true ? $item2['main']->updated_at :  $item2['main']->is_elevated;
     
                 if($a == $b){
-                    $c = (Carbon::now()->diffInDays($item1['main']->updated_at) < 3) ? 1 : $this->get_users_similarity($item1['user_info'],$user_response_info);
-                    $d = (Carbon::now()->diffInDays($item2['main']->updated_at) < 3) ? 1 : $this->get_users_similarity($item2['user_info'],$user_response_info);
+                    $item1_degree = $item1['user_info']->ums + $item1['user_info']->upr;
+                    $item2_degree = $item2['user_info']->ums + $item2['user_info']->upr;
+
+                    $c = (Carbon::now()->diffInDays($item1['main']->updated_at) < 3) ? 0 : abs($user_response_info['ums'] + $user_response_info['upr'] - $item1_degree);
+                    $d = (Carbon::now()->diffInDays($item2['main']->updated_at) < 3) ? 0 : abs($user_response_info['ums'] + $user_response_info['upr'] - $item2_degree);
     
                     if($c == $d){
                         $e = (((Carbon::now()->diffInDays($item1['main']->updated_at) < 2)) || ($item1['user_info']->response_time > 0 )) ? $item1['user_info']->ums : 10000;
@@ -488,7 +573,7 @@ class product_list_controller extends Controller
                         return ($e > $f) ? 1 : -1;
                     }
     
-                    return ($c < $d) ? 1 : -1;
+                    return ($c > $d) ? 1 : -1;
                 }
     
                 return ($a < $b) ? 1 : -1;
@@ -543,7 +628,7 @@ class product_list_controller extends Controller
         $contacts = DB::table('messages')
                                     ->where('receiver_id',$user_id)
                                     ->select(DB::raw("DISTINCT(sender_id) as sender_id,sum(TIMESTAMPDIFF(SECOND,created_at,updated_at)) as delay"))
-                                    ->whereBetween('created_at',[Carbon::now()->subMonths(3),Carbon::now()])
+                                    ->whereBetween('created_at',[Carbon::now()->subMonths(9),Carbon::now()])
                                     ->groupBy('sender_id')
                                     ->get();
         
@@ -581,9 +666,21 @@ class product_list_controller extends Controller
             $response_time =  round($total_delay/$total_contacts_count);
         }
 
-        $ums = $total_contacts_count;
+        $ums = $total_contacts_count; // UMS stands for unique message senders to this user
 
-        return compact('response_rate','response_time','ums'); // UMS stands for unique message senders to this user
+        $user_phone_view_log = phone_number_view_log::where('myuser_id',$user_id)
+                        ->select(DB::raw("DISTINCT(viewer_id) as cnt"))
+                        ->get()
+                        ->first();
+
+        if($user_phone_view_log){
+            $upr = $user_phone_view_log->cnt;
+        }
+        else{
+            $upr = 0;
+        }
+
+        return compact('response_rate','response_time','ums','upr'); // UMS stands for unique message senders to this user
     }
 
     protected function apply_province_filter_in_query($query,$province_id)
@@ -668,38 +765,91 @@ class product_list_controller extends Controller
 
     protected function apply_search_text_filter(&$products,$search_text)
     {
-        $category_record = category::where('category_name',$search_text)
-                                        ->whereNotNull('parent_id')
+        $search_text = str_ireplace( array( '\'', '"',
+                    ',' , ';', '<', '>' , 'or', 'and','--'), ' ', $search_text);
+
+
+        $category_record = DB::table('categories')
+                                        ->where('category_name',$search_text)
                                         ->first();
 
         if($category_record){
-            $this->apply_category_filter($products,$category_record->id);
+            if(is_null($category_record->parent_id)){
+                $child_categories = DB::table('categories')
+                                    ->where('parent_id',$category_record->id)
+                                    ->pluck('id')
+                                    ->toArray();
+                
+                if($child_categories){
+                    $products = array_filter($products,function($product) use($child_categories){
+                        return in_array($product['main']->category_id,$child_categories) == true;
+                    });
+                }
+
+            }
+            else{
+                $child_categories = DB::table('categories')
+                                    ->where('parent_id',$category_record->id)
+                                    ->pluck('id')
+                                    ->toArray();
+
+                if($child_categories){
+                    $products = array_filter($products,function($product) use($child_categories){
+                        return in_array($product['main']->sub_category_id,$child_categories) == true;
+                    });
+                }
+                else{
+                    $this->apply_category_filter($products,$category_record->id);
+                }
+            }
+            
+
+
+            
         }
         else{
-            $products = array_filter($products,function($product) use($search_text){
-                return $this->does_search_text_matche_the_product($search_text,$product);
+            $search_text = str_replace('\\', '', $search_text);
+            $search_text = str_replace('/', '', $search_text);
+            $search_text_array = explode(' ', $search_text);
+
+            $search_expresion = '(.*)';
+
+            foreach ($search_text_array as $text) {
+                $search_expresion .= "($text)(.*)";
+            }
+
+            $result_products = array_filter($products,function($product) use($search_expresion){
+                return $this->does_search_text_matche_the_product($search_expresion,$product);
             });
+
+            if(count($result_products) == 0){
+                
+                $result_products = array_filter($products,function($product) use($search_text_array){
+                    $product_info[] = $product['main']->sub_category_name;
+                    $product_info[] = $product['main']->product_name;
+                    $product_info[] = $product['main']->description;
+                    $product_info[] = $product['user_info']->first_name . $product['user_info']->last_name;
+
+                    if(array_intersect($search_text_array,$product_info)){
+                        return true;
+                    }
+
+                    return false;
+                });
+            }
+
+            $products = $result_products;
         }
     }
 
-    protected function does_search_text_matche_the_product($search_text, &$product)
+    protected function does_search_text_matche_the_product($search_expresion, &$product)
     {
-        $search_text = str_replace('\\', '', $search_text);
-        $search_text = str_replace('/', '', $search_text);
-        $search_text_array = explode(' ', $search_text);
-
-        $search_expresion = '(.*)';
-
-        foreach ($search_text_array as $text) {
-            $search_expresion .= "($text)(.*)";
-        }
-
         $product_info[] = $product['main']->sub_category_name;
         $product_info[] = $product['main']->product_name;
         $product_info[] = $product['main']->description;
         $product_info[] = $product['user_info']->first_name . $product['user_info']->last_name;
 
-        $result = array_filter($product_info, function ($item) use ($search_text,$search_expresion) {
+        $result = array_filter($product_info, function ($item) use ($search_expresion) {
             return preg_match("/$search_expresion/", $item);
         });
 
@@ -728,28 +878,127 @@ class product_list_controller extends Controller
     {
         if($special_products == true){
             $products = array_filter($products,function($product){
-                return $product['user_info']->active_pakage_type == 3;
+                return $product['user_info']->active_pakage_type != 0 || ($product['user_info']->response_rate >= 90 && $product['user_info']->ums <= 10) ;
             });
+
+            $user_id = session('user_id');
+            $buyAds = DB::table('buy_ads')
+                            ->whereNull('deleted_at')
+                            ->where('buy_ads.myuser_id',$user_id)
+                            ->where(function($q){
+                                return $q = $q->where('confirmed',true)
+                                                ->orWhereBetween('created_at',[Carbon::now()->subHours(24),Carbon::now()]);
+                            })
+                            ->whereNull('deleted_at')
+                            ->orderBy('created_at','desc')
+                            ->get();
+            $result = [];
+            
+            foreach($buyAds as $buyAd){
+                $filtered_products = [];
+
+                if(! is_null($buyAd->name)){
+                    $buyAd_name_array = array_slice($this->get_buyAd_name_array($buyAd),0,2);
+                    
+            
+                    foreach($buyAd_name_array as $search_text){
+    
+                        $tmp = array_filter($products,function($product) use($search_text,$buyAd){
+                            return $this->does_search_text_matche_the_product($search_text,$product) == true && $product['main']->sub_category_id === $buyAd->category_id;
+                        });
+
+                        $filtered_products = array_merge($filtered_products,$tmp);
+                    }
+                    
+                }
+                else{
+                    $filtered_products = array_filter($products,function($product) use($buyAd){
+                        return $product['main']->sub_category_id === $buyAd->category_id;
+                    });
+                }
+
+                $result = array_merge($result,$filtered_products);
+            }
+            if(count($result) > 0){
+                $products = $this->remove_duplicated_sellers($result);
+            }
         }
+    }
+
+    protected function get_buyAd_name_array($buyAd)
+    {
+        $buyAd_name_array = array_filter(array_map('trim', explode(' ', str_replace('،', ' ', $buyAd->name)))); //PHP is for professionals,not for kids
+        
+        $category_info = $this->get_category_and_subcategory_name($buyAd->category_id);
+
+        if (count($buyAd_name_array)) {
+            if ($buyAd_name_array[0] == $category_info['subcategory_name']) {
+                array_splice($buyAd_name_array, 0, 1);
+            }
+        }
+
+        $buyAd_name_array = $this->remove_black_list_words($buyAd_name_array);
+
+        return $buyAd_name_array;
+    }
+
+    protected function get_category_and_subcategory_name($subcategory_id)
+    {
+        $subcategory_record = category::where('id', $subcategory_id)
+            ->select('category_name', 'parent_id')
+            ->get()
+            ->first();
+
+        $category_record = category::where('id', $subcategory_record->parent_id)
+            ->select('category_name')
+            ->get()
+            ->first();
+
+        return [
+            'category_name' => $category_record->category_name,
+            'subcategory_name' => $subcategory_record->category_name,
+        ];
+    }
+
+    protected function remove_black_list_words(&$words)
+    {
+        $result = [];
+
+        foreach ($words as $word) {
+            $index = array_search($word, $this->words_blacklist);
+            if ($index === false) {
+                $result[] = $word;
+            }
+        }
+
+        return $result;
     }
 
     protected function sort_products_by_response_rate(&$products)
     {
         usort($products,function($item1,$item2){
-            $a = $item1['user_info']->response_rate;
-            $b = $item2['user_info']->response_rate;
+            $a = $item1['main']->is_elevated == true ? $item1['main']->updated_at :  $item1['main']->is_elevated;
+            $b = $item2['main']->is_elevated == true ? $item2['main']->updated_at :  $item2['main']->is_elevated;
 
             if($a == $b){
-                $c = $item1['user_info']->active_pakage_type;
-                $d = $item2['user_info']->active_pakage_type;
+                $c = $item1['user_info']->response_rate;
+                $d = $item2['user_info']->response_rate;
 
                 if($c == $d){
-                    return $item1['main']->updated_at < $item2['main']->updated_at;
+                    $e = $item1['user_info']->active_pakage_type;
+                    $f = $item2['user_info']->active_pakage_type;
+
+                    if($e == $f){
+                        return $item1['main']->updated_at < $item2['main']->updated_at;
+                    }
+                    return ($e < $f) ? 1 : -1;
                 }
+
                 return ($c < $d) ? 1 : -1;
             }
 
             return ($a < $b) ? 1 : -1;
+            
         });
 
         return $products;
@@ -758,20 +1007,27 @@ class product_list_controller extends Controller
     protected function sort_products_by_response_time(&$products)
     {
         usort($products,function($item1,$item2){
-            $a = ($item1['user_info']->response_time > 0 && $item1['user_info']->response_rate > 70) ? ($item1['user_info']->response_time + ((100 - $item1['user_info']->response_rate) * $item1['user_info']->ums)) : 10000;
-            $b = ($item2['user_info']->response_time > 0 && $item2['user_info']->response_rate > 70) ? ($item2['user_info']->response_time + ((100 - $item2['user_info']->response_rate) * $item2['user_info']->ums)) : 10000;
+            $a = $item1['main']->is_elevated == true ? $item1['main']->updated_at :  $item1['main']->is_elevated;
+            $b = $item2['main']->is_elevated == true ? $item2['main']->updated_at :  $item2['main']->is_elevated;
 
             if($a == $b){
-                $c = $item1['user_info']->response_rate > 70 ? $item1['user_info']->response_rate : 0;
-                $d = $item2['user_info']->response_rate > 70 ? $item2['user_info']->response_rate : 0;
+                $c = ($item1['user_info']->response_time > 0 && $item1['user_info']->response_rate > 75) ? ($item1['user_info']->response_time + ((100 - $item1['user_info']->response_rate) * $item1['user_info']->ums)) : 10000;
+                $d = ($item2['user_info']->response_time > 0 && $item2['user_info']->response_rate > 75) ? ($item2['user_info']->response_time + ((100 - $item2['user_info']->response_rate) * $item2['user_info']->ums)) : 10000;
 
                 if($c == $d){
-                    return $item1['main']->updated_at < $item2['main']->updated_at;
-                }
-                return ($c < $d) ? 1 : -1;
-            }
+                    $e = $item1['user_info']->response_rate > 75 ? $item1['user_info']->response_rate : 0;
+                    $f = $item2['user_info']->response_rate > 75 ? $item2['user_info']->response_rate : 0;
 
-            return ($a > $b) ? 1 : -1;
+                    if($e == $f){
+                        return $item1['main']->updated_at < $item2['main']->updated_at;
+                    }
+                    return ($e < $f) ? 1 : -1;
+                }
+
+                return ($c > $d) ? 1 : -1;
+            }
+            return ($a < $b) ? 1 : -1;
+            
         });
 
         return $products;
@@ -796,6 +1052,439 @@ class product_list_controller extends Controller
         
         return $products;
     }
+
+    protected function remove_duplicated_sellers(&$products)
+    {
+        $first_products = array_slice($products,0,250);
+
+        $tmp_user_ids = [];
+        $duplicated_keys = [];
+        foreach($first_products as $key => $value)
+        {
+            if(! in_array($value['user_info']->id,$tmp_user_ids)){
+                $tmp_user_ids[] = $value['user_info']->id;
+            }
+            else{
+                $duplicated_keys[] = $key;
+            }
+        }
+
+        foreach($duplicated_keys as $key)
+        {
+            unset($products[$key]);
+        }
+
+        return $products;
+    }
+
+
+    // ---------------------------------------------------------------------------------------------------
+
+
+    public function get_product_list_blade(Request $request,$category_name = null)
+    {
+        if($this->_bot_detected() == false){
+            if (!$request->session()->has('user_id')) {
+                $user_phone = $request->cookie('user_phone');
+                $user_hashed_password = $request->cookie('user_password');
+        
+                if ($user_phone && $user_hashed_password) {
+                    $login_middleware_object = new login();
+                    $status = $login_middleware_object->set_user_session($user_phone, $user_hashed_password);
+                }
+            }
+        
+            return  view('layout.master');
+        }
+
+        //crwler bot has been deteced and will be served by plain html
+
+        $products = $this->get_products_from_cache();
+
+        $categories =  $this->get_all_categories();
+
+        $meta_info = null;
+        $related_categories = [];
+
+        if(! is_null($category_name)){
+            $category_name = strip_tags($category_name);
+            $category_name = str_replace('-',' ',$category_name);
+
+            $this->apply_search_text_filter($products,$category_name);
+
+            $meta_info = $this->get_category_tags_data_if_any($category_name);
+
+            if($meta_info['category_id'])
+            {
+                $category_controller_object = new category_controller();
+                $related_categories = $category_controller_object->get_related_category_names_array($meta_info['category_id'],$category_name);
+            }
+        }
+
+        usort($products, function ($item1, $item2) {
+            $a = $item1['main']->is_elevated;
+            $b = $item2['main']->is_elevated;
+
+            if ($a == $b) {
+                return $item1['main']->updated_at < $item2['main']->updated_at;
+            }
+
+            return ($a < $b) ? 1 : -1;
+        });
+
+        $products = array_slice($products,0,72);
+
+        
+        return view('layout.product-list',[
+            'products' => $products,
+            'categories' => $categories,
+            'categoryMetaData' => $meta_info,
+            'category_name' => $category_name,
+            'related_categories' => $related_categories,
+        ]);
+    }
+
+    protected function get_all_categories()
+    {
+        $all_categories = Cache::remember(md5('categories'),1,function(){
+            return DB::table('categories')
+                        ->leftJoin('products','products.category_id','=','categories.id')
+                        ->select('categories.*',DB::raw('count(products.id) as score'))
+                        ->groupBy('categories.id','categories.created_at','categories.updated_at','categories.category_name','categories.parent_id')
+                        ->orderByRaw('score desc, categories.id')
+                        ->get();
+        });
+
+        $categories = $all_categories->filter(function($category){
+            return $category->parent_id == null;
+        });
+
+        $categories->each(function ($item) use($all_categories){
+            // $item['subcategories'] = category::where('parent_id', $item->id)
+            //     ->get();
+            $other = null;
+            $item->subcategories = $all_categories->filter(function($category) use($item,&$other){
+                if($category->parent_id == $item->id && $category->category_name == 'سایر'){
+                    $other = $category;
+                    return false;
+                }
+
+                return $category->parent_id == $item->id;
+            });
+
+            $item->subcategories->each(function($item) use($all_categories){
+                $other = null;
+                $item->subcategories = $all_categories->filter(function($category) use($item,&$other){
+                    if($category->parent_id == $item->id && $category->category_name == 'سایر'){
+                        $other = $category;
+                        return false;
+                    }
+
+                    return $category->parent_id == $item->id;
+                });
+            });
+            
+
+            if(! is_null($other)){
+                ($item->subcategories)[] = $other;
+            }
+        });
+
+        return $categories;
+    }
+
+    protected function get_category_tags_data_if_any($category_name)
+    {
+
+        $category_record = category::where('category_name',$category_name)
+                                        ->first();
+        $schema_object = '';
+
+        if($category_record){
+            $category_id = $category_record->id;
+
+            $tags_info = $this->get_category_meta_data($category_id);
+
+
+            if(! is_null($tags_info)){
+                $temp = $tags_info->first();
+                $schema_object = $temp->schema_object;
+                unset($tags_info->schema_object);
+            }
+            
+
+            $data = [
+                'category_info' => $tags_info->toArray(),
+                'schema_object' => $schema_object,
+                'category_id' => $category_id,
+            ];
+
+            return $data;
+        }
+        else{
+            $tags_info = tag::where('header',$category_name)
+                                ->where('is_visible',true)
+                                ->select([
+                                    'id',
+                                    'header',
+                                    'content',
+                                    'schema_object',
+                                    'category_id'
+                                ])->get();
+
+            $category_id = null;
+
+            if(sizeof($tags_info) > 0){
+                $temp = $tags_info->first();
+                $schema_object = $temp->schema_object;
+                $category_id = $temp->category_id;
+
+                unset($temp->schema_object);
+            }
+                                
+            
+            // $tags_info = array($tags_info);
+
+            if($tags_info){
+                $data = [
+                    'category_info' => $tags_info->toArray(),
+                    'schema_object' => $schema_object,
+                    'category_id' => $category_id,
+                ];
+
+                return $data;
+            }
+            else{
+                return null;
+            }
+
+        }  
+    }
+
+    protected function get_category_meta_data($category_id)
+    {
+        $tags_info = tag::where('category_id',$category_id)
+                            ->where('is_visible',true)
+                            ->select([
+                                'id',
+                                'header',
+                                'content',
+                                'schema_object',
+                                'category_id'
+                            ])->get();
+
+        return $tags_info;
+    }
+
+    protected function _bot_detected() {
+
+        return (
+          isset($_SERVER['HTTP_USER_AGENT'])
+          && preg_match('/bot|crawl|slurp|spider|mediapartners/i', $_SERVER['HTTP_USER_AGENT'])
+        );
+    }
+
+    protected function get_user_last_activity_date($user_id)
+    {
+        $sending_message_records = DB::table('messages')
+                                ->where('sender_id',$user_id)
+                                ->whereNotExists(function($q) use($user_id){ //prevent duplication
+                                    $q->select(DB::raw(1))
+                                            ->from('auto_sent_phone_numbers_meta_datas as tmp')
+                                            ->whereRaw("tmp.sender_id = $user_id")
+                                            ->whereRaw('messages.receiver_id <> tmp.receiver_id');
+                                })
+                                ->select(DB::raw("distinct(created_at) as date"));
+
+        $seen_message_records = DB::table('messages')->where('receiver_id',$user_id)
+                                        ->where('is_read',true)
+                                        ->select(DB::raw("distinct(updated_at) as date"));
+
+        $profile_records = DB::table('profiles')->where('myuser_id',$user_id)
+                                            ->select(DB::raw("distinct(updated_at) as date"));
+
+        $product_records = DB::table('products')->where('products.myuser_id',$user_id)
+                                            ->select(DB::raw("distinct(updated_at) as date"));
+
+        $user_record = DB::table('myusers')->where('id',$user_id)
+                                            ->select(DB::raw("updated_at as date"));
+
+        $phone_view_record = DB::table('phone_number_view_logs')->where('myuser_id',$user_id)
+                                                            ->select(DB::raw('created_at as date'));
+
+        $last_activity_date = DB::table('buy_ads')->where('buy_ads.myuser_id',$user_id)
+                                            ->select(DB::raw("distinct(updated_at) as date"))
+                                            ->union($sending_message_records)
+                                            ->union($profile_records)
+                                            ->union($product_records)
+                                            ->union($sending_message_records)
+                                            ->union($user_record)
+                                            ->union($phone_view_record)
+                                            ->orderBy('date','desc')
+                                            ->get()
+                                            ->first()
+                                            ->date;
+
+
+        return $last_activity_date;
+    }
+
+    protected function apply_customized_related_products_filter_for_buyers(&$products,$viewer_info)
+    {
+        $user_id = $viewer_info->id;
+        $buyAds = DB::table('buy_ads')
+                        ->where('buy_ads.myuser_id',$user_id)
+                        ->where(function($q){
+                            return $q->whereBetween('updated_at',[Carbon::now()->subHours(24),Carbon::now()])
+                                        ->orWhere('confirmed',true);
+                        })
+                        ->whereNull('deleted_at')
+                        ->orderBy('updated_at','desc')
+                        ->get();
+
+        if(count($buyAds) > 0){
+            $related_buyAds_subcategory_id_array = [];
+            foreach($buyAds as $buyAd){
+                $related_buyAds_subcategory_id_array[] = $buyAd->category_id;
+            }
+
+            $p = array_filter($products,function($product) use($related_buyAds_subcategory_id_array){
+                return in_array($product['main']->sub_category_id,$related_buyAds_subcategory_id_array) == true && $product['user_info']->response_rate >= 70;
+            });
+        }
+        else{
+            $leads = DB::table('leads')
+                            ->where('buyer_id',$user_id)
+                            ->orderBy('updated_at','desc')
+                            ->get();
+
+                        
+            if(count($leads) > 0)
+            {
+                $related_buyAds_subcategory_id_array = [];
+                foreach($leads as $lead){
+                    $related_buyAds_subcategory_id_array[] = $lead->category_id;
+                }
+
+                $result = array_filter($products,function($product) use($related_buyAds_subcategory_id_array){
+                    return in_array($product['main']->category_id,$related_buyAds_subcategory_id_array) == true && $product['user_info']->response_rate >= 70;
+                });
+            }
+            else{
+                $result = array_filter($products,function($product) use($viewer_info){
+                    return $product['user_info']->response_rate >= 70;
+                });
+            }
+            
+
+            usort($result, function ($item1, $item2){
+                $a = $item1['main']->is_elevated;
+                $b = $item2['main']->is_elevated;
+
+                if($a == $b){
+                    $c = $item1['user_info']->is_verified;
+                    $d = $item2['user_info']->is_verified;
+                    
+                    if ($c == $d) {
+                        $e = $item1['user_info']->active_pakage_type;
+                        $f = $item2['user_info']->active_pakage_type;
+
+                        if($e == $f){
+                            return ($item1['main']->updated_at < $item2['main']->updated_at) ? 1 : -1;
+                        }
+
+                        return ($e < $f) ? 1 : -1;
+                    }
+        
+                    return ($c < $d) ? 1 : -1;
+                } 
+
+                return ($a < $b) ? 1 : -1;
+            });
+
+            return $result;
+        }
+        
+
+        
+        $result = [];
+        
+        foreach($buyAds as $buyAd){
+            $filtered_products = [];
+
+            if(! is_null($buyAd->name)){
+                $buyAd_name_array = array_slice($this->get_buyAd_name_array($buyAd),0,2);
+        
+                foreach($buyAd_name_array as $search_text){
+
+                    $tmp = array_filter($p,function($product) use($search_text,$buyAd){
+                        return $this->does_search_text_matche_the_product($search_text,$product) == true;
+                    });
+
+                    $filtered_products = array_merge($filtered_products,$tmp);
+                }
+                
+            }
+
+            $result = array_merge($result,$filtered_products);
+        }
+
+        $advertised_products_for_the_buyer = DB::table('product_suggestions')
+                                                    ->join('products','products.id','=','product_suggestions.product_id')
+                                                    ->where('products.confirmed',true)
+                                                    ->whereNull('products.deleted_at')
+                                                    ->where('product_suggestions.buyer_id',$user_id)
+                                                    ->whereBetween('product_suggestions.created_at',[Carbon::now()->subDays(2),Carbon::now()])
+                                                    ->select('products.id as id')
+                                                    ->distinct('products.id')
+                                                    ->get()
+                                                    ->toArray();
+
+        $advertised_products_for_the_buyer = array_column($advertised_products_for_the_buyer,'id');
+
+        if(count($result) > 0){
+            usort($result, function ($item1, $item2){
+
+                $a = $item1['main']->is_elevated;
+                $b = $item2['main']->is_elevated;
+    
+                if($a == $b){
+                    $c = $item1['user_info']->is_verified;
+                    $d = $item2['user_info']->is_verified;
+
+                    if ($c == $d) {
+                        $e = $item1['user_info']->response_rate;
+                        $f = $item2['user_info']->response_rate;
+
+                        if($e == $f){
+                            return ($item1['main']->updated_at < $item2['main']->updated_at) ? 1 : -1;
+                        }
+                        
+                        return ($e < $f) ? 1 : -1;
+                    }
+                    
+                    return ($c < $d) ? 1 : -1;
+
+                }
+    
+                return ($a < $b) ? 1 : -1;
+            });
+        }
+        
+
+        if(count($advertised_products_for_the_buyer) > 0){
+            $tmp = array_filter($products,function($product) use($advertised_products_for_the_buyer){
+                return in_array($product['main']->id,$advertised_products_for_the_buyer) == true; 
+            });
+
+            $result = array_merge($tmp,$result);
+        }
+
+        $result = $this->remove_duplicated_sellers($result);
+
+        return $result;
+    }
+
 
 
 }

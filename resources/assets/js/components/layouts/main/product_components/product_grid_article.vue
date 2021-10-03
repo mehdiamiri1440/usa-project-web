@@ -25,13 +25,26 @@
 .main-content-item {
   direction: rtl;
   margin: 15px auto;
-  border-radius: 5px;
-  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.16);
+  border-radius: 12px;
   padding: 0;
   background: #fff;
   float: right;
   width: 100%;
-  border: 2px solid transparent;
+  border: 1px solid #e0e0e0;
+  overflow: hidden;
+  position: relative;
+  height: 250px;
+}
+
+.elevator-event {
+  position: absolute;
+  left: 5px;
+  bottom: 15px;
+  border: none;
+  border-radius: 8px;
+  background: #38485f;
+  color: #fff;
+  padding: 3px 7px 0;
 }
 
 .main-article-title {
@@ -165,7 +178,7 @@ label {
 }
 
 .is-user-valid {
-  border: 2px solid #00c569;
+  border: 1px solid #00c569;
 }
 
 .modal-content {
@@ -234,18 +247,12 @@ label {
   margin: 0;
   padding: 4px 15px;
   width: 100%;
+  border-radius: 8px;
 }
 
 .article-features button.disable {
   background: #777;
   border: none;
-}
-
-.article-features button.elevator-event {
-  background: #e41c38;
-  color: #fff;
-  border-radius: 4px;
-  padding: 4px 14px;
 }
 
 .article-features button.disable {
@@ -279,6 +286,10 @@ label {
 }
 
 @media screen and (max-width: 555px) {
+  .article-action-buttons > button {
+    padding: 8px 15px;
+    font-size: 16px;
+  }
   .article-action-buttons {
     padding: 0 15px 15px;
     display: block;
@@ -420,6 +431,24 @@ label {
     </div>
 
     <!--end article modal-->
+    <div class="main-article-contents-image-wrapper" @click="setScroll()">
+      <ProductImage
+        :base="str + '/'"
+        :img="product.photos[0].file_path"
+        :alt="
+          'فروش عمده ی ' +
+          product.main.sub_category_name +
+          ' ' +
+          product.main.product_name +
+          ' ' +
+          product.main.city_name +
+          ' - ' +
+          product.main.province_name
+        "
+        :image-count="product.main.photos_count"
+        :product-url="productUrl"
+      />
+    </div>
 
     <ProductUserInfo
       :profile_photo="product.profile_info.profile_photo"
@@ -428,7 +457,6 @@ label {
         product.user_info.first_name + ' ' + product.user_info.last_name
       "
       :user_name="product.user_info.user_name"
-      :current_user="currentUser"
       :product_id="product.main.id"
       :is_my_profile_status="isMyProfile"
     />
@@ -437,67 +465,16 @@ label {
       :productIndex="productIndex"
       :is_my_profile_status="isMyProfile"
     />
-
-    <div
-      class="footer-article"
-      :class="{
-        'owner-product': isMyProfile,
-      }"
+    <button
+      v-if="product.main.is_elevated == 1"
+      data-toggle="tooltip"
+      data-placement="right"
+      title="نردبان اعمال شده است"
+      class="elevator-event"
     >
-      <div
-        class="article-features pull-left"
-        v-if="product.main.is_elevated == 1 || isMyProfile"
-      >
-        <button
-          v-if="isMyProfile"
-          class="elevator-event"
-          @click.prevent="elevatorEvent()"
-        >
-          <i class="fas fa-chart-line"></i>
-          اعمال نردبان
-        </button>
+      <i class="fas fa-chart-line"></i>
+    </button>
 
-        <button
-          v-if="product.main.is_elevated == 1"
-          data-toggle="tooltip"
-          data-placement="bottom"
-          title="نردبان اعمال شده است"
-          class="elevator-event active disable"
-        >
-          <i class="fas fa-chart-line"></i>
-        </button>
-      </div>
-      <div
-        class="article-action-buttons pull-right"
-        :class="[
-          {
-            'full-width-button': product.main.is_elevated == 0 && !isMyProfile,
-          },
-          {
-            'calc-width-button': product.main.is_elevated == 1 && !isMyProfile,
-          },
-        ]"
-      >
-        <button
-          v-if="!isMyProfile"
-          @click.prevent="openChat(product)"
-          class="green-button"
-        >
-          <i class="fa fa-envelope"></i>
-          استعلام قیمت
-        </button>
-
-        <button
-          v-else
-          class="blue-button"
-          data-toggle="modal"
-          :data-target="'#article-modal' + product.main.id"
-        >
-          <i class="fa fa-pencil-alt"></i>
-          ویرایش
-        </button>
-      </div>
-    </div>
     <!--google codes-->
     <script v-html="jsonLDObject" type="application/ld+json"></script>
     <!--end google codes-->
@@ -508,13 +485,15 @@ import { eventBus } from "../../../../router/router";
 
 import ProductUserInfo from "./product-grid-article-components/product_user_info";
 import ArticleMainContents from "./product-grid-article-components/article_main_contents";
+import ProductImage from "./product-grid-article-components/product_image";
 
 export default {
   components: {
     ProductUserInfo,
     ArticleMainContents,
+    ProductImage,
   },
-  props: ["productIndex", "product", "str", "currentUser"],
+  props: ["productIndex", "product", "str"],
   data: function () {
     return {
       submiting: false,
@@ -525,20 +504,30 @@ export default {
       productUrl: "",
       jsonLDObject: "",
       verifiedUserContent: this.$parent.verifiedUserContent,
+      loadedProduct: true,
     };
   },
   methods: {
     init: function () {
       this.productUrl = this.getProductUrl();
-
-      if (this.currentUser.user_info) {
-        if (this.currentUser.user_info.id === this.product.main.myuser_id) {
+      let userId = getUserId();
+      if (userId) {
+        if (userId === this.product.main.myuser_id) {
           this.isMyProfile = true;
           this.$emit("isMyProfile", this.isMyProfile);
         }
       }
 
       // this.jsonLDObject = this.createJsonLDObject();
+    },
+    setScroll: function () {
+      localStorage.setItem("scrollIndex", this.$props.productIndex);
+      window.open(this.productUrl, "_blank");
+      this.$parent.registerComponentStatistics(
+        "product",
+        "show-product-in-seperate-page",
+        "show-product-in-seperate-page"
+      );
     },
     toLatinNumbers: function (num) {
       if (num == null) {
@@ -557,31 +546,6 @@ export default {
         .replace(/[\u06f0-\u06f9]/g, function (c) {
           return c.charCodeAt(0) - 0x06f0;
         });
-    },
-    openEditBox: function (e) {
-      e.preventDefault();
-
-      if (this.currentUser.profile) {
-        var event = $(e.target);
-        this.errors = "";
-        var element = event.parents("article").find(".buy_details");
-
-        element.slideToggle("125", "swing");
-        $(".buy_details").not(element).slideUp();
-
-        this.scrollToTheRequestRegisterBox(element);
-
-        this.registerComponentStatistics(
-          "product",
-          "open-edit-box",
-          "click on open edit box"
-        );
-      } else {
-        this.registerComponentExceptions(
-          "Product-component: click on open edit box while current user is undefined",
-          true
-        );
-      }
     },
     scrollToTheRequestRegisterBox: function (element) {
       var newPosition = $(element).offset();
@@ -642,46 +606,6 @@ export default {
             "Product-component: validation errors in edit product API"
           );
         });
-    },
-
-    openChat: function (product) {
-      this.registerComponentStatistics(
-        "product",
-        "openChat",
-        "click on open chatBox"
-      );
-
-      let productName =
-        product.main.sub_category_name + " " + product.main.product_name;
-
-      var contact = {
-        contact_id: product.user_info.id,
-        first_name: product.user_info.first_name,
-        last_name: product.user_info.last_name,
-        profile_photo: product.profile_info.profile_photo,
-        user_name: product.user_info.user_name,
-        product_name: productName,
-      };
-
-      var self = this;
-
-      if (this.currentUser.user_info) {
-        if (this.currentUser.user_info.id !== product.user_info.id) {
-          eventBus.$emit("ChatInfo", contact);
-          // window.localStorage.setItem("contact", JSON.stringify(contact));
-
-          // this.$router.push({name : 'registerInquiry'});
-        } else {
-          this.popUpMsg = "شما نمیتوانید به خودتان پیام دهید.";
-          eventBus.$emit("submitSuccess", this.popUpMsg);
-          $("#custom-main-modal").modal("show");
-        }
-      } else {
-        window.localStorage.setItem("contact", JSON.stringify(contact));
-
-        this.$router.push({ name: "registerInquiry" });
-        // eventBus.$emit('modal','sendMsg');
-      }
     },
     updatePopUpStatus: function (popUpOpenStatus) {
       this.popUpLoaded = popUpOpenStatus;
@@ -811,12 +735,11 @@ export default {
 
       eventBus.$emit("productId", this.product.main.id);
       eventBus.$emit("modal", "elevator");
-      // $("#elevator-modal").modal("show");
     },
   },
   mounted() {
     this.init();
-    $(".elevator-event.active").tooltip();
+    $(".elevator-event").tooltip();
   },
 };
 </script>

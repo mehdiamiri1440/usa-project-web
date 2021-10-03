@@ -141,6 +141,27 @@ create new badge for buttons
   background-color: #eee !important;
 }
 
+.swal-star-badge {
+  border-radius: 12px;
+  color: rgb(249, 242, 159);
+  text-align: center;
+  direction: ltr;
+  line-height: 1;
+}
+
+.swal-star-badge i{
+  font-size: 60px;
+  background: linear-gradient( 21deg, rgb(199, 168, 79) 0%, rgb(249, 242, 159) 51%, rgb(199, 168, 79) 100% );
+  background-clip: border-box;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 2px 0;
+}
+
+.swal-guide{
+  line-height: 1.618;
+}
+
 .swal-user-image {
   width: 90px;
   height: 90px;
@@ -154,6 +175,49 @@ create new badge for buttons
 .swal-img{
   height: 100%;
 }
+
+
+/* style for credit-card-wrapper */
+
+.credit-card-wrapper > i{
+  font-size: 70px;
+  margin: 10px auto;
+  color: #556080;
+}
+
+.credit-card-wrapper > p{
+  color: #555;
+font-size: 16px;
+line-height: 1.618;
+margin: 10px;
+font-weight: bold;
+}
+.credit-card-wrapper > div{
+  margin: 15px auto;
+}
+.credit-card-wrapper > div a{
+  display: block;
+font-size: 20px;
+color: #333;
+font-weight: bold;
+margin-top: 20px;
+}
+.credit-card-wrapper > div i{
+  color: #00c569;
+}
+
+.increase-wallet-button{
+  border-radius: 12px;
+  direction: rtl;
+  font-size: 18px;
+  font-weight: 500;
+  margin: 30px auto 0;
+}
+
+.increase-wallet-button i{
+  margin-left: 7px;
+}
+
 
 @media screen and (max-width: 768px) {
   .custom-swal-full-size,

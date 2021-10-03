@@ -1,0 +1,941 @@
+/* @font-face {
+    font-family: "IRANSans";
+    src: url(../../../index/fonts/IranSans.woff);
+} */
+
+body {
+    font-family: "IRANSans", Tahoma;
+    font-style: normal;
+}
+
+/*---------------------------------------
+    Typorgraphy
+-----------------------------------------*/
+
+input[type="text"], textarea{
+    width: 100%;
+    outline: none;
+}
+
+h1, h2, h3, h4, h5 {
+    font-weight: 300;
+}
+
+h1 {
+    font-size: 60px;
+}
+
+h2 {
+    font-size: 40px;
+}
+
+h3 {
+    font-size: 22px;
+}
+
+h5 {
+    color: #ddd;
+    padding-top: 10px;
+}
+
+h6 {
+    color: #666;
+    font-weight: 500;
+
+}
+
+img {
+    width: 100%;
+}
+
+a, abbr, acronym, address, applet, article, aside, audio, b, big, blockquote, body, canvas, caption, center, cite, code, dd, del, details, dfn, div, dl, dt, em, embed, fieldset, figcaption, figure, footer, form, h1, h2, h3, h4, h5, h6, header, html, i, iframe, img, ins, kbd, label, legend, li, mark, menu, nav, object, ol, output, p, pre, q, ruby, s, samp, section, small, span, strike, strong, sub, summary, sup, table, tbody, td, tfoot, th, thead, time, tr, tt, u, ul, var, video {
+  margin: 0;
+  margin-bottom: 0px;
+  padding: 0;
+  vertical-align: baseline;
+  word-wrap: break-word;
+}
+
+ul,ol{
+  list-style: none;
+}
+
+a {
+    text-decoration: none !important;
+    outline: none;
+}
+
+
+p{
+    margin: 0;
+}
+
+a:visited,
+a:focus {
+    outline: none;
+    text-decoration: none !important;
+}
+
+.h-100{
+    height: 100%;
+}
+
+.navbar-nav > li > a{
+    padding: initial;
+    border: none;
+    line-height: initial;
+}
+
+body {
+    background: #fff;
+  }
+
+  .text-rtl{
+    direction: rtl;
+  }
+
+  .bg-gray{
+    background-color: #556080 !important;
+
+  }
+/*---------------------------------------
+            Header styles 
+        -----------------------------------------*/
+
+/*start header styles*/
+
+.search-input {
+  transition: 150ms;
+  min-width: 590px;
+  position: relative;
+  border-radius: 8px;
+}
+
+.search-input input {
+  padding: 8px 157px 8px 15px;
+  margin: 0;
+  float: right;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  line-height: 24px;
+}
+
+.search-input > button {
+  transition: 150ms;
+  border: none;
+  margin: 0;
+  padding: 8px 17px;
+  color: #868686;
+  background: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 17px;
+  font-weight: 500;
+}
+
+button.open-categories {
+  background: #eee;
+  color: #313a43;
+  font-weight: 400;
+  padding: 9px;
+  left: initial;
+  border: none;
+  border-radius: 0 12px 12px 0;
+  right: 0;
+  max-width: 138px;
+  font-size: 16px;
+}
+
+.custom-mega-menu .col-xs-12 {
+  padding: 0 10px;
+}
+
+.custom-mega-menu ul {
+  position: absolute;
+  margin: 0;
+  list-style: none;
+  z-index: 2;
+}
+
+.custom-mega-menu li:hover > ul {
+  display: block;
+}
+
+.custom-mega-menu li:hover .open-categories {
+  border-bottom-right-radius: 0;
+}
+
+.custom-mega-menu ul ul {
+  position: absolute;
+  display: none;
+  margin: 0;
+  background: #fff;
+}
+.custom-mega-menu ul ul li {
+  display: block;
+}
+
+.custom-mega-menu ul ul ul {
+  position: absolute;
+  top: 0;
+  right: 100%;
+  width: 452px;
+}
+
+.custom-mega-menu .lvl1-wrapper {
+  background: none;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  border-bottom-right-radius: 12px;
+}
+
+.custom-mega-menu .lvl2-wrapper {
+  box-shadow: -5px 7px 9px rgba(0, 0, 0, 0.02);
+  border-radius: 0 0 12px 12px;
+  padding-bottom: 25px;
+  min-height: calc(100% + 20px);
+}
+
+.custom-mega-menu .lvl2-wrapper > li > div > div {
+  padding: 0 3px;
+}
+
+.custom-mega-menu .lvl1-list button {
+  border: none;
+  background: #fafafa;
+  padding: 10px 0;
+}
+
+.custom-mega-menu .lvl1-list button:hover {
+  background: #eeeeee;
+}
+.custom-mega-menu .lvl1-list:last-of-type button {
+  border-bottom-right-radius: 12px;
+}
+
+.category-name {
+  display: flex;
+  justify-content: space-around;
+}
+
+.search-input > button.open-categories span {
+  margin-left: 4px;
+}
+
+.search-input > button i:before {
+  position: relative;
+  left: 2px;
+  top: 3px;
+}
+
+nav.navbar {
+  background: #fff;
+  margin: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1012;
+  border-radius: 0;
+  border: none;
+  border-bottom: 1px solid #ebebeb;
+}
+
+nav.navbar.navbar-category {
+  border-bottom: none !important;
+}
+
+nav.navbar.navbar-category .search-input {
+  margin-bottom: 0;
+}
+
+.buskool-main-nav {
+  border-bottom: 1px solid #fafafa;
+  padding: 10px 15px;
+}
+
+.nav > li > a.green-button:hover {
+  background: #f0f7e7;
+  color: #5f6368 !important;
+}
+
+.nav > li > a.green-button.router-link-exact-active:hover {
+  background: #eee;
+}
+
+nav .green-button {
+  font-size: 14px;
+  background: none;
+  color: #5f6368;
+  margin-top: 0;
+  font-weight: 400;
+  padding: 0;
+  padding: 5px 10px;
+  min-width: 80px;
+  border-radius: 12px;
+}
+
+nav .green-button .item-icon {
+  font-size: 19px;
+}
+
+nav .green-button .item-icon.register::before {
+  content: "\F067";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  font-size: 10px;
+  position: relative;
+  top: -5px;
+  color: #21ad93;
+}
+.user-auth-info-wrapper, .nav.navbar-nav > li {
+  float: left;
+  text-align: center;
+}
+.user-auth-info-wrapper .navbar-nav > li {
+  margin: -5px auto;
+  padding: 0 10px;
+}
+
+.user-auth-info-wrapper .navbar-nav > li:last-of-type .green-button-alt {
+  margin-right: 0;
+}
+
+.user-auth-info-wrapper .navbar-nav > li:after {
+  content: " ";
+  width: 1px;
+  height: 35px;
+  position: absolute;
+  left: 0;
+  background: #eee;
+  top: 8px;
+}
+.user-auth-info-wrapper .navbar-nav > li:first-of-type::after {
+  display: none;
+}
+
+nav .green-button-alt {
+  padding: 5px 10px;
+  font-size: 14px;
+  margin-top: 0;
+  margin-right: 15px;
+  font-weight: 400;
+  border-radius: 12px;
+  border: none;
+  background: none;
+  /* color: #1da1f2; */
+  color: #5f6368;
+}
+
+.nav > li > a.green-button.green-button-alt:hover {
+  color: #fff;
+  background: #e6f4f8 !important;
+}
+
+.green-button:focus,
+.green-button:hover {
+  color: #fff !important;
+}
+
+.user-auth-info-wrapper .nav > li > a.green-button:focus,
+.user-auth-info-wrapper .nav > li > a.router-link-exact-active,
+.user-auth-info-wrapper
+  .nav
+  > li
+  > a.router-link-exact-active
+  .light-green-text,
+.user-auth-info-wrapper
+  .nav
+  > li
+  > a.router-link-exact-active
+  .item-icon::before,
+.user-auth-info-wrapper .nav > li > a.router-link-exact-active:hover {
+  color: #fff !important;
+  background: #eee !important;
+}
+
+.buskool-logo .navbar-brand {
+  overflow: hidden;
+  width: 140px;
+  height: 28px;
+  margin: 6px 15px 6px 0;
+  padding: 0;
+}
+
+.buskool-logo .navbar-brand img {
+  width: 140px;
+  height: 28px;
+}
+
+#buskool-nav {
+  margin-right: 35px;
+}
+
+.buskool-sub-menu .navbar-right {
+  margin-right: 165px !important;
+}
+
+.absolute-position > ul {
+  position: absolute;
+}
+
+.buskool-sub-menu .navbar-right > li > a + ul {
+  display: none;
+  height: 0;
+}
+
+.buskool-sub-menu .navbar-right > li > a:hover + ul,
+.buskool-sub-menu .navbar-right > li > a:active + ul,
+.buskool-sub-menu .navbar-right > li > a:focus + ul,
+.buskool-sub-menu .navbar-right > li > ul:hover {
+  display: block;
+  height: initial;
+}
+.buskool-sub-menu .navbar-right > li > ul:hover + a {
+  background: red;
+}
+
+.buskool-sub-menu .navbar-right > li > ul {
+  position: absolute;
+  width: 600px;
+  background: #fff;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+  border-radius: 0 0 12px 12px;
+}
+
+.buskool-sub-menu .navbar-right > li > ul > li {
+  padding-bottom: 17px;
+}
+
+.buskool-sub-menu {
+  transition: 0.3s;
+  height: 36px;
+  opacity: 1;
+  overflow: hidden;
+  margin-bottom: -1px;
+  background-color: #fafafa;
+}
+
+.buskool-sub-menu.scrollUp {
+  height: 0;
+  opacity: 0;
+  transition: 0.3s;
+}
+
+.buskool-sub-menu li {
+  float: right !important;
+}
+
+.buskool-sub-menu .smoothScroll > a {
+  color: #404b55;
+  padding: 6px 15px;
+  position: relative;
+  border-left: 1px solid #eee;
+  font-weight: 300;
+}
+
+a.menu-title {
+  font-size: 15px;
+  display: block;
+  border-bottom: 1px solid #e9ecef;
+  color: #000;
+  padding: 13px 0;
+}
+
+a.sub-menu-title {
+  font-size: 13px;
+  color: #707070;
+  display: block;
+  padding: 7px 0;
+  font-weight: 300;
+  transition: 300ms;
+  transform: translateX(0);
+}
+
+a.sub-menu-title:hover {
+  color: #21ad93;
+  transform: translateX(-5px);
+}
+
+.buskool-sub-menu li:last-of-type a {
+  border-left: none;
+}
+
+a.profile-info-wrapper {
+  overflow: hidden;
+
+  padding: 0;
+
+  font-size: 14px;
+
+  color: #777;
+
+  font-weight: bold;
+}
+
+a.profile-info-wrapper:focus {
+  background: none;
+}
+
+a.profile-info-wrapper:hover {
+  background: none;
+
+  color: #00c569;
+}
+
+.profile-information {
+  float: left;
+
+  padding-top: 10px;
+}
+
+.profile-information i {
+  position: relative;
+
+  top: 3px;
+
+  margin-right: 7px;
+}
+
+.profile-image-wrapper {
+  width: 40px;
+
+  height: 40px;
+
+  border-radius: 40px;
+
+  overflow: hidden;
+
+  float: right;
+
+  margin-left: 10px;
+
+  background-position: center;
+
+  background-size: cover;
+
+  background-repeat: no-repeat;
+
+  background-color: #dddddd;
+}
+
+#web-profile-items {
+  position: absolute;
+  top: 45px;
+  background: #fff;
+  width: 100%;
+  text-align: right;
+  direction: rtl;
+  line-height: 1.618;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0px 3px 9px rgba(0, 0, 0, 0.05);
+  z-index: 6;
+  min-width: 160px;
+  left: 0;
+}
+
+#web-profile-items a {
+  background: none;
+  color: #777;
+  font-size: 13px;
+  border: none;
+  width: 100%;
+  padding: 10px;
+  text-align: right;
+  -webkit-transition: 200ms;
+  transition: 200ms;
+  border-bottom: 1px solid #dbdbdb;
+  display: block;
+}
+#web-profile-items > li:last-of-type a {
+  border: none;
+}
+#web-profile-items a:hover {
+  color: #333;
+  background: #eee;
+}
+#web-profile-items li a i {
+  margin-left: 6px;
+}
+
+.mobile-menu-button {
+  float: right;
+  position: relative;
+  padding-top: 2px;
+}
+
+.mobile-menu-button .message-count {
+  padding-top: 0px;
+  left: -16px;
+  top: -4px;
+}
+.navbar-toggle {
+  margin: 0;
+  border: 1px solid;
+  border-radius: 8px;
+  height: 27px;
+  width: 35px;
+  padding: 0;
+  padding-top: 9px;
+  margin-bottom: 2px;
+}
+.navbar-toggle i {
+  font-size: 15px;
+  line-height: 1;
+  position: relative;
+  top: -6px;
+}
+
+.mobile-background-shadow {
+  background: rgb(0, 0, 0);
+
+  opacity: 0.8;
+
+  display: none;
+
+  transition: 150ms;
+
+  position: fixed;
+
+  height: 100%;
+
+  width: 100%;
+
+  z-index: 10;
+}
+.message-count {
+  background: #e41c39;
+  border-radius: 50px;
+  font-size: 12px;
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  position: absolute;
+  top: 0px;
+  color: #fff;
+  left: -9px;
+  padding-top: 1px;
+  text-align: center;
+  z-index: 1;
+}
+
+.star-badge {
+  color: rgb(249, 242, 159);
+}
+
+.star-badge i {
+  background: linear-gradient(
+    21deg,
+    rgb(199, 168, 79) 0%,
+    rgb(249, 242, 159) 51%,
+    rgb(199, 168, 79) 100%
+  );
+  background-clip: border-box;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.mobile-navigation li {
+  position: relative;
+}
+.mobile-navigation li .message-count {
+  position: relative;
+  top: 0px;
+  padding-top: 5px;
+}
+@media screen and (min-width: 767px) {
+  .mobile-background-shadow {
+    display: none !important;
+  }
+}
+
+@media screen and (max-width: 1245px) {
+  .search-input {
+    min-width: 545px;
+  }
+}
+@media screen and (max-width: 1199px) {
+  .search-input .open-categories {
+    display: none;
+  }
+  .search-input input {
+    padding: 8px 15px 8px 15px;
+  }
+  .search-input {
+    min-width: 360px;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  nav .green-button.static-layout {
+    padding: 6px 8px 5px;
+    font-size: 13px;
+    width: initial;
+  }
+
+  .search-input {
+    min-width: 277px;
+  }
+
+  #buskool-nav {
+    margin: 0;
+  }
+
+  .buskool-sub-menu .navbar-right {
+    margin-right: 149px;
+  }
+
+  nav .green-button {
+    padding: 6px 8px 5px;
+    font-size: 13px;
+  }
+  .profile-image-wrapper {
+    margin-left: 0;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .main-content{
+    padding: 0;
+  }
+
+  .user-auth-info-wrapper .navbar-nav > li:after {
+    display: none;
+  }
+  .user-auth-info-wrapper .navbar-nav > li {
+    padding: 0;
+  }
+  .search-input {
+    overflow: hidden;
+  }
+
+  .search-input input {
+    border: none;
+    background: #f2f2f2;
+  }
+
+  .navbar-nav > li {
+    border-right: none;
+  }
+
+  a.profile-info-wrapper {
+    margin-top: -4px;
+  }
+  a.profile-info-wrapper .profile-image-wrapper {
+    width: 35px;
+    height: 35px;
+    margin-top: 3px;
+  }
+
+  .buskool-logo .navbar-brand {
+    width: 100px;
+    height: 20px;
+    margin-top: 4px;
+  }
+  .buskool-logo .navbar-brand img {
+    width: 100px;
+    height: 20px;
+  }
+
+  .buskool-logo {
+    margin: 0 auto;
+    position: absolute;
+    right: calc(50% - 50px);
+  }
+
+  .buskool-main-nav {
+    padding: 6px 0 1px;
+    border-bottom: none;
+    margin: 0 10px;
+  }
+
+  .search-input {
+    min-width: 100%;
+    margin: 10px auto;
+    padding: 0 10px;
+  }
+
+  .search-input > button {
+    font-weight: bold;
+    top: 0;
+    bottom: 0;
+    left: initial;
+    right: 10px;
+    padding: 9px;
+    background: none;
+    color: #5f6368;
+  }
+
+  .search-input > .location-filter-wrapper {
+    position: absolute;
+    left: 10px;
+    top: 0;
+  }
+
+  .search-input > .location-filter-wrapper button {
+    border: none;
+    color: #7e7e7e;
+    padding: 6px 10px;
+    background: #f2f2f2;
+    border-radius: 8px;
+  }
+
+  .search-input input {
+    padding: 6px 35px 5px 15px;
+    border-radius: 8px;
+  }
+
+  #buskool-nav {
+    padding: 0;
+
+    overflow: hidden;
+
+    margin: 0;
+
+    position: absolute;
+
+    background: #fff;
+
+    top: 93px;
+
+    right: -1px;
+
+    left: -1px;
+  }
+
+  #buskool-nav.hidden-search {
+    top: 50px;
+  }
+
+  #buskool-nav:after {
+    width: 0;
+
+    height: 0;
+
+    border-style: solid;
+
+    border-width: 0 10px 10px 10px;
+
+    border-color: transparent transparent #00c569 transparent;
+
+    content: "";
+
+    position: absolute;
+
+    top: -10px;
+
+    right: 29px;
+  }
+
+  .profile-image-wrapper,
+  .user-auth-info-wrapper,
+  .user-auth-info-wrapper .navbar-nav {
+    margin: 0;
+  }
+
+  .user-auth-info-wrapper {
+    float: left;
+  }
+
+  #buskool-nav .search-input {
+    max-width: 100%;
+
+    width: 100%;
+
+    padding: 0 15px;
+
+    margin-bottom: 15px;
+
+    float: none;
+  }
+
+  #buskool-nav .search-input input {
+    border: 1px solid #e6e6e6;
+  }
+
+  #buskool-nav ul.mobile-navigation a {
+    color: #777;
+
+    font-weight: bold;
+
+    padding: 15px;
+
+    display: block;
+
+    border-bottom: 1px solid #e6e6e6;
+  }
+
+  #buskool-nav ul.mobile-navigation a:hover,
+  #buskool-nav ul.mobile-navigation a:focus,
+  #buskool-nav ul.mobile-navigation a.router-link-exact-active {
+    color: #00c569;
+
+    background: #fbfbfb;
+
+    border-color: #00c569;
+  }
+
+  #web-profile-items {
+    min-width: 150px;
+
+    left: 0;
+  }
+  nav .green-button.router-link-exact-active,
+  nav > li > a.green-button.router-link-exact-active:hover {
+    display: none;
+  }
+  .mobile-login-link a {
+    font-size: 12px !important;
+    color: #fff !important;
+    background: #00c569;
+    padding: 4px 9px !important;
+    margin-top: 6px !important;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .buskool-logo {
+    margin: 0 auto;
+
+    float: right;
+
+    position: relative;
+
+    right: calc(50% - 95px);
+  }
+
+  .buskool-logo .navbar-brand {
+    width: 100px;
+
+    margin-top: 5px;
+
+    margin-right: 0;
+  }
+
+  .profile-image-wrapper,
+  .user-auth-info-wrapper,
+  .user-auth-info-wrapper .navbar-nav {
+    margin: 0;
+  }
+
+  .user-auth-info-wrapper {
+    float: left;
+  }
+
+  .mobile-login-link {
+    font-size: 11px;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .mobile-login-link a {
+    padding: 6px 16px 4px;
+    font-size: 17px;
+    min-width: initial;
+  }
+
+  .mobile-login-link span {
+    display: none;
+  }
+}

@@ -17,7 +17,7 @@ services:
         - --api.dashboard=true # <== Enabling the dashboard to view services, middlewares, routers, etc...
         - --api.debug=true # <== Enabling additional endpoints for debugging and profiling
           ## Log Settings (options: ERROR, DEBUG, PANIC, FATAL, WARN, INFO) - https://docs.traefik.io/observability/logs/ ##
-        - --log.level=DEBUG # <== Setting the level of the logs from traefik
+        - --log.level=ERROR # <== Setting the level of the logs from traefik
           ## Provider Settings - https://docs.traefik.io/providers/docker/#provider-configuration ##
         - --providers.docker=true # <== Enabling docker as the provider for traefik
         - --providers.docker.exposedbydefault=false # <== Don't expose every container to traefik, only expose enabled ones
@@ -80,10 +80,10 @@ services:
         #### Labels define the behavior and rules of the traefik proxy for this container ####
       - "traefik.enable=true" # <== Enable traefik to proxy this container
       - "traefik.http.routers.nginx-secured.tls=true"
-      - "traefik.http.routers.nginx-web.rule=Host(`${APP_BASE_URL}`)" # <== Your Domain Name goes here for the http rule
+      - "traefik.http.routers.nginx-web.rule=Host(`${APP_BASE_URL}`) || Host(`${APP_ALTERNATIVE_BASE_URL}`)" # <== Your Domain Name goes here for the http rule
       - "traefik.http.routers.nginx-web.entrypoints=web" # <== Defining the entrypoint for http, **ref: line 30
    #   - "traefik.http.routers.nginx-web.middlewares=redirect@file" # <== This is a middleware to redirect to https
-      - "traefik.http.routers.nginx-secured.rule=Host(`${APP_BASE_URL}`) || Host(`www.${APP_BASE_URL}`)" # <== Your Domain Name for the https rule
+      - "traefik.http.routers.nginx-secured.rule=Host(`${APP_BASE_URL}`) || Host(`www.${APP_BASE_URL}`) || Host(`${APP_ALTERNATIVE_BASE_URL}`) || Host(`www.${APP_ALTERNATIVE_BASE_URL}`)" # <== Your Domain Name for the https rule
       - "traefik.http.routers.nginx-secured.entrypoints=web-secured" # <== Defining entrypoint for https, **ref: line 31
 #      - "traefik.http.routers.nginx-secured.tls.certresolver=mytlschallenge" # <== Defining certsresolvers for https    
       - "traefik.http.routers.nginx-secured.middlewares=packet-compressor"
@@ -93,6 +93,11 @@ services:
       - "traefik.http.middlewares.web-redirectregex.redirectregex.regex=^https://${APP_BASE_URL}/(.*)"
       - "traefik.http.middlewares.web-redirectregex.redirectregex.replacement=https://www.${APP_BASE_URL}/$${1}"
       - "traefik.http.middlewares.web-redirectregex.redirectregex.permanent=true"
+
+      - "traefik.http.routers.nginx-secured.middlewares=web-alternative-redirectregex"
+      - "traefik.http.middlewares.web-alternative-redirectregex.redirectregex.regex=^https://${APP_ALTERNATIVE_BASE_URL}/(.*)"
+      - "traefik.http.middlewares.web-alternative-redirectregex.redirectregex.replacement=https://www.${APP_ALTERNATIVE_BASE_URL}/$${1}"
+      - "traefik.http.middlewares.web-alternative-redirectregex.redirectregex.permanent=true"
     networks:
       - backend
       - web
@@ -129,9 +134,9 @@ services:
         #### Labels define the behavior and rules of the traefik proxy for this container ####
       - "traefik.enable=true" # <== Enable traefik to proxy this container
       - "traefik.http.routers.phpmyadmin-secured.tls=true"
-      - "traefik.http.routers.phpmyadmin-web.rule=Host(`php-admin.${APP_BASE_URL}`)"  # <== Your Domain Name goes here for the http rule
+      - "traefik.http.routers.phpmyadmin-web.rule=Host(`php-admin.${APP_BASE_URL}`) || Host(`php-admin.${APP_ALTERNATIVE_BASE_URL}`)"  # <== Your Domain Name goes here for the http rule
       - "traefik.http.routers.phpmyadmin-web.entrypoints=web" # <== Defining the entrypoint for http, **ref: line 30
-      - "traefik.http.routers.phpmyadmin-secured.rule=Host(`php-admin.${APP_BASE_URL}`)" # <== Your Domain Name for the https rule
+      - "traefik.http.routers.phpmyadmin-secured.rule=Host(`php-admin.${APP_BASE_URL}`) || Host(`php-admin.${APP_ALTERNATIVE_BASE_URL}`)" # <== Your Domain Name for the https rule
       - "traefik.http.routers.phpmyadmin-secured.entrypoints=web-secured" # <== Defining entrypoint for https, **ref: line 31
     networks:
       - backend
@@ -159,7 +164,46 @@ services:
     volumes:
       - .:/var/www/html
     environment:
-      CONTAINER_ROLE: queue
+      CONTAINER_ROLE: defaultqueue
+    networks:
+      - backend
+
+  queue-helper-1:
+    image: buskool-app
+    container_name: laravel-helper-1
+    restart: always
+    depends_on:
+      - laravel-app
+    volumes:
+      - .:/var/www/html
+    environment:
+      CONTAINER_ROLE: smsqueue
+    networks:
+      - backend
+
+  queue-helper-2:
+    image: buskool-app
+    container_name: laravel-helper-2
+    restart: always
+    depends_on:
+      - laravel-app
+    volumes:
+      - .:/var/www/html
+    environment:
+      CONTAINER_ROLE: fcmqueue
+    networks:
+      - backend
+
+  queue-helper-3:
+    image: buskool-app
+    container_name: laravel-helper-3
+    restart: always
+    depends_on:
+      - laravel-app
+    volumes:
+      - .:/var/www/html
+    environment:
+      CONTAINER_ROLE: mainqueue
     networks:
       - backend
 
@@ -182,19 +226,24 @@ services:
         #### Labels define the behavior and rules of the traefik proxy for this container ####
       - "traefik.enable=true" # <== Enable traefik to proxy this container
       - "traefik.http.routers.nginx-blog-secured.tls=true"
-      - "traefik.http.routers.nginx-blog-web.rule=Host(`blog.${APP_BASE_URL}`)" # <== Your Domain Name goes here for the http rule
+      - "traefik.http.routers.nginx-blog-web.rule=Host(`blog.${APP_BASE_URL}`) || Host(`blog.${APP_ALTERNATIVE_BASE_URL}`)" # <== Your Domain Name goes here for the http rule
       - "traefik.http.routers.nginx-blog-web.entrypoints=web" # <== Defining the entrypoint for http, **ref: line 30
    #   - "traefik.http.routers.nginx-web.middlewares=redirect@file" # <== This is a middleware to redirect to https
-      - "traefik.http.routers.nginx-blog-secured.rule=Host(`blog.${APP_BASE_URL}`) || Host(`www.blog.${APP_BASE_URL}`)" # <== Your Domain Name for the https rule
+      - "traefik.http.routers.nginx-blog-secured.rule=Host(`blog.${APP_BASE_URL}`) || Host(`www.blog.${APP_BASE_URL}`) || Host(`blog.${APP_ALTERNATIVE_BASE_URL}`) || Host(`www.blog.${APP_ALTERNATIVE_BASE_URL}`)" # <== Your Domain Name for the https rule
       - "traefik.http.routers.nginx-blog-secured.entrypoints=web-secured" # <== Defining entrypoint for https, **ref: line 31
 
       - "traefik.http.routers.nginx-blog-secured.middlewares=packet-compressor"
       - "traefik.http.middlewares.packet-compressor.compress=true"
 
       - "traefik.http.routers.nginx-blog-secured.middlewares=blog-redirectregex"
-      - "traefik.http.middlewares.blog-redirectregex.redirectregex.regex=^https://www.blog.${APP_BASE_URL}/(.*)"
+      - "traefik.http.middlewares.blog-redirectregex.redirectregex.regex=^https://www.blog.${APP_BASE_URL}/(.*) "
       - "traefik.http.middlewares.blog-redirectregex.redirectregex.replacement=https://blog.${APP_BASE_URL}/$${1}"
       - "traefik.http.middlewares.blog-redirectregex.redirectregex.permanent=true"
+
+      - "traefik.http.routers.nginx-blog-secured.middlewares=blog-alternative-redirectregex"
+      - "traefik.http.middlewares.blog-alternative-redirectregex.redirectregex.regex=^https://www.blog.${APP_ALTERNATIVE_BASE_URL}/(.*) "
+      - "traefik.http.middlewares.blog-alternative-redirectregex.redirectregex.replacement=https://blog.${APP_ALTERNATIVE_BASE_URL}/$${1}"
+      - "traefik.http.middlewares.blog-alternative-redirectregex.redirectregex.permanent=true"
 
     networks:
       - backend

@@ -4,8 +4,8 @@ input[type="number"] {
 }
 .wrapper-background {
   background: #fff;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
-  border-radius: 4px;
+  border: 1px solid #e9ecef;
+  border-radius: 12px;
   padding: 15px;
   line-height: 1.618;
   margin-bottom: 30px;
@@ -221,6 +221,37 @@ input[type="number"] {
   -webkit-appearance: none;
   margin: 0;
 }
+
+.fix-botton-wraper {
+  position: fixed;
+  bottom: 59px;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+  padding: 5px;
+  box-shadow: 0 -6px 15px rgba(0, 0, 0, 0.16);
+  background: #fff;
+  display: flex;
+}
+
+.fix-botton-wraper button {
+  width: 100%;
+  border-radius: 6px;
+  margin: 0;
+  font-size: 18px;
+  padding: 10px 15px;
+  background: #556080;
+}
+
+.fix-botton-wraper button i {
+  position: relative;
+  top: 2px;
+}
+
+.pricing-wrapper {
+  margin-bottom: 130px;
+}
+
 @media screen and (max-width: 1300px) {
   .arrow-icon {
     display: none;
@@ -330,23 +361,10 @@ input[type="number"] {
 </style>
 <template>
   <div class="col-xs-12 pricing-section-wrapper">
-    <!-- payment loader -->
-    <div v-if="doPaymentLoader" class="main-loader-content">
-      <div class="pricing-loader-icon">
-        <div class="lds-ring">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-        <p class="pricing-loader-text text-rtl">در حال انتقال به درگاه پرداخت . . .</p>
-      </div>
-    </div>
-
     <!-- end payment loader -->
     <div class="row">
       <div class="col-xs-12">
-        <div class="header-section">
+        <div class="header-section hidden-xs hidden-sm">
           <p>افزایش ظرفیت</p>
         </div>
 
@@ -357,7 +375,10 @@ input[type="number"] {
                 <p>افزایش ظرفیت ثبت محصول</p>
               </div>
               <div class="description-section gray-text">
-                <p>تعداد ظرفیت اضافی برای ثبت محصول را انتخاب کنید سپس دکمه افزایش ظرفیت را بزنید.</p>
+                <p>
+                  تعداد ظرفیت اضافی برای ثبت محصول را انتخاب کنید سپس دکمه
+                  افزایش ظرفیت را بزنید.
+                </p>
               </div>
               <div class="form-wrapper">
                 <div class="item-wrapper active">
@@ -371,7 +392,7 @@ input[type="number"] {
                   </button>
                   <p class="item-text">تعداد محصولات اضافی</p>
                   <p class="item-count">
-                    {{productPriceData.count}}
+                    {{ productPriceData.count }}
                     <span>عدد</span>
                   </p>
                 </div>
@@ -415,22 +436,40 @@ input[type="number"] {
               <div class="pricing-section">
                 <label>قیمت</label>
                 <p class="price-content">
-                  <span v-text="getNumberWithCommas(productPriceData.totalPrice)"></span>
+                  <span
+                    v-text="getNumberWithCommas(productPriceData.totalPrice)"
+                  ></span>
                   <span class="currency">تومان</span>
                   <span class="price-date">(سالانه)</span>
                 </p>
-                <button class="green-button" @click.prevent="doPayment()">افزایش ظرفیت</button>
+                <button
+                  class="green-button"
+                  @click.prevent="openPaymentModal()"
+                >
+                  افزایش ظرفیت
+                </button>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-xs-12">
-        <div class="header-section">
-          <p>ارتقا عضویت</p>
+      <div class="col-xs-12 pricing-wrapper">
+        <div class="row">
+          <div class="header-section col-xs-12">
+            <p>ارتقا عضویت</p>
+          </div>
+          <product-pricing-contents
+            justPro="true"
+            :offer-time="this.offerTime"
+          />
         </div>
-        <product-pricing-contents justPro="true" :offer-time="this.offerTime" />
       </div>
+    </div>
+    <div class="fix-botton-wraper hidden-sm hidden-md hidden-lg">
+      <button class="green-button" @click="openCreditCardGuide()">
+        پرداخت از طریق کارت به کارت
+        <i class="fa fa-credit-card"></i>
+      </button>
     </div>
   </div>
 </template>
@@ -439,19 +478,20 @@ input[type="number"] {
 <script>
 import ProductPricing from "./pricing-tables/pricing-packages.vue";
 import productPricingContents from "./pricing-tables/pricing-package-contents";
+import swal from "../../../../sweetalert.min.js";
+import { eventBus } from "../../../../router/router";
+
 export default {
   props: ["offerTime"],
   components: { ProductPricing, productPricingContents },
-  data: function() {
+  data: function () {
     return {
       productPriceData: {
         unitPrice: "25000",
         count: 1,
-        totalPrice: ""
+        totalPrice: "",
       },
       statusData: "",
-      doPaymentLoader: false,
-
       productPricing: [
         {
           priceName: "عضویت ویژه",
@@ -463,14 +503,14 @@ export default {
               contentUnit: "۷ عدد",
               helpDescription:
                 " تعداد آگهی های همزمان شما که در لیست محصولات نمایش داده می شود. ",
-              active: true
+              active: true,
             },
             {
               title: "تعداد نردبان ",
               contentUnit: "1",
               helpDescription:
                 "بر روی اولین محصول ثبت شده ویژگی نردبان به صورت خودکار اعمال خواهد شد",
-              active: false
+              active: false,
             },
             {
               title: "نمایش در لیست محصولات ویژه",
@@ -478,7 +518,7 @@ export default {
                 '<i class="text-green fa fa-check-circle" style="color:#00c569"></i>',
               helpDescription:
                 "محصولات ثبت شده شما، در قسمت محصولات ویژه در پنل خریداران به آنها نمایش داده می شود",
-              active: false
+              active: false,
             },
             {
               title: "تایید فوری ",
@@ -486,27 +526,27 @@ export default {
                 '<i class="text-green fa fa-check-circle" style="color:#00c569"></i>',
               helpDescription:
                 " آگهی های فروش ثبت شده بلافاصله پس از ثبت در لیست محصولات نمایش داده می شود. ",
-              active: false
+              active: false,
             },
             {
               title: " میزان افزایش خوشنامی ",
               contentUnit: "350",
               helpDescription: " مقدار اعتبار اضافه شده به صفحه پروفایل شما ",
-              active: false
+              active: false,
             },
             {
-              title: " نشان فروشنده معتبر ",
+              title: " نشان فروشنده ویژه ",
               contentUnit:
                 '<i class="text-green fa fa-check-circle" style="color:#00c569"></i>',
               helpDescription:
                 " این نشان در صفحه پروفایل فروشنده نمایش داده می شود. ",
-              active: false
+              active: false,
             },
             {
               title: " سقف روزانه پاسخ به درخواست ها ",
               contentUnit: "30",
               helpDescription: "سقف تعداد روزانه پاسخگویی به درخواست های خرید",
-              active: false
+              active: false,
             },
             {
               title: "مشاهده بلافاصله درخواست خرید ",
@@ -514,7 +554,7 @@ export default {
                 '<i class="text-green fa fa-check-circle" style="color:#00c569"></i>',
               helpDescription:
                 " درخواست های خرید جدید بدون تاخیر به شما نمایش داده می شود. ",
-              active: false
+              active: false,
             },
             {
               title: "تضمین بازگشت وجه ",
@@ -522,78 +562,102 @@ export default {
                 '<i class="text-green fa fa-check-circle" style="color:#00c569"></i>',
               helpDescription:
                 " اگر پس از سه ماه از نتیجه آن رضایت نداشته باشید 100% مبلغ پرداختی به شما بازگردانده می شود. ",
-              active: false
-            }
-          ]
-        }
-      ]
+              active: false,
+            },
+          ],
+        },
+      ],
     };
   },
   methods: {
-    init: function() {
+    init: function () {
       var self = this;
       axios
         .post("/get_seller_dashboard_required_data")
-        .then(function(response) {
+        .then(function (response) {
           if (response.data.is_valid || response.data.is_valid == false) {
             self.statusData = response.data;
           }
         });
     },
-    collapseControl: function(link) {
+    collapseControl: function (link) {
       var $myGroup = $(".item-content");
       $myGroup.find(".collapse.in").collapse("hide");
     },
-    doPayment: function() {
-      this.doPaymentLoader = true;
-
-      let self = this;
-
-      this.registerComponentStatistics(
-        "payment",
-        "product-capacity",
-        self.productPriceData.count
-      );
-
-      window.location.href =
-        "/payment/product-capacity/" + this.productPriceData.count;
+    openPaymentModal() {
+      let paymentData = {
+        paymentName: "productPriceData",
+        count: this.productPriceData.count,
+        totalPrice:
+          this.productPriceData.unitPrice * this.productPriceData.count,
+      };
+      eventBus.$emit("peymentMethodData", paymentData);
+      $("#payment-type-modal").modal("show");
     },
-    registerComponentStatistics: function(categoryName, actionName, labelName) {
+    registerComponentStatistics: function (
+      categoryName,
+      actionName,
+      labelName
+    ) {
       gtag("event", actionName, {
         event_category: categoryName,
-        event_label: labelName
+        event_label: labelName,
       });
     },
-    setTotalPrice: function() {
+    setTotalPrice: function () {
       this.productPriceData.totalPrice =
         this.productPriceData.count * this.productPriceData.unitPrice;
     },
-    getNumberWithCommas: function(number) {
+    getNumberWithCommas: function (number) {
       if (number || typeof number === "number")
         return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       else return "";
     },
-    selectCountInput: function(event) {
+    selectCountInput: function (event) {
       event.target.select();
       // event.target.setSelectionRange(0, this.productPriceData.count);
-    }
+    },
+    openCreditCardGuide() {
+      var buskoolInfo = document.createElement("div");
+      buskoolInfo.className = "credit-card-wrapper";
+      buskoolInfo.innerHTML = `<i class="fa fa-credit-card"></i><p>
+      درصورت نیاز به پرداخت از طریق کارت به کارت، با ما تماس بگیرید
+      </p> <div>
+      <a href='tel:09178928266'><span><i class='fa fa-phone-alt'></i> 09178928266</span></a>
+      <a href='tel:09118413054'><span><i class='fa fa-phone-alt'></i> 09118413054</span></a>
+      </div>`;
+
+      swal({
+        content: buskoolInfo,
+        className: "custom-swal-with-cancel",
+        buttons: {
+          close: {
+            text: "بستن",
+            className: "bg-cancel",
+          },
+        },
+      }).then((value) => {
+        this.isActivePhone = false;
+      });
+    },
   },
   mounted() {
     this.init();
-    $(document).on("click", function() {
+    $(document).on("click", function () {
       $(".collapse").collapse("hide");
     });
     this.setTotalPrice();
+    $(".item-guid").tooltip();
   },
   watch: {
-    "productPriceData.count": function() {
+    "productPriceData.count": function () {
       if (this.productPriceData.count <= 0) {
         this.productPriceData.count = 1;
       } else if (this.productPriceData.count >= 1000) {
         this.productPriceData.count = 1000;
       }
       this.setTotalPrice();
-    }
-  }
+    },
+  },
 };
 </script>

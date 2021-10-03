@@ -1,7 +1,8 @@
 <style scoped>
 .contents .green-button {
-  padding: 4px 12px;
+  padding: 5px 15px;
   margin-top: 40px;
+  border-radius: 8px;
 }
 
 .search-not-found {
@@ -9,9 +10,8 @@
   direction: rtl;
   margin: 15px auto 0;
   padding: 25px 15px 15px;
-  border-radius: 5px;
-  -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
   overflow: hidden;
 }
 
@@ -42,6 +42,7 @@
 
 .text-content {
   color: #777;
+  line-height: 1.618;
 }
 
 .category-item {
@@ -54,17 +55,24 @@
 
 .title-section {
   direction: rtl;
-  margin-bottom: 8px;
 }
 
 .title-section p {
-  font-size: 16px;
+  font-size: 18px;
   color: #00c569;
   float: right;
 }
 
+.categories-list h2 {
+  font-size: 16px;
+  color: #333;
+  float: right;
+  width: 100%;
+  margin: 30px 0 15px;
+}
+
 .title-section hr {
-  margin: 15px 15px 10px auto;
+  margin: 15px 15px 0 auto;
   position: relative;
 }
 
@@ -130,12 +138,18 @@
             class="green-button"
             type="button"
             @click="openBuyAdRequestPage()"
-          >ثبت درخواست خرید</button>
+          >
+            ثبت درخواست خرید
+          </button>
         </div>
       </div>
 
       <div class="categories-content-wrapper">
-        <div class="category-item" v-for="(category, index) in categories" :key="index">
+        <div
+          class="category-item"
+          v-for="(category, index) in categories"
+          :key="index"
+        >
           <div class="title-section col-xs-12">
             <p class="category-title" v-text="category.category_name"></p>
             <hr />
@@ -145,11 +159,37 @@
             <li
               v-for="(subCategory, catIndex) in category.subcategories"
               :key="catIndex"
-              class="list-item col-xs-4 col-sm-3 col-md-2 pull-right"
+              class="col-xs-12"
             >
-              <router-link :to="getSubCategoryUrl(subCategory)" v-text="subCategory.category_name"></router-link>
+              <h2 v-text="subCategory.category_name"></h2>
+              <ul class="categories-list">
+                <li
+                  v-for="(
+                    categoryItem, subCategoryIndex
+                  ) in subCategory.subcategories"
+                  :key="subCategoryIndex"
+                  class="list-item col-xs-6 col-sm-4 col-md-2 pull-right"
+                >
+                  <router-link
+                    :to="getSubCategoryUrl(categoryItem)"
+                    v-text="categoryItem.category_name"
+                  ></router-link>
+                </li>
+              </ul>
             </li>
           </ul>
+          <!-- <ul class="categories-list">
+            <li
+              v-for="(subCategory, catIndex) in category.subcategories"
+              :key="catIndex"
+              class="list-item col-xs-4 col-sm-3 col-md-2 pull-right"
+            >
+              <router-link
+                :to="getSubCategoryUrl(subCategory)"
+                v-text="subCategory.category_name"
+              ></router-link>
+            </li>
+          </ul> -->
         </div>
       </div>
     </div>
@@ -158,34 +198,34 @@
 
 <script>
 export default {
-  data: function() {
+  data: function () {
     return {
-      categories: ""
+      categories: "",
     };
   },
   methods: {
-    init: function() {
+    init: function () {
       let self = this;
 
       axios
         .post("/get_category_list", {
-          cascade_list: true
+          cascade_list: true,
         })
-        .then(function(response) {
+        .then(function (response) {
           self.categories = response.data.categories;
         });
     },
-    getSubCategoryUrl: function(t) {
+    getSubCategoryUrl: function (t) {
       let url =
         "/product-list/category/" + t.category_name.split(" ").join("-");
       return url;
     },
-    openBuyAdRequestPage: function() {
+    openBuyAdRequestPage: function () {
       this.$router.push({ name: "mainRegisterRequest" });
-    }
+    },
   },
-  mounted: function() {
+  mounted: function () {
     this.init();
-  }
+  },
 };
 </script>

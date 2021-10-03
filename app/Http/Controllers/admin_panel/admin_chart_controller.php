@@ -12,6 +12,7 @@ use App\Http\Library\date_convertor;
 use App\Models\myuser;
 use App\Models\product;
 use App\Models\buyAd;
+use App\Models\phone_number_view_log;
 
 class admin_chart_controller extends Controller
 {
@@ -76,6 +77,7 @@ class admin_chart_controller extends Controller
         
         $package_buyers_chart = $this->get_package_buyers_chart($from_date,$until_date);
         $active_users_chart = $this->get_active_users_chart($from_date,$until_date,$user_type);
+        $sellers_phone_number_viewers_chart = $this->get_phone_number_viewers_chart($from_date,$until_date);
 
         // $returning_users_chart = $this->get_returning_users_chart($from_date,$until_date,$user_type,$retention_period);
 
@@ -87,6 +89,7 @@ class admin_chart_controller extends Controller
             'buyAdPostingChart' => $buyAd_posting_chart,
             'productElevatorChart' => $product_elevator_buying_chart,
             'activeUsersChart' => $active_users_chart,
+            'sellersPhoneNumberViewersChart' => $sellers_phone_number_viewers_chart,
             // 'returningUsersChart' => $returning_users_chart
 //            'packageBuyersChart' => $package_buyers_chart
         ]);
@@ -339,7 +342,7 @@ class admin_chart_controller extends Controller
     protected  function get_active_users_chart($from,$to,$user_type = null)
     {
         if(is_null($user_type)){
-            $data = DB::select("SELECT date,COUNT(user_id) as cnt from (SELECT DISTINCT(myusers.id) as user_id,date(products.created_at) as date from myusers,products where myusers.id = products.myuser_id and products.confirmed = true  and products.created_at BETWEEN '" . $from ."' and "."'" .$to."' UNION SELECT DISTINCT(myusers.id) as user_id,date(buy_ads.created_at) as date from myusers,buy_ads where myusers.id = buy_ads.myuser_id and buy_ads.confirmed = true and  buy_ads.created_at BETWEEN '" .$from ."' and "."'".$to."' UNION SELECT DISTINCT(myusers.id) as user_id,date(messages.created_at) as date from myusers,messages where myusers.id = messages.sender_id and  messages.created_at BETWEEN '". $from. "' and "."'" . $to ."') as tmp group by date");
+            $data = DB::select("SELECT date,COUNT(user_id) as cnt from (SELECT DISTINCT(myusers.id) as user_id,date(products.created_at) as date from myusers,products where myusers.id = products.myuser_id and products.confirmed = true  and products.created_at BETWEEN '" . $from ."' and "."'" .$to."' UNION SELECT DISTINCT(myusers.id) as user_id,date(buy_ads.created_at) as date from myusers,buy_ads where myusers.id = buy_ads.myuser_id and buy_ads.confirmed = true and  buy_ads.created_at BETWEEN '" .$from ."' and "."'".$to."' UNION SELECT DISTINCT(myusers.id) as user_id,date(messages.created_at) as date from myusers,messages where myusers.id = messages.sender_id and  messages.created_at BETWEEN '". $from. "' and "."'" . $to ." 'UNION SELECT DISTINCT(viewer_id) as user_id,date(created_at) as date from phone_number_view_logs where created_at BETWEEN '". $from. "' and "."'" . $to ."') as tmp group by date");
         }
         else if($user_type == 'seller'){
             $data = DB::select("SELECT date,COUNT(user_id) as cnt from (SELECT DISTINCT(myusers.id) as user_id,date(products.created_at) as date from myusers,products where myusers.id = products.myuser_id and products.confirmed = true  and products.created_at BETWEEN '" . $from ."' and "."'" .$to."' UNION SELECT DISTINCT(myusers.id) as user_id,date(messages.created_at) as date from myusers,messages where myusers.id = messages.sender_id  and myusers.is_seller = true and  messages.created_at BETWEEN '". $from. "' and "."'" . $to ."') as tmp group by date");
@@ -423,5 +426,32 @@ class admin_chart_controller extends Controller
                         ->color('green');
         
         return $returning_users_chart;
+    }
+
+    protected function get_phone_number_viewers_chart($from,$to)
+    {
+        
+        $data = phone_number_view_log::whereBetween('created_at',[$from,$to])
+                            ->select(DB::raw('DATE(created_at) as date'),
+                                                DB::raw('count(id) as cnt')
+                            )
+                            ->groupBy('date')
+                            ->get();
+        
+        
+        
+        $phone_chart = new general();
+        
+        foreach($data as $item){
+            $labels[] = $item->date;
+            $values[] = $item->cnt;
+        }
+        
+        $phone_chart->title('نمودار مشاهده شماره تماس فروشندگان');
+        $phone_chart->labels($labels);
+        $phone_chart->dataset('sellers phone number viewers', 'line', $values)
+                        ->color('orange');
+        
+        return $phone_chart;
     }
 }

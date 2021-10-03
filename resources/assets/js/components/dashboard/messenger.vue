@@ -1,25 +1,17 @@
 <style scoped>
 .message-wrapper {
-  border-right: 2px solid #f2f2f2;
+  border-right: 1px solid #e4e4e4;
   position: relative;
   height: 100%;
 }
 .main-content {
   padding: 59px 250px 0 0;
-
   direction: rtl;
-
-  border-bottom: 2px solid #f2f2f2;
   height: 100%;
   position: fixed;
-
-  /*right: 0;*/
   background: #fff;
-
   left: 0;
-
   bottom: 0;
-
   top: 0;
 }
 .main-content.is-fix-alert {
@@ -128,70 +120,96 @@
   overflow-y: scroll;
   float: right;
   width: 100%;
+  border-left: 1px solid #e0e0e0;
 }
 
 .default-message-wrapper {
   position: relative;
   height: 100%;
-  background: #f6f6f6;
+  overflow: auto;
 }
 
 .default-message-wrapper .default-main-contents {
-  width: 250px;
-
-  height: 250px;
-
   background: #fff;
-
   border-radius: 250px;
-
   position: absolute;
-
   left: 50%;
-
   top: 50%;
-
   transform: translate(-50%, -50%);
-
   text-align: center;
-
-  padding-top: 60px;
-  box-shadow: 0 0 10px #ebebeb;
+  padding-top: 70px;
+  padding-bottom: 30px;
 }
 
-.default-message-wrapper .default-main-contents.seller-buyAd-picture {
+.default-message-wrapper .default-main-contents > img {
+  max-width: 260px;
+}
+
+.default-message-wrapper .default-main-contents.delsa-box {
   width: 100%;
-  max-width: 400px;
-  border-radius: 10px;
-  padding: 0;
-  padding-top: 30px;
-  height: 435px;
+  max-width: 585px;
+  min-height: 550px;
 }
 
-.default-message-wrapper .default-main-contents.seller-buyAd-picture .red-text {
-  margin: 30px 0px -24px;
-  z-index: 1;
-  padding: 0 15px;
+.default-message-wrapper .default-main-contents.delsa-box .delsa-image {
+  max-width: 455px;
+  margin: 0 auto 30px;
+  min-height: 254px;
+}
+
+.default-message-wrapper .default-main-contents .delsa-title {
+  font-size: 29px;
+  color: #222222;
+  font-weight: 400;
+  margin: 18px auto 20px;
+}
+
+.default-message-wrapper .default-main-contents .delsa-title-active {
+  font-size: 29px;
+  font-weight: 400;
+  margin: 33px auto 30px;
+}
+
+small {
+  font-size: 16px;
+}
+
+.default-message-wrapper .default-main-contents .check-icon-title {
+  width: 80px;
+  height: 80px;
+  font-size: 50px;
+  background: #edf8e6;
+  border-radius: 50px;
+  padding-top: 15px;
+  margin-top: 14px;
+}
+
+.default-message-wrapper .title-item {
+  font-size: 18px;
+  color: #222222;
+  font-weight: 400;
+  margin: 33px auto 30px;
+}
+
+.default-message-wrapper .default-main-contents .delsa-text {
+  color: #777;
   line-height: 1.618;
-  position: relative;
+  font-size: 15px;
 }
 
-.default-message-wrapper
-  .default-main-contents.seller-buyAd-picture
-  p:last-of-type {
-  max-width: 320px;
-  margin: 0 auto;
+.default-message-wrapper .default-main-contents.delsa-box .green-button {
+  background-image: linear-gradient(to left, #21ad93, #4dc0bb);
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 400;
+  padding: 10px 40px;
+  margin-top: 26px;
 }
 
 .default-message-wrapper .default-main-contents i {
-  font-size: 55px;
+  font-size: 26px;
 }
 
-.default-message-wrapper .default-main-contents p {
-  font-size: 16px;
-
-  margin: 20px 0;
-}
 .contact-not-found {
   text-align: center;
   margin: 15px auto;
@@ -254,26 +272,16 @@
   font-size: 12px;
 }
 
-.contact-wrapper .contact-items {
-  position: relative;
-  overflow-y: scroll;
-  height: calc(100% + 40px);
-}
-
-.contact-wrapper .contact-items > ul {
-  position: absolute;
-  right: 0;
-  left: 0;
-  top: 0;
-  bottom: 0;
-}
-
 @media screen and (max-width: 991px) {
   .main-content {
-    padding: 59px 0 0;
+    padding: 0;
+    top: 42px;
+    padding-bottom: 59px;
   }
   .main-content.is-fix-alert {
-    padding: 89px 0 0;
+    padding: 0;
+    top: 89px;
+    padding-bottom: 89px;
   }
 }
 
@@ -286,33 +294,13 @@
   .send-message-form .message-input input {
     padding: 13px 15px;
   }
-
-  .main-content {
-    padding: 59px 0 0;
-  }
-
   .main-content.is-fix-alert {
-    padding: 85px 0 0;
+    padding: 0;
+    top: 85px;
   }
 
   .hidden_element {
     display: none;
-  }
-
-  .message-wrapper .message-contact-title span {
-    padding-top: 6px;
-
-    width: 170px;
-
-    overflow: hidden;
-
-    height: 40px;
-
-    line-height: 1.618;
-
-    text-overflow: ellipsis;
-
-    white-space: nowrap;
   }
 
   .contacts-switch-buttons-wrapper .switch-button-item {
@@ -323,19 +311,12 @@
   }
 }
 
-@media screen and (max-width: 370px) {
-  .message-wrapper .message-contact-title span {
-    width: 130px;
-  }
-}
-
-@media screen and (max-width: 330px) {
-  .message-wrapper .message-contact-title-img {
-    margin: 0 15px;
-  }
-
-  .message-wrapper .message-contact-title span {
-    font-size: 13px;
+@media screen and (max-width: 767px) {
+  .is-guide-active {
+    z-index: 1011 !important;
+    background: transparent !important;
+    top: 0;
+    padding-bottom: 0;
   }
 }
 </style>
@@ -343,11 +324,18 @@
 <template>
   <section
     class="main-content col-xs-12"
-    :class="{ 'is-fix-alert': isRequiredFixAlert }"
+    :class="{
+      'is-fix-alert': isRequiredFixAlert,
+      'is-guide-active': selectedContact || isChanleActive,
+    }"
   >
     <div
       class="col-xs-12 contact-wrapper pull-right col-sm-4 col-lg-3"
-      v-bind:class="{ hidden_element: selectedContact }"
+      v-bind:class="[
+        {
+          hidden_element: selectedContact || isChanleActive,
+        },
+      ]"
     >
       <div class="row">
         <router-view name="messenger-list" />
@@ -355,27 +343,71 @@
     </div>
 
     <div
-      class="col-xs-12 message-wrapper col-sm-8 col-lg-9"
-      v-bind:class="{ hidden_element: !selectedContact }"
-      v-if="selectedContact"
+      class="col-xs-12 pull-right message-wrapper col-sm-8"
+      v-bind:class="[
+        {
+          'col-lg-6': !isChanleActive,
+          'col-lg-9': isChanleActive,
+        },
+      ]"
+      v-if="selectedContact || isChanleActive"
     >
-      <mainChatWrapper />
+      <main-channel-wrapper v-if="isChanleActive" />
+      <main-chat-wrapper v-else />
+    </div>
+    <div
+      class="col-xs-12 default-message-wrapper hidden-xs col-sm-8 col-lg-9"
+      v-if="!selectedContact && isCurrentStep == 0 && !isChanleActive"
+    >
+      <div v-if="userType" class="default-main-contents delsa-box">
+        <div class="delsa-image">
+          <img src="../../../img/delsa-messenger.svg" alt="" />
+        </div>
+        <div
+          v-if="currentUser.user_info.active_pakage_type > 0"
+          class="col-xs-12"
+        >
+          <i class="fa fa-check light-green-text check-icon-title"></i>
+          <p class="delsa-title-active light-green-text">
+            منشی آنلاین شما (دلسا) فعال است.
+          </p>
+        </div>
+        <div v-else class="col-xs-12">
+          <p class="delsa-text text-right">سلام</p>
+          <p class="delsa-title text-right">
+            <i class="fas fa-chess-queen light-green-text"></i>
+            من دلسا هستم
+            <small> (ربات خودکار باسکول) </small>
+          </p>
+          <p class="delsa-text text-right">
+            کار اصلی من بازاریابی برای محصولات شماست. اگر مایل هستید بازاریابی
+            بیشتری برای محصولات شما انجام بدهم کافی است نوع عضویت خود را ارتقا
+            دهید.
+          </p>
+          <router-link
+            :to="{ name: 'dashboardPricingTableSeller' }"
+            class="green-button hover-effect"
+          >
+            ارتقا عضویت
+          </router-link>
+        </div>
+      </div>
+      <div v-else class="default-main-contents">
+        <img src="../../../img/empty-message.svg" alt="" />
+        <p class="title-item">برای شروع چت لطفا یک مخاطب انتخاب کنید</p>
+      </div>
     </div>
 
     <div
-      class="col-xs-12 default-message-wrapper hidden-xs col-sm-8 col-lg-9"
-      v-if="!selectedContact && isCurrentStep == 0"
+      class="contact-wrapper pull-left hiiden-sm hidden-xs col-lg-3"
+      v-bind:class="{ hidden_element: !selectedContact }"
+      v-if="selectedContact && !isChanleActive"
     >
-      <div v-if="userType" class="default-main-contents seller-buyAd-picture">
-        <p class="red-text">
-          برای دسترسی به خریداران پیشنهادی از این قسمت در منوی سمت راست اقدام
-          کنید
-          <img src="../../../img/messegs-buy-ads.jpg" alt="" />
-        </p>
-      </div>
-      <div v-else class="default-main-contents">
-        <i class="fa fa-user"></i>
-        <p>برای شروع چت لطفا یک مخاطب انتخاب کنید</p>
+      <div class="row">
+        <chat-user-info
+          v-if="selectedContact"
+          :selected-contact="selectedContact"
+        />
       </div>
     </div>
   </section>
@@ -386,19 +418,24 @@ import { eventBus } from "../../router/router";
 import Push from "push.js";
 
 import myContactList from "./messages-components/my-contact-list";
+import chatUserInfo from "./messages-components/chat-user-info";
 import MainChatWrapper from "./messages-components/main-chat-wrapper";
+import MainChannelWrapper from "./messages-components/main-channel-wrapper";
 
 export default {
-  props: ["isRequiredFixAlert", "userType", "currentUser"],
+  props: ["isRequiredFixAlert", "userType", "currentUser", "str"],
   components: {
     myContactList,
+    chatUserInfo,
     MainChatWrapper,
+    MainChannelWrapper,
   },
   data: function () {
     return {
       isImageLoad: false,
-      isChatMessagesLoaded: true,
-      isFirstMessageLoading: true,
+      isImageOpened: false,
+      chatMessagesLoader: true,
+      isFirstMessageLoading: false,
       selectedIndex: -1,
       items: [
         {
@@ -408,8 +445,16 @@ export default {
       ],
       isSearchingContact: false,
       contactList: [],
+      channelInfo: {
+        unread_contents: 0,
+        last_content_title: "",
+        last_content_date: "",
+      },
       chatMessages: "",
       isNoticeActive: true,
+      isLikeBoxActive: true,
+      isLatestMessage: false,
+      isGuideActive: false,
       selectedContact: "",
       currentUserId: "",
       currentContactUserId: "",
@@ -419,14 +464,22 @@ export default {
       isContactListLoaded: false,
       isCurrentStep: 0,
       assets: this.$parent.assets,
-      str: this.$parent.str,
       fromContact: 0,
       toContact: 15,
       contactsCountInEachLoad: 20,
       showLoadMoreBtn: false,
-      userAllowedReview: false,
       verifiedUserContent: this.$parent.verifiedUserContent,
       isCurrentUserVerified: false,
+      isChatUpdate: true,
+      userDataLoader: true,
+      isChanleActive: false,
+      userAllowedReview: false,
+      isReviewSubmited: false,
+      reviewSubmitLoader: false,
+      totalChatCount: "",
+      initialLoadChatCount: 30,
+      LoadChatCount: "",
+      delsaInfo: true,
     };
   },
 
@@ -451,6 +504,7 @@ export default {
         })
         .then(function (response) {
           self.contactList = response.data.contact_list;
+          self.channelInfo = response.data.channel_info;
           self.currentUserId = response.data.user_id;
           self.isCurrentUserVerified = response.data.is_verified;
           self.isContactListLoaded = true;
@@ -470,32 +524,77 @@ export default {
 
       this.loadContactList();
     },
-    loadChatHistory: function (contact, index) {
+    openChannel() {
+      this.channelInfo.unread_contents = 0;
+      this.channelInfo.last_content_title = "";
+      this.channelInfo.last_content_date = "";
+      this.handleBackBtnClickOnDevices();
+      this.isChanleActive = true;
+
+      this.registerComponentStatistics(
+        "messenger",
+        "openChannel",
+        "clickOnChannel"
+      );
+    },
+    loadChatHistory: function (contact, index, isUpdate) {
+      this.isChanleActive = false;
+      if (!isUpdate) {
+        this.selectedContact = "";
+        this.selectedContact = contact;
+        this.chatMessages = "";
+        this.userDataLoader = true;
+      }
       var self = this;
+
+      // enable loader for user info component
+
       self.isChatLoadeMore = false;
       self.handleBackBtnClickOnDevices();
-      self.isChatMessagesLoaded = true;
+      self.chatMessagesLoader = true;
       if (index !== -10) self.isFirstMessageLoading = true;
       self.selectedIndex = index;
-
-      this.selectedContact = contact;
-      this.isUserAuthorizedToPostComment();
+      this.setUserGuideCookie();
 
       this.currentContactUserId = contact.contact_id;
 
       axios
         .post("/get_user_chat_history", {
           user_id: contact.contact_id,
+          from: 0,
+          to: this.initialLoadChatCount,
         })
         .then(function (response) {
           self.isNoticeActive = true;
-          self.chatMessages = response.data.messages;
+          let data = response.data.messages.reverse();
+          self.totalChatCount = response.data.total_count;
+          // convert to time to new design
+
+          // let itemDate = "";
+          // data = data.map((item) => {
+          //   let date = item.created_at.substr(0, 10);
+          //   item.isDateShow = true;
+          //   if (itemDate == date) {
+          //     item.isDateShow = false;
+          //   }
+          //   itemDate = date;
+          //   return item;
+          // });
+
+          self.chatMessages = data;
           if (!self.chatMessages.length) {
             self.isNoticeActive = false;
           }
           self.userHasNotice();
           self.currentUserId = response.data.current_user_id;
-          self.scrollToEnd(0);
+          self.isLatestMessage = self.lastMessageMins(
+            10,
+            data[data.length - 1].created_at
+          );
+          self.chatMessagesLoader = false;
+          self.$nextTick(() => {
+            self.scrollToEnd(0);
+          });
         })
         .catch(function (e) {
           //
@@ -512,28 +611,84 @@ export default {
 
       this.contactList.splice(index, 1, contact);
     },
-    userHasNotice() {
-      let cookie = this.getCookie("messengerNoticeData");
-      if (cookie) {
-        let getAlCookies = JSON.parse(cookie).userNoticeCloed;
-        if (getAlCookies.find(this.cookieHasUser)) {
-          this.isNoticeActive = false;
-        }
+    getMoreChat(position) {
+      let contact = this.selectedContact;
+      let tempCount = this.LoadChatCount + this.initialLoadChatCount;
+      let chatWrapper = $("#chat-list");
+
+      if (this.totalChatCount > this.chatMessages.length) {
+        this.chatMessagesLoader = true;
+
+        axios
+          .post("/get_user_chat_history", {
+            user_id: contact.contact_id,
+            from: this.LoadChatCount,
+            to: tempCount,
+          })
+          .then((response) => {
+            this.LoadChatCount = tempCount;
+            let data = response.data.messages.reverse();
+            this.chatMessages.unshift(...data);
+
+            this.$nextTick(() => {
+              chatWrapper.scrollTop(
+                chatWrapper[0].scrollHeight - position.totalHeight
+              );
+              this.chatMessagesLoader = false;
+            });
+          });
       }
     },
+
     cookieHasUser(userId) {
       return userId == this.selectedContact.contact_id;
+    },
+    setUserGuideCookie() {
+      let contactUserId = this.selectedContact.contact_id;
+      let cookie = this.getCookie("userGuideData");
+
+      if (cookie) {
+        let getAllGuidDataCookies = JSON.parse(cookie).userSelected;
+        if (!getAllGuidDataCookies.find(this.cookieHasUser)) {
+          getAllGuidDataCookies.push(contactUserId);
+          this.createCookie(
+            "userGuideData",
+            JSON.stringify({ userSelected: getAllGuidDataCookies }),
+            5400 * 365 // 2400 * 365 this time may 5 years
+          );
+          if (getAllGuidDataCookies.length > 20) {
+            this.isGuideActive = false;
+          } else {
+            this.isGuideActive = true;
+          }
+        } else {
+          this.isGuideActive = false;
+        }
+      } else {
+        this.createCookie(
+          "userGuideData",
+          JSON.stringify({ userSelected: [contactUserId] }),
+          5400 * 365 // 2400 * 365 this time may 2 years
+        );
+        this.isGuideActive = true;
+      }
+      if (this.isGuideActive == true) {
+        $(".overlay-bg-guide").css("display", "block");
+        setTimeout(() => {
+          $(".overlay-bg-guide").fadeOut();
+        }, 1000);
+      }
     },
     setNoticeCookie() {
       let contactUserId = this.selectedContact.contact_id;
       let cookie = this.getCookie("messengerNoticeData");
       if (cookie) {
-        let getAlCookies = JSON.parse(cookie).userNoticeCloed;
-        if (!getAlCookies.find(this.cookieHasUser)) {
-          getAlCookies.push(contactUserId);
+        let getAllCookies = JSON.parse(cookie).userNoticeCloed;
+        if (!getAllCookies.find(this.cookieHasUser)) {
+          getAllCookies.push(contactUserId);
           this.createCookie(
             "messengerNoticeData",
-            JSON.stringify({ userNoticeCloed: getAlCookies }),
+            JSON.stringify({ userNoticeCloed: getAllCookies }),
             1000
           );
         }
@@ -545,6 +700,46 @@ export default {
         );
       }
       this.isNoticeActive = false;
+    },
+    setLikeBoxCookie() {
+      let contactUserId = this.selectedContact.contact_id;
+      let cookie = this.getCookie("closeLikeBox");
+      if (cookie) {
+        let getAllCookies = JSON.parse(cookie).userCloseLikeBox;
+        if (!getAllCookies.find(this.cookieHasUser)) {
+          getAllCookies.push(contactUserId);
+          this.createCookie(
+            "closeLikeBox",
+            JSON.stringify({ userCloseLikeBox: getAllCookies }),
+            60 * 24
+          );
+        }
+      } else {
+        this.createCookie(
+          "closeLikeBox",
+          JSON.stringify({ userCloseLikeBox: [contactUserId] }),
+          60 * 24
+        );
+      }
+      this.isLikeBoxActive = false;
+    },
+    userHasLikeBox() {
+      let cookie = this.getCookie("closeLikeBox");
+      if (cookie) {
+        let getAlCookies = JSON.parse(cookie).userCloseLikeBox;
+        if (getAlCookies.find(this.cookieHasUser)) {
+          this.isLikeBoxActive = false;
+        }
+      }
+    },
+    userHasNotice() {
+      let cookie = this.getCookie("messengerNoticeData");
+      if (cookie) {
+        let getAlCookies = JSON.parse(cookie).userNoticeCloed;
+        if (getAlCookies.find(this.cookieHasUser)) {
+          this.isNoticeActive = false;
+        }
+      }
     },
     createCookie: function (name, value, minutes) {
       if (minutes) {
@@ -583,8 +778,9 @@ export default {
     },
     appendMessageToChatHistory: function (contact) {
       var self = this;
-      self.isChatMessagesLoaded = false;
+      self.isLatestMessage = true;
 
+      self.chatMessagesLoader = false;
       this.selectedContact = contact;
       this.currentContactUserId = contact.contact_id;
 
@@ -594,6 +790,11 @@ export default {
         })
         .then(function (response) {
           self.chatMessages = response.data.messages;
+          self.isLatestMessage = self.lastMessageMins(
+            10,
+            self.chatMessages[self.chatMessages.length - 1].created_at
+          );
+
           self.currentUserId = response.data.current_user_id;
           self.scrollToEnd(0);
         })
@@ -610,13 +811,14 @@ export default {
           0,
           "swing",
           () => {
-            self.isChatMessagesLoaded = false;
+            self.chatMessagesLoader = false;
           }
         );
       }, time);
     },
     sendMessage: function () {
       var self = this;
+      self.isLatestMessage = true;
 
       let tempMsg = self.msgToSend;
       self.msgToSend = "";
@@ -629,13 +831,14 @@ export default {
         };
 
         self.chatMessages.push(msgObject);
+
         self.scrollToEnd(0);
 
         axios
           .post("/messanger/send_message", msgObject)
           .then(function (response) {
             self.isFirstMessageLoading = false;
-            self.loadChatHistory(self.selectedContact, -10);
+            self.loadChatHistory(self.selectedContact, -10, true);
           })
           .catch(function (e) {
             //
@@ -645,7 +848,7 @@ export default {
     keepChatUpdated: function (contact) {
       var self = this;
       setTimeout(function () {
-        self.loadChatHistory(contact);
+        self.loadChatHistory(contact, -10, true);
       }, 20000);
     },
     pushNotification: function (header, body, link) {
@@ -702,21 +905,33 @@ export default {
         return false;
       }
     },
-    handleBackBtnClickOnDevices: function () {
-      var self = this;
-
+    handleBackKeys: function () {
       if (window.history.state) {
         history.pushState(null, null, window.location);
       }
-
       $(window).on("popstate", function (e) {
-        if (self.isDeviceMobile()) {
+        $(".modal").modal("hide");
+      });
+    },
+    handleBackBtnClickOnDevices: function () {
+      var self = this;
+      if (window.history.state) {
+        history.pushState(null, null, window.location);
+      }
+      $(window).on("popstate", function (e) {
+        let delsaModal = $("#delsa-promotion-modal").hasClass("in");
+
+        if (self.isDeviceMobile() && !delsaModal) {
           if (
             window.location.pathname == "/seller/messenger/contacts" ||
             window.location.pathname == "/buyer/messenger/contacts"
           ) {
-            if (self.selectedContact) {
-              self.selectedContact = "";
+            if (!self.isImageOpened) {
+              if (self.selectedContact) {
+                self.selectedContact = "";
+              } else if (self.isChanleActive) {
+                self.isChanleActive = false;
+              }
             }
           }
         }
@@ -768,16 +983,45 @@ export default {
 
       eventBus.$emit("reviewUserData", selectedUserData);
     },
-    isUserAuthorizedToPostComment: function () {
-      let self = this;
-      let userObg = {
+    registerReview: function (reviewScore) {
+      this.reviewSubmitLoader = true;
+
+      let reviewObg = {
         user_id: this.selectedContact.contact_id,
+        rating_score: reviewScore,
       };
-      axios
-        .post("/profile/is-user-authorized-to-post-comment", userObg)
-        .then(function (response) {
-          self.userAllowedReview = response.data.is_allowed;
-        });
+
+      let self = this;
+
+      axios.post("/profile/add-comment", reviewObg).then(function (response) {
+        self.reviewSubmitLoader = false;
+        if (response.data.status == true) {
+          self.isReviewSubmited = true;
+
+          setTimeout(() => {
+            if (self.isReviewSubmited) {
+              $(".mobile-like-user").fadeOut();
+              setTimeout(() => {
+                self.userAllowedReview = false;
+              }, 1500);
+            }
+          }, 3000);
+        }
+      });
+    },
+    activeChanel() {
+      // this.isChanleActive = true
+    },
+    lastMessageMins(mins, time) {
+      const currentTime = new Date();
+      const diffInMins = (currentTime - Date.parse(time)) / (1000 * 60);
+      return diffInMins < mins;
+    },
+    openDelasModal() {
+      $("#delsa-promotion-modal").modal("show");
+      $("#delsa-promotion-modal").on("shown.bs.modal", (e) => {
+        this.handleBackKeys();
+      });
     },
   },
 
@@ -817,7 +1061,6 @@ export default {
         });
 
       eventBus.$on("contanctMessageReceived", ($event) => {
-        // console.log("contact message");
         if (self.selectedContact) {
           self.appendMessageToChatHistory(self.selectedContact);
         } else if (self.isComponentActive) {
@@ -825,10 +1068,6 @@ export default {
         }
       });
     }
-
-    eventBus.$on("userAllowedReview", ($event) => {
-      this.userAllowedReview = $event;
-    });
   },
   watch: {
     contactNameSearchText: function (value) {
@@ -864,7 +1103,27 @@ export default {
       }
     },
     selectedContact: function (value) {
+      this.delsaInfo = true;
+      // reset like message datas
+      this.isReviewSubmited = false;
+      this.userAllowedReview = false;
+      this.isLikeBoxActive = true;
+      this.LoadChatCount = this.initialLoadChatCount;
+
+      // check like message active box
+      this.userHasLikeBox();
+
       eventBus.$emit("activeContactId", value.contact_id);
+    },
+    isChanleActive(isChanel) {
+      if (isChanel) {
+        this.activeChanel();
+      }
+    },
+    userAllowedReview() {
+      this.$nextTick(() => {
+        this.scrollToEnd(0);
+      });
     },
   },
 

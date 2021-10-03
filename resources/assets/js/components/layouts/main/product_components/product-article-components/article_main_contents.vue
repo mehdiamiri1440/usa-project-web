@@ -6,11 +6,11 @@ body {
 <style scoped>
 .main-article-contents p a,
 span {
-  color: #777;
+  color: #474747;
 }
 
 .main-article-contents h3 a {
-  color: #474747;
+  color: #777;
 }
 .main-article-contents h3 {
   font-size: 16px;
@@ -64,9 +64,11 @@ span {
 }
 
 .main-article-contents p {
-  font-size: 13px;
+  font-size: 15px;
 
   font-weight: bold;
+
+  color: #777;
 
   max-width: 500px;
 
@@ -138,7 +140,7 @@ span {
   .main-article-contents h3,
   .main-article-contents a p {
     max-width: 150px;
-    font-size: 14px;
+    font-size: 17px;
   }
 
   .main-article-contents a p {
@@ -188,28 +190,41 @@ span {
 <template>
   <div
     class="main-article-contents-wrapper pointer-class"
-    :class="{ 'is-user-valid-content': $parent.product.user_info.active_pakage_type != 3 }"
+    :class="{
+      'is-user-valid-content':
+        $parent.product.user_info.active_pakage_type != 3,
+    }"
   >
     <div class="main-article-contents-image-wrapper" @click="setScroll()">
       <ProductImage
         :base="$parent.str + '/'"
         :img="$parent.product.photos[0].file_path"
-        :alt="'فروش عمده ی ' + $parent.product.main.sub_category_name +
-                                            ' '  +
-                                            $parent.product.main.product_name +
-                                            ' ' +
-                                            $parent.product.main.city_name +
-                                             ' - ' +
-                                            $parent.product.main.province_name"
-        :image-count="$parent.product.photos.length"
+        :alt="
+          'فروش عمده ی ' +
+          $parent.product.main.sub_category_name +
+          ' ' +
+          $parent.product.main.product_name +
+          ' ' +
+          $parent.product.main.city_name +
+          ' - ' +
+          $parent.product.main.province_name
+        "
+        :image-count="$parent.product.main.photos_count"
         :product-url="this.$parent.productUrl"
       />
     </div>
     <div class="main-article-contents" @click="setScroll()">
-      <div class="valid-user-badge" v-if="$parent.product.user_info.active_pakage_type == 3">
+      <div
+        class="valid-user-badge"
+        v-if="$parent.product.user_info.active_pakage_type == 3"
+      >
         <div class="wrapper-icon">
           <svg width="24.965" height="30.574" viewBox="0 0 24.965 30.574">
-            <g id="buskool-icon" data-name="buskool" transform="translate(-273.1 -715.025)">
+            <g
+              id="buskool-icon"
+              data-name="buskool"
+              transform="translate(-273.1 -715.025)"
+            >
               <path
                 id="Subtraction_1"
                 data-name="Subtraction 1"
@@ -248,16 +263,18 @@ span {
         <p>
           استان / شهر:
           <span
-            v-text="$parent.product.main.province_name +
-                            ' - ' +
-                             $parent.product.main.city_name"
+            v-text="
+              $parent.product.main.province_name +
+              ' - ' +
+              $parent.product.main.city_name
+            "
           ></span>
         </p>
 
         <p v-if="$parent.product.main.description" class="product-description">
           توضیحات
           <router-link
-            v-if="$parent.product.main.description<100"
+            v-if="$parent.product.main.description < 100"
             :to="this.$parent.productUrl"
             v-html="$parent.product.main.description"
           ></router-link>
@@ -265,13 +282,13 @@ span {
           <router-link
             v-else
             :to="this.$parent.productUrl"
-            v-html="$parent.product.main.description.substring(0,100)"
+            v-html="$parent.product.main.description.substring(0, 100)"
           ></router-link>
         </p>
 
         <p>
           مقدار موجودی:
-          <span v-text="getNumberWithCommas($parent.product.main.stock) + ' کیلوگرم'"></span>
+          <span v-text="getConvertedNumbers($parent.product.main.stock)"></span>
         </p>
       </div>
 
@@ -280,7 +297,7 @@ span {
         @click.prevent="$parent.copyProductLinkToClipBoard"
         class="share-link hidden"
       >
-        <i class="fa fa-share"></i>
+        <i class="fa fa-share-alt"></i>
         <span>اشتراک گذاری</span>
       </router-link>
     </div>
@@ -293,10 +310,10 @@ import ProductImage from "./product_image";
 export default {
   props: ["productIndex", "is_my_profile_status"],
   components: {
-    ProductImage
+    ProductImage,
   },
   methods: {
-    setScroll: function() {
+    setScroll: function () {
       localStorage.setItem("scrollIndex", this.$props.productIndex);
 
       if (
@@ -313,13 +330,13 @@ export default {
         "show-product-in-seperate-page"
       );
     },
-    getProductName: function() {
+    getProductName: function () {
       var productName = "";
       productName =
         this.$parent.product.main.category_name +
         " | " +
         this.$parent.product.main.sub_category_name +
-        ' <span style="color: #777">' +
+        ' <span style="color: #474747">' +
         this.$parent.product.main.product_name +
         "</span>";
       // if (this.$route.params.categoryName) {
@@ -342,7 +359,7 @@ export default {
 
       return productName;
     },
-    isDeviceMobile: function() {
+    isDeviceMobile: function () {
       if (
         navigator.userAgent.match(/Android/i) ||
         navigator.userAgent.match(/webOS/i) ||
@@ -357,18 +374,29 @@ export default {
         return false;
       }
     },
-    getProductLinkTarget: function() {
+    getProductLinkTarget: function () {
       // if (this.isDeviceMobile()) {
       //   return "_blank";
       // }
 
       return "_self";
     },
-    getNumberWithCommas:function(number){
+    getNumberWithCommas: function (number) {
       if (number || typeof number === "number")
         return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       else return "";
-    }
-  }
+    },
+    getConvertedNumbers: function (number) {
+      if (number || typeof number === "number") {
+        let data = number / 1000;
+        if (number < 1000) {
+          return number + " " + "کیلوگرم";
+        } else {
+          data = this.getNumberWithCommas(data);
+          return data + " " + "تن";
+        }
+      } else return "";
+    },
+  },
 };
 </script>
