@@ -806,6 +806,7 @@
   display: flex;
   align-items: center;
   width: 100%;
+  height: 100%;
 }
 
 .messenger-alert .text-wrapper span {
