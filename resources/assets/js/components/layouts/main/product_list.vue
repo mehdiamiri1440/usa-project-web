@@ -716,7 +716,7 @@ end filter modal styles
   content: " ";
   background: rgba(0, 156, 131, 0.5);
   position: absolute;
-  bottom: -160px;
+  bottom: -110px;
   left: -180px;
   border-radius: 170px;
   z-index: 1;
@@ -1406,7 +1406,6 @@ div.items-wrapper {
                   </div>
                   <p class="text-center text-rtl">درحال دریافت اطلاعات ...</p>
                 </div>
-                
               </div>
             </section>
             <!-- test -->
