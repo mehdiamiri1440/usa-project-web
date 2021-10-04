@@ -523,7 +523,7 @@ export default {
     setScroll: function () {
       localStorage.setItem("scrollIndex", this.$props.productIndex);
       window.open(this.productUrl, "_blank");
-      this.$parent.registerComponentStatistics(
+      this.registerComponentStatistics(
         "product",
         "show-product-in-seperate-page",
         "show-product-in-seperate-page"

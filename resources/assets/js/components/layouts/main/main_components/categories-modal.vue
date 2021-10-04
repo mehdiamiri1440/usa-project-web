@@ -202,7 +202,7 @@ export default {
     submitCategory(category) {
       this.resetModalData();
 
-      if (this.$route.name == "buyAdRequestsSeller") {
+      if (this.$route.name == "mainBuyAdRequests") {
         this.$parent.selectBuyAdCategoryFilter(category);
       } else {
         let url = this.getSubCategoryUrl(category);
