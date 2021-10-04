@@ -141,8 +141,8 @@
     />
   </div>
 
-<script defer src="https://www.gstatic.com/firebasejs/7.13.0/firebase-app.js"></script>
-<script defer src="https://www.gstatic.com/firebasejs/7.13.0/firebase-messaging.js"></script> 
+<script  src="https://www.gstatic.com/firebasejs/7.13.0/firebase-app.js"></script>
+<script  src="https://www.gstatic.com/firebasejs/7.13.0/firebase-messaging.js"></script> 
 
 <script>
 
