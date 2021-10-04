@@ -819,6 +819,7 @@
   color: #fff;
   border: none;
 }
+
 .messenger-alert.danger .actions-wrapper button {
   width: 100px;
   border-radius: 50px;
