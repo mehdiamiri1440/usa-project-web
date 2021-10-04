@@ -1340,6 +1340,10 @@ export default {
   },
   methods: {
     init: function () {
+     
+      $("#description-modal").on("shown.bs.modal", () => {
+      this.$parent.handleBackKeys();
+    });
       this.activeisCompanyCollapse();
       this.isLoaded = true;
       $('input[type="file"]').imageuploadify();
@@ -1637,7 +1641,6 @@ export default {
     this.init();
     eventBus.$emit("subHeader", this.items);
     var self = this;
-
     $("#imgInp").change(function () {
       self.show_image_preview(this);
       self.RegisterBasicProfileInfo();

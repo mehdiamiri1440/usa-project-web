@@ -105,13 +105,13 @@
   .promotion-image-wrapper {
     padding-top: 38px;
   }
-  .modal-dialog.modal-dialog-centered{
+  .modal-dialog.modal-dialog-centered {
     margin: 0;
     height: 100%;
   }
-  .modal-content{
+  .modal-content {
     height: 100%;
-width: 100%;
+    width: 100%;
   }
 }
 </style>
@@ -171,6 +171,19 @@ export default {
       $(".modal").modal("hide");
       $("#wallet-modal").modal("show");
     },
+    handleBackKeys: function () {
+      if (window.history.state) {
+        history.pushState(null, null, window.location);
+      }
+      $(window).on("popstate", function (e) {
+        $("#phone-locked-modal").modal("hide");
+      });
+    },
+  },
+  mounted() {
+    $("#phone-locked-modal").on("shown.bs.modal", () => {
+      this.handleBackKeys();
+    });
   },
 };
 </script>
