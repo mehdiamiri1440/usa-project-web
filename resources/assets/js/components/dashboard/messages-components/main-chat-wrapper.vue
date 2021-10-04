@@ -817,6 +817,7 @@
 .messenger-alert.danger {
   background: red;
   color: #fff;
+  border: none;
 }
 .messenger-alert.danger .actions-wrapper button {
   width: 100px;
@@ -1106,11 +1107,11 @@
 
     <div class="chat-page" v-if="$parent.selectedContact">
       <div class="bg-wrapper"></div>
-      <div class="messenger-alert danger" v-if="isAlertActive">
-        <div class="text-wrapper">
-          <button class="close-alert" @click="closeWalletAlert()">
-            <i class="fa fa-times"></i>
-          </button>
+      <button class="messenger-alert danger" v-if="isAlertActive">
+        <button class="close-alert" @click="closeWalletAlert()">
+          <i class="fa fa-times"></i>
+        </button>
+        <div class="text-wrapper" @click="showWallet()">
           <span>
             شماره تماس شما به علت عدم موجودی کیف پول شما، به خریدارن نمایش داده
             نمی شود.
@@ -1122,7 +1123,7 @@
             <span>افزایش موجودی</span>
           </button>
         </div>
-      </div>
+      </button>
       <ul
         @scroll="infinityScroll()"
         id="chat-list"
