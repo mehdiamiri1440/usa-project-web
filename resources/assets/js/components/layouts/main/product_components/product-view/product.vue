@@ -259,6 +259,7 @@ label {
 @media screen and (max-width: 991px) {
   .actions {
     margin-top: 15px;
+    width: 100%;
   }
 
   .main-contents-wrapper h1 {

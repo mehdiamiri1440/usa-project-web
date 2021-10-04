@@ -629,7 +629,7 @@ h2 {
         </g>
       </svg>
 
-      <div class="reviews">
+      <!-- <div class="reviews">
         <h2>نظرات کاربران</h2>
         <div class="owl-carousel">
           <article class="review-item" v-for="(item, i) in 7" :key="i">
@@ -644,7 +644,7 @@ h2 {
             </div>
           </article>
         </div>
-      </div>
+      </div> -->
       <div class="invite-button-wrapper text-center">
         <button @click.prevent="setScrollToRegister()" class="invite-button">
           ثبت نام رایگان

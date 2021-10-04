@@ -242,6 +242,11 @@ a {
   max-width: 280px;
   width: 100%;
   border-radius: 12px;
+  background: #f0f0f0;
+}
+
+.submit-form-button.green-button {
+  background: #00c569;
 }
 
 .submit-form-button i {
@@ -1153,10 +1158,6 @@ textarea.error:focus + i {
                     v-for="(photo, index) in currentUser.relateds"
                     :key="index"
                   >
-                    <!-- <a href="#">
-                      <i class="fa fa-times"></i>
-                    </a> -->
-
                     <div
                       class="image-item"
                       :style="{
