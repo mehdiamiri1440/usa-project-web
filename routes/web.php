@@ -793,8 +793,12 @@ Route::get('/public-channel/{slug}',[
 //------------------------- End of Channel routes ---------------------------------------------------------
 
 Route::get('/logout', function () {
+    $otp_count = session('OTP_count');
+
     Session::flush();
     Session::save();
+
+    Session::put('OTP_count',$otp_count);
 
     $cookie = \Cookie::forget('user_phone');
     $cookie = \Cookie::forget('user_password');

@@ -78,7 +78,7 @@ class sms_controller extends Controller
             ],400);
         }
         
-        if(session()->has('OTP_start') && (session('OTP_start') + 2 * 60) >= time()){
+        if(session()->has('OTP_start') && (session('OTP_start') + 2 * 60) < time()){
             return response()->json([
                 'status' => false,
                 'msg' => 'منتظر بمانید.'
@@ -156,7 +156,7 @@ class sms_controller extends Controller
 		
 		$this->validate($request,$rules);
 		
-		if((session('OTP_start') + 2 * 60) < time() && session('sms_OTP') == $request->verification_code)
+		if((session('OTP_start') + 2 * 60) >= time() && session('sms_OTP') == $request->verification_code)
 		{
             if($request->filled('phone')){
                 $phone = $request->phone;
