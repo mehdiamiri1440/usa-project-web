@@ -810,6 +810,8 @@
 
 .messenger-alert .text-wrapper span {
   font-size: 12px;
+  font-weight: bold;
+  line-height: 1.418;
 }
 
 .messenger-alert.danger {
@@ -820,7 +822,7 @@
   width: 100px;
   border-radius: 50px;
   border: none;
-  background: rgba(255, 255, 255, 0.75);
+  background: rgba(255, 255, 255, 1);
   color: #264653;
   font-size: 12px;
   display: flex;

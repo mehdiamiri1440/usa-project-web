@@ -784,6 +784,9 @@ div.items-wrapper {
 }
 
 @media screen and (max-width: 767px) {
+  #article-list {
+    padding-bottom: 70px;
+  }
   #article-list.grid-items-wrapper {
     margin-left: 0 !important;
     margin-right: 0 !important;
