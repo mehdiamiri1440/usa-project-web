@@ -53,8 +53,11 @@
   float: right;
   border-radius: 50px;
   overflow: hidden;
-  border: 1px solid #f2f2f2;
   position: relative;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #dddddd;
 }
 
 .contact-body .channel-image img {
@@ -628,15 +631,22 @@ i.fa-star {
                 !$parent.isChanleActive,
             }"
           >
-            <div class="contact-image">
-              <img
-                v-if="contact.profile_photo"
-                :src="$parent.str + '/' + contact.profile_photo"
-                :alt="contact.first_name[0]"
-              />
-
-              <img v-else src="../../../../img/user-defult.png" />
-            </div>
+            <div
+              v-if="contact.profile_photo"
+              class="contact-image"
+              :style="{
+                backgroundImage:
+                  'url(' + $parent.str + '/' + contact.profile_photo + ')',
+              }"
+            ></div>
+            <div
+              v-else
+              class="contact-image"
+              :style="{
+                backgroundImage:
+                  'url(' + $parent.assets + 'assets/img/user-defult.png' + ')',
+              }"
+            ></div>
             <div class="my-contact-info-wrapper">
               <span class="contact-name text-rtl">
                 {{ contact.first_name + " " + contact.last_name }}

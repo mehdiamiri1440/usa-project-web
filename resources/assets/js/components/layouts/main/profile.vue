@@ -241,6 +241,12 @@
   border-radius: 50%;
   margin: 0 auto 10px;
 }
+.user-image div {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #dddddd;
+}
 
 .user-image-content {
   width: 40px;
@@ -823,28 +829,25 @@ p.response-rate span {
           <div class="header-content col-xs-12">
             <div class="image_user_wrapper col-xs-4 col-sm-3 col-lg-2">
               <div v-if="profileOwner.user_info" class="user-image">
-                <div v-if="profileOwner.profile.profile_photo">
-                  <img
-                    v-bind:src="str + '/' + profileOwner.profile.profile_photo"
-                    :alt="
-                      profileOwner.user_info.first_name +
-                      ' ' +
-                      profileOwner.user_info.last_name
-                    "
-                  />
-                </div>
+                <div
+                  v-if="profileOwner.profile.profile_photo"
+                  :style="{
+                    backgroundImage:
+                      'url(' +
+                      str +
+                      '/' +
+                      profileOwner.profile.profile_photo +
+                      ')',
+                  }"
+                ></div>
 
-                <div v-else>
-                  <img
-                    src="../../../../img/user-defult.png"
-                    class="image_defult"
-                    :alt="
-                      profileOwner.user_info.first_name +
-                      ' ' +
-                      profileOwner.user_info.last_name
-                    "
-                  />
-                </div>
+                <div
+                  v-else
+                  :style="{
+                    backgroundImage:
+                      'url(' + assets + 'assets/img/user-defult.png' + ')',
+                  }"
+                ></div>
               </div>
               <div v-else class="user-image">
                 <div
@@ -905,7 +908,7 @@ p.response-rate span {
               <div class="row">
                 <div
                   class="col-xs-6 text-center"
-                  v-if="profileOwnerStatistics.reputation_score >= 0 "
+                  v-if="profileOwnerStatistics.reputation_score >= 0"
                 >
                   <div
                     class="info-num"

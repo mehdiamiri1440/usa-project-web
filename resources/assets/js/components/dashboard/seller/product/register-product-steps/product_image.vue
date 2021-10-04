@@ -136,6 +136,8 @@ label {
           :uploadUploadAuto="false"
           :imageWrapperSize="'col-xs-6'"
           :isImageReset="filesReset"
+          imageAccessUploadCount="4"
+          :maximum="4"
         />
       </div>
 

@@ -297,6 +297,10 @@ border-radius: 8px;
   padding-top: 5px;
 }
 
+.padding-top-60 {
+  padding-top: 60px !important;
+}
+
 .padding-bottom-5 {
   padding-bottom: 5px;
 }
@@ -398,6 +402,10 @@ border-radius: 8px;
 
 .bg-white {
   background-color: #fff !important;
+}
+
+.bg-orange {
+  background-color: #ff5722 !important;
 }
 
 .bg-red {

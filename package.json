@@ -103,7 +103,6 @@
     "vue-template-compiler": "^2.5.17",
     "vue-upload-component": "^2.8.19",
     "vue-wow": "^1.2.0",
-    "vuex": "^3.1.2",
     "webpack-livereload-plugin": "^1.0.0"
   }
 }

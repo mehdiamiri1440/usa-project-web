@@ -423,7 +423,7 @@ import MainChatWrapper from "./messages-components/main-chat-wrapper";
 import MainChannelWrapper from "./messages-components/main-channel-wrapper";
 
 export default {
-  props: ["isRequiredFixAlert", "userType", "currentUser", "str"],
+  props: ["isRequiredFixAlert", "userType", "currentUser", "str", "assets"],
   components: {
     myContactList,
     chatUserInfo,
@@ -463,7 +463,6 @@ export default {
       contactNameSearchText: "",
       isContactListLoaded: false,
       isCurrentStep: 0,
-      assets: this.$parent.assets,
       fromContact: 0,
       toContact: 15,
       contactsCountInEachLoad: 20,
