@@ -132,7 +132,7 @@ class sms_controller extends Controller
              'OTP_start'=>time(),
          ]); 
 
-         if(session()->has('OPT_count')){
+         if(session()->has('OTP_count')){
              $cnt = session('OTP_count');
 
              session([
