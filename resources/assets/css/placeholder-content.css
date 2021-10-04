@@ -404,6 +404,10 @@ border-radius: 8px;
   background-color: #fff !important;
 }
 
+.bg-orange {
+  background-color: #ff5722 !important;
+}
+
 .bg-red {
   background-color: #e41c38 !important;
 }

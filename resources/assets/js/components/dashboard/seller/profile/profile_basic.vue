@@ -568,7 +568,7 @@ textarea.error:focus + i {
           </div>
           <div class="modal-body col-xs-12">
             <div class="modal-box-title">
-              درباره ی خودتان حد اقل <span class="hidden-xs">۳</span
+              درباره ی خودتان حداقل <span class="hidden-xs">۳</span
               ><span class="hidden-lg hidden-md hidden-sm">۵</span> خط بنویسید.
             </div>
             <div class="description">
@@ -584,7 +584,7 @@ textarea.error:focus + i {
                   <textarea
                     rows="5"
                     v-model="editDescription"
-                    placeholder="در مورد کیفیت و نوع بسته بندی محصول خود اینجا توضیح دهید"
+                    placeholder="اینجا بنویسید"
                   ></textarea>
                   <div class="feature-wrapper" v-if="editDescription.length">
                     <p
