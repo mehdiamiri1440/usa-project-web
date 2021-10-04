@@ -821,7 +821,7 @@ div.items-wrapper {
   content: " ";
   background: rgba(0, 156, 131, 0.5);
   position: absolute;
-  bottom: -110px;
+  bottom: -160px;
   left: -180px;
   border-radius: 170px;
   z-index: 1;
