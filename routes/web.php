@@ -121,7 +121,7 @@ Route::post('/user/is_national_code_unique', [
 Route::post('send_verification_code', [
     'uses' => 'Notification\sms_controller@send_phone_verification_code',
     'as' => 'send_verification_code',
-])->middleware('throttle:1,1');
+])->middleware('throttle:3,1');
 
 Route::post('/verify_code', [
     'uses' => 'Notification\sms_controller@verify_code',
