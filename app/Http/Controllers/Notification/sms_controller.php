@@ -106,7 +106,7 @@ class sms_controller extends Controller
                 return response()->json([
                    'status' => FALSE,
                    'msg' => 'ارتباط خود با اینترنت را بررسی کنید.',
-                   'descriptive_msg' => $e->getMessage(),
+                //    'descriptive_msg' => $e->getMessage(),
                 ],500);
              }
         }
@@ -132,7 +132,7 @@ class sms_controller extends Controller
              'OTP_start'=>time(),
          ]); 
 
-         if(session()->has('OPT_count')){
+         if(session()->has('OTP_count')){
              $cnt = session('OTP_count');
 
              session([
