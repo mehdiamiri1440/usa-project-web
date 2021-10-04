@@ -6,35 +6,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="keywords" content="محصولات کشاورزی,خرید مستقیم صیفی,فروشگاه آنلاین کشاورزی,باسکول">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
     <meta name="csrf-token" content="{{csrf_token()}}">
-
-    <link rel="icon" href="{{asset('assets/img/logo/mobile-logo.svg')}}">
-
     @if(config('app.name') != 'Laravel')
     <meta name="robots" content="noindex" />
     @endif
 
-
+    <link rel="icon" href="{{asset('assets/img/logo/mobile-logo.svg')}}">
+    
     <!-- fonts -->
     <link rel="preload" href="{{asset('assets/fonts/woff2/IRANSansWeb(FaNum)_Bold.woff2')}}" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="{{asset('assets/fonts/woff2/IRANSansWeb(FaNum).woff2')}}" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="{{asset('assets/fonts/woff2/IRANSansWeb(FaNum)_Medium.woff2')}}" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="{{asset('assets/webfonts/fa-solid-900.woff2')}}" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="{{asset('assets/webfonts/fa-regular-400.woff2')}}" as="font" type="font/woff2" crossorigin>
-    <!-- <link rel="preload" href="{{asset('assets/webfonts/fa-brands-400.woff2')}}" as="font" type="font/woff2" crossorigin> -->
-    
-    
+  
     <!-- Main Styles
-    // improve for blocking request 
+    // improve for blocking request for preload
     -->
     <link rel="preload" href="{{asset('assets/css/fontiran.min.css')}}" as="style" onload="this.rel='stylesheet'" crossorigin>
     <link rel="preload" href="{{asset('assets/css/all.min.css')}}" as="style" onload="this.rel='stylesheet'" crossorigin>
     <link rel="preload" href="{{asset('css/app.css')}}" as="style" onload="this.rel='stylesheet'" crossorigin>
     <title>باسکول | بازار خرید و فروش عمده محصولات غذایی و کشاورزی ایران بدون واسطه</title>
-
-
-
 
      <script>
         window.Laravel = {csrfToken: '{{csrf_token()}}'}
@@ -43,76 +35,57 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129398000-1"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-
         function gtag() {
             dataLayer.push(arguments);
         }
-
         gtag('js', new Date());
-
-        //        gtag('config', 'UA-129398000-1');
         gtag('config', 'UA-129398000-1', {'send_page_view': false});
     </script>
-
-    <style>
-
-     
-      .main-loader-wrapper {
-        position: fixed;
-
-        bottom: 20px;
-
-        z-index: 1030;
-
-        background: #fff;
-
-        width: 100%;
-
-        height: 100%;
-
-        left: 0;
-
-        top: 0;
-        }
-
-        .logo-main-loader {
-          display: inline-block;
-          position: absolute;
-          left: 50%;
-          top: 40%;
-          transform: translate(-50%, -50%);
-          text-align: center;
-          line-height: 1.618;
-          width: 100%;
-          padding: 0 15px;
-        }
-
-        .logo-main-loader svg {
-            width: 60px;
-            height: 70px;
-        }
-        .main-loader-shape-wrapper {
-          position: absolute;
-          height: 70px !important;
-          bottom: 20%;
-          left: calc(50% - 23px);
-        }
-
-
-        /* preloader image style*/
-        .spinner-border{
-          width: 4.5rem;
-          height: 4.5rem;
-          color: #bbb;
-          border-width: 3px;
-        }
-    </style>
+  <style>
+    .main-loader-wrapper {
+      position: fixed;
+      bottom: 20px;
+      z-index: 1030;
+      background: #fff;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+    }
+    .logo-main-loader {
+      display: inline-block;
+      position: absolute;
+      left: 50%;
+      top: 40%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      line-height: 1.618;
+      width: 100%;
+      padding: 0 15px;
+    }
+    .logo-main-loader svg {
+        width: 60px;
+        height: 70px;
+    }
+    .main-loader-shape-wrapper {
+      position: absolute;
+      height: 70px !important;
+      bottom: 20%;
+      left: calc(50% - 23px);
+    }
+    /* preloader image style*/
+    .spinner-border{
+      width: 4.5rem;
+      height: 4.5rem;
+      color: #bbb;
+      border-width: 3px;
+    }
+  </style>
 </head>
 <body >
 
  <!-- #regex main loader -->
  <div id="master-loader-wrapper" class="main-loader-wrapper">
-   
     <div class="logo-main-loader">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -157,16 +130,15 @@
   <!-- end regex main loader -->
 
   <div id="app">
-
-            <route-component
-                    user-id = "{{session('user_id')}}"
-                    is-seller = "{{session('is_seller')}}"
-                    assets = "{{asset('')}}"
-                    storage-path = "{{url('/storage')}}"
-                    profile-photo="{{session('profile_photo')}}"
-                    user-full-name="{{session('full_name')}}"
-                    user-logout-path="{{route('logout')}}"
-            />
+    <route-component
+      user-id = "{{session('user_id')}}"
+      is-seller = "{{session('is_seller')}}"
+      assets = "{{asset('')}}"
+      storage-path = "{{url('/storage')}}"
+      profile-photo="{{session('profile_photo')}}"
+      user-full-name="{{session('full_name')}}"
+      user-logout-path="{{route('logout')}}"
+    />
   </div>
 
 <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-app.js"></script>
@@ -192,21 +164,7 @@
 
 <script src="{{asset('js/app.js')}}" defer></script>
 
- {{-- <script async src="{{asset('js/sw/app.js')}}"></script> 
- <script src="{{asset('assets/js/idleTimer.js')}}"></script>  --}}
-
 <script>
-    // $(document).ready(function () {
-    //     // $(document).idleTimer(7200000);
-        
-    //     $('.main-loader-wrapper').css('display','none');
-    // });
-    
-   
-
-    // $(document).on("idle.idleTimer", function () {
-    //     window.location.href = '/login'
-    // });
 
     function getUserId(){
         let userId = <?php if(session('user_id')){echo session('user_id');} else echo -1; ?>;
@@ -217,14 +175,6 @@
         return base + '/';
     }
 
-   
-    //     addEvent(window, "load", function (e) {
-            
-    //         });
-    //     });
 </script>
-
-
 </body>
-
 </html>

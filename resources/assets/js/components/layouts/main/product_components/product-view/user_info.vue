@@ -754,7 +754,7 @@ a#note-close:not(.collapsed):after {
                 </p>
               </div>
             </li> -->
-            <li>
+            <li v-if="$parent.product.user_info.response_rate">
               <div class="icon-wrapper">
                 <i class="fa fa-exchange-alt"> </i>
               </div>

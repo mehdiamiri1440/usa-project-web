@@ -171,17 +171,6 @@ const router = new Router({
                 },
               },
             },
-            // {
-            //   path: "group-messages",
-            //   name: "groupMessagesSeller",
-            //   components: {
-            //     "group-list": resolve => {
-            //       require([
-            //         "../components/dashboard/group-messages.vue"
-            //       ], resolve);
-            //     }
-            //   }
-            // }
           ],
         },
         {
@@ -249,15 +238,6 @@ const router = new Router({
             },
           },
         },
-        // {
-        //   path: "wallet",
-        //   name: "walletSeller",
-        //   components: {
-        //     default: (resolve) => {
-        //       require(["../components/dashboard/seller/wallet.vue"], resolve);
-        //     },
-        //   },
-        // },
         {
           path: "support",
           name: "supportSeller",
@@ -345,17 +325,6 @@ const router = new Router({
                 },
               },
             },
-            // {
-            //   path: "group-messages",
-            //   name: "groupMessagesBuyer",
-            //   components: {
-            //     "group-list": resolve => {
-            //       require([
-            //         "../components/dashboard/group-messages.vue"
-            //       ], resolve);
-            //     }
-            //   }
-            // }
           ],
         },
         {
@@ -584,17 +553,17 @@ const router = new Router({
             },
           },
         },
-        {
-          path: "register-inquiry",
-          name: "registerInquiry",
-          components: {
-            default: (resolve) => {
-              require([
-                "../components/layouts/main/main_components/register-inquiry.vue",
-              ], resolve);
-            },
-          },
-        },
+        // {
+        //   path: "register-inquiry",
+        //   name: "registerInquiry",
+        //   components: {
+        //     default: (resolve) => {
+        //       require([
+        //         "../components/layouts/main/main_components/register-inquiry.vue",
+        //       ], resolve);
+        //     },
+        //   },
+        // },
         {
           path: "invite/:userName",
           name: "invite",

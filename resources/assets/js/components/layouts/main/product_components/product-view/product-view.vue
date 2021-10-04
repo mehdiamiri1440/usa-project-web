@@ -29,7 +29,6 @@ span {
 
 .bread-crumbs-wrapper {
   margin: 3px auto 11px;
-  height: 25px;
 }
 
 .bread-crumbs-wrapper a {
@@ -489,7 +488,7 @@ button.send-message-button {
           :class="{
             'send-message-button':
               product.user_info.has_phone && currentUser.user_info.is_buyer,
-            'green-button bg-gradient-green':
+            'green-button bg-orange':
               !product.user_info.has_phone ||
               (product.user_info.has_phone && currentUser.user_info.is_seller),
           }"
@@ -508,7 +507,7 @@ button.send-message-button {
           @click.prevent="loginModal(true)"
           :class="{
             'send-message-button': product.user_info.has_phone,
-            'green-button bg-gradient-green': !product.user_info.has_phone,
+            'green-button bg-orange': !product.user_info.has_phone,
           }"
         >
           <span v-if="product.user_info.has_phone"> چت </span>
