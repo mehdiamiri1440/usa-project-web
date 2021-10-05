@@ -49,6 +49,10 @@ h2 {
   border-radius: 50px;
   overflow: hidden;
   float: right;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: #dddddd;
 }
 
 .user-info {
@@ -421,14 +425,23 @@ h2 {
         v-if="inviterUser.user_info"
       >
         <div class="user-info">
-          <div class="image-wrapper">
-            <img
-              v-if="inviterUser.profile.profile_photo"
-              :src="str + '/' + inviterUser.profile.profile_photo"
-              alt=""
-            />
-            <img v-else src="../../../../img/user-defult.png" alt="" />
-          </div>
+          <div
+            class="image-wrapper"
+            v-if="inviterUser.profile.profile_photo"
+            :style="{
+              backgroundImage:
+                'url(' + str + '/' + inviterUser.profile.profile_photo + ')',
+            }"
+          ></div>
+          <div
+            class="image-wrapper"
+            v-else
+            :style="{
+              backgroundImage:
+                'url(' + assets + 'assets/img/user-defult.png' + ')',
+            }"
+          ></div>
+
           <p
             v-text="
               inviterUser.user_info.first_name +
