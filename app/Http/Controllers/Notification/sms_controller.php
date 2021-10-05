@@ -27,11 +27,12 @@ class sms_controller extends Controller
 
         $this->validate($request,$rules);
 
-        if($this->is_request_safe($request) == false){
-            return response()->json([
-                'status' => false,
-            ],400);
-        }
+        // if($this->is_request_safe($request) == false){
+        //     return response()->json([
+        //         'status' => false,
+        //         'msg' => 'لطفا بعدا دوباره تلاش کنید.'
+        //     ],400);
+        // }
 		
 		$random_number = $this->generate_random_number();
 		
