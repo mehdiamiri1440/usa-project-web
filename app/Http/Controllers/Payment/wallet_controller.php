@@ -13,6 +13,7 @@ use DB;
 use App\Models\premium_service;
 use App\Traits\Payment;
 use App\Http\Controllers\Payment\payment_controller;
+use App\Jobs\GiveReferralReward;
 
 
 class wallet_controller extends Controller
@@ -100,13 +101,28 @@ class wallet_controller extends Controller
 
     public function wallet_payment_callback()
     {
-        try{ 
-            $this->do_payment_callback(session('user_id'),session('payment_amount'));
+        try{
+            $user_id = session('user_id');
+            $payment_amount = session()->pull('payment_amount');
+
+            // $this->do_payment_callback(session('user_id'),session('payment_amount'));
+
+            $gateway = \Gateway::verify();
+            $trackingCode = $gateway->trackingCode();
+            $refId = $gateway->refId();
+            $cardNumber = $gateway->cardNumber();
+
+            
+            if(is_integer($user_id) && is_integer($payment_amount)){
+                GiveReferralReward::dispatch($user_id,$payment_amount);
+            }
+
+            
 
             // عملیات خرید با موفقیت انجام شده است
             // در اینجا کالا درخواستی را به کاربر ارائه میکنم
             
-            $this->do_after_payment_changes_for_wallet_charge(session()->pull('payment_amount'),session('user_id'));
+            $this->do_after_payment_changes_for_wallet_charge($payment_amount,$user_id);
             
             return redirect('/seller/buyAd-requests');
 
@@ -120,7 +136,10 @@ class wallet_controller extends Controller
     public function app_wallet_payment_callback()
     {
         try{ 
-            $this->do_payment_callback(session('app_user_id'),session('payment_amount'));
+            $user_id = session('app_user_id');
+            $payment_amount = session()->pull('payment_amount');
+
+            // $this->do_payment_callback(session('app_user_id'),session('payment_amount'));
 
             // عملیات خرید با موفقیت انجام شده است
             // در اینجا کالا درخواستی را به کاربر ارائه میکنم

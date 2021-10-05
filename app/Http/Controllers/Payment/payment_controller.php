@@ -18,6 +18,7 @@ use App\Models\product;
 use DB;
 use App\Models\premium_service;
 use App\Traits\Payment;
+use App\Jobs\GiveReferralReward;
     
 
 class payment_controller extends Controller
@@ -115,7 +116,20 @@ class payment_controller extends Controller
     public function payment_callback()
     {
         try { 
-            $this->do_payment_callback(session('user_id'),session()->pull('payment_amount'));
+            $user_id = session('user_id');
+            $payment_amount = session()->pull('payment_amount');
+            // $this->do_payment_callback(session('user_id'),session()->pull('payment_amount'));
+
+
+            $gateway = \Gateway::verify();
+            $trackingCode = $gateway->trackingCode();
+            $refId = $gateway->refId();
+            $cardNumber = $gateway->cardNumber();
+
+            
+            if(is_integer($user_id) && is_integer($payment_amount)){
+                GiveReferralReward::dispatch($user_id,$payment_amount);
+            }
 
             // عملیات خرید با موفقیت انجام شده است
             // در اینجا کالا درخواستی را به کاربر ارائه میکنم
@@ -144,7 +158,19 @@ class payment_controller extends Controller
     {
         
         try { 
-            $this->do_payment_callback(session('app_user_id'),session()->pull('payment_amount'));
+            $user_id = session('app_user_id');
+            $payment_amount = session()->pull('payment_amount');
+            // $this->do_payment_callback(session('app_user_id'),session()->pull('payment_amount'));
+
+            $gateway = \Gateway::verify();
+            $trackingCode = $gateway->trackingCode();
+            $refId = $gateway->refId();
+            $cardNumber = $gateway->cardNumber();
+
+        
+            if(is_integer($user_id) && is_integer($payment_amount)){
+                GiveReferralReward::dispatch($user_id,$payment_amount);
+            }
 
             // عملیات خرید با موفقیت انجام شده است
             // در اینجا کالا درخواستی را به کاربر ارائه میکنم
@@ -271,7 +297,20 @@ class payment_controller extends Controller
     public function elevator_payment_callback()
     {
         try{ 
-            $this->do_payment_callback(session('user_id'),session()->pull('payment_amount'));
+            $user_id = session('user_id');
+            $payment_amount = session()->pull('payment_amount');
+
+            // $this->do_payment_callback(session('user_id'),session()->pull('payment_amount'));
+
+            $gateway = \Gateway::verify();
+            $trackingCode = $gateway->trackingCode();
+            $refId = $gateway->refId();
+            $cardNumber = $gateway->cardNumber();
+
+            
+            if(is_integer($user_id) && is_integer($payment_amount)){
+                GiveReferralReward::dispatch($user_id,$payment_amount);
+            }
 
             // عملیات خرید با موفقیت انجام شده است
             // در اینجا کالا درخواستی را به کاربر ارائه میکنم
@@ -290,7 +329,19 @@ class payment_controller extends Controller
     public function app_elevator_payment_callback()
     {
         try{ 
-            $this->do_payment_callback(session('app_user_id'),session()->pull('payment_amount'));
+            $user_id = session('app_user_id');
+            $payment_amount = session()->pull('payment_amount');
+            // $this->do_payment_callback(session('app_user_id'),session()->pull('payment_amount'));
+
+            $gateway = \Gateway::verify();
+            $trackingCode = $gateway->trackingCode();
+            $refId = $gateway->refId();
+            $cardNumber = $gateway->cardNumber();
+
+            
+            if(is_integer($user_id) && is_integer($payment_amount)){
+                GiveReferralReward::dispatch($user_id,$payment_amount);
+            }
 
             // عملیات خرید با موفقیت انجام شده است
             // در اینجا کالا درخواستی را به کاربر ارائه میکنم
@@ -423,7 +474,19 @@ class payment_controller extends Controller
     public function product_capacity_payment_callback()
     {
         try{ 
-            $this->do_payment_callback(session('user_id'),session()->pull('payment_amount'));
+            $user_id = session('user_id');
+            $payment_amount = session()->pull('payment_amount');
+            // $this->do_payment_callback(session('user_id'),session()->pull('payment_amount'));
+
+            $gateway = \Gateway::verify();
+            $trackingCode = $gateway->trackingCode();
+            $refId = $gateway->refId();
+            $cardNumber = $gateway->cardNumber();
+
+            
+            if(is_integer($user_id) && is_integer($payment_amount)){
+                GiveReferralReward::dispatch($user_id,$payment_amount);
+            }
 
             // عملیات خرید با موفقیت انجام شده است
             // در اینجا کالا درخواستی را به کاربر ارائه میکنم
@@ -442,7 +505,19 @@ class payment_controller extends Controller
     public function app_product_capacity_payment_callback()
     {
         try{ 
-            $this->do_payment_callback(session('app_user_id'),session()->pull('payment_amount'));
+            $user_id = session('app_user_id');
+            $payment_amount = session()->pull('payment_amount');
+            // $this->do_payment_callback(session('app_user_id'),session()->pull('payment_amount'));
+
+            $gateway = \Gateway::verify();
+            $trackingCode = $gateway->trackingCode();
+            $refId = $gateway->refId();
+            $cardNumber = $gateway->cardNumber();
+
+            
+            if(is_integer($user_id) && is_integer($payment_amount)){
+                GiveReferralReward::dispatch($user_id,$payment_amount);
+            }
 
             // عملیات خرید با موفقیت انجام شده است
             // در اینجا کالا درخواستی را به کاربر ارائه میکنم
@@ -565,7 +640,19 @@ class payment_controller extends Controller
     public function buyAd_reply_capacity_payment_callback()
     {
         try{ 
-            $this->do_payment_callback(session('user_id'),session()->pull('payment_amount'));
+            $user_id = session('user_id');
+            $payment_amount = session()->pull('payment_amount');
+            // $this->do_payment_callback(session('user_id'),session()->pull('payment_amount'));
+
+            $gateway = \Gateway::verify();
+            $trackingCode = $gateway->trackingCode();
+            $refId = $gateway->refId();
+            $cardNumber = $gateway->cardNumber();
+
+            
+            if(is_integer($user_id) && is_integer($payment_amount)){
+                GiveReferralReward::dispatch($user_id,$payment_amount);
+            }
 
             // عملیات خرید با موفقیت انجام شده است
             // در اینجا کالا درخواستی را به کاربر ارائه میکنم
@@ -586,7 +673,19 @@ class payment_controller extends Controller
     public function app_buyAd_reply_capacity_payment_callback()
     {
         try{ 
-            $this->do_payment_callback(session('app_user_id'),session()->pull('payment_amount'));
+            $user_id = session('user_id');
+            $payment_amount = session()->pull('payment_amount');
+            // $this->do_payment_callback(session('app_user_id'),session()->pull('payment_amount'));
+
+            $gateway = \Gateway::verify();
+            $trackingCode = $gateway->trackingCode();
+            $refId = $gateway->refId();
+            $cardNumber = $gateway->cardNumber();
+
+            
+            if(is_integer($user_id) && is_integer($payment_amount)){
+                GiveReferralReward::dispatch($user_id,$payment_amount);
+            }
 
             // عملیات خرید با موفقیت انجام شده است
             // در اینجا کالا درخواستی را به کاربر ارائه میکنم
