@@ -548,6 +548,9 @@ textarea.error:focus + i {
 .modal-button-wrapper {
   margin: 15px auto 50px;
 }
+.default-images {
+  padding: 0 15px;
+}
 @media screen and (max-width: 992px) {
   .address-wrapper {
     margin-top: 15px;
@@ -1340,10 +1343,9 @@ export default {
   },
   methods: {
     init: function () {
-     
       $("#description-modal").on("shown.bs.modal", () => {
-      this.$parent.handleBackKeys();
-    });
+        this.$parent.handleBackKeys();
+      });
       this.activeisCompanyCollapse();
       this.isLoaded = true;
       $('input[type="file"]').imageuploadify();

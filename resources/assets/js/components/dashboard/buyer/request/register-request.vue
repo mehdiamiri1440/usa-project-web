@@ -119,6 +119,9 @@
 }
 
 @media screen and (max-width: 767px) {
+  .main-content .section-title {
+    margin: 0 15px 30px;
+  }
   .main-section-wrapper {
     margin: 0px auto;
   }
