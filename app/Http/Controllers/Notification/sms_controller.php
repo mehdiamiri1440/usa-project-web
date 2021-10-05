@@ -26,19 +26,19 @@ class sms_controller extends Controller
 		
         $this->validate($request,$rules);
         
-        if(session()->has('OTP_count') && session('OTP_count') > 10){
-            return response()->json([
-                'status' => false,
-                'msg' => 'خطای تلاش های زیاد!'
-            ],400);
-        }
+        // if(session()->has('OTP_count') && session('OTP_count') > 10){
+        //     return response()->json([
+        //         'status' => false,
+        //         'msg' => 'خطای تلاش های زیاد!'
+        //     ],400);
+        // }
 
-        if(session()->has('OTP_start') && (session('OTP_start') + 2 * 60) >= time()){
-            return response()->json([
-                'status' => false,
-                'msg' => 'منتظر بمانید.'
-            ],400);
-        }
+        // if(session()->has('OTP_start') && (session('OTP_start') + 2 * 60) >= time()){
+        //     return response()->json([
+        //         'status' => false,
+        //         'msg' => 'منتظر بمانید.'
+        //     ],400);
+        // }
 		
 		$random_number = $this->generate_random_number();
 		
@@ -71,19 +71,19 @@ class sms_controller extends Controller
 		
         $this->validate($request,$rules);
 
-        if(session()->has('OTP_count') && session('OTP_count') > 10){
-            return response()->json([
-                'status' => false,
-                'msg' => 'خطای تلاش های زیاد!'
-            ],400);
-        }
+        // if(session()->has('OTP_count') && session('OTP_count') > 10){
+        //     return response()->json([
+        //         'status' => false,
+        //         'msg' => 'خطای تلاش های زیاد!'
+        //     ],400);
+        // }
         
-        if(session()->has('OTP_start') && (session('OTP_start') + 2 * 60) < time()){
-            return response()->json([
-                'status' => false,
-                'msg' => 'منتظر بمانید.'
-            ],400);
-        }
+        // if(session()->has('OTP_start') && (session('OTP_start') + 2 * 60) < time()){
+        //     return response()->json([
+        //         'status' => false,
+        //         'msg' => 'منتظر بمانید.'
+        //     ],400);
+        // }
         
         $user_record = myuser::where('phone',$request->phone)
                                 ->get()
@@ -132,18 +132,18 @@ class sms_controller extends Controller
              'OTP_start'=>time(),
          ]); 
 
-         if(session()->has('OTP_count')){
-             $cnt = session('OTP_count');
+        //  if(session()->has('OTP_count')){
+        //      $cnt = session('OTP_count');
 
-             session([
-                 'OTP_count' => $cnt + 1
-             ]);
-         }
-         else{
-             session([
-                 'OTP_count' => 1
-             ]);
-         }
+        //      session([
+        //          'OTP_count' => $cnt + 1
+        //      ]);
+        //  }
+        //  else{
+        //      session([
+        //          'OTP_count' => 1
+        //      ]);
+        //  }
     }
 	
 	public function verify_code(Request $request)
