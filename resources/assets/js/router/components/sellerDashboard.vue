@@ -573,6 +573,7 @@ export default {
       $(window).on("popstate", function (e) {
         $("#factor-pricing-modal").modal("hide");
         $("#pricing-modal").modal("hide");
+        $("#description-modal").modal("hide");
       });
     },
     checkPricingModal: function () {

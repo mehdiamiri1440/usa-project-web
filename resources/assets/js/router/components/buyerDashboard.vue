@@ -90,6 +90,16 @@ export default {
       verificationAlert: false,
     };
   },
+  methods: {
+    handleBackKeys: function () {
+      if (window.history.state) {
+        history.pushState(null, null, window.location);
+      }
+      $(window).on("popstate", function (e) {
+        $("#description-modal").modal("hide");
+      });
+    },
+  },
   mounted: function () {
     axios
       .post("/get_total_unread_messages_for_current_user")

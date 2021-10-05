@@ -799,13 +799,14 @@
   padding: 0 3px;
   top: 52px;
   z-index: 2;
-  left: 15px;
   right: 10px;
 }
 
 .messenger-alert .text-wrapper {
   display: flex;
   align-items: center;
+  width: 100%;
+  height: 100%;
 }
 
 .messenger-alert .text-wrapper span {
@@ -818,7 +819,9 @@
   background: red;
   color: #fff;
   border: none;
+  width: calc(100% - 15px);
 }
+
 .messenger-alert.danger .actions-wrapper button {
   width: 100px;
   border-radius: 50px;

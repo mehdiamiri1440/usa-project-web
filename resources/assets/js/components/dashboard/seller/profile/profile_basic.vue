@@ -1305,6 +1305,9 @@ export default {
   },
   methods: {
     init: function () {
+      $("#description-modal").on("shown.bs.modal", () => {
+        this.$parent.handleBackKeys();
+      });
       this.activeisCompanyCollapse();
       this.isLoaded = true;
       $('input[type="file"]').imageuploadify();
