@@ -173,7 +173,12 @@
 
 <template>
   <div class="switch-buttons">
-    <p class="button-title">نوع کاربری فروشنده فعال است</p>
+    <p class="button-title">
+      نوع کاربری
+      <span v-if="isSeller == 1">فروشنده</span>
+      <span v-else>خریدار</span>
+      فعال است
+    </p>
 
     <div class="radio-wrapper">
       <div class="label-radio" :class="{ active: isSeller == 1 }">

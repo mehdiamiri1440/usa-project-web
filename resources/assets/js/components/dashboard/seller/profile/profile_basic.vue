@@ -517,6 +517,10 @@ textarea.error:focus + i {
   margin: 15px auto 50px;
 }
 
+.default-images {
+  padding: 0 15px;
+}
+
 @media screen and (max-width: 992px) {
   .address-wrapper {
     margin-top: 15px;
