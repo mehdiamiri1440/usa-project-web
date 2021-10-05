@@ -369,7 +369,7 @@ class sms_controller extends Controller
             return false;
         }
         
-        if(Cache::has($request->phone) && Cache::get($request->phone) >= 10){
+        if(Cache::has($request->phone) && Cache::get($request->phone) >= 20){
             $black_list_key = 'black-listed-' . $request->phone;
 
             Cache::put($black_list_key,true,60 * 24);
@@ -377,13 +377,13 @@ class sms_controller extends Controller
             return false;
         }
 
-        if(session()->has('OTP_count') && session('OTP_count') >= 10){
-            return false;
-        }
+        // if(session()->has('OTP_count') && session('OTP_count') >= 10){
+        //     return false;
+        // }
 
-        if(session()->has('OTP_start') && (session('OTP_start') + 2 * 60) >= time()){
-            return false;
-        }
+        // if(session()->has('OTP_start') && (session('OTP_start') + 2 * 60) < time()){
+        //     return false;
+        // }
 
         return true;
     }

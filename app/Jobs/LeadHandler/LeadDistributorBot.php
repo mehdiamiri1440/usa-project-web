@@ -645,12 +645,9 @@ class LeadDistributorBot implements ShouldQueue
                                    $description
                                 );
 
-        $price_msg = '';
-        if(Carbon::parse($product['user_info']->created_at)->diffInDays(Carbon::now()) <= 7){
-            $price = number_format($product['main']->min_sale_price);
-            $price_msg = "حدود کف قیمت برای هر کیلو {$price} تومان است." . "\n\n";
-        }
-
+        $price = number_format($product['main']->min_sale_price);
+        $price_msg = "حدود کف قیمت برای هر کیلو {$price} تومان است." . "\n\n";
+        
         $msg = $this->greeting_lines[array_rand($this->greeting_lines)] . "\n";
         $msg = $msg . $description . "\n\n";
         $msg = $msg . $this->call_to_action_lines[array_rand($this->call_to_action_lines)] . "\n\n";
