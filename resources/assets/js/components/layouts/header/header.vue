@@ -1235,7 +1235,7 @@ a.profile-info-wrapper:hover {
 
             <li class="hidden-xs">
               <router-link
-                v-if="is_seller"
+                v-if="is_seller == 1"
                 class="green-button green-button-alt static-layout"
                 :to="{ name: 'mainBuyAdRequests' }"
               >
