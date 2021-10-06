@@ -223,6 +223,9 @@
 
         $.ajax({
             url:"{{route('admin_panel_block_operator')}}",
+            xhrFields: {
+                withCredentials: true
+            },
             data:{
                 user_id:user_id,
                 block:1
@@ -248,6 +251,9 @@
 
         $.ajax({
             url:"{{route('admin_panel_block_operator')}}",
+            xhrFields: {
+                withCredentials: true
+            },
             data:{
                 user_id:user_id,
                 block:0
