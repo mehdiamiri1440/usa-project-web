@@ -241,6 +241,12 @@
   border-radius: 50%;
   margin: 0 auto 10px;
 }
+.user-image div {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #dddddd;
+}
 
 .user-image-content {
   width: 40px;
@@ -823,28 +829,25 @@ p.response-rate span {
           <div class="header-content col-xs-12">
             <div class="image_user_wrapper col-xs-4 col-sm-3 col-lg-2">
               <div v-if="profileOwner.user_info" class="user-image">
-                <div v-if="profileOwner.profile.profile_photo">
-                  <img
-                    v-bind:src="str + '/' + profileOwner.profile.profile_photo"
-                    :alt="
-                      profileOwner.user_info.first_name +
-                      ' ' +
-                      profileOwner.user_info.last_name
-                    "
-                  />
-                </div>
+                <div
+                  v-if="profileOwner.profile.profile_photo"
+                  :style="{
+                    backgroundImage:
+                      'url(' +
+                      str +
+                      '/' +
+                      profileOwner.profile.profile_photo +
+                      ')',
+                  }"
+                ></div>
 
-                <div v-else>
-                  <img
-                    src="../../../../img/user-defult.png"
-                    class="image_defult"
-                    :alt="
-                      profileOwner.user_info.first_name +
-                      ' ' +
-                      profileOwner.user_info.last_name
-                    "
-                  />
-                </div>
+                <div
+                  v-else
+                  :style="{
+                    backgroundImage:
+                      'url(' + assets + 'assets/img/user-defult.png' + ')',
+                  }"
+                ></div>
               </div>
               <div v-else class="user-image">
                 <div
@@ -905,7 +908,7 @@ p.response-rate span {
               <div class="row">
                 <div
                   class="col-xs-6 text-center"
-                  v-if="profileOwnerStatistics.reputation_score"
+                  v-if="profileOwnerStatistics.reputation_score >= 0"
                 >
                   <div
                     class="info-num"
@@ -1525,14 +1528,10 @@ p.response-rate span {
 
             <div v-if="userLogin">
               <div class="reviews-wrapper col-xs-12">
-                <div class="row">
-                  <p class="title-content">نظر کاربران</p>
-                  <div class="header-reviews text-center">
-                    <div
-                      class="actions"
-                      v-if="userAllowedReview && !isMyProfile"
-                    >
-                      <!-- <button
+                <p class="title-content">نظر کاربران</p>
+                <div class="header-reviews text-center">
+                  <div class="actions" v-if="userAllowedReview && !isMyProfile">
+                    <!-- <button
                       v-if="userAllowedReview && !isMyProfile"
                       @click.prevent="activeReviewModal()"
                       class="add-review hover-effect rtl"
@@ -1542,59 +1541,58 @@ p.response-rate span {
                       <span>ثبت نظر</span>
                     </button> -->
 
-                      <ChatReviewComponent
-                        :user-full-name="
-                          profileOwner.user_info.first_name +
-                          ' ' +
-                          profileOwner.user_info.last_name
-                        "
-                        :user-id="profileOwner.user_info.id"
-                        v-if="reviewCurrentStep == 0"
-                      />
+                    <ChatReviewComponent
+                      :user-full-name="
+                        profileOwner.user_info.first_name +
+                        ' ' +
+                        profileOwner.user_info.last_name
+                      "
+                      :user-id="profileOwner.user_info.id"
+                      v-if="reviewCurrentStep == 0"
+                    />
 
-                      <SuccessReviewComponent v-if="reviewCurrentStep == 1" />
-                    </div>
-                    <p
-                      class="red-text deleted-reviews"
-                      v-if="reviews.deleted_count > 0"
-                    >
-                      نظرات
-                      <strong v-text="reviews.deleted_count"></strong>
-                      کاربر توسط
-                      <span
-                        v-text="
-                          profileOwner.user_info.first_name +
-                          ' ' +
-                          profileOwner.user_info.last_name
-                        "
-                      ></span>
-                      حذف شده است
-                    </p>
+                    <SuccessReviewComponent v-if="reviewCurrentStep == 1" />
                   </div>
-
-                  <div
-                    class="reviews-wrapper"
-                    v-if="reviews.comments.length > 0 && !reviewsLoader"
+                  <p
+                    class="red-text deleted-reviews"
+                    v-if="reviews.deleted_count > 0"
                   >
-                    <article-review
-                      v-for="(comment, index) in reviews.comments"
+                    نظرات
+                    <strong v-text="reviews.deleted_count"></strong>
+                    کاربر توسط
+                    <span
+                      v-text="
+                        profileOwner.user_info.first_name +
+                        ' ' +
+                        profileOwner.user_info.last_name
+                      "
+                    ></span>
+                    حذف شده است
+                  </p>
+                </div>
+
+                <div
+                  class="reviews-wrapper"
+                  v-if="reviews.comments.length > 0 && !reviewsLoader"
+                >
+                  <article-review
+                    v-for="(comment, index) in reviews.comments"
+                    :key="index"
+                    :review="comment"
+                  />
+                </div>
+                <div class="reviews-wrapper" v-else-if="reviewsLoader">
+                  <div class="default-review">
+                    <placeholder-article-review
+                      v-for="(item, index) in 2"
                       :key="index"
-                      :review="comment"
                     />
                   </div>
-                  <div class="reviews-wrapper" v-else-if="reviewsLoader">
-                    <div class="default-review">
-                      <placeholder-article-review
-                        v-for="(item, index) in 2"
-                        :key="index"
-                      />
-                    </div>
-                  </div>
-                  <div class="reviews-wrapper" v-else>
-                    <div class="empty-reviews">
-                      <span class="fa fa-comment-alt"></span>
-                      هیچ نظری ثبت نشده است
-                    </div>
+                </div>
+                <div class="reviews-wrapper" v-else>
+                  <div class="empty-reviews">
+                    <span class="fa fa-comment-alt"></span>
+                    هیچ نظری ثبت نشده است
                   </div>
                 </div>
               </div>
@@ -2118,9 +2116,7 @@ export default {
         .catch(function (err) {
           //
         });
-      axios.post("/user/profile_info").then((response) => {
-        this.currentUser = response.data;
-      });
+      this.checkCurrentUser();
 
       axios
         .post("/load_profile_by_user_name", {
@@ -2147,6 +2143,11 @@ export default {
             window.location.href = "/404";
           }
         });
+    },
+    checkCurrentUser() {
+      if (this.$parent.currentUser.user_info) {
+        this.currentUser = this.$parent.currentUser;
+      }
     },
     getProfileOwnerProducts: function () {
       this.registerComponentStatistics(
@@ -2249,47 +2250,13 @@ export default {
       } else {
         let url =
           baseUrl + "shared-profile/" + this.profileOwner.user_info.user_name;
-        eventBus.$emit("shareModalUrl", url);
+        let shareItem = {
+          shareModalUrl: url,
+          shareModalText: "",
+        };
+        eventBus.$emit("shareModalUrl", shareItem);
       }
     },
-    // copyProfileLinkToClipBoard: function () {
-    //   this.registerComponentStatistics(
-    //     "profileView",
-    //     "CopyProfileLink",
-    //     "click on copy profile link"
-    //   );
-    //   let base = getBase();
-
-    //   if (this.isDeviceMobile()) {
-    //     var linkElement = document.createElement("a");
-    //     var Message =
-    //       base + "shared-profile/" + this.profileOwner.user_info.user_name;
-    //     var messageToWhatsApp = encodeURIComponent(Message);
-    //     var url = "whatsapp://send?text=" + messageToWhatsApp;
-    //     linkElement.setAttribute("href", url);
-    //     linkElement.setAttribute("data-action", "share/whatsapp/share");
-    //     document.body.appendChild(linkElement);
-
-    //     linkElement.click();
-
-    //     document.body.removeChild(linkElement);
-    //   } else {
-    //     var input = document.createElement("input");
-    //     input.setAttribute(
-    //       "value",
-    //       base + "shared-profile/" + this.profileOwner.user_info.user_name
-    //     );
-    //     document.body.appendChild(input);
-    //     input.select();
-    //     var result = document.execCommand("copy");
-    //     document.body.removeChild(input);
-    //     if (result) {
-    //       this.popUpMsg = "آدرس پروفایل کاربر کپی شد.";
-    //       eventBus.$emit("submitSuccess", this.popUpMsg);
-    //       $("#custom-main-modal").modal("show");
-    //     }
-    //   }
-    // },
     isDeviceMobile: function () {
       if (
         navigator.userAgent.match(/Android/i) ||
@@ -2473,6 +2440,9 @@ export default {
           this.activeComponentTooltip();
         }, 10);
       }
+    },
+    "$parent.currentUser"(user) {
+      this.checkCurrentUser();
     },
   },
   metaInfo() {

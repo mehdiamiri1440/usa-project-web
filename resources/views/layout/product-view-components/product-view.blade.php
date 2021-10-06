@@ -1,8 +1,8 @@
-<div class="container">
+<div id="main-content" class="container-fluid padding-0-30 main-content-wrapper">
 
 
     <main id="main" class="row">
-      <div class="col-xs-12 text-rtl text-right bread-crumbs-wrapper hidden-xs">
+      <div class="col-xs-12 text-rtl text-right bread-crumbs-wrapper">
         <div class="row" v-if="product">
           <?php 
 
@@ -38,7 +38,7 @@
           </span>
         </div>
       </div>
-      <div class="col-xs-12 col-lg-9 pull-right">
+      <div class="col-xs-12 product-section-wrapper col-lg-8 pull-right">
         <section class="main-content">
           <div class="row">
             @include('layout.product-view-components.product-contents')
@@ -46,73 +46,88 @@
         </section>
       </div>
 
-      <div class="col-xs-12 col-lg-3 pull-left">
-        <div class="row">
+      <div class="col-xs-12 col-lg-4
+                  hidden-xs hidden-sm hidden-md
+                  user-section-wrapper
+                  pull-left">
             @include('layout.product-view-components.profile-info')
-        </div>
       </div>
 
+
       <section
-        id="product-section"
-        class="section-wrapper col-xs-12 latest-product"
-      >
-        <div class="row">
-          <h3 class="box-title">محصولات مرتبط</h3>
+      id="product-section"
+      class="section-wrapper col-xs-12 latest-product"
+    >
+      <div class="row">
+        <h3 class="box-title">محصولات مرتبط</h3>
 
-          <div class="products-contents">
-              @php 
-              $i = 0
-              @endphp
-              @foreach ($related_products as $product_item)
-                
-                <div class="owl-carousel product-carousel col-xs-12 col-sm-4 col-md-3"
-                >
-                  <article class="carousel-item box-content">
-                    <a href="{{'/product-view/' . 'خرید-عمده-' .  implode(explode(' ',$product_item->subcategory_name),'-') . '/' . $product_item->category_name . '/' . $product_item->id }}" class="carousel-img text-center">
-                      <img
+        <div class="products-contents">
+            @php 
+            $i = 0
+            @endphp
+            @foreach ($related_products as $product_item)
+              
+              <div class=" product-carousel col-xs-6 col-sm-4 col-md-3"
+              >
+                <article class="carousel-item box-content">
+                  <a href="{{'/product-view/' . 'خرید-عمده-' .  implode(explode(' ',$product_item->subcategory_name),'-') . '/' . $product_item->category_name . '/' . $product_item->id }}" class="carousel-img text-center">
+                    <img
 
-                        src="{{url('storage/') . '/' .$product_item->photo}}"
-                        class="main-image main-image-load"
-                      />
-                    </a>
+                      src="{{url('storage/') . '/' .$product_item->photo}}"
+                      class="main-image main-image-load"
+                    />
+                  </a>
+                  
+                  <a href="{{'/product-view/' . 'خرید-عمده-' .  implode(explode(' ',$product_item->subcategory_name),'-') . '/' . $product_item->category_name . '/' . $product_item->id }}" class="carousel-title">
                     
-                    <a href="{{'/product-view/' . 'خرید-عمده-' .  implode(explode(' ',$product_item->subcategory_name),'-') . '/' . $product_item->category_name . '/' . $product_item->id }}" class="carousel-title">
-                      
-                    <h4 >
+                  <h4 >
+                    {{
+                      $product_item->product_name
+                    }}
+                  </h4>
+                
+                </a>
+                <a href="#" class="stock-wrapper">
+
+                    <span>موجودی</span>
+                    <span >
                       {{
-                        $product_item->product_name
-                      }}
-                    </h4>
-                  
-                  </a>
-                  <a href="#" class="stock-wrapper">
+                        $product_item->stock
+                      }} کیلوگرم
+                    </span>
+                
+                </a>
+                </article>
+              </div>
 
-                      <span>موجودی</span>
-                      <span >
-                        {{
-                          $product_item->stock
-                        }} کیلوگرم
-                      </span>
-                  
-                  </a>
-                  </article>
-                </div>
-
-                @php
-                $i++
-                @endphp
-              @endforeach
-            
-          </div>
+              @php
+              $i++
+              @endphp
+            @endforeach
+          
         </div>
-      </section>
-
-
+      </div>
+      @if(isset($related_categories))
+      <div class="col-xs-12" >
+        <div class="data-tag-wrapper text-rtl">
+          @foreach ($related_categories as $item)
+          <a
+            class="tag-item"
+            href="{{'/product-list/category/'  . str_replace(' ', '-', $item)}}"
+          >
+            {{$item}}
+          </a>
+          @endforeach
+          
+        </div>
+      </div>
+    @endif
+    </section>
 
       <div class="buttons-wrapper col-xs-12">
         <a
           href="{{'/product-list/category/' . implode('-',explode(' ',$product['main']->sub_category_name)) }}"
-          class="green-button blue-button"
+          class="green-button blue-button all-products-button"
           >مشاهده همه محصولات</a
         >
       </div>
@@ -124,7 +139,7 @@
       
       @if($product['user_info']->has_phone)
       <button
-          class="green-button"
+          class="green-button phone-call"
         >
         <i class="fas fa-phone-square-alt" ></i>
 
@@ -144,7 +159,7 @@
           </button>
           @else
           <button
-            class=" green-button"
+            class=" green-button phone-call"
           >
           <span >
             <i class="fas fa-comment-alt"></i>

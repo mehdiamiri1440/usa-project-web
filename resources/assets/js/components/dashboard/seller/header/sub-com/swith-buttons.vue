@@ -23,7 +23,7 @@
 
   direction: rtl;
 
-  padding: 0 29px 0 8px;
+  padding: 0 27px 0 5px;
 
   font-size: 14px;
 }
@@ -91,10 +91,6 @@
   border: none;
 }
 
-.label-radio input:checked ~ label::after {
-  background-color: #fff;
-}
-
 .label-radio label::after {
   content: "";
 
@@ -119,6 +115,10 @@
   border-radius: 12px;
 
   border: 1px solid #fff;
+}
+
+.label-radio.active label::after {
+  background-color: #fff;
 }
 
 .label-radio.error label::after {

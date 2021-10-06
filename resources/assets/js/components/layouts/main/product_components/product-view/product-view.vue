@@ -28,8 +28,7 @@ span {
 }
 
 .bread-crumbs-wrapper {
-  margin: 10px auto;
-  height: 21px;
+  margin: 3px auto 11px;
 }
 
 .bread-crumbs-wrapper a {
@@ -119,6 +118,7 @@ span {
   box-shadow: 0 -6px 15px rgba(0, 0, 0, 0.16);
   background: #fff;
   display: flex;
+  height: 59px;
 }
 
 .fix-send-message-wrapper button {
@@ -205,13 +205,90 @@ button.send-message-button {
   left: 2px;
 }
 
-@media screen and (max-width: 1199px) {
-  .box-title {
-    margin: 0 auto 15px;
-  }
+.main-content-wrapper {
+  max-width: 1336px;
+}
 
+.product-section-wrapper {
+  width: calc(100% - 400px);
+}
+
+.user-section-wrapper {
+  padding: 0;
+  max-width: 370px;
+}
+
+.section-wrapper .title-box {
+  text-align: center;
+
+  margin-top: 35px;
+}
+
+.section-wrapper {
+  border-top: 1px solid #e0e0e0;
+}
+
+.default-grid {
+  padding: 0 3px;
+}
+
+.default-grid .default-main-article-content {
+  width: 100%;
+}
+.default-grid .default-wrapper-main-image {
+  width: 100%;
+  height: 160px;
+}
+.default-grid > div {
+  padding: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #f0f0f1;
+}
+
+.default-grid .default-article-contents {
+  padding: 15px;
+}
+
+.related-product,
+.default-related-product {
+  margin-top: 70px;
+  padding-bottom: 120px;
+}
+
+.tag-item {
+  background: #f2f2f2;
+  border: 1px solid #e0e0e0;
+  color: #313942;
+  border-radius: 12px;
+  padding: 8px 27px;
+  margin-left: 10px;
+  display: inline-block;
+  margin-bottom: 15px;
+}
+
+.tag-item:hover {
+  background: #e0e0e0;
+}
+
+.data-tag-wrapper {
+  margin-top: 50px;
+}
+
+@media screen and (max-width: 1199px) {
+  .product-section-wrapper {
+    width: 100%;
+  }
+  .user-section-wrapper {
+    max-width: initial;
+  }
   .default-carousel-item:last-of-type {
     display: none;
+  }
+
+  .bread-crumbs-wrapper {
+    padding: 0 15px;
+    margin: 11px auto;
   }
 }
 
@@ -219,16 +296,27 @@ button.send-message-button {
   .default-carousel-item:nth-child(3) {
     display: none;
   }
+  .fix-send-message-wrapper {
+    bottom: 59px;
+  }
 }
 
 @media screen and (max-width: 767px) {
+  .box-title {
+    padding: 0 10px;
+  }
+  .bread-crumbs-wrapper a {
+    font-size: 12px;
+  }
+
+  .main-content-wrapper {
+    padding: 0 15px !important;
+  }
+
   #main {
     padding-top: 94px;
   }
 
-  .box-title {
-    margin: 0 10px 15px;
-  }
   .main-product-wrapper {
     border-radius: 0;
   }
@@ -247,138 +335,148 @@ button.send-message-button {
 </style>
 
 <template>
-  <div class="container">
+  <div class="container-fluid padding-0-30 main-content-wrapper">
     <RegisterModal
       v-if="!currentUser.user_info"
       :is-chat="isChat"
       :product="product"
     />
-
     <main id="main" class="row">
-      <div class="col-xs-12 text-rtl text-right bread-crumbs-wrapper hidden-xs">
-        <div class="row" v-if="breadCrumbs">
-          <router-link :to="{ name: 'productList' }">
-            همه دسته ها
-            <i class="fa fa-angle-left"></i>
-          </router-link>
-
-          <router-link
-            v-for="(item, index) in breadCrumbs"
-            :key="index"
-            :to="getSubCategoryUrl(item)"
-          >
-            {{ item }}
-            <i class="fa fa-angle-left"></i>
-          </router-link>
-          <span v-text="product.main.product_name"></span>
-        </div>
-      </div>
-      <div class="col-xs-12 col-lg-9 pull-right">
-        <section class="main-content">
-          <div class="row">
-            <ProductContents />
-          </div>
-        </section>
-      </div>
-
-      <div class="col-xs-12 col-lg-3 pull-left">
+      <div class="col-xs-12">
         <div class="row">
-          <UserInfo />
-        </div>
-      </div>
+          <div class="text-rtl text-right bread-crumbs-wrapper">
+            <div v-if="breadCrumbs">
+              <router-link :to="{ name: 'productList' }">
+                همه دسته ها
+                <i class="fa fa-angle-left"></i>
+              </router-link>
 
-      <section
-        v-if="relatedProducts.length > 0 && isLoading == false"
-        id="product-section"
-        class="section-wrapper col-xs-12 latest-product"
-      >
-        <div class="row">
-          <h3 class="box-title">محصولات مرتبط</h3>
-
-          <div class="products-contents">
-            <div class="owl-carousel product-carousel">
-              <ProductCarousel
-                v-for="(product, index) in relatedProducts"
+              <router-link
+                v-for="(item, index) in breadCrumbs"
                 :key="index"
-                :img="str + '/thumbnails/' + product.photo"
-                :title="product.product_name"
-                :stock="getConvertedNumbers(product.stock)"
-                :link="getRelatedProductUrl(product)"
-                column="4"
-              />
+                :to="getSubCategoryUrl(item)"
+              >
+                {{ item }}
+                <i class="fa fa-angle-left"></i>
+              </router-link>
+              <span v-text="product.main.product_name"></span>
             </div>
           </div>
+          <div class="col-xs-12 col-lg-8 product-section-wrapper pull-right">
+            <section class="main-content">
+              <div class="row">
+                <ProductContents />
+              </div>
+            </section>
+            <div
+              class="
+                col-xs-12 col-lg-4
+                hidden-lg
+                user-section-wrapper
+                pull-left
+              "
+            >
+              <div class="row">
+                <UserInfo v-if="checkIsMobile()" />
+              </div>
+            </div>
+            <UserData />
+          </div>
+
+          <aside
+            class="
+              col-xs-12 col-lg-4
+              hidden-xs hidden-sm hidden-md
+              user-section-wrapper
+              pull-left
+            "
+          >
+            <UserInfo v-if="!checkIsMobile()" />
+          </aside>
         </div>
-      </section>
+      </div>
 
-      <section
-        class="section-wrapper col-xs-12"
-        v-else-if="relatedProducts.length == 0 && isLoading == true"
+      <div
+        id="related-products-wrapper"
+        class="section-wrapper col-xs-12 related-product"
+        :class="{ 'default-related-product': !isRelatedProducts }"
       >
-        <div class="row">
+        <div v-show="isRelatedProducts">
+          <div class="row">
+            <h3 class="box-title">محصولات مرتبط</h3>
+            <RelatedProducts />
+          </div>
+        </div>
+
+        <div v-if="!isRelatedProducts" class="row">
           <h3 class="box-title">محصولات مرتبط</h3>
-
-          <div class="col-xs-12 products-contents">
-            <div class="row">
+          <div>
+            <div
+              v-for="(defaultItem, index) in 12"
+              :key="index"
+              class="
+                default-items
+                col-xs-6 col-sm-4 col-md-3 col-lg-2
+                default-grid
+              "
+            >
               <div
-                v-for="(item, index) in 4"
-                :key="index"
-                :class="{ 'hidden-xs': index >= 2 }"
-                class="col-lg-3 col-md-4 col-xs-6 default-carousel-item"
+                class="
+                  col-xs-12
+                  margin-15-0
+                  default-item-wrapper default-main-wrapper
+                "
               >
-                <article class="carousel-item box-content col-xs-12">
-                  <span
-                    class="
-                      default-index-product-image
-                      placeholder-content
-                      col-xs-12
-                    "
-                  ></span>
+                <div class="default-wrapper-main-image pull-right">
+                  <span class="default-main-image placeholder-content"></span>
+                </div>
 
-                  <span
-                    class="
-                      content-default-width
-                      placeholder-content
-                      margin-10
-                      col-xs-10 col-xs-offset-1
-                    "
-                  ></span>
+                <div
+                  class="
+                    default-article-contents
+                    padding-0
+                    margin-top-10
+                    col-xs-12
+                  "
+                >
+                  <div class="default-main-article-content">
+                    <span class="content-half-width placeholder-content"></span>
 
-                  <span
-                    class="
-                      content-default-width
-                      placeholder-content
-                      col-xs-8 col-xs-offset-2
-                    "
-                  ></span>
-
-                  <span class="margin-10"></span>
-                </article>
+                    <span
+                      class="content-default-width placeholder-content"
+                    ></span>
+                    <span
+                      class="
+                        placeholder-content
+                        default-button-full-with
+                        pull-left
+                        mobile-hidden
+                      "
+                    ></span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </section>
-
-      <div class="buttons-wrapper col-xs-12">
-        <router-link
-          :to="{ path: this.categoryUrl }"
-          class="green-button blue-button"
-          >مشاهده همه محصولات</router-link
-        >
       </div>
 
-      <!-- <register-inquer-form
-        v-if="showRegisterRequestBox"
-        wrapper-bg="true"
-        :str="str"
-        :user-profile-info="product.user_info"
-        :user-profile-photo="
-          product.profile_info.profile_photo
-            ? str + '/' + product.profile_info.profile_photo
-            : assets + 'assets/img/user-defult.png'
-        "
-      /> -->
+      <div class="col-xs-12" id="related-categories">
+        <div class="data-tag-wrapper text-rtl" v-if="dataTags.length">
+          <router-link
+            class="tag-item"
+            v-for="(tag, index) in dataTags"
+            :key="index"
+            v-text="tag"
+            :to="{
+              name: 'productCategory',
+              params: {
+                categoryName: convertCategoryname(tag),
+              },
+            }"
+          ></router-link>
+        </div>
+      </div>
 
       <div
         v-if="product.main.product_name && !isMyProfile"
@@ -390,7 +488,7 @@ button.send-message-button {
           :class="{
             'send-message-button':
               product.user_info.has_phone && currentUser.user_info.is_buyer,
-            'green-button':
+            'green-button bg-orange':
               !product.user_info.has_phone ||
               (product.user_info.has_phone && currentUser.user_info.is_seller),
           }"
@@ -409,7 +507,7 @@ button.send-message-button {
           @click.prevent="loginModal(true)"
           :class="{
             'send-message-button': product.user_info.has_phone,
-            'green-button': !product.user_info.has_phone,
+            'green-button bg-orange': !product.user_info.has_phone,
           }"
         >
           <span v-if="product.user_info.has_phone"> چت </span>
@@ -424,7 +522,7 @@ button.send-message-button {
             currentUser.user_info.is_buyer
           "
           @click.prevent="activePhoneCall(true)"
-          class="green-button"
+          class="green-button bg-gradient-green"
           :class="{ disable: isActivePhone }"
           :disabled="isActivePhone"
         >
@@ -437,7 +535,7 @@ button.send-message-button {
         <button
           v-else-if="!currentUser.user_info && product.user_info.has_phone"
           @click.prevent="loginModal(false)"
-          class="green-button"
+          class="green-button bg-gradient-green"
           :class="{ disable: isActivePhone }"
           :disabled="isActivePhone"
         >
@@ -460,29 +558,30 @@ button.send-message-button {
 
 <script>
 import { eventBus } from "../../../../../router/router";
-import ProductCarousel from "../../main_components/product-list-carousel";
+
 import ProductContents from "./product";
 import UserInfo from "./user_info";
-// import registerInquerForm from "../../main_components/register-inquiry-form.vue";
+import UserData from "./User-data";
+import RelatedProducts from "./related-products.vue";
 import RegisterModal from "../../main_components/register-modal";
 import swal from "../../../../../sweetalert.min.js";
+import StickySidebar from "../../../../../stickySidebar.js";
+// import registerInquerForm from "../../main_components/register-inquiry-form.vue";
+import { isElementShownInView } from "../../../../../custom";
 
 export default {
   components: {
     ProductContents,
     UserInfo,
-    ProductCarousel,
+    UserData,
     RegisterModal,
+    RelatedProducts,
     // registerInquerForm,
   },
-  props: ["str", "assets", "userType", "categoryList"],
+  props: ["str", "assets", "userType", "categoryList", "currentUser"],
   data: function () {
     return {
       isChat: true,
-      currentUser: {
-        profile: "",
-        user_info: "",
-      },
       product: {
         main: {
           category_name: "",
@@ -494,7 +593,7 @@ export default {
         },
         photos: [],
       },
-      relatedProducts: "",
+      isRelatedProducts: false,
       relatedLoad: false,
       errors: "",
       popUpMsg: "",
@@ -509,58 +608,52 @@ export default {
       userPhone: "",
       getPhoneLoader: false,
       breadCrumbs: "",
+      dataTags: "",
     };
   },
   methods: {
-    init: function () {
+    init() {
+      this.scrollToTop();
+      if (!this.product.user_info && !this.isLoading) {
+        this.checkCurrentUser();
+      }
+    },
+    checkCurrentUser() {
       this.isLoading = true;
       var self = this;
-      axios.post("/user/profile_info").then(function (response) {
-        if (response.data.status) {
-          self.currentUser = response.data;
+      let userId = getUserId();
 
-          if (self.currentUser.user_info) {
-            if (self.currentUser.user_info.is_seller == true) {
-              self.showRegisterRequestBox = false;
+      if (this.currentUser && this.currentUser.user_info) {
+        if (this.currentUser.user_info.is_seller == true) {
+          this.showRegisterRequestBox = false;
+        }
+      }
+      axios
+        .post("/get_product_by_id", {
+          product_id: self.$route.params.id,
+        })
+        .then(function (response) {
+          self.product = response.data.product;
+          self.getRelatedCategories(self.product.main.sub_category_id);
+          if (userId) {
+            if (userId === self.product.main.myuser_id) {
+              self.isMyProfile = true;
+              self.$emit("isMyProfile", self.isMyProfile);
             }
           }
-        }
+          self.categoryUrl = "/product-list/category/" + self.getCategoryName();
+          self.starScore = Math.floor(
+            self.product.user_info.review_info.avg_score
+          );
 
-        axios
-          .post("/get_product_by_id", {
-            product_id: self.$route.params.id,
-          })
-          .then(function (response) {
-            self.product = response.data.product;
-            self.categoryUrl =
-              "/product-list/category/" + self.getCategoryName();
-            self.starScore = Math.floor(
-              self.product.user_info.review_info.avg_score
-            );
-            if (self.currentUser.user_info) {
-              if (
-                self.currentUser.user_info.id === self.product.main.myuser_id
-              ) {
-                self.isMyProfile = true;
-                self.$emit("isMyProfile", self.isMyProfile);
-              }
-            }
-            self.getBreadCrumbs();
-            axios
-              .post("/get_related_products", {
-                product_id: self.product.main.id,
-              })
-              .then(function (response) {
-                self.relatedProducts = response.data.related_products;
-                self.isLoading = false;
-              });
-          })
-          .catch(function (err) {
-            window.location.href = "/404";
-          });
-      });
+          self.sidebarScroll();
+          self.getBreadCrumbs();
+        })
+        .catch(function (err) {
+          window.location.href = "/404";
+        });
     },
-    openChat: function (product) {
+    openChat(product) {
       this.isChat = true;
       this.registerComponentStatistics(
         "product",
@@ -602,28 +695,8 @@ export default {
     loginModal(isChat) {
       this.isChat = isChat;
       $("#register-modal").modal("show");
-      // swal({
-      //   title: "ارتباط با مخاطب",
-      //   icon: "info",
-      //   text:
-      //     "برای ارتباط با هزاران خریدار و فروشنده در باسکول ابتدا ثبت نام کنید.",
-      //   className: "custom-swal-with-cancel",
-      //   buttons: {
-      //     success: {
-      //       text: "ورود سریع / ثبت نام",
-      //     },
-      //     close: {
-      //       text: "بستن",
-      //       className: "bg-cancel",
-      //     },
-      //   },
-      // }).then((value) => {
-      //   if (value == "success") {
-      //     this.$router.push({ name: "register" });
-      //   }
-      // });
     },
-    openChatModal: function (product) {
+    openChatModal(product) {
       this.isChat = true;
       this.registerComponentStatistics(
         "product",
@@ -658,7 +731,7 @@ export default {
         eventBus.$emit("modal", "sendMsg");
       }
     },
-    activePhoneCall: function (isModal) {
+    activePhoneCall(isModal) {
       this.isChat = false;
       this.getPhoneLoader = true;
       this.isActivePhone = true;
@@ -734,17 +807,13 @@ export default {
           });
         });
     },
-    registerComponentStatistics: function (
-      categoryName,
-      actionName,
-      labelName
-    ) {
+    registerComponentStatistics(categoryName, actionName, labelName) {
       gtag("event", actionName, {
         event_category: categoryName,
         event_label: labelName,
       });
     },
-    getProductUrl: function () {
+    getProductUrl() {
       return (
         "/product-view/خرید-عمده-" +
         this.product.main.sub_category_name.replace(" ", "-") +
@@ -754,16 +823,17 @@ export default {
         this.product.main.id
       );
     },
-    copyProductLinkToClipBoard: function () {
-      this.registerComponentStatistics(
-        "product",
-        "copy-product-link",
-        "click on copy poduct link"
-      );
-
+    shareMyProfile() {
+      let baseUrl = getBase();
+      baseUrl = baseUrl.substring(0, baseUrl.length - 1);
       if (this.isDeviceMobile()) {
+        this.registerComponentStatistics(
+          "product",
+          "copy-product-link",
+          "click on copy poduct link"
+        );
         var linkElement = document.createElement("a");
-        var Message = "https://buskool.com" + this.getProductUrl();
+        var Message = baseUrl + this.getProductUrl();
         var messageToWhatsApp = encodeURIComponent(Message);
         var url = "whatsapp://send?text=" + messageToWhatsApp;
 
@@ -776,23 +846,15 @@ export default {
 
         document.body.removeChild(linkElement);
       } else {
-        var input = document.createElement("input");
-        input.setAttribute(
-          "value",
-          "https://buskool.com" + this.getProductUrl()
-        );
-        document.body.appendChild(input);
-        input.select();
-        var result = document.execCommand("copy");
-        document.body.removeChild(input);
-        if (result) {
-          this.popUpMsg = "آدرس محصول کپی شد.";
-          eventBus.$emit("submitSuccess", this.popUpMsg);
-          $("#custom-main-modal").modal("show");
-        }
+        let url = baseUrl + this.getProductUrl();
+        let shareItem = {
+          shareModalUrl: url,
+          shareModalText: "",
+        };
+        eventBus.$emit("shareModalUrl", shareItem);
       }
     },
-    isDeviceMobile: function () {
+    isDeviceMobile() {
       if (
         navigator.userAgent.match(/Android/i) ||
         navigator.userAgent.match(/webOS/i) ||
@@ -807,7 +869,7 @@ export default {
         return false;
       }
     },
-    toLatinNumbers: function (num) {
+    toLatinNumbers(num) {
       if (num == null) {
         return null;
       }
@@ -825,7 +887,7 @@ export default {
           return c.charCodeAt(0) - 0x06f0;
         });
     },
-    editProduct: function (getProductWrapper) {
+    editProduct(getProductWrapper) {
       this.submiting = true;
       this.errors = "";
 
@@ -876,10 +938,10 @@ export default {
           // self.registerComponentExceptions('Product-component: validation errors in edit product API');
         });
     },
-    stopLoader: function () {
+    stopLoader() {
       eventBus.$emit("isLoading", false);
     },
-    getRelatedProductUrl: function (product) {
+    getRelatedProductUrl(product) {
       return (
         "/product-view/خرید-عمده-" +
         product.subcategory_name.replace(" ", "-") +
@@ -889,17 +951,24 @@ export default {
         product.id
       );
     },
-    elevatorEvent: function () {
+    elevatorEvent() {
       // eventBus.$emit("elevatorText", "با استفاده از نردبان، محصول شما تا زمان دریافت محصول تازه تر در همان دسته بندی، به عنوان اولین محصول نمایش داده می‌شود.");
 
-      eventBus.$emit("productId", this.product.main.id);
-      eventBus.$emit("modal", "elevator");
+      // eventBus.$emit("productId", this.product.main.id);
+      // eventBus.$emit("modal", "elevator");
+      let paymentData = {
+        paymentName: "elevatorPricingData",
+        productId: this.product.main.id,
+        totalPrice: "25000",
+      };
+      eventBus.$emit("peymentMethodData", paymentData);
+      $("#payment-type-modal").modal("show");
     },
-    inquiry: function () {
+    inquiry() {
       //eventBus.$emit("productUserInfo", this.product);
       this.$router.push({ name: "registerinquiry" });
     },
-    getConvertedNumbers: function (number) {
+    getConvertedNumbers(number) {
       if (number || typeof number === "number") {
         let data = number / 1000;
         if (number < 1000) {
@@ -909,12 +978,15 @@ export default {
         }
       } else return "";
     },
-    getCategoryName: function () {
+    getCategoryName() {
       let name = this.product.main.sub_category_name;
 
-      return name.split("-").join(" ");
+      return name ? name.split("-").join(" ") : "";
     },
-    handleBackKeys: function () {
+    convertCategoryname(name) {
+      return name ? name.toString().split("-").join(" ") : "";
+    },
+    handleBackKeys() {
       if (window.history.state) {
         history.pushState(null, null, window.location);
       }
@@ -934,9 +1006,44 @@ export default {
 
       this.breadCrumbs = items;
     },
-    getSubCategoryUrl: function (category) {
+    getSubCategoryUrl(category) {
       let url = "/product-list/category/" + category.split(" ").join("-");
       return url;
+    },
+    sidebarScroll() {
+      $("aside").StickySidebar({
+        additionalMarginTop: 157,
+      });
+    },
+    checkIsMobile() {
+      let pageWidth = window.outerWidth;
+      if (pageWidth <= 1199) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    getRelatedCategories(categroyId) {
+      isElementShownInView(
+        "#related-categories",
+        (isInView) => {
+          if (isInView) {
+            axios
+              .post("/get_related_categories", {
+                category_id: categroyId,
+                category_name: this.getCategoryName(),
+              })
+              .then((response) => {
+                this.dataTags = response.data.category_names;
+                this.isLoading = false;
+              });
+          }
+        },
+        100
+      );
+    },
+    scrollToTop() {
+      window.scrollTo(0, 0);
     },
   },
   created() {
@@ -946,7 +1053,6 @@ export default {
   },
   mounted() {
     this.init();
-
     var self = this;
     document.onreadystatechange = () => {
       if (document.readyState === "complete") {

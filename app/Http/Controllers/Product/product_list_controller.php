@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Cache;
 use Carbon\Carbon;
 use App\Http\Middleware\login;
 use App\Models\phone_number_view_log;
+use App\Http\Controllers\General\category_controller;
 
 
 class product_list_controller extends Controller
@@ -213,7 +214,9 @@ class product_list_controller extends Controller
         else{
             $products = $this->get_all_products_with_related_media();
 
-            Cache::put($cache_key,$products,30);  
+            if(! Cache::has($cache_key)){
+                Cache::put($cache_key,$products,30);
+            }    
         }
 
         return $products;
@@ -1101,6 +1104,7 @@ class product_list_controller extends Controller
         $categories =  $this->get_all_categories();
 
         $meta_info = null;
+        $related_categories = [];
 
         if(! is_null($category_name)){
             $category_name = strip_tags($category_name);
@@ -1109,6 +1113,12 @@ class product_list_controller extends Controller
             $this->apply_search_text_filter($products,$category_name);
 
             $meta_info = $this->get_category_tags_data_if_any($category_name);
+
+            if($meta_info['category_id'])
+            {
+                $category_controller_object = new category_controller();
+                $related_categories = $category_controller_object->get_related_category_names_array($meta_info['category_id'],$category_name);
+            }
         }
 
         usort($products, function ($item1, $item2) {
@@ -1123,12 +1133,14 @@ class product_list_controller extends Controller
         });
 
         $products = array_slice($products,0,72);
+
         
         return view('layout.product-list',[
             'products' => $products,
             'categories' => $categories,
             'categoryMetaData' => $meta_info,
-            'category_name' => $category_name
+            'category_name' => $category_name,
+            'related_categories' => $related_categories,
         ]);
     }
 
@@ -1191,18 +1203,20 @@ class product_list_controller extends Controller
         if($category_record){
             $category_id = $category_record->id;
 
-            $tags_info = $this->get_category_meta_data($category_id)->first();
+            $tags_info = $this->get_category_meta_data($category_id);
 
 
             if(! is_null($tags_info)){
-                $schema_object = $tags_info->schema_object;
+                $temp = $tags_info->first();
+                $schema_object = $temp->schema_object;
                 unset($tags_info->schema_object);
             }
             
 
             $data = [
-                'category_info' => array($tags_info),
-                'schema_object' => $schema_object
+                'category_info' => $tags_info->toArray(),
+                'schema_object' => $schema_object,
+                'category_id' => $category_id,
             ];
 
             return $data;
@@ -1214,22 +1228,28 @@ class product_list_controller extends Controller
                                     'id',
                                     'header',
                                     'content',
-                                    'schema_object'
+                                    'schema_object',
+                                    'category_id'
                                 ])->get();
+
+            $category_id = null;
 
             if(sizeof($tags_info) > 0){
                 $temp = $tags_info->first();
                 $schema_object = $temp->schema_object;
-                
+                $category_id = $temp->category_id;
+
                 unset($temp->schema_object);
             }
                                 
             
+            // $tags_info = array($tags_info);
 
             if($tags_info){
                 $data = [
-                    'category_info' => array($tags_info),
-                    'schema_object' => $schema_object
+                    'category_info' => $tags_info->toArray(),
+                    'schema_object' => $schema_object,
+                    'category_id' => $category_id,
                 ];
 
                 return $data;
@@ -1249,7 +1269,8 @@ class product_list_controller extends Controller
                                 'id',
                                 'header',
                                 'content',
-                                'schema_object'
+                                'schema_object',
+                                'category_id'
                             ])->get();
 
         return $tags_info;

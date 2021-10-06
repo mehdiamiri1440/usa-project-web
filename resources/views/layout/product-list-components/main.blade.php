@@ -30,7 +30,7 @@
         </button>
       </div>
     </div>
-
+   
     <main id="main" class="container">
       <div class="col-xs-12 pull-left col-lg-9">
         <div class="row">
@@ -566,8 +566,23 @@
           </div>
         </div>
       </aside>
+      @if(isset($related_categories))
+          <div class="col-xs-12" >
+            <div class="data-tag-wrapper text-rtl">
+              @foreach ($related_categories as $item)
+              <a
+                class="tag-item"
+                href="{{'/product-list/category/'  . str_replace(' ', '-', $item)}}"
+              >
+                {{$item}}
+              </a>
+              @endforeach
+              
+            </div>
+          </div>
+        @endif
     </main>
-
+  
      <footer
       class="category-footer container"
       >
@@ -580,8 +595,8 @@
                 class="contents"
               >
               @foreach($categoryMetaData['category_info'] as $categoryMeta)
-                <div>{!! $categoryMeta['header'] ?? $categoryMeta[0]['header'] !!}</div>
-                <div>{!! $categoryMeta['content'] ?? $categoryMeta[0]['content'] !!}</div>
+                  <div>{!! $categoryMeta['header'] ?? $categoryMeta[0]['header'] !!}</div>
+                  <div>{!! $categoryMeta['content'] ?? $categoryMeta[0]['content'] !!}</div>
               @endforeach
               </div>
             </div>

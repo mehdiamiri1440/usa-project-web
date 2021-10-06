@@ -7,29 +7,10 @@ use App\Models\myuser;
 use App\Http\Controllers\Product\product_controller;
 use App\Models\category;
 use DB;
+use App\Http\Controllers\General\category_controller;
 
 class sitemap_controller extends Controller
 {
-    protected $extra_categories = [
-        'برنج عنبربو',
-        'برنج طارم',
-        'برنج ایرانی',
-        'برنج هاشمی',
-        'برنج شمال',
-        'پسته احمد آقایی',
-        'پسته فندقی',
-        'پسته کله قوچی',
-        'پسته اکبری',
-        'خرما ربی',
-        'خرما مضافتی',
-        'خرما کبکاب',
-        'خرما زاهدی',
-        'خرما خاصویی',
-        'خرما پیارم',
-        'خرما شاهانی',
-
-    ];
-
     public function get_required_data_for_sitemap(){
         
         $product_controller_object = new product_controller();
@@ -48,8 +29,11 @@ class sitemap_controller extends Controller
                                         ->toArray();
 
         // $category_names = array_column($category_names,'category_name');
+        $category_controller_object = new category_controller();
 
-        $category_names = array_merge($category_names,$this->extra_categories);
+        $extra_categories = $category_controller_object->get_all_extra_category_names();
+
+        $category_names = array_merge($category_names,$extra_categories);
 
         $categories_result = [];
         foreach($category_names as $category_name){

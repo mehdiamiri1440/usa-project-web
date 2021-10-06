@@ -236,7 +236,7 @@ tr:nth-child(even) {
   <div>
     <div class="requests" v-show="isRequests">
       <section class="main-content col-xs-12 padding-0-15'">
-        <div class="title">
+        <div class="title hidden-xs hidden-sm">
           <div class="row">
             <div class="col-xs-12 text-rtl text-right col-sm-8 pull-right">
               <h1>درخواست های من</h1>

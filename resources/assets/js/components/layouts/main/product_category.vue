@@ -37,6 +37,23 @@
   left: calc(50% - 25px);
 }
 
+.more-product-wrapper {
+  float: right;
+  width: 100%;
+  position: relative;
+}
+
+.more-product-wrapper .spinner-border {
+  top: 30px;
+  width: 4rem;
+  height: 4rem;
+}
+
+.more-product-wrapper p {
+  margin-top: 40px;
+  color: #999;
+}
+
 .filter-loader-wrapper {
   position: absolute;
   top: 0;
@@ -118,7 +135,7 @@ a.close-dialog-popup {
 .flat-plust-icon {
   position: fixed;
   right: 15px;
-  bottom: 15px;
+  bottom: 70px;
   z-index: 3;
 }
 
@@ -306,40 +323,6 @@ li.active a::after {
 
 .main-image {
   float: right;
-}
-
-.load-more-button {
-  text-align: center;
-
-  margin: 15px auto;
-}
-
-.load-more-button button {
-  border: 1px solid;
-
-  padding: 15px 30px;
-
-  height: initial;
-
-  background: #fff;
-
-  position: relative;
-
-  top: 0;
-
-  border-radius: 12px;
-
-  transition: 200ms;
-
-  color: #00c569;
-}
-
-.load-more-button button:hover {
-  top: -3px;
-
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
-
-  transition: 200ms;
 }
 
 .btn-loader {
@@ -844,6 +827,29 @@ div.items-wrapper {
   z-index: 1;
 }
 
+.tag-item {
+  background: #f2f2f2;
+  border: 1px solid #e0e0e0;
+  color: #313942;
+  border-radius: 12px;
+  padding: 8px 27px;
+  margin-left: 10px;
+  display: inline-block;
+  margin-bottom: 15px;
+}
+
+.tag-item:hover {
+  background: #e0e0e0;
+}
+
+.data-tag-wrapper {
+  margin-top: 50px;
+}
+
+.category-footer {
+  padding-bottom: 120px;
+}
+
 @media screen and (max-width: 1199px) {
   .search-box input {
     width: 100%;
@@ -896,6 +902,10 @@ div.items-wrapper {
 }
 
 @media screen and (max-width: 767px) {
+  #article-list {
+    padding-bottom: 70px;
+  }
+
   #article-list.grid-items-wrapper {
     margin-left: 0 !important;
     margin-right: 0 !important;
@@ -908,8 +918,7 @@ div.items-wrapper {
   }
 
   .main-content,
-  #main,
-  .category-footer {
+  #main {
     padding: 0;
   }
 
@@ -1504,46 +1513,18 @@ div.items-wrapper {
                         :key="product.main.id"
                         :product="product"
                         :str="str"
-                        :currentUser="currentUser"
                       />
                     </div>
                   </div>
                 </div>
-                <div
-                  class="load-more-button col-xs-12"
-                  v-if="continueToLoadProducts === true"
-                >
-                  <button
-                    class="btn btn-loader"
-                    :disabled="loadMoreActive"
-                    @click.prevent="feed()"
-                  >
-                    <div class="btn-content">
-                      <span class="hidden-xs text-rtl" v-show="!loadMoreActive">
-                        مشاهده محصولات بیشتر
-                        <i class="fa fa-plus"></i>
-                      </span>
-
-                      <span
-                        class="hidden-sm hidden-md hidden-lg text-rtl"
-                        v-show="!loadMoreActive"
-                      >
-                        محصولات بیشتر
-                        <i class="fa fa-plus"></i>
-                      </span>
-
-                      <div
-                        v-show="loadMoreActive"
-                        class="btn-loader-active-wrapper"
-                      >
-                        <img src="../../../../img/gif/loading.gif" />
-                      </div>
-                    </div>
-                  </button>
+                <div class="more-product-wrapper" v-if="loadMoreActive">
+                  <div class="spinner-border">
+                    <span class="sr-only"></span>
+                  </div>
+                  <p class="text-center text-rtl">درحال دریافت اطلاعات ...</p>
                 </div>
               </div>
             </section>
-            <!-- test -->
 
             <search-not-found
               v-else-if="products.length === 0 && searchActive === true"
@@ -1727,12 +1708,28 @@ div.items-wrapper {
       class="category-footer container"
       v-if="categoryMetaData.length > 0 && categoryMetaData[0]"
     >
+      <div class="col-xs-12" v-if="dataTags.length">
+        <div class="data-tag-wrapper text-rtl">
+          <router-link
+            class="tag-item"
+            v-for="(tag, index) in dataTags"
+            :key="index"
+            v-text="tag"
+            :to="{
+              name: 'productCategory',
+              params: {
+                categoryName: convertCategoryname(tag),
+              },
+            }"
+          ></router-link>
+        </div>
+      </div>
       <div class="col-xs-12">
         <div class="title-section col-xs-12">
           <div class="row">
             <h1>
               خرید
-              <span v-text="this.getCategoryName()"></span>
+              <span v-text="getCategoryName()"></span>
               عمده
             </h1>
             <hr />
@@ -1804,7 +1801,6 @@ export default {
       popUpMsg: "",
       submiting: false,
       loading: false,
-      bottom: false,
       loadMoreActive: false,
       searchTextTimeout: null,
       headerSearchText: "",
@@ -1812,6 +1808,8 @@ export default {
       sortOption: "BM",
       verifiedUserContent: this.$parent.verifiedUserContent,
       listIsGrid: true,
+      selectedCategory: "",
+      dataTags: [],
     };
   },
   methods: {
@@ -1863,54 +1861,57 @@ export default {
           self.categoryMetaData = response.data.category_info;
           self.jsonLDObject = response.data.schema_object;
         });
-      axios.post("/user/profile_info").then(function (response) {
-        self.currentUser = response.data;
+      self.checkCurrentUser();
 
-        if (searchValueText) {
-          self.registerComponentStatistics(
-            "homePage",
-            "search-text",
-            searchValueText
-          );
-          self.searchText = searchValueText;
-          setTimeout(function () {
-            self.sidebarScroll();
-          }, 500);
-        } else {
-          self.loading = true;
+      if (searchValueText) {
+        self.registerComponentStatistics(
+          "homePage",
+          "search-text",
+          searchValueText
+        );
+        self.searchText = searchValueText;
+        setTimeout(function () {
+          self.sidebarScroll();
+        }, 500);
+      } else {
+        self.loading = true;
 
-          self.fromProductCount = 0;
-          self.productCountInPage = 16;
-          let getProductsData = {
-            from_record_number: self.fromProductCount,
-            response_rate: self.$parent.productByResponseRate,
-            to_record_number: self.productCountInPage,
-            search_text: categoryName,
-            sort_by: self.sortOption,
-          };
-          if (self.province.id) {
-            getProductsData.province_id = self.province.id;
-          }
-          if (self.city.id) {
-            getProductsData.city_id = self.city.id;
-          }
-          axios
-            .post("/user/get_product_list", getProductsData)
-            .then(function (response) {
-              self.products = response.data.products;
-              self.loading = false;
-              if (self.products.length < self.productCountInPage) {
-                self.continueToLoadProducts = false;
-              } else {
-                self.continueToLoadProducts = true;
-              }
-              setTimeout(function () {
-                self.sidebarScroll();
-              }, 500);
-              self.submiting = false;
-            });
+        self.fromProductCount = 0;
+        self.productCountInPage = 16;
+        let getProductsData = {
+          from_record_number: self.fromProductCount,
+          response_rate: self.$parent.productByResponseRate,
+          to_record_number: self.productCountInPage,
+          search_text: categoryName,
+          sort_by: self.sortOption,
+        };
+        if (self.province.id) {
+          getProductsData.province_id = self.province.id;
         }
-      });
+        if (self.city.id) {
+          getProductsData.city_id = self.city.id;
+        }
+        axios
+          .post("/user/get_product_list", getProductsData)
+          .then(function (response) {
+            self.products = response.data.products;
+            self.loading = false;
+            if (self.products.length < self.productCountInPage) {
+              self.continueToLoadProducts = false;
+            } else {
+              self.continueToLoadProducts = true;
+            }
+            setTimeout(function () {
+              self.sidebarScroll();
+            }, 500);
+            self.submiting = false;
+          });
+      }
+    },
+    checkCurrentUser() {
+      if (this.$parent.currentUser.user_info) {
+        this.currentUser = this.$parent.currentUser;
+      }
     },
     feed() {
       var self = this;
@@ -1924,6 +1925,7 @@ export default {
         this.loadMoreActive = true;
         this.fromProductCount = this.productCountInPage;
         this.productCountInPage += this.productCountInEachLoad;
+
         axios
           .post("/user/get_product_list", {
             from_record_number: this.fromProductCount,
@@ -1933,6 +1935,9 @@ export default {
             sort_by: self.sortOption,
           })
           .then(function (response) {
+            if (!response.data.products.length) {
+              self.continueToLoadProducts = false;
+            }
             if (Array.isArray(self.products)) {
               self.products = self.products.concat(response.data.products);
             }
@@ -1977,22 +1982,27 @@ export default {
         searchObject.to_record_number = self.productCountInPage;
         searchObject.sort_by = self.sortOption;
 
-        axios
-          .post("/user/get_product_list", searchObject)
-          .then(function (response) {
-            if (Array.isArray(self.products)) {
-              self.products = self.products.concat(response.data.products);
-            }
+        if (searchObject.search_text) {
+          axios
+            .post("/user/get_product_list", searchObject)
+            .then(function (response) {
+              if (!response.data.products.length) {
+                self.continueToLoadProducts = false;
+              }
+              if (Array.isArray(self.products)) {
+                self.products = self.products.concat(response.data.products);
+              }
 
-            self.loadMoreActive = false;
+              self.loadMoreActive = false;
 
-            setTimeout(function () {
-              self.sidebarScroll();
-            }, 500);
-          })
-          .catch(function (err) {
-            alert("خطایی رخ داده است. دوباره تلاش کنید.");
-          });
+              setTimeout(function () {
+                self.sidebarScroll();
+              }, 500);
+            })
+            .catch(function (err) {
+              alert("خطایی رخ داده است. دوباره تلاش کنید.");
+            });
+        }
       }
     },
     registerRequestInSearchNotFoundCase: function () {
@@ -2176,28 +2186,22 @@ export default {
     getCategoryName: function () {
       let name = this.$route.params.categoryName;
 
-      return name.split("-").join(" ");
+      return name ? name.toString().split("-").join(" ") : "";
     },
-    infiniteScrollHandler: function () {
-      let lastOffset = 0;
-
-      window.onscroll = () => {
-        if (window.location.pathname.includes("product-list/category")) {
-          var bottom =
-            document.documentElement.scrollTop + window.innerHeight >
-            document.documentElement.offsetHeight -
-              document.documentElement.scrollTop / 2;
-
-          let newOffset = document.documentElement.offsetHeight;
-
-          if (bottom) {
-            if (newOffset > lastOffset + 100) {
-              lastOffset = document.documentElement.offsetHeight;
-              this.feed();
-            }
-          }
+    convertCategoryname(name) {
+      return name ? name.toString().split("-").join(" ") : "";
+    },
+    infiniteScrollHandler() {
+      $(window).scroll(() => {
+        if (
+          $(window).scrollTop() >=
+            ($(document).height() - $(window).height() - 100) / 2 &&
+          !this.loadMoreActive &&
+          this.continueToLoadProducts
+        ) {
+          this.feed();
         }
-      };
+      });
     },
     openSortModal() {
       $("#filter-modal").modal("show");
@@ -2335,8 +2339,28 @@ export default {
     },
   },
   watch: {
+    categoryList(categories) {
+      if (categories) {
+        this.selectedCategory = this.$parent.getCategoryItem(categories);
+      }
+    },
+    selectedCategory(category) {
+      if (category) {
+        axios
+          .post("/get_related_categories", {
+            category_id: category.id,
+            category_name: this.getCategoryName(),
+          })
+          .then((response) => {
+            this.dataTags = response.data.category_names;
+          });
+      }
+    },
     "$route.params.categoryName": function (name) {
       this.init();
+      if (this.categoryList) {
+        this.selectedCategory = this.$parent.getCategoryItem(this.categoryList);
+      }
     },
 
     headerSearchText: function (value) {
@@ -2377,6 +2401,9 @@ export default {
       if (bottom) {
         this.feed();
       }
+    },
+    "$parent.currentUser"(user) {
+      this.checkCurrentUser();
     },
   },
   created() {

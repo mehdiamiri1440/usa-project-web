@@ -11,9 +11,15 @@ use Carbon\Carbon;
 use App\Models\product;
 use DB;
 use App\Models\premium_service;
+use App\Traits\Payment;
+use App\Http\Controllers\Payment\payment_controller;
+use App\Jobs\GiveReferralReward;
+
 
 class wallet_controller extends Controller
 {
+    protected $package_types = [1,2,3];
+
     public function do_charge_wallet($amount)
     {
         if($amount >= 1000){
@@ -95,16 +101,28 @@ class wallet_controller extends Controller
 
     public function wallet_payment_callback()
     {
-        try{ 
+        try{
+            $user_id = session('user_id');
+            $payment_amount = session()->pull('payment_amount');
+
+            // $this->do_payment_callback(session('user_id'),session('payment_amount'));
+
             $gateway = \Gateway::verify();
             $trackingCode = $gateway->trackingCode();
             $refId = $gateway->refId();
             $cardNumber = $gateway->cardNumber();
 
+            
+            if(is_integer($user_id) && is_integer($payment_amount)){
+                GiveReferralReward::dispatch($user_id,$payment_amount);
+            }
+
+            
+
             // عملیات خرید با موفقیت انجام شده است
             // در اینجا کالا درخواستی را به کاربر ارائه میکنم
             
-            $this->do_after_payment_changes_for_wallet_charge(session()->pull('payment_amount'),session('user_id'));
+            $this->do_after_payment_changes_for_wallet_charge($payment_amount,$user_id);
             
             return redirect('/seller/buyAd-requests');
 
@@ -118,10 +136,10 @@ class wallet_controller extends Controller
     public function app_wallet_payment_callback()
     {
         try{ 
-            $gateway = \Gateway::verify();
-            $trackingCode = $gateway->trackingCode();
-            $refId = $gateway->refId();
-            $cardNumber = $gateway->cardNumber();
+            $user_id = session('app_user_id');
+            $payment_amount = session()->pull('payment_amount');
+
+            // $this->do_payment_callback(session('app_user_id'),session('payment_amount'));
 
             // عملیات خرید با موفقیت انجام شده است
             // در اینجا کالا درخواستی را به کاربر ارائه میکنم
@@ -148,11 +166,9 @@ class wallet_controller extends Controller
         return redirect('/pricing');  
     }
 
-    public function insert_expendig_log_record($service_id,$user_id,$count = 1)
+    public function insert_expendig_log_record($service_name,$unit_cost,$user_id,$count = 1)
     {
-        $service_record = premium_service::find($service_id);
-
-        $amount = $service_record->current_unit_cost * $count;
+        $amount = $unit_cost * $count;
 
         $is_balance_updated = $this->update_user_account_balance($amount,$user_id);
 
@@ -163,7 +179,7 @@ class wallet_controller extends Controller
                     ->insert([
                         'created_at' => $now,
                         'updated_at' => $now,
-                        'service_id' => $service_record->id,
+                        'service_name' => $service_name,
                         'myuser_id'  => $user_id,
                         'amount'     => $amount,
                         'count'      => $count
@@ -219,7 +235,8 @@ class wallet_controller extends Controller
                     'elevator_expiry' => $elevator_expiry
                 ]);
 
-        $this->insert_expendig_log_record(2,$user_id);
+        $unit_cost = config("subscriptionPakage.elevator.price") / 10;
+        $this->insert_expendig_log_record('product-elevator',$unit_cost,$user_id);
 
         return response()->json([
             'status' => true,
@@ -229,12 +246,128 @@ class wallet_controller extends Controller
 
     public function do_extra_buyAd_capacity_payment_from_wallet(Request $request)
     {
-        //
+        $this->validate($request,[
+            'extra_capacity' => 'required|integer|min:1'
+        ]);
+
+        $user_id = session('user_id');
+        $extra_capacity_count = $request->extra_capacity;
+
+        $user_record = DB::table('myusers')->where('id',$user_id)->first();
+
+        if($user_record){
+            $min_required_balance = ( config("subscriptionPakage.buyAd-capacity-price")/10 ) * $extra_capacity_count;
+            
+            if($user_record->wallet_balance < $min_required_balance){
+                return response()->json([
+                    'status' => false,
+                    'msg' => 'موجودی کیف پول شما کافی نیست. لطفا ابتدا موجودی کیف پول خود را افزایش دهید.'
+                ],423);
+            }
+            
+            DB::table('myusers')
+                    ->where('id',$user_record->id)
+                    ->increment('extra_buyAd_reply_capacity',$extra_capacity_count);
+
+            $unit_cost = config("subscriptionPakage.buyAd-capacity-price") / 10;
+            $this->insert_expendig_log_record('buyAd-capacity',$unit_cost,$user_id,$extra_capacity_count);
+
+            return response()->json([
+                'status' => true,
+                'msg' => 'done!'
+            ],200);
+        }
+
+        return response()->json([
+            'status' => false,
+            'msg' => 'شما مجاز با انجام این عملیات نیستید.'
+        ],200);
+
     }
 
     public function do_extra_product_capacity_payment_from_wallet(Request $request)
     {
+        $this->validate($request,[
+            'extra_capacity' => 'required|integer|min:1'
+        ]);
+
+        $user_id = session('user_id');
+        $extra_capacity_count = $request->extra_capacity;
+
+        $user_record = DB::table('myusers')->where('id',$user_id)->first();
+
+        if($user_record){
+            $min_required_balance = ( config("subscriptionPakage.product-capacity-price")/10 ) * $extra_capacity_count;
+
+            if($user_record->wallet_balance < $min_required_balance){
+                return response()->json([
+                    'status' => false,
+                    'msg' => 'موجودی کیف پول شما کافی نیست. لطفا ابتدا موجودی کیف پول خود را افزایش دهید.'
+                ],423);
+            }
+            
+            DB::table('myusers')
+                    ->where('id',$user_record->id)
+                    ->increment('extra_product_capacity',$extra_capacity_count);
+
+            $unit_cost = config("subscriptionPakage.product-capacity-price") / 10;
+            $this->insert_expendig_log_record('product-capacity',$unit_cost,$user_id,$extra_capacity_count);
+
+            return response()->json([
+                'status' => true,
+                'msg' => 'done!'
+            ],200);
+        }
+
+        return response()->json([
+            'status' => false,
+            'msg' => 'شما مجاز به انجام این عملیات نیستید.'
+        ],200);
+    }
+
+    public function do_package_payemnt_from_wallet(Request $request)
+    {
+        $this->validate($request,[
+            'package_type' => 'required|integer|min:1'
+        ]);
+
+        $package_type = $request->package_type;
+
+        if(! in_array($package_type,$this->package_types) ){
+            return response()->json([
+                'status' => false,
+                'msg' => 'wrong input!'
+            ],404);
+        }
+
         //
+        $user_id = session('user_id');
+        $user_record = DB::table('myusers')->where('id',$user_id)->first();
+
+        $package_price = config("subscriptionPakage.type-$package_type.price")/10 ;
+
+        if($user_record->wallet_balance < $package_price){
+            return response()->json([
+                'status' => false,
+                'msg' => 'موجودی کیف پول شما کافی نیست. لطفا ابتدا موجودی کیف پول خود را افزایش دهید.'
+            ],423);
+        }
+
+        DB::table('myusers')->where('id',$user_id)
+                            ->update([
+                                'active_pakage_type' => $package_type,
+                                'pakage_start' => Carbon::now(),
+                                'pakage_end' => Carbon::now()->addMonths(config("subscriptionPakage.type-$package_type.pakage-duration-in-months"))
+                            ]);
+
+        $unit_cost = $this->get_package_price($package_type,$user_id) / 10;
+
+        $this->insert_expendig_log_record("package-type-$package_type",$unit_cost,$user_id);
+
+        return response()->json([
+            'status' => true,
+            'msg' => 'done!'
+        ],200);
     }
 
     protected function do_after_payment_changes_for_elevator($product_id)
@@ -261,5 +394,15 @@ class wallet_controller extends Controller
     protected function record_payment_log($payment)
     {
         DB::table('payment_logs')->insert($payment);
+    }
+
+    protected function get_package_price($pakage_type,$user_id)
+    {
+        $payment_controller_object = new payment_controller();
+        $prices_array = $payment_controller_object->get_packages_price_array($user_id);
+
+        $unit_cost = $prices_array['type-' . $pakage_type .'-discount'] ?? $prices_array['type-' . $pakage_type];
+
+        return $unit_cost;
     }
 }

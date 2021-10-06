@@ -20,9 +20,13 @@ use App\Jobs\sendSMS;
 use App\Jobs\LeadHandler\LeadDistributorBot;
 
 
+Route::get('/',[
+    'uses' => 'index_controller@load_home_page_blade'
+])->middleware('throttle:10,1');
+
 Route::get('/product-list',[
     'uses' => 'Product\product_list_controller@get_product_list_blade',
-]);
+])->middleware('throttle:10,1');;
 
 Route::get('/product-list/category/{category_name}',[
     'uses' => 'Product\product_list_controller@get_product_list_blade',
@@ -117,16 +121,20 @@ Route::post('/user/is_national_code_unique', [
 Route::post('send_verification_code', [
     'uses' => 'Notification\sms_controller@send_phone_verification_code',
     'as' => 'send_verification_code',
-])->middleware('throttle:3,1');;
+])->middleware('throttle:3,1'); // 10 try in each 15 mins
 
 Route::post('/verify_code', [
     'uses' => 'Notification\sms_controller@verify_code',
     'as' => 'verify_code',
-]);
+])->middleware('throttle:10,1');
 
 Route::post('/get_category_list', [
     'uses' => 'General\category_controller@get_all_categories',
     'as' => 'get_category_list',
+]);
+
+Route::post('/get_related_categories',[
+    'uses' => 'General\category_controller@get_related_category_names'
 ]);
 
 Route::post('/get_category_meta_data',[
@@ -584,10 +592,6 @@ Route::group(['middleware' => [login::class]], function () {
         'as' => 'post_comment_on_user_porfile'
      ]);
 
-     Route::post('/profile/get-user-comments',[
-         'uses' => 'Accounting\comment_controller@get_user_comments',
-         'as' => 'get_user_comments'
-     ]);
 
      Route::post('/profile/do-like',[
         'uses' => 'Accounting\comment_controller@do_like_actions',
@@ -675,10 +679,25 @@ Route::group(['middleware' => [login::class]], function () {
         'uses' => 'Payment\wallet_controller@do_extra_buyAd_capacity_payment_from_wallet',
         'as' => 'do_extra_buyad_capacity_payment_from_wallet'
     ]);
+
+    Route::post('/wallet-expend/buy-package',[
+        'uses' => 'Payment\wallet_controller@do_package_payemnt_from_wallet',
+        'as' => 'do_package_payment_from_wallet'
+    ]);
     
     Route::post('/app/get_product_list', [
         'uses' => 'Product\product_list_controller@get_product_list',
         'as' => 'get_product_list',
+    ]);
+
+    Route::post('/get-user-phone-contacts',[
+        'uses' => 'Accounting\phone_number_controller@get_user_contacts',
+        'as' => 'get_user_phone_contact_list'
+    ]);
+
+    Route::post('/get-user-referral-info',[
+        'uses' => 'Accounting\user_controller@get_referral_credit_amount',
+        'as' => 'get_user_referral_credit'
     ]);
     
 });
@@ -692,6 +711,12 @@ Route::post('/reset_password', [
     'uses' => 'Accounting\user_controller@reset_password',
     'as' => 'reset_password',
 ]);
+
+Route::post('/profile/get-user-comments',[
+    'uses' => 'Accounting\comment_controller@get_user_comments',
+    'as' => 'get_user_comments'
+]);
+
 
 // Route::post('/get_buyAd_list_by_user_name', [
 //     'uses' => 'BuyAd\buyAd_controller@get_buyAd_list_by_user_name',
@@ -768,8 +793,12 @@ Route::get('/public-channel/{slug}',[
 //------------------------- End of Channel routes ---------------------------------------------------------
 
 Route::get('/logout', function () {
+    $otp_count = session('OTP_count');
+
     Session::flush();
     Session::save();
+
+    Session::put('OTP_count',$otp_count);
 
     $cookie = \Cookie::forget('user_phone');
     $cookie = \Cookie::forget('user_password');

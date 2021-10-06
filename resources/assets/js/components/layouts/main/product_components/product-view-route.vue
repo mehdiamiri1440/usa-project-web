@@ -5,6 +5,7 @@
     :assets="assets"
     :userType="userType"
     :categoryList="categoryList"
+    :currentUser="currentUser"
   />
 </template>
 
@@ -15,6 +16,6 @@ export default {
       verifiedUserContent: this.$parent.verifiedUserContent,
     };
   },
-  props: ["str", "assets", "userType", "categoryList"],
+  props: ["str", "assets", "userType", "categoryList", "currentUser"],
 };
 </script>

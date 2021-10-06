@@ -32,7 +32,7 @@ class verification_controller extends Controller
 
         $photos_count = $request->images_count;
         foreach (range(0, $photos_count - 1) as $index) {
-            $rules['image_'.$index] = 'required|image|mimes:png,jpg,jpeg|min:2|max:5000';
+            $rules['image_'.$index] = 'required|mimes:png,jpg,jpeg|min:2|max:5000';
         }
 
         return $rules;

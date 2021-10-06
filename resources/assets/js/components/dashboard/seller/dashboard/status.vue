@@ -291,7 +291,12 @@
               </div>
               <div class="box-upgrade-link">
                 <span
-                  class="content-full-width placeholder-content default-item-wrapper col-xs-12"
+                  class="
+                    content-full-width
+                    placeholder-content
+                    default-item-wrapper
+                    col-xs-12
+                  "
                 ></span>
               </div>
             </div>

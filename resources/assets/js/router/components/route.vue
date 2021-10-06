@@ -1,7 +1,7 @@
 <style scoped>
 .android-download-alert-wrapper {
   position: fixed;
-  bottom: 0;
+  bottom: 59px;
   width: 100%;
   background: #fff;
   text-align: center;
@@ -128,6 +128,25 @@
   padding: 50px 0;
 }
 
+#payment-type-modal.modal {
+  text-align: center;
+  padding: 0 !important;
+}
+
+#payment-type-modal.modal:before {
+  content: "";
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -4px;
+}
+
+#payment-type-modal .modal-dialog {
+  display: inline-block;
+  text-align: right;
+  vertical-align: middle;
+}
+
 @media screen and (max-width: 768px) {
   #wallet-modal .modal-dialog {
     margin: 0;
@@ -153,6 +172,13 @@
 
     width: 100%;
   }
+
+  #payment-type-modal .modal-dialog {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+  }
 }
 </style>
 
@@ -173,7 +199,7 @@
       </div>
     </div>
 
-    <!--  #regex elevator modal  -->
+    <!--  #regex wallet modal  -->
 
     <div class="container">
       <div id="wallet-modal" class="modal fade" tabindex="-1" role="dialog">
@@ -183,7 +209,7 @@
               <a href="#" data-dismiss="modal">
                 <i class="fa fa-times"></i>
               </a>
-              <wallet-component
+              <WalletComponent
                 :user-name="userFullName"
                 :walletBalance="walletBalance"
               />
@@ -195,7 +221,41 @@
       </div>
     </div>
 
-    <!-- end regex elevator modal -->
+    <!-- end regex wallet modal -->
+
+    <!--  #regex payment type modal  -->
+
+    <div class="container">
+      <div
+        id="payment-type-modal"
+        class="modal fade"
+        tabindex="-1"
+        role="dialog"
+      >
+        <div
+          class="modal-dialog modal-lg modal-dialog-centered"
+          role="document"
+        >
+          <div class="modal-content">
+            <div class="modal-body col-xs-12">
+              <div class="main_popup_content modal-body col-xs-12">
+                <a href="#" data-dismiss="modal">
+                  <i class="fa fa-times"></i>
+                </a>
+                <PaymentTypes
+                  :peyment-method-data="peymentMethodData"
+                  :wallet-balance="walletBalance"
+                />
+              </div>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+    </div>
+
+    <!-- end regex payment type modal -->
 
     <!--  #regex download App modal  -->
 
@@ -240,9 +300,19 @@
 
     <ChatModal />
     <EditProductModal />
-    <ShareToSocialModal :share-modal-url="shareModalUrl" />
+    <ShareToSocialModal
+      :share-modal-url="shareModalUrl"
+      :share-modal-text="shareModalText"
+      :share-modal-title="shareModalTitle"
+    />
     <ReportModal :reported-user-id="reportedUserId" />
     <ReviewModal :review-user-data="reviewUserData" />
+
+    <Navigation
+      v-if="$route.name != 'invite'"
+      :messageCount="messageCount"
+      class="hidden-lg hidden-md"
+    />
 
     <router-view
       :user-id="userId"
@@ -277,7 +347,7 @@
     <!-- add android app download  -->
 
     <div
-      v-if="downloadAppButton"
+      v-if="downloadAppButton && $route.name != 'invite'"
       class="android-download-alert-wrapper hidden-lg hidden-md"
     >
       <button
@@ -287,7 +357,7 @@
         <i class="fa fa-times"></i>
       </button>
 
-      <button class="android-apk-download" @click.prevent="doDownload">
+      <button class="android-apk-download" @click.prevent="doDownload()">
         دانلود اپلیکیشن باسکول
 
         <img
@@ -309,8 +379,10 @@ import EditProductModal from "../../components/layouts/main/main_components/edit
 import ReportModal from "../../components/layouts/main/main_components/report";
 import ReviewModal from "../../components/layouts/main/main_components/review-component/review";
 import ShareToSocialModal from "../../components/layouts/main/main_components/share-to-social-modal";
-import walletComponent from "../../components/layouts/main/wallet";
+import WalletComponent from "../../components/layouts/main/wallet";
+import PaymentTypes from "../../components/layouts/main/payment-types.vue";
 import swal from "../../sweetalert.min.js";
+import Navigation from "./navigation.vue";
 
 export default {
   components: {
@@ -319,7 +391,9 @@ export default {
     ReportModal,
     ReviewModal,
     ShareToSocialModal,
-    walletComponent,
+    WalletComponent,
+    PaymentTypes,
+    Navigation,
   },
   data: function () {
     return {
@@ -334,15 +408,24 @@ export default {
       activeContactId: "",
       reportedUserId: "",
       shareModalUrl: "",
+      shareModalText: "",
+      shareModalTitle: "",
       msg: "",
       reviewCurrentStep: 0,
       reviewUserData: "",
       reviewUserPrfileId: "",
-      currentUser: "",
+      currentUser: {
+        profile: {
+          profile_photo: "",
+        },
+        user_info: "",
+      },
       walletBalance: "",
+      peymentMethodData: "",
       verifiedUserContent:
         "<div class='tooltip-wrapper text-rtl'>اطلاعات هویتی این کاربر احراز شده است.<br/><a href='/verification'>اطلاعات بیشتر</a> </div>",
       doPaymentLoader: false,
+      messageCount: "",
     };
   },
   props: [
@@ -358,48 +441,7 @@ export default {
     window.localStorage.setItem("userId", this.userId);
     window.localStorage.setItem("userType", this.isSeller);
 
-    eventBus.$on("elevatorText", ($event) => {
-      this.elevatorText = $event;
-    });
-
-    eventBus.$on("productId", ($event) => {
-      this.productId = $event;
-    });
-
-    eventBus.$on("buyAdId", ($event) => {
-      this.buyAdId = $event;
-    });
-
-    eventBus.$on("joinGroupId", ($event) => {
-      this.joinGroupId = $event;
-    });
-    eventBus.$on("joinGroupMessage", ($event) => {
-      this.joinGroupMessage = $event;
-    });
-
-    eventBus.$on("activeContactId", ($event) => {
-      this.activeContactId = $event;
-    });
-
-    eventBus.$on("reoprtModal", ($event) => {
-      this.reportedUserId = $event;
-      $("#report-modal").modal("show");
-    });
-
-    eventBus.$on("shareModalUrl", ($event) => {
-      this.shareModalUrl = $event;
-      $("#share-modal").modal("show");
-    });
-
-    eventBus.$on("reviewUserData", ($event) => {
-      this.reviewUserData = $event;
-      this.reviewUserPrfileId = $event.id;
-      $("#review-modal").modal("show");
-    });
-
-    eventBus.$on("modal", ($event) => {
-      this.openRelatedSwalModal($event);
-    });
+    this.setEventBus();
 
     let self = this;
 
@@ -482,7 +524,7 @@ export default {
           if (
             window.location.pathname != "/buyer/messenger/contacts" &&
             window.location.pathname != "/seller/messenger/contacts" &&
-            window.location.pathname != "/seller/buyAd-requests" &&
+            window.location.pathname != "/buyAd-requests" &&
             !window.location.pathname.includes("product-view") &&
             !this.iswebview
           ) {
@@ -505,7 +547,7 @@ export default {
           if (
             window.location.pathname != "/buyer/messenger/contacts" &&
             window.location.pathname != "/seller/messenger/contacts" &&
-            window.location.pathname != "/seller/buyAd-requests" &&
+            window.location.pathname != "/buyAd-requests" &&
             !window.location.pathname.includes("product-view") &&
             !this.iswebview
           ) {
@@ -1105,6 +1147,7 @@ export default {
       }).then((value) => {
         switch (value) {
           case "promote":
+            $('.modal').modal('hide')
             self.$router.push({ name: "dashboardPricingTableSeller" });
             break;
         }
@@ -1259,9 +1302,74 @@ export default {
         }
       }
     },
+    setEventBus() {
+      eventBus.$on("elevatorText", ($event) => {
+        this.elevatorText = $event;
+      });
+
+      eventBus.$on("productId", ($event) => {
+        this.productId = $event;
+      });
+
+      eventBus.$on("buyAdId", ($event) => {
+        this.buyAdId = $event;
+      });
+
+      eventBus.$on("joinGroupId", ($event) => {
+        this.joinGroupId = $event;
+      });
+      eventBus.$on("joinGroupMessage", ($event) => {
+        this.joinGroupMessage = $event;
+      });
+
+      eventBus.$on("activeContactId", ($event) => {
+        this.activeContactId = $event;
+      });
+
+      eventBus.$on("reoprtModal", ($event) => {
+        this.reportedUserId = $event;
+        $("#report-modal").modal("show");
+      });
+
+      eventBus.$on("shareModalUrl", ($event) => {
+        let shareItem = $event;
+        this.shareModalUrl = shareItem.shareModalUrl;
+        if (shareItem.shareModalText) {
+          this.shareModalText = shareItem.shareModalText;
+        }
+
+        if (shareItem.shareModalTitle) {
+          this.shareModalTitle = shareItem.shareModalTitle;
+        } else {
+          this.shareModalTitle = "";
+        }
+
+        $("#share-modal").modal("show");
+      });
+
+      eventBus.$on("reviewUserData", ($event) => {
+        this.reviewUserData = $event;
+        this.reviewUserPrfileId = $event.id;
+        $("#review-modal").modal("show");
+      });
+
+      eventBus.$on("modal", ($event) => {
+        this.openRelatedSwalModal($event);
+      });
+
+      eventBus.$on("peymentMethodData", ($event) => {
+        this.peymentMethodData = $event;
+      });
+      eventBus.$on("messageCount", (event) => {
+        this.messageCount += event;
+      });
+    },
   },
   mounted() {
     // eventBus.$emit("globalVerifiedBadgeContents", this.verifiedUserContent);
+    // document.addEventListener("DOMContentLoaded", function (event) {
+    //   document.getElementById("master-loader-wrapper").style.display = "none";
+    // });
     this.activateDownloadAppButton();
     $("#wallet-modal").on("show.bs.modal", (e) => {
       this.handleBackKeys();
@@ -1270,14 +1378,16 @@ export default {
   },
   watch: {
     currentUser(user) {
-      this.walletBalance = user.user_info.wallet_balance;
+      if (user.user_info) {
+        this.walletBalance = user.user_info.wallet_balance;
 
-      let date = user.profile.created_at;
-      let userCreatedAt = new Date(date);
-      let currentDate = new Date();
-      currentDate = new Date(currentDate.getTime() - 60 * 60000);
-      if (currentDate > userCreatedAt) {
-        // this.activateDownloadApp();
+        let date = user.profile.created_at;
+        let userCreatedAt = new Date(date);
+        let currentDate = new Date();
+        currentDate = new Date(currentDate.getTime() - 60 * 60000);
+        if (currentDate > userCreatedAt) {
+          // this.activateDownloadApp();
+        }
       }
     },
     walletBalance(balance) {

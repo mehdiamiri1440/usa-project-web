@@ -645,9 +645,10 @@
   color: #21ad92;
 }
 .message-button-wrapper {
-  margin: 0 -10px -5px;
+  border-top: 1px solid rgba(0, 0, 0, 0.04);
+  margin: 10px -10px -5px;
+  padding: 10px;
   overflow: hidden;
-  border-radius: 0 0 8px 8px;
 }
 .message-button-wrapper button {
   display: block;
@@ -656,9 +657,9 @@
   text-align: center;
   color: #fff;
   border: none;
-  font-size: 13px;
-  padding: 5px 15px;
-  margin-top: 8px;
+  font-size: 16px;
+  padding: 10px 26px;
+  border-radius: 8px;
 }
 .message-button-wrapper button i {
   width: 15px;
@@ -667,9 +668,48 @@
 }
 
 .message-button-wrapper.link-button button {
-  background: #5d9fd8;
+  background: linear-gradient(-45deg, #fea858, #ed765e, #fea858);
+  animation: gradient 2s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+  background-size: 400% 400%;
 }
 
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+.scale-up-center-full {
+  -webkit-animation: scale-up-center-full 0.15s
+    cubic-bezier(0.39, 0.575, 0.565, 1) both;
+  animation: scale-up-center-full 0.15s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+  animation-delay: 0.15s;
+}
+@-webkit-keyframes scale-up-center-full {
+  0% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+@keyframes scale-up-center-full {
+  0% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
 .message-button-wrapper.link-button button.edit-button {
   background: #556080;
 }
@@ -749,6 +789,88 @@
   padding: 0 15px;
 }
 
+.messenger-alert {
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 48px;
+  border-radius: 50px;
+  padding: 0 3px;
+  top: 52px;
+  z-index: 2;
+  right: 10px;
+}
+
+.messenger-alert .text-wrapper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.messenger-alert .text-wrapper span {
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 1.418;
+}
+
+.messenger-alert.danger {
+  background: red;
+  color: #fff;
+  border: none;
+  width: calc(100% - 30px);
+}
+
+.messenger-alert.danger .actions-wrapper button {
+  width: 100px;
+  border-radius: 50px;
+  border: none;
+  background: rgba(255, 255, 255, 1);
+  color: #264653;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+}
+
+.messenger-alert.danger .actions-wrapper button span {
+  width: 50px;
+  display: inline-block;
+  line-height: 16px;
+}
+
+.close-alert {
+  background: none;
+  border: none;
+  font-size: 15px;
+  padding: 14px 7px 10px 12px;
+  float: right;
+}
+
+.delsa-message-item {
+  font-size: 12px;
+  margin: 0 10px;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.exclamation-alert {
+  width: 24px;
+  height: 24px;
+  border-radius: 20px;
+  border: none;
+  background: #f03738;
+  color: #fff;
+  text-align: center;
+  padding-top: 2px;
+  padding-right: 4px;
+  position: absolute;
+  right: calc(100% + 13px);
+  font-size: 12px;
+  top: calc(50% - 12px);
+}
+
 @media screen and (max-width: 1199px) {
   .message-wrapper .message-contact-title {
     position: relative;
@@ -757,6 +879,12 @@
 }
 
 @media screen and (max-width: 768px) {
+  .messenger-alert {
+    left: 6px;
+    right: 6px;
+    width: calc(100% - 15px) !important;
+  }
+
   #fitler-modal > div {
     margin: 0;
     width: 100%;
@@ -983,6 +1111,23 @@
 
     <div class="chat-page" v-if="$parent.selectedContact">
       <div class="bg-wrapper"></div>
+      <button class="messenger-alert danger" v-if="isAlertActive">
+        <button class="close-alert" @click="closeWalletAlert()">
+          <i class="fa fa-times"></i>
+        </button>
+        <div class="text-wrapper" @click="showWallet()">
+          <span>
+            شماره تماس شما به علت عدم موجودی کیف پول شما، به خریدارن نمایش داده
+            نمی شود.
+          </span>
+        </div>
+        <div class="actions-wrapper">
+          <button @click.prevent="showWallet()">
+            <i class="fa fa-plus"></i>
+            <span>افزایش موجودی</span>
+          </button>
+        </div>
+      </button>
       <ul
         @scroll="infinityScroll()"
         id="chat-list"
@@ -990,6 +1135,7 @@
           $parent.chatMessagesLoader && $parent.isFirstMessageLoading
             ? 'chat-not-loaded'
             : 'chat-loaded',
+          isAlertActive ? 'padding-top-60' : '',
         ]"
       >
         <li
@@ -1002,6 +1148,7 @@
               {{ msg.created_at | moment("jYYYY/jMM/jDD") }}
             </span>
           </div> -->
+
           <div
             class="message-item-wrapper"
             :class="[
@@ -1010,6 +1157,21 @@
                 : 'message-receive',
             ]"
           >
+            <button
+              class="exclamation-alert"
+              data-toggle="modal"
+              data-target="#phone-locked-modal"
+              v-if="checkMessageListClass(msg.sender_id) && msg.phone_locked"
+            >
+              <i class="fa fa-exclamation"></i>
+            </button>
+            <span
+              class="delsa-message-item"
+              v-if="msg.p_id || msg.phone_locked"
+            >
+              ارسال شده توسط ربات خودکار دلسا
+            </span>
+
             <div
               v-if="msg.is_phone && !checkMessageListClass(msg.sender_id)"
               class="message-content-wrapper is-phone-active-wrapper"
@@ -1098,11 +1260,11 @@
                     Date() | moment("jYYYY/jMM/jDD, HH:mm")
                   }}</span>
                   <div class="message-button-wrapper link-button">
+                    <!-- v-if="
+                        $parent.currentUser.user_info.active_pakage_type > 0
+                      " -->
                     <button
                       class="edit-button"
-                      v-if="
-                        $parent.currentUser.user_info.active_pakage_type > 0
-                      "
                       @click.prevent="openEditPriceModal(msg.p_id)"
                     >
                       <i class="fa fa-angle-left angle-icon"></i>
@@ -1110,7 +1272,7 @@
                       <i v-if="!editPriceLoader" class="fa fa-edit"></i>
                       <i v-else class="fas fa-circle-notch fa-spin"></i>
                     </button>
-                    <button
+                    <!-- <button
                       v-else
                       class="delsa-button"
                       @click.prevent="$parent.openDelasModal()"
@@ -1118,7 +1280,7 @@
                       <i class="fa fa-angle-left angle-icon"></i>
                       استخدام منشی آنلاین
                       <i class="fas fa-chess-queen"></i>
-                    </button>
+                    </button> -->
                   </div>
                 </span>
               </div>
@@ -1312,6 +1474,7 @@ export default {
       isChat: false,
       openProductLoader: false,
       editPriceLoader: false,
+      isAlertActive: false,
     };
   },
   methods: {
@@ -1331,9 +1494,35 @@ export default {
 
     init: function () {
       this.userGuide();
+      this.checkWalletBalance();
       this.hideCollapses();
       this.$parent.userHasNotice();
       this.$parent.userHasLikeBox();
+    },
+    showWallet: function () {
+      $("#wallet-modal").modal("show");
+    },
+    checkWalletBalance() {
+      if (this.$parent.userType) {
+        let isCookieSet = this.$parent.getCookie("walletAlert");
+        let userInfo = this.$parent.currentUser.user_info;
+        if (!isCookieSet) {
+          if (
+            userInfo.active_pakage_type == 0 &&
+            userInfo.wallet_balance == 0
+          ) {
+            this.isAlertActive = true;
+          }
+        }
+      }
+    },
+    closeWalletAlert() {
+      this.$parent.createCookie(
+        "walletAlert",
+        JSON.stringify(true),
+        60 * 1 // 1 hour
+      );
+      this.isAlertActive = false;
     },
     hideCollapses: function () {
       $(document).on("click", function (e) {

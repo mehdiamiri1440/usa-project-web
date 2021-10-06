@@ -183,6 +183,7 @@
   font-size: 18px;
   border-radius: 12px;
   padding: 13px 30px;
+  margin-bottom: 50px;
 }
 
 .main-button-wrapper button i {
@@ -213,6 +214,13 @@
   line-height: 1;
   font-weight: 900;
 }
+
+@media screen and (max-width: 992px) {
+  .main-section-wrapper {
+    overflow: hidden;
+  }
+}
+
 @media screen and (max-width: 767px) {
   .wrapper-section.success {
     margin-top: -33px;
@@ -284,7 +292,7 @@
     class="main-content col-xs-12"
     v-if="!$parent.currentUser.user_info.is_verified"
   >
-    <div class="row title-wrapper">
+    <div class="row title-wrapper hidden-xs hidden-sm">
       <div class="section-title" v-if="currentStep >= 0 && currentStep <= 2">
         احراز هویت
       </div>
@@ -400,7 +408,7 @@ export default {
     UserImage,
     DocumentImage,
   },
-  data: function () {
+  data() {
     return {
       currentStep: 0,
       userImage: "",

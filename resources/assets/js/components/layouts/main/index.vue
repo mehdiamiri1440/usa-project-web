@@ -1254,13 +1254,13 @@ a.sub-menu-title:hover {
 
 <template>
   <div>
-    <div
+    <!-- <div
       :class="{ 'loader-wrapper': isLoading, 'finish-loader-show': !isLoading }"
     >
       <div class="main-loader">
         <img src="../../../../img/gif/loading.gif" />
       </div>
-    </div>
+    </div> -->
 
     <!-- =========================
         Intro SECTION
@@ -1762,7 +1762,7 @@ a.sub-menu-title:hover {
               <div
                 v-for="(buyAd, index) in lastRequests"
                 :key="'buyAd-item-' + index"
-                class="col-xs-12 col-sm-6 col-md-4"
+                class="col-xs-12 col-sm-6 col-md-4 pull-right"
               >
                 <LandingPageBuyAds :buyAd="buyAd" />
               </div>
@@ -1828,7 +1828,7 @@ a.sub-menu-title:hover {
           <router-link
             v-if="!isUserLogin || (isUserLogin && userType == 1)"
             class="green-button bg-light-green main-cta-page"
-            :to="{ name: 'buyAdRequestsSeller' }"
+            :to="{ name: 'mainBuyAdRequests' }"
             >مشاهده همه درخواست ها
             <i class="fa fa-angle-left"></i>
           </router-link>
@@ -1858,7 +1858,7 @@ a.sub-menu-title:hover {
 
             <router-link
               class="green-button"
-              :to="{ name: 'buyAdRequestsSeller' }"
+              :to="{ name: 'mainBuyAdRequests' }"
               >لیست درخواست های خرید</router-link
             >
           </div>

@@ -1,3 +1,16 @@
+<style >
+.profile-carosel .owl-nav {
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  width: 100%;
+  margin-top: -10px;
+  top: calc(50% - 10px);
+  direction: ltr;
+  padding: 0 15px;
+  height: 0;
+}
+</style>
 <style scoped>
 #main {
   margin-right: 250px;
@@ -16,7 +29,7 @@
   width: 60px;
   height: 60px;
   right: 25px;
-  bottom: 25px;
+  bottom: 75px;
   font-weight: bold;
   font-size: 10px;
   background: #e51c38;
@@ -185,6 +198,9 @@
   #main.is-required-fix-alert {
     margin-top: 89px !important;
   }
+  #main.has-verification-alert {
+    margin-top: 81px;
+  }
 }
 
 @media screen and (max-width: 767px) {
@@ -313,6 +329,7 @@
     <!-- end regex pricing modal -->
     <promotion-modal />
     <DelsaPromotionModal />
+    <PhoneLockedModal />
 
     <header-dash-seller
       :storage="storagePath"
@@ -363,6 +380,7 @@ import HeaderDashSeller from "../../components/dashboard/seller/header/header";
 import pricingContents from "../../components/dashboard/seller/pricing-seller-page/pricing-tables/pricing-package-contents";
 import PromotionModal from "../../components/layouts/main/promotion-modal";
 import DelsaPromotionModal from "../../components/layouts/main/delsa-promotion-modal.vue";
+import PhoneLockedModal from "../../components/layouts/main/phone-locked-modal.vue";
 import { eventBus } from "../router.js";
 
 export default {
@@ -371,6 +389,7 @@ export default {
     "pricing-contents": pricingContents,
     PromotionModal,
     DelsaPromotionModal,
+    PhoneLockedModal,
   },
   props: [
     "userId",
@@ -383,7 +402,6 @@ export default {
   data: function () {
     return {
       linkHideStates: [
-        "buyAd-requests",
         "messenger/contacts",
         "messenger/buy-ads",
         "register-product/success",
@@ -391,6 +409,8 @@ export default {
         "pricing",
         "product-pricing",
         "buyad-pricing",
+        "invited-users",
+        "referral",
       ],
       buttonIsActive: true,
       currentUser: {
@@ -414,10 +434,11 @@ export default {
       paymentData: "",
       doPaymentLoader: false,
       verificationAlert: false,
+      buyAdsGolden: [],
     };
   },
   methods: {
-    init: function () {
+    init() {
       this.checkButtonIsHide();
 
       $("#factor-pricing-modal").on("show.bs.modal", (e) => {
@@ -552,6 +573,7 @@ export default {
       $(window).on("popstate", function (e) {
         $("#factor-pricing-modal").modal("hide");
         $("#pricing-modal").modal("hide");
+        $("#description-modal").modal("hide");
       });
     },
     checkPricingModal: function () {
@@ -597,10 +619,22 @@ export default {
         !this.getCookie("registerNewUser") &&
         this.currentUser.user_info.active_pakage_type == 0
       ) {
+        if (this.buyAdsGolden.length == 0) {
+          this.checkGoldenBuyAd();
+        } else {
+          setTimeout(() => {
+            $("#promotion-modal").modal("show");
+          }, 5000);
+        }
+      }
+    },
+    checkGoldenBuyAd() {
+      axios.post("/get_my_buyAd_suggestions").then((response) => {
+        this.buyAdsGolden = response.data.golden_buyAds;
         setTimeout(() => {
           $("#promotion-modal").modal("show");
-        }, 5000);
-      }
+        }, 4000);
+      });
     },
     routePromotionModal() {
       $("#promotion-modal").modal("hide");
@@ -611,14 +645,27 @@ export default {
         history.pushState(null, null, window.location);
       }
       $(window).on("popstate", function (e) {
-        $(".modal").modal("hide");
+        if (swal.getState().isOpen) {
+          swal.close();
+        } else {
+          $(".modal").modal("hide");
+        }
       });
+    },
+    openGoldenChatRestrictionModal() {
+      eventBus.$emit("modal", "goldenBuyAdReplyLimit");
+
+      this.registerComponentStatistics(
+        "suggestedBuyAdReply",
+        "openChat",
+        "permission denied"
+      );
     },
   },
   watch: {
     currentUser(user) {
+      this.$parent.currentUser = user;
       if (user.user_info.id) {
-        this.$parent.currentUser = user;
         this.promotionModal();
       }
     },

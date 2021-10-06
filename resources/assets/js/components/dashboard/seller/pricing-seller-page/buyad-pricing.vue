@@ -224,7 +224,7 @@ input[type="number"] {
 
 .fix-botton-wraper {
   position: fixed;
-  bottom: 0;
+  bottom: 59px;
   left: 0;
   width: 100%;
   z-index: 1;
@@ -248,6 +248,9 @@ input[type="number"] {
   top: 2px;
 }
 
+.pricing-wrapper {
+  margin-bottom: 130px;
+}
 @media screen and (max-width: 1300px) {
   .arrow-icon {
     display: none;
@@ -370,26 +373,11 @@ input[type="number"] {
 </style>
 <template>
   <div class="col-xs-12 pricing-section-wrapper">
-    <!-- payment loader -->
-    <div v-if="doPaymentLoader" class="main-loader-content">
-      <div class="pricing-loader-icon">
-        <div class="lds-ring">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-        <p class="pricing-loader-text text-rtl">
-          در حال انتقال به درگاه پرداخت . . .
-        </p>
-      </div>
-    </div>
-
     <!-- end payment loader -->
 
     <div class="row">
       <div class="col-xs-12">
-        <div class="header-section">
+        <div class="header-section hidden-xs hidden-sm">
           <p>افزایش ظرفیت</p>
         </div>
 
@@ -416,7 +404,7 @@ input[type="number"] {
                     <i class="fa fa-question"></i>
                   </button>
                   <p class="item-text">افزایش روزانه پاسخ به درخواست ها</p>
-                  <p class="item-count">{{ productPriceData.count }}</p>
+                  <p class="item-count">{{ buyAdPriceData.count }}</p>
                 </div>
 
                 <div class="input-wrapper">
@@ -426,7 +414,7 @@ input[type="number"] {
                     <div class="input-group-prepend">
                       <button
                         class="btn btn-outline-secondary btn-minus"
-                        @click="--productPriceData.count"
+                        @click="--buyAdPriceData.count"
                       >
                         <i class="fa fa-minus"></i>
                       </button>
@@ -436,13 +424,13 @@ input[type="number"] {
                       max="1000"
                       type="number"
                       @click="selectCountInput"
-                      v-model="productPriceData.count"
+                      v-model="buyAdPriceData.count"
                     />
 
                     <div class="input-group-append">
                       <button
                         class="btn btn-outline-secondary btn-plus"
-                        @click="++productPriceData.count"
+                        @click="++buyAdPriceData.count"
                       >
                         <i class="fa fa-plus"></i>
                       </button>
@@ -459,12 +447,18 @@ input[type="number"] {
                 <label>قیمت</label>
                 <p class="price-content">
                   <span
-                    v-text="getNumberWithCommas(productPriceData.totalPrice)"
+                    v-text="getNumberWithCommas(buyAdPriceData.totalPrice)"
                   ></span>
                   <span class="currency">تومان</span>
                   <span class="price-date">(سالانه)</span>
                 </p>
-                <button class="green-button" @click.prevent="doPayment()">
+                <!-- <button class="green-button" @click.prevent="doPayment()">
+                  افزایش ظرفیت
+                </button> -->
+                <button
+                  class="green-button"
+                  @click.prevent="openPaymentModal()"
+                >
                   افزایش ظرفیت
                 </button>
               </div>
@@ -472,7 +466,7 @@ input[type="number"] {
           </div>
         </div>
       </div>
-      <div class="col-xs-12">
+      <div class="col-xs-12 pricing-wrapper">
         <div class="row">
           <div class="header-section col-xs-12">
             <p>ارتقا عضویت</p>
@@ -498,19 +492,19 @@ input[type="number"] {
 import ProductPricing from "./pricing-tables/pricing-packages.vue";
 import productPricingContents from "./pricing-tables/pricing-package-contents";
 import swal from "../../../../sweetalert.min.js";
+import { eventBus } from "../../../../router/router";
 
 export default {
   props: ["offerTime"],
   components: { ProductPricing, productPricingContents },
   data: function () {
     return {
-      productPriceData: {
+      buyAdPriceData: {
         unitPrice: "25000",
         count: 1,
         totalPrice: "",
       },
       statusData: "",
-      doPaymentLoader: false,
       productPricing: [
         {
           priceName: "عضویت ویژه",
@@ -603,18 +597,14 @@ export default {
       var $myGroup = $(".item-content");
       $myGroup.find(".collapse.in").collapse("hide");
     },
-    doPayment: function () {
-      this.doPaymentLoader = true;
-      let self = this;
-
-      this.registerComponentStatistics(
-        "payment",
-        "buyAd-reply-capacity",
-        self.productPriceData.count
-      );
-
-      window.location.href =
-        "/payment/buyAd-reply-capacity/" + this.productPriceData.count;
+    openPaymentModal() {
+      let paymentData = {
+        paymentName: "buyAdPriceData",
+        count: this.buyAdPriceData.count,
+        totalPrice: this.buyAdPriceData.unitPrice * this.buyAdPriceData.count,
+      };
+      eventBus.$emit("peymentMethodData", paymentData);
+      $("#payment-type-modal").modal("show");
     },
     registerComponentStatistics: function (
       categoryName,
@@ -627,8 +617,8 @@ export default {
       });
     },
     setTotalPrice: function () {
-      this.productPriceData.totalPrice =
-        this.productPriceData.count * this.productPriceData.unitPrice;
+      this.buyAdPriceData.totalPrice =
+        this.buyAdPriceData.count * this.buyAdPriceData.unitPrice;
     },
     getNumberWithCommas: function (number) {
       if (number || typeof number === "number")
@@ -637,7 +627,7 @@ export default {
     },
     selectCountInput: function (event) {
       event.target.select();
-      // event.target.setSelectionRange(0, this.productPriceData.count);
+      // event.target.setSelectionRange(0, this.buyAdPriceData.count);
     },
     openCreditCardGuide() {
       var buskoolInfo = document.createElement("div");
@@ -672,11 +662,11 @@ export default {
     $(".item-guid").tooltip();
   },
   watch: {
-    "productPriceData.count": function () {
-      if (this.productPriceData.count <= 0) {
-        this.productPriceData.count = 1;
-      } else if (this.productPriceData.count >= 1000) {
-        this.productPriceData.count = 1000;
+    "buyAdPriceData.count": function () {
+      if (this.buyAdPriceData.count <= 0) {
+        this.buyAdPriceData.count = 1;
+      } else if (this.buyAdPriceData.count >= 1000) {
+        this.buyAdPriceData.count = 1000;
       }
       this.setTotalPrice();
     },

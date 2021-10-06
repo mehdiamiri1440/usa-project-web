@@ -68,9 +68,10 @@ ul {
     <div class="help">
       <div class="title col-xs-12">
         <div class="row">
-          <div class="col-xs-12 col-sm-4 pull-right">
+          <div class="col-xs-12 col-sm-4 pull-right hidden-xs hidden-sm">
             <h1>راهنما</h1>
           </div>
+          <br />
         </div>
       </div>
 
@@ -100,8 +101,9 @@ ul {
               </router-link>
             </li>
             <li>
-              شما میتوانید نسبت به احراز هویت مشخصات حقیقی یا حقوقی خود برای جلب اعتماد خریداران اقدام کنید.
-             <router-link
+              شما میتوانید نسبت به احراز هویت مشخصات حقیقی یا حقوقی خود برای جلب
+              اعتماد خریداران اقدام کنید.
+              <router-link
                 :to="{ name: 'profileBasicSellerVeficiation' }"
                 class="guide-link"
               >
@@ -126,8 +128,8 @@ ul {
             </li>
             <li>
               پیشنهاد های خرید از سوی خریداران را میتوانید در قسمت
-              <router-link :to="{ name: 'buyAdRequestsSeller' }"
-                > درخواست ها </router-link
+              <router-link :to="{ name: 'buyAdRequestsSeller' }">
+                درخواست ها </router-link
               >مشاهده کنیدو در صورت داشتن آمادگی جهت تامین محصول، قیمت پیشنهادی،
               تصویر محصولات و توضیحات مربوطه را به خریدار ارسال نمایید.
               <router-link
@@ -139,7 +141,8 @@ ul {
               </router-link>
             </li>
             <li>
-              شما میتوانید در قسمت خریداران پیشنهادی با خریدارانی که به دنبال محصولات شما هستند ارتباط برقرار کنید.
+              شما میتوانید در قسمت خریداران پیشنهادی با خریدارانی که به دنبال
+              محصولات شما هستند ارتباط برقرار کنید.
               <router-link
                 :to="{ name: 'messagesRequestSeller' }"
                 class="guide-link"
@@ -149,20 +152,19 @@ ul {
               </router-link>
             </li>
             <li>
-              خریداران در صورت رغبت از طریق پیام یا تماس تلفنی با شما در ارتباط خواهند بود.
-              لیست پیام های شما در قسمت
-              <router-link :to="{ name: 'messagesSeller' }"> پیام ها </router-link
+              خریداران در صورت رغبت از طریق پیام یا تماس تلفنی با شما در ارتباط
+              خواهند بود. لیست پیام های شما در قسمت
+              <router-link :to="{ name: 'messagesSeller' }">
+                پیام ها </router-link
               >قرار دارد.
-              <router-link
-                :to="{ name: 'messagesSeller' }"
-                class="guide-link"
-              >
+              <router-link :to="{ name: 'messagesSeller' }" class="guide-link">
                 پیام ها
                 <i class="fa fa-arrow-left"></i>
               </router-link>
             </li>
             <li>
-              در صورتیکه مایل به نمایش شماره تماس خود به خریدران هستید راهنمای نمایش اطلاعات تماس را که در لینک مقابل آمده مطالعه کنید. 
+              در صورتیکه مایل به نمایش شماره تماس خود به خریدران هستید راهنمای
+              نمایش اطلاعات تماس را که در لینک مقابل آمده مطالعه کنید.
               <router-link
                 :to="{ name: 'showNumberGuideSeller' }"
                 class="guide-link"
@@ -171,11 +173,9 @@ ul {
                 <i class="fa fa-arrow-left"></i>
               </router-link>
             </li>
-            <li>در صورت بروز هرگونه مشکل با خدمتگزاران خود تماس بگیرید.
-                <router-link
-                :to="{ name: 'supportSeller' }"
-                class="guide-link"
-              >
+            <li>
+              در صورت بروز هرگونه مشکل با خدمتگزاران خود تماس بگیرید.
+              <router-link :to="{ name: 'supportSeller' }" class="guide-link">
                 پشتیبانی باسکول
                 <i class="fa fa-arrow-left"></i>
               </router-link>

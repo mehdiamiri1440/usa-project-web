@@ -46,7 +46,7 @@
 }
 
 .main-header {
-  min-height: 59px;
+  /* min-height: 59px; */
   position: fixed;
   left: 0;
   right: 250px;
@@ -466,6 +466,12 @@ a.profile-info-wrapper:focus {
     flex: 1;
     text-align: center;
   }
+  .sub-header {
+    top: 41px;
+  }
+  .sub-header.is-verification-alert-active {
+    top: 82px;
+  }
 }
 @media screen and (min-width: 991px) {
   .hide-message-notification {
@@ -616,6 +622,26 @@ a.profile-info-wrapper:focus {
   padding: 8px 14px;
 }
 
+.mobile-header-title {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 500;
+  color: #333;
+  padding: 11px 5px;
+  line-height: 1;
+  position: relative;
+}
+
+.mobile-header-title button {
+  position: absolute;
+  right: 0;
+  top: 0;
+  border: none;
+  padding: 10px 15px;
+  line-height: 1;
+  background: none;
+}
+
 @media screen and (max-width: 768px) {
   .verification-wrapper-contents {
     padding: 2px 15px 8px 0;
@@ -642,182 +668,245 @@ a.profile-info-wrapper:focus {
         <i class="fa fa-times"></i>
       </button>
     </router-link>
-    <div class="show-header hidden-md hidden-lg">
-      <div
-        v-if="messageCount > 0"
-        class="message-notification hide-message-notification"
-      >
-        <span>
-          {{ messageCount > 100 ? "+99" : messageCount }}
-        </span>
-      </div>
-      <button class="button-height">
-        <span :class="menuClosed ? 'rotation' : ''" class="fa fa-bars"></span>
-      </button>
-    </div>
 
-    <div class="user-auth-info-wrapper">
-      <ul v-if="!isLoading" class="nav navbar-nav">
-        <li>
-          <a
-            class="profile-info-wrapper"
-            data-toggle="collapse"
-            href="#web-profile-items"
-            role="button"
-          >
-            <div
-              v-if="photoLink"
-              class="profile-image-wrapper"
-              :style="{
-                backgroundImage: 'url(' + storage + '/' + photoLink + ')',
-              }"
-            ></div>
-            <div
-              v-else
-              class="profile-image-wrapper"
-              :style="{
-                backgroundImage:
-                  'url(' + $parent.assets + 'assets/img/user-defult.png' + ')',
-              }"
-            ></div>
+    <div class="hidden-sm hidden-xs">
+      <div class="user-auth-info-wrapper">
+        <ul v-if="!isLoading" class="nav navbar-nav">
+          <li>
+            <a
+              class="profile-info-wrapper"
+              data-toggle="collapse"
+              href="#web-profile-items"
+              role="button"
+            >
+              <div
+                v-if="photoLink"
+                class="profile-image-wrapper"
+                :style="{
+                  backgroundImage: 'url(' + storage + '/' + photoLink + ')',
+                }"
+              ></div>
+              <div
+                v-else
+                class="profile-image-wrapper"
+                :style="{
+                  backgroundImage:
+                    'url(' +
+                    $parent.assets +
+                    'assets/img/user-defult.png' +
+                    ')',
+                }"
+              ></div>
 
-            <div class="profile-information">
-              <span class="user_name" v-text="username"></span>
-              <i class="fa fa-angle-down"></i>
+              <div class="profile-information">
+                <span class="user_name" v-text="username"></span>
+                <i class="fa fa-angle-down"></i>
+              </div>
+            </a>
+
+            <ul id="web-profile-items" class="collapse">
+              <li class="list-item">
+                <router-link
+                  data-toggle="collapse"
+                  href="#web-profile-items"
+                  :to="{ name: 'profileBasicBuyer' }"
+                  @click="
+                    registerComponentStatistics(
+                      'seller-dashboard-header',
+                      'profile-link',
+                      'click-on-profile-link-in-dashboard'
+                    )
+                  "
+                >
+                  <i class="fa fa-user"></i>
+                  پروفایل
+                </router-link>
+              </li>
+
+              <li class="list-item">
+                <router-link
+                  data-toggle="collapse"
+                  href="#web-profile-items"
+                  :to="{ name: 'passwordBuyer' }"
+                  @click="
+                    registerComponentStatistics(
+                      'seller-dashboard-header',
+                      'change-password',
+                      'click-on-change-password-dashboard'
+                    )
+                  "
+                >
+                  <i class="fa fa-lock"></i>
+                  تغییر کلمه عبور
+                </router-link>
+              </li>
+
+              <li class="list-item">
+                <a :href="out"> <i class="fas fa-sign-out-alt"></i> خروج </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <ul v-else class="nav navbar-nav">
+          <li>
+            <div class="col display-loading">
+              <div
+                class="
+                  user_name
+                  placeholder-content placeholder-user-name
+                  margin-loading
+                "
+              ></div>
+              <div
+                class="placeholder-image-header-profile placeholder-content"
+              ></div>
             </div>
-          </a>
-
-          <ul id="web-profile-items" class="collapse">
-            <li class="list-item">
-              <router-link
-                data-toggle="collapse"
-                href="#web-profile-items"
-                :to="{ name: 'profileBasicBuyer' }"
-                @click="
-                  registerComponentStatistics(
-                    'seller-dashboard-header',
-                    'profile-link',
-                    'click-on-profile-link-in-dashboard'
-                  )
-                "
-              >
-                <i class="fa fa-user"></i>
-                پروفایل
-              </router-link>
-            </li>
-
-            <li class="list-item">
-              <router-link
-                data-toggle="collapse"
-                href="#web-profile-items"
-                :to="{ name: 'passwordBuyer' }"
-                @click="
-                  registerComponentStatistics(
-                    'seller-dashboard-header',
-                    'change-password',
-                    'click-on-change-password-dashboard'
-                  )
-                "
-              >
-                <i class="fa fa-lock"></i>
-                تغییر کلمه عبور
-              </router-link>
-            </li>
-
-            <li class="list-item">
-              <a :href="out" @click="logUserOut()">
-                <i class="fas fa-sign-out-alt"></i> خروج
-              </a>
-            </li>
-          </ul>
-        </li>
-      </ul>
-      <ul v-else class="nav navbar-nav">
-        <li>
-          <div class="col display-loading">
-            <div
-              class="
-                user_name
-                placeholder-content placeholder-user-name
-                margin-loading
+          </li>
+        </ul>
+      </div>
+      <div class="right-menu-header">
+        <ul class="list-inline">
+          <li>
+            <router-link
+              class="product-list-link"
+              :to="{ name: 'productList' }"
+              @click="
+                registerComponentStatistics(
+                  'dashboard-header',
+                  'product-list-btn',
+                  'click-on-product-list-in-dashboard'
+                )
               "
-            ></div>
-            <div
-              class="placeholder-image-header-profile placeholder-content"
-            ></div>
-          </div>
-        </li>
-      </ul>
+            >
+              <span class="hidden-xs hidden-sm"> لیست محصولات </span>
+              <span class="hidden-md hidden-lg">
+                <i class="fa fa-list-ul"></i>
+              </span>
+            </router-link>
+          </li>
+
+          <li>
+            <router-link
+              :to="{ name: 'indexPage' }"
+              @click="
+                registerComponentStatistics(
+                  'dashboard-header',
+                  'home-page-btn',
+                  'click-on-home-page-in-dashboard'
+                )
+              "
+              class="home-button"
+            >
+              <i class="fa fa-home" aria-hidden="true"></i>
+            </router-link>
+          </li>
+        </ul>
+      </div>
+
+      <div
+        v-if="$route.path === '/buyer/special-products'"
+        class="sub-header col-xs-12"
+        :class="{ 'is-verification-alert-active ': $parent.verificationAlert }"
+      >
+        <div class="search-box col-sm-6 col-xs-12 col-lg-4 pull-right">
+          <input
+            type="text"
+            v-model="$parent.searchValueText"
+            placeholder="اینجا جستجو کنید"
+          />
+
+          <button class="btn-search">
+            <i class="fa-search fa"></i>
+          </button>
+        </div>
+      </div>
+      <SubMenu
+        :class="{ 'header-with-fix-alert': $parent.isRequiredFixAlert }"
+      />
     </div>
-    <div class="right-menu-header">
-      <ul class="list-inline">
-        <li>
-          <router-link
-            class="product-list-link"
-            :to="{ name: 'productList' }"
-            @click="
-              registerComponentStatistics(
-                'dashboard-header',
-                'product-list-btn',
-                'click-on-product-list-in-dashboard'
-              )
-            "
-          >
-            <span class="hidden-xs hidden-sm"> لیست محصولات </span>
-            <span class="hidden-md hidden-lg">
-              <i class="fa fa-list-ul"></i>
-            </span>
-          </router-link>
-        </li>
-
-        <li>
-          <router-link
-            :to="{ name: 'indexPage' }"
-            @click="
-              registerComponentStatistics(
-                'dashboard-header',
-                'home-page-btn',
-                'click-on-home-page-in-dashboard'
-              )
-            "
-            class="home-button"
-          >
-            <i class="fa fa-home" aria-hidden="true"></i>
-          </router-link>
-        </li>
-      </ul>
-    </div>
-
-    <div
-      v-if="$route.path === '/buyer/special-products'"
-      class="sub-header col-xs-12"
-      :class="{ 'is-verification-alert-active ': $parent.verificationAlert }"
-    >
-      <div class="search-box col-sm-6 col-xs-12 col-lg-4 pull-right">
-        <input
-          type="text"
-          v-model="$parent.searchValueText"
-          placeholder="اینجا جستجو کنید"
-        />
-
-        <button class="btn-search">
-          <i class="fa-search fa"></i>
+    <div class="hidden-md hidden-lg">
+      <div class="mobile-header-title">
+        <span v-text="pageTitle"></span>
+        <button
+          class="mobile-back-button"
+          onclick="window.history.go(-1); return false;"
+        >
+          <i class="fa fa-arrow-right"></i>
         </button>
       </div>
+      <div
+        v-if="$route.path === '/buyer/special-products'"
+        class="sub-header col-xs-12"
+        :class="{ 'is-verification-alert-active ': $parent.verificationAlert }"
+      >
+        <div class="search-box col-sm-6 col-xs-12 col-lg-4 pull-right">
+          <input
+            type="text"
+            v-model="$parent.searchValueText"
+            placeholder="اینجا جستجو کنید"
+          />
+
+          <button class="btn-search">
+            <i class="fa-search fa"></i>
+          </button>
+        </div>
+      </div>
+      <SubMenu />
     </div>
-    <SubMenu :class="{ 'header-with-fix-alert': $parent.isRequiredFixAlert }" />
   </header>
 </template>
 
 
 <script>
-var visible = false;
 import SubMenu from "./sub-menu/sub-menu.vue";
 import { eventBus } from "../../../../../router/router";
 export default {
   data: function () {
     return {
       messageCount: "",
+      pageTitle: "",
+      pages: [
+        {
+          name: "passwordBuyer",
+          title: "تغییر کلمه عبور",
+        },
+        {
+          name: "myBuskoolBuyer",
+          title: "باسکول من",
+        },
+        {
+          name: "profileBasicBuyer",
+          title: "ویرایش پروفایل",
+        },
+        {
+          name: "profileBasicBuyerVeficiation",
+          title: "احراز هویت",
+        },
+        {
+          name: "messagesBuyer",
+          title: "پیام ها",
+        },
+        {
+          name: "registerRequestBuyer",
+          title: "ثبت درخواست خرید",
+        },
+        {
+          name: "specialProducts",
+          title: "فروشندگان پیشنهادی",
+        },
+        {
+          name: "myBuyAdRequestsBuyer",
+          title: "درخواست های من",
+        },
+        {
+          name: "guideBuyer",
+          title: "راهنما",
+        },
+        {
+          name: "supportBuyer",
+          title: "پشتیبانی",
+        },
+      ],
     };
   },
   components: {
@@ -835,14 +924,7 @@ export default {
   methods: {
     init: function () {
       this.closeCollapses();
-    },
-    logUserOut: function () {
-      localStorage.removeItem("userRoute");
-      this.registerComponentStatistics(
-        "seller-dashboard-header",
-        "logout",
-        "click-on-logout-in-dashboard"
-      );
+      this.checkName(this.$route.name);
     },
     closeCollapses: function () {
       $(document).on("click", function (e) {
@@ -859,9 +941,25 @@ export default {
         }
       });
     },
+    registerComponentStatistics: function (
+      categoryName,
+      actionName,
+      labelName
+    ) {
+      gtag("event", actionName, {
+        event_category: categoryName,
+        event_label: labelName,
+      });
+    },
+    checkName(routeName) {
+      this.pages.map((item) => {
+        if (item.name == routeName) {
+          this.pageTitle = item.title;
+        }
+      });
+    },
   },
   mounted() {
-    var self = this;
     this.init();
 
     // axios
@@ -886,11 +984,11 @@ export default {
     });
     document.addEventListener("click", this.documentClick);
   },
-  registerComponentStatistics: function (categoryName, actionName, labelName) {
-    gtag("event", actionName, {
-      event_category: categoryName,
-      event_label: labelName,
-    });
+
+  watch: {
+    "$route.name"(route) {
+      this.checkName(route);
+    },
   },
 };
 </script>

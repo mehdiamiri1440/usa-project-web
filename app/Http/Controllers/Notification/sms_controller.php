@@ -10,6 +10,7 @@ use phplusir\smsir\Smsir;
 use App\Http\Controllers\Accounting\user_controller;
 use App\services\v1\userService;
 use DB;
+use Illuminate\Support\Facades\Cache;
 
 class sms_controller extends Controller
 {
@@ -22,21 +23,14 @@ class sms_controller extends Controller
 	{
 		$rules = [
 			'phone' => ['required','regex:/^((09[0-9]{9})|(\x{06F0}\x{06F9}[\x{06F0}-\x{06F9}]{9}))$/u']
-		];
-		
-        $this->validate($request,$rules);
-        
-        // if(session()->has('OTP_count') && session('OTP_count') > 10){
-        //     return response()->json([
-        //         'status' => false,
-        //         'msg' => 'خطای تلاش های زیاد!'
-        //     ],400);
-        // }
+        ];
 
-        // if(session()->has('OTP_start') && (session('OTP_start') + 2 * 60) >= time()){
+        $this->validate($request,$rules);
+
+        // if($this->is_request_safe($request) == false){
         //     return response()->json([
         //         'status' => false,
-        //         'msg' => 'منتظر بمانید.'
+        //         'msg' => 'لطفا بعدا دوباره تلاش کنید.'
         //     ],400);
         // }
 		
@@ -45,7 +39,7 @@ class sms_controller extends Controller
 		try{
             Smsir::sendVerification($random_number,$request->phone);
             
-            $this->set_generated_code_in_session($random_number);
+            $this->set_generated_code_in_session($random_number,$request->phone);
 		
             return response()->json([
                 'status' => TRUE,
@@ -70,20 +64,6 @@ class sms_controller extends Controller
 		];
 		
         $this->validate($request,$rules);
-
-        // if(session()->has('OTP_count') && session('OTP_count') > 10){
-        //     return response()->json([
-        //         'status' => false,
-        //         'msg' => 'خطای تلاش های زیاد!'
-        //     ],400);
-        // }
-        
-        // if(session()->has('OTP_start') && (session('OTP_start') + 2 * 60) < time()){
-        //     return response()->json([
-        //         'status' => false,
-        //         'msg' => 'منتظر بمانید.'
-        //     ],400);
-        // }
         
         $user_record = myuser::where('phone',$request->phone)
                                 ->get()
@@ -95,7 +75,7 @@ class sms_controller extends Controller
             try{
                 Smsir::sendVerification($random_number,$request->phone);
 
-                $this->set_generated_code_in_session($random_number);
+                $this->set_generated_code_in_session($random_number,$request->phone);
 
                 return response()->json([
                     'status' => TRUE,
@@ -106,7 +86,7 @@ class sms_controller extends Controller
                 return response()->json([
                    'status' => FALSE,
                    'msg' => 'ارتباط خود با اینترنت را بررسی کنید.',
-                   'descriptive_msg' => $e->getMessage(),
+                //    'descriptive_msg' => $e->getMessage(),
                 ],500);
              }
         }
@@ -125,25 +105,32 @@ class sms_controller extends Controller
 		return rand(1000,9999);
 	}
 	
-	protected function set_generated_code_in_session($random_number)//also sets OTP_start session
+	protected function set_generated_code_in_session($random_number,$phone_number)//also sets OTP_start session
     {
          session([
              'sms_OTP'=>$random_number,
              'OTP_start'=>time(),
          ]); 
 
-        //  if(session()->has('OTP_count')){
-        //      $cnt = session('OTP_count');
+         if(Cache::has($phone_number)){
+             Cache::increment($phone_number);
+         }
+         else{
+            Cache::put($phone_number,1,2); //setting up counter in cahce for 2 minutes
+         }
 
-        //      session([
-        //          'OTP_count' => $cnt + 1
-        //      ]);
-        //  }
-        //  else{
-        //      session([
-        //          'OTP_count' => 1
-        //      ]);
-        //  }
+         if(session()->has('OTP_count')){
+             $cnt = session('OTP_count');
+
+             session([
+                 'OTP_count' => $cnt + 1
+             ]);
+         }
+         else{
+             session([
+                 'OTP_count' => 1
+             ]);
+         }
     }
 	
 	public function verify_code(Request $request)
@@ -369,5 +356,30 @@ class sms_controller extends Controller
         catch(\Exception $e){
             echo $e->getMessage();
         }
+    }
+
+    protected function is_request_safe($request){
+
+        if(Cache::has('black-listed-' . $request->phone)){
+            return false;
+        }
+        
+        if(Cache::has($request->phone) && Cache::get($request->phone) >= 20){
+            $black_list_key = 'black-listed-' . $request->phone;
+
+            Cache::put($black_list_key,true,60 * 24);
+
+            return false;
+        }
+
+        // if(session()->has('OTP_count') && session('OTP_count') >= 10){
+        //     return false;
+        // }
+
+        // if(session()->has('OTP_start') && (session('OTP_start') + 2 * 60) < time()){
+        //     return false;
+        // }
+
+        return true;
     }
 }

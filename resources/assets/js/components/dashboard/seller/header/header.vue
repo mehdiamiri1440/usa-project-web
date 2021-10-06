@@ -42,8 +42,9 @@ body,
 .little_header .wallet-main .icon-wrapper {
   text-align: center;
   top: 16px;
-  left: 15px;
   font-size: 18px;
+  right: 10px;
+  left: 10px;
 }
 
 .little_header .wallet-main > i {
@@ -240,31 +241,31 @@ span.min {
 
 .wallet-main > .icon-wrapper {
   position: absolute;
-  top: 32px;
-  left: 10px;
+  top: 31px;
+  left: 7px;
   font-size: 11px;
   background: #fff;
   color: #333;
   border-radius: 8px;
-  padding: 5px 7px;
+  padding: 5px;
+  direction: ltr;
 }
 
 .wallet-main > .icon-wrapper i {
   color: #21ad93;
-}
-
-.wallet-main > p {
-  font-weight: bold;
-  font-size: 15px;
+  position: relative;
+  top: 1px;
 }
 
 .wallet-main > p.wallet-price {
-  font-size: 23px;
-  margin-top: 13px;
+  font-size: 18px;
+  margin-top: 21px;
+  font-weight: 500;
 }
 
 .wallet-main > p.wallet-price > span {
-  font-size: 16px;
+  font-size: 14px;
+  font-weight: 300;
 }
 
 @media screen and (max-width: 991px) {
@@ -535,60 +536,6 @@ span.min {
       </div>
     </div>
 
-    <section class="right-header mobile-header">
-      <header class="header-right-header">
-        <button class="close_menu_mob">
-          <i class="fa fa-bars"></i>
-        </button>
-
-        <button class="close_menu">
-          <i class="fa fa-bars"></i>
-        </button>
-
-        <router-link class="logo" :to="{ name: 'indexPage' }">
-          <img src="../../../../../img/logo/web-logo-white.svg" alt="buskool" />
-        </router-link>
-      </header>
-
-      <section class="main-right-header">
-        <ProfileInfo
-          :isLoading="isLoading"
-          :photoLink="currentUser.profile.profile_photo"
-          :storage="storage"
-          :username="
-            currentUser.user_info.first_name +
-            ' ' +
-            currentUser.user_info.last_name
-          "
-          :usercity="
-            currentUser.user_info.province + ' - ' + currentUser.user_info.city
-          "
-          :userprof="currentUser.user_info.user_name"
-        />
-        <a href="#" @click.prevent="showWallet()" class="wallet-wrapper">
-          <div class="wallet-main">
-            <p class="wallet-title">
-              <i class="fa fa-wallet"></i>
-              موجودی کیف پول
-            </p>
-
-            <p class="wallet-price">
-              {{ getNumberWithCommas(currentUser.user_info.wallet_balance) }}
-
-              <span> تومان </span>
-            </p>
-
-            <span class="icon-wrapper">
-              <span>افزایش موجودی</span>
-              <i class="fa fa-plus"></i>
-            </span>
-          </div>
-        </a>
-        <SwitchButtons mobile="1" />
-        <HeaderMenuList />
-      </section>
-    </section>
-
     <div class="background_mob_sec"></div>
 
     <section class="right-header desktop-header">
@@ -827,13 +774,13 @@ export default {
 
           headerMenu.css("display", "inline");
 
-          menuCloseButtonIcon
-            .addClass("fa-angle-right", 200)
-            .removeClass("fa-angle-left");
+          // menuCloseButtonIcon
+          //   .addClass("fa-angle-right", 200)
+          //   .removeClass("fa-angle-left");
 
-          rightHeaderDesktop.removeClass("little_header", 200);
-          littleMainHeader.removeClass("little-main-header", 200);
-          main.removeClass("little-main", 200);
+          rightHeaderDesktop.removeClass("little_header", 0);
+          littleMainHeader.removeClass("little-main-header", 0);
+          main.removeClass("little-main", 0);
 
           nextMove = "shrink";
 
@@ -851,137 +798,15 @@ export default {
             "text-align": "center",
           });
 
-          menuCloseButtonIcon
-            .addClass("fa-angle-left", 200)
-            .removeClass("fa-angle-right", 200);
+          // menuCloseButtonIcon
+          //   .addClass("fa-angle-left", 200)
+          //   .removeClass("fa-angle-right", 200);
 
-          rightHeaderDesktop.addClass("little_header", 200);
-          littleMainHeader.addClass("little-main-header", 200);
-          main.addClass("little-main", 200);
+          rightHeaderDesktop.addClass("little_header", 0);
+          littleMainHeader.addClass("little-main-header", 0);
+          main.addClass("little-main", 0);
 
           nextMove = "expand";
-        }
-      });
-    },
-    toggleShowHeader() {
-      var self = this;
-      var showHeaderButtonElement = $(".show-header");
-      var closeHeaderButtonMobile = $(".close_menu_mob ");
-      var flag = true;
-      var rightHeader = $(".right-header.mobile-header");
-      var back = $(".background_mob_sec");
-      var closeHeaderButtonMobileLinks = $(".mobile-header .header-menu a");
-      if (self.showSnapShot)
-        rightHeader.animate(
-          {
-            right: "0",
-          },
-          800
-        );
-      setTimeout(() => {
-        rightHeader.animate(
-          {
-            right: "-300",
-          },
-          800,
-          undefined,
-          function () {
-            self.menuClosed = true;
-          }
-        );
-      }, 2000);
-      showHeaderButtonElement.on("click", function () {
-        rightHeader.animate({ scrollTop: 0 }, "fast");
-
-        if (flag === true) {
-          rightHeader.animate(
-            {
-              right: "0",
-            },
-            300
-          );
-
-          back.fadeIn();
-
-          flag = false;
-        } else {
-          rightHeader.animate(
-            {
-              right: "-300px",
-            },
-            300
-          );
-
-          flag = true;
-        }
-      });
-      closeHeaderButtonMobile.on("click", function () {
-        if (flag === true) {
-          rightHeader.animate(
-            {
-              right: "0",
-            },
-            300
-          );
-
-          flag = false;
-        } else {
-          rightHeader.animate(
-            {
-              right: "-300px",
-            },
-            300
-          );
-
-          back.fadeOut();
-
-          flag = true;
-        }
-      });
-      closeHeaderButtonMobileLinks.on("click", function () {
-        if (flag === true) {
-          rightHeader.animate(
-            {
-              right: "0",
-            },
-            300
-          );
-
-          flag = false;
-        } else {
-          rightHeader.animate(
-            {
-              right: "-300px",
-            },
-            300
-          );
-
-          back.fadeOut();
-
-          flag = true;
-        }
-      });
-      back.on("click", function () {
-        if (flag === true) {
-          rightHeader.animate(
-            {
-              right: "0",
-            },
-            300
-          );
-
-          flag = false;
-        } else {
-          rightHeader.animate(
-            {
-              right: "-300px",
-            },
-            300
-          );
-
-          back.fadeOut();
-
-          flag = true;
         }
       });
     },
@@ -1078,7 +903,6 @@ export default {
     });
     this.init();
     this.toggleHeader();
-    this.toggleShowHeader();
   },
   created() {
     var self = this;
@@ -1106,6 +930,9 @@ export default {
     });
   },
   watch: {
+    currentUser(user) {
+      this.$parent.currentUser = user;
+    },
     $route(route) {
       if (
         !this.$parent.currentUser.user_info.is_verified &&

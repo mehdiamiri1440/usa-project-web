@@ -105,17 +105,18 @@
 }
 
 .button-icon-wrapper {
-  display: inline;
-}
-
-.button-icon-wrapper {
-  display: inline;
+  display: inline-block;
+  position: relative;
 }
 
 .spinner-border {
   position: absolute;
-  left: 50px;
-  top: 19px;
+  left: 2px;
+  top: 5px;
+  width: 1.5rem;
+  height: 1.5rem;
+  color: #fff;
+  border-width: 0.25rem;
 }
 
 .upload-error {
@@ -134,6 +135,9 @@
   .upload-error {
     text-align: center;
   }
+  .action-button-wrapper {
+    margin-bottom: 80px;
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -146,11 +150,6 @@
     font-size: 18px;
     font-weight: 500;
     padding: 13px 27px;
-  }
-  .spinner-border {
-    position: absolute;
-    left: 27px;
-    top: 15px;
   }
 
   .green-button.next {

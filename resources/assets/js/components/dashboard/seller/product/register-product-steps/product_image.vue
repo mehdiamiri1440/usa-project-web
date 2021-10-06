@@ -31,8 +31,12 @@
 
 .spinner-border {
   position: absolute;
-  left: 19px;
-  top: 9px;
+  left: 21px;
+  top: 11px;
+  width: 1.5rem;
+  height: 1.5rem;
+  color: #fff;
+  border-width: 0.25rem;
 }
 
 .submit-button i {
@@ -102,6 +106,9 @@ label {
   .title-contents {
     margin-top: 40px;
   }
+  .submit-button-wrapper {
+    margin: 15px auto 100px;
+  }
 }
 </style>
 
@@ -129,6 +136,8 @@ label {
           :uploadUploadAuto="false"
           :imageWrapperSize="'col-xs-6'"
           :isImageReset="filesReset"
+          imageAccessUploadCount="4"
+          :maximum="4"
         />
       </div>
 

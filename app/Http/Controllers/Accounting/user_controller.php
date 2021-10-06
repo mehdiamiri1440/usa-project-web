@@ -13,6 +13,7 @@ use App\Http\Controllers\Notification\sms_controller;
 use DB;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
 
 class user_controller extends Controller
 {
@@ -158,7 +159,7 @@ class user_controller extends Controller
 
         DB::table('client_meta_datas')->insert($meta_data);
 
-        if(! is_null($device_id)){
+        if( ! is_null($device_id)){
             if($user->is_blocked == false){
                 $this->block_user_if_already_has_been_blocked_on_this_device($device_id,$user_id);
             }
@@ -182,6 +183,14 @@ class user_controller extends Controller
             DB::table('myusers')->where('id',$user_id)
                                     ->update(['is_blocked' => true]);
 
+            $now = Carbon::now();
+            DB::table('admin_notes')->insert([
+                'created_at' => $now,
+                'updated_at' => $now,
+                'note' => 'مسدود شده به دلیل مسدود بودن حساب های دیگر رو این دستگاه',
+                'myuser_id' => $user_id
+            ]);
+
             \Session::flush();
             \Session::save();
         }
@@ -198,6 +207,14 @@ class user_controller extends Controller
 
         DB::table('myusers')->whereIn('id',$blocking_user_ids)
                                 ->update(['is_blocked' => true]);
+
+        $now = Carbon::now();
+        DB::table('admin_notes')->insert([
+            'created_at' => $now,
+            'updated_at' => $now,
+            'note' => 'مسدود شده چون حساب کاربری جدیدتری که رو همین دستگاه ساخته شده مسدود شده است.',
+            'myuser_id' => $user_id
+        ]);
     }
 
     public function does_user_name_already_exists(Request $request)
@@ -627,4 +644,139 @@ class user_controller extends Controller
             'msg' => 'unAuthorized Access!'
         ],404);
     }
+
+    public function get_referral_credit_amount()
+    {
+        $user_id = session('user_id');
+        $invited_users = [];
+
+        $wallet_balance = DB::table('myusers')->where('id',$user_id)->first()->wallet_balance;
+
+        $referred_users_ids = DB::table('referred_users')
+                                    ->where('myuser_id',$user_id)
+                                    ->pluck('referred_user_id');
+
+        if(count($referred_users_ids) == 0 ){
+            return response()->json([
+                'status' => true,
+                'credit' => 0,
+                'invited_users' => $invited_users,
+                'wallet_balance' => $wallet_balance
+            ]);
+        }
+
+        $refered_users_payment_records = DB::table('payment_logs')
+                            ->join('gateway_transactions','gateway_transactions.id','=','payment_logs.transaction_id')
+                            ->where('gateway_transactions.status','SUCCEED')
+                            ->whereNotNull('gateway_transactions.payment_date')
+                            ->whereIn('payment_logs.myuser_id',$referred_users_ids)
+                            ->pluck('gateway_transactions.price');
+
+        $invited_users = $this->get_the_user_referred_users($user_id);
+
+        if(count($refered_users_payment_records) > 0)
+        {
+            $credit = $refered_users_payment_records->sum() / config('subscriptionPakage.referred-credit-divider');
+
+            return response()->json([
+                'status' => true,
+                'credit' => $credit,
+                'invited_users' => $invited_users,
+                'wallet_balance' => $wallet_balance
+            ]);
+        }
+
+
+        return response()->json([
+            'status' => true,
+            'credit' => 0,
+            'invited_users' => $invited_users,
+            'wallet_balance' => $wallet_balance
+        ]);
+    }
+
+    protected function get_the_user_referred_users($user_id)
+    {
+        $users = DB::table('myusers')
+                        ->join('referred_users','referred_users.referred_user_id','=','myusers.id')
+                        ->join('profiles',function($q){
+                            $q->on('myusers.id','=','profiles.myuser_id')
+                                ->whereRaw('profiles.id in (select MAX(p.id) from profiles as p join myusers as u on p.myuser_id = u.id and p.confirmed = true group by u.id)');
+                        })
+                        ->where('referred_users.myuser_id',$user_id)
+                        ->where('profiles.confirmed',true)
+                        ->select([
+                            'myusers.id',
+                            'myusers.first_name',
+                            'myusers.last_name',
+                            'myusers.user_name',
+                            'profiles.profile_photo'
+                        ])
+                        ->orderBy('referred_users.created_at','desc')
+                        ->get();
+        
+
+        foreach($users as $user)
+        {
+            $user->credit = $this->get_user_purchase_volume($user->id) / config('subscriptionPakage.referred-credit-divider');
+        }
+
+        return $users;
+    }
+
+    protected function get_user_purchase_volume($user_id)
+    {
+        $purchase_volume = DB::table('payment_logs')
+                            ->join('gateway_transactions','gateway_transactions.id','=','payment_logs.transaction_id')
+                            ->where('gateway_transactions.status','SUCCEED')
+                            ->whereNotNull('gateway_transactions.payment_date')
+                            ->where('payment_logs.myuser_id',$user_id)
+                            ->pluck('gateway_transactions.price')
+                            ->sum();
+
+        return $purchase_volume;
+    }
+
+    public function store_photo(Request $request)
+    {
+        $this->validate($request,[
+            'profile_image' => 'required|image',
+            'text' => 'required'
+        ]);
+
+        if($request->hasFile('profile_image')) {
+            
+            //get filename with extension
+            $filenamewithextension = $request->file('profile_image')->getClientOriginalName();
+
+            //get filename without extension
+            $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+
+            //get file extension
+            $extension = $request->file('profile_image')->getClientOriginalExtension();
+
+            //filename to store
+            $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+
+            //Upload File to external server
+            $request->file('profile_image')->store('tests','sftp');
+            // Storage::disk('sftp')->put($filenametostore, fopen($request->file('profile_image'), 'r+'));
+
+            //Store $filenametostore in the database
+
+            return response()->json([
+                'status' => true,
+                'msg' => 'file uploaded'
+            ]);
+        }
+        else{
+            return response()->json([
+                'status' => false,
+                'msg' => 'no file!'
+            ]);
+        }
+
+    }
+
+        
 }

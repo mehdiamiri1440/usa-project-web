@@ -7,7 +7,7 @@
   left: calc(50% - 342px);
   top: 65px;
   margin-bottom: 50px;
-  height: 100%;
+  height: calc(100% + 70px);
   direction: rtl;
 }
 
@@ -119,6 +119,9 @@
 }
 
 @media screen and (max-width: 767px) {
+  .main-content .section-title {
+    margin: 0 15px 30px;
+  }
   .main-section-wrapper {
     margin: 0px auto;
   }

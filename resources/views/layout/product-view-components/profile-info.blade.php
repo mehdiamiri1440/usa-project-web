@@ -1,4 +1,5 @@
 <div class="user-info-section-wrapper">
+  
   @if($product['user_info']->active_pakage_type == 3)
   <div
     class="user-info-wrapper wrapper-bg active">
@@ -6,7 +7,9 @@
     <div
     class="user-info-wrapper wrapper-bg ">
     @endif
-  
+
+
+    <div class="user-link-wrapper">
       <a 
         href="/profile/<?php echo $product['user_info']->user_name ?>"
         class="user-information-link text-rtl"
@@ -28,7 +31,7 @@
             />
           </div>
           @endif
-
+          
           @if($product['user_info']->active_pakage_type == 3)
             <div
               class="valid-icon"
@@ -67,72 +70,174 @@
             </div>
           @endif
         </div>
-          <div class="user-information-content">
+
+      
+  
+
+        <div class="user-information-content">
           <p >
             {{
                $product['user_info']->first_name . ' ' . $product['user_info']->last_name
             }}
-            @if($product['user_info']->is_verified)
-            <button
-              v-if="$parent.product.user_info.is_verified"
-              @click.prevent
-              class="verified-user"
-              data-container="body"
-              data-toggle="popover"
-              data-placement="bottom"
-              :data-content="$parent.verifiedUserContent"
-              title
-            >
-              <i class="fa fa-certificate"></i>
-            </button>
-            @endif
           </p>
-          @if($product['user_info']->response_rate)
-          <p
-            class="response-rate">
-            احتمال پاسخ گویی
-            <span >
-              {{
-                $product['user_info']->response_rate . '%'
-              }}
-            </span>
-          </p>
-          @endif
-
           @if($product['user_info']->active_pakage_type == 3)
           <p
-            class="user-valid-text"
-          >
-            فروشنده ویژه
-          </p>
-          @else
-          <p  class="user-position">فروشنده</p>
-          @endif
-            
-          <div class="user-info-actions hidden-xs hidden-sm hidden-md">
-            <button
-                class="green-button green-button-o"
-                >مشاهده پروفایل
-            </button>
-
-            <button
-                class="green-button"
+              class="user-valid-text"
             >
-                <i class="fa fa-comment-alt"></i>
-
-                ارسال پیام
-            </button>
-
-
-          
-          </div>
-            <span class="more-info hidden-lg">
-            مشاهده پروفایل
-            <i class="fa fa-angle-left"></i>
-            </span>
+              فروشنده ویژه
+            </p>
+            @else
+            <p  class="user-position">فروشنده</p>
+            @endif
         </div>
-      
+
       </a>
+      <div class="user-data-wrapper text-rtl col-xs-12">
+        <ul>
+          <li>
+            <div class="icon-wrapper">
+              <i class="fa fa-star"> </i>
+            </div>
+            <div class="content-wrapper rating-section">
+              <span
+                class="pull-right"
+              >4.5</span>
+              <div class="rating-stars pull-right">
+                <p class="stars-wrapper">
+                  <span >
+                    <span>1</span>
+
+                    <i
+                      class="fa fa-star yellow-text"
+                    ></i>
+                  </span>
+                  <span >
+                    <span>2</span>
+
+                    <i
+                      class="fa fa-star yellow-text"
+                    ></i>
+                  </span>
+                  <span >
+                    <span>3</span>
+
+                    <i
+                      class="fa fa-star yellow-text"
+                    ></i>
+                  </span>
+                  <span >
+                    <span>4</span>
+
+                    <i
+                      class="fa fa-star yellow-text"
+                    ></i>
+                  </span>
+                  <span >
+                    <span>5</span>
+
+                    <i
+                      class="fa fa-star yellow-text"
+                    ></i>
+                  </span>
+                </p>
+              </div>
+              <span
+                class="pull-right brand-text"
+              >
+              (10 نظر)
+              </span>
+            </div>
+          </li> 
+          
+          @if($product['user_info']->response_rate)
+          <li>
+            <div class="icon-wrapper">
+              <i class="fa fa-exchange-alt"> </i>
+            </div>
+            <div class="content-wrapper rating-section">
+              <p
+                class="info-text"
+              >
+                احتمال پاسخ گویی
+                <span
+                  class="red-text"
+                >
+                {{
+                  $product['user_info']->response_rate . '%'
+                }}</span>
+              </p>
+            </div>
+          </li>
+          @endif
+          <li>
+            <div class="icon-wrapper ">
+              @if($product['user_info']->is_verified)
+
+            
+              <button class="verified-user blue-text"
+                @else
+              <button class="verified-user gray-text"
+                @endif
+                class="verified-user"
+                data-container="body"
+                data-toggle="popover"
+                data-placement="bottom"
+                :data-content="$parent.verifiedUserContent"
+              >
+                <i class="fa fa-certificate"></i>
+              </button>
+            </div>
+            <div class="content-wrapper rating-section">
+              @if($product['user_info']->is_verified)
+              <span
+                class="blue-text"
+                v-text="'احراز هویت شده'"
+              ></span>
+              @else
+              <span >
+                احراز هویت نشده
+              </span>
+              @endif
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="user-info-actions text-rtl ">
+        <button
+          class="green-button green-button-alt"
+        >
+          <i class="fa fa-comment-alt"></i>
+
+          ارسال پیام
+        </button>
+        
+
+      </div>
+      @if($product['profile_info']->profile_description)
+      <div  class="user-description-wrapper text-right">
+        <p class="description-title">توضیحات فروشنده</p>
+        <p
+          id="user-description"
+          class="user-description"
+          aria-expanded="false"
+        >
+          <span>
+            {{$product['profile_info']->profile_description}}
+          </span>
+        </p>
+        <a
+          role="button"
+          class="collapsed"
+          id="note-close"
+          data-toggle="collapse"
+          href="#user-description"
+          aria-expanded="false"
+        ></a>
+      </div>
+      @endif
+    </div>
+  
+
     </div>
 
     

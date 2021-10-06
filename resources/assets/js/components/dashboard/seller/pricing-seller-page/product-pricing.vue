@@ -224,7 +224,7 @@ input[type="number"] {
 
 .fix-botton-wraper {
   position: fixed;
-  bottom: 0;
+  bottom: 59px;
   left: 0;
   width: 100%;
   z-index: 1;
@@ -246,6 +246,10 @@ input[type="number"] {
 .fix-botton-wraper button i {
   position: relative;
   top: 2px;
+}
+
+.pricing-wrapper {
+  margin-bottom: 130px;
 }
 
 @media screen and (max-width: 1300px) {
@@ -357,25 +361,10 @@ input[type="number"] {
 </style>
 <template>
   <div class="col-xs-12 pricing-section-wrapper">
-    <!-- payment loader -->
-    <div v-if="doPaymentLoader" class="main-loader-content">
-      <div class="pricing-loader-icon">
-        <div class="lds-ring">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-        <p class="pricing-loader-text text-rtl">
-          در حال انتقال به درگاه پرداخت . . .
-        </p>
-      </div>
-    </div>
-
     <!-- end payment loader -->
     <div class="row">
       <div class="col-xs-12">
-        <div class="header-section">
+        <div class="header-section hidden-xs hidden-sm">
           <p>افزایش ظرفیت</p>
         </div>
 
@@ -453,7 +442,10 @@ input[type="number"] {
                   <span class="currency">تومان</span>
                   <span class="price-date">(سالانه)</span>
                 </p>
-                <button class="green-button" @click.prevent="doPayment()">
+                <button
+                  class="green-button"
+                  @click.prevent="openPaymentModal()"
+                >
                   افزایش ظرفیت
                 </button>
               </div>
@@ -461,7 +453,7 @@ input[type="number"] {
           </div>
         </div>
       </div>
-      <div class="col-xs-12">
+      <div class="col-xs-12 pricing-wrapper">
         <div class="row">
           <div class="header-section col-xs-12">
             <p>ارتقا عضویت</p>
@@ -487,6 +479,7 @@ input[type="number"] {
 import ProductPricing from "./pricing-tables/pricing-packages.vue";
 import productPricingContents from "./pricing-tables/pricing-package-contents";
 import swal from "../../../../sweetalert.min.js";
+import { eventBus } from "../../../../router/router";
 
 export default {
   props: ["offerTime"],
@@ -499,8 +492,6 @@ export default {
         totalPrice: "",
       },
       statusData: "",
-      doPaymentLoader: false,
-
       productPricing: [
         {
           priceName: "عضویت ویژه",
@@ -593,19 +584,15 @@ export default {
       var $myGroup = $(".item-content");
       $myGroup.find(".collapse.in").collapse("hide");
     },
-    doPayment: function () {
-      this.doPaymentLoader = true;
-
-      let self = this;
-
-      this.registerComponentStatistics(
-        "payment",
-        "product-capacity",
-        self.productPriceData.count
-      );
-
-      window.location.href =
-        "/payment/product-capacity/" + this.productPriceData.count;
+    openPaymentModal() {
+      let paymentData = {
+        paymentName: "productPriceData",
+        count: this.productPriceData.count,
+        totalPrice:
+          this.productPriceData.unitPrice * this.productPriceData.count,
+      };
+      eventBus.$emit("peymentMethodData", paymentData);
+      $("#payment-type-modal").modal("show");
     },
     registerComponentStatistics: function (
       categoryName,

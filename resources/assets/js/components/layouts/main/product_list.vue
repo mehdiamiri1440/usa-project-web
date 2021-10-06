@@ -22,6 +22,23 @@
   left: calc(50% - 25px);
 }
 
+.more-product-wrapper {
+  float: right;
+  width: 100%;
+  position: relative;
+}
+
+.more-product-wrapper .spinner-border {
+  top: 30px;
+  width: 4rem;
+  height: 4rem;
+}
+
+.more-product-wrapper p {
+  margin-top: 40px;
+  color: #999;
+}
+
 .filter-loader-wrapper {
   position: absolute;
   top: 0;
@@ -97,7 +114,7 @@ a.close-dialog-popup {
 .flat-plust-icon {
   position: fixed;
   right: 15px;
-  bottom: 15px;
+  bottom: 70px;
   z-index: 3;
 }
 
@@ -279,40 +296,6 @@ li.active a::after {
 
 .main-image {
   float: right;
-}
-
-.load-more-button {
-  text-align: center;
-
-  margin: 15px auto;
-}
-
-.load-more-button button {
-  border: 1px solid;
-
-  padding: 15px 30px;
-
-  height: initial;
-
-  background: #fff;
-
-  position: relative;
-
-  top: 0;
-
-  border-radius: 12px;
-
-  transition: 200ms;
-
-  color: #00c569;
-}
-
-.load-more-button button:hover {
-  top: -3px;
-
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
-
-  transition: 200ms;
 }
 
 .btn-loader {
@@ -801,6 +784,9 @@ div.items-wrapper {
 }
 
 @media screen and (max-width: 767px) {
+  #article-list {
+    padding-bottom: 70px;
+  }
   #article-list.grid-items-wrapper {
     margin-left: 0 !important;
     margin-right: 0 !important;
@@ -1080,10 +1066,7 @@ div.items-wrapper {
         <!-- /.modal-dialog -->
       </div>
     </div>
-    <CategoriesModal
-      :categoryList="categoryList"
-      :modalSubCategory="modalSubCategory"
-    />
+
     <div
       v-if="!currentUser.user_info"
       class="flat-plust-icon hidden-lg hidden-md"
@@ -1417,37 +1400,11 @@ div.items-wrapper {
                     </div>
                   </div>
                 </div>
-                <div
-                  class="load-more-button col-xs-12"
-                  v-if="continueToLoadProducts === true"
-                >
-                  <button
-                    class="btn btn-loader"
-                    :disabled="loadMoreActive"
-                    @click.prevent="feed()"
-                  >
-                    <div class="btn-content">
-                      <span class="hidden-xs text-rtl" v-show="!loadMoreActive">
-                        مشاهده محصولات بیشتر
-                        <i class="fa fa-plus"></i>
-                      </span>
-
-                      <span
-                        class="hidden-sm hidden-md hidden-lg text-rtl"
-                        v-show="!loadMoreActive"
-                      >
-                        محصولات بیشتر
-                        <i class="fa fa-plus"></i>
-                      </span>
-
-                      <div
-                        v-show="loadMoreActive"
-                        class="btn-loader-active-wrapper"
-                      >
-                        <img src="../../../../img/gif/loading.gif" />
-                      </div>
-                    </div>
-                  </button>
+                <div class="more-product-wrapper" v-if="loadMoreActive">
+                  <div class="spinner-border">
+                    <span class="sr-only"></span>
+                  </div>
+                  <p class="text-center text-rtl">درحال دریافت اطلاعات ...</p>
                 </div>
               </div>
             </section>
@@ -1634,7 +1591,6 @@ import ProductAsideCategories from "./product_components/sidebar/product_aside_c
 import searchNotFound from "./main_components/search-not-found";
 import { eventBus } from "../../../router/router";
 import StickySidebar from "../../../stickySidebar.js";
-import CategoriesModal from "./main_components/categories-modal.vue";
 var visible = false;
 export default {
   components: {
@@ -1642,7 +1598,6 @@ export default {
     ProductGridArticle,
     ProductAsideCategories,
     searchNotFound,
-    CategoriesModal,
   },
   props: ["assets", "str", "user_id", "categoryList"],
   data: function () {
@@ -1676,7 +1631,6 @@ export default {
       popUpMsg: "",
       submiting: false,
       loading: false,
-      bottom: false,
       loadMoreActive: false,
       searchTextTimeout: null,
       sortOption: "BM",
@@ -1730,50 +1684,53 @@ export default {
       }
 
       var searchValueText = searchValue;
+      self.checkCurrentUser();
 
-      axios.post("/user/profile_info").then(function (response) {
-        self.currentUser = response.data;
-        if (searchValueText) {
-          self.registerComponentStatistics(
-            "homePage",
-            "search-text",
-            searchValueText
-          );
-          self.searchText = searchValueText;
-          self.submiting = false;
-        } else {
-          self.loading = true;
+      if (searchValueText) {
+        self.registerComponentStatistics(
+          "homePage",
+          "search-text",
+          searchValueText
+        );
+        self.searchText = searchValueText;
+        self.submiting = false;
+      } else {
+        self.loading = true;
 
-          self.fromProductCount = 0;
-          self.productCountInPage = 16;
+        self.fromProductCount = 0;
+        self.productCountInPage = 16;
 
-          let getProductsData = {
-            from_record_number: self.fromProductCount,
-            response_rate: self.$parent.productByResponseRate,
-            to_record_number: self.productCountInPage,
-            sort_by: self.sortOption,
-          };
-          if (self.province.id) {
-            getProductsData.province_id = self.province.id;
-          }
-          if (self.city.id) {
-            getProductsData.city_id = self.city.id;
-          }
-
-          axios
-            .post("/user/get_product_list", getProductsData)
-            .then(function (response) {
-              self.products = response.data.products;
-              //                                localStorage.removeItem('productCountInPage')
-              //                                resolve(self.loading = false);
-              self.submiting = false;
-              setTimeout(function () {
-                self.sidebarScroll();
-              }, 500);
-            });
+        let getProductsData = {
+          from_record_number: self.fromProductCount,
+          response_rate: self.$parent.productByResponseRate,
+          to_record_number: self.productCountInPage,
+          sort_by: self.sortOption,
+        };
+        if (self.province.id) {
+          getProductsData.province_id = self.province.id;
         }
-        //                    }).catch(error=>reject(error));
-      });
+        if (self.city.id) {
+          getProductsData.city_id = self.city.id;
+        }
+
+        axios
+          .post("/user/get_product_list", getProductsData)
+          .then(function (response) {
+            self.products = response.data.products;
+            //                                localStorage.removeItem('productCountInPage')
+            //                                resolve(self.loading = false);
+            self.submiting = false;
+            setTimeout(function () {
+              self.sidebarScroll();
+            }, 500);
+          });
+      }
+      //                    }).catch(error=>reject(error));
+    },
+    checkCurrentUser() {
+      if (this.$parent.currentUser.user_info) {
+        this.currentUser = this.$parent.currentUser;
+      }
     },
     feed() {
       if (this.products.isEmptyObject == true) {
@@ -1798,10 +1755,12 @@ export default {
             sort_by: self.sortOption,
           })
           .then(function (response) {
+            if (!response.data.products.length) {
+              self.continueToLoadProducts = false;
+            }
             if (self.products && self.products.length) {
               self.products = self.products.concat([...response.data.products]);
             }
-            //                      localStorage.productCountInPage=JSON.stringify(self.productCountInPage)
             self.submiting = false;
             if (self.products.length + 1 < self.productCountInPage) {
               self.continueToLoadProducts = false;
@@ -1858,6 +1817,9 @@ export default {
         axios
           .post("/user/get_product_list", searchObject)
           .then(function (response) {
+            if (!response.data.products.length) {
+              self.continueToLoadProducts = false;
+            }
             if (Array.isArray(self.products)) {
               self.products = self.products.concat(response.data.products);
             }
@@ -2052,29 +2014,19 @@ export default {
         fatal: fatal,
       });
     },
-    infiniteScrollHandler: function () {
-      let lastOffset = 0;
-
-      window.onscroll = () => {
-        if (
-          window.location.pathname.includes("product-list") &&
-          !window.location.pathname.includes("category")
-        ) {
-          var bottom =
-            document.documentElement.scrollTop + window.innerHeight >
-            document.documentElement.offsetHeight -
-              document.documentElement.scrollTop / 2;
-
-          let newOffset = document.documentElement.offsetHeight;
-
-          if (bottom) {
-            if (newOffset > lastOffset + 100) {
-              lastOffset = document.documentElement.offsetHeight;
-              this.feed();
-            }
+    infiniteScrollHandler() {
+      $(window).scroll(() => {
+        if (this.$route.name == "productList") {
+          if (
+            $(window).scrollTop() >=
+              ($(document).height() - $(window).height() - 100) / 2 &&
+            !this.loadMoreActive &&
+            this.continueToLoadProducts
+          ) {
+            this.feed();
           }
         }
-      };
+      });
     },
     openSortModal() {
       $("#filter-modal").modal("show");
@@ -2219,10 +2171,8 @@ export default {
         this.init();
       }
     },
-    bottom(bottom) {
-      if (bottom) {
-        //this.feed()
-      }
+    "$parent.currentUser"(user) {
+      this.checkCurrentUser();
     },
   },
   created() {

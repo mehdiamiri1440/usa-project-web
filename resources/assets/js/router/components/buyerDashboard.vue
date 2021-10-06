@@ -1,7 +1,20 @@
+<style >
+.profile-carosel .owl-nav {
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  width: 100%;
+  margin-top: -10px;
+  top: calc(50% - 10px);
+  direction: ltr;
+  padding: 0 15px;
+  height: 0;
+}
+</style>
 <style scoped>
 #main {
   margin-right: 250px;
-  margin-top: 59px;
+  margin-top: 42px;
   position: relative;
 }
 #main.has-verification-alert {
@@ -16,6 +29,9 @@
   #main,
   #main.little-main {
     margin-right: 0 !important;
+  }
+  #main.has-verification-alert {
+    margin-top: 81px;
   }
 }
 </style>
@@ -74,6 +90,16 @@ export default {
       verificationAlert: false,
     };
   },
+  methods: {
+    handleBackKeys: function () {
+      if (window.history.state) {
+        history.pushState(null, null, window.location);
+      }
+      $(window).on("popstate", function (e) {
+        $("#description-modal").modal("hide");
+      });
+    },
+  },
   mounted: function () {
     axios
       .post("/get_total_unread_messages_for_current_user")
@@ -87,6 +113,8 @@ export default {
   },
   watch: {
     currentUser(user) {
+      this.$parent.currentUser = user;
+
       if (user.profile.created_at)
         this.$parent.currentUserCreatedAt = user.profile.created_at;
     },

@@ -255,9 +255,9 @@ nav.navbar.navbar-category {
   border-bottom: none !important;
 }
 
-nav.navbar.navbar-category .search-input {
+/* nav.navbar.navbar-category .search-input {
   margin-bottom: 0;
-}
+} */
 
 .buskool-main-nav {
   border-bottom: 1px solid #fafafa;
@@ -782,14 +782,13 @@ a.profile-info-wrapper:hover {
 
   .buskool-logo {
     margin: 0 auto;
-    position: absolute;
-    right: calc(50% - 50px);
   }
 
   .buskool-main-nav {
     padding: 6px 0 1px;
     border-bottom: none;
     margin: 0 10px;
+    display: flex;
   }
 
   .search-input {
@@ -937,16 +936,6 @@ a.profile-info-wrapper:hover {
 }
 
 @media screen and (max-width: 550px) {
-  .buskool-logo {
-    margin: 0 auto;
-
-    float: right;
-
-    position: relative;
-
-    right: calc(50% - 95px);
-  }
-
   .buskool-logo .navbar-brand {
     width: 100px;
 
@@ -1111,7 +1100,7 @@ a.profile-info-wrapper:hover {
       }"
     >
       <div class="container-fluid buskool-main-nav">
-        <div class="hidden-md hidden-sm hidden-lg mobile-menu-button">
+        <div class="hidden mobile-menu-button">
           <button
             type="button"
             class="navbar-toggle"
@@ -1136,7 +1125,7 @@ a.profile-info-wrapper:hover {
           </router-link>
         </div>
 
-        <div class="user-auth-info-wrapper navbar-nav">
+        <div class="user-auth-info-wrapper navbar-nav hidden-xs">
           <ul v-if="user_id != ''" class="nav navbar-nav">
             <li>
               <a
@@ -1246,9 +1235,9 @@ a.profile-info-wrapper:hover {
 
             <li class="hidden-xs">
               <router-link
-                v-if="is_seller"
+                v-if="is_seller == 1"
                 class="green-button green-button-alt static-layout"
-                :to="{ name: 'buyAdRequestsSeller' }"
+                :to="{ name: 'mainBuyAdRequests' }"
               >
                 <div class="item-icon">
                   <i class="fa fa-users"></i>
@@ -1274,8 +1263,7 @@ a.profile-info-wrapper:hover {
                 <div class="item-icon register">
                   <i class="fa fa-user static-layout light-green-text"></i>
                 </div>
-                ثبت نام
-                <span class="light-green-text"> رایگان </span>
+                ورود / ثبت نام
               </router-link>
             </li>
 
@@ -1286,7 +1274,7 @@ a.profile-info-wrapper:hover {
               </router-link>
             </li>
 
-            <li class="hidden-xs">
+            <!-- <li class="hidden-xs">
               <router-link
                 class="green-button green-button-alt static-layout"
                 :to="{ name: 'login' }"
@@ -1295,6 +1283,28 @@ a.profile-info-wrapper:hover {
                   <i class="fa fa-sign-in-alt"></i>
                 </div>
                 ورود به باسکول
+              </router-link>
+            </li> -->
+            <li class="hidden-xs">
+              <router-link
+                class="green-button green-button-alt static-layout"
+                :to="{ name: 'mainBuyAdRequests' }"
+              >
+                <div class="item-icon">
+                  <i class="fa fa-users"></i>
+                </div>
+                خریداران
+              </router-link>
+            </li>
+            <li class="hidden-xs">
+              <router-link
+                class="green-button green-button-alt static-layout"
+                :to="{ name: 'productList' }"
+              >
+                <div class="item-icon">
+                  <i class="fas fa-grip-horizontal"></i>
+                </div>
+                فروشندگان
               </router-link>
             </li>
           </ul>
@@ -1447,7 +1457,7 @@ a.profile-info-wrapper:hover {
                 <router-link
                   v-if="is_seller == 1"
                   class="smoothScroll"
-                  :to="{ name: 'buyAdRequestsSeller' }"
+                  :to="{ name: 'mainBuyAdRequests' }"
                   @click="
                     registerComponentStatistics(
                       'header',
@@ -1694,14 +1704,14 @@ export default {
         });
       }
     },
-    logUserOut: function () {
-      localStorage.removeItem("userRoute");
-      this.registerComponentStatistics(
-        "header",
-        "register-login",
-        "click-on-register-login"
-      );
-    },
+    // logUserOut: function () {
+    //   localStorage.removeItem("userRoute");
+    //   this.registerComponentStatistics(
+    //     "header",
+    //     "register-login",
+    //     "click-on-register-login"
+    //   );
+    // },
     registerComponentStatistics: function (
       categoryName,
       actionName,

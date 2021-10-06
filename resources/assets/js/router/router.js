@@ -25,6 +25,17 @@ const router = new Router({
       redirect: "/404",
       children: [
         {
+          path: "my-buskool",
+          name: "myBuskoolSeller",
+          components: {
+            default: (resolve) => {
+              require([
+                "../components/dashboard/my-buskool/my-buskool.vue",
+              ], resolve);
+            },
+          },
+        },
+        {
           path: "password",
           name: "passwordSeller",
           components: {
@@ -42,6 +53,28 @@ const router = new Router({
             default: (resolve) => {
               require([
                 "../components/dashboard/seller/dashboard/status.vue",
+              ], resolve);
+            },
+          },
+        },
+        {
+          path: "referral",
+          name: "referralSeller",
+          components: {
+            default: (resolve) => {
+              require([
+                "../components/dashboard/seller/referral/referral.vue",
+              ], resolve);
+            },
+          },
+        },
+        {
+          path: "invited-users",
+          name: "invitedUsers",
+          components: {
+            default: (resolve) => {
+              require([
+                "../components/dashboard/seller/referral/invited-users.vue",
               ], resolve);
             },
           },
@@ -138,17 +171,6 @@ const router = new Router({
                 },
               },
             },
-            // {
-            //   path: "group-messages",
-            //   name: "groupMessagesSeller",
-            //   components: {
-            //     "group-list": resolve => {
-            //       require([
-            //         "../components/dashboard/group-messages.vue"
-            //       ], resolve);
-            //     }
-            //   }
-            // }
           ],
         },
         {
@@ -162,6 +184,7 @@ const router = new Router({
             },
           },
         },
+
         {
           path: "my-products",
           name: "myProductsSeller",
@@ -215,15 +238,6 @@ const router = new Router({
             },
           },
         },
-        // {
-        //   path: "wallet",
-        //   name: "walletSeller",
-        //   components: {
-        //     default: (resolve) => {
-        //       require(["../components/dashboard/seller/wallet.vue"], resolve);
-        //     },
-        //   },
-        // },
         {
           path: "support",
           name: "supportSeller",
@@ -257,6 +271,17 @@ const router = new Router({
             default: (resolve) => {
               require([
                 "../components/dashboard/seller/profile/change_password.vue",
+              ], resolve);
+            },
+          },
+        },
+        {
+          path: "my-buskool",
+          name: "myBuskoolBuyer",
+          components: {
+            default: (resolve) => {
+              require([
+                "../components/dashboard/my-buskool/my-buskool.vue",
               ], resolve);
             },
           },
@@ -300,17 +325,6 @@ const router = new Router({
                 },
               },
             },
-            // {
-            //   path: "group-messages",
-            //   name: "groupMessagesBuyer",
-            //   components: {
-            //     "group-list": resolve => {
-            //       require([
-            //         "../components/dashboard/group-messages.vue"
-            //       ], resolve);
-            //     }
-            //   }
-            // }
           ],
         },
         {
@@ -500,6 +514,17 @@ const router = new Router({
           },
         },
         {
+          path: "buyAd-requests",
+          name: "mainBuyAdRequests",
+          components: {
+            default: (resolve) => {
+              require([
+                "../components/layouts/main/buyAd-requests.vue",
+              ], resolve);
+            },
+          },
+        },
+        {
           path: "login",
           name: "login",
           components: {
@@ -528,15 +553,29 @@ const router = new Router({
             },
           },
         },
+        // {
+        //   path: "register-inquiry",
+        //   name: "registerInquiry",
+        //   components: {
+        //     default: (resolve) => {
+        //       require([
+        //         "../components/layouts/main/main_components/register-inquiry.vue",
+        //       ], resolve);
+        //     },
+        //   },
+        // },
         {
-          path: "register-inquiry",
-          name: "registerInquiry",
+          path: "invite/:userName",
+          name: "invite",
           components: {
             default: (resolve) => {
-              require([
-                "../components/layouts/main/main_components/register-inquiry.vue",
-              ], resolve);
+              require(["../components/layouts/main/invite.vue"], resolve);
             },
+          },
+          beforeEnter: (to, from, next) => {
+            var userId = window.localStorage.getItem("userId");
+            if (!userId) next();
+            else next("/login");
           },
         },
         // {

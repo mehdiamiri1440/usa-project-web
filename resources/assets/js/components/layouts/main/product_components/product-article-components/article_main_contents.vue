@@ -297,7 +297,7 @@ span {
         @click.prevent="$parent.copyProductLinkToClipBoard"
         class="share-link hidden"
       >
-        <i class="fa fa-share"></i>
+        <i class="fa fa-share-alt"></i>
         <span>اشتراک گذاری</span>
       </router-link>
     </div>

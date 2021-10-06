@@ -46,6 +46,7 @@ class product_controller extends Controller
     ];
     protected $profile_info_sent_by_product_array = [
         'profiles.profile_photo',
+        'profiles.description as profile_description',
     ];
 
     protected $product_register_fields_array = [
@@ -185,7 +186,7 @@ class product_controller extends Controller
 
         $photos_count = $request->images_count;
         foreach (range(0, $photos_count - 1) as $index) {
-            $rules['image_'.$index] = 'image|mimes:png,jpg,jpeg|min:2|max:5000';
+            $rules['image_'.$index] = 'mimes:png,jpg,jpeg|min:2|max:5000';
         }
 
         return $rules;
@@ -206,9 +207,9 @@ class product_controller extends Controller
             $tmp_path = $img->storeAs('thumbnails/products',$file_name);
 
             $thumbnail_path = storage_path('app/public/'.$tmp_path);
-            $media_controller_object->create_thumbnail($thumbnail_path,230,335);
+            $media_controller_object->create_thumbnail($thumbnail_path,230,335,$img);
 
-            $media_controller_object->create_thumbnail(storage_path('app/public/'.$path),700,700);
+            $media_controller_object->create_thumbnail(storage_path('app/public/'.$path),700,700,$img);
             // $media_controller_object->put_water_mark_on_photo(storage_path('app/public/'.$path),'bottom');
 
             $files_path[] = $path;
@@ -368,79 +369,6 @@ class product_controller extends Controller
         return compact('response_rate','response_time','ums'); // UMS stands for unique message senders to this user
     }
 
-    protected function append_related_data_to_given_products($products)
-    {
-        $main_records = $this->product_info_sent_by_product_array;
-        array_walk($main_records,function(&$property_name){
-            $new_value = explode('.',$property_name)[1];
-            $new_value_array = explode(' as ',$new_value);
-            $property_name = sizeof($new_value_array) > 1 ? $new_value_array[1] : $new_value_array[0]; 
-        });
-        
-        $user_records = $this->user_info_sent_by_product_array;
-        array_walk($user_records,function(&$property_name){
-            $new_value = explode('.',$property_name)[1];
-            $new_value_array = explode(' as ',$new_value);
-            $property_name = sizeof($new_value_array) > 1 ? $new_value_array[1] : $new_value_array[0]; 
-        });
-
-        $profile_records = $this->profile_info_sent_by_product_array;
-        array_walk($profile_records,function(&$property_name){
-            $new_value = explode('.',$property_name)[1];
-            $new_value_array = explode(' as ',$new_value);
-            $property_name = sizeof($new_value_array) > 1 ? $new_value_array[1] : $new_value_array[0]; 
-        });
-
-        $result_products = [];
-
-        foreach ($products as $product) {
-            $temp = array();
-            $product_related_photos = product_media::where('product_id',$product->id)
-                ->select('file_path')
-                ->get();
-
-            $product_related_data_tmp = $this->get_product_related_data($product->id);
-    
-            $product_related_data['main'] = new \StdClass;
-            foreach($main_records as $property_name)
-            {
-                if($property_name == 'product_id'){
-                    $product_related_data['main']->id = $product_related_data_tmp->$property_name;
-                }
-                else{
-                    $product_related_data['main']->$property_name = $product_related_data_tmp->$property_name;
-                }
-            }
-
-            $product_related_data['user_info'] = new \StdClass;
-            foreach($user_records as $property_name)
-            {
-                if($property_name == 'user_id'){
-                    $product_related_data['user_info']->id = $product_related_data_tmp->$property_name;
-                }   
-                else{
-                    $product_related_data['user_info']->$property_name = $product_related_data_tmp->$property_name;
-                }
-            }
-
-            $product_related_data['profile_info'] = new \StdClass;
-            foreach($profile_records as $property_name)
-            {
-                $product_related_data['profile_info']->$property_name = $product_related_data_tmp->$property_name;
-            }
-
-            $product_related_data['photos'] = $product_related_photos;
-
-            $product_parent_category_data = $product->category;
-            $product_related_data['main']->category_id = $product_parent_category_data['parent_id'];
-            $product_related_data['main']->category_name = (category::find($product_parent_category_data['parent_id']))['category_name'];
-
-            $result_products[] = $product_related_data;
-        }
-
-        return $result_products;
-    }
-
     protected function get_product_related_data($product_id)
     {
         $selected_items = array_merge($this->product_info_sent_by_product_array,
@@ -495,26 +423,8 @@ class product_controller extends Controller
             ], 404);
         }
 
-        $main_records = $this->product_info_sent_by_product_array;
-        array_walk($main_records,function(&$property_name){
-            $new_value = explode('.',$property_name)[1];
-            $new_value_array = explode(' as ',$new_value);
-            $property_name = sizeof($new_value_array) > 1 ? $new_value_array[1] : $new_value_array[0]; 
-        });
         
-        $user_records = $this->user_info_sent_by_product_array;
-        array_walk($user_records,function(&$property_name){
-            $new_value = explode('.',$property_name)[1];
-            $new_value_array = explode(' as ',$new_value);
-            $property_name = sizeof($new_value_array) > 1 ? $new_value_array[1] : $new_value_array[0]; 
-        });
-
-        $profile_records = $this->profile_info_sent_by_product_array;
-        array_walk($profile_records,function(&$property_name){
-            $new_value = explode('.',$property_name)[1];
-            $new_value_array = explode(' as ',$new_value);
-            $property_name = sizeof($new_value_array) > 1 ? $new_value_array[1] : $new_value_array[0]; 
-        });
+        $product_required_properties = $this->generate_product_required_properties();
 
         $product_related_photos = product_media::where('product_id',$product->id)
                 ->select('file_path')
@@ -522,56 +432,58 @@ class product_controller extends Controller
 
         $product_related_data_tmp = $this->get_product_related_data($product->id);
 
-        $product_related_data['main'] = new \StdClass;
-        foreach($main_records as $property_name)
-        {
-            if($property_name == 'product_id'){
-                $product_related_data['main']->id = $product_related_data_tmp->$property_name;
-            }
-            else{
-                $product_related_data['main']->$property_name = $product_related_data_tmp->$property_name;
-            }
-        }
+        $product_related_data = $this->fill_out_product_required_properties($product,$product_required_properties,$product_related_data_tmp);
 
-        $product_related_data['user_info'] = new \StdClass;
-        foreach($user_records as $property_name)
-        {
-            if($property_name == 'user_id'){
-                $product_related_data['user_info']->id = $product_related_data_tmp->$property_name;
-            }  
-            else{
-                $product_related_data['user_info']->$property_name = $product_related_data_tmp->$property_name;
-            }
-        }
+        // $product_related_data['main'] = new \StdClass;
+        // foreach($main_records as $property_name)
+        // {
+        //     if($property_name == 'product_id'){
+        //         $product_related_data['main']->id = $product_related_data_tmp->$property_name;
+        //     }
+        //     else{
+        //         $product_related_data['main']->$property_name = $product_related_data_tmp->$property_name;
+        //     }
+        // }
 
-        if(($product_related_data['user_info']->wallet_balance >= config('subscriptionPakage.phone-number.view-price') && str_split($product_related_data['user_info']->phone_view_permission)[0] == 1) || (str_split($product_related_data['user_info']->phone_view_permission)[0] == 1 && $product_related_data['user_info']->active_pakage_type > 0) )
-        {
-            $product_related_data['user_info']->has_phone = true;
-        }
-        else{
-            $product_related_data['user_info']->has_phone = false;
-        }
+        // $product_related_data['user_info'] = new \StdClass;
+        // foreach($user_records as $property_name)
+        // {
+        //     if($property_name == 'user_id'){
+        //         $product_related_data['user_info']->id = $product_related_data_tmp->$property_name;
+        //     }  
+        //     else{
+        //         $product_related_data['user_info']->$property_name = $product_related_data_tmp->$property_name;
+        //     }
+        // }
 
-        unset($product_related_data['user_info']->wallet_balance);
+        // if(($product_related_data['user_info']->wallet_balance >= config('subscriptionPakage.phone-number.view-price') && str_split($product_related_data['user_info']->phone_view_permission)[0] == 1) || (str_split($product_related_data['user_info']->phone_view_permission)[0] == 1 && $product_related_data['user_info']->active_pakage_type > 0) )
+        // {
+        //     $product_related_data['user_info']->has_phone = true;
+        // }
+        // else{
+        //     $product_related_data['user_info']->has_phone = false;
+        // }
 
-        $product_related_data['profile_info'] = new \StdClass;
-        foreach($profile_records as $property_name)
-        {
-            $product_related_data['profile_info']->$property_name = $product_related_data_tmp->$property_name;
-        }
+        // unset($product_related_data['user_info']->wallet_balance);
 
-        $product_related_data['user_info']->response_rate = $this->get_user_response_info($product->myuser_id)['response_rate'];
+        // $product_related_data['profile_info'] = new \StdClass;
+        // foreach($profile_records as $property_name)
+        // {
+        //     $product_related_data['profile_info']->$property_name = $product_related_data_tmp->$property_name;
+        // }
 
-        $comment_controller_object = new comment_controller();
-        $product_related_data['user_info']->review_info = $comment_controller_object->get_user_avg_rating_score($product->myuser_id);
+        // $product_related_data['user_info']->response_rate = $this->get_user_response_info($product->myuser_id)['response_rate'];
+
+        // $comment_controller_object = new comment_controller();
+        // $product_related_data['user_info']->review_info = $comment_controller_object->get_user_avg_rating_score($product->myuser_id);
 
 
-        $product_related_data['photos'] = $product_related_photos;
+        // $product_related_data['photos'] = $product_related_photos;
 
-        $product_parent_category_data = $product->category;
-        $product_related_data['main']->category_id = $product_parent_category_data['parent_id'];
-        $product_related_data['main']->category_name = ($category_record = category::find($product_parent_category_data['parent_id']))['category_name'];
-        $product_related_data['main']->super_category_name = (category::find($category_record->parent_id))['category_name'];
+        // $product_parent_category_data = $product->category;
+        // $product_related_data['main']->category_id = $product_parent_category_data['parent_id'];
+        // $product_related_data['main']->category_name = ($category_record = category::find($product_parent_category_data['parent_id']))['category_name'];
+        // $product_related_data['main']->super_category_name = (category::find($category_record->parent_id))['category_name'];
 
         if(session()->has('user_id')){
             $now = Carbon::now();
@@ -593,6 +505,7 @@ class product_controller extends Controller
         }
 
         unset($product_related_data['user_info']->phone_view_permission);
+        unset($product_related_data['user_info']->wallet_balance);
 
         DB::table('products')->where('id',$product->id)->increment('product_view_count');
 
@@ -1061,9 +974,6 @@ class product_controller extends Controller
 
     protected function get_related_products_to_the_given_subcategory($subcategory_id)
     {
-//        $until_date = Carbon::now();
-//        $from_date = Carbon::now()->subDays(28); // last 2 weeks
-
         $related_subcategory_products = product::where('category_id', $subcategory_id)
                                             ->where('confirmed', true)
                                             ->where('is_elevated', false)
@@ -1075,7 +985,7 @@ class product_controller extends Controller
         return $related_subcategory_products;
     }
 
-    protected function get_related_products_to_the_given_product_from_given_products($product, &$products)
+    protected function get_related_products_to_the_given_product_from_given_products($product, &$products,$max_count = 10)
     {
         $result_products = [];
 
@@ -1100,7 +1010,7 @@ class product_controller extends Controller
             if ($matched == true) {
                 $result_products[] = $product_item;
 
-                if (count($result_products) > 10) {
+                if (count($result_products) > $max_count) {
                     break;
                 }
             }
@@ -1517,27 +1427,54 @@ class product_controller extends Controller
 
         //crwler bot has been deteced and will be served by plain html
 
+        return $this->get_product_details_for_blade_page($product_id);
+    }
+
+    protected function get_product_details_for_blade_page($product_id)
+    {
         $product = product::where('id', $product_id)
             ->where('confirmed', true)
             ->first();
 
         if (is_null($product)) {
-            $category_record = DB::table('products')
-                                ->where('products.id',$product_id)
-                                ->where('confirmed',true)
-                                ->selectRaw('products.*,(select category_name from categories where categories.id = products.category_id) as category_name')
-                                ->get()
-                                ->first();
-
-            if($category_record){
-                $category_name = implode('-',explode(' ',$category_record->category_name));
-
-                return redirect("/product-list/category/$category_name",301);
-            }
-
-            return 'Not Found!';
+            return $this->get_redirection_route_for_deleted_product($product_id);
         }
 
+        $product_required_properties = $this->generate_product_required_properties();
+
+        $product_related_data_tmp = $this->get_product_related_data($product->id);
+        
+        $product_related_data = $this->fill_out_product_required_properties($product,$product_required_properties,$product_related_data_tmp);
+
+        $comment_controller_object = new comment_controller();
+        
+        $product_related_data['user_info']->comments = $comment_controller_object->get_pure_user_comments($product->myuser_id);
+        $product_related_data['products'] = $this->get_current_user_products_with_related_media($product->myuser_id);
+
+        //getting related products
+        $subcategory_related_products = $this->get_related_products_to_the_given_subcategory($product->category_id);
+
+        $related_products = $this->get_related_products_to_the_given_product_from_given_products($product, $subcategory_related_products, 50);
+
+        $category_info = $this->get_category_and_subcategory_name($product->category_id);
+
+        foreach ($related_products as $product) {
+            $product->category_name = $category_info['category_name'];
+            $product->subcategory_name = $category_info['subcategory_name'];
+            $product->photo = product_media::where('product_id', $product->id)
+                                                ->get()
+                                                ->first()
+                                                ->file_path;
+        }
+
+        return view('layout.product-detail',[
+            'product' => $product_related_data,
+            'related_products' => $related_products
+        ]);
+    }
+
+    protected function generate_product_required_properties()
+    {
         $main_records = $this->product_info_sent_by_product_array;
         array_walk($main_records,function(&$property_name){
             $new_value = explode('.',$property_name)[1];
@@ -1559,14 +1496,13 @@ class product_controller extends Controller
             $property_name = sizeof($new_value_array) > 1 ? $new_value_array[1] : $new_value_array[0]; 
         });
 
-        $product_related_photos = product_media::where('product_id',$product->id)
-                ->select('file_path')
-                ->get();
+        return compact('main_records','user_records','profile_records');
+    }
 
-        $product_related_data_tmp = $this->get_product_related_data($product->id);
-
+    protected function fill_out_product_required_properties($product,$product_required_properties,$product_related_data_tmp)
+    {
         $product_related_data['main'] = new \StdClass;
-        foreach($main_records as $property_name)
+        foreach($product_required_properties['main_records'] as $property_name)
         {
             if($property_name == 'product_id'){
                 $product_related_data['main']->id = $product_related_data_tmp->$property_name;
@@ -1577,7 +1513,7 @@ class product_controller extends Controller
         }
 
         $product_related_data['user_info'] = new \StdClass;
-        foreach($user_records as $property_name)
+        foreach($product_required_properties['user_records'] as $property_name)
         {
             if($property_name == 'user_id'){
                 $product_related_data['user_info']->id = $product_related_data_tmp->$property_name;
@@ -1595,11 +1531,9 @@ class product_controller extends Controller
             $product_related_data['user_info']->has_phone = false;
         }
 
-        unset($product_related_data['user_info']->wallet_balance);
-        unset($product_related_data['user_info']->phone_view_permission);
 
         $product_related_data['profile_info'] = new \StdClass;
-        foreach($profile_records as $property_name)
+        foreach($product_required_properties['profile_records'] as $property_name)
         {
             $product_related_data['profile_info']->$property_name = $product_related_data_tmp->$property_name;
         }
@@ -1610,6 +1544,10 @@ class product_controller extends Controller
         $product_related_data['user_info']->review_info = $comment_controller_object->get_user_avg_rating_score($product->myuser_id);
 
 
+        $product_related_photos = product_media::where('product_id',$product->id)
+                ->select('file_path')
+                ->get();
+
         $product_related_data['photos'] = $product_related_photos;
 
         $product_parent_category_data = $product->category;
@@ -1617,27 +1555,28 @@ class product_controller extends Controller
         $product_related_data['main']->category_name = ($category_record = category::find($product_parent_category_data['parent_id']))['category_name'];
         $product_related_data['main']->super_category_name = (category::find($category_record->parent_id))['category_name'];
 
-        //getting related products
-        $subcategory_related_products = $this->get_related_products_to_the_given_subcategory($product->category_id);
+        return $product_related_data;
 
-        $related_products = $this->get_related_products_to_the_given_product_from_given_products($product, $subcategory_related_products);
+    }
 
-        $category_info = $this->get_category_and_subcategory_name($product->category_id);
+    protected function get_redirection_route_for_deleted_product($product_id)
+    {
+        $category_record = DB::table('products')
+                                ->where('products.id',$product_id)
+                                ->where('confirmed',true)
+                                ->selectRaw('products.*,(select category_name from categories where categories.id = products.category_id) as category_name')
+                                ->get()
+                                ->first();
 
-        foreach ($related_products as $product) {
-            $product->category_name = $category_info['category_name'];
-            $product->subcategory_name = $category_info['subcategory_name'];
-            $product->photo = product_media::where('product_id', $product->id)
-                                                ->get()
-                                                ->first()
-                                                ->file_path;
+        if($category_record){
+            $category_name = implode('-',explode(' ',$category_record->category_name));
+
+            return redirect("/product-list/category/$category_name",301);
         }
 
-        return view('layout.product-detail',[
-            'product' => $product_related_data,
-            'related_products' => $related_products
-        ]);
+        return 'Not Found!';
     }
+
 
     protected function _bot_detected() {
 

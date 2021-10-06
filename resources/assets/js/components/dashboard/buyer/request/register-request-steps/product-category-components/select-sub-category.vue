@@ -109,6 +109,12 @@ ul li.item button i {
   font-size: 20px;
 }
 
+@media screen and (max-width: 991px) {
+  .action-control-wrapper {
+    margin-bottom: 90px;
+  }
+}
+
 @media screen and (max-width: 767px) {
   .title-contents {
     margin-top: 30px;
