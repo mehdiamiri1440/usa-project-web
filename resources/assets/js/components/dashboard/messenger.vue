@@ -817,12 +817,11 @@ export default {
     },
     sendMessage: function () {
       var self = this;
-      self.isLatestMessage = true;
-
       let tempMsg = self.msgToSend;
       self.msgToSend = "";
 
       if (tempMsg) {
+        self.isLatestMessage = true;
         let msgObject = {
           sender_id: self.currentUserId,
           receiver_id: self.currentContactUserId,
