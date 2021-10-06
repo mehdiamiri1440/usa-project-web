@@ -819,7 +819,7 @@
   background: red;
   color: #fff;
   border: none;
-  width: calc(100% - 15px);
+  width: calc(100% - 30px);
 }
 
 .messenger-alert.danger .actions-wrapper button {
@@ -882,6 +882,7 @@
   .messenger-alert {
     left: 6px;
     right: 6px;
+    width: calc(100% - 15px) !important;
   }
 
   #fitler-modal > div {

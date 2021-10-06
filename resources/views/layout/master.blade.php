@@ -69,17 +69,50 @@
     }
     .main-loader-shape-wrapper {
       position: absolute;
-      height: 70px !important;
+      /* height: 70px !important; */
       bottom: 20%;
       left: calc(50% - 23px);
+      padding: 0;
     }
     /* preloader image style*/
-    .spinner-border{
-      width: 4.5rem;
-      height: 4.5rem;
+    /*spinner and animation styles*/
+  #master-loader-wrapper  .spinner-border {
+    display: inline-block;
+    vertical-align: text-bottom;
+    border: 0.25rem solid currentColor;
+    border-right-color: currentcolor;
+    border-right-color: transparent;
+    border-radius: 50%;
+    -webkit-animation: spinner-border 1s linear infinite;
+    animation: spinner-border 1s linear infinite;
+  }
+  #master-loader-wrapper  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+  @keyframes spinner-border {
+    100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+    #master-loader-wrapper .spinner-border{
+      width: 45px;
+      height: 45px;
       color: #bbb;
       border-width: 3px;
+      box-sizing: border-box;
+      top: 0;
+      position: relative;
     }
+
   </style>
 </head>
 <body >
@@ -165,7 +198,10 @@
 <script src="{{asset('js/app.js')}}" defer></script>
 
 <script>
-
+    document.addEventListener('DOMContentLoaded', (event) => {
+      var x = document.getElementById("master-loader-wrapper");
+      x.style.display = "none";
+    })
     function getUserId(){
         let userId = <?php if(session('user_id')){echo session('user_id');} else echo -1; ?>;
         return userId;
