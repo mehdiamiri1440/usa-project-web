@@ -784,7 +784,11 @@ a#note-close:not(.collapsed):after {
                   data-container="body"
                   data-toggle="popover"
                   data-placement="bottom"
-                  :data-content="$parent.verifiedUserContent"
+                  :data-content="
+                    $parent.product.user_info.is_verified
+                      ? $parent.verifiedUserContent
+                      : `<div class='tooltip-wrapper text-rtl'>اطلاعات هویتی این کاربر احراز نشده است.<br/><a href='/verification'>اطلاعات بیشتر</a> </div>`
+                  "
                 >
                   <i class="fa fa-certificate"></i>
                 </button>
