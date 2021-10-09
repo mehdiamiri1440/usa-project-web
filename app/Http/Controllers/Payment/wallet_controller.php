@@ -141,6 +141,16 @@ class wallet_controller extends Controller
 
             // $this->do_payment_callback(session('app_user_id'),session('payment_amount'));
 
+            $gateway = \Gateway::verify();
+            $trackingCode = $gateway->trackingCode();
+            $refId = $gateway->refId();
+            $cardNumber = $gateway->cardNumber();
+
+            
+            if(is_integer($user_id) && is_integer($payment_amount)){
+                GiveReferralReward::dispatch($user_id,$payment_amount);
+            }
+
             // عملیات خرید با موفقیت انجام شده است
             // در اینجا کالا درخواستی را به کاربر ارائه میکنم
             
