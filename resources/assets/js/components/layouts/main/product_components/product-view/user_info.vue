@@ -437,13 +437,9 @@ a#note-close:not(.collapsed):after {
 
   .user-information-content {
     float: right;
-
     text-align: right;
-
     margin-right: 15px;
-
     padding-top: 6px;
-
     width: calc(100% - 125px);
   }
 
@@ -968,6 +964,7 @@ export default {
   data() {
     return {
       base: "",
+      collapseFlag: true,
     };
   },
   methods: {
@@ -998,6 +995,35 @@ export default {
       } else {
         $("#note-close").css("display", "block");
       }
+      this.setDescriptionStatistics();
+    },
+    setDescriptionStatistics() {
+      $("#note-close.collapsed").on("click", () => {
+        if (this.collapseFlag) {
+          this.$parent.registerComponentStatistics(
+            "product",
+            "user-more-info",
+            "click on 'see more' in user info section"
+          );
+          this.collapseFlag = false;
+        }
+      });
+    },
+    setUserInfoStatistics() {
+      $(".user-information-content").on("click", () => {
+        this.$parent.registerComponentStatistics(
+          "product",
+          "show-profile-by-name",
+          "click on user name to show user profile"
+        );
+      });
+      $(".user-information-content-image").on("click", () => {
+        this.$parent.registerComponentStatistics(
+          "product",
+          "show-profile-by-photo",
+          "click on user photo to show user profile"
+        );
+      });
     },
   },
   mounted() {
@@ -1012,6 +1038,7 @@ export default {
         this.$nextTick(() => {
           this.activeComponentTooltip();
           this.userDescriptionStatus();
+          this.setUserInfoStatistics();
         });
       }
     },

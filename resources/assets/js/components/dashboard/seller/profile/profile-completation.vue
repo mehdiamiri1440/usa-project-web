@@ -287,9 +287,19 @@ export default {
       });
     },
     verificationButtonClick() {
+      this.$parent.registerComponentStatistics(
+        "sellerProfileBasic",
+        "route-to-verification",
+        "route to verification page from completion profile"
+      );
       this.$router.push({ name: "profileBasicSellerVeficiation" });
     },
     referralButtonClick() {
+      this.$parent.registerComponentStatistics(
+        "sellerProfileBasic",
+        "route-to-invite-page",
+        "click on seller invite button"
+      );
       this.$router.push({ name: "referralSeller" });
     },
     isDeviceMobile: function () {

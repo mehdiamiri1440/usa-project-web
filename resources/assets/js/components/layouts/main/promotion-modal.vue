@@ -376,7 +376,7 @@
                       </p>
                       <div class="buyAd-buttons-wrapper" v-if="buyAd.has_phone">
                         <button
-                          @click="$parent.openGoldenChatRestrictionModal()"
+                          @click="openGoldenChatRestrictionModal()"
                           class="buyad-button golden-button phone-button"
                           :id="'loader-phone-' + buyAd.id"
                         >
@@ -389,7 +389,7 @@
                           </span>
                         </button>
                         <button
-                          @click="$parent.openGoldenChatRestrictionModal()"
+                          @click="openGoldenChatRestrictionModal()"
                           class="buyad-button send-message-button"
                         >
                           <i class="fas fa-comment-alt"></i>
@@ -398,7 +398,7 @@
                       </div>
                       <button
                         v-else
-                        @click="$parent.openGoldenChatRestrictionModal()"
+                        @click="openGoldenChatRestrictionModal()"
                         class="buyad-button"
                       >
                         <i class="fas fa-comment-alt"></i>
@@ -440,6 +440,9 @@
 
 
 <script>
+
+
+import {eventBus} from "../../../router/router"
 export default {
   data() {
     return {
@@ -453,6 +456,17 @@ export default {
         has_phone: false,
       },
     };
+  },
+  methods:{
+    openGoldenChatRestrictionModal() {
+      eventBus.$emit("modal", "goldenBuyAdReplyLimit");
+
+      this.registerComponentStatistics(
+        "suggestedBuyAdReply",
+        "open-suggestion-buyAd-modal",
+        "click on suggestion buyAd modal"
+      );
+    },
   },
   watch: {
     "$parent.buyAdsGolden"(goldens) {

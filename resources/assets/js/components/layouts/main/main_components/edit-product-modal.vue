@@ -341,9 +341,9 @@ export default {
             eventBus.$emit("modal", "productEditDone");
 
             this.registerComponentStatistics(
-              "product",
+              "messenger",
               "edit-product-price",
-              "product-edited-successfully"
+              "product edited successfully"
             );
           })
           .catch(function (err) {

@@ -199,6 +199,11 @@ export default {
       this.baseUrl = getBase();
     },
     openShareModal() {
+      this.$parent.registerComponentStatistics(
+        "sellerReferral",
+        "open-share-invite-link",
+        "click on send invitation button"
+      );
       let url =
         this.baseUrl + "invite/" + this.$parent.currentUser.user_info.user_name;
       let shareItem = {

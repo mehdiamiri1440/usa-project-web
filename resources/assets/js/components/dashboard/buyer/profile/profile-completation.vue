@@ -291,9 +291,19 @@ export default {
       });
     },
     verificationButtonClick() {
+      this.$parent.registerComponentStatistics(
+        "buyerProfileBasic",
+        "route-to-verification",
+        "route to verification page from completion profile"
+      );
       this.$router.push({ name: "profileBasicBuyerVeficiation" });
     },
     referralButtonClick() {
+      this.$parent.registerComponentStatistics(
+        "buyerProfileBasic",
+        "open-share-invite-link",
+        "click on buyer invite button"
+      );
       this.openShareModal();
     },
     openShareModal() {

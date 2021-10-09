@@ -111,6 +111,7 @@ export default {
         });
     },
     infiniteScrollHandler(productsSection) {
+      this.relatedProductStatistics();
       $(window).scroll(() => {
         if (typeof productsSection.offset() !== "undefined") {
           if (
@@ -127,6 +128,18 @@ export default {
           }
         }
       });
+    },
+    relatedProductStatistics() {
+      let elements = $("#related-products-item > .items-wrapper");
+      $(elements)
+        .unbind("click")
+        .click(() => {
+          this.$parent.registerComponentStatistics(
+            "product",
+            "open-related-product",
+            "click on related product in productDetail"
+          );
+        });
     },
   },
   mounted() {},

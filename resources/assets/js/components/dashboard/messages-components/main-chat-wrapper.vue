@@ -871,6 +871,14 @@
   top: calc(50% - 12px);
 }
 
+.phone-call {
+  width: 100%;
+  background: none;
+  border: none;
+  text-align: right;
+  border-radius: 0;
+}
+
 @media screen and (max-width: 1199px) {
   .message-wrapper .message-contact-title {
     position: relative;
@@ -1177,9 +1185,9 @@
               class="message-content-wrapper is-phone-active-wrapper"
             >
               <!--msg.created_at | moment("jYY/jMM/jDD, HH:mm") -->
-              <a
-                :href="'tel:' + msg.text"
-                class="hidden-sm hidden-md hidden-lg"
+              <button
+                @click.prevent="openCall('tel:' + msg.text)"
+                class="hidden-sm hidden-md hidden-lg phone-call"
               >
                 <span class="is-phone-active-text">
                   {{ msg.text }}
@@ -1198,7 +1206,7 @@
                     </button>
                   </div>
                 </span>
-              </a>
+              </button>
               <div class="hidden-xs">
                 <span class="message-text" v-text="msg.text"></span>
                 <span class="message-chat-date">
@@ -1500,6 +1508,11 @@ export default {
       this.$parent.userHasLikeBox();
     },
     showWallet: function () {
+      this.$parent.registerComponentStatistics(
+        "messenger",
+        "openChargeWallet",
+        "click on open charge wallet from messenger"
+      );
       $("#wallet-modal").modal("show");
     },
     checkWalletBalance() {
@@ -1592,8 +1605,26 @@ export default {
         }, 1000);
       }
     },
+    openCall(href) {
+      this.$parent.registerComponentStatistics(
+        "messenger",
+        "openPhoneCall",
+        "click on open phone call from  message in chat"
+      );
+      var link = document.createElement("a"); // Create with DOM
+      link.href = href;
+      link.click();
+      link.remove();
+    },
     openProduct(productId) {
+      this.$parent.registerComponentStatistics(
+        "messenger",
+        "openProductDetail",
+        "click on open productDetail from delsa message in chat"
+      );
+
       this.openProductLoader = true;
+
       let win = window.open("about:blank", "_blank");
       axios
         .post("/get_product_by_id", { product_id: productId })
@@ -1653,6 +1684,11 @@ export default {
       }
     },
     openEditPriceModal(productId) {
+      this.$parent.registerComponentStatistics(
+        "messenger",
+        "openUpdatePrice",
+        "click on the price update"
+      );
       this.editPriceLoader = true;
 
       axios

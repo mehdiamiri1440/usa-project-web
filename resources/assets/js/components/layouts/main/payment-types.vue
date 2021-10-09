@@ -466,6 +466,11 @@ export default {
           break;
 
         case "elevatorPricingData":
+          this.registerComponentStatistics(
+            "payment",
+            "elevator",
+            "productId: " + this.peymentMethodData.productId
+          );
           window.location.href =
             "/payment/elevator/" + this.peymentMethodData.productId;
           break;
@@ -475,6 +480,11 @@ export default {
       }
     },
     paymentWithWallet() {
+      this.registerComponentStatistics(
+        "payment",
+        "payment-wigh-wallet",
+        "click on payment with wallet"
+      );
       switch (this.peymentMethodData.paymentName) {
         case "buyAdPriceData":
           axios
@@ -482,6 +492,11 @@ export default {
               extra_capacity: this.peymentMethodData.count,
             })
             .then((_) => {
+              this.registerComponentStatistics(
+                "payment",
+                "wallet-buyAd-reply-capacity",
+                this.peymentMethodData.count
+              );
               this.successModal();
             })
             .catch((err) => {
@@ -495,6 +510,11 @@ export default {
               extra_capacity: this.peymentMethodData.count,
             })
             .then((_) => {
+              this.registerComponentStatistics(
+                "payment",
+                "wallet-product-capacity",
+                this.peymentMethodData.count
+              );
               this.successModal();
             })
             .catch((err) => {
@@ -509,6 +529,11 @@ export default {
               package_type: this.peymentMethodData.packageType,
             })
             .then((_) => {
+              this.registerComponentStatistics(
+                "payment",
+                "wallet-payment-type-" + this.peymentMethodData.packageType,
+                "userId: " + this.peymentMethodData.userId
+              );
               this.successModal();
             })
             .catch((err) => {
@@ -522,6 +547,11 @@ export default {
               product_id: this.peymentMethodData.productId,
             })
             .then((_) => {
+              this.registerComponentStatistics(
+                "payment",
+                "wallet-elevator",
+                "productId: " + this.peymentMethodData.productId
+              );
               this.successModal();
             })
             .catch((err) => {

@@ -1638,6 +1638,12 @@ export default {
         this.RegisterBasicProfileInfo();
       }
     },
+    registerComponentStatistics(categoryName, actionName, labelName) {
+      gtag("event", actionName, {
+        event_category: categoryName,
+        event_label: labelName,
+      });
+    },
   },
   mounted() {
     this.init();

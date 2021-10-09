@@ -732,6 +732,11 @@ export default {
       }
     },
     activePhoneCall(isModal) {
+      this.registerComponentStatistics(
+        "product",
+        "openPhoneCall",
+        "click on open phone Call"
+      );
       this.isChat = false;
       this.getPhoneLoader = true;
       this.isActivePhone = true;
@@ -823,14 +828,14 @@ export default {
         this.product.main.id
       );
     },
-    shareMyProfile() {
+    shareProduct() {
       let baseUrl = getBase();
       baseUrl = baseUrl.substring(0, baseUrl.length - 1);
       if (this.isDeviceMobile()) {
         this.registerComponentStatistics(
           "product",
-          "copy-product-link",
-          "click on copy poduct link"
+          "open-share-product-link",
+          "click on share product button"
         );
         var linkElement = document.createElement("a");
         var Message = baseUrl + this.getProductUrl();
