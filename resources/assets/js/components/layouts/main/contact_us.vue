@@ -68,9 +68,9 @@ export default {
   updated: function () {
     this.$nextTick(this.stopLoader());
   },
-  created() {
-    gtag("config", "UA-129398000-1", { page_path: "/contact-us" });
-  },
+  // created() {
+  //   gtag("config", "UA-129398000-1", { page_path: "/contact-us" });
+  // },
   metaInfo() {
     return {
       title: " تماس با ما ",
