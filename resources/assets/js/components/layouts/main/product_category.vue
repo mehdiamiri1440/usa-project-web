@@ -1307,7 +1307,7 @@ div.items-wrapper {
                 data-toggle="modal"
                 data-target="#searchFilter"
               >
-                <i class="fa fa-filter"></i>
+                <i class="fa fa-map-marker-alt"></i>
                 <!-- دسته ها و فیلتر -->
                 فیلتر مکان
               </button>
