@@ -344,6 +344,7 @@ export default {
 
       boxes: "",
       items: [],
+      posts: [],
     };
   },
   methods: {
@@ -351,109 +352,112 @@ export default {
       eventBus.$emit("subHeader", false);
 
       var self = this;
-      axios
-        .post("/get_seller_dashboard_required_data")
-        .then(function (response) {
-          self.statusData = response.data;
+      axios.get("/get_seller_dashboard_required_data").then((response) => {
+        this.posts = response.data;
+      });
+      // axios
+      //   .post("/get_seller_dashboard_required_data")
+      //   .then(function (response) {
+      //     self.statusData = response.data;
 
-          self.boxes = [
-            {
-              title: "نوع عضویت فعال شما",
-              icon: "fas fa-address-card",
-              iconColor: "#19668E",
-              staticName: "",
-              button: response.data.active_pakage_type < 3 ? true : false,
-              routerName: "dashboardPricingTableSeller",
-              linkName: "ارتقا عضویت",
-              linkIcon: "fa fa-arrow-up",
-              status: self.checkPackage(response.data.active_pakage_type),
-            },
-            {
-              title: "تعداد محصولات قابل ثبت",
-              icon: "fas fa-list-ol",
-              iconColor: "#aa49c8",
-              staticName: "",
-              button: true,
-              routerName: "dashboardProductPricing",
-              linkName: "افزایش ظرفیت ثبت محصول",
-              linkIcon: "fa fa-plus",
-              status:
-                response.data.max_allowed_product_register_count == 0
-                  ? "صفر"
-                  : response.data.max_allowed_product_register_count + " محصول",
-            },
-            {
-              title: "سقف روزانه تعداد پاسخ ها به درخواست های خرید",
-              icon: "fas fa-list-alt",
-              iconColor: "#D8A679",
-              staticName: "",
-              button: true,
-              routerName: "dashboardBuyAdPricing",
-              linkName: "افزایش ظرفیت پاسخ گویی",
-              linkIcon: "fa fa-arrow-up",
-              status: self.checkRequest(response.data.max_buyAds_reply),
-            },
-            {
-              title: "احراز هویت شده",
-              icon: "fas fa-award	",
-              iconColor: "#21AD93",
-              staticName: "",
-              button: response.data.is_verified ? false : true,
-              routerName: "profileBasicSellerVeficiation",
-              linkName: "احراز هویت کنید",
-              linkIcon: "",
-              status: response.data.is_verified ? "بله" : "خیر",
-            },
+      //     self.boxes = [
+      //       {
+      //         title: "نوع عضویت فعال شما",
+      //         icon: "fas fa-address-card",
+      //         iconColor: "#19668E",
+      //         staticName: "",
+      //         button: response.data.active_pakage_type < 3 ? true : false,
+      //         routerName: "dashboardPricingTableSeller",
+      //         linkName: "ارتقا عضویت",
+      //         linkIcon: "fa fa-arrow-up",
+      //         status: self.checkPackage(response.data.active_pakage_type),
+      //       },
+      //       {
+      //         title: "تعداد محصولات قابل ثبت",
+      //         icon: "fas fa-list-ol",
+      //         iconColor: "#aa49c8",
+      //         staticName: "",
+      //         button: true,
+      //         routerName: "dashboardProductPricing",
+      //         linkName: "افزایش ظرفیت ثبت محصول",
+      //         linkIcon: "fa fa-plus",
+      //         status:
+      //           response.data.max_allowed_product_register_count == 0
+      //             ? "صفر"
+      //             : response.data.max_allowed_product_register_count + " محصول",
+      //       },
+      //       {
+      //         title: "سقف روزانه تعداد پاسخ ها به درخواست های خرید",
+      //         icon: "fas fa-list-alt",
+      //         iconColor: "#D8A679",
+      //         staticName: "",
+      //         button: true,
+      //         routerName: "dashboardBuyAdPricing",
+      //         linkName: "افزایش ظرفیت پاسخ گویی",
+      //         linkIcon: "fa fa-arrow-up",
+      //         status: self.checkRequest(response.data.max_buyAds_reply),
+      //       },
+      //       {
+      //         title: "احراز هویت شده",
+      //         icon: "fas fa-award	",
+      //         iconColor: "#21AD93",
+      //         staticName: "",
+      //         button: response.data.is_verified ? false : true,
+      //         routerName: "profileBasicSellerVeficiation",
+      //         linkName: "احراز هویت کنید",
+      //         linkIcon: "",
+      //         status: response.data.is_verified ? "بله" : "خیر",
+      //       },
 
-            {
-              title: "دسترسی به درخواست های خرید طلایی",
-              icon: "fas fa-star",
-              iconColor: "#FFAC58",
-              staticName: "",
-              button: response.data.access_to_golden_buyAds ? false : true,
-              routerName: "dashboardPricingTableSeller",
-              linkName: "دسترسی به درخواست های طلایی",
-              linkIcon: "",
-              status: response.data.access_to_golden_buyAds ? "بله" : "خیر",
-            },
+      //       {
+      //         title: "دسترسی به درخواست های خرید طلایی",
+      //         icon: "fas fa-star",
+      //         iconColor: "#FFAC58",
+      //         staticName: "",
+      //         button: response.data.access_to_golden_buyAds ? false : true,
+      //         routerName: "dashboardPricingTableSeller",
+      //         linkName: "دسترسی به درخواست های طلایی",
+      //         linkIcon: "",
+      //         status: response.data.access_to_golden_buyAds ? "بله" : "خیر",
+      //       },
 
-            // {
-            //   title: "میزان اعتبار",
-            //   icon: "fas fa-star",
-            //   iconColor: "#00C5BE",
-            //   staticName: "",
-            //   button: false,
-            //   routerName: "dashboardPricingTableSeller",
-            //   linkName: "ارتقا عضویت",
-            //   linkIcon: "fa fa-arrow-up",
-            //   status: response.data.reputation_score
-            //     ? response.data.reputation_score
-            //     : "بدون اعتبار",
-            // },
-            {
-              title: "تعداد محصولات ثبت شده",
-              icon: "fas fa-list-ol",
-              iconColor: "#00C5BE",
-              staticName: "",
-              button: true,
-              routerName: "myProductsSeller",
-              linkName: "محصولات من",
-              linkIcon: "fas fa-list-ol",
-              status:
-                response.data.confirmed_products_count == 0
-                  ? "صفر"
-                  : response.data.confirmed_products_count + " محصول",
-            },
-            /*					{
-								title : 'احتمال پاسخگویی به پیام',
-								icon : 'fa fa-chart-line',
-								iconColor : '#FF8058',
-								staticName : 'درصد',
-								upgrade : true,
-								status : '20'
-							},	*/
-          ];
-        });
+      //       // {
+      //       //   title: "میزان اعتبار",
+      //       //   icon: "fas fa-star",
+      //       //   iconColor: "#00C5BE",
+      //       //   staticName: "",
+      //       //   button: false,
+      //       //   routerName: "dashboardPricingTableSeller",
+      //       //   linkName: "ارتقا عضویت",
+      //       //   linkIcon: "fa fa-arrow-up",
+      //       //   status: response.data.reputation_score
+      //       //     ? response.data.reputation_score
+      //       //     : "بدون اعتبار",
+      //       // },
+      //       {
+      //         title: "تعداد محصولات ثبت شده",
+      //         icon: "fas fa-list-ol",
+      //         iconColor: "#00C5BE",
+      //         staticName: "",
+      //         button: true,
+      //         routerName: "myProductsSeller",
+      //         linkName: "محصولات من",
+      //         linkIcon: "fas fa-list-ol",
+      //         status:
+      //           response.data.confirmed_products_count == 0
+      //             ? "صفر"
+      //             : response.data.confirmed_products_count + " محصول",
+      //       },
+      //       /*					{
+      // 					title : 'احتمال پاسخگویی به پیام',
+      // 					icon : 'fa fa-chart-line',
+      // 					iconColor : '#FF8058',
+      // 					staticName : 'درصد',
+      // 					upgrade : true,
+      // 					status : '20'
+      // 				},	*/
+      //     ];
+      //   });
     },
     checkPackage(packageId) {
       var packageName = "";
