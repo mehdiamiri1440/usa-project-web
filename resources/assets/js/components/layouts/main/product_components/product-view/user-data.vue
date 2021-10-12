@@ -296,11 +296,7 @@ export default {
         });
     },
     getProductByUserName() {
-      this.registerComponentStatistics(
-        "productDetail",
-        "showUserProducts",
-        "show user products"
-      );
+      
       axios
         .post("/get_product_list_by_user_name", {
           user_name: this.$parent.product.user_info.user_name,

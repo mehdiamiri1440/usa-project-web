@@ -415,8 +415,8 @@ export default {
       }
       if (this.$parent.errors.stock) {
         this.$parent.registerComponentStatistics(
-          "product-register-error",
-          "min-sale-price",
+          "buyAd-register-error",
+          "requirement-amount",
           "input:" + number + " error:" + this.$parent.errors.stock
         );
       }

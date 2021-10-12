@@ -199,6 +199,12 @@ export default {
       this.baseUrl = getBase();
     },
     openShareModal() {
+      this.registerComponentStatistics(
+          "invite",
+          "click-on-invite-btn",
+          "click-on-invite-btn"
+      );
+
       let url =
         this.baseUrl + "invite/" + this.$parent.currentUser.user_info.user_name;
       let shareItem = {
@@ -233,6 +239,16 @@ export default {
           x.className = x.className.replace("show", "");
         }, 3000);
       }
+    },
+    registerComponentStatistics: function (
+      categoryName,
+      actionName,
+      labelName
+    ) {
+      gtag("event", actionName, {
+        event_category: categoryName,
+        event_label: labelName,
+      });
     },
   },
   mounted() {

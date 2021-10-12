@@ -170,9 +170,9 @@ export default {
     doDownload: function () {
       //ga
       this.registerComponentStatistics(
-        "download",
-        "app download btn",
-        "download app btn in popUp"
+        "invite-page",
+        "app-download",
+        "click-on-app-download-btn-in-intive-page"
       );
       // code here
       this.createCookie("downloadAppModal", true, 60 * 24);

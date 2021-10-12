@@ -420,7 +420,7 @@ export default {
       this.registerComponentStatistics(
         "product",
         "show-product-in-seperate-page",
-        "show-product-in-seperate-page"
+        "click-on-product-in-home-page"
       );
     },
     toLatinNumbers: function (num) {
