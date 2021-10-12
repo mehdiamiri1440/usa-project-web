@@ -2408,11 +2408,6 @@ export default {
   },
   created() {
     gtag("config", "UA-129398000-1", { page_path: "/product-list" });
-    this.registerComponentStatistics(
-      "productCategory",
-      "start-a-component",
-      "start a component of ab test"
-    );
     document.addEventListener("click", this.documentClick);
   },
   mounted() {
