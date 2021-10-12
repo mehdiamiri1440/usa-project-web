@@ -350,6 +350,7 @@
       }"
     >
       <router-view
+        :question="question"
         :str="storagePath"
         :assets="assets"
         :user-type="currentUser.user_info.is_seller"
@@ -401,6 +402,10 @@ export default {
   ],
   data: function () {
     return {
+      question: {
+        title: "The title",
+        body: "The body",
+      },
       linkHideStates: [
         "messenger/contacts",
         "messenger/buy-ads",

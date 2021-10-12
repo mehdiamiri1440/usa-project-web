@@ -1,7 +1,3 @@
-// module.exports = {
-//     testRegex: 'resources/assets/js/test/.*.spec.js$'
-// }
-
 module.exports = {
     testRegex: 'resources/assets/js/test/.*.spec.js$',
     moduleFileExtensions: [
@@ -14,3 +10,4 @@ module.exports = {
         '.*\\.(vue)$': '<rootDir>/node_modules/vue-jest'
     },
 }
+
