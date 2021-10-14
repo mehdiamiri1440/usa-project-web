@@ -1501,6 +1501,12 @@ export default {
     },
     showWallet: function () {
       $("#wallet-modal").modal("show");
+
+      this.registerComponentStatistics(
+        "messenger",
+        "wallet",
+        "click-on-charge-wallet-btn"
+      );
     },
     checkWalletBalance() {
       if (this.$parent.userType) {
@@ -1593,6 +1599,13 @@ export default {
       }
     },
     openProduct(productId) {
+
+      this.registerComponentStatistics(
+                            "messenger",
+                            "click-on-delsa-btn",
+                            "click-on-product-detail-btn-in-messenger"
+                          );
+      
       this.openProductLoader = true;
       let win = window.open("about:blank", "_blank");
       axios
@@ -1653,6 +1666,7 @@ export default {
       }
     },
     openEditPriceModal(productId) {
+
       this.editPriceLoader = true;
 
       axios
@@ -1661,7 +1675,31 @@ export default {
           eventBus.$emit("editProductData", response.data.product);
           $("#edit-price-modal").modal("show");
           this.editPriceLoader = false;
+
+          this.registerComponentStatistics(
+                            "messenger",
+                            "click-on-delsa-btn",
+                            "click-on-edit-price-btn-in-messenger"
+                          );
         });
+    },
+    registeCallBtnEvent() {
+        this.registerComponentStatistics(
+                            "messenger",
+                            "click-on-call-btn",
+                            "click-on-call-btn"
+                          );
+      
+    },
+    registerComponentStatistics: function (
+      categoryName,
+      actionName,
+      labelName
+    ) {
+      gtag("event", actionName, {
+        event_category: categoryName,
+        event_label: labelName,
+      });
     },
   },
   mounted: function () {

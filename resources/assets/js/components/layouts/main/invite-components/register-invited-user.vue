@@ -281,7 +281,7 @@ export default {
                   console.log("err");
                 });
               this.registerComponentStatistics(
-                "Register",
+                "invite-page",
                 "successful-register",
                 "user-registered-successfully"
               );
@@ -317,7 +317,7 @@ export default {
           }, 120000);
 
           this.registerComponentStatistics(
-            "Register",
+            "invite-page",
             "send-verification-code",
             "verification-code-sent-to-user"
           );
@@ -330,7 +330,7 @@ export default {
           this.step1.sendCode = false;
 
           this.registerComponentStatistics(
-            "Register-Error",
+            "Invite-Register-Error",
             "phone-number-verification",
             "error:" + this.errors.phone
           );
@@ -358,7 +358,7 @@ export default {
             this.errors.verification_code = response.data.msg;
 
             this.registerComponentStatistics(
-              "Register-Error",
+              "Invite-Register-Error",
               "verification-code-wrong",
               "error:" + this.errors.verification_code
             );
@@ -371,7 +371,7 @@ export default {
           this.errors.verification_code = "وارد کردن کد الزامی است.";
 
           this.registerComponentStatistics(
-            "Register-Error",
+            "Invite-Register-Error",
             "verification-code-empty",
             "error:" + this.errors.verification_code
           );

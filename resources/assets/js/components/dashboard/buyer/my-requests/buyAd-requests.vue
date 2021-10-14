@@ -488,9 +488,9 @@ export default {
       eventBus.$emit("modal", "deleteBuyAdModal");
 
       this.registerComponentStatistics(
-        "product",
-        "delete-product",
-        "click on delete product-btn"
+        "buyAd",
+        "delete-buyAd",
+        "click on delete buyAd-btn"
       );
     },
     createCookie: function (name, value, minutes) {
