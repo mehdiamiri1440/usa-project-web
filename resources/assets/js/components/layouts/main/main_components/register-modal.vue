@@ -132,7 +132,7 @@ export default {
     return {
       isMobile: false,
       currentStep: 1,
-      route: 0,
+      activity_type: 0,
       stock: "",
       productName: "",
       currentUser: {
@@ -202,7 +202,7 @@ export default {
           sex: "آقا",
           province: this.step5.provinceName,
           city: this.step5.cityName,
-          activity_type: 1,
+          activity_type: this.activity_type,
           national_code: "",
           category_id: this.product.main.category_id,
         };

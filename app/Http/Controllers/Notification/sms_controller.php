@@ -64,12 +64,6 @@ class sms_controller extends Controller
 		];
 		
         $this->validate($request,$rules);
-
-        if($this->is_request_safe($request) == false){
-            return response()->json([
-                'status' => false,
-            ],400);
-        }
         
         $user_record = myuser::where('phone',$request->phone)
                                 ->get()

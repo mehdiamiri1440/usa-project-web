@@ -272,11 +272,11 @@ export default {
     setCity(cityName) {
       this.$parent.step5.cityName = cityName;
 
-      if (this.$parent.route == 1) {
-        this.$parent.registerUser(this.$parent.route);
+      if (this.$parent.activity_type == 1) {
+        this.$parent.registerUser(this.$parent.activity_type);
         this.$parent.goToStep(6);
       } else {
-        this.$parent.registerUser(this.$parent.route);
+        this.$parent.registerUser(this.$parent.activity_type);
       }
     },
     itemsSearched() {
