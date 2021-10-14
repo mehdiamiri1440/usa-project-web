@@ -1,87 +1,107 @@
-import { mount } from '@vue/test-utils'
-import Status from '../../../components/dashboard/seller/dashboard/status.vue'
+import { mount, RouterLinkStub } from '@vue/test-utils'
 import moxios from 'moxios';
+import { seeElement, seeIcon, checkRouterLink, checkBoxContents } from '../../utils.js'
+import { linkItems, boxData, boxes } from '../../fakeResponse/dashboard/statusFakeResponse'
+import Status from '../../../components/dashboard/seller/dashboard/status.vue'
 
-
-
-
-describe('my suite', () => {
+describe('dashboard Status page suite', () => {
     let wrapper;
 
+    beforeAll(() => {
+        moxios.install();
 
-    let see = (text, selector) => {
-        let wrap = selector ? wrapper.find(selector) : wrapper;
-
-        expect(wrap.html()).toContain(text);
-    }
-
-    let type = (text, selector) => {
-        const updateInput = wrapper.find(selector);
-        updateInput.element.value = text
-        updateInput.trigger('input');
-
-    }
-
+        moxios.stubRequest('/get_seller_dashboard_required_data', {
+            status: 200,
+            response: boxData
+        })
+    })
     beforeEach(function () {
+
         // import and pass your custom axios instance to this method
         wrapper = mount(Status, {
-            stubs: ['router-link'],
-            propsData: {
-                question: {
-                    title: 'The title',
-                    body: 'The body'
-                }
+            stubs: {
+                RouterLink: RouterLinkStub
             }
         });
-        // moxios.install()
+
+        // expect(wrapper.html()).toMatchSnapshot()
     })
 
 
-    it('presents the title and the body', () => {
-        see('The title')
-        see('The body')
+    it('check page texts', () => {
+        seeElement('داشبورد', 'h1', wrapper)
+
+        // button of payment
+        seeElement('ارتقا عضویت', '.blue-brand-background', wrapper)
+        seeIcon('fa-arrow-up', wrapper);
+        checkRouterLink('.blue-brand-background', 'dashboardPricingTableSeller', RouterLinkStub, wrapper);
+
+        // button of payment
+        seeElement('خریدارانی که شماره تماس شما را دیده اند', '.header-links-wrapper', wrapper)
+        seeIcon('fa-arrow-left', wrapper);
+        checkRouterLink('.viewers-link', 'sellerViewer', RouterLinkStub, wrapper);
+
+        expect(wrapper.findAll('.header-links-wrapper > .green-button').length).toBe(linkItems.length)
+        expect(wrapper.find('.header-links-wrapper > .green-button .badge').text()).toBe('جدید')
+
+        let i = 1;
+        linkItems.forEach((element) => {
+            seeElement(element.text, '.header-links-wrapper', wrapper)
+            seeIcon(element.icon, wrapper);
+            let wrap = wrapper.find('.header-links-wrapper > .green-button:nth-of-type(' + i + ')');
+
+            expect(wrap.findComponent(RouterLinkStub).props().to.name).toBe(element.href)
+
+            i++
+        });
     })
 
-    it('it can be Edited', async () => {
-        const button = wrapper.find('button');
 
-        expect(wrapper.find('input[name=title]').exists()).toBe(false);
+    it('check boxes load', async (done) => {
+        // before load axios
+        expect(wrapper.findAll('.boxes > .row > div').length).toBe(6)
 
-        //find the button and trigger click event
-        await button.trigger('click');
+        // load axios
+        moxios.wait(() => {
+            expect(wrapper.findAll('.boxes > .row > div > .box').length).toBe(6)
 
-        const input = wrapper.find('input');
+            let i = 1;
 
-        expect(input.element.value).toBe('The title');
-    })
+            boxes.forEach((element) => {
+
+                let wrap = wrapper.find('.boxes > .row > div:nth-of-type(' + i + ')');
+                let link = wrap.find('.green-button');
+                let boxBotton = wrap.find('.box-upgrade-link')
+
+                seeElement(element.title, '.box-title', wrap);
+                seeIcon(element.icon, wrapper);
+
+                checkBoxContents(element, boxData, wrap);
+
+                if (link.exists()) {
+                    expect(link.findComponent(RouterLinkStub).props().to.name).toBe(element.routerName)
+                    let boxButtonIcon = boxBotton.find('i');
+                    if (boxButtonIcon.exists()) {
+                        expect(boxButtonIcon.classes(element.linkIcon)).toBe(true)
+                    }
+                    expect(boxBotton.html()).toContain(element.linkName)
+                }
+
+                i++
+            });
 
 
-    it('hides the edit button during edit mode', async () => {
-        const button = wrapper.find('button');
 
-        await button.trigger('click');
-        expect(wrapper.find('#edit').exists()).toBe(false);
-    })
+            // expect(wrapper.html()).toMatchSnapshot()
 
-    it('update the question after being edited', async () => {
-        const button = wrapper.find('button');
-        await button.trigger('click');
-
-        type('Changed title', 'input');
-        type('Changed body', 'textarea');
-
-        await wrapper.find('#update').trigger('click');
-
-        see('Changed title')
-        see('Changed body')
+            done();
+        })
 
     });
 
-    afterEach(function () {
-        // import and pass your custom axios instance to this method
-        moxios.uninstall()
+    afterAll(() => {
+        moxios.uninstall();
     })
-
 });
 
 

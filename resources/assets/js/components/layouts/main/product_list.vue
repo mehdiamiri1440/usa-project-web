@@ -1590,7 +1590,7 @@ import ProductGridArticle from "./product_components/Product_grid_article";
 import ProductAsideCategories from "./product_components/sidebar/product_aside_categories";
 import searchNotFound from "./main_components/search-not-found";
 import { eventBus } from "../../../router/router";
-import StickySidebar from "../../../stickySidebar.js";
+// import StickySidebar from "../../../stickySidebar.js";
 var visible = false;
 export default {
   components: {
@@ -2079,10 +2079,10 @@ export default {
     sidebarScroll() {
       let sidebarHeight = $("#sidebar").outerHeight();
       $("#main .main-content").css("min-height", sidebarHeight);
-      $("#sidebar").StickySidebar({
-        // Settings
-        additionalMarginTop: 120,
-      });
+      // $("#sidebar").StickySidebar({
+      //   // Settings
+      //   additionalMarginTop: 120,
+      // });
     },
     openStickyGuide: function () {
       eventBus.$emit("modal", "guide");
