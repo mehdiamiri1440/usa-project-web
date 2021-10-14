@@ -6,15 +6,17 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Image;
 use DB;
+use Illuminate\Support\Facades\Storage;
 
 class media_controller extends Controller
 {
-    public function create_thumbnail($path, $width, $height)
+    public function create_thumbnail($path, $width, $height,$photo)
     {
-        $img = Image::make($path)->resize($width, $height, function ($constraint) {
+        $img = Image::make($photo)->resize($width, $height, function ($constraint) {
             $constraint->aspectRatio();
         });
-        $img->save($path);
+        // $img->save($path);
+        Storage::disk('sftp')->put($path,$img->encode());
     }
 
     public function put_water_mark_on_photo($path,$position)

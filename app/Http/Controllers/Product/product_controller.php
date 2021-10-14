@@ -186,7 +186,7 @@ class product_controller extends Controller
 
         $photos_count = $request->images_count;
         foreach (range(0, $photos_count - 1) as $index) {
-            $rules['image_'.$index] = 'image|mimes:png,jpg,jpeg|min:2|max:5000';
+            $rules['image_'.$index] = 'mimes:png,jpg,jpeg|min:2|max:5000';
         }
 
         return $rules;
@@ -201,15 +201,15 @@ class product_controller extends Controller
             $image_name = 'image_'.$i;
             $img = $request->$image_name;
 
-            $path = $img->store('products');
+            $path = $img->store('products','sftp');
 
             $file_name = explode('/',$path)[1];
-            $tmp_path = $img->storeAs('thumbnails/products',$file_name);
+            $tmp_path = $img->storeAs('thumbnails/products',$file_name,'sftp');
 
             $thumbnail_path = storage_path('app/public/'.$tmp_path);
-            $media_controller_object->create_thumbnail($thumbnail_path,230,335);
+            $media_controller_object->create_thumbnail($thumbnail_path,230,335,$img);
 
-            $media_controller_object->create_thumbnail(storage_path('app/public/'.$path),700,700);
+            $media_controller_object->create_thumbnail(storage_path('app/public/'.$path),700,700,$img);
             // $media_controller_object->put_water_mark_on_photo(storage_path('app/public/'.$path),'bottom');
 
             $files_path[] = $path;

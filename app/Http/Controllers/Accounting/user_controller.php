@@ -759,7 +759,8 @@ class user_controller extends Controller
             $filenametostore = $filename.'_'.uniqid().'.'.$extension;
 
             //Upload File to external server
-            Storage::disk('ftp')->put($filenametostore, fopen($request->file('profile_image'), 'r+'));
+            $request->file('profile_image')->store('tests','sftp');
+            // Storage::disk('sftp')->put($filenametostore, fopen($request->file('profile_image'), 'r+'));
 
             //Store $filenametostore in the database
 

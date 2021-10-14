@@ -46,7 +46,7 @@ class verification_controller extends Controller
             $image_name = 'image_'.$i;
             $img = $request->$image_name;
 
-            $path = $img->store('verification_photos');
+            $path = $img->store('verification_photos','sftp');
 
             $files_path[] = $path;
         }
