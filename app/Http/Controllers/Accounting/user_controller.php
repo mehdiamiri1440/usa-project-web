@@ -164,7 +164,7 @@ class user_controller extends Controller
                 $this->block_user_if_already_has_been_blocked_on_this_device($device_id,$user_id);
             }
             else{
-                $this->block_previous_accounts_on_this_device($device_id);
+                $this->block_previous_accounts_on_this_device($device_id,$user_id);
             }
         }
     }
@@ -197,7 +197,7 @@ class user_controller extends Controller
                                                         
     }
 
-    protected function block_previous_accounts_on_this_device($device_id)
+    protected function block_previous_accounts_on_this_device($device_id,$user_id)
     {
         $blocking_user_ids = DB::table('client_meta_datas')
                                 ->where('device_id',$device_id)
