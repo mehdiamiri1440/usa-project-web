@@ -25,6 +25,8 @@
     -->
     <link rel="preload" href="{{asset('assets/css/fontiran.min.css')}}" as="style" onload="this.rel='stylesheet'" crossorigin>
     <link rel="preload" href="{{asset('assets/css/all.min.css')}}" as="style" onload="this.rel='stylesheet'" crossorigin>
+    {{-- <link rel="preload" href="{{asset('assets/css/bootstrap.min.css')}}" as="style" onload="this.rel='stylesheet'" crossorigin> --}}
+    <link  href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet">
     <link rel="preload" href="{{asset('css/app.css')}}" as="style" onload="this.rel='stylesheet'" crossorigin>
     <title>باسکول | بازار خرید و فروش عمده محصولات غذایی و کشاورزی ایران بدون واسطه</title>
 
@@ -195,7 +197,7 @@
         const messaging = firebase.messaging();
 </script>
 
-<script src="{{asset('js/app.js')}}" defer></script>
+<script src="{{asset('js/app.js')}}" async></script>
 
 <script>
     document.addEventListener('DOMContentLoaded', (event) => {

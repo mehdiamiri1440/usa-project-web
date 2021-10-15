@@ -261,6 +261,12 @@
   text-align: right;
 }
 
+.delsa-message-item {
+  font-size: 12px;
+  margin: 0;
+  color: rgba(0, 0, 0, 0.5);
+}
+
 @media screen and (max-width: 991px) {
   .chat-modal-wrapper {
     left: calc(50% - 230px);
@@ -373,6 +379,12 @@
           :class="[msg.sender_id == currentUserId ? 'sender' : 'resiver']"
         >
           <div>
+            <span
+              class="delsa-message-item"
+              v-if="msg.p_id || msg.phone_locked"
+            >
+              ارسال شده توسط ربات خودکار دلسا
+            </span>
             <p v-text="msg.text"></p>
             <div class="message-info">
               <span class="time" v-if="msg.created_at"

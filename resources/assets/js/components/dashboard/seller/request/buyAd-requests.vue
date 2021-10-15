@@ -168,7 +168,7 @@ button.disable {
 
 .fix-request-bottom {
   position: fixed;
-  bottom: 0;
+  bottom: 59px;
   left: 0;
   z-index: 5;
   width: 100%;
