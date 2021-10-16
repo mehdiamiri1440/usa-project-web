@@ -200,10 +200,7 @@
 <script src="{{asset('js/app.js')}}" async></script>
 
 <script>
-    document.addEventListener('DOMContentLoaded', (event) => {
-      var x = document.getElementById("master-loader-wrapper");
-      x.style.display = "none";
-    })
+   
     function getUserId(){
         let userId = <?php if(session('user_id')){echo session('user_id');} else echo -1; ?>;
         return userId;
