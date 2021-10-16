@@ -1367,7 +1367,7 @@ export default {
   },
   mounted() {
     $(document).ready(() => {
-      $("#master-loader-wrapper").fadeOut(100);
+      $("#master-loader-wrapper").css('display','none');
     });
     this.activateDownloadAppButton();
     $("#wallet-modal").on("show.bs.modal", (e) => {
