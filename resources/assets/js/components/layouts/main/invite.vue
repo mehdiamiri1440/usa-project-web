@@ -524,7 +524,7 @@ h2 {
           </svg>
         </div>
         <div class="text-center"><h2>ثبت نام رایگان</h2></div>
-        <RegisterInvitedUser :categoryList="categoryList" />
+        <RegisterInvitedUser :categoryList="categoryList" :referredUserName="$route.params.userName" />
       </section>
     </div>
     <section class="col-xs-12 main-categories">
