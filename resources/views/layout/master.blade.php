@@ -1,124 +1,136 @@
 <!DOCTYPE html>
 <html lang="fa">
 <head>
-    
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-    <meta name="keywords" content="محصولات کشاورزی,خرید مستقیم صیفی,فروشگاه آنلاین کشاورزی,باسکول">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="csrf-token" content="{{csrf_token()}}">
-    @if(config('app.name') != 'Laravel')
-    <meta name="robots" content="noindex" />
-    @endif
-
-    <link rel="icon" href="{{asset('assets/img/logo/mobile-logo.svg')}}">
-    
-    <!-- fonts -->
-    <link rel="preload" href="{{asset('assets/fonts/woff2/IRANSansWeb(FaNum)_Bold.woff2')}}" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="{{asset('assets/fonts/woff2/IRANSansWeb(FaNum).woff2')}}" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="{{asset('assets/fonts/woff2/IRANSansWeb(FaNum)_Medium.woff2')}}" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="{{asset('assets/webfonts/fa-solid-900.woff2')}}" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="{{asset('assets/webfonts/fa-regular-400.woff2')}}" as="font" type="font/woff2" crossorigin>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="keywords" content="محصولات کشاورزی,خرید مستقیم صیفی,فروشگاه آنلاین کشاورزی,باسکول">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="csrf-token" content="{{csrf_token()}}">
+  @if(config('app.name') != 'Laravel')
+  <meta name="robots" content="noindex" />
+  @endif
   
-    <!-- Main Styles
-    // improve for blocking request for preload
-    -->
-    <link rel="preload" href="{{asset('assets/css/fontiran.min.css')}}" as="style" onload="this.rel='stylesheet'" crossorigin>
-    <link rel="preload" href="{{asset('assets/css/all.min.css')}}" as="style" onload="this.rel='stylesheet'" crossorigin>
-    {{-- <link rel="preload" href="{{asset('assets/css/bootstrap.min.css')}}" as="style" onload="this.rel='stylesheet'" crossorigin> --}}
-    <link  href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet">
-    <link rel="preload" href="{{asset('css/app.css')}}" as="style" onload="this.rel='stylesheet'" crossorigin>
-    <title>باسکول | بازار خرید و فروش عمده محصولات غذایی و کشاورزی ایران بدون واسطه</title>
+  <link rel="icon" href="{{asset('assets/img/logo/mobile-logo.svg')}}">
+  <!-- fonts -->
+  {{-- <link rel="preload" href="{{asset('assets/fonts/woff2/IRANSansWeb(FaNum)_Bold.woff2')}}" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{{asset('assets/fonts/woff2/IRANSansWeb(FaNum).woff2')}}" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{{asset('assets/fonts/woff2/IRANSansWeb(FaNum)_Medium.woff2')}}" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{{asset('assets/webfonts/fa-solid-900.woff2')}}" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{{asset('assets/webfonts/fa-regular-400.woff2')}}" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{{asset('assets/css/fontiran.min.css')}}" as="style" onload="this.rel='stylesheet'" crossorigin>
+  <link rel="preload" href="{{asset('assets/css/all.min.css')}}" as="style" onload="this.rel='stylesheet'" crossorigin> --}}
 
-     <script>
-        window.Laravel = {csrfToken: '{{csrf_token()}}'}
-    </script>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129398000-1"></script>
+  {{-- <link  href="{{asset('assets/css/bootstrap.min.css')}}" as="style" onload="this.rel='stylesheet'" crossorigin> --}}
+  {{-- <link rel="preload" href="{{asset('css/app.css')}}" as="style" onload="this.rel='stylesheet'" crossorigin> --}}
+  
+  <title>باسکول | بازار خرید و فروش عمده محصولات غذایی و کشاورزی ایران بدون واسطه</title>
     <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
-        gtag('config', 'UA-129398000-1', {'send_page_view': false});
-    </script>
-  <style>
-    .main-loader-wrapper {
-      position: fixed;
-      bottom: 20px;
-      z-index: 1030;
-      background: #fff;
-      width: 100%;
-      height: 100%;
-      left: 0;
-      top: 0;
-    }
-    .logo-main-loader {
-      display: inline-block;
-      position: absolute;
-      left: 50%;
-      top: 40%;
-      transform: translate(-50%, -50%);
-      text-align: center;
-      line-height: 1.618;
-      width: 100%;
-      padding: 0 15px;
-    }
-    .logo-main-loader svg {
-        width: 60px;
-        height: 70px;
-    }
-    .main-loader-shape-wrapper {
-      position: absolute;
-      /* height: 70px !important; */
-      bottom: 20%;
-      left: calc(50% - 23px);
-      padding: 0;
-    }
-    /* preloader image style*/
-    /*spinner and animation styles*/
-  #master-loader-wrapper  .spinner-border {
-    display: inline-block;
-    vertical-align: text-bottom;
-    border: 0.25rem solid currentColor;
-    border-right-color: currentcolor;
-    border-right-color: transparent;
-    border-radius: 50%;
-    -webkit-animation: spinner-border 1s linear infinite;
-    animation: spinner-border 1s linear infinite;
-  }
-  #master-loader-wrapper  .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
-  }
-  @keyframes spinner-border {
-    100% {
-      -webkit-transform: rotate(360deg);
-      transform: rotate(360deg);
-    }
-  }
-    #master-loader-wrapper .spinner-border{
-      width: 45px;
-      height: 45px;
-      color: #bbb;
-      border-width: 3px;
-      box-sizing: border-box;
-      top: 0;
-      position: relative;
-    }
+      window.Laravel = {csrfToken: '{{csrf_token()}}'}
+  </script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  {{-- <script  src="{{asset('assets/js/firebase/gtag.min.js')}}" async></script>
+  <script  src="{{asset('assets/js/firebase/firebase-app-7.13.0.min.js')}}" defer></script>
+  <script  src="{{asset('assets/js/firebase/firebase-messaging-7.13.0.min.js')}}" defer></script> --}}
 
-  </style>
+  {{-- <script>
+    //  gtag configs
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+          dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'UA-129398000-1', {'send_page_view': false});
+
+      // firebase configs
+      var firebaseConfig = {
+      apiKey: "AIzaSyDHAonYamODsV034KRTjzd4_C_z4YpzaRo",
+      authDomain: "incobac-64ec9.firebaseapp.com",
+      databaseURL: "https://incobac-64ec9.firebaseio.com",
+      projectId: "incobac-64ec9",
+      storageBucket: "incobac-64ec9.appspot.com",
+      messagingSenderId: "946346601127",
+      appId: "1:946346601127:web:74e870ed6dd09f369bc982",
+      measurementId: "G-ZXCG6RTHC7"
+  };
+      firebase.initializeApp(firebaseConfig);
+      const messaging = firebase.messaging();
+  </script> --}}
+
+<style>
+  .main-loader-wrapper {
+    position: fixed;
+    bottom: 20px;
+    z-index: 1030;
+    background: #fff;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+  }
+  .logo-main-loader {
+    display: inline-block;
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    line-height: 1.618;
+    width: 100%;
+    padding: 0 15px;
+  }
+  .logo-main-loader svg {
+      width: 60px;
+      height: 70px;
+  }
+  .main-loader-shape-wrapper {
+    position: absolute;
+    /* height: 70px !important; */
+    bottom: 20%;
+    left: calc(50% - 23px);
+    padding: 0;
+  }
+  /* preloader image style*/
+  /*spinner and animation styles*/
+#master-loader-wrapper  .spinner-border {
+  display: inline-block;
+  vertical-align: text-bottom;
+  border: 0.25rem solid currentColor;
+  border-right-color: currentcolor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  -webkit-animation: spinner-border 1s linear infinite;
+  animation: spinner-border 1s linear infinite;
+}
+#master-loader-wrapper  .sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+@keyframes spinner-border {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+  #master-loader-wrapper .spinner-border{
+    width: 45px;
+    height: 45px;
+    color: #bbb;
+    border-width: 3px;
+    box-sizing: border-box;
+    top: 0;
+    position: relative;
+  }
+
+</style>
 </head>
 <body >
-
  <!-- #regex main loader -->
  <div id="master-loader-wrapper" class="main-loader-wrapper">
     <div class="logo-main-loader">
@@ -162,48 +174,22 @@
     </div>
   </div>
 
-  <!-- end regex main loader -->
-
   <div id="app">
     <route-component
       user-id = "{{session('user_id')}}"
       is-seller = "{{session('is_seller')}}"
       assets = "{{asset('')}}"
-      storage-path = "{{url('/storage')}}"
+      storage-path = "{{url('storage/')}}"
       profile-photo="{{session('profile_photo')}}"
       user-full-name="{{session('full_name')}}"
       user-logout-path="{{route('logout')}}"
     />
   </div>
 
-<script  src="https://www.gstatic.com/firebasejs/7.13.0/firebase-app.js"></script>
-<script  src="https://www.gstatic.com/firebasejs/7.13.0/firebase-messaging.js"></script> 
-
+<script src="{{asset('js/app.js')}}" ></script>
+{{-- <script src="{{asset('assets/js/custom.bootstrap.min.js')}}" defer></script> --}}
 <script>
 
-    var firebaseConfig = {
-        apiKey: "AIzaSyDHAonYamODsV034KRTjzd4_C_z4YpzaRo",
-        authDomain: "incobac-64ec9.firebaseapp.com",
-        databaseURL: "https://incobac-64ec9.firebaseio.com",
-        projectId: "incobac-64ec9",
-        storageBucket: "incobac-64ec9.appspot.com",
-        messagingSenderId: "946346601127",
-        appId: "1:946346601127:web:74e870ed6dd09f369bc982",
-        measurementId: "G-ZXCG6RTHC7"
-    };
-    // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-
-        const messaging = firebase.messaging();
-</script>
-
-<script src="{{asset('js/app.js')}}" async></script>
-
-<script>
-    document.addEventListener('DOMContentLoaded', (event) => {
-      var x = document.getElementById("master-loader-wrapper");
-      x.style.display = "none";
-    })
     function getUserId(){
         let userId = <?php if(session('user_id')){echo session('user_id');} else echo -1; ?>;
         return userId;
@@ -214,5 +200,6 @@
     }
 
 </script>
+
 </body>
 </html>

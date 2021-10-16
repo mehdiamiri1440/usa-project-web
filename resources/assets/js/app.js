@@ -1,14 +1,11 @@
-
 import Vue from 'vue'
-import Axios from 'axios'
+window.axios = require('axios')
 import Meta from 'vue-meta'
 
 
-require('./bootstrap');
+window.$ = window.jQuery = require('jquery');
 
-window.Vue = require('vue');
 
-Vue.prototype.$http = Axios;
 Vue.config.productionTip = false;
 Vue.use(require('vue-jalali-moment'));
 Vue.use(Meta);
@@ -22,5 +19,4 @@ new Vue({
         RouteComponent
     }
 });
-
 
