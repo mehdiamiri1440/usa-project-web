@@ -180,7 +180,7 @@ import device from "device-uuid/lib/device-uuid";
 import pricingTableSellerContentVue from "../../../dashboard/seller/pricing-seller-page/pricing-table-seller-content.vue";
 
 export default {
-  props: ["categoryList"],
+  props: ["categoryList", "referredUserName"],
   components: {
     RegisterNumber,
     VerifiedCode,
@@ -252,7 +252,7 @@ export default {
           activity_type: this.step6.activityType,
           national_code: "",
           category_id: this.step6.categoryId,
-          referred_user_name: true,
+          referred_user_name: this.referredUserName,
         };
         axios
           .post("/api/v1/users", object)
