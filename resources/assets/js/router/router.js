@@ -15,377 +15,377 @@ const router = new Router({
   mode: "history",
   base: process.env.BASE_URL,
   routes: [
-    // {
-    //   path: "/seller",
-    //   components: {
-    //     seller: (resolve) => {
-    //       require(["./components/sellerDashboard.vue"], resolve);
-    //     },
-    //   },
-    //   redirect: "/404",
-    //   children: [
-    //     {
-    //       path: "my-buskool",
-    //       name: "myBuskoolSeller",
-    //       components: {
-    //         default: (resolve) => {
-    //           require([
-    //             "../components/dashboard/my-buskool/my-buskool.vue",
-    //           ], resolve);
-    //         },
-    //       },
-    //     },
-    //     {
-    //       path: "password",
-    //       name: "passwordSeller",
-    //       components: {
-    //         default: (resolve) => {
-    //           require([
-    //             "../components/dashboard/seller/profile/change_password.vue",
-    //           ], resolve);
-    //         },
-    //       },
-    //     },
-    //     {
-    //       path: "status",
-    //       name: "statusSeller",
-    //       components: {
-    //         default: (resolve) => {
-    //           require([
-    //             "../components/dashboard/seller/dashboard/status.vue",
-    //           ], resolve);
-    //         },
-    //       },
-    //     },
-    //     {
-    //       path: "referral",
-    //       name: "referralSeller",
-    //       components: {
-    //         default: (resolve) => {
-    //           require([
-    //             "../components/dashboard/seller/referral/referral.vue",
-    //           ], resolve);
-    //         },
-    //       },
-    //     },
-    //     {
-    //       path: "invited-users",
-    //       name: "invitedUsers",
-    //       components: {
-    //         default: (resolve) => {
-    //           require([
-    //             "../components/dashboard/seller/referral/invited-users.vue",
-    //           ], resolve);
-    //         },
-    //       },
-    //     },
-    //     {
-    //       path: "phone-viewers",
-    //       name: "sellerViewer",
-    //       components: {
-    //         default: (resolve) => {
-    //           require([
-    //             "../components/dashboard/seller/seller-viewer.vue",
-    //           ], resolve);
-    //         },
-    //       },
-    //     },
-    //     {
-    //       path: "pricing",
-    //       name: "dashboardPricingTableSeller",
-    //       components: {
-    //         default: (resolve) => {
-    //           require([
-    //             "../components/dashboard/dashboard-pricing-table",
-    //           ], resolve);
-    //         },
-    //       },
-    //     },
-    //     {
-    //       path: "product-pricing",
-    //       name: "dashboardProductPricing",
-    //       components: {
-    //         default: (resolve) => {
-    //           require([
-    //             "../components/dashboard/seller/pricing-seller-page/product-pricing.vue",
-    //           ], resolve);
-    //         },
-    //       },
-    //     },
-    //     {
-    //       path: "buyad-pricing",
-    //       name: "dashboardBuyAdPricing",
-    //       components: {
-    //         default: (resolve) => {
-    //           require([
-    //             "../components/dashboard/seller/pricing-seller-page/buyad-pricing.vue",
-    //           ], resolve);
-    //         },
-    //       },
-    //     },
-    //     {
-    //       path: "profile",
-    //       name: "profileBasicSeller",
-    //       components: {
-    //         default: (resolve) => {
-    //           require([
-    //             "../components/dashboard/seller/profile/profile_basic.vue",
-    //           ], resolve);
-    //         },
-    //       },
-    //     },
-    //     {
-    //       path: "profile/verification",
-    //       name: "profileBasicSellerVeficiation",
-    //       components: {
-    //         default: (resolve) => {
-    //           require([
-    //             "../components/dashboard/seller/profile/profile_verification.vue",
-    //           ], resolve);
-    //         },
-    //       },
-    //     },
-    //     {
-    //       path: "messenger",
-    //       components: {
-    //         default: (resolve) => {
-    //           require(["../components/dashboard/messenger.vue"], resolve);
-    //         },
-    //       },
-    //       children: [
-    //         {
-    //           path: "contacts",
-    //           name: "messagesSeller",
-    //           components: {
-    //             "messenger-list": (resolve) => {
-    //               require(["../components/dashboard/messages-components/my-contact-list.vue"], resolve);
-    //             },
-    //           },
-    //         },
-    //         {
-    //           path: 'buy-ads',
-    //           name: "messagesRequestSeller",
-    //           components: {
-    //             "messenger-list": (resolve) => {
-    //               require(["../components/dashboard/messages-components/my-buyad-list.vue"], resolve);
-    //             },
-    //           },
-    //         },
-    //       ],
-    //     },
-    //     {
-    //       path: "buyAd-requests",
-    //       name: "buyAdRequestsSeller",
-    //       components: {
-    //         default: (resolve) => {
-    //           require([
-    //             "../components/dashboard/seller/request/buyAd-requests.vue",
-    //           ], resolve);
-    //         },
-    //       },
-    //     },
+    {
+      path: "/seller",
+      components: {
+        seller: (resolve) => {
+          require(["./components/sellerDashboard.vue"], resolve);
+        },
+      },
+      redirect: "/404",
+      children: [
+        {
+          path: "my-buskool",
+          name: "myBuskoolSeller",
+          components: {
+            default: (resolve) => {
+              require([
+                "../components/dashboard/my-buskool/my-buskool.vue",
+              ], resolve);
+            },
+          },
+        },
+        {
+          path: "password",
+          name: "passwordSeller",
+          components: {
+            default: (resolve) => {
+              require([
+                "../components/dashboard/seller/profile/change_password.vue",
+              ], resolve);
+            },
+          },
+        },
+        {
+          path: "status",
+          name: "statusSeller",
+          components: {
+            default: (resolve) => {
+              require([
+                "../components/dashboard/seller/dashboard/status.vue",
+              ], resolve);
+            },
+          },
+        },
+        {
+          path: "referral",
+          name: "referralSeller",
+          components: {
+            default: (resolve) => {
+              require([
+                "../components/dashboard/seller/referral/referral.vue",
+              ], resolve);
+            },
+          },
+        },
+        {
+          path: "invited-users",
+          name: "invitedUsers",
+          components: {
+            default: (resolve) => {
+              require([
+                "../components/dashboard/seller/referral/invited-users.vue",
+              ], resolve);
+            },
+          },
+        },
+        {
+          path: "phone-viewers",
+          name: "sellerViewer",
+          components: {
+            default: (resolve) => {
+              require([
+                "../components/dashboard/seller/seller-viewer.vue",
+              ], resolve);
+            },
+          },
+        },
+        {
+          path: "pricing",
+          name: "dashboardPricingTableSeller",
+          components: {
+            default: (resolve) => {
+              require([
+                "../components/dashboard/dashboard-pricing-table",
+              ], resolve);
+            },
+          },
+        },
+        {
+          path: "product-pricing",
+          name: "dashboardProductPricing",
+          components: {
+            default: (resolve) => {
+              require([
+                "../components/dashboard/seller/pricing-seller-page/product-pricing.vue",
+              ], resolve);
+            },
+          },
+        },
+        {
+          path: "buyad-pricing",
+          name: "dashboardBuyAdPricing",
+          components: {
+            default: (resolve) => {
+              require([
+                "../components/dashboard/seller/pricing-seller-page/buyad-pricing.vue",
+              ], resolve);
+            },
+          },
+        },
+        {
+          path: "profile",
+          name: "profileBasicSeller",
+          components: {
+            default: (resolve) => {
+              require([
+                "../components/dashboard/seller/profile/profile_basic.vue",
+              ], resolve);
+            },
+          },
+        },
+        {
+          path: "profile/verification",
+          name: "profileBasicSellerVeficiation",
+          components: {
+            default: (resolve) => {
+              require([
+                "../components/dashboard/seller/profile/profile_verification.vue",
+              ], resolve);
+            },
+          },
+        },
+        {
+          path: "messenger",
+          components: {
+            default: (resolve) => {
+              require(["../components/dashboard/messenger.vue"], resolve);
+            },
+          },
+          children: [
+            {
+              path: "contacts",
+              name: "messagesSeller",
+              components: {
+                "messenger-list": (resolve) => {
+                  require(["../components/dashboard/messages-components/my-contact-list.vue"], resolve);
+                },
+              },
+            },
+            {
+              path: 'buy-ads',
+              name: "messagesRequestSeller",
+              components: {
+                "messenger-list": (resolve) => {
+                  require(["../components/dashboard/messages-components/my-buyad-list.vue"], resolve);
+                },
+              },
+            },
+          ],
+        },
+        {
+          path: "buyAd-requests",
+          name: "buyAdRequestsSeller",
+          components: {
+            default: (resolve) => {
+              require([
+                "../components/dashboard/seller/request/buyAd-requests.vue",
+              ], resolve);
+            },
+          },
+        },
 
-    //     {
-    //       path: "my-products",
-    //       name: "myProductsSeller",
-    //       components: {
-    //         default: (resolve) => {
-    //           require([
-    //             "../components/dashboard/seller/product/my_products",
-    //           ], resolve);
-    //         },
-    //       },
-    //     },
-    //     {
-    //       path: "register-product",
-    //       name: "registerProductSeller",
-    //       components: {
-    //         default: (resolve) => {
-    //           require([
-    //             "../components/dashboard/seller/product/product-basic.vue",
-    //           ], resolve);
-    //         },
-    //       },
-    //       children: [
-    //         {
-    //           path: "success",
-    //           name: "successRegisterProduct",
-    //           components: {
-    //             default: (resolve) => {
-    //               require([
-    //                 "../components/dashboard/seller/product/product-basic.vue",
-    //               ], resolve);
-    //             },
-    //           },
-    //         },
-    //       ]
-    //     },
-    //     {
-    //       path: "guide",
-    //       name: "guideSeller",
-    //       components: {
-    //         default: (resolve) => {
-    //           require(["../components/dashboard/seller/guide.vue"], resolve);
-    //         },
-    //       },
-    //     },
-    //     {
-    //       path: "show-number-guide",
-    //       name: "showNumberGuideSeller",
-    //       components: {
-    //         default: (resolve) => {
-    //           require(["../components/dashboard/seller/show-number-guide.vue"], resolve);
-    //         },
-    //       },
-    //     },
-    //     {
-    //       path: "support",
-    //       name: "supportSeller",
-    //       components: {
-    //         default: (resolve) => {
-    //           require(["../components/dashboard/seller/support.vue"], resolve);
-    //         },
-    //       },
-    //     },
-    //   ],
-    //   beforeEnter: (to, from, next) => {
-    //     var userId = window.localStorage.getItem("userId");
-    //     var userType = window.localStorage.getItem("userType");
-    //     if (userId && userType == 1) next();
-    //     else next("/login");
-    //   },
-    // },
-    // {
-    //   path: "/buyer",
-    //   components: {
-    //     buyer: (resolve) => {
-    //       require(["./components/buyerDashboard.vue"], resolve);
-    //     },
-    //   },
-    //   redirect: "/404",
-    //   children: [
-    //     {
-    //       path: "password",
-    //       name: "passwordBuyer",
-    //       components: {
-    //         default: (resolve) => {
-    //           require([
-    //             "../components/dashboard/seller/profile/change_password.vue",
-    //           ], resolve);
-    //         },
-    //       },
-    //     },
-    //     {
-    //       path: "my-buskool",
-    //       name: "myBuskoolBuyer",
-    //       components: {
-    //         default: (resolve) => {
-    //           require([
-    //             "../components/dashboard/my-buskool/my-buskool.vue",
-    //           ], resolve);
-    //         },
-    //       },
-    //     },
-    //     {
-    //       path: "profile",
-    //       name: "profileBasicBuyer",
-    //       components: {
-    //         default: (resolve) => {
-    //           require([
-    //             "../components/dashboard/buyer/profile/profile_basic.vue",
-    //           ], resolve);
-    //         },
-    //       },
-    //     },
-    //     {
-    //       path: "profile/verification",
-    //       name: "profileBasicBuyerVeficiation",
-    //       components: {
-    //         default: (resolve) => {
-    //           require([
-    //             "../components/dashboard/buyer/profile/profile_verification.vue",
-    //           ], resolve);
-    //         },
-    //       },
-    //     },
-    //     {
-    //       path: "messenger",
-    //       components: {
-    //         default: (resolve) => {
-    //           require(["../components/dashboard/messenger.vue"], resolve);
-    //         },
-    //       },
-    //       children: [
-    //         {
-    //           path: "contacts",
-    //           name: "messagesBuyer",
-    //           components: {
-    //             "messenger-list": (resolve) => {
-    //               require(["../components/dashboard/messages-components/my-contact-list.vue"], resolve);
-    //             },
-    //           },
-    //         },
-    //       ],
-    //     },
-    //     {
-    //       path: "register-request",
-    //       name: "registerRequestBuyer",
-    //       components: {
-    //         default: (resolve) => {
-    //           require([
-    //             "../components/dashboard/buyer/request/register-request",
-    //           ], resolve);
-    //         },
-    //       },
-    //     },
-    //     {
-    //       path: "special-products",
-    //       name: "specialProducts",
-    //       components: {
-    //         default: (resolve) => {
-    //           require([
-    //             "../components/dashboard/buyer/products/special-products",
-    //           ], resolve);
-    //         },
-    //       },
-    //     },
-    //     {
-    //       path: "my-buyAd-requests",
-    //       name: "myBuyAdRequestsBuyer",
-    //       components: {
-    //         default: (resolve) => {
-    //           require([
-    //             "../components/dashboard/buyer/my-requests/buyAd-requests.vue",
-    //           ], resolve);
-    //         },
-    //       },
-    //     },
-    //     {
-    //       path: "guide",
-    //       name: "guideBuyer",
-    //       components: {
-    //         default: (resolve) => {
-    //           require(["../components/dashboard/buyer/guide.vue"], resolve);
-    //         },
-    //       },
-    //     },
-    //     {
-    //       path: "support",
-    //       name: "supportBuyer",
-    //       components: {
-    //         default: (resolve) => {
-    //           require(["../components/dashboard/buyer/support.vue"], resolve);
-    //         },
-    //       },
-    //     },
-    //   ],
-    //   beforeEnter: (to, from, next) => {
-    //     var userId = window.localStorage.getItem("userId");
-    //     var userType = window.localStorage.getItem("userType");
-    //     if (userId && userType == 0) next();
-    //     else next("/login");
-    //   },
-    // },
+        {
+          path: "my-products",
+          name: "myProductsSeller",
+          components: {
+            default: (resolve) => {
+              require([
+                "../components/dashboard/seller/product/my_products",
+              ], resolve);
+            },
+          },
+        },
+        {
+          path: "register-product",
+          name: "registerProductSeller",
+          components: {
+            default: (resolve) => {
+              require([
+                "../components/dashboard/seller/product/product-basic.vue",
+              ], resolve);
+            },
+          },
+          children: [
+            {
+              path: "success",
+              name: "successRegisterProduct",
+              components: {
+                default: (resolve) => {
+                  require([
+                    "../components/dashboard/seller/product/product-basic.vue",
+                  ], resolve);
+                },
+              },
+            },
+          ]
+        },
+        {
+          path: "guide",
+          name: "guideSeller",
+          components: {
+            default: (resolve) => {
+              require(["../components/dashboard/seller/guide.vue"], resolve);
+            },
+          },
+        },
+        {
+          path: "show-number-guide",
+          name: "showNumberGuideSeller",
+          components: {
+            default: (resolve) => {
+              require(["../components/dashboard/seller/show-number-guide.vue"], resolve);
+            },
+          },
+        },
+        {
+          path: "support",
+          name: "supportSeller",
+          components: {
+            default: (resolve) => {
+              require(["../components/dashboard/seller/support.vue"], resolve);
+            },
+          },
+        },
+      ],
+      beforeEnter: (to, from, next) => {
+        var userId = window.localStorage.getItem("userId");
+        var userType = window.localStorage.getItem("userType");
+        if (userId && userType == 1) next();
+        else next("/login");
+      },
+    },
+    {
+      path: "/buyer",
+      components: {
+        buyer: (resolve) => {
+          require(["./components/buyerDashboard.vue"], resolve);
+        },
+      },
+      redirect: "/404",
+      children: [
+        {
+          path: "password",
+          name: "passwordBuyer",
+          components: {
+            default: (resolve) => {
+              require([
+                "../components/dashboard/seller/profile/change_password.vue",
+              ], resolve);
+            },
+          },
+        },
+        {
+          path: "my-buskool",
+          name: "myBuskoolBuyer",
+          components: {
+            default: (resolve) => {
+              require([
+                "../components/dashboard/my-buskool/my-buskool.vue",
+              ], resolve);
+            },
+          },
+        },
+        {
+          path: "profile",
+          name: "profileBasicBuyer",
+          components: {
+            default: (resolve) => {
+              require([
+                "../components/dashboard/buyer/profile/profile_basic.vue",
+              ], resolve);
+            },
+          },
+        },
+        {
+          path: "profile/verification",
+          name: "profileBasicBuyerVeficiation",
+          components: {
+            default: (resolve) => {
+              require([
+                "../components/dashboard/buyer/profile/profile_verification.vue",
+              ], resolve);
+            },
+          },
+        },
+        {
+          path: "messenger",
+          components: {
+            default: (resolve) => {
+              require(["../components/dashboard/messenger.vue"], resolve);
+            },
+          },
+          children: [
+            {
+              path: "contacts",
+              name: "messagesBuyer",
+              components: {
+                "messenger-list": (resolve) => {
+                  require(["../components/dashboard/messages-components/my-contact-list.vue"], resolve);
+                },
+              },
+            },
+          ],
+        },
+        {
+          path: "register-request",
+          name: "registerRequestBuyer",
+          components: {
+            default: (resolve) => {
+              require([
+                "../components/dashboard/buyer/request/register-request",
+              ], resolve);
+            },
+          },
+        },
+        {
+          path: "special-products",
+          name: "specialProducts",
+          components: {
+            default: (resolve) => {
+              require([
+                "../components/dashboard/buyer/products/special-products",
+              ], resolve);
+            },
+          },
+        },
+        {
+          path: "my-buyAd-requests",
+          name: "myBuyAdRequestsBuyer",
+          components: {
+            default: (resolve) => {
+              require([
+                "../components/dashboard/buyer/my-requests/buyAd-requests.vue",
+              ], resolve);
+            },
+          },
+        },
+        {
+          path: "guide",
+          name: "guideBuyer",
+          components: {
+            default: (resolve) => {
+              require(["../components/dashboard/buyer/guide.vue"], resolve);
+            },
+          },
+        },
+        {
+          path: "support",
+          name: "supportBuyer",
+          components: {
+            default: (resolve) => {
+              require(["../components/dashboard/buyer/support.vue"], resolve);
+            },
+          },
+        },
+      ],
+      beforeEnter: (to, from, next) => {
+        var userId = window.localStorage.getItem("userId");
+        var userType = window.localStorage.getItem("userType");
+        if (userId && userType == 0) next();
+        else next("/login");
+      },
+    },
     {
       path: "/",
       components: {

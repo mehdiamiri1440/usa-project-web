@@ -19,15 +19,11 @@
 
 .main-article-image .product-image {
   display: block;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
   position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 100%;
-  z-index: 1;
 }
 
 .image-wrapper-contents {
@@ -109,6 +105,12 @@
   left: 0;
   bottom: -14px;
 }
+.image__wrapper img {
+  position: relative;
+}
+.image__wrapper.loaded .spinner-wrapper {
+  display: none;
+}
 @media screen and (max-width: 555px) {
   .main-article-image {
     height: 130px;
@@ -118,18 +120,17 @@
 
 <template>
   <div class="main-article-image">
-    <div
-      v-if="$parent.loadedProduct"
-      class="product-image"
-      :style="{
-        backgroundImage: 'url(' + base + 'thumbnails/' + img + ')',
-      }"
-    ></div>
-    <div v-show="!isImageLoad" class="text-center spinner-wrapper">
-      <div class="spinner-border">
-        <span class="sr-only"></span>
-      </div>
+    <div v-if="$parent.loadedProduct" class="product-image">
+      <figure v-lazyload class="image__wrapper">
+        <div class="text-center spinner-wrapper">
+          <div class="spinner-border">
+            <span class="sr-only"></span>
+          </div>
+        </div>
+        <img class="image__item" :data-url="base + 'thumbnails/' + img" />
+      </figure>
     </div>
+
     <div class="image-wrapper-contents">
       <div
         class="valid-user-badge"
@@ -169,13 +170,13 @@
           </svg>
         </div>
       </div>
-      <img
+      <!-- <img
         v-if="$parent.loadedProduct"
         class="hidden"
         :src="base + 'thumbnails/' + img"
         @load="ImageLoaded"
         :alt="alt"
-      />
+      /> -->
 
       <div v-if="imageCount" class="image-count-item">
         <i class="fas fa-images"></i>

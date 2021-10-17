@@ -28,9 +28,10 @@
       window.Laravel = {csrfToken: '{{csrf_token()}}'}
   </script>
   <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script  src="{{asset('assets/js/firebase/gtag.min.js')}}" async></script>
-  <script  src="{{asset('assets/js/firebase/firebase-app-7.13.0.min.js')}}" defer></script>
-  <script  src="{{asset('assets/js/firebase/firebase-messaging-7.13.0.min.js')}}" defer></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129398000-1"></script>
+  <script  src="https://www.gstatic.com/firebasejs/7.13.0/firebase-app.js"></script>
+  <script  src="https://www.gstatic.com/firebasejs/7.13.0/firebase-messaging.js"></script> 
+  
 
   <script>
     //  gtag configs
@@ -186,9 +187,9 @@
     />
   </div>
 
-  <script src="{{asset('assets/js/custom.bootstrap.min.js')}}" ></script>
 
-<script src="{{asset('js/app.js')}}" ></script>
+<script src="{{asset('js/app.js')}}" defer></script>
+
 <script>
 
     function getUserId(){
