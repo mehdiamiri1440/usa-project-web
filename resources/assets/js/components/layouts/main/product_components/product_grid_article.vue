@@ -36,10 +36,39 @@
   height: 250px;
 }
 
+.main-content-item.has-action {
+  height: 300px;
+}
+
+.has-action .actions-wrapper {
+  padding: 0 15px;
+}
+
+.has-action .green-button,
+.has-action .green-button:active,
+.has-action .green-button:focus {
+  transition: 150ms;
+  margin: 0 auto;
+  border-radius: 12px;
+  padding: 9px;
+  width: 100%;
+  font-size: 16px;
+  background: #fff !important;
+  border: 1px solid;
+  color: #00c569 !important;
+  line-height: 1;
+}
+
+.has-action .green-button:hover {
+  transition: 150ms;
+  color: #fff !important;
+  background: #00c569 !important;
+}
+
 .elevator-event {
   position: absolute;
   left: 5px;
-  bottom: 15px;
+  bottom: 11px;
   border: none;
   border-radius: 8px;
   background: #38485f;
@@ -285,6 +314,10 @@ label {
   width: 114px;
 }
 
+.main-wrapper {
+  position: relative;
+}
+
 @media screen and (max-width: 555px) {
   .article-action-buttons > button {
     padding: 8px 15px;
@@ -312,7 +345,10 @@ label {
 <template>
   <article
     class="main-content-item"
-    :class="{ 'is-user-valid': product.user_info.active_pakage_type == 3 }"
+    :class="[
+      { 'is-user-valid': product.user_info.active_pakage_type == 3 },
+      { 'has-action': checkActionButtonShow() },
+    ]"
   >
     <!--article modal-->
 
@@ -431,7 +467,10 @@ label {
     </div>
 
     <!--end article modal-->
-    <div class="main-article-contents-image-wrapper" @click="setScroll()">
+    <div
+      class="main-article-contents-image-wrapper"
+      @click="openProductInSeperatePage()"
+    >
       <ProductImage
         :base="str + '/'"
         :img="product.photos[0].file_path"
@@ -461,20 +500,26 @@ label {
       :is_my_profile_status="isMyProfile"
     />
 
-    <ArticleMainContents
-      :productIndex="productIndex"
-      :is_my_profile_status="isMyProfile"
-    />
-    <button
-      v-if="product.main.is_elevated == 1"
-      data-toggle="tooltip"
-      data-placement="right"
-      title="نردبان اعمال شده است"
-      class="elevator-event"
-    >
-      <i class="fas fa-chart-line"></i>
-    </button>
-
+    <div class="main-wrapper">
+      <ArticleMainContents
+        :productIndex="productIndex"
+        :is_my_profile_status="isMyProfile"
+      />
+      <button
+        v-if="product.main.is_elevated == 1"
+        data-toggle="tooltip"
+        data-placement="right"
+        title="نردبان اعمال شده است"
+        class="elevator-event"
+      >
+        <i class="fas fa-chart-line"></i>
+      </button>
+    </div>
+    <div v-if="checkActionButtonShow()" class="actions-wrapper">
+      <button @click="openProductInSeperatePage()" class="green-button">
+        استعلام قیمت
+      </button>
+    </div>
     <!--google codes-->
     <script v-html="jsonLDObject" type="application/ld+json"></script>
     <!--end google codes-->
@@ -493,7 +538,7 @@ export default {
     ArticleMainContents,
     ProductImage,
   },
-  props: ["productIndex", "product", "str"],
+  props: ["productIndex", "product", "str", "hasActionButton"],
   data: function () {
     return {
       submiting: false,
@@ -520,7 +565,7 @@ export default {
 
       // this.jsonLDObject = this.createJsonLDObject();
     },
-    setScroll: function () {
+    openProductInSeperatePage: function () {
       localStorage.setItem("scrollIndex", this.$props.productIndex);
       window.open(this.productUrl, "_blank");
       // this.registerComponentStatistics(
@@ -735,6 +780,17 @@ export default {
 
       eventBus.$emit("productId", this.product.main.id);
       eventBus.$emit("modal", "elevator");
+    },
+    checkActionButtonShow() {
+      let userId = getUserId();
+      if (
+        (!userId && this.hasActionButton) ||
+        (userId == -1 && this.hasActionButton)
+      ) {
+        return true;
+      } else {
+        return false;
+      }
     },
   },
   mounted() {

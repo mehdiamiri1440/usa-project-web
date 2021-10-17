@@ -458,7 +458,9 @@ const router = new Router({
           name: "productList",
           components: {
             default: (resolve) => {
-              require(["../components/layouts/main/product_list.vue"], resolve);
+              require([
+                abTestingOption == 'first' ? "../components/layouts/main/product_list.vue" : "../components/layouts/main/product_list2.vue",
+              ], resolve);
             },
           },
           props: true,

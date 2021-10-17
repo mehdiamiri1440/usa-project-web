@@ -138,7 +138,10 @@ div.user-information-link {
 </style>
 
 <template>
-  <div class="user-information-wrapper" @click.prevent="$parent.setScroll()">
+  <div
+    class="user-information-wrapper"
+    @click.prevent="$parent.openProductInSeperatePage()"
+  >
     <div class="user-information-link">
       <div class="user-information-content pull-right">
         <i class="fa fa-user-circle"></i>

@@ -123,7 +123,10 @@ body {
         $parent.product.user_info.active_pakage_type != 3,
     }"
   >
-    <div class="main-article-contents" @click="$parent.setScroll()">
+    <div
+      class="main-article-contents"
+      @click="$parent.openProductInSeperatePage()"
+    >
       <p>
         <span>
           <i class="fa fa-map-marker-alt"></i>
