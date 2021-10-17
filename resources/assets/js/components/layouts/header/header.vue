@@ -1417,13 +1417,6 @@ a.profile-info-wrapper:hover {
                   v-if="is_seller == 1"
                   class="smoothScroll"
                   :to="{ name: 'messagesSeller' }"
-                  @click="
-                    registerComponentStatistics(
-                      'header',
-                      'dashboard',
-                      'click-on-dashboard'
-                    )
-                  "
                 >
                   پیام ها
                   <span
@@ -1437,13 +1430,6 @@ a.profile-info-wrapper:hover {
                   v-else
                   class="smoothScroll"
                   :to="{ name: 'messagesBuyer' }"
-                  @click="
-                    registerComponentStatistics(
-                      'header',
-                      'dashboard',
-                      'click-on-dashboard'
-                    )
-                  "
                 >
                   پیام ها
                   <span
@@ -1458,26 +1444,12 @@ a.profile-info-wrapper:hover {
                   v-if="is_seller == 1"
                   class="smoothScroll"
                   :to="{ name: 'mainBuyAdRequests' }"
-                  @click="
-                    registerComponentStatistics(
-                      'header',
-                      'dashboard',
-                      'click-on-dashboard'
-                    )
-                  "
                   >درخواست های خرید</router-link
                 >
                 <router-link
                   v-else
                   class="smoothScroll"
                   :to="{ name: 'registerRequestBuyer' }"
-                  @click="
-                    registerComponentStatistics(
-                      'header',
-                      'dashboard',
-                      'click-on-dashboard'
-                    )
-                  "
                   >ثبت درخواست خرید</router-link
                 >
               </li>
@@ -1486,13 +1458,6 @@ a.profile-info-wrapper:hover {
                   v-if="is_seller == 1"
                   class="smoothScroll"
                   :to="{ name: 'messagesRequestSeller' }"
-                  @click="
-                    registerComponentStatistics(
-                      'header',
-                      'dashboard',
-                      'click-on-dashboard'
-                    )
-                  "
                 >
                   <span class="star-badge">
                     <i class="fa fa-star"></i>

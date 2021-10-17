@@ -333,7 +333,11 @@ li.score-item i {
                     data-container="body"
                     data-toggle="popover"
                     data-placement="bottom"
-                    :data-content="$parent.verifiedUserContent"
+                    :data-content="
+                      selectedContact.is_verified
+                        ? $parent.verifiedUserContent
+                        : `<div class='tooltip-wrapper text-rtl'>اطلاعات هویتی این کاربر احراز نشده است.<br/><a href='/verification'>اطلاعات بیشتر</a> </div>`
+                    "
                   >
                     <i class="fa fa-certificate"></i>
                   </button>

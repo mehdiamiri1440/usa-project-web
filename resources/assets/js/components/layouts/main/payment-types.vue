@@ -475,6 +475,12 @@ export default {
       }
     },
     paymentWithWallet() {
+      this.registerComponentStatistics(
+            "payment",
+            "payment-from-wallet",
+            "pay-for : " + this.peymentMethodData.paymentName
+      );
+
       switch (this.peymentMethodData.paymentName) {
         case "buyAdPriceData":
           axios

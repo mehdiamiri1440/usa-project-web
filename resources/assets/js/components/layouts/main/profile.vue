@@ -2150,11 +2150,6 @@ export default {
       }
     },
     getProfileOwnerProducts: function () {
-      this.registerComponentStatistics(
-        "profileView",
-        "showUserProducts",
-        "click on show products"
-      );
 
       this.loading = true;
 
@@ -2170,11 +2165,7 @@ export default {
         });
     },
     showProfileOwnerDescription: function () {
-      this.registerComponentStatistics(
-        "profileView",
-        "profileDescription",
-        "click on profile description"
-      );
+      
       this.getProfileOwnerProducts();
       // this.profileDescription = true;
       this.profileOwner.profile = "";
@@ -2188,39 +2179,6 @@ export default {
           if (err.response.status == 404) {
             window.location.href = "/404";
           }
-        });
-    },
-    refreshProduct: function (productId) {
-      this.registerComponentStatistics(
-        "profileView",
-        "RefreshProduct",
-        "refresh product"
-      );
-
-      var self = this;
-
-      axios
-        .post("/refresh_my_product_by_id", {
-          product_id: productId,
-        })
-        .then(function (response) {
-          if (response.data.status === true) {
-            self.popUpMsg =
-              "محصول شما بروز رسانی شد و در صدر لیست محصولات قرار گرفت.";
-            eventBus.$emit("submitSuccess", self.popUpMsg);
-            $("#custom-main-modal").modal("show");
-          } else {
-            self.popUpMsg =
-              "هم اکنون قادر به انجام عملیات نیستیم.دوباره تلاش کنید.";
-            eventBus.$emit("submitSuccess", self.popUpMsg);
-            $("#custom-main-modal").modal("show");
-          }
-        })
-        .catch(function (err) {
-          self.popUpMsg =
-            "هم اکنون قادر به انجام عملیات نیستیم.دوباره تلاش کنید.";
-          eventBus.$emit("submitSuccess", self.popUpMsg);
-          $("#custom-main-modal").modal("show");
         });
     },
     copyProfileLinkToClipBoard(contentId) {

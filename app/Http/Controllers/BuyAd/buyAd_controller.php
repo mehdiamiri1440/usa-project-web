@@ -899,7 +899,7 @@ class buyAd_controller extends Controller
         $buyAds = $query->get();
 
         $buyAds = $buyAds->filter(function($buyAd){
-            return is_null($buyAd->response_rate) || $buyAd->response_rate >= 50;
+            return is_null($buyAd->response_rate) || $buyAd->response_rate >= 50 || (str_split($buyAd->phone_view_permission)[1] == 0 && $buyAd->reply_capacity <= 0);
         });
 
         $golden_buyAds_update_date = Carbon::now()->subHours(2);

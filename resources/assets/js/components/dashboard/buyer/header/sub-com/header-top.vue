@@ -710,13 +710,6 @@ a.profile-info-wrapper:focus {
                   data-toggle="collapse"
                   href="#web-profile-items"
                   :to="{ name: 'profileBasicBuyer' }"
-                  @click="
-                    registerComponentStatistics(
-                      'seller-dashboard-header',
-                      'profile-link',
-                      'click-on-profile-link-in-dashboard'
-                    )
-                  "
                 >
                   <i class="fa fa-user"></i>
                   پروفایل
@@ -728,13 +721,6 @@ a.profile-info-wrapper:focus {
                   data-toggle="collapse"
                   href="#web-profile-items"
                   :to="{ name: 'passwordBuyer' }"
-                  @click="
-                    registerComponentStatistics(
-                      'seller-dashboard-header',
-                      'change-password',
-                      'click-on-change-password-dashboard'
-                    )
-                  "
                 >
                   <i class="fa fa-lock"></i>
                   تغییر کلمه عبور
@@ -770,13 +756,6 @@ a.profile-info-wrapper:focus {
             <router-link
               class="product-list-link"
               :to="{ name: 'productList' }"
-              @click="
-                registerComponentStatistics(
-                  'dashboard-header',
-                  'product-list-btn',
-                  'click-on-product-list-in-dashboard'
-                )
-              "
             >
               <span class="hidden-xs hidden-sm"> لیست محصولات </span>
               <span class="hidden-md hidden-lg">
@@ -788,13 +767,6 @@ a.profile-info-wrapper:focus {
           <li>
             <router-link
               :to="{ name: 'indexPage' }"
-              @click="
-                registerComponentStatistics(
-                  'dashboard-header',
-                  'home-page-btn',
-                  'click-on-home-page-in-dashboard'
-                )
-              "
               class="home-button"
             >
               <i class="fa fa-home" aria-hidden="true"></i>

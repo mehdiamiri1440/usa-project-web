@@ -132,7 +132,7 @@ export default {
     return {
       isMobile: false,
       currentStep: 1,
-      route: 0,
+      activity_type: 0,
       stock: "",
       productName: "",
       currentUser: {
@@ -202,7 +202,7 @@ export default {
           sex: "آقا",
           province: this.step5.provinceName,
           city: this.step5.cityName,
-          activity_type: 1,
+          activity_type: this.activity_type,
           national_code: "",
           category_id: this.product.main.category_id,
         };
@@ -233,7 +233,7 @@ export default {
                   console.log("err");
                 });
               this.registerComponentStatistics(
-                "Register",
+                "Register-Modal",
                 "successful-register",
                 "user-registered-successfully"
               );
@@ -267,11 +267,6 @@ export default {
         .then((response) => {
           if (response.status === 201) {
             $("#register-modal").modal("hide");
-            this.registerComponentStatistics(
-              "buyAd-register",
-              "buyAd-registered-successfully",
-              "buyAd-registered-successfully"
-            );
           }
         })
         .catch((err) => {
@@ -330,7 +325,7 @@ export default {
           }, 120000);
 
           this.registerComponentStatistics(
-            "Register",
+            "Register-Modal",
             "send-verification-code",
             "verification-code-sent-to-user"
           );
@@ -343,7 +338,7 @@ export default {
           this.step1.sendCode = false;
 
           this.registerComponentStatistics(
-            "Register-Error",
+            "Register-Modal-Error",
             "phone-number-verification",
             "error:" + this.errors.phone
           );
@@ -372,7 +367,7 @@ export default {
             this.errors.verification_code = response.data.msg;
 
             this.registerComponentStatistics(
-              "Register-Error",
+              "Register-Modal-Error",
               "verification-code-wrong",
               "error:" + this.errors.verification_code
             );
@@ -385,7 +380,7 @@ export default {
           this.errors.verification_code = "وارد کردن کد الزامی است.";
 
           this.registerComponentStatistics(
-            "Register-Error",
+            "Register-Modal-Error",
             "verification-code-empty",
             "error:" + this.errors.verification_code
           );

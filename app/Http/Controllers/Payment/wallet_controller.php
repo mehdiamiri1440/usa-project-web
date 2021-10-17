@@ -154,11 +154,11 @@ class wallet_controller extends Controller
             // عملیات خرید با موفقیت انجام شده است
             // در اینجا کالا درخواستی را به کاربر ارائه میکنم
             
-            $this->do_after_payment_changes_for_wallet_charge(session()->pull('payment_amount'),session()->pull('app_user_id'));
+            $this->do_after_payment_changes_for_wallet_charge($payment_amount,$user_id);
             
             return redirect('buskool://my-buskool');
 
-        } 
+        }  
         catch (\Exception $e)
         {
             return redirect('buskool://wallet');

@@ -59,7 +59,7 @@ class user_controller extends Controller
             'activity_type' => 'required',
             //'national_code' => 'unique:myusers',
             'verification_code' => 'required|numeric',
-            'referred_user_name' => 'exists:myusers,user_name'
+            'referred_user_name' => 'string|exists:myusers,user_name'
 		);
 		$this->validate($request,$rules);
 		
