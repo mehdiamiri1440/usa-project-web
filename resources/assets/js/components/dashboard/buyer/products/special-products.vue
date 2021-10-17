@@ -463,7 +463,7 @@ export default {
 
       this.searchTextTimeout = setTimeout(function () {
         self.registerComponentStatistics(
-          "product-list",
+          "special-product-list",
           "search-text",
           self.$parent.searchText
         );

@@ -326,7 +326,7 @@
         <span class="header-chat-image" v-if="contactInfo.profile_photo">
           <img :src="$parent.assets + 'storage/' + contactInfo.profile_photo" />
         </span>
-        <span class="header-chat-image" v-else-if="!chatMessagesLoader">
+        <span class="header-chat-image" v-else-if="openChatBox">
           <img :src="$parent.assets + 'assets/img/user-defult.png'" />
         </span>
 
@@ -353,10 +353,7 @@
     </div>
 
     <div class="main-modal-chat">
-      <div
-        class="bg-wrapper"
-        :class="{ 'background-chat': !chatMessagesLoader }"
-      ></div>
+      <div class="bg-wrapper background-chat" v-if="openChatBox"></div>
 
       <div
         class="loading-container"

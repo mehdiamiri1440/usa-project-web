@@ -2028,35 +2028,6 @@ export default {
       const bottomOfPage = visible + scrollY >= pageHeight;
       return bottomOfPage || pageHeight < visible;
     },
-    addProductOrRequest: function () {
-      if (this.currentUser.user_info) {
-        if (this.currentUser.user_info.is_seller) {
-          this.registerComponentStatistics(
-            "product-list",
-            "register-product",
-            "seller clicks on plus button"
-          );
-
-          window.location.href = "/seller/register-product";
-        } else if (this.currentUser.user_info.is_buyer) {
-          this.registerComponentStatistics(
-            "product-list",
-            "register-request",
-            "seller clicks on plus button"
-          );
-
-          window.location.href = "/buyer/register-request";
-        }
-      } else {
-        this.registerComponentStatistics(
-          "product-list",
-          "unauthorized-user-clicks-on-plus-btn",
-          "unauthorized-user-clicks-on-plus-btn"
-        );
-
-        eventBus.$emit("modal", "guide");
-      }
-    },
     resetFilter: function () {
       this.submiting = true;
 

@@ -12,27 +12,27 @@
   
   <link rel="icon" href="{{asset('assets/img/logo/mobile-logo.svg')}}">
   <!-- fonts -->
-  {{-- <link rel="preload" href="{{asset('assets/fonts/woff2/IRANSansWeb(FaNum)_Bold.woff2')}}" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{{asset('assets/fonts/woff2/IRANSansWeb(FaNum)_Bold.woff2')}}" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="{{asset('assets/fonts/woff2/IRANSansWeb(FaNum).woff2')}}" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="{{asset('assets/fonts/woff2/IRANSansWeb(FaNum)_Medium.woff2')}}" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="{{asset('assets/webfonts/fa-solid-900.woff2')}}" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="{{asset('assets/webfonts/fa-regular-400.woff2')}}" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="{{asset('assets/css/fontiran.min.css')}}" as="style" onload="this.rel='stylesheet'" crossorigin>
-  <link rel="preload" href="{{asset('assets/css/all.min.css')}}" as="style" onload="this.rel='stylesheet'" crossorigin> --}}
+  <link rel="preload" href="{{asset('assets/css/all.min.css')}}" as="style" onload="this.rel='stylesheet'" crossorigin>
 
   {{-- <link  href="{{asset('assets/css/bootstrap.min.css')}}" as="style" onload="this.rel='stylesheet'" crossorigin> --}}
-  {{-- <link rel="preload" href="{{asset('css/app.css')}}" as="style" onload="this.rel='stylesheet'" crossorigin> --}}
+  <link rel="preload" href="{{asset('css/app.css')}}" as="style" onload="this.rel='stylesheet'" crossorigin>
   
   <title>باسکول | بازار خرید و فروش عمده محصولات غذایی و کشاورزی ایران بدون واسطه</title>
     <script>
       window.Laravel = {csrfToken: '{{csrf_token()}}'}
   </script>
   <!-- Global site tag (gtag.js) - Google Analytics -->
-  {{-- <script  src="{{asset('assets/js/firebase/gtag.min.js')}}" async></script>
+  <script  src="{{asset('assets/js/firebase/gtag.min.js')}}" async></script>
   <script  src="{{asset('assets/js/firebase/firebase-app-7.13.0.min.js')}}" defer></script>
-  <script  src="{{asset('assets/js/firebase/firebase-messaging-7.13.0.min.js')}}" defer></script> --}}
+  <script  src="{{asset('assets/js/firebase/firebase-messaging-7.13.0.min.js')}}" defer></script>
 
-  {{-- <script>
+  <script>
     //  gtag configs
       window.dataLayer = window.dataLayer || [];
       function gtag() {
@@ -54,7 +54,7 @@
   };
       firebase.initializeApp(firebaseConfig);
       const messaging = firebase.messaging();
-  </script> --}}
+  </script>
 
 <style>
   .main-loader-wrapper {
@@ -186,8 +186,9 @@
     />
   </div>
 
+  <script src="{{asset('assets/js/custom.bootstrap.min.js')}}" ></script>
+
 <script src="{{asset('js/app.js')}}" ></script>
-{{-- <script src="{{asset('assets/js/custom.bootstrap.min.js')}}" defer></script> --}}
 <script>
 
     function getUserId(){

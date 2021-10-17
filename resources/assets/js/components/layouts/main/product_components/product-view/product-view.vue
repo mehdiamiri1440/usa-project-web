@@ -656,7 +656,7 @@ export default {
     openChat(product) {
       this.isChat = true;
       this.registerComponentStatistics(
-        "product",
+        "product-view",
         "openChat",
         "click on open chatBox"
       );
@@ -699,7 +699,7 @@ export default {
     openChatModal(product) {
       this.isChat = true;
       this.registerComponentStatistics(
-        "product",
+        "product-view",
         "openChat",
         "click on open chatBox"
       );
@@ -823,15 +823,18 @@ export default {
         this.product.main.id
       );
     },
-    shareMyProfile() {
-      let baseUrl = getBase();
-      baseUrl = baseUrl.substring(0, baseUrl.length - 1);
-      if (this.isDeviceMobile()) {
-        this.registerComponentStatistics(
-          "product",
+    shareProduct() {
+      this.registerComponentStatistics(
+          "product-view",
           "copy-product-link",
           "click on copy poduct link"
         );
+
+        
+      let baseUrl = getBase();
+      baseUrl = baseUrl.substring(0, baseUrl.length - 1);
+      if (this.isDeviceMobile()) {
+
         var linkElement = document.createElement("a");
         var Message = baseUrl + this.getProductUrl();
         var messageToWhatsApp = encodeURIComponent(Message);
@@ -927,7 +930,7 @@ export default {
           eventBus.$emit("modal", "productEditDone");
 
           self.registerComponentStatistics(
-            "product",
+            "product-view",
             "register-product-edit",
             "product-edited-successfully"
           );

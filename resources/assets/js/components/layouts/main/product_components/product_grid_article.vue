@@ -523,11 +523,11 @@ export default {
     setScroll: function () {
       localStorage.setItem("scrollIndex", this.$props.productIndex);
       window.open(this.productUrl, "_blank");
-      this.registerComponentStatistics(
-        "product",
-        "show-product-in-seperate-page",
-        "show-product-in-seperate-page"
-      );
+      // this.registerComponentStatistics(
+      //   "product",
+      //   "show-product-in-seperate-page",
+      //   "show-product-in-seperate-page"
+      // );
     },
     toLatinNumbers: function (num) {
       if (num == null) {

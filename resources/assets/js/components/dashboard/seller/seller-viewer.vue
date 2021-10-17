@@ -222,7 +222,7 @@ export default {
     },
     openChat: function (user) {
       this.registerComponentStatistics(
-        "ٰsellerViewer",
+        "ٰphone-number-viewers-list",
         "openChat",
         "click on open chatBox"
       );
