@@ -113,6 +113,19 @@
   white-space: nowrap;
   border: 0;
 }
+
+#intro.intro-web {
+  background: url({{asset('assets/img/hero-section.webp')}});
+  background-position: center left;
+  background-size: cover;
+}
+
+#intro.intro-mobile {
+  background: url("../../../assets/img/mobile/mobile-hero-section.webp");
+  background-position: center center;
+  background-size: cover;
+}
+
 @keyframes spinner-border {
   100% {
     -webkit-transform: rotate(360deg);

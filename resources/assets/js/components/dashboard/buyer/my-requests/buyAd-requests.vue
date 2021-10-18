@@ -31,14 +31,6 @@
   padding: 5px;
 }
 
-.list-group-item {
-  border: 1px solid #ddd;
-  padding: 11px 0;
-}
-.list-group-item:nth-last-of-type(2n + 1) {
-  background: #fdfdfd !important;
-}
-
 .detail-success {
   padding: 8px 0;
   width: 100%;
@@ -54,11 +46,6 @@
   border-radius: 3px;
   box-shadow: 0 0 10px #e1e1e1;
   overflow: hidden;
-}
-
-.main-content .list-group-item p {
-  text-align: center;
-  direction: rtl;
 }
 
 #main.little-main {

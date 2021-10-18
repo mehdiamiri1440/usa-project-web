@@ -1226,17 +1226,6 @@ border: 1px solid #F0F0F1;
 
 /*index page global style */
 
-#intro.intro-web {
-  background: url("../../../assets/img/hero-section.jpg");
-  background-position: center left;
-  background-size: cover;
-}
-
-#intro.intro-mobile {
-  background: url("../../../assets/img/mobile/mobile-hero-section.jpg");
-  background-position: center center;
-  background-size: cover;
-}
 
 .title-page {
   text-align: center;
