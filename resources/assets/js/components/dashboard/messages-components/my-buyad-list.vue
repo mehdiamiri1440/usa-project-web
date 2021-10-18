@@ -688,6 +688,7 @@ li.static-item > button i {
             class="contact-item golden"
             v-for="(buyAd, index) in buyAdsGoldenFilter"
             :key="'golden-' + index"
+            :id="'item-' + buyAd.id"
           >
             <div v-if="$parent.currentUser.user_info.active_pakage_type > 0">
               <div class="user-information-wrapper col-xs-12">
@@ -869,6 +870,7 @@ li.static-item > button i {
             class="contact-item"
             v-for="(buyAd, index) in buyAdsFilter"
             :key="index"
+            :id="'item-' + buyAd.id"
           >
             <div v-if="!buyAd.expired">
               <div class="user-information-wrapper col-xs-12">
@@ -1060,6 +1062,7 @@ li.static-item > button i {
 <script >
 import { eventBus } from "../../../router/router";
 import swal from "../../../sweetalert.min.js";
+import termsVue from "../seller/product/register-product-steps/terms.vue";
 
 export default {
   data: function () {
@@ -1084,6 +1087,7 @@ export default {
       axios.post("/get_my_buyAd_suggestions").then((response) => {
         this.buyAds = response.data.buyAds;
         this.buyAdsGolden = response.data.golden_buyAds;
+
         this.buyAdsGoldenFilter = this.buyAdsGolden;
         this.filterBuyAdBySearch();
         this.isLoading = false;
@@ -1147,14 +1151,25 @@ export default {
           }
         });
     },
+    setScrollToBuyAd(id) {
+      var note = document.getElementById("item-" + id);
+      var screenPosition = note.getBoundingClientRect();
+      $(".contact-body.my-contacts").animate(
+        {
+          scrollTop:
+            $(".contact-body.my-contacts").scrollTop() +
+            screenPosition.top -
+            159,
+        },
+        300
+      );
+    },
     activePhoneCall: function (buyAdUserId, buyAdId) {
       let id = "#loader-phone-" + buyAdId;
 
       $(id).prop("disabled", true);
       $(id).addClass("disable");
-
       this.hideReplyBtn(id);
-
       axios
         .post("/get_buyer_phone_number", {
           b_id: buyAdUserId,
@@ -1171,6 +1186,7 @@ export default {
               "tel:" + response.data.phone
             );
             $("#" + buyAdId + "-phone-number-wrapper").collapse("show");
+            this.setScrollToBuyAd(buyAdId);
             this.showReplyBtn(id);
           });
         })
@@ -1371,6 +1387,10 @@ export default {
   },
   mounted() {
     this.init();
+
+    $(".my-contacts").scroll(function (event) {
+      console.log($(".contact-body.my-contacts").scrollTop());
+    });
   },
 };
 </script>

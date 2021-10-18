@@ -1396,14 +1396,24 @@ export default {
           }
         });
     },
+    setScrollToBuyAd(id) {
+      let element = $(id);
+      let elementTop = element.offset().top;
+      let elementHeight = element.height();
+      let windowHeight = $(window).height();
+      $("html, body").animate(
+        {
+          scrollTop: elementTop - (windowHeight - elementHeight) / 2,
+        },
+        300
+      );
+    },
     activePhoneCall: function (buyAdUserId, buyAdId) {
       let id = "#loader-phone-" + buyAdId;
 
       $(id).prop("disabled", true);
       $(id).addClass("disable");
-
       this.hideReplyBtn(id);
-
       axios
         .post("/get_buyer_phone_number", {
           b_id: buyAdUserId,
@@ -1421,6 +1431,7 @@ export default {
               "tel:" + response.data.phone
             );
             $("#" + buyAdId + "-phone-number-wrapper").collapse("show");
+            this.setScrollToBuyAd(id);
             this.showReplyBtn(id);
           });
         })
