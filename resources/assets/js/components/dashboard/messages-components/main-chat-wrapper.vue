@@ -1599,13 +1599,12 @@ export default {
       }
     },
     openProduct(productId) {
-
       this.registerComponentStatistics(
-                            "messenger",
-                            "click-on-delsa-btn",
-                            "click-on-product-detail-btn-in-messenger"
-                          );
-      
+        "messenger",
+        "click-on-delsa-btn",
+        "click-on-product-detail-btn-in-messenger"
+      );
+
       this.openProductLoader = true;
       let win = window.open("about:blank", "_blank");
       axios
@@ -1653,6 +1652,7 @@ export default {
           isDelsaMessageActive = true;
         }
       }
+
       if (
         !isDelsaMessageActive &&
         this.$parent.userAllowedReview &&
@@ -1660,13 +1660,23 @@ export default {
         !this.$parent.isLatestMessage &&
         !this.$parent.chatMessagesLoader
       ) {
-        return true;
+        if (
+          this.$parent.chatMessages &&
+          this.$parent.chatMessages.length &&
+          this.$parent.chatMessages
+            .filter((item) => !this.checkMessageListClass(item.sender_id))
+            .some((item) => !item.p_id && !item.phone_locked)
+        ) {
+          return true;
+        } else {
+          return false;
+        }
+        // return true;
       } else {
         return false;
       }
     },
     openEditPriceModal(productId) {
-
       this.editPriceLoader = true;
 
       axios
@@ -1677,19 +1687,18 @@ export default {
           this.editPriceLoader = false;
 
           this.registerComponentStatistics(
-                            "messenger",
-                            "click-on-delsa-btn",
-                            "click-on-edit-price-btn-in-messenger"
-                          );
+            "messenger",
+            "click-on-delsa-btn",
+            "click-on-edit-price-btn-in-messenger"
+          );
         });
     },
     registeCallBtnEvent() {
-        this.registerComponentStatistics(
-                            "messenger",
-                            "click-on-call-btn",
-                            "click-on-call-btn"
-                          );
-      
+      this.registerComponentStatistics(
+        "messenger",
+        "click-on-call-btn",
+        "click-on-call-btn"
+      );
     },
     registerComponentStatistics: function (
       categoryName,
