@@ -417,6 +417,16 @@ class product_controller extends Controller
             ->first();
 
         if (is_null($product)) {
+            $product = DB::table('products')->where('id',$product_id)->first();
+
+            if(! $product){
+                return response()->json([
+                    'status' => false,
+                    'msg' => 'product not found.',
+                    'not_found' => true
+                ], 404);
+            }
+            
             return response()->json([
                 'status' => false,
                 'msg' => 'product not found.',

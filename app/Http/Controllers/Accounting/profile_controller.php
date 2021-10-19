@@ -82,9 +82,16 @@ class profile_controller extends Controller
                 $action = 'Edit';
                 $profile_object = new profile();
 
+
                 $this->copy_profile_object_fields_listed_in_profile_fields_array($profile_object, $last_confirmed_profile_record);
 
-                $profile_object->confirmed = false;
+                
+                if($this->does_update_need_admin_confirmation($request) == true){
+                    $profile_object->confirmed = false;
+                }
+                else{
+                    $profile_object->confirmed = true;
+                }
 
                 $status = $this->change_user_profile_record($request, $profile_object, $last_confirmed_profile_record->id);
             } else {
@@ -773,5 +780,47 @@ class profile_controller extends Controller
                 'updated_at' => $now
             ]);
         }
+    }
+
+    protected function does_update_need_admin_confirmation($request)
+    {
+        if($request->has('is_company') && $request->is_company == true){
+            return true;
+        }
+
+        if($request->has('certificate_image_count') && $request->certificate_image_count == 0 &&  $request->has('related_image_count') && $request->related_image_count == 0){
+            if($request->has('description')){
+                if($this->is_profile_description_clear($request->description) == true){
+                    return false;
+                }
+                return true;
+            }
+
+            return false;
+        }
+
+        return true;
+    }
+
+    protected function is_profile_description_clear($text)
+    {
+        //check for taboo words
+        //
+
+        //check for phone number
+        try{
+            $phones = null;
+            $match_result = preg_match_all('/((09[0-9]{9})|(\x{06F0}\x{06F9}[\x{06F0}-\x{06F9}]{9}))/u',$text,$phones);
+
+            if($match_result != false){
+                return false;
+            }
+
+            return true;
+        }
+        catch(\Exception $e){
+            return false;
+        }
+        
     }
 }
