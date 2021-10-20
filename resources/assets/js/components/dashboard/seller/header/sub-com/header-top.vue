@@ -835,6 +835,10 @@ export default {
           title: "احراز هویت",
         },
         {
+          name: "messagesRequestSeller",
+          title: "پیام ها",
+        },
+        {
           name: "messagesSeller",
           title: "پیام ها",
         },

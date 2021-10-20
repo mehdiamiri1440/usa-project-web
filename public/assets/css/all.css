@@ -282,6 +282,9 @@
     content: "\f019"
 }
 
+.fa-tag:before {
+    content: "\f02b"; }
+  
  
  .sr-only {
      border: 0;
