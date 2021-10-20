@@ -517,7 +517,7 @@ label {
     </div>
     <div v-if="checkActionButtonShow()" class="actions-wrapper">
       <button @click="openProductInSeperatePage()" class="green-button">
-        استعلام قیمت
+        جزییات محصول
       </button>
     </div>
     <!--google codes-->
