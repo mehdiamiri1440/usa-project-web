@@ -412,6 +412,7 @@ export default {
         "buyad-pricing",
         "invited-users",
         "referral",
+        "introduction-delsa",
       ],
       buttonIsActive: true,
       currentUser: {
