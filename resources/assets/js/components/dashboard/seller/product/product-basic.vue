@@ -20,6 +20,7 @@
 
 .main-content > div.wrapper-section.finish-stage {
   border: none;
+  margin-top: 20px;
 }
 
 .main-content > div.wrapper-section.empty-section {
@@ -151,35 +152,100 @@
 }
 
 .success-register {
-  background: #edf8e6;
-  border-radius: 4px;
-  margin-bottom: 20px;
-  padding: 10px 15px 20px;
-  color: #21ad93;
+  background: linear-gradient(
+    270deg,
+    rgba(1, 173, 101, 0.5) 0%,
+    rgba(122, 245, 188, 0.5) 100%
+  );
+  border-radius: 8px;
+  margin-top: 20px;
+  padding: 20px 15px 15px;
+  color: rgb(38, 70, 83);
   text-align: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.success-register::after,
+.success-register::before {
+  content: " ";
+  position: absolute;
+  width: 85px;
+  height: 85px;
+  background: rgba(255, 255, 255, 0.21);
+  border-radius: 50px;
+}
+
+.success-register::after {
+  left: -36px;
+  top: -13px;
+}
+.success-register::before {
+  left: 10px;
+  top: -49px;
 }
 
 .success-register h2 {
-  font-size: 19px;
+  font-size: 14px;
   margin-bottom: 10px;
-}
-
-.success-register h2 i {
-  font-size: 26px;
-  width: 38px;
-  height: 38px;
-  background: #fff;
-  border-radius: 50px;
-  padding-top: 6px;
-}
-
-.success-register h2 span {
+  font-weight: 500;
   position: relative;
-  top: -4px;
-  margin-right: 5px;
+  z-index: 1;
+}
+
+.title-success {
+  float: left;
+  width: calc(100% - 36px);
+}
+.icon-wrapper {
+  float: right;
+  padding-top: 3px;
+}
+
+.success-register p {
+  font-size: 12px;
+  font-weight: 300;
+  color: rgba(38, 70, 83, 0.8);
+  line-height: 1.6;
+}
+
+.seller-toggle-button {
+  margin: 0 auto;
+  padding: 10px 15px;
+  background: none;
+  border: none;
+  color: #fff;
+}
+.seller-toggle-button i {
+  display: block;
 }
 
 @media screen and (max-width: 767px) {
+  .box-wrapper + .wrapper-section {
+    padding: 15px;
+    background: linear-gradient(
+      255.44deg,
+      rgba(84, 141, 165, 0.85) 0%,
+      rgba(159, 189, 202, 0.85) 81.2%
+    );
+    box-shadow: 0px -5px 8px rgba(0, 0, 0, 0.15);
+    border-radius: 8px 8px 0px 0px;
+  }
+  .box-wrapper + .wrapper-section.closed-box {
+    background: #fff;
+    box-shadow: none;
+  }
+
+  .box-wrapper {
+    overflow: hidden;
+    transition: 300ms;
+    height: 120px;
+    padding: 0 15px;
+  }
+
+  .close-success-box {
+    height: 0;
+  }
   .main-section-wrapper {
     max-width: initial;
     margin: 0px auto;
@@ -220,23 +286,6 @@
     right: 20px;
     left: 26px;
   }
-
-  .success-register {
-    margin-top: -19px;
-  }
-
-  .success-register p {
-    line-height: 1.618;
-  }
-
-  .success-register h2 i {
-    display: block;
-    margin: 0 auto 20px;
-    width: 80px;
-    height: 80px;
-    font-size: 45px;
-    padding-top: 17px;
-  }
 }
 </style>
 
@@ -247,17 +296,47 @@
       v-show="$route.name == 'successRegisterProduct'"
       class="main-content col-xs-12"
     >
-      <div class="row">
+      <div
+        class="row"
+        :class="[
+          { 'close-success-box': !successBox || !successRegisterProduct },
+          { 'box-wrapper': $route.name == 'successRegisterProduct' },
+        ]"
+      >
         <div class="success-register" v-if="successRegisterProduct">
           <div class="title-success">
-            <h2>
-              <i class="fa fa-check"></i>
-              <span> ثبت محصول با موفقیت انجام شد </span>
-            </h2>
+            <h2>ثبت محصول شما با موفقیت انجام شد!</h2>
+            <p>
+              محصول شما، پس از تایید کارشناسان باسکول، در لیست محصولات قرار
+              خواهد گرفت.
+            </p>
           </div>
-          <p>پس از تایید کارشناسان، محصول شما در لیست قرار خواهد گرفت.</p>
+          <div class="icon-wrapper">
+            <svg
+              width="36"
+              height="32"
+              viewBox="0 0 36 32"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle cx="20" cy="16" r="16" fill="white" />
+              <circle cx="20" cy="16" r="16" fill="white" />
+              <circle cx="20" cy="16" r="16" fill="white" />
+              <circle cx="20" cy="16" r="16" fill="white" />
+              <circle cx="16" cy="16" r="15.5" stroke="black" />
+              <path
+                d="M9.77771 16.0001L15.111 20.4446L22.2222 11.5557"
+                stroke="black"
+              />
+            </svg>
+          </div>
         </div>
-        <div class="col-xs-12" v-if="buyAds.length != 0">
+      </div>
+      <div
+        class="col-xs-12"
+        v-if="!successRegisterProduct && buyAds.length > 0"
+      >
+        <div class="row">
           <div class="section-title">
             <h2>خریداران</h2>
             <p>
@@ -270,11 +349,24 @@
       <div
         v-show="buyAds.length > 0"
         class="row wrapper-section finish-stage"
-        :class="{
-          'empty-section': buyAds.length == 0,
-        }"
+        :class="[
+          {
+            'empty-section': buyAds.length == 0,
+          },
+          {
+            'closed-box': !successBox || !successRegisterProduct,
+          },
+        ]"
       >
         <div class="main-section">
+          <button
+            class="seller-toggle-button collapse hidden-sm hidden-md hidden-lg"
+            :class="{ in: successBox && successRegisterProduct }"
+            @click="successBox = !successBox"
+          >
+            <i class="fa fa-angle-up"></i>
+            خریداران پیشنهادی
+          </button>
           <main
             class="main-section-wrapper main-section-wrapper-full-width row"
           >
@@ -516,6 +608,7 @@ export default {
       load: true,
       successRegisterProduct: false,
       resetAllImages: false,
+      successBox: true,
     };
   },
   methods: {

@@ -63,7 +63,7 @@
   border: 1px solid #e9ecef;
 }
 
-.buyAd-list-item:nth-last-of-type(2n + 1) {
+.buyAd-list-item {
   background: #fdfdfd !important;
 }
 
@@ -342,7 +342,7 @@ li .buyad-button.send-message-button:hover {
 
 .static-item {
   border: none;
-  background: #fff;
+  background: none
 }
 
 .phone-number-wrapper {
@@ -822,6 +822,9 @@ export default {
       $(itemLast).hide();
       $(itemFirst).show();
     },
+  },
+  mounted() {
+    this.$parent.successBox = true;
   },
 };
 </script>

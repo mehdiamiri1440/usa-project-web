@@ -3,6 +3,7 @@
   border: 1px solid #e9ecef;
   border-radius: 12px;
   margin-bottom: 35px;
+  background: #fff;
 }
 .main-article-wrapper:hover {
   cursor: pointer;

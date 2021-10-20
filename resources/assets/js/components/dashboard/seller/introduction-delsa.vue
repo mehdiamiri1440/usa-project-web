@@ -4,14 +4,9 @@
 </style>
 <template>
   <section class="main-content col-xs-12">
-    <div class="help">
-      <div class="title col-xs-12">
-        <div class="row">
-          <div class="col-xs-12 col-sm-4 pull-right hidden-xs hidden-sm">
-            <h1>راهنما</h1>
-          </div>
-          <br />
-        </div>
+    <div class="intro-delsa">
+      <div class="image-wrapper">
+        <img src="../../../../img/intro-delsa.gif" alt="دلسا" />
       </div>
     </div>
   </section>
