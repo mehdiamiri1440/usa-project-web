@@ -761,6 +761,28 @@ export default {
       }
       return false;
     },
+    checkIsMobile() {
+      let pageWidth = window.outerWidth;
+      if (pageWidth <= 991) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    getCookie: function (cname) {
+      var name = cname + "=";
+      var ca = document.cookie.split(";");
+      for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == " ") {
+          c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+          return c.substring(name.length, c.length);
+        }
+      }
+      return "";
+    },
   },
   created() {
     gtag("config", "UA-129398000-1", { page_path: "/login" });
@@ -775,7 +797,11 @@ export default {
       if (self.isUserInInquirySubmissionProcess()) {
         self.returnUserToPreviousPageAndChatBox(userInfo);
       } else {
-        self.$router.push("seller/register-product");
+        if (self.checkIsMobile() && !!self.getCookie("firstLogin")) {
+          self.$router.push("seller/introduction-delsa");
+        } else {
+          self.$router.push("seller/register-product");
+        }
       }
     } else if (self.isUserLogin && self.userType != 1) {
       // self.returnUserToPreviousPageAndChatBox(userInfo);
