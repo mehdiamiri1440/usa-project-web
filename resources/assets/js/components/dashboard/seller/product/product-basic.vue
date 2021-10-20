@@ -332,7 +332,10 @@
           </div>
         </div>
       </div>
-      <div class="col-xs-12" v-if="!successRegisterProduct">
+      <div
+        class="col-xs-12"
+        v-if="!successRegisterProduct && buyAds.length > 0"
+      >
         <div class="row">
           <div class="section-title">
             <h2>خریداران</h2>
