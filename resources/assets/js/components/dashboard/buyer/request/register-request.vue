@@ -138,6 +138,7 @@
   font-weight: 500;
   position: relative;
   z-index: 1;
+  line-height: 1.6;
 }
 
 .mini-wrapper h2 {
