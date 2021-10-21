@@ -384,6 +384,18 @@ export default {
         this.$router.push(this.getProductUrl());
       }
     },
+    setScrollToProduct() {
+      let element = $("#" + this.product.id + "-phone-number-wrapper");
+      let elementTop = element.offset().top;
+      let elementHeight = element.height();
+      let windowHeight = $(window).height();
+      $("html, body").animate(
+        {
+          scrollTop: elementTop - (windowHeight - elementHeight) / 2,
+        },
+        300
+      );
+    },
     activePhoneCall() {
       this.getPhoneLoader = true;
       this.isActivePhone = true;
@@ -398,6 +410,7 @@ export default {
             this.userPhone = response.data.phone;
             $("#" + this.product.id + "-phone-number-wrapper").collapse("show");
             this.getPhoneLoader = false;
+            this.setScrollToProduct();
           });
         })
         .catch((error) => {

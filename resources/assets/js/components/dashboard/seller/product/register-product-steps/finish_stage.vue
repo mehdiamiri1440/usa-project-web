@@ -741,6 +741,18 @@ export default {
           }
         });
     },
+    setScrollToBuyAd(id) {
+      let element = $(id);
+      let elementTop = element.offset().top;
+      let elementHeight = element.height();
+      let windowHeight = $(window).height();
+      $("html, body").animate(
+        {
+          scrollTop: elementTop - (windowHeight - elementHeight) / 2,
+        },
+        300
+      );
+    },
     activePhoneCall: function (buyAdUserId, buyAdId) {
       let id = "#loader-phone-" + buyAdId;
 
@@ -765,6 +777,7 @@ export default {
               "tel:" + response.data.phone
             );
             $("#" + buyAdId + "-phone-number-wrapper").collapse("show");
+            this.setScrollToBuyAd(id);
             this.showReplyBtn(id);
           });
         })
