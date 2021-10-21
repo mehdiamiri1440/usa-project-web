@@ -80,7 +80,10 @@
             </a>
 
             <div class="modal-title">
-              <span v-if="currentStep == 0"> همه دسته ها </span>
+              <span v-if="currentStep == 0">
+                <span v-if="title" v-text="title"> </span>
+                <span v-else> همه دسته ها </span>
+              </span>
               <span
                 v-if="currentStep == 1"
                 v-text="selectedCategory.category_name"
@@ -117,6 +120,7 @@ export default {
     "categoryList",
     "modalSubCategory",
     "mainSubCategories",
+    "title"
   ],
   components: {
     Categoreis,

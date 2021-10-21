@@ -23,6 +23,10 @@
 </style>
 <template>
   <section class="main-content col-xs-12">
+    <CategoriesModal
+      :categoryList="categoryList"
+      :title="'دسته بندی محصول را انتخاب کنید'"
+    />
     <div class="intro-delsa">
       <div class="image-wrapper">
         <img src="../../../../img/intro-delsa.gif" alt="دلسا" />
@@ -46,9 +50,9 @@
             </div>
             <i class="fa fa-angle-left"></i>
           </router-link>
-          <router-link
-            tag="button"
-            :to="{ name: 'buyAdRequestsSeller' }"
+          <button
+            data-target="#categories-modal"
+            data-toggle="modal"
             class="default-btn-with-icon"
           >
             <div class="button-main-icon-wrapper">
@@ -58,7 +62,7 @@
               <p class="button-title single-title">قیمت محصولات را می خواهم</p>
             </div>
             <i class="fa fa-angle-left"></i>
-          </router-link>
+          </button>
         </div>
       </div>
     </div>
@@ -67,8 +71,12 @@
 
 <script>
 import { eventBus } from "../../../router/router";
+import CategoriesModal from "../../layouts/main/main_components/categories-modal.vue";
 
 export default {
+  components: {
+    CategoriesModal,
+  },
   data: function () {
     return {
       items: [
@@ -77,9 +85,28 @@ export default {
           url: "guide",
         },
       ],
+      categoryList: "",
     };
   },
+  methods: {
+    init() {
+      axios
+        .post("/get_category_list", {
+          cascade_list: true,
+        })
+        .then((response) => {
+          this.categoryList = response.data.categories;
+        });
+    },
+    selectCategoryItem(category, url) {
+      $(".modal").modal("hide");
+      this.$nextTick(() => {
+        this.$router.push({ path: url });
+      });
+    },
+  },
   mounted() {
+    this.init();
     eventBus.$emit("subHeader", false);
   },
   created() {
