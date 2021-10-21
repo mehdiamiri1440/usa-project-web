@@ -342,7 +342,7 @@ li .buyad-button.send-message-button:hover {
 
 .static-item {
   border: none;
-  background: none
+  background: none;
 }
 
 .phone-number-wrapper {
@@ -612,7 +612,7 @@ li .buyad-button.send-message-button:hover {
         </div>
       </div>
 
-      <div v-else class="col-sm-5 col-xs-12 pull-left">
+      <div v-else class="col-sm-5 col-xs-12 pull-left text-center">
         <button
           v-if="
             buyAd.is_golden &&

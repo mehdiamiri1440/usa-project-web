@@ -161,7 +161,7 @@ button i {
 
 .action-button-wrapper {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .spinner-border {
