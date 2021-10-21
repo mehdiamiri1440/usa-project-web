@@ -17,10 +17,9 @@
   <link rel="preload" href="{{asset('assets/fonts/woff2/IRANSansWeb(FaNum)_Medium.woff2')}}" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="{{asset('assets/webfonts/fa-solid-900.woff2')}}" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="{{asset('assets/webfonts/fa-regular-400.woff2')}}" as="font" type="font/woff2" crossorigin>
+  <!-- css -->
   <link rel="preload" href="{{asset('assets/css/fontiran.min.css')}}" as="style" onload="this.rel='stylesheet'" crossorigin>
   <link rel="preload" href="{{asset('assets/css/all.min.css')}}" as="style" onload="this.rel='stylesheet'" crossorigin>
-
-  {{-- <link  href="{{asset('assets/css/bootstrap.min.css')}}" as="style" onload="this.rel='stylesheet'" crossorigin> --}}
   <link rel="preload" href="{{asset('css/app.css')}}" as="style" onload="this.rel='stylesheet'" crossorigin>
   
   <title>باسکول | بازار خرید و فروش عمده محصولات غذایی و کشاورزی ایران بدون واسطه</title>
@@ -29,32 +28,13 @@
   </script>
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129398000-1"></script>
-  <script  src="https://www.gstatic.com/firebasejs/7.13.0/firebase-app.js"></script>
-  <script  src="https://www.gstatic.com/firebasejs/7.13.0/firebase-messaging.js"></script> 
-  
-
   <script>
-    //  gtag configs
       window.dataLayer = window.dataLayer || [];
       function gtag() {
           dataLayer.push(arguments);
       }
       gtag('js', new Date());
       gtag('config', 'UA-129398000-1', {'send_page_view': false});
-
-      // firebase configs
-      var firebaseConfig = {
-      apiKey: "AIzaSyDHAonYamODsV034KRTjzd4_C_z4YpzaRo",
-      authDomain: "incobac-64ec9.firebaseapp.com",
-      databaseURL: "https://incobac-64ec9.firebaseio.com",
-      projectId: "incobac-64ec9",
-      storageBucket: "incobac-64ec9.appspot.com",
-      messagingSenderId: "946346601127",
-      appId: "1:946346601127:web:74e870ed6dd09f369bc982",
-      measurementId: "G-ZXCG6RTHC7"
-  };
-      firebase.initializeApp(firebaseConfig);
-      const messaging = firebase.messaging();
   </script>
 
 <style>
@@ -200,6 +180,26 @@
     />
   </div>
 
+<script  src="https://www.gstatic.com/firebasejs/7.13.0/firebase-app.js"></script>
+<script  src="https://www.gstatic.com/firebasejs/7.13.0/firebase-messaging.js"></script> 
+
+<script>
+
+    var firebaseConfig = {
+        apiKey: "AIzaSyDHAonYamODsV034KRTjzd4_C_z4YpzaRo",
+        authDomain: "incobac-64ec9.firebaseapp.com",
+        databaseURL: "https://incobac-64ec9.firebaseio.com",
+        projectId: "incobac-64ec9",
+        storageBucket: "incobac-64ec9.appspot.com",
+        messagingSenderId: "946346601127",
+        appId: "1:946346601127:web:74e870ed6dd09f369bc982",
+        measurementId: "G-ZXCG6RTHC7"
+    };
+    // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        const messaging = firebase.messaging();
+</script>
 
 <script src="{{asset('js/app.js')}}" defer></script>
 
