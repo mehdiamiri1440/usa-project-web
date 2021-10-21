@@ -310,5 +310,11 @@ select.error:focus {
   </div>
 </template>
 
+
 <script>
+export default {
+  mounted() {
+    this.$parent.successBox = false;
+  },
+};
 </script>

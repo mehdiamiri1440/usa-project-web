@@ -18,6 +18,10 @@
   min-height: 400px;
 }
 
+.main-content > div.wrapper-section.success {
+  border: none;
+}
+
 .main-content > div.wrapper-section.finish-stage {
   border: none;
 }
@@ -136,29 +140,7 @@
 }
 
 .main-section-wrapper {
-  padding: 0 5px;
-}
-
-.wrapper-section.success {
-  border: none !important;
-  background: #edf8e6;
-  text-align: center;
-  min-height: initial !important;
-}
-
-.success-step {
-  margin: 30px auto 50px;
-}
-
-.success-step .icon-wrapper {
-  width: 120px;
-  height: 120px;
-  background: #fff;
-  border-radius: 120px;
-  font-size: 76px;
-  color: #21ad93;
-  padding-top: 22px;
-  margin: 0 auto 30px;
+  padding: 0 15px;
 }
 
 .success-title,
@@ -215,6 +197,73 @@
   font-weight: 900;
 }
 
+.success-register {
+  background: linear-gradient(
+    270deg,
+    rgba(1, 173, 101, 0.5) 0%,
+    rgba(122, 245, 188, 0.5) 100%
+  );
+  border-radius: 8px;
+  margin-top: 20px;
+  padding: 20px 15px 15px;
+  color: rgb(38, 70, 83);
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.success-register::after,
+.success-register::before {
+  content: " ";
+  position: absolute;
+  width: 85px;
+  height: 85px;
+  background: rgba(255, 255, 255, 0.21);
+  border-radius: 50px;
+}
+
+.success-register::after {
+  left: -36px;
+  top: -13px;
+}
+.success-register::before {
+  left: 10px;
+  top: -49px;
+}
+
+.title-success {
+  float: left;
+  width: calc(100% - 36px);
+}
+.icon-wrapper {
+  float: right;
+  padding-top: 6px;
+}
+
+.success-register h2 {
+  font-size: 14px;
+  margin-bottom: 10px;
+  font-weight: 500;
+  position: relative;
+  z-index: 1;
+  line-height: 1.6;
+}
+
+.success-register p {
+  font-size: 12px;
+  font-weight: 300;
+  color: rgba(38, 70, 83, 0.8);
+}
+
+.actions-wrapper {
+  overflow: hidden;
+  padding: 30px 0px;
+}
+
+.actions-wrapper > div {
+  padding: 0px;
+}
+
 @media screen and (max-width: 992px) {
   .main-section-wrapper {
     overflow: hidden;
@@ -222,8 +271,12 @@
 }
 
 @media screen and (max-width: 767px) {
+  .icon-wrapper {
+    padding-top: 12px;
+  }
+
   .wrapper-section.success {
-    margin-top: -33px;
+    margin-top: -20px;
   }
 
   .title-wrapper {
@@ -261,10 +314,6 @@
   .active-progress-wrapper {
     right: -15px;
     max-width: initial;
-  }
-
-  .success-register {
-    margin-top: -20px;
   }
 
   .success-register p {
@@ -344,40 +393,65 @@
           <UserImage v-show="currentStep == 1" />
           <DocumentImage v-show="currentStep == 2" />
           <div v-show="currentStep == 3" class="success-step">
-            <div class="icon-wrapper">
-              <i class="fa fa-check"></i>
+            <div class="success-register">
+              <div class="title-success">
+                <h2>اطلاعات شما با موفقیت برای کارشناسان باسکول ارسال شد!</h2>
+                <p>پس از تایید کارشناسان حساب شما احراز هویت خواهد شد.</p>
+              </div>
+              <div class="icon-wrapper">
+                <svg
+                  width="36"
+                  height="32"
+                  viewBox="0 0 36 32"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <circle cx="20" cy="16" r="16" fill="white" />
+                  <circle cx="20" cy="16" r="16" fill="white" />
+                  <circle cx="20" cy="16" r="16" fill="white" />
+                  <circle cx="20" cy="16" r="16" fill="white" />
+                  <circle cx="16" cy="16" r="15.5" stroke="black" />
+                  <path
+                    d="M9.77771 16.0001L15.111 20.4446L22.2222 11.5557"
+                    stroke="black"
+                  />
+                </svg>
+              </div>
             </div>
-            <p class="success-title">
-              اطلاعات شما با موفقیت برای کارشناسان باسکول ارسال شد
-            </p>
-            <p class="success-text">
-              پس از تایید کارشناسان حساب شما احراز هویت خواهد شد.
-            </p>
+            <div class="actions-wrapper">
+              <div class="col-xs-12">
+                <router-link
+                  tag="button"
+                  :to="{ name: 'specialProducts' }"
+                  class="default-btn-with-icon"
+                >
+                  <div class="button-main-icon-wrapper">
+                    <svg
+                      width="20"
+                      height="24"
+                      viewBox="0 0 20 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M10 23.27L0.25 16.27L2.005 15.01L9.98917 20.74L17.9842 15.001L19.75 16.27L10 23.27ZM10 19L0.25 12L2.005 10.74L9.98917 16.47L17.9842 10.73L19.75 12L10 19ZM10 14.73L2.01583 8.99998L0.25 7.72998L10 0.72998L19.75 7.72998L17.9733 8.99998L10 14.73Z"
+                        fill="white"
+                      />
+                    </svg>
+                  </div>
+                  <div class="button-content-wrapper">
+                    <p class="button-title">محصولات پیشنهادی</p>
+                    <p class="button-text">مشاهده لیست محصولات فروش</p>
+                  </div>
+                  <i class="fa fa-angle-left"></i>
+                </router-link>
+              </div>
+            </div>
           </div>
         </main>
       </div>
 
       <div class="section-background"></div>
-    </div>
-    <div v-if="currentStep == 3" class="main-button-wrapper">
-      <router-link
-        v-if="$parent.currentUser.user_info.is_buyer"
-        :to="{ name: 'productList' }"
-        tag="button"
-        class="green-button"
-      >
-        لیست محصولات
-        <i class="fa fa-arrow-left"></i>
-      </router-link>
-      <router-link
-        v-else
-        :to="{ name: 'buyAdRequestsSeller' }"
-        tag="button"
-        class="green-button"
-      >
-        درخواست های خرید
-        <i class="fa fa-arrow-left"></i>
-      </router-link>
     </div>
   </section>
 

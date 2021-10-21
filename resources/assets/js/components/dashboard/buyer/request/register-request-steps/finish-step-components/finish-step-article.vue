@@ -3,23 +3,16 @@
   border: 1px solid #e9ecef;
   border-radius: 12px;
   margin-bottom: 35px;
+  background: #fff;
+  overflow: hidden;
 }
 .main-article-wrapper:hover {
   cursor: pointer;
 }
 
-.user-information-content {
-  display: block;
-  float: right;
-  width: 100%;
-  padding: 5px 30px;
-  background: none;
-  border: none;
-  border-bottom: 1px solid #e9ecef;
-}
 .user-image {
-  width: 35px;
-  height: 35px;
+  width: 20px;
+  height: 20px;
   float: right;
   margin-left: 10px;
 }
@@ -28,14 +21,14 @@
   max-width: 170px;
   overflow: hidden;
   font-size: 14px;
-  font-weight: 700;
-  color: #777;
+  font-weight: 400;
+  color: #000;
   height: 21px;
   padding-top: 0;
   white-space: nowrap;
   text-overflow: ellipsis;
   position: relative;
-  top: 7px;
+  top: 3px;
   text-align: right;
 }
 
@@ -73,16 +66,20 @@
   width: calc(100% - 130px);
 }
 
+.main-content ul {
+  padding-right: 10px;
+}
+
 h3.article-title {
   font-size: 16px;
-  font-weight: bold;
+  font-weight: 400;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
   max-width: 215px;
-  margin-bottom: 25px;
-  margin-top: 10px;
   height: 17px;
+  color: #000;
+  margin-bottom: 10px;
 }
 
 .main-content .main-article p {
@@ -179,16 +176,38 @@ button i {
   background: #e0e0e0;
 }
 
+.main-content li.items {
+  margin-bottom: 12px;
+}
+.main-content li.items > i {
+  margin-left: 5px;
+  font-size: 15px;
+  width: 20px;
+  display: inline-block;
+  text-align: center;
+}
+.verified-user {
+  top: -1px;
+  position: absolute;
+}
+
 @media screen and (max-width: 767px) {
+  .green-button {
+    font-size: 14px;
+    font-weight: 400;
+    padding: 5px;
+    margin: 0 5px 10px;
+  }
   .main-article {
     padding: 15px;
   }
   .article-image {
     width: 100px;
+    height: 80px;
   }
-  .action-button-wrapper {
+  /* .action-button-wrapper {
     flex-direction: column;
-  }
+  } */
 }
 </style>
 
@@ -198,32 +217,6 @@ button i {
       class="main-article-wrapper col-xs-12"
       :class="{ 'is-user-valid': product.active_pakage_type == 3 }"
     >
-      <div @click="handelLinkTarget()" class="user-information-wrapper row">
-        <div class="user-information-content">
-          <div class="user-image">
-            <img src="../../../../../../../img/user-defult.png" />
-          </div>
-          <div class="user-content">
-            <span
-              class="user-name-link"
-              v-text="product.first_name + ' ' + product.last_name"
-            >
-            </span>
-            <button
-              v-if="product.is_verified"
-              @click.prevent
-              class="verified-user"
-              data-container="body"
-              data-toggle="popover"
-              data-placement="bottom"
-              :data-content="$parent.verifiedUserContent"
-              title
-            >
-              <i class="fa fa-certificate"></i>
-            </button>
-          </div>
-        </div>
-      </div>
       <div @click="handelLinkTarget()" class="main-article row text-center">
         <div class="valid-user-badge">
           <div class="wrapper-icon">
@@ -279,14 +272,38 @@ button i {
         </div>
         <div class="main-content text-rtl">
           <h3 class="article-title">
-            <span v-text="product.subcategory_name" style="color: #777"></span>
             {{ product.product_name }}
           </h3>
-
-          <p>
-            <span style="color: #777">مقدار موجودی :</span>
-            <span v-text="$parent.getConvertedNumbers(product.stock)"></span>
-          </p>
+          <ul>
+            <li class="items">
+              <span class="user-image">
+                <img src="../../../../../../../img/user-defult.png" />
+              </span>
+              <div class="user-content">
+                <span
+                  class="user-name-link"
+                  v-text="product.first_name + ' ' + product.last_name"
+                >
+                </span>
+                <button
+                  v-if="product.is_verified"
+                  @click.prevent
+                  class="verified-user"
+                  data-container="body"
+                  data-toggle="popover"
+                  data-placement="bottom"
+                  :data-content="$parent.verifiedUserContent"
+                  title
+                >
+                  <i class="fa fa-certificate"></i>
+                </button>
+              </div>
+            </li>
+            <li class="items">
+              <i class="fa fa-box-open"></i>
+              <span v-text="$parent.getConvertedNumbers(product.stock)"></span>
+            </li>
+          </ul>
         </div>
       </div>
 
@@ -299,7 +316,7 @@ button i {
           @click.prevent="activePhoneCall()"
         >
           <span>
-            <i class="fas fa-phone-square-alt" v-if="!getPhoneLoader"></i>
+            <i class="fas fa-phone-alt" v-if="!getPhoneLoader"></i>
             <div v-else class="spinner-border">
               <span class="sr-only"></span>
             </div>
@@ -311,7 +328,7 @@ button i {
           :class="{ 'send-message-button': product.has_phone }"
           @click.prevent="$parent.openChat(product)"
         >
-          <i class="fa fa-envelope"></i> چت با فروشنده
+          <i class="fa fa-comment-alt"></i> چت با فروشنده
         </button>
       </div>
       <div
