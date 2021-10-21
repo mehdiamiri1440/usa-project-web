@@ -101,10 +101,6 @@ export default {
           if (self.products && self.products.length) {
             self.products = self.products.concat([...response.data.products]);
           }
-          // this.$nextTick(() => {
-          //   this.infiniteScrollHandler();
-          // });
-
           self.loadMoreActive = false;
         });
     },
@@ -113,10 +109,6 @@ export default {
         let productsSection = $("div.items-wrapper:last-of-type");
 
         if (typeof productsSection.offset() !== "undefined") {
-          console.log(
-            $(window).scrollTop() + $(window).height(),
-            productsSection.offset().top
-          );
           if (
             $(window).scrollTop() + $(window).height() >=
             productsSection.offset().top
@@ -140,7 +132,6 @@ export default {
         "#related-products-wrapper",
         (isInView) => {
           if (isInView && this.products.length == 0) {
-            console.log("getRelatedProducts is run");
             this.getRelatedProducts();
           }
         },

@@ -24,6 +24,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   width: 100%;
+  height: 100%;
 }
 
 .image-wrapper-contents {
@@ -108,8 +109,16 @@
 .image__wrapper img {
   position: relative;
 }
+.spinner-wrapper {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #404b55;
+  overflow: hidden;
+  z-index: 1;
+}
 .image__wrapper.loaded .spinner-wrapper {
-  display: none;
+  z-index: -1;
 }
 @media screen and (max-width: 555px) {
   .main-article-image {
