@@ -233,6 +233,15 @@ const router = new Router({
           },
         },
         {
+          path: "introduction-delsa",
+          name: "introductionDelsaSeller",
+          components: {
+            default: (resolve) => {
+              require(["../components/dashboard/seller/introduction-delsa.vue"], resolve);
+            },
+          },
+        },
+        {
           path: "show-number-guide",
           name: "showNumberGuideSeller",
           components: {

@@ -570,6 +570,12 @@ border-radius: 8px;
   display: flex;
   align-items: center;
   float: right;
+  justify-content: center;
+}
+
+.button-main-icon-wrapper > i{
+  font-size: 18px;
+color: #fff;
 }
 
 .button-content-wrapper {
@@ -579,12 +585,19 @@ border-radius: 8px;
   padding-right: 20px;
 }
 
-.default-btn-with-icon i {
+.default-btn-with-icon > i {
   position: absolute;
   left: 20px;
   color: #15313c;
   font-size: 20px;
   top: 23px;
+}
+
+.button-title.single-title {
+  height: 48px;
+display: flex;
+align-items: center;
+direction: rtl;
 }
 
 .button-text {

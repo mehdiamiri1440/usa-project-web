@@ -736,10 +736,7 @@ a.profile-info-wrapper:focus {
           </li>
 
           <li>
-            <router-link
-              :to="{ name: 'statusSeller' }"
-              class="home-button"
-            >
+            <router-link :to="{ name: 'statusSeller' }" class="home-button">
               <i class="fa fa-home" aria-hidden="true"></i>
             </router-link>
           </li>
@@ -838,6 +835,10 @@ export default {
           title: "احراز هویت",
         },
         {
+          name: "messagesRequestSeller",
+          title: "پیام ها",
+        },
+        {
           name: "messagesSeller",
           title: "پیام ها",
         },
@@ -860,6 +861,10 @@ export default {
         {
           name: "guideSeller",
           title: "راهنما",
+        },
+        {
+          name: "introductionDelsaSeller",
+          title: "باسکول",
         },
         {
           name: "showNumberGuideSeller",
