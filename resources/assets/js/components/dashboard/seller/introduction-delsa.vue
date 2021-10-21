@@ -1,6 +1,7 @@
 <style scoped>
 .image-wrapper {
   max-width: 270px;
+  height: 270px;
   margin: 0 auto;
 }
 .delsa-description-wrapper {
