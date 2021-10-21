@@ -138,7 +138,6 @@
   font-weight: 500;
   position: relative;
   z-index: 1;
-  line-height: 1.6;
 }
 
 .mini-wrapper h2 {
@@ -168,7 +167,7 @@
 @media screen and (max-width: 767px) {
   .success-box-wrapper {
     transition: 300ms;
-    height: 120px;
+    height: 126px;
     overflow: hidden;
     margin-bottom: 20px;
     padding: 0 15px;
