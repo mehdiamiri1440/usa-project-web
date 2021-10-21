@@ -1,5 +1,8 @@
 import Vue from "vue";
 import Router from "vue-router";
+import { abtest } from 'vue-a2b'
+
+const abTestingOption = abtest('product-category', { "first": 50, "second": 50 });
 
 window.Vue = require("vue");
 
@@ -455,7 +458,9 @@ const router = new Router({
           name: "productList",
           components: {
             default: (resolve) => {
-              require(["../components/layouts/main/product_list.vue"], resolve);
+              require([
+                abTestingOption == 'first' ? "../components/layouts/main/product_list.vue" : "../components/layouts/main/product_list2.vue",
+              ], resolve);
             },
           },
           props: true,
@@ -497,9 +502,10 @@ const router = new Router({
           path: "product-list/category/:categoryName",
           name: "productCategory",
           components: {
+
             default: (resolve) => {
               require([
-                "../components/layouts/main/product_category.vue",
+                abTestingOption == 'first' ? "../components/layouts/main/product_category.vue" : "../components/layouts/main/product_category2.vue",
               ], resolve);
             },
           },

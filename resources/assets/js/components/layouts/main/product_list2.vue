@@ -1,22 +1,7 @@
-<style>
-.footer-note-wrapper h1,
-.footer-note-wrapper h2,
-.footer-note-wrapper h3,
-.footer-note-wrapper h4,
-.footer-note-wrapper p,
-.footer-note-wrapper div,
-.footer-note-wrapper span {
-  font-size: 14px;
-  line-height: 1.618;
-  margin: 10px auto;
-}
-</style>
-
 <style scoped>
 #main-content {
   padding-top: 122px;
 }
-
 #main {
   max-width: 1280px;
 }
@@ -63,12 +48,6 @@
   height: 100%;
 }
 
-@media screen and (min-width: 1200px) {
-  #main-content {
-    padding-top: 122px;
-  }
-}
-
 .shadow-content {
   background: #fff;
 }
@@ -109,7 +88,7 @@
   margin: 0;
 }
 
-#searchFilter .main_popup_content {
+#searchFilter .main_popup_content > div {
   padding: 0;
 }
 
@@ -149,7 +128,7 @@ a.close-dialog-popup {
   -webkit-box-shadow: 0 3px 15px rgba(0, 0, 0, 0.3);
   box-shadow: 0 3px 15px rgba(0, 0, 0, 0.3);
   text-align: center;
-  padding-top: 15px;
+  padding-top: 12px;
   font-size: 23px;
 }
 
@@ -175,7 +154,6 @@ a.close-dialog-popup {
 .header-nav a:hover {
   color: #333;
 }
-
 .title-page {
   text-align: center;
 
@@ -225,8 +203,8 @@ button.btn-filter {
   background: #000546;
   color: #fff;
   width: 140px;
-  margin-right: 15px;
   border-radius: 8px;
+  margin-right: 15px;
 }
 
 .links-sub-header {
@@ -254,10 +232,6 @@ button.btn-filter {
   background: #00c569;
   height: 3px;
   width: 100%;
-}
-
-#main {
-  position: relative;
 }
 
 .main-content > h4 {
@@ -294,13 +268,12 @@ button.btn-filter {
   left: 0;
   right: 0;
   z-index: 2;
-  background: #f0f3f6;
   padding: 0;
 }
 
 /*  .main-padding-fix {
-          padding-top: 72px;
-      }*/
+              padding-top: 72px;
+          }*/
 
 li.active a {
   color: #313942;
@@ -335,11 +308,8 @@ li.active a::after {
 
 .btn-loader img {
   width: 56px;
-  margin-top: -15px;
-}
 
-.rate-filter {
-  float: right;
+  margin-top: -15px;
 }
 
 .static-sort-item {
@@ -401,7 +371,6 @@ li.active a::after {
   top: 2px;
   margin-left: 5px;
 }
-
 .rate-filter-mobile-wrapper > button i.fa-times {
   position: relative;
   top: 2px;
@@ -432,25 +401,6 @@ li.active a::after {
   background: none;
 
   border: none;
-}
-
-.rate-filter label {
-  float: right;
-  margin-left: 7px;
-}
-
-.rate-filter > button {
-  padding: 8px 0;
-
-  font-size: 14px;
-
-  margin: 0;
-
-  font-weight: 400;
-
-  width: 140px;
-
-  border-radius: 8px;
 }
 
 .filter-select-input-wrapper {
@@ -525,7 +475,6 @@ li.active a::after {
   font-size: 16px;
   min-width: 36px;
 }
-
 .show-list-items button .fa-grip-horizontal {
   font-size: 16px;
 }
@@ -540,73 +489,6 @@ li.active a::after {
   color: #fff;
   border-color: #556080;
   transition: 300ms;
-}
-.footer-note-wrapper {
-  background: #fff;
-  direction: rtl;
-  margin: 15px auto;
-  padding: 7px 15px;
-  border-radius: 12px;
-  overflow: hidden;
-  max-height: 220px;
-  overflow-y: auto;
-  border: 1px solid #e0e0e0;
-  line-height: 1.628;
-}
-
-.wrapper-contents {
-  margin-bottom: 20px;
-}
-
-.footer-note-wrapper h3 {
-  font-size: 15px;
-  margin: 8px auto;
-}
-
-.title-section {
-  direction: rtl;
-  margin: 50px auto 10px;
-}
-
-.title-section h1 {
-  font-size: 16px;
-  color: #00c569;
-  float: right;
-}
-
-.title-section hr {
-  margin: 15px 15px 10px auto;
-  position: relative;
-}
-
-.title-section hr::after {
-  content: " ";
-  height: 3px;
-  width: 50px;
-  background: #00c569;
-  position: absolute;
-  top: -4px;
-  right: 0;
-}
-
-.guide-button {
-  height: 32px;
-  border: solid 1px white;
-  background: #e41c38;
-  width: 100px;
-  line-height: 32px;
-  -webkit-transform: rotate(-90deg);
-  font-weight: 500;
-  color: white;
-  transform: rotate(-90deg);
-  -ms-transform: rotate(-90deg);
-  -moz-transform: rotate(-90deg);
-  text-align: center;
-  font-size: 17px;
-  position: fixed;
-  left: -40px;
-  top: 50%;
-  z-index: 999;
 }
 
 /* 
@@ -715,10 +597,31 @@ filter modal styles
 .default-grid .default-article-contents {
   padding: 15px;
 }
+
 /* 
 end filter modal styles
 ---------------------------------------------------------------------------------
 */
+
+.guide-button {
+  height: 32px;
+  border: solid 1px white;
+  background: #e41c38;
+  width: 100px;
+  line-height: 32px;
+  -webkit-transform: rotate(-90deg);
+  font-weight: 500;
+  color: white;
+  transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  text-align: center;
+  font-size: 17px;
+  position: fixed;
+  left: -40px;
+  top: 50%;
+  z-index: 999;
+}
 
 .banner-wrapper {
   background: linear-gradient(90deg, #060446, #21ad93);
@@ -736,6 +639,7 @@ end filter modal styles
   padding: 20px 100px;
   overflow: hidden;
   z-index: 1;
+  border-radius: 12px;
 }
 
 .banner-button {
@@ -778,23 +682,14 @@ end filter modal styles
 .banner-wrapper .circle-item-wrapper {
   position: absolute;
   left: 100px;
-  width: 140px;
-  height: 140px;
+  width: 180px;
+  height: 180px;
   background: #fff;
   top: calc(50% - 70px);
   border-radius: 100%;
   display: flex;
   align-items: center;
   box-shadow: 0 3px 2px rgba(0, 0, 0, 0.16);
-}
-
-#article-list.grid-items-wrapper {
-  margin-right: -3px;
-  margin-left: -3px;
-}
-
-div.items-wrapper {
-  padding: 0 7px;
 }
 
 .banner-wrapper .circle-item-wrapper img {
@@ -827,27 +722,13 @@ div.items-wrapper {
   z-index: 1;
 }
 
-.tag-item {
-  background: #f2f2f2;
-  border: 1px solid #e0e0e0;
-  color: #313942;
-  border-radius: 12px;
-  padding: 8px 27px;
-  margin-left: 10px;
-  display: inline-block;
-  margin-bottom: 15px;
+#article-list.grid-items-wrapper {
+  margin-right: -3px;
+  margin-left: -3px;
 }
 
-.tag-item:hover {
-  background: #e0e0e0;
-}
-
-.data-tag-wrapper {
-  margin-top: 50px;
-}
-
-.category-footer {
-  padding-bottom: 120px;
+div.items-wrapper {
+  padding: 0 7px;
 }
 
 @media screen and (max-width: 1199px) {
@@ -869,13 +750,14 @@ div.items-wrapper {
     display: block;
   }
 }
+
 @media screen and (max-width: 768px) {
   #filter-modal > div {
     margin: 0;
     width: 100%;
     height: 100%;
   }
-  #filter-modal .modal-content {
+  .modal-content {
     min-height: 100%;
 
     border-radius: 0;
@@ -905,7 +787,6 @@ div.items-wrapper {
   #article-list {
     padding-bottom: 70px;
   }
-
   #article-list.grid-items-wrapper {
     margin-left: 0 !important;
     margin-right: 0 !important;
@@ -916,13 +797,12 @@ div.items-wrapper {
     border: none;
     border-radius: 0;
   }
-
   .main-content,
   #main {
     padding: 0;
   }
 
-  #main {
+  .main-content {
     padding-top: 18px;
   }
 
@@ -1031,6 +911,7 @@ div.items-wrapper {
   #article-list > div > div {
     padding: 0;
   }
+
   .default-items {
     padding: 3px;
   }
@@ -1058,9 +939,6 @@ div.items-wrapper {
     padding-left: 35px;
     float: left;
   }
-  .banner-wrapper p {
-    font-size: 16px;
-  }
 }
 
 @media screen and (max-width: 370px) {
@@ -1078,6 +956,9 @@ div.items-wrapper {
   .default-button-min-with {
     width: 100%;
   }
+  .banner-wrapper p {
+    font-size: 16px;
+  }
 }
 
 @media screen and (min-width: 370px) {
@@ -1086,13 +967,13 @@ div.items-wrapper {
   }
 }
 </style>
+
 <template>
   <div>
     <!--modal-->
-
     <div class="container">
       <div
-        class="modal"
+        class="modal fade"
         id="searchFilter"
         tabindex="-1"
         role="dialog"
@@ -1108,6 +989,7 @@ div.items-wrapper {
               <span>فیلتر مکان</span>
             </div>
           </div>
+
           <div class="main_popup_content">
             <div class="col-xs-12">
               <div class="filter-mobile-sidebar">
@@ -1245,15 +1127,15 @@ div.items-wrapper {
           <span v-else-if="province" v-text="province.province_name"> </span>
           <i class="fa fa-times"></i>
         </button>
-        <router-link
+        <button
+          v-if="$route.query.s && searchText"
           tag="button"
-          :to="{ name: 'productList' }"
-          v-if="$route.params.categoryName"
+          @click.prevent="searchText = ''"
           class="mobile-category-item filter-item"
         >
-          {{ getCategoryName() }}
+          {{ searchText }}
           <i class="fa fa-times"></i>
-        </router-link>
+        </button>
         <button
           v-for="(category, index) in categoryList"
           :key="index + '-sub-header-category'"
@@ -1354,15 +1236,15 @@ div.items-wrapper {
                 </span>
                 <i class="fa fa-times"></i>
               </button>
-              <router-link
+              <button
+                v-if="$route.query.s && searchText"
                 tag="button"
-                :to="{ name: 'productList' }"
-                v-if="$route.params.categoryName"
+                @click.prevent="searchText = ''"
                 class="mobile-category-item filter-item"
               >
-                {{ getCategoryName() }}
+                {{ searchText }}
                 <i class="fa fa-times"></i>
-              </router-link>
+              </button>
             </div>
           </section>
           <div class="filter-loader-wrapper" v-if="submiting">
@@ -1508,11 +1390,13 @@ div.items-wrapper {
                       "
                     >
                       <ProductGridArticle
-                        :productIndex="productIndex"
+                        :product-index="productIndex"
                         v-if="products.length >= productIndex"
                         :key="product.main.id"
                         :product="product"
                         :str="str"
+                        :currentUser="currentUser"
+                        :has-action-button="true"
                       />
                     </div>
                   </div>
@@ -1525,6 +1409,7 @@ div.items-wrapper {
                 </div>
               </div>
             </section>
+            <!-- test -->
 
             <search-not-found
               v-else-if="products.length === 0 && searchActive === true"
@@ -1697,59 +1582,7 @@ div.items-wrapper {
           </div>
         </div>
       </aside>
-
-      <script
-        v-if="jsonLDObject"
-        v-html="jsonLDObject"
-        type="application/ld+json"
-      ></script>
     </main>
-    <footer
-      class="category-footer container"
-      v-if="categoryMetaData.length > 0 && categoryMetaData[0]"
-    >
-      <div class="col-xs-12" v-if="dataTags.length">
-        <div class="data-tag-wrapper text-rtl">
-          <router-link
-            class="tag-item"
-            v-for="(tag, index) in dataTags"
-            :key="index"
-            v-text="tag"
-            :to="{
-              name: 'productCategory',
-              params: {
-                categoryName: convertCategoryname(tag),
-              },
-            }"
-          ></router-link>
-        </div>
-      </div>
-      <div class="col-xs-12">
-        <div class="title-section col-xs-12">
-          <div class="row">
-            <h1>
-              خرید
-              <span v-text="getCategoryName()"></span>
-              عمده
-            </h1>
-            <hr />
-          </div>
-        </div>
-
-        <div class="footer-note-wrapper main-box-shadow">
-          <div class="wrapper-contents">
-            <div
-              class="contents"
-              v-for="categoryMeta in categoryMetaData"
-              :key="categoryMeta.id"
-            >
-              <div v-html="categoryMeta.header"></div>
-              <div v-html="categoryMeta.content"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
   </div>
 </template>
 <script>
@@ -1759,7 +1592,6 @@ import ProductAsideCategories from "./product_components/sidebar/product_aside_c
 import searchNotFound from "./main_components/search-not-found";
 import { eventBus } from "../../../router/router";
 import StickySidebar from "../../../stickySidebar.js";
-
 var visible = false;
 export default {
   components: {
@@ -1768,7 +1600,7 @@ export default {
     ProductAsideCategories,
     searchNotFound,
   },
-  props: ["assets", "str", "categoryList"],
+  props: ["assets", "str", "user_id", "categoryList"],
   data: function () {
     return {
       currentUser: {
@@ -1789,13 +1621,12 @@ export default {
       resetLocation: false,
       categoryId: "",
       subCategoryId: "",
-      categoryMetaData: "",
-      searchValue: this.$route.params.searchText,
+      searchValue: "",
       scrolled: false,
       productCountInPage: 16,
       productCountInEachLoad: 16,
-      continueToLoadProducts: true,
       fromProductCount: 0,
+      continueToLoadProducts: true,
       searchActive: false,
       errors: "",
       popUpMsg: "",
@@ -1803,13 +1634,11 @@ export default {
       loading: false,
       loadMoreActive: false,
       searchTextTimeout: null,
-      headerSearchText: "",
-      jsonLDObject: "",
       sortOption: "BM",
       verifiedUserContent: this.$parent.verifiedUserContent,
       listIsGrid: true,
-      selectedCategory: "",
-      dataTags: [],
+      isMyProfile: false,
+      modalSubCategory: false,
     };
   },
   methods: {
@@ -1840,27 +1669,22 @@ export default {
       $(".modal").on("show.bs.modal", () => {
         this.handleBackKeys();
       });
-      this.checkLocationFilter();
       this.checkSortOption();
-      $("#searchFilter").modal("hide");
-      this.products = {};
-      this.scrollToTop();
+      this.checkLocationFilter();
+      //              return new Promise((resolve,reject)=>{
+      var self = this;
       $(".show-list-items button").tooltip();
       this.swithToListOnMobile();
       this.cehckPageWidth();
-      var self = this;
-      var searchValue = this.searchValue;
-      var searchValueText = searchValue;
-      let categoryName = this.getCategoryName();
 
-      axios
-        .post("/get_category_meta_data", {
-          category_name: categoryName,
-        })
-        .then(function (response) {
-          self.categoryMetaData = response.data.category_info;
-          self.jsonLDObject = response.data.schema_object;
-        });
+      this.scrollToTop();
+      if (this.$route.query.s) {
+        var searchValue = this.$route.query.s.split("+").join(" ");
+      } else {
+        var searchValue = "";
+      }
+
+      var searchValueText = searchValue;
       self.checkCurrentUser();
 
       if (searchValueText) {
@@ -1870,19 +1694,17 @@ export default {
           searchValueText
         );
         self.searchText = searchValueText;
-        setTimeout(function () {
-          self.sidebarScroll();
-        }, 500);
+        self.submiting = false;
       } else {
         self.loading = true;
 
         self.fromProductCount = 0;
         self.productCountInPage = 16;
+
         let getProductsData = {
           from_record_number: self.fromProductCount,
           response_rate: self.$parent.productByResponseRate,
           to_record_number: self.productCountInPage,
-          search_text: categoryName,
           sort_by: self.sortOption,
         };
         if (self.province.id) {
@@ -1891,22 +1713,20 @@ export default {
         if (self.city.id) {
           getProductsData.city_id = self.city.id;
         }
+
         axios
           .post("/user/get_product_list", getProductsData)
           .then(function (response) {
             self.products = response.data.products;
-            self.loading = false;
-            if (self.products.length < self.productCountInPage) {
-              self.continueToLoadProducts = false;
-            } else {
-              self.continueToLoadProducts = true;
-            }
+            //                                localStorage.removeItem('productCountInPage')
+            //                                resolve(self.loading = false);
+            self.submiting = false;
             setTimeout(function () {
               self.sidebarScroll();
             }, 500);
-            self.submiting = false;
           });
       }
+      //                    }).catch(error=>reject(error));
     },
     checkCurrentUser() {
       if (this.$parent.currentUser.user_info) {
@@ -1914,8 +1734,11 @@ export default {
       }
     },
     feed() {
-      var self = this;
+      if (this.products.isEmptyObject == true) {
+        return false;
+      }
 
+      var self = this;
       if (
         this.searchText === "" &&
         this.province.id === "" &&
@@ -1925,23 +1748,20 @@ export default {
         this.loadMoreActive = true;
         this.fromProductCount = this.productCountInPage;
         this.productCountInPage += this.productCountInEachLoad;
-
         axios
           .post("/user/get_product_list", {
-            from_record_number: this.fromProductCount,
+            from_record_number: self.fromProductCount,
             response_rate: self.$parent.productByResponseRate,
-            to_record_number: this.productCountInPage,
-            search_text: this.getCategoryName(),
+            to_record_number: self.productCountInPage,
             sort_by: self.sortOption,
           })
           .then(function (response) {
             if (!response.data.products.length) {
               self.continueToLoadProducts = false;
             }
-            if (Array.isArray(self.products)) {
-              self.products = self.products.concat(response.data.products);
+            if (self.products && self.products.length) {
+              self.products = self.products.concat([...response.data.products]);
             }
-
             self.submiting = false;
             if (self.products.length + 1 < self.productCountInPage) {
               self.continueToLoadProducts = false;
@@ -1953,8 +1773,6 @@ export default {
             }, 500);
           });
       } else {
-        let self = this;
-
         this.loadMoreActive = true;
 
         var searchObject = {};
@@ -1968,47 +1786,59 @@ export default {
         if (this.subCategoryId) {
           searchObject.sub_category_id = this.subCategoryId;
         }
-        if (this.province) {
+        if (this.province.id) {
           searchObject.province_id = this.province.id;
         }
-        if (this.city) {
+        if (this.city.id) {
           searchObject.city_id = this.city.id;
         }
+        if (this.searchText) {
+          this.$router.replace({
+            name: "productList",
+            query: {
+              s: this.searchText.replace(/ /g, "+"),
+            },
+          });
+          searchObject.search_text = this.searchText;
+        }
 
-        searchObject.search_text = this.getCategoryName();
+        if (jQuery.isEmptyObject(searchObject)) {
+          if (this.searchText == "") {
+            this.$router.push({
+              name: "productList",
+            });
+          }
+        }
 
         searchObject.from_record_number = self.productCountInPage;
         self.productCountInPage += self.productCountInEachLoad;
         searchObject.to_record_number = self.productCountInPage;
         searchObject.sort_by = self.sortOption;
 
-        if (searchObject.search_text) {
-          axios
-            .post("/user/get_product_list", searchObject)
-            .then(function (response) {
-              if (!response.data.products.length) {
-                self.continueToLoadProducts = false;
-              }
-              if (Array.isArray(self.products)) {
-                self.products = self.products.concat(response.data.products);
-              }
+        axios
+          .post("/user/get_product_list", searchObject)
+          .then(function (response) {
+            if (!response.data.products.length) {
+              self.continueToLoadProducts = false;
+            }
+            if (Array.isArray(self.products)) {
+              self.products = self.products.concat(response.data.products);
+            }
+            self.loadMoreActive = false;
 
-              self.loadMoreActive = false;
-
-              setTimeout(function () {
-                self.sidebarScroll();
-              }, 500);
-            })
-            .catch(function (err) {
-              alert("خطایی رخ داده است. دوباره تلاش کنید.");
-            });
-        }
+            setTimeout(function () {
+              self.sidebarScroll();
+            }, 500);
+          })
+          .catch(function (err) {
+            alert("خطایی رخ داده است. دوباره تلاش کنید.");
+          });
       }
     },
     registerRequestInSearchNotFoundCase: function () {
       if (this.currentUser.profile) {
         if (this.currentUser.user_info.is_buyer) {
-          window.location.href = "/buyer/register-request";
+          this.$router.push({ name: "registerRequestBuyer" });
         } else {
           this.popUpMsg = "حساب کاربری شما از نوع خریدار نیست.";
           eventBus.$emit("submitSuccess", this.popUpMsg);
@@ -2041,7 +1871,7 @@ export default {
       this.subCategoryId = "";
       this.city = "";
 
-      this.init();
+      this.applyFilter();
     },
     applyFilter: function () {
       var self = this;
@@ -2062,14 +1892,29 @@ export default {
       if (this.subCategoryId) {
         searchObject.sub_category_id = this.subCategoryId;
       }
-      if (this.province) {
+      if (this.province.id) {
         searchObject.province_id = this.province.id;
       }
-      if (this.city) {
+      if (this.city.id) {
         searchObject.city_id = this.city.id;
       }
+      if (this.searchText) {
+        this.$router.replace({
+          name: "productList",
+          query: {
+            s: this.searchText.replace(/ /g, "+"),
+          },
+        });
+        searchObject.search_text = this.searchText;
+      }
 
-      searchObject.search_text = this.getCategoryName();
+      if (jQuery.isEmptyObject(searchObject)) {
+        if (this.searchText == "") {
+          this.$router.push({
+            name: "productList",
+          });
+        }
+      }
 
       searchObject.from_record_number = self.fromProductCount;
       searchObject.to_record_number = self.productCountInPage;
@@ -2080,12 +1925,7 @@ export default {
         .then(function (response) {
           self.products = response.data.products;
           self.submiting = false;
-
           self.scrollToTop();
-
-          setTimeout(function () {
-            self.sidebarScroll();
-          }, 500);
         })
         .catch(function (err) {
           alert("خطایی رخ داده است. دوباره تلاش کنید.");
@@ -2100,7 +1940,7 @@ export default {
 
       if (this.sortOption != sortOption) {
         this.registerComponentStatistics(
-          "product-category",
+          "product-list",
           "apply-sort",
           sortOption
         );
@@ -2146,31 +1986,17 @@ export default {
         fatal: fatal,
       });
     },
-    sidebarScroll() {
-      let sidebarHeight = $("#sidebar").outerHeight();
-      $("#main .main-content").css("min-height", sidebarHeight);
-      $("#sidebar").StickySidebar({
-        // Settings
-        additionalMarginTop: 120,
-      });
-    },
-    getCategoryName: function () {
-      let name = this.$route.params.categoryName;
-
-      return name ? name.toString().split("-").join(" ") : "";
-    },
-    convertCategoryname(name) {
-      return name ? name.toString().split("-").join(" ") : "";
-    },
     infiniteScrollHandler() {
       $(window).scroll(() => {
-        if (
-          $(window).scrollTop() >=
-            ($(document).height() - $(window).height() - 100) / 2 &&
-          !this.loadMoreActive &&
-          this.continueToLoadProducts
-        ) {
-          this.feed();
+        if (this.$route.name == "productList") {
+          if (
+            $(window).scrollTop() >=
+              ($(document).height() - $(window).height() - 100) / 2 &&
+            !this.loadMoreActive &&
+            this.continueToLoadProducts
+          ) {
+            this.feed();
+          }
         }
       });
     },
@@ -2218,43 +2044,17 @@ export default {
         $("#categories-modal").modal("show");
       }
     },
-    createJsonLDObject: function () {
-      var fullName =
-        this.product.user_info.first_name +
-        " " +
-        this.product.user_info.last_name;
-
-      var productOwnerProfilePageUrl =
-        "https://www.buskool.com/profile/" + this.product.user_info.user_name;
-
-      let jsonDL = {
-        "@context": "https://schema.org/",
-        "@type": "Product",
-        name: this.product.main.product_name,
-        image: this.product.photos.map(function (photo) {
-          return "https://www.buskool.com/storage/" + photo.file_path;
-        }),
-        description: this.product.main.description,
-        aggregateRating: {
-          "@type": "AggregateRating",
-          ratingValue: "4.4",
-          reviewCount: "3",
-        },
-        offers: {
-          "@type": "Offer",
-          url: "https://www.buskool.com" + this.getProductUrl(),
-          priceCurrency: "IRR",
-          price: this.product.main.min_sale_price * 10,
-          availability: "https://schema.org/InStock",
-          seller: {
-            "@type": "Person",
-            name: fullName,
-            url: productOwnerProfilePageUrl,
-          },
-        },
-      };
-
-      return jsonDL;
+    closeFilterModal: function () {
+      $(".modal").modal("hide");
+      history.go(-1);
+    },
+    sidebarScroll() {
+      let sidebarHeight = $("#sidebar").outerHeight();
+      $("#main .main-content").css("min-height", sidebarHeight);
+      $("#sidebar").StickySidebar({
+        // Settings
+        additionalMarginTop: 120,
+      });
     },
     openStickyGuide: function () {
       eventBus.$emit("modal", "guide");
@@ -2310,32 +2110,10 @@ export default {
     },
   },
   watch: {
-    categoryList(categories) {
-      if (categories) {
-        this.selectedCategory = this.$parent.getCategoryItem(categories);
-      }
-    },
-    selectedCategory(category) {
-      if (category) {
-        axios
-          .post("/get_related_categories", {
-            category_id: category.id,
-            category_name: this.getCategoryName(),
-          })
-          .then((response) => {
-            this.dataTags = response.data.category_names;
-          });
-      }
-    },
-    "$route.params.categoryName": function (name) {
-      this.init();
-      if (this.categoryList) {
-        this.selectedCategory = this.$parent.getCategoryItem(this.categoryList);
-      }
-    },
-
-    headerSearchText: function (value) {
+    searchText: function (value) {
       var self = this;
+
+      eventBus.$emit("textSearch", value);
 
       clearTimeout(this.searchTextTimeout);
 
@@ -2346,15 +2124,13 @@ export default {
           self.searchText
         );
 
-        eventBus.$emit("textSearch", value);
-
-        self.$router.replace({
-          name: "productList",
-          query: {
-            s: self.headerSearchText.replace(/ /g, "+"),
-          },
-        });
+        self.applyFilter();
       }, 1500);
+    },
+    $route: function () {
+      if (this.$route.query.s) {
+        this.searchText = this.$route.query.s.split("+").join(" ");
+      }
     },
     "$parent.productByResponseRate": function () {
       this.products = {};
@@ -2367,57 +2143,56 @@ export default {
         this.init();
       }
     },
-
-    bottom(bottom) {
-      if (bottom) {
-        this.feed();
-      }
-    },
     "$parent.currentUser"(user) {
       this.checkCurrentUser();
     },
   },
   created() {
     gtag("config", "UA-129398000-1", { page_path: "/product-list" });
-    document.addEventListener("click", this.documentClick);
+    eventBus.$on("textSearch", (event) => {
+      this.searchText = event;
+    });
+
+    // document.addEventListener('click', this.documentClick);
   },
   mounted() {
+    let self = this;
+
     this.scrollToTop();
 
     this.infiniteScrollHandler();
 
-    this.init();
-
+    this.init(); //.then(loading=>{
+    //              if(!loading){
+    //                   let scrollPosition=(localStorage.getItem('scroll'))||{x:0,y:0};
+    //                   window.scrollTo(0,scrollPosition);
+    //                   localStorage.removeItem('scroll')
+    //                   }
+    //            });
     this.stopLoader();
   },
   metaInfo() {
-    let categoryName = this.getCategoryName();
+    let canonicalLink = window.location.host + "/product-list";
 
-    let canonicalLink =
-      window.location.host +
-      "/product-list/category/" +
-      categoryName.split(" ").join("-");
+    let title = "";
+    let description = "";
+
+    if (this.searchText) {
+      title = "لیست محصولات و قیمت عمده " + this.searchText;
+      description = "خرید و قیمت عمده " + title;
+    } else {
+      title = "لیست محصولات و قیمت عمده محصولات غذایی و کشاورزی";
+      description =
+        "خرید عمده و قیمت میوه | خرید عمده و قیمت غلات | خرید عمده و قیمت صیفی جات | خرید و قیمت عمده خشکبار";
+    }
 
     return {
-      title:
-        "قیمت " +
-        categoryName +
-        " - " +
-        " خرید و فروش " +
-        categoryName +
-        " عمده - بهترین قیمت روز ",
+      title: title,
       titleTemplate: "%s | باسکول",
       meta: [
         {
           name: "description",
-          content:
-            " قیمت امروز - " +
-            categoryName +
-            " خرید و فروش " +
-            categoryName +
-            " عمده بدون واسطه از بهترین تامین کنندگان ☀️☀️ آخرین قیمت " +
-            categoryName +
-            " ☀️☀️ بازار باسکول",
+          content: description,
         },
         {
           name: "author",
@@ -2426,11 +2201,7 @@ export default {
         {
           property: "og:description",
           content:
-            "خرید و فروش عمده " +
-            categoryName +
-            " - قیمت  " +
-            categoryName +
-            " عمده مستقیم + صادراتی |‌ باسکول ",
+            "مرجع تخصصی خرید و فروش عمده و قیمت محصولات غذایی و کشاورزی ایران | صادرات محصولات غذایی و کشاورزی",
         },
         {
           property: "og:site_name",
@@ -2439,7 +2210,7 @@ export default {
         },
         {
           property: "og:title",
-          content: "باسکول | خرید و فروش عمده و قیمت " + categoryName,
+          content: "باسکول | لیست محصولات و قیمت " + title,
         },
       ],
       link: [{ rel: "canonical", href: canonicalLink }],
