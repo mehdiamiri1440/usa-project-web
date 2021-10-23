@@ -650,7 +650,19 @@ export default {
           self.getBreadCrumbs();
         })
         .catch(function (err) {
-          window.location.href = "/404";
+
+          //redirect user to the parent category
+          let categoryName = self.$route.params.categoryName.split('-');
+
+          categoryName = categoryName.filter(item => {
+              if(item == 'خرید' || item == 'عمده'){
+                  return false;
+              }
+              return true;
+          });
+          
+          window.location.href = "/product-list/category/" + categoryName.join('-');
+          
         });
     },
     openChat(product) {
