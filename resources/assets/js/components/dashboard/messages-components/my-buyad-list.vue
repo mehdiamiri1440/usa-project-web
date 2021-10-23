@@ -1387,10 +1387,6 @@ export default {
   },
   mounted() {
     this.init();
-
-    $(".my-contacts").scroll(function (event) {
-      console.log($(".contact-body.my-contacts").scrollTop());
-    });
   },
 };
 </script>

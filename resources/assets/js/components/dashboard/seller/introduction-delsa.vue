@@ -38,9 +38,8 @@
       </div>
       <div class="actions-wrapper">
         <div class="col-xs-12">
-          <router-link
-            tag="button"
-            :to="{ name: 'registerProductSeller' }"
+          <button
+            @click.prevent="routeToPage('registerProductSeller')"
             class="default-btn-with-icon"
           >
             <div class="button-main-icon-wrapper">
@@ -50,10 +49,9 @@
               <p class="button-title single-title">محصول برای فروش دارم</p>
             </div>
             <i class="fa fa-angle-left"></i>
-          </router-link>
+          </button>
           <button
-            data-target="#categories-modal"
-            data-toggle="modal"
+            @click.prevent="openCategoryModal()"
             class="default-btn-with-icon"
           >
             <div class="button-main-icon-wrapper">
@@ -103,6 +101,39 @@ export default {
       $(".modal").modal("hide");
       this.$nextTick(() => {
         this.$router.push({ path: url });
+      });
+    },
+    routeToPage(routeName) {
+      // ready for analytics
+
+      this.registerComponentStatistics(
+            "seller-just-after-signup",
+            "click-on-suggested-options",
+            "click-on-register-product-btn"
+          );
+
+      this.$router.push({ name: routeName });
+    },
+    openCategoryModal() {
+      // ready for analytics
+
+      this.registerComponentStatistics(
+            "seller-just-after-signup",
+            "click-on-suggested-options",
+            "click-on-get-price-btn"
+          );
+
+      // this.registerComponentStatistics("", "", "");
+      $("#categories-modal").modal("show");
+    },
+    registerComponentStatistics: function (
+      categoryName,
+      actionName,
+      labelName
+    ) {
+      gtag("event", actionName, {
+        event_category: categoryName,
+        event_label: labelName,
       });
     },
   },
