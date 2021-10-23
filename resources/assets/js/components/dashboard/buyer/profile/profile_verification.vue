@@ -483,7 +483,7 @@ export default {
   },
   data() {
     return {
-      currentStep: 3,
+      currentStep: 0,
       userImage: "",
       idCardImage: "",
       documetImage: "",
