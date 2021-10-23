@@ -77,8 +77,7 @@ export default {
           this.products = this.products.concat([...response.data.products]);
           this.$parent.isRelatedProducts = true;
           this.$nextTick(() => {
-            let productsSection = $("div.items-wrapper:last-of-type");
-            this.infiniteScrollHandler(productsSection);
+            this.infiniteScrollHandler();
           });
         });
     },
@@ -102,16 +101,13 @@ export default {
           if (self.products && self.products.length) {
             self.products = self.products.concat([...response.data.products]);
           }
-          this.$nextTick(() => {
-            let productsSection = $("div.items-wrapper:last-of-type");
-            this.infiniteScrollHandler(productsSection);
-          });
-
           self.loadMoreActive = false;
         });
     },
-    infiniteScrollHandler(productsSection) {
+    infiniteScrollHandler() {
       $(window).scroll(() => {
+        let productsSection = $("div.items-wrapper:last-of-type");
+
         if (typeof productsSection.offset() !== "undefined") {
           if (
             $(window).scrollTop() + $(window).height() >=
@@ -135,7 +131,7 @@ export default {
       isElementShownInView(
         "#related-products-wrapper",
         (isInView) => {
-          if (isInView) {
+          if (isInView && this.products.length == 0) {
             this.getRelatedProducts();
           }
         },
