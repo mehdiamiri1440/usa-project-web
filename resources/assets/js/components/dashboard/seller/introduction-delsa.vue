@@ -106,12 +106,22 @@ export default {
     routeToPage(routeName) {
       // ready for analytics
 
-      // this.registerComponentStatistics("", "", "");
+      this.registerComponentStatistics(
+            "seller-just-after-signup",
+            "click-on-suggested-options",
+            "click-on-register-product-btn"
+          );
 
       this.$router.push({ name: routeName });
     },
     openCategoryModal() {
       // ready for analytics
+
+      this.registerComponentStatistics(
+            "seller-just-after-signup",
+            "click-on-suggested-options",
+            "click-on-get-price-btn"
+          );
 
       // this.registerComponentStatistics("", "", "");
       $("#categories-modal").modal("show");

@@ -533,7 +533,11 @@ export default {
     },
     routeToPage(routeName) {
       // ready for analytics
-      // this.registerComponentStatistics("", "", "");
+      this.registerComponentStatistics(
+            "verification",
+            "buyer-last-step",
+            "click-on-special-products"
+          );
 
       this.$router.push({ name: routeName });
     },

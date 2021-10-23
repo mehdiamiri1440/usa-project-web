@@ -554,10 +554,18 @@ export default {
     routeToPage(routeName) {
       if (routeName == "dashboardPricingTableSeller") {
         // ready for analytics
-        // this.registerComponentStatistics("", "", "");
+        this.registerComponentStatistics(
+            "verification",
+            "seller-last-step",
+            "click-on-package-promotion"
+          );
       } else if (routeName == "buyAdRequestsSeller") {
         // ready for analytics
-        // this.registerComponentStatistics("", "", "");
+        this.registerComponentStatistics(
+            "verification",
+            "seller-last-step",
+            "click-on-buyAd-requests"
+          );
       }
 
       this.$router.push({ name: routeName });

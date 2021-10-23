@@ -612,21 +612,28 @@ export default {
     openProductInSeperatePage: function () {
       localStorage.setItem("scrollIndex", this.$props.productIndex);
       window.open(this.productUrl, "_blank");
-      // this.registerComponentStatistics(
-      //   "product",
-      //   "show-product-in-seperate-page",
-      //   "show-product-in-seperate-page"
-      // );
+
+      this.registerComponentStatistics(
+        "product",
+        "show-product-in-seperate-page",
+        "show-product-in-seperate-page"
+      );
     },
     openProductWithABtest() {
       let routeName = this.$route.name;
-      if (routeName == "productList") {
-        // ready for analytics
-        // this.registerComponentStatistics("","","");
-      } else if (routeName == "productCategory") {
-        // ready for analytics
-        // this.registerComponentStatistics("","","");
-      }
+      // if (routeName == "productList") {
+      //   // ready for analytics
+        
+      // } else if (routeName == "productCategory") {
+      //   // ready for analytics
+      //   // this.registerComponentStatistics("","","");
+      // }
+
+      this.registerComponentStatistics(
+            "product",
+            "show-product-in-seperate-page",
+            "click-on-show-product-detail-btn"
+        );
 
       this.openProductInSeperatePage();
     },
