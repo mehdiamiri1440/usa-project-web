@@ -420,9 +420,8 @@
             </div>
             <div class="actions-wrapper">
               <div class="col-xs-12">
-                <router-link
-                  tag="button"
-                  :to="{ name: 'specialProducts' }"
+                <button
+                  @click.prevent="routeToPage('specialProducts')"
                   class="default-btn-with-icon"
                 >
                   <div class="button-main-icon-wrapper">
@@ -444,7 +443,7 @@
                     <p class="button-text">مشاهده لیست محصولات فروش</p>
                   </div>
                   <i class="fa fa-angle-left"></i>
-                </router-link>
+                </button>
               </div>
             </div>
           </div>
@@ -531,6 +530,26 @@ export default {
     },
     scrollToTop() {
       window.scrollTo(0, 0);
+    },
+    routeToPage(routeName) {
+      // ready for analytics
+      this.registerComponentStatistics(
+            "verification",
+            "buyer-last-step",
+            "click-on-special-products"
+          );
+
+      this.$router.push({ name: routeName });
+    },
+    registerComponentStatistics: function (
+      categoryName,
+      actionName,
+      labelName
+    ) {
+      gtag("event", actionName, {
+        event_category: categoryName,
+        event_label: labelName,
+      });
     },
   },
   watch: {

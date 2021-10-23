@@ -193,8 +193,8 @@ class MessagingAnomalyDetection implements ShouldQueue
             }
 
             $phone = null;
-            preg_match_all('/((09[0-9]{9})|(\x{06F0}\x{06F9}[\x{06F0}-\x{06F9}]{9}))/u',$msg->text,$phone);
-            if(count($phone) > 0){
+            $match_result = preg_match_all('/((09[0-9]{9})|(\x{06F0}\x{06F9}[\x{06F0}-\x{06F9}]{9}))/u',$msg->text,$phone);
+            if($match_result != false){ // it's tricky. it means when function has failed or match count is zero, dont process the IF body
                 $repeat_count = 0;
 
                 foreach($long_messages as $tmp_msg){

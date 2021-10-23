@@ -305,7 +305,7 @@
       >
         <div class="success-register" v-if="successRegisterProduct">
           <div class="title-success">
-            <h2>ثبت محصول شما با موفقیت انجام شد!</h2>
+            <h2>ثبت محصول با موفقیت انجام شد!</h2>
             <p>
               محصول شما، پس از تایید کارشناسان باسکول، در لیست محصولات قرار
               خواهد گرفت.

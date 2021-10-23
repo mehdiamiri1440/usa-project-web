@@ -413,9 +413,9 @@
             </div>
             <div class="actions-wrapper">
               <div class="col-xs-12">
-                <router-link
-                  tag="button"
-                  :to="{ name: 'dashboardPricingTableSeller' }"
+                <button
+                  v-if="$parent.currentUser.user_info.active_pakage_type == 0"
+                  @click.prevent="routeToPage('dashboardPricingTableSeller')"
                   class="default-btn-with-icon"
                 >
                   <div class="button-main-icon-wrapper">
@@ -438,12 +438,11 @@
                     <p class="button-text">دسترسی به امکانات بیشتر باسکول</p>
                   </div>
                   <i class="fa fa-angle-left"></i>
-                </router-link>
+                </button>
               </div>
               <div class="col-xs-12">
-                <router-link
-                  tag="button"
-                  :to="{ name: 'buyAdRequestsSeller' }"
+                <button
+                  @click.prevent="routeToPage('buyAdRequestsSeller')"
                   class="default-btn-with-icon"
                 >
                   <div class="button-main-icon-wrapper">
@@ -465,7 +464,7 @@
                     <p class="button-text">مشاهده لیست درخواست های خرید</p>
                   </div>
                   <i class="fa fa-angle-left"></i>
-                </router-link>
+                </button>
               </div>
             </div>
           </div>
@@ -552,6 +551,35 @@ export default {
     },
     scrollToTop() {
       window.scrollTo(0, 0);
+    },
+    routeToPage(routeName) {
+      if (routeName == "dashboardPricingTableSeller") {
+        // ready for analytics
+        this.registerComponentStatistics(
+          "verification",
+          "seller-last-step",
+          "click-on-package-promotion"
+        );
+      } else if (routeName == "buyAdRequestsSeller") {
+        // ready for analytics
+        this.registerComponentStatistics(
+          "verification",
+          "seller-last-step",
+          "click-on-buyAd-requests"
+        );
+      }
+
+      this.$router.push({ name: routeName });
+    },
+    registerComponentStatistics: function (
+      categoryName,
+      actionName,
+      labelName
+    ) {
+      gtag("event", actionName, {
+        event_category: categoryName,
+        event_label: labelName,
+      });
     },
   },
   watch: {
