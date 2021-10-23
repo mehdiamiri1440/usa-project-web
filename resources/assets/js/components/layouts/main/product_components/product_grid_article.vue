@@ -82,7 +82,6 @@
 .has-action .green-button:hover .svg-1 {
   fill: #fff;
   transition: 150ms;
-  
 }
 
 .elevator-event {
@@ -536,7 +535,7 @@ label {
       </button>
     </div>
     <div v-if="checkActionButtonShow()" class="actions-wrapper">
-      <button @click="openProductInSeperatePage()" class="green-button">
+      <button @click="openProductWithABtest()" class="green-button">
         <svg
           width="22"
           height="16"
@@ -618,6 +617,18 @@ export default {
       //   "show-product-in-seperate-page",
       //   "show-product-in-seperate-page"
       // );
+    },
+    openProductWithABtest() {
+      let routeName = this.$route.name;
+      if (routeName == "productList") {
+        // ready for analytics
+        // this.registerComponentStatistics("","","");
+      } else if (routeName == "productCategory") {
+        // ready for analytics
+        // this.registerComponentStatistics("","","");
+      }
+
+      this.openProductInSeperatePage();
     },
     toLatinNumbers: function (num) {
       if (num == null) {
