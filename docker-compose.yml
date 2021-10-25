@@ -164,6 +164,7 @@ services:
       - laravel-app
     volumes:
       - .:/var/www/html
+      - ${PHP_INI}:/usr/local/etc/php/php.ini
     environment:
       CONTAINER_ROLE: queue
     networks:
@@ -177,6 +178,7 @@ services:
       - laravel-app
     volumes:
       - .:/var/www/html
+      - ${PHP_INI}:/usr/local/etc/php/php.ini
     environment:
       CONTAINER_ROLE: queue
     networks:
@@ -190,6 +192,7 @@ services:
       - laravel-app
     volumes:
       - .:/var/www/html
+      - ${PHP_INI}:/usr/local/etc/php/php.ini
     environment:
       CONTAINER_ROLE: queue
     networks:
