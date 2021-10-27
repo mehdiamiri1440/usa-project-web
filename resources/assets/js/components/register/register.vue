@@ -70,12 +70,22 @@ input[type="number"]::-webkit-outer-spin-button {
     padding: 0;
   }
 
+  #main-content {
+    padding-top: 50px;
+  }
+
   .progrees-item p {
     display: none;
   }
 
   .main-wrapper {
-    top: calc(50% - 30px);
+    top: 0;
+    left: 0;
+    transform: translate(0);
+  }
+
+  #main.latest-step {
+    margin: 0;
   }
 
   .progressbar-items {
@@ -84,6 +94,8 @@ input[type="number"]::-webkit-outer-spin-button {
 
   .main-contents {
     border-radius: 0;
+    border: none;
+    margin: 0;
   }
 
   .main-content-header {
@@ -161,11 +173,6 @@ input[type="number"]::-webkit-outer-spin-button {
     <div v-else>
       <div class="loading-container">
         <div class="image-wrapper">
-          <a v-show="isImageLoad">
-            <transition>
-              <img src @load="ImageLoaded" alt="alt" />
-            </transition>
-          </a>
           <div class="text-loader text-muted">
             ... در حال انتقال به پنل کاربری
           </div>
@@ -251,12 +258,6 @@ export default {
     };
   },
   methods: {
-    ImageLoaded: function () {
-      this.isImageLoad = true;
-    },
-    loadImage: function () {
-      this.isImageLoad = false;
-    },
     setLocation() {
       this.getCategory();
     },
@@ -283,31 +284,7 @@ export default {
       }
 
       this.currentStep = step;
-      // this.checkLevel();
       this.scrollToTop();
-    },
-    checkLevel() {
-      var progressElement = $(".custom-progressbar.active");
-      switch (this.currentStep) {
-        case 1:
-          progressElement.css("width", "0");
-          break;
-        case 2:
-          progressElement.css("width", "18%");
-          break;
-        case 3:
-          progressElement.css("width", "36%");
-          break;
-        case 4:
-          progressElement.css("width", "54%");
-          break;
-        case 5:
-          progressElement.css("width", "73%");
-          break;
-        case 6:
-          progressElement.css("width", "90%");
-          break;
-      }
     },
     sendVerificationCode: function () {
       this.verifyCodeBtnLoading = true;
@@ -352,7 +329,7 @@ export default {
           self.registerComponentStatistics(
             "Register-Error",
             "phone-number-verification",
-            "error:" + self.errors.phone[0]
+            "error:" + self.errors.phone
           );
         });
     },
@@ -390,7 +367,7 @@ export default {
             self.registerComponentStatistics(
               "Register-Error",
               "verification-code-wrong",
-              "error:" + self.errors.verification_code[0]
+              "error:" + self.errors.verification_code
             );
           }
         })
@@ -406,20 +383,6 @@ export default {
             "error:" + self.errors.verification_code
           );
         });
-    },
-    register_details: function () {
-      this.errorFlag = false;
-
-      this.checkStep3();
-
-      if (
-        this.errorFlag === false &&
-        this.userNameUnique === true &&
-        this.nationalCodeUnique === true
-      ) {
-        this.goToStep(6);
-        this.getCategory();
-      }
     },
     submitForm: function () {
       var self = this;
@@ -503,16 +466,12 @@ export default {
       this.step4.category_id = $(e.target).val();
     },
     checkStep3: function () {
-      // this.userNameValidator(this.step3.user_name);
       if (this.errors.name == "" && this.errors.family == "") {
         this.firstNameValidator(this.step3.name);
         this.lastNameValidator(this.step3.family);
       }
       this.provinceValidator(this.step3.province);
       this.cityValidator(this.step3.city);
-      // this.nationalCodeValidator(this.step3.national_code);
-      // this.passwordValidator(this.step3.password);
-      // this.sexValidator(this.step3.sex);
 
       if (this.errorFlag) {
         this.registerComponentStatistics(
@@ -607,40 +566,6 @@ export default {
         );
       }
     },
-    userNameValidator: function (userName) {
-      if (this.userNameUnique === true) {
-        this.errors.user_name = [];
-      }
-
-      if (userName === "") {
-        this.errors.user_name.push("نام کاربری الزامی است");
-
-        this.errorFlag = true;
-      }
-      if (!this.validateRegx(userName, /^\w+$/)) {
-        this.errors.user_name.push(" شامل حروف غیر مجاز است");
-        this.errorFlag = true;
-      }
-
-      if (this.errors.user_name[0]) {
-        this.registerComponentStatistics(
-          "Register-Error",
-          "username",
-          "input:" + username + " Error:" + this.errors.family[0]
-        );
-      }
-    },
-    nationalCodeValidator: function (code) {
-      code = this.toLatinNumbers(code);
-
-      if (this.nationalCodeUnique === true) {
-        this.errors.national_code = [];
-      }
-      if (code !== "" && !this.isIrNationalCode(code)) {
-        this.errors.national_code.push("کد ملی معتبر نیست");
-        this.errorFlag = true;
-      }
-    },
     isIrNationalCode: function (input) {
       if (!/^\d{10}$/.test(input)) {
         return false;
@@ -657,58 +582,6 @@ export default {
           }) % 11;
 
       return (sum < 2 && check == sum) || (sum >= 2 && check + sum == 11);
-    },
-    passwordValidator: function (pass) {
-      this.errors.password = [];
-      this.errors.password_conf = [];
-
-      if (pass === "") {
-        this.errors.password.push("رمز عبور الزامی است");
-        this.errorFlag = true;
-      }
-      if (pass.length < 8) {
-        this.errors.password.push("رمز عبور حداقل ۸ کاراکتر باشد");
-        this.errorFlag = true;
-      }
-      // if (passConf === "") {
-      //     this.errors.password_conf.push("تکرار رمز عبور الزامی است");
-      //     this.errorFlag = true;
-      // }
-      // if (passConf !== pass) {
-      //     this.errors.password_conf.push("رمز عبور مطابقت ندارد");
-      //     this.errorFlag = true;
-      // }
-
-      if (this.errors.password[0]) {
-        this.registerComponentStatistics(
-          "Register-Error",
-          "password",
-          "input:" + pass + " Error:" + this.errors.password[0]
-        );
-      }
-      // if (this.errors.password_conf[0]) {
-      //     this.registerComponentStatistics(
-      //         "Register-Error",
-      //         "passwordConfirmation",
-      //         "input:" + passConf + " Error:" + this.errors.password_conf[0]
-      //     );
-      // }
-    },
-    sexValidator: function (sex) {
-      this.errors.sex = [];
-
-      if (sex === "") {
-        this.errors.sex.push("جنسیت الزامی است");
-        this.errorFlag = true;
-      }
-
-      if (this.errors.sex[0]) {
-        this.registerComponentStatistics(
-          "Register-Error",
-          "sex",
-          "input:" + sex + " Error:" + this.errors.sex[0]
-        );
-      }
     },
     categoryIdValidator: function (categoryId) {
       this.errors.category_id = "";
@@ -919,61 +792,6 @@ export default {
         self.updateCounterDownTimer(seconds);
       }, 1000);
     },
-    "step3.user_name": function () {
-      var self = this;
-      if (this.step3.user_name.length > 0) {
-        axios
-          .post("/user/is_user_name_unique", {
-            user_name: this.step3.user_name,
-          })
-          .then(function (response) {
-            if (response.data.status === true) {
-              self.errors.user_name = [];
-              self.userNameUnique = true;
-            }
-          })
-          .catch(function (err) {
-            self.errors.user_name = [];
-            self.errors.user_name.push("نام کاربری قبلا گرفته شده");
-
-            self.errorFlag = true;
-            self.userNameUnique = false;
-          });
-      }
-    },
-    "step3.national_code": function () {
-      var self = this;
-
-      this.step3.national_code = this.toLatinNumbers(this.step3.national_code);
-
-      if (
-        this.step3.national_code.length > 0 &&
-        this.step3.national_code < 10
-      ) {
-        this.errors.national_code = [];
-        this.errors.national_code.push("کد ملی ۱۰ رقمی است");
-
-        this.errorFlag = true;
-      } else if (this.step3.national_code.length === 10) {
-        axios
-          .post("user/is_national_code_unique", {
-            national_code: this.toLatinNumbers(this.step3.national_code),
-          })
-          .then(function (response) {
-            if (response.data.status === true) {
-              self.errors.national_code = [];
-              self.nationalCodeUnique = true;
-            }
-          })
-          .catch(function (err) {
-            self.errors.national_code = [];
-            self.errors.national_code.push("کد ملی قبلا گرفته شده");
-
-            self.errorFlag = true;
-            self.nationalCodeUnique = false;
-          });
-      }
-    },
   },
   created() {
     var self = this;
@@ -1003,7 +821,6 @@ export default {
         // self.$nextTick(this.stopLoader());
       }
     };
-    // this.checkLevel();
   },
   updated: function () {
     this.$nextTick(this.stopLoader());

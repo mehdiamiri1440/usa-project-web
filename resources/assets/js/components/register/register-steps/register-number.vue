@@ -127,13 +127,13 @@ input.error:focus + i {
 </style>
 
 <template>
-  <div class="form-contents col-xs-12">
+  <form v-on:submit.prevent="submitPhone()" class="form-contents col-xs-12">
     <div class="row">
       <label class="input-title" for="phone-number">
         برای ورود یا ثبت نام، شماره همراه خود را وارد کنید.
       </label>
 
-      <form  v-on:submit.prevent="submitPhone()" class="input-wrapper user-phone-number-wrapper">
+      <div class="input-wrapper user-phone-number-wrapper">
         <input
           v-model="phoneNumber"
           :class="{
@@ -148,7 +148,7 @@ input.error:focus + i {
         />
 
         <i class="fa fa-phone-square-alt"></i>
-      </form>
+      </div>
 
       <p class="error-message">
         <i class="fa fa-exclamation" v-if="$parent.errors.phone"></i>
@@ -169,7 +169,7 @@ input.error:focus + i {
         ></i>
       </button>
     </div>
-  </div>
+  </form>
 </template>
 
 <script>

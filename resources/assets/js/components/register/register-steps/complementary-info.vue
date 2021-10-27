@@ -274,7 +274,7 @@ select.error:focus {
     <div class="row">
       <div class="user-phone-number-wrapper">
         <div class="row">
-          <div class="col-xs-6 pull-right">
+          <div class="col-xs-12 col-sm-6 pull-right">
             <label class="input-title" for="first-name">نام </label>
 
             <input
@@ -295,7 +295,7 @@ select.error:focus {
             </p>
           </div>
 
-          <div class="col-xs-6">
+          <div class="col-xs-12 col-sm-6">
             <label class="input-title" for="last-name">نام خانوادگی</label>
 
             <input

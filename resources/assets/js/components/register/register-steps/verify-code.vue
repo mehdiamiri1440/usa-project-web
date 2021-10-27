@@ -327,7 +327,7 @@ export default {
         if (!this.$parent.errors.verification_code) {
           this.$parent.verifyCode();
         }
-      } else {
+      } else if (!this.$parent.step3.verifyCodeLoader) {
         this.$parent.errors.verification_code = "لطفا کد تایید را وارد کنید.";
       }
     },

@@ -6,8 +6,9 @@ span {
 
 .from-wrapper {
   max-width: 400px;
-  margin: 49px auto 70px;
+  margin: 0 auto;
   overflow: hidden;
+  width: 100%;
 }
 
 .title-contents {
@@ -22,9 +23,12 @@ span {
 }
 
 .form-contents label {
-  font-weight: 500;
-  color: #777;
-  margin: 0 auto 7px;
+  text-align: center;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  margin-bottom: 26px;
+  color: #000;
 }
 
 .input-wrapper {
@@ -108,8 +112,8 @@ input.error:focus + i {
 }
 
 .submit-button {
-  background: #e0e0e0;
-  color: #fff;
+  background: #c2c9d1;
+  color: #9e9e9e;
   border: none;
   border-radius: 8px;
   width: 100%;
@@ -132,6 +136,7 @@ input.error:focus + i {
 .submit-button.active {
   background: #00c569;
   cursor: pointer;
+  color: #fff;
 }
 .submit-button.active:hover i {
   right: 3px;
@@ -165,20 +170,15 @@ input.error:focus + i {
 
 <template>
   <div class="text-rtl from-wrapper">
-    <h2 class="title-contents">
-      کد تایید را وارد نمایید
-      <span class="red-text">*</span>
-    </h2>
-
     <form
       v-on:submit.prevent="submitVerifyCode()"
       class="form-contents col-xs-12"
     >
       <div class="row">
-        <label for="code">
-          کد ارسال شده به شماره ی
-          <span class="light-green-text" v-text="$parent.step1.phone"> </span>
-          را وارد کنید
+        <label for="code" class="input-title">
+          کد ۴ رقمی ارسال شده به شماره ی
+          <span class="" v-text="$parent.step1.phone"> </span>
+          را وارد کنید.
         </label>
         <div class="input-wrapper">
           <input
@@ -278,18 +278,17 @@ input.error:focus + i {
             @click.prevent="submitVerifyCode()"
             :disabled="$parent.step3.verifyCodeLoader"
           >
-            مرحله بعد
+            ثبت کد
 
             <i
               class="fas fa-circle-notch fa-spin"
               v-if="$parent.step3.verifyCodeLoader"
             ></i>
-            <i class="fa fa-arrow-left" v-else></i>
           </button>
 
           <button
             class="submit-button back-button"
-            @click.prevent="$parent.goToStep(--$parent.currentStep)"
+            @click.prevent="$parent.currentStep--"
           >
             <i class="fa fa-arrow-right"></i>
             مرحله قبل
@@ -418,6 +417,9 @@ export default {
     currentCode(value) {
       if (value) {
         this.$parent.step2.verification_code = value;
+        if (value.length == 4) {
+          this.submitVerifyCode();
+        }
       }
     },
     "$parent.step2.verification_code"(code) {
