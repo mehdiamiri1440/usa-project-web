@@ -248,6 +248,7 @@ export default {
         verification_code: "",
         phone: "",
         category_id: "",
+        activity_type: "",
       },
       errorFlag: false,
       userNameUnique: true,
@@ -387,10 +388,7 @@ export default {
     submitForm: function () {
       var self = this;
 
-      this.errorFlag = false;
-
-      this.checkStep3();
-      this.checkStep4();
+      this.stepsValidator();
 
       var object = {
         phone: this.toLatinNumbers(this.step1.phone),
@@ -465,33 +463,28 @@ export default {
 
       this.step4.category_id = $(e.target).val();
     },
-    checkStep3: function () {
+    validateErrors() {
+      if (
+        this.step3.name.length &&
+        this.step3.family.length &&
+        this.step3.province &&
+        this.step3.city &&
+        this.step4.activity_type !== "" &&
+        this.step4.category_id !== ""
+      ) {
+        this.errorFlag = false;
+      }
+    },
+    stepsValidator() {
+      this.errorFlag = false;
       if (this.errors.name == "" && this.errors.family == "") {
         this.firstNameValidator(this.step3.name);
         this.lastNameValidator(this.step3.family);
       }
       this.provinceValidator(this.step3.province);
       this.cityValidator(this.step3.city);
-
-      if (this.errorFlag) {
-        this.registerComponentStatistics(
-          "Register-Error",
-          "step-3",
-          "validation error in step 3"
-        );
-      }
-    },
-    checkStep4: function () {
-      this.activityTypeValidator(this.step4.activity_type);
       this.categoryIdValidator(this.step4.category_id);
-
-      if (this.errorFlag) {
-        this.registerComponentStatistics(
-          "Register-Error",
-          "step-4",
-          "validation error in step 4"
-        );
-      }
+      this.activityTypeValidator(this.step4.activity_type);
     },
     textValidator(text, name) {
       if (text != "") {
@@ -585,7 +578,7 @@ export default {
     },
     categoryIdValidator: function (categoryId) {
       this.errors.category_id = "";
-      if (categoryId === "") {
+      if (categoryId == "") {
         this.errors.category_id = "انتخاب حوزه ی فعالیت الزامی است.";
         this.errorFlag = true;
       }
@@ -604,6 +597,7 @@ export default {
         this.errors.activity_type = "انتخاب نوع کاربری الزامی است.";
         this.errorFlag = true;
       }
+
       if (this.errors.activity_type) {
         this.registerComponentStatistics(
           "Register-Error",

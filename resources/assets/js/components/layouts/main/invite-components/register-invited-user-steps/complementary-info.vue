@@ -48,7 +48,7 @@ label.input-title {
 }
 
 .form-contents {
-  margin: 30px auto 50px;
+  margin: 5px auto;
   max-width: 400px;
 }
 
@@ -270,8 +270,10 @@ select.error:focus {
 </style>
 
 <template>
-  <div class="form-contents col-xs-12">
-    <div class="row">
+  <form
+    v-on:submit.prevent="$parent.submitForm()"
+    class="form-contents col-xs-12"
+  >    <div class="row">
       <div class="user-phone-number-wrapper">
         <div class="row">
           <div class="col-xs-12 col-sm-6 pull-right">
@@ -379,7 +381,7 @@ select.error:focus {
         >
           <option disabled selected>انتخاب کنید</option>
           <option
-            v-for="(category, index) in $parent.categoryList"
+            v-for="(category, index) in $parent.step4.categoryList"
             :key="index"
             :selected="$parent.step4.category_id == category.id"
             v-bind:value="category.id"
@@ -516,8 +518,8 @@ select.error:focus {
             $parent.errors.family == '' &&
             $parent.step3.province &&
             $parent.step3.city &&
-            $parent.step4.activity_type &&
-            $parent.step4.category_id &&
+            $parent.step4.activity_type !== '' &&
+            $parent.step4.category_id !== '' &&
             !$parent.errorFlag,
         }"
         :disabled="$parent.formSubmitActive"
@@ -530,7 +532,7 @@ select.error:focus {
         ></i>
       </button>
     </div>
-  </div>
+  </form>
 </template>
 
 <script>
@@ -548,10 +550,12 @@ export default {
     setProvince(event) {
       this.$parent.errors.province = "";
       this.$parent.setProvinceName(event);
+      this.$parent.validateErrors();
     },
     setCity(event) {
       this.$parent.errors.city = "";
       this.$parent.setCityName(event);
+      this.$parent.validateErrors();
     },
     getActivityDomain(event) {
       this.$parent.errors.category_id = "";
@@ -560,9 +564,11 @@ export default {
         this.$parent.step4.formSubmitActive = true;
       }
       this.$parent.setCategoryId(event);
+      this.$parent.validateErrors();
     },
   },
   mounted() {
+    this.$parent.getCategory();
     this.$parent.getProvinceList();
   },
   watch: {
@@ -577,10 +583,10 @@ export default {
         let error = this.$parent.textValidator(text, "نام");
         if (error) {
           this.$parent.errors.name = error;
-          this.$parent.errorFlag = true;
+          this.$parent.validateErrors();
         } else {
           this.$parent.step3.name = this.name;
-          this.$parent.errorFlag = false;
+          this.$parent.validateErrors();
         }
       } else {
         this.$parent.step3.name = "";
@@ -597,10 +603,10 @@ export default {
         let error = this.$parent.textValidator(text, "نام خانوادگی");
         if (error) {
           this.$parent.errors.family = error;
-          this.$parent.errorFlag = true;
+          this.$parent.validateErrors();
         } else {
           this.$parent.step3.family = text;
-          this.$parent.errorFlag = false;
+          this.$parent.validateErrors();
         }
       } else {
         this.$parent.step3.family = "";
@@ -609,6 +615,7 @@ export default {
     activityType(item) {
       this.$parent.errors.activity_type = "";
       this.$parent.step4.activity_type = item;
+      this.$parent.validateErrors();
     },
   },
 };
