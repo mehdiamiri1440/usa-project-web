@@ -76,7 +76,7 @@
   border: none;
   float: right;
   width: 100%;
-  background: #f6f6f6;
+  background: #fff;
 }
 
 #factor-pricing-modal .modal-content {
