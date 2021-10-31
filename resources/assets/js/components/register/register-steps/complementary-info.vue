@@ -12,12 +12,9 @@ textarea {
 
 label.input-title {
   display: inline-block;
-  background: #fff;
   padding: 5px;
   position: relative;
   z-index: 1;
-  bottom: -9px;
-  right: 12px;
   font-weight: 400;
   color: rgba(0, 0, 0, 0.7);
   font-size: 12px;
@@ -260,7 +257,7 @@ select.error:focus {
   color: #bebebe;
   position: absolute;
   display: inline-block;
-  top: 14px;
+  top: 41px;
   font-family: "Font Awesome 5 Free", sans-serif;
   font-weight: 900;
   left: 25px;
@@ -278,7 +275,9 @@ select.error:focus {
       <div class="user-phone-number-wrapper">
         <div class="row">
           <div class="col-xs-12 col-sm-6 pull-right">
-            <label class="input-title" for="first-name">نام </label>
+            <label class="input-title" for="first-name"
+              >نام <span class="red-text">*</span>
+            </label>
 
             <input
               v-model="name"
@@ -299,7 +298,9 @@ select.error:focus {
           </div>
 
           <div class="col-xs-12 col-sm-6">
-            <label class="input-title" for="last-name">نام خانوادگی</label>
+            <label class="input-title" for="last-name"
+              >نام خانوادگی <span class="red-text">*</span></label
+            >
 
             <input
               v-model="family"
@@ -321,6 +322,9 @@ select.error:focus {
       </div>
       <div class="row">
         <div class="input-wrapper province-wrapper col-xs-6 pull-right">
+          <label class="input-title" for="last-name"
+            >استان <span class="red-text">*</span></label
+          >
           <select
             @change="setProvince($event)"
             :class="{
@@ -348,6 +352,9 @@ select.error:focus {
         </div>
 
         <div class="input-wrapper province-wrapper col-xs-6">
+          <label class="input-title" for="last-name"
+            >شهر <span class="red-text">*</span></label
+          >
           <select
             @change="setCity($event)"
             :class="{ error: $parent.errors.city, active: $parent.step3.city }"
@@ -372,6 +379,9 @@ select.error:focus {
       </div>
 
       <div class="input-wrapper activity-domain-wrapper">
+        <label class="input-title" for="last-name"
+          >حوزه فعالیت <span class="red-text">*</span></label
+        >
         <select
           v-on:change="getActivityDomain($event)"
           :class="{
@@ -398,7 +408,9 @@ select.error:focus {
       </div>
       <div class="col-xs-12">
         <div class="row">
-          <label class="input-title" for="first-name">نوع فعالیت</label>
+          <label class="input-title" for="first-name"
+            >نوع فعالیت <span class="red-text">*</span></label
+          >
           <div
             class="radio-wrapper"
             :class="{

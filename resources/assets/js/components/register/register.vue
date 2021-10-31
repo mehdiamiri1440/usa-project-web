@@ -24,7 +24,7 @@ span {
 }
 
 #main.latest-step {
-  min-height: 600px;
+  min-height: 650px;
 }
 
 input[type="number"] {
@@ -578,7 +578,7 @@ export default {
     },
     categoryIdValidator: function (categoryId) {
       this.errors.category_id = "";
-      if (categoryId == "") {
+      if (categoryId === "") {
         this.errors.category_id = "انتخاب حوزه ی فعالیت الزامی است.";
         this.errorFlag = true;
       }

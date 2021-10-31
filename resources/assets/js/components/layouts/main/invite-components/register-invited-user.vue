@@ -183,6 +183,7 @@ export default {
         verification_code: "",
         phone: "",
         category_id: "",
+        activity_type: "",
       },
       errorFlag: false,
       userNameUnique: true,
