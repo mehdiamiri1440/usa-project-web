@@ -279,59 +279,10 @@
   top: 2px;
 }
 
-.pricing-wrapper {
-  margin-bottom: 130px;
-}
-
-.panel.panel-default {
-  border-radius: 8px;
-  background: #c5e1eb;
-  padding: 10px 15px;
-  border: 1px solid #f2f2f2;
-  box-shadow: 0px 4px 8px rgba(151, 151, 151, 0.2);
-  margin-bottom: 20px;
-}
-
-.panel.panel-default .panel-heading > a {
-  color: #000;
-  font-size: 16px;
-  font-weight: 300;
-  display: block;
-  direction: rtl;
-}
-
-.panel-collapse > p {
-  line-height: 20px;
-  font-size: 13px;
-  direction: rtl;
-  padding: 10px;
-  color: #2d3031;
-}
-
-.phones {
-  text-align: right;
-}
-
-.phones a {
-  color: #000;
-}
-
-.phones a:first-of-type {
-  margin-right: 30px;
-}
-
-.collapse-wrapper {
-  padding-bottom: 100px;
-}
-.panel-heading a:after {
-  content: "\f106";
-  font-family: "Font Awesome 5 Free";
-  font-weight: 900;
-  float: left;
-  color: #15313c;
-}
-.panel-heading a.collapsed:after {
-  content: "\f107";
+.main-content-wrapper {
+  float: initial;
+  max-width: 760px;
+  margin: 0 auto;
 }
 
 @media screen and (max-width: 991px) {
@@ -440,7 +391,7 @@
     </div>
 
     <div class="row">
-      <div class="main-content-wrapper col-xs-12 col-lg-10 col-lg-offset-1">
+      <div class="main-content-wrapper col-xs-12">
         <div class="row">
           <div class="col-xs-12 text-center">
             <div class="item-content-wrapper">
@@ -482,118 +433,6 @@
           <pricing-contents justPro="false" :offer-time="this.offerTime" />
 
           <!-- after pricing items  -->
-          <div class="collapse-wrapper col-xs-12">
-            <div class="row">
-              <div
-                id="accordion"
-                role="tablist"
-                aria-multiselectable="true"
-                class="panel-group col-xs-12"
-              >
-                <div class="panel panel-default">
-                  <div role="tab" id="headingFirst" class="panel-heading">
-                    <a
-                      data-toggle="collapse"
-                      data-parent="#accordion"
-                      href="#collapseFirst"
-                      aria-expanded="false"
-                      aria-controls="collapseFirst"
-                      class="collapsed"
-                    >
-                      بسته فروش ویژه چیست ؟
-                    </a>
-                  </div>
-                  <div
-                    id="collapseFirst"
-                    role="tabpanel"
-                    aria-labelledby="headingFirst"
-                    class="panel-collapse collapse"
-                  >
-                    <p>
-                      این بسته شامل مجموعه امکاناتی مانند اعمال نردبان رایگان ،
-                      مشاهده بدون تاخیر درخواست های خرید ، دریافت پیامک درخواست
-                      های خرید مرتبط و .. است که باعث فروش محصولات شما در رسیع
-                      ترین زمان ممکن می شود.
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div
-                id="elevator"
-                role="tablist"
-                aria-multiselectable="true"
-                class="panel-group col-xs-12"
-              >
-                <div class="panel panel-default">
-                  <div role="tab" id="headingFirst" class="panel-heading">
-                    <a
-                      data-toggle="collapse"
-                      data-parent="#elevator"
-                      href="#elevator-body"
-                      aria-expanded="false"
-                      aria-controls="elevator-body"
-                      class="collapsed"
-                    >
-                      نردبان در بسته فروش ویژه چیست؟
-                    </a>
-                  </div>
-                  <div
-                    id="elevator-body"
-                    role="tabpanel"
-                    aria-labelledby="headingFirst"
-                    class="panel-collapse collapse"
-                  >
-                    <p>
-                      با اعمال هربار نردبان محصول شما در صدر لیست محصولات قرار
-                      میگیرد.
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div
-                id="phones-wrapper"
-                role="tablist"
-                aria-multiselectable="true"
-                class="panel-group col-xs-12"
-              >
-                <div class="panel panel-default">
-                  <div role="tab" id="headingFirst" class="panel-heading">
-                    <a
-                      data-toggle="collapse"
-                      data-parent="#phones-wrapper"
-                      href="#phones-body"
-                      aria-expanded="false"
-                      aria-controls="phones-body"
-                      class="collapsed"
-                    >
-                      رمز دوم برای خرید آنلاین ندارم!
-                    </a>
-                  </div>
-                  <div
-                    id="phones-body"
-                    role="tabpanel"
-                    aria-labelledby="headingFirst"
-                    class="panel-collapse collapse"
-                  >
-                    <p>
-                      درصورتی که قادر به خرید مستقیم نیستید ، برلی پرداخت ازطریق
-                      کارت به کارت با ما تماس بگیرید.
-                    </p>
-                    <div class="phones">
-                      <a href="tel:۰۹۱۱۸۴۱۳۰۵۴"
-                        ><i class="fa fa-phone"></i>
-                        ۰۹۱۱۸۴۱۳۰۵۴
-                      </a>
-                      <a href="tel:۰۹۱۷۸۹۲۸۲۶۶"
-                        ><i class="fa fa-phone"></i>
-                        ۰۹۱۷۸۹۲۸۲۶۶
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
 

@@ -93,6 +93,13 @@
   margin-bottom: 30px;
 }
 
+.item-content.desktop-contents {
+  position: relative;
+  float: left;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
 .item-action {
   text-align: center;
   float: right;
@@ -169,7 +176,63 @@
 }
 .item-content-list li:last-of-type,
 .item-content-list li:first-of-type {
-  border: none#fafafa;
+  border: none;
+}
+
+.desktop-contents .item-content-list {
+  margin-bottom: 16px;
+}
+
+.desktop-contents .item-content-list li:first-of-type {
+  max-width: 100%;
+  text-align: center;
+}
+
+.desktop-contents .item-content-list li {
+  max-width: 230px;
+  margin: 0 auto;
+  overflow: hidden;
+  float: initial;
+  border: none;
+}
+
+.desktop-contents .item-content-list li > p {
+  padding: 5px 0;
+}
+
+.desktop-contents .item-content-list li.list-header > span {
+  background: #e7e5f4;
+  text-align: center;
+  font-size: 18px;
+  margin-bottom: 10px;
+  box-shadow: none;
+}
+
+.desktop-contents .item-content-title {
+  float: right;
+  border: none;
+  max-width: 230px;
+  position: relative;
+}
+
+.desktop-contents .item-content-title::after {
+  content: "";
+  width: 150px;
+  height: 1px;
+  background: #d1d1d1;
+  position: absolute;
+  bottom: 0px;
+  right: 0;
+}
+
+.desktop-contents li:last-of-type .item-content-title::after {
+  background: none;
+}
+
+.desktop-contents .item-content-amount {
+  float: right;
+  border: none;
+  max-width: 25px;
 }
 
 .item-content-list li.free-item {
@@ -388,6 +451,62 @@
   margin-top: 30px;
   overflow: hidden;
 }
+
+.pricing-wrapper {
+  margin-bottom: 130px;
+}
+
+.panel.panel-default {
+  border-radius: 8px;
+  background: #c5e1eb;
+  padding: 10px 15px;
+  border: 1px solid #f2f2f2;
+  box-shadow: 0px 4px 8px rgba(151, 151, 151, 0.2);
+  margin-bottom: 20px;
+}
+
+.panel.panel-default .panel-heading > a {
+  color: #000;
+  font-size: 16px;
+  font-weight: 300;
+  display: block;
+  direction: rtl;
+}
+
+.panel-collapse > p {
+  line-height: 20px;
+  font-size: 13px;
+  direction: rtl;
+  padding: 10px;
+  color: #2d3031;
+}
+
+.phones {
+  text-align: right;
+}
+
+.phones a {
+  color: #000;
+}
+
+.phones a:first-of-type {
+  margin-right: 30px;
+}
+
+.collapse-wrapper {
+  padding-bottom: 100px;
+}
+.panel-heading a:after {
+  content: "\f106";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  float: left;
+  color: #15313c;
+}
+.panel-heading a.collapsed:after {
+  content: "\f107";
+}
+
 @media screen and (max-width: 991px) {
   .package-wrapper > div {
     padding: 0;
@@ -491,7 +610,7 @@
           v-if="packagePage == 1 || !checkIsMobile()"
           key="1"
           :class="{ 'col-sm-offset-3': justPro == 'true' }"
-          class="pull-left mobile-padding-5 col-xs-12 col-sm-6 col-lg-6"
+          class="pull-left mobile-padding-5 col-xs-12 col-md-6 col-lg-6"
         >
           <div class="item-wrapper pro-version wrapper-background">
             <div class="item-header text-center">
@@ -593,7 +712,7 @@
               </button>
             </div>
 
-            <div class="item-content">
+            <div class="item-content hidden-md hidden-lg">
               <ul class="item-content-list">
                 <li class="list-header">
                   <span>ویژگی های بسته ویژه</span>
@@ -617,6 +736,33 @@
                     ></i>
                     <span v-else v-text="item.contentUnit"></span>
                   </p>
+                </li>
+              </ul>
+            </div>
+
+            <div class="item-content desktop-contents hidden-xs hidden-sm">
+              <ul class="item-content-list">
+                <li class="list-header">
+                  <span>ویژگی های بسته ویژه</span>
+                </li>
+                <li v-for="(item, index) in priceItemPro" :key="index">
+                  <p class="item-content-amount">
+                    <i
+                      v-if="!item.contentUnit"
+                      class="text-green fa fa-times"
+                      style="color: #e41c38"
+                    ></i>
+
+                    <i
+                      v-else-if="
+                        item.contentUnit == true && item.contentUnit != ''
+                      "
+                      class="text-green fa fa-check"
+                      style="color: #00c569"
+                    ></i>
+                    <span v-else v-text="item.contentUnit"></span>
+                  </p>
+                  <p class="item-content-title" v-html="item.title"></p>
                 </li>
               </ul>
             </div>
@@ -721,7 +867,7 @@
             (justPro == 'false' && !checkIsMobile())
           "
           key="2"
-          class="pull-right mobile-padding-5 col-xs-12 col-sm-6 col-lg-6"
+          class="pull-right mobile-padding-5 col-xs-12 col-md-6 col-lg-6"
         >
           <div class="item-wrapper wrapper-background">
             <div class="item-header text-center">
@@ -821,7 +967,7 @@
               </button>
             </div>
 
-            <div class="item-content">
+            <div class="item-content hidden-md hidden-lg">
               <ul class="item-content-list">
                 <li class="list-header">
                   <span>ویژگی های بسته پایه</span>
@@ -849,6 +995,36 @@
                     ></i>
                     <span v-else v-text="item.contentUnit"></span>
                   </p>
+                </li>
+              </ul>
+            </div>
+            <div class="item-content desktop-contents hidden-xs hidden-sm">
+              <ul class="item-content-list">
+                <li class="list-header">
+                  <span>ویژگی های بسته پایه</span>
+                </li>
+                <li v-for="(item, index) in priceItemBasic" :key="index">
+                  <p class="item-content-amount">
+                    <i
+                      v-if="!item.contentUnit"
+                      class="text-green fa fa-times"
+                      style="color: #e41c38"
+                    ></i>
+
+                    <i
+                      v-else-if="
+                        item.contentUnit == true && item.contentUnit != ''
+                      "
+                      class="text-green fa fa-check"
+                      style="color: #00c569"
+                    ></i>
+                    <span v-else v-text="item.contentUnit"></span>
+                  </p>
+                  <p
+                    class="item-content-title"
+                    :class="{ 'disable-text': !item.contentUnit }"
+                    v-html="item.title"
+                  ></p>
                 </li>
               </ul>
             </div>
@@ -932,6 +1108,138 @@
           </div>
         </div>
       </transition-group>
+      <div class="collapse-wrapper col-xs-12">
+        <div class="row">
+          <div
+            :id="isModal ? isModal + 'accordion' : 'accordion'"
+            role="tablist"
+            aria-multiselectable="true"
+            class="panel-group col-xs-12"
+          >
+            <div class="panel panel-default">
+              <div role="tab" id="headingFirst" class="panel-heading">
+                <a
+                  data-toggle="collapse"
+                  :data-parent="
+                    isModal ? '#' + isModal + 'accordion' : '#accordion'
+                  "
+                  :href="
+                    isModal ? '#' + isModal + 'collapse-body' : '#collapse-body'
+                  "
+                  aria-expanded="false"
+                  :aria-controls="
+                    isModal ? isModal + 'collapse-body' : 'collapse-body'
+                  "
+                  class="collapsed"
+                >
+                  بسته فروش ویژه چیست ؟
+                </a>
+              </div>
+              <div
+                :id="isModal ? isModal + 'collapse-body' : 'collapse-body'"
+                role="tabpanel"
+                aria-labelledby="headingFirst"
+                class="panel-collapse collapse"
+              >
+                <p>
+                  این بسته شامل مجموعه امکاناتی مانند اعمال نردبان رایگان ،
+                  مشاهده بدون تاخیر درخواست های خرید ، دریافت پیامک درخواست های
+                  خرید مرتبط و .. است که باعث فروش محصولات شما در رسیع ترین زمان
+                  ممکن می شود.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div
+            :id="isModal ? isModal + 'elevator' : 'elevator'"
+            role="tablist"
+            aria-multiselectable="true"
+            class="panel-group col-xs-12"
+          >
+            <div class="panel panel-default">
+              <div role="tab" id="headingFirst" class="panel-heading">
+                <a
+                  data-toggle="collapse"
+                  :data-parent="
+                    isModal ? '#' + isModal + 'elevator' : '#elevator'
+                  "
+                  :href="
+                    isModal ? '#' + isModal + 'elevator-body' : '#elevator-body'
+                  "
+                  aria-expanded="false"
+                  :aria-controls="
+                    isModal ? isModal + 'elevator-body' : 'elevator-body'
+                  "
+                  class="collapsed"
+                >
+                  نردبان در بسته فروش ویژه چیست؟
+                </a>
+              </div>
+              <div
+                :id="isModal ? isModal + 'elevator-body' : 'elevator-body'"
+                role="tabpanel"
+                aria-labelledby="headingFirst"
+                class="panel-collapse collapse"
+              >
+                <p>
+                  با اعمال هربار نردبان محصول شما در صدر لیست محصولات قرار
+                  میگیرد.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div
+            :id="isModal ? isModal + 'phones-wrapper' : 'phones-wrapper'"
+            role="tablist"
+            aria-multiselectable="true"
+            class="panel-group col-xs-12"
+          >
+            <div class="panel panel-default">
+              <div role="tab" id="headingFirst" class="panel-heading">
+                <a
+                  data-toggle="collapse"
+                  :data-parent="
+                    isModal
+                      ? '#' + isModal + 'phones-wrapper'
+                      : '#phones-wrapper'
+                  "
+                  :href="
+                    isModal ? '#' + isModal + 'phones-body' : '#phones-body'
+                  "
+                  aria-expanded="false"
+                  :aria-controls="
+                    isModal ? isModal + 'phones-body' : 'phones-body'
+                  "
+                  class="collapsed"
+                >
+                  رمز دوم برای خرید آنلاین ندارم!
+                </a>
+              </div>
+              <div
+                :id="isModal ? isModal + 'phones-body' : 'phones-body'"
+                role="tabpanel"
+                aria-labelledby="headingFirst"
+                class="panel-collapse collapse"
+              >
+                <p>
+                  درصورتی که قادر به خرید مستقیم نیستید ، برلی پرداخت ازطریق
+                  کارت به کارت با ما تماس بگیرید.
+                </p>
+                <div class="phones">
+                  <a href="tel:۰۹۱۱۸۴۱۳۰۵۴"
+                    ><i class="fa fa-phone"></i>
+                    ۰۹۱۱۸۴۱۳۰۵۴
+                  </a>
+                  <a href="tel:۰۹۱۷۸۹۲۸۲۶۶"
+                    ><i class="fa fa-phone"></i>
+                    ۰۹۱۷۸۹۲۸۲۶۶
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -940,7 +1248,7 @@
 <script>
 import { eventBus } from "../../../../../router/router";
 export default {
-  props: ["justPro", "offerTime"],
+  props: ["justPro", "offerTime", "isModal"],
   data: function () {
     return {
       packagePage: 1,

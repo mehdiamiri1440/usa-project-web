@@ -276,6 +276,7 @@
                 <pricing-contents
                   justPro="false"
                   :offer-time="this.offerTime"
+                  isModal="modal-"
                 />
               </div>
             </div>

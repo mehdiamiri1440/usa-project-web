@@ -249,7 +249,7 @@ input[type="number"] {
 }
 
 .pricing-wrapper {
-  max-width: 991px;
+  max-width: 760px;
   margin: 0 auto 130px;
   float: initial;
 }
@@ -480,12 +480,12 @@ input[type="number"] {
         </div>
       </div>
     </div>
-    <div class="fix-botton-wraper hidden-sm hidden-md hidden-lg">
+    <!-- <div class="fix-botton-wraper hidden-sm hidden-md hidden-lg">
       <button class="green-button" @click="openCreditCardGuide()">
         پرداخت از طریق کارت به کارت
         <i class="fa fa-credit-card"></i>
       </button>
-    </div>
+    </div> -->
   </div>
 </template>
 
