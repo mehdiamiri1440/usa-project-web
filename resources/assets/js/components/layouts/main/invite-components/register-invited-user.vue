@@ -6,6 +6,10 @@
   margin: 30px auto 70px;
   overflow: hidden;
   box-shadow: 0px 3px 9px rgba(0, 0, 0, 0.05);
+  display: flex;
+  direction: rtl;
+  min-height: 350px;
+  align-items: center;
 }
 
 /*progressbar styles*/
@@ -112,153 +116,243 @@
 
 <template>
   <div class="register-content-wrapper">
-    <div class="wrapper-progressbar" v-if="currentStep != 6">
-      <div class="custom-progressbar">
-        <div
-          class="progress-bar"
-          role="progressbar"
-          aria-valuenow="21"
-          aria-valuemin="0"
-          aria-valuemax="100"
-        ></div>
-      </div>
-      <div class="custom-progressbar active">
-        <div
-          class="progress-bar"
-          role="progressbar"
-          aria-valuenow="21"
-          aria-valuemin="0"
-          aria-valuemax="100"
-        ></div>
-      </div>
-
-      <div class="progressbar-items">
-        <a class="progrees-item active">
-          <span>1</span>
-          <p>ثبت موبایل</p>
-        </a>
-
-        <a class="progrees-item" :class="{ active: currentStep >= 2 }">
-          <span>2</span>
-          <p>تایید شماره</p>
-        </a>
-
-        <a class="progrees-item" :class="{ active: currentStep >= 3 }">
-          <span>3</span>
-          <p>مشخصات فردی</p>
-        </a>
-
-        <a class="progrees-item" :class="{ active: currentStep >= 4 }">
-          <span>4</span>
-          <p>انتخاب آدرس</p>
-        </a>
-
-        <a class="progrees-item" :class="{ active: currentStep >= 5 }">
-          <span>5</span>
-          <p>حوزه فعالیت</p>
-        </a>
-      </div>
-    </div>
-
     <RegisterNumber v-show="currentStep == 1" />
     <VerifiedCode v-show="currentStep == 2" />
-    <PersonalInformation v-show="currentStep == 3" />
-    <Location v-show="currentStep == 4" />
-    <ActivityType v-show="currentStep == 5" />
-    <RegisterLoader v-show="currentStep == 6" />
+    <ComplementaryInfo v-show="currentStep == 3" />
   </div>
 </template>
 
 <script>
 import RegisterNumber from "./register-invited-user-steps/register-number";
-import VerifiedCode from "./register-invited-user-steps/verified-code";
-import PersonalInformation from "./register-invited-user-steps/personal-information";
-import Location from "./register-invited-user-steps/location";
-import ActivityType from "./register-invited-user-steps/activity-type";
-import RegisterLoader from "./register-invited-user-steps/register-loader";
+import VerifiedCode from "./register-invited-user-steps/verify-code";
+import ComplementaryInfo from "./register-invited-user-steps/complementary-info.vue";
+
 import device from "device-uuid/lib/device-uuid";
 import pricingTableSellerContentVue from "../../../dashboard/seller/pricing-seller-page/pricing-table-seller-content.vue";
+
+import { eventBus } from "../../../../router/router";
+import swal from "../../../../sweetalert.min.js";
 
 export default {
   props: ["categoryList", "referredUserName"],
   components: {
     RegisterNumber,
     VerifiedCode,
-    PersonalInformation,
-    Location,
-    ActivityType,
-    RegisterLoader,
+    ComplementaryInfo,
   },
   data: function () {
     return {
+      isImageLoad: false,
+      loginCheckerLoading: true,
       currentStep: 1,
-      currentUser: {
-        profile: "",
-        user_info: "",
-      },
-      errors: {
-        phone: "",
-        verification_code: "",
-        name: "",
-        family: "",
-        activityType: "",
-        categoryId: "",
-      },
       step1: {
         phone: "",
-        sendCode: false,
+        sendCode: true,
       },
       step2: {
         verification_code: "",
         reSendCode: false,
-        timeCounterDown: 119,
+        timeCounterDown: 120,
         showTimer: false,
         now: null,
       },
       step3: {
-        verifyCodeLoader: false,
-        provinceList: "",
-      },
-      step4: {
         name: "",
         family: "",
         password: "",
+        re_password: "",
+        user_name: "",
+        sex: "آقا",
+        province: "",
+        city: "",
+        national_code: "",
+        provinceList: "",
+        cityList: "",
       },
-      step5: {
-        provinceName: "",
-        cityName: "",
+      step4: {
+        activity_type: "",
+        rules: 0,
+        categoryList: "",
+        category_id: "",
       },
-      step6: {
-        activityType: "",
-        categoryId: "",
+      errors: {
+        name: "",
+        family: "",
+        province: "",
+        city: "",
+        verification_code: "",
+        phone: "",
+        category_id: "",
+        activity_type: "",
       },
+      errorFlag: false,
+      userNameUnique: true,
+      nationalCodeUnique: true,
+      popUpMsg: "",
+      verifyCodeBtnLoading: false,
+      formSubmitActive: false,
     };
   },
   methods: {
-    registerUser() {
-      if (!this.currentUser.user_info) {
-        this.step4.password = this.makeRandomString(8);
+    setLocation() {
+      this.getCategory();
+    },
+    makeRandomString(length) {
+      var result = "";
+      var characters =
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+      var charactersLength = characters.length;
+      for (var i = 0; i < length; i++) {
+        result += characters.charAt(
+          Math.floor(Math.random() * charactersLength)
+        );
+      }
+      return result;
+    },
+    stopLoader: function () {
+      eventBus.$emit("isLoading", false);
+    },
+    goToStep: function (step) {
+      if (step < 1) {
+        step = 1;
+      } else if (step > 6) {
+        step = 6;
+      }
 
-        var object = {
-          phone: this.step1.phone,
-          first_name: this.step4.name,
-          last_name: this.step4.family,
-          verification_code: this.step2.verification_code,
-          password: this.step4.password,
-          user_name: "",
-          sex: "آقا",
-          province: this.step5.provinceName,
-          city: this.step5.cityName,
-          activity_type: this.step6.activityType,
-          national_code: "",
-          category_id: this.step6.categoryId,
-          referred_user_name: this.referredUserName,
-        };
+      this.currentStep = step;
+    },
+    sendVerificationCode: function () {
+      this.verifyCodeBtnLoading = true;
+      this.step2.reSendCode = false;
+      this.step1.sendCode = false;
+      var self = this;
+
+      this.step2.now = new Date().getTime();
+      this.step2.showTimer = true;
+      this.step2.timeCounterDown = 119;
+
+      axios
+        .post("/send_verification_code", {
+          phone: this.toLatinNumbers(this.step1.phone),
+        })
+        .then(function (response) {
+          self.verifyCodeBtnLoading = false;
+
+          self.goToStep(2);
+          self.step1.sendCode = true;
+
+          self.step2.verification_code = "";
+          self.errors.verification_code = "";
+
+          setTimeout(function () {
+            self.step2.reSendCode = true;
+          }, 120000);
+
+          self.registerComponentStatistics(
+            "invite-page",
+            "send-verification-code",
+            "verification-code-sent-to-user"
+          );
+        })
+        .catch(function (err) {
+          self.verifyCodeBtnLoading = false;
+
+          self.errors.phone = err.response.data.errors.phone;
+
+          self.step1.sendCode = true;
+
+          self.registerComponentStatistics(
+            "Invite-Register-Error",
+            "phone-number-verification",
+            "error:" + self.errors.phone
+          );
+        });
+    },
+    verifyCode: function () {
+      var self = this;
+
+      self.verifyCodeBtnLoading = true;
+
+      let deviceInfo = new device.DeviceUUID();
+      let deviceId = null;
+      if (deviceInfo.get()) {
+        deviceId = deviceInfo.get();
+      }
+
+      axios
+        .post("/verify_code", {
+          verification_code: this.toLatinNumbers(this.step2.verification_code),
+          phone: this.toLatinNumbers(this.step1.phone),
+          device_id: deviceId,
+        })
+        .then(function (response) {
+          self.verifyCodeBtnLoading = false;
+
+          if (response.data.status === true) {
+            if (response.data.redirected) {
+              // it's very tricky condition, be careful
+              window.location.href = "/login";
+            } else {
+              self.goToStep(3);
+              self.getProvinceList();
+            }
+          } else {
+            self.goToStep(2);
+            self.errors.verification_code = response.data.msg;
+            self.registerComponentStatistics(
+              "Invite-Register-Error",
+              "verification-code-wrong",
+              "error:" + self.errors.verification_code
+            );
+          }
+        })
+        .catch(function (error) {
+          self.verifyCodeBtnLoading = false;
+
+          self.goToStep(2);
+          self.errors.verification_code = "";
+          self.errors.verification_code = "وارد کردن کد الزامی است.";
+          self.registerComponentStatistics(
+            "Invite-Register-Error",
+            "verification-code-empty",
+            "error:" + self.errors.verification_code
+          );
+        });
+    },
+    submitForm: function () {
+      var self = this;
+
+      this.stepsValidator();
+
+      var object = {
+        phone: this.toLatinNumbers(this.step1.phone),
+        first_name: this.step3.name,
+        last_name: this.step3.family,
+        verification_code: this.toLatinNumbers(this.step2.verification_code),
+        password: this.makeRandomString(8),
+        user_name: this.step3.user_name,
+        sex: this.step3.sex,
+        province: this.step3.province,
+        city: this.step3.city,
+        activity_type: this.step4.activity_type,
+        national_code: this.toLatinNumbers(this.step3.national_code),
+        category_id: this.step4.category_id,
+        referred_user_name: this.referredUserName,
+      };
+
+      if (
+        this.errorFlag === false &&
+        !this.errors.name &&
+        !this.errors.family
+      ) {
+        this.formSubmitActive = true;
         axios
           .post("/api/v1/users", object)
-          .then((response) => {
+          .then(function (response) {
             if (response.status === 201) {
-              this.createCookie("registerNewUser", true, 60);
+              eventBus.$emit("modal", "userRegisterSuccess");
+              self.createCookie("registerNewUser", true, 60);
+              self.createCookie("firstLogin", true, 1);
 
               let deviceInfo = new device.DeviceUUID();
               let deviceId = null;
@@ -274,131 +368,58 @@ export default {
                 })
                 .then((response) => {
                   if (response.data.status) {
-                    window.location.href = "/login";
+                    if (self.isUserComeFromChatBoxOpen()) {
+                      swal.close(); //close modal
+
+                      self.returnUserToPreviousPageAndChatBox(response.data);
+                    } else {
+                      self.redirectUserToPanel(response.data);
+                    }
                   }
                 })
                 .catch((err) => {
                   console.log("err");
                 });
-              this.registerComponentStatistics(
+              self.registerComponentStatistics(
                 "invite-page",
                 "successful-register",
                 "user-registered-successfully"
               );
             }
           })
-          .catch((err) => {
-            console.log("User register API failed");
-            this.registerComponentExceptions("User register API failed", true);
+          .catch(function (err) {
+            self.formSubmitActive = false;
+            self.registerComponentExceptions("User register API failed", true);
           });
       }
     },
-    sendVerificationCode() {
-      this.step2.reSendCode = false;
-      this.step1.sendCode = true;
+    setCategoryId: function (e) {
+      e.preventDefault();
 
-      this.step2.now = new Date().getTime();
-      this.step2.showTimer = true;
-      this.step2.timeCounterDown = 120;
-
-      axios
-        .post("/send_verification_code", {
-          phone: this.step1.phone,
-        })
-        .then((response) => {
-          this.step1.sendCode = false;
-          this.goToStep(2);
-
-          this.step2.verification_code = "";
-          this.errors.verification_code = "";
-
-          setTimeout(() => {
-            this.step2.reSendCode = true;
-          }, 120000);
-
-          this.registerComponentStatistics(
-            "invite-page",
-            "send-verification-code",
-            "verification-code-sent-to-user"
-          );
-        })
-        .catch((err) => {
-          this.step1.sendCode = false;
-
-          this.errors.phone = err.response.data.errors.phone;
-
-          this.step1.sendCode = false;
-
-          this.registerComponentStatistics(
-            "Invite-Register-Error",
-            "phone-number-verification",
-            "error:" + this.errors.phone
-          );
-        });
+      this.step4.category_id = $(e.target).val();
     },
-    verifyCode() {
-      this.step3.verifyCodeLoader = true;
-
-      axios
-        .post("/verify_code", {
-          verification_code: this.step2.verification_code,
-          phone: this.step1.phone,
-        })
-        .then((response) => {
-          this.step3.verifyCodeLoader = false;
-
-          if (response.data.status === true) {
-            if (response.data.redirected) {
-              window.location.href = "/login";
-            } else {
-              this.getProvinceList();
-              this.goToStep(3);
-            }
-          } else {
-            this.errors.verification_code = response.data.msg;
-
-            this.registerComponentStatistics(
-              "Invite-Register-Error",
-              "verification-code-wrong",
-              "error:" + this.errors.verification_code
-            );
-          }
-        })
-        .catch((error) => {
-          this.step3.verifyCodeLoader = false;
-
-          this.goToStep(2);
-          this.errors.verification_code = "وارد کردن کد الزامی است.";
-
-          this.registerComponentStatistics(
-            "Invite-Register-Error",
-            "verification-code-empty",
-            "error:" + this.errors.verification_code
-          );
-        });
-    },
-    createCookie(name, value, minutes) {
-      if (minutes) {
-        var date = new Date();
-        date.setTime(date.getTime() + minutes * 60 * 1000);
-        var expires = "; expires=" + date.toGMTString();
-      } else {
-        var expires = "";
+    validateErrors() {
+      if (
+        this.step3.name.length &&
+        this.step3.family.length &&
+        this.step3.province &&
+        this.step3.city &&
+        this.step4.activity_type !== "" &&
+        this.step4.category_id !== ""
+      ) {
+        this.errorFlag = false;
       }
-      document.cookie = name + "=" + value + expires + "; path=/";
     },
-    getProvinceList() {
-      axios
-        .post("/location/get_location_info", { cascade_list: true })
-        .then(
-          (response) => (this.step3.provinceList = response.data.provinces)
-        );
-    },
-    registerComponentStatistics(categoryName, actionName, labelName) {
-      gtag("event", actionName, {
-        event_category: categoryName,
-        event_label: labelName,
-      });
+    stepsValidator() {
+      this.errorFlag = false;
+      if (this.errors.name == "" && this.errors.family == "") {
+        this.firstNameValidator(this.step3.name);
+        this.lastNameValidator(this.step3.family);
+      }
+      this.provinceValidator(this.step3.province);
+      this.cityValidator(this.step3.city);
+      this.categoryIdValidator(this.step4.category_id);
+      this.activityTypeValidator(this.step4.activity_type);
     },
     textValidator(text, name) {
       if (text != "") {
@@ -409,24 +430,175 @@ export default {
         }
       }
     },
-    updateCounterDownTimer(seconds) {
-      if (seconds !== 1) {
-        this.step2.timeCounterDown = seconds;
-      } else this.step2.showTimer = false;
-    },
-    goToStep(step) {
-      if (step < 1) {
-        step = 1;
-      } else if (step > 6) {
-        step = 6;
+    firstNameValidator: function (name) {
+      this.errors.name = "";
+
+      if (name === "") {
+        this.errors.name = "نام الزامی است.";
+        this.errorFlag = true;
       }
-      this.currentStep = step;
-      this.checkLevel();
+
+      if (this.errors.name) {
+        // update for analytics
+        // this.registerComponentStatistics(
+        //   "Invite-Register-Error",
+        //   "first-name",
+        //   "input:" + name + " Error:" + this.errors.name
+        // );
+      }
     },
-    toLatinNumbers(num) {
+    lastNameValidator: function (family) {
+      this.errors.family = "";
+
+      if (family === "") {
+        this.errors.family = "نام خانوادگی الزامی است.";
+        this.errorFlag = true;
+      }
+
+      if (this.errors.family) {
+        // update for analytics
+        // this.registerComponentStatistics(
+        //   "Invite-Register-Error",
+        //   "last-name",
+        //   "input:" + family + " Error:" + this.errors.family
+        // );
+      }
+    },
+
+    provinceValidator: function (province) {
+      this.errors.province = "";
+
+      if (province == "") {
+        this.errors.province = "استان الزامی است";
+        this.errorFlag = true;
+      }
+
+      if (this.errors.province) {
+        // update for analytics
+        // this.registerComponentStatistics(
+        //   "Invite-Register-Error",
+        //   "province",
+        //   "input:" + province + " Error:" + this.errors.province
+        // );
+      }
+    },
+    cityValidator: function (city) {
+      this.errors.city = "";
+
+      if (city === "") {
+        this.errors.city = "شهر الزامی است";
+        this.errorFlag = true;
+      }
+      if (this.errors.city) {
+        // update for analytics
+        // this.registerComponentStatistics(
+        //   "Invite-Register-Error",
+        //   "city",
+        //   "input:" + city + " Error:" + this.errors.city
+        // );
+      }
+    },
+    isIrNationalCode: function (input) {
+      if (!/^\d{10}$/.test(input)) {
+        return false;
+      }
+
+      var check = parseInt(input[9]);
+      var sum =
+        [0, 1, 2, 3, 4, 5, 6, 7, 8]
+          .map(function (x) {
+            return parseInt(input[x]) * (10 - x);
+          })
+          .reduce(function (x, y) {
+            return x + y;
+          }) % 11;
+
+      return (sum < 2 && check == sum) || (sum >= 2 && check + sum == 11);
+    },
+    categoryIdValidator: function (categoryId) {
+      this.errors.category_id = "";
+      if (categoryId === "") {
+        this.errors.category_id = "انتخاب حوزه ی فعالیت الزامی است.";
+        this.errorFlag = true;
+      }
+
+      if (this.errors.category_id) {
+        // update for analytics
+        // this.registerComponentStatistics(
+        //   "Invite-Register-Error",
+        //   "category-selection",
+        //   "input:" + categoryId + " Error:" + this.errors.category_id
+        // );
+      }
+    },
+    activityTypeValidator: function (activityType) {
+      this.errors.activity_type = "";
+      if (activityType === "") {
+        this.errors.activity_type = "انتخاب نوع کاربری الزامی است.";
+        this.errorFlag = true;
+      }
+      if (this.errors.activity_type) {
+        // update for analytics
+        // this.registerComponentStatistics(
+        //   "Invite-Register-Error",
+        //   "activity-type",
+        //   "input:" + activityType + " Error:" + this.errors.activity_type
+        // );
+      }
+    },
+    validateRegx: function (input, regx) {
+      return regx.test(input);
+    },
+    getCategory: function () {
+      axios
+        .post("/get_category_list")
+        .then(
+          (response) => (this.step4.categoryList = response.data.categories)
+        );
+    },
+    getCategoryId: function (categoryId) {
+      this.step4.category_id = categoryId;
+    },
+    getProvinceList: function () {
+      axios
+        .post("/location/get_location_info")
+        .then(
+          (response) => (this.step3.provinceList = response.data.provinces)
+        );
+    },
+    getCityList: function (provinceId) {
+      axios
+        .post("/location/get_location_info", {
+          province_id: provinceId,
+        })
+        .then((response) => (this.step3.cityList = response.data.cities));
+    },
+    setProvinceName: function (e) {
+      e.preventDefault();
+
+      this.step3.province = $(e.target).val();
+
+      var provinceId = "";
+
+      for (var i = 0; i < this.step3.provinceList.length; i++) {
+        if (this.step3.province === this.step3.provinceList[i].province_name) {
+          provinceId = this.step3.provinceList[i].id;
+          break;
+        }
+      }
+
+      this.getCityList(provinceId);
+    },
+    setCityName: function (e) {
+      e.preventDefault();
+
+      this.step3.city = $(e.target).val();
+    },
+    toLatinNumbers: function (num) {
       if (num == null) {
         return null;
       }
+
       return num
         .toString()
         .replace(/[\u0660-\u0669]/g, function (c) {
@@ -436,70 +608,131 @@ export default {
           return c.charCodeAt(0) - 0x06f0;
         });
     },
-    validateRegx(input, regx) {
-      return regx.test(input);
+    updateCounterDownTimer: function (seconds) {
+      if (seconds !== 1) {
+        this.step2.timeCounterDown = seconds;
+      } else this.step2.showTimer = false;
     },
-    isOsIOS() {
+    registerComponentStatistics: function (
+      categoryName,
+      actionName,
+      labelName
+    ) {
+      gtag("event", actionName, {
+        event_category: categoryName,
+        event_label: labelName,
+      });
+    },
+    registerComponentExceptions: function (description, fatal = false) {
+      gtag("event", "exception", {
+        description: description,
+        fatal: fatal,
+      });
+    },
+    isOsIOS: function () {
       var userAgent = window.navigator.userAgent.toLowerCase(),
         safari = /safari/.test(userAgent),
         ios = /iphone|ipod|ipad/.test(userAgent);
 
       return ios;
     },
-    makeRandomString(length) {
-      var result = "";
-      var characters =
-        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-      var charactersLength = characters.length;
-      for (var i = 0; i < length; i++) {
-        result += characters.charAt(
-          Math.floor(Math.random() * charactersLength)
-        );
+    isUserComeFromChatBoxOpen: function () {
+      if (
+        window.localStorage.getItem("contact") &&
+        window.localStorage.getItem("pathname")
+      ) {
+        return true;
       }
-      return result;
+
+      return false;
     },
-    registerComponentExceptions(description, fatal = false) {
-      gtag("event", "exception", {
-        description: description,
-        fatal: fatal,
-      });
-    },
-    checkLevel() {
-      var progressElement = $(".custom-progressbar.active");
-      switch (this.currentStep) {
-        case 1:
-          progressElement.css("width", "0");
-          break;
-        case 2:
-          progressElement.css("width", "21%");
-          break;
-        case 3:
-          progressElement.css("width", "43%");
-          break;
-        case 4:
-          progressElement.css("width", "66%");
-          break;
-        case 5:
-          progressElement.css("width", "89%");
-          break;
+    returnUserToPreviousPageAndChatBox: function (userInfo) {
+      if (this.isUserInInquirySubmissionProcess()) {
+        let contact = JSON.parse(window.localStorage.getItem("contact"));
+        let pathname = window.localStorage.getItem("msgToSend");
+
+        if (userInfo.is_buyer) {
+          window.location.href = "/buyer/register-request";
+        } else if (userInfo.is_seller) {
+          window.location.href = "/switch-role";
+        } else {
+          window.localStorage.removeItem("contact");
+          window.localStorage.removeItem("msgToSend");
+
+          this.redirectUserToPanel(userInfo);
+        }
+      } else if (this.isUserComeFromChatBoxOpen()) {
+        let contact = JSON.parse(window.localStorage.getItem("contact"));
+        let pathname = window.localStorage.getItem("pathname");
+
+        window.localStorage.removeItem("contact");
+        window.localStorage.removeItem("pathname");
+
+        if (userInfo.id != contact.contact_id) {
+          window.localStorage.setItem("comeFromAuthentication", true);
+
+          this.$router.push({ path: pathname });
+
+          eventBus.$emit("ChatInfo", contact);
+        } else {
+          this.redirectUserToPanel(userInfo);
+        }
+      } else {
+        this.redirectUserToPanel(userInfo);
       }
     },
-  },
-  mounted() {
-    this.checkLevel();
+    redirectUserToPanel: function (userInfo) {
+      if (userInfo.is_seller == true) {
+        localStorage.setItem("showSnapShot", true);
+        window.location.href = "/seller/register-product";
+      } else if (userInfo.is_buyer == true) {
+        localStorage.setItem("showSnapShot", true);
+        window.location.href = "/buyer/register-request";
+      }
+    },
+    isUserInInquirySubmissionProcess: function () {
+      if (
+        window.localStorage.getItem("contact") &&
+        window.localStorage.getItem("msgToSend")
+      ) {
+        return true;
+      }
+      return false;
+    },
+    createCookie: function (name, value, minutes) {
+      if (minutes) {
+        var date = new Date();
+        date.setTime(date.getTime() + minutes * 60 * 1000);
+        var expires = "; expires=" + date.toGMTString();
+      } else {
+        var expires = "";
+      }
+      document.cookie = name + "=" + value + expires + "; path=/";
+    },
   },
   watch: {
-    "step2.timeCounterDown"() {
+    "step2.timeCounterDown": function () {
       var self = this;
       var now = new Date().getTime();
 
       var distance = now - this.step2.now;
 
-      var seconds = 119 - Math.floor((distance % (1000 * 120)) / 1000);
+      var seconds = 119 - Math.floor((distance % (1000 * 120)) / 1000) + 1;
 
       setTimeout(function () {
-        seconds - 1;
+        self.updateCounterDownTimer(seconds);
       }, 1000);
+    },
+  },
+  watch: {
+    "step2.timeCounterDown": function () {
+      var self = this;
+      var now = new Date().getTime();
+
+      var distance = now - this.step2.now;
+
+      var seconds = 119 - Math.floor((distance % (1000 * 120)) / 1000) + 1;
+
       setTimeout(function () {
         self.updateCounterDownTimer(seconds);
       }, 1000);

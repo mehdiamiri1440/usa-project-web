@@ -4,54 +4,82 @@ span {
   line-height: 1.5;
 }
 
-.from-wrapper {
-  max-width: 400px;
-  margin: 49px auto 70px;
-  overflow: hidden;
+label.input-title {
+  text-align: center;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  margin-bottom: 26px;
+}
+
+.submit-button {
+  background: #c2c9d1;
+  color: #9e9e9e;
+  border: none;
+  border-radius: 8px;
+  width: 100%;
+  font-size: 16px;
+  padding: 10px 0 9px;
+  transition: 300ms;
+  cursor: default;
+  margin: 5px auto 0;
+  display: block;
+}
+
+.submit-button.active {
+  background: #00c569;
+  cursor: pointer;
+  color: #fff;
 }
 
 .title-contents {
-  font-weight: 500;
-  font-size: 18px;
-  color: #555;
-  margin-bottom: 16px;
+  font-weight: bold;
+  font-size: 19px;
 }
 
 .form-contents {
-  line-height: 1.618;
+  margin: 0 auto;
+  max-width: 400px;
 }
 
-.form-contents label {
-  font-weight: 500;
-  color: #777;
-  margin: 0 auto 7px;
+.form-contents lable {
+  font-size: 12px;
 }
 
 .input-wrapper {
-  margin: 0 auto;
+  margin: 6px auto 4px;
   position: relative;
 }
 
 input {
   width: 100%;
-  border-radius: 8px;
-  border: 1px solid;
-  color: #bdc4cc;
-  padding: 8px 15px 8px 45px;
-  direction: ltr;
-  transition: 150ms;
-  text-align: right;
-  background: #fbfbfb;
-}
 
+  border-radius: 8px;
+
+  border: 1px solid;
+
+  padding: 8px 15px 9px 45px;
+
+  color: #bebebe;
+
+  direction: ltr;
+
+  transition: 300ms;
+}
 .input-wrapper i {
   display: inline-block;
+
   position: absolute;
+
   left: 15px;
-  font-size: 21px;
+
+  font-size: 20px;
+
   color: #bebebe;
-  top: 11px;
-  transition: 150ms;
+
+  top: 9px;
+
+  transition: 300ms;
 }
 
 input:focus,
@@ -60,18 +88,18 @@ input:focus + i {
 }
 
 input.active {
-  border-color: #4dc0bb;
+  border-color: #00c569;
   color: #333;
 }
 
 input.active + i {
-  color: #4dc0bb;
+  color: #00c569;
 }
 
 input.active:focus,
 input.active:focus + i,
 input.active + i {
-  border-color: #4dc0bb;
+  border-color: #00c569;
 }
 
 input.error {
@@ -89,109 +117,58 @@ input.error:focus + i {
 }
 
 .error-message {
+  text-align: right;
   color: #e41c38;
-  height: 22px;
+  height: 25px;
+  margin-bottom: 5px;
   direction: rtl;
-  font-size: 13px;
-  padding-top: 2px;
-}
-
-.step-action {
-  margin-top: 18px;
-}
-
-.submit-button {
-  background: #e0e0e0;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  width: 100%;
-  font-size: 18px;
-  padding: 8px;
-  transition: 150ms;
-  cursor: default;
-  max-width: 147px;
-  display: inline-block;
-}
-.submit-button.active {
-  background: #00c569;
-  cursor: pointer;
-}
-.submit-button.active:hover i {
-  right: 3px;
-  transition: 150ms;
-}
-
-.submit-button i {
-  position: relative;
-  top: 1px;
-  font-size: 14px;
-  right: 0;
-  transition: 150ms;
+  font-size: 12px;
 }
 </style>
 
 <template>
-  <div class="text-rtl from-wrapper">
-    <h2 class="title-contents">
-      شماره موبایل
-      <span class="red-text">*</span>
-    </h2>
+  <div class="form-contents col-xs-12">
+    <div class="row">
+      <label class="input-title" for="phone-number">
+        برای ورود یا ثبت نام، شماره همراه خود را وارد کنید.
+      </label>
 
-    <form v-on:submit.prevent="submitPhone()" class="form-contents col-xs-12">
-      <div class="row">
-        <label for="phone-number"> لطفا شماره موبایل خود را وارد کنید</label>
+      <form  v-on:submit.prevent="submitPhone()" class="input-wrapper user-phone-number-wrapper">
+        <input
+          v-model="phoneNumber"
+          :class="{
+            error: $parent.errors.phone,
+            active: this.phoneNumber.length >= 11,
+          }"
+          id="phone-number"
+          type="tel"
+          class="dire"
+          placeholder="شماره موبایل"
+          pattern="[0-9]*"
+        />
 
-        <div class="input-wrapper user-phone-number-wrapper">
-          <input
-            v-model="phoneNumber"
-            :class="{
-              error: $parent.errors.phone,
-              active: this.phoneNumber.length >= 11,
-            }"
-            id="phone-number"
-            type="tel"
-            placeholder="09123456789"
-            pattern="[0-9]*"
-          />
+        <i class="fa fa-phone-square-alt"></i>
+      </form>
 
-          <i
-            class="fa fa-check-circle"
-            v-if="this.phoneNumber.length >= 11 && !$parent.errors.phone"
-          ></i>
-          <i class="fa fa-times-circle" v-else-if="$parent.errors.phone"></i>
-          <i class="fa fa-phone-square-alt" v-else></i>
-        </div>
-
-        <p class="error-message">
-          <span
-            v-if="$parent.errors.phone"
-            v-text="$parent.errors.phone"
-          ></span>
-        </p>
-        <div class="step-action text-left">
-          <button
-            class="submit-button disabled"
-            :class="{
-              active:
-                this.phoneNumber.length >= 11 &&
-                !$parent.step1.sendCode &&
-                !$parent.errors.phone,
-            }"
-            @click.prevent="submitPhone()"
-            :disabled="$parent.step1.sendCode"
-          >
-            ثبت شماره
-
-            <i
-              class="fas fa-circle-notch fa-spin"
-              v-if="$parent.step1.sendCode"
-            ></i>
-            <i class="fa fa-arrow-left" v-else></i>
-          </button>
-        </div>
-      </div>
-    </form>
+      <p class="error-message">
+        <i class="fa fa-exclamation" v-if="$parent.errors.phone"></i>
+        <span v-if="$parent.errors.phone" v-text="$parent.errors.phone"></span>
+      </p>
+      <button
+        class="submit-button disabled"
+        :class="{
+          active: this.phoneNumber.length >= 11 && $parent.step1.sendCode,
+        }"
+        @click.prevent="submitPhone()"
+        :disabled="!$parent.step1.sendCode"
+      >
+        ورود
+        <i
+          v-if="$parent.verifyCodeBtnLoading"
+          class="fas fa-circle-notch fa-spin"
+        ></i>
+      </button>
+    </div>
   </div>
 </template>
 
@@ -222,7 +199,6 @@ export default {
         if (this.phoneNumber.length >= 11) {
           this.phoneNumber = this.phoneNumber.substring(0, 11);
         }
-
         let number = this.$parent.toLatinNumbers(value);
         if (!this.$parent.validateRegx(number, /^\d*$/)) {
           this.$parent.errors.phone =
