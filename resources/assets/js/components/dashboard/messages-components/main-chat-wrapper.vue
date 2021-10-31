@@ -1259,6 +1259,27 @@
                   <span v-else>{{
                     Date() | moment("jYYYY/jMM/jDD, HH:mm")
                   }}</span>
+                  <span
+                    class="check-items"
+                    v-if="
+                      msg.sender_id === $parent.currentUserId && !msg.created_at
+                    "
+                  >
+                    <i class="far fa-clock"></i>
+                  </span>
+                  <span
+                    class="check-items dual"
+                    v-else-if="
+                      msg.sender_id === $parent.currentUserId && msg.created_at
+                    "
+                  >
+                    <i
+                      class="fa fa-check"
+                      v-if="msg.is_read"
+                      :class="{ 'text-blue': msg.is_read }"
+                    ></i>
+                    <i class="fa fa-check text-blue"></i>
+                  </span>
                   <div class="message-button-wrapper link-button">
                     <!-- v-if="
                         $parent.currentUser.user_info.active_pakage_type > 0
