@@ -247,17 +247,13 @@ input.error:focus + i {
           ></span>
         </p>
         <div class="count-down-timer">
-          <p class="gray-text text-center" v-if="$parent.step2.showTimer">
-            ارسال مجدد کد تا
-            <span
-              class="blue-text"
-              v-text="$parent.step2.timeCounterDown"
-            ></span>
-            ثانیه دیگر
-          </p>
+          <div class="text-center" v-if="$parent.step2.showTimer">
+            <p class="margin-bottom-10">مدت اعتبار کد</p>
+            <p class="green-text" v-text="$parent.step2.timeCounterDown"></p>
+          </div>
           <button
             v-else
-            class="resend-code-button blue-text"
+            class="resend-code-button green-text"
             type="button"
             @click="reSendCode()"
             :disabled="$parent.step2.reSendCode === false"
@@ -327,7 +323,7 @@ export default {
         if (!this.$parent.errors.verification_code) {
           this.$parent.verifyCode();
         }
-      } else if (!this.$parent.step3.verifyCodeLoader) {
+      } else {
         this.$parent.errors.verification_code = "لطفا کد تایید را وارد کنید.";
       }
     },
