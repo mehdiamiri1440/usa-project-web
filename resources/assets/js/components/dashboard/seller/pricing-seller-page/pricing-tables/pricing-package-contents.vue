@@ -760,9 +760,17 @@
                       class="text-green fa fa-check"
                       style="color: #00c569"
                     ></i>
-                    <span v-else v-text="item.contentUnit"></span>
+                    <span
+                      v-else-if="!item.desktopTitle"
+                      v-text="item.contentUnit"
+                    ></span>
                   </p>
-                  <p class="item-content-title" v-html="item.title"></p>
+                  <p
+                    class="item-content-title"
+                    v-if="item.desktopTitle"
+                    v-html="item.desktopTitle"
+                  ></p>
+                  <p class="item-content-title" v-else v-html="item.title"></p>
                 </li>
               </ul>
             </div>
@@ -1018,9 +1026,19 @@
                       class="text-green fa fa-check"
                       style="color: #00c569"
                     ></i>
-                    <span v-else v-text="item.contentUnit"></span>
+                    <span
+                      v-else-if="!item.desktopTitle"
+                      v-text="item.contentUnit"
+                    ></span>
                   </p>
                   <p
+                    class="item-content-title"
+                    v-if="item.desktopTitle"
+                    :class="{ 'disable-text': !item.contentUnit }"
+                    v-html="item.desktopTitle"
+                  ></p>
+                  <p
+                    v-else
                     class="item-content-title"
                     :class="{ 'disable-text': !item.contentUnit }"
                     v-html="item.title"
@@ -1260,12 +1278,14 @@ export default {
           contentUnit: "3",
           helpDescription:
             " تعداد آگهی های همزمان شما که در لیست محصولات نمایش داده می شود. ",
+          desktopTitle: "<strong>۳</strong> محصول قابل تبلیغ",
         },
         {
           title: "تعداد روزانه خریداران در دسترس",
           contentUnit: "10",
           helpDescription:
             "بر روی اولین محصول ثبت شده ویژگی نردبان به صورت خودکار اعمال خواهد شد",
+          desktopTitle: "روزانه <strong>۱۰</strong> خریدار در دسترس",
         },
         {
           title: "امکان ارتباط با خریداران طلایی",
@@ -1311,12 +1331,14 @@ export default {
           contentUnit: "7",
           helpDescription:
             " تعداد آگهی های همزمان شما که در لیست محصولات نمایش داده می شود. ",
+          desktopTitle: "<strong>۷</strong> محصول قابل تبلیغ",
         },
         {
           title: "تعداد روزانه خریداران در دسترس",
           contentUnit: "30",
           helpDescription:
             "بر روی اولین محصول ثبت شده ویژگی نردبان به صورت خودکار اعمال خواهد شد",
+          desktopTitle: "روزانه <strong>۳۰</strong> خریدار در دسترس",
         },
         {
           title: "امکان ارتباط با خریداران طلایی",
