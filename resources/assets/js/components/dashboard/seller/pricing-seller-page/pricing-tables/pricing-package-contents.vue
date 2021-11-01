@@ -459,7 +459,6 @@
 .panel.panel-default {
   border-radius: 8px;
   background: #c5e1eb;
-  padding: 10px 15px;
   border: 1px solid #f2f2f2;
   box-shadow: 0px 4px 8px rgba(151, 151, 151, 0.2);
   margin-bottom: 20px;
@@ -471,18 +470,21 @@
   font-weight: 300;
   display: block;
   direction: rtl;
+  padding: 10px 15px;
 }
 
 .panel-collapse > p {
   line-height: 20px;
   font-size: 13px;
   direction: rtl;
-  padding: 10px;
+  padding: 0 20px 10px;
   color: #2d3031;
 }
 
 .phones {
   text-align: right;
+  padding-right: 20px;
+padding-bottom: 15px;
 }
 
 .phones a {
