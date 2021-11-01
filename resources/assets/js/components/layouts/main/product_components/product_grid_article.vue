@@ -562,7 +562,7 @@ label {
           />
         </svg>
 
-        جزییات محصول
+        استعلام قیمت
       </button>
     </div>
     <!--google codes-->
