@@ -252,6 +252,7 @@ input[type="number"] {
   max-width: 760px;
   margin: 0 auto 130px;
   float: initial;
+  overflow: hidden;
 }
 @media screen and (max-width: 1300px) {
   .arrow-icon {
