@@ -239,7 +239,6 @@
     $(document).ready(function() {
 
     getCategories();
-    console.log(categories)
 
     });
     
