@@ -676,7 +676,7 @@ a#note-close:not(.collapsed):after {
             </button>
             <button
               v-else-if="!$parent.isMyProfile && !$parent.currentUser.user_info"
-              @click.prevent="$parent.loginModal()"
+              @click.prevent="$parent.loginModal(true)"
               class="green-button green-button-alt"
             >
               <i class="fa fa-comment-alt"></i>
@@ -817,7 +817,7 @@ a#note-close:not(.collapsed):after {
         </button>
         <button
           v-else-if="!$parent.isMyProfile && !$parent.currentUser.user_info"
-          @click.prevent="$parent.loginModal()"
+          @click.prevent="$parent.loginModal(true)"
           class="green-button green-button-alt"
         >
           <i class="fa fa-comment-alt"></i>

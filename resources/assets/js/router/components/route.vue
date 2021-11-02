@@ -1041,7 +1041,7 @@ export default {
     },
     raiseGuideModal: function () {
       let self = this;
-
+      $(".modal").modal("hide");
       this.handleBackBtn();
 
       swal({
@@ -1367,7 +1367,7 @@ export default {
   },
   mounted() {
     $(document).ready(() => {
-      $("#master-loader-wrapper").css('display','none');
+      $("#master-loader-wrapper").css("display", "none");
     });
     this.activateDownloadAppButton();
     $("#wallet-modal").on("show.bs.modal", (e) => {
