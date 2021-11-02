@@ -313,6 +313,7 @@
       :messageCount="messageCount"
       class="hidden-lg hidden-md"
     />
+
     <router-view
       :user-id="user.id"
       :is-seller="user.type"
@@ -1413,7 +1414,7 @@ export default {
     },
   },
   mounted() {
-    // this.updateUserData();
+    this.updateUserData();
     $(document).ready(() => {
       $("#master-loader-wrapper").css("display", "none");
     });
