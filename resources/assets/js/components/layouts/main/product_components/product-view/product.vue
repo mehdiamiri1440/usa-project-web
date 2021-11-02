@@ -57,10 +57,6 @@ label {
   color: #474747;
 }
 
-.blue-button {
-  background: #000546;
-}
-
 .gray-text {
   color: #777;
 }
@@ -147,11 +143,18 @@ label {
   transition: 300ms;
 }
 
-.actions .elevator-event {
-  background: #e41c38;
+.actions .min-button-style {
+  max-width: 225px;
+  width: 100% !important;
+  border-radius: 12px;
+  margin: 15px 5px;
+  padding: 10px 15px 9px;
+  border: none;
   color: #fff;
+  font-size: 14px;
   border-radius: 4px;
-  float: left;
+  font-weight: 400;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.15);
 }
 
 .product-info-table {
@@ -231,23 +234,22 @@ label {
   direction: rtl;
 }
 
-.actions .min-button-style {
-  max-width: 225px;
-  width: 100% !important;
-  border-radius: 12px;
-  margin: 15px 5px;
-  padding: 10px 15px 9px;
-  border: none;
-  color: #fff;
-  font-size: 18px;
-}
-
 .actions .min-button-style.phone-call {
   margin-left: 10px;
 }
 
 .actions .min-button-style.send-message-button {
   margin-right: 10px;
+}
+
+.actions .elevator-event {
+  background: #140092;
+  color: #fff;
+}
+
+.actions .blue-button {
+  background: rgba(20, 0, 146, 0.25);
+  color: #140092;
 }
 
 @media screen and (max-width: 1199px) {
@@ -534,8 +536,30 @@ label {
             class="elevator-event min-button-style green-button"
             @click.prevent="$parent.elevatorEvent()"
           >
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M1.33301 14.6667H4.66634V11.3334H7.99967V8.00008H11.333V4.66675H14.6663"
+                stroke="white"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M0.916504 7.16671L7.1665 1.33337M7.1665 1.33337V4.66671M7.1665 1.33337H3.83317"
+                stroke="white"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+
             اعمال نردبان
-            <i class="fas fa-chart-line"></i>
           </button>
 
           <button
