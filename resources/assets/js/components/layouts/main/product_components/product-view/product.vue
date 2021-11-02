@@ -530,7 +530,7 @@ label {
 
         <div class="actions">
           <button
-            v-if="$parent.isMyProfile"
+            v-if="$parent.updatedCurrentUser.user_info && $parent.isMyProfile"
             class="elevator-event min-button-style green-button"
             @click.prevent="$parent.elevatorEvent()"
           >
@@ -541,9 +541,9 @@ label {
           <button
             v-if="
               !$parent.isMyProfile &&
-              $parent.currentUser.user_info &&
+              $parent.updatedCurrentUser.user_info &&
               $parent.product.user_info.has_phone &&
-              $parent.currentUser.user_info.is_buyer
+              $parent.updatedCurrentUser.user_info.is_buyer
             "
             @click.prevent="$parent.activePhoneCall(false)"
             class="green-button min-button-style phone-call hidden-xs hidden-sm"
@@ -561,7 +561,7 @@ label {
           </button>
           <button
             v-else-if="
-              !$parent.currentUser.user_info &&
+              !$parent.updatedCurrentUser.user_info &&
               $parent.product.user_info.has_phone
             "
             @click.prevent="$parent.loginModal(false)"
@@ -580,24 +580,24 @@ label {
           </button>
 
           <button
-            v-if="!$parent.isMyProfile && $parent.currentUser.user_info"
+            v-if="!$parent.isMyProfile && $parent.updatedCurrentUser.user_info"
             @click.prevent="$parent.openChat($parent.product)"
             class="hidden-xs hidden-sm min-button-style"
             :class="{
               'send-message-button':
                 $parent.product.user_info.has_phone &&
-                $parent.currentUser.user_info.is_buyer,
+                $parent.updatedCurrentUser.user_info.is_buyer,
               'bg-gradient-green':
                 !$parent.product.user_info.has_phone ||
                 ($parent.product.user_info.has_phone &&
-                  !$parent.currentUser.user_info.is_buyer),
+                  !$parent.updatedCurrentUser.user_info.is_buyer),
             }"
           >
             <i class="fas fa-comment-alt"></i>
             چت با فروشنده
           </button>
           <button
-            v-else-if="!$parent.currentUser.user_info"
+            v-else-if="!$parent.updatedCurrentUser.user_info"
             @click.prevent="$parent.loginModal(true)"
             class="hidden-xs hidden-sm min-button-style"
             :class="{

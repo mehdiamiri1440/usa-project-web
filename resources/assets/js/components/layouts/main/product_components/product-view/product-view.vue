@@ -337,7 +337,7 @@ button.send-message-button {
 <template>
   <div class="container-fluid padding-0-30 main-content-wrapper">
     <RegisterModal
-      v-if="!currentUser.user_info"
+      v-if="!updatedCurrentUser.user_info"
       :is-chat="isChat"
       :product="product"
     />
@@ -578,7 +578,14 @@ export default {
     RelatedProducts,
     // registerInquerForm,
   },
-  props: ["str", "assets", "userType", "categoryList", "currentUser"],
+  props: [
+    "str",
+    "assets",
+    "isUserLogin",
+    "userType",
+    "categoryList",
+    "currentUser",
+  ],
   data: function () {
     return {
       isChat: true,
@@ -609,6 +616,7 @@ export default {
       getPhoneLoader: false,
       breadCrumbs: "",
       dataTags: "",
+      updatedCurrentUser: "",
     };
   },
   methods: {
@@ -623,8 +631,8 @@ export default {
       var self = this;
       let userId = getUserId();
 
-      if (this.currentUser && this.currentUser.user_info) {
-        if (this.currentUser.user_info.is_seller == true) {
+      if (this.updatedCurrentUser && this.updatedCurrentUser.user_info) {
+        if (this.updatedCurrentUser.user_info.is_seller == true) {
           this.showRegisterRequestBox = false;
         }
       }
@@ -650,19 +658,18 @@ export default {
           self.getBreadCrumbs();
         })
         .catch(function (err) {
-
           //redirect user to the parent category
-          let categoryName = self.$route.params.categoryName.split('-');
+          let categoryName = self.$route.params.categoryName.split("-");
 
-          categoryName = categoryName.filter(item => {
-              if(item == 'خرید' || item == 'عمده'){
-                  return false;
-              }
-              return true;
+          categoryName = categoryName.filter((item) => {
+            if (item == "خرید" || item == "عمده") {
+              return false;
+            }
+            return true;
           });
-          
-          window.location.href = "/product-list/category/" + categoryName.join('-');
-          
+
+          window.location.href =
+            "/product-list/category/" + categoryName.join("-");
         });
     },
     openChat(product) {
@@ -684,18 +691,17 @@ export default {
         product_name: productName,
         product_id: product.main.id,
       };
-
-      var self = this;
-      if (this.currentUser.user_info) {
-        if (this.currentUser.user_info.id !== product.user_info.id) {
+      if (this.updatedCurrentUser.user_info.id) {
+        if (this.updatedCurrentUser.user_info.id !== product.user_info.id) {
           eventBus.$emit("ChatInfo", contact);
           //   window.localStorage.setItem("contact", JSON.stringify(contact));
 
           //   this.$router.push({ name: "registerInquiry" });
         } else {
-          this.popUpMsg = "شما نمی توانید به خودتان پیام دهید.";
-          eventBus.$emit("submitSuccess", this.popUpMsg);
-          $("#custom-main-modal").modal("show");
+          window.location.reload()
+          // this.popUpMsg = "شما نمی توانید به خودتان پیام دهید.";
+          // eventBus.$emit("submitSuccess", this.popUpMsg);
+          // $("#custom-main-modal").modal("show");
         }
       } else {
         window.localStorage.setItem("contact", JSON.stringify(contact));
@@ -725,16 +731,16 @@ export default {
         product_id: product.main.id,
       };
 
-      var self = this;
-      if (this.currentUser.user_info) {
-        if (this.currentUser.user_info.id !== product.user_info.id) {
+      if (this.isUserLogin) {
+        if (this.isUserLogin !== product.user_info.id) {
           window.localStorage.setItem("contact", JSON.stringify(contact));
 
           eventBus.$emit("ChatInfo", contact);
         } else {
-          this.popUpMsg = "شما نمی توانید به خودتان پیام دهید.";
-          eventBus.$emit("submitSuccess", this.popUpMsg);
-          $("#custom-main-modal").modal("show");
+          window.location.reload()
+          // this.popUpMsg = "شما نمی توانید به خودتان پیام دهید.";
+          // eventBus.$emit("submitSuccess", this.popUpMsg);
+          // $("#custom-main-modal").modal("show");
         }
       } else {
         window.localStorage.setItem("contact", JSON.stringify(contact));
@@ -837,16 +843,14 @@ export default {
     },
     shareProduct() {
       this.registerComponentStatistics(
-          "product-view",
-          "copy-product-link",
-          "click on copy poduct link"
-        );
+        "product-view",
+        "copy-product-link",
+        "click on copy poduct link"
+      );
 
-        
       let baseUrl = getBase();
       baseUrl = baseUrl.substring(0, baseUrl.length - 1);
       if (this.isDeviceMobile()) {
-
         var linkElement = document.createElement("a");
         var Message = baseUrl + this.getProductUrl();
         var messageToWhatsApp = encodeURIComponent(Message);
@@ -1090,6 +1094,18 @@ export default {
       this.isMyProfile = false;
       this.product.main.id = "";
       this.init();
+    },
+    updatedCurrentUser(user) {
+      // this.currentUser = user;
+      if (this.updatedCurrentUser && this.updatedCurrentUser.user_info) {
+        if (this.updatedCurrentUser.user_info.is_seller == true) {
+          this.showRegisterRequestBox = false;
+        }
+      }
+      eventBus.$emit("currentUser", user);
+    },
+    currentUser() {
+      this.updatedCurrentUser = this.currentUser;
     },
   },
   metaInfo() {

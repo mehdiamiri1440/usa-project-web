@@ -1883,6 +1883,7 @@ export default {
     eventBus.$on("selectedCity", (event) => {
       this.selectedCity = event;
     });
+    
 
     $(window).resize(this.jqUpdateSize); // When the browser changes size
   },
