@@ -593,13 +593,6 @@ const router = new Router({
             else next("/login");
           },
         },
-        // {
-        //     path: 'pricing',
-        //     name: 'pricing',
-        //     components: {
-        //         default: pricingTable,
-        //     },
-        // },
       ],
     },
     {
