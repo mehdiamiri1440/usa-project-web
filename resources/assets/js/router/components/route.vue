@@ -3,7 +3,7 @@
   position: fixed;
   bottom: 59px;
   width: 100%;
-  background: #fff;
+  background: linear-gradient(253.81deg, #018374 0%, #53dccc 100%);
   text-align: center;
   color: #fff;
   direction: rtl;
@@ -12,36 +12,76 @@
   font-size: 20px;
   padding: 5px;
   box-shadow: 0 -8px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px 8px 0px 0px;
 }
 
 .android-apk-download {
-  padding: 10px 15px;
+  padding: 6px 0;
   background: linear-gradient(-35deg, #ff9300, #f60);
   border: none;
   width: 100%;
-  border-radius: 8px;
+  border-radius: 4px;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
+  font-size: 16px;
+  font-weight: 400;
+  margin-bottom: 15px;
+}
+
+.download-app-text {
+  padding: 40px 5px 10px;
+  margin-bottom: 10px;
+}
+
+.actions-wrapper {
+  max-width: 190px;
+  margin: 0 auto;
+}
+
+.download-app-button-alt {
+  padding: 6px 0;
+  background: none;
+  border: 1px solid #fff;
+  color: #fff;
+  width: 100%;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  font-size: 16px;
+  font-weight: 400;
+  margin-bottom: 15px;
 }
 
 .android-apk-download img {
-  width: 28px;
-  position: absolute;
-  left: 15px;
+  width: 16px;
+  margin-right: 10px;
 }
 
 .close-android-download-alert-wrapper {
   background: none;
   border: none;
-  font-size: 20px;
+  font-size: 17px;
   position: absolute;
-  right: 5px;
-  top: 5px;
+  left: -2px;
+  top: -2px;
   z-index: 1021;
   padding: 11px 15px 8px;
 }
+
+.android-download-alert-wrapper hr {
+  content: "";
+  width: 100%;
+  max-width: 230px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.5);
+  margin: 0 auto 10px;
+  border: none;
+}
+
 /* 
 .modal-dialog {
   width: 400px;
@@ -350,6 +390,10 @@
       v-if="downloadAppButton && $route.name != 'invite'"
       class="android-download-alert-wrapper hidden-lg hidden-md"
     >
+      <p class="download-app-text">
+        برای استفاده راحت تر نسخه موبایل باسکول را نصب کنید.
+      </p>
+      <hr />
       <button
         class="close-android-download-alert-wrapper"
         @click.prevent="downloadAppButton = false"
@@ -357,14 +401,23 @@
         <i class="fa fa-times"></i>
       </button>
 
-      <button class="android-apk-download" @click.prevent="doDownload()">
-        دانلود اپلیکیشن باسکول
+      <div class="actions-wrapper">
+        <button class="android-apk-download" @click.prevent="doDownload()">
+          دانلود اپلیکیشن
 
-        <img
-          src="../../../img/google-play-icon.svg"
-          alt="دانلود اپلیکیشن باسکول"
-        />
-      </button>
+          <img
+            src="../../../img/google-play-icon.svg"
+            alt="دانلود اپلیکیشن باسکول"
+          />
+        </button>
+
+        <button
+          class="download-app-button-alt"
+          @click.prevent="downloadAppButton = false"
+        >
+          بعدا نصب می کنم
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -1367,7 +1420,7 @@ export default {
   },
   mounted() {
     $(document).ready(() => {
-      $("#master-loader-wrapper").css('display','none');
+      $("#master-loader-wrapper").css("display", "none");
     });
     this.activateDownloadAppButton();
     $("#wallet-modal").on("show.bs.modal", (e) => {
