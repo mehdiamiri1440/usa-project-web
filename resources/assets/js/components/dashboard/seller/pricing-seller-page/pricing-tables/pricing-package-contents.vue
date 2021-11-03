@@ -297,7 +297,7 @@
   font-size: 12px;
   padding: 0 30px;
   margin-bottom: 27px;
-  min-height: 77px;
+  min-height: 97px;
   display: flex;
   align-items: center;
 }
@@ -424,7 +424,17 @@
 /* .fade-leave-active in <2.1.8 */ {
   opacity: 0;
 }
-.tab-action-wrapper {
+
+.tab-action-wrapper.fixed-tab-action {
+  background: #fff;
+  position: fixed;
+  z-index: 1;
+  top: 22px;
+  left: 0;
+  width: 100%;
+}
+
+.tab-action-wrapper > div {
   max-width: 330px;
   display: flex;
   flex-direction: row;
@@ -484,7 +494,7 @@
 .phones {
   text-align: right;
   padding-right: 20px;
-padding-bottom: 15px;
+  padding-bottom: 15px;
 }
 
 .phones a {
@@ -597,14 +607,17 @@ padding-bottom: 15px;
 <template>
   <div class="col-xs-12">
     <div class="row">
-      <div class="tab-action-wrapper hidden-md hidden-lg">
-        <div :class="{ active: packagePage == 1 }">
-          <button @click="packagePage = 1">بسته ویژه سالانه</button>
-        </div>
-        <div :class="{ active: packagePage == 2 }">
-          <button @click="packagePage = 2">بسته پایه سه ماهه</button>
+      <div class="tab-action-wrapper" :class="{ 'page-type': !isModal }">
+        <div class="hidden-md hidden-lg">
+          <div :class="{ active: packagePage == 1 }">
+            <button @click="packagePage = 1">بسته ویژه سالانه</button>
+          </div>
+          <div :class="{ active: packagePage == 2 }">
+            <button @click="packagePage = 2">بسته پایه سه ماهه</button>
+          </div>
         </div>
       </div>
+      <div id="action-spaces"></div>
       <transition-group
         name="fade"
         tag="div"
@@ -986,6 +999,7 @@ padding-bottom: 15px;
                 <li class="list-header">
                   <span>ویژگی های بسته پایه</span>
                 </li>
+
                 <li v-for="(item, index) in priceItemBasic" :key="index">
                   <p
                     class="item-content-title"
@@ -1016,6 +1030,9 @@ padding-bottom: 15px;
               <ul class="item-content-list">
                 <li class="list-header">
                   <span>ویژگی های بسته پایه</span>
+                </li>
+                <li class="empty">
+                  <p class="item-content-title">ویژگی ها</p>
                 </li>
                 <li v-for="(item, index) in priceItemBasic" :key="index">
                   <p class="item-content-amount">
@@ -1362,7 +1379,7 @@ export default {
           contentUnit: "نا محدود",
           helpDescription:
             "بر روی اولین محصول ثبت شده ویژگی نردبان به صورت خودکار اعمال خواهد شد",
-          desktopTitle: "روزانه <strong>۳۰</strong> خریدار در دسترس",
+          desktopTitle: "تعداد  <strong>نامحدود</strong> خریدار در دسترس",
         },
         {
           title: "امکان ارتباط با خریداران طلایی",
@@ -1414,6 +1431,28 @@ export default {
           }
         });
       this.getPrices();
+      if (this.checkIsMobile()) {
+        this.setPricingHeaderScroll();
+      }
+    },
+    setPricingHeaderScroll() {
+      let elementSpace = $(".tab-action-wrapper.page-type + #action-spaces");
+      let element = $(".tab-action-wrapper.page-type");
+      let pricingHeaderTop = element.offset().top;
+
+      $(window).scroll(() => {
+        if (
+          this.$route.name == "dashboardPricingTableSeller" 
+        ) {
+          if ($(window).scrollTop() >= pricingHeaderTop - 42 ) {
+            element.addClass("fixed-tab-action");
+            elementSpace.height(62);
+          } else {
+            element.removeClass("fixed-tab-action");
+            elementSpace.height(0);
+          }
+        }
+      });
     },
     getPrices() {
       axios.post("/payment/get-packages-price").then((response) => {
