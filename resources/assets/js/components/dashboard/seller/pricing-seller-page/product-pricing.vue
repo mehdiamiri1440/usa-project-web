@@ -249,27 +249,15 @@ input[type="number"] {
 }
 
 .pricing-wrapper {
-  margin-bottom: 130px;
+  max-width: 760px;
+  margin: 0 auto 130px;
+  float: initial;
+  overflow: hidden;
 }
 
 @media screen and (max-width: 1300px) {
   .arrow-icon {
     display: none;
-  }
-}
-
-@media screen and (max-width: 991px) {
-  .main-content-wrapper > .row > div {
-    padding: 0 7px;
-  }
-
-  .list-title,
-  .needs,
-  .list-time {
-    padding: 15px;
-  }
-  .pricing-section-wrapper {
-    margin-bottom: 80px;
   }
 }
 
@@ -459,18 +447,18 @@ input[type="number"] {
             <p>ارتقا عضویت</p>
           </div>
           <product-pricing-contents
-            justPro="true"
+            justPro="false"
             :offer-time="this.offerTime"
           />
         </div>
       </div>
     </div>
-    <div class="fix-botton-wraper hidden-sm hidden-md hidden-lg">
+    <!-- <div class="fix-botton-wraper hidden-sm hidden-md hidden-lg">
       <button class="green-button" @click="openCreditCardGuide()">
         پرداخت از طریق کارت به کارت
         <i class="fa fa-credit-card"></i>
       </button>
-    </div>
+    </div> -->
   </div>
 </template>
 
