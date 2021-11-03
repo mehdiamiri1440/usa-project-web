@@ -1210,11 +1210,17 @@ class product_list_controller extends Controller
                 $temp = $tags_info->first();
                 $schema_object = $temp->schema_object;
                 unset($tags_info->schema_object);
+
+                $tags_info = $tags_info->filter(function($item) use($temp){
+                    return $temp->id == $item->id || $item->header != strip_tags($item->header);
+                });
             }
             
 
+            
+
             $data = [
-                'category_info' => $tags_info->toArray(),
+                'category_info' =>  $tags_info->toArray(),
                 'schema_object' => $schema_object,
                 'category_id' => $category_id,
             ];
