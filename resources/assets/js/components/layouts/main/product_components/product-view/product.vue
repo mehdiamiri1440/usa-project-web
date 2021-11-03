@@ -333,6 +333,10 @@ label {
 
 <template>
   <div v-if="$parent.product.main.id" class="wrapper-bg main-product-wrapper">
+    <PriceModal
+      :product-name="$parent.product.main.product_name"
+      :price="$parent.product.main.min_sale_price"
+    />
     <!--article modal-->
 
     <div
@@ -657,14 +661,14 @@ label {
           <ul class="product-info-list">
             <li>
               <span class="gray-text">
-                <i class="fa fa-folder"></i> دسته بندی
+                <i class="fa fa-user-circle"></i> فروشنده
               </span>
 
               <span v-text="$parent.product.main.sub_category_name"></span>
             </li>
             <li>
               <span class="gray-text">
-                <i class="fa fa-map-marker-alt"></i> استان / شهر</span
+                <i class="fa fa-map-marker-alt"></i> آدرس</span
               >
 
               <span
@@ -686,7 +690,7 @@ label {
             </li>
             <li>
               <span class="gray-text">
-                <i class="fas fa-clipboard-check"></i> حداقل سفارش</span
+                <i class="fas fa-clipboard-check"></i> حداقل میزان سفارش</span
               >
 
               <span
@@ -695,14 +699,16 @@ label {
                 "
               ></span>
             </li>
-            <li v-if="!$parent.isMyProfile">
-              <span class="gray-text">
-                <i class="fas fa-dollar-sign"></i> قیمت</span
-              >
-
-              <span>استعلام بگیرید</span>
-            </li>
           </ul>
+          <div class="show-button-wrapper">
+            <button
+              @click="openPriceModal()"
+              class="main-button-alt orange-text"
+            >
+              استعلام قیمت
+            </button>
+          </div>
+
           <div
             v-if="$parent.product.main.description"
             class="product-description"
@@ -833,10 +839,11 @@ label {
 
 <script >
 import Carousel from "./carousel";
-
+import PriceModal from "./price-modal.vue";
 export default {
   components: {
     Carousel,
+    PriceModal,
   },
   methods: {
     getNumberWithCommas: function (number) {
@@ -854,6 +861,9 @@ export default {
           return data + " " + "تن";
         }
       } else return "";
+    },
+    openPriceModal() {
+      $(".price-modal").addClass("show-custom-modal");
     },
   },
 };
