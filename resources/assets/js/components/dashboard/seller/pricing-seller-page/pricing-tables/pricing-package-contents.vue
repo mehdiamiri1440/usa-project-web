@@ -459,7 +459,6 @@
 .panel.panel-default {
   border-radius: 8px;
   background: #c5e1eb;
-  padding: 10px 15px;
   border: 1px solid #f2f2f2;
   box-shadow: 0px 4px 8px rgba(151, 151, 151, 0.2);
   margin-bottom: 20px;
@@ -471,18 +470,21 @@
   font-weight: 300;
   display: block;
   direction: rtl;
+  padding: 10px 15px;
 }
 
 .panel-collapse > p {
   line-height: 20px;
   font-size: 13px;
   direction: rtl;
-  padding: 10px;
+  padding: 0 20px 10px;
   color: #2d3031;
 }
 
 .phones {
   text-align: right;
+  padding-right: 20px;
+padding-bottom: 15px;
 }
 
 .phones a {
@@ -764,9 +766,17 @@
                       class="text-green fa fa-check"
                       style="color: #00c569"
                     ></i>
-                    <span v-else v-text="item.contentUnit"></span>
+                    <span
+                      v-else-if="!item.desktopTitle"
+                      v-text="item.contentUnit"
+                    ></span>
                   </p>
-                  <p class="item-content-title" v-html="item.title"></p>
+                  <p
+                    class="item-content-title"
+                    v-if="item.desktopTitle"
+                    v-html="item.desktopTitle"
+                  ></p>
+                  <p class="item-content-title" v-else v-html="item.title"></p>
                 </li>
               </ul>
             </div>
@@ -1022,9 +1032,19 @@
                       class="text-green fa fa-check"
                       style="color: #00c569"
                     ></i>
-                    <span v-else v-text="item.contentUnit"></span>
+                    <span
+                      v-else-if="!item.desktopTitle"
+                      v-text="item.contentUnit"
+                    ></span>
                   </p>
                   <p
+                    class="item-content-title"
+                    v-if="item.desktopTitle"
+                    :class="{ 'disable-text': !item.contentUnit }"
+                    v-html="item.desktopTitle"
+                  ></p>
+                  <p
+                    v-else
                     class="item-content-title"
                     :class="{ 'disable-text': !item.contentUnit }"
                     v-html="item.title"
@@ -1282,12 +1302,14 @@ export default {
           contentUnit: "3",
           helpDescription:
             " تعداد آگهی های همزمان شما که در لیست محصولات نمایش داده می شود. ",
+          desktopTitle: "<strong>۳</strong> محصول قابل تبلیغ",
         },
         {
           title: "تعداد روزانه خریداران در دسترس",
           contentUnit: "10",
           helpDescription:
             "بر روی اولین محصول ثبت شده ویژگی نردبان به صورت خودکار اعمال خواهد شد",
+          desktopTitle: "روزانه <strong>۱۰</strong> خریدار در دسترس",
         },
         {
           title: "امکان ارتباط با خریداران طلایی",
@@ -1333,12 +1355,14 @@ export default {
           contentUnit: "7",
           helpDescription:
             " تعداد آگهی های همزمان شما که در لیست محصولات نمایش داده می شود. ",
+          desktopTitle: "<strong>۷</strong> محصول قابل تبلیغ",
         },
         {
           title: "تعداد روزانه خریداران در دسترس",
           contentUnit: "نا محدود",
           helpDescription:
             "بر روی اولین محصول ثبت شده ویژگی نردبان به صورت خودکار اعمال خواهد شد",
+          desktopTitle: "روزانه <strong>۳۰</strong> خریدار در دسترس",
         },
         {
           title: "امکان ارتباط با خریداران طلایی",

@@ -19,6 +19,11 @@
   color: #000;
 }
 
+.actions-wrapper {
+  overflow: hidden;
+  padding-bottom: 100px;
+}
+
 @media screen and (max-width: 767px) {
 }
 </style>
@@ -107,10 +112,10 @@ export default {
       // ready for analytics
 
       this.registerComponentStatistics(
-            "seller-just-after-signup",
-            "click-on-suggested-options",
-            "click-on-register-product-btn"
-          );
+        "seller-just-after-signup",
+        "click-on-suggested-options",
+        "click-on-register-product-btn"
+      );
 
       this.$router.push({ name: routeName });
     },
@@ -118,10 +123,10 @@ export default {
       // ready for analytics
 
       this.registerComponentStatistics(
-            "seller-just-after-signup",
-            "click-on-suggested-options",
-            "click-on-get-price-btn"
-          );
+        "seller-just-after-signup",
+        "click-on-suggested-options",
+        "click-on-get-price-btn"
+      );
 
       // this.registerComponentStatistics("", "", "");
       $("#categories-modal").modal("show");
