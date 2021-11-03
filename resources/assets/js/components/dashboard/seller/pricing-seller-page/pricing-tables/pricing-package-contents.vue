@@ -6,7 +6,7 @@
   padding: 15px;
   line-height: 1.618;
   margin-bottom: 30px;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .item-action .main-button.bg-gray {
@@ -515,7 +515,10 @@
     border: none !important;
   }
   .save-money {
-    max-width: 240px;
+    width: 100%;
+    max-width: 500px;
+    border-radius: 0 0 20px 20px;
+    box-shadow: 0px -4px 8px rgba(0, 0, 0, 0.2);
   }
 }
 
@@ -653,10 +656,11 @@
               </div>
 
               <p class="price-description text-center">
-                این بسته شامل مجموعه امکاناتی مانند اعمال نردبان رایگان ، مشاهده
-                بدون تاخیر درخواست های خرید ، دریافت پیامک درخواست های خرید
-                مرتبط و .. است که باعث فروش محصولات شما در سریع ترین زمان ممکن
-                می شود.
+                با این بسته می توانید از تمام امکانات ارتباطی باسکول حداکثر
+                استفاده را داشته باشید. بدون محدودیت ! به راحتی با خریدارن
+                دلخواه تماس بگیرید و با تبلیغ محصولات متعدد بیشترین تعداد
+                خریداران را به خود جذب کنید. این بسته ۲۰% به صرفه تر از بسته سه
+                ماهه است.
               </p>
 
               <div
@@ -1239,7 +1243,18 @@
             </div>
           </div>
         </div>
+        <div class="row"> <div class="switch-actions hidden-md hidden-lg col-xs-12 text-center">
+       
+        <button v-if="packagePage == 1" @click="packagePage = 2" class="main-button button-shadow white-text" >
+          بسته پایه سه ماهه
+        </button>
+        <button v-else @click="packagePage = 1" class="main-button button-shadow white-text" >
+          بسته ویژه سالانه
+        </button>
+      </div></div>
       </div>
+
+     
     </div>
   </div>
 </template>
@@ -1284,7 +1299,7 @@ export default {
         },
 
         {
-          title: "نمایش شماره تماس شما به خریداران",
+          title: "نمایش شماره تماس به خریداران",
           contentUnit: true,
           helpDescription: "",
         },
@@ -1293,13 +1308,13 @@ export default {
           contentUnit: false,
           helpDescription: "",
         },
+        // {
+        //   title: "5 برابر ارتباط بیشتر با خریداران",
+        //   contentUnit: false,
+        //   helpDescription: "",
+        // },
         {
-          title: "5 برابر ارتباطات بیشتر با خریداران",
-          contentUnit: false,
-          helpDescription: "",
-        },
-        {
-          title: "بسته ی ویژه فروش",
+          title: "بسته ویژه فروش",
           contentUnit: false,
           helpDescription:
             "محصولات ثبت شده شما، در قسمت محصولات ویژه در پنل خریداران به آنها نمایش داده می شود",
@@ -1314,7 +1329,7 @@ export default {
         },
         {
           title: "تعداد روزانه خریداران در دسترس",
-          contentUnit: "30",
+          contentUnit: "نا محدود",
           helpDescription:
             "بر روی اولین محصول ثبت شده ویژگی نردبان به صورت خودکار اعمال خواهد شد",
         },
@@ -1334,7 +1349,7 @@ export default {
           helpDescription: "",
         },
         {
-          title: "نمایش شماره تماس شما به خریداران",
+          title: "نمایش شماره تماس به خریداران",
           contentUnit: true,
           helpDescription: "",
         },
@@ -1344,7 +1359,7 @@ export default {
           helpDescription: "",
         },
         {
-          title: "5 برابر ارتباطات بیشتر با خریداران",
+          title: "5 برابر ارتباط بیشتر با خریداران",
           contentUnit: true,
           helpDescription: "",
         },
