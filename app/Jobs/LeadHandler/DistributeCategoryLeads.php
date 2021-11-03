@@ -108,7 +108,6 @@ class DistributeCategoryLeads implements ShouldQueue
      */
     public function handle()
     {
-        echo $this->category_id . "\n";
         $this->distribute_all_valid_leads($this->category_id);
     }
 
@@ -592,7 +591,7 @@ class DistributeCategoryLeads implements ShouldQueue
 
             $messages[] = $msg;
         }
-        echo 'Ali' . "\n";
+        
         DB::table('messages')->insert($messages);
 
         return $forbidden_leads_to_send_advertisement; //these are real advertised lead ids
