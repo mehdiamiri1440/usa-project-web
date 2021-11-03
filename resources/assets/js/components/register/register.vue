@@ -499,32 +499,34 @@ export default {
       this.errors.name = "";
 
       if (name === "") {
-        this.errors.name = "نام الزامی است.";
+        this.errors.name = "نام خود را وارد کنید.";
         this.errorFlag = true;
       }
 
       if (this.errors.name) {
-        this.registerComponentStatistics(
-          "Register-Error",
-          "first-name",
-          "input:" + name + " Error:" + this.errors.name
-        );
+        // update for analytics
+        // this.registerComponentStatistics(
+        //   "Invite-Register-Error",
+        //   "first-name",
+        //   "input:" + name + " Error:" + this.errors.name
+        // );
       }
     },
     lastNameValidator: function (family) {
       this.errors.family = "";
 
       if (family === "") {
-        this.errors.family = "نام خانوادگی الزامی است.";
+        this.errors.family = "نام خانوادگی خود را وارد کنید.";
         this.errorFlag = true;
       }
 
       if (this.errors.family) {
-        this.registerComponentStatistics(
-          "Register-Error",
-          "last-name",
-          "input:" + family + " Error:" + this.errors.family
-        );
+        // update for analytics
+        // this.registerComponentStatistics(
+        //   "Invite-Register-Error",
+        //   "last-name",
+        //   "input:" + family + " Error:" + this.errors.family
+        // );
       }
     },
 
@@ -532,31 +534,64 @@ export default {
       this.errors.province = "";
 
       if (province == "") {
-        this.errors.province = "استان الزامی است";
+        this.errors.province = "استان خود را انتخاب کنید.";
         this.errorFlag = true;
       }
 
       if (this.errors.province) {
-        this.registerComponentStatistics(
-          "Register-Error",
-          "province",
-          "input:" + province + " Error:" + this.errors.province
-        );
+        // update for analytics
+        // this.registerComponentStatistics(
+        //   "Invite-Register-Error",
+        //   "province",
+        //   "input:" + province + " Error:" + this.errors.province
+        // );
       }
     },
     cityValidator: function (city) {
       this.errors.city = "";
 
       if (city === "") {
-        this.errors.city = "شهر الزامی است";
+        this.errors.city = "شهر خود را انتخاب کنید.";
         this.errorFlag = true;
       }
       if (this.errors.city) {
-        this.registerComponentStatistics(
-          "Register-Error",
-          "city",
-          "input:" + city + " Error:" + this.errors.city
-        );
+        // update for analytics
+        // this.registerComponentStatistics(
+        //   "Invite-Register-Error",
+        //   "city",
+        //   "input:" + city + " Error:" + this.errors.city
+        // );
+      }
+    },
+    categoryIdValidator: function (categoryId) {
+      this.errors.category_id = "";
+      if (categoryId === "") {
+        this.errors.category_id = "حوزه فعالیت خود را انتخاب کنید.";
+        this.errorFlag = true;
+      }
+
+      if (this.errors.category_id) {
+        // update for analytics
+        // this.registerComponentStatistics(
+        //   "Invite-Register-Error",
+        //   "category-selection",
+        //   "input:" + categoryId + " Error:" + this.errors.category_id
+        // );
+      }
+    },
+    activityTypeValidator: function (activityType) {
+      this.errors.activity_type = "";
+      if (activityType === "") {
+        this.errors.activity_type = " نوع فعالیت خود را انتخاب کنید.";
+        this.errorFlag = true;
+      }
+      if (this.errors.activity_type) {
+        // update for analytics
+        // this.registerComponentStatistics(
+        //   "Invite-Register-Error",
+        //   "activity-type",
+        //   "input:" + activityType + " Error:" + this.errors.activity_type
+        // );
       }
     },
     isIrNationalCode: function (input) {
@@ -576,36 +611,7 @@ export default {
 
       return (sum < 2 && check == sum) || (sum >= 2 && check + sum == 11);
     },
-    categoryIdValidator: function (categoryId) {
-      this.errors.category_id = "";
-      if (categoryId === "") {
-        this.errors.category_id = "انتخاب حوزه ی فعالیت الزامی است.";
-        this.errorFlag = true;
-      }
 
-      if (this.errors.category_id) {
-        this.registerComponentStatistics(
-          "Register-Error",
-          "category-selection",
-          "input:" + categoryId + " Error:" + this.errors.category_id
-        );
-      }
-    },
-    activityTypeValidator: function (activityType) {
-      this.errors.activity_type = "";
-      if (activityType === "") {
-        this.errors.activity_type = "انتخاب نوع کاربری الزامی است.";
-        this.errorFlag = true;
-      }
-
-      if (this.errors.activity_type) {
-        this.registerComponentStatistics(
-          "Register-Error",
-          "activity-type",
-          "input:" + activityType + " Error:" + this.errors.activity_type
-        );
-      }
-    },
     validateRegx: function (input, regx) {
       return regx.test(input);
     },

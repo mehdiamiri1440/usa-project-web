@@ -17,7 +17,7 @@ label.input-title {
   z-index: 1;
   font-weight: 400;
   color: rgba(0, 0, 0, 0.7);
-  font-size: 12px;
+  font-size: 14px;
   margin: 0;
 }
 
@@ -45,8 +45,8 @@ label.input-title {
 }
 
 .form-contents {
-  margin: 5px auto;
-  max-width: 400px;
+  margin: 20px auto;
+  max-width: 450px;
 }
 
 .input-wrapper {
@@ -120,10 +120,7 @@ input.error:focus + i,
 }
 
 .radio-wrapper {
-  margin: 0 auto;
-  border: 1px solid #bebebe;
-  border-radius: 8px;
-  padding: 15px 0 10px;
+  margin: 10px auto;
 }
 
 .label-radio {
@@ -135,12 +132,13 @@ input.error:focus + i,
   -ms-user-select: none;
   user-select: none;
   direction: rtl;
-  padding: 0 29px 0 15px;
+  padding-right: 35px;
   font-size: 14px;
-  width: 100%;
+  width: 135px;
 }
+
 .label-radio:nth-of-type(2) {
-  margin-left: 16px;
+  margin-right: 16px;
 }
 /* Hide the browser's default radio button */
 .label-radio input {
@@ -160,12 +158,11 @@ input.error:focus + i,
 .checkmark {
   position: absolute;
   top: 9px;
-  right: 20px;
+  right: 10px;
   height: 20px;
   width: 20px;
-  background-color: #eee;
+  border: 2px solid #666;
   border-radius: 50%;
-  border: 1px solid #666;
 }
 
 /* On mouse-over, add a grey background color */
@@ -179,14 +176,27 @@ input.error:focus + i,
   border-color: #00c569;
 }
 
-.label-radio.error label::after {
-  border: 1px solid #e41c38;
+.label-radio input:checked ~ label::after {
+  border-color: #00c569;
 }
 
-.label-radio label {
-  font-size: 14px;
-  font-weight: 400;
-  padding: 0 23px;
+.label-radio label::after {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -2px;
+  bottom: 0;
+  z-index: 0;
+  margin: 0;
+  padding: 0;
+  border-radius: 8px;
+  border: 1px solid #d9d9d9;
+}
+
+.label-radio.error label::after {
+  border: 1px solid #e41c38;
 }
 
 .label-radio label svg {
@@ -197,7 +207,9 @@ input.error:focus + i,
 }
 
 .label-radio label span {
-  margin: 0 10px;
+  margin: 0 5px;
+  font-weight: 400;
+  color: #000;
 }
 
 .cls-1 {
@@ -285,6 +297,7 @@ select.error:focus {
                 error: $parent.errors.name,
                 active: name.length,
               }"
+              placeholder="نام خود را وارد کنید"
               id="first-name"
               type="text"
             />
@@ -308,6 +321,7 @@ select.error:focus {
                 error: $parent.errors.family,
                 active: family.length,
               }"
+              placeholder="نام خانوادگی خود را وارد کنید"
               id="last-name"
               type="text"
             />
@@ -390,7 +404,7 @@ select.error:focus {
           }"
           id="activity-domain"
         >
-          <option disabled selected>انتخاب کنید</option>
+          <option disabled selected>حوزه فعالیت خود را انتخاب کنید</option>
           <option
             v-for="(category, index) in $parent.step4.categoryList"
             :key="index"
@@ -409,15 +423,9 @@ select.error:focus {
       <div class="col-xs-12">
         <div class="row">
           <label class="input-title" for="first-name"
-            >نوع فعالیت <span class="red-text">*</span></label
+            >نوع فعالیت شما <span class="red-text">*</span></label
           >
-          <div
-            class="radio-wrapper"
-            :class="{
-              error: $parent.errors.activity_type,
-              active: $parent.step4.activity_type,
-            }"
-          >
+          <div class="radio-wrapper">
             <div class="label-radio">
               <input
                 type="radio"
@@ -458,7 +466,7 @@ select.error:focus {
                   </g>
                 </svg>
 
-                <span>فروشنده</span>
+                <span>فروشنده ام</span>
               </label>
             </div>
             <div class="label-radio">
@@ -509,7 +517,7 @@ select.error:focus {
                   />
                 </svg>
 
-                <span>خریدار</span>
+                <span>خریدارم</span>
               </label>
             </div>
           </div>
