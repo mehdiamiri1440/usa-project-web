@@ -1243,18 +1243,25 @@
             </div>
           </div>
         </div>
-        <div class="row"> <div class="switch-actions hidden-md hidden-lg col-xs-12 text-center">
-       
-        <button v-if="packagePage == 1" @click="packagePage = 2" class="main-button button-shadow white-text" >
-          بسته پایه سه ماهه
-        </button>
-        <button v-else @click="packagePage = 1" class="main-button button-shadow white-text" >
-          بسته ویژه سالانه
-        </button>
-      </div></div>
+        <div class="row">
+          <div class="switch-actions hidden-md hidden-lg col-xs-12 text-center">
+            <button
+              v-if="packagePage == 1"
+              @click="packagePage = 2"
+              class="bg-navy-blue main-button button-shadow white-text"
+            >
+              بسته پایه سه ماهه
+            </button>
+            <button
+              v-else
+              @click="packagePage = 1"
+              class="bg-navy-blue main-button button-shadow white-text"
+            >
+              بسته ویژه سالانه
+            </button>
+          </div>
+        </div>
       </div>
-
-     
     </div>
   </div>
 </template>

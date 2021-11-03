@@ -406,6 +406,10 @@ padding: 4px;
   color: #ffbb00 !important;
 }
 
+.navy-blue-text {
+  color: #140092 !important;
+}
+
 .blue-text {
   color: #1DA1F2 !important;
 }
@@ -448,6 +452,10 @@ padding: 4px;
 
 .bg-light-green {
   background-color: #21ad93 !important;
+}
+
+.bg-navy-blue {
+  background-color: #140092 !important;
 }
 
 .bg-blue {
