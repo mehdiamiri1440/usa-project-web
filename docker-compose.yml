@@ -112,6 +112,7 @@ services:
       - MYSQL_DATABASE=${DB_DATABASE}
       - MYSQL_USER=dbuser
       - MYSQL_PASSWORD=${DB_PASSWORD}
+    command: mysqld --innodb-buffer-pool-size=6G
     networks:
       backend:
         aliases:
