@@ -333,10 +333,6 @@ label {
 
 <template>
   <div v-if="$parent.product.main.id" class="wrapper-bg main-product-wrapper">
-    <PriceModal
-      :product-name="$parent.product.main.product_name"
-      :price="$parent.product.main.min_sale_price"
-    />
     <!--article modal-->
 
     <div
@@ -700,9 +696,9 @@ label {
               ></span>
             </li>
           </ul>
-          <div class="show-button-wrapper">
+          <div class="show-button-wrapper text-center">
             <button
-              @click="openPriceModal()"
+              @click="$parent.openPriceModal()"
               class="main-button-alt orange-text"
             >
               استعلام قیمت
@@ -839,11 +835,11 @@ label {
 
 <script >
 import Carousel from "./carousel";
-import PriceModal from "./price-modal.vue";
+
 export default {
   components: {
     Carousel,
-    PriceModal,
+    
   },
   methods: {
     getNumberWithCommas: function (number) {
@@ -861,9 +857,6 @@ export default {
           return data + " " + "تن";
         }
       } else return "";
-    },
-    openPriceModal() {
-      $(".price-modal").addClass("show-custom-modal");
     },
   },
 };

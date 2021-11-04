@@ -341,6 +341,10 @@ button.send-message-button {
       :is-chat="isChat"
       :product="product"
     />
+     <PriceModal
+      :product-name="product.main.product_name"
+      :price="product.main.min_sale_price"
+    />
     <main id="main" class="row">
       <div class="col-xs-12">
         <div class="row">
@@ -568,6 +572,7 @@ import swal from "../../../../../sweetalert.min.js";
 import StickySidebar from "../../../../../stickySidebar.js";
 // import registerInquerForm from "../../main_components/register-inquiry-form.vue";
 import { isElementShownInView } from "../../../../../custom";
+import PriceModal from "./price-modal.vue";
 
 export default {
   components: {
@@ -577,6 +582,7 @@ export default {
     RegisterModal,
     RelatedProducts,
     // registerInquerForm,
+    PriceModal,
   },
   props: ["str", "assets", "userType", "categoryList", "currentUser"],
   data: function () {
@@ -1059,6 +1065,9 @@ export default {
     },
     scrollToTop() {
       window.scrollTo(0, 0);
+    },
+     openPriceModal() {
+      $(".price-modal").addClass("show-custom-modal");
     },
   },
   created() {

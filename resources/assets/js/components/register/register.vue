@@ -3,91 +3,10 @@ p,
 span {
   line-height: 1.5;
 }
-.text-loader {
-  display: block;
-  width: 100%;
-  text-align: center;
-  font-size: 16px;
-  position: absolute;
-  bottom: 37%;
-  right: 10px;
-}
-
-.loading-container {
-  width: 100%;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
-  background: #fff;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  margin: 0;
-  padding: 0;
-  z-index: 1100;
-  position: fixed;
-}
-
-.lds-ring {
-  display: inline-block;
-
-  position: absolute;
-
-  width: 64px;
-
-  height: 64px;
-
-  left: 50%;
-
-  top: 50%;
-
-  transform: translate(-50%, -50%);
-}
-
-.lds-ring div {
-  box-sizing: border-box;
-  display: block;
-  position: absolute;
-  width: 51px;
-  height: 51px;
-  margin: 6px;
-  border: 5px solid #00c569;
-  border-radius: 50%;
-  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-  border-color: #00c569 transparent transparent transparent;
-}
-
-.lds-ring-alt {
-  display: block;
-  margin-top: 50px;
-  direction: rtl;
-  text-align: center;
-}
-
-.lds-ring div:nth-child(1) {
-  animation-delay: -0.45s;
-}
-
-.lds-ring div:nth-child(2) {
-  animation-delay: -0.3s;
-}
-
-.lds-ring div:nth-child(3) {
-  animation-delay: -0.15s;
-}
-
-@keyframes lds-ring {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
 
 #main-content {
   padding-bottom: 0;
+  padding-top: 80px;
 }
 
 .error-message {
@@ -97,14 +16,15 @@ span {
 
 #main {
   margin-top: 21px;
-
   height: 100%;
-
   position: relative;
-
   width: 100%;
   overflow: hidden;
-  min-height: 768px;
+  min-height: 400px;
+}
+
+#main.latest-step {
+  min-height: 650px;
 }
 
 input[type="number"] {
@@ -131,74 +51,6 @@ input[type="number"]::-webkit-outer-spin-button {
   margin: 40px auto;
 }
 
-/*progressbar styles*/
-
-.wrapper-progressbar {
-  position: relative;
-}
-
-.progressbar-items {
-  display: flex;
-  justify-content: space-between;
-  direction: rtl;
-  position: relative;
-}
-
-.progrees-item {
-  text-align: center;
-  color: #bebebe;
-}
-
-.progrees-item p {
-  font-size: 12px;
-}
-
-.progrees-item span {
-  width: 20px;
-  height: 20px;
-  font-size: 13px;
-  background: #bebebe;
-  border-radius: 50px;
-  color: #fff;
-  display: inline-block;
-  margin-bottom: 6px;
-  padding-top: 1px;
-}
-
-.progrees-item.active {
-  color: #333;
-}
-
-.progrees-item.active p {
-  font-weight: bold;
-}
-
-.progrees-item.active span {
-  background: #00c569;
-}
-
-.custom-progressbar {
-  display: block;
-  height: 3px;
-  background: #bebebe;
-  right: 20px;
-  left: 21px;
-  position: absolute;
-  top: 9px;
-  z-index: 0;
-}
-
-.custom-progressbar.active {
-  background: #00c569;
-  width: 0;
-  left: initial;
-}
-
-.custom-progressbar .progress-bar {
-  background: #00c569;
-  float: right;
-}
-
 /*main contents styles */
 .main-contents {
   background: #fff;
@@ -206,62 +58,11 @@ input[type="number"]::-webkit-outer-spin-button {
   overflow: hidden;
   margin-top: 16px;
   border: 1px solid #e0e0e0;
-  height: 500px;
+  min-height: 350px;
   position: relative;
-}
-
-/*main content headers styles*/
-.main-content-header {
-  direction: rtl;
-  text-align: center;
-  background: #00c569;
-  color: #fff;
-  padding: 22px 0;
-}
-
-.main-content-header a {
-  color: #fff;
-  position: relative;
-  right: 0;
-  transition: 300ms;
-}
-
-.main-content-header a,
-.main-content-header h1 {
-  font-size: 23px;
-}
-
-.main-content-header a:hover {
-  transition: 300ms;
-}
-
-.main-content-header a.arrow-left:hover {
-  right: 5px;
-}
-
-.main-content-header a.arrow-right:hover {
-  right: -5px;
-}
-
-/*main content footer style*/
-.main-content-footer {
-  position: absolute;
-
-  bottom: 0;
-}
-
-.footer-content {
-  direction: rtl;
-  text-align: center;
-  background: #f6f6f6;
-  font-size: 11px;
-  padding: 5px;
-  color: #333;
-}
-
-.footer-content i {
-  font-size: 12px;
-  color: #00c569;
+  display: flex;
+  align-items: center;
+  padding: 15px;
 }
 
 @media screen and (max-width: 767px) {
@@ -269,12 +70,22 @@ input[type="number"]::-webkit-outer-spin-button {
     padding: 0;
   }
 
+  #main-content {
+    padding-top: 50px;
+  }
+
   .progrees-item p {
     display: none;
   }
 
   .main-wrapper {
-    top: calc(50% - 30px);
+    top: 0;
+    left: 0;
+    transform: translate(0);
+  }
+
+  #main.latest-step {
+    margin: 0;
   }
 
   .progressbar-items {
@@ -283,6 +94,8 @@ input[type="number"]::-webkit-outer-spin-button {
 
   .main-contents {
     border-radius: 0;
+    border: none;
+    margin: 0;
   }
 
   .main-content-header {
@@ -343,136 +156,16 @@ input[type="number"]::-webkit-outer-spin-button {
 <template>
   <div>
     <div v-if="!loginCheckerLoading">
-      <main id="main" class="container">
-        <div class="main-wrapper col-xs-12">
-          <div class="row">
-            <div class="wrapper-progressbar">
-              <div class="custom-progressbar">
-                <div
-                  class="progress-bar"
-                  role="progressbar"
-                  aria-valuenow="21"
-                  aria-valuemin="0"
-                  aria-valuemax="100"
-                ></div>
-              </div>
-              <div class="custom-progressbar active">
-                <div
-                  class="progress-bar"
-                  role="progressbar"
-                  aria-valuenow="21"
-                  aria-valuemin="0"
-                  aria-valuemax="100"
-                ></div>
-              </div>
-
-              <div class="progressbar-items">
-                <a class="progrees-item active">
-                  <span>1</span>
-                  <p>ثبت موبایل</p>
-                </a>
-
-                <a class="progrees-item" :class="{ active: currentStep >= 2 }">
-                  <span>2</span>
-                  <p>تایید شماره</p>
-                </a>
-
-                <a class="progrees-item" :class="{ active: currentStep >= 3 }">
-                  <span>3</span>
-                  <p>مشخصات فردی</p>
-                </a>
-
-                <a class="progrees-item" :class="{ active: currentStep >= 4 }">
-                  <span>4</span>
-                  <p>انتخاب آدرس</p>
-                </a>
-
-                <a class="progrees-item" :class="{ active: currentStep >= 5 }">
-                  <span>5</span>
-                  <p>حساب کاربری</p>
-                </a>
-
-                <a class="progrees-item" :class="{ active: currentStep >= 6 }">
-                  <span>6</span>
-                  <p>حوزه فعالیت</p>
-                </a>
-              </div>
-            </div>
-
-            <div class="main-contents">
-              <header class="main-content-header col-xs-12">
-                <div class="row">
-                  <p class="arrow-left col-xs-2">
-                    <!-- <i class="fa fa-arrow-left"></i> -->
-                  </p>
-
-                  <h1 class="col-xs-8">ثبت نام در باسکول</h1>
-
-                  <a
-                    href="#"
-                    v-if="currentStep != 1 && currentStep != 6"
-                    @click.prevent="goToStep(currentStep - 1)"
-                    class="arrow-right col-xs-2"
-                  >
-                    <i class="fa fa-arrow-right"></i>
-                  </a>
-
-                  <a
-                    href="#"
-                    v-show="currentStep == 6"
-                    @click.prevent="goToStep(currentStep - 1)"
-                    class="arrow-right hidden-xs hidden-sm col-xs-2"
-                  >
-                    <i class="fa fa-arrow-right"></i>
-                  </a>
-                  <a
-                    href="#"
-                    v-show="currentStep == 6"
-                    @click.prevent="goToStep(currentStep - 2)"
-                    class="arrow-right hidden-md hidden-lg col-xs-2"
-                  >
-                    <i class="fa fa-arrow-right"></i>
-                  </a>
-                </div>
-              </header>
-
-              <main class="col-xs-12">
-                <div class="row">
-                  <div
-                    class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2"
-                  >
-                    <div class="wraper-main-contents row">
-                      <RegisterNumber
-                        @getPhoneNumber="setPhoneNumber"
-                        v-if="currentStep == 1"
-                        :parent-errors="errors.phone[0]"
-                      />
-
-                      <VerifyCode
-                        @getVerificationCode="setVerificationCode"
-                        v-else-if="currentStep == 2"
-                        :parent-errors="errors.verification_code[0]"
-                      />
-
-                      <PersonalInformatin v-else-if="currentStep == 3" />
-
-                      <Location v-else-if="currentStep == 4" />
-
-                      <UserAccount v-else-if="currentStep == 5" />
-
-                      <ActivityDomain v-else-if="currentStep == 6" />
-                    </div>
-                  </div>
-                </div>
-              </main>
-
-              <footer class="main-content-footer col-xs-12">
-                <div class="footer-content row">
-                  <i class="fa fa-star"></i>
-                  فرصت های جدید را خلق کنید و در زمان و هزینه صرفه جویی کنید
-                </div>
-              </footer>
-            </div>
+      <main
+        id="main"
+        class="container"
+        :class="{ 'latest-step': currentStep == 3 }"
+      >
+        <div class="main-wrapper">
+          <div class="main-contents text-rtl">
+            <RegisterNumber v-if="currentStep == 1" />
+            <VerifyCode v-else-if="currentStep == 2" />
+            <ComplementaryInfo v-else-if="currentStep == 3" />
           </div>
         </div>
       </main>
@@ -480,11 +173,6 @@ input[type="number"]::-webkit-outer-spin-button {
     <div v-else>
       <div class="loading-container">
         <div class="image-wrapper">
-          <a v-show="isImageLoad">
-            <transition>
-              <img src @load="ImageLoaded" alt="alt" />
-            </transition>
-          </a>
           <div class="text-loader text-muted">
             ... در حال انتقال به پنل کاربری
           </div>
@@ -504,12 +192,9 @@ input[type="number"]::-webkit-outer-spin-button {
 
 <script>
 import { eventBus } from "../../router/router";
-import RegisterNumber from "./register_steps/register_number";
-import VerifyCode from "./register_steps/verify_code";
-import PersonalInformatin from "./register_steps/personal_information";
-import Location from "./register_steps/location";
-import UserAccount from "./register_steps/user_account";
-import ActivityDomain from "./register_steps/activity_domain";
+import RegisterNumber from "./register-steps/register-number";
+import VerifyCode from "./register-steps/verify-code";
+import ComplementaryInfo from "./register-steps/complementary-info.vue";
 import device from "device-uuid/lib/device-uuid";
 import swal from "../../sweetalert.min.js";
 
@@ -517,10 +202,7 @@ export default {
   components: {
     RegisterNumber,
     VerifyCode,
-    PersonalInformatin,
-    Location,
-    UserAccount,
-    ActivityDomain,
+    ComplementaryInfo,
   },
   props: ["isUserLogin", "userType"],
   data: function () {
@@ -540,8 +222,8 @@ export default {
         now: null,
       },
       step3: {
-        first_name: "",
-        last_name: "",
+        name: "",
+        family: "",
         password: "",
         re_password: "",
         user_name: "",
@@ -556,63 +238,29 @@ export default {
         activity_type: "",
         rules: 0,
         categoryList: "",
-        categoryId: "",
-        formSubmitActive: true,
+        category_id: "",
       },
       errors: {
-        first_name: [],
-        last_name: [],
-        province: [],
-        city: [],
-        user_name: [],
-        national_code: [],
-        password: [],
-        password_conf: [],
-        sex: [],
-        verification_code: [],
-        phone: [],
-        category_id: [],
+        name: "",
+        family: "",
+        province: "",
+        city: "",
+        verification_code: "",
+        phone: "",
+        category_id: "",
+        activity_type: "",
       },
       errorFlag: false,
       userNameUnique: true,
       nationalCodeUnique: true,
       popUpMsg: "",
       verifyCodeBtnLoading: false,
+      formSubmitActive: false,
     };
   },
   methods: {
-    ImageLoaded: function () {
-      this.isImageLoad = true;
-    },
-    loadImage: function () {
-      this.isImageLoad = false;
-    },
-    setPhoneNumber(phoneNumber) {
-      this.step1.phone = phoneNumber;
-      this.send_verification_code();
-    },
-    setVerificationCode(vaerifyCode) {
-      this.step2.verification_code = vaerifyCode;
-      this.verify_code();
-    },
-    setPersonalInformation() {
-      this.firstNameValidator(this.step3.first_name);
-      this.lastNameValidator(this.step3.last_name);
-      if (
-        this.errors.first_name.length == 0 &&
-        this.errors.last_name.length == 0
-      ) {
-        this.goToStep(4);
-      }
-    },
-    setLocation(isUserMobile) {
-      if (isUserMobile) {
-        this.getCategory();
-        this.step3.password = this.makeRandomString(8);
-        this.goToStep(6);
-      } else {
-        this.goToStep(5);
-      }
+    setLocation() {
+      this.getCategory();
     },
     makeRandomString(length) {
       var result = "";
@@ -626,17 +274,6 @@ export default {
       }
       return result;
     },
-    setAccount() {
-      // this.userNameValidator(this.step3.user_name);
-      this.passwordValidator(this.step3.password);
-      if (
-        // !this.errors.user_name[0] &&
-        !this.errors.password[0]
-        //&& !this.errors.password_conf[0]
-      ) {
-        this.register_details();
-      }
-    },
     stopLoader: function () {
       eventBus.$emit("isLoading", false);
     },
@@ -648,38 +285,12 @@ export default {
       }
 
       this.currentStep = step;
-      this.checkLevel();
       this.scrollToTop();
     },
-    checkLevel() {
-      var progressElement = $(".custom-progressbar.active");
-      switch (this.currentStep) {
-        case 1:
-          progressElement.css("width", "0");
-          break;
-        case 2:
-          progressElement.css("width", "18%");
-          break;
-        case 3:
-          progressElement.css("width", "36%");
-          break;
-        case 4:
-          progressElement.css("width", "54%");
-          break;
-        case 5:
-          progressElement.css("width", "73%");
-          break;
-        case 6:
-          progressElement.css("width", "90%");
-          break;
-      }
-    },
-    send_verification_code: function () {
+    sendVerificationCode: function () {
       this.verifyCodeBtnLoading = true;
-
       this.step2.reSendCode = false;
       this.step1.sendCode = false;
-
       var self = this;
 
       this.step2.now = new Date().getTime();
@@ -697,7 +308,7 @@ export default {
           self.step1.sendCode = true;
 
           self.step2.verification_code = "";
-          self.errors.verification_code = [];
+          self.errors.verification_code = "";
 
           setTimeout(function () {
             self.step2.reSendCode = true;
@@ -719,11 +330,11 @@ export default {
           self.registerComponentStatistics(
             "Register-Error",
             "phone-number-verification",
-            "error:" + self.errors.phone[0]
+            "error:" + self.errors.phone
           );
         });
     },
-    verify_code: function () {
+    verifyCode: function () {
       var self = this;
 
       self.verifyCodeBtnLoading = true;
@@ -753,12 +364,11 @@ export default {
             }
           } else {
             self.goToStep(2);
-            self.errors.verification_code = [];
-            self.errors.verification_code.push(response.data.msg);
+            self.errors.verification_code = response.data.msg;
             self.registerComponentStatistics(
               "Register-Error",
               "verification-code-wrong",
-              "error:" + self.errors.verification_code[0]
+              "error:" + self.errors.verification_code
             );
           }
         })
@@ -766,51 +376,41 @@ export default {
           self.verifyCodeBtnLoading = false;
 
           self.goToStep(2);
-          self.errors.verification_code = [];
-          self.errors.verification_code.push("وارد کردن کد الزامی است.");
+          self.errors.verification_code = "";
+          self.errors.verification_code = "وارد کردن کد الزامی است.";
           self.registerComponentStatistics(
             "Register-Error",
             "verification-code-empty",
-            "error:" + self.errors.verification_code[0]
+            "error:" + self.errors.verification_code
           );
         });
     },
-    register_details: function () {
-      this.errorFlag = false;
-
-      this.checkStep3();
-
-      if (
-        this.errorFlag === false &&
-        this.userNameUnique === true &&
-        this.nationalCodeUnique === true
-      ) {
-        this.goToStep(6);
-        this.getCategory();
-      }
-    },
     submitForm: function () {
       var self = this;
-      this.step4.formSubmitActive = false;
-      this.errorFlag = false;
 
-      this.checkStep4();
+      this.stepsValidator();
 
       var object = {
         phone: this.toLatinNumbers(this.step1.phone),
-        first_name: this.step3.first_name,
-        last_name: this.step3.last_name,
+        first_name: this.step3.name,
+        last_name: this.step3.family,
         verification_code: this.toLatinNumbers(this.step2.verification_code),
-        password: this.step3.password,
+        password: this.makeRandomString(8),
         user_name: this.step3.user_name,
         sex: this.step3.sex,
         province: this.step3.province,
         city: this.step3.city,
         activity_type: this.step4.activity_type,
         national_code: this.toLatinNumbers(this.step3.national_code),
-        category_id: this.step4.categoryId,
+        category_id: this.step4.category_id,
       };
-      if (this.errorFlag === false) {
+
+      if (
+        this.errorFlag === false &&
+        !this.errors.name &&
+        !this.errors.family
+      ) {
+        this.formSubmitActive = true;
         axios
           .post("api/v1/users", object)
           .then(function (response) {
@@ -853,7 +453,7 @@ export default {
             }
           })
           .catch(function (err) {
-            self.formSubmitActive = true;
+            self.formSubmitActive = false;
             self.registerComponentExceptions("User register API failed", true);
           });
       }
@@ -861,150 +461,137 @@ export default {
     setCategoryId: function (e) {
       e.preventDefault();
 
-      this.step4.categoryId = $(e.target).val();
+      this.step4.category_id = $(e.target).val();
     },
-    checkStep3: function () {
-      // this.userNameValidator(this.step3.user_name);
-      this.firstNameValidator(this.step3.first_name);
-      this.lastNameValidator(this.step3.last_name);
-      this.provinceValidator(this.step3.province);
-      this.cityValidator(this.step3.city);
-      this.nationalCodeValidator(this.step3.national_code);
-      this.passwordValidator(this.step3.password);
-      this.sexValidator(this.step3.sex);
-
-      if (this.errorFlag) {
-        this.registerComponentStatistics(
-          "Register-Error",
-          "step-3",
-          "validation error in step 3"
-        );
+    validateErrors() {
+      if (
+        this.step3.name.length &&
+        this.step3.family.length &&
+        this.step3.province &&
+        this.step3.city &&
+        this.step4.activity_type !== "" &&
+        this.step4.category_id !== ""
+      ) {
+        this.errorFlag = false;
       }
     },
-    checkStep4: function () {
+    stepsValidator() {
+      this.errorFlag = false;
+      if (this.errors.name == "" && this.errors.family == "") {
+        this.firstNameValidator(this.step3.name);
+        this.lastNameValidator(this.step3.family);
+      }
+      this.provinceValidator(this.step3.province);
+      this.cityValidator(this.step3.city);
+      this.categoryIdValidator(this.step4.category_id);
       this.activityTypeValidator(this.step4.activity_type);
-      this.categoryIdValidator(this.step4.categoryId);
-
-      if (this.errorFlag) {
-        this.registerComponentStatistics(
-          "Register-Error",
-          "step-4",
-          "validation error in step 4"
-        );
+    },
+    textValidator(text, name) {
+      if (text != "") {
+        if (!this.validateRegx(text, /^[\u0600-\u06FF\s]+$/)) {
+          return `لطفا ${name} را به فارسی وارد کنید`;
+        } else {
+          return false;
+        }
       }
     },
     firstNameValidator: function (name) {
-      this.errors.first_name = [];
+      this.errors.name = "";
 
       if (name === "") {
-        this.errors.first_name.push("فیلد الزامی است");
-        this.errorFlag = true;
-      }
-      if (!this.validateRegx(name, /^[\u0600-\u06FF\s]+$/)) {
-        this.errors.first_name.push("فیلد باید فارسی باشد");
+        this.errors.name = "نام خود را وارد کنید.";
         this.errorFlag = true;
       }
 
-      if (this.errors.first_name[0]) {
-        this.registerComponentStatistics(
-          "Register-Error",
-          "first-name",
-          "input:" + name + " Error:" + this.errors.first_name[0]
-        );
+      if (this.errors.name) {
+        // update for analytics
+        // this.registerComponentStatistics(
+        //   "Invite-Register-Error",
+        //   "first-name",
+        //   "input:" + name + " Error:" + this.errors.name
+        // );
       }
     },
-    lastNameValidator: function (name) {
-      this.errors.last_name = [];
+    lastNameValidator: function (family) {
+      this.errors.family = "";
 
-      if (name === "") {
-        this.errors.last_name.push("فیلد الزامی است");
-        this.errorFlag = true;
-      }
-      if (!this.validateRegx(name, /^[\u0600-\u06FF\s]+$/)) {
-        this.errors.last_name.push("فیلد باید فارسی باشد");
+      if (family === "") {
+        this.errors.family = "نام خانوادگی خود را وارد کنید.";
         this.errorFlag = true;
       }
 
-      if (this.errors.last_name[0]) {
-        this.registerComponentStatistics(
-          "Register-Error",
-          "last-name",
-          "input:" + name + " Error:" + this.errors.last_name[0]
-        );
+      if (this.errors.family) {
+        // update for analytics
+        // this.registerComponentStatistics(
+        //   "Invite-Register-Error",
+        //   "last-name",
+        //   "input:" + family + " Error:" + this.errors.family
+        // );
       }
     },
+
     provinceValidator: function (province) {
-      this.errors.province = [];
+      this.errors.province = "";
 
-      if (province === "") {
-        this.errors.province.push("فیلد استان الزامی است");
-        this.errorFlag = true;
-      }
-      if (!this.validateRegx(province, /^[\u0600-\u06FF\s]+$/)) {
-        this.errors.province.push("استان باید فارسی باشد");
+      if (province == "") {
+        this.errors.province = "استان خود را انتخاب کنید.";
         this.errorFlag = true;
       }
 
-      if (this.errors.province[0]) {
-        this.registerComponentStatistics(
-          "Register-Error",
-          "province",
-          "input:" + province + " Error:" + this.errors.province[0]
-        );
+      if (this.errors.province) {
+        // update for analytics
+        // this.registerComponentStatistics(
+        //   "Invite-Register-Error",
+        //   "province",
+        //   "input:" + province + " Error:" + this.errors.province
+        // );
       }
     },
     cityValidator: function (city) {
-      this.errors.city = [];
+      this.errors.city = "";
 
       if (city === "") {
-        this.errors.city.push("فیلد شهر الزامی است");
+        this.errors.city = "شهر خود را انتخاب کنید.";
         this.errorFlag = true;
       }
-      if (!this.validateRegx(city, /^[\u0600-\u06FF\s]+$/)) {
-        this.errors.city.push("شهر باید فارسی باشد");
-        this.errorFlag = true;
-      }
-
-      if (this.errors.city[0]) {
-        this.registerComponentStatistics(
-          "Register-Error",
-          "city",
-          "input:" + city + " Error:" + this.errors.city[0]
-        );
+      if (this.errors.city) {
+        // update for analytics
+        // this.registerComponentStatistics(
+        //   "Invite-Register-Error",
+        //   "city",
+        //   "input:" + city + " Error:" + this.errors.city
+        // );
       }
     },
-    userNameValidator: function (userName) {
-      if (this.userNameUnique === true) {
-        this.errors.user_name = [];
-      }
-
-      if (userName === "") {
-        this.errors.user_name.push("نام کاربری الزامی است");
-
-        this.errorFlag = true;
-      }
-      if (!this.validateRegx(userName, /^\w+$/)) {
-        this.errors.user_name.push(" شامل حروف غیر مجاز است");
+    categoryIdValidator: function (categoryId) {
+      this.errors.category_id = "";
+      if (categoryId === "") {
+        this.errors.category_id = "حوزه فعالیت خود را انتخاب کنید.";
         this.errorFlag = true;
       }
 
-      if (this.errors.user_name[0]) {
-        this.registerComponentStatistics(
-          "Register-Error",
-          "username",
-          "input:" + username + " Error:" + this.errors.last_name[0]
-        );
+      if (this.errors.category_id) {
+        // update for analytics
+        // this.registerComponentStatistics(
+        //   "Invite-Register-Error",
+        //   "category-selection",
+        //   "input:" + categoryId + " Error:" + this.errors.category_id
+        // );
       }
     },
-    nationalCodeValidator: function (code) {
-      code = this.toLatinNumbers(code);
-
-      if (this.nationalCodeUnique === true) {
-        this.errors.national_code = [];
-      }
-      if (code !== "" && !this.isIrNationalCode(code)) {
-        this.errors.national_code.push("کد ملی معتبر نیست");
+    activityTypeValidator: function (activityType) {
+      this.errors.activity_type = "";
+      if (activityType === "") {
+        this.errors.activity_type = " نوع فعالیت خود را انتخاب کنید.";
         this.errorFlag = true;
+      }
+      if (this.errors.activity_type) {
+        // update for analytics
+        // this.registerComponentStatistics(
+        //   "Invite-Register-Error",
+        //   "activity-type",
+        //   "input:" + activityType + " Error:" + this.errors.activity_type
+        // );
       }
     },
     isIrNationalCode: function (input) {
@@ -1024,88 +611,7 @@ export default {
 
       return (sum < 2 && check == sum) || (sum >= 2 && check + sum == 11);
     },
-    passwordValidator: function (pass) {
-      this.errors.password = [];
-      this.errors.password_conf = [];
 
-      if (pass === "") {
-        this.errors.password.push("رمز عبور الزامی است");
-        this.errorFlag = true;
-      }
-      if (pass.length < 8) {
-        this.errors.password.push("رمز عبور حداقل ۸ کاراکتر باشد");
-        this.errorFlag = true;
-      }
-      // if (passConf === "") {
-      //     this.errors.password_conf.push("تکرار رمز عبور الزامی است");
-      //     this.errorFlag = true;
-      // }
-      // if (passConf !== pass) {
-      //     this.errors.password_conf.push("رمز عبور مطابقت ندارد");
-      //     this.errorFlag = true;
-      // }
-
-      if (this.errors.password[0]) {
-        this.registerComponentStatistics(
-          "Register-Error",
-          "password",
-          "input:" + pass + " Error:" + this.errors.password[0]
-        );
-      }
-      // if (this.errors.password_conf[0]) {
-      //     this.registerComponentStatistics(
-      //         "Register-Error",
-      //         "passwordConfirmation",
-      //         "input:" + passConf + " Error:" + this.errors.password_conf[0]
-      //     );
-      // }
-    },
-    sexValidator: function (sex) {
-      this.errors.sex = [];
-
-      if (sex === "") {
-        this.errors.sex.push("جنسیت الزامی است");
-        this.errorFlag = true;
-      }
-
-      if (this.errors.sex[0]) {
-        this.registerComponentStatistics(
-          "Register-Error",
-          "sex",
-          "input:" + sex + " Error:" + this.errors.sex[0]
-        );
-      }
-    },
-    categoryIdValidator: function (categoryId) {
-      this.errors.category_id = [];
-      if (categoryId === "") {
-        this.errors.category_id.push("انتخاب حوزه ی فعالیت الزامی است.");
-        this.errorFlag = true;
-      }
-
-      if (this.errors.category_id[0]) {
-        this.registerComponentStatistics(
-          "Register-Error",
-          "category-selection",
-          "input:" + categoryId + " Error:" + this.errors.category_id[0]
-        );
-      }
-    },
-    activityTypeValidator: function (activityType) {
-      this.errors.activity_type = [];
-      if (activityType === "") {
-        this.errors.activity_type.push("انتخاب نوع کاربری الزامی است.");
-        this.errorFlag = true;
-      }
-
-      if (this.errors.activity_type[0]) {
-        this.registerComponentStatistics(
-          "Register-Error",
-          "activity-type",
-          "input:" + activity_type + " Error:" + this.errors.activity_type[0]
-        );
-      }
-    },
     validateRegx: function (input, regx) {
       return regx.test(input);
     },
@@ -1117,7 +623,7 @@ export default {
         );
     },
     getCategoryId: function (categoryId) {
-      this.step4.categoryId = categoryId;
+      this.step4.category_id = categoryId;
     },
     getProvinceList: function () {
       axios
@@ -1286,61 +792,6 @@ export default {
         self.updateCounterDownTimer(seconds);
       }, 1000);
     },
-    "step3.user_name": function () {
-      var self = this;
-      if (this.step3.user_name.length > 0) {
-        axios
-          .post("/user/is_user_name_unique", {
-            user_name: this.step3.user_name,
-          })
-          .then(function (response) {
-            if (response.data.status === true) {
-              self.errors.user_name = [];
-              self.userNameUnique = true;
-            }
-          })
-          .catch(function (err) {
-            self.errors.user_name = [];
-            self.errors.user_name.push("نام کاربری قبلا گرفته شده");
-
-            self.errorFlag = true;
-            self.userNameUnique = false;
-          });
-      }
-    },
-    "step3.national_code": function () {
-      var self = this;
-
-      this.step3.national_code = this.toLatinNumbers(this.step3.national_code);
-
-      if (
-        this.step3.national_code.length > 0 &&
-        this.step3.national_code < 10
-      ) {
-        this.errors.national_code = [];
-        this.errors.national_code.push("کد ملی ۱۰ رقمی است");
-
-        this.errorFlag = true;
-      } else if (this.step3.national_code.length === 10) {
-        axios
-          .post("user/is_national_code_unique", {
-            national_code: this.toLatinNumbers(this.step3.national_code),
-          })
-          .then(function (response) {
-            if (response.data.status === true) {
-              self.errors.national_code = [];
-              self.nationalCodeUnique = true;
-            }
-          })
-          .catch(function (err) {
-            self.errors.national_code = [];
-            self.errors.national_code.push("کد ملی قبلا گرفته شده");
-
-            self.errorFlag = true;
-            self.nationalCodeUnique = false;
-          });
-      }
-    },
   },
   created() {
     var self = this;
@@ -1370,7 +821,6 @@ export default {
         // self.$nextTick(this.stopLoader());
       }
     };
-    this.checkLevel();
   },
   updated: function () {
     this.$nextTick(this.stopLoader());
