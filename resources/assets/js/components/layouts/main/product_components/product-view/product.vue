@@ -117,34 +117,9 @@ label {
   line-height: 1.618;
 }
 
-.actions .green-button,
-.send-message-button {
-  font-size: 14px;
-  font-weight: bold;
-  width: initial;
-  padding: 8px 15px;
-  border-radius: 8px;
-}
-
-.send-message-button {
-  background: none;
-  border-radius: 8px;
-  border: 1px solid #404b55 !important;
-  color: #404b55 !important;
-  transition: 300ms;
-}
 .phone-call {
   margin-left: 15px;
   background: linear-gradient(90deg, #21ad93, #00c569);
-}
-
-.send-message-button:hover {
-  background: none;
-  border-radius: 8px;
-  border: 1px solid #404b55 !important;
-  background: #404b55 !important;
-  color: #fff !important;
-  transition: 300ms;
 }
 
 .actions .elevator-event {
@@ -229,6 +204,7 @@ label {
   display: flex;
   justify-content: space-between;
   direction: rtl;
+  margin: 15px auto;
 }
 
 .actions .min-button-style {
@@ -546,14 +522,11 @@ label {
               $parent.currentUser.user_info.is_buyer
             "
             @click.prevent="$parent.activePhoneCall(false)"
-            class="green-button min-button-style phone-call hidden-xs hidden-sm"
+            class="main-button bg-orange white-text hidden-xs hidden-sm"
             :class="{ disable: $parent.isActivePhone }"
             :disabled="$parent.isActivePhone"
           >
-            <i
-              class="fas fa-phone-square-alt"
-              v-if="!$parent.getPhoneLoader"
-            ></i>
+            <i class="fas fa-phone-alt" v-if="!$parent.getPhoneLoader"></i>
             <div v-else class="spinner-border">
               <span class="sr-only"></span>
             </div>
@@ -565,14 +538,11 @@ label {
               $parent.product.user_info.has_phone
             "
             @click.prevent="$parent.loginModal(false)"
-            class="green-button min-button-style phone-call hidden-xs hidden-sm"
+            class="main-button bg-orange white-text hidden-xs hidden-sm"
             :class="{ disable: $parent.isActivePhone }"
             :disabled="$parent.isActivePhone"
           >
-            <i
-              class="fas fa-phone-square-alt"
-              v-if="!$parent.getPhoneLoader"
-            ></i>
+            <i class="fas fa-phone-alt" v-if="!$parent.getPhoneLoader"></i>
             <div v-else class="spinner-border">
               <span class="sr-only"></span>
             </div>
@@ -582,7 +552,13 @@ label {
           <button
             v-if="!$parent.isMyProfile && $parent.currentUser.user_info"
             @click.prevent="$parent.openChat($parent.product)"
-            class="hidden-xs hidden-sm min-button-style"
+            class="
+              hidden-xs hidden-sm
+              main-button
+              bg-soft-orange
+              orange-text
+              button-shadow
+            "
             :class="{
               'send-message-button':
                 $parent.product.user_info.has_phone &&
@@ -599,7 +575,13 @@ label {
           <button
             v-else-if="!$parent.currentUser.user_info"
             @click.prevent="$parent.loginModal(true)"
-            class="hidden-xs hidden-sm min-button-style"
+            class="
+              hidden-xs hidden-sm
+              main-button
+              bg-soft-orange
+              orange-text
+              button-shadow
+            "
             :class="{
               'send-message-button': $parent.product.user_info.has_phone,
               'bg-gradient-green': !$parent.product.user_info.has_phone,
@@ -660,7 +642,13 @@ label {
                 <i class="fa fa-user-circle"></i> فروشنده
               </span>
 
-              <span v-text="$parent.product.main.sub_category_name"></span>
+              <span>
+                {{
+                  $parent.product.user_info.first_name +
+                  " " +
+                  $parent.product.user_info.last_name
+                }}
+              </span>
             </li>
             <li>
               <span class="gray-text">
@@ -696,7 +684,10 @@ label {
               ></span>
             </li>
           </ul>
-          <div class="show-button-wrapper text-center">
+          <div
+            class="show-button-wrapper text-center"
+            v-if="!$parent.isMyProfile"
+          >
             <button
               @click="$parent.openPriceModal()"
               class="main-button-alt orange-text"
@@ -839,7 +830,6 @@ import Carousel from "./carousel";
 export default {
   components: {
     Carousel,
-    
   },
   methods: {
     getNumberWithCommas: function (number) {

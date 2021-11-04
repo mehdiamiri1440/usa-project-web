@@ -417,6 +417,9 @@ padding: 4px;
   font-size: 16px;
   position: relative;
   top: 2px;
+}
+
+.main-button i.fa-angle-left{
   right: 9px;
 }
 
@@ -481,6 +484,10 @@ padding: 4px;
 
 .bg-orange {
   background-color: #FF6600 !important;
+}
+
+.bg-soft-orange {
+  background-color: #FFD5A8 !important;
 }
 
 .bg-red {
