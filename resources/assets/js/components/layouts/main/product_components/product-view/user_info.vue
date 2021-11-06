@@ -666,7 +666,9 @@ a#note-close:not(.collapsed):after {
 
           <div class="user-info-actions text-rtl hidden-xs hidden-lg">
             <button
-              v-if="!$parent.isMyProfile && $parent.currentUser.user_info"
+              v-if="
+                !$parent.isMyProfile && $parent.updatedCurrentUser.user_info
+              "
               @click.prevent="$parent.openChatModal($parent.product)"
               class="green-button green-button-alt"
             >
@@ -675,8 +677,10 @@ a#note-close:not(.collapsed):after {
               ارسال پیام
             </button>
             <button
-              v-else-if="!$parent.isMyProfile && !$parent.currentUser.user_info"
-              @click.prevent="$parent.loginModal()"
+              v-else-if="
+                !$parent.isMyProfile && !$parent.updatedCurrentUser.user_info
+              "
+              @click.prevent="$parent.loginModal(true)"
               class="green-button green-button-alt"
             >
               <i class="fa fa-comment-alt"></i>
@@ -807,7 +811,7 @@ a#note-close:not(.collapsed):after {
       </div>
       <div class="user-info-actions text-rtl hidden-sm hidden-md">
         <button
-          v-if="!$parent.isMyProfile && $parent.currentUser.user_info"
+          v-if="!$parent.isMyProfile && $parent.updatedCurrentUser.user_info"
           @click.prevent="$parent.openChatModal($parent.product)"
           class="green-button green-button-alt"
         >
@@ -816,8 +820,10 @@ a#note-close:not(.collapsed):after {
           ارسال پیام
         </button>
         <button
-          v-else-if="!$parent.isMyProfile && !$parent.currentUser.user_info"
-          @click.prevent="$parent.loginModal()"
+          v-else-if="
+            !$parent.isMyProfile && !$parent.updatedCurrentUser.user_info
+          "
+          @click.prevent="$parent.loginModal(true)"
           class="green-button green-button-alt"
         >
           <i class="fa fa-comment-alt"></i>

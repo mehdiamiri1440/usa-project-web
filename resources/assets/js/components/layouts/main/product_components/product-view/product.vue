@@ -57,10 +57,6 @@ label {
   color: #474747;
 }
 
-.blue-button {
-  background: #000546;
-}
-
 .gray-text {
   color: #777;
 }
@@ -117,41 +113,9 @@ label {
   line-height: 1.618;
 }
 
-.actions .green-button,
-.send-message-button {
-  font-size: 14px;
-  font-weight: bold;
-  width: initial;
-  padding: 8px 15px;
-  border-radius: 8px;
-}
-
-.send-message-button {
-  background: none;
-  border-radius: 8px;
-  border: 1px solid #404b55 !important;
-  color: #404b55 !important;
-  transition: 300ms;
-}
 .phone-call {
   margin-left: 15px;
   background: linear-gradient(90deg, #21ad93, #00c569);
-}
-
-.send-message-button:hover {
-  background: none;
-  border-radius: 8px;
-  border: 1px solid #404b55 !important;
-  background: #404b55 !important;
-  color: #fff !important;
-  transition: 300ms;
-}
-
-.actions .elevator-event {
-  background: #e41c38;
-  color: #fff;
-  border-radius: 4px;
-  float: left;
 }
 
 .product-info-table {
@@ -229,17 +193,7 @@ label {
   display: flex;
   justify-content: space-between;
   direction: rtl;
-}
-
-.actions .min-button-style {
-  max-width: 225px;
-  width: 100% !important;
-  border-radius: 12px;
-  margin: 15px 5px;
-  padding: 10px 15px 9px;
-  border: none;
-  color: #fff;
-  font-size: 18px;
+  margin: 15px auto;
 }
 
 .actions .min-button-style.phone-call {
@@ -248,6 +202,11 @@ label {
 
 .actions .min-button-style.send-message-button {
   margin-right: 10px;
+}
+
+.actions .blue-button {
+  background: rgba(20, 0, 146, 0.25);
+  color: #140092;
 }
 
 @media screen and (max-width: 1199px) {
@@ -260,6 +219,10 @@ label {
   .actions {
     margin-top: 15px;
     width: 100%;
+  }
+
+  .actions .elevator-event {
+    margin-left: 10px;
   }
 
   .main-contents-wrapper h1 {
@@ -531,29 +494,48 @@ label {
         <div class="actions">
           <button
             v-if="$parent.isMyProfile"
-            class="elevator-event min-button-style green-button"
+            class="elevator-event main-button bg-navy-blue white-text"
             @click.prevent="$parent.elevatorEvent()"
           >
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M1.33301 14.6667H4.66634V11.3334H7.99967V8.00008H11.333V4.66675H14.6663"
+                stroke="white"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M0.916504 7.16671L7.1665 1.33337M7.1665 1.33337V4.66671M7.1665 1.33337H3.83317"
+                stroke="white"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+
             اعمال نردبان
-            <i class="fas fa-chart-line"></i>
           </button>
 
           <button
-            v-if="
+            v-else-if="
               !$parent.isMyProfile &&
-              $parent.currentUser.user_info &&
+              $parent.updatedCurrentUser.user_info &&
               $parent.product.user_info.has_phone &&
-              $parent.currentUser.user_info.is_buyer
+              $parent.updatedCurrentUser.user_info.is_buyer
             "
             @click.prevent="$parent.activePhoneCall(false)"
-            class="green-button min-button-style phone-call hidden-xs hidden-sm"
+            class="main-button bg-orange white-text hidden-xs hidden-sm"
             :class="{ disable: $parent.isActivePhone }"
             :disabled="$parent.isActivePhone"
           >
-            <i
-              class="fas fa-phone-square-alt"
-              v-if="!$parent.getPhoneLoader"
-            ></i>
+            <i class="fas fa-phone-alt" v-if="!$parent.getPhoneLoader"></i>
             <div v-else class="spinner-border">
               <span class="sr-only"></span>
             </div>
@@ -561,62 +543,56 @@ label {
           </button>
           <button
             v-else-if="
-              !$parent.currentUser.user_info &&
+              !$parent.updatedCurrentUser.user_info &&
               $parent.product.user_info.has_phone
             "
             @click.prevent="$parent.loginModal(false)"
-            class="green-button min-button-style phone-call hidden-xs hidden-sm"
+            class="main-button bg-orange white-text hidden-xs hidden-sm"
             :class="{ disable: $parent.isActivePhone }"
             :disabled="$parent.isActivePhone"
           >
-            <i
-              class="fas fa-phone-square-alt"
-              v-if="!$parent.getPhoneLoader"
-            ></i>
+            <i class="fas fa-phone-alt" v-if="!$parent.getPhoneLoader"></i>
             <div v-else class="spinner-border">
               <span class="sr-only"></span>
             </div>
             اطلاعات تماس
           </button>
-
           <button
-            v-if="!$parent.isMyProfile && $parent.currentUser.user_info"
-            @click.prevent="$parent.openChat($parent.product)"
-            class="hidden-xs hidden-sm min-button-style"
-            :class="{
-              'send-message-button':
-                $parent.product.user_info.has_phone &&
-                $parent.currentUser.user_info.is_buyer,
-              'bg-gradient-green':
-                !$parent.product.user_info.has_phone ||
-                ($parent.product.user_info.has_phone &&
-                  !$parent.currentUser.user_info.is_buyer),
-            }"
-          >
-            <i class="fas fa-comment-alt"></i>
-            چت با فروشنده
-          </button>
-          <button
-            v-else-if="!$parent.currentUser.user_info"
-            @click.prevent="$parent.loginModal(true)"
-            class="hidden-xs hidden-sm min-button-style"
-            :class="{
-              'send-message-button': $parent.product.user_info.has_phone,
-              'bg-gradient-green': !$parent.product.user_info.has_phone,
-            }"
-          >
-            <i class="fas fa-comment-alt"></i>
-            چت با فروشنده
-          </button>
-
-          <button
-            v-else
-            class="green-button blue-button min-button-style"
+            v-if="$parent.isMyProfile"
+            class="main-button bg-soft-blue navy-blue-text button-shadow"
             data-toggle="modal"
             :data-target="'#article-modal' + $parent.product.main.id"
           >
             <i class="fa fa-pencil-alt"></i>
             ویرایش
+          </button>
+          <button
+            v-else-if="!$parent.isMyProfile && $parent.currentUser.user_info"
+            @click.prevent="$parent.openChat($parent.product)"
+            class="
+              hidden-xs hidden-sm
+              main-button
+              bg-soft-orange
+              orange-text
+              button-shadow
+            "
+          >
+            <i class="fas fa-comment-alt"></i>
+            چت با فروشنده
+          </button>
+          <button
+            v-else-if="!$parent.updatedCurrentUser.user_info"
+            @click.prevent="$parent.loginModal(true)"
+            class="
+              hidden-xs hidden-sm
+              main-button
+              bg-soft-orange
+              orange-text
+              button-shadow
+            "
+          >
+            <i class="fas fa-comment-alt"></i>
+            چت با فروشنده
           </button>
 
           <div class="share hidden-md hidden-lg pull-left">
@@ -657,14 +633,20 @@ label {
           <ul class="product-info-list">
             <li>
               <span class="gray-text">
-                <i class="fa fa-folder"></i> دسته بندی
+                <i class="fa fa-user-circle"></i> فروشنده
               </span>
 
-              <span v-text="$parent.product.main.sub_category_name"></span>
+              <span>
+                {{
+                  $parent.product.user_info.first_name +
+                  " " +
+                  $parent.product.user_info.last_name
+                }}
+              </span>
             </li>
             <li>
               <span class="gray-text">
-                <i class="fa fa-map-marker-alt"></i> استان / شهر</span
+                <i class="fa fa-map-marker-alt"></i> آدرس</span
               >
 
               <span
@@ -686,7 +668,7 @@ label {
             </li>
             <li>
               <span class="gray-text">
-                <i class="fas fa-clipboard-check"></i> حداقل سفارش</span
+                <i class="fas fa-clipboard-check"></i> حداقل میزان سفارش</span
               >
 
               <span
@@ -695,14 +677,19 @@ label {
                 "
               ></span>
             </li>
-            <li v-if="!$parent.isMyProfile">
-              <span class="gray-text">
-                <i class="fas fa-dollar-sign"></i> قیمت</span
-              >
-
-              <span>استعلام بگیرید</span>
-            </li>
           </ul>
+          <div
+            class="show-button-wrapper text-center"
+            v-if="!$parent.isMyProfile"
+          >
+            <button
+              @click="$parent.openPriceModal()"
+              class="main-button-alt orange-text"
+            >
+              استعلام قیمت
+            </button>
+          </div>
+
           <div
             v-if="$parent.product.main.description"
             class="product-description"

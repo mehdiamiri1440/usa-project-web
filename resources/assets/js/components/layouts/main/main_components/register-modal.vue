@@ -276,13 +276,13 @@ export default {
     },
     openChatOrCall(currentUser) {
       setTimeout(() => {
-        this.$parent.currentUser = currentUser;
+        this.$parent.updatedCurrentUser = currentUser;
         // if (this.$parent.currentUser.user_info) {
         //   if (this.$parent.currentUser.user_info.is_seller == true) {
         //     this.$parent.showRegisterRequestBox = false;
         //   }
         // }
-        if (this.$parent.currentUser.user_info.is_seller) {
+        if (this.$parent.updatedCurrentUser.user_info.is_seller) {
           this.$parent.openChat(this.$parent.product);
         } else {
           if (this.isChat) {

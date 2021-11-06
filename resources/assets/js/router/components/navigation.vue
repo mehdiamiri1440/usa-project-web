@@ -99,7 +99,7 @@
 </style>
 <template>
   <nav class="custom-navigation">
-    <div class="item-wrapper" v-if="!$parent.userId">
+    <div class="item-wrapper" v-if="!$parent.user.id">
       <router-link
         v-for="(item, index) in masterRoutes"
         :key="index"
@@ -122,7 +122,7 @@
 
     <div
       class="item-wrapper"
-      v-else-if="$parent.userId && $parent.isSeller == 1"
+      v-else-if="$parent.user.id && $parent.user.type == 1"
     >
       <router-link
         v-for="(item, index) in sellerRoutes"

@@ -315,20 +315,20 @@
     />
 
     <router-view
-      :user-id="userId"
-      :is-seller="isSeller"
+      :user-id="user.id"
+      :is-seller="user.type"
       :assets="assets"
       :storage-path="storagePath"
-      :profile-photo="profilePhoto"
-      :user-full-name="userFullName"
+      :profile-photo="user.photo"
+      :user-full-name="user.name"
       :user-logout-path="userLogoutPath"
       :verified-user-content="verifiedUserContent"
     />
 
     <router-view
       name="buyer"
-      :user-id="userId"
-      :is-seller="isSeller"
+      :user-id="user.id"
+      :is-seller="user.type"
       :assets="assets"
       :storage-path="storagePath"
       :verified-user-content="verifiedUserContent"
@@ -337,8 +337,8 @@
     <router-view
       name="seller"
       class="h-100"
-      :user-id="userId"
-      :is-seller="isSeller"
+      :user-id="user.id"
+      :is-seller="user.type"
       :assets="assets"
       :storage-path="storagePath"
       :verified-user-content="verifiedUserContent"
@@ -397,6 +397,12 @@ export default {
   },
   data: function () {
     return {
+      user: {
+        id: "",
+        name: "",
+        type: "",
+        photo: "",
+      },
       iswebview: navigator.userAgent == "webView" ? true : false,
       isConditionSatisfied: false,
       downloadAppButton: false,
@@ -1041,7 +1047,7 @@ export default {
     },
     raiseGuideModal: function () {
       let self = this;
-
+      $(".modal").modal("hide");
       this.handleBackBtn();
 
       swal({
@@ -1364,19 +1370,66 @@ export default {
         this.messageCount += event;
       });
     },
+    getUserData(itemName) {
+      switch (itemName) {
+        case "id":
+          return this.currentUser.user_info && this.currentUser.user_info.id
+            ? this.currentUser.user_info.id
+            : this.userId;
+          break;
+        case "type":
+          return this.currentUser.user_info &&
+            this.currentUser.user_info.is_seller
+            ? this.currentUser.user_info.is_seller
+            : this.isSeller;
+          break;
+        case "name":
+          return this.currentUser.user_info &&
+            this.currentUser.user_info.first_name
+            ? this.currentUser.user_info.first_name +
+                " " +
+                this.currentUser.user_info.last_name
+            : this.userFullName;
+
+          break;
+        case "photo":
+          return this.currentUser.user_info &&
+            this.currentUser.profile.profile_photo
+            ? this.currentUser.profile.profile_photo
+            : this.profilePhoto;
+          break;
+
+        default:
+          return "";
+          break;
+      }
+    },
+    updateUserData() {
+      this.user.id = this.getUserData("id");
+      this.user.name = this.getUserData("name");
+      this.user.type = this.getUserData("type");
+      this.user.photo = this.getUserData("photo");
+      window.localStorage.setItem("userId", this.user.id);
+      window.localStorage.setItem("userType", this.user.type);
+    },
   },
   mounted() {
+    this.updateUserData();
     $(document).ready(() => {
-      $("#master-loader-wrapper").css('display','none');
+      $("#master-loader-wrapper").css("display", "none");
     });
     this.activateDownloadAppButton();
     $("#wallet-modal").on("show.bs.modal", (e) => {
       this.handleBackKeys();
     });
     eventBus.$emit("globalVerifiedBadgeContents", 1);
+    eventBus.$on("currentUser", (event) => {
+      this.currentUser = event;
+    });
   },
   watch: {
     currentUser(user) {
+      this.updateUserData();
       if (user.user_info) {
         this.walletBalance = user.user_info.wallet_balance;
 

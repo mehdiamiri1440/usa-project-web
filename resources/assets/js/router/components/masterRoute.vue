@@ -18,6 +18,7 @@
       :modalSubCategory="modalSubCategory"
       :mainSubCategories="mainSubCategories"
     />
+
     <router-view
       id="main-content"
       :str="storagePath"
@@ -84,6 +85,7 @@ export default {
         "productView",
         "invite",
         "mainBuyAdRequests",
+        "register",
       ],
     };
   },
