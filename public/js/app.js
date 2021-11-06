@@ -86,7 +86,7 @@
 /******/ 		if (__webpack_require__.nc) {
 /******/ 			script.setAttribute("nonce", __webpack_require__.nc);
 /******/ 		}
-/******/ 		script.src = __webpack_require__.p + "chunks/" + ({}[chunkId]||chunkId) + "." + {"0":"cb3dd6eba5ccea4e912f","1":"9cadb50bee1d03f0a6ff","2":"11d7afd23e4dc03db587","3":"c54e735ab476ba7532a2","4":"92f32c11a6b25526d871","5":"77c25b70e2a26028744b","6":"69108ace5d49925600ce","7":"f9c8cba4c298a553debf","8":"96dd86368d3d1fe2bf21","9":"cac281a79f6db82a8ac8","10":"e50c44db41d0605469ad","11":"206461733964717ace91","12":"29b8f2a1a36298dad8f9","13":"aaf8d62079cd5acb8f13","14":"2c5b10d85b511083223e","15":"480fe01941002c813066","16":"d608e35b9e93b12d12b3","17":"274297aeee3471662309","18":"2374579539559bf4a3b8","19":"c2384a588e51ce936601","20":"401ca6ec2f8925ac7df6","21":"483fdd0351e62c87cc36","22":"362fe6d6cc986f3f9dce","23":"0b85bcb698ec1a26e07f","24":"2bc1af31bc9ac7edd886","25":"f0a622feea471d29bb3b","26":"861869a16fdc4da2eb23","27":"98c79aa196e03780926e","28":"2ca8c3f1826288e9fdf4","29":"e6f588062912aede1ba7","30":"9084211a7979fed481fb","31":"d9dd1e95549251bdce16","32":"69955900db8e8a71fbbd","33":"2f4784ae341e32d97ca3","34":"1e25852b9d8c36903a76","35":"3b9f16e1eeab6c4ce5d0","36":"edbe6824ec4ed4007668","37":"c596f7661a55e57b2b6e","38":"e9d33a50e815a7e95ec8","39":"1d7d3bfbca71a8d06b36","40":"1f36d4aa70b326bd4e66","41":"aa5556dcefa0f21e7aa4","42":"a781655de7a49c854187","43":"14037526945febf51a90","44":"569d9ea4051ae7a33b83","45":"59e95b657d94f42feed2","46":"d1b6c478713bbb29d459"}[chunkId] + ".js";
+/******/ 		script.src = __webpack_require__.p + "chunks/" + ({}[chunkId]||chunkId) + "." + {"0":"cb3dd6eba5ccea4e912f","1":"9cadb50bee1d03f0a6ff","2":"11d7afd23e4dc03db587","3":"c54e735ab476ba7532a2","4":"92f32c11a6b25526d871","5":"77c25b70e2a26028744b","6":"a77e5ba061147e65620f","7":"f9c8cba4c298a553debf","8":"96dd86368d3d1fe2bf21","9":"cac281a79f6db82a8ac8","10":"e50c44db41d0605469ad","11":"206461733964717ace91","12":"29b8f2a1a36298dad8f9","13":"aaf8d62079cd5acb8f13","14":"553c7ae64c1c3b03bb8f","15":"480fe01941002c813066","16":"d608e35b9e93b12d12b3","17":"274297aeee3471662309","18":"2374579539559bf4a3b8","19":"c2384a588e51ce936601","20":"401ca6ec2f8925ac7df6","21":"483fdd0351e62c87cc36","22":"362fe6d6cc986f3f9dce","23":"0b85bcb698ec1a26e07f","24":"2bc1af31bc9ac7edd886","25":"f0a622feea471d29bb3b","26":"861869a16fdc4da2eb23","27":"98c79aa196e03780926e","28":"2ca8c3f1826288e9fdf4","29":"e6f588062912aede1ba7","30":"9084211a7979fed481fb","31":"d9dd1e95549251bdce16","32":"69955900db8e8a71fbbd","33":"2f4784ae341e32d97ca3","34":"1e25852b9d8c36903a76","35":"3b9f16e1eeab6c4ce5d0","36":"edbe6824ec4ed4007668","37":"c596f7661a55e57b2b6e","38":"e9d33a50e815a7e95ec8","39":"1d7d3bfbca71a8d06b36","40":"1f36d4aa70b326bd4e66","41":"aa5556dcefa0f21e7aa4","42":"a781655de7a49c854187","43":"14037526945febf51a90","44":"569d9ea4051ae7a33b83","45":"59e95b657d94f42feed2","46":"6f5f60a30e39da2c8c62"}[chunkId] + ".js";
 /******/ 		var timeout = setTimeout(onScriptComplete, 120000);
 /******/ 		script.onerror = script.onload = onScriptComplete;
 /******/ 		function onScriptComplete() {
@@ -19165,6 +19165,12 @@ module.exports = function(module) {
   },
   data: function data() {
     return {
+      user: {
+        id: "",
+        name: "",
+        type: "",
+        photo: ""
+      },
       iswebview: navigator.userAgent == "webView" ? true : false,
       isConditionSatisfied: false,
       downloadAppButton: false,
@@ -19744,7 +19750,7 @@ module.exports = function(module) {
     },
     raiseGuideModal: function raiseGuideModal() {
       var self = this;
-
+      $(".modal").modal("hide");
       this.handleBackBtn();
 
       __WEBPACK_IMPORTED_MODULE_10__sweetalert_min_js___default()({
@@ -20060,23 +20066,57 @@ module.exports = function(module) {
       __WEBPACK_IMPORTED_MODULE_0__router_js__["b" /* eventBus */].$on("messageCount", function (event) {
         _this3.messageCount += event;
       });
+    },
+    getUserData: function getUserData(itemName) {
+      switch (itemName) {
+        case "id":
+          return this.currentUser.user_info && this.currentUser.user_info.id ? this.currentUser.user_info.id : this.userId;
+          break;
+        case "type":
+          return this.currentUser.user_info && this.currentUser.user_info.is_seller ? this.currentUser.user_info.is_seller : this.isSeller;
+          break;
+        case "name":
+          return this.currentUser.user_info && this.currentUser.user_info.first_name ? this.currentUser.user_info.first_name + " " + this.currentUser.user_info.last_name : this.userFullName;
+
+          break;
+        case "photo":
+          return this.currentUser.user_info && this.currentUser.profile.profile_photo ? this.currentUser.profile.profile_photo : this.profilePhoto;
+          break;
+
+        default:
+          return "";
+          break;
+      }
+    },
+    updateUserData: function updateUserData() {
+      this.user.id = this.getUserData("id");
+      this.user.name = this.getUserData("name");
+      this.user.type = this.getUserData("type");
+      this.user.photo = this.getUserData("photo");
+      window.localStorage.setItem("userId", this.user.id);
+      window.localStorage.setItem("userType", this.user.type);
     }
   },
   mounted: function mounted() {
     var _this4 = this;
 
+    this.updateUserData();
     $(document).ready(function () {
-      $("#master-loader-wrapper").css('display', 'none');
+      $("#master-loader-wrapper").css("display", "none");
     });
     this.activateDownloadAppButton();
     $("#wallet-modal").on("show.bs.modal", function (e) {
       _this4.handleBackKeys();
     });
     __WEBPACK_IMPORTED_MODULE_0__router_js__["b" /* eventBus */].$emit("globalVerifiedBadgeContents", 1);
+    __WEBPACK_IMPORTED_MODULE_0__router_js__["b" /* eventBus */].$on("currentUser", function (event) {
+      _this4.currentUser = event;
+    });
   },
 
   watch: {
     currentUser: function currentUser(user) {
+      this.updateUserData();
       if (user.user_info) {
         this.walletBalance = user.user_info.wallet_balance;
 
@@ -47756,7 +47796,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("nav", { staticClass: "custom-navigation" }, [
-    !_vm.$parent.userId
+    !_vm.$parent.user.id
       ? _c(
           "div",
           { staticClass: "item-wrapper" },
@@ -47783,7 +47823,7 @@ var render = function() {
             )
           })
         )
-      : _vm.$parent.userId && _vm.$parent.isSeller == 1
+      : _vm.$parent.user.id && _vm.$parent.user.type == 1
       ? _c(
           "div",
           { staticClass: "item-wrapper" },
@@ -48074,12 +48114,12 @@ var render = function() {
       _vm._v(" "),
       _c("router-view", {
         attrs: {
-          "user-id": _vm.userId,
-          "is-seller": _vm.isSeller,
+          "user-id": _vm.user.id,
+          "is-seller": _vm.user.type,
           assets: _vm.assets,
           "storage-path": _vm.storagePath,
-          "profile-photo": _vm.profilePhoto,
-          "user-full-name": _vm.userFullName,
+          "profile-photo": _vm.user.photo,
+          "user-full-name": _vm.user.name,
           "user-logout-path": _vm.userLogoutPath,
           "verified-user-content": _vm.verifiedUserContent
         }
@@ -48088,8 +48128,8 @@ var render = function() {
       _c("router-view", {
         attrs: {
           name: "buyer",
-          "user-id": _vm.userId,
-          "is-seller": _vm.isSeller,
+          "user-id": _vm.user.id,
+          "is-seller": _vm.user.type,
           assets: _vm.assets,
           "storage-path": _vm.storagePath,
           "verified-user-content": _vm.verifiedUserContent
@@ -48100,8 +48140,8 @@ var render = function() {
         staticClass: "h-100",
         attrs: {
           name: "seller",
-          "user-id": _vm.userId,
-          "is-seller": _vm.isSeller,
+          "user-id": _vm.user.id,
+          "is-seller": _vm.user.type,
           assets: _vm.assets,
           "storage-path": _vm.storagePath,
           "verified-user-content": _vm.verifiedUserContent

@@ -4,6 +4,7 @@
     :str="str"
     :assets="assets"
     :userType="userType"
+    :is-user-login="isUserLogin"
     :categoryList="categoryList"
     :currentUser="currentUser"
   />
@@ -16,6 +17,13 @@ export default {
       verifiedUserContent: this.$parent.verifiedUserContent,
     };
   },
-  props: ["str", "assets", "userType", "categoryList", "currentUser"],
+  props: [
+    "str",
+    "isUserLogin",
+    "assets",
+    "userType",
+    "categoryList",
+    "currentUser",
+  ],
 };
 </script>

@@ -526,9 +526,9 @@ label {
           <button
             v-else-if="
               !$parent.isMyProfile &&
-              $parent.currentUser.user_info &&
+              $parent.updatedCurrentUser.user_info &&
               $parent.product.user_info.has_phone &&
-              $parent.currentUser.user_info.is_buyer
+              $parent.updatedCurrentUser.user_info.is_buyer
             "
             @click.prevent="$parent.activePhoneCall(false)"
             class="main-button bg-orange white-text hidden-xs hidden-sm"
@@ -543,7 +543,7 @@ label {
           </button>
           <button
             v-else-if="
-              !$parent.currentUser.user_info &&
+              !$parent.updatedCurrentUser.user_info &&
               $parent.product.user_info.has_phone
             "
             @click.prevent="$parent.loginModal(false)"
@@ -576,13 +576,12 @@ label {
               orange-text
               button-shadow
             "
-
           >
             <i class="fas fa-comment-alt"></i>
             چت با فروشنده
           </button>
           <button
-            v-else-if="!$parent.currentUser.user_info"
+            v-else-if="!$parent.updatedCurrentUser.user_info"
             @click.prevent="$parent.loginModal(true)"
             class="
               hidden-xs hidden-sm
