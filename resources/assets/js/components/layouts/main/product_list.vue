@@ -1390,12 +1390,13 @@ div.items-wrapper {
                       "
                     >
                       <ProductGridArticle
-                        :productIndex="productIndex"
+                        :product-index="productIndex"
                         v-if="products.length >= productIndex"
                         :key="product.main.id"
                         :product="product"
                         :str="str"
                         :currentUser="currentUser"
+                        :has-action-button="true"
                       />
                     </div>
                   </div>
