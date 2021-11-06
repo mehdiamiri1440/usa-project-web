@@ -615,10 +615,10 @@
       <div class="tab-action-wrapper" :class="{ 'page-type': !isModal }">
         <div class="hidden-md hidden-lg">
           <div :class="{ active: packagePage == 1 }">
-            <button @click="packagePage = 1">بسته ویژه سالانه</button>
+            <button @click="switchPackage(1)">بسته ویژه سالانه</button>
           </div>
           <div :class="{ active: packagePage == 2 }">
-            <button @click="packagePage = 2">بسته پایه سه ماهه</button>
+            <button @click="switchPackage(2)">بسته پایه سه ماهه</button>
           </div>
         </div>
       </div>
@@ -1287,14 +1287,14 @@
           <div class="switch-actions hidden-md hidden-lg col-xs-12 text-center">
             <button
               v-if="packagePage == 1"
-              @click="packagePage = 2"
+              @click="switchPackage(2)"
               class="bg-navy-blue main-button button-shadow white-text"
             >
               بسته پایه سه ماهه
             </button>
             <button
               v-else
-              @click="packagePage = 1"
+              @click="switchPackage(1)"
               class="bg-navy-blue main-button button-shadow white-text"
             >
               بسته ویژه سالانه
@@ -1622,6 +1622,19 @@ export default {
         return false;
       }
     },
+    switchPackage(item){
+      if(item == 1){
+      // ready for analytics if switch to package type 1
+      // this.registerComponentStatistics("","","");
+
+      }else if(item == 2){
+        // ready for analytics if switch to package type 3
+      // this.registerComponentStatistics("","","");
+
+      }
+
+      this.packagePage = item
+    }
   },
   mounted() {
     this.init();

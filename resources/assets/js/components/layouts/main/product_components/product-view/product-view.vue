@@ -1077,6 +1077,9 @@ export default {
       window.scrollTo(0, 0);
     },
     openPriceModal() {
+      // ready for analytics click on estelam gheymat
+      // this.registerComponentStatistics("","","");
+
       let customModal = $(".price-modal");
       customModal.addClass("show-custom-modal");
       this.handleBackForCustomModal(customModal, "show-custom-modal");

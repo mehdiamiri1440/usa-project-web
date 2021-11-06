@@ -624,17 +624,17 @@ export default {
       let routeName = this.$route.name;
       // if (routeName == "productList") {
       //   // ready for analytics
-        
+      //   // this.registerComponentStatistics("","","");
       // } else if (routeName == "productCategory") {
       //   // ready for analytics
       //   // this.registerComponentStatistics("","","");
       // }
 
       this.registerComponentStatistics(
-            "product",
-            "show-product-in-seperate-page",
-            "click-on-show-product-detail-btn"
-        );
+        "product",
+        "show-product-in-seperate-page",
+        "click-on-show-product-detail-btn"
+      );
 
       this.openProductInSeperatePage();
     },
