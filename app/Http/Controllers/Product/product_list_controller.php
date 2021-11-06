@@ -1224,7 +1224,12 @@ class product_list_controller extends Controller
 
             if(! is_null($tags_info) && $tags_info){
                 $temp = $tags_info->first();
-                $schema_object = $temp->schema_object;
+                $schema_object = null;
+                
+                if($schema_object){
+                    $schema_object = $temp->schema_object;
+                }
+                
                 unset($tags_info->schema_object);
 
                 $tags_info = $tags_info->filter(function($item) use($temp){

@@ -1468,7 +1468,7 @@ class product_controller extends Controller
                 $product_related_data['main']->id = $product_related_data_tmp->$property_name;
             }
             else{
-                $product_related_data['main']->$property_name = $product_related_data_tmp->$property_name;
+                $product_related_data['main']->$property_name = $product_related_data_tmp->$property_name ?? null;
             }
         }
 
