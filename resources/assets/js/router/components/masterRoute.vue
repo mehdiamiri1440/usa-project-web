@@ -84,6 +84,7 @@ export default {
         "productView",
         "invite",
         "mainBuyAdRequests",
+        "register",
       ],
     };
   },
