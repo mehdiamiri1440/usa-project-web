@@ -347,7 +347,7 @@ select.error:focus {
             }"
             id="province"
           >
-            <option selected disabled>استان</option>
+            <option selected disabled>استان شما</option>
 
             <option
               v-for="(province, index) in $parent.step3.provinceList"
@@ -374,7 +374,7 @@ select.error:focus {
             :class="{ error: $parent.errors.city, active: $parent.step3.city }"
             id="city"
           >
-            <option selected disabled>شهر</option>
+            <option selected disabled>شهر شما</option>
             <option
               v-for="(city, index) in $parent.step3.cityList"
               :key="index"

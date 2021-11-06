@@ -142,7 +142,7 @@
               $parent.product.user_info.has_phone)
           "
           @click="openChat()"
-          class="main-button bg-soft-orange orange-text button-shadow"
+          class="main-button bg-orange white-text"
         >
           <i class="fa fa-comment-alt"></i>
           <span> چت با فروشنده </span>
@@ -150,7 +150,7 @@
         <button
           v-else
           @click="openLoginModal(true)"
-          class="main-button bg-soft-orange orange-text button-shadow"
+          class="main-button bg-orange white-text"
         >
           <i class="fa fa-comment-alt"></i>
           <span> چت با فروشنده </span>

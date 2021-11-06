@@ -129,10 +129,19 @@ input.error:focus + i {
   right: 0;
   transition: 150ms;
 }
+.title-notice {
+  text-align: center;
+  margin-bottom: 25px;
+}
 </style>
 
 <template>
   <div class="text-rtl from-wrapper">
+    <p class="title-notice">
+      <strong>
+        برای ارتباط مستقیم با کاربران باسکول اطلاعات خود را وارد کنید
+      </strong>
+    </p>
     <h2 class="title-contents">
       شماره موبایل
       <span class="red-text">*</span>

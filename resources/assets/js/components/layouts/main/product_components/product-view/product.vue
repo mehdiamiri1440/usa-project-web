@@ -209,8 +209,31 @@ label {
   color: #140092;
 }
 
-.show-button-wrapper{
+.show-button-wrapper {
   margin: 50px auto 30px;
+}
+
+.show-button-wrapper svg {
+  width: 20px;
+  position: relative;
+  top: 3px;
+}
+
+.show-button-wrapper button:hover {
+  background: #ff6600 !important;
+  border-color: #ff6600;
+  color: #fff !important;
+  transition: 150ms;
+}
+
+.svg-1 {
+  fill: #ff6600;
+  transition: 150ms;
+}
+
+.show-button-wrapper button:hover .svg-1 {
+  fill: #fff;
+  transition: 150ms;
 }
 
 @media screen and (max-width: 1199px) {
@@ -565,7 +588,9 @@ label {
             v-if="$parent.isMyProfile"
             class="main-button bg-soft-blue navy-blue-text button-shadow"
             data-toggle="modal"
-            @click="$parent.openEditModal('#article-modal' + $parent.product.main.id)"
+            @click="
+              $parent.openEditModal('#article-modal' + $parent.product.main.id)
+            "
           >
             <i class="fa fa-pencil-alt"></i>
             ویرایش
@@ -575,13 +600,16 @@ label {
               !$parent.isMyProfile && $parent.updatedCurrentUser.user_info
             "
             @click.prevent="$parent.openChat($parent.product)"
-            class="
-              hidden-xs hidden-sm
-              main-button
-              bg-soft-orange
-              orange-text
-              button-shadow
-            "
+            class="hidden-xs hidden-sm main-button button-shadow"
+            :class="{
+              'bg-soft-orange orange-text send-message-button':
+                $parent.product.user_info.has_phone &&
+                $parent.updatedCurrentUser.user_info.is_buyer,
+              'bg-orange white-text':
+                !$parent.product.user_info.has_phone ||
+                ($parent.product.user_info.has_phone &&
+                  $parent.updatedCurrentUser.user_info.is_seller),
+            }"
           >
             <i class="fas fa-comment-alt"></i>
             چت با فروشنده
@@ -589,13 +617,12 @@ label {
           <button
             v-else-if="!$parent.updatedCurrentUser.user_info"
             @click.prevent="$parent.loginModal(true)"
-            class="
-              hidden-xs hidden-sm
-              main-button
-              bg-soft-orange
-              orange-text
-              button-shadow
-            "
+            class="hidden-xs hidden-sm main-button button-shadow"
+            :class="{
+              'bg-soft-orange orange-text send-message-button':
+                $parent.product.user_info.has_phone,
+              'bg-orange white-text': !$parent.product.user_info.has_phone,
+            }"
           >
             <i class="fas fa-comment-alt"></i>
             چت با فروشنده
@@ -685,13 +712,28 @@ label {
             </li>
           </ul>
           <div
-            class="show-button-wrapper text-center"
+            class="show-button-wrapper text-rtl text-center"
             v-if="!$parent.isMyProfile"
           >
             <button
               @click="$parent.openPriceModal()"
               class="main-button-alt orange-text"
             >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                aria-hidden="true"
+                role="img"
+                width="1em"
+                height="1em"
+                preserveAspectRatio="xMidYMid meet"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  class="svg-1"
+                  d="M19.388.405a.605.605 0 0 0-1.141.399c.929 2.67-.915 4.664-2.321 5.732l-.568-.814c-.191-.273-.618-.5-.95-.504l-3.188.014a2.162 2.162 0 0 0-1.097.338L.729 12.157a1.01 1.01 0 0 0-.247 1.404l4.269 6.108c.32.455.831.4 1.287.082l9.394-6.588c.27-.191.582-.603.692-.918l.998-3.145c.11-.314.043-.793-.148-1.066l-.346-.496c1.888-1.447 3.848-4.004 2.76-7.133zm-4.371 9.358a1.608 1.608 0 0 1-2.24-.396a1.614 1.614 0 0 1 .395-2.246a1.607 1.607 0 0 1 1.868.017c-.272.164-.459.26-.494.275a.606.606 0 0 0 .259 1.153c.086 0 .174-.02.257-.059c.194-.092.402-.201.619-.33a1.615 1.615 0 0 1-.664 1.586z"
+                />
+              </svg>
               استعلام قیمت
             </button>
           </div>

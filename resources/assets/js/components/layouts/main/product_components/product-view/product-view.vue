@@ -488,11 +488,11 @@ button.send-message-button {
         <button
           v-if="!isMyProfile && currentUser.user_info"
           @click.prevent="openChat(product)"
-          class="main-button bg-soft-orange orange-text button-shadow"
+          class="main-button button-shadow"
           :class="{
-            'send-message-button':
+            'bg-soft-orange orange-text send-message-button':
               product.user_info.has_phone && currentUser.user_info.is_buyer,
-            'single-item':
+            'bg-orange white-text':
               !product.user_info.has_phone ||
               (product.user_info.has_phone && currentUser.user_info.is_seller),
           }"
@@ -504,10 +504,11 @@ button.send-message-button {
         <button
           v-else-if="!currentUser.user_info"
           @click.prevent="loginModal(true)"
-          class="main-button bg-soft-orange orange-text button-shadow"
+          class="main-button button-shadow"
           :class="{
-            'send-message-button': product.user_info.has_phone,
-            'single-item': !product.user_info.has_phone,
+            'bg-soft-orange orange-text send-message-button':
+              product.user_info.has_phone,
+            'bg-orange white-text': !product.user_info.has_phone,
           }"
         >
           <span> چت با فروشنده </span>
