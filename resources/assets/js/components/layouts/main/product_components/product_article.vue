@@ -320,7 +320,7 @@ label {
 
     <div
       v-if="isMyProfile"
-      class="modal fade"
+      class="modal fade article-modal"
       :id="'article-modal' + product.main.id"
       tabindex="-1"
       role="dialog"
@@ -543,7 +543,7 @@ label {
           v-if="isMyProfile"
           class="blue-button bg-soft-blue navy-blue-text"
           data-toggle="modal"
-          :data-target="'#article-modal' + product.main.id"
+          @click="openEditModal('#article-modal' + product.main.id)"
         >
           <i class="fa fa-pencil-alt"></i>
           ویرایش
@@ -647,6 +647,7 @@ export default {
         .animate({ scrollTop: newPosition.top - 380 }, 1000);
     },
     editProduct: function (getProductWrapper) {
+      
       this.submiting = true;
       this.errors = "";
 
@@ -875,6 +876,18 @@ export default {
       };
       eventBus.$emit("peymentMethodData", paymentData);
       $("#payment-type-modal").modal("show");
+    },
+    openEditModal(element){
+      $(element).modal('show');
+      this.handleBackKeys();
+    },
+    handleBackKeys: function () {
+      if (window.history.state) {
+        history.pushState(null, null, window.location);
+      }
+      $(window).on("popstate", function (e) {
+        $(".modal").modal("hide");
+      });
     },
   },
   mounted() {

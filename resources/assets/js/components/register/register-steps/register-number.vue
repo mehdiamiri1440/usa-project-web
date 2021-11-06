@@ -162,7 +162,7 @@ input.error:focus + i {
         @click.prevent="submitPhone()"
         :disabled="!$parent.step1.sendCode"
       >
-        ورود
+        ورود به باسکول
         <i
           v-if="$parent.verifyCodeBtnLoading"
           class="fas fa-circle-notch fa-spin"

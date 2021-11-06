@@ -272,7 +272,7 @@ p.response-rate {
         v-if="is_my_profile_status"
         class="edit-button bg-soft-blue navy-blue-text"
         data-toggle="modal"
-        :data-target="'#article-modal' + $parent.product.main.id"
+        @click="$parent.openEditModal('#article-modal' + $parent.product.main.id)"
       >
         <i class="fa fa-pencil-alt"></i>
         ویرایش

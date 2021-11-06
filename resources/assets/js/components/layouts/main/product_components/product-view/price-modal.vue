@@ -167,16 +167,15 @@
           "
           >محصول برای فروش دارم</router-link
         >
-        <router-link
-          tag="button"
-          :to="{ name: 'registerRequestBuyer' }"
-          class="orange-text button-link"
+        <span
           v-else-if="
             !!$parent.currentUser.user_info &&
             $parent.currentUser.user_info.is_buyer
           "
-          >ثبت درخواست خرید</router-link
+          class="button-link"
         >
+          <br />
+        </span>
         <router-link
           tag="button"
           :to="{ name: 'register' }"

@@ -281,7 +281,7 @@ select.error:focus {
 <template>
   <form
     v-on:submit.prevent="$parent.submitForm()"
-    class="form-contents col-xs-12"
+    class="form-contents text-right col-xs-12"
   >
     <div class="row">
       <div class="user-phone-number-wrapper">

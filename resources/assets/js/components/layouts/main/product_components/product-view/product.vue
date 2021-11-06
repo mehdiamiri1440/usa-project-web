@@ -209,6 +209,10 @@ label {
   color: #140092;
 }
 
+.show-button-wrapper{
+  margin: 50px auto 30px;
+}
+
 @media screen and (max-width: 1199px) {
   .main-product-wrapper {
     min-height: initial;
@@ -539,7 +543,7 @@ label {
             <div v-else class="spinner-border">
               <span class="sr-only"></span>
             </div>
-            اطلاعات تماس
+            تماس با فروشنده
           </button>
           <button
             v-else-if="
@@ -555,19 +559,21 @@ label {
             <div v-else class="spinner-border">
               <span class="sr-only"></span>
             </div>
-            اطلاعات تماس
+            تماس با فروشنده
           </button>
           <button
             v-if="$parent.isMyProfile"
             class="main-button bg-soft-blue navy-blue-text button-shadow"
             data-toggle="modal"
-            :data-target="'#article-modal' + $parent.product.main.id"
+            @click="$parent.openEditModal('#article-modal' + $parent.product.main.id)"
           >
             <i class="fa fa-pencil-alt"></i>
             ویرایش
           </button>
           <button
-            v-else-if="!$parent.isMyProfile && $parent.currentUser.user_info"
+            v-else-if="
+              !$parent.isMyProfile && $parent.updatedCurrentUser.user_info
+            "
             @click.prevent="$parent.openChat($parent.product)"
             class="
               hidden-xs hidden-sm

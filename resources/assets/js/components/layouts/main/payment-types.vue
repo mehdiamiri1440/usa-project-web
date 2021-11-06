@@ -476,9 +476,9 @@ export default {
     },
     paymentWithWallet() {
       this.registerComponentStatistics(
-            "payment",
-            "payment-from-wallet",
-            "pay-for : " + this.peymentMethodData.paymentName
+        "payment",
+        "payment-from-wallet",
+        "pay-for : " + this.peymentMethodData.paymentName
       );
 
       switch (this.peymentMethodData.paymentName) {
@@ -491,7 +491,7 @@ export default {
               this.successModal();
             })
             .catch((err) => {
-              console.log(err);
+              this.notEnoughAmountModal();
             });
           break;
 
@@ -504,7 +504,7 @@ export default {
               this.successModal();
             })
             .catch((err) => {
-              console.log(err);
+              this.notEnoughAmountModal();
             });
 
           break;
@@ -518,7 +518,7 @@ export default {
               this.successModal();
             })
             .catch((err) => {
-              console.log(err);
+              this.notEnoughAmountModal();
             });
 
           break;
@@ -531,7 +531,7 @@ export default {
               this.successModal();
             })
             .catch((err) => {
-              console.log(err);
+              this.notEnoughAmountModal();
             });
 
           break;
@@ -614,6 +614,19 @@ export default {
         this.walletHasAmount = false;
       }
     },
+      handleBackKeys: function () {
+      if (window.history.state) {
+        history.pushState(null, null, window.location);
+      }
+      $(window).on("popstate", function (e) {
+        $(".modal").modal("hide");
+      });
+    },
+  },
+  mounted() {
+    $("#payment-type-modal").on("shown.bs.modal", () => {
+      this.handleBackKeys();
+    });
   },
   watch: {
     peymentMethodData(payment) {

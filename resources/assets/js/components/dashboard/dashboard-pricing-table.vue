@@ -41,6 +41,7 @@
         <PricingTableSellerContent
           :active-users="activeUsers"
           :offer-time="this.offerTime"
+          :currentUser="currentUser"
         />
       </div>
     </section>
@@ -53,7 +54,7 @@ import { eventBus } from "../../router/router";
 import PricingTableSellerContent from "./seller/pricing-seller-page/pricing-table-seller-content";
 
 export default {
-  props: ["str", "offerTime"],
+  props: ["str", "offerTime", "currentUser"],
   components: {
     PricingTableSellerContent,
   },

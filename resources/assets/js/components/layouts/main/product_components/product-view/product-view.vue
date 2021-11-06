@@ -525,7 +525,7 @@ button.send-message-button {
           :class="{ disable: isActivePhone }"
           :disabled="isActivePhone"
         >
-          اطلاعات تماس
+          تماس با فروشنده
           <i class="fas fa-phone-alt" v-if="!getPhoneLoader"></i>
           <div v-else class="spinner-border">
             <span class="sr-only"></span>
@@ -538,7 +538,7 @@ button.send-message-button {
           :class="{ disable: isActivePhone }"
           :disabled="isActivePhone"
         >
-          اطلاعات تماس
+          تماس با فروشنده
           <i class="fas fa-phone-alt" v-if="!getPhoneLoader"></i>
           <div v-else class="spinner-border">
             <span class="sr-only"></span>
@@ -702,7 +702,7 @@ export default {
 
           //   this.$router.push({ name: "registerInquiry" });
         } else {
-          window.location.reload()
+          window.location.reload();
           // this.popUpMsg = "شما نمی توانید به خودتان پیام دهید.";
           // eventBus.$emit("submitSuccess", this.popUpMsg);
           // $("#custom-main-modal").modal("show");
@@ -741,7 +741,7 @@ export default {
 
           eventBus.$emit("ChatInfo", contact);
         } else {
-          window.location.reload()
+          window.location.reload();
           // this.popUpMsg = "شما نمی توانید به خودتان پیام دهید.";
           // eventBus.$emit("submitSuccess", this.popUpMsg);
           // $("#custom-main-modal").modal("show");
@@ -1094,6 +1094,18 @@ export default {
           }
         });
       }
+    },
+    openEditModal(element) {
+      $(element).modal("show");
+      this.handleBackKeys();
+    },
+    handleBackKeys: function () {
+      if (window.history.state) {
+        history.pushState(null, null, window.location);
+      }
+      $(window).on("popstate", function (e) {
+        $(".modal").modal("hide");
+      });
     },
   },
   created() {
