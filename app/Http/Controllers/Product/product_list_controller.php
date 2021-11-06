@@ -215,7 +215,7 @@ class product_list_controller extends Controller
             $products = $this->get_all_products_with_related_media();
 
             if(! Cache::has($cache_key)){
-                Cache::put($cache_key,$products,30);
+                Cache::put($cache_key,$products,60);
             }    
         }
 
@@ -828,7 +828,7 @@ class product_list_controller extends Controller
                 $category_id = $general_category->category_id;
 
                 $result_products = array_filter($products,function($product) use($search_expresion,$category_id){
-                    return  $this->does_search_text_matche_the_product($search_expresion,$product);
+                    return  $category_id == $product['main']->sub_category_id && $this->does_search_text_matche_the_product($search_expresion,$product);
                 });
             }
             else{
