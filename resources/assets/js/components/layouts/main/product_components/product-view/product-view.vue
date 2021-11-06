@@ -114,19 +114,21 @@ span {
   left: 0;
   width: 100%;
   z-index: 1;
-  padding: 5px;
-  box-shadow: 0 -6px 15px rgba(0, 0, 0, 0.16);
+  padding: 10px 10px 15px;
   background: #fff;
   display: flex;
-  height: 59px;
+  height: 61px;
+  transition: 200ms;
 }
 
 .fix-send-message-wrapper button {
   width: 100%;
   border-radius: 6px;
-  margin: 0;
-  font-size: 18px;
-  padding: 10px 15px;
+  margin: 0 auto;
+  font-size: 14px;
+  padding: 0px;
+  font-weight: 500;
+  max-width: 400px;
 }
 
 .fix-send-message-wrapper button.disable {
@@ -134,14 +136,14 @@ span {
 }
 
 button.send-message-button {
-  background: none;
+  /* background: none;
   border-radius: 8px;
   border: 1px solid #404b55;
   color: #404b55;
-  transition: 300ms;
+  transition: 300ms; */
   margin-right: 10px;
 }
-
+/* 
 .send-message-button:hover {
   background: none;
   border-radius: 8px;
@@ -149,7 +151,7 @@ button.send-message-button {
   background: #404b55;
   color: #fff;
   transition: 300ms;
-}
+} */
 
 /* 
 ---------------------------------------------------------------------------------
@@ -296,9 +298,6 @@ button.send-message-button {
   .default-carousel-item:nth-child(3) {
     display: none;
   }
-  .fix-send-message-wrapper {
-    bottom: 59px;
-  }
 }
 
 @media screen and (max-width: 767px) {
@@ -340,6 +339,10 @@ button.send-message-button {
       v-if="!currentUser.user_info"
       :is-chat="isChat"
       :product="product"
+    />
+    <PriceModal
+      :product-name="product.main.product_name"
+      :price="product.main.min_sale_price"
     />
     <main id="main" class="row">
       <div class="col-xs-12">
@@ -485,33 +488,29 @@ button.send-message-button {
         <button
           v-if="!isMyProfile && currentUser.user_info"
           @click.prevent="openChat(product)"
+          class="main-button bg-soft-orange orange-text button-shadow"
           :class="{
             'send-message-button':
               product.user_info.has_phone && currentUser.user_info.is_buyer,
-            'green-button bg-orange':
+            'single-item':
               !product.user_info.has_phone ||
               (product.user_info.has_phone && currentUser.user_info.is_seller),
           }"
         >
-          <span
-            v-if="product.user_info.has_phone && currentUser.user_info.is_buyer"
-          >
-            چت
-          </span>
-          <span v-else> چت با فروشنده </span>
+          <span> چت با فروشنده </span>
 
           <i class="fas fa-comment-alt"></i>
         </button>
         <button
           v-else-if="!currentUser.user_info"
           @click.prevent="loginModal(true)"
+          class="main-button bg-soft-orange orange-text button-shadow"
           :class="{
             'send-message-button': product.user_info.has_phone,
-            'green-button bg-orange': !product.user_info.has_phone,
+            'single-item': !product.user_info.has_phone,
           }"
         >
-          <span v-if="product.user_info.has_phone"> چت </span>
-          <span v-else> چت با فروشنده </span>
+          <span> چت با فروشنده </span>
           <i class="fas fa-comment-alt"></i>
         </button>
         <button
@@ -522,12 +521,12 @@ button.send-message-button {
             currentUser.user_info.is_buyer
           "
           @click.prevent="activePhoneCall(true)"
-          class="green-button bg-gradient-green"
+          class="main-button bg-orange white-text"
           :class="{ disable: isActivePhone }"
           :disabled="isActivePhone"
         >
           اطلاعات تماس
-          <i class="fas fa-phone-square-alt" v-if="!getPhoneLoader"></i>
+          <i class="fas fa-phone-alt" v-if="!getPhoneLoader"></i>
           <div v-else class="spinner-border">
             <span class="sr-only"></span>
           </div>
@@ -535,12 +534,12 @@ button.send-message-button {
         <button
           v-else-if="!currentUser.user_info && product.user_info.has_phone"
           @click.prevent="loginModal(false)"
-          class="green-button bg-gradient-green"
+          class="main-button bg-orange white-text"
           :class="{ disable: isActivePhone }"
           :disabled="isActivePhone"
         >
           اطلاعات تماس
-          <i class="fas fa-phone-square-alt" v-if="!getPhoneLoader"></i>
+          <i class="fas fa-phone-alt" v-if="!getPhoneLoader"></i>
           <div v-else class="spinner-border">
             <span class="sr-only"></span>
           </div>
@@ -568,6 +567,7 @@ import swal from "../../../../../sweetalert.min.js";
 import StickySidebar from "../../../../../stickySidebar.js";
 // import registerInquerForm from "../../main_components/register-inquiry-form.vue";
 import { isElementShownInView } from "../../../../../custom";
+import PriceModal from "./price-modal.vue";
 
 export default {
   components: {
@@ -577,6 +577,7 @@ export default {
     RegisterModal,
     RelatedProducts,
     // registerInquerForm,
+    PriceModal,
   },
   props: ["str", "assets", "userType", "categoryList", "currentUser"],
   data: function () {
@@ -614,6 +615,9 @@ export default {
   methods: {
     init() {
       this.scrollToTop();
+      if (this.checkIsMobile(991)) {
+        this.setActionScroll();
+      }
       if (!this.product.user_info && !this.isLoading) {
         this.checkCurrentUser();
       }
@@ -650,19 +654,18 @@ export default {
           self.getBreadCrumbs();
         })
         .catch(function (err) {
-
           //redirect user to the parent category
-          let categoryName = self.$route.params.categoryName.split('-');
+          let categoryName = self.$route.params.categoryName.split("-");
 
-          categoryName = categoryName.filter(item => {
-              if(item == 'خرید' || item == 'عمده'){
-                  return false;
-              }
-              return true;
+          categoryName = categoryName.filter((item) => {
+            if (item == "خرید" || item == "عمده") {
+              return false;
+            }
+            return true;
           });
-          
-          window.location.href = "/product-list/category/" + categoryName.join('-');
-          
+
+          window.location.href =
+            "/product-list/category/" + categoryName.join("-");
         });
     },
     openChat(product) {
@@ -837,16 +840,14 @@ export default {
     },
     shareProduct() {
       this.registerComponentStatistics(
-          "product-view",
-          "copy-product-link",
-          "click on copy poduct link"
-        );
+        "product-view",
+        "copy-product-link",
+        "click on copy poduct link"
+      );
 
-        
       let baseUrl = getBase();
       baseUrl = baseUrl.substring(0, baseUrl.length - 1);
       if (this.isDeviceMobile()) {
-
         var linkElement = document.createElement("a");
         var Message = baseUrl + this.getProductUrl();
         var messageToWhatsApp = encodeURIComponent(Message);
@@ -1009,6 +1010,14 @@ export default {
         $(".modal").modal("hide");
       });
     },
+    handleBackForCustomModal(modalNode, className) {
+      if (window.history.state) {
+        history.pushState(null, null, window.location);
+      }
+      $(window).on("popstate", function (e) {
+        modalNode.removeClass(className);
+      });
+    },
     closePhoneModal() {
       $(".modal").modal("hide");
     },
@@ -1030,9 +1039,9 @@ export default {
         additionalMarginTop: 157,
       });
     },
-    checkIsMobile() {
+    checkIsMobile(width = 1199) {
       let pageWidth = window.outerWidth;
-      if (pageWidth <= 1199) {
+      if (pageWidth <= width) {
         return true;
       } else {
         return false;
@@ -1059,6 +1068,25 @@ export default {
     },
     scrollToTop() {
       window.scrollTo(0, 0);
+    },
+    openPriceModal() {
+      let customModal = $(".price-modal");
+      customModal.addClass("show-custom-modal");
+      this.handleBackForCustomModal(customModal, "show-custom-modal");
+    },
+    setActionScroll() {
+      let element = $(".fix-send-message-wrapper");
+      if (element) {
+        $(window).scroll(() => {
+          if (this.$route.name == "productView") {
+            if ($(window).scrollTop() >= 220) {
+              element.css("bottom", 59);
+            } else {
+              element.css("bottom", -5);
+            }
+          }
+        });
+      }
     },
   },
   created() {

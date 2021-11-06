@@ -243,8 +243,9 @@ label {
   width: 100% !important;
   max-width: 280px;
   margin: 0 auto;
-  padding: 7px;
-  font-size: 18px;
+  padding: 6px;
+  font-size: 14px;
+  min-width: 140px;
 }
 
 .article-features button.disable {
@@ -253,16 +254,17 @@ label {
 }
 
 .article-features button.elevator-event {
-  background: #e41c38;
-  color: #fff;
   border-radius: 4px;
-  padding: 7px 14px;
-  font-size: 17px;
+  padding: 6px 9px 5px;
+  font-size: 14px;
+  min-width: 140px;
 }
 
 .article-features button.disable {
   background: #777;
   border: none;
+  border-radius: 3px;
+  padding: 5px 10px;
 }
 
 .article-action-buttons {
@@ -277,6 +279,14 @@ label {
 }
 .calc-width-button button {
   width: 100% !important;
+}
+
+.elevator-svg {
+  display: inline;
+  width: 16px;
+  position: relative;
+  top: 3px;
+  left: 2px;
 }
 @media screen and (max-width: 555px) {
   .article-action-buttons {
@@ -448,10 +458,32 @@ label {
       >
         <button
           v-if="isMyProfile"
-          class="elevator-event"
+          class="elevator-event bg-navy-blue white-text"
           @click.prevent="elevatorEvent()"
         >
-          <i class="fas fa-chart-line"></i>
+          <svg
+            width="16"
+            height="16"
+            class="elevator-svg"
+            viewBox="0 0 16 16"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M1.33301 14.6667H4.66634V11.3334H7.99967V8.00008H11.333V4.66675H14.6663"
+              stroke="white"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M0.916504 7.16671L7.1665 1.33337M7.1665 1.33337V4.66671M7.1665 1.33337H3.83317"
+              stroke="white"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
           اعمال نردبان
         </button>
 
@@ -460,9 +492,31 @@ label {
           data-toggle="tooltip"
           data-placement="bottom"
           title="نردبان اعمال شده است"
-          class="elevator-event hidden-xs active disable"
+          class="elevator-icon white-text hidden-xs active disable"
         >
-          <i class="fas fa-chart-line"></i>
+          <svg
+            width="16"
+            class="elevator-svg"
+            height="16"
+            viewBox="0 0 16 16"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M1.33301 14.6667H4.66634V11.3334H7.99967V8.00008H11.333V4.66675H14.6663"
+              stroke="white"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M0.916504 7.16671L7.1665 1.33337M7.1665 1.33337V4.66671M7.1665 1.33337H3.83317"
+              stroke="white"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
         </button>
       </div>
       <div
@@ -487,7 +541,7 @@ label {
 
         <button
           v-if="isMyProfile"
-          class="blue-button"
+          class="blue-button bg-soft-blue navy-blue-text"
           data-toggle="modal"
           :data-target="'#article-modal' + product.main.id"
         >
@@ -817,7 +871,7 @@ export default {
       let paymentData = {
         paymentName: "elevatorPricingData",
         productId: this.product.main.id,
-        totalPrice:"25000"
+        totalPrice: "25000",
       };
       eventBus.$emit("peymentMethodData", paymentData);
       $("#payment-type-modal").modal("show");

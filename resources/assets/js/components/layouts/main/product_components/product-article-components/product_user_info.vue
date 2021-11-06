@@ -8,15 +8,9 @@ i {
 .user-information-wrapper,
 .article-action-buttons button {
   font-size: 14px;
-
-  font-weight: bold;
-
   padding: 4px 7px 5px;
-
   margin: 0;
-
   margin-top: 3px;
-
   line-height: 1.618;
 }
 
@@ -48,11 +42,9 @@ i {
   color: #000430;
 }
 
-.blue-button {
+.edit-button {
   margin: 15px 0;
   display: inline-block;
-  background: #150e47;
-  color: #fff;
   padding: 5px 0;
   width: 100%;
   border-radius: 3px;
@@ -61,11 +53,6 @@ i {
   transition: 300ms;
 }
 
-.blue-button:hover,
-.blue-button:focus {
-  color: #fff;
-  background: #1d1060;
-}
 .user-image {
   width: 35px;
   height: 35px;
@@ -283,7 +270,7 @@ p.response-rate {
 
       <button
         v-if="is_my_profile_status"
-        class="blue-button"
+        class="edit-button bg-soft-blue navy-blue-text"
         data-toggle="modal"
         :data-target="'#article-modal' + $parent.product.main.id"
       >
