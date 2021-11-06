@@ -419,6 +419,15 @@ padding: 4px;
   top: 2px;
 }
 
+
+.main-button svg{
+  display: inline;
+    max-width: 20px;
+    position: relative;
+    top: 2px;
+    margin-left: 2px;
+}
+
 .main-button i.fa-angle-left{
   right: 9px;
 }
@@ -457,6 +466,7 @@ padding: 4px;
 .blue-text {
   color: #1DA1F2 !important;
 }
+
 .brand-text {
   color: #556080 !important;
 }
@@ -504,6 +514,10 @@ padding: 4px;
 
 .bg-navy-blue {
   background-color: #140092 !important;
+}
+
+.bg-soft-blue{
+  background-color: #C4BFE4 !important;
 }
 
 .bg-blue {
