@@ -66,7 +66,7 @@ class product_controller extends Controller
         'products.product_name', 
         'products.stock', 
         'products.min_sale_price', 
-        // 'products.max_sale_price', 
+        'products.max_sale_price', 
         'products.min_sale_amount', 
         'products.description',
         'products.address', 
