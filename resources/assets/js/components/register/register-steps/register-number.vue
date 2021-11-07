@@ -130,7 +130,7 @@ input.error:focus + i {
   <form v-on:submit.prevent="submitPhone()" class="form-contents col-xs-12">
     <div class="row">
       <label class="input-title" for="phone-number">
-        برای ورود یا ثبت نام، شماره همراه خود را وارد کنید.
+        برای ورود یا ثبت نام ، شماره موبایل خود را وارد کنید.
       </label>
 
       <div class="input-wrapper user-phone-number-wrapper">

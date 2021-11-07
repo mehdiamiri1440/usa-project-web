@@ -136,22 +136,8 @@ span {
 }
 
 button.send-message-button {
-  /* background: none;
-  border-radius: 8px;
-  border: 1px solid #404b55;
-  color: #404b55;
-  transition: 300ms; */
   margin-right: 10px;
 }
-/* 
-.send-message-button:hover {
-  background: none;
-  border-radius: 8px;
-  border: 1px solid #404b55;
-  background: #404b55;
-  color: #fff;
-  transition: 300ms;
-} */
 
 /* 
 ---------------------------------------------------------------------------------

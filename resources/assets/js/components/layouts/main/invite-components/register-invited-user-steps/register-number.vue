@@ -130,10 +130,13 @@ input.error:focus + i {
   <div class="form-contents col-xs-12">
     <div class="row">
       <label class="input-title" for="phone-number">
-        برای ورود یا ثبت نام، شماره همراه خود را وارد کنید.
+        برای ورود یا ثبت نام ، شماره موبایل خود را وارد کنید
       </label>
 
-      <form  v-on:submit.prevent="submitPhone()" class="input-wrapper user-phone-number-wrapper">
+      <form
+        v-on:submit.prevent="submitPhone()"
+        class="input-wrapper user-phone-number-wrapper"
+      >
         <input
           v-model="phoneNumber"
           :class="{
@@ -162,7 +165,7 @@ input.error:focus + i {
         @click.prevent="submitPhone()"
         :disabled="!$parent.step1.sendCode"
       >
-        ورود
+        ورود به باسکول
         <i
           v-if="$parent.verifyCodeBtnLoading"
           class="fas fa-circle-notch fa-spin"

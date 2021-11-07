@@ -49,6 +49,12 @@ label.input-title {
   max-width: 450px;
 }
 
+.form-title {
+  margin-top: -30px;
+  font-weight: 400;
+  margin-bottom: 28px;
+  color: #000;
+}
 .input-wrapper {
   margin: 0 auto;
   position: relative;
@@ -283,6 +289,10 @@ select.error:focus {
     v-on:submit.prevent="$parent.submitForm()"
     class="form-contents text-right col-xs-12"
   >
+    <p class="form-title hidden-xs hidden-sm text-center h4 margin-top-0">
+      مشخصات خود را وارد کنید
+    </p>
+
     <div class="row">
       <div class="user-phone-number-wrapper">
         <div class="row">
@@ -425,7 +435,7 @@ select.error:focus {
           <label class="input-title" for="first-name"
             >نوع فعالیت شما <span class="red-text">*</span></label
           >
-          <div class="radio-wrapper">
+          <div class="radio-wrapper text-center">
             <div class="label-radio">
               <input
                 type="radio"

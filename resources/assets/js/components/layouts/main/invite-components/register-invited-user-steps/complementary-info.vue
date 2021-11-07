@@ -425,7 +425,7 @@ select.error:focus {
           <label class="input-title" for="first-name"
             >نوع فعالیت شما <span class="red-text">*</span></label
           >
-          <div class="radio-wrapper">
+          <div class="radio-wrapper text-center">
             <div class="label-radio">
               <input
                 type="radio"
@@ -520,7 +520,6 @@ select.error:focus {
                 <span>خریدارم</span>
               </label>
             </div>
-          </div>
           </div>
           <p class="error-message">
             <span

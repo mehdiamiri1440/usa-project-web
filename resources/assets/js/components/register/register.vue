@@ -20,7 +20,7 @@ span {
   position: relative;
   width: 100%;
   overflow: hidden;
-  min-height: 650px;
+  min-height: 700px;
 }
 
 input[type="number"] {
@@ -109,7 +109,7 @@ input[type="number"]::-webkit-outer-spin-button {
     border-radius: 0;
     border: none;
     margin: 0;
-    padding:  15px;
+    padding: 15px;
   }
 
   .main-content-header {

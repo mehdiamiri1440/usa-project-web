@@ -196,11 +196,11 @@ label {
   margin: 15px auto;
 }
 
-.actions .min-button-style.phone-call {
+.actions .phone-call {
   margin-left: 10px;
 }
 
-.actions .min-button-style.send-message-button {
+.actions .send-message-button {
   margin-right: 10px;
 }
 
