@@ -623,7 +623,7 @@ export default {
       this.registerComponentStatistics(
         "product",
         "show-product-in-seperate-page",
-        "click-on-show-product-detail-btn"
+        "click-on-btn"
       );
 
       this.openProductInSeperatePage();

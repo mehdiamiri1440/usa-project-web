@@ -66,7 +66,7 @@ class product_controller extends Controller
         'products.product_name', 
         'products.stock', 
         'products.min_sale_price', 
-        'products.max_sale_price', 
+        // 'products.max_sale_price', 
         'products.min_sale_amount', 
         'products.description',
         'products.address', 
@@ -444,56 +444,6 @@ class product_controller extends Controller
 
         $product_related_data = $this->fill_out_product_required_properties($product,$product_required_properties,$product_related_data_tmp);
 
-        // $product_related_data['main'] = new \StdClass;
-        // foreach($main_records as $property_name)
-        // {
-        //     if($property_name == 'product_id'){
-        //         $product_related_data['main']->id = $product_related_data_tmp->$property_name;
-        //     }
-        //     else{
-        //         $product_related_data['main']->$property_name = $product_related_data_tmp->$property_name;
-        //     }
-        // }
-
-        // $product_related_data['user_info'] = new \StdClass;
-        // foreach($user_records as $property_name)
-        // {
-        //     if($property_name == 'user_id'){
-        //         $product_related_data['user_info']->id = $product_related_data_tmp->$property_name;
-        //     }  
-        //     else{
-        //         $product_related_data['user_info']->$property_name = $product_related_data_tmp->$property_name;
-        //     }
-        // }
-
-        // if(($product_related_data['user_info']->wallet_balance >= config('subscriptionPakage.phone-number.view-price') && str_split($product_related_data['user_info']->phone_view_permission)[0] == 1) || (str_split($product_related_data['user_info']->phone_view_permission)[0] == 1 && $product_related_data['user_info']->active_pakage_type > 0) )
-        // {
-        //     $product_related_data['user_info']->has_phone = true;
-        // }
-        // else{
-        //     $product_related_data['user_info']->has_phone = false;
-        // }
-
-        // unset($product_related_data['user_info']->wallet_balance);
-
-        // $product_related_data['profile_info'] = new \StdClass;
-        // foreach($profile_records as $property_name)
-        // {
-        //     $product_related_data['profile_info']->$property_name = $product_related_data_tmp->$property_name;
-        // }
-
-        // $product_related_data['user_info']->response_rate = $this->get_user_response_info($product->myuser_id)['response_rate'];
-
-        // $comment_controller_object = new comment_controller();
-        // $product_related_data['user_info']->review_info = $comment_controller_object->get_user_avg_rating_score($product->myuser_id);
-
-
-        // $product_related_data['photos'] = $product_related_photos;
-
-        // $product_parent_category_data = $product->category;
-        // $product_related_data['main']->category_id = $product_parent_category_data['parent_id'];
-        // $product_related_data['main']->category_name = ($category_record = category::find($product_parent_category_data['parent_id']))['category_name'];
-        // $product_related_data['main']->super_category_name = (category::find($category_record->parent_id))['category_name'];
 
         if(session()->has('user_id')){
             $now = Carbon::now();
@@ -1518,7 +1468,7 @@ class product_controller extends Controller
                 $product_related_data['main']->id = $product_related_data_tmp->$property_name;
             }
             else{
-                $product_related_data['main']->$property_name = $product_related_data_tmp->$property_name;
+                $product_related_data['main']->$property_name = $product_related_data_tmp->$property_name ?? null;
             }
         }
 

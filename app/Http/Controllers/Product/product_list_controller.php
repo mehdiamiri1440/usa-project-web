@@ -215,7 +215,7 @@ class product_list_controller extends Controller
             $products = $this->get_all_products_with_related_media();
 
             if(! Cache::has($cache_key)){
-                Cache::put($cache_key,$products,30);
+                Cache::put($cache_key,$products,60);
             }    
         }
 
@@ -818,10 +818,26 @@ class product_list_controller extends Controller
                 $search_expresion .= "($text)(.*)";
             }
 
-            $result_products = array_filter($products,function($product) use($search_expresion){
-                return $this->does_search_text_matche_the_product($search_expresion,$product);
-            });
+            $general_category = DB::table('tags')
+                                    ->where('header','like',"%$search_text%")
+                                    ->get()
+                                    ->first();
 
+            if($general_category)
+            {
+                $category_id = $general_category->category_id;
+
+                $result_products = array_filter($products,function($product) use($search_expresion,$category_id){
+                    return  $category_id == $product['main']->sub_category_id && $this->does_search_text_matche_the_product($search_expresion,$product);
+                });
+            }
+            else{
+                $result_products = array_filter($products,function($product) use($search_expresion){
+                    return $this->does_search_text_matche_the_product($search_expresion,$product);
+                });
+            }
+
+            
             if(count($result_products) == 0){
                 
                 $result_products = array_filter($products,function($product) use($search_text_array){
@@ -1206,9 +1222,14 @@ class product_list_controller extends Controller
             $tags_info = $this->get_category_meta_data($category_id);
 
 
-            if(! is_null($tags_info)){
+            if(! is_null($tags_info) && $tags_info){
                 $temp = $tags_info->first();
-                $schema_object = $temp->schema_object;
+                $schema_object = null;
+                
+                if($schema_object){
+                    $schema_object = $temp->schema_object;
+                }
+                
                 unset($tags_info->schema_object);
 
                 $tags_info = $tags_info->filter(function($item) use($temp){
