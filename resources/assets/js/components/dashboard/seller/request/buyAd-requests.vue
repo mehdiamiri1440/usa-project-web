@@ -770,7 +770,7 @@ button.disable {
                   <p
                     class="list-time"
                     :class="[
-                      buyAd.reply_capacity
+                      buyAd.reply_capacity > 0
                         ? 'col-sm-2 col-xs-6'
                         : 'col-sm-3 col-xs-12 text-center',
                     ]"

@@ -23,7 +23,7 @@
   left: 0;
   right: 0;
   border: none;
-  transition: 300ms;
+  transition: 500ms;
 }
 
 .button-background {
@@ -33,7 +33,7 @@
   height: 100%;
   width: 100%;
   background: rgba(0, 0, 0, 0);
-  transition: 300ms;
+  transition: 500ms;
 }
 
 .price-modal.show-custom-modal .modal-content {
@@ -83,7 +83,7 @@
     max-width: 600px;
     left: calc(50% - 300px);
     padding: 30px 0;
-    bottom: -250px;
+    bottom: -500px;
   }
 }
 </style>

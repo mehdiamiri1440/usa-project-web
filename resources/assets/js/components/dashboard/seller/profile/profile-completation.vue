@@ -262,7 +262,7 @@ export default {
         margin: 15,
         dots: true,
         stagePadding: 5,
-        rtl: false,
+        rtl: true,
         responsive: {
           0: {
             items: 1,
