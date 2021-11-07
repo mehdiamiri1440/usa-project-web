@@ -162,102 +162,17 @@
               {!! $product['main']->description !!}
             </p>
           </div>
+
+          <div class="col-xs-12 col-lg-4
+                  hidden-lg 
+                  user-section-wrapper
+                  ">
+            @include('layout.product-view-components.profile-info')
+      </div>
         </div>
       </div>
     </div>
   </div>
-
-
-  @if($product["user_info"]->comments)
-  <section
-        id="reviews-section"
-        class="section-wrapper col-xs-12 reviews-product"
-      >
-        <div class="row">
-          <h3 class="box-title">نظرات کاربران</h3>
-  
-          <div
-            class="reviews-wrapper"
-            v-if="reviews.comments.length > 0 && !reviewsLoader"
-          >
-            @foreach($product["user_info"]->comments as $comment)
-            <div class="col-xs-12">
-              <div class="row">
-                <article class="review-item-wrapper">
-                  <div
-                    class="
-                      reviewer-information-wrapper
-                      text-center
-                      col-xs-12 col-sm-2
-                      pull-right
-                    "
-                  >
-                    <div class="reviewer-information">
-                      <p class="user-name" >
-                        {{$comment->first_name . ' ' . $comment->last_name}}
-                      </p>
-                      <p
-                        class="user-city"
-                      >
-                      {{$comment->province . ' - ' . $comment->city}}
-  
-                    </p>
-                      <p class="comment-date hidden-sm hidden-md hidden-lg">
-                        {{ $comment->created_at}}
-                      </p>
-                    </div>
-                  </div>
-                  <div class="review-message col-xs-12 col-sm-8 pull-right">
-                    <div class="rate-stars" v-if="review.rating_score > 0">
-                      <p class="stars-wrapper text-right">
-                        @for($i = 0; $i < 5;$i++)
-                        <span  >
-                          <span>{{$i + 1}}</span>
-                          <i
-                          @if( $comment->rating_score > $i)
-                            class="fa fa-star yellow-text"
-                            @else
-                            class="fa fa-star"
-                            @endif
-                          ></i>
-                        </span>
-                        @endfor
-                      </p>
-                    </div>
-                    <p v-text="review.text">
-                      {{$comment->text}}
-                    </p>
-                  </div>
-                  <div class="review-rate text-center col-xs-12 col-sm-2 pull-right">
-                    <p class="comment-date hidden-xs">
-                      {{ $comment->created_at}}
-                    </p>
-                    <div
-                      class="review-likes-wrapper text-center"                  >
-                      <button
-                        @click.prevent="doLike()"
-                        class="review-likes"
-                      >
-                        <span class="like-icon">
-                          <span >
-                            {{ $comment->likes}}
-                          </span>
-                          <i class="fa fa-thumbs-up"></i>
-                        </span>
-                        <span >می پسندم</span>
-                      </button>
-                    </div>
-                  </div>
-                </article>
-              </div>
-            </div>
-            @endforeach
-          </div>
-        </div>
-      </section>
-  
-      @endif
-      
 
   <section
   id="product-section"
@@ -432,3 +347,95 @@
 </section>
 
 
+
+
+@if($product["user_info"]->comments)
+<section
+      id="reviews-section"
+      class="section-wrapper col-xs-12 reviews-product"
+    >
+      <div class="row">
+        <h3 class="box-title">نظرات کاربران</h3>
+
+        <div
+          class="reviews-wrapper"
+          v-if="reviews.comments.length > 0 && !reviewsLoader"
+        >
+          @foreach($product["user_info"]->comments as $comment)
+          <div class="col-xs-12">
+            <div class="row">
+              <article class="review-item-wrapper">
+                <div
+                  class="
+                    reviewer-information-wrapper
+                    text-center
+                    col-xs-12 col-sm-2
+                    pull-right
+                  "
+                >
+                  <div class="reviewer-information">
+                    <p class="user-name" >
+                      {{$comment->first_name . ' ' . $comment->last_name}}
+                    </p>
+                    <p
+                      class="user-city"
+                    >
+                    {{$comment->province . ' - ' . $comment->city}}
+
+                  </p>
+                    <p class="comment-date hidden-sm hidden-md hidden-lg">
+                      {{ $comment->created_at}}
+                    </p>
+                  </div>
+                </div>
+                <div class="review-message col-xs-12 col-sm-8 pull-right">
+                  <div class="rate-stars" v-if="review.rating_score > 0">
+                    <p class="stars-wrapper text-right">
+                      @for($i = 0; $i < 5;$i++)
+                      <span  >
+                        <span>{{$i + 1}}</span>
+                        <i
+                        @if( $comment->rating_score > $i)
+                          class="fa fa-star yellow-text"
+                          @else
+                          class="fa fa-star"
+                          @endif
+                        ></i>
+                      </span>
+                      @endfor
+                    </p>
+                  </div>
+                  <p v-text="review.text">
+                    {{$comment->text}}
+                  </p>
+                </div>
+                <div class="review-rate text-center col-xs-12 col-sm-2 pull-right">
+                  <p class="comment-date hidden-xs">
+                    {{ $comment->created_at}}
+                  </p>
+                  <div
+                    class="review-likes-wrapper text-center"                  >
+                    <button
+                      @click.prevent="doLike()"
+                      class="review-likes"
+                    >
+                      <span class="like-icon">
+                        <span >
+                          {{ $comment->likes}}
+                        </span>
+                        <i class="fa fa-thumbs-up"></i>
+                      </span>
+                      <span >می پسندم</span>
+                    </button>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+          @endforeach
+        </div>
+      </div>
+    </section>
+
+    @endif
+    

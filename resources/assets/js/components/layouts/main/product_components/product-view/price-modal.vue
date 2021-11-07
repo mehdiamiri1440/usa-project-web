@@ -18,7 +18,7 @@
   position: absolute;
   border-radius: 20px 20px 0 0;
   min-height: 100px;
-  bottom: -190px;
+  bottom: -1000px;
   padding: 0;
   left: 0;
   right: 0;
@@ -46,6 +46,7 @@
 
 .custom-modal-title {
   margin-top: 20px;
+  padding: 0 15px;
 }
 
 .price-text {
@@ -83,7 +84,6 @@
     max-width: 600px;
     left: calc(50% - 300px);
     padding: 30px 0;
-    bottom: -500px;
   }
 }
 </style>

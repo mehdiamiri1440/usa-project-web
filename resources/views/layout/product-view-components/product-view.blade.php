@@ -1,4 +1,4 @@
-<div id="main-content" class="container-fluid padding-0-30 main-content-wrapper">
+<div id="main-content" class="container-fluid  main-content-wrapper">
 
 
     <main id="main" class="row">
