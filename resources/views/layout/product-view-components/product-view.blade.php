@@ -139,27 +139,27 @@
       
       @if($product['user_info']->has_phone)
       <button
-          class="green-button phone-call"
+          class="main-button bg-orange white-text"
         >
-        <i class="fas fa-phone-square-alt" ></i>
+        <i class="fas fa-phone-alt" ></i>
 
-          اطلاعات تماس
+          تماس با فروشنده
         </button>
       @endif
 
       @if($product['user_info']->has_phone)
           <button
-            class=" send-message-button green-button"
+            class=" send-message-button main-button button-shadow bg-soft-orange orange-text"
           >
           <span
           >
           <i class="fas fa-comment-alt"></i>
-            چت
+            چت با فروشنده
           </span>
           </button>
           @else
           <button
-            class=" green-button phone-call"
+            class="main-button bg-orange white-text"
           >
           <span >
             <i class="fas fa-comment-alt"></i>

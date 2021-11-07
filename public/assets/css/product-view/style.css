@@ -124,30 +124,16 @@ span {
   width: 100%;
   border-radius: 6px;
   margin: 0;
-  font-size: 18px;
+  font-size: 15px;
   padding: 10px 15px;
+}
+
+.send-message-button {
+ margin-right: 10px !important;
 }
 
 .fix-send-message-wrapper button.disable {
   background: #e0e0e0;
-}
-
-button.send-message-button {
-  background: none;
-  border-radius: 8px;
-  border: 1px solid #404b55;
-  color: #404b55;
-  transition: 300ms;
-  margin-right: 10px;
-}
-
-.send-message-button:hover {
-  background: none;
-  border-radius: 8px;
-  border: 1px solid #404b55;
-  background: #404b55;
-  color: #fff;
-  transition: 300ms;
 }
 
 /* 
@@ -352,6 +338,7 @@ button.send-message-button {
     display: flex;
     justify-content: space-between;
     direction: rtl;
+    margin: 15px auto;
   }
 
   .main-contents-wrapper .actions .min-button-style {
@@ -559,8 +546,7 @@ a.user-name-link {
     font-weight: 500;
   }
   
-  .actions .green-button,
-  .send-message-button {
+  .actions .green-button {
     font-size: 14px;
     font-weight: bold;
     width: initial;
@@ -580,25 +566,9 @@ a.user-name-link {
     background: #556080;
   }
 
-  .send-message-button {
-    background: none;
-    border-radius: 8px;
-    border: 1px solid #404b55 !important;
-    color: #404b55 !important;
-    transition: 300ms;
-  }
   .phone-call {
     margin-left: 15px;
     background: linear-gradient(90deg,#21ad93,#00c569) ;
-  }
-  
-  .send-message-button:hover {
-    background: none;
-    border-radius: 8px;
-    border: 1px solid #404b55;
-    background: #404b55;
-    color: #fff;
-    transition: 300ms;
   }
   
   .actions button.elevator-event {
@@ -1125,6 +1095,35 @@ text-align: center;
   white-space: nowrap;
   text-overflow: ellipsis;
   font-weight: 500;
+}
+
+
+.show-button-wrapper {
+  margin: 50px auto 30px;
+}
+
+.show-button-wrapper svg {
+  width: 20px;
+  position: relative;
+  top: 3px;
+}
+
+.show-button-wrapper button:hover {
+  background: #ff6600 !important;
+  border-color: #ff6600;
+  color: #fff !important;
+  transition: 150ms;
+}
+
+.show-button-wrapper button .svg-1 {
+  fill: #ff6600;
+  transition: 150ms;
+}
+
+
+.show-button-wrapper button:hover .svg-1 {
+  fill: #fff;
+  transition: 150ms;
 }
 
 @media screen and (max-width: 1199px) {

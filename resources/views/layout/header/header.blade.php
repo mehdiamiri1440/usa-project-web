@@ -82,8 +82,7 @@
                 <div class="item-icon register">
                   <i class="fa fa-user static-layout light-green-text"></i>
                 </div>
-                ثبت نام
-                <span class="light-green-text"> رایگان </span>
+                ورود / ثبت نام
               </a>
             </li>
 
@@ -100,9 +99,20 @@
                 href="/login"
               >
                 <div class="item-icon">
-                  <i class="fa fa-sign-in-alt"></i>
+                  <i class="fa fa-users"></i>
                 </div>
-                ورود به باسکول
+                خریداران
+              </a>
+            </li>
+            <li class="hidden-xs">
+              <a
+                class="green-button green-button-alt"
+                href="/login"
+              >
+                <div class="item-icon">
+                  <i class="fas fa-grip-horizontal"></i>
+                </div>
+                فروشندگان
               </a>
             </li>
           </ul>

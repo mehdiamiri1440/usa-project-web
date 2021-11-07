@@ -410,7 +410,32 @@
   }
   
  .grid-list .main-content-item{
-    height: 250px;
+    height: 300px;
+  }
+  .grid-list .has-action   {
+    padding: 0 5px;
+  }
+  .grid-list .has-action .green-button {
+    transition: .15s;
+    margin: 0 auto;
+    border-radius: 12px;
+    padding: 9px 0;
+    width: 100%;
+    font-size: 16px;
+    background: #fff !important;
+    border: 1px solid;
+    color: #128c7e !important;
+    line-height: 1;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+    max-width: 200px;
+  }
+  .grid-list .svg-1 {
+    fill: #128c7e;
+    transition: .15s;
   }
 
   .main-article-contents p a,
@@ -747,7 +772,7 @@
 .grid-list .article-features button.elevator-event {
   position: absolute;
   left: 5px;
-  bottom: 15px;
+  bottom: 55px;
   border: none;
   border-radius: 8px;
   background: #38485f;

@@ -51,15 +51,15 @@
          
           @if($product['user_info']->has_phone)
           <button
-          class="green-button min-button-style phone-call hidden-xs hidden-sm"
+          class=" main-button bg-orange white-text hidden-xs hidden-sm"
         >
-        <i class="fas fa-phone-square-alt" ></i>
-          اطلاعات تماس
+        <i class="fas fa-phone-alt" ></i>
+          تماس با فروشنده
         </button>
           @endif
           @if($product['user_info']->has_phone)
           <button
-            class="hidden-xs hidden-sm send-message-button green-button min-button-style"
+            class="hidden-xs hidden-sm send-message-button main-button button-shadow bg-soft-orange orange-text"
           >
           <i class="fas fa-comment-alt"></i>
 
@@ -67,7 +67,7 @@
           </button>
           @else
           <button
-            class="hidden-xs hidden-sm green-button phone-call min-button-style"
+            class="hidden-xs hidden-sm main-button bg-orange white-text"
           >
           <i class="fas fa-comment-alt"></i>
 
@@ -88,16 +88,17 @@
           <ul class="product-info-list">
             <li>
               <span class="gray-text">
-                <i class="fa fa-folder"></i> دسته بندی
+                <i class="fa fa-users"></i> 
+                فروشنده
               </span>
 
               <span >
-                {{$product['main']->sub_category_name}}
+                {{$product['user_info']->first_name . ' ' . $product['user_info']->last_name}}
               </span>
             </li>
             <li>
               <span class="gray-text">
-                <i class="fa fa-map-marker-alt"></i> استان / شهر</span
+                <i class="fa fa-map-marker-alt"></i> آدرس</span
               >
 
               <span
@@ -128,16 +129,33 @@
 
             </span>
             </li>
-            <li >
-              <span class="gray-text">
-                <i class="fas fa-dollar-sign"></i> قیمت</span
-              >
-
-              <span>استعلام بگیرید</span>
-            </li>
           </ul>
           <div
-            class="product-description"
+            class="show-button-wrapper text-rtl text-center"
+          >
+            <button
+              class="main-button-alt orange-text"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                aria-hidden="true"
+                role="img"
+                width="1em"
+                height="1em"
+                preserveAspectRatio="xMidYMid meet"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  class="svg-1"
+                  d="M19.388.405a.605.605 0 0 0-1.141.399c.929 2.67-.915 4.664-2.321 5.732l-.568-.814c-.191-.273-.618-.5-.95-.504l-3.188.014a2.162 2.162 0 0 0-1.097.338L.729 12.157a1.01 1.01 0 0 0-.247 1.404l4.269 6.108c.32.455.831.4 1.287.082l9.394-6.588c.27-.191.582-.603.692-.918l.998-3.145c.11-.314.043-.793-.148-1.066l-.346-.496c1.888-1.447 3.848-4.004 2.76-7.133zm-4.371 9.358a1.608 1.608 0 0 1-2.24-.396a1.614 1.614 0 0 1 .395-2.246a1.607 1.607 0 0 1 1.868.017c-.272.164-.459.26-.494.275a.606.606 0 0 0 .259 1.153c.086 0 .174-.02.257-.059c.194-.092.402-.201.619-.33a1.615 1.615 0 0 1-.664 1.586z"
+                />
+              </svg>
+              استعلام قیمت
+            </button>
+          </div>
+          <div
+            class="product-description show"
           >
             <span class="gray-text">توضیحات</span>
             <p>
@@ -150,6 +168,96 @@
   </div>
 
 
+  @if($product["user_info"]->comments)
+  <section
+        id="reviews-section"
+        class="section-wrapper col-xs-12 reviews-product"
+      >
+        <div class="row">
+          <h3 class="box-title">نظرات کاربران</h3>
+  
+          <div
+            class="reviews-wrapper"
+            v-if="reviews.comments.length > 0 && !reviewsLoader"
+          >
+            @foreach($product["user_info"]->comments as $comment)
+            <div class="col-xs-12">
+              <div class="row">
+                <article class="review-item-wrapper">
+                  <div
+                    class="
+                      reviewer-information-wrapper
+                      text-center
+                      col-xs-12 col-sm-2
+                      pull-right
+                    "
+                  >
+                    <div class="reviewer-information">
+                      <p class="user-name" >
+                        {{$comment->first_name . ' ' . $comment->last_name}}
+                      </p>
+                      <p
+                        class="user-city"
+                      >
+                      {{$comment->province . ' - ' . $comment->city}}
+  
+                    </p>
+                      <p class="comment-date hidden-sm hidden-md hidden-lg">
+                        {{ $comment->created_at}}
+                      </p>
+                    </div>
+                  </div>
+                  <div class="review-message col-xs-12 col-sm-8 pull-right">
+                    <div class="rate-stars" v-if="review.rating_score > 0">
+                      <p class="stars-wrapper text-right">
+                        @for($i = 0; $i < 5;$i++)
+                        <span  >
+                          <span>{{$i + 1}}</span>
+                          <i
+                          @if( $comment->rating_score > $i)
+                            class="fa fa-star yellow-text"
+                            @else
+                            class="fa fa-star"
+                            @endif
+                          ></i>
+                        </span>
+                        @endfor
+                      </p>
+                    </div>
+                    <p v-text="review.text">
+                      {{$comment->text}}
+                    </p>
+                  </div>
+                  <div class="review-rate text-center col-xs-12 col-sm-2 pull-right">
+                    <p class="comment-date hidden-xs">
+                      {{ $comment->created_at}}
+                    </p>
+                    <div
+                      class="review-likes-wrapper text-center"                  >
+                      <button
+                        @click.prevent="doLike()"
+                        class="review-likes"
+                      >
+                        <span class="like-icon">
+                          <span >
+                            {{ $comment->likes}}
+                          </span>
+                          <i class="fa fa-thumbs-up"></i>
+                        </span>
+                        <span >می پسندم</span>
+                      </button>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </div>
+            @endforeach
+          </div>
+        </div>
+      </section>
+  
+      @endif
+      
 
   <section
   id="product-section"
@@ -324,94 +432,3 @@
 </section>
 
 
-
-@if($product["user_info"]->comments)
-<section
-      id="reviews-section"
-      class="section-wrapper col-xs-12 reviews-product"
-    >
-      <div class="row">
-        <h3 class="box-title">نظرات کاربران</h3>
-
-        <div
-          class="reviews-wrapper"
-          v-if="reviews.comments.length > 0 && !reviewsLoader"
-        >
-          @foreach($product["user_info"]->comments as $comment)
-          <div class="col-xs-12">
-            <div class="row">
-              <article class="review-item-wrapper">
-                <div
-                  class="
-                    reviewer-information-wrapper
-                    text-center
-                    col-xs-12 col-sm-2
-                    pull-right
-                  "
-                >
-                  <div class="reviewer-information">
-                    <p class="user-name" >
-                      {{$comment->first_name . ' ' . $comment->last_name}}
-                    </p>
-                    <p
-                      class="user-city"
-                    >
-                    {{$comment->province . ' - ' . $comment->city}}
-
-                  </p>
-                    <p class="comment-date hidden-sm hidden-md hidden-lg">
-                      {{ $comment->created_at}}
-                    </p>
-                  </div>
-                </div>
-                <div class="review-message col-xs-12 col-sm-8 pull-right">
-                  <div class="rate-stars" v-if="review.rating_score > 0">
-                    <p class="stars-wrapper text-right">
-                      @for($i = 0; $i < 5;$i++)
-                      <span  >
-                        <span>{{$i + 1}}</span>
-                        <i
-                        @if( $comment->rating_score > $i)
-                          class="fa fa-star yellow-text"
-                          @else
-                          class="fa fa-star"
-                          @endif
-                        ></i>
-                      </span>
-                      @endfor
-                    </p>
-                  </div>
-                  <p v-text="review.text">
-                    {{$comment->text}}
-                  </p>
-                </div>
-                <div class="review-rate text-center col-xs-12 col-sm-2 pull-right">
-                  <p class="comment-date hidden-xs">
-                    {{ $comment->created_at}}
-                  </p>
-                  <div
-                    class="review-likes-wrapper text-center"                  >
-                    <button
-                      @click.prevent="doLike()"
-                      class="review-likes"
-                    >
-                      <span class="like-icon">
-                        <span >
-                          {{ $comment->likes}}
-                        </span>
-                        <i class="fa fa-thumbs-up"></i>
-                      </span>
-                      <span >می پسندم</span>
-                    </button>
-                  </div>
-                </div>
-              </article>
-            </div>
-          </div>
-          @endforeach
-        </div>
-      </div>
-    </section>
-
-    @endif
-    
