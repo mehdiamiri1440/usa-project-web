@@ -1304,7 +1304,7 @@
             <div class="switch-package-button-wrapper">
               <button
                 v-if="packagePage == 1"
-                @click="switchPackage(2)"
+                @click="switchPackage(2,'down')"
                 class="main-button"
               >
                 <div class="icon-wrapper">
@@ -1316,7 +1316,7 @@
 
                 <span> بسته پایه سه ماهه</span>
               </button>
-              <button v-else @click="switchPackage(1)" class="main-button">
+              <button v-else @click="switchPackage(1,'down')" class="main-button">
                 <div class="icon-wrapper">
                   <img
                     src="../../../../../../img/main-arrow.svg"
@@ -1649,13 +1649,37 @@ export default {
         return false;
       }
     },
-    switchPackage(item) {
+    switchPackage(item,btnPosition = 'up') {
       if (item == 1) {
-        // ready for analytics if switch to package type 1
-        // this.registerComponentStatistics("","","");
-      } else if (item == 2) {
         // ready for analytics if switch to package type 3
-        // this.registerComponentStatistics("","","");
+        let label = '';
+        if(btnPosition == 'down'){
+          label = 'from-page-down';
+        }
+        else{
+          label = 'from-page-top';
+        }
+
+        this.registerComponentStatistics(
+          "payment",
+          "click-on-type-3",
+          label
+        );
+      } else if (item == 2) {
+        // ready for analytics if switch to package type 1
+          let label = '';
+          if(btnPosition == 'down'){
+            label = 'from-page-down';
+          }
+          else{
+            label = 'from-page-top';
+          }
+
+          this.registerComponentStatistics(
+            "payment",
+            "click-on-type-1",
+            label
+          );
       }
 
       this.packagePage = item;

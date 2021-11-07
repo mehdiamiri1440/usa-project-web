@@ -201,7 +201,11 @@ export default {
     },
     openPhone(isModal = false) {
       // ready for analytics click call phone when  user login
-      // this.$parent.registerComponentStatistics("", "", "");
+      this.$parent.registerComponentStatistics(
+        "product-view",
+        "price-modal",
+        "click-on-show-price-btn"
+      );
 
       this.closeModal();
       this.$parent.activePhoneCall(isModal);
@@ -209,7 +213,11 @@ export default {
     routeToPage(routeName) {
       // ready for analytics
       // when click on mahsol baraye forosh daram
-      // this.$parent.registerComponentStatistics("", "", "");
+      this.$parent.registerComponentStatistics(
+        "product-view",
+        "price-modal",
+        "click-on-register-product-btn"
+      );
 
       this.$router.push({ name: routeName });
     },
@@ -217,11 +225,20 @@ export default {
       if (isChat) {
         // ready for analytics
         // click on chat button when user not logged in
+        this.$parent.registerComponentStatistics(
+          "product-view",
+          "price-modal",
+          "click-on-chat-btn"
+        );
         // this.$parent.registerComponentStatistics("", "", "");
       } else {
         // ready for analytics
         // click on phone call button when user not logged in
-        // this.$parent.registerComponentStatistics("", "", "");
+        this.$parent.registerComponentStatistics(
+          "product-view",
+          "price-modal",
+          "click-on-phone-btn"
+        );
       }
 
       this.closeModal();
@@ -232,7 +249,11 @@ export default {
     openChat() {
       // ready for analytics
       // click on chat button when user login
-      // this.$parent.registerComponentStatistics("", "", "");
+      this.$parent.registerComponentStatistics(
+          "product-view",
+          "price-modal",
+          "click-on-chat-btn"
+      );
 
       this.closeModal();
       this.$parent.openChat(this.$parent.product);
