@@ -255,7 +255,7 @@ class phone_number_controller extends Controller
                                 ->where('myusers.id',$buyer_id)
                                 ->where('myusers.id','<>',$user_id)
                                 ->where('buy_ads.id',$buyAd_id)
-                                ->where('buy_ads.phone_view_capacity','>',0)
+                                // ->where('buy_ads.phone_view_capacity','>',0)
                                 ->where('buy_ads.confirmed',true)
                                 ->whereIn('myusers.phone_view_permission',['0101','1101','0111','1111'])
                                 ->select('myusers.*')
