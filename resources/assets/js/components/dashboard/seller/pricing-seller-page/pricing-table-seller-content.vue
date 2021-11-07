@@ -245,7 +245,7 @@
   width: 100%;
   font-weight: 300;
   text-align: right;
-  max-width: 350px;
+  max-width: 450px;
   margin: 0 auto;
 }
 

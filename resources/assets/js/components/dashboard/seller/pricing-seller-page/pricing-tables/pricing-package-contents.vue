@@ -206,11 +206,10 @@
 }
 
 .desktop-contents .item-content-list li.list-header > span {
-  background: #e7e5f4;
-  text-align: center;
-  font-size: 18px;
-  margin-bottom: 10px;
-  box-shadow: none;
+  font-size: 16px;
+  font-weight: 300;
+  margin: 0 auto 15px;
+  padding: 6px 10px;
 }
 
 .desktop-contents .item-content-title {
@@ -957,7 +956,9 @@
               </div>
 
               <p class="price-description text-center">
-               این بسته شامل مجموعه امکانات پایه باسکول از جمله دسترسی به شماره تماس خریداران ، دسترسی به خریداران طلایی و جذب چندین برابری خریداران نسبت به حالت رایگان است.
+                این بسته شامل مجموعه امکانات پایه باسکول از جمله دسترسی به شماره
+                تماس خریداران ، دسترسی به خریداران طلایی و جذب چندین برابری
+                خریداران نسبت به حالت رایگان است.
               </p>
 
               <div
@@ -1303,7 +1304,7 @@
             <div class="switch-package-button-wrapper">
               <button
                 v-if="packagePage == 1"
-                @click="switchPackage(2,'down')"
+                @click="switchPackage(2, 'down')"
                 class="main-button"
               >
                 <div class="icon-wrapper">
@@ -1315,7 +1316,11 @@
 
                 <span> بسته پایه سه ماهه</span>
               </button>
-              <button v-else @click="switchPackage(1,'down')" class="main-button">
+              <button
+                v-else
+                @click="switchPackage(1, 'down')"
+                class="main-button"
+              >
                 <div class="icon-wrapper">
                   <img
                     src="../../../../../../img/main-arrow.svg"
@@ -1648,37 +1653,27 @@ export default {
         return false;
       }
     },
-    switchPackage(item,btnPosition = 'up') {
+    switchPackage(item, btnPosition = "up") {
       if (item == 1) {
         // ready for analytics if switch to package type 3
-        let label = '';
-        if(btnPosition == 'down'){
-          label = 'from-page-down';
-        }
-        else{
-          label = 'from-page-top';
+        let label = "";
+        if (btnPosition == "down") {
+          label = "from-page-down";
+        } else {
+          label = "from-page-top";
         }
 
-        this.registerComponentStatistics(
-          "payment",
-          "click-on-type-3",
-          label
-        );
+        this.registerComponentStatistics("payment", "click-on-type-3", label);
       } else if (item == 2) {
         // ready for analytics if switch to package type 1
-          let label = '';
-          if(btnPosition == 'down'){
-            label = 'from-page-down';
-          }
-          else{
-            label = 'from-page-top';
-          }
+        let label = "";
+        if (btnPosition == "down") {
+          label = "from-page-down";
+        } else {
+          label = "from-page-top";
+        }
 
-          this.registerComponentStatistics(
-            "payment",
-            "click-on-type-1",
-            label
-          );
+        this.registerComponentStatistics("payment", "click-on-type-1", label);
       }
 
       this.packagePage = item;

@@ -114,7 +114,7 @@ span {
   left: 0;
   width: 100%;
   z-index: 1;
-  padding: 10px 10px 15px;
+  padding: 2px 10px 12px;
   background: #fff;
   display: flex;
   height: 61px;
@@ -125,10 +125,8 @@ span {
   width: 100%;
   border-radius: 6px;
   margin: 0 auto;
-  font-size: 14px;
-  padding: 0px;
   font-weight: 500;
-  max-width: 400px;
+  max-width: 300px;
 }
 
 .fix-send-message-wrapper button.disable {
@@ -1118,6 +1116,17 @@ export default {
   },
   updated() {
     this.$nextTick(this.stopLoader());
+  },
+  created() {
+    if (this.isUserLogin) {
+      this.updatedCurrentUser = {
+        profile: "",
+        user_info: {
+          is_seller: this.userType == 1 ? 1 : 0,
+          is_buyer: this.userType == 0 ? 1 : 0,
+        },
+      };
+    }
   },
   watch: {
     $route(to, from) {

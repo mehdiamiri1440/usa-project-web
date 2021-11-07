@@ -1373,18 +1373,18 @@ export default {
     getUserData(itemName) {
       switch (itemName) {
         case "id":
-          return this.currentUser.user_info && this.currentUser.user_info.id
+          return !!this.currentUser.user_info && this.currentUser.user_info.id
             ? this.currentUser.user_info.id
             : this.userId;
           break;
         case "type":
-          return this.currentUser.user_info &&
+          return !!this.currentUser.user_info &&
             this.currentUser.user_info.is_seller
             ? this.currentUser.user_info.is_seller
             : this.isSeller;
           break;
         case "name":
-          return this.currentUser.user_info &&
+          return !!this.currentUser.user_info &&
             this.currentUser.user_info.first_name
             ? this.currentUser.user_info.first_name +
                 " " +
@@ -1393,7 +1393,7 @@ export default {
 
           break;
         case "photo":
-          return this.currentUser.user_info &&
+          return !!this.currentUser.user_info &&
             this.currentUser.profile.profile_photo
             ? this.currentUser.profile.profile_photo
             : this.profilePhoto;

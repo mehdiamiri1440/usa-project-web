@@ -103,9 +103,9 @@
       <p class="main-action">
         <span
           v-if="
-            $parent.currentUser.user_info &&
+            $parent.updatedCurrentUser.user_info &&
             $parent.product.user_info.has_phone &&
-            $parent.currentUser.user_info.is_buyer
+            $parent.updatedCurrentUser.user_info.is_buyer
           "
         >
           <button
@@ -125,7 +125,7 @@
         </span>
         <button
           v-else-if="
-            !$parent.currentUser.user_info &&
+            !$parent.updatedCurrentUser.user_info &&
             $parent.product.user_info.has_phone
           "
           @click="openLoginModal(false)"
@@ -136,9 +136,9 @@
         </button>
         <button
           v-else-if="
-            (!!$parent.currentUser.user_info &&
+            (!!$parent.updatedCurrentUser.user_info &&
               !$parent.product.user_info.has_phone) ||
-            (!!$parent.currentUser.user_info &&
+            (!!$parent.updatedCurrentUser.user_info &&
               $parent.product.user_info.has_phone)
           "
           @click="openChat()"
@@ -250,9 +250,9 @@ export default {
       // ready for analytics
       // click on chat button when user login
       this.$parent.registerComponentStatistics(
-          "product-view",
-          "price-modal",
-          "click-on-chat-btn"
+        "product-view",
+        "price-modal",
+        "click-on-chat-btn"
       );
 
       this.closeModal();

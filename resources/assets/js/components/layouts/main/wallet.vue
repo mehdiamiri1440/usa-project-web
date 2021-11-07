@@ -309,7 +309,7 @@ export default {
   props: ["userName", "walletBalance"],
   data: function () {
     return {
-      price: "50,000",
+      price: "100,000",
       priceError: "",
     };
   },
