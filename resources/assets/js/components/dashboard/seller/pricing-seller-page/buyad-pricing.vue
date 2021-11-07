@@ -477,6 +477,7 @@ input[type="number"] {
           <product-pricing-contents
             justPro="false"
             :offer-time="this.offerTime"
+            :currentUser="currentUser"
           />
         </div>
       </div>
@@ -498,7 +499,7 @@ import swal from "../../../../sweetalert.min.js";
 import { eventBus } from "../../../../router/router";
 
 export default {
-  props: ["offerTime"],
+  props: ["offerTime", "currentUser"],
   components: { ProductPricing, productPricingContents },
   data: function () {
     return {

@@ -380,6 +380,7 @@ border-radius: 8px;
   padding: 6px ;
   width: 100%;
   max-width: 200px ;
+  transition: 150ms;
 }
 
 .main-button-alt{
@@ -392,6 +393,7 @@ border-radius: 8px;
   padding: 6px ;
   width: 100%;
   max-width: 200px ;
+  transition: 150ms;
 }
 
 .button-link{
@@ -404,6 +406,7 @@ border-radius: 8px;
   padding: 6px ;
   width: 100%;
   max-width: 200px ;
+  transition: 150ms;
 }
 
 .small-button{

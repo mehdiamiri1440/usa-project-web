@@ -488,11 +488,11 @@ button.send-message-button {
         <button
           v-if="!isMyProfile && currentUser.user_info"
           @click.prevent="openChat(product)"
-          class="main-button bg-soft-orange orange-text button-shadow"
+          class="main-button button-shadow"
           :class="{
-            'send-message-button':
+            'bg-soft-orange orange-text send-message-button':
               product.user_info.has_phone && currentUser.user_info.is_buyer,
-            'single-item':
+            'bg-orange white-text':
               !product.user_info.has_phone ||
               (product.user_info.has_phone && currentUser.user_info.is_seller),
           }"
@@ -504,10 +504,11 @@ button.send-message-button {
         <button
           v-else-if="!currentUser.user_info"
           @click.prevent="loginModal(true)"
-          class="main-button bg-soft-orange orange-text button-shadow"
+          class="main-button button-shadow"
           :class="{
-            'send-message-button': product.user_info.has_phone,
-            'single-item': !product.user_info.has_phone,
+            'bg-soft-orange orange-text send-message-button':
+              product.user_info.has_phone,
+            'bg-orange white-text': !product.user_info.has_phone,
           }"
         >
           <span> چت با فروشنده </span>
@@ -525,7 +526,7 @@ button.send-message-button {
           :class="{ disable: isActivePhone }"
           :disabled="isActivePhone"
         >
-          اطلاعات تماس
+          تماس با فروشنده
           <i class="fas fa-phone-alt" v-if="!getPhoneLoader"></i>
           <div v-else class="spinner-border">
             <span class="sr-only"></span>
@@ -538,7 +539,7 @@ button.send-message-button {
           :class="{ disable: isActivePhone }"
           :disabled="isActivePhone"
         >
-          اطلاعات تماس
+          تماس با فروشنده
           <i class="fas fa-phone-alt" v-if="!getPhoneLoader"></i>
           <div v-else class="spinner-border">
             <span class="sr-only"></span>
@@ -702,7 +703,7 @@ export default {
 
           //   this.$router.push({ name: "registerInquiry" });
         } else {
-          window.location.reload()
+          window.location.reload();
           // this.popUpMsg = "شما نمی توانید به خودتان پیام دهید.";
           // eventBus.$emit("submitSuccess", this.popUpMsg);
           // $("#custom-main-modal").modal("show");
@@ -741,7 +742,7 @@ export default {
 
           eventBus.$emit("ChatInfo", contact);
         } else {
-          window.location.reload()
+          window.location.reload();
           // this.popUpMsg = "شما نمی توانید به خودتان پیام دهید.";
           // eventBus.$emit("submitSuccess", this.popUpMsg);
           // $("#custom-main-modal").modal("show");
@@ -1077,6 +1078,9 @@ export default {
       window.scrollTo(0, 0);
     },
     openPriceModal() {
+      // ready for analytics click on estelam gheymat
+      // this.registerComponentStatistics("","","");
+
       let customModal = $(".price-modal");
       customModal.addClass("show-custom-modal");
       this.handleBackForCustomModal(customModal, "show-custom-modal");
@@ -1094,6 +1098,18 @@ export default {
           }
         });
       }
+    },
+    openEditModal(element) {
+      $(element).modal("show");
+      this.handleBackKeys();
+    },
+    handleBackKeys: function () {
+      if (window.history.state) {
+        history.pushState(null, null, window.location);
+      }
+      $(window).on("popstate", function (e) {
+        $(".modal").modal("hide");
+      });
     },
   },
   created() {

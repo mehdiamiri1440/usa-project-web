@@ -13,6 +13,11 @@
   background-color: #556080 !important;
 }
 
+.item-header .main-button {
+  max-width: 240px;
+  padding: 10px;
+}
+
 .item-wrapper {
   position: relative;
   padding: 0;
@@ -349,11 +354,12 @@
 }
 
 .icon-wrapper {
-  float: right;
-  font-size: 45px;
-  height: 45px;
-  width: 45px;
+  width: 30px;
   line-height: 1;
+  display: inline-block;
+  position: relative;
+  top: 5px;
+  margin-right: 33px;
 }
 
 .content-wrapper {
@@ -518,6 +524,21 @@
 .panel-heading a.collapsed:after {
   content: "\f107";
 }
+.switch-package-button-wrapper {
+  background: linear-gradient(25deg, #c6cccd, rgba(255, 255, 255, 0));
+  border-radius: 50px;
+  padding: 1px;
+  max-width: 275px;
+  margin: 15px auto;
+}
+
+.switch-package-button-wrapper button {
+  background: #e8e8e8;
+  max-width: 100%;
+  border-radius: 50px;
+  padding: 19px 6px;
+  color: #264653;
+}
 
 @media screen and (max-width: 991px) {
   .package-wrapper > div {
@@ -610,10 +631,10 @@
       <div class="tab-action-wrapper" :class="{ 'page-type': !isModal }">
         <div class="hidden-md hidden-lg">
           <div :class="{ active: packagePage == 1 }">
-            <button @click="packagePage = 1">بسته ویژه سالانه</button>
+            <button @click="switchPackage(1)">بسته ویژه سالانه</button>
           </div>
           <div :class="{ active: packagePage == 2 }">
-            <button @click="packagePage = 2">بسته پایه سه ماهه</button>
+            <button @click="switchPackage(2)">بسته پایه سه ماهه</button>
           </div>
         </div>
       </div>
@@ -874,7 +895,6 @@
                 @click.prevent="doPayment(3)"
                 class="
                   main-button
-                  small-button
                   button-shadow
                   white-text
                   hover-effect
@@ -1134,7 +1154,6 @@
                 @click.prevent="doPayment(1)"
                 class="
                   main-button
-                  small-button
                   button-shadow
                   white-text
                   hover-effect
@@ -1282,20 +1301,31 @@
         </div>
         <div class="row">
           <div class="switch-actions hidden-md hidden-lg col-xs-12 text-center">
-            <button
-              v-if="packagePage == 1"
-              @click="packagePage = 2"
-              class="bg-navy-blue main-button button-shadow white-text"
-            >
-              بسته پایه سه ماهه
-            </button>
-            <button
-              v-else
-              @click="packagePage = 1"
-              class="bg-navy-blue main-button button-shadow white-text"
-            >
-              بسته ویژه سالانه
-            </button>
+            <div class="switch-package-button-wrapper">
+              <button
+                v-if="packagePage == 1"
+                @click="switchPackage(2)"
+                class="main-button"
+              >
+                <div class="icon-wrapper">
+                  <img
+                    src="../../../../../../img/main-arrow.svg"
+                    alt="main-arrow.svg"
+                  />
+                </div>
+
+                <span> بسته پایه سه ماهه</span>
+              </button>
+              <button v-else @click="switchPackage(1)" class="main-button">
+                <div class="icon-wrapper">
+                  <img
+                    src="../../../../../../img/main-arrow.svg"
+                    alt="main-arrow.svg"
+                  />
+                </div>
+                <span> بسته ویژه سالانه </span>
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -1307,7 +1337,7 @@
 <script>
 import { eventBus } from "../../../../../router/router";
 export default {
-  props: ["justPro", "offerTime", "isModal"],
+  props: ["justPro", "offerTime", "isModal", "currentUser"],
   data: function () {
     return {
       packagePage: 1,
@@ -1438,21 +1468,22 @@ export default {
     setPricingHeaderScroll() {
       let elementSpace = $(".tab-action-wrapper.page-type + #action-spaces");
       let element = $(".tab-action-wrapper.page-type");
-      let pricingHeaderTop = element.offset().top;
 
-      $(window).scroll(() => {
-        if (
-          this.$route.name == "dashboardPricingTableSeller" 
-        ) {
-          if ($(window).scrollTop() >= pricingHeaderTop - 42 ) {
-            element.addClass("fixed-tab-action");
-            elementSpace.height(62);
-          } else {
-            element.removeClass("fixed-tab-action");
-            elementSpace.height(0);
+      if (element.length) {
+        let pricingHeaderTop = element.offset().top;
+
+        $(window).scroll(() => {
+          if (this.$route.name == "dashboardPricingTableSeller") {
+            if ($(window).scrollTop() >= pricingHeaderTop - 42) {
+              element.addClass("fixed-tab-action");
+              elementSpace.height(62);
+            } else {
+              element.removeClass("fixed-tab-action");
+              elementSpace.height(0);
+            }
           }
-        }
-      });
+        });
+      }
     },
     getPrices() {
       axios.post("/payment/get-packages-price").then((response) => {
@@ -1512,16 +1543,21 @@ export default {
       $("#payment-type-modal").modal("show");
     },
     doPayment: function (packageType) {
-      this.$parent.doPaymentLoader = true;
-      let userId = getUserId();
+      let totalPrice = this.getTotalPriceForPay(packageType);
 
-      this.registerComponentStatistics(
-        "payment",
-        "type-" + packageType,
-        "userId: " + userId
-      );
-      window.location.href = "/payment/" + packageType;
+      if (this.currentUser.user_info.wallet_balance >= totalPrice) {
+        this.openPaymentModal(packageType);
+      } else {
+        this.$parent.doPaymentLoader = true;
+        let userId = getUserId();
 
+        this.registerComponentStatistics(
+          "payment",
+          "type-" + packageType,
+          "userId: " + userId
+        );
+        window.location.href = "/payment/" + packageType;
+      }
       // *****  payment width factor  *****
 
       // let paymentData = {
@@ -1612,6 +1648,17 @@ export default {
       } else {
         return false;
       }
+    },
+    switchPackage(item) {
+      if (item == 1) {
+        // ready for analytics if switch to package type 1
+        // this.registerComponentStatistics("","","");
+      } else if (item == 2) {
+        // ready for analytics if switch to package type 3
+        // this.registerComponentStatistics("","","");
+      }
+
+      this.packagePage = item;
     },
   },
   mounted() {

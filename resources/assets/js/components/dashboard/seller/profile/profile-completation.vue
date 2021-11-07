@@ -27,6 +27,7 @@ p {
   border: 1px solid #999;
   border-radius: 12px;
   padding: 20px 10px;
+  direction: rtl;
 }
 
 .title-item {
@@ -84,7 +85,8 @@ p {
       ></span>
     </div>
     <p class="gray-text">
-      اطلاعات پروفایل خود را تکمیل کنید تا اعتماد کاربران را بیشتر به خود جلب کنید و پاسخ های سریعتری دریافت کنید.
+      اطلاعات پروفایل خود را تکمیل کنید تا اعتماد کاربران را بیشتر به خود جلب
+      کنید و پاسخ های سریعتری دریافت کنید.
     </p>
     <div id="clone-box" class="hidden">
       <div v-if="!verification" :class="{ 'ready-clone': !verification }">
@@ -169,7 +171,9 @@ p {
       </div>
     </div>
     <div class="row">
-      <div class="owl-carousel owl-theme profile-carosel item-wrapper"></div>
+      <div
+        class="owl-carousel owl-theme text-ltr profile-carosel item-wrapper"
+      ></div>
     </div>
   </div>
 </template>
@@ -258,7 +262,7 @@ export default {
         margin: 15,
         dots: true,
         stagePadding: 5,
-        rtl: true,
+        rtl: false,
         responsive: {
           0: {
             items: 1,

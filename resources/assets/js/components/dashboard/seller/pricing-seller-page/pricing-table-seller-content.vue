@@ -429,7 +429,11 @@
           </div>
 
           <!-- show pricing items -->
-          <pricing-contents justPro="false" :offer-time="this.offerTime" />
+          <pricing-contents
+            :currentUser="currentUser"
+            justPro="false"
+            :offer-time="this.offerTime"
+          />
 
           <!-- after pricing items  -->
         </div>
@@ -470,7 +474,7 @@ import pricingContents from "./pricing-tables/pricing-package-contents";
 import swal from "../../../../sweetalert.min.js";
 
 export default {
-  props: ["offerTime"],
+  props: ["offerTime", "currentUser"],
   components: { pricingUserCarousel, pricingContents },
   data: function () {
     return {

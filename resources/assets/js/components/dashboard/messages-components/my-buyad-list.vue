@@ -743,7 +743,7 @@ li.static-item > button i {
                       >
                         <span>
                           <span class="fas fa-phone-square-alt"></span>
-                          اطلاعات تماس
+                          تماس با خریدار
                         </span>
                         <span class="hide-reply text-rtl">
                           کمی صبر کنید...
@@ -842,7 +842,7 @@ li.static-item > button i {
                     >
                       <span>
                         <span class="fas fa-phone-square-alt"></span>
-                        اطلاعات تماس
+                        تماس با خریدار
                       </span>
                       <span class="hide-reply text-rtl"> کمی صبر کنید... </span>
                     </button>
@@ -931,7 +931,7 @@ li.static-item > button i {
                       >
                         <span>
                           <span class="fas fa-phone-square-alt"></span>
-                          اطلاعات تماس
+                          تماس با خریدار
                         </span>
                         <span class="hide-reply text-rtl">
                           کمی صبر کنید...

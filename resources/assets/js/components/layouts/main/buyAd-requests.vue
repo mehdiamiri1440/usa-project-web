@@ -964,7 +964,7 @@ button.disable {
                         >
                           <span>
                             <span class="fas fa-phone-square-alt"></span>
-                            اطلاعات تماس
+                            تماس با خریدار
                           </span>
                           <span class="hide-reply text-rtl">
                             کمی صبر کنید...
@@ -980,7 +980,7 @@ button.disable {
                         >
                           <span>
                             <span class="fas fa-phone-square-alt"></span>
-                            اطلاعات تماس
+                            تماس با خریدار
                           </span>
                           <span class="hide-reply text-rtl">
                             کمی صبر کنید...
@@ -1168,7 +1168,7 @@ button.disable {
                           <span :id="'loader-chat-' + buyAd.id">
                             <span>
                               <span class="fas fa-phone-square-alt"></span>
-                              اطلاعات تماس
+                              تماس با خریدار
                             </span>
                           </span>
                         </router-link>

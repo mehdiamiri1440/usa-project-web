@@ -128,7 +128,7 @@
             !$parent.currentUser.user_info &&
             $parent.product.user_info.has_phone
           "
-          @click="routeToLogin(false)"
+          @click="openLoginModal(false)"
           class="main-button bg-orange white-text"
         >
           <i class="fa fa-phone-alt"></i>
@@ -142,48 +142,47 @@
               $parent.product.user_info.has_phone)
           "
           @click="openChat()"
-          class="main-button bg-soft-orange orange-text button-shadow"
+          class="main-button bg-orange white-text"
         >
           <i class="fa fa-comment-alt"></i>
           <span> چت با فروشنده </span>
         </button>
         <button
           v-else
-          @click="routeToLogin(true)"
-          class="main-button bg-soft-orange orange-text button-shadow"
+          @click="openLoginModal(true)"
+          class="main-button bg-orange white-text"
         >
           <i class="fa fa-comment-alt"></i>
           <span> چت با فروشنده </span>
         </button>
       </p>
       <p class="second-action">
-        <router-link
-          tag="button"
-          :to="{ name: 'registerProductSeller' }"
+        <button
+          @click="routeToPage('registerProductSeller')"
           class="orange-text button-link"
           v-if="
             !!$parent.currentUser.user_info &&
             $parent.currentUser.user_info.is_seller
           "
-          >محصول برای فروش دارم</router-link
         >
-        <router-link
-          tag="button"
-          :to="{ name: 'registerRequestBuyer' }"
-          class="orange-text button-link"
+          محصول برای فروش دارم
+        </button>
+        <span
           v-else-if="
             !!$parent.currentUser.user_info &&
             $parent.currentUser.user_info.is_buyer
           "
-          >ثبت درخواست خرید</router-link
+          class="button-link"
         >
-        <router-link
-          tag="button"
-          :to="{ name: 'register' }"
+          <br />
+        </span>
+        <button
+          @click="routeToPage('register')"
           class="orange-text button-link"
           v-else
-          >محصول برای فروش دارم</router-link
         >
+          محصول برای فروش دارم
+        </button>
       </p>
     </div>
     <div @click="closeModal()" class="button-background"></div>
@@ -201,16 +200,40 @@ export default {
       else return "";
     },
     openPhone(isModal = false) {
+      // ready for analytics click call phone when  user login
+      // this.$parent.registerComponentStatistics("", "", "");
+
       this.closeModal();
       this.$parent.activePhoneCall(isModal);
     },
-    routeToLogin() {
+    routeToPage(routeName) {
+      // ready for analytics
+      // when click on mahsol baraye forosh daram
+      // this.$parent.registerComponentStatistics("", "", "");
+
+      this.$router.push({ name: routeName });
+    },
+    openLoginModal(isChat) {
+      if (isChat) {
+        // ready for analytics
+        // click on chat button when user not logged in
+        // this.$parent.registerComponentStatistics("", "", "");
+      } else {
+        // ready for analytics
+        // click on phone call button when user not logged in
+        // this.$parent.registerComponentStatistics("", "", "");
+      }
+
       this.closeModal();
       setTimeout(() => {
         this.$parent.loginModal(false);
       }, 200);
     },
     openChat() {
+      // ready for analytics
+      // click on chat button when user login
+      // this.$parent.registerComponentStatistics("", "", "");
+
       this.closeModal();
       this.$parent.openChat(this.$parent.product);
     },

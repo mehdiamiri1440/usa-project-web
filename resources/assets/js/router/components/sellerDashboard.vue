@@ -277,6 +277,7 @@
                   justPro="false"
                   :offer-time="this.offerTime"
                   isModal="modal-"
+                  :currentUser="currentUser"
                 />
               </div>
             </div>

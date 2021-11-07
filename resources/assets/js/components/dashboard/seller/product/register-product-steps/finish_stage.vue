@@ -540,7 +540,7 @@ li .buyad-button.send-message-button:hover {
             >
               <span>
                 <span class="fas fa-phone-square-alt"></span>
-                اطلاعات تماس
+                تماس با خریدار
               </span>
               <span class="hide-reply text-rtl"> کمی صبر کنید... </span>
             </button>
@@ -552,7 +552,7 @@ li .buyad-button.send-message-button:hover {
             >
               <span>
                 <span class="fas fa-phone-square-alt"></span>
-                اطلاعات تماس
+                تماس با خریدار
               </span>
               <span class="hide-reply text-rtl"> کمی صبر کنید... </span>
             </button>
