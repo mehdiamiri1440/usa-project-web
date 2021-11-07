@@ -121,6 +121,13 @@ input,textarea {
   margin: 0 auto;
 }
 
+.small-icon {
+  width: 25px;
+  height: 25px;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
 .default-icon {
   width: 50px;
   height: 50px;
@@ -136,7 +143,7 @@ input,textarea {
   overflow: hidden;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
-  border-radius: 3px;
+  border-radius: 8px;
   display: inline-block;
 }
 
@@ -147,7 +154,7 @@ input,textarea {
   overflow: hidden;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
-  border-radius: 3px;
+border-radius: 8px;
   display: inline-block;
 }
 
@@ -159,8 +166,12 @@ input,textarea {
   overflow: hidden;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
-  border-radius: 3px;
+border-radius: 8px;
   display: inline-block;
+}
+
+.default-mdedium-button-width {
+  width: 135px;
 }
 
 .default-item-wrapper {
@@ -200,6 +211,10 @@ input,textarea {
   direction: ltr;
 }
 
+.margin-5-0 {
+  margin: 10px 0;
+}
+
 .margin-10-0 {
   margin: 10px 0;
 }
@@ -218,6 +233,9 @@ input,textarea {
 .margin-15-0 {
   margin: 15px 0;
 }
+.margin-30-0 {
+  margin: 30px 0;
+}
 .margin-0-15 {
   margin: 0 15px;
 }
@@ -233,16 +251,58 @@ input,textarea {
   margin: 15px auto;
 }
 
+.margin-h-10 {
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.margin-v-5 {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
 .margin-top-10 {
   margin-top: 10px;
 }
 
 .margin-top-15 {
-  margin-top: 10px;
+  margin-top: 15px;
+}
+
+.margin-top-20 {
+  margin-top: 20px;
+}
+
+.margin-top-25 {
+  margin-top: 25px;
+}
+
+.margin-top-30 {
+  margin-top: 30px;
+}
+
+.margin-top-50 {
+  margin-top: 50px;
+}
+
+.margin-bottom-10 {
+  margin-bottom: 10px;
+}
+
+.margin-bottom-50 {
+  margin-bottom: 50px;
+}
+
+.margin-bottom-100 {
+  margin-bottom: 100px;
 }
 
 .padding-top-5 {
   padding-top: 5px;
+}
+
+.padding-top-60 {
+  padding-top: 60px !important;
 }
 
 .padding-bottom-5 {
@@ -269,8 +329,16 @@ input,textarea {
   padding: 15px 0 !important;
 }
 
+.padding-0-10 {
+  padding: 0 10px !important;
+}
+
 .padding-0-15 {
   padding: 0 15px !important;
+}
+
+.padding-0-30 {
+  padding: 0 30px !important;
 }
 
 .h-20 {
@@ -285,8 +353,13 @@ input,textarea {
   height: 30px;
 }
 
+
 .h-40 {
   height: 40px;
+}
+
+.h-45 {
+  height: 45px;
 }
 
 .h-100 {
@@ -297,6 +370,85 @@ input,textarea {
   width: 100%;
 }
 
+.main-button{
+  border:none;
+  font-size: 16px;
+  border-radius: 4px;
+  background: #bebebe;
+  color: #333;
+  display: inline-block;
+  padding: 6px ;
+  width: 100%;
+  max-width: 200px ;
+  transition: 150ms;
+}
+
+.main-button-alt{
+  border:1px solid;
+  font-size: 16px;
+  border-radius: 4px;
+  background: none;
+  color: #333;
+  display: inline-block;
+  padding: 6px ;
+  width: 100%;
+  max-width: 200px ;
+  transition: 150ms;
+}
+
+.button-link{
+  border:none;
+  font-size: 16px;
+  border-radius: 4px;
+  background: none;
+  color: #333;
+  display: inline-block;
+  padding: 6px ;
+  width: 100%;
+  max-width: 200px ;
+  transition: 150ms;
+}
+
+.small-button{
+  max-width: 150px;
+font-size: 14px;
+padding: 4px;
+}
+
+
+.main-button i{
+  font-size: 16px;
+  position: relative;
+  top: 2px;
+}
+
+
+.main-button svg{
+  display: inline;
+    max-width: 20px;
+    position: relative;
+    top: 2px;
+    margin-left: 2px;
+}
+
+.main-button i.fa-angle-left{
+  right: 9px;
+}
+
+.main-button.small-button i{
+  font-size: 14px;
+
+}
+
+
+.button-shadow{
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.white-text {
+  color: #fff !important;
+}
+
 .red-text {
   color: #e41c38 !important;
 }
@@ -305,9 +457,19 @@ input,textarea {
   color: #ffbb00 !important;
 }
 
+.orange-text {
+  color: #FF6600 !important;
+}
+
+
+.navy-blue-text {
+  color: #140092 !important;
+}
+
 .blue-text {
   color: #1DA1F2 !important;
 }
+
 .brand-text {
   color: #556080 !important;
 }
@@ -315,6 +477,7 @@ input,textarea {
 .green-text {
   color: #00c569;
 }
+
 .light-green-text {
   color: #21ad93;
 }
@@ -332,6 +495,14 @@ input,textarea {
   background-color: #fff !important;
 }
 
+.bg-orange {
+  background-color: #FF6600 !important;
+}
+
+.bg-soft-orange {
+  background-color: #FFD5A8 !important;
+}
+
 .bg-red {
   background-color: #e41c38 !important;
 }
@@ -340,12 +511,28 @@ input,textarea {
   background-color: #00c569 !important;
 }
 
+.bg-light-green {
+  background-color: #21ad93 !important;
+}
+
+.bg-navy-blue {
+  background-color: #140092 !important;
+}
+
+.bg-soft-blue{
+  background-color: #C4BFE4 !important;
+}
+
 .bg-blue {
   background-color: #1DA1F2 !important;
 }
 
 .bg-gray {
   background-color: #556080 !important;
+}
+
+.bg-gradient-green{
+  background: linear-gradient(90deg,#21AD93,#00C569) !important;
 }
 
 .category-products-widget-default {
@@ -418,7 +605,8 @@ input,textarea {
 
 .default-product-image {
   height: 380px;
-  border-radius: 12px;
+    border-radius: 12px;
+
 }
 
 .default-product-contents {
@@ -434,7 +622,7 @@ input,textarea {
 
   justify-content: space-between;
 
-  padding: 15px 0;
+  padding: 22px 0;
 
   border-bottom: 1px solid #f1f1f1;
 }
@@ -448,9 +636,82 @@ input,textarea {
 
 
 
+/* custom button style */
+
+
+.default-btn-with-icon {
+  width: 100%;
+  background: rgba(197, 225, 235, 0.5);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-sizing: border-box;
+  box-shadow: 0px 4px 8px rgba(151, 151, 151, 0.2);
+  border-radius: 15px;
+  position: relative;
+  top: 0;
+  padding: 10px;
+  margin: 15px auto;
+  max-width: 320px;
+  display: block;
+  transition: 150ms;
+}
+
+.default-btn-with-icon:hover {
+  box-shadow: 0px 4px 8px rgba(151, 151, 151, 0.4);
+  top: -3px;
+  transition: 150ms;
+}
+
+.button-main-icon-wrapper {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(
+    180deg,
+    rgba(21, 49, 60, 0.83) 0%,
+    rgba(39, 182, 238, 0.72) 100%
+  );
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  float: right;
+  justify-content: center;
+}
+
+.button-main-icon-wrapper > i{
+  font-size: 18px;
+color: #fff;
+}
+
+.button-content-wrapper {
+  float: right;
+  width: calc(100% - 48px);
+  text-align: right;
+  padding-right: 20px;
+}
+
+.default-btn-with-icon > i {
+  position: absolute;
+  left: 20px;
+  color: #15313c;
+  font-size: 20px;
+  top: 23px;
+}
+
+.button-title.single-title {
+  height: 48px;
+display: flex;
+align-items: center;
+direction: rtl;
+}
+
+.button-text {
+  font-weight: 200;
+  font-size: 12px;
+}
+
+
+
+
 /* toast style */
-
-
 
 .toast {
   visibility: hidden;
@@ -504,7 +765,7 @@ input,textarea {
 
 .default-index-product-image {
   position: relative;
-  height: 140px;
+  height: 135px;
 }
 
 /*end product view styles*/
