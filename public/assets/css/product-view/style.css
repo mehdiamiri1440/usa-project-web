@@ -183,7 +183,10 @@ span {
 }
 @media screen and (max-width: 1199px) {
 
+  .user-data-wrapper{
+    padding: 0;
 
+  }
   .default-carousel-item:last-of-type {
     display: none;
   }
@@ -584,7 +587,7 @@ a.user-name-link {
   
   .product-info-table li {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     direction: rtl;
     font-weight: 700;
     width: 100%;
@@ -1211,11 +1214,6 @@ text-align: center;
     float: right;
   }
 
-  .user-info-actions,
-  .default-user-action-buttons {
-    float: left;
-  }
-
   .valid-icon {
     padding-top: 3px;
 
@@ -1287,10 +1285,6 @@ text-align: center;
   .rating-stars p > span i {
     left: -1px;
     font-size: 17px;
-  }
-
-  .user-information-content {
-    width: calc(100% - 85px);
   }
 
   .user-information-content p.stars-wrapper {
