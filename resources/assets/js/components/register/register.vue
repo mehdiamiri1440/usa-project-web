@@ -79,6 +79,15 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 @media screen and (max-width: 767px) {
+  .logo-wrapper {
+    margin-bottom: 22px;
+  }
+  .header-wrapper > h1 {
+    margin-bottom: 26px;
+  }
+  .header-wrapper > p {
+    margin-bottom: 12px;
+  }
   #main {
     padding: 0;
   }
