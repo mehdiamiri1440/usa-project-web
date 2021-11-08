@@ -607,6 +607,7 @@ export default {
   },
   methods: {
     init() {
+      this.updatedCurrentUser = this.currentUser;
       this.scrollToTop();
       if (this.checkIsMobile(991)) {
         this.setActionScroll();
