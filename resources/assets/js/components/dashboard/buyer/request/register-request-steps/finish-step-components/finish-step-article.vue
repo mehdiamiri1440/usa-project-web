@@ -320,7 +320,7 @@ button i {
             <div v-else class="spinner-border">
               <span class="sr-only"></span>
             </div>
-            اطلاعات تماس
+            تماس با فروشنده
           </span>
         </button>
         <button

@@ -418,6 +418,9 @@ export default {
     currentCode(value) {
       if (value) {
         this.$parent.step2.verification_code = value;
+        if (value.length == 4) {
+          this.submitVerifyCode();
+        }
       }
     },
     "$parent.step2.verification_code"(code) {
