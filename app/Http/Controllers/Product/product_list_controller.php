@@ -818,24 +818,24 @@ class product_list_controller extends Controller
                 $search_expresion .= "($text)(.*)";
             }
 
-            $general_category = DB::table('tags')
-                                    ->where('header','like',"%$search_text%")
-                                    ->get()
-                                    ->first();
+            // $general_category = DB::table('tags')
+            //                         ->where('header','like',"%$search_text%")
+            //                         ->get()
+            //                         ->first();
 
-            if($general_category)
-            {
-                $category_id = $general_category->category_id;
+            // if($general_category)
+            // {
+            //     $category_id = $general_category->category_id;
 
-                $result_products = array_filter($products,function($product) use($search_expresion,$category_id){
-                    return  $category_id == $product['main']->sub_category_id && $this->does_search_text_matche_the_product($search_expresion,$product);
-                });
-            }
-            else{
+            //     $result_products = array_filter($products,function($product) use($search_expresion,$category_id){
+            //         return  $category_id == $product['main']->sub_category_id && $this->does_search_text_matche_the_product($search_expresion,$product);
+            //     });
+            // }
+            // else{
                 $result_products = array_filter($products,function($product) use($search_expresion){
                     return $this->does_search_text_matche_the_product($search_expresion,$product);
                 });
-            }
+            // }
 
             
             if(count($result_products) == 0){
@@ -866,7 +866,12 @@ class product_list_controller extends Controller
         $product_info[] = $product['user_info']->first_name . $product['user_info']->last_name;
 
         $result = array_filter($product_info, function ($item) use ($search_expresion) {
-            return preg_match("/$search_expresion/", $item);
+            try{
+                return preg_match("/$search_expresion/", $item);
+            }
+            catch(\Exception $e){
+                return false;
+            } 
         });
 
         if (sizeof($result) > 0) {

@@ -1424,7 +1424,7 @@ class product_controller extends Controller
             $product->photo = product_media::where('product_id', $product->id)
                                                 ->get()
                                                 ->first()
-                                                ->file_path;
+                                                ->file_path ?? null;
         }
 
         return view('layout.product-detail',[
