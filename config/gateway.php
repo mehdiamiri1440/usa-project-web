@@ -16,8 +16,8 @@ return [
         'type'         => 'normal',             // Types: [zarin-gate || normal]
         'callback-url' => '/',
         'server'       => 'iran',                // Servers: [germany || iran || test]
-        'email'        => 'ali_delkhosh@ymail.com',
-        'mobile'       => '09118413054',
+        'email'        => '',
+        'mobile'       => '',
         'description'  => 'باسکول',
     ],
 
