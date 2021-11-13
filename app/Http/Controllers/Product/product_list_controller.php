@@ -1231,14 +1231,17 @@ class product_list_controller extends Controller
                 $temp = $tags_info->first();
                 $schema_object = null;
                 
-                if($schema_object){
+                if($temp->schema_object){
                     $schema_object = $temp->schema_object;
+                }
+                else{
+                    $schema_object = null;
                 }
                 
                 unset($tags_info->schema_object);
 
                 $tags_info = $tags_info->filter(function($item) use($temp){
-                    return $temp->id == $item->id || $item->header != strip_tags($item->header);
+                    return $temp->id == $item->id;
                 });
             }
             
