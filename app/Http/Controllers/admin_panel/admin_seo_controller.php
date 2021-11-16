@@ -16,7 +16,8 @@ class admin_seo_controller extends Controller
             'header' => 'required|string|max:250',
             'content' => 'required|string',
             'schema' => 'nullable|string',
-            'meta_data_id' => 'required|integer|exists:tags,id'
+            'meta_data_id' => 'required|integer|exists:tags,id',
+            'category_id' => 'required|integer|exists:categories,id'
             // 'password' => 'required',
         ]);
 
@@ -28,6 +29,7 @@ class admin_seo_controller extends Controller
             'header' => $request->header,
             'content' => $request->content,
             'schema_object' => $schema,
+            'category_id' => $request->category_id
         ];
 
         DB::table('tags')
@@ -56,7 +58,8 @@ class admin_seo_controller extends Controller
             'header' => $request->header,
             'content' => $request->content,
             'schema_object' => $schema,
-            'category_id' => $request->category_id
+            'category_id' => $request->category_id,
+            'is_visible' => false
         ];
 
         DB::table('tags')->insert($meta_data_record);
@@ -89,5 +92,25 @@ class admin_seo_controller extends Controller
         return view('admin_panel.categoryMetaDataDetail',[
             'data' => $record
         ]);
+    }
+
+    public function make_category_meta_content_visible($id)
+    {
+        DB::table('tags')->where('id',$id)
+                        ->update([
+                            'is_visible' => true
+                        ]);
+
+        return redirect()->route('admin_panel_load_meta_contents_list');
+    }
+
+    public function make_category_meta_content_invisible($id)
+    {
+        DB::table('tags')->where('id',$id)
+                        ->update([
+                            'is_visible' => false
+                        ]);
+
+        return redirect()->route('admin_panel_load_meta_contents_list');
     }
 }

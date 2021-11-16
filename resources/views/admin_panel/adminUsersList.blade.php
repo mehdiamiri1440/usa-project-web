@@ -41,7 +41,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        لیست متا دیتا ها
+        کاربران ادمین
       </h1>
     </section>
 
@@ -51,70 +51,34 @@
           <div class="box">
             <div class="box-header">
               <h3 class="box-title">جدول داده ها</h3>
-                <form method="GET" action="{{route('admin_panel_load_meta_contents_list')}}">
-                  <div class="row">
-                    <div class="col-xs-4 col-xs-offset-4">
-                      <label>جستوجو‌ :‌ </label>
-                      <input type="text" name="search" placeholder="عنوان...">
-                      <input type="submit" class="btn btn-primary" value="برو">
-                    </div>
-                  </div>
-                </form>
-            </div>
-            <div class="row text-center">
-                <a href='/admin/add-category-meta-data-detail'>اضافه کردن اطلاعات جدید</a>
             </div>
             <!-- /.box-header -->
+            <div class="row text-center">
+                <a href='/admin/add-new-admin-form'>اضافه کردن ادمین حدید</a>
+            </div>
             <div class="box-body">
-              <table  class="table table-bordered table-striped">
+              <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
                   <th>#</th>
-                  <th>عنوان</th>
-                  <th>تاریخ ثبت اطلاعات</th>
-                  <th>آی دی دسته بندی</th>
-                  <th>اسکیما</th>
-                  <th>وضعیت</th>
-                  <th>جزییات</th>
+                  <th>نام و نام خانوادگی</th>
+                  <th>ایمیل</th>
+                  <th>مشاهده جزییات</th>
                 </tr>
                 </thead>
                 <tbody>
-                    @foreach($meta_records as $record)
-                      @if($record->is_visible == false)
-                        <tr class="warning">
-                            <td>{{$loop->iteration}}</td>
-                            <td>{{$record->header}}</td>
-                            <td>{{$record->created_at}}</td>
-                            <td>{{$record->category_id}}</td>
-                            <td>{{($record->schema_object == null) ? 'ندارد' : 'دارد'}}</td>
-                            <td>
-                                در صف انتشار
-                            </td>
-                            <td>
-                                <a href="{{route('load_meta_content_details_by_id',['id' => $record->id])}}">مشاهده جزییات</a>
-                            </td>
-                        </tr>
-                      @else
-                        <tr>
-                            <td>{{$loop->iteration}}</td>
-                            <td>{{$record->header}}</td>
-                            <td>{{$record->created_at}}</td>
-                            <td>{{$record->category_id}}</td>
-                            <td>{{($record->schema_object == null) ? 'ندارد' : 'دارد'}}</td>
-                            <td>
-                                منتشر شده
-                            </td>
-                            <td>
-                                <a href="{{route('load_meta_content_details_by_id',['id' => $record->id])}}">مشاهده جزییات</a>
-                            </td>
-                        </tr>
-                      @endif
+                    @foreach($users as $user)
+                    <tr>
+                        <td>{{$loop->iteration}}</td>
+                        <td>{{$user->full_name}}</td>
+                        <td>{{$user->email}}</td>
+                        <td>
+                          <a href="{{route('admin_panel_load_admin_user_permission_setup_form',['admin_user_id' => $user->id])}}">مشاهده</a>
+                        </td>
+                    </tr>
                     @endforeach
               </table>
-
-              <div align="center">
-                {{$meta_records->appends($_GET)->render("pagination::default")}}
-              </div>
+              
             </div>
             <!-- /.box-body -->
           </div>
@@ -153,15 +117,120 @@
 <!-- page script -->
 <script>
   $(function () {
-    $('#example1').DataTable()
-    $('#example2').DataTable({
-      'paging'      : true,
-      'lengthChange': false,
+    // $('#example1').DataTable()
+    $('#example1').DataTable({
+      'paging'      : false,
+      'lengthChange': true,
       'searching'   : false,
       'ordering'    : true,
       'info'        : true,
       'autoWidth'   : false
     })
   })
+</script>
+    <script>
+    function push_notification(data)
+    {
+        if (!window.Notification) {
+                alert("Sorry, Notification Not supported in this Browser!");
+        } else {
+            if (Notification.permission === 'default') {
+                  Notification.requestPermission(function(p) {
+                        if (p === 'denied')
+                              alert('You have denied Notification from Team Abhivyakti');
+                        else {
+                              notify = new Notification(data.title, {
+                                    body: data.msg,
+                                    icon: "{{asset('images/logo-Inco-mobile.png')}}",
+                              });
+                        }
+                  });
+            } else {
+                  notify = new Notification(data.title, {
+                        body: data.msg,
+                        icon: "{{asset('images/logo-Inco-mobile.png')}}",  
+                        // You Can give image Link to change notification Icon.
+                  });
+            }
+      }
+    }
+    function notif(){
+            $.ajax({
+                url: "{{route('admin_notify')}}",
+                method:'POST',
+                success: function(data){
+                    if(data.notify){
+                         push_notification(data);
+                        setTimeout(notif,300000);
+                    }
+                },
+        });
+    }
+        
+    $(document).ready(function() {
+      // run the first time; all subsequent calls will take care of themselves
+      setTimeout(notif, 5000);
+    });
+    
+</script>
+
+<script>
+    
+    function block_user(event)
+    {
+        event.preventDefault();
+        var e = event.currentTarget;
+
+        var user_id = $(e).attr('id');
+
+        $.ajax({
+            url:"{{route('admin_panel_block_operator')}}",
+            xhrFields: {
+                withCredentials: true
+            },
+            data:{
+                user_id:user_id,
+                block:1
+            },
+            type:"POST",
+            datatype:'json'
+        })
+        .done(function(json){
+            alert(json.msg); 
+            window.location.reload();          
+        })
+        .fail(function(xhr,status,errorThrown){
+
+        });   
+    }
+
+    function unblock_user(event)
+    {
+        event.preventDefault();
+        var e = event.currentTarget;
+
+        var user_id = $(e).attr('id');
+
+        $.ajax({
+            url:"{{route('admin_panel_block_operator')}}",
+            xhrFields: {
+                withCredentials: true
+            },
+            data:{
+                user_id:user_id,
+                block:0
+            },
+            type:"POST",
+            datatype:'json'
+        })
+        .done(function(json){
+            alert(json.msg); 
+            window.location.reload();          
+        })
+        .fail(function(xhr,status,errorThrown){
+
+        });   
+    }
+
 </script>
 @endsection

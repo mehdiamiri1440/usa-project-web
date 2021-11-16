@@ -1152,6 +1152,41 @@ Route::group(['prefix' => 'admin', 'middleware' => [admin_login::class]], functi
     Route::get('/d-leads',function(){
         LeadDistributorBot::dispatch();
     });
+
+    Route::get('/admin-users-list',[
+        'uses' => 'admin_panel\admin_user_controller@load_admin_users_list',
+        'as' => 'load_admin_users_list'
+    ]);
+
+    Route::get('/add-new-admin-form',function(){
+        return view('admin_panel.addNewAdminUser');
+    })->name('admin_panel_add_new_admin_user_form');
+
+    Route::post('/add-new-admin-user',[
+        'uses' => 'admin_panel\admin_user_controller@add_new_admin_user',
+        'as' => 'admin_panel_add_new_admin_user'
+    ]);
+
+    Route::get('/admin-user-permission-form/{admin_user_id}',[
+        'uses' => 'admin_panel\admin_user_controller@load_admin_user_permission_setup_form',
+        'as' => 'admin_panel_load_admin_user_permission_setup_form'
+    ]);
+
+    Route::post('/setup-admin-user-permissions',[
+        'uses' => 'admin_panel\admin_user_controller@setup_admin_user_permissions',
+        'as'   => 'admin_panel_setup_admin_user_permissions'
+    ]);
+
+    Route::get('/make-content-visible/{id}',[
+        'uses' => 'admin_panel\admin_seo_controller@make_category_meta_content_visible',
+        'as' => 'admin_panel_make_category_meta_content_visible'
+    ]);
+    
+    
+    Route::get('/make-content-invisible/{id}',[
+        'uses' => 'admin_panel\admin_seo_controller@make_category_meta_content_invisible',
+        'as' => 'admin_panel_make_category_meta_content_invisible'
+    ]);
     
 });
 

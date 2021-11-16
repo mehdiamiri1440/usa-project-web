@@ -83,6 +83,44 @@
                                 </div>
                             </td>
                         </tr>
+
+                        <tr>
+                           
+
+                                <td class="col-xs-12 col-sm-4 ">
+                                    <div class="md-form">
+                                        <label for="super_categories" class="">انتخاب سر دسته </label>
+
+                                        <select  onchange="setCategories(this)" class="form-control" id="super_categories">
+                                        <option  selected value="">انتخاب کنید</option>
+                                        </select>                             
+                                    </div>
+                                </td>
+
+                                <td class="col-xs-12 col-sm-4 ">
+                                    <div class="md-form">
+                                        <label for="categories" class="">انتخاب دسته بندی</label>
+
+                                        <select onchange="setSubCategories(this)"  class="form-control"  id="categories">
+                                            <option  selected value="">انتخاب کنید</option>
+                                        </select>                             
+                                    </div>
+                                </td>
+                               
+                                
+                            
+                        </tr>
+                        <tr>
+                            <td class="col-xs-12 col-sm-4 ">
+                                <div class="md-form">
+                                    <label for="sub_categories" class="">انتخاب زیر دسته</label>
+
+                                    <select  class="form-control" name="category_id" id="sub_categories">
+                                        <option  selected value="">انتخاب کنید</option>
+                                    </select>                             
+                                </div>
+                            </td>
+                        </tr>
                   </tbody>
               </table>
             </div>
@@ -95,7 +133,16 @@
                     <div class="col-xs-3 col-xs-offset-1">
                         <input type="hidden" name="meta_data_id" value="{{$data->id}}">
                         <button type="submit" class="btn btn-success btn-block">ویرایش</button>
-                    </div>                 
+                    </div> 
+                    @if($data->is_visible == false)
+                      <div class="col-xs-3 col-xs-offset-1">
+                        <a href="{{'/admin/make-content-visible/' . $data->id }}" >انتشار محتوا</a>
+                      </div> 
+                    @else
+                      <div class="col-xs-3 col-xs-offset-1">
+                        <a href="{{'/admin/make-content-invisible/' . $data->id }}" >عدم انشار محتوا</a>
+                      </div>
+                    @endif               
             </div>  
         </form>
         <!-- /.col -->
@@ -130,16 +177,69 @@
 
 <!-- page script -->
 <script>
-  $(function () {
-    $('#example1').DataTable()
-    $('#example2').DataTable({
-      'paging'      : true,
-      'lengthChange': false,
-      'searching'   : false,
-      'ordering'    : true,
-      'info'        : true,
-      'autoWidth'   : false
-    })
-  })
+   var superCategories = '';
+    var categories = '';
+    function getCategories(){
+            $.post("/get_category_list",
+                {cascade_list:true},
+                 function(data, status){
+                    superCategories = data.categories;
+                    data.categories.map((item,index)=>{
+                        $('#super_categories').append('<option value="' + index +'">' + item.category_name + '</option>')
+                    })
+                },
+        );
+    }  
+
+    function setCategories(categoryIndex){
+            let getItemFromCategory = superCategories.filter((item,index)=>{
+                return categoryIndex.value == index
+            })
+            
+            // convert obj to array 
+            categories = $.map(getItemFromCategory[0].subcategories, function(value, index) {
+                return [value];
+            });
+
+            // reset select options
+            resetSelect('#categories');
+
+            categories.map((item,index)=>{
+                $('#categories').append('<option value="' + index +'">' + item.category_name + '</option>')
+            })
+            
+    }  
+
+    function setSubCategories(categoryIndex){
+            let getItemFromCategory = categories.filter((item,index)=>{
+                return categoryIndex.value == index
+            })
+
+          
+            
+            // convert obj to array 
+            let subCategories = $.map(getItemFromCategory[0].subcategories, function(value, index) {
+                return [value];
+            });
+            
+            // reset select options 
+            resetSelect('#sub_categories');
+            
+            subCategories.map((item)=>{
+                $('#sub_categories').append('<option value="' + item.id +'">' + item.category_name + '</option>')
+            })
+            
+    }  
+
+    function resetSelect(element){
+        $(element).empty();
+        $(element).append('<option  selected value="">انتخاب کنید</option>')
+    }
+
+    $(document).ready(function() {
+
+    getCategories();
+
+    });
 </script>
 @endsection
