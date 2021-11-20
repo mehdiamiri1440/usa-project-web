@@ -52,7 +52,7 @@ const router = new Router({
         {
           path:"password-new",
           name:"changeSellerPassword",
-          component:{
+          components:{
             default:(resolve)=>{
               require([
                 "../components/dashboard/seller/profile/password_change.vue"
