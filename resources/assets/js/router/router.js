@@ -50,6 +50,17 @@ const router = new Router({
           },
         },
         {
+          path:"password-new",
+          name:"changeSellerPassword",
+          component:{
+            default:(resolve)=>{
+              require([
+                "../components/dashboard/seller/profile/password_change.vue"
+              ],resolve)
+            }
+          }
+        },
+        {
           path: "status",
           name: "statusSeller",
           components: {
@@ -474,7 +485,6 @@ const router = new Router({
           },
           props: true,
         },
-        
         {
           path: "product-view",
           name: "productViewRoute",

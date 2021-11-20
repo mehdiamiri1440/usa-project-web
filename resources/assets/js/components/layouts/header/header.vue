@@ -1167,7 +1167,8 @@ a.profile-info-wrapper:hover {
                   </router-link>
                 </li>
                 <li class="list-item">
-                  <router-link :to="{ name: 'passwordSeller' }">
+                  <!--<router-link :to="{ name: 'passwordSeller' }">-->
+                  <router-link :to="{ name: 'changeSellerPassword' }">
                     <i class="fa fa-lock"></i>
                     تغییر کلمه عبور
                   </router-link>
@@ -1883,7 +1884,6 @@ export default {
     eventBus.$on("selectedCity", (event) => {
       this.selectedCity = event;
     });
-    
 
     $(window).resize(this.jqUpdateSize); // When the browser changes size
   },
