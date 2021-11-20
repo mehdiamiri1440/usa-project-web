@@ -474,6 +474,7 @@ const router = new Router({
           },
           props: true,
         },
+        
         {
           path: "product-view",
           name: "productViewRoute",
