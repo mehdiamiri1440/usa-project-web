@@ -11,6 +11,17 @@ div.items-wrapper {
   border-radius: 12px;
   margin: 0;
 }
+.more-product-wrapper .spinner-border {
+    top: 30px;
+    width: 4rem;
+    height: 4rem;
+    color: #999;
+}
+.more-product-wrapper p {
+    margin-top: 40px;
+    color: #999;
+    margin-bottom: 4rem;
+}
 </style>
 <template>
   <div id="related-products-item">

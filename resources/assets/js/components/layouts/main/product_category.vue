@@ -52,6 +52,7 @@
 .more-product-wrapper p {
   margin-top: 40px;
   color: #999;
+  margin-bottom: 4rem;
 }
 
 .filter-loader-wrapper {
