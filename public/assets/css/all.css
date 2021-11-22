@@ -285,7 +285,9 @@
 .fa-tag:before {
     content: "\f02b"; }
   
- 
+    .fa-key:before {
+        content: "\f084"; }
+      
  .sr-only {
      border: 0;
      clip: rect(0, 0, 0, 0);

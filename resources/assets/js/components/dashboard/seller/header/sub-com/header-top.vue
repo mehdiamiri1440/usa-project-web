@@ -687,11 +687,15 @@ a.profile-info-wrapper:focus {
               </li>
 
               <li class="list-item">
-                <router-link
+                <!--<router-link
                   data-toggle="collapse"
                   href="#web-profile-items"
                   :to="{ name: 'passwordSeller' }"
-                >
+                >-->
+                <router-link
+                data-toggle="collapse"
+                href="#web-profile-items"
+                :to="{name:'changeSellerPassword'}">
                   <i class="fa fa-lock"></i>
                   تغییر کلمه عبور
                 </router-link>
