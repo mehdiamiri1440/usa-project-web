@@ -20,8 +20,6 @@ class admin_login
         {
             return redirect()->route('admin_login_page');
         }
-
-        return $next($request);
         
         $admin_id = session('admin_user_id');
 
@@ -43,11 +41,20 @@ class admin_login
             $allowed_routes = session('allowed_routes');
         }
 
+        if($admin_id == 2){
+            return $next($request);
+        }
+
         $current_route = $request->route()->getName();
         if(in_array($current_route,$allowed_routes)){
             return $next($request);
         }
         
+        if($allowed_routes){
+            return redirect()->route($allowed_routes[0]);
+        }
+
         return redirect()->back();
+        
     }
 }

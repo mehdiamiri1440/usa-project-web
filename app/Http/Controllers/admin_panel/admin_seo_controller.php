@@ -113,4 +113,9 @@ class admin_seo_controller extends Controller
 
         return redirect()->route('admin_panel_load_meta_contents_list');
     }
+
+    public function load_add_new_category_meta_form()
+    {
+        return view('admin_panel.addNewCategoryMetaData');
+    }
 }

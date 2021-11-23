@@ -78,96 +78,102 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">منو</li>
-        <!-- <li class="{{Request::is('admin/statistics') ? 'active':''}}">
-                <a href="{{route('admin_panel_load_statistics')}}"><i class="fa fa-envelope"></i><span>آمار سایت</span></a>      
-        </li> -->
+        @if(in_array('admin_panel_load_statistics_chart',session('allowed_routes')))
         <li class="{{Request::is('admin/statisticsCharts') ? 'active':''}}">
                 <a href="{{route('admin_panel_load_statistics_chart')}}"><i class="fa fa-envelope"></i><span>نمودارها</span></a>      
         </li>
+        @endif
+        @if(in_array('admin_panel_load_user_list',session('allowed_routes')))
         <li class="{{Request::is('admin/user-list') || Request::is('admin/user-list-detail/*') ? 'active':''}}">
                 <a href="{{route('admin_panel_load_user_list')}}"><i class="fa fa-envelope"></i><span> لیست کاربران</span></a>      
         </li>
+        @endif
+        @if(in_array('admin_panel_profile',session('allowed_routes')))
         <li class="{{Request::is('admin/profile')  ? 'active':''}}">
             <a href="{{route('admin_panel_profile')}}"><i class="fa fa-envelope"></i><span>پروفایل ها</span></a>      
         </li>
+        @endif
+        @if(in_array('admin_panel_buyAd',session('allowed_routes')))
         <li class="{{Request::is('admin/buyAd') || Request::is('admin/buyAd-detail/*') ? 'active':''}}">
             <a href="{{route('admin_panel_buyAd')}}"><i class="fa fa-envelope"></i><span>درخواست ها ی خرید</span></a>      
         </li>
+        @endif
+        @if(in_array('admin_panel_sellAd',session('allowed_routes')))
         <li class="{{Request::is('admin/sellAd') || Request::is('admin/sellAd-detail/*')  ? 'active':''}}">
             <a href="{{route('admin_panel_sellAd')}}">
                 <i class="fa fa-envelope"></i><span>آگهی های فروش</span></a>      
         </li>
+        @endif
+        @if(in_array('admin_panel_profile_list',session('allowed_routes')))
         <li class="{{Request::is('admin/profile-list') ? 'active':''}}">
             <a href="{{route('admin_panel_profile_list')}}"><i class="fa fa-envelope"></i><span>لیست پروفایل ها</span></a>      
         </li>
+        @endif
+        @if(in_array('admin_panel_buyAd_list',session('allowed_routes')))
         <li class="{{Request::is('admin/buyAd-list') || Request::is('admin/buyAd-list-detail/*') ? 'active':''}}">
             <a href="{{route('admin_panel_buyAd_list')}}"><i class="fa fa-envelope"></i><span>درخواست های خرید تایید شده</span></a>      
         </li>
+        @endif
+        @if(in_array('admin_panel_sellAd_list',session('allowed_routes')))
         <li class="{{Request::is('admin/sellAd-list') || Request::is('admin/sellAd-list-detail/*') ? 'active':''}}">
             <a href="{{route('admin_panel_sellAd_list')}}"><i class="fa fa-envelope"></i><span>آگهی های فروش تایید شده</span></a>      
         </li>
+        @endif
+        @if(in_array('admin_panel_message_list',session('allowed_routes')))
         <li class="{{Request::is('admin/messages') ? 'active':''}}">
             <a href="{{route('admin_panel_message_list')}}"><i class="fa fa-envelope"></i><span>پیام ها</span></a>      
         </li>
+        @endif
+        @if(in_array('load_users_unconfirmed_comments',session('allowed_routes')))
         <li class="{{Request::is('admin/user-comment-list') || Request::is('admin/user-comment-detail/*')? 'active':''}}">
             <a href="{{route('load_users_unconfirmed_comments')}}"><i class="fa fa-envelope"></i><span>کامنت های تایید نشده</span></a>      
         </li>
+        @endif
+        @if(in_array('admin_panel_load_messaging_anomaly',session('allowed_routes')))
         <li class="{{Request::is('admin/suspicious-messages-list') ? 'active':''}}">
             <a href="{{route('admin_panel_load_messaging_anomaly')}}"><i class="fa fa-envelope"></i><span>آنومالی در پیام ها</span></a>      
         </li>
+        @endif
+        @if(in_array('admin_load_unverified_documents',session('allowed_routes')))
         <li class="{{Request::is('admin/unverified-user-list') ? 'active':''}}">
             <a href="{{route('admin_load_unverified_documents')}}"><i class="fa fa-envelope"></i><span>اطلاعات احراز هویت</span></a>      
         </li>
+        @endif
+        @if(in_array('admin_panel_payment_list',session('allowed_routes')))
         <li class="{{Request::is('admin/payment-list') ? 'active':''}}">
             <a href="{{route('admin_panel_payment_list')}}"><i class="fa fa-envelope"></i><span>وضعیت تراکنش ها</span></a>      
         </li>
+        @endif
+        @if(in_array('admin_panel_submit_to_channel',session('allowed_routes')))
         <li class="{{Request::is('admin/submit-to-channel') ? 'active':''}}">
             <a href="{{route('admin_panel_submit_to_channel')}}"><i class="fa fa-envelope"></i><span>ارسال در کانال</span></a>      
         </li>
+        @endif
+        @if(in_array('admin_panel_channel_content_list',session('allowed_routes')))
         <li class="{{Request::is('admin/admin_panel_channel_content_list') ? 'active':''}}">
             <a href="{{route('admin_panel_channel_content_list')}}"><i class="fa fa-envelope"></i><span>همه پست های کانال</span></a>      
         </li>
+        @endif
+        @if(in_array('admin_panel_load_meta_contents_list',session('allowed_routes')))
         <li class="{{Request::is('admin/categories-meta-data-list') ? 'active':''}}">
             <a href="{{route('admin_panel_load_meta_contents_list')}}"><i class="fa fa-envelope"></i><span>اطلاعات دسته بندی ها</span></a>      
         </li>
+        @endif
+        @if(in_array('load_admin_users_list',session('allowed_routes')))
         <li class="{{Request::is('admin/admin-users-list') ? 'active':''}}">
             <a href="{{route('load_admin_users_list')}}"><i class="fa fa-envelope"></i><span>کاربران ادمین</span></a>      
         </li>
-        <!-- <li class="{{Request::is('admin/sell-offers') || Request::is('admin/sell-offer-detail/*') ? 'active':''}}">
-            <a href="{{route('admin_panel_sell_offer_list')}}"><i class="fa fa-envelope"></i><span>پیشنهادات فروش</span></a>     
+        @endif
+        @if(in_array('admin_panel_get_potential_paying_users_list',session('allowed_routes')))
+        <li class="{{Request::is('admin/potential-paying-users-list') ? 'active':''}}">
+            <a href="{{route('admin_panel_get_potential_paying_users_list')}}"><i class="fa fa-envelope"></i><span>لیست پرداخت نکرده ها</span></a>      
         </li>
-        <hr/>
-        <li class="{{Request::is('admin/pending-list') ? 'active':''}}">
-            <a href="{{route('admin_panel_waiting_to_initiate_transactions_list')}}"><i class="fa fa-envelope"></i><span>در انتظار تماس</span></a>
+        @endif
+        @if(in_array('admin_panel_get_package_expiring_customers_list',session('allowed_routes')))
+        <li class="{{Request::is('admin/package-expiring-custormers') ? 'active':''}}">
+            <a href="{{route('admin_panel_get_package_expiring_customers_list')}}"><i class="fa fa-envelope"></i><span>عضویت های در حال اتمام</span></a>      
         </li>
-        <li class="{{Request::is('admin/prepayment-factor-list') ? 'active':''}}">
-            <a href="{{route('admin_panel_waiting_for_prepayment_factor_issuance_list')}}"><i class="fa fa-envelope"></i><span>در انتظار فاکتور پیش پرداخت</span></a>
-        </li>
-        <li class="{{Request::is('admin/payment-factor-list') ? 'active':''}}">
-            <a href="{{route('admin_panel_waiting_for_payment_factor_issuance_list')}}"><i class="fa fa-envelope"></i><span>در انتظار فاکتور تسویه</span></a>
-        </li>
-        <li class="{{Request::is('admin/transaction-termination-list') ? 'active':''}}">
-            <a href="{{route('admin_panel_waiting_for_termination_transaction_list')}}"><i class="fa fa-envelope"></i><span>در انتظاراتمام تراکنش</span></a>
-        </li>
-        <li class="{{Request::is('admin/transaction-checkout-list') ? 'active':''}}">
-            <a href="{{route('admin_panel_waiting_for_checkout_transaction_list')}}"><i class="fa fa-envelope"></i><span>درانتظار تسویه با باسکول</span></a>
-        </li>
-        <hr/>
-        <li class="{{Request::is('admin/initiate-instant-transaction') ? 'active':''}}">
-            <a href="{{route('initiate-instant-transaction-view')}}"><i class="fa fa-envelope"></i><span>آغاز تراکنش آنی</span></a>
-        </li>
-        <li class="{{Request::is('admin/prepayment-instant-factor-list') ? 'active':''}}">
-            <a href="{{route('admin_panel_waiting_for_prepayment_instant_factor_issuance_list')}}"><i class="fa fa-envelope"></i><span> صدور فاکتور پیش پرداخت آنی</span></a>
-        </li>
-        <li class="{{Request::is('admin/payment-instant-factor-list') ? 'active':''}}">
-            <a href="{{route('admin_panel_waiting_for_payment_instant_factor_issuance_list')}}"><i class="fa fa-envelope"></i><span> صدور فاکتور تسویه آنی</span></a>
-        </li>
-        <li class="{{Request::is('admin/instant-transaction-termination-list') ? 'active':''}}">
-            <a href="{{route('admin_panel_waiting_for_termination_instant_transaction_list')}}"><i class="fa fa-envelope"></i><span> اتمام تراکنش آنی</span></a>
-        </li>
-        <li class="{{Request::is('admin/generate-manual-payment-url') ? 'active':''}}">
-            <a href="{{route('generate_manual_payment_url')}}"><i class="fa fa-envelope"></i><span>صدور لینک پرداخت</span></a>
-        </li> -->
+        @endif
       </ul>
     </section>
     <!-- /.sidebar -->

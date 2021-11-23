@@ -313,4 +313,54 @@ class admin_user_controller extends Controller
         return redirect()->route('load_admin_users_list');
     }
 
+    public function get_admin_routes()
+    {
+        $route_collection = \Illuminate\Support\Facades\Route::getRoutes();
+
+        $existing_routes = DB::table('admin_routes')
+                                ->pluck('route')
+                                ->all();
+
+        $result = [];
+
+        foreach ($route_collection as $value){
+                $route = $value->getName();
+
+                if(in_array($route,$existing_routes) == true){
+                    continue;
+                }
+
+                $now = Carbon::now();
+
+                $prefix = $value->getPrefix();
+                $middlewares = $value->middleware();
+
+                if($middlewares){
+                    if(in_array('App\Http\Middleware\admin_login',$middlewares) == true && $prefix == '/admin'){
+                        $action = $value->getAction();
+
+                        if(isset($action['description'])){
+                            $result[] = [
+                                'route' => $route,
+                                'description' => $action['description'],
+                                'created_at' => $now,
+                                'updated_at' => $now
+                            ];
+                        }
+                    }
+                }
+        }
+
+
+        if($result){
+            DB::table('admin_routes')->insert($result);
+        }
+        
+    }
+
+    public function load_add_new_user_form()
+    {
+        return view('admin_panel.addNewAdminUser');
+    }
+
 }
