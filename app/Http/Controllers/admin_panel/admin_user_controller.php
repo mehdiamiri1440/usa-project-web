@@ -194,4 +194,173 @@ class admin_user_controller extends Controller
         Cache::forget(md5('categories'));
     }
 
+    public function load_admin_users_list()
+    {
+        $users = DB::table('admin_users')->select([
+            'id',
+            'full_name',
+            'email'
+        ])->get();
+
+        return view('admin_panel.adminUsersList',[
+            'users' => $users
+        ]);
+    }
+
+    public function add_new_admin_user(Request $request)
+    {
+        $this->validate($request,[
+            'full_name' => 'required|string',
+            'email' => 'required|string',
+            'password' => 'required|string|min:8', 
+        ]);
+
+        $password = sha1($request->password);
+        $now = Carbon::now();
+
+        DB::table('admin_users')->insert([
+            'full_name' => $request->full_name,
+            'email' => $request->email,
+            'password' => $password,
+            'created_at' => $now,
+            'updated_at' => $now
+        ]);
+
+        return redirect()->route('load_admin_users_list');
+    }
+
+    public function load_admin_user_permission_setup_form($admin_user_id)
+    {
+        $permissions = DB::table('admin_routes')
+                            ->leftJoin('admin_permissions',function($join) use($admin_user_id){
+                                $join->on('admin_routes.id','=','admin_permissions.route_id')
+                                            ->where('admin_permissions.admin_id',$admin_user_id);
+                            })
+                            ->selectRaw("admin_routes.*,admin_permissions.admin_id,admin_permissions.route_id,admin_permissions.confirmed")
+                            // ->orderBy('admin_routes.id')
+                            ->get();
+
+
+        $permissions = $permissions->filter(function($item) use($admin_user_id){
+            return ($item->admin_id == $admin_user_id && $item->confirmed == true) || is_null($item->admin_id);
+        });
+
+        return view('admin_panel.adminPermissionSetup',[
+            'permissions' => $permissions,
+            'admin_id' => $admin_user_id
+        ]);
+    }
+
+    public function setup_admin_user_permissions(Request $request)
+    {
+        $this->validate($request,[
+            'routes' => 'required|array',
+            'admin_id' => 'required|exists:admin_users,id'
+        ]);
+
+        $routes_id_array = $request->routes;
+        $admin_id = $request->admin_id;
+
+        $admin_permissions = DB::table('admin_permissions')
+                                    ->where('admin_id',$admin_id)
+                                    ->where('confirmed',true)
+                                    // ->whereNotIn('route_id',$routes_id_array)
+                                    ->get();
+
+        $removed_permissions = [];
+        foreach($admin_permissions as $permission)
+        {
+            if(  in_array($permission->route_id,$routes_id_array) === false)
+            {
+                $removed_permissions[] = $permission->id;
+            }
+            
+        }
+
+        $new_granted_permission_records = [];
+        $route_ids = $admin_permissions->pluck('route_id')->all();
+
+        $now = Carbon::now();
+
+        foreach($routes_id_array as $route_id)
+        {
+            if(in_array($route_id,$route_ids) === false)
+            {
+                $new_granted_permission_records[] = [
+                    'created_at' => $now,
+                    'updated_at' => $now,
+                    'admin_id' => $admin_id,
+                    'route_id' => $route_id,
+                    'confirmed' => true
+                ];  
+            }
+        }
+
+        if($removed_permissions){
+            DB::table('admin_permissions')
+                    ->whereIn('id',$removed_permissions)
+                    ->update([
+                        'confirmed' => false
+                    ]);
+        }
+
+        if($new_granted_permission_records){
+            DB::table('admin_permissions')
+                    ->insert($new_granted_permission_records);
+        }
+        
+
+        return redirect()->route('load_admin_users_list');
+    }
+
+    public function get_admin_routes()
+    {
+        $route_collection = \Illuminate\Support\Facades\Route::getRoutes();
+
+        $existing_routes = DB::table('admin_routes')
+                                ->pluck('route')
+                                ->all();
+
+        $result = [];
+
+        foreach ($route_collection as $value){
+                $route = $value->getName();
+
+                if(in_array($route,$existing_routes) == true){
+                    continue;
+                }
+
+                $now = Carbon::now();
+
+                $prefix = $value->getPrefix();
+                $middlewares = $value->middleware();
+
+                if($middlewares){
+                    if(in_array('App\Http\Middleware\admin_login',$middlewares) == true && $prefix == '/admin'){
+                        $action = $value->getAction();
+
+                        if(isset($action['description'])){
+                            $result[] = [
+                                'route' => $route,
+                                'description' => $action['description'],
+                                'created_at' => $now,
+                                'updated_at' => $now
+                            ];
+                        }
+                    }
+                }
+        }
+
+
+        if($result){
+            DB::table('admin_routes')->insert($result);
+        }
+        
+    }
+
+    public function load_add_new_user_form()
+    {
+        return view('admin_panel.addNewAdminUser');
+    }
+
 }

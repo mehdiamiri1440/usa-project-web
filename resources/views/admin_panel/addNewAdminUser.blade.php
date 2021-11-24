@@ -31,17 +31,19 @@
   <![endif]-->
 
   <!-- Google Font -->
-
+ 
     
 
 </head>
+@endsection
+
 @section('main_content')
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        لیست متا دیتا ها
+        پیام ها
       </h1>
     </section>
 
@@ -51,70 +53,48 @@
           <div class="box">
             <div class="box-header">
               <h3 class="box-title">جدول داده ها</h3>
-                <form method="GET" action="{{route('admin_panel_load_meta_contents_list')}}">
-                  <div class="row">
-                    <div class="col-xs-4 col-xs-offset-4">
-                      <label>جستوجو‌ :‌ </label>
-                      <input type="text" name="search" placeholder="عنوان...">
-                      <input type="submit" class="btn btn-primary" value="برو">
-                    </div>
-                  </div>
-                </form>
-            </div>
-            <div class="row text-center">
-                <a href='/admin/add-category-meta-data-detail'>اضافه کردن اطلاعات جدید</a>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <table  class="table table-bordered table-striped">
-                <thead>
-                <tr>
-                  <th>#</th>
-                  <th>عنوان</th>
-                  <th>تاریخ ثبت اطلاعات</th>
-                  <th>آی دی دسته بندی</th>
-                  <th>اسکیما</th>
-                  <th>وضعیت</th>
-                  <th>جزییات</th>
-                </tr>
-                </thead>
-                <tbody>
-                    @foreach($meta_records as $record)
-                      @if($record->is_visible == false)
-                        <tr class="warning">
-                            <td>{{$loop->iteration}}</td>
-                            <td>{{$record->header}}</td>
-                            <td>{{$record->created_at}}</td>
-                            <td>{{$record->category_id}}</td>
-                            <td>{{($record->schema_object == null) ? 'ندارد' : 'دارد'}}</td>
-                            <td>
-                                در صف انتشار
-                            </td>
-                            <td>
-                                <a href="{{route('load_meta_content_details_by_id',['id' => $record->id])}}">مشاهده جزییات</a>
-                            </td>
-                        </tr>
-                      @else
-                        <tr>
-                            <td>{{$loop->iteration}}</td>
-                            <td>{{$record->header}}</td>
-                            <td>{{$record->created_at}}</td>
-                            <td>{{$record->category_id}}</td>
-                            <td>{{($record->schema_object == null) ? 'ندارد' : 'دارد'}}</td>
-                            <td>
-                                منتشر شده
-                            </td>
-                            <td>
-                                <a href="{{route('load_meta_content_details_by_id',['id' => $record->id])}}">مشاهده جزییات</a>
-                            </td>
-                        </tr>
-                      @endif
-                    @endforeach
-              </table>
-
-              <div align="center">
-                {{$meta_records->appends($_GET)->render("pagination::default")}}
-              </div>
+            <form method="post" action="{{route('admin_panel_add_new_admin_user')}}">
+                     <div class="row">
+                        <div class="col-xs-4">
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <label>نام کامل</label>
+                                </div>
+                                <div class="col-xs-12">
+                                    <input class="form-control" type="text" name="full_name" placeholder="نام و نام خانوادگی">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <label>پسورد</label>
+                                </div>
+                                <div class="col-xs-12">
+                                    <input class="form-control" type="password" name="password" placeholder="پسورد">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <label>ایمیل</label>
+                                </div>
+                                <div class="col-xs-12">
+                                    <input class="form-control" type="email" name="email" placeholder="ایمیل">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <br/>
+                            <button type="submit" class="btn btn-primary">ثبت کاربر ادمین جدید</button>
+                        </div>    
+                    </div>
+                    <br/>
+                </form> 
             </div>
             <!-- /.box-body -->
           </div>
@@ -131,7 +111,7 @@
   <!-- /.control-sidebar -->
   <!-- Add the sidebar's background. This div must be placed
        immediately after the control sidebar -->
-@endsection
+  @endsection
 <!-- ./wrapper -->
 
 @section('script_tags')
@@ -152,16 +132,5 @@
 <script src="{{asset('admin-panel/dist/js/demo.js')}}"></script>
 <!-- page script -->
 <script>
-  $(function () {
-    $('#example1').DataTable()
-    $('#example2').DataTable({
-      'paging'      : true,
-      'lengthChange': false,
-      'searching'   : false,
-      'ordering'    : true,
-      'info'        : true,
-      'autoWidth'   : false
-    })
-  })
-</script>
+ 
 @endsection

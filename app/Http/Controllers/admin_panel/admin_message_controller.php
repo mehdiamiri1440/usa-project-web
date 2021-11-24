@@ -152,4 +152,9 @@ class admin_message_controller extends Controller
         
         return $messages;
     }
+
+    public function load_messages_form()
+    {
+        return view('admin_panel.message');
+    }
 }

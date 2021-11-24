@@ -830,328 +830,456 @@ Route::group(['prefix' => 'admin', 'middleware' => [admin_login::class]], functi
     Route::get('/profile', [
         'uses' => 'admin_panel\admin_profile_controller@load_unconfirmed_profile_records',
         'as' => 'admin_panel_profile',
+        'description' => "دسترسی به لیست پروفایلهای تایید نشده"
     ]);
 
     Route::get('profile-detail/{profile_id}', [
         'uses' => 'admin_panel\admin_profile_controller@load_profile_by_id',
         'as' => 'admin_panel_load_profile_by_id',
+        'description' => "دسترسی به جزییات پروفایل تایید نشده",
     ]);
 
     Route::post('profile_confirmation', [
         'uses' => 'admin_panel\admin_profile_controller@admin_profile_confirmation',
         'as' => 'admin_panel_profile_confirmation',
+        'description' => "توانایی تایید پروفایل",
     ]);
 
     Route::get('/profile-list', [
         'uses' => 'admin_panel\admin_profile_controller@load_confirmed_profile_records',
         'as' => 'admin_panel_profile_list',
+        'description' => "دسترسی به لیست پروفایلهای تایید شده",
     ]);
 
     Route::get('/buyAd', [
         'uses' => 'admin_panel\admin_buyAd_controller@load_unconfirmed_buyAd_list',
         'as' => 'admin_panel_buyAd',
+        'description' => "دسترسی به لیست درخواستهای خرید تایید نشده",
     ]);
 
     Route::get('buyAd-detail/{buyAd_id}', [
         'uses' => 'admin_panel\admin_buyAd_controller@load_unconfirmed_buyAd_by_id',
         'as' => 'admin_panel_load_unconfirmed_buyAd_by_id',
+        'description' => "دسترسی به حزییات درخواست خرید تایید نشده",
     ]);
 
     Route::post('buyAd_confirmation', [
         'uses' => 'admin_panel\admin_buyAd_controller@admin_buyAd_confirmation',
         'as' => 'admin_panel_buyAd_confirmation',
+        'description' => "توانایی تایید و ویرایش درخواست خرید تایید نشده",
     ]);
 
     Route::post('buyAd_edit', [
         'uses' => 'admin_panel\admin_buyAd_controller@admin_buyAd_edit',
         'as' => 'admin_panel_buyAd_edit',
+        'description' => "توانایی ویرایش درخواست خرید تایید شده",
     ]);
 
     Route::get('/buyAd-list', [
         'uses' => 'admin_panel\admin_buyAd_controller@load_confirmed_buyAd_list',
         'as' => 'admin_panel_buyAd_list',
+        'description' => "دسترسی به لیست درخواستهای خرید تایید شده",
     ]);
 
     Route::get('buyAd-list-detail/{buyAd_id}', [
         'uses' => 'admin_panel\admin_buyAd_controller@load_confirmed_buyAd_by_id',
         'as' => 'admin_panel_load_confirmed_buyAd_by_id',
+        'description' => "دسترسی به جزییات درخواست خرید تایید شده",
     ]);
 
     Route::get('/sellAd', [
         'uses' => 'admin_panel\admin_sellAd_controller@load_unconfirmed_sellAd_list',
         'as' => 'admin_panel_sellAd',
+        'description' => "دسترسی به لیست محصولات تایید نشده"
     ]);
 
     Route::get('sellAd-detail/{sellAd_id}', [
         'uses' => 'admin_panel\admin_sellAd_controller@load_unconfirmed_sellAd_by_id',
         'as' => 'admin_panel_load_unconfirmed_sellAd_by_id',
+        'description' => "دسترسی به جزییات محصول تایید نشده",
     ]);
 
     Route::post('sellAd_confirmation', [
         'uses' => 'admin_panel\admin_sellAd_controller@admin_sellAd_confirmation',
         'as' => 'admin_panel_sellAd_confirmation',
+        'description' => "توانایی تایید و ویرایش محصول تایید نشده",
     ]);
 
     Route::post('sellAd_edit', [
         'uses' => 'admin_panel\admin_sellAd_controller@admin_sellAd_edit',
         'as' => 'admin_panel_sellAd_edit',
+        'description' => "توانایی ویرایش محصول تایید شده",
     ]);
 
     Route::get('/sellAd-list', [
         'uses' => 'admin_panel\admin_sellAd_controller@load_confirmed_sellAd_list',
         'as' => 'admin_panel_sellAd_list',
+        'description' => "دسترسی به لیست محصولات تایید شده",
     ]);
 
     Route::get('sellAd-list-detail/{sellAd_id}', [
         'uses' => 'admin_panel\admin_sellAd_controller@load_confirmed_sellAd_by_id',
         'as' => 'admin_panel_load_confirmed_sellAd_by_id',
+        'description' => "دسترسی به جزییات محصول تایید شده",
     ]);
 
     //notify
     Route::post('admin_notify', [
         'uses' => 'admin_panel\admin_notify_controller@get_notification_if_any',
         'as' => 'admin_notify',
+        'description' => "دسترسی به نوتیفیکیشن های پنل ادمین",
     ]);
 
     //delete photos
     Route::delete('sellAd/delete_photo_by_id', [
         'uses' => 'admin_panel\admin_sellAd_controller@admin_sellAd_photo_delete_by_id',
         'as' => 'delete_sellAd_photo_by_id',
+        'description' => "توانایی حذف تصاویر محصول",
     ]);
 
-    Route::delete('buyAd/delete_photo_by_id', [
-        'uses' => 'admin_panel\admin_buyAd_controller@admin_buyAd_photo_delete_by_id',
-        'as' => 'delete_buyAd_photo_by_id',
-    ]);
+    // Route::delete('buyAd/delete_photo_by_id', [
+    //     'uses' => 'admin_panel\admin_buyAd_controller@admin_buyAd_photo_delete_by_id',
+    //     'as' => 'delete_buyAd_photo_by_id',
+    //     'description' => "",
+    // ]);
 
     Route::delete('profile/delete_photo_by_id', [
         'uses' => 'admin_panel\admin_profile_controller@admin_profile_related_photo_delete_by_id',
         'as' => 'delete_profile_related_photo_by_id',
+        'description' => "توانایی حذف تصاویر مربوطه و مدارک از پروفایل",
     ]);
 
     Route::get('user-list', [
         'uses' => 'admin_panel\admin_user_controller@load_user_list',
         'as' => 'admin_panel_load_user_list',
+        'description' => "دسترسی به لیست کاربران",
     ]);
 
     Route::get('user-list-detail/{user_id}', [
         'uses' => 'admin_panel\admin_user_controller@load_user_notes_by_id',
         'as' => 'admin_panel_load_user_notes_by_id',
+        'description' => "دسترسی به کامنت های ادمین برای هر کاربر",
     ]);
 
-    Route::get('sell-offers', [
-        'uses' => 'admin_panel\admin_sell_offer_controller@load_unconfirmed_sell_offer_list',
-        'as' => 'admin_panel_sell_offer_list',
-    ]);
+    // Route::get('sell-offers', [
+    //     'uses' => 'admin_panel\admin_sell_offer_controller@load_unconfirmed_sell_offer_list',
+    //     'as' => 'admin_panel_sell_offer_list',
+    //     'description' => "",
+    // ]);
 
-    Route::get('pending-list', [
-        'uses' => 'admin_panel\admin_transaction_controller@load_waiting_to_initiate_transactions_list',
-        'as' => 'admin_panel_waiting_to_initiate_transactions_list',
-    ]);
+    // Route::get('pending-list', [
+    //     'uses' => 'admin_panel\admin_transaction_controller@load_waiting_to_initiate_transactions_list',
+    //     'as' => 'admin_panel_waiting_to_initiate_transactions_list',
+    //     'description' => "",
+    // ]);
 
-    Route::get('transaction-detail/{id}', [
-        'uses' => 'admin_panel\admin_transaction_controller@get_transaction_with_related_buyAd',
-        'as' => 'admin_panel_load_transaction_by_id',
-    ]);
+    // Route::get('transaction-detail/{id}', [
+    //     'uses' => 'admin_panel\admin_transaction_controller@get_transaction_with_related_buyAd',
+    //     'as' => 'admin_panel_load_transaction_by_id',
+    //     'description' => "",
+    // ]);
 
-    Route::get('instant-transaction-detail/{id}', [
-        'uses' => 'admin_panel\admin_transaction_controller@get_instant_transaction_with_related_data',
-        'as' => 'admin_panel_load_instant_transaction_by_id',
-    ]);
+    // Route::get('instant-transaction-detail/{id}', [
+    //     'uses' => 'admin_panel\admin_transaction_controller@get_instant_transaction_with_related_data',
+    //     'as' => 'admin_panel_load_instant_transaction_by_id',
+    //     'description' => "",
+    // ]);
 
-    Route::get('sell-offer-detail/{id}', [
-        'uses' => 'admin_panel\admin_sell_offer_controller@get_sell_offer_with_related_buyAd',
-        'as' => 'admin_panel_load_sell_offer_by_id',
-    ]);
+    // Route::get('sell-offer-detail/{id}', [
+    //     'uses' => 'admin_panel\admin_sell_offer_controller@get_sell_offer_with_related_buyAd',
+    //     'as' => 'admin_panel_load_sell_offer_by_id',
+    //     'description' => "",
+    // ]);
 
     Route::post('register_note_for_user', [
         'uses' => 'admin_panel\admin_user_controller@register_note_for_user',
         'as' => 'admin_panel_register_note_for_user',
+        'description' => "توانایی نوشتن کامنت ادمین برای هر کاربر",
     ]);
 
-    Route::post('confirm_sell_offer_by_id', [
-        'uses' => 'admin_panel\admin_sell_offer_controller@confirm_sell_offer_by_id',
-        'as' => 'admin_panel_confirm_sell_offer_by_id',
-    ]);
+    // Route::post('confirm_sell_offer_by_id', [
+    //     'uses' => 'admin_panel\admin_sell_offer_controller@confirm_sell_offer_by_id',
+    //     'as' => 'admin_panel_confirm_sell_offer_by_id',
+    //     'description' => "",
+    // ]);
 
-    Route::get('prepayment-factor-list', [
-        'uses' => 'admin_panel\admin_transaction_controller@load_waiting_for_prepayment_factor_issuance_transactions_list',
-        'as' => 'admin_panel_waiting_for_prepayment_factor_issuance_list',
-    ]);
+    // Route::get('prepayment-factor-list', [
+    //     'uses' => 'admin_panel\admin_transaction_controller@load_waiting_for_prepayment_factor_issuance_transactions_list',
+    //     'as' => 'admin_panel_waiting_for_prepayment_factor_issuance_list',
+    //     'description' => "",
+    // ]);
 
-    Route::get('prepayment-instant-factor-list', [
-        'uses' => 'admin_panel\admin_transaction_controller@load_waiting_for_prepayment_factor_issuance_instant_transactions_list',
-        'as' => 'admin_panel_waiting_for_prepayment_instant_factor_issuance_list',
-    ]);
+    // Route::get('prepayment-instant-factor-list', [
+    //     'uses' => 'admin_panel\admin_transaction_controller@load_waiting_for_prepayment_factor_issuance_instant_transactions_list',
+    //     'as' => 'admin_panel_waiting_for_prepayment_instant_factor_issuance_list',
+    //     'description' => "",
+    // ]);
 
-    Route::get('payment-factor-list', [
-        'uses' => 'admin_panel\admin_transaction_controller@load_waiting_for_payment_factor_issuance_transactions_list',
-        'as' => 'admin_panel_waiting_for_payment_factor_issuance_list',
-    ]);
+    // Route::get('payment-factor-list', [
+    //     'uses' => 'admin_panel\admin_transaction_controller@load_waiting_for_payment_factor_issuance_transactions_list',
+    //     'as' => 'admin_panel_waiting_for_payment_factor_issuance_list',
+    //     'description' => "",
+    // ]);
 
-    Route::get('payment-instant-factor-list', [
-        'uses' => 'admin_panel\admin_transaction_controller@load_waiting_for_payment_factor_issuance_instant_transactions_list',
-        'as' => 'admin_panel_waiting_for_payment_instant_factor_issuance_list',
-    ]);
+    // Route::get('payment-instant-factor-list', [
+    //     'uses' => 'admin_panel\admin_transaction_controller@load_waiting_for_payment_factor_issuance_instant_transactions_list',
+    //     'as' => 'admin_panel_waiting_for_payment_instant_factor_issuance_list',
+    //     'description' => "",
+    // ]);
 
-    Route::get('transaction-termination-list', [
-        'uses' => 'admin_panel\admin_transaction_controller@load_waiting_for_termination_transaction_list',
-        'as' => 'admin_panel_waiting_for_termination_transaction_list',
-    ]);
+    // Route::get('transaction-termination-list', [
+    //     'uses' => 'admin_panel\admin_transaction_controller@load_waiting_for_termination_transaction_list',
+    //     'as' => 'admin_panel_waiting_for_termination_transaction_list',
+    //     'description' => "",
+    // ]);
 
-    Route::get('instant-transaction-termination-list', [
-        'uses' => 'admin_panel\admin_transaction_controller@load_waiting_for_termination_instant_transaction_list',
-        'as' => 'admin_panel_waiting_for_termination_instant_transaction_list',
-    ]);
+    // Route::get('instant-transaction-termination-list', [
+    //     'uses' => 'admin_panel\admin_transaction_controller@load_waiting_for_termination_instant_transaction_list',
+    //     'as' => 'admin_panel_waiting_for_termination_instant_transaction_list',
+    //     'description' => "",
+    // ]);
 
-    Route::get('transaction-checkout-list', [
-        'uses' => 'admin_panel\admin_transaction_controller@load_waiting_for_checkout_transaction_list',
-        'as' => 'admin_panel_waiting_for_checkout_transaction_list',
-    ]);
+    // Route::get('transaction-checkout-list', [
+    //     'uses' => 'admin_panel\admin_transaction_controller@load_waiting_for_checkout_transaction_list',
+    //     'as' => 'admin_panel_waiting_for_checkout_transaction_list',
+    //     'description' => "",
+    // ]);
 
-    Route::match(['get', 'post'], 'statistics', [
-        'uses' => 'admin_panel\admin_statistics_controller@load_statistics',
-        'as' => 'admin_panel_load_statistics',
-    ]);
+    // Route::match(['get', 'post'], 'statistics', [
+    //     'uses' => 'admin_panel\admin_statistics_controller@load_statistics',
+    //     'as' => 'admin_panel_load_statistics',
+    //     'description' => "دسترسی به قسمت آمار",
+    // ]);
 
-    Route::post('get_site_statistics', [
-        'uses' => 'admin_panel\admin_statistics_controller@load_statistics',
-        'as' => 'get_site_statistics',
-    ]);
+    // Route::post('get_site_statistics', [
+    //     'uses' => 'admin_panel\admin_statistics_controller@load_statistics',
+    //     'as' => 'get_site_statistics',
+    //     'description' => "",
+    // ]);
 
-    Route::get('initiate-instant-transaction', function () {
-        return view('admin_panel.initiateInstantTransaction');
-    })->name('initiate-instant-transaction-view');
+    // Route::get('initiate-instant-transaction', function () {
+    //     return view('admin_panel.initiateInstantTransaction');
+    // })->name('initiate-instant-transaction-view');
 
-    Route::post('initiate-instant-transaction', [
-        'uses' => 'admin_panel\admin_transaction_controller@initiate_instant_transaction',
-        'as' => 'initiate_instant_transaction',
-    ]);
+    // Route::post('initiate-instant-transaction', [
+    //     'uses' => 'admin_panel\admin_transaction_controller@initiate_instant_transaction',
+    //     'as' => 'initiate_instant_transaction',
+    //     'description' => "",
+    // ]);
 
-    Route::get('generate-manual-payment-url', function () {
-        return view('admin_panel.generateManualPaymentUrl');
-    })->name('generate_manual_payment_url');
+    // Route::get('generate-manual-payment-url', function () {
+    //     return view('admin_panel.generateManualPaymentUrl');
+    // })->name('generate_manual_payment_url');
 
     Route::match(['get', 'post'], '/statisticsCharts', [
         'uses' => 'admin_panel\admin_chart_controller@chart_loader',
         'as' => 'admin_panel_load_statistics_chart',
+        'description' => "دسترسی به قسمت نمودارها و آمار سایت",
     ]);
 
-    Route::get('/messages', function () {
-        return view('admin_panel.message');
-    })->name('admin_panel_message_list');
+    Route::get('/messages', [
+        'uses' => 'admin_panel\admin_message_controller@load_messages_form',
+        'as' => 'admin_panel_message_list',
+        'description' => 'دسترسی به صفحه ی پیامها'
+    ]);
 
     Route::post('/messages', [
         'uses' => 'admin_panel\admin_message_controller@get_all_user_contacts_with_related_messages',
         'as' => 'admin_panel_load_user_messages',
+        'description' => "دسترسی به چت های کاربران",
     ]);
 
     Route::get('/user-comment-list',[
         'uses' => 'admin_panel\admin_user_comment_controller@load_unconfirmed_comments',
-        'as' => 'load_users_unconfirmed_comments'
+        'as' => 'load_users_unconfirmed_comments',
+        'description' => "دسترسی به لیست کامنتهای تایید نشده",
     ]);
 
     Route::get('/user-comment-detail/{id}',[
         'uses' => 'admin_panel\admin_user_comment_controller@get_user_comment_by_id',
-        'as'   => 'admin_panel_load_user_comment_by_id'
+        'as'   => 'admin_panel_load_user_comment_by_id',
+        'description' => "توانایی مشاهده ی جزییات یک کامنت از طرف کاربر",
     ]);
 
     Route::post('/confirm_user_comment_by_id',[
         'uses' => 'admin_panel\admin_user_comment_controller@confirm_user_comment_by_id',
-        'as'   => 'admin_panel_confirm_user_comment_by_id'
+        'as'   => 'admin_panel_confirm_user_comment_by_id',
+        'description' => "توانایی تایید یک کامنت تایید نشده",
     ]);
 
     Route::get('/suspicious-messages-list',[
         'uses' => 'admin_panel\AnomalyDetector\messaging_anomaly_controller@load_messaging_anomaly',
-        'as'   => 'admin_panel_load_messaging_anomaly'
+        'as'   => 'admin_panel_load_messaging_anomaly',
+        'description' => "دسترسی به لیست پیام های آنومالی",
     ]);
 
     Route::post('/block-operator',[
         'uses' => 'admin_panel\AnomalyDetector\messaging_anomaly_controller@block_operator',
-        'as'  => 'admin_panel_block_operator'
+        'as'  => 'admin_panel_block_operator',
+        'description' => "توانایی مسدود و عدم مسدود سازی یک کاربر",
     ]);
 
     Route::get('/unverified-user-list',[
         'uses' => 'admin_panel\admin_verification_controller@load_unverified_documents',
-        'as' => 'admin_load_unverified_documents'
+        'as' => 'admin_load_unverified_documents',
+        'description' => "دسترسی به لیست کاربرانی که فرم احراز هویت را پر کرده اند",
     ]);
 
     Route::get('/document-detail/{user_id}', [
         'uses' => 'admin_panel\admin_verification_controller@load_user_documents_by_id',
         'as' => 'admin_panel_load_user_document_by_id',
+        'description' => "دسترسی به تصاویر و جزییات ارسال شده برای احراز هویت",
     ]);
     
     Route::delete('/d-verifivation-photo', [
         'uses' => 'admin_panel\admin_verification_controller@delete_verification_photo_by_id',
         'as' => 'delete_verification_photo_by_id',
+        'description' => "توانایی حذف تصویر ارسال شده برای احراز هویت",
     ]);
     
     Route::post('/verifiy-user-account', [
         'uses' => 'admin_panel\admin_verification_controller@verify_user_account',
         'as' => 'verify_user_account_by_id',
+        'description' => "توانایی احراز هویت کردن کاربران",
     ]);
 
     Route::get('/payment-list',[
         'uses' => 'admin_panel\admin_payment_controller@get_payment_logs',
-        'as' => 'admin_panel_payment_list'
+        'as' => 'admin_panel_payment_list',
+        'description' => "دسترسی به لیست کلی وضعیت تراکنش ها",
     ]);
 
     Route::post('/add-channel-content',[
         'uses' => 'Messenger\channel_controller@add_content',
-        'as' => 'admin_panel_add_channel_content'
+        'as' => 'admin_panel_add_channel_content',
+        'description' => "توانایی اضافه کردن محتوا در کانال رسمی باسکول در پیام رسان",
     ]);
 
     Route::delete('/d-channel-content',[
         'uses' => 'Messenger\channel_controller@delete_channel_content',
-        'as' => 'delete_channel_content_by_admin'
+        'as' => 'delete_channel_content_by_admin',
+        'description' => "توانایی حذف محتوااز کانال رسمی باسکول",
     ]);
 
     Route::get('/channel-contents-list',[
         'uses' => 'Messenger\channel_controller@get_all_channel_contents',
-        'as' => 'admin_panel_channel_content_list'
+        'as' => 'admin_panel_channel_content_list',
+        'description' => "دسترسی به لیست محتوای منتشر شده در کانال باسکول",
     ]);
 
     Route::get('/submit-to-channel', [
         'uses' => 'Messenger\channel_controller@submit_contents_to_channel',
-        'as' => 'admin_panel_submit_to_channel'
+        'as' => 'admin_panel_submit_to_channel',
+        'description' => "دسترسی به صفحه ی اضافه کردن محتوا به کانال باسکول",
     ]);
     
     Route::get('/categories-meta-data-list', [
         'uses' => 'admin_panel\admin_seo_controller@load_meta_contents_list',
-        'as' => 'admin_panel_load_meta_contents_list'
+        'as' => 'admin_panel_load_meta_contents_list',
+        'description' => "دسترسی به لیست محتوا های منتشر شده برای دسته بندی ها",
     ]);
 
     Route::get('/meta-data-detail/{id}', [
         'uses' => 'admin_panel\admin_seo_controller@load_meta_content_details',
         'as' => 'load_meta_content_details_by_id',
+        'description' => "دسترسی به جزییات محتوای منتشر شده برای دسته بندی ها",
     ]);
 
     Route::post('/edit-category-meta-data-detail', [
         'uses' => 'admin_panel\admin_seo_controller@edit_meta_content_to_a_category',
         'as' => 'admin_panel_edit_meta_content_to_a_category',
+        'description' => "توانایی ویرایش محتوای یم دسته بندی که بلافاصله منتشر خواهد شد",
     ]);
 
     Route::post('/add-category-meta-data-detail', [
         'uses' => 'admin_panel\admin_seo_controller@add_meta_content_to_a_category',
         'as' => 'admin_panel_add_meta_content_to_a_category',
+        'description' => "توانایی اضافه کردن محتوای جدید برای یک دسته بندی",
     ]);
 
-    Route::get('/add-category-meta-data-detail',function(){
-        return view('admin_panel.addNewCategoryMetaData');
-    });
+    Route::get('/add-category-meta-data-detail',[
+        'uses' => 'admin_panel\admin_seo_controller@load_add_new_category_meta_form',
+        'as' => 'admin_panel_add_new_meta_content_form',
+        'description' => 'دسترسی به صفحه اضافه کردن محتوای جدید برای دسته بندی ها'
+    ]);
 
     Route::get('/same-device-users-list/{user_id}',[
         'uses' => 'admin_panel\admin_user_controller@load_same_device_users',
-        'as' => 'admin_panel_same_device_users_list'
+        'as' => 'admin_panel_same_device_users_list',
+        'description' => "دسترسی به لیست دستگاه های متصل به یک حساب کاربری",
     ])->where('user_id','[0-9]+');
 
     Route::get('/clear-storage-cache',[
         'uses' => 'admin_panel\admin_user_controller@clear_categories_cached_file',
+        'as' => 'admin_panel_clear_categories_cache',
+        'description' => "توانایی حذف کش برای لیست دسته بندی ها"
     ]);
 
     Route::get('/d-leads',function(){
         LeadDistributorBot::dispatch();
-    });
+    })->name('admin_panel_manual_lead_distribution')->setAction([
+        'description' => 'توانایی توزیع لید بصورت دستی'
+    ]);
+
+    Route::get('/admin-users-list',[
+        'uses' => 'admin_panel\admin_user_controller@load_admin_users_list',
+        'as' => 'load_admin_users_list',
+        'description' => "دسترسی به لیست کاربران ادمین",
+    ]);
+
+    Route::get('/add-new-admin-form',[
+        'uses' => 'admin_panel\admin_user_controller@load_add_new_user_form',
+        'as' => 'admin_panel_add_new_admin_user_form',
+        'description' => 'دسترسی به فرم اضافه کردن ادمین جدید'
+    ]);
+
+    Route::post('/add-new-admin-user',[
+        'uses' => 'admin_panel\admin_user_controller@add_new_admin_user',
+        'as' => 'admin_panel_add_new_admin_user',
+        'description' => "توانایی اضافه کردن ادمین جدید",
+    ]);
+
+    Route::get('/admin-user-permission-form/{admin_user_id}',[
+        'uses' => 'admin_panel\admin_user_controller@load_admin_user_permission_setup_form',
+        'as' => 'admin_panel_load_admin_user_permission_setup_form',
+        'description' => "دسترسی به لیست دسترسی های یک کاربر ادمین",
+    ]);
+
+    Route::post('/setup-admin-user-permissions',[
+        'uses' => 'admin_panel\admin_user_controller@setup_admin_user_permissions',
+        'as'   => 'admin_panel_setup_admin_user_permissions',
+        'description' => "توانایی دسترسی دادن یا حذف دسترسی یک کاربر ادمین رو مارد دسترسی",
+    ]);
+
+    Route::get('/make-content-visible/{id}',[
+        'uses' => 'admin_panel\admin_seo_controller@make_category_meta_content_visible',
+        'as' => 'admin_panel_make_category_meta_content_visible',
+        'description' => "توانایی اجازه انتشار دادن به یک محتوا دسته بندی که اولین بار اضافه شده",
+    ]);
+    
+    
+    Route::get('/make-content-invisible/{id}',[
+        'uses' => 'admin_panel\admin_seo_controller@make_category_meta_content_invisible',
+        'as' => 'admin_panel_make_category_meta_content_invisible',
+        'description' => "توانایی از حالت انتشار خارج کردن محتوای یک دسته بندی",
+    ]);
+
+    Route::get('/potential-paying-users-list',[
+        'uses' => 'admin_panel\admin_payment_controller@get_potential_paying_users_list',
+        'as'   => 'admin_panel_get_potential_paying_users_list',
+        'description' => "دسترسی به لیست کاربران گیر کرده در درگاه بانکی",
+    ]);
+    
+    Route::get('/package-expiring-custormers',[
+        'uses' => 'admin_panel\admin_payment_controller@get_package_expiring_customers_list',
+        'as'   => 'admin_panel_get_package_expiring_customers_list',
+        'description' => "دسترسی به لیست کاربرانی که عضویت آنها در حال اتمام است",
+    ]);
+    
+    Route::get('/get-routes',[
+        'uses' => 'admin_panel\admin_user_controller@get_admin_routes',
+        'as'   => 'admin_panel_get_package_expiring_customers_lists'
+    ]);
     
 });
 
