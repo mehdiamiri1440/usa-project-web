@@ -215,7 +215,7 @@ class product_list_controller extends Controller
             $products = $this->get_all_products_with_related_media();
 
             if(! Cache::has($cache_key)){
-                Cache::put($cache_key,$products,60);
+                Cache::put($cache_key,$products,120);
             }    
         }
 
@@ -295,25 +295,88 @@ class product_list_controller extends Controller
         $selected_items = array_merge($this->product_info_sent_by_product_array,
                                         $this->user_info_sent_by_product_array);
 
+        // $products = DB::table('products')
+        //                 ->join('categories as c', 'products.category_id', '=', 'c.id')
+        //                 ->join('myusers','products.myuser_id','=','myusers.id')
+        //                 ->leftJoin('cities', 'cities.id', '=', 'products.city_id')
+        //                 ->leftJoin('provinces', 'provinces.id', '=', 'cities.province_id')
+        //                 ->selectRaw(implode(', ' , $selected_items) . ',( 
+        //                     FLOOR((select count(distinct(m1.sender_id)) from messages as m1 where m1.is_read = true and m1.receiver_id = products.myuser_id and not exists(select * from messages where messages.receiver_id = products.myuser_id and m1.is_read = false ))/(select count(distinct(messages.sender_id)) from messages where messages.receiver_id = products.myuser_id) * 100 )) as response_rate,
+        //                     (
+        //                         (select sum(TIMESTAMPDIFF(HOUR,messages.created_at,messages.updated_at)) from messages where messages.receiver_id = products.myuser_id and messages.is_read = true and messages.created_at between SUBDATE(NOW(), INTERVAL 3 MONTH) and NOW() ) / (select count(messages.id) from messages where messages.is_read = true and messages.receiver_id = products.myuser_id and messages.created_at between SUBDATE(NOW(), INTERVAL 3 MONTH) and NOW() )
+        //                     ) as response_time,(select categories.category_name from categories where c.parent_id = categories.id) as category_name,(select categories.id from categories where c.parent_id = categories.id) as category_id,(select count(id) from product_media where product_media.product_id = products.id) as photos_count,(select file_path from product_media where product_media.product_id = products.id order by product_media.id asc limit 1) as file_path,(select count(distinct(messages.sender_id)) from messages where messages.receiver_id = products.myuser_id) as ums,(select count(distinct(phone_number_view_logs.viewer_id)) from phone_number_view_logs where phone_number_view_logs.myuser_id = products.myuser_id) as upr')
+        //                 ->distinct('products.id')
+        //                 ->whereNull('products.deleted_at')
+        //                 ->where('myusers.is_blocked',false)
+        //                 ->where('products.confirmed', true)
+        //                 ->get();
+        
+        $all_product_ids = DB::table('products')
+                                ->where('confirmed',true)
+                                ->whereNull('deleted_at')
+                                ->pluck('id')
+                                ->all();
+
+        $updated_product_ids = DB::table('products')
+                                    ->whereIn('id',$all_product_ids)
+                                    ->whereNull('deleted_at')
+                                    ->where(function($q){
+                                        return $q->where('is_elevated',true)
+                                                    ->orWhereBetween('updated_at',[Carbon::now()->subDays(2),Carbon::now()])
+                                                    ->orWhereExists(function($q){
+                                                        $q->select(DB::raw(1))
+                                                            ->from('messages')
+                                                            ->where('messages.receiver_id','products.myuser_id')
+                                                            ->where('messages.is_read',true)
+                                                            ->whereBetween('messages.updated_at',[Carbon::now()->subHours(2),Carbon::now()]);
+                                                    })
+                                                    ->orWhereExists(function($q){
+                                                        $q->select(DB::raw(1))
+                                                            ->from('myusers')
+                                                            ->where('myusers.is_verified',true)
+                                                            ->orWhere('myusers.active_pakage_type','>',0);
+                                                    });
+                                    });
+
+        $cached_products = Cache::get('AllProducts');
+
+        if(is_null($cached_products)){
+            $cached_products = [];
+        }
+
+        $old_product_ids = [];
+        $old_products = array_filter($cached_products,function($item) use($all_product_ids,$updated_product_ids,&$old_product_ids){
+            if( (in_array($item['main']->id,$updated_product_ids) == false) &&  (in_array($item['main']->id,$all_product_ids) == true) ){
+                $old_products[] = $item['main']->id;
+
+                return true;
+            }
+
+            return false;
+        });
+
+        
+
         $products = DB::table('products')
-                        ->join('categories as c', 'products.category_id', '=', 'c.id')
-                        ->join('myusers','products.myuser_id','=','myusers.id')
-                        ->leftJoin('cities', 'cities.id', '=', 'products.city_id')
-                        ->leftJoin('provinces', 'provinces.id', '=', 'cities.province_id')
-                        ->selectRaw(implode(', ' , $selected_items) . ',( 
-                            FLOOR((select count(distinct(m1.sender_id)) from messages as m1 where m1.is_read = true and m1.receiver_id = products.myuser_id and not exists(select * from messages where messages.receiver_id = products.myuser_id and m1.is_read = false ))/(select count(distinct(messages.sender_id)) from messages where messages.receiver_id = products.myuser_id) * 100 )) as response_rate,
-                            (
-                                (select sum(TIMESTAMPDIFF(HOUR,messages.created_at,messages.updated_at)) from messages where messages.receiver_id = products.myuser_id and messages.is_read = true and messages.created_at between SUBDATE(NOW(), INTERVAL 3 MONTH) and NOW() ) / (select count(messages.id) from messages where messages.is_read = true and messages.receiver_id = products.myuser_id and messages.created_at between SUBDATE(NOW(), INTERVAL 3 MONTH) and NOW() )
-                            ) as response_time,(select categories.category_name from categories where c.parent_id = categories.id) as category_name,(select categories.id from categories where c.parent_id = categories.id) as category_id,(select count(id) from product_media where product_media.product_id = products.id) as photos_count,(select file_path from product_media where product_media.product_id = products.id order by product_media.id asc limit 1) as file_path,(select count(distinct(messages.sender_id)) from messages where messages.receiver_id = products.myuser_id) as ums,(select count(distinct(phone_number_view_logs.viewer_id)) from phone_number_view_logs where phone_number_view_logs.myuser_id = products.myuser_id) as upr')
-                        ->distinct('products.id')
-                        ->whereNull('products.deleted_at')
-                        ->where('myusers.is_blocked',false)
-                        ->where('products.confirmed', true)
-                        ->get();
+                    ->join('categories as c', 'products.category_id', '=', 'c.id')
+                    ->join('myusers','products.myuser_id','=','myusers.id')
+                    ->leftJoin('cities', 'cities.id', '=', 'products.city_id')
+                    ->leftJoin('provinces', 'provinces.id', '=', 'cities.province_id')
+                    ->selectRaw(implode(', ' , $selected_items) . ',( 
+                        FLOOR((select count(distinct(m1.sender_id)) from messages as m1 where m1.is_read = true and m1.receiver_id = products.myuser_id and not exists(select * from messages where messages.receiver_id = products.myuser_id and m1.is_read = false ))/(select count(distinct(messages.sender_id)) from messages where messages.receiver_id = products.myuser_id) * 100 )) as response_rate,
+                        (
+                            (select sum(TIMESTAMPDIFF(HOUR,messages.created_at,messages.updated_at)) from messages where messages.receiver_id = products.myuser_id and messages.is_read = true and messages.created_at between SUBDATE(NOW(), INTERVAL 3 MONTH) and NOW() ) / (select count(messages.id) from messages where messages.is_read = true and messages.receiver_id = products.myuser_id and messages.created_at between SUBDATE(NOW(), INTERVAL 3 MONTH) and NOW() )
+                        ) as response_time,(select categories.category_name from categories where c.parent_id = categories.id) as category_name,(select categories.id from categories where c.parent_id = categories.id) as category_id,(select count(id) from product_media where product_media.product_id = products.id) as photos_count,(select file_path from product_media where product_media.product_id = products.id order by product_media.id asc limit 1) as file_path,(select count(distinct(messages.sender_id)) from messages where messages.receiver_id = products.myuser_id) as ums,(select count(distinct(phone_number_view_logs.viewer_id)) from phone_number_view_logs where phone_number_view_logs.myuser_id = products.myuser_id) as upr')
+                    ->distinct('products.id')
+                    ->whereNull('products.deleted_at')
+                    ->where('myusers.is_blocked',false)
+                    ->where('products.confirmed', true)
+                    ->whereNotIn('products.id',$old_products)
+                    ->get();
 
         $products = $this->prepare_data_for_client($products);
 
-        return $products;
+        return array_merge($products,$old_products);
     }
 
     protected function prepare_data_for_client(&$products)
