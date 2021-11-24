@@ -1276,7 +1276,7 @@ Route::group(['prefix' => 'admin', 'middleware' => [admin_login::class]], functi
         'description' => "دسترسی به لیست کاربرانی که عضویت آنها در حال اتمام است",
     ]);
     
-    Route::get('/get-routes',[
+    Route::get('/setup-admin-routes',[
         'uses' => 'admin_panel\admin_user_controller@get_admin_routes',
         'as'   => 'admin_panel_get_package_expiring_customers_lists'
     ]);
