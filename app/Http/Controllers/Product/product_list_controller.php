@@ -327,7 +327,6 @@ class product_list_controller extends Controller
                                                         $q->select(DB::raw(1))
                                                             ->from('messages')
                                                             ->where('messages.receiver_id','products.myuser_id')
-                                                            ->where('messages.is_read',true)
                                                             ->whereBetween('messages.updated_at',[Carbon::now()->subHours(2),Carbon::now()]);
                                                     })
                                                     ->orWhereExists(function($q){

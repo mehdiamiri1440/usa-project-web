@@ -43,6 +43,7 @@ class CheckElevatorExpiry implements ShouldQueue
             DB::table('products') // in order to prevent from updating updated_at otherwise
                 ->where('id',$product->id)//it will cause major problems in listing
                 ->update([
+                    'updated_at' => $now,
                     'elevator_expiry' => NULL,
                     'is_elevated' => false
                 ]);
