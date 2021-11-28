@@ -109,7 +109,7 @@ export default {
       });
     },
     routeToPage(routeName) {
-      // ready for analytics
+      //  analytics
 
       this.registerComponentStatistics(
         "seller-just-after-signup",
@@ -120,7 +120,7 @@ export default {
       this.$router.push({ name: routeName });
     },
     openCategoryModal() {
-      // ready for analytics
+      // analytics
 
       this.registerComponentStatistics(
         "seller-just-after-signup",

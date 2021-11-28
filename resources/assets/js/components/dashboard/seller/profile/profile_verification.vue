@@ -553,19 +553,19 @@ export default {
     },
     routeToPage(routeName) {
       if (routeName == "dashboardPricingTableSeller") {
-        // ready for analytics
+        //  analytics
         this.registerComponentStatistics(
-            "verification",
-            "seller-last-step",
-            "click-on-package-promotion"
-          );
+          "verification",
+          "seller-last-step",
+          "click-on-package-promotion"
+        );
       } else if (routeName == "buyAdRequestsSeller") {
-        // ready for analytics
+        //  analytics
         this.registerComponentStatistics(
-            "verification",
-            "seller-last-step",
-            "click-on-buyAd-requests"
-          );
+          "verification",
+          "seller-last-step",
+          "click-on-buyAd-requests"
+        );
       }
 
       this.$router.push({ name: routeName });

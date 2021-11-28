@@ -613,10 +613,10 @@ export default {
     openProductWithABtest() {
       let routeName = this.$route.name;
       // if (routeName == "productList") {
-      //   // ready for analytics
+      //  analytics
       //   // this.registerComponentStatistics("","","");
       // } else if (routeName == "productCategory") {
-      //   // ready for analytics
+      //  analytics
       //   // this.registerComponentStatistics("","","");
       // }
 

@@ -1075,7 +1075,7 @@ export default {
     },
     priceModalFunction() {
       this.isPrice = false;
-      // ready for analytics click on estelam gheymat
+      //  analytics click on estelam gheymat
       this.registerComponentStatistics(
         "product-view",
         "show-price",
