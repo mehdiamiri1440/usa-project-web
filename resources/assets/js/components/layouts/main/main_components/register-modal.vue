@@ -775,8 +775,12 @@ export default {
       this.handleBackKeys();
     });
     $("#register-modal").on("hidden.bs.modal", (e) => {
+
       if (this.currentUser.user_info) {
         this.openChatOrCall(this.currentUser);
+      } else {
+        this.currentStep = 1;
+        this.$parent.isPrice = false;
       }
     });
   },
