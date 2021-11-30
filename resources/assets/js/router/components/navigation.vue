@@ -1,4 +1,9 @@
 <style  scoped>
+.introjs-tooltip
+{
+  background-color:unset;
+  box-shadow: unset;
+}
 .custom-navigation {
   position: fixed;
   bottom: 0;
@@ -126,6 +131,7 @@
     >
       <router-link
         v-for="(item, index) in sellerRoutes"
+        :id="'button' + index"
         :key="index"
         tag="button"
         :to="{ name: item.name }"
@@ -204,6 +210,7 @@
 
 
 <script>
+import introJs from "intro.js";
 export default {
   props: ["messageCount"],
   data() {
@@ -305,6 +312,46 @@ export default {
         },
       ],
     };
+  },
+  methods: {
+    init() {
+      this.$nextTick(() => {
+        setTimeout(() => {
+          console.log(document.querySelector("#button0"), "test");
+          introJs()
+          
+            .setOptions({
+              showBullets: false,
+              steps: [
+                {
+                  element: document.querySelector("#button0"),
+                  intro: "This step 1 focuses on an image",
+                },
+                {
+                  element: document.querySelector("#button1"),
+                  intro: "This step 2 focuses on an image",
+                },
+                {
+                  element: document.querySelector("#button2"),
+                  intro: "This step 3 focuses on an image",
+                },
+                {
+                  element: document.querySelector("#button3"),
+                  intro: "This step 4 focuses on an image",
+                },
+                {
+                  element: document.querySelector("#button4"),
+                  intro: "This step 5 focuses on an image",
+                },
+              ],
+            })
+            .start();
+        }, 50);
+      });
+    },
+  },
+  mounted() {
+    this.init();
   },
 };
 </script>

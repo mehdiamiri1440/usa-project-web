@@ -244,5 +244,11 @@ export default {
       isLoading: false,
     };
   },
+  methods: {
+    
+  },
+  mounted() {
+    
+  },
 };
 </script>
