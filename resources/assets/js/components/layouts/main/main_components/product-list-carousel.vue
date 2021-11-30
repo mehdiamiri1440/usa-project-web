@@ -113,7 +113,7 @@
 </template>
 
 <script>
-import owlCarousel from "../../../../owl.carousel.min.js";
+import owlCarousel from "../../../../scripts/owl.carousel.min.js";
 
 export default {
   data: function () {

@@ -516,7 +516,7 @@ import ProductImage from "./register-product-steps/product_image";
 import Terms from "./register-product-steps/terms";
 import MoreDetails from "./register-product-steps/more_details";
 import FinishStage from "./register-product-steps/finish_stage";
-import imageuploadify from "../../../../imageuploadify.min";
+import imageuploadify from "../../../../scripts/imageuploadify.min";
 
 export default {
   components: {

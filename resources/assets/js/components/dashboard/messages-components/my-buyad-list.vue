@@ -1061,7 +1061,7 @@ li.static-item > button i {
 
 <script >
 import { eventBus } from "../../../router/router";
-import swal from "../../../sweetalert.min.js";
+import swal from "../../../scripts/sweetalert.min.js";
 import termsVue from "../seller/product/register-product-steps/terms.vue";
 
 export default {

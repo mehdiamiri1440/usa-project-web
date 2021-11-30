@@ -678,7 +678,7 @@ li .buyad-button.send-message-button:hover {
 
 <script>
 import { eventBus } from "../../../../../router/router";
-import swal from "../../../../../sweetalert.min.js";
+import swal from "../../../../../scripts/sweetalert.min.js";
 
 export default {
   methods: {

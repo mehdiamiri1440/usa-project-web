@@ -548,10 +548,10 @@ import UserInfo from "./user_info";
 import UserData from "./User-data";
 import RelatedProducts from "./related-products.vue";
 import RegisterModal from "../../main_components/register-modal";
-import swal from "../../../../../sweetalert.min.js";
-import StickySidebar from "../../../../../stickySidebar.js";
+import swal from "../../../../../scripts/sweetalert.min.js";
+import StickySidebar from "../../../../../scripts/stickySidebar.js";
 // import registerInquerForm from "../../main_components/register-inquiry-form.vue";
-import { isElementShownInView } from "../../../../../custom";
+import { isElementShownInView } from "../../../../../scripts/custom";
 import PriceModal from "./price-modal.vue";
 
 export default {

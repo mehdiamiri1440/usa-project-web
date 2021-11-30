@@ -1009,7 +1009,7 @@ button.disable {
 
 <script>
 import { eventBus } from "../../../../router/router";
-import swal from "../../../../sweetalert.min.js";
+import swal from "../../../../scripts/sweetalert.min.js";
 import CategoriesModal from "../../../layouts/main/main_components/categories-modal.vue";
 
 export default {
@@ -1108,7 +1108,7 @@ export default {
           }
         });
     },
-     setScrollToBuyAd(id) {
+    setScrollToBuyAd(id) {
       let element = $(id);
       let elementTop = element.offset().top;
       let elementHeight = element.height();

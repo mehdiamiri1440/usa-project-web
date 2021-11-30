@@ -241,8 +241,8 @@ import ProductCarousel from "../../main_components/product-list-carousel";
 import ArticleReview from "../../main_components/review-components/article-review";
 import PlaceholderArticleReview from "../../main_components/review-components/placeholder-article-review";
 import ProductGridArticle from "../../product_components/Product_grid_article";
-import owlCarousel from "../../../../../owl.carousel.min.js";
-import { isElementShownInView } from "../../../../../custom";
+import owlCarousel from "../../../../../scripts/owl.carousel.min.js";
+import { isElementShownInView } from "../../../../../scripts/custom";
 
 export default {
   components: {
@@ -296,7 +296,6 @@ export default {
         });
     },
     getProductByUserName() {
-      
       axios
         .post("/get_product_list_by_user_name", {
           user_name: this.$parent.product.user_info.user_name,

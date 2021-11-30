@@ -50,8 +50,8 @@
 </template>
 
 <script>
-import owlCarousel from "../../../../../owl.carousel.min.js";
-import magnificPopup from "../../../../../jquery.magnific-popup.min";
+import owlCarousel from "../../../../../scripts/owl.carousel.min.js";
+import magnificPopup from "../../../../../scripts/jquery.magnific-popup.min";
 import { imagePreloader } from "vue-image-preloader";
 export default {
   components: {

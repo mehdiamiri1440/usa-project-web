@@ -471,7 +471,7 @@
 <script>
 import pricingUserCarousel from "./pricing-user-carousel";
 import pricingContents from "./pricing-tables/pricing-package-contents";
-import swal from "../../../../sweetalert.min.js";
+import swal from "../../../../scripts/sweetalert.min.js";
 
 export default {
   props: ["offerTime", "currentUser"],

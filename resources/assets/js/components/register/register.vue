@@ -250,7 +250,7 @@ import RegisterNumber from "./register-steps/register-number";
 import VerifyCode from "./register-steps/verify-code";
 import ComplementaryInfo from "./register-steps/complementary-info.vue";
 import device from "device-uuid/lib/device-uuid";
-import swal from "../../sweetalert.min.js";
+import swal from "../../scripts/sweetalert.min.js";
 
 export default {
   components: {

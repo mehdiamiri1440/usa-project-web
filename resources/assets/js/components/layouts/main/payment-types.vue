@@ -379,7 +379,7 @@
 </template>
 
 <script>
-import swal from "../../../sweetalert.min.js";
+import swal from "../../../scripts/sweetalert.min.js";
 
 export default {
   props: ["walletBalance", "peymentMethodData"],
@@ -614,7 +614,7 @@ export default {
         this.walletHasAmount = false;
       }
     },
-      handleBackKeys: function () {
+    handleBackKeys: function () {
       if (window.history.state) {
         history.pushState(null, null, window.location);
       }

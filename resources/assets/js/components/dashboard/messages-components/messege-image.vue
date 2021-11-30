@@ -142,7 +142,7 @@
 </template>
 
 <script>
-import magnificPopup from "../../../jquery.magnific-popup.min";
+import magnificPopup from "../../../scripts/jquery.magnific-popup.min";
 
 export default {
   data: function () {

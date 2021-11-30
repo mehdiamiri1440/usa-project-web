@@ -49,7 +49,7 @@ div.items-wrapper {
 
 <script>
 import ProductGridArticle from "../../product_components/Product_grid_article";
-import { isElementShownInView } from "../../../../../custom";
+import { isElementShownInView } from "../../../../../scripts/custom";
 export default {
   components: {
     ProductGridArticle,

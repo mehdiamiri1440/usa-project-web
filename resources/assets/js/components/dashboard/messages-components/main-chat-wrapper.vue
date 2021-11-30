@@ -1486,7 +1486,7 @@
 
 
 <script>
-import swal from "../../../sweetalert.min.js";
+import swal from "../../../scripts/sweetalert.min.js";
 import { eventBus } from "../../../router/router";
 export default {
   data() {

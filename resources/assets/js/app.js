@@ -4,7 +4,7 @@ import Axios from 'axios'
 import Meta from 'vue-meta'
 // import VueAB from 'vue-a2b'
 
-require('./bootstrap');
+require('./scripts/bootstrap');
 
 window.Vue = require('vue');
 

@@ -381,7 +381,7 @@ import ReviewModal from "../../components/layouts/main/main_components/review-co
 import ShareToSocialModal from "../../components/layouts/main/main_components/share-to-social-modal";
 import WalletComponent from "../../components/layouts/main/wallet";
 import PaymentTypes from "../../components/layouts/main/payment-types.vue";
-import swal from "../../sweetalert.min.js";
+import swal from "../../scripts/sweetalert.min.js";
 import Navigation from "./navigation.vue";
 
 export default {

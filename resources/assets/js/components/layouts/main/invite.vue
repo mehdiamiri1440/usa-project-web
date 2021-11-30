@@ -524,7 +524,10 @@ h2 {
           </svg>
         </div>
         <div class="text-center"><h2>ثبت نام رایگان</h2></div>
-        <RegisterInvitedUser :categoryList="categoryList" :referredUserName="$route.params.userName" />
+        <RegisterInvitedUser
+          :categoryList="categoryList"
+          :referredUserName="$route.params.userName"
+        />
       </section>
     </div>
     <section class="col-xs-12 main-categories">
@@ -668,8 +671,8 @@ h2 {
 </template>
 
 <script>
-import owlCarousel from "../../../owl.carousel.min";
-import RegisterInvitedUser from "./invite-components/register-invited-user.vue";
+import owlCarousel from "../../../scripts/owl.carousel.min.js";
+import RegisterInvitedUser from "./invite-page-components/register-invited-user.vue";
 export default {
   components: {
     RegisterInvitedUser,

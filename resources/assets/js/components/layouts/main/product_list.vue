@@ -1591,7 +1591,7 @@ import ProductGridArticle from "./product_components/Product_grid_article";
 import ProductAsideCategories from "./product_components/sidebar/product_aside_categories";
 import searchNotFound from "./main_components/search-not-found";
 import { eventBus } from "../../../router/router";
-import StickySidebar from "../../../stickySidebar.js";
+import StickySidebar from "../../../scripts/stickySidebar.js";
 var visible = false;
 export default {
   components: {

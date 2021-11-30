@@ -1852,8 +1852,8 @@ import ProductArticle from "./product_components/product_article";
 import ArticleReview from "./main_components/review-components/article-review";
 import PlaceholderArticleReview from "./main_components/review-components/placeholder-article-review";
 import { eventBus } from "../../../router/router";
-import owlCarousel from "../../../owl.carousel.min.js";
-import magnificPopup from "../../../jquery.magnific-popup.min";
+import owlCarousel from "../../../scripts/owl.carousel.min.js";
+import magnificPopup from "../../../scripts/jquery.magnific-popup.min";
 
 var visible = false;
 var PopupImage = {

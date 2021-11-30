@@ -131,7 +131,7 @@ import device from "device-uuid/lib/device-uuid";
 import pricingTableSellerContentVue from "../../../dashboard/seller/pricing-seller-page/pricing-table-seller-content.vue";
 
 import { eventBus } from "../../../../router/router";
-import swal from "../../../../sweetalert.min.js";
+import swal from "../../../../scripts/sweetalert.min.js";
 
 export default {
   props: ["categoryList", "referredUserName"],

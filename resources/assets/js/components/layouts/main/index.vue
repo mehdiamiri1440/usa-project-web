@@ -2288,7 +2288,7 @@ import { eventBus } from "../../../router/router";
 import MainRegisterRequestForm from "./main_components/main-register-request-form";
 import LandingPageBuyAds from "./main_components/landing-page-buyAds";
 import ProductGridArticle from "./product_components/landing_page_product_grid_article";
-import owlCarousel from "../../../owl.carousel.min.js";
+import owlCarousel from "../../../scripts/owl.carousel.min.js";
 import Route from "../../../router/components/route";
 
 var visible = false;

@@ -360,7 +360,7 @@ button i {
 </template>
 
 <script>
-import swal from "../../../../../../sweetalert.min.js";
+import swal from "../../../../../../scripts/sweetalert.min.js";
 
 export default {
   props: ["product", "str"],
