@@ -471,7 +471,7 @@ export default {
             if (response.status === 201) {
               eventBus.$emit("modal", "userRegisterSuccess");
               self.createCookie("registerNewUser", true, 60);
-              self.createCookie("firstLogin", true, 1);
+              self.createCookie("firstLogin", true, 60);
 
               let deviceInfo = new device.DeviceUUID();
               let deviceId = null;

@@ -1,7 +1,6 @@
 <style  scoped>
-.introjs-tooltip
-{
-  background-color:unset;
+.introjs-tooltip {
+  background-color: unset;
   box-shadow: unset;
 }
 .custom-navigation {
@@ -131,7 +130,7 @@
     >
       <router-link
         v-for="(item, index) in sellerRoutes"
-        :id="'button' + index"
+        :id="'navTour' + index"
         :key="index"
         tag="button"
         :to="{ name: item.name }"
@@ -314,38 +313,72 @@ export default {
     };
   },
   methods: {
+    test() {
+      setTimeout(() => {
+        document
+          .querySelector(".introjs-arrow")
+          .classList.remove("bottom-middle");
+        document.querySelector(".introjs-arrow").classList.add("bottom-right");
+        document.querySelector(".introjs-arrow").style.marginRight="10px";
+      }, 50);
+    },
     init() {
       this.$nextTick(() => {
         setTimeout(() => {
-          console.log(document.querySelector("#button0"), "test");
           introJs()
-          
             .setOptions({
+              nextLabel: "بعدی ",
+              doneLabel: "متوجه شدم!",
               showBullets: false,
+              tooltipPosition: "top",
               steps: [
                 {
-                  element: document.querySelector("#button0"),
-                  intro: "This step 1 focuses on an image",
+                  element: document.querySelector("#navTour4"),
+                  intro:
+                    "امکان تغییر نوع فعالیت از فروشنده به خریدار و بالعکس و انجام سایر تغییرات حساب کاربری",
                 },
                 {
-                  element: document.querySelector("#button1"),
-                  intro: "This step 2 focuses on an image",
+                  element: document.querySelector("#navTour3"),
+                  intro: "راه ارتباطی با فروشندگان و خریدارن",
                 },
                 {
-                  element: document.querySelector("#button2"),
-                  intro: "This step 3 focuses on an image",
+                  element: document.querySelector("#navTour2"),
+                  intro: "برای یافتن خریدار برای محصول خود، آن را ثبت کنید.",
                 },
                 {
-                  element: document.querySelector("#button3"),
-                  intro: "This step 4 focuses on an image",
+                  element: document.querySelector("#navTour1"),
+                  intro: "محل یافتن خریدار برای محصول مورد نظر شما",
                 },
                 {
-                  element: document.querySelector("#button4"),
-                  intro: "This step 5 focuses on an image",
+                  element: document.querySelector("#navTour0"),
+                  intro: "محل جستجوی فروشندگان و محصولات آنها",
                 },
               ],
             })
-            .start();
+            .start()
+            /*.onafterchange((element) => {
+             
+              switch (element.id) {
+                
+                case "navTour3":
+                    document
+                      .querySelector(".introjs-arrow").style.marginLeft ='20px';
+                   
+                  break;
+                case "navTour2":
+                  document
+                      .querySelector(".introjs-arrow").style.marginLeft ='-5px';
+                  break;
+                case "navTour1":
+                  document
+                      .querySelector(".introjs-arrow").style.marginLeft ='-50px';
+                  break;
+                case "navTour0":
+                  document
+                      .querySelector(".introjs-arrow").style.marginLeft ='-5px';
+                  break;
+              }
+            });*/
         }, 50);
       });
     },
