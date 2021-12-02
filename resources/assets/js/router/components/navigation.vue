@@ -98,7 +98,14 @@
   background: #fff !important;
   color: #00c569 !important;
 }
-
+@media (max-width: 370px) {
+  .item-wrapper button {
+    width: 70px;
+  }
+  .item-wrapper .icon-wrapper i {
+    font-size: 1.5rem;
+  }
+}
 </style>
 <template>
   <nav class="custom-navigation">
