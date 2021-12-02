@@ -60,9 +60,6 @@ trait Token
             return 1;
         }
 
-        echo $expiry_time . "-----";
-        echo $time;
-
         return json_decode($this->base64url_decode($data));
     }
 
