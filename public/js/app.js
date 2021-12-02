@@ -24188,7 +24188,6 @@ module.exports = function(module) {
 //
 //
 //
-//
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
@@ -24279,16 +24278,21 @@ module.exports = function(module) {
   methods: {
     test: function test() {
       setTimeout(function () {
-        document.querySelector(".introjs-arrow").classList.remove("bottom-middle");
-        document.querySelector(".introjs-arrow").classList.add("bottom-right");
-        document.querySelector(".introjs-arrow").style.marginRight = "10px";
+        document.getElementById("navTour4").style.transform = "scale(1.5)";
+        document.getElementById("navTour3").style.transform = "scale(1)";
+        document.getElementById("navTour2").style.transform = "scale(1)";
+        document.getElementById("navTour4").style.marginTop = "-7px";
+        document.getElementById("navTour4").style.fontSize = "1rem";
       }, 50);
     },
     init: function init() {
+      var _this = this;
+
       this.$nextTick(function () {
         setTimeout(function () {
           __WEBPACK_IMPORTED_MODULE_0_intro_js___default()().setOptions({
             nextLabel: "بعدی ",
+            prevLabel: "قبلی",
             doneLabel: "متوجه شدم!",
             showBullets: false,
             tooltipPosition: "top",
@@ -24308,30 +24312,74 @@ module.exports = function(module) {
               element: document.querySelector("#navTour0"),
               intro: "محل جستجوی فروشندگان و محصولات آنها"
             }]
-          }).start();
-          /*.onafterchange((element) => {
-           
+          }).start(_this.test()).onafterchange(function (element) {
             switch (element.id) {
-              
+              case "navTour4":
+                console.log(element.id);
+                document.getElementById(element.id).style.transform = "scale(1.5)";
+                document.getElementById(element.id).style.marginTop = "-7px";
+                document.getElementById(element.id).style.fontSize = "1rem";
+                document.getElementById("navTour3").style.fontSize = "1.3rem";
+                document.getElementById("navTour3").style.marginTop = "0";
+                document.getElementById("navTour3").style.transform = "scale(1)";
+                document.getElementById("navTour2").style.transform = "scale(1)";
+
+                break;
               case "navTour3":
-                  document
-                    .querySelector(".introjs-arrow").style.marginLeft ='20px';
-                 
+                document.getElementById(element.id).style.transform = "scale(1.5)";
+                document.getElementById(element.id).style.marginTop = "-7px";
+                document.getElementById("navTour4").style.marginTop = "0";
+                document.getElementById("navTour2").style.marginTop = "0";
+                document.getElementById(element.id).style.fontSize = "1rem";
+                document.getElementById("navTour4").style.fontSize = "1.3rem";
+                document.getElementById("navTour2").style.fontSize = "1.3rem";
+                document.getElementById("navTour3").style.marginTop = "0";
+                document.getElementById("navTour2").style.transform = "scale(1)";
+                document.getElementById("navTour4").style.transform = "scale(1)";
                 break;
               case "navTour2":
-                document
-                    .querySelector(".introjs-arrow").style.marginLeft ='-5px';
+                document.getElementById("navTour3").style.transform = "scale(1)";
+                document.getElementById(element.id).style.marginTop = "-7px";
+                document.getElementById("navTour3").style.marginTop = "0";
+                document.getElementById("navTour1").style.marginTop = "0";
+                document.getElementById(element.id).style.fontSize = "1rem";
+                document.getElementById("navTour3").style.fontSize = "1.3rem";
+                document.getElementById("navTour1").style.fontSize = "1.3rem";
+                document.getElementById(element.id).style.transform = "scale(1.5)";
+                document.getElementById("navTour1").style.transform = "scale(1)";
                 break;
               case "navTour1":
-                document
-                    .querySelector(".introjs-arrow").style.marginLeft ='-50px';
+                document.getElementById("navTour2").style.transform = "scale(1)";
+                document.getElementById(element.id).style.marginTop = "-7px";
+                document.getElementById("navTour2").style.marginTop = "0";
+                document.getElementById("navTour0").style.marginTop = "0";
+                document.getElementById(element.id).style.fontSize = "1rem";
+                document.getElementById("navTour2").style.fontSize = "1.3rem";
+                document.getElementById("navTour0").style.fontSize = "1.3rem";
+                document.getElementById("navTour0").style.transform = "scale(1)";
+                document.getElementById(element.id).style.transform = "scale(1.5)";
                 break;
               case "navTour0":
-                document
-                    .querySelector(".introjs-arrow").style.marginLeft ='-5px';
+                document.getElementById("navTour1").style.transform = "scale(1)";
+                document.getElementById(element.id).style.marginTop = "-7px";
+                document.getElementById("navTour1").style.marginTop = "0";
+                document.getElementById(element.id).style.fontSize = "1rem";
+                document.getElementById("navTour1").style.fontSize = "1.3rem";
+                document.getElementById(element.id).style.transform = "scale(1.5)";
                 break;
             }
-          });*/
+          }).onexit(function () {
+            document.getElementById("navTour0").style.transform = "scale(1)";
+            document.getElementById("navTour1").style.transform = "scale(1)";
+            document.getElementById("navTour2").style.transform = "scale(1)";
+            document.getElementById("navTour3").style.transform = "scale(1)";
+            document.getElementById("navTour4").style.transform = "scale(1)";
+            document.getElementById("navTour4").style.marginTop = "0";
+            document.getElementById("navTour3").style.marginTop = "0";
+            document.getElementById("navTour2").style.marginTop = "0";
+            document.getElementById("navTour1").style.marginTop = "0";
+            document.getElementById("navTour0").style.marginTop = "0";
+          });
         }, 50);
       });
     }
@@ -47866,7 +47914,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.introjs-tooltip[data-v-96a7d674] {\r\n  background-color: unset;\r\n  -webkit-box-shadow: unset;\r\n          box-shadow: unset;\n}\n.custom-navigation[data-v-96a7d674] {\r\n  position: fixed;\r\n  bottom: 0;\r\n  z-index: 1010;\r\n  background: #313a43;\r\n  color: #fff;\r\n  width: 100%;\n}\n.item-wrapper[data-v-96a7d674] {\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -ms-flex-pack: distribute;\r\n      justify-content: space-around;\r\n  padding-top: 4px;\n}\n.item-wrapper .icon-wrapper[data-v-96a7d674] {\r\n  background: transparent;\r\n  width: 32px;\r\n  height: 32px;\r\n  font-size: 20px;\r\n  border-radius: 12px;\r\n  position: relative;\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -webkit-box-align: center;\r\n      -ms-flex-align: center;\r\n          align-items: center;\r\n  margin: 0 auto -4px;\n}\n.item-wrapper .icon-wrapper i[data-v-96a7d674] {\r\n  -webkit-box-flex: 1;\r\n      -ms-flex: 1;\r\n          flex: 1;\r\n  font-size: 18px;\n}\n.item-wrapper .router-link-exact-active .icon-wrapper[data-v-96a7d674] {\r\n  background: linear-gradient(45deg, #47c1b4, #47c1b4);\r\n  color: #fff;\n}\n.item-wrapper .router-link-exact-active .icon-wrapper.default-icon[data-v-96a7d674] {\r\n  background: none;\r\n  color: #fff;\n}\n.item-wrapper button[data-v-96a7d674] {\r\n  background: none;\r\n  border: none;\r\n  font-weight: 300;\r\n  font-size: 13px;\r\n  padding: 0;\n}\r\n\r\n/* .item-wrapper button span {\r\n  display: block;\r\n  background: red;\r\n} */\n.icon-wrapper.main-icon[data-v-96a7d674] {\r\n  width: 35px;\r\n  height: 35px;\r\n  background: #fff;\r\n  color: #00c569;\n}\n.icon-wrapper.main-icon[data-v-96a7d674]::after {\r\n  content: \"\";\r\n  width: 13px;\r\n  height: 13px;\r\n  background: #1da1f2;\r\n  position: absolute;\r\n  right: -4px;\r\n  top: -4px;\r\n  border: 2px solid #313a43;\r\n  border-radius: 15px;\n}\n.user-image-wrapper[data-v-96a7d674] {\r\n  width: 26px;\r\n  height: 27px;\r\n  background-size: cover;\r\n  margin: 0 auto;\r\n  border-radius: 12px;\r\n  overflow: hidden;\n}\n.counter-item[data-v-96a7d674] {\r\n  width: 12px;\r\n  height: 12px;\r\n  background: red;\r\n  position: absolute;\r\n  right: 0;\r\n  top: 0;\r\n  border: 2px solid #313a43;\r\n  z-index: 1;\r\n  border-radius: 12px;\n}\n.plus-icon[data-v-96a7d674] {\r\n  overflow: inherit !important;\r\n  background: #fff !important;\r\n  color: #00c569 !important;\n}\r\n", ""]);
+exports.push([module.i, "\n.introjs-tooltip[data-v-96a7d674] {\r\n  background-color: unset;\r\n  -webkit-box-shadow: unset;\r\n          box-shadow: unset;\n}\n.custom-navigation[data-v-96a7d674] {\r\n  position: fixed;\r\n  bottom: 0;\r\n  z-index: 1010;\r\n  background: #313a43;\r\n  color: #fff;\r\n  width: 100%;\n}\n.item-wrapper[data-v-96a7d674] {\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -ms-flex-pack: distribute;\r\n      justify-content: space-around;\r\n  padding-top: 4px;\n}\n.item-wrapper .icon-wrapper[data-v-96a7d674] {\r\n  background: transparent;\r\n  width: 32px;\r\n  height: 32px;\r\n  font-size: 20px;\r\n  border-radius: 12px;\r\n  position: relative;\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -webkit-box-align: center;\r\n      -ms-flex-align: center;\r\n          align-items: center;\r\n  margin: 0 auto -4px;\n}\n.item-wrapper .icon-wrapper i[data-v-96a7d674] {\r\n  -webkit-box-flex: 1;\r\n      -ms-flex: 1;\r\n          flex: 1;\r\n  font-size: 18px;\n}\n.item-wrapper .router-link-exact-active .icon-wrapper[data-v-96a7d674] {\r\n  background: linear-gradient(45deg, #47c1b4, #47c1b4);\r\n  color: #fff;\n}\n.item-wrapper .router-link-exact-active .icon-wrapper.default-icon[data-v-96a7d674] {\r\n  background: none;\r\n  color: #fff;\n}\n.item-wrapper button[data-v-96a7d674] {\r\n  background: none;\r\n  border: none;\r\n  font-weight: 300;\r\n  font-size: 13px;\r\n  padding: 0;\r\n  border-radius: 5px;\r\n  width: 80px;\r\n  background-color: #313a43;\n}\n.icon-wrapper.main-icon[data-v-96a7d674] {\r\n  width: 35px;\r\n  height: 35px;\r\n  background: #fff;\r\n  color: #00c569;\n}\n.icon-wrapper.main-icon[data-v-96a7d674]::after {\r\n  content: \"\";\r\n  width: 13px;\r\n  height: 13px;\r\n  background: #1da1f2;\r\n  position: absolute;\r\n  right: -4px;\r\n  top: -4px;\r\n  border: 2px solid #313a43;\r\n  border-radius: 15px;\n}\n.user-image-wrapper[data-v-96a7d674] {\r\n  width: 26px;\r\n  height: 27px;\r\n  background-size: cover;\r\n  margin: 0 auto;\r\n  border-radius: 12px;\r\n  overflow: hidden;\n}\n.counter-item[data-v-96a7d674] {\r\n  width: 12px;\r\n  height: 12px;\r\n  background: red;\r\n  position: absolute;\r\n  right: 0;\r\n  top: 0;\r\n  border: 2px solid #313a43;\r\n  z-index: 1;\r\n  border-radius: 12px;\n}\n.plus-icon[data-v-96a7d674] {\r\n  overflow: inherit !important;\r\n  background: #fff !important;\r\n  color: #00c569 !important;\n}\r\n\r\n", ""]);
 
 // exports
 

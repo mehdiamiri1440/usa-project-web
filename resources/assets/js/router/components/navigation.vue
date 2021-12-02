@@ -50,12 +50,10 @@
   font-weight: 300;
   font-size: 13px;
   padding: 0;
+  border-radius: 5px;
+  width: 80px;
+  background-color: #313a43;
 }
-
-/* .item-wrapper button span {
-  display: block;
-  background: red;
-} */
 
 .icon-wrapper.main-icon {
   width: 35px;
@@ -100,6 +98,7 @@
   background: #fff !important;
   color: #00c569 !important;
 }
+
 </style>
 <template>
   <nav class="custom-navigation">
@@ -315,11 +314,11 @@ export default {
   methods: {
     test() {
       setTimeout(() => {
-        document
-          .querySelector(".introjs-arrow")
-          .classList.remove("bottom-middle");
-        document.querySelector(".introjs-arrow").classList.add("bottom-right");
-        document.querySelector(".introjs-arrow").style.marginRight="10px";
+        document.getElementById("navTour4").style.transform = "scale(1.5)";
+        document.getElementById("navTour3").style.transform = "scale(1)";
+        document.getElementById("navTour2").style.transform = "scale(1)";
+        document.getElementById("navTour4").style.marginTop = "-7px";
+        document.getElementById("navTour4").style.fontSize = "1rem";
       }, 50);
     },
     init() {
@@ -328,6 +327,7 @@ export default {
           introJs()
             .setOptions({
               nextLabel: "بعدی ",
+              prevLabel: "قبلی",
               doneLabel: "متوجه شدم!",
               showBullets: false,
               tooltipPosition: "top",
@@ -355,30 +355,90 @@ export default {
                 },
               ],
             })
-            .start()
-            /*.onafterchange((element) => {
-             
+            .start(this.test())
+            .onafterchange((element) => {
               switch (element.id) {
-                
+                case "navTour4":
+                  console.log(element.id);
+                  document.getElementById(element.id).style.transform =
+                    "scale(1.5)";
+                  document.getElementById(element.id).style.marginTop = "-7px";
+                  document.getElementById(element.id).style.fontSize = "1rem";
+                  document.getElementById("navTour3").style.fontSize = "1.3rem";
+                  document.getElementById("navTour3").style.marginTop = "0";
+                  document.getElementById("navTour3").style.transform =
+                    "scale(1)";
+                  document.getElementById("navTour2").style.transform =
+                    "scale(1)";
+
+                  break;
                 case "navTour3":
-                    document
-                      .querySelector(".introjs-arrow").style.marginLeft ='20px';
-                   
+                  document.getElementById(element.id).style.transform =
+                    "scale(1.5)";
+                  document.getElementById(element.id).style.marginTop = "-7px";
+                  document.getElementById("navTour4").style.marginTop = "0";
+                  document.getElementById("navTour2").style.marginTop = "0";
+                  document.getElementById(element.id).style.fontSize = "1rem";
+                  document.getElementById("navTour4").style.fontSize = "1.3rem";
+                  document.getElementById("navTour2").style.fontSize = "1.3rem";
+                  document.getElementById("navTour3").style.marginTop = "0";
+                  document.getElementById("navTour2").style.transform =
+                    "scale(1)";
+                  document.getElementById("navTour4").style.transform =
+                    "scale(1)";
                   break;
                 case "navTour2":
-                  document
-                      .querySelector(".introjs-arrow").style.marginLeft ='-5px';
+                  document.getElementById("navTour3").style.transform =
+                    "scale(1)";
+                  document.getElementById(element.id).style.marginTop = "-7px";
+                  document.getElementById("navTour3").style.marginTop = "0";
+                  document.getElementById("navTour1").style.marginTop = "0";
+                  document.getElementById(element.id).style.fontSize = "1rem";
+                  document.getElementById("navTour3").style.fontSize = "1.3rem";
+                  document.getElementById("navTour1").style.fontSize = "1.3rem";
+                  document.getElementById(element.id).style.transform =
+                    "scale(1.5)";
+                  document.getElementById("navTour1").style.transform =
+                    "scale(1)";
                   break;
                 case "navTour1":
-                  document
-                      .querySelector(".introjs-arrow").style.marginLeft ='-50px';
+                  document.getElementById("navTour2").style.transform =
+                    "scale(1)";
+                  document.getElementById(element.id).style.marginTop = "-7px";
+                  document.getElementById("navTour2").style.marginTop = "0";
+                  document.getElementById("navTour0").style.marginTop = "0";
+                  document.getElementById(element.id).style.fontSize = "1rem";
+                  document.getElementById("navTour2").style.fontSize = "1.3rem";
+                  document.getElementById("navTour0").style.fontSize = "1.3rem";
+                  document.getElementById("navTour0").style.transform =
+                    "scale(1)";
+                  document.getElementById(element.id).style.transform =
+                    "scale(1.5)";
                   break;
                 case "navTour0":
-                  document
-                      .querySelector(".introjs-arrow").style.marginLeft ='-5px';
+                  document.getElementById("navTour1").style.transform =
+                    "scale(1)";
+                  document.getElementById(element.id).style.marginTop = "-7px";
+                  document.getElementById("navTour1").style.marginTop = "0";
+                  document.getElementById(element.id).style.fontSize = "1rem";
+                  document.getElementById("navTour1").style.fontSize = "1.3rem";
+                  document.getElementById(element.id).style.transform =
+                    "scale(1.5)";
                   break;
               }
-            });*/
+            })
+            .onexit(() => {
+              document.getElementById("navTour0").style.transform = "scale(1)";
+              document.getElementById("navTour1").style.transform = "scale(1)";
+              document.getElementById("navTour2").style.transform = "scale(1)";
+              document.getElementById("navTour3").style.transform = "scale(1)";
+              document.getElementById("navTour4").style.transform = "scale(1)";
+              document.getElementById("navTour4").style.marginTop = "0";
+              document.getElementById("navTour3").style.marginTop = "0";
+              document.getElementById("navTour2").style.marginTop = "0";
+              document.getElementById("navTour1").style.marginTop = "0";
+              document.getElementById("navTour0").style.marginTop = "0";
+            });
         }, 50);
       });
     },
