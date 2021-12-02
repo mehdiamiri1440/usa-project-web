@@ -3,9 +3,9 @@
   position: fixed;
   bottom: 59px;
   width: 100%;
-  background: #fff;
+  background-color: #e0eff4;
   text-align: center;
-  color: #fff;
+  color: #000000;
   direction: rtl;
   z-index: 1020;
   font-weight: bold;
@@ -13,16 +13,30 @@
   padding: 5px;
   box-shadow: 0 -8px 8px rgba(0, 0, 0, 0.1);
 }
+.android-download-alert-wrapper p.android-download-title {
+  text-align: right;
+  font-size: 1.2rem;
+}
+.android-download-alert-wrapper p.android-download-slogan {
+  text-align: right;
+  font-size: 1rem;
+}
+.android-download-alert-wrapper img {
+  width: 37px;
+  height: 37px;
+  float: right;
+  margin-right: 37px;
+}
 
 .android-apk-download {
-  padding: 10px 15px;
-  background: linear-gradient(-35deg, #ff9300, #f60);
+  padding: 3px 15px;
+  font-size: 1.3rem;
+  background-color: #ff9828;
+  float: left;
   border: none;
-  width: 100%;
+  width: 64px;
+  height: 30px;
   border-radius: 8px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   position: relative;
 }
 
@@ -356,14 +370,14 @@
       >
         <i class="fa fa-times"></i>
       </button>
-
+      <img
+        src="../../../img/logo/512-buskool-logo.jpg"
+        alt="دانلود اپلیکیشن باسکول"
+      />
+      <p class="android-download-title">اپلیکیشن باسکول</p>
+      <p class="android-download-slogan">استفاده راحت تر و سریع تر</p>
       <button class="android-apk-download" @click.prevent="doDownload()">
-        دانلود اپلیکیشن باسکول
-
-        <img
-          src="../../../img/google-play-icon.svg"
-          alt="دانلود اپلیکیشن باسکول"
-        />
+        دانلود
       </button>
     </div>
   </div>
