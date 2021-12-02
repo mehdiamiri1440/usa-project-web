@@ -14,9 +14,12 @@ use DB;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
+use App\Traits\Token;
 
 class user_controller extends Controller
 {
+    use Token;
+
     public $users;
 
     public function __construct(userService $service)
@@ -60,7 +63,10 @@ class user_controller extends Controller
 
             $this->set_user_session($user);
             $this->set_last_login_info($user,$request);
-            $jwt_token = JWTAuth::fromUser($user,['exp' => Carbon::now()->addDays(7)->timestamp]);
+            // $token_controller_object = new token_controller();
+
+            $jwt_token = $this->generate_token($user,Carbon::now()->addMinutes(1));
+            // $jwt_token = JWTAuth::fromUser($user,['exp' => Carbon::now()->addDays(7)->timestamp]);
 
             return response()->json([
                 'status' => true,
