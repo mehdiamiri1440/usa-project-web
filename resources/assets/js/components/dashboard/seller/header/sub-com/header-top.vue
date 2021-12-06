@@ -391,6 +391,11 @@ a.profile-info-wrapper:focus {
 }
 
 @media screen and (max-width: 991px) {
+  .main-header {
+    position: absolute;
+    top: 65px;
+  }
+
   .main-header,
   .little-main-header {
     right: 0 !important;
@@ -557,10 +562,7 @@ a.profile-info-wrapper:focus {
       <span @click.prevent class="verified-user" title>
         <i class="fa fa-certificate"></i>
       </span>
-      <button
-        class="close-info"
-        @click.prevent="$parent.disableVerificationAlert = true"
-      >
+      <button class="close-info" @click.prevent="disableVerificationAlert()">
         <i class="fa fa-times"></i>
       </button>
     </router-link>
@@ -925,6 +927,17 @@ export default {
           this.pageTitle = item.title;
         }
       });
+    },
+    disableVerificationAlert() {
+      this.$parent.disableVerificationAlert = true;
+
+      var div = document.querySelector(".main-buskool-wrapper");
+      var style = div.currentStyle || window.getComputedStyle(div);
+
+      console.log("Current marginTop: " + style.marginTop);
+      if (style.marginTop == "125px") {
+        div.style.marginTop = "85px";
+      }
     },
   },
   mounted() {

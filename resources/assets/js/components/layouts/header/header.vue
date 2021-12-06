@@ -1831,8 +1831,37 @@ export default {
         $("#categories-modal").modal("show");
       }
     },
+    navbarCategoryMoble() {
+      if (window.screen.width < 991) {
+        document.querySelector(".navbar-category").style.marginTop = "65px";
+        document.querySelector(".sub-header").style.marginTop = "0";
+
+        window.addEventListener("scroll", () => {
+          if (this.isClosed) {
+            document.querySelector(".main-header").style.position = "fixed";
+            document.querySelector(".main-header").style.top = "0";
+            document.querySelector(".main-buskool-wrapper").style.marginTop =
+              "85px";
+          } else if (window.scrollY > 65) {
+            document.querySelector(".navbar-category").style.position = "fixed";
+            ocument.querySelector(".navbar-category").style.position = "fixed";
+            document.querySelector(".navbar-category").style.marginTop = "0";
+            document.querySelector(".sub-header").style.marginTop = "0";
+          } else {
+            document.querySelector(".navbar-category").style.position =
+              "absolute";
+            //document.querySelector(".navbar-category").style.marginTop = "65px";
+
+            // document.querySelector(".navbar-category").style.position =
+            //   "absolute";
+          }
+        });
+      }
+    },
   },
   mounted() {
+   // this.navbarCategoryMoble();
+    this.$parent.check
     this.checkLocationFilter();
     if (this.user_id) {
       axios
@@ -1883,7 +1912,6 @@ export default {
     eventBus.$on("selectedCity", (event) => {
       this.selectedCity = event;
     });
-    
 
     $(window).resize(this.jqUpdateSize); // When the browser changes size
   },

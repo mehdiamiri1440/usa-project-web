@@ -1,60 +1,68 @@
+
 <style scoped>
 .android-download-alert-wrapper {
-  position: fixed;
-  bottom: 59px;
+  overflow: hidden;
+  height: 0;
   width: 100%;
   background-color: #e0eff4;
   text-align: center;
   color: #000000;
   direction: rtl;
-  z-index: 1020;
   font-weight: bold;
   font-size: 20px;
-  padding: 5px;
+  padding: 0 5px;
   box-shadow: 0 -8px 8px rgba(0, 0, 0, 0.1);
+  display: grid;
+  grid-template-columns: 75px auto 100px;
+  transition: height 1.3s;
 }
-.android-download-alert-wrapper p.android-download-title {
-  text-align: right;
-  font-size: 1.2rem;
-}
-.android-download-alert-wrapper p.android-download-slogan {
-  text-align: right;
-  font-size: 1rem;
+
+.android-download-alert-wrapper .m-t-b {
+  margin: 1.4rem 0;
 }
 .android-download-alert-wrapper img {
   width: 37px;
   height: 37px;
-  float: right;
-  margin-right: 37px;
+  float: left;
 }
-
+.text-android-download-alert-wrapper {
+  padding-right: 8.8px;
+}
+.text-android-download-alert-wrapper p.android-download-title {
+  text-align: right;
+  font-size: 1.2rem;
+  margin-top: 5px;
+}
+.text-android-download-alert-wrapper p.android-download-slogan {
+  text-align: right;
+  font-size: 1rem;
+  margin-top: 5px;
+}
 .android-apk-download {
   padding: 3px 15px;
   font-size: 1.3rem;
   background-color: #ff9828;
-  float: left;
+  color: #ffffff;
   border: none;
   width: 64px;
   height: 30px;
   border-radius: 8px;
+  display: inline-block;
   position: relative;
-}
-
-.android-apk-download img {
-  width: 28px;
-  position: absolute;
-  left: 15px;
+  top: 4px;
 }
 
 .close-android-download-alert-wrapper {
   background: none;
   border: none;
   font-size: 20px;
-  position: absolute;
-  right: 5px;
-  top: 5px;
-  z-index: 1021;
-  padding: 11px 15px 8px;
+  position: relative;
+  top: 9px;
+  margin-right: 5px;
+  float: right;
+}
+.close-android-download-alert-wrapper.hide {
+  display: none;
 }
 /* 
 .modal-dialog {
@@ -212,7 +220,33 @@
         </p>
       </div>
     </div>
-
+    <!-- Download app modal -->
+    <div
+      :class="[{ hide: isClosed }, { test: isClosed == false }]"
+      class="android-download-alert-wrapper hidden-lg hidden-md"
+    >
+      <div class="m-t-b">
+        <button
+          class="close-android-download-alert-wrapper"
+          @click.prevent="closeAppModal()"
+        >
+          <i class="fa fa-times"></i>
+        </button>
+        <img
+          src="../../../img/logo/512-buskool-logo.jpg"
+          alt="دانلود اپلیکیشن باسکول"
+        />
+      </div>
+      <div class="text-android-download-alert-wrapper m-t-b">
+        <p class="android-download-title">اپلیکیشن باسکول</p>
+        <p class="android-download-slogan">استفاده راحت تر و سریع تر</p>
+      </div>
+      <div class="text-center m-t-b">
+        <button class="android-apk-download" @click.prevent="doDownload()">
+          دانلود
+        </button>
+      </div>
+    </div>
     <!--  #regex wallet modal  -->
 
     <div class="container">
@@ -359,27 +393,7 @@
     />
 
     <!-- add android app download  -->
-
-    <div
-      v-if="downloadAppButton && $route.name != 'invite'"
-      class="android-download-alert-wrapper hidden-lg hidden-md"
-    >
-      <button
-        class="close-android-download-alert-wrapper"
-        @click.prevent="downloadAppButton = false"
-      >
-        <i class="fa fa-times"></i>
-      </button>
-      <img
-        src="../../../img/logo/512-buskool-logo.jpg"
-        alt="دانلود اپلیکیشن باسکول"
-      />
-      <p class="android-download-title">اپلیکیشن باسکول</p>
-      <p class="android-download-slogan">استفاده راحت تر و سریع تر</p>
-      <button class="android-apk-download" @click.prevent="doDownload()">
-        دانلود
-      </button>
-    </div>
+    <!-- v-if="downloadAppButton && $route.name != 'invite'" -->
   </div>
 </template>
 
@@ -446,6 +460,7 @@ export default {
         "<div class='tooltip-wrapper text-rtl'>اطلاعات هویتی این کاربر احراز شده است.<br/><a href='/verification'>اطلاعات بیشتر</a> </div>",
       doPaymentLoader: false,
       messageCount: "",
+      isClosed: false,
     };
   },
   props: [
@@ -505,6 +520,19 @@ export default {
         return false;
       }
     },
+    closeAppModal() {
+      this.downloadAppButton = false;
+      this.isClosed = true;
+      if (
+        document.querySelector(".main-header") &&
+        document.querySelector(".main-buskool-wrapper")
+      ) {
+        document.querySelector(".main-header").style.position = "fixed";
+        document.querySelector(".main-header").style.top = "0";
+        document.querySelector(".main-buskool-wrapper").style.marginTop =
+          "85px";
+      }
+    },
     getAndroidVersion: function (ua) {
       ua = (ua || navigator.userAgent).toLowerCase();
       var match = ua.match(/android\s([0-9\.]*)/);
@@ -559,8 +587,7 @@ export default {
         }
       }
     },
-    activateDownloadAppButton: function () {
-      let self = this;
+    activateDownloadAppButton() {
       if (this.isDeviceMobile() && !this.isOsIOS()) {
         let androidVersion = this.getAndroidVersion();
         if (parseInt(androidVersion) >= 5) {
@@ -1426,6 +1453,125 @@ export default {
       window.localStorage.setItem("userId", this.user.id);
       window.localStorage.setItem("userType", this.user.type);
     },
+    checkScrolling() {
+      if (window.screen.width < 991) {
+        window.addEventListener("load", () => {
+          if (document.querySelector(".main-header")) {
+            document.querySelector(".main-header").style.position = "unset";
+          }
+          if (document.querySelector(".main-buskool-wrapper")) {
+            document.querySelector(".main-buskool-wrapper").style.marginTop =
+              "0";
+          }
+          if (document.querySelector(".navbar-category")) {
+            document.querySelector(".navbar-category").style.position = "unset";
+          }
+          if (document.querySelector("#main")) {
+            document.querySelector("#main").style.marginTop = "0";
+          }
+          if (document.querySelector("#main-content")) {
+            document.querySelector("#main-content").style.paddingTop = "0";
+          }
+          if (document.querySelector(".sub-header")) {
+            document
+              .querySelector(".sub-header")
+              .classList.remove("sub-header-fix");
+            document.querySelector(".sub-header").style.position = "unset";
+          }
+
+          setTimeout(() => {
+            document.querySelector(
+              ".android-download-alert-wrapper"
+            ).style.height = "65px";
+          }, 3000);
+        });
+        //document.querySelector(".main-header").style.top = "65px";
+        // document.querySelector(".main-buskool-wrapper").style.marginTop =
+        //   "125px";
+
+        window.addEventListener("scroll", () => {
+          if (this.isClosed) {
+            if (document.querySelector(".main-header")) {
+              document.querySelector(".main-header").style.position = "fixed";
+              document.querySelector(".main-header").style.top = "0";
+            }
+
+            if (document.querySelector(".navbar-category")) {
+              document.querySelector(".navbar-category").style.position =
+                "fixed";
+              document.querySelector(".navbar-category").style.top = "0";
+            }
+            if (document.querySelector(".sub-header")) {
+              document
+                .querySelector(".sub-header")
+                .classList.remove("sub-header-fix");
+              document.querySelector(".sub-header").style.position = "unset";
+              if (window.scrollY > 70) {
+                //-------------------------------------------------
+                document
+                  .querySelector(".sub-header")
+                  .classList.add("sub-header-fix");
+                document.querySelector(".sub-header").style.position = "fixed";
+              }
+            }
+            // document.querySelector(".main-header").style.top = "0";
+            // document.querySelector(".main-buskool-wrapper").style.marginTop =
+            //   "85px";
+          } else if (window.scrollY > 65) {
+            if (document.querySelector(".navbar-category")) {
+              document.querySelector(".navbar-category").style.position =
+                "fixed";
+              document.querySelector(".navbar-category").style.top = "0";
+            }
+            if (document.querySelector(".main-header")) {
+              document.querySelector(".main-header").style.position = "fixed";
+              document.querySelector(".main-header").style.top = "0";
+            }
+            if (document.querySelector(".main-buskool-wrapper")) {
+              document.querySelector(".main-buskool-wrapper").style.marginTop =
+                "84px";
+            }
+            if (document.querySelector("#main-content")) {
+              document.querySelector("#main-content").style.marginTop = "90px";
+            }
+            if (document.querySelector(".sub-header")) {
+              document
+                .querySelector(".sub-header")
+                .classList.add("sub-header-fix");
+              document.querySelector(".sub-header").style.position = "fixed";
+            }
+          } else {
+            if (document.querySelector(".main-header")) {
+              document.querySelector(".main-header").style.position = "unset";
+            }
+            if (document.querySelector(".main-buskool-wrapper")) {
+              document.querySelector(".main-buskool-wrapper").style.marginTop =
+                "0";
+            }
+            if (document.querySelector(".navbar-category")) {
+              document.querySelector(".navbar-category").style.position =
+                "unset";
+            }
+            if (document.querySelector(".sub-header")) {
+              if (window.scrollY == 0) {
+                document
+                  .querySelector(".sub-header")
+                  .classList.remove("sub-header-fix");
+                document.querySelector(".sub-header").style.position = "unset";
+              } else if (window.scrollY <= 65) {
+                document
+                  .querySelector(".sub-header")
+                  .classList.remove("sub-header-fix");
+                document.querySelector(".sub-header").style.position = "unset";
+              }
+            }
+            if (document.querySelector("#main-content")) {
+              document.querySelector("#main-content").style.marginTop = "0";
+            }
+          }
+        });
+      }
+    },
   },
   mounted() {
     this.updateUserData();
@@ -1440,8 +1586,36 @@ export default {
     eventBus.$on("currentUser", (event) => {
       this.currentUser = event;
     });
+    this.checkScrolling();
   },
   watch: {
+    $route() {
+      if (!this.isClosed) {
+        setTimeout(() => {
+          if (document.querySelector(".main-header")) {
+            document.querySelector(".main-header").style.position = "unset";
+          }
+          if (document.querySelector(".main-buskool-wrapper")) {
+            document.querySelector(".main-buskool-wrapper").style.marginTop =
+              "0";
+          }
+          if (document.querySelector(".navbar-category")) {
+            document.querySelector(".navbar-category").style.position = "unset";
+          }
+          if (document.querySelector("#main")) {
+            document.querySelector("#main").style.marginTop = "0";
+          }
+          if (document.querySelector("#main-content")) {
+            document.querySelector("#main-content").style.paddingTop = "0";
+          }
+          if (document.querySelector(".sub-header")) {
+            document
+              .querySelector(".sub-header")
+              .classList.remove("sub-header-fix");
+          }
+        }, 50);
+      }
+    },
     currentUser(user) {
       this.updateUserData();
       if (user.user_info) {
