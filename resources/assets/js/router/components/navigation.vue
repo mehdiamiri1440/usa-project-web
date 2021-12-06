@@ -98,13 +98,30 @@
   background: #fff !important;
   color: #00c569 !important;
 }
+@media (max-width: 414px) {
+  .item-wrapper button {
+    width: 75px;
+  }
+  .introjs-fixedTooltip {
+    
+    height: 80px!important;
+}
+}
 @media (max-width: 370px) {
   .item-wrapper button {
     width: 70px;
+    font-size: 0.9rem!important;
   }
   .item-wrapper .icon-wrapper i {
     font-size: 1.5rem;
   }
+}
+@media (max-width: 360px) {
+  .item-wrapper button {
+    width: 55px;
+    font-size: 0.9rem!important;
+  }
+  
 }
 </style>
 <template>
@@ -404,7 +421,7 @@ export default {
                   document.getElementById("navTour3").style.fontSize = "1.3rem";
                   document.getElementById("navTour1").style.fontSize = "1.3rem";
                   document.getElementById(element.id).style.transform =
-                    "scale(1.5)";
+                    "scale(1.3)";
                   document.getElementById("navTour1").style.transform =
                     "scale(1)";
                   break;
