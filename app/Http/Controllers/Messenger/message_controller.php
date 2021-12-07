@@ -143,18 +143,18 @@ class message_controller extends Controller
             $is_price_asking_found = false;
             $is_phone_number_request_found = false;
 
-            foreach($this->price_asking_keywords as $keyword)
-            {
-                if(preg_match("/$keyword/",$text)){
-                    $is_price_asking_found = true;
-                     break;
-                }
-            }
+            // foreach($this->price_asking_keywords as $keyword)
+            // {
+            //     if(preg_match("/$keyword/",$text)){
+            //         $is_price_asking_found = true;
+            //          break;
+            //     }
+            // }
 
-            if($is_price_asking_found == true){ // match has been found
-                $auto_reply_text = $this->get_product_general_details_as_a_string($product_id);
-            }
-            else{
+            // if($is_price_asking_found == true){ // match has been found
+            //     $auto_reply_text = $this->get_product_general_details_as_a_string($product_id);
+            // }
+            // else{
         
                 foreach($this->phone_asking_keywords as $keyword)
                 {
@@ -169,7 +169,7 @@ class message_controller extends Controller
                     $auto_reply_text = $this->get_seller_phone_number_or_proper_message($product_id,$receiver_id,$sender_id);
 
                 }
-            }
+            // }
 
             return $auto_reply_text;
         }
