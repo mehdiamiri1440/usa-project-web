@@ -227,7 +227,7 @@ input.error:focus + i {
             </p>
           </div>
         </div>
-        <div class="step-action text-left">
+        <!-- <div class="step-action text-left">
           <button
             class="submit-button disabled"
             :class="{
@@ -251,7 +251,7 @@ input.error:focus + i {
             <i class="fa fa-arrow-right"></i>
             مرحله قبل
           </button>
-        </div>
+        </div> -->
       </div>
     </form>
   </div>

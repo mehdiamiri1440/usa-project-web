@@ -396,6 +396,9 @@ export default {
       if (!this.$parent.errors.stock && !this.$parent.errors.productName) {
         this.$parent.registerBuyAd();
       }
+      else{
+        console.log(this.$parent.isChat);
+      }
     },
     stockValidator(number) {
       var standardNumber = this.$parent.toLatinNumbersWithCommas(number);
