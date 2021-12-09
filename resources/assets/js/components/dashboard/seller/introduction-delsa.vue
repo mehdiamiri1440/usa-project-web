@@ -51,7 +51,7 @@
               <i class="fa fa-box-open"></i>
             </div>
             <div class="button-content-wrapper">
-              <p class="button-title single-title">محصول برای فروش دارم</p>
+              <p class="button-title single-title"> ثبت محصول برای فروش</p>
             </div>
             <i class="fa fa-angle-left"></i>
           </button>
@@ -63,7 +63,19 @@
               <i class="fa fa-tag"></i>
             </div>
             <div class="button-content-wrapper">
-              <p class="button-title single-title">قیمت محصولات را می خواهم</p>
+              <p class="button-title single-title">جستجوی قیمت محصولات</p>
+            </div>
+            <i class="fa fa-angle-left"></i>
+          </button>
+          <button
+            @click.prevent="openCategoryModal()"
+            class="default-btn-with-icon"
+          >
+            <div class="button-main-icon-wrapper">
+              <i class="fas fa-search"></i>
+            </div>
+            <div class="button-content-wrapper">
+              <p class="button-title single-title">جستجوی خریداران مرتبط</p>
             </div>
             <i class="fa fa-angle-left"></i>
           </button>
