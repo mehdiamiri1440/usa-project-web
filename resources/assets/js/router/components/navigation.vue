@@ -109,7 +109,7 @@
 }
 @media (max-width: 370px) {
   .item-wrapper button {
-    width: 70px;
+    width: 60px;
     font-size: 0.9rem!important;
   }
   .item-wrapper .icon-wrapper i {

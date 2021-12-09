@@ -29,8 +29,20 @@
         min-width: 280px;
       }
       }
+      @media (max-width:414px) {
+        .introjs-fixedTooltip
+        {
+            width: 80px!important;
+            height: 80px!important;
+            margin-top: -20px;
+        }
+      }
       @media (max-width:392px) {
-        
+        .introjs-fixedTooltip {
+          width: 75px!important;
+          height: 75px!important;
+          margin-top: -15px;
+      }
       .introjs-tooltip{
         min-width: 250px;
         
@@ -64,6 +76,15 @@
         .introjs-arrow.bottom-right {
           right: 0px;
       }
+      .introjs-top-left-aligned {
+        left: 17px!important;
+    }
+    .introjs-arrow.bottom-middle {
+      bottom: -23px;
+      left: 42%;
+      margin-left: 35px;
+      border-top-color: #F0F3F5;
+  }
     }
     @media (max-width:359px) {
         
