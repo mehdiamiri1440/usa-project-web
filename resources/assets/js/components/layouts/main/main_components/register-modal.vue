@@ -90,12 +90,7 @@
 
             <div class="modal-title">ورود به باسکول</div>
           </div>
-          <div class="modal-body col-xs-12" v-if="$parent.isPrice">
-            <PriceRegisterNumber v-show="currentStep == 1" />
-            <PriceVerifyCode v-show="currentStep == 2" />
-            <UserInformations v-show="currentStep == 3" />
-          </div>
-          <div class="modal-body col-xs-12" v-else>
+          <div class="modal-body col-xs-12">
             <RegisterNumber v-show="currentStep == 1" />
             <VerifiedCode v-show="currentStep == 2" />
             <UserInformations v-show="currentStep == 3" />
@@ -259,22 +254,25 @@ export default {
       if (!this.step3.family) {
         this.errors.family = "لطفا نام خانوادگی خود را وارد کنید";
       }
-     
+
       this.provinceValidator(this.step3.province);
       this.cityValidator(this.step3.city);
-
-      if (!this.step3.activity_type) {
+      if (this.step3.activity_type == "") {
         this.errors.activity_type = "لطفا نوع فعالیت خود را انتخاب کنید";
       }
-      
-      if (this.step3.activity_type == 0) {
-        this.openChatOrCall(this.step3);
-      } else if(this.step3.activity_type == 1) {
-        this.goToStep(4)
+
+      if (
+        !this.step3.name ||
+        !this.step3.family ||
+        !this.step3.province ||
+        !this.step3.city ||
+        !this.step3.activity_type
+      ) {
+        return;
+      } else {
+        this.registerUser(this.step3.activity_type);
       }
     },
-
-    /*----------*/
     registerBuyAd() {
       if (this.currentUser.user_info) {
         if (this.stock) {
@@ -288,9 +286,7 @@ export default {
     },
     registerUser(isRoute = false) {
       if (!this.currentUser.user_info) {
-        if (!isRoute && !this.isPrice) {
-          this.currentStep = 7;
-        }
+        
         this.step4.password = this.makeRandomString(8);
 
         var object = {};
@@ -307,21 +303,21 @@ export default {
             sex: "آقا",
             province: this.step3.province,
             city: this.step3.city,
-            activity_type: this.step4.activity_type,
+            activity_type: this.step3.activity_type,
             national_code: "",
             category_id: this.product.main.category_id,
           };
         } else {
           object = {
             phone: this.step1.phone,
-            first_name: this.step4.name,
-            last_name: this.step4.family,
+            first_name: this.step3.name,
+            last_name: this.step3.family,
             verification_code: this.step2.verification_code,
             password: this.step4.password,
             user_name: "",
             sex: "آقا",
-            province: this.step5.provinceName,
-            city: this.step5.cityName,
+            province: this.step3.province,
+            city: this.step3.city,
             activity_type: this.activity_type,
             national_code: "",
             category_id: this.product.main.category_id,
@@ -377,19 +373,21 @@ export default {
       }
     },
     getCurrentUser(isRoute = false) {
-      if (!isRoute && !this.isPrice) {
-        this.currentStep = 7;
-      }
-
+      
       axios.post("/user/profile_info").then((response) => {
         this.currentUser = response.data;
-        if (response.data.status && !isRoute) {
+       
+        if (response.data.status && isRoute == 0) {
           $("#register-modal").modal("hide");
-        }
+            this.goToStep(5);
+        }else if (isRoute == 1) {
+           
+            this.goToStep(4);
+          }
       });
     },
     submitBuyAd(currentUser) {
-      this.currentStep = 7;
+      this.currentStep = 5;
 
       let formData = this.getBuyAdFormFields();
 
@@ -572,7 +570,7 @@ export default {
         this.step3.family.length &&
         this.step3.province &&
         this.step3.city &&
-        this.step4.activity_type !== "" &&
+        this.step3.activity_type !== "" &&
         this.step4.category_id !== ""
       ) {
         this.errorFlag = false;
@@ -587,7 +585,7 @@ export default {
       this.provinceValidator(this.step3.province);
       this.cityValidator(this.step3.city);
       this.categoryIdValidator(this.step4.category_id);
-      this.activityTypeValidator(this.step4.activity_type);
+      this.activityTypeValidator(this.step3.activity_type);
     },
     firstNameValidator: function (name) {
       this.errors.name = "";
@@ -723,8 +721,8 @@ export default {
     goToStep(step) {
       if (step < 1) {
         step = 1;
-      } else if (step > 4) {
-        step = 4;
+      } else if (step > 5) {
+        step = 5;
       }
       this.currentStep = step;
     },

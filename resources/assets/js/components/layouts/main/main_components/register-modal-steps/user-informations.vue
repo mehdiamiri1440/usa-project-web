@@ -554,7 +554,6 @@ export default {
     return {
       name: "",
       family: "",
-    
     };
   },
   methods: {
@@ -580,9 +579,9 @@ export default {
   },
 
   watch: {
-    name(text) {
+    "$parent.step3.name"(text) {
       if (text == " ") {
-        this.name = "";
+        this.parent.step3.name = "";
       }
       text = $.trim(text);
 
@@ -591,16 +590,18 @@ export default {
         let error = this.$parent.textValidator(text, "نام");
         if (error) {
           this.$parent.errors.name = error;
+          this.$parent.validateErrors();
         } else {
-          this.$parent.step4.name = this.name;
+          this.$parent.step3.name = text;
+          this.$parent.validateErrors();
         }
       } else {
-        this.$parent.step4.name = "";
+        this.$parent.step3.name = "";
       }
     },
-    family(text) {
+    "$parent.step3.family"(text) {
       if (text == " ") {
-        this.family = "";
+        this.$parent.step3.family = "";
       }
       text = $.trim(text);
       this.$parent.errors.family = "";
@@ -610,11 +611,16 @@ export default {
         if (error) {
           this.$parent.errors.family = error;
         } else {
-          this.$parent.step4.family = text;
+          this.$parent.step3.family = text;
         }
       } else {
-        this.$parent.step4.family = "";
+        this.$parent.step3.family = "";
       }
+    },
+    "$parent.step3.activity_type"(item) {
+      this.$parent.errors.activity_type = "";
+      this.$parent.step4.activity_type = item;
+      this.$parent.validateErrors();
     },
   },
 };
