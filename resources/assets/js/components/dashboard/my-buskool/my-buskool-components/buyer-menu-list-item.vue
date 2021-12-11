@@ -41,6 +41,29 @@ a.active {
   font-size: 18px;
   color: #cccccc;
 }
+.main-menu button {
+  color: #404b55;
+  padding: 20px 10px;
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  text-align: right;
+  border: 0;
+  border-bottom: 1px solid #e9ecef;
+  font-size: 15px;
+  background-color: unset;
+}
+
+.main-menu button::before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\F104";
+  position: absolute;
+  left: 10px;
+  top: 25px;
+  font-size: 18px;
+  color: #cccccc;
+}
 
 .list-item:last-of-type a {
   border-bottom: none;
@@ -51,6 +74,9 @@ a.active {
 }
 
 .main-menu a:hover {
+  background: #f2f2f2;
+}
+.main-menu button:hover {
   background: #f2f2f2;
 }
 
@@ -236,10 +262,10 @@ a.active {
           </router-link>
         </li>
         <li class="list-item">
-          <router-link :to="{ name: 'guideBuyer' }">
+          <button @click.prevent="showIntro()">
             <i class="fa fa-question-circle" aria-hidden="true"></i>
             <span>راهنما</span>
-          </router-link>
+          </button>
         </li>
 
         <li class="list-item">
@@ -259,7 +285,7 @@ a.active {
 
 <script>
 import { eventBus } from "../../../../router/router";
-
+import introJs from "intro.js";
 export default {
   props: [
     "profilebasic",
@@ -295,6 +321,128 @@ export default {
           this.activeElement = null;
         }
       }
+    },
+    introFirstLoad() {
+      setTimeout(() => {
+        document.getElementById("navTour4").style.transform = "scale(1.5)";
+        document.getElementById("navTour3").style.transform = "scale(1)";
+        document.getElementById("navTour2").style.transform = "scale(1)";
+        document.getElementById("navTour4").style.marginTop = "-7px";
+        $('#navTour4' + ' span').css("font-size", "1rem");
+      }, 50);
+    },
+    showIntro() {
+      introJs()
+        .setOptions({
+          nextLabel: "بعدی ",
+          prevLabel: "قبلی",
+          doneLabel: "متوجه شدم!",
+          showBullets: false,
+          tooltipPosition: "top",
+          steps: [
+            {
+              element: document.querySelector("#navTour4"),
+              intro:
+                "امکان تغییر نوع فعالیت از فروشنده به خریدار و بالعکس و انجام سایر تغییرات حساب کاربری",
+            },
+            {
+              element: document.querySelector("#navTour3"),
+              intro: "راه ارتباطی با فروشندگان و خریدارن",
+            },
+            {
+              element: document.querySelector("#navTour2"),
+              intro: "برای یافتن خریدار برای محصول خود، آن را ثبت کنید.",
+            },
+            {
+              element: document.querySelector("#navTour1"),
+              intro: "محل یافتن خریدار برای محصول مورد نظر شما",
+            },
+            {
+              element: document.querySelector("#navTour0"),
+              intro: "محل جستجوی فروشندگان و محصولات آنها",
+            },
+          ],
+        })
+        .start(this.introFirstLoad())
+        .onafterchange((element) => {
+          switch (element.id) {
+            case "navTour4":
+              console.log(element.id);
+              document.getElementById(element.id).style.transform =
+                "scale(1.5)";
+              document.getElementById(element.id).style.marginTop = "-7px";
+              $('#' + element.id + ' span').css("font-size", "1rem");
+              document.getElementById("navTour3").style.fontSize = "1.3rem";
+              document.getElementById("navTour3").style.marginTop = "0";
+              document.getElementById("navTour3").style.transform = "scale(1)";
+              document.getElementById("navTour2").style.transform = "scale(1)";
+
+              break;
+            case "navTour3":
+              document.getElementById(element.id).style.transform =
+                "scale(1.5)";
+              document.getElementById(element.id).style.marginTop = "-7px";
+              document.getElementById("navTour4").style.marginTop = "0";
+              document.getElementById("navTour2").style.marginTop = "0";
+              $('#' + element.id + ' span').css("font-size", "1rem");
+              document.getElementById("navTour4").style.fontSize = "1.3rem";
+              document.getElementById("navTour2").style.fontSize = "1.3rem";
+              document.getElementById("navTour3").style.marginTop = "0";
+              document.getElementById("navTour2").style.transform = "scale(1)";
+              document.getElementById("navTour4").style.transform = "scale(1)";
+              break;
+            case "navTour2":
+              document.getElementById("navTour3").style.transform = "scale(1)";
+              document.getElementById(element.id).style.marginTop = "-7px";
+              document.getElementById("navTour3").style.marginTop = "0";
+              document.getElementById("navTour1").style.marginTop = "0";
+              $('#' + element.id + ' span').css("font-size", "1rem");
+              document.getElementById("navTour3").style.fontSize = "1.3rem";
+              document.getElementById("navTour1").style.fontSize = "1.3rem";
+              document.getElementById(element.id).style.transform =
+                "scale(1.3)";
+              document.getElementById("navTour1").style.transform = "scale(1)";
+              break;
+            case "navTour1":
+              document.getElementById("navTour2").style.transform = "scale(1)";
+              document.getElementById(element.id).style.marginTop = "-7px";
+              document.getElementById("navTour2").style.marginTop = "0";
+              document.getElementById("navTour0").style.marginTop = "0";
+             $('#' + element.id + ' span').css("font-size", "1rem");
+              document.getElementById("navTour2").style.fontSize = "1.3rem";
+              document.getElementById("navTour0").style.fontSize = "1.3rem";
+              document.getElementById("navTour0").style.transform = "scale(1)";
+              document.getElementById(element.id).style.transform =
+                "scale(1.5)";
+              break;
+            case "navTour0":
+              document.getElementById("navTour1").style.transform = "scale(1)";
+              document.getElementById(element.id).style.marginTop = "-7px";
+              document.getElementById("navTour1").style.marginTop = "0";
+              $('#' + element.id + ' span').css("font-size", "1rem");
+              document.getElementById("navTour1").style.fontSize = "1.3rem";
+              document.getElementById(element.id).style.transform =
+                "scale(1.5)";
+              break;
+          }
+        })
+        .onexit(() => {
+          document.getElementById("navTour0").style.transform = "scale(1)";
+          document.getElementById("navTour1").style.transform = "scale(1)";
+          document.getElementById("navTour2").style.transform = "scale(1)";
+          document.getElementById("navTour3").style.transform = "scale(1)";
+          document.getElementById("navTour4").style.transform = "scale(1)";
+          document.getElementById("navTour4").style.marginTop = "0";
+          document.getElementById("navTour3").style.marginTop = "0";
+          document.getElementById("navTour2").style.marginTop = "0";
+          document.getElementById("navTour1").style.marginTop = "0";
+          document.getElementById("navTour0").style.marginTop = "0";
+          if (screen.width <= 360) {
+            $(".custom-navigation button span").css("font-size", "0.9rem");
+          } else if (screen.width >= 361) {
+            $(".custom-navigation button span").css("font-size", "1.3rem");
+          }
+        });
     },
   },
   watch: {

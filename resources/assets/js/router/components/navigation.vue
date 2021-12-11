@@ -130,6 +130,7 @@
       <router-link
         v-for="(item, index) in masterRoutes"
         :key="index"
+        :id="'navTour' + index"
         tag="button"
         :to="{ name: item.name }"
       >
@@ -194,6 +195,7 @@
       <router-link
         v-for="(item, index) in buyerRoutes"
         :key="index"
+        :id="'navTour' + index"
         tag="button"
         :to="{ name: item.name }"
       >
@@ -336,13 +338,13 @@ export default {
     };
   },
   methods: {
-    test() {
+    introFirstLoad() {
       setTimeout(() => {
         document.getElementById("navTour4").style.transform = "scale(1.5)";
         document.getElementById("navTour3").style.transform = "scale(1)";
         document.getElementById("navTour2").style.transform = "scale(1)";
         document.getElementById("navTour4").style.marginTop = "-7px";
-        document.getElementById("navTour4").style.fontSize = "1rem";
+        $('#navTour4' + ' span').css("font-size", "1rem");
       }, 50);
     },
     init() {
@@ -379,7 +381,7 @@ export default {
                 },
               ],
             })
-            .start(this.test())
+            .start(this.introFirstLoad())
             .onafterchange((element) => {
               switch (element.id) {
                 case "navTour4":
@@ -402,7 +404,7 @@ export default {
                   document.getElementById(element.id).style.marginTop = "-7px";
                   document.getElementById("navTour4").style.marginTop = "0";
                   document.getElementById("navTour2").style.marginTop = "0";
-                  document.getElementById(element.id).style.fontSize = "1rem";
+                  $('#' + element.id + ' span').css("font-size", "1rem");
                   document.getElementById("navTour4").style.fontSize = "1.3rem";
                   document.getElementById("navTour2").style.fontSize = "1.3rem";
                   document.getElementById("navTour3").style.marginTop = "0";
@@ -417,7 +419,7 @@ export default {
                   document.getElementById(element.id).style.marginTop = "-7px";
                   document.getElementById("navTour3").style.marginTop = "0";
                   document.getElementById("navTour1").style.marginTop = "0";
-                  document.getElementById(element.id).style.fontSize = "1rem";
+                  $('#' + element.id + ' span').css("font-size", "1rem");
                   document.getElementById("navTour3").style.fontSize = "1.3rem";
                   document.getElementById("navTour1").style.fontSize = "1.3rem";
                   document.getElementById(element.id).style.transform =
@@ -431,7 +433,7 @@ export default {
                   document.getElementById(element.id).style.marginTop = "-7px";
                   document.getElementById("navTour2").style.marginTop = "0";
                   document.getElementById("navTour0").style.marginTop = "0";
-                  document.getElementById(element.id).style.fontSize = "1rem";
+                  $('#' + element.id + ' span').css("font-size", "1rem");
                   document.getElementById("navTour2").style.fontSize = "1.3rem";
                   document.getElementById("navTour0").style.fontSize = "1.3rem";
                   document.getElementById("navTour0").style.transform =
@@ -444,7 +446,7 @@ export default {
                     "scale(1)";
                   document.getElementById(element.id).style.marginTop = "-7px";
                   document.getElementById("navTour1").style.marginTop = "0";
-                  document.getElementById(element.id).style.fontSize = "1rem";
+                  $('#' + element.id + ' span').css("font-size", "1rem");
                   document.getElementById("navTour1").style.fontSize = "1.3rem";
                   document.getElementById(element.id).style.transform =
                     "scale(1.5)";
@@ -462,6 +464,12 @@ export default {
               document.getElementById("navTour2").style.marginTop = "0";
               document.getElementById("navTour1").style.marginTop = "0";
               document.getElementById("navTour0").style.marginTop = "0";
+              if (screen.width  <= 360) {
+                $(".custom-navigation button span").css('font-size','0.9rem');
+              }
+              else if (screen.width >= 361 ) {
+                $(".custom-navigation button span").css('font-size','1.3rem');
+              }
             });
         }, 50);
       });
