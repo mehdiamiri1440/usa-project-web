@@ -1655,7 +1655,7 @@ export default {
     },
     switchPackage(item, btnPosition = "up") {
       if (item == 1) {
-        // ready for analytics if switch to package type 3
+        //  analytics if switch to package type 3
         let label = "";
         if (btnPosition == "down") {
           label = "from-page-down";
@@ -1665,7 +1665,7 @@ export default {
 
         this.registerComponentStatistics("payment", "click-on-type-3", label);
       } else if (item == 2) {
-        // ready for analytics if switch to package type 1
+        //  analytics if switch to package type 1
         let label = "";
         if (btnPosition == "down") {
           label = "from-page-down";

@@ -532,12 +532,12 @@ export default {
       window.scrollTo(0, 0);
     },
     routeToPage(routeName) {
-      // ready for analytics
+      //  analytics
       this.registerComponentStatistics(
-            "verification",
-            "buyer-last-step",
-            "click-on-special-products"
-          );
+        "verification",
+        "buyer-last-step",
+        "click-on-special-products"
+      );
 
       this.$router.push({ name: routeName });
     },
