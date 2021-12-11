@@ -68,7 +68,7 @@
             <i class="fa fa-angle-left"></i>
           </button>
           <button
-            @click.prevent="openCategoryModal()"
+            @click.prevent="routeToPage('buyAdRequestsSeller')"
             class="default-btn-with-icon"
           >
             <div class="button-main-icon-wrapper">
