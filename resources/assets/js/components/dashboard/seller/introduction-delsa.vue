@@ -4,6 +4,12 @@
   height: 270px;
   margin: 0 auto;
 }
+.image-wrapper img {
+    position: unset;
+    left: unset;
+    top: unset;
+    transform: unset;
+}
 .delsa-description-wrapper {
   text-align: center;
   direction: rtl;
@@ -51,7 +57,7 @@
               <i class="fa fa-box-open"></i>
             </div>
             <div class="button-content-wrapper">
-              <p class="button-title single-title">ثبت محصول برای فروش</p>
+              <p class="button-title single-title">محصول دارم برای فروش</p>
             </div>
             <i class="fa fa-angle-left"></i>
           </button>
@@ -63,7 +69,7 @@
               <i class="fas fa-search"></i>
             </div>
             <div class="button-content-wrapper">
-              <p class="button-title single-title">جستجوی خریداران مرتبط</p>
+              <p class="button-title single-title">دنبال خریدارها هستم</p>
             </div>
             <i class="fa fa-angle-left"></i>
           </button>
@@ -75,7 +81,7 @@
               <i class="fa fa-tag"></i>
             </div>
             <div class="button-content-wrapper">
-              <p class="button-title single-title">جستجوی قیمت محصولات</p>
+              <p class="button-title single-title">می خواهم قیمت بگیرم</p>
             </div>
             <i class="fa fa-angle-left"></i>
           </button>
