@@ -1459,6 +1459,10 @@ export default {
           setTimeout(() => {
             if (document.querySelector("#main")) {
               document.querySelector("#main").classList.add("p-t-0");
+              document.querySelector("#main").classList.add("m-t-0");
+            }
+            if (document.querySelector(".main-buskool-wrapper")) {
+              document.querySelector(".main-buskool-wrapper").classList.add("m-t-0");
             }
             if (document.querySelector(".main-header")) {
               document.querySelector(".main-header").classList.add('position-unset');
@@ -1466,6 +1470,12 @@ export default {
             if ($("#main-content.contents")) {
               $("#main-content.contents").addClass("p-t-50");
               $("#main-content.contents").addClass("m-t-0");
+            }
+            if (document.querySelector("#main-content")) {
+              document.querySelector("#main-content").classList.add("p-t-0");
+            }
+            if (document.querySelector(".sub-header")) {
+              document.querySelector(".sub-header").classList.add("position-unset");
             }
             if (document.querySelector(".navbar.text-rtl")) {
               document
