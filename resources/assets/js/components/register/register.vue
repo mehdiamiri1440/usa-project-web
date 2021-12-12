@@ -472,6 +472,7 @@ export default {
               eventBus.$emit("modal", "userRegisterSuccess");
               self.createCookie("registerNewUser", true, 60);
               self.createCookie("firstLogin", true, 1);
+              self.createCookie("firstThreeDaysRegistered", true, 4320); // 3 days expire date
 
               let deviceInfo = new device.DeviceUUID();
               let deviceId = null;

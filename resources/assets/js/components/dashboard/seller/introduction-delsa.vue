@@ -51,19 +51,7 @@
               <i class="fa fa-box-open"></i>
             </div>
             <div class="button-content-wrapper">
-              <p class="button-title single-title"> ثبت محصول برای فروش</p>
-            </div>
-            <i class="fa fa-angle-left"></i>
-          </button>
-          <button
-            @click.prevent="openCategoryModal()"
-            class="default-btn-with-icon"
-          >
-            <div class="button-main-icon-wrapper">
-              <i class="fa fa-tag"></i>
-            </div>
-            <div class="button-content-wrapper">
-              <p class="button-title single-title">جستجوی قیمت محصولات</p>
+              <p class="button-title single-title">ثبت محصول برای فروش</p>
             </div>
             <i class="fa fa-angle-left"></i>
           </button>
@@ -76,6 +64,18 @@
             </div>
             <div class="button-content-wrapper">
               <p class="button-title single-title">جستجوی خریداران مرتبط</p>
+            </div>
+            <i class="fa fa-angle-left"></i>
+          </button>
+          <button
+            @click.prevent="openCategoryModal()"
+            class="default-btn-with-icon"
+          >
+            <div class="button-main-icon-wrapper">
+              <i class="fa fa-tag"></i>
+            </div>
+            <div class="button-content-wrapper">
+              <p class="button-title single-title">جستجوی قیمت محصولات</p>
             </div>
             <i class="fa fa-angle-left"></i>
           </button>

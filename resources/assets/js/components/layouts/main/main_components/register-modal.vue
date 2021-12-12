@@ -225,6 +225,7 @@ export default {
                   device_id: deviceId,
                 })
                 .then((response) => {
+                 
                   if (response.data.status) {
                     this.getCurrentUser(isRoute);
                   }
