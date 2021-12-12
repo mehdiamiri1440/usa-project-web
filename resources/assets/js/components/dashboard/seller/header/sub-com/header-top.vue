@@ -391,10 +391,10 @@ a.profile-info-wrapper:focus {
 }
 
 @media screen and (max-width: 991px) {
-  .main-header {
+  /*.main-header {
     position: absolute;
     top: 65px;
-  }
+  }*/
 
   .main-header,
   .little-main-header {
