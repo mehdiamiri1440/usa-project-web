@@ -323,6 +323,10 @@ class product_list_controller extends Controller
                                     ->where(function($q){
                                         return $q->where('is_elevated',true)
                                                     ->orWhereBetween('updated_at',[Carbon::now()->subDays(2),Carbon::now()])
+                                                    ->orWhere(function($q){
+                                                        return $q->whereNotNull('elevator_expiry')
+                                                                    ->whereDate('elevatory_expiry','<',Carbon::now()->subHours(12));
+                                                    })
                                                     ->orWhereExists(function($q){
                                                         $q->select(DB::raw(1))
                                                             ->from('messages')

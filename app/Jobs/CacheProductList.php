@@ -35,6 +35,6 @@ class CacheProductList implements ShouldQueue
 
         $products = $product_list_controller_object->get_all_products_with_related_media();
 
-        Cache::put(md5('AllProducts'),$products,60);
+        Cache::put(md5('AllProducts'),$products,120);
     }
 }
