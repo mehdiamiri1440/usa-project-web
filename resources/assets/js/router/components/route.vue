@@ -10,15 +10,19 @@
   direction: rtl;
   font-weight: bold;
   font-size: 20px;
-  padding: 0 5px;
+  padding: 0;
   box-shadow: 0 -8px 8px rgba(0, 0, 0, 0.1);
   display: grid;
-  grid-template-columns: 75px auto 100px;
+  grid-template-columns: 37.05px auto;
   transition: height 1.3s;
   position: absolute;
   z-index: 1020;
 }
-
+.android-download-alert-content
+{
+ display: grid;
+  grid-template-columns: 37.05px auto 90px;
+}
 .android-download-alert-wrapper .m-t-b {
   margin: 1.4rem 0;
 }
@@ -224,29 +228,36 @@
     </div>
     <!-- Download app modal -->
     <div
+      v-if="downloadAppButton && $route.name != 'invite'"
       :class="[{ hide: isClosed }, { test: isClosed == false }]"
       class="android-download-alert-wrapper hidden-lg hidden-md"
     >
-      <div class="m-t-b">
-        <button
-          class="close-android-download-alert-wrapper"
-          @click.prevent="closeAppModal()"
-        >
-          <i class="fa fa-times"></i>
-        </button>
-        <img
-          src="../../../img/logo/512-buskool-logo.jpg"
-          alt="دانلود اپلیکیشن باسکول"
-        />
+      <div @click.prevent="closeAppModal()">
+        <div class="m-t-b">
+          <button
+            class="close-android-download-alert-wrapper"
+            
+          >
+            <i class="fa fa-times"></i>
+          </button>
+        </div>
       </div>
-      <div class="text-android-download-alert-wrapper m-t-b">
-        <p class="android-download-title">اپلیکیشن باسکول</p>
-        <p class="android-download-slogan">استفاده راحت تر و سریع تر</p>
-      </div>
-      <div class="text-center m-t-b">
-        <button class="android-apk-download" @click.prevent="doDownload()">
-          دانلود
-        </button>
+      <div class="android-download-alert-content" @click.prevent="doDownload()">
+        <div class="m-t-b">
+          <img
+            src="../../../img/logo/512-buskool-logo.jpg"
+            alt="دانلود اپلیکیشن باسکول"
+          />
+        </div>
+        <div class="text-android-download-alert-wrapper m-t-b">
+          <p class="android-download-title">اپلیکیشن باسکول</p>
+          <p class="android-download-slogan">استفاده راحت تر و سریع تر</p>
+        </div>
+        <div class="text-center m-t-b">
+          <button class="android-apk-download" >
+            دانلود
+          </button>
+        </div>
       </div>
     </div>
     <!--  #regex wallet modal  -->
@@ -395,7 +406,7 @@
     />
 
     <!-- add android app download  -->
-    <!-- v-if="downloadAppButton && $route.name != 'invite'" -->
+    <!--  -->
   </div>
 </template>
 
@@ -1446,7 +1457,6 @@ export default {
       window.localStorage.setItem("userId", this.user.id);
       window.localStorage.setItem("userType", this.user.type);
     },
-   
   },
   mounted() {
     this.updateUserData();
@@ -1465,7 +1475,11 @@ export default {
   watch: {
     $route() {
       setTimeout(() => {
-        if (window.screen.width < 991 && !this.isOsIOS()) {
+        if (
+          window.screen.width < 991 &&
+          !this.isOsIOS() &&
+          this.getAndroidVersion() >= 5
+        ) {
           if (!this.isClosed) {
             setTimeout(() => {
               document.querySelector(
