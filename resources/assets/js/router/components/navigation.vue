@@ -105,6 +105,7 @@
         :key="index"
         tag="button"
         :to="{ name: item.name }"
+        
       >
         <div
           class="icon-wrapper"
@@ -223,7 +224,7 @@ export default {
         },
         {
           title: "ثبت محصول",
-          name: "registerProductSeller",
+          name: this.showDelsa() ? "introductionDelsaSeller" : "registerProductSeller",
           icon: "fa-plus",
           mainIcon: true,
         },
@@ -306,5 +307,27 @@ export default {
       ],
     };
   },
+  methods:{
+    showDelsa(){
+      if(screen.width < 991 && this.getCookie("firstThreeDaysRegistered")) return true;
+      else 
+      return false;
+    },
+    getCookie: function (cname) {
+      var name = cname + "=";
+      var ca = document.cookie.split(";");
+      for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == " ") {
+          c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+          return c.substring(name.length, c.length);
+        }
+      }
+      return "";
+    },
+  },
+  
 };
 </script>

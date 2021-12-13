@@ -324,6 +324,7 @@ export default {
           };
         }
 
+<<<<<<< HEAD
         if (
           this.errorFlag === false &&
           !this.errors.name &&
@@ -367,6 +368,27 @@ export default {
               this.registerComponentExceptions(
                 "User register API failed",
                 true
+=======
+              axios
+                .post("/dologin", {
+                  phone: object.phone,
+                  password: object.password,
+                  device_id: deviceId,
+                })
+                .then((response) => {
+                 
+                  if (response.data.status) {
+                    this.getCurrentUser(isRoute);
+                  }
+                })
+                .catch((err) => {
+                  console.log("err");
+                });
+              this.registerComponentStatistics(
+                "Register-Modal",
+                "successful-register",
+                "user-registered-successfully"
+>>>>>>> 282-change-delsa-modal-for-seller
               );
             });
         }
