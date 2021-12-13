@@ -334,9 +334,11 @@ class product_list_controller extends Controller
                                                             ->whereBetween('messages.updated_at',[Carbon::now()->subHours(2),Carbon::now()]);
                                                     })
                                                     ->orWhereExists(function($q){
+                                                        $yesterday = Carbon::now()->subDays(1)->format('Y-m-d H:i:s');
+
                                                         $q->select(DB::raw(1))
                                                             ->from('myusers')
-                                                            ->whereRaw("(myusers.is_verified = true or myusers.active_pakage_type > 0) and myusers.id = products.myuser_id");
+                                                            ->whereRaw("(myusers.is_verified = true or myusers.active_pakage_type > 0 or (not isnull(pakage_end) and pakage_end > " . "'" . $yesterday . "'" . ")) and myusers.id = products.myuser_id");
                                                     });
                                     })->pluck('id')
                                     ->all();
