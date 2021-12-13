@@ -15,6 +15,8 @@
   display: grid;
   grid-template-columns: 75px auto 100px;
   transition: height 1.3s;
+  position: absolute;
+  z-index: 1020;
 }
 
 .android-download-alert-wrapper .m-t-b {
@@ -523,15 +525,6 @@ export default {
     closeAppModal() {
       this.downloadAppButton = false;
       this.isClosed = true;
-      if (
-        document.querySelector(".main-header") &&
-        document.querySelector(".main-buskool-wrapper")
-      ) {
-        document.querySelector(".main-header").style.position = "fixed";
-        document.querySelector(".main-header").style.top = "0";
-        document.querySelector(".main-buskool-wrapper").style.marginTop =
-          "85px";
-      }
     },
     getAndroidVersion: function (ua) {
       ua = (ua || navigator.userAgent).toLowerCase();
@@ -1453,194 +1446,7 @@ export default {
       window.localStorage.setItem("userId", this.user.id);
       window.localStorage.setItem("userType", this.user.type);
     },
-    checkScrolling() {
-      if (window.screen.width < 991) {
-        window.onload = () => {
-          setTimeout(() => {
-            if (document.querySelector("#main")) {
-              document.querySelector("#main").classList.add("p-t-0");
-              document.querySelector("#main").classList.add("m-t-0");
-            }
-            if (document.querySelector(".main-buskool-wrapper")) {
-              document.querySelector(".main-buskool-wrapper").classList.add("m-t-0");
-            }
-            if (document.querySelector(".main-header")) {
-              document.querySelector(".main-header").classList.add('position-unset');
-            }
-            if ($("#main-content.contents")) {
-              $("#main-content.contents").addClass("p-t-50");
-              $("#main-content.contents").addClass("m-t-0");
-            }
-            if (document.querySelector("#main-content")) {
-              document.querySelector("#main-content").classList.add("p-t-0");
-            }
-            if (document.querySelector(".sub-header")) {
-              document.querySelector(".sub-header").classList.add("position-unset");
-            }
-            if (document.querySelector(".navbar.text-rtl")) {
-              document
-                .querySelector(".navbar.text-rtl")
-                .classList.add("position-unset");
-            }
-          }, 50);
-        };
-        window.addEventListener("scroll", () => {
-          if (this.isClosed) {
-            if (document.querySelector("#main")) {
-              document.querySelector("#main").classList.add("p-t-94");
-            }
-            if (document.querySelector(".contact-wrapper")) {
-              document.querySelector(".contact-wrapper").classList.add("m-t-0");
-            }
-            if ($("#main.container-fluid")) {
-              $("#main.container-fluid").addClass("p-t-0");
-            }
-            if (document.querySelector(".main-header")) {
-              document
-                .querySelector(".main-header")
-                .classList.add("position-fixed");
-              document.querySelector(".main-header").classList.add("top-0");
-            }
-            if (document.querySelector(".contact-body")) {
-              //document.querySelector(".contact-body").style.marginTop = "-50px";
-            }
-            if (document.querySelector(".navbar-category")) {
-              document.querySelector(".navbar-category").style.position =
-                "fixed";
-              document.querySelector(".navbar-category").style.top = "0";
-            }
-            if (document.querySelector(".navbar.text-rtl")) {
-              document.querySelector(".navbar.text-rtl").style.position =
-                "fixed";
-              document.querySelector(".navbar.text-rtl").style.top = "0";
-            }
-            if (document.querySelector(".sub-header")) {
-              document
-                .querySelector(".sub-header")
-                .classList.remove("sub-header-fix");
-              document.querySelector(".sub-header").style.position = "unset";
-
-              document
-                .querySelector(".sub-header")
-                .classList.add("sub-header-fix");
-              document.querySelector(".sub-header").style.position = "fixed";
-            }
-
-            if ($("#main-content.contents")) {
-              $("#main-content.contents").css("padding-top", "0");
-            }
-            if ($("#main.has-verification-alert")) {
-              $("#main.has-verification-alert").css("padding-top", "0");
-              $("#main.has-verification-alert").css("margin-top", "0");
-            }
-            if ($(".main-content.col-xs-12")) {
-              $(".main-content.col-xs-12").css("position", "fixed");
-            }
-            if ($(".list-unstyled.wrapper-items")) {
-              $(".list-unstyled.wrapper-items").css("margin-top", "45px");
-            }
-            // if (document.querySelector("#main-content")) {
-            //   document.querySelector("#main-content").style.paddingTop =
-            //     "128px";
-            // }
-
-            if ($("#main .main-content:last-child")) {
-              $("#main .main-content:last-child").css("position", "absolute");
-            }
-            if (document.querySelector(".main-header")) {
-              document.querySelector(".main-header").style.top = "0";
-            }
-            if (document.querySelector(".main-buskool-wrapper")) {
-              document.querySelector(".main-buskool-wrapper").style.marginTop =
-                "60px";
-            }
-          } else if (window.scrollY > 65) {
-            if (document.querySelector(".navbar-category")) {
-              document
-                .querySelector(".navbar-category")
-                .classList.add("position-fixed");
-              document.querySelector(".navbar-category").classList.add("top-0");
-            }
-            if (document.querySelector(".navbar.text-rtl")) {
-              document
-                .querySelector(".navbar.text-rtl")
-                .classList.add("position-fixed");
-              document.querySelector(".navbar.text-rtl").classList.add("top-0");
-            }
-            if (document.querySelector(".main-header")) {
-              document
-                .querySelector(".main-header")
-                .classList.add("position-fixed");
-              document.querySelector(".main-header").classList.add("top-0");
-            }
-            if (document.querySelector(".main-buskool-wrapper")) {
-              document
-                .querySelector(".main-buskool-wrapper")
-                .classList.add("m-t-0");
-            }
-            // if (document.querySelector("#main-content")) {
-            //   document.querySelector("#main-content").style.marginTop = "90px";
-            // }
-            if (document.querySelector(".sub-header")) {
-              document
-                .querySelector(".sub-header")
-                .classList.add("sub-header-fix");
-              document
-                .querySelector(".sub-header")
-                .classList.add("position-fixed");
-            }
-          } else {
-            if ($("#main-content.contents")) {
-              $("#main-content.contents").addclass("p-t-50");
-              $("#main-content.contents").addclass("m-t-0");
-            }
-            if ($(".list-unstyled.wrapper-items")) {
-              $(".list-unstyled.wrapper-items").addclass("m-t-45");
-            }
-            if (document.querySelector(".main-header")) {
-              document
-                .querySelector(".main-header")
-                .classList.add("position-unset");
-            }
-            if (document.querySelector(".main-buskool-wrapper")) {
-              document
-                .querySelector(".main-buskool-wrapper")
-                .classList.add("m-t-0");
-            }
-            if (document.querySelector(".navbar-category")) {
-              document
-                .querySelector(".navbar-category")
-                .classList.add("position-unset");
-            }
-            if (document.querySelector(".navbar.text-rtl")) {
-              document
-                .querySelector(".navbar.text-rtl")
-                .classList.add("position-unset");
-            }
-            if (document.querySelector(".sub-header")) {
-              if (window.scrollY == 0) {
-                document
-                  .querySelector(".sub-header")
-                  .classList.remove("sub-header-fix");
-                document
-                  .querySelector(".sub-header")
-                  .classList.add("position-unset");
-              } else if (window.scrollY <= 65) {
-                document
-                  .querySelector(".sub-header")
-                  .classList.remove("sub-header-fix");
-                document
-                  .querySelector(".sub-header")
-                  .classList.add("position-unset");
-              }
-            }
-            if (document.querySelector("#main-content")) {
-              document.querySelector("#main-content").classList.add("m-t-0");
-            }
-          }
-        });
-      }
-    },
+   
   },
   mounted() {
     this.updateUserData();
@@ -1655,7 +1461,7 @@ export default {
     eventBus.$on("currentUser", (event) => {
       this.currentUser = event;
     });
-    this.checkScrolling();
+   
   },
   watch: {
     $route() {
@@ -1667,132 +1473,6 @@ export default {
                 ".android-download-alert-wrapper"
               ).style.height = "65px";
             }, 3000);
-
-            /* if (document.querySelector("#main")) {
-              document.querySelector("#main").style.paddingTop = "0";
-            }
-
-            if ($("#main-content.contents")) {
-              $("#main-content.contents").css("padding-top", "0");
-              $("#main-content.contents").css("margin-top", "50px");
-            }
-            if (document.querySelector(".main-header")) {
-              document.querySelector(".main-header").style.position = "unset";
-            }
-            if (document.querySelector(".main-buskool-wrapper")) {
-              document.querySelector(".main-buskool-wrapper").style.marginTop =
-                "0";
-            }
-            if (document.querySelector(".navbar.text-rtl")) {
-              document.querySelector(".navbar.text-rtl").style.position =
-                "unset";
-            }
-            if (document.querySelector(".navbar-category")) {
-              document.querySelector(".navbar-category").style.position =
-                "unset";
-            }
-            if (document.querySelector("#main")) {
-              document.querySelector("#main").style.marginTop = "0";
-            }
-            if (document.querySelector("#main-content")) {
-              document.querySelector("#main-content").style.paddingTop = "0";
-            }
-
-            if (document.querySelector(".sub-header")) {
-              document
-                .querySelector(".sub-header")
-                .classList.remove("sub-header-fix");
-              document.querySelector(".sub-header").style.position = "unset";
-            }
-            if ($(".sub-header.is-verification-alert-active")) {
-              document;
-              $(".sub-header.is-verification-alert-active").removeClass(
-                "sub-header-fix"
-              );
-            }
-
-            setTimeout(() => {
-              document.querySelector(
-                ".android-download-alert-wrapper"
-              ).style.height = "65px";
-            }, 3000);
-
-            if ($("#main .main-content:last-child")) {
-              $("#main .main-content:last-child").css("position", "unset");
-            }
-            if (document.querySelector(".main-header")) {
-              document.querySelector(".main-header").style.position = "unset";
-            }
-            if (document.querySelector(".main-buskool-wrapper")) {
-              document.querySelector(".main-buskool-wrapper").style.marginTop =
-                "0";
-            }
-            if (document.querySelector(".navbar-category")) {
-              document.querySelector(".navbar-category").style.position =
-                "unset";
-            }
-            if (document.querySelector("#main")) {
-              document.querySelector("#main").style.marginTop = "0";
-            }
-            if (document.querySelector("#main-content")) {
-              document.querySelector("#main-content").style.paddingTop = "0";
-            }
-
-            if (document.querySelector(".sub-header")) {
-              document
-                .querySelector(".sub-header")
-                .classList.remove("sub-header-fix");
-            }
-          } else {
-            if (document.querySelector(".contact-body")) {
-              document.querySelector(".contact-body").style.marginTop = "0";
-            }
-            if (document.querySelector(".main-buskool-wrapper")) {
-              document.querySelector(".main-buskool-wrapper").style.marginTop =
-                "60px";
-            }
-            if (document.querySelector(".contact-wrapper")) {
-              document.querySelector(".contact-wrapper").style.marginTop = "0";
-            }
-            if ($("#main.container-fluid")) {
-              $("#main.container-fluid").css("padding-top", "0");
-            }
-            if ($("#main.has-verification-alert")) {
-              $("#main.has-verification-alert").css("padding-top", "0");
-              $("#main.has-verification-alert").css("margin-top", "0");
-            }
-            if ($(".list-unstyled.wrapper-items")) {
-              $(".list-unstyled.wrapper-items").css("margin-top", "45px");
-            }
-
-            if (document.querySelector("#article-list")) {
-              document.querySelector("#article-list").style.position =
-                "reletive";
-              document.querySelector("#article-list").style.marginTop = "-75px";
-            }
-
-            if (document.querySelector(".main-header")) {
-              document.querySelector(".main-header").style.top = "0";
-            }
-            if (document.querySelector(".main-buskool-wrapper")) {
-              document.querySelector(".main-buskool-wrapper").style.marginTop =
-                "75px";
-            }
-            if ($(".list-unstyled.wrapper-items")) {
-              $(".list-unstyled.wrapper-items").css("margin-top", "105px");
-            }
-            
-            if (document.querySelector("#intro")) {
-              document.querySelector("#intro").style.marginTop = "75px";
-            }
-            if (document.querySelector(".main-product-wrapper")) {
-              document.querySelector(".main-product-wrapper").style.marginTop = "10px";
-            }
-
-            if ($("#main-content.contents")) {
-              $("#main-content.contents").css("padding-top", "0");
-              $("#main-content.contents").css("margin-top", "135px");
-            }*/
           }
         }
       }, 50);
