@@ -65,16 +65,16 @@ trait Token
 
     public function refresh_token($token)
     {
-        // if(! is_string($token)){
-        //     return 0;
-        // }
+        if(! is_string($token)){
+            return 0;
+        }
 
         $token_parts = explode('.',$token);
 
-        // if(sizeof($token_parts) != 3){
-        //     //token is not valid
-        //     return 0;
-        // }
+        if(sizeof($token_parts) != 3){
+            //token is not valid
+            return 0;
+        }
 
         list($data,$expiry_time,$signiture) = $token_parts;
 
@@ -91,7 +91,7 @@ trait Token
         if($expiry_time < time()){
             //token expired
             $first = $token_parts[0];
-            $second = $this->base64url_encode(strtotime(Carbon::now()->addHours(1)) );
+            $second = $this->base64url_encode(strtotime(Carbon::now()->addHours(2)) );
 
             $hash = sha1($first . $second . sha1($this->get_secret()) );
 
