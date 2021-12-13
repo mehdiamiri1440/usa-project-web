@@ -1191,7 +1191,7 @@ a.sub-menu-title:hover {
     height: 35px;
   }
   #intro {
-    margin-top: 0;
+    margin-top: 75px;
     padding: 20px 0;
   }
   .hero-search-input {
