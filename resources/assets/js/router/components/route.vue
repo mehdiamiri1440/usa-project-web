@@ -1461,12 +1461,11 @@ export default {
     eventBus.$on("currentUser", (event) => {
       this.currentUser = event;
     });
-   
   },
   watch: {
     $route() {
       setTimeout(() => {
-        if (window.screen.width < 991) {
+        if (window.screen.width < 991 && !this.isOsIOS()) {
           if (!this.isClosed) {
             setTimeout(() => {
               document.querySelector(
