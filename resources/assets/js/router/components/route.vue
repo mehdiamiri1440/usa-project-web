@@ -1,46 +1,74 @@
+
 <style scoped>
 .android-download-alert-wrapper {
-  position: fixed;
-  bottom: 59px;
+  overflow: hidden;
+  height: 0;
   width: 100%;
-  background: #fff;
+  background-color: #e0eff4;
   text-align: center;
-  color: #fff;
+  color: #000000;
   direction: rtl;
-  z-index: 1020;
   font-weight: bold;
   font-size: 20px;
-  padding: 5px;
+  padding: 0;
   box-shadow: 0 -8px 8px rgba(0, 0, 0, 0.1);
-}
-
-.android-apk-download {
-  padding: 10px 15px;
-  background: linear-gradient(-35deg, #ff9300, #f60);
-  border: none;
-  width: 100%;
-  border-radius: 8px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-}
-
-.android-apk-download img {
-  width: 28px;
+  display: grid;
+  grid-template-columns: 37.05px auto;
+  transition: height 1.3s;
   position: absolute;
-  left: 15px;
+  z-index: 1020;
+}
+.android-download-alert-content
+{
+ display: grid;
+  grid-template-columns: 37.05px auto 90px;
+}
+.android-download-alert-wrapper .m-t-b {
+  margin: 1.4rem 0;
+}
+.android-download-alert-wrapper img {
+  width: 37px;
+  height: 37px;
+  float: left;
+}
+.text-android-download-alert-wrapper {
+  padding-right: 8.8px;
+}
+.text-android-download-alert-wrapper p.android-download-title {
+  text-align: right;
+  font-size: 1.2rem;
+  margin-top: 5px;
+}
+.text-android-download-alert-wrapper p.android-download-slogan {
+  text-align: right;
+  font-size: 1rem;
+  margin-top: 5px;
+}
+.android-apk-download {
+  padding: 3px 15px;
+  font-size: 1.3rem;
+  background-color: #ff9828;
+  color: #ffffff;
+  border: none;
+  width: 64px;
+  height: 30px;
+  border-radius: 8px;
+  display: inline-block;
+  position: relative;
+  top: 4px;
 }
 
 .close-android-download-alert-wrapper {
   background: none;
   border: none;
   font-size: 20px;
-  position: absolute;
-  right: 5px;
-  top: 5px;
-  z-index: 1021;
-  padding: 11px 15px 8px;
+  position: relative;
+  top: 9px;
+  margin-right: 5px;
+  float: right;
+}
+.close-android-download-alert-wrapper.hide {
+  display: none;
 }
 /* 
 .modal-dialog {
@@ -198,7 +226,40 @@
         </p>
       </div>
     </div>
-
+    <!-- Download app modal -->
+    <div
+      v-if="downloadAppButton && $route.name != 'invite'"
+      :class="[{ hide: isClosed }, { test: isClosed == false }]"
+      class="android-download-alert-wrapper hidden-lg hidden-md"
+    >
+      <div @click.prevent="closeAppModal()">
+        <div class="m-t-b">
+          <button
+            class="close-android-download-alert-wrapper"
+            
+          >
+            <i class="fa fa-times"></i>
+          </button>
+        </div>
+      </div>
+      <div class="android-download-alert-content" @click.prevent="doDownload()">
+        <div class="m-t-b">
+          <img
+            src="../../../img/logo/512-buskool-logo.jpg"
+            alt="دانلود اپلیکیشن باسکول"
+          />
+        </div>
+        <div class="text-android-download-alert-wrapper m-t-b">
+          <p class="android-download-title">اپلیکیشن باسکول</p>
+          <p class="android-download-slogan">استفاده راحت تر و سریع تر</p>
+        </div>
+        <div class="text-center m-t-b">
+          <button class="android-apk-download" >
+            دانلود
+          </button>
+        </div>
+      </div>
+    </div>
     <!--  #regex wallet modal  -->
 
     <div class="container">
@@ -345,27 +406,7 @@
     />
 
     <!-- add android app download  -->
-
-    <div
-      v-if="downloadAppButton && $route.name != 'invite'"
-      class="android-download-alert-wrapper hidden-lg hidden-md"
-    >
-      <button
-        class="close-android-download-alert-wrapper"
-        @click.prevent="downloadAppButton = false"
-      >
-        <i class="fa fa-times"></i>
-      </button>
-
-      <button class="android-apk-download" @click.prevent="doDownload()">
-        دانلود اپلیکیشن باسکول
-
-        <img
-          src="../../../img/google-play-icon.svg"
-          alt="دانلود اپلیکیشن باسکول"
-        />
-      </button>
-    </div>
+    <!--  -->
   </div>
 </template>
 
@@ -432,6 +473,7 @@ export default {
         "<div class='tooltip-wrapper text-rtl'>اطلاعات هویتی این کاربر احراز شده است.<br/><a href='/verification'>اطلاعات بیشتر</a> </div>",
       doPaymentLoader: false,
       messageCount: "",
+      isClosed: false,
     };
   },
   props: [
@@ -491,6 +533,10 @@ export default {
         return false;
       }
     },
+    closeAppModal() {
+      this.downloadAppButton = false;
+      this.isClosed = true;
+    },
     getAndroidVersion: function (ua) {
       ua = (ua || navigator.userAgent).toLowerCase();
       var match = ua.match(/android\s([0-9\.]*)/);
@@ -545,8 +591,7 @@ export default {
         }
       }
     },
-    activateDownloadAppButton: function () {
-      let self = this;
+    activateDownloadAppButton() {
       if (this.isDeviceMobile() && !this.isOsIOS()) {
         let androidVersion = this.getAndroidVersion();
         if (parseInt(androidVersion) >= 5) {
@@ -1428,6 +1473,23 @@ export default {
     });
   },
   watch: {
+    $route() {
+      setTimeout(() => {
+        if (
+          window.screen.width < 991 &&
+          !this.isOsIOS() &&
+          this.getAndroidVersion() >= 5
+        ) {
+          if (!this.isClosed) {
+            setTimeout(() => {
+              document.querySelector(
+                ".android-download-alert-wrapper"
+              ).style.height = "65px";
+            }, 3000);
+          }
+        }
+      }, 50);
+    },
     currentUser(user) {
       this.updateUserData();
       if (user.user_info) {

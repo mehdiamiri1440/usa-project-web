@@ -344,7 +344,7 @@ a.profile-info-wrapper:focus {
   /* border-top: 1px solid #e6e6e6; */
 }
 .sub-header.is-verification-alert-active {
-  top: 99px;
+  position: unset;
 }
 
 .sub-header ul {
