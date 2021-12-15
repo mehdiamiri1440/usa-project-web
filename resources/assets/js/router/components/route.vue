@@ -18,9 +18,8 @@
   position: absolute;
   z-index: 1020;
 }
-.android-download-alert-content
-{
- display: grid;
+.android-download-alert-content {
+  display: grid;
   grid-template-columns: 37.05px auto 90px;
 }
 .android-download-alert-wrapper .m-t-b {
@@ -234,10 +233,7 @@
     >
       <div @click.prevent="closeAppModal()">
         <div class="m-t-b">
-          <button
-            class="close-android-download-alert-wrapper"
-            
-          >
+          <button class="close-android-download-alert-wrapper">
             <i class="fa fa-times"></i>
           </button>
         </div>
@@ -254,9 +250,7 @@
           <p class="android-download-slogan">استفاده راحت تر و سریع تر</p>
         </div>
         <div class="text-center m-t-b">
-          <button class="android-apk-download" >
-            دانلود
-          </button>
+          <button class="android-apk-download">دانلود</button>
         </div>
       </div>
     </div>
@@ -602,12 +596,21 @@ export default {
             !this.iswebview
           ) {
             this.downloadAppButton = true;
+            if (!this.isClosed) {
+              setTimeout(() => {
+                if (document.querySelector(".android-download-alert-wrapper")) {
+                  document.querySelector(
+                    ".android-download-alert-wrapper"
+                  ).style.height = "65px";
+                }
+              }, 3000);
+            }
+            // if (!this.checkCookie() && !this.iswebview) {
+            // setTimeout(() => {
+            //   $("#download-app-modal").modal("show");
+            // }, 1000);
+            // }
           }
-          // if (!this.checkCookie() && !this.iswebview) {
-          // setTimeout(() => {
-          //   $("#download-app-modal").modal("show");
-          // }, 1000);
-          // }
         }
       }
     },
@@ -1480,11 +1483,13 @@ export default {
           this.getAndroidVersion() >= 5
         ) {
           if (!this.isClosed) {
-            setTimeout(() => {
+            if (document.querySelector(".android-download-alert-wrapper")) {
+              setTimeout(() => {
               document.querySelector(
                 ".android-download-alert-wrapper"
               ).style.height = "65px";
-            }, 3000);
+              },3000);
+            }
           }
         }
       }, 50);
