@@ -596,8 +596,6 @@ export default {
         let androidVersion = this.getAndroidVersion();
         if (parseInt(androidVersion) >= 5) {
           if (
-            window.location.pathname != "/buyer/messenger/contacts" &&
-            window.location.pathname != "/seller/messenger/contacts" &&
             window.location.pathname != "/buyAd-requests" &&
             !window.location.pathname.includes("product-view") &&
             !this.iswebview
