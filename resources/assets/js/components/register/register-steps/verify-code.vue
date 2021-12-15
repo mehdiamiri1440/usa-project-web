@@ -166,6 +166,28 @@ input.error:focus + i {
   border: none;
   cursor: pointer;
 }
+@media (max-width: 500px) {
+  
+  label.input-title
+  {
+    font-size: 1.4rem;
+  }
+}
+@media (max-width: 375px) {
+  
+  label.input-title
+  {
+    font-size: 1.3rem;
+  }
+}
+@media (max-width: 358px) {
+  
+  label.input-title
+  {
+    font-size: 1.1rem;
+  }
+}
+
 </style>
 
 <template>

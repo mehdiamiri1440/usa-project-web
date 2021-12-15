@@ -124,6 +124,16 @@ input.error:focus + i {
   direction: rtl;
   font-size: 12px;
 }
+@media (max-width: 500px) {
+  .logo-wrapper svg {
+    width: 60px;
+    height: 77px;
+  }
+  label.input-title
+  {
+    font-size: 1.4rem;
+  }
+}
 </style>
 
 <template>

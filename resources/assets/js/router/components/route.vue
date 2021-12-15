@@ -228,7 +228,7 @@
     </div>
     <!-- Download app modal -->
     <div
-      v-if="downloadAppButton && $route.name != 'invite'"
+      v-if="downloadAppButton && $route.name != 'invite' && !checkCookie()"
       :class="[{ hide: isClosed }, { test: isClosed == false }]"
       class="android-download-alert-wrapper hidden-lg hidden-md"
     >
@@ -536,6 +536,7 @@ export default {
     closeAppModal() {
       this.downloadAppButton = false;
       this.isClosed = true;
+      this.createCookie("downloadAppModal", true, 60 * 24);
     },
     getAndroidVersion: function (ua) {
       ua = (ua || navigator.userAgent).toLowerCase();
