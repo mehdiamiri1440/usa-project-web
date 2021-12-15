@@ -280,8 +280,8 @@ export default {
           mainIcon: false,
         },
         {
-          title: "درخواست‌ ها",
-          name: "mainBuyAdRequests",
+          title: "خریداران",
+          name: "buyAdRequestsSeller",
           icon: "fa-list-alt",
           mainIcon: false,
         },
