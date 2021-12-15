@@ -281,7 +281,7 @@ export default {
         },
         {
           title: "خریداران",
-          name: "buyAdRequestsSeller",
+          name: "mainBuyAdRequests",
           icon: "fa-list-alt",
           mainIcon: false,
         },
