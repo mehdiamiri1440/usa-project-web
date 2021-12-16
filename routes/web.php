@@ -1275,6 +1275,12 @@ Route::group(['prefix' => 'admin', 'middleware' => [admin_login::class]], functi
         'as'   => 'admin_panel_get_package_expiring_customers_list',
         'description' => "دسترسی به لیست کاربرانی که عضویت آنها در حال اتمام است",
     ]);
+
+    Route::post('/edit-user-info',[
+        'uses' => 'admin_panel\admin_user_controller@edit_user_info',
+        'as' => 'admin_panel_edit_user_info',
+        'description' => 'توانایی ویرایش اطلاعات حساب کاربری کاربران'
+    ]);
     
     Route::get('/setup-admin-routes',[
         'uses' => 'admin_panel\admin_user_controller@get_admin_routes',

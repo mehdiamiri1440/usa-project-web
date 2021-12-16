@@ -22,6 +22,16 @@ class admin_user_controller extends Controller
         'password' => 'required'
     ];
 
+    protected $user_validation_rules = [
+        'first_name' => 'required|string',
+        'last_name'  => 'required|string',
+        'active_pakage_type' => 'required|integer|min:0|max:3',
+        'extra_product_capacity' => 'required|integer|min:0',
+        'extra_buyAd_reply_capacity' => 'required|integer|min:0',
+        'wallet_balance' => 'required|integer|min:0',
+        'user_id' => 'required|exists:myusers,id'
+    ];
+
     public function login(Request $request)
     {
 //        $login_try_count = session('login_try_count') + 1;
@@ -361,6 +371,25 @@ class admin_user_controller extends Controller
     public function load_add_new_user_form()
     {
         return view('admin_panel.addNewAdminUser');
+    }
+
+    public function edit_user_info(Request $request)
+    {
+        $this->validate($request,$this->user_validation_rules);
+
+        $tmp = [];
+        foreach($this->user_validation_rules as $key => $value)
+        {
+            if($key != 'user_id'){
+                $tmp[$key] = $request->$key;
+            }
+        }
+
+        $user_id = $request->user_id;
+
+        // DB::table('myusers')
+        //     ->
+
     }
 
 }
