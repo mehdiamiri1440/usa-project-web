@@ -34,19 +34,31 @@ class CheckElevatorExpiry implements ShouldQueue
     {
         $now = Carbon::now();
         
-        $product_records = product::where('is_elevated',true)
-                                ->whereDate('elevator_expiry','<',$now)
-                                ->where('confirmed',true) // to be sure
-                                ->get();
+        // $product_records = product::where('is_elevated',true)
+        //                         ->whereDate('elevator_expiry','<',$now)
+        //                         ->where('confirmed',true) // to be sure
+        //                         ->get();
+
+        DB::table('products')->where('is_elevated',true)
+                            ->whereDate('elevator_expiry','<',$now)
+                            ->where('confirmed',true) // to be sure
+                            ->update([
+                                'is_elevated' => false
+                            ]);
         
-        $product_records->each(function($product){
-            DB::table('products') // in order to prevent from updating updated_at otherwise
-                ->where('id',$product->id)//it will cause major problems in listing
-                ->update([
-                    'updated_at' => $now,
-                    'elevator_expiry' => NULL,
-                    'is_elevated' => false
-                ]);
-        });
+        // $product_records->each(function($product){
+        //     DB::table('products') // in order to prevent from updating updated_at otherwise
+        //         ->where('id',$product->id)//it will cause major problems in listing
+        //         ->update([
+        //             // 'updated_at' => $now,
+        //             // 'elevator_expiry' => NULL,
+        //             'is_elevated' => false
+        //         ]);
+        // });
+
+        DB::table('products')->whereDate('elevator_expiry','<',Carbon::now()->subDays(1))
+                                ->update([
+                                    'elevator_expiry' => NULL, 
+                                ]);
     }
 }
