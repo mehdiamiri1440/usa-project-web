@@ -323,6 +323,10 @@ class product_list_controller extends Controller
                                     ->where(function($q){
                                         return $q->where('is_elevated',true)
                                                     ->orWhereBetween('updated_at',[Carbon::now()->subDays(2),Carbon::now()])
+                                                    ->orWhere(function($q){
+                                                        return $q->whereNotNull('elevator_expiry')
+                                                                    ->whereDate('elevator_expiry','<',Carbon::now()->subHours(12));
+                                                    })
                                                     ->orWhereExists(function($q){
                                                         $q->select(DB::raw(1))
                                                             ->from('messages')
@@ -330,14 +334,17 @@ class product_list_controller extends Controller
                                                             ->whereBetween('messages.updated_at',[Carbon::now()->subHours(2),Carbon::now()]);
                                                     })
                                                     ->orWhereExists(function($q){
+                                                        $yesterday = Carbon::now()->subDays(1)->format('Y-m-d H:i:s');
+
                                                         $q->select(DB::raw(1))
                                                             ->from('myusers')
-                                                            ->where('myusers.is_verified',true)
-                                                            ->orWhere('myusers.active_pakage_type','>',0);
+                                                            ->whereRaw("(myusers.is_verified = true or myusers.active_pakage_type > 0 or (not isnull(pakage_end) and pakage_end > " . "'" . $yesterday . "'" . ")) and myusers.id = products.myuser_id");
                                                     });
-                                    });
+                                    })->pluck('id')
+                                    ->all();
 
-        $cached_products = Cache::get('AllProducts');
+
+        $cached_products = Cache::get(md5('AllProducts'));
 
         if(is_null($cached_products)){
             $cached_products = [];
@@ -346,7 +353,7 @@ class product_list_controller extends Controller
         $old_product_ids = [];
         $old_products = array_filter($cached_products,function($item) use($all_product_ids,$updated_product_ids,&$old_product_ids){
             if( (in_array($item['main']->id,$updated_product_ids) == false) &&  (in_array($item['main']->id,$all_product_ids) == true) ){
-                $old_products[] = $item['main']->id;
+                $old_product_ids[] = $item['main']->id;
 
                 return true;
             }
@@ -370,7 +377,7 @@ class product_list_controller extends Controller
                     ->whereNull('products.deleted_at')
                     ->where('myusers.is_blocked',false)
                     ->where('products.confirmed', true)
-                    ->whereNotIn('products.id',$old_products)
+                    ->whereNotIn('products.id',$old_product_ids)
                     ->get();
 
         $products = $this->prepare_data_for_client($products);
