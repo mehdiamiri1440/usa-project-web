@@ -8,7 +8,9 @@
   font-size: 23px;
   padding: 15px 0;
 }
-
+.wrapper_no_pro .green-button {
+  font-size: 1.6rem;
+}
 .content_no_pic {
   font-size: 70px;
   margin: 20px auto;
@@ -212,6 +214,7 @@ tr:nth-child(even) {
   .fix-request-header-box,
   .title {
     right: 0;
+    
   }
   .default-list-title {
     padding: 4px 15px;

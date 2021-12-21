@@ -213,7 +213,7 @@
             class="load-more-button col-xs-12"
             v-if="$parent.searchText === '' && continueToLoadProducts === true"
           >
-            <button class="btn btn-loader" @click.prevent="feed()">
+            <button class="btn-loader" @click.prevent="feed()">
               <div class="btn-content">
                 <span class="hidden-xs text-rtl" v-show="!loadMoreActive">
                   مشاهده محصولات بیشتر

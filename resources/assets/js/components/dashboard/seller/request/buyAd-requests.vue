@@ -98,7 +98,7 @@
   border: none;
   color: #fff;
   text-align: center;
-  border-radius: 8px;
+  border-radius: 4px;
   font-size: 15px;
   font-weight: bold;
   display: block;
@@ -464,6 +464,10 @@ button.disable {
   .default-list-title {
     padding: 4px 15px;
   }
+  
+.title h1 {
+  display: none;
+}
 }
 @media screen and (max-width: 767px) {
   .banner-wrapper .main-wrapper {
@@ -590,7 +594,7 @@ button.disable {
           <div class="row">
             <div class="col-xs-12 text-rtl text-right col-sm-8 pull-right">
               <h1>
-                درخواست های خرید
+                <span>درخواست های خرید</span>
                 <button
                   v-if="filterCategory"
                   class="green-button remove-filter-button"
@@ -608,7 +612,6 @@ button.disable {
             <div
               class="
                 col-xs-12 col-sm-4
-                hidden-xs
                 request-update
                 pull-left
                 text-left

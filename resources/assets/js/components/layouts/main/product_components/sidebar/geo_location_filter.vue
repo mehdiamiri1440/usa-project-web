@@ -71,17 +71,6 @@ hr {
   position: relative;
 }
 
-.title-input .fa-map-marker-alt::after {
-  content: " ";
-  width: 8px;
-  height: 8px;
-  background: #1da1f2;
-  border-radius: 10px;
-  position: absolute;
-  top: -3px;
-  right: 1px;
-}
-
 .action-button .filter-button {
   width: 100%;
   border-radius: 8px;

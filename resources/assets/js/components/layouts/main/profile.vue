@@ -332,12 +332,11 @@
   padding: 4px 0;
 }
 
-.btn.btn-copy {
+button.btn-copy {
   width: 100%;
   background: #f0f0f0;
 }
-
-.btn.btn-copy > span.icon-wrapper {
+button.btn-copy > span.icon-wrapper {
   display: inline-block;
   max-width: 12px;
 }
@@ -576,6 +575,10 @@ p.response-rate span {
   .title-page {
     text-align: center;
     margin: -10px auto 95px;
+  }
+  button.btn-copy {
+    box-shadow: unset;
+    border: 0;
   }
 }
 
@@ -1025,7 +1028,7 @@ p.response-rate span {
                   <button
                     v-else
                     href="#"
-                    class="btn btn-copy"
+                    class="btn-copy"
                     @click.prevent="copyProfileLinkToClipBoard"
                   >
                     <span class="icon-wrapper">
@@ -2150,7 +2153,6 @@ export default {
       }
     },
     getProfileOwnerProducts: function () {
-
       this.loading = true;
 
       var self = this;
@@ -2165,7 +2167,6 @@ export default {
         });
     },
     showProfileOwnerDescription: function () {
-      
       this.getProfileOwnerProducts();
       // this.profileDescription = true;
       this.profileOwner.profile = "";

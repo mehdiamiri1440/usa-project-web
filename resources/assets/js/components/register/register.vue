@@ -263,7 +263,7 @@ export default {
     return {
       isImageLoad: false,
       loginCheckerLoading: true,
-      currentStep: 1,
+      currentStep: 3,
       step1: {
         phone: "",
         sendCode: true,
