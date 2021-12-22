@@ -752,11 +752,6 @@ a.profile-info-wrapper:hover {
     overflow: hidden;
   }
 
-  .search-input input {
-    border: none;
-    background: #f2f2f2;
-  }
-
   .navbar-nav > li {
     border-right: none;
   }
@@ -824,7 +819,9 @@ a.profile-info-wrapper:hover {
 
   .search-input input {
     padding: 6px 35px 5px 15px;
-    border-radius: 8px;
+    border-radius: 4px;
+    border: none;
+    background: #f2f2f2;
   }
 
   #buskool-nav {

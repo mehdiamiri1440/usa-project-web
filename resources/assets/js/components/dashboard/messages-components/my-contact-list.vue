@@ -1,6 +1,5 @@
 <style scoped>
 .contact-body .contact-search {
-  background: #f0f0f0;
   position: absolute;
   left: 0;
   right: 0;
@@ -17,22 +16,22 @@
 
 .contact-body .contact-search .contact-search-input-wrapper {
   position: relative;
-  padding: 10px 7px;
+  min-width: 100%;
+  margin: 10px auto;
+  padding: 0 10px;
 }
 
 .contact-body .contact-search .contact-search-input-wrapper > i {
   position: absolute;
   right: 20px;
   font-size: 16px;
-  color: #919191;
-  top: 21px;
+  color: #5f6368;
+  top: 10px;
 }
 
 .contact-body .contact-search .contact-search-input-wrapper input {
-  padding: 8px 40px 8px 15px;
-  border-radius: 50px;
-  background: #fff;
-  border: none;
+  padding: 6px 35px 5px 15px;
+  border-radius: 8px;
 }
 
 .contact-body .contact-search .contact-search-input-wrapper > button {
@@ -362,6 +361,13 @@ i.fa-star {
 @media screen and (max-width: 991px) {
   .contact-items {
     padding-bottom: 42px;
+  }
+}
+@media (max-width: 768px) {
+  .contact-body .contact-search .contact-search-input-wrapper input {
+    border: none;
+    background: #f2f2f2;
+    border-radius: 4px;
   }
 }
 </style>

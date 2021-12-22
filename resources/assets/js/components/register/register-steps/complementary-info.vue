@@ -283,12 +283,16 @@ select.error:focus {
   color: #bebebe;
   position: absolute;
   display: inline-block;
-  top: 41px;
+  top: 46px;
   font-family: "Font Awesome 5 Free", sans-serif;
   font-weight: 900;
   left: 25px;
   font-size: 15px;
   z-index: 0;
+}
+.activity-domain-wrapper:after {
+  
+  left: 10px;
 }
 </style>
 
@@ -414,7 +418,7 @@ select.error:focus {
         </div>
       </div>
 
-      <div class="input-wrapper activity-domain-wrapper col-xs-12">
+      <div class="input-wrapper activity-domain-wrapper">
         <label class="input-title" for="last-name"
           >حوزه فعالیت <span class="red-text">*</span></label
         >
