@@ -846,6 +846,21 @@ direction: rtl;
 .m-t-45{
   margin-top: 45px!important;
 }
+.btn-orange-empty-state
+{
+  background: #FF9828;
+  border-radius: 8px;
+  color: #ffffff;
+  border:0;
+  font-size:1.4rem;
+  padding: 5px 35px 5px 17px;
+}
+.btn-orange-empty-state i
+{
+    position: absolute;
+    margin-right: -20px;
+    margin-top: 5px;
+}
 @media screen and (max-width: 767px) {
   .xs-text-right {
     text-align: right;
