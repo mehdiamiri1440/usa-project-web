@@ -853,12 +853,12 @@ direction: rtl;
   color: #ffffff;
   border:0;
   font-size:1.4rem;
-  padding: 5px 35px 5px 17px;
+  padding: 5px 40px 5px 17px;
 }
 .btn-orange-empty-state i
 {
     position: absolute;
-    margin-right: -20px;
+    margin-right: -25px;
     margin-top: 5px;
 }
 @media screen and (max-width: 767px) {

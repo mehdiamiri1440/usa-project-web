@@ -341,22 +341,35 @@ i.fa-star {
   transition: 300ms;
 }
 
-.user-not-fount {
+.wrapper_no_pro {
   text-align: center;
-  font-size: 20px;
-  font-weight: 500;
-  padding-top: 60px;
+  padding: 15px 0;
+  margin-top: 0;
+  position: relative;
 }
 
-.user-not-fount img {
-  width: 200px;
-  display: block;
-  margin: 60px auto 20px;
+.content_no_pic {
+  text-align: center;
 }
 
-.user-not-fount p {
-  font-weight: 500;
+.content_no_pic img {
+  width: 106px;
 }
+
+.text_no_pic {
+  width: 70%;
+  margin: 15px auto;
+  color: #15313c;
+  font-size: 23px;
+  font-weight: bold;
+}
+.text-description_no_pic {
+  margin-top: 10px;
+  color: #15313c;
+  font-size: 1rem;
+}
+
+
 
 @media screen and (max-width: 991px) {
   .contact-items {
@@ -521,28 +534,35 @@ i.fa-star {
             </a>
           </li>
           <li>
-            <div class="empty-list">
-              <i class="fa fa-user"></i>
-              <p>در حال حاضر پیامی وجود ندارد</p>
+            <div class="wrapper_no_pro">
+              <div class="content_no_pic">
+                <img src="../../../../img/my_empty_product.svg" alt="" />
+              </div>
 
+              <div class="text_no_pic standard-line text-rtl">
+                <p>هیچ پیام جدیدی ندارید!</p>
+                <p class="text-description_no_pic">
+                  برای شروع گفتگو با خریداران و فروشندگان باسکول، پیام ارسال کنید.
+                </p>
+              </div>
               <router-link
                 v-if="$parent.userType"
                 :to="{ name: 'buyAdRequestsSeller' }"
                 tag="button"
-                class="user-button"
+                class="btn-orange-empty-state text-rtl"
               >
-                شروع چت با خریداران
+                <i class="fas fa-user-friends"></i> مشاهده خریداران
               </router-link>
-
               <router-link
                 v-else
                 :to="{ name: 'productList' }"
                 tag="button"
-                class="user-button"
+                class="btn-orange-empty-state text-rtl"
               >
-                شروع چت با فروشندگان
+               <i class="fas fa-user-friends"></i> شروع چت با فروشندگان
               </router-link>
             </div>
+           
           </li>
         </ul>
       </div>
