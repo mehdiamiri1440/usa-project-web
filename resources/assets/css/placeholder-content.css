@@ -861,6 +861,38 @@ direction: rtl;
     margin-right: -25px;
     margin-top: 5px;
 }
+.wrapper_no_pro {
+  text-align: center;
+  padding: 15px 0;
+  margin-top: 0;
+  position: relative;
+}
+
+.content_no_pic {
+  text-align: center;
+}
+
+.content_no_pic img {
+  width: 106px;
+}
+
+.text_no_pic {
+  width: 70%;
+  margin: 15px auto;
+  color: #15313c;
+  font-size: 23px;
+  font-weight: bold;
+}
+.text_no_pic p {
+  color: #15313c;
+
+}
+.text-description_no_pic {
+  margin-top: 10px;
+  color: #15313c;
+  font-size: 1rem;
+}
+
 @media screen and (max-width: 767px) {
   .xs-text-right {
     text-align: right;

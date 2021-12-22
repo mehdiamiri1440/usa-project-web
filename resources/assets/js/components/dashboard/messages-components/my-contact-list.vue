@@ -341,36 +341,6 @@ i.fa-star {
   transition: 300ms;
 }
 
-.wrapper_no_pro {
-  text-align: center;
-  padding: 15px 0;
-  margin-top: 0;
-  position: relative;
-}
-
-.content_no_pic {
-  text-align: center;
-}
-
-.content_no_pic img {
-  width: 106px;
-}
-
-.text_no_pic {
-  width: 70%;
-  margin: 15px auto;
-  color: #15313c;
-  font-size: 23px;
-  font-weight: bold;
-}
-.text-description_no_pic {
-  margin-top: 10px;
-  color: #15313c;
-  font-size: 1rem;
-}
-
-
-
 @media screen and (max-width: 991px) {
   .contact-items {
     padding-bottom: 42px;
@@ -536,7 +506,7 @@ i.fa-star {
           <li>
             <div class="wrapper_no_pro">
               <div class="content_no_pic">
-                <img src="../../../../img/my_empty_product.svg" alt="" />
+                <img src="../../../../img/messages_not_found.svg" alt="" />
               </div>
 
               <div class="text_no_pic standard-line text-rtl">

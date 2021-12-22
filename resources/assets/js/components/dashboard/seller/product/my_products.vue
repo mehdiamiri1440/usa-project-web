@@ -14,33 +14,6 @@
   border-radius: 4px;
 }
 
-.wrapper_no_pro {
-  text-align: center;
-  padding: 15px 0;
-  margin: 15px auto;
-  position: relative;
-}
-
-.content_no_pic {
-  text-align: center;
-}
-
-.content_no_pic img {
-  width: 106px;
-}
-
-.text_no_pic {
-  width: 70%;
-  margin: 15px auto;
-  color: #15313c;
-  font-size: 23px;
-  font-weight: bold;
-}
-.text-description_no_pic {
-  margin-top: 10px;
-  color: #15313c;
-  font-size: 1rem;
-}
 .my-products-info-text {
   line-height: 1.618;
   padding: 15px;
@@ -170,7 +143,7 @@
         <div class="col-xs-12" v-if="products.length === 0 && !loading">
           <div class="wrapper_no_pro">
             <div class="content_no_pic">
-              <img src="../../../../../img/my_empty_product.svg" alt="" />
+              <img src="../../../../../img/my_product_not_found.svg" alt="" />
             </div>
 
             <div class="text_no_pic standard-line text-rtl">

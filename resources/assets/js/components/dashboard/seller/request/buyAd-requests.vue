@@ -43,23 +43,6 @@
   font-size: 15px;
 }
 
-.wrapper_no_pro {
-  text-align: center;
-  font-size: 23px;
-  padding: 15px 0;
-}
-
-.content_no_pic {
-  font-size: 70px;
-  margin: 20px auto;
-  color: #bdbdbd;
-}
-
-.text_no_pic {
-  margin: 30px auto;
-  color: #bdbdbd;
-}
-
 .list-title,
 .needs,
 .list-time,
@@ -464,10 +447,10 @@ button.disable {
   .default-list-title {
     padding: 4px 15px;
   }
-  
-.title h1 {
-  display: none;
-}
+
+  .title h1 {
+    display: none;
+  }
 }
 @media screen and (max-width: 767px) {
   .banner-wrapper .main-wrapper {
@@ -609,14 +592,7 @@ button.disable {
                 </button>
               </h1>
             </div>
-            <div
-              class="
-                col-xs-12 col-sm-4
-                request-update
-                pull-left
-                text-left
-              "
-            >
+            <div class="col-xs-12 col-sm-4 request-update pull-left text-left">
               <button
                 type="button"
                 @click.prevent="openCategoryModal()"
@@ -924,12 +900,22 @@ button.disable {
         >
           <div class="wrapper_no_pro">
             <div class="content_no_pic">
-              <i class="fa fa-list-alt"></i>
+              <img src="../../../../../img/not_found_search.svg" alt="" />
             </div>
 
-            <div class="text_no_pic">
-              <p>درخواست خرید مرتبط با شما وجود ندارد</p>
+            <div class="text_no_pic standard-line text-rtl">
+              <p>خریداری یافت نشد!</p>
+              <p class="text-description_no_pic">
+              درصورتی که این محصول را برای فروش دارید، آن را ثبت کنید.
+              </p>
             </div>
+            <router-link
+              :to="{ name: 'registerProductSeller' }"
+              tag="button"
+              class="btn-orange-empty-state text-rtl"
+            >
+              <i class="fas fa-plus"></i> ثبت محصول
+            </router-link>
           </div>
         </div>
         <div class="col-xs-12 wrapper-items" v-else-if="load">
@@ -1111,7 +1097,7 @@ export default {
           }
         });
     },
-     setScrollToBuyAd(id) {
+    setScrollToBuyAd(id) {
       let element = $(id);
       let elementTop = element.offset().top;
       let elementHeight = element.height();

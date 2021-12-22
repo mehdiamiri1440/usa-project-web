@@ -187,33 +187,8 @@ li.contact-item:nth-last-of-type(2n + 1) {
   text-align: center;
 }
 .wrapper_no_pro {
-  text-align: center;
-  padding: 15px 0;
-  margin-top: 115px;
-  position: relative;
+    margin-top: 115px;
 }
-
-.content_no_pic {
-  text-align: center;
-}
-
-.content_no_pic img {
-  width: 106px;
-}
-
-.text_no_pic {
-  width: 70%;
-  margin: 15px auto;
-  color: #15313c;
-  font-size: 23px;
-  font-weight: bold;
-}
-.text-description_no_pic {
-  margin-top: 10px;
-  color: #15313c;
-  font-size: 1rem;
-}
-
 .load-more {
   margin: 0px 0 0;
   display: inline-block;
@@ -664,7 +639,7 @@ li.static-item > button i {
     >
       <div class="wrapper_no_pro">
         <div class="content_no_pic">
-          <img src="../../../../img/my_empty_product.svg" alt="" />
+          <img src="../../../../img/my_requests_not_found.svg" alt="" />
         </div>
 
         <div class="text_no_pic standard-line text-rtl">
