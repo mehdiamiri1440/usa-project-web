@@ -192,13 +192,6 @@
             >
               <i class="fas fa-plus"></i> ثبت محصول
             </router-link>
-
-            <!-- <router-link
-              class="green-button"
-              :to="{ name: 'registerProductSeller' }"
-            >
-              ثبت محصول
-            </router-link> -->
           </div>
         </div>
 

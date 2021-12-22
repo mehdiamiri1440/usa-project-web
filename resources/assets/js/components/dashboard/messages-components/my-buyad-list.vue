@@ -186,17 +186,32 @@ li.contact-item:nth-last-of-type(2n + 1) {
   float: left;
   text-align: center;
 }
-.not-found-item {
+.wrapper_no_pro {
   text-align: center;
-  padding: 100px 15px 0;
+  padding: 15px 0;
+  margin-top: 115px;
+  position: relative;
 }
-.not-found-item p {
-  font-size: 16px;
+
+.content_no_pic {
+  text-align: center;
+}
+
+.content_no_pic img {
+  width: 106px;
+}
+
+.text_no_pic {
+  width: 70%;
+  margin: 15px auto;
+  color: #15313c;
+  font-size: 23px;
   font-weight: bold;
-  color: #777;
 }
-.not-found-item i {
-  margin: 5px;
+.text-description_no_pic {
+  margin-top: 10px;
+  color: #15313c;
+  font-size: 1rem;
 }
 
 .load-more {
@@ -647,18 +662,23 @@ li.static-item > button i {
       "
       class="not-found-item"
     >
-      <div class="empty-list">
-        <i class="fa fa-list-ul"></i>
-        <p>در حال حاضر پیشنهادی برای شما وجود ندارد</p>
-        <p class="red-text">
-          در صورتی که محصولی ثبت نکرده اید، ابتدا محصول خود را ثبت کنید.
-        </p>
+      <div class="wrapper_no_pro">
+        <div class="content_no_pic">
+          <img src="../../../../img/my_empty_product.svg" alt="" />
+        </div>
+
+        <div class="text_no_pic standard-line text-rtl">
+          <p>خریدار مرتبطی ندارید!</p>
+          <p class="text-description_no_pic">
+            رای مشاهده خریداران مرتبط، ابتدا محصول خود را ثبت کنید.
+          </p>
+        </div>
         <router-link
           :to="{ name: 'registerProductSeller' }"
           tag="button"
-          class="buyad-button"
+          class="btn-orange-empty-state text-rtl"
         >
-          ثبت محصول
+          <i class="fas fa-plus"></i> ثبت محصول
         </router-link>
       </div>
     </div>
