@@ -97,6 +97,7 @@
   padding: 0 15px;
   max-width: 430px;
   margin: 27px auto 0;
+  font-weight: 400;
 }
 
 .bg-gradient {
@@ -114,7 +115,7 @@
   font-size: 1.4rem;
   padding: 5px 50px 5px 35px;
   max-width: 245px;
-  margin: 35px auto 20px;
+  margin: 35px auto 28px;
   border-radius: 4px;
   color: #ffffff;
   border: 0;
@@ -138,6 +139,12 @@
   .product-registration-restrictions-image-wrapper img {
     max-width: 120px;
   }
+  .modal-contents h3 {
+  font-size: 1.4rem;
+}
+.modal-contents p {
+  font-size: 1.2rem;
+}
 }
 </style>
 

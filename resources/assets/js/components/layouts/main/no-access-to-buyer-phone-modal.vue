@@ -106,7 +106,7 @@
   font-size: 1.4rem;
   padding: 5px 50px;
   max-width: 245px;
-  margin: 35px auto 20px;
+  margin: 35px auto 28px;
   border-radius: 4px;
   color: #ffffff;
   border: 0;
@@ -129,6 +129,12 @@
 @media (max-width: 600px) {
   .no-access-to-buyer-phone-image-wrapper img {
     max-width: 120px;
+  }
+  .modal-contents h3 {
+    font-size: 1.4rem;
+  }
+  .modal-contents p {
+    font-size: 1.2rem;
   }
 }
 </style>
@@ -155,14 +161,13 @@
             <div class="modal-contents">
               <h3>به شماره تماس خریداران دسترسی ندارید!</h3>
               <p class="text-rtl">
-                برای مشاهده شماره تماس های خریداران، لطفا نوع عضویت خود را ارتقا دهید
+                برای مشاهده شماره تماس های خریداران، لطفا نوع عضویت خود را ارتقا
+                دهید
               </p>
               <div class="text-center">
                 <button
                   class="orange-button bg-gradient text-rtl"
-                  @click.prevent="
-                    $parent.routenNoAccessToBuyerPhoneModal()
-                  "
+                  @click.prevent="$parent.routenNoAccessToBuyerPhoneModal()"
                 >
                   ارتقا عضویت
                 </button>

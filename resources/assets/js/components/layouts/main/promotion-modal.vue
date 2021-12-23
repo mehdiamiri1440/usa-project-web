@@ -49,21 +49,11 @@
 }
 
 .promotion-image-wrapper {
-  background: #e7f9ff;
-  padding-top: 25px;
+  background: #ffc985;
   text-align: center;
-}
-
-.promotion-image-wrapper::after {
-  content: " ";
-  position: absolute;
-  width: 1062px;
-  height: 433px;
-  background: #fff;
-  left: calc(50% - 531px);
-  border-radius: 100%;
-  top: 130px;
-  z-index: 0;
+  height: 266px;
+  overflow: hidden;
+  position: relative;
 }
 
 .promotion-image-wrapper.buyAd-title::after {
@@ -71,9 +61,11 @@
 }
 
 .promotion-image-wrapper img {
-  max-width: 325px;
-  position: relative;
-  z-index: 1;
+  left: 0;
+  width: 109%;
+  position: absolute;
+  z-index: 2;
+  margin-top: 3px;
 }
 
 .modal-contents {
@@ -83,7 +75,7 @@
 
 .modal-contents h3 {
   text-align: center;
-  font-size: 25px;
+  font-size: 2rem;
   color: #374761;
   padding: 20px 0 0;
   font-weight: 500;
@@ -98,9 +90,16 @@
   max-width: 430px;
   margin: 27px auto 0;
 }
-
+.promotion-title
+{
+  font-weight: 500;
+}
+.promotion-description
+{
+  font-weight: 400;
+}
 .bg-gradient {
-  background: linear-gradient(90deg, #FF9828 0%, #FF6600 100%);
+  background: linear-gradient(90deg, #ff9828 0%, #ff6600 100%);
 }
 
 .green-button {
@@ -110,15 +109,14 @@
   min-width: 245px;
   margin: 35px auto 50px;
 }
-.orange-button
-{
+.orange-button {
   font-size: 19px;
-  padding: 8px 15px;
+  padding: 8px 45px;
   max-width: 245px;
-  margin: 35px auto 50px;
+  margin: 35px auto 30px;
   border-radius: 4px;
   color: #ffffff;
-  border:0;
+  border: 0;
 }
 .user-information-content {
   display: block;
@@ -317,6 +315,24 @@
 .modal-dialog.has-golden-buyAd {
   max-width: 478px;
 }
+@media (max-width: 768px) {
+  .promotion-image-wrapper {
+    height: 190px;
+  }
+  .modal-contents h3 {
+  font-size: 1.8rem;
+}
+}
+@media (max-width: 400px) {
+  .promotion-image-wrapper {
+    height: 158px;
+  }
+}
+@media (max-width: 350px) {
+  .promotion-image-wrapper {
+    height: 135px;
+  }
+}
 </style>
 
 <template>
@@ -421,19 +437,18 @@
           </div>
           <div v-else class="modal-body col-xs-12">
             <div class="promotion-image-wrapper">
-              <img src="../../../../img/promotion-icon.png" alt />
+              <img src="../../../../img/upgrade_membership.svg" alt />
             </div>
             <div class="modal-contents">
-              <h3> حساب کاربری خود را ارتقا دهید</h3>
-               <p class="text-rtl">
-                 فروش سریع تر و آسان تر
-              </p>
-              <p class="text-rtl">
-                برای دسترسی به تمام امکانات ویژه باسکول، حساب کاربری خود را ارتقا دهد
+              <h3>حساب کاربری خود را ارتقا دهید</h3>
+              <p class="text-rtl promotion-title">فروش سریع تر و آسان تر</p>
+              <p class="text-rtl promotion-description">
+                برای دسترسی به تمام امکانات ویژه باسکول، حساب کاربری خود را
+                ارتقا دهد
               </p>
               <div class="text-center">
                 <button
-                  class="orange-button bg-gradient "
+                  class="orange-button bg-gradient"
                   @click.prevent="$parent.routePromotionModal()"
                 >
                   ارتقا عضویت

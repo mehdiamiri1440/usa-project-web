@@ -330,8 +330,10 @@
     </div>
     <!-- end regex pricing modal -->
     <promotion-modal />
-    <ProductRegistrationRestrictionsModal  />
+    <ProductRegistrationRestrictionsModal />
     <NoAccessToBuyerPhoneModal />
+    <FullMessagingCeilingModal />
+    <noAccessToGoldenBuyersModal />
     <DelsaPromotionModal />
     <PhoneLockedModal />
 
@@ -385,6 +387,8 @@ import pricingContents from "../../components/dashboard/seller/pricing-seller-pa
 import PromotionModal from "../../components/layouts/main/promotion-modal";
 import ProductRegistrationRestrictionsModal from "../../components/layouts/main/product-registration-restrictions-modal.vue";
 import NoAccessToBuyerPhoneModal from "../../components/layouts/main/no-access-to-buyer-phone-modal.vue";
+import FullMessagingCeilingModal from "../../components/layouts/main/full-messaging-ceiling-modal.vue";
+import noAccessToGoldenBuyersModal from "../../components/layouts/main/no-access-to-golden-buyers-modal.vue";
 import DelsaPromotionModal from "../../components/layouts/main/delsa-promotion-modal.vue";
 import PhoneLockedModal from "../../components/layouts/main/phone-locked-modal.vue";
 import { eventBus } from "../router.js";
@@ -397,7 +401,9 @@ export default {
     DelsaPromotionModal,
     PhoneLockedModal,
     ProductRegistrationRestrictionsModal,
-    NoAccessToBuyerPhoneModal
+    NoAccessToBuyerPhoneModal,
+    FullMessagingCeilingModal,
+    noAccessToGoldenBuyersModal,
   },
   props: [
     "userId",
