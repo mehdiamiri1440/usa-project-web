@@ -39,7 +39,7 @@
   left: 7px;
   font-size: 16px;
   color: #919191;
-  top: 12px;
+  top: 2px;
   background: none;
   border: none;
   padding: 7px 15px 1px;

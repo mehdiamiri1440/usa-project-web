@@ -1,6 +1,5 @@
 <style scoped>
 .contact-body .contact-search {
-  background: #f0f0f0;
   position: absolute;
   left: 0;
   right: 0;
@@ -83,8 +82,8 @@ li.contact-item:nth-last-of-type(2n + 1) {
 
 .contact-body .contact-search .contact-search-input-wrapper input {
   padding: 8px 40px 8px 15px;
-  border-radius: 50px;
-  background: #fff;
+  background: #f2f2f2;
+  border-radius: 4px;
   border: none;
 }
 
@@ -93,7 +92,7 @@ li.contact-item:nth-last-of-type(2n + 1) {
   left: 7px;
   font-size: 16px;
   color: #919191;
-  top: 12px;
+  top: 15px;
   background: none;
   border: none;
   padding: 7px 15px 1px;
