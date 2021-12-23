@@ -340,7 +340,10 @@ i.fa-star {
   /* background: #00c569; */
   transition: 300ms;
 }
-
+.wrapper-no-message
+{
+  margin-top:115px;
+}
 @media screen and (max-width: 991px) {
   .contact-items {
     padding-bottom: 42px;
@@ -414,10 +417,36 @@ i.fa-star {
       <div
         v-else-if="$parent.contactNameSearchText && !$parent.isSearchingContact"
       >
-        <p class="user-not-fount">
-          <img src="../../../../img/empty-message.svg" alt="" />
-          <span>پیام یافت نشد</span>
-        </p>
+        <div class="wrapper-no-message">
+          <div class="wrapper_no_pro">
+            <div class="content_no_pic">
+              <img src="../../../../img/messages_not_found.svg" alt="" />
+            </div>
+
+            <div class="text_no_pic standard-line text-rtl">
+              <p>هیچ پیام جدیدی ندارید!</p>
+              <p class="text-description_no_pic">
+                برای شروع گفتگو با خریداران و فروشندگان باسکول، پیام ارسال کنید.
+              </p>
+            </div>
+            <router-link
+              v-if="$parent.userType"
+              :to="{ name: 'buyAdRequestsSeller' }"
+              tag="button"
+              class="btn-orange-empty-state text-rtl"
+            >
+              <i class="fas fa-user-friends"></i> مشاهده خریداران
+            </router-link>
+            <router-link
+              v-else
+              :to="{ name: 'productList' }"
+              tag="button"
+              class="btn-orange-empty-state text-rtl"
+            >
+              <i class="fas fa-user-friends"></i> شروع چت با فروشندگان
+            </router-link>
+          </div>
+        </div>
       </div>
 
       <div v-else-if="$parent.isSearchingContact" class="contact-is-search">
@@ -512,7 +541,8 @@ i.fa-star {
               <div class="text_no_pic standard-line text-rtl">
                 <p>هیچ پیام جدیدی ندارید!</p>
                 <p class="text-description_no_pic">
-                  برای شروع گفتگو با خریداران و فروشندگان باسکول، پیام ارسال کنید.
+                  برای شروع گفتگو با خریداران و فروشندگان باسکول، پیام ارسال
+                  کنید.
                 </p>
               </div>
               <router-link
@@ -529,10 +559,9 @@ i.fa-star {
                 tag="button"
                 class="btn-orange-empty-state text-rtl"
               >
-               <i class="fas fa-user-friends"></i> شروع چت با فروشندگان
+                <i class="fas fa-user-friends"></i> شروع چت با فروشندگان
               </router-link>
             </div>
-           
           </li>
         </ul>
       </div>
