@@ -1099,6 +1099,7 @@ export default {
               "click on open chatBox"
             );
           } else {
+            console.log('modal');
             eventBus.$emit("modal", "buyAdReplyLimit");
             self.registerComponentStatistics(
               "buyAdReply",
@@ -1152,28 +1153,7 @@ export default {
           $(id).prop("disabled", false);
           $(id).removeClass("disable");
           if (error.response.status == 423) {
-            swal({
-              title: "ارتقا عضویت",
-              text: error.response.data.msg,
-              icon: "warning",
-              className: "custom-swal-with-cancel",
-              buttons: {
-                success: {
-                  text: "ارتقا عضویت",
-                  value: "promote",
-                },
-                close: {
-                  text: "بستن",
-                  className: "bg-cancel",
-                },
-              },
-            }).then((value) => {
-              switch (value) {
-                case "promote":
-                  this.$router.push({ name: "dashboardPricingTableSeller" });
-                  break;
-              }
-            });
+            $('#no-access-to-buyer-phone-modal').modal('show');
           } else {
             swal({
               text: error.response.data.msg,

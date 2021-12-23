@@ -649,7 +649,7 @@ export default {
           self.isStartLoading = false;
 
           if (self.limited.isLimited) {
-            eventBus.$emit("modal", "registerProductLimit");
+            $('#product-registration-restrictions-modal').modal('show');
           } else {
             eventBus.$emit("buyAdbuttonActive", false);
             self.goToStep(1);

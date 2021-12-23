@@ -330,6 +330,8 @@
     </div>
     <!-- end regex pricing modal -->
     <promotion-modal />
+    <ProductRegistrationRestrictionsModal  />
+    <NoAccessToBuyerPhoneModal />
     <DelsaPromotionModal />
     <PhoneLockedModal />
 
@@ -381,6 +383,8 @@
 import HeaderDashSeller from "../../components/dashboard/seller/header/header";
 import pricingContents from "../../components/dashboard/seller/pricing-seller-page/pricing-tables/pricing-package-contents";
 import PromotionModal from "../../components/layouts/main/promotion-modal";
+import ProductRegistrationRestrictionsModal from "../../components/layouts/main/product-registration-restrictions-modal.vue";
+import NoAccessToBuyerPhoneModal from "../../components/layouts/main/no-access-to-buyer-phone-modal.vue";
 import DelsaPromotionModal from "../../components/layouts/main/delsa-promotion-modal.vue";
 import PhoneLockedModal from "../../components/layouts/main/phone-locked-modal.vue";
 import { eventBus } from "../router.js";
@@ -392,6 +396,8 @@ export default {
     PromotionModal,
     DelsaPromotionModal,
     PhoneLockedModal,
+    ProductRegistrationRestrictionsModal,
+    NoAccessToBuyerPhoneModal
   },
   props: [
     "userId",
@@ -642,6 +648,14 @@ export default {
     },
     routePromotionModal() {
       $("#promotion-modal").modal("hide");
+      this.$router.push({ name: "dashboardPricingTableSeller" });
+    },
+    routeProductRegistrationRestrictionsModal() {
+      $("#product-registration-restrictions-modal").modal("hide");
+      this.$router.push({ name: "dashboardPricingTableSeller" });
+    },
+    routenNoAccessToBuyerPhoneModal() {
+      $("#no-access-to-buyer-phone-modal").modal("hide");
       this.$router.push({ name: "dashboardPricingTableSeller" });
     },
     handleBackKeys: function () {

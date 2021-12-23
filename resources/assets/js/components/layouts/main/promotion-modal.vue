@@ -85,7 +85,7 @@
   text-align: center;
   font-size: 25px;
   color: #374761;
-  padding: 20px 0 50px;
+  padding: 20px 0 0;
   font-weight: 500;
 }
 
@@ -100,7 +100,7 @@
 }
 
 .bg-gradient {
-  background: linear-gradient(90deg, #00c569 0%, #21ad93 100%);
+  background: linear-gradient(90deg, #FF9828 0%, #FF6600 100%);
 }
 
 .green-button {
@@ -110,7 +110,16 @@
   min-width: 245px;
   margin: 35px auto 50px;
 }
-
+.orange-button
+{
+  font-size: 19px;
+  padding: 8px 15px;
+  max-width: 245px;
+  margin: 35px auto 50px;
+  border-radius: 4px;
+  color: #ffffff;
+  border:0;
+}
 .user-information-content {
   display: block;
   float: right;
@@ -415,14 +424,16 @@
               <img src="../../../../img/promotion-icon.png" alt />
             </div>
             <div class="modal-contents">
-              <h3>فروش سریع تر و آسان تر</h3>
+              <h3> حساب کاربری خود را ارتقا دهید</h3>
+               <p class="text-rtl">
+                 فروش سریع تر و آسان تر
+              </p>
               <p class="text-rtl">
-                با ارتقا عضویت حساب کاربری خود، خریداران بیشتری را جذب کنید و با
-                فروش بیشتر از بازار رقابت جا نمانید.
+                برای دسترسی به تمام امکانات ویژه باسکول، حساب کاربری خود را ارتقا دهد
               </p>
               <div class="text-center">
                 <button
-                  class="green-button bg-gradient"
+                  class="orange-button bg-gradient "
                   @click.prevent="$parent.routePromotionModal()"
                 >
                   ارتقا عضویت
