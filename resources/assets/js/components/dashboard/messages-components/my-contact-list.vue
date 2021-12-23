@@ -19,6 +19,7 @@
   min-width: 100%;
   margin: 10px auto;
   padding: 0 10px;
+  background-color: #ffffff;
 }
 
 .contact-body .contact-search .contact-search-input-wrapper > i {
