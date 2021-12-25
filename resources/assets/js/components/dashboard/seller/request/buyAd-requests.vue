@@ -465,7 +465,7 @@ button.disable {
     padding: 4px 15px;
   }
   
-.title h1 {
+.title h1 span.title-text{
   display: none;
 }
 }
@@ -594,7 +594,7 @@ button.disable {
           <div class="row">
             <div class="col-xs-12 text-rtl text-right col-sm-8 pull-right">
               <h1>
-                <span>درخواست های خرید</span>
+                <span class="title-text">درخواست های خرید</span>
                 <button
                   v-if="filterCategory"
                   class="green-button remove-filter-button"
@@ -612,6 +612,7 @@ button.disable {
             <div
               class="
                 col-xs-12 col-sm-4
+                hidden-xs
                 request-update
                 pull-left
                 text-left

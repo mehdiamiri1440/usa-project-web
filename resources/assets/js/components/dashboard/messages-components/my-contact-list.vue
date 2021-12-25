@@ -40,7 +40,7 @@
   left: 7px;
   font-size: 16px;
   color: #919191;
-  top: 2px;
+  top: 3px;
   background: none;
   border: none;
   padding: 7px 15px 1px;
@@ -369,6 +369,9 @@ i.fa-star {
     border: none;
     background: #f2f2f2;
     border-radius: 4px;
+  }
+  .contact-body .contact-search .contact-search-input-wrapper > button {
+    top: 2px;
   }
 }
 </style>
