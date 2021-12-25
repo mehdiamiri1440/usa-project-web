@@ -20,13 +20,13 @@
 }
 
 .modal-content {
-  overflow: hidden;
   border-radius: 12px;
+  display: grid;
 }
 .close-modal {
   font-size: 20px;
 
-  color: #777;
+  color: #FF6600;
 
   position: absolute;
 
@@ -51,26 +51,41 @@
 .promotion-image-wrapper {
   background: #ffc985;
   text-align: center;
+  display: grid;
+ justify-items: center;
   height: 266px;
-  overflow: hidden;
   position: relative;
+  -webkit-border-top-left-radius: 12px;
+  -webkit-border-top-right-radius: 12px;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
 }
 
 .promotion-image-wrapper.buyAd-title::after {
   top: 95px;
 }
 
-.promotion-image-wrapper img {
-  left: 0;
-  width: 109%;
+.promotion-image-wrapper img.upgrade-rocket {
+  width: 100px;
   position: absolute;
-  z-index: 2;
-  margin-top: 3px;
+  margin-top: -60px;
+  z-index: 1051;
 }
-
+.promotion-image-wrapper img.smoke-rocket {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
 .modal-contents {
   position: relative;
   z-index: 1;
+  margin-top: -2px;
+  background-color: #f0f3f5;
+  -webkit-border-bottom-right-radius: 12px;
+-webkit-border-bottom-left-radius: 12px;
+border-bottom-right-radius: 12px;
+border-bottom-left-radius: 12px;
+
 }
 
 .modal-contents h3 {
@@ -90,12 +105,10 @@
   max-width: 430px;
   margin: 27px auto 0;
 }
-.promotion-title
-{
+.promotion-title {
   font-weight: 500;
 }
-.promotion-description
-{
+.promotion-description {
   font-weight: 400;
 }
 .bg-gradient {
@@ -315,22 +328,45 @@
 .modal-dialog.has-golden-buyAd {
   max-width: 478px;
 }
-@media (max-width: 768px) {
+@media (min-width: 768px) {
+  .promotion-image-wrapper {
+    height: 270px;
+  }
+  .modal-contents h3 {
+    font-size: 1.8rem;
+  }
+}
+@media (max-width: 767px) {
   .promotion-image-wrapper {
     height: 190px;
   }
   .modal-contents h3 {
-  font-size: 1.8rem;
+    font-size: 1.8rem;
+  }
 }
-}
-@media (max-width: 400px) {
+@media (max-width: 414px) {
   .promotion-image-wrapper {
-    height: 158px;
+    height: 175px;
+  }
+  .promotion-image-wrapper img.upgrade-rocket {
+    width: 85px;
+  }
+}
+@media (max-width: 380px) {
+  .promotion-image-wrapper {
+    height: 160px;
+  }
+  .promotion-image-wrapper img.upgrade-rocket {
+    margin-top: -50px;
   }
 }
 @media (max-width: 350px) {
   .promotion-image-wrapper {
-    height: 135px;
+    height: 140px;
+  }
+  .promotion-image-wrapper img.upgrade-rocket {
+    width: 70px;
+    margin-top: -45px;
   }
 }
 </style>
@@ -437,7 +473,9 @@
           </div>
           <div v-else class="modal-body col-xs-12">
             <div class="promotion-image-wrapper">
-              <img src="../../../../img/upgrade_membership.svg" alt />
+              <img class="upgrade-rocket" src="../../../../img/upgrade_rocket.svg" alt />
+              <img class="smoke-rocket" src="../../../../img/smoke_rocket.svg" alt />
+              
             </div>
             <div class="modal-contents">
               <h3>حساب کاربری خود را ارتقا دهید</h3>

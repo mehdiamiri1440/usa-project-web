@@ -1100,7 +1100,8 @@ export default {
             );
           } else {
             console.log('modal');
-            eventBus.$emit("modal", "buyAdReplyLimit");
+            $("#full-messaging-ceiling-modal").modal("show");
+            //eventBus.$emit("modal", "buyAdReplyLimit");
             self.registerComponentStatistics(
               "buyAdReply",
               "openChat",
@@ -1182,7 +1183,7 @@ export default {
       $(itemFirst).show();
     },
     openGoldenChatRestrictionModal: function () {
-      eventBus.$emit("modal", "goldenBuyAdReplyLimit");
+      $("#no-access-to-golden-buyers-phone-modal").modal("show");
 
       this.registerComponentStatistics(
         "buyAdReply",

@@ -48,12 +48,12 @@
   padding: 0;
 }
 
-.no-access-to-buyer-phone-image-wrapper {
+.full-messaging-ceiling-image-wrapper {
   padding-top: 25px;
   text-align: center;
 }
 
-.no-access-to-buyer-phone-image-wrapper::after {
+.full-messaging-ceiling-image-wrapper::after {
   content: " ";
   position: absolute;
   width: 1062px;
@@ -65,11 +65,11 @@
   z-index: 0;
 }
 
-.no-access-to-buyer-phone-image-wrapper.buyAd-title::after {
+.full-messaging-ceiling-image-wrapper.buyAd-title::after {
   top: 95px;
 }
 
-.no-access-to-buyer-phone-image-wrapper img {
+.full-messaging-ceiling-image-wrapper img {
   max-width: 200px;
   position: relative;
   z-index: 1;
@@ -104,7 +104,7 @@
 }
 .orange-button {
   font-size: 1.4rem;
-  padding: 5px 50px;
+  padding: 5px 63px 5px 50px;
   max-width: 245px;
   margin: 35px auto 28px;
   border-radius: 4px;
@@ -119,7 +119,7 @@
 }
 
 @media (max-width: 971px) {
-  .no-access-to-buyer-phone-image-wrapper img {
+  .full-messaging-ceiling-image-wrapper img {
     max-width: 200px;
   }
   .modal-dialog {
@@ -127,7 +127,7 @@
   }
 }
 @media (max-width: 600px) {
-  .no-access-to-buyer-phone-image-wrapper img {
+  .full-messaging-ceiling-image-wrapper img {
     max-width: 120px;
   }
   .modal-contents h3 {
@@ -142,8 +142,8 @@
 <template>
   <div class="container">
     <div
-      id="no-access-to-buyer-phone-modal"
-      class="no-access-to-buyer-phone-modal modal fade"
+      id="full-messaging-ceiling-modal"
+      class="full-messaging-ceiling-modal modal fade"
       tabindex="-1"
       role="dialog"
     >
@@ -155,20 +155,22 @@
             </a>
           </div>
           <div class="modal-body col-xs-12">
-            <div class="no-access-to-buyer-phone-image-wrapper">
-              <img src="../../../../img/no_access_to_buyyers_phone.svg" alt />
+            <div class="full-messaging-ceiling-image-wrapper">
+              <img src="../../../../img/my_requests_not_found.svg" alt />
             </div>
             <div class="modal-contents">
-              <h3> سقف روزانه ارسال پیام به خریداران پر شد!</h3>
+              <h3>سقف روزانه ارسال پیام به خریداران پر شد!</h3>
               <p class="text-rtl">
-                  برای ارسال پیام به خریداران بیشتر، ظرفیت پاسخگویی روزانه خود را افزایش دهید
+                برای ارسال پیام به خریداران بیشتر، ظرفیت پاسخگویی روزانه خود را
+                افزایش دهید
               </p>
               <div class="text-center">
                 <button
                   class="orange-button bg-gradient text-rtl"
                   @click.prevent="$parent.routenNoAccessToBuyerPhoneModal()"
                 >
-                  ارتقا عضویت
+                 <i class="fas fa-plus"></i>
+                  افزایش ظرفیت
                 </button>
               </div>
             </div>

@@ -48,12 +48,12 @@
   padding: 0;
 }
 
-.no-access-to-buyer-phone-image-wrapper {
+.no-access-to-golden-buyers-phone-image-wrapper {
   padding-top: 25px;
   text-align: center;
 }
 
-.no-access-to-buyer-phone-image-wrapper::after {
+.no-access-to-golden-buyers-phone-image-wrapper::after {
   content: " ";
   position: absolute;
   width: 1062px;
@@ -65,11 +65,11 @@
   z-index: 0;
 }
 
-.no-access-to-buyer-phone-image-wrapper.buyAd-title::after {
+.no-access-to-golden-buyers-phone-image-wrapper.buyAd-title::after {
   top: 95px;
 }
 
-.no-access-to-buyer-phone-image-wrapper img {
+.no-access-to-golden-buyers-phone-image-wrapper img {
   max-width: 200px;
   position: relative;
   z-index: 1;
@@ -119,7 +119,7 @@
 }
 
 @media (max-width: 971px) {
-  .no-access-to-buyer-phone-image-wrapper img {
+  .no-access-to-golden-buyers-phone-image-wrapper img {
     max-width: 200px;
   }
   .modal-dialog {
@@ -127,7 +127,7 @@
   }
 }
 @media (max-width: 600px) {
-  .no-access-to-buyer-phone-image-wrapper img {
+  .no-access-to-golden-buyers-phone-image-wrapper img {
     max-width: 120px;
   }
   .modal-contents h3 {
@@ -142,8 +142,8 @@
 <template>
   <div class="container">
     <div
-      id="no-access-to-buyer-phone-modal"
-      class="no-access-to-buyer-phone-modal modal fade"
+      id="no-access-to-golden-buyers-phone-modal"
+      class="no-access-to-golden-buyers-phone-modal modal fade"
       tabindex="-1"
       role="dialog"
     >
@@ -155,7 +155,7 @@
             </a>
           </div>
           <div class="modal-body col-xs-12">
-            <div class="no-access-to-buyer-phone-image-wrapper">
+            <div class="no-access-to-golden-buyers-phone-image-wrapper">
               <img src="../../../../img/no_access_to_buyyers_phone.svg" alt />
             </div>
             <div class="modal-contents">
