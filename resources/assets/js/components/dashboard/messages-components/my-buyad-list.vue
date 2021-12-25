@@ -187,7 +187,11 @@ li.contact-item:nth-last-of-type(2n + 1) {
   text-align: center;
 }
 .wrapper_no_pro {
-    margin-top: 115px;
+  margin-top: 115px;
+}
+.search-not-found
+{
+  margin-top: 0;
 }
 .load-more {
   margin: 0px 0 0;
@@ -633,7 +637,10 @@ li.static-item > button i {
     </div>
     <div
       v-else-if="
-        buyAds.length === 0 && buyAdsGoldenFilter.length == 0 && !isLoading
+        buyAds.length === 0 &&
+        buyAdsGoldenFilter.length == 0 &&
+        !isLoading &&
+        isSearchingBuyAds == false
       "
       class="not-found-item"
     >
@@ -645,7 +652,7 @@ li.static-item > button i {
         <div class="text_no_pic standard-line text-rtl">
           <p>خریدار مرتبطی ندارید!</p>
           <p class="text-description_no_pic">
-            رای مشاهده خریداران مرتبط، ابتدا محصول خود را ثبت کنید.
+            برای مشاهده خریداران مرتبط، ابتدا محصول خود را ثبت کنید.
           </p>
         </div>
         <router-link
@@ -667,12 +674,14 @@ li.static-item > button i {
       class="contact-items buyad-lists-wrapper"
     >
       <div>
-        <div class="empty-list text-center">
-          <i class="fa fa-search"></i>
-          <p>جستجو نتیجه ای نداشت.</p>
-          <p class="red-text">
-            در صورت وجود درخواست خرید، به شما اطلاع داده می شود.
-          </p>
+        <div class="wrapper_no_pro search-not-found">
+          <div class="content_no_pic">
+            <img src="../../../../img/not_found_search.svg" alt="" />
+          </div>
+
+          <div class="text_no_pic standard-line text-rtl">
+            <p>خریداری یافت نشد!</p>
+          </div>
         </div>
       </div>
     </div>

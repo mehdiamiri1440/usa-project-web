@@ -906,7 +906,7 @@ button.disable {
             <div class="text_no_pic standard-line text-rtl">
               <p>خریداری یافت نشد!</p>
               <p class="text-description_no_pic">
-              درصورتی که این محصول را برای فروش دارید، آن را ثبت کنید.
+                درصورتی که این محصول را برای فروش دارید، آن را ثبت کنید.
               </p>
             </div>
             <router-link

@@ -147,7 +147,6 @@
   line-height: 2;
   text-align: center;
 }
-
 .count-number {
   display: inline-block;
   height: 17px;
@@ -420,31 +419,13 @@ i.fa-star {
         <div class="wrapper-no-message">
           <div class="wrapper_no_pro">
             <div class="content_no_pic">
-              <img src="../../../../img/messages_not_found.svg" alt="" />
+              <img src="../../../../img/not_found_search.svg" alt="" />
             </div>
 
             <div class="text_no_pic standard-line text-rtl">
-              <p>هیچ پیام جدیدی ندارید!</p>
-              <p class="text-description_no_pic">
-                برای شروع گفتگو با خریداران و فروشندگان باسکول، پیام ارسال کنید.
-              </p>
+              <p>مخاطبی یافت نشد!</p>
             </div>
-            <router-link
-              v-if="$parent.userType"
-              :to="{ name: 'buyAdRequestsSeller' }"
-              tag="button"
-              class="btn-orange-empty-state text-rtl"
-            >
-              <i class="fas fa-user-friends"></i> مشاهده خریداران
-            </router-link>
-            <router-link
-              v-else
-              :to="{ name: 'productList' }"
-              tag="button"
-              class="btn-orange-empty-state text-rtl"
-            >
-              <i class="fas fa-user-friends"></i> شروع چت با فروشندگان
-            </router-link>
+            
           </div>
         </div>
       </div>
