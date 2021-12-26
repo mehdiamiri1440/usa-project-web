@@ -25,17 +25,11 @@
 }
 .close-modal {
   font-size: 20px;
-
-  color: #FF6600;
-
+  color: #ff6600;
   position: absolute;
-
   right: 0;
-
-  padding: 8px 15px 2px;
-
+  padding: 16px 22px;
   top: 0;
-
   z-index: 2;
 }
 
@@ -52,7 +46,7 @@
   background: #ffc985;
   text-align: center;
   display: grid;
- justify-items: center;
+  justify-items: center;
   height: 266px;
   position: relative;
   -webkit-border-top-left-radius: 12px;
@@ -79,20 +73,18 @@
 .modal-contents {
   position: relative;
   z-index: 1;
-  margin-top: -2px;
+  margin-top: -28px;
   background-color: #f0f3f5;
   -webkit-border-bottom-right-radius: 12px;
--webkit-border-bottom-left-radius: 12px;
-border-bottom-right-radius: 12px;
-border-bottom-left-radius: 12px;
-
+  -webkit-border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  border-bottom-left-radius: 12px;
 }
 
 .modal-contents h3 {
   text-align: center;
   font-size: 2rem;
   color: #374761;
-  padding: 20px 0 0;
   font-weight: 500;
 }
 
@@ -103,30 +95,26 @@ border-bottom-left-radius: 12px;
   color: #38485f;
   padding: 0 15px;
   max-width: 430px;
-  margin: 27px auto 0;
+  
 }
 .promotion-title {
   font-weight: 500;
+  margin: 26px auto 0;
 }
 .promotion-description {
   font-weight: 400;
+  margin-top: 10px;
+  margin: 19px auto 0;
 }
 .bg-gradient {
   background: linear-gradient(90deg, #ff9828 0%, #ff6600 100%);
 }
-
-.green-button {
-  font-size: 19px;
-  border-radius: 8px;
-  padding: 15px;
-  min-width: 245px;
-  margin: 35px auto 50px;
-}
 .orange-button {
-  font-size: 19px;
-  padding: 8px 45px;
-  max-width: 245px;
-  margin: 35px auto 30px;
+  font-size: 1.4rem;
+  padding: 8px 0;
+  text-align: center;
+  width: 214px;
+  margin: 40px auto 30px;
   border-radius: 4px;
   color: #ffffff;
   border: 0;
@@ -332,35 +320,59 @@ border-bottom-left-radius: 12px;
   .promotion-image-wrapper {
     height: 270px;
   }
-  .modal-contents h3 {
-    font-size: 1.8rem;
-  }
+ 
 }
 @media (max-width: 767px) {
+  .modal-contents {
+    padding: 0px 70px;
+    margin-top: -30px;
+  }
   .promotion-image-wrapper {
     height: 190px;
   }
+  .promotion-image-wrapper img.upgrade-rocket {
+    width: 60px;
+  }
   .modal-contents h3 {
-    font-size: 1.8rem;
+    font-size: 1.4rem;
+    margin-bottom: 7px;
+  }
+
+  .modal-contents p {
+    font-size: 1rem;
+    color: #38485f;
+    margin-top: 3px;
+  }
+  .promotion-title {
+    font-weight: 500;
+  }
+  .orange-button {
+    margin: 15px auto 23px;
+    max-width: 140px;
+    padding: 5px 0;
   }
 }
 @media (max-width: 414px) {
+  
   .promotion-image-wrapper {
     height: 175px;
   }
   .promotion-image-wrapper img.upgrade-rocket {
-    width: 85px;
+    margin-top: -38px;
   }
 }
 @media (max-width: 380px) {
+  .modal-contents {
+    padding: 0 40px;
+  }
   .promotion-image-wrapper {
     height: 160px;
   }
-  .promotion-image-wrapper img.upgrade-rocket {
-    margin-top: -50px;
-  }
 }
 @media (max-width: 350px) {
+  .modal-contents {
+    padding: 0 30px;
+  }
   .promotion-image-wrapper {
     height: 140px;
   }
@@ -473,9 +485,16 @@ border-bottom-left-radius: 12px;
           </div>
           <div v-else class="modal-body col-xs-12">
             <div class="promotion-image-wrapper">
-              <img class="upgrade-rocket" src="../../../../img/upgrade_rocket.svg" alt />
-              <img class="smoke-rocket" src="../../../../img/smoke_rocket.svg" alt />
-              
+              <img
+                class="upgrade-rocket"
+                src="../../../../img/upgrade_rocket.svg"
+                alt
+              />
+              <img
+                class="smoke-rocket"
+                src="../../../../img/smoke_rocket.svg"
+                alt
+              />
             </div>
             <div class="modal-contents">
               <h3>حساب کاربری خود را ارتقا دهید</h3>

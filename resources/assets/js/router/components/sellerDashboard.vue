@@ -660,8 +660,8 @@ export default {
       $("#product-registration-restrictions-modal").modal("hide");
       this.$router.push({ name: "dashboardPricingTableSeller" });
     },
-    routenNoAccessToBuyerPhoneModal() {
-      $("#no-access-to-buyer-phone-modal").modal("hide");
+    routenNoAccessToBuyerModal() {
+      $("#no-access-to-buyers-modal").modal("hide");
       this.$router.push({ name: "dashboardPricingTableSeller" });
     },
     handleBackKeys: function () {

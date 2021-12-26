@@ -1183,7 +1183,7 @@ export default {
       $(itemFirst).show();
     },
     openGoldenChatRestrictionModal: function () {
-      $("#no-access-to-golden-buyers-phone-modal").modal("show");
+      $("#no-access-to-golden-buyers-modal").modal("show");
 
       this.registerComponentStatistics(
         "buyAdReply",
