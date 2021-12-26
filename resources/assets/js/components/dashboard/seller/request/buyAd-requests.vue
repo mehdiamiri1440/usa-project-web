@@ -354,7 +354,7 @@ button.disable {
   z-index: 999;
 }
 
-.banner-wrapper {
+.green-banner .banner-wrapper {
   background: linear-gradient(76.93deg, #44a08d 0%, #093637 100%);
   border-radius: 4px;
   min-height: 130px;
@@ -363,7 +363,7 @@ button.disable {
   overflow: hidden;
   margin-bottom: 15px;
 }
-.banner-wrapper::before {
+.green-banner .banner-wrapper::before {
   content: "";
   width: 150px;
   height: 150px;
@@ -371,37 +371,50 @@ button.disable {
   background-position: top, 2px 0;
   background-repeat: no-repeat;
   position: absolute;
-  right:-35px;
+  right: -35px;
 }
 
-.banner-wrapper::after {
+.green-banner .banner-wrapper::after {
   content: "";
   width: 197px;
   height: 150px;
   background: url("../../../../../img/half-circle-large-left.svg"),
     url("../../../../../img/half-circle-small-left.svg");
   background-position: top, 2px 26px;
-  background-position-x: center, 2px;
-  background-position-y: top, 26px;
   background-repeat: no-repeat;
   position: absolute;
   margin-top: -56px;
   margin-right: -195px;
 }
 
-.banner-wrapper .main-wrapper {
+.green-banner .banner-wrapper .main-wrapper {
   position: relative;
   padding: 12px 47px;
   overflow: hidden;
   z-index: 2;
   text-align: right;
 }
+
+.green-banner .banner-wrapper .banner-bg-striped {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.2;
+}
 .green-banner .banner-wrapper-title {
   font-size: 1.6rem;
   font-weight: 500;
+  text-align: right;
+  margin-bottom: 17px;
+  color: #ffffff;
 }
 .green-banner .banner-wrapper-description {
   font-size: 1.4rem;
+  color: #ffffff;
+  text-align: right;
+  margin-bottom: 17px;
 }
 .green-banner .green-banner-button-wrapper {
   display: grid;
@@ -417,35 +430,16 @@ button.disable {
   border-radius: 4px;
 }
 
-.banner-button i {
+.green-banner .banner-button i {
   position: relative;
   top: 2px;
   margin-right: 5px;
 }
 
-.green-button.banner-button:hover {
+.green-banner .green-button.banner-button:hover {
   background: #1da1f2;
 }
-
-.banner-wrapper .banner-bg-striped {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  /* background: url("../../../../../img/bg-striped.png") repeat; */
-  opacity: 0.2;
-}
-
-.banner-wrapper p {
-  font-size: 18px;
-  font-weight: bold;
-  color: #fff;
-  text-align: right;
-  margin-bottom: 17px;
-}
-
-.banner-wrapper .circle-item-wrapper {
+.green-banner .banner-wrapper .circle-item-wrapper {
   position: absolute;
   left: 100px;
   width: 200px;
@@ -458,12 +452,12 @@ button.disable {
   box-shadow: 0 3px 2px rgba(0, 0, 0, 0.16);
 }
 
-.banner-wrapper .circle-item-wrapper img {
+.green-banner .banner-wrapper .circle-item-wrapper img {
   position: relative;
   top: -20px;
 }
 
-.banner-wrapper .circle-item-wrapper::after {
+.green-banner .banner-wrapper .circle-item-wrapper::after {
   width: 315px;
   height: 195px;
   content: " ";
@@ -476,7 +470,7 @@ button.disable {
   z-index: 1;
 }
 
-.banner-wrapper .circle-item-wrapper::before {
+.green-banner .banner-wrapper .circle-item-wrapper::before {
   width: 295px;
   height: 185px;
   content: " ";
@@ -487,7 +481,63 @@ button.disable {
   border-radius: 170px;
   z-index: 1;
 }
+/*----------------------------- orange banner ---------*/
+.promotional-orange-banner .banner-wrapper::before {
+  content: "";
+  width: 300px;
+  height: 100px;
+  background: url("../../../../../img/promotional_card_launcher_bg.svg");
+  background-repeat: no-repeat;
+  background-position: top, 2px 26px;
+  background-repeat: no-repeat;
+  position: absolute;
+  bottom: 0;
+  right: -17px;
+}
+.promotional-orange-banner .banner-wrapper {
+  background-color: #ffc985;
+  border-radius: 4px;
+  min-height: 120px;
+  position: relative;
+  direction: rtl;
+  overflow: hidden;
+  margin-bottom: 15px;
+}
+.promotional-orange-banner .banner-wrapper .main-wrapper {
+  position: relative;
+  padding: 10px 190px;
+  overflow: hidden;
+  z-index: 2;
+  text-align: right;
+}
+.promotional-orange-banner .banner-wrapper-title {
+  font-weight: 500;
+  font-size: 1.6rem;
+  line-height: 20px;
+  margin-bottom: 6px;
+}
+.promotional-orange-banner .banner-wrapper-description {
+  font-size: 1.4rem;
+  line-height: 20px;
+  
+}
+.promotional-orange-banner .orange-banner-button-wrapper {
+  display: grid;
+  justify-items: left;
+}
+.promotional-orange-banner .banner-button {
+  width: 200px;
+  font-size: 1.4rem;
+  padding: 3px 0;
+  line-height: 24px;
+  margin-top: 29px;
+  background: #128c7e;
+  color: #ffffff;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+}
 
+/*---------------*/
 .text-center {
   text-align: center !important;
 }
@@ -500,18 +550,26 @@ button.disable {
   .default-list-title {
     padding: 4px 15px;
   }
-  .banner-wrapper::before {
-  content: "";
-  width: 150px;
-  height: 150px;
-  background: url("../../../../../img/half-circle-small-right.svg");
-  background-position: top, 2px 0;
-  background-repeat: no-repeat;
-  position: absolute;
-  top: -20px;
-  right:-35px;
-}
-  .banner-wrapper::after {
+  .promotional-orange-banner .banner-wrapper::before {
+    background-size: 200px 86px;
+    right: -105px;
+    height: 85px;
+  }
+  .promotional-orange-banner .banner-wrapper .main-wrapper {
+    padding: 10px 65px 10px 5px;
+  }
+  .green-banner .banner-wrapper::before {
+    content: "";
+    width: 150px;
+    height: 150px;
+    background: url("../../../../../img/half-circle-small-right.svg");
+    background-position: top, 2px 0;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: -20px;
+    right: -35px;
+  }
+  .green-banner .banner-wrapper::after {
     background: url("../../../../../img/half-circle-large-left-mobile.svg"),
       url("../../../../../img/half-circle-small-left-mobile.svg");
     background-position: 43px 0px, 38px 14px;
@@ -520,30 +578,47 @@ button.disable {
     margin-top: -50px;
     margin-right: -154px;
   }
-  .banner-wrapper .main-wrapper {
+  .green-banner .banner-wrapper .main-wrapper {
     padding: 7px 16px;
   }
   .green-banner .green-banner-button-wrapper {
     justify-items: right;
   }
 }
-@media screen and (max-width: 767px) {
-  
-  .green-banner .banner-wrapper-title
-{
-  font-size: 1.4rem;
-  line-height: 24px;
-  margin-bottom: 5px;
-}
-.green-banner .banner-wrapper-description
-{
-  font-size: 1.2rem;
-  line-height: 20px;
-}
+@media screen and (max-width: 768px) {
+  .promotional-orange-banner .banner-wrapper-title {
+    font-size: 1.6rem;
+    line-height: 24px;
+    margin-bottom: 0;
+  }
+  .promotional-orange-banner .banner-wrapper-description {
+    font-size: 1.3rem;
+    line-height: 20px;
+  }
+  .promotional-orange-banner .orange-banner-button-wrapper {
+    justify-items: left;
+  }
+  .promotional-orange-banner .banner-button {
+    width: 127px;
+    font-size: 1.4rem;
+    padding: 3px 0;
+    line-height: 24px;
+    margin-top: 16px;
+    margin-left: 27px;
+  }
+  .green-banner .banner-wrapper-title {
+    font-size: 1.4rem;
+    line-height: 24px;
+    margin-bottom: 5px;
+  }
+  .green-banner .banner-wrapper-description {
+    font-size: 1.2rem;
+    line-height: 20px;
+  }
   .banner-button {
     margin-right: 26px;
   }
-  .banner-wrapper .circle-item-wrapper {
+  .green-banner .banner-wrapper .circle-item-wrapper {
     left: -20px;
     width: 190px;
     height: 190px;
@@ -634,7 +709,6 @@ button.disable {
     padding-top: 6px;
   }
 }
-
 </style>
 <template>
   <div>
@@ -705,7 +779,7 @@ button.disable {
               <div v-if="buyAd.has_msg || buyAd.has_phone">
                 <div
                   class="col-xs-12 green-banner"
-                  v-if="index % 9 == 0 && index == 0"
+                  v-if="index % 9 == 0 && index != 0"
                 >
                   <div class="row">
                     <div class="banner-wrapper">
@@ -729,7 +803,32 @@ button.disable {
                     </div>
                   </div>
                 </div>
-
+                <div
+                  class="col-xs-12 promotional-orange-banner"
+                  v-if="index == 3"
+                >
+                  <div class="row">
+                    <div class="banner-wrapper">
+                      <div class="main-wrapper">
+                        <p class="banner-wrapper-title">
+                          کاربر ویژه باسکول شوید!
+                        </p>
+                        <p class="banner-wrapper-description">
+                          برای دسترسی به خریداران طلایی و شماره های تماس ، حساب
+                          کاربری خود را ارتقا دهید.
+                        </p>
+                        <div class="row orange-banner-button-wrapper">
+                          <router-link
+                            :to="{ name: 'dashboardPricingTableSeller' }"
+                            class="btn banner-button hover-effect"
+                          >
+                            ارتقا عضویت
+                          </router-link>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
                 <div
                   class="buyAd-wrapper-item col-xs-12"
                   :class="{
