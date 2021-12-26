@@ -355,30 +355,66 @@ button.disable {
 }
 
 .banner-wrapper {
-  background: linear-gradient(90deg, #060446, #21ad93);
+  background: linear-gradient(76.93deg, #44a08d 0%, #093637 100%);
+  border-radius: 4px;
   min-height: 130px;
   position: relative;
   direction: rtl;
   overflow: hidden;
   margin-bottom: 15px;
-  border-radius: 12px;
+}
+.banner-wrapper::before {
+  content: "";
+  width: 150px;
+  height: 150px;
+  background: url("../../../../../img/half-circle-small-right.svg");
+  background-position: top, 2px 0;
+  background-repeat: no-repeat;
+  position: absolute;
+  right:-35px;
+}
+
+.banner-wrapper::after {
+  content: "";
+  width: 197px;
+  height: 150px;
+  background: url("../../../../../img/half-circle-large-left.svg"),
+    url("../../../../../img/half-circle-small-left.svg");
+  background-position: top, 2px 26px;
+  background-position-x: center, 2px;
+  background-position-y: top, 26px;
+  background-repeat: no-repeat;
+  position: absolute;
+  margin-top: -56px;
+  margin-right: -195px;
 }
 
 .banner-wrapper .main-wrapper {
   position: relative;
-  padding: 20px 100px;
+  padding: 12px 47px;
   overflow: hidden;
   z-index: 2;
   text-align: right;
 }
-
+.green-banner .banner-wrapper-title {
+  font-size: 1.6rem;
+  font-weight: 500;
+}
+.green-banner .banner-wrapper-description {
+  font-size: 1.4rem;
+}
+.green-banner .green-banner-button-wrapper {
+  display: grid;
+  justify-items: center;
+}
 .banner-button {
   width: initial;
-  font-size: 18px;
-  padding: 10px 20px;
-  border-radius: 7px;
-  background: #1da1f2;
-  box-shadow: 0 3px 2px rgba(0, 0, 0, 0.16);
+  font-size: 1.4rem;
+  padding: 8px 14px;
+  background: #f0f3f5;
+  color: #ff6600;
+  box-shadow: 0px 2px 8px rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
 }
 
 .banner-button i {
@@ -397,7 +433,7 @@ button.disable {
   left: 0;
   right: 0;
   bottom: 0;
-  background: url("../../../../../img/bg-striped.png") repeat;
+  /* background: url("../../../../../img/bg-striped.png") repeat; */
   opacity: 0.2;
 }
 
@@ -464,12 +500,49 @@ button.disable {
   .default-list-title {
     padding: 4px 15px;
   }
+  .banner-wrapper::before {
+  content: "";
+  width: 150px;
+  height: 150px;
+  background: url("../../../../../img/half-circle-small-right.svg");
+  background-position: top, 2px 0;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: -20px;
+  right:-35px;
+}
+  .banner-wrapper::after {
+    background: url("../../../../../img/half-circle-large-left-mobile.svg"),
+      url("../../../../../img/half-circle-small-left-mobile.svg");
+    background-position: 43px 0px, 38px 14px;
+    background-repeat: no-repeat;
+    position: absolute;
+    margin-top: -50px;
+    margin-right: -154px;
+  }
+  .banner-wrapper .main-wrapper {
+    padding: 7px 16px;
+  }
+  .green-banner .green-banner-button-wrapper {
+    justify-items: right;
+  }
 }
 @media screen and (max-width: 767px) {
-  .banner-wrapper .main-wrapper {
-    padding: 20px 10px;
+  
+  .green-banner .banner-wrapper-title
+{
+  font-size: 1.4rem;
+  line-height: 24px;
+  margin-bottom: 5px;
+}
+.green-banner .banner-wrapper-description
+{
+  font-size: 1.2rem;
+  line-height: 20px;
+}
+  .banner-button {
+    margin-right: 26px;
   }
-
   .banner-wrapper .circle-item-wrapper {
     left: -20px;
     width: 190px;
@@ -561,6 +634,7 @@ button.disable {
     padding-top: 6px;
   }
 }
+
 </style>
 <template>
   <div>
@@ -629,23 +703,28 @@ button.disable {
           <ul class="list-unstyled wrapper-items">
             <li v-for="(buyAd, index) in buyAds" :key="index">
               <div v-if="buyAd.has_msg || buyAd.has_phone">
-                <div class="col-xs-12" v-if="index % 9 == 0 && index != 0">
+                <div
+                  class="col-xs-12 green-banner"
+                  v-if="index % 9 == 0 && index == 0"
+                >
                   <div class="row">
                     <div class="banner-wrapper">
-                      <div class="banner-bg-striped"></div>
                       <div class="main-wrapper">
-                        <p>آیا خریدار مورد نظر خود را پیدا نکرده اید؟</p>
-                        <p>محصول خود را ثبت کنید.</p>
-                        <router-link
-                          :to="{ name: 'registerProductSeller' }"
-                          class="btn green-button banner-button hover-effect"
-                        >
-                          ثبت محصول
-                          <i class="fa fa-arrow-left"> </i>
-                        </router-link>
-                      </div>
-                      <div class="circle-item-wrapper">
-                        <img src="../../../../../img/request.svg" alt="" />
+                        <p class="banner-wrapper-title">
+                          هنوز خریدار محصول خود را پیدا نکرده اید؟!
+                        </p>
+                        <p class="banner-wrapper-description">
+                          با ثبت محصول به لیست خریداران پیشنهادی مخصوص خود ،
+                          دسترسی پیدا کنید.
+                        </p>
+                        <div class="row green-banner-button-wrapper">
+                          <router-link
+                            :to="{ name: 'registerProductSeller' }"
+                            class="btn banner-button hover-effect"
+                          >
+                            ثبت محصول و یافتن خریدار
+                          </router-link>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -1099,7 +1178,7 @@ export default {
               "click on open chatBox"
             );
           } else {
-            console.log('modal');
+            console.log("modal");
             $("#full-messaging-ceiling-modal").modal("show");
             //eventBus.$emit("modal", "buyAdReplyLimit");
             self.registerComponentStatistics(
@@ -1110,7 +1189,7 @@ export default {
           }
         });
     },
-     setScrollToBuyAd(id) {
+    setScrollToBuyAd(id) {
       let element = $(id);
       let elementTop = element.offset().top;
       let elementHeight = element.height();
@@ -1154,7 +1233,7 @@ export default {
           $(id).prop("disabled", false);
           $(id).removeClass("disable");
           if (error.response.status == 423) {
-            $('#no-access-to-buyer-phone-modal').modal('show');
+            $("#no-access-to-buyer-phone-modal").modal("show");
           } else {
             swal({
               text: error.response.data.msg,
