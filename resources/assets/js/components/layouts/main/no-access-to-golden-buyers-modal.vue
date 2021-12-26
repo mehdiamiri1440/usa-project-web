@@ -25,17 +25,11 @@
 }
 .close-modal {
   font-size: 20px;
-
   color: #777;
-
   position: absolute;
-
   right: 0;
-
-  padding: 8px 15px 2px;
-
+  padding: 25px 24px;
   top: 0;
-
   z-index: 2;
 }
 
@@ -48,12 +42,12 @@
   padding: 0;
 }
 
-.no-access-to-golden-buyers-phone-image-wrapper {
-  padding-top: 25px;
+.no-access-to-golden-buyers-image-wrapper {
+  padding-top: 22px;
   text-align: center;
 }
 
-.no-access-to-golden-buyers-phone-image-wrapper::after {
+.no-access-to-golden-buyers-image-wrapper::after {
   content: " ";
   position: absolute;
   width: 1062px;
@@ -65,12 +59,12 @@
   z-index: 0;
 }
 
-.no-access-to-golden-buyers-phone-image-wrapper.buyAd-title::after {
+.no-access-to-golden-buyers-image-wrapper.buyAd-title::after {
   top: 95px;
 }
 
-.no-access-to-golden-buyers-phone-image-wrapper img {
-  max-width: 200px;
+.no-access-to-golden-buyers-image-wrapper img {
+  max-width: 122px;
   position: relative;
   z-index: 1;
 }
@@ -84,19 +78,20 @@
   text-align: center;
   font-size: 1.6rem;
   color: #15313c;
-  padding: 20px 0 0;
+  padding: 10px 0 0;
   font-weight: 500;
   direction: rtl;
 }
 
 .modal-contents p {
   font-size: 1.4rem;
+  font-weight: 400;
   text-align: center;
   line-height: 1.618;
   color: #15313c;
   padding: 0 15px;
-  max-width: 430px;
-  margin: 27px auto 0;
+  margin: 11px auto 0;
+  padding: 0px 50px;
 }
 
 .bg-gradient {
@@ -106,11 +101,12 @@
   font-size: 1.4rem;
   padding: 5px 50px;
   max-width: 245px;
-  margin: 35px auto 28px;
+  margin: 25px auto 28px;
   border-radius: 4px;
   color: #ffffff;
   border: 0;
   position: relative;
+  background-color: #FF9828;
 }
 .orange-button i {
   position: absolute;
@@ -119,31 +115,57 @@
 }
 
 @media (max-width: 971px) {
-  .no-access-to-golden-buyers-phone-image-wrapper img {
-    max-width: 200px;
-  }
+  
   .modal-dialog {
     width: 85%;
   }
 }
+@media (min-width: 768px) {
+  .modal-dialog {
+    width: 440px;
+  }
+  .orange-button {
+  font-size: 1.4rem;
+  padding: 5px 50px;
+  max-width: 245px;
+  margin: 33px auto 28px;
+}
+}
 @media (max-width: 600px) {
-  .no-access-to-golden-buyers-phone-image-wrapper img {
-    max-width: 120px;
+  .modal-contents {
+    margin-top: -8px;
+  }
+  .no-access-to-golden-buyers-image-wrapper img {
+    max-width: 67px;
   }
   .modal-contents h3 {
     font-size: 1.4rem;
   }
   .modal-contents p {
     font-size: 1.2rem;
+    line-height: 17px;
+    margin-top: 9px;
   }
+  .orange-button {
+    font-size: 1.4rem;
+    padding: 5px 50px;
+    max-width: 245px;
+    margin: 33px auto 23px;
 }
+}
+@media (max-width: 411px) {
+  
+  
+  
+}
+
 </style>
 
 <template>
   <div class="container">
     <div
-      id="no-access-to-golden-buyers-phone-modal"
-      class="no-access-to-golden-buyers-phone-modal modal fade"
+      id="no-access-to-golden-buyers-modal"
+      class="no-access-to-golden-buyers-modal modal fade"
       tabindex="-1"
       role="dialog"
     >
@@ -155,7 +177,7 @@
             </a>
           </div>
           <div class="modal-body col-xs-12">
-            <div class="no-access-to-golden-buyers-phone-image-wrapper">
+            <div class="no-access-to-golden-buyers-image-wrapper">
               <img src="../../../../img/no_access_to_buyyers_phone.svg" alt />
             </div>
             <div class="modal-contents">
@@ -165,8 +187,8 @@
               </p>
               <div class="text-center">
                 <button
-                  class="orange-button bg-gradient text-rtl"
-                  @click.prevent="$parent.routenNoAccessToBuyerPhoneModal()"
+                  class="orange-button text-rtl"
+                  @click.prevent="$parent.routenNoAccessToBuyerModal()"
                 >
                   ارتقا عضویت
                 </button>

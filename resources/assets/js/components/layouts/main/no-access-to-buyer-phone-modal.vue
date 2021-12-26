@@ -25,17 +25,11 @@
 }
 .close-modal {
   font-size: 20px;
-
   color: #777;
-
   position: absolute;
-
   right: 0;
-
-  padding: 8px 15px 2px;
-
+  padding: 15px 12px;
   top: 0;
-
   z-index: 2;
 }
 
@@ -49,7 +43,7 @@
 }
 
 .no-access-to-buyer-phone-image-wrapper {
-  padding-top: 25px;
+  padding-top: 22px;
   text-align: center;
 }
 
@@ -70,7 +64,7 @@
 }
 
 .no-access-to-buyer-phone-image-wrapper img {
-  max-width: 200px;
+  max-width: 122px;
   position: relative;
   z-index: 1;
 }
@@ -84,19 +78,19 @@
   text-align: center;
   font-size: 1.6rem;
   color: #15313c;
-  padding: 20px 0 0;
+  padding: 10px 0 0;
   font-weight: 500;
   direction: rtl;
 }
 
 .modal-contents p {
   font-size: 1.4rem;
+  font-weight: 400;
   text-align: center;
   line-height: 1.618;
   color: #15313c;
-  padding: 0 15px;
-  max-width: 430px;
-  margin: 27px auto 0;
+  margin: 11px auto 0;
+  padding: 0px 50px;
 }
 
 .bg-gradient {
@@ -106,11 +100,12 @@
   font-size: 1.4rem;
   padding: 5px 50px;
   max-width: 245px;
-  margin: 35px auto 28px;
+  margin: 25px auto 28px;
   border-radius: 4px;
   color: #ffffff;
   border: 0;
   position: relative;
+  background-color: #FF9828;
 }
 .orange-button i {
   position: absolute;
@@ -119,23 +114,30 @@
 }
 
 @media (max-width: 971px) {
-  .no-access-to-buyer-phone-image-wrapper img {
-    max-width: 200px;
-  }
+  
   .modal-dialog {
     width: 85%;
   }
 }
+@media (min-width: 768px) {
+  .modal-dialog {
+    width: 440px;
+  }
+}
 @media (max-width: 600px) {
   .no-access-to-buyer-phone-image-wrapper img {
-    max-width: 120px;
+    max-width: 67px;
   }
   .modal-contents h3 {
     font-size: 1.4rem;
   }
   .modal-contents p {
     font-size: 1.2rem;
+    padding: 0 65px;
   }
+  .orange-button{
+    margin: 33px auto 23px;
+}
 }
 </style>
 
@@ -166,7 +168,7 @@
               </p>
               <div class="text-center">
                 <button
-                  class="orange-button bg-gradient text-rtl"
+                  class="orange-button text-rtl"
                   @click.prevent="$parent.routenNoAccessToBuyerPhoneModal()"
                 >
                   ارتقا عضویت
