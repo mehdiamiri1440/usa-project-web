@@ -330,10 +330,7 @@
     </div>
     <!-- end regex pricing modal -->
     <promotion-modal />
-    <ProductRegistrationRestrictionsModal />
-    <NoAccessToBuyerPhoneModal />
-    <FullMessagingCeilingModal />
-    <noAccessToGoldenBuyersModal />
+    
     <DelsaPromotionModal />
     <PhoneLockedModal />
 
@@ -385,10 +382,6 @@
 import HeaderDashSeller from "../../components/dashboard/seller/header/header";
 import pricingContents from "../../components/dashboard/seller/pricing-seller-page/pricing-tables/pricing-package-contents";
 import PromotionModal from "../../components/layouts/main/promotion-modal";
-import ProductRegistrationRestrictionsModal from "../../components/layouts/main/product-registration-restrictions-modal.vue";
-import NoAccessToBuyerPhoneModal from "../../components/layouts/main/no-access-to-buyer-phone-modal.vue";
-import FullMessagingCeilingModal from "../../components/layouts/main/full-messaging-ceiling-modal.vue";
-import noAccessToGoldenBuyersModal from "../../components/layouts/main/no-access-to-golden-buyers-modal.vue";
 import DelsaPromotionModal from "../../components/layouts/main/delsa-promotion-modal.vue";
 import PhoneLockedModal from "../../components/layouts/main/phone-locked-modal.vue";
 import { eventBus } from "../router.js";
@@ -400,10 +393,7 @@ export default {
     PromotionModal,
     DelsaPromotionModal,
     PhoneLockedModal,
-    ProductRegistrationRestrictionsModal,
-    NoAccessToBuyerPhoneModal,
-    FullMessagingCeilingModal,
-    noAccessToGoldenBuyersModal,
+    
   },
   props: [
     "userId",
@@ -656,14 +646,7 @@ export default {
       $("#promotion-modal").modal("hide");
       this.$router.push({ name: "dashboardPricingTableSeller" });
     },
-    routeProductRegistrationRestrictionsModal() {
-      $("#product-registration-restrictions-modal").modal("hide");
-      this.$router.push({ name: "dashboardPricingTableSeller" });
-    },
-    routenNoAccessToBuyerModal() {
-      $("#no-access-to-buyers-modal").modal("hide");
-      this.$router.push({ name: "dashboardPricingTableSeller" });
-    },
+    
     handleBackKeys: function () {
       if (window.history.state) {
         history.pushState(null, null, window.location);

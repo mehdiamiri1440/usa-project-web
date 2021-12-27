@@ -18,9 +18,8 @@
   position: absolute;
   z-index: 1020;
 }
-.android-download-alert-content
-{
- display: grid;
+.android-download-alert-content {
+  display: grid;
   grid-template-columns: 37.05px auto 90px;
 }
 .android-download-alert-wrapper .m-t-b {
@@ -234,10 +233,7 @@
     >
       <div @click.prevent="closeAppModal()">
         <div class="m-t-b">
-          <button
-            class="close-android-download-alert-wrapper"
-            
-          >
+          <button class="close-android-download-alert-wrapper">
             <i class="fa fa-times"></i>
           </button>
         </div>
@@ -254,9 +250,7 @@
           <p class="android-download-slogan">استفاده راحت تر و سریع تر</p>
         </div>
         <div class="text-center m-t-b">
-          <button class="android-apk-download" >
-            دانلود
-          </button>
+          <button class="android-apk-download">دانلود</button>
         </div>
       </div>
     </div>
@@ -407,6 +401,11 @@
 
     <!-- add android app download  -->
     <!--  -->
+    <!-- modals -->
+    <ProductRegistrationRestrictionsModal />
+    <NoAccessToBuyerPhoneModal :message="msg" :errorStatus="errStatus" />
+    <FullMessagingCeilingModal />
+    <noAccessToGoldenBuyersModal />
   </div>
 </template>
 
@@ -424,6 +423,10 @@ import WalletComponent from "../../components/layouts/main/wallet";
 import PaymentTypes from "../../components/layouts/main/payment-types.vue";
 import swal from "../../sweetalert.min.js";
 import Navigation from "./navigation.vue";
+import ProductRegistrationRestrictionsModal from "../../components/layouts/main/product-registration-restrictions-modal.vue";
+import NoAccessToBuyerPhoneModal from "../../components/layouts/main/no-access-to-buyer-phone-modal.vue";
+import FullMessagingCeilingModal from "../../components/layouts/main/full-messaging-ceiling-modal.vue";
+import noAccessToGoldenBuyersModal from "../../components/layouts/main/no-access-to-golden-buyers-modal.vue";
 
 export default {
   components: {
@@ -435,6 +438,10 @@ export default {
     WalletComponent,
     PaymentTypes,
     Navigation,
+    ProductRegistrationRestrictionsModal,
+    NoAccessToBuyerPhoneModal,
+    FullMessagingCeilingModal,
+    noAccessToGoldenBuyersModal,
   },
   data: function () {
     return {
@@ -474,6 +481,7 @@ export default {
       doPaymentLoader: false,
       messageCount: "",
       isClosed: false,
+      errStatus: true,
     };
   },
   props: [
@@ -664,7 +672,7 @@ export default {
           this.raiseRegisterProductLimitModal();
           break;
         case "buyAdReplyLimit":
-          this.raiseBuyAdReplyLimitModal();
+          this.FullMessagingCeilingModal();
           break;
         case "profileEditSuccess":
           this.raiseProfileEditSuccessModal();
@@ -995,68 +1003,25 @@ export default {
       });
     },
     raiseRegisterProductLimitModal: function () {
-      let self = this;
-
       this.handleBackBtn();
-
-      let content = document.createElement("div");
-      content.innerHTML =
-        '<p dir="rtl" class="swal-guide">سقف تعداد محصولات ثبت شده شما پر شده است.</p><br/><p class="red-text swal-guide" dir="rtl"><b>برای ثبت محصولات جدید، لطفا دکمه افزایش ظرفیت را بزنید.</b></p>';
-      swal({
-        title: "محدودیت ثبت محصول جدید",
-        content: content,
-        className: "custom-swal-with-cancel",
-        icon: "warning",
-        buttons: {
-          success: {
-            text: "افزایش ظرفیت",
-            value: "promote",
-            // className: "button-new-badge",
-          },
-          close: {
-            text: "بستن",
-            className: "bg-cancel",
-          },
-        },
-      }).then((value) => {
-        switch (value) {
-          case "promote":
-            self.$router.push({ name: "dashboardProductPricing" });
-            break;
-        }
-      });
+      $("#product-registration-restrictions-modal").modal("show");
     },
-    raiseBuyAdReplyLimitModal: function () {
-      let self = this;
-
+    FullMessagingCeilingModal() {
+      $("#full-messaging-ceiling-modal").modal("show");
+    },
+    routeRaiseUpgradeMemberShip() {
+      $(".modal").modal("hide");
+      this.$router.push({ name: "dashboardPricingTableSeller" });
+    },
+    routeRegisterProductLimit() {
+      $(".modal").modal("hide");
+      this.$router.push({ name: "dashboardProductPricing" });
+    },
+    routeRaiseBuyAdReplyLimit: function () {
       this.handleBackBtn();
+      $(".modal").modal("hide");
 
-      let content = document.createElement("div");
-      content.innerHTML =
-        '<p class="swal-guide" dir="rtl">ظرفیت روزانه پاسخ به درخواست های خرید شما پر شده است.</p><br/><p class="red-text swal-guide" dir="rtl"><b>برای افزایش ظرفیت، لطفا دکمه افزایش ظرفیت را بزنید.</b></p>';
-      swal({
-        title: "محدودیت پاسخ به درخواست ها",
-        content: content,
-        className: "custom-swal-with-cancel",
-        icon: "warning",
-        buttons: {
-          success: {
-            text: "افزایش ظرفیت",
-            value: "promote",
-            // className: "button-new-badge",
-          },
-          close: {
-            text: "بستن",
-            className: "bg-cancel",
-          },
-        },
-      }).then((value) => {
-        switch (value) {
-          case "promote":
-            self.$router.push({ name: "dashboardBuyAdPricing" });
-            break;
-        }
-      });
+      this.$router.push({ name: "dashboardBuyAdPricing" });
     },
     raiseProfileEditSuccessModal: function () {
       this.handleBackBtn();
@@ -1171,37 +1136,10 @@ export default {
       });
     },
     raiseGoldenBuyAdReplyLimitModal: function () {
-      let self = this;
-
       this.handleBackBtn();
-
-      let content = document.createElement("div");
-      content.innerHTML =
-        '<p><span class="swal-star-badge"><i class="fa fa-star"></i></span></p><br/><p class="swal-guide" dir="rtl">شما به درخواست هایی طلایی دسترسی ندارید.</p><br/><p class="red-text swal-guide" dir="rtl"><b>برای دسترسی به تمام درخواست های طلایی، عضویت خود را ارتقا دهید.</b></p>';
-      swal({
-        title: "درخواست های طلایی",
-        content: content,
-        className: "custom-swal-with-cancel",
-        icon: "warning",
-        buttons: {
-          success: {
-            text: "ارتقا عضویت",
-            value: "promote",
-          },
-          close: {
-            text: "بستن",
-            className: "bg-cancel",
-          },
-        },
-      }).then((value) => {
-        switch (value) {
-          case "promote":
-            $(".modal").modal("hide");
-            self.$router.push({ name: "dashboardPricingTableSeller" });
-            break;
-        }
-      });
+      $("#no-access-to-golden-buyers-modal").modal("show");
     },
+    
     isModalOpen: function () {
       return swal.getState().isOpen;
     },
@@ -1411,6 +1349,16 @@ export default {
       });
       eventBus.$on("messageCount", (event) => {
         this.messageCount += event;
+      });
+      eventBus.$on("noAccessToBuyerPhone423Error", (event) => {
+        this.msg = event;
+        this.errStatus = true;
+        $("#no-access-to-buyer-phone-modal").modal("show");
+      });
+      eventBus.$on("noAccessToBuyerPhoneOtherError", (event) => {
+        this.msg = event;
+        this.errStatus = false;
+        $("#no-access-to-buyer-phone-modal").modal("show");
       });
     },
     getUserData(itemName) {

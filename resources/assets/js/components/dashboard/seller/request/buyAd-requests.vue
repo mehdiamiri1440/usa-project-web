@@ -482,6 +482,9 @@ button.disable {
   z-index: 1;
 }
 /*----------------------------- orange banner ---------*/
+.promotional-orange-banner {
+  cursor: pointer;
+}
 .promotional-orange-banner .banner-wrapper::before {
   content: "";
   width: 300px;
@@ -519,7 +522,6 @@ button.disable {
 .promotional-orange-banner .banner-wrapper-description {
   font-size: 1.4rem;
   line-height: 20px;
-  
 }
 .promotional-orange-banner .orange-banner-button-wrapper {
   display: grid;
@@ -806,6 +808,7 @@ button.disable {
                 <div
                   class="col-xs-12 promotional-orange-banner"
                   v-if="index == 3"
+                  @click="$router.push({ name: 'dashboardPricingTableSeller' })"
                 >
                   <div class="row">
                     <div class="banner-wrapper">
@@ -1277,9 +1280,7 @@ export default {
               "click on open chatBox"
             );
           } else {
-            console.log("modal");
-            $("#full-messaging-ceiling-modal").modal("show");
-            //eventBus.$emit("modal", "buyAdReplyLimit");
+            eventBus.$emit("modal", "buyAdReplyLimit");
             self.registerComponentStatistics(
               "buyAdReply",
               "openChat",
@@ -1300,7 +1301,7 @@ export default {
         300
       );
     },
-    activePhoneCall: function (buyAdUserId, buyAdId) {
+    activePhoneCall(buyAdUserId, buyAdId) {
       let id = "#loader-phone-" + buyAdId;
 
       $(id).prop("disabled", true);
@@ -1332,19 +1333,15 @@ export default {
           $(id).prop("disabled", false);
           $(id).removeClass("disable");
           if (error.response.status == 423) {
-            $("#no-access-to-buyer-phone-modal").modal("show");
+            eventBus.$emit(
+              "noAccessToBuyerPhone423Error",
+              error.response.data.msg
+            );
           } else {
-            swal({
-              text: error.response.data.msg,
-              icon: "warning",
-              className: "custom-swal-with-cancel",
-              buttons: {
-                close: {
-                  text: "بستن",
-                  className: "bg-cancel",
-                },
-              },
-            });
+            eventBus.$emit(
+              "noAccessToBuyerPhoneOtherError",
+              error.response.data.msg
+            );
           }
         });
     },

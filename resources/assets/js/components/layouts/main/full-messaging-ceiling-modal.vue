@@ -178,7 +178,7 @@
               <div class="text-center">
                 <button
                   class="orange-button text-rtl"
-                  @click.prevent="$parent.routenNoAccessToBuyerPhoneModal()"
+                  @click.prevent="$parent.routeRaiseBuyAdReplyLimit()"
                 >
                   <div>
                     <i class="fas fa-plus"></i>

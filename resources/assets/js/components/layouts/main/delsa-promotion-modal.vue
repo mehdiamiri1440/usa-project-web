@@ -32,7 +32,7 @@
 
   right: 0;
 
-  padding: 8px 15px 2px;
+  padding: 13px 15px 2px;
 
   top: 0;
   z-index: 1;
@@ -63,17 +63,9 @@
   z-index: 1;
   max-width: 430px;
   margin: 0 auto;
-  text-align: right;
+  text-align: center;
   padding: 0 20px;
 }
-
-.modal-contents h3 {
-  font-size: 22px;
-  direction: rtl;
-  color: #374761;
-  margin-top: 8px;
-}
-
 .modal-contents h3 span {
   font-size: 15px;
   font-weight: 400;
@@ -91,20 +83,41 @@
   background: linear-gradient(90deg, #00c569 0%, #21ad93 100%);
 }
 
-.green-button {
-  font-size: 19px;
-  border-radius: 8px;
-  padding: 15px;
-  min-width: 245px;
+.orange-button {
+  font-size: 1.9rem;
+  padding: 15px 50px;
+  max-width: 345px;
   margin: 35px auto 50px;
+  background: #ff9828;
+  border-radius: 4px;
+  border: 0;
+  color: #ffffff;
 }
 @media screen and (max-width: 768px) {
   .promotion-image-wrapper {
-    padding-top: 38px;
+    padding-top: 0;
   }
-
   .promotion-image-wrapper img {
-    max-width: 280px;
+    max-width: 150px;
+  }
+  .modal-contents p {
+    font-size: 1.3rem;
+  }
+  .modal-contents p.text-hello {
+    margin-top: 0;
+  }
+  .orange-button {
+    font-size: 1.6rem;
+    padding: 5px 35px;
+    margin: 28px auto 27px;
+  }
+}
+@media screen and (max-width: 380px) {
+  .modal-title {
+    font-size: 2rem;
+  }
+  .orange-button {
+    margin: 15px auto 13px;
   }
 }
 </style>
@@ -126,10 +139,10 @@
           </div>
           <div class="modal-body col-xs-12">
             <div class="promotion-image-wrapper">
-              <img src="../../../../img/delsa-promotion-icon.png" alt />
+              <img src="../../../../img/intro-delsa.gif" alt />
             </div>
-            <div class="modal-contents text-right">
-              <p class="text-rtl">سلام</p>
+            <div class="modal-contents">
+              <p class="text-rtl text-hello">سلام</p>
               <h3 class="modal-title">
                 من دلسا هستم
                 <span> (ربات خودکار باسکول) </span>
@@ -141,7 +154,7 @@
               </p>
               <div class="text-center">
                 <router-link
-                  class="green-button bg-gradient"
+                  class="orange-button"
                   tag="button"
                   data-dismiss="modal"
                   :to="{ name: 'dashboardPricingTableSeller' }"

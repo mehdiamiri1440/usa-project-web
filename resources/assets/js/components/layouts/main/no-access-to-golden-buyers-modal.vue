@@ -188,7 +188,7 @@
               <div class="text-center">
                 <button
                   class="orange-button text-rtl"
-                  @click.prevent="$parent.routenNoAccessToBuyerModal()"
+                  @click.prevent="$parent.routeRaiseUpgradeMemberShip()"
                 >
                   ارتقا عضویت
                 </button>

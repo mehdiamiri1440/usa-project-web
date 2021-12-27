@@ -105,7 +105,7 @@
   color: #ffffff;
   border: 0;
   position: relative;
-  background-color: #FF9828;
+  background-color: #ff9828;
 }
 .orange-button i {
   position: absolute;
@@ -114,7 +114,6 @@
 }
 
 @media (max-width: 971px) {
-  
   .modal-dialog {
     width: 85%;
   }
@@ -135,9 +134,9 @@
     font-size: 1.2rem;
     padding: 0 65px;
   }
-  .orange-button{
+  .orange-button {
     margin: 33px auto 23px;
-}
+  }
 }
 </style>
 
@@ -161,15 +160,15 @@
               <img src="../../../../img/no_access_to_buyyers_phone.svg" alt />
             </div>
             <div class="modal-contents">
-              <h3>به شماره تماس خریداران دسترسی ندارید!</h3>
-              <p class="text-rtl">
-                برای مشاهده شماره تماس های خریداران، لطفا نوع عضویت خود را ارتقا
-                دهید
+              <h3 v-if="errorStatus">به شماره تماس خریداران دسترسی ندارید!</h3>
+              <p class="text-rtl" v-text="message">
+                
               </p>
               <div class="text-center">
                 <button
+                  v-if="errorStatus"
                   class="orange-button text-rtl"
-                  @click.prevent="$parent.routenNoAccessToBuyerPhoneModal()"
+                  @click.prevent="$parent.routeRaiseUpgradeMemberShip()"
                 >
                   ارتقا عضویت
                 </button>
@@ -183,3 +182,14 @@
     </div>
   </div>
 </template>
+<script>
+export default {
+  props: {
+    message: String,
+    errorStatus: Boolean,
+  },
+  data() {
+    return {};
+  },
+};
+</script>

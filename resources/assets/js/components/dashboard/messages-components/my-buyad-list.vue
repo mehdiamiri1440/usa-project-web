@@ -1195,40 +1195,15 @@ export default {
           $(id).prop("disabled", false);
           $(id).removeClass("disable");
           if (error.response.status == 423) {
-            swal({
-              title: "ارتقا عضویت",
-              text: error.response.data.msg,
-              icon: "warning",
-              className: "custom-swal-with-cancel",
-              buttons: {
-                success: {
-                  text: "ارتقا عضویت",
-                  value: "promote",
-                },
-                close: {
-                  text: "بستن",
-                  className: "bg-cancel",
-                },
-              },
-            }).then((value) => {
-              switch (value) {
-                case "promote":
-                  this.$router.push({ name: "dashboardPricingTableSeller" });
-                  break;
-              }
-            });
+            eventBus.$emit(
+              "noAccessToBuyerPhone423Error",
+              error.response.data.msg
+            );
           } else {
-            swal({
-              text: error.response.data.msg,
-              icon: "warning",
-              className: "custom-swal-with-cancel",
-              buttons: {
-                close: {
-                  text: "بستن",
-                  className: "bg-cancel",
-                },
-              },
-            });
+            eventBus.$emit(
+              "noAccessToBuyerPhoneOtherError",
+              error.response.data.msg
+            );
           }
         });
     },

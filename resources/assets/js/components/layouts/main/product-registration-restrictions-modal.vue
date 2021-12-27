@@ -170,7 +170,7 @@
                 <button
                   class="orange-button text-rtl"
                   @click.prevent="
-                    $parent.routeProductRegistrationRestrictionsModal()
+                    $parent.routeRegisterProductLimit()
                   "
                 >
                   <div>
