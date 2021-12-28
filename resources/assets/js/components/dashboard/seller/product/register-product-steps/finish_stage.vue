@@ -345,8 +345,13 @@ li .buyad-button.send-message-button:hover {
   background: none;
 }
 
+.phone-number-content {
+  padding: 15px 0 0;
+  margin: 35px 0;
+}
 .phone-number-wrapper {
-  padding: 15px 0;
+  margin: 0;
+  padding: 0;
 }
 
 @media screen and (max-width: 991px) {
@@ -591,6 +596,7 @@ li .buyad-button.send-message-button:hover {
             :id="buyAd.id + '-phone-number-wrapper'"
             class="phone-number-wrapper collapse"
           >
+           <div class="phone-number-content">
             <a class="phone-number">
               <p>
                 <i class="fa fa-phone-square-alt"></i>
@@ -608,6 +614,7 @@ li .buyad-button.send-message-button:hover {
                 توصیه باسکول همواره به انجام معاملات حضوری است.
               </p>
             </div>
+          </div>
           </div>
         </div>
       </div>
@@ -756,8 +763,12 @@ export default {
     activePhoneCall: function (buyAdUserId, buyAdId) {
       let id = "#loader-phone-" + buyAdId;
 
-      $(id).prop("disabled", true);
-      $(id).addClass("disable");
+     if ($(id).hasClass("disable")) {
+        $(id).removeClass("disable");
+      } else {
+        $(id).addClass("disable");
+      }
+
 
       this.hideReplyBtn(id);
 
@@ -776,7 +787,7 @@ export default {
               "href",
               "tel:" + response.data.phone
             );
-            $("#" + buyAdId + "-phone-number-wrapper").collapse("show");
+            $("#" + buyAdId + "-phone-number-wrapper").collapse("toggle");
             this.setScrollToBuyAd(id);
             this.showReplyBtn(id);
           });
