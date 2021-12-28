@@ -139,6 +139,9 @@ button.disable {
   font-weight: bold;
   line-height: 1.9;
 }
+.title button.mobile-category-item {
+  display: none;
+}
 .fix-request-header-box {
   background: #eff3f6;
   position: fixed;
@@ -232,12 +235,14 @@ button.disable {
 }
 .remove-filter-button {
   background: #fff;
-  border-radius: 50px;
+  border-radius: 12px;
   border: 1px solid #e41c39;
-  color: #777;
+  color: #e41c39;
   margin: 0;
-  padding: 2px 15px;
+  padding: 3px 15px;
   margin-right: 10px;
+  font-size: 1.5rem;
+  font-weight: 400;
 }
 .remove-filter-icon {
   position: relative;
@@ -313,8 +318,13 @@ button.disable {
   font-size: 18px;
 }
 
-.phone-number-wrapper {
+.phone-number-content {
   padding: 15px 0 0;
+  margin: 35px 0;
+}
+.phone-number-wrapper {
+  margin: 0;
+  padding: 0;
 }
 
 .guide-button {
@@ -447,12 +457,35 @@ button.disable {
   .default-list-title {
     padding: 4px 15px;
   }
-  
-.title h1 span.title-text{
-  display: none;
-}
+
+  .title h1 span.title-text {
+    display: none;
+  }
 }
 @media screen and (max-width: 767px) {
+  .title {
+    background-color: #ffffff;
+    border-bottom: 1px solid #ebebeb;
+    margin-bottom: 20px;
+  }
+  .title button.mobile-category-item {
+    flex-shrink: 0;
+    border: 1px solid #ededed;
+    background: #fafafa;
+    border-radius: 12px;
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: #707070;
+    padding: 3px 15px;
+    display: inline-flex;
+    height: 32px;
+    margin-left: 10px;
+  }
+  .title button.mobile-category-item i {
+    position: relative;
+    top: 4px;
+    margin-left: 5px;
+  }
   .banner-wrapper .main-wrapper {
     padding: 20px 10px;
   }
@@ -504,10 +537,6 @@ button.disable {
     position: relative;
     z-index: 0;
   }
-  .title h1 {
-    text-align: center;
-  }
-
   .detail-success {
     max-width: 300px;
     margin: 13px auto 0;
@@ -552,25 +581,6 @@ button.disable {
 <template>
   <div>
     <CategoriesModal :categoryList="categoryList" />
-    <div
-      class="
-        fix-request-bottom
-        hidden-sm hidden-md hidden-lg
-        shadow-content
-        text-center
-      "
-    >
-      <div class="col-xs-12 text-right">
-        <button
-          type="button"
-          @click.prevent="openCategoryModal()"
-          class="green-button bg-gray w-100 margin-0 hover-effect"
-        >
-          دسته بندی ها
-          <i class="fas fa-filter"></i>
-        </button>
-      </div>
-    </div>
     <div class="requests" v-show="isRequests">
       <section class="main-content col-xs-12 padding-0-15'">
         <div class="title">
@@ -579,6 +589,13 @@ button.disable {
               <h1>
                 <span class="title-text">درخواست های خرید</span>
                 <button
+                  class="mobile-category-item"
+                  @click.prevent="openCategoryModal()"
+                >
+                  <i class="fa fa-list"></i>
+                  دسته ها
+                </button>
+                <button
                   v-if="filterCategory"
                   class="green-button remove-filter-button"
                   @click.prevent="filterCategory = ''"
@@ -586,9 +603,7 @@ button.disable {
                   <span class="red-text remove-filter-icon">
                     <i class="fa fa-times"></i>
                   </span>
-                  <span
-                    v-text="'دسته بندی : ' + filterCategory.category_name"
-                  ></span>
+                  <span v-text="filterCategory.category_name"></span>
                 </button>
               </h1>
             </div>
@@ -840,22 +855,24 @@ button.disable {
                       :id="buyAd.id + '-phone-number-wrapper'"
                       class="phone-number-wrapper collapse"
                     >
-                      <a class="phone-number">
-                        <p>
-                          <i class="fa fa-phone-square-alt"></i>
-                          <span class="phone"></span>
-                        </p>
-                        <p>شماره تماس</p>
-                      </a>
-                      <div class="warning-wrapper">
-                        <p class="warning-title">
-                          <i class="fa fa-exclamation-circle"></i>
+                      <div class="phone-number-content">
+                        <a class="phone-number">
+                          <p>
+                            <i class="fa fa-phone-square-alt"></i>
+                            <span class="phone"></span>
+                          </p>
+                          <p>شماره تماس</p>
+                        </a>
+                        <div class="warning-wrapper">
+                          <p class="warning-title">
+                            <i class="fa fa-exclamation-circle"></i>
 
-                          توصیه باسکول
-                        </p>
-                        <p class="warning-text">
-                          توصیه باسکول همواره به انجام معاملات حضوری است.
-                        </p>
+                            توصیه باسکول
+                          </p>
+                          <p class="warning-text">
+                            توصیه باسکول همواره به انجام معاملات حضوری است.
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -1120,8 +1137,12 @@ export default {
     activePhoneCall: function (buyAdUserId, buyAdId) {
       let id = "#loader-phone-" + buyAdId;
 
-      $(id).prop("disabled", true);
-      $(id).addClass("disable");
+      if ($(id).hasClass("disable")) {
+        $(id).removeClass("disable");
+      } else {
+        $(id).addClass("disable");
+      }
+
       this.hideReplyBtn(id);
       axios
         .post("/get_buyer_phone_number", {
@@ -1139,14 +1160,14 @@ export default {
               "href",
               "tel:" + response.data.phone
             );
-            $("#" + buyAdId + "-phone-number-wrapper").collapse("show");
+            $("#" + buyAdId + "-phone-number-wrapper").collapse("toggle");
             this.setScrollToBuyAd(id);
             this.showReplyBtn(id);
           });
         })
         .catch((error) => {
           this.showReplyBtn(id);
-          $(id).prop("disabled", false);
+
           $(id).removeClass("disable");
           if (error.response.status == 423) {
             swal({

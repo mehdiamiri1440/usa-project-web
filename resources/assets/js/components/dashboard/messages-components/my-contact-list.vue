@@ -4,6 +4,7 @@
   left: 0;
   right: 0;
   z-index: 2;
+  background-color: #ffffff;
 }
 
 .contact-items {

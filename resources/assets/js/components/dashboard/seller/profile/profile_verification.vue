@@ -262,15 +262,14 @@
 .actions-wrapper > div {
   padding: 0px;
 }
-
+@media screen and (max-width: 991px) {
+.title-wrapper {
+    display: none;
+  }
+}
 @media screen and (max-width: 767px) {
   .wrapper-section.success {
     margin-top: -33px;
-  }
-
-  .title-wrapper {
-    padding-left: 5px;
-    padding-right: 5px;
   }
 
   .main-section-wrapper {
