@@ -497,7 +497,7 @@ a.profile-info-wrapper:focus {
     border-radius: 4px;
   }
   .sub-header {
-    background: unset;
+    background-color: #ffffff;
   }
 }
 

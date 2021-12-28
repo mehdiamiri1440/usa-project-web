@@ -1,6 +1,5 @@
 <style scoped>
 .contact-body .contact-search {
-  background: #f0f0f0;
   position: absolute;
   left: 0;
   right: 0;
@@ -82,10 +81,9 @@ li.contact-item:nth-last-of-type(2n + 1) {
 }
 
 .contact-body .contact-search .contact-search-input-wrapper input {
-  padding: 8px 40px 8px 15px;
-  border-radius: 50px;
-  background: #fff;
-  border: none;
+  padding: 6px 35px 5px 15px;
+  border-radius: 8px;
+  border: 1px solid #cfcfcf;
 }
 
 .contact-body .contact-search .contact-search-input-wrapper > button {
@@ -93,7 +91,7 @@ li.contact-item:nth-last-of-type(2n + 1) {
   left: 7px;
   font-size: 16px;
   color: #919191;
-  top: 12px;
+  top: 13px;
   background: none;
   border: none;
   padding: 7px 15px 1px;
@@ -518,7 +516,20 @@ li.static-item > button i {
     padding: 89px 0 0;
   }
 }
+@media screen and (max-width: 768px) {
+  .contact-body .contact-search .contact-search-input-wrapper {
+    background-color: #ffffff;
+  }
+  .contact-body .contact-search .contact-search-input-wrapper input {
+    border-radius: 4px;
+    background-color: #f2f2f2;
+    border: 0;
+  }
+  .contact-body .contact-search .contact-search-input-wrapper > button {
+  top: 12px;
+}
 
+}
 @media screen and (max-width: 767px) {
   .send-message-form .button-wrapper button {
     padding: 12px 13px;

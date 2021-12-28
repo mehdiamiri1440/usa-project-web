@@ -1511,7 +1511,7 @@ a.profile-info-wrapper:hover {
         </div>
       </div>
       <div
-        v-if="$route.name != 'login' && $route.name != 'register'"
+        v-if="$route.name != 'login' && $route.name != 'register' && $route.name != 'profile'"
         class="search-input hidden-sm hidden-md hidden-lg"
       >
         <input

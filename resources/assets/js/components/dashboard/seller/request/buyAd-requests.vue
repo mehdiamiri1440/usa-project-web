@@ -447,10 +447,10 @@ button.disable {
   .default-list-title {
     padding: 4px 15px;
   }
-
-  .title h1 {
-    display: none;
-  }
+  
+.title h1 span.title-text{
+  display: none;
+}
 }
 @media screen and (max-width: 767px) {
   .banner-wrapper .main-wrapper {
@@ -577,7 +577,7 @@ button.disable {
           <div class="row">
             <div class="col-xs-12 text-rtl text-right col-sm-8 pull-right">
               <h1>
-                <span>درخواست های خرید</span>
+                <span class="title-text">درخواست های خرید</span>
                 <button
                   v-if="filterCategory"
                   class="green-button remove-filter-button"
@@ -592,7 +592,15 @@ button.disable {
                 </button>
               </h1>
             </div>
-            <div class="col-xs-12 col-sm-4 request-update pull-left text-left">
+            <div
+              class="
+                col-xs-12 col-sm-4
+                hidden-xs
+                request-update
+                pull-left
+                text-left
+              "
+            >
               <button
                 type="button"
                 @click.prevent="openCategoryModal()"
