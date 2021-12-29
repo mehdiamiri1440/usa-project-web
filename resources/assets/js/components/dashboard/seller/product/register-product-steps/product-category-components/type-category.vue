@@ -189,6 +189,8 @@ label {
                 error: $parent.errors.productName,
               }"
               placeholder="نوع محصول را وارد کنید"
+              @blur="$parent.showNavigationMenu"
+              @focus="$parent.hideNavigationMenu"
             />
 
             <i

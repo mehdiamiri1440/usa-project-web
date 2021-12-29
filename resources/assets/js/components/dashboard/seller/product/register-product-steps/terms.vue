@@ -168,6 +168,8 @@ textarea.error:focus + i {
           }"
           v-model="$parent.product.description"
           placeholder="در مورد کیفیت و نوع بسته بندی محصول خود اینجا توضیح دهید"
+          @blur="$parent.showNavigationMenu"
+          @focus="$parent.hideNavigationMenu"
         ></textarea>
 
         <i

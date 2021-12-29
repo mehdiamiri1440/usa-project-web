@@ -14,25 +14,6 @@
   border-radius: 4px;
 }
 
-.wrapper_no_pro {
-  text-align: center;
-  padding: 15px 0;
-  margin: 15px auto;
-}
-
-.content_no_pic {
-  font-size: 70px;
-  margin: 20px auto;
-  color: #bdbdbd;
-}
-
-.text_no_pic {
-  margin: 15px auto;
-  color: #bdbdbd;
-  font-size: 23px;
-  font-weight: bold;
-}
-
 .my-products-info-text {
   line-height: 1.618;
   padding: 15px;
@@ -162,19 +143,28 @@
         <div class="col-xs-12" v-if="products.length === 0 && !loading">
           <div class="wrapper_no_pro">
             <div class="content_no_pic">
-              <i class="fa fa-list-alt"></i>
+              <img src="../../../../../img/my_product_not_found.svg" alt="" />
             </div>
 
             <div class="text_no_pic standard-line text-rtl">
-              <p>شما محصولی را ثبت نکرده اید یا در انتظار تایید است.</p>
-            </div>
+              <p>
+                شما محصولی را ثبت نکرده اید یا در
 
-            <!-- <router-link
-              class="green-button"
+                <router-link to="">انتظار تایید</router-link>
+                است!
+              </p>
+              <p class="text-description_no_pic">
+                برای ثبت محصول جدید در باسکول، از طریق دکمه ثبت محصول اقدام
+                کنید.
+              </p>
+            </div>
+            <router-link
               :to="{ name: 'registerProductSeller' }"
+              tag="button"
+              class="btn-orange-empty-state text-rtl"
             >
-              ثبت محصول
-            </router-link> -->
+              <i class="fas fa-plus"></i> ثبت محصول
+            </router-link>
           </div>
         </div>
 

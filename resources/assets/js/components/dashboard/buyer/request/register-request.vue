@@ -163,7 +163,17 @@
 .success-box-wrapper.mini-wrapper {
   margin-bottom: 20px;
 }
-
+@media (max-width: 991px) {
+  .main-content .section-title {
+    display: none;
+  }
+  .main-content > div.wrapper-section {
+    border: 0;
+  }
+  .seller-toggle-button {
+    display: none;
+  }
+}
 @media screen and (max-width: 767px) {
   .success-box-wrapper {
     transition: 300ms;
@@ -208,8 +218,6 @@
   }
 
   .main-content > div.wrapper-section {
-    border: none;
-    border-top: 1px solid #dadce0;
     border-radius: 0;
   }
 

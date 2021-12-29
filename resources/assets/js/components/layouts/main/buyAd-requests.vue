@@ -60,7 +60,7 @@
 }
 
 .text_no_pic {
-  margin: 30px auto;
+  margin: 10px auto;
   color: #bdbdbd;
 }
 
@@ -735,7 +735,7 @@ button.disable {
           <div class="title hidden-xs hidden-sm">
             <div class="row">
               <div class="col-xs-12 text-rtl text-right col-sm-8 pull-right">
-                <h1>
+                <h1 >
                   درخواست های خرید
                   <button
                     v-if="$parent.filterCategory"

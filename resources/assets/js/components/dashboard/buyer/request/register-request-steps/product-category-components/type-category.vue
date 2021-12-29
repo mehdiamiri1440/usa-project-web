@@ -211,6 +211,8 @@ input.error:focus + i {
                 error: $parent.errors.productName,
               }"
               placeholder="نوع محصول مورد نیاز خود را وارد کنید"
+              @blur="$parent.showNavigationMenu"
+              @focus="$parent.hideNavigationMenu"
             />
 
             <i
@@ -258,6 +260,8 @@ input.error:focus + i {
               }"
               placeholder="میزان نیازمندی را وارد کنید"
               pattern="[0-9]*"
+               @blur="$parent.showNavigationMenu"
+              @focus="$parent.hideNavigationMenu"
             />
 
             <i

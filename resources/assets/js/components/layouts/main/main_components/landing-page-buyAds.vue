@@ -56,7 +56,7 @@
 }
 
 .text_no_pic {
-  margin: 30px auto;
+  margin: 10px auto;
   color: #bdbdbd;
 }
 

@@ -34,7 +34,7 @@
 }
 
 .text_no_pic {
-  margin: 30px auto;
+  margin: 10px auto;
   color: #bdbdbd;
 }
 
@@ -125,7 +125,14 @@
 .default-grid .default-article-contents {
   padding: 15px;
 }
-
+.no-product-buttons {
+  display: grid;
+  grid-template-rows: auto auto;
+  justify-content: center;
+}
+.no-product-buttons button{
+  max-width: 250px;
+}
 @media screen and (max-width: 767px) {
   .product-wrapper {
     margin: 15px auto 100px;
@@ -213,7 +220,7 @@
             class="load-more-button col-xs-12"
             v-if="$parent.searchText === '' && continueToLoadProducts === true"
           >
-            <button class="btn btn-loader" @click.prevent="feed()">
+            <button class="btn-loader" @click.prevent="feed()">
               <div class="btn-content">
                 <span class="hidden-xs text-rtl" v-show="!loadMoreActive">
                   مشاهده محصولات بیشتر
@@ -240,30 +247,51 @@
           class="col-xs-12"
           v-else-if="products.length == 0 && $parent.searchText && !loading"
         >
+          <!-- <div class="wrapper_no_pro">
+           <div class="content_no_pic">
+           <img src="../../../../img/my_empty_product.svg" alt="" />
+           </div>
+
+           <div class="text_no_pic standard-line text-rtl">
+             <p>خریدار مرتبطی ندارید!</p>
+               <p class="text-description_no_pic">
+                رای مشاهده خریداران مرتبط، ابتدا محصول خود را ثبت کنید.
+             </p>
+            </div>
+            <router-link
+             :to="{ name: 'registerProductSeller' }"
+             tag="button"
+              class="btn-orange-empty-state text-rtl"
+              >
+             <i class="fas fa-plus"></i> ثبت محصول
+            </router-link>
+          </div>
+         </div> -->
+
           <div class="wrapper_no_pro">
             <div class="content_no_pic">
-              <i class="fa fa-list-alt"></i>
+              <img src="../../../../../img/not_found_search.svg" alt="" />
             </div>
 
-            <div class="text_no_pic standard-line">
-              <h4 class="text-center" dir="rtl">جستجو نتیجه ای نداشت.</h4>
+            <div class="text_no_pic standard-line text-rtl">
+              <p>فروشنده ای یافت نشد!</p>
 
-              <p class="text-center" dir="rtl">
+              <p class="text-description_no_pic" dir="rtl">
                 شما می توانید درخواست خرید خود را در اینجا ثبت کنید.
               </p>
+            </div>
+            <div class="text-center no-product-buttons">
+              <router-link
+                :to="{ name: 'registerRequestBuyer' }"
+                class="btn-orange-empty-state text-rtl"
+                tag="button"
+              >
+                <i class="fas fa-plus"></i> ثبت درخواست خرید</router-link
+              >
 
-              <div class="text-center no-product-buttons">
-                <router-link
-                  :to="{ name: 'registerRequestBuyer' }"
-                  class="green-button"
-                  tag="button"
-                  >ثبت درخواست خرید</router-link
-                >
-
-                <button class="green-button" @click.prevent="resetFilter()">
-                  نمایش همه محصولات
-                </button>
-              </div>
+              <button class="green-button" @click.prevent="resetFilter()">
+                نمایش همه محصولات
+              </button>
             </div>
           </div>
         </div>

@@ -271,7 +271,7 @@
           <div class="count-input-wrapper">
             <div class="input-group-prepend">
               <button
-                class="btn btn-outline-secondary btn-minus"
+                class="btn-outline-secondary btn-minus"
                 @click="calculatePrice(false)"
               >
                 <i class="fa fa-minus"></i>
@@ -280,7 +280,7 @@
             <input type="tel" v-model="price" />
             <div class="input-group-append">
               <button
-                class="btn btn-outline-secondary btn-plus"
+                class="btn-outline-secondary btn-plus"
                 @click="calculatePrice(true)"
               >
                 <i class="fa fa-plus"></i>

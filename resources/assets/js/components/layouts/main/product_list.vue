@@ -368,7 +368,7 @@ li.active a::after {
 
 .rate-filter-mobile-wrapper > button i {
   position: relative;
-  top: 2px;
+  top: 4px;
   margin-left: 5px;
 }
 .rate-filter-mobile-wrapper > button i.fa-times {
