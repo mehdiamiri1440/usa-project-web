@@ -20,22 +20,16 @@
 }
 
 .modal-content {
-  overflow: hidden;
   border-radius: 12px;
+  display: grid;
 }
 .close-modal {
   font-size: 20px;
-
-  color: #777;
-
+  color: #ff6600;
   position: absolute;
-
   right: 0;
-
-  padding: 8px 15px 2px;
-
+  padding: 16px 22px;
   top: 0;
-
   z-index: 2;
 }
 
@@ -49,43 +43,48 @@
 }
 
 .promotion-image-wrapper {
-  background: #e7f9ff;
-  padding-top: 25px;
+  background: #ffc985;
   text-align: center;
-}
-
-.promotion-image-wrapper::after {
-  content: " ";
-  position: absolute;
-  width: 1062px;
-  height: 433px;
-  background: #fff;
-  left: calc(50% - 531px);
-  border-radius: 100%;
-  top: 130px;
-  z-index: 0;
+  display: grid;
+  justify-items: center;
+  height: 266px;
+  position: relative;
+  -webkit-border-top-left-radius: 12px;
+  -webkit-border-top-right-radius: 12px;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
 }
 
 .promotion-image-wrapper.buyAd-title::after {
   top: 95px;
 }
 
-.promotion-image-wrapper img {
-  max-width: 325px;
-  position: relative;
-  z-index: 1;
+.promotion-image-wrapper img.upgrade-rocket {
+  width: 100px;
+  position: absolute;
+  margin-top: -60px;
+  z-index: 1051;
 }
-
+.promotion-image-wrapper img.smoke-rocket {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
 .modal-contents {
   position: relative;
   z-index: 1;
+  margin-top: -28px;
+  background-color: #f0f3f5;
+  -webkit-border-bottom-right-radius: 12px;
+  -webkit-border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  border-bottom-left-radius: 12px;
 }
 
 .modal-contents h3 {
   text-align: center;
-  font-size: 25px;
+  font-size: 2rem;
   color: #374761;
-  padding: 20px 0 50px;
   font-weight: 500;
 }
 
@@ -96,21 +95,30 @@
   color: #38485f;
   padding: 0 15px;
   max-width: 430px;
-  margin: 27px auto 0;
+  
 }
-
+.promotion-title {
+  font-weight: 500;
+  margin: 26px auto 0;
+}
+.promotion-description {
+  font-weight: 400;
+  margin-top: 10px;
+  margin: 19px auto 0;
+}
 .bg-gradient {
-  background: linear-gradient(90deg, #00c569 0%, #21ad93 100%);
+  background: linear-gradient(90deg, #ff9828 0%, #ff6600 100%);
 }
-
-.green-button {
-  font-size: 19px;
-  border-radius: 8px;
-  padding: 15px;
-  min-width: 245px;
-  margin: 35px auto 50px;
+.orange-button {
+  font-size: 1.4rem;
+  padding: 8px 0;
+  text-align: center;
+  width: 214px;
+  margin: 40px auto 30px;
+  border-radius: 4px;
+  color: #ffffff;
+  border: 0;
 }
-
 .user-information-content {
   display: block;
   float: right;
@@ -308,6 +316,71 @@
 .modal-dialog.has-golden-buyAd {
   max-width: 478px;
 }
+@media (min-width: 768px) {
+  .promotion-image-wrapper {
+    height: 270px;
+  }
+ 
+}
+@media (max-width: 767px) {
+  .modal-contents {
+    padding: 0px 70px;
+    margin-top: -30px;
+  }
+  .promotion-image-wrapper {
+    height: 190px;
+  }
+  .promotion-image-wrapper img.upgrade-rocket {
+    width: 60px;
+  }
+  .modal-contents h3 {
+    font-size: 1.4rem;
+    margin-bottom: 7px;
+  }
+
+  .modal-contents p {
+    font-size: 1rem;
+    color: #38485f;
+    margin-top: 3px;
+  }
+  .promotion-title {
+    font-weight: 500;
+  }
+  .orange-button {
+    margin: 15px auto 23px;
+    max-width: 140px;
+    padding: 5px 0;
+  }
+}
+@media (max-width: 414px) {
+  
+  .promotion-image-wrapper {
+    height: 175px;
+  }
+  .promotion-image-wrapper img.upgrade-rocket {
+    margin-top: -38px;
+  }
+}
+@media (max-width: 380px) {
+  .modal-contents {
+    padding: 0 40px;
+  }
+  .promotion-image-wrapper {
+    height: 160px;
+  }
+}
+@media (max-width: 350px) {
+  .modal-contents {
+    padding: 0 30px;
+  }
+  .promotion-image-wrapper {
+    height: 140px;
+  }
+  .promotion-image-wrapper img.upgrade-rocket {
+    width: 70px;
+    margin-top: -45px;
+  }
+}
 </style>
 
 <template>
@@ -412,17 +485,27 @@
           </div>
           <div v-else class="modal-body col-xs-12">
             <div class="promotion-image-wrapper">
-              <img src="../../../../img/promotion-icon.png" alt />
+              <img
+                class="upgrade-rocket"
+                src="../../../../img/upgrade_rocket.svg"
+                alt
+              />
+              <img
+                class="smoke-rocket"
+                src="../../../../img/smoke_rocket.svg"
+                alt
+              />
             </div>
             <div class="modal-contents">
-              <h3>فروش سریع تر و آسان تر</h3>
-              <p class="text-rtl">
-                با ارتقا عضویت حساب کاربری خود، خریداران بیشتری را جذب کنید و با
-                فروش بیشتر از بازار رقابت جا نمانید.
+              <h3>حساب کاربری خود را ارتقا دهید</h3>
+              <p class="text-rtl promotion-title">فروش سریع تر و آسان تر</p>
+              <p class="text-rtl promotion-description">
+                برای دسترسی به تمام امکانات ویژه باسکول، حساب کاربری خود را
+                ارتقا دهد
               </p>
               <div class="text-center">
                 <button
-                  class="green-button bg-gradient"
+                  class="orange-button bg-gradient"
                   @click.prevent="$parent.routePromotionModal()"
                 >
                   ارتقا عضویت

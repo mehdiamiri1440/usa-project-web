@@ -440,17 +440,10 @@ export default {
           this.getPhoneLoader = false;
           this.isActivePhone = false;
 
-          swal({
-            text: error.response.data.msg,
-            icon: "warning",
-            className: "custom-swal-with-cancel",
-            buttons: {
-              close: {
-                text: "بستن",
-                className: "bg-cancel",
-              },
-            },
-          });
+           eventBus.$emit(
+              "noAccessToBuyerPhoneOtherError",
+              error.response.data.msg
+            );
         });
     },
     loadImage: function () {
