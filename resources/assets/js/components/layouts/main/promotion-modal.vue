@@ -89,13 +89,12 @@
 }
 
 .modal-contents p {
-  font-size: 15px;
+  font-size: 1.5rem;
   text-align: center;
   line-height: 1.618;
   color: #38485f;
   padding: 0 15px;
   max-width: 430px;
-  
 }
 .promotion-title {
   font-weight: 500;
@@ -320,28 +319,28 @@
   .promotion-image-wrapper {
     height: 270px;
   }
- 
 }
 @media (max-width: 767px) {
+  .promotion-image-wrapper img.upgrade-rocket {
+    margin-top: -45px;
+  }
   .modal-contents {
-    padding: 0px 70px;
     margin-top: -30px;
   }
   .promotion-image-wrapper {
     height: 190px;
   }
   .promotion-image-wrapper img.upgrade-rocket {
-    width: 60px;
+    width: 70px;
   }
   .modal-contents h3 {
-    font-size: 1.4rem;
     margin-bottom: 7px;
   }
 
   .modal-contents p {
-    font-size: 1rem;
-    color: #38485f;
     margin-top: 3px;
+    padding: 0 35px;
+    font-size: 1.45rem;
   }
   .promotion-title {
     font-weight: 500;
@@ -350,10 +349,10 @@
     margin: 15px auto 23px;
     max-width: 140px;
     padding: 5px 0;
+    font-size: 1.6rem;
   }
 }
 @media (max-width: 414px) {
-  
   .promotion-image-wrapper {
     height: 175px;
   }
@@ -362,23 +361,21 @@
   }
 }
 @media (max-width: 380px) {
-  .modal-contents {
-    padding: 0 40px;
-  }
   .promotion-image-wrapper {
     height: 160px;
   }
 }
 @media (max-width: 350px) {
-  .modal-contents {
-    padding: 0 30px;
-  }
-  .promotion-image-wrapper {
-    height: 140px;
-  }
   .promotion-image-wrapper img.upgrade-rocket {
     width: 70px;
     margin-top: -45px;
+  }
+   .modal-contents h3 {
+    font-size: 1.73rem;
+  }
+  .modal-contents p {
+    padding: 0 25px;
+    font-size: 1.4rem;
   }
 }
 </style>

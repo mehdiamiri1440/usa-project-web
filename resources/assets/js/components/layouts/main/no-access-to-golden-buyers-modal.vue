@@ -106,7 +106,7 @@
   color: #ffffff;
   border: 0;
   position: relative;
-  background-color: #FF9828;
+  background-color: #ff9828;
 }
 .orange-button i {
   position: absolute;
@@ -115,7 +115,6 @@
 }
 
 @media (max-width: 971px) {
-  
   .modal-dialog {
     width: 85%;
   }
@@ -125,40 +124,36 @@
     width: 440px;
   }
   .orange-button {
-  font-size: 1.4rem;
-  padding: 5px 50px;
-  max-width: 245px;
-  margin: 33px auto 28px;
-}
+    
+    padding: 5px 50px;
+    max-width: 245px;
+    margin: 33px auto 28px;
+  }
 }
 @media (max-width: 600px) {
   .modal-contents {
     margin-top: -8px;
   }
   .no-access-to-golden-buyers-image-wrapper img {
-    max-width: 67px;
+    max-width: 95px;
   }
   .modal-contents h3 {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
   }
   .modal-contents p {
-    font-size: 1.2rem;
-    line-height: 17px;
     margin-top: 9px;
+    padding: 0 35px;
   }
   .orange-button {
     font-size: 1.4rem;
     padding: 5px 50px;
     max-width: 245px;
     margin: 33px auto 23px;
-}
+    font-weight: 500;
+  }
 }
 @media (max-width: 411px) {
-  
-  
-  
 }
-
 </style>
 
 <template>
@@ -183,7 +178,8 @@
             <div class="modal-contents">
               <h3>شما به خریداران طلایی دسترسی ندارید!</h3>
               <p class="text-rtl">
-                  برای دسترسی به درخواست های خرید طلایی، نوع عضویت خود را ارتقا دهید.
+                برای دسترسی به درخواست های خرید طلایی، نوع عضویت خود را ارتقا
+                دهید.
               </p>
               <div class="text-center">
                 <button

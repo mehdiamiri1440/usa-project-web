@@ -188,8 +188,7 @@ li.contact-item:nth-last-of-type(2n + 1) {
 .wrapper_no_pro {
   margin-top: 115px;
 }
-.search-not-found
-{
+.search-not-found {
   margin-top: 0;
 }
 .load-more {
@@ -527,9 +526,8 @@ li.static-item > button i {
     border: 0;
   }
   .contact-body .contact-search .contact-search-input-wrapper > button {
-  top: 12px;
-}
-
+    top: 12px;
+  }
 }
 @media screen and (max-width: 767px) {
   .send-message-form .button-wrapper button {
@@ -1183,8 +1181,11 @@ export default {
     activePhoneCall: function (buyAdUserId, buyAdId) {
       let id = "#loader-phone-" + buyAdId;
 
-      $(id).prop("disabled", true);
-      $(id).addClass("disable");
+      if ($(id).hasClass("disable")) {
+        $(id).removeClass("disable");
+      } else {
+        $(id).addClass("disable");
+      }
       this.hideReplyBtn(id);
       axios
         .post("/get_buyer_phone_number", {
@@ -1201,7 +1202,7 @@ export default {
               "href",
               "tel:" + response.data.phone
             );
-            $("#" + buyAdId + "-phone-number-wrapper").collapse("show");
+            $("#" + buyAdId + "-phone-number-wrapper").collapse("toggle");
             this.setScrollToBuyAd(buyAdId);
             this.showReplyBtn(id);
           });

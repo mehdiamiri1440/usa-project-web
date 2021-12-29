@@ -106,6 +106,7 @@
   border: 0;
   position: relative;
   background-color: #ff9828;
+  font-weight: 500;
 }
 .orange-button i {
   position: absolute;
@@ -125,17 +126,15 @@
 }
 @media (max-width: 600px) {
   .no-access-to-buyer-phone-image-wrapper img {
-    max-width: 67px;
+    max-width: 95px;
   }
-  .modal-contents h3 {
-    font-size: 1.4rem;
-  }
+  
   .modal-contents p {
-    font-size: 1.2rem;
-    padding: 0 65px;
+    padding: 0 35px;
   }
   .orange-button {
     margin: 33px auto 23px;
+
   }
 }
 </style>

@@ -109,6 +109,7 @@
   background-color: #ff9828;
   display: grid;
   justify-items: center;
+  font-weight: 500;
 }
 .orange-button div {
   padding-right: 20px;
@@ -133,11 +134,8 @@
   .product-registration-restrictions-image-wrapper img {
     max-width: 120px;
   }
-  .modal-contents h3 {
-    font-size: 1.4rem;
-  }
   .modal-contents p {
-    font-size: 1.2rem;
+   padding: 0 35px;
   }
 }
 </style>
