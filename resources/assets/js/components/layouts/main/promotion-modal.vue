@@ -32,7 +32,11 @@
   top: 0;
   z-index: 2;
 }
-
+.buy-ad-close-modal
+{
+  top: -30px;
+  color: #777777;
+}
 .modal-header {
   border: none;
   padding: 0;
@@ -70,6 +74,30 @@
   position: absolute;
   bottom: 0;
 }
+.buy-ad-modal-body {
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+.buy-ad-contents {
+  overflow: hidden;
+  border-radius: 12px;
+}
+.buy-ad-image-wrapper {
+  background: #e7f9ff;
+  padding-top: 25px;
+  text-align: center;
+}
+.buy-ad-image-wrapper::after {
+  content: " ";
+  position: absolute;
+  width: 1062px;
+  height: 433px;
+  background: #fff;
+  left: calc(50% - 531px);
+  border-radius: 100%;
+  top: 95px;
+  z-index: 0;
+}
 .modal-contents {
   position: relative;
   z-index: 1;
@@ -80,14 +108,19 @@
   border-bottom-right-radius: 12px;
   border-bottom-left-radius: 12px;
 }
-
 .modal-contents h3 {
   text-align: center;
   font-size: 2rem;
   color: #374761;
   font-weight: 500;
 }
-
+.buy-ad-image-wrapper h3 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #374761;
+  padding: 20px 8px 50px;
+  font-weight: 500;
+}
 .modal-contents p {
   font-size: 1.5rem;
   text-align: center;
@@ -349,7 +382,7 @@
     margin: 15px auto 23px;
     max-width: 140px;
     padding: 5px 0;
-    font-size: 1.6rem;
+    font-weight: 500;
   }
 }
 @media (max-width: 414px) {
@@ -370,7 +403,7 @@
     width: 70px;
     margin-top: -45px;
   }
-   .modal-contents h3 {
+  .modal-contents h3 {
     font-size: 1.73rem;
   }
   .modal-contents p {
@@ -395,7 +428,9 @@
       >
         <div class="modal-content">
           <div class="modal-header">
-            <a class="close-modal" data-dismiss="modal">
+            <a class="close-modal"
+            :class="{'buy-ad-close-modal' : $parent.buyAdsGolden.length > 0}"
+             data-dismiss="modal">
               <i class="fa fa-times"></i>
             </a>
           </div>
@@ -403,8 +438,8 @@
             v-if="$parent.buyAdsGolden.length > 0"
             class="modal-body col-xs-12"
           >
-            <div class="modal-contents">
-              <div class="promotion-image-wrapper buyAd-title">
+            <div class="modal-contents buy-ad-contents">
+              <div class="buy-ad-image-wrapper buyAd-title">
                 <h3 class="text-rtl">این خریدار را از دست ندهید...</h3>
               </div>
 

@@ -26,7 +26,7 @@
 .close-modal {
   font-size: 20px;
 
-  color: #777;
+  color: #15313c;
 
   position: absolute;
 
@@ -42,7 +42,9 @@
   border: none;
   padding: 0;
 }
-
+.modal-title {
+  color: #15313c;
+}
 .modal-body {
   padding: 0;
 }
@@ -50,10 +52,11 @@
 .promotion-image-wrapper {
   padding-top: 22px;
   text-align: center;
+  margin: 20px 0;
 }
 
 .promotion-image-wrapper img {
-  max-width: 390px;
+  max-width: 280px;
   position: relative;
   z-index: 1;
 }
@@ -73,19 +76,21 @@
 
 .modal-contents p {
   font-size: 15px;
-  text-align: right;
+  text-align: center;
   line-height: 1.618;
-  color: #777;
+  color: #15313c;
   margin: 13px auto 0;
 }
-
+.modal-contents .text-hello{
+  text-align: right;
+}
 .bg-gradient {
   background: linear-gradient(90deg, #00c569 0%, #21ad93 100%);
 }
 
 .orange-button {
-  font-size: 1.9rem;
-  padding: 15px 50px;
+  font-size: 1.8rem;
+  padding: 15px 66px;
   max-width: 345px;
   margin: 35px auto 50px;
   background: #ff9828;
@@ -107,7 +112,8 @@
     margin-top: 0;
   }
   .orange-button {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
+    font-weight: 500;
     padding: 5px 35px;
     margin: 28px auto 27px;
   }
@@ -139,15 +145,15 @@
           </div>
           <div class="modal-body col-xs-12">
             <div class="promotion-image-wrapper">
-              <img src="../../../../img/intro-delsa.gif" alt />
+              <img src="../../../../img/delsa-promotional.svg" alt />
             </div>
             <div class="modal-contents">
-              <p class="text-rtl text-hello">سلام</p>
+              <p class="text-hello">سلام</p>
               <h3 class="modal-title">
                 من دلسا هستم
                 <span> (ربات خودکار باسکول) </span>
               </h3>
-              <p class="text-rtl">
+              <p>
                 کار اصلی من بازاریابی برای محصولات شماست. اگر مایل هستید
                 بازاریابی بیشتری برای محصولات شما انجام بدهم کافی است نوع عضویت
                 خود را ارتقا دهید.

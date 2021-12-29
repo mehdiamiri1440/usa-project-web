@@ -429,7 +429,7 @@ button.disable {
 .banner-button {
   width: initial;
   font-size: 1.4rem;
-  padding: 8px 14px;
+  padding: 8px 36px;
   background: #f0f3f5;
   color: #ff6600;
   box-shadow: 0px 2px 8px rgba(255, 255, 255, 0.1);
@@ -494,14 +494,14 @@ button.disable {
 .promotional-orange-banner .banner-wrapper::before {
   content: "";
   width: 300px;
-  height: 100px;
+  height: 125px;
   background: url("../../../../img/promotional_card_launcher_bg.svg");
   background-repeat: no-repeat;
-  background-position: top, 2px 26px;
-  background-repeat: no-repeat;
+  background-position: right 17px;
+  background-size: 300px 110px;
   position: absolute;
   bottom: 0;
-  right: -17px;
+  right: -35px;
 }
 .promotional-orange-banner .banner-wrapper {
   background-color: #ffc985;
@@ -538,7 +538,7 @@ button.disable {
   font-size: 1.4rem;
   padding: 3px 0;
   line-height: 24px;
-  margin-top: 29px;
+  margin: 29px 0 10px;
   background: #128c7e;
   color: #ffffff;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
@@ -567,9 +567,12 @@ button.disable {
 
 @media screen and (max-width: 991px) {
   .promotional-orange-banner .banner-wrapper::before {
-    background-size: 200px 86px;
-    right: -105px;
-    height: 85px;
+    background: url("../../../../img/promotional_mobile_card_launcher_bg.svg");
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size: 165px 95px;
+    right: 0;
+    height: 95px;
   }
   .promotional-orange-banner .banner-wrapper .main-wrapper {
     padding: 10px 65px 10px 5px;
@@ -603,13 +606,13 @@ button.disable {
     margin-left: 10px;
   }
   .promotional-orange-banner .banner-wrapper-title {
-    font-size: 1.6rem;
+    font-size: 1.8rem;
     line-height: 24px;
     margin-bottom: 0;
   }
   .promotional-orange-banner .banner-wrapper-description {
-    font-size: 1.3rem;
-    line-height: 20px;
+    font-size: 1.6rem;
+    line-height: 29px;
   }
   .promotional-orange-banner .orange-banner-button-wrapper {
     justify-items: left;
