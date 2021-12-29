@@ -253,13 +253,15 @@ button.disable {
   overflow: hidden;
 }
 .remove-filter-button {
+  position: absolute;
   background: #fff;
-  border-radius: 50px;
+  border-radius: 12px;
   border: 1px solid #e41c39;
-  color: #777;
-  margin: 0;
-  padding: 2px 15px;
-  margin-right: 10px;
+  color: #e41c39;
+  margin: 3px 10px 0;
+  padding: 3px 15px;
+  font-size: 1.5rem;
+  font-weight: 400;
 }
 .remove-filter-icon {
   position: relative;
@@ -547,7 +549,9 @@ button.disable {
 .text-center {
   text-align: center !important;
 }
-
+.title button.mobile-category-item {
+  display: none;
+}
 .mobile-filter-button {
   position: fixed;
   background: #fff;
@@ -562,9 +566,6 @@ button.disable {
 }
 
 @media screen and (max-width: 991px) {
-  .active-category-filter {
-    padding-top: 50px;
-  }
   .promotional-orange-banner .banner-wrapper::before {
     background-size: 200px 86px;
     right: -105px;
@@ -583,8 +584,24 @@ button.disable {
   .requests .main-content {
     padding: 105px 0 150px !important;
   }
+  .title h1 span.title-text {
+    display: none;
+  }
 }
 @media screen and (max-width: 767px) {
+  .title button.mobile-category-item {
+    flex-shrink: 0;
+    border: 1px solid #ededed;
+    background: #fafafa;
+    border-radius: 12px;
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: #707070;
+    padding: 3px 15px;
+    display: inline-flex;
+    height: 32px;
+    margin-left: 10px;
+  }
   .promotional-orange-banner .banner-wrapper-title {
     font-size: 1.6rem;
     line-height: 24px;
@@ -666,7 +683,7 @@ button.disable {
 
   .main-content,
   .wrapper-items {
-    padding-top: 20px;
+    padding-top: 51px;
   }
 
   .title {
@@ -769,7 +786,7 @@ button.disable {
 
   .rate-filter-mobile-wrapper > button i {
     position: relative;
-    top: 2px;
+    top: 4px;
     margin-left: 5px;
   }
   .rate-filter-mobile-wrapper > button i.fa-times {
@@ -824,30 +841,28 @@ button.disable {
         hidden-lg hidden-md hidden-sm
         container-fluid
       "
-      v-if="$parent.filterCategory"
     >
       <div class="rate-filter-mobile-wrapper">
-        <!-- <button
+        <button
           class="mobile-category-item"
           @click.prevent="openCategoryModal()"
         >
           <i class="fa fa-list"></i>
           دسته ها
-        </button> -->
+        </button>
 
         <button
+          v-if="$parent.filterCategory"
           class="mobile-category-item filter-item"
           @click.prevent="$parent.filterCategory = ''"
         >
-          <span
-            v-text="'دسته بندی: ' + $parent.filterCategory.category_name"
-          ></span>
+          <span v-text="$parent.filterCategory.category_name"></span>
           <i class="fa fa-times"></i>
         </button>
       </div>
     </div>
 
-    <div
+    <!-- <div
       class="fix-request-bottom hidden-md hidden-lg shadow-content text-center"
     >
       <div class="col-xs-12 text-right">
@@ -860,7 +875,7 @@ button.disable {
           <i class="fas fa-filter"></i>
         </button>
       </div>
-    </div>
+    </div> -->
 
     <main id="main" class="container-fluid">
       <div class="requests" v-show="isRequests">
@@ -868,7 +883,7 @@ button.disable {
           <div class="title hidden-xs hidden-sm">
             <div class="row">
               <div class="col-xs-12 text-rtl text-right col-sm-8 pull-right">
-                <h1 >
+                <h1>
                   درخواست های خرید
                   <button
                     v-if="$parent.filterCategory"
@@ -906,11 +921,12 @@ button.disable {
               </div>
             </div>
           </div>
-          <div
+          <!-- <div
             class="mobile-filter-button text-rtl hiddne-md hidden-lg"
             v-if="$parent.filterCategory"
           >
-            <!-- :class="{ 'active-verification-alert': $parent.verificationAlert }" -->
+            <!- :class="{ 'active-verification-alert': $parent.verificationAlert }" ->
+
             <button
               class="green-button remove-filter-button"
               @click.prevent="$parent.filterCategory = ''"
@@ -922,7 +938,7 @@ button.disable {
                 v-text="'دسته بندی : ' + $parent.filterCategory.category_name"
               ></span>
             </button>
-          </div>
+          </div> -->
           <div
             v-if="buyAds.length != 0"
             :class="{ 'active-category-filter': $parent.filterCategory }"
@@ -1371,12 +1387,22 @@ button.disable {
           >
             <div class="wrapper_no_pro">
               <div class="content_no_pic">
-                <i class="fa fa-list-alt"></i>
+                <img src="../../../../img/not_found_search.svg" alt="" />
               </div>
 
-              <div class="text_no_pic">
-                <p>درخواست خرید مرتبط با شما وجود ندارد</p>
+              <div class="text_no_pic standard-line text-rtl">
+                <p>خریداری یافت نشد!</p>
+                <p class="text-description_no_pic">
+                  درصورتی که این محصول را برای فروش دارید، آن را ثبت کنید.
+                </p>
               </div>
+              <router-link
+                :to="{ name: 'registerProductSeller' }"
+                tag="button"
+                class="btn-orange-empty-state text-rtl"
+              >
+                <i class="fas fa-plus"></i> ثبت محصول
+              </router-link>
             </div>
           </div>
           <div class="col-xs-12 wrapper-items" v-else-if="load">

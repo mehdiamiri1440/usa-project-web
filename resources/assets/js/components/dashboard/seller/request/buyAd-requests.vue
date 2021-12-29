@@ -234,13 +234,13 @@ button.disable {
   overflow: hidden;
 }
 .remove-filter-button {
+  position: absolute;
   background: #fff;
   border-radius: 12px;
   border: 1px solid #e41c39;
   color: #e41c39;
-  margin: 0;
+  margin: 3px 10px 0;
   padding: 3px 15px;
-  margin-right: 10px;
   font-size: 1.5rem;
   font-weight: 400;
 }

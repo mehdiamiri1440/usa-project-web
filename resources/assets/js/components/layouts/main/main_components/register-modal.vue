@@ -135,7 +135,7 @@ export default {
   data: function () {
     return {
       isMobile: false,
-      currentStep: 3,
+      currentStep: 1,
       activity_type: 0,
       stock: "",
       productName: "",
