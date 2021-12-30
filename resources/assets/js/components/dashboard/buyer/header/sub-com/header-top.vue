@@ -404,8 +404,8 @@ a.profile-info-wrapper:focus {
   text-align: right;
   direction: rtl;
   border: 1px solid #777;
-  border-radius: 6px;
-  padding: 6px 50px 5px 15px;
+  border-radius: px;
+  padding: 6px 35px 5px 15px;
   background: #fff;
   font-size: 14px;
   float: right;
@@ -417,10 +417,9 @@ a.profile-info-wrapper:focus {
   position: absolute;
   right: 5px;
   top: 7px;
-  border-left: 1px solid;
   color: #777;
   padding: 0 7px;
-  font-size: 22px;
+  font-size: 1.7rem;
   height: 20px;
 }
 
@@ -491,6 +490,14 @@ a.profile-info-wrapper:focus {
   .profile-menu-header {
     padding: 7px;
     padding-left: 36px;
+  }
+  .search-box input {
+    border: none;
+    background: #f2f2f2;
+    border-radius: 4px;
+  }
+  .sub-header {
+    background-color: #ffffff;
   }
 }
 
@@ -765,10 +772,7 @@ a.profile-info-wrapper:focus {
           </li>
 
           <li>
-            <router-link
-              :to="{ name: 'indexPage' }"
-              class="home-button"
-            >
+            <router-link :to="{ name: 'indexPage' }" class="home-button">
               <i class="fa fa-home" aria-hidden="true"></i>
             </router-link>
           </li>

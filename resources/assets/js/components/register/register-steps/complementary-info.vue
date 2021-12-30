@@ -163,29 +163,34 @@ input.error:focus + i,
 /* Create a custom radio button */
 .checkmark {
   position: absolute;
-  top: 9px;
+  top: 7px;
   right: 10px;
   height: 20px;
   width: 20px;
-  border: 2px solid #666;
+  color: #666;
   border-radius: 50%;
+  font-size: 2rem;
 }
 
 /* On mouse-over, add a grey background color */
 .label-radio:hover input ~ .checkmark {
-  background-color: #ccc;
+  color: #ccc;
 }
 
 /* When the radio button is checked, add a blue background */
 .label-radio input:checked ~ .checkmark {
-  background-color: #00c569;
-  border-color: #00c569;
+  color: #00c569;
 }
 
 .label-radio input:checked ~ label::after {
   border-color: #00c569;
 }
-
+.fa-dot-circle:before {
+  content: "\f192";
+}
+.fa-circle:before {
+  content: "\f111";
+}
 .label-radio label::after {
   content: "";
   display: block;
@@ -216,6 +221,9 @@ input.error:focus + i,
   margin: 0 5px;
   font-weight: 400;
   color: #000;
+}
+.label-radio input:checked ~ label span {
+  color: #00c569;
 }
 
 .cls-1 {
@@ -275,12 +283,16 @@ select.error:focus {
   color: #bebebe;
   position: absolute;
   display: inline-block;
-  top: 41px;
+  top: 46px;
   font-family: "Font Awesome 5 Free", sans-serif;
   font-weight: 900;
   left: 25px;
   font-size: 15px;
   z-index: 0;
+}
+.activity-domain-wrapper:after {
+  
+  left: 10px;
 }
 </style>
 
@@ -310,6 +322,8 @@ select.error:focus {
               placeholder="نام خود را وارد کنید"
               id="first-name"
               type="text"
+              @blur="showNavigationMenu"
+              @focus="hideNavigationMenu"
             />
 
             <p class="error-message">
@@ -334,6 +348,8 @@ select.error:focus {
               placeholder="نام خانوادگی خود را وارد کنید"
               id="last-name"
               type="text"
+              @blur="showNavigationMenu"
+              @focus="hideNavigationMenu"
             />
             <p class="error-message">
               <span
@@ -444,7 +460,15 @@ select.error:focus {
                 :checked="'0' == $parent.step4.activity_type"
                 name="radio"
               />
-              <span class="checkmark"></span>
+              <span class="checkmark">
+                <i
+                  class="far"
+                  :class="[
+                    { 'fa-dot-circle': sellerActive },
+                    { 'fa-circle': !sellerActive },
+                  ]"
+                ></i>
+              </span>
               <label>
                 <svg
                   id="Layer_1"
@@ -487,8 +511,15 @@ select.error:focus {
                 name="radio"
                 :checked="'1' == $parent.step4.activity_type"
               />
-
-              <span class="checkmark"></span>
+              <span class="checkmark">
+                <i
+                  class="far"
+                  :class="[
+                    { 'fa-dot-circle': buyerActive },
+                    { 'fa-circle': !buyerActive },
+                  ]"
+                ></i>
+              </span>
 
               <label>
                 <svg
@@ -575,6 +606,8 @@ export default {
       activityDomain: "",
       activityType: "",
       error: "",
+      sellerActive: false,
+      buyerActive: false,
     };
   },
   methods: {
@@ -597,7 +630,25 @@ export default {
       this.$parent.setCategoryId(event);
       this.$parent.validateErrors();
     },
+    showNavigationMenu() {
+      if (screen.width < 992) {
+        if (document.querySelector(".custom-navigation")) {
+          document.querySelector(".custom-navigation").style.display = "block";
+         
+        }
+      }
+    },
+    hideNavigationMenu() {
+      if (screen.width < 992) {
+       
+          if (document.querySelector(".custom-navigation")) {
+            document.querySelector(".custom-navigation").style.display = "none";
+          }
+        
+      }
+    },
   },
+
   mounted() {
     this.$parent.getCategory();
     this.$parent.getProvinceList();
@@ -647,6 +698,13 @@ export default {
       this.$parent.errors.activity_type = "";
       this.$parent.step4.activity_type = item;
       this.$parent.validateErrors();
+      if (item == "0") {
+        this.sellerActive = true;
+        this.buyerActive = false;
+      } else if (item == "1") {
+        this.sellerActive = false;
+        this.buyerActive = true;
+      }
     },
   },
 };

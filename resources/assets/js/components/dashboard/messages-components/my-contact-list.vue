@@ -1,10 +1,10 @@
 <style scoped>
 .contact-body .contact-search {
-  background: #f0f0f0;
   position: absolute;
   left: 0;
   right: 0;
   z-index: 2;
+  background-color: #ffffff;
 }
 
 .contact-items {
@@ -17,22 +17,23 @@
 
 .contact-body .contact-search .contact-search-input-wrapper {
   position: relative;
-  padding: 10px 7px;
+  min-width: 100%;
+  margin: 10px auto;
+  padding: 0 10px;
+  background-color: #ffffff;
 }
 
 .contact-body .contact-search .contact-search-input-wrapper > i {
   position: absolute;
   right: 20px;
   font-size: 16px;
-  color: #919191;
-  top: 21px;
+  color: #5f6368;
+  top: 10px;
 }
 
 .contact-body .contact-search .contact-search-input-wrapper input {
-  padding: 8px 40px 8px 15px;
-  border-radius: 50px;
-  background: #fff;
-  border: none;
+  padding: 6px 35px 5px 15px;
+  border-radius: 8px;
 }
 
 .contact-body .contact-search .contact-search-input-wrapper > button {
@@ -40,7 +41,7 @@
   left: 7px;
   font-size: 16px;
   color: #919191;
-  top: 12px;
+  top: 3px;
   background: none;
   border: none;
   padding: 7px 15px 1px;
@@ -148,7 +149,6 @@
   line-height: 2;
   text-align: center;
 }
-
 .count-number {
   display: inline-block;
   height: 17px;
@@ -341,27 +341,23 @@ i.fa-star {
   /* background: #00c569; */
   transition: 300ms;
 }
-
-.user-not-fount {
-  text-align: center;
-  font-size: 20px;
-  font-weight: 500;
-  padding-top: 60px;
+.wrapper-no-message
+{
+  margin-top:115px;
 }
-
-.user-not-fount img {
-  width: 200px;
-  display: block;
-  margin: 60px auto 20px;
-}
-
-.user-not-fount p {
-  font-weight: 500;
-}
-
 @media screen and (max-width: 991px) {
   .contact-items {
     padding-bottom: 42px;
+  }
+}
+@media (max-width: 768px) {
+  .contact-body .contact-search .contact-search-input-wrapper input {
+    border: none;
+    background: #f2f2f2;
+    border-radius: 4px;
+  }
+  .contact-body .contact-search .contact-search-input-wrapper > button {
+    top: 2px;
   }
 }
 </style>
@@ -425,10 +421,18 @@ i.fa-star {
       <div
         v-else-if="$parent.contactNameSearchText && !$parent.isSearchingContact"
       >
-        <p class="user-not-fount">
-          <img src="../../../../img/empty-message.svg" alt="" />
-          <span>پیام یافت نشد</span>
-        </p>
+        <div class="wrapper-no-message">
+          <div class="wrapper_no_pro">
+            <div class="content_no_pic">
+              <img src="../../../../img/not_found_search.svg" alt="" />
+            </div>
+
+            <div class="text_no_pic standard-line text-rtl">
+              <p>مخاطبی یافت نشد!</p>
+            </div>
+            
+          </div>
+        </div>
       </div>
 
       <div v-else-if="$parent.isSearchingContact" class="contact-is-search">
@@ -515,26 +519,33 @@ i.fa-star {
             </a>
           </li>
           <li>
-            <div class="empty-list">
-              <i class="fa fa-user"></i>
-              <p>در حال حاضر پیامی وجود ندارد</p>
+            <div class="wrapper_no_pro">
+              <div class="content_no_pic">
+                <img src="../../../../img/messages_not_found.svg" alt="" />
+              </div>
 
+              <div class="text_no_pic standard-line text-rtl">
+                <p>هیچ پیام جدیدی ندارید!</p>
+                <p class="text-description_no_pic">
+                  برای شروع گفتگو با خریداران و فروشندگان باسکول، پیام ارسال
+                  کنید.
+                </p>
+              </div>
               <router-link
                 v-if="$parent.userType"
                 :to="{ name: 'buyAdRequestsSeller' }"
                 tag="button"
-                class="user-button"
+                class="btn-orange-empty-state text-rtl"
               >
-                شروع چت با خریداران
+                <i class="fas fa-user-friends"></i> مشاهده خریداران
               </router-link>
-
               <router-link
                 v-else
                 :to="{ name: 'productList' }"
                 tag="button"
-                class="user-button"
+                class="btn-orange-empty-state text-rtl"
               >
-                شروع چت با فروشندگان
+                <i class="fas fa-user-friends"></i> شروع چت با فروشندگان
               </router-link>
             </div>
           </li>

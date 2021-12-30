@@ -218,6 +218,8 @@ input.error:focus + i {
               }"
               placeholder="میزان موجودی محصول را وارد کنید"
               pattern="[0-9]*"
+               @blur="$parent.showNavigationMenu"
+              @focus="$parent.hideNavigationMenu"
             />
 
             <i
@@ -274,6 +276,8 @@ input.error:focus + i {
               }"
               placeholder="حداقل میزان فروش را وارد کنید"
               pattern="[0-9]*"
+              @blur="$parent.showNavigationMenu"
+              @focus="$parent.hideNavigationMenu"
             />
 
             <i
@@ -339,6 +343,8 @@ input.error:focus + i {
               }"
               placeholder="حداقل قیمت را وارد کنید"
               pattern="[0-9]*"
+              @blur="$parent.showNavigationMenu"
+              @focus="$parent.hideNavigationMenu"
             />
 
             <i
@@ -393,6 +399,8 @@ input.error:focus + i {
               }"
               placeholder="حداکثر قیمت را وارد کنید"
               pattern="[0-9]*"
+              @blur="$parent.showNavigationMenu"
+              @focus="$parent.hideNavigationMenu"
             />
 
             <i

@@ -60,7 +60,7 @@
 }
 
 .text_no_pic {
-  margin: 30px auto;
+  margin: 10px auto;
   color: #bdbdbd;
 }
 
@@ -253,13 +253,15 @@ button.disable {
   overflow: hidden;
 }
 .remove-filter-button {
+  position: absolute;
   background: #fff;
-  border-radius: 50px;
+  border-radius: 12px;
   border: 1px solid #e41c39;
-  color: #777;
-  margin: 0;
-  padding: 2px 15px;
-  margin-right: 10px;
+  color: #e41c39;
+  margin: 3px 10px 0;
+  padding: 3px 15px;
+  font-size: 1.5rem;
+  font-weight: 400;
 }
 .remove-filter-icon {
   position: relative;
@@ -358,63 +360,92 @@ button.disable {
   top: 50%;
   z-index: 999;
 }
-
-.banner-wrapper {
-  background: linear-gradient(90deg, #060446, #21ad93);
+.green-banner .banner-wrapper {
+  background: linear-gradient(76.93deg, #44a08d 0%, #093637 100%);
+  border-radius: 4px;
   min-height: 130px;
   position: relative;
   direction: rtl;
   overflow: hidden;
   margin-bottom: 15px;
-  border-radius: 12px;
+}
+.green-banner .banner-wrapper::before {
+  content: "";
+  width: 150px;
+  height: 150px;
+  background: url("../../../../img/half-circle-small-right.svg");
+  background-position: top, 2px 0;
+  background-repeat: no-repeat;
+  position: absolute;
+  right: -35px;
 }
 
-.banner-wrapper .main-wrapper {
+.green-banner .banner-wrapper::after {
+  content: "";
+  width: 197px;
+  height: 150px;
+  background: url("../../../../img/half-circle-large-left.svg"),
+    url("../../../../img/half-circle-small-left.svg");
+  background-position: top, 2px 26px;
+  background-repeat: no-repeat;
+  position: absolute;
+  margin-top: -56px;
+  margin-right: -195px;
+}
+
+.green-banner .banner-wrapper .main-wrapper {
   position: relative;
-  padding: 20px 100px;
+  padding: 12px 47px;
   overflow: hidden;
   z-index: 2;
   text-align: right;
 }
 
-.banner-button {
-  width: initial;
-  font-size: 18px;
-  padding: 10px 20px;
-  border-radius: 7px;
-  background: #1da1f2;
-  box-shadow: 0 3px 2px rgba(0, 0, 0, 0.16);
-}
-
-.banner-button i {
-  position: relative;
-  top: 2px;
-  margin-right: 5px;
-}
-
-.green-button.banner-button:hover {
-  background: #1da1f2;
-}
-
-.banner-wrapper .banner-bg-striped {
+.green-banner .banner-wrapper .banner-bg-striped {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: url("../../../../img/bg-striped.png") repeat;
   opacity: 0.2;
 }
-
-.banner-wrapper p {
-  font-size: 18px;
-  font-weight: bold;
-  color: #fff;
+.green-banner .banner-wrapper-title {
+  font-size: 1.6rem;
+  font-weight: 500;
+  text-align: right;
+  margin-bottom: 17px;
+  color: #ffffff;
+}
+.green-banner .banner-wrapper-description {
+  font-size: 1.4rem;
+  color: #ffffff;
   text-align: right;
   margin-bottom: 17px;
 }
+.green-banner .green-banner-button-wrapper {
+  display: grid;
+  justify-items: center;
+}
+.banner-button {
+  width: initial;
+  font-size: 1.4rem;
+  padding: 8px 36px;
+  background: #f0f3f5;
+  color: #ff6600;
+  box-shadow: 0px 2px 8px rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
 
-.banner-wrapper .circle-item-wrapper {
+.green-banner .banner-button i {
+  position: relative;
+  top: 2px;
+  margin-right: 5px;
+}
+
+.green-banner .green-button.banner-button:hover {
+  background: #1da1f2;
+}
+.green-banner .banner-wrapper .circle-item-wrapper {
   position: absolute;
   left: 100px;
   width: 200px;
@@ -427,12 +458,12 @@ button.disable {
   box-shadow: 0 3px 2px rgba(0, 0, 0, 0.16);
 }
 
-.banner-wrapper .circle-item-wrapper img {
+.green-banner .banner-wrapper .circle-item-wrapper img {
   position: relative;
   top: -20px;
 }
 
-.banner-wrapper .circle-item-wrapper::after {
+.green-banner .banner-wrapper .circle-item-wrapper::after {
   width: 315px;
   height: 195px;
   content: " ";
@@ -445,7 +476,7 @@ button.disable {
   z-index: 1;
 }
 
-.banner-wrapper .circle-item-wrapper::before {
+.green-banner .banner-wrapper .circle-item-wrapper::before {
   width: 295px;
   height: 185px;
   content: " ";
@@ -456,11 +487,71 @@ button.disable {
   border-radius: 170px;
   z-index: 1;
 }
+/*----------------- orange promotional ------------*/
+.promotional-orange-banner {
+  cursor: pointer;
+}
+.promotional-orange-banner .banner-wrapper::before {
+  content: "";
+  width: 300px;
+  height: 125px;
+  background: url("../../../../img/promotional_card_launcher_bg.svg");
+  background-repeat: no-repeat;
+  background-position: right 17px;
+  background-size: 300px 110px;
+  position: absolute;
+  bottom: 0;
+  right: -35px;
+}
+.promotional-orange-banner .banner-wrapper {
+  background-color: #ffc985;
+  border-radius: 4px;
+  min-height: 120px;
+  position: relative;
+  direction: rtl;
+  overflow: hidden;
+  margin-bottom: 15px;
+}
+.promotional-orange-banner .banner-wrapper .main-wrapper {
+  position: relative;
+  padding: 10px 190px;
+  overflow: hidden;
+  z-index: 2;
+  text-align: right;
+}
+.promotional-orange-banner .banner-wrapper-title {
+  font-weight: 500;
+  font-size: 1.6rem;
+  line-height: 20px;
+  margin-bottom: 6px;
+}
+.promotional-orange-banner .banner-wrapper-description {
+  font-size: 1.4rem;
+  line-height: 20px;
+}
+.promotional-orange-banner .orange-banner-button-wrapper {
+  display: grid;
+  justify-items: left;
+}
+.promotional-orange-banner .banner-button {
+  width: 200px;
+  font-size: 1.4rem;
+  padding: 3px 0;
+  line-height: 24px;
+  margin: 29px 0 10px;
+  background: #128c7e;
+  color: #ffffff;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+}
 
+/*----------------- */
 .text-center {
   text-align: center !important;
 }
-
+.title button.mobile-category-item {
+  display: none;
+}
 .mobile-filter-button {
   position: fixed;
   background: #fff;
@@ -475,10 +566,17 @@ button.disable {
 }
 
 @media screen and (max-width: 991px) {
-  .active-category-filter {
-    padding-top: 50px;
+  .promotional-orange-banner .banner-wrapper::before {
+    background: url("../../../../img/promotional_mobile_card_launcher_bg.svg");
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size: 165px 95px;
+    right: 0;
+    height: 95px;
   }
-
+  .promotional-orange-banner .banner-wrapper .main-wrapper {
+    padding: 10px 65px 10px 5px;
+  }
   .fix-request-header-box,
   .title {
     right: 0;
@@ -489,17 +587,72 @@ button.disable {
   .requests .main-content {
     padding: 105px 0 150px !important;
   }
+  .title h1 span.title-text {
+    display: none;
+  }
 }
 @media screen and (max-width: 767px) {
-  .banner-wrapper .main-wrapper {
-    padding: 20px 10px;
+  .title button.mobile-category-item {
+    flex-shrink: 0;
+    border: 1px solid #ededed;
+    background: #fafafa;
+    border-radius: 12px;
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: #707070;
+    padding: 3px 15px;
+    display: inline-flex;
+    height: 32px;
+    margin-left: 10px;
   }
-
-  .banner-wrapper .circle-item-wrapper {
-    left: -20px;
-    width: 190px;
-    height: 190px;
-    top: calc(50% - 48px);
+  .promotional-orange-banner .banner-wrapper-title {
+    font-size: 1.8rem;
+    line-height: 24px;
+    margin-bottom: 0;
+  }
+  .promotional-orange-banner .banner-wrapper-description {
+    font-size: 1.6rem;
+    line-height: 29px;
+  }
+  .promotional-orange-banner .orange-banner-button-wrapper {
+    justify-items: left;
+  }
+  .promotional-orange-banner .banner-button {
+    width: 127px;
+    font-size: 1.4rem;
+    padding: 3px 0;
+    line-height: 24px;
+    margin-top: 16px;
+    margin-left: 27px;
+  }
+  .green-banner .banner-wrapper::before {
+    content: "";
+    width: 150px;
+    height: 150px;
+    background: url("../../../../img/half-circle-small-right.svg");
+    background-position: top, 2px 0;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: -20px;
+    right: -35px;
+  }
+  .green-banner .banner-wrapper::after {
+    background: url("../../../../img/half-circle-large-left-mobile.svg"),
+      url("../../../../img/half-circle-small-left-mobile.svg");
+    background-position: 43px 0px, 38px 14px;
+    background-repeat: no-repeat;
+    position: absolute;
+    margin-top: -50px;
+    margin-right: -154px;
+  }
+  .green-banner .banner-wrapper .main-wrapper {
+    padding: 7px 16px;
+  }
+  .green-banner .green-banner-button-wrapper {
+    justify-items: right;
+  }
+  .banner-button {
+    margin-right: 26px;
   }
 
   .buyAd-phone-buttons-wrapper {
@@ -533,7 +686,7 @@ button.disable {
 
   .main-content,
   .wrapper-items {
-    padding-top: 20px;
+    padding-top: 51px;
   }
 
   .title {
@@ -583,104 +736,104 @@ button.disable {
     padding-right: 30px;
     padding-top: 6px;
   }
-}
 
-.sub-header-fix {
-  position: fixed;
-  top: 83px;
-  left: 0;
-  right: 0;
-  z-index: 1012;
-  padding: 0;
-  width: 100%;
-  background: #fff;
-}
+  .sub-header-fix {
+    position: fixed;
+    top: 83px;
+    left: 0;
+    right: 0;
+    z-index: 1012;
+    padding: 0;
+    width: 100%;
+    background: #fff;
+  }
 
-.rate-filter-mobile-wrapper {
-  direction: rtl;
-  display: flex;
-  overflow-y: hidden;
-  overflow-x: scroll;
-  border-bottom: 1px solid #ebebeb;
-  padding: 10px;
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-}
+  .rate-filter-mobile-wrapper {
+    direction: rtl;
+    display: flex;
+    overflow-y: hidden;
+    overflow-x: scroll;
+    border-bottom: 1px solid #ebebeb;
+    padding: 10px;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
 
-.rate-filter-mobile-wrapper.desktop-filter-items {
-  border-bottom: none;
-  padding: 5px 0 10px;
-}
+  .rate-filter-mobile-wrapper.desktop-filter-items {
+    border-bottom: none;
+    padding: 5px 0 10px;
+  }
 
-.rate-filter-mobile-wrapper::-webkit-scrollbar {
-  display: none;
-}
+  .rate-filter-mobile-wrapper::-webkit-scrollbar {
+    display: none;
+  }
 
-.rate-filter-mobile-wrapper > button {
-  flex-shrink: 0;
-  border: 1px solid #ededed;
-  background: #fff;
-  border-radius: 12px;
-  font-size: 15px;
-  color: #707070;
-  padding: 3px 15px;
-  display: inline-flex;
-  height: 32px;
-  margin-left: 10px;
-}
+  .rate-filter-mobile-wrapper > button {
+    flex-shrink: 0;
+    border: 1px solid #ededed;
+    background: #fff;
+    border-radius: 12px;
+    font-size: 15px;
+    color: #707070;
+    padding: 3px 15px;
+    display: inline-flex;
+    height: 32px;
+    margin-left: 10px;
+  }
 
-.rate-filter-mobile-wrapper > button.mobile-category-item.filter-item {
-  border-color: #fa8888;
-  color: #e41c38;
-  background: #fcf6f6;
-}
+  .rate-filter-mobile-wrapper > button.mobile-category-item.filter-item {
+    border-color: #fa8888;
+    color: #e41c38;
+    background: #fcf6f6;
+  }
 
-.rate-filter-mobile-wrapper > button i {
-  position: relative;
-  top: 2px;
-  margin-left: 5px;
-}
-.rate-filter-mobile-wrapper > button i.fa-times {
-  position: relative;
-  top: 2px;
-  margin-left: 0;
-  margin-right: 10px;
-  font-size: 11px;
-  top: 6px;
-}
+  .rate-filter-mobile-wrapper > button i {
+    position: relative;
+    top: 4px;
+    margin-left: 5px;
+  }
+  .rate-filter-mobile-wrapper > button i.fa-times {
+    position: relative;
+    top: 2px;
+    margin-left: 0;
+    margin-right: 10px;
+    font-size: 11px;
+    top: 6px;
+  }
 
-.rate-filter-mobile-wrapper > button:first-of-type {
-  background: #fafafa;
-}
+  .rate-filter-mobile-wrapper > button:first-of-type {
+    background: #fafafa;
+  }
 
-.rate-filter-mobile-wrapper > button:last-of-type {
-  margin-left: 0;
-}
-.spinner-border {
-  width: 5rem;
-  height: 5rem;
-  color: #999;
-  border-width: 3px;
-  top: 170px;
-  left: calc(50% - 25px);
-}
+  .rate-filter-mobile-wrapper > button:last-of-type {
+    margin-left: 0;
+  }
+  .spinner-border {
+    width: 5rem;
+    height: 5rem;
+    color: #999;
+    border-width: 3px;
+    top: 170px;
+    left: calc(50% - 25px);
+  }
 
-.more-buyAds-wrapper {
-  float: right;
-  width: 100%;
-  min-height: 96px;
-  position: relative;
-}
+  .more-buyAds-wrapper {
+    float: right;
+    width: 100%;
+    min-height: 96px;
+    position: relative;
+  }
 
-.more-buyAds-wrapper .spinner-border {
-  top: 30px;
-  width: 4rem;
-  height: 4rem;
-}
+  .more-buyAds-wrapper .spinner-border {
+    top: 30px;
+    width: 4rem;
+    height: 4rem;
+  }
 
-.more-buyAds-wrapper p {
-  margin-top: 40px;
-  color: #999;
+  .more-buyAds-wrapper p {
+    margin-top: 40px;
+    color: #999;
+  }
 }
 </style>
 <template>
@@ -691,30 +844,28 @@ button.disable {
         hidden-lg hidden-md hidden-sm
         container-fluid
       "
-      v-if="$parent.filterCategory"
     >
       <div class="rate-filter-mobile-wrapper">
-        <!-- <button
+        <button
           class="mobile-category-item"
           @click.prevent="openCategoryModal()"
         >
           <i class="fa fa-list"></i>
           دسته ها
-        </button> -->
+        </button>
 
         <button
+          v-if="$parent.filterCategory"
           class="mobile-category-item filter-item"
           @click.prevent="$parent.filterCategory = ''"
         >
-          <span
-            v-text="'دسته بندی: ' + $parent.filterCategory.category_name"
-          ></span>
+          <span v-text="$parent.filterCategory.category_name"></span>
           <i class="fa fa-times"></i>
         </button>
       </div>
     </div>
 
-    <div
+    <!-- <div
       class="fix-request-bottom hidden-md hidden-lg shadow-content text-center"
     >
       <div class="col-xs-12 text-right">
@@ -727,7 +878,7 @@ button.disable {
           <i class="fas fa-filter"></i>
         </button>
       </div>
-    </div>
+    </div> -->
 
     <main id="main" class="container-fluid">
       <div class="requests" v-show="isRequests">
@@ -773,11 +924,12 @@ button.disable {
               </div>
             </div>
           </div>
-          <div
+          <!-- <div
             class="mobile-filter-button text-rtl hiddne-md hidden-lg"
             v-if="$parent.filterCategory"
           >
-            <!-- :class="{ 'active-verification-alert': $parent.verificationAlert }" -->
+            <!- :class="{ 'active-verification-alert': $parent.verificationAlert }" ->
+
             <button
               class="green-button remove-filter-button"
               @click.prevent="$parent.filterCategory = ''"
@@ -789,7 +941,7 @@ button.disable {
                 v-text="'دسته بندی : ' + $parent.filterCategory.category_name"
               ></span>
             </button>
-          </div>
+          </div> -->
           <div
             v-if="buyAds.length != 0"
             :class="{ 'active-category-filter': $parent.filterCategory }"
@@ -797,28 +949,61 @@ button.disable {
             <ul class="list-unstyled wrapper-items">
               <li v-for="(buyAd, index) in buyAds" :key="index">
                 <div v-if="buyAd.has_msg || buyAd.has_phone">
-                  <div class="col-xs-12" v-if="index % 9 == 0 && index != 0">
+                  <div
+                    class="col-xs-12 green-banner"
+                    v-if="index % 9 == 0 && index != 0"
+                  >
                     <div class="row">
                       <div class="banner-wrapper">
-                        <div class="banner-bg-striped"></div>
                         <div class="main-wrapper">
-                          <p>آیا خریدار مورد نظر خود را پیدا نکرده اید؟</p>
-                          <p>محصول خود را ثبت کنید.</p>
-                          <router-link
-                            :to="{ name: 'registerProductSeller' }"
-                            class="btn green-button banner-button hover-effect"
-                          >
-                            ثبت محصول
-                            <i class="fa fa-arrow-left"> </i>
-                          </router-link>
-                        </div>
-                        <div class="circle-item-wrapper">
-                          <img src="../../../../img/request.svg" alt="" />
+                          <p class="banner-wrapper-title">
+                            هنوز خریدار محصول خود را پیدا نکرده اید؟!
+                          </p>
+                          <p class="banner-wrapper-description">
+                            با ثبت محصول به لیست خریداران پیشنهادی مخصوص خود ،
+                            دسترسی پیدا کنید.
+                          </p>
+                          <div class="row green-banner-button-wrapper">
+                            <router-link
+                              :to="{ name: 'registerProductSeller' }"
+                              class="btn banner-button hover-effect"
+                            >
+                              ثبت محصول و یافتن خریدار
+                            </router-link>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-
+                  <div
+                    class="col-xs-12 promotional-orange-banner"
+                    v-if="index == 3"
+                    @click="
+                      $router.push({ name: 'dashboardPricingTableSeller' })
+                    "
+                  >
+                    <div class="row">
+                      <div class="banner-wrapper">
+                        <div class="main-wrapper">
+                          <p class="banner-wrapper-title">
+                            کاربر ویژه باسکول شوید!
+                          </p>
+                          <p class="banner-wrapper-description">
+                            برای دسترسی به خریداران طلایی و شماره های تماس ،
+                            حساب کاربری خود را ارتقا دهید.
+                          </p>
+                          <div class="row orange-banner-button-wrapper">
+                            <router-link
+                              :to="{ name: 'dashboardPricingTableSeller' }"
+                              class="btn banner-button hover-effect"
+                            >
+                              ارتقا عضویت
+                            </router-link>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                   <div
                     class="buyAd-wrapper-item col-xs-12"
                     :class="{
@@ -1205,12 +1390,22 @@ button.disable {
           >
             <div class="wrapper_no_pro">
               <div class="content_no_pic">
-                <i class="fa fa-list-alt"></i>
+                <img src="../../../../img/not_found_search.svg" alt="" />
               </div>
 
-              <div class="text_no_pic">
-                <p>درخواست خرید مرتبط با شما وجود ندارد</p>
+              <div class="text_no_pic standard-line text-rtl">
+                <p>خریداری یافت نشد!</p>
+                <p class="text-description_no_pic">
+                  درصورتی که این محصول را برای فروش دارید، آن را ثبت کنید.
+                </p>
               </div>
+              <router-link
+                :to="{ name: 'registerProductSeller' }"
+                tag="button"
+                class="btn-orange-empty-state text-rtl"
+              >
+                <i class="fas fa-plus"></i> ثبت محصول
+              </router-link>
             </div>
           </div>
           <div class="col-xs-12 wrapper-items" v-else-if="load">
@@ -1440,40 +1635,15 @@ export default {
           $(id).prop("disabled", false);
           $(id).removeClass("disable");
           if (error.response.status == 423) {
-            swal({
-              title: "ارتقا عضویت",
-              text: error.response.data.msg,
-              icon: "warning",
-              className: "custom-swal-with-cancel",
-              buttons: {
-                success: {
-                  text: "ارتقا عضویت",
-                  value: "promote",
-                },
-                close: {
-                  text: "بستن",
-                  className: "bg-cancel",
-                },
-              },
-            }).then((value) => {
-              switch (value) {
-                case "promote":
-                  this.$router.push({ name: "dashboardPricingTableSeller" });
-                  break;
-              }
-            });
+            eventBus.$emit(
+              "noAccessToBuyerPhone423Error",
+              error.response.data.msg
+            );
           } else {
-            swal({
-              text: error.response.data.msg,
-              icon: "warning",
-              className: "custom-swal-with-cancel",
-              buttons: {
-                close: {
-                  text: "بستن",
-                  className: "bg-cancel",
-                },
-              },
-            });
+            eventBus.$emit(
+              "noAccessToBuyerPhoneOtherError",
+              error.response.data.msg
+            );
           }
         });
     },
@@ -1491,7 +1661,6 @@ export default {
     },
     openGoldenChatRestrictionModal: function () {
       eventBus.$emit("modal", "goldenBuyAdReplyLimit");
-
       this.registerComponentStatistics(
         "buyAdReply",
         "openChat",

@@ -3,22 +3,6 @@
   padding-top: 50px;
 } */
 
-.wrapper_no_pro {
-  text-align: center;
-  font-size: 23px;
-  padding: 15px 0;
-}
-
-.content_no_pic {
-  font-size: 70px;
-  margin: 20px auto;
-  color: #bdbdbd;
-}
-
-.text_no_pic {
-  margin: 30px auto;
-  color: #bdbdbd;
-}
 
 .list-title,
 .needs,
@@ -212,6 +196,7 @@ tr:nth-child(even) {
   .fix-request-header-box,
   .title {
     right: 0;
+    
   }
   .default-list-title {
     padding: 4px 15px;
@@ -314,18 +299,26 @@ tr:nth-child(even) {
         <div class="buyAds-wrapper" v-else-if="buyAds.length === 0 && !load">
           <div class="wrapper_no_pro">
             <div class="content_no_pic">
-              <i class="fa fa-list-alt"></i>
+              <img src="../../../../../img/my_requests_not_found.svg" alt="" />
             </div>
 
-            <div class="text_no_pic text-rtl">
-              <p>شما درخواست خریدی را ثبت نکرده اید یا در انتظار تایید است.</p>
-            </div>
+            <div class="text_no_pic standard-line text-rtl">
+              <p>
+                هیچ درخواست خریدی ثبت نشده یا در 
 
+                <router-link to="">انتظار تایید</router-link>
+                است!
+              </p>
+              <p class="text-description_no_pic">
+                بعد از ثبت درخواست، منتظر تایید آن توسط کارشناسان باسکول بمانید.
+              </p>
+            </div>
             <router-link
-              class="green-button"
               :to="{ name: 'registerRequestBuyer' }"
+              tag="button"
+              class="btn-orange-empty-state text-rtl"
             >
-              ثبت درخواست خرید
+              <i class="fas fa-plus"></i> ثبت درخواست خرید
             </router-link>
           </div>
         </div>

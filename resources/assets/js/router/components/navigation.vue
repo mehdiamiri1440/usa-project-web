@@ -59,18 +59,6 @@
   background: #fff;
   color: #00c569;
 }
-
-.icon-wrapper.main-icon::after {
-  content: "";
-  width: 13px;
-  height: 13px;
-  background: #1da1f2;
-  position: absolute;
-  right: -4px;
-  top: -4px;
-  border: 2px solid #313a43;
-  border-radius: 15px;
-}
 .user-image-wrapper {
   width: 26px;
   height: 27px;
