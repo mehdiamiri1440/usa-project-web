@@ -887,12 +887,16 @@ direction: rtl;
   color: #15313c;
 
 }
-.text-description_no_pic {
-  margin-top: 10px;
-  color: #15313c;
-  font-size: 1rem;
+.text-title_no_pic {
+  font-size: 1.6rem;
+  font-weight: 700;
 }
 
+.text-description_no_pic {
+  margin: 10px 0 20px 0;
+  color: #15313c;
+  font-size: 1.4rem;
+}
 @media screen and (max-width: 767px) {
   .xs-text-right {
     text-align: right;

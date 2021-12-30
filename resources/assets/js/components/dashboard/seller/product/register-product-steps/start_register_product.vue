@@ -65,7 +65,7 @@
 
 .arrow-icon {
   font-size: 23px;
-  color: #20ae91;
+  color: #FF6600;
   margin-bottom: 3px;
 }
 p {

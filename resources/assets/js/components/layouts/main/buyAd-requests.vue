@@ -98,7 +98,7 @@
 .detail-success {
   padding: 10px 0;
   width: 100%;
-  background:#FF9828;
+  background: #ff9828;
   border: none;
   color: #fff;
   text-align: center;
@@ -395,7 +395,7 @@ button.disable {
 
 .green-banner .banner-wrapper .main-wrapper {
   position: relative;
-  padding: 12px 47px;
+  padding: 24px 47px;
   overflow: hidden;
   z-index: 2;
   text-align: right;
@@ -410,14 +410,14 @@ button.disable {
   opacity: 0.2;
 }
 .green-banner .banner-wrapper-title {
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   font-weight: 500;
   text-align: right;
   margin-bottom: 17px;
   color: #ffffff;
 }
 .green-banner .banner-wrapper-description {
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   color: #ffffff;
   text-align: right;
   margin-bottom: 17px;
@@ -490,6 +490,7 @@ button.disable {
 /*----------------- orange promotional ------------*/
 .promotional-orange-banner {
   cursor: pointer;
+  max-height: 170px;
 }
 .promotional-orange-banner .banner-wrapper::before {
   content: "";
@@ -521,13 +522,15 @@ button.disable {
 }
 .promotional-orange-banner .banner-wrapper-title {
   font-weight: 500;
-  font-size: 1.6rem;
+  font-size: 2rem;
   line-height: 20px;
-  margin-bottom: 6px;
+  margin: 14px 0 20px 0;
+  color: #004f46;
 }
 .promotional-orange-banner .banner-wrapper-description {
-  font-size: 1.4rem;
+  font-size: 1.8rem;
   line-height: 20px;
+  color: #004f46;
 }
 .promotional-orange-banner .orange-banner-button-wrapper {
   display: grid;
@@ -536,12 +539,12 @@ button.disable {
 .promotional-orange-banner .banner-button {
   width: 200px;
   font-size: 1.4rem;
-  padding: 3px 0;
-  line-height: 24px;
-  margin: 29px 0 10px;
+  padding: 10px 0;
+  margin: 14px 0 10px;
   background: #128c7e;
   color: #ffffff;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+  -webkit-box-shadow: 0px 4px 8px rgb(0 0 0 / 15%);
+  box-shadow: 0px 4px 8px rgb(0 0 0 / 15%);
   border-radius: 4px;
 }
 
@@ -606,19 +609,19 @@ button.disable {
     margin-left: 10px;
   }
   .promotional-orange-banner .banner-wrapper-title {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     line-height: 24px;
     margin-bottom: 0;
   }
   .promotional-orange-banner .banner-wrapper-description {
-    font-size: 1.6rem;
-    line-height: 29px;
+    font-size: 1.4rem;
+    line-height: 20px;
   }
   .promotional-orange-banner .orange-banner-button-wrapper {
     justify-items: left;
   }
   .promotional-orange-banner .banner-button {
-    width: 127px;
+    width: 160px;
     font-size: 1.4rem;
     padding: 3px 0;
     line-height: 24px;
@@ -648,13 +651,21 @@ button.disable {
   .green-banner .banner-wrapper .main-wrapper {
     padding: 7px 16px;
   }
+  .green-banner .banner-wrapper-title {
+    margin: 15px 0 8px;
+    font-size: 1.6rem;
+  }
+  .green-banner .banner-wrapper-description {
+    font-size: 1.4rem;
+    line-height: 24px;
+  }
   .green-banner .green-banner-button-wrapper {
     justify-items: right;
   }
   .banner-button {
     margin-right: 26px;
+    padding: 8px 20px;
   }
-
   .buyAd-phone-buttons-wrapper {
     margin-top: 15px;
   }
@@ -924,24 +935,6 @@ button.disable {
               </div>
             </div>
           </div>
-          <!-- <div
-            class="mobile-filter-button text-rtl hiddne-md hidden-lg"
-            v-if="$parent.filterCategory"
-          >
-            <!- :class="{ 'active-verification-alert': $parent.verificationAlert }" ->
-
-            <button
-              class="green-button remove-filter-button"
-              @click.prevent="$parent.filterCategory = ''"
-            >
-              <span class="red-text remove-filter-icon">
-                <i class="fa fa-times"></i>
-              </span>
-              <span
-                v-text="'دسته بندی : ' + $parent.filterCategory.category_name"
-              ></span>
-            </button>
-          </div> -->
           <div
             v-if="buyAds.length != 0"
             :class="{ 'active-category-filter': $parent.filterCategory }"
@@ -1279,21 +1272,30 @@ button.disable {
                 <div v-else>
                   <div class="col-xs-12" v-if="index % 9 == 0 && index != 0">
                     <div class="row">
-                      <div class="banner-wrapper">
-                        <div class="banner-bg-striped"></div>
-                        <div class="main-wrapper">
-                          <p>آیا خریدار مورد نظر خود را پیدا نکرده اید؟</p>
-                          <p>محصول خود را ثبت کنید.</p>
-                          <router-link
-                            :to="{ name: 'register' }"
-                            class="btn green-button banner-button hover-effect"
-                          >
-                            ثبت محصول
-                            <i class="fa fa-arrow-left"> </i>
-                          </router-link>
-                        </div>
-                        <div class="circle-item-wrapper">
-                          <img src="../../../../img/request.svg" alt="" />
+                      <div
+                        class="col-xs-12 green-banner"
+                        v-if="index % 9 == 0 && index != 0"
+                      >
+                        <div class="row">
+                          <div class="banner-wrapper">
+                            <div class="main-wrapper">
+                              <p class="banner-wrapper-title">
+                                هنوز خریدار محصول خود را پیدا نکرده اید؟!
+                              </p>
+                              <p class="banner-wrapper-description">
+                                با ثبت محصول به لیست خریداران پیشنهادی مخصوص خود
+                                ، دسترسی پیدا کنید.
+                              </p>
+                              <div class="row green-banner-button-wrapper">
+                                <router-link
+                                  :to="{ name: 'registerProductSeller' }"
+                                  class="btn banner-button hover-effect"
+                                >
+                                  ثبت محصول و یافتن خریدار
+                                </router-link>
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>

@@ -788,7 +788,7 @@ a.profile-info-wrapper:focus {
           <input
             type="text"
             v-model="$parent.searchValueText"
-            placeholder="اینجا جستجو کنید"
+            placeholder="محصول مورد نظر خود را جستجو کنید"
           />
 
           <button class="btn-search">
@@ -819,7 +819,7 @@ a.profile-info-wrapper:focus {
           <input
             type="text"
             v-model="$parent.searchValueText"
-            placeholder="اینجا جستجو کنید"
+            placeholder="محصول مورد نظر خود را جستجو کنید"
           />
 
           <button class="btn-search">

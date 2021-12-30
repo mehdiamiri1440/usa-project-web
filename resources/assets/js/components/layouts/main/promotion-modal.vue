@@ -17,11 +17,13 @@
   display: inline-block;
   text-align: right;
   vertical-align: middle;
+  width: 500px;
 }
 
 .modal-content {
   border-radius: 12px;
   display: grid;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
 }
 .close-modal {
   font-size: 20px;
@@ -66,7 +68,7 @@
 .promotion-image-wrapper img.upgrade-rocket {
   width: 100px;
   position: absolute;
-  margin-top: -60px;
+  margin-top: -55px;
   z-index: 1051;
 }
 .promotion-image-wrapper img.smoke-rocket {
@@ -131,12 +133,12 @@
 }
 .promotion-title {
   font-weight: 500;
-  margin: 26px auto 0;
+  margin: 20px auto 0;
 }
 .promotion-description {
   font-weight: 400;
   margin-top: 10px;
-  margin: 19px auto 0;
+  margin: 8px auto 0;
 }
 .bg-gradient {
   background: linear-gradient(90deg, #ff9828 0%, #ff6600 100%);
@@ -146,7 +148,7 @@
   padding: 8px 0;
   text-align: center;
   width: 214px;
-  margin: 40px auto 30px;
+  margin: 30px auto 30px;
   border-radius: 4px;
   color: #ffffff;
   border: 0;
@@ -350,10 +352,13 @@
 }
 @media (min-width: 768px) {
   .promotion-image-wrapper {
-    height: 270px;
+    height: 232px;
   }
 }
 @media (max-width: 767px) {
+  .modal-dialog {
+  width: 90%;
+}
   .promotion-image-wrapper img.upgrade-rocket {
     margin-top: -45px;
   }
@@ -371,16 +376,21 @@
   }
 
   .modal-contents p {
-    margin-top: 3px;
+    
     padding: 0 35px;
-    font-size: 1.45rem;
+    font-size: 1.4rem;
   }
   .promotion-title {
     font-weight: 500;
+    margin-top: 14px;
   }
+.promotion-description {
+  margin-top: 6px;
+  
+}
   .orange-button {
     margin: 15px auto 23px;
-    max-width: 140px;
+    max-width: 180px;
     padding: 5px 0;
     font-weight: 500;
   }
@@ -465,7 +475,7 @@
                         قابل نمایش است
                       </p>
                       <p class="buyad-notice">
-                        برای مشاهده لطفا حساب کاربری خود را ارتقا دهد
+                        برای مشاهده لطفا حساب کاربری خود را ارتقا دهید
                       </p>
                     </div>
                     <div class="row golden-info-text">

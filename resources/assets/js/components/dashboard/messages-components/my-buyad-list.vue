@@ -660,7 +660,7 @@ li.static-item > button i {
         </div>
 
         <div class="text_no_pic standard-line text-rtl">
-          <p>خریدار مرتبطی ندارید!</p>
+          <p class="text-title_no_pic ">خریدار مرتبطی ندارید!</p>
           <p class="text-description_no_pic">
             برای مشاهده خریداران مرتبط، ابتدا محصول خود را ثبت کنید.
           </p>
@@ -690,7 +690,7 @@ li.static-item > button i {
           </div>
 
           <div class="text_no_pic standard-line text-rtl">
-            <p>خریداری یافت نشد!</p>
+            <p class="text-description_no_pic">خریداری یافت نشد!</p>
           </div>
         </div>
       </div>

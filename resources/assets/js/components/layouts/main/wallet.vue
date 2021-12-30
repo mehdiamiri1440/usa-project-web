@@ -124,7 +124,7 @@
 }
 
 .payment-buttons > button.active {
-  background-color: #21ad93;
+  background-color: #FF9828;
   color: #fff;
 }
 
@@ -156,7 +156,6 @@
   background: #fcfcfc;
   overflow: hidden;
   border-radius: 4px;
-  border: 1px solid #707070;
 }
 
 .count-input-wrapper .input-group-append {
@@ -174,8 +173,9 @@
 }
 
 .count-input-wrapper button {
-  padding: 9px 20px;
+  padding: 12px 20px 9px 20px;
   font-size: 25px;
+  border: 0;
 }
 
 .form-control[type="tel"]::-webkit-inner-spin-button,
@@ -185,7 +185,7 @@
 }
 
 .bg-gradient {
-  background: linear-gradient(90deg, #00c569 0%, #21ad93 100%);
+  background: linear-gradient(90deg, #FF6600 0%, #FF9828 100%);
 }
 
 .green-button {

@@ -22,10 +22,11 @@
 .modal-content {
   overflow: hidden;
   border-radius: 12px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
 }
 .close-modal {
   font-size: 20px;
-  color: #777;
+  color: #264653;
   position: absolute;
   right: 0;
   padding: 15px 12px;

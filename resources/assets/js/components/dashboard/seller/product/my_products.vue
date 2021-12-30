@@ -147,7 +147,7 @@
             </div>
 
             <div class="text_no_pic standard-line text-rtl">
-              <p>
+              <p class="text-title_no_pic">
                 شما محصولی را ثبت نکرده اید یا در
 
                 <router-link to="">انتظار تایید</router-link>

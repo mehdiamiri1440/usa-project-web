@@ -368,7 +368,7 @@ i.fa-star {
       <div class="contact-search-input-wrapper">
         <input
           type="text"
-          placeholder="جستجو پیام"
+          placeholder="جستجوی مخاطب"
           v-model="$parent.contactNameSearchText"
         />
         <i class="fa fa-search"></i>
@@ -428,7 +428,7 @@ i.fa-star {
             </div>
 
             <div class="text_no_pic standard-line text-rtl">
-              <p>مخاطبی یافت نشد!</p>
+              <p class="text-description_no_pic">مخاطبی یافت نشد!</p>
             </div>
             
           </div>
@@ -525,7 +525,7 @@ i.fa-star {
               </div>
 
               <div class="text_no_pic standard-line text-rtl">
-                <p>هیچ پیام جدیدی ندارید!</p>
+                <p class="text-title_no_pic">هیچ پیام جدیدی ندارید!</p>
                 <p class="text-description_no_pic">
                   برای شروع گفتگو با خریداران و فروشندگان باسکول، پیام ارسال
                   کنید.
@@ -545,7 +545,7 @@ i.fa-star {
                 tag="button"
                 class="btn-orange-empty-state text-rtl"
               >
-                <i class="fas fa-user-friends"></i> شروع چت با فروشندگان
+                <i class="fas fa-user-friends"></i>  مشاهده فروشندگان
               </router-link>
             </div>
           </li>

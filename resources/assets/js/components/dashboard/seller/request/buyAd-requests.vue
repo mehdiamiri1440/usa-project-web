@@ -53,7 +53,6 @@
   font-weight: bold;
   padding: 5px;
 }
-
 .buyAd-wrapper-item {
   border: 1px solid #ddd;
   padding: 11px 5px 15px;
@@ -77,7 +76,7 @@
 .detail-success {
   padding: 10px 0;
   width: 100%;
-  background: #FF9828;
+  background: #ff9828;
   border: none;
   color: #fff;
   text-align: center;
@@ -382,7 +381,7 @@ button.disable {
 
 .green-banner .banner-wrapper .main-wrapper {
   position: relative;
-  padding: 12px 47px;
+  padding: 24px 47px;
   overflow: hidden;
   z-index: 2;
   text-align: right;
@@ -397,14 +396,14 @@ button.disable {
   opacity: 0.2;
 }
 .green-banner .banner-wrapper-title {
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   font-weight: 500;
   text-align: right;
   margin-bottom: 17px;
   color: #ffffff;
 }
 .green-banner .banner-wrapper-description {
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   color: #ffffff;
   text-align: right;
   margin-bottom: 17px;
@@ -477,6 +476,7 @@ button.disable {
 /*----------------------------- orange banner ---------*/
 .promotional-orange-banner {
   cursor: pointer;
+  max-height: 170px;
 }
 .promotional-orange-banner .banner-wrapper::before {
   content: "";
@@ -508,13 +508,15 @@ button.disable {
 }
 .promotional-orange-banner .banner-wrapper-title {
   font-weight: 500;
-  font-size: 1.8rem;
+  font-size: 2rem;
   line-height: 20px;
-  margin-bottom: 6px;
+  margin: 14px 0 20px 0;
+  color: #004f46;
 }
 .promotional-orange-banner .banner-wrapper-description {
-  font-size: 1.6rem;
-  line-height: 29px;
+  font-size: 1.8rem;
+  line-height: 20px;
+  color: #004f46;
 }
 .promotional-orange-banner .orange-banner-button-wrapper {
   display: grid;
@@ -523,13 +525,12 @@ button.disable {
 .promotional-orange-banner .banner-button {
   width: 200px;
   font-size: 1.4rem;
-  padding: 3px 0;
-  line-height: 24px;
-  margin-top: 29px;
-  margin-bottom: 10px;
+  padding: 10px 0;
+  margin: 14px 0 10px;
   background: #128c7e;
   color: #ffffff;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+  -webkit-box-shadow: 0px 4px 8px rgb(0 0 0 / 15%);
+  box-shadow: 0px 4px 8px rgb(0 0 0 / 15%);
   border-radius: 4px;
 }
 
@@ -623,7 +624,7 @@ button.disable {
     padding: 20px 10px;
   }
   .promotional-orange-banner .banner-wrapper-description {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     line-height: 20px;
   }
   .promotional-orange-banner .orange-banner-button-wrapper {
@@ -638,12 +639,12 @@ button.disable {
     margin-left: 27px;
   }
   .green-banner .banner-wrapper-title {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     line-height: 24px;
     margin-bottom: 5px;
   }
   .green-banner .banner-wrapper-description {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     line-height: 20px;
   }
   .banner-button {
@@ -688,6 +689,9 @@ button.disable {
   .main-content,
   .wrapper-items {
     padding: 0;
+  }
+  .list-unstyled {
+    padding: 0 15px;
   }
   .requests .main-content {
     padding: 0 0 100px !important;
