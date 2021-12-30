@@ -1140,7 +1140,7 @@ export default {
       this.handleBackBtn();
       $("#no-access-to-golden-buyers-modal").modal("show");
     },
-    
+
     isModalOpen: function () {
       return swal.getState().isOpen;
     },
@@ -1429,9 +1429,11 @@ export default {
         ) {
           if (!this.isClosed) {
             setTimeout(() => {
-              document.querySelector(
-                ".android-download-alert-wrapper"
-              ).style.height = "65px";
+              if (document.querySelector(".android-download-alert-wrapper")) {
+                document.querySelector(
+                  ".android-download-alert-wrapper"
+                ).style.height = "65px";
+              }
             }, 3000);
           }
         }
