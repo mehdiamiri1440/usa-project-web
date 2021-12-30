@@ -98,7 +98,7 @@
 .detail-success {
   padding: 10px 0;
   width: 100%;
-  background: #00c569;
+  background:#FF9828;
   border: none;
   color: #fff;
   text-align: center;

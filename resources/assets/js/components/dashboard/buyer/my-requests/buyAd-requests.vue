@@ -26,7 +26,7 @@
 .detail-success {
   padding: 8px 0;
   width: 100%;
-  background: #00c569;
+  background: #FF9828;
   color: #fff;
   text-align: center;
   border-radius: 5px;

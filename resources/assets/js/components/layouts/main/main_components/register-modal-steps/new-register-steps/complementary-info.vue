@@ -34,7 +34,7 @@ label.input-title {
 }
 
 .submit-button.active {
-  background: #00c569;
+  background: #FF9828;
   color: #fff;
   cursor: pointer;
 }

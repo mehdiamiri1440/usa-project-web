@@ -56,7 +56,7 @@
 .detail-success {
   padding: 8px 0;
   width: 100%;
-  background: #00c569;
+  background: #ff9828;
   color: #fff;
   text-align: center;
   border-radius: 5px;
@@ -90,42 +90,56 @@
         <li class="list-group-item" v-for="sellOffer in sellOffers">
           <div class="col-sm-3 col-xs-12">
             <p class="list-title">
-              {{sellOffer.category_name}}
+              {{ sellOffer.category_name }}
               <span>|</span>
-              {{sellOffer.subcategory_name}}
+              {{ sellOffer.subcategory_name }}
               <span>|</span>
-              {{sellOffer.name}}
+              {{ sellOffer.name }}
             </p>
           </div>
           <div class="col-sm-2 col-xs-12">
             <p class="needs">
               <span class="static-content">تحویل :</span>
-              {{sellOffer.deliver_at}}
+              {{ sellOffer.deliver_at }}
             </p>
           </div>
           <div class="col-sm-2 col-xs-12">
             <p class="needs">
               <span class="static-content">قیمت :</span>
-              {{sellOffer.price}}
+              {{ sellOffer.price }}
               <span class="static-content">تومان</span>
             </p>
           </div>
           <div class="col-sm-3 col-xs-12">
-            <p class="list-time">{{sellOffer.valid_from + ' - ' + sellOffer.valid_to}}</p>
+            <p class="list-time">
+              {{ sellOffer.valid_from + " - " + sellOffer.valid_to }}
+            </p>
           </div>
           <div class="col-sm-2 status col-xs-12">
-            <p v-if="sellOffer.status == 'در حال بررسی'" class="detail-stand">{{sellOffer.status}}</p>
-            <p v-if="sellOffer.status == 'تایید شده'" class="detail-success">{{sellOffer.status}}</p>
-            <p v-if="sellOffer.status == 'رد شده'" class="detail-error">{{sellOffer.status}}</p>
+            <p v-if="sellOffer.status == 'در حال بررسی'" class="detail-stand">
+              {{ sellOffer.status }}
+            </p>
+            <p v-if="sellOffer.status == 'تایید شده'" class="detail-success">
+              {{ sellOffer.status }}
+            </p>
+            <p v-if="sellOffer.status == 'رد شده'" class="detail-error">
+              {{ sellOffer.status }}
+            </p>
           </div>
         </li>
       </ul>
     </section>
-    <section class="main-content col-xs-12" v-if="sellOffers.length == 0 && !load">
+    <section
+      class="main-content col-xs-12"
+      v-if="sellOffers.length == 0 && !load"
+    >
       <h4 dir="rtl" class="text-center">پیشنهاد فروشی ثبت نکرده اید.</h4>
     </section>
     <div class="loading_images col-xs-12" v-show="load">
-      <img src="../../../../../img/gif/prload.gif" style="width:200px;height:200px" />
+      <img
+        src="../../../../../img/gif/prload.gif"
+        style="width: 200px; height: 200px"
+      />
     </div>
   </div>
 </template>
@@ -133,11 +147,11 @@
 <script>
 import { eventBus } from "../../../../router/router";
 export default {
-  data: function() {
+  data: function () {
     return {
       currentUser: {
         profile: "",
-        user_info: ""
+        user_info: "",
       },
       sellOffers: "",
       popUpMsg: "",
@@ -145,26 +159,26 @@ export default {
       items: [
         {
           message: "پیشنهادات من",
-          url: "mySellOffers"
+          url: "mySellOffers",
         },
         {
           message: "درخواست های جدید",
-          url: "buyAdRequests"
-        }
-      ]
+          url: "buyAdRequests",
+        },
+      ],
     };
   },
   methods: {
-    init: function() {
+    init: function () {
       this.load = true;
 
       var self = this;
 
-      axios.post("/get_my_sell_offer_list").then(function(response) {
+      axios.post("/get_my_sell_offer_list").then(function (response) {
         self.sellOffers = response.data.sell_offers;
         self.load = false;
       });
-    }
+    },
   },
   mounted() {
     this.init();
@@ -172,6 +186,6 @@ export default {
   },
   created() {
     gtag("config", "UA-129398000-1", { page_path: "/my-sell-offers" });
-  }
+  },
 };
 </script>

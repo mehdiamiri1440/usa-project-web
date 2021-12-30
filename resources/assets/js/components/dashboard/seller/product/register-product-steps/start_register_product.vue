@@ -109,7 +109,8 @@ label {
   cursor: pointer;
   transition: 150ms;
   box-shadow: 0 1px 3px rgb(0, 0, 0, 0);
-  background-image: linear-gradient(to left, #00c569, #21ad93);
+  background-image: linear-gradient(to left, #ff9828, #ff6600);
+  border-radius: 4px;
 }
 
 .submit-button:hover {

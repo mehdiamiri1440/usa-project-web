@@ -114,7 +114,7 @@ input.error:focus + i {
   display: inline-block;
 }
 .submit-button.active {
-  background: #00c569;
+  background: #FF9828;
   cursor: pointer;
 }
 .submit-button.active:hover i {

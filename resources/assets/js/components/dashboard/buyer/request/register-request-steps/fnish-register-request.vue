@@ -23,7 +23,7 @@ label {
 }
 
 .submit-button.active {
-  background: #00c569;
+  background: #FF9828;
   cursor: pointer;
 }
 
