@@ -100,7 +100,7 @@
 }
 .orange-button {
   font-size: 1.4rem;
-  padding: 5px 50px;
+  padding: 8px 50px;
   max-width: 245px;
   margin: 25px auto 28px;
   border-radius: 4px;

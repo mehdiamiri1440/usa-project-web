@@ -593,7 +593,13 @@ li.static-item > button i {
   <div class="contact-body my-contacts">
     <div class="contact-search">
       <div class="contact-search-input-wrapper">
-        <input type="text" placeholder=" جستجو پیشنهاد" v-model="filterBuyAd" />
+        <input
+          type="text"
+          placeholder=" جستجو پیشنهاد"
+          v-model="filterBuyAd"
+          @blur="showNavigationMenu"
+          @focus="hideNavigationMenu"
+        />
         <i class="fa fa-search"></i>
         <button v-if="filterBuyAd" @click.prevent="filterBuyAd = ''">
           <i class="fa fa-times"></i>
@@ -660,7 +666,7 @@ li.static-item > button i {
         </div>
 
         <div class="text_no_pic standard-line text-rtl">
-          <p class="text-title_no_pic ">خریدار مرتبطی ندارید!</p>
+          <p class="text-title_no_pic">خریدار مرتبطی ندارید!</p>
           <p class="text-description_no_pic">
             برای مشاهده خریداران مرتبط، ابتدا محصول خود را ثبت کنید.
           </p>
@@ -1356,6 +1362,24 @@ export default {
         event_category: categoryName,
         event_label: labelName,
       });
+    },
+    showNavigationMenu() {
+      if (screen.width < 992) {
+        if (document.querySelector(".custom-navigation")) {
+          setTimeout(() => {
+             document.querySelector(".custom-navigation").style.display = "block";
+          }, 50);
+        }
+      }
+    },
+    hideNavigationMenu() {
+      if (screen.width < 992) {
+       
+          if (document.querySelector(".custom-navigation")) {
+            document.querySelector(".custom-navigation").style.display = "none";
+          }
+        
+      }
     },
   },
   watch: {

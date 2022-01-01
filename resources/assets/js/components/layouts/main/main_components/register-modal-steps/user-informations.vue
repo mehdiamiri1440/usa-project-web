@@ -8,6 +8,7 @@ input[type="text"],
 select,
 textarea {
   border-radius: 8px;
+  color: #333333;
 }
 
 label.input-title {
@@ -34,7 +35,7 @@ label.input-title {
 }
 
 .submit-button.active {
-  background: #FF9828;
+  background: #ff9828;
   color: #fff;
   cursor: pointer;
 }
@@ -309,6 +310,8 @@ select.error:focus {
                 id="user-name"
                 type="text"
                 placeholder="نام شما"
+                @blur="$parent.showNavigationMenu"
+                @focus="$parent.hideNavigationMenu"
               />
 
               <i
@@ -343,7 +346,8 @@ select.error:focus {
                 id="user-family"
                 type="text"
                 placeholder="نام خانوادگی شما"
-                
+                @blur="$parent.showNavigationMenu"
+                @focus="$parent.hideNavigationMenu"
               />
 
               <i
@@ -441,12 +445,12 @@ select.error:focus {
                 />
                 <span class="checkmark">
                   <i
-                  class="far"
-                  :class="[
-                    { 'fa-dot-circle': sellerActive },
-                    { 'fa-circle': !sellerActive },
-                  ]"
-                ></i>
+                    class="far"
+                    :class="[
+                      { 'fa-dot-circle': sellerActive },
+                      { 'fa-circle': !sellerActive },
+                    ]"
+                  ></i>
                 </span>
                 <label>
                   <svg
@@ -493,14 +497,13 @@ select.error:focus {
 
                 <span class="checkmark">
                   <i
-                  class="far"
-                  :class="[
-                    { 'fa-dot-circle': buyerActive },
-                    { 'fa-circle': !buyerActive },
-                  ]"
-                ></i>
+                    class="far"
+                    :class="[
+                      { 'fa-dot-circle': buyerActive },
+                      { 'fa-circle': !buyerActive },
+                    ]"
+                  ></i>
                 </span>
-                
 
                 <label>
                   <svg
@@ -604,17 +607,14 @@ export default {
       if (screen.width < 992) {
         if (document.querySelector(".custom-navigation")) {
           document.querySelector(".custom-navigation").style.display = "block";
-         
         }
       }
     },
     hideNavigationMenu() {
       if (screen.width < 992) {
-       
-          if (document.querySelector(".custom-navigation")) {
-            document.querySelector(".custom-navigation").style.display = "none";
-          }
-        
+        if (document.querySelector(".custom-navigation")) {
+          document.querySelector(".custom-navigation").style.display = "none";
+        }
       }
     },
   },

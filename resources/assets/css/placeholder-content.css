@@ -292,7 +292,9 @@ border-radius: 8px;
 .margin-bottom-50 {
   margin-bottom: 50px;
 }
-
+.margin-bottom-28 {
+  margin-bottom: 28px!important;
+}
 .margin-bottom-100 {
   margin-bottom: 100px;
 }
@@ -852,8 +854,8 @@ direction: rtl;
   border-radius: 8px;
   color: #ffffff;
   border:0;
-  font-size:1.4rem;
-  padding: 5px 40px 5px 17px;
+  font-size:1.6rem;
+  padding: 8px 40px 8px 17px;
 }
 .btn-orange-empty-state i
 {

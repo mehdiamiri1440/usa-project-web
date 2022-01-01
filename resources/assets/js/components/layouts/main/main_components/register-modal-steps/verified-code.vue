@@ -190,7 +190,6 @@ input.error:focus + i {
             maxlength="1"
             type="tel"
             pattern="[0-9]*"
-            onfocus="this.select();"
             :class="{
               error: this.$parent.errors.verification_code,
               active: code.number1.length,
@@ -204,7 +203,6 @@ input.error:focus + i {
             maxlength="1"
             type="tel"
             pattern="[0-9]*"
-            onfocus="this.select();"
             :class="{
               error: this.$parent.errors.verification_code,
               active: code.number2.length,
@@ -218,7 +216,6 @@ input.error:focus + i {
             maxlength="1"
             type="tel"
             pattern="[0-9]*"
-            onfocus="this.select();"
             :class="{
               error: this.$parent.errors.verification_code,
               active: code.number3.length,
@@ -232,7 +229,6 @@ input.error:focus + i {
             maxlength="1"
             type="tel"
             pattern="[0-9]*"
-            onfocus="this.select();"
             :class="{
               error: this.$parent.errors.verification_code,
               active: code.number4.length,
@@ -322,6 +318,10 @@ export default {
   methods: {
     init() {
       this.inputCodeLimits();
+      setTimeout(() => {
+        document.getElementById("code").focus();
+      }, 50);
+      
     },
     submitVerifyCode() {
       if (this.$parent.step2.verification_code) {

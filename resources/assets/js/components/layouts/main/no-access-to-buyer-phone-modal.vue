@@ -99,7 +99,7 @@
 }
 .orange-button {
   font-size: 1.4rem;
-  padding: 5px 50px;
+  padding: 8px 50px;
   max-width: 245px;
   margin: 25px auto 28px;
   border-radius: 4px;
@@ -129,13 +129,12 @@
   .no-access-to-buyer-phone-image-wrapper img {
     max-width: 95px;
   }
-  
+
   .modal-contents p {
     padding: 0 35px;
   }
   .orange-button {
     margin: 33px auto 23px;
-
   }
 }
 </style>
@@ -161,12 +160,9 @@
             </div>
             <div class="modal-contents">
               <h3 v-if="errorStatus">به شماره تماس خریداران دسترسی ندارید!</h3>
-              <p class="text-rtl" v-text="message">
-                
-              </p>
-              <div class="text-center">
+              <p :class="{'margin-bottom-28':!errorStatus}" class="text-rtl" v-text="message"></p>
+              <div class="text-center" v-if="errorStatus">
                 <button
-                  v-if="errorStatus"
                   class="orange-button text-rtl"
                   @click.prevent="$parent.routeRaiseUpgradeMemberShip()"
                 >

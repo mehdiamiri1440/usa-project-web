@@ -370,6 +370,8 @@ i.fa-star {
           type="text"
           placeholder="جستجوی مخاطب"
           v-model="$parent.contactNameSearchText"
+          @blur="showNavigationMenu"
+          @focus="hideNavigationMenu"
         />
         <i class="fa fa-search"></i>
         <button
@@ -738,6 +740,24 @@ export default {
             }
           }, 300);
         });
+    },
+    showNavigationMenu() {
+      if (screen.width < 992) {
+        if (document.querySelector(".custom-navigation")) {
+          setTimeout(() => {
+             document.querySelector(".custom-navigation").style.display = "block";
+          }, 50);
+        }
+      }
+    },
+    hideNavigationMenu() {
+      if (screen.width < 992) {
+       
+          if (document.querySelector(".custom-navigation")) {
+            document.querySelector(".custom-navigation").style.display = "none";
+          }
+        
+      }
     },
   },
   watch: {

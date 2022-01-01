@@ -194,7 +194,6 @@ input[type="number"] {
   background: #fcfcfc;
   overflow: hidden;
   border-radius: 4px;
-  border: 1px solid #707070;
   top: -7px;
 }
 
@@ -214,6 +213,7 @@ input[type="number"] {
 
 .count-input-wrapper button {
   padding: 10px 15px;
+  border:0;
 }
 
 .form-control[type="number"]::-webkit-inner-spin-button,

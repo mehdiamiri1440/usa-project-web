@@ -97,6 +97,7 @@ input.active:focus + i,
 input.active + i,
 .radio-wrapper.active {
   border-color: #00c569;
+  color: #333333;
 }
 
 input.error {

@@ -789,6 +789,8 @@ a.profile-info-wrapper:focus {
             type="text"
             v-model="$parent.searchValueText"
             placeholder="محصول مورد نظر خود را جستجو کنید"
+            @blur="showNavigationMenu"
+            @focus="hideNavigationMenu"
           />
 
           <button class="btn-search">
@@ -820,6 +822,8 @@ a.profile-info-wrapper:focus {
             type="text"
             v-model="$parent.searchValueText"
             placeholder="محصول مورد نظر خود را جستجو کنید"
+            @blur="showNavigationMenu"
+            @focus="hideNavigationMenu"
           />
 
           <button class="btn-search">
@@ -933,6 +937,23 @@ export default {
           this.pageTitle = item.title;
         }
       });
+    },
+    showNavigationMenu() {
+      if (screen.width < 992) {
+        if (document.querySelector(".custom-navigation")) {
+          setTimeout(() => {
+            document.querySelector(".custom-navigation").style.display =
+              "block";
+          }, 50);
+        }
+      }
+    },
+    hideNavigationMenu() {
+      if (screen.width < 992) {
+        if (document.querySelector(".custom-navigation")) {
+          document.querySelector(".custom-navigation").style.display = "none";
+        }
+      }
     },
   },
   mounted() {
