@@ -265,7 +265,7 @@ const router = new Router({
         var userId = window.localStorage.getItem("userId");
         var userType = window.localStorage.getItem("userType");
         if (userId && userType == 1) next();
-        else next("/login");
+        else next("/register");
       },
     },
     {
@@ -396,7 +396,7 @@ const router = new Router({
         var userId = window.localStorage.getItem("userId");
         var userType = window.localStorage.getItem("userType");
         if (userId && userType == 0) next();
-        else next("/login");
+        else next("/register");
       },
     },
     {
@@ -591,7 +591,7 @@ const router = new Router({
           beforeEnter: (to, from, next) => {
             var userId = window.localStorage.getItem("userId");
             if (!userId) next();
-            else next("/login");
+            else next("/register");
           },
         },
       ],
