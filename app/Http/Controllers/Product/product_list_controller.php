@@ -382,6 +382,13 @@ class product_list_controller extends Controller
 
         $products = $this->prepare_data_for_client($products);
 
+        echo 'all products : ' . count($all_product_ids) . "\n";
+        echo 'old products ids : ' . count($old_product_ids) . "\n";
+        echo 'old products : ' . count($old_products) . "\n";
+        echo 'calculated products : ' . count($products) . "\n";
+        echo 'updated products : ' . count($updated_product_ids) . "\n";
+        echo 'cached products : ' . count($cached_products) . "\n";
+
         return array_merge($products,$old_products);
     }
 
