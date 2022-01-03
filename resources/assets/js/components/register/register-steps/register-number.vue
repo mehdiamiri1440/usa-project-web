@@ -27,7 +27,7 @@ label.input-title {
 }
 
 .submit-button.active {
-  background: #FF9828;
+  background: #ff9828;
   cursor: pointer;
   color: #fff;
 }
@@ -129,8 +129,7 @@ input.error:focus + i {
     width: 60px;
     height: 77px;
   }
-  label.input-title
-  {
+  label.input-title {
     font-size: 1.4rem;
   }
 }
@@ -150,6 +149,9 @@ input.error:focus + i {
             error: $parent.errors.phone,
             active: this.phoneNumber.length >= 11,
           }"
+          @blur="$parent.showNavigationMenu"
+          @focus="$parent.hideNavigationMenu"
+          @click="$parent.hideNavigationMenu"
           id="phone-number"
           type="tel"
           class="dire"
@@ -201,6 +203,11 @@ export default {
       }
     },
   },
+  mounted() {
+    if (this.$parent.isOsIOS()) {
+      $("#phone-number").attr("type", "text");
+    }
+  },
   watch: {
     phoneNumber: function (value) {
       this.$parent.errors.phone = "";
@@ -223,11 +230,6 @@ export default {
         }
       }
     },
-  },
-  mounted() {
-    if (this.$parent.isOsIOS()) {
-      $("#phone-number").attr("type", "text");
-    }
   },
 };
 </script>

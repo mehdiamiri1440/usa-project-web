@@ -880,11 +880,9 @@ export default {
     },
     hideNavigationMenu() {
       if (screen.width < 992) {
-       
           if (document.querySelector(".custom-navigation")) {
             document.querySelector(".custom-navigation").style.display = "none";
           }
-        
       }
     },
   },

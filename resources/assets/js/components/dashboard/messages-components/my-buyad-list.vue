@@ -696,7 +696,7 @@ li.static-item > button i {
           </div>
 
           <div class="text_no_pic standard-line text-rtl">
-            <p class="text-description_no_pic">خریداری یافت نشد!</p>
+            <p class="text-title_no_pic">خریداری یافت نشد!</p>
           </div>
         </div>
       </div>

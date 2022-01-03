@@ -132,6 +132,7 @@
 }
 .no-product-buttons button{
   max-width: 250px;
+  border-radius: 8px;
 }
 @media screen and (max-width: 767px) {
   .product-wrapper {
@@ -274,7 +275,7 @@
             </div>
 
             <div class="text_no_pic standard-line text-rtl">
-              <p>فروشنده ای یافت نشد!</p>
+              <p class="text-title_no_pic">فروشنده ای یافت نشد!</p>
 
               <p class="text-description_no_pic" dir="rtl">
                 شما می توانید درخواست خرید خود را در اینجا ثبت کنید.

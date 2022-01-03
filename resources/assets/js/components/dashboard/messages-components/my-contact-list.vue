@@ -430,7 +430,7 @@ i.fa-star {
             </div>
 
             <div class="text_no_pic standard-line text-rtl">
-              <p class="text-description_no_pic">مخاطبی یافت نشد!</p>
+              <p class="text-title_no_pic">مخاطبی یافت نشد!</p>
             </div>
             
           </div>

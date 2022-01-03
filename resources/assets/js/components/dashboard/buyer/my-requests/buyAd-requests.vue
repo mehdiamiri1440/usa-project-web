@@ -303,8 +303,8 @@ tr:nth-child(even) {
             </div>
 
             <div class="text_no_pic standard-line text-rtl">
-              <p>
-                هیچ درخواست خریدی ثبت نشده یا در 
+              <p class="text-title_no_pic">
+                هیچ درخواست خریدی ثبت نشد و یا در
 
                 <router-link to="">انتظار تایید</router-link>
                 است!
