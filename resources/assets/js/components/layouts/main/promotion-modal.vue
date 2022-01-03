@@ -391,7 +391,7 @@
   .orange-button {
     margin: 15px auto 23px;
     max-width: 180px;
-    padding: 5px 0;
+    padding: 8px 0;
     font-weight: 500;
   }
 }

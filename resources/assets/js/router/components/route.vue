@@ -1404,6 +1404,13 @@ export default {
       window.localStorage.setItem("userId", this.user.id);
       window.localStorage.setItem("userType", this.user.type);
     },
+     showNavigationMenu() {
+      if (screen.width < 992) {
+        if (document.querySelector(".custom-navigation")) {
+          document.querySelector(".custom-navigation").style.display = "block";
+        }
+      }
+    },
   },
   mounted() {
     this.updateUserData();
@@ -1414,18 +1421,18 @@ export default {
     $("#wallet-modal").on("show.bs.modal", (e) => {
       this.handleBackKeys();
     });
-     $("#product-registration-restrictions-modal").on("show.bs.modal", (e) => {
-        this.handleBackKeys();
-      });
-      $("#no-access-to-golden-buyers-modal").on("show.bs.modal", (e) => {
-        this.handleBackKeys();
-      });
-      $("#no-access-to-buyer-phone-modal").on("show.bs.modal", (e) => {
-        this.handleBackKeys();
-      });
-      $("#full-messaging-ceiling-modal").on("show.bs.modal", (e) => {
-        this.handleBackKeys();
-      });
+    $("#product-registration-restrictions-modal").on("show.bs.modal", (e) => {
+      this.handleBackKeys();
+    })
+    $("#no-access-to-golden-buyers-modal").on("show.bs.modal", (e) => {
+      this.handleBackKeys();
+    });
+    $("#no-access-to-buyer-phone-modal").on("show.bs.modal", (e) => {
+      this.handleBackKeys();
+    });
+    $("#full-messaging-ceiling-modal").on("show.bs.modal", (e) => {
+      this.handleBackKeys();
+    });
     eventBus.$emit("globalVerifiedBadgeContents", 1);
     eventBus.$on("currentUser", (event) => {
       this.currentUser = event;
