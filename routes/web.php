@@ -19,8 +19,6 @@ use Illuminate\Http\Request;
 use App\Jobs\sendSMS;
 use App\Jobs\LeadHandler\LeadDistributorBot;
 
-use App\Jobs\CacheProductList;
-
 
 Route::get('/',[
     'uses' => 'index_controller@load_home_page_blade'
@@ -1307,9 +1305,7 @@ Route::post('/get_wp_posts', [
 
 Route::get('download-media','General\media_controller@download_media');
 
-Route::get('/get-p',function(){
-    CacheProductList::dispatch();
-});
+
 // Route::group(['middleware' => [cors::class]], function () {
 //     Route::options('/broadcastAuth', function () {
 //         return response('OK', \Illuminate\Http\Response::HTTP_NO_CONTENT)
