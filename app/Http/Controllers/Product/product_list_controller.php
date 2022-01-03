@@ -362,7 +362,7 @@ class product_list_controller extends Controller
         });
 
         
-
+        echo 'start main calculations at ' . Carbon::now() . "\n";
         $products = DB::table('products')
                     ->join('categories as c', 'products.category_id', '=', 'c.id')
                     ->join('myusers','products.myuser_id','=','myusers.id')
@@ -379,6 +379,8 @@ class product_list_controller extends Controller
                     ->where('products.confirmed', true)
                     ->whereNotIn('products.id',$old_product_ids)
                     ->get();
+
+        echo 'end main calculations at ' . Carbon::now() . "\n";
 
         $products = $this->prepare_data_for_client($products);
 
