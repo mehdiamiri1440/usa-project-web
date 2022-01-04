@@ -246,26 +246,7 @@
         event.preventDefault();
         var e = event.currentTarget;
 
-        var photo_id = $(e).attr('id');
-
-        $.ajax({
-            url:"{{route('delete_buyAd_photo_by_id')}}",
-            data:{
-                photo_id:photo_id,
-            },
-            type:"DELETE",
-            datatype:'json'
-        })
-        .done(function(json){
-            if(json.status == true)
-            {
-                $(e).parent().hide();            
-            }
-            alert(json.msg);           
-        })
-        .fail(function(xhr,status,errorThrown){
-
-        });   
+        var photo_id = $(e).attr('id');   
     }
 
     let superCategories = '';
