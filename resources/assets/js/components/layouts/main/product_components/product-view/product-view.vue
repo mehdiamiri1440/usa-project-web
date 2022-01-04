@@ -472,30 +472,32 @@ button.send-message-button {
         class="fix-send-message-wrapper hidden-lg hidden-md"
       >
         <button
-          v-if="!isMyProfile && currentUser.user_info"
+          v-if="!isMyProfile && updatedCurrentUser.user_info"
           @click.prevent="openChat(product)"
           class="main-button button-shadow"
-          :class="{
-            'bg-soft-orange orange-text send-message-button':
-              product.user_info.has_phone && currentUser.user_info.is_buyer,
-            'bg-orange white-text':
-              !product.user_info.has_phone ||
-              (product.user_info.has_phone && currentUser.user_info.is_seller),
-          }"
+           :class="{
+              'bg-soft-orange orange-text send-message-button':
+                product.user_info.has_phone &&
+                updatedCurrentUser.user_info.is_buyer,
+              'bg-orange white-text':
+                !product.user_info.has_phone ||
+                (product.user_info.has_phone &&
+                  updatedCurrentUser.user_info.is_seller),
+            }"
         >
           <span> چت با فروشنده </span>
 
           <i class="fas fa-comment-alt"></i>
         </button>
         <button
-          v-else-if="!currentUser.user_info"
+          v-else-if="!updatedCurrentUser.user_info"
           @click.prevent="loginModal(true)"
           class="main-button button-shadow"
-          :class="{
-            'bg-soft-orange orange-text send-message-button':
-              product.user_info.has_phone,
-            'bg-orange white-text': !product.user_info.has_phone,
-          }"
+         :class="{
+              'bg-soft-orange orange-text send-message-button':
+                product.user_info.has_phone,
+              'bg-orange white-text': !product.user_info.has_phone,
+            }"
         >
           <span> چت با فروشنده </span>
           <i class="fas fa-comment-alt"></i>
@@ -503,9 +505,9 @@ button.send-message-button {
         <button
           v-if="
             !isMyProfile &&
-            currentUser.user_info &&
+            updatedCurrentUser.user_info &&
             product.user_info.has_phone &&
-            currentUser.user_info.is_buyer
+            updatedCurrentUser.user_info.is_buyer
           "
           @click.prevent="activePhoneCall(true)"
           class="main-button bg-orange white-text"
@@ -519,7 +521,7 @@ button.send-message-button {
           </div>
         </button>
         <button
-          v-else-if="!currentUser.user_info && product.user_info.has_phone"
+          v-else-if="!updatedCurrentUser.user_info && product.user_info.has_phone"
           @click.prevent="loginModal(false)"
           class="main-button bg-orange white-text"
           :class="{ disable: isActivePhone }"

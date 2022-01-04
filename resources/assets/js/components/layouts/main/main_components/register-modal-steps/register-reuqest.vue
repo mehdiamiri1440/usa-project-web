@@ -362,13 +362,7 @@ input.error:focus + i {
 
             <i class="fa fa-check"></i>
           </button>
-          <button
-            class="submit-button back-button"
-            @click.prevent="$parent.currentStep--"
-          >
-            <i class="fa fa-arrow-right"></i>
-            مرحله قبل
-          </button>
+          
         </div>
       </div>
     </div>
