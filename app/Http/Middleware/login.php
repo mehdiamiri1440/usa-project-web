@@ -6,6 +6,8 @@ use Closure;
 use App\Models\profile;
 use App\Models\myuser;
 use JWTAuth;
+use App\Http\Controllers\Accounting\token_controller;
+use App\Traits\Token;
 
 class login
 {
@@ -16,12 +18,46 @@ class login
      * @param  \Closure  $next
      * @return mixed
      */
+    use Token;
+
     public function handle($request, Closure $next)
-    {
-        
+    {   
         if($request->hasHeader('Authorization')){
             try{
-                $user = JWTAuth::parseToken()->authenticate();
+                $token = explode(' ',$request->Header('Authorization'))[1];//explode(' ',$request->Authorization)[1];
+                // $user = JWTAuth::parseToken()->authenticate();
+                $user = $this->parse_token($token);
+
+                if( ! is_object($user)){
+                
+                    if($user === 1){
+                        $refreshed_token = $this->refresh_token($token);
+
+                        if($refreshed_token === 0){
+                            return response()->json([
+                                'status' => false,
+                                'redirect_to_login' => true,
+                                'msg' => 'invalid token!!!'
+                            ],401);
+                        }
+
+                        return response()->json([
+                            'status' => false,
+                            'refresh' => true,
+                            'token' => $refreshed_token
+                        ],401);
+
+                    }
+                    else{
+                        return response()->json([
+                            'status' => false,
+                            'redirect_to_login' => true,
+                            'msg' => 'invalid token'
+                        ],401);
+                    }
+                    
+                }
+
 
                 if(! $request->session()->has('user_id')){
                     $status = $this->set_user_session($user->phone,$user->password);
@@ -41,62 +77,11 @@ class login
                 return $next($request);
             }
             catch(\Exception $e){
-                if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenInvalidException){
-                    return response()->json([
-                        'status' => false,
-                        'redirect_to_login' => true,
-                        'msg' => 'token is not valid'
-                    ],401);
-                }else if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenExpiredException){
-                    // If the token is expired, then it will be refreshed and added to the headers
-                    try
-                    {
-                        $refreshed_token = JWTAuth::refresh(JWTAuth::getToken());
-                        
-                        
-                        return response()->json([
-                            'status' => false,
-                            'refresh' => true,
-                            'token' => $refreshed_token
-                        ],401);
-
-                    }catch (\Exception $e){
-                        if($e instanceof \Tymon\JWTAuth\Exceptions\TokenBlacklistedException){
-                            return response()->json([
-                                'status' => false,
-                                'redirect_to_login' => true,
-                                'msg' => $e->getMessage()
-                            ],403);
-                        }
-                        else if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenExpiredException){
-                            return response()->json([
-                                'status' => false,
-                                'redirect_to_login' => true,
-                                'msg' => $e->getMessage()
-                            ],401);
-                        }
-
-                        return response()->json([
-                            'status' => false,
-                            'redirect_to_login' => true,
-                            'msg' => 'token can not be refreshed',
-                        ],401);
-                    }
-                }
-                else if($e instanceof \Tymon\JWTAuth\Exceptions\TokenBlacklistedException){
-                    return response()->json([
-                        'status' => false,
-                        'redirect_to_login' => true,
-                        'msg' => $e->getMessage()
-                    ],403);
-                }
-                else{
-                    response()->json([
-                        'status' => false,
-                        'redirect_to_login' => true,
-                        'msg' => 'token not found!'
-                    ],401);
-                }
+                return response()->json([
+                    'status' => false,
+                    'redirect_to_login' => true,
+                    'msg' => 'token is not valid!'
+                ],401);
             }
         }
         else{

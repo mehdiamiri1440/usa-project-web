@@ -59,18 +59,6 @@
   background: #fff;
   color: #00c569;
 }
-
-.icon-wrapper.main-icon::after {
-  content: "";
-  width: 13px;
-  height: 13px;
-  background: #1da1f2;
-  position: absolute;
-  right: -4px;
-  top: -4px;
-  border: 2px solid #313a43;
-  border-radius: 15px;
-}
 .user-image-wrapper {
   width: 26px;
   height: 27px;
@@ -105,6 +93,7 @@
         :key="index"
         tag="button"
         :to="{ name: item.name }"
+        
       >
         <div
           class="icon-wrapper"
@@ -223,7 +212,7 @@ export default {
         },
         {
           title: "ثبت محصول",
-          name: "registerProductSeller",
+          name: this.showDelsa() ? "introductionDelsaSeller" : "registerProductSeller",
           icon: "fa-plus",
           mainIcon: true,
         },
@@ -280,7 +269,7 @@ export default {
           mainIcon: false,
         },
         {
-          title: "درخواست‌ ها",
+          title: "خریداران",
           name: "mainBuyAdRequests",
           icon: "fa-list-alt",
           mainIcon: false,
@@ -306,5 +295,27 @@ export default {
       ],
     };
   },
+  methods:{
+    showDelsa(){
+      if(screen.width < 991 && this.getCookie("firstThreeDaysRegistered")) return true;
+      else 
+      return false;
+    },
+    getCookie: function (cname) {
+      var name = cname + "=";
+      var ca = document.cookie.split(";");
+      for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == " ") {
+          c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+          return c.substring(name.length, c.length);
+        }
+      }
+      return "";
+    },
+  },
+  
 };
 </script>

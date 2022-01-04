@@ -344,7 +344,7 @@ i {
 }
 
 .text_no_pic {
-  margin: 30px auto;
+  margin: 10px auto;
   color: #bdbdbd;
 }
 
@@ -1369,6 +1369,8 @@ a.sub-menu-title:hover {
                   type="text"
                   placeholder="محصول مورد نظر خود را جستجو کنید"
                   v-model="mainSearchBoxText"
+                  @blur="showNavigationMenu"
+                  @focus="hideNavigationMenu"
                 />
                 <button
                   class="hidden-sm hidden-md hidden-lg fa fa-search"
@@ -2839,6 +2841,23 @@ export default {
         });
         mainCategories = Object.values(mainCategories.subcategories);
         this.mobileCategoryList = mainCategories;
+      }
+    },
+    showNavigationMenu() {
+      if (screen.width < 992) {
+        if (document.querySelector(".custom-navigation")) {
+          setTimeout(() => {
+            document.querySelector(".custom-navigation").style.display =
+              "block";
+          }, 50);
+        }
+      }
+    },
+    hideNavigationMenu() {
+      if (screen.width < 992) {
+        if (document.querySelector(".custom-navigation")) {
+          document.querySelector(".custom-navigation").style.display = "none";
+        }
       }
     },
   },

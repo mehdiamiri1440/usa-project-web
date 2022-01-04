@@ -323,6 +323,8 @@ button.send-message-button {
       v-if="!updatedCurrentUser.user_info"
       :is-chat="isChat"
       :product="product"
+      :is-price="isPrice"
+      :category-list="categoryList"
     />
     <PriceModal
       :product-name="product.main.product_name"
@@ -603,6 +605,7 @@ export default {
       breadCrumbs: "",
       dataTags: "",
       updatedCurrentUser: "",
+      isPrice: false,
     };
   },
   methods: {
@@ -699,7 +702,7 @@ export default {
         eventBus.$emit("modal", "sendMsg");
       }
     },
-    loginModal(isChat) {
+    loginModal(isChat = false) {
       this.isChat = isChat;
       $("#register-modal").modal("show");
     },
@@ -1062,7 +1065,17 @@ export default {
       window.scrollTo(0, 0);
     },
     openPriceModal() {
-      // ready for analytics click on estelam gheymat
+      if (!this.isUserLogin) {
+        this.isPrice = true;
+
+        this.loginModal();
+      } else {
+        this.priceModalFunction();
+      }
+    },
+    priceModalFunction() {
+      this.isPrice = false;
+      //  analytics click on estelam gheymat
       this.registerComponentStatistics(
         "product-view",
         "show-price",

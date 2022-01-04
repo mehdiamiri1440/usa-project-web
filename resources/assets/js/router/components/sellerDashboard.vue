@@ -330,6 +330,7 @@
     </div>
     <!-- end regex pricing modal -->
     <promotion-modal />
+    
     <DelsaPromotionModal />
     <PhoneLockedModal />
 
@@ -392,6 +393,7 @@ export default {
     PromotionModal,
     DelsaPromotionModal,
     PhoneLockedModal,
+    
   },
   props: [
     "userId",
@@ -644,6 +646,7 @@ export default {
       $("#promotion-modal").modal("hide");
       this.$router.push({ name: "dashboardPricingTableSeller" });
     },
+    
     handleBackKeys: function () {
       if (window.history.state) {
         history.pushState(null, null, window.location);

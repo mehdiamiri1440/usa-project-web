@@ -173,6 +173,27 @@
     padding: 0 5px;
   }
 }
+@media screen and (max-width: 500px) {
+  .image-file-wrapper {
+    text-align: center;
+  }
+  .image-file-wrapper img {
+    width: 200px;
+    min-height: 120px;
+  }
+  .main-title-wrapper {
+    padding-top: 10px;
+  }
+  .title-section {
+    margin-bottom: 10px;
+  }
+}
+@media screen and (max-width: 360px) {
+  .title-section {
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+}
 </style>
 
 <template>

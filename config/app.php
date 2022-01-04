@@ -124,6 +124,8 @@ return [
 
     'log_level' => env('APP_LOG_LEVEL', 'debug'),
 
+    'token_key' => env('TOKEN_SECRET',null),
+
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers

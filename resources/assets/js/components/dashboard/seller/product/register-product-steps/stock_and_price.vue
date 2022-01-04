@@ -58,12 +58,12 @@
   transform: translateX(5px);
 }
 .submit-button.active {
-  background: #00c569;
+  background: #FF9828;
   cursor: pointer;
   transform: translateX(0);
 }
 .submit-button.active:hover i {
-  background: #00c569;
+  background: #FF9828;
   cursor: pointer;
   transform: translateX(-5px);
 }
@@ -218,6 +218,8 @@ input.error:focus + i {
               }"
               placeholder="میزان موجودی محصول را وارد کنید"
               pattern="[0-9]*"
+               @blur="$parent.showNavigationMenu"
+              @focus="$parent.hideNavigationMenu"
             />
 
             <i
@@ -274,6 +276,8 @@ input.error:focus + i {
               }"
               placeholder="حداقل میزان فروش را وارد کنید"
               pattern="[0-9]*"
+              @blur="$parent.showNavigationMenu"
+              @focus="$parent.hideNavigationMenu"
             />
 
             <i
@@ -339,6 +343,8 @@ input.error:focus + i {
               }"
               placeholder="حداقل قیمت را وارد کنید"
               pattern="[0-9]*"
+              @blur="$parent.showNavigationMenu"
+              @focus="$parent.hideNavigationMenu"
             />
 
             <i
@@ -393,6 +399,8 @@ input.error:focus + i {
               }"
               placeholder="حداکثر قیمت را وارد کنید"
               pattern="[0-9]*"
+              @blur="$parent.showNavigationMenu"
+              @focus="$parent.hideNavigationMenu"
             />
 
             <i

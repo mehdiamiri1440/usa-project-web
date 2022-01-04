@@ -264,9 +264,12 @@
   padding: 0px;
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 991px) {
   .main-section-wrapper {
     overflow: hidden;
+  }
+  .title-wrapper {
+    display: none;
   }
 }
 
@@ -278,12 +281,6 @@
   .wrapper-section.success {
     margin-top: -20px;
   }
-
-  .title-wrapper {
-    padding-left: 5px;
-    padding-right: 5px;
-  }
-
   .main-section-wrapper {
     max-width: initial;
     margin: 0px auto;
@@ -532,12 +529,12 @@ export default {
       window.scrollTo(0, 0);
     },
     routeToPage(routeName) {
-      // ready for analytics
+      //  analytics
       this.registerComponentStatistics(
-            "verification",
-            "buyer-last-step",
-            "click-on-special-products"
-          );
+        "verification",
+        "buyer-last-step",
+        "click-on-special-products"
+      );
 
       this.$router.push({ name: routeName });
     },

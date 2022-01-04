@@ -59,12 +59,12 @@
   transform: translateX(5px);
 }
 .submit-button.active {
-  background: #00c569;
+  background: #FF9828;
   cursor: pointer;
   transform: translateX(0);
 }
 .submit-button.active:hover i {
-  background: #00c569;
+  background: #FF9828;
   cursor: pointer;
   transform: translateX(-5px);
 }
@@ -168,6 +168,8 @@ textarea.error:focus + i {
           }"
           v-model="$parent.product.description"
           placeholder="در مورد کیفیت و نوع بسته بندی محصول خود اینجا توضیح دهید"
+          @blur="$parent.showNavigationMenu"
+          @focus="$parent.hideNavigationMenu"
         ></textarea>
 
         <i

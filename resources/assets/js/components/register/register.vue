@@ -160,7 +160,19 @@ input[type="number"]::-webkit-outer-spin-button {
     padding: 8px 15px 9px 35px;
   }
 }
-
+@media (max-width: 500px) {
+  #main{
+    padding-top: 0;
+    min-height: 660px;
+  }
+   #main .main-content{
+    padding-top: 0;
+  }
+  .logo-wrapper svg {
+    width: 60px;
+    height: 77px;
+  }
+}
 @media screen and (max-width: 400px) {
   .form-contents .col-xs-10 {
     padding: 0;
@@ -172,6 +184,31 @@ input[type="number"]::-webkit-outer-spin-button {
 
   .col-xs-10.col-xs-offset-1.col-sm-8.col-sm-offset-2 {
     padding: 0;
+  }
+}
+
+@media (max-width: 375px) {
+  #main{
+    margin-bottom:18px
+  }
+  #main .main-contents{
+    padding-top: 0;
+  }
+  .header-wrapper > h1 {
+    font-size: 2.2rem;
+  }
+  .logo-wrapper{
+    margin-bottom: 17px;
+}
+  .logo-wrapper svg {
+    width: 60px;
+    height: 77px;
+  }
+}
+@media (max-width: 350px) {
+   .logo-wrapper svg {
+    width: 50px;
+    height: 67px;
   }
 }
 </style>
@@ -472,6 +509,7 @@ export default {
               eventBus.$emit("modal", "userRegisterSuccess");
               self.createCookie("registerNewUser", true, 60);
               self.createCookie("firstLogin", true, 1);
+              self.createCookie("firstThreeDaysRegistered", true, 4320); // 3 days expire date
 
               let deviceInfo = new device.DeviceUUID();
               let deviceId = null;
@@ -831,6 +869,21 @@ export default {
         var expires = "";
       }
       document.cookie = name + "=" + value + expires + "; path=/";
+    },
+    showNavigationMenu() {
+      if (screen.width < 992) {
+        if (document.querySelector(".custom-navigation")) {
+          document.querySelector(".custom-navigation").style.display = "block";
+         
+        }
+      }
+    },
+    hideNavigationMenu() {
+      if (screen.width < 992) {
+          if (document.querySelector(".custom-navigation")) {
+            document.querySelector(".custom-navigation").style.display = "none";
+          }
+      }
     },
   },
   watch: {

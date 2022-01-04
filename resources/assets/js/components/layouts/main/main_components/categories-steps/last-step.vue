@@ -61,6 +61,12 @@
 .loading-list {
   padding: 90px 0 130px;
 }
+@media (max-width: 991px) {
+  .form-check-wrapper button {
+    font-size: 1.8rem;
+    padding: 20px 15px;
+  }
+}
 </style>
 
 <template>

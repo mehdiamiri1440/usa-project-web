@@ -110,6 +110,9 @@ export default {
       .catch(function (error) {
         console.log("error", error);
       });
+      //console.log(this.$parent.isClosed);
+      //this.$parent.checkScrolling();
+      //console.log(eventBus.$on('testeb',(name)=>{}));
   },
   watch: {
     currentUser(user) {

@@ -1,10 +1,10 @@
 <style scoped>
 .contact-body .contact-search {
-  background: #f0f0f0;
   position: absolute;
   left: 0;
   right: 0;
   z-index: 2;
+  background-color: #ffffff;
 }
 
 .user-information-content {
@@ -82,10 +82,9 @@ li.contact-item:nth-last-of-type(2n + 1) {
 }
 
 .contact-body .contact-search .contact-search-input-wrapper input {
-  padding: 8px 40px 8px 15px;
-  border-radius: 50px;
-  background: #fff;
-  border: none;
+  padding: 6px 35px 5px 15px;
+  border-radius: 8px;
+  border: 1px solid #cfcfcf;
 }
 
 .contact-body .contact-search .contact-search-input-wrapper > button {
@@ -93,7 +92,7 @@ li.contact-item:nth-last-of-type(2n + 1) {
   left: 7px;
   font-size: 16px;
   color: #919191;
-  top: 12px;
+  top: 13px;
   background: none;
   border: none;
   padding: 7px 15px 1px;
@@ -186,19 +185,12 @@ li.contact-item:nth-last-of-type(2n + 1) {
   float: left;
   text-align: center;
 }
-.not-found-item {
-  text-align: center;
-  padding: 100px 15px 0;
+.wrapper_no_pro {
+  margin-top: 115px;
 }
-.not-found-item p {
-  font-size: 16px;
-  font-weight: bold;
-  color: #777;
+.search-not-found {
+  margin-top: 0;
 }
-.not-found-item i {
-  margin: 5px;
-}
-
 .load-more {
   margin: 0px 0 0;
   display: inline-block;
@@ -524,7 +516,19 @@ li.static-item > button i {
     padding: 89px 0 0;
   }
 }
-
+@media screen and (max-width: 768px) {
+  .contact-body .contact-search .contact-search-input-wrapper {
+    background-color: #ffffff;
+  }
+  .contact-body .contact-search .contact-search-input-wrapper input {
+    border-radius: 4px;
+    background-color: #f2f2f2;
+    border: 0;
+  }
+  .contact-body .contact-search .contact-search-input-wrapper > button {
+    top: 12px;
+  }
+}
 @media screen and (max-width: 767px) {
   .send-message-form .button-wrapper button {
     padding: 12px 13px;
@@ -589,7 +593,13 @@ li.static-item > button i {
   <div class="contact-body my-contacts">
     <div class="contact-search">
       <div class="contact-search-input-wrapper">
-        <input type="text" placeholder=" جستجو پیشنهاد" v-model="filterBuyAd" />
+        <input
+          type="text"
+          placeholder=" جستجو پیشنهاد"
+          v-model="filterBuyAd"
+          @blur="showNavigationMenu"
+          @focus="hideNavigationMenu"
+        />
         <i class="fa fa-search"></i>
         <button v-if="filterBuyAd" @click.prevent="filterBuyAd = ''">
           <i class="fa fa-times"></i>
@@ -643,22 +653,30 @@ li.static-item > button i {
     </div>
     <div
       v-else-if="
-        buyAds.length === 0 && buyAdsGoldenFilter.length == 0 && !isLoading
+        buyAds.length === 0 &&
+        buyAdsGoldenFilter.length == 0 &&
+        !isLoading &&
+        isSearchingBuyAds == false
       "
       class="not-found-item"
     >
-      <div class="empty-list">
-        <i class="fa fa-list-ul"></i>
-        <p>در حال حاضر پیشنهادی برای شما وجود ندارد</p>
-        <p class="red-text">
-          در صورتی که محصولی ثبت نکرده اید، ابتدا محصول خود را ثبت کنید.
-        </p>
+      <div class="wrapper_no_pro">
+        <div class="content_no_pic">
+          <img src="../../../../img/my_requests_not_found.svg" alt="" />
+        </div>
+
+        <div class="text_no_pic standard-line text-rtl">
+          <p class="text-title_no_pic">خریدار مرتبطی ندارید!</p>
+          <p class="text-description_no_pic">
+            برای مشاهده خریداران مرتبط، ابتدا محصول خود را ثبت کنید.
+          </p>
+        </div>
         <router-link
           :to="{ name: 'registerProductSeller' }"
           tag="button"
-          class="buyad-button"
+          class="btn-orange-empty-state text-rtl"
         >
-          ثبت محصول
+          <i class="fas fa-plus"></i> ثبت محصول
         </router-link>
       </div>
     </div>
@@ -672,12 +690,14 @@ li.static-item > button i {
       class="contact-items buyad-lists-wrapper"
     >
       <div>
-        <div class="empty-list text-center">
-          <i class="fa fa-search"></i>
-          <p>جستجو نتیجه ای نداشت.</p>
-          <p class="red-text">
-            در صورت وجود درخواست خرید، به شما اطلاع داده می شود.
-          </p>
+        <div class="wrapper_no_pro search-not-found">
+          <div class="content_no_pic">
+            <img src="../../../../img/not_found_search.svg" alt="" />
+          </div>
+
+          <div class="text_no_pic standard-line text-rtl">
+            <p class="text-title_no_pic">خریداری یافت نشد!</p>
+          </div>
         </div>
       </div>
     </div>
@@ -1167,8 +1187,11 @@ export default {
     activePhoneCall: function (buyAdUserId, buyAdId) {
       let id = "#loader-phone-" + buyAdId;
 
-      $(id).prop("disabled", true);
-      $(id).addClass("disable");
+      if ($(id).hasClass("disable")) {
+        $(id).removeClass("disable");
+      } else {
+        $(id).addClass("disable");
+      }
       this.hideReplyBtn(id);
       axios
         .post("/get_buyer_phone_number", {
@@ -1185,7 +1208,7 @@ export default {
               "href",
               "tel:" + response.data.phone
             );
-            $("#" + buyAdId + "-phone-number-wrapper").collapse("show");
+            $("#" + buyAdId + "-phone-number-wrapper").collapse("toggle");
             this.setScrollToBuyAd(buyAdId);
             this.showReplyBtn(id);
           });
@@ -1195,40 +1218,15 @@ export default {
           $(id).prop("disabled", false);
           $(id).removeClass("disable");
           if (error.response.status == 423) {
-            swal({
-              title: "ارتقا عضویت",
-              text: error.response.data.msg,
-              icon: "warning",
-              className: "custom-swal-with-cancel",
-              buttons: {
-                success: {
-                  text: "ارتقا عضویت",
-                  value: "promote",
-                },
-                close: {
-                  text: "بستن",
-                  className: "bg-cancel",
-                },
-              },
-            }).then((value) => {
-              switch (value) {
-                case "promote":
-                  this.$router.push({ name: "dashboardPricingTableSeller" });
-                  break;
-              }
-            });
+            eventBus.$emit(
+              "noAccessToBuyerPhone423Error",
+              error.response.data.msg
+            );
           } else {
-            swal({
-              text: error.response.data.msg,
-              icon: "warning",
-              className: "custom-swal-with-cancel",
-              buttons: {
-                close: {
-                  text: "بستن",
-                  className: "bg-cancel",
-                },
-              },
-            });
+            eventBus.$emit(
+              "noAccessToBuyerPhoneOtherError",
+              error.response.data.msg
+            );
           }
         });
     },
@@ -1364,6 +1362,24 @@ export default {
         event_category: categoryName,
         event_label: labelName,
       });
+    },
+    showNavigationMenu() {
+      if (screen.width < 992) {
+        if (document.querySelector(".custom-navigation")) {
+          setTimeout(() => {
+             document.querySelector(".custom-navigation").style.display = "block";
+          }, 50);
+        }
+      }
+    },
+    hideNavigationMenu() {
+      if (screen.width < 992) {
+       
+          if (document.querySelector(".custom-navigation")) {
+            document.querySelector(".custom-navigation").style.display = "none";
+          }
+        
+      }
     },
   },
   watch: {

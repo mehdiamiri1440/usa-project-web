@@ -262,15 +262,14 @@
 .actions-wrapper > div {
   padding: 0px;
 }
-
+@media screen and (max-width: 991px) {
+.title-wrapper {
+    display: none;
+  }
+}
 @media screen and (max-width: 767px) {
   .wrapper-section.success {
     margin-top: -33px;
-  }
-
-  .title-wrapper {
-    padding-left: 5px;
-    padding-right: 5px;
   }
 
   .main-section-wrapper {
@@ -553,19 +552,19 @@ export default {
     },
     routeToPage(routeName) {
       if (routeName == "dashboardPricingTableSeller") {
-        // ready for analytics
+        //  analytics
         this.registerComponentStatistics(
-            "verification",
-            "seller-last-step",
-            "click-on-package-promotion"
-          );
+          "verification",
+          "seller-last-step",
+          "click-on-package-promotion"
+        );
       } else if (routeName == "buyAdRequestsSeller") {
-        // ready for analytics
+        //  analytics
         this.registerComponentStatistics(
-            "verification",
-            "seller-last-step",
-            "click-on-buyAd-requests"
-          );
+          "verification",
+          "seller-last-step",
+          "click-on-buyAd-requests"
+        );
       }
 
       this.$router.push({ name: routeName });

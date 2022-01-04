@@ -284,7 +284,10 @@
 
 .fa-tag:before {
     content: "\f02b"; }
-  
+    
+    .fa-user-friends:before {
+        content: "\f500";
+    }
  
  .sr-only {
      border: 0;

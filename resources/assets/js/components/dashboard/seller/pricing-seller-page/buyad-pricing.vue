@@ -194,7 +194,6 @@ input[type="number"] {
   background: #fcfcfc;
   overflow: hidden;
   border-radius: 4px;
-  border: 1px solid #707070;
   top: -7px;
 }
 
@@ -214,6 +213,11 @@ input[type="number"] {
 
 .count-input-wrapper button {
   padding: 10px 15px;
+  border:0;
+}
+.count-input-wrapper button:focus {
+  border:0;
+  box-shadow: unset;
 }
 
 .form-control[type="number"]::-webkit-inner-spin-button,
@@ -272,7 +276,7 @@ input[type="number"] {
     width: 140px;
   }
   .count-input-wrapper button {
-    padding: 15px;
+    padding: 8px  15px 7px 15px;
   }
   .main-content-wrapper > .row > div {
     padding: 0 7px;
@@ -416,7 +420,7 @@ input[type="number"] {
                   <div class="count-input-wrapper">
                     <div class="input-group-prepend">
                       <button
-                        class="btn btn-outline-secondary btn-minus"
+                        class="btn-outline-secondary btn-minus"
                         @click="--buyAdPriceData.count"
                       >
                         <i class="fa fa-minus"></i>
@@ -432,7 +436,7 @@ input[type="number"] {
 
                     <div class="input-group-append">
                       <button
-                        class="btn btn-outline-secondary btn-plus"
+                        class="btn-outline-secondary btn-plus"
                         @click="++buyAdPriceData.count"
                       >
                         <i class="fa fa-plus"></i>

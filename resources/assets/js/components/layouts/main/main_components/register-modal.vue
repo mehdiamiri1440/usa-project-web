@@ -88,16 +88,14 @@
               <i class="fa fa-times"></i>
             </a>
 
-            <div class="modal-title">ورود / ثبت نام</div>
+            <div class="modal-title">ورود به باسکول</div>
           </div>
           <div class="modal-body col-xs-12">
             <RegisterNumber v-show="currentStep == 1" />
             <VerifiedCode v-show="currentStep == 2" />
-            <PersonalInformation v-show="currentStep == 3" />
-            <ChoseRoute v-show="currentStep == 4" />
-            <Location v-show="currentStep == 5" />
-            <RegisterRequest v-show="currentStep == 6" />
-            <RegisterLoader v-show="currentStep == 7" />
+            <UserInformations v-show="currentStep == 3" />
+            <RegisterRequest v-show="currentStep == 4" />
+            <RegisterLoader v-show="currentStep == 5" />
           </div>
         </div>
         <!-- /.modal-content -->
@@ -108,9 +106,12 @@
 </template>
 
 <script>
+import PriceRegisterNumber from "./register-modal-steps/new-register-steps/register-number.vue";
+import PriceVerifyCode from "./register-modal-steps/new-register-steps/verify-code.vue";
+import PriceComplementary from "./register-modal-steps/new-register-steps/complementary-info.vue";
 import RegisterNumber from "./register-modal-steps/register-number";
 import VerifiedCode from "./register-modal-steps/verified-code";
-import PersonalInformation from "./register-modal-steps/personal-information";
+import UserInformations from "./register-modal-steps/user-informations";
 import ChoseRoute from "./register-modal-steps/chose-route";
 import Location from "./register-modal-steps/location";
 import RegisterRequest from "./register-modal-steps/register-reuqest";
@@ -118,11 +119,14 @@ import RegisterLoader from "./register-modal-steps/register-loader";
 import device from "device-uuid/lib/device-uuid";
 
 export default {
-  props: ["isChat", "product"],
+  props: ["isChat", "product", "isPrice"],
   components: {
+    PriceRegisterNumber,
+    PriceVerifyCode,
+    PriceComplementary,
     RegisterNumber,
     VerifiedCode,
-    PersonalInformation,
+    UserInformations,
     ChoseRoute,
     Location,
     RegisterRequest,
@@ -135,6 +139,7 @@ export default {
       activity_type: 0,
       stock: "",
       productName: "",
+      errorFlag: false,
       currentUser: {
         profile: "",
         user_info: "",
@@ -144,8 +149,11 @@ export default {
         verification_code: "",
         name: "",
         family: "",
+        city: "",
+        province: "",
         stock: "",
         productName: "",
+        activity_type: "",
       },
       step1: {
         phone: "",
@@ -159,13 +167,20 @@ export default {
         now: null,
       },
       step3: {
-        verifyCodeLoader: false,
+        name: "",
+        family: "",
+        province: "",
+        city: "",
+        activity_type: "",
         provinceList: "",
+        cityList: "",
+        verifyCodeLoader: false,
       },
       step4: {
         name: "",
         family: "",
         password: "",
+        activity_type: "",
       },
       step5: {
         provinceName: "",
@@ -174,6 +189,90 @@ export default {
     };
   },
   methods: {
+    provinceValidator(province) {
+      this.errors.province = "";
+
+      if (province == "") {
+        this.errors.province = "استان خود را انتخاب کنید.";
+        this.errorFlag = true;
+      }
+
+      if (this.errors.province) {
+        // update for analytics
+        // this.registerComponentStatistics(
+        //   "Invite-Register-Error",
+        //   "province",
+        //   "input:" + province + " Error:" + this.errors.province
+        // );
+      }
+    },
+    cityValidator(city) {
+      this.errors.city = "";
+
+      if (city === "") {
+        this.errors.city = "شهر خود را انتخاب کنید.";
+        this.errorFlag = true;
+      }
+      if (this.errors.city) {
+        // update for analytics
+        // this.registerComponentStatistics(
+        //   "Invite-Register-Error",
+        //   "city",
+        //   "input:" + city + " Error:" + this.errors.city
+        // );
+      }
+    },
+    activityTypeValidator: function (activityType) {
+      this.errors.activity_type = "";
+      if (activityType === "") {
+        this.errors.activity_type = " نوع فعالیت خود را انتخاب کنید.";
+        this.errorFlag = true;
+      }
+      if (this.errors.activity_type) {
+        // update for analytics
+        // this.registerComponentStatistics(
+        //   "Invite-Register-Error",
+        //   "activity-type",
+        //   "input:" + activityType + " Error:" + this.errors.activity_type
+        // );
+      }
+    },
+    setProvince(event) {
+      this.errors.province = "";
+      this.setProvinceName(event);
+      this.validateErrors();
+    },
+    setCity(event) {
+      this.errors.city = "";
+      this.setCityName(event);
+      this.validateErrors();
+    },
+    submitUserInformation() {
+      if (!this.step3.name) {
+        this.errors.name = "لطفا نام خود را وارد کنید";
+      }
+      if (!this.step3.family) {
+        this.errors.family = "لطفا نام خانوادگی خود را وارد کنید";
+      }
+
+      this.provinceValidator(this.step3.province);
+      this.cityValidator(this.step3.city);
+      if (this.step3.activity_type == "") {
+        this.errors.activity_type = "لطفا نوع فعالیت خود را انتخاب کنید";
+      }
+
+      if (
+        !this.step3.name ||
+        !this.step3.family ||
+        !this.step3.province ||
+        !this.step3.city ||
+        !this.step3.activity_type
+      ) {
+        return;
+      } else {
+        this.registerUser(this.step3.activity_type);
+      }
+    },
     registerBuyAd() {
       if (this.currentUser.user_info) {
         if (this.stock) {
@@ -187,78 +286,108 @@ export default {
     },
     registerUser(isRoute = false) {
       if (!this.currentUser.user_info) {
-        if (!isRoute) {
-          this.currentStep = 7;
-        }
+        
         this.step4.password = this.makeRandomString(8);
 
-        var object = {
-          phone: this.step1.phone,
-          first_name: this.step4.name,
-          last_name: this.step4.family,
-          verification_code: this.step2.verification_code,
-          password: this.step4.password,
-          user_name: "",
-          sex: "آقا",
-          province: this.step5.provinceName,
-          city: this.step5.cityName,
-          activity_type: this.activity_type,
-          national_code: "",
-          category_id: this.product.main.category_id,
-        };
-        axios
-          .post("/api/v1/users", object)
-          .then((response) => {
-            if (response.status === 201) {
-              this.createCookie("registerNewUser", true, 60);
+        var object = {};
 
-              let deviceInfo = new device.DeviceUUID();
-              let deviceId = null;
-              if (deviceInfo.get()) {
-                deviceId = deviceInfo.get();
+        if (this.isPrice) {
+          this.stepsValidator();
+          object = {
+            phone: this.step1.phone,
+            first_name: this.step3.name,
+            last_name: this.step3.family,
+            verification_code: this.step2.verification_code,
+            password: this.step4.password,
+            user_name: "",
+            sex: "آقا",
+            province: this.step3.province,
+            city: this.step3.city,
+            activity_type: this.step3.activity_type,
+            national_code: "",
+            category_id: this.product.main.category_id,
+          };
+        } else {
+          object = {
+            phone: this.step1.phone,
+            first_name: this.step3.name,
+            last_name: this.step3.family,
+            verification_code: this.step2.verification_code,
+            password: this.step4.password,
+            user_name: "",
+            sex: "آقا",
+            province: this.step3.province,
+            city: this.step3.city,
+            activity_type: this.activity_type,
+            national_code: "",
+            category_id: this.product.main.category_id,
+          };
+        }
+
+        if (
+          this.errorFlag === false &&
+          !this.errors.name &&
+          !this.errors.family
+        ) {
+          axios
+            .post("/api/v1/users", object)
+            .then((response) => {
+              if (response.status === 201) {
+                this.createCookie("registerNewUser", true, 60);
+
+                let deviceInfo = new device.DeviceUUID();
+                let deviceId = null;
+                if (deviceInfo.get()) {
+                  deviceId = deviceInfo.get();
+                }
+
+                axios
+                  .post("/dologin", {
+                    phone: object.phone,
+                    password: object.password,
+                    device_id: deviceId,
+                  })
+                  .then((response) => {
+                    if (response.data.status) {
+                      this.getCurrentUser(isRoute);
+                    }
+                  })
+                  .catch((err) => {
+                    console.log("err");
+                  });
+                this.registerComponentStatistics(
+                  "Register-Modal",
+                  "successful-register",
+                  "user-registered-successfully"
+                );
               }
-
-              axios
-                .post("/dologin", {
-                  phone: object.phone,
-                  password: object.password,
-                  device_id: deviceId,
-                })
-                .then((response) => {
-                  if (response.data.status) {
-                    this.getCurrentUser(isRoute);
-                  }
-                })
-                .catch((err) => {
-                  console.log("err");
-                });
-              this.registerComponentStatistics(
-                "Register-Modal",
-                "successful-register",
-                "user-registered-successfully"
+            })
+            .catch((err) => {
+              console.log("User register API failed");
+              this.registerComponentExceptions(
+                "User register API failed",
+                true
               );
-            }
-          })
-          .catch((err) => {
-            console.log("User register API failed");
-            this.registerComponentExceptions("User register API failed", true);
-          });
+            });
+        }
       }
     },
     getCurrentUser(isRoute = false) {
-      if (!isRoute) {
-        this.currentStep = 7;
-      }
-
+      
       axios.post("/user/profile_info").then((response) => {
         this.currentUser = response.data;
-        if (response.data.status && !isRoute) {
+       
+        if (response.data.status && isRoute == 0) {
           $("#register-modal").modal("hide");
-        }
+            this.goToStep(5);
+        }else if (isRoute == 1) {
+           
+            this.goToStep(4);
+          }
       });
     },
     submitBuyAd(currentUser) {
-      this.currentStep = 7;
+      this.currentStep = 5;
 
       let formData = this.getBuyAdFormFields();
 
@@ -282,13 +411,17 @@ export default {
         //     this.$parent.showRegisterRequestBox = false;
         //   }
         // }
-        if (this.$parent.updatedCurrentUser.user_info.is_seller) {
-          this.$parent.openChat(this.$parent.product);
+        if (this.isPrice) {
+          this.$parent.priceModalFunction();
         } else {
-          if (this.isChat) {
+          if (this.$parent.updatedCurrentUser.user_info.is_seller) {
             this.$parent.openChat(this.$parent.product);
           } else {
-            this.$parent.activePhoneCall(this.isMobile);
+            if (this.isChat) {
+              this.$parent.openChat(this.$parent.product);
+            } else {
+              this.$parent.activePhoneCall(this.isMobile);
+            }
           }
         }
       }, 100);
@@ -403,6 +536,155 @@ export default {
           (response) => (this.step3.provinceList = response.data.provinces)
         );
     },
+    getCityList: function (provinceId) {
+      axios
+        .post("/location/get_location_info", {
+          province_id: provinceId,
+        })
+        .then((response) => (this.step3.cityList = response.data.cities));
+    },
+    setProvinceName: function (e) {
+      e.preventDefault();
+
+      this.step3.province = $(e.target).val();
+
+      var provinceId = "";
+
+      for (var i = 0; i < this.step3.provinceList.length; i++) {
+        if (this.step3.province === this.step3.provinceList[i].province_name) {
+          provinceId = this.step3.provinceList[i].id;
+          break;
+        }
+      }
+
+      this.getCityList(provinceId);
+    },
+    setCityName: function (e) {
+      e.preventDefault();
+
+      this.step3.city = $(e.target).val();
+    },
+    validateErrors() {
+      if (
+        this.step3.name.length &&
+        this.step3.family.length &&
+        this.step3.province &&
+        this.step3.city &&
+        this.step3.activity_type !== "" &&
+        this.step4.category_id !== ""
+      ) {
+        this.errorFlag = false;
+      }
+    },
+    stepsValidator() {
+      this.errorFlag = false;
+      if (this.errors.name == "" && this.errors.family == "") {
+        this.firstNameValidator(this.step3.name);
+        this.lastNameValidator(this.step3.family);
+      }
+      this.provinceValidator(this.step3.province);
+      this.cityValidator(this.step3.city);
+      this.categoryIdValidator(this.step4.category_id);
+      this.activityTypeValidator(this.step3.activity_type);
+    },
+    firstNameValidator: function (name) {
+      this.errors.name = "";
+
+      if (name === "") {
+        this.errors.name = "نام خود را وارد کنید.";
+        this.errorFlag = true;
+      }
+
+      if (this.errors.name) {
+        // update for analytics
+        // this.registerComponentStatistics(
+        //   "Invite-Register-Error",
+        //   "first-name",
+        //   "input:" + name + " Error:" + this.errors.name
+        // );
+      }
+    },
+    lastNameValidator: function (family) {
+      this.errors.family = "";
+
+      if (family === "") {
+        this.errors.family = "نام خانوادگی خود را وارد کنید.";
+        this.errorFlag = true;
+      }
+
+      if (this.errors.family) {
+        // update for analytics
+        // this.registerComponentStatistics(
+        //   "Invite-Register-Error",
+        //   "last-name",
+        //   "input:" + family + " Error:" + this.errors.family
+        // );
+      }
+    },
+    provinceValidator: function (province) {
+      this.errors.province = "";
+
+      if (province == "") {
+        this.errors.province = "استان خود را انتخاب کنید.";
+        this.errorFlag = true;
+      }
+
+      if (this.errors.province) {
+        // update for analytics
+        // this.registerComponentStatistics(
+        //   "Invite-Register-Error",
+        //   "province",
+        //   "input:" + province + " Error:" + this.errors.province
+        // );
+      }
+    },
+    cityValidator: function (city) {
+      this.errors.city = "";
+
+      if (city === "") {
+        this.errors.city = "شهر خود را انتخاب کنید.";
+        this.errorFlag = true;
+      }
+      if (this.errors.city) {
+        // update for analytics
+        // this.registerComponentStatistics(
+        //   "Invite-Register-Error",
+        //   "city",
+        //   "input:" + city + " Error:" + this.errors.city
+        // );
+      }
+    },
+    categoryIdValidator: function (categoryId) {
+      this.errors.category_id = "";
+      if (categoryId === "") {
+        this.errors.category_id = "حوزه فعالیت خود را انتخاب کنید.";
+        this.errorFlag = true;
+      }
+
+      if (this.errors.category_id) {
+        // update for analytics
+        // this.registerComponentStatistics(
+        //   "Invite-Register-Error",
+        //   "category-selection",
+        //   "input:" + categoryId + " Error:" + this.errors.category_id
+        // );
+      }
+    },
+    activityTypeValidator: function (activityType) {
+      this.errors.activity_type = "";
+      if (activityType === "") {
+        this.errors.activity_type = " نوع فعالیت خود را انتخاب کنید.";
+        this.errorFlag = true;
+      }
+      if (this.errors.activity_type) {
+        // update for analytics
+        // this.registerComponentStatistics(
+        //   "Invite-Register-Error",
+        //   "activity-type",
+        //   "input:" + activityType + " Error:" + this.errors.activity_type
+        // );
+      }
+    },
     registerComponentStatistics(categoryName, actionName, labelName) {
       gtag("event", actionName, {
         event_category: categoryName,
@@ -439,8 +721,8 @@ export default {
     goToStep(step) {
       if (step < 1) {
         step = 1;
-      } else if (step > 6) {
-        step = 6;
+      } else if (step > 5) {
+        step = 5;
       }
       this.currentStep = step;
     },
@@ -561,6 +843,23 @@ export default {
         }
       });
     },
+    showNavigationMenu() {
+      if (screen.width < 992) {
+        if (document.querySelector(".custom-navigation")) {
+          document.querySelector(".custom-navigation").style.display = "block";
+         
+        }
+      }
+    },
+    hideNavigationMenu() {
+      if (screen.width < 992) {
+       
+          if (document.querySelector(".custom-navigation")) {
+            document.querySelector(".custom-navigation").style.display = "none";
+          }
+        
+      }
+    },
   },
   mounted() {
     this.cehckPageWidth();
@@ -571,6 +870,9 @@ export default {
     $("#register-modal").on("hidden.bs.modal", (e) => {
       if (this.currentUser.user_info) {
         this.openChatOrCall(this.currentUser);
+      } else {
+        this.currentStep = 1;
+        this.$parent.isPrice = false;
       }
     });
   },

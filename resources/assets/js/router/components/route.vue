@@ -1,46 +1,73 @@
+
 <style scoped>
 .android-download-alert-wrapper {
-  position: fixed;
-  bottom: 59px;
+  overflow: hidden;
+  height: 0;
   width: 100%;
-  background: #fff;
+  background-color: #e0eff4;
   text-align: center;
-  color: #fff;
+  color: #000000;
   direction: rtl;
-  z-index: 1020;
   font-weight: bold;
   font-size: 20px;
-  padding: 5px;
+  padding: 0;
   box-shadow: 0 -8px 8px rgba(0, 0, 0, 0.1);
-}
-
-.android-apk-download {
-  padding: 10px 15px;
-  background: linear-gradient(-35deg, #ff9300, #f60);
-  border: none;
-  width: 100%;
-  border-radius: 8px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-}
-
-.android-apk-download img {
-  width: 28px;
+  display: grid;
+  grid-template-columns: 37.05px auto;
+  transition: height 1.3s;
   position: absolute;
-  left: 15px;
+  z-index: 1020;
+}
+.android-download-alert-content {
+  display: grid;
+  grid-template-columns: 37.05px auto 90px;
+}
+.android-download-alert-wrapper .m-t-b {
+  margin: 1.4rem 0;
+}
+.android-download-alert-wrapper img {
+  width: 37px;
+  height: 37px;
+  float: left;
+}
+.text-android-download-alert-wrapper {
+  padding-right: 8.8px;
+}
+.text-android-download-alert-wrapper p.android-download-title {
+  text-align: right;
+  font-size: 1.2rem;
+  margin-top: 5px;
+}
+.text-android-download-alert-wrapper p.android-download-slogan {
+  text-align: right;
+  font-size: 1rem;
+  margin-top: 5px;
+}
+.android-apk-download {
+  padding: 3px 15px;
+  font-size: 1.3rem;
+  background-color: #ff9828;
+  color: #ffffff;
+  border: none;
+  width: 64px;
+  height: 30px;
+  border-radius: 8px;
+  display: inline-block;
+  position: relative;
+  top: 4px;
 }
 
 .close-android-download-alert-wrapper {
   background: none;
   border: none;
   font-size: 20px;
-  position: absolute;
-  right: 5px;
-  top: 5px;
-  z-index: 1021;
-  padding: 11px 15px 8px;
+  position: relative;
+  top: 9px;
+  margin-right: 5px;
+  float: right;
+}
+.close-android-download-alert-wrapper.hide {
+  display: none;
 }
 /* 
 .modal-dialog {
@@ -198,7 +225,35 @@
         </p>
       </div>
     </div>
-
+    <!-- Download app modal -->
+    <div
+      v-if="downloadAppButton && $route.name != 'invite' && !checkCookie()"
+      :class="[{ hide: isClosed }, { test: isClosed == false }]"
+      class="android-download-alert-wrapper hidden-lg hidden-md"
+    >
+      <div @click.prevent="closeAppModal()">
+        <div class="m-t-b">
+          <button class="close-android-download-alert-wrapper">
+            <i class="fa fa-times"></i>
+          </button>
+        </div>
+      </div>
+      <div class="android-download-alert-content" @click.prevent="doDownload()">
+        <div class="m-t-b">
+          <img
+            src="../../../img/logo/512-buskool-logo.jpg"
+            alt="دانلود اپلیکیشن باسکول"
+          />
+        </div>
+        <div class="text-android-download-alert-wrapper m-t-b">
+          <p class="android-download-title">اپلیکیشن باسکول</p>
+          <p class="android-download-slogan">استفاده راحت تر و سریع تر</p>
+        </div>
+        <div class="text-center m-t-b">
+          <button class="android-apk-download">دانلود</button>
+        </div>
+      </div>
+    </div>
     <!--  #regex wallet modal  -->
 
     <div class="container">
@@ -345,27 +400,12 @@
     />
 
     <!-- add android app download  -->
-
-    <div
-      v-if="downloadAppButton && $route.name != 'invite'"
-      class="android-download-alert-wrapper hidden-lg hidden-md"
-    >
-      <button
-        class="close-android-download-alert-wrapper"
-        @click.prevent="downloadAppButton = false"
-      >
-        <i class="fa fa-times"></i>
-      </button>
-
-      <button class="android-apk-download" @click.prevent="doDownload()">
-        دانلود اپلیکیشن باسکول
-
-        <img
-          src="../../../img/google-play-icon.svg"
-          alt="دانلود اپلیکیشن باسکول"
-        />
-      </button>
-    </div>
+    <!--  -->
+    <!-- modals -->
+    <ProductRegistrationRestrictionsModal />
+    <NoAccessToBuyerPhoneModal :message="msg" :errorStatus="errStatus" />
+    <FullMessagingCeilingModal />
+    <noAccessToGoldenBuyersModal />
   </div>
 </template>
 
@@ -383,6 +423,10 @@ import WalletComponent from "../../components/layouts/main/wallet";
 import PaymentTypes from "../../components/layouts/main/payment-types.vue";
 import swal from "../../sweetalert.min.js";
 import Navigation from "./navigation.vue";
+import ProductRegistrationRestrictionsModal from "../../components/layouts/main/product-registration-restrictions-modal.vue";
+import NoAccessToBuyerPhoneModal from "../../components/layouts/main/no-access-to-buyer-phone-modal.vue";
+import FullMessagingCeilingModal from "../../components/layouts/main/full-messaging-ceiling-modal.vue";
+import noAccessToGoldenBuyersModal from "../../components/layouts/main/no-access-to-golden-buyers-modal.vue";
 
 export default {
   components: {
@@ -394,6 +438,10 @@ export default {
     WalletComponent,
     PaymentTypes,
     Navigation,
+    ProductRegistrationRestrictionsModal,
+    NoAccessToBuyerPhoneModal,
+    FullMessagingCeilingModal,
+    noAccessToGoldenBuyersModal,
   },
   data: function () {
     return {
@@ -432,6 +480,8 @@ export default {
         "<div class='tooltip-wrapper text-rtl'>اطلاعات هویتی این کاربر احراز شده است.<br/><a href='/verification'>اطلاعات بیشتر</a> </div>",
       doPaymentLoader: false,
       messageCount: "",
+      isClosed: false,
+      errStatus: true,
     };
   },
   props: [
@@ -491,6 +541,11 @@ export default {
         return false;
       }
     },
+    closeAppModal() {
+      this.downloadAppButton = false;
+      this.isClosed = true;
+      this.createCookie("downloadAppModal", true, 60 * 24);
+    },
     getAndroidVersion: function (ua) {
       ua = (ua || navigator.userAgent).toLowerCase();
       var match = ua.match(/android\s([0-9\.]*)/);
@@ -545,14 +600,11 @@ export default {
         }
       }
     },
-    activateDownloadAppButton: function () {
-      let self = this;
+    activateDownloadAppButton() {
       if (this.isDeviceMobile() && !this.isOsIOS()) {
         let androidVersion = this.getAndroidVersion();
         if (parseInt(androidVersion) >= 5) {
           if (
-            window.location.pathname != "/buyer/messenger/contacts" &&
-            window.location.pathname != "/seller/messenger/contacts" &&
             window.location.pathname != "/buyAd-requests" &&
             !window.location.pathname.includes("product-view") &&
             !this.iswebview
@@ -621,7 +673,7 @@ export default {
           this.raiseRegisterProductLimitModal();
           break;
         case "buyAdReplyLimit":
-          this.raiseBuyAdReplyLimitModal();
+          this.FullMessagingCeilingModal();
           break;
         case "profileEditSuccess":
           this.raiseProfileEditSuccessModal();
@@ -952,68 +1004,25 @@ export default {
       });
     },
     raiseRegisterProductLimitModal: function () {
-      let self = this;
-
       this.handleBackBtn();
-
-      let content = document.createElement("div");
-      content.innerHTML =
-        '<p dir="rtl" class="swal-guide">سقف تعداد محصولات ثبت شده شما پر شده است.</p><br/><p class="red-text swal-guide" dir="rtl"><b>برای ثبت محصولات جدید، لطفا دکمه افزایش ظرفیت را بزنید.</b></p>';
-      swal({
-        title: "محدودیت ثبت محصول جدید",
-        content: content,
-        className: "custom-swal-with-cancel",
-        icon: "warning",
-        buttons: {
-          success: {
-            text: "افزایش ظرفیت",
-            value: "promote",
-            // className: "button-new-badge",
-          },
-          close: {
-            text: "بستن",
-            className: "bg-cancel",
-          },
-        },
-      }).then((value) => {
-        switch (value) {
-          case "promote":
-            self.$router.push({ name: "dashboardProductPricing" });
-            break;
-        }
-      });
+      $("#product-registration-restrictions-modal").modal("show");
     },
-    raiseBuyAdReplyLimitModal: function () {
-      let self = this;
-
+    FullMessagingCeilingModal() {
+      $("#full-messaging-ceiling-modal").modal("show");
+    },
+    routeRaiseUpgradeMemberShip() {
+      $(".modal").modal("hide");
+      this.$router.push({ name: "dashboardPricingTableSeller" });
+    },
+    routeRegisterProductLimit() {
+      $(".modal").modal("hide");
+      this.$router.push({ name: "dashboardProductPricing" });
+    },
+    routeRaiseBuyAdReplyLimit: function () {
       this.handleBackBtn();
+      $(".modal").modal("hide");
 
-      let content = document.createElement("div");
-      content.innerHTML =
-        '<p class="swal-guide" dir="rtl">ظرفیت روزانه پاسخ به درخواست های خرید شما پر شده است.</p><br/><p class="red-text swal-guide" dir="rtl"><b>برای افزایش ظرفیت، لطفا دکمه افزایش ظرفیت را بزنید.</b></p>';
-      swal({
-        title: "محدودیت پاسخ به درخواست ها",
-        content: content,
-        className: "custom-swal-with-cancel",
-        icon: "warning",
-        buttons: {
-          success: {
-            text: "افزایش ظرفیت",
-            value: "promote",
-            // className: "button-new-badge",
-          },
-          close: {
-            text: "بستن",
-            className: "bg-cancel",
-          },
-        },
-      }).then((value) => {
-        switch (value) {
-          case "promote":
-            self.$router.push({ name: "dashboardBuyAdPricing" });
-            break;
-        }
-      });
+      this.$router.push({ name: "dashboardBuyAdPricing" });
     },
     raiseProfileEditSuccessModal: function () {
       this.handleBackBtn();
@@ -1128,37 +1137,10 @@ export default {
       });
     },
     raiseGoldenBuyAdReplyLimitModal: function () {
-      let self = this;
-
       this.handleBackBtn();
-
-      let content = document.createElement("div");
-      content.innerHTML =
-        '<p><span class="swal-star-badge"><i class="fa fa-star"></i></span></p><br/><p class="swal-guide" dir="rtl">شما به درخواست هایی طلایی دسترسی ندارید.</p><br/><p class="red-text swal-guide" dir="rtl"><b>برای دسترسی به تمام درخواست های طلایی، عضویت خود را ارتقا دهید.</b></p>';
-      swal({
-        title: "درخواست های طلایی",
-        content: content,
-        className: "custom-swal-with-cancel",
-        icon: "warning",
-        buttons: {
-          success: {
-            text: "ارتقا عضویت",
-            value: "promote",
-          },
-          close: {
-            text: "بستن",
-            className: "bg-cancel",
-          },
-        },
-      }).then((value) => {
-        switch (value) {
-          case "promote":
-            $(".modal").modal("hide");
-            self.$router.push({ name: "dashboardPricingTableSeller" });
-            break;
-        }
-      });
+      $("#no-access-to-golden-buyers-modal").modal("show");
     },
+
     isModalOpen: function () {
       return swal.getState().isOpen;
     },
@@ -1369,6 +1351,16 @@ export default {
       eventBus.$on("messageCount", (event) => {
         this.messageCount += event;
       });
+      eventBus.$on("noAccessToBuyerPhone423Error", (event) => {
+        this.msg = event;
+        this.errStatus = true;
+        $("#no-access-to-buyer-phone-modal").modal("show");
+      });
+      eventBus.$on("noAccessToBuyerPhoneOtherError", (event) => {
+        this.msg = event;
+        this.errStatus = false;
+        $("#no-access-to-buyer-phone-modal").modal("show");
+      });
     },
     getUserData(itemName) {
       switch (itemName) {
@@ -1412,6 +1404,13 @@ export default {
       window.localStorage.setItem("userId", this.user.id);
       window.localStorage.setItem("userType", this.user.type);
     },
+     showNavigationMenu() {
+      if (screen.width < 992) {
+        if (document.querySelector(".custom-navigation")) {
+          document.querySelector(".custom-navigation").style.display = "block";
+        }
+      }
+    },
   },
   mounted() {
     this.updateUserData();
@@ -1422,12 +1421,43 @@ export default {
     $("#wallet-modal").on("show.bs.modal", (e) => {
       this.handleBackKeys();
     });
+    $("#product-registration-restrictions-modal").on("show.bs.modal", (e) => {
+      this.handleBackKeys();
+    })
+    $("#no-access-to-golden-buyers-modal").on("show.bs.modal", (e) => {
+      this.handleBackKeys();
+    });
+    $("#no-access-to-buyer-phone-modal").on("show.bs.modal", (e) => {
+      this.handleBackKeys();
+    });
+    $("#full-messaging-ceiling-modal").on("show.bs.modal", (e) => {
+      this.handleBackKeys();
+    });
     eventBus.$emit("globalVerifiedBadgeContents", 1);
     eventBus.$on("currentUser", (event) => {
       this.currentUser = event;
     });
   },
   watch: {
+    $route() {
+      setTimeout(() => {
+        if (
+          window.screen.width < 991 &&
+          !this.isOsIOS() &&
+          this.getAndroidVersion() >= 5
+        ) {
+          if (!this.isClosed) {
+            setTimeout(() => {
+              if (document.querySelector(".android-download-alert-wrapper")) {
+                document.querySelector(
+                  ".android-download-alert-wrapper"
+                ).style.height = "65px";
+              }
+            }, 3000);
+          }
+        }
+      }, 50);
+    },
     currentUser(user) {
       this.updateUserData();
       if (user.user_info) {

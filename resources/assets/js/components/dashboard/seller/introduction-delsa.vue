@@ -4,6 +4,12 @@
   height: 270px;
   margin: 0 auto;
 }
+.image-wrapper img {
+    position: unset;
+    left: unset;
+    top: unset;
+    transform: unset;
+}
 .delsa-description-wrapper {
   text-align: center;
   direction: rtl;
@@ -51,7 +57,19 @@
               <i class="fa fa-box-open"></i>
             </div>
             <div class="button-content-wrapper">
-              <p class="button-title single-title">محصول برای فروش دارم</p>
+              <p class="button-title single-title">محصول دارم برای فروش</p>
+            </div>
+            <i class="fa fa-angle-left"></i>
+          </button>
+          <button
+            @click.prevent="routeToPage('buyAdRequestsSeller')"
+            class="default-btn-with-icon"
+          >
+            <div class="button-main-icon-wrapper">
+              <i class="fas fa-search"></i>
+            </div>
+            <div class="button-content-wrapper">
+              <p class="button-title single-title">دنبال خریدارها هستم</p>
             </div>
             <i class="fa fa-angle-left"></i>
           </button>
@@ -63,7 +81,7 @@
               <i class="fa fa-tag"></i>
             </div>
             <div class="button-content-wrapper">
-              <p class="button-title single-title">قیمت محصولات را می خواهم</p>
+              <p class="button-title single-title">می خواهم قیمت بگیرم</p>
             </div>
             <i class="fa fa-angle-left"></i>
           </button>
@@ -109,7 +127,7 @@ export default {
       });
     },
     routeToPage(routeName) {
-      // ready for analytics
+      //  analytics
 
       this.registerComponentStatistics(
         "seller-just-after-signup",
@@ -120,7 +138,7 @@ export default {
       this.$router.push({ name: routeName });
     },
     openCategoryModal() {
-      // ready for analytics
+      // analytics
 
       this.registerComponentStatistics(
         "seller-just-after-signup",

@@ -351,7 +351,7 @@ export default {
           .then(function (response) {
             if (response.status === 201) {
               eventBus.$emit("modal", "userRegisterSuccess");
-              self.createCookie("registerNewUser", true, 60);
+              self.createCookie("registerNewUser", true, 5);
               self.createCookie("firstLogin", true, 1);
 
               let deviceInfo = new device.DeviceUUID();

@@ -200,7 +200,7 @@ export default {
       else return "";
     },
     openPhone(isModal = false) {
-      // ready for analytics click call phone when  user login
+      // analytics click call phone when  user login
       this.$parent.registerComponentStatistics(
         "product-view",
         "price-modal",
@@ -211,7 +211,7 @@ export default {
       this.$parent.activePhoneCall(isModal);
     },
     routeToPage(routeName) {
-      // ready for analytics
+      // analytics
       // when click on mahsol baraye forosh daram
       this.$parent.registerComponentStatistics(
         "product-view",
@@ -223,7 +223,7 @@ export default {
     },
     openLoginModal(isChat) {
       if (isChat) {
-        // ready for analytics
+        // analytics
         // click on chat button when user not logged in
         this.$parent.registerComponentStatistics(
           "product-view",
@@ -232,7 +232,7 @@ export default {
         );
         // this.$parent.registerComponentStatistics("", "", "");
       } else {
-        // ready for analytics
+        // analytics
         // click on phone call button when user not logged in
         this.$parent.registerComponentStatistics(
           "product-view",
@@ -247,7 +247,7 @@ export default {
       }, 200);
     },
     openChat() {
-      // ready for analytics
+      // analytics
       // click on chat button when user login
       this.$parent.registerComponentStatistics(
         "product-view",

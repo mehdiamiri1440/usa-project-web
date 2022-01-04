@@ -69,7 +69,7 @@ span {
 }
 
 .submit-button.active {
-  background: #00c569;
+  background: #FF9828;
   cursor: pointer;
 }
 .submit-button.active:hover i {
@@ -395,6 +395,9 @@ export default {
     callRegisterBuyAd() {
       if (!this.$parent.errors.stock && !this.$parent.errors.productName) {
         this.$parent.registerBuyAd();
+      }
+      else{
+        console.log(this.$parent.isChat);
       }
     },
     stockValidator(number) {
