@@ -1335,7 +1335,9 @@ Route::get('/shared-profile/{username}',[
     'uses' => 'Accounting\profile_controller@get_user_shared_profile_info'
 ])->name('sharedProfile')->where("username","[A-Za-z0-9_]+$");
 
-
+Route::get('/profileBlade', function () {
+    return view('layout.profile');
+});
 //-----------------------------------------------------
 //    in code bayad bad az har chizi ke any dare biad
 Route::get('/{any}', function (Request $request) {
