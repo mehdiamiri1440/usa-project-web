@@ -788,7 +788,9 @@ class profile_controller extends Controller
             return true;
         }
 
-        if($request->has('certificate_image_count') && $request->certificate_image_count == 0 &&  $request->has('related_image_count') && $request->related_image_count == 0){
+        if( ( $request->has('certificate_image_count') && $request->certificate_image_count == 0 &&  $request->has('related_image_count') && $request->related_image_count == 0 ) 
+                    || ( (! $request->has('certificate_image_count'))  &&  (! $request->has('related_image_count')) )
+        ){
             if($request->has('description')){
                 if($this->is_profile_description_clear($request->description) == true){
                     return false;
