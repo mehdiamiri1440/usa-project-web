@@ -889,11 +889,13 @@ class product_list_controller extends Controller
             $search_text = str_replace('/', '', $search_text);
             $search_text_array = explode(' ', $search_text);
 
-            $search_expresion = '(.*)';
+            $search_expresion = '^';
 
             foreach ($search_text_array as $text) {
-                $search_expresion .= "($text)(.*)";
+                $search_expresion .= "(?=.*\b$text\b)";
             }
+
+            $search_expresion .=  '.*$';
 
             // $general_category = DB::table('tags')
             //                         ->where('header','like',"%$search_text%")
