@@ -1,6 +1,6 @@
 @include('layout.header.header-profile-meta')
-<link rel="stylesheet" href="{{asset('assets/css/profile/styles.css')}}">
 <link rel="stylesheet" href="{{asset('assets/css/header-styles.css')}}">
+<link rel="stylesheet" href="{{asset('assets/css/profile/styles.css')}}">
 <link rel="stylesheet" href="{{asset('assets/css/footer-styles.css')}}">
 
 @include('layout.header.header')

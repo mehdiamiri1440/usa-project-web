@@ -2,10 +2,67 @@
   margin: 0;
   padding: 0;
 }
+a, abbr, acronym, address, applet, article, aside, audio, b, big, blockquote, body, canvas, caption, center, cite, code, dd, del, details, dfn, div, dl, dt, em, embed, fieldset, figcaption, figure, footer, form, h1, h2, h3, h4, h5, h6, header, html, i, iframe, img, ins, kbd, label, legend, li, mark, menu, nav, object, ol, output, p, pre, q, ruby, s, samp, section, small, span, strike, strong, sub, summary, sup, table, tbody, td, tfoot, th, thead, time, tr, tt, u, ul, var, video {
+  margin: 0;
+  padding: 0;
+  vertical-align: baseline;
+  font-family: IRANSans,sans-serif;
+  word-wrap: break-word;
+}
+.h1, h1 {
+  font-size: 36px;
+}
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+  font-family: inherit;
+  font-weight: 500;
+  line-height: 1.1;
+  color: inherit;
+}
+.navbar-nav > li > a {
+  padding: initial;
+  border: none;
+  line-height: 20px;
+}
+.padding-0{
+  padding: 0;
+}
 .row{
   margin-left: 0;
   margin-right: 0;
 }
+button
+{
+  line-height: 24px;
+}
+img, svg {
+  width: 100%;
+}
+.navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
+  margin-right: auto; 
+  margin-left: auto;
+}
+.btn {
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
 .user-auth-info-wrapper {
     margin-top: 6px;
     margin-left: 10px;
@@ -116,10 +173,10 @@
 
 .user-contents h1 {
   padding: 14px 0;
+  border-bottom: 1px solid #ededed;
 }
 
 .title_content {
-  border-bottom: 1px solid #ededed;
   padding: 0;
 }
 
@@ -396,9 +453,12 @@ p.response-rate span {
 /* #wrap-footer {
   display: none;
 } */
-
-.title_content .back_page.first-back {
-  margin-top: 9px;
+.back_page.first-back a {
+  margin-top: 24px;
+  margin-bottom: 50px;
+}
+.back_page.first-back {
+  padding: 0;
 }
 
 .profile-main-content-item {
@@ -500,6 +560,80 @@ p.response-rate span {
 .empty-actions a.green-button {
   width: initial;
 }
+.product-carousel{
+  padding: 0 7px;
+
+}
+
+.main-content-item{
+  direction: rtl;
+  margin: 15px auto;
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
+  padding: 0;
+  background: #fff;
+  float: right;
+  width: 100%;
+  overflow: hidden;
+}
+.box-content {
+  overflow: hidden;
+  background: #fff;
+  padding: 0;
+  margin-bottom: 20px;
+  text-align: center;
+  padding-bottom: 10px;
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
+  min-height: 212px;
+}
+.carousel-img {
+  height: 135px;
+  overflow: hidden;
+  position: relative;
+  display: block;
+}
+.grid-list {
+padding: 0 3px;
+}
+.carousel-img {
+  height: 135px;
+  overflow: hidden;
+  position: relative;
+  display: block;
+}
+
+.main-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transition: 300ms;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  opacity: 0;
+  transition: 150ms;
+}
+.main-image-load {
+  opacity: 1;
+}
+
+.carousel-title {
+  font-size: 16px;
+  direction: rtl;
+  font-weight: bold;
+  color: #4b4b4b;
+}
+.stock-wrapper {
+  font-size: 14px;
+  direction: rtl;
+  font-weight: bold;
+  color: #00c569;
+  margin-bottom: 5px;
+  display: inline-block;
+}
+.grid-list .main-content-item{
+  height: 250px;
+}
 .add-review {
   background: #556080;
   border: none;
@@ -525,7 +659,10 @@ p.response-rate span {
   color: #777;
   margin: 40px auto;
 }
-
+.image-wrapper {
+  height: 300px;
+  overflow: hidden;
+}
 .login-empty-reviews {
   text-align: center;
   font-size: 18px;
