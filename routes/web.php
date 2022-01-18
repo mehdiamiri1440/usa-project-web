@@ -36,6 +36,10 @@ Route::get('/product-view/{category_name}/{extra_text}/{product_id}',[
     'uses' => 'Product\product_controller@get_product_blade',
 ])->where('product_id','[0-9]+');
 
+Route::get('/profile/{user_name}',[
+    'uses' => 'Accounting\profile_controller@get_profile_blade',
+]);
+
 Route::get('/pricing',function(){
     if(session()->has('user_id')){
         if(session('is_seller') == true){
@@ -1335,9 +1339,6 @@ Route::get('/shared-profile/{username}',[
     'uses' => 'Accounting\profile_controller@get_user_shared_profile_info'
 ])->name('sharedProfile')->where("username","[A-Za-z0-9_]+$");
 
-Route::get('/profileBlade', function () {
-    return view('layout.profile');
-});
 //-----------------------------------------------------
 //    in code bayad bad az har chizi ke any dare biad
 Route::get('/{any}', function (Request $request) {

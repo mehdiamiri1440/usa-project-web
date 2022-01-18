@@ -66,12 +66,7 @@
 
                 <h1 v-if="profileOwner.user_info" class="content_title col-xs-12" itemprop="name">
                   <span>
-                    نام کاربر
-                    {{-- {{
-                   profileOwner.user_info.first_name +
-                   " " +
-                   profileOwner.user_info.last_name
-                 }}--}}
+                    {{$profile_info->first_name . ' ' . $profile_info->last_name}}
                     <button v-if="profileOwner.user_info.is_verified" @click.prevent class="verified-user" data-container="body" data-toggle="popover" data-placement="bottom" :data-content="verifiedUserContent" title>
                       <i class="fa fa-certificate"></i>
                     </button>
