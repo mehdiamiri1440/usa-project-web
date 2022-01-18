@@ -738,6 +738,11 @@ class buyAd_controller extends Controller
     //public method
     public function get_related_buyAds_list_to_the_seller(Request $request)
     {
+        $this->validate($request,[
+            'from_record_number' => 'integer:min:0',
+            'to_record_number' => 'integer:min:5'
+        ]);
+
         $seller_id = session('user_id');
 
         $user = myuser::find($seller_id);
@@ -864,6 +869,15 @@ class buyAd_controller extends Controller
             $result_buyAds = array_merge($filtered_buyAds,$result_buyAds);
 
             $result_buyAds = array_unique($result_buyAds,SORT_REGULAR);
+
+            $result_buyAds = array_values($result_buyAds);
+
+            if ($request->has('from_record_number') && $request->has('to_record_number')) {
+                $offset = abs($request->from_record_number - $request->to_record_number);
+    
+                $result_buyAds = array_slice($result_buyAds, $request->from_record_number, $offset, true);
+            }
+
 
             return response()->json([
                 'status' => true,
