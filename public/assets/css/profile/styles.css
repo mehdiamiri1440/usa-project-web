@@ -564,7 +564,20 @@ p.response-rate span {
   padding: 0 7px;
 
 }
-
+.carousel-title h4 {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 0 10px;
+  margin-top: 10px;
+  margin-bottom: 9px;
+}
+.carousel-img {
+  height: 135px;
+  overflow: hidden;
+  position: relative;
+  display: block;
+}
 .main-content-item{
   direction: rtl;
   margin: 15px auto;
