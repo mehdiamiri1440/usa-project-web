@@ -80,7 +80,7 @@
                @endif
                 <p class="response-rate">
                   احتمال پاسخ گویی
-                  <span>70%</span>
+                  <span>100%</span>
                 </p>
               </h1>
               <div class="title_content col-xs-12">
@@ -362,9 +362,9 @@
                     
                       <a href="{{'/product-view/'. $product_item->product_id }}" class="carousel-title">
                      
-                      {{--
+                      
                       <img src="{{url('storage/') . '/' .$product_item->photo}}" class="main-image main-image-load" alt="" />
-                      --}}
+                      
                       <h4>
                         {{$product_item->product_name }}
                       </h4>

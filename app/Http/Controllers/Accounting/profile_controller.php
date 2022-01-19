@@ -13,6 +13,7 @@ use App\Models\buyAd;
 use App\Models\sell_offer;
 use DB;
 use App\Models\message;
+use App\Models\product_media;
 use App\Http\Controllers\General\media_controller;
 use App\Http\Controllers\Accounting\comment_controller;
 use Carbon\Carbon;
@@ -851,7 +852,7 @@ class profile_controller extends Controller
                                                 ->join('profiles','profiles.myuser_id','=','myusers.id')
                                                 ->where('myusers.user_name',$user_name)
                                                 ->where('profiles.confirmed',true)
-                                                ->select('myusers.id as user_id','myusers.first_name','myusers.last_name','myusers.active_pakage_type','myusers.is_verified','profiles.*')
+                                                ->select('myusers.id as user_id','myusers.is_seller','myusers.is_buyer','myusers.first_name','myusers.last_name','myusers.active_pakage_type','myusers.is_verified','profiles.*')
                                                 ->get()
                                                 ->last();
 
@@ -885,7 +886,21 @@ class profile_controller extends Controller
                     ])
                     ->where('products.myuser_id', $last_confirmed_profile_record->user_id)
                     ->where('products.confirmed', true)
+                    ->whereNull('products.deleted_at')
                     ->get();
+
+        
+        foreach($product_with_related_data as $product) {
+
+            $category_info = $this->get_category_and_subcategory_name($product->sub_category_id);
+
+            $product->category_name = $category_info['category_name'];
+            $product->subcategory_name = $category_info['subcategory_name'];
+            $product->photo = product_media::where('product_id', $product->product_id)
+                                                ->get()
+                                                ->first()
+                                                ->file_path ?? null;
+        }
 
         
         return view('layout.profile',[
@@ -893,6 +908,24 @@ class profile_controller extends Controller
             'related_photos' => $related_photos,
             'user_products' => $product_with_related_data
         ]);
+    }
+
+    protected function get_category_and_subcategory_name($subcategory_id)
+    {
+        $subcategory_record = category::where('id', $subcategory_id)
+            ->select('category_name', 'parent_id')
+            ->get()
+            ->first();
+
+        $category_record = category::where('id', $subcategory_record->parent_id)
+            ->select('category_name')
+            ->get()
+            ->first();
+
+        return [
+            'category_name' => $category_record->category_name,
+            'subcategory_name' => $subcategory_record->category_name,
+        ];
     }
    
     protected function _bot_detected() 
