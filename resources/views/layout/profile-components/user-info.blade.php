@@ -1,5 +1,6 @@
         <div class="header-content col-xs-12">
           <div class="image_user_wrapper col-xs-4 col-sm-3 col-lg-2">
+            
             <div class="user-image">
               {{--<div
                   style="
@@ -11,7 +12,7 @@
             <div style="background-image: url('assets/img/user-defult.png')"></div>
           </div>
 
-          <div class="profile-rating-box-wrapper hidden-xs" v-if="profileOwnerStatistics.rating_info.total_count > 0 && !statisticsLoader">
+          <div class="profile-rating-box-wrapper hidden-xs">
             <div class="profile-rating-box">
               <div class="rating-stars pull-left">
                 <p class="stars-wrapper">
@@ -60,7 +61,7 @@
             <div class="title_content col-xs-12 col-sm-8 col-md-9">
 
 
-              <h1 v-if="profileOwner.user_info" class="content_title col-xs-12" itemprop="name">
+              <h1 class="content_title col-xs-12" itemprop="name">
 
                 <span>
                   {{$profile_info->first_name . ' ' . $profile_info->last_name}}
@@ -72,12 +73,12 @@
                 </span>
 
                 @if($profile_info->active_pakage_type == 3)
-                <span class="valid-seller" v-if="profileOwnerStatistics.validated_seller">
+                <span class="valid-seller">
                   <i class="fa fa-check-circle"></i>
                   فروشنده ویژه
                 </span>
                @endif
-                <p v-if="profileOwnerStatistics.response_rate" class="response-rate">
+                <p class="response-rate">
                   احتمال پاسخ گویی
                   <span>70%</span>
                 </p>
@@ -87,7 +88,7 @@
                 <div class="content_user_info col-xs-12">
                   <div class="row">
                     <div class="col-xs-6 pull-right">
-                      <p v-if="profileOwner.activity_domain">
+                      <p>
                         حوزه ی فعالیت :
                         <span>مواد غذایی</span>
                       </p>
@@ -95,7 +96,7 @@
                     </div>
 
                     <div class="col-xs-6">
-                      <p v-if="profileOwner.user_info">
+                      <p>
                         آدرس :
                         <span itemprop="address">
                           {{$profile_info->address}}
@@ -128,7 +129,7 @@
             </div>
             <div class="back_page first-back col-xs-12 col-sm-4 col-md-3">
               <a href="javascript:history.back()" class="green-button">بازگشت به صفحه قبل</a>
-              <button v-else href="#" @click.prevent="openChat()" class="green-button edit">
+              <button href="#" class="green-button edit">
                 <i class="fa fa-envelope"></i>
                 ارسال پیام
               </button>
@@ -160,7 +161,7 @@
               درخواست ها
             </div>
             @endif
-            <div class="col-xs-6 text-center" v-if="profileOwnerStatistics.reputation_score >= 0">
+            <div class="col-xs-6 text-center">
               <div class="info-num">7</div>
               اعتبار
             </div>
@@ -199,27 +200,27 @@
             <div class="title_content col-xs-12">
               <div class="back_page col-xs-12 col-sm-4">
                 <button class="btn btn-copy">
-                  <i :class="copyLinkClass" aria-hidden="true"></i>
+                  <i aria-hidden="true"></i>
                   <span v-text="copyLinkText"></span>
                 </button>
               </div>
 
-              <h1 v-if="profileOwner.user_info" class="content_title col-xs-12 col-sm-8">
+              <h1 class="content_title col-xs-12 col-sm-8">
                 <span>
                 {{$profile_info->first_name . ' ' . $profile_info->last_name}}
                 @if($profile_info->is_verified)
-                  <button v-if="profileOwner.user_info.is_verified" @click.prevent class="verified-user" data-container="body" data-toggle="popover" data-placement="bottom" :data-content="verifiedUserContent" title>
+                  <button class="verified-user" data-container="body" data-toggle="popover" data-placement="bottom" title>
                     <i class="fa fa-certificate"></i>
                   </button>
                 @endif
                 </span>
                 @if($profile_info->active_pakage_type == 3)
-                <span class="valid-seller" v-if="profileOwnerStatistics.validated_seller">
+                <span class="valid-seller">
                   <i class="fa fa-check-circle"></i>
                   فروشنده ویژه
                 </span>
                 @endif
-                <p v-if="profileOwnerStatistics.response_rate" class="response-rate">
+                <p class="response-rate">
                   احتمال پاسخ گویی
                   <span>70%</span>
                 </p>
@@ -228,7 +229,7 @@
               <div class="
                       profile-rating-box-wrapper
                       hidden-sm hidden-md hidden-lg
-                    " v-if="profileOwnerStatistics.rating_info.total_count > 0">
+                    ">
                 <div class="profile-rating-box">
                   <div class="rating-stars pull-left">
                     <p class="stars-wrapper">
@@ -272,27 +273,27 @@
               <div class="content_user_info col-xs-12 col-sm-8">
                 <div class="row">
                   <div class="col-xs-6 pull-right">
-                    <p v-if="profileOwner.activity_domain">
+                    <p>
                       حوزه ی فعالیت :
                       <span>مواد غذایی</span>
                     </p>
                   </div>
 
                   <div class="col-xs-6">
-                    <p v-if="profileOwner.user_info">
+                    <p >
                       آدرس :
                       <span itemprop="address"> {{$profile_info->address}}</span>
                     </p>
                   </div>
                   @if($profile_info->is_company)
                   <div class="col-xs-6 pull-right margin-15-0">
-                    <p v-if="profileOwner.profile.is_company">
+                    <p>
                       نام شرکت :
                       <span>{{$profile_info->company_name}}</span>
                     </p>
                   </div>
                   <div class="col-xs-6 margin-15-0">
-                    <p v-if="profileOwner.profile.is_company">
+                    <p>
                       شماره ثبت :
                       <span>{{$profile_info->company_register_code}}</span>
                     </p>
@@ -338,9 +339,9 @@
             </li>
           </ul>
         </div>
-        <div class="contents col-xs-12" v-if="profileDescription === true">
+        <div class="contents col-xs-12">
           <div class="description-wrapper col-xs-12">
-            <p v-if="profileOwner.profile.description" class="title-content">
+            <p class="title-content">
               توضیحات
             </p>
 
@@ -353,8 +354,8 @@
             <div class="my-products col-xs-12">
               <p class="title-content">محصولات من</p>
 
-              <section class="row" v-if="products.length > 0">
-                <div class="col-xs-12 pull-right" :key="productIndex" v-for="(product, productIndex) in products">
+              <section class="row">
+                <div class="col-xs-12 pull-right">
                   @foreach ($user_products as $product_item)
                   <div class=" product-carousel col-xs-6 col-sm-4 col-md-3">
                     <article class="carousel-item box-content">

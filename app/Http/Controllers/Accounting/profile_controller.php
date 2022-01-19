@@ -894,55 +894,7 @@ class profile_controller extends Controller
             'user_products' => $product_with_related_data
         ]);
     }
-    protected function get_profile_test($user_name)
-    {
-        $last_confirmed_profile_record = DB::table('myusers')
-                                                ->join('profiles','profiles.myuser_id','=','myusers.id')
-                                                ->where('myusers.user_name',$user_name)
-                                                ->where('profiles.confirmed',true)
-                                                ->select('myusers.id as user_id','myusers.first_name','myusers.last_name','myusers.active_pakage_type','myusers.is_verified','profiles.*')
-                                                ->get()
-                                                ->last();
-
-        $related_photos = DB::table('profile_media')
-                                ->where('profile_id',$last_confirmed_profile_record->id)
-                                ->get();
-
-        $product_with_related_data = DB::table('products')
-                    ->join('categories', 'products.category_id', '=', 'categories.id')
-                    ->leftJoin('cities', 'cities.id', '=', 'products.city_id')
-                    ->leftJoin('provinces', 'provinces.id', '=', 'cities.province_id')
-                    ->select([
-                        'products.id as product_id',
-                        'products.updated_at', 
-                        'products.product_name', 
-                        'products.stock', 
-                        'products.min_sale_price', 
-                        'products.max_sale_price', 
-                        'products.min_sale_amount', 
-                        'products.description',
-                        'products.address', 
-                        'products.myuser_id', 
-                        'products.category_id as sub_category_id', 
-                        'products.confirmed',
-                        'provinces.province_name',
-                        'provinces.id as province_id', 
-                        'cities.city_name', 
-                        'cities.id as city_id', 
-                        'categories.category_name as sub_category_name', 
-                        'products.is_elevated',
-                    ])
-                    ->where('products.myuser_id', $last_confirmed_profile_record->user_id)
-                    ->where('products.confirmed', true)
-                    ->get();
-
-        
-        return response()->json([
-            'profile_info' => $last_confirmed_profile_record,
-            'related_photos' => $related_photos,
-            'user_products' => $product_with_related_data
-        ]);
-    }
+   
     protected function _bot_detected() 
     {
         return (
