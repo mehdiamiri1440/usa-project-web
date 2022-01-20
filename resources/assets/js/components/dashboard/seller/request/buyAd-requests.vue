@@ -533,7 +533,26 @@ button.disable {
   box-shadow: 0px 4px 8px rgb(0 0 0 / 15%);
   border-radius: 4px;
 }
+.more-buyAds-wrapper {
+  float: right;
+  width: 100%;
+  min-height: 96px;
+  position: relative;
+}
 
+.more-buyAds-wrapper .spinner-border {
+  top: 10px;
+  width: 4rem;
+  height: 4rem;
+  color: #999;
+  border-width: 3px;
+  left: calc(50% - 25px);
+}
+
+.more-buyAds-wrapper p {
+  margin-top: 25px;
+  color: #999;
+}
 /*---------------*/
 .text-center {
   text-align: center !important;
@@ -1210,6 +1229,14 @@ button.disable {
             </li>
           </ul>
         </div>
+        <div class="more-buyAds-wrapper" v-if="loadMoreActive">
+          <div>
+            <div class="spinner-border">
+              <span class="sr-only"></span>
+            </div>
+            <p class="text-center text-rtl">درحال دریافت اطلاعات ...</p>
+          </div>
+        </div>
       </section>
     </div>
   </div>
@@ -1246,6 +1273,9 @@ export default {
       filterCategory: "",
       emptyItem: 0,
       categoryList: "",
+      buyAdPostCount: 20,
+      loadMoreActive: false,
+      continueToLoadProducts: true,
     };
   },
   methods: {
@@ -1265,12 +1295,16 @@ export default {
         });
 
       axios
-        .post("/get_related_buyAds_list_to_the_seller")
+        .post("/get_related_buyAds_list_to_the_seller", {
+          from_record_number: self.buyAdPostCount - 20,
+          to_record_number: self.buyAdPostCount,
+        })
         .then(function (response) {
           self.allBuyAds = response.data.buyAds;
           self.buyAds = self.allBuyAds;
 
           self.load = false;
+          self.infiniteScrollHandler();
           setTimeout(function () {
             $(".list-notice button").tooltip();
           }, 100);
@@ -1328,6 +1362,65 @@ export default {
         300
       );
     },
+    /*--------------------------------*/
+    infiniteScrollHandler() {
+      $(window).scroll(() => {
+        if (
+          this.$route.name == "buyAdRequestsSeller" &&
+          !this.filterCategory &&
+          this.continueToLoadProducts
+        ) {
+          if (
+            $(window).scrollTop() >=
+              ($(document).height() - $(window).height() - 100) / 2 &&
+            !this.loadMoreActive &&
+            this.continueToLoadProducts
+          ) {
+            this.feed();
+          }
+        }
+      });
+    },
+    feed() {
+      this.loadMoreActive = true;
+
+      // use 20 because from start as 1 and get 20 item
+
+      this.buyAdPostCount += 20;
+
+      let data = {};
+      if (!this.filterCategory) {
+        data = {
+          from_record_number: this.buyAdPostCount - 20,
+          to_record_number: this.buyAdPostCount,
+        };
+      } else if (this.continueToLoadProducts) {
+        this.load = true;
+        this.buyAds = "";
+      }
+
+      axios
+        .post("/get_related_buyAds_list_to_the_seller", data)
+        .then((response) => {
+          if (response.data.buyAds.length > 0) {
+            this.allBuyAds = this.allBuyAds.concat(response.data.buyAds);
+            if (this.filterCategory) {
+              this.$nextTick(() => {
+                this.filterBuyAdByCategory();
+              });
+              this.load = false;
+              this.continueToLoadProducts = false;
+            } else {
+              this.buyAds = this.allBuyAds;
+            }
+          } else {
+            this.continueToLoadProducts = false;
+          }
+          this.loadMoreActive = false;
+        });
+    },
+
+    /*------------------------------------*/
     activePhoneCall(buyAdUserId, buyAdId) {
       let id = "#loader-phone-" + buyAdId;
 
