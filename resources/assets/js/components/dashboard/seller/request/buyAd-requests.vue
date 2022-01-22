@@ -841,7 +841,9 @@ button.disable {
                 </div>
                 <div
                   class="col-xs-12 promotional-orange-banner"
-                  v-if="index == 3"
+                  v-if="
+                    index == 3 && currentUser.user_info.active_pakage_type == 0
+                  "
                   @click="$router.push({ name: 'dashboardPricingTableSeller' })"
                 >
                   <div class="row">
@@ -1260,6 +1262,7 @@ export default {
       },
       buyAds: "",
       allBuyAds: "",
+      filteredBuyAds: "",
       popUpMsg: "",
       load: false,
       textActive: false,
@@ -1274,8 +1277,10 @@ export default {
       emptyItem: 0,
       categoryList: "",
       buyAdPostCount: 20,
+      buyAdPostFilterCount: 20,
       loadMoreActive: false,
       continueToLoadProducts: true,
+      categoryId: 0,
     };
   },
   methods: {
@@ -1350,6 +1355,9 @@ export default {
           }
         });
     },
+    setScrollTo(x,y) {
+      window.scrollTo(x,y);
+    },
     setScrollToBuyAd(id) {
       let element = $(id);
       let elementTop = element.offset().top;
@@ -1367,7 +1375,6 @@ export default {
       $(window).scroll(() => {
         if (
           this.$route.name == "buyAdRequestsSeller" &&
-          !this.filterCategory &&
           this.continueToLoadProducts
         ) {
           if (
@@ -1382,42 +1389,55 @@ export default {
       });
     },
     feed() {
+      this.continueToLoadProducts = true;
       this.loadMoreActive = true;
-
+      let self = this;
       // use 20 because from start as 1 and get 20 item
-
-      this.buyAdPostCount += 20;
-
+      if (this.continueToLoadProducts) {
+        this.load = true;
+      }
       let data = {};
       if (!this.filterCategory) {
+        this.buyAdPostCount += 20;
         data = {
           from_record_number: this.buyAdPostCount - 20,
           to_record_number: this.buyAdPostCount,
         };
-      } else if (this.continueToLoadProducts) {
-        this.load = true;
-        this.buyAds = "";
-      }
 
-      axios
-        .post("/get_related_buyAds_list_to_the_seller", data)
-        .then((response) => {
-          if (response.data.buyAds.length > 0) {
-            this.allBuyAds = this.allBuyAds.concat(response.data.buyAds);
-            if (this.filterCategory) {
-              this.$nextTick(() => {
-                this.filterBuyAdByCategory();
-              });
-              this.load = false;
-              this.continueToLoadProducts = false;
-            } else {
+        axios
+          .post("/get_related_buyAds_list_to_the_seller", data)
+          .then((response) => {
+            if (response.data.buyAds.length > 0) {
+              this.allBuyAds = this.allBuyAds.concat(response.data.buyAds);
+
               this.buyAds = this.allBuyAds;
+              this.load = false;
+            } else {
+              self.continueToLoadProducts = false;
+              this.load = false;
             }
-          } else {
-            this.continueToLoadProducts = false;
-          }
-          this.loadMoreActive = false;
-        });
+
+            this.loadMoreActive = false;
+          });
+      } else {
+        this.buyAdPostFilterCount += 20;
+        axios
+          .post("/get_related_buyAds_list_to_the_seller", {
+            from_record_number: self.buyAdPostFilterCount - 20,
+            to_record_number: self.buyAdPostFilterCount,
+            category_id: self.filterCategory.id,
+          })
+          .then((response) => {
+            if (response.data.buyAds.length > 0) {
+              self.buyAds = self.filteredBuyAds.concat(response.data.buyAds);
+              self.load = false;
+            } else {
+              self.continueToLoadProducts = false;
+              self.load = false;
+            }
+            self.loadMoreActive = false;
+          });
+      }
     },
 
     /*------------------------------------*/
@@ -1520,15 +1540,37 @@ export default {
       $("#categories-modal").modal("show");
     },
     filterBuyAdByCategory: function () {
-      this.buyAds = "";
+      this.setScrollTo(0,0);
+      let self = this;
+      this.load = true;
       this.isRequests = true;
       if (this.filterCategory.id) {
-        let filterBuyAd = this.allBuyAds;
-        filterBuyAd = filterBuyAd.filter(
-          (buyAd) => buyAd.category_id == this.filterCategory.id
-        );
-        this.buyAds = filterBuyAd;
+        this.continueToLoadProducts = true;
+        this.buyAds = "";
+        self.buyAdPostFilterCount = 20;
+        axios
+          .post("/get_related_buyAds_list_to_the_seller", {
+            from_record_number: self.buyAdPostFilterCount - 20,
+            to_record_number: self.buyAdPostFilterCount,
+            category_id: self.filterCategory.id,
+          })
+          .then(function (response) {
+            if (response.data.buyAds.length > 0) {
+              self.filteredBuyAds = response.data.buyAds;
+              self.buyAds = self.filteredBuyAds;
+              self.load = false;
+              self.infiniteScrollHandler();
+              setTimeout(function () {
+                $(".list-notice button").tooltip();
+              }, 100);
+            } else {
+              self.continueToLoadProducts = false;
+              self.buyAds = "";
+              self.load = false;
+            }
+          });
       } else {
+        this.buyAds = "";
         this.buyAds = this.allBuyAds;
       }
       setTimeout(function () {
