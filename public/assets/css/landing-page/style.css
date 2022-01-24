@@ -30,6 +30,10 @@ i {
   top: 1px;
   padding: 0 2px;
 }
+div, h1, h2, h3, h4, p, span {
+  line-height: 1.618;
+}
+
 
 #main-content {
   margin-bottom: -60px;
@@ -173,7 +177,16 @@ i {
   top: 1px;
   padding: 0 2px;
 }
+#intro , #intro h2[data-v-1c176f65] {
+  color: #fff;
+  font-weight: 700;
+}
 
+#intro h1[data-v-1c176f65] {
+  margin-top: 18px;
+  font-size: 30px;
+  margin-bottom: 16px;
+}
 .search-wrapper {
   position: relative;
 
@@ -1178,15 +1191,22 @@ li > ul > li.active > ul > li {
   border: 1px solid #f0f0f1;
   margin: 30px auto;
   direction: rtl;
-  max-height: 400px;
-overflow-y: scroll;
 }
 
 .main-contents-wrapper > p {
   margin-top: 20px;
 }
 
-
+.main-cta-page {
+  font-size: 17px;
+  border-radius: 8px;
+  padding: 7px 22px 6px;
+  direction: rtl;
+  font-weight: 400;
+  margin: 20px auto 0;
+  display: block;
+  max-width: 270px;
+}
 /*---------------------------------------
           Main product Styles
       -----------------------------------------*/
