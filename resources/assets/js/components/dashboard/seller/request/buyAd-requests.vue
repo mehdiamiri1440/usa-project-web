@@ -1355,8 +1355,8 @@ export default {
           }
         });
     },
-    setScrollTo(x,y) {
-      window.scrollTo(x,y);
+    setScrollTo(x, y) {
+      window.scrollTo(x, y);
     },
     setScrollToBuyAd(id) {
       let element = $(id);
@@ -1378,8 +1378,8 @@ export default {
           this.continueToLoadProducts
         ) {
           if (
-            $(window).scrollTop() >=
-              ($(document).height() - $(window).height() - 100) / 2 &&
+            $(window).scrollTop() + $(window).height() ==
+              $(document).height() &&
             !this.loadMoreActive &&
             this.continueToLoadProducts
           ) {
@@ -1387,6 +1387,12 @@ export default {
           }
         }
       });
+    },
+    disableScroll() {
+      window.addEventListener("DOMMouseScroll", preventDefault, false); // older FF
+      window.addEventListener(wheelEvent, preventDefault, wheelOpt); // modern desktop
+      window.addEventListener("touchmove", preventDefault, wheelOpt); // mobile
+      window.addEventListener("keydown", preventDefaultForScrollKeys, false);
     },
     feed() {
       this.continueToLoadProducts = true;
@@ -1429,13 +1435,15 @@ export default {
           })
           .then((response) => {
             if (response.data.buyAds.length > 0) {
-              self.buyAds = self.filteredBuyAds.concat(response.data.buyAds);
+              self.filteredBuyAds = self.filteredBuyAds.concat(response.data.buyAds);
+              self.buyAds = self.filteredBuyAds;
               self.load = false;
+              
             } else {
               self.continueToLoadProducts = false;
               self.load = false;
             }
-            self.loadMoreActive = false;
+             self.loadMoreActive = false;
           });
       }
     },
@@ -1540,7 +1548,7 @@ export default {
       $("#categories-modal").modal("show");
     },
     filterBuyAdByCategory: function () {
-      this.setScrollTo(0,0);
+      this.scrollToTop();
       let self = this;
       this.load = true;
       this.isRequests = true;
@@ -1572,6 +1580,7 @@ export default {
       } else {
         this.buyAds = "";
         this.buyAds = this.allBuyAds;
+        this.continueToLoadProducts= true;
       }
       setTimeout(function () {
         $(".list-notice button").tooltip();
@@ -1586,6 +1595,9 @@ export default {
   },
   mounted() {
     this.init();
+
+    this.scrollToTop();
+
     eventBus.$emit("subHeader", false);
   },
   created() {
