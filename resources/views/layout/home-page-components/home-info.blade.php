@@ -2,10 +2,6 @@
     <section
       id="intro"
       class="container-fluid"
-      :class="{
-        'intro-web': !checkIsMobile(),
-        'intro-mobile': checkIsMobile(),
-      }"
     >
       <!-- <div class="particle-network-animation"></div> -->
       <div class="container">
@@ -24,7 +20,6 @@
               :iteration="1"
               :offset="0"
               animateClass="animated"
-              :begin="false"
             >
               <h2 class="intro-site-title">
                 ارتباط مستقیم با خریداران و فروشندگان عمده محصولات غذایی و
@@ -101,24 +96,21 @@
                 <input
                   type="text"
                   placeholder="محصول مورد نظر خود را جستجو کنید"
-                  v-model="mainSearchBoxText"
-                  @blur="showNavigationMenu"
-                  @focus="hideNavigationMenu"
                 />
                 <button
                   class="hidden-sm hidden-md hidden-lg fa fa-search"
-                  @click="search"
+                 
                 ></button>
 
-                <button class="hidden-xs" @click="search">
+                <button class="hidden-xs" >
                   <i class="fa fa-search"></i>
                 </button>
               </div>
 
-              <router-link :to="{ name: 'productList' }" class="green-button">
+              <a href="/product-list" class="green-button">
                 لیست محصولات
                 <i class="fa fa-angle-left"></i>
-              </router-link>
+                                  </a>
             </div>
           </div>
         </div>
@@ -335,6 +327,48 @@
       class="section-wrapper container latest-product"
     >
       <div class="row">
+      <div class="col-xs-12 col-md-3">
+          <div v-if="isUserLogin && userType == 0" class="title-box">
+            <div class="section-title">ارتباط با فروشندگان</div>
+
+            <p>
+              محصولات فروشندگان را ببینید و بدون واسطه با آن ها ارتباط برقرار
+              کنید
+            </p>
+
+            <router-link class="green-button" :to="{ name: 'productList' }"
+              >لیست محصولات</router-link
+            >
+          </div>
+
+          <div v-else-if="isUserLogin && userType == 1" class="title-box">
+            <div class="section-title">ثبت و معرفی محصول</div>
+
+            <p>
+              با ثبت و معرفی محصول خود، بدون واسطه با خریداران عمده ارتباط
+              برقرار کنید
+            </p>
+
+            <router-link
+              class="green-button"
+              :to="{ name: 'registerProductSeller' }"
+              >ثبت محصول</router-link
+            >
+          </div>
+
+          <div v-else class="title-box">
+            <div class="section-title">ثبت نام خریداران</div>
+            <p>
+              برای استعلام قیمت و خرید محصولات غذایی و کشاورزی از بهترین
+              فروشندگان عمده هم اکنون ثبت نام کنید
+            </p>
+
+            <router-link class="green-button" :to="{ name: 'register' }"
+              >ثبت نام رایگان
+              <i class="fa fa-angle-left"></i>
+            </router-link>
+          </div>
+        </div>
         <div class="col-xs-12 col-md-9">
           <div class="section-title">آخرین محصولات ثبت شده</div>
 
@@ -438,48 +472,7 @@
           </div>
         </div>
 
-        <div class="col-xs-12 col-md-3 pull-right">
-          <div v-if="isUserLogin && userType == 0" class="title-box">
-            <div class="section-title">ارتباط با فروشندگان</div>
-
-            <p>
-              محصولات فروشندگان را ببینید و بدون واسطه با آن ها ارتباط برقرار
-              کنید
-            </p>
-
-            <router-link class="green-button" :to="{ name: 'productList' }"
-              >لیست محصولات</router-link
-            >
-          </div>
-
-          <div v-else-if="isUserLogin && userType == 1" class="title-box">
-            <div class="section-title">ثبت و معرفی محصول</div>
-
-            <p>
-              با ثبت و معرفی محصول خود، بدون واسطه با خریداران عمده ارتباط
-              برقرار کنید
-            </p>
-
-            <router-link
-              class="green-button"
-              :to="{ name: 'registerProductSeller' }"
-              >ثبت محصول</router-link
-            >
-          </div>
-
-          <div v-else class="title-box">
-            <div class="section-title">ثبت نام خریداران</div>
-            <p>
-              برای استعلام قیمت و خرید محصولات غذایی و کشاورزی از بهترین
-              فروشندگان عمده هم اکنون ثبت نام کنید
-            </p>
-
-            <router-link class="green-button" :to="{ name: 'register' }"
-              >ثبت نام رایگان
-              <i class="fa fa-angle-left"></i>
-            </router-link>
-          </div>
-        </div>
+       
       </div>
     </section>
 

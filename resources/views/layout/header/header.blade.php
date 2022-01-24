@@ -96,7 +96,7 @@
             <li class="hidden-xs">
               <a
                 class="green-button green-button-alt"
-                href="/login"
+                href="/buyAd-requests"
               >
                 <div class="item-icon">
                   <i class="fa fa-users"></i>
@@ -107,7 +107,7 @@
             <li class="hidden-xs">
               <a
                 class="green-button green-button-alt"
-                href="/login"
+                href="/product-list"
               >
                 <div class="item-icon">
                   <i class="fas fa-grip-horizontal"></i>
