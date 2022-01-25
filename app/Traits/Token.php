@@ -96,7 +96,7 @@ trait Token
         if($expiry_time < time()){
             //token expired
             $first = $token_parts[0];
-            $second = $this->base64url_encode(strtotime(Carbon::now()->addHours(2)) );
+            $second = $this->base64url_encode(strtotime(Carbon::now()->addMinutes(2)) );
 
             $hash = sha1($first . $second . sha1($this->get_secret()) );
 
