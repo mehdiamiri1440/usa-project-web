@@ -128,7 +128,6 @@
               <input
                 type="text"
                 placeholder="محصول مورد نظر خود را جستجو کنید"
-                v-model="mainSearchBoxText"
               />
 
               <button class="hidden-xs" >
@@ -159,7 +158,6 @@
         <input
           type="text"
           placeholder="محصول مورد نظر خود را جستجو کنید"
-          v-model="mainSearchBoxText"
         />
         <button class="fa fa-search" ></button>
 
@@ -168,9 +166,6 @@
           <span class="hidden-sm"> جستجو </span>
         </button>
         <div
-          v-if="
-            $route.name == 'productList' || $route.name == 'productCategory'
-          "
           class="hidden-sm hidden-md hidden-lg location-filter-wrapper"
         >
           <button >
