@@ -34,6 +34,10 @@ class login
                         $refreshed_token = $this->refresh_token($token);
 
                         if($refreshed_token === 0){
+                            if($request->has()->session('user_id')){
+                                return $next($request);
+                            }
+
                             return response()->json([
                                 'status' => false,
                                 'redirect_to_login' => true,
@@ -49,6 +53,11 @@ class login
 
                     }
                     else{
+                        
+                        if($request->has()->session('user_id')){
+                            return $next($request);
+                        }
+
                         return response()->json([
                             'status' => false,
                             'redirect_to_login' => true,
