@@ -8,6 +8,7 @@ use App\Models\myuser;
 use JWTAuth;
 use App\Http\Controllers\Accounting\token_controller;
 use App\Traits\Token;
+use Illuminate\Support\Facades\Log;
 
 class login
 {
@@ -34,6 +35,15 @@ class login
                         $refreshed_token = $this->refresh_token($token);
 
                         if($refreshed_token === 0){
+
+                            if($request->session()->has('user_id')){
+                                Log::info('1 - user has been prevented from logout using session info. token is : ' . $token);
+
+                                return $next($request);
+                            }
+
+                            Log::info('Token expired (after session checking): ' . $token);
+
                             return response()->json([
                                 'status' => false,
                                 'redirect_to_login' => true,
@@ -49,6 +59,15 @@ class login
 
                     }
                     else{
+
+                        if($request->session()->has('user_id')){
+                            Log::info('2 - user has been prevented from logout using session info. token is : ' . $token);
+
+                            return $next($request);
+                        }
+
+                        Log::info('Token is not valid (after session checking): ' . $token);
+
                         return response()->json([
                             'status' => false,
                             'redirect_to_login' => true,
@@ -60,12 +79,15 @@ class login
 
 
                 if(! $request->session()->has('user_id')){
+
                     $status = $this->set_user_session($user->phone,$user->password);
 
                     if($status){
                         return $next($request);
                     }
                     else{
+                        Log::info('set_user_session method returns false for app user. user phone is : ' . $user->phone . ' and password is : ' . $user->password);
+
                         return response()->json([
                             'status' => false,
                             'redirect_to_login' => true,
@@ -77,6 +99,13 @@ class login
                 return $next($request);
             }
             catch(\Exception $e){
+
+                if($request->session()->has('user_id')){
+                    Log::info('3 - user has been prevented from logout using session info. token is : ' . $token);
+
+                    return $next($request);
+                }
+
                 return response()->json([
                     'status' => false,
                     'redirect_to_login' => true,
