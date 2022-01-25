@@ -334,28 +334,37 @@ class sms_controller extends Controller
     
     public function send_sms_to_given_phone_number($phone_number,$pattern_code,$data = [])
     {
-        $user_first_name = DB::table('myusers')
+        $user_record = DB::table('myusers')
                             ->where('phone',$phone_number)
+                            ->where('is_blocked',false)
                             ->select('first_name')
-                            ->get()
-                            ->first()
-                            ->first_name;
+                            ->get();
 
-        $sending_data = [
-            'name' => $user_first_name
-        ];
+        if(count($user_record) > 0)
+        {
+            $user_first_name = $user_record->first()->first_name;
 
-        if(! is_null($data)){
-            $sending_data = array_merge($sending_data,$data);
+            $sending_data = [
+                'name' => $user_first_name
+            ];
+    
+            if(! is_null($data)){
+                $sending_data = array_merge($sending_data,$data);
+            }
+    
+            
+            try{
+                Smsir::ultraFastSend($sending_data,$pattern_code,$phone_number);
+            }
+            catch(\Exception $e){
+                echo $e->getMessage();
+            }
         }
-
-        
-        try{
-            Smsir::ultraFastSend($sending_data,$pattern_code,$phone_number);
+        else{
+            //user should not receive sms message
+            return false;
         }
-        catch(\Exception $e){
-            echo $e->getMessage();
-        }
+  
     }
 
     protected function is_request_safe($request){
