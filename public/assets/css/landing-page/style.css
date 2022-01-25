@@ -1,4 +1,19 @@
 
+
+body {
+    line-height: 1.1;
+    font-family: IRANSans,sans-serif;
+    font-size: 14px;
+    background: #fff;
+}
+a, abbr, acronym, address, applet, article, aside, audio, b, big, blockquote, body, canvas, caption, center, cite, code, dd, del, details, dfn, div, dl, dt, em, embed, fieldset, figcaption, figure, footer, form, h1, h2, h3, h4, h5, h6, header, html, i, iframe, img, ins, kbd, label, legend, li, mark, menu, nav, object, ol, output, p, pre, q, ruby, s, samp, section, small, span, strike, strong, sub, summary, sup, table, tbody, td, tfoot, th, thead, time, tr, tt, u, ul, var, video {
+  margin: 0;
+  padding: 0;
+  vertical-align: baseline;
+  font-family: IRANSans,sans-serif;
+  word-wrap: break-word;
+}
+
 h1,
 h2,
 h3,
@@ -67,11 +82,14 @@ div, h1, h2, h3, h4, p, span {
 .box-content {
   overflow: hidden;
   background: #fff;
-  padding: 15px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
-  border-radius: 4px;
+  padding: 0;
+  margin-bottom: 20px;
+  text-align: center;
+  padding-bottom: 10px;
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
+  min-height: 212px;
 }
-
 .title-box {
   text-align: center;
 }
@@ -660,12 +678,12 @@ li > ul > li.active > ul > li {
 /*product section style*/
 
 .carousel-item {
-  padding: 0;
+  padding-bottom: 10px;
   text-align: center;
 }
 
 .products-contents {
-  padding: 0;
+  padding: 15px 0;
 }
 
 /*services section*/

@@ -50,8 +50,8 @@
                             <div v-for="(
                                     item, index
                                   ) in subCategory.subcategories" :key="index + 'last-sub-menu'" class="col-xs-12 pull-right" :class="[setSubMenuClass(subCategory, false)]">
-                              <router-link :to="getSubCategoryUrl(item.category_name)" class="sub-menu-title" v-text="item.category_name">
-                              </router-link>
+                              <a href="#" :to="getSubCategoryUrl(item.category_name)" class="sub-menu-title" v-text="item.category_name">
+                            </a>
                             </div>
                           </div>
                         </li>
@@ -241,48 +241,404 @@
 
       <div class="col-xs-12 products-contents">
         <div v-if="lastProducts" class="row">
-          <div data-v-1c176f65="" class="col-xs-6 col-sm-4 items-wrapper pull-right col-md-3">
-            <article data-v-5cb21502="" data-v-1c176f65="" class="main-content-item">
-              <div data-v-5cb21502="" class="main-article-contents-image-wrapper">
-                <div data-v-245ce4bb="" data-v-5cb21502="" class="main-article-image">
-                  <div data-v-245ce4bb="" class="product-image" style="background-image: url(&quot;http://localhost:66/storage/thumbnails/products/EtydCXuGXf3MiaCVm2xsGO7a0LyQrRySaXKOnDc8.jpeg&quot;);"></div>
-                  <div data-v-245ce4bb="" class="text-center spinner-wrapper" style="display: none;">
-                    <div data-v-245ce4bb="" class="spinner-border"><span data-v-245ce4bb="" class="sr-only"></span></div>
-                  </div>
-                  <div data-v-245ce4bb="" class="image-wrapper-contents">
-                    <!----> <img data-v-245ce4bb="" src="http://localhost:66/storage/thumbnails/products/EtydCXuGXf3MiaCVm2xsGO7a0LyQrRySaXKOnDc8.jpeg" alt="فروش عمده ی undefined 123  پارس آباد - اردبیل" class="hidden">
-                    <!---->
-                    <h3 data-v-245ce4bb="" class="article-title">
-                      <p data-v-245ce4bb="">سیب | <span style="color: #fff">123</span></p>
-                    </h3>
-                  </div>
-                </div>
-              </div>
-              <div data-v-586f776c="" data-v-5cb21502="" class="user-information-wrapper">
-                <div data-v-586f776c="" class="user-information-link">
-                  <div data-v-586f776c="" class="user-information-content pull-right"><i data-v-586f776c="" class="fa fa-user-circle"></i>
-                    ایمان دلطلب
-                  </div> <button data-v-586f776c="" data-container="body" data-toggle="popover" data-placement="bottom" data-content="<div class='tooltip-wrapper text-rtl'>اطلاعات هویتی این کاربر احراز شده است.<br/><a href='/verification'>اطلاعات بیشتر</a> </div>" title="" class="verified-user" data-original-title=""><i data-v-586f776c="" class="fa fa-certificate"></i></button>
-                  <div data-v-586f776c="" class="response-rate-wrapper pull-left">
-                    <!---->
-                  </div>
-                </div>
-              </div>
-              <div data-v-265ffb1a="" data-v-5cb21502="" class="main-article-contents-wrapper pointer-class is-user-valid-content">
-                <div data-v-265ffb1a="" class="main-article-contents">
-                  <p data-v-265ffb1a=""><span data-v-265ffb1a=""><i data-v-265ffb1a="" class="fa fa-map-marker-alt"></i></span> <span data-v-265ffb1a="" style="color: rgb(71, 71, 71);">اردبیل - پارس آباد</span></p>
-                  <p data-v-265ffb1a=""><span data-v-265ffb1a=""><i data-v-265ffb1a="" class="fa fa-box-open"></i></span> <span data-v-265ffb1a="" style="color: rgb(71, 71, 71);">4 کیلوگرم</span></p>
-                </div>
-              </div>
-              <script data-v-5cb21502="" type="application/ld+json"></script>
+          {{-- @foreach($products as $product_item)--}}
+          <div class=" product-carousel col-xs-6 col-sm-4 col-md-3">
+            <article class="carousel-item box-content">
+              {{-- <a href="{{'/product-view/' . 'خرید-عمده-' .  implode(explode(' ',$product_item->subcategory_name),'-') . '/' . $product_item->category_name . '/' . $product_item->id }}" class="carousel-img text-center">
+              --}}
+              <a href="#">
+                {{-- <img src="{{url('storage/') . '/' .$product_item->photo}}" class="main-image main-image-load" />
+                --}}
+                <img src="{{url('assets/img/buyer.jpg')}}" alt="">
+              </a>
+
+              {{-- <a href="{{'/product-view/' . 'خرید-عمده-' .  implode(explode(' ',$product_item->subcategory_name),'-') . '/' . $product_item->category_name . '/' . $product_item->id }}" class="carousel-title">
+              --}}<a href="#">
+                <h4>
+                  نام محصول
+                  {{--
+                  {{ $product_item->product_name
+                    }}
+                  --}}
+                </h4>
+
+              </a>
+              <a href="#" class="stock-wrapper">
+
+                <span>موجودی</span>
+                <span>
+                  {{--
+                  {{
+                        $product_item->stock
+                      }}
+                  --}} 50
+                  کیلوگرم
+                </span>
+
+              </a>
             </article>
           </div>
+          <div class="product-carousel col-xs-6 col-sm-4 col-md-3">
+            <article class="carousel-item box-content">
+              {{-- <a href="{{'/product-view/' . 'خرید-عمده-' .  implode(explode(' ',$product_item->subcategory_name),'-') . '/' . $product_item->category_name . '/' . $product_item->id }}" class="carousel-img text-center">
+              --}}
+              <a href="#">
+                {{-- <img src="{{url('storage/') . '/' .$product_item->photo}}" class="main-image main-image-load" />
+                --}}
+                <img src="{{url('assets/img/buyer.jpg')}}" alt="">
+              </a>
 
-          <div class="hidden-xs">
-            <div v-for="(product, productIndex) in lastProducts" :key="'products-' + productIndex" class="col-xs-6 col-sm-4 items-wrapper pull-right col-md-3" :class="{ 'product-hidden': productIndex > 7 }">
-              <ProductGridArticle :productIndex="productIndex" :key="'product-item-' + product.id" :last-product="product" :str="str" :loadedProduct="showLatestProducts" />
-            </div>
+              {{-- <a href="{{'/product-view/' . 'خرید-عمده-' .  implode(explode(' ',$product_item->subcategory_name),'-') . '/' . $product_item->category_name . '/' . $product_item->id }}" class="carousel-title">
+              --}}<a href="#">
+                <h4>
+                  نام محصول
+                  {{--
+                  {{ $product_item->product_name
+                    }}
+                  --}}
+                </h4>
+
+              </a>
+              <a href="#" class="stock-wrapper">
+
+                <span>موجودی</span>
+                <span>
+                  {{--
+                  {{
+                        $product_item->stock
+                      }}
+                  --}} 50
+                  کیلوگرم
+                </span>
+
+              </a>
+            </article>
           </div>
+          <div class=" product-carousel col-xs-6 col-sm-4 col-md-3">
+            <article class="carousel-item box-content">
+              {{-- <a href="{{'/product-view/' . 'خرید-عمده-' .  implode(explode(' ',$product_item->subcategory_name),'-') . '/' . $product_item->category_name . '/' . $product_item->id }}" class="carousel-img text-center">
+              --}}
+              <a href="#">
+                {{-- <img src="{{url('storage/') . '/' .$product_item->photo}}" class="main-image main-image-load" />
+                --}}
+                <img src="{{url('assets/img/buyer.jpg')}}" alt="">
+              </a>
+
+              {{-- <a href="{{'/product-view/' . 'خرید-عمده-' .  implode(explode(' ',$product_item->subcategory_name),'-') . '/' . $product_item->category_name . '/' . $product_item->id }}" class="carousel-title">
+              --}}<a href="#">
+                <h4>
+                  نام محصول
+                  {{--
+                  {{ $product_item->product_name
+                    }}
+                  --}}
+                </h4>
+
+              </a>
+              <a href="#" class="stock-wrapper">
+
+                <span>موجودی</span>
+                <span>
+                  {{--
+                  {{
+                        $product_item->stock
+                      }}
+                  --}} 50
+                  کیلوگرم
+                </span>
+
+              </a>
+            </article>
+          </div>
+          <div class=" product-carousel col-xs-6 col-sm-4 col-md-3">
+            <article class="carousel-item box-content">
+              {{-- <a href="{{'/product-view/' . 'خرید-عمده-' .  implode(explode(' ',$product_item->subcategory_name),'-') . '/' . $product_item->category_name . '/' . $product_item->id }}" class="carousel-img text-center">
+              --}}
+              <a href="#">
+                {{-- <img src="{{url('storage/') . '/' .$product_item->photo}}" class="main-image main-image-load" />
+                --}}
+                <img src="{{url('assets/img/buyer.jpg')}}" alt="">
+              </a>
+
+              {{-- <a href="{{'/product-view/' . 'خرید-عمده-' .  implode(explode(' ',$product_item->subcategory_name),'-') . '/' . $product_item->category_name . '/' . $product_item->id }}" class="carousel-title">
+              --}}<a href="#">
+                <h4>
+                  نام محصول
+                  {{--
+                  {{ $product_item->product_name
+                    }}
+                  --}}
+                </h4>
+
+              </a>
+              <a href="#" class="stock-wrapper">
+
+                <span>موجودی</span>
+                <span>
+                  {{--
+                  {{
+                        $product_item->stock
+                      }}
+                  --}} 50
+                  کیلوگرم
+                </span>
+
+              </a>
+            </article>
+          </div>
+          <div class=" product-carousel col-xs-6 col-sm-4 col-md-3">
+            <article class="carousel-item box-content">
+              {{-- <a href="{{'/product-view/' . 'خرید-عمده-' .  implode(explode(' ',$product_item->subcategory_name),'-') . '/' . $product_item->category_name . '/' . $product_item->id }}" class="carousel-img text-center">
+              --}}
+              <a href="#">
+                {{-- <img src="{{url('storage/') . '/' .$product_item->photo}}" class="main-image main-image-load" />
+                --}}
+                <img src="{{url('assets/img/buyer.jpg')}}" alt="">
+              </a>
+
+              {{-- <a href="{{'/product-view/' . 'خرید-عمده-' .  implode(explode(' ',$product_item->subcategory_name),'-') . '/' . $product_item->category_name . '/' . $product_item->id }}" class="carousel-title">
+              --}}<a href="#">
+                <h4>
+                  نام محصول
+                  {{--
+                  {{ $product_item->product_name
+                    }}
+                  --}}
+                </h4>
+
+              </a>
+              <a href="#" class="stock-wrapper">
+
+                <span>موجودی</span>
+                <span>
+                  {{--
+                  {{
+                        $product_item->stock
+                      }}
+                  --}} 50
+                  کیلوگرم
+                </span>
+
+              </a>
+            </article>
+          </div>
+          <div class=" product-carousel col-xs-6 col-sm-4 col-md-3">
+            <article class="carousel-item box-content">
+              {{-- <a href="{{'/product-view/' . 'خرید-عمده-' .  implode(explode(' ',$product_item->subcategory_name),'-') . '/' . $product_item->category_name . '/' . $product_item->id }}" class="carousel-img text-center">
+              --}}
+              <a href="#">
+                {{-- <img src="{{url('storage/') . '/' .$product_item->photo}}" class="main-image main-image-load" />
+                --}}
+                <img src="{{url('assets/img/buyer.jpg')}}" alt="">
+              </a>
+
+              {{-- <a href="{{'/product-view/' . 'خرید-عمده-' .  implode(explode(' ',$product_item->subcategory_name),'-') . '/' . $product_item->category_name . '/' . $product_item->id }}" class="carousel-title">
+              --}}<a href="#">
+                <h4>
+                  نام محصول
+                  {{--
+                  {{ $product_item->product_name
+                    }}
+                  --}}
+                </h4>
+
+              </a>
+              <a href="#" class="stock-wrapper">
+
+                <span>موجودی</span>
+                <span>
+                  {{--
+                  {{
+                        $product_item->stock
+                      }}
+                  --}} 50
+                  کیلوگرم
+                </span>
+
+              </a>
+            </article>
+          </div>
+          <div class=" product-carousel col-xs-6 col-sm-4 col-md-3">
+            <article class="carousel-item box-content">
+              {{-- <a href="{{'/product-view/' . 'خرید-عمده-' .  implode(explode(' ',$product_item->subcategory_name),'-') . '/' . $product_item->category_name . '/' . $product_item->id }}" class="carousel-img text-center">
+              --}}
+              <a href="#">
+                {{-- <img src="{{url('storage/') . '/' .$product_item->photo}}" class="main-image main-image-load" />
+                --}}
+                <img src="{{url('assets/img/buyer.jpg')}}" alt="">
+              </a>
+
+              {{-- <a href="{{'/product-view/' . 'خرید-عمده-' .  implode(explode(' ',$product_item->subcategory_name),'-') . '/' . $product_item->category_name . '/' . $product_item->id }}" class="carousel-title">
+              --}}<a href="#">
+                <h4>
+                  نام محصول
+                  {{--
+                  {{ $product_item->product_name
+                    }}
+                  --}}
+                </h4>
+
+              </a>
+              <a href="#" class="stock-wrapper">
+
+                <span>موجودی</span>
+                <span>
+                  {{--
+                  {{
+                        $product_item->stock
+                      }}
+                  --}} 50
+                  کیلوگرم
+                </span>
+
+              </a>
+            </article>
+          </div>
+          <div class=" product-carousel col-xs-6 col-sm-4 col-md-3">
+            <article class="carousel-item box-content">
+              {{-- <a href="{{'/product-view/' . 'خرید-عمده-' .  implode(explode(' ',$product_item->subcategory_name),'-') . '/' . $product_item->category_name . '/' . $product_item->id }}" class="carousel-img text-center">
+              --}}
+              <a href="#">
+                {{-- <img src="{{url('storage/') . '/' .$product_item->photo}}" class="main-image main-image-load" />
+                --}}
+                <img src="{{url('assets/img/buyer.jpg')}}" alt="">
+              </a>
+
+              {{-- <a href="{{'/product-view/' . 'خرید-عمده-' .  implode(explode(' ',$product_item->subcategory_name),'-') . '/' . $product_item->category_name . '/' . $product_item->id }}" class="carousel-title">
+              --}}<a href="#">
+                <h4>
+                  نام محصول
+                  {{--
+                  {{ $product_item->product_name
+                    }}
+                  --}}
+                </h4>
+
+              </a>
+              <a href="#" class="stock-wrapper">
+
+                <span>موجودی</span>
+                <span>
+                  {{--
+                  {{
+                        $product_item->stock
+                      }}
+                  --}} 50
+                  کیلوگرم
+                </span>
+
+              </a>
+            </article>
+          </div>
+          <div class=" product-carousel col-xs-6 col-sm-4 col-md-3">
+            <article class="carousel-item box-content">
+              {{-- <a href="{{'/product-view/' . 'خرید-عمده-' .  implode(explode(' ',$product_item->subcategory_name),'-') . '/' . $product_item->category_name . '/' . $product_item->id }}" class="carousel-img text-center">
+              --}}
+              <a href="#">
+                {{-- <img src="{{url('storage/') . '/' .$product_item->photo}}" class="main-image main-image-load" />
+                --}}
+                <img src="{{url('assets/img/buyer.jpg')}}" alt="">
+              </a>
+
+              {{-- <a href="{{'/product-view/' . 'خرید-عمده-' .  implode(explode(' ',$product_item->subcategory_name),'-') . '/' . $product_item->category_name . '/' . $product_item->id }}" class="carousel-title">
+              --}}<a href="#">
+                <h4>
+                  نام محصول
+                  {{--
+                  {{ $product_item->product_name
+                    }}
+                  --}}
+                </h4>
+
+              </a>
+              <a href="#" class="stock-wrapper">
+
+                <span>موجودی</span>
+                <span>
+                  {{--
+                  {{
+                        $product_item->stock
+                      }}
+                  --}} 50
+                  کیلوگرم
+                </span>
+
+              </a>
+            </article>
+          </div>
+          <div class=" product-carousel col-xs-6 col-sm-4 col-md-3">
+            <article class="carousel-item box-content">
+              {{-- <a href="{{'/product-view/' . 'خرید-عمده-' .  implode(explode(' ',$product_item->subcategory_name),'-') . '/' . $product_item->category_name . '/' . $product_item->id }}" class="carousel-img text-center">
+              --}}
+              <a href="#">
+                {{-- <img src="{{url('storage/') . '/' .$product_item->photo}}" class="main-image main-image-load" />
+                --}}
+                <img src="{{url('assets/img/buyer.jpg')}}" alt="">
+              </a>
+
+              {{-- <a href="{{'/product-view/' . 'خرید-عمده-' .  implode(explode(' ',$product_item->subcategory_name),'-') . '/' . $product_item->category_name . '/' . $product_item->id }}" class="carousel-title">
+              --}}<a href="#">
+                <h4>
+                  نام محصول
+                  {{--
+                  {{ $product_item->product_name
+                    }}
+                  --}}
+                </h4>
+
+              </a>
+              <a href="#" class="stock-wrapper">
+
+                <span>موجودی</span>
+                <span>
+                  {{--
+                  {{
+                        $product_item->stock
+                      }}
+                  --}} 50
+                  کیلوگرم
+                </span>
+
+              </a>
+            </article>
+          </div>
+          <div class=" product-carousel col-xs-6 col-sm-4 col-md-3">
+            <article class="carousel-item box-content">
+              {{-- <a href="{{'/product-view/' . 'خرید-عمده-' .  implode(explode(' ',$product_item->subcategory_name),'-') . '/' . $product_item->category_name . '/' . $product_item->id }}" class="carousel-img text-center">
+              --}}
+              <a href="#">
+                {{-- <img src="{{url('storage/') . '/' .$product_item->photo}}" class="main-image main-image-load" />
+                --}}
+                <img src="{{url('assets/img/buyer.jpg')}}" alt="">
+              </a>
+
+              {{-- <a href="{{'/product-view/' . 'خرید-عمده-' .  implode(explode(' ',$product_item->subcategory_name),'-') . '/' . $product_item->category_name . '/' . $product_item->id }}" class="carousel-title">
+              --}}<a href="#">
+                <h4>
+                  نام محصول
+                  {{--
+                  {{ $product_item->product_name
+                    }}
+                  --}}
+                </h4>
+
+              </a>
+              <a href="#" class="stock-wrapper">
+
+                <span>موجودی</span>
+                <span>
+                  {{--
+                  {{
+                        $product_item->stock
+                      }}
+                  --}} 50
+                  کیلوگرم
+                </span>
+
+              </a>
+            </article>
+          </div>
+          {{-- @endforeach --}}
         </div>
         <a href="/product-list" class="green-button bg-light-green main-cta-page">
           مشاهده همه محصولات
@@ -315,18 +671,239 @@
       <div class="section-title">آخرین درخواست های خرید</div>
 
       <div v-if="lastRequests" class="requests-contents">
-        <div class="row hidden-xs">
+        <div class="row">
           <div v-for="(buyAd, index) in lastRequests" :key="'buyAd-item-' + index" class="col-xs-12 col-sm-6 col-md-4 pull-right">
-            <LandingPageBuyAds :buyAd="buyAd" />
-          </div>
-        </div>
+            <div class="buyAd-wrapper-item col-xs-12">
+              <div class="list-title list-name col-xs-12">
+                <div class="user-information-wrapper">
+                  <div class="user-information-content">
+                    <div class="user-content">
+                      <i class="fa fa-user-circle"></i>
+                      <span class="user-name-link">
+                        ایمان رضایی
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="buyer-text">
+                  <div>
+                    <span> خریدار </span>
+                    <span class="red-text" v-text="getConvertedNumbers(buyAd.requirement_amount)">52 کیلوگرم</span>
+                    <span class="brand-text">سیب</span>
+                    <span v-if="buyAd.name"> از نوع </span>
+                    <span class="brand-text" v-if="buyAd.name">سرخ</span>
 
-        <div class="
-                owl-carousel
-                hidden-sm hidden-md hidden-lg
-                last-buyAds-carousel
-              ">
-          <LandingPageBuyAds :buyAd="buyAd" v-for="(buyAd, index) in lastRequests" :key="'mobile-buyAd-item-' + index" />
+                    <span> هستم </span>
+                  </div>
+                </div>
+              </div>
+
+              <p class="list-time" v-text="buyAd.register_date"></p>
+            </div>
+          </div>
+          <div v-for="(buyAd, index) in lastRequests" :key="'buyAd-item-' + index" class="col-xs-12 col-sm-6 col-md-4 pull-right">
+            <div class="buyAd-wrapper-item col-xs-12">
+              <div class="list-title list-name col-xs-12">
+                <div class="user-information-wrapper">
+                  <div class="user-information-content">
+                    <div class="user-content">
+                      <i class="fa fa-user-circle"></i>
+                      <span class="user-name-link">
+                        ایمان رضایی
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="buyer-text">
+                  <div>
+                    <span> خریدار </span>
+                    <span class="red-text" v-text="getConvertedNumbers(buyAd.requirement_amount)">52 کیلوگرم</span>
+                    <span class="brand-text">سیب</span>
+                    <span v-if="buyAd.name"> از نوع </span>
+                    <span class="brand-text" v-if="buyAd.name">سرخ</span>
+
+                    <span> هستم </span>
+                  </div>
+                </div>
+              </div>
+
+              <p class="list-time" v-text="buyAd.register_date"></p>
+            </div>
+          </div>
+          <div v-for="(buyAd, index) in lastRequests" :key="'buyAd-item-' + index" class="col-xs-12 col-sm-6 col-md-4 pull-right">
+            <div class="buyAd-wrapper-item col-xs-12">
+              <div class="list-title list-name col-xs-12">
+                <div class="user-information-wrapper">
+                  <div class="user-information-content">
+                    <div class="user-content">
+                      <i class="fa fa-user-circle"></i>
+                      <span class="user-name-link">
+                        ایمان رضایی
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="buyer-text">
+                  <div>
+                    <span> خریدار </span>
+                    <span class="red-text" v-text="getConvertedNumbers(buyAd.requirement_amount)">52 کیلوگرم</span>
+                    <span class="brand-text">سیب</span>
+                    <span v-if="buyAd.name"> از نوع </span>
+                    <span class="brand-text" v-if="buyAd.name">سرخ</span>
+
+                    <span> هستم </span>
+                  </div>
+                </div>
+              </div>
+
+              <p class="list-time" v-text="buyAd.register_date"></p>
+            </div>
+          </div>
+          <div v-for="(buyAd, index) in lastRequests" :key="'buyAd-item-' + index" class="col-xs-12 col-sm-6 col-md-4 pull-right">
+            <div class="buyAd-wrapper-item col-xs-12">
+              <div class="list-title list-name col-xs-12">
+                <div class="user-information-wrapper">
+                  <div class="user-information-content">
+                    <div class="user-content">
+                      <i class="fa fa-user-circle"></i>
+                      <span class="user-name-link">
+                        ایمان رضایی
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="buyer-text">
+                  <div>
+                    <span> خریدار </span>
+                    <span class="red-text" v-text="getConvertedNumbers(buyAd.requirement_amount)">52 کیلوگرم</span>
+                    <span class="brand-text">سیب</span>
+                    <span v-if="buyAd.name"> از نوع </span>
+                    <span class="brand-text" v-if="buyAd.name">سرخ</span>
+
+                    <span> هستم </span>
+                  </div>
+                </div>
+              </div>
+
+              <p class="list-time" v-text="buyAd.register_date"></p>
+            </div>
+          </div>
+          <div v-for="(buyAd, index) in lastRequests" :key="'buyAd-item-' + index" class="col-xs-12 col-sm-6 col-md-4 pull-right">
+            <div class="buyAd-wrapper-item col-xs-12">
+              <div class="list-title list-name col-xs-12">
+                <div class="user-information-wrapper">
+                  <div class="user-information-content">
+                    <div class="user-content">
+                      <i class="fa fa-user-circle"></i>
+                      <span class="user-name-link">
+                        ایمان رضایی
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="buyer-text">
+                  <div>
+                    <span> خریدار </span>
+                    <span class="red-text" v-text="getConvertedNumbers(buyAd.requirement_amount)">52 کیلوگرم</span>
+                    <span class="brand-text">سیب</span>
+                    <span v-if="buyAd.name"> از نوع </span>
+                    <span class="brand-text" v-if="buyAd.name">سرخ</span>
+
+                    <span> هستم </span>
+                  </div>
+                </div>
+              </div>
+
+              <p class="list-time" v-text="buyAd.register_date"></p>
+            </div>
+          </div>
+          <div v-for="(buyAd, index) in lastRequests" :key="'buyAd-item-' + index" class="col-xs-12 col-sm-6 col-md-4 pull-right">
+            <div class="buyAd-wrapper-item col-xs-12">
+              <div class="list-title list-name col-xs-12">
+                <div class="user-information-wrapper">
+                  <div class="user-information-content">
+                    <div class="user-content">
+                      <i class="fa fa-user-circle"></i>
+                      <span class="user-name-link">
+                        ایمان رضایی
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="buyer-text">
+                  <div>
+                    <span> خریدار </span>
+                    <span class="red-text" v-text="getConvertedNumbers(buyAd.requirement_amount)">52 کیلوگرم</span>
+                    <span class="brand-text">سیب</span>
+                    <span v-if="buyAd.name"> از نوع </span>
+                    <span class="brand-text" v-if="buyAd.name">سرخ</span>
+
+                    <span> هستم </span>
+                  </div>
+                </div>
+              </div>
+
+              <p class="list-time" v-text="buyAd.register_date"></p>
+            </div>
+          </div>
+          <div v-for="(buyAd, index) in lastRequests" :key="'buyAd-item-' + index" class="col-xs-12 col-sm-6 col-md-4 pull-right">
+            <div class="buyAd-wrapper-item col-xs-12">
+              <div class="list-title list-name col-xs-12">
+                <div class="user-information-wrapper">
+                  <div class="user-information-content">
+                    <div class="user-content">
+                      <i class="fa fa-user-circle"></i>
+                      <span class="user-name-link">
+                        ایمان رضایی
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="buyer-text">
+                  <div>
+                    <span> خریدار </span>
+                    <span class="red-text" v-text="getConvertedNumbers(buyAd.requirement_amount)">52 کیلوگرم</span>
+                    <span class="brand-text">سیب</span>
+                    <span v-if="buyAd.name"> از نوع </span>
+                    <span class="brand-text" v-if="buyAd.name">سرخ</span>
+
+                    <span> هستم </span>
+                  </div>
+                </div>
+              </div>
+
+              <p class="list-time" v-text="buyAd.register_date"></p>
+            </div>
+          </div>
+          <div v-for="(buyAd, index) in lastRequests" :key="'buyAd-item-' + index" class="col-xs-12 col-sm-6 col-md-4 pull-right">
+            <div class="buyAd-wrapper-item col-xs-12">
+              <div class="list-title list-name col-xs-12">
+                <div class="user-information-wrapper">
+                  <div class="user-information-content">
+                    <div class="user-content">
+                      <i class="fa fa-user-circle"></i>
+                      <span class="user-name-link">
+                        ایمان رضایی
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="buyer-text">
+                  <div>
+                    <span> خریدار </span>
+                    <span class="red-text" v-text="getConvertedNumbers(buyAd.requirement_amount)">52 کیلوگرم</span>
+                    <span class="brand-text">سیب</span>
+                    <span v-if="buyAd.name"> از نوع </span>
+                    <span class="brand-text" v-if="buyAd.name">سرخ</span>
+
+                    <span> هستم </span>
+                  </div>
+                </div>
+              </div>
+
+              <p class="list-time" v-text="buyAd.register_date"></p>
+            </div>
+          </div>
         </div>
       </div>
       <a href="/buyAd-requests" class="green-button bg-light-green main-cta-page">
@@ -421,7 +998,180 @@
 </section>
 
 <section id="register-request-section" class="container" v-if="userType != 1">
-  <main-register-request-form wrapper-bg="true" :is-user-login="isUserLogin" :categoryList="categoryList" />
+
+  <div class="section-wrapper col-xs-12">
+    <div class="row">
+      <div class="text-right col-xs-12 form-contents-wrapper" :class="{ 'wrapper-bg': wrapperBg }">
+        <div class="form-wrapper">
+          <div class="section-title">ثبت درخواست خرید</div>
+
+          <div class="form-contents col-xs-12">
+            <div class="row">
+              <div class="col-xs-12 col-md-4 pull-right">
+                <h2 class="title-contents col-xs-12">
+                  دسته بندی محصول
+                  <span class="red-text"> * </span>
+                </h2>
+                <label for="category" class="description">
+                  مثلا: کشاورزی
+                </label>
+
+                <div class="input-wrapper select-items">
+                  <select :class="{
+                      active: categorySelected !== '',
+                      error: errors.categorySelected,
+                    }" id="category" v-model="categorySelected">
+                    <option value="" selected disabled>انتخاب دسته بندی</option>
+                    <option v-for="(category, index) in categoryList" v-bind:value="index" :key="index" v-text="category.category_name"></option>
+                  </select>
+                </div>
+                <p class="error-message">
+                  <span v-if="errors.categorySelected" v-text="errors.categorySelected"></span>
+                </p>
+              </div>
+              <div class="col-xs-12 col-md-4 pull-right">
+                <h2 class="title-contents col-xs-12">
+                  زیر دسته بندی
+                  <span class="red-text"> * </span>
+                </h2>
+                <label for="mainSubcategory" class="description">
+                  مثلا: میوه
+                </label>
+
+                <div class="input-wrapper select-items">
+                  <select :class="{
+                      active: selectedMainSubCategory,
+                      error: errors.selectedMainSubCategory,
+                    }" id="mainSubcategory" v-model="selectedMainSubCategory">
+                    <option value="" selected disabled>
+                      انتخاب زیر دسته بندی
+                    </option>
+                    <option v-for="(
+                        category, mainSubCategoryindex
+                      ) in mainSubCategories" v-bind:value="mainSubCategoryindex" :key="mainSubCategoryindex" v-text="category.category_name"></option>
+                  </select>
+                </div>
+                <p class="error-message">
+                  <span v-if="errors.selectedMainSubCategory" v-text="errors.selectedMainSubCategory"></span>
+                </p>
+              </div>
+
+              <div class="col-xs-12 col-md-4">
+                <h2 class="title-contents col-xs-12">
+                  نام محصول
+
+                  <span class="red-text"> * </span>
+                </h2>
+                <label for="sub-category" class="description">
+                  مثلا: خرما
+                </label>
+
+                <div class="input-wrapper select-items">
+                  <select :class="{
+                      active: buyAd.sub_category_id,
+                      error: errors.sub_category_id,
+                    }" id="sub-category" v-model="selectedSubCategory">
+                    <option value="" disabled selected>انتخاب نام محصول</option>
+                    <option v-for="(subCategory, index) in subCategoryList" v-bind:value="subCategory" :key="index" v-text="subCategory.category_name"></option>
+                  </select>
+                </div>
+                <p class="error-message">
+                  <span v-if="errors.sub_category_id" v-text="errors.sub_category_id"></span>
+                </p>
+              </div>
+
+              <div class="col-xs-12 col-md-6 pull-right">
+                <h2 class="title-contents col-xs-12">
+                  نوع
+                  <span class="light-green-text" v-text="' ' + subCategoryName + ' '">
+                  </span>
+                  مورد نیاز خود را وارد کنید.
+                </h2>
+                <label for="product-type" class="description">
+                  <span v-if="categoryName == 'میوه'"> مثلا: مضافتی </span>
+                  <!-- <span v-else-if="categoryName == 'صیفی'">
+                    مثلا: بذر متین صادراتی
+                  </span>
+                  <span v-else-if="categoryName == 'غلات'">
+                    مثلا: هندی ۱۱۲۱
+                  </span>
+                  <span v-else-if="categoryName == 'خشکبار'">
+                    مثلا: فندقی
+                  </span>
+                  <span v-else-if="categoryName == 'ادویه'"> مثلا: نگین </span>
+                  <span v-else-if="categoryName == 'دامپروری'">
+                    مثلا: چهل گیاه
+                  </span>
+                  <span v-else-if="categoryName == 'حبوبات'"> مثلا: چیتی </span>
+                  <span v-else> مثلا: مضافتی</span> -->
+                </label>
+                <div class="text-input-wrapper">
+                  <input v-model="buyAd.name" id="product-type" type="text" :class="{ active: buyAd.name, error: errors.name }" placeholder="نوع محصول مورد نیاز خود را وارد کنید" />
+                  <i v-if="buyAd.name && !errors.name" class="fa fa-check-circle"></i>
+                  <i v-else-if="errors.name" class="fa fa-times-circle"></i>
+                  <i v-else class="fa fa-edit"></i>
+                </div>
+                <div class="input-text-wrapper">
+                  <p class="error-message">
+                    <span class="red-text" v-if="errors.name" v-text="errors.name"></span>
+                  </p>
+                </div>
+              </div>
+
+              <div class="col-xs-12 col-md-6">
+                <h2 class="title-contents col-xs-12">
+                  میزان نیازمندی
+
+                  <span class="small-label">(کیلوگرم)</span>
+
+                  <span class="red-text"> * </span>
+                </h2>
+                <label for="requirement_amount" class="description">
+                  مثلا: 50,000
+                </label>
+
+                <div class="text-input-wrapper">
+                  <input v-model="buyAd.requirement_amount" id="requirement_amount" type="tel" :class="{
+                      active: buyAd.requirement_amount,
+                      error: errors.requirement_amount,
+                    }" placeholder="میزان نیازمندی را وارد کنید" pattern="[0-9]*" />
+
+                  <i v-if="
+                      buyAd.requirement_amount && !errors.requirement_amount
+                    " class="fa fa-check-circle"></i>
+                  <i v-else-if="errors.requirement_amount" class="fa fa-times-circle"></i>
+                  <i v-else class="fa fa-edit"></i>
+                </div>
+
+                <div class="input-text-wrapper">
+                  <p class="small-description-text" v-if="!errors.requirement_amount">
+                    <span class="blue-text" v-if="requirement_amount_text" v-text="requirement_amount_text"></span>
+                  </p>
+                  <p class="error-message">
+                    <span class="red-text" v-if="errors.requirement_amount" v-text="errors.requirement_amount"></span>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="submit-button-wrapper col-xs-12">
+              <div class="row">
+                <button class="submit-button disabled" :class="{
+                    active:
+                      buyAd.sub_category_id &&
+                      buyAd.requirement_amount &&
+                      !errors.requirement_amount,
+                  }" @click.prevent="formValidator()">
+                  ثبت درخواست
+                  <i class="fa fa-check"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <section id="main-contents-section" class="container">
@@ -672,7 +1422,7 @@
         <div class="row">
           <!-- loop for wholesale date -->
           <h4 v-for="(item, index) in footerLinks.wholesaleDate" :key="'wholesale-date-item-' + index" class="col-xs-6 col-sm-4 col-md-2 pull-right">
-            <router-link :to="getSubCategoryUrl(item.link)" v-text="'فروش عمده' + ' ' + item.name"></router-link>
+            <a href="" :to="getSubCategoryUrl(item.link)" v-text="'فروش عمده' + ' ' + item.name">فروش عمده لپه</a>
           </h4>
           <!-- end loop  -->
 
@@ -680,7 +1430,7 @@
           <div v-if="mobileCategoryList">
             <div v-for="(category, index) in mobileCategoryList" :key="'wholesale-categories-item-' + index">
               <h4 v-for="(subCategory, subIndex) in category.subcategories" :key="'wholesale-sub-categories-item-' + subIndex" class="col-xs-6 col-sm-4 col-md-2 pull-right">
-                <router-link :to="getSubCategoryUrl(subCategory.category_name)" v-text="'فروش عمده' + ' ' + subCategory.category_name"></router-link>
+                <a href="" :to="getSubCategoryUrl(subCategory.category_name)" v-text="'فروش عمده' + ' ' + subCategory.category_name">فروش عمده خرمای مضافتی</a>
               </h4>
             </div>
           </div>
@@ -690,7 +1440,7 @@
           <!-- loop for wholesale rice -->
 
           <h4 v-for="(item, index) in footerLinks.wholesaleRise" :key="'wholesale-rise-item-' + index" class="col-xs-6 col-sm-4 col-md-2 pull-right">
-            <router-link :to="getSubCategoryUrl(item.link)" v-text="'فروش عمده برنج' + ' ' + item.name"></router-link>
+            <a href="" :to="getSubCategoryUrl(item.link)" v-text="'فروش عمده برنج' + ' ' + item.name">فروش عمده برنج طبیعت</a>
           </h4>
 
           <!-- end loop  -->
