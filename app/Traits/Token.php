@@ -40,7 +40,7 @@ trait Token
 
         if(sizeof($token_parts) != 3){
             //token is not valid
-            Log::info('token is not valid because of 3 part format : ' . $token);
+            Log::info('token is not valid because of 3 part format :' . $token);
 
             return 0;
         }
@@ -96,7 +96,7 @@ trait Token
         if($expiry_time < time()){
             //token expired
             $first = $token_parts[0];
-            $second = $this->base64url_encode(strtotime(Carbon::now()->addMinutes(2)) );
+            $second = $this->base64url_encode(strtotime(Carbon::now()->addHours(2)) );
 
             $hash = sha1($first . $second . sha1($this->get_secret()) );
 

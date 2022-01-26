@@ -27,6 +27,7 @@ class login
             try{
                 $token = explode(' ',$request->Header('Authorization'))[1];//explode(' ',$request->Authorization)[1];
                 // $user = JWTAuth::parseToken()->authenticate();
+                
                 $user = $this->parse_token($token);
 
                 if( ! is_object($user)){
@@ -101,10 +102,12 @@ class login
             catch(\Exception $e){
 
                 if($request->session()->has('user_id')){
-                    Log::info('3 - user has been prevented from logout using session info. token is : ' . $token);
+                    Log::info('3 - user has been prevented from logout using session info.');
 
                     return $next($request);
                 }
+
+                Log::info('an error has accoured in processing the token and user has been logged out. Error ' . $e->getMessage() . ' at line ' . $e->getLine());
 
                 return response()->json([
                     'status' => false,
