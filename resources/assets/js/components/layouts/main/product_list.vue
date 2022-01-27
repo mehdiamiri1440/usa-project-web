@@ -1148,6 +1148,7 @@ div.items-wrapper {
     </div>
 
     <main id="main" class="container-fluid">
+      <DownloadAppCard />
       <div class="col-xs-12 main-product-wrapper col-lg-9">
         <div class="row">
           <section class="hidden-xs col-xs-12">
@@ -1590,6 +1591,7 @@ import ProductArticle from "./product_components/product_article";
 import ProductGridArticle from "./product_components/Product_grid_article";
 import ProductAsideCategories from "./product_components/sidebar/product_aside_categories";
 import searchNotFound from "./main_components/search-not-found";
+import DownloadAppCard from "./download-app-card";
 import { eventBus } from "../../../router/router";
 import StickySidebar from "../../../stickySidebar.js";
 var visible = false;
@@ -1599,6 +1601,7 @@ export default {
     ProductGridArticle,
     ProductAsideCategories,
     searchNotFound,
+    DownloadAppCard,
   },
   props: ["assets", "str", "user_id", "categoryList"],
   data: function () {

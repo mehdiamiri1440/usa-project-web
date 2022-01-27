@@ -19,7 +19,9 @@
   width: 100%;
   z-index: 10;
   bottom: -500px;
-  transition: bottom 1.7s;
+  transition: bottom 1s;
+  height: 200px;
+  background-color: #F0F3F5;
 }
 .app-modal .modal-header {
   border-bottom: 0;
@@ -27,10 +29,11 @@
 .app-modal .modal-header .modal-title {
   margin: 0;
   line-height: 1.42857143;
-  margin-top: 20px;
+  margin-top: 40px;
   font-size: 1.8rem;
   font-weight: 500;
   text-align: center;
+  color: #15313C;
 }
 .android-download-alert-content {
   display: grid;
@@ -51,6 +54,7 @@
 .text-android-download-alert-wrapper p.android-download-title {
   text-align: right;
   font-size: 1.6rem;
+  color: #15313C;
 }
 .android-apk-download {
   padding: 3px 15px;
@@ -58,7 +62,7 @@
   background-color: #ff9828;
   color: #ffffff;
   border: none;
-  height: 36px;
+  height: 40px;
   border-radius: 8px;
   display: inline-block;
   position: relative;
@@ -70,7 +74,7 @@
   font-size: 20px;
   position: relative;
   float: right;
-  color: #15313c;
+  color: #264653;
 }
 .modal-background {
   position: absolute;

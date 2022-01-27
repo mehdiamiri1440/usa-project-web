@@ -226,7 +226,7 @@
       </div>
     </div>
     <!-- Download app modal -->
-    <div
+    <!--<div
       v-if="downloadAppButton && $route.name != 'invite' && !checkCookie()"
       :class="[{ hide: isClosed }, { test: isClosed == false }]"
       class="android-download-alert-wrapper hidden-xs hidden-lg hidden-md"
@@ -253,7 +253,7 @@
           <button class="android-apk-download">دانلود</button>
         </div>
       </div>
-    </div>
+    </div>-->
     <!--  #regex wallet modal  -->
 
     <div class="container">
@@ -562,10 +562,10 @@ export default {
       );
       // code here
       this.createCookie("downloadAppModal", true, 60 * 24);
-      // window.location.href =
-      //   "https://play.google.com/store/apps/details?id=com.buskool";
       window.location.href =
-        "https://play.google.com/store/search?q=%D8%A8%D8%A7%D8%B3%DA%A9%D9%88%D9%84&c=apps";
+        "https://play.google.com/store/apps/details?id=com.buskool";
+     /* window.location.href =
+        "https://play.google.com/store/search?q=%D8%A8%D8%A7%D8%B3%DA%A9%D9%88%D9%84&c=apps";*/
     },
     isOsIOS: function () {
       var userAgent = window.navigator.userAgent.toLowerCase(),
