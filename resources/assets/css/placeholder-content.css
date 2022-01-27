@@ -210,7 +210,12 @@ border-radius: 8px;
 .text-ltr {
   direction: ltr;
 }
-
+.top-0{
+  top: 0!important;
+}
+.bottom-0{
+  bottom: 0!important;
+}
 .margin-5-0 {
   margin: 10px 0;
 }

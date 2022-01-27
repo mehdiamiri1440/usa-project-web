@@ -229,7 +229,7 @@
     <div
       v-if="downloadAppButton && $route.name != 'invite' && !checkCookie()"
       :class="[{ hide: isClosed }, { test: isClosed == false }]"
-      class="android-download-alert-wrapper hidden-lg hidden-md"
+      class="android-download-alert-wrapper hidden-xs hidden-lg hidden-md"
     >
       <div @click.prevent="closeAppModal()">
         <div class="m-t-b">
@@ -405,7 +405,12 @@
     <ProductRegistrationRestrictionsModal />
     <NoAccessToBuyerPhoneModal :message="msg" :errorStatus="errStatus" />
     <FullMessagingCeilingModal />
-    <noAccessToGoldenBuyersModal />
+    <NoAccessToGoldenBuyersModal />
+    <DownloadAppModal
+      v-if="
+        activateDownloadAppModal && $route.name != 'invite' && !checkCookie()
+      "
+    />
   </div>
 </template>
 
@@ -426,7 +431,8 @@ import Navigation from "./navigation.vue";
 import ProductRegistrationRestrictionsModal from "../../components/layouts/main/product-registration-restrictions-modal.vue";
 import NoAccessToBuyerPhoneModal from "../../components/layouts/main/no-access-to-buyer-phone-modal.vue";
 import FullMessagingCeilingModal from "../../components/layouts/main/full-messaging-ceiling-modal.vue";
-import noAccessToGoldenBuyersModal from "../../components/layouts/main/no-access-to-golden-buyers-modal.vue";
+import NoAccessToGoldenBuyersModal from "../../components/layouts/main/no-access-to-golden-buyers-modal.vue";
+import DownloadAppModal from "../../components/layouts/main/download-app-modal.vue";
 
 export default {
   components: {
@@ -441,7 +447,8 @@ export default {
     ProductRegistrationRestrictionsModal,
     NoAccessToBuyerPhoneModal,
     FullMessagingCeilingModal,
-    noAccessToGoldenBuyersModal,
+    NoAccessToGoldenBuyersModal,
+    DownloadAppModal,
   },
   data: function () {
     return {
@@ -541,11 +548,6 @@ export default {
         return false;
       }
     },
-    closeAppModal() {
-      this.downloadAppButton = false;
-      this.isClosed = true;
-      this.createCookie("downloadAppModal", true, 60 * 24);
-    },
     getAndroidVersion: function (ua) {
       ua = (ua || navigator.userAgent).toLowerCase();
       var match = ua.match(/android\s([0-9\.]*)/);
@@ -600,7 +602,22 @@ export default {
         }
       }
     },
-    activateDownloadAppButton() {
+    handleBackButtonForAppModal() {
+      let self =this;
+      if (window.history.state) {
+        history.pushState(null, null, window.location);
+      }
+      $(window).on("popstate", function (e) {
+        $("#app-modal .modal-content").removeClass("bottom-0");
+        document
+          .getElementById("app-modal")
+          .classList.remove("show-custom-modal");
+
+          self.createCookie("downloadAppModal", true, 60 * 24);
+      });
+    },
+    activateDownloadAppModal() {
+      let self = this;
       if (this.isDeviceMobile() && !this.isOsIOS()) {
         let androidVersion = this.getAndroidVersion();
         if (parseInt(androidVersion) >= 5) {
@@ -610,6 +627,15 @@ export default {
             !this.iswebview
           ) {
             this.downloadAppButton = true;
+          }
+          if (!this.checkCookie() && !this.iswebview) {
+            setTimeout(() => {
+              document
+                .getElementById("app-modal")
+                .classList.add("show-custom-modal");
+              $("#app-modal .modal-content").addClass("bottom-0");
+              self.handleBackButtonForAppModal();
+            }, 1000);
           }
           // if (!this.checkCookie() && !this.iswebview) {
           // setTimeout(() => {
@@ -1404,7 +1430,7 @@ export default {
       window.localStorage.setItem("userId", this.user.id);
       window.localStorage.setItem("userType", this.user.type);
     },
-     showNavigationMenu() {
+    showNavigationMenu() {
       if (screen.width < 992) {
         if (document.querySelector(".custom-navigation")) {
           document.querySelector(".custom-navigation").style.display = "block";
@@ -1417,13 +1443,13 @@ export default {
     $(document).ready(() => {
       $("#master-loader-wrapper").css("display", "none");
     });
-    this.activateDownloadAppButton();
+    this.activateDownloadAppModal();
     $("#wallet-modal").on("show.bs.modal", (e) => {
       this.handleBackKeys();
     });
     $("#product-registration-restrictions-modal").on("show.bs.modal", (e) => {
       this.handleBackKeys();
-    })
+    });
     $("#no-access-to-golden-buyers-modal").on("show.bs.modal", (e) => {
       this.handleBackKeys();
     });
@@ -1440,23 +1466,7 @@ export default {
   },
   watch: {
     $route() {
-      setTimeout(() => {
-        if (
-          window.screen.width < 991 &&
-          !this.isOsIOS() &&
-          this.getAndroidVersion() >= 5
-        ) {
-          if (!this.isClosed) {
-            setTimeout(() => {
-              if (document.querySelector(".android-download-alert-wrapper")) {
-                document.querySelector(
-                  ".android-download-alert-wrapper"
-                ).style.height = "65px";
-              }
-            }, 3000);
-          }
-        }
-      }, 50);
+      this.activateDownloadAppModal();
     },
     currentUser(user) {
       this.updateUserData();
