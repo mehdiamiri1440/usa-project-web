@@ -564,7 +564,7 @@ export default {
       this.createCookie("downloadAppModal", true, 60 * 24);
       window.location.href =
         "https://play.google.com/store/apps/details?id=com.buskool";
-     /* window.location.href =
+      /* window.location.href =
         "https://play.google.com/store/search?q=%D8%A8%D8%A7%D8%B3%DA%A9%D9%88%D9%84&c=apps";*/
     },
     isOsIOS: function () {
@@ -603,7 +603,7 @@ export default {
       }
     },
     handleBackButtonForAppModal() {
-      let self =this;
+      let self = this;
       if (window.history.state) {
         history.pushState(null, null, window.location);
       }
@@ -613,7 +613,7 @@ export default {
           .getElementById("app-modal")
           .classList.remove("show-custom-modal");
 
-          self.createCookie("downloadAppModal", true, 60 * 24);
+        self.createCookie("downloadAppModal", true, 60 * 24);
       });
     },
     activateDownloadAppModal() {
@@ -621,11 +621,7 @@ export default {
       if (this.isDeviceMobile() && !this.isOsIOS()) {
         let androidVersion = this.getAndroidVersion();
         if (parseInt(androidVersion) >= 5) {
-          if (
-            window.location.pathname != "/buyAd-requests" &&
-            !window.location.pathname.includes("product-view") &&
-            !this.iswebview
-          ) {
+          if (!this.iswebview) {
             this.downloadAppButton = true;
           }
           if (!this.checkCookie() && !this.iswebview) {
@@ -635,7 +631,7 @@ export default {
                 .classList.add("show-custom-modal");
               $("#app-modal .modal-content").addClass("bottom-0");
               self.handleBackButtonForAppModal();
-            }, 1000);
+            }, 3000);
           }
           // if (!this.checkCookie() && !this.iswebview) {
           // setTimeout(() => {
@@ -1386,6 +1382,25 @@ export default {
         this.msg = event;
         this.errStatus = false;
         $("#no-access-to-buyer-phone-modal").modal("show");
+      });
+      eventBus.$on("checkDownloadAppCard", ($event) => {
+        let androidVersion =
+          parseInt(this.getAndroidVersion()) >= 5 ? true : false;
+        if (
+          !this.iswebview &&
+          !this.isOsIOS() &&
+          this.isDeviceMobile() &&
+          androidVersion &&
+          !this.getCookie("downloadAppModal")
+        ) {
+          console.log(true);
+          $event = true;
+          return $event;
+        } else {
+          console.log(false);
+          $event = false;
+          return $event;
+        }
       });
     },
     getUserData(itemName) {

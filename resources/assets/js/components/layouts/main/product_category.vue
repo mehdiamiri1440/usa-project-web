@@ -1266,6 +1266,7 @@ div.items-wrapper {
     </div>
 
     <main id="main" class="container-fluid">
+      <DownloadAppCard v-if="checkDownloadAppCard()" className="margin-top-2" text="با استفاده از اپلیکیشن باسکول راحت تر محصول مورد نظر خود را پیدا کنید."/>
       <div class="col-xs-12 main-product-wrapper col-lg-9">
         <div class="row">
           <section class="hidden-xs col-xs-12">
@@ -1758,6 +1759,7 @@ import ProductArticle from "./product_components/product_article";
 import ProductGridArticle from "./product_components/Product_grid_article";
 import ProductAsideCategories from "./product_components/sidebar/product_aside_categories";
 import searchNotFound from "./main_components/search-not-found";
+import DownloadAppCard from "./download-app-card";
 import { eventBus } from "../../../router/router";
 import StickySidebar from "../../../stickySidebar.js";
 
@@ -1768,6 +1770,7 @@ export default {
     ProductGridArticle,
     ProductAsideCategories,
     searchNotFound,
+    DownloadAppCard,
   },
   props: ["assets", "str", "categoryList"],
   data: function () {
@@ -1912,6 +1915,7 @@ export default {
     checkCurrentUser() {
       if (this.$parent.currentUser.user_info) {
         this.currentUser = this.$parent.currentUser;
+        return true;
       }
     },
     feed() {
@@ -2337,6 +2341,47 @@ export default {
         .then(
           (response) => (this.$parent.provinceList = response.data.provinces)
         );
+    },
+    isOsIOS: function () {
+      var userAgent = window.navigator.userAgent.toLowerCase(),
+        safari = /safari/.test(userAgent),
+        ios = /iphone|ipod|ipad/.test(userAgent);
+      return ios;
+    },
+    getAndroidVersion: function (ua) {
+      ua = (ua || navigator.userAgent).toLowerCase();
+      var match = ua.match(/android\s([0-9\.]*)/);
+      return match ? match[1] : undefined;
+    },
+    getCookie: function (cname) {
+      var name = cname + "=";
+      var ca = document.cookie.split(";");
+      for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == " ") {
+          c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+          return c.substring(name.length, c.length);
+        }
+      }
+      return "";
+    },
+    checkDownloadAppCard() {
+      let androidVersion =
+          parseInt(this.getAndroidVersion()) >= 5 ? true : false;
+        if (
+          
+          !this.isOsIOS() &&
+          this.isDeviceMobile() &&
+          androidVersion &&
+          !this.getCookie("downloadAppCard") && 
+          this.checkCurrentUser()
+        ) {
+          return true;
+        } else {
+          return false;
+        }
     },
   },
   watch: {

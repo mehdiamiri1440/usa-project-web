@@ -1148,7 +1148,8 @@ div.items-wrapper {
     </div>
 
     <main id="main" class="container-fluid">
-      <DownloadAppCard />
+      <DownloadAppCardPlaceHolder />
+      <DownloadAppCard v-if="checkDownloadAppCard()" text="با استفاده از اپلیکیشن باسکول راحت تر محصول مورد نظر خود را پیدا کنید."/>
       <div class="col-xs-12 main-product-wrapper col-lg-9">
         <div class="row">
           <section class="hidden-xs col-xs-12">
@@ -1592,6 +1593,7 @@ import ProductGridArticle from "./product_components/Product_grid_article";
 import ProductAsideCategories from "./product_components/sidebar/product_aside_categories";
 import searchNotFound from "./main_components/search-not-found";
 import DownloadAppCard from "./download-app-card";
+import DownloadAppCardPlaceHolder from "./download-app-card-place-holder/download-app-card-place-holder";
 import { eventBus } from "../../../router/router";
 import StickySidebar from "../../../stickySidebar.js";
 var visible = false;
@@ -1602,6 +1604,7 @@ export default {
     ProductAsideCategories,
     searchNotFound,
     DownloadAppCard,
+    DownloadAppCardPlaceHolder,
   },
   props: ["assets", "str", "user_id", "categoryList"],
   data: function () {
@@ -1642,6 +1645,7 @@ export default {
       listIsGrid: true,
       isMyProfile: false,
       modalSubCategory: false,
+      showDownloadAppCard:false,
     };
   },
   methods: {
@@ -1729,11 +1733,54 @@ export default {
             }, 500);
           });
       }
+      
       //                    }).catch(error=>reject(error));
+    },
+    isOsIOS: function () {
+      var userAgent = window.navigator.userAgent.toLowerCase(),
+        safari = /safari/.test(userAgent),
+        ios = /iphone|ipod|ipad/.test(userAgent);
+      return ios;
+    },
+    getAndroidVersion: function (ua) {
+      ua = (ua || navigator.userAgent).toLowerCase();
+      var match = ua.match(/android\s([0-9\.]*)/);
+      return match ? match[1] : undefined;
+    },
+    getCookie: function (cname) {
+      var name = cname + "=";
+      var ca = document.cookie.split(";");
+      for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == " ") {
+          c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+          return c.substring(name.length, c.length);
+        }
+      }
+      return "";
+    },
+    checkDownloadAppCard() {
+      let androidVersion =
+          parseInt(this.getAndroidVersion()) >= 5 ? true : false;
+        if (
+          
+          !this.isOsIOS() &&
+          this.isDeviceMobile() &&
+          androidVersion &&
+          !this.getCookie("downloadAppCard") && 
+          this.checkCurrentUser()
+        ) {
+          return true;
+        } else {
+          return false;
+        }
     },
     checkCurrentUser() {
       if (this.$parent.currentUser.user_info) {
         this.currentUser = this.$parent.currentUser;
+        return true;
       }
     },
     feed() {
