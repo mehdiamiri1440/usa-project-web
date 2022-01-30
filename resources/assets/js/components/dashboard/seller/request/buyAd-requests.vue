@@ -234,7 +234,7 @@ button.disable {
 }
 .remove-filter-button {
   position: absolute;
-  background: #fff;
+  background: #fcf6f6;
   border-radius: 12px;
   border: 1px solid #e41c39;
   color: #e41c39;
@@ -245,8 +245,10 @@ button.disable {
 }
 .remove-filter-icon {
   position: relative;
-  top: 2px;
-  right: -6px;
+  top: 3px;
+  font-size: 1.1rem;
+  margin-right: 10px;
+  float: left;
 }
 .golden {
   border: 2px solid #c5a75b;

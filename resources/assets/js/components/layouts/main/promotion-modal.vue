@@ -543,7 +543,7 @@
               <p class="text-rtl promotion-title">فروش سریع تر و آسان تر</p>
               <p class="text-rtl promotion-description">
                 برای دسترسی به تمام امکانات ویژه باسکول، حساب کاربری خود را
-                ارتقا دهد
+                ارتقا دهید.
               </p>
               <div class="text-center">
                 <button
