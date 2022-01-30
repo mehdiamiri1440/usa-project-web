@@ -12,7 +12,7 @@
 }
 
 .contact-items.is-buyer-list {
-  padding-top: 60px;
+  padding-top: 55px;
 }
 
 .contact-body .contact-search .contact-search-input-wrapper {
@@ -563,8 +563,8 @@ i.fa-star {
     >
       <ul>
         <li>
-          <DownloadAppCard />
-        </li>
+            <DownloadAppCard v-if="checkDownloadAppCard()" className="margin-top-0 margin-top--15" text="با ورود به اپلیکیشن باسکول سریع تر با کاربران باسکول ارتباط بگیرید." />
+          </li>
         <li class="contact-item">
           <a
             href="#"

@@ -4,7 +4,7 @@
   position: relative;
   display: grid;
   direction: rtl;
-  background-color: #E6F0F3;
+  background-color: #e6f0f3;
   margin: 20px 10px 0;
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.15);
   border-radius: 8px;
@@ -18,7 +18,7 @@
   border: none;
   font-size: 20px;
   position: relative;
-  z-index: 10;
+  z-index: 2;
   margin: 5px 0 0 -2px;
   float: right;
 }
@@ -53,6 +53,14 @@
   padding: 7px 15px;
   float: left;
 }
+@media (max-width: 350px) {
+  .android-download-title {
+    font-size: 1.2rem;
+  }
+  .download-app-info {
+    padding: 0 12px;
+  }
+}
 </style>
 <template>
   <div id="downloadAppCard" :class="className" class="download-app-wrapper row">
@@ -76,9 +84,7 @@
         />
       </div>
       <div class="text-android-download-alert-wrapper m-t-b">
-        <p class="android-download-title">
-          <strong>توصیه: </strong>{{text}}
-        </p>
+        <p class="android-download-title"><strong>توصیه: </strong>{{ text }}</p>
       </div>
     </div>
     <div @click.prevent="doDownload()" class="col-md-12">
@@ -89,9 +95,7 @@
 
 <script>
 export default {
-  props:[
-    'className',"text"
-  ],
+  props: ["className", "text"],
   methods: {
     registerComponentStatistics: function (
       categoryName,
@@ -104,8 +108,7 @@ export default {
       });
     },
     closeCard() {
-      
-      $('#downloadAppCard').remove();
+      $("#downloadAppCard").remove();
       this.createCookie("downloadAppCard", true, 60 * 24);
     },
     doDownload: function () {

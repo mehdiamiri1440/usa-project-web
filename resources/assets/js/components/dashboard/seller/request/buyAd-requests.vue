@@ -791,7 +791,7 @@ button.disable {
           </div>
         </div>
         <div v-if="buyAds.length != 0">
-          <DownloadAppCard v-if="checkDownloadAppCard()" className="margin-10" text="با استفاده از اپلیکیشن باسکول راحت تر به خریداران دسترسی پیدا کنید."/>
+          <DownloadAppCard v-if="checkDownloadAppCard()" className="margin-top--10 margin-bottom-10" text="با استفاده از اپلیکیشن باسکول راحت تر به خریداران دسترسی پیدا کنید."/>
           <ul class="list-unstyled wrapper-items">
             <li v-for="(buyAd, index) in buyAds" :key="index">
               <div v-if="buyAd.has_msg || buyAd.has_phone">

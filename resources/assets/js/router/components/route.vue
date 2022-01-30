@@ -225,35 +225,6 @@
         </p>
       </div>
     </div>
-    <!-- Download app modal -->
-    <!--<div
-      v-if="downloadAppButton && $route.name != 'invite' && !checkCookie()"
-      :class="[{ hide: isClosed }, { test: isClosed == false }]"
-      class="android-download-alert-wrapper hidden-xs hidden-lg hidden-md"
-    >
-      <div @click.prevent="closeAppModal()">
-        <div class="m-t-b">
-          <button class="close-android-download-alert-wrapper">
-            <i class="fa fa-times"></i>
-          </button>
-        </div>
-      </div>
-      <div class="android-download-alert-content" @click.prevent="doDownload()">
-        <div class="m-t-b">
-          <img
-            src="../../../img/logo/512-buskool-logo.jpg"
-            alt="دانلود اپلیکیشن باسکول"
-          />
-        </div>
-        <div class="text-android-download-alert-wrapper m-t-b">
-          <p class="android-download-title">اپلیکیشن باسکول</p>
-          <p class="android-download-slogan">استفاده راحت تر و سریع تر</p>
-        </div>
-        <div class="text-center m-t-b">
-          <button class="android-apk-download">دانلود</button>
-        </div>
-      </div>
-    </div>-->
     <!--  #regex wallet modal  -->
 
     <div class="container">
@@ -312,46 +283,6 @@
 
     <!-- end regex payment type modal -->
 
-    <!--  #regex download App modal  -->
-
-    <div class="container">
-      <div
-        id="download-app-modal"
-        class="download-app-modal modal fade"
-        tabindex="-1"
-        role="dialog"
-      >
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <a class="close-modal" data-dismiss="modal">
-                <i class="fa fa-times"></i>
-              </a>
-
-              <div class="modal-title">دانلود اپلیکیشن باسکول</div>
-            </div>
-            <div class="modal-body col-xs-12">
-              <div class="download-app-logo-wrapper">
-                <img src="../../../img/logo/mobile-logo.svg" alt />
-              </div>
-              <h3>اپلیکیشن جدید باسکول</h3>
-              <p class="text-rtl">
-                برای دسترسی سریعتر و راحت تر به خریداران و فروشندگان عمده برنامه
-                جدید باسکول را نصب کنید.
-              </p>
-              <a href @click.prevent="doDownload()">
-                دانلود اپلیکیشن باسکول
-                <i class="fa fa-download"></i>
-              </a>
-            </div>
-          </div>
-          <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-      </div>
-    </div>
-
-    <!-- end regex download App modal  -->
 
     <ChatModal />
     <EditProductModal />

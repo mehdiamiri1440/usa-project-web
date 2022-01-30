@@ -28,8 +28,7 @@
 }
 .app-modal .modal-header .modal-title {
   margin: 0;
-  line-height: 1.42857143;
-  margin-top: 40px;
+  margin-top: 35px;
   font-size: 1.8rem;
   font-weight: 500;
   text-align: center;
@@ -69,12 +68,19 @@
 }
 
 .close-android-download-alert-wrapper {
+  width: 25px;
+  height: 22px;
   background: none;
   border: none;
   font-size: 20px;
   position: relative;
+  z-index: 2;
+  margin: 5px 0 0 -2px;
   float: right;
-  color: #264653;
+}
+.close-android-download-alert-wrapper img{
+  width: 100%;
+  height: 100%;
 }
 .modal-background {
   position: absolute;
@@ -88,6 +94,13 @@
 .app-modal.show-custom-modal .modal-background {
   background: rgba(0, 0, 0, 0.7);
 }
+@media (max-width:350px) {
+  .app-modal .modal-header .modal-title {
+  margin: 0;
+  margin-top: 40px;
+  font-size: 1.4rem;
+}
+}
 </style>
 <template>
   <div id="app-modal" class="app-modal">
@@ -97,7 +110,11 @@
           class="close-modal close-android-download-alert-wrapper"
           @click="closeModal()"
         >
-          <i class="fa fa-times"></i>
+          <img
+        class="dl-app-img"
+        src="../../../../img/eva_close.svg"
+        alt="دانلود اپلیکیشن باسکول"
+      />
         </a>
 
         <div class="modal-title">

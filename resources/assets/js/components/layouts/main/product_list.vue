@@ -1148,7 +1148,6 @@ div.items-wrapper {
     </div>
 
     <main id="main" class="container-fluid">
-      <DownloadAppCardPlaceHolder />
       <DownloadAppCard v-if="checkDownloadAppCard()" text="با استفاده از اپلیکیشن باسکول راحت تر محصول مورد نظر خود را پیدا کنید."/>
       <div class="col-xs-12 main-product-wrapper col-lg-9">
         <div class="row">
@@ -1604,7 +1603,6 @@ export default {
     ProductAsideCategories,
     searchNotFound,
     DownloadAppCard,
-    DownloadAppCardPlaceHolder,
   },
   props: ["assets", "str", "user_id", "categoryList"],
   data: function () {

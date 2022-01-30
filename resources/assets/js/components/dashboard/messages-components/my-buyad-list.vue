@@ -630,27 +630,17 @@ li.static-item > button i {
       </div>
     </div>
     <div class="wrapper_no_pro">
+      
       <DownloadAppCard
         v-if="checkDownloadAppCard()"
-        className="margin-top-0"
+        className="margin-top--15"
         text="با ورود به اپلیکیشن باسکول سریع تر با کاربران باسکول ارتباط بگیرید."
       />
 
-      <div v-if="isConditionSatisfied" class="android-wrapper">
-        <p class="section-title">لیست خریداران محصول خود را اینجا ببینید</p>
-        <p class="section-image">
-          <img src="../../../../img/hand-phone-icon-6.jpg" />
-        </p>
-        <p class="section-contents">
-          برای دسترسی به این قسمت لطفا اپلیکیشن موبایل باسکول را نصب کنید.
-        </p>
-        <a class="green-button download-app" href @click.prevent="doDownload()">
-          دانلود اپلیکیشن</a
-        >
-      </div>
+      
       <div
         class="image-wrapper"
-        v-else-if="
+        v-if="
           buyAds.length === 0 && buyAdsGoldenFilter.length == 0 && isLoading
         "
       >
@@ -1118,7 +1108,6 @@ export default {
   methods: {
     init() {
       this.getBuyAds();
-      this.isOsAndroid();
     },
     getBuyAds() {
       this.isLoading = true;
@@ -1306,15 +1295,6 @@ export default {
       ua = (ua || navigator.userAgent).toLowerCase();
       var match = ua.match(/android\s([0-9\.]*)/);
       return match ? match[1] : undefined;
-    },
-    isOsAndroid: function () {
-      let self = this;
-      if (this.isDeviceMobile() && !this.isOsIOS()) {
-        let androidVersion = this.getAndroidVersion();
-        if (parseInt(androidVersion) >= 5) {
-          // this.isConditionSatisfied = true;
-        }
-      }
     },
     getNumberWithCommas: function (number) {
       if (number || typeof number === "number")
