@@ -846,7 +846,7 @@ textarea.error:focus + i {
                 @click.prevent="switchPhoneActivation(false)"
                 class="deactive-number-button hover-effect"
               >
-                غیرفعال
+                غیرفعال کردن
               </button>
             </div>
           </div>

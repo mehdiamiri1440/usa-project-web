@@ -769,6 +769,8 @@ a.profile-info-wrapper:focus {
             type="text"
             v-model="$parent.searchValueText"
             placeholder="اینجا جستجو کنید"
+            @blur="showNavigationMenu"
+            @focus="hideNavigationMenu"
           />
 
           <button class="btn-search">
@@ -937,6 +939,23 @@ export default {
       console.log("Current marginTop: " + style.marginTop);
       if (style.marginTop == "125px") {
         div.style.marginTop = "85px";
+      }
+    },
+    showNavigationMenu() {
+      if (screen.width < 992) {
+        if (document.querySelector(".custom-navigation")) {
+          setTimeout(() => {
+            document.querySelector(".custom-navigation").style.display =
+              "block";
+          }, 50);
+        }
+      }
+    },
+    hideNavigationMenu() {
+      if (screen.width < 992) {
+        if (document.querySelector(".custom-navigation")) {
+          document.querySelector(".custom-navigation").style.display = "none";
+        }
       }
     },
   },

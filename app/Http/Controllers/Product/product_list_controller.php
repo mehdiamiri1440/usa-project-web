@@ -123,6 +123,7 @@ class product_list_controller extends Controller
 
     protected $activate_cache = true;
     protected $is_search_text_category_name = true;
+    protected $backup_products = [];
 
     public function get_product_list(Request $request)
     {
@@ -164,6 +165,13 @@ class product_list_controller extends Controller
                 else{
                     $products = $this->{$this->sorting_options_array[$request->sort_by]}($products);
                 }
+
+                if(count($this->backup_products) > 0){
+                    $backup_products = $this->{$this->sorting_options_array[$request->sort_by]}($this->backup_products);
+
+                    $products = array_unique(array_merge($products,$backup_products),SORT_REGULAR);
+                }
+
             }
             else{
                     usort($products, function ($item1, $item2) {
@@ -881,11 +889,13 @@ class product_list_controller extends Controller
             $search_text = str_replace('/', '', $search_text);
             $search_text_array = explode(' ', $search_text);
 
-            $search_expresion = '(.*)';
+            $search_expresion = '^';
 
             foreach ($search_text_array as $text) {
-                $search_expresion .= "($text)(.*)";
+                $search_expresion .= "(?=.*\b$text\b)";
             }
+
+            $search_expresion .=  '.*$';
 
             // $general_category = DB::table('tags')
             //                         ->where('header','like',"%$search_text%")
@@ -921,6 +931,18 @@ class product_list_controller extends Controller
 
                     return false;
                 });
+            }
+
+            if(count($result_products) <= 20){
+                $tag_record = DB::table('tags')->where('header',$search_text)
+                                    ->get()
+                                    ->first();
+
+                if($tag_record){
+                    $this->backup_products = array_filter($products,function($product) use($tag_record){
+                        return $product['main']->sub_category_id == $tag_record->category_id || $product['main']->category_id == $tag_record->category_id;
+                    });
+                }
             }
 
             $products = $result_products;

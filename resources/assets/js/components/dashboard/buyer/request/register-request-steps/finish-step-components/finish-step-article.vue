@@ -16,6 +16,13 @@
   float: right;
   margin-left: 10px;
 }
+.user-image > i {
+  margin-left: 5px;
+  font-size: 1.8rem;
+  width: 20px;
+  display: inline-block;
+  text-align: center;
+}
 .user-content {
   display: block;
   max-width: 170px;
@@ -69,7 +76,14 @@
 .main-content ul {
   padding-right: 10px;
 }
-
+.phone-number-content {
+  padding: 15px 0 0;
+  margin: 35px 0;
+}
+.phone-number-wrapper {
+  margin: 0;
+  padding: 0;
+}
 h3.article-title {
   font-size: 16px;
   font-weight: 400;
@@ -277,7 +291,8 @@ button i {
           <ul>
             <li class="items">
               <span class="user-image">
-                <img src="../../../../../../../img/user-defult.png" />
+                <i class="fas fa-user-circle"></i>
+                <!-- <img src="../../../../../../../img/user-defult.png" /> -->
               </span>
               <div class="user-content">
                 <span
@@ -312,7 +327,7 @@ button i {
           v-if="product.has_phone"
           class="green-button phone-button"
           :class="{ disable: isActivePhone }"
-          :disabled="isActivePhone"
+          
           @click.prevent="activePhoneCall()"
         >
           <span>
@@ -336,6 +351,7 @@ button i {
         v-if="isActivePhone"
         class="phone-number-wrapper collapse"
       >
+       <div class="phone-number-content">
         <a :href="'tel:' + userPhone" class="phone-number">
           <p>
             <i class="fa fa-phone-square-alt"></i>
@@ -353,6 +369,7 @@ button i {
             لطفاً پیش از انجام معامله و هر نوع پرداخت وجه، از صحت کالا یا خدمات
             ارائه شده، به صورت حضوری اطمینان حاصل نمایید.
           </p>
+        </div>
         </div>
       </div>
     </article>
@@ -398,7 +415,13 @@ export default {
     },
     activePhoneCall() {
       this.getPhoneLoader = true;
-      this.isActivePhone = true;
+      
+      if (this.isActivePhone) {
+        this.isActivePhone = false;
+      } else {
+       this.isActivePhone =true;
+      }
+
       axios
         .post("/get_seller_phone_number", {
           p_id: this.product.id,
@@ -408,7 +431,7 @@ export default {
         .then((response) => {
           this.$nextTick(() => {
             this.userPhone = response.data.phone;
-            $("#" + this.product.id + "-phone-number-wrapper").collapse("show");
+            $("#" + this.product.id + "-phone-number-wrapper").collapse("toggle");
             this.getPhoneLoader = false;
             this.setScrollToProduct();
           });
@@ -417,17 +440,10 @@ export default {
           this.getPhoneLoader = false;
           this.isActivePhone = false;
 
-          swal({
-            text: error.response.data.msg,
-            icon: "warning",
-            className: "custom-swal-with-cancel",
-            buttons: {
-              close: {
-                text: "بستن",
-                className: "bg-cancel",
-              },
-            },
-          });
+           eventBus.$emit(
+              "noAccessToBuyerPhoneOtherError",
+              error.response.data.msg
+            );
         });
     },
     loadImage: function () {

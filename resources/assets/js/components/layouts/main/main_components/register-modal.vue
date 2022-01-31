@@ -843,6 +843,23 @@ export default {
         }
       });
     },
+    showNavigationMenu() {
+      if (screen.width < 992) {
+        if (document.querySelector(".custom-navigation")) {
+          document.querySelector(".custom-navigation").style.display = "block";
+         
+        }
+      }
+    },
+    hideNavigationMenu() {
+      if (screen.width < 992) {
+       
+          if (document.querySelector(".custom-navigation")) {
+            document.querySelector(".custom-navigation").style.display = "none";
+          }
+        
+      }
+    },
   },
   mounted() {
     this.cehckPageWidth();

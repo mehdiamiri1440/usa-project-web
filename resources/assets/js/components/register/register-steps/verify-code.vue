@@ -134,7 +134,7 @@ input.error:focus + i {
 }
 
 .submit-button.active {
-  background: #00c569;
+  background: #ff9828;
   cursor: pointer;
   color: #fff;
 }
@@ -167,27 +167,20 @@ input.error:focus + i {
   cursor: pointer;
 }
 @media (max-width: 500px) {
-  
-  label.input-title
-  {
+  label.input-title {
     font-size: 1.4rem;
   }
 }
 @media (max-width: 375px) {
-  
-  label.input-title
-  {
+  label.input-title {
     font-size: 1.3rem;
   }
 }
 @media (max-width: 358px) {
-  
-  label.input-title
-  {
+  label.input-title {
     font-size: 1.1rem;
   }
 }
-
 </style>
 
 <template>
@@ -206,13 +199,15 @@ input.error:focus + i {
           <input
             id="code"
             v-model="code.number1"
+            autofocus
             name="code"
             class="code-input"
             placeholder="_"
             maxlength="1"
             type="tel"
             pattern="[0-9]*"
-            onfocus="this.select();"
+            @blur="$parent.showNavigationMenu"
+            @focus="$parent.hideNavigationMenu"
             :class="{
               error: this.$parent.errors.verification_code,
               active: code.number1.length,
@@ -226,7 +221,8 @@ input.error:focus + i {
             maxlength="1"
             type="tel"
             pattern="[0-9]*"
-            onfocus="this.select();"
+            @blur="$parent.showNavigationMenu"
+            @focus="$parent.hideNavigationMenu"
             :class="{
               error: this.$parent.errors.verification_code,
               active: code.number2.length,
@@ -240,7 +236,8 @@ input.error:focus + i {
             maxlength="1"
             type="tel"
             pattern="[0-9]*"
-            onfocus="this.select();"
+            @blur="$parent.showNavigationMenu"
+            @focus="$parent.hideNavigationMenu"
             :class="{
               error: this.$parent.errors.verification_code,
               active: code.number3.length,
@@ -254,7 +251,8 @@ input.error:focus + i {
             maxlength="1"
             type="tel"
             pattern="[0-9]*"
-            onfocus="this.select();"
+            @blur="$parent.showNavigationMenu"
+            @focus="$parent.hideNavigationMenu"
             :class="{
               error: this.$parent.errors.verification_code,
               active: code.number4.length,

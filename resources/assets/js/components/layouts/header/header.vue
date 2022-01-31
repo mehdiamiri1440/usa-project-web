@@ -752,11 +752,6 @@ a.profile-info-wrapper:hover {
     overflow: hidden;
   }
 
-  .search-input input {
-    border: none;
-    background: #f2f2f2;
-  }
-
   .navbar-nav > li {
     border-right: none;
   }
@@ -824,7 +819,9 @@ a.profile-info-wrapper:hover {
 
   .search-input input {
     padding: 6px 35px 5px 15px;
-    border-radius: 8px;
+    border-radius: 4px;
+    border: none;
+    background: #f2f2f2;
   }
 
   #buskool-nav {
@@ -1390,6 +1387,8 @@ a.profile-info-wrapper:hover {
                 type="text"
                 placeholder="محصول مورد نظر خود را جستجو کنید"
                 v-model="mainSearchBoxText"
+                @blur="showNavigationMenu"
+                @focus="hideNavigationMenu"
               />
 
               <button class="hidden-xs" @click="search">
@@ -1514,13 +1513,19 @@ a.profile-info-wrapper:hover {
         </div>
       </div>
       <div
-        v-if="$route.name != 'login' && $route.name != 'register'"
+        v-if="
+          $route.name != 'login' &&
+          $route.name != 'register' &&
+          $route.name != 'profile'
+        "
         class="search-input hidden-sm hidden-md hidden-lg"
       >
         <input
           type="text"
           placeholder="محصول مورد نظر خود را جستجو کنید"
           v-model="mainSearchBoxText"
+          @blur="showNavigationMenu"
+          @focus="hideNavigationMenu"
         />
         <button class="fa fa-search" @click="search"></button>
 
@@ -1858,10 +1863,27 @@ export default {
         });
       }
     },
+    showNavigationMenu() {
+      if (screen.width < 992) {
+        if (document.querySelector(".custom-navigation")) {
+          setTimeout(() => {
+            document.querySelector(".custom-navigation").style.display =
+              "block";
+          }, 50);
+        }
+      }
+    },
+    hideNavigationMenu() {
+      if (screen.width < 992) {
+        if (document.querySelector(".custom-navigation")) {
+          document.querySelector(".custom-navigation").style.display = "none";
+        }
+      }
+    },
   },
   mounted() {
-   // this.navbarCategoryMoble();
-    this.$parent.check
+    // this.navbarCategoryMoble();
+    this.$parent.check;
     this.checkLocationFilter();
     if (this.user_id) {
       axios

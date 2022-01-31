@@ -1069,6 +1069,23 @@ export default {
       this.currentStep = 0;
       this.resetAllImages = false;
     },
+    showNavigationMenu() {
+      if (screen.width < 992) {
+        if (document.querySelector(".custom-navigation")) {
+          document.querySelector(".custom-navigation").style.display = "block";
+         
+        }
+      }
+    },
+    hideNavigationMenu() {
+      if (screen.width < 992) {
+       
+          if (document.querySelector(".custom-navigation")) {
+            document.querySelector(".custom-navigation").style.display = "none";
+          }
+        
+      }
+    },
   },
   mounted() {
     this.init();

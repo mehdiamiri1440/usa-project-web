@@ -34,7 +34,7 @@ label.input-title {
 }
 
 .submit-button.active {
-  background: #00c569;
+  background: #FF9828;
   color: #fff;
   cursor: pointer;
 }
@@ -97,6 +97,7 @@ input.active:focus + i,
 input.active + i,
 .radio-wrapper.active {
   border-color: #00c569;
+  color: #333333;
 }
 
 input.error {
@@ -173,19 +174,20 @@ input.error:focus + i,
 
 /* On mouse-over, add a grey background color */
 .label-radio:hover input ~ .checkmark {
-  background-color: #ccc;
+  color: #ccc;
 }
 
 /* When the radio button is checked, add a blue background */
 .label-radio input:checked ~ .checkmark {
-  background-color: #00c569;
-  border-color: #00c569;
+  color: #00c569;
 }
 
 .label-radio input:checked ~ label::after {
   border-color: #00c569;
 }
-
+.fa-dot-circle:before {
+  content: "\f192";
+}
 .label-radio label::after {
   content: "";
   display: block;
@@ -310,6 +312,8 @@ select.error:focus {
               placeholder="نام خود را وارد کنید"
               id="first-name"
               type="text"
+              @blur="showNavigationMenu"
+              @focus="hideNavigationMenu"
             />
 
             <p class="error-message">
@@ -334,6 +338,8 @@ select.error:focus {
               placeholder="نام خانوادگی خود را وارد کنید"
               id="last-name"
               type="text"
+              @blur="showNavigationMenu"
+              @focus="hideNavigationMenu"
             />
             <p class="error-message">
               <span
@@ -444,7 +450,15 @@ select.error:focus {
                 :checked="'0' == $parent.step4.activity_type"
                 name="radio"
               />
-              <span class="checkmark"></span>
+              <span class="checkmark">
+                 <i
+                  class="far"
+                  :class="[
+                    { 'fa-dot-circle': buyerActive },
+                    { 'fa-circle': !buyerActive },
+                  ]"
+                ></i>
+              </span>
               <label>
                 <svg
                   id="Layer_1"
@@ -488,7 +502,15 @@ select.error:focus {
                 :checked="'1' == $parent.step4.activity_type"
               />
 
-              <span class="checkmark"></span>
+              <span class="checkmark">
+                 <i
+                  class="far"
+                  :class="[
+                    { 'fa-dot-circle': buyerActive },
+                    { 'fa-circle': !buyerActive },
+                  ]"
+                ></i>
+              </span>
 
               <label>
                 <svg
@@ -575,6 +597,8 @@ export default {
       activityDomain: "",
       activityType: "",
       error: "",
+      sellerActive: false,
+      buyerActive: false,
     };
   },
   methods: {
@@ -596,6 +620,23 @@ export default {
       }
       this.$parent.setCategoryId(event);
       this.$parent.validateErrors();
+    },
+    showNavigationMenu() {
+      if (screen.width < 992) {
+        if (document.querySelector(".custom-navigation")) {
+          document.querySelector(".custom-navigation").style.display = "block";
+         
+        }
+      }
+    },
+    hideNavigationMenu() {
+      if (screen.width < 992) {
+       
+          if (document.querySelector(".custom-navigation")) {
+            document.querySelector(".custom-navigation").style.display = "none";
+          }
+        
+      }
     },
   },
   mounted() {
@@ -646,6 +687,13 @@ export default {
       this.$parent.errors.activity_type = "";
       this.$parent.step4.activity_type = item;
       this.$parent.validateErrors();
+      if (item == "0") {
+        this.sellerActive = true;
+        this.buyerActive = false;
+      } else if (item == "1") {
+        this.sellerActive = false;
+        this.buyerActive = true;
+      }
     },
   },
 };

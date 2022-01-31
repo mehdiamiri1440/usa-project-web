@@ -154,6 +154,8 @@ li.add-group-button-wrapper {
             type="text"
             placeholder="جستجوی گروه"
             v-model="$parent.groupNameSearchText"
+            @blur="$parent.showNavigationMenu"
+            @focus="$parent.hideNavigationMenu"
           />
 
           <i class="fa fa-search"></i>

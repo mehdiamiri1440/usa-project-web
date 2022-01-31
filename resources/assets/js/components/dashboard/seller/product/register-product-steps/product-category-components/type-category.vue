@@ -49,12 +49,12 @@
   transform: translateX(5px);
 }
 .submit-button.active {
-  background: #00c569;
+  background: #FF9828;
   cursor: pointer;
   transform: translateX(0);
 }
 .submit-button.active:hover i {
-  background: #00c569;
+  background: #FF9828;
   cursor: pointer;
   transform: translateX(-5px);
 }
@@ -189,6 +189,8 @@ label {
                 error: $parent.errors.productName,
               }"
               placeholder="نوع محصول را وارد کنید"
+              @blur="$parent.showNavigationMenu"
+              @focus="$parent.hideNavigationMenu"
             />
 
             <i

@@ -62,7 +62,7 @@
   transform: translateX(5px);
 }
 .submit-button.active {
-  background: #00c569;
+  background: #FF9828;
   cursor: pointer;
 }
 .action-control-wrapper {

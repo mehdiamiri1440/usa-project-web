@@ -738,6 +738,12 @@ class buyAd_controller extends Controller
     //public method
     public function get_related_buyAds_list_to_the_seller(Request $request)
     {
+        $this->validate($request,[
+            'from_record_number' => 'integer:min:0',
+            'to_record_number' => 'integer:min:5',
+            'category_id' => 'exists:categories,id'
+        ]);
+
         $seller_id = session('user_id');
 
         $user = myuser::find($seller_id);
@@ -762,6 +768,28 @@ class buyAd_controller extends Controller
                 $buyAd->register_date = $date_convertor_object->get_persian_date_with_month_name($buyAd->created_at);
 
                 $result_buyAds[] = $buyAd;
+            }
+
+            if($request->has('category_id')){
+                $category_id = $request->category_id;
+                $result_buyAds = $related_buyAds->toArray();
+
+                $result_buyAds = array_filter($result_buyAds,function($buyAd) use($category_id){
+                    return $buyAd->category_id == $category_id;
+                });
+
+                
+
+                if ($request->has('from_record_number') && $request->has('to_record_number')) {
+                    $offset = abs($request->from_record_number - $request->to_record_number);
+        
+                    $result_buyAds = array_slice($result_buyAds, $request->from_record_number, $offset, true);
+                }
+
+                return response()->json([
+                    'status' => true,
+                    'buyAds' => collect(array_values($result_buyAds)),
+                ], 200);
             }
 
             $user_registered_products = DB::table('products')->where('myuser_id',$seller_id)
@@ -865,6 +893,15 @@ class buyAd_controller extends Controller
 
             $result_buyAds = array_unique($result_buyAds,SORT_REGULAR);
 
+            $result_buyAds = array_values($result_buyAds);
+
+            if ($request->has('from_record_number') && $request->has('to_record_number')) {
+                $offset = abs($request->from_record_number - $request->to_record_number);
+    
+                $result_buyAds = array_slice($result_buyAds, $request->from_record_number, $offset, true);
+            }
+
+
             return response()->json([
                 'status' => true,
                 'buyAds' => collect(array_values($result_buyAds)),
@@ -889,7 +926,7 @@ class buyAd_controller extends Controller
                                         ->orWhere('buy_ads.phone_view_capacity','>',0);
                     })
                     ->whereNull('buy_ads.deleted_at')
-                    ->whereBetween('buy_ads.updated_at',[Carbon::now()->subWeeks(3),Carbon::now()]);
+                    ->whereBetween('buy_ads.updated_at',[Carbon::now()->subWeeks(2),Carbon::now()]);
                     // ->where('buy_ads.myuser_id','<>',$user->id);
 
         $query = $query->selectRaw(implode(', ',$this->related_buyAd_list_required_fields) . ",(FLOOR((select count(distinct(m1.sender_id)) from messages as m1 where m1.is_read = true and m1.receiver_id = buy_ads.myuser_id and not exists(select * from messages where messages.receiver_id = buy_ads.myuser_id and m1.is_read = false ))/(select count(distinct(messages.sender_id)) from messages where messages.receiver_id = buy_ads.myuser_id) * 100 )) as response_rate,

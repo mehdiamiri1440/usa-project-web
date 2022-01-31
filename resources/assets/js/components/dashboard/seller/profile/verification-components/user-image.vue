@@ -18,6 +18,11 @@
 #verification-user-image .article-images {
   padding: 0;
 }
+@media (max-width: 500px) {
+  #verification-user-image .imageuploadify .imageuploadify-images-list {
+    padding: 75px 0;
+  }
+}
 </style>
 <style scoped>
 #verification-user-image {
@@ -41,7 +46,6 @@
 .image-file-wrapper img {
   border-radius: 12px;
   border: 1px solid #bdc4cc;
-  min-height: 384px;
 }
 
 .main-title-wrapper {
@@ -190,6 +194,32 @@
     padding: 0 5px;
   }
 }
+@media (max-width: 500px) {
+  .image-file-wrapper,
+  #verification-user-image {
+    max-width: 150px;
+  }
+  .image-file-wrapper {
+    text-align: center;
+  }
+  .image-file-wrapper img {
+    width: 150px;
+    min-height: 150px;
+  }
+  .main-title-wrapper {
+    padding-top: 10px;
+  }
+  .title-section {
+    margin-bottom: 10px;
+  }
+}
+@media screen and (max-width: 360px) {
+  .title-section {
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+}
+
 </style>
 
 <template>

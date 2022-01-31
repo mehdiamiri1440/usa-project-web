@@ -263,6 +263,8 @@
           type="text"
           v-model="searchText"
           placeholder="اینجا جستجو کنید"
+          @blur="showNavigationMenu"
+          @focus="hideNavigationMenu"
         />
 
         <button class="btn-search">
@@ -419,6 +421,24 @@ export default {
         description: description,
         fatal: fatal,
       });
+    },
+    showNavigationMenu() {
+      if (screen.width < 992) {
+        if (document.querySelector(".custom-navigation")) {
+          setTimeout(() => {
+             document.querySelector(".custom-navigation").style.display = "block";
+          }, 50);
+        }
+      }
+    },
+    hideNavigationMenu() {
+      if (screen.width < 992) {
+       
+          if (document.querySelector(".custom-navigation")) {
+            document.querySelector(".custom-navigation").style.display = "none";
+          }
+        
+      }
     },
   },
   watch: {

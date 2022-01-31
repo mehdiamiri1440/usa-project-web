@@ -90,7 +90,7 @@ input.focus + i {
 }
 
 .submit-button.active {
-  background: #00c569;
+  background: #ff9828;
   cursor: pointer;
 }
 .submit-button.active:hover i {
@@ -184,6 +184,8 @@ input.focus + i {
               type="text"
               :class="{ focus: searchText }"
               :placeholder="isProvince ? 'جستجوی استان' : 'جستجوی شهر'"
+              @blur="showNavigationMenu"
+              @focus="hideNavigationMenu"
             />
 
             <button v-if="searchText" @click.prevent="searchText = ''">
@@ -308,6 +310,24 @@ export default {
           this.$refs.isProvinces.scrollTop = 0;
         }
       });
+    },
+    showNavigationMenu() {
+      if (screen.width < 992) {
+        if (document.querySelector(".custom-navigation")) {
+          setTimeout(() => {
+             document.querySelector(".custom-navigation").style.display = "block";
+          }, 50);
+        }
+      }
+    },
+    hideNavigationMenu() {
+      if (screen.width < 992) {
+       
+          if (document.querySelector(".custom-navigation")) {
+            document.querySelector(".custom-navigation").style.display = "none";
+          }
+        
+      }
     },
   },
   // mounted() {

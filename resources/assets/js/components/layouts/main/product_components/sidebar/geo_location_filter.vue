@@ -71,17 +71,6 @@ hr {
   position: relative;
 }
 
-.title-input .fa-map-marker-alt::after {
-  content: " ";
-  width: 8px;
-  height: 8px;
-  background: #1da1f2;
-  border-radius: 10px;
-  position: absolute;
-  top: -3px;
-  right: 1px;
-}
-
 .action-button .filter-button {
   width: 100%;
   border-radius: 8px;
@@ -260,6 +249,7 @@ export default {
     },
     filterProducts() {
       if (this.selectedCity) {
+        eventBus.$emit("selectedCity", this.selectedCity);
         this.$parent.provinceChild = this.selectedProvince;
         this.$parent.cityChild = this.selectedCity;
         localStorage.setItem("provinceIndex", parseInt(this.provinceIndex));
@@ -281,6 +271,7 @@ export default {
           JSON.stringify(this.selectedProvince)
         );
         this.$parent.provinceChild = this.selectedProvince;
+        eventBus.$emit("selectedProvince", this.selectedProvince);
         this.registerComponentStatistics(
           "product-list",
           "sidebarSearch",
@@ -338,14 +329,11 @@ export default {
       if (index >= 0 && this.provinceList && !this.isResetData) {
         this.selectedProvince = this.provinceList[Number(index)];
         this.cityList = this.selectedProvince.cities;
-        eventBus.$emit("selectedProvince", this.selectedProvince);
+        
         this.selectedCity = "";
       } else {
         this.isResetData = false;
       }
-    },
-    selectedCity(city) {
-      eventBus.$emit("selectedCity", city);
     },
     resetLocationFilter(reset) {
       if (this.selectedProvince || this.selectedCity) {

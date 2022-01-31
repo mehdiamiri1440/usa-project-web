@@ -163,7 +163,7 @@ input[type="number"]::-webkit-outer-spin-button {
 @media (max-width: 500px) {
   #main{
     padding-top: 0;
-    min-height: 470px;
+    min-height: 660px;
   }
    #main .main-content{
     padding-top: 0;
@@ -869,6 +869,21 @@ export default {
         var expires = "";
       }
       document.cookie = name + "=" + value + expires + "; path=/";
+    },
+    showNavigationMenu() {
+      if (screen.width < 992) {
+        if (document.querySelector(".custom-navigation")) {
+          document.querySelector(".custom-navigation").style.display = "block";
+         
+        }
+      }
+    },
+    hideNavigationMenu() {
+      if (screen.width < 992) {
+          if (document.querySelector(".custom-navigation")) {
+            document.querySelector(".custom-navigation").style.display = "none";
+          }
+      }
     },
   },
   watch: {
