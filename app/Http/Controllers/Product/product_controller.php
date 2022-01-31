@@ -412,9 +412,12 @@ class product_controller extends Controller
         ]);
 
         $product_id = $request->product_id;
-        $product = product::where('id', $product_id)
+
+        $product = product::where('id',$product_id)
             ->where('confirmed', true)
+            ->withTrashed() // including deleted products
             ->first();
+
 
         if (is_null($product)) {
             $product = DB::table('products')->where('id',$product_id)->first();
