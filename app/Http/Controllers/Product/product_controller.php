@@ -79,6 +79,7 @@ class product_controller extends Controller
         'cities.id as city_id', 
         'categories.category_name as sub_category_name', 
         'products.is_elevated',
+        'products.deleted_at',
     ];
 
     protected $product_register_nullable_fields_array_with_validation_rules = array(
