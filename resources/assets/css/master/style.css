@@ -227,6 +227,18 @@ select {
   font-weight: bold;
   border: none;
 }
+.orange-button {
+  margin: 15px 0 0;
+  display: inline-block;
+  background: #FF9828;
+  color: #fff;
+  padding: 10px 25px;
+  border-radius: 3px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: bold;
+  border: none;
+}
 
 .gray-button {
   margin: 15px 0 0;

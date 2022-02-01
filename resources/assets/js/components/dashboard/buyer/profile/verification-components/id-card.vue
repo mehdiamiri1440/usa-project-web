@@ -1,27 +1,45 @@
 
 <style >
-#verification-id-card .imageuploadify .imageuploadify-images-list {
-  padding: 65px 0 66px;
+#verification-id-card .imageuploadify {
+  height: 130px;
 }
-#verification-id-card .image-upload-wrapper {
+#verification-id-card .imageuploadify .imageuploadify-images-list {
+  padding: 39px 0 39px;
+}
+#verification-id-card.image-upload-wrapper {
   padding: 0;
+  width: 100%;
+  margin: auto;
 }
 #verification-id-card .article-images .image {
   border-radius: 12px;
-  height: 188px;
+  height: 130px;
 }
-
 @media screen and (max-width: 992px) {
   #verification-id-card .upload {
     padding: 0;
   }
+}
+@media screen and (max-width: 768px) {
+  #verification-id-card .upload {
+    height: 93px;
+    width: 150px;
+    position: relative;
+    right: 18%;
+  }
+  #verification-id-card .imageuploadify {
+    height: 93px;
+  }
+  #verification-id-card .imageuploadify .imageuploadify-images-list {
+    padding: 19px 0 19px;
+  }
+  
 }
 </style>
 <style scoped>
 #verification-id-card {
   overflow: hidden;
 }
-
 .title {
   padding: 13px 0;
 }
@@ -30,38 +48,80 @@
   font-size: 18px;
   font-weight: bold;
 }
-
+.wrapper-section {
+  padding: 0;
+  float: right;
+}
+.wrapper-section .sample-card {
+  padding-right: 70px;
+  padding-left: 40px;
+}
+.wrapper-section .uploader-div {
+  padding-right: 50px;
+}
 .small-description {
   font-size: 12px;
   color: #bdc4cc;
 }
-
+.image-file-wrapper {
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  height: 156px;
+  border: 1px solid #00c569;
+}
+.image-file-wrapper::before {
+  content: "";
+  width: 270px;
+  height: 78px;
+  position: absolute;
+  z-index: 0;
+  background-color: #ffffff;
+}
+.image-file-wrapper::after {
+  content: "";
+  width: 135px;
+  height: 164px;
+  position: absolute;
+  z-index: 0;
+  background-color: #ffffff;
+}
 .image-file-wrapper img {
   border-radius: 12px;
   border: 1px solid #bdc4cc;
-  min-height: 192px;
+  max-width: 214px;
+  max-height: 136px;
+  position: relative;
+  z-index: 2;
 }
 
 .main-title-wrapper {
   padding-top: 15px;
   padding-bottom: 10px;
-  font-size: 15px;
-  line-height: 1.618;
+  font-weight: 400;
+  font-size: 1.6rem;
+  line-height: 16px;
+  color: rgb(0, 0, 0, 0.6);
+}
+.uploader-content {
+  display: grid;
+  height: 162px;
+  width: 214px;
 }
 .upload-error {
   line-height: 1.618;
 }
 
-.green-button {
-  border-radius: 12px;
-  margin: 44px 5px 50px;
-  font-size: 21px;
+.orange-button {
+  border-radius: 8px;
+  margin: 10px 5px 50px;
+  font-size: 1.4rem;
   font-weight: 500;
-  padding: 13px 50px;
+  padding: 6px 27px;
   position: relative;
 }
 
-.green-button.next i {
+.-button.next i {
   position: relative;
   top: 3px;
   margin-right: 14px;
@@ -98,30 +158,32 @@
 .title-section {
   margin-top: 25px;
   margin-bottom: 15px;
-  font-size: 18px;
-  color: #313a43;
+  font-size: 1.8rem;
+  color: #000000;
   line-height: 1.618;
   padding: 0 15px;
+  text-align: center;
 }
 
 .button-icon-wrapper {
   display: inline-block;
   position: relative;
+  top: 2px;
 }
 
 .spinner-border {
   position: absolute;
-  left: 2px;
-  top: 5px;
-  width: 1.5rem;
-  height: 1.5rem;
+  left: -3px;
+  top: 3px;
+  width: 1.1rem;
+  height: 1.1rem;
   color: #fff;
   border-width: 0.25rem;
 }
 
 .upload-error {
   height: 25px;
-  margin: 15px 0;
+  margin: 5px 0;
   padding: 0;
 }
 
@@ -143,40 +205,45 @@
 @media screen and (max-width: 768px) {
   .image-file-wrapper {
     text-align: center;
+    width: 245px;
   }
   .image-file-wrapper img {
-    width: 200px;
-    min-height: 120px;
+    width: 214px;
   }
   .main-title-wrapper {
     padding-top: 25px;
   }
-  .green-button {
-    border-radius: 12px;
-    margin: 44px 0 50px;
-    font-size: 18px;
-    font-weight: 500;
-    padding: 13px 27px;
+  .orange-button {
+    font-size: 1.4rem;
+    padding: 6px 10px;
   }
 
-  .green-button.next {
-    min-width: 163px;
-  }
-  .green-button.back {
+  .orange-button.back {
     padding: 13px 20px;
   }
 
-  .green-button.next i {
+  .orange-button.next i {
     position: relative;
-    top: 3px;
-    margin-right: 10px;
+    top: 1px;
+    margin-right: 2px;
   }
   .wrapper-section > div {
     padding: 0;
   }
+  .title-section {
+    font-size: 1.6rem;
+  }
   .title-section,
   .action-button-wrapper {
     padding: 0 5px;
+  }
+  .uploader-content {
+    height: 134px;
+    width: 224px;
+    margin: auto;
+  }
+  .wrapper-section .uploader-div {
+    padding-right: 30px;
   }
 }
 @media screen and (max-width: 500px) {
@@ -184,11 +251,8 @@
     text-align: center;
   }
   .image-file-wrapper img {
-    width: 200px;
+    width: 245px;
     min-height: 120px;
-  }
-  .main-title-wrapper {
-    padding-top: 10px;
   }
   .title-section {
     margin-bottom: 10px;
@@ -204,10 +268,12 @@
 
 <template>
   <div>
-    <div class="title-section">کارت ملی خود را طبق نمونه بار گذاری کنید.</div>
-    <section class="wrapper-section verification-id-card">
-      <div class="col-xs-12 col-md-6 pull-right">
-        <div class="main-title-wrapper">نمونه تصویر از کارت ملی</div>
+    <div class="title-section">
+      تصویر کارت ملی خود را طبق نمونه بارگذاری کنید.
+    </div>
+    <section class="wrapper-section col-xs-12 col-md-6 verification-id-card">
+      <div class="col-md-12 sample-card">
+        <div class="main-title-wrapper">نمونه تصویر کارت ملی</div>
         <div class="image-file-wrapper">
           <img
             src="../../../../../../img/user-id-card.jpg"
@@ -216,40 +282,40 @@
         </div>
       </div>
     </section>
-    <section class="wrapper-section">
-      <div class="col-xs-12 col-md-6 pull-right">
+    <section class="wrapper-section uploader-div col-xs-12 col-md-6">
+      <div class="col-md-12">
         <div class="main-title-wrapper">
           بارگذاری تصویر کارت ملی
           <span class="red-text">*</span>
         </div>
-
-        <UploadFile
-          id="verification-id-card"
-          uploadName="idCardFile"
-          uploadAccept="image/*"
-          :uploadMinSize="1024"
-          :uploadSize="1024 * 1024 * 10"
-          :uploadMultiple="true"
-          :uploadDrop="true"
-          :uploadDropDirectory="true"
-          :uploadAddIndex="false"
-          :uploadThread="2"
-          :uploadOCompress="1024 * 1024"
-          :uploadUploadAuto="false"
-          imageWrapperSize="col-xs-12"
-          imageAccessUploadCount="1"
-          :maximum="1"
-        />
+        <div class="uploader-content">
+          <UploadFile
+            id="verification-id-card"
+            uploadName="idCardFile"
+            uploadAccept="image/*"
+            :uploadMinSize="1024"
+            :uploadSize="1024 * 1024 * 10"
+            :uploadMultiple="true"
+            :uploadDrop="true"
+            :uploadDropDirectory="true"
+            :uploadAddIndex="false"
+            :uploadThread="2"
+            :uploadOCompress="1024 * 1024"
+            :uploadUploadAuto="false"
+            imageWrapperSize="col-xs-12 padding-0-5"
+            imageAccessUploadCount="1"
+            :maximum="1"
+          />
+        </div>
         <p
           class="upload-error red-text col-xs-12"
           v-text="errors.idCardFile"
         ></p>
       </div>
     </section>
-
     <div class="col-xs-12 text-left action-button-wrapper">
       <button
-        class="green-button next"
+        class="orange-button next"
         :class="{
           disabled: idCardFile.length == 0 || errors.idCardFile || isCompressor,
         }"
@@ -258,7 +324,10 @@
         <span> مرحله بعد </span>
         <div class="button-icon-wrapper">
           <!-- v-if="isCompressor" -->
-          <i class="fa fa-arrow-left" :class="{ empty: isCompressor }"></i>
+          <i
+            class="fas fa-long-arrow-alt-left"
+            :class="{ empty: isCompressor }"
+          ></i>
           <div class="spinner-border" :class="{ empty: !isCompressor }">
             <span class="sr-only"></span>
           </div>
@@ -312,12 +381,11 @@ export default {
 
             if (files[i].size > 5242880) {
               errorsStatus = true;
-              this.errors.idCardFile =
-                "حجم تصویر بالا است، باید کمتر از 5 مگابایت باشد.";
+              this.errors.idCardFile = "حجم تصویر باید کمتر از 5 مگابایت باشد.";
             } else if (files[i].file.size < 20480) {
               errorsStatus = true;
               this.errors.idCardFile =
-                "حجم تصویر پایین است، باید بیشتر از 20 کیلوبایت باشد.";
+                "حجم تصویر باید بیشتر از 20 کیلوبایت باشد.";
             }
           }
         }

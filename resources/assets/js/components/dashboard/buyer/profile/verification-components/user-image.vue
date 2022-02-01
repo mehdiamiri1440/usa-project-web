@@ -279,7 +279,7 @@
         }"
         @click.prevent="nextStep"
       >
-        <span> مرحله بعد </span>
+        <span> ثبت نهایی </span>
         <div class="button-icon-wrapper">
           <!-- v-if="isCompressor" -->
           <i class="fa fa-arrow-left" :class="{ empty: isCompressor }"></i>

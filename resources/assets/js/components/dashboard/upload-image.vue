@@ -46,6 +46,7 @@
   opacity: 0;
   background: rgba(49, 58, 67, 0.85);
   transition: 300ms;
+  height: 100%;
 }
 
 .image {
@@ -331,10 +332,7 @@ button.close {
 }
 
 @media only screen and (max-width: 991px) {
-  .actions-content {
-    opacity: 1;
-    background: none;
-  }
+ 
 
   .modal.show .modal-dialog {
     margin: 40px 20px;
@@ -400,7 +398,7 @@ button.close {
                 class="delete"
                 href="#"
                 @click.prevent="$refs.upload.remove(file)"
-                ><i aria-hidden="true" class="fa fa-trash"></i
+                ><i aria-hidden="true" class="fas fa-trash-alt"></i
               ></a>
             </div>
           </div>
@@ -512,6 +510,7 @@ export default {
     "isImageReset",
     "imageAccessUploadCount",
     "maximum",
+    "articleImages",
   ],
   components: {
     FileUpload,

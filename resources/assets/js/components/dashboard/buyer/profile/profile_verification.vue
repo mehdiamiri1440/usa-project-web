@@ -1,11 +1,42 @@
-
+<style>
+.actions-content {
+  position: absolute;
+  left: 0;
+  top: 0;
+  text-align: center;
+  display: none;
+  right: 0;
+  opacity: 1;
+  background: rgba(49, 58, 67, 0.3);
+  transition: 300ms;
+  height: 100%;
+}
+.article-images:hover .actions-content {
+  display: block;
+}
+.actions-content a {
+  background-color: rgb(38, 70, 83, 0.5);
+  width: 30px;
+  height: 30px;
+  border: 1px solid #ffffff;
+  float: left;
+  margin: 8px;
+}
+@media screen and (max-width: 768px) {
+  .actions-content {
+    float: left;
+    opacity: 1!important;
+    display: block;
+  }
+}
+</style>
 <style scoped>
 /*main style*/
 
 .main-content {
-  max-width: 685px;
+  max-width: 850px;
   position: absolute;
-  left: calc(50% - 342px);
+  left: calc(50% - 425px);
   top: 65px;
   margin-bottom: 50px;
   height: 100%;
@@ -13,9 +44,10 @@
 }
 
 .main-content > div.wrapper-section {
-  border: 1px solid #dadce0;
-  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
   min-height: 400px;
+
 }
 
 .main-content > div.wrapper-section.success {
@@ -33,8 +65,23 @@
 }
 
 .main-content .section-title {
-  font-size: 18px;
+  font-size: 1.4rem;
+  font-weight: 400;
   margin-bottom: 20px;
+  color: #FF6600;
+}
+.main-content .section-title img {
+  width: 32px;
+  height: 42px;
+  position: absolute;
+}
+.main-content .section-title span {
+  margin: 0 36px;
+  top: 14px;
+  position: relative;
+}
+.main-content .section-title::after {
+  content: unset;
 }
 
 .main-content div.section-title p {
@@ -57,7 +104,9 @@
   font-weight: bold;
   text-align: right;
 }
-
+.header-section {
+  margin-top: 50px;
+}
 .header-section > h2 {
   font-weight: 600;
 }
@@ -66,7 +115,6 @@
 .wrapper-progressbar {
   position: relative;
   padding: 0;
-  top: -12px;
   overflow: hidden;
 }
 
@@ -90,9 +138,9 @@
   width: 20px;
   height: 20px;
   font-size: 13px;
-  background: #bebebe;
+  background: #979797;
   border-radius: 50px;
-  color: #fff;
+  color: #ffffff;
   display: inline-block;
   margin-bottom: 6px;
   padding-top: 4px;
@@ -101,24 +149,33 @@
 }
 
 .progrees-item span.line-item {
-  height: 1px;
+  height: 5px;
   font-size: 13px;
-  background: #dadce0;
+  background: #979797;
   display: block;
   position: absolute;
   width: 100%;
-  top: 11px;
+  top: 8px;
   left: 50%;
   z-index: 0;
 }
-
+.progrees-item.active-item span.wrapper-counter {
+  background-color: #ffffff;
+  color: #00c569;
+  padding-top: 3px;
+}
+.progrees-item.done-item span.wrapper-counter {
+  background-color: #00c569;
+  color: #ffffff;
+  padding-top: 3px;
+}
 .progrees-item.active-item {
   color: #333;
 }
 
 .progrees-item.active-item span,
 .progrees-item.active-item span.line-item {
-  background: #00c569;
+  border: 1px solid #00c569;
 }
 
 .custom-progressbar.active-item {
@@ -140,7 +197,9 @@
 }
 
 .main-section-wrapper {
-  padding: 0 15px;
+  display: grid;
+  margin-top: 26px;
+  padding: 0 80px;
 }
 
 .success-title,
@@ -277,13 +336,16 @@
   .icon-wrapper {
     padding-top: 12px;
   }
-
   .wrapper-section.success {
     margin-top: -20px;
+  }
+  .header-section {
+    margin-top: 10px;
   }
   .main-section-wrapper {
     max-width: initial;
     margin: 0px auto;
+    padding: 0 30px;
   }
 
   .main-content .section-title p {
@@ -293,8 +355,8 @@
   .main-content > div.wrapper-section {
     border: none;
     border-radius: 0;
+    box-shadow: unset;
   }
-
   .main-content {
     max-width: initial;
     background: #fff;
@@ -339,8 +401,11 @@
     v-if="!$parent.currentUser.user_info.is_verified"
   >
     <div class="row title-wrapper hidden-xs hidden-sm">
-      <div class="section-title" v-if="currentStep >= 0 && currentStep <= 2">
-        احراز هویت
+      <div class="section-title" v-if="currentStep >= 0 && currentStep <= 1">
+        <img src="../../../../../img/ic_twotone-tips-and-updates.svg" alt="" />
+        <span>
+          با احراز هویت، اعتماد خریداران و فروشندگان را به خود جلب کنید.</span
+        >
       </div>
       <div v-else>
         <br />
@@ -349,19 +414,24 @@
     <div
       class="row wrapper-section"
       :class="{
-        success: currentStep == 3,
+        success: currentStep == 2,
       }"
     >
       <div class="main-section">
         <header class="header-section">
           <div
-            v-if="currentStep >= 0 && currentStep <= 2"
+            v-if="currentStep >= 0 && currentStep <= 1"
             class="wrapper-progressbar"
           >
             <div class="progressbar-items">
-              <a class="progrees-item active-item">
+              <a
+                class="progrees-item"
+                :class="{
+                  'active-item': currentStep == 0,
+                  'done-item': currentStep == 1,
+                }"
+              >
                 <span class="wrapper-counter">1</span>
-                <p>کارت ملی</p>
               </a>
 
               <a
@@ -370,16 +440,6 @@
               >
                 <span class="line-item"></span>
                 <span class="wrapper-counter">2</span>
-                <p>تصویر شما</p>
-              </a>
-
-              <a
-                class="progrees-item"
-                :class="{ 'active-item': currentStep >= 2 }"
-              >
-                <span class="line-item"></span>
-                <span class="wrapper-counter">3</span>
-                <p>مدارک مرتبط</p>
               </a>
             </div>
           </div>

@@ -288,7 +288,13 @@
     .fa-user-friends:before {
         content: "\f500";
     }
- 
+    .fa-long-arrow-alt-left:before
+    {
+      content: "\f30a";
+    }
+    .fa-trash-alt:before {
+        content: "\f2ed";
+    }
  .sr-only {
      border: 0;
      clip: rect(0, 0, 0, 0);
