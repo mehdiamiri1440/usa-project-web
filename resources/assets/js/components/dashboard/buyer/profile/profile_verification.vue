@@ -1,4 +1,25 @@
 <style>
+.imageuploadify #custom-upload-image-icons i.fa-plus-circle {
+  color: #140092;
+  background: #ffffff;
+  border-radius: 50%;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  top: 14px;
+  right: -5px;
+  font-size: 1.6rem;
+  border: 1px solid #ffffff;
+}
+.imageuploadify #custom-upload-image-icons i.fa-camera {
+  color: #140092;
+}
+.imageuploadify .imageuploadify-images-list span.imageuploadify-message {
+  font-size: 1.2rem;
+  font-weight: 400;
+  padding-top: 11px;
+}
 .actions-content {
   position: absolute;
   left: 0;
@@ -7,10 +28,11 @@
   display: none;
   right: 0;
   opacity: 1;
-  background: rgba(49, 58, 67, 0.3);
+  background: rgba(49, 58, 67, 0.3)!important;
   transition: 300ms;
   height: 100%;
 }
+
 .article-images:hover .actions-content {
   display: block;
 }
@@ -21,12 +43,25 @@
   border: 1px solid #ffffff;
   float: left;
   margin: 8px;
+  padding-top: 5px;
+}
+.orange-button {
+  border-radius: 8px;
+  margin: 10px 5px 50px;
+  font-size: 1.4rem;
+  font-weight: 500;
+  padding: 6px 27px;
+  position: relative;
 }
 @media screen and (max-width: 768px) {
   .actions-content {
     float: left;
-    opacity: 1!important;
+    opacity: 1 !important;
     display: block;
+  }
+  .upload-error
+  {
+    font-size: 1.2rem;
   }
 }
 </style>
@@ -47,7 +82,6 @@
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
   border-radius: 4px;
   min-height: 400px;
-
 }
 
 .main-content > div.wrapper-section.success {
@@ -68,7 +102,7 @@
   font-size: 1.4rem;
   font-weight: 400;
   margin-bottom: 20px;
-  color: #FF6600;
+  color: #ff6600;
 }
 .main-content .section-title img {
   width: 32px;
@@ -176,6 +210,7 @@
 .progrees-item.active-item span,
 .progrees-item.active-item span.line-item {
   border: 1px solid #00c569;
+  background-color: #00c569;
 }
 
 .custom-progressbar.active-item {
@@ -448,8 +483,7 @@
         <main class="main-section-wrapper">
           <IdCard v-show="currentStep == 0" />
           <UserImage v-show="currentStep == 1" />
-          <DocumentImage v-show="currentStep == 2" />
-          <div v-show="currentStep == 3" class="success-step">
+          <div v-show="currentStep == 2" class="success-step">
             <div class="success-register">
               <div class="title-success">
                 <h2>اطلاعات شما با موفقیت برای کارشناسان باسکول ارسال شد!</h2>
@@ -552,11 +586,10 @@ export default {
 
       let data = new FormData();
 
-      data.append("images_count", 3);
+      data.append("images_count", 2);
 
       data.append("image_0", this.idCardImage.file);
       data.append("image_1", this.userImage.file);
-      data.append("image_2", this.documetImage.file);
 
       axios
         .post("/verify/upload-photos", data, {
@@ -574,7 +607,7 @@ export default {
           eventBus.$emit("submiting", false);
           eventBus.$emit("uploadPercentage", 0);
 
-          this.currentStep = 3;
+          this.currentStep = 2;
 
           // setTimeout(function () {
           //   window.location.href = "/buyer/profile";

@@ -295,6 +295,9 @@
     .fa-trash-alt:before {
         content: "\f2ed";
     }
+    .fa-plus-circle:before {
+        content: "\f055";
+    }
  .sr-only {
      border: 0;
      clip: rect(0, 0, 0, 0);

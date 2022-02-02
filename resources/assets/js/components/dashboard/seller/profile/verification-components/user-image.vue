@@ -234,7 +234,7 @@
         </div>
         <div class="image-file-wrapper">
           <img
-            src="../../../../../../img/verifi-user-image.jpg"
+            src="../../../../../../img/user-verification.svg"
             class="placeholder-content"
           />
         </div>

@@ -2,9 +2,12 @@
 <style >
 #verification-id-card .imageuploadify {
   height: 130px;
+  border: 2px dashed #699cff;
+  color: #140092;
+  background-color: #F0F3F5;
 }
 #verification-id-card .imageuploadify .imageuploadify-images-list {
-  padding: 39px 0 39px;
+  padding: 35px 0;
 }
 #verification-id-card.image-upload-wrapper {
   padding: 0;
@@ -13,8 +16,9 @@
 }
 #verification-id-card .article-images .image {
   border-radius: 12px;
+  width: 214px;
   height: 130px;
-}
+}/*
 @media screen and (max-width: 992px) {
   #verification-id-card .upload {
     padding: 0;
@@ -22,19 +26,26 @@
 }
 @media screen and (max-width: 768px) {
   #verification-id-card .upload {
-    height: 93px;
-    width: 150px;
+    height: 136px;
+    width: 214px;
     position: relative;
-    right: 18%;
+    right: 8%;
   }
   #verification-id-card .imageuploadify {
-    height: 93px;
+    height: 136px;
+    width: 214px;
   }
   #verification-id-card .imageuploadify .imageuploadify-images-list {
-    padding: 19px 0 19px;
+    padding: 18px 0;
   }
-  
+  .imageuploadify #custom-upload-image-icons i.fa-camera {
+    font-size: 2.4rem;
+  }
+  .imageuploadify #custom-upload-image-icons i.fa-plus-circle {
+  right: -4px;
+  font-size: 1.2rem;
 }
+}*/
 </style>
 <style scoped>
 #verification-id-card {
@@ -110,17 +121,8 @@
 }
 .upload-error {
   line-height: 1.618;
+  font-size: 1.2rem;
 }
-
-.orange-button {
-  border-radius: 8px;
-  margin: 10px 5px 50px;
-  font-size: 1.4rem;
-  font-weight: 500;
-  padding: 6px 27px;
-  position: relative;
-}
-
 .-button.next i {
   position: relative;
   top: 3px;
@@ -212,6 +214,7 @@
   }
   .main-title-wrapper {
     padding-top: 25px;
+    font-size: 1.4rem;
   }
   .orange-button {
     font-size: 1.4rem;
@@ -238,12 +241,15 @@
     padding: 0 5px;
   }
   .uploader-content {
-    height: 134px;
+    height: 136px;
     width: 224px;
-    margin: auto;
+    margin-right: 24px;
+  }
+  .wrapper-section .sample-card {
+    padding-right: 41px;
   }
   .wrapper-section .uploader-div {
-    padding-right: 30px;
+    padding-right: 41px;
   }
 }
 @media screen and (max-width: 500px) {
@@ -282,8 +288,8 @@
         </div>
       </div>
     </section>
-    <section class="wrapper-section uploader-div col-xs-12 col-md-6">
-      <div class="col-md-12">
+    <section class="wrapper-section col-xs-12 col-md-6">
+      <div class="col-md-12 uploader-div">
         <div class="main-title-wrapper">
           بارگذاری تصویر کارت ملی
           <span class="red-text">*</span>
@@ -406,6 +412,19 @@ export default {
   },
   mounted() {
     $('#verification-id-card input[type="file"]').imageuploadify();
+    this.$nextTick(() => {
+      let iconWrapper = $("#verification-id-card #custom-upload-image-icons");
+      let textWrapper = $("#verification-id-card .imageuploadify-message");
+
+      let cameraIcon = "<i class='fas fa-camera'></i>";
+      let plusIcon = "<i class='fas fa-plus-circle'></i>";
+      
+      iconWrapper.empty()
+      iconWrapper.append(cameraIcon);
+      iconWrapper.append(plusIcon);
+
+      textWrapper.html("عکس کارت ملی شما");
+    });
   },
   watch: {
     idCardFile: function (files) {
