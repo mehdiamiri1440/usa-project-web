@@ -234,7 +234,7 @@
         </div>
         <div class="image-file-wrapper">
           <img
-            src="../../../../../../img/user-verification.svg"
+            src="../../../../../../img/user-verification.jpg"
             class="placeholder-content"
           />
         </div>
@@ -319,13 +319,13 @@ export default {
     nextStep() {
       this.checkImageErrors();
       if (!this.isCompressor && !this.errors.userImageFile) {
-        this.$parent.currentStep = 2;
+         this.imageValidator(files);
       }
     },
     backStep() {
       this.$parent.currentStep--;
     },
-    imageValidator(files) {
+   imageValidator(files) {
       var errorsStatus = false;
 
       if (files.length) {
@@ -341,23 +341,23 @@ export default {
               files[i].type == "application/x-gzip"
             ) {
               errorsStatus = true;
-              this.errors.userImageFile = "تصویر باید فرمت معتبری باشند.";
+              this.errors.documentImageFile = "تصویر باید فرمت معتبری باشند.";
             }
 
             if (files[i].size > 5242880) {
               errorsStatus = true;
-              this.errors.userImageFile =
+              this.errors.documentImageFile =
                 "حجم تصویر بالا است، باید کمتر از 5 مگابایت باشد.";
             } else if (files[i].file.size < 20480) {
               errorsStatus = true;
-              this.errors.userImageFile =
+              this.errors.documentImageFile =
                 "حجم تصویر پایین است، باید بیشتر از 20 کیلوبایت باشد.";
             }
           }
         }
         if (!errorsStatus) {
-          this.errors.userImageFile = "";
-          this.$parent.userImage = this.userImageFile[0];
+          this.errors.documentImageFile = "";
+          this.$parent.documetImage = this.documentImageFile[0];
         }
       }
     },

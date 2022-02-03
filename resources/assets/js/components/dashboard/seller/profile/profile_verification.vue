@@ -1,11 +1,87 @@
+<style>
+.imageuploadify {
+  border-radius: 8px;
+}
+.imageuploadify #custom-upload-image-icons i.fa-plus-circle {
+  color: #140092;
+  background: #ffffff;
+  border-radius: 50%;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  top: 14px;
+  right: -5px;
+  font-size: 1.6rem;
+  border: 1px solid #ffffff;
+}
+.imageuploadify #custom-upload-image-icons i.fa-camera {
+  color: #140092;
+}
+.imageuploadify .imageuploadify-images-list span.imageuploadify-message {
+  font-size: 1.2rem;
+  font-weight: 400;
+  padding-top: 11px;
+}
+.actions-content {
+  position: absolute;
+  left: 0;
+  top: 0;
+  text-align: center;
+  display: none;
+  right: 0;
+  opacity: 1;
+  background: rgba(49, 58, 67, 0.3) !important;
+  transition: 300ms;
+  height: 100%;
+}
 
+.article-images:hover .actions-content {
+  display: block;
+}
+.actions-content a {
+  background-color: rgb(38, 70, 83, 0.5);
+  width: 30px;
+  height: 30px;
+  border: 1px solid #ffffff;
+  float: left;
+  margin: 8px;
+  padding-top: 5px;
+}
+.action-button-wrapper {
+  width: 80%;
+  margin: auto;
+}
+.orange-button {
+  border-radius: 8px;
+  margin: 10px 5px 50px;
+  font-size: 1.4rem;
+  font-weight: 500;
+  padding: 6px 27px;
+  position: relative;
+}
+.actions-content .delete {
+  float: left;
+}
+@media screen and (max-width: 768px) {
+  .actions-content {
+    float: left;
+    opacity: 1 !important;
+    display: block;
+  }
+
+  .upload-error {
+    font-size: 1.2rem;
+  }
+}
+</style>
 <style scoped>
 /*main style*/
 
 .main-content {
-  max-width: 685px;
+  max-width: 850px;
   position: absolute;
-  left: calc(50% - 342px);
+  left: calc(50% - 425px);
   top: 65px;
   margin-bottom: 50px;
   height: 100%;
@@ -13,12 +89,12 @@
 }
 
 .main-content > div.wrapper-section {
-  border: 1px solid #dadce0;
-  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
   min-height: 400px;
 }
 
-.main-content > div.wrapper-section.success {
+.main-content .wrapper-section.success {
   border: none;
 }
 
@@ -31,10 +107,27 @@
   border-radius: 4px;
   min-height: initial;
 }
-
+.title-wrapper {
+  height: 50px;
+}
 .main-content .section-title {
-  font-size: 18px;
+  font-size: 1.4rem;
+  font-weight: 400;
   margin-bottom: 20px;
+  color: #ff6600;
+}
+.main-content .section-title img {
+  width: 32px;
+  height: 42px;
+  position: absolute;
+}
+.main-content .section-title span {
+  margin: 0 36px;
+  top: 14px;
+  position: relative;
+}
+.main-content .section-title::after {
+  content: unset;
 }
 
 .main-content div.section-title p {
@@ -57,7 +150,9 @@
   font-weight: bold;
   text-align: right;
 }
-
+.header-section {
+  margin-top: 50px;
+}
 .header-section > h2 {
   font-weight: 600;
 }
@@ -66,7 +161,6 @@
 .wrapper-progressbar {
   position: relative;
   padding: 0;
-  top: -12px;
   overflow: hidden;
 }
 
@@ -90,9 +184,9 @@
   width: 20px;
   height: 20px;
   font-size: 13px;
-  background: #bebebe;
+  background: #979797;
   border-radius: 50px;
-  color: #fff;
+  color: #ffffff;
   display: inline-block;
   margin-bottom: 6px;
   padding-top: 4px;
@@ -101,24 +195,34 @@
 }
 
 .progrees-item span.line-item {
-  height: 1px;
+  height: 5px;
   font-size: 13px;
-  background: #dadce0;
+  background: #979797;
   display: block;
   position: absolute;
   width: 100%;
-  top: 11px;
+  top: 8px;
   left: 50%;
   z-index: 0;
 }
-
+.progrees-item.active-item span.wrapper-counter {
+  background-color: #ffffff;
+  color: #00c569;
+  padding-top: 3px;
+}
+.progrees-item.done-item span.wrapper-counter {
+  background-color: #00c569;
+  color: #ffffff;
+  padding-top: 3px;
+}
 .progrees-item.active-item {
   color: #333;
 }
 
 .progrees-item.active-item span,
 .progrees-item.active-item span.line-item {
-  background: #00c569;
+  border: 1px solid #00c569;
+  background-color: #00c569;
 }
 
 .custom-progressbar.active-item {
@@ -140,7 +244,9 @@
 }
 
 .main-section-wrapper {
-  padding: 0 5px;
+  display: grid;
+  margin-top: 26px;
+  padding: 0 60px;
 }
 
 .success-title,
@@ -160,11 +266,21 @@
   text-align: center;
   margin-top: 25px;
 }
-
+.default-btn-with-icon {
+  max-width: 541px;
+}
+.button-content-wrapper .button-title {
+  font-size: 1.6rem;
+}
+.button-content-wrapper .button-text {
+  font-size: 1.4rem;
+  font-weight: 300;
+}
 .main-button-wrapper button {
   font-size: 18px;
   border-radius: 12px;
   padding: 13px 30px;
+  margin-bottom: 50px;
 }
 
 .main-button-wrapper button i {
@@ -199,16 +315,18 @@
 .success-register {
   background: linear-gradient(
     270deg,
-    rgba(1, 173, 101, 0.5) 0%,
-    rgba(122, 245, 188, 0.5) 100%
+    rgba(1, 173, 93, 0.7) 0%,
+    rgba(122, 245, 188, 0.7) 100%
   );
   border-radius: 8px;
   margin-top: 20px;
-  padding: 20px 15px 15px;
+  padding: 20px 15px 10px;
   color: rgb(38, 70, 83);
   text-align: center;
   overflow: hidden;
   position: relative;
+  width: 622px;
+  margin: auto;
 }
 
 .success-register::after,
@@ -231,27 +349,36 @@
 }
 
 .title-success {
-  float: left;
+  float: right;
   width: calc(100% - 36px);
 }
 .icon-wrapper {
+  width: 45px;
+  height: 40px;
   float: right;
-  padding-top: 6px;
+  margin-top: -5px;
+  margin-right: 5px;
+  margin-left: -38px;
+}
+.icon-wrapper svg {
+  width: 45px;
+  height: 40px;
 }
 
 .success-register h2 {
-  font-size: 14px;
-  margin-bottom: 10px;
+  font-size: 1.6rem;
+  margin-bottom: 25px;
   font-weight: 500;
   position: relative;
   z-index: 1;
   line-height: 1.6;
+  color: #264653;
 }
 
 .success-register p {
-  font-size: 12px;
+  font-size: 1.4rem;
   font-weight: 300;
-  color: rgba(38, 70, 83, 0.8);
+  color: #264653;
 }
 
 .actions-wrapper {
@@ -262,30 +389,83 @@
 .actions-wrapper > div {
   padding: 0px;
 }
+@media screen and (max-width: 1105px) {
+  .main-section-wrapper {
+    padding: 0;
+  }
+  .main-content > div.wrapper-section {
+    box-shadow: unset;
+  }
+  .main-content {
+    left: 0;
+  }
+}
 @media screen and (max-width: 991px) {
-.title-wrapper {
+  .main-section-content {
+    margin: auto;
+  }
+  .header-section {
+    margin-top: 0;
+  }
+  .main-section-wrapper {
+    overflow: hidden;
+    padding: 0;
+  }
+  .title-wrapper {
     display: none;
+  }
+  .main-content .section-title {
+    width: 90%;
+    margin: auto;
+  }
+  .main-content {
+    left: calc(50% - 425px);
+  }
+}
+@media screen and (max-width: 768px) {
+  .main-content {
+    left: 0;
   }
 }
 @media screen and (max-width: 767px) {
   .wrapper-section.success {
-    margin-top: -33px;
+    margin-top: -20px;
   }
-
+  .success-register {
+    width: 326px;
+  }
+  .icon-wrapper {
+    width: 36px;
+    height: 32px;
+    float: right;
+    margin-top: -5px;
+    margin-right: 0;
+    margin-left: 10px;
+  }
+  .success-register h2 {
+    margin-bottom: 5px;
+  }
+  .header-section {
+    margin-top: 10px;
+  }
   .main-section-wrapper {
     max-width: initial;
     margin: 0px auto;
+    padding: 0;
   }
 
   .main-content .section-title p {
     line-height: 1.618;
   }
-
+  .icon-wrapper svg {
+    width: 36px;
+    height: 32px;
+  }
   .main-content > div.wrapper-section {
     border: none;
     border-radius: 0;
+    box-shadow: unset;
   }
-
   .main-content {
     max-width: initial;
     background: #fff;
@@ -296,7 +476,6 @@
     top: 0;
     padding-top: 20px;
     width: 100%;
-    left: 0;
   }
 
   .active-progress-wrapper {
@@ -304,14 +483,12 @@
     max-width: initial;
   }
 
-  .success-register {
-    margin-top: -20px;
-  }
-
   .success-register p {
     line-height: 1.618;
   }
-
+  .title-success {
+    width: 100%;
+  }
   .success-register h2 i {
     display: block;
     margin: 0 auto 20px;
@@ -334,8 +511,11 @@
     v-if="!$parent.currentUser.user_info.is_verified"
   >
     <div class="row title-wrapper">
-      <div class="section-title" v-if="currentStep >= 0 && currentStep <= 2">
-        احراز هویت
+      <div class="section-title" v-if="currentStep >= 0 && currentStep <= 1">
+        <img src="../../../../../img/ic_twotone-tips-and-updates.svg" alt="" />
+        <span>
+          با احراز هویت، اعتماد خریداران و فروشندگان را به خود جلب کنید.</span
+        >
       </div>
       <div v-else>
         <br />
@@ -344,13 +524,13 @@
     <div
       class="row wrapper-section"
       :class="{
-        success: currentStep == 3,
+        success: currentStep == 1,
       }"
     >
       <div class="main-section">
         <header class="header-section">
           <div
-            v-if="currentStep >= 0 && currentStep <= 2"
+            v-if="currentStep >= 0 && currentStep <= 1"
             class="wrapper-progressbar"
           >
             <div class="progressbar-items">
@@ -367,15 +547,6 @@
                 <span class="wrapper-counter">2</span>
                 <p>تصویر شما</p>
               </a>
-
-              <a
-                class="progrees-item"
-                :class="{ 'active-item': currentStep >= 2 }"
-              >
-                <span class="line-item"></span>
-                <span class="wrapper-counter">3</span>
-                <p>مدارک مرتبط</p>
-              </a>
             </div>
           </div>
         </header>
@@ -383,31 +554,30 @@
         <main class="main-section-wrapper">
           <IdCard v-show="currentStep == 0" />
           <UserImage v-show="currentStep == 1" />
-          <DocumentImage v-show="currentStep == 2" />
-          <div v-show="currentStep == 3" class="success-step">
+          <div v-show="currentStep == 2" class="success-step">
             <div class="success-register">
               <div class="title-success">
+                <div class="icon-wrapper">
+                  <svg
+                    width="36"
+                    height="32"
+                    viewBox="0 0 36 32"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <circle cx="20" cy="16" r="16" fill="white" />
+                    <circle cx="20" cy="16" r="16" fill="white" />
+                    <circle cx="20" cy="16" r="16" fill="white" />
+                    <circle cx="20" cy="16" r="16" fill="white" />
+                    <circle cx="16" cy="16" r="15.5" stroke="black" />
+                    <path
+                      d="M9.77771 16.0001L15.111 20.4446L22.2222 11.5557"
+                      stroke="black"
+                    />
+                  </svg>
+                </div>
                 <h2>اطلاعات شما با موفقیت برای کارشناسان باسکول ارسال شد!</h2>
                 <p>پس از تایید کارشناسان حساب شما احراز هویت خواهد شد.</p>
-              </div>
-              <div class="icon-wrapper">
-                <svg
-                  width="36"
-                  height="32"
-                  viewBox="0 0 36 32"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <circle cx="20" cy="16" r="16" fill="white" />
-                  <circle cx="20" cy="16" r="16" fill="white" />
-                  <circle cx="20" cy="16" r="16" fill="white" />
-                  <circle cx="20" cy="16" r="16" fill="white" />
-                  <circle cx="16" cy="16" r="15.5" stroke="black" />
-                  <path
-                    d="M9.77771 16.0001L15.111 20.4446L22.2222 11.5557"
-                    stroke="black"
-                  />
-                </svg>
               </div>
             </div>
             <div class="actions-wrapper">
@@ -490,15 +660,13 @@
 
 <script>
 import { eventBus } from "../../../../router/router";
-import IdCard from "./verification-components/id-card";
-import UserImage from "./verification-components/user-image";
-import DocumentImage from "./verification-components/document-image";
+import IdCard from "../../buyer/profile/verification-components/id-card";
+import UserImage from "../../buyer/profile/verification-components/user-image";
 
 export default {
   components: {
     IdCard,
     UserImage,
-    DocumentImage,
   },
   data: function () {
     return {
@@ -514,11 +682,10 @@ export default {
 
       let data = new FormData();
 
-      data.append("images_count", 3);
+      data.append("images_count", 2);
 
       data.append("image_0", this.idCardImage.file);
       data.append("image_1", this.userImage.file);
-      data.append("image_2", this.documetImage.file);
 
       axios
         .post("/verify/upload-photos", data, {
@@ -536,7 +703,7 @@ export default {
           eventBus.$emit("submiting", false);
           eventBus.$emit("uploadPercentage", 0);
 
-          this.currentStep = 3;
+          this.currentStep = 2;
 
           // setTimeout(function () {
           //   window.location.href = "/buyer/profile";

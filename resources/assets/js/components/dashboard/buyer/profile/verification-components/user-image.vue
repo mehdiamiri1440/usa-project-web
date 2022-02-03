@@ -30,6 +30,15 @@
 #verification-user-image .article-images {
   width: 167px;
 }
+#verification-user-image .wrapper-articles {
+  margin-top: 6px;
+  padding-right: 25px;
+}
+@media (max-width: 991px) {
+  #verification-user-image .wrapper-articles {
+    padding-right: 0;
+  }
+}
 @media (max-width: 768px) {
   .wrapper-articles {
     display: grid;
@@ -46,11 +55,10 @@
     height: 93px;
   }
   #verification-user-image .imageuploadify .imageuploadify-images-list {
-    padding: 20px 0;
+    padding: 16px 0;
   }
 }
-@media (max-width: 500px) {
-}
+
 </style>
 <style scoped>
 #verification-user-image {
@@ -61,9 +69,10 @@
   margin: auto;
 }
 .ul-description-section li {
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   line-height: 20px;
   margin: 10px 0;
+  color: #000000;
 }
 .title {
   padding: 13px 0;
@@ -85,18 +94,18 @@
   height: 237px;
   border: 1px solid #00c569;
 }
-.wrapper-section .sample-card {
-  padding-left: 80px;
-}
+
 .wrapper-section .sample-card .sample-card-img {
-  padding: 0px 30px 0 35px;
+  width: 190px;
+  margin: auto;
 }
 .wrapper-section .uploader-div {
   padding-right: 50px;
+  float: right;
 }
 .image-file-wrapper::before {
   content: "";
-  width: 200px;
+  width: 220px;
   height: 78px;
   position: absolute;
   z-index: 0;
@@ -105,7 +114,7 @@
 .image-file-wrapper::after {
   content: "";
   width: 135px;
-  height: 245px;
+  height: 255px;
   position: absolute;
   z-index: 0;
   background-color: #ffffff;
@@ -118,12 +127,21 @@
   position: relative;
   z-index: 2;
 }
-
+.id-card-content {
+  padding-right: 30px;
+}
 .main-title-wrapper {
+  width: 350px;
   padding-top: 15px;
   padding-bottom: 10px;
   font-size: 15px;
   line-height: 1.618;
+  color: rgb(0, 0, 0, 0.6);
+  text-align: center;
+}
+.main-title-wrapper.upload-title {
+  widows: 100%;
+  text-align: right;
 }
 .upload-error {
   line-height: 1.618;
@@ -179,7 +197,7 @@
 }
 
 .title-section {
-  width: 70%;
+  width: 66%;
   margin: 25px auto 15px;
   font-size: 1.6rem;
   color: #140092;
@@ -209,43 +227,76 @@
   padding: 0;
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 991px) {
   .image-file-wrapper,
   #verification-user-image {
-    max-width: 300px;
+    max-width: 167px;
     margin: 0 auto;
   }
-
+  .image-file-wrapper {
+    max-width: 190px;
+    height: 237px;
+  }
+  .wrapper-section .sample-card {
+    padding-right: 50px;
+  }
+  .id-card-content {
+    padding-right: 0;
+  }
   .upload-error {
     text-align: center;
   }
   .action-button-wrapper {
     margin-bottom: 80px;
   }
+  .main-title-wrapper {
+    width: auto;
+  }
+  .orange-button {
+    padding: 5px 0;
+  }
+  .orange-button.next {
+    width: 93px;
+  }
+  .orange-button.next i {
+    position: relative;
+    top: 3px;
+    margin-right: 0;
+  }
+  .orange-button.back {
+    padding: 5px 0;
+    width: 93px;
+  }
+  .orange-button.back i {
+    position: relative;
+    top: 3px;
+  }
 }
 
 @media screen and (max-width: 768px) {
-  .image-file-wrapper {
-    max-width: 190px;
-    height: 237px;
-  }
   .main-title-wrapper {
     padding-top: 25px;
   }
   .ul-description-section {
-    width: 100%;
+    width: 90%;
   }
   .ul-description-section li {
-    font-size: 1.4rem;
-    line-height: 30px;
+    font-size: 1.6rem;
   }
   .title-section {
-    width: 100%;
+    width: 90%;
     font-size: 1.4rem;
   }
-
+  .verification-user-image {
+    width: 90%;
+    margin: auto;
+    display: grid;
+  }
   .wrapper-section .uploader-div {
     padding-right: 0;
+    width: 90%;
+    margin: auto;
+    float: none;
   }
   .wrapper-section > div {
     padding: 0;
@@ -253,21 +304,17 @@
 
   .wrapper-section .sample-card {
     padding-left: 0;
+    padding-right: 0;
   }
-  .orange-button.next {
-    max-width: 93px;
-  }
+
   .title-section,
   .action-button-wrapper {
     padding: 0 5px;
   }
-  .orange-button {
-    padding:6px 7px;
-  }
-  .orange-button.next i {
-    position: relative;
-    top: 3px;
-    margin-right: 0;
+}
+@media (max-width: 767px) {
+.main-title-wrapper {
+    text-align: right;
   }
 }
 @media (max-width: 500px) {
@@ -281,11 +328,17 @@
   .title-section {
     margin-bottom: 10px;
   }
+  .wrapper-section {
+    padding-right: 18px;
+  }
 }
 @media screen and (max-width: 360px) {
   .title-section {
     font-size: 1.5rem;
     font-weight: 500;
+  }
+  .action-button-wrapper {
+    width: 90%;
   }
 }
 </style>
@@ -305,78 +358,82 @@
       "اینجانب.........کارت ملی خود را جهت احراز هویت در بازار باسکول ارسال می
       نمایم."
     </div>
-    <section class="wrapper-section verification-user-image">
-      <div class="col-xs-12 col-md-6 sample-card pull-right">
-        <div class="main-title-wrapper">نمونه تصویر گواهی احراز هویت</div>
-        <div class="sample-card-img">
-          <div class="image-file-wrapper">
-            <imagePreloader
-              :src="'../../../../../../img/user-verification.svg'"
-            />
-            <a href="../../../../../../img/user-verification.svg">
-              <img
-                src="../../../../../../img/user-verification.svg"
-                class="placeholder-content"
-              />
-            </a>
+    <div class="row id-card-content">
+      <section class="wrapper-section verification-user-image">
+        <div class="col-xs-12 col-md-6 sample-card pull-right">
+          <div class="main-title-wrapper">نمونه تصویر گواهی احراز هویت</div>
+          <div class="sample-card-img">
+            <div class="image-file-wrapper">
+             
+             
+                <img
+                  src="../../../../../../img/user-verification.jpg"
+                  class="placeholder-content"
+                />
+              
+            </div>
           </div>
         </div>
-      </div>
-    </section>
-    <section class="wrapper-section">
-      <div class="col-xs-12 col-md-6 uploader-div pull-right">
-        <div class="main-title-wrapper">
-          بارگذاری تصویر گواهی احراز هویت
-          <span class="red-text">*</span>
-        </div>
-
-        <UploadFile
-          id="verification-user-image"
-          uploadName="userImageFile"
-          uploadAccept="image/*"
-          :uploadMinSize="1024"
-          :uploadSize="1024 * 1024 * 10"
-          :uploadMultiple="true"
-          :uploadDrop="true"
-          :uploadDropDirectory="true"
-          :uploadAddIndex="false"
-          :uploadThread="2"
-          :uploadOCompress="1024 * 1024"
-          :uploadUploadAuto="false"
-          imageWrapperSize="col-xs-12"
-          imageAccessUploadCount="1"
-          :maximum="1"
-        />
-        <p
-          class="upload-error red-text col-xs-12"
-          v-text="errors.userImageFile"
-        ></p>
-      </div>
-    </section>
-
-    <div class="col-xs-12 text-left action-button-wrapper">
-      <button
-        class="orange-button next"
-        :class="{
-          disabled:
-            userImageFile.length == 0 || errors.userImageFile || isCompressor,
-        }"
-        @click.prevent="nextStep"
-      >
-        <span> ثبت نهایی </span>
-        <div class="button-icon-wrapper">
-          <!-- v-if="isCompressor" -->
-          <i class="fa fa-check" :class="{ empty: isCompressor }"></i>
-          <div class="spinner-border" :class="{ empty: !isCompressor }">
-            <span class="sr-only"></span>
+      </section>
+      <section class="wrapper-section">
+        <div class="col-xs-12 col-md-6 uploader-div">
+          <div class="main-title-wrapper upload-title">
+            بارگذاری تصویر گواهی احراز هویت
+            <span class="red-text">*</span>
           </div>
-        </div>
-      </button>
 
-      <button class="orange-button back" @click.prevent="backStep()">
-        <i class="fa fa-arrow-right"></i>
-        <span> مرحله قبل </span>
-      </button>
+          <UploadFile
+            id="verification-user-image"
+            uploadName="userImageFile"
+            uploadAccept="image/*"
+            :uploadMinSize="1024"
+            :uploadSize="1024 * 1024 * 10"
+            :uploadMultiple="true"
+            :uploadDrop="true"
+            :uploadDropDirectory="true"
+            :uploadAddIndex="false"
+            :uploadThread="2"
+            :uploadOCompress="1024 * 1024"
+            :uploadUploadAuto="false"
+            imageWrapperSize="col-xs-12"
+            imageAccessUploadCount="1"
+            :maximum="1"
+          />
+          <p
+            class="upload-error red-text col-xs-12"
+            v-text="errors.userImageFile"
+          ></p>
+        </div>
+      </section>
+
+      <div class="col-xs-12 text-left">
+        <div class="action-button-wrapper">
+          <button
+            class="orange-button next"
+            :class="{
+              disabled:
+                userImageFile.length == 0 ||
+                errors.userImageFile ||
+                isCompressor,
+            }"
+            @click.prevent="nextStep"
+          >
+            <span> ثبت نهایی </span>
+            <div class="button-icon-wrapper">
+              <!-- v-if="isCompressor" -->
+              <i class="fa fa-check" :class="{ empty: isCompressor }"></i>
+              <div class="spinner-border" :class="{ empty: !isCompressor }">
+                <span class="sr-only"></span>
+              </div>
+            </div>
+          </button>
+
+          <button class="orange-button back" @click.prevent="backStep()">
+            <i class="fa fa-arrow-right"></i>
+            <span> مرحله قبل </span>
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </template>

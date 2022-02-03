@@ -1,4 +1,7 @@
 <style>
+.imageuploadify {
+  border-radius: 8px;
+}
 .imageuploadify #custom-upload-image-icons i.fa-plus-circle {
   color: #140092;
   background: #ffffff;
@@ -28,7 +31,7 @@
   display: none;
   right: 0;
   opacity: 1;
-  background: rgba(49, 58, 67, 0.3)!important;
+  background: rgba(49, 58, 67, 0.3) !important;
   transition: 300ms;
   height: 100%;
 }
@@ -45,6 +48,10 @@
   margin: 8px;
   padding-top: 5px;
 }
+.action-button-wrapper {
+  width: 80%;
+  margin: auto;
+}
 .orange-button {
   border-radius: 8px;
   margin: 10px 5px 50px;
@@ -53,14 +60,17 @@
   padding: 6px 27px;
   position: relative;
 }
+.actions-content .delete {
+  float: left;
+}
 @media screen and (max-width: 768px) {
   .actions-content {
     float: left;
     opacity: 1 !important;
     display: block;
   }
-  .upload-error
-  {
+
+  .upload-error {
     font-size: 1.2rem;
   }
 }
@@ -84,7 +94,7 @@
   min-height: 400px;
 }
 
-.main-content > div.wrapper-section.success {
+.main-content .wrapper-section.success {
   border: none;
 }
 
@@ -97,7 +107,9 @@
   border-radius: 4px;
   min-height: initial;
 }
-
+.title-wrapper {
+  height: 50px;
+}
 .main-content .section-title {
   font-size: 1.4rem;
   font-weight: 400;
@@ -234,7 +246,7 @@
 .main-section-wrapper {
   display: grid;
   margin-top: 26px;
-  padding: 0 80px;
+  padding: 0 60px;
 }
 
 .success-title,
@@ -254,7 +266,16 @@
   text-align: center;
   margin-top: 25px;
 }
-
+.default-btn-with-icon {
+  max-width: 541px;
+}
+.button-content-wrapper .button-title {
+  font-size: 1.6rem;
+}
+.button-content-wrapper .button-text {
+  font-size: 1.4rem;
+  font-weight: 300;
+}
 .main-button-wrapper button {
   font-size: 18px;
   border-radius: 12px;
@@ -294,16 +315,18 @@
 .success-register {
   background: linear-gradient(
     270deg,
-    rgba(1, 173, 101, 0.5) 0%,
-    rgba(122, 245, 188, 0.5) 100%
+    rgba(1, 173, 93, 0.7) 0%,
+    rgba(122, 245, 188, 0.7) 100%
   );
   border-radius: 8px;
   margin-top: 20px;
-  padding: 20px 15px 15px;
+  padding: 20px 15px 10px;
   color: rgb(38, 70, 83);
   text-align: center;
   overflow: hidden;
   position: relative;
+  width: 622px;
+  margin: auto;
 }
 
 .success-register::after,
@@ -326,27 +349,36 @@
 }
 
 .title-success {
-  float: left;
+  float: right;
   width: calc(100% - 36px);
 }
 .icon-wrapper {
+  width: 45px;
+  height: 40px;
   float: right;
-  padding-top: 6px;
+  margin-top: -5px;
+  margin-right: 5px;
+  margin-left: -38px;
+}
+.icon-wrapper svg {
+  width: 45px;
+  height: 40px;
 }
 
 .success-register h2 {
-  font-size: 14px;
-  margin-bottom: 10px;
+  font-size: 1.6rem;
+  margin-bottom: 25px;
   font-weight: 500;
   position: relative;
   z-index: 1;
   line-height: 1.6;
+  color: #264653;
 }
 
 .success-register p {
-  font-size: 12px;
+  font-size: 1.4rem;
   font-weight: 300;
-  color: rgba(38, 70, 83, 0.8);
+  color: #264653;
 }
 
 .actions-wrapper {
@@ -357,22 +389,61 @@
 .actions-wrapper > div {
   padding: 0px;
 }
-
+@media screen and (max-width: 1105px) {
+  .main-section-wrapper {
+    padding: 0;
+  }
+  .main-content > div.wrapper-section {
+    box-shadow: unset;
+  }
+  .main-content {
+    left: 0;
+  }
+}
 @media screen and (max-width: 991px) {
+  .main-section-content {
+    margin: auto;
+  }
+  .header-section {
+    margin-top: 0;
+  }
   .main-section-wrapper {
     overflow: hidden;
+    padding: 0;
   }
   .title-wrapper {
     display: none;
   }
-}
-
-@media screen and (max-width: 767px) {
-  .icon-wrapper {
-    padding-top: 12px;
+  .main-content .section-title {
+    width: 90%;
+    margin: auto;
   }
+  .main-content {
+    left: calc(50% - 425px);
+  }
+}
+@media screen and (max-width: 768px) {
+  .main-content {
+    left: 0;
+  }
+}
+@media screen and (max-width: 767px) {
   .wrapper-section.success {
     margin-top: -20px;
+  }
+  .success-register {
+    width: 326px;
+  }
+  .icon-wrapper {
+    width: 36px;
+    height: 32px;
+    float: right;
+    margin-top: -5px;
+    margin-right: 0;
+    margin-left: 10px;
+  }
+  .success-register h2 {
+    margin-bottom: 5px;
   }
   .header-section {
     margin-top: 10px;
@@ -380,13 +451,16 @@
   .main-section-wrapper {
     max-width: initial;
     margin: 0px auto;
-    padding: 0 30px;
+    padding: 0;
   }
 
   .main-content .section-title p {
     line-height: 1.618;
   }
-
+  .icon-wrapper svg {
+    width: 36px;
+    height: 32px;
+  }
   .main-content > div.wrapper-section {
     border: none;
     border-radius: 0;
@@ -402,7 +476,6 @@
     top: 0;
     padding-top: 20px;
     width: 100%;
-    left: 0;
   }
 
   .active-progress-wrapper {
@@ -413,7 +486,9 @@
   .success-register p {
     line-height: 1.618;
   }
-
+  .title-success {
+    width: 100%;
+  }
   .success-register h2 i {
     display: block;
     margin: 0 auto 20px;
@@ -481,60 +556,62 @@
         </header>
 
         <main class="main-section-wrapper">
-          <IdCard v-show="currentStep == 0" />
-          <UserImage v-show="currentStep == 1" />
-          <div v-show="currentStep == 2" class="success-step">
-            <div class="success-register">
-              <div class="title-success">
-                <h2>اطلاعات شما با موفقیت برای کارشناسان باسکول ارسال شد!</h2>
-                <p>پس از تایید کارشناسان حساب شما احراز هویت خواهد شد.</p>
-              </div>
-              <div class="icon-wrapper">
-                <svg
-                  width="36"
-                  height="32"
-                  viewBox="0 0 36 32"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <circle cx="20" cy="16" r="16" fill="white" />
-                  <circle cx="20" cy="16" r="16" fill="white" />
-                  <circle cx="20" cy="16" r="16" fill="white" />
-                  <circle cx="20" cy="16" r="16" fill="white" />
-                  <circle cx="16" cy="16" r="15.5" stroke="black" />
-                  <path
-                    d="M9.77771 16.0001L15.111 20.4446L22.2222 11.5557"
-                    stroke="black"
-                  />
-                </svg>
-              </div>
-            </div>
-            <div class="actions-wrapper">
-              <div class="col-xs-12">
-                <button
-                  @click.prevent="routeToPage('specialProducts')"
-                  class="default-btn-with-icon"
-                >
-                  <div class="button-main-icon-wrapper">
+          <div class="main-section-content">
+            <IdCard v-show="currentStep == 0" />
+            <UserImage v-show="currentStep == 1" />
+            <div v-show="currentStep == 2" class="success-step">
+              <div class="success-register">
+                <div class="title-success">
+                  <div class="icon-wrapper">
                     <svg
-                      width="20"
-                      height="24"
-                      viewBox="0 0 20 24"
+                      width="36"
+                      height="32"
+                      viewBox="0 0 36 32"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
                     >
+                      <circle cx="20" cy="16" r="16" fill="white" />
+                      <circle cx="20" cy="16" r="16" fill="white" />
+                      <circle cx="20" cy="16" r="16" fill="white" />
+                      <circle cx="20" cy="16" r="16" fill="white" />
+                      <circle cx="16" cy="16" r="15.5" stroke="black" />
                       <path
-                        d="M10 23.27L0.25 16.27L2.005 15.01L9.98917 20.74L17.9842 15.001L19.75 16.27L10 23.27ZM10 19L0.25 12L2.005 10.74L9.98917 16.47L17.9842 10.73L19.75 12L10 19ZM10 14.73L2.01583 8.99998L0.25 7.72998L10 0.72998L19.75 7.72998L17.9733 8.99998L10 14.73Z"
-                        fill="white"
+                        d="M9.77771 16.0001L15.111 20.4446L22.2222 11.5557"
+                        stroke="black"
                       />
                     </svg>
                   </div>
-                  <div class="button-content-wrapper">
-                    <p class="button-title">محصولات پیشنهادی</p>
-                    <p class="button-text">مشاهده لیست محصولات فروش</p>
-                  </div>
-                  <i class="fa fa-angle-left"></i>
-                </button>
+                  <h2>اطلاعات شما با موفقیت برای کارشناسان باسکول ارسال شد!</h2>
+                  <p>پس از تایید کارشناسان حساب شما احراز هویت خواهد شد.</p>
+                </div>
+              </div>
+              <div class="actions-wrapper">
+                <div class="col-xs-12">
+                  <button
+                    @click.prevent="routeToPage('specialProducts')"
+                    class="default-btn-with-icon"
+                  >
+                    <div class="button-main-icon-wrapper">
+                      <svg
+                        width="20"
+                        height="24"
+                        viewBox="0 0 20 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M10 23.27L0.25 16.27L2.005 15.01L9.98917 20.74L17.9842 15.001L19.75 16.27L10 23.27ZM10 19L0.25 12L2.005 10.74L9.98917 16.47L17.9842 10.73L19.75 12L10 19ZM10 14.73L2.01583 8.99998L0.25 7.72998L10 0.72998L19.75 7.72998L17.9733 8.99998L10 14.73Z"
+                          fill="white"
+                        />
+                      </svg>
+                    </div>
+                    <div class="button-content-wrapper">
+                      <p class="button-title">محصولات پیشنهادی</p>
+                      <p class="button-text">مشاهده لیست محصولات فروشندگان</p>
+                    </div>
+                    <i class="fa fa-angle-left"></i>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
