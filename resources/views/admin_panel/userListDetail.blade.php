@@ -97,6 +97,14 @@
                     <label for="wallet_balance">شارژ کیف پول</label>
                     <input type="number" name="wallet_balance"  value="{{$user->wallet_balance}}" class="form-control"/>
                 </div>
+
+                <div class="col-xs-3 col-xs-offset-1 form-group">
+                    <label><input type="checkbox" name="is_verified" value="{{$user->is_verified}}" id="is-verified"   
+                                                @if($user->is_verified == 1)
+                                                    checked 
+                                                @endif 
+                                            > تایید احراز هویت </label>
+                </div>
                
                 <input type="hidden" name="user_id" value="{{$user->id}}">
                 <div class="col-xs-2 col-xs-offset-9" dir="ltr">
@@ -210,6 +218,10 @@
         
     $(document).ready(function() {
       // run the first time; all subsequent calls will take care of themselves
+      $(document).on('click','#is-verified:checked',function(e){
+          $('#is-verified').attr('value',1);
+      });
+
       setTimeout(notif, 5000);
     });
     

@@ -29,6 +29,7 @@ class admin_user_controller extends Controller
         'extra_product_capacity' => 'required|integer|min:0',
         'extra_buyAd_reply_capacity' => 'required|integer|min:0',
         'wallet_balance' => 'required|integer|min:0',
+        'is_verified' => 'string|nullable',
         'user_id' => 'required|exists:myusers,id'
     ];
 
@@ -376,19 +377,44 @@ class admin_user_controller extends Controller
     public function edit_user_info(Request $request)
     {
         $this->validate($request,$this->user_validation_rules);
-
+        
         $tmp = [];
         foreach($this->user_validation_rules as $key => $value)
         {
             if($key != 'user_id'){
+                if($key == 'active_pakage_type' && $request->$key != 0){
+
+                    $tmp['pakage_start'] = Carbon::now();
+                    $tmp['pakage_end'] = Carbon::now()->addMonths(config("subscriptionPakage.type-{$request->$key}.pakage-duration-in-months"));
+                    
+                }
+                
                 $tmp[$key] = $request->$key;
+                
             }
         }
 
         $user_id = $request->user_id;
 
-        // DB::table('myusers')
-        //     ->
+        if($tmp){
+            
+            DB::table('myusers')
+                ->where('id',$user_id)
+                ->where(function($q) use($tmp){ // update if any value has been changed
+
+                    foreach($tmp as $key => $value){
+                        $q = $q->orWhere($key,'<>',$value);
+                    }
+
+                    return $q;
+                })
+                ->update($tmp);
+        }
+
+
+        return redirect()->route('admin_panel_load_user_notes_by_id',[
+            'user_id' => $user_id
+        ]);
 
     }
 
