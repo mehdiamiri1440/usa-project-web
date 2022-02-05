@@ -599,7 +599,7 @@ export default {
             .compress(newFile.file, Options)
             .then((file) => {
               self.getOrientation(newFile.file, function (orientation) {
-                // console.log(orientation);
+               
                 if (orientation == 6) {
                   finalOrientation = 8;
                 } else if (orientation != 1) {

@@ -144,7 +144,7 @@ const router = new Router({
           components: {
             default: (resolve) => {
               require([
-                "../components/dashboard/seller/profile/profile_verification.vue",
+                "../components/dashboard/profile_verification.vue",
               ], resolve);
             },
           },
@@ -316,7 +316,7 @@ const router = new Router({
           components: {
             default: (resolve) => {
               require([
-                "../components/dashboard/buyer/profile/profile_verification.vue",
+                "../components/dashboard/profile_verification.vue",
               ], resolve);
             },
           },
