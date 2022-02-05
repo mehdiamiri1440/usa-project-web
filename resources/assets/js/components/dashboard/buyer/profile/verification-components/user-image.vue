@@ -58,9 +58,14 @@
     padding: 16px 0;
   }
 }
-
 </style>
 <style scoped>
+.image-file-wrapper .image-scale {
+  transform: scale(1.5, 1.5);
+  position: fixed;
+  z-index: 1023;
+  top: calc(50% - 150px);
+}
 #verification-user-image {
   overflow: hidden;
 }
@@ -93,6 +98,7 @@
   justify-items: center;
   height: 237px;
   border: 1px solid #00c569;
+  position: relative;
 }
 
 .wrapper-section .sample-card .sample-card-img {
@@ -142,9 +148,6 @@
 .main-title-wrapper.upload-title {
   widows: 100%;
   text-align: right;
-}
-.upload-error {
-  line-height: 1.618;
 }
 
 .orange-button {
@@ -223,10 +226,22 @@
 
 .upload-error {
   height: 25px;
-  margin: 15px 0;
-  padding: 0;
+  margin: 5px 0;
+  line-height: 1.618;
+  font-size: 1.2rem;
 }
 
+.show-img-sample-content {
+  width: 100%;
+  display: grid;
+  position: fixed;
+  height: 100%;
+  bottom: 0;
+  left: 0;
+  direction: rtl;
+  z-index: 1020;
+  text-align: center;
+}
 @media screen and (max-width: 991px) {
   .image-file-wrapper,
   #verification-user-image {
@@ -245,6 +260,8 @@
   }
   .upload-error {
     text-align: center;
+    padding-right: 0;
+    margin: 10px 0 5px;
   }
   .action-button-wrapper {
     margin-bottom: 80px;
@@ -313,7 +330,7 @@
   }
 }
 @media (max-width: 767px) {
-.main-title-wrapper {
+  .main-title-wrapper {
     text-align: right;
   }
 }
@@ -328,7 +345,7 @@
   .title-section {
     margin-bottom: 10px;
   }
-  .wrapper-section {
+  .wrapper-section .main-title-wrapper {
     padding-right: 18px;
   }
 }
@@ -361,16 +378,24 @@
     <div class="row id-card-content">
       <section class="wrapper-section verification-user-image">
         <div class="col-xs-12 col-md-6 sample-card pull-right">
-          <div class="main-title-wrapper">نمونه تصویر گواهی احراز هویت</div>
+          <div class="main-title-wrapper sample-img-tilte">
+            نمونه تصویر گواهی احراز هویت
+          </div>
           <div class="sample-card-img">
-            <div class="image-file-wrapper">
-             
-             
-                <img
-                  src="../../../../../../img/user-verification.jpg"
-                  class="placeholder-content"
-                />
-              
+            <div class="image-file-wrapper" @click="showSampleImage()">
+              <div class="overlay-bg-modal" @click="closeShowImage()">
+                 <button class="image-close">
+                    <i class="fas fa-times-circle"></i>
+                  </button>
+                <div class="show-sample-image-content">
+                 
+                </div>
+              </div>
+              <img
+                id="sample_image"
+                src="../../../../../../img/user-verification.jpg"
+                class="placeholder-content"
+              />
             </div>
           </div>
         </div>
@@ -458,6 +483,21 @@ export default {
     };
   },
   methods: {
+    isDeviceMobile: function () {
+      if (
+        navigator.userAgent.match(/Android/i) ||
+        navigator.userAgent.match(/webOS/i) ||
+        navigator.userAgent.match(/iPhone/i) ||
+        navigator.userAgent.match(/iPad/i) ||
+        navigator.userAgent.match(/iPod/i) ||
+        navigator.userAgent.match(/BlackBerry/i) ||
+        navigator.userAgent.match(/Windows Phone/i)
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    },
     nextStep() {
       this.checkImageErrors();
       if (!this.isCompressor && !this.errors.userImageFile) {
@@ -511,6 +551,39 @@ export default {
       } else {
         this.imageValidator(this.userImageFile);
       }
+    },
+    showSampleImage() {
+      if (this.isDeviceMobile()) {
+        if ($("body").children().last() != $(".overlay-bg-modal")) {
+          $("body").append($(".overlay-bg-modal"));
+          $(".overlay-bg-modal").addClass("active");
+          $(".overlay-bg-modal .show-sample-image-content").append(
+            $("#sample_image")
+          );
+        } else {
+          $("body").children().last().addClass("active");
+        }
+
+        this.handleBackButtonForShowImage();
+      }
+    },
+    handleBackButtonForShowImage() {
+      let self = this;
+      if (window.history.state) {
+        history.pushState(null, null, window.location);
+      }
+      $(window).on("popstate", function (e) {
+        $(".image-file-wrapper").html($("#sample_image"));
+
+        $("body").children().last().removeClass("active");
+        $(".show-sample-image-content img").remove();
+      });
+    },
+    closeShowImage() {
+      $(".image-file-wrapper").html($("#sample_image"));
+
+      $("body").children().last().removeClass("active");
+      $(".show-sample-image-content img").remove();
     },
   },
   mounted() {

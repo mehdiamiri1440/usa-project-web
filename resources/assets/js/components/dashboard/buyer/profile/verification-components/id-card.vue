@@ -117,10 +117,6 @@
   width: 214px;
   margin-right: 40px;
 }
-.upload-error {
-  line-height: 1.618;
-  font-size: 1.2rem;
-}
 .-button.next i {
   position: relative;
   top: 3px;
@@ -184,7 +180,9 @@
 .upload-error {
   height: 25px;
   margin: 5px 0;
-  padding: 0;
+  line-height: 1.618;
+  font-size: 1.2rem;
+  padding-right: 40px;
 }
 
 @media screen and (max-width: 991px) {
@@ -198,6 +196,8 @@
   }
   .upload-error {
     text-align: center;
+    padding-right: 0;
+    margin: 10px 0 5px;
   }
   .action-button-wrapper {
     margin-bottom: 80px;

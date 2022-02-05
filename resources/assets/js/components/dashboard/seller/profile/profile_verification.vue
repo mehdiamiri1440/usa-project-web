@@ -747,6 +747,8 @@ export default {
       });
     },
   },
+  mounted() {
+  },
   watch: {
     uploadPercentage: function () {
       eventBus.$emit("uploadPercentage", this.uploadPercentage);
