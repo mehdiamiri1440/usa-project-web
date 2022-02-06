@@ -8,6 +8,9 @@ use App\Models\myuser;
 use JWTAuth;
 use App\Http\Controllers\Accounting\token_controller;
 use App\Traits\Token;
+use Illuminate\Support\Facades\Log;
+use DB;
+use Carbon\Carbon;
 
 class login
 {
@@ -26,6 +29,7 @@ class login
             try{
                 $token = explode(' ',$request->Header('Authorization'))[1];//explode(' ',$request->Authorization)[1];
                 // $user = JWTAuth::parseToken()->authenticate();
+                
                 $user = $this->parse_token($token);
 
                 if( ! is_object($user)){
@@ -34,9 +38,14 @@ class login
                         $refreshed_token = $this->refresh_token($token);
 
                         if($refreshed_token === 0){
-                            if($request->has()->session('user_id')){
+
+                            if($request->session()->has('user_id')){
+                                Log::info('1 - user has been prevented from logout using session info. token is : ' . $token);
+
                                 return $next($request);
                             }
+
+                            Log::info('Token expired (after session checking): ' . $token);
 
                             return response()->json([
                                 'status' => false,
@@ -44,6 +53,7 @@ class login
                                 'msg' => 'invalid token!!!'
                             ],401);
                         }
+                        
 
                         return response()->json([
                             'status' => false,
@@ -53,10 +63,14 @@ class login
 
                     }
                     else{
-                        
-                        if($request->has()->session('user_id')){
+
+                        if($request->session()->has('user_id')){
+                            Log::info('2 - user has been prevented from logout using session info. token is : ' . $token);
+
                             return $next($request);
                         }
+
+                        Log::info('Token is not valid (after session checking): ' . $token);
 
                         return response()->json([
                             'status' => false,
@@ -69,12 +83,17 @@ class login
 
 
                 if(! $request->session()->has('user_id')){
-                    $status = $this->set_user_session($user->phone,$user->password);
 
-                    if($status){
+                    $user_id = $this->set_user_session($user->phone,$user->password);
+
+                    if($user_id){ // if user id is false, then session is not set
+                        $this->update_last_login_client_status($user_id,'mobile');
+
                         return $next($request);
                     }
                     else{
+                        Log::info('set_user_session method returns false for app user. user phone is : ' . $user->phone . ' and password is : ' . $user->password);
+
                         return response()->json([
                             'status' => false,
                             'redirect_to_login' => true,
@@ -86,6 +105,15 @@ class login
                 return $next($request);
             }
             catch(\Exception $e){
+
+                if($request->session()->has('user_id')){
+                    Log::info('3 - user has been prevented from logout using session info.');
+
+                    return $next($request);
+                }
+
+                Log::info('an error has accoured in processing the token and user has been logged out. Error ' . $e->getMessage() . ' at line ' . $e->getLine());
+
                 return response()->json([
                     'status' => false,
                     'redirect_to_login' => true,
@@ -101,9 +129,11 @@ class login
                     $user_hashed_password = $request->cookie('user_password');
 
                     if($user_phone && $user_hashed_password){
-                        $status = $this->set_user_session($user_phone,$user_hashed_password);
+                        $user_id = $this->set_user_session($user_phone,$user_hashed_password);
 
-                        if($status){
+                        if($user_id){
+                            $this->update_last_login_client_status($user_id,'web');
+
                             return $next($request);
                         }
 
@@ -115,7 +145,9 @@ class login
                     } 
 
                 }
-                else return $next($request);
+                else{
+                    return $next($request);
+                } 
             }
             catch(\Exception $e){
                 return redirect('/login');
@@ -152,9 +184,23 @@ class login
             'profile_photo' => $user_profile_record ? $user_profile_record->profile_photo : null,
 		]);
 
-        return true;
+        return $user_info->id;
         }
         else return false;
+    }
+
+    protected function update_last_login_client_status($user_id,$client)
+    {
+        if($user_id && $client){
+            
+            DB::table('myusers')
+                    ->where('id',$user_id)
+                    ->update([
+                        'last_login_date' => Carbon::now(),
+                        'last_login_client' => $client
+                    ]);
+        }
+        
     }
 
 }

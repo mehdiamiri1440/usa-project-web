@@ -2,6 +2,7 @@
 
 namespace App\Traits;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 
 /**
  * 
@@ -39,6 +40,8 @@ trait Token
 
         if(sizeof($token_parts) != 3){
             //token is not valid
+            Log::info('token is not valid because of 3 part format :' . $token);
+
             return 0;
         }
 
@@ -51,6 +54,8 @@ trait Token
         
         if($hash != $this->base64url_decode($token_parts[2])){
             //token is not valid
+            Log::info('token is not valid because of signiture mismatching : ' . $token);
+
             return 0;
         }
         

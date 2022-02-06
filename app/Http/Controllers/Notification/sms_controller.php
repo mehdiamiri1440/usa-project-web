@@ -37,7 +37,18 @@ class sms_controller extends Controller
 		$random_number = $this->generate_random_number();
 		
 		try{
-            Smsir::sendVerification($random_number,$request->phone);
+            if($request->filled('client') && $request->client == 'mobile'){
+                Smsir::ultraFastSend([
+                    'code' => $random_number
+                ],61952,$request->phone);
+            }
+            else{
+                Smsir::ultraFastSend([
+                    'code' => $random_number
+                ],61951,$request->phone);
+            }
+
+            // Smsir::sendVerification($random_number,$request->phone);
             
             $this->set_generated_code_in_session($random_number,$request->phone);
 		
@@ -50,7 +61,7 @@ class sms_controller extends Controller
             return response()->json([
                'status' => FALSE,
                'msg' => 'ارتباط خود با اینترنت را بررسی کنید.',
-            //    'descriptive_msg' => $e->getMessage(),
+               'descriptive_msg' => $e->getMessage(),
             ],400);
         }
 		
