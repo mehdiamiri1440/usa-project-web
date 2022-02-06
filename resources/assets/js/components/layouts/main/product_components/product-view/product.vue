@@ -89,10 +89,16 @@ label {
   font-size: 12px;
   font-weight: 500;
   border: 1px solid;
-  border-radius: 12px;
+  border-radius: 4px;
   padding: 4px 15px 3px;
 }
-
+.share .share-button.disabled {
+  color: rgba(38, 70, 83, 0.5);
+  border: 1px solid rgba(38, 70, 83, 0.2);
+}
+.share .share-button.disabled i {
+  color: rgba(38, 70, 83, 0.5);
+}
 .buskool-default-text {
   color: #777;
   direction: rtl;
@@ -176,7 +182,6 @@ label {
 .phone-number-wrapper {
   margin-top: 15px;
 }
-
 .green-button.disable {
   background: #e0e0e0;
 }
@@ -212,7 +217,10 @@ label {
 .show-button-wrapper {
   margin: 50px auto 30px;
 }
-
+.show-button-wrapper p {
+  margin-bottom: 10px;
+  color: #747474;
+}
 .show-button-wrapper svg {
   width: 20px;
   position: relative;
@@ -235,7 +243,26 @@ label {
   fill: #fff;
   transition: 150ms;
 }
-
+.show-button-wrapper button.main-button-alt.disabled {
+  border-color: #979797;
+  color: #979797;
+}
+.show-button-wrapper button.main-button-alt.disabled svg {
+  color: #979797;
+}
+.show-button-wrapper button.main-button-alt.disabled:hover {
+  background-color: unset !important;
+  border-color: #979797;
+  color: #979797 !important;
+  transition: unset;
+}
+button:disabled {
+  cursor: default;
+}
+.main-button:disabled {
+  background-color: rgb(151, 151, 151,0.6);
+  color: #ffffff;
+}
 @media screen and (max-width: 1199px) {
   .main-product-wrapper {
     min-height: initial;
@@ -490,9 +517,11 @@ label {
           <polygon fill="#eee" points="28,23.5 22,31 34,31" />
         </svg>
       </div>
-      <div v-if="$parent.product.main.deleted_at != null" class="share hidden-xs hidden-sm">
-        <button class="share-button disabled"  disabled>
-         
+      <div
+        v-if="$parent.product.main.deleted_at != null"
+        class="share hidden-xs hidden-sm"
+      >
+        <button class="share-button disabled" disabled>
           <span>اشتراک گذاری</span>
           <i class="fa fa-share-alt"></i>
         </button>
@@ -535,7 +564,7 @@ label {
             تماس با فروشنده
           </button>
 
-          <button class="hidden-xs hidden-sm main-button button-shadow">
+          <button class="hidden-xs hidden-sm main-button" disabled>
             <i class="fas fa-comment-alt"></i>
             چت با فروشنده
           </button>
@@ -742,16 +771,14 @@ label {
           </ul>
           <div
             class="show-button-wrapper text-rtl text-center"
-            v-if="$parent.product.main.deleted_at != null"
+            v-if="!$parent.isMyProfile"
           >
-            <p class="orange-text">ـــــــــــ ناموجود ـــــــــــ</p>
-          </div>
-          <div
-            class="show-button-wrapper text-rtl text-center"
-            v-else-if="
-              $parent.product.main.deleted_at == null && !$parent.isMyProfile
-            "
-          >
+            <p
+              v-if="$parent.product.main.deleted_at != null"
+              
+            >
+              ـــــــــــــــــــــــ ناموجود ــــــــــــــــــــــ 
+            </p>
             <button
               @click="$parent.openPriceModal()"
               class="main-button-alt orange-text"

@@ -136,7 +136,13 @@ span {
 button.send-message-button {
   margin-right: 10px;
 }
-
+button:disabled{
+cursor: default;
+}
+.main-button:disabled{
+  background-color: rgb(151, 151, 151,0.6);
+  color: #ffffff;
+}
 /* 
 ---------------------------------------------------------------------------------
 
@@ -472,7 +478,7 @@ button.send-message-button {
         class="fix-send-message-wrapper hidden-lg hidden-md"
       >
         <button
-          class="main-button button-shadow send-message-button disabled"
+          class="main-button send-message-button disabled"
           disabled
         >
           <span> چت با فروشنده </span>
@@ -670,7 +676,6 @@ export default {
 
           self.sidebarScroll();
           self.getBreadCrumbs();
-          console.log(self.product);
         })
         .catch(function (err) {
           //redirect user to the parent category
