@@ -27,12 +27,13 @@ class sms_controller extends Controller
 
         $this->validate($request,$rules);
 
-        // if($this->is_request_safe($request) == false){
-        //     return response()->json([
-        //         'status' => false,
-        //         'msg' => 'لطفا بعدا دوباره تلاش کنید.'
-        //     ],400);
-        // }
+        $client_ip = $this->get_client_ip_address();
+
+        if($this->is_request_safe($request,$client_ip) == false){
+            return response()->json([
+                'status' => false
+            ],429);
+        }
 		
 		$random_number = $this->generate_random_number();
 		
@@ -50,7 +51,7 @@ class sms_controller extends Controller
 
             // Smsir::sendVerification($random_number,$request->phone);
             
-            $this->set_generated_code_in_session($random_number,$request->phone);
+            $this->set_generated_code_in_session($random_number,$request->phone,$client_ip);
 		
             return response()->json([
                 'status' => TRUE,
@@ -116,7 +117,7 @@ class sms_controller extends Controller
 		return rand(1000,9999);
 	}
 	
-	protected function set_generated_code_in_session($random_number,$phone_number)//also sets OTP_start session
+	protected function set_generated_code_in_session($random_number,$phone_number,$client_ip)//also sets OTP_start session
     {
          session([
              'sms_OTP'=>$random_number,
@@ -128,6 +129,15 @@ class sms_controller extends Controller
          }
          else{
             Cache::put($phone_number,1,2); //setting up counter in cahce for 2 minutes
+         }
+
+         if($client_ip){
+             if(Cache::has($client_ip)){
+                 Cache::increment($client_ip);
+             }
+             else{
+                 Cache::put($client_ip,1,10);
+             }
          }
 
          if(session()->has('OTP_count')){
@@ -378,28 +388,45 @@ class sms_controller extends Controller
   
     }
 
-    protected function is_request_safe($request){
+    protected function is_request_safe($request,$client_ip){
 
-        if(Cache::has('black-listed-' . $request->phone)){
+        if( (Cache::has($request->phone) || Cache::has($client_ip)) && (! $request->session()->has("sms_OTP"))){
+            return false;
+        }
+
+        return true;
+    }
+
+    protected function get_client_ip_address()
+    {
+        try{
+            if (isset($_SERVER["HTTP_CF_CONNECTING_IP"])) {
+                $_SERVER['REMOTE_ADDR'] = $_SERVER["HTTP_CF_CONNECTING_IP"];
+                $_SERVER['HTTP_CLIENT_IP'] = $_SERVER["HTTP_CF_CONNECTING_IP"];
+            }
+            $client  = @$_SERVER['HTTP_CLIENT_IP'];
+            $forward = @$_SERVER['HTTP_X_FORWARDED_FOR'];
+            $remote  = $_SERVER['REMOTE_ADDR'];
+        
+            if(filter_var($client, FILTER_VALIDATE_IP)){
+                $client_ip = $client;
+            }
+            elseif(filter_var($forward, FILTER_VALIDATE_IP)){
+                $client_ip = $forward;
+            }
+            else{
+                $client_ip = $remote;
+            }
+        
+            if($client_ip){
+                return $client_ip;
+            }
+    
+            return false;
+        }
+        catch(\Exception $e){
             return false;
         }
         
-        if(Cache::has($request->phone) && Cache::get($request->phone) >= 20){
-            $black_list_key = 'black-listed-' . $request->phone;
-
-            Cache::put($black_list_key,true,60 * 24);
-
-            return false;
-        }
-
-        // if(session()->has('OTP_count') && session('OTP_count') >= 10){
-        //     return false;
-        // }
-
-        // if(session()->has('OTP_start') && (session('OTP_start') + 2 * 60) < time()){
-        //     return false;
-        // }
-
-        return true;
     }
 }
