@@ -490,7 +490,14 @@ label {
           <polygon fill="#eee" points="28,23.5 22,31 34,31" />
         </svg>
       </div>
-      <div class="share hidden-xs hidden-sm">
+      <div v-if="$parent.product.main.deleted_at != null" class="share hidden-xs hidden-sm">
+        <button class="share-button disabled"  disabled>
+         
+          <span>اشتراک گذاری</span>
+          <i class="fa fa-share-alt"></i>
+        </button>
+      </div>
+      <div v-else class="share hidden-xs hidden-sm">
         <button @click.prevent="$parent.shareProduct()" class="share-button">
           <span>اشتراک گذاری</span>
           <i class="fa fa-share-alt"></i>
@@ -518,7 +525,29 @@ label {
       <div class="main-contents">
         <h1 v-text="$parent.product.main.product_name"></h1>
 
-        <div class="actions">
+        <div v-if="$parent.product.main.deleted_at != null" class="actions">
+          <button
+            class="main-button white-text hidden-xs hidden-sm disable"
+            disabled
+          >
+            <i class="fas fa-phone-alt"></i>
+
+            تماس با فروشنده
+          </button>
+
+          <button class="hidden-xs hidden-sm main-button button-shadow">
+            <i class="fas fa-comment-alt"></i>
+            چت با فروشنده
+          </button>
+
+          <div class="share hidden-md hidden-lg pull-left">
+            <button class="share-button disabled" disabled>
+              <i class="fa fa-share-alt"></i>
+              <span>اشتراک گذاری</span>
+            </button>
+          </div>
+        </div>
+        <div v-else class="actions">
           <button
             v-if="$parent.isMyProfile"
             class="elevator-event main-button bg-navy-blue white-text"
@@ -713,7 +742,15 @@ label {
           </ul>
           <div
             class="show-button-wrapper text-rtl text-center"
-            v-if="!$parent.isMyProfile"
+            v-if="$parent.product.main.deleted_at != null"
+          >
+            <p class="orange-text">ـــــــــــ ناموجود ـــــــــــ</p>
+          </div>
+          <div
+            class="show-button-wrapper text-rtl text-center"
+            v-else-if="
+              $parent.product.main.deleted_at == null && !$parent.isMyProfile
+            "
           >
             <button
               @click="$parent.openPriceModal()"

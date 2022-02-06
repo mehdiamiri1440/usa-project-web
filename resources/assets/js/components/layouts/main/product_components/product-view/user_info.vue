@@ -6,7 +6,10 @@
   width: 100%;
   border-radius: 8px;
 }
-
+.green-button-disabled
+{
+  background-color: #bebebe;
+}
 .green-button-alt {
   color: #00c569;
   background: none;
@@ -663,8 +666,20 @@ a#note-close:not(.collapsed):after {
             </p>
             <p v-else class="user-position">فروشنده</p>
           </div>
+          <div
+            v-if="$parent.product.main.deleted_at != null"
+            class="user-info-actions text-rtl hidden-xs hidden-lg"
+          >
+            <button class="disabled green-button greenbutton-disabled" disabled>
+              <i class="fa fa-comment-alt"></i>
 
-          <div class="user-info-actions text-rtl hidden-xs hidden-lg">
+              ارسال پیام
+            </button>
+          </div>
+          <div
+            v-else-if="$parent.product.main.deleted_at == null"
+            class="user-info-actions text-rtl hidden-xs hidden-lg"
+          >
             <button
               v-if="
                 !$parent.isMyProfile && $parent.updatedCurrentUser.user_info
@@ -809,7 +824,17 @@ a#note-close:not(.collapsed):after {
           </ul>
         </div>
       </div>
-      <div class="user-info-actions text-rtl hidden-sm hidden-md">
+      <div v-if="$parent.product.main.deleted_at != null" class="user-info-actions text-rtl hidden-sm hidden-md">
+        <button
+          disabled
+          class="disabled green-button green-button-disabled"
+        >
+          <i class="fa fa-comment-alt"></i>
+
+          ارسال پیام
+        </button>
+    </div>
+      <div v-else-if="$parent.product.main.deleted_at == null" class="user-info-actions text-rtl hidden-sm hidden-md">
         <button
           v-if="!$parent.isMyProfile && $parent.updatedCurrentUser.user_info"
           @click.prevent="$parent.openChatModal($parent.product)"

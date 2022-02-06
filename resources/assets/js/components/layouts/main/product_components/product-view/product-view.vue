@@ -468,7 +468,28 @@ button.send-message-button {
       </div>
 
       <div
-        v-if="product.main.product_name && !isMyProfile"
+        v-if="product.main.deleted_at != null"
+        class="fix-send-message-wrapper hidden-lg hidden-md"
+      >
+        <button
+          class="main-button button-shadow send-message-button disabled"
+          disabled
+        >
+          <span> چت با فروشنده </span>
+
+          <i class="fas fa-comment-alt"></i>
+        </button>
+        <button class="main-button disabled" disabled>
+          تماس با فروشنده
+          <i class="fas fa-phone-alt"></i>
+        </button>
+      </div>
+      <div
+        v-else-if="
+          product.main.deleted_at == null &&
+          product.main.product_name &&
+          !isMyProfile
+        "
         class="fix-send-message-wrapper hidden-lg hidden-md"
       >
         <button
@@ -533,7 +554,7 @@ button.send-message-button {
         </button>
       </div>
       <div
-        v-else-if="!product.main.product_name && !isMyProfile"
+        v-else-if="product.main.deleted_at == null && !product.main.product_name && !isMyProfile"
         class="fix-send-message-wrapper hidden-lg hidden-md hidden-sm"
       >
         <div class="content-full-width h-40 placeholder-content"></div>
@@ -581,6 +602,7 @@ export default {
         main: {
           category_name: "",
           sub_category_name: "",
+          deleted_at: null,
         },
         user_info: "",
         profile_info: {
@@ -648,6 +670,7 @@ export default {
 
           self.sidebarScroll();
           self.getBreadCrumbs();
+          console.log(self.product);
         })
         .catch(function (err) {
           //redirect user to the parent category
