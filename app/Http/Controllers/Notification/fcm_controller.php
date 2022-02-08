@@ -48,9 +48,9 @@ class fcm_controller extends Controller
         
         $topicResponse = FCM::sendToTopic($topic, null, $notification, $data);
         
-        $topicResponse->isSuccess();
+        var_dump($topicResponse->isSuccess());
         $topicResponse->shouldRetry();
-        $topicResponse->error();
+        var_dump($topicResponse->error());
     }
 
     public function send_notification_to_given_topic_group($data,$topics)
@@ -177,6 +177,20 @@ class fcm_controller extends Controller
             'token' => $token
         ],200);
 
+    }
+
+    public function test_notif()
+    {
+        $data = [
+            'title' => 'باسکول',
+            'message' => 'یک خریدار جدید برای محصول شما پیدا شد. خریدار فقط تا چهار ساعت دیگر منتظر پاسخ شما می ماند ',
+            'sound' => 'buskool_voice.mp3',
+            'payload' => [
+                'BTarget' => 'buyAdSuggestion'
+            ]
+        ];
+
+        $this->send_notification_to_the_given_topic($data,'FCM10');
     }
             
 }

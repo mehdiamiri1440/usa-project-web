@@ -115,13 +115,15 @@ class Kernel extends ConsoleKernel
                 ->dailyAt('02:33');
 
 
-        $daily_product_avertisement_for_premium_sellers = new AdvertiseProductsPeriodically(0,true,true);
-        // $schedule->job($daily_product_avertisement_for_premium_sellers)
-        //                 ->dailyAt('10:45');
+        $daily_product_avertisement_for_premium_sellers = new AdvertiseProductsPeriodically(true);
+        $schedule->job($daily_product_avertisement_for_premium_sellers)
+                        ->hourlyAt(25)
+                        ->between('11:00', '22:00');
 
-        // $daily_product_avertisement_for_first_day_after_register_product = new AdvertiseProductsPeriodically(1,false,false);
-        // $schedule->job($daily_product_avertisement_for_first_day_after_register_product)
-        //                 ->dailyAt('16:45');
+        $daily_product_avertisement_for_first_day_after_register_product = new AdvertiseProductsPeriodically(false);
+        $schedule->job($daily_product_avertisement_for_first_day_after_register_product)
+                        ->hourlyAt(28)
+                        ->between('11:00', '22:00');
 
         // $daily_product_avertisement_for_third_day_after_register_product = new AdvertiseProductsPeriodically(3,false,false);
         // $schedule->job($daily_product_avertisement_for_third_day_after_register_product)

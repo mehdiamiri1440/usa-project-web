@@ -52,10 +52,41 @@ class NotifyBuyersIfAnyNewRelatedProductRegistered implements ShouldQueue
             return 0; //we can elevate product in this case or something like that
         }
 
+        $the_most_related_buyAd_owners_ids_active_on_app = DB::table('myusers')
+                                                                ->whereIn('id',$the_most_related_buyAd_owners_ids)
+                                                                ->where('last_login_client','mobile')
+                                                                ->where('last_login_date','>',Carbon::now()->subDays(100))
+                                                                ->get()
+                                                                ->pluck('id')
+                                                                ->toArray();
+
+
+        $the_most_related_buyAd_owners_ids_active_on_web = [];
+
+        foreach($the_most_related_buyAd_owners_ids as $buyer_id){
+            if( in_array($buyer_id,$the_most_related_buyAd_owners_ids_active_on_app) == false){
+                $the_most_related_buyAd_owners_ids_active_on_web[] = $buyer_id;
+
+                if(count($the_most_related_buyAd_owners_ids_active_on_web) > $this->max_notified_buyers){
+                    break;
+                }
+            }
+            
+        }
+
+        if(count($the_most_related_buyAd_owners_ids_active_on_app) > 0){
+            $the_most_related_buyAd_owners_ids_active_on_app = array_slice($the_most_related_buyAd_owners_ids_active_on_app,0, $this->max_notified_buyers * 4);
+        }
+        else{
+            $the_most_related_buyAd_owners_ids_active_on_app = [];
+        }
+
+        $notified_buyer_ids = array_merge($the_most_related_buyAd_owners_ids_active_on_app,$the_most_related_buyAd_owners_ids_active_on_web);
+
         $product_suggestion_records = [];
         $now = Carbon::now();
 
-        foreach($the_most_related_buyAd_owners_ids as $buyer_id)
+        foreach($notified_buyer_ids as $buyer_id)
         {
             $product_suggestion_records[] = [
                 'buyer_id' => $buyer_id,
@@ -69,7 +100,7 @@ class NotifyBuyersIfAnyNewRelatedProductRegistered implements ShouldQueue
         DB::table('product_suggestions')
                 ->insert($product_suggestion_records);
 
-        $topics = $this->generate_related_topics($the_most_related_buyAd_owners_ids);
+        $topics = $this->generate_related_topics($the_most_related_buyAd_owners_ids_active_on_app);
 
         $subcategory_record = category::where('id', $this->product->category_id)
             ->select('category_name')
@@ -89,17 +120,17 @@ class NotifyBuyersIfAnyNewRelatedProductRegistered implements ShouldQueue
         $fcm_object = new fcm_controller();
 
         $fcm_object->send_notification_to_given_topic_group($data,$topics);
-
+        
         if($this->send_sms == true){
             //send SMS notification to buyers
-            $this->send_sms_to_buyers($subcategory_record->category_name,$this->product->product_name,$the_most_related_buyAd_owners_ids);
+            $this->send_sms_to_buyers($subcategory_record->category_name,$this->product->product_name,$the_most_related_buyAd_owners_ids_active_on_web);
         }
         
     }
 
     protected function get_the_most_related_buyAd_owners_id_to_the_given_product_if_any(&$product)
     {
-        $until = Carbon::now()->subMonth(1);
+        $until = Carbon::now();
         $from = Carbon::now()->subMonths(4); // last 4 months
 
         $until_last_year = Carbon::now()->subMonth(9);
@@ -131,35 +162,6 @@ class NotifyBuyersIfAnyNewRelatedProductRegistered implements ShouldQueue
                                     ->from('product_suggestions')
                                     ->whereRaw("product_suggestions.buyer_id = buy_ads.myuser_id")
                                     ->where(function($q) use($product){
-                                        return $q = $q->whereBetween('created_at',[Carbon::now()->subHours(12),Carbon::now()])
-                                                            ->orWhere('product_suggestions.product_id',$product->id);
-                                    });
-                            })->orderBy('buy_ads.created_at','desc')
-                            ->select('buy_ads.myuser_id as buyer_id')
-                            ->distinct('buyer_id')
-                            ->get();
-
-
-        $new_buyAds = DB::table('buy_ads')
-                            ->join('myusers','myusers.id','=','buy_ads.myuser_id')
-                            ->where('buy_ads.myuser_id','<>',$product->myuser_id)
-                            ->where('buy_ads.category_id',$product->category_id)
-                            ->whereNull('buy_ads.deleted_at')
-                            // ->where('myusers.is_buyer',true)
-                            ->whereBetween('buy_ads.updated_at',[$until,Carbon::now()])
-                            ->where('confirmed',true)
-                            ->where(function($q) use($product_name_array){
-                                foreach($product_name_array as $name){
-                                    $q = $q->orWhere('name','like',"%$name%");
-                                }
-
-                                return $q;
-
-                            })->whereNotExists(function($q) use($product){
-                                $q->select(DB::raw(1))
-                                    ->from('product_suggestions')
-                                    ->whereRaw("product_suggestions.buyer_id = buy_ads.myuser_id")
-                                    ->where(function($q) use($product){
                                         return $q = $q->whereBetween('created_at',[Carbon::now()->subHours(6),Carbon::now()])
                                                             ->orWhere('product_suggestions.product_id',$product->id);
                                     });
@@ -167,6 +169,58 @@ class NotifyBuyersIfAnyNewRelatedProductRegistered implements ShouldQueue
                             ->select('buy_ads.myuser_id as buyer_id')
                             ->distinct('buyer_id')
                             ->get();
+
+
+        // $new_buyAds = DB::table('buy_ads')
+        //                     ->join('myusers','myusers.id','=','buy_ads.myuser_id')
+        //                     ->where('buy_ads.myuser_id','<>',$product->myuser_id)
+        //                     ->where('buy_ads.category_id',$product->category_id)
+        //                     ->whereNull('buy_ads.deleted_at')
+        //                     // ->where('myusers.is_buyer',true)
+        //                     ->whereBetween('buy_ads.updated_at',[$until,Carbon::now()])
+        //                     ->where('confirmed',true)
+        //                     ->where(function($q) use($product_name_array){
+        //                         foreach($product_name_array as $name){
+        //                             $q = $q->orWhere('name','like',"%$name%");
+        //                         }
+
+        //                         return $q;
+
+        //                     })->whereNotExists(function($q) use($product){
+        //                         $q->select(DB::raw(1))
+        //                             ->from('product_suggestions')
+        //                             ->whereRaw("product_suggestions.buyer_id = buy_ads.myuser_id")
+        //                             ->where(function($q) use($product){
+        //                                 return $q = $q->whereBetween('created_at',[Carbon::now()->subHours(6),Carbon::now()])
+        //                                                     ->orWhere('product_suggestions.product_id',$product->id);
+        //                             });
+        //                     })->orderBy('buy_ads.created_at','desc')
+        //                     ->select('buy_ads.myuser_id as buyer_id')
+        //                     ->distinct('buyer_id')
+        //                     ->get();
+
+        $new_buyAds =  DB::table('leads')
+                                ->where('category_id',$product->category_id)
+                                ->where('seller_id','<>',$product->myuser_id)
+                                ->whereBetween('created_at',[$until,Carbon::now()])
+                                ->where(function($q) use($product_name_array){
+                                    foreach($product_name_array as $name){
+                                        $q = $q->orWhere('keywords','like',"%$name%");
+                                    }
+    
+                                    return $q;
+                                })->whereNotExists(function($q) use($product){
+                                    $q->select(DB::raw(1))
+                                        ->from('product_suggestions')
+                                        ->whereRaw("product_suggestions.buyer_id = leads.buyer_id")
+                                        ->where(function($q) use($product){
+                                            return $q = $q->whereBetween('created_at',[Carbon::now()->subHours(6),Carbon::now()])
+                                                                ->orWhere('product_suggestions.product_id',$product->id);
+                                        });
+                                })->orderBy('leads.created_at','desc')
+                                ->select('leads.buyer_id as buyer_id')
+                                ->distinct('buyer_id')
+                                ->get();
 
         //remove duplication in buyers
         $old_buyer_ids = array_map(function($item){
@@ -187,50 +241,28 @@ class NotifyBuyersIfAnyNewRelatedProductRegistered implements ShouldQueue
 
     protected function filter_buyers_based_on_algorithm_detailes(&$buyer_ids)
     {
-        // $tmp = product_suggestion::whereIn('buyer_id',$buyer_ids)
-        //                             ->select(DB::raw('MAX(created_at) as date,buyer_id as user_id'))
-        //                             ->groupBy('user_id')
-        //                             ->orderBy('date')
-        //                             ->get()
-        //                             ->values()
-        //                             ->toArray();
-
-        // $previous_notified_buyers = array_unique(array_column($tmp,'user_id'));
-
-        // $final_buyers = [];
-
-        // if(count($previous_notified_buyers) > 0){
-        //     $filtered_buyers = array_filter($buyer_ids,function($buyer_id) use($previous_notified_buyers){
-        //         return in_array($buyer_id,$previous_notified_buyers) === false;
-        //     });
-
-        //     if(count($filtered_buyers) < 10){
-        //         $final_buyers = array_merge($filtered_buyers,array_slice($previous_notified_buyers,0, 10 - count($filtered_buyers) )  );
-        //     }
-        //     else{
-        //         $final_buyers = array_slice($filtered_buyers,0,10);
-        //     }
-        // }
-        // else{
-        //     $final_buyers = array_slice($buyer_ids,0,10);
+        // $tmp = [];
+        // foreach($buyer_ids as $buyer_id){ //buyer ids are unique in array so we can use them as array key
+        //     $tmp[$buyer_id] = $this->get_user_last_activity_date($buyer_id);
         // }
 
-        // return $final_buyers;
-        $tmp = [];
-        foreach($buyer_ids as $buyer_id){ //buyer ids are unique in array so we can use them as array key
-            $tmp[$buyer_id] = $this->get_user_last_activity_date($buyer_id);
-        }
+        $tmp = DB::table('myusers')
+                    ->whereIn('id',$buyer_ids)
+                    ->select('id','last_login_date as last_activity_date')
+                    ->orderBy('last_login_date','desc')
+                    ->get()
+                    ->toArray();
 
-        uasort($tmp,function($item1,$item2){
-            $a = $item1;
-            $b = $item2;
+        // uasort($tmp,function($item1,$item2){
+        //     $a = $item1->last_activity_date;
+        //     $b = $item2->last_activity_date;
 
-            return ($a < $b) ? 1 : -1;
-        });
+        //     return ($a < $b) ? 1 : -1;
+        // });
 
-        $final_buyers = array_keys($tmp);
+        $final_buyers = array_values(array_column($tmp,'id'));
 
-        return array_slice($final_buyers,0,$this->max_notified_buyers); 
+        return $final_buyers; 
     }
 
     protected function get_the_most_related_buyAd_owners_id_to_given_product($product, $buyAds)
