@@ -178,19 +178,5 @@ class fcm_controller extends Controller
         ],200);
 
     }
-
-    public function test_notif()
-    {
-        $data = [
-            'title' => 'باسکول',
-            'message' => 'یک خریدار جدید برای محصول شما پیدا شد. خریدار فقط تا چهار ساعت دیگر منتظر پاسخ شما می ماند ',
-            'sound' => 'buskool_voice.mp3',
-            'payload' => [
-                'BTarget' => 'buyAdSuggestion'
-            ]
-        ];
-
-        $this->send_notification_to_the_given_topic($data,'FCM10');
-    }
             
 }
