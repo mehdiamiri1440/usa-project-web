@@ -1,5 +1,4 @@
 <style scoped>
-
 .btn-crop {
   display: inline-block;
   background: #00c569;
@@ -46,6 +45,7 @@
   opacity: 0;
   background: rgba(49, 58, 67, 0.85);
   transition: 300ms;
+  height: 100%;
 }
 
 .image {
@@ -331,11 +331,6 @@ button.close {
 }
 
 @media only screen and (max-width: 991px) {
-  .actions-content {
-    opacity: 1;
-    background: none;
-  }
-
   .modal.show .modal-dialog {
     margin: 40px 20px;
   }
@@ -400,7 +395,7 @@ button.close {
                 class="delete"
                 href="#"
                 @click.prevent="$refs.upload.remove(file)"
-                ><i aria-hidden="true" class="fa fa-trash"></i
+                ><i aria-hidden="true" class="fas fa-trash-alt"></i
               ></a>
             </div>
           </div>
@@ -512,6 +507,7 @@ export default {
     "isImageReset",
     "imageAccessUploadCount",
     "maximum",
+    "articleImages",
   ],
   components: {
     FileUpload,
@@ -545,63 +541,22 @@ export default {
       autoCompress: 512 * 512,
     };
   },
-  watch: {
-    files(value) {
-      this.$parent[this.uploadName] = value;
-    },
-    isImageReset(value) {
-      if (value) {
-        let variable = this.uploadName + "Reset";
-        this.files = [];
-        this.$parent[variable] = false;
-      }
-    },
-    "editFile.show"(newValue, oldValue) {
-      // 关闭了 自动删除 error
-      if (!newValue && oldValue) {
-        this.$refs.upload.update(this.editFile.id, {
-          error: this.editFile.error || "",
-        });
-      }
-      if (newValue) {
-        this.$nextTick(function () {
-          if (!this.$refs.editImage) {
-            return;
-          }
-          // let cropper = new Cropper(this.$refs.editImage, {
-          //     autoCrop: true,
-          //     aspectRatio: 1 / 1,
-          //     responsive: true,
-          //     center:true,
-          //     guides: false,
-          //     movable: false,
-          //     rotatable: false,
-          //     scalabel: false,
-          //     zoomable: false,
-          //     zoomOnTouch: false,
-          //     zoomOnWheel: false,
-          //     wheelZoomRatio: false,
-          //     toggleDragModeOnDblclick: false,
-          //     minCropBoxWidth:400,
-          //     minCropBoxHeight:400,
-
-          // })
-          // this.editFile = {
-          //     ...this.editFile,
-          //     cropper
-          // }
-        });
-      }
-    },
-    "addData.show"(show) {
-      if (show) {
-        this.addData.name = "";
-        this.addData.type = "";
-        this.addData.content = "";
-      }
-    },
-  },
   methods: {
+    isDeviceMobile: function () {
+      if (
+        navigator.userAgent.match(/Android/i) ||
+        navigator.userAgent.match(/webOS/i) ||
+        navigator.userAgent.match(/iPhone/i) ||
+        navigator.userAgent.match(/iPad/i) ||
+        navigator.userAgent.match(/iPod/i) ||
+        navigator.userAgent.match(/BlackBerry/i) ||
+        navigator.userAgent.match(/Windows Phone/i)
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    },
     inputFilter(newFile, oldFile, prevent) {
       if (newFile && !oldFile) {
         // Before adding a file
@@ -644,7 +599,7 @@ export default {
             .compress(newFile.file, Options)
             .then((file) => {
               self.getOrientation(newFile.file, function (orientation) {
-                // console.log(orientation);
+               
                 if (orientation == 6) {
                   finalOrientation = 8;
                 } else if (orientation != 1) {
@@ -852,6 +807,71 @@ export default {
       };
 
       reader.readAsArrayBuffer(file.slice(0, 64 * 1024));
+    },
+  },
+  watch: {
+    files(value) {
+      this.$parent[this.uploadName] = value;
+
+      if (this.isDeviceMobile()) {
+        $("html, body").animate(
+          {
+            scrollTop: $(window).height(),
+          },
+          300
+        );
+      }
+    },
+    isImageReset(value) {
+      if (value) {
+        let variable = this.uploadName + "Reset";
+        this.files = [];
+        this.$parent[variable] = false;
+      }
+    },
+    "editFile.show"(newValue, oldValue) {
+      // 关闭了 自动删除 error
+      if (!newValue && oldValue) {
+        this.$refs.upload.update(this.editFile.id, {
+          error: this.editFile.error || "",
+        });
+      }
+      if (newValue) {
+        this.$nextTick(function () {
+          if (!this.$refs.editImage) {
+            return;
+          }
+          // let cropper = new Cropper(this.$refs.editImage, {
+          //     autoCrop: true,
+          //     aspectRatio: 1 / 1,
+          //     responsive: true,
+          //     center:true,
+          //     guides: false,
+          //     movable: false,
+          //     rotatable: false,
+          //     scalabel: false,
+          //     zoomable: false,
+          //     zoomOnTouch: false,
+          //     zoomOnWheel: false,
+          //     wheelZoomRatio: false,
+          //     toggleDragModeOnDblclick: false,
+          //     minCropBoxWidth:400,
+          //     minCropBoxHeight:400,
+
+          // })
+          // this.editFile = {
+          //     ...this.editFile,
+          //     cropper
+          // }
+        });
+      }
+    },
+    "addData.show"(show) {
+      if (show) {
+        this.addData.name = "";
+        this.addData.type = "";
+        this.addData.content = "";
+      }
     },
   },
 };

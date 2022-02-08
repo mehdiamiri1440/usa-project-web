@@ -206,7 +206,49 @@ select {
   padding: 7px 15px;
   outline: none;
 }
-
+.overlay-bg-modal
+{
+  width: 100%;
+  position: fixed;
+  height: 100%;
+  bottom: 0;
+  left: 0;
+  direction: rtl;
+  z-index: 1020;
+  background: #000000;
+  display: none;
+}
+.overlay-bg-modal.active
+{
+  display: grid;
+  justify-content: center;
+    align-content: center;
+}
+.overlay-bg-modal button
+{
+  width: 28px;
+  height: 28px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  border-radius: 50%;
+  border: 0;
+  background:unset;
+  color: #ffffff;
+  font-size: 6rem;
+  padding: 0;
+}
+.overlay-bg-modal .show-sample-image-content
+{
+  text-align: center;
+  position: relative;
+}
+.overlay-bg-modal img
+{
+  width: 90vw;
+  max-width: 650px;
+  background-size: contain;
+}
 .main-content-index-pages h1,
 .main-content-index-pages h2,
 .main-content-index-pages h3,
@@ -227,7 +269,25 @@ select {
   font-weight: bold;
   border: none;
 }
-
+.orange-button {
+  margin: 15px 0 0;
+  display: inline-block;
+  background: #FF9828;
+  color: #fff;
+  padding: 10px 25px;
+  border-radius: 3px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: bold;
+  border: none;
+}
+.orange-button.back
+{
+  background: #fff;
+  border: 1px solid #FF9828;
+  color: #FF6600;
+  padding: 13px 30px;
+}
 .gray-button {
   margin: 15px 0 0;
   display: inline-block;
@@ -1450,10 +1510,24 @@ span.min {
   .actions-content .delete {
     float: inherit;
   }
+  .overlay-bg-modal img
+{
+  max-width: 500px;
+  background-size: contain;
+}
+.overlay-bg-modal button
+{
+  font-size: 4.9rem;
+}
 }
 
 @media only screen and (max-width: 767px) {
   .overflow-hidden {
     overflow: hidden;
   }
+  .overlay-bg-modal button
+{
+  
+  font-size: 3rem;
+}
 }

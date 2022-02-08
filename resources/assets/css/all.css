@@ -4565,8 +4565,13 @@
  
  .fa-zhihu:before {
    content: "\f63f"; }
-
-   
+.fa-long-arrow-alt-left:before
+{
+  content: "\f30a";
+}
+.fa-plus-circle:before {
+  content: "\f055";
+}
  .sr-only {
    border: 0;
    clip: rect(0, 0, 0, 0);

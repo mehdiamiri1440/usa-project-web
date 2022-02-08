@@ -27,7 +27,7 @@ class verification_controller extends Controller
     protected function set_validation_rules($request)
     {
         $rules = [
-            'images_count' => 'required|integer|min:3|max:6',
+            'images_count' => 'required|integer|min:2|max:3',
         ];
 
         $photos_count = $request->images_count;
