@@ -1326,10 +1326,6 @@ Route::get('download-media','General\media_controller@download_media');
 //     });
 // });
 
-Route::post('test-notif',[
-    'uses' => 'Notification\fcm_controller@test_notif'
-]);
-
 Route::post('/is_user_from_webview', [
     'uses' => 'Accounting\user_controller@is_user_from_webview',
 ]);
