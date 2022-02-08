@@ -35,7 +35,10 @@
   background: rgba(0, 0, 0, 0);
   transition: 500ms;
 }
-
+button.main-button.disabled {
+  background-color: rgb(151, 151, 151,0.6);
+  color: #ffffff;
+}
 .price-modal.show-custom-modal .modal-content {
   bottom: 0;
 }
@@ -48,6 +51,12 @@
   margin-top: 20px;
   padding: 0 15px;
 }
+.custom-modal-title.disabled {
+  color: rgba(0, 0, 0, 0.6);
+}
+.custom-modal-title.disabled strong {
+  color: rgba(0, 0, 0, 0.5);
+}
 
 .price-text {
   font-size: 18px;
@@ -55,7 +64,10 @@
   margin-top: 10px;
   color: #140092;
 }
+.price-text.disabled {
 
+  color: rgb(20, 0, 146,0.6);
+}
 .main-action button {
   margin-top: 23px;
 }
@@ -69,7 +81,14 @@
   margin-top: 12px;
   padding-bottom: 16px;
 }
-
+.unavailable {
+  position: absolute;
+  left: 0;
+  top: 10px;
+  font-weight: 500;
+  padding: 0 16px;
+  color: #264653;
+}
 .close-modal-button {
   position: absolute;
   right: 0;
@@ -88,104 +107,163 @@
 }
 </style>
 <template>
-  <div class="price-modal">
-    <div class="modal-content text-rtl text-center">
-      <button @click="closeModal()" class="close-modal-button">
-        <i class="fa fa-times"></i>
-      </button>
-      <p class="custom-modal-title">
-        <strong> کف قیمت </strong>
-        برای هر کیلو
-        {{ productName }}
-      </p>
-      <p class="price-text" v-text="getNumberWithCommas(price) + ' تومان'"></p>
+  <div>
+    <div v-if="$parent.product.main.deleted_at != null" class="price-modal">
+      <div class="modal-content text-rtl text-center">
+        <div class="unavailable">ناموجود</div>
 
-      <p class="main-action">
-        <span
-          v-if="
-            $parent.updatedCurrentUser.user_info &&
-            $parent.product.user_info.has_phone &&
-            $parent.updatedCurrentUser.user_info.is_buyer
-          "
-        >
-          <button
-            @click="openPhone(true)"
-            class="main-button bg-orange white-text hidden-lg hidden-md"
-          >
+        <button @click="closeModal()" class="close-modal-button">
+          <i class="fa fa-times"></i>
+        </button>
+        <p class="custom-modal-title disabled">
+          <strong> کف قیمت </strong>
+          برای هر کیلو
+          {{ productName }}
+        </p>
+        <p
+          class="price-text disabled"
+          v-text="getNumberWithCommas(price) + ' تومان'"
+        ></p>
+
+        <p class="main-action">
+          <button disabled class="main-button white-text disabled">
             <i class="fa fa-phone-alt"></i>
             <span> تماس با فروشنده </span>
           </button>
+        </p>
+        <p class="second-action">
           <button
-            @click="openPhone(false)"
-            class="main-button bg-orange white-text hidden-xs hidden-sm"
+            @click="routeToPage('registerProductSeller')"
+            class="orange-text button-link"
+            v-if="
+              !!$parent.currentUser.user_info &&
+              $parent.currentUser.user_info.is_seller
+            "
           >
-            <i class="fa fa-phone-alt"></i>
-            <span> تماس با فروشنده </span>
+            محصول برای فروش دارم
           </button>
-        </span>
-        <button
-          v-else-if="
-            !$parent.updatedCurrentUser.user_info &&
-            $parent.product.user_info.has_phone
-          "
-          @click="openLoginModal(false)"
-          class="main-button bg-orange white-text"
-        >
-          <i class="fa fa-phone-alt"></i>
-          <span> تماس با فروشنده </span>
-        </button>
-        <button
-          v-else-if="
-            (!!$parent.updatedCurrentUser.user_info &&
-              !$parent.product.user_info.has_phone) ||
-            (!!$parent.updatedCurrentUser.user_info &&
-              $parent.product.user_info.has_phone)
-          "
-          @click="openChat()"
-          class="main-button bg-orange white-text"
-        >
-          <i class="fa fa-comment-alt"></i>
-          <span> چت با فروشنده </span>
-        </button>
-        <button
-          v-else
-          @click="openLoginModal(true)"
-          class="main-button bg-orange white-text"
-        >
-          <i class="fa fa-comment-alt"></i>
-          <span> چت با فروشنده </span>
-        </button>
-      </p>
-      <p class="second-action">
-        <button
-          @click="routeToPage('registerProductSeller')"
-          class="orange-text button-link"
-          v-if="
-            !!$parent.currentUser.user_info &&
-            $parent.currentUser.user_info.is_seller
-          "
-        >
-          محصول برای فروش دارم
-        </button>
-        <span
-          v-else-if="
-            !!$parent.currentUser.user_info &&
-            $parent.currentUser.user_info.is_buyer
-          "
-          class="button-link"
-        >
-          <br />
-        </span>
-        <button
-          @click="routeToPage('register')"
-          class="orange-text button-link"
-          v-else
-        >
-          محصول برای فروش دارم
-        </button>
-      </p>
+          <span
+            v-else-if="
+              !!$parent.currentUser.user_info &&
+              $parent.currentUser.user_info.is_buyer
+            "
+            class="button-link"
+          >
+            <br />
+          </span>
+          <button
+            @click="routeToPage('register')"
+            class="orange-text button-link"
+            v-else
+          >
+            محصول برای فروش دارم
+          </button>
+        </p>
+      </div>
+      <div @click="closeModal()" class="button-background"></div>
     </div>
-    <div @click="closeModal()" class="button-background"></div>
+    <div v-else class="price-modal">
+      <div class="modal-content text-rtl text-center">
+        <button @click="closeModal()" class="close-modal-button">
+          <i class="fa fa-times"></i>
+        </button>
+        <p class="custom-modal-title">
+          <strong> کف قیمت </strong>
+          برای هر کیلو
+          {{ productName }}
+        </p>
+        <p
+          class="price-text"
+          v-text="getNumberWithCommas(price) + ' تومان'"
+        ></p>
+
+        <p class="main-action">
+          <span
+            v-if="
+              $parent.updatedCurrentUser.user_info &&
+              $parent.product.user_info.has_phone &&
+              $parent.updatedCurrentUser.user_info.is_buyer
+            "
+          >
+            <button
+              @click="openPhone(true)"
+              class="main-button bg-orange white-text hidden-lg hidden-md"
+            >
+              <i class="fa fa-phone-alt"></i>
+              <span> تماس با فروشنده </span>
+            </button>
+            <button
+              @click="openPhone(false)"
+              class="main-button bg-orange white-text hidden-xs hidden-sm"
+            >
+              <i class="fa fa-phone-alt"></i>
+              <span> تماس با فروشنده </span>
+            </button>
+          </span>
+          <button
+            v-else-if="
+              !$parent.updatedCurrentUser.user_info &&
+              $parent.product.user_info.has_phone
+            "
+            @click="openLoginModal(false)"
+            class="main-button bg-orange white-text"
+          >
+            <i class="fa fa-phone-alt"></i>
+            <span> تماس با فروشنده </span>
+          </button>
+          <button
+            v-else-if="
+              (!!$parent.updatedCurrentUser.user_info &&
+                !$parent.product.user_info.has_phone) ||
+              (!!$parent.updatedCurrentUser.user_info &&
+                $parent.product.user_info.has_phone)
+            "
+            @click="openChat()"
+            class="main-button bg-orange white-text"
+          >
+            <i class="fa fa-comment-alt"></i>
+            <span> چت با فروشنده </span>
+          </button>
+          <button
+            v-else
+            @click="openLoginModal(true)"
+            class="main-button bg-orange white-text"
+          >
+            <i class="fa fa-comment-alt"></i>
+            <span> چت با فروشنده </span>
+          </button>
+        </p>
+        <p class="second-action">
+          <button
+            @click="routeToPage('registerProductSeller')"
+            class="orange-text button-link"
+            v-if="
+              !!$parent.currentUser.user_info &&
+              $parent.currentUser.user_info.is_seller
+            "
+          >
+            محصول برای فروش دارم
+          </button>
+          <span
+            v-else-if="
+              !!$parent.currentUser.user_info &&
+              $parent.currentUser.user_info.is_buyer
+            "
+            class="button-link"
+          >
+            <br />
+          </span>
+          <button
+            @click="routeToPage('register')"
+            class="orange-text button-link"
+            v-else
+          >
+            محصول برای فروش دارم
+          </button>
+        </p>
+      </div>
+      <div @click="closeModal()" class="button-background"></div>
+    </div>
   </div>
 </template>
 

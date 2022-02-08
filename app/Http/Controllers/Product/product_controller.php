@@ -79,6 +79,7 @@ class product_controller extends Controller
         'cities.id as city_id', 
         'categories.category_name as sub_category_name', 
         'products.is_elevated',
+        'products.deleted_at',
     ];
 
     protected $product_register_nullable_fields_array_with_validation_rules = array(
@@ -412,9 +413,12 @@ class product_controller extends Controller
         ]);
 
         $product_id = $request->product_id;
-        $product = product::where('id', $product_id)
+
+        $product = product::where('id',$product_id)
             ->where('confirmed', true)
+            ->withTrashed() // including deleted products
             ->first();
+
 
         if (is_null($product)) {
             $product = DB::table('products')->where('id',$product_id)->first();
