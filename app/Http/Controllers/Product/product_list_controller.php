@@ -889,13 +889,11 @@ class product_list_controller extends Controller
             $search_text = str_replace('/', '', $search_text);
             $search_text_array = explode(' ', $search_text);
 
-            $search_expresion = '^';
+            $search_expresion = '(.*)';
 
             foreach ($search_text_array as $text) {
-                $search_expresion .= "(?=.*\b$text\b)";
+                $search_expresion .= "($text)(.*)";
             }
-
-            $search_expresion .=  '.*$';
 
             // $general_category = DB::table('tags')
             //                         ->where('header','like',"%$search_text%")
@@ -934,6 +932,7 @@ class product_list_controller extends Controller
             }
 
             if(count($result_products) <= 20){
+                
                 $tag_record = DB::table('tags')->where('header',$search_text)
                                     ->get()
                                     ->first();

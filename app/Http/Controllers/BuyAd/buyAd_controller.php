@@ -742,7 +742,8 @@ class buyAd_controller extends Controller
             'from_record_number' => 'integer:min:0',
             'to_record_number' => 'integer:min:5',
             'category_id' => 'exists:categories,id',
-            'search_text' => 'string'
+            'search_text' => 'string',
+            'sort_by' => 'string'
         ]);
 
         $seller_id = session('user_id');
@@ -772,27 +773,20 @@ class buyAd_controller extends Controller
                 $search_text = str_replace('/', '', $search_text);
                 $search_text_array = explode(' ', $search_text);
 
-                $search_expresion = '^';
+                $search_expresion = '(.*)';
 
                 foreach ($search_text_array as $text) {
-                    $search_expresion .= "(?=.*\b$text\b)";
+                    $search_expresion .= "($text)(.*)";
                 }
-
-                $search_expresion .=  '.*$';
-
-                var_dump($search_expresion);
 
                 $related_buyAds = $related_buyAds->filter(function($buyAd) use($search_expresion){
                     try{
-                        var_dump(preg_match("/$search_expresion/", 'سیب صادراتی'));
                         return preg_match("/$search_expresion/", $buyAd->name);
                     }
                     catch(\Exception $e){
                         return false;
                     }
                 });
-
-                return count($related_buyAds);
             }
 
             foreach ($related_buyAds as $buyAd) {
@@ -801,7 +795,7 @@ class buyAd_controller extends Controller
                 $result_buyAds[] = $buyAd;
             }
 
-            if($request->has('category_id')){
+            if($request->filled('category_id')){
                 $category_id = $request->category_id;
                 $result_buyAds = $related_buyAds->toArray();
 
@@ -821,6 +815,26 @@ class buyAd_controller extends Controller
                     'status' => true,
                     'buyAds' => collect(array_values($result_buyAds)),
                 ], 200);
+            }
+
+            if($request->filled('sort_by')){
+                if($request->sort_by == 'RD'){
+                    usort($result_buyAds,function($item1,$item2){
+                        return ($item1->updated_at < $item2->updated_at) ? 1 : -1;
+                    });
+
+                    if ($request->has('from_record_number') && $request->has('to_record_number')) {
+                        $offset = abs($request->from_record_number - $request->to_record_number);
+            
+                        $result_buyAds = array_slice($result_buyAds, $request->from_record_number, $offset, true);
+                    }
+    
+                    return response()->json([
+                        'status' => true,
+                        'buyAds' => collect(array_values($result_buyAds)),
+                    ], 200);
+                }
+
             }
 
             $user_registered_products = DB::table('products')->where('myuser_id',$seller_id)
