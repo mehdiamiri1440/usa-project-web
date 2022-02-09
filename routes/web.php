@@ -1326,6 +1326,10 @@ Route::get('download-media','General\media_controller@download_media');
 //     });
 // });
 
+Route::get('/otp',function(){
+    return view('otp');
+});
+
 Route::post('/is_user_from_webview', [
     'uses' => 'Accounting\user_controller@is_user_from_webview',
 ]);

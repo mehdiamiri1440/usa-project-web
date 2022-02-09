@@ -395,7 +395,7 @@ export default {
         .then(function (response) {
           self.verifyCodeBtnLoading = false;
 
-          self.goToStep(2);
+          // self.goToStep(2);
           self.step1.sendCode = true;
 
           self.step2.verification_code = "";
@@ -934,7 +934,7 @@ export default {
       window.addEventListener('DOMContentLoaded', e => {
         // const input = document.querySelector('input[autocomplete="one-time-code"]');
         // if (!input) return;
-        const ac = new AbortController();
+        // const ac = new AbortController();
         // const form = input.closest('form');
         // if (form) {
         //   form.addEventListener('submit', e => {
@@ -943,13 +943,14 @@ export default {
         // }
         navigator.credentials.get({
           otp: { transport:['sms'] },
-          signal: ac.signal
+          // signal: ac.signal
         }).then(otp => {
           alert(otp.code);
           // input.value = otp.code;
           // if (form) form.submit();
         }).catch(err => {
           console.log(err);
+          alert(err);
         });
       });
     }
