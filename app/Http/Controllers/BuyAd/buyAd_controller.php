@@ -741,7 +741,8 @@ class buyAd_controller extends Controller
         $this->validate($request,[
             'from_record_number' => 'integer:min:0',
             'to_record_number' => 'integer:min:5',
-            'category_id' => 'exists:categories,id'
+            'category_id' => 'exists:categories,id',
+            'search_text' => 'string'
         ]);
 
         $seller_id = session('user_id');
@@ -762,6 +763,36 @@ class buyAd_controller extends Controller
                 $related_buyAds = $this->get_related_buyAds_list_to_the_user();
 
                 Cache::put($cache_key,$related_buyAds,5);  
+            }
+
+            if($request->filled('search_text')){
+                $search_text = $request->search_text;
+
+                $search_text = str_replace('\\', '', $search_text);
+                $search_text = str_replace('/', '', $search_text);
+                $search_text_array = explode(' ', $search_text);
+
+                $search_expresion = '^';
+
+                foreach ($search_text_array as $text) {
+                    $search_expresion .= "(?=.*\b$text\b)";
+                }
+
+                $search_expresion .=  '.*$';
+
+                var_dump($search_expresion);
+
+                $related_buyAds = $related_buyAds->filter(function($buyAd) use($search_expresion){
+                    try{
+                        var_dump(preg_match("/$search_expresion/", 'سیب صادراتی'));
+                        return preg_match("/$search_expresion/", $buyAd->name);
+                    }
+                    catch(\Exception $e){
+                        return false;
+                    }
+                });
+
+                return count($related_buyAds);
             }
 
             foreach ($related_buyAds as $buyAd) {
@@ -1839,4 +1870,5 @@ class buyAd_controller extends Controller
         ],200);
         
     }
+
 }
