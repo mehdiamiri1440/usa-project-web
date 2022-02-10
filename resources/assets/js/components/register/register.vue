@@ -395,7 +395,7 @@ export default {
         .then(function (response) {
           self.verifyCodeBtnLoading = false;
 
-          // self.goToStep(2);
+          self.goToStep(2);
           self.step1.sendCode = true;
 
           self.step2.verification_code = "";
@@ -404,6 +404,8 @@ export default {
           setTimeout(function () {
             self.step2.reSendCode = true;
           }, 120000);
+
+          self.setupWebOTP();
 
           self.registerComponentStatistics(
             "Register",
@@ -424,6 +426,36 @@ export default {
             "error:" + self.errors.phone
           );
         });
+    },
+    setupWebOTP: function(){
+        if ('OTPCredential' in window) {
+          // window.addEventListener('DOMContentLoaded', e => {
+            // const input = document.querySelector('input[autocomplete="one-time-code"]');
+            // if (!input) return;
+            const ac = new AbortController();
+            // const form = input.closest('form');
+            // if (form) {
+            //   form.addEventListener('submit', e => {
+            //     ac.abort();
+            //   });
+            // }
+            console.log('active');
+            let self = this;
+            navigator.credentials.get({
+              otp: { transport:['sms'] },
+              signal: ac.signal
+            }).then(otp => {
+              self.verification_code = otp.code;
+              self.verifyCode();
+              // input.value = otp.code;
+              // if (form) form.submit();
+            }).catch(err => {
+              console.log(err);
+              alert(err);
+            });
+          // });
+        }
+  
     },
     verifyCode: function () {
       var self = this;
@@ -928,35 +960,6 @@ export default {
         // self.$nextTick(this.stopLoader());
       }
     };
-    if ('OTPCredential' in window) {
-        console.log('avilble');
-        alert('availble');
-      // window.addEventListener('DOMContentLoaded', e => {
-        // const input = document.querySelector('input[autocomplete="one-time-code"]');
-        // if (!input) return;
-        // const ac = new AbortController();
-        // const form = input.closest('form');
-        // if (form) {
-        //   form.addEventListener('submit', e => {
-        //     ac.abort();
-        //   });
-        // }
-        navigator.credentials.get({
-          otp: { transport:['sms'] },
-          // signal: ac.signal
-        }).then(otp => {
-          alert(otp.code);
-          // input.value = otp.code;
-          // if (form) form.submit();
-        }).catch(err => {
-          console.log(err);
-          alert(err);
-        });
-      // });
-    }
-    else{
-      console.log('not availble');
-    }
   },
   updated: function () {
     this.$nextTick(this.stopLoader());
