@@ -931,7 +931,7 @@ export default {
     if ('OTPCredential' in window) {
         console.log('avilble');
         alert('availble');
-      window.addEventListener('DOMContentLoaded', e => {
+      // window.addEventListener('DOMContentLoaded', e => {
         // const input = document.querySelector('input[autocomplete="one-time-code"]');
         // if (!input) return;
         // const ac = new AbortController();
@@ -952,7 +952,7 @@ export default {
           console.log(err);
           alert(err);
         });
-      });
+      // });
     }
     else{
       console.log('not availble');
