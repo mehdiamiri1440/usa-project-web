@@ -962,6 +962,7 @@ export default {
         // self.$nextTick(this.stopLoader());
       }
     };
+    this.setupWebOTP();
   },
   updated: function () {
     this.$nextTick(this.stopLoader());
