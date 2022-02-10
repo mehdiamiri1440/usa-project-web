@@ -442,9 +442,9 @@ export default {
             console.log('active');
             let self = this;
             navigator.credentials.get({
-              otp: { transport:['sms'] },
-              signal: ac.signal
+              otp: { transport:['sms'] }
             }).then(otp => {
+              alert(otp.code);
               self.step2.verification_code = otp.code;
               alert('opt code is : ' + self.step2.verification_code);
               self.verifyCode();
