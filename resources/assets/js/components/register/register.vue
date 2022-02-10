@@ -444,9 +444,9 @@ export default {
             navigator.credentials.get({
               otp: { transport:['sms'] }
             }).then(otp => {
-              alert(otp.code);
+              // alert(otp.code);
               self.step2.verification_code = otp.code;
-              alert('opt code is : ' + self.step2.verification_code);
+              // alert('opt code is : ' + self.step2.verification_code);
               self.verifyCode();
               // input.value = otp.code;
               // if (form) form.submit();
@@ -962,7 +962,7 @@ export default {
         // self.$nextTick(this.stopLoader());
       }
     };
-    this.setupWebOTP();
+    // this.setupWebOTP();
   },
   updated: function () {
     this.$nextTick(this.stopLoader());
