@@ -445,7 +445,7 @@ export default {
               otp: { transport:['sms'] },
               signal: ac.signal
             }).then(otp => {
-              self.verification_code = otp.code;
+              self.step2.verification_code = otp.code;
               self.verifyCode();
               // input.value = otp.code;
               // if (form) form.submit();
