@@ -12,7 +12,7 @@
 }
 
 .contact-items.is-buyer-list {
-  padding-top: 60px;
+  padding-top: 55px;
 }
 
 .contact-body .contact-search .contact-search-input-wrapper {
@@ -341,9 +341,8 @@ i.fa-star {
   /* background: #00c569; */
   transition: 300ms;
 }
-.wrapper-no-message
-{
-  margin-top:115px;
+.wrapper-no-message {
+  margin-top: 115px;
 }
 @media screen and (max-width: 991px) {
   .contact-items {
@@ -432,7 +431,6 @@ i.fa-star {
             <div class="text_no_pic standard-line text-rtl">
               <p class="text-title_no_pic">مخاطبی یافت نشد!</p>
             </div>
-            
           </div>
         </div>
       </div>
@@ -451,6 +449,9 @@ i.fa-star {
         :class="{ 'is-buyer-list': !$parent.userType }"
       >
         <ul>
+          <li>
+            <DownloadAppCard v-if="checkDownloadAppCard()" text="با ورود به اپلیکیشن باسکول سریع تر با کاربران باسکول ارتباط بگیرید." />
+          </li>
           <li class="contact-item">
             <a
               href="#"
@@ -547,7 +548,7 @@ i.fa-star {
                 tag="button"
                 class="btn-orange-empty-state text-rtl"
               >
-                <i class="fas fa-user-friends"></i>  مشاهده فروشندگان
+                <i class="fas fa-user-friends"></i> مشاهده فروشندگان
               </router-link>
             </div>
           </li>
@@ -561,6 +562,9 @@ i.fa-star {
       :class="{ 'is-buyer-list': !$parent.userType }"
     >
       <ul>
+        <li>
+            <DownloadAppCard v-if="checkDownloadAppCard()" className="margin-top-0 margin-top--15" text="با ورود به اپلیکیشن باسکول سریع تر با کاربران باسکول ارتباط بگیرید." />
+          </li>
         <li class="contact-item">
           <a
             href="#"
@@ -715,7 +719,11 @@ i.fa-star {
 
 
 <script >
+import DownloadAppCard from "../../layouts/main/download-app-card";
 export default {
+  components: {
+    DownloadAppCard,
+  },
   data: function () {
     return {
       is_contact: true,
@@ -745,19 +753,73 @@ export default {
       if (screen.width < 992) {
         if (document.querySelector(".custom-navigation")) {
           setTimeout(() => {
-             document.querySelector(".custom-navigation").style.display = "block";
+            document.querySelector(".custom-navigation").style.display =
+              "block";
           }, 50);
         }
       }
     },
     hideNavigationMenu() {
       if (screen.width < 992) {
-       
-          if (document.querySelector(".custom-navigation")) {
-            document.querySelector(".custom-navigation").style.display = "none";
-          }
-        
+        if (document.querySelector(".custom-navigation")) {
+          document.querySelector(".custom-navigation").style.display = "none";
+        }
       }
+    },
+    isOsIOS: function () {
+      var userAgent = window.navigator.userAgent.toLowerCase(),
+        safari = /safari/.test(userAgent),
+        ios = /iphone|ipod|ipad/.test(userAgent);
+      return ios;
+    },
+    getAndroidVersion: function (ua) {
+      ua = (ua || navigator.userAgent).toLowerCase();
+      var match = ua.match(/android\s([0-9\.]*)/);
+      return match ? match[1] : undefined;
+    },
+    getCookie: function (cname) {
+      var name = cname + "=";
+      var ca = document.cookie.split(";");
+      for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == " ") {
+          c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+          return c.substring(name.length, c.length);
+        }
+      }
+      return "";
+    },
+    isDeviceMobile: function () {
+      if (
+        navigator.userAgent.match(/Android/i) ||
+        navigator.userAgent.match(/webOS/i) ||
+        navigator.userAgent.match(/iPhone/i) ||
+        navigator.userAgent.match(/iPad/i) ||
+        navigator.userAgent.match(/iPod/i) ||
+        navigator.userAgent.match(/BlackBerry/i) ||
+        navigator.userAgent.match(/Windows Phone/i)
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    checkDownloadAppCard() {
+      let androidVersion =
+          parseInt(this.getAndroidVersion()) >= 5 ? true : false;
+        if (
+          
+          !this.isOsIOS() &&
+          this.isDeviceMobile() &&
+          androidVersion &&
+          !this.getCookie("downloadAppCard")
+        ) {
+          return true;
+        } else {
+          return false;
+        }
     },
   },
   watch: {

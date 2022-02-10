@@ -225,35 +225,6 @@
         </p>
       </div>
     </div>
-    <!-- Download app modal -->
-    <div
-      v-if="downloadAppButton && $route.name != 'invite' && !checkCookie()"
-      :class="[{ hide: isClosed }, { test: isClosed == false }]"
-      class="android-download-alert-wrapper hidden-lg hidden-md"
-    >
-      <div @click.prevent="closeAppModal()">
-        <div class="m-t-b">
-          <button class="close-android-download-alert-wrapper">
-            <i class="fa fa-times"></i>
-          </button>
-        </div>
-      </div>
-      <div class="android-download-alert-content" @click.prevent="doDownload()">
-        <div class="m-t-b">
-          <img
-            src="../../../img/logo/512-buskool-logo.jpg"
-            alt="دانلود اپلیکیشن باسکول"
-          />
-        </div>
-        <div class="text-android-download-alert-wrapper m-t-b">
-          <p class="android-download-title">اپلیکیشن باسکول</p>
-          <p class="android-download-slogan">استفاده راحت تر و سریع تر</p>
-        </div>
-        <div class="text-center m-t-b">
-          <button class="android-apk-download">دانلود</button>
-        </div>
-      </div>
-    </div>
     <!--  #regex wallet modal  -->
 
     <div class="container">
@@ -312,46 +283,6 @@
 
     <!-- end regex payment type modal -->
 
-    <!--  #regex download App modal  -->
-
-    <div class="container">
-      <div
-        id="download-app-modal"
-        class="download-app-modal modal fade"
-        tabindex="-1"
-        role="dialog"
-      >
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <a class="close-modal" data-dismiss="modal">
-                <i class="fa fa-times"></i>
-              </a>
-
-              <div class="modal-title">دانلود اپلیکیشن باسکول</div>
-            </div>
-            <div class="modal-body col-xs-12">
-              <div class="download-app-logo-wrapper">
-                <img src="../../../img/logo/mobile-logo.svg" alt />
-              </div>
-              <h3>اپلیکیشن جدید باسکول</h3>
-              <p class="text-rtl">
-                برای دسترسی سریعتر و راحت تر به خریداران و فروشندگان عمده برنامه
-                جدید باسکول را نصب کنید.
-              </p>
-              <a href @click.prevent="doDownload()">
-                دانلود اپلیکیشن باسکول
-                <i class="fa fa-download"></i>
-              </a>
-            </div>
-          </div>
-          <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-      </div>
-    </div>
-
-    <!-- end regex download App modal  -->
 
     <ChatModal />
     <EditProductModal />
@@ -405,7 +336,12 @@
     <ProductRegistrationRestrictionsModal />
     <NoAccessToBuyerPhoneModal :message="msg" :errorStatus="errStatus" />
     <FullMessagingCeilingModal />
-    <noAccessToGoldenBuyersModal />
+    <NoAccessToGoldenBuyersModal />
+    <DownloadAppModal
+      v-if="
+        activateDownloadAppModal && $route.name != 'invite' && !checkCookie()
+      "
+    />
   </div>
 </template>
 
@@ -426,7 +362,8 @@ import Navigation from "./navigation.vue";
 import ProductRegistrationRestrictionsModal from "../../components/layouts/main/product-registration-restrictions-modal.vue";
 import NoAccessToBuyerPhoneModal from "../../components/layouts/main/no-access-to-buyer-phone-modal.vue";
 import FullMessagingCeilingModal from "../../components/layouts/main/full-messaging-ceiling-modal.vue";
-import noAccessToGoldenBuyersModal from "../../components/layouts/main/no-access-to-golden-buyers-modal.vue";
+import NoAccessToGoldenBuyersModal from "../../components/layouts/main/no-access-to-golden-buyers-modal.vue";
+import DownloadAppModal from "../../components/layouts/main/download-app-modal.vue";
 
 export default {
   components: {
@@ -441,7 +378,8 @@ export default {
     ProductRegistrationRestrictionsModal,
     NoAccessToBuyerPhoneModal,
     FullMessagingCeilingModal,
-    noAccessToGoldenBuyersModal,
+    NoAccessToGoldenBuyersModal,
+    DownloadAppModal,
   },
   data: function () {
     return {
@@ -541,11 +479,6 @@ export default {
         return false;
       }
     },
-    closeAppModal() {
-      this.downloadAppButton = false;
-      this.isClosed = true;
-      this.createCookie("downloadAppModal", true, 60 * 24);
-    },
     getAndroidVersion: function (ua) {
       ua = (ua || navigator.userAgent).toLowerCase();
       var match = ua.match(/android\s([0-9\.]*)/);
@@ -560,10 +493,10 @@ export default {
       );
       // code here
       this.createCookie("downloadAppModal", true, 60 * 24);
-      // window.location.href =
-      //   "https://play.google.com/store/apps/details?id=com.buskool";
       window.location.href =
-        "https://play.google.com/store/search?q=%D8%A8%D8%A7%D8%B3%DA%A9%D9%88%D9%84&c=apps";
+        "https://play.google.com/store/apps/details?id=com.buskool";
+      /* window.location.href =
+        "https://play.google.com/store/search?q=%D8%A8%D8%A7%D8%B3%DA%A9%D9%88%D9%84&c=apps";*/
     },
     isOsIOS: function () {
       var userAgent = window.navigator.userAgent.toLowerCase(),
@@ -600,16 +533,36 @@ export default {
         }
       }
     },
-    activateDownloadAppButton() {
+    handleBackButtonForAppModal() {
+      let self = this;
+      if (window.history.state) {
+        history.pushState(null, null, window.location);
+      }
+      $(window).on("popstate", function (e) {
+        $("#app-modal .modal-content").removeClass("bottom-0");
+        document
+          .getElementById("app-modal")
+          .classList.remove("show-custom-modal");
+
+        self.createCookie("downloadAppModal", true, 60 * 24);
+      });
+    },
+    activateDownloadAppModal() {
+      let self = this;
       if (this.isDeviceMobile() && !this.isOsIOS()) {
         let androidVersion = this.getAndroidVersion();
         if (parseInt(androidVersion) >= 5) {
-          if (
-            window.location.pathname != "/buyAd-requests" &&
-            !window.location.pathname.includes("product-view") &&
-            !this.iswebview
-          ) {
+          if (!this.iswebview) {
             this.downloadAppButton = true;
+          }
+          if (!this.checkCookie() && !this.iswebview) {
+            setTimeout(() => {
+              document
+                .getElementById("app-modal")
+                .classList.add("show-custom-modal");
+              $("#app-modal .modal-content").addClass("bottom-0");
+              self.handleBackButtonForAppModal();
+            }, 3000);
           }
           // if (!this.checkCookie() && !this.iswebview) {
           // setTimeout(() => {
@@ -1361,6 +1314,25 @@ export default {
         this.errStatus = false;
         $("#no-access-to-buyer-phone-modal").modal("show");
       });
+      eventBus.$on("checkDownloadAppCard", ($event) => {
+        let androidVersion =
+          parseInt(this.getAndroidVersion()) >= 5 ? true : false;
+        if (
+          !this.iswebview &&
+          !this.isOsIOS() &&
+          this.isDeviceMobile() &&
+          androidVersion &&
+          !this.getCookie("downloadAppModal")
+        ) {
+          console.log(true);
+          $event = true;
+          return $event;
+        } else {
+          console.log(false);
+          $event = false;
+          return $event;
+        }
+      });
     },
     getUserData(itemName) {
       switch (itemName) {
@@ -1404,7 +1376,7 @@ export default {
       window.localStorage.setItem("userId", this.user.id);
       window.localStorage.setItem("userType", this.user.type);
     },
-     showNavigationMenu() {
+    showNavigationMenu() {
       if (screen.width < 992) {
         if (document.querySelector(".custom-navigation")) {
           document.querySelector(".custom-navigation").style.display = "block";
@@ -1417,13 +1389,13 @@ export default {
     $(document).ready(() => {
       $("#master-loader-wrapper").css("display", "none");
     });
-    this.activateDownloadAppButton();
+    this.activateDownloadAppModal();
     $("#wallet-modal").on("show.bs.modal", (e) => {
       this.handleBackKeys();
     });
     $("#product-registration-restrictions-modal").on("show.bs.modal", (e) => {
       this.handleBackKeys();
-    })
+    });
     $("#no-access-to-golden-buyers-modal").on("show.bs.modal", (e) => {
       this.handleBackKeys();
     });
@@ -1440,23 +1412,7 @@ export default {
   },
   watch: {
     $route() {
-      setTimeout(() => {
-        if (
-          window.screen.width < 991 &&
-          !this.isOsIOS() &&
-          this.getAndroidVersion() >= 5
-        ) {
-          if (!this.isClosed) {
-            setTimeout(() => {
-              if (document.querySelector(".android-download-alert-wrapper")) {
-                document.querySelector(
-                  ".android-download-alert-wrapper"
-                ).style.height = "65px";
-              }
-            }, 3000);
-          }
-        }
-      }, 50);
+      this.activateDownloadAppModal();
     },
     currentUser(user) {
       this.updateUserData();
