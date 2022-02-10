@@ -446,6 +446,7 @@ export default {
               signal: ac.signal
             }).then(otp => {
               self.step2.verification_code = otp.code;
+              alert('opt code is : ' + self.step2.verification_code);
               self.verifyCode();
               // input.value = otp.code;
               // if (form) form.submit();
@@ -458,6 +459,7 @@ export default {
   
     },
     verifyCode: function () {
+      alert('start verification...');
       var self = this;
 
       self.verifyCodeBtnLoading = true;
