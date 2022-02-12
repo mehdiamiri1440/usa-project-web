@@ -789,11 +789,12 @@ class buyAd_controller extends Controller
                 });
             }
 
-            foreach ($related_buyAds as $buyAd) {
-                $buyAd->register_date = $date_convertor_object->get_persian_date_with_month_name($buyAd->created_at);
+            // foreach ($related_buyAds as $buyAd) {
+            //     $buyAd->register_date = $date_convertor_object->get_persian_date_with_month_name($buyAd->created_at);
 
-                $result_buyAds[] = $buyAd;
-            }
+            //     $result_buyAds[] = $buyAd;
+            // }
+            $result_buyAds = $related_buyAds->toArray();
 
             if($request->filled('category_id')){
                 $category_id = $request->category_id;
