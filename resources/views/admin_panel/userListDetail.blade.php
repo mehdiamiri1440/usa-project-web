@@ -48,6 +48,71 @@
 
     <!-- Main content -->
     <section class="content">
+      <div class="row">
+            <form action="{{route('admin_panel_edit_user_info')}}" method="post">
+                <div class="col-xs-3 col-xs-offset-1 form-group">
+                    <label for="first_name">نام</label>
+                    <input type="text" name="first_name" placeholder='نام...'  value="{{$user->first_name}}" class="form-control"/>
+                </div>
+                <div class="col-xs-3 col-xs-offset-1 form-group">
+                    <label for="last_name">نام خانوادگی</label>
+                    <input type="text" name="last_name" placeholder='نام خانوادگی...' value="{{$user->last_name}}" class="form-control"/>
+                </div>
+                <div class="col-xs-3 col-xs-offset-1 form-group">
+                    <label for="active_pakage_type">نوع عضویت</label>
+                    <select  class="form-control" name="active_pakage_type">
+                        @if($user->active_pakage_type == 0)
+                          <option  selected value="0">عضویت رایگان</option>
+                        @else
+                          <option  value="0">عضویت رایگان</option>
+                        @endif
+
+                        @if($user->active_pakage_type == 1)
+                          <option selected value="1">عضویت سه ماهه</option>
+                        @else
+                          <option value="1">عضویت سه ماهه</option>
+                        @endif
+
+                        @if($user->active_pakage_type == 3)
+                          <option selected value="3">عضویت سالانه</option>
+                        @else
+                          <option  value="3">عضویت سالانه</option>
+                        @endif
+                    </select>  
+                </div>
+                
+                <div class="col-xs-3 col-xs-offset-1 form-group">
+                    <label for="extra_product_capacity">ظرفیت ثبت محصول</label>
+                    <input type="number" name="extra_product_capacity"  value="{{$user->extra_product_capacity}}" class="form-control"/>
+                </div>
+
+
+                <div class="col-xs-3 col-xs-offset-1 form-group">
+                    <label for="extra_buyAd_reply_capacity">ظرفیت پاسخگویی به درخواست ها</label>
+                    <input type="number" name="extra_buyAd_reply_capacity"  value="{{$user->extra_buyAd_reply_capacity}}" class="form-control"/>
+                </div>
+
+
+                <div class="col-xs-3 col-xs-offset-1 form-group">
+                    <label for="wallet_balance">شارژ کیف پول</label>
+                    <input type="number" name="wallet_balance"  value="{{$user->wallet_balance}}" class="form-control"/>
+                </div>
+
+                <div class="col-xs-3 col-xs-offset-1 form-group">
+                    <label><input type="checkbox" name="is_verified" value="{{$user->is_verified}}" id="is-verified"   
+                                                @if($user->is_verified == 1)
+                                                    checked 
+                                                @endif 
+                                            > تایید احراز هویت </label>
+                </div>
+               
+                <input type="hidden" name="user_id" value="{{$user->id}}">
+                <div class="col-xs-2 col-xs-offset-9" dir="ltr">
+                    <button type="submit" class="btn btn-danger btn-block">ویرایش اطلاعات</button>
+                </div>
+            </form>
+        </div>
+        <br/>
         <div class="row">
             <form action="{{route('admin_panel_register_note_for_user')}}" method="post">
                 <div class="col-xs-10 col-xs-offset-1 form-group">
@@ -153,6 +218,10 @@
         
     $(document).ready(function() {
       // run the first time; all subsequent calls will take care of themselves
+      $(document).on('click','#is-verified:checked',function(e){
+          $('#is-verified').attr('value',1);
+      });
+
       setTimeout(notif, 5000);
     });
     

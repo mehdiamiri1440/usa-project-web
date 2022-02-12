@@ -1279,12 +1279,41 @@ Route::group(['prefix' => 'admin', 'middleware' => [admin_login::class]], functi
         'as'   => 'admin_panel_get_package_expiring_customers_list',
         'description' => "دسترسی به لیست کاربرانی که عضویت آنها در حال اتمام است",
     ]);
+
+    Route::post('/edit-user-info',[
+        'uses' => 'admin_panel\admin_user_controller@edit_user_info',
+        'as' => 'admin_panel_edit_user_info',
+        'description' => 'توانایی ویرایش اطلاعات حساب کاربری کاربران'
+    ]);
     
     Route::get('/setup-admin-routes',[
         'uses' => 'admin_panel\admin_user_controller@get_admin_routes',
         'as'   => 'admin_panel_get_package_expiring_customers_lists'
     ]);
+
+    Route::get('/add-new-category-form',[
+        'uses' => 'admin_panel\admin_category_controller@load_add_category_form',
+        'as' => 'admin_panel_add_new_category',
+        'description' => 'دسترسی به فرم اضافه کردن دسته بندی ها'
+    ]);
+
+    Route::post('/add-new-super-category',[
+        'uses' => 'admin_panel\admin_category_controller@add_new_super_category',
+        'as' => 'admin_panel_add_new_super_category',
+        'description' => 'توانایی اضافه کردن صنعت جدید به دسته بندی ها'
+    ]);
     
+    Route::post('/add-new-category',[
+        'uses' => 'admin_panel\admin_category_controller@add_new_category',
+        'as' => 'admin_panel_add_new_category',
+        'description' => 'توانایی اضافه کردن دسته بندی به هر صنعت'
+    ]);
+
+    Route::post('/add-new-sub-category',[
+        'uses' => 'admin_panel\admin_category_controller@add_new_sub_category',
+        'as' => 'admin_panel_add_new_sub_category',
+        'description' => 'توانایی اضافه کردن زیردسته بندی به هر دسته بندی'
+    ]);
 });
 
 Route::post('/refresh-token',[
