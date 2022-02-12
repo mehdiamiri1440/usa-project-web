@@ -432,7 +432,7 @@ export default {
             self.step2.reSendCode = true;
           }, 120000);
 
-          // self.setupWebOTP();
+          self.setupWebOTP();
 
           self.registerComponentStatistics(
             "Register",

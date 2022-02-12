@@ -481,6 +481,7 @@ export default {
     },
     setupWebOTP: function(){
         if ('OTPCredential' in window) {
+            alert('active');
             const ac = new AbortController();
             // const form = input.closest('form');
             // if (form) {
@@ -495,7 +496,7 @@ export default {
               signal: ac.signal
             }).then(otp => {
               self.step2.verification_code = otp.code;
-              
+              alert('opt is' + self.step2.verification_code );
               self.verifyCode();
               
             }).catch(err => {
