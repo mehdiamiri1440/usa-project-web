@@ -457,6 +457,8 @@ export default {
             this.step2.reSendCode = true;
           }, 120000);
 
+          this.setupWebOTP();
+
           this.registerComponentStatistics(
             "Register-Modal",
             "send-verification-code",
@@ -476,6 +478,33 @@ export default {
             "error:" + this.errors.phone
           );
         });
+    },
+    setupWebOTP: function(){
+        if ('OTPCredential' in window) {
+            
+            const ac = new AbortController();
+            // const form = input.closest('form');
+            // if (form) {
+            //   form.addEventListener('submit', e => {
+            //     ac.abort();
+            //   });
+            // }
+            
+            let self = this;
+            navigator.credentials.get({
+              otp: { transport:['sms'] },
+              signal: ac.signal
+            }).then(otp => {
+              self.step2.verification_code = otp.code;
+              
+              self.verifyCode();
+              
+            }).catch(err => {
+              console.log(err);
+            });
+        
+        }
+  
     },
     verifyCode() {
       this.step3.verifyCodeLoader = true;

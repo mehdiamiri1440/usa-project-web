@@ -157,6 +157,7 @@ input.error:focus + i {
           class="dire"
           placeholder="شماره موبایل"
           pattern="[0-9]*"
+          autocomplete="one-time-code"
         />
 
         <i class="fa fa-phone-square-alt"></i>
