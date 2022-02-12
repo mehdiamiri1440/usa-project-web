@@ -378,6 +378,33 @@ export default {
       this.currentStep = step;
       this.scrollToTop();
     },
+    setupWebOTP: function(){
+        if ('OTPCredential' in window) {
+            console.log('start');
+            const ac = new AbortController();
+            // const form = input.closest('form');
+            // if (form) {
+            //   form.addEventListener('submit', e => {
+            //     ac.abort();
+            //   });
+            // }
+            
+            let self = this;
+            navigator.credentials.get({
+              otp: { transport:['sms'] },
+              signal: ac.signal
+            }).then(otp => {
+              self.step2.verification_code = otp.code;
+              
+              self.verifyCode();
+              
+            }).catch(err => {
+              console.log(err);
+            });
+        
+        }
+  
+    },
     sendVerificationCode: function () {
       this.verifyCodeBtnLoading = true;
       this.step2.reSendCode = false;
@@ -405,7 +432,7 @@ export default {
             self.step2.reSendCode = true;
           }, 120000);
 
-          self.setupWebOTP();
+          // self.setupWebOTP();
 
           self.registerComponentStatistics(
             "Register",
@@ -414,6 +441,8 @@ export default {
           );
         })
         .catch(function (err) {
+          console.log(err);
+          alert(err);
           self.verifyCodeBtnLoading = false;
 
           self.errors.phone = err.response.data.errors.phone;
@@ -426,37 +455,6 @@ export default {
             "error:" + self.errors.phone
           );
         });
-    },
-    setupWebOTP: function(){
-        if ('OTPCredential' in window) {
-          // window.addEventListener('DOMContentLoaded', e => {
-            // const input = document.querySelector('input[autocomplete="one-time-code"]');
-            // if (!input) return;
-            const ac = new AbortController();
-            // const form = input.closest('form');
-            // if (form) {
-            //   form.addEventListener('submit', e => {
-            //     ac.abort();
-            //   });
-            // }
-            console.log('active');
-            let self = this;
-            navigator.credentials.get({
-              otp: { transport:['sms'] }
-            }).then(otp => {
-              // alert(otp.code);
-              self.step2.verification_code = otp.code;
-              // alert('opt code is : ' + self.step2.verification_code);
-              self.verifyCode();
-              // input.value = otp.code;
-              // if (form) form.submit();
-            }).catch(err => {
-              console.log(err);
-              alert(err);
-            });
-          // });
-        }
-  
     },
     verifyCode: function () {
       var self = this;
@@ -961,7 +959,7 @@ export default {
         // self.$nextTick(this.stopLoader());
       }
     };
-    // this.setupWebOTP();
+    
   },
   updated: function () {
     this.$nextTick(this.stopLoader());
