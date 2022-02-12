@@ -380,7 +380,7 @@ export default {
     },
     setupWebOTP: function(){
         if ('OTPCredential' in window) {
-            console.log('start');
+            
             const ac = new AbortController();
             // const form = input.closest('form');
             // if (form) {
