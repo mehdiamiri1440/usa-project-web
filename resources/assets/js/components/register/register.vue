@@ -459,7 +459,6 @@ export default {
   
     },
     verifyCode: function () {
-      alert('start verification...');
       var self = this;
 
       self.verifyCodeBtnLoading = true;
