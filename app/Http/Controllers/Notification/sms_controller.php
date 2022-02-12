@@ -44,10 +44,12 @@ class sms_controller extends Controller
                 ],61952,$request->phone);
             }
             else{
-                // Smsir::sendVerification($random_number,$request->phone);
                 // Smsir::ultraFastSend([
                 //     'code' => $random_number
                 // ],61951,$request->phone);
+                Smsir::ultraFastSend([
+                    'code' => $random_number
+                ],62285,$request->phone);
             }
 
             // Smsir::sendVerification($random_number,$request->phone);
